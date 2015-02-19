@@ -1,5 +1,5 @@
 <?php
-$title = 'Welcome to Abusereporter!';
+$title = 'Welcome to AbuseIO!';
 include('../bin/loader.php');
 include('../lib/frontend/top.php');
 ?>
@@ -8,7 +8,7 @@ include('../lib/frontend/top.php');
     <div class="col-md-6">
         <h2>Introduction</h2>
         <p>
-            Abusereporter is a toolkit to receive, process, correlate and notify
+            AbuseIO is a toolkit to receive, process, correlate and notify
             about abuse reports received by network operators, typically hosting
             and access providers.
         </p>

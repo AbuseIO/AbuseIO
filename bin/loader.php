@@ -15,7 +15,7 @@ $modules = array(
                                                 "postfix",
                                                 "csv",
                                              ),
-                "abusereporter"     => array (
+                "core"              => array (
                                                 "functions",
                                              ),
                 );

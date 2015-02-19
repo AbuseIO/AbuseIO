@@ -1,9 +1,9 @@
 TIME_ZONE = Europe/Amsterdam
 KEEP_MAILS = true
 SQL_HOST = localhost
-SQL_USER = abusereporter
+SQL_USER = abuseio
 SQL_PASS = 
-SQL_DBNAME = abusereporter
+SQL_DBNAME = abuseio
 NOTES = true                                    ; enable the ability for admins to add notes to reports
 NOTES_DELETABLE = true                          ; enable the ability for admins to delete notes from reports (disabled by default)
 NOTIFICATIONS = true                            ; enable this for AR3 to send out e-mails to customers where AutoNotify is enabled
