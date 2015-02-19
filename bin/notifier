@@ -1,0 +1,63 @@
+#!/usr/bin/php
+<?php
+include ("loader.php");
+
+if (null === NOTIFICATIONS && !is_file(APP.NOTIFICATION_TEMPLATE)){
+    exit();
+} else {
+    $template = file_get_contents(APP.NOTIFICATION_TEMPLATE);
+}
+
+$filter = array(
+//                'Ticket'    => '4159',
+//                'IP'        => '',
+//                'Customer'  => '',
+                'All'       => true,
+               );
+
+// Collect reports - return all the data so you can decide what to put
+// in the customer mail. format: array($reports[CustomerCode][$i][$report_elements])
+$allreports = reportNotification($filter);
+
+foreach($allreports as $customerCode => $reports) {
+    $count = count($reports);
+
+    $blocks = "";
+    foreach($reports as $id => $report) {
+        $block  = array();
+        $report['Information'] = json_decode($report['Information']);
+
+        if (null !== SELF_HELP_URL) {
+            $token = md5("${report['ID']}${report['IP']}${report['Class']}");
+            $selfHelpLink = SELF_HELP_URL . "?=" . $token;
+        } else { $selfHelpLink = ""; }
+
+        $block[] = "============================REPORT=START=============================="; 
+        $block[] = "Ticket: ${report['ID']} ";
+        $block[] = "IP: ${report['IP']}";
+        $block[] = "Classification: ${report['Class']}";
+        $block[] = "Reply or help: " . $selfHelpLink;
+        $block[] = "----------------------------INFORMATION-------------------------------";
+        if(isset($report['Information']->Domain)) {
+          $block[] = "domain: " . $report['Information']['Domain'];
+        }
+        if(isset($report['Information']->URI)) {
+          $block[] = "uri/path: " . $report['Information']['URI'];
+        }
+        foreach($report['Information'] as $field => $value){
+            $block[] = "${field}: ${value}";
+        }
+        $block[] = "=============================REPORT=END===============================";
+        $blocks .= implode("\n", $block) . "\n";
+    }
+
+    $customerContact = $report['CustomerContact'];
+    $email = $template;
+    $email = str_replace("<<COUNT>>", $count, $email);
+    $email = str_replace("<<BOXES>>", $blocks, $email);
+
+    // TODO - Actually sent e-mail
+    // TOTO - add valid_mail function in general
+}
+
+?>

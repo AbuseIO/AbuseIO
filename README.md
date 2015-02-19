@@ -8,7 +8,11 @@
 
 ### Ubuntu
 
+* apt-get install php-mail-mimedecode php5-cli php5-curl php5-mysql apache2 postfix
+
 ### CentOS
+
+* php-pear-Mail-mimeDecode php-cli php-mysql
 
 ## Note on Patches/Pull Requests
 
