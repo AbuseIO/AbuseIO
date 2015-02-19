@@ -1,0 +1,9 @@
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# Ignore the message archive
+/archive
+
+# Ignore custom modules
+/lib/custom/
