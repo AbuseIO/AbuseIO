@@ -1,3 +1,7 @@
+# Ignore configuration files
+/etc/mail.template
+/etc/settings.conf
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
