@@ -4,10 +4,10 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
+/tmp/*/*
 
 # Ignore the message archive
-/archive
+/archive/*.eml
 
 # Ignore custom modules
 /lib/custom/find_customer.php
