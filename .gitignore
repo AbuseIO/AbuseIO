@@ -7,3 +7,6 @@
 
 # Ignore custom modules
 /lib/custom/find_customer.php
+
+# Ignore htdocs protection
+/htdocs/.htaccess
