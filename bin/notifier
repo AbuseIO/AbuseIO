@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-include ("../lib/core/loader.php");
+include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
 
 if (null === NOTIFICATIONS && !is_file(APP.NOTIFICATION_TEMPLATE)){
     exit();
