@@ -1,5 +1,11 @@
 # AbuseIO
 
+## Getting support
+
+You can find us on the FreeNODE IRC network in #abuseio
+
+check [IRC channel Guidelines and F.A.Q.](https://abuse.io/abuseio/abuseio/wikis/ircandfaq) for details
+
 ## Contributions
 
 ## Development
