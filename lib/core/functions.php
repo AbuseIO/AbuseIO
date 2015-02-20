@@ -52,7 +52,6 @@ function reportAdd($report) {
         $customer = CustomerLookup($ip);
 
         $query = "INSERT INTO Reports (
-                                        ID, 
                                         Source, 
                                         IP, 
                                         Domain, 
@@ -71,7 +70,6 @@ function reportAdd($report) {
                                         ReportCount,
                                         LastNotifyReportCount
                             ) VALUES (
-                                        \"\", 
                                         \"${source}\", 
                                         \"${ip}\", 
                                         \"${domain}\", 
