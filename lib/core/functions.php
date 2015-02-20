@@ -83,7 +83,7 @@ function reportAdd($report) {
                                         \"${customer['Contact']}\", 
                                         \"0\", 
                                         \"0\",
-                                        \"${customer['AutoNotify']}\",
+                                        \"".((empty($customer['AutoNotify']))?0:1)."\",
                                         \"0\", 
                                         \"1\",
                                         \"0\"
