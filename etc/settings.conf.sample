@@ -1,5 +1,6 @@
 TIME_ZONE = Europe/Amsterdam
-KEEP_MAILS = true
+KEEP_MAILS = true                               ; this will store all incoming mail in a file in APP/archive/ for future use (e.g. reseeding database)
+KEEP_EVIDENCE = true                            ; this will store all incoming mail into a evidence table and links each related ticket
 SQL_HOST = localhost
 SQL_USER = abuseio
 SQL_PASS = 

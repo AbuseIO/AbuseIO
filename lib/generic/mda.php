@@ -1,6 +1,6 @@
 <?PHP
 /*
-This include file contains functions to handle interactions from postfix
+This include file contains functions to handle interactions from a MTA
 
 */
 
@@ -31,6 +31,7 @@ function receive_mail($call) {
         //TODO Unhandled mail
         return false;
     }
+
     $decoder        = new Mail_mimeDecode($raw);
     $structure      = $decoder->decode($params);
     $html           = "";
@@ -181,6 +182,13 @@ function receive_mail($call) {
 
     if (strlen($arf['report']) > 1) {
         $message['arf']     = $arf;
+    }
+
+    if(KEEP_EVIDENCE == true) {
+        // We will save evidence in the SQL databases for linking in CLI/Webgui or
+        // to re-use that dataset. It will keep record of which cases are related
+        // to a specific set of evidence records.
+        $message['evidenceid'] = evidence_store($raw);
     }
 
     return $message;

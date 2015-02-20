@@ -1,4 +1,4 @@
-<?PHP
+<?php
 function parse_blocklist_de($message) {
 
     $source = "Blocklist.DE";
@@ -43,15 +43,19 @@ function parse_blocklist_de($message) {
 
         logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
 
-        return reportAdd(array(
-            'source'=>$source,
-            'ip'=>$fields['Source'],
-            'domain'=>false,
-            'uri'=>false,
-            'class'=>$typeMap[$fields['Report-Type']],
-            'timestamp'=>strtotime($fields['Date']),
-            'information'=>$fields
-        ));
+        $outReport = array(
+                            'source'=>$source,
+                            'ip'=>$fields['Source'],
+                            'domain'=>false,
+                            'uri'=>false,
+                            'class'=>$typeMap[$fields['Report-Type']],
+                            'timestamp'=>strtotime($fields['Date']),
+                            'information'=>$fields
+                          );
+
+        $reportID = reportAdd($outReport);
+        if (!$reportID) return false;
+        if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
 
     } else {
         logger(LOG_ERR, __FUNCTION__ . " Unable to parse message from ${source} subject ${message['subject']}");

@@ -1,4 +1,4 @@
-<?PHP
+<?php
 function parse_shadowserver($message) {
     $feeds = array(
                 'scan_qotd'             => array (
@@ -150,7 +150,10 @@ function parse_shadowserver($message) {
                 $outReport['uri'] = "/";
             }
 
-            if (!reportAdd($outReport)) return false;
+            $reportID = reportAdd($outReport);
+            if (!$reportID) return false;
+            if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
+
         }
     }
 

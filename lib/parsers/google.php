@@ -1,4 +1,4 @@
-<?PHP
+<?php
 function parse_google($message) {
     // Feed configuration
     $types = array(
@@ -70,7 +70,9 @@ function parse_google($message) {
                                 'information'   => $information
                                );
 
-            if (!reportAdd($outReport)) return false;
+            $reportID = reportAdd($outReport);
+            if (!$reportID) return false;
+            if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
 
         }
     }

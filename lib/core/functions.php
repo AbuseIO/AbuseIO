@@ -1,4 +1,20 @@
 <?PHP
+function evidence_store($data) {
+    $query = "INSERT INTO Evidence (Data) VALUES ('" . mysql_escape_string($data) . "');";
+
+    $id = _mysqli_query($query);
+
+    return $id;
+}
+
+function evidence_link($evidenceID, $reportID) {
+    $query = "INSERT IGNORE INTO EvidenceLinks (EvidenceID, ReportID) VALUES ('${evidenceID}', '${reportID}');";
+
+    $result = _mysqli_query($query);
+
+    return $result;
+}
+
 function reportAdd($report) {
     // Array should minimally contain $source(string), $ip(string), $class(string), $timestamp(int), $information(array)
     if (!is_array($report)) {
@@ -89,9 +105,10 @@ function reportAdd($report) {
                                         \"0\"
                             );";
 
-        if (_mysqli_query($query, "")) {
+        $result = _mysqli_query($query);
+        if ($result) {
             logger(LOG_DEBUG, __FUNCTION__ . " by $source ip $ip class $class seen " . date("d-m-Y H:i:s",$timestamp));
-            return true;
+            return $result;
         }
         return false;
 

@@ -61,3 +61,18 @@ CREATE TABLE IF NOT EXISTS `Reports` (
   KEY `CustomerCode` (`CustomerCode`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
+CREATE TABLE IF NOT EXISTS `Evidence` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `Data` longtext NOT NULL,
+  `LastModified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `EvidenceLinks` (
+  `EvidenceID` int(10) NOT NULL,
+  `ReportID` int(10) NOT NULL,
+  PRIMARY KEY (`EvidenceID`,`ReportID`),
+  KEY `EvidenceID` (`EvidenceID`),
+  KEY `ReportID` (`ReportID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+

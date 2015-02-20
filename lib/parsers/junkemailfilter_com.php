@@ -1,4 +1,4 @@
-<?PHP
+<?php
 function parse_junkemailfilter_com($message) {
 
     $source = 'JunkEmailFilter.com';
@@ -14,15 +14,19 @@ function parse_junkemailfilter_com($message) {
 
     logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
 
-    return reportAdd(array(
-        'source'=>$source,
-        'ip'=>$fields['Source-IP'],
-        'domain'=>false,
-        'uri'=>false,
-        'class'=>'SPAM',
-        'timestamp'=>strtotime($fields['Received-Date']),
-        'information'=>$fields
-    ));
+    $outReport = array(
+                        'source'=>$source,
+                        'ip'=>$fields['Source-IP'],
+                        'domain'=>false,
+                        'uri'=>false,
+                        'class'=>'SPAM',
+                        'timestamp'=>strtotime($fields['Received-Date']),
+                        'information'=>$fields
+                      );
+
+    $reportID = reportAdd($outReport);
+    if (!$reportID) return false;
+    if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
 
     logger(LOG_ERR, __FUNCTION__ . ' No ARF report found in message');
     return false;

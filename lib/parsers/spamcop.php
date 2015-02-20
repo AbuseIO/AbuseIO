@@ -1,4 +1,4 @@
-<?PHP
+<?php
 function parse_spamcop($message) {
     $outReport                  = array('source' => 'Spamcop');
     $outReport['information']   = array();
@@ -43,7 +43,9 @@ function parse_spamcop($message) {
         $outReport['ip']            = $match['ip'];
         $outReport['timestamp']     = strtotime($match['date']);
 
-        if (!reportAdd($outReport)) return false;
+        $reportID = reportAdd($outReport);
+        if (!$reportID) return false;
+        if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
 
     } elseif (strpos($message['from'], "@reports.spamcop.net") !== FALSE) {
         //TODO uitpakken report voor IP en datum
@@ -134,7 +136,9 @@ function parse_spamcop($message) {
             return false;
         }
 
-        if (!reportAdd($outReport)) return false;
+        $reportID = reportAdd($outReport);
+        if (!$reportID) return false;
+        if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
 
     } elseif ($message['subject'] == "[SpamCop] summary report") {
         // Only trap, mole and simp are interesting. Ignore the user field
@@ -158,7 +162,10 @@ function parse_spamcop($message) {
                 $outReport['ip']            = $match['ip'];
                 $outReport['timestamp']     = strtotime($match['date'] . ":00");
 
-                if (!reportAdd($outReport)) return false;
+                $reportID = reportAdd($outReport);
+                if (!$reportID) return false;
+                if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
+
             } else { 
                 /* Ignore user mails as we get a more details report from spamcop in a seperate mail */ 
                 logger(LOG_DEBUG, __FUNCTION__ . " message item from ${outReport['source']} ignored because its a user message about ${match['ip']} which we already got");

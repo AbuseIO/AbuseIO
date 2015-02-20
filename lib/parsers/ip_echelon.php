@@ -1,4 +1,4 @@
-<?PHP
+<?php
 function parse_ip_echelon($message) {
 
     $source = 'IP-Echelon';
@@ -25,8 +25,13 @@ function parse_ip_echelon($message) {
                                 'information'   => $information,
         );
 
+        $reportID = reportAdd($outReport);
+        if (!$reportID) return false;
+        if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
+
         logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
-        return reportAdd($outReport);
+
+        return $reportID;
 
     } else {
         logger(LOG_ERR, __FUNCTION__." Unable to parse XML ${source} subject ${message['subject']}");

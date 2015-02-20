@@ -1,4 +1,4 @@
-<?PHP
+<?php
 function csv_to_array($file) {
     $array = array();
     $row = 1;

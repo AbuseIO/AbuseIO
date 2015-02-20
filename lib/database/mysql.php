@@ -7,13 +7,20 @@ function _mysqli_connect() {
     return false;
 }
 
-function _mysqli_query($query, $link) {
+function _mysqli_query($query, $link = "") {
     if(is_string($link)) {
         if (($link = _mysqli_connect())===false) {
             return false;
         }
     }
-    $result = mysqli_query($link, $query);
+
+    if(substr($query,0,6) == "INSERT") {
+        mysqli_query($link, $query);
+        $result = mysqli_insert_id($link);
+    } else {
+        $result = mysqli_query($link, $query);
+    }
+
     if (mysqli_errno($link)) {
         logger(LOG_ERR,"Fatal ERROR in MySQL Query ($query), Error:".mysqli_errno($link) . ': ' . mysqli_error($link) . PHP_EOL);
         return false;
