@@ -25,7 +25,7 @@
     $pages = ceil($count / $rows_per_page);
 
     if ($page > $pages) {
-        echo '<h2>404 - Invalid page</h2>';
+        echo '<h2>Empty database</h2>Your database does not contain any entries yet';
         include('../lib/frontend/bottom.php');
         die();
     }
