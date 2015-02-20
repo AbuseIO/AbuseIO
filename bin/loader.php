@@ -7,12 +7,12 @@ $modules = array(
                                                 "config",
                                                 "logger",
                                                 "functions",
+                                                "mda",
                                              ),
                 "database"          => array (
                                                 "mysql",
                                              ),
                 "parsers"           => array (
-                                                "postfix",
                                                 "csv",
                                              ),
                 "core"              => array (
