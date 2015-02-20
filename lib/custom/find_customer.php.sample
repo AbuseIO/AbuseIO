@@ -14,7 +14,8 @@ function custom_find_customer($IP) {
     $customer = array(
                         'Code'      => 'ACME',
                         'Name'      => 'Another Company Making Everything LTD',
-                        'Contact'   => 'r.runny@acme.ltd'
+                        'Contact'   => 'r.runny@acme.ltd',
+                        'AutoNotify'=> false
                      );
 
 
