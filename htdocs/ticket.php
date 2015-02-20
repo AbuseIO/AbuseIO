@@ -1,6 +1,6 @@
 <?php
     $title = 'Ticket '.$_GET['id'];
-    include('../bin/loader.php');
+    include('../lib/core/loader.php');
     include('../lib/frontend/top.php');
 
 if (empty($_GET['id'])) {

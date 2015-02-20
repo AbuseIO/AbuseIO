@@ -1,6 +1,6 @@
 <?php
     $title = 'Analytics and statistics';
-    include('../bin/loader.php');
+    include('../lib/core/loader.php');
     include('../lib/frontend/top.php');
     $summary = reportSummary("3650");
 ?>

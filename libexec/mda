@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-include ("loader.php");
+include ("../lib/core/loader.php");
 
 $message = receive_mail(array('type' => 'EXTERNAL'));
 
