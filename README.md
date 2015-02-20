@@ -18,7 +18,7 @@ check [IRC channel Guidelines and F.A.Q.](https://abuse.io/abuseio/abuseio/wikis
 
 ### CentOS
 
-* php-pear-Mail-mimeDecode php-cli php-mysql
+* yum install php-cli php-mysql php-pear-Mail-mimeDecode
 
 ## Note on Patches/Pull Requests
 
