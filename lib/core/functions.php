@@ -52,7 +52,6 @@ function reportAdd($report) {
         $customer = CustomerLookup($ip);
 
         $query = "INSERT INTO Reports (
-                                        ID, 
                                         Source, 
                                         IP, 
                                         Domain, 
@@ -71,7 +70,6 @@ function reportAdd($report) {
                                         ReportCount,
                                         LastNotifyReportCount
                             ) VALUES (
-                                        \"\", 
                                         \"${source}\", 
                                         \"${ip}\", 
                                         \"${domain}\", 
@@ -85,7 +83,7 @@ function reportAdd($report) {
                                         \"${customer['Contact']}\", 
                                         \"0\", 
                                         \"0\",
-                                        \"${customer['AutoNotify']}\",
+                                        \"".((empty($customer['AutoNotify']))?0:1)."\",
                                         \"0\", 
                                         \"1\",
                                         \"0\"
@@ -239,7 +237,7 @@ function reportNotification($filter) {
         } elseif($row['CustomerIgnored'] == 1) {
             // Customer does not want any more notifications from this report
 
-        } elseif(isset($filter['All']) && $row['ReportCount'] != $row['LastNotifyReportCount'] && $row['AutoNotify'] = '1') {
+        } elseif(isset($filter['All']) && $row['ReportCount'] != $row['LastNotifyReportCount'] && $row['AutoNotify'] == '1') {
             // Tjek if the customer has the AutoNotify flag AND is not undefined AND the e-mail address is valid
 
             if ($row['CustomerCode'] != "UNDEF") {
@@ -281,7 +279,7 @@ function CustomerLookup($ip) {
     $customer['Code'] = "UNDEF";
     $customer['Name'] = "Undefined customer";
     $customer['Contact'] = "undef@local.isp";
-    $customer['AutoNotify'] = "0";
+    $customer['AutoNotify'] = 0;
 
     return $customer;
 }

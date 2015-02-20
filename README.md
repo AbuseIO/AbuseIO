@@ -12,11 +12,22 @@ check [IRC channel Guidelines and F.A.Q.](https://abuse.io/abuseio/abuseio/wikis
 
 ## Getting Started
 
-### Ubuntu
+### Dependencies
 
-* apt-get install php-mail-mimedecode php5-cli php5-curl php5-mysql apache2 postfix
+At this point we assume you have a working web- and mailserver. The configuration of these components
+is outside the scope of this document.
 
-### CentOS
+The AbuseIO scripts can be placed anywhere on your system. Point your webserver to APP/htdocs.
+
+Create a database and import the APP/sql/abuseio.sql schema.
+
+Some additional packages are required:
+
+#### Ubuntu
+
+* apt-get install php-mail-mimedecode php5-cli php5-curl php5-mysql
+
+#### CentOS
 
 * yum install php-cli php-mysql php-pear-Mail-mimeDecode
 
