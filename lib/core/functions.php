@@ -131,10 +131,12 @@ function reportCount($filter) {
 }
 
 function reportGet($id) {
+
+    // FIXME: Only 1 evidence row is currently included in the report, while multiple could exist
     $reports = array();
 
-    $filter  = "AND ID='${id}'";
-    $query   = "SELECT * FROM Reports WHERE 1 ${filter}";
+    $filter  = "AND Reports.ID='${id}'";
+    $query   = "SELECT Reports.*,Evidence.Data as Evidence FROM Reports,EvidenceLinks,Evidence WHERE Reports.ID=EvidenceLinks.ReportID and EvidenceLinks.EvidenceID=Evidence.ID ${filter}";
     $report = _mysqli_fetch($query);
 
     if (isset($report[0])) {

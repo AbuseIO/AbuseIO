@@ -100,6 +100,14 @@ if(isset($_GET['action']) && $_GET['action'] == 'delNote' && is_numeric($_GET['n
 
 
 ?>
+<h2>Evidence</h2>
+
+<p>
+<pre>
+<?php echo htmlentities($report['Evidence']); ?>
+</pre>
+</p>
+
 <h2>Notes</h2>
 
 <table class="table table-striped table-condensed">
@@ -118,7 +126,6 @@ $notes = reportNoteList($filter);
 
 foreach($notes as $nr => $note) {
     echo "
-    <tbody>
         <tr>
           <td>".date("d-m-Y H:m", $note['Timestamp'])."</td>
           <td>${note['Submittor']}</td>
