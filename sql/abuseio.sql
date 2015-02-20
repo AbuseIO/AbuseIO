@@ -59,5 +59,5 @@ CREATE TABLE IF NOT EXISTS `Reports` (
   KEY `Domain` (`Domain`),
   KEY `Class` (`Class`),
   KEY `CustomerCode` (`CustomerCode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10000 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
