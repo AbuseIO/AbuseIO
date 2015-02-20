@@ -36,7 +36,7 @@ function parse_spamcop($message) {
 
         //TODO uitzoeken wat verschillende feedback-type's zijn
         //TODO als ^^ niet de class word, dan class herkenning (spam, bounce, spamvertised)
-        $match = "^Feedback-Type: (?<type>.*)\r?\n?\r\nUser-Agent: (?<agent>.*\r?\n?\r\n\s.*)\r?\n?\r\nVersion: (?<version>.*)\r?\n?\r\nReceived-Date: (?<date>.*)\r?\n?\r\nSource-IP: (?<ip>.*)\r?\n?\r\n";
+        $match = "^Feedback-Type: (?<type>.*)\r\n?\r?\nUser-Agent: (?<agent>.*\r\n?\r?\n\s.*)\r\n?\r?\nVersion: (?<version>.*)\r\n?\r?\nReceived-Date: (?<date>.*)\r\n?\r?\nSource-IP: (?<ip>.*)\r\n?\r?\n";
         preg_match("/${match}/m", $message['arf']['report'], $match);
 
         $outReport['class']         = "SPAM"; // ?????
