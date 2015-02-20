@@ -1,6 +1,6 @@
 <?php
 
-define('APP',realpath(dirname(__FILE__).'/../'));
+define('APP',realpath(dirname(__FILE__).'/../../'));
 
 $modules = array(
                 "generic"           => array (
