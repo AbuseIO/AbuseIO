@@ -6,4 +6,4 @@
 /archive
 
 # Ignore custom modules
-/lib/custom/
+/lib/custom/find_customer.php

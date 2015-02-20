@@ -1,0 +1,23 @@
+<?PHP
+// If you enable the custom_customer_resolving you will need to expand this function
+// so it will output the correct data. Note that local database resolving (customer table)
+// always takes precidence over this function and was ment for a local override.
+//
+// If you want to use subfunctions you will need to prefix them with custom_ to 
+// prevent clashes.
+
+function custom_find_customer($IP) {
+    if(!isset($IP) || !valid_ip($IP) || strlen($IP) < 4){
+        return false;
+    }
+
+    $customer = array(
+                        'Code'      => 'ACME',
+                        'Name'      => 'Another Company Making Everything LTD',
+                        'Contact'   => 'r.runny@acme.ltd'
+                     );
+
+
+    return $customer;
+}
+?>
