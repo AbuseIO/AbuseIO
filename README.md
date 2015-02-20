@@ -17,6 +17,8 @@ check [IRC channel Guidelines and F.A.Q.](https://abuse.io/abuseio/abuseio/wikis
 At this point we assume you have a working web- and mailserver. The configuration of these components
 is outside the scope of this document.
 
+The AbuseIO scripts can be placed anywhere on your system. You should point your webserver to APP/htdocs.
+
 Some additional packages are required:
 
 #### Ubuntu
