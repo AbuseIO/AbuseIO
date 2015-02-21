@@ -1,6 +1,7 @@
 <?php
-    $title = 'Ticket '.$_GET['id'];
-    include('../lib/core/loader.php');
+
+$title = 'Ticket '.$_GET['id'];
+include('../lib/core/loader.php');
 
 if (empty($_GET['id'])) {
     include('../lib/frontend/top.php');
@@ -38,6 +39,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'ViewEvidence' && is_numeric($_
         die();
     }
 }
+
+include('../lib/frontend/top.php');
 
 ?>
 
