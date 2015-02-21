@@ -1,55 +1,7 @@
 <?php
-function evidenceStore($sender, $subject, $data) {
-    $query = "INSERT INTO Evidence (
-                                    Sender, 
-                                    Subject, 
-                                    Data
-                         ) VALUES (
-                                    '" . mysql_escape_string($sender) . "',
-                                    '" . mysql_escape_string($subject) . "',
-                                    '" . mysql_escape_string($data) . "'
-                                  );";
-
-    $id = _mysqli_query($query);
-
-    return $id;
-}
-
-function evidenceLink($evidenceID, $reportID) {
-    $query = "INSERT IGNORE INTO EvidenceLinks (EvidenceID, ReportID) VALUES ('${evidenceID}', '${reportID}');";
-
-    $result = _mysqli_query($query);
-
-    return $result;
-}
-
-function evidenceList($ticket) {
-    $reports = array();
-
-    $query = "SELECT EvidenceLinks.EvidenceID, EvidenceLinks.ReportID, Evidence.ID, Evidence.LastModified, Evidence.Sender, Evidence.Subject ".
-             "FROM Evidence, EvidenceLinks WHERE 1 AND EvidenceLinks.EvidenceID = Evidence.ID AND EvidenceLinks.ReportID = '${ticket}';";
-
-    $reports = _mysqli_fetch($query);
-
-    return $reports;
-}
-
-function evidenceGet($id) {
-    $reports = array();
-
-    $filter  = "AND ID='${id}'";
-    $query   = "SELECT * FROM Evidence WHERE 1 ${filter}";
-
-    $report = _mysqli_fetch($query);
-
-    if (isset($report[0])) {
-        return $report[0];
-    } else {
-        return false;
-    }
-}
-
-
+/*
+    Function description
+*/
 function reportAdd($report) {
     // Array should minimally contain $source(string), $ip(string), $class(string), $timestamp(int), $information(array)
     if (!is_array($report)) {
@@ -150,6 +102,10 @@ function reportAdd($report) {
     }
 }
 
+
+/*
+    Function description
+*/
 function reportList($filter) {
     $reports = array();
     $query = "SELECT * FROM Reports WHERE 1 ${filter}";
@@ -157,6 +113,10 @@ function reportList($filter) {
     return $reports;
 }
 
+
+/*
+    Function description
+*/
 function reportCount($filter) {
     $reports = array();
     $query = "SELECT COUNT(*) as Count FROM Reports WHERE 1 ${filter}";
@@ -165,6 +125,10 @@ function reportCount($filter) {
     return 0;
 }
 
+
+/*
+    Function description
+*/
 function reportGet($id) {
     $reports = array();
 
@@ -180,44 +144,10 @@ function reportGet($id) {
     }
 }
 
-function reportNoteList($filter) {
-    $reports = array();
 
-    $query = "SELECT * FROM Notes WHERE 1 ${filter}";
-    $reports = _mysqli_fetch($query);
-
-    return $reports;
-}
-
-function reportNoteAdd($submittor, $ReportID, $note) {
-    if (NOTES != true || !is_numeric($ReportID)) {
-        return false;
-    } else {
-        $query = "INSERT INTO Notes (
-                                        ReportID, 
-                                        Timestamp, 
-                                        Submittor, 
-                                        Text 
-                            ) VALUES (
-                                        '".$ReportID."', 
-                                        '".time()."', 
-                                        '".$submittor."', 
-                                        '".mysql_escape_string($note)."'
-                            );";
-
-        return _mysqli_query($query, "");
-    }
-}
-
-function reportNoteDelete($NoteID) {
-    if (NOTES != true || NOTES_DELETABLE != true || !is_numeric($NoteID)) {
-        return false;
-    } else {
-        $query = "DELETE FROM Notes WHERE ID = '${NoteID}';";
-        return _mysqli_query($query, "");
-    }
-}
-
+/*
+    Function description
+*/
 function reportSummary($period) {
     $summary = array();
 
@@ -229,14 +159,26 @@ function reportSummary($period) {
     return $summary;
 }
 
+
+/*
+    Function description
+*/
 function reportMerge() {
 
 }
 
+
+/*
+    Function description
+*/
 function reportHandled() {
 
 }
 
+
+/*
+    Function description
+*/
 function reportNotified($ticket) {
     // Subfunction for reportNotification which can be called when a notifier
     // successfully send out the notification to mark the ticket as notified
@@ -246,6 +188,10 @@ function reportNotified($ticket) {
     _mysqli_query($query, "");
 }
 
+
+/*
+    Function description
+*/
 function reportNotification($filter) {
     // First we will create an selection
     // Ticket, IP, Customer reports are hooks from the GUI/CLI and will e-mail
@@ -302,38 +248,5 @@ function reportNotification($filter) {
     }
 
     return $data;
-}
-
-function CustomerLookup($ip) {
-    // Local matches are already perferred
-    $longip  = ip2long($ip);
-    $query   = "SELECT Code, Name, Contact, AutoNotify FROM Netblocks, Customers WHERE 1 AND Netblocks.CustomerCode = Customers.Code AND begin_in <= '${longip}' AND end_in >= '${longip}' ORDER BY begin_in DESC"; 
-    $count   = _mysqli_num_rows($query);
-    if ($count === 1) {
-        $result = _mysqli_fetch($query);
-        $customer = $result[0];
-        return $customer;
-
-    } elseif ($count > 1) {
-        // There should never be two duplicates here
-        return false;
-
-    } else {
-        // If there are no matches then find on the user defined lookup
-        if(function_exists('custom_find_customer')) {
-            $custom_find = custom_find_customer($ip);
-            if($custom_find !== false) {
-                return $custom_find;
-            }
-        }
-    }
-
-    //Lookup failed thus we return dummy
-    $customer['Code'] = "UNDEF";
-    $customer['Name'] = "Undefined customer";
-    $customer['Contact'] = "undef@local.isp";
-    $customer['AutoNotify'] = 0;
-
-    return $customer;
 }
 ?>

@@ -16,7 +16,11 @@ $modules = array(
                                                 "csv",
                                              ),
                 "core"              => array (
-                                                "functions",
+                                                "evidence",
+                                                "reporting",
+                                                "notes",
+                                                "customers",
+                                                "netblocks"
                                              ),
                 );
 
