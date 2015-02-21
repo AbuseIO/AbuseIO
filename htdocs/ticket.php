@@ -17,6 +17,27 @@ if (!$report) {
     die();
 }
 
+// View or download evidence
+if(isset($_GET['action']) && $_GET['action'] == 'DownloadEvidence' && is_numeric($_GET['EvidenceID'])) {
+    if ($eml = evidenceGet($_GET['EvidenceID'])) {
+        header('Content-Type: message/rfc822');
+        header('Content-Transfer-Encoding: Binary'); 
+        header("Content-disposition: attachment; filename=\"${_GET['EvidenceID']}.eml\""); 
+        echo $eml['Data'];
+        include('../lib/frontend/bottom.php');
+        die();
+    }
+} 
+if (isset($_GET['action']) && $_GET['action'] == 'ViewEvidence' && is_numeric($_GET['EvidenceID'])) {
+    if ($eml = evidenceGet($_GET['EvidenceID'])) {
+        echo '<pre>';
+        echo htmlentities($eml['Data']);
+        echo '</pre>';
+        include('../lib/frontend/bottom.php');
+        die();
+    }
+}
+
 ?>
 
 <dl class="dl-horizontal">
@@ -82,30 +103,15 @@ if (!$report) {
 ?>
 </dl>
 
-
-<?php
-// Start Evidence section
-if(isset($_GET['action']) && $_GET['action'] == 'DownloadEvidence' && is_numeric($_GET['EvidenceID'])) {
-    $eml = evidenceGet($_GET['EvidenceID']);
-
-    // TODO make browser download this $eml['data'] blob
-} 
-if (isset($_GET['action']) && $_GET['action'] == 'ViewEvidence' && is_numeric($_GET['EvidenceID'])) {
-    $eml = evidenceGet($_GET['EvidenceID']);
-
-    // TODO make a nice html overlay and render this EML
-}
-
-?>
 <h2>Evidence</h2>
 
 <table class="table table-striped table-condensed">
     <thead>
         <tr>
-          <th width='150'>Date</td>
-          <th width='250'>Sender</td>
-          <th>Subject</td>
-          <th width='125'> </td>
+          <th width='200'>Date</th>
+          <th width='300'>Sender</th>
+          <th>Subject</th>
+          <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
@@ -119,8 +125,10 @@ foreach($evidences as $nr => $evidence) {
           <td>${evidence['Sender']}</td>
           <td>${evidence['Subject']}</td>
           <td>
-                <a href='?action=DownloadEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' title='Download this EML filed'>Download<a/>
-                <a href='?action=ViewEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' title='Download this EML filed'>View<a/>
+                <div class='btn-group pull-right'>
+                    <a href='?action=ViewEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' class='btn btn-default btn-sm' title='View EML file' target='_blank'>View<a/>
+                    <a href='?action=DownloadEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' class='btn btn-default btn-sm' title='Download EML file'>Download<a/>
+                </div>
           </td>
         </tr>
     ";
@@ -134,16 +142,15 @@ foreach($evidences as $nr => $evidence) {
 // Start Notes section
 if (NOTES == true) {
 
-if(isset($_GET['action']) && $_GET['action'] == 'addNote') {
-    if(isset($_SERVER['REMOTE_USER'])) {
-        $submittor = "Abusedesk (${_SERVER['REMOTE_USER']})";
+if(!empty($_POST['action']) && $_POST['action'] == 'addNote') {
+    if(!empty($_SERVER['REMOTE_USER'])) {
+        $submittor = $_SERVER['REMOTE_USER'];
     } else {
         $submittor = "Abusedesk";
     }
-
-    reportNoteAdd($submittor, $_GET['id'], $_GET['Note']);
+    if (!empty($_POST['Note'])) reportNoteAdd($submittor, $_POST['id'], $_POST['Note']);
 }
-if(isset($_GET['action']) && $_GET['action'] == 'delNote' && is_numeric($_GET['noteid'])) {
+if(!empty($_GET['action']) && $_GET['action'] == 'delNote' && is_numeric($_GET['noteid'])) {
     reportNoteDelete($_GET['noteid']);
 }
 ?>
@@ -154,10 +161,10 @@ if(isset($_GET['action']) && $_GET['action'] == 'delNote' && is_numeric($_GET['n
 <table class="table table-striped table-condensed">
     <thead>
         <tr>
-          <th width='125'>Date</td>
-          <th width='175'>Submittor</td>
-          <th>Note</td>
-          <th width='1'> </td>
+          <th width='200'>Date</th>
+          <th width='300'>Submittor</th>
+          <th>Note</th>
+          <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
@@ -168,10 +175,14 @@ $notes = reportNoteList($filter);
 foreach($notes as $nr => $note) {
     echo "
         <tr>
-          <td>".date("d-m-Y H:m", $note['Timestamp'])."</td>
+          <td>".date("Y-m-d H:i:s", $note['Timestamp'])."</td>
           <td>${note['Submittor']}</td>
           <td>${note['Text']}</td>
-          <td><a href='?action=delNote&id=${_GET['id']}&noteid=${note['ID']}' title='Delete this note'>X<a/></td>
+          <td>
+              <div class='btn-group pull-right'>
+                  <a href='?action=delNote&id=${_GET['id']}&noteid=${note['ID']}' class='btn btn-default btn-sm' title='Delete note' onclick='return confirm(\"Are you sure you want to delete this note?\");'>Delete</a>
+              </div>
+          </td>
         </tr>
     ";
 }
@@ -181,16 +192,16 @@ foreach($notes as $nr => $note) {
 
 <br>
 
-<form method='GET' action="ticket.php">
+<form method='POST' action="ticket.php?id=<?php echo $_GET['id']; ?>">
     <input type='hidden' name='action' value='addNote'>
     <input type='hidden' name='id' value='<?php echo $_GET['id']; ?>'>
     <div class="row">
         <div class="col-md-6 form-group form-group-sm">
-            <label for='Ticket'>Create new note:</label>
+            <label for='Ticket'>Add note</label>
             <textarea rows="4" cols="80" name='Note'></textarea>
         </div>
         <div class="col-md-12">
-            <button type='submit' class="btn btn-primary">Add</button>
+            <button type='submit' class="btn btn-primary">Save</button>
         </div>
     </div>
 </form>
