@@ -28,7 +28,6 @@ function parse_junkemailfilter_com($message) {
     if (!$reportID) return false;
     if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
-    logger(LOG_ERR, __FUNCTION__ . ' No ARF report found in message');
-    return false;
+    return true;
 }
 ?>
