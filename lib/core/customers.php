@@ -2,18 +2,49 @@
 /*
     Function description
 */
-function customerCreate() {
-
+function customerCount($filter) {
+    $reports = array();
+    $query = "SELECT COUNT(*) as Count FROM Customers WHERE 1 ${filter}";
+    $reports = _mysqli_fetch($query);
+    if (!empty($reports[0]['Count'])) return $reports[0]['Count'];
+    return 0;
 }
 
 
 /*
     Function description
 */
-function customerDelete() {
+function customerAdd($customer) {
+    if (!is_array($customer)) {
+        return false;
+    } else {
+        $query = "INSERT INTO Customers (
+                                        Code,
+                                        Name,
+                                        Contact,
+                                        AutoNotify
+                            ) VALUES (
+                                        '".mysql_escape_string($customer['Code'])."',
+                                        '".mysql_escape_string($customer['Name'])."',
+                                        '".mysql_escape_string($customer['Contact'])."',
+                                        '".mysql_escape_string($customer['AutoNotify'])."'
+                            );";
 
+        return _mysqli_query($query, "");
+    }
 }
 
+/*
+    Function description
+*/
+function customerDelete($CustomerID) {
+    if (!is_numeric($CustomerID)) {
+        return false;
+    } else {
+        $query = "DELETE FROM Customers WHERE ID = '${CustomerID}';";
+        return _mysqli_query($query, "");
+    }
+}
 
 /*
     Function description
@@ -34,8 +65,13 @@ function customerUpdate() {
 /*
     Function description
 */
-function customerList() {
+function customerList($filter) {
+    $reports = array();
 
+    $query = "SELECT * FROM Customers WHERE 1 ${filter}";
+    $reports = _mysqli_fetch($query);
+
+    return $reports;
 }
 
 
