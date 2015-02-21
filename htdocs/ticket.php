@@ -1,9 +1,9 @@
 <?php
     $title = 'Ticket '.$_GET['id'];
     include('../lib/core/loader.php');
-    include('../lib/frontend/top.php');
 
 if (empty($_GET['id'])) {
+    include('../lib/frontend/top.php');
     echo '<h2>404 - Invalid ticket</h2>';
     include('../lib/frontend/bottom.php');
     die();
@@ -12,6 +12,7 @@ if (empty($_GET['id'])) {
 $report = reportGet($_GET['id']);
 
 if (!$report) {
+    include('../lib/frontend/top.php');
     echo '<h2>404 - Invalid ticket</h2>';
     include('../lib/frontend/bottom.php');
     die();
@@ -24,12 +25,12 @@ if(isset($_GET['action']) && $_GET['action'] == 'DownloadEvidence' && is_numeric
         header('Content-Transfer-Encoding: Binary'); 
         header("Content-disposition: attachment; filename=\"${_GET['EvidenceID']}.eml\""); 
         echo $eml['Data'];
-        include('../lib/frontend/bottom.php');
         die();
     }
 } 
 if (isset($_GET['action']) && $_GET['action'] == 'ViewEvidence' && is_numeric($_GET['EvidenceID'])) {
     if ($eml = evidenceGet($_GET['EvidenceID'])) {
+        include('../lib/frontend/top.php');
         echo '<pre>';
         echo htmlentities($eml['Data']);
         echo '</pre>';
