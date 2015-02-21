@@ -1,6 +1,14 @@
 <?PHP
-function evidence_store($data) {
-    $query = "INSERT INTO Evidence (Data) VALUES ('" . mysql_escape_string($data) . "');";
+function evidence_store($sender, $subject, $data) {
+    $query = "INSERT INTO Evidence (
+                                    Sender, 
+                                    Subject, 
+                                    Data
+                         ) VALUES (
+                                    '" . mysql_escape_string($sender) . "',
+                                    '" . mysql_escape_string($subject) . "',
+                                    '" . mysql_escape_string($data) . "'
+                                  );";
 
     $id = _mysqli_query($query);
 
