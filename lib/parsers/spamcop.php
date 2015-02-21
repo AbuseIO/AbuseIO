@@ -45,7 +45,7 @@ function parse_spamcop($message) {
 
         $reportID = reportAdd($outReport);
         if (!$reportID) return false;
-        if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
+        if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
     } elseif (strpos($message['from'], "@reports.spamcop.net") !== FALSE) {
         //TODO uitpakken report voor IP en datum
@@ -138,7 +138,7 @@ function parse_spamcop($message) {
 
         $reportID = reportAdd($outReport);
         if (!$reportID) return false;
-        if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
+        if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
     } elseif ($message['subject'] == "[SpamCop] summary report") {
         // Only trap, mole and simp are interesting. Ignore the user field
@@ -164,7 +164,7 @@ function parse_spamcop($message) {
 
                 $reportID = reportAdd($outReport);
                 if (!$reportID) return false;
-                if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
+                if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
             } else { 
                 /* Ignore user mails as we get a more details report from spamcop in a seperate mail */ 

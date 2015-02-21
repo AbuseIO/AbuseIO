@@ -55,7 +55,7 @@ function parse_blocklist_de($message) {
 
         $reportID = reportAdd($outReport);
         if (!$reportID) return false;
-        if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
+        if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
     } else {
         logger(LOG_ERR, __FUNCTION__ . " Unable to parse message from ${source} subject ${message['subject']}");

@@ -82,7 +82,56 @@ if (!$report) {
 ?>
 </dl>
 
+
 <?php
+// Start Evidence section
+if(isset($_GET['action']) && $_GET['action'] == 'DownloadEvidence' && is_numeric($_GET['EvidenceID'])) {
+    $eml = evidenceGet($_GET['EvidenceID']);
+
+    // TODO make browser download this $eml['data'] blob
+} 
+if (isset($_GET['action']) && $_GET['action'] == 'ViewEvidence' && is_numeric($_GET['EvidenceID'])) {
+    $eml = evidenceGet($_GET['EvidenceID']);
+
+    // TODO make a nice html overlay and render this EML
+}
+
+?>
+<h2>Evidence</h2>
+
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+          <th width='150'>Date</td>
+          <th width='250'>Sender</td>
+          <th>Subject</td>
+          <th width='125'> </td>
+        </tr>
+    </thead>
+    <tbody>
+<?php
+$evidences = evidenceList($_GET['id']);
+
+foreach($evidences as $nr => $evidence) {
+    echo "
+        <tr>
+          <td>${evidence['LastModified']}</td>
+          <td>${evidence['Sender']}</td>
+          <td>${evidence['Subject']}</td>
+          <td>
+                <a href='?action=DownloadEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' title='Download this EML filed'>Download<a/>
+                <a href='?action=ViewEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' title='Download this EML filed'>View<a/>
+          </td>
+        </tr>
+    ";
+}
+?>
+    </tbody>
+</table>
+<?php // End of Evidence section ?>
+
+<?php
+// Start Notes section
 if (NOTES == true) {
 
 if(isset($_GET['action']) && $_GET['action'] == 'addNote') {
@@ -97,16 +146,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'addNote') {
 if(isset($_GET['action']) && $_GET['action'] == 'delNote' && is_numeric($_GET['noteid'])) {
     reportNoteDelete($_GET['noteid']);
 }
-
-
 ?>
-<h2>Evidence</h2>
 
-<p>
-<pre>
-<?php echo htmlentities($report['Evidence']); ?>
-</pre>
-</p>
 
 <h2>Notes</h2>
 
@@ -154,4 +195,4 @@ foreach($notes as $nr => $note) {
     </div>
 </form>
 
-<?php } ?>
+<?php } // End Notes section ?>

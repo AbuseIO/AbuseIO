@@ -188,7 +188,7 @@ function receive_mail($call) {
         // We will save evidence in the SQL databases for linking in CLI/Webgui or
         // to re-use that dataset. It will keep record of which cases are related
         // to a specific set of evidence records.
-        $message['evidenceid'] = evidence_store($message['from'], $message['subject'], $raw);
+        $message['evidenceid'] = evidenceStore($message['from'], $message['subject'], $raw);
     }
 
     return $message;

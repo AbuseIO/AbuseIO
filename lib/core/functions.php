@@ -1,5 +1,5 @@
-<?PHP
-function evidence_store($sender, $subject, $data) {
+<?php
+function evidenceStore($sender, $subject, $data) {
     $query = "INSERT INTO Evidence (
                                     Sender, 
                                     Subject, 
@@ -15,13 +15,40 @@ function evidence_store($sender, $subject, $data) {
     return $id;
 }
 
-function evidence_link($evidenceID, $reportID) {
+function evidenceLink($evidenceID, $reportID) {
     $query = "INSERT IGNORE INTO EvidenceLinks (EvidenceID, ReportID) VALUES ('${evidenceID}', '${reportID}');";
 
     $result = _mysqli_query($query);
 
     return $result;
 }
+
+function evidenceList($ticket) {
+    $reports = array();
+
+    $query = "SELECT EvidenceLinks.EvidenceID, EvidenceLinks.ReportID, Evidence.ID, Evidence.LastModified, Evidence.Sender, Evidence.Subject ".
+             "FROM Evidence, EvidenceLinks WHERE 1 AND EvidenceLinks.EvidenceID = Evidence.ID AND EvidenceLinks.ReportID = '${ticket}';";
+
+    $reports = _mysqli_fetch($query);
+
+    return $reports;
+}
+
+function evidenceGet($id) {
+    $reports = array();
+
+    $filter  = "AND ID='${id}'";
+    $query   = "SELECT * FROM Evidence WHERE 1 ${filter}";
+
+    $report = _mysqli_fetch($query);
+
+    if (isset($report[0])) {
+        return $report[0];
+    } else {
+        return false;
+    }
+}
+
 
 function reportAdd($report) {
     // Array should minimally contain $source(string), $ip(string), $class(string), $timestamp(int), $information(array)
@@ -139,12 +166,11 @@ function reportCount($filter) {
 }
 
 function reportGet($id) {
-
-    // FIXME: Only 1 evidence row is currently included in the report, while multiple could exist
     $reports = array();
 
-    $filter  = "AND Reports.ID='${id}'";
-    $query   = "SELECT Reports.*,Evidence.Data as Evidence FROM Reports,EvidenceLinks,Evidence WHERE Reports.ID=EvidenceLinks.ReportID and EvidenceLinks.EvidenceID=Evidence.ID ${filter}";
+    $filter  = "AND ID='${id}'";
+    $query   = "SELECT * FROM Reports WHERE 1 ${filter}";
+
     $report = _mysqli_fetch($query);
 
     if (isset($report[0])) {

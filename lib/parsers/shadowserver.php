@@ -152,7 +152,7 @@ function parse_shadowserver($message) {
 
             $reportID = reportAdd($outReport);
             if (!$reportID) return false;
-            if(KEEP_EVIDENCE == true && $reportID !== true) { evidence_link($message['evidenceid'], $reportID); }
+            if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
         }
     }
