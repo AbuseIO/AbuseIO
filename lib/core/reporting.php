@@ -54,7 +54,7 @@ function reportAdd($report) {
             $query  = "${update} ${filter}";
             if (_mysqli_query($query, "")) {
                 logger(LOG_DEBUG, __FUNCTION__ . " by $source ip $ip class $class seen " . date("d-m-Y H:i:s",$timestamp) . " is UPDATED");
-                return true;
+                return $row['ID'];
             }
             return false;
         }
