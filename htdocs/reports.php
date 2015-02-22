@@ -9,13 +9,15 @@
     if(!empty($_GET['IP'])) $filter .= " AND IP LIKE '".mysql_escape_string($_GET['IP'])."'";
     if(!empty($_GET['Class'])) $filter .= " AND Class='".mysql_escape_string($_GET['Class'])."'";
     if(!empty($_GET['Source'])) $filter .= " AND Source='".mysql_escape_string($_GET['Source'])."'";
-
-    // Select only ABUSE type by default
-    $reportType=(!empty($_GET['Type']))?mysql_escape_string($_GET['Type']):'ABUSE';
-    $filter .= " AND Type='$reportType'";
-
     if(!empty($_GET['CustomerCode'])) $filter .= " AND CustomerCode='".mysql_escape_string($_GET['CustomerCode'])."'";
     if(!empty($_GET['CustomerName'])) $filter .= " AND CustomerName like '%".mysql_escape_string($_GET['CustomerName'])."%'";
+
+    // Select only ABUSE type by default, unless we have other filter options
+    if (empty($filter)) {
+        $reportType=(!empty($_GET['Type']))?mysql_escape_string($_GET['Type']):'ABUSE';
+        if (!empty($_GET['Type']) || empty($filter) && empty($_GET['Type'])) $filter .= " AND Type='$reportType'";
+    }
+
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
 
     if(!empty($_GET['OrderBy'])) { $order = mysql_escape_string($_GET['OrderBy']); } else { $order = 'LastSeen'; }
