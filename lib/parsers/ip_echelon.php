@@ -2,6 +2,7 @@
 function parse_ip_echelon($message) {
 
     $source = 'IP-Echelon';
+    $type = 'ABUSE';
 
     if (
         !empty($message['store']) && !empty($message['attachments']) &&
@@ -21,6 +22,7 @@ function parse_ip_echelon($message) {
                                 'domain'        => false,
                                 'uri'           => false,
                                 'class'         => 'Copyright Infringement',
+                                'type'          => $type,
                                 'timestamp'     => strtotime($xml->Source->TimeStamp),
                                 'information'   => $information,
         );

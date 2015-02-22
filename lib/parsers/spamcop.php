@@ -2,6 +2,7 @@
 function parse_spamcop($message) {
     $outReport                  = array('source' => 'Spamcop');
     $outReport['information']   = array();
+    $outReport['type']          = 'ABUSE';
 
     if (
         strpos($message['from'], "@reports.spamcop.net>") !== FALSE && 

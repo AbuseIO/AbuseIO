@@ -3,7 +3,7 @@
     Function description
 */
 function reportAdd($report) {
-    // Array should minimally contain $source(string), $ip(string), $class(string), $timestamp(int), $information(array)
+    // Array should minimally contain $source(string), $ip(string), $class(string), $type(string), $timestamp(int), $information(array)
     if (!is_array($report)) {
         return false;
     } else {
@@ -62,7 +62,8 @@ function reportAdd($report) {
                                         FirstSeen, 
                                         LastSeen, 
                                         Information, 
-                                        Class, 
+                                        Class,
+                                        Type,
                                         CustomerCode, 
                                         CustomerName,
                                         CustomerContact, 
@@ -81,6 +82,7 @@ function reportAdd($report) {
                                         \"${timestamp}\", 
                                         \"" . mysql_escape_string(json_encode($information)) . "\", 
                                         \"${class}\", 
+                                        \"${type}\",
                                         \"${customer['Code']}\", 
                                         \"${customer['Name']}\",
                                         \"${customer['Contact']}\", 

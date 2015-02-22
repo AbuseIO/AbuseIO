@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `Reports` (
   `LastSeen` int(12) NOT NULL,
   `Information` longtext NOT NULL,
   `Class` varchar(50) NOT NULL,
+  `Type` varchar(10) NOT NULL,
   `CustomerCode` varchar(50) NOT NULL,
   `CustomerName` varchar(255) NOT NULL,
   `CustomerContact` varchar(255) NOT NULL,

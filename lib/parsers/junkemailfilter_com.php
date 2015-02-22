@@ -2,6 +2,7 @@
 function parse_junkemailfilter_com($message) {
 
     $source = 'JunkEmailFilter.com';
+    $type   = 'ABUSE';
 
     // Read and parse report
     preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$message['arf']['report'],$regs);
@@ -15,13 +16,14 @@ function parse_junkemailfilter_com($message) {
     logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
 
     $outReport = array(
-                        'source'=>$source,
-                        'ip'=>$fields['Source-IP'],
-                        'domain'=>false,
-                        'uri'=>false,
-                        'class'=>'SPAM',
-                        'timestamp'=>strtotime($fields['Received-Date']),
-                        'information'=>$fields
+                        'source'        => $source,
+                        'ip'            => $fields['Source-IP'],
+                        'domain'        => false,
+                        'uri'           => false,
+                        'class'         => 'SPAM',
+                        'type'          => 'ABUSE',
+                        'timestamp'     => strtotime($fields['Received-Date']),
+                        'information'   => $fields
                       );
 
     $reportID = reportAdd($outReport);

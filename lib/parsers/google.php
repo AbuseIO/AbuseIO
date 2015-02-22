@@ -9,6 +9,7 @@ function parse_google($message) {
     // ==================
 
     $source         = "Google Safe Browsing";
+    $type           = "ABUSE"
     $xml            = simplexml_load_string($message['body']);
     $timestamp      = strtotime($xml->attributes()->date);
 
@@ -66,6 +67,7 @@ function parse_google($message) {
                                 'domain'        => $url_info['domain'],
                                 'uri'           => $url_info['path'],
                                 'class'         => $class,
+                                'type'          => $type,
                                 'timestamp'     => $timestamp,
                                 'information'   => $information
                                );

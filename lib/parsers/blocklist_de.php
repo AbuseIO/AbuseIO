@@ -43,14 +43,21 @@ function parse_blocklist_de($message) {
 
         logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
 
+        if($fields['Report-Type'] == 'info') {
+            $type = 'INFO';
+        } else {
+            $type = 'ABUSE';
+        }
+
         $outReport = array(
-                            'source'=>$source,
-                            'ip'=>$fields['Source'],
-                            'domain'=>false,
-                            'uri'=>false,
-                            'class'=>$typeMap[$fields['Report-Type']],
-                            'timestamp'=>strtotime($fields['Date']),
-                            'information'=>$fields
+                            'source'        => $source,
+                            'ip'            => $fields['Source'],
+                            'domain'        => false,
+                            'uri'           => false,
+                            'class'         => $typeMap[$fields['Report-Type']],
+                            'type'          => $type,
+                            'timestamp'     => strtotime($fields['Date']),
+                            'information'   => $fields
                           );
 
         $reportID = reportAdd($outReport);
