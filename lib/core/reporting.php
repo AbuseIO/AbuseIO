@@ -11,6 +11,7 @@ function reportAdd($report) {
     }
 
     if (!isset($ip) || !isset($source) || !isset($class) || !isset($type) || !isset($timestamp)) {
+        logger(LOG_WARNING, __FUNCTION__ . " was called with not enough arguments in the array");
         return false;
     }
     if (!isset($domain)) {
