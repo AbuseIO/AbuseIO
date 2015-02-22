@@ -2,6 +2,7 @@
 function parse_project_honeypot($message) {
 
     $source = "Project Honeypot";
+    $type = 'ABUSE';
 
     $typeMap = array(
         'H'=>'Harvesting',
@@ -17,9 +18,8 @@ function parse_project_honeypot($message) {
         $outReport = array(
                             'source'=>$source,
                             'ip'=>$ip,
-                            'domain'=>false,
-                            'uri'=>false,
                             'class'=>$typeMap[$regs[2][$k]],
+                            'type'=>$type,
                             'timestamp'=>strtotime($regs[3][$k]),
                             'information'=>array()
                           );
