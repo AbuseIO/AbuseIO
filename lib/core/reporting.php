@@ -10,7 +10,7 @@ function reportAdd($report) {
         extract($report);
     }
 
-    if (!isset($ip) || !isset($source) || !isset($class) || !isset($timestamp)) {
+    if (!isset($ip) || !isset($source) || !isset($class) || !isset($type) || !isset($timestamp)) {
         return false;
     }
 
