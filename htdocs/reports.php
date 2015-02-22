@@ -14,8 +14,8 @@
 
     // Select only ABUSE type by default, unless we have other filter options
     if (empty($filter)) {
-        $reportType=(!empty($_GET['Type']))?mysql_escape_string($_GET['Type']):'ABUSE';
-        if (!empty($_GET['Type']) || empty($filter) && empty($_GET['Type'])) $filter .= " AND Type='$reportType'";
+        $reportType=(isset($_GET['Type']))?mysql_escape_string($_GET['Type']):'ABUSE';
+        if (!empty($reportType)) $filter .= " AND Type='$reportType'";
     }
 
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
