@@ -9,6 +9,7 @@
     if(!empty($_GET['IP'])) $filter .= " AND IP LIKE '".mysql_escape_string($_GET['IP'])."'";
     if(!empty($_GET['Class'])) $filter .= " AND Class='".mysql_escape_string($_GET['Class'])."'";
     if(!empty($_GET['Source'])) $filter .= " AND Source='".mysql_escape_string($_GET['Source'])."'";
+    if(!empty($_GET['Type'])) $filter .= " AND Type='".mysql_escape_string($_GET['Type'])."'";
     if(!empty($_GET['CustomerCode'])) $filter .= " AND CustomerCode='".mysql_escape_string($_GET['CustomerCode'])."'";
     if(!empty($_GET['CustomerName'])) $filter .= " AND CustomerName like '%".mysql_escape_string($_GET['CustomerName'])."%'";
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
@@ -75,6 +76,7 @@
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'CustomerCode','Direction'=>($order='CustomerCode'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Customer</a></th>
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Class','Direction'=>($order='Class'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Classification</a></th>
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Source','Direction'=>($order='Source'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Source</a></th>
+          <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Type','Direction'=>($order='Type'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Type</a></th>
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'FirstSeen','Direction'=>($order='FirstSeen'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>First Seen</a></th>
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'LastSeen','Direction'=>($order='LastSeen'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Last Seen</a></th>
           <th>Count</th>
@@ -82,6 +84,12 @@
     </thead>
     <tbody>
 <?php
+$labelClass = array(
+    'ABUSE'=>'warning',
+    'INFO'=>'info',
+    'ALERT'=>'danger'
+);
+
 foreach($results as $nr => $result) {
     echo "
         <tr>
@@ -93,6 +101,7 @@ foreach($results as $nr => $result) {
           </td>
           <td><a href='reports.php?Class=${result['Class']}'>${result['Class']}</a></td>
           <td><a href='reports.php?Source=${result['Source']}'>${result['Source']}</a></td>
+          <td><span class='label label-${labelClass[$result['Type']]}'><a href='reports.php?Type=${result['Type']}'>${result['Type']}</a></span></td>
           <td>".date("d-m-Y H:m", $result['FirstSeen'])."</td>
           <td>".date("d-m-Y H:m", $result['LastSeen'])."</td>
           <td>${result['ReportCount']}</td>

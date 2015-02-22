@@ -42,6 +42,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'ViewEvidence' && is_numeric($_
 
 include('../lib/frontend/top.php');
 
+$labelClass = array(
+    'ABUSE'=>'warning',
+    'INFO'=>'info',
+    'ALERT'=>'danger'
+);
 ?>
 
 <dl class="dl-horizontal">
@@ -80,6 +85,9 @@ include('../lib/frontend/top.php');
 
     <dt>Source</dt>
     <dd><?php echo "<a href='reports.php?Source=${report['Source']}'>${report['Source']}</a>"; ?></dd>
+
+    <dt>Type</dt>
+    <dd><?php echo "<span class='label label-${labelClass[$report['Type']]}'><a href='reports.php?Type=${report['Type']}'>${report['Type']}</a></span>"; ?></dd>
 
     <dt>First Seen</dt>
     <dd><?php echo date("d-m-Y H:m", $report['FirstSeen']); ?></dd>

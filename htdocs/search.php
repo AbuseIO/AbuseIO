@@ -35,6 +35,18 @@
                     ?>
                 </select>
             </div>
+            <div class="col-md-6 form-group form-group-sm">
+                <label for='Type'>Type</label>
+                <select name='Type' class="form-control">
+                    <option value=''>All</option>
+                    <?php
+                        $types = array('ABUSE','INFO','ALERT');
+                        foreach($types as $type) {
+                            echo "<option value='{$type}'>{$type}</option>";
+                        }
+                    ?>
+                </select>
+            </div>
             <div class="col-md-12">
                 <button type='submit' class="btn btn-primary">Search</button>
             </div>

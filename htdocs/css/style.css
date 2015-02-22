@@ -79,3 +79,8 @@ tbody>tr:hover,.table-striped>tbody>tr:hover,tbody>tr:hover>td>a {
   color: #fff;
   background-color: #428bca;
 }
+
+/* Label style */
+span.label>a {
+  color: #fff;
+}
