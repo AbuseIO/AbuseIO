@@ -13,9 +13,16 @@ function reportAdd($report) {
     if (!isset($ip) || !isset($source) || !isset($class) || !isset($type) || !isset($timestamp)) {
         return false;
     }
+    if (!isset($domain)) {
+        $domain = '';
+    } elseif(preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
+        $domain = $regs['domain'];
+    } else {
+        // Its fine as it is
+    }
 
     $select = "SELECT * FROM Reports";
-    $filter = "WHERE IP='${ip}' AND Source='${source}' AND Class='${class}' AND LastSeen > '".($timestamp-(86400*7))."' ORDER BY LastSeen DESC LIMIT 1;";
+    $filter = "WHERE IP='${ip}' AND Domain LIKE '%${domain}%' AND Source='${source}' AND Class='${class}' AND LastSeen > '".($timestamp-(86400*7))."' ORDER BY LastSeen DESC LIMIT 1;";
     $query  = "${select} ${filter}";
     $count  = _mysqli_num_rows($query);
 
