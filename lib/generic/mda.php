@@ -28,7 +28,7 @@ function receive_mail($call) {
     } elseif ($call['type'] == "EXTERNAL") {
         $raw        = file_get_contents("php://stdin");
     } else {
-        //TODO Unhandled mail
+        logger(LOG_ERR, __FUNCTION__ . " was called, but was unable to determin if this was internally passed or not");
         return false;
     }
 
