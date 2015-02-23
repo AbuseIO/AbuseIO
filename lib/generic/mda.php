@@ -57,8 +57,8 @@ function receive_mail($call) {
             $archiveFile = '/archive/' . str_replace(array(" ","(",")","/"), "_", $structure->headers['message-id']) . ".eml";      
         }
 
-        if (!is_file(APP.'/archive/'.$archiveFile.'.eml')) {
-            file_put_contents(APP.$archiveFile.'.eml', $raw);
+        if (!is_file(APP.'/archive/'.$archiveFile)) {
+            file_put_contents(APP.$archiveFile, $raw);
             logger(LOG_DEBUG, __FUNCTION__ . " Saved email message to " . APP. $archiveFile);
         } else {
             logger(LOG_ERR, __FUNCTION__ . " Unable to archive email because the file already exists");
