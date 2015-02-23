@@ -10,7 +10,6 @@ function csv_to_array($file) {
             } else {
                 $num = count($data);
                 if ($num !== $magic) {
-                    // TODO error handle offset unmatched
                     logger(LOG_ERR, __FUNCTION__ . " The number of cells do not match the header. CSV is either corrupt or incomplete.");
 
                     return false;
