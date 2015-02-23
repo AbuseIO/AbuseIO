@@ -232,8 +232,7 @@ function reportNotification($filter) {
         $query .= "AND CustomerCode = '${filter['Customer']}' ";
 
     } elseif (isset($filter['All'])) {
-        // Notify everything from anyone (cronable)
-        // Doesnt really need filtering does it, but it beats the return
+        $query .= "AND AutoNotify = '1' ";
 
     } else {
         return false;
