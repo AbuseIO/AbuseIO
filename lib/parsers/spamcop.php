@@ -47,7 +47,6 @@ function parse_spamcop($message) {
         if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
     } elseif (strpos($message['from'], "@reports.spamcop.net") !== FALSE) {
-        //TODO uitpakken report voor IP en datum
         // We've got a SPAMCOP formatted message
         // most inline SPAM messages contain the original SPAM message
         // Lets attempt to grab that part of the message and collect the interesting bits
@@ -128,7 +127,7 @@ function parse_spamcop($message) {
 
         } elseif (strpos($tmp[3], "Unsolicited bounce from") !== false) {
             // This part handles 'bounce' complaints
-            // TODO
+            // TODO - Waiting on sample
         } else {
             logger(LOG_ERR, __FUNCTION__ . " Unable to match the report, perhaps a new classification type?");
             logger(LOG_WARNING, __FUNCTION__ . " FAILED message from ${outReport['source']} subject ${message['subject']}");
