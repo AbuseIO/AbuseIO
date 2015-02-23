@@ -18,8 +18,6 @@ function parse_junkemailfilter_com($message) {
     $outReport = array(
                         'source'        => $source,
                         'ip'            => $fields['Source-IP'],
-                        'domain'        => false,
-                        'uri'           => false,
                         'class'         => 'SPAM',
                         'type'          => 'ABUSE',
                         'timestamp'     => strtotime($fields['Received-Date']),

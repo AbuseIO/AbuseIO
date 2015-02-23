@@ -52,8 +52,6 @@ function parse_blocklist_de($message) {
         $outReport = array(
                             'source'        => $source,
                             'ip'            => $fields['Source'],
-                            'domain'        => false,
-                            'uri'           => false,
                             'class'         => $typeMap[$fields['Report-Type']],
                             'type'          => $type,
                             'timestamp'     => strtotime($fields['Date']),

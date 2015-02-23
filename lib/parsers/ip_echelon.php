@@ -19,8 +19,6 @@ function parse_ip_echelon($message) {
         $outReport   = array(
                                 'source'        => $source,
                                 'ip'            => (string)$xml->Source->IP_Address,
-                                'domain'        => false,
-                                'uri'           => false,
                                 'class'         => 'Copyright Infringement',
                                 'type'          => $type,
                                 'timestamp'     => strtotime($xml->Source->TimeStamp),
