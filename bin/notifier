@@ -8,12 +8,15 @@ if (null === NOTIFICATIONS && !is_file(APP.NOTIFICATION_TEMPLATE)){
     $template = file_get_contents(APP.NOTIFICATION_TEMPLATE);
 }
 
+$counter= 0;
 $filter = array(
 //                'Ticket'    => '4159',
 //                'IP'        => '',
 //                'Customer'  => '',
                 'All'       => true,
                );
+
+logger(LOG_DEBUG, "Notifier - Is starting a run");
 
 // Collect reports - return all the data so you can decide what to put
 // in the customer mail. format: array($reports[CustomerCode][$i][$report_elements])
@@ -91,6 +94,7 @@ foreach($allreports as $customerCode => $reports) {
     if ($validated) {
         if(mail($to, $subject, $email, implode("\r\n", $headers))) {
             logger(LOG_DEBUG, "Notifier - Successfully sent notification to ${to}");
+            $counter++;
         } else {
             logger(LOG_ERR, "Notifier - Failed sending mail to ${to} MTA returned false");
         }
@@ -99,4 +103,5 @@ foreach($allreports as $customerCode => $reports) {
     }
 }
 
+logger(LOG_DEBUG, "Notifier - Completed and has sent out {$counter} notifications");
 ?>
