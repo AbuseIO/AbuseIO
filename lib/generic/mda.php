@@ -52,9 +52,14 @@ function receive_mail($call) {
 
     if(KEEP_MAILS == true) {
         if (empty($structure->headers['message-id'])) {
-            logger(LOG_ERR, __FUNCTION__ . " Unable to archive email due to missing message-id");
+            $archiveFile = '/archive/' . rand(10,10) . ".eml";
         } else {
-            file_put_contents(APP.'/archive/'.str_replace(array(" ","(",")","/"), "_", $structure->headers['message-id']).".eml", $raw);      
+            $archiveFile = '/archive/' . str_replace(array(" ","(",")","/"), "_", $structure->headers['message-id']) . ".eml", $raw);      
+        }
+        if (!is_file(APP.'/archive/'.$filename.'.eml') {
+            file_put_contents(APP.'/archive/'.$filename.'.eml', $raw);
+        } else {
+            logger(LOG_ERR, __FUNCTION__ . " Unable to archive email because the file already exists");
         }
     }
 
