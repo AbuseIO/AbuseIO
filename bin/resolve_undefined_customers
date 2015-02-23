@@ -1,0 +1,24 @@
+#!/usr/bin/php
+<?php
+/*
+This script locates all undefined customers are retries to find their real name and contact details.
+*/
+include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
+
+$query = "SELECT * FROM Reports WHERE 1 AND CustomerCode='UNDEF'";
+$results = _mysqli_fetch($query);
+
+foreach($results as $id => $result) {
+
+    $customer = custom_find_customer($result['IP']);
+
+    if (isset($customer['Code']) && $customer['Code'] != $result['CustomerCode']) {
+        echo "{$result['IP']} OLD ${result['CustomerCode']} => ${customer['Code']}". PHP_EOL;
+
+        $query = "UPDATE `Reports` SET CustomerCode='${customer['Code']}', CustomerName='${customer['Name']}', CustomerContact='Onbekend' WHERE ID='${result['ID']}';";
+        _mysqli_query($query, "");
+    } else {
+        echo "{$result['IP']} did not resolve its netname at ripe".PHP_EOL;
+    }
+}
+?>
