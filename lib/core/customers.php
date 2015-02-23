@@ -105,7 +105,7 @@ function customerLookup($ip) {
     //Lookup failed thus we return dummy
     $customer['Code'] = "UNDEF";
     $customer['Name'] = "Undefined customer";
-    $customer['Contact'] = "undef@local.isp";
+    $customer['Contact'] = "unknown";
     $customer['AutoNotify'] = 0;
 
     return $customer;

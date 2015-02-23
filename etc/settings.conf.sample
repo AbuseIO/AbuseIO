@@ -9,5 +9,7 @@ NOTES = true                                    ; enable the ability for admins 
 NOTES_DELETABLE = true                          ; enable the ability for admins to delete notes from reports (disabled by default)
 NOTIFICATIONS = true                            ; enable this for AR3 to send out e-mails to customers where AutoNotify is enabled
 NOTIFICATION_TEMPLATE = /etc/mail.template      ; set this to the APP relative path to use this email template (required for notification = true!)
+NOTIFICATIONS_FROM_ADDRESS = name@host.tld      ; set here the senders email address
+NOTIFICATIONS_FROM_NAME = ISP AbuseDesk         ; set here the senders name which could be more user readable
 SELF_HELP_URL = http://sh.abuse.io/             ; enable this to insert urls in each e-mail which link to a specific FAQ to help them resolve this
 CUSTOM_MODULES = find_customer                  ; define customer modules, comma separated value

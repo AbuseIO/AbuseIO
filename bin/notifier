@@ -49,15 +49,54 @@ foreach($allreports as $customerCode => $reports) {
         }
         $block[] = "=============================REPORT=END===============================";
         $blocks .= implode("\n", $block) . "\n";
+
+        //Mark the report as notified:
+        reportNotification($report['ID']);
+
     }
 
-    $customerContact = $report['CustomerContact'];
-    $email = $template;
-    $email = str_replace("<<COUNT>>", $count, $email);
-    $email = str_replace("<<BOXES>>", $blocks, $email);
+    $to                 = $report['CustomerContact'];
+    $email              = $template;
+    $subject            = 'Abusereport for ' . $customerCode . ' ' . date("Ymd_Hi");
+    $email              = str_replace("<<COUNT>>", $count, $email);
+    $email              = str_replace("<<BOXES>>", $blocks, $email);
 
-    // TODO - Actually sent e-mail
-    // TOTO - add valid_mail function in general
+    // Validate all the email addresses in the TO field
+    if (strpos(",", $to) !== false) {
+        if (filter_var($to, FILTER_VALIDATE_EMAIL)) {
+            $validated = true;
+        } else {
+            $validated = false;
+        }
+    } else {
+        $to = str_replace(" ", "", $to);
+        $addresses = explode(",", $to);
+        foreach($addresses as $address) {
+            if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
+                $validated = true;
+            } else {
+                $validated = false;
+            }
+        }
+    }
+
+    $headers   = array();
+    $headers[] = "MIME-Version: 1.0";
+    $headers[] = "Content-type: text/plain; charset=iso-8859-1";
+    $headers[] = "From: " . NOTIFICATIONS_FROM_NAME . " <" . NOTIFICATIONS_FROM_ADDRESS . ">";
+    $headers[] = "Reply-To: " . NOTIFICATIONS_FROM_NAME . " <" . NOTIFICATIONS_FROM_ADDRESS . ">";
+    $headers[] = "Subject: {$subject}";
+    $headers[] = "X-Mailer: AbuseIO/".VERSION;
+
+    if ($validated) {
+        if(mail($to, $subject, $email, implode("\r\n", $headers))) {
+            logger(LOG_DEBUG, "Notifier - Successfully sent notification to ${to}");
+        } else {
+            logger(LOG_ERR, "Notifier - Failed sending mail to ${to} MTA returned false");
+        }
+    } else {
+        logger(LOG_ERR, "Notifier - Failed sending mail to ${to} as the addres is incorrectly formatted");
+    }
 }
 
 ?>
