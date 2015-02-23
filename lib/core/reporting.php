@@ -215,7 +215,7 @@ function reportNotification($filter) {
     // all items per customer
 
     $data  = array();
-    $query = "SELECT * FROM Reports WHERE 1 ";
+    $query = "SELECT * FROM Reports WHERE 1 AND CustomerContact != ''";
 
     if (!is_array($filter)) {
         return false;
