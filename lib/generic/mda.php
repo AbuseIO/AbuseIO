@@ -44,15 +44,18 @@ function receive_mail($call) {
     // We cannot parse mail if some fields are unset
     if (
         empty($structure->headers['from']) ||
-        empty($structure->headers['subject']) ||
-        empty($structure->headers['message-id'])
+        empty($structure->headers['subject'])
     ) {
         logger(LOG_ERR, __FUNCTION__ . " Unable to parse email due to missing fields");
         return false;
     }
 
     if(KEEP_MAILS == true) {
-        file_put_contents(APP.'/archive/'.str_replace(array(" ","(",")","/"), "_", $structure->headers['message-id']).".eml", $raw);      
+        if (empty($structure->headers['message-id'])) {
+            logger(LOG_ERR, __FUNCTION__ . " Unable to archive email due to missing message-id");
+        } else {
+            file_put_contents(APP.'/archive/'.str_replace(array(" ","(",")","/"), "_", $structure->headers['message-id']).".eml", $raw);      
+        }
     }
 
     if (isset($structure->body)) {
