@@ -54,7 +54,7 @@ foreach($allreports as $customerCode => $reports) {
         $blocks .= implode("\n", $block) . "\n";
 
         //Mark the report as notified:
-        reportNotification($report['ID']);
+        reportNotified($report['ID']);
 
     }
 
