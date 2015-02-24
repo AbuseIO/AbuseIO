@@ -54,7 +54,7 @@ if ($parser_func($message)) {
 }
 
 function bounce($message) {
-    logger(LOG_WARNING, "Bouncing message to admin because i was unabled to parse it");
+    logger(LOG_WARNING, "Attempting to bounce message to admin because i was unabled to parse it");
 
     $tempfile = "/tmp/" . mt_rand();
     file_put_contents($tempfile, $message['raw']);
@@ -73,9 +73,15 @@ function bounce($message) {
 
     $email->AddAttachment( $tempfile , 'bounce.eml' );
 
-    $email->Send();
+    if(!$email->Send()) {
+        logger(LOG_ERR, "Bouncing to " . FALLBACK_MAIL . " failed.");
+        exit(1);
 
-    exit(0);
+    } else {
+        logger(LOG_WARNING, "Bounced to " . FALLBACK_MAIL . " successfully.");
+        exit(0);
+
+    }
 }
 
 ?>
