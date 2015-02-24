@@ -20,6 +20,13 @@ if (SNDS_KEY == "") {
                 'delisting_url'=>'http://ipremoval.sms.symantec.com/'
             ),
         ),
+        'SpamHaus SBL/XBL'=>array(
+            'class'=>'RBL Listed',
+            'type'=>'INFO',
+            'information'=>array(
+                'delisting_url'=>'https://www.spamhaus.org/lookup/',
+            ),
+        )
     );
     preg_match_all('/([^,]+),([^,]+),([^,]+),([^\r\n]+)\r?\n/',$data, $regs);
     $first_ip = $regs[1];
