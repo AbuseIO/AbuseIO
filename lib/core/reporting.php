@@ -173,6 +173,25 @@ function reportSummary($period) {
 /*
     Function description
 */
+function reportIps($period=14) {
+    $summary = array();
+
+    $lastseen = time()-$period*86400;
+    $query  = "SELECT DISTINCT Ip FROM Reports WHERE LastSeen > $lastseen";
+
+    if ($ips = _mysqli_fetch($query)) {
+        $ret = array();
+        foreach ($ips as $ip) $ret[] = $ip['Ip'];
+        return $ret;
+    }
+
+    return false;
+}
+
+
+/*
+    Function description
+*/
 function reportMerge() {
 
 }
