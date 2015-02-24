@@ -108,8 +108,8 @@ foreach($results as $nr => $result) {
           <td><a href='reports.php?Class=${result['Class']}'>${result['Class']}</a></td>
           <td><a href='reports.php?Source=${result['Source']}'>${result['Source']}</a></td>
           <td><span class='label label-${labelClass[$result['Type']]}'><a href='reports.php?Type=${result['Type']}'>${result['Type']}</a></span></td>
-          <td>".date("d-m-Y H:m", $result['FirstSeen'])."</td>
-          <td>".date("d-m-Y H:m", $result['LastSeen'])."</td>
+          <td>".date("d-m-Y H:i", $result['FirstSeen'])."</td>
+          <td>".date("d-m-Y H:i", $result['LastSeen'])."</td>
           <td>${result['ReportCount']}</td>
         </tr>
     ";

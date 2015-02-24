@@ -90,10 +90,10 @@ $labelClass = array(
     <dd><?php echo "<span class='label label-${labelClass[$report['Type']]}'><a href='reports.php?Type=${report['Type']}'>${report['Type']}</a></span>"; ?></dd>
 
     <dt>First Seen</dt>
-    <dd><?php echo date("d-m-Y H:m", $report['FirstSeen']); ?></dd>
+    <dd><?php echo date("d-m-Y H:i", $report['FirstSeen']); ?></dd>
 
     <dt>Last Seen</dt>
-    <dd><?php echo date("d-m-Y H:m", $report['LastSeen']); ?></dd>
+    <dd><?php echo date("d-m-Y H:i", $report['LastSeen']); ?></dd>
 
     <dt>Report Count</dt>
     <dd><?php echo $report['ReportCount']; ?></dd>
