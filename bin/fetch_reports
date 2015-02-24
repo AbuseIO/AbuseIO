@@ -11,10 +11,14 @@ if (SNDS_KEY == "") {
         'E-mail address harvesting'=>array(
             'class'=>'Harvesting',
             'type'=>'ABUSE',
+            'information'=>array(),
         ),
         'Symantec Brightmail'=>array(
             'class'=>'RBL Listed',
             'type'=>'INFO',
+            'information'=>array(
+                'delisting_url'=>'http://ipremoval.sms.symantec.com/'
+            ),
         ),
     );
     preg_match_all('/([^,]+),([^,]+),([^,]+),([^\r\n]+)\r?\n/',$data, $regs);
@@ -35,9 +39,9 @@ if (SNDS_KEY == "") {
                             'class'=>$sndsMap[$source[$k]]['class'],
                             'type'=>$sndsMap[$source[$k]]['type'],
                             'timestamp'=>time(),
-                            'information'=>array(
+                            'information'=>array_merge($sndsMap[$source[$k]]['information'],array(
                                 'details'=>$source[$k]
-                            )
+                            ))
                         ))) break;
                     } else {
                         logger(LOG_ERR,'Unknown class when importing SNDS report: '.$source[$k]);
