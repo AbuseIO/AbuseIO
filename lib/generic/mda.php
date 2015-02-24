@@ -119,22 +119,6 @@ function receive_mail($call) {
                     if(strpos($sp->headers['content-type'],'text/html')!==false){
                         $html .= $sp->body;
                     }
-                    /*
-                    Removed this part and replace  with ARF matching a few lines up
-                    if (strpos($sp->headers['content-type'],'multipart/alternative')!==false){
-                        // Seems we got a multipart message. Lets parse this for possible ARF handling
-                        $arf['headers'] = $sp->headers;
-                        foreach($sp->parts as $multipartSP){
-
-                            if(strpos($multipartSP->headers['content-type'],'text/plain')!==false){
-                                $arf['plain'] .= $multipartSP->body;
-                            }
-                            if(strpos($multipartSP->headers['content-type'],'text/html')!==false){
-                                $arf['html'] .= $multipartSP->body;
-                            }
-                        }
-                    }
-                    */
                 }
 
             } elseif (isset($part->headers['content-type'])) {
@@ -164,11 +148,6 @@ function receive_mail($call) {
                     $plain .= $part->body;
                 } elseif(strpos($part->headers['content-type'],'text/html')!==false){
                     $html .= $part->body;
-                /*
-                Removed this part and replace  with ARF matching a few lines up
-                } elseif(strpos($part->headers['content-type'],'message/feedback-report')!==false){
-                    $arf['report'] .= $part->body;
-                */
                 } else {
                     //Todo: unknown content type should be handled
                     return false;
@@ -189,6 +168,7 @@ function receive_mail($call) {
     $message['html']        = $html;
     $message['attachments'] = $attachments;
     $message['store']       = $message_store;
+    $message['raw']         = $raw;
 
     if (strlen($arf['report']) > 1) {
         $message['arf']     = $arf;

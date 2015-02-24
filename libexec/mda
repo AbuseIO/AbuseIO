@@ -7,8 +7,7 @@ $message = receive_mail(array('type' => 'EXTERNAL'));
 // Sanity checks
 if(empty($message['from']) || empty($message['body'])) {
     delete_store($message);
-    echo "5.5.0 DENIED - Unable to process invalid message" . PHP_EOL;
-    exit(EX_PERMFAIL);
+    bounce($message);
 }
 
 // Maps regular expressions to match from address to the corresponding parser
@@ -33,12 +32,14 @@ foreach ($parserMap as $regex => $p) {
     }
 }
 
-// If we don't have a parser, we cannot process the message
+// If we don't have a static parser
 if (empty($parser)) {
+    // TODO - try a generic ARF parser
+    // TODO - else bounce the e-mail using phpmailer
+
+    // } else {
     delete_store($message);
-    logger(LOG_DEBUG, "Received a message from unknown sender");
-    echo "4.5.0 DENIED - Unable to process message from unknown sender" . PHP_EOL;
-    exit(EX_TEMPFAIL);
+    bounce($message);
 }
 
 // Import the parser
@@ -47,11 +48,34 @@ require_once(APP."/lib/parsers/$parser.php");
 $parser_func = "parse_$parser";
 if ($parser_func($message)) {
     delete_store($message);
-    echo "2.5.0 OK - The message has been delivered" . PHP_EOL;
     exit(0);
 } else {
-    echo "4.5.0 ERROR - Unable to process message" . PHP_EOL;
-    exit(EX_TEMPFAIL);
+    bounce($message);
+}
+
+function bounce($message) {
+    logger(LOG_WARNING, "Bouncing message to admin because i was unabled to parse it");
+
+    $tempfile = "/tmp/" . mt_rand();
+    file_put_contents($tempfile, $message['raw']);
+
+    $bodytext = "AbuseIO tried to parse a message, however was not able to. You will find the EML attached.";
+
+    $email = new PHPMailer();
+    $email->From      = NOTIFICATIONS_FROM_ADDRESS;
+    $email->FromName  = NOTIFICATIONS_FROM_NAME;
+    $email->Subject   = 'AbuseIO failed parsing attempt';
+    $email->Body      = $bodytext;
+    $email->AddAddress( FALLBACK_MAIL );
+
+
+    $file_to_attach = 'PATH_OF_YOUR_FILE_HERE';
+
+    $email->AddAttachment( $tempfile , 'bounce.eml' );
+
+    $email->Send();
+
+    exit(0);
 }
 
 ?>

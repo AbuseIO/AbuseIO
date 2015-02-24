@@ -30,6 +30,7 @@ $modules = array(
                                                 "logger",
                                                 "functions",
                                                 "mda",
+                                                "mailer",
                                              ),
                 "database"          => array (
                                                 "mysql",
@@ -66,13 +67,7 @@ foreach(explode(",", CUSTOM_MODULES) as $object) {
     }
 }
 
-// MDA exit codes
-DEFINE('EX_PERMFAIL', 73);    // Permanent failure - don't try again
-DEFINE('EX_TEMPFAIL', 75);    // Temporary failure - try again later
-
 date_default_timezone_set(TIME_ZONE);
 
 logger(LOG_DEBUG, "Loader completed successfully");
-
-//print_r(get_defined_constants(true));
 ?>
