@@ -3,20 +3,24 @@ define('VERSION', '3.0.0');
 define('APP',realpath(dirname(__FILE__).'/../../'));
 
 // Globally used options like debug and version
-$shortopts = "dv";
-$longopts  = array(
-                    "debug",
-                    "version",
-                  );
-$options   = getopt($shortopts, $longopts);
 
-if (isset($options['debug']) || isset($options['d'])) {
-    define('DEBUG', true);
-} else {
-    define('DEBUG', false);
-}
-if (isset($options['version']) || isset($options['v'])){
-    die(VERSION . PHP_EOL);
+// getopt() only works on cli
+if (PHP_SAPI == 'cli') {
+    $shortopts = "dv";
+    $longopts  = array(
+                        "debug",
+                        "version",
+                      );
+    $options   = getopt($shortopts, $longopts);
+
+    if (isset($options['debug']) || isset($options['d'])) {
+        define('DEBUG', true);
+    } else {
+        define('DEBUG', false);
+    }
+    if (isset($options['version']) || isset($options['v'])){
+        die(VERSION . PHP_EOL);
+    }
 }
 
 // Modules that should be loaded for AbuseIO to function correctly
