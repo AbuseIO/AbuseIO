@@ -8,7 +8,7 @@ $rbls = array(
         'name'=>'Spamhaus',
         'host'=>'zen.spamhaus.org',
         'information' => array(
-            'delisting_url'=>'https://www.spamhaus.org/lookup'
+            'delisting_url'=>'https://www.spamhaus.org/lookup/'
         )
     ),
     array(
