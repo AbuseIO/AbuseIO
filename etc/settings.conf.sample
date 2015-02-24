@@ -13,3 +13,4 @@ NOTIFICATIONS_FROM_ADDRESS = name@host.tld      ; set here the senders email add
 NOTIFICATIONS_FROM_NAME = ISP AbuseDesk         ; set here the senders name which could be more user readable
 SELF_HELP_URL = http://sh.abuse.io/             ; enable this to insert urls in each e-mail which link to a specific FAQ to help them resolve this
 CUSTOM_MODULES = find_customer                  ; define customer modules, comma separated value
+SNDS_KEY =                                      ; specify key to be able to fetch reports from Microsoft SNDS (https://postmaster.live.com/snds/)
