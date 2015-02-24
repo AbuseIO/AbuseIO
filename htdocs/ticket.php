@@ -115,6 +115,11 @@ $labelClass = array(
 ?>
 </dl>
 
+<?php
+$evidences = evidenceList($_GET['id']);
+
+if (!empty($evidences)) {
+?>
 <h2>Evidence</h2>
 
 <table class="table table-striped table-condensed">
@@ -128,22 +133,21 @@ $labelClass = array(
     </thead>
     <tbody>
 <?php
-$evidences = evidenceList($_GET['id']);
-
-foreach($evidences as $nr => $evidence) {
-    echo "
-        <tr>
-          <td>${evidence['LastModified']}</td>
-          <td>${evidence['Sender']}</td>
-          <td>${evidence['Subject']}</td>
-          <td>
-                <div class='btn-group pull-right'>
-                    <a href='?action=ViewEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' class='btn btn-default btn-sm' title='View EML file' target='_blank'>View<a/>
-                    <a href='?action=DownloadEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' class='btn btn-default btn-sm' title='Download EML file'>Download<a/>
-                </div>
-          </td>
-        </tr>
-    ";
+    foreach($evidences as $nr => $evidence) {
+        echo "
+            <tr>
+              <td>${evidence['LastModified']}</td>
+              <td>${evidence['Sender']}</td>
+              <td>${evidence['Subject']}</td>
+              <td>
+                    <div class='btn-group pull-right'>
+                        <a href='?action=ViewEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' class='btn btn-default btn-sm' title='View EML file' target='_blank'>View<a/>
+                        <a href='?action=DownloadEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' class='btn btn-default btn-sm' title='Download EML file'>Download<a/>
+                    </div>
+              </td>
+            </tr>
+        ";
+    }
 }
 ?>
     </tbody>
