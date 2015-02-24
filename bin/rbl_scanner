@@ -12,13 +12,6 @@ $rbls = array(
         )
     ),
     array(
-        'name'=>'BarracudaCentral',
-        'host'=>'b.barracudacentral.org',
-        'information' => array(
-            'delisting_url'=>'http://www.barracudacentral.org/rbl/removal-request'
-        )
-    ),
-    array(
         'name'=>'Spamcop',
         'host'=>'bl.spamcop.net',
         'information' => array(
