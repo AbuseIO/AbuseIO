@@ -1,0 +1,78 @@
+#!/usr/bin/php
+<?php
+include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
+
+// RBL's to check
+$rbls = array(
+    array(
+        'name'=>'Spamhaus',
+        'host'=>'zen.spamhaus.org',
+        'information' => array(
+            'delisting_url'=>'https://www.spamhaus.org/lookup'
+        )
+    ),
+    array(
+        'name'=>'BarracudaCentral',
+        'host'=>'b.barracudacentral.org',
+        'information' => array(
+            'delisting_url'=>'http://www.barracudacentral.org/rbl/removal-request'
+        )
+    ),
+    array(
+        'name'=>'Spamcop',
+        'host'=>'bl.spamcop.net',
+        'information' => array(
+            'delisting_url'=>'https://www.spamcop.net/bl.shtml'
+        )
+    ),
+);
+
+// Check RBL's for listings for IP's with confirmed abuse reports
+if ($ips = reportIps()) {
+    foreach ($ips as $ip) {
+        foreach ($rbls as $rbl) {
+            $ip_reversed = implode('.',array_reverse(preg_split('/\./',$ip)));
+            $lookup = $ip_reversed.'.'.$rbl['host'];
+            if ($result = gethostbyname($lookup)) {
+                $class = '';
+                switch ($result) {
+                    // No listing
+                    case $lookup:
+                        break;
+
+                    // Generic spam sources
+                    case '127.0.0.2':
+                    case '127.0.0.3':
+                        $class = 'RBL Listed';
+                        break;
+
+                    // Used by Spamhaus CBL (open proxy / trojans)
+                    case '127.0.0.4':
+                        $class = 'RBL Listed (Open Proxy)';
+                        break;
+
+                    // Used by Spamhaus PBL (policy listed by network operator) (ignore)
+                    case '127.0.0.10':
+                    case '127.0.0.11':
+                        break;
+
+                    default:
+                        logger(LOG_ERR,"Unhandled DNS result received by {$rbl['name']} for IP $ip: $result");
+                }
+                if (!empty($class)) {
+                    // Abort if we cannot save a report
+                    if (!reportAdd(array(
+                        'source'=>$rbl['name'],
+                        'ip'=>$ip,
+                        'class'=>$class,
+                        'type'=>'INFO',
+                        'timestamp'=>time(),
+                        'information'=>$rbl['information']
+                    ))) break 2;
+                }
+            }
+        }
+    }
+}
+
+?>
