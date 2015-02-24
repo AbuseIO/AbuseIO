@@ -116,6 +116,11 @@ function parse_shadowserver($message) {
                                                     'fields'    => 'protocol port version uptime curr_connections total_connections',
                                                     'type'      => 'INFO',
                                                  ),
+                'scan_mongodb'        => array (
+                                                    'class'     => 'Open MongoDB Server',
+                                                    'fields'    => 'protocol port version sysinfo visible_databases',
+                                                    'type'      => 'INFO',
+                                                 ),
               );
 
     // ==================
