@@ -58,7 +58,11 @@ foreach($allreports as $customerCode => $reports) {
 
     }
 
-    $to                 = $report['CustomerContact'];
+    if (DEBUG) {
+        $to =           NOTIFICATIONS_FROM_ADDRESS;
+    } else {
+        $to             = $report['CustomerContact'];
+    }
     $email              = $template;
     $subject            = 'Abusereport for ' . $customerCode . ' ' . date("Ymd_Hi");
     $email              = str_replace("<<COUNT>>", $count, $email);
