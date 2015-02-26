@@ -23,6 +23,7 @@ $parserMap = array(
     '/abuse@clean-mx.de/'                   => 'cleanmx_de',
     '/@USGOabuse.net/'                      => 'usgoabuse',
     '/abuse-reports@cyscon.de/'             => 'cyscon',
+    '/takedown-response.*@netcraft.com/'    => 'netcraft',
 );
 
 // Detect parser
@@ -36,7 +37,6 @@ foreach ($parserMap as $regex => $p) {
 // If we don't have a static parser
 if (empty($parser)) {
     // TODO - try a generic ARF parser
-    // TODO - else bounce the e-mail using phpmailer
 
     // } else {
     delete_store($message);
