@@ -38,6 +38,7 @@ foreach($allreports as $customerCode => $reports) {
         $block[] = "==========================[ REPORT START ]============================"; 
         $block[] = "Ticket: ${report['ID']} ";
         $block[] = "IP: ${report['IP']}";
+        $block[] = "Source: ${report['Source']}";
         $block[] = "Classification: ${report['Class']}";
         if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
         $block[] = "--------------------------[ INFORMATION ]-----------------------------";
