@@ -25,7 +25,7 @@ Some additional packages are required:
 
 #### Ubuntu
 
-* apt-get install php-mail-mimedecode php5-cli php5-curl php5-mysql
+* apt-get install php-mail-mimedecode php5-cli php5-curl php5-mysql apache2 php5 postfix mysql-server
 
 #### CentOS
 

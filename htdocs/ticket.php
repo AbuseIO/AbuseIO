@@ -215,11 +215,9 @@ foreach($notes as $nr => $note) {
     <input type='hidden' name='id' value='<?php echo $_GET['id']; ?>'>
     <div class="row">
         <div class="col-md-6 form-group form-group-sm">
-            <label for='Ticket'>Add note</label>
-            <textarea rows="4" cols="80" name='Note'></textarea>
-        </div>
-        <div class="col-md-12">
-            <button type='submit' class="btn btn-primary">Save</button>
+            <label for='Note'>Add note : </label>
+            <textarea rows="4" cols="80" name='Note'>
+            </textarea><button type='submit' class="btn btn-primary">Save</button>
         </div>
     </div>
 </form>

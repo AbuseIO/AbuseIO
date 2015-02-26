@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS `Netblocks` (
   `CustomerCode` varchar(80) NOT NULL DEFAULT '',
   `LastModified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`begin_in`,`end_in`),
-  KEY `begin_in` (`begin_in`),
-  KEY `end_in` (`end_in`),
+  UNIQUE KEY `begin_in` (`begin_in`),
+  UNIQUE KEY `end_in` (`end_in`),
   KEY `Code` (`CustomerCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

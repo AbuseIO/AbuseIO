@@ -37,13 +37,10 @@ function customerAdd($customer) {
 /*
     Function description
 */
-function customerDelete($CustomerID) {
-    if (!is_numeric($CustomerID)) {
-        return false;
-    } else {
-        $query = "DELETE FROM Customers WHERE ID = '${CustomerID}';";
-        return _mysqli_query($query, "");
-    }
+function customerDelete($CustomerCode) {
+    $query = "DELETE FROM Customers WHERE Code = '${CustomerCode}';";
+
+    return _mysqli_query($query, "");
 }
 
 /*

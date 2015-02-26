@@ -15,7 +15,7 @@ function netblockCount($filter) {
     Function description
 */
 function netblockAdd($netblock) {
-    if (NOTES != true || !is_array($netblock)) {
+    if (!is_array($netblock)) {
         return false;
     } else {
         $query = "INSERT INTO Netblocks (
@@ -23,8 +23,8 @@ function netblockAdd($netblock) {
                                         end_in,
                                         CustomerCode
                             ) VALUES (
-                                        '".mysql_escape_string($netblock['Begin'])."',
-                                        '".mysql_escape_string($netblock['End'])."',
+                                        '".mysql_escape_string($netblock['begin_in'])."',
+                                        '".mysql_escape_string($netblock['end_in'])."',
                                         '".mysql_escape_string($netblock['CustomerCode'])."'
                             );";
 
@@ -35,11 +35,13 @@ function netblockAdd($netblock) {
 /*
     Function description
 */
-function netblockDelete($NetblockID) {
-    if (!is_numeric($NetblockID)) {
+function netblockDelete($begin_in, $end_in) {
+    if (!is_numeric($begin_in) || !is_numeric($end_in)) {
         return false;
+
     } else {
-        $query = "DELETE FROM Netblocks WHERE ID = '${NetblockID}';";
+        $query = "DELETE FROM Netblocks WHERE begin_in = '${begin_in}' AND end_in = '${end_in}';";
+
         return _mysqli_query($query, "");
     }
 }
@@ -66,7 +68,7 @@ function netblockUpdate() {
 function netblockList($filter) {
     $reports = array();
 
-    $query = "SELECT * FROM Netblocks WHERE 1 ${filter}"; 
+    $query = "SELECT Netblocks.begin_in, Netblocks.end_in, Netblocks.CustomerCode, Customers.Code, Customers.Name FROM Netblocks, Customers WHERE 1 AND Customers.Code = Netblocks.CustomerCode ${filter}"; 
     $reports = _mysqli_fetch($query);
 
     return $reports;
