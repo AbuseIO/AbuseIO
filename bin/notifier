@@ -30,7 +30,7 @@ foreach($allreports as $customerCode => $reports) {
         $block  = array();
         $report['Information'] = json_decode($report['Information']);
 
-        if (null !== SELF_HELP_URL) {
+        if (SELF_HELP_URL != "") {
             $token = md5("${report['ID']}${report['IP']}${report['Class']}");
             $selfHelpLink = SELF_HELP_URL . "?=" . $token;
         } else { $selfHelpLink = ""; }
@@ -39,7 +39,7 @@ foreach($allreports as $customerCode => $reports) {
         $block[] = "Ticket: ${report['ID']} ";
         $block[] = "IP: ${report['IP']}";
         $block[] = "Classification: ${report['Class']}";
-        $block[] = "Reply or help: " . $selfHelpLink;
+        if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
         $block[] = "----------------------------INFORMATION-------------------------------";
         if(isset($report['Information']->Domain)) {
           $block[] = "domain: " . $report['Information']['Domain'];
