@@ -126,7 +126,7 @@ function receive_mail($call) {
                     // This is a mime multipart attachment!
                     $i++;
 
-                    $regex = "name=\"(.*)\";";
+                    $regex = "name=\"(.*)\"";
                     preg_match("/${regex}/m", $part->headers['content-type'], $match);
                     if (count($match) === 2) {
                         $filename = $match[1];
@@ -141,7 +141,7 @@ function receive_mail($call) {
                         $attachments[$i] = $filename;
 
                     } else {
-                        // Unhandled mime exit
+                        logger(LOG_ERR, "Unknown mime type in parsing e-mail");
                         return false;
                     }
                 } elseif(strpos($part->headers['content-type'],'text/plain')!==false){
@@ -149,7 +149,7 @@ function receive_mail($call) {
                 } elseif(strpos($part->headers['content-type'],'text/html')!==false){
                     $html .= $part->body;
                 } else {
-                    //Todo: unknown content type should be handled
+                    logger(LOG_ERR, "Unknown content type in parsing e-mail");
                     return false;
                 }
             } else {
