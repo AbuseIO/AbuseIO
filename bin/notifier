@@ -29,31 +29,28 @@ foreach($allreports as $customerCode => $reports) {
 
     $blocks = "";
     foreach($reports as $id => $report) {
-        $block  = array();
+        $block = array();
         $report['Information'] = json_decode($report['Information']);
 
         if (SELF_HELP_URL != "") {
             $token = md5("${report['ID']}${report['IP']}${report['Class']}");
             $selfHelpLink = SELF_HELP_URL . "?=" . $token;
-        } else { $selfHelpLink = ""; }
+        } else {
+            $selfHelpLink = "";
+        }
 
-        $block[] = "==========================[ REPORT START ]============================"; 
-        $block[] = "Ticket: ${report['ID']} ";
-        $block[] = "IP: ${report['IP']}";
+        $block[] = "";
+        $block[] = "Ticket #${report['ID']}: Report for IP address ${report['IP']} (${report['Type']}: ${report['Class']})";
+        $block[] = "";
+        $block[] = "Report date: ".date('Y-m-d H:i',$report['LastSeen']);
         $block[] = "Source: ${report['Source']}";
-        $block[] = "Classification: ${report['Class']}";
         if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
-        $block[] = "--------------------------[ INFORMATION ]-----------------------------";
-        if(isset($report['Information']->Domain)) {
-          $block[] = "domain: " . $report['Information']['Domain'];
+        if (!empty($report['Information'])) {
+            $block[] = "Further information:";
+            if(isset($report['Information']->Domain)) $block[] = "  - domain: " . $report['Information']['Domain'];
+            if(isset($report['Information']->URI)) $block[] = "  - uri/path: " . $report['Information']['URI'];
+            foreach($report['Information'] as $field => $value) $block[] = "  - ${field}: ${value}";
         }
-        if(isset($report['Information']->URI)) {
-          $block[] = "uri/path: " . $report['Information']['URI'];
-        }
-        foreach($report['Information'] as $field => $value){
-            $block[] = "${field}: ${value}";
-        }
-        $block[] = "===========================[ REPORT END ]=============================";
         $block[] = "";
         $blocks .= implode("\n", $block);
 
