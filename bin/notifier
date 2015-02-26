@@ -65,7 +65,7 @@ foreach($allreports as $customerCode => $reports) {
         $to             = $report['CustomerContact'];
     }
     $email              = $template;
-    $subject            = 'Abusereport for ' . $customerCode . ' ' . date("Ymd_Hi");
+    $subject            = 'Notification of (possible) abuse';
     $email              = str_replace("<<COUNT>>", $count, $email);
     $email              = str_replace("<<BOXES>>", $blocks, $email);
 
