@@ -24,6 +24,8 @@ logger(LOG_DEBUG, "Notifier - Is starting a run");
 // in the customer mail. format: array($reports[CustomerCode][$i][$report_elements])
 $allreports = reportNotification($filter);
 
+$class_seen = array();
+
 foreach($allreports as $customerCode => $reports) {
     $count = count($reports);
 
@@ -46,7 +48,7 @@ foreach($allreports as $customerCode => $reports) {
         $block[] = "Source: ${report['Source']}";
         if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
         if (!empty($report['Information'])) {
-            $block[] = "Further information:";
+            $block[] = "Report information:";
             if(isset($report['Information']->Domain)) $block[] = "  - domain: " . $report['Information']['Domain'];
             if(isset($report['Information']->URI)) $block[] = "  - uri/path: " . $report['Information']['URI'];
             foreach($report['Information'] as $field => $value) $block[] = "  - ${field}: ${value}";
@@ -57,6 +59,18 @@ foreach($allreports as $customerCode => $reports) {
         //Mark the report as notified:
         reportNotified($report['ID']);
 
+        $class_seen[$report['Class']] = 1;
+
+    }
+
+    // Include further information about the abuse reports
+    if (!empty($class_seen)) {
+        $blocks .= "\nAdditional information:\n\n";
+        foreach ($class_seen as $class => $true) {
+            if ($class_info = getClassInfo($class)) {
+                $blocks .= "$class:\n\n$class_info";
+            }
+        }
     }
 
     if (DEBUG) {

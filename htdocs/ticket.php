@@ -116,6 +116,8 @@ $labelClass = array(
 </dl>
 
 <?php
+if ($info_extra = getClassInfo($report['Class'])) echo '<pre>'.$info_extra.'</pre>';
+
 $evidences = evidenceList($_GET['id']);
 
 if (!empty($evidences)) {

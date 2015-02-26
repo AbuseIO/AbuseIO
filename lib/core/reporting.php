@@ -281,4 +281,17 @@ function reportNotification($filter) {
 
     return $data;
 }
+
+/*
+    Get additional information for a class
+*/
+function getClassInfo($class) {
+    $class_file = APP.'/lib/templates/class/'.preg_replace('/( )+/','_',preg_replace('@/@','',strtolower($class))).'.txt';
+    if (file_exists($class_file)) {
+        return file_get_contents($class_file);
+    } else {
+        return false;
+    }
+}
+
 ?>
