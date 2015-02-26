@@ -54,7 +54,8 @@ function receive_mail($call) {
         if (empty($structure->headers['message-id'])) {
             $archiveFile = '/archive/' . rand(10,10) . ".eml";
         } else {
-            $archiveFile = '/archive/' . str_replace(array(" ","(",")","/"), "_", $structure->headers['message-id']) . ".eml";      
+            $messageID = preg_replace('/[^a-zA-Z0-9_\.]/', '_', $structure->headers['message-id']);
+            $archiveFile = '/archive/' . $messageID . ".eml";      
         }
 
         if (!is_file(APP.'/archive/'.$archiveFile)) {
