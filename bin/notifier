@@ -14,6 +14,8 @@ $filter = array(
 //                'IP'        => '',
 //                'Customer'  => '',
                 'All'       => true,
+                // How many days to look back (don't notify about old obsolete reports)
+                'Days'      => 3
                );
 
 logger(LOG_DEBUG, "Notifier - Is starting a run");

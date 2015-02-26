@@ -250,6 +250,10 @@ function reportNotification($filter) {
         // Notify everything about this Customer(code)
         $query .= "AND CustomerCode = '${filter['Customer']}' ";
 
+    } elseif (isset($filter['Days'])) {
+        $from = time()-(86400*$filter['Days']);
+        $query .= "AND LastSeen >= $from ";
+
     } elseif (isset($filter['All'])) {
         $query .= "AND AutoNotify = '1' ";
 
