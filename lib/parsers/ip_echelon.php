@@ -13,7 +13,8 @@ function parse_ip_echelon($message) {
                                 'type'          => (string)$xml->Source->Type,
                                 'port'          => (string)$xml->Source->Port,
                                 'number_files'  => (string)$xml->Source->Number_Files,
-                                'complainant'   => (string)$xml->Complainant->Entity,
+                                // IP Echelon sometimes passes invalid UTF-8, so let's fix that
+                                'complainant'   => iconv('UTF-8', 'UTF-8//IGNORE', (string)$xml->Complainant->Entity),
                             );
 
         $outReport   = array(
