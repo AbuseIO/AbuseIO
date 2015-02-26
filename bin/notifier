@@ -35,12 +35,12 @@ foreach($allreports as $customerCode => $reports) {
             $selfHelpLink = SELF_HELP_URL . "?=" . $token;
         } else { $selfHelpLink = ""; }
 
-        $block[] = "============================REPORT=START=============================="; 
+        $block[] = "==========================[ REPORT START ]============================"; 
         $block[] = "Ticket: ${report['ID']} ";
         $block[] = "IP: ${report['IP']}";
         $block[] = "Classification: ${report['Class']}";
         if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
-        $block[] = "----------------------------INFORMATION-------------------------------";
+        $block[] = "--------------------------[ INFORMATION ]-----------------------------";
         if(isset($report['Information']->Domain)) {
           $block[] = "domain: " . $report['Information']['Domain'];
         }
@@ -50,7 +50,8 @@ foreach($allreports as $customerCode => $reports) {
         foreach($report['Information'] as $field => $value){
             $block[] = "${field}: ${value}";
         }
-        $block[] = "=============================REPORT=END===============================";
+        $block[] = "===========================[ REPORT END ]=============================";
+        $block[] = "";
         $blocks .= implode("\n", $block) . "\n";
 
         //Mark the report as notified:
