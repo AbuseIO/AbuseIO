@@ -13,8 +13,6 @@ function parse_junkemailfilter_com($message) {
         return false;
     }
 
-    logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
-
     $outReport = array(
                         'source'        => $source,
                         'ip'            => $fields['Source-IP'],
@@ -28,6 +26,7 @@ function parse_junkemailfilter_com($message) {
     if (!$reportID) return false;
     if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
+    logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
     return true;
 }
 ?>

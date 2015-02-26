@@ -23,8 +23,6 @@ function parse_cyscon($message) {
         $fields['uri'] = str_replace("http://".$fields['domain'], "", $fields['uri']);
     }
 
-    logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
-
     $outReport = array(
                         'source'        => $source,
                         'ip'            => $fields['ip'],
@@ -40,6 +38,7 @@ function parse_cyscon($message) {
     if (!$reportID) return false;
     if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
+    logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
     return true;
 }
 ?>

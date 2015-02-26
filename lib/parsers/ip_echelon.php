@@ -30,7 +30,6 @@ function parse_ip_echelon($message) {
         if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
         logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
-
         return $reportID;
 
     } else {

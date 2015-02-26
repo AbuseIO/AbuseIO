@@ -41,8 +41,6 @@ function parse_blocklist_de($message) {
             return false;
         }
 
-        logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
-
         if($fields['Report-Type'] == 'info') {
             $type = 'INFO';
         } else {
@@ -61,6 +59,8 @@ function parse_blocklist_de($message) {
         $reportID = reportAdd($outReport);
         if (!$reportID) return false;
         if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
+
+        logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
         return true;
 
     } else {
