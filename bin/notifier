@@ -93,7 +93,6 @@ foreach($allreports as $customerCode => $reports) {
     $headers[] = "Content-type: text/plain; charset=iso-8859-1";
     $headers[] = "From: " . NOTIFICATIONS_FROM_NAME . " <" . NOTIFICATIONS_FROM_ADDRESS . ">";
     $headers[] = "Reply-To: " . NOTIFICATIONS_FROM_NAME . " <" . NOTIFICATIONS_FROM_ADDRESS . ">";
-    $headers[] = "Subject: {$subject}";
     $headers[] = "X-Mailer: AbuseIO/".VERSION;
 
     if ($validated) {
