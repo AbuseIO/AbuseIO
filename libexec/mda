@@ -60,7 +60,14 @@ function bounce($message) {
     $tempfile = "/tmp/" . mt_rand();
     file_put_contents($tempfile, $message['raw']);
 
-    $bodytext = "AbuseIO tried to parse a message, however was not able to. You will find the EML attached.";
+    $bodytext  = "AbuseIO tried to parse a message, however was not able to.\n";
+    if(!empty($message['from'])) {
+        $bodytext .= "\nfrom: ${message['from']}\n";
+    }
+    if(!empty($message['subject'])) {
+        $bodytext .= "\nsubject: ${message['subject']}\n";
+    }
+    $bodytext .= "\nYou will find the EML attached.\n";
 
     $email = new PHPMailer();
     $email->From      = NOTIFICATIONS_FROM_ADDRESS;
