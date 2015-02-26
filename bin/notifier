@@ -52,7 +52,7 @@ foreach($allreports as $customerCode => $reports) {
         }
         $block[] = "===========================[ REPORT END ]=============================";
         $block[] = "";
-        $blocks .= implode("\n", $block) . "\n";
+        $blocks .= implode("\n", $block);
 
         //Mark the report as notified:
         reportNotified($report['ID']);
