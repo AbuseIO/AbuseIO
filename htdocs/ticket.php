@@ -139,8 +139,8 @@ if (!empty($evidences)) {
         echo "
             <tr>
               <td>${evidence['LastModified']}</td>
-              <td>${evidence['Sender']}</td>
-              <td>${evidence['Subject']}</td>
+              <td>". htmlentities($evidence['Sender']) ."</td>
+              <td>". htmlentities($evidence['Subject']) ."</td>
               <td>
                     <div class='btn-group pull-right'>
                         <a href='?action=ViewEvidence&EvidenceID=${evidence['ID']}&id=${_GET['id']}' class='btn btn-default btn-sm' title='View EML file' target='_blank'>View<a/>
