@@ -127,6 +127,9 @@ function parse_shadowserver($message) {
 
     $source = "Shadowserver";
 
+    // Ignore some feeds if an ignore list exists in the configuration
+    $feed_ignore = (defined('SHADOWSERVER_IGNORE'))?explode(',',str_replace(' ','',SHADOWSERVER_IGNORE)):array();
+
     foreach( $message['attachments'] as $attachmentID => $attachment) {
         preg_match("~(?:\d{4})-(?:\d{2})-(?:\d{2})-(.*)-[^\-]+-[^\-]+.csv~i", $attachment, $feed);
         $feed   = $feed[1];
@@ -136,6 +139,9 @@ function parse_shadowserver($message) {
             logger(LOG_ERR, __FUNCTION__ . " A configuration error was detected. An unconfigured feed ${feed} was selected for parsing");
             logger(LOG_WARNING, __FUNCTION__ ." FAILED message from ${source} subject ${message['subject']}");
             return false;
+        } else if (in_array($feed,$feed_ignore)) {
+            logger(LOG_INFO, __FUNCTION__ ." IGNORING message from ${source} subject ${message['subject']}");
+            return true;
         }
 
         $class   = $feeds[$feed]['class'];
