@@ -68,7 +68,7 @@ foreach($allreports as $customerCode => $reports) {
         $blocks .= "\nAdditional information:\n\n";
         foreach ($class_seen as $class => $true) {
             if ($class_info = getClassInfo($class)) {
-                $blocks .= "$class:\n\n$class_info";
+                $blocks .= "$class:\n\n$class_info\n";
             }
         }
     }
