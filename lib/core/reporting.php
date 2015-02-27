@@ -22,10 +22,14 @@ function reportAdd($report) {
         // Its fine as it is
     }
 
-    $select = "SELECT * FROM Reports";
-    $filter = "WHERE IP='${ip}' AND Domain LIKE '%${domain}%' AND Source='${source}' AND Class='${class}' AND LastSeen > '".($timestamp-(86400*7))."' ORDER BY LastSeen DESC LIMIT 1;";
-    $query  = "${select} ${filter}";
-    $count  = _mysqli_num_rows($query);
+    $select  = "SELECT * FROM Reports";
+    $filteradd = "";
+    if (isset($customer) && is_array($customer) && !empty($customer['Code']) && !empty($customer['AutoNotify'])) {
+        $filteradd = "AND CustomerCode='${customer['Code']}'";
+    }
+    $filter  = "WHERE IP='${ip}' AND Domain LIKE '%${domain}%' AND Source='${source}' AND Class='${class}' AND LastSeen > '".($timestamp-(86400*7))."' ${filteradd} ORDER BY LastSeen DESC LIMIT 1;";
+    $query   = "${select} ${filter}";
+    $count   = _mysqli_num_rows($query);
 
     if (!isset($domain)) {
         $domain = "";
@@ -60,7 +64,14 @@ function reportAdd($report) {
             return false;
         }
     } else {
-        $customer = CustomerLookup($ip);
+        if (!isset($customer) || !is_array($customer)) {
+            $customer = CustomerLookup($ip);
+        } else {
+            if(empty($customer['Code'])) {
+                logger(LOG_ERR, __FUNCTION__ . " was incorrectly called with empty customer information");
+                return false;
+            }
+        }
 
         $query = "INSERT INTO Reports (
                                         Source, 
