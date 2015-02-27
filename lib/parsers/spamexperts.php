@@ -1,6 +1,6 @@
 <?php
 function parse_antispamcloud($message) {
-    $outReport                  = array('source' => 'Antispamcloud');
+    $outReport                  = array('source' => 'SpamExperts');
     $outReport['information']   = array();
     $outReport['type']          = 'ABUSE';
 
