@@ -46,7 +46,7 @@ function reportAdd($report) {
         if ($row['LastSeen'] == $timestamp) {
             logger(LOG_WARNING, __FUNCTION__ . " by $source ip $ip class $class seen " . date("d-m-Y H:i:s",$timestamp) . " is DUPLICATE!");
             return true;
-        } elseif ($row['LastSeen'] > $timestamp) {
+        } elseif ($row['LastSeen'] >= $timestamp) {
             logger(LOG_WARNING, __FUNCTION__ . " by $source ip $ip class $class seen " . date("d-m-Y H:i:s",$timestamp) . " is OBSOLETE!");
             return true;
         } else {
