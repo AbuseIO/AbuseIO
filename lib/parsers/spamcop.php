@@ -38,6 +38,11 @@ function parse_spamcop($message) {
         $match = "^Feedback-Type: (?<type>.*)\r\n?\r?\nUser-Agent: (?<agent>.*\r\n?\r?\n\s.*)\r\n?\r?\nVersion: (?<version>.*)\r\n?\r?\nReceived-Date: (?<date>.*)\r\n?\r?\nSource-IP: (?<ip>.*)\r\n?\r?\n";
         preg_match("/${match}/m", $message['arf']['report'], $match);
 
+        if(empty($match['ip']) || empty($match['date'])) {
+            logger(LOG_ERR, __FUNCTION__ . " ARF Report is missing essential fields");
+            return false;
+        }
+
         $outReport['class']         = "SPAM";
         $outReport['ip']            = $match['ip'];
         $outReport['timestamp']     = strtotime($match['date']);
