@@ -24,6 +24,7 @@ $parserMap = array(
     '/@USGOabuse.net/'                      => 'usgoabuse',
     '/abuse-reports@cyscon.de/'             => 'cyscon',
     '/takedown-response.*@netcraft.com/'    => 'netcraft',
+    '/noreply@spamlogin.com/'               => 'antispamcloud',
 );
 
 // Detect parser
