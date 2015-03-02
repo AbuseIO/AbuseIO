@@ -88,10 +88,12 @@ function reportAdd($report) {
                                         CustomerContact, 
                                         CustomerResolved,
                                         CustomerIgnored,
+                                        Status,
                                         AutoNotify,
                                         NotifiedCount, 
                                         ReportCount,
-                                        LastNotifyReportCount
+                                        LastNotifyReportCount,
+                                        LastNotifyTimestamp
                             ) VALUES (
                                         \"${source}\", 
                                         \"${ip}\", 
@@ -107,9 +109,11 @@ function reportAdd($report) {
                                         \"${customer['Contact']}\", 
                                         \"0\", 
                                         \"0\",
+                                        \"Open\",
                                         \"".((empty($customer['AutoNotify']))?0:1)."\",
                                         \"0\", 
                                         \"1\",
+                                        \"0\",
                                         \"0\"
                             );";
 

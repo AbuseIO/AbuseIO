@@ -95,11 +95,31 @@ $labelClass = array(
     <dt>Last Seen</dt>
     <dd><?php echo date("d-m-Y H:i", $report['LastSeen']); ?></dd>
 
-    <dt>Report Count</dt>
-    <dd><?php echo $report['ReportCount']; ?></dd>
+    <dt>Ticket status</dt>
+    <dd><?php echo $report['Status']; ?></dd>
 
-    <dt>Notified Count</dt>
-    <dd><?php echo $report['NotifiedCount']; ?></dd>
+    <dt>Customer status</dt>
+    <dd>
+        <?php 
+            echo "Resolved: ". ($report['CustomerResolved'] ? 'YES' : 'NO'); 
+            echo " - Ignored: ". ($report['CustomerIgnored']  ? 'YES' : 'NO');
+
+        ?>
+    </dd>
+
+    <dt>Report Status</dt>
+    <dd>
+        <?php 
+            echo "Seen: " . $report['ReportCount'] . "x"; 
+            echo " - Notifications: " . $report['NotifiedCount'] . "x";
+            echo " - Last notification : ";
+            if ($report['LastNotifyReportCount'] === '0') {
+                echo "never"; 
+            } else {
+                echo "at count ". $report['LastNotifyReportCount'] ." on ". $report['LastNotifyTimestamp'] ; 
+            }
+        ?>
+    </dd>
 
 </dl>
 

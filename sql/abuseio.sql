@@ -11,6 +11,23 @@ CREATE TABLE IF NOT EXISTS `Customers` (
   KEY `Contact` (`Contact`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE IF NOT EXISTS `Evidence` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `Data` longtext NOT NULL,
+  `LastModified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Sender` varchar(255) NOT NULL,
+  `Subject` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `EvidenceLinks` (
+  `EvidenceID` int(10) NOT NULL,
+  `ReportID` int(10) NOT NULL,
+  PRIMARY KEY (`EvidenceID`,`ReportID`),
+  KEY `EvidenceID` (`EvidenceID`),
+  KEY `ReportID` (`ReportID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS `Netblocks` (
   `begin_in` int(10) unsigned NOT NULL DEFAULT '0',
   `end_in` int(10) unsigned NOT NULL DEFAULT '0',
@@ -49,10 +66,12 @@ CREATE TABLE IF NOT EXISTS `Reports` (
   `CustomerContact` varchar(255) NOT NULL,
   `CustomerResolved` int(1) NOT NULL,
   `CustomerIgnored` int(1) NOT NULL,
+  `Status` varchar(255) NOT NULL,
   `AutoNotify` int(1) NOT NULL,
   `NotifiedCount` int(10) NOT NULL,
   `ReportCount` int(10) NOT NULL,
   `LastNotifyReportCount` int(10) NOT NULL,
+  `LastNotifyTimestamp` int(12) NOT NULL,
   `LastModified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
   KEY `IP` (`IP`),
@@ -60,22 +79,5 @@ CREATE TABLE IF NOT EXISTS `Reports` (
   KEY `Domain` (`Domain`),
   KEY `Class` (`Class`),
   KEY `CustomerCode` (`CustomerCode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
-
-CREATE TABLE IF NOT EXISTS `Evidence` (
-  `ID` int(10) NOT NULL AUTO_INCREMENT,
-  `Data` longtext NOT NULL,
-  `LastModified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `Sender` varchar(255) NOT NULL,
-  `Subject` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-CREATE TABLE IF NOT EXISTS `EvidenceLinks` (
-  `EvidenceID` int(10) NOT NULL,
-  `ReportID` int(10) NOT NULL,
-  PRIMARY KEY (`EvidenceID`,`ReportID`),
-  KEY `EvidenceID` (`EvidenceID`),
-  KEY `ReportID` (`ReportID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
