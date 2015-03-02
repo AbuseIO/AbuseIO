@@ -17,7 +17,7 @@ function parse_shadowserver($message) {
                                                     'type'      => 'INFO',
                                                  ),
                 'ssl_scan'              => array (
-                                                    'class'     => 'SSLv3/Poodle Vulnerable Server',
+                                                    'class'     => 'SSLv3 Vulnerable Server',
                                                     'fields'    => 'port handshake cipher_suite subject_common_name issuer_common_name cert_expiration_date issuer_organization_name issuer_common_name',
                                                     'type'      => 'INFO',
                                                  ),
