@@ -42,17 +42,17 @@ function parse_shadowserver($message) {
                                                     'type'      => 'ABUSE',
                                                  ),
                 'sinkhole_http_drone'   => array (
-                                                    'class'     => 'Botnet drone / infection',
+                                                    'class'     => 'Botnet infection',
                                                     'fields'    => 'type url http_agent src_port dst_ip dst_port',
                                                     'type'      => 'ABUSE',
                                                  ),
                 'microsoft_sinkhole'    => array (
-                                                    'class'     => 'Botnet drone / infection',
+                                                    'class'     => 'Botnet infection',
                                                     'fields'    => 'type url http_agent src_port dst_ip dst_port',
                                                     'type'      => 'ABUSE',
                                                  ),
                 'botnet_drone'          => array (
-                                                    'class'     => 'Botnet drone / infection',
+                                                    'class'     => 'Botnet infection',
                                                     'fields'    => 'infection url agent cc cc_port cc_dns',
                                                     'type'      => 'ABUSE',
                                                  ),
