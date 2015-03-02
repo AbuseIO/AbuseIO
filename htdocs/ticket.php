@@ -149,7 +149,7 @@ if(isset($PostMessage)) {
             if ($report['LastNotifyReportCount'] === '0') {
                 echo "never"; 
             } else {
-                echo "at count ". $report['LastNotifyReportCount'] ." on ". $report['LastNotifyTimestamp'] ; 
+                echo "at count ". $report['LastNotifyReportCount'] ." on ". date("d-m-Y H:i", $report['LastNotifyTimestamp']) ; 
             }
         ?>
     </dd>

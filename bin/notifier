@@ -3,11 +3,7 @@
 include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
 
 $filter = array(
-//                'Ticket'    => '4411',
-//                'IP'        => '',
-//                'Customer'  => '',
                 'All'       => true,
-                // How many days to look back (don't notify about old obsolete reports)
                 'Days'      => 3
                );
 

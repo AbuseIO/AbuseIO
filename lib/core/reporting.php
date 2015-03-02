@@ -279,7 +279,7 @@ function reportNotified($ticket) {
     // successfully send out the notification to mark the ticket as notified
     //
     // Set the notifyCount + 1, Set the LastNotifyReportCount to ReportCount
-    $query = "Update Reports SET LastNotifyReportCount = ReportCount, NotifiedCount = NotifiedCount+1 WHERE 1 AND ID = '${ticket}'";
+    $query = "Update Reports SET LastNotifyReportCount = ReportCount, NotifiedCount = NotifiedCount+1, LastNotifyTimestamp = '".time()."' WHERE 1 AND ID = '${ticket}'";
 
     $result = _mysqli_query($query, "");
 
@@ -378,7 +378,7 @@ function reportSend($filter) {
         $email              = str_replace("<<BOXES>>", $blocks, $email);
 
         // Validate all the email addresses in the TO field
-        if (strpos(",", $to) !== false) {
+        if (!empty($to) && strpos(",", $to) !== false) {
             if (filter_var($to, FILTER_VALIDATE_EMAIL)) {
                 $validated = true;
             } else {
