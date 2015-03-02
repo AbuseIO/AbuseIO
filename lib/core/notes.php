@@ -28,7 +28,7 @@ function reportNoteAdd($submittor, $ReportID, $note) {
                                         '".$ReportID."', 
                                         '".time()."', 
                                         '".$submittor."', 
-                                        '".mysql_escape_string($note)."'
+                                        '".mysql_escape_string(htmlentities($note))."'
                             );";
 
         return _mysqli_query($query, "");
