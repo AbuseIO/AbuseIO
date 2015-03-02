@@ -342,7 +342,7 @@ function reportSend($filter) {
 
             if (SELF_HELP_URL != "") {
                 $token = md5("${report['ID']}${report['IP']}${report['Class']}");
-                $selfHelpLink = SELF_HELP_URL . "?=" . $token;
+                $selfHelpLink = SELF_HELP_URL . "?id=${report['ID']}&token=" . $token;
             } else {
                 $selfHelpLink = "";
             }
@@ -384,7 +384,7 @@ function reportSend($filter) {
             }
         }
 
-        if (DEBUG) {
+        if (DEBUG === true) {
             $to =           NOTIFICATIONS_FROM_ADDRESS;
         } else {
             $to             = $report['CustomerContact'];
@@ -426,9 +426,11 @@ function reportSend($filter) {
                 $counter++;
             } else {
                 logger(LOG_ERR, "Notifier - Failed sending mail to ${to} MTA returned false");
+                return false;
             }
         } else {
             logger(LOG_ERR, "Notifier - Failed sending mail to ${to} as the addres is incorrectly formatted");
+            return false;
         }
     }
 
