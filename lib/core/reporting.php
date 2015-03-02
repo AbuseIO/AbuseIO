@@ -215,8 +215,59 @@ function reportMerge() {
 /*
     Function description
 */
-function reportHandled() {
+function reportResolved($ticket) {
+    $query = "Update Reports SET CustomerResolved = '1' WHERE 1 AND ID = '${ticket}'";
 
+    $result = _mysqli_query($query, "");
+
+    return $result;
+}
+
+
+/*
+    Function description
+*/
+function reportIgnored($ticket) {
+    $query = "Update Reports SET CustomerIgnored = '1' WHERE 1 AND ID = '${ticket}'";
+
+    $result = _mysqli_query($query, "");
+
+    return $result;
+}
+
+
+/*
+    Function description
+*/
+function reportClosed($ticket) {
+    $query = "Update Reports SET Status = 'Closed' WHERE 1 AND ID = '${ticket}'";
+
+    $result = _mysqli_query($query, "");
+
+    return $result;
+}
+
+
+
+/*
+    Function description
+*/
+function ReportContactupdate($ticket) {
+
+    $report = reportGet($ticket);
+
+    $customer = custom_find_customer($report['IP']);
+
+    if (isset($customer['Code']) && $customer['Code'] != $result['CustomerCode']) {
+        echo "{$result['IP']} OLD ${result['CustomerCode']} => ${customer['Code']}". PHP_EOL;
+
+        $query = "UPDATE `Reports` SET CustomerCode='${customer['Code']}', CustomerName='${customer['Name']}', CustomerContact='${customer['Contact']}' WHERE ID='${ticket}';";
+        _mysqli_query($query, "");
+
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
@@ -229,7 +280,10 @@ function reportNotified($ticket) {
     //
     // Set the notifyCount + 1, Set the LastNotifyReportCount to ReportCount
     $query = "Update Reports SET LastNotifyReportCount = ReportCount, NotifiedCount = NotifiedCount+1 WHERE 1 AND ID = '${ticket}'";
-    _mysqli_query($query, "");
+
+    $result = _mysqli_query($query, "");
+
+    return $result;    
 }
 
 

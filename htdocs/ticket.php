@@ -10,6 +10,26 @@ if (empty($_GET['id'])) {
     die();
 }
 
+if(isset($_GET['action']) && $_GET['action'] == 'Notify') {
+    $PostMessage = "A new notification was sent to: ${report['CustomerContact']}";
+}
+if(isset($_GET['action']) && $_GET['action'] == 'UpdateContact') {
+    ReportContactupdate($_GET['id']);
+    $PostMessage = "Customer information is updated";
+}
+if(isset($_GET['action']) && $_GET['action'] == 'MarkIgnored') {
+    reportIgnored($_GET['id']);
+    $PostMessage = "This ticket has been marked as customer ignored. The listed contacts will no longer receive reports on this ticket";
+}
+if(isset($_GET['action']) && $_GET['action'] == 'MarkResolved') {
+    reportResolved($_GET['id']);
+    $PostMessage = "This ticket has been marked as customer resolved. Any new reports will resend a notification directly";
+}
+if(isset($_GET['action']) && $_GET['action'] == 'MarkClosed') {
+    reportClosed($_GET['id']);
+    $PostMessage = "This ticket has been marked as closed. Any new reports will open a new ticket";
+}
+
 $report = reportGet($_GET['id']);
 
 if (!$report) {
@@ -47,7 +67,20 @@ $labelClass = array(
     'INFO'=>'info',
     'ALERT'=>'danger'
 );
+
+if(isset($PostMessage)) {
+    echo "<body onLoad=\"alert('${PostMessage}')\">";
+}
 ?>
+
+<div class='btn-group pull-right'>
+    <a href='?id=<?php echo $_GET['id']; ?>&action=Notify' class='btn btn-default btn-sm' title='Resend a notification to customer for this ticket'>Renotify</a>
+    <a href='?id=<?php echo $_GET['id']; ?>&action=UpdateContact' class='btn btn-default btn-sm' title='Try to resolve or update the customer information'>Update contact</a>
+    <a href='?id=<?php echo $_GET['id']; ?>&action=MarkIgnored' class='btn btn-default btn-sm' title='Set status to customer ignored'>Ignore</a>
+    <a href='?id=<?php echo $_GET['id']; ?>&action=MarkResolved' class='btn btn-default btn-sm' title='Set status to customer resolved'>Resolved</a>
+    <a href='?id=<?php echo $_GET['id']; ?>&action=MarkClosed' class='btn btn-default btn-sm' title='Set status to closed. Another incoming abuse mail will result in a new ticket!'>Closed</a>
+</div>
+<br>
 
 <dl class="dl-horizontal">
     <dt>IP address</dt>
