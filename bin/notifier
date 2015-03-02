@@ -2,15 +2,8 @@
 <?php
 include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
 
-if (null === NOTIFICATIONS && !is_file(APP.NOTIFICATION_TEMPLATE)){
-    exit();
-} else {
-    $template = file_get_contents(APP.NOTIFICATION_TEMPLATE);
-}
-
-$counter= 0;
 $filter = array(
-//                'Ticket'    => '4159',
+//                'Ticket'    => '4411',
 //                'IP'        => '',
 //                'Customer'  => '',
                 'All'       => true,
@@ -18,113 +11,11 @@ $filter = array(
                 'Days'      => 3
                );
 
-logger(LOG_DEBUG, "Notifier - Is starting a run");
+logger(LOG_DEBUG, "Notifier CRON - Is starting a run");
 
-// Collect reports - return all the data so you can decide what to put
-// in the customer mail. format: array($reports[CustomerCode][$i][$report_elements])
-$allreports = reportNotification($filter);
-
-$class_seen = array();
-
-foreach($allreports as $customerCode => $reports) {
-    $count = count($reports);
-
-    $blocks = "";
-    foreach($reports as $id => $report) {
-        $block = array();
-        $report['Information'] = json_decode($report['Information']);
-
-        if (SELF_HELP_URL != "") {
-            $token = md5("${report['ID']}${report['IP']}${report['Class']}");
-            $selfHelpLink = SELF_HELP_URL . "?=" . $token;
-        } else {
-            $selfHelpLink = "";
-        }
-
-        $block[] = "";
-        $block[] = "Ticket #${report['ID']}: Report for IP address ${report['IP']} (${report['Type']}: ${report['Class']})";
-        $block[] = "";
-        $block[] = "Report date: ".date('Y-m-d H:i',$report['LastSeen']);
-        $block[] = "Source: ${report['Source']}";
-        if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
-        if (!empty($report['Information'])) {
-            $block[] = "Report information:";
-            if(isset($report['Information']->Domain)) $block[] = "  - domain: " . str_replace('.','[.]',$report['Information']['Domain']);
-            if(isset($report['Information']->URI)) $block[] = "  - uri/path: " . $report['Information']['URI'];
-            $report['Information']['IP Address'] = $report['IP'];
-            foreach($report['Information'] as $field => $value) {
-                // If the value contains a domain name, escape it so spam filters won't flag this abuse report
-                if (in_array($field,array('cc_dns','domain','host','url','http_host'))) $value = str_replace('.','[.]',$value);
-                $block[] = "  - ${field}: ${value}";
-            }
-        }
-        $block[] = "\n";
-        $blocks .= implode("\n", $block);
-
-        //Mark the report as notified:
-        reportNotified($report['ID']);
-
-        $class_seen[$report['Class']] = 1;
-
-    }
-
-    // Include further information about the abuse reports
-    if (!empty($class_seen)) {
-        $blocks .= "\nAdditional information:\n\n";
-        foreach ($class_seen as $class => $true) {
-            if ($class_info = getClassInfo($class)) {
-                $blocks .= "$class:\n\n$class_info\n";
-            }
-        }
-    }
-
-    if (DEBUG) {
-        $to =           NOTIFICATIONS_FROM_ADDRESS;
-    } else {
-        $to             = $report['CustomerContact'];
-    }
-    $email              = $template;
-    $subject            = 'Notification of (possible) abuse';
-    $email              = str_replace("<<COUNT>>", $count, $email);
-    $email              = str_replace("<<BOXES>>", $blocks, $email);
-
-    // Validate all the email addresses in the TO field
-    if (strpos(",", $to) !== false) {
-        if (filter_var($to, FILTER_VALIDATE_EMAIL)) {
-            $validated = true;
-        } else {
-            $validated = false;
-        }
-    } else {
-        $to = str_replace(" ", "", $to);
-        $addresses = explode(",", $to);
-        foreach($addresses as $address) {
-            if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
-                $validated = true;
-            } else {
-                $validated = false;
-            }
-        }
-    }
-
-    $headers   = array();
-    $headers[] = "MIME-Version: 1.0";
-    $headers[] = "Content-type: text/plain; charset=iso-8859-1";
-    $headers[] = "From: " . NOTIFICATIONS_FROM_NAME . " <" . NOTIFICATIONS_FROM_ADDRESS . ">";
-    $headers[] = "Reply-To: " . NOTIFICATIONS_FROM_NAME . " <" . NOTIFICATIONS_FROM_ADDRESS . ">";
-    $headers[] = "X-Mailer: AbuseIO/".VERSION;
-
-    if ($validated) {
-        if(mail($to, $subject, $email, implode("\r\n", $headers))) {
-            logger(LOG_DEBUG, "Notifier - Successfully sent notification to ${to}");
-            $counter++;
-        } else {
-            logger(LOG_ERR, "Notifier - Failed sending mail to ${to} MTA returned false");
-        }
-    } else {
-        logger(LOG_ERR, "Notifier - Failed sending mail to ${to} as the addres is incorrectly formatted");
-    }
+if (reportSend($filter)) {
+    logger(LOG_DEBUG, "Notifier CRON - Completed sending notifications");
+} else {
+    logger(LOG_ERR, "Notifier CRON - Error while sending notifications");
 }
-
-logger(LOG_DEBUG, "Notifier - Completed and has sent out {$counter} notifications");
 ?>
