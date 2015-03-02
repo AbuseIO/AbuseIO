@@ -11,7 +11,16 @@ if (empty($_GET['id'])) {
 }
 
 if(isset($_GET['action']) && $_GET['action'] == 'Notify') {
-    $PostMessage = "A new notification was sent to: ${report['CustomerContact']}";
+    $filter = array(
+                    'Ticket'  => $_GET['id'],
+                   );
+
+    if (reportSend($filter)) {
+        $PostMessage = "A new notification was sent to contacts";
+    } else {
+        $PostMessage = "Failed sending notification to contacts";
+    }
+
 }
 if(isset($_GET['action']) && $_GET['action'] == 'UpdateContact') {
     ReportContactupdate($_GET['id']);
