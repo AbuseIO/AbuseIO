@@ -288,7 +288,24 @@ function reportNotified($ticket) {
 
 
 /*
-    Function description
+    Function description sends out notifications based on a filter (array):
+
+$filter = array(
+                // Send out for a specific ticket
+                'Ticket'    => '4411',
+
+                // Send out for a specific IP
+                'IP'        => '1.1.1.1',
+
+                // Send out for a specific customer
+                'Customer'  => 'UNDEF',
+
+                // Send out everthing thats considered unhandled
+                'All'       => true,
+
+                // How many days to look back (don't notify about old obsolete reports)
+                'Days'      => 3
+               );
 */
 function reportSend($filter) {
 
