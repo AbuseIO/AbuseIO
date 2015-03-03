@@ -1,0 +1,100 @@
+<h2>What is an 'Open DNS Resolver'?</h2>
+
+An open DNS server is a DNS server which is willing to resolve
+recursive DNS queries for anyone on the Internet.
+
+When a DNS server resolves a recursive DNS query, it tracks down
+information about a domain name hosted on some other DNS server
+somewhere else on the Internet (a recursive process involving
+several other DNS servers in the DNS hierarchy).
+
+<h2>Why would this be bad?</h2>
+
+Running an Open DNS Resolver is not bad on its own and it is mostly
+a required 'service' to resolve domains to their IP addresses.
+Unfortunately, hackers have also found this feature useful in performing a 
+special type of DDoS attack called a 'DNS Amplification Attack'.
+
+The concept of this attack is that a hacker sends a recursive DNS
+query with a spoofed IP source address to an open recursive DNS
+server. This DNS server eventually sends a DNS response packet
+back to the spoofed IP address, which is actually the targeted victim
+in the DoS Amplification attack.
+
+<h2>Recommende action</h2>
+
+In most cases the computer has installed a DNS service as an dependancy
+as resolving is needed on that computer. However its only required to do
+local resolving, thus the added 'external access' to this service is 
+unneeded. In such cases we recommend either changing the configuration
+of your DNS service or to firewall port 53 for external hosts.
+
+If you are running a DNS resolver for multiple computers, then consider
+to limit access to the required group of computer or implement safegaurds
+like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.
+
+<h2>Tips to resolve this matter</h2>
+
+<h3>Firewalling the DNS Service</h3>
+
+To block incoming remote requests you will need to filter UDP/port 53. You
+service might also be listening on TCP/port 53, however only UDP services
+are used in DNS Amplification Attacks. 
+
+<h3>Bind 9.x Authoritative</h3>
+
+For BIND 9.x authoritative servers, apply the following global options:
+<br>
+<code>
+  options {
+      recursion no;
+      additional-from-cache no;
+  };
+</code>
+<br>
+Beginning with BIND versions 9.4 and later, most configurations would default to a closed resolver. Those running earlier versions should upgrade if possible.<br>
+<br>
+<h3>Bind 9.x Caching</h3>
+
+For BIND 9.x caching servers, additionally create access control lists and use "views" to explicitly permit a limited set of source addresses from your trusted network issue queries to your caching server:
+<code>
+  # example only, replace 192.0.2.0/24 a list of your CIDR blocks
+  acl "trusted" {
+      192.0.2.0/24;
+  };
+
+  options {
+      recursion no;
+      additional-from-cache no;
+      allow-query { none; };
+  };
+
+  view "trusted" in {
+      match-clients { trusted; };
+      allow-query { trusted; };
+      recursion yes;
+      additional-from-cache yes;
+  };
+</code>
+
+<h3>Windows Systems</h3>
+
+Please see the following Microsoft TechNet examples:<br>
+<br>
+<a href='http://technet.microsoft.com/en-us/library/cc771738.aspx'>Disabling recursion on Windows Server 2008 R2 systems</a><br>
+<a href='http://technet.microsoft.com/en-us/library/cc787602.aspx'>Disabling recursion on older Windows Server systems</a><br>
+<a href='http://technet.microsoft.com/en-us/library/cc773370(WS.10).aspx'>Acting as a non-recursive forwarder</a> (See the "Notes" section under the "Using the Windows interface" instructions)<br>
+
+
+<h2>Getting more information</h2>
+
+<a href='http://dns.measurement-factory.com/cgi-bin/openresolvercheck.pl/'>A website for (re)checking your DNS service</a><br>
+<a href='http://openresolverproject.org/'>the Open Resolver Project</a><br>
+<a href="http://www.youtube.com/watch?v=XhSTlqYIQnI" target="_blank">Team Cymru "Who and Why Show" - DNS Amplification Attacks</a> (5 minute YouTube video)<br>
+<a href="http://www.team-cymru.com/ReadingRoom/Whitepapers/2009/recursion.pdf" target="_blank">Team Cymru DNS Open Recursion Whitepaper</a><br>
+<a href="http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf" target="_blank">http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf</a><br>
+<a href="http://www.cymru.com/Documents/secure-bind-template.html">http://www.cymru.com/Documents/secure-bind-template.html</a><br>
+<a href="http://www.ripe.net/ripe/meetings/ripe-52/presentations/ripe52-plenary-dnsamp.pdf" target="_blank">http://www.ripe.net/ripe/meetings/ripe-52/presentations/ripe52-plenary-dnsamp.pdf</a><br>
+<a href="http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf" target="_blank">http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf</a><br>
+<a href="http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification" target="_blank">http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification</a><br>
+<a href="http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf" target="_blank">http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf</a><br>

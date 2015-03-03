@@ -163,6 +163,15 @@ if(isset($PostMessage)) {
         ?>
     </dd>
 
+<?php
+    if (SELF_HELP_URL != "") {
+        $token    = md5("${report['ID']}${report['IP']}${report['Class']}");
+        $tokenurl = SELF_HELP_URL . "?id=${report['ID']}&token=" . $token; 
+        echo "    <dt>Self Help URL</dt>" . PHP_EOL;
+        echo "    <dd><a target='_blank' href = '${tokenurl}'>${tokenurl}</a></dd>" . PHP_EOL;
+    }
+?>
+
 </dl>
 
 <h2>Information</h2>
