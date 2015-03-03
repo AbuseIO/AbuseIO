@@ -1,0 +1,9 @@
+"timestamp","ip","asn","geo","url","type","http_agent","tor","src_port","p0f_genre","p0f_detail","hostname","dst_port","http_host","http_referer","http_referer_asn","http_referer_geo","dst_ip","dst_asn","dst_geo"
+"2010-08-31 00:09:04","202.86.21.11",23456,"AF","GET /search?q=0 HTTP/1.0","downadup","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)",,8726,,,,80,"149.20.56.32",,,,,,
+"2010-08-31 00:09:06","82.115.28.93",41152,"AF","GET /search?q=0 HTTP/1.0","downadup","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)",,50499,,,,80,"149.20.56.32",,,,,,
+"2010-08-31 00:14:50","180.94.94.3",55330,"AF","GET /?3c851a=7932468 HTTP/1.1","sality","KUKU v5.06exp =19026555919",,60564,"Windows","2000 SP2+, XP SP1+ (seldom 98)",,80,"www.kjwre9fqwieluoi.info",,,,,,
+"2010-08-31 00:36:05","82.115.10.63",41152,"AF","GET /search?q=0 HTTP/1.0","downadup","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)",,47947,,,,80,"149.20.56.32",,,,,,
+"2010-08-31 00:36:05","82.115.10.39",41152,"AF","GET /search?q=0 HTTP/1.0","downadup","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)",,47928,,,,,,,,,,,
+"2010-08-31 00:53:15","82.115.25.117",41152,"AF","GET /search?q=0 HTTP/1.0","downadup","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)",,4460,,,,80,"149.20.56.32",,,,,,
+"2010-08-31 01:00:26","82.115.23.237",41152,"AF","GET /search?q=0 HTTP/1.0","downadup","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; GTB6)",,2476,,,,,,,,,,,
+"2010-08-31 01:02:39","82.115.23.172",41152,"AF","GET /search?q=0 HTTP/1.0","downadup","Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; InfoPath.2)",,1426,,,,,,,,,,,

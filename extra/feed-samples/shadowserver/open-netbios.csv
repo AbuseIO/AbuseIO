@@ -1,0 +1,9 @@
+"timestamp","ip","protocol","port","hostname","tag","mac_address","asn","geo","region","city","workgroup","machine_name","username"
+"2014-03-16 00:13:19","118.232.245.224","udp",137,"118-232-245-224.dynamic.kbronet.com.tw","netbios","D4-3D-7E-E1-E8-EE",9924,"TW","T'AI-WAN","TAIPEI","WORKGROUP","WEI",
+"2014-03-16 00:13:19","131.193.206.74","udp",137,,"netbios","02-A0-98-12-C2-60",6200,"US","ILLINOIS","CHICAGO","AD","LAS-NETAPP2","LAS-NETAPP2"
+"2014-03-16 00:13:19","188.108.94.175","udp",137,,"netbios","02-26-4D-7E-FF-F9",3209,"DE","NIEDERSACHSEN","BRAUNSCHWEIG","WORKGROUP","EASYBOX",
+"2014-03-16 00:13:19","150.7.205.59","udp",137,"plzm0841.scc.u-tokai.ac.jp","netbios","40-61-86-D3-86-CD",2907,"JP","TOKYO","TOKYO","WORKGROUP","PLZM0841",
+"2014-03-16 00:13:19","199.83.89.41","udp",137,"unassigned.psychz.net","netbios","00-16-3E-14-C7-E2",40676,"US","CALIFORNIA","LOS ANGELES",,,
+"2014-03-16 00:13:19","203.94.3.164","udp",137,,"netbios","06-17-5A-00-03-27",17739,"CN","SHANGHAI","SHANGHAI","WORKGROUP","HAPLINK-53FD87A",
+"2014-03-16 00:13:19","190.14.237.98","udp",137,"1901423798.ip14.static.mediacommerce.com.co","netbios","00-11-3B-01-56-60",,"CO","RISARALDA","PEREIRA","GRUPO_TRABAJO","MC-FTP1",
+"2014-03-16 00:13:19","190.177.250.57","udp",137,"190-177-250-57.speedy.com.ar","netbios","00-00-00-00-00-00",22927,"AR","DISTRITO FEDERAL","BUENOS AIRES","WORKGROUP","DSL_ROUTE","DSL_ROUTE"

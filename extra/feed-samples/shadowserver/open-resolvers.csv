@@ -1,0 +1,6 @@
+"timestamp","ip","asn","geo","region","city","port","protocol","hostname","min_amplification","dns_version","p0f_genre","p0f_detail"
+"2013-10-10 00:05:10","208.70.149.107","36252","US","Illinois","Chicago","53","udp","107.149.70.208.static.ipv4.dnsptr.net","4.6190","PalmOS DNS v1.0",,
+"2013-10-10 00:05:10","204.245.210.223","2914","US","Oregon","Warren","53","udp","","1.3810","",,
+"2013-10-10 00:05:10","40.135.0.109","7029","US","Nebraska","Pawnee City","53","udp","h109.0.135.40.static.ip.windstream.net","1.3810","SERVFAIL",,
+"2013-10-10 00:05:10","76.74.186.178","13768","CA","British Columbia","Richmond","53","udp","ns2.domainhostingservers.com","3.4762","9.2.4",,
+"2013-10-10 00:05:10","31.42.105.195","51003","RU","-","-","53","udp","","1.3810","dnsmasq-2.63",,

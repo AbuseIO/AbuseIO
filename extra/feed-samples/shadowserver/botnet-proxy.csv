@@ -1,0 +1,4 @@
+"Date","Time","C&C","C&C Port","C&C ASN","C&C Geo","C&C DNS","PXY","PXY ASN","PXY Geo","PXY DNS","PXY Port","Password"
+"2008-11-03","22:00:27","81.88.53.122",7000,39729,"IT","host-81-88-53-122.dedicatedservers.it","192.168.1.100","","-","",8001,""
+"2008-11-03","22:00:27","81.88.53.122",7000,39729,"IT","host-81-88-53-122.dedicatedservers.it","190.72.240.6",8048,"VE","190-72-240-6.dyn.dsl.cantv.net",8001,""
+"2008-11-03","22:00:27","81.88.53.122",7000,39729,"IT","host-81-88-53-122.dedicatedservers.it","201.51.32.9",7738,"BR","20151032009.user.veloxzone.com.br",8001,""
