@@ -7,6 +7,10 @@ $filter = array(
                 'Days'      => 3
                );
 
+if(null !== NOTIFICATIONS_MIN_LASTSEEN) {
+    $filter['Days'] = round((time() - strtotime(NOTIFICATIONS_MIN_LASTSEEN . " ago")) / 86400);
+}
+
 logger(LOG_DEBUG, "Notifier CRON - Is starting a run");
 
 if (reportSend($filter)) {

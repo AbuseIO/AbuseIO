@@ -355,8 +355,8 @@ function reportSend($filter) {
             if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
             if (!empty($report['Information'])) {
                 $block[] = "Report information:";
-                if(isset($report['Information']->Domain)) $block[] = "  - domain: " . str_replace('.','[.]',$report['Information']['Domain']);
-                if(isset($report['Information']->URI)) $block[] = "  - uri/path: " . $report['Information']['URI'];
+                if(isset($report['Information']->Domain)) $block[] = "  - domain: " . str_replace('.','[.]',$report['Information']->Domain);
+                if(isset($report['Information']->URI)) $block[] = "  - uri/path: " . $report['Information']->URI;
                 $report['Information']->Address = $report['IP'];
                 foreach($report['Information'] as $field => $value) {
                     // If the value contains a domain name, escape it so spam filters won't flag this abuse report
@@ -482,21 +482,41 @@ function reportNotification($filter) {
         return false;
     }
 
+    $interval_info_after  = strtotime(NOTIFICATIONS_INFO_INTERVAL . " ago");
+    $interval_abuse_after = strtotime(NOTIFICATIONS_ABUSE_INTERVAL . " ago");
+
     foreach(_mysqli_fetch($query) as $id => $row) {
         if(isset($filter['All']) && $row['ReportCount'] == $row['LastNotifyReportCount']) {
             // Already notified, nothing new to report
+
+        } elseif($row['CustomerCode'] == "UNDEF") {
+            // Customer is not found, therefore we cannot send notifications
 
         } elseif($row['CustomerIgnored'] == 1) {
             // Customer does not want any more notifications from this report
 
         } elseif(isset($filter['All']) && $row['ReportCount'] != $row['LastNotifyReportCount'] && $row['AutoNotify'] == '1') {
-            // Tjek if the customer has the AutoNotify flag AND is not undefined AND the e-mail address is valid
-
-            if ($row['CustomerCode'] != "UNDEF") {
+            // The 'all' filter is called by the cronned notifier for automatic notifications
+            // It will check based on the NOTIFICATION_INFO_INTERVAL and NOTIFICATION_ABUSE_INTERVAL is a case is to be 
+            // sent out. However if the case was marked as resolved it should always send out the notification again and
+            // unset the customerResolved flag. Also the customers AutoNotify must be enabled for notifications to be send.
+            if ($row['Type'] == 'INFO' && $row['LastNotifyTimestamp'] < $interval_info_after) {
                 $data[$row['CustomerCode']][] = $row;
+
+            } elseif ($row['Type'] == 'ABUSE' && $row['LastNotifyTimestamp'] < $interval_abuse_after) {
+                $data[$row['CustomerCode']][] = $row;
+
+            } elseif ($row['Type'] == 'ALERT') {
+                $data[$row['CustomerCode']][] = $row;
+
+            } else {
+                // Skip this report for notification
+
             }
+
         } else {
             $data[$row['CustomerCode']][] = $row;
+
         }
     }
 

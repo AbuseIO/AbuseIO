@@ -9,6 +9,10 @@ SQL_DBNAME = abuseio
 NOTES = true                                    ; enable the ability for admins to add notes to reports
 NOTES_DELETABLE = true                          ; enable the ability for admins to delete notes from reports (disabled by default)
 NOTIFICATIONS = true                            ; enable this for AR3 to send out e-mails to customers where AutoNotify is enabled
+                                                ; Notification interfaces, used as x mounts, x days, or x hours, or x minutes
+NOTIFICATIONS_INFO_INTERVAL = 90 days           ; Amount of days between INFO notifications, set to 0 for always directly notify
+NOTIFICATIONS_ABUSE_INTERVAL = 0 minutes        ; Amount of days between ABUSE notifications, set to 0 for always directly notify
+NOTIFICATIONS_MIN_LASTSEEN = 3 days             ; Amount of days that the abuse recently must have been seen in to notify for (or is considered out of date) 
 NOTIFICATION_TEMPLATE = /etc/mail.template      ; set this to the APP relative path to use this email template (required for notification = true!)
 NOTIFICATIONS_FROM_ADDRESS = name@host.tld      ; set here the senders email address
 NOTIFICATIONS_FROM_NAME = ISP AbuseDesk         ; set here the senders name which could be more user readable
