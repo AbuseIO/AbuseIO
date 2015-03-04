@@ -39,6 +39,15 @@ Some additional packages are required:
 Optional:
 
  - Create daily cronjobs for APP/bin/fetch_reports (fetches and parses SNDS reports) and APP/bin/rbl_scanner (scans RBL for listing of IPs referenced in recent reports)
+
+    example:
+
+        # m h dom mon dow user  command
+        10 * * * *   root    /opt/abuseio/bin/housekeeping
+        30 * * * *   root    /opt/abuseio/bin/fetch_reports
+        40 * * * *   root    /opt/abuseio/bin/rbl_scanner
+        */15 * * * *   root    /opt/abuseio/bin/notifier
+
  - AbuseIO logs to syslog (local.1 facility), so you might want to review your syslog configuration to log all AbuseIO messages to a separate file.
  - If you have a Microsoft SNDS account, enable "Automated Data Access" at https://postmaster.live.com/snds/auto.aspx and configure your key in APP/etc/settings.conf
 
@@ -66,7 +75,7 @@ If you want to re-process an abuse report, simply mark the abuse email as (new) 
 
 Simply add the following line to your /etc/aliases file to enable email delivery directly to AbuseIO:
 
-abuse: |"/path/to/libexec/mda"
+    abuse: |"/path/to/libexec/mda"
 
 (Do not forget to run the newaliases command to inform your MTA that the aliases file has been updated.)
 
