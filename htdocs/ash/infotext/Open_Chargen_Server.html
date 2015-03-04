@@ -1,21 +1,16 @@
-<h2>What is a '[THIS CLASS]'?</h2>
+<h2>What is an 'Open Chargen server'?</h2>
 
-[ Korte samenvatting over deze classificatie ]
+The Character Generator Protocol (CHARGEN) is a service thats intended for testing, debugging, and measurement purposes. The protocol is rarely used, as its design flaws allow ready misuse. A host may connect to a server that supports the Character Generator Protocol on either Transmission Control Protocol (TCP) or User Datagram Protocol (UDP) port number 19. Upon opening a TCP connection, the server starts sending arbitrary characters to the connecting host and continues until the host closes the connection. In the UDP implementation of the protocol, the server sends a UDP datagram containing a random number (between 0 and 512) of characters every time it receives a datagram from the connecting host. Any data received by the server is discarded.
 
 <h2>Why would this be bad?</h2>
 
-[ Korte samenvatting waarom dit opgelost zou moeten worden ]
+UDP CHARGEN is commonly used in denial of service attacks. By using a fake source address the attacker can send bounce traffic off a UDP CHARGEN application to the victim. UDP CHARGEN sends 200 to 1,000 times times more data than it receives, depending upon the implementation. This "traffic multiplication" is attractive to an attacker. Also attractive is the obscuring of the attacker's IP address from the victim. 
 
 <h2>Recommende action</h2>
 
-[ Korte samenvatting wat men moet doen om dit op te lossen ]
-
-<h2>Tips to resolve this matter</h2>
-
-[ Uitgebreide info hoe dit op te lossen is, b.v. per OS met config examples, etc ]
+There is no reason to have this CHARGEN service enabled on a public facing interface. You should either stop te service or make sure it is not reachable from the internet by using RPC1918 spaces or a firewall.
 
 <h2>Getting more information</h2>
 
-[ linkjes naar 3rd party website, zoals retests of meer FAQ ]
-
+<a href='http://dnsamplificationattacks.blogspot.nl/2013/07/source-port-chargen-destination-port.html'>Amplification Attacks Observer</a><br>
 

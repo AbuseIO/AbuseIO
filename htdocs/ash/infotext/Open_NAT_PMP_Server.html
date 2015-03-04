@@ -1,21 +1,33 @@
-<h2>What is a '[THIS CLASS]'?</h2>
+<h2>What is an 'Open NAT-PMP Server'?</h2>
 
-[ Korte samenvatting over deze classificatie ]
+The NAT Port Mapping Protocol (NAT-PMP) is a network protocol for establishing network address translation (NAT) settings and port forwarding configurations automatically without user effort. The protocol automatically determines the external IPv4 address of a NAT gateway, and provides means for an application to communicate the parameters for communication to peers.
 
 <h2>Why would this be bad?</h2>
 
-[ Korte samenvatting waarom dit opgelost zou moeten worden ]
+Many NAT-PMP devices are incorrectly configured, allowing them to field requests received on external network interfaces or map forwarding routes to addresses other than that of the requesting host, making them potentially vulnerable to information disclosure and malicious port mapping requests. The responses from Open NAT-PMP Servers represent two types of vulnerabilities; malicious port mapping manipulation and information disclosure about the NAT-PMP device.  These can be broken down into 5 specific issues, outlined below:
+
+- Interception of Internal NAT Traffic (2.5% of responding devices)
+- Interception of External Traffic (86% of responding devices)
+- Access to Internal NAT Client Services (88% of responding devices)
+- DoS Against Host Services (88% of responding devices)
+- Information Disclosure about the NAT-PMP device (100% of responding devices)
+
+In short: A remote, unauthenticated attacker may be able to gather information about a NAT device, manipulate its port mapping, intercept its private and public traffic, access its private client services, and block its host services.
 
 <h2>Recommende action</h2>
 
-[ Korte samenvatting wat men moet doen om dit op te lossen ]
+Developers and administrators implementing NAT-PMP should exercise care to ensure that devices are configured securely, specifically that
+
+- the LAN and WAN interfaces are correctly assigned,
+- NAT-PMP requests are only accepted on internal interfaces, and
+- port mappings are only opened for the requesting internal IP address.
 
 <h2>Tips to resolve this matter</h2>
 
-[ Uitgebreide info hoe dit op te lossen is, b.v. per OS met config examples, etc ]
+- Deploy firewall rules to block untrusted hosts from being able to access port 5351/udp.
+- Consider disabling NAT-PMP on the device if it is not absolutely necessary.
 
 <h2>Getting more information</h2>
 
-[ linkjes naar 3rd party website, zoals retests of meer FAQ ]
-
-
+<a href='http://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
+<a href='https://community.rapid7.com/community/metasploit/blog/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities'>NAT-PMP Implementation and Configuration Vulnerabilities</a>

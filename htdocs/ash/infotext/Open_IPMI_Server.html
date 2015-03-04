@@ -1,21 +1,41 @@
-<h2>What is a '[THIS CLASS]'?</h2>
+<h2>What is an 'Open IPMI Server'?</h2>
 
-[ Korte samenvatting over deze classificatie ]
+IPMI defines a set of interfaces used by system administrators for 
+out-of-band management of computer systems and monitoring of their operation. 
+For example, IPMI provides a way to manage a computer that may be powered off 
+or otherwise unresponsive by using a network connection to the hardware 
+rather than to an operating system or login shell.
+
+IPMI is integrated on most server systems, however under different names like
+iRMC, ILOM, BMC, iDRAC, etc. Each vender has their own implementation of IPMI,
+but the base is the same on each of them: It allows access to hardware outside
+your operating system (and its locally installed firewall!).
 
 <h2>Why would this be bad?</h2>
 
-[ Korte samenvatting waarom dit opgelost zou moeten worden ]
+IPMI is the base of most of the Out Of Band / Lights Out management suites and 
+is implemented by the server's Baseboard Management Controller (BMC). The BMC 
+has near complete access and control of the server's resources, including, but 
+not limited to, memory, power, and storage. Anyone that can control your BMC 
+(via IPMI), can control your server.
+
+IPMI instances in general are known to contain a variety of vulnerabilities, 
+some more serious than other. In short; you really do not want to expose IPMI 
+to the internet. 
 
 <h2>Recommende action</h2>
 
-[ Korte samenvatting wat men moet doen om dit op te lossen ]
+Implement a seperate network for hosting these Out-Of-Band management entries and
+place them in a RFC1918(non public IP) space in combination with a VPN or add a 
+hardware firewall in front of this network that filters access.
 
-<h2>Tips to resolve this matter</h2>
-
-[ Uitgebreide info hoe dit op te lossen is, b.v. per OS met config examples, etc ]
+Some IPMI implementations do offer some kind of what they call firewalling, however
+we havent come across an implementation that actually fully protects the IPMI 
+interface from outside influance.
 
 <h2>Getting more information</h2>
 
-[ linkjes naar 3rd party website, zoals retests of meer FAQ ]
+<a href='http://fish2.com/ipmi/'>Dan Farmer on IPMI security issues</a><br>
+<a href='https://www.us-cert.gov/ncas/alerts/TA13-207A'>US-CERT alert TA13-207A</a><br>
 
 

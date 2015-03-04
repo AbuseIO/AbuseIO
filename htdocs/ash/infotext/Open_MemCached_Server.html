@@ -1,14 +1,84 @@
-<h2>What is a '[THIS CLASS]'?</h2>
+<h2>What is an 'Open Memcached Server'?</h2>
 
-[ Korte samenvatting over deze classificatie ]
+Memcached is an in-memory key-value store for small chunks of 
+arbitrary data (strings, objects) from results of database calls, 
+API calls, or page rendering. Its intended for use in speeding up 
+dynamic web applications by alleviating database load
 
 <h2>Why would this be bad?</h2>
 
-[ Korte samenvatting waarom dit opgelost zou moeten worden ]
+The problem is actually pretty simple - memcached is built for speed,
+not for security, and it does nothing to secure itself. As far as 
+memcache's authors are concerned, this isn't a problem... it just 
+means you have to secure it yourself. The problem is the people don't 
+do that.
+
+Since its not secure, this means that random people on the internet 
+can discover your memcache, read things from it, and even write into 
+it. The kinds of security problems that could create are limited only 
+by your imagination and the kinds of data you put into your cache.
+
+Lets assume I have an insecure memcache instance running at my.example.com. 
+I can log into that server, and connect to my memcache instance with telnet:
+
+[dbock@my.example ~]$ telnet localhost 11211
+Trying 127.0.0.1...
+Connected to my.example.com (127.0.0.1).
+Escape character is '^]'.
+add catchphrase 0 0 29
+intelligence for sale or rent
+
+and memcache returns : STORED
+
+so far, so good. We just stuck a piece of data into our memcache. but guess 
+what? ANYONE, ANYWHERE on the internet can now get that piece of data. Log 
+out of your machine and try this from a remote host:
+
+[dbock@my.desktopmachine] ~]$ telnet my.example.com 11211
+Trying 192.0.32.10...
+Connected to my.example.com (192.0.32.10).
+Escape character is '^]'.
+get catchphrase
+
+and memcache responds:
+
+VALUE catchphrase 0 29
+intelligence for sale or rent
+END
+
+Ouch. We just connected to our server and pulled out our super-secret catch 
+phrase. We don't want or need memcache to be listening to the outside world.
 
 <h2>Recommende action</h2>
 
-[ Korte samenvatting wat men moet doen om dit op te lossen ]
+If you are dealing with a multi-server environment, the solution will be more 
+complicated than this - you'll want a firewall, a private network, and other 
+complexity to separate the 'outside world' from your 'inside world'. If you 
+are dealing with one server though, the solution is simple - just don't 
+listen to your ethernet connection.
+
+Mysql has an option to specify what address it listens to... so rather than 
+listen to everything, we ony want to listen to the localhost - 127.0.0.1
+
+On my CentOS box, I can do this by simply editing the file: /etc/sysconfig/memcached
+and changing the line
+
+OPTIONS=""
+
+to
+
+OPTIONS="-l 127.0.0.1"
+
+and restart memcache with
+
+sudo /sbin/service memcached restart
+
+retry the steps above and you'll find that outside the server, telnet can't connect anymore.
+
+The memcached settings file might be someplace else on other linuxes, depending 
+on their file conventions... The memcacheinstall for your platform should give 
+you a clue where this is, as this file is also needed to specify the amount of 
+memory in the cache, etc.
 
 <h2>Tips to resolve this matter</h2>
 
@@ -16,6 +86,5 @@
 
 <h2>Getting more information</h2>
 
-[ linkjes naar 3rd party website, zoals retests of meer FAQ ]
-
+<a href='http://blog.codesherpas.com/on_the_path/2010/08/securing-memcache-in-2-minutes.html'>David Bock - Securing Memcache in 2 Minutes</a><br>
 
