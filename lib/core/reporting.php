@@ -27,7 +27,8 @@ function reportAdd($report) {
     if (isset($customer) && is_array($customer) && !empty($customer['Code']) && !empty($customer['AutoNotify'])) {
         $filteradd = "AND CustomerCode='${customer['Code']}'";
     }
-    $filter  = "WHERE IP='${ip}' AND Domain LIKE '%${domain}%' AND Source='${source}' AND Class='${class}' AND LastSeen > '".($timestamp-(86400*7))."' ${filteradd} ORDER BY LastSeen DESC LIMIT 1;";
+    $matchperiod = $timestamp - strtotime(REPORT_MATCHING . " ago");
+    $filter  = "WHERE IP='${ip}' AND Domain LIKE '%${domain}%' AND Source='${source}' AND Class='${class}' AND LastSeen > '${matchperiod}' ${filteradd} ORDER BY LastSeen DESC LIMIT 1;";
     $query   = "${select} ${filter}";
     $count   = _mysqli_num_rows($query);
 

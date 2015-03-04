@@ -6,6 +6,7 @@ SQL_HOST = localhost
 SQL_USER = abuseio
 SQL_PASS = 
 SQL_DBNAME = abuseio
+REPORT_MATCHING = 7 days                        ; period in which we consider a incoming report to be related to an existing report and will be combined
 NOTES = true                                    ; enable the ability for admins to add notes to reports
 NOTES_DELETABLE = true                          ; enable the ability for admins to delete notes from reports (disabled by default)
 NOTIFICATIONS = true                            ; enable this for AR3 to send out e-mails to customers where AutoNotify is enabled
