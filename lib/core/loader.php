@@ -58,12 +58,14 @@ foreach ($modules as $library => $objects) {
 define_configuration();
 
 // Load dynamic custom modules
-foreach(explode(",", CUSTOM_MODULES) as $object) {
-    if(is_file(APP."/lib/custom/${object}.php")) {
-        include(APP."/lib/custom/${object}.php");
-    } else {
-        logger(LOG_ERR, "Loader was not able to load custom module ${object}");
-        exit(1);
+if(@defined(CUSTOM_MODULES)) {
+    foreach(explode(",", CUSTOM_MODULES) as $object) {
+        if(is_file(APP."/lib/custom/${object}.php")) {
+            include(APP."/lib/custom/${object}.php");
+        } else {
+            logger(LOG_ERR, "Loader was not able to load custom module ${object}");
+            exit(1);
+        }
     }
 }
 
