@@ -21,4 +21,5 @@ NOTIFICATIONS_FROM_NAME = ISP AbuseDesk         ; set here the senders name whic
 SELF_HELP_URL = http://sh.abuse.io/             ; enable this to insert urls in each e-mail which link to a specific FAQ to help them resolve this
 CUSTOM_MODULES = find_customer                  ; define customer modules, comma separated value
 SNDS_KEY =                                      ; specify key to be able to fetch reports from Microsoft SNDS (https://postmaster.live.com/snds/)
+RBL_SCANNER_DURATION = 3 days                   ; amount of days to scan for rbl listings after an existing report was issued for an IP address
 SHADOWSERVER_IGNORE = ssl_scan                  ; define shadowserver reports to ignore, comma separated value

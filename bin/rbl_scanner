@@ -21,7 +21,7 @@ $rbls = array(
 );
 
 // Check RBL's for listings for IP's with confirmed abuse reports
-if ($ips = reportIps()) {
+if ($ips = reportIps(strtotime(RBL_SCANNER_DURATION . "ago"))) {
     foreach ($ips as $ip) {
         foreach ($rbls as $rbl) {
             $ip_reversed = implode('.',array_reverse(preg_split('/\./',$ip)));

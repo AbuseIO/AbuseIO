@@ -188,12 +188,13 @@ function reportSummary($period) {
 
 /*
     Function description
+
+    accepts only timestamp as argument now
 */
-function reportIps($period=14) {
+function reportIps($period) {
     $summary = array();
 
-    $lastseen = time()-$period*86400;
-    $query  = "SELECT DISTINCT Ip FROM Reports WHERE LastSeen > $lastseen";
+    $query  = "SELECT DISTINCT Ip FROM Reports WHERE LastSeen > $period";
 
     if ($ips = _mysqli_fetch($query)) {
         $ret = array();
