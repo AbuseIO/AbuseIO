@@ -1,0 +1,8 @@
+#!/usr/bin/php
+<?php
+/*
+This script will do the regular needed tasks, like cleaning old info, merging and closing old tickets
+*/
+include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
+
+?>
