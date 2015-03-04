@@ -5,4 +5,15 @@ This script will do the regular needed tasks, like cleaning old info, merging an
 */
 include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
 
+$filter  = "";
+$reports = reportList($filter);
+
+foreach($reports as $id => $report) {
+
+    // Close old cases
+    if ($report['LastSeen'] < strtotime(REPORT_CLOSING . "ago") ) {
+        reportClosed($report['ID']);
+    }
+
+}
 ?>
