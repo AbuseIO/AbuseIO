@@ -109,7 +109,7 @@ function reportAdd($report) {
                                         \"${customer['Contact']}\", 
                                         \"0\", 
                                         \"0\",
-                                        \"Open\",
+                                        \"OPEN\",
                                         \"".((empty($customer['AutoNotify']))?0:1)."\",
                                         \"0\", 
                                         \"1\",
@@ -240,7 +240,7 @@ function reportIgnored($ticket) {
     Function description
 */
 function reportClosed($ticket) {
-    $query = "Update Reports SET Status = 'Closed' WHERE 1 AND ID = '${ticket}'";
+    $query = "Update Reports SET Status = 'CLOSED' WHERE 1 AND ID = '${ticket}'";
 
     $result = _mysqli_query($query, "");
 

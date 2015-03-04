@@ -72,10 +72,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'ViewEvidence' && is_numeric($_
 include('../lib/frontend/top.php');
 
 $labelClass = array(
-    'ABUSE'=>'warning',
-    'INFO'=>'info',
-    'ALERT'=>'danger'
-);
+    'ABUSE'     => 'warning',
+    'INFO'      => 'info',
+    'ALERT'     => 'danger',
+    'OPEN'      => 'warning',
+    'CLOSED'    => 'info',
+    'ESCALATED' => 'danger',
+    'NO'        => 'warning',
+    'YES'       => 'info',
+    '0'         => 'warning',
+    '1'         => 'info',
+); 
 
 if(isset($PostMessage)) {
     echo "<body onLoad=\"alert('${PostMessage}')\">";
@@ -138,13 +145,13 @@ if(isset($PostMessage)) {
     <dd><?php echo date("d-m-Y H:i", $report['LastSeen']); ?></dd>
 
     <dt>Ticket status</dt>
-    <dd><?php echo $report['Status']; ?></dd>
+    <dd><?php echo "<span class='label label-${labelClass[$report['Status']]}'><a href='reports.php?Type=${report['Status']}'>${report['Status']}</a></span>"; ?></dd>
 
     <dt>Customer status</dt>
     <dd>
         <?php 
-            echo "Resolved: ". ($report['CustomerResolved'] ? 'YES' : 'NO'); 
-            echo " - Ignored: ". ($report['CustomerIgnored']  ? 'YES' : 'NO');
+            echo "Resolved: <span class='label label-${labelClass[$report['CustomerResolved']]}'>". ($report['CustomerResolved'] ? 'YES' : 'NO') . "</span>"; 
+            echo " - Ignored: <span class='label label-${labelClass[$report['CustomerResolved']]}'>". ($report['CustomerIgnored']  ? 'YES' : 'NO') . "</span>";
 
         ?>
     </dd>

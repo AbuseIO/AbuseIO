@@ -5,21 +5,23 @@
 
     // Query filter
     $filter = "";
-    if(!empty($_GET['Ticket'])) $filter .= " AND ID='".mysql_escape_string($_GET['Ticket'])."'";
-    if(!empty($_GET['IP'])) $filter .= " AND IP LIKE '".mysql_escape_string($_GET['IP'])."'";
-    if(!empty($_GET['Class'])) $filter .= " AND Class='".mysql_escape_string($_GET['Class'])."'";
-    if(!empty($_GET['Source'])) $filter .= " AND Source='".mysql_escape_string($_GET['Source'])."'";
-    if(!empty($_GET['CustomerCode'])) $filter .= " AND CustomerCode='".mysql_escape_string($_GET['CustomerCode'])."'";
-    if(!empty($_GET['CustomerName'])) $filter .= " AND CustomerName like '%".mysql_escape_string($_GET['CustomerName'])."%'";
+    if(!empty($_GET['Ticket']))         $filter .= " AND ID='".mysql_escape_string($_GET['Ticket'])."'";
+    if(!empty($_GET['IP']))             $filter .= " AND IP LIKE '".mysql_escape_string($_GET['IP'])."'";
+    if(!empty($_GET['Class']))          $filter .= " AND Class='".mysql_escape_string($_GET['Class'])."'";
+    if(!empty($_GET['Source']))         $filter .= " AND Source='".mysql_escape_string($_GET['Source'])."'";
+    if(!empty($_GET['Status']))         $filter .= " AND Status='".mysql_escape_string($_GET['Status'])."'";
+    if(!empty($_GET['CustomerCode']))   $filter .= " AND CustomerCode='".mysql_escape_string($_GET['CustomerCode'])."'";
+    if(!empty($_GET['CustomerName']))   $filter .= " AND CustomerName like '%".mysql_escape_string($_GET['CustomerName'])."%'";
 
-    // Select only ABUSE type by default, unless we have other filter options
+    // Select only ABUSE type and OPEN status by default, unless we have other filter options
     if (empty($filter)) {
         $reportType=(isset($_GET['Type']))?mysql_escape_string($_GET['Type']):'ABUSE';
         if (!empty($reportType)) $filter .= " AND Type='$reportType'";
+
+        $filter .= " AND Status = 'OPEN'";
     }
 
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
-
     if(!empty($_GET['OrderBy'])) { $order = mysql_escape_string($_GET['OrderBy']); } else { $order = 'LastSeen'; }
     if(!empty($_GET['Direction']) && in_array($_GET['Direction'],array('ASC','DESC'))) { $direction = mysql_escape_string($_GET['Direction']); } else { $direction = 'DESC'; }
 
@@ -86,14 +88,22 @@
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'FirstSeen','Direction'=>($order='FirstSeen'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>First Seen</a></th>
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'LastSeen','Direction'=>($order='LastSeen'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Last Seen</a></th>
           <th>Count</th>
+          <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Status','Direction'=>($order='Status'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Status</a></th>
         </tr>
     </thead>
     <tbody>
 <?php
 $labelClass = array(
-    'ABUSE'=>'warning',
-    'INFO'=>'info',
-    'ALERT'=>'danger'
+    'ABUSE'     => 'warning',
+    'INFO'      => 'info',
+    'ALERT'     => 'danger',
+    'OPEN'      => 'warning',
+    'CLOSED'    => 'info',
+    'ESCALATED' => 'danger',
+    'NO'        => 'warning',
+    'YES'       => 'info',
+    '0'         => 'warning',
+    '1'         => 'info',
 );
 
 foreach($results as $nr => $result) {
@@ -111,6 +121,7 @@ foreach($results as $nr => $result) {
           <td>".date("d-m-Y H:i", $result['FirstSeen'])."</td>
           <td>".date("d-m-Y H:i", $result['LastSeen'])."</td>
           <td>${result['ReportCount']}</td>
+          <td><span class='label label-${labelClass[$result['Status']]}'><a href='reports.php?Status=${result['Status']}'>${result['Status']}</a></span></span></td>
         </tr>
     ";
 }

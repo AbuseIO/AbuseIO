@@ -47,6 +47,32 @@
                     ?>
                 </select>
             </div>
+            <div class="col-md-6 form-group form-group-sm">
+                <label for='Status'>Status</label>
+                <select name='Status' class="form-control">
+                    <option value=''>All</option>
+                    <?php
+                        $statuss = array('OPEN','CLOSED','ESCALATED');
+                        foreach($statuss as $status) {
+                            echo "<option value='{$status}'>{$status}</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="col-md-6 form-group form-group-sm">
+                <label for='State'>State</label>
+                <select name='State' class="form-control">
+                    <option value=''>All</option>
+                    <?php
+                        $states = array('NOTIFIED', 'UNNOTIFIED');
+                        foreach($states as $state) {
+                            echo "<option value='{$state}'>{$state}</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+
+
             <div class="col-md-12">
                 <button type='submit' class="btn btn-primary">Search</button>
             </div>
