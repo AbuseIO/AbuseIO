@@ -43,9 +43,9 @@ Optional:
     example:
 
         # m h dom mon dow user  command
-        10 * * * *   root    /opt/abuseio/bin/housekeeping
-        30 * * * *   root    /opt/abuseio/bin/fetch_reports
-        40 * * * *   root    /opt/abuseio/bin/rbl_scanner
+        10 * * * *     root    /opt/abuseio/bin/housekeeper
+        30 * * * *     root    /opt/abuseio/bin/fetch_reports
+        40 * * * *     root    /opt/abuseio/bin/rbl_scanner
         */15 * * * *   root    /opt/abuseio/bin/notifier
 
  - AbuseIO logs to syslog (local.1 facility), so you might want to review your syslog configuration to log all AbuseIO messages to a separate file.
