@@ -5,7 +5,7 @@ function parse_spamcop($message) {
     $outReport['type']          = 'ABUSE';
 
     if (
-        strpos($message['from'], "@reports.spamcop.net>") !== FALSE && 
+        strpos($message['from'], "@reports.spamcop.net") !== FALSE && 
         isset($message['arf']) && 
         is_array($message['arf']) && isset($message['arf']['report'])
     ) {
@@ -35,17 +35,48 @@ function parse_spamcop($message) {
             }
         }
 
-        $match = "^Feedback-Type: (?<type>.*)\r\n?\r?\nUser-Agent: (?<agent>.*\r\n?\r?\n\s.*)\r\n?\r?\nVersion: (?<version>.*)\r\n?\r?\nReceived-Date: (?<date>.*)\r\n?\r?\nSource-IP: (?<ip>.*)\r\n?\r?\n";
-        preg_match("/${match}/m", $message['arf']['report'], $match);
+        preg_match_all('/([\w\-]+): (.*)[ ]*\r\n?\r?\n/',$message['arf']['report'],$regs);
+        $fields = array_combine($regs[1],$regs[2]);
 
-        if(empty($match['ip']) || empty($match['date'])) {
-            logger(LOG_ERR, __FUNCTION__ . " ARF Report is missing essential fields");
+        if(!empty($fields['Source-IP']) && !empty($fields['Reported-URI'])) {
+            // This is a spamvertized report and we need to ignore the IP and use the domain
+            $outReport['class']         = "Spamvertised web site";
+            unset($fields['Source-IP']);
+
+            // grab domain and path from reported uri
+            $url_info = parse_url($fields['Reported-URI']);
+            if(empty($url_info['host']) || empty($url_info['path'])) {
+                logger(LOG_ERR, __FUNCTION__ . " ARF Report is missing essential url fields");
+                return false;
+            } else {
+                $outReport['domain'] = $url_info['host'];
+                $outReport['uri'] = $url_info['path'];
+            }
+
+            // grab domain from body
+
+            $regex = str_replace("/", "\/", $outReport['domain']);
+            preg_match("/.*${regex}.* is (.*);/s", $message['body'], $match);
+            if(valid_ip($match[1])) {
+                $fields['Source-IP'] = $match[1];
+            } else {
+            }
+        } else {
+            $outReport['class']         = "SPAM";
+        }
+
+        if(empty($fields['Source-IP'])) {
+            // Sometimes Spamcop has a trouble adding the correct fields. The IP is pretty
+            // normal to add. In a last attempt we will try to fetch the IP from the body
+        }
+
+        if(empty($fields['Source-IP']) || empty($fields['Received-Date'])) {
+            logger(LOG_ERR, __FUNCTION__ . " ARF Report is missing essential report fields");
             return false;
         }
 
-        $outReport['class']         = "SPAM";
-        $outReport['ip']            = $match['ip'];
-        $outReport['timestamp']     = strtotime($match['date']);
+        $outReport['ip']            = $fields['Source-IP'];
+        $outReport['timestamp']     = strtotime($fields['Received-Date']);
 
         $reportID = reportAdd($outReport);
         if (!$reportID) return false;
