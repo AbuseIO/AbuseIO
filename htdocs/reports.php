@@ -33,6 +33,12 @@
     $count = reportCount($filter);
     $pages = ceil($count / $rows_per_page);
 
+    if (!empty($_SERVER[HTTP_REFERER]) && $page > $pages) {
+        echo '<h2>No results</h2>Your search did not find any reports';
+        include('../lib/frontend/bottom.php');
+        die();
+
+    }
     if ($page > $pages) {
         echo '<h2>Empty database</h2>Your database does not contain any entries yet';
         include('../lib/frontend/bottom.php');
