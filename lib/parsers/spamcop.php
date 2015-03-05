@@ -207,6 +207,22 @@ function parse_spamcop($message) {
         }
         return true;
 
+    } elseif ($message['subject'] == "[SpamCop] Alert") {
+        // If the receiver has enabled pager alerts when a spamtrap is hit we only receive an email with 
+        // an IP address in the body, nothing more and nothing less. These alerts are pretty fast!
+
+        $match = "^\s*(?<ip>[a-f0-9:\.]+)";
+        preg_match("/${match}/", $message['body'], $match );
+
+        $outReport['information']['Note'] = 'A spamtrap hit notification was received. These notifications do not provide any evidence.';
+        $outReport['class']         = "SPAM Trap";
+        $outReport['ip']            = $match['ip'];
+        $outReport['timestamp']     = time();
+
+        $reportID = reportAdd($outReport);
+        if (!$reportID) return false;
+        if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
+
     } else {
         logger(LOG_ERR, __FUNCTION__ . " The data from this e-mail was not in a known format");
         return false;
