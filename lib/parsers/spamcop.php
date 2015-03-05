@@ -68,6 +68,11 @@ function parse_spamcop($message) {
         if(empty($fields['Source-IP'])) {
             // Sometimes Spamcop has a trouble adding the correct fields. The IP is pretty
             // normal to add. In a last attempt we will try to fetch the IP from the body
+
+            preg_match("/Email from (?<ip>[a-f0-9:\.]+) \/ ${fields['Received-Date']}/s",$message['body'],$regs);
+            if(valid_ip($regs['ip'])) {
+                $fields['Source-IP'] = $regs['ip'];
+            }
         }
 
         if(empty($fields['Source-IP']) || empty($fields['Received-Date'])) {
