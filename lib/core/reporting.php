@@ -28,7 +28,7 @@ function reportAdd($report) {
         $filteradd = "AND CustomerCode='${customer['Code']}'";
     }
     $matchperiod = $timestamp - strtotime(REPORT_MATCHING . " ago");
-    $filter  = "WHERE IP='${ip}' AND Domain LIKE '%${domain}%' AND Source='${source}' AND Class='${class}' AND LastSeen > '${matchperiod}' ${filteradd} ORDER BY LastSeen DESC LIMIT 1;";
+    $filter  = "WHERE IP='${ip}' AND Domain LIKE '%${domain}%' AND Source='${source}' AND Class='${class}' AND LastSeen > '${matchperiod}' AND Status != 'CLOSED' ${filteradd} ORDER BY LastSeen DESC LIMIT 1;";
     $query   = "${select} ${filter}";
     $count   = _mysqli_num_rows($query);
 
