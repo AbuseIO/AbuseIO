@@ -1,7 +1,7 @@
 <?php
     $title = 'Customers';
-    include('../lib/core/loader.php');
-    include('../lib/frontend/top.php');
+    include('../../lib/core/loader.php');
+    include('../../lib/frontend/top.php');
 
     if (isset($_GET['action']) && $_GET['action'] == 'delCustomer' ) {
         customerDelete($_GET['DelCustomerCode']);

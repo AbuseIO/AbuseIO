@@ -1,7 +1,7 @@
 <?php
     $title = 'Reports';
-    include('../lib/core/loader.php');
-    include('../lib/frontend/top.php');
+    include('../../lib/core/loader.php');
+    include('../../lib/frontend/top.php');
 
     // Query filter
     $filter = "";

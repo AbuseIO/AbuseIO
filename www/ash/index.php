@@ -20,7 +20,7 @@ if ($_GET['token'] != $token) {
 $(function(){
     $('#button').click(function(){
         if(!$('#iframe').length) {
-                $('#iframeHolder').html('<iframe id="iframe" src="/ash/infotext/<?PHP echo str_replace(" ", "_", $report['Class']); ?>.html" width="850" height="450"></iframe>');
+                $('#iframeHolder').html('<iframe id="iframe" src="/infotext/<?PHP echo str_replace(" ", "_", $report['Class']); ?>.html" width="850" height="450"></iframe>');
         }
     });   
 });

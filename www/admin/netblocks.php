@@ -1,7 +1,7 @@
 <?php
     $title = 'Netblocks';
-    include('../lib/core/loader.php');
-    include('../lib/frontend/top.php');
+    include('../../lib/core/loader.php');
+    include('../../lib/frontend/top.php');
 
     if (isset($_GET['action']) && $_GET['action'] == 'delNetblock' ) {
         if(is_numeric($_GET['begin_in']) || is_numeric($_GET['end_in'])) {

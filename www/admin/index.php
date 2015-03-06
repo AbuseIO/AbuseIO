@@ -1,7 +1,7 @@
 <?php
 $title = 'Welcome to AbuseIO!';
-include('../lib/core/loader.php');
-include('../lib/frontend/top.php');
+include('../../lib/core/loader.php');
+include('../../lib/frontend/top.php');
 ?>
 
 <div class="row">
