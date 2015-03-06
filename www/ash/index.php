@@ -9,7 +9,7 @@ $report = reportGet($_GET['id']);
 $token  = md5("${report['ID']}${report['IP']}${report['Class']}");
 
 if ($_GET['token'] != $token) {
-    die('<h2>401 - Unautherized</h2>');
+    die('<h2>401 - Unauthorized</h2>');
 }
 ?>
 <html>
