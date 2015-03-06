@@ -19,9 +19,10 @@ function parse_cyscon($message) {
         return false;
     }
 
-    $message['arf']['report'] = str_replace("\r", "", $message['arf']['report']);
+    $report = str_replace("\r", "", $report);
     preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$report,$regs);
     $fields = array_combine($regs[1],$regs[2]);
+
 
     if (empty($fields['signature']) || empty($fields['ip']) || empty($fields['domain']) || empty($fields['last_seen']) || empty($fields['uri']) ) {
         logger(LOG_ERR, __FUNCTION__ . " Unable to select correct fields in message from ${source} subject ${message['subject']}");
