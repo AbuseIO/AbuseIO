@@ -35,7 +35,8 @@ function parse_spamcop($message) {
             }
         }
 
-        preg_match_all('/([\w\-]+): (.*)[ ]*\r\n?\r?\n/',$message['arf']['report'],$regs);
+        $message['arf']['report'] = str_replace("\r", "", $message['arf']['report']);
+        preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$message['arf']['report'],$regs);
         $fields = array_combine($regs[1],$regs[2]);
 
         if(!empty($fields['Source-IP']) && !empty($fields['Reported-URI'])) {
