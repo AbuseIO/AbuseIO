@@ -19,7 +19,8 @@ function parse_cyscon($message) {
         return false;
     }
 
-    preg_match_all('/([\w\-]+): (.*)[ ]*\r\n?\r?\n/',$report,$regs);
+    $message['arf']['report'] = str_replace("\r", "", $message['arf']['report']);
+    preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$report,$regs);
     $fields = array_combine($regs[1],$regs[2]);
 
     if (empty($fields['signature']) || empty($fields['ip']) || empty($fields['domain']) || empty($fields['last_seen']) || empty($fields['uri']) ) {
