@@ -211,7 +211,6 @@ function parse_spamcop($message) {
                 logger(LOG_DEBUG, __FUNCTION__ . " message item from ${outReport['source']} ignored because its a user message about ${match['ip']} which we already got");
             }
         }
-        return true;
 
     } elseif ($message['subject'] == "[SpamCop] Alert") {
         // If the receiver has enabled pager alerts when a spamtrap is hit we only receive an email with 
