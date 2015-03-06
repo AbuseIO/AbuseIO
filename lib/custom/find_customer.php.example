@@ -8,6 +8,10 @@ If you want to use subfunctions you will need to prefix them with custom_ to
 prevent clashes.
 */
 
+*/
+
+Example 1: Using static data
+
 function custom_find_customer($IP) {
     if(!isset($IP) || !valid_ip($IP) || strlen($IP) < 4){
         return false;
@@ -24,9 +28,11 @@ function custom_find_customer($IP) {
     return $customer;
 }
 
+*/
+
 /*
 
-Example 1: Using remote REST API
+Example 2: Using remote REST API
 
 {
   "email_contacts": [
@@ -37,8 +43,6 @@ Example 1: Using remote REST API
     "id": "1"
   }
 }
-
-*/
 
 function custom_find_customer($IP) {
     $url = "https://foo/api/ip/get_contacts/$IP";
@@ -60,4 +64,5 @@ function custom_find_customer($IP) {
     return $out;
 }
 
+*/
 ?>
