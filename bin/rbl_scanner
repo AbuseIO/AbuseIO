@@ -8,14 +8,16 @@ $rbls = array(
         'name'=>'Spamhaus',
         'host'=>'zen.spamhaus.org',
         'information' => array(
-            'delisting_url'=>'https://www.spamhaus.org/lookup/'
+            'delisting_url'=>'https://www.spamhaus.org/lookup/',
+            'Type'=>'Open Proxy'
         )
     ),
     array(
         'name'=>'Spamcop',
         'host'=>'bl.spamcop.net',
         'information' => array(
-            'delisting_url'=>'https://www.spamcop.net/bl.shtml'
+            'delisting_url'=>'https://www.spamcop.net/bl.shtml',
+            'Type'=>'Blacklisting'
         )
     ),
 );
@@ -28,6 +30,7 @@ if ($ips = reportIps(strtotime(RBL_SCANNER_DURATION . "ago"))) {
             $lookup = $ip_reversed.'.'.$rbl['host'];
             if ($result = gethostbyname($lookup)) {
                 $class = '';
+		$rbl['information']['List'] = $rbl['host'];
                 switch ($result) {
                     // No listing
                     case $lookup:
@@ -41,7 +44,7 @@ if ($ips = reportIps(strtotime(RBL_SCANNER_DURATION . "ago"))) {
 
                     // Used by Spamhaus CBL (open proxy / trojans)
                     case '127.0.0.4':
-                        $class = 'RBL Listed (Open Proxy)';
+                        $class = 'RBL Listed';
                         break;
 
                     // Used by Spamhaus PBL (policy listed by network operator) (ignore)
@@ -54,14 +57,16 @@ if ($ips = reportIps(strtotime(RBL_SCANNER_DURATION . "ago"))) {
                 }
                 if (!empty($class)) {
                     // Abort if we cannot save a report
-                    if (!reportAdd(array(
+                    $outReport = array(
                         'source'=>$rbl['name'],
                         'ip'=>$ip,
                         'class'=>$class,
                         'type'=>'INFO',
                         'timestamp'=>time(),
                         'information'=>$rbl['information']
-                    ))) break 2;
+                    );
+
+                    if (!reportAdd($outReport)) break 2;
                 }
             }
         }
