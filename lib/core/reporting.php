@@ -120,6 +120,12 @@ function reportAdd($report) {
 
         $result = _mysqli_query($query);
         if ($result) {
+            if(function_exists('custom_notifier')) {
+                logger(LOG_DEBUG, __FUNCTION__ . " is calling custom_notifier");
+                $report['customer'] = $customer;
+                custom_notifier($report);
+            }
+
             logger(LOG_DEBUG, __FUNCTION__ . " by $source ip $ip class $class seen " . date("d-m-Y H:i:s",$timestamp));
             return $result;
         }
