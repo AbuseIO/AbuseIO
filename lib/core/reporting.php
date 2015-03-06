@@ -135,6 +135,7 @@ function reportAdd($report) {
 function reportList($filter) {
     $reports = array();
     $query = "SELECT * FROM Reports WHERE 1 ${filter}";
+
     $reports = _mysqli_fetch($query);
     return $reports;
 }

@@ -7,7 +7,7 @@
         customerDelete($_GET['DelCustomerCode']);
     }
     if (isset($_POST['action']) && $_POST['action'] == 'addCustomer' ) {
-        if($_POST['AutoNotify'] == 'on') {
+        if($_POST['AddAutoNotify'] == 'on') {
             $autonotify = 1;
         } else {
             $autonotify = 0;
@@ -31,14 +31,14 @@
 
     // Query filter
     $filter = "";
-    if(!empty($_POST['Code'])) $filter .= " AND begin_in='".mysql_escape_string($_POST['Code'])."'";
-    if(!empty($_POST['Name'])) $filter .= " AND begin_in='".mysql_escape_string($_POST['Name'])."'";
-    if(!empty($_POST['Contact'])) $filter .= " AND CustomerCode LIKE '".mysql_escape_string($_POST['Contact'])."'";
-    if(!empty($_POST['AutoNotify'])) $filter .= " AND CustomerCode LIKE '".mysql_escape_string($_POST['AutoNotify'])."'";
-    if(!empty($_POST['Page']) && is_numeric($_POST['Page'])) { $page = $_POST['Page']; } else { $page = 1; }
+    if(!empty($_GET['Code'])) $filter .= " AND Code='".mysql_escape_string($_GET['Code'])."'";
+    if(!empty($_GET['Name'])) $filter .= " AND Name='".mysql_escape_string($_GET['Name'])."'";
+    if(!empty($_GET['Contact'])) $filter .= " AND Contact LIKE '".mysql_escape_string($_GET['Contact'])."'";
+    if(!empty($_GET['AutoNotify'])) $filter .= " AND AutoNotify = '".mysql_escape_string($_GET['AutoNotify'])."'";
+    if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
 
-    if(!empty($_POST['OrderBy'])) { $order = mysql_escape_string($_POST['OrderBy']); } else { $order = 'Code'; }
-    if(!empty($_POST['Direction']) && in_array($_POST['Direction'],array('ASC','DESC'))) { $direction = mysql_escape_string($_POST['Direction']); } else { $direction = 'DESC'; }
+    if(!empty($_GET['OrderBy'])) { $order = mysql_escape_string($_GET['OrderBy']); } else { $order = 'Code'; }
+    if(!empty($_GET['Direction']) && in_array($_GET['Direction'],array('ASC','DESC'))) { $direction = mysql_escape_string($_GET['Direction']); } else { $direction = 'DESC'; }
 
     // Calculate offset
     $rows_per_page = 100;
@@ -68,7 +68,7 @@
 
         // Build pagination links
         $paginator = '<p>';
-        $uri = $_POST;
+        $uri = $_GET;
         if ($pages > 1) {
             if (!empty($uri['Page'])) unset($uri['Page']);
             $paginator .= '<div class="btn-group">';
@@ -93,7 +93,7 @@
     <thead>
         <tr>
           <th width='100'><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Code','Direction'=>($order='Code'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Code</a></th>
-          <th width='200'><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'CustomerName','Direction'=>($order='CustomerName'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Customer name</a></th>
+          <th width='200'><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Name','Direction'=>($order='Name'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Customer name</a></th>
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Contact','Direction'=>($order='Contact'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Contact</a></th>
           <th width='100'><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'AutoNotify','Direction'=>($order='AutoNotify'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Notifications</a></th>
           <th width='100'> </th>
