@@ -9,7 +9,6 @@ $rbls = array(
         'host'=>'zen.spamhaus.org',
         'information' => array(
             'delisting_url'=>'https://www.spamhaus.org/lookup/',
-            'Type'=>'Open Proxy'
         )
     ),
     array(
@@ -17,10 +16,11 @@ $rbls = array(
         'host'=>'bl.spamcop.net',
         'information' => array(
             'delisting_url'=>'https://www.spamcop.net/bl.shtml',
-            'Type'=>'Blacklisting'
         )
     ),
 );
+
+//Todo extend array so that return codes are specified per list!
 
 // Check RBL's for listings for IP's with confirmed abuse reports
 if ($ips = reportIps(strtotime(RBL_SCANNER_DURATION . "ago"))) {
@@ -30,7 +30,7 @@ if ($ips = reportIps(strtotime(RBL_SCANNER_DURATION . "ago"))) {
             $lookup = $ip_reversed.'.'.$rbl['host'];
             if ($result = gethostbyname($lookup)) {
                 $class = '';
-		$rbl['information']['List'] = $rbl['host'];
+                $rbl['information']['List'] = $rbl['host'];
                 switch ($result) {
                     // No listing
                     case $lookup:
@@ -40,11 +40,16 @@ if ($ips = reportIps(strtotime(RBL_SCANNER_DURATION . "ago"))) {
                     case '127.0.0.2':
                     case '127.0.0.3':
                         $class = 'RBL Listed';
+                        $rbl['information']['Type'] = 'Blacklisted';
                         break;
 
-                    // Used by Spamhaus CBL (open proxy / trojans)
+                    // Used by Spamhaus CBL (open proxy / trojans / exploits)
                     case '127.0.0.4':
+                    case '127.0.0.5':
+                    case '127.0.0.6':
+                    case '127.0.0.7':
                         $class = 'RBL Listed';
+                        $rbl['information']['Type'] = 'Open Proxy, Trojans or Exploits';
                         break;
 
                     // Used by Spamhaus PBL (policy listed by network operator) (ignore)
