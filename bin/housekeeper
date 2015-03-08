@@ -5,15 +5,36 @@ This script will do the regular needed tasks, like cleaning old info, merging an
 */
 include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
 
-$filter  = "";
-$reports = reportList($filter);
+logger(LOG_DEBUG, "Knock Knock ... housekeeping");
 
-foreach($reports as $id => $report) {
-
-    // Close old cases
-    if ($report['LastSeen'] < strtotime(REPORT_CLOSING . "ago") ) {
-        reportClosed($report['ID']);
-    }
-
+if(!reportHousekeeping()) {
+    logger(LOG_ERR, "Housekeeper failed to do reports");
 }
+
+if (null !== COLLECTOR_SNDS_ENABLED && COLLECTOR_SNDS_ENABLED == true) {
+    logger(LOG_DEBUG, "Housekeeper - starting SNDS collector");
+
+    $config = array();
+    if(!collect_snds($config)) {
+        logger(LOG_ERR, "Housekeeper failed to run SNDS collector");
+    }
+}
+
+if (null !== COLLECTOR_OSINT_ENABLED && COLLECTOR_OSINT_ENABLED == true) {
+    logger(LOG_DEBUG, "Housekeeper - starting OSINT collector");
+    $config = array();
+    if(!collect_osint($config)) {
+        logger(LOG_ERR, "Housekeeper failed to run OSINT collector");
+    }
+}
+
+if (null !== COLLECTOR_RBLSCAN_ENABLED && COLLECTOR_RBLSCAN_ENABLED == true) {
+    logger(LOG_DEBUG, "Housekeeper - starting RBLSCAN collector");
+    $config = array();
+    if(!collect_rblscan($config)) {
+        logger(LOG_ERR, "Housekeeper failed to run RBLSCAN collector");
+    }
+}
+
+logger(LOG_DEBUG, "Housekeeper completed");
 ?>

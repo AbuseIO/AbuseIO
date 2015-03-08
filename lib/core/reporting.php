@@ -260,6 +260,28 @@ function reportClosed($ticket) {
 
 /*
     Function description
+    Do some housekeeping on reports, like closing old tickets or merging
+    based on the etc/settings configuration
+*/
+function reportHousekeeping() {
+    $filter  = "";
+    $reports = reportList($filter);
+
+    foreach($reports as $id => $report) {
+
+        // Close old cases
+        if ($report['LastSeen'] < strtotime(REPORT_CLOSING . "ago") ) {
+            reportClosed($report['ID']);
+        }
+    }
+
+    return true;
+}
+
+
+
+/*
+    Function description
 */
 function ReportContactupdate($ticket) {
 

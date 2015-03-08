@@ -20,6 +20,10 @@ NOTIFICATIONS_FROM_ADDRESS = name@host.tld      ; set here the senders email add
 NOTIFICATIONS_FROM_NAME = ISP AbuseDesk         ; set here the senders name which could be more user readable
 SELF_HELP_URL = http://sh.abuse.io/             ; enable this to insert urls in each e-mail which link to a specific FAQ to help them resolve this
 #CUSTOM_MODULES = find_customer, notifier       ; define customer modules, comma separated value
-SNDS_KEY =                                      ; specify key to be able to fetch reports from Microsoft SNDS (https://postmaster.live.com/snds/)
 RBL_SCANNER_DURATION = 3 days                   ; amount of days to scan for rbl listings after an existing report was issued for an IP address
 SHADOWSERVER_IGNORE = ssl_scan                  ; define shadowserver reports to ignore, comma separated value
+
+COLLECTOR_SNDS_ENABLED = false                  ; enable the Microsoft SNDS reports collector
+COLLECTOR_SNDS_KEY = xxxxxxxxxxxxxxxxxxxxxxx    ; specify key to be able to fetch reports from Microsoft SNDS (https://postmaster.live.com/snds/)
+COLLECTOR_OSINT_ENABLED = false                 ; enable the Bambenek reports collector
+COLLECTOR_RBLSCAN_ENABLED = true                ; enable the scanning of RBL's of IP's that have been reported recently

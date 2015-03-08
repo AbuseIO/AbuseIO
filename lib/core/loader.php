@@ -38,6 +38,11 @@ $modules = array(
                 "parsers"           => array (
                                                 "csv",
                                              ),
+                "collectors"        => array (
+                                                "osint",
+                                                "snds",
+                                                "rblscan",
+                                             ),
                 "core"              => array (
                                                 "evidence",
                                                 "reporting",
