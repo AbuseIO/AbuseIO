@@ -52,6 +52,14 @@ function parse_spamexperts($message) {
         $fields = array_combine($regs[1],$regs[2]);
         $outReport['information'] = array_merge($outReport['information'], $fields);
 
+        $match = "smtp.auth=(.*)";
+        preg_match("/${match}/m", $outReport['information']['Authentication-Results'], $customerCode);
+        $outReport['customer'] = array(
+                                        'Code'    => $customerCode[1],
+                                        'Name'    => '',
+                                        'Contact' => '',
+                                        'AutoNotify' => 0,
+                                      );
 
         $outReport['class']         = "SPAM";
         $outReport['ip']            = $fields['Source-IP'];
