@@ -111,7 +111,7 @@ function customerLookupIP($ip) {
 function customerLookupCode($code) {
     $customer = array();
 
-    $query = "SELECT Name, Contact, AutoNotify FROM Customers WHERE 1 AND Code='${customer['Code']}'";
+    $query = "SELECT Name, Contact, AutoNotify FROM Customers WHERE 1 AND Code='${Code}'";
     $result = _mysqli_fetch($query);
 
     if (is_array($result) && isset($result[0]) && isset($result[0]['Name']) && isset($result[0]['Contact'])) {
