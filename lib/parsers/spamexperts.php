@@ -54,11 +54,13 @@ function parse_spamexperts($message) {
 
         $match = "smtp.auth=(.*)";
         preg_match("/${match}/m", $outReport['information']['Authentication-Results'], $customerCode);
+        $customer = customerLookupCode($customerCode[1]);
+
         $outReport['customer'] = array(
                                         'Code'    => $customerCode[1],
-                                        'Name'    => '',
-                                        'Contact' => '',
-                                        'AutoNotify' => 0,
+                                        'Name'    => $customer['Name'],
+                                        'Contact' => $customer['Contact'],
+                                        'AutoNotify' => $customer['AutoNotify'],
                                       );
 
         $outReport['class']         = "SPAM";
