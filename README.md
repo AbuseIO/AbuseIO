@@ -89,6 +89,10 @@ Simply add the following line to your /etc/aliases file to enable email delivery
 
 (Do not forget to run the newaliases command to inform your MTA that the aliases file has been updated.)
 
+After that you will need to forward either abuse@isp.tld to abuse@abuseio.isp.tld so that incoming e-mails are redirected to AbuseIO. In addition a lot of feeds
+have the option to deliver on a custom address. Using addresses like spamcop-abuse@isp.tld and forwardding them to abuse@abuseio.isp.tld will give you more control to
+enable or disable individual feeds.
+
 ## Note on Patches/Pull Requests
 
  * Fork the project.
