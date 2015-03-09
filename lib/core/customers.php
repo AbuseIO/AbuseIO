@@ -91,8 +91,8 @@ function customerLookup($ip) {
 
     } else {
         // If there are no matches then find on the user defined lookup
-        if(function_exists('custom_find_customer')) {
-            $custom_find = custom_find_customer($ip);
+        if(function_exists('custom_find_customer_by_ip')) {
+            $custom_find = custom_find_customer_by_ip($ip);
             if($custom_find !== false) {
                 return $custom_find;
             }

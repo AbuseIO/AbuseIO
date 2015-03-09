@@ -287,7 +287,7 @@ function ReportContactupdate($ticket) {
 
     $report = reportGet($ticket);
 
-    $customer = custom_find_customer($report['IP']);
+    $customer = custom_find_customer_by_ip($report['IP']);
 
     if (isset($customer['Code']) && $customer['Code'] != $result['CustomerCode']) {
         echo "{$result['IP']} OLD ${result['CustomerCode']} => ${customer['Code']}". PHP_EOL;
