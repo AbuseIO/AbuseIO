@@ -35,9 +35,7 @@ Some additional packages are required:
 
  - Set permissions:
 
-    - chmod -R 770 archive tmp
-
-    - chown root:postfix archive tmp (change postfix whatever MTA you are using)
+    - chmod -R 777 archive tmp
 
  - Copy APP/etc/settings.conf.example to APP/etc/settings.conf and modify the settings.
  - To enrich reports with customer data, copy APP/lib/custom/find_customer.php.example to APP/lib/custom/find_customer.php and implement a hook to fetch customer information.
