@@ -66,7 +66,7 @@ function reportAdd($report) {
         }
     } else {
         if (!isset($customer) || !is_array($customer)) {
-            $customer = CustomerLookup($ip);
+            $customer = customerLookupIP($ip);
         } else {
             if(empty($customer['Code'])) {
                 logger(LOG_ERR, __FUNCTION__ . " was incorrectly called with empty customer information");
