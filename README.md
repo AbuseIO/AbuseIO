@@ -50,9 +50,13 @@ Optional:
 
         # m h dom mon dow user  command
         10 * * * *     root    /opt/abuseio/bin/housekeeper
-        30 * * * *     root    /opt/abuseio/bin/fetch_reports
-        40 * * * *     root    /opt/abuseio/bin/rbl_scanner
         */15 * * * *   root    /opt/abuseio/bin/notifier
+
+    About these cronjobs:
+
+        - housekeeper does regular maintainance task as well as using collectors (if enabled) to fetch information that arent send by mail
+
+        - notifier is a script that send out notifications to customers (if enabled)
 
  - AbuseIO logs to syslog (local.1 facility), so you might want to review your syslog configuration to log all AbuseIO messages to a separate file.
  - If you have a Microsoft SNDS account, enable "Automated Data Access" at https://postmaster.live.com/snds/auto.aspx and configure your key in APP/etc/settings.conf
