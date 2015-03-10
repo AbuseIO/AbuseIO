@@ -4,17 +4,25 @@ function parse_cyscon($message) {
     $type   = 'ABUSE';
 
     // Read and parse report which is located in the attachment
-    if(!empty($message['attachments'][1]) && $message['attachments'][1] = "SPAMVERTIZED-report.txt") {
+    if(!empty($message['attachments'][1]) && $message['attachments'][1] == "SPAMVERTIZED-report.txt") {
         $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
         $class  = 'Compromised website';
         $type   = 'ABUSE';
+
+   } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "MALWARE-report.txt") {
+        $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
+        $class  = 'Compromised website';
+        $type   = 'ABUSE';
+
     } else {
         logger(LOG_ERR, __FUNCTION__ . " Unable to detect report type in message from ${source} subject ${message['subject']}");
         return false;
     }
 
-    preg_match_all('/([\w\-]+): (.*)[ ]*\r\n?\r?\n/',$report,$regs);
+    $report = str_replace("\r", "", $report);
+    preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$report,$regs);
     $fields = array_combine($regs[1],$regs[2]);
+
 
     if (empty($fields['signature']) || empty($fields['ip']) || empty($fields['domain']) || empty($fields['last_seen']) || empty($fields['uri']) ) {
         logger(LOG_ERR, __FUNCTION__ . " Unable to select correct fields in message from ${source} subject ${message['subject']}");

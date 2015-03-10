@@ -1,7 +1,7 @@
 <?php
     $title = 'Reports';
-    include('../lib/core/loader.php');
-    include('../lib/frontend/top.php');
+    include('../../lib/core/loader.php');
+    include('../../lib/frontend/top.php');
 
     // Query filter
     $filter = "";
@@ -34,7 +34,7 @@
     $pages = ceil($count / $rows_per_page);
 
     if ($page > $pages) {
-        echo '<h2>Empty database</h2>Your database does not contain any entries yet';
+        echo '<h2>No results</h2>Your search did not find any reports';
         include('../lib/frontend/bottom.php');
         die();
     }

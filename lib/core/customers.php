@@ -75,7 +75,7 @@ function customerList($filter) {
 /*
     Function description
 */
-function customerLookup($ip) {
+function customerLookupIP($ip) {
     // Local matches are already perferred
     $longip  = ip2long($ip);
     $query   = "SELECT Code, Name, Contact, AutoNotify FROM Netblocks, Customers WHERE 1 AND Netblocks.CustomerCode = Customers.Code AND begin_in <= '${longip}' AND end_in >= '${longip}' ORDER BY begin_in DESC"; 
@@ -91,12 +91,46 @@ function customerLookup($ip) {
 
     } else {
         // If there are no matches then find on the user defined lookup
-        if(function_exists('custom_find_customer')) {
-            $custom_find = custom_find_customer($ip);
+        if(function_exists('custom_find_customer_by_ip')) {
+            $custom_find = custom_find_customer_by_ip($ip);
             if($custom_find !== false) {
                 return $custom_find;
             }
         }
+    }
+
+    //Lookup failed thus we return dummy
+    $customer['Code'] = "UNDEF";
+    $customer['Name'] = "Undefined customer";
+    $customer['Contact'] = "";
+    $customer['AutoNotify'] = 0;
+
+    return $customer;
+}
+
+function customerLookupCode($code) {
+    $customer = array();
+
+    $query = "SELECT Code, Name, Contact, AutoNotify FROM Customers WHERE 1 AND Code='${code}'";
+    $result = _mysqli_fetch($query);
+
+    if (is_array($result) && isset($result[0]) && isset($result[0]['Name']) && isset($result[0]['Contact'])) {
+        $customer['Code']       = $result[0]['Code'];
+        $customer['Name']       = $result[0]['Name'];
+        $customer['Contact']    = $result[0]['Contact'];
+        $customer['AutoNotify'] = $result[0]['AutoNotify'];
+
+        return $customer;
+
+    } else {
+        // If there are no matches then find on the user defined lookup
+        if(function_exists('custom_find_customer_by_code')) {
+            $custom_find = custom_find_customer_by_code($code);
+            if($custom_find !== false) {
+                return $custom_find;
+            }
+        }
+
     }
 
     //Lookup failed thus we return dummy

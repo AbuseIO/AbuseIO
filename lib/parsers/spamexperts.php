@@ -1,5 +1,5 @@
 <?php
-function parse_antispamcloud($message) {
+function parse_spamexperts($message) {
     $outReport                  = array('source' => 'SpamExperts');
     $outReport['information']   = array();
     $outReport['type']          = 'ABUSE';
@@ -52,6 +52,16 @@ function parse_antispamcloud($message) {
         $fields = array_combine($regs[1],$regs[2]);
         $outReport['information'] = array_merge($outReport['information'], $fields);
 
+        $match = "smtp.auth=(.*)";
+        preg_match("/${match}/m", $outReport['information']['Authentication-Results'], $customerCode);
+        $customer = customerLookupCode($customerCode[1]);
+
+        $outReport['customer'] = array(
+                                        'Code'    => $customer['Code'],
+                                        'Name'    => $customer['Name'],
+                                        'Contact' => $customer['Contact'],
+                                        'AutoNotify' => $customer['AutoNotify'],
+                                      );
 
         $outReport['class']         = "SPAM";
         $outReport['ip']            = $fields['Source-IP'];

@@ -1,12 +1,12 @@
 <?php
 
 $title = 'Ticket '.$_GET['id'];
-include('../lib/core/loader.php');
+include('../../lib/core/loader.php');
 
 if (empty($_GET['id'])) {
-    include('../lib/frontend/top.php');
+    include('../../lib/frontend/top.php');
     echo '<h2>404 - Invalid ticket</h2>';
-    include('../lib/frontend/bottom.php');
+    include('../../lib/frontend/bottom.php');
     die();
 }
 
@@ -42,9 +42,9 @@ if(isset($_GET['action']) && $_GET['action'] == 'MarkClosed') {
 $report = reportGet($_GET['id']);
 
 if (!$report) {
-    include('../lib/frontend/top.php');
+    include('../../lib/frontend/top.php');
     echo '<h2>404 - Invalid ticket</h2>';
-    include('../lib/frontend/bottom.php');
+    include('../../lib/frontend/bottom.php');
     die();
 }
 
@@ -60,16 +60,16 @@ if(isset($_GET['action']) && $_GET['action'] == 'DownloadEvidence' && is_numeric
 } 
 if (isset($_GET['action']) && $_GET['action'] == 'ViewEvidence' && is_numeric($_GET['EvidenceID'])) {
     if ($eml = evidenceGet($_GET['EvidenceID'])) {
-        include('../lib/frontend/top.php');
+        include('../../lib/frontend/top.php');
         echo '<pre>';
         echo htmlentities($eml['Data']);
         echo '</pre>';
-        include('../lib/frontend/bottom.php');
+        include('../../lib/frontend/bottom.php');
         die();
     }
 }
 
-include('../lib/frontend/top.php');
+include('../../lib/frontend/top.php');
 
 $labelClass = array(
     'ABUSE'     => 'warning',

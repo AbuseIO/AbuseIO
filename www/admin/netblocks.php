@@ -1,7 +1,7 @@
 <?php
     $title = 'Netblocks';
-    include('../lib/core/loader.php');
-    include('../lib/frontend/top.php');
+    include('../../lib/core/loader.php');
+    include('../../lib/frontend/top.php');
 
     if (isset($_GET['action']) && $_GET['action'] == 'delNetblock' ) {
         if(is_numeric($_GET['begin_in']) || is_numeric($_GET['end_in'])) {
@@ -35,7 +35,7 @@
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
 
     if(!empty($_GET['OrderBy'])) { $order = mysql_escape_string($_GET['OrderBy']); } else { $order = 'begin_in'; }
-    if(!empty($_GET['Direction']) && in_array($_GET['Direction'],array('ASC','DESC'))) { $direction = mysql_escape_string($_GET['Direction']); } else { $direction = 'DESC'; }
+    if(!empty($_GET['Direction']) && in_array($_GET['Direction'],array('ASC','DESC'))) { $direction = mysql_escape_string($_GET['Direction']); } else { $direction = 'ASC'; }
 
     // Calculate offset
     $rows_per_page = 100;

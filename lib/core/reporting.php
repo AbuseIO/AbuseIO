@@ -28,7 +28,7 @@ function reportAdd($report) {
         $filteradd = "AND CustomerCode='${customer['Code']}'";
     }
     $matchperiod = $timestamp - strtotime(REPORT_MATCHING . " ago");
-    $filter  = "WHERE IP='${ip}' AND Domain LIKE '%${domain}%' AND Source='${source}' AND Class='${class}' AND LastSeen > '${matchperiod}' ${filteradd} ORDER BY LastSeen DESC LIMIT 1;";
+    $filter  = "WHERE IP='${ip}' AND Domain LIKE '%${domain}%' AND Source='${source}' AND Class='${class}' AND LastSeen > '${matchperiod}' AND Status != 'CLOSED' ${filteradd} ORDER BY LastSeen DESC LIMIT 1;";
     $query   = "${select} ${filter}";
     $count   = _mysqli_num_rows($query);
 
@@ -66,7 +66,7 @@ function reportAdd($report) {
         }
     } else {
         if (!isset($customer) || !is_array($customer)) {
-            $customer = CustomerLookup($ip);
+            $customer = customerLookupIP($ip);
         } else {
             if(empty($customer['Code'])) {
                 logger(LOG_ERR, __FUNCTION__ . " was incorrectly called with empty customer information");
@@ -120,6 +120,12 @@ function reportAdd($report) {
 
         $result = _mysqli_query($query);
         if ($result) {
+            if(function_exists('custom_notifier')) {
+                logger(LOG_DEBUG, __FUNCTION__ . " is calling custom_notifier");
+                $report['customer'] = $customer;
+                custom_notifier($report);
+            }
+
             logger(LOG_DEBUG, __FUNCTION__ . " by $source ip $ip class $class seen " . date("d-m-Y H:i:s",$timestamp));
             return $result;
         }
@@ -135,6 +141,7 @@ function reportAdd($report) {
 function reportList($filter) {
     $reports = array();
     $query = "SELECT * FROM Reports WHERE 1 ${filter}";
+
     $reports = _mysqli_fetch($query);
     return $reports;
 }
@@ -253,12 +260,34 @@ function reportClosed($ticket) {
 
 /*
     Function description
+    Do some housekeeping on reports, like closing old tickets or merging
+    based on the etc/settings configuration
+*/
+function reportHousekeeping() {
+    $filter  = "";
+    $reports = reportList($filter);
+
+    foreach($reports as $id => $report) {
+
+        // Close old cases
+        if ($report['LastSeen'] < strtotime(REPORT_CLOSING . "ago") ) {
+            reportClosed($report['ID']);
+        }
+    }
+
+    return true;
+}
+
+
+
+/*
+    Function description
 */
 function ReportContactupdate($ticket) {
 
     $report = reportGet($ticket);
 
-    $customer = custom_find_customer($report['IP']);
+    $customer = custom_find_customer_by_ip($report['IP']);
 
     if (isset($customer['Code']) && $customer['Code'] != $result['CustomerCode']) {
         echo "{$result['IP']} OLD ${result['CustomerCode']} => ${customer['Code']}". PHP_EOL;

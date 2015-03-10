@@ -6,9 +6,14 @@ always takes precidence over this function and was meant for a local override.
 
 If you want to use subfunctions you will need to prefix them with custom_ to 
 prevent clashes.
+
 */
 
-function custom_find_customer($IP) {
+*/
+
+Example 1: Using static data
+
+function custom_find_customer_by_ip($IP) {
     if(!isset($IP) || !valid_ip($IP) || strlen($IP) < 4){
         return false;
     }
@@ -20,13 +25,26 @@ function custom_find_customer($IP) {
                         'AutoNotify'=> false
                      );
 
+    return $customer;
+}
+
+
+function custom_find_customer_by_code($Code) {
+    $customer = array(
+                        'Code'      => 'ACME',
+                        'Name'      => 'Another Company Making Everything LTD',
+                        'Contact'   => 'r.runny@acme.ltd',
+                        'AutoNotify'=> false
+                     );
 
     return $customer;
 }
 
+*/
+
 /*
 
-Example 1: Using remote REST API
+Example 2: Using remote REST API
 
 {
   "email_contacts": [
@@ -38,9 +56,7 @@ Example 1: Using remote REST API
   }
 }
 
-*/
-
-function custom_find_customer($IP) {
+function custom_find_customer_by_ip($IP) {
     $url = "https://foo/api/ip/get_contacts/$IP";
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
@@ -60,4 +76,5 @@ function custom_find_customer($IP) {
     return $out;
 }
 
+*/
 ?>

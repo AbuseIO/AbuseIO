@@ -33,6 +33,10 @@ Some additional packages are required:
 
 ### Configuration
 
+ - Set permissions:
+
+    - chmod -R 777 archive tmp
+
  - Copy APP/etc/settings.conf.example to APP/etc/settings.conf and modify the settings.
  - To enrich reports with customer data, copy APP/lib/custom/find_customer.php.example to APP/lib/custom/find_customer.php and implement a hook to fetch customer information.
 
@@ -44,9 +48,13 @@ Optional:
 
         # m h dom mon dow user  command
         10 * * * *     root    /opt/abuseio/bin/housekeeper
-        30 * * * *     root    /opt/abuseio/bin/fetch_reports
-        40 * * * *     root    /opt/abuseio/bin/rbl_scanner
         */15 * * * *   root    /opt/abuseio/bin/notifier
+
+    About these cronjobs:
+
+        - housekeeper does regular maintainance task as well as using collectors (if enabled) to fetch information that arent send by mail
+
+        - notifier is a script that send out notifications to customers (if enabled)
 
  - AbuseIO logs to syslog (local.1 facility), so you might want to review your syslog configuration to log all AbuseIO messages to a separate file.
  - If you have a Microsoft SNDS account, enable "Automated Data Access" at https://postmaster.live.com/snds/auto.aspx and configure your key in APP/etc/settings.conf
@@ -78,6 +86,10 @@ Simply add the following line to your /etc/aliases file to enable email delivery
     abuse: |"/path/to/libexec/mda"
 
 (Do not forget to run the newaliases command to inform your MTA that the aliases file has been updated.)
+
+After that you will need to forward either abuse@isp.tld to abuse@abuseio.isp.tld so that incoming e-mails are redirected to AbuseIO. In addition a lot of feeds
+have the option to deliver on a custom address. Using addresses like spamcop-abuse@isp.tld and forwardding them to abuse@abuseio.isp.tld will give you more control to
+enable or disable individual feeds.
 
 ## Note on Patches/Pull Requests
 

@@ -1,0 +1,18 @@
+<h2>What is an 'Open Microsoft SQL Server'?</h2>
+
+Microsoft SQL Server is a relational database management system developed by Microsoft. As a database, it is a software product whose primary function is to store and retrieve data as requested by other software applications, be it those on the same computer or those running on another computer across a network (including the Internet). There are at least a dozen different editions of Microsoft SQL Server aimed at different audiences and for workloads ranging from small single-machine applications to large Internet-facing applications with many concurrent users. Its primary query languages are T-SQL and ANSI SQL.
+
+<h2>Why would this be bad?</h2>
+
+This service has the potential to expose information about a clients network on which this service is accessible and the service itself can be used in UDP amplification attacks. In addition it opens up your system to 0-day attacks or worm/virus infections that exploit a vulnarability in Windows to gain access to your system.
+
+<h2>Recommende action</h2>
+
+Either use the Windows Firewall or even better an external firewall to prevent access to Netbios (and other Windows ports). The windows firewall has an nasty way of trying to think for himself and for example automaticly starts to open ports if you install something that uses Netbios. In all cases the administrator is unaware of these open ports.
+
+<h2>Tips to resolve this matter</h2>
+
+
+<h2>Getting more information</h2>
+
+

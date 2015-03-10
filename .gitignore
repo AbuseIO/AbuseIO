@@ -11,6 +11,9 @@
 
 # Ignore custom modules
 /lib/custom/find_customer.php
+/lib/custom/notifier.php
 
 # Ignore htdocs protection
-/htdocs/.htaccess
+/www/admin/.htaccess
+/www/ash/.htaccess
+/www/rpc/.htaccess

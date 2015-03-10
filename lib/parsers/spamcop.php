@@ -5,7 +5,7 @@ function parse_spamcop($message) {
     $outReport['type']          = 'ABUSE';
 
     if (
-        strpos($message['from'], "@reports.spamcop.net>") !== FALSE && 
+        strpos($message['from'], "@reports.spamcop.net") !== FALSE && 
         isset($message['arf']) && 
         is_array($message['arf']) && isset($message['arf']['report'])
     ) {
@@ -35,17 +35,54 @@ function parse_spamcop($message) {
             }
         }
 
-        $match = "^Feedback-Type: (?<type>.*)\r\n?\r?\nUser-Agent: (?<agent>.*\r\n?\r?\n\s.*)\r\n?\r?\nVersion: (?<version>.*)\r\n?\r?\nReceived-Date: (?<date>.*)\r\n?\r?\nSource-IP: (?<ip>.*)\r\n?\r?\n";
-        preg_match("/${match}/m", $message['arf']['report'], $match);
+        $message['arf']['report'] = str_replace("\r", "", $message['arf']['report']);
+        preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$message['arf']['report'],$regs);
+        $fields = array_combine($regs[1],$regs[2]);
 
-        if(empty($match['ip']) || empty($match['date'])) {
-            logger(LOG_ERR, __FUNCTION__ . " ARF Report is missing essential fields");
+        if(!empty($fields['Source-IP']) && !empty($fields['Reported-URI'])) {
+            // This is a spamvertized report and we need to ignore the IP and use the domain
+            $outReport['class']         = "Spamvertised web site";
+            unset($fields['Source-IP']);
+
+            // grab domain and path from reported uri
+            $url_info = parse_url($fields['Reported-URI']);
+            if(empty($url_info['host']) || empty($url_info['path'])) {
+                logger(LOG_ERR, __FUNCTION__ . " ARF Report is missing essential url fields");
+                return false;
+            } else {
+                $outReport['domain'] = $url_info['host'];
+                $outReport['uri'] = $url_info['path'];
+            }
+
+            // grab domain from body
+
+            $regex = str_replace("/", "\/", $outReport['domain']);
+            preg_match("/.*${regex}.* is (.*);/s", $message['body'], $match);
+            if(valid_ip($match[1])) {
+                $fields['Source-IP'] = $match[1];
+            } else {
+            }
+        } else {
+            $outReport['class']         = "SPAM";
+        }
+
+        if(empty($fields['Source-IP'])) {
+            // Sometimes Spamcop has a trouble adding the correct fields. The IP is pretty
+            // normal to add. In a last attempt we will try to fetch the IP from the body
+
+            preg_match("/Email from (?<ip>[a-f0-9:\.]+) \/ ${fields['Received-Date']}/s",$message['body'],$regs);
+            if(valid_ip($regs['ip'])) {
+                $fields['Source-IP'] = $regs['ip'];
+            }
+        }
+
+        if(empty($fields['Source-IP']) || empty($fields['Received-Date'])) {
+            logger(LOG_ERR, __FUNCTION__ . " ARF Report is missing essential report fields");
             return false;
         }
 
-        $outReport['class']         = "SPAM";
-        $outReport['ip']            = $match['ip'];
-        $outReport['timestamp']     = strtotime($match['date']);
+        $outReport['ip']            = $fields['Source-IP'];
+        $outReport['timestamp']     = strtotime($fields['Received-Date']);
 
         $reportID = reportAdd($outReport);
         if (!$reportID) return false;
@@ -174,7 +211,22 @@ function parse_spamcop($message) {
                 logger(LOG_DEBUG, __FUNCTION__ . " message item from ${outReport['source']} ignored because its a user message about ${match['ip']} which we already got");
             }
         }
-        return true;
+
+    } elseif ($message['subject'] == "[SpamCop] Alert") {
+        // If the receiver has enabled pager alerts when a spamtrap is hit we only receive an email with 
+        // an IP address in the body, nothing more and nothing less. These alerts are pretty fast!
+
+        $match = "^\s*(?<ip>[a-f0-9:\.]+)";
+        preg_match("/${match}/", $message['body'], $match );
+
+        $outReport['information']['Note'] = 'A spamtrap hit notification was received. These notifications do not provide any evidence.';
+        $outReport['class']         = "SPAM Trap";
+        $outReport['ip']            = $match['ip'];
+        $outReport['timestamp']     = time();
+
+        $reportID = reportAdd($outReport);
+        if (!$reportID) return false;
+        if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
 
     } else {
         logger(LOG_ERR, __FUNCTION__ . " The data from this e-mail was not in a known format");

@@ -27,11 +27,27 @@ $parserMap = array(
     '/noreply@spamlogin.com/'               => 'spamexperts',
 );
 
-// Detect parser
+// Maps regular expressions to match body to the corresponding parser in case from matching failed
+$bodyMap = array(
+    '/User-Agent: Spampanel/'               => 'spamexperts',
+    '/User-Agent: SpamExperts/'             => 'spamexperts',
+);
+
+// Fast detect parser
 foreach ($parserMap as $regex => $p) {
     if (preg_match($regex, $message['from'])) {
         $parser = $p;
         break;
+    }
+}
+
+// Slow detect parser
+if (empty($parser)) {
+    foreach ($bodyMap as $regex => $p) {
+        if (preg_match($regex, $message['raw'])) {
+            $parser = $p;
+            break;
+        }
     }
 }
 

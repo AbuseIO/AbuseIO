@@ -1,7 +1,7 @@
 <?php
     $title = 'Search reports';
-    include('../lib/core/loader.php');
-    include('../lib/frontend/top.php');
+    include('../../lib/core/loader.php');
+    include('../../lib/frontend/top.php');
 ?>
 <div class="row">
     <div class="col-md-8" id="search">

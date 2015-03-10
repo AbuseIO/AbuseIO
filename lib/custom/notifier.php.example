@@ -1,0 +1,19 @@
+<?php
+/*
+If you enable the custom_notifier you will need to expand this function
+so it will output the correct data. This function will be called with a single
+argument: $report(array) containing all the report elements. No return is 
+needed as its not a required element at the core.
+*/
+
+*/
+
+Example 1: Send to IRC
+
+function custom_notifier($report) {
+    // Do stuff
+}
+
+*/
+
+?>
