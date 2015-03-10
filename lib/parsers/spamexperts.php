@@ -57,7 +57,7 @@ function parse_spamexperts($message) {
         $customer = customerLookupCode($customerCode[1]);
 
         $outReport['customer'] = array(
-                                        'Code'    => $customerCode[1],
+                                        'Code'    => $customer['Code'],
                                         'Name'    => $customer['Name'],
                                         'Contact' => $customer['Contact'],
                                         'AutoNotify' => $customer['AutoNotify'],

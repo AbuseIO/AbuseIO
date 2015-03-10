@@ -25,18 +25,17 @@ function custom_find_customer_by_ip($IP) {
                         'AutoNotify'=> false
                      );
 
-
     return $customer;
 }
 
 
 function custom_find_customer_by_code($Code) {
     $customer = array(
+                        'Code'      => 'ACME',
                         'Name'      => 'Another Company Making Everything LTD',
                         'Contact'   => 'r.runny@acme.ltd',
                         'AutoNotify'=> false
                      );
-
 
     return $customer;
 }
