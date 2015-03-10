@@ -10,18 +10,32 @@ several other DNS servers in the DNS hierarchy).
 
 <h2>Why would this be bad?</h2>
 
-Running an Open DNS Resolver is not bad on its own and it is mostly
-a required 'service' to resolve domains to their IP addresses.
-Unfortunately, hackers have also found this feature useful in performing a 
-special type of DDoS attack called a 'DNS Amplification Attack'.
+Running an open (UDP) service is not bad on its own and it is mostly
+a required dependancy when installing a system.
+Unfortunately, hackers have also found this feature useful in performing a
+special type of DDoS attack called a 'Amplification Attack'.
 
-The concept of this attack is that a hacker sends a recursive DNS
-query with a spoofed IP source address to an open recursive DNS
-server. This DNS server eventually sends a DNS response packet
-back to the spoofed IP address, which is actually the targeted victim
-in the DoS Amplification attack.
+The attacker sends a packet apparently from the intended victim to some
+server on the Internet that will reply immediately. Because the source
+IP address is forged, the remote Internet server replies and sends data
+to the victim.
 
-<h2>Recommende action</h2>
+That has two effects: the actual source of the attack is hidden and is
+very hard to trace, and, if many Internet servers are used, an attack
+can consist of an overwhelming number of packets hitting a victim from
+all over the world.
+
+But what makes reflection attacks really powerful is when they are
+also amplified: when a small forged packet elicits a large reply from
+the server (or servers). In that case, an attacker can send a small
+packet "from" a forged source IP address and have the server (or
+servers) send large replies to the victim.
+
+Amplification attacks like that result in an attacker turning a small
+amount of bandwidth coming from a small number of machines into a massive
+traffic load hitting a victim from around the Internet.
+
+<h2>Recommended action</h2>
 
 In most cases the computer has installed a DNS service as an dependancy
 as resolving is needed on that computer. However its only required to do
