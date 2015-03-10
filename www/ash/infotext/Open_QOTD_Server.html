@@ -1,14 +1,43 @@
-<h2>What is a '[THIS CLASS]'?</h2>
+<h2>What is an 'Open QOTD Server'?</h2>
 
-[ Korte samenvatting over deze classificatie ]
+The Quote Of The Day (QOTD) service is a member of the Internet protocol 
+suite, defined in RFC 865. As indicated there, the QOTD concept predated 
+the specification, when QOTD was used by mainframe sysadmins to broadcast 
+a daily quote on request by a user. It was then formally codified both 
+for prior purposes as well as for testing and measurement purposes in RFC 865.
 
 <h2>Why would this be bad?</h2>
 
-[ Korte samenvatting waarom dit opgelost zou moeten worden ]
+Running an open (UDP) service is not bad on its own and it is mostly
+a required dependancy when installing a system.
+Unfortunately, hackers have also found this feature useful in performing a
+special type of DDoS attack called a 'Amplification Attack'.
 
-<h2>Recommende action</h2>
+The attacker sends a packet apparently from the intended victim to some
+server on the Internet that will reply immediately. Because the source
+IP address is forged, the remote Internet server replies and sends data
+to the victim.
 
-[ Korte samenvatting wat men moet doen om dit op te lossen ]
+That has two effects: the actual source of the attack is hidden and is
+very hard to trace, and, if many Internet servers are used, an attack
+can consist of an overwhelming number of packets hitting a victim from
+all over the world.
+
+But what makes reflection attacks really powerful is when they are
+also amplified: when a small forged packet elicits a large reply from
+the server (or servers). In that case, an attacker can send a small
+packet "from" a forged source IP address and have the server (or
+servers) send large replies to the victim.
+
+Amplification attacks like that result in an attacker turning a small
+amount of bandwidth coming from a small number of machines into a massive
+traffic load hitting a victim from around the Internet.
+
+<h2>Recommended action</h2>
+
+There is no reason to have this QOTD service enabled on a public facing
+interface. You should either stop te service or make sure it is not reachable
+from the internet by using RFC1918 spaces or a firewall.
 
 <h2>Tips to resolve this matter</h2>
 

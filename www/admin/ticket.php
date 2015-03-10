@@ -124,6 +124,16 @@ if(isset($PostMessage)) {
 
             <dt>Ticket status</dt>
             <dd><?php echo "<span class='label label-${labelClass[$report['Status']]}'><a href='reports.php?Type=${report['Status']}'>${report['Status']}</a></span>"; ?></dd>
+
+<?php
+    if (SELF_HELP_URL != "") {
+        $token    = md5("${report['ID']}${report['IP']}${report['Class']}");
+        $tokenurl = SELF_HELP_URL . "?id=${report['ID']}&token=" . $token;
+        echo "    <dt>Self Help URL</dt>" . PHP_EOL;
+        echo "    <dd><a target='_blank' href = '${tokenurl}'>${tokenurl}</a></dd>" . PHP_EOL;
+    }
+?>
+
         </dl>
     </div>
     <div class="col-md-6">
@@ -187,15 +197,6 @@ if(isset($PostMessage)) {
         </dl>
     </div>
 </div>
-
-<?php
-    if (SELF_HELP_URL != "") {
-        $token    = md5("${report['ID']}${report['IP']}${report['Class']}");
-        $tokenurl = SELF_HELP_URL . "?id=${report['ID']}&token=" . $token; 
-        echo "    <dt>Self Help URL</dt>" . PHP_EOL;
-        echo "    <dd><a target='_blank' href = '${tokenurl}'>${tokenurl}</a></dd>" . PHP_EOL;
-    }
-?>
 
 </dl>
 
