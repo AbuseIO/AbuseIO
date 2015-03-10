@@ -29,7 +29,8 @@ $parserMap = array(
 
 // Maps regular expressions to match body to the corresponding parser in case from matching failed
 $bodyMap = array(
-    '/User-Agent: Spampanel/' => 'spamexperts',
+    '/User-Agent: Spampanel/'               => 'spamexperts',
+    '/User-Agent: SpamExperts/'             => 'spamexperts',
 );
 
 // Fast detect parser
