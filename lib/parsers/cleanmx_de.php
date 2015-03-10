@@ -30,7 +30,7 @@ function parse_cleanmx_de($message) {
         preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$report,$regs);
         $fields = array_combine($regs[1],$regs[2]);
 
-        if (!array_key_exists($fields['Report-Type'],$typeMap)) {
+        if (empty($fields['Report-Type']) || !array_key_exists($fields['Report-Type'],$typeMap)) {
             logger(LOG_ERR, __FUNCTION__ . " Unable to detect report type in message from ${source} subject ${message['subject']}");
             return false;
         }

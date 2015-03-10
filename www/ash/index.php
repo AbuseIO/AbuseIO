@@ -2,7 +2,7 @@
 include('../../lib/core/loader.php');
 
 if (empty($_GET['id']) || empty($_GET['token']) || !is_numeric($_GET['id'])) {
-    die('<h2>401 - Unautherized</h2>');
+    die('<h2>401 - Unauthorized</h2>');
 }
 
 $report = reportGet($_GET['id']);
