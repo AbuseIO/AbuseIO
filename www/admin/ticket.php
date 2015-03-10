@@ -318,4 +318,8 @@ foreach($notes as $nr => $note) {
     </div>
 </form>
 
-<?php } // End Notes section ?>
+<?php 
+} // End Notes section 
+
+include('../../lib/frontend/bottom.php');
+?>

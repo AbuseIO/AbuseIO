@@ -130,6 +130,6 @@ foreach($results as $nr => $result) {
 </table>
 <?php
     echo $paginator;
-    include('../lib/frontend/bottom.php');
+    include('../../lib/frontend/bottom.php');
 ?>
 

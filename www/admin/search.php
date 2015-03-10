@@ -80,4 +80,4 @@
         </form>
     </div>
 </div>
-<?php include('../lib/frontend/bottom.php'); ?>
+<?php include('../../lib/frontend/bottom.php'); ?>

@@ -155,5 +155,5 @@ foreach($results as $nr => $result) {
 </form>
 
 <?php
-    include('../lib/frontend/bottom.php');
+    include('../../lib/frontend/bottom.php');
 ?>
