@@ -9,19 +9,16 @@ function collect_snds($config) {
         $sndsMap = array(
             'E-mail address harvesting'=>array(
                 'class'=>'Harvesting',
-                'type'=>'ABUSE',
                 'information'=>array(),
             ),
             'Symantec Brightmail'=>array(
                 'class'=>'RBL Listed',
-                'type'=>'INFO',
                 'information'=>array(
                     'delisting_url'=>'http://ipremoval.sms.symantec.com/'
                 ),
             ),
             'SpamHaus SBL/XBL'=>array(
                 'class'=>'RBL Listed',
-                'type'=>'INFO',
                 'information'=>array(
                     'delisting_url'=>'https://www.spamhaus.org/lookup/',
                 ),
@@ -43,7 +40,7 @@ function collect_snds($config) {
                                 'source'=>'Microsoft SNDS',
                                 'ip'=>long2ip($x),
                                 'class'=>$sndsMap[$source[$k]]['class'],
-                                'type'=>$sndsMap[$source[$k]]['type'],
+                                'type'=>'INFO',
                                 'timestamp'=>time(),
                                 'information'=>array_merge($sndsMap[$source[$k]]['information'],array(
                                     'details'=>$source[$k]
