@@ -7,7 +7,7 @@
 /tmp/*/*
 
 # Ignore the message archive
-/archive/*.eml
+/archive/*/*.eml
 
 # Ignore custom modules
 /lib/custom/find_customer.php

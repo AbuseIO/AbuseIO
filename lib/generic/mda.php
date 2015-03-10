@@ -51,18 +51,25 @@ function receive_mail($call) {
     }
 
     if(KEEP_MAILS == true) {
-        if (empty($structure->headers['message-id'])) {
-            $archiveFile = '/archive/' . rand(10,10) . ".eml";
-        } else {
-            $messageID = preg_replace('/[^a-zA-Z0-9_\.]/', '_', $structure->headers['message-id']);
-            $archiveFile = '/archive/' . $messageID . ".eml";      
+        $archiveDir = APP . '/archive/' . date('Ymd') . '/';
+        if (!is_dir($archiveDir)) {
+            if(!mkdir($archiveDir)) {
+                logger(LOG_ERR, __FUNCTION__ . " Unable to create archive subdir " . $archiveDir);
+            } 
         }
 
-        if (!is_file(APP.'/archive/'.$archiveFile)) {
-            file_put_contents(APP.$archiveFile, $raw);
-            logger(LOG_DEBUG, __FUNCTION__ . " Saved email message to " . APP. $archiveFile);
+        if (empty($structure->headers['message-id'])) {
+            $archiveFile = rand(10,10) . ".eml";
         } else {
-            logger(LOG_ERR, __FUNCTION__ . " Unable to archive email because the file already exists");
+            $messageID = preg_replace('/[^a-zA-Z0-9_\.]/', '_', $structure->headers['message-id']);
+            $archiveFile = $messageID . ".eml";      
+        }
+
+        if (!is_file($archiveDir.$archiveFile)) {
+            file_put_contents($archiveDir.$archiveFile, $raw);
+            logger(LOG_DEBUG, __FUNCTION__ . " Saved email message to " . $archiveDir . $archiveFile);
+        } else {
+            logger(LOG_ERR, __FUNCTION__ . " Unable to archive email because the file already exists " . $archiveDir . $archiveFile);
         }
     }
 
