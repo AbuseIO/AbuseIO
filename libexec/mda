@@ -10,6 +10,13 @@ if(empty($message['from']) || empty($message['body'])) {
     bounce($message);
 }
 
+// Ignore email from our own notification address to prevent mail loops
+if (preg_match('/'.NOTIFICATIONS_FROM_ADDRESS.'/', $message['from'])) {
+    delete_store($message);
+    logger(LOG_WARNING, "Loop prevention: Ignoring email from self (" . NOTIFICATIONS_FROM_ADDRESS . ")");
+    exit(0);
+}
+
 // Maps regular expressions to match from address to the corresponding parser
 $parserMap = array(
     '/autoreports@shadowserver.org/'        => 'shadowserver',
