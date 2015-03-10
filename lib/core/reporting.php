@@ -102,7 +102,7 @@ function reportAdd($report) {
                                         \"${uri}\", 
                                         \"${timestamp}\", 
                                         \"${timestamp}\", 
-                                        \"" . mysql_escape_string(json_encode($information)) . "\", 
+                                        \"" . mysql_escape_string(@json_encode($information)) . "\", 
                                         \"${class}\", 
                                         \"${type}\",
                                         \"${customer['Code']}\", 
