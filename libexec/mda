@@ -27,6 +27,7 @@ $parserMap = array(
     '/@ip-echelon.com/'                     => 'ip_echelon',
     '/monitor-bounce@projecthoneypot.org/'  => 'project_honeypot',
     '/@junkemailfilter.com/'                => 'junkemailfilter_com',
+    '/@r.iecc.com/'                         => 'iecc_com',
     '/abuse@clean-mx.de/'                   => 'cleanmx_de',
     '/@USGOabuse.net/'                      => 'usgoabuse',
     '/abuse-reports@cyscon.de/'             => 'cyscon',
