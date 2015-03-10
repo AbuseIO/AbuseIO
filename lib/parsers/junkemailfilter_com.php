@@ -5,6 +5,7 @@ function parse_junkemailfilter_com($message) {
     $type   = 'ABUSE';
 
     // Read and parse report
+    $message['arf']['report'] = str_replace("\r", "", $message['arf']['report']);
     preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$message['arf']['report'],$regs);
     $fields = array_combine($regs[1],$regs[2]);
 

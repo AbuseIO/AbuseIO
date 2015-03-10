@@ -34,6 +34,7 @@ function parse_spamexperts($message) {
             }
         }
 
+        $message['arf']['report'] = str_replace("\r", "", $message['arf']['report']);
         $match = "([\w\-]+): (.*)[ ]*\r?\n";
         preg_match_all("/${match}/m", $message['arf']['report'], $regs);
 
