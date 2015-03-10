@@ -16,52 +16,38 @@
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+      <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">AbuseIO</a>
+          <a class="navbar-brand" href="https://abuse.io" target="_blank">AbuseIO</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.php">Dashboard</a></li>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <?php
+            $nav_items = array(
+                'index.php'=>'Welcome',
+                'customers.php'=>'Customers',
+                'netblocks.php'=>'Netblocks',
+                'reports.php'=>'Reports',
+                'search.php'=>'Search',
+                'analytics.php'=>'Analytics'
+            );
+            foreach ($nav_items as $u => $t) {
+                if ($u == basename($_SERVER['SCRIPT_NAME'])) {
+                    echo "<li class='active'><a href='$u'>$t <span class='sr-only'>(current)</span></a></li>";
+                } else {
+                    echo "<li><a href='$u'>$t</a></li>";
+                }
+            }
+            ?>
           </ul>
         </div>
       </div>
     </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-<?php
-
-$nav_items = array(
-    array(
-        'index.php'=>'Welcome',
-        'customers.php'=>'Customers',
-        'netblocks.php'=>'Netblocks',
-        'reports.php'=>'Reports',
-        'search.php'=>'Search',
-        'analytics.php'=>'Analytics'
-    )
-);
-
-foreach ($nav_items as $subnav) {
-    echo '<ul class="nav nav-sidebar">';
-    foreach ($subnav as $u => $t) {
-        if ($u == basename($_SERVER['SCRIPT_NAME'])) {
-            echo "<li class='active'><a href='$u'>$t <span class='sr-only'>(current)</span></a></li>";
-        } else {
-            echo "<li><a href='$u'>$t</a></li>";
-        }
-    }
-    echo '</ul>';
-}
-?>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header"><?php echo $title; ?></h1>
+    <div class="container">
+        <h1 class="page-header"><?php echo $title; ?></h1>
