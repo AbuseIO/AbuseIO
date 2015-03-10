@@ -11,7 +11,8 @@ function parse_netcraft($message) {
         return false;
     }
 
-    preg_match_all('/([\w\-]+): (.*)[ ]*\r\n?\r?\n/',$report,$regs);
+    $report = str_replace("\r", "", $report);
+    preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$report,$regs);
     $fields = array_combine($regs[1],$regs[2]);
 
     // Since ARF does not supply the IP and we dont want to rely on DNS (which might be changed) we fetch it from the body
