@@ -89,86 +89,104 @@ if(isset($PostMessage)) {
 }
 ?>
 
-<div class='btn-group pull-right'>
-    <a href='?id=<?php echo $_GET['id']; ?>&action=Notify' class='btn btn-default btn-sm' title='Resend a notification to customer for this ticket'>Renotify</a>
-    <a href='?id=<?php echo $_GET['id']; ?>&action=UpdateContact' class='btn btn-default btn-sm' title='Try to resolve or update the customer information'>Update contact</a>
-    <a href='?id=<?php echo $_GET['id']; ?>&action=MarkIgnored' class='btn btn-default btn-sm' title='Set status to customer ignored'>Ignore</a>
-    <a href='?id=<?php echo $_GET['id']; ?>&action=MarkResolved' class='btn btn-default btn-sm' title='Set status to customer resolved'>Resolved</a>
-    <a href='?id=<?php echo $_GET['id']; ?>&action=MarkClosed' class='btn btn-default btn-sm' title='Set status to closed. Another incoming abuse mail will result in a new ticket!'>Closed</a>
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>IP address</dt>
+            <dd><?php echo "<a href='reports.php?IP=${report['IP']}'>${report['IP']}</a>"; ?></dd>
+
+            <?php 
+                $reverse = gethostbyaddr($report['IP']);
+                if ($reverse != $report['IP'] && $reverse !== false) {
+            ?>
+            <dt>Reverse DNS</dt>
+            <dd><?php echo gethostbyaddr($report['IP']); ?></dd>
+            <?php } ?>
+
+            <?php if (!empty($report['Domain'])) { ?>
+            <dt>Domain</dt>
+            <dd><?php echo $report['Domain']; ?></dd>
+            <?php } ?>
+
+            <?php if (!empty($report['URI'])) { ?>
+            <dt>URI</dt>
+            <dd><?php echo $report['URI']; ?></dd>
+            <?php } ?>
+
+            <dt>Classification</dt>
+            <dd><?php echo "<a href='reports.php?Class=${report['Class']}'>${report['Class']}</a>"; ?></dd>
+
+            <dt>Source</dt>
+            <dd><?php echo "<a href='reports.php?Source=${report['Source']}'>${report['Source']}</a>"; ?></dd>
+
+            <dt>Type</dt>
+            <dd><?php echo "<span class='label label-${labelClass[$report['Type']]}'><a href='reports.php?Type=${report['Type']}'>${report['Type']}</a></span>"; ?></dd>
+
+            <dt>Ticket status</dt>
+            <dd><?php echo "<span class='label label-${labelClass[$report['Status']]}'><a href='reports.php?Type=${report['Status']}'>${report['Status']}</a></span>"; ?></dd>
+        </dl>
+    </div>
+    <div class="col-md-6">
+        <div class='btn-group pull-right'>
+            <a href='?id=<?php echo $_GET['id']; ?>&action=UpdateContact' class='btn btn-default btn-sm' title='Try to resolve or update the customer information'>Update customer</a>
+            <a href='?id=<?php echo $_GET['id']; ?>&action=Notify' class='btn btn-default btn-sm' title='Resend a notification to customer for this ticket'>Send notification</a>
+            <a href='?id=<?php echo $_GET['id']; ?>&action=MarkIgnored' class='btn btn-default btn-sm' title='Set status to customer ignored'>Ignore report</a>
+            <a href='?id=<?php echo $_GET['id']; ?>&action=MarkResolved' class='btn btn-default btn-sm' title='Set status to customer resolved'>Mark resolved</a>
+            <a href='?id=<?php echo $_GET['id']; ?>&action=MarkClosed' class='btn btn-default btn-sm' title='Set status to closed. Another incoming abuse mail will result in a new ticket!'>Close ticket</a>
+        </div>
+    </div>
 </div>
-<br>
 
-<dl class="dl-horizontal">
-    <dt>IP address</dt>
-    <dd><?php echo "<a href='reports.php?IP=${report['IP']}'>${report['IP']}</a>"; ?></dd>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Customer Information</h2>
 
-    <?php 
-        $reverse = gethostbyaddr($report['IP']);
-        if ($reverse != $report['IP'] && $reverse !== false) {
-    ?>
-    <dt>Reverse DNS</dt>
-    <dd><?php echo gethostbyaddr($report['IP']); ?></dd>
-    <?php } ?>
+        <dl class="dl-horizontal">
+            <dt>Customer Code</dt>
+            <dd><?php echo "<a href='reports.php?CustomerCode=${report['CustomerCode']}'>${report['CustomerCode']}</a>"; ?></dd>
 
-    <?php if (!empty($report['Domain'])) { ?>
-    <dt>Domain</dt>
-    <dd><?php echo $report['Domain']; ?></dd>
-    <?php } ?>
+            <dt>Customer Name</dt>
+            <dd><?php echo "<a href='reports.php?CustomerName=${report['CustomerName']}'>${report['CustomerName']}</a>"; ?></dd>
 
-    <?php if (!empty($report['URI'])) { ?>
-    <dt>URI</dt>
-    <dd><?php echo $report['URI']; ?></dd>
-    <?php } ?>
+            <dt>Contact(s)</dt>
+            <dd><?php echo $report['CustomerContact']; ?></dd>
 
-    <dt>Customer Code</dt>
-    <dd><?php echo "<a href='reports.php?CustomerCode=${report['CustomerCode']}'>${report['CustomerCode']}</a>"; ?></dd>
+            <dt>Resolved</dt>
+            <dd><?php echo "<span class='label label-${labelClass[$report['CustomerResolved']]}'>". ($report['CustomerResolved'] ? 'YES' : 'NO') . "</span>"; ?></dd>
 
-    <dt>Customer Name</dt>
-    <dd><?php echo "<a href='reports.php?CustomerName=${report['CustomerName']}'>${report['CustomerName']}</a>"; ?></dd>
+            <dt>Ignored</dt>
+            <dd><?php echo "<span class='label label-${labelClass[$report['CustomerResolved']]}'>". ($report['CustomerIgnored']  ? 'YES' : 'NO') . "</span>"; ?></dd>
+        </dl>
+    </div>
+    <div class="col-md-6">
+        <h2>Report Status</h2>
 
-    <dt>Customer Contact(s)</dt>
-    <dd><?php echo $report['CustomerContact']; ?></dd>
+        <dl class="dl-horizontal">
+            <dt>Seen</dt>
+            <dd><?php echo $report['ReportCount']; ?>&times;</dd>
 
-    <dt>Classification</dt>
-    <dd><?php echo "<a href='reports.php?Class=${report['Class']}'>${report['Class']}</a>"; ?></dd>
+            <dt>First Seen</dt>
+            <dd><?php echo date("d-m-Y H:i", $report['FirstSeen']); ?></dd>
 
-    <dt>Source</dt>
-    <dd><?php echo "<a href='reports.php?Source=${report['Source']}'>${report['Source']}</a>"; ?></dd>
+            <dt>Last Seen</dt>
+            <dd><?php echo date("d-m-Y H:i", $report['LastSeen']); ?></dd>
 
-    <dt>Type</dt>
-    <dd><?php echo "<span class='label label-${labelClass[$report['Type']]}'><a href='reports.php?Type=${report['Type']}'>${report['Type']}</a></span>"; ?></dd>
+            <dt>Notifications</dt>
+            <dd><?php echo $report['NotifiedCount']; ?>&times;</dd>
 
-    <dt>First Seen</dt>
-    <dd><?php echo date("d-m-Y H:i", $report['FirstSeen']); ?></dd>
-
-    <dt>Last Seen</dt>
-    <dd><?php echo date("d-m-Y H:i", $report['LastSeen']); ?></dd>
-
-    <dt>Ticket status</dt>
-    <dd><?php echo "<span class='label label-${labelClass[$report['Status']]}'><a href='reports.php?Type=${report['Status']}'>${report['Status']}</a></span>"; ?></dd>
-
-    <dt>Customer status</dt>
-    <dd>
-        <?php 
-            echo "Resolved: <span class='label label-${labelClass[$report['CustomerResolved']]}'>". ($report['CustomerResolved'] ? 'YES' : 'NO') . "</span>"; 
-            echo " - Ignored: <span class='label label-${labelClass[$report['CustomerResolved']]}'>". ($report['CustomerIgnored']  ? 'YES' : 'NO') . "</span>";
-
-        ?>
-    </dd>
-
-    <dt>Report Status</dt>
-    <dd>
-        <?php 
-            echo "Seen: " . $report['ReportCount'] . "x"; 
-            echo " - Notifications: " . $report['NotifiedCount'] . "x";
-            echo " - Last notification : ";
-            if ($report['LastNotifyReportCount'] === '0') {
-                echo "never"; 
-            } else {
-                echo "at count ". $report['LastNotifyReportCount'] ." on ". date("d-m-Y H:i", $report['LastNotifyTimestamp']) ; 
-            }
-        ?>
-    </dd>
+            <dt>Last notification</dt>
+            <dd>
+            <?php
+                if ($report['LastNotifyReportCount'] === '0') {
+                    echo "Never"; 
+                } else {
+                    echo "At count ". $report['LastNotifyReportCount'] ." on ". date("d-m-Y H:i", $report['LastNotifyTimestamp']); 
+                }
+            ?>
+            </dd>
+        </dl>
+    </div>
+</div>
 
 <?php
     if (SELF_HELP_URL != "") {
