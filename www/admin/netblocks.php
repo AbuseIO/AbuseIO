@@ -17,7 +17,7 @@
             $netblock = array(
                                 'begin_in'      => ip2long($_POST['AddBegin_in']),
                                 'end_in'        => ip2long($_POST['AddEnd_in']),
-                                'CustomerCode'  => $_POST['AddCustomerCode'],
+                                'CustomerCode'  => htmlentities($_POST['AddCustomerCode']),
                              );
 
             if (!is_numeric(netblockAdd($netblock))) {

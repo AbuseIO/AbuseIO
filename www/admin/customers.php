@@ -17,10 +17,10 @@
             echo "ERROR - Not all fields were filled in";
         } else {
             $customer = array(
-                                'Code'       => $_POST['AddCustomerCode'],
-                                'Name'       => $_POST['AddCustomerName'],
-                                'Contact'    => $_POST['AddCustomerContacts'],
-                                'AutoNotify' => $autonotify,
+                                'Code'       => htmlentities($_POST['AddCustomerCode']),
+                                'Name'       => htmlentities($_POST['AddCustomerName']),
+                                'Contact'    => htmlentities($_POST['AddCustomerContacts']),
+                                'AutoNotify' => htmlentities($autonotify),
                              );
 
             if (!is_numeric(customerAdd($customer))) {

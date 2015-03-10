@@ -263,7 +263,7 @@ if(!empty($_POST['action']) && $_POST['action'] == 'addNote') {
     } else {
         $submittor = "Abusedesk";
     }
-    if (!empty($_POST['Note'])) reportNoteAdd($submittor, $_POST['id'], $_POST['Note']);
+    if (!empty($_POST['Note'])) reportNoteAdd($submittor, $_POST['id'], htmlentities($_POST['Note']));
 }
 if(!empty($_GET['action']) && $_GET['action'] == 'delNote' && is_numeric($_GET['noteid'])) {
     reportNoteDelete($_GET['noteid']);
