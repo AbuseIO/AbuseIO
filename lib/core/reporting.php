@@ -361,12 +361,11 @@ function reportSend($filter) {
     // in the customer mail. format: array($reports[CustomerCode][$i][$report_elements])
     $allreports = reportNotification($filter);
 
-    $class_seen = array();
-
     foreach($allreports as $customerCode => $reports) {
         $count = count($reports);
 
         $blocks = "";
+        $class_seen = array();
         foreach($reports as $id => $report) {
             $block = array();
             $report['Information'] = json_decode($report['Information']);
