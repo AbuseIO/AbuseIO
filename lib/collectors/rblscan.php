@@ -28,7 +28,7 @@ function collect_rblscan($config) {
                 $lookup = $ip_reversed.'.'.$rbl['host'];
                 if ($result = gethostbyname($lookup)) {
                     $class = '';
-                    $rbl['information']['List'] = $rbl['host'];
+                    $rbl['information']['listed_in'] = $rbl['host'];
                     switch ($result) {
                         // No listing
                         case $lookup:
@@ -38,7 +38,7 @@ function collect_rblscan($config) {
                         case '127.0.0.2':
                         case '127.0.0.3':
                             $class = 'RBL Listed';
-                            $rbl['information']['Type'] = 'Blacklisted';
+                            $rbl['information']['reason'] = 'Spam';
                             break;
 
                         // Used by Spamhaus CBL (open proxy / trojans / exploits)
@@ -47,7 +47,7 @@ function collect_rblscan($config) {
                         case '127.0.0.6':
                         case '127.0.0.7':
                             $class = 'RBL Listed';
-                            $rbl['information']['Type'] = 'Open Proxy, Trojans or Exploits';
+                            $rbl['information']['reason'] = 'Open Proxy, Trojans or Exploits';
                             break;
 
                         // Used by Spamhaus PBL (policy listed by network operator) (ignore)
