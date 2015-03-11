@@ -21,7 +21,7 @@ function parse_shadowserver($message) {
                                                     'fields'    => 'port handshake cipher_suite subject_common_name issuer_common_name cert_expiration_date issuer_organization_name',
                                                     'type'      => 'INFO',
                                                  ),
-                'ssl_freak_scan'        => array (
+                'scan_ssl_freak'        => array (
                                                     'class'     => 'FREAK Vulnerable Server',
                                                     'fields'    => 'port handshake cipher_suite freak_cipher_suite subject_common_name issuer_common_name cert_expiration_date',
                                                     'type'      => 'INFO',
