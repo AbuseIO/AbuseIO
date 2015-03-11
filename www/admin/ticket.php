@@ -202,18 +202,27 @@ if(isset($PostMessage)) {
 
 <h2>Information</h2>
 
-<dl class="dl-horizontal">
 <?php
     $info_array = json_decode($report['Information'], true);
-    foreach($info_array as $field => $value) {
-        echo "<dt>${field}</dt>";
-        echo "<dd>${value}</dd>";
+    if (empty($info_array)) {
+            echo '<p>No information found</p>';
+    } else {
+        echo '<dl class="dl-horizontal">';
+        foreach($info_array as $field => $value) {
+            echo "<dt>${field}</dt>";
+            echo "<dd>${value}</dd>";
+        }
+        echo '</dl>';
     }
 ?>
-</dl>
 
 <?php
-if ($info_extra = getClassInfo($report['Class'])) echo '<pre>'.$info_extra.'</pre>';
+$infotext = "../ash/infotext/".str_replace(" ", "_", $report['Class']).".html";
+if (file_exists($infotext)) {
+    echo '<div style="padding: 1em 0 2em;">';
+    include($infotext);
+    echo '</div>';
+}
 
 $evidences = evidenceList($_GET['id']);
 

@@ -408,7 +408,9 @@ function reportSend($filter) {
         if (!empty($class_seen)) {
             $blocks .= "\nAdditional information:\n\n";
             foreach ($class_seen as $class => $true) {
-                if ($class_info = getClassInfo($class)) {
+                $infotext = "../../www/ash/infotext/".str_replace(" ", "_", $report['Class']).".html";
+                if (file_exists($infotext)) {
+                    $class_info = strip_tags(file_get_contents($infotext));
                     $blocks .= "$class:\n\n$class_info\n";
                 }
             }
@@ -551,18 +553,6 @@ function reportNotification($filter) {
     }
 
     return $data;
-}
-
-/*
-    Get additional information for a class
-*/
-function getClassInfo($class) {
-    $class_file = APP.'/lib/templates/class/'.preg_replace('/( )+/','_',preg_replace('@/@','',strtolower($class))).'.txt';
-    if (file_exists($class_file)) {
-        return file_get_contents($class_file);
-    } else {
-        return false;
-    }
 }
 
 ?>
