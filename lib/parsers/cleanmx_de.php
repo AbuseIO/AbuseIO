@@ -127,8 +127,6 @@ function parse_cleanmx_de($message) {
 
     } else {
         logger(LOG_ERR, __FUNCTION__ . " Unable to parse message from ${source} subject ${message['subject']}");
-        echo 'nothing found'.PHP_EOL;
-        return true;
     }
 }
 ?>
