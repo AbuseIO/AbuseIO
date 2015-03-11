@@ -10,7 +10,7 @@ $results = _mysqli_fetch($query);
 
 foreach($results as $id => $result) {
 
-    $customer = custom_find_customer($result['IP']);
+    $customer = custom_find_customer_by_ip($result['IP']);
 
     if (isset($customer['Code']) && $customer['Code'] != $result['CustomerCode']) {
         echo "{$result['IP']} OLD ${result['CustomerCode']} => ${customer['Code']}". PHP_EOL;
