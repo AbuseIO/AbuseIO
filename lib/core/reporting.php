@@ -61,7 +61,12 @@ function reportAdd($report) {
             if (_mysqli_query($query, "")) {
                 if(function_exists('custom_notifier')) {
                     logger(LOG_DEBUG, __FUNCTION__ . " is calling custom_notifier for UPDATED notification");
-                    $report['customer'] = $customer;
+                    $report['customer'] = array(
+                                                'Code' => $row['CustomerCode'],
+                                                'Name' => $row['CustomerName'],
+                                                'Contact' => $row['CustomerContact'],
+                                                'AutoNotify' => $row['AutoNotify'],
+                                               );
                     $report['state']    = 'UPDATED';
                     custom_notifier($report);
                 }
