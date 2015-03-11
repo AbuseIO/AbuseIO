@@ -37,8 +37,12 @@ function customerAdd($customer) {
 /*
     Function description
 */
-function customerDelete($CustomerCode) {
-    $query = "DELETE FROM Customers WHERE Code = '${CustomerCode}';";
+function customerDelete($customerCode) {
+    if(!is_numeric($customerCode)) {
+        return false;
+    }
+
+    $query = "DELETE FROM Customers WHERE Code = '${customerCode}';";
 
     return _mysqli_query($query, "");
 }

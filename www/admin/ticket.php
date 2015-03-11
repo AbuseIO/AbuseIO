@@ -1,16 +1,16 @@
 <?php
-
-$title = 'Ticket '.$_GET['id'];
 include('../../lib/core/loader.php');
 
-if (empty($_GET['id'])) {
+if (empty($_GET['id']) || !is_numeric($_GET['id'])) {
     include('../../lib/frontend/top.php');
     echo '<h2>404 - Invalid ticket</h2>';
     include('../../lib/frontend/bottom.php');
     die();
 }
 
-if(isset($_GET['action']) && $_GET['action'] == 'Notify') {
+$title = 'Ticket '.$_GET['id'];
+
+if(isset($_GET['action']) && $_GET['action'] == 'Notify' && is_numeric($_GET['id'])) {
     $filter = array(
                     'Ticket'  => $_GET['id'],
                    );
@@ -22,19 +22,19 @@ if(isset($_GET['action']) && $_GET['action'] == 'Notify') {
     }
 
 }
-if(isset($_GET['action']) && $_GET['action'] == 'UpdateContact') {
+if(isset($_GET['action']) && $_GET['action'] == 'UpdateContact' && is_numeric($_GET['id'])) {
     ReportContactupdate($_GET['id']);
     $PostMessage = "Customer information is updated";
 }
-if(isset($_GET['action']) && $_GET['action'] == 'MarkIgnored') {
+if(isset($_GET['action']) && $_GET['action'] == 'MarkIgnored' && is_numeric($_GET['id'])) {
     reportIgnored($_GET['id']);
     $PostMessage = "This ticket has been marked as customer ignored. The listed contacts will no longer receive reports on this ticket";
 }
-if(isset($_GET['action']) && $_GET['action'] == 'MarkResolved') {
+if(isset($_GET['action']) && $_GET['action'] == 'MarkResolved' && is_numeric($_GET['id'])) {
     reportResolved($_GET['id']);
     $PostMessage = "This ticket has been marked as customer resolved. Any new reports will resend a notification directly";
 }
-if(isset($_GET['action']) && $_GET['action'] == 'MarkClosed') {
+if(isset($_GET['action']) && $_GET['action'] == 'MarkClosed' && is_numeric($_GET['id'])) {
     reportClosed($_GET['id']);
     $PostMessage = "This ticket has been marked as closed. Any new reports will open a new ticket";
 }

@@ -23,6 +23,10 @@ function evidenceStore($sender, $subject, $data) {
     Function description
 */
 function evidenceLink($evidenceID, $reportID) {
+    if(!is_numeric($evidenceID) || !is_numeric($reportID)) {
+        return false;
+    }
+
     $query = "INSERT IGNORE INTO EvidenceLinks (EvidenceID, ReportID) VALUES ('${evidenceID}', '${reportID}');";
 
     $result = _mysqli_query($query);
@@ -35,6 +39,10 @@ function evidenceLink($evidenceID, $reportID) {
     Function description
 */
 function evidenceList($ticket) {
+    if(!is_numeric($ticket)) {
+        return false;
+    }
+
     $reports = array();
 
     $query = "SELECT EvidenceLinks.EvidenceID, EvidenceLinks.ReportID, Evidence.ID, Evidence.LastModified, Evidence.Sender, Evidence.Subject ".
@@ -51,6 +59,10 @@ function evidenceList($ticket) {
 */
 function evidenceGet($id) {
     $reports = array();
+
+    if(!is_numeric($id)) {
+        return false;
+    }
 
     $filter  = "AND ID='${id}'";
     $query   = "SELECT * FROM Evidence WHERE 1 ${filter}";

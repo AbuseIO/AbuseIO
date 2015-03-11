@@ -173,6 +173,10 @@ function reportCount($filter) {
 function reportGet($id) {
     $reports = array();
 
+    if (!is_numeric($id)) {
+        return false;
+    }
+
     $filter  = "AND ID='${id}'";
     $query   = "SELECT * FROM Reports WHERE 1 ${filter}";
 
@@ -233,6 +237,10 @@ function reportMerge() {
     Function description
 */
 function reportResolved($ticket) {
+    if(!is_numeric($ticket)) {
+        return false;
+    }
+
     $query = "Update Reports SET CustomerResolved = '1' WHERE 1 AND ID = '${ticket}'";
 
     $result = _mysqli_query($query, "");
@@ -245,6 +253,10 @@ function reportResolved($ticket) {
     Function description
 */
 function reportIgnored($ticket) {
+    if(!is_numeric($ticket)) {
+        return false;
+    }
+
     $query = "Update Reports SET CustomerIgnored = '1' WHERE 1 AND ID = '${ticket}'";
 
     $result = _mysqli_query($query, "");
@@ -257,6 +269,10 @@ function reportIgnored($ticket) {
     Function description
 */
 function reportClosed($ticket) {
+    if(!is_numeric($ticket)) {
+        return false;
+    }
+
     $query = "Update Reports SET Status = 'CLOSED' WHERE 1 AND ID = '${ticket}'";
 
     $result = _mysqli_query($query, "");
@@ -292,6 +308,9 @@ function reportHousekeeping() {
     Function description
 */
 function ReportContactupdate($ticket) {
+    if(!is_numeric($ticket)) {
+        return false;
+    }
 
     $report = reportGet($ticket);
 
@@ -314,6 +333,10 @@ function ReportContactupdate($ticket) {
     Function description
 */
 function reportNotified($ticket) {
+    if(!is_numeric($ticket)) {
+        return false;
+    }
+
     // Subfunction for reportNotification which can be called when a notifier
     // successfully send out the notification to mark the ticket as notified
     //
