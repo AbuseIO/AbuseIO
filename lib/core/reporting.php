@@ -59,6 +59,13 @@ function reportAdd($report) {
             $update = "UPDATE Reports SET LastSeen='${timestamp}', ReportCount='".($row['ReportCount'] + 1)."'";
             $query  = "${update} ${filter}";
             if (_mysqli_query($query, "")) {
+                if(function_exists('custom_notifier')) {
+                    logger(LOG_DEBUG, __FUNCTION__ . " is calling custom_notifier for UPDATED notification");
+                    $report['customer'] = $customer;
+                    $report['state']    = 'UPDATED';
+                    custom_notifier($report);
+                }
+
                 logger(LOG_DEBUG, __FUNCTION__ . " by $source ip $ip class $class seen " . date("d-m-Y H:i:s",$timestamp) . " is UPDATED");
                 return $row['ID'];
             }
@@ -121,8 +128,9 @@ function reportAdd($report) {
         $result = _mysqli_query($query);
         if ($result) {
             if(function_exists('custom_notifier')) {
-                logger(LOG_DEBUG, __FUNCTION__ . " is calling custom_notifier");
+                logger(LOG_DEBUG, __FUNCTION__ . " is calling custom_notifier for NEW notification");
                 $report['customer'] = $customer;
+                $report['state']    = 'NEW';
                 custom_notifier($report);
             }
 
