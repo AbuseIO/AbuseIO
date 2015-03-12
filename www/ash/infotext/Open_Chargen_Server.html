@@ -1,6 +1,6 @@
 <h2>What is an 'Open Chargen server'?</h2>
 
-The Character Generator Protocol (CHARGEN) is a service thats intended 
+<p>The Character Generator Protocol (CHARGEN) is a service thats intended 
 for testing, debugging, and measurement purposes. The protocol is rarely 
 used, as its design flaws allow ready misuse. A host may connect to a 
 server that supports the Character Generator Protocol on either 
@@ -10,40 +10,40 @@ arbitrary characters to the connecting host and continues until the host
 closes the connection. In the UDP implementation of the protocol, the 
 server sends a UDP datagram containing a random number (between 0 and 512) 
 of characters every time it receives a datagram from the connecting host. 
-Any data received by the server is discarded.
+Any data received by the server is discarded.</p>
 
 <h2>Why would this be bad?</h2>
 
-Running an open (UDP) service is not bad on its own and it is mostly
+<p>Running an open (UDP) service is not bad on its own and it is mostly
 a required dependancy when installing a system.
 Unfortunately, hackers have also found this feature useful in performing a
-special type of DDoS attack called a 'Amplification Attack'.
+special type of DDoS attack called a 'Amplification Attack'.</p>
 
-The attacker sends a packet apparently from the intended victim to some
+<p>The attacker sends a packet apparently from the intended victim to some
 server on the Internet that will reply immediately. Because the source
 IP address is forged, the remote Internet server replies and sends data
-to the victim.
+to the victim.</p>
 
-That has two effects: the actual source of the attack is hidden and is
+<p>That has two effects: the actual source of the attack is hidden and is
 very hard to trace, and, if many Internet servers are used, an attack
 can consist of an overwhelming number of packets hitting a victim from
-all over the world.
+all over the world.</p>
 
-But what makes reflection attacks really powerful is when they are
+<p>But what makes reflection attacks really powerful is when they are
 also amplified: when a small forged packet elicits a large reply from
 the server (or servers). In that case, an attacker can send a small
 packet "from" a forged source IP address and have the server (or
-servers) send large replies to the victim.
+servers) send large replies to the victim.</p>
 
-Amplification attacks like that result in an attacker turning a small
+<p>Amplification attacks like that result in an attacker turning a small
 amount of bandwidth coming from a small number of machines into a massive
-traffic load hitting a victim from around the Internet.
+traffic load hitting a victim from around the Internet.</p>
 
 <h2>Recommended action</h2>
 
-There is no reason to have this CHARGEN service enabled on a public facing 
+<p>There is no reason to have this CHARGEN service enabled on a public facing 
 interface. You should either stop te service or make sure it is not reachable 
-from the internet by using RFC1918 spaces or a firewall.
+from the internet by using RFC1918 spaces or a firewall.</p>
 
 <h2>Getting more information</h2>
 

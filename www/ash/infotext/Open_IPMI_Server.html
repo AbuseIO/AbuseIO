@@ -1,37 +1,37 @@
 <h2>What is an 'Open IPMI Server'?</h2>
 
-IPMI defines a set of interfaces used by system administrators for 
+<p>IPMI defines a set of interfaces used by system administrators for 
 out-of-band management of computer systems and monitoring of their operation. 
 For example, IPMI provides a way to manage a computer that may be powered off 
 or otherwise unresponsive by using a network connection to the hardware 
-rather than to an operating system or login shell.
+rather than to an operating system or login shell.</p>
 
-IPMI is integrated on most server systems, however under different names like
+<p>IPMI is integrated on most server systems, however under different names like
 iRMC, ILOM, BMC, iDRAC, etc. Each vender has their own implementation of IPMI,
 but the base is the same on each of them: It allows access to hardware outside
-your operating system (and its locally installed firewall!).
+your operating system (and its locally installed firewall!).</p>
 
 <h2>Why would this be bad?</h2>
 
-IPMI is the base of most of the Out Of Band / Lights Out management suites and 
+<p>IPMI is the base of most of the Out Of Band / Lights Out management suites and 
 is implemented by the server's Baseboard Management Controller (BMC). The BMC 
 has near complete access and control of the server's resources, including, but 
 not limited to, memory, power, and storage. Anyone that can control your BMC 
-(via IPMI), can control your server.
+(via IPMI), can control your server.</p>
 
-IPMI instances in general are known to contain a variety of vulnerabilities, 
+<p>IPMI instances in general are known to contain a variety of vulnerabilities, 
 some more serious than other. In short; you really do not want to expose IPMI 
-to the internet. 
+to the internet. </p>
 
 <h2>Recommended action</h2>
 
-Implement a seperate network for hosting these Out-Of-Band management entries and
+<p>Implement a seperate network for hosting these Out-Of-Band management entries and
 place them in a RFC1918(non public IP) space in combination with a VPN or add a 
-hardware firewall in front of this network that filters access.
+hardware firewall in front of this network that filters access.</p>
 
-Some IPMI implementations do offer some kind of what they call firewalling, however
+<p>Some IPMI implementations do offer some kind of what they call firewalling, however
 we havent come across an implementation that actually fully protects the IPMI 
-interface from outside influance.
+interface from outside influance.</p>
 
 <h2>Getting more information</h2>
 

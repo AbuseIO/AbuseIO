@@ -1,20 +1,20 @@
 <h2>What is an 'Open NAT-PMP Server'?</h2>
 
-The NAT Port Mapping Protocol (NAT-PMP) is a network protocol for establishing 
+<p>The NAT Port Mapping Protocol (NAT-PMP) is a network protocol for establishing 
 network address translation (NAT) settings and port forwarding configurations 
 automatically without user effort. The protocol automatically determines the 
 external IPv4 address of a NAT gateway, and provides means for an application 
-to communicate the parameters for communication to peers.
+to communicate the parameters for communication to peers.</p>
 
 <h2>Why would this be bad?</h2>
 
-Many NAT-PMP devices are incorrectly configured, allowing them to field requests 
+<p>Many NAT-PMP devices are incorrectly configured, allowing them to field requests 
 received on external network interfaces or map forwarding routes to addresses 
 other than that of the requesting host, making them potentially vulnerable to 
 information disclosure and malicious port mapping requests. The responses from 
 Open NAT-PMP Servers represent two types of vulnerabilities; malicious port 
 mapping manipulation and information disclosure about the NAT-PMP device. These 
-can be broken down into 5 specific issues, outlined below:
+can be broken down into 5 specific issues, outlined below:</p>
 
 - Interception of Internal NAT Traffic (2.5% of responding devices)
 - Interception of External Traffic (86% of responding devices)
@@ -22,14 +22,14 @@ can be broken down into 5 specific issues, outlined below:
 - DoS Against Host Services (88% of responding devices)
 - Information Disclosure about the NAT-PMP device (100% of responding devices)
 
-In short: A remote, unauthenticated attacker may be able to gather information 
+<p>In short: A remote, unauthenticated attacker may be able to gather information 
 about a NAT device, manipulate its port mapping, intercept its private and public 
-traffic, access its private client services, and block its host services.
+traffic, access its private client services, and block its host services.</p>
 
 <h2>Recommended action</h2>
 
-Developers and administrators implementing NAT-PMP should exercise care to ensure 
-that devices are configured securely, specifically that
+<p>Developers and administrators implementing NAT-PMP should exercise care to ensure 
+that devices are configured securely, specifically that</p>
 
 - the LAN and WAN interfaces are correctly assigned,
 - NAT-PMP requests are only accepted on internal interfaces, and

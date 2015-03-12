@@ -1,57 +1,57 @@
 <h2>What is an 'Open MongoDB Server'?</h2>
 
-MongoDB is a cross-platform document-oriented database. Classified as a NoSQL 
+<p>MongoDB is a cross-platform document-oriented database. Classified as a NoSQL 
 database, MongoDB eschews the traditional table-based relational database 
 structure in favor of JSON-like documents with dynamic schemas (MongoDB calls 
 the format BSON), making the integration of data in certain types of 
-applications easier and faster.
+applications easier and faster.</p>
 
 <h2>Why would this be bad?</h2>
 
-You system is have a MongoDB NoSQL database (see www.mongodb.org for more 
+<p>Your system has a MongoDB NoSQL database (see www.mongodb.org for more 
 information) running which is accessible on the internet. While authentication 
-is available for MongoDB, in many instances this authentication is not enabled.
+is available for MongoDB, in many instances this authentication is not enabled.</p>
 
-This enables an attacker, without circumventing any security measures, to get 
+<p>This enables an attacker, without circumventing any security measures, to get 
 read-and-write access to these databases, many of which contain sensitive 
-customer data or live backends of Web shops
+customer data or live backends of Web shops</p>
 
 <h2>Recommended action</h2>
 
-Either bind this service only to non-public facing connections or add a firewall 
-to block the port MongoDB is running on.
+<p>Either bind this service only to non-public facing connections or add a firewall 
+to block the port MongoDB is running on.</p>
 
 <h2>Tips to resolve this matter</h2>
 
-The MongoDB service default configuration enables local access only. Its main 
+<p>The MongoDB service default configuration enables local access only. Its main 
 configuration file is usually found at:
 
 Linux: /etc/mongodb.conf
 
 BSD: /usr/local/etc/mongodb.conf
 
-Windows: no default path; usually assigned on setup
+Windows: no default path; usually assigned on setup</p>
 
-Many precompiled packages of MongoDB already ship with a default configuration 
+<p>Many precompiled packages of MongoDB already ship with a default configuration 
 that binds the service after its installation only to localhost:
 
 bindIp: 127.0.0.1
-port: 27017
+port: 27017</p>
 
-This allows access from services running on the same physical or virtual host 
+<p>This allows access from services running on the same physical or virtual host 
 and denies everything else. No other security feature like traffic encryption 
 or access control is enabled by default. This configuration is acceptable, if 
 the use-case scenario includes only services that need to access MongoDB from 
-the same host as the database service.
+the same host as the database service.</p>
 
-However, a common setup and scalable solution for most Internet services is to 
+<p>However, a common setup and scalable solution for most Internet services is to 
 have a database server running on one physical machine, while the services 
 using this database service are (often virtualized) running on another machine. 
 In this case, the easiest solution is to comment out the flag 'bind.ip = 
 127.0.0.1' or to remove it completely, which defaults to accepting all network
 connections to the database. If access is possible from untrusted machines 
 (e.g., from the Internet) outside the trusted network, it is crucial to also 
-set up transfer encryption and proper access control.
+set up transfer encryption and proper access control.</p>
 
 <h2>Getting more information</h2>
 
