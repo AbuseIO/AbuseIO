@@ -4,6 +4,8 @@ function csv_to_array($file) {
     $row = 1;
     if (($handle = fopen($file, "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+			// Skip empty csv rows
+			if ($data[0] == NULL) continue;
             if ($row === 1) {
                 $headers = $data;
                 $magic   = count($data);
