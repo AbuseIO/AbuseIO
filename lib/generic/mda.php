@@ -81,28 +81,10 @@ function receive_mail($call) {
         foreach($structure->parts as $part){
             if (isset($part->disposition) && $part->disposition=='attachment'){
                 $i++;
-                $attachment_path = "${message_store}/${i}/";
-                $attachment_file = $attachment_path . $part->d_parameters['filename'];
-
-                if (!mkdir($attachment_path, 0777, true)) {
-                    //FATAL ERROR LOG - Failed to create message store
+                $attachment_file = "${message_store}/${i}/" . $part->d_parameters['filename'];
+                if ($saved_file = save_attachment($part->headers['content-type'], $attachment_file, $part->body)) {
+                    $attachments[$i] = $saved_file;
                 }
-
-                file_put_contents($attachment_file, $part->body);
-                if (substr($part->d_parameters['filename'], -4, 4) == ".zip") {
-                    $zip = new ZipArchive;
-                    if (true === $zip->open($attachment_file)) {
-                        $filename = $zip->getNameIndex('0');
-                        $zip->extractTo($attachment_path, array($zip->getNameIndex('0')));
-                        unlink($attachment_file);
-                    } else {
-                        //FATAL ERROR LOG - ERROR PARSING
-                    }
-                    $attachments[$i] = substr($part->d_parameters['filename'], 0, -4);
-                } else {
-                    $attachments[$i] = $part->d_parameters['filename'];
-                }
-
             } elseif (isset($part->headers['content-type']) && strpos($part->headers['content-type'], "message/feedback-report") !== false) {
                 // This is a ARF report feedback
                 $arf['report'] = $part->body;
@@ -124,30 +106,32 @@ function receive_mail($call) {
                     if(strpos($sp->headers['content-type'],'text/plain')!==false){
                         $plain .= $sp->body;
                     }
+                    // Plain html we just add to the body
                     if(strpos($sp->headers['content-type'],'text/html')!==false){
                         $html .= $sp->body;
+                    }
+                    // Save attachments
+                    if(isset($sp->disposition) && $sp->disposition=='attachment'){
+						$i++;
+                        $attachment_file = "${message_store}/${i}/". $sp->d_parameters['filename'];
+                        if ($saved_file = save_attachment($sp->headers['content-type'], $attachment_file, $sp->body)) {
+                            $attachments[$i] = $saved_file;
+                        }
                     }
                 }
 
             } elseif (isset($part->headers['content-type'])) {
                 if (strpos($part->headers['content-type'],'name=')!==false){
                     // This is a mime multipart attachment!
-                    $i++;
-
                     $regex = "name=\"(.*)\"";
                     preg_match("/${regex}/m", $part->headers['content-type'], $match);
                     if (count($match) === 2) {
+                        $i++;
                         $filename = $match[1];
-                        $attachment_path = "${message_store}/${i}/";
-                        $attachment_file = $attachment_path . $filename;
-
-                        if (!mkdir($attachment_path, 0777, true)) {
-                            //FATAL ERROR LOG - Failed to create message store
+                        $attachment_file = "${message_store}/${i}/" . $filename;
+                        if ($saved_file = save_attachment($part->headers['content-type'], $attachment_file, $part->body)) {
+                            $attachments[$i] = $saved_file;
                         }
-
-                        file_put_contents($attachment_file, $part->body);
-                        $attachments[$i] = $filename;
-
                     } else {
                         logger(LOG_ERR, "Unknown mime type in parsing e-mail");
                         return false;
@@ -160,6 +144,7 @@ function receive_mail($call) {
                     logger(LOG_ERR, "Unknown content type in parsing e-mail");
                     return false;
                 }
+
             } else {
                 $plain .= $part->body;
             }
@@ -192,4 +177,45 @@ function receive_mail($call) {
     return $message;
 }
 
+/*
+** Function: save_attachment
+** Parameters:
+**  type (string): The mime type of the file
+**	file (string): The absolute filepath
+**	body (string): The contents of the file
+** Returns: The function will return the filename or FALSE when failed to save the file.
+**
+** Note: You can add more actions for specific file types
+*/
+function save_attachment($type, $file, $body) {
+    $attachment_path = dirname($file);
+    if (!file_exists($attachment_path) && !mkdir($attachment_path, 0777, true)) {
+        logger(LOG_ERR, "Error creating message store ${attachment_path}");
+    }
+
+    // Save attachment
+    if(!file_put_contents($file, $body)) {
+        logger(LOG_ERR, "Error saving attachment ${file}");
+        return false;
+    }
+
+    switch ($type) {
+        case 'application/zip':
+        case 'multipart/x-zip':
+            // extract zip file
+            $zip = new ZipArchive;
+            if (true === $zip->open($file)) {
+                $zip->extractTo($attachment_path, array($zip->getNameIndex('0')));
+                unlink($file);
+                return substr(basename($file), 0, -4);
+            } else {
+                logger(LOG_ERR, "Error extracting zip file to ${attachment_path}");
+                return false;
+            }
+            break;
+        default:
+            break;
+    }
+    return basename($file);
+}
 ?>
