@@ -1,0 +1,74 @@
+#!/usr/bin/php
+<?php
+/*
+    This scanner can scan ASn or filelists using DNS or zonefiles(if you have that service)
+*/
+$asn     = '12859';
+
+// If argument is --as $number we collect all the target ranges of that ASN using ASCC
+
+$dns = dns_get_record("as${asn}.ascc.dnsbl.bit.nl", DNS_TXT);
+foreach($dns as $key => $entry) {
+    $iplist[] = $entry['entries'][0];
+} 
+
+// If the argument is --ipfile $file we read the list of targets from file
+
+// If the argument is --zonefile $file we dont query DNS but parse the DNS zone
+
+
+foreach($iplist as $netblock) {
+    if(strpos("/", $netblock) !== true) {
+        // Single IP's we prefix as /32
+        $netblock .= "/32";
+    }
+
+    $split     = explode("/", $netblock);
+    //TODO check split[0] for valid IP first
+    $startstop = iprange($split[0], $split[1]);
+
+    $netblocks[$netblock]['range']      = $split[0];
+    $netblocks[$netblock]['netmask']    = $split[1];
+    $netblocks[$netblock]['begin']      = $startstop['first_ip'];
+    $netblocks[$netblock]['end']        = $startstop['last_ip'];
+}
+unset($iplist);
+
+print_r($netblocks);
+
+function walk_range($netblock) {
+
+}
+
+function parse_zonefile($file) {
+    $regexp = "";
+    $handle = @popen("cat ${file}", "r");
+    if ($handle) {
+        while (!feof($handle)) {
+            $line = str_replace("\n","",fgets($handle, 4096));
+            $ip = filter_var($line, FILTER_VALIDATE_IP);
+            $iplong = ip2long($ip);
+
+            foreach($netblocks as $netblock => $info) {
+                if ($iplong > $info['begin'] && $iplong < $info['end']) {
+                       echo "$ip is listed on $rbl" . PHP_EOL;
+                }
+            }
+
+        }
+    }
+    pclose($handle);
+}
+
+function iprange($range_ip, $range_cidr) {   
+    $corr       = (pow(2,32)-1)-(pow(2,32-$range_cidr)-1);
+    $first      = ip2long($range_ip) & ($corr);
+    $length     = pow(2,32-$range_cidr)-1;
+
+    return array(
+               'first_ip'=>$first,
+               'last_ip'=>$first+$length
+               );
+}
+
+?>
