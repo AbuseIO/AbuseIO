@@ -8,7 +8,7 @@ if (empty($_GET['id']) || !is_numeric($_GET['id'])) {
     die();
 }
 
-if ($isset($_GET['lang']) && strlen($_GET['lang']) == 2){
+if (isset($_GET['lang']) && strlen($_GET['lang']) == 2){
     $infolang = $_GET['lang'];
 } else {
     $infolang = 'en';
