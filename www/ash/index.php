@@ -5,6 +5,12 @@ if (empty($_GET['id']) || empty($_GET['token']) || !is_numeric($_GET['id'])) {
     die('<h2>401 - Unauthorized</h2>');
 }
 
+if ($isset($_GET['lang']) && strlen($_GET['lang']) == 2){
+    $infolang = $_GET['lang'];
+} else {
+    $infolang = 'en';
+}
+
 $report = reportGet($_GET['id']);
 $token  = md5("${report['ID']}${report['IP']}${report['Class']}");
 
@@ -94,7 +100,7 @@ $labelClass = array(
         </div>
 
         <?php
-        $infotext = "infotext/".str_replace(" ", "_", $report['Class']).".html";
+        $infotext = "infotext/${infolang}".str_replace(" ", "_", $report['Class']).".html";
         if (file_exists($infotext)) {
             echo '<div style="padding-top: 1em;">';
             include($infotext);
