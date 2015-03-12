@@ -8,6 +8,12 @@ if (empty($_GET['id']) || !is_numeric($_GET['id'])) {
     die();
 }
 
+if ($isset($_GET['lang']) && strlen($_GET['lang']) == 2){
+    $infolang = $_GET['lang'];
+} else {
+    $infolang = 'en';
+}
+
 $title = 'Ticket '.$_GET['id'];
 
 if(isset($_GET['action']) && $_GET['action'] == 'Notify' && is_numeric($_GET['id'])) {
@@ -217,7 +223,7 @@ if(isset($PostMessage)) {
 ?>
 
 <?php
-$infotext = "../ash/infotext/".str_replace(" ", "_", $report['Class']).".html";
+$infotext = "../ash/infotext/".$infolang.str_replace(" ", "_", $report['Class']).".html";
 if (file_exists($infotext)) {
     echo '<div style="padding: 1em 0 2em;">';
     include($infotext);
