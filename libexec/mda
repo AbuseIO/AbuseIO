@@ -33,6 +33,7 @@ $parserMap = array(
     '/abuse-reports@cyscon.de/'             => 'cyscon',
     '/takedown-response.*@netcraft.com/'    => 'netcraft',
     '/noreply@spamlogin.com/'               => 'spamexperts',
+    '/reports@reports.abusehub.nl/'         => 'abusehub',
 );
 
 // Maps regular expressions to match body to the corresponding parser in case from matching failed
