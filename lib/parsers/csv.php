@@ -1,5 +1,10 @@
 <?php
 function csv_to_array($file) {
+    if(!is_file($file)) {
+        logger(LOG_ERR, __FUNCTION__ . " file ${file} used for CSV parsing does not exist");
+        return false;
+    }
+
     $array = array();
     $row = 1;
     if (($handle = fopen($file, "r")) !== FALSE) {
