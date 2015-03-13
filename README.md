@@ -31,7 +31,27 @@ Some additional packages are required:
 
 * yum install php-cli php-mysql php-pear-Mail-mimeDecode
 
-### Configuration
+### Configurationa
+
+ - Setup your DNS:
+
+    for example like:
+
+    abuseio.isp.tld IN A 10.0.0.1
+    mx.isp.tld IN A 10.0.0.1
+    abuseio.isp.tld IN MX 100 mx.isp.tld.
+    admin.abuseio.isp.tld IN CNAME abuseio.isp.tld.
+    ash.abuseio.isp.tld IN CNAME abuseio.isp.tld.
+    rpc.abuseio.isp.tld IN CNAME abuseio.isp.tld.
+
+    your servername would be abuseio.isp.tld under IP 10.0.0.1. The MX record is important! It will allow you
+    to forward email directly into AbuseIO for parsing.
+
+ - Setup your apache configuration
+
+    admin.abuseio.isp.tld -> /opt/abuseio/www/admin (pw / ip acl protected!)
+    ash.abuseio.isp.tld   -> /opt/abuseio/www/ash
+    rpc.abuseio.isp.tld   -> /opt/abuseio/www/rpc
 
  - Set permissions:
 
@@ -79,17 +99,32 @@ poll myserver.com proto imap
 AbuseIO will process all (new) mails from this mailbox. If parsing succeeds fetchmail will mark the mail as read. If the mail cannot be parsed by AbuseIO, fetchmail will not touch the email.
 If you want to re-process an abuse report, simply mark the abuse email as (new) and run fetchmail again.
 
-#### Option 2: Hook up your MTA directly to AbuseIO
+#### Option 2: Hook up your MTA directly to AbuseIO (Best way)
+
+Make sure you configured DNS correctly. The delivery address for abuse mails to be parsed would be notifier@isp.tld
 
 Simply add the following line to your /etc/aliases file to enable email delivery directly to AbuseIO:
 
-    abuse: |"/path/to/libexec/mda"
+    notifier: |"/path/to/libexec/mda"
+
+    example:
+
+    notifier: | "php -q /opt/abuseio/libexec/mda"
 
 (Do not forget to run the newaliases command to inform your MTA that the aliases file has been updated.)
 
-After that you will need to forward either abuse@isp.tld to abuse@abuseio.isp.tld so that incoming e-mails are redirected to AbuseIO. In addition a lot of feeds
-have the option to deliver on a custom address. Using addresses like spamcop-abuse@isp.tld and forwardding them to abuse@abuseio.isp.tld will give you more control to
-enable or disable individual feeds.
+After that you will need to forward either abuse@isp.tld to abuse@abuseio.isp.tld so that incoming e-mails 
+are redirected to AbuseIO. In addition a lot of feeds have the option to deliver on a custom address. Using 
+addresses like spamcop-abuse@isp.tld and forwardding them to abuse@abuseio.isp.tld will give you more control 
+to enable or disable individual feeds.
+
+for example:
+
+    alias spamcop@isp.tld deliver to abuse@isp.tld AND notifier@abusio.isp.tld
+    alias shadowserver@isp.tld deliver to abuse@isp.tld AND notifier@abusio.isp.tld
+    alias netcraft@isp.tld deliver to abuse@isp.tld AND notifier@abusio.isp.tld
+    alias csirt@isp.tld deliver to abuse@isp.tld AND notifier@abusio.isp.tld
+    alias spamexperts@isp.tld deliver to abuse@isp.tld AND notifier@abusio.isp.tld
 
 ## Note on Patches/Pull Requests
 
