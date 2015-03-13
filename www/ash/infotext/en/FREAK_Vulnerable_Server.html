@@ -1,0 +1,46 @@
+<h2>What is a 'FREAK Vulnarable Server'?</h2>
+
+<p>Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK 
+attack. Using Internet-wide scanning, we have been performing daily tests of all 
+HTTPS servers at public IP addresses to determine whether they allow this weakened 
+encryption. More than a third of all servers with browser-trusted certificates are 
+at risk.</p>
+
+<h2>Why would this be bad?</h2>
+
+<p>Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK 
+attack. The FREAK attack is possible when a vulnerable browser connects to a 
+susceptible web server—a server that accepts “export-grade” encryption.</p>
+
+<p>It allows an attacker to intercept HTTPS connections between vulnerable clients and 
+servers and force them to use weakened encryption, which the attacker can break to 
+steal or manipulate sensitive data. </p>
+
+<p>The factoring of such 512-bit export keys can be done with a cluster of EC2 virtual 
+servers, and can be done in about 7.5 hours for $104 in EC2 time. The attacker 
+factors the RSA modulus to recover the corresponding RSA decryption key. When the 
+client encrypts the 'pre-master secret' to the server, the attacker can now decrypt 
+it to recover the TLS 'master secret'. From here on out, the attacker sees plaintext 
+and can inject anything it wants.</p>
+
+<h2>Recommended action</h2>
+
+<p>You should immediately disable support for TLS export cipher suites. While you’re 
+at it, you should also disable other cipher suites that are known to be insecure 
+and enable forward secrecy. For instructions on how to secure popular HTTPS server 
+software, we recommend Mozilla’s 
+<a href="https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations">security configuration guide</a> 
+and their <a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/">SSL configuration generator</a>. 
+We also recommend testing your configuration with the Qualys SSL Labs 
+<a href="https://www.ssllabs.com/ssltest/">SSL Server Test</a> tool.</p>
+
+<h2>Tips how to resolve this matter</h2>
+
+<p>With apache server add the following to your SSL section(s):
+
+SSLCipherSuite ALL:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK</p>
+
+<h2>Getting more information</h2>
+
+<a href='https://freakattack.com/'>Tracking the FRAEK Attack</a><br>
+

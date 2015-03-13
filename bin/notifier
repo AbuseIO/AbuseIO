@@ -4,7 +4,7 @@ include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
 
 $filter = array(
                 'All'       => true,
-                'Days'      => 3
+                'Days'      => 30
                );
 
 if(null !== NOTIFICATIONS_MIN_LASTSEEN) {
