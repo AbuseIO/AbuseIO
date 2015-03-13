@@ -206,7 +206,7 @@ function save_attachment($file, $body) {
             // extract zip file
             $zip = new ZipArchive;
             if (true === $zip->open($file)) {
-                $zip->extractTo($attachment_path, array($zip->getNameIndex('0')));
+                $zip->extractTo($file_info['dirname'], array($zip->getNameIndex('0')));
                 unlink($file);
                 return $file_info['filename'];
             } else {
