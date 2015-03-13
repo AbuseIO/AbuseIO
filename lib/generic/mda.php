@@ -76,13 +76,14 @@ function receive_mail($call) {
     if (isset($structure->body)) {
         $plain .= $structure->body;
     }
+
     if(isset($structure->parts)){
         $message_store = APP.'/tmp/'.substr( md5(rand()), 0, 8);
         foreach($structure->parts as $part){
             if (isset($part->disposition) && $part->disposition=='attachment'){
                 $i++;
                 $attachment_file = "${message_store}/${i}/" . $part->d_parameters['filename'];
-                if ($saved_file = save_attachment($part->headers['content-type'], $attachment_file, $part->body)) {
+                if ($saved_file = save_attachment($attachment_file, $part->body)) {
                     $attachments[$i] = $saved_file;
                 }
             } elseif (isset($part->headers['content-type']) && strpos($part->headers['content-type'], "message/feedback-report") !== false) {
@@ -114,7 +115,7 @@ function receive_mail($call) {
                     if(isset($sp->disposition) && $sp->disposition=='attachment'){
 						$i++;
                         $attachment_file = "${message_store}/${i}/". $sp->d_parameters['filename'];
-                        if ($saved_file = save_attachment($sp->headers['content-type'], $attachment_file, $sp->body)) {
+                        if ($saved_file = save_attachment($attachment_file, $sp->body)) {
                             $attachments[$i] = $saved_file;
                         }
                     }
@@ -129,7 +130,7 @@ function receive_mail($call) {
                         $i++;
                         $filename = $match[1];
                         $attachment_file = "${message_store}/${i}/" . $filename;
-                        if ($saved_file = save_attachment($part->headers['content-type'], $attachment_file, $part->body)) {
+                        if ($saved_file = save_attachment($attachment_file, $part->body)) {
                             $attachments[$i] = $saved_file;
                         }
                     } else {
@@ -187,9 +188,9 @@ function receive_mail($call) {
 **
 ** Note: You can add more actions for specific file types
 */
-function save_attachment($type, $file, $body) {
-    $attachment_path = dirname($file);
-    if (!file_exists($attachment_path) && !mkdir($attachment_path, 0777, true)) {
+function save_attachment($file, $body) {
+    $file_info = pathinfo($file);
+    if (!file_exists($file_info['dirname']) && !mkdir($file_info['dirname'], 0777, true)) {
         logger(LOG_ERR, "Error creating message store ${attachment_path}");
     }
 
@@ -199,17 +200,17 @@ function save_attachment($type, $file, $body) {
         return false;
     }
 
-    switch ($type) {
-        case 'application/zip':
-        case 'multipart/x-zip':
+    // We can't rely on mime-type, so we'll grab the extension so we work from there
+    switch ($file_info['extension']) {
+        case 'zip':
             // extract zip file
             $zip = new ZipArchive;
             if (true === $zip->open($file)) {
                 $zip->extractTo($attachment_path, array($zip->getNameIndex('0')));
                 unlink($file);
-                return substr(basename($file), 0, -4);
+                return $file_info['filename'];
             } else {
-                logger(LOG_ERR, "Error extracting zip file to ${attachment_path}");
+                logger(LOG_ERR, "Error extracting zip file to ". $file_info['dirname']);
                 return false;
             }
             break;
