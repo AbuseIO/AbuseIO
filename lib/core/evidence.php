@@ -1,6 +1,36 @@
 <?php
+/******************************************************************************
+* AbuseIO 3.0
+* Copyright (C) 2015 AbuseIO Development Team (http://abuse.io)
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software Foundation
+* Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+*******************************************************************************
+*
+* Core evidence related functions
+*
+******************************************************************************/
+
+
 /*
-    Function description
+** Function: evidenceStore
+** Parameters: 
+**  sender(string):
+**  subject(string):
+**  data(string): The raw EML formatted message
+** Returns: 
+**  (int): mysql insert ID
 */
 function evidenceStore($sender, $subject, $data) {
     $query = "INSERT INTO Evidence (
@@ -20,7 +50,12 @@ function evidenceStore($sender, $subject, $data) {
 
 
 /*
-    Function description
+** Function: evidenceLink 
+** Parameters: 
+**  evidenceID(int):
+**  reportID(int):
+** Returns: 
+**  (int): mysql insert ID
 */
 function evidenceLink($evidenceID, $reportID) {
     if(!is_numeric($evidenceID) || !is_numeric($reportID)) {
@@ -36,7 +71,11 @@ function evidenceLink($evidenceID, $reportID) {
 
 
 /*
-    Function description
+** Function: evidenceList
+** Parameters: 
+**  ticket(int): List all evidence related to a ticket no#
+** Returns: 
+**  (array): All mysql rows with evidence
 */
 function evidenceList($ticket) {
     if(!is_numeric($ticket)) {
@@ -55,7 +94,11 @@ function evidenceList($ticket) {
 
 
 /*
-    Function description
+** Function: evidenceGet
+** Parameters: 
+**  id(int): 
+** Returns: 
+**  (array): All mysql rows with evidence
 */
 function evidenceGet($id) {
     $reports = array();

@@ -1,9 +1,43 @@
 <?php
+/******************************************************************************
+* AbuseIO 3.0
+* Copyright (C) 2015 AbuseIO Development Team (http://abuse.io)
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software Foundation
+* Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+*******************************************************************************
+*
+* Core reporting / event handling related functions
+*
+******************************************************************************/
+
 /*
-    Function description
+** Function: reportAdd
+** Parameters: 
+**  report(array):
+**   source(string)
+**   ip(string)
+**   class(string)
+**   type(string)
+**   timestamp(int)
+**   information(array)
+**   customer(array): optional
+** Returns: 
+**  (int): mysql insert ID on success
+**  (boolean): on failure
 */
 function reportAdd($report) {
-    // Array should minimally contain $source(string), $ip(string), $class(string), $type(string), $timestamp(int), $information(array)
     if (!is_array($report)) {
         return false;
     } else {
@@ -149,7 +183,11 @@ function reportAdd($report) {
 
 
 /*
-    Function description
+** Function: reportList
+** Parameters: 
+**  filter(string): SQL WHERE Condition
+** Returns: 
+**  (array): MySQL rows with fields
 */
 function reportList($filter) {
     $reports = array();
@@ -161,7 +199,11 @@ function reportList($filter) {
 
 
 /*
-    Function description
+** Function: reportCount
+** Parameters: 
+**  filter(string): SQL WHERE Condition
+** Returns:
+**  (int): mysql row count
 */
 function reportCount($filter) {
     $reports = array();
@@ -173,7 +215,11 @@ function reportCount($filter) {
 
 
 /*
-    Function description
+** Function: reportGet
+** Parameters: 
+**  id(int): Report.ID
+** Returns: 
+**  (array)
 */
 function reportGet($id) {
     $reports = array();
@@ -196,7 +242,11 @@ function reportGet($id) {
 
 
 /*
-    Function description
+** Function: reportSummary
+** Parameters: 
+**  period(int):
+** Returns: 
+**  (array): MySQL rows with fields
 */
 function reportSummary($period) {
     $summary = array();
@@ -211,9 +261,12 @@ function reportSummary($period) {
 
 
 /*
-    Function description
-
-    accepts only timestamp as argument now
+** Description: return an array with every IP there are reports for within a period
+** Function: reportIps
+** Parameters: 
+**  period(int): timestamp
+** Returns: 
+**  (array)
 */
 function reportIps($period) {
     $summary = array();
@@ -231,7 +284,9 @@ function reportIps($period) {
 
 
 /*
-    Function description
+** Function: reportMerge
+** Parameters: 
+** Returns: 
 */
 function reportMerge() {
 
@@ -239,7 +294,11 @@ function reportMerge() {
 
 
 /*
-    Function description
+** Function: reportResolved
+** Parameters: 
+**  ticket(int):
+** Returns: 
+**  (boolean):
 */
 function reportResolved($ticket) {
     if(!is_numeric($ticket)) {
@@ -255,7 +314,11 @@ function reportResolved($ticket) {
 
 
 /*
-    Function description
+** Function: reportIgnored
+** Parameters: 
+**  ticket(int):
+** Returns:
+**  (boolean):
 */
 function reportIgnored($ticket) {
     if(!is_numeric($ticket)) {
@@ -271,7 +334,11 @@ function reportIgnored($ticket) {
 
 
 /*
-    Function description
+** Function: reportClosed
+** Parameters:
+**  ticket(int):
+** Returns:
+**  (boolean):
 */
 function reportClosed($ticket) {
     if(!is_numeric($ticket)) {
@@ -288,9 +355,12 @@ function reportClosed($ticket) {
 
 
 /*
-    Function description
-    Do some housekeeping on reports, like closing old tickets or merging
-    based on the etc/settings configuration
+** Description: Do some housekeeping on reports, like closing old tickets or merging
+**              based on the etc/settings configuration
+** Function: reportHousekeeping
+** Parameters: None
+** Returns: 
+**  (boolean):
 */
 function reportHousekeeping() {
     $filter  = "";
@@ -308,9 +378,12 @@ function reportHousekeeping() {
 }
 
 
-
 /*
-    Function description
+** Function: ReportContactupdate
+** Parameters:
+**  ticket(int):
+** Returns:
+**  (boolean):
 */
 function ReportContactupdate($ticket) {
     if(!is_numeric($ticket)) {
@@ -335,7 +408,11 @@ function ReportContactupdate($ticket) {
 
 
 /*
-    Function description
+** Function: reportNotified
+** Parameters:
+**  ticket(int):
+** Returns:
+**  (boolean):
 */
 function reportNotified($ticket) {
     if(!is_numeric($ticket)) {
@@ -355,24 +432,17 @@ function reportNotified($ticket) {
 
 
 /*
-    Function description sends out notifications based on a filter (array):
-
-$filter = array(
-                // Send out for a specific ticket
-                'Ticket'    => '4411',
-
-                // Send out for a specific IP
-                'IP'        => '1.1.1.1',
-
-                // Send out for a specific customer
-                'Customer'  => 'UNDEF',
-
-                // Send out everthing thats considered unhandled
-                'All'       => true,
-
-                // How many days to look back (don't notify about old obsolete reports)
-                'Days'      => 3
-               );
+** Description: sends out notifications based on a filter
+** Function: reportSend
+** Parameters: 
+**  filter(array): (with one of the following elements:)
+**   Ticket(int):       Send out for a specific ticket
+**   IP(string):        Send out for a specific IP
+**   Customer(string):  Send out for a specific customer
+**   All(boolean):      Send out everthing thats considered unhandled
+**   Days(int):         Optional addition a limition of amount of days in the past
+** Returns: 
+**  (boolean):
 */
 function reportSend($filter) {
 
@@ -508,7 +578,11 @@ function reportSend($filter) {
 
 
 /*
-    Function description
+** Function: reportNotification
+** Parameters: 
+**  filter(string): SQL WHERE Condition
+** Returns: 
+**  (array): Mysql rows with fields
 */
 function reportNotification($filter) {
     // First we will create an selection

@@ -1,18 +1,45 @@
 <?php
+/******************************************************************************
+* AbuseIO 3.0
+* Copyright (C) 2015 AbuseIO Development Team (http://abuse.io)
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software Foundation
+* Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+*******************************************************************************
+*
+* If you enable the custom_customer_resolving you will need to expand this 
+* function so it will output the correct data. Note that local database 
+* resolving (customer table) always takes precidence over this function and was
+* meant for a local override.
+*
+* If you want to use subfunctions you will need to prefix them with custom_ to
+* prevent clashes.
+*
+******************************************************************************/
+
+
 /*
-If you enable the custom_customer_resolving you will need to expand this function
-so it will output the correct data. Note that local database resolving (customer table)
-always takes precidence over this function and was meant for a local override.
-
-If you want to use subfunctions you will need to prefix them with custom_ to 
-prevent clashes.
-
+** Function: custom_find_customer_by_ip EXAMPLE 1
+** Parameters:
+**  ip (string): a valid IP address 
+** Returns: 
+**  customer(array): a set of customer values with required values
+**   Code(string): The customer id code
+**   Name(string): The customer name
+**   Contact(string): The customer e-mail contacts using a comma (,) seperator without spaces
+**   AutoNotify(boolean): Wither the customer is allowed to receive automated notifications
 */
-
-*/
-
-Example 1: Using static data
-
 function custom_find_customer_by_ip($IP) {
     if(!isset($IP) || !valid_ip($IP) || strlen($IP) < 4){
         return false;
@@ -29,6 +56,17 @@ function custom_find_customer_by_ip($IP) {
 }
 
 
+/*
+** Function: custom_find_customer_by_code EXAMPLE 1
+** Parameters:
+**  code (string): a valid IP address
+** Returns:
+**  customer(array): a set of customer values with required values
+**   Code(string): The customer id code
+**   Name(string): The customer name
+**   Contact(string): The customer e-mail contacts using a comma (,) seperator without spaces
+**   AutoNotify(boolean): Wither the customer is allowed to receive automated notifications
+*/
 function custom_find_customer_by_code($Code) {
     $customer = array(
                         'Code'      => 'ACME',
@@ -40,12 +78,20 @@ function custom_find_customer_by_code($Code) {
     return $customer;
 }
 
+
+/*
+** Function: custom_find_customer_by_ip EXAMPLE 2 - Using remote REST API
+** Parameters:
+**  ip (string): a valid IP address
+** Returns:
+**  customer(array): a set of customer values with required values
+**   Code(string): The customer id code
+**   Name(string): The customer name
+**   Contact(string): The customer e-mail contacts using a comma (,) seperator without spaces
+**   AutoNotify(boolean): Wither the customer is allowed to receive automated notifications
 */
 
 /*
-
-Example 2: Using remote REST API
-
 {
   "email_contacts": [
     "foo@bar",

@@ -27,3 +27,8 @@ COLLECTOR_SNDS_ENABLED = false                  ; enable the Microsoft SNDS repo
 COLLECTOR_SNDS_KEY = xxxxxxxxxxxxxxxxxxxxxxx    ; specify key to be able to fetch reports from Microsoft SNDS (https://postmaster.live.com/snds/)
 COLLECTOR_OSINT_ENABLED = false                 ; enable the Bambenek reports collector
 COLLECTOR_RBLSCAN_ENABLED = true                ; enable the scanning of RBL's of IP's that have been reported recently
+
+#ABUSEHUB_DEFAULTTYPE =                         ; Report type (default: INFO)
+#ABUSEHUB_FEED_IGNORE =                         ; What feeds to ignore (default: none)
+#ABUSEHUB_FEED_ABUSE =                          ; What feeds to mark as 'ABUSE' (default: none)
+#ABUSEHUB_FEED_INFO =                           ; What feeds to mark as 'INFO' (default: none)

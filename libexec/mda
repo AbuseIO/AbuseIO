@@ -1,5 +1,32 @@
 #!/usr/bin/php
 <?php
+/******************************************************************************
+* AbuseIO 3.0
+* Copyright (C) 2015 AbuseIO Development Team (http://abuse.io)
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software Foundation
+* Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+*******************************************************************************
+*
+* The MDA functions will handle the interactions between a delevering MTA and
+* the AbuseIO core. It uses a general MDA parser to process the received e-mail
+* in combination with a parser- and body map to call the required parser
+*
+* Usage: cat(pipe) a valid EML formatted e-mail to the MDA to parse the e-mail
+*
+******************************************************************************/
+
 include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
 
 $message = receive_mail(array('type' => 'EXTERNAL'));
@@ -78,44 +105,6 @@ if ($parser_func($message)) {
     exit(0);
 } else {
     bounce($message);
-}
-
-function bounce($message) {
-    logger(LOG_WARNING, "Attempting to bounce message to admin because i was unabled to parse it");
-
-    $tempfile = "/tmp/" . mt_rand();
-    file_put_contents($tempfile, $message['raw']);
-
-    $bodytext  = "AbuseIO tried to parse a message, however was not able to.\n";
-    if(!empty($message['from'])) {
-        $bodytext .= "\nfrom: ${message['from']}\n";
-    }
-    if(!empty($message['subject'])) {
-        $bodytext .= "\nsubject: ${message['subject']}\n";
-    }
-    $bodytext .= "\nYou will find the EML attached.\n";
-
-    $email = new PHPMailer();
-    $email->From      = NOTIFICATIONS_FROM_ADDRESS;
-    $email->FromName  = NOTIFICATIONS_FROM_NAME;
-    $email->Subject   = 'AbuseIO failed parsing attempt';
-    $email->Body      = $bodytext;
-    $email->AddAddress( FALLBACK_MAIL );
-
-
-    $file_to_attach = 'PATH_OF_YOUR_FILE_HERE';
-
-    $email->AddAttachment( $tempfile , 'bounce.eml' );
-
-    if(!$email->Send()) {
-        logger(LOG_ERR, "Bouncing to " . FALLBACK_MAIL . " failed.");
-        exit(1);
-
-    } else {
-        logger(LOG_WARNING, "Bounced to " . FALLBACK_MAIL . " successfully.");
-        exit(0);
-
-    }
 }
 
 ?>

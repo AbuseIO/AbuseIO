@@ -1,9 +1,33 @@
 <?PHP
+/******************************************************************************
+* AbuseIO 3.0
+* Copyright (C) 2015 AbuseIO Development Team (http://abuse.io)
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software Foundation
+* Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+*******************************************************************************
+*
+* This include file contains functions to handle interactions from a MTA
+*
+******************************************************************************/
+
 /*
-This include file contains functions to handle interactions from a MTA
-
+** Function: delete_store
+** Parameters:
+**  message (array): The full message dataset returned from receive_mail function
+** Returns: Nothing
 */
-
 function delete_store($message) {
     if (isset($message['attachments']) && is_array($message['attachments'])) {
         foreach($message['attachments'] as $id => $attachment) {
@@ -16,6 +40,14 @@ function delete_store($message) {
     }
 }
 
+/*
+** Function: receive_mail
+** Parameters:
+**  call (array): 
+**   type (string): required to be INTERNAL (using a passed along mail) or EXTERNAL (using STDIN)
+**   message (string): required when type is EXTERNAL and should contain a full raw email (EML)
+** Returns: The function will a direct exit value to the MTA either accepting or cancelling the message
+*/
 function receive_mail($call) {
     require_once 'Mail/mimeDecode.php';
 
@@ -218,5 +250,50 @@ function save_attachment($file, $body) {
             break;
     }
     return basename($file);
+}
+
+
+/*
+** Function: bounce
+** Parameters:
+**  message (array): The full message dataset returned from receive_mail function
+** Returns: The function will a direct exit value to the MTA either accepting or cancelling the message
+*/
+function bounce($message) {
+    logger(LOG_WARNING, "Attempting to bounce message to admin because i was unabled to parse it");
+
+    $tempfile = "/tmp/" . mt_rand();
+    file_put_contents($tempfile, $message['raw']);
+
+    $bodytext  = "AbuseIO tried to parse a message, however was not able to.\n";
+    if(!empty($message['from'])) {
+        $bodytext .= "\nfrom: ${message['from']}\n";
+    }
+    if(!empty($message['subject'])) {
+        $bodytext .= "\nsubject: ${message['subject']}\n";
+    }
+    $bodytext .= "\nYou will find the EML attached.\n";
+
+    $email = new PHPMailer();
+    $email->From      = NOTIFICATIONS_FROM_ADDRESS;
+    $email->FromName  = NOTIFICATIONS_FROM_NAME;
+    $email->Subject   = 'AbuseIO failed parsing attempt';
+    $email->Body      = $bodytext;
+    $email->AddAddress( FALLBACK_MAIL );
+
+
+    $file_to_attach = 'PATH_OF_YOUR_FILE_HERE';
+
+    $email->AddAttachment( $tempfile , 'bounce.eml' );
+
+    if(!$email->Send()) {
+        logger(LOG_ERR, "Bouncing to " . FALLBACK_MAIL . " failed.");
+        exit(1);
+
+    } else {
+        logger(LOG_WARNING, "Bounced to " . FALLBACK_MAIL . " successfully.");
+        exit(0);
+
+    }
 }
 ?>

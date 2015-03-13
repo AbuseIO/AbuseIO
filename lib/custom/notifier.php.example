@@ -1,19 +1,39 @@
 <?php
+/******************************************************************************
+* AbuseIO 3.0
+* Copyright (C) 2015 AbuseIO Development Team (http://abuse.io)
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software Foundation
+* Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+*******************************************************************************
+*
+* If you enable the custom_notifier you will need to expand this function
+* so it will output the correct data. This function will be called with a 
+* single argument: $report(array) containing all the report elements. No return 
+* is needed as its not a required element at the core and there not validated.
+*
+******************************************************************************/
+
+
 /*
-If you enable the custom_notifier you will need to expand this function
-so it will output the correct data. This function will be called with a single
-argument: $report(array) containing all the report elements. No return is 
-needed as its not a required element at the core.
+** Function: custom_notifier
+** Parameters:
+**  report (array): the reportAdd array after it was added into the database and
+**                  including customer information
+** Returns: Nothing
 */
-
-*/
-
-Example 1: Send to IRC
-
 function custom_notifier($report) {
     // Do stuff
 }
-
-*/
-
 ?>
