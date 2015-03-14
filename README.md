@@ -6,8 +6,8 @@ AbuseIO's purpose is to consolidate efforts by various companies and individuals
 to automate and improve the abuse handling process.
 
 We already have support for the feeds from : ShadowServer, SpamCop, Netcraft, 
-Google Safe Browsing, IP Echelon, C-SIRT, Project Honey Pot any many more! Our 
-goal is to support any known feed that provides abuse information.
+Google Safe Browsing, IP Echelon, C-SIRT, Project Honey Pot, Abuse-IX and many 
+more! Our goal is to support any known feed that provides abuse information.
 
 ## AbuseIO's main features:
 
@@ -19,6 +19,8 @@ goal is to support any known feed that provides abuse information.
  * Allow customers to reply, close or add notes to cases, keeping them organized  
  * Link customers to a self help portal in case they need more clue  
  * Works with IPv4 and IPv6 addresses  
+
+More details and documentation can be found on our [Projects Website])https://abuse.io).
 
 ## Getting started
 
