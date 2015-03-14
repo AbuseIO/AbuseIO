@@ -20,6 +20,10 @@ goal is to support any known feed that provides abuse information.
  * Link customers to a self help portal in case they need more clue  
  * Works with IPv4 and IPv6 addresses  
 
+## Getting started
+
+See [INSTALL](INSTALL.md) for details.
+
 ## Getting support
 
 You can find us on the FreeNODE IRC network in #abuseio
