@@ -305,7 +305,7 @@ function reportResolved($ticket) {
         return false;
     }
 
-    $query = "Update Reports SET CustomerResolved = '1' WHERE 1 AND ID = '${ticket}'";
+    $query = "Update Reports SET CustomerResolved = '1', CustomerIgnored = '0' WHERE 1 AND ID = '${ticket}'";
 
     $result = _mysqli_query($query, "");
 
@@ -325,7 +325,7 @@ function reportIgnored($ticket) {
         return false;
     }
 
-    $query = "Update Reports SET CustomerIgnored = '1' WHERE 1 AND ID = '${ticket}'";
+    $query = "Update Reports SET CustomerIgnored = '1', CustomerResolved = '0' WHERE 1 AND ID = '${ticket}'";
 
     $result = _mysqli_query($query, "");
 

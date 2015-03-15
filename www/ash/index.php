@@ -33,6 +33,34 @@ $labelClass = array(
     '1'         => 'info',
 ); 
 
+if (!empty($_GET['action'])) {
+    if ($_GET['action'] == 'addNote') {
+        if (strlen($_GET['noteMessage']) < 10) {
+            $changeMessage = "<span class='label label-warning'>YOUR REPLY WAS NOT SUBMITTED, BECAUSE THERE WAS INSUFFICIANT INFORMATION IN THE NOTE!</span>";
+
+        } elseif ($_GET['noteType'] == 'message') {
+            reportNoteAdd('Customer', $_GET['id'], htmlentities(strip_tags($_GET['noteMessage'])));
+            $changeMessage = "<span class='label label-info'>YOUR REPLY HAS BEEN REGISTERED</span>";
+
+        } elseif ($_GET['noteType'] == 'ignore') {
+            reportNoteAdd('Customer', $_GET['id'], htmlentities(strip_tags($_GET['noteMessage'])));
+            reportIgnored($_GET['id']);
+            $report['CustomerIgnored'] = 1;
+            $report['CustomerResolved'] = 0;
+            $changeMessage = "<span class='label label-info'>YOUR REPLY HAS BEEN REGISTERED AND YOU WILL NO LONGER RECEIVE NEW NOTIFICATIONS ON THIS EVENT</span>";
+
+        } elseif ($_GET['noteType'] == 'resolve') {
+            reportNoteAdd('Customer', $_GET['id'], htmlentities(strip_tags($_GET['noteMessage'])));
+            reportResolved($_GET['id']);
+            $report['CustomerIgnored'] = 0;
+            $report['CustomerResolved'] = 1;
+            $changeMessage = "<span class='label label-info'>YOUR REPLY HAS BEEN REGISTERED AND THE EVENT WAS MARKED AS RESOLVED</span>";
+
+        } else {
+            $changeMessage = "<span class='label label-warning'>UNKNOWN REPLY COMMAND</span>";
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,10 +122,23 @@ $labelClass = array(
                 <dt>Ticket status</dt>
                 <dd><?php echo "<span class='label label-${labelClass[$report['Status']]}'>${report['Status']}</span>"; ?></dd>
 
+                <dt>Reply status</dt>
+                <dd><?php
+                    if($report['CustomerIgnored'] == 1) {
+                        echo "<span class='label label-warning'>CUSTOMER IGNORED</span>";
+                    } elseif($report['CustomerResolved'] == 1) {
+                        echo "<span class='label label-info'>CUSTOMER RESOLVED</span>";
+                    } else {
+                        echo "<span class='label label-warning'>AWAITING REPLY</span>";
+                    }
+                ?></dd>
+
             </dl>
         </div>
 
         <?php
+        if (!empty($changeMessage)) { echo $changeMessage; }
+
         $statictext = APP . "/etc/ash.template";
         if (file_exists($statictext)) {
             echo '<div style="padding-top: 1em;">';
@@ -107,16 +148,22 @@ $labelClass = array(
         ?>
 
         <form method='GET'>
-        <input type='hidden' name='id'    value='<?php echo $_GET['id']; ?>'>
-        <input type='hidden' name='token' value='<?php echo $_GET['token']; ?>'>
+        <input type='hidden' name='action' value='addNote'>
+        <input type='hidden' name='id'     value='<?php echo $_GET['id']; ?>'>
+        <input type='hidden' name='token'  value='<?php echo $_GET['token']; ?>'>
         <div class="row">
             <div class="col-md-6 form-group form-group-sm">
-                <label for='Note'>Your reply : </label>
-                <textarea rows="5" cols="79" name='Note'></textarea>
+                <label for='noteMessage'>Your reply : </label>
+                <textarea rows="5" cols="79" name='noteMessage'></textarea>
             </div>
-            <div class="col-md-6 form-group form-group-sm"><br><br>
-                <input type='submit' class='btn btn-primary btn-sm' name='Resolved' value='This issue has been resolved'><br><br>
-                <input type='submit' class='btn btn-default btn-sm' name='Ignored' value='This issue can be ignored'><br><br>
+            <div class="col-md-6 form-group form-group-sm"><br>
+                <input type="radio" name="noteType" value="message" checked>Reply<br>
+<?php if($report['Type'] == "INFO") { ?>
+                <input type="radio" name="noteType" value="ignore" onclick="javascript:alert('When setting the report to ignored you will no longer receive any notifications of this event. Be very carefull using this option!');">Reply and mark as ignored<br>
+<?php } ?>
+                <input type="radio" name="noteType" value="resolve" onclick="javascript:alert('If you mark this case as resolved and no new abuse is received within certain period then the ticket will be closed. Only mark the event as resolved when you actually resolved the issue.')";>Reply and mark as resolved<br>
+                <br>
+                <input type='submit' class='btn btn-primary btn-sm' name='' value='Submit'><br>
             </div>
         </div>
         </form>
