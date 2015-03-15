@@ -59,9 +59,25 @@ function parse_netcraft($message) {
         $class  = 'Phishing website';
         $type   = 'ABUSE';
         $fields['uri'] = str_replace($fields['Service']."://".$fields['Domain'], "", $fields['Source']);
+
+    } elseif($fields['Report-Type'] == 'malware-attack') {
+        $class  = 'Compromised website';
+        $type   = 'ABUSE';
+
+        // Download-Link to domain/uri
+        $url_info = parse_url($fields['Download-Link']);
+        if(!empty($url_info['host'])) {
+            $fields['Domain'] = $url_info['host'];
+        }
+        if(!empty($url_info['path'])) {
+            $fields['uri'] = $url_info['path'];
+        }
+
     } elseif($fields['Report-Type'] == 'others') {
         // Need more samples
+
     } else {
+        logger(LOG_ERR, __FUNCTION__ . " This report type is not available. Please submit this sample to the developers so it can be implemented");
         return false;
     }
 
