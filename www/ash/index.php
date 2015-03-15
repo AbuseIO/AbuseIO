@@ -18,7 +18,7 @@ if ($_GET['token'] != $token) {
     die('<h2>401 - Unauthorized</h2>');
 }
 
-$title = "Ticket {$report['ID']}";
+$title = "ASH - Ticket {$report['ID']}";
 
 $labelClass = array(
     'ABUSE'     => 'warning',
@@ -95,12 +95,34 @@ $labelClass = array(
                 <dd><?php echo "<span class='label label-${labelClass[$report['Status']]}'>${report['Status']}</span>"; ?></dd>
 
             </dl>
-            <a href='' class="btn btn-primary btn-sm">This issue has been resolved</a>
-            <a href='' class="btn btn-default btn-sm">This issue can be ignored</a>
         </div>
 
         <?php
-        $infotext = "infotext/${infolang}/".str_replace(" ", "_", $report['Class']).".html";
+        $statictext = APP . "/etc/ash.template";
+        if (file_exists($statictext)) {
+            echo '<div style="padding-top: 1em;">';
+            include($statictext);
+            echo '</div>';
+        }
+        ?>
+
+        <form method='GET'>
+        <input type='hidden' name='id'    value='<?php echo $_GET['id']; ?>'>
+        <input type='hidden' name='token' value='<?php echo $_GET['token']; ?>'>
+        <div class="row">
+            <div class="col-md-6 form-group form-group-sm">
+                <label for='Note'>Your reply : </label>
+                <textarea rows="5" cols="79" name='Note'></textarea>
+            </div>
+            <div class="col-md-6 form-group form-group-sm"><br><br>
+                <input type='submit' class='btn btn-primary btn-sm' name='Resolved' value='This issue has been resolved'><br><br>
+                <input type='submit' class='btn btn-default btn-sm' name='Ignored' value='This issue can be ignored'><br><br>
+            </div>
+        </div>
+        </form>
+
+        <?php
+        $infotext = APP . "/www/ash/infotext/${infolang}/".str_replace(" ", "_", $report['Class']).".html";
         if (file_exists($infotext)) {
             echo '<div style="padding-top: 1em;">';
             include($infotext);
