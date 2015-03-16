@@ -22,6 +22,7 @@
 *
 ******************************************************************************/
 
+
 /*
 ** Function: delete_store
 ** Parameters:
@@ -40,6 +41,7 @@ function delete_store($message) {
     }
 }
 
+
 /*
 ** Function: receive_mail
 ** Parameters:
@@ -56,22 +58,22 @@ function receive_mail($call) {
     $params['decode_headers'] = true;
 
     if ($call['type'] == "INTERNAL") {
-        $raw        = $call['message'];
+        $raw = $call['message'];
     } elseif ($call['type'] == "EXTERNAL") {
-        $raw        = file_get_contents("php://stdin");
+        $raw = file_get_contents("php://stdin");
     } else {
         logger(LOG_ERR, __FUNCTION__ . " was called, but was unable to determin if this was internally passed or not");
         return false;
     }
 
-    $decoder        = new Mail_mimeDecode($raw);
-    $structure      = $decoder->decode($params);
-    $html           = "";
-    $plain          = "";
-    $i              = 0;
-    $message_store  = "";
-    $attachments    = array();
-    $arf            = array('headers' => '', 'plain' => '', 'html' => '', 'report' => '');
+    $decoder            = new Mail_mimeDecode($raw);
+    $structure          = $decoder->decode($params);
+    $html               = "";
+    $plain              = "";
+    $attachment_counter = 0;
+    $message_store      = "";
+    $attachments        = array();
+    $arf                = array('headers' => '', 'plain' => '', 'html' => '', 'report' => '');
 
     // We cannot parse mail if some fields are unset
     if (
@@ -113,10 +115,10 @@ function receive_mail($call) {
         $message_store = APP.'/tmp/'.substr( md5(rand()), 0, 8);
         foreach($structure->parts as $part){
             if (isset($part->disposition) && $part->disposition=='attachment'){
-                $i++;
+                $attachment_counter++;
                 $attachment_file = "${message_store}/${i}/" . $part->d_parameters['filename'];
                 if ($saved_file = save_attachment($attachment_file, $part->body)) {
-                    $attachments[$i] = $saved_file;
+                    $attachments[$attachment_counter] = $saved_file;
                 }
             } elseif (isset($part->headers['content-type']) && strpos($part->headers['content-type'], "message/feedback-report") !== false) {
                 // This is a ARF report feedback
@@ -145,10 +147,10 @@ function receive_mail($call) {
                     }
                     // Save attachments
                     if(isset($sp->disposition) && $sp->disposition=='attachment'){
-						$i++;
+						$attachment_counter++;
                         $attachment_file = "${message_store}/${i}/". $sp->d_parameters['filename'];
                         if ($saved_file = save_attachment($attachment_file, $sp->body)) {
-                            $attachments[$i] = $saved_file;
+                            $attachments[$attachment_counter] = $saved_file;
                         }
                     }
                 }
@@ -159,11 +161,11 @@ function receive_mail($call) {
                     $regex = "name=\"(.*)\"";
                     preg_match("/${regex}/m", $part->headers['content-type'], $match);
                     if (count($match) === 2) {
-                        $i++;
+                        $attachment_counter++;
                         $filename = $match[1];
                         $attachment_file = "${message_store}/${i}/" . $filename;
                         if ($saved_file = save_attachment($attachment_file, $part->body)) {
-                            $attachments[$i] = $saved_file;
+                            $attachments[$attachment_counter] = $saved_file;
                         }
                     } else {
                         logger(LOG_ERR, "Unknown mime type in parsing e-mail");
@@ -209,6 +211,7 @@ function receive_mail($call) {
 
     return $message;
 }
+
 
 /*
 ** Function: save_attachment
@@ -265,26 +268,22 @@ function bounce($message) {
     $tempfile = "/tmp/" . mt_rand();
     file_put_contents($tempfile, $message['raw']);
 
-    $bodytext  = "AbuseIO tried to parse a message, however was not able to.\n";
+    $bodytext = "AbuseIO tried to parse a message but was not able to.\n\n";
     if(!empty($message['from'])) {
-        $bodytext .= "\nfrom: ${message['from']}\n";
+        $bodytext .= "From: ${message['from']}\n";
     }
     if(!empty($message['subject'])) {
-        $bodytext .= "\nsubject: ${message['subject']}\n";
+        $bodytext .= "Subject: ${message['subject']}\n";
     }
-    $bodytext .= "\nYou will find the EML attached.\n";
+    $bodytext .= "\nYou will find the original email attached.\n";
 
     $email = new PHPMailer();
     $email->From      = NOTIFICATIONS_FROM_ADDRESS;
     $email->FromName  = NOTIFICATIONS_FROM_NAME;
     $email->Subject   = 'AbuseIO failed parsing attempt';
     $email->Body      = $bodytext;
-    $email->AddAddress( FALLBACK_MAIL );
-
-
-    $file_to_attach = 'PATH_OF_YOUR_FILE_HERE';
-
-    $email->AddAttachment( $tempfile , 'bounce.eml' );
+    $email->AddAddress(FALLBACK_MAIL);
+    $email->AddAttachment($tempfile, 'bounce.eml', 'base64', 'message/rfc822');
 
     if(!$email->Send()) {
         logger(LOG_ERR, "Bouncing to " . FALLBACK_MAIL . " failed.");
