@@ -1,34 +1,70 @@
 <h2>What is a 'Botnet infection'?</h2>
 
-<p>Your server has been compromised. It's hosting malware 
-and is participating in a botnet.</p>
+<p>Botnet is a portmanteau derived from the words robot and network. Bot refers 
+to a computer program that independently performs automated jobs. Such programs 
+have many legitimate uses; search engines, for example, commonly use bots to 
+catalogue web sites. Unfortunately, bots can also be programmed to perform 
+malicious actions on systems. A botnet is a large group of infected computers 
+connected to each other via the internet. Criminals administering the botnet 
+make sure that the the programs get installed on as many systems as possible. 
+The programs stay under the radar, generally running in the background, and are 
+usually difficult for antivirus software to identify. Once a computer is infected, 
+it can then become part of the botnet through the exploitation of vulnerabilities 
+in software installed on the user's system. There are many avenues for this 
+infection, such as visiting a (generally infected) web site, 'drive-by downloads' 
+(when malware is downloaded and installed on the system without the user's knowledge), 
+and even by simply clicking attachments or links in an e-mail or merely connecting 
+peripherals such as USB sticks or external hard drives to the system.</p>
 
 <h2>Why would this be bad?</h2>
 
+<p>The IP listed in the report (the system behind it using NAT), has seen
+participating inside the botnet. With your system in communication with the
+botnet you can be 99,9% sure it has been compromised. It's hosting malware 
+and is participating in a botnet.</p>
+
 <p>A botnet can be used to steal your personal data, send 
-spam, hack into other computers and launch network attacks.</p>
+spam, hack into other computers and launch network attacks. In these examples
+you are the actual source of these attacks!</p>
 
 <h2>Recommended action</h2>
 
-<p>This issue needs to be resolved by removing the malicious 
-software.</p>
+<p>This issue needs to be resolved by removing the malicious software. In 
+very persistant infections you will need to reinstall the system to get rid
+of the infection.</p>
 
 <h2>Tips to resolve this matter</h2>
 
-<p>If you suspect a user account has been compromised, change
-the password for the account immediately.</p>
+<p>If your system is a workstation or server:<ul>
+<li>Install including all updates an antivirus software and run a full scan of your computer. 
+It's recommended to try several scanners as not every scanner is able to detect a specific
+kind of malware.</li>
+<li>Scan the network for infected files. Don't forget to scan the backups, as well as any 
+computers that may have been "off" for the last little while because of employee vacation, 
+etc.</li>
+<li>Users of any system with a botnet infection should change all their passwords as quickly 
+as possible. This should include any passwords saved locally and used to access other systems 
+and applications (including business applications, access to web site administrator accounts, 
+personal use of e-mail and social media, etc.).</li>
+<li>If a computer is infected with malware, there is a significant chance that other malware is 
+also present on the system. A clean reinstall will help prevent any other infections from 
+having free access to the network.</li>
+</ul></p>
 
-<p>Scan all hosted websites and temporary directories for 
-suspicious files and remove them. Also check your process
-list for suspicious processes and kill them.</p>
+<p>If your system is a website / hosting system:<ul>
+<li>If you suspect a user account has been compromised, change the password for the account 
+immediately.</li>
+<li>Scan all hosted websites and temporary directories for suspicious files and remove them. 
+Also check your process list for suspicious processes and kill them.</li>
+<li>Check your mail queues for outgoing SPAM and remove them for the queue.</li>
+<li>Install a rootkit and a virus scanner to ensure all malicious files have been removed.</li>
+</ul></p>
 
-<p>Install a rootkit and a virus scanner to ensure all malicious
-files have been removed.</p>
-
-<p>Once all malicious software has been removed make sure the 
-server can't be compromised again by installing the latest 
-updates for your operating system, control panel and hosted 
-applications, including themes and plugins (i.e. Wordpress).</p>
+<p>Once all malicious software has been removed make sure the server can't be compromised again 
+by installing the latest updates for your operating system, control panel and hosted 
+applications, including themes and plugins (i.e. Wordpress). If you do not upgrade them 
+directly you will face a re-infection in a very short time!</p>
 
 <h2>Getting more information</h2>
 
+<a href='https://www.ncsc.nl/binaries/content/documents/ncsc-en/services/expertise-advice/knowledge-sharing/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet</a><br>
