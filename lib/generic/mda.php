@@ -116,7 +116,7 @@ function receive_mail($call) {
         foreach($structure->parts as $part){
             if (isset($part->disposition) && $part->disposition=='attachment'){
                 $attachment_counter++;
-                $attachment_file = "${message_store}/${i}/" . $part->d_parameters['filename'];
+                $attachment_file = "${message_store}/${attachment_counter}/" . $part->d_parameters['filename'];
                 if ($saved_file = save_attachment($attachment_file, $part->body)) {
                     $attachments[$attachment_counter] = $saved_file;
                 }
@@ -148,7 +148,7 @@ function receive_mail($call) {
                     // Save attachments
                     if(isset($sp->disposition) && $sp->disposition=='attachment'){
 						$attachment_counter++;
-                        $attachment_file = "${message_store}/${i}/". $sp->d_parameters['filename'];
+                        $attachment_file = "${message_store}/${attachment_counter}/". $sp->d_parameters['filename'];
                         if ($saved_file = save_attachment($attachment_file, $sp->body)) {
                             $attachments[$attachment_counter] = $saved_file;
                         }
@@ -163,7 +163,7 @@ function receive_mail($call) {
                     if (count($match) === 2) {
                         $attachment_counter++;
                         $filename = $match[1];
-                        $attachment_file = "${message_store}/${i}/" . $filename;
+                        $attachment_file = "${message_store}/${attachment_counter}/" . $filename;
                         if ($saved_file = save_attachment($attachment_file, $part->body)) {
                             $attachments[$attachment_counter] = $saved_file;
                         }
