@@ -395,8 +395,6 @@ function ReportContactupdate($ticket) {
     $customer = customerLookupIP($report['IP']);
 
     if (isset($customer['Code']) && $customer['Code'] != $result['CustomerCode']) {
-        echo "{$result['IP']} OLD ${result['CustomerCode']} => ${customer['Code']}". PHP_EOL;
-
         $query = "UPDATE `Reports` SET CustomerCode='${customer['Code']}', CustomerName='${customer['Name']}', CustomerContact='${customer['Contact']}' WHERE ID='${ticket}';";
         _mysqli_query($query, "");
 
