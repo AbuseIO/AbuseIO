@@ -1,5 +1,10 @@
 <h2>What is an 'Open NTP Server'?</h2>
 
+<p>Network Time Protocol (NTP) is a networking protocol for clock 
+synchronization between computer systems over packet-switched, 
+variable-latency data networks. In operation since before 1985, NTP 
+is one of the oldest Internet protocols in current use.</p>
+
 <h2>Why would this be bad?</h2>
 
 <p>Running an open (UDP) service is not bad on its own and it is mostly
@@ -42,9 +47,44 @@ like ... to prevent a DNS Amplification Attack.</p>
 
 <h2>Tips to resolve this matter</h2>
 
-<p></p>
+<h3>UNIX/Linux ntpd</h3>
+
+<p>The following configuration is for a UNIX/Linux machine to act as simply 
+an NTP client and never to allow NTP queries to it except from the loopback
+address:</p>
+
+<pre># by default act only as a basic NTP client
+restrict -4 default nomodify nopeer noquery notrap
+restrict -6 default nomodify nopeer noquery notrap
+# allow NTP messages from the loopback address, useful for debugging
+restrict 127.0.0.1
+restrict ::1
+# server(s) we time sync to
+server 192.0.2.1
+server 2001:DB8::1
+server time.example.net
+</pre>
+
+<p>You can use your standard host firewall filtering capabilities to limit
+who the NTP process talks to.  If you're using Linux and the host is acting
+as an NTP client only, the following iptables rules could be adapted to shield
+your NTP listener from unwanted remote hosts.</p>
+
+<pre>-A INPUT -s 0/0 -d 0/0 -p udp --source-port 123:123 -m state --state ESTABLISHED -j ACCEPT
+-A OUTPUT -s 0/0 -d 0/0 -p udp --destination-port 123:123 -m state --state NEW,ESTABLISHED -j ACCEPT
+</pre>
+
+<p>Authentication with the reference NTP software on UNIX can be done using
+symmetric key encryption, much like in Cisco IOS and Juniper JUNOS, using
+MD5.  However, a public key-based approach called 'AutoKey' is also
+available, which is generally be considered to be even more secure.  For
+more information about these options, see the <a href="http://www.eecis.udel.edu/~mills/ntp/html/authopt.html" target="_blank">NTP
+authentication options page</a> and the <a href="http://support.ntp.org/bin/view/Support/ConfiguringAutokey" target="_blank">Configuring
+Autokey documentation</a>.</p>
+
 
 <h2>Getting more information</h2>
 
+<a href='http://www.team-cymru.org/secure-ntp-template.html'>Examples in securing a NTP service</a>
 <a href='http://www.internetsociety.org/sites/default/files/01_5.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
 

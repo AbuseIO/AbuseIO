@@ -59,12 +59,12 @@ are used in DNS Amplification Attacks. </p>
 
 <p>For BIND 9.x authoritative servers, apply the following global options:
 <br>
-<code>
+<pre>
   options {
       recursion no;
       additional-from-cache no;
   };
-</code>
+</pre>
 <br>
 Beginning with BIND versions 9.4 and later, most configurations would default to a closed resolver. Those running earlier versions should upgrade if possible.<br>
 </p>
@@ -72,7 +72,7 @@ Beginning with BIND versions 9.4 and later, most configurations would default to
 <p><h3>Bind 9.x Caching</h3>
 
 For BIND 9.x caching servers, additionally create access control lists and use "views" to explicitly permit a limited set of source addresses from your trusted network issue queries to your caching server:
-<code>
+<pre>
   # example only, replace 192.0.2.0/24 a list of your CIDR blocks
   acl "trusted" {
       192.0.2.0/24;
@@ -90,7 +90,7 @@ For BIND 9.x caching servers, additionally create access control lists and use "
       recursion yes;
       additional-from-cache yes;
   };
-</code></p>
+</pre></p>
 
 <h3>Windows Systems</h3>
 

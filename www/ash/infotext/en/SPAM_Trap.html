@@ -15,6 +15,9 @@ immediately considered unsolicited.</p>
 <p>Clean up your mailing lists. Configure your "Hard & Soft" Bounce values to 
 correctly remove recipient's when needed.</p>
 
+<p>If you are not sending bulk email, then check your website and DNS
+for signs of comprimise. </p>
+
 <h2>Tips how to resolve this matter</h2>
 
 <p>When cleaning your mailing lists there are some thing that you can already do:</p>
@@ -26,6 +29,13 @@ correctly remove recipient's when needed.</p>
 	<li>Never buy a mailing list</li>
 	<li>Use double opt-in</li>
 </ul>
+
+<p>The best way to solve the problem is to stop your mailserver(MTA)
+and investigate the mail queues for SPAM messages. When you found an
+example you can open it to identify its source. By stopping the MTA
+you will prevent SPAM from being sent out. After solving the problem
+you must clean your mail queue from all these SPAM messages before
+starting your MTA again.</p>
 
 <h2>Getting more information</h2>
 

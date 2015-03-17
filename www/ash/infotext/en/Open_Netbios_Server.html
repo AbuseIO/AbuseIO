@@ -1,10 +1,39 @@
 <h2>What is an 'Open Netbios server'?</h2>
 
-<p>NetBIOS (Network Basic Input/Output System) is a program that allows applications 
-on different computers to communicate within a local area network (LAN). Its a 
-integrated part of Windows for use with for example File Sharing.</p>
+<p>NetBIOS is a transport protocol that Microsoft Windows systems use to share 
+resources.  For example, if a PC running Windows wants to connect to and access a 
+share on a file server, it probably uses NetBIOS.  There have been some changes in 
+recent days, however, that allow this connection without it.  SMB, the method used 
+to access file and printer shares, can also run independently of NetBIOS over TCP 
+ports 139 and 445.  Both of these approaches, however, tend to increase the attack 
+surface of a network.</p>
 
 <h2>Why would this be bad?</h2>
+
+<p>The ports that that are open to the Internet are UDP/137, UDP/138, and TCP/139. 
+Unfortunately, the most popular attacker target is NetBIOS and against these 
+ports.</p>
+
+<p>Once an attacker discovers an active port 139 on a device, he can run NBSTAT to 
+begin the very important first step of an attack—footprinting.  With the NBSTAT 
+command, he can obtain some or all of the following information:</p>
+
+<ul>
+<li>Computer name</li>
+<li>Contents of the remote name cache, including IP addresses</li>
+<li>A list of local NetBIOS names</li>
+<li>A list of names resolved by broadcast or via WINS</li>
+<li>Contents of the session table with the destination IP addresses</li>
+</ul>
+
+<p>With this information, the attacker has information about the OS, services, and major 
+applications running on the system. He also has private IP addresses that the LAN/WAN 
+and security engineers have tried hard to hide behind NAT.  And that’s not all.  The 
+lists provided by running NBSTAT also include user IDs.</p>
+
+<p>If null sessions are allowed against IPC$, it isn’t difficult to take the next step 
+and connect to the target device.  This connection provides a list of all available 
+shares.</p>
 
 <p>These services have the potential to be used in amplification attacks by criminals 
 that wish to perform denial of service attacks. In addition it opens up your system 
@@ -19,11 +48,28 @@ to think for himself and for example automaticly starts to open ports if you ins
 something that uses Netbios. In all cases the administrator is unaware of these open 
 ports.</p>
 
+<p>If you really need NETBIOS open for the entire world, then ensure that the exposed 
+system(s) are hardened by:</p>
+<ul>
+<li>Disabling the system’s ability to support null sessions</li>
+<li>Defining very strong passwords for the local administrator accounts</li>
+<li>Defining very strong passwords for shares, assuming you absolutely have to have shares on exposed systems</li>
+<li>Keeping the Guest account disabled</li>
+<li>Under no circumstances allowing access to the root of a hard drive via a share</li>
+<li>Under no circumstances sharing the Windows or WinNT directories or any directory located beneath them</li>
+</ul>
+
 <h2>Tips to resolve this matter</h2>
 
-<p></p>
+<p>In a privileged DOS box run the following commands:</p>
+
+netsh advfirewall firewall add rule name="NetBIOS UDP Port 137" dir=in action=deny protocol=UDP localport=137<br>
+netsh advfirewall firewall add rule name="NetBIOS UDP Port 137" dir=out action=deny protocol=UDP localport=137<br>
+netsh advfirewall firewall add rule name="NetBIOS UDP Port 138" dir=in action=deny protocol=UDP localport=138<br>
+netsh advfirewall firewall add rule name="NetBIOS UDP Port 138" dir=out action=deny protocol=UDP localport=138<br>
+netsh advfirewall firewall add rule name="NetBIOS TCP Port 139" dir=in action=deny protocol=TCP localport=139<br>
+netsh advfirewall firewall add rule name="NetBIOS TCP Port 139" dir=out action=deny protocol=TCP localport=139<br>
 
 <h2>Getting more information</h2>
 
-
-
+<a href='https://technet.microsoft.com/en-us/library/cc940063.aspx'>Microsoft NetBIOS Over TCP/IP guide</a>

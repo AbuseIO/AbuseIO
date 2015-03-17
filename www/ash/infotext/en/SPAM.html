@@ -20,10 +20,20 @@ as spam:</p>
     <li>2) Each email sent contains a working opt-out link.</li>
 </ul>
 
+<p>If you are not sending bulk email, then check your website and DNS 
+for signs of comprimise. </p>
+
 <h2>Tips to resolve this matter</h2>
 
 <p>If the server should not be sending much or any email, this spam 
 report could indicate that your server has been compromised.</p>
+
+<p>The best way to solve the problem is to stop your mailserver(MTA) 
+and investigate the mail queues for SPAM messages. When you found an
+example you can open it to identify its source. By stopping the MTA
+you will prevent SPAM from being sent out. After solving the problem
+you must clean your mail queue from all these SPAM messages before
+starting your MTA again.</p>
 
 <h2>Getting more information</h2>
 

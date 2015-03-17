@@ -41,8 +41,29 @@ from the internet by using RFC1918 spaces or a firewall.</p>
 
 <h2>Tips to resolve this matter</h2>
 
-<p></p>
+<h3>Unix/Linux</h3>
 
-<h2>Getting more information</h2>
+<p>To disable QOTD when started from inetd:</p>
+
+<ul>
+<li>Edit the /etc/inetd.conf (or equivalent) file.</li>
+<li>Locate the line that controls the qotd daemon.</li>
+<li>Type a # at the beginning of the line to comment out the daemon.</li>
+<li>Restart inetd.</li>
+</ul>
+
+<h3>Windows</h3>
+
+<p>Set the following registry keys to 0:</p>
+<pre>
+HKLM\System\CurrentControlSet\Services\SimpTCP\Parameters\EnableTcpQotd
+HKLM\System\CurrentControlSet\Services\SimpTCP\Parameters\EnableUdpQotd
+</pre>
+
+<p>Then launch cmd.exe and type the following commands to restart the service:</p>
+<pre>
+net stop simptcp
+net start simptcp
+</pre>
 
 

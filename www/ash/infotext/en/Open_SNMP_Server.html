@@ -1,5 +1,9 @@
 <h2>What is an 'Open SNMP Server'?</h2>
 
+<p>Simple Network Management Protocol (SNMP) is a popular protocol for network 
+management. It is used for collecting information from, and configuring, 
+network devices, such as servers, printers, hubs, switches, and routers on an 
+Internet Protocol (IP) network.</p>
 
 <h2>Why would this be bad?</h2>
 
@@ -34,11 +38,66 @@ traffic load hitting a victim from around the Internet.</p>
 
 <h2>Recommended action</h2>
 
-<p></p>
+<ul>
+<li>Use firewalling to block UDP/161 entirely or only allow the hosts that
+need access to this service</li>
+<li>Update the SNMP configuration to use a different community string then public. Something
+strong like ThisIsMyCommunity$tring</li>
+<li>Update the SNMP configuration to use a host based ACL's in combination with either the 'public'
+community or a string thats more 'secure'</li>
+</ul>
 
 <h2>Tips to resolve this matter</h2>
 
-<p></p>
+<h3>Windows</h3>
+<ul>
+<li>Click on Windows Key > Administrative Tools > Services.</li>
+<li>Right click on SNMP Service and click on Properties.</li>
+<li>Click on the Security tab.</li>
+<li>Type your randomized 8 - 10 character connection string. Be sure to make it Read Only, not Read Write.</li>
+<li>Click on Add.</li>
+<li>Click on OK.</li>
+<li>Finally restart the SNMP service</li>
+</ul>
+
+<h3>Linux</h3>
+<p>Edit the SNMP configuration file, which is useally located at: /etc/snmp/snmpd.conf<p>
+
+<p>Change/Modify line(s) as follows:</p>
+<p>Find the following Line:</p>
+<pre>com2sec notConfigUser  default       public</pre>
+Replace with (make sure you replace 192.168.0.0/24 with your network/subnet) the following lines:
+<pre>com2sec local     localhost           public
+com2sec mynetwork 192.168.0.0/24      public</pre>
+<p>Scroll down a bit and change :</p>
+<p>Find Lines:</p>
+<pre>group   notConfigGroup v1           notConfigUser
+group   notConfigGroup v2c           notConfigUser</pre>
+<p>Replace with:</p>
+<pre>group MyRWGroup v1         local
+group MyRWGroup v2c        local
+group MyRWGroup usm        local
+group MyROGroup v1         mynetwork
+group MyROGroup v2c        mynetwork
+group MyROGroup usm        mynetwork</pre>
+<p>Again scroll down a bit and locate the following line:</p>
+<p>Find line:</p>
+<pre>view    systemview     included      system</pre>
+<p>Replace with:</p>
+<pre>view all    included  .1                               80</pre>
+<p>Again scroll down a bit and change the following line:</p>
+<p>Find line:</p>
+<pre>access  notConfigGroup ""      any       noauth    exact  systemview none none</pre>
+<p>Replace with:</p>
+<pre>access MyROGroup ""      any       noauth    exact  all    none   none<br>access MyRWGroup ""      any       noauth    exact  all    all    none</pre>
+<p>Scroll down a bit and change the following lines:</p>
+<p>Find lines:</p>
+<pre>syslocation Unknown (edit /etc/snmp/snmpd.conf)
+syscontact Root <root@localhost> (configure /etc/snmp/snmp.local.conf)</root@localhost></pre>
+<b>Replace with (make sure you supply appropriate values), for example:</b>
+<pre>syslocation Linux (RH3_UP2), Home Linux Router.<br>syscontact YourNameHere &lt;you@example.com&gt;</pre>
+
+<p>restart your snmp server and test it</p>
 
 <h2>Getting more information</h2>
 

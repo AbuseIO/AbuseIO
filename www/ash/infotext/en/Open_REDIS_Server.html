@@ -1,42 +1,81 @@
 <h2>What is an 'Open REDIS Server'?</h2>
 
+<p>Redis clients communicate with the Redis server using a protocol called 
+RESP (REdis Serialization Protocol). While the protocol was designed 
+specifically for Redis, it can be used for other client-server software 
+projects.</p>
 
 <h2>Why would this be bad?</h2>
 
-<p>Running an open (UDP) service is not bad on its own and it is mostly
-a required dependancy when installing a system.
-Unfortunately, hackers have also found this feature useful in performing a
-special type of DDoS attack called a 'Amplification Attack'.</p>
+<p>Redis is designed to be accessed by trusted clients inside trusted environments. 
+This means that usually it is not a good idea to expose the Redis instance 
+directly to the internet or, in general, to an environment where untrusted 
+clients can directly access the Redis TCP port or UNIX socket.</p>
 
-<p>The attacker sends a packet apparently from the intended victim to some
-server on the Internet that will reply immediately. Because the source
-IP address is forged, the remote Internet server replies and sends data
-to the victim.</p>
+<p>For instance, in the common context of a web application implemented using 
+Redis as a database, cache, or messaging system, the clients inside the 
+frontend (web side) of the application will query Redis to generate pages or 
+to perform operations requested or triggered by the web application user.</p>
 
-<p>That has two effects: the actual source of the attack is hidden and is
-very hard to trace, and, if many Internet servers are used, an attack
-can consist of an overwhelming number of packets hitting a victim from
-all over the world.</p>
-
-<p>But what makes reflection attacks really powerful is when they are
-also amplified: when a small forged packet elicits a large reply from
-the server (or servers). In that case, an attacker can send a small
-packet "from" a forged source IP address and have the server (or
-servers) send large replies to the victim.</p>
-
-<p>Amplification attacks like that result in an attacker turning a small
-amount of bandwidth coming from a small number of machines into a massive
-traffic load hitting a victim from around the Internet.</p>
-
+<p>In this case, the web application mediates access between Redis and untrusted 
+clients (the user browsers accessing the web application). This is a specific 
+example, but, in general, untrusted access to Redis should always be mediated 
+by a layer implementing ACLs, validating user input, and deciding what 
+operations to perform against the Redis instance. In general, Redis is not 
+optimized for maximum security but for maximum performance and simplicity.</p>
 
 <h2>Recommended action</h2>
+
+<p>Access to the Redis port should be denied to everybody but trusted clients in 
+the network, so the servers running Redis should be directly accessible only 
+by the computers implementing the application using Redis.</p>
+
+<p>In the common case of a single computer directly exposed to the internet, such 
+as a virtualized Linux instance (Linode, EC2, ...), the Redis port should be 
+firewalled to prevent access from the outside. Clients will still be able to 
+access Redis using the loopback interface.</p>
 
 <p></p>
 
 <h2>Tips to resolve this matter</h2>
 
-<p></p>
+<h3>Firewalling remote access</h3>
+
+<p>Simplest way is to block the default port TCP/6379 (or whatever port is listed
+in the report) and only allow IP's that should actually have access to this service.</p>
+
+<h3>Blocking remote access</h3>
+
+<p>It is possible to bind Redis to a single interface by adding a line like the following to the redis.conf file:</p>
+
+<pre>
+    bind 127.0.0.1
+</pre>
+
+<h3>Enabling Authentication feature</h3>
+
+<p>While Redis does not try to implement Access Control, it provides a tiny layer 
+of authentication that is optionally turned on editing the redis.conf file. When 
+the authorization layer is enabled, Redis will refuse any query by unauthenticated 
+clients. A client can authenticate itself by sending the AUTH command followed by 
+the password.</p>
+
+<p>The password is set by the system administrator in clear text inside the redis.conf 
+file. It should be long enough to prevent brute force attacks for two reasons:</p>
+
+<ul>
+<li>Redis is very fast at serving queries. Many passwords per second can be tested by an external client.</li>
+<li>The Redis password is stored inside the redis.conf file and inside the client configuration, so it does not need to be remembered by the system administrator, and thus it can be very long.</li>
+</ul>
+
+<p>The goal of the authentication layer is to optionally provide a layer of redundancy. 
+If firewalling or any other system implemented to protect Redis from external attackers 
+fail, an external client will still not be able to access the Redis instance without 
+knowledge of the authentication password. The AUTH command, like every other Redis 
+command, is sent unencrypted, so it does not protect against an attacker that has 
+enough access to the network to perform eavesdropping.</p>
+
 
 <h2>Getting more information</h2>
 
-
+<a href='http://redis.io/topics/security'>Redis Security advisory</a><br>
