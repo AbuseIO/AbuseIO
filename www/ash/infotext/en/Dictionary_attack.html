@@ -1,25 +1,28 @@
 <h2>What is a 'Dictionary attack'?</h2>
 
-<p>Short summery about this class, e.g. whats the service/type</p>
+<p>A dictionary attack is when hackers floods your mail-server with usernames (email addresses) 
+selected from a dictionary in the form of emails</p>
 
 <h2>Why would this be bad?</h2>
 
-<p>short summery why this should be solved</p>
+<p>A dictionary attack on a mail-server can cause excess load and often cause delays in email delivery 
+if not properly configured. Spammers use this trick to gather list of valid email accounts. 
+If your mail-server is configured to send NDR's to for non-existent users, then systems can quickly 
+overload when an attack is seen.</p>
 
 <h2>Recommended action</h2>
 
-<p>short summery of whats needed, somewhat technical like firewall this port, to 
-stop this service, etc. Should be more details in the next section</p>
+<p>Check your MTA's configuration and make sure it is set to reject emails to unknown recipients and not send bounces(NDR).</p>
 
 <h2>Tips how to resolve this matter</h2>
-
-<p>Whats needed to solve this. Step-by-step guides if needs be! May be as long as needed. 
-Source can be linked at the section 'getting more info' but content should be on this page. 
-We dont want endusers to click out unless its REALLY needed</p>
+<ul>
+<li>Most major control panels (Plesk,WHM,DirectAdmin) should already do the above, if not you should change this</li>
+<li>It's also recommended to make sure your domains are not set as a catch-all (accept any email address for a domain)</li>
+<li>Set rate-limiting where applicable to senders who send to non-existent users</li>
+</ul>
 
 <h2>Getting more information</h2>
 
-<p>Links to 3rd-party websites and reference materials or more advanced FAQ/Howtos/Selfchecks
-wont fit here</p>
+<p><a href="http://en.wikipedia.org/wiki/Directory_Harvest_Attack">Details on Dictionary Attacks</a></p>
 
 
