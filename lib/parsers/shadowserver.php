@@ -189,7 +189,9 @@ function parse_shadowserver($message) {
         foreach($reports as $id => $report) {
             $information = array();
             foreach($fields as $field) {
-                $information[$field] = $report[$field];
+                if (!empty($report[$field]))
+                    $information[$field] = $report[$field];
+                }
             }
 
             $outReport = array(  
