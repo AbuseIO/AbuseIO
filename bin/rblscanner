@@ -89,7 +89,6 @@ foreach($iplist as $netblock) {
     }
 
     $split     = explode("/", $netblock);
-    //TODO check split[0] for valid IP first
     $startstop = iprange($split[0], $split[1]);
 
     $netblocks[$netblock]['range']      = $split[0];
