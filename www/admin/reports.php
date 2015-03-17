@@ -1,7 +1,6 @@
 <?php
     $title = 'Reports';
     include('../../lib/core/loader.php');
-    include('../../lib/frontend/top.php');
 
     // Query filter
     $filter = "";
@@ -34,14 +33,66 @@
     $pages = ceil($count / $rows_per_page);
 
     if ($page > $pages) {
+        include('../../lib/frontend/top.php');
         echo '<h2>No results</h2>Your search did not find any reports';
         include('../lib/frontend/bottom.php');
         die();
     }
 
     // Fetch reports
-    $filter  .= " ORDER BY ${order} ${direction} LIMIT ${rows_per_page} OFFSET ${offset}";
+    $filter  .= " ORDER BY ${order} ${direction}";
+    if(empty($_GET['action']) || $_GET['action'] != 'DownloadCSV') {
+        $filter  .= " LIMIT ${rows_per_page} OFFSET ${offset}";
+    }
     $results = reportList($filter);
+
+    // Download search results as CSV
+    if(isset($_GET['action']) && $_GET['action'] == 'DownloadCSV') {
+        header('Content-Type: text/csv');
+        header('Content-Transfer-Encoding: Binary');
+        header("Content-disposition: attachment; filename=\"export.csv\"");
+
+        $fields = array('IP', 'Domain', 'URI', 'Type', 'Class', 'FirstSeen', 'LastSeen', 'Status', 'ReportCount', 'SelfHelpURL', 'Information');
+        $seperator = ';';
+
+        // Print CSV header row
+        foreach($fields as $field) {
+            print "\"$field\"" . $seperator;
+        }
+        print PHP_EOL;
+
+        // Print CSV data rows
+        foreach($results as $rowid => $report) {
+            foreach($fields as $field) {
+                if ($field == 'SelfHelpURL') {
+                    $token    = md5("${report['ID']}${report['IP']}${report['Class']}");
+                    $tokenurl = SELF_HELP_URL . "?id=${report['ID']}&token=" . $token;
+                    print "\"${tokenurl}\"" . $seperator;
+
+                } elseif ($field == 'Information') {
+                    $info_output = "";
+                    $info_array = json_decode($report['Information'], true);
+                    foreach($info_array as $infofield => $infovalue) {
+                        $info_output .= "$infofield='" . str_replace(array("'","\""), '', $infovalue) . "' "; 
+                    }
+                    print "\"${info_output}\"" . $seperator;
+
+                } elseif ($field == 'FirstSeen') {
+                    print "\"" . date("d-m-Y H:i", $report[$field]) . "\"" . $seperator;
+
+                } elseif ($field == 'LastSeen') {
+                    print "\"" . date("d-m-Y H:i", $report[$field]) . "\"" . $seperator;
+
+                } else {
+                    print "\"${report[$field]}\"" . $seperator;
+                }
+            }
+            print PHP_EOL;
+        }
+        die();
+    }
+
+    include('../../lib/frontend/top.php');
 
     // Calculate result range for current page
     $first = $offset + 1;
@@ -73,7 +124,9 @@
     }
     $paginator .= " &nbsp; Showing results ${first} - ${last} of ${count}</p>";
 
-    echo $paginator;
+    $downloadCSV = "<span class='btn btn-info btn-sm'><a href='?".http_build_query(array_merge($uri,array('action'=>'DownloadCSV')))."'>Export to CSV</a></span>";
+
+    echo $downloadCSV . $paginator;
 
 ?>
 <table class="table table-striped table-condensed">
