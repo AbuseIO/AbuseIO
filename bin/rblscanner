@@ -24,22 +24,66 @@
 *
 ******************************************************************************/
 
-$asn     = '12859';
+include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
 
-// If argument is --as $number we collect all the target ranges of that ASN using ASCC
+$usage  = 'Usage: --asn 666 --range 1.1.1.1/24 --range 2.2.2.2/8 --rbl rblname:/var/rbldnsd/data/rbl1.bla.tld --rbl rblname:rbl2.bla.tld --file file.list' . PHP_EOL;
+$usage .= '       example --range 1.1.1.0/24 --rbl Spamhaus:zen.spamhaus.org' . PHP_EOL;
 
-$dns = dns_get_record("as${asn}.ascc.dnsbl.bit.nl", DNS_TXT);
-foreach($dns as $key => $entry) {
-    $iplist[] = $entry['entries'][0];
-} 
+$shortopts = '';
+$longopts  = array(
+                    'asn:',
+                    'rbl:',
+                    'range:',
+                    'file:',
+                 );
+$options = getopt($shortopts, $longopts);
 
-// If the argument is --ipfile $file we read the list of targets from file
+if (!empty($options['asn'])) {
+    $dns = dns_get_record("as${options['asn']}.ascc.dnsbl.bit.nl", DNS_TXT);
+    foreach($dns as $key => $entry) {
+        $iplist[] = $entry['entries'][0];
+    }
 
-// If the argument is --zonefile $file we dont query DNS but parse the DNS zone
+} elseif (!empty($options['range'])) {
+    if(is_array($options['range'])) {
+        $iplist = $options['range'];
+    } else {
+        $iplist[] = $options['range'];
+    }
 
+} elseif (!empty($options['file'])) {
+    if(is_file($options['file'])) {
+	$iplist =  file($options['file'], FILE_IGNORE_NEW_LINES);
+    }
+
+} else {
+    die($usage.PHP_EOL);
+}
+
+if (!empty($options['rbl'])) {
+    if(is_array($options['rbl'])) {
+        foreach($options['rbl'] as $rblpart) {
+            $parts = explode(":", $rblpart);
+            $rbllist[$parts[0]] = $parts[1];
+        }
+    } else {
+        $parts = explode(":", $options['rbl']);
+        $rbllist[$parts[0]] = $parts[1];
+    }
+}
+
+
+if(empty($iplist) || !is_array($iplist)) {
+    die($usage.PHP_EOL);
+}
+if(empty($rbllist) || !is_array($rbllist)) {
+    die($usage.PHP_EOL);
+}
+
+logger(LOG_DEBUG, "RBLSCANNER CLI starting up");
 
 foreach($iplist as $netblock) {
-    if(strpos("/", $netblock) !== true) {
+    if(strpos($netblock, "/") != true) {
         // Single IP's we prefix as /32
         $netblock .= "/32";
     }
@@ -55,41 +99,93 @@ foreach($iplist as $netblock) {
 }
 unset($iplist);
 
-print_r($netblocks);
 
-function walk_range($netblock) {
+foreach($netblocks as $netblock => $info) {
+    logger(LOG_DEBUG, "RBLSCANNER CLI scanning $netblock");
 
+    foreach($rbllist as $rblname => $rblhost) {
+
+        if(is_file($rblhost)) {
+            logger(LOG_DEBUG, "RBLSCANNER CLI start loading rbldnsd zonefile $rblhost");
+            $rbldata = parse_zonefile($rblhost);
+            logger(LOG_DEBUG, "RBLSCANNER CLI completed loading rbldnsd zonefile $rblhost");
+        }
+
+        for($pos = $info['begin']; $pos <= $info['end']; $pos++) {
+            $ip = long2ip($pos);
+            $ip_reversed = implode('.',array_reverse(preg_split('/\./',$ip)));
+
+            $lookup = $ip_reversed.'.'.$rblhost;
+
+            if(is_file($rblhost)) {
+                // Use zone file
+                if(in_array($ip, $rbldata)) {
+
+                    $outReport = array(
+                        'source'=>$rblname,
+                        'ip'=>$ip,
+                        'class'=>'RBL Listed',
+                        'type'=>'INFO',
+                        'timestamp'=>time(),
+                        'information'=> array(
+                                           'Return code' => '127.0.0.1',
+                                             )
+                    );
+
+                    if (!reportAdd($outReport)) {
+                        die('error adding report'.PHP_EOL);
+                    }
+
+		}
+
+            } elseif(dns_get_record($rblhost, DNS_SOA)) {
+                // Use DNS queries
+                if ($result = gethostbyname($lookup)) {
+                    if($result != $lookup) {
+
+                        $outReport = array(
+                            'source'=>$rblname,
+                            'ip'=>$ip,
+                            'class'=>'RBL Listed',
+                            'type'=>'INFO',
+                            'timestamp'=>time(),
+                            'information'=> array(
+                                           'Return code' => $result,
+                                             )
+                        );
+
+                        if (!reportAdd($outReport)) {
+                            die('error adding report'.PHP_EOL);
+                        }
+                    }
+                }
+            } else {
+                logger(LOG_DEBUG, "RBLSCANNER CLI cant detect RBL type");
+            }
+        }
+    }
 }
+logger(LOG_DEBUG, "RBLSCANNER CLI completed");
+
 
 function parse_zonefile($file) {
+    if(!is_file($file)) {
+        return false;
+    }
+
+    $rbllist = array();
     $regexp = "";
     $handle = @popen("cat ${file}", "r");
     if ($handle) {
         while (!feof($handle)) {
             $line = str_replace("\n","",fgets($handle, 4096));
             $ip = filter_var($line, FILTER_VALIDATE_IP);
-            $iplong = ip2long($ip);
-
-            foreach($netblocks as $netblock => $info) {
-                if ($iplong > $info['begin'] && $iplong < $info['end']) {
-                       echo "$ip is listed on $rbl" . PHP_EOL;
-                }
-            }
-
+            $rbllist[] = $ip;
         }
     }
     pclose($handle);
-}
 
-function iprange($range_ip, $range_cidr) {   
-    $corr       = (pow(2,32)-1)-(pow(2,32-$range_cidr)-1);
-    $first      = ip2long($range_ip) & ($corr);
-    $length     = pow(2,32-$range_cidr)-1;
-
-    return array(
-               'first_ip'=>$first,
-               'last_ip'=>$first+$length
-               );
+    return $rbllist;
 }
 
 ?>
