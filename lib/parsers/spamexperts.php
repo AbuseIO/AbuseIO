@@ -83,6 +83,10 @@ function parse_spamexperts($message) {
         preg_match("/${match}/m", $outReport['information']['Authentication-Results'], $customerCode);
         $customer = customerLookupCode($customerCode[1]);
 
+        if($customer['Code'] == 'UNDEF') {
+            $customer['Code'] = $customerCode[1];
+        }
+
         $outReport['customer'] = array(
                                         'Code'    => $customer['Code'],
                                         'Name'    => $customer['Name'],
