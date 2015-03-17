@@ -107,7 +107,7 @@ foreach($results as $nr => $result) {
           <td>${result['Code']}</td>
           <td>${result['Name']}</td>
           <td>${result['Contact']}</td>
-          <td>${result['AutoNotify']}</td>
+          <td>" . ($result['AutoNotify'] ? 'YES' : 'NO') . "</td>
           <td>
               <div class='btn-group pull-right'>
                   <a href='?action=delCustomer&DelCustomerCode=${result['Code']}' class='btn btn-default btn-sm' title='Delete customer' onclick='return confirm(\"Are you sure you want to delete this customer?\");'>Delete</a>
