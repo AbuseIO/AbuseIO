@@ -1,0 +1,44 @@
+Date: Tue, 17 Mar 2015 20:28:33 +0100
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <bd348f225398e637c8808555917c6e92@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_bd348f225398e637c8808555917c6e92"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver Sample Report: 2015-01-01
+
+--b1_bd348f225398e637c8808555917c6e92
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_bd348f225398e637c8808555917c6e92
+Content-Type: application/octet-stream; name="2015-01-01-compromised_website-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2015-01-01-compromised_website-sample-asn.csv.zip
+
+UEsDBBQAAAAIABGbcUZuiIXrTgIAAMYHAAAtABwAMjAxNS0wMS0wMS1jb21wcm9taXNlZF93ZWJz
+aXRlLXNhbXBsZS1hc24uY3N2VVQJAANicQhVYnEIVXV4CwABBAAAAAAEAAAAAM2Vy1LbMBSG930K
+xutYlnyHXUszxbRNaBLC0A0j5IMx2JJGkgl5+0rGycCiGbMp3egcS2Pp/3Qu8kzdgja0ld7Eq90g
+hTLW3AttOG3BuoZWdqRSNjWjphbcfWk3ViDsqKB6mWS12VrTqcZtYIy8cbu4BWqgEsot6q020Fqn
+BAPMQHmja87cMRrUEyjvkxdiEvs49Ul6hPEJSU+iyC6HEcoxInmC0tyb5PjtDFIl14hqkmAcIQ49
+AmWPUPobuH3Z2rcn00ZR4xsyCPQm/Q8T73JpZ2bTq6Pr+eL7K/fotFhdO3G6YesnJO/dFWGM0zBH
+TDgOLakzV8VstnIyB/E47sUnJ/jYm/yNieAckYygECcojnqqsbLzOMGD7J/Fcjm/XBTWvSimi9Pp
+TvRG+kxwA9wEsumqmuvgob4DHrSi7BrQQSm4jUxgbAbs0aKGviX7UfPueU+W+CTfISQfSWazpulK
+C6HAdIqvcfx7LEPkY8tAnFicfhhDfcvKgMNGnzWb87HSY5/gXmN2WLqtDXKcIkJCRFL8Hu1xHmcT
+73RmJ75Mi/Ni9u2N9/rmV/Bsgq/13V2wAF6CAhXYtR2KjzFi/EAeZYPij62QPc2DDkzNty2DfbVs
+ZEWbBtQ2GOz4KsHHAwY5UCVZjMIQWzgbpexdQUpTnA5wl6vPZw5sMV/PXWdmTHTc/JLLvdhMU1vt
+h/TafpXsopH9F9GQohU2m0p4Dsk6HF/ZJB5THv+8726EKqUCrX0pZNdQZa02Omgor4YO9ng/Or2i
+/nkh/fPiMP8AUEsBAh4DFAAAAAgAEZtxRm6IhetOAgAAxgcAAC0AGAAAAAAAAQAAAKSBAAAAADIw
+MTUtMDEtMDEtY29tcHJvbWlzZWRfd2Vic2l0ZS1zYW1wbGUtYXNuLmNzdlVUBQADYnEIVXV4CwAB
+BAAAAAAEAAAAAFBLBQYAAAAAAQABAHMAAAC1AgAAAAA=
+
+
+--b1_bd348f225398e637c8808555917c6e92--
