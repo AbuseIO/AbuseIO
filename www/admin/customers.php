@@ -13,7 +13,7 @@
             $autonotify = 0;
         }
 
-        if(empty($_POST['AddCustomerCode']) || empty($_POST['AddCustomerName']) || empty($_POST['AddCustomerContacts'])) {
+        if(empty($_POST['AddCustomerCode']) || empty($_POST['AddCustomerName'])) {
             echo "ERROR - Not all fields were filled in";
         } else {
             $customer = array(
