@@ -5,6 +5,11 @@
 This getting starting document will guide you quickly through the installation and setup. A more
 detailed instruction document and documenation can be found on our website https://abuse.io/
 
+## Requirements
+
+A simple virtual machine (1 core, 1 GB ram) will suffice for normal operations. If you intend to
+use the RBL scanner in combination with rbldnsd zonefiles 4 GB ram is recommended.
+
 ### Dependencies
 
 At this point we assume you have a working web- and mailserver. The configuration of these components
