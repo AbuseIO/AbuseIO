@@ -1,0 +1,7 @@
+You can use these files with the MDA, these EML's were made quick & dirty, but they do the trick.
+
+These samples are from the shadowserver wiki, and somewhat outdated. Therefore AbuseIO will give some warnings:
+
+PHP Notice:  Undefined index: timestamp in /opt/abuseio/lib/parsers/shadowserver.php on line 200
+
+You can ignore them safely
