@@ -144,16 +144,12 @@ function customerList($filter) {
 function customerLookupIP($ip) {
     // Local matches are already perferred
     $longip  = ip2long($ip);
-    $query   = "SELECT Code, Name, Contact, AutoNotify FROM Netblocks, Customers WHERE 1 AND Netblocks.CustomerCode = Customers.Code AND begin_in <= '${longip}' AND end_in >= '${longip}' ORDER BY begin_in DESC"; 
+    $query   = "SELECT Code, Name, Contact, AutoNotify FROM Netblocks, Customers WHERE 1 AND Netblocks.CustomerCode = Customers.Code AND begin_in <= '${longip}' AND end_in >= '${longip}' ORDER BY begin_in DESC LIMIT 1"; 
     $count   = _mysqli_num_rows($query);
     if ($count === 1) {
         $result = _mysqli_fetch($query);
         $customer = $result[0];
         return $customer;
-
-    } elseif ($count > 1) {
-        // There should never be two duplicates here
-        return false;
 
     } else {
         // If there are no matches then find on the user defined lookup
