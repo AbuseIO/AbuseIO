@@ -199,7 +199,7 @@ function parse_shadowserver($message) {
                                 'ip'            => $report['ip'], 
                                 'class'         => $class,
                                 'type'          => $type,
-                                'timestamp'     => $report['timestamp'], 
+                                'timestamp'     => strtotime($report['timestamp']),
                                 'information'   => $information
                               );
 
