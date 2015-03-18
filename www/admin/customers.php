@@ -37,7 +37,7 @@
     if(!empty($_GET['AutoNotify'])) $filter .= " AND AutoNotify = '".mysql_escape_string($_GET['AutoNotify'])."'";
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
 
-    if(!empty($_GET['OrderBy'])) { $order = mysql_escape_string($_GET['OrderBy']); } else { $order = 'Code'; }
+    if(!empty($_GET['OrderBy']) && in_array($_GET['OrderBy'], array('Code','Name','Contact','AutoNotify'))) { $order = mysql_escape_string($_GET['OrderBy']); } else { $order = 'Code'; }
     if(!empty($_GET['Direction']) && in_array($_GET['Direction'],array('ASC','DESC'))) { $direction = mysql_escape_string($_GET['Direction']); } else { $direction = 'ASC'; }
 
     // Calculate offset

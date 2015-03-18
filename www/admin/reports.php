@@ -21,7 +21,7 @@
     }
 
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
-    if(!empty($_GET['OrderBy'])) { $order = mysql_escape_string($_GET['OrderBy']); } else { $order = 'LastSeen'; }
+    if(!empty($_GET['OrderBy']) && in_array($_GET['OrderBy'],array('ID','IP','Class','Status','Source','CustomerCode','CustomerName','LastSeen','Type'))) { $order = mysql_escape_string($_GET['OrderBy']); } else { $order = 'LastSeen'; }
     if(!empty($_GET['Direction']) && in_array($_GET['Direction'],array('ASC','DESC'))) { $direction = mysql_escape_string($_GET['Direction']); } else { $direction = 'DESC'; }
 
     // Calculate offset
