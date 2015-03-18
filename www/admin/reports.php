@@ -124,7 +124,7 @@
     }
     $paginator .= " &nbsp; Showing results ${first} - ${last} of ${count}</p>";
 
-    $downloadCSV = "<span class='btn btn-info btn-sm'><a href='?".http_build_query(array_merge($uri,array('action'=>'DownloadCSV')))."'>Export to CSV</a></span>";
+    $downloadCSV = "<div class='pull-right'><a href='?".http_build_query(array_merge($uri,array('action'=>'DownloadCSV')))."' class='btn btn-default btn-sm'>Export to CSV</a></div>";
 
     echo $downloadCSV . $paginator;
 
