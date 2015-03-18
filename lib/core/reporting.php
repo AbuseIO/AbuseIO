@@ -48,6 +48,11 @@ function reportAdd($report) {
         logger(LOG_WARNING, __FUNCTION__ . " was called with not enough arguments in the array");
         return false;
     }
+    if(date('Y', $timestamp) < 2010) {
+        logger(LOG_WARNING, __FUNCTION__ . " was called with an incorrect timestamp (${timestamp})");
+        return false;
+    }
+
     if (!isset($domain)) {
         $domain = '';
     } elseif(preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
