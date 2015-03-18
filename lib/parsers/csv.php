@@ -30,35 +30,25 @@ function csv_to_array($file) {
         return false;
     }
 
-    $array = array();
-    $row = 1;
-    if (($handle = fopen($file, "r")) !== FALSE) {
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-			// Skip empty csv rows
-			if ($data[0] == NULL) continue;
-            if ($row === 1) {
-                $headers = $data;
-                $magic   = count($data);
-            } else {
-                $num = count($data);
-                if ($num !== $magic) {
-                    logger(LOG_ERR, __FUNCTION__ . " The number of cells do not match the header. CSV is either corrupt or incomplete.");
-
-                    return false;
-                }
-
-                for ($c=0; $c < $num; $c++) {
-                    if ($headers[$c] == "timestamp") {
-                        $array[$row][$headers[$c]] = strtotime($data[$c]);
-                    } else {
-                        $array[$row][$headers[$c]] = $data[$c];
-                    }
-                }
-            }
-            $row++;
+    $data = array();
+    
+    $csvdata = array_map('str_getcsv', file($file));
+    if (count($csvdata) > 1) { // there should be a minimum of 2 lines, column names and one line of data
+        $header = array_shift($csvdata);
+        if (count($csvdata[0]) !== count($header)) {
+            logger(LOG_ERR, __FUNCTION__ . " The number of cells do not match the header. CSV is either corrupt or incomplete.");
+            return false;
         }
-        fclose($handle);
+
+        foreach($csvdata as $row) {
+            if ($row[0] == NULL) continue;
+            $data[] = array_combine($header, $row);
+        }
+        return $data;
+    } else {
+        // Missing data
+        logger(LOG_ERR, __FUNCTION__ . " Incomplete CSV file.");
+        return false;
     }
-    return $array;
 }
 ?>
