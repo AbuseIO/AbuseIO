@@ -34,7 +34,7 @@
     if(!empty($_GET['CustomerCode'])) $filter .= " AND CustomerCode LIKE '".mysql_escape_string($_GET['CustomerCode'])."'";
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
 
-    if(!empty($_GET['OrderBy'])) { $order = mysql_escape_string($_GET['OrderBy']); } else { $order = 'begin_in'; }
+    if(!empty($_GET['OrderBy']) && in_array($_GET['OrderBy'], array('begin_in','end_in','CustomerCode'))) { $order = mysql_escape_string($_GET['OrderBy']); } else { $order = 'begin_in'; }
     if(!empty($_GET['Direction']) && in_array($_GET['Direction'],array('ASC','DESC'))) { $direction = mysql_escape_string($_GET['Direction']); } else { $direction = 'ASC'; }
 
     // Calculate offset
