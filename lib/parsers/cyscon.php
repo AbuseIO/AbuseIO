@@ -35,9 +35,14 @@ function parse_cyscon($message) {
         $class  = 'Compromised website';
         $type   = 'ABUSE';
 
-   } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "MALWARE-report.txt") {
+    } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "MALWARE-report.txt") {
         $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
         $class  = 'Compromised website';
+        $type   = 'ABUSE';
+
+    } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "PHISH-report.txt") {
+        $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
+        $class  = 'Phishing website';
         $type   = 'ABUSE';
 
     } else {
