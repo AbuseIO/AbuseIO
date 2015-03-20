@@ -223,13 +223,18 @@ if(isset($PostMessage)) {
 ?>
 
 <?php
-$infotext = "../ash/infotext/".$infolang.str_replace(" ", "_", $report['Class']).".html";
+$infotext = "../ash/infotext/".$infolang."/".str_replace(" ", "_", $report['Class']).".html";
 if (file_exists($infotext)) {
-    echo '<div style="padding: 1em 0 2em;">';
-    include($infotext);
-    echo '</div>';
-}
+?>
+    <p style="margin: 2em 0;"><a class="btn btn-default" data-toggle="collapse" href="#infotext" aria-expanded="false" aria-controls="infotext">Toggle class infotext</a></p>
+    <div class="collapse" id="infotext">
+        <div class="well"><?php include($infotext); ?></div>
+    </div>
+<?php } else { ?>
+    No template found
+<?php } ?>
 
+<?php
 $evidences = evidenceList($_GET['id']);
 
 if (!empty($evidences)) {
