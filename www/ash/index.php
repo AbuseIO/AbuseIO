@@ -157,7 +157,7 @@ if (!empty($_GET['action'])) {
         <div class="row">
             <div class="col-md-6 form-group form-group-sm">
                 <label for='noteMessage'>Your reply : </label>
-                <textarea rows="5" cols="79" name='noteMessage'></textarea>
+                <textarea rows="5" cols="70" name='noteMessage'></textarea>
             </div>
             <div class="col-md-6 form-group form-group-sm"><br>
                 <input type="radio" name="noteType" value="message" checked>Reply<br>
