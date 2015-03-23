@@ -3,8 +3,16 @@
     include('../../lib/core/loader.php');
     include('../../lib/frontend/top.php');
 
+    if (isset($_GET['action']) && $_GET['action'] == 'toggleCustomer' ) {
+        if(empty($_GET['toggleCustomerCode']) || strlen($_GET['toggleState']) != 1) {
+            echo "ERROR - Changing notification setting";
+        } else {
+            customerNotification(mysql_escape_string($_GET['toggleCustomerCode']), $_GET['toggleState']);
+        }
+    }
+
     if (isset($_GET['action']) && $_GET['action'] == 'delCustomer' ) {
-        customerDelete($_GET['DelCustomerCode']);
+        customerDelete(mysql_escape_string($_GET['DelCustomerCode']));
     }
     if (isset($_POST['action']) && $_POST['action'] == 'addCustomer' ) {
         if($_POST['AddAutoNotify'] == 'on') {
@@ -108,9 +116,10 @@ foreach($results as $nr => $result) {
           <td>${result['Name']}</td>
           <td>${result['Contact']}</td>
           <td>" . ($result['AutoNotify'] ? 'YES' : 'NO') . "</td>
-          <td>
+          <td width='150'>
               <div class='btn-group pull-right'>
                   <a href='?action=delCustomer&DelCustomerCode=${result['Code']}' class='btn btn-default btn-sm' title='Delete customer' onclick='return confirm(\"Are you sure you want to delete this customer?\");'>Delete</a>
+                  <a href='?action=toggleCustomer&toggleCustomerCode=${result['Code']}&toggleState=" . ($result['AutoNotify'] ? '0' : '1') . "' class='btn btn-default btn-sm' title='Switch notification setting'>" . ($result['AutoNotify'] ? 'Disable' : 'Enable') . "</a>
               </div>
           </td>
         </tr>

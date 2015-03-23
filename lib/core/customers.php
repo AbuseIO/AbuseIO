@@ -24,6 +24,24 @@
 
 
 /*
+** Function: customerNotification
+** Parameters:
+**  (bool): true enable, false disable notifcations
+** Returns: 
+**  (bool): return value of change
+*/
+function customerNotification($code, $state) {
+    if(empty($code) || strlen($state) != 1) {
+        return false;
+    }
+
+    $query = "UPDATE Customers SET AutoNotify = '${state}' WHERE 1 and Code='${code}'";
+
+    return _mysqli_query($query, "");    
+}
+
+
+/*
 ** Function: customerCount
 ** Parameters: 
 **  filter(string): SQL WHERE Conditions to be added to the selection
