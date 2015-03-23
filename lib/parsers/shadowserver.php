@@ -42,6 +42,11 @@ function parse_shadowserver($message) {
                                                     'fields'    => 'protocol port version instance_name tcp_port named_pipe response_length amplification',
                                                     'type'      => 'INFO',
                                                  ),
+                'scan_ssl_poodle'       => array (
+                                                    'class'     => 'SSLv3 Vulnerable Server',
+                                                    'fields'    => 'port handshake cipher_suite subject_common_name issuer_common_name cert_expiration_date issuer_organization_name',
+                                                    'type'      => 'INFO',
+                                                 ),
                 'ssl_scan'              => array (
                                                     'class'     => 'SSLv3 Vulnerable Server',
                                                     'fields'    => 'port handshake cipher_suite subject_common_name issuer_common_name cert_expiration_date issuer_organization_name',

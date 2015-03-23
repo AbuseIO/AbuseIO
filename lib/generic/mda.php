@@ -243,7 +243,7 @@ function save_attachment($file, $body) {
             if (true === $zip->open($file)) {
                 $zip->extractTo($file_info['dirname'], array($zip->getNameIndex('0')));
                 unlink($file);
-                return $file_info['filename'];
+                return $zip->getNameIndex('0');
             } else {
                 logger(LOG_ERR, "Error extracting zip file to ". $file_info['dirname']);
                 return false;

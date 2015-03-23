@@ -34,11 +34,55 @@ function parse_cyscon($message) {
         $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
         $class  = 'Compromised website';
         $type   = 'ABUSE';
+        $list   = 'Spamvertized';
 
-   } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "MALWARE-report.txt") {
+    } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "MALWARE-report.txt") {
         $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
         $class  = 'Compromised website';
         $type   = 'ABUSE';
+        $list   = 'Malware';
+
+    } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "PHISH-report.txt") {
+        $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
+        $class  = 'Phishing website';
+        $type   = 'ABUSE';
+        $list   = 'Phishing';
+
+    } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "DEFACEMENT-report.txt") {
+        $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
+        $class  = 'Compromised website';
+        $type   = 'ABUSE';
+        $list   = 'Defacement';
+
+    } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "ADWARE-report.txt") {
+        $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
+        $class  = 'Compromised website';
+        $type   = 'ABUSE';
+        $list   = 'Malicious adware';
+
+    } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "FRAUD-report.txt") {
+        $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
+        $class  = 'Phishing website';
+        $type   = 'ABUSE';
+        $list   = 'Fraud';
+
+    } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "MALICIOUS-report.txt") {
+        $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
+        $class  = 'Compromised website';
+        $type   = 'ABUSE';
+        $list   = 'Malicious';
+
+    } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "EVIL-report.txt") {
+        $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
+        $class  = 'Compromised website';
+        $type   = 'ABUSE';
+        $list   = 'Evil';
+
+    } elseif(!empty($message['attachments'][1]) && $message['attachments'][1] == "SCAM-report.txt") {
+        $report = file_get_contents($message['store'] ."/1/". $message['attachments'][1]);
+        $class  = 'Phishing website';
+        $type   = 'ABUSE';
+        $list   = 'Scam';
 
     } else {
         logger(LOG_ERR, __FUNCTION__ . " Unable to detect report type in message from ${source} subject ${message['subject']}");
@@ -48,7 +92,7 @@ function parse_cyscon($message) {
     $report = str_replace("\r", "", $report);
     preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$report,$regs);
     $fields = array_combine($regs[1],$regs[2]);
-
+    $fields['list'] = "${source}-${list}";
 
     if (empty($fields['signature']) || empty($fields['ip']) || empty($fields['domain']) || empty($fields['last_seen']) || empty($fields['uri']) ) {
         logger(LOG_ERR, __FUNCTION__ . " Unable to select correct fields in message from ${source} subject ${message['subject']}");
