@@ -646,10 +646,10 @@ function reportNotification($filter) {
             // It will check based on the NOTIFICATION_INFO_INTERVAL and NOTIFICATION_ABUSE_INTERVAL is a case is to be 
             // sent out. However if the case was marked as resolved it should always send out the notification again and
             // unset the customerResolved flag. Also the customers AutoNotify must be enabled for notifications to be send.
-            if ($row['Type'] == 'INFO' && $row['LastNotifyTimestamp'] >= $interval_info_after) {
+            if ($row['Type'] == 'INFO' && $row['LastNotifyTimestamp'] <= $interval_info_after) {
                 $data[$row['CustomerCode']][] = $row;
 
-            } elseif ($row['Type'] == 'ABUSE' && $row['LastNotifyTimestamp'] >= $interval_abuse_after) {
+            } elseif ($row['Type'] == 'ABUSE' && $row['LastNotifyTimestamp'] <= $interval_abuse_after) {
                 $data[$row['CustomerCode']][] = $row;
 
             } elseif ($row['Type'] == 'ALERT') {
