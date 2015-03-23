@@ -137,6 +137,21 @@ if (!empty($_GET['action'])) {
                 ?></dd>
 
             </dl>
+
+        <?php
+            $info_array = json_decode($report['Information'], true);
+            if (empty($info_array)) {
+                echo '<p>No information found</p>';
+            } else {
+                echo '<dl class="dl-horizontal">';
+                foreach($info_array as $field => $value) {
+                    echo "<dt>${field}</dt>";
+                    echo "<dd>${value}</dd>";
+                }
+                echo '</dl>';
+            }
+        ?>
+
         </div>
 
         <?php
