@@ -216,7 +216,7 @@ if(isset($PostMessage)) {
         echo '<dl class="dl-horizontal">';
         foreach($info_array as $field => $value) {
             echo "<dt>${field}</dt>";
-            echo "<dd>${value}</dd>";
+            echo "<dd>".htmlentities($value)."</dd>";
         }
         echo '</dl>';
     }

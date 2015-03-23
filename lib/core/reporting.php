@@ -488,8 +488,8 @@ function reportSend($filter) {
 
             $block[] = "";
             $block[] = "Ticket #${report['ID']}: Report for IP address ${report['IP']} (${report['Type']}: ${report['Class']})";
-            $block[] = "";
             $block[] = "Report date: ".date('Y-m-d H:i',$report['LastSeen']);
+            $block[] = "Report count: ".$report['ReportCount'];
             $block[] = "Source: ${report['Source']}";
             if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
             if (!empty($report['Information'])) {
@@ -600,7 +600,7 @@ function reportNotification($filter) {
     // all items per customer
 
     $data  = array();
-    $query = "SELECT * FROM Reports WHERE 1 ";
+    $query = "SELECT * FROM Reports WHERE 1 AND Status != 'CLOSED' ";
 
     if (!is_array($filter)) {
         return false;
@@ -646,10 +646,10 @@ function reportNotification($filter) {
             // It will check based on the NOTIFICATION_INFO_INTERVAL and NOTIFICATION_ABUSE_INTERVAL is a case is to be 
             // sent out. However if the case was marked as resolved it should always send out the notification again and
             // unset the customerResolved flag. Also the customers AutoNotify must be enabled for notifications to be send.
-            if ($row['Type'] == 'INFO' && $row['LastNotifyTimestamp'] >= $interval_info_after) {
+            if ($row['Type'] == 'INFO' && $row['LastNotifyTimestamp'] <= $interval_info_after) {
                 $data[$row['CustomerCode']][] = $row;
 
-            } elseif ($row['Type'] == 'ABUSE' && $row['LastNotifyTimestamp'] >= $interval_abuse_after) {
+            } elseif ($row['Type'] == 'ABUSE' && $row['LastNotifyTimestamp'] <= $interval_abuse_after) {
                 $data[$row['CustomerCode']][] = $row;
 
             } elseif ($row['Type'] == 'ALERT') {

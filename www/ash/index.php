@@ -119,6 +119,9 @@ if (!empty($_GET['action'])) {
                 <dt>Last Seen</dt>
                 <dd><?php echo date("d-m-Y H:i", $report['LastSeen']); ?></dd>
 
+                <dt>Report count</dt>
+                <dd><?php echo $report['ReportCount']; ?></dd>
+
                 <dt>Ticket status</dt>
                 <dd><?php echo "<span class='label label-${labelClass[$report['Status']]}'>${report['Status']}</span>"; ?></dd>
 
@@ -134,6 +137,21 @@ if (!empty($_GET['action'])) {
                 ?></dd>
 
             </dl>
+
+        <?php
+            $info_array = json_decode($report['Information'], true);
+            if (empty($info_array)) {
+                echo '<p>No information found</p>';
+            } else {
+                echo '<dl class="dl-horizontal">';
+                foreach($info_array as $field => $value) {
+                    echo "<dt>${field}</dt>";
+                    echo "<dd>".htmlentities($value)."</dd>";
+                }
+                echo '</dl>';
+            }
+        ?>
+
         </div>
 
         <?php
@@ -154,7 +172,7 @@ if (!empty($_GET['action'])) {
         <div class="row">
             <div class="col-md-6 form-group form-group-sm">
                 <label for='noteMessage'>Your reply : </label>
-                <textarea rows="5" cols="79" name='noteMessage'></textarea>
+                <textarea rows="5" cols="70" name='noteMessage'></textarea>
             </div>
             <div class="col-md-6 form-group form-group-sm"><br>
                 <input type="radio" name="noteType" value="message" checked>Reply<br>
