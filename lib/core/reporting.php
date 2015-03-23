@@ -489,6 +489,7 @@ function reportSend($filter) {
             $block[] = "";
             $block[] = "Ticket #${report['ID']}: Report for IP address ${report['IP']} (${report['Type']}: ${report['Class']})";
             $block[] = "Report date: ".date('Y-m-d H:i',$report['LastSeen']);
+            $block[] = "Report count: ".$report['ReportCount'];
             $block[] = "Source: ${report['Source']}";
             if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
             if (!empty($report['Information'])) {
