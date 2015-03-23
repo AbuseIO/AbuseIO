@@ -119,6 +119,9 @@ if (!empty($_GET['action'])) {
                 <dt>Last Seen</dt>
                 <dd><?php echo date("d-m-Y H:i", $report['LastSeen']); ?></dd>
 
+                <dt>Report count</dt>
+                <dd><?php echo $report['ReportCount']; ?></dd>
+
                 <dt>Ticket status</dt>
                 <dd><?php echo "<span class='label label-${labelClass[$report['Status']]}'>${report['Status']}</span>"; ?></dd>
 
