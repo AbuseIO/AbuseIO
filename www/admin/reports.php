@@ -158,7 +158,7 @@ $labelClass = array(
 );
 
 foreach($results as $nr => $result) {
-    if ($result['ReportCount'] != $result['LastNotifyReportcount']) {
+    if ($result['ReportCount'] != $result['LastNotifyReportCount']) {
         $ticketStatus = 'NOTIFY PENDING';
     } elseif($result['CustomerResolved'] == 1) {
         $ticketStatus = 'RESOLVED';
