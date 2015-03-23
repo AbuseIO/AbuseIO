@@ -488,7 +488,6 @@ function reportSend($filter) {
 
             $block[] = "";
             $block[] = "Ticket #${report['ID']}: Report for IP address ${report['IP']} (${report['Type']}: ${report['Class']})";
-            $block[] = "";
             $block[] = "Report date: ".date('Y-m-d H:i',$report['LastSeen']);
             $block[] = "Source: ${report['Source']}";
             if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
@@ -600,7 +599,7 @@ function reportNotification($filter) {
     // all items per customer
 
     $data  = array();
-    $query = "SELECT * FROM Reports WHERE 1 ";
+    $query = "SELECT * FROM Reports WHERE 1 AND Status != 'CLOSED' ";
 
     if (!is_array($filter)) {
         return false;
