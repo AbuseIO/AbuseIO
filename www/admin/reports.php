@@ -11,13 +11,11 @@
     if(!empty($_GET['Status']))         $filter .= " AND Status='".mysql_escape_string($_GET['Status'])."'";
     if(!empty($_GET['CustomerCode']))   $filter .= " AND CustomerCode='".mysql_escape_string($_GET['CustomerCode'])."'";
     if(!empty($_GET['CustomerName']))   $filter .= " AND CustomerName like '%".mysql_escape_string($_GET['CustomerName'])."%'";
+    if(!empty($_GET['Type']))           $filter .= " AND Type = '".mysql_escape_string($_GET['Type'])."'";
 
     // Select only ABUSE type and OPEN status by default, unless we have other filter options
     if (empty($filter)) {
-        $reportType=(isset($_GET['Type']))?mysql_escape_string($_GET['Type']):'ABUSE';
-        if (!empty($reportType)) $filter .= " AND Type='$reportType'";
-
-        $filter .= " AND Status = 'OPEN'";
+        $filter .= " AND (Type = 'ABUSE' OR ReportCount != LastNotifyReportCount) AND Status = 'OPEN'";
     }
 
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
