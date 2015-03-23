@@ -15,7 +15,7 @@
         customerDelete(mysql_escape_string($_GET['DelCustomerCode']));
     }
     if (isset($_POST['action']) && $_POST['action'] == 'addCustomer' ) {
-        if($_POST['AddAutoNotify'] == 'on') {
+        if(!empty($_POST['AddAutoNotify']) && $_POST['AddAutoNotify'] == 'on') {
             $autonotify = 1;
         } else {
             $autonotify = 0;

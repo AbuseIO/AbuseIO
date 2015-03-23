@@ -101,9 +101,6 @@ function customerAdd($customer) {
 **  (boolean): Mysql query result
 */
 function customerDelete($customerCode) {
-    if(!is_numeric($customerCode)) {
-        return false;
-    }
 
     $query = "DELETE FROM Customers WHERE Code = '${customerCode}';";
 
