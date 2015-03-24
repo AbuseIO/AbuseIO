@@ -48,6 +48,11 @@ function parse_spamcop($message) {
             }
         }
 
+        if(strpos($message['body'], 'Comments from recipient') !== false) {
+            preg_match("/Comments from recipient.*\s]\n(.*)\n\n\nThis/s", str_replace(array("\r","> "), "", $message['body']), $match);
+            $outReport['information']['recipient_comment'] = str_replace("\n", " ", $match[1]);
+        }
+
         $message['arf']['report'] = str_replace("\r", "", $message['arf']['report']);
         preg_match_all('/([\w\-]+): (.*)[ ]*\r?\n/',$message['arf']['report'],$regs);
         $fields = array_combine($regs[1],$regs[2]);
