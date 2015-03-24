@@ -506,11 +506,7 @@ function reportSend($filter) {
             $block[] = "\n";
             $blocks .= implode("\n", $block);
 
-            //Mark the report as notified:
-            reportNotified($report['ID']);
-
             $class_seen[$report['Class']] = 1;
-
         }
 
         // Include further information about the abuse reports
@@ -565,6 +561,10 @@ function reportSend($filter) {
             if(mail($to, $subject, $email, implode("\r\n", $headers))) {
                 logger(LOG_DEBUG, "Notifier - Successfully sent notification to ${to}");
                 $counter++;
+                foreach($reports as $id => $report) {
+                    //Mark the report as notified:
+                    reportNotified($report['ID']);
+                }
             } else {
                 logger(LOG_ERR, "Notifier - Failed sending mail to ${to} MTA returned false");
                 return false;
