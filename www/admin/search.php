@@ -28,9 +28,9 @@
                 <select name='Class' class="form-control">
                     <option value=''>All</option>
                     <?php
-                        $summary = reportSummary("365");
-                        foreach($summary as $nr => $element) {
-                            echo "<option value='{$element['Class']}'>{$element['Class']}</option>";
+                        $summary = reportSummary(3650);
+                        foreach($summary as $class => $count) {
+                            echo "<option value='{$class}'>{$class}</option>";
                         }
                     ?>
                 </select>

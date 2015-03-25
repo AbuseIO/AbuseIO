@@ -256,10 +256,13 @@ function reportGet($id) {
 function reportSummary($period) {
     $summary = array();
 
-    $filter = "";
-    $query  = "SELECT Class, count(*) AS Count FROM Reports GROUP BY Class";
+    $query  = "SELECT Class, count(*) AS Count FROM Reports WHERE 1 AND LastSeen > '".strtotime($period . " days ago")."' GROUP BY Class";
 
-    $summary = _mysqli_fetch($query);
+    $rows = _mysqli_fetch($query);
+
+    foreach($rows as $id => $row) {
+        $summary[$row['Class']] = $row['Count'];
+    }
 
     return $summary;
 }
