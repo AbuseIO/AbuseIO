@@ -527,7 +527,7 @@ function reportSend($filter) {
             $to             = $report['CustomerContact'];
         }
         $email              = $template;
-        $subject            = '['.date('Y-m-d').']Notification of (possible) abuse';
+        $subject            = '['.date('Y-m-d').'] Notification of (possible) abuse';
         $email              = str_replace("<<COUNT>>", $count, $email);
         $email              = str_replace("<<BOXES>>", $blocks, $email);
 
