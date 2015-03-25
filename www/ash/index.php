@@ -172,14 +172,14 @@ if (!empty($_GET['action'])) {
         <div class="row">
             <div class="col-md-6 form-group form-group-sm">
                 <label for='noteMessage'>Your reply : </label>
-                <textarea rows="5" cols="70" name='noteMessage'></textarea>
+                <textarea rows="5" cols="70" name='noteMessage' style="width: 100%;"></textarea>
             </div>
             <div class="col-md-6 form-group form-group-sm"><br>
                 <input type="radio" name="noteType" value="message" checked>Reply<br>
 <?php if($report['Type'] == "INFO") { ?>
-                <input type="radio" name="noteType" value="ignore" onclick="javascript:alert('When setting the report to ignored you will no longer receive any notifications of this event. Be very carefull using this option!');">Reply and mark as ignored<br>
+                <input type="radio" name="noteType" value="ignore">Reply and mark as ignored<br>
 <?php } ?>
-                <input type="radio" name="noteType" value="resolve" onclick="javascript:alert('If you mark this case as resolved and no new abuse is received within certain period then the ticket will be closed. Only mark the event as resolved when you actually resolved the issue.')";>Reply and mark as resolved<br>
+                <input type="radio" name="noteType" value="resolve">Reply and mark as resolved<br>
                 <br>
                 <input type='submit' class='btn btn-primary btn-sm' name='' value='Submit'><br>
             </div>

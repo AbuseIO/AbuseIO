@@ -38,27 +38,19 @@ function parse_spamcop($message) {
         // We've got a ARF formatted message
         // The e-mail parses should have noticed the multipart elements and created a 'arf' array
 
-        if (isset($message['arf']['headers']['from'])) {
-            $outReport['information']['from'] = $message['arf']['headers']['from'];
-        }
-        if (isset($message['arf']['headers']['return-path'])) {
-            if (!is_array($message['arf']['headers']['return-path'])) {
-                $outReport['information']['return-path'] =  $message['arf']['headers']['return-path'];
+        foreach($message['arf']['headers'] as $key => $value) {
+            if(is_array($value)) {
+                foreach($value as $index => $subvalue) {
+                    $outReport['information']["${key}${index}"] = $subvalue;
+                }
             } else {
-                $outReport['information']['return-path'] = $message['arf']['headers']['return-path'][0];
+                $outReport['information'][$key] = $value;
             }
         }
-        if (isset($message['arf']['headers']['subject'])) {
-            $outReport['information']['subject'] = $message['arf']['headers']['subject'];
-        }
-        if (isset($message['arf']['headers']['x-mailer'])) {
-            $outReport['information']['x-mailer'] = $message['arf']['headers']['x-mailer'];
-        }
-        if (is_array($message['arf']['headers']['received'])) {
-            foreach( $message['arf']['headers']['received'] as $id => $received) {
-                $field = "header_line". ($id + 1);
-                $outReport['information'][$field] = "received " . $received;
-            }
+
+        if(strpos($message['body'], 'Comments from recipient') !== false) {
+            preg_match("/Comments from recipient.*\s]\n(.*)\n\n\nThis/s", str_replace(array("\r","> "), "", $message['body']), $match);
+            $outReport['information']['recipient_comment'] = str_replace("\n", " ", $match[1]);
         }
 
         $message['arf']['report'] = str_replace("\r", "", $message['arf']['report']);
