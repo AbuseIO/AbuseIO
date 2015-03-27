@@ -269,13 +269,12 @@ if (!empty($evidences)) {
             </tr>
         ";
     }
-}
 ?>
     </tbody>
 </table>
 </div>
 </div>
-<?php // End of Evidence section ?>
+<?php } // End of Evidence section ?>
 
 <?php
 // Start Notes section
