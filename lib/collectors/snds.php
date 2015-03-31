@@ -56,7 +56,7 @@ function collect_snds($config) {
             ),
             'Blocked due to user complaints or other evidence of spamming'=>array(
                 'class'=>'SPAM',
-                'information'=>array('reported_as' => 'Blocked due to user complaints or other evidence of spamming'),
+                'information'=>array(),
             ),
         );
         preg_match_all('/([^,]+),([^,]+),([^,]+),([^\r\n]+)\r?\n/',$data, $regs);
