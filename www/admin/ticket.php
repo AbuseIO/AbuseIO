@@ -238,8 +238,8 @@ $evidences = evidenceList($_GET['id']);
 if (!empty($evidences)) {
 ?>
 <p style="margin: 2em 0;"><a class="btn btn-default" data-toggle="collapse" href="#evidencetable" aria-expanded="false" aria-controls="evidencetable">Show linked evidence</a></p>
+
 <div class="collapse" id="evidencetable">
-<div class="well">
 
 <h2>Evidence</h2>
 
@@ -272,7 +272,6 @@ if (!empty($evidences)) {
 ?>
     </tbody>
 </table>
-</div>
 </div>
 <?php } // End of Evidence section ?>
 
