@@ -478,7 +478,6 @@ function reportSend($filter) {
         $count = count($reports);
 
         $blocks = "";
-        $class_seen = array();
         foreach($reports as $id => $report) {
             $block = array();
             $report['Information'] = json_decode($report['Information']);
@@ -509,20 +508,6 @@ function reportSend($filter) {
             }
             $block[] = "\n";
             $blocks .= implode("\n", $block);
-
-            $class_seen[$report['Class']] = 1;
-        }
-
-        // Include further information about the abuse reports
-        if (!empty($class_seen)) {
-            $blocks .= "\nAdditional information:\n\n";
-            foreach ($class_seen as $class => $true) {
-                $infotext = dirname(__FILE__)."/../../www/ash/infotext/en/".str_replace(" ", "_", $report['Class']).".html";
-                if (file_exists($infotext)) {
-                    $class_info = strip_tags(file_get_contents($infotext));
-                    $blocks .= "$class:\n\n$class_info\n";
-                }
-            }
         }
 
         if (DEBUG === true) {
