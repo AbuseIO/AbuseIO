@@ -460,6 +460,7 @@ function reportSend($filter) {
     }
 
     if (!defined('NOTIFICATIONS') && NOTIFICATIONS != true && !is_file(APP.NOTIFICATION_TEMPLATE)){
+        logger(LOG_DEBUG, "Notifier - Is not enabled or template is missing");
         return false;
     } else {
         $template = file_get_contents(APP.NOTIFICATION_TEMPLATE);
