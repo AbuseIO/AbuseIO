@@ -53,7 +53,11 @@ function collect_snds($config) {
                 'information'=>array(
                     'delisting_url'=>'https://www.spamhaus.org/lookup/',
                 ),
-            )
+            ),
+            'Blocked due to user complaints or other evidence of spamming'=>array(
+                'class'=>'SPAM',
+                'information'=>array('reported_as' => 'Blocked due to user complaints or other evidence of spamming'),
+            ),
         );
         preg_match_all('/([^,]+),([^,]+),([^,]+),([^\r\n]+)\r?\n/',$data, $regs);
         $first_ip = $regs[1];
