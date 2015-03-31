@@ -517,7 +517,7 @@ function reportSend($filter) {
         if (!empty($class_seen)) {
             $blocks .= "\nAdditional information:\n\n";
             foreach ($class_seen as $class => $true) {
-                $infotext = "../../www/ash/infotext/".str_replace(" ", "_", $report['Class']).".html";
+                $infotext = dirname(__FILE__)."/../../www/ash/infotext/en/".str_replace(" ", "_", $report['Class']).".html";
                 if (file_exists($infotext)) {
                     $class_info = strip_tags(file_get_contents($infotext));
                     $blocks .= "$class:\n\n$class_info\n";
