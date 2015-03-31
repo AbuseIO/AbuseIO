@@ -459,7 +459,7 @@ function reportSend($filter) {
         return false;
     }
 
-    if (null === NOTIFICATIONS && !is_file(APP.NOTIFICATION_TEMPLATE)){
+    if (!defined('NOTIFICATIONS') && NOTIFICATIONS != true && !is_file(APP.NOTIFICATION_TEMPLATE)){
         return false;
     } else {
         $template = file_get_contents(APP.NOTIFICATION_TEMPLATE);
