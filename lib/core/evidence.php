@@ -39,7 +39,7 @@ function evidenceStore($sender, $subject, $data) {
                                     Data
                          ) VALUES (
                                     '" . mysql_escape_string($sender) . "',
-                                    '" . mysql_escape_string($subject) . "',
+                                    '" . substr(mysql_escape_string($subject),0,255) . "',
                                     '" . mysql_escape_string($data) . "'
                                   );";
 
