@@ -86,7 +86,6 @@ function collect_osint($config) {
                 $outReport['information']   = array();
                 $outReport['timestamp']     = '';
         
-                print_r($fields);
             }
         }
     }

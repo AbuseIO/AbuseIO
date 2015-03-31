@@ -2,6 +2,7 @@ FALLBACK_MAIL = bounce@host.tld                 ; this is required to bounce inc
 TIME_ZONE = Europe/Amsterdam
 KEEP_MAILS = true                               ; this will store all incoming mail in a file in APP/archive/ for future use (e.g. reseeding database)
 KEEP_EVIDENCE = true                            ; this will store all incoming mail into a evidence table and links each related ticket
+REMOVE_EVIDENCE = 500 days                       ; this will remove all evidence from the database after 'x days, x months' etc
 SQL_HOST = localhost
 SQL_USER = abuseio
 SQL_PASS = 

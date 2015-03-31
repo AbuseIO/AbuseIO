@@ -48,7 +48,7 @@ function reportAdd($report) {
         logger(LOG_WARNING, __FUNCTION__ . " was called with not enough arguments in the array");
         return false;
     }
-    if(date('Y', $timestamp) < 2010) {
+    if(date('Y', $timestamp) < 2013 || strtotime(date('d-m-Y H:i:s',$timestamp)) !== (int)$timestamp) {
         logger(LOG_WARNING, __FUNCTION__ . " was called with an incorrect timestamp (${timestamp})");
         return false;
     }
