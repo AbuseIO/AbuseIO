@@ -18,7 +18,7 @@
         $interval_info_after  = strtotime(NOTIFICATIONS_INFO_INTERVAL . " ago");
         $interval_abuse_after = strtotime(NOTIFICATIONS_ABUSE_INTERVAL . " ago");
 
-        $filter .= " AND (Type = 'ABUSE' OR (Type != 'ABUSE' AND NotifiedCount = 0 AND ReportCount != LastNotifyReportCount AND LastNotifyTimestamp <= ${interval_info_after})) AND Status = 'OPEN'";
+        $filter .= " AND (Type = 'ABUSE' OR (Type != 'ABUSE' AND NotifiedCount = 0 AND CustomerIgnored = 0 AND ReportCount != LastNotifyReportCount AND LastNotifyTimestamp <= ${interval_info_after})) AND Status = 'OPEN'";
     }
 
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
