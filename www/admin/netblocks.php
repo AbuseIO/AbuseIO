@@ -38,7 +38,7 @@
     if(!empty($_GET['Direction']) && in_array($_GET['Direction'],array('ASC','DESC'))) { $direction = mysql_escape_string($_GET['Direction']); } else { $direction = 'ASC'; }
 
     // Calculate offset
-    $rows_per_page = 100;
+    $rows_per_page = 20;
     $offset = $rows_per_page*($page-1);
 
     // Pagination settings
