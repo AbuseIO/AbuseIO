@@ -143,7 +143,7 @@ foreach($results as $nr => $result) {
                     $filter = "";
                     $list = customerList($filter);
                     foreach($list as $nr => $element) {
-                        echo "<option value='{$element['Code']}'>{$element['Name']}</option>";
+                        echo "<option value='{$element['Code']}'>{$element['Code']} - {$element['Name']}</option>";
                     }
                 ?>
             </select>
