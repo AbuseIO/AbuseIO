@@ -190,7 +190,7 @@ if (!empty($_GET['action'])) {
         $infotext = infotextGet($infolang, $report['Class']);
         if ($infotext) {
             echo '<div style="padding-top: 1em;">';
-            include($infotext);
+            echo $infotext;
             echo '</div>';
         }
         ?>

@@ -228,7 +228,7 @@ if ($infotext) {
 ?>
     <p style="margin: 2em 0;"><a class="btn btn-default" data-toggle="collapse" href="#infotext" aria-expanded="false" aria-controls="infotext">Show information text</a></p>
     <div class="collapse" id="infotext">
-        <div class="well"><?php include($infotext); ?></div>
+        <div class="well"><?php echo$infotext; ?></div>
     </div>
 <?php } ?>
 
