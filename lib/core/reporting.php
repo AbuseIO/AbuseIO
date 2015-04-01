@@ -548,7 +548,7 @@ function reportSend($filter) {
 
         if ($validated) {
             if(mail($to, $subject, $email, implode("\r\n", $headers))) {
-                logger(LOG_DEBUG, "Notifier - Successfully sent notification to ${to}");
+                logger(LOG_DEBUG, "Notifier - Successfully sent ${count} reports by notification to ${to}");
                 $counter++;
                 foreach($reports as $id => $report) {
                     //Mark the report as notified:
