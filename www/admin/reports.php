@@ -161,12 +161,12 @@ $labelClass = array(
 foreach($results as $nr => $result) {
     if ($result['Status'] == 'CLOSED' || $result['Status'] == 'ESCALATED') {
         $ticketStatus = $result['Status'];
+    } elseif($result['CustomerIgnored'] == 1) {
+        $ticketStatus = 'IGNORED';
     } elseif ($result['ReportCount'] != $result['LastNotifyReportCount']) {
         $ticketStatus = 'NOTIFY PENDING';
     } elseif($result['CustomerResolved'] == 1) {
         $ticketStatus = 'RESOLVED';
-    } elseif($result['CustomerIgnored'] == 1) {
-        $ticketStatus = 'IGNORED';
     } else {
         $ticketStatus = $result['Status'];
     }
