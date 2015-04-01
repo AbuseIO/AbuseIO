@@ -474,6 +474,12 @@ function reportSend($filter) {
     // in the customer mail. format: array($reports[CustomerCode][$i][$report_elements])
     $allreports = reportNotification($filter);
 
+    $typemsg = array(
+                        'INFO' => 'Information message, we strongly advice this matter to be resolved',
+                        'ABUSE' => 'Abuse message, we require you to take direct action to resolve this matter',
+                        'ESCALATION' => 'Escalation message, we are implementing measures to resolve this matter', 
+                    );
+
     foreach($allreports as $customerCode => $reports) {
         $count = count($reports);
 
@@ -490,7 +496,8 @@ function reportSend($filter) {
             }
 
             $block[] = "";
-            $block[] = "Ticket #${report['ID']}: Report for IP address ${report['IP']} (${report['Type']}: ${report['Class']})";
+            $block[] = "Ticket #${report['ID']}: Report for IP address ${report['IP']} (${report['Class']})";
+            $block[] = "Category: ". $typemsg[$report['Type']];
             $block[] = "Report date: ".date('Y-m-d H:i',$report['LastSeen']);
             $block[] = "Report count: ".$report['ReportCount'];
             $block[] = "Source: ${report['Source']}";
