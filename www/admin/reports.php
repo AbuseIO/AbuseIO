@@ -163,7 +163,7 @@ foreach($results as $nr => $result) {
         $ticketStatus = $result['Status'];
     } elseif($result['CustomerIgnored'] == 1) {
         $ticketStatus = 'IGNORED';
-    } elseif ($result['ReportCount'] != $result['LastNotifyReportCount'] && $result['ReportCount'] == 0) {
+    } elseif ($result['ReportCount'] != $result['LastNotifyReportCount'] && $result['LastNotifyReportCount'] != 0) {
         $ticketStatus = 'RENOTIFY PENDING';
     } elseif ($result['ReportCount'] != $result['LastNotifyReportCount']) {
         $ticketStatus = 'NOTIFY PENDING';
