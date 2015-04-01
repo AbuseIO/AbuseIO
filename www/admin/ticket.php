@@ -223,8 +223,8 @@ if(isset($PostMessage)) {
 ?>
 
 <?php
-$infotext = "../ash/infotext/".$infolang."/".str_replace(" ", "_", $report['Class']).".html";
-if (file_exists($infotext)) {
+$infotext = infotextGet($infolang, $report['Class']);
+if ($infotext) {
 ?>
     <p style="margin: 2em 0;"><a class="btn btn-default" data-toggle="collapse" href="#infotext" aria-expanded="false" aria-controls="infotext">Show information text</a></p>
     <div class="collapse" id="infotext">

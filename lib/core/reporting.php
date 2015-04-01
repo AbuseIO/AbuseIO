@@ -665,4 +665,31 @@ function reportNotification($filter) {
     return $data;
 }
 
+
+/*
+** Function: reportNotification
+** Parameters:
+**  lang(string): CC code of language
+**  class(string): name of the class an infotext is being collected
+** Returns:
+**  (string): html blob with class information
+*/
+function infotextGet($lang, $class) {
+    if (strlen($lang) != 2) { 
+        return false; 
+    }
+
+    $classfile = str_replace(" ", "_", $class).".html";
+
+    if(file_exists(APP . "/www/ash/infotext/" . $classfile)) {
+        return file_get_contents(APP . "/www/ash/infotext/" . $classfile);
+
+    } elseif (file_exists(APP . "/www/ash/infotext/default/${lang}/${classfile}")) {
+        return file_get_contents(APP . "/www/ash/infotext/default/${lang}/${classfile}");
+
+    } else { 
+        return false ;
+    }
+
+}
 ?>
