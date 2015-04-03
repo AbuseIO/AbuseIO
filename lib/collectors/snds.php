@@ -36,7 +36,7 @@ function collect_snds($config) {
         logger(LOG_DEBUG,'No SNDS key specified in config, skipping SNDS reporting');
         return false;
 
-    } else if ($data = file_get_contents('https://postmaster.live.com/snds/ipStatus.aspx?key='.COLLECTOR_SNDS_KEY)) {
+    } else if ($data = @file_get_contents('https://postmaster.live.com/snds/ipStatus.aspx?key='.COLLECTOR_SNDS_KEY)) {
         $sndsMap = array(
             'E-mail address harvesting'=>array(
                 'class'=>'Harvesting',
