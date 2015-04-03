@@ -48,7 +48,7 @@ function reportAdd($report) {
         logger(LOG_WARNING, __FUNCTION__ . " was called with not enough arguments in the array");
         return false;
     }
-    if(date('Y', $timestamp) < 2010) {
+    if(date('Y', $timestamp) < 2013 || strtotime(date('d-m-Y H:i:s',$timestamp)) !== (int)$timestamp) {
         logger(LOG_WARNING, __FUNCTION__ . " was called with an incorrect timestamp (${timestamp})");
         return false;
     }
@@ -459,7 +459,8 @@ function reportSend($filter) {
         return false;
     }
 
-    if (null === NOTIFICATIONS && !is_file(APP.NOTIFICATION_TEMPLATE)){
+    if (!defined('NOTIFICATIONS') && NOTIFICATIONS != true && !is_file(APP.NOTIFICATION_TEMPLATE)){
+        logger(LOG_DEBUG, "Notifier - Is not enabled or template is missing");
         return false;
     } else {
         $template = file_get_contents(APP.NOTIFICATION_TEMPLATE);
@@ -473,11 +474,16 @@ function reportSend($filter) {
     // in the customer mail. format: array($reports[CustomerCode][$i][$report_elements])
     $allreports = reportNotification($filter);
 
+    $typemsg = array(
+                        'INFO' => 'Information message, we strongly advice this matter to be resolved',
+                        'ABUSE' => 'Abuse message, we require you to take direct action to resolve this matter',
+                        'ESCALATION' => 'Escalation message, we are implementing measures to resolve this matter', 
+                    );
+
     foreach($allreports as $customerCode => $reports) {
         $count = count($reports);
 
         $blocks = "";
-        $class_seen = array();
         foreach($reports as $id => $report) {
             $block = array();
             $report['Information'] = json_decode($report['Information']);
@@ -490,7 +496,8 @@ function reportSend($filter) {
             }
 
             $block[] = "";
-            $block[] = "Ticket #${report['ID']}: Report for IP address ${report['IP']} (${report['Type']}: ${report['Class']})";
+            $block[] = "Ticket #${report['ID']}: Report for IP address ${report['IP']} (${report['Class']})";
+            $block[] = "Category: ". $typemsg[$report['Type']];
             $block[] = "Report date: ".date('Y-m-d H:i',$report['LastSeen']);
             $block[] = "Report count: ".$report['ReportCount'];
             $block[] = "Source: ${report['Source']}";
@@ -508,20 +515,6 @@ function reportSend($filter) {
             }
             $block[] = "\n";
             $blocks .= implode("\n", $block);
-
-            $class_seen[$report['Class']] = 1;
-        }
-
-        // Include further information about the abuse reports
-        if (!empty($class_seen)) {
-            $blocks .= "\nAdditional information:\n\n";
-            foreach ($class_seen as $class => $true) {
-                $infotext = "../../www/ash/infotext/".str_replace(" ", "_", $report['Class']).".html";
-                if (file_exists($infotext)) {
-                    $class_info = strip_tags(file_get_contents($infotext));
-                    $blocks .= "$class:\n\n$class_info\n";
-                }
-            }
         }
 
         if (DEBUG === true) {
@@ -562,7 +555,7 @@ function reportSend($filter) {
 
         if ($validated) {
             if(mail($to, $subject, $email, implode("\r\n", $headers))) {
-                logger(LOG_DEBUG, "Notifier - Successfully sent notification to ${to}");
+                logger(LOG_DEBUG, "Notifier - Successfully sent ${count} reports by notification to ${to}");
                 $counter++;
                 foreach($reports as $id => $report) {
                     //Mark the report as notified:
@@ -672,4 +665,31 @@ function reportNotification($filter) {
     return $data;
 }
 
+
+/*
+** Function: reportNotification
+** Parameters:
+**  lang(string): CC code of language
+**  class(string): name of the class an infotext is being collected
+** Returns:
+**  (string): html blob with class information
+*/
+function infotextGet($lang, $class) {
+    if (strlen($lang) != 2) { 
+        return false; 
+    }
+
+    $classfile = str_replace(" ", "_", $class).".html";
+
+    if(file_exists(APP . "/www/ash/infotext/" . $classfile)) {
+        return file_get_contents(APP . "/www/ash/infotext/" . $classfile);
+
+    } elseif (file_exists(APP . "/www/ash/infotext/default/${lang}/${classfile}")) {
+        return file_get_contents(APP . "/www/ash/infotext/default/${lang}/${classfile}");
+
+    } else { 
+        return false ;
+    }
+
+}
 ?>

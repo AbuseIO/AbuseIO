@@ -187,10 +187,10 @@ if (!empty($_GET['action'])) {
         </form>
 
         <?php
-        $infotext = APP . "/www/ash/infotext/${infolang}/".str_replace(" ", "_", $report['Class']).".html";
-        if (file_exists($infotext)) {
+        $infotext = infotextGet($infolang, $report['Class']);
+        if ($infotext) {
             echo '<div style="padding-top: 1em;">';
-            include($infotext);
+            echo $infotext;
             echo '</div>';
         }
         ?>

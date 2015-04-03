@@ -18,7 +18,7 @@
         $interval_info_after  = strtotime(NOTIFICATIONS_INFO_INTERVAL . " ago");
         $interval_abuse_after = strtotime(NOTIFICATIONS_ABUSE_INTERVAL . " ago");
 
-        $filter .= " AND (Type = 'ABUSE' OR (Type != 'ABUSE' AND NotifiedCount = 0 AND ReportCount != LastNotifyReportCount AND LastNotifyTimestamp <= ${interval_info_after})) AND Status = 'OPEN'";
+        $filter .= " AND (Type = 'ABUSE' OR (Type != 'ABUSE' AND NotifiedCount = 0 AND CustomerIgnored = 0 AND ReportCount != LastNotifyReportCount AND LastNotifyTimestamp <= ${interval_info_after})) AND Status = 'OPEN'";
     }
 
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
@@ -159,12 +159,16 @@ $labelClass = array(
 );
 
 foreach($results as $nr => $result) {
-    if ($result['ReportCount'] != $result['LastNotifyReportCount']) {
+    if ($result['Status'] == 'CLOSED' || $result['Status'] == 'ESCALATED') {
+        $ticketStatus = $result['Status'];
+    } elseif($result['CustomerIgnored'] == 1) {
+        $ticketStatus = 'IGNORED';
+    } elseif ($result['ReportCount'] != $result['LastNotifyReportCount'] && $result['LastNotifyReportCount'] != 0) {
+        $ticketStatus = 'RENOTIFY PENDING';
+    } elseif ($result['ReportCount'] != $result['LastNotifyReportCount']) {
         $ticketStatus = 'NOTIFY PENDING';
     } elseif($result['CustomerResolved'] == 1) {
         $ticketStatus = 'RESOLVED';
-    } elseif($result['CustomerIgnored'] == 1) {
-        $ticketStatus = 'IGNORED';
     } else {
         $ticketStatus = $result['Status'];
     }

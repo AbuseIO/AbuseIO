@@ -223,12 +223,12 @@ if(isset($PostMessage)) {
 ?>
 
 <?php
-$infotext = "../ash/infotext/".$infolang."/".str_replace(" ", "_", $report['Class']).".html";
-if (file_exists($infotext)) {
+$infotext = infotextGet($infolang, $report['Class']);
+if ($infotext) {
 ?>
     <p style="margin: 2em 0;"><a class="btn btn-default" data-toggle="collapse" href="#infotext" aria-expanded="false" aria-controls="infotext">Show information text</a></p>
     <div class="collapse" id="infotext">
-        <div class="well"><?php include($infotext); ?></div>
+        <div class="well"><?php echo$infotext; ?></div>
     </div>
 <?php } ?>
 
@@ -238,8 +238,8 @@ $evidences = evidenceList($_GET['id']);
 if (!empty($evidences)) {
 ?>
 <p style="margin: 2em 0;"><a class="btn btn-default" data-toggle="collapse" href="#evidencetable" aria-expanded="false" aria-controls="evidencetable">Show linked evidence</a></p>
+
 <div class="collapse" id="evidencetable">
-<div class="well">
 
 <h2>Evidence</h2>
 
@@ -272,7 +272,6 @@ if (!empty($evidences)) {
 ?>
     </tbody>
 </table>
-</div>
 </div>
 <?php } // End of Evidence section ?>
 

@@ -144,6 +144,14 @@ AbuseIO will process all (new) mails from this mailbox. If parsing succeeds fetc
 read. If the mail cannot be parsed by AbuseIO, fetchmail will not touch the email. If you want to re-process 
 an abuse report, simply mark the abuse email as (new) and run fetchmail again.
 
+### Using ASH information texts
+
+We include a default set of information texts per class in APP/www/ash/infotext/defaults/ split up in multiple
+languages. These are shown in combination with a report of that named class.
+
+If you want your own text with a class you can create the class html in APP/www/ash/infotext/ with the same name.
+files in this folder are preferred over the defaults. You for conviniance we included a little template.html
+file to get you started.
 
 ## Note on Patches/Pull Requests
 

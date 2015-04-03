@@ -32,7 +32,19 @@ if(!reportHousekeeping()) {
     logger(LOG_ERR, "Housekeeper failed to do reports");
 }
 
-if (null !== COLLECTOR_SNDS_ENABLED && COLLECTOR_SNDS_ENABLED == true) {
+if (defined('REMOVE_EVIDENCE')) {
+    logger(LOG_DEBUG, "Housekeeper - starting old evidence removal (older then ".REMOVE_EVIDENCE.")");
+    $timestamp = strtotime(REMOVE_EVIDENCE . " ago");
+    if(date('Y', $timestamp) < 2013 || strtotime(date('d-m-Y H:i:s',$timestamp)) !== (int)$timestamp) {
+        logger(LOG_WARNING, " Evidence cleanup was called with an incorrect timestamp (${timestamp})");
+    } else {
+        if(!evidenceCleanup($timestamp)) {
+            logger(LOG_ERR, "Housekeeper - cleanup of old evidence failed");
+        }
+    }
+}
+
+if (defined('COLLECTOR_SNDS_ENABLED') && COLLECTOR_SNDS_ENABLED == true) {
     logger(LOG_DEBUG, "Housekeeper - starting SNDS collector");
 
     $config = array();
@@ -41,7 +53,7 @@ if (null !== COLLECTOR_SNDS_ENABLED && COLLECTOR_SNDS_ENABLED == true) {
     }
 }
 
-if (null !== COLLECTOR_OSINT_ENABLED && COLLECTOR_OSINT_ENABLED == true) {
+if (defined('COLLECTOR_OSINT_ENABLED') && COLLECTOR_OSINT_ENABLED == true) {
     logger(LOG_DEBUG, "Housekeeper - starting OSINT collector");
     $config = array();
     if(!collect_osint($config)) {
@@ -49,13 +61,15 @@ if (null !== COLLECTOR_OSINT_ENABLED && COLLECTOR_OSINT_ENABLED == true) {
     }
 }
 
-if (null !== COLLECTOR_RBLSCAN_ENABLED && COLLECTOR_RBLSCAN_ENABLED == true) {
+if (defined('COLLECTOR_RBLSCAN_ENABLED') && COLLECTOR_RBLSCAN_ENABLED == true) {
     logger(LOG_DEBUG, "Housekeeper - starting RBLSCAN collector");
     $config = array();
     if(!collect_rblscan($config)) {
         logger(LOG_ERR, "Housekeeper failed to run RBLSCAN collector");
     }
 }
+
+
 
 logger(LOG_DEBUG, "Housekeeper completed");
 ?>

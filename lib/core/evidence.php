@@ -94,6 +94,39 @@ function evidenceList($ticket) {
 
 
 /*
+** Function: evidenceCleanup
+** Parameters:
+**  (timestamp): Cleans up all old evidence from SQL (NOT! the archive)
+** Returns:
+**  (boolean): SQL result
+*/
+function evidenceCleanup($timestamp) {
+    if(!is_numeric($timestamp)) {
+        return false;
+    }
+
+    $reports = array();
+
+    $query = "SELECT ID, LastModified FROM Evidence WHERE 1 AND LastModified < FROM_UNIXTIME('${timestamp}');";
+
+    $evidences = _mysqli_fetch($query);
+
+    foreach($evidences as $evidence) {
+        if(_mysqli_query("DELETE FROM EvidenceLinks WHERE EvidenceID = '${evidence['ID']}';")) {
+            if(!_mysqli_query("DELETE FROM Evidence WHERE ID = '${evidence['ID']}';")) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+
+/*
 ** Function: evidenceGet
 ** Parameters: 
 **  id(int): 
