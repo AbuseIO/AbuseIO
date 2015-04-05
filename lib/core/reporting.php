@@ -517,7 +517,7 @@ function reportSend($filter) {
             $blocks .= implode("\n", $block);
         }
 
-        if (DEBUG === true) {
+        if (TESTMODE === true) {
             $to =           NOTIFICATIONS_FROM_ADDRESS;
         } else {
             $to             = $report['CustomerContact'];

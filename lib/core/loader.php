@@ -29,10 +29,11 @@ define('APP',realpath(dirname(__FILE__).'/../../'));
 
 // getopt() only works on cli
 if (PHP_SAPI == 'cli') {
-    $shortopts = "dv";
+    $shortopts = "dvt";
     $longopts  = array(
                         "debug",
                         "version",
+                        "test",
                       );
     $options   = getopt($shortopts, $longopts);
 
@@ -41,8 +42,15 @@ if (PHP_SAPI == 'cli') {
     } else {
         define('DEBUG', false);
     }
+
     if (isset($options['version']) || isset($options['v'])){
         die(VERSION . PHP_EOL);
+    }
+
+    if (isset($options['test']) || isset($options['t'])){
+        define('TESTMODE', true);
+    } else {
+        define('TESTMODE', false);
     }
 }
 
