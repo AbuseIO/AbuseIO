@@ -18,3 +18,8 @@
 /www/admin/.htaccess
 /www/ash/.htaccess
 /www/rpc/.htaccess
+
+# Ignore custom templates
+/www/ash/infotext/*.html
+!/www/ash/infotext/template.html
+
