@@ -517,7 +517,7 @@ function reportSend($filter) {
             $blocks .= implode("\n", $block);
         }
 
-        if (DEBUG === true) {
+        if (defined('TESTMODE') && TESTMODE === true) {
             $to =           NOTIFICATIONS_FROM_ADDRESS;
         } else {
             $to             = $report['CustomerContact'];
@@ -552,6 +552,10 @@ function reportSend($filter) {
         $headers[] = "From: " . NOTIFICATIONS_FROM_NAME . " <" . NOTIFICATIONS_FROM_ADDRESS . ">";
         $headers[] = "Reply-To: " . NOTIFICATIONS_FROM_NAME . " <" . NOTIFICATIONS_FROM_ADDRESS . ">";
         $headers[] = "X-Mailer: AbuseIO/".VERSION;
+
+        if (defined('NOTIFICATIONS_BCC')) {
+            $headers[] = "BCC: " . NOTIFICATIONS_BCC;
+        }
 
         if ($validated) {
             if(mail($to, $subject, $email, implode("\r\n", $headers))) {
