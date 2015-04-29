@@ -22,7 +22,7 @@
 *
 ******************************************************************************/
 
-define('VERSION', '3.0.0');
+define('VERSION', '3.0.1');
 define('APP',realpath(dirname(__FILE__).'/../../'));
 
 // Globally used options like debug and version

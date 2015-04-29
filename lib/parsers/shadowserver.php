@@ -223,6 +223,10 @@ function parse_shadowserver($message) {
                 $outReport['domain'] = $report['http_host'];
                 $outReport['uri'] = "/";
             }
+            if($feed == "botnet_drone") {
+                $outReport['domain'] = $report['cc_dns'];
+                $outReport['uri'] = str_replace("//", "/", "/" . $report['url']);
+            }
 
             $reportID = reportAdd($outReport);
             if (!$reportID) return false;
