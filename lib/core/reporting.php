@@ -568,11 +568,9 @@ function reportSend($filter) {
                 }
             } else {
                 logger(LOG_ERR, "Notifier - Failed sending mail to ${to} MTA returned false");
-                return false;
             }
         } else {
-            logger(LOG_ERR, "Notifier - Failed sending mail to ${to} as the addres is incorrectly formatted");
-            return false;
+            logger(LOG_ERR, "Notifier - Failed sending mail to ${to} as the address is incorrectly formatted");
         }
     }
 
