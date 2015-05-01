@@ -20,6 +20,7 @@ NOTIFICATION_TEMPLATE = /etc/mail.template      ; set this to the APP relative p
 NOTIFICATIONS_FROM_ADDRESS = name@host.tld      ; set here the senders email address
 NOTIFICATIONS_FROM_NAME = ISP AbuseDesk         ; set here the senders name which could be more user readable
 NOTIFICATIONS_BCC = name@host.tld               ; set here the address you want to BCC in every outgoing e-mail (usefull for testing)
+NOTIFICATIONS_BOUNCE = name@host.tld            ; set here the email address to use for bounced notifications (delivery errors) (optional)
 
 SELF_HELP_URL = http://ash.abuse.io/            ; enable this to insert urls in each e-mail which link to a specific FAQ to help them resolve this
 #CUSTOM_MODULES = find_customer, notifier       ; define customer modules, comma separated value
