@@ -18,7 +18,7 @@ if ($_GET['token'] != $token) {
     die('<h2>401 - Unauthorized</h2>');
 }
 
-$title = "ASH - Ticket {$report['ID']}";
+$title = "Abuse Self Help - Ticket {$report['ID']}";
 
 $labelClass = array(
     'ABUSE'     => 'warning',
@@ -36,28 +36,28 @@ $labelClass = array(
 if (!empty($_GET['action'])) {
     if ($_GET['action'] == 'addNote') {
         if (strlen($_GET['noteMessage']) < 10) {
-            $changeMessage = "<span class='label label-warning'>YOUR REPLY WAS NOT SUBMITTED, BECAUSE THERE WAS INSUFFICIANT INFORMATION IN THE NOTE!</span>";
+            $changeMessage = "<span class='alert alert-danger'>Your reply was <b>not submitted</b>, because of insufficient information in the note.</span>";
 
         } elseif ($_GET['noteType'] == 'message') {
             reportNoteAdd('Customer', $_GET['id'], htmlentities(strip_tags($_GET['noteMessage'])));
-            $changeMessage = "<span class='label label-info'>YOUR REPLY HAS BEEN REGISTERED</span>";
+            $changeMessage = "<span class='alert alert-success'>Your reply has been registered <b>successfully</b>. Thank you for your reply!</span>";
 
         } elseif ($_GET['noteType'] == 'ignore') {
             reportNoteAdd('Customer', $_GET['id'], htmlentities(strip_tags($_GET['noteMessage'])));
             reportIgnored($_GET['id']);
             $report['CustomerIgnored'] = 1;
             $report['CustomerResolved'] = 0;
-            $changeMessage = "<span class='label label-info'>YOUR REPLY HAS BEEN REGISTERED AND YOU WILL NO LONGER RECEIVE NEW NOTIFICATIONS ON THIS EVENT</span>";
+            $changeMessage = "<span class='alert alert-info'>Your reply has been registered <b>successfully</b>. You will no longer receive new notifications about this event.</span>";
 
         } elseif ($_GET['noteType'] == 'resolve') {
             reportNoteAdd('Customer', $_GET['id'], htmlentities(strip_tags($_GET['noteMessage'])));
             reportResolved($_GET['id']);
             $report['CustomerIgnored'] = 0;
             $report['CustomerResolved'] = 1;
-            $changeMessage = "<span class='label label-info'>YOUR REPLY HAS BEEN REGISTERED AND THE EVENT WAS MARKED AS RESOLVED</span>";
+            $changeMessage = "<span class='alert alert-success'>Your reply has been registered <b>successfully</b>. This event has been marked as <b>resolved</b>.</span>";
 
         } else {
-            $changeMessage = "<span class='label label-warning'>UNKNOWN REPLY COMMAND</span>";
+            $changeMessage = "<span class='alert alert-danger'>Your reply was <b>not submitted</b>, because the reply action is unknown.</span>";
         }
     }
 }
@@ -78,9 +78,19 @@ if (!empty($_GET['action'])) {
     <![endif]-->
   </head>
   <body>
-    <div class="container" style="padding-bottom: 4em;">
-        <div>
+    <div class="container" style="padding: 0.5em 0.5em 4em;">
+
             <h1><?php echo $title; ?></h1>
+            <hr>
+
+            <?php if (!empty($changeMessage)) echo '<div style="margin: 2em 0;">'.$changeMessage.'</div>'; ?>
+
+            <?php
+                $statictext = APP . "/etc/ash.template";
+                if (file_exists($statictext)) include($statictext);
+            ?>
+
+            <h2>Report information</h2>
 
             <dl class="dl-horizontal">
                 <dt>IP address</dt>
@@ -138,7 +148,15 @@ if (!empty($_GET['action'])) {
 
             </dl>
 
+            <?php
+                $infotext = infotextGet($infolang, $report['Class']);
+                if ($infotext) echo $infotext;
+            ?>
+
+            <h2>Additional information</h2>
+
         <?php
+
             $info_array = json_decode($report['Information'], true);
             if (empty($info_array)) {
                 echo '<p>No information found</p>';
@@ -152,49 +170,22 @@ if (!empty($_GET['action'])) {
             }
         ?>
 
-        </div>
-
-        <?php
-        if (!empty($changeMessage)) { echo $changeMessage; }
-
-        $statictext = APP . "/etc/ash.template";
-        if (file_exists($statictext)) {
-            echo '<div style="padding-top: 1em;">';
-            include($statictext);
-            echo '</div>';
-        }
-        ?>
-
+        <h2>Feedback form</h2>
         <form method='GET'>
         <input type='hidden' name='action' value='addNote'>
         <input type='hidden' name='id'     value='<?php echo $_GET['id']; ?>'>
         <input type='hidden' name='token'  value='<?php echo $_GET['token']; ?>'>
-        <div class="row">
-            <div class="col-md-6 form-group form-group-sm">
-                <label for='noteMessage'>Your reply : </label>
-                <textarea rows="5" cols="70" name='noteMessage' style="width: 100%;"></textarea>
+            <div style="margin: 1em 0 1em;">
+                <div><label for='noteMessage'>Your reply</label></div>
+                <div><textarea rows="5" cols="70" name='noteMessage' style="width: 30em; height: 10em;"></textarea></div>
             </div>
-            <div class="col-md-6 form-group form-group-sm"><br>
-                <input type="radio" name="noteType" value="message" checked>Reply<br>
+            <div style="margin: 0.5em 0 0;"><input type="radio" name="noteType" value="message" checked> Reply</div>
 <?php if($report['Type'] == "INFO") { ?>
-                <input type="radio" name="noteType" value="ignore">Reply and mark as ignored<br>
+            <div style="margin: 0.5em 0 0;"><input type="radio" name="noteType" value="ignore"> Reply and mark as ignored</div>
 <?php } ?>
-                <input type="radio" name="noteType" value="resolve">Reply and mark as resolved<br>
-                <br>
-                <input type='submit' class='btn btn-primary btn-sm' name='' value='Submit'><br>
-            </div>
-        </div>
+            <div style="margin: 0.5em 0 0;"><input type="radio" name="noteType" value="resolve"> Reply and mark as resolved</div>
+            <div style="margin: 1.5em 0 0;"><input type='submit' class='btn btn-primary btn-sm' name='' value='Submit'></div>
         </form>
-
-        <?php
-        $infotext = infotextGet($infolang, $report['Class']);
-        if ($infotext) {
-            echo '<div style="padding-top: 1em;">';
-            echo $infotext;
-            echo '</div>';
-        }
-        ?>
-
     </div>
   </body>
 </html>
