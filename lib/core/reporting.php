@@ -558,7 +558,7 @@ function reportSend($filter) {
         }
 
         if ($validated) {
-            $params=(defined('NOTIFICATIONS_BOUNCE') && !empty(NOTIFICATIONS_BOUNCE))?'-f '.NOTIFICATIONS_BOUNCE:NULL;
+            $params=(defined('NOTIFICATIONS_BOUNCE') && NOTIFICATIONS_BOUNCE != '')?'-f '.NOTIFICATIONS_BOUNCE:NULL;
             if(mail($to, $subject, $email, implode("\r\n", $headers, $params))) {
                 logger(LOG_DEBUG, "Notifier - Successfully sent ${count} reports by notification to ${to}");
                 $counter++;
