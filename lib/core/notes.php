@@ -53,6 +53,12 @@ function reportNoteAdd($submittor, $ReportID, $note) {
     if (NOTES != true || !is_numeric($ReportID)) {
         return false;
     } else {
+
+        // Ignore note if identical note already exists
+        $query = "SELECT * FROM Notes WHERE ReportID='".$ReportID."' AND Submittor='".$submittor."' AND Text='".mysql_escape_string(htmlentities($note))."'";
+        $result = _mysqli_query($query, "");
+        if ($result->num_rows) return true;
+
         $query = "INSERT INTO Notes (
                                         ReportID, 
                                         Timestamp, 
