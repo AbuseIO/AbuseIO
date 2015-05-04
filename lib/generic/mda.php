@@ -233,6 +233,7 @@ function save_attachment($file, $body) {
     $file_info = pathinfo($file);
     if (!file_exists($file_info['dirname']) && !mkdir($file_info['dirname'], 0777, true)) {
         logger(LOG_ERR, "Error creating message store ${attachment_path}");
+        return false;
     }
 
     // Save attachment
