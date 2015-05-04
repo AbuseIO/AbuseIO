@@ -287,10 +287,12 @@ function bounce($message) {
 
     if(!$email->Send()) {
         logger(LOG_ERR, "Bouncing to " . FALLBACK_MAIL . " failed.");
+        unlink($tempfile);
         exit(1);
 
     } else {
         logger(LOG_WARNING, "Bounced to " . FALLBACK_MAIL . " successfully.");
+        unlink($tempfile);
         exit(0);
 
     }
