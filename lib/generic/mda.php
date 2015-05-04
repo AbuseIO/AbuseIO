@@ -265,7 +265,7 @@ function save_attachment($file, $body) {
 function bounce($message) {
     logger(LOG_WARNING, "Attempting to bounce message to admin because i was unabled to parse it");
 
-    $tempfile = "/tmp/" . mt_rand();
+    $tempfile = APP.'/tmp/'.mt_rand();
     file_put_contents($tempfile, $message['raw']);
 
     $bodytext = "AbuseIO tried to parse a message but was not able to.\n\n";
