@@ -224,6 +224,12 @@ function receive_mail($call) {
 ** Note: You can add more actions for specific file types
 */
 function save_attachment($file, $body) {
+
+    if (empty($body)) {
+        logger(LOG_ERR, "Cannot save empty attachment ${attachment_path}");
+        return false;
+    }
+
     $file_info = pathinfo($file);
     if (!file_exists($file_info['dirname']) && !mkdir($file_info['dirname'], 0777, true)) {
         logger(LOG_ERR, "Error creating message store ${attachment_path}");
