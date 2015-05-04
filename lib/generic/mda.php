@@ -117,7 +117,7 @@ function receive_mail($call) {
             if (isset($part->disposition) && $part->disposition=='attachment'){
                 $attachment_counter++;
                 $attachment_file = "${message_store}/${attachment_counter}/" . $part->d_parameters['filename'];
-                if ($saved_file = save_attachment($attachment_file, $part->body)) {
+                if (!empty($part->body) && $saved_file = save_attachment($attachment_file, $part->body)) {
                     $attachments[$attachment_counter] = $saved_file;
                 }
             } elseif (isset($part->headers['content-type']) && strpos($part->headers['content-type'], "message/feedback-report") !== false) {
@@ -149,7 +149,7 @@ function receive_mail($call) {
                     if(isset($sp->disposition) && $sp->disposition=='attachment'){
 						$attachment_counter++;
                         $attachment_file = "${message_store}/${attachment_counter}/". $sp->d_parameters['filename'];
-                        if ($saved_file = save_attachment($attachment_file, $sp->body)) {
+                        if (!empty($sp->body) && $saved_file = save_attachment($attachment_file, $sp->body)) {
                             $attachments[$attachment_counter] = $saved_file;
                         }
                     }
@@ -164,7 +164,7 @@ function receive_mail($call) {
                         $attachment_counter++;
                         $filename = $match[1];
                         $attachment_file = "${message_store}/${attachment_counter}/" . $filename;
-                        if ($saved_file = save_attachment($attachment_file, $part->body)) {
+                        if (!empty($part->body) && $saved_file = save_attachment($attachment_file, $part->body)) {
                             $attachments[$attachment_counter] = $saved_file;
                         }
                     } else {
