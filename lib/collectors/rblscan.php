@@ -56,7 +56,7 @@ function collect_rblscan($config) {
         foreach ($ips as $ip) {
             foreach ($rbls as $rbl) {
                 $ip_reversed = implode('.',array_reverse(preg_split('/\./',$ip)));
-                $lookup = $ip_reversed.'.'.$rbl['host'];
+                $lookup = $ip_reversed.'.'.$rbl['host'].'.';
                 if ($result = gethostbyname($lookup)) {
                     $class = '';
                     $rbl['information']['listed_in'] = $rbl['host'];

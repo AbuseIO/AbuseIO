@@ -170,7 +170,7 @@ foreach($rbllist as $source => $rbl) {
             for($pos = $info['begin']; $pos <= $info['end']; $pos++) {
                 $ip = long2ip($pos);
                 $ip_reversed = implode('.',array_reverse(preg_split('/\./',$ip)));
-                $lookup = $ip_reversed.'.'.$rbl['zone'];
+                $lookup = $ip_reversed.'.'.$rbl['zone'].'.';
 
                 if(dns_get_record($rbl['zone'], DNS_SOA)) {
                     if ($result = gethostbyname($lookup)) {
