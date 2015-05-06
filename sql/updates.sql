@@ -7,4 +7,8 @@ ALTER TABLE  `Reports` ADD  `Status` varchar(255) NOT NULL AFTER  `CustomerIgnor
 
 ALTER TABLE  `Reports` ADD  `Type` VARCHAR( 10 ) NOT NULL AFTER  `Class` ;
 
+[2015-05-06]
+
+ALTER TABLE  `Reports` MODIFY COLUMN  `Domain` VARCHAR(255) ;
+ALTER TABLE  `Reports` MODIFY COLUMN  `URI` VARCHAR(255) ;
 
