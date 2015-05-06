@@ -30,9 +30,14 @@ function parse_ip_echelon($message) {
     $source = 'IP-Echelon';
     $type = 'ABUSE';
 
-    if (
-        !empty($message['store']) && !empty($message['attachments']) &&
-        $xml = simplexml_load_string(file_get_contents($message['store'].'/'.key($message['attachments']).'/'.array_shift($message['attachments'])))
+    // XML should be placed in an attachment, but it can be placed in-line too (sigh)
+    if (!empty($message['store']) && !empty($message['attachments'])) {
+        $xml = file_get_contents($message['store'].'/'.key($message['attachments']).'/'.array_shift($message['attachments']));
+    } else if (preg_match('/\<\?xml.*/s',$message['body'],$regs)) {
+        $xml = $regs[0];
+    }
+
+    if (!empty($xml) && $xml = simplexml_load_string($xml)) {
 
     ) {
         $information = array(
