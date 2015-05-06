@@ -39,7 +39,15 @@ function parse_ip_echelon($message) {
 
     if (!empty($xml) && $xml = simplexml_load_string($xml)) {
 
-    ) {
+        // Work around the crappy timestamp used by IP-echelon, i.e.: 2015-05-06T05-00-00UTC 
+        // We loose some timezone information, but hey it's close enough ;)
+        if (preg_match('/^([0-9-]+)T([0-9]{2})-([0-9]{2})-([0-9]{2})/',$xml->Source->TimeStamp,$regs)) {
+            $timestamp = strtotime($regs[1].' '.$regs[2].':'.$regs[3].':'.$regs[4]);
+        // Fall back to now if we can't parse the timestamp
+        } else {
+            $timestamp = time();
+        }
+
         $information = array(
                                 'type'          => (string)$xml->Source->Type,
                                 'port'          => (string)$xml->Source->Port,
@@ -52,7 +60,7 @@ function parse_ip_echelon($message) {
                                 'ip'            => (string)$xml->Source->IP_Address,
                                 'class'         => 'Copyright Infringement',
                                 'type'          => $type,
-                                'timestamp'     => strtotime($xml->Source->TimeStamp),
+                                'timestamp'     => $timestamp,
                                 'information'   => $information,
         );
 
