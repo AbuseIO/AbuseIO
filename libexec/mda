@@ -61,6 +61,7 @@ $parserMap = array(
     '/takedown-response.*@netcraft.com/'    => 'netcraft',
     '/noreply@spamlogin.com/'               => 'spamexperts',
     '/reports@reports.abusehub.nl/'         => 'abusehub',
+    '/@abuse-reporting.webiron.com/'        => 'webiron',
 );
 
 // Maps regular expressions to match body to the corresponding parser in case from matching failed
