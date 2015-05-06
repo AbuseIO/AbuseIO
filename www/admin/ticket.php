@@ -335,8 +335,8 @@ foreach($notes as $nr => $note) {
     <div class="row">
         <div class="col-md-6 form-group form-group-sm">
             <label for='Note'>Add note : </label>
-            <textarea rows="4" cols="80" name='Note'>
-            </textarea><button type='submit' class="btn btn-primary">Save</button>
+            <textarea rows="4" cols="80" name='Note'></textarea>
+            <button type='submit' class="btn btn-primary">Save</button>
         </div>
     </div>
 </form>
