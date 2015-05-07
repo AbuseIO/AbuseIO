@@ -475,9 +475,9 @@ function reportSend($filter) {
     $allreports = reportNotification($filter);
 
     $typemsg = array(
-                        'INFO' => 'Information message, we strongly advice this matter to be resolved',
-                        'ABUSE' => 'Abuse message, we require you to take direct action to resolve this matter',
-                        'ESCALATION' => 'Escalation message, we are implementing measures to resolve this matter', 
+                        'INFO' => 'This is an informational message. We strongly recommend this matter to be resolved.',
+                        'ABUSE' => 'This is an abuse notification. We require you to take immediate action to resolve this matter.',
+                        'ESCALATION' => 'This is an escalation message. We are implementing measures to resolve this matter.',
                     );
 
     foreach($allreports as $customerCode => $reports) {
@@ -495,25 +495,10 @@ function reportSend($filter) {
                 $selfHelpLink = "";
             }
 
+            $block[] = "[Ticket #{$report['ID']}] Report for IP address {$report['IP']} ({$report['Type']}: {$report['Class']})";
+            $block[] = $typemsg[$report['Type']];
+            if (!empty($selfHelpLink)) $block[] = "More information at " . $selfHelpLink;
             $block[] = "";
-            $block[] = "Ticket #${report['ID']}: Report for IP address ${report['IP']} (${report['Class']})";
-            $block[] = "Category: ". $typemsg[$report['Type']];
-            $block[] = "Report date: ".date('Y-m-d H:i',$report['LastSeen']);
-            $block[] = "Report count: ".$report['ReportCount'];
-            $block[] = "Source: ${report['Source']}";
-            if (!empty($selfHelpLink)) $block[] = "Reply or help: " . $selfHelpLink;
-            if (!empty($report['Information'])) {
-                $block[] = "Report information:";
-                if(isset($report['Information']->Domain)) $block[] = "  - domain: " . str_replace('.','[.]',$report['Information']->Domain);
-                if(isset($report['Information']->URI)) $block[] = "  - uri/path: " . $report['Information']->URI;
-                $report['Information']->Address = $report['IP'];
-                foreach($report['Information'] as $field => $value) {
-                    // If the value contains a domain name, escape it so spam filters won't flag this abuse report
-                    if (in_array($field,array('cc_dns','domain','host','url','http_host'))) $value = str_replace('.','[.]',$value);
-                    $block[] = "  - ${field}: ${value}";
-                }
-            }
-            $block[] = "\n";
             $blocks .= implode("\n", $block);
         }
 
