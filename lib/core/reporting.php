@@ -498,7 +498,7 @@ function reportSend($filter) {
             $block[] = "[Ticket #{$report['ID']}] Report for IP address {$report['IP']} ({$report['Type']}: {$report['Class']})";
             $block[] = $typemsg[$report['Type']];
             if (!empty($selfHelpLink)) $block[] = "More information at " . $selfHelpLink;
-            $block[] = "";
+            $block[] = "\n";
             $blocks .= implode("\n", $block);
         }
 
