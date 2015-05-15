@@ -175,15 +175,23 @@ if (!empty($_GET['action'])) {
         <input type='hidden' name='action' value='addNote'>
         <input type='hidden' name='id'     value='<?php echo $_GET['id']; ?>'>
         <input type='hidden' name='token'  value='<?php echo $_GET['token']; ?>'>
+            <div style="margin: 1.5em 0 0;">
+                <p><b>Important note:</b> Do not use this feedback form for direct communication with our abuse department.</p>
+                <p>Your feedback will only be logged in our database to keep a record about measures taken to prevent (further) abuse.</p>
+                <p>If you have questions regarding this notification or require assistance, please contact our abuse department instead.</p>
+                <?php if (FALLBACK_MAIL != NULL) { ?>
+                <p>You can reach our abuse department at <a href="mailto:<?php echo FALLBACK_MAIL; ?>?subject=Abuse ticket <?php echo $_GET['id']; ?>"><?php echo FALLBACK_MAIL; ?></a>.</p>
+                <?php } ?>
+            </div>
             <div style="margin: 1em 0 1em;">
-                <div><label for='noteMessage'>Your reply</label></div>
+                <div><label for='noteMessage'>Your feedback</label></div>
                 <div><textarea rows="5" cols="70" name='noteMessage' style="width: 30em; height: 10em;"></textarea></div>
             </div>
-            <div style="margin: 0.5em 0 0;"><input type="radio" name="noteType" value="message" checked> Reply</div>
+            <div style="margin: 0.5em 0 0;"><input type="radio" name="noteType" value="message" checked> This issue has not yet been resolved</div>
+            <div style="margin: 0.5em 0 0;"><input type="radio" name="noteType" value="resolve"> This issue has been resolved and can be closed</div>
 <?php if($report['Type'] == "INFO") { ?>
-            <div style="margin: 0.5em 0 0;"><input type="radio" name="noteType" value="ignore"> Reply and mark as ignored</div>
+            <div style="margin: 0.5em 0 0;"><input type="radio" name="noteType" value="ignore"> Ignore this issue and stop sending me notifications (not recommended)</div>
 <?php } ?>
-            <div style="margin: 0.5em 0 0;"><input type="radio" name="noteType" value="resolve"> Reply and mark as resolved</div>
             <div style="margin: 1.5em 0 0;"><input type='submit' class='btn btn-primary btn-sm' name='' value='Submit'></div>
         </form>
     </div>
