@@ -59,8 +59,15 @@ Some additional packages are required:
 
 
  - Set permissions:
+ 
+    Preferable create a new user (e.g. abuseio) and set ownership with mod 755 to the entire base. The
+    http server (e.g. apache) should only have read permissions to the install base
 
-    - chmod -R 777 archive tmp  
+    - chmod -R 777 tmp  
+    - chmod -R 664 archive 
+    
+    please make sure that the archive folder ownership is correctly set. The group should be set to 
+    your MTA group, so your MTA can actually write here.
 
 
  - Set configuration
