@@ -1,0 +1,18 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+/* Table style */
+.table {
+  font-size: 12px;
+}
+tbody>tr:hover,.table-striped>tbody>tr:hover,tbody>tr:hover>td>a {
+  color: #fff;
+  background-color: #428bca;
+}
+
+/* Label style */
+span.label>a {
+  color: #fff;
+}

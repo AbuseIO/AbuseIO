@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: AbuseIO
+        psr4_prefix: AbuseIO
+        src_path: app
