@@ -42,17 +42,20 @@ class EmailParseCommand extends Command {
 	 */
 	public function fire()
 	{
-        // read from stdin
+        // Read from stdin (should be piped from cat or MDA)
         $fd = fopen("php://stdin", "r");
-        $rawEmail = "";
+        $raw_email = "";
         while (!feof($fd)) {
-            $rawEmail .= fread($fd, 1024);
+            $raw_email .= fread($fd, 1024);
         }
         fclose($fd);
 
-        // parse it
-        $parser = new Parser();
-        $parser->setText($rawEmail);
+        // Actually parse it
+        $parsed_mail = new Parser();
+        $parsed_mail->setText($raw_email);
+
+        // Ignore email from our own notification address to prevent mail loops
+        // TODO: add
 
         // Store the raw e-mail into a EML file if the archiving is enabled
         if(Config::get('main.emailparser.store_evidence') === true) {
@@ -62,37 +65,32 @@ class EmailParseCommand extends Command {
             if (!$filesystem->isDirectory($path)) {
                 if(!$filesystem->makeDirectory($path)) {
                     Log::error('Unable to create directory' . $path);
-                    // TODO Bounce to admin
-                    die();
+                    $this->exception($raw_email);
                 }
             }
 
-            if(empty($parser->parts[1]['headers']['message-id'])) {
+            if(empty($parsed_mail->parts[1]['headers']['message-id'])) {
                 $file = rand(10,10) . '.eml';
             } else {
-                $file = substr($parser->parts[1]['headers']['message-id'],1,-1) . '.eml';
+                $file = substr($parsed_mail->parts[1]['headers']['message-id'],1,-1) . '.eml';
                 $file = preg_replace('/[^a-zA-Z0-9_\.]/', '_', $file);
             }
 
             if($filesystem->isFile($path . $file)) {
                 // No way an e-mail with the same message ID would arrive twice. So this is an error to rage quit for
-                Log::error('Received duplicate e-mail with message ID: ' . $parser->parts[1]['headers']['message-id']);
-                // TODO Bounce to admin
-                die();
+                Log::error('Received duplicate e-mail with message ID: ' . $parsed_mail->parts[1]['headers']['message-id']);
+                $this->exception($raw_email);
             }
 
-            if ( $filesystem->put($path . $file, $rawEmail) === false ) {
+            if ( $filesystem->put($path . $file, $raw_email) === false ) {
                 Log::error('Unable to write file: ' . $path . $file);
-                // TODO Bounce to admin
-                die();
+                $this->exception($raw_email);
             }
 
         }
 
-
-
         // Start with detecting valid ARF e-mail
-        $attachments = $parser->getAttachments();
+        $attachments = $parsed_mail->getAttachments();
         $arf = [ ];
         foreach ($attachments as $attachment) {
             if($attachment->contentType == 'message/feedback-report') {
@@ -106,6 +104,35 @@ class EmailParseCommand extends Command {
             }
         }
 
+        // Use parser mapping to see where to kick it to
+        // Start using the quick method using the sender mapping
+        $sender_map = Config::get('main.emailparser.sender_map');
+        foreach ($sender_map as $regex => $mapping) {
+            if (preg_match($regex, $parsed_mail->getHeader('from'))) {
+                $parser = $mapping;
+                break;
+            }
+        }
+
+        // If the quick method didnt work fall back to body mapping
+        if (empty($parsed_mail)) {
+            $body_map = Config::get('main.emailparser.body_map');
+            foreach ($bodyMap as $regex => $mapping) {
+                if (preg_match($regex, $parsed_mail->getMessageBody())) {
+                    $parser = $mapping;
+                    break;
+                }
+            }
+        }
+
+        // If we haven't figured out which parser we're going to use, we will never find out so another rage quit
+        if (empty($parser)) {
+            Log::error('Unable to handle message from: ' . $parsed_mail->getHeader('from') . ' with subject: ' . $parsed_mail->getHeader('subject'));
+            $this->exception($raw_email);
+        }
+
+        // Kick of the parser
+        // Handle parse results
 
 	}
 
@@ -116,9 +143,7 @@ class EmailParseCommand extends Command {
 	 */
 	protected function getArguments()
 	{
-		return [
-			//['example', InputArgument::REQUIRED, 'An example argument.'],
-		];
+		return [ ];
 	}
 
 	/**
@@ -129,8 +154,20 @@ class EmailParseCommand extends Command {
 	protected function getOptions()
 	{
 		return [
+            // TODO: add debug option
 			//['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
 		];
 	}
+
+    /**
+     * We've hit a snag, so we are gracefully killing ourselves after we contact the admin about it.
+     *
+     * @return mixed
+     */
+    protected function exception($raw_email)
+    {
+        // TODO: sent the rawEmail back to admin
+        dd();
+    }
 
 }
