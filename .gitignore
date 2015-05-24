@@ -1,4 +1,5 @@
 /vendor
 /node_modules
 .env
+/.idea
 composer.lock
