@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use PhpMimeMailParser\Attachment;
 use PhpMimeMailParser\Parser;
+use Config;
 
 class EmailParseCommand extends Command {
 
@@ -48,8 +49,37 @@ class EmailParseCommand extends Command {
         }
         fclose($fd);
 
+        // parse it
         $parser = new Parser();
         $parser->setText($rawEmail);
+
+        // Store the raw e-mail into a EML file if the archiving is enabled
+        if(Config::get('main.emailparser.store_evidence') === true) {
+            $filesystem = new Filesystem;
+
+            $path = storage_path() . '/mailarchive/' . date('Ymd') . '/';
+            if (!is_dir($path)) {
+                if(!$filesystem->makeDirectory($path)) {
+                    // TODO Log something great
+                }
+            }
+
+            if(empty($parser->parts[1]['headers']['message-id'])) {
+                $file = rand(10,10) . '.eml';
+            } else {
+                $file = substr($parser->parts[1]['headers']['message-id'],1,-1) . '.eml';
+                $file = preg_replace('/[^a-zA-Z0-9_\.]/', '_', $file);
+            }
+
+            if ( $filesystem->put($path . $file, $rawEmail) === false ) {
+                // TODO Log something great
+                // TODO Bounce to admin
+                echo $path . $file . PHP_EOL;
+            }
+
+        }
+
+
 
         // Start with detecting valid ARF e-mail
         $attachments = $parser->getAttachments();
