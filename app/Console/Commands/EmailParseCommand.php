@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use PhpMimeMailParser\Attachment;
 use PhpMimeMailParser\Parser;
 use Config;
+use Log;
 
 class EmailParseCommand extends Command {
 
@@ -58,9 +59,11 @@ class EmailParseCommand extends Command {
             $filesystem = new Filesystem;
 
             $path = storage_path() . '/mailarchive/' . date('Ymd') . '/';
-            if (!is_dir($path)) {
+            if (!$filesystem->isDirectory($path)) {
                 if(!$filesystem->makeDirectory($path)) {
-                    // TODO Log something great
+                    Log::error('Unable to create directory' . $path);
+                    // TODO Bounce to admin
+                    die();
                 }
             }
 
@@ -71,10 +74,17 @@ class EmailParseCommand extends Command {
                 $file = preg_replace('/[^a-zA-Z0-9_\.]/', '_', $file);
             }
 
-            if ( $filesystem->put($path . $file, $rawEmail) === false ) {
-                // TODO Log something great
+            if($filesystem->isFile($path . $file)) {
+                // No way an e-mail with the same message ID would arrive twice. So this is an error to rage quit for
+                Log::error('Received duplicate e-mail with message ID: ' . $parser->parts[1]['headers']['message-id']);
                 // TODO Bounce to admin
-                echo $path . $file . PHP_EOL;
+                die();
+            }
+
+            if ( $filesystem->put($path . $file, $rawEmail) === false ) {
+                Log::error('Unable to write file: ' . $path . $file);
+                // TODO Bounce to admin
+                die();
             }
 
         }
