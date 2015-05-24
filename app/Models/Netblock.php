@@ -14,7 +14,7 @@ class Netblock extends Model {
     protected $guarded  = ['id'];
 
     public function contact() {
-        return $this->BelongsTo('AbuseIO\Models\contact');
+        return $this->BelongsTo('AbuseIO\Models\Contact');
     }
 
 }
