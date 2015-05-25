@@ -45,12 +45,25 @@ class StartParserEvent implements ShouldBeQueued {
             // $this->delete();
         }
 
-        // TODO: call up the $parser and either pass the email parts (yes both, so some notifiers put bits in either
-        // TODO: (cont) of them and not both of them.
+        /* TODO: call up the $parser and either pass the email parts (yes both, so some notifiers put bits in either
+           TODO: (cont) of them and not both of them.
+           Format:
+                event [
+                    Source
+                    IP
+                    Domain
+                    URI
+                    Timestamp
+                    Infoblob
+                ];
+        */
 
         // TODO: If the result is OK, then call up the validator
 
         // TODO: if the validator agrees, then save the data into the database
+        // TODO: Phase 1 : Log the evidence
+        // TODO: Phase 2 : Save evidence for existing tickets and link them
+        // TODO: Phase 3 : Create a new ticket and link evidence for it
 
         // TODO: return a valid response to let the EmailParseCommand know of the result
 
