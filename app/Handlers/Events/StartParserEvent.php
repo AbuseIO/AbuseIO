@@ -34,16 +34,8 @@ class StartParserEvent implements ShouldBeQueued {
         // deny the rest, but that would give problems with a new attempt of parsing (although we can filter duplicate
         // events at that point.
         //
-        // Run the 'php artisan queue:work --daemon --sleep=3 --tries=3' command as a daemon for queue running?
+        // Run the 'php artisan queue:work --daemon --sleep=3 --tries=1' command as a daemon for queue running?
         // Possible to check wither the queue is actually running stuff?
-
-        // TODO: manage queue (database, sync, method, etc?)
-        if ($this->attempts() > 3)
-        {
-            // After trying to parse the e-mail 3 times its kinda ok to give up
-            // Call bouncer here?
-            // $this->delete();
-        }
 
         /* TODO: call up the $parser and either pass the email parts (yes both, so some notifiers put bits in either
            TODO: (cont) of them and not both of them.
