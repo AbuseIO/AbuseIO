@@ -1,5 +1,6 @@
 <?php namespace AbuseIO\Console\Commands;
 
+use AbuseIO\Events\EmailParsedEvent;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
@@ -8,6 +9,7 @@ use PhpMimeMailParser\Attachment;
 use PhpMimeMailParser\Parser;
 use Config;
 use Log;
+Use Event;
 
 class EmailParseCommand extends Command {
 
@@ -44,15 +46,15 @@ class EmailParseCommand extends Command {
 	{
         // Read from stdin (should be piped from cat or MDA)
         $fd = fopen("php://stdin", "r");
-        $raw_email = "";
+        $rawEmail = "";
         while (!feof($fd)) {
-            $raw_email .= fread($fd, 1024);
+            $rawEmail .= fread($fd, 1024);
         }
         fclose($fd);
 
         // Actually parse it
-        $parsed_mail = new Parser();
-        $parsed_mail->setText($raw_email);
+        $parsedMail = new Parser();
+        $parsedMail->setText($rawEmail);
 
         // Ignore email from our own notification address to prevent mail loops
         // TODO: add
@@ -65,60 +67,60 @@ class EmailParseCommand extends Command {
             if (!$filesystem->isDirectory($path)) {
                 if(!$filesystem->makeDirectory($path)) {
                     Log::error('Unable to create directory' . $path);
-                    $this->exception($raw_email);
+                    $this->exception($rawEmail);
                 }
             }
 
-            if(empty($parsed_mail->parts[1]['headers']['message-id'])) {
+            if(empty($parsedMail->parts[1]['headers']['message-id'])) {
                 $file = rand(10,10) . '.eml';
             } else {
-                $file = substr($parsed_mail->parts[1]['headers']['message-id'],1,-1) . '.eml';
+                $file = substr($parsedMail->parts[1]['headers']['message-id'],1,-1) . '.eml';
                 $file = preg_replace('/[^a-zA-Z0-9_\.]/', '_', $file);
             }
 
             if($filesystem->isFile($path . $file)) {
                 // No way an e-mail with the same message ID would arrive twice. So this is an error to rage quit for
-                Log::error('Received duplicate e-mail with message ID: ' . $parsed_mail->parts[1]['headers']['message-id']);
-                $this->exception($raw_email);
+                Log::error('Received duplicate e-mail with message ID: ' . $parsedMail->parts[1]['headers']['message-id']);
+                $this->exception($rawEmail);
             }
 
-            if ( $filesystem->put($path . $file, $raw_email) === false ) {
+            if ( $filesystem->put($path . $file, $rawEmail) === false ) {
                 Log::error('Unable to write file: ' . $path . $file);
-                $this->exception($raw_email);
+                $this->exception($rawEmail);
             }
 
         }
 
         // Start with detecting valid ARF e-mail
-        $attachments = $parsed_mail->getAttachments();
-        $arf = [ ];
+        $attachments = $parsedMail->getAttachments();
+        $arfEmail = [ ];
         foreach ($attachments as $attachment) {
             if($attachment->contentType == 'message/feedback-report') {
-                $arf['report'] = $attachment->getContent();
+                $arfEmail['report'] = $attachment->getContent();
             }
             if($attachment->contentType == 'message/rfc822') {
-                $arf['evidence'] = $attachment->getContent();
+                $arfEmail['evidence'] = $attachment->getContent();
             }
             if($attachment->contentType == 'text/plain') {
-                $arf['message'] = $attachment->getContent();
+                $arfEmail['message'] = $attachment->getContent();
             }
         }
 
         // Use parser mapping to see where to kick it to
         // Start using the quick method using the sender mapping
-        $sender_map = Config::get('main.emailparser.sender_map');
-        foreach ($sender_map as $regex => $mapping) {
-            if (preg_match($regex, $parsed_mail->getHeader('from'))) {
+        $senderMap = Config::get('main.emailparser.sender_map');
+        foreach ($senderMap as $regex => $mapping) {
+            if (preg_match($regex, $parsedMail->getHeader('from'))) {
                 $parser = $mapping;
                 break;
             }
         }
 
         // If the quick method didnt work fall back to body mapping
-        if (empty($parsed_mail)) {
-            $body_map = Config::get('main.emailparser.body_map');
+        if (empty($parsedMail)) {
+            $bodyMap = Config::get('main.emailparser.body_map');
             foreach ($bodyMap as $regex => $mapping) {
-                if (preg_match($regex, $parsed_mail->getMessageBody())) {
+                if (preg_match($regex, $parsedMail->getMessageBody())) {
                     $parser = $mapping;
                     break;
                 }
@@ -127,12 +129,14 @@ class EmailParseCommand extends Command {
 
         // If we haven't figured out which parser we're going to use, we will never find out so another rage quit
         if (empty($parser)) {
-            Log::error('Unable to handle message from: ' . $parsed_mail->getHeader('from') . ' with subject: ' . $parsed_mail->getHeader('subject'));
-            $this->exception($raw_email);
+            Log::error('Unable to handle message from: ' . $parsedMail->getHeader('from') . ' with subject: ' . $parsedMail->getHeader('subject'));
+            $this->exception($rawEmail);
+        } else {
+            Log::info('Received message from: '. $parsedMail->getHeader('from') . ' with subject: ' . $parsedMail->getHeader('subject') . ' heading to parser: ' . $parser);
         }
 
-        // Kick of the parser
-        // Handle parse results
+        $response = Event::fire(new EmailParsedEvent($parser, $rawEmail, $arfEmail));
+        // Handle parse results (did it fire?)
 
 	}
 
@@ -164,8 +168,9 @@ class EmailParseCommand extends Command {
      *
      * @return mixed
      */
-    protected function exception($raw_email)
+    protected function exception($rawEmail)
     {
+        Log::error('Email parser is ending with errors. The received e-mail will be bounced to the admin for investigation');
         // TODO: sent the rawEmail back to admin
         dd();
     }

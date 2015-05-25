@@ -2,6 +2,8 @@
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use AbuseIO\Events\EmailParsedEvent;
+use AbuseIO\Handlers\Events\StartParserEvent;
 
 class EventServiceProvider extends ServiceProvider {
 
@@ -14,6 +16,9 @@ class EventServiceProvider extends ServiceProvider {
 		'event.name' => [
 			'EventListener',
 		],
+        EmailParsedEvent::class => [
+            StartParserEvent::class,
+        ]
 	];
 
 	/**
