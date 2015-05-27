@@ -30,10 +30,10 @@
     @endif
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#basicinfo"><span class="glyphicon glyphicon-file"></span> Basis Informatie</a></li>
-        <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> Technische Details</a></li>
-        <li><a data-toggle="tab" href="#whatsthis"><span class="glyphicon glyphicon-question-sign"></span> Wat is dit?</a></li>
-        <li><a data-toggle="tab" href="#resolved"><span class="glyphicon glyphicon-ok"></span> Vragen / Opgelost!</a></li>
+        <li class="active"><a data-toggle="tab" href="#basicinfo"><span class="glyphicon glyphicon-file"></span> Basic Information</a></li>
+        <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> Technical Details</a></li>
+        <li><a data-toggle="tab" href="#whatsthis"><span class="glyphicon glyphicon-question-sign"></span> What is this?</a></li>
+        <li><a data-toggle="tab" href="#resolved"><span class="glyphicon glyphicon-ok"></span> Questions / Resolved!</a></li>
     </ul>
     <div class="tab-content">
         <div id="basicinfo" class="tab-pane fade in active">
