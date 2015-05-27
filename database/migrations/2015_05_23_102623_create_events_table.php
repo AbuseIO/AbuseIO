@@ -18,7 +18,6 @@ class CreateEventsTable extends Migration {
             $table->integer('ticket_id');
             $table->integer('evidence_id');
             $table->string('source');
-            $table->string('uri');
             $table->timestamp('timestamp');
             $table->longText('information');
 			$table->timestamps();

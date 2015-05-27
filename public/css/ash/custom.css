@@ -1,0 +1,33 @@
+.header {
+    padding: 10px 0px 10px 10px;
+}
+
+.header_wrapper {
+    background-color: #ecedef;
+}
+
+.img-responsive {
+    max-width: 250px;
+}
+
+.tab-pane {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0px 0px 5px 5px;
+    padding: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+}
+
+.container {
+    padding-bottom: 20px;
+}
+
+.panel-heading span
+{
+    margin-top: -18px;
+    margin-right: -9px;
+}

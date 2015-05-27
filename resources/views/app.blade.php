@@ -1,6 +1,6 @@
 <?php
-//TODO - Move this array to a better place
-$nav_items = array(
+// TODO : Move this array to a better place
+$navItems = array(
         'home'      => 'Home',
         'contacts'  => 'Contacts',
         'netblocks' => 'Netblocks',
@@ -9,8 +9,6 @@ $nav_items = array(
         'search'    => 'Search',
         'analytics' => 'Analytics',
 );
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +16,11 @@ $nav_items = array(
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ Config::get('app.name') }} {{ Config::get('app.version') }} - {{ $nav_items[Request::segment(2)] }}</title>
+	<title>{{ Config::get('app.name') }} {{ Config::get('app.version') }} - {{ $navItems[Request::segment(2)] }}</title>
 
-	<link href="{{ asset('/css/bootstrap.min.css')          }}" rel="stylesheet">
-    <link href="{{ asset('/css/bootstrap-theme.min.css')    }}" rel="stylesheet">
-    <link href="{{ asset('/css/style.css')                  }}" rel="stylesheet">
+	<link href="{{ asset('/css/admin/bootstrap.min.css')          }}" rel="stylesheet">
+    <link href="{{ asset('/css/admin/bootstrap-theme.min.css')    }}" rel="stylesheet">
+    <link href="{{ asset('/css/admin/style.css')                  }}" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -45,8 +43,8 @@ $nav_items = array(
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                        @foreach($nav_items as $nav_link => $nav_title) {
-                            <li class="{{ Request::path() == $nav_link ? 'active' : '' }}"><a href="{{ url('/'.Request::segment(1).'/'.$nav_link) }}">{{ $nav_title }}</a></li>
+                        @foreach($navItems as $navLink => $navTitle)
+                            <li class="{{ Request::path() == $navLink ? 'active' : '' }}"><a href="{{ url('/'.Request::segment(1).'/'.$navLink) }}">{{ $navTitle }}</a></li>
                         @endforeach
                 </ul>
             </div>
@@ -63,6 +61,6 @@ $nav_items = array(
 
 	<!-- Scripts -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="js/admin/bootstrap.min.js"></script>
 </body>
 </html>

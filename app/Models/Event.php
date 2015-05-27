@@ -2,20 +2,20 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class events extends Model {
+class Event extends Model {
 
     protected $table    = 'events';
     protected $fillable = [
         'ticket_id',
         'evidence_id',
         'source',
-        'uri',
         'timestamp',
         'information'
     ];
     protected $guarded  = ['id'];
 
     public function ticket() {
-        return $this->BelongsTo('AbuseIO\Models\ticket');
+        return $this->BelongsTo('AbuseIO\Models\Ticket');
     }
+
 }

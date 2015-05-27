@@ -7,6 +7,7 @@ use Illuminate\Queue\SerializesModels;
 class EmailParsedEvent extends Event {
 
 	use SerializesModels;
+
     public $parser;
     public $rawEmail;
     public $arfEmail;

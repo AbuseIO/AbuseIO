@@ -19,9 +19,25 @@ class NotesTableSeeder extends Seeder {
             ],
             [
                 'id'                        => '2',
+                'ticket_id'                 => '1',
+                'submitter'                 => 'Contact',
+                'text'                      => 'Oh please dont shut my internet off!',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime
+            ],
+            [
+                'id'                        => '3',
                 'ticket_id'                 => '2',
-                'submitter'                 => '',
+                'submitter'                 => 'AbuseDesk',
                 'text'                      => 'Placed in quarantine until client is contacted',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime
+            ],
+            [
+                'id'                        => '4',
+                'ticket_id'                 => '2',
+                'submitter'                 => 'Contact',
+                'text'                      => 'Antivirus has removed malware',
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
             ]
