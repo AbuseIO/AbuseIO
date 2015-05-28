@@ -13,6 +13,10 @@
 
 Return [
 
+    'interface' => [
+        'language' => 'en',
+    ],
+
     'emailparser' => [
         'fallback_mail'                     => 'admin@isp.local',
         'store_mail'                        => true,

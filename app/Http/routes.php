@@ -1,4 +1,6 @@
 <?php
+App::setLocale(Config::get('main.interface.language'));
+
 Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/', function () {
