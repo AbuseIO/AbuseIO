@@ -22,21 +22,22 @@
                 <tr>
                     <th>Contact</th>
                     <th>Domain name</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 @foreach( $domains as $domain )
                     <tr>
-                        {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('admin.domains.destroy', $domain->id))) !!}
                         <td>{{ $domain->contact->name }} ({{ $domain->contact->reference }})</td>
                         <td>{{ $domain->name }}</td>
                         <td>
+                            {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('admin.domains.destroy', $domain->id))) !!}
                             {!! link_to_route('admin.domains.show', 'Details', array($domain->id), array('class' => 'btn btn-info')) !!}
                             {!! link_to_route('admin.domains.edit', 'Edit', array($domain->id), array('class' => 'btn btn-info')) !!}
                             {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
+                            {!! Form::close() !!}
                         </td>
-                        {!! Form::close() !!}
                     </tr>
                 @endforeach
             </table>

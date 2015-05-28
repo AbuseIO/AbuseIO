@@ -12,7 +12,7 @@
     <script src="/js/ash/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="header_wrapper"><div class="container header"><img class="img-responsive" src="images/logo.svg" /></div></div>
+<div class="header_wrapper"><div class="container header"><img class="img-responsive" src="images/logo.svg" alt=''/></div></div>
 <div class="container">
     <h2>ASH - Ticket {{ $ticket->id }}</h2>
     <div class="panel panel-danger">

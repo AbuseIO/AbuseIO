@@ -23,22 +23,23 @@
                     <th>Contact</th>
                     <th>First IP</th>
                     <th>Last IP</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 @foreach( $netblocks as $netblock )
                     <tr>
-                        {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('admin.netblocks.destroy', $netblock->id))) !!}
                         <td>{{ $netblock->contact->name }} ({{ $netblock->contact->reference }})</td>
                         <td>{{ inet_ntop($netblock->first_ip) }}</td>
                         <td>{{ inet_ntop($netblock->last_ip) }}</td>
                         <td>
+                            {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('admin.netblocks.destroy', $netblock->id))) !!}
                             {!! link_to_route('admin.netblocks.show', 'Details', array($netblock->id), array('class' => 'btn btn-info')) !!}
                             {!! link_to_route('admin.netblocks.edit', 'Edit', array($netblock->id), array('class' => 'btn btn-info')) !!}
                             {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
+                            {!! Form::close() !!}
                         </td>
-                        {!! Form::close() !!}
                     </tr>
                 @endforeach
             </table>

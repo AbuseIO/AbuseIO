@@ -25,24 +25,25 @@
                     <th>E-Mail</th>
                     <th>RPC Host</th>
                     <th>Notify</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 @foreach( $contacts as $contact )
                     <tr>
-                        {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('admin.contacts.destroy', $contact->id))) !!}
                         <td>{{ $contact->reference }}</td>
                         <td>{{ $contact->name }}</td>
                         <td>{{ $contact->email }}</td>
                         <td>{{ $contact->rpc_host }}</td>
                         <td>{{ $contact->auto_notify ? 'Automatic' : 'Manual' }}</td>
                         <td>
+                            {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('admin.contacts.destroy', $contact->id))) !!}
                             {!! link_to_route('admin.contacts.show', 'Details', array($contact->id), array('class' => 'btn btn-info')) !!}
                             {!! link_to_route('admin.contacts.edit', 'Edit', array($contact->id), array('class' => 'btn btn-info')) !!}
                             {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
+                            {!! Form::close() !!}
                         </td>
-                        {!! Form::close() !!}
                     </tr>
                 @endforeach
             </table>
