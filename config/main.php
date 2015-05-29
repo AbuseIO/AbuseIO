@@ -48,6 +48,9 @@ Return [
     'reports' => [
         'match_period'                      => '14 days',
         'close_after'                       => '21 days',
+        'resolvable_only'                   => false, // This drops anything if a domain or netblock cannot be found in the DB
+        'resolvable_netblocks'              => [ ], // Overlapping netblocks defined here if IPA only lists IP's that are in use, which is a fallback check.
+        'resolvable_domains'                => [ ], // Overlapping domains defined here if IPA only lists IP's that are in use, which is a fallback check.
     ],
 
     'notes' => [
