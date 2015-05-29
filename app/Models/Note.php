@@ -8,7 +8,9 @@ class Note extends Model {
     protected $fillable = [
         'ticket_id',
         'submitter',
-        'text'
+        'text',
+        'hidden',
+        'viewed',
     ];
     protected $guarded  = ['id'];
 

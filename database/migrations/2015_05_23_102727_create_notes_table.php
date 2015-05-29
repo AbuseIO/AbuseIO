@@ -18,6 +18,8 @@ class CreateNotesTable extends Migration {
             $table->integer('ticket_id');
             $table->string('submitter');
             $table->longText('text');
+            $table->boolean('hidden');
+            $table->boolean('viewed');
 			$table->timestamps();
 		});
 	}
