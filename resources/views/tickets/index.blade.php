@@ -5,8 +5,9 @@
     <div class="container">
 
         <div class="row">
-            <div  class="col-md-9" ><h1 class="page-header">Tickets</h1></div>
-            <div  class="col-md-3 pagination">
+            <div  class="col-md-8" ><h1 class="page-header">Tickets</h1></div>
+            <div  class="col-md-4 pagination">
+                [ Pulldown VIEW ]<!-- This is a preset view select for some default reports, like open tickets, or escalations -->
                 {!! link_to_route('admin.tickets.create', 'Create Ticket', '', array('class' => 'btn btn-info')) !!}
                 {!! link_to_route('admin.export.tickets', 'CSV Export', array('format' => 'csv'), array('class' => 'btn btn-info')) !!}
             </div>
