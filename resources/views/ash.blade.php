@@ -52,13 +52,13 @@
                 @endif
 
                 <dt>{{ Lang::get('ash.basic.class') }}</dt>
-                <dd>{{ $ticket->class_id }}</dd>
+                <dd>{{ Lang::get('classifications.' . $ticket->class_id . '.name') }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.type') }}</dt>
-                <dd>{{ $ticket->type_id }}</dd>
+                <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.name') }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.suggest') }}</dt>
-                <dd></dd>
+                <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.description') }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.firstSeen') }}</dt>
                 <dd>{{ $ticket->first_seen }}</dd>
@@ -70,7 +70,7 @@
                 <dd>{{ $ticket->report_count }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.ticketStatus') }}</dt>
-                <dd>{{ $ticket->status_id }}</dd>
+                <dd>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.replyStatus') }}</dt>
                 <dd></dd>
@@ -115,7 +115,7 @@
         </div>
 
         <div id="whatsthis" class="tab-pane fade">
-            {{ Lang::getLocale() . $ticket->class_id }}
+            {!! Lang::get('classifications.' . $ticket->class_id . '.description') !!}
         </div>
 
         <div id="resolved" class="tab-pane fade">
