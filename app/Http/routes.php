@@ -7,7 +7,6 @@ Route::group(['prefix' => 'admin'], function () {
         return Redirect::to('/admin/home');
     });
     Route::get('home', 'HomeController@index');
-    Route::get('reports', 'ReportsController@index');
 
     Route::model('contacts', 'AbuseIO\Models\Contact');
     Route::resource('contacts', 'ContactsController');
@@ -31,7 +30,7 @@ Route::group(['prefix' => 'admin'], function () {
     ]);
 
     Route::model('tickets', 'AbuseIO\Models\Ticket');
-    Route::resource('ticket', 'TicketsController');
+    Route::resource('tickets', 'TicketsController');
     Route::get('/export/tickets', [
         'as' => 'admin.export.tickets',
         'uses' => 'TicketsController@export'

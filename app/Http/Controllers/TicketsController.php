@@ -3,6 +3,7 @@
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Ticket;
+use AbuseIO\Models\Event;
 use Input;
 use Redirect;
 
@@ -17,7 +18,8 @@ class TicketsController extends Controller {
      */
     public function index()
     {
-        $tickets = Ticket::with('contact')->paginate(10);
+        //$tickets = Ticket::with('events')->paginate(10);
+        $tickets = Ticket::paginate(10);
 
         return view('tickets.index')->with('tickets', $tickets);
     }
@@ -39,9 +41,20 @@ class TicketsController extends Controller {
      */
     public function export()
     {
-        $tickets = Ticket::all();
+        $tickets  = Ticket::all();
+        $columns    = [
+            'id'        => 'Ticket ID',
+        ];
 
-        return view('tickets.export')->with('tickets', $tickets);
+        $output     = '"' . implode('","',$columns) . '"' . PHP_EOL;
+        foreach ($tickets as $ticket) {
+            $row = [
+                $ticket->id,
+            ];
+            $output .= '"' . implode('","',$row) . '"' . PHP_EOL;
+        }
+
+        return response(substr($output, 0, -1), 200)->header('Content-Type', 'text/csv')->header('Content-Disposition', 'attachment; filename="Tickets.csv"');
     }
 
     /**

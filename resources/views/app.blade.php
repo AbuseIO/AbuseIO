@@ -5,7 +5,7 @@ $navItems = array(
         'contacts'  => 'Contacts',
         'netblocks' => 'Netblocks',
         'domains'   => 'Domains',
-        'reports'   => 'Reports',
+        'tickets'   => 'Tickets',
         'search'    => 'Search',
         'analytics' => 'Analytics',
 );
