@@ -8,6 +8,7 @@ class Netblock extends Model {
     protected $fillable = [
         'first_ip',
         'last_ip',
+        'description',
         'contact_id',
         'enabled'
     ];

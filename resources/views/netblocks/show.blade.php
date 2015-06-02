@@ -18,6 +18,9 @@
             <dt>Contact</dt>
             <dd>{{ $netblock->contact->name }} ({{ $netblock->contact->reference }})</dd>
 
+            <dt>Description</dt>
+            <dd>{{ $netblock->description }}</dd>
+
             <dt>Status</dt>
             <dd>{{ $netblock->enabled ? 'Enabled' : 'Disabled' }}</dd>
         </dl>

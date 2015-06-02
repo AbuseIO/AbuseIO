@@ -15,20 +15,17 @@ class CreateNetblocksTable extends Migration {
 		Schema::create('netblocks', function(Blueprint $table)
 		{
             $table->integer('id');
-            //$table->string('first_ip');
-            //$table->string('last_ip');
             $table->integer('contact_id');
+            $table->string('description');
             $table->boolean('enabled');
 			$table->timestamps();
 
-            //$table->index('first_ip');
-            //$table->index('last_ip');
             $table->index('contact_id');
             $table->index('enabled');
 
-            //$table->unique('first_ip', 'last_ip');
 		});
 
+        // Laravel has no support for varbinary yet, manually adding these fields:
         DB::statement('ALTER TABLE `netblocks` ADD `first_ip` VARBINARY(16)');
         DB::statement('ALTER TABLE `netblocks` ADD `last_ip`  VARBINARY(16)');
         DB::statement('ALTER TABLE `netblocks` ADD UNIQUE( `first_ip`, `last_ip`)');
