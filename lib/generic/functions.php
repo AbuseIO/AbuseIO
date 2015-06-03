@@ -58,7 +58,9 @@ function valid_date($date) {
 ** Returns: True when the IP is valid
 */
 function valid_ip($ip) {
-    return filter_var($ip, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE));
+    $validate = filter_var($ip, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE));
+
+    return (bool) $validate;
 }
 
 
