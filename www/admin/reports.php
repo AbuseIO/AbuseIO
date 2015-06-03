@@ -138,6 +138,7 @@
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'CustomerCode','Direction'=>($order='CustomerCode'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Customer</a></th>
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Type','Direction'=>($order='Type'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Type</a></th>
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Class','Direction'=>($order='Class'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Classification</a></th>
+          <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Source','Direction'=>($order='Source'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Source</a></th>
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'LastSeen','Direction'=>($order='LastSeen'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Last Seen</a></th>
           <th>Count</th>
           <th><a href='?<?php echo http_build_query(array_merge($uri,array('OrderBy'=>'Status','Direction'=>($order='Status'&&$direction=='ASC')?'DESC':'ASC'))); ?>'>Status</a></th>
@@ -183,6 +184,7 @@ foreach($results as $nr => $result) {
           </td>
           <td><span class='label label-${labelClass[$result['Type']]}'><a href='reports.php?Type=${result['Type']}'>${result['Type']}</a></span></td>
           <td><a href='reports.php?Class=${result['Class']}'>${result['Class']}</a></td>
+          <td><a href='reports.php?Source=${result['Source']}'>${result['Source']}</a></td>
           <td>".date("d-m-Y H:i", $result['LastSeen'])."</td>
           <td>${result['ReportCount']}</td>
           <td><span class='label label-${labelClass[$result['Status']]}'><a href='reports.php?Status=${result['Status']}'>${ticketStatus}</a></span></span></td>
