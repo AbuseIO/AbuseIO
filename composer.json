@@ -1,8 +1,8 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
-	"license": "MIT",
+	"name": "abuseio/abuseio",
+	"description": "Open Source abusemanagement tool",
+	"keywords": ["abuse", "abuseio"],
+	"license": "GPLv2",
 	"type": "project",
 	"require": {
 		"laravel/framework": "5.1.*",
