@@ -11,7 +11,7 @@ class EvidencesTableSeeder extends Seeder {
         $evidences = array(
             [
                 'id'                        => '1',
-                'data'                      => 'its true when 1 says it is!',
+                'filename'                  => '20150906/1_messageid',
                 'sender'                    => '1 me',
                 'subject'                   => 'i say 1',
                 'created_at'                => new DateTime,
@@ -19,7 +19,7 @@ class EvidencesTableSeeder extends Seeder {
             ],
             [
                 'id'                        => '2',
-                'data'                      => 'its true when 2 says it is!',
+                'filename'                  => '20150906/2_messageid',
                 'sender'                    => '2 me',
                 'subject'                   => 'i say 2',
                 'created_at'                => new DateTime,
@@ -27,7 +27,7 @@ class EvidencesTableSeeder extends Seeder {
             ],
             [
                 'id'                        => '3',
-                'data'                      => 'its true when 3 says it is!',
+                'filename'                  => '20150906/3_messageid',
                 'sender'                    => '3 me',
                 'subject'                   => 'i say 3',
                 'created_at'                => new DateTime,
@@ -35,7 +35,7 @@ class EvidencesTableSeeder extends Seeder {
             ],
             [
                 'id'                        => '4',
-                'data'                      => 'its true when 4 says it is!',
+                'filename'                  => '20150906/4_messageid',
                 'sender'                    => '4 me',
                 'subject'                   => 'i say 4',
                 'created_at'                => new DateTime,
@@ -43,7 +43,7 @@ class EvidencesTableSeeder extends Seeder {
             ],
             [
                 'id'                        => '5',
-                'data'                      => 'its true when 5 says it is!',
+                'filename'                  => '20150906/5_messageid',
                 'sender'                    => '5 me',
                 'subject'                   => 'i say 5',
                 'created_at'                => new DateTime,

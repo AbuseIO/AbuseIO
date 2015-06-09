@@ -13,7 +13,7 @@ class Evidence extends Model {
     protected $guarded  = ['id'];
 
     public function event() {
-        return $this->BelongsTo('AbuseIO\Models\event');
+        return $this->belongsTo('AbuseIO\Models\event');
     }
     
 }

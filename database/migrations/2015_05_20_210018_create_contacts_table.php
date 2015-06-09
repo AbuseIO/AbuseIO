@@ -20,8 +20,8 @@ class CreateContactsTable extends Migration {
             $table->string('email');
             $table->string('rpc_host');
             $table->string('rpc_key');
-            $table->boolean('auto_notify');
-            $table->boolean('enabled');
+            $table->boolean('auto_notify')->unsigned();
+            $table->boolean('enabled')->unsigned();
 			$table->timestamps();
 
             $table->index('reference');
@@ -29,7 +29,6 @@ class CreateContactsTable extends Migration {
             $table->index('email');
             $table->index('rpc_host');
             $table->index('auto_notify');
-            $table->index('enabled');
 
 		});
 	}

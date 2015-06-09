@@ -70,7 +70,7 @@ class NetblocksTableSeeder extends Seeder {
                 'updated_at'    => new DateTime,
             ],
             [
-                'id'            => 4,
+                'id'            => 7,
                 'first_ip'      => inet_pton('10.0.4.0'),
                 'last_ip'       => inet_pton('10.0.4.255'),
                 'description'   => 'This is a description',
@@ -80,7 +80,7 @@ class NetblocksTableSeeder extends Seeder {
                 'updated_at'    => new DateTime,
             ],
             [
-                'id'            => 5,
+                'id'            => 8,
                 'first_ip'      => inet_pton('10.0.5.0'),
                 'last_ip'       => inet_pton('10.0.5.255'),
                 'description'   => 'This is a description',
@@ -90,7 +90,7 @@ class NetblocksTableSeeder extends Seeder {
                 'updated_at'    => new DateTime,
             ],
             [
-                'id'            => 6,
+                'id'            => 9,
                 'first_ip'      => inet_pton('10.0.6.0'),
                 'last_ip'       => inet_pton('10.0.6.255'),
                 'description'   => 'This is a description',
@@ -100,7 +100,7 @@ class NetblocksTableSeeder extends Seeder {
                 'updated_at'    => new DateTime,
             ],
             [
-                'id'            => 7,
+                'id'            => 10,
                 'first_ip'      => inet_pton('10.0.7.0'),
                 'last_ip'       => inet_pton('10.0.7.255'),
                 'description'   => 'This is a description',
@@ -110,7 +110,7 @@ class NetblocksTableSeeder extends Seeder {
                 'updated_at'    => new DateTime,
             ],
             [
-                'id'            => 8,
+                'id'            => 11,
                 'first_ip'      => inet_pton('10.0.8.0'),
                 'last_ip'       => inet_pton('10.0.8.255'),
                 'description'   => 'This is a description',
@@ -120,7 +120,7 @@ class NetblocksTableSeeder extends Seeder {
                 'updated_at'    => new DateTime,
             ],
             [
-                'id'            => 9,
+                'id'            => 12,
                 'first_ip'      => inet_pton('10.0.9.0'),
                 'last_ip'       => inet_pton('10.0.9.255'),
                 'description'   => 'This is a description',
@@ -130,7 +130,7 @@ class NetblocksTableSeeder extends Seeder {
                 'updated_at'    => new DateTime,
             ],
             [
-                'id'            => 11,
+                'id'            => 21,
                 'first_ip'      => inet_pton('10.1.11.0'),
                 'last_ip'       => inet_pton('10.1.11.255'),
                 'description'   => 'This is a description',
@@ -140,7 +140,7 @@ class NetblocksTableSeeder extends Seeder {
                 'updated_at'    => new DateTime,
             ],
             [
-                'id'            => 12,
+                'id'            => 22,
                 'first_ip'      => inet_pton('10.1.12.12'),
                 'last_ip'       => inet_pton('10.1.12.14'),
                 'description'   => 'This is a description',

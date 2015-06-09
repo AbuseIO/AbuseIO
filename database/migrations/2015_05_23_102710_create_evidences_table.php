@@ -15,10 +15,14 @@ class CreateEvidencesTable extends Migration {
 		Schema::create('evidences', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->longText('data');
+            $table->string('filename');
             $table->string('sender');
             $table->string('subject');
 			$table->timestamps();
+
+            $table->index('filename');
+            $table->index('sender');
+            $table->index('subject');
 		});
 	}
 

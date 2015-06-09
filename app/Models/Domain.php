@@ -13,7 +13,7 @@ class Domain extends Model {
     protected $guarded  = ['id'];
 
     public function contact() {
-        return $this->BelongsTo('AbuseIO\Models\Contact');
+        return $this->belongsTo('AbuseIO\Models\Contact');
     }
 
 }

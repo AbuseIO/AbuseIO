@@ -15,12 +15,14 @@ class CreateNotesTable extends Migration {
 		Schema::create('notes', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('ticket_id');
+            $table->integer('ticket_id')->unsigned();
             $table->string('submitter');
             $table->longText('text');
-            $table->boolean('hidden');
-            $table->boolean('viewed');
+            $table->boolean('hidden')->unsigned();
+            $table->boolean('viewed')->unsigned();
 			$table->timestamps();
+
+            $table->index('ticket_id');
 		});
 	}
 

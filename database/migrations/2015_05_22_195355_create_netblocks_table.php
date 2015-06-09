@@ -14,10 +14,10 @@ class CreateNetblocksTable extends Migration {
 	{
 		Schema::create('netblocks', function(Blueprint $table)
 		{
-            $table->integer('id');
-            $table->integer('contact_id');
+            $table->increments('id');
+            $table->integer('contact_id')->unsigned();
             $table->string('description');
-            $table->boolean('enabled');
+            $table->boolean('enabled')->unsigned();
 			$table->timestamps();
 
             $table->index('contact_id');
