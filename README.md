@@ -44,6 +44,8 @@ chown -R abuseio:abuseio abuseio
 chmod -R 775 abuseio/storage
 chown -R abuseio:www-data abuseio/storage
 chown -R abuseio:postfix abuseio/storage/mailarchive
+chown abuseio:www-data abuseio/bootstrap/cache
+chmod 775 abuseio/bootstrap/cache
 
 ## Creating MTA delivery
 
