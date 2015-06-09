@@ -7,8 +7,8 @@
         <div class="row">
             <div  class="col-md-9" ><h1 class="page-header">Netblocks</h1></div>
             <div  class="col-md-3 pagination">
-                {!! link_to_route('admin.netblocks.create', 'Create Netblock', '', array('class' => 'btn btn-info')) !!}
-                {!! link_to_route('admin.export.netblocks', 'CSV Export', array('format' => 'csv'), array('class' => 'btn btn-info')) !!}
+                {!! link_to_route('admin.netblocks.create', 'Create Netblock', null, ['class' => 'btn btn-info']) !!}
+                {!! link_to_route('admin.export.netblocks', 'CSV Export', ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
             </div>
         </div>
 
@@ -34,10 +34,10 @@
                         <td>{{ inet_ntop($netblock->first_ip) }}</td>
                         <td>{{ inet_ntop($netblock->last_ip) }}</td>
                         <td>
-                            {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('admin.netblocks.destroy', $netblock->id))) !!}
-                            {!! link_to_route('admin.netblocks.show', 'Details', array($netblock->id), array('class' => 'btn btn-info')) !!}
-                            {!! link_to_route('admin.netblocks.edit', 'Edit', array($netblock->id), array('class' => 'btn btn-info')) !!}
-                            {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
+                            {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.netblocks.destroy', $netblock->id]]) !!}
+                            {!! link_to_route('admin.netblocks.show', 'Details', [$netblock->id], ['class' => 'btn btn-info']) !!}
+                            {!! link_to_route('admin.netblocks.edit', 'Edit', [$netblock->id], ['class' => 'btn btn-info']) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         </td>
                     </tr>

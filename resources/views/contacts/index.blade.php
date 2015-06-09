@@ -7,8 +7,8 @@
         <div class="row">
             <div  class="col-md-9" ><h1 class="page-header">Contacts</h1></div>
             <div  class="col-md-3 pagination">
-                {!! link_to_route('admin.contacts.create', 'Create Contact', '', array('class' => 'btn btn-info')) !!}
-                {!! link_to_route('admin.export.contacts', 'CSV Export', array('format' => 'csv'), array('class' => 'btn btn-info')) !!}
+                {!! link_to_route('admin.contacts.create', 'Create Contact', null, ['class' => 'btn btn-info']) !!}
+                {!! link_to_route('admin.export.contacts', 'CSV Export', ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
             </div>
         </div>
 
@@ -38,10 +38,10 @@
                         <td>{{ $contact->rpc_host }}</td>
                         <td>{{ $contact->auto_notify ? 'Automatic' : 'Manual' }}</td>
                         <td>
-                            {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('admin.contacts.destroy', $contact->id))) !!}
-                            {!! link_to_route('admin.contacts.show', 'Details', array($contact->id), array('class' => 'btn btn-info')) !!}
-                            {!! link_to_route('admin.contacts.edit', 'Edit', array($contact->id), array('class' => 'btn btn-info')) !!}
-                            {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
+                            {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.contacts.destroy', $contact->id]]) !!}
+                            {!! link_to_route('admin.contacts.show', 'Details', [$contact->id], ['class' => 'btn btn-info']) !!}
+                            {!! link_to_route('admin.contacts.edit', 'Edit', [$contact->id], ['class' => 'btn btn-info']) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         </td>
                     </tr>

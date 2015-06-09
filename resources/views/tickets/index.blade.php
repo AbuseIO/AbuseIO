@@ -8,8 +8,28 @@
             <div  class="col-md-8" ><h1 class="page-header">Tickets</h1></div>
             <div  class="col-md-4 pagination">
                 [ Pulldown VIEW ]<!-- This is a preset view select for some default reports, like open tickets, or escalations -->
-                {!! link_to_route('admin.tickets.create', 'Create Ticket', '', array('class' => 'btn btn-info')) !!}
-                {!! link_to_route('admin.export.tickets', 'CSV Export', array('format' => 'csv'), array('class' => 'btn btn-info')) !!}
+                {!! 
+                    link_to_route(
+                        'admin.tickets.create', 
+                        'Create Ticket', 
+                        null, 
+                        [   
+                            'class' => 'btn btn-info',
+                        ]
+                    ) 
+                !!}
+                {!! 
+                    link_to_route(
+                        'admin.export.tickets', 
+                        'CSV Export', 
+                        [
+                            'format' => 'csv',
+                        ], 
+                        [
+                            'class' => 'btn btn-info',
+                        ]
+                    ) 
+                !!}
             </div>
         </div>
 
@@ -47,7 +67,7 @@
                         <td></td>
                         <td>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</td>
                         <td>
-                            {!! link_to_route('admin.tickets.show', 'Details', array($ticket->id), array('class' => 'btn btn-info')) !!}
+                            {!! link_to_route('admin.tickets.show', 'Details', [$ticket->id], ['class' => 'btn btn-info']) !!}
                         </td>
                     </tr>
                 @endforeach

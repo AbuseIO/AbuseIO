@@ -1,6 +1,5 @@
 <?php
-// TODO : Move this array to a better place
-$navItems = array(
+$navItems = [
         'home'      => 'Home',
         'contacts'  => 'Contacts',
         'netblocks' => 'Netblocks',
@@ -8,7 +7,7 @@ $navItems = array(
         'tickets'   => 'Tickets',
         'search'    => 'Search',
         'analytics' => 'Analytics',
-);
+];
 ?>
 <!DOCTYPE html>
 <html lang="en">

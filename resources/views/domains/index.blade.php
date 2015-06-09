@@ -7,8 +7,8 @@
         <div class="row">
             <div  class="col-md-9" ><h1 class="page-header">Domains</h1></div>
             <div  class="col-md-3 pagination">
-                {!! link_to_route('admin.domains.create', 'Create Domain', '', array('class' => 'btn btn-info')) !!}
-                {!! link_to_route('admin.export.domains', 'CSV Export', array('format' => 'csv'), array('class' => 'btn btn-info')) !!}
+                {!! link_to_route('admin.domains.create', 'Create Domain', null, ['class' => 'btn btn-info']) !!}
+                {!! link_to_route('admin.export.domains', 'CSV Export', ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
             </div>
         </div>
 
@@ -32,10 +32,10 @@
                         <td>{{ $domain->contact->name }} ({{ $domain->contact->reference }})</td>
                         <td>{{ $domain->name }}</td>
                         <td>
-                            {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('admin.domains.destroy', $domain->id))) !!}
-                            {!! link_to_route('admin.domains.show', 'Details', array($domain->id), array('class' => 'btn btn-info')) !!}
-                            {!! link_to_route('admin.domains.edit', 'Edit', array($domain->id), array('class' => 'btn btn-info')) !!}
-                            {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
+                            {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.domains.destroy', $domain->id]]) !!}
+                            {!! link_to_route('admin.domains.show', 'Details', [$domain->id], ['class' => 'btn btn-info']) !!}
+                            {!! link_to_route('admin.domains.edit', 'Edit', [$domain->id], ['class' => 'btn btn-info']) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         </td>
                     </tr>
