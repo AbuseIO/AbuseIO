@@ -12,7 +12,7 @@
                     link_to_route(
                         'admin.tickets.create', 
                         'Create Ticket', 
-                        null, 
+                        [ ], 
                         [   
                             'class' => 'btn btn-info',
                         ]

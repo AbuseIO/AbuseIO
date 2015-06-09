@@ -7,7 +7,7 @@
         <div class="row">
             <div  class="col-md-9" ><h1 class="page-header">Contacts</h1></div>
             <div  class="col-md-3 pagination">
-                {!! link_to_route('admin.contacts.create', 'Create Contact', null, ['class' => 'btn btn-info']) !!}
+                {!! link_to_route('admin.contacts.create', 'Create Contact', [ ], ['class' => 'btn btn-info']) !!}
                 {!! link_to_route('admin.export.contacts', 'CSV Export', ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
             </div>
         </div>

@@ -7,7 +7,7 @@
         <div class="row">
             <div  class="col-md-9" ><h1 class="page-header">Domains</h1></div>
             <div  class="col-md-3 pagination">
-                {!! link_to_route('admin.domains.create', 'Create Domain', null, ['class' => 'btn btn-info']) !!}
+                {!! link_to_route('admin.domains.create', 'Create Domain', [ ], ['class' => 'btn btn-info']) !!}
                 {!! link_to_route('admin.export.domains', 'CSV Export', ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
             </div>
         </div>
