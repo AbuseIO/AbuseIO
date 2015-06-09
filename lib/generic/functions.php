@@ -25,7 +25,7 @@
 
 /*
 ** Function: _die
-** Parameters: 
+** Parameters:
 **  msg(string): Exit message that will be displayed on CLI
 **  code(int): Exit value to be given back to the CLI
 ** Returns: Nothing
@@ -38,7 +38,7 @@ function _die($msg, $code) {
 
 /*
 ** Function: valid_date
-** Parameters: 
+** Parameters:
 **  date(string): a (human) date formatted string that PHP can put into timestamp
 ** Returns: True when its a valid date string
 */
@@ -53,32 +53,23 @@ function valid_date($date) {
 
 /*
 ** Function: valid_ip
-** Parameters: 
+** Parameters:
 **  ip(string): And IP address
 ** Returns: True when the IP is valid
 */
 function valid_ip($ip) {
-    if (strpos($ip, ".") < 1) {
-        return false;
-    } else {
-        $octets = explode(".", $ip);
-        foreach ( $octets AS $octet ) {
-            if ( $octet > 255 || $octet < 0 || !is_numeric($octet) ) {
-                return false;
-            }
-        }
-    }
+    $validate = filter_var($ip, FILTER_VALIDATE_IP, array('flags' => FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE));
 
-    return true;
+    return (bool) $validate;
 }
 
 
 /*
-** Function: iprange 
-** Parameters: 
+** Function: iprange
+** Parameters:
 **  range_ip(string): The first IP of the range
 **  range_ip(cidr): The CIDR notation without the prefex /
-** Returns: 
+** Returns:
 **  (array)
 **   first_ip(string): First IP of the range in decimal
 **   last_ip(string): Last IP of the range in decimal
@@ -97,9 +88,9 @@ function iprange($range_ip,$range_cidr) {
 
 /*
 ** Function: generate_startstop
-** Parameters: 
+** Parameters:
 **  ranges(array): as [key] => [ip/cidr]
-** Returns: 
+** Returns:
 **  (array)
 **   [ip/cidr](array)
 **    first_ip(string): First IP of the range in decimal
@@ -118,11 +109,11 @@ function generate_startstop($ranges) {
 
 /*
 ** Function: difference
-** Parameters: 
+** Parameters:
 **  value1(int): value to match difference with
 **  value2(int): value to match difference with
 **  offset(int): Threshold when its considered true
-** Returns: 
+** Returns:
 */
 function difference($val1, $val2, $offset) {
     if (abs($val1 - $val2) > $offset) {
