@@ -9,9 +9,14 @@ https://github.com/AbuseIO/AbuseIO/tree/AbuseIO-3.0
 # Requirements
 
 PHP 5.x or better
-MTA that can redirect into pipes (e.g. Exim)
+MTA that can redirect into pipes (e.g. Exim or Postfix)
 Apache 2.x or better
 Database backend (mysql, postgres, etc)
+Beanstalk Queueing server
+
+for ubuntu
+
+apt-get install php5 mysql-server beanstalkd apache2 postfix
 
 # Installation (as root)
 
