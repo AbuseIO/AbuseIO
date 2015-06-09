@@ -41,7 +41,7 @@ git clone -b AbuseIO-4.0 git@github.com:AbuseIO/AbuseIO.git abuseio
 
 cd /opt
 chown -R abuseio:abuseio abuseio
-chmod -R 664 abuseio/storage
+chmod -R 775 abuseio/storage
 chown -R abuseio:www-data abuseio/storage
 chown -R abuseio:postfix abuseio/storage/mailarchive
 
