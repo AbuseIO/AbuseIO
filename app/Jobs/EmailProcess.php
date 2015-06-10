@@ -1,6 +1,4 @@
-<?php
-
-namespace AbuseIO\Jobs;
+<?php namespace AbuseIO\Jobs;
 
 use AbuseIO\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
@@ -28,8 +26,19 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle($filename)
     {
         Log::error('starting: ' . $filename);
     }
+
+    public function fire()
+    {
+        //
+    }
+
+    public function getRawBody()
+    {
+        //
+    }
+
 }
