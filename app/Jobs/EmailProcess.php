@@ -1,6 +1,5 @@
 <?php namespace AbuseIO\Jobs;
 
-use AbuseIO\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
