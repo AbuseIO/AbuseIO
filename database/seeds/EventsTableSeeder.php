@@ -2,10 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
-class EventsTableSeeder extends Seeder {
+class EventsTableSeeder extends Seeder
+{
 
-	public function run()
-	{
+    public function run()
+    {
         DB::table('events')->delete();
 
         $events = array(
@@ -15,10 +16,12 @@ class EventsTableSeeder extends Seeder {
                 'evidence_id'               => '1',
                 'source'                    => 'Simon Says',
                 'timestamp'                 => new DateTime,
-                'information'               => json_encode([
+                'information'               => json_encode(
+                    [
                     'engine' => 'infected website blob',
                     'uri' => '/dir1'
-                ]),
+                    ]
+                ),
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
             ],
@@ -28,10 +31,12 @@ class EventsTableSeeder extends Seeder {
                 'evidence_id'               => '2',
                 'source'                    => 'Simon Says',
                 'timestamp'                 => new DateTime,
-                'information'               => json_encode([
+                'information'               => json_encode(
+                    [
                     'engine' => 'infected website blob',
                     'uri' => '/dir2'
-                ]),
+                    ]
+                ),
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
             ],
@@ -41,10 +46,12 @@ class EventsTableSeeder extends Seeder {
                 'evidence_id'               => '3',
                 'source'                    => 'Simon Says',
                 'timestamp'                 => new DateTime,
-                'information'               => json_encode([
+                'information'               => json_encode(
+                    [
                     'engine' => 'infected website blob',
                     'uri' => '/dir3'
-                ]),
+                    ]
+                ),
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
             ],
@@ -54,11 +61,13 @@ class EventsTableSeeder extends Seeder {
                 'evidence_id'               => '4',
                 'source'                    => 'Simon Says',
                 'timestamp'                 => new DateTime,
-                'information'               => json_encode([
+                'information'               => json_encode(
+                    [
                     'engine' => 'infected botnet blob',
                     'cc_host' => 'x.x.x.x',
                     'cc_port' => '8080'
-                ]),
+                    ]
+                ),
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
             ],
@@ -68,17 +77,19 @@ class EventsTableSeeder extends Seeder {
                 'evidence_id'               => '5',
                 'source'                    => 'Simon Says',
                 'timestamp'                 => new DateTime,
-                'information'               => json_encode([
+                'information'               => json_encode(
+                    [
                     'engine' => 'infected botnet blob',
                     'cc_host' => 'x.x.x.x',
                     'cc_port' => '8080'
-                ]),
+                    ]
+                ),
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
             ]
         );
 
         DB::table('events')->insert($events);
-	}
+    }
 
 }

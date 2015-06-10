@@ -2,11 +2,19 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Evidence extends Model {
+/**
+ * Class Evidence
+ * @package AbuseIO\Models
+ * @property string $filename
+ * @property string $sender
+ * @property string $subject
+ */
+class Evidence extends Model
+{
 
     protected $table    = 'evidences';
     protected $fillable = [
-        'data',
+        'filename',
         'sender',
         'subject'
     ];

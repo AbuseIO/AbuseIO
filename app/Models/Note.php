@@ -2,7 +2,17 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Note extends Model {
+/**
+ * Class Note
+ * @package AbuseIO\Models
+ * @property integer $ticket_id
+ * @property string $submitter
+ * @property string $text
+ * @property boolean $hidden
+ * @property boolean $viewed
+ */
+class Note extends Model
+{
 
     protected $table    = 'notes';
     protected $fillable = [

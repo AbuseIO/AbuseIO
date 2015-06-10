@@ -2,10 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
-class NotesTableSeeder extends Seeder {
+class NotesTableSeeder extends Seeder
+{
 
-	public function run()
-	{
+    public function run()
+    {
         DB::table('notes')->delete();
 
         $notes = array(
@@ -62,6 +63,6 @@ class NotesTableSeeder extends Seeder {
         );
 
         DB::table('notes')->insert($notes);
-	}
+    }
 
 }

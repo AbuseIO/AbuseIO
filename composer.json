@@ -24,7 +24,8 @@
 		"abuseio/parser-spamcop": "dev-master",
 		"abuseio/parser-spamexperts": "dev-master",
 		"abuseio/parser-usgo": "dev-master",
-		"abuseio/parser-webiron": "dev-master"
+		"abuseio/parser-webiron": "dev-master",
+		"barryvdh/laravel-ide-helper": "^2.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
@@ -50,6 +51,7 @@
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
+            "php artisan ide-helper:generate",
 			"php artisan optimize"
 		],
 		"post-create-project-cmd": [

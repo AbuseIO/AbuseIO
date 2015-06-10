@@ -5,30 +5,31 @@ use AbuseIO\Events\EmailParsedEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 
-class StartParserEvent implements ShouldBeQueued {
+class StartParserEvent implements ShouldBeQueued
+{
 
-	use InteractsWithQueue;
+    use InteractsWithQueue;
 
-	/**
-	 * Create the event handler.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		//
-	}
+    /**
+     * Create the event handler.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
 
-	/**
-	 * Handle the event.
-	 *
-	 * @param  EmailParsedEvent  $event
-	 * @return void
-	 */
-	public function handle(EmailParsedEvent $event)
-	{
+    /**
+     * Handle the event.
+     *
+     * @param  EmailParsedEvent  $event
+     * @return void
+     */
+    public function handle(EmailParsedEvent $event)
+    {
         // So lets not have parsers directly insert data into the database and rather have them return an array
-        // with the dataset it managed to figure out AND its endresult status. If a mail cannot be handled fully
+        // with the data set it managed to figure out AND its endresult status. If a mail cannot be handled fully
         // we are just going to ignore the rest and have the admin sort the error first.
         // We could consider adding an option that allows admins to accept the events that actually work and partially
         // deny the rest, but that would give problems with a new attempt of parsing (although we can filter duplicate
@@ -59,7 +60,7 @@ class StartParserEvent implements ShouldBeQueued {
 
         // TODO: return a valid response to let the EmailParseCommand know of the result
 
-		dd($event);
-	}
+        dd($event);
+    }
 
 }

@@ -1,7 +1,8 @@
 <?php namespace AbuseIO\Commands;
 
-abstract class Command {
+abstract class Command
+{
 
-	//
+    //
 
 }

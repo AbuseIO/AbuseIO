@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class DomainsTableSeeder extends Seeder {
+class DomainsTableSeeder extends Seeder
+{
 
     public function run()
     {

@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class TicketsTableSeeder extends Seeder {
+class TicketsTableSeeder extends Seeder
+{
 
     public function run()
     {

@@ -2,7 +2,17 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model {
+/**
+ * Class Event
+ * @package AbuseIO\Models
+ * @property integer $ticket_id
+ * @property integer $evidence_id
+ * @property string $source
+ * @property integer $timestamp
+ * @property string $information
+ */
+class Event extends Model
+{
 
     protected $table    = 'events';
     protected $fillable = [

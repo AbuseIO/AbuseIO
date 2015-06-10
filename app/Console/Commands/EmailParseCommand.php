@@ -3,47 +3,45 @@
 use AbuseIO\Events\EmailParsedEvent;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
-use PhpMimeMailParser\Attachment;
 use PhpMimeMailParser\Parser;
 use Config;
 use Log;
 Use Event;
 
-class EmailParseCommand extends Command {
+class EmailParseCommand extends Command
+{
 
-	/**
-	 * The console command name.
-	 *
-	 * @var string
-	 */
-	protected $name = 'email:parse';
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'email:parse';
 
-	/**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
-	protected $description = 'Parses an incoming email into abuse events.';
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Parses an incoming email into abuse events.';
 
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
-	public function fire()
-	{
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function fire()
+    {
         // Read from stdin (should be piped from cat or MDA)
         $fd = fopen("php://stdin", "r");
         $rawEmail = "";
@@ -60,25 +58,25 @@ class EmailParseCommand extends Command {
         // TODO: add
 
         // Store the raw e-mail into a EML file if the archiving is enabled
-        if(Config::get('main.emailparser.store_evidence') === true) {
+        if (Config::get('main.emailparser.store_evidence') === true) {
             $filesystem = new Filesystem;
 
             $path = storage_path() . '/mailarchive/' . date('Ymd') . '/';
             if (!$filesystem->isDirectory($path)) {
-                if(!$filesystem->makeDirectory($path)) {
+                if (!$filesystem->makeDirectory($path)) {
                     Log::error('Unable to create directory' . $path);
                     $this->exception($rawEmail);
                 }
             }
 
-            if(empty($parsedMail->parts[1]['headers']['message-id'])) {
-                $file = rand(10,10) . '.eml';
+            if (empty($parsedMail->parts[1]['headers']['message-id'])) {
+                $file = rand(10, 10) . '.eml';
             } else {
-                $file = substr($parsedMail->parts[1]['headers']['message-id'],1,-1) . '.eml';
+                $file = substr($parsedMail->parts[1]['headers']['message-id'], 1, -1) . '.eml';
                 $file = preg_replace('/[^a-zA-Z0-9_\.]/', '_', $file);
             }
 
-            if($filesystem->isFile($path . $file)) {
+            if ($filesystem->isFile($path . $file)) {
                 // No way an e-mail with the same message ID would arrive twice. So this is an error to rage quit for
                 Log::error('Received duplicate e-mail with message ID: ' . $parsedMail->parts[1]['headers']['message-id']);
                 $this->exception($rawEmail);
@@ -95,16 +93,18 @@ class EmailParseCommand extends Command {
         $attachments = $parsedMail->getAttachments();
         $arfEmail = [ ];
         foreach ($attachments as $attachment) {
-            if($attachment->contentType == 'message/feedback-report') {
+            if ($attachment->contentType == 'message/feedback-report') {
                 $arfEmail['report'] = $attachment->getContent();
             }
-            if($attachment->contentType == 'message/rfc822') {
+            if ($attachment->contentType == 'message/rfc822') {
                 $arfEmail['evidence'] = $attachment->getContent();
             }
-            if($attachment->contentType == 'text/plain') {
+            if ($attachment->contentType == 'text/plain') {
                 $arfEmail['message'] = $attachment->getContent();
             }
         }
+
+        $parser = false;
 
         // Use parser mapping to see where to kick it to
         // Start using the quick method using the sender mapping
@@ -128,7 +128,7 @@ class EmailParseCommand extends Command {
         }
 
         // If we haven't figured out which parser we're going to use, we will never find out so another rage quit
-        if (empty($parser)) {
+        if ($parser === false) {
             Log::error('Unable to handle message from: ' . $parsedMail->getHeader('from') . ' with subject: ' . $parsedMail->getHeader('subject'));
             $this->exception($rawEmail);
         } else {
@@ -136,32 +136,34 @@ class EmailParseCommand extends Command {
         }
 
         $response = Event::fire(new EmailParsedEvent($parser, $rawEmail, $arfEmail));
-        // Handle parse results (did it fire?)
+        if ($response) {
+            // Handle parse results (did it fire?)
+        }
 
-	}
+    }
 
-	/**
-	 * Get the console command arguments.
-	 *
-	 * @return array
-	 */
-	protected function getArguments()
-	{
-		return [ ];
-	}
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [ ];
+    }
 
-	/**
-	 * Get the console command options.
-	 *
-	 * @return array
-	 */
-	protected function getOptions()
-	{
-		return [
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
             // TODO: add debug option
-			//['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
-		];
-	}
+            //['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
+        ];
+    }
 
     /**
      * We've hit a snag, so we are gracefully killing ourselves after we contact the admin about it.
@@ -172,7 +174,7 @@ class EmailParseCommand extends Command {
     {
         Log::error('Email parser is ending with errors. The received e-mail will be bounced to the admin for investigation');
         // TODO: sent the rawEmail back to admin
-        dd();
+        dd($rawEmail);
     }
 
 }

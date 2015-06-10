@@ -2,10 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
-class ContactsTableSeeder extends Seeder {
+class ContactsTableSeeder extends Seeder
+{
 
-	public function run()
-	{
+    public function run()
+    {
         DB::table('contacts')->delete();
 
         $contacts = array(
@@ -144,6 +145,6 @@ class ContactsTableSeeder extends Seeder {
         );
 
         DB::table('contacts')->insert($contacts);
-	}
+    }
 
 }

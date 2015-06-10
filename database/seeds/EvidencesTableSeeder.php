@@ -2,10 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
-class EvidencesTableSeeder extends Seeder {
+class EvidencesTableSeeder extends Seeder
+{
 
-	public function run()
-	{
+    public function run()
+    {
         DB::table('evidences')->delete();
 
         $evidences = array(
@@ -52,6 +53,6 @@ class EvidencesTableSeeder extends Seeder {
         );
 
         DB::table('evidences')->insert($evidences);
-	}
+    }
 
 }

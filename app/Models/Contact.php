@@ -2,7 +2,19 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Contact extends Model {
+/**
+ * Class Contact
+ * @package AbuseIO\Models
+ * @property string $reference
+ * @property string $name
+ * @property string $email
+ * @property string $rpc_host
+ * @property string $rpc_key
+ * @property boolean $auto_notify
+ * @property boolean $enabled
+ */
+class Contact extends Model
+{
 
     protected $table    = 'contacts';
     protected $fillable = [

@@ -2,7 +2,15 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Domain extends Model {
+/**
+ * Class Domain
+ * @package AbuseIO\Models
+ * @property string $name
+ * @property integer $contact_id
+ * @property boolean $enabled
+ */
+class Domain extends Model
+{
 
     protected $table    = 'domains';
     protected $fillable = [

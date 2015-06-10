@@ -1,15 +1,12 @@
 <?php namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests;
-use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Ticket;
-use AbuseIO\Models\Event;
 use Input;
 use Redirect;
 
-use Illuminate\Http\Request;
-
-class TicketsController extends Controller {
+class TicketsController extends Controller
+{
 
     /**
      * Display a listing of the resource.
@@ -46,12 +43,12 @@ class TicketsController extends Controller {
             'id'        => 'Ticket ID',
         ];
 
-        $output     = '"' . implode('","',$columns) . '"' . PHP_EOL;
+        $output     = '"' . implode('", "', $columns) . '"' . PHP_EOL;
         foreach ($tickets as $ticket) {
             $row = [
                 $ticket->id,
             ];
-            $output .= '"' . implode('","',$row) . '"' . PHP_EOL;
+            $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
         }
 
         return response(substr($output, 0, -1), 200)->header('Content-Type', 'text/csv')->header('Content-Disposition', 'attachment; filename="Tickets.csv"');
@@ -64,10 +61,11 @@ class TicketsController extends Controller {
      */
     public function store()
     {
-        $input = Input::all();
-        Ticket::create( $input );
-
-        return Redirect::route('tickets.index')->with('message', 'Ticket has been created');
+        //only allowed in debug mode or something
+        //$input = Input::all();
+        //Ticket::create( $input );
+        //
+        //return Redirect::route('admin.tickets.index')->with('message', 'Ticket has been created');
     }
 
     /**
@@ -105,7 +103,7 @@ class TicketsController extends Controller {
         //$input = array_except(Input::all(), '_method');
         //$ticket->update($input);
         //
-        //return Redirect::route('tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');
+        //return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');
     }
 
     /**
@@ -119,7 +117,7 @@ class TicketsController extends Controller {
         //only allowed in debug mode or something
         //$ticket->delete();
         //
-        //return Redirect::route('tickets.index')->with('message', 'Ticket has been deleted.');
+        //return Redirect::route('admin.tickets.index')->with('message', 'Ticket has been deleted.');
     }
 
 }

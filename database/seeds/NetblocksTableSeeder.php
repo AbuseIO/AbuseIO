@@ -2,10 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
-class NetblocksTableSeeder extends Seeder {
+class NetblocksTableSeeder extends Seeder
+{
 
-	public function run()
-	{
+    public function run()
+    {
         DB::table('netblocks')->delete();
 
         $netblocks = array(
@@ -232,6 +233,6 @@ class NetblocksTableSeeder extends Seeder {
         );
 
         DB::table('netblocks')->insert($netblocks);
-	}
+    }
 
 }
