@@ -31,14 +31,4 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         Log::error('starting: ' . $filename);
     }
 
-    public function fire()
-    {
-        //
-    }
-
-    public function getRawBody()
-    {
-        //
-    }
-
 }
