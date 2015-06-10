@@ -7,7 +7,7 @@ class Kernel extends ConsoleKernel
 {
 
     protected $commands = [
-        'AbuseIO\Console\Commands\EmailParseCommand'
+        'AbuseIO\Console\Commands\EmailReceiveCommand'
     ];
 
     protected function schedule(Schedule $schedule)

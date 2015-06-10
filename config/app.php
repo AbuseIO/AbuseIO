@@ -202,6 +202,8 @@ return [
         'View'      => 'Illuminate\Support\Facades\View',
         'Form'      => 'Collective\Html\FormFacade',
         'Html'      => 'Collective\Html\HtmlFacade',
+        'Uuid'      => 'Webpatser\Uuid\Uuid',
+        'Carbon'    => 'Carbon\Carbon',
 
     ],
 

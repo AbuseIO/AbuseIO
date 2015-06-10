@@ -17,9 +17,6 @@ class EventServiceProvider extends ServiceProvider
         'event.name' => [
             'EventListener',
         ],
-        EmailParsedEvent::class => [
-            StartParserEvent::class,
-        ],
     ];
 
     /**
