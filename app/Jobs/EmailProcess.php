@@ -11,6 +11,8 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
+    public $filename;
+
     /**
      * Create a new job instance.
      *
@@ -26,9 +28,9 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
      *
      * @return void
      */
-    public function handle($filename)
+    public function handle()
     {
-        Log::error('starting: ' . $filename);
+        Log::info('queue is starting the processing of email file: ' . $this->filename);
     }
 
 }

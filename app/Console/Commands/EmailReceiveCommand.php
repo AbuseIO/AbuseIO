@@ -78,7 +78,7 @@ class EmailReceiveCommand extends Command
             $this->exception($rawEmail);
         }
 
-        $job = (new EmailProcess($path . $file))->onQueue('emails');
+        $job = (new EmailProcess($path . $file))->onQueue('emails')->delay(600);
 
         $this->dispatch($job);
 
