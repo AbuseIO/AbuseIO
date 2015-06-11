@@ -1,6 +1,6 @@
 <?php namespace AbuseIO\Console\Commands;
 
-use AbuseIO\Jobs\EmailProcess;
+use AbuseIO\Commands\EmailProcess;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -9,6 +9,7 @@ use Log;
 Use Events;
 Use Uuid;
 Use Carbon;
+Use Queue;
 
 class EmailReceiveCommand extends Command
 {
@@ -46,6 +47,9 @@ class EmailReceiveCommand extends Command
      */
     public function fire()
     {
+
+        Log::info('MDA is called to receive an incoming e-mail');
+
         // Read from stdin (should be piped from cat or MDA)
         $fd = fopen("php://stdin", "r");
         $rawEmail = "";
@@ -58,6 +62,7 @@ class EmailReceiveCommand extends Command
         $datefolder = Carbon::now()->format('Ymd');
         $path = storage_path() . '/mailarchive/' . $datefolder . '/';
         $file = Uuid::generate(4) . '.eml';
+        $filename = $path . $file;
 
         if (!$filesystem->isDirectory($path)) {
             // If a datefolder does not exist, then create it or die trying
@@ -68,19 +73,21 @@ class EmailReceiveCommand extends Command
         }
 
         if ($filesystem->isFile($path . $file)) {
-            Log::error('File aready exists: ' . $path . $file);
+            Log::error('File aready exists: ' . $filename);
             $this->exception($rawEmail);
         }
 
         if ($filesystem->put($path . $file, $rawEmail) === false) {
-            Log::error('Unable to write file: ' . $path . $file);
+            Log::error('Unable to write file: ' . $filename);
 
             $this->exception($rawEmail);
         }
 
-        $job = (new EmailProcess($path . $file))->onQueue('emails')->delay(600);
+        Log::info('Pushing incoming email into queue file: ' . $filename);
 
-        $this->dispatch($job);
+        $this->dispatch(new EmailProcess($filename));
+
+        Log::info('MDA has successfully received the incoming e-mail');
 
     }
 

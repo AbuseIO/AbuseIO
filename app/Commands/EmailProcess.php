@@ -1,19 +1,22 @@
-<?php namespace AbuseIO\Jobs;
+<?php
 
+namespace AbuseIO\Commands;
+
+use AbuseIO\Commands\Command;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Log;
 
-class EmailProcess extends Job implements SelfHandling, ShouldQueue
+class EmailProcess extends Command implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
     public $filename;
 
     /**
-     * Create a new job instance.
+     * Create a new command instance.
      *
      * @return void
      */
@@ -23,13 +26,12 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
     }
 
     /**
-     * Execute the job.
+     * Execute the command.
      *
      * @return void
      */
     public function handle()
     {
-        Log::info('queue is starting the processing of email file: ' . $this->filename);
+        Log::info('Queued worker is starting the processing of email file: ' . $this->filename);
     }
-
 }
