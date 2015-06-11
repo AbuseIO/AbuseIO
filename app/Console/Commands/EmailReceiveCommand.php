@@ -9,7 +9,6 @@ use Log;
 Use Events;
 Use Uuid;
 Use Carbon;
-Use Queue;
 
 class EmailReceiveCommand extends Command
 {
@@ -48,7 +47,7 @@ class EmailReceiveCommand extends Command
     public function fire()
     {
 
-        Log::info('MDA is called to receive an incoming e-mail');
+        Log::info(get_class($this).': Being called upon to receive an incoming e-mail');
 
         // Read from stdin (should be piped from cat or MDA)
         $fd = fopen("php://stdin", "r");
@@ -67,27 +66,27 @@ class EmailReceiveCommand extends Command
         if (!$filesystem->isDirectory($path)) {
             // If a datefolder does not exist, then create it or die trying
             if (!$filesystem->makeDirectory($path)) {
-                Log::error('Unable to create directory: ' . $path);
+                Log::error(get_class($this).': Unable to create directory: ' . $path);
                 $this->exception($rawEmail);
             }
         }
 
         if ($filesystem->isFile($path . $file)) {
-            Log::error('File aready exists: ' . $filename);
+            Log::error(get_class($this).': File aready exists: ' . $filename);
             $this->exception($rawEmail);
         }
 
         if ($filesystem->put($path . $file, $rawEmail) === false) {
-            Log::error('Unable to write file: ' . $filename);
+            Log::error(get_class($this).': Unable to write file: ' . $filename);
 
             $this->exception($rawEmail);
         }
 
-        Log::info('Pushing incoming email into queue file: ' . $filename);
+        Log::info(get_class($this).': Pushing incoming email into queue file: ' . $filename);
 
         $this->dispatch(new EmailProcess($filename));
 
-        Log::info('MDA has successfully received the incoming e-mail');
+        Log::info(get_class($this).': Successfully received the incoming e-mail');
 
     }
 
@@ -120,7 +119,7 @@ class EmailReceiveCommand extends Command
      */
     protected function exception($rawEmail)
     {
-        Log::error('Email parser is ending with errors. The received e-mail will be bounced to the admin for investigation');
+        Log::error(get_class($this).': Email receiver is ending with errors. The received e-mail will be bounced to the admin for investigation');
         // TODO: send the rawEmail back to admin
         dd($rawEmail);
     }

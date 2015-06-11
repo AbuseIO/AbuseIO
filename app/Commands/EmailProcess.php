@@ -6,6 +6,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Filesystem\Filesystem;
 use PhpMimeMailParser\Parser;
 use Config;
 use Log;
@@ -43,15 +44,25 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        Log::info('Queued worker is starting the processing of email file: ' . $this->filename);
+        Log::info(get_class($this).': Queued worker is starting the processing of email file: ' . $this->filename);
 
-        $rawEmail = file_get_contents($this->filename);
+        $filesystem = new Filesystem;
+        $rawEmail = $filesystem->get($this->filename);
 
         $parsedMail = new Parser();
         $parsedMail->setText($rawEmail);
 
+        // Sanity checks
+        if (empty($parsedMail->getHeader('from')) || empty($parsedMail->getMessageBody())) {
+            logger(LOG_WARNING, "Validation failed on " . $this->filename);
+            $this->exception($this->filename, $rawEmail);
+        }
+
         // Ignore email from our own notification address to prevent mail loops
-        // TODO
+        if (preg_match('/' . Config::get('main.notifications.from_address') . '/', $parsedMail->getHeader('from'))) {
+            logger(LOG_WARNING, "Loop prevention: Ignoring email from self (" . Config::get('main.notifications.from_address') . ")");
+            $this->exception($this->filename, $rawEmail);
+        }
 
         // Start with detecting valid ARF e-mail
         $attachments = $parsedMail->getAttachments();
@@ -91,14 +102,30 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
 
         // If we haven't figured out which parser we're going to use, we will never find out so another rage quit
         if (empty($parser)) {
-            Log::error('Unable to handle message from: ' . $parsedMail->getHeader('from') . ' with subject: ' . $parsedMail->getHeader('subject'));
-            $this->exception($rawEmail);
+            Log::error(get_class($this).': Unable to handle message from: ' . $parsedMail->getHeader('from') . ' with subject: ' . $parsedMail->getHeader('subject'));
+            $this->exception($this->filename, $rawEmail);
         } else {
-            Log::info('Received message from: '. $parsedMail->getHeader('from') . ' with subject: ' . $parsedMail->getHeader('subject') . ' heading to parser: ' . $parser);
+            Log::info(get_class($this).': Received message from: '. $parsedMail->getHeader('from') . ' with subject: ' . $parsedMail->getHeader('subject') . ' heading to parser: ' . $parser);
         }
 
-
+        // call parser
+        // call validater
+        // call linker
+        // call saver
 
     }
+
+    /**
+     * We've hit a snag, so we are gracefully killing ourselves after we contact the admin about it.
+     *
+     * @return mixed
+     */
+    protected function exception($filename, $rawEmail)
+    {
+        Log::error(get_class($this).': Ending with errors. The received e-mail will be deleted from archive and bounced to the admin for investigation');
+        // TODO: send the rawEmail back to admin
+        dd($filename . $rawEmail);
+    }
+
 
 }
