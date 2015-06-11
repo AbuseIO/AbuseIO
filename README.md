@@ -16,9 +16,25 @@ Beanstalk Queueing server
 
 for ubuntu
 
-apt-get install php5 mysql-server beanstalkd apache2 postfix
+apt-get install php5 mysql-server beanstalkd apache2 postfix supervisor
 
 # Installation (as root)
+
+## Setup supervisor:
+
+/etc/supervisor/conf.d/abuseio_queue_email.conf
+
+[program:abuseio_queue_emails]
+command=php artisan queue:listen --tries=1 --sleep=3 --memory=128 --delay=0 --queue=emails
+directory=/opt/abuseio
+stdout_logfile=/opt/abuseio/storage/logs/queue-emails.log
+redirect_stderr=true
+
+then:
+
+supervisorctl reread  
+supervisorctl add abuseio_queue_emails
+supervisorctl start abuseio_queue_emails
 
 ## Install global composer 
 
