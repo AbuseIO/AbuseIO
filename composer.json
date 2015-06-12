@@ -9,6 +9,7 @@
         "laravelcollective/html": "~5.0",
         "php-mime-mail-parser/php-mime-mail-parser": "dev-master",
         "webpatser/laravel-uuid": "1.*",
+        "abuseio/parser-common": "dev-master",
 		"abuseio/parser-abusehub": "dev-master",
 		"abuseio/parser-blocklistde": "dev-master",
 		"abuseio/parser-cegtek": "dev-master",

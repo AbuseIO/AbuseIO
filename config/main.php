@@ -22,6 +22,8 @@ Return [
         'store_mail'                        => true,
         'store_evidence'                    => true,
         'remove_evidence'                   => '500 days',
+        /*
+         * Moving into parser config itself
         'sender_map'                        => [
             '/autoreports@shadowserver.org/'        => 'shadowserver',
             '/noreply@google.com/'                  => 'google',
@@ -43,6 +45,7 @@ Return [
             '/User-Agent: Spampanel/'               => 'spamexperts',
             '/User-Agent: SpamExperts/'             => 'spamexperts',
         ],
+        */
     ],
 
     'reports' => [
