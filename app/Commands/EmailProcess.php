@@ -7,14 +7,14 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Filesystem\Filesystem;
-use PhpMimeMailParser\Parser;
+use PhpMimeMailParser\Parser as MimeParser;
+use AbuseIO\Parsers\Factory as FindParser;
 use Config;
 use Log;
-Use AbuseIO\Parsers\Shadowserver; //For testing, will be loaded automaticly ... with extends?
 
-class EmailProcess extends Command implements SelfHandling, ShouldQueue
+class EmailProcess extends Command implements SelfHandling//, ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels;
+    //use InteractsWithQueue, SerializesModels;
 
     public $filename;
 
@@ -51,7 +51,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         $filesystem = new Filesystem;
         $rawEmail = $filesystem->get($this->filename);
 
-        $parsedMail = new Parser();
+        $parsedMail = new MimeParser();
         $parsedMail->setText($rawEmail);
 
         // Sanity checks
@@ -81,37 +81,21 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
             }
         }
 
-        // Use parser mapping to see where to kick it to
-        // Start using the quick method using the sender mapping
-        $senderMap = Config::get('main.emailparser.sender_map');
-        foreach ($senderMap as $regex => $mapping) {
-            if (preg_match($regex, $parsedMail->getHeader('from'))) {
-                $parser = $mapping;
-                break;
-            }
-        }
-
-        // If the quick method didnt work fall back to body mapping
-        if (empty($parsedMail)) {
-            $bodyMap = Config::get('main.emailparser.body_map');
-            foreach ($bodyMap as $regex => $mapping) {
-                if (preg_match($regex, $parsedMail->getMessageBody())) {
-                    $parser = $mapping;
-                    break;
-                }
-            }
+        // call parser
+        $parserName = FindParser::mapFrom($parsedMail->getHeader('from'));
+        if (empty($parserName)) {
+            $parserName = FindParser::mapBody($parsedMail->getMessageBody());
         }
 
         // If we haven't figured out which parser we're going to use, we will never find out so another rage quit
-        if (empty($parser)) {
+        if (empty($parserName)) {
             Log::error(get_class($this).': Unable to handle message from: ' . $parsedMail->getHeader('from') . ' with subject: ' . $parsedMail->getHeader('subject'));
             $this->exception($this->filename, $rawEmail);
         } else {
-            Log::info(get_class($this).': Received message from: '. $parsedMail->getHeader('from') . ' with subject: ' . $parsedMail->getHeader('subject') . ' heading to parser: ' . $parser);
+            Log::info(get_class($this).': Received message from: '. $parsedMail->getHeader('from') . ' with subject: \'' . $parsedMail->getHeader('subject') . '\' heading to parser: ' . $parserName);
         }
 
-        // call parser
-        $parser = new Shadowserver('config', 'parsed', 'raw');
+        $parser = new $parserName('config', 'parsed', 'arf');
         $result = $parser->parse();
 
         Log::info(get_class($this).': ' . $result['errorStatus'] . $result['errorMessage']);
