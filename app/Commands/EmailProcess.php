@@ -10,6 +10,7 @@ use Illuminate\Filesystem\Filesystem;
 use PhpMimeMailParser\Parser;
 use Config;
 use Log;
+Use AbuseIO\Parsers\Shadowserver; //For testing, will be loaded automaticly ... with extends?
 
 class EmailProcess extends Command implements SelfHandling, ShouldQueue
 {
@@ -44,6 +45,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+
         Log::info(get_class($this).': Queued worker is starting the processing of email file: ' . $this->filename);
 
         $filesystem = new Filesystem;
@@ -54,13 +56,13 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
 
         // Sanity checks
         if (empty($parsedMail->getHeader('from')) || empty($parsedMail->getMessageBody())) {
-            logger(LOG_WARNING, "Validation failed on " . $this->filename);
+            Log::warning(get_class($this).'Validation failed on: ' . $this->filename);
             $this->exception($this->filename, $rawEmail);
         }
 
         // Ignore email from our own notification address to prevent mail loops
         if (preg_match('/' . Config::get('main.notifications.from_address') . '/', $parsedMail->getHeader('from'))) {
-            logger(LOG_WARNING, "Loop prevention: Ignoring email from self (" . Config::get('main.notifications.from_address') . ")");
+            Log::warning(get_class($this).'Loop prevention: Ignoring email from self ' . Config::get('main.notifications.from_address'));
             $this->exception($this->filename, $rawEmail);
         }
 
@@ -109,6 +111,11 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         }
 
         // call parser
+        $parser = new Shadowserver('config', 'parsed', 'raw');
+        $result = $parser->parse();
+
+        Log::info(get_class($this).': ' . $result['errorStatus'] . $result['errorMessage']);
+
         // call validater
         // call linker
         // call saver
@@ -127,5 +134,9 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         dd($filename . $rawEmail);
     }
 
+    protected function getMapping()
+    {
+        //
+    }
 
 }
