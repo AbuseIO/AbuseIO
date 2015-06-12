@@ -66,16 +66,16 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
 
         // Start with detecting valid ARF e-mail
         $attachments = $parsedMail->getAttachments();
-        $arfEmail = [ ];
+        $arfMail = [ ];
         foreach ($attachments as $attachment) {
             if ($attachment->contentType == 'message/feedback-report') {
-                $arfEmail['report'] = $attachment->getContent();
+                $arfMail['report'] = $attachment->getContent();
             }
             if ($attachment->contentType == 'message/rfc822') {
-                $arfEmail['evidence'] = $attachment->getContent();
+                $arfMail['evidence'] = $attachment->getContent();
             }
             if ($attachment->contentType == 'text/plain') {
-                $arfEmail['message'] = $attachment->getContent();
+                $arfMail['message'] = $attachment->getContent();
             }
         }
 
