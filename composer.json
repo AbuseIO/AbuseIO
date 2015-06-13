@@ -9,6 +9,7 @@
         "laravelcollective/html": "~5.0",
         "php-mime-mail-parser/php-mime-mail-parser": "dev-master",
         "webpatser/laravel-uuid": "1.*",
+        "Chumper/Zipper": "0.6.x",
         "abuseio/parser-common": "dev-master",
 		"abuseio/parser-abusehub": "dev-master",
 		"abuseio/parser-blocklistde": "dev-master",
@@ -28,7 +29,8 @@
 		"abuseio/parser-usgo": "dev-master",
 		"abuseio/parser-webiron": "dev-master",
 		"barryvdh/laravel-ide-helper": "^2.0",
-		"pda/pheanstalk": "~3.0"
+		"pda/pheanstalk": "~3.0",
+		"ddeboer/data-import": "^0.18.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

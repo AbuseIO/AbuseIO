@@ -147,6 +147,7 @@ return [
         'AbuseIO\Providers\ConfigServiceProvider',
         'AbuseIO\Providers\EventServiceProvider',
         'AbuseIO\Providers\RouteServiceProvider',
+        'Chumper\Zipper\ZipperServiceProvider',
 
         /*
          * Developer Providers
@@ -204,6 +205,7 @@ return [
         'Html'      => 'Collective\Html\HtmlFacade',
         'Uuid'      => 'Webpatser\Uuid\Uuid',
         'Carbon'    => 'Carbon\Carbon',
+        'Zipper'    => 'Chumper\Zipper\Zipper',
 
     ],
 

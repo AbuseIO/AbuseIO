@@ -12,9 +12,9 @@ use AbuseIO\Parsers\Factory as GetParser;
 use Config;
 use Log;
 
-class EmailProcess extends Command implements SelfHandling, ShouldQueue
+class EmailProcess extends Command implements SelfHandling//, ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels;
+    //use InteractsWithQueue, SerializesModels;
 
     public $filename;
 
