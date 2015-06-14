@@ -196,6 +196,7 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
 
             }
         );
+
     }
 
 }

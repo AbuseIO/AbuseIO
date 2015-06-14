@@ -27,13 +27,14 @@ class CreateTicketsTable extends Migration
                 $table->string('ip_contact_email');
                 $table->string('ip_contact_rpchost');
                 $table->string('ip_contact_rpckey');
+                $table->boolean('ip_contact_auto_notify')->unsigned();
                 $table->string('domain_contact_reference');
                 $table->string('domain_contact_name');
                 $table->string('domain_contact_email');
                 $table->string('domain_contact_rpchost');
                 $table->string('domain_contact_rpckey');
+                $table->boolean('domain_contact_auto_notify')->unsigned();
                 $table->integer('status_id')->unsigned();
-                $table->boolean('auto_notify')->unsigned();
                 $table->integer('notified_count')->unsigned();
                 $table->integer('last_notify_count')->unsigned();
                 $table->timestamp('last_notify_timestamp');
