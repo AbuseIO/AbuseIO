@@ -97,8 +97,7 @@ class EventsSave extends Command implements SelfHandling
 
             if ($search->count() === 0) {
 
-                $ticket = new Ticket();
-                $ticket->save;
+                
 
             } elseif ($search->count() === 1) {
 
