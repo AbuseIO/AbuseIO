@@ -16,9 +16,16 @@ Beanstalk Queueing server
 
 for ubuntu
 
-apt-get install php5 mysql-server beanstalkd apache2 postfix supervisor
+apt-get install php5 mysql-server beanstalkd apache2 postfix supervisor bind9
 
 # Installation (as root)
+
+## Setup local resolving
+
+Some parsers produce high amounts of DNS queries, so your better off using a local resolve (e.g. bind)
+in the above install example bind is installed and you only need to update your /etc/resolv.conf (or
+with newer ubuntu versions the /etc/network/interfaces) to use 127.0.0.1 as the FIRST resolver, but make
+sure you leave a 2nd or 3rd with your 'normale' resolvers.
 
 ## Setup supervisor:
 
