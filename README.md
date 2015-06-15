@@ -108,11 +108,40 @@ echo 'notifier: | "| /usr/bin/php -q /opt/abuseio/artisan --env=local email:pars
 newaliasses
 ```
 
-## Configuring Apache
-
+## Configuring Webserver
 You should be able to visit the website at URI /admin/ with a document root at /opt/abuseio/public/
 
+### Apache httpd
 Don't forget: It's highly recommended to add a .htaccess and secure with both IP as ACL filters!
+
+### Nginx
+This is an example configuration for running AbuseIO via Nginx with php fpm. Change it to suit your own setup.
+The important line is the "try_files" line which emulates the .htaccess behaviour.
+##### /etc/nginx/sites-available/abuseio
+```
+server {
+  listen 80;
+  server_name abuseio.myserver.tld;
+  root /opt/abuseio/public;
+  index index.php;
+ 
+  location ~ \.php$ {
+    try_files $uri =404;
+    fastcgi_pass unix:/var/run/fpm_abuseio.socket;
+    fastcgi_index index.php;
+    include fastcgi_params;
+  }
+
+  location / {
+    try_files $uri $uri/ /index.php?q=$uri&$args;
+  }
+}
+```
+
+```
+ln -s /etc/nginx/sites-available/abuseio /etc/nginx/sites-enabled/001-abuseio
+service nginx reload
+```
 
 # Installation (as abuseio)
 
