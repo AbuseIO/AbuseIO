@@ -35,6 +35,37 @@ class EventsSave extends Command implements SelfHandling
     public function handle()
     {
 
+        $newTickets = [ ];
+        /* setup as follows:
+         *
+         * $newTickets =
+         * [
+         * 'id' =>
+         *     [
+         *     'ticket' = array(ticket)
+         *     'events' = array('id' => array(event))
+         *     'evidence' = array('id' => array(evidence))
+         *     ]
+         * ];
+         *
+         */
+
+        $existingTickets = [ ];
+        /*
+         * setup as follows:
+         *
+         * $existingTickets =
+         * [
+         * 'id' =>
+         *     [
+         *     'ticket_id' = int
+         *     'events' = array('id' => array(event))
+         *     'evidence' = array('id' => array(evidence))
+         *     ]
+         * ];
+         *
+         */
+
         foreach ($this->events as $event) {
 
             // Here we will thru all the events and look if these is an existing ticket. We will split them up into
@@ -94,10 +125,9 @@ class EventsSave extends Command implements SelfHandling
                 ->get();
 
 
-
             if ($search->count() === 0) {
 
-                
+                // Build an array with all new tickes and save it with its related event and evidence link.
 
             } elseif ($search->count() === 1) {
 
