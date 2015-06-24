@@ -100,9 +100,10 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
         }
 
         // If we do not have a complete e-mail, then we empty the perhaps partially filled arfMail
+        // which is useless, hence reset to false
         if (!isset($arfMail['report']) || !isset($arfMail['evidence']) || !isset($arfMail['message'])) {
 
-            $arfMail = [ ];
+            $arfMail = false;
 
         }
 
