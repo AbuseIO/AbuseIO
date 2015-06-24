@@ -55,6 +55,10 @@ Route::group(
             ]
         );
 
+        Route::get('search', 'SearchController@index');
+
+        Route::get('analytics', 'AnalyticsController@index');
+
     }
 );
 
