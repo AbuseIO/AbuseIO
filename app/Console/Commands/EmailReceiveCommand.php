@@ -107,6 +107,10 @@ class EmailReceiveCommand extends Command
      */
     protected function getOptions()
     {
+        // TODO: implment debug function: It should
+        // 1. not queue the task, but keep it on console
+        // 2. set logging to console instead in addition to logfile
+
         return [
             ['debug', 'd', InputOption::VALUE_OPTIONAL, 'Enable debugging while pushing e-mail from CLI.', false],
         ];
