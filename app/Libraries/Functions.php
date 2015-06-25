@@ -76,7 +76,7 @@ class ICF
     {
 
         $parts = array();
-//echo $decimal;
+
         // Use BCMath if available
         if (function_exists('bcadd')) {
 

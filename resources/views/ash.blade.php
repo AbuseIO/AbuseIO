@@ -85,7 +85,7 @@
                 <table class="table table-striped table-condensed">
                     <thead>
                     <tr>
-                        <th>{{ Lang::get('ash.technical.seen') }}</th>
+                        <th>{{ Lang::get('ash.technical.timestamp') }}</th>
                         <th>{{ Lang::get('ash.technical.source') }}</th>
                         <th>{{ Lang::get('ash.technical.information') }}</th>
                     </tr>
