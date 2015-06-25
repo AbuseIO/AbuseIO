@@ -67,7 +67,7 @@
                 <dd>{{ $ticket->last_seen }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.reportCount') }}</dt>
-                <dd>{{ $ticket->report_count }}</dd>
+                <dd>{{ $ticket->events->count() }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.ticketStatus') }}</dt>
                 <dd>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</dd>
@@ -79,7 +79,7 @@
         </div>
 
         <div id="events" class="tab-pane fade">
-            @if ( !$events->count() )
+            @if ( !$ticket->events->count() )
                 {{ Lang::get('ash.technical.collectError') }}
             @else
                 <table class="table table-striped table-condensed">
@@ -92,7 +92,7 @@
                     </thead>
                     <tbody>
 
-                    @foreach ($events as $event)
+                    @foreach ($ticket->events as $event)
 
                         <tr>
                             <td>{{ $event->timestamp }}</td>
@@ -132,10 +132,10 @@
             {!! Form::close() !!}
 
             <h4>{{ Lang::get('ash.communication.previousCommunication') }}</h4>
-            @if ( !$notes->count() )
+            @if ( !$ticket->notes->count() )
                 {{ Lang::get('ash.communication.noMessages') }}
             @else
-                @foreach ($notes as $note)
+                @foreach ($ticket->notes as $note)
 
                     <div class="panel panel-{{ ($note->submitter == 'contact') ? 'default' : 'primary' }}">
 
