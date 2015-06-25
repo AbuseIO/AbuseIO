@@ -5,9 +5,9 @@ namespace AbuseIO\Commands;
 use AbuseIO\Commands\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 use AbuseIO\Models\Ticket;
-use AbuseIO\Models\Netblock;
-use AbuseIO\Models\Domain;
+use AbuseIO\Commands\FindCustomer;
 use AbuseIO\Models\Evidence;
+use ICF;
 use DB;
 
 class EventsSave extends Command implements SelfHandling
@@ -94,34 +94,17 @@ class EventsSave extends Command implements SelfHandling
                 'last_notify_timestamp'
              */
 
-            $ipContact =
-                [
-                    'reference'     => 'UNDEFIP',
-                    'name'          => 'Undefined contact IP',
-                    'email'         => 'undefip@isp.local',
-                    'rpc_host'      => '',
-                    'rpc_key'       => '',
-                    'auto_notify'   => '0',
-                    'enabled'       => '1',
-                ];
+            $ipContact = FindCustomer::byIP($event['ip']);
 
-            $domainContact =
-                [
-                    'reference'     => 'UNDEFDOMAIN',
-                    'name'          => 'Undefined contact Domain',
-                    'email'         => 'undefdomain@isp.local',
-                    'rpc_host'      => '',
-                    'rpc_key'       => '',
-                    'auto_notify'   => '0',
-                    'enabled'       => '1',
-                ];
+            if ($event['domain'] != '') {
+                $domainContact = FindCustomer::byDomain($event['domain']);
+            }
 
             $search = Ticket::
-                where('ip', '=', $event['ip'])
+                  where('ip', '=', $event['ip'])
                 ->where('class_id', '=', $event['class'], 'AND')
                 ->where('type_id', '=', $event['type'], 'AND')
-                ->where('ip_contact_reference', '=', $ipContact['reference'], 'AND')
-                ->where('domain_contact_reference', '=', $domainContact['reference'], 'AND')
+                ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 2, 'AND')
                 ->get();
 
