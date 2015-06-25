@@ -56,7 +56,7 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
         Log::info(get_class($this).': Queued worker is starting the processing of email file: ' . $this->filename);
 
         $filesystem = new Filesystem;
-        $rawEmail = $filesystem->get($this->filename);
+        $rawEmail   = $filesystem->get($this->filename);
 
         $parsedMail = new MimeParser();
         $parsedMail->setText($rawEmail);
@@ -65,6 +65,7 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
         if (empty($parsedMail->getHeader('from')) || empty($parsedMail->getMessageBody())) {
 
             Log::warning(get_class($this).'Validation failed on: ' . $this->filename);
+
             $this->exception();
 
         }
@@ -73,6 +74,7 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
         if (preg_match('/' . Config::get('main.notifications.from_address') . '/', $parsedMail->getHeader('from'))) {
 
             Log::warning(get_class($this).'Loop prevention: Ignoring email from self ' . Config::get('main.notifications.from_address'));
+
             $this->exception();
 
         }
@@ -131,11 +133,13 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
         if ($result !== false && $result['errorStatus'] !== true) {
 
             Log::info(get_class($parser).': Parser as ended without errors');
+
             $events = $result['data'];
 
         } else {
 
             Log::error(get_class($parser).': Parser as ended with errors ! : ' . $result['errorMessage']);
+
             $this->exception();
 
         }
@@ -148,6 +152,7 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
         if ($return['errorStatus'] === false) {
 
             Log::error(get_class($validator).': Validator as ended with errors ! : ' . $result['errorMessage']);
+
             $this->exception();
 
         } else {
@@ -164,6 +169,7 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
         if ($return['errorStatus'] === false) {
 
             Log::error(get_class($saver).': Saver as ended with errors ! : ' . $result['errorMessage']);
+
             $this->exception();
 
         } else {

@@ -50,40 +50,54 @@ class EmailReceiveCommand extends Command
         Log::info(get_class($this).': Being called upon to receive an incoming e-mail');
 
         if ($this->option('debug') === true) {
+
             Log::debug(get_class($this).': Debug mode has been enabled');
+
         }
 
         // Read from stdin (should be piped from cat or MDA)
         $fd = fopen("php://stdin", "r");
         $rawEmail = "";
+
         while (!feof($fd)) {
+
             $rawEmail .= fread($fd, 1024);
+
         }
+
         fclose($fd);
 
         $filesystem = new Filesystem;
         $datefolder = Carbon::now()->format('Ymd');
-        $path = storage_path() . '/mailarchive/' . $datefolder . '/';
-        $file = Uuid::generate(4) . '.eml';
-        $filename = $path . $file;
+        $path       = storage_path() . '/mailarchive/' . $datefolder . '/';
+        $file       = Uuid::generate(4) . '.eml';
+        $filename   = $path . $file;
 
         if (!$filesystem->isDirectory($path)) {
+
             // If a datefolder does not exist, then create it or die trying
             if (!$filesystem->makeDirectory($path)) {
+
                 Log::error(get_class($this).': Unable to create directory: ' . $path);
                 $this->exception($rawEmail);
+
             }
+
         }
 
         if ($filesystem->isFile($path . $file)) {
+
             Log::error(get_class($this).': File aready exists: ' . $filename);
             $this->exception($rawEmail);
+
         }
 
         if ($filesystem->put($path . $file, $rawEmail) === false) {
+
             Log::error(get_class($this).': Unable to write file: ' . $filename);
 
             $this->exception($rawEmail);
+
         }
 
         if ($this->option('debug') === true) {
@@ -101,8 +115,6 @@ class EmailReceiveCommand extends Command
 
         }
 
-
-
         Log::info(get_class($this).': Successfully received the incoming e-mail');
 
     }
@@ -114,10 +126,12 @@ class EmailReceiveCommand extends Command
      */
     protected function getArguments()
     {
+
         return
             [
 
             ];
+
     }
 
     /**
@@ -127,10 +141,8 @@ class EmailReceiveCommand extends Command
      */
     protected function getOptions()
     {
-        // TODO: implment debug function: It should
-        // 1. not queue the task, but keep it on console
-        // 2. set logging to console instead in addition to logfile
 
+        // TODO: logging to console instead in addition to logfile
         return
             [
                 [
