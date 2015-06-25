@@ -31,9 +31,9 @@
             <dd>{{ $contact->enabled ? 'Enabled' : 'Disabled' }}</dd>
         </dl>
 
-        @if ( $netblocks->count() )
+        @if ( $contact->netblocks->count() )
             <h2 class="page-header">Linked netblocks</h2>
-            @foreach( $netblocks as $netblock )
+            @foreach( $contact->netblocks as $netblock )
                 <div class="row">
                     <div class="col-md-2">Block ID: {{ $netblock->id }}</div>
                     <div class="col-md-2">{{ inet_ntop($netblock->first_ip) }}</div>
@@ -42,9 +42,9 @@
             @endforeach
         @endif
 
-        @if ( $domains->count() )
+        @if ( $contact->domains->count() )
             <h2 class="page-header">Linked domains</h2>
-            @foreach( $domains as $domain )
+            @foreach( $contact->domains as $domain )
                 <div class="row">
                     <div class="col-md-2">Domain ID: {{ $domain->id }}</div>
                     <div class="col-md-2">{{ $domain->name }}</div>

@@ -111,16 +111,8 @@ class ContactsController extends Controller
     public function show(Contact $contact)
     {
 
-        $netblocks = Netblock::where('contact_id', '=', $contact->id)
-            ->get();
-
-        $domains   = Domain::where('contact_id', '=', $contact->id)
-            ->get();
-
         return view('contacts.show')
-            ->with('contact', $contact)
-            ->with('netblocks', $netblocks)
-            ->with('domains', $domains);
+            ->with('contact', $contact);
 
     }
 
