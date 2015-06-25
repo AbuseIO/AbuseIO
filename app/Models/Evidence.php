@@ -13,15 +13,21 @@ class Evidence extends Model
 {
 
     protected $table    = 'evidences';
-    protected $fillable = [
-        'filename',
-        'sender',
-        'subject'
-    ];
+
+    protected $fillable =
+        [
+            'filename',
+            'sender',
+            'subject'
+        ];
+
     protected $guarded  = ['id'];
 
-    public function event() {
+    public function event()
+    {
+
         return $this->belongsTo('AbuseIO\Models\event');
+
     }
     
 }

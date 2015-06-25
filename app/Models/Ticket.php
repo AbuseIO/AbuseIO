@@ -30,28 +30,45 @@ class Ticket extends Model
 {
 
     protected $table    = 'tickets';
-    protected $fillable = [
-        'ip',
-        'domain',
-        'class_id',
-        'type_id',
-        'ip_contact_reference',
-        'ip_contact_name',
-        'ip_contact_email',
-        'ip_contact_rpchost',
-        'ip_contact_rpckey',
-        'ip_contact_auto_notify',
-        'domain_contact_reference',
-        'domain_contact_name',
-        'domain_contact_email',
-        'domain_contact_rpchost',
-        'domain_contact_rpckey',
-        'domain_contact_auto_notify',
-        'status_id',
-        'notified_count',
-        'last_notify_count',
-        'last_notify_timestamp'
-    ];
+
+    protected $fillable =
+        [
+            'ip',
+            'domain',
+            'class_id',
+            'type_id',
+            'ip_contact_reference',
+            'ip_contact_name',
+            'ip_contact_email',
+            'ip_contact_rpchost',
+            'ip_contact_rpckey',
+            'ip_contact_auto_notify',
+            'domain_contact_reference',
+            'domain_contact_name',
+            'domain_contact_email',
+            'domain_contact_rpchost',
+            'domain_contact_rpckey',
+            'domain_contact_auto_notify',
+            'status_id',
+            'notified_count',
+            'last_notify_count',
+            'last_notify_timestamp'
+        ];
+
     protected $guarded  = ['id'];
+
+    public function events()
+    {
+
+        return $this->hasMany('AbuseIO\Models\Event');
+
+    }
+
+    public function notes()
+    {
+
+        return $this->hasMany('AbuseIO\Models\Note');
+
+    }
 
 }
