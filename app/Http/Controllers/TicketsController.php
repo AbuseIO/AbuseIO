@@ -15,10 +15,13 @@ class TicketsController extends Controller
      */
     public function index()
     {
+
         //$tickets = Ticket::with('events')->paginate(10);
         $tickets = Ticket::paginate(10);
 
-        return view('tickets.index')->with('tickets', $tickets);
+        return view('tickets.index')
+            ->with('tickets', $tickets);
+
     }
 
     /**
@@ -28,7 +31,9 @@ class TicketsController extends Controller
      */
     public function create()
     {
+
         return view('tickets.create');
+
     }
 
     /**
@@ -38,20 +43,30 @@ class TicketsController extends Controller
      */
     public function export()
     {
+
         $tickets  = Ticket::all();
-        $columns    = [
-            'id'        => 'Ticket ID',
-        ];
+        $columns    =
+            [
+                'id'        => 'Ticket ID',
+            ];
 
         $output     = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+
         foreach ($tickets as $ticket) {
-            $row = [
-                $ticket->id,
-            ];
+
+            $row =
+                [
+                    $ticket->id,
+                ];
+
             $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+
         }
 
-        return response(substr($output, 0, -1), 200)->header('Content-Type', 'text/csv')->header('Content-Disposition', 'attachment; filename="Tickets.csv"');
+        return response(substr($output, 0, -1), 200)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', 'attachment; filename="Tickets.csv"');
+
     }
 
     /**
@@ -61,11 +76,13 @@ class TicketsController extends Controller
      */
     public function store()
     {
+
         //only allowed in debug mode or something
         //$input = Input::all();
         //Ticket::create( $input );
         //
         //return Redirect::route('admin.tickets.index')->with('message', 'Ticket has been created');
+
     }
 
     /**
@@ -76,7 +93,10 @@ class TicketsController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        return view('tickets.show')->with('ticket', $ticket);
+
+        return view('tickets.show')
+            ->with('ticket', $ticket);
+
     }
 
     /**
@@ -87,8 +107,10 @@ class TicketsController extends Controller
      */
     public function edit(Ticket $ticket)
     {
+
         //only allowed in debug mode or something
         //return view('tickets.edit')->with('ticket', $ticket);
+
     }
 
     /**
@@ -99,11 +121,13 @@ class TicketsController extends Controller
      */
     public function update(Ticket $ticket)
     {
+
         //only allowed in debug mode or something
         //$input = array_except(Input::all(), '_method');
         //$ticket->update($input);
         //
         //return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');
+
     }
 
     /**
@@ -114,10 +138,12 @@ class TicketsController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
+
         //only allowed in debug mode or something
         //$ticket->delete();
         //
         //return Redirect::route('admin.tickets.index')->with('message', 'Ticket has been deleted.');
+
     }
 
 }

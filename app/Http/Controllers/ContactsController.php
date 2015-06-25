@@ -19,9 +19,12 @@ class ContactsController extends Controller
      */
     public function index()
     {
+
         $contacts = Contact::paginate(10);
 
-        return view('contacts.index')->with('contacts', $contacts);
+        return view('contacts.index')
+            ->with('contacts', $contacts);
+
     }
 
     /**
@@ -31,7 +34,9 @@ class ContactsController extends Controller
      */
     public function create()
     {
+
         return view('contacts.create');
+
     }
 
     /**
@@ -41,32 +46,43 @@ class ContactsController extends Controller
      */
     public function export()
     {
+
         $contacts  = Contact::all();
-        $columns    = [
-            'reference'     => 'Reference',
-            'contact'       => 'name',
-            'enabled'       => 'Status',
-            'email'         => 'E-Mail address',
-            'rpc_host'      => 'RPC address',
-            'rpc_key'       => 'RPC key',
-            'auto_notify'   => 'Notifications',
-        ];
+
+        $columns    =
+            [
+                'reference'     => 'Reference',
+                'contact'       => 'name',
+                'enabled'       => 'Status',
+                'email'         => 'E-Mail address',
+                'rpc_host'      => 'RPC address',
+                'rpc_key'       => 'RPC key',
+                'auto_notify'   => 'Notifications',
+            ];
 
         $output     = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+
         foreach ($contacts as $contact) {
-            $row = [
-                $contact->reference,
-                $contact->name,
-                $contact['enabled'] ? 'Enabled' : 'Disabled',
-                $contact['email'],
-                $contact['rpc_host'],
-                $contact['rpc_key'],
-                $contact['auto_notify'] ? 'Automatic' : 'Manual',
-            ];
+
+            $row =
+                [
+                    $contact->reference,
+                    $contact->name,
+                    $contact['enabled'] ? 'Enabled' : 'Disabled',
+                    $contact['email'],
+                    $contact['rpc_host'],
+                    $contact['rpc_key'],
+                    $contact['auto_notify'] ? 'Automatic' : 'Manual',
+                ];
+
             $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+
         }
 
-        return response(substr($output, 0, -1), 200)->header('Content-Type', 'text/csv')->header('Content-Disposition', 'attachment; filename="Contacts.csv"');
+        return response(substr($output, 0, -1), 200)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', 'attachment; filename="Contacts.csv"');
+
     }
 
     /**
@@ -76,10 +92,14 @@ class ContactsController extends Controller
      */
     public function store()
     {
+
         $input = Input::all();
+
         Contact::create($input);
 
-        return Redirect::route('admin.contacts.index')->with('message', 'Contact has been created');
+        return Redirect::route('admin.contacts.index')
+            ->with('message', 'Contact has been created');
+
     }
 
     /**
@@ -90,10 +110,18 @@ class ContactsController extends Controller
      */
     public function show(Contact $contact)
     {
-        $netblocks = Netblock::where('contact_id', '=', $contact->id)->get();
-        $domains   = Domain::where('contact_id', '=', $contact->id)->get();
 
-        return view('contacts.show')->with('contact', $contact)->with('netblocks', $netblocks)->with('domains', $domains);
+        $netblocks = Netblock::where('contact_id', '=', $contact->id)
+            ->get();
+
+        $domains   = Domain::where('contact_id', '=', $contact->id)
+            ->get();
+
+        return view('contacts.show')
+            ->with('contact', $contact)
+            ->with('netblocks', $netblocks)
+            ->with('domains', $domains);
+
     }
 
     /**
@@ -104,7 +132,10 @@ class ContactsController extends Controller
      */
     public function edit(Contact $contact)
     {
-        return view('contacts.edit')->with('contact', $contact);
+
+        return view('contacts.edit')
+            ->with('contact', $contact);
+
     }
 
     /**
@@ -115,10 +146,14 @@ class ContactsController extends Controller
      */
     public function update(Contact $contact)
     {
+
         $input = array_except(Input::all(), '_method');
+
         $contact->update($input);
 
-        return Redirect::route('admin.contacts.show', $contact->id)->with('message', 'Contact has been updated.');
+        return Redirect::route('admin.contacts.show', $contact->id)
+            ->with('message', 'Contact has been updated.');
+
     }
 
     /**
@@ -129,9 +164,12 @@ class ContactsController extends Controller
      */
     public function destroy(Contact $contact)
     {
+
         $contact->delete();
 
-        return Redirect::route('admin.contacts.index')->with('message', 'Contact has been deleted.');
+        return Redirect::route('admin.contacts.index')
+            ->with('message', 'Contact has been deleted.');
+
     }
 
 }

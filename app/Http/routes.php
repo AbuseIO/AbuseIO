@@ -20,8 +20,8 @@ Route::group(
         Route::get(
             'export/contacts',
             [
-            'as' => 'admin.export.contacts',
-            'uses' => 'ContactsController@export',
+                'as' => 'admin.export.contacts',
+                'uses' => 'ContactsController@export',
             ]
         );
 
@@ -30,8 +30,8 @@ Route::group(
         Route::get(
             '/export/netblocks',
             [
-            'as' => 'admin.export.netblocks',
-            'uses' => 'NetblocksController@export',
+                'as' => 'admin.export.netblocks',
+                'uses' => 'NetblocksController@export',
             ]
         );
 
@@ -40,8 +40,8 @@ Route::group(
         Route::get(
             '/export/domains',
             [
-            'as' => 'admin.export.domains',
-            'uses' => 'DomainsController@export',
+                'as' => 'admin.export.domains',
+                'uses' => 'DomainsController@export',
             ]
         );
 
@@ -50,8 +50,8 @@ Route::group(
         Route::get(
             '/export/tickets',
             [
-            'as' => 'admin.export.tickets',
-            'uses' => 'TicketsController@export',
+                'as' => 'admin.export.tickets',
+                'uses' => 'TicketsController@export',
             ]
         );
 

@@ -16,9 +16,13 @@ class DomainsController extends Controller
      */
     public function index()
     {
-        $domains = Domain::with('contact')->paginate(10);
 
-        return view('domains.index')->with('domains', $domains);
+        $domains = Domain::with('contact')
+            ->paginate(10);
+
+        return view('domains.index')
+            ->with('domains', $domains);
+
     }
 
     /**
@@ -28,9 +32,13 @@ class DomainsController extends Controller
      */
     public function create()
     {
+
         $contacts = Contact::lists('name', 'id');
 
-        return view('domains.create')->with('contact_selection', $contacts)->with('selected', null);
+        return view('domains.create')
+            ->with('contact_selection', $contacts)
+            ->with('selected', null);
+
     }
 
     /**
@@ -40,24 +48,35 @@ class DomainsController extends Controller
      */
     public function export()
     {
+
         $domains = Domain::all();
-        $columns = [
-            'contact' => 'Contact',
-            'domain' => 'Domain name',
-            'enabled' => 'Status',
-        ];
+
+        $columns =
+            [
+                'contact' => 'Contact',
+                'domain' => 'Domain name',
+                'enabled' => 'Status',
+            ];
 
         $output = '"' . implode('","', $columns) . '"' . PHP_EOL;
+
         foreach ($domains as $domain) {
-            $row = [
-                $domain->contact->name . ' (' . $domain->contact->reference . ')',
-                $domain['name'],
-                $domain['enabled'] ? 'Enabled' : 'Disabled',
-            ];
+
+            $row =
+                [
+                    $domain->contact->name . ' (' . $domain->contact->reference . ')',
+                    $domain['name'],
+                    $domain['enabled'] ? 'Enabled' : 'Disabled',
+                ];
+
             $output .= '"' . implode('","', $row) . '"' . PHP_EOL;
+
         }
 
-        return response(substr($output, 0, -1), 200)->header('Content-Type', 'text/csv')->header('Content-Disposition', 'attachment; filename="Domains.csv"');
+        return response(substr($output, 0, -1), 200)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', 'attachment; filename="Domains.csv"');
+
     }
 
     /**
@@ -67,10 +86,14 @@ class DomainsController extends Controller
      */
     public function store()
     {
+
         $input = Input::all();
+
         Domain::create($input);
 
-        return Redirect::route('admin.domains.index')->with('message', 'Domain has been created');
+        return Redirect::route('admin.domains.index')
+            ->with('message', 'Domain has been created');
+
     }
 
     /**
@@ -81,7 +104,10 @@ class DomainsController extends Controller
      */
     public function show(Domain $domain)
     {
-        return view('domains.show')->with('domain', $domain);
+
+        return view('domains.show')
+            ->with('domain', $domain);
+
     }
 
     /**
@@ -92,9 +118,14 @@ class DomainsController extends Controller
      */
     public function edit(Domain $domain)
     {
+
         $contacts = Contact::lists('name', 'id');
 
-        return view('domains.edit')->with('domain', $domain)->with('contact_selection', $contacts)->with('selected', $domain->contact_id);
+        return view('domains.edit')
+            ->with('domain', $domain)
+            ->with('contact_selection', $contacts)
+            ->with('selected', $domain->contact_id);
+
     }
 
     /**
@@ -105,10 +136,14 @@ class DomainsController extends Controller
      */
     public function update(Domain $domain)
     {
+
         $input = array_except(Input::all(), '_method');
+
         $domain->update($input);
 
-        return Redirect::route('admin.domains.show', $domain->id)->with('message', 'Domain has been updated.');
+        return Redirect::route('admin.domains.show', $domain->id)
+            ->with('message', 'Domain has been updated.');
+
     }
 
     /**
@@ -119,9 +154,12 @@ class DomainsController extends Controller
      */
     public function destroy(Domain $domain)
     {
+
         $domain->delete();
 
-        return Redirect::route('admin.domains.index')->with('message', 'Domain has been deleted.');
+        return Redirect::route('admin.domains.index')
+            ->with('message', 'Domain has been deleted.');
+
     }
 
 }

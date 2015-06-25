@@ -27,10 +27,8 @@ class AshController extends Controller
 
         if ($token == $validTokenIP || $token == $validTokenDomain) {
 
-            $events = Event::where('ticket_id', '=', $ticket->id)->get();
-            $notes = Note::where('ticket_id', '=', $ticket->id)->where('hidden', '=', false)->get();
-
-            return view('ash')->with('ticket', $ticket)->with('notes', $notes)->with('events', $events);
+            return view('ash')
+                ->with('ticket', $ticket);
 
         } else {
 

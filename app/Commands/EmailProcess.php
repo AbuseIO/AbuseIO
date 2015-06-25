@@ -28,7 +28,9 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
      */
     public function __construct($filename)
     {
+
         $this->filename = $filename;
+
     }
 
     /**
@@ -38,7 +40,9 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
      */
     public function queue($queue, $command)
     {
+
         $queue->pushOn('emails', $command);
+
     }
 
     /**

@@ -16,9 +16,13 @@ class NetblocksController extends Controller
      */
     public function index()
     {
-        $netblocks = Netblock::with('contact')->paginate(10);
 
-        return view('netblocks.index')->with('netblocks', $netblocks);
+        $netblocks = Netblock::with('contact')
+            ->paginate(10);
+
+        return view('netblocks.index')
+            ->with('netblocks', $netblocks);
+
     }
 
     /**
@@ -28,9 +32,13 @@ class NetblocksController extends Controller
      */
     public function create()
     {
+
         $contacts = Contact::lists('name', 'id');
 
-        return view('netblocks.create')->with('contact_selection', $contacts)->with('selected', null);
+        return view('netblocks.create')
+            ->with('contact_selection', $contacts)
+            ->with('selected', null);
+
     }
 
     /**
@@ -40,26 +48,36 @@ class NetblocksController extends Controller
      */
     public function export()
     {
+
         $netblocks  = Netblock::all();
-        $columns    = [
-            'contact'   => 'Contact',
-            'enabled'   => 'Status',
-            'first_ip'  => 'First IP',
-            'last_ip'   => 'Last IP'
-        ];
+
+        $columns    =
+            [
+                'contact'   => 'Contact',
+                'enabled'   => 'Status',
+                'first_ip'  => 'First IP',
+                'last_ip'   => 'Last IP'
+            ];
 
         $output     = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+
         foreach ($netblocks as $netblock) {
-            $row = [
-                $netblock->contact->name . ' (' .$netblock->contact->reference . ')',
-                inet_ntop($netblock['first_ip']),
-                inet_ntop($netblock['last_ip']),
-                $netblock['enabled'] ? 'Enabled' : 'Disabled',
-            ];
+
+            $row =
+                [
+                    $netblock->contact->name . ' (' .$netblock->contact->reference . ')',
+                    inet_ntop($netblock['first_ip']),
+                    inet_ntop($netblock['last_ip']),
+                    $netblock['enabled'] ? 'Enabled' : 'Disabled',
+                ];
+
             $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+
         }
 
-        return response(substr($output, 0, -1), 200)->header('Content-Type', 'text/csv')->header('Content-Disposition', 'attachment; filename="Netblocks.csv"');
+        return response(substr($output, 0, -1), 200)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', 'attachment; filename="Netblocks.csv"');
     }
 
     /**
@@ -69,13 +87,17 @@ class NetblocksController extends Controller
      */
     public function store()
     {
+
         $input = Input::all();
+
         $input['first_ip'] =  inet_pton($input['first_ip']);
         $input['last_ip']  =  inet_pton($input['last_ip']);
 
         Netblock::create($input);
 
-        return Redirect::route('admin.netblocks.index')->with('message', 'Netblock has been created');
+        return Redirect::route('admin.netblocks.index')
+            ->with('message', 'Netblock has been created');
+
     }
 
     /**
@@ -86,7 +108,10 @@ class NetblocksController extends Controller
      */
     public function show(Netblock $netblock)
     {
-        return view('netblocks.show')->with('netblock', $netblock);
+
+        return view('netblocks.show')
+            ->with('netblock', $netblock);
+
     }
 
     /**
@@ -97,11 +122,17 @@ class NetblocksController extends Controller
      */
     public function edit(Netblock $netblock)
     {
+
         $contacts = Contact::lists('name', 'id');
+
         $netblock->first_ip = inet_ntop($netblock->first_ip);
         $netblock->last_ip  = inet_ntop($netblock->last_ip);
 
-        return view('netblocks.edit')->with('netblock', $netblock)->with('contact_selection', $contacts)->with('selected', $netblock->contact_id);
+        return view('netblocks.edit')
+            ->with('netblock', $netblock)
+            ->with('contact_selection', $contacts)
+            ->with('selected', $netblock->contact_id);
+
     }
 
     /**
@@ -112,14 +143,17 @@ class NetblocksController extends Controller
      */
     public function update(Netblock $netblock)
     {
+
         $input = array_except(Input::all(), '_method');
-        print_r($input);
+
         $input['first_ip'] =  inet_pton($input['first_ip']);
         $input['last_ip']  =  inet_pton($input['last_ip']);
 
         $netblock->update($input);
 
-        return Redirect::route('admin.netblocks.show', $netblock->id)->with('message', 'Netblock has been updated.');
+        return Redirect::route('admin.netblocks.show', $netblock->id)
+            ->with('message', 'Netblock has been updated.');
+
     }
 
     /**
@@ -130,9 +164,12 @@ class NetblocksController extends Controller
      */
     public function destroy(Netblock $netblock)
     {
+
         $netblock->delete();
 
-        return Redirect::route('admin.netblocks.index')->with('message', 'Netblock has been deleted.');
+        return Redirect::route('admin.netblocks.index')
+            ->with('message', 'Netblock has been deleted.');
+
     }
 
 }

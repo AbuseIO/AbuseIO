@@ -94,26 +94,27 @@ class EventsSave extends Command implements SelfHandling
                 'last_notify_timestamp'
              */
 
-            $ipContact = [
-                'reference'     => 'UNDEFIP',
-                'name'          => 'Undefined contact IP',
-                'email'         => 'undefip@isp.local',
-                'rpc_host'      => '',
-                'rpc_key'       => '',
-                'auto_notify'   => '0',
-                'enabled'       => '1',
+            $ipContact =
+                [
+                    'reference'     => 'UNDEFIP',
+                    'name'          => 'Undefined contact IP',
+                    'email'         => 'undefip@isp.local',
+                    'rpc_host'      => '',
+                    'rpc_key'       => '',
+                    'auto_notify'   => '0',
+                    'enabled'       => '1',
                 ];
 
-            $domainContact = [
-                'reference'     => 'UNDEFDOMAIN',
-                'name'          => 'Undefined contact Domain',
-                'email'         => 'undefdomain@isp.local',
-                'rpc_host'      => '',
-                'rpc_key'       => '',
-                'auto_notify'   => '0',
-                'enabled'       => '1',
-            ];
-
+            $domainContact =
+                [
+                    'reference'     => 'UNDEFDOMAIN',
+                    'name'          => 'Undefined contact Domain',
+                    'email'         => 'undefdomain@isp.local',
+                    'rpc_host'      => '',
+                    'rpc_key'       => '',
+                    'auto_notify'   => '0',
+                    'enabled'       => '1',
+                ];
 
             $search = Ticket::
                 where('ip', '=', $event['ip'])

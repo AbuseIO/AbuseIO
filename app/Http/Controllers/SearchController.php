@@ -1,6 +1,8 @@
 <?php namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests;
+use AbuseIO\Models\Ticket;
+use AbuseIO\Models\Event;
 
 class SearchController extends Controller
 {
@@ -12,7 +14,9 @@ class SearchController extends Controller
      */
     public function index()
     {
+
         return view('search');
+
     }
 
 }

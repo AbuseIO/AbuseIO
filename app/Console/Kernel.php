@@ -6,9 +6,10 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
 
-    protected $commands = [
-        'AbuseIO\Console\Commands\EmailReceiveCommand'
-    ];
+    protected $commands =
+        [
+            'AbuseIO\Console\Commands\EmailReceiveCommand'
+        ];
 
     protected function schedule(Schedule $schedule)
     {
