@@ -49,6 +49,10 @@ class EmailReceiveCommand extends Command
 
         Log::info(get_class($this).': Being called upon to receive an incoming e-mail');
 
+        if ($this->option('debug') === true) {
+            Log::debug(get_class($this).': Debug mode has been enabled');
+        }
+
         // Read from stdin (should be piped from cat or MDA)
         $fd = fopen("php://stdin", "r");
         $rawEmail = "";
@@ -82,9 +86,22 @@ class EmailReceiveCommand extends Command
             $this->exception($rawEmail);
         }
 
-        Log::info(get_class($this).': Pushing incoming email into queue file: ' . $filename);
+        if ($this->option('debug') === true) {
 
-        $this->dispatch(new EmailProcess($filename));
+            // In debug mode we don't queue the job
+            Log::debug(get_class($this).': Directly handling message file: ' . $filename);
+
+            $processer = new EmailProcess($filename);
+            $processer->handle();
+
+        } else {
+
+            Log::info(get_class($this).': Pushing incoming email into queue file: ' . $filename);
+            $this->dispatch(new EmailProcess($filename));
+
+        }
+
+
 
         Log::info(get_class($this).': Successfully received the incoming e-mail');
 
@@ -97,7 +114,10 @@ class EmailReceiveCommand extends Command
      */
     protected function getArguments()
     {
-        return [ ];
+        return
+            [
+
+            ];
     }
 
     /**
@@ -111,9 +131,16 @@ class EmailReceiveCommand extends Command
         // 1. not queue the task, but keep it on console
         // 2. set logging to console instead in addition to logfile
 
-        return [
-            ['debug', 'd', InputOption::VALUE_OPTIONAL, 'Enable debugging while pushing e-mail from CLI.', false],
-        ];
+        return
+            [
+                [
+                    'debug',
+                    'd',
+                    InputOption::VALUE_OPTIONAL,
+                    'Enable debugging while pushing e-mail from CLI.',
+                    true
+                ],
+            ];
     }
 
     /**
