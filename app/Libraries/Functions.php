@@ -75,6 +75,12 @@ class ICF
     static public function inet_itop($decimal)
     {
 
+        // QuickFix: Decimal 0 is both for ::0 and 0.0.0.0, however it defaults to IPv6, while there is now way a
+        // ::/64 will ever be used.
+        if ($decimal < 255) {
+            return '0.0.0.' . $decimal;
+        }
+
         $parts = array();
 
         // Use BCMath if available
