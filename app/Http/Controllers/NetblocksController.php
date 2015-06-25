@@ -5,6 +5,7 @@ use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Contact;
 use Input;
 use Redirect;
+use ICF;
 
 class NetblocksController extends Controller
 {
@@ -66,8 +67,8 @@ class NetblocksController extends Controller
             $row =
                 [
                     $netblock->contact->name . ' (' .$netblock->contact->reference . ')',
-                    inet_ntop($netblock['first_ip']),
-                    inet_ntop($netblock['last_ip']),
+                    ICF::inet_itop($netblock['first_ip']),
+                    ICF::inet_itop($netblock['last_ip']),
                     $netblock['enabled'] ? 'Enabled' : 'Disabled',
                 ];
 
@@ -90,8 +91,8 @@ class NetblocksController extends Controller
 
         $input = Input::all();
 
-        $input['first_ip'] =  inet_pton($input['first_ip']);
-        $input['last_ip']  =  inet_pton($input['last_ip']);
+        $input['first_ip'] =  ICF::inet_ptoi($input['first_ip']);
+        $input['last_ip']  =  ICF::inet_ptoi($input['last_ip']);
 
         Netblock::create($input);
 
@@ -125,8 +126,8 @@ class NetblocksController extends Controller
 
         $contacts = Contact::lists('name', 'id');
 
-        $netblock->first_ip = inet_ntop($netblock->first_ip);
-        $netblock->last_ip  = inet_ntop($netblock->last_ip);
+        $netblock->first_ip = ICF::inet_itop($netblock->first_ip);
+        $netblock->last_ip  = ICF::inet_itop($netblock->last_ip);
 
         return view('netblocks.edit')
             ->with('netblock', $netblock)
@@ -146,8 +147,8 @@ class NetblocksController extends Controller
 
         $input = array_except(Input::all(), '_method');
 
-        $input['first_ip'] =  inet_pton($input['first_ip']);
-        $input['last_ip']  =  inet_pton($input['last_ip']);
+        $input['first_ip'] =  ICF::inet_ptoi($input['first_ip']);
+        $input['last_ip']  =  ICF::inet_ptoi($input['last_ip']);
 
         $netblock->update($input);
 

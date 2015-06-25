@@ -31,8 +31,8 @@
                 @foreach( $netblocks as $netblock )
                     <tr>
                         <td>{{ $netblock->contact->name }} ({{ $netblock->contact->reference }})</td>
-                        <td>{{ inet_ntop($netblock->first_ip) }}</td>
-                        <td>{{ inet_ntop($netblock->last_ip) }}</td>
+                        <td>{{ ICF::inet_itop($netblock->first_ip) }}</td>
+                        <td>{{ ICF::inet_itop($netblock->last_ip) }}</td>
                         <td>
                             {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.netblocks.destroy', $netblock->id]]) !!}
                             {!! link_to_route('admin.netblocks.show', 'Details', [$netblock->id], ['class' => 'btn btn-info']) !!}

@@ -132,7 +132,7 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
 
         if ($result !== false && $result['errorStatus'] !== true) {
 
-            Log::info(get_class($parser).': Parser as ended without errors');
+            Log::info(get_class($parser).': Parser as ended without errors. Collected ' . count($result['data']) . ' events to save');
 
             $events = $result['data'];
 

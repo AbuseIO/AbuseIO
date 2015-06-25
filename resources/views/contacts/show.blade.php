@@ -36,8 +36,8 @@
             @foreach( $contact->netblocks as $netblock )
                 <div class="row">
                     <div class="col-md-2">Block ID: {{ $netblock->id }}</div>
-                    <div class="col-md-2">{{ inet_ntop($netblock->first_ip) }}</div>
-                    <div class="col-md-2">{{ inet_ntop($netblock->last_ip) }}</div>
+                    <div class="col-md-2">{{ ICF::inet_itop($netblock->first_ip) }}</div>
+                    <div class="col-md-2">{{ ICF::inet_itop($netblock->last_ip) }}</div>
                 </div>
             @endforeach
         @endif

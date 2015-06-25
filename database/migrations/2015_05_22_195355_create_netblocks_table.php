@@ -17,22 +17,23 @@ class CreateNetblocksTable extends Migration
             'netblocks', 
             function(Blueprint $table)
             {
+
                 $table->increments('id');
                 $table->integer('contact_id')->unsigned();
+                $table->decimal('first_ip', 38, 0);
+                $table->decimal('last_ip', 38, 0);
                 $table->string('description');
                 $table->boolean('enabled')->unsigned();
                 $table->timestamps();
     
                 $table->index('contact_id');
                 $table->index('enabled');
+                $table->index('first_ip');
+                $table->index('last_ip');
     
             }
         );
 
-        // Laravel has no support for varbinary yet, manually adding these fields:
-        DB::statement("ALTER TABLE netblocks ADD first_ip VARBINARY(16)");
-        DB::statement("ALTER TABLE netblocks ADD last_ip  VARBINARY(16)");
-        DB::statement("ALTER TABLE netblocks ADD UNIQUE( first_ip, last_ip)");
     }
 
     /**
@@ -42,9 +43,6 @@ class CreateNetblocksTable extends Migration
      */
     public function down()
     {
-        DB::statement("ALTER TABLE netblocks DROP INDEX first_ip");
-        DB::statement("ALTER TABLE netblocks DROP COLUMN first_ip");
-        DB::statement("ALTER TABLE netblocks DROP COLUMN last_ip");
 
         Schema::drop('netblocks');
     }

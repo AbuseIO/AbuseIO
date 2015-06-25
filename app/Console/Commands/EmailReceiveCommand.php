@@ -6,9 +6,9 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Symfony\Component\Console\Input\InputOption;
 use Log;
-Use Events;
-Use Uuid;
-Use Carbon;
+use Events;
+use Uuid;
+use Carbon;
 
 class EmailReceiveCommand extends Command
 {

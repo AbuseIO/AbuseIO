@@ -10,10 +10,10 @@
             <dd>{{ $netblock->id }}</dd>
 
             <dt>First IP address</dt>
-            <dd>{{ inet_ntop($netblock->first_ip) }}</dd>
+            <dd>{{ ICF::inet_itop($netblock->first_ip) }}</dd>
 
             <dt>Last IP address</dt>
-            <dd>{{ inet_ntop($netblock->last_ip) }}</dd>
+            <dd>{{ ICF::inet_itop($netblock->last_ip) }}</dd>
 
             <dt>Contact</dt>
             <dd>{{ $netblock->contact->name }} ({{ $netblock->contact->reference }})</dd>
