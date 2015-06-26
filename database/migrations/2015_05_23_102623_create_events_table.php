@@ -21,13 +21,14 @@ class CreateEventsTable extends Migration
                 $table->integer('ticket_id')->unsigned();
                 $table->integer('evidence_id')->unsigned();
                 $table->string('source');
-                $table->timestamp('timestamp');
+                $table->integer('timestamp');
                 $table->longText('information');
                 $table->timestamps();
 
                 $table->index('ticket_id');
                 $table->index('evidence_id');
                 $table->index('source');
+                $table->index('timestamp');
             }
         );
     }

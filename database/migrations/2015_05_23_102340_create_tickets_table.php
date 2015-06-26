@@ -37,7 +37,7 @@ class CreateTicketsTable extends Migration
                 $table->integer('status_id')->unsigned();
                 $table->integer('notified_count')->unsigned();
                 $table->integer('last_notify_count')->unsigned();
-                $table->timestamp('last_notify_timestamp');
+                $table->integer('last_notify_timestamp');
                 $table->timestamps();
 
                 $table->index('ip');

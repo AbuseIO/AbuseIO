@@ -15,11 +15,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $ip_contact_email
  * @property string $ip_contact_rpchost
  * @property string $ip_contact_rpckey
+ * @property string $ip_contact_auto_notify
  * @property string $domain_contact_reference
  * @property string $domain_contact_name
  * @property string $domain_contact_email
  * @property string $domain_contact_rpchost
  * @property string $domain_contact_rpckey
+ * @property string $domain_contact_auto_notify
  * @property integer $status_id
  * @property boolean auto_notify
  * @property integer $notified_count
@@ -61,6 +63,24 @@ class Ticket extends Model
     {
 
         return $this->hasMany('AbuseIO\Models\Event');
+
+    }
+
+    public function firstEvent()
+    {
+
+        return $this->hasMany('AbuseIO\Models\Event')
+            ->orderBy('timestamp', 'asc')
+            ->take(1);
+
+    }
+
+    public function lastEvent()
+    {
+
+        return $this->hasMany('AbuseIO\Models\Event')
+            ->orderBy('timestamp', 'desc')
+            ->take(1);
 
     }
 

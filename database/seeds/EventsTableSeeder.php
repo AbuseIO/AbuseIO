@@ -15,7 +15,7 @@ class EventsTableSeeder extends Seeder
                 'ticket_id'                 => '1',
                 'evidence_id'               => '1',
                 'source'                    => 'Simon Says',
-                'timestamp'                 => new DateTime,
+                'timestamp'                 => time(),
                 'information'               => json_encode(
                     [
                     'engine' => 'infected website blob',
@@ -30,7 +30,7 @@ class EventsTableSeeder extends Seeder
                 'ticket_id'                 => '1',
                 'evidence_id'               => '2',
                 'source'                    => 'Simon Says',
-                'timestamp'                 => new DateTime,
+                'timestamp'                 => time(),
                 'information'               => json_encode(
                     [
                     'engine' => 'infected website blob',
@@ -45,7 +45,7 @@ class EventsTableSeeder extends Seeder
                 'ticket_id'                 => '1',
                 'evidence_id'               => '3',
                 'source'                    => 'Simon Says',
-                'timestamp'                 => new DateTime,
+                'timestamp'                 => time(),
                 'information'               => json_encode(
                     [
                     'engine' => 'infected website blob',
@@ -60,7 +60,7 @@ class EventsTableSeeder extends Seeder
                 'ticket_id'                 => '2',
                 'evidence_id'               => '4',
                 'source'                    => 'Simon Says',
-                'timestamp'                 => new DateTime,
+                'timestamp'                 => time(),
                 'information'               => json_encode(
                     [
                     'engine' => 'infected botnet blob',
@@ -76,7 +76,7 @@ class EventsTableSeeder extends Seeder
                 'ticket_id'                 => '2',
                 'evidence_id'               => '5',
                 'source'                    => 'Simon Says',
-                'timestamp'                 => new DateTime,
+                'timestamp'                 => time(),
                 'information'               => json_encode(
                     [
                     'engine' => 'infected botnet blob',

@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Commands;
 
+use AbuseIO\Models\Evidence;
 Use Illuminate\Queue\SerializesModels;
 Use Illuminate\Queue\InteractsWithQueue;
 Use Illuminate\Contracts\Bus\SelfHandling;
@@ -15,9 +16,9 @@ Use AbuseIO\Commands\EventsSave;
 Use Config;
 Use Log;
 
-class EmailProcess extends Command implements SelfHandling//, ShouldQueue
+class EmailProcess extends Command implements SelfHandling, ShouldQueue
 {
-    //use InteractsWithQueue, SerializesModels;
+    use InteractsWithQueue, SerializesModels;
 
     public $filename;
 
@@ -125,14 +126,21 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
 
         } else {
 
-            Log::error(get_class($this).': Unable to handle message from: ' . $parsedMail->getHeader('from') . ' with subject: ' . $parsedMail->getHeader('subject'));
+            Log::error(
+                get_class($this)
+                . ': Unable to handle message from: ' . $parsedMail->getHeader('from')
+                . ' with subject: ' . $parsedMail->getHeader('subject')
+            );
             $this->exception();
 
         }
 
         if ($result !== false && $result['errorStatus'] !== true) {
 
-            Log::info(get_class($parser).': Parser as ended without errors. Collected ' . count($result['data']) . ' events to save');
+            Log::info(
+                get_class($parser)
+                . ': Parser as ended without errors. Collected ' . count($result['data']) . ' events to save'
+            );
 
             $events = $result['data'];
 
@@ -161,9 +169,17 @@ class EmailProcess extends Command implements SelfHandling//, ShouldQueue
 
         }
 
+        // save evidence into table
+
+        $evidence = new Evidence();
+        $evidence->filename = $this->filename;
+        $evidence->sender   = $parsedMail->getHeader('from');
+        $evidence->subject  = $parsedMail->getHeader('subject');
+        $evidence->save();
+
         // call saver
 
-        $saver = new EventsSave($events);
+        $saver = new EventsSave($events, $evidence->id);
         $return = $saver->handle();
 
         if ($return['errorStatus'] === false) {

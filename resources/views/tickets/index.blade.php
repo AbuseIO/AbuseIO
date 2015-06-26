@@ -62,9 +62,9 @@
                         <td>{{ $ticket->ip_contact_name }} ({{ $ticket->ip_contact_reference }})</td>
                         <td>{{ Lang::get('types.type.' . $ticket->type_id . '.name') }}</td>
                         <td>{{ Lang::get('classifications.' . $ticket->class_id . '.name') }}</td>
-                        <td>{{ $ticket->first_seen }}</td>
-                        <td>{{ $ticket->last_seen }}</td>
-                        <td></td>
+                        <td>{{ $ticket->firstEvent[0]->timestamp }}</td>
+                        <td>{{ $ticket->lastEvent[0]->timestamp }}</td>
+                        <td>{{ $ticket->events->count() }}</td>
                         <td>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</td>
                         <td>
                             {!! link_to_route('admin.tickets.show', 'Details', [$ticket->id], ['class' => 'btn btn-info']) !!}

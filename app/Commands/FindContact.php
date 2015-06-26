@@ -7,7 +7,7 @@ use AbuseIO\Models\Domain;
 use AbuseIO\Models\Contact;
 use ICF;
 
-class FindCustomer extends Command
+class FindContact extends Command
 {
 
     // Todo add custom lookup module (package / own repo template)
@@ -44,9 +44,16 @@ class FindCustomer extends Command
 
             return $netblock[0]->contact;
 
+        } elseif (
+            class_exists('AbuseIO::Custom::FindContact') === true &&
+            is_callable('\AbuseIO\Custom\FindContact->byIP') === true
+        ) {
+
+            // Call custom function
+
         } else {
 
-            return FindCustomer::undefined();
+            return FindContact::undefined();
 
         }
 
@@ -66,9 +73,16 @@ class FindCustomer extends Command
 
             return $domain[0]->contact;
 
+        } elseif (
+            class_exists('AbuseIO::Custom::FindContact') === true &&
+            is_callable('\AbuseIO\Custom\FindContact->byDomain') === true
+        ) {
+
+            // Call custom function
+
         } else {
 
-            return FindCustomer::undefined();
+            return FindContact::undefined();
 
         }
 
@@ -87,9 +101,16 @@ class FindCustomer extends Command
 
             return $contact[0];
 
+        } elseif (
+            class_exists('AbuseIO::Custom::FindContact') === true &&
+            is_callable('\AbuseIO\Custom\FindContact->byReference') === true
+        ) {
+
+            // Call custom function
+
         } else {
 
-            return FindCustomer::undefined();
+            return FindContact::undefined();
 
         }
 
