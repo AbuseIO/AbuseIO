@@ -86,6 +86,7 @@ class EventsSave extends Command implements SelfHandling
             }
 
             // Search to see if there is an existing ticket for this event classification
+            // Todo: somehow add the domain too!!!!
 
             $search = Ticket::
                   where('ip', '=', $event['ip'])

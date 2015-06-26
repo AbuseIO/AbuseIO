@@ -7,14 +7,17 @@
         <h1 class="page-header">Ticket {{ $ticket->id }} details</h1>
 
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#info"><span class="glyphicon glyphicon-file"></span>Basic Information</a></li>
-            <li><a data-toggle="tab" href="#details"><span class="glyphicon glyphicon-list-alt"></span>Technical Details</a></li>
-            <li><a data-toggle="tab" href="#communication"><span class="glyphicon glyphicon-ok"></span>Communication</a></li>
+
+            <li class="active"><a data-toggle="tab" href="#info"><span class="glyphicon glyphicon-file"></span> Information</a></li>
+            <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> Events</a></li>
+            <li><a data-toggle="tab" href="#communication"><span class="glyphicon glyphicon-ok"></span> Communication</a></li>
+
         </ul>
         <div class="tab-content">
             <div id="info" class="tab-pane fade in active">
 
                 <dl class="dl-horizontal">
+
                     <dt>IP address</dt>
                     <dd>{{ $ticket->ip }}</dd>
 
@@ -59,11 +62,53 @@
                         "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference)
                         ) !!}
                     </dd>
+
+                </dl>
+
+                <h4>IP contact:</h4>
+                <dl class="dl-horizontal">
+
+                    <dt>Reference</dt>
+                    <dd>{{ $ticket->ip_contact_reference }}</dd>
+
+                    <dt>Name</dt>
+                    <dd>{{ $ticket->ip_contact_name }}</dd>
+
+                    <dt>E-mail address</dt>
+                    <dd>{{ $ticket->ip_contact_email }}</dd>
+
+                    <dt>RPC Host</dt>
+                    <dd>{{ $ticket->ip_contact_rpc_host }}</dd>
+
+                    <dt>RPC Key</dt>
+                    <dd>{{ $ticket->ip_contact_rpc_key }}</dd>
+
+                </dl>
+
+                <h4>Domain contact:</h4>
+                <dl class="dl-horizontal">
+
+                    <dt>Reference</dt>
+                    <dd>{{ $ticket->domain_contact_reference }}</dd>
+
+                    <dt>Name</dt>
+                    <dd>{{ $ticket->domain_contact_name }}</dd>
+
+                    <dt>E-mail address</dt>
+                    <dd>{{ $ticket->domain_contact_email }}</dd>
+
+                    <dt>RPC Host</dt>
+                    <dd>{{ $ticket->domain_contact_rpc_host }}</dd>
+
+                    <dt>RPC Key</dt>
+                    <dd>{{ $ticket->domain_contact_rpc_key }}</dd>
+
                 </dl>
 
             </div>
 
-            <div id="details" class="tab-pane fade">
+
+            <div id="events" class="tab-pane fade">
 
                 @if ( !$ticket->events->count() )
                     Error - No events found
@@ -74,6 +119,7 @@
                             <th>Timestamp</th>
                             <th>Source</th>
                             <th>Information</th>
+                            <th>Evidence</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -93,6 +139,7 @@
                                         @endforeach
                                     </dl>
                                 </td>
+                                <td><a href='{{ $event->evidences[0]->filename }}'>Download - View</a></td>
                             </tr>
 
                         @endforeach
@@ -100,6 +147,7 @@
                 @endif
 
             </div>
+
 
             <div id="communication" class="tab-pane fade">
 
