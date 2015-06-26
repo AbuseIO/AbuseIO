@@ -15,6 +15,16 @@ Return [
 
     'interface' => [
         'language' => 'en',
+        'navigation' =>
+            [
+                'home'      => 'Home',
+                'contacts'  => 'Contacts',
+                'netblocks' => 'Netblocks',
+                'domains'   => 'Domains',
+                'tickets'   => 'Tickets',
+                'search'    => 'Search',
+                'analytics' => 'Analytics',
+            ]
     ],
 
     'emailparser' => [

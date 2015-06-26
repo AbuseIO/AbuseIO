@@ -62,7 +62,8 @@ class Ticket extends Model
     public function events()
     {
 
-        return $this->hasMany('AbuseIO\Models\Event');
+        return $this->hasMany('AbuseIO\Models\Event')
+            ->orderBy('timestamp', 'desc');
 
     }
 

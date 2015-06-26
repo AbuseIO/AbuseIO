@@ -5,14 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ Lang::get('ash.title') }} {{ $ticket->id }}</title>
-    <link rel="stylesheet" href="/css/ash/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/ash/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/css/ash/custom.css" />
-    <script src="/js/ash/jquery.min.js"></script>
-    <script src="/js/ash/bootstrap.min.js"></script>
+
+    <link href="{{ asset('/css/custom.css')                 }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrap.min.css')          }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrap-theme.min.css')    }}" rel="stylesheet">
+
+    <script src="{{ asset('/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+
 </head>
 <body>
-<div class="header_wrapper"><div class="container header"><img class="img-responsive" src="/images/logo.png" alt=''/></div></div>
+<div class="header_wrapper"><div class="container header"><img class="img-responsive" src="{{ asset('/images/logo.png') }}" alt=''/></div></div>
 <div class="container">
     <h2>{{ Lang::get('ash.title') }} {{ $ticket->id }}</h2>
     <div class="panel panel-danger">
