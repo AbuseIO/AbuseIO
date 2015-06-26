@@ -40,7 +40,7 @@ class EventsSave extends Command implements SelfHandling
     public function handle()
     {
 
-        //.Start with building a classification lookup table
+        // Start with building a classification lookup table
         $classNames = [ ];
         foreach ( Lang::get('classifications') as $classID => $class) {
             $classNames[$class['name']] = $classID;
