@@ -157,6 +157,11 @@ function parse_shadowserver($message) {
                                                     'fields'    => 'protocol port version sysinfo visible_databases',
                                                     'type'      => 'INFO',
                                                  ),
+                'scan_elasticsearch'    => array (
+                                                    'class'     => 'Open ElasticSearch Server',
+                                                    'fields'    => 'protocol port version name cluster_name',
+                                                    'type'      => 'INFO',
+                                                 ),
               );
 
     // ==================
