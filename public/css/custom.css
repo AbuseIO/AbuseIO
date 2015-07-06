@@ -1,3 +1,6 @@
+/* Prevent overlapping of the top navbar */
+body { padding-top: 70px; }
+
 .header {
     padding: 10px 0px 10px 10px;
 }
@@ -22,9 +25,10 @@
     margin-bottom: 0;
 }
 
+/* marknl: Why is this here?
 .container {
     padding-bottom: 20px;
-}
+} */
 
 .panel-heading span
 {

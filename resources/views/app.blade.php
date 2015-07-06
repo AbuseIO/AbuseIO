@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ Config::get('app.name') }} {{ Config::get('app.version') }} - {{ Config::get('main.interface.navigation.' . Request::segment(2)) }}</title>
 
-    <link href="{{ asset('/css/custom.css')                 }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap.min.css')          }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap-theme.min.css')    }}" rel="stylesheet">
+    <link href="{{ asset('/css/custom.css')                 }}" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,11 +19,8 @@
 
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-
 </head>
 <body>
-    <br><br><br>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -45,13 +42,13 @@
         </div>
     </nav>
 
+<div class="container">
     @if (Session::has('message'))
         <div class="flash alert-info">
             <p>{{ Session::get('message') }}</p>
         </div>
     @endif
-
     @yield('content')
-
+</div>
 </body>
 </html>
