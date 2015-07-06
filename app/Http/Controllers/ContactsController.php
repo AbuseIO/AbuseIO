@@ -1,17 +1,22 @@
-<?php namespace AbuseIO\Http\Controllers;
+<?php
+
+namespace AbuseIO\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use AbuseIO\Http\Requests;
-//use AbuseIO\Http\Controllers\Controller;
+use AbuseIO\Http\Requests\ContactFormRequest;
+
+use AbuseIO\Http\Controllers\Controller;
+
 use AbuseIO\Models\Contact;
-use AbuseIO\Models\Netblock;
-use AbuseIO\Models\Domain;
-use Input;
+
 use Redirect;
-//use Illuminate\Http\Request;
+use Input;
 
 class ContactsController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +39,6 @@ class ContactsController extends Controller
      */
     public function create()
     {
-
         return view('contacts.create');
 
     }
@@ -49,8 +53,7 @@ class ContactsController extends Controller
 
         $contacts  = Contact::all();
 
-        $columns    =
-            [
+        $columns = [
                 'reference'     => 'Reference',
                 'contact'       => 'name',
                 'enabled'       => 'Status',
@@ -58,31 +61,27 @@ class ContactsController extends Controller
                 'rpc_host'      => 'RPC address',
                 'rpc_key'       => 'RPC key',
                 'auto_notify'   => 'Notifications',
-            ];
+        ];
 
-        $output     = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+        $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
 
         foreach ($contacts as $contact) {
-
-            $row =
-                [
-                    $contact->reference,
-                    $contact->name,
-                    $contact['enabled'] ? 'Enabled' : 'Disabled',
-                    $contact['email'],
-                    $contact['rpc_host'],
-                    $contact['rpc_key'],
-                    $contact['auto_notify'] ? 'Automatic' : 'Manual',
-                ];
+            $row = [
+                $contact->reference,
+                $contact->name,
+                $contact['enabled'] ? 'Enabled' : 'Disabled',
+                $contact['email'],
+                $contact['rpc_host'],
+                $contact['rpc_key'],
+                $contact['auto_notify'] ? 'Automatic' : 'Manual',
+            ];
 
             $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
-
         }
 
         return response(substr($output, 0, -1), 200)
             ->header('Content-Type', 'text/csv')
             ->header('Content-Disposition', 'attachment; filename="Contacts.csv"');
-
     }
 
     /**
@@ -90,7 +89,7 @@ class ContactsController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(ContactFormRequest $contact)
     {
 
         $input = Input::all();

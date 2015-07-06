@@ -1,10 +1,20 @@
-<?php namespace AbuseIO\Http\Controllers;
+<?php
+
+namespace AbuseIO\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use AbuseIO\Http\Requests;
+use AbuseIO\Http\Requests\NetblockFormRequest;
+
+use AbuseIO\Http\Controllers\Controller;
+
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Contact;
-use Input;
+
 use Redirect;
+use Input;
 use ICF;
 
 class NetblocksController extends Controller
@@ -52,28 +62,24 @@ class NetblocksController extends Controller
 
         $netblocks  = Netblock::all();
 
-        $columns    =
-            [
-                'contact'   => 'Contact',
-                'enabled'   => 'Status',
-                'first_ip'  => 'First IP',
-                'last_ip'   => 'Last IP'
-            ];
+        $columns = [
+            'contact'   => 'Contact',
+            'enabled'   => 'Status',
+            'first_ip'  => 'First IP',
+            'last_ip'   => 'Last IP'
+        ];
 
-        $output     = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+        $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
 
         foreach ($netblocks as $netblock) {
-
-            $row =
-                [
-                    $netblock->contact->name . ' (' .$netblock->contact->reference . ')',
-                    ICF::inet_itop($netblock['first_ip']),
-                    ICF::inet_itop($netblock['last_ip']),
-                    $netblock['enabled'] ? 'Enabled' : 'Disabled',
-                ];
+            $row = [
+                $netblock->contact->name . ' (' .$netblock->contact->reference . ')',
+                ICF::inet_itop($netblock['first_ip']),
+                ICF::inet_itop($netblock['last_ip']),
+                $netblock['enabled'] ? 'Enabled' : 'Disabled',
+            ];
 
             $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
-
         }
 
         return response(substr($output, 0, -1), 200)
@@ -86,7 +92,7 @@ class NetblocksController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(NetblockFormRequest $netblock)
     {
 
         $input = Input::all();
@@ -172,5 +178,4 @@ class NetblocksController extends Controller
             ->with('message', 'Netblock has been deleted.');
 
     }
-
 }

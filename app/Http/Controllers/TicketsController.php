@@ -1,9 +1,19 @@
-<?php namespace AbuseIO\Http\Controllers;
+<?php
+
+namespace AbuseIO\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use AbuseIO\Http\Requests;
+use AbuseIO\Http\Requests\TicketsFormRequest;
+
+use AbuseIO\Http\Controllers\Controller;
+
 use AbuseIO\Models\Ticket;
-use Input;
+
 use Redirect;
+use Input;
 
 class TicketsController extends Controller
 {
@@ -44,29 +54,24 @@ class TicketsController extends Controller
     public function export()
     {
 
-        $tickets  = Ticket::all();
-        $columns    =
-            [
-                'id'        => 'Ticket ID',
-            ];
+        $tickets = Ticket::all();
+        $columns = [
+            'id' => 'Ticket ID',
+        ];
 
-        $output     = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+        $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
 
         foreach ($tickets as $ticket) {
-
-            $row =
-                [
-                    $ticket->id,
-                ];
+            $row = [
+                $ticket->id,
+            ];
 
             $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
-
         }
 
         return response(substr($output, 0, -1), 200)
             ->header('Content-Type', 'text/csv')
             ->header('Content-Disposition', 'attachment; filename="Tickets.csv"');
-
     }
 
     /**
@@ -74,15 +79,13 @@ class TicketsController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(TicketsFormRequest $ticket)
     {
-
         //only allowed in debug mode or something
         //$input = Input::all();
         //Ticket::create( $input );
         //
         //return Redirect::route('admin.tickets.index')->with('message', 'Ticket has been created');
-
     }
 
     /**

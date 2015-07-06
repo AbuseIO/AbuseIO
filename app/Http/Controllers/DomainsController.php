@@ -1,10 +1,20 @@
-<?php namespace AbuseIO\Http\Controllers;
+<?php
+
+namespace AbuseIO\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use AbuseIO\Http\Requests;
+use AbuseIO\Http\Requests\DomainFormRequest;
+
+use AbuseIO\Http\Controllers\Controller;
+
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\Contact;
-use Input;
+
 use Redirect;
+use Input;
 
 class DomainsController extends Controller
 {
@@ -51,26 +61,22 @@ class DomainsController extends Controller
 
         $domains = Domain::all();
 
-        $columns =
-            [
-                'contact' => 'Contact',
-                'domain' => 'Domain name',
-                'enabled' => 'Status',
-            ];
+        $columns = [
+            'contact' => 'Contact',
+            'domain' => 'Domain name',
+            'enabled' => 'Status',
+        ];
 
         $output = '"' . implode('","', $columns) . '"' . PHP_EOL;
 
         foreach ($domains as $domain) {
-
-            $row =
-                [
-                    $domain->contact->name . ' (' . $domain->contact->reference . ')',
-                    $domain['name'],
-                    $domain['enabled'] ? 'Enabled' : 'Disabled',
-                ];
+            $row = [
+                $domain->contact->name . ' (' . $domain->contact->reference . ')',
+                $domain['name'],
+                $domain['enabled'] ? 'Enabled' : 'Disabled',
+            ];
 
             $output .= '"' . implode('","', $row) . '"' . PHP_EOL;
-
         }
 
         return response(substr($output, 0, -1), 200)
@@ -84,7 +90,7 @@ class DomainsController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(DomainFormRequest $domain)
     {
 
         $input = Input::all();
