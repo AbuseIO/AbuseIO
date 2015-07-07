@@ -95,7 +95,7 @@ To test your mail route, send a e-mail to notifier@your-MTA-domain.lan and if yo
 send a EML file into the parser using:
 
 ```bash
-cat file.eml | /usr/bin/php -q /opt/abuseio/artisan --env=local email:parse
+cat file.eml | /usr/bin/php -q /opt/abuseio/artisan --env=local email:receive
 ```
 
 Please note that using the 'cat' option might give you a difference with email bodies, for example with line 
