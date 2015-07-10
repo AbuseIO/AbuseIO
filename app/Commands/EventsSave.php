@@ -42,19 +42,19 @@ class EventsSave extends Command implements SelfHandling
 
         // Start with building a classification lookup table
         $classNames = [ ];
-        foreach ( Lang::get('classifications') as $classID => $class) {
+        foreach (Lang::get('classifications') as $classID => $class) {
             $classNames[$class['name']] = $classID;
         }
 
         // Also build a types lookup table
         $typeNames = [ ];
-        foreach ( Lang::get('types.type') as $typeID => $type) {
+        foreach (Lang::get('types.type') as $typeID => $type) {
             $typeNames[$type['name']] = $typeID;
         }
 
         // Also build a status lookup table
         $statusNames = [ ];
-        foreach ( Lang::get('types.status') as $statusID => $status) {
+        foreach (Lang::get('types.status') as $statusID => $status) {
             $statusNames[$status['name']] = $statusID;
         }
 
@@ -175,12 +175,13 @@ class EventsSave extends Command implements SelfHandling
 
                 // This is an existing ticket
 
-            } else $this->failed('Unable to link to ticket, multiple open tickets found for same event type');
+            } else {
+                $this->failed('Unable to link to ticket, multiple open tickets found for same event type');
+            }
 
         }
 
         $this->success('');
 
     }
-
 }

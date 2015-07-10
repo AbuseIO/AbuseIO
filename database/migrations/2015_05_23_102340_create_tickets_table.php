@@ -15,8 +15,8 @@ class CreateTicketsTable extends Migration
     {
         Schema::create(
             'tickets',
-            function(Blueprint $table)
-            {
+            function (Blueprint $table) {
+
                 $table->increments('id');
                 $table->string('ip');
                 $table->string('domain');
@@ -47,6 +47,7 @@ class CreateTicketsTable extends Migration
                 $table->index('ip_contact_reference');
                 $table->index('domain_contact_reference');
                 $table->index('status_id');
+
             }
         );
     }
@@ -60,5 +61,4 @@ class CreateTicketsTable extends Migration
     {
         Schema::drop('tickets');
     }
-
 }

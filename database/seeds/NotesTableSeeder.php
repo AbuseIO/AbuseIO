@@ -64,5 +64,4 @@ class NotesTableSeeder extends Seeder
 
         DB::table('notes')->insert($notes);
     }
-
 }

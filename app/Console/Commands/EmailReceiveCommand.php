@@ -162,22 +162,27 @@ class EmailReceiveCommand extends Command
      */
     protected function exception($rawEmail)
     {
-        Log::error(get_class($this).': Email receiver is ending with errors. The received e-mail will be bounced to the admin for investigation');
+        Log::error(
+            get_class($this).': Email receiver is ending with errors. "
+            ."The received e-mail will be bounced to the admin for investigation'
+        );
+
         // TODO: send the rawEmail back to admin
 
         dd($rawEmail);
 
         Mail::queueOn(
             'FailedProcessNotifications',
-            'emails.bounce', '', function($message) {
+            'emails.bounce',
+            '',
+            function ($message) {
 
-            $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailProcess');
+                $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailProcess');
 
-            $message->to(Config::get('main.emailparser.fallback_mail'));
+                $message->to(Config::get('main.emailparser.fallback_mail'));
 
             }
         );
 
     }
-
 }

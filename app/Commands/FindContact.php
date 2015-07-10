@@ -44,19 +44,15 @@ class FindContact extends Command
 
             return $netblock[0]->contact;
 
-        } elseif (
-            class_exists('AbuseIO::Custom::FindContact') === true &&
-            is_callable('\AbuseIO\Custom\FindContact->byIP') === true
+        } elseif (class_exists('AbuseIO::Custom::FindContact') === true
+            && is_callable('\AbuseIO\Custom\FindContact->byIP') === true
         ) {
 
             // Call custom function
 
-        } else {
-
-            return FindContact::undefined();
-
         }
 
+        return FindContact::undefined();
 
     }
 
@@ -73,18 +69,15 @@ class FindContact extends Command
 
             return $domain[0]->contact;
 
-        } elseif (
-            class_exists('AbuseIO::Custom::FindContact') === true &&
-            is_callable('\AbuseIO\Custom\FindContact->byDomain') === true
+        } elseif (class_exists('AbuseIO::Custom::FindContact') === true
+            && is_callable('\AbuseIO\Custom\FindContact->byDomain') === true
         ) {
 
             // Call custom function
 
-        } else {
-
-            return FindContact::undefined();
-
         }
+
+        return FindContact::undefined();
 
     }
 
@@ -101,19 +94,15 @@ class FindContact extends Command
 
             return $contact[0];
 
-        } elseif (
-            class_exists('AbuseIO::Custom::FindContact') === true &&
-            is_callable('\AbuseIO\Custom\FindContact->byReference') === true
+        } elseif (class_exists('AbuseIO::Custom::FindContact') === true
+            && is_callable('\AbuseIO\Custom\FindContact->byReference') === true
         ) {
 
             // Call custom function
 
-        } else {
-
-            return FindContact::undefined();
-
         }
 
-    }
+        return FindContact::undefined();
 
+    }
 }

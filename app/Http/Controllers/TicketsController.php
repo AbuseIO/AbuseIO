@@ -4,14 +4,10 @@ namespace AbuseIO\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\TicketsFormRequest;
-
 use AbuseIO\Http\Controllers\Controller;
-
 use AbuseIO\Models\Ticket;
-
 use Redirect;
 use Input;
 
@@ -148,5 +144,4 @@ class TicketsController extends Controller
         //return Redirect::route('admin.tickets.index')->with('message', 'Ticket has been deleted.');
 
     }
-
 }

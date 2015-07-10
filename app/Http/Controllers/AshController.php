@@ -37,5 +37,4 @@ class AshController extends Controller
         }
 
     }
-
 }

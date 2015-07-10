@@ -4,15 +4,11 @@ namespace AbuseIO\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\NetblockFormRequest;
-
 use AbuseIO\Http\Controllers\Controller;
-
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Contact;
-
 use Redirect;
 use Input;
 use ICF;

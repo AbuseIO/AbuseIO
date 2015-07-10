@@ -3,18 +3,18 @@
 namespace AbuseIO\Commands;
 
 use AbuseIO\Models\Evidence;
-Use Illuminate\Queue\SerializesModels;
-Use Illuminate\Queue\InteractsWithQueue;
-Use Illuminate\Contracts\Bus\SelfHandling;
-Use Illuminate\Contracts\Queue\ShouldQueue;
-Use Illuminate\Filesystem\Filesystem;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Filesystem\Filesystem;
 use League\Flysystem\Exception;
-Use PhpMimeMailParser\Parser as MimeParser;
-Use AbuseIO\Parsers\Factory as GetParser;
-Use AbuseIO\Commands\EventsValidate;
-Use AbuseIO\Commands\EventsSave;
-Use Config;
-Use Log;
+use PhpMimeMailParser\Parser as MimeParser;
+use AbuseIO\Parsers\Factory as GetParser;
+use AbuseIO\Commands\EventsValidate;
+use AbuseIO\Commands\EventsSave;
+use Config;
+use Log;
 
 class EmailProcess extends Command implements SelfHandling, ShouldQueue
 {
@@ -74,7 +74,10 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         // Ignore email from our own notification address to prevent mail loops
         if (preg_match('/' . Config::get('main.notifications.from_address') . '/', $parsedMail->getHeader('from'))) {
 
-            Log::warning(get_class($this).'Loop prevention: Ignoring email from self ' . Config::get('main.notifications.from_address'));
+            Log::warning(
+                get_class($this).'Loop prevention: Ignoring email from self '
+                . Config::get('main.notifications.from_address')
+            );
 
             $this->exception();
 
@@ -206,24 +209,34 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         // we have $this->filename and $this->rawMail
         // and this Config::get('main.emailparser.fallback_mail')
                 
-        Log::error(get_class($this).': Ending with errors. The received e-mail will be deleted from archive and bounced to the admin for investigation');
+        Log::error(
+            get_class($this).': Ending with errors. The received e-mail will be deleted from " .
+            "archive and bounced to the admin for investigation'
+        );
         // TODO: send the rawmail back to admin and delete file
 
         dd();
 
         Mail::queueOn(
             'FailedProcessNotifications',
-            'emails.bounce', '', function($message) {
+            'emails.bounce',
+            '',
+            function ($message) {
 
                 $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailProcess');
 
                 $message->to(Config::get('main.emailparser.fallback_mail'));
 
-                $message->attach($this->filename, ['as' => 'failed_message.eml', 'mime' => 'message/rfc822']);;
+                $message->attach(
+                    $this->filename,
+                    [
+                        'as' => 'failed_message.eml',
+                        'mime' => 'message/rfc822',
+                    ]
+                );
 
             }
         );
 
     }
-
 }

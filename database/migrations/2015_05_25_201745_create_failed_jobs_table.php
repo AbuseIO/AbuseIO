@@ -15,13 +15,14 @@ class CreateFailedJobsTable extends Migration
     {
         Schema::create(
             'failed_jobs',
-            function(Blueprint $table)
-            {
+            function (Blueprint $table) {
+
                 $table->increments('id');
                 $table->text('connection');
                 $table->text('queue');
                 $table->text('payload');
                 $table->timestamp('failed_at');
+
             }
         );
     }
@@ -35,5 +36,4 @@ class CreateFailedJobsTable extends Migration
     {
         Schema::drop('failed_jobs');
     }
-
 }

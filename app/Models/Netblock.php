@@ -33,5 +33,4 @@ class Netblock extends Model
         return $this->belongsTo('AbuseIO\Models\Contact');
 
     }
-
 }

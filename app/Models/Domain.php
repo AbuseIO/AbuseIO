@@ -29,5 +29,4 @@ class Domain extends Model
         return $this->belongsTo('AbuseIO\Models\Contact');
 
     }
-
 }

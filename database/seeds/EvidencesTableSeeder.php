@@ -54,5 +54,4 @@ class EvidencesTableSeeder extends Seeder
 
         DB::table('evidences')->insert($evidences);
     }
-
 }

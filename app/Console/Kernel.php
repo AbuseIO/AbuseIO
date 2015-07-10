@@ -15,5 +15,4 @@ class Kernel extends ConsoleKernel
     {
 
     }
-
 }

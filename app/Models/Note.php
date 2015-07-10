@@ -26,5 +26,4 @@ class Note extends Model
         ];
 
     protected $guarded  = ['id'];
-
 }

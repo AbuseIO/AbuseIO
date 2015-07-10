@@ -91,5 +91,4 @@ class Ticket extends Model
         return $this->hasMany('AbuseIO\Models\Note');
 
     }
-
 }

@@ -4,14 +4,10 @@ namespace AbuseIO\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ContactFormRequest;
-
 use AbuseIO\Http\Controllers\Controller;
-
 use AbuseIO\Models\Contact;
-
 use Redirect;
 use Input;
 
@@ -162,5 +158,4 @@ class ContactsController extends Controller
             ->with('message', 'Contact has been deleted.');
 
     }
-
 }

@@ -57,5 +57,4 @@ class EventsValidate extends Command implements SelfHandling
         $this->success('');
 
     }
-
 }

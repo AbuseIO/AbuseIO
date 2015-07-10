@@ -91,5 +91,4 @@ class EventsTableSeeder extends Seeder
 
         DB::table('events')->insert($events);
     }
-
 }

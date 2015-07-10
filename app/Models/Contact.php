@@ -51,5 +51,4 @@ class Contact extends Model
         return $this->hasMany('AbuseIO\Models\Netblock');
 
     }
-
 }

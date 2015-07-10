@@ -29,5 +29,4 @@ class Evidence extends Model
         return $this->belongsTo('AbuseIO\Models\event');
 
     }
-    
 }

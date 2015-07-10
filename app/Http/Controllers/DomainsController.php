@@ -4,15 +4,11 @@ namespace AbuseIO\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\DomainFormRequest;
-
 use AbuseIO\Http\Controllers\Controller;
-
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\Contact;
-
 use Redirect;
 use Input;
 
@@ -167,5 +163,4 @@ class DomainsController extends Controller
             ->with('message', 'Domain has been deleted.');
 
     }
-
 }

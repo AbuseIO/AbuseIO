@@ -14,9 +14,9 @@ class CreateEvidencesTable extends Migration
     public function up()
     {
         Schema::create(
-            'evidences', 
-            function(Blueprint $table)
-            {
+            'evidences',
+            function (Blueprint $table) {
+
                 $table->increments('id');
                 $table->string('filename');
                 $table->string('sender');
@@ -26,6 +26,7 @@ class CreateEvidencesTable extends Migration
                 $table->index('filename');
                 $table->index('sender');
                 $table->index('subject');
+
             }
         );
     }
@@ -39,5 +40,4 @@ class CreateEvidencesTable extends Migration
     {
         Schema::drop('evidences');
     }
-
 }

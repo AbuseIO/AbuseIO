@@ -134,9 +134,4 @@ class DomainsTableSeeder extends Seeder
 
         DB::table('domains')->insert($domains);
     }
-
 }
-
-
-
-

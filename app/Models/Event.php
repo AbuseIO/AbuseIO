@@ -33,5 +33,4 @@ class Event extends Model
         return $this->hasMany('AbuseIO\Models\Evidence', 'id', 'evidence_id');
 
     }
-
 }

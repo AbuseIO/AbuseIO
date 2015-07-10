@@ -64,5 +64,4 @@ class TicketsTableSeeder extends Seeder
 
         DB::table('tickets')->insert($tickets);
     }
-
 }

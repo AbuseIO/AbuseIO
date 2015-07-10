@@ -31,5 +31,4 @@ class Kernel extends HttpKernel
             'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
             'guest' => 'AbuseIO\Http\Middleware\RedirectIfAuthenticated',
         ];
-
 }

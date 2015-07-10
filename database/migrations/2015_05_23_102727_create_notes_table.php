@@ -15,8 +15,8 @@ class CreateNotesTable extends Migration
     {
         Schema::create(
             'notes',
-            function(Blueprint $table)
-            {
+            function (Blueprint $table) {
+
                 $table->increments('id');
                 $table->integer('ticket_id')->unsigned();
                 $table->string('submitter');
@@ -26,6 +26,7 @@ class CreateNotesTable extends Migration
                 $table->timestamps();
 
                 $table->index('ticket_id');
+
             }
         );
     }
@@ -39,5 +40,4 @@ class CreateNotesTable extends Migration
     {
         Schema::drop('notes');
     }
-
 }

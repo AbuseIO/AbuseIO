@@ -15,8 +15,7 @@ class CreateDomainsTable extends Migration
     {
         Schema::create(
             'domains',
-            function(Blueprint $table)
-            {
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
                 $table->integer('contact_id')->unsigned();
@@ -38,5 +37,4 @@ class CreateDomainsTable extends Migration
     {
         Schema::drop('domains');
     }
-
 }

@@ -14,9 +14,8 @@ class CreateNetblocksTable extends Migration
     public function up()
     {
         Schema::create(
-            'netblocks', 
-            function(Blueprint $table)
-            {
+            'netblocks',
+            function (Blueprint $table) {
 
                 $table->increments('id');
                 $table->integer('contact_id')->unsigned();
@@ -46,5 +45,4 @@ class CreateNetblocksTable extends Migration
 
         Schema::drop('netblocks');
     }
-
 }

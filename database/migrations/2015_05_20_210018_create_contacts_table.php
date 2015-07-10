@@ -15,8 +15,7 @@ class CreateContactsTable extends Migration
     {
         Schema::create(
             'contacts',
-            function(Blueprint $table)
-            {
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('reference')->unique();
                 $table->string('name');
@@ -46,5 +45,4 @@ class CreateContactsTable extends Migration
     {
         Schema::drop('contacts');
     }
-
 }

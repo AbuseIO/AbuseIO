@@ -16,5 +16,4 @@ class AnalyticsController extends Controller
         return view('analytics');
 
     }
-
 }

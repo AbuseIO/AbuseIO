@@ -15,8 +15,8 @@ class CreateEventsTable extends Migration
     {
         Schema::create(
             'events',
-            function(Blueprint $table)
-            {
+            function (Blueprint $table) {
+
                 $table->increments('id');
                 $table->integer('ticket_id')->unsigned();
                 $table->integer('evidence_id')->unsigned();
@@ -29,6 +29,7 @@ class CreateEventsTable extends Migration
                 $table->index('evidence_id');
                 $table->index('source');
                 $table->index('timestamp');
+
             }
         );
     }
@@ -42,5 +43,4 @@ class CreateEventsTable extends Migration
     {
         Schema::drop('events');
     }
-
 }

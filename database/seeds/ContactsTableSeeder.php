@@ -146,5 +146,4 @@ class ContactsTableSeeder extends Seeder
 
         DB::table('contacts')->insert($contacts);
     }
-
 }
