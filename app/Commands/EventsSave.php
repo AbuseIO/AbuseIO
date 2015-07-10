@@ -10,6 +10,8 @@ use AbuseIO\Commands\FindContact;
 use AbuseIO\Models\Evidence;
 use ICF;
 use DB;
+use Lang;
+use Log;
 
 class EventsSave extends Command implements SelfHandling
 {
@@ -58,8 +60,23 @@ class EventsSave extends Command implements SelfHandling
              * have any access to the ticket anymore.
              */
 
-            // Lookup the ip contact and if needed the domain contact too
+            // Start with building a classification lookup table  and switch out name for ID
+            // This should prolly be moved to parser-common
+            foreach (Lang::get('classifications') as $classID => $class) {
+                if ($class['name'] == $event['class']) {
+                    $event['class'] = $classID;
+                }
+            }
 
+            // Also build a types lookup table and switch out name for ID
+            // This should prolly be moved to parser-common
+            foreach (Lang::get('types.type') as $typeID => $type) {
+                if ($type['name'] == $event['type']) {
+                    $event['type'] = $typeID;
+                }
+            }
+
+            // Lookup the ip contact and if needed the domain contact too
             $ipContact = FindContact::byIP($event['ip']);
 
             if ($event['domain'] != '') {
@@ -135,7 +152,7 @@ class EventsSave extends Command implements SelfHandling
                     ->exists()
                 ) {
 
-                    // Exact duplicate match so we will ignore this event
+                    Log::warning(get_class($this).' Ignoring exact duplicent event');
 
                 } else {
 
