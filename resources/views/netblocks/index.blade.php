@@ -4,7 +4,7 @@
     <h1 class="page-header">Netblocks</h1>
     <div class="row">
         <div  class="col-md-3 col-md-offset-9 text-right">
-            {!! link_to_route('admin.netblocks.create', 'Create Netblock', null, ['class' => 'btn btn-info']) !!}
+            {!! link_to_route('admin.netblocks.create', 'Create Netblock', [], ['class' => 'btn btn-info']) !!}
             {!! link_to_route('admin.export.netblocks', 'CSV Export', ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
         </div>
     </div>

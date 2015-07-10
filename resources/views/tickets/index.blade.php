@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-8 text-right">
             [ Pulldown VIEW ]<!-- This is a preset view select for some default reports, like open tickets, or escalations -->
-            {!! link_to_route('admin.tickets.create', 'Create Ticket', null, ['class' => 'btn btn-info']) !!}
+            {!! link_to_route('admin.tickets.create', 'Create Ticket', [], ['class' => 'btn btn-info']) !!}
             {!! link_to_route('admin.export.tickets', 'CSV Export', ['format' => 'csv'], ['class' => 'btn btn-info']) !!}  
         </div>
     </div>
