@@ -10,7 +10,6 @@ use AbuseIO\Commands\FindContact;
 use AbuseIO\Models\Evidence;
 use ICF;
 use DB;
-use Lang;
 
 class EventsSave extends Command implements SelfHandling
 {
@@ -39,24 +38,6 @@ class EventsSave extends Command implements SelfHandling
      */
     public function handle()
     {
-
-        // Start with building a classification lookup table
-        $classNames = [ ];
-        foreach (Lang::get('classifications') as $classID => $class) {
-            $classNames[$class['name']] = $classID;
-        }
-
-        // Also build a types lookup table
-        $typeNames = [ ];
-        foreach (Lang::get('types.type') as $typeID => $type) {
-            $typeNames[$type['name']] = $typeID;
-        }
-
-        // Also build a status lookup table
-        $statusNames = [ ];
-        foreach (Lang::get('types.status') as $statusID => $status) {
-            $statusNames[$status['name']] = $statusID;
-        }
 
         foreach ($this->events as $event) {
 
@@ -90,8 +71,8 @@ class EventsSave extends Command implements SelfHandling
 
             $search = Ticket::
                   where('ip', '=', $event['ip'])
-                ->where('class_id', '=', $classNames[$event['class']], 'AND')
-                ->where('type_id', '=', $typeNames[$event['type']], 'AND')
+                ->where('class_id', '=', $event['class'], 'AND')
+                ->where('type_id', '=', $event['type'], 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 2, 'AND')
                 ->get();
@@ -104,8 +85,8 @@ class EventsSave extends Command implements SelfHandling
 
                 $newTicket->ip                         = $event['ip'];
                 $newTicket->domain                     = $event['domain'];
-                $newTicket->class_id                   = $classNames[$event['class']];
-                $newTicket->type_id                    = $typeNames[$event['type']];
+                $newTicket->class_id                   = $event['class'];
+                $newTicket->type_id                    = $event['type'];
                 $newTicket->ip_contact_reference       = $ipContact->reference;
                 $newTicket->ip_contact_name            = $ipContact->name;
                 $newTicket->ip_contact_email           = $ipContact->email;

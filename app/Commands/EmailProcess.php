@@ -138,7 +138,13 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
 
         }
 
-        if ($result !== false && $result['errorStatus'] !== true) {
+        if ($result !== false && $result['errorStatus'] === true) {
+
+            Log::error(get_class($parser).': Parser as ended with errors ! : ' . $result['errorMessage']);
+
+            $this->exception();
+
+        } else {
 
             Log::info(
                 get_class($parser)
@@ -147,12 +153,6 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
 
             $events = $result['data'];
 
-        } else {
-
-            Log::error(get_class($parser).': Parser as ended with errors ! : ' . $result['errorMessage']);
-
-            $this->exception();
-
         }
 
         // call validater
@@ -160,9 +160,9 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         $validator = new EventsValidate($events);
         $return = $validator->handle();
 
-        if ($return['errorStatus'] === false) {
+        if ($return['errorStatus'] === true) {
 
-            Log::error(get_class($validator).': Validator as ended with errors ! : ' . $result['errorMessage']);
+            Log::error(get_class($validator).': Validator as ended with errors ! : ' . $return['errorMessage']);
 
             $this->exception();
 
@@ -185,9 +185,9 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         $saver = new EventsSave($events, $evidence->id);
         $return = $saver->handle();
 
-        if ($return['errorStatus'] === false) {
+        if ($return['errorStatus'] === true) {
 
-            Log::error(get_class($saver).': Saver as ended with errors ! : ' . $result['errorMessage']);
+            Log::error(get_class($saver).': Saver as ended with errors ! : ' . $return['errorMessage']);
 
             $this->exception();
 
@@ -210,8 +210,8 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         // and this Config::get('main.emailparser.fallback_mail')
                 
         Log::error(
-            get_class($this).': Ending with errors. The received e-mail will be deleted from " .
-            "archive and bounced to the admin for investigation'
+            get_class($this).': Ending with errors. The received e-mail will be deleted from '
+            . 'archive and bounced to the admin for investigation'
         );
         // TODO: send the rawmail back to admin and delete file
 
