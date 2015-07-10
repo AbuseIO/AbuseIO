@@ -46,6 +46,7 @@ class EventsValidate extends Command implements SelfHandling
         foreach ($this->events as $event) {
 
             // TODO - implement a lot of validation here
+            // TODO - Requires some extending validation rules http://laravel.com/docs/4.2/validation#custom-validation-rules
 
             // Check valid IP
             $validator = Validator::make(
