@@ -5,6 +5,15 @@
     <div class="container">
         <h1 class="page-header">Contact details for: {{ $contact->name }}</h1>
 
+        <div class="row">
+            <div class="col-md-3 col-md-offset-9 text-right">
+                {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.contacts.destroy', $contact->id]]) !!}
+                {!! link_to_route('admin.contacts.edit', 'Edit', $contact->id, ['class' => 'btn btn-info']) !!}
+                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                {!! Form::close() !!}
+            </div>
+        </div>
+
         <dl class="dl-horizontal">
             <dt>Database ID</dt>
             <dd>{{ $contact->id }}</dd>
