@@ -151,6 +151,20 @@ class ContactsController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        if ($contact->domains->count() > 0) {
+            return Redirect::route('admin.contacts.index')->with(
+                'message',
+                "Contact could not be deleted because ".  $contact->domains->count()
+                . " domain(s) is stil pointing to this contact."
+            );
+        }
+        if ($contact->netblocks->count() > 0) {
+            return Redirect::route('admin.contacts.index')->with(
+                'message',
+                "Contact could not be deleted because ".  $contact->domains->count()
+                . " domain(s) is stil pointing to this contact."
+            );
+        }
 
         $contact->delete();
 
