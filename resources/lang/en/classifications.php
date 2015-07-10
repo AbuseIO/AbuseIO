@@ -3,13 +3,16 @@
 return [
 
     /*
-    |--------------------------------------------------------------------------
-    | Infotext Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used by the ASH and admin views to
-    | display specific event information
-    */
+     *--------------------------------------------------------------------------
+     * Infotext Language Lines
+     *--------------------------------------------------------------------------
+     *
+     * The following language lines are used by the ASH and admin views to
+     * display specific event information
+     *
+     * This page may defer from PSR-2
+     *
+     */
 
     100 => [
         'name' => 'Botnet controller',
@@ -1707,6 +1710,42 @@ return [
             <a target'_blank' href='https://wordpress.org/plugins/sucuri-scanner/'>WordPress Security scanner (Sucuri)</a><br>
             <a target'_blank' href='http://spamvertised.abusebutler.com/'>List of Spamvertised websites</a><br>
 
+            "
+    ],
+
+    129 => [
+        'name' => 'Open ElasticSearch Server',
+        'description' => "
+            <h2>What is an 'Open ElasticSearch Server'?</h2>
+
+            <p>Elasticsearch is a search server based on Lucene. It provides a distributed,
+            multitenant-capable full-text search engine with a RESTful web interface and
+            schema-free JSON documents.</p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>Your system has an ElasticSearch instance running (see www.elastic.co for
+            more information) which is accessible on the internet. On its own, ElasticSearch
+            does not support authentication or restrict access to the datastore, so it is
+            possible that any entity that can access the ElasticSearch instance may have
+            complete control.</p>
+
+            <p>This is especially problematic if this instance has dynamic scripting running.
+            The scripting engine can be abused to launch a denial of service attack.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Either bind this service only to non-public facing connections or add a firewall
+            to block the port ElasticSearch is running on.</p>
+
+            <h2>Tips to resolve this matter</h2>
+
+            <p>Read the ElasticSearch documentation on how to properly secure your ElasticSearch
+            instance.
+
+            <h2>Getting more information</h2>
+
+            <a href='http://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution</a><br>
             "
     ],
 
