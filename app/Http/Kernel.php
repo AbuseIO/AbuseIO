@@ -10,25 +10,24 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $middleware =
-        [
-            'Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode',
-            'Illuminate\Cookie\Middleware\EncryptCookies',
-            'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
-            'Illuminate\Session\Middleware\StartSession',
-            'Illuminate\View\Middleware\ShareErrorsFromSession',
-            'AbuseIO\Http\Middleware\VerifyCsrfToken',
-        ];
+    protected $middleware = [
+        'Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode',
+        'Illuminate\Cookie\Middleware\EncryptCookies',
+        'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
+        'Illuminate\Session\Middleware\StartSession',
+        'Illuminate\View\Middleware\ShareErrorsFromSession',
+        'AbuseIO\Http\Middleware\VerifyCsrfToken',
+    ];
 
     /**
      * The application's route middleware.
      *
      * @var array
      */
-    protected $routeMiddleware =
-        [
-            'auth' => 'AbuseIO\Http\Middleware\Authenticate',
-            'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-            'guest' => 'AbuseIO\Http\Middleware\RedirectIfAuthenticated',
-        ];
+    protected $routeMiddleware = [
+        'auth' => 'AbuseIO\Http\Middleware\Authenticate',
+        'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
+        'guest' => 'AbuseIO\Http\Middleware\RedirectIfAuthenticated',
+    ];
+
 }

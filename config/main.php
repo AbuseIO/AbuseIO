@@ -11,20 +11,19 @@
  * TODO : work out how to create seperate override config file for each module (like parsers, collectors, etc)
  */
 
-Return [
+return [
 
     'interface' => [
         'language' => 'en',
-        'navigation' =>
-            [
-                'home'      => 'Home',
-                'contacts'  => 'Contacts',
-                'netblocks' => 'Netblocks',
-                'domains'   => 'Domains',
-                'tickets'   => 'Tickets',
-                'search'    => 'Search',
-                'analytics' => 'Analytics',
-            ]
+        'navigation' => [
+            'home'      => 'Home',
+            'contacts'  => 'Contacts',
+            'netblocks' => 'Netblocks',
+            'domains'   => 'Domains',
+            'tickets'   => 'Tickets',
+            'search'    => 'Search',
+            'analytics' => 'Analytics',
+        ]
     ],
 
     'emailparser' => [
@@ -61,8 +60,10 @@ Return [
     'reports' => [
         'match_period'                      => '14 days',
         'close_after'                       => '21 days',
-        'resolvable_only'                   => false, // This drops anything if a domain or netblock cannot be found in the DB
-        'resolvable_netblocks'              => [ ], // Overlapping netblocks defined here if IPA only lists IP's that are in use, which is a fallback check.
+        'resolvable_only'                   => false, // This drops anything if a domain or netblock cannot be found
+        'resolvable_netblocks'              => [
+            // Overlapping netblocks defined here if IPA only lists IP's that are in use, which is a fallback check.
+        ],
     ],
 
     'notes' => [

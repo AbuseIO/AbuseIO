@@ -18,18 +18,19 @@ class Contact extends Model
 
     protected $table    = 'contacts';
 
-    protected $fillable =
-        [
-            'reference',
-            'name',
-            'email',
-            'rpc_host',
-            'rpc_key',
-            'auto_notify',
-            'enabled'
-        ];
+    protected $fillable = [
+        'reference',
+        'name',
+        'email',
+        'rpc_host',
+        'rpc_key',
+        'auto_notify',
+        'enabled'
+    ];
 
-    protected $guarded  = ['id'];
+    protected $guarded  = [
+        'id'
+    ];
 
     public function shortlist()
     {

@@ -9,7 +9,7 @@ class DomainsTableSeeder extends Seeder
     {
         DB::table('domains')->delete();
 
-        $domains = array(
+        $domains = [
             [
                 'id'            => 1,
                 'name'          => 'domain1.com',
@@ -130,7 +130,7 @@ class DomainsTableSeeder extends Seeder
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
             ]
-        );
+        ];
 
         DB::table('domains')->insert($domains);
     }

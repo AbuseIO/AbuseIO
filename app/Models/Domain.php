@@ -14,14 +14,15 @@ class Domain extends Model
 
     protected $table    = 'domains';
 
-    protected $fillable =
-        [
-            'name',
-            'contact_id',
-            'enabled'
-        ];
+    protected $fillable = [
+        'name',
+        'contact_id',
+        'enabled'
+    ];
 
-    protected $guarded  = ['id'];
+    protected $guarded  = [
+        'id'
+    ];
 
     public function contact()
     {

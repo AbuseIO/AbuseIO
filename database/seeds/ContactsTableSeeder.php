@@ -9,7 +9,7 @@ class ContactsTableSeeder extends Seeder
     {
         DB::table('contacts')->delete();
 
-        $contacts = array(
+        $contacts = [
             [
                 'id'            => 1,
                 'reference'     => 'INTERNET',
@@ -142,7 +142,7 @@ class ContactsTableSeeder extends Seeder
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
             ]
-        );
+        ];
 
         DB::table('contacts')->insert($contacts);
     }

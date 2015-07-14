@@ -11,12 +11,11 @@ abstract class Command
     protected function failed($message)
     {
 
-        return
-            [
-                'errorStatus'   => true,
-                'errorMessage'  => $message,
-                'data'          => '',
-            ];
+        return [
+            'errorStatus'   => true,
+            'errorMessage'  => $message,
+            'data'          => '',
+        ];
 
     }
 
@@ -28,13 +27,11 @@ abstract class Command
     protected function success($data)
     {
 
-        return
-            [
-                'errorStatus'   => false,
-                'errorMessage'  => 'Data sucessfully parsed',
-                'data'          => $data,
-            ];
+        return [
+            'errorStatus'   => false,
+            'errorMessage'  => 'Data sucessfully parsed',
+            'data'          => $data,
+        ];
 
     }
-
 }

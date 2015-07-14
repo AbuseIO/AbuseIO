@@ -50,13 +50,13 @@ class ContactsController extends Controller
         $contacts  = Contact::all();
 
         $columns = [
-                'reference'     => 'Reference',
-                'contact'       => 'name',
-                'enabled'       => 'Status',
-                'email'         => 'E-Mail address',
-                'rpc_host'      => 'RPC address',
-                'rpc_key'       => 'RPC key',
-                'auto_notify'   => 'Notifications',
+            'reference'     => 'Reference',
+            'contact'       => 'name',
+            'enabled'       => 'Status',
+            'email'         => 'E-Mail address',
+            'rpc_host'      => 'RPC address',
+            'rpc_key'       => 'RPC key',
+            'auto_notify'   => 'Notifications',
         ];
 
         $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;

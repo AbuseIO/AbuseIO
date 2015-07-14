@@ -9,7 +9,7 @@ class EventsTableSeeder extends Seeder
     {
         DB::table('events')->delete();
 
-        $events = array(
+        $events = [
             [
                 'id'                        => '1',
                 'ticket_id'                 => '1',
@@ -87,7 +87,7 @@ class EventsTableSeeder extends Seeder
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
             ]
-        );
+        ];
 
         DB::table('events')->insert($events);
     }
