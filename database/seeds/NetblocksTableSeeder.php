@@ -11,7 +11,7 @@ class NetblocksTableSeeder extends Seeder
 
         DB::table('netblocks')->delete();
 
-        $netblocks = array(
+        $netblocks = [
             [
                 'id' => 1,
                 'first_ip' => ICF::inet_ptoi('0.0.0.0'),
@@ -232,7 +232,7 @@ class NetblocksTableSeeder extends Seeder
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime,
             ]
-        );
+        ];
 
         DB::table('netblocks')->insert($netblocks);
     }

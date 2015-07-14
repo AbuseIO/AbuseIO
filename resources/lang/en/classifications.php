@@ -19,7 +19,7 @@ return [
         'description' => "
 
             "
-        ],
+    ],
 
     101 => [
         'name' => 'Botnet infection',

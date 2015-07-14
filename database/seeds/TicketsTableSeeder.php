@@ -9,7 +9,7 @@ class TicketsTableSeeder extends Seeder
     {
         DB::table('tickets')->delete();
 
-        $tickets = array(
+        $tickets = [
             [
                 'id'                        => 1,
                 'ip'                        => '10.1.12.12',
@@ -60,7 +60,7 @@ class TicketsTableSeeder extends Seeder
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
             ]
-        );
+        ];
 
         DB::table('tickets')->insert($tickets);
     }

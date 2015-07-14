@@ -9,7 +9,7 @@ class NotesTableSeeder extends Seeder
     {
         DB::table('notes')->delete();
 
-        $notes = array(
+        $notes = [
             [
                 'id'                        => '1',
                 'ticket_id'                 => '1',
@@ -60,7 +60,7 @@ class NotesTableSeeder extends Seeder
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
             ]
-        );
+        ];
 
         DB::table('notes')->insert($notes);
     }

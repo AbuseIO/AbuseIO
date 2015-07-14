@@ -9,7 +9,7 @@ class EvidencesTableSeeder extends Seeder
     {
         DB::table('evidences')->delete();
 
-        $evidences = array(
+        $evidences = [
             [
                 'id'                        => '1',
                 'filename'                  => '20150906/1_messageid',
@@ -50,7 +50,7 @@ class EvidencesTableSeeder extends Seeder
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
             ]
-        );
+        ];
 
         DB::table('evidences')->insert($evidences);
     }
