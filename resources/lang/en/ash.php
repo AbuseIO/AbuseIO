@@ -34,6 +34,8 @@ return [
         'lastSeen'                  => 'Last seen',
         'reportCount'               => 'Report count',
         'ticketStatus'              => 'Ticket status',
+        'ticketCreated'             => 'Ticket created',
+        'ticketModified'            => 'Ticket modified',
         'replyStatus'               => 'Reply status',
         'suggest'                   => 'Action required',
     ],

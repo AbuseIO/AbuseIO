@@ -39,9 +39,9 @@
                         <td>{{ Lang::get('types.type.' . $ticket->type_id . '.name') }}</td>
                         <td>{{ Lang::get('classifications.' . $ticket->class_id . '.name') }}</td>
 <!-- $ticket->firstEvent[0]->timestamp -->
-                        <td>{{ date('d-m-Y H:i') }}</td>
+                        <td>{{ date('d-m-Y H:i', $ticket->firstEvent[0]->timestamp) }}</td>
 <!-- $ticket->lastEvent[0]->timestamp -->
-                        <td>{{ date('d-m-Y H:i') }}</td>
+                        <td>{{ date('d-m-Y H:i', $ticket->lastEvent[0]->timestamp) }}</td>
                         <td>{{ $ticket->events->count() }}</td>
                         <td>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</td>
                         <td>

@@ -52,6 +52,12 @@
                     <dt>Ticket status</dt>
                     <dd>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</dd>
 
+                    <dt>Ticket created</dt>
+                    <dd>{{ $ticket->created_at }}</dd>
+
+                    <dt>Ticket last modified</dt>
+                    <dd>{{ $ticket->updated_at }}</dd>
+
                     <dt>Reply status</dt>
                     <dd></dd>
 

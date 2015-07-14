@@ -64,16 +64,22 @@
                 <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.description') }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.firstSeen') }}</dt>
-                <dd>{{ $ticket->first_seen }}</dd>
+                <dd>{{ date('d-m-Y H:i', $ticket->firstEvent[0]->timestamp) }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.lastSeen') }}</dt>
-                <dd>{{ $ticket->last_seen }}</dd>
+                <dd>{{ date('d-m-Y H:i', $ticket->lastEvent[0]->timestamp) }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.reportCount') }}</dt>
                 <dd>{{ $ticket->events->count() }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.ticketStatus') }}</dt>
                 <dd>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</dd>
+
+                <dt>{{ Lang::get('ash.basic.ticketCreated') }}</dt>
+                <dd>{{ $ticket->created_at }}</dd>
+
+                <dt>{{ Lang::get('ash.basic.ticketModified') }}</dt>
+                <dd>{{ $ticket->updated_at }}</dd>
 
                 <dt>{{ Lang::get('ash.basic.replyStatus') }}</dt>
                 <dd></dd>
