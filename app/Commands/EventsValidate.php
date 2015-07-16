@@ -58,8 +58,14 @@ class EventsValidate extends Command implements SelfHandling
             }
 
             // check valid domain name
+            if ($event['domain'] !== false) {
+
+            }
 
             // check valid URI
+            if ($event['uri'] !== false) {
+
+            }
 
             // check valid Type
 
