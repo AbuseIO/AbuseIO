@@ -292,9 +292,9 @@ return [
 
             <h2>What is 'Harvesting'?</h2>
 
-            <p>Email harvesting is the process of obtaining lists of email addresses
+            <p>Email harvesting is the process of obtaining lists of email addresses or accounts
             using various methods for use in bulk email or other purposes usually
-            grouped as spam.</p>
+            like seding SPAM or gaining access to the system.</p>
 
             <p>A common method is the use of special software known as 'harvesting bots'
             or 'harvesters', which spider web pages, mailing list archives, internet
@@ -1390,66 +1390,6 @@ return [
             "
     ],
 
-    122 => [
-        'name' => 'Possible DDOS sending DNS Server',
-        'description' => "
-            <h2>What is a 'DDOS sending DNS Server'?</h2>
-
-            <p>Short summery about this class, e.g. whats the service/type</p>
-
-            <h2>Why would this be bad?</h2>
-
-            <p>short summery why this should be solved</p>
-
-            <h2>Recommended action</h2>
-
-            <p>short summery of whats needed, somewhat technical like firewall this port, to
-            stop this service, etc. Should be more details in the next section</p>
-
-            <h2>Tips how to resolve this matter</h2>
-            
-            <p>Whats needed to solve this. Step-by-step guides if needs be! May be as long as needed.
-            Source can be linked at the section 'getting more info' but content should be on this page.
-            We dont want endusers to click out unless its REALLY needed</p>
-
-            <h2>Getting more information</h2>
-
-            <p>Links to 3rd-party websites and reference materials or more advanced FAQ/Howtos/Selfchecks
-            wont fit here</p>
-
-            "
-    ],
-
-    123 => [
-        'name' => 'Possible DDOS sending NTP Server',
-        'description' => "
-            <h2>What is a 'DDOS sending NTP Server'?</h2>
-
-            <p>Short summery about this class, e.g. whats the service/type</p>
-
-            <h2>Why would this be bad?</h2>
-
-            <p>short summery why this should be solved</p>
-
-            <h2>Recommended action</h2>
-
-            <p>short summery of whats needed, somewhat technical like firewall this port, to
-            stop this service, etc. Should be more details in the next section</p>
-
-            <h2>Tips how to resolve this matter</h2>
-
-            <p>Whats needed to solve this. Step-by-step guides if needs be! May be as long as needed.
-            Source can be linked at the section 'getting more info' but content should be on this page.
-            We dont want endusers to click out unless its REALLY needed</p>
-
-            <h2>Getting more information</h2>
-
-            <p>Links to 3rd-party websites and reference materials or more advanced FAQ/Howtos/Selfchecks
-            wont fit here</p>
-
-            "
-    ],
-
     124 => [
         'name' => 'RBL Listed',
         'description' => "
@@ -1749,4 +1689,24 @@ return [
             "
     ],
 
+    130 => [
+        'name' => 'Copyright Infringement',
+        'description' => "
+
+            "
+    ],
+
+    131 => [
+        'name' => 'Possible DDoS sending Server',
+        'description' => "
+
+            "
+    ],
+
+    132 => [
+        'name' => 'DDoS sending Server',
+        'description' => "
+
+            "
+    ],
 ];
