@@ -42,7 +42,6 @@ class EventsSave extends Command implements SelfHandling
     {
 
         foreach ($this->events as $event) {
-
             /* Here we will thru all the events and look if these is an existing ticket. We will split them up into
              * two seperate arrays: $eventsNew and $events$known. We can save all the known events in the DB with
              * a single event saving loads of queries
@@ -95,7 +94,6 @@ class EventsSave extends Command implements SelfHandling
                 ->get();
 
             if ($search->count() === 0) {
-
                 // Build an array with all new tickes and save it with its related event and evidence link.
 
                 $newTicket = new Ticket;
@@ -110,8 +108,8 @@ class EventsSave extends Command implements SelfHandling
                 $newTicket->ip_contact_rpchost         = $ipContact->rpc_host;
                 $newTicket->ip_contact_rpckey          = $ipContact->rpc_key;
                 $newTicket->ip_contact_auto_notify     = $ipContact->auto_notify;
-                
-                if ($event['domain'] != '') {
+
+                if (!empty($event['domain'])) {
                     $newTicket->domain_contact_reference   = $domainContact->reference;
                     $newTicket->domain_contact_name        = $domainContact->name;
                     $newTicket->domain_contact_email       = $domainContact->email;
@@ -119,7 +117,7 @@ class EventsSave extends Command implements SelfHandling
                     $newTicket->domain_contact_rpckey      = $domainContact->rpc_key;
                     $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
                 }
-                
+
                 $newTicket->status_id                  = 1;
                 $newTicket->notified_count             = 0;
                 $newTicket->last_notify_count          = 0;
@@ -141,7 +139,6 @@ class EventsSave extends Command implements SelfHandling
                 // Call notifier action handler, type new
 
             } elseif ($search->count() === 1) {
-
                 $ticketID = $search[0]->id;
 
                 if (Event::
@@ -151,11 +148,9 @@ class EventsSave extends Command implements SelfHandling
                     ->where('timestamp', '=', $event['timestamp'])
                     ->exists()
                 ) {
-
                     Log::warning(get_class($this).' Ignoring exact duplicent event');
 
                 } else {
-
                     // New unique event, so we will save this
 
                     $newEvent = new Event;
