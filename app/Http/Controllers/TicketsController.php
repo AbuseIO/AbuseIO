@@ -21,13 +21,24 @@ class TicketsController extends Controller
      */
     public function index()
     {
-
-        //$tickets = Ticket::with('events')->paginate(10);
         $tickets = Ticket::paginate(10);
 
         return view('tickets.index')
             ->with('tickets', $tickets);
+    }
 
+    public function statusOpen()
+    {
+        $tickets = Ticket::where('status_id', 1)->paginate(10);
+        return view('tickets.index')
+            ->with('tickets', $tickets);
+    }
+
+    public function statusClosed()
+    {
+        $tickets = Ticket::where('status_id', 2)->paginate(10);
+        return view('tickets.index')
+            ->with('tickets', $tickets);
     }
 
     /**

@@ -29,5 +29,6 @@
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         {!! Form::submit($submit_text, ['class'=>'btn btn-success']) !!}
+        {!! link_to(URL::previous(), 'Cancel', ['class' => 'btn btn-default']) !!}
     </div>
 </div>

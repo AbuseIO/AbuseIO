@@ -9,32 +9,32 @@
         </div>
     </div>
     @if ( !$domains->count() )
-    <div class="alert alert-info">You have no domains yet</div>
+        <div class="alert alert-info">You have no domains yet</div>
     @else
-    {!! $domains->render() !!}
-    <table class="table table-striped table-condensed">
-        <thead>
-            <tr>
-                <th>Contact</th>
-                <th>Domain name</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach( $domains as $domain )
-            <tr>
-                <td>{{ $domain->contact->name }} ({{ $domain->contact->reference }})</td>
-                <td>{{ $domain->name }}</td>
-                <td>
-                    {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.domains.destroy', $domain->id]]) !!}
-                    {!! link_to_route('admin.domains.show', 'Details', [$domain->id], ['class' => 'btn btn-info']) !!}
-                    {!! link_to_route('admin.domains.edit', 'Edit', [$domain->id], ['class' => 'btn btn-info']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+        {!! $domains->render() !!}
+        <table class="table table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Contact</th>
+                    <th>Domain name</th>
+                    <th class="text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach( $domains as $domain )
+                <tr>
+                    <td>{{ $domain->contact->name }} ({{ $domain->contact->reference }})</td>
+                    <td>{{ $domain->name }}</td>
+                    <td class="text-right">
+                        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.domains.destroy', $domain->id]]) !!}
+                        {!! link_to_route('admin.domains.show', 'Details', [$domain->id], ['class' => 'btn btn-info btn-xs']) !!}
+                        {!! link_to_route('admin.domains.edit', 'Edit', [$domain->id], ['class' => 'btn btn-info btn-xs']) !!}
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
+                        {!! Form::close() !!}
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     @endif
-@stop
+@endsection

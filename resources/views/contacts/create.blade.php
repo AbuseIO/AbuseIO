@@ -5,4 +5,4 @@
     {!! Form::model(new AbuseIO\Models\Contact, ['route' => 'admin.contacts.store', 'class' => 'form-horizontal']) !!}
     @include('contacts/partials/_form', ['submit_text' => 'Create Contact'])
     {!! Form::close() !!}
-@stop
+@endsection

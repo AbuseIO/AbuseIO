@@ -47,6 +47,11 @@ Route::group(
 
         Route::model('tickets', 'AbuseIO\Models\Ticket');
         Route::resource('tickets', 'TicketsController');
+        Route::group(['prefix' => 'tickets/status'], function () {
+            Route::resource('open', 'TicketsController@statusOpen');
+            Route::resource('closed', 'TicketsController@statusClosed');
+        });
+
         Route::get(
             '/export/tickets',
             [

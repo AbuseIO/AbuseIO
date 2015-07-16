@@ -1,6 +1,5 @@
 @extends('app')
 
 @section('content')
-    <h2>Create Ticket</h2>
-
-@endsection
+    <h1 class="page-header">Create Ticket</h1>
+@stop
