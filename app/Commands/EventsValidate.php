@@ -68,8 +68,26 @@ class EventsValidate extends Command implements SelfHandling
             }
 
             // check valid Type
+            $validType = false;
+            foreach (Lang::get('types.type') as $typeID => $type) {
+                if ($type['name'] == $event['type']) {
+                    $validType = true;
+                }
+            }
+            if ($validType !== true) {
+                return $this->failed('Invalid type used');
+            }
 
             // Check valid Class
+            $validClass = false;
+            foreach (Lang::get('classifications') as $classID => $class) {
+                if ($class['name'] == $event['class']) {
+                    $validClass = true;
+                }
+            }
+            if ($validClass !== true) {
+                return $this->failed('Invalid classification used');
+            }
 
             // Check if information is json encoded
 
