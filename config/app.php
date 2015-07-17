@@ -147,6 +147,7 @@ return [
         'AbuseIO\Providers\ConfigServiceProvider',
         'AbuseIO\Providers\EventServiceProvider',
         'AbuseIO\Providers\RouteServiceProvider',
+        'AbuseIO\Providers\ParserconfigServiceProvider',
         'Chumper\Zipper\ZipperServiceProvider',
 
         /*
