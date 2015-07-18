@@ -122,12 +122,12 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         }
 
         if ($result !== false && $result['errorStatus'] === true) {
-            Log::error(get_class($parser).': Parser as ended with errors ! : ' . $result['errorMessage']);
+            Log::error(get_class($parser).': Parser has ended with errors ! : ' . $result['errorMessage']);
             $this->exception();
         } else {
             Log::info(
                 get_class($parser)
-                . ': Parser as ended without errors. Collected ' . count($result['data']) . ' events to save'
+                . ': Parser has ended without errors. Collected ' . count($result['data']) . ' events to save'
             );
             $events = $result['data'];
         }
@@ -137,10 +137,10 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         $return = $validator->handle();
 
         if ($return['errorStatus'] === true) {
-            Log::error(get_class($validator).': Validator as ended with errors ! : ' . $return['errorMessage']);
+            Log::error(get_class($validator).': Validator has ended with errors ! : ' . $return['errorMessage']);
             $this->exception();
         } else {
-            Log::info(get_class($validator).': Validator as ended without errors');
+            Log::info(get_class($validator).': Validator has ended without errors');
         }
 
         // save evidence into table
@@ -157,10 +157,10 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         $return = $saver->handle();
 
         if ($return['errorStatus'] === true) {
-            Log::error(get_class($saver).': Saver as ended with errors ! : ' . $return['errorMessage']);
+            Log::error(get_class($saver).': Saver has ended with errors ! : ' . $return['errorMessage']);
             $this->exception();
         } else {
-            Log::info(get_class($saver).': Saver as ended without errors');
+            Log::info(get_class($saver).': Saver has ended without errors');
         }
 
     }
