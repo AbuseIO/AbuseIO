@@ -86,6 +86,7 @@
                 <dd>{{ $ticket->ip_contact_rpc_key }}</dd>
             </dl>
 
+            @if ( $ticket->domain_contact_reference )
             <h4>Domain contact:</h4>
             <dl class="dl-horizontal">
                 <dt>Reference</dt>
@@ -103,6 +104,7 @@
                 <dt>RPC Key</dt>
                 <dd>{{ $ticket->domain_contact_rpc_key }}</dd>
             </dl>
+            @endif
         </div>
         <div id="events" class="tab-pane fade">
         @if ( !$ticket->events->count() )
