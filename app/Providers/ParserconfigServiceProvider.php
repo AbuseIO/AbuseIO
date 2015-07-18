@@ -16,11 +16,13 @@ class ParserconfigServiceProvider extends ServiceProvider
     public function boot()
     {
         // Publish config files of all installed Parsers
+        // All parser configs we will put into the master 'parsers' tree of the config
+        // So we can easily walk through all of them based on the active configuration
         $parserList = Factory::getParsers();
         foreach ($parserList as $parser) {
             $this->mergeConfigFrom(
                 base_path().'/vendor/abuseio/parser-'.strtolower($parser)."/config/{$parser}.php",
-                $parser
+                'parsers' . $parser
             );
         }
     }
