@@ -22,7 +22,7 @@ class ParserconfigServiceProvider extends ServiceProvider
         foreach ($parserList as $parser) {
             $this->mergeConfigFrom(
                 base_path().'/vendor/abuseio/parser-'.strtolower($parser)."/config/{$parser}.php",
-                'parsers' . $parser
+                'parsers.' . $parser
             );
         }
     }
