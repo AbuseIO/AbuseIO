@@ -1,0 +1,43 @@
+Date: Tue, 17 Mar 2015 20:28:33 +0100
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <7adbac58ddea6e73f8eb60a57532eaa6@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_7adbac58ddea6e73f8eb60a57532eaa6"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_nat_pmp Report: 2015-01-01
+
+--b1_7adbac58ddea6e73f8eb60a57532eaa6
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_7adbac58ddea6e73f8eb60a57532eaa6
+Content-Type: application/octet-stream; name="2015-01-01-scan_nat_pmp-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2015-01-01-scan_nat_pmp-sample-asn.csv.zip
+
+UEsDBBQAAAAIABGbcUaTQGXECgIAAJYEAAAmABwAMjAxNS0wMS0wMS1zY2FuX25hdF9wbXAtc2Ft
+cGxlLWFzbi5jc3ZVVAkAA2JxCFVicQhVdXgLAAEEAAAAAAQAAAAAjZPNjptADIDv+xQoZ7DmB5iZ
+vU12KUlFoYKkh14qlswmSAkgoKvu29eTVVqFhKoHe4zH2B+2WYz1yQxjeeoW7qK2quvbsa3aozXb
+fsTj0A5jU54MmmO5R/1m+qFuG7TKweq9aVH3Zv/hrOrxHY+mrKsBz6GuULdd1e5sip+dLYmG+TWa
+vimPP7Dsw4IR6nuUeVQ5RDwS+RgojKFCgAKqUEJiX94hYsADer7yFIajhAR2wxFGczRDB40Z4aU/
+A4xeZz+MuEyESrmLZY7uQmfOV71NMrSTLI9SjSmpZJS4ggufBi5l0mVKcDIFmMNUPrDABw5UTCgP
+HvfQCSVnDLq+foOX8tAc2lcYzDWi9AVHuAi9sf6WRMssjwsn0enFYYPImU1yKUMiJnVneyhDoNyH
+QGIYmzRRhh7eeYFESgZDZ8zuHar2BOW0g0wxrKhtB5fbKM0KR6/zqMDHJ11sosTeXAAFpb4QN6Vn
+CamAEEOIABqIK8IrBh9zYTnbEZ2utms8V9GnaH2nM5OU871REBCglALjar4yk2Eo7+zPZ739W5wK
+RRkPbrL+czAEhUng8s5gCAqTHpe4NK9wat9q/FN7qI7Xo8GdRbanBL15FK+z1PkSbfLMeY6cQqeb
+tY6zM/bF/MPLlM9YcAMyPyZcNBoCo9jY8L/GFG91Gj9naWwBVlH6HeXutK4yP/wGUEsBAh4DFAAA
+AAgAEZtxRpNAZcQKAgAAlgQAACYAGAAAAAAAAQAAAKSBAAAAADIwMTUtMDEtMDEtc2Nhbl9uYXRf
+cG1wLXNhbXBsZS1hc24uY3N2VVQFAANicQhVdXgLAAEEAAAAAAQAAAAAUEsFBgAAAAABAAEAbAAA
+AGoCAAAAAA==
+
+
+--b1_7adbac58ddea6e73f8eb60a57532eaa6--

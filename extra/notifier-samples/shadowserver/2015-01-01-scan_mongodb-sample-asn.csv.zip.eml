@@ -1,0 +1,33 @@
+Date: Tue, 17 Mar 2015 20:28:33 +0100
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <4c3ca739007ed992584c7b682ba9bbd2@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_4c3ca739007ed992584c7b682ba9bbd2"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_mongodb-sample Report: 2015-01-01
+
+--b1_4c3ca739007ed992584c7b682ba9bbd2
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_4c3ca739007ed992584c7b682ba9bbd2
+Content-Type: application/octet-stream; name="2015-01-01-scan_mongodb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2015-01-01-scan_mongodb-sample-asn.csv.zip
+
+UEsDBAoAAAAAABGbcUYAAAAAAAAAAAAAAAAmABwAMjAxNS0wMS0wMS1zY2FuX21vbmdvZGItc2Ft
+cGxlLWFzbi5jc3ZVVAkAA2JxCFVicQhVdXgLAAEEAAAAAAQAAAAAUEsBAh4DCgAAAAAAEZtxRgAA
+AAAAAAAAAAAAACYAGAAAAAAAAAAAAKSBAAAAADIwMTUtMDEtMDEtc2Nhbl9tb25nb2RiLXNhbXBs
+ZS1hc24uY3N2VVQFAANicQhVdXgLAAEEAAAAAAQAAAAAUEsFBgAAAAABAAEAbAAAAGAAAAAAAA==
+
+
+--b1_4c3ca739007ed992584c7b682ba9bbd2--

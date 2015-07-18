@@ -1,0 +1,43 @@
+Date: Tue, 17 Mar 2015 20:28:33 +0100
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <de95af053d26f716b3a35d921fdee794@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_de95af053d26f716b3a35d921fdee794"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ntpmonitor-sample Report: 2015-01-01
+
+--b1_de95af053d26f716b3a35d921fdee794
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_de95af053d26f716b3a35d921fdee794
+Content-Type: application/octet-stream; name="2015-01-01-scan_ntpmonitor-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2015-01-01-scan_ntpmonitor-sample-asn.csv.zip
+
+UEsDBBQAAAAIABGbcUaAZQQFMgIAAKoEAAApABwAMjAxNS0wMS0wMS1zY2FuX250cG1vbml0b3It
+c2FtcGxlLWFzbi5jc3ZVVAkAA2JxCFVicQhVdXgLAAEEAAAAAAQAAAAAlVNRb9owEH7fr4jywotj
++RwHO30z4BaPkERxMlTeEEVttJUgyB62X79zqLTSFaRJiX2+s7+78/c57NvX3anfvB5CErZ+OBy7
+vtt2P7zZHXucXrpTv9+87rxns/2+609ondrf3rE57XF83nU4HnfPbeeX27b/FX4JOQMRMREBD5i6
+E/EdAAY5KApjoImkEpc/nzAp8HgIRBiIEhlJ+tLud33UHs4GxR93MSIEYyQWY07CeoWn65G20Urn
+3tS2NPZqWkgZBRhTiBmV7H1iIggkAgfOE8QtDQbLqvhm86nVwcwEmV1q9A3TZ/DcwzNFOXDKcQZx
+0RjhJEk5kQwUCRuHoaV1rmgqi+ZC5067YGrrx6vYCigXCVYuqLgABsK5IImIseyJL3tSNc6ZzAXz
+orifudrMTGa/LoIHszKufrfheh8gaIy5AD/2SbL/vvsBVDHsACg2wMVH1HisCMhUChLaGcZcs9S1
+qXTQ1Lry9740M0xy/eJTCjIeJAX8UlFPXk7opO324FV0QFEDUYxAjN0hyxluX1mTLYqyyNzCDtQX
+6/xGPo4a4tjIWFKRfKBZMWwlBSbfeEaS63kw1VWR2XyQkF6Y21zj4UGiKSqVqdsymurM3hdVbj20
+03lwX2nUrJsWn8LHuEvKMxHq8u2RBMn1L0ulCZCwagZAm9dBaZALN2mqh3Pd//qv5kLSlUBu8L7Y
+R9IBXxokMvat+OrXuiwqux4tdFBMMu3q0V/nfD1/xIf3B1BLAQIeAxQAAAAIABGbcUaAZQQFMgIA
+AKoEAAApABgAAAAAAAEAAACkgQAAAAAyMDE1LTAxLTAxLXNjYW5fbnRwbW9uaXRvci1zYW1wbGUt
+YXNuLmNzdlVUBQADYnEIVXV4CwABBAAAAAAEAAAAAFBLBQYAAAAAAQABAG8AAACVAgAAAAA=
+
+
+--b1_de95af053d26f716b3a35d921fdee794--
