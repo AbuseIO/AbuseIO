@@ -62,7 +62,8 @@
                 <dd>
                     {!! link_to(
                         "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference),
-                        "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference)
+                        'http://' . Request::server('SERVER_NAME') . "/ash/collect/$ticket->id/"
+                         . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference)
                     ) !!}
                 </dd>
             </dl>
