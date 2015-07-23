@@ -15,38 +15,31 @@ class ContactsController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
      * @return Response
      */
     public function index()
     {
-
         $contacts = Contact::paginate(10);
 
         return view('contacts.index')
             ->with('contacts', $contacts);
-
     }
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return Response
      */
     public function create()
     {
         return view('contacts.create');
-
     }
 
     /**
      * Export listing to CSV format.
-     *
      * @return Response
      */
     public function export()
     {
-
         $contacts  = Contact::all();
 
         $columns = [
@@ -82,70 +75,56 @@ class ContactsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
      * @return Response
      */
     public function store(ContactFormRequest $contact)
     {
-
         $input = Input::all();
-
         Contact::create($input);
 
         return Redirect::route('admin.contacts.index')
             ->with('message', 'Contact has been created');
-
     }
 
     /**
      * Display the specified resource.
-     *
      * @param  int  $id
      * @return Response
      */
     public function show(Contact $contact)
     {
-
         return view('contacts.show')
             ->with('contact', $contact);
-
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
      * @param  int  $id
      * @return Response
      */
     public function edit(Contact $contact)
     {
-
         return view('contacts.edit')
             ->with('contact', $contact);
-
     }
 
     /**
      * Update the specified resource in storage.
-     *
      * @param  int  $id
      * @return Response
      */
     public function update(Contact $contact)
     {
-
         $input = array_except(Input::all(), '_method');
 
         $contact->update($input);
 
         return Redirect::route('admin.contacts.show', $contact->id)
             ->with('message', 'Contact has been updated.');
-
     }
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return Response
      */
@@ -158,6 +137,7 @@ class ContactsController extends Controller
                 . " domain(s) is stil pointing to this contact."
             );
         }
+
         if ($contact->netblocks->count() > 0) {
             return Redirect::route('admin.contacts.index')->with(
                 'message',
@@ -170,6 +150,5 @@ class ContactsController extends Controller
 
         return Redirect::route('admin.contacts.index')
             ->with('message', 'Contact has been deleted.');
-
     }
 }

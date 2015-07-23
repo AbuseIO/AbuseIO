@@ -8,39 +8,30 @@ use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Event;
 use AbuseIO\Commands\FindContact;
 use AbuseIO\Models\Evidence;
-use ICF;
-use DB;
 use Lang;
 use Log;
 
 class EventsSave extends Command implements SelfHandling
 {
-
     public $events;
     public $evidenceID;
 
     /**
      * Create a new command instance.
-     *
      * @return void
      */
     public function __construct($events, $evidenceID)
     {
-
         $this->events       = $events;
-
         $this->evidenceID   = $evidenceID;
-
     }
 
     /**
      * Execute the command.
-     *
      * @return array
      */
     public function handle()
     {
-
         foreach ($this->events as $event) {
             /* Here we will thru all the events and look if these is an existing ticket. We will split them up into
              * two seperate arrays: $eventsNew and $events$known. We can save all the known events in the DB with
@@ -83,19 +74,17 @@ class EventsSave extends Command implements SelfHandling
             // Search to see if there is an existing ticket for this event classification
             // Todo: somehow add the domain too!!!!
 
-            $search = Ticket::
-                  where('ip', '=', $event['ip'])
-                ->where('class_id', '=', $event['class'], 'AND')
-                ->where('type_id', '=', $event['type'], 'AND')
-                ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
-                ->where('status_id', '!=', 2, 'AND')
-                ->get();
+            $search = Ticket::where('ip', '=', $event['ip'])
+                        ->where('class_id', '=', $event['class'], 'AND')
+                        ->where('type_id', '=', $event['type'], 'AND')
+                        ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
+                        ->where('status_id', '!=', 2, 'AND')
+                        ->get();
 
             if ($search->count() === 0) {
                 // Build an array with all new tickes and save it with its related event and evidence link.
 
                 $newTicket = new Ticket;
-
                 $newTicket->ip                         = $event['ip'];
                 $newTicket->domain                     = $event['domain'];
                 $newTicket->class_id                   = $event['class'];
@@ -116,16 +105,14 @@ class EventsSave extends Command implements SelfHandling
                     $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
                 }
 
-                $newTicket->status_id                  = 1;
-                $newTicket->notified_count             = 0;
-                $newTicket->last_notify_count          = 0;
-                $newTicket->last_notify_timestamp      = 0;
+                $newTicket->status_id               = 1;
+                $newTicket->notified_count          = 0;
+                $newTicket->last_notify_count       = 0;
+                $newTicket->last_notify_timestamp   = 0;
 
                 $newTicket->save();
 
-
                 $newEvent  = new Event;
-
                 $newEvent->evidence_id = $this->evidenceID;
                 $newEvent->information = $event['information'];
                 $newEvent->source      = $event['source'];
@@ -139,12 +126,11 @@ class EventsSave extends Command implements SelfHandling
             } elseif ($search->count() === 1) {
                 $ticketID = $search[0]->id;
 
-                if (Event::
-                      where('information', '=', $event['information'])
-                    ->where('source', '=', $event['source'])
-                    ->where('ticket_id', '=', $ticketID)
-                    ->where('timestamp', '=', $event['timestamp'])
-                    ->exists()
+                if (Event::where('information', '=', $event['information'])
+                        ->where('source', '=', $event['source'])
+                        ->where('ticket_id', '=', $ticketID)
+                        ->where('timestamp', '=', $event['timestamp'])
+                        ->exists()
                 ) {
                     Log::warning(get_class($this).' Ignoring exact duplicent event');
 
@@ -152,12 +138,11 @@ class EventsSave extends Command implements SelfHandling
                     // New unique event, so we will save this
 
                     $newEvent = new Event;
-
-                    $newEvent->evidence_id = $this->evidenceID;
-                    $newEvent->information = $event['information'];
-                    $newEvent->source = $event['source'];
-                    $newEvent->ticket_id = $ticketID;
-                    $newEvent->timestamp = $event['timestamp'];
+                    $newEvent->evidence_id  = $this->evidenceID;
+                    $newEvent->information  = $event['information'];
+                    $newEvent->source       = $event['source'];
+                    $newEvent->ticket_id    = $ticketID;
+                    $newEvent->timestamp    = $event['timestamp'];
 
                     $newEvent->save();
 
@@ -169,10 +154,7 @@ class EventsSave extends Command implements SelfHandling
             } else {
                 $this->failed('Unable to link to ticket, multiple open tickets found for same event type');
             }
-
         }
-
         $this->success('');
-
     }
 }

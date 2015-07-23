@@ -1,9 +1,11 @@
 <?php
+
+// Set language
 App::setLocale(Config::get('main.interface.language'));
 
 Route::group(
     [
-    'prefix' => 'admin'
+        'prefix' => 'admin'
     ],
     function () {
 
@@ -69,7 +71,7 @@ Route::group(
 
 Route::group(
     [
-    'prefix' => 'ash',
+        'prefix' => 'ash',
     ],
     function () {
         Route::get('/collect/{ticketID}/{token}', 'AshController@index');
@@ -78,7 +80,7 @@ Route::group(
 
 Route::group(
     [
-    'prefix' => 'api',
+        'prefix' => 'api',
     ],
     function () {
 

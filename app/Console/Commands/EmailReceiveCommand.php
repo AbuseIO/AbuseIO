@@ -1,4 +1,6 @@
-<?php namespace AbuseIO\Console\Commands;
+<?php
+
+namespace AbuseIO\Console\Commands;
 
 use AbuseIO\Commands\EmailProcess;
 use Illuminate\Console\Command;
@@ -12,26 +14,22 @@ use Carbon;
 
 class EmailReceiveCommand extends Command
 {
-
     use DispatchesJobs;
 
     /**
      * The console command name.
-     *
      * @var string
      */
     protected $name = 'email:receive';
 
     /**
      * The console command description.
-     *
      * @var string
      */
     protected $description = 'Parses an incoming email into abuse events.';
 
     /**
      * Create a new command instance.
-     *
      * @return void
      */
     public function __construct()
@@ -46,13 +44,10 @@ class EmailReceiveCommand extends Command
      */
     public function fire()
     {
-
         Log::info(get_class($this).': Being called upon to receive an incoming e-mail');
 
         if ($this->option('debug') === true) {
-
             Log::debug(get_class($this).': Debug mode has been enabled');
-
         }
 
         // Read from stdin (should be piped from cat or MDA)
@@ -60,9 +55,7 @@ class EmailReceiveCommand extends Command
         $rawEmail = "";
 
         while (!feof($fd)) {
-
             $rawEmail .= fread($fd, 1024);
-
         }
 
         fclose($fd);
@@ -74,34 +67,25 @@ class EmailReceiveCommand extends Command
         $filename   = $path . $file;
 
         if (!$filesystem->isDirectory($path)) {
-
             // If a datefolder does not exist, then create it or die trying
             if (!$filesystem->makeDirectory($path)) {
-
                 Log::error(get_class($this).': Unable to create directory: ' . $path);
                 $this->exception($rawEmail);
-
             }
-
         }
 
         if ($filesystem->isFile($path . $file)) {
-
             Log::error(get_class($this).': File aready exists: ' . $filename);
             $this->exception($rawEmail);
-
         }
 
         if ($filesystem->put($path . $file, $rawEmail) === false) {
-
             Log::error(get_class($this).': Unable to write file: ' . $filename);
 
             $this->exception($rawEmail);
-
         }
 
         if ($this->option('debug') === true) {
-
             // In debug mode we don't queue the job
             Log::debug(get_class($this).': Directly handling message file: ' . $filename);
 
@@ -109,55 +93,43 @@ class EmailReceiveCommand extends Command
             $processer->handle();
 
         } else {
-
             Log::info(get_class($this).': Pushing incoming email into queue file: ' . $filename);
             $this->dispatch(new EmailProcess($filename));
 
         }
 
         Log::info(get_class($this).': Successfully received the incoming e-mail');
-
     }
 
     /**
      * Get the console command arguments.
-     *
      * @return array
      */
     protected function getArguments()
     {
-
-        return
-            [
-
-            ];
-
+        return [ ];
     }
 
     /**
      * Get the console command options.
-     *
      * @return array
      */
     protected function getOptions()
     {
-
         // TODO: logging to console instead in addition to logfile
-        return
+        return [
             [
-                [
-                    'debug',
-                    'd',
-                    InputOption::VALUE_OPTIONAL,
-                    'Enable debugging while pushing e-mail from CLI.',
-                    true
-                ],
-            ];
+                'debug',
+                'd',
+                InputOption::VALUE_OPTIONAL,
+                'Enable debugging while pushing e-mail from CLI.',
+                true
+            ],
+        ];
     }
 
     /**
      * We've hit a snag, so we are gracefully killing ourselves after we contact the admin about it.
-     *
      * @return mixed
      */
     protected function exception($rawEmail)
@@ -168,7 +140,6 @@ class EmailReceiveCommand extends Command
         );
 
         // TODO: send the rawEmail back to admin
-
         dd($rawEmail);
 
         Mail::queueOn(
@@ -176,13 +147,9 @@ class EmailReceiveCommand extends Command
             'emails.bounce',
             '',
             function ($message) {
-
                 $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailProcess');
-
                 $message->to(Config::get('main.emailparser.fallback_mail'));
-
             }
         );
-
     }
 }

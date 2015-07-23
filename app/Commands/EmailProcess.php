@@ -53,7 +53,6 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-
         Log::info(get_class($this).': Queued worker is starting the processing of email file: ' . $this->filename);
 
         $filesystem = new Filesystem;
@@ -118,17 +117,22 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
                 . ': Unable to handle message from: ' . $parsedMail->getHeader('from')
                 . ' with subject: ' . $parsedMail->getHeader('subject')
             );
+
             $this->exception();
         }
 
         if ($result !== false && $result['errorStatus'] === true) {
-            Log::error(get_class($parser).': Parser has ended with errors ! : ' . $result['errorMessage']);
+            Log::error(
+                get_class($parser).': Parser has ended with errors ! : ' . $result['errorMessage']
+            );
+
             $this->exception();
         } else {
             Log::info(
                 get_class($parser)
                 . ': Parser has ended without errors. Collected ' . count($result['data']) . ' events to save'
             );
+
             $events = $result['data'];
         }
 
@@ -137,7 +141,10 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         $return = $validator->handle();
 
         if ($return['errorStatus'] === true) {
-            Log::error(get_class($validator).': Validator has ended with errors ! : ' . $return['errorMessage']);
+            Log::error(
+                get_class($validator).': Validator has ended with errors ! : ' . $return['errorMessage']
+            );
+
             $this->exception();
         } else {
             Log::info(get_class($validator).': Validator has ended without errors');
@@ -157,17 +164,23 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         $return = $saver->handle();
 
         if ($return['errorStatus'] === true) {
-            Log::error(get_class($saver).': Saver has ended with errors ! : ' . $return['errorMessage']);
+            Log::error(
+                get_class($saver).': Saver has ended with errors ! : ' . $return['errorMessage']
+            );
+
             $this->exception();
         } else {
             Log::info(get_class($saver).': Saver has ended without errors');
         }
-
     }
 
     /**
      * We've hit a snag, so we are gracefully killing ourselves
      * after we contact the admin about it.
+     **/
+
+    /**
+     * Throw an exception
      * @return void
      */
     protected function exception()

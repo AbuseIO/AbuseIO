@@ -10,33 +10,29 @@ use Log;
 
 class EventsValidate extends Command implements SelfHandling
 {
-
     public $events;
 
     /**
      * Create a new command instance.
-     *
      * @return void
      */
     public function __construct($events)
     {
-
         $this->events = $events;
-
     }
 
     /**
      * Execute the command.
-     *
      * @return array
      */
     public function handle()
     {
-
         foreach ($this->events as $event) {
-
-            // TODO - implement a lot of validation here
-            // TODO - Requires some extending validation rules http://laravel.com/docs/4.2/validation#custom-validation-rules
+            /**
+             *  TODO - implement a lot of validation here
+             *  TODO - Requires some extending validation rules
+             *  http://laravel.com/docs/4.2/validation#custom-validation-rules
+             */
 
             // Check valid IP
             $validator = Validator::make(
@@ -47,6 +43,7 @@ class EventsValidate extends Command implements SelfHandling
                     'ip' => 'required|ip',
                 ]
             );
+
             if ($validator->fails()) {
                 $messages = $validator->messages();
 
@@ -59,12 +56,10 @@ class EventsValidate extends Command implements SelfHandling
 
             // check valid domain name
             if ($event['domain'] !== false) {
-
             }
 
             // check valid URI
             if ($event['uri'] !== false) {
-
             }
 
             // check valid Type
@@ -94,8 +89,6 @@ class EventsValidate extends Command implements SelfHandling
             // This any failed, we call a $this->failed($message)
 
         }
-
         return $this->success('');
-
     }
 }

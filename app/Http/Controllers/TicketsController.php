@@ -15,8 +15,7 @@ class TicketsController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     *
+     * Display all tickets
      * @return Response
      */
     public function index()
@@ -27,6 +26,10 @@ class TicketsController extends Controller
             ->with('tickets', $tickets);
     }
 
+    /**
+     * Display all open tickets
+     * @return Response
+     */
     public function statusOpen()
     {
         $tickets = Ticket::where('status_id', 1)->paginate(10);
@@ -34,6 +37,10 @@ class TicketsController extends Controller
             ->with('tickets', $tickets);
     }
 
+    /**
+     * Display all closed tickets
+     * @return Response
+     */
     public function statusClosed()
     {
         $tickets = Ticket::where('status_id', 2)->paginate(10);
@@ -42,8 +49,7 @@ class TicketsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
+     * Show the form for creating a ticket
      * @return Response
      */
     public function create()
@@ -54,8 +60,7 @@ class TicketsController extends Controller
     }
 
     /**
-     * Export listing to CSV format.
-     *
+     * Export tickets to CSV format.
      * @return Response
      */
     public function export()
@@ -82,8 +87,7 @@ class TicketsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * Store a newly created ticket in storage.
      * @return Response
      */
     public function store(TicketsFormRequest $ticket)
@@ -96,8 +100,7 @@ class TicketsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
+     * Display the specified ticket.
      * @param  int  $id
      * @return Response
      */
@@ -110,49 +113,40 @@ class TicketsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
+     * Show the form for editing the specified ticket.
      * @param  int  $id
      * @return Response
      */
     public function edit(Ticket $ticket)
     {
-
         //only allowed in debug mode or something
         //return view('tickets.edit')->with('ticket', $ticket);
-
     }
 
     /**
      * Update the specified resource in storage.
-     *
      * @param  int  $id
      * @return Response
      */
     public function update(Ticket $ticket)
     {
-
         //only allowed in debug mode or something
         //$input = array_except(Input::all(), '_method');
         //$ticket->update($input);
         //
         //return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');
-
     }
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return Response
      */
     public function destroy(Ticket $ticket)
     {
-
         //only allowed in debug mode or something
         //$ticket->delete();
         //
         //return Redirect::route('admin.tickets.index')->with('message', 'Ticket has been deleted.');
-
     }
 }
