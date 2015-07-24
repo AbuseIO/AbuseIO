@@ -123,7 +123,7 @@ class EmailReceiveCommand extends Command
                 'd',
                 InputOption::VALUE_OPTIONAL,
                 'Enable debugging while pushing e-mail from CLI.',
-                true
+                false
             ],
         ];
     }
