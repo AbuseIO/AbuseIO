@@ -124,6 +124,8 @@ class EventsSave extends Command implements SelfHandling
                 // Call notifier action handler, type new
 
             } elseif ($search->count() === 1) {
+                // This is an existing ticket
+
                 $ticketID = $search[0]->id;
 
                 if (Event::where('information', '=', $event['information'])
@@ -144,12 +146,11 @@ class EventsSave extends Command implements SelfHandling
                     $newEvent->ticket_id    = $ticketID;
                     $newEvent->timestamp    = $event['timestamp'];
 
+                    // TODO - look into combining this as a whole
                     $newEvent->save();
 
                     // Call notifier action handler, type update
                 }
-
-                // This is an existing ticket
 
             } else {
                 $this->failed('Unable to link to ticket, multiple open tickets found for same event type');
