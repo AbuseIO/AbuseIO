@@ -42,11 +42,8 @@ return [
             '/@junkemailfilter.com/'                => 'junkemailfilter_com',
             '/@r.iecc.com/'                         => 'iecc_com',
             '/abuse@clean-mx.de/'                   => 'cleanmx_de',
-            '/@USGOabuse.net/'                      => 'usgoabuse',
-            '/abuse-reports@cyscon.de/'             => 'cyscon',
             '/takedown-response.*@netcraft.com/'    => 'netcraft',
             '/noreply@spamlogin.com/'               => 'spamexperts',
-            '/reports@reports.abusehub.nl/'         => 'abusehub',
         ],
         'body_map'                          => [
             '/User-Agent: Spampanel/'               => 'spamexperts',
