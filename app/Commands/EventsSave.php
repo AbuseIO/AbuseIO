@@ -69,6 +69,8 @@ class EventsSave extends Command implements SelfHandling
 
             if ($event['domain'] != '') {
                 $domainContact = FindContact::byDomain($event['domain']);
+            } else {
+                $domainContact = '';
             }
 
             // Search to see if there is an existing ticket for this event classification
