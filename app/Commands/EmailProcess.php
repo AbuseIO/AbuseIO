@@ -163,6 +163,10 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         $saver = new EventsSave($events, $evidence->id);
         $return = $saver->handle();
 
+        /**
+         * We've hit a snag, so we are gracefully killing ourselves
+         * after we contact the admin about it.
+         **/
         if ($return['errorStatus'] === true) {
             Log::error(
                 get_class($saver).': Saver has ended with errors ! : ' . $return['errorMessage']
@@ -172,12 +176,10 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         } else {
             Log::info(get_class($saver).': Saver has ended without errors');
         }
+
+        Log::info(get_class($this).': Queued worker has ended the processing of email file: ' . $this->filename);
     }
 
-    /**
-     * We've hit a snag, so we are gracefully killing ourselves
-     * after we contact the admin about it.
-     **/
 
     /**
      * Throw an exception
