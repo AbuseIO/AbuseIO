@@ -15,6 +15,7 @@ use AbuseIO\Commands\EventsValidate;
 use AbuseIO\Commands\EventsSave;
 use Config;
 use Log;
+use Mail;
 
 class EmailProcess extends Command implements SelfHandling, ShouldQueue
 {
@@ -165,7 +166,8 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
 
         /**
          * We've hit a snag, so we are gracefully killing ourselves
-         * after we contact the admin about it.
+         * after we contact the admin about it. EventsSave should never
+         * end with problems unless the mysql died while doing transactions
          **/
         if ($return['errorStatus'] === true) {
             Log::error(
@@ -194,19 +196,19 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
             get_class($this).': Ending with errors. The received e-mail will be deleted from '
             . 'archive and bounced to the admin for investigation'
         );
-        // TODO: send the rawmail back to admin and delete file
 
-        dd();
+        $filename = $this->filename;
 
+        // Send a e-mail to the admin about the failed parse attempt
         Mail::queueOn(
             'FailedProcessNotifications',
             'emails.bounce',
-            '',
-            function ($message) {
+            [ ],
+            function ($message) use ($filename) {
                 $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailProcess');
                 $message->to(Config::get('main.emailparser.fallback_mail'));
                 $message->attach(
-                    $this->filename,
+                    $filename,
                     [
                         'as' => 'failed_message.eml',
                         'mime' => 'message/rfc822',
@@ -214,5 +216,9 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
                 );
             }
         );
+
+        // Delete the evidence file as we are not using it.
+        $filesystem = new Filesystem;
+        $filesystem->delete($filename);
     }
 }
