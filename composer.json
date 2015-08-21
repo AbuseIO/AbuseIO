@@ -28,6 +28,7 @@
 		"abuseio/parser-spamexperts": "dev-master",
 		"abuseio/parser-usgo": "dev-master",
 		"abuseio/parser-webiron": "dev-master",
+        "abuseio/collector-common": "dev-master",
 		"barryvdh/laravel-ide-helper": "^2.0",
 		"pda/pheanstalk": "~3.0",
 		"ddeboer/data-import": "^0.18.0"
