@@ -95,7 +95,7 @@ To test your mail route, send a e-mail to notifier@your-MTA-domain.lan and if yo
 send a EML file into the parser using:
 
 ```bash
-cat file.eml | /usr/bin/php -q /opt/abuseio/artisan --env=local email:receive
+cat file.eml | /usr/bin/php -q /opt/abuseio/artisan --env=production email:receive
 ```
 
 Please note that using the 'cat' option might give you a difference with email bodies, for example with line 
@@ -105,7 +105,7 @@ always use the MTA address to validate your work!
 ### Postfix
  
 ```bash
-echo 'notifier: | "| /usr/bin/php -q /opt/abuseio/artisan --env=local email:parse"' >> /etc/aliasses
+echo 'notifier: | "| /usr/bin/php -q /opt/abuseio/artisan --env=production email:parse"' >> /etc/aliasses
 newaliasses
 ```
 
@@ -158,7 +158,7 @@ composer install
 Create the file /opt/abuseio/.env with the following hints:
 
 ```bash
-APP_ENV=local (change to production if needed)
+APP_ENV=production (change to development if needed)
 APP_DEBUG=true (change to false if needed)
 APP_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 DB_HOST=localhost
