@@ -88,18 +88,6 @@ function parse_cleanmx_de($message) {
     // Some reports don't contain an ARF report, but a table with abuse info
     } else if (preg_match_all('/\n\|([^\|]*)[ ]*\|([^\|]*)[ ]*\|([^\|]*)[ ]*\|([^\|]*)[ ]*\|([^\|]*)[ ]*\|([^\| \r\n]*)/',$message['body'],$regs)) {
         
-        // Class depends on mail subject
-        $subjectMap = array(
-            '/clean-mx-portals/'=>false, // Determine class based on report content
-            '/clean-mx-phishing/'=>'Phishing website',
-        );
-
-        foreach ($subjectMap as $regex => $class) {
-            if (preg_match($regex, $message['subject'])) {
-                break;
-            }
-        }
-
         // Convert regex results into a report array
         array_shift($regs);
         $reports = array();
@@ -110,24 +98,55 @@ function parse_cleanmx_de($message) {
             }
         }
 
-        // For portal reports (this is not a comprehensive list)
-        $portalMap = array(
-            'cleanmx_phish' => 'Phishing website',
-            'cleanmx_spamvertized' => 'Spamvertised web site',
-            'cleanmx_generic' => 'Compromised website',
-            'defaced_site' => 'Compromised website',
-            'cysc.blacklisted.file.gd_url_cloud' => 'Compromised website',
-            'JS/Decdec.psc' => 'Malware infection',
-            'HIDDENEXT/Worm.Gen' => 'Malware infection',
-            'unknown_html_RFI_php' => 'Compromised website',
+        // Detect report type
+        $subjectMap = array(
+            '/clean-mx-portals/'=>'portals',
+            '/clean-mx-viruses/'=>'viruses',
+            '/clean-mx-phishing/'=>'phishing',
         );
+        foreach ($subjectMap as $regex => $t) {
+            if (preg_match($regex, $message['subject'])) {
+                $type = $t;
+                break;
+            }
+        }
+        if (empty($type)) {
+            logger(LOG_ERR, __FUNCTION__ . " Unable to determine report type for subject: {$message['subject']}");
+            return false;
+        }
+
+        switch ($type) {
+
+            // Phishing reports only have one class
+            case 'phishing':
+                $class = 'Phishing website';
+                break;
+
+            // Portal report classes (this is not a comprehensive list)
+            case 'portals':
+                $classMap = array(
+                    'cleanmx_phish' => 'Phishing website',
+                    'cleanmx_spamvertized' => 'Spamvertised web site',
+                    'cleanmx_generic' => 'Compromised website',
+                    'defaced_site' => 'Compromised website',
+                    'cysc.blacklisted.file.gd_url_cloud' => 'Compromised website',
+                    'JS/Decdec.psc' => 'Malware infection',
+                    'HIDDENEXT/Worm.Gen' => 'Malware infection',
+                    'unknown_html_RFI_php' => 'Compromised website',
+                );
+                break;
+
+            // Handle all virus reports as malware infections
+            case 'viruses':
+                $class = 'Malware infection';
+                break;
+        }
 
         // Save reports
         foreach ($reports as $report) {
-
-            if (!empty($report['virusname'])) {
-                if (array_key_exists($report['virusname'],$portalMap)) {
-                    $class = $portalMap[$report['virusname']];
+            if ($type=='phishing') {
+                if (!empty($report['virusname']) && array_key_exists($report['virusname'],$classMap)) {
+                    $class = $classMap[$report['virusname']];
                 } else {
                     // Don't process unknown classes, log and continue with next report
                     logger(LOG_ERR, __FUNCTION__ . " Unable to determine portal class for {$report['virusname']}");
