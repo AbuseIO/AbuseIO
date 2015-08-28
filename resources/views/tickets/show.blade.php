@@ -132,7 +132,7 @@
                             @endforeach
                             </dl>
                         </td>
-                        <td><a href='{{ $event->evidences[0]->filename }}'>Download - View</a></td>
+                        <td><a href='{{ Request::url() }}/evidence/{{ $event->evidences[0]->filename }}'>{{ Lang::get('ash.communication.download') }}</a> - <a href="#">{{ Lang::get('ash.communication.view') }}</a></td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -140,32 +140,39 @@
         @endif
         </div>
         <div id="communication" class="tab-pane fade">
-            {!! Form::model(new AbuseIO\Models\Note) !!}
-                <div class="form-group">
-                    {!! Form::label('text', 'Reply:') !!}
-                    {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => 'Enter a reply to the customer', 'class' => 'form-control']) !!}
+            @if ( !$ticket->notes->count() )
+                <div class="alert alert-info">{{ Lang::get('ash.communication.noMessages') }}</div>
+            @else
+                @foreach ($ticket->notes as $note)
+                <div class="row">
+                    <div class="col-xs-11 {{ ($note->submitter != 'contact') ? 'col-xs-offset-1' : '' }}">
+                        <div class="panel panel-{{ ($note->submitter == 'contact') ? 'default' : 'primary' }}">
+                            <div class="panel-heading clearfix">
+                                <h3 class="panel-title pull-left">{{ Lang::get('ash.communication.responseFrom') }}: {{ Lang::get('ash.communication.'.$note->submitter) }}</h3>
+                                <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
+                            </div>
+                            <div class="panel-body">
+                                {{ htmlentities($note->text) }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    {!! Form::submit('Submit', ['class'=>'btn primary']) !!}
+                @endforeach
+            @endif
+            {!! Form::open(['method' => 'put']) !!}
+                <div class="row">
+                    <div class="col-xs-11 col-xs-offset-1">
+                        <div class="form-group">
+                            {!! Form::label('text', Lang::get('ash.communication.reply')) !!}
+                            {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => Lang::get('ash.communication.placeholder_admin'), 'class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::submit(Lang::get('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
+                        </div>
+                    </div>
                 </div>
             {!! Form::close() !!}
 
-            <h4>Previous communication</h4>
-            @if ( !$ticket->notes->count() )
-                <div class="alert alert-info">No interaction has been done yet</div>
-            @else
-                @foreach ($ticket->notes as $note)
-                    <div class="panel panel-{{ ($note->submitter == 'contact') ? 'default' : 'primary' }}">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"> Reponse from: {{ Lang::get('ash.communication.'.$note->submitter) }}</h3>
-                            <span class="pull-right">{{ $note->created_at }}</span>
-                        </div>
-                        <div class="panel-body">
-                            {{ htmlentities($note->text) }}
-                        </div>
-                    </div>
-                @endforeach
-            @endif
         </div>
     </div>
 @endsection

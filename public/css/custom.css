@@ -24,14 +24,3 @@ body { padding-top: 70px; }
 .nav-tabs {
     margin-bottom: 0;
 }
-
-/* marknl: Why is this here?
-.container {
-    padding-bottom: 20px;
-} */
-
-.panel-heading span
-{
-    margin-top: -18px;
-    margin-right: -9px;
-}

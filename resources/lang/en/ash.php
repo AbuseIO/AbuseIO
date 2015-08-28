@@ -48,20 +48,21 @@ return [
     ],
 
     'communication' => [
-        'header'                    => 'You can use the below form to reply to this ticket or implemented solution and close the ticket.',
-        'noMessages'                => 'No interaction has been done yet',
-        'reply'                     => 'Reply',
+        'header'                    => 'You can use the form below to reply to this ticket.',
+        'noMessages'                => 'No interaction has been done yet.',
         'placeholder'               => 'Use this text box to ask your question or your applied solution.',
-        'submit'                    => 'Submit',
+        'placeholder_admin'         => 'Enter a reply to the customer',
         'previousCommunication'     => 'Previous communication',
         'responseFrom'              => 'Response from',
         'contact'                   => 'Customer',
         'abusedesk'                 => 'Abusedesk',
-
+        'submit'                    => 'Submit',
+        'reply'                     => 'Reply',
+        'download'                  => 'Download',
+        'view'                      => 'View',
     ],
 
     'messages' => [
         'alertTest'                 => 'This is an alert message',
     ],
-
 ];

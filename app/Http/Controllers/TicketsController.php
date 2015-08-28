@@ -8,6 +8,7 @@ use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\TicketsFormRequest;
 use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Ticket;
+use AbuseIO\Models\Note;
 use Redirect;
 use Input;
 
@@ -124,17 +125,19 @@ class TicketsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified ticket in storage.
      * @param  int  $id
      * @return Response
      */
     public function update(Ticket $ticket)
     {
-        //only allowed in debug mode or something
-        //$input = array_except(Input::all(), '_method');
-        //$ticket->update($input);
-        //
-        //return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');
+        $note = new Note;
+        $note->ticket_id = $ticket->id;
+        $note->submitter = 'abusedesk';
+        $note->text = Input::get('text');
+        $note->save();
+
+        return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');
     }
 
     /**

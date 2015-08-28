@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ Lang::get('ash.title') }} {{ $ticket->id }}</title>
-
-    <link href="{{ asset('/css/custom.css')                 }}" rel="stylesheet">
-    <link href="{{ asset('/css/bootstrap.min.css')          }}" rel="stylesheet">
-    <link href="{{ asset('/css/bootstrap-theme.min.css')    }}" rel="stylesheet">
-
+    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 
 </head>
 <body>
-<div class="header_wrapper"><div class="container header"><img class="img-responsive" src="{{ asset('/images/logo.png') }}" alt=''/></div></div>
+<div class="header_wrapper">
+    <div class="container header"><img class="img-responsive" src="{{ asset('/images/logo_150.png') }}" alt='AbuseIO' /></div>
+</div>
 <div class="container">
     <h2>{{ Lang::get('ash.title') }} {{ $ticket->id }}</h2>
     <div class="panel panel-danger">
@@ -130,7 +130,7 @@
         <div id="resolved" class="tab-pane fade">
             <p>{{ Lang::get('ash.communication.header') }}</p>
 
-            {!! Form::model(new AbuseIO\Models\Note) !!}
+            {!! Form::model(['method' => 'put']) !!}
             <div class="form-group">
                 {!! Form::label('text', Lang::get('ash.communication.reply').':') !!}
                 {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => Lang::get('ash.communication.placeholder'), 'class' => 'form-control']) !!}
