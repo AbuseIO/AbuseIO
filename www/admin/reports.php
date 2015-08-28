@@ -13,12 +13,21 @@
     if(!empty($_GET['CustomerName']))   $filter .= " AND CustomerName like '%".mysql_escape_string($_GET['CustomerName'])."%'";
     if(!empty($_GET['Type']))           $filter .= " AND Type = '".mysql_escape_string($_GET['Type'])."'";
 
-    // Select only ABUSE type and OPEN status by default, unless we have other filter options
+    // Select only ABUSE type or INFO type which are being actively scanned for and used for DDoS attacks and which have OPEN status by default, unless we have other filter options
     if (empty($filter)) {
         $interval_info_after  = strtotime(NOTIFICATIONS_INFO_INTERVAL . " ago");
         $interval_abuse_after = strtotime(NOTIFICATIONS_ABUSE_INTERVAL . " ago");
+        $filtered_classes = array(
+            'Open DNS Resolver',
+            'Open NTP Server',
+            'Open SSDP Server',
+            'Open Microsoft SQL Server',
+            'Open ElasticSearch Server',
+            'Open Chargen Server',
+            'Open SNMP Server',
+        );
 
-        $filter .= " AND (Type = 'ABUSE' OR (Type != 'ABUSE' AND NotifiedCount = 0 AND CustomerIgnored = 0 AND ReportCount != LastNotifyReportCount AND LastNotifyTimestamp <= ${interval_info_after})) AND Status = 'OPEN'";
+        $filter .= " AND ((Type = 'ABUSE' OR Class IN ('".implode("','",$filtered_classes)."')) OR (Type != 'ABUSE' AND NotifiedCount = 0 AND ReportCount != LastNotifyReportCount AND LastNotifyTimestamp <= ${interval_info_after})) AND Status = 'OPEN'";
     }
 
     if(!empty($_GET['Page']) && is_numeric($_GET['Page'])) { $page = $_GET['Page']; } else { $page = 1; }
