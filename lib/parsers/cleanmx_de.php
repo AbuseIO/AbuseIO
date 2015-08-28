@@ -110,10 +110,16 @@ function parse_cleanmx_de($message) {
             }
         }
 
-        // For portal reports
+        // For portal reports (this is not a comprehensive list)
         $portalMap = array(
             'cleanmx_phish' => 'Phishing website',
-            'cleanmx_spamvertized' => 'Spamvertised web site'
+            'cleanmx_spamvertized' => 'Spamvertised web site',
+            'cleanmx_generic' => 'Compromised website',
+            'defaced_site' => 'Compromised website',
+            'cysc.blacklisted.file.gd_url_cloud' => 'Compromised website',
+            'JS/Decdec.psc' => 'Malware infection',
+            'HIDDENEXT/Worm.Gen' => 'Malware infection',
+            'unknown_html_RFI_php' => 'Compromised website',
         );
 
         // Save reports
