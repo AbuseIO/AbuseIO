@@ -502,9 +502,9 @@ return [
             <a target'_blank' href='http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf' http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf</a><br>
             <a target'_blank' href='http://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
             <a target'_blank' href='http://www.ripe.net/ripe/meetings/ripe-52/presentations/ripe52-plenary-dnsamp.pdf' http://www.ripe.net/ripe/meetings/ripe-52/presentations/ripe52-plenary-dnsamp.pdf</a><br>
-            <a target'_blank' href='http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf' http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf</a><br>
-            <a target'_blank' href='http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification' http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification</a><br>
-            <a target'_blank' href='http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf' http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf</a><br>
+            <a target'_blank' href='http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf'>http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf</a><br>
+            <a target'_blank' href='http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification'>http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification</a><br>
+            <a target'_blank' href='http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf'>http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf</a><br>
 
             "
     ],
