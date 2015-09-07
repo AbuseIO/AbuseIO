@@ -148,8 +148,14 @@
 
                     <div class="panel panel-{{ ($note->submitter == 'contact') ? 'default' : 'primary' }}">
 
-                        <div class="panel-heading"><h3 class="panel-title"> {{ Lang::get('ash.communication.responseFrom') }} {{ Lang::get('ash.communication.'.$note->submitter) }}
-                            </h3><span class="pull-right">{{ $note->created_at }}</span>
+                        <div class="panel-heading">
+                            <div class="pull-left">
+                                <h3 class="panel-title">{{ Lang::get('ash.communication.responseFrom') }} {{ Lang::get('ash.communication.'.$note->submitter) }}</h3>
+                            </div>
+                            <div class="pull-right">
+                                <span>{{ $note->created_at }}</span>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
 
                         <div class="panel-body">

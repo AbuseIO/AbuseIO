@@ -28,9 +28,3 @@ body { padding-top: 70px; }
 .container {
     padding-bottom: 20px;
 }
-
-.panel-heading span
-{
-    margin-top: -18px;
-    margin-right: -9px;
-}
