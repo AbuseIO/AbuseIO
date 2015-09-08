@@ -65,6 +65,7 @@ $parserMap = array(
     '/@abuse-reporting.webiron.com/'        => 'webiron',
     '/@mailpit.powerweb.de/'                => 'dnsbl_de',
     '/dmca@cegtek.com/'                     => 'cegtek',
+    '/nobody@woody.ch/'                     => 'woody_ch',
 );
 
 // Maps regular expressions to match body to the corresponding parser in case from matching failed
