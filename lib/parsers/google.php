@@ -61,6 +61,11 @@ function parse_google($message) {
                     $url_info['domain'] = "";
                 } else {
                     $url_info['ip'] = gethostbyname($url_info['host']);
+                    // Continue with next entry in case NS lookup failed
+                    if ($url_info['ip'] == $url_info['host']) {
+                        logger(LOG_INFO, __FUNCTION__ . " Skipping report for host ${url_info['host']} due to failed DNS lookup while parsing report from ${source} subject ${message['subject']}");
+                        continue;
+                    }
                     $url_info['domain'] = $url_info['host'];
                 }
             } else {
