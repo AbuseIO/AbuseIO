@@ -1,14 +1,15 @@
 <div class="form-group @if ($errors->has('first_ip')) has-error @endif">
     {!! Form::label('first_ip', 'First IP address:', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::text('first_ip', null, ['class' => 'form-control', 'placeholder'=> '0.0.0.0']) !!}
+        {!! Form::text('first_ip', null, ['class' => 'form-control']) !!}
+        <p class="help-block">Can be a single IPv4 or IPv6 address. <small>(You can enter CIDR to auto fill 'Last IP address')</small></p>
         @if ($errors->has('first_ip')) <p class="help-block">{{ $errors->first('first_ip') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('last_ip')) has-error @endif">
     {!! Form::label('last_ip', 'Last IP address:', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::text('last_ip', null, ['class' => 'form-control', 'placeholder'=> '0.0.0.0']) !!}
+        {!! Form::text('last_ip', null, ['class' => 'form-control']) !!}
         @if ($errors->has('last_ip')) <p class="help-block">{{ $errors->first('last_ip') }}</p> @endif
     </div>
 </div>

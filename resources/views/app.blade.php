@@ -19,6 +19,7 @@
 
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+	@yield('extrajs')
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">

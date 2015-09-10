@@ -1,5 +1,10 @@
 @extends('app')
 
+
+@section('extrajs')
+    <script src="{{ asset('/js/netblocks.js') }}"></script>
+@stop
+
 @section('content')
     <h1 class="page-header">Create Netblock</h1>
     {!! Form::model(new AbuseIO\Models\Netblock, ['route' => 'admin.netblocks.store', 'class' => 'form-horizontal']) !!}
