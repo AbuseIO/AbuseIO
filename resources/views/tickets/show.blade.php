@@ -126,9 +126,18 @@
                         <td>{{ $event->source }}</td>
                         <td>
                             <dl class="dl-horizontal">
-                            @foreach (json_decode($event->information) as $field => $value)
-                                <dt>{{ ucfirst($field) }}</dt>
-                                <dd>{{ htmlentities($value) }}</dd>
+                            @foreach (json_decode($event->information, true) as $field => $value)
+                                    @if (is_array($value))
+                                        <dl class="dl-horizontal">
+                                            @foreach ($value as $subfield=>$subvalue)
+                                                <dt>{{ ucfirst($field) . ' ' .ucfirst($subfield) }}</dt>
+                                                <dd>{{ htmlentities($subvalue) }}</dd>
+                                            @endforeach
+                                        </dl>
+                                    @else
+                                        <dt>{{ ucfirst($field) }}</dt>
+                                        <dd>{{ htmlentities($value) }}</dd>
+                                    @endif
                             @endforeach
                             </dl>
                         </td>
