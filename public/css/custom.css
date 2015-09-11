@@ -25,6 +25,5 @@ body { padding-top: 70px; }
     margin-bottom: 0;
 }
 
-.container {
-    padding-bottom: 20px;
-}
+/* Helper class for more vertical spacing */
+.top-buffer { margin-top:20px; }
