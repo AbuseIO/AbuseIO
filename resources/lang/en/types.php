@@ -23,14 +23,28 @@ return [
 
         '1' => [
             'name' => 'Open',
-            'description' => '',
+            'description' => 'Open tickets',
         ],
 
         '2' => [
             'name' => 'Closed',
-            'description' => '',
+            'description' => 'Closed tickets',
         ],
 
+        '3' => [
+            'name' => 'Escalated',
+            'description' => 'Escalated tickets',
+        ],
     ],
 
+    'state' => [
+        '1' => [
+            'name' => 'Notified',
+            'description' => 'Tickets where the customer have been nofitied.'
+        ],
+        '2' => [
+            'name' => 'Unnotified',
+            'description' => 'Tickets where the customer have not been nofitied.'
+        ],
+    ]
 ];

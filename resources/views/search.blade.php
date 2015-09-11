@@ -6,7 +6,7 @@
     <div class="row top-buffer">
         <div class="col-md-6 @if ($errors->has('ticket_id')) has-error @endif">
             {!! Form::label('ticket_id', 'Ticket ID:') !!}
-            {!! Form::text('ticket_id', null, ['class' => 'form-control']) !!}
+            {!! Form::number('ticket_id', null, ['class' => 'form-control']) !!}
             @if ($errors->has('ticket_id')) <p class="help-block">{{ $errors->first('ticket_id') }}</p> @endif
         </div>
         <div class="col-md-6 @if ($errors->has('ip_address')) has-error @endif">
@@ -30,24 +30,24 @@
     <div class="row top-buffer">
         <div class="col-md-6 @if ($errors->has('classification')) has-error @endif">
             {!! Form::label('classification', 'Classification:') !!}
-            {!! Form::select('classification', ['All', 'Grab from', 'Classifications list'], 'All', ['class' => 'form-control']) !!}
+            {!! Form::select('classification', $classification_selection, null, ['class' => 'form-control']) !!}
             @if ($errors->has('classification')) <p class="help-block">{{ $errors->first('classification') }}</p> @endif
         </div>
         <div class="col-md-6 @if ($errors->has('type')) has-error @endif">
             {!! Form::label('type', 'Type:') !!}
-            {!! Form::select('type', ['All', 'ABUSE', 'INFO', 'ALERT'], 'All', ['class' => 'form-control']) !!}
+            {!! Form::select('type', $type_selection, null, ['class' => 'form-control']) !!}
             @if ($errors->has('type')) <p class="help-block">{{ $errors->first('type') }}</p> @endif
         </div>
     </div>
     <div class="row top-buffer">
         <div class="col-md-6 @if ($errors->has('status')) has-error @endif">
             {!! Form::label('status', 'Status:') !!}
-            {!! Form::select('status', ['All', 'OPEN', 'CLOSED', 'ESCALATED'], 'All', ['class' => 'form-control']) !!}
+            {!! Form::select('status', $status_selection, null, ['class' => 'form-control']) !!}
             @if ($errors->has('status')) <p class="help-block">{{ $errors->first('status') }}</p> @endif
         </div>
         <div class="col-md-6 @if ($errors->has('state')) has-error @endif">
             {!! Form::label('state', 'State:') !!}
-            {!! Form::select('state', ['All', 'NOTIFIED', 'UNNOTIFIED'], 'All', ['class' => 'form-control']) !!}
+            {!! Form::select('state', $state_selection, null, ['class' => 'form-control']) !!}
             @if ($errors->has('state')) <p class="help-block">{{ $errors->first('state') }}</p> @endif
         </div>
     </div>
