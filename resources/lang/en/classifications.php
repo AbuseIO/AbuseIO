@@ -93,7 +93,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://www.ncsc.nl/binaries/content/documents/ncsc-en/services/expertise-advice/knowledge-sharing/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet</a><br>
+            <a target'_blank' href='https://www.ncsc.nl/binaries/content/documents/ncsc-en/current-topics/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet</a><br>
 
             "
     ],
