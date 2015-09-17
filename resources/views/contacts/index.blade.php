@@ -2,15 +2,16 @@
 
 @section('content')
     <h1 class="page-header">Contacts</h1>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-9 text-right">
+            {!! link_to_route('admin.contacts.create', 'Create Contact', [ ], ['class' => 'btn btn-info']) !!}
+            {!! link_to_route('admin.export.contacts', 'CSV Export', ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
+        </div>
+    </div>
+
     @if ( !$contacts->count() )
         <div class="alert alert-info">You have no contacts yet</div>
     @else
-        <div class="row">
-            <div class="col-md-3 col-md-offset-9 text-right">
-                {!! link_to_route('admin.contacts.create', 'Create Contact', [ ], ['class' => 'btn btn-info']) !!}
-                {!! link_to_route('admin.export.contacts', 'CSV Export', ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
-            </div>
-        </div>
         {!! $contacts->render() !!}
         <table class="table table-striped table-condensed">
             <thead>
