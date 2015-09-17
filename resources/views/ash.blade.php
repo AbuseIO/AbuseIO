@@ -104,7 +104,7 @@
                     @foreach ($ticket->events as $event)
 
                         <tr>
-                            <td>{{ $event->timestamp }}</td>
+                            <td>{{ date('d-m-Y H:i', $event->timestamp) }}</td>
                             <td>{{ $event->source }}</td>
                             <td>
                                 <dl class="dl-horizontal">
