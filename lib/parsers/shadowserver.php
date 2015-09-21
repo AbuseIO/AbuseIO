@@ -162,6 +162,11 @@ function parse_shadowserver($message) {
                                                     'fields'    => 'protocol port version name cluster_name',
                                                     'type'      => 'INFO',
                                                  ),
+                'scan_portmapper'    => array (
+                                                    'class'     => 'Open Portmapper Server',
+                                                    'fields'    => 'protocol port tag programs mountd_port exports',
+                                                    'type'      => 'INFO',
+                                                 ),
               );
 
     // ==================
