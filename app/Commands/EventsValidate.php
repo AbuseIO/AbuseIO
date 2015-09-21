@@ -27,7 +27,7 @@ class EventsValidate extends Command implements SelfHandling
      */
     public function handle()
     {
-        if (empty($events)) {
+        if (empty($this->events)) {
             return $this->failed("Empty resultset cannot be validated");
         }
 
