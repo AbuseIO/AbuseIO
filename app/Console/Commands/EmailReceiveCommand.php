@@ -85,7 +85,7 @@ class EmailReceiveCommand extends Command
             $this->exception($rawEmail);
         }
 
-        if ($this->option('debug') === true) {
+        if ($this->option('debug') == true) {
             // In debug mode we don't queue the job
             Log::debug(get_class($this).': Directly handling message file: ' . $filename);
 
