@@ -126,18 +126,28 @@
                         <td>{{ $event->source }}</td>
                         <td>
                             <dl class="dl-horizontal">
-                            @foreach (json_decode($event->information, true) as $field => $value)
-                                    @if (is_array($value))
-                                        <dl class="dl-horizontal">
-                                            @foreach ($value as $subfield=>$subvalue)
-                                                <dt>{{ ucfirst($field) . ' ' .ucfirst($subfield) }}</dt>
-                                                <dd>{{ htmlentities($subvalue) }}</dd>
+                            @foreach (json_decode($event->information, true) as $l1field => $l1value)
+                                @if (is_array($l1value))
+                                    @foreach ($l1value as $l2field=>$l2value)
+                                        @if (is_array($l2value))
+                                            @foreach ($l2value as $l3field=>$l3value)
+                                                @if (is_array($l3value))
+                                                    <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
+                                                    <dd>This is filtered due to fourth layer nesting</dd>
+                                                @else
+                                                    <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
+                                                    <dd>{{ htmlentities($l3value) }}</dd>
+                                                @endif
                                             @endforeach
-                                        </dl>
-                                    @else
-                                        <dt>{{ ucfirst($field) }}</dt>
-                                        <dd>{{ htmlentities($value) }}</dd>
-                                    @endif
+                                        @else
+                                            <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) }}</dt>
+                                            <dd>{{ htmlentities($l2value) }}</dd>
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <dt>{{ ucfirst($l1field) }}</dt>
+                                    <dd>{{ htmlentities($l1value) }}</dd>
+                                @endif
                             @endforeach
                             </dl>
                         </td>
