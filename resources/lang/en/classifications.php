@@ -17,7 +17,7 @@ return [
     100 => [
         'name' => 'Botnet controller',
         'description' => "
-
+            This classification has no information text yet.
             "
     ],
 
@@ -101,7 +101,7 @@ return [
     102 => [
         'name' => 'Compromised server',
         'description' => "
-
+            This classification has no information text yet.
             "
     ],
 
@@ -327,7 +327,7 @@ return [
     107 => [
         'name' => 'Notice and Take Down request',
         'description' => "
-
+            This classification has no information text yet.
             "
     ],
 
@@ -1692,21 +1692,21 @@ return [
     130 => [
         'name' => 'Copyright Infringement',
         'description' => "
-
+            This classification has no information text yet.
             "
     ],
 
     131 => [
         'name' => 'Possible DDoS sending Server',
         'description' => "
-
+            This classification has no information text yet.
             "
     ],
 
     132 => [
         'name' => 'DDoS sending Server',
         'description' => "
-
+            This classification has no information text yet.
             "
     ],
 
