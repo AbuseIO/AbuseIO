@@ -15,6 +15,7 @@
 		"abuseio/parser-blocklistde": "dev-master",
 		"abuseio/parser-cegtek": "dev-master",
 		"abuseio/parser-cleanmx": "dev-master",
+        "abuseio/parser-copyrightcompliance": "dev-master",
 		"abuseio/parser-cyscon": "dev-master",
 		"abuseio/parser-dnsblde": "dev-master",
 		"abuseio/parser-google": "dev-master",
