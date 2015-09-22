@@ -55,6 +55,7 @@ return [
         'template'                          => '/etc/mail.template',
         'from_address'                      => 'abuse@isp.local',
         'from_name'                         => 'ISP Abusedesk',
+        'bcc_enabled'                       => false,
         'bcc_address'                       => 'management@isp.local',
     ],
 
