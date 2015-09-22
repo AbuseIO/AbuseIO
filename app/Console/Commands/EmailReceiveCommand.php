@@ -11,6 +11,7 @@ use Log;
 use Events;
 use Uuid;
 use Carbon;
+use Config;
 
 class EmailReceiveCommand extends Command
 {
@@ -134,21 +135,28 @@ class EmailReceiveCommand extends Command
      */
     protected function exception($rawEmail)
     {
+        // This only bounces with config errors or problems with installations where we cannot accept
+        // the email at all. In normal cases the bounce will be handled within EmailProcess::()
         Log::error(
             get_class($this).': Email receiver is ending with errors. "
             ."The received e-mail will be bounced to the admin for investigation'
         );
 
-        // TODO: send the rawEmail back to admin
-        dd($rawEmail);
-
         Mail::queueOn(
             'FailedProcessNotifications',
             'emails.bounce',
             '',
-            function ($message) {
-                $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailProcess');
+            function ($message) use ($rawEmail) {
+                $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailReceiver');
                 $message->to(Config::get('main.emailparser.fallback_mail'));
+                $message->attachData(
+                    $rawEmail,
+                    'failed_message.eml',
+                    [
+                        'as' => 'failed_message.eml',
+                        'mime' => 'message/rfc822',
+                    ]
+                );
             }
         );
     }
