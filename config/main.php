@@ -31,25 +31,6 @@ return [
         'store_mail'                        => true,
         'store_evidence'                    => true,
         'remove_evidence'                   => '500 days',
-        /*
-         * Moving into parser config itself
-        'sender_map'                        => [
-
-            '/summaries@admin.spamcop.net/'         => 'spamcop',
-            '/@reports.spamcop.net/'                => 'spamcop',
-            '/@ip-echelon.com/'                     => 'ip_echelon',
-            '/monitor-bounce@projecthoneypot.org/'  => 'project_honeypot',
-            '/@junkemailfilter.com/'                => 'junkemailfilter_com',
-            '/@r.iecc.com/'                         => 'iecc_com',
-            '/abuse@clean-mx.de/'                   => 'cleanmx_de',
-            '/takedown-response.*@netcraft.com/'    => 'netcraft',
-            '/noreply@spamlogin.com/'               => 'spamexperts',
-        ],
-        'body_map'                          => [
-            '/User-Agent: Spampanel/'               => 'spamexperts',
-            '/User-Agent: SpamExperts/'             => 'spamexperts',
-        ],
-        */
     ],
 
     'reports' => [
