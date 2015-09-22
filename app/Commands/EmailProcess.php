@@ -64,9 +64,9 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
 
         // Sanity checks
         if (empty($parsedMail->getHeader('from')) || empty($parsedMail->getMessageBody())) {
-            Log::warning(get_class($this).'Validation failed on: ' . $this->filename);
+            Log::warning(get_class($this).' Missing e-mail headers from and/or empty body: ' . $this->filename);
 
-            $this->exception();
+            return $this->exception();
 
         }
 
@@ -77,7 +77,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
                 . Config::get('main.notifications.from_address')
             );
 
-            $this->exception();
+            return $this->exception();
         }
 
         // Start with detecting valid ARF e-mail
@@ -119,7 +119,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
                 . ' with subject: ' . $parsedMail->getHeader('subject')
             );
 
-            $this->exception();
+            return $this->exception();
         }
 
         if ($result !== false && $result['errorStatus'] === true) {
@@ -127,7 +127,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
                 get_class($parser).': Parser has ended with errors ! : ' . $result['errorMessage']
             );
 
-            $this->exception();
+            return $this->exception();
         } else {
             Log::info(
                 get_class($parser)
@@ -146,7 +146,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
                 get_class($validator).': Validator has ended with errors ! : ' . $return['errorMessage']
             );
 
-            $this->exception();
+            return $this->exception();
         } else {
             Log::info(get_class($validator).': Validator has ended without errors');
         }
@@ -174,7 +174,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
                 get_class($saver).': Saver has ended with errors ! : ' . $return['errorMessage']
             );
 
-            $this->exception();
+            return $this->exception();
         } else {
             Log::info(get_class($saver).': Saver has ended without errors');
         }
@@ -191,19 +191,16 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
     {
         // we have $this->filename and $this->rawMail
         // and this Config::get('main.emailparser.fallback_mail')
-
         Log::error(
-            get_class($this).': Ending with errors. The received e-mail will be deleted from '
+            get_class($this).': Email processor ending with errors. The received e-mail will be deleted from '
             . 'archive and bounced to the admin for investigation'
         );
 
         $filename = $this->filename;
 
         // Send a e-mail to the admin about the failed parse attempt
-        Mail::queueOn(
-            'FailedProcessNotifications',
-            'emails.bounce',
-            [ ],
+        $sent = Mail::raw(
+            'AbuseIO was not able to handle an incoming message. This message is attached to this email.',
             function ($message) use ($filename) {
                 $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailProcess');
                 $message->to(Config::get('main.emailparser.fallback_mail'));
@@ -216,6 +213,16 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
                 );
             }
         );
+
+        if (!$sent) {
+            Log::error(
+                get_class($this).': Unable to send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
+            );
+        } else {
+            Log::info(
+                get_class($this).': Successfully send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
+            );
+        }
 
         // Delete the evidence file as we are not using it.
         $filesystem = new Filesystem;

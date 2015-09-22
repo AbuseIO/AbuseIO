@@ -142,10 +142,8 @@ class EmailReceiveCommand extends Command
             ."The received e-mail will be bounced to the admin for investigation'
         );
 
-        Mail::queueOn(
-            'FailedProcessNotifications',
-            'emails.bounce',
-            '',
+        $sent = Mail::raw(
+            'AbuseIO was not able to receive an incoming message. This message is attached to this email.',
             function ($message) use ($rawEmail) {
                 $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailReceiver');
                 $message->to(Config::get('main.emailparser.fallback_mail'));
@@ -159,5 +157,15 @@ class EmailReceiveCommand extends Command
                 );
             }
         );
+
+        if (!$sent) {
+            Log::error(
+                get_class($this).': Unable to send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
+            );
+        } else {
+            Log::info(
+                get_class($this).': Successfully send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
+            );
+        }
     }
 }
