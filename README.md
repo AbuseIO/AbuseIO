@@ -105,7 +105,7 @@ always use the MTA address to validate your work!
 ### Postfix
  
 ```bash
-echo 'notifier: | "| /usr/bin/php -q /opt/abuseio/artisan --env=production email:parse"' >> /etc/aliasses
+echo 'notifier: | "| /usr/bin/php -q /opt/abuseio/artisan --env=production email:receive"' >> /etc/aliasses
 newaliasses
 ```
 
