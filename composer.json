@@ -1,9 +1,26 @@
 {
 	"name": "abuseio/abuseio",
 	"description": "Open Source abusemanagement tool",
+	"version": "4.0.0-dev",
 	"keywords": ["abuse", "abuseio"],
-	"license": "GPLv2",
+	"homepage": "http://abuse.io",
 	"type": "project",
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "AbuseIO Foundation",
+			"email": "dev@abuse.io",
+			"homepage": "http://abuse.io",
+			"role": "Lead"
+		}
+	],
+	"support": {
+		"email": "dev@abuse.io",
+		"issues": "https://github.com/AbuseIO/parser-abusehub/issues",
+		"irc": "irc://irc.freenode.net/abuseio",
+		"source": "https://github.com/AbuseIO/parser-abusehub",
+		"docs": "https://abuse.io/resources/documentation/"
+	},
 	"require": {
 		"laravel/framework": "5.1.*",
         "laravelcollective/html": "~5.0",
