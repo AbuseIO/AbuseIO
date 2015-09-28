@@ -18,7 +18,7 @@ Bind or pDNS-recursor
 for ubuntu
 
 ```bash
-apt-get install php5 mysql-server beanstalkd apache2 postfix supervisor bind9 php-pear php5-dev php5-mcrypt git
+apt-get install php5 mysql-server php5-myssql beanstalkd apache2 postfix supervisor bind9 php-pear php5-dev php5-mcrypt git
 ```
 
 # Installation (as root)
