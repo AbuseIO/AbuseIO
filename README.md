@@ -126,7 +126,7 @@ a2enmod ssl
 a2enmod rewrite
 a2enmod headers
 mkdir /etc/apache2/ssl
-htpasswd -c /opt/abuseio/htpasswd admin password
+htpasswd -b -c /opt/abuseio/htpasswd admin password
 ```
 
 create config /etc/apache2/sites-available/abuseio.conf
