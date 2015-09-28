@@ -18,7 +18,7 @@ Bind or pDNS-recursor
 for ubuntu
 
 ```bash
-apt-get install php5 mysql-server php5-myssql beanstalkd apache2 postfix supervisor bind9 php-pear php5-dev php5-mcrypt git
+apt-get install php5 mysql-server php5-myssql beanstalkd apache2 apache2-utils postfix supervisor bind9 php-pear php5-dev php5-mcrypt git
 ```
 
 # Installation (as root)
@@ -119,6 +119,77 @@ You should be able to visit the website at URI /admin/ with a document root at /
 
 ### Apache httpd
 Don't forget: It's highly recommended to add a .htaccess and secure with both IP as ACL filters!
+
+Enable options and place your SSL cert into /etc/apache2/ssl/:
+```
+a2enmod ssl
+a2enmod rewrite
+a2enmod headers
+mkdir /etc/apache2/ssl
+htpasswd -c /opt/abuseio/htpasswd admin password
+```
+
+create config /etc/apache2/sites-available/abuseio.conf
+```
+<VirtualHost _default_:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /opt/abuseio/public
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    RewriteEngine On
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R=301,L]
+</VirtualHost>
+<IfModule mod_ssl.c>
+        <VirtualHost _default_:443>
+                # Dont forget to protect /admin with an IP/User ACL!
+
+                ServerAdmin webmaster@localhost
+                DocumentRoot /opt/abuseio/public
+
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+                Header always add Strict-Transport-Security "max-age=15552000; includeSubDomains"
+                Header always add X-Content-Type-Options "nosniff"
+                Header always add X-Frame-Options "SAMEORIGIN"
+                Header always add X-XSS-Protection "1; mode=block"
+
+                SSLEngine On
+
+                SSLProtocol ALL -SSLv2 -SSLv3
+                SSLCipherSuite ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA
+                SSLHonorCipherOrder on
+
+                SSLCertificateFile       /etc/apache2/ssl/yourisp.local.crt
+                SSLCertificateKeyFile    /etc/apache2/ssl/yourisp.local.key
+                SSLCACertificateFile     /etc/apache2/ssl/yourisp.local.int
+
+                <FilesMatch "\.(cgi|shtml|phtml|php)$">
+                                SSLOptions +StdEnvVars
+                </FilesMatch>
+                <Directory /usr/lib/cgi-bin>
+                                SSLOptions +StdEnvVars
+                </Directory>
+
+                <Directory /opt/abuseio/public/>
+                    Options Indexes FollowSymLinks
+                    AllowOverride All
+                    Require all granted 
+                </Directory>
+
+                <Location /admin>
+                    AuthUserFile /opt/abuseio/htpasswd
+                    AuthName "Password Protected"
+                    AuthType Basic
+                    require valid-user
+                </Location>
+
+        </VirtualHost>
+</IfModule>
+
+```
 
 ### Nginx
 This is an example configuration for running AbuseIO via Nginx with php fpm. Change it to suit your own setup.
