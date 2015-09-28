@@ -75,6 +75,32 @@ function parse_webiron($message) {
         logger(LOG_INFO, __FUNCTION__ . " Completed message from ${source} subject ${message['subject']}");
         return true;
 
+    // This is possibly an inline abuse report
+    } else if (preg_match('/Offending\/Source IP:[ ]+([0-9\.]+)\n/',$message['body'], $regs)) {
+
+        // Parse IP and all report lines from body
+        $ip = $regs[1];
+        preg_match_all('/  - ([^:]+): ([^\n]+)\n/',$message['body'],$regs);
+
+        if (empty($regs)) {
+            logger(LOG_ERR, __FUNCTION__ . " Unable to parse message from ${source} subject ${message['subject']}");
+            return false;
+        }
+
+        $fields = array_combine($regs[1],$regs[2]);
+        $outReport = array(
+            'source'        => $source,
+            'ip'            => $ip,
+            'class'         => 'Botnet infection',
+            'type'          => 'ABUSE',
+            'timestamp'     => strtotime($fields['Time']),
+            'information'   => $fields
+        );
+
+        $reportID = reportAdd($outReport);
+        if (!$reportID) return false;
+        if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
+
     } else {
         logger(LOG_ERR, __FUNCTION__ . " Unable to parse message from ${source} subject ${message['subject']}");
     }
