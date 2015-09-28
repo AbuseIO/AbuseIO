@@ -18,7 +18,7 @@ Bind or pDNS-recursor
 for ubuntu
 
 ```bash
-apt-get install php5 mysql-server beanstalkd apache2 postfix supervisor bind9
+apt-get install php5 mysql-server beanstalkd apache2 postfix supervisor bind9 php-pear php5-dev php5-mcrypt git
 ```
 
 # Installation (as root)
@@ -29,25 +29,6 @@ Some parsers produce high amounts of DNS queries, so your better off using a loc
 in the above install example bind is installed and you only need to update your /etc/resolv.conf (or
 with newer ubuntu versions the /etc/network/interfaces) to use 127.0.0.1 as the FIRST resolver, but make
 sure you leave a 2nd or 3rd with your 'normal' resolvers.
-
-## Setup supervisor:
-
-##### /etc/supervisor/conf.d/abuseio_queue_email.conf
-```
-[program:abuseio_queue_emails]
-command=php artisan queue:listen --tries=1 --sleep=3 --memory=128 --delay=0 --queue=emails
-directory=/opt/abuseio
-stdout_logfile=/opt/abuseio/storage/logs/queue-emails.log
-redirect_stderr=true
-```
-
-then:
-
-```bash
-supervisorctl reread  
-supervisorctl add abuseio_queue_emails
-supervisorctl start abuseio_queue_emails
-```
 
 ## Install global composer 
 
@@ -63,6 +44,7 @@ mv composer.phar /usr/local/bin/composer
 pecl install mailparse (note: mbstring should be installed on linux systems, if not add mbstring to the install command)
 echo "extension=mailparse.so" > /etc/php5/mods-available/mailparse.ini
 php5enmod mailparse
+php5enmod mcrypt
 ```
 
 ## Create local user 
@@ -73,9 +55,13 @@ adduser abuseio
 
 ## checkout git
 
+Please note that a composer update is required to install all other required packages and dependancies!
+
 ```bash
 cd /opt
-git clone -b AbuseIO-4.0 git@github.com:AbuseIO/AbuseIO.git abuseio
+git clone https://github.com/AbuseIO/AbuseIO.git abuseio
+cd /opt/abuseio
+composer update
 ```
 ## fix permissions
 
@@ -87,6 +73,25 @@ chown -R abuseio:www-data abuseio/storage
 chown -R abuseio:postfix abuseio/storage/mailarchive
 chown abuseio:www-data abuseio/bootstrap/cache
 chmod 775 abuseio/bootstrap/cache
+```
+
+## Setup supervisor:
+
+##### /etc/supervisor/conf.d/abuseio_queue_email.conf
+```
+[program:abuseio_queue_emails]
+command=php artisan queue:listen --tries=1 --sleep=3 --memory=128 --delay=0 --queue=emails
+directory=/opt/abuseio
+stdout_logfile=/opt/abuseio/storage/logs/queue-emails.log
+redirect_stderr=true
+```
+
+then:
+
+```bash
+supervisorctl reread
+supervisorctl add abuseio_queue_emails
+supervisorctl start abuseio_queue_emails
 ```
 
 ## Creating MTA delivery
@@ -150,7 +155,7 @@ service nginx reload
 
 ```bash
 cd /opt/abuseio
-composer install
+composer update
 ```
 
 ## Setting up configuration
