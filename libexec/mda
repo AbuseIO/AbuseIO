@@ -32,7 +32,7 @@ include (realpath(dirname(__FILE__))."/../lib/core/loader.php");
 $message = receive_mail(array('type' => 'EXTERNAL'));
 
 // Sanity checks
-if(empty($message['from']) || empty($message['body'])) {
+if(empty($message['from'])) {
     delete_store($message);
     bounce($message);
 }
