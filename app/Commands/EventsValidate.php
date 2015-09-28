@@ -41,10 +41,24 @@ class EventsValidate extends Command implements SelfHandling
             // Check valid IP
             $validator = Validator::make(
                 [
+                    'source' => $event['source'],
                     'ip' => $event['ip'],
+                    'domain' => $event['domain'],
+                    'uri' => $event['uri'],
+                    'class' => $event['class'],
+                    'type' => $event['type'],
+                    'timestamp' => $event['timestamp'],
+                    'information' => $event['information'],
                 ],
                 [
+                    'source' => 'required',
                     'ip' => 'required|ip',
+                    'domain' => 'required',
+                    'uri' => 'required',
+                    'class' => 'required',
+                    'type' => 'required',
+                    'timestamp' => 'required',
+                    'information' => 'required',
                 ]
             );
 
