@@ -80,6 +80,11 @@ class EventsValidate extends Command implements SelfHandling
             if ($event['uri'] !== false) {
             }
 
+            // check valid timestamp
+            if ($event['timestamp'] === false) {
+                return $this->failed('Invalid timestamp used');
+            }
+
             // check valid Type
             $validType = false;
             foreach (Lang::get('types.type') as $typeID => $type) {
