@@ -1546,7 +1546,7 @@ return [
             based on OpenSSL.</p>
 
             <h2>Why would this be bad?</h2>
-            
+
             <p>The whole issue ultimately hinges on the site supporting SSLv3 and the attacker being
             able to downgrade the client to use SSLv3. These protocol downgrade attacks are old news
             and are still surfacing to cause problems. By simulating a failure during the negotiation
@@ -1754,4 +1754,40 @@ return [
             firewall and only allowing connections from trusted IP addresses.
             "
     ],
+
+    134 => [
+        'name' => 'Malware infection',
+        'description' => "
+            This classification has no information text yet.
+            "
+    ],
+
+    135 => [
+        'name' => 'Comment Spam',
+        'description' => "
+            This classification has no information text yet.
+            "
+    ],
+
+    136 => [
+        'name' => 'Hack attack',
+        'description' => "
+            This classification has no information text yet.
+            "
+    ],
+
+    137 => [
+        'name' => 'Informational',
+        'description' => "
+            This classification has no information text yet.
+            "
+    ],
+
+    138 => [
+        'name' => 'Login attack',
+        'description' => "
+            This classification has no information text yet.
+            "
+    ],
+
 ];
