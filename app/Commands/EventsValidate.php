@@ -82,8 +82,10 @@ class EventsValidate extends Command implements SelfHandling
             foreach (Lang::get('classifications') as $classID => $class) {
                 if ($class['name'] == $event['class']) {
                     $validClass = true;
+                    break;
                 }
             }
+
             if ($validClass !== true) {
                 return $this->failed('Invalid classification used');
             }
