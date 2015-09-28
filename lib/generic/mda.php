@@ -128,6 +128,12 @@ function receive_mail($call) {
                 // This is a ARF report message
                 $arf['headers'] = $part->parts[0]->headers;
 
+                // Skip this part if we're unable to determine content-type
+                if (empty($part->parts[0]->headers['content-type'])) {
+                    logger(LOG_ERR, "Unknown content type in parsing e-mail");
+                    continue;
+                }
+
                 if(strpos($part->parts[0]->headers['content-type'],'text/plain')!==false){
                     $arf['plain'] .= $part->parts[0]->body;
                 }
