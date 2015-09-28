@@ -252,5 +252,7 @@ QUEUE_DRIVER=sync
 cd /opt/abuseio
 php artisan migrate:install
 php artisan migrate
-php artisan db:seed
+php artisan db:seed < run this only if you want demo material in your installation.
 ```
+
+
