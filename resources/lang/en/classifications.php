@@ -1790,4 +1790,17 @@ return [
             "
     ],
 
+    139 => [
+        'name' => 'Dictionary attack',
+        'description' => "
+            This classification has no information text yet.
+            "
+    ],
+
+    140 => [
+        'name' => 'Rule Breaker',
+        'description' => "
+            This classification has no information text yet.
+            "
+    ],
 ];
