@@ -115,7 +115,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         } else {
             Log::error(
                 get_class($this)
-                . ': Unable to handle message from: ' . $parsedMail->getHeader('from')
+                . ': No parser available to handle message from : ' . $parsedMail->getHeader('from')
                 . ' with subject: ' . $parsedMail->getHeader('subject')
             );
 
@@ -124,18 +124,21 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
 
         if ($result !== false && $result['errorStatus'] === true) {
             Log::error(
-                get_class($parser).': Parser has ended with errors ! : ' . $result['errorMessage']
+                get_class($parser).': Parser has ended with fatal errors ! : ' . $result['errorMessage']
             );
 
             return $this->exception();
         } else {
             Log::info(
                 get_class($parser)
-                . ': Parser has ended without errors. Collected ' . count($result['data']) . ' events to save'
+                . ': Parser completed with ' . $result['warningCount'] .
+                ' warnings and collected ' . count($result['data']) . ' events to save'
             );
 
             $events = $result['data'];
         }
+
+        // TODO - Add option to consider a warningCount an error to bounce the mail to admin
 
         // Call validator
         $validator = new EventsValidate($events);
