@@ -46,29 +46,17 @@ Please feel https: //www.webiron.com/abuse-soc-issues.html
 and or Abusive Web Requests:
 
 Offending/Source IP:  172.16.31.21
-
        - Issue:  Client software hosts (IE:  botnets).
-
        - Block Type: New Ban
-
        - Time:  2015-09-25 22:14:33-07:00
-
        - Port: 80
-
        - Service:  http
-
        - Report ID:  c141a958-6477-466b-8fec-235a460a5fa7
-
        - Bot Fingerprint:  25c396532781a2ce940af048519c5b04
-
        - Bot Node Feed:  https: //www.webiron.com/bot_feed/25c396532781a2ce940af048519c5b04
-
        - Targeted Range:  172.16.30.0/24
-
        - Targeted URL:  http://[Site Host Removed For Privacy]/wp-login.php
-
        - User-Agent:  Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv: 39.0) Gecko/20100101 Firefox/39.0
-
        - GET/POST Arguements Sent:  pwd, wp-submit, testcookie, log, 375953253532102
 
 --D14432240689150374
@@ -79,27 +67,15 @@ Content-Type: text/html; charset="us-ascii"
 <hr Requests: <br />
 
 Offending/Source IP:  172.16.31.21<br />
-
        - Issue:  Client software detected (IE:  botnets).<br />
-
        - Block Type: New Ban<br />
-
        - Time:  2015-09-25 22:14:33-07:00<br />
-
        - Port: 80<br />
-
        - Service:  http<br />
-
        - Report ID:  c141a958-6477-466b-8fec-235a460a5fa7<br />
-
        - Bot Fingerprint: 25c396532781a2ce940af048519c5b04
-
        - Bot Node Feed:  https: //www.webiron.com/bot_feed/25c396532781a2ce940af048519c5b04<br />
-
        - Targeted Range:  172.16.30.0/24<br />
-
        - Targeted URL:  http://[Site Host Removed For Privacy]/wp-login.php<br />
-
        - User-Agent:  Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv: 39.0) Gecko/20100101 Firefox/39.0<br />
-
-       - GET/POST Arguements Sent:  pwd, wp-submit, MIME-Version: 1.0
+       - GET/POST Arguements Sent:  pwd, wp-submit, testcookie, log, 375953253532102
