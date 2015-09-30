@@ -8,7 +8,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Filesystem\Filesystem;
-use League\Flysystem\Exception;
 use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use AbuseIO\Commands\EventsValidate;
@@ -66,8 +65,8 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         if (empty($parsedMail->getHeader('from')) || empty($parsedMail->getMessageBody())) {
             Log::warning(get_class($this).' Missing e-mail headers from and/or empty body: ' . $this->filename);
 
-            return $this->exception();
-
+            $this->alertAdmin();
+            return;
         }
 
         // Ignore email from our own notification address to prevent mail loops
@@ -77,7 +76,8 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
                 . Config::get('main.notifications.from_address')
             );
 
-            return $this->exception();
+            $this->alertAdmin();
+            return;
         }
 
         // Start with detecting valid ARF e-mail
@@ -107,11 +107,8 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         // Asking ParserFactory for an object based on mappings, or die trying
         $parser = ParserFactory::create($parsedMail, $arfMail);
 
-        $result = false;
-        $events = false;
-
         if ($parser !== false) {
-            $result = $parser->parse();
+            $parserResult = $parser->parse();
         } else {
             Log::error(
                 get_class($this)
@@ -119,65 +116,69 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
                 . ' with subject: ' . $parsedMail->getHeader('subject')
             );
 
-            return $this->exception();
+            $this->alertAdmin();
+            return;
         }
 
-        if ($result !== false && $result['errorStatus'] === true) {
+        if ($parserResult !== false && $parserResult['errorStatus'] === true) {
             Log::error(
-                get_class($parser).': Parser has ended with fatal errors ! : ' . $result['errorMessage']
+                get_class($parser).': Parser has ended with fatal errors ! : ' . $parserResult['errorMessage']
             );
 
-            return $this->exception();
+            $this->alertAdmin();
+            return;
         } else {
             Log::info(
                 get_class($parser)
-                . ': Parser completed with ' . $result['warningCount'] .
-                ' warnings and collected ' . count($result['data']) . ' events to save'
+                . ': Parser completed with ' . $parserResult['warningCount'] .
+                ' warnings and collected ' . count($parserResult['data']) . ' events to save'
             );
-
-            $events = $result['data'];
         }
 
         // TODO - Add option to consider a warningCount an error to bounce the mail to admin
 
         // Call validator
-        $validator = new EventsValidate($events);
-        $return = $validator->handle();
+        $validator = new EventsValidate($parserResult['data']);
+        $validatorResult = $validator->handle();
 
-        if ($return['errorStatus'] === true) {
+        if ($validatorResult['errorStatus'] === true) {
             Log::error(
-                get_class($validator).': Validator has ended with errors ! : ' . $return['errorMessage']
+                get_class($validator).': Validator has ended with errors ! : ' . $validatorResult['errorMessage']
             );
 
-            return $this->exception();
+            $this->alertAdmin();
+            return;
         } else {
             Log::info(get_class($validator).': Validator has ended without errors');
         }
 
-        // save evidence into table
-
+        /**
+         * save evidence into table
+         **/
         $evidence = new Evidence();
         $evidence->filename = $this->filename;
         $evidence->sender   = $parsedMail->getHeader('from');
         $evidence->subject  = $parsedMail->getHeader('subject');
         $evidence->save();
 
-        // call saver
-
-        $saver = new EventsSave($events, $evidence->id);
-        $return = $saver->handle();
+        /**
+         * call saver
+        **/
+        $saver = new EventsSave($parserResult['data'], $evidence->id);
+        $saverResult = $saver->handle();
 
         /**
          * We've hit a snag, so we are gracefully killing ourselves
          * after we contact the admin about it. EventsSave should never
          * end with problems unless the mysql died while doing transactions
          **/
-        if ($return['errorStatus'] === true) {
+        if ($saverResult['errorStatus'] === true) {
             Log::error(
-                get_class($saver).': Saver has ended with errors ! : ' . $return['errorMessage']
+                get_class($saver).': Saver has ended with errors ! : ' . $saverResult['errorMessage']
             );
 
-            return $this->exception();
+            $this->alertAdmin();
+            return;
         } else {
             Log::info(get_class($saver).': Saver has ended without errors');
         }
@@ -185,12 +186,11 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         Log::info(get_class($this).': Queued worker has ended the processing of email file: ' . $this->filename);
     }
 
-
     /**
-     * Throw an exception
-     * @return void
+     * alert administrator when problems happens. We will add the received message as attachment or bounce the original
+     * @return Boolean
      */
-    protected function exception()
+    protected function alertAdmin()
     {
         // we have $this->filename and $this->rawMail
         // and this Config::get('main.emailparser.fallback_mail')
@@ -230,5 +230,6 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         // Delete the evidence file as we are not using it.
         $filesystem = new Filesystem;
         $filesystem->delete($filename);
+
     }
 }
