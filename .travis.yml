@@ -30,7 +30,7 @@ after_script:
 
 notifications:
   email:
-    - bart@abuse.io
+    - dev@abuse.io
   irc:
     channels:
       - "irc.freenode.net#abuseio"
