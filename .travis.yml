@@ -13,12 +13,13 @@ before_script:
   - composer install --dev --prefer-source --no-interaction
   - chmod -R 777 storage
   - php artisan migrate:install --no-interaction -vvv
-  - chmod +x extra/notifier-samples/runall; extra/notifier-samples/runall
+  - chmod +x extra/notifier-samples/runall
 
 script: 
   - php artisan migrate --env=testing --no-interaction -vvv
   - php artisan db:seed --env=testing --no-interaction -vvv
   - vendor/bin/phpunit
+  - extra/notifier-samples/runall
   - php artisan migrate:rollback --env=testing --no-interaction -vvv
 
 after_script:
