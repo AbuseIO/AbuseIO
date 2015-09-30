@@ -6,6 +6,9 @@
 [![Latest Unstable Version](https://poser.pugx.org/abuseio/abuseio/v/unstable.svg)](https://packagist.org/packages/abuseio/abuseio)
 [![License](https://poser.pugx.org/abuseio/abuseio/license.svg)](https://packagist.org/packages/abuseio/abuseio)
 
+It is a toolkit to receive, process, correlate and notify endusers about abuse reports received by network operators, typically
+hosting and access providers. The purpose is to consolidate efforts by various companies and individuals to automate and improve 
+the abuse handling process.
 
 ## Notice
 
