@@ -1,0 +1,11 @@
+site_name: AbuseIO
+repo_url: https://github.com/AbuseIO/AbuseIO
+site_description: Abusemanagement tools
+site_author: AbuseIO
+pages:
+- 'Introduction': 'index.md'
+- 'Installation': 'installation.md'
+- 'Migrating from 3.x': 'migration.md'
+- 'Main configuration': 'configuration-main.md'
+- 'Parser configurations': 'configuration-parser.md'
+= 'License': 'license.md'

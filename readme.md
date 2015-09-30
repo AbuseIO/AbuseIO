@@ -1,4 +1,4 @@
-## AbuseIO - abusemanagement tool
+## AbuseIO - Abusemanagement tools
 
 [![Build Status](https://api.travis-ci.org/AbuseIO/AbuseIO.svg)](https://travis-ci.org/AbuseIO/AbuseIO)
 [![Total Downloads](https://poser.pugx.org/abuseio/abuseio/d/total.svg)](https://packagist.org/packages/abuseio/abuseio)
