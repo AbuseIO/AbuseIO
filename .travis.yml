@@ -8,9 +8,7 @@ env:
 
 before_script:
   - echo 'yes' | pecl install mailparse 
-  - echo 'extension = mbstring.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - echo 'extension = mcrypt.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - mysql -e 'CREATE DATABASE `abuseio.travis`;'
+  - mysql -e 'CREATE DATABASE `abuseio`;'
   - composer self-update
   - composer install --dev --prefer-source --no-interaction
   - chmod -R 777 storage
