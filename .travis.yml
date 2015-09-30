@@ -11,15 +11,17 @@ before_script:
   - echo 'extension = mbstring.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - echo 'extension = mcrypt.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - mysql -e 'CREATE DATABASE `abuseio.travis`;'
-  - travis_retry composer self-update
-  - travis_retry composer install --prefer-source --no-interaction --dev
+  - composer self-update
+  - composer install --dev --prefer-source --no-interaction
   - chmod -R 777 app/storage
   - php artisan migrate:install --no-interaction -vvv
-  - php artisan db:seed
   - chmod +x extra/notifier-samples/runall; extra/notifier-samples/runall
 
 script: 
+  - php artisan migrate --env=testing --no-interaction -vvv
+  - php artisan db:seed --env=testing --no-interaction -vvv
   - vendor/bin/phpunit
+  - php artisan migrate:rollback --env=testing --no-interaction -vvv
 
 after_script:
   - ls -laR app/storage
