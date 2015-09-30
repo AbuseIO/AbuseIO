@@ -23,8 +23,8 @@ script:
   - php artisan migrate:rollback --env=testing --no-interaction -vvv
 
 after_script:
-  - ls -laR app/storage
-  - cat storage/app/logs/*
+  - ls -laR storage/mailarchive
+  - cat storage/logs/*.log
 
 notifications:
   email:
