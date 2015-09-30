@@ -7,5 +7,5 @@ pages:
 - 'Installation': 'installation.md'
 - 'Migrating from 3.x': 'migration.md'
 - 'Main configuration': 'configuration-main.md'
-- 'Parser configurations': 'configuration-parser.md'
+- 'Parser configurations': 'configuration-parsers.md'
 - 'License': 'license.md'
