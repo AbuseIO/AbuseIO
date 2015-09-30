@@ -16,9 +16,9 @@
 	],
 	"support": {
 		"email": "dev@abuse.io",
-		"issues": "https://github.com/AbuseIO/parser-abusehub/issues",
+		"issues": "https://github.com/AbuseIO/AbuseIO/issues",
 		"irc": "irc://irc.freenode.net/abuseio",
-		"source": "https://github.com/AbuseIO/parser-abusehub",
+		"source": "https://github.com/AbuseIO/AbuseIO",
 		"docs": "https://abuse.io/resources/documentation/"
 	},
 	"require": {
