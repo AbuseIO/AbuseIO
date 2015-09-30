@@ -13,6 +13,7 @@ before_script:
   - mysql -e 'CREATE DATABASE `abuseio.travis`;'
   - composer self-update
   - composer install --dev --prefer-source --no-interaction
+  - find ./
   - chmod -R 777 app/storage
   - php artisan migrate:install --no-interaction -vvv
   - chmod +x extra/notifier-samples/runall; extra/notifier-samples/runall
