@@ -53,17 +53,17 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        Log::info(get_class($this).': Queued worker is starting the processing of email file: ' . $this->filename);
+        Log::info(get_class($this) . ': Queued worker is starting the processing of email file: ' . $this->filename);
 
         $filesystem = new Filesystem;
-        $rawEmail   = $filesystem->get($this->filename);
+        $rawEmail = $filesystem->get($this->filename);
 
         $parsedMail = new MimeParser();
         $parsedMail->setText($rawEmail);
 
         // Sanity checks
         if (empty($parsedMail->getHeader('from')) || empty($parsedMail->getMessageBody())) {
-            Log::warning(get_class($this).' Missing e-mail headers from and/or empty body: ' . $this->filename);
+            Log::warning(get_class($this) . ' Missing e-mail headers from and/or empty body: ' . $this->filename);
 
             $this->alertAdmin();
             return;
@@ -72,7 +72,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         // Ignore email from our own notification address to prevent mail loops
         if (preg_match('/' . Config::get('main.notifications.from_address') . '/', $parsedMail->getHeader('from'))) {
             Log::warning(
-                get_class($this).'Loop prevention: Ignoring email from self '
+                get_class($this) . 'Loop prevention: Ignoring email from self '
                 . Config::get('main.notifications.from_address')
             );
 
@@ -82,7 +82,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
 
         // Start with detecting valid ARF e-mail
         $attachments = $parsedMail->getAttachments();
-        $arfMail = [ ];
+        $arfMail = [];
 
         foreach ($attachments as $attachment) {
             if ($attachment->contentType == 'message/feedback-report') {
@@ -122,7 +122,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
 
         if ($parserResult !== false && $parserResult['errorStatus'] === true) {
             Log::error(
-                get_class($parser).': Parser has ended with fatal errors ! : ' . $parserResult['errorMessage']
+                get_class($parser) . ': Parser has ended with fatal errors ! : ' . $parserResult['errorMessage']
             );
 
             $this->alertAdmin();
@@ -135,52 +135,67 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
             );
         }
 
-        // TODO - Add option to consider a warningCount an error to bounce the mail to admin
-
-        // Call validator
-        $validator = new EventsValidate($parserResult['data']);
-        $validatorResult = $validator->handle();
-
-        if ($validatorResult['errorStatus'] === true) {
+        if ($parserResult['warningCount'] !== 0 && Config::get('main.emailparser.notify_on_warnings') === true) {
             Log::error(
-                get_class($validator).': Validator has ended with errors ! : ' . $validatorResult['errorMessage']
+                get_class($parser) . ': Configuration has warnings set as critical and ' .
+                $parserResult['warningCount'] . ' warnings were detected. Sending alert to administrator'
             );
 
             $this->alertAdmin();
             return;
-        } else {
-            Log::info(get_class($validator).': Validator has ended without errors');
         }
 
-        /**
-         * save evidence into table
-         **/
-        $evidence = new Evidence();
-        $evidence->filename = $this->filename;
-        $evidence->sender   = $parsedMail->getHeader('from');
-        $evidence->subject  = $parsedMail->getHeader('subject');
-        $evidence->save();
+        if (count($parserResult['data']) !== 0) {
+            // Call validator
+            $validator = new EventsValidate($parserResult['data']);
+            $validatorResult = $validator->handle();
 
-        /**
-         * call saver
-        **/
-        $saver = new EventsSave($parserResult['data'], $evidence->id);
-        $saverResult = $saver->handle();
+            if ($validatorResult['errorStatus'] === true) {
+                Log::error(
+                    get_class($validator).': Validator has ended with errors ! : ' . $validatorResult['errorMessage']
+                );
 
-        /**
-         * We've hit a snag, so we are gracefully killing ourselves
-         * after we contact the admin about it. EventsSave should never
-         * end with problems unless the mysql died while doing transactions
-         **/
-        if ($saverResult['errorStatus'] === true) {
-            Log::error(
-                get_class($saver).': Saver has ended with errors ! : ' . $saverResult['errorMessage']
-            );
+                $this->alertAdmin();
+                return;
+            } else {
+                Log::info(get_class($validator).': Validator has ended without errors');
+            }
 
-            $this->alertAdmin();
-            return;
+            /**
+             * save evidence into table
+             **/
+            $evidence = new Evidence();
+            $evidence->filename = $this->filename;
+            $evidence->sender = $parsedMail->getHeader('from');
+            $evidence->subject = $parsedMail->getHeader('subject');
+            $evidence->save();
+
+            /**
+             * call saver
+             **/
+            $saver = new EventsSave($parserResult['data'], $evidence->id);
+            $saverResult = $saver->handle();
+
+            /**
+             * We've hit a snag, so we are gracefully killing ourselves
+             * after we contact the admin about it. EventsSave should never
+             * end with problems unless the mysql died while doing transactions
+             **/
+            if ($saverResult['errorStatus'] === true) {
+                Log::error(
+                    get_class($saver) . ': Saver has ended with errors ! : ' . $saverResult['errorMessage']
+                );
+
+                $this->alertAdmin();
+                return;
+            } else {
+                Log::info(get_class($saver) . ': Saver has ended without errors');
+            }
         } else {
-            Log::info(get_class($saver).': Saver has ended without errors');
+            Log::warning(
+                get_class($this) .
+                ': Parser did not return any events therefore skipping validation and saving a empty event set'
+            );
         }
 
         Log::info(get_class($this).': Queued worker has ended the processing of email file: ' . $this->filename);

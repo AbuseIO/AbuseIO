@@ -31,6 +31,7 @@ return [
         'store_mail'                        => true,
         'store_evidence'                    => true,
         'remove_evidence'                   => '500 days',
+        'notify_on_warnings'                => true,
     ],
 
     'reports' => [
