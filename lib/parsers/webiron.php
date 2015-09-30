@@ -100,6 +100,7 @@ function parse_webiron($message) {
         $reportID = reportAdd($outReport);
         if (!$reportID) return false;
         if(KEEP_EVIDENCE == true && $reportID !== true) { evidenceLink($message['evidenceid'], $reportID); }
+        return true;
 
     } else {
         logger(LOG_ERR, __FUNCTION__ . " Unable to parse message from ${source} subject ${message['subject']}");
