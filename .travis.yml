@@ -27,7 +27,7 @@ install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo 'yes' | pecl install mailparse; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then mysql -e 'CREATE DATABASE `abuseio`;'; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then composer self-update; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then composer install --dev --prefer-source --no-interaction; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then composer install --prefer-source --no-interaction; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod -R 777 storage; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan migrate:install --no-interaction -vvv; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod +x extra/notifier-samples/runall; fi
@@ -35,7 +35,7 @@ install:
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then echo 'yes' | pecl install mailparse; fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then mysql -e 'CREATE DATABASE `abuseio`;'; fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then composer self-update; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then composer install --dev --prefer-source --no-interaction; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then composer install --prefer-source --no-interaction; fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan migrate:install --no-interaction -vvv; fi
 
 script:
