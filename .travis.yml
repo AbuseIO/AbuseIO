@@ -1,5 +1,13 @@
 language: php
 
+branches:
+  except:
+    - ABuseIO-3.0
+
+os:
+  - linux
+  - windows
+
 php:
   - 5.5.9
   - 5.6
@@ -8,25 +16,39 @@ php:
 env:
   - DB=mysql
 
-before_script:
-  - echo 'yes' | pecl install mailparse 
-  - mysql -e 'CREATE DATABASE `abuseio`;'
-  - composer self-update
-  - composer install --dev --prefer-source --no-interaction
-  - chmod -R 777 storage
-  - php artisan migrate:install --no-interaction -vvv
-  - chmod +x extra/notifier-samples/runall
+before_install:
+  # COMMON
+  - echo $TRAVIS_OS_NAME
+  # LINUX
+  # WINDOWS
 
-script: 
-  - php artisan migrate --env=testing --no-interaction -vvv
-  - php artisan db:seed --env=testing --no-interaction -vvv
-  - vendor/bin/phpunit
-  - extra/notifier-samples/runall
-  - php artisan migrate:rollback --env=testing --no-interaction -vvv
+install:
+  # LINUX
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo 'yes' | pecl install mailparse; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then mysql -e 'CREATE DATABASE `abuseio`;'; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then composer self-update; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then composer install --dev --prefer-source --no-interaction; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod -R 777 storage; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan migrate:install --no-interaction -vvv; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod +x extra/notifier-samples/runall; fi
+  # WINDOWS
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then echo 'yes' | pecl install mailparse; fi
+
+script:
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan migrate --env=testing --no-interaction -vvv; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan db:seed --env=testing --no-interaction -vvv; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then vendor/bin/phpunit; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then extra/notifier-samples/runall; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan migrate:rollback --env=testing --no-interaction -vvv; fi
+
+
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php -v; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then cd; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then dir; fi
 
 after_script:
-  - ls -laR storage/mailarchive
-  - cat storage/logs/*.log
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then ls -laR storage/mailarchive; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then cat storage/logs/*.log; fi
 
 notifications:
   email:
