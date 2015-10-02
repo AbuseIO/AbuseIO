@@ -6,7 +6,6 @@ use AbuseIO\Commands\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Validator;
 use Lang;
-use Log;
 
 class EventsValidate extends Command implements SelfHandling
 {

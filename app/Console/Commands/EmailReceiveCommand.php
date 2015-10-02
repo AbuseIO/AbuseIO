@@ -45,10 +45,16 @@ class EmailReceiveCommand extends Command
      */
     public function fire()
     {
-        Log::info(get_class($this).': Being called upon to receive an incoming e-mail');
+        Log::info(
+            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            'Being called upon to receive an incoming e-mail'
+        );
 
         if ($this->option('debug') === true) {
-            Log::debug(get_class($this).': Debug mode has been enabled');
+            Log::debug(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                'Debug mode has been enabled'
+            );
         }
 
         // Read from stdin (should be piped from cat or MDA)
@@ -70,36 +76,54 @@ class EmailReceiveCommand extends Command
         if (!$filesystem->isDirectory($path)) {
             // If a datefolder does not exist, then create it or die trying
             if (!$filesystem->makeDirectory($path)) {
-                Log::error(get_class($this).': Unable to create directory: ' . $path);
+                Log::error(
+                    '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                    'Unable to create directory: ' . $path
+                );
                 $this->exception($rawEmail);
             }
         }
 
         if ($filesystem->isFile($path . $file)) {
-            Log::error(get_class($this).': File aready exists: ' . $filename);
+            Log::error(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                'File aready exists: ' . $filename
+            );
             $this->exception($rawEmail);
         }
 
         if ($filesystem->put($path . $file, $rawEmail) === false) {
-            Log::error(get_class($this).': Unable to write file: ' . $filename);
+            Log::error(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                'Unable to write file: ' . $filename
+            );
 
             $this->exception($rawEmail);
         }
 
         if ($this->option('debug') == true) {
             // In debug mode we don't queue the job
-            Log::debug(get_class($this).': Directly handling message file: ' . $filename);
+            Log::debug(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                'Directly handling message file: ' . $filename
+            );
 
             $processer = new EmailProcess($filename);
             $processer->handle();
 
         } else {
-            Log::info(get_class($this).': Pushing incoming email into queue file: ' . $filename);
+            Log::info(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                'Pushing incoming email into queue file: ' . $filename
+            );
             $this->dispatch(new EmailProcess($filename));
 
         }
 
-        Log::info(get_class($this).': Successfully received the incoming e-mail');
+        Log::info(
+            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            'Successfully received the incoming e-mail'
+        );
     }
 
     /**
@@ -138,8 +162,8 @@ class EmailReceiveCommand extends Command
         // This only bounces with config errors or problems with installations where we cannot accept
         // the email at all. In normal cases the bounce will be handled within EmailProcess::()
         Log::error(
-            get_class($this).': Email receiver is ending with errors. "
-            ."The received e-mail will be bounced to the admin for investigation'
+            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            'Email receiver is ending with errors. The received e-mail will be bounced to the admin for investigation'
         );
 
         $sent = Mail::raw(
@@ -160,11 +184,13 @@ class EmailReceiveCommand extends Command
 
         if (!$sent) {
             Log::error(
-                get_class($this).': Unable to send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                'Unable to send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
             );
         } else {
             Log::info(
-                get_class($this).': Successfully send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                'Successfully send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
             );
         }
     }

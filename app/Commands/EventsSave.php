@@ -136,7 +136,10 @@ class EventsSave extends Command implements SelfHandling
                         ->where('timestamp', '=', $event['timestamp'])
                         ->exists()
                 ) {
-                    Log::warning(get_class($this).' Ignoring exact duplicent event');
+                    Log::warning(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        'Ignoring exact duplicent event'
+                    );
 
                 } else {
                     // New unique event, so we will save this
