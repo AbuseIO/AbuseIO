@@ -21,6 +21,7 @@ before_install:
   - echo $TRAVIS_OS_NAME
   # LINUX
   # WINDOWS
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then wmic os get Caption,CSDVersion /value; fi
 
 install:
   # LINUX
@@ -54,13 +55,9 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan migrate:rollback --env=testing --no-interaction -vvv; fi
 
 after_script:
-  # LINUX
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then ls -laR storage/mailarchive; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then cat storage/logs/*.log; fi
-
-  # WINDOWS
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then dir /a /s storage/mailarchive; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then cat storage/logs/*.log; fi
+  # COMMON
+  - ls -laR storage/mailarchive
+  - cat storage/logs/*.log
 
 notifications:
   email:
