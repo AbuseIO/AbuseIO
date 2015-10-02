@@ -60,6 +60,7 @@ after_script:
 
   # WINDOWS
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then dir /a /s storage/mailarchive; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then cat phpspec.yml; fi
   #fix cat logs?
 
 notifications:
