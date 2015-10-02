@@ -50,7 +50,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan migrate --env=testing --no-interaction -vvv; fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan db:seed --env=testing --no-interaction -vvv; fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then vendor/bin/phpunit; fi
-  #run samples fix?
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then bash extra/notifier-samples/runall; fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan migrate:rollback --env=testing --no-interaction -vvv; fi
 
 after_script:
@@ -60,8 +60,7 @@ after_script:
 
   # WINDOWS
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then dir /a /s storage/mailarchive; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then cat phpspec.yml; fi
-  #fix cat logs?
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then cat storage/logs/*.log; fi
 
 notifications:
   email:
