@@ -33,22 +33,34 @@ install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod +x extra/notifier-samples/runall; fi
   # WINDOWS
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then echo 'yes' | pecl install mailparse; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then mysql -e 'CREATE DATABASE `abuseio`;'; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then composer self-update; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then composer install --dev --prefer-source --no-interaction; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan migrate:install --no-interaction -vvv; fi
 
 script:
+  # LINUX
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan migrate --env=testing --no-interaction -vvv; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan db:seed --env=testing --no-interaction -vvv; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then vendor/bin/phpunit; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then extra/notifier-samples/runall; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan migrate:rollback --env=testing --no-interaction -vvv; fi
 
-
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php -v; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then cd; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then dir; fi
+  # WINDOWS
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan migrate --env=testing --no-interaction -vvv; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan db:seed --env=testing --no-interaction -vvv; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then vendor/bin/phpunit; fi
+  #run samples fix?
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan migrate:rollback --env=testing --no-interaction -vvv; fi
 
 after_script:
+  # LINUX
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then ls -laR storage/mailarchive; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then cat storage/logs/*.log; fi
+
+  # WINDOWS
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then dir /a /s storage/mailarchive; fi
+  #fix cat logs?
 
 notifications:
   email:
