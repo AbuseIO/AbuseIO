@@ -177,8 +177,12 @@ function parse_shadowserver($message) {
     $feed_ignore = (defined('SHADOWSERVER_IGNORE'))?explode(',',str_replace(' ','',SHADOWSERVER_IGNORE)):array();
 
     foreach( $message['attachments'] as $attachmentID => $attachment) {
-        preg_match("~(?:\d{4})-(?:\d{2})-(?:\d{2})-(.*)-[^\-]+-[^\-]+.csv~i", $attachment, $feed);
-        $feed   = $feed[1];
+        preg_match("~(?:\d{4})-(?:\d{2})-(?:\d{2})-(.*)-[^\-]+-[^\-]+.csv~i", $attachment, $matches);
+        if (count($matches) == 2) {
+            $feed = $matches[1];
+        } else {
+            continue;
+        }
 
         if (!isset($feeds[$feed])) {
             //Autodetect of classification failed - this is a config error!
