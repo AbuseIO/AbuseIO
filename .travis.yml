@@ -59,7 +59,7 @@ after_script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then cat storage/logs/*.log; fi
 
   # WINDOWS
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then dir /a /s storage/mailarchive; fi
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then dir /a /s storage/mailarchive; fi
   #fix cat logs?
 
 notifications:
