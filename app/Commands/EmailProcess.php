@@ -12,6 +12,7 @@ use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use AbuseIO\Commands\EventsValidate;
 use AbuseIO\Commands\EventsSave;
+use Pheanstalk\Pheanstalk;
 use Config;
 use Log;
 use Mail;
@@ -25,6 +26,12 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
      * @var string
      */
     public $filename;
+
+    /**
+     * Name of the beandstalk queue to be used
+     * @var string
+     */
+    public $queueName = 'emails';
 
     /**
      * Create a new EmailProcess instance
@@ -44,7 +51,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
      */
     public function queue($queue, $command)
     {
-        $queue->pushOn('emails', $command);
+        $queue->pushOn($this->queueName, $command);
     }
 
     /**
@@ -53,6 +60,14 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        $beans = new Pheanstalk(config('queue.connections.beanstalkd.host'));
+        $stats = $beans->statsTube($this->queueName);
+
+        Log::info(
+            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            'Queued worker still has work to do, currently ' . $stats['current-jobs-ready'] . ' jobs in the queue'
+        );
+
         Log::info(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
             'Queued worker is starting the processing of email file: ' . $this->filename
