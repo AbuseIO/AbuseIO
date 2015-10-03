@@ -32,6 +32,9 @@ class EventsSave extends Command implements SelfHandling
      */
     public function handle()
     {
+        $ticketCount = 0;
+        $eventCount = 0;
+
         foreach ($this->events as $event) {
             /* Here we will thru all the events and look if these is an existing ticket. We will split them up into
              * two seperate arrays: $eventsNew and $events$known. We can save all the known events in the DB with
@@ -85,6 +88,7 @@ class EventsSave extends Command implements SelfHandling
 
             if ($search->count() === 0) {
                 // Build an array with all new tickes and save it with its related event and evidence link.
+                $ticketCount++;
 
                 $newTicket = new Ticket;
                 $newTicket->ip                         = $event['ip'];
@@ -127,6 +131,7 @@ class EventsSave extends Command implements SelfHandling
 
             } elseif ($search->count() === 1) {
                 // This is an existing ticket
+                $eventCount++;
 
                 $ticketID = $search[0]->id;
 
@@ -161,6 +166,12 @@ class EventsSave extends Command implements SelfHandling
                 $this->failed('Unable to link to ticket, multiple open tickets found for same event type');
             }
         }
+
+        Log::debug(
+            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            "has completed creating {$ticketCount} new tickets and linking {$eventCount} new events"
+        );
+        
         $this->success('');
     }
 }
