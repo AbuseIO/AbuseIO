@@ -14,6 +14,11 @@
 			"role": "Lead"
 		}
 	],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.0.2-dev"
+        }
+    },
 	"support": {
 		"email": "dev@abuse.io",
 		"issues": "https://github.com/AbuseIO/AbuseIO/issues",
