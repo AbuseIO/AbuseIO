@@ -171,7 +171,7 @@ class EventsSave extends Command implements SelfHandling
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
             "has completed creating {$ticketCount} new tickets and linking {$eventCount} new events"
         );
-        
+
         $this->success('');
     }
 }
