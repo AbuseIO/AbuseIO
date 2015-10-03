@@ -1,7 +1,7 @@
 {
 	"name": "abuseio/abuseio",
 	"description": "Open Source abusemanagement tool",
-	"version": "4.0.0-dev",
+	"version": "4.0.2-dev",
 	"keywords": ["abuse", "abuseio"],
 	"homepage": "http://abuse.io",
 	"type": "project",
