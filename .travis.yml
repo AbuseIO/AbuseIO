@@ -6,7 +6,6 @@ branches:
 
 os:
   - linux
-#  - windows
 
 php:
   - 5.5.9
@@ -16,46 +15,23 @@ php:
 env:
   - DB=mysql
 
-before_install:
-  # COMMON
-  - echo $TRAVIS_OS_NAME
-  # LINUX
-  # WINDOWS
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then wmic os get Caption,CSDVersion /value; fi
-
-install:
-  # LINUX
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo 'yes' | pecl install mailparse; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then mysql -e 'CREATE DATABASE `abuseio`;'; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then composer self-update; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then composer install --prefer-source --no-interaction; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod -R 777 storage; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan migrate:install --no-interaction -vvv; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then chmod +x extra/notifier-samples/runall; fi
-  # WINDOWS
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then echo 'yes' | pecl install mailparse; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then mysql -e 'CREATE DATABASE `abuseio`;'; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then composer self-update; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then composer install --prefer-source --no-interaction; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan migrate:install --no-interaction -vvv; fi
+before_script:
+  - echo 'yes' | pecl install mailparse
+  - mysql -e 'CREATE DATABASE `abuseio`;'
+  - composer self-update
+  - composer install --dev --prefer-source --no-interaction
+  - chmod -R 777 storage
+  - php artisan migrate:install --no-interaction -vvv
+  - chmod +x extra/notifier-samples/runall
 
 script:
-  # LINUX
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan migrate --env=testing --no-interaction -vvv; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan db:seed --env=testing --no-interaction -vvv; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then vendor/bin/phpunit; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then extra/notifier-samples/runall; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then php artisan migrate:rollback --env=testing --no-interaction -vvv; fi
-
-  # WINDOWS
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan migrate --env=testing --no-interaction -vvv; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan db:seed --env=testing --no-interaction -vvv; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then vendor/bin/phpunit; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then bash extra/notifier-samples/runall; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then php artisan migrate:rollback --env=testing --no-interaction -vvv; fi
+  - php artisan migrate --env=testing --no-interaction -vvv
+  - php artisan db:seed --env=testing --no-interaction -vvv
+  - vendor/bin/phpunit
+  - extra/notifier-samples/runall
+  - php artisan migrate:rollback --env=testing --no-interaction -vvv
 
 after_script:
-  # COMMON
   - ls -laR storage/mailarchive
   - cat storage/logs/*.log
 
@@ -68,4 +44,3 @@ notifications:
     template:
       - "%{repository}#%{build_number} (%{branch} - %{commit}) %{author}: %{message} - %{build_url}"
   on_failure: always
-  on_success: change
