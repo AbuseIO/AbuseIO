@@ -60,6 +60,10 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
+        /*
+         * Removing this added code because its confusing beanstalkd for some reason which results
+         * in a [Pheanstalk\Exception\ServerException] -> Server reported NOT_FOUND
+         *
         if (env('QUEUE_DRIVER') == 'beanstalkd') {
             $beans = new Pheanstalk(config('queue.connections.beanstalkd.host'));
             $stats = $beans->statsTube($this->queueName);
@@ -70,12 +74,13 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
             $currentJobs = 'unknown';
         }
 
+
         Log::info(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' . env('QUEUE_DRIVER') .
             'Queue worker ' . env('QUEUE_DRIVER') . ' still has work to do, '.
             'currently ' . $currentJobs . ' jobs still left in the queue'
         );
-
+        */
         Log::info(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
             'Queued worker is starting the processing of email file: ' . $this->filename
