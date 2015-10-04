@@ -73,7 +73,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
         Log::info(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' . env('QUEUE_DRIVER') .
             'Queue worker ' . env('QUEUE_DRIVER') . ' still has work to do, '.
-            'currently ' . $currentJobs . ' jobs in the queue'
+            'currently ' . $currentJobs . ' jobs still left in the queue'
         );
 
         Log::info(
