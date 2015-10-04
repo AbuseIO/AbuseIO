@@ -19,11 +19,13 @@ class MainconfigServiceProvider extends ServiceProvider
          * inside config where an config override can be made.
          */
         $envConfig = $this->app['config']->get(app()->environment());
-        foreach ($envConfig as $configKey => $configElement) {
-            $overrideConfig = $envConfig[$configKey];
-            $defaultConfig = $this->app['config']->get($configKey, []);
+        if (!empty($envConfig) && is_array($envConfig)) {
+            foreach ($envConfig as $configKey => $configElement) {
+                $overrideConfig = $envConfig[$configKey];
+                $defaultConfig = $this->app['config']->get($configKey, []);
 
-            $this->app['config']->set($configKey, array_replace_recursive($defaultConfig, $overrideConfig));
+                $this->app['config']->set($configKey, array_replace_recursive($defaultConfig, $overrideConfig));
+            }
         }
     }
 
