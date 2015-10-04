@@ -17,6 +17,7 @@ env:
 
 before_script:
   - echo 'yes' | pecl install mailparse
+  - apt-get install supervisor beanstalkd
   - mysql -e 'CREATE DATABASE `abuseio`;'
   - composer self-update
   - composer install --dev --prefer-source --no-interaction

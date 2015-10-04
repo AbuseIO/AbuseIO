@@ -60,12 +60,20 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $beans = new Pheanstalk(config('queue.connections.beanstalkd.host'));
-        $stats = $beans->statsTube($this->queueName);
+        if (env('QUEUE_DRIVER') == 'beanstalkd') {
+            $beans = new Pheanstalk(config('queue.connections.beanstalkd.host'));
+            $stats = $beans->statsTube($this->queueName);
+
+            $currentJobs = $stats['current-jobs-ready'];
+            // TODO Add a method to do all queue providers
+        } else {
+            $currentJobs = 'unknown';
+        }
 
         Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-            'Queued worker still has work to do, currently ' . $stats['current-jobs-ready'] . ' jobs in the queue'
+            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' . env('QUEUE_DRIVER') .
+            'Queue worker ' . env('QUEUE_DRIVER') . ' still has work to do, '.
+            'currently ' . $currentJobs . ' jobs in the queue'
         );
 
         Log::info(
