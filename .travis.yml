@@ -1,7 +1,5 @@
 language: php
 
-sudo: true
-
 branches:
   except:
     - ABuseIO-3.0
@@ -18,16 +16,6 @@ env:
   - DB=mysql
 
 before_script:
-  - sudo apt-get install supervisor beanstalkd
-  - sudo cat /etc/default/beanstalkd 
-  - sudo echo "[program:abuseio_queue_emails]" >> /etc/supervisor/conf.d/abuseio_queue_email.conf
-  - sudo echo "command=php artisan queue:listen --tries=1 --sleep=3 --memory=128 --delay=0 --queue=emails" >> /etc/supervisor/conf.d/abuseio_queue_email.conf
-  - sudo echo "directory=/opt/abuseio" >> /etc/supervisor/conf.d/abuseio_queue_email.conf
-  - sudo echo "stdout_logfile=/opt/abuseio/storage/logs/queue-emails.log" >> /etc/supervisor/conf.d/abuseio_queue_email.conf
-  - sudo echo "redirect_stderr=true" >> /etc/supervisor/conf.d/abuseio_queue_email.conf
-  - sudo supervisorctl reread
-  - sudo supervisorctl add abuseio_queue_emails
-  - sudo supervisorctl start abuseio_queue_emails
   - echo 'yes' | pecl install mailparse
   - mysql -e 'CREATE DATABASE `abuseio`;'
   - composer self-update
