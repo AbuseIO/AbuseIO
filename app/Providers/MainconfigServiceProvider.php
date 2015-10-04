@@ -27,6 +27,11 @@ class MainconfigServiceProvider extends ServiceProvider
                 $this->app['config']->set($configKey, array_replace_recursive($defaultConfig, $overrideConfig));
             }
         }
+
+        /*
+         *
+         */
+        date_default_timezone_set(config('app.timezone'));
     }
 
     /**
