@@ -19,6 +19,7 @@ env:
 
 before_script:
   - sudo apt-get install supervisor beanstalkd
+  - sudo cat /etc/default/beanstalkd 
   - sudo echo "[program:abuseio_queue_emails]" >> /etc/supervisor/conf.d/abuseio_queue_email.conf
   - sudo echo "command=php artisan queue:listen --tries=1 --sleep=3 --memory=128 --delay=0 --queue=emails" >> /etc/supervisor/conf.d/abuseio_queue_email.conf
   - sudo echo "directory=/opt/abuseio" >> /etc/supervisor/conf.d/abuseio_queue_email.conf
