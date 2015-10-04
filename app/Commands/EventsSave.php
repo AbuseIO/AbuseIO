@@ -55,14 +55,14 @@ class EventsSave extends Command implements SelfHandling
              */
 
             // Start with building a classification lookup table  and switch out name for ID
-            foreach (Lang::get('classifications') as $classID => $class) {
+            foreach ((array)Lang::get('classifications') as $classID => $class) {
                 if ($class['name'] == $event['class']) {
                     $event['class'] = $classID;
                 }
             }
 
             // Also build a types lookup table and switch out name for ID
-            foreach (Lang::get('types.type') as $typeID => $type) {
+            foreach ((array)Lang::get('types.type') as $typeID => $type) {
                 if ($type['name'] == $event['type']) {
                     $event['type'] = $typeID;
                 }
