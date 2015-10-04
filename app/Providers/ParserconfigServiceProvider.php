@@ -4,7 +4,6 @@ namespace AbuseIO\Providers;
 
 use AbuseIO\Parsers\Factory;
 use Illuminate\Support\ServiceProvider;
-use Symfony\Component\ClassLoader\ClassMapGenerator;
 
 class ParserconfigServiceProvider extends ServiceProvider
 {
