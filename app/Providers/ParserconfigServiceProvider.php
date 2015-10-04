@@ -6,7 +6,6 @@ use AbuseIO\Parsers\Factory;
 use Illuminate\Support\ServiceProvider;
 use File;
 
-
 class ParserconfigServiceProvider extends ServiceProvider
 {
     /**
@@ -21,12 +20,21 @@ class ParserconfigServiceProvider extends ServiceProvider
         // So we can easily walk through all of them based on the active configuration
         $parserList = Factory::getParsers();
         foreach ($parserList as $parser) {
-            $parserConfig = base_path().'/vendor/abuseio/parser-'.strtolower($parser)."/config/{$parser}.php";
+            $basePath = base_path().'/vendor/abuseio/parser-'.strtolower($parser) . '/config';
 
+            $parserConfig = $basePath . "/{$parser}.php";
             if (File::exists($parserConfig)) {
                 $this->mergeConfigFrom(
                     $parserConfig,
                     'parsers.' . $parser
+                );
+            }
+
+            $parserOverride = $basePath . '/' . app()->environment() . "/{$parser}.php";
+            if (File::exists($parserOverride)) {
+                $this->mergeConfigFrom(
+                    $parserOverride,
+                    app()->environment() . '.parsers.' . $parser
                 );
             }
         }
