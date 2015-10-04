@@ -34,6 +34,7 @@ class EventsSave extends Command implements SelfHandling
     {
         $ticketCount = 0;
         $eventCount = 0;
+        $eventsIgnored = 0;
 
         foreach ($this->events as $event) {
             /* Here we will thru all the events and look if these is an existing ticket. We will split them up into
@@ -131,8 +132,6 @@ class EventsSave extends Command implements SelfHandling
 
             } elseif ($search->count() === 1) {
                 // This is an existing ticket
-                $eventCount++;
-
                 $ticketID = $search[0]->id;
 
                 if (Event::where('information', '=', $event['information'])
@@ -141,13 +140,11 @@ class EventsSave extends Command implements SelfHandling
                         ->where('timestamp', '=', $event['timestamp'])
                         ->exists()
                 ) {
-                    Log::warning(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        'Ignoring exact duplicent event'
-                    );
+                    $eventsIgnored++;
 
                 } else {
                     // New unique event, so we will save this
+                    $eventCount++;
 
                     $newEvent = new Event;
                     $newEvent->evidence_id  = $this->evidenceID;
@@ -169,7 +166,8 @@ class EventsSave extends Command implements SelfHandling
 
         Log::debug(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-            "has completed creating {$ticketCount} new tickets and linking {$eventCount} new events"
+            "has completed creating {$ticketCount} new tickets, " .
+            "linking {$eventCount} new events and ignored $eventsIgnored duplicates"
         );
 
         $this->success('');
