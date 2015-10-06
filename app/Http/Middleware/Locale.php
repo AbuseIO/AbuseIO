@@ -28,7 +28,7 @@ class Locale implements Middleware
      */
     public function handle($request, Closure $next)
     {
-        $this->languages = Config::get('app.locales');
+        $this->languages = array_keys(Config::get('app.locales'));
 
         if (!Session::has('locale')) {
             Session::put('locale', $request->getPreferredLanguage($this->languages));
