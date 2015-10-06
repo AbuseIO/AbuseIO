@@ -6,10 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ Config::get('app.name') }} {{ Config::get('app.version') }} - {{ trans('misc.'.Request::segment(2)) }}</title>
 
-    <link href="{{ asset('/css/bootstrap.min.css')          }}" rel="stylesheet">
-    <link href="{{ asset('/css/bootstrap-theme.min.css')    }}" rel="stylesheet">
-	<link href="{{ asset('/css/flag-icon-min.css')          }}" rel="stylesheet">
-    <link href="{{ asset('/css/custom.css')                 }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/flag-icon-min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

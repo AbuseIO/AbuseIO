@@ -8,11 +8,37 @@
     <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/flag-icon-min.css') }}" rel="stylesheet">
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 
 </head>
 <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://abuse.io" target="_blank">AbuseIO</a>
+            </div>
+            <div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('misc.language') }} <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							@foreach(Config::get('app.locales') as $locale => $localeData)
+				            	<li><a href="/ash/locale/{{$locale}}"><span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}</a></li>
+							@endforeach
+						</ul>
+					</li>
+				</ul>
+            </div>
+        </div>
+    </nav>
 <div class="header_wrapper">
     <div class="container header"><img class="img-responsive" src="{{ asset('/images/logo_150.png') }}" alt='AbuseIO' /></div>
 </div>
