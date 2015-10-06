@@ -62,7 +62,7 @@ Route::group(['prefix' => "admin"], function () {
 
 // Ash routes
 Route::group(['prefix' => 'ash'], function () {
-    Route::get('{$locale}/collect/{ticketID}/{token}', 'AshController@index');
+    Route::get('collect/{ticketID}/{token}', 'AshController@index');
 });
 
 // Api routes
