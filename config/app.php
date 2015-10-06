@@ -56,6 +56,12 @@ return [
 
     'locale' => 'en',
 
+    // 'locale' => ['Language Name', 'flag'],
+    'locales' => [
+        'en' => ['English', 'gb'],
+        'nl' => ['Nederlands', 'nl'],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

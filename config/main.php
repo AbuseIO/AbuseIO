@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Each plugin, collector or handler will have a config template and a custom config. We will provide the default
  * settings whereas when a custom config file exists it should be overriding the custom config.
@@ -15,15 +16,7 @@ return [
 
     'interface' => [
         'language' => 'en',
-        'navigation' => [
-            'home'      => 'Home',
-            'contacts'  => 'Contacts',
-            'netblocks' => 'Netblocks',
-            'domains'   => 'Domains',
-            'tickets'   => 'Tickets',
-            'search'    => 'Search',
-            'analytics' => 'Analytics',
-        ]
+        'navigation' => ['home', 'contacts', 'netblocks', 'domains' , 'tickets', 'search', 'analytics']
     ],
 
     'emailparser' => [
