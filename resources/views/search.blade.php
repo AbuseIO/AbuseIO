@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <h1 class="page-header">Search</h1>
+    <h1 class="page-header">{{ trans('misc.search') }}</h1>
     {!! Form::open(['route' => 'admin.tickets.index', 'class' => 'form-horizontal']) !!}
     <div class="row top-buffer">
         <div class="col-md-6 @if ($errors->has('ticket_id')) has-error @endif">

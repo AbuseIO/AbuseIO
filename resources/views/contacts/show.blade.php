@@ -1,46 +1,46 @@
 @extends('app')
 
 @section('content')
-    <h1 class="page-header">Contact details for: {{ $contact->name }}</h1>
+    <h1 class="page-header">{{ trans('contacts.headers.detail') }}: {{ $contact->name }}</h1>
     <div class="row">
         <div class="col-md-3 col-md-offset-9 text-right">
             {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.contacts.destroy', $contact->id]]) !!}
-            {!! link_to_route('admin.contacts.edit', 'Edit', $contact->id, ['class' => 'btn btn-info']) !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+            {!! link_to_route('admin.contacts.edit', trans('misc.button.edit'), $contact->id, ['class' => 'btn btn-info']) !!}
+            {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger']) !!}
             {!! Form::close() !!}
         </div>
     </div>
     <dl class="dl-horizontal">
-        <dt>Database ID</dt>
+        <dt>{{ trans('contacts.database_id') }}</dt>
         <dd>{{ $contact->id }}</dd>
 
-        <dt>Reference</dt>
+        <dt>{{ trans('contacts.reference') }}</dt>
         <dd>{{ $contact->reference }}</dd>
 
-        <dt>Name</dt>
+        <dt>{{ trans('misc.name') }}</dt>
         <dd>{{ $contact->name }}</dd>
 
-        <dt>E-mail addresses</dt>
+        <dt>{{ trans('misc.email') }}</dt>
         <dd>{{ $contact->email }}</dd>
 
-        <dt>RPC Hosts</dt>
+        <dt>{{ trans('contacts.rpchost') }}</dt>
         <dd>{{ $contact->rpc_host }}</dd>
 
-        <dt>RPC Key</dt>
+        <dt>{{ trans('contacts.rpckey') }}</dt>
         <dd>{{ $contact->rpc_key }}</dd>
 
-        <dt>Notifications</dt>
-        <dd>{{ $contact->auto_notify ? 'Automatic' : 'Manual' }}</dd>
+        <dt>{{ trans('contacts.notification') }}</dt>
+        <dd>{{ $contact->auto_notify ? trans('misc.automatic') : trans('misc.manual') }}</dd>
 
-        <dt>Status</dt>
-        <dd>{{ $contact->enabled ? 'Enabled' : 'Disabled' }}</dd>
+        <dt>{{ trans('misc.status') }}</dt>
+        <dd>{{ $contact->enabled ? trans('misc.enabled') : trans('misc.disabled') }}</dd>
     </dl>
 
     @if ( $contact->netblocks->count() )
-    <h2 class="page-header">Linked netblocks</h2>
+    <h3 class="page-header">{{ trans('contacts.linked_netblocks') }}</h3>
         @foreach( $contact->netblocks as $netblock )
         <div class="row">
-            <div class="col-md-2">Block ID: {{ $netblock->id }}</div>
+            <div class="col-md-2">{{ trans('contacts.netblock_id') }}: {{ $netblock->id }}</div>
             <div class="col-md-2">{{ ICF::inetItop($netblock->first_ip) }}</div>
             <div class="col-md-2">{{ ICF::inetItop($netblock->last_ip) }}</div>
         </div>
@@ -48,13 +48,13 @@
     @endif
 
     @if ( $contact->domains->count() )
-    <h2 class="page-header">Linked domains</h2>
+    <h3 class="page-header">{{ trans('contacts.linked_domains') }}</h3>
         @foreach( $contact->domains as $domain )
         <div class="row">
-            <div class="col-md-2">Domain ID: {{ $domain->id }}</div>
+            <div class="col-md-2">{{ trans('contacts.domain_id') }}: {{ $domain->id }}</div>
             <div class="col-md-2">{{ $domain->name }}</div>
         </div>
         @endforeach
     @endif
-    {!! link_to(URL::previous(), 'Back', ['class' => 'btn btn-default']) !!}
+    {!! link_to(URL::previous(), trans('misc.button.back'), ['class' => 'btn btn-default top-buffer']) !!}
 @endsection

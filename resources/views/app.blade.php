@@ -4,10 +4,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ Config::get('app.name') }} {{ Config::get('app.version') }} - {{ Config::get('main.interface.navigation.' . Request::segment(2)) }}</title>
+	<title>{{ Config::get('app.name') }} {{ Config::get('app.version') }} - {{ trans('misc.'.Request::segment(2)) }}</title>
 
     <link href="{{ asset('/css/bootstrap.min.css')          }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap-theme.min.css')    }}" rel="stylesheet">
+	<link href="{{ asset('/css/flag-icon-min.css')          }}" rel="stylesheet">
     <link href="{{ asset('/css/custom.css')                 }}" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -35,10 +36,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                        @foreach(Config::get('main.interface.navigation') as $navLink => $navTitle)
-                            <li class="{{ Request::path() == $navLink ? 'active' : '' }}"><a href="{{ url('/'.Request::segment(1).'/'.$navLink) }}">{{ $navTitle }}</a></li>
+                        @foreach(Config::get('main.interface.navigation') as $navLink)
+                            <li class="{{ Request::path() == $navLink ? 'active' : '' }}">
+								<a href="{{ url('/'.Request::segment(1).'/'.$navLink) }}">{{ trans('misc.'.$navLink) }}</a>
+							</li>
                         @endforeach
                 </ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('misc.language') }} <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							@foreach(Config::get('app.locales') as $locale => $localeData)
+				            	<li><a href="/admin/locale/{{$locale}}"><span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}</a></li>
+							@endforeach
+						</ul>
+					</li>
+				</ul>
             </div>
         </div>
     </nav>
