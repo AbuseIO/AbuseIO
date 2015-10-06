@@ -11,208 +11,191 @@
     <link href="{{ asset('/css/flag-icon-min.css') }}" rel="stylesheet">
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="https://abuse.io" target="_blank">AbuseIO</a>
-            </div>
-            <div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ trans('misc.language') }} <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							@foreach(Config::get('app.locales') as $locale => $localeData)
-				            	<li><a href="/ash/locale/{{$locale}}"><span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}</a></li>
-							@endforeach
-						</ul>
-					</li>
-				</ul>
-            </div>
-        </div>
-    </nav>
-<div class="header_wrapper">
-    <div class="container header"><img class="img-responsive" src="{{ asset('/images/logo_150.png') }}" alt='AbuseIO' /></div>
-</div>
-<div class="container">
-    <h2>{{ Lang::get('ash.title') }} {{ $ticket->id }}</h2>
-    <div class="panel panel-danger">
-        <div class="panel-heading">
-            {{ Lang::get('ash.intro') }}
-        </div>
+    <div class="header_wrapper">
+        <div class="container header"><img class="img-responsive" src="{{ asset('/images/logo_150.png') }}" alt='AbuseIO' /></div>
     </div>
-
-    @if (Session::has('message'))
-        <div class="alert alert-{{ Session::get('messageType') }}">
-            <span class="glyphicon glyphicon-{{ Session::get('messageIcon') }}"></span>
-            {{ Lang::get('ash.messages.'. Session::get('message')) }}
+    <div class="container">
+        <h1 class="page-header">{{ Lang::get('ash.title') }} {{ $ticket->id }}</h1>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-9 text-right">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ trans('misc.language') }} <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        @foreach(Config::get('app.locales') as $locale => $localeData)
+                            <li><a href="/ash/locale/{{$locale}}"><span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
-    @endif
-
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#basicinfo"><span class="glyphicon glyphicon-file"></span> {{ Lang::get('ash.menu.basic') }}</a></li>
-        <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ Lang::get('ash.menu.technical') }}</a></li>
-        <li><a data-toggle="tab" href="#whatsthis"><span class="glyphicon glyphicon-question-sign"></span> {{ Lang::get('ash.menu.about') }}</a></li>
-        <li><a data-toggle="tab" href="#resolved"><span class="glyphicon glyphicon-ok"></span> {{ Lang::get('ash.menu.communication') }}</a></li>
-    </ul>
-    <div class="tab-content">
-        <div id="basicinfo" class="tab-pane fade in active">
-            <dl class="dl-horizontal">
-
-                <dt>{{ Lang::get('ash.basic.ip') }}</dt>
-                <dd>{{ $ticket->ip }}</dd>
-
-                @if (gethostbyaddr($ticket->ip) !== false)
-                    <dt>{{ Lang::get('ash.basic.ptr') }}</dt>
-                    <dd>{{ gethostbyaddr($ticket->ip) }}</dd>
-                @endif
-
-                @if (!empty($ticket->domain))
-                    <dt>{{ Lang::get('ash.basic.domain') }}</dt>
-                    <dd>{{ $ticket->domain }}</dd>
-                @endif
-
-                <dt>{{ Lang::get('ash.basic.class') }}</dt>
-                <dd>{{ Lang::get('classifications.' . $ticket->class_id . '.name') }}</dd>
-
-                <dt>{{ Lang::get('ash.basic.type') }}</dt>
-                <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.name') }}</dd>
-
-                <dt>{{ Lang::get('ash.basic.suggest') }}</dt>
-                <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.description') }}</dd>
-
-                <dt>{{ Lang::get('ash.basic.firstSeen') }}</dt>
-                <dd>{{ date('d-m-Y H:i', $ticket->firstEvent[0]->timestamp) }}</dd>
-
-                <dt>{{ Lang::get('ash.basic.lastSeen') }}</dt>
-                <dd>{{ date('d-m-Y H:i', $ticket->lastEvent[0]->timestamp) }}</dd>
-
-                <dt>{{ Lang::get('ash.basic.reportCount') }}</dt>
-                <dd>{{ $ticket->events->count() }}</dd>
-
-                <dt>{{ Lang::get('ash.basic.ticketStatus') }}</dt>
-                <dd>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</dd>
-
-                <dt>{{ Lang::get('ash.basic.ticketCreated') }}</dt>
-                <dd>{{ $ticket->created_at }}</dd>
-
-                <dt>{{ Lang::get('ash.basic.ticketModified') }}</dt>
-                <dd>{{ $ticket->updated_at }}</dd>
-
-                <dt>{{ Lang::get('ash.basic.replyStatus') }}</dt>
-                <dd></dd>
-
-            </dl>
+        <div class="panel panel-danger top-buffer">
+            <div class="panel-heading">
+                {{ Lang::get('ash.intro') }}
+            </div>
         </div>
 
-        <div id="events" class="tab-pane fade">
-            @if ( !$ticket->events->count() )
-                {{ Lang::get('ash.technical.collectError') }}
-            @else
-                <table class="table table-striped table-condensed">
-                    <thead>
-                    <tr>
-                        <th>{{ Lang::get('ash.technical.timestamp') }}</th>
-                        <th>{{ Lang::get('ash.technical.source') }}</th>
-                        <th>{{ Lang::get('ash.technical.information') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+        @if (Session::has('message'))
+            <div class="alert alert-{{ Session::get('messageType') }}">
+                <span class="glyphicon glyphicon-{{ Session::get('messageIcon') }}"></span>
+                {{ Lang::get('ash.messages.'. Session::get('message')) }}
+            </div>
+        @endif
 
-                    @foreach ($ticket->events as $event)
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#basicinfo"><span class="glyphicon glyphicon-file"></span> {{ Lang::get('ash.menu.basic') }}</a></li>
+            <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ Lang::get('ash.menu.technical') }}</a></li>
+            <li><a data-toggle="tab" href="#whatsthis"><span class="glyphicon glyphicon-question-sign"></span> {{ Lang::get('ash.menu.about') }}</a></li>
+            <li><a data-toggle="tab" href="#resolved"><span class="glyphicon glyphicon-ok"></span> {{ Lang::get('ash.menu.communication') }}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="basicinfo" class="tab-pane fade in active">
+                <dl class="dl-horizontal">
 
+                    <dt>{{ Lang::get('ash.basic.ip') }}</dt>
+                    <dd>{{ $ticket->ip }}</dd>
+
+                    @if (gethostbyaddr($ticket->ip) !== false)
+                        <dt>{{ Lang::get('ash.basic.ptr') }}</dt>
+                        <dd>{{ gethostbyaddr($ticket->ip) }}</dd>
+                    @endif
+
+                    @if (!empty($ticket->domain))
+                        <dt>{{ Lang::get('ash.basic.domain') }}</dt>
+                        <dd>{{ $ticket->domain }}</dd>
+                    @endif
+
+                    <dt>{{ Lang::get('ash.basic.class') }}</dt>
+                    <dd>{{ Lang::get('classifications.' . $ticket->class_id . '.name') }}</dd>
+
+                    <dt>{{ Lang::get('ash.basic.type') }}</dt>
+                    <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.name') }}</dd>
+
+                    <dt>{{ Lang::get('ash.basic.suggest') }}</dt>
+                    <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.description') }}</dd>
+
+                    <dt>{{ Lang::get('ash.basic.firstSeen') }}</dt>
+                    <dd>{{ date('d-m-Y H:i', $ticket->firstEvent[0]->timestamp) }}</dd>
+
+                    <dt>{{ Lang::get('ash.basic.lastSeen') }}</dt>
+                    <dd>{{ date('d-m-Y H:i', $ticket->lastEvent[0]->timestamp) }}</dd>
+
+                    <dt>{{ Lang::get('ash.basic.reportCount') }}</dt>
+                    <dd>{{ $ticket->events->count() }}</dd>
+
+                    <dt>{{ Lang::get('ash.basic.ticketStatus') }}</dt>
+                    <dd>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</dd>
+
+                    <dt>{{ Lang::get('ash.basic.ticketCreated') }}</dt>
+                    <dd>{{ $ticket->created_at }}</dd>
+
+                    <dt>{{ Lang::get('ash.basic.ticketModified') }}</dt>
+                    <dd>{{ $ticket->updated_at }}</dd>
+
+                    <dt>{{ Lang::get('ash.basic.replyStatus') }}</dt>
+                    <dd></dd>
+
+                </dl>
+            </div>
+
+            <div id="events" class="tab-pane fade">
+                @if ( !$ticket->events->count() )
+                    {{ Lang::get('ash.technical.collectError') }}
+                @else
+                    <table class="table table-striped table-condensed">
+                        <thead>
                         <tr>
-                            <td>{{ date('d-m-Y H:i', $event->timestamp) }}</td>
-                            <td>{{ $event->source }}</td>
-                            <td>
-                                <dl class="dl-horizontal">
-                                    @foreach (json_decode($event->information, true) as $l1field => $l1value)
-                                        @if (is_array($l1value))
-                                            @foreach ($l1value as $l2field=>$l2value)
-                                                @if (is_array($l2value))
-                                                    @foreach ($l2value as $l3field=>$l3value)
-                                                        @if (is_array($l3value))
-                                                            <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
-                                                            <dd>This is filtered due to fourth layer nesting</dd>
-                                                        @else
-                                                            <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
-                                                            <dd>{{ htmlentities($l3value) }}</dd>
-                                                        @endif
-                                                    @endforeach
-                                                @else
-                                                    <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) }}</dt>
-                                                    <dd>{{ htmlentities($l2value) }}</dd>
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <dt>{{ ucfirst($l1field) }}</dt>
-                                            <dd>{{ htmlentities($l1value) }}</dd>
-                                        @endif
-                                    @endforeach
-                                </dl>
-                            </td>
+                            <th>{{ Lang::get('ash.technical.timestamp') }}</th>
+                            <th>{{ Lang::get('ash.technical.source') }}</th>
+                            <th>{{ Lang::get('ash.technical.information') }}</th>
                         </tr>
+                        </thead>
+                        <tbody>
 
+                        @foreach ($ticket->events as $event)
+
+                            <tr>
+                                <td>{{ date('d-m-Y H:i', $event->timestamp) }}</td>
+                                <td>{{ $event->source }}</td>
+                                <td>
+                                    <dl class="dl-horizontal">
+                                        @foreach (json_decode($event->information, true) as $l1field => $l1value)
+                                            @if (is_array($l1value))
+                                                @foreach ($l1value as $l2field=>$l2value)
+                                                    @if (is_array($l2value))
+                                                        @foreach ($l2value as $l3field=>$l3value)
+                                                            @if (is_array($l3value))
+                                                                <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
+                                                                <dd>This is filtered due to fourth layer nesting</dd>
+                                                            @else
+                                                                <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
+                                                                <dd>{{ htmlentities($l3value) }}</dd>
+                                                            @endif
+                                                        @endforeach
+                                                    @else
+                                                        <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) }}</dt>
+                                                        <dd>{{ htmlentities($l2value) }}</dd>
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                <dt>{{ ucfirst($l1field) }}</dt>
+                                                <dd>{{ htmlentities($l1value) }}</dd>
+                                            @endif
+                                        @endforeach
+                                    </dl>
+                                </td>
+                            </tr>
+
+                        @endforeach
+                    </table>
+                @endif
+            </div>
+
+            <div id="whatsthis" class="tab-pane fade">
+                {!! Lang::get('classifications.' . $ticket->class_id . '.description') !!}
+            </div>
+
+            <div id="resolved" class="tab-pane fade">
+                <p>{{ Lang::get('ash.communication.header') }}</p>
+
+                {!! Form::model(['method' => 'put']) !!}
+                <div class="form-group">
+                    {!! Form::label('text', Lang::get('ash.communication.reply').':') !!}
+                    {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => Lang::get('ash.communication.placeholder'), 'class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::submit(Lang::get('ash.communication.submit'), ['class'=>'btn primary']) !!}
+                </div>
+                {!! Form::close() !!}
+
+                <h4>{{ Lang::get('ash.communication.previousCommunication') }}</h4>
+                @if ( !$ticket->notes->count() )
+                    {{ Lang::get('ash.communication.noMessages') }}
+                @else
+                    @foreach ($ticket->notes as $note)
+
+                        <div class="panel panel-{{ ($note->submitter == 'contact') ? 'default' : 'primary' }}">
+
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h3 class="panel-title">{{ Lang::get('ash.communication.responseFrom') }} {{ Lang::get('ash.communication.'.$note->submitter) }}</h3>
+                                </div>
+                                <div class="pull-right">
+                                    <span>{{ $note->created_at }}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="panel-body">
+                                {{ htmlentities($note->text) }}
+                            </div>
+
+                        </div>
                     @endforeach
-                </table>
-            @endif
-        </div>
-
-        <div id="whatsthis" class="tab-pane fade">
-            {!! Lang::get('classifications.' . $ticket->class_id . '.description') !!}
-        </div>
-
-        <div id="resolved" class="tab-pane fade">
-            <p>{{ Lang::get('ash.communication.header') }}</p>
-
-            {!! Form::model(['method' => 'put']) !!}
-            <div class="form-group">
-                {!! Form::label('text', Lang::get('ash.communication.reply').':') !!}
-                {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => Lang::get('ash.communication.placeholder'), 'class' => 'form-control']) !!}
+                @endif
             </div>
-            <div class="form-group">
-                {!! Form::submit(Lang::get('ash.communication.submit'), ['class'=>'btn primary']) !!}
-            </div>
-            {!! Form::close() !!}
-
-            <h4>{{ Lang::get('ash.communication.previousCommunication') }}</h4>
-            @if ( !$ticket->notes->count() )
-                {{ Lang::get('ash.communication.noMessages') }}
-            @else
-                @foreach ($ticket->notes as $note)
-
-                    <div class="panel panel-{{ ($note->submitter == 'contact') ? 'default' : 'primary' }}">
-
-                        <div class="panel-heading">
-                            <div class="pull-left">
-                                <h3 class="panel-title">{{ Lang::get('ash.communication.responseFrom') }} {{ Lang::get('ash.communication.'.$note->submitter) }}</h3>
-                            </div>
-                            <div class="pull-right">
-                                <span>{{ $note->created_at }}</span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-
-                        <div class="panel-body">
-                            {{ htmlentities($note->text) }}
-                        </div>
-
-                    </div>
-                @endforeach
-            @endif
         </div>
-
     </div>
-
-</div>
-
 </body>
 </html>
