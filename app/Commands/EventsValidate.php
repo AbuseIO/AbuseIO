@@ -92,7 +92,7 @@ class EventsValidate extends Command implements SelfHandling
                 }
             }
             if ($validType !== true) {
-                return $this->failed('Invalid type used');
+                return $this->failed("Invalid type used: {$event['type']}");
             }
 
             // Check valid Class
@@ -105,7 +105,7 @@ class EventsValidate extends Command implements SelfHandling
             }
 
             if ($validClass !== true) {
-                return $this->failed('Invalid classification used');
+                return $this->failed("Invalid classification used: {$event['class']}");
             }
 
             // Check if information is json encoded
