@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @property string $name
  * @property string $email
  * @property string $password
+ * @property boolean $active
  *
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
@@ -35,6 +36,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'name',
         'email',
         'password',
+        'active',
     ];
 
     /**

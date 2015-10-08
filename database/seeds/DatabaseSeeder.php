@@ -10,6 +10,8 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        $this->call('UsersTableSeeder');
+
         $this->call('ContactsTableSeeder');
         $this->call('NetblocksTableSeeder');
         $this->call('DomainsTableSeeder');
