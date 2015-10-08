@@ -49,13 +49,15 @@ adduser abuseio
 
 Please note that a composer update is required to install all other required packages and dependancies!
 
-```bash using Composer
+using Composer:
+```bash
 cd /opt
 composer create-project abuseio/abuseio
 or composer create-project -s dev abuseio/abuseio if you want latest development release
 ```
 
-```bash using GIT:
+using GIT:
+```bash
 cd /opt
 git clone https://github.com/AbuseIO/AbuseIO.git abuseio
 cd /opt/abuseio
