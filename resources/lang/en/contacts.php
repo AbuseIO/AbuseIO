@@ -1,12 +1,15 @@
 <?php
 
 return [
-    // Contacts - headers
+    // Contacts - Headers
     'headers.new'       => 'New Contact',
     'headers.edit'      => 'Edit Contact',
     'headers.detail'    => 'Contact details for',
 
-    // Contacts - misc fields
+    // Contacts - Buttons
+    'button.new_contact'    => 'Nieuw Contact',
+
+    // Contacts - Miscellaneous
     'csv_export'        => 'CSV Export',
     'no_contacts'       => 'You do not yet have any contacts.',
     'reference'         => 'Reference',
@@ -14,7 +17,6 @@ return [
     'rpckey'            => 'RPC Key',
     'notification'      => 'Notification',
     'details_for'       => 'Contact details for',
-    'database_id'       => 'Database Id',
     'linked_netblocks'  => 'Linked Netblocks',
     'linked_domains'    => 'Linked Domains',
     'netblock_id'       => 'Netblock Id',

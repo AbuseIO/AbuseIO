@@ -11,7 +11,7 @@
         </div>
     </div>
     <dl class="dl-horizontal">
-        <dt>{{ trans('contacts.database_id') }}</dt>
+        <dt>{{ trans('misc.database_id') }}</dt>
         <dd>{{ $contact->id }}</dd>
 
         <dt>{{ trans('contacts.reference') }}</dt>

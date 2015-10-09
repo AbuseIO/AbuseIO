@@ -4,13 +4,13 @@
     <h1 class="page-header">{{ trans('misc.contacts') }}</h1>
     <div class="row">
         <div class="col-md-3 col-md-offset-9 text-right">
-            {!! link_to_route('admin.contacts.create', trans('misc.button.new_contact'), [ ], ['class' => 'btn btn-info']) !!}
+            {!! link_to_route('admin.contacts.create', trans('contacts.button.new_contact'), [ ], ['class' => 'btn btn-info']) !!}
             {!! link_to_route('admin.export.contacts', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
         </div>
     </div>
 
     @if ( !$contacts->count() )
-        <div class="alert alert-info top-buffer">{{ trans('contacts.no_contacts')}}</div>
+        <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('contacts.no_contacts')}}</div>
     @else
         {!! $contacts->render() !!}
         <table class="table table-striped table-condensed">

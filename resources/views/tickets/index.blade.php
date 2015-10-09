@@ -1,38 +1,38 @@
 @extends('app')
 
 @section('content')
-    <h1 class="page-header">Tickets</h1>
+    <h1 class="page-header">{{ trans('misc.tickets') }}</h1>
     <div class="row">
         <div class="col-md-4 col-md-offset-8 text-right">
             <div class="btn-group">
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Views <span class="caret"></span></button>
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ trans('misc.button.filters') }} <span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu">
-                    <li>{!! link_to('admin/tickets', 'All tickets') !!}</li>
-                    <li>{!! link_to('admin/tickets/status/open', 'Open tickets') !!}</li>
-                    <li>{!! link_to('admin/tickets/status/closed', 'Closed tickets') !!}</li>
+                    <li>{!! link_to('admin/tickets', trans('tickets.button.all_tickets')) !!}</li>
+                    <li>{!! link_to('admin/tickets/status/open', trans('tickets.button.open_tickets')) !!}</li>
+                    <li>{!! link_to('admin/tickets/status/closed', trans('tickets.button.closed_tickets')) !!}</li>
                 </ul>
             </div>
-            {!! link_to_route('admin.tickets.create', 'Create Ticket', [], ['class' => 'btn btn-info']) !!}
-            {!! link_to_route('admin.export.tickets', 'CSV Export', ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
+            {!! link_to_route('admin.tickets.create', trans('tickets.button.new_ticket'), [], ['class' => 'btn btn-info']) !!}
+            {!! link_to_route('admin.export.tickets', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
         </div>
     </div>
     @if ( !$tickets->count() )
-        <div class="alert alert-info">You have no tickets yet</div>
+        <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('tickets.no_tickets') }}</div>
     @else
         {!! $tickets->render() !!}
-        <table class="table table-striped table-condensed">
+        <table class="table table-striped table-condensed top-buffer">
             <thead>
                 <tr>
-                    <th>Ticket</th>
-                    <th>IP</th>
-                    <th>Contact</th>
-                    <th>Type</th>
-                    <th>Classification</th>
-                    <th>First Seen</th>
-                    <th>Last Seen</th>
-                    <th>Count</th>
-                    <th>Status</th>
-                    <th class="text-right">Action</th>
+                    <th>{{ trans('tickets.ticket_id') }}</th>
+                    <th>{{ trans('misc.ip') }}</th>
+                    <th>{{ trans('misc.contact') }}</th>
+                    <th>{{ trans('misc.type') }}</th>
+                    <th>{{ trans('misc.classification') }}</th>
+                    <th>{{ trans('tickets.first_seen') }}</th>
+                    <th>{{ trans('tickets.last_seen') }}</th>
+                    <th>{{ trans('tickets.count') }}</th>
+                    <th>{{ trans('misc.status') }}</th>
+                    <th class="text-right">{{ trans('misc.action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +48,7 @@
                     <td>{{ $ticket->events->count() }}</td>
                     <td>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</td>
                     <td class="text-right">
-                        {!! link_to_route('admin.tickets.show', 'Details', [$ticket->id], ['class' => 'btn btn-info btn-xs']) !!}
+                        {!! link_to_route('admin.tickets.show', trans('misc.button.details'), [$ticket->id], ['class' => 'btn btn-info btn-xs']) !!}
                     </td>
                 </tr>
             @endforeach
