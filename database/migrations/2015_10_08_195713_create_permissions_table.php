@@ -3,9 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDomainsTable extends Migration
+class CreatePermissionsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,17 +13,14 @@ class CreateDomainsTable extends Migration
     public function up()
     {
         Schema::create(
-            'domains',
+            'permissions',
             function (Blueprint $table) {
 
                 $table->increments('id');
-                $table->string('name');
-                $table->integer('contact_id')->unsigned();
-                $table->boolean('enabled')->unsigned();
-                $table->timestamps();
+                $table->string('permission_title');
+                $table->string('permission_slug');
+                $table->string('permission_description')->nullable();
 
-                $table->index('name');
-                $table->index('contact_id');
             }
         );
     }
@@ -36,6 +32,6 @@ class CreateDomainsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('domains');
+        Schema::drop('permissions');
     }
 }

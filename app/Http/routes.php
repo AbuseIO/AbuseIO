@@ -1,4 +1,10 @@
 <?php
+Route::controllers(
+    [
+        'auth' => 'Auth\AuthController',
+        'password' => 'Auth\PasswordController',
+    ]
+);
 
 // Go to admin home when / is called.
 Route::get(
@@ -12,10 +18,10 @@ Route::get(
 Route::group(
     [
         'prefix' => 'admin',
-        // Enable this to protect admin, well if the admin/auth/login exists ...
-        //'middleware' => [
-        //    'auth',
-        //],
+        'middleware' => [
+            'auth',
+            'acl:admin.login'
+        ],
     ],
     function () {
         Route::get(
@@ -98,7 +104,7 @@ Route::group(
 // Ash routes
 Route::group(
     [
-        'prefix' => 'ash'
+        'prefix' => 'ash',
     ],
     function () {
         Route::get('collect/{ticketID}/{token}', 'AshController@index');
@@ -111,7 +117,7 @@ Route::group(
 // Api routes
 Route::group(
     [
-        'prefix' => 'api'
+        'prefix' => 'api',
     ],
     function () {
         // TODO
