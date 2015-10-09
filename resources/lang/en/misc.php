@@ -42,6 +42,8 @@ return [
     'email'             => 'E-Mail',
     'settings'          => 'Settings',
     'account'           => 'Account|Accounts',
+    'user'              => 'User|Users',
+    'logout'            => 'Logout',
     'brand'             => 'Brand|Brands',
     'options'           => 'Options',
     'misc'              => 'Miscellaneous',
