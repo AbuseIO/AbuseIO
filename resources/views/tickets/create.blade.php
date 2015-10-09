@@ -1,5 +1,5 @@
 @extends('app')
 
 @section('content')
-    <h1 class="page-header">Create Ticket</h1>
+    <h1 class="page-header">{{ trans('tickets.headers.new') }}</h1>
 @stop

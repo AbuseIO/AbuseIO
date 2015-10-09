@@ -1,25 +1,25 @@
 @extends('app')
 
 @section('content')
-    <h1 class="page-header">Ticket {{ $ticket->id }} details</h1>
+    <h1 class="page-header">{{ trans('tickets.headers.detail') }}: {{ $ticket->id }}</h1>
     <div class="row">
         <div class="col-md-4 col-md-offset-8 text-right">
-            {!! link_to(URL::previous(), 'Back', ['class' => 'btn btn-default']) !!}
+            {!! link_to(URL::previous(), trans('misc.button.back'), ['class' => 'btn btn-default']) !!}
         </div>
     </div>
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#info"><span class="glyphicon glyphicon-file"></span> Information</a></li>
-        <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> Events</a></li>
-        <li><a data-toggle="tab" href="#communication"><span class="glyphicon glyphicon-envelope"></span> Communication</a></li>
+        <li class="active"><a data-toggle="tab" href="#info"><span class="glyphicon glyphicon-file"></span> {{ trans('tickets.information') }}</a></li>
+        <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ trans('tickets.incidents') }}</a></li>
+        <li><a data-toggle="tab" href="#communication"><span class="glyphicon glyphicon-envelope"></span> {{ trans('tickets.communication') }}</a></li>
     </ul>
     <div class="tab-content">
         <div id="info" class="tab-pane fade in active">
             <dl class="dl-horizontal">
-                <dt>IP address</dt>
+                <dt>{{ trans('misc.ip_address') }}</dt>
                 <dd>{{ $ticket->ip }}</dd>
 
                 @if (gethostbyaddr($ticket->ip) !== false)
-                    <dt>Reverse DNS</dt>
+                    <dt>{{ trans('misc.revdns') }}</dt>
                     <dd>{{ gethostbyaddr($ticket->ip) }}</dd>
                 @endif
 
@@ -28,37 +28,37 @@
                     <dd>{{ $ticket->domain }}</dd>
                 @endif
 
-                <dt>Classification</dt>
+                <dt>{{ trans('misc.classification') }}</dt>
                 <dd>{{ Lang::get('classifications.' . $ticket->class_id . '.name') }}</dd>
 
-                <dt>Type</dt>
+                <dt>{{ trans('misc.type') }}</dt>
                 <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.name') }}</dd>
 
-                <dt>Action required</dt>
+                <dt>{{ trans('tickets.action_req') }}</dt>
                 <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.description') }}</dd>
 
-                <dt>First seen</dt>
+                <dt>{{ trans('tickets.first_seen') }}</dt>
                 <dd>{{ date('d-m-Y H:i', $ticket->firstEvent[0]->timestamp) }}</dd>
 
-                <dt>Last seen</dt>
+                <dt>{{ trans('tickets.last_seen') }}</dt>
                 <dd>{{ date('d-m-Y H:i', $ticket->lastEvent[0]->timestamp) }}</dd>
 
-                <dt>Event count</dt>
+                <dt>{{ trans('tickets.count') }}</dt>
                 <dd>{{ $ticket->events->count() }}</dd>
 
-                <dt>Ticket status</dt>
+                <dt>{{ trans('misc.status') }}</dt>
                 <dd>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</dd>
 
-                <dt>Ticket created</dt>
+                <dt>{{ trans('tickets.created') }}</dt>
                 <dd>{{ $ticket->created_at }}</dd>
 
-                <dt>Ticket last modified</dt>
+                <dt>{{ trans('tickets.modified') }}</dt>
                 <dd>{{ $ticket->updated_at }}</dd>
 
-                <dt>Reply status</dt>
+                <dt>{{ trans('tickets.reply_status') }}</dt>
                 <dd></dd>
 
-                <dt>ASH Link</dt>
+                <dt>{{ trans('tickets.ashlink') }}</dt>
                 <dd>
                     {!! link_to(
                         "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference),
@@ -68,55 +68,55 @@
                 </dd>
             </dl>
 
-            <h4>IP contact:</h4>
+            <h4>{{ trans('misc.ip') }} {{ trans('misc.contact') }}:</h4>
             <dl class="dl-horizontal">
-                <dt>Reference</dt>
+                <dt>{{ trans('contacts.reference') }}</dt>
                 <dd>{{ $ticket->ip_contact_reference }}</dd>
 
-                <dt>Name</dt>
+                <dt>{{ trans('misc.name') }}</dt>
                 <dd>{{ $ticket->ip_contact_name }}</dd>
 
-                <dt>E-mail address</dt>
+                <dt>{{ trans('misc.email') }}</dt>
                 <dd>{{ $ticket->ip_contact_email }}</dd>
 
-                <dt>RPC Host</dt>
+                <dt>{{ trans('contacts.rpchost') }}</dt>
                 <dd>{{ $ticket->ip_contact_rpc_host }}</dd>
 
-                <dt>RPC Key</dt>
+                <dt>{{ trans('contacts.rpckey') }}</dt>
                 <dd>{{ $ticket->ip_contact_rpc_key }}</dd>
             </dl>
 
             @if ( $ticket->domain_contact_reference )
-            <h4>Domain contact:</h4>
+            <h4>{{ trans('misc.domain') }} {{ trans('misc.contact') }}:</h4>
             <dl class="dl-horizontal">
-                <dt>Reference</dt>
+                <dt>{{ trans('contacts.reference') }}</dt>
                 <dd>{{ $ticket->domain_contact_reference }}</dd>
 
-                <dt>Name</dt>
+                <dt>{{ trans('misc.name') }}</dt>
                 <dd>{{ $ticket->domain_contact_name }}</dd>
 
-                <dt>E-mail address</dt>
+                <dt>{{ trans('misc.email') }}</dt>
                 <dd>{{ $ticket->domain_contact_email }}</dd>
 
-                <dt>RPC Host</dt>
+                <dt>{{ trans('contacts.rpchost') }}</dt>
                 <dd>{{ $ticket->domain_contact_rpc_host }}</dd>
 
-                <dt>RPC Key</dt>
+                <dt>{{ trans('contacts.rpckey') }}</dt>
                 <dd>{{ $ticket->domain_contact_rpc_key }}</dd>
             </dl>
             @endif
         </div>
         <div id="events" class="tab-pane fade">
         @if ( !$ticket->events->count() )
-            <div class="alert alert-danger">No events found</div>
+            <div class="alert alert-danger"><span class="glyphicon glyphicon-info-sign"></span> No events found</div>
         @else
             <table class="table table-striped table-condensed">
                 <thead>
                     <tr>
-                        <th>Timestamp</th>
-                        <th>Source</th>
-                        <th>Information</th>
-                        <th>Evidence</th>
+                        <th>{{ trans('tickets.timestamp') }}</th>
+                        <th>{{ trans('tickets.source') }}</th>
+                        <th>{{ trans('tickets.information') }}</th>
+                        <th>{{ trans('tickets.evidence') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -151,7 +151,7 @@
                             @endforeach
                             </dl>
                         </td>
-                        <td><a href='{{ Request::url() }}/evidence/{{ $event->evidences[0]->filename }}'>{{ Lang::get('ash.communication.download') }}</a> - <a href="#">{{ Lang::get('ash.communication.view') }}</a></td>
+                        <td><a href='{{ Request::url() }}/evidence/{{ $event->evidences[0]->filename }}'>{{ trans('ash.communication.download') }}</a> - <a href="#">{{ trans('ash.communication.view') }}</a></td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -160,7 +160,7 @@
         </div>
         <div id="communication" class="tab-pane fade">
             @if ( !$ticket->notes->count() )
-                <div class="alert alert-info">{{ Lang::get('ash.communication.noMessages') }}</div>
+                <div class="alert alert-info"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('ash.communication.noMessages') }}</div>
             @else
                 @foreach ($ticket->notes as $note)
                 <div class="row">
