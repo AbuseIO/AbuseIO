@@ -14,16 +14,12 @@ use Input;
 class ContactsController extends Controller
 {
 
+    /*
+     * Call the parent constructor to generate a base ACL
+     */
     public function __construct()
     {
-        /*
-         * Apply ACL restructions to resource controller
-         */
-        $this->middleware('acl:admin_contacts_view', ['only' => ['index', 'show']]);
-        $this->middleware('acl:admin_contacts_create', ['only' => ['create', 'store']]);
-        $this->middleware('acl:admin_contacts_export', ['only' => ['export']]);
-        $this->middleware('acl:admin_contacts_delete', ['only' => ['destroy']]);
-        $this->middleware('acl:admin_contacts_edit', ['only' => ['edit', 'update']]);
+        parent::__construct('contacts');
     }
 
     /**
