@@ -22,6 +22,13 @@ class CreateRoleUserTable extends Migration
 
             }
         );
+
+        $this->addDefaultRolesUsers();
+    }
+
+    public function addDefaultRolesUsers()
+    {
+        //
     }
 
     /**

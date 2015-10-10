@@ -23,6 +23,34 @@ class CreatePermissionsTable extends Migration
 
             }
         );
+
+        $this->addDefaultPermissions();
+    }
+
+    public function addDefaultPermissions()
+    {
+        /*
+         * We delete all the permissions and recreate them as these are from within the hardcode ACL options which
+         * users cannot modify unless changing the code. If they can change the code they can change the defaults
+         * here as well.
+         */
+        DB::table('permissions')->delete();
+        $permissions = [
+            [
+                'id'                        => 1,
+                'permission_title'          => 'admin.login',
+                'permission_slug'           => 'admin.login',
+                'permission_description'    => 'Login to admin portal',
+            ],
+            [
+                'id'                        => 2,
+                'permission_title'          => 'admin.view.contacts',
+                'permission_slug'           => 'admin.view.contacts',
+                'permission_description'    => 'Allow to view contacts',
+            ],
+        ];
+        DB::table('permissions')->insert($permissions);
+
     }
 
     /**

@@ -22,6 +22,23 @@ class CreateRolesTable extends Migration
 
             }
         );
+
+        $this->addDefaultRoles();
+    }
+
+    public function addDefaultRoles()
+    {
+
+        DB::table('roles')->where('id', '=', '1')->delete();
+        $roles = [
+            [
+                'id'                        => 1,
+                'role_title'                => 'System Administrator',
+                'role_slug'                 => 'admin',
+            ],
+        ];
+        DB::table('roles')->insert($roles);
+
     }
 
     /**

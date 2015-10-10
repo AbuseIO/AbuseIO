@@ -10,8 +10,6 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call('UsersTableSeeder');
-
         $this->call('ContactsTableSeeder');
         $this->call('NetblocksTableSeeder');
         $this->call('DomainsTableSeeder');
@@ -20,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call('EventsTableSeeder');
         $this->call('TicketsTableSeeder');
         $this->call('NotesTableSeeder');
+
+        $this->call('UsersTableSeeder');
 
     }
 }
