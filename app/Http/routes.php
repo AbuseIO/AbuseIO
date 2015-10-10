@@ -43,7 +43,6 @@ Route::group(
         Route::get(
             'export/contacts',
             [
-                'middleware' => 'acl:admin_contacts_export',
                 'as' => 'admin.export.contacts',
                 'uses' => 'ContactsController@export',
             ]
@@ -55,7 +54,6 @@ Route::group(
         Route::get(
             'export/netblocks',
             [
-                'middleware' => 'acl:admin_netblocks_export',
                 'as' => 'admin.export.netblocks',
                 'uses' => 'NetblocksController@export',
             ]
@@ -67,7 +65,6 @@ Route::group(
         Route::get(
             'export/domains',
             [
-                'middleware' => 'acl:admin_domains_export',
                 'as' => 'admin.export.domains',
                 'uses' => 'DomainsController@export',
             ]
@@ -79,7 +76,6 @@ Route::group(
         Route::get(
             'export/tickets',
             [
-                'middleware' => 'acl:admin_tickets_export',
                 'as' => 'admin.export.tickets',
                 'uses' => 'TicketsController@export',
             ]
