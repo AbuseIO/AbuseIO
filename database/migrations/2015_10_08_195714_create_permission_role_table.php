@@ -2,11 +2,12 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use AbuseIO\Models\Permission;
 
 class CreatePermissionRoleTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. This migration has a later timestamp as it depends on permissions table.
      *
      * @return void
      */
@@ -30,6 +31,10 @@ class CreatePermissionRoleTable extends Migration
     {
         // Always recreate the permissions for the system administrator
         DB::table('permission_role')->where('role_id', '=', '1')->delete();
+
+        foreach (Permission::all() as $permission) {
+            print_r($permission);
+        }
         $permission_role = [
             [
                 'id'                        => '1',
