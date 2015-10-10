@@ -20,7 +20,7 @@ Route::group(
         'prefix' => 'admin',
         'middleware' => [
             'auth',
-            'acl:admin.login'
+            'acl:admin_login'
         ],
     ],
     function () {

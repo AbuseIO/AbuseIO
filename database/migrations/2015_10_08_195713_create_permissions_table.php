@@ -35,20 +35,47 @@ class CreatePermissionsTable extends Migration
          * here as well.
          */
         DB::table('permissions')->delete();
+
+        // Add single permissions
         $permissions = [
             [
-                'id'                        => 1,
-                'permission_title'          => 'admin.login',
-                'permission_slug'           => 'admin.login',
+                'permission_title'          => 'login admin',
+                'permission_slug'           => 'admin_login',
                 'permission_description'    => 'Login to admin portal',
             ],
-            [
-                'id'                        => 2,
-                'permission_title'          => 'admin.view.contacts',
-                'permission_slug'           => 'admin.view.contacts',
-                'permission_description'    => 'Allow to view contacts',
-            ],
         ];
+
+        // Add scripted permissions (controllers)
+        $controllers = [
+            'contacts',
+            'netblocks',
+            'domains',
+            'tickets',
+            'search',
+            'accounts',
+            'users',
+            'brands',
+            'templates',
+        ];
+        $actions = [
+            'view',
+            'create',
+            'edit',
+            'delete',
+            'export',
+        ];
+
+        foreach ($controllers as $controller) {
+            foreach ($actions as $action) {
+                $permissions[] = [
+                    'permission_title'          => "{$action} {$controller}",
+                    'permission_slug'           => "admin_{$controller}_{$action}",
+                    'permission_description'    => "Allow to {$action} {$controller}",
+                ];
+            }
+        }
+
+        // Write permissions into database
         DB::table('permissions')->insert($permissions);
 
     }
