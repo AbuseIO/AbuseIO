@@ -14,6 +14,16 @@ use Input;
 
 class DomainsController extends Controller
 {
+
+
+    /*
+     * Call the parent constructor to generate a base ACL
+     */
+    public function __construct()
+    {
+        parent::__construct('createDynamicACL');
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response

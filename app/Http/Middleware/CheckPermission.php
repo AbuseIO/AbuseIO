@@ -21,7 +21,10 @@ class CheckPermission
             }
         }
 
-        $request->session()->flash('message', 'Sorry! You are not authorized to access that resource');
+        $request->session()->flash(
+            'message',
+            "Sorry! You are not authorized to access that resource. Missing permission : {$permission}"
+        );
         return $request->ajax ? response('Unauthorized.', 401) : redirect()->back();
 
     }

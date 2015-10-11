@@ -19,7 +19,7 @@ class ContactsController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('contacts');
+        parent::__construct('createDynamicACL');
     }
 
     /**

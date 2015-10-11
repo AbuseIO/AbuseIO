@@ -52,6 +52,7 @@ class CreatePermissionsTable extends Migration
             'domains',
             'tickets',
             'search',
+            'analytics',
             'accounts',
             'users',
             'brands',

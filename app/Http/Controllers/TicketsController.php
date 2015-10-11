@@ -15,6 +15,14 @@ use Input;
 class TicketsController extends Controller
 {
 
+    /*
+     * Call the parent constructor to generate a base ACL
+     */
+    public function __construct()
+    {
+        parent::__construct('createDynamicACL');
+    }
+
     /**
      * Display all tickets
      * @return Response
