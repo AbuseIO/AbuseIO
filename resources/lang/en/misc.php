@@ -43,6 +43,7 @@ return [
     'settings'          => 'Settings',
     'account'           => 'Account|Accounts',
     'user'              => 'User|Users',
+    'profile'           => 'My account',
     'logout'            => 'Logout',
     'brand'             => 'Brand|Brands',
     'options'           => 'Options',

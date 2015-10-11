@@ -26,5 +26,6 @@ class LocaleController extends Controller
             Session::put('locale', $locale);
             return redirect(url(URL::previous()));
         }
+
     }
 }
