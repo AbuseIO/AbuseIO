@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 class AdminControllersTest extends TestCase
 {
 
-    use WithoutMiddleware;
+    //use WithoutMiddleware;
 
     protected $_userId = 1; // use the default admin user defined in the db seed
 
