@@ -20,6 +20,24 @@ class CreateAccountsTable extends Migration
                 $table->timestamps();
             }
         );
+
+        $this->addDefaultAccount();
+    }
+
+    public function addDefaultAccount()
+    {
+
+        // Always recreate the default account for the system
+        DB::table('accounts')->where('id', '=', '1')->delete();
+
+        $accounts = [
+            [
+                'id'                        => 1,
+                'name'                      => 'default'
+            ],
+        ];
+
+        DB::table('accounts')->insert($accounts);
     }
 
     /**
