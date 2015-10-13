@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             function (Blueprint $table) {
 
                 $table->increments('id')->unsigned();
+                $table->integer('account_id')->unsigned();
                 $table->string('email')->unique();
                 $table->string('password');
                 $table->string('first_name');
@@ -25,6 +26,10 @@ class CreateUsersTable extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
+                $table->index('account_id');
+                $table->index('email');
+                $table->index('first_name');
+                $table->index('last_name');
             }
         );
 

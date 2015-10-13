@@ -101,6 +101,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         );
     }
 
+
+    /**
+     * return the fullname of the user
+     *
+     * @return string
+     */
+    public function fullName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Relationship Methods
@@ -116,4 +127,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsToMany('AbuseIO\Models\Role');
     }
+
+    /**
+     * One-To-Many relation to account
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function account()
+    {
+
+        return $this->belongsTo('AbuseIO\Models\Account');
+
+    }
+
 }
