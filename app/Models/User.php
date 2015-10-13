@@ -66,7 +66,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected function checkPermission($perm)
     {
-        $permissions = $this->getAllPernissionsFormAllRoles();
+        $permissions = $this->getAllPermissionsFormAllRoles();
 
         $permissionArray = is_array($perm) ? $perm : [$perm];
 
@@ -78,10 +78,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @return Array of permission slugs
      */
-    protected function getAllPernissionsFormAllRoles()
+    protected function getAllPermissionsFormAllRoles()
     {
-        $permissionsArray = [];
-
         $permissions = $this->roles->load('permissions')->fetch('permissions')->toArray();
 
         return array_map(
@@ -139,5 +137,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo('AbuseIO\Models\Account');
 
     }
-
 }
