@@ -30,7 +30,7 @@ class Account extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    function users()
+    public function users()
     {
         return $this->hasMany('AbuseIO\Models\User');
 
