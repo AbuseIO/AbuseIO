@@ -1,5 +1,7 @@
 <?php
 
+use AbuseIO\Models\User;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
 
@@ -9,6 +11,10 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      * @var string
      */
     protected $baseUrl = 'http://localhost';
+
+    protected $userId = 1; // use the default admin user defined in the db seed
+
+    public $user;
 
     /**
      * Creates the application.
@@ -20,6 +26,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app = require __DIR__.'/../bootstrap/app.php';
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
+
+        $this->user = User::find($this->userId);
 
         return $app;
     }
