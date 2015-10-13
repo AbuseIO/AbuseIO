@@ -98,7 +98,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             )
         );
     }
-    
+
     /**
      * return the fullname of the user
      *
