@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AbuseIO 4.0.0 - misc.login</title>
+
+    <link href="http://localhost/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="http://localhost/css/flag-icon-min.css" rel="stylesheet">
+    <link href="http://localhost/css/custom.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="http://localhost/js/html5shiv.min.js"></script>
+		<script src="http://localhost/js/respond.min.js"></script>
+	<![endif]-->
+
+    <script src="http://localhost/js/jquery.min.js"></script>
+    <script src="http://localhost/js/bootstrap.min.js"></script>
+	</head>
+<body>
+	<div class="container">
+		<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">Login</div>
+				<div class="panel-body">
+					
+					<form class="form-horizontal" role="form" method="POST" action="http://localhost/auth/login">
+						<input type="hidden" name="_token" value="VFFlFpoO7F9U59n5NMz1RhOJQ4s1xSV1VKg40cM4">
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">E-Mail Address</label>
+							<div class="col-md-6">
+								<input type="email" class="form-control" name="email" value="">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Password</label>
+							<div class="col-md-6">
+								<input type="password" class="form-control" name="password">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="remember"> Remember Me
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<button type="submit" class="btn btn-primary">Login</button>
+
+								<a class="btn btn-link" href="http://localhost/password/email">Forgot Your Password?</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	</div>
+</body>
+</html>

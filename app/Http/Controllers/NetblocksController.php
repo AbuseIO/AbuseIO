@@ -27,28 +27,32 @@ class NetblocksController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $netblocks = Netblock::with('contact')
                         ->paginate(10);
 
         return view('netblocks.index')
-            ->with('netblocks', $netblocks);
+            ->with('netblocks', $netblocks)
+            ->with('user', $request->user());
     }
 
     /**
      * Show the form for creating a new resource.
+     * @param Request $request
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $contacts = Contact::lists('name', 'id');
 
         return view('netblocks.create')
             ->with('contact_selection', $contacts)
-            ->with('selected', null);
+            ->with('selected', null)
+            ->with('user', $request->user());
     }
 
     /**
@@ -102,21 +106,26 @@ class NetblocksController extends Controller
 
     /**
      * Display the specified resource.
-     * @param  int  $id
+     * @param Request $request
+     * @param Netblock $netblock
      * @return Response
+     * @internal param int $id
      */
-    public function show(Netblock $netblock)
+    public function show(Request $request, Netblock $netblock)
     {
         return view('netblocks.show')
-            ->with('netblock', $netblock);
+            ->with('netblock', $netblock)
+            ->with('user',$request->user());
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param  int  $id
+     * @param Request $request
+     * @param Netblock $netblock
      * @return Response
+     * @internal param int $id
      */
-    public function edit(Netblock $netblock)
+    public function edit(Request $request, Netblock $netblock)
     {
         $contacts = Contact::lists('name', 'id');
 
@@ -126,7 +135,8 @@ class NetblocksController extends Controller
         return view('netblocks.edit')
             ->with('netblock', $netblock)
             ->with('contact_selection', $contacts)
-            ->with('selected', $netblock->contact_id);
+            ->with('selected', $netblock->contact_id)
+            ->with('user', $request->user());
     }
 
     /**

@@ -4,6 +4,7 @@ namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests;
 use AbuseIO\Models\Ticket;
+use Illuminate\Http\Request;
 use Lang;
 
 class AnalyticsController extends Controller
@@ -19,9 +20,10 @@ class AnalyticsController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $classCounts = [ ];
 
@@ -42,6 +44,7 @@ class AnalyticsController extends Controller
         }
 
         return view('analytics')
-            ->with('classCounts', $classCounts);
+            ->with('classCounts', $classCounts)
+            ->with('user', $request->user());
     }
 }

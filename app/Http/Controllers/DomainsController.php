@@ -26,28 +26,32 @@ class DomainsController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $domains = Domain::with('contact')
             ->paginate(10);
 
         return view('domains.index')
-            ->with('domains', $domains);
+            ->with('domains', $domains)
+            ->with('user', $request->user());
     }
 
     /**
      * Show the form for creating a new resource.
+     * @param Request $request
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $contacts = Contact::lists('name', 'id');
 
         return view('domains.create')
             ->with('contact_selection', $contacts)
-            ->with('selected', null);
+            ->with('selected', null)
+            ->with('user', $request->user());
     }
 
     /**
@@ -97,34 +101,41 @@ class DomainsController extends Controller
 
     /**
      * Display the specified resource.
-     * @param  int $id
+     * @param Request $request
+     * @param Domain $domain
      * @return Response
+     * @internal param int $id
      */
-    public function show(Domain $domain)
+    public function show(Request $request, Domain $domain)
     {
         return view('domains.show')
-            ->with('domain', $domain);
+            ->with('domain', $domain)
+            ->with('user', $request->user());
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param  int $id
+     * @param Request $request
+     * @param Domain $domain
      * @return Response
+     * @internal param int $id
      */
-    public function edit(Domain $domain)
+    public function edit(Request $request, Domain $domain)
     {
         $contacts = Contact::lists('name', 'id');
 
         return view('domains.edit')
             ->with('domain', $domain)
             ->with('contact_selection', $contacts)
-            ->with('selected', $domain->contact_id);
+            ->with('selected', $domain->contact_id)
+            ->with('user', $request->user());
     }
 
     /**
      * Update the specified resource in storage.
-     * @param  int $id
+     * @param Domain $domain
      * @return Response
+     * @internal param int $id
      */
     public function update(Domain $domain)
     {

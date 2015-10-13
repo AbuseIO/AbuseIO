@@ -25,46 +25,54 @@ class TicketsController extends Controller
 
     /**
      * Display all tickets
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $tickets = Ticket::paginate(10);
 
         return view('tickets.index')
-            ->with('tickets', $tickets);
+            ->with('tickets', $tickets)
+            ->with('user', $request->user());
     }
 
     /**
      * Display all open tickets
+     * @param Request $request
      * @return Response
      */
-    public function statusOpen()
+    public function statusOpen(Request $request)
     {
         $tickets = Ticket::where('status_id', 1)->paginate(10);
         return view('tickets.index')
-            ->with('tickets', $tickets);
+            ->with('tickets', $tickets)
+            ->with('user', $request->user());
     }
 
     /**
      * Display all closed tickets
+     * @param Request $request
      * @return Response
      */
-    public function statusClosed()
+    public function statusClosed(Request $request)
     {
         $tickets = Ticket::where('status_id', 2)->paginate(10);
         return view('tickets.index')
-            ->with('tickets', $tickets);
+            ->with('tickets', $tickets)
+            ->with('user', $request->user());
     }
 
     /**
      * Show the form for creating a ticket
+     * @param Request $request
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
 
-        return view('tickets.create');
+        return view('tickets.create')
+            ->with('user', $request->user());
 
     }
 
@@ -110,14 +118,17 @@ class TicketsController extends Controller
 
     /**
      * Display the specified ticket.
-     * @param  int  $id
+     * @param Request $request
+     * @param Ticket $ticket
      * @return Response
+     * @internal param int $id
      */
-    public function show(Ticket $ticket)
+    public function show(Request $request, Ticket $ticket)
     {
 
         return view('tickets.show')
-            ->with('ticket', $ticket);
+            ->with('ticket', $ticket)
+            ->with('user', $request->user());
 
     }
 
