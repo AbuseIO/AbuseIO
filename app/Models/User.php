@@ -66,7 +66,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected function checkPermission($perm)
     {
-        $permissions = $this->getAllPermissionsFormAllRoles();
+        $permissions = $this->getAllPermissionsFromAllRoles();
 
         $permissionArray = is_array($perm) ? $perm : [$perm];
 
@@ -78,7 +78,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @return Array of permission slugs
      */
-    protected function getAllPermissionsFormAllRoles()
+    protected function getAllPermissionsFromAllRoles()
     {
         $permissions = $this->roles->load('permissions')->fetch('permissions')->toArray();
 
@@ -98,8 +98,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             )
         );
     }
-
-
+    
     /**
      * return the fullname of the user
      *
