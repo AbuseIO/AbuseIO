@@ -23,7 +23,7 @@ class AnalyticsController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $classCounts = [ ];
 
@@ -45,6 +45,6 @@ class AnalyticsController extends Controller
 
         return view('analytics')
             ->with('classCounts', $classCounts)
-            ->with('user', $request->user());
+            ->with('user', $this->user);
     }
 }

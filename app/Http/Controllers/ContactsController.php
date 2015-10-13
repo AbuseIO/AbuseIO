@@ -24,27 +24,25 @@ class ContactsController extends Controller
 
     /**
      * Display a listing of the resource.
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $contacts = Contact::paginate(10);
 
         return view('contacts.index')
             ->with('contacts', $contacts)
-            ->with('user', $request->user());
+            ->with('user', $this->user);
     }
 
     /**
      * Show the form for creating a new resource.
-     * @param Request $request
      * @return Response
      */
-    public function create(Request $request)
+    public function create()
     {
         return view('contacts.create')
-            ->with('user', $request->user());
+            ->with('user', $this->user);
     }
 
     /**
@@ -101,7 +99,6 @@ class ContactsController extends Controller
 
     /**
      * Display the specified resource.
-     * @param Request $request
      * @param Contact $contact
      * @return Response
      * @internal param int $id
@@ -115,16 +112,15 @@ class ContactsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param Request $request
      * @param Contact $contact
      * @return Response
      * @internal param int $id
      */
-    public function edit(Request $request, Contact $contact)
+    public function edit(Contact $contact)
     {
         return view('contacts.edit')
             ->with('contact', $contact)
-            ->with('user', $request->user());
+            ->with('user', $this->user);
     }
 
     /**

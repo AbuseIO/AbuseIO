@@ -27,32 +27,30 @@ class NetblocksController extends Controller
 
     /**
      * Display a listing of the resource.
-     * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $netblocks = Netblock::with('contact')
                         ->paginate(10);
 
         return view('netblocks.index')
             ->with('netblocks', $netblocks)
-            ->with('user', $request->user());
+            ->with('user', $this->user);
     }
 
     /**
      * Show the form for creating a new resource.
-     * @param Request $request
      * @return Response
      */
-    public function create(Request $request)
+    public function create()
     {
         $contacts = Contact::lists('name', 'id');
 
         return view('netblocks.create')
             ->with('contact_selection', $contacts)
             ->with('selected', null)
-            ->with('user', $request->user());
+            ->with('user', $this->user);
     }
 
     /**
@@ -106,26 +104,24 @@ class NetblocksController extends Controller
 
     /**
      * Display the specified resource.
-     * @param Request $request
      * @param Netblock $netblock
      * @return Response
      * @internal param int $id
      */
-    public function show(Request $request, Netblock $netblock)
+    public function show(Netblock $netblock)
     {
         return view('netblocks.show')
             ->with('netblock', $netblock)
-            ->with('user',$request->user());
+            ->with('user', $this->user);
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param Request $request
      * @param Netblock $netblock
      * @return Response
      * @internal param int $id
      */
-    public function edit(Request $request, Netblock $netblock)
+    public function edit(Netblock $netblock)
     {
         $contacts = Contact::lists('name', 'id');
 
@@ -136,7 +132,7 @@ class NetblocksController extends Controller
             ->with('netblock', $netblock)
             ->with('contact_selection', $contacts)
             ->with('selected', $netblock->contact_id)
-            ->with('user', $request->user());
+            ->with('user', $this->user);
     }
 
     /**

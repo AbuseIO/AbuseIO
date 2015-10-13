@@ -27,7 +27,7 @@ class SearchController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $classifications = array_merge([Lang::get('misc.all')], array_column(Lang::get('classifications'), 'name'));
         $types = array_merge([Lang::get('misc.all')], array_column(Lang::get('types.type'), 'name'));
@@ -39,6 +39,6 @@ class SearchController extends Controller
             ->with('type_selection', $types)
             ->with('status_selection', $status)
             ->with('state_selection', $state)
-            ->with('user', $request->user());
+            ->with('user', $this->user);
     }
 }

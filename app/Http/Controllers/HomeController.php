@@ -12,10 +12,13 @@ class HomeController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $user = $request->user();
-
-        return view('home', ['user' => $user]);
+        return view(
+            'home',
+            [
+                'user' => $this->user
+            ]
+        );
     }
 }

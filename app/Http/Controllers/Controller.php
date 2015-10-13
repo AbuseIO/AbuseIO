@@ -11,6 +11,8 @@ abstract class Controller extends BaseController
 {
     use DispatchesCommands, ValidatesRequests;
 
+    public $user;
+
     public function __construct($createAcl = false)
     {
         if ($createAcl !== false) {
@@ -31,5 +33,8 @@ abstract class Controller extends BaseController
             $this->middleware("acl:admin_{$resourceAcl}_delete", ['only' => ['destroy']]);
             $this->middleware("acl:admin_{$resourceAcl}_edit", ['only' => ['edit', 'update']]);
         }
+
+        $this->user = \Auth::user();
+
     }
 }
