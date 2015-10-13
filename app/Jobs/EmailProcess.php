@@ -1,6 +1,6 @@
 <?php
 
-namespace AbuseIO\Commands;
+namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Evidence;
 use Illuminate\Queue\SerializesModels;
@@ -10,14 +10,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Filesystem\Filesystem;
 use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
-use AbuseIO\Commands\EventsValidate;
-use AbuseIO\Commands\EventsSave;
-use Pheanstalk\Pheanstalk;
+use AbuseIO\Jobs\EventsValidate;
+use AbuseIO\Jobs\EventsSave;
 use Config;
 use Log;
 use Mail;
 
-class EmailProcess extends Command implements SelfHandling, ShouldQueue
+class EmailProcess extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
@@ -60,27 +59,7 @@ class EmailProcess extends Command implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        /*
-         * Removing this added code because its confusing beanstalkd for some reason which results
-         * in a [Pheanstalk\Exception\ServerException] -> Server reported NOT_FOUND
-         *
-        if (env('QUEUE_DRIVER') == 'beanstalkd') {
-            $beans = new Pheanstalk(config('queue.connections.beanstalkd.host'));
-            $stats = $beans->statsTube($this->queueName);
 
-            $currentJobs = $stats['current-jobs-ready'];
-            // TODO Add a method to do all queue providers
-        } else {
-            $currentJobs = 'unknown';
-        }
-
-
-        Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' . env('QUEUE_DRIVER') .
-            'Queue worker ' . env('QUEUE_DRIVER') . ' still has work to do, '.
-            'currently ' . $currentJobs . ' jobs still left in the queue'
-        );
-        */
         Log::info(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
             'Queued worker is starting the processing of email file: ' . $this->filename

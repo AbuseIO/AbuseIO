@@ -2,7 +2,7 @@
 
 namespace AbuseIO\Console\Commands;
 
-use AbuseIO\Commands\EmailProcess;
+use AbuseIO\Jobs\EmailProcess;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;

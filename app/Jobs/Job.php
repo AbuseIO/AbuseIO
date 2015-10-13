@@ -1,9 +1,14 @@
 <?php
 
-namespace AbuseIO\Commands;
+namespace AbuseIO\Jobs;
 
-abstract class Command
+use Illuminate\Bus\Queueable;
+
+abstract class Job
 {
+
+    use Queueable;
+
     /**
      * Command has failed
      * @return array

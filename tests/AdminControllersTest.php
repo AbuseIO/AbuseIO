@@ -6,9 +6,11 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 class AdminControllersTest extends TestCase
 {
 
+    /**
+     * This is required else it would generate:
+     *  Fatal error:  Maximum function nesting level of '100' reached, aborting
+     */
     use WithoutMiddleware;
-    
-    protected $userId = 1; // use the default admin user defined in the db seed
 
     /**
      * @return void
@@ -24,9 +26,7 @@ class AdminControllersTest extends TestCase
      */
     public function testAdminHome()
     {
-        $user = User::find($this->userId);
-        $this->be($user);
-
+        $this->be($this->user);
         $response = $this->call('GET', '/admin/home');
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -37,9 +37,7 @@ class AdminControllersTest extends TestCase
      */
     public function testAdminContacts()
     {
-        $user = User::find($this->userId);
-        $this->be($user);
-
+        $this->be($this->user);
         $response = $this->call('GET', '/admin/contacts');
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -50,9 +48,7 @@ class AdminControllersTest extends TestCase
      */
     public function testAdminNetblocks()
     {
-        $user = User::find($this->userId);
-        $this->be($user);
-
+        $this->be($this->user);
         $response = $this->call('GET', '/admin/netblocks');
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -63,9 +59,7 @@ class AdminControllersTest extends TestCase
      */
     public function testAdminDomains()
     {
-        $user = User::find($this->userId);
-        $this->be($user);
-
+        $this->be($this->user);
         $response = $this->call('GET', '/admin/domains');
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -76,9 +70,7 @@ class AdminControllersTest extends TestCase
      */
     public function testAdminTickets()
     {
-        $user = User::find($this->userId);
-        $this->be($user);
-
+        $this->be($this->user);
         $response = $this->call('GET', '/admin/tickets');
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -89,9 +81,7 @@ class AdminControllersTest extends TestCase
      */
     public function testAdminSearch()
     {
-        $user = User::find($this->userId);
-        $this->be($user);
-
+        $this->be($this->user);
         // TODO mark, fix search forms
         // $response = $this->call('GET', '/admin/search');
         // $this->assertEquals(200, $response->getStatusCode());
@@ -103,9 +93,7 @@ class AdminControllersTest extends TestCase
      */
     public function testAdminAnalytics()
     {
-        $user = User::find($this->userId);
-        $this->be($user);
-
+        $this->be($this->user);
         $response = $this->call('GET', '/admin/analytics');
         $this->assertEquals(200, $response->getStatusCode());
     }

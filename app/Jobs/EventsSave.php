@@ -1,17 +1,17 @@
 <?php
 
-namespace AbuseIO\Commands;
+namespace AbuseIO\Jobs;
 
-use AbuseIO\Commands\Command;
+use AbuseIO\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Event;
-use AbuseIO\Commands\FindContact;
+use AbuseIO\Jobs\FindContact;
 use AbuseIO\Models\Evidence;
 use Lang;
 use Log;
 
-class EventsSave extends Command implements SelfHandling
+class EventsSave extends Job implements SelfHandling
 {
     public $events;
     public $evidenceID;

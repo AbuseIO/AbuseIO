@@ -1,13 +1,13 @@
 <?php
 
-namespace AbuseIO\Commands;
+namespace AbuseIO\Jobs;
 
-use AbuseIO\Commands\Command;
+use AbuseIO\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Validator;
 use Lang;
 
-class EventsValidate extends Command implements SelfHandling
+class EventsValidate extends Job implements SelfHandling
 {
     public $events;
 

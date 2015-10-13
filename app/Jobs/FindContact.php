@@ -1,13 +1,13 @@
 <?php
 
-namespace AbuseIO\Commands;
+namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\Contact;
 use ICF;
 
-class FindContact extends Command
+class FindContact extends Job
 {
     // Todo add custom lookup module (package / own repo template)
 
