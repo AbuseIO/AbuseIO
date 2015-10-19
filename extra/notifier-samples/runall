@@ -1,5 +1,5 @@
 #!/bin/bash
-for file in `find extra/notifier-samples/ -type f | grep eml`
+for file in `find extra/notifier-samples/ -type f | grep eml | grep -v spamexperts`
   do
     echo "pushing $file into queue"
     cat $file | php -q artisan email:receive --debug=true
