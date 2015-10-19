@@ -29,6 +29,7 @@ return [
     'button.save'           => 'Save',
     'button.cancel'         => 'Cancel',
     'button.filters'        => 'Filters',
+    'button.reset'          => 'Reset',
 
     // Miscellaneous
     'all'               => 'Alle',
@@ -58,4 +59,7 @@ return [
     'details'           => 'details',
     'revdns'            => 'Reverse DNS',
     'domain'            => 'Domain',
+    'ticket_id'         => 'Ticket Id',
+    'status'            => 'State',
+    'ticket_state'      => 'Ticket state',
 ];

@@ -15,7 +15,6 @@ return [
     // Tickets - Miscellaneous
     'no_tickets'    => 'U heeft nog geen tickets',
     'ticket'        => 'Ticket',
-    'ticket_id'     => 'Ticket Nr.',
     'first_seen'    => 'Eerst gezien',
     'last_seen'     => 'Laatst gezien',
     'count'         => 'Aantal',

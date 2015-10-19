@@ -15,7 +15,6 @@ return [
     // Tickets - Miscellaneous
     'no_tickets'    => 'You do not yet have any tickets',
     'ticket'        => 'Ticket',
-    'ticket_id'     => 'Ticket Id.',
     'first_seen'    => 'First seen',
     'last_seen'     => 'Last seen',
     'count'         => 'Amount',

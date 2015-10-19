@@ -29,6 +29,7 @@ return [
     'button.save'           => 'Opslaan',
     'button.cancel'         => 'Annuleren',
     'button.filters'        => 'Filters',
+    'button.reset'          => 'Reset',
 
     // Miscellaneous
     'all'               => 'Alle',
@@ -58,4 +59,7 @@ return [
     'details'           => 'details',
     'revdns'            => 'Reverse DNS',
     'domain'            => 'Domein',
+    'ticket_id'         => 'Ticket Nr',
+    'status'            => 'Status',
+    'ticket_state'      => 'Ticket status',
 ];
