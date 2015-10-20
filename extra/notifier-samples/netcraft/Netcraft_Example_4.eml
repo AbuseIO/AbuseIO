@@ -20,7 +20,7 @@ Received: from caolila.netcraft.com (caolila.netcraft.com [194.72.238.70])
 Received: by caolila.netcraft.com (Postfix, from userid 507)
     id 92BE470121; Mon, 28 Sep 2015 22:31:04 +0100 (BST)
 Content-Transfer-Encoding: 7bit
-Content-Type: multipart/mixed; boundary="_----------=_1443475864170946182"
+Content-Type: multipart/mixed; boundary="_----------=_144463218222649567"
 MIME-Version: 1.0
 Date: Mon, 28 Sep 2015 21:31:04 UT
 From: Netcraft Takedown Service <takedown-response+0317484@netcraft.com>
@@ -136,6 +136,3 @@ Source-Type: uri
 User-Agent: Netcraft Takedown
 
 --_----------=_144463218222649567--
-
-
-
