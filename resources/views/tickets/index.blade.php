@@ -19,7 +19,7 @@
     @if ( !$tickets->count() )
         <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('tickets.no_tickets') }}</div>
     @else
-        {!! $tickets->render() !!}
+        {!! $tickets->appends(Request::except('page'))->render() !!}
         <table class="table table-striped table-condensed top-buffer">
             <thead>
                 <tr>

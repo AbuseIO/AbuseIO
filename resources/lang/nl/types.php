@@ -12,7 +12,7 @@ return [
             'description' => 'Uw interventie is vereist, anders zijn we genoodzaakt zelf in te grijpen.',
         ],
         3 => [
-            'name' => 'Escalation',
+            'name' => 'Escalatie',
             'description' => 'We hebben stappen ondernomen om verdere misbruik te voorkomen. Deze limitaties zullen worden opgeheven als u uw probleem heeft opgelost.',
         ],
     ],
@@ -23,22 +23,22 @@ return [
             'description' => 'Open tickets',
         ],
         2 => [
-            'name' => 'Closed',
+            'name' => 'Gesloten',
             'description' => 'Gesloten tickets',
         ],
         3 => [
-            'name' => 'Escalated',
-            'description' => 'Geëscaleerd tickets',
+            'name' => 'Geëscaleerd',
+            'description' => 'Geëscaleerde tickets',
         ],
     ],
 
     'state' => [
         1 => [
-            'name' => 'Aangemeld',
+            'name' => 'Aangemeld bij klant',
             'description' => 'Tickets welke zijn aangemeld bij de klant.'
         ],
         2 => [
-            'name' => 'Niet aangemeld',
+            'name' => 'Niet aangemeld bij klant',
             'description' => 'Tickets welke nog niet zijn aangemeld bij de klant.'
         ],
     ]

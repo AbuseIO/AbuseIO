@@ -29,10 +29,11 @@ class SearchController extends Controller
      */
     public function index()
     {
-        $classifications = array_merge([Lang::get('misc.all')], array_column(Lang::get('classifications'), 'name'));
-        $types = array_merge([Lang::get('misc.all')], array_column(Lang::get('types.type'), 'name'));
-        $status = array_merge([Lang::get('misc.all')], array_column(Lang::get('types.status'), 'name'));
-        $state = array_merge([Lang::get('misc.all')], array_column(Lang::get('types.state'), 'name'));
+        $classifications = array_combine(array_keys(trans('classifications')), array_column(trans('classifications'), 'name'));
+        $classifications = [0 => trans('misc.all')]+$classifications;
+        $types = array_merge([trans('misc.all')], array_column(trans('types.type'), 'name'));
+        $status = array_merge([trans('misc.all')], array_column(trans('types.status'), 'name'));
+        $state = array_merge([trans('misc.all')], array_column(trans('types.state'), 'name'));
 
         return view('search')
             ->with('classification_selection', $classifications)
