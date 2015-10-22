@@ -1,0 +1,14 @@
+<?php
+
+return [
+    // Accounts - Headers
+    'headers.new'           => 'New Account',
+    'headers.detail'        => 'Account details for',
+
+    // Accounts - Buttons
+    'button.new_account'    => 'New Account',
+
+    // Accounts - Miscellaneous
+    'no_accounts'           => 'No accounts',
+    'linked_users'          => 'Linked users'
+];
