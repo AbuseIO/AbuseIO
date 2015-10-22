@@ -52,7 +52,7 @@
 							<li><a href="/admin/locale/{{$locale}}"><span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}</a></li>
 							@endforeach
 							<li role="separator" class="divider"></li>
-							<li><a href="/admin/settings/profile"><span class="glyphicon glyphicon-file"></span> {{ trans_choice('misc.profile', 2) }}</a></li>
+							<li><a href="/admin/profile"><span class="glyphicon glyphicon-file"></span> {{ trans_choice('misc.profile', 2) }}</a></li>
 							<li><a href="/auth/logout"><span class="glyphicon glyphicon-log-out"></span> {{ trans_choice('misc.logout', 2) }}</a></li>
 						</ul>
 					</li>
@@ -62,9 +62,9 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> {{ trans('misc.settings') }} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">{{ trans('misc.options') }}</li>
-							<li><a href="/admin/settings/accounts"><span class="glyphicon glyphicon-tag"></span> {{ trans_choice('misc.account', 2) }}</a></li>
-							<li><a href="/admin/settings/brands"><span class="glyphicon glyphicon-tags"></span> {{ trans_choice('misc.brand', 2) }}</a></li>
-							<li><a href="/admin/settings/users"><span class="glyphicon glyphicon-user"></span> {{ trans_choice('misc.user', 2) }}</a></li>
+							<li><a href="/admin/accounts"><span class="glyphicon glyphicon-tag"></span> {{ trans_choice('misc.accounts', 2) }}</a></li>
+							<li><a href="/admin/brands"><span class="glyphicon glyphicon-tags"></span> {{ trans_choice('misc.brands', 2) }}</a></li>
+							<li><a href="/admin/users"><span class="glyphicon glyphicon-user"></span> {{ trans_choice('misc.users', 2) }}</a></li>
 						</ul>
 					</li>
 				</ul>

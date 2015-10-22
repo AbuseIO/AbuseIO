@@ -99,6 +99,19 @@ Route::group(
 
         // Language switcher
         Route::get('locale/{locale?}', 'LocaleController@setLocale');
+
+        // Settings related
+        Route::model('accounts', 'AbuseIO\Models\Account');
+        Route::resource('accounts', 'AccountsController');
+
+        Route::model('brands', 'AbuseIO\Models\Brand');
+        Route::resource('brands', 'BrandsController');
+
+        Route::model('users', 'AbuseIO\Models\User');
+        Route::resource('users', 'UsersController');
+
+        Route::model('profile', 'AbuseIO\Models\Profile');
+        Route::resource('profile', 'ProfilesController');
     }
 );
 
