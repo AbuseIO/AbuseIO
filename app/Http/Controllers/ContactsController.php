@@ -90,7 +90,10 @@ class ContactsController extends Controller
      */
     public function store(ContactFormRequest $contact)
     {
+        $account = $this->user->account;
         $input = Input::all();
+        $input['account_id'] = $account->id;
+
         Contact::create($input);
 
         return Redirect::route('admin.contacts.index')
@@ -130,7 +133,9 @@ class ContactsController extends Controller
      */
     public function update(Contact $contact)
     {
+        $account = $this->user->account;
         $input = array_except(Input::all(), '_method');
+        $input['account_id'] = $account->id;
 
         $contact->update($input);
 
