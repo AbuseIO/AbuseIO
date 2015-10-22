@@ -2,15 +2,13 @@ language: php
 
 branches:
   except:
-    - ABuseIO-3.0
+    - AbuseIO-3.0
 
 os:
   - linux
 
 php:
   - 5.5.9
-  - 5.6
-  - 5.5
 
 env:
   - DB=mysql
