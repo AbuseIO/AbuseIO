@@ -20,6 +20,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 2,
@@ -31,6 +32,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 3,
@@ -42,6 +44,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 11,
@@ -53,6 +56,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 12,
@@ -64,6 +68,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 13,
@@ -75,6 +80,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 14,
@@ -86,6 +92,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 15,
@@ -97,6 +104,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 16,
@@ -108,6 +116,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 17,
@@ -119,6 +128,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 18,
@@ -130,6 +140,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ],
             [
                 'id'            => 19,
@@ -141,6 +152,7 @@ class ContactsTableSeeder extends Seeder
                 'enabled'       => 1,
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
+                'account_id'    => 1,
             ]
         ];
 

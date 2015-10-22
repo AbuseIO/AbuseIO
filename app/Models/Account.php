@@ -35,4 +35,14 @@ class Account extends Model
         return $this->hasMany('AbuseIO\Models\User');
 
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contacts()
+    {
+        return $this->hasMany('AbuseIO\Models\Contact');
+
+    }
+
 }

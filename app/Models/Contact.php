@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $rpc_key
  * @property boolean $auto_notify
  * @property boolean $enabled
+ * @property integer account_id
  */
 class Contact extends Model
 {
@@ -25,7 +26,8 @@ class Contact extends Model
         'rpc_host',
         'rpc_key',
         'auto_notify',
-        'enabled'
+        'enabled',
+        'account_id',
     ];
 
     protected $guarded  = [
@@ -37,6 +39,14 @@ class Contact extends Model
 
         return $this->belongsTo('id', 'name');
 
+    }
+
+    /**
+     * @return Account
+     */
+    public function account()
+    {
+        return $this->belongsTo('AbuseIO\Models\Account');
     }
 
     public function domains()
