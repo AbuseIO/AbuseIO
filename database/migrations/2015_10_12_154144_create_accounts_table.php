@@ -17,6 +17,7 @@ class CreateAccountsTable extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->unique();
+                $table->string('description');
                 $table->timestamps();
             }
         );
@@ -33,7 +34,8 @@ class CreateAccountsTable extends Migration
         $accounts = [
             [
                 'id'                        => 1,
-                'name'                      => 'default'
+                'name'                      => 'default',
+                'description'               => 'The default account'
             ],
         ];
 
