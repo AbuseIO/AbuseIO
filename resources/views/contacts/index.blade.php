@@ -16,7 +16,7 @@
         <table class="table table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>{{ trans('misc.button.details') }}</th>
+                    <th>{{ trans('contacts.reference') }}</th>
                     <th>{{ trans('misc.name') }}</th>
                     <th>{{ trans('misc.email') }}</th>
                     <th>{{ trans('contacts.rpchost') }}</th>
