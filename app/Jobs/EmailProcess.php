@@ -103,7 +103,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             }
 
             if ($attachment->contentType == 'message/rfc822') {
-                $arfMail['evidence'] = $attachment->getContent();
+                $arfMail['evidence'] = utf8_encode($attachment->getContent());
             }
 
             if ($attachment->contentType == 'text/plain') {
