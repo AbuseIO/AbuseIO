@@ -126,29 +126,34 @@
                         <td>{{ $event->source }}</td>
                         <td>
                             <dl class="dl-horizontal">
-                            @foreach (json_decode($event->information, true) as $l1field => $l1value)
-                                @if (is_array($l1value))
-                                    @foreach ($l1value as $l2field=>$l2value)
-                                        @if (is_array($l2value))
-                                            @foreach ($l2value as $l3field=>$l3value)
-                                                @if (is_array($l3value))
-                                                    <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
-                                                    <dd>This is filtered due to fourth layer nesting</dd>
-                                                @else
-                                                    <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
-                                                    <dd>{{ htmlentities($l3value) }}</dd>
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) }}</dt>
-                                            <dd>{{ htmlentities($l2value) }}</dd>
-                                        @endif
-                                    @endforeach
-                                @else
-                                    <dt>{{ ucfirst($l1field) }}</dt>
-                                    <dd>{{ htmlentities($l1value) }}</dd>
-                                @endif
-                            @endforeach
+                            @if (!is_array(json_decode($event->information, true)))
+                                    <dt>Parser Error</dt>
+                                    <dd>The parser not provider valid event data. Contact the administrator for the evidence related to this event</dd>
+                            @else
+                                @foreach (json_decode($event->information, true) as $l1field => $l1value)
+                                    @if (is_array($l1value))
+                                        @foreach ($l1value as $l2field=>$l2value)
+                                            @if (is_array($l2value))
+                                                @foreach ($l2value as $l3field=>$l3value)
+                                                    @if (is_array($l3value))
+                                                        <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
+                                                        <dd>This is filtered due to fourth layer nesting</dd>
+                                                    @else
+                                                        <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
+                                                        <dd>{{ htmlentities($l3value) }}</dd>
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) }}</dt>
+                                                <dd>{{ htmlentities($l2value) }}</dd>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <dt>{{ ucfirst($l1field) }}</dt>
+                                        <dd>{{ htmlentities($l1value) }}</dd>
+                                    @endif
+                                @endforeach
+                            @endif
                             </dl>
                         </td>
                         <td><a href='{{ Request::url() }}/evidence/{{ $event->evidences[0]->filename }}'>{{ trans('ash.communication.download') }}</a> - <a href="#">{{ trans('ash.communication.view') }}</a></td>
