@@ -20,14 +20,15 @@
 
 
 /*
-** Function: parse_juno
+** Function: parse_uol
 ** Parameters: 
 **  message(array): The message array returned from the receive_mail function
 ** Returns: True on parsing success (or false when it failed)
 */
-function parse_juno($message) {
+function parse_uol($message) {
 
-    $source = 'Juno.com';
+    // Unitedonline.net has several brands. Juno and NetZero are two of them and use the same abuse system
+    $source = 'UOL';
     $type   = 'ABUSE';
 
     // Read and parse report
