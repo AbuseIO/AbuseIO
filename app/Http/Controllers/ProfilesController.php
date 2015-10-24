@@ -89,7 +89,7 @@ class ProfilesController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name'  => 'required',
-            'email'      => 'required|email',
+            'email'      => 'required|unique:users,email,' . $this->user->id .'|email',
             'password'   => 'sometimes|confirmed|min:6'
         ]);
 
