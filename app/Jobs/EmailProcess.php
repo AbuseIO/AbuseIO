@@ -111,6 +111,15 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             }
         }
 
+        /*
+         * Sometimes the mime header does not set the main message correctly. This is ment as a fallback and will
+         * use the original content body (which is basicly the same mime element). But only fallback if we actually
+         * have a RFC822 message with a feedback report.
+         */
+        if (empty($arfMail['message']) && isset($arfMail['report']) && isset($arfMail['evidence'])) {
+            $arfMail['message'] = $parsedMail->getMessageBody();
+        }
+
         // If we do not have a complete e-mail, then we empty the perhaps partially filled arfMail
         // which is useless, hence reset to false
         if (!isset($arfMail['report']) || !isset($arfMail['evidence']) || !isset($arfMail['message'])) {
