@@ -5,6 +5,11 @@ namespace AbuseIO\Http\Controllers;
 use Illuminate\Http\Request;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Controllers\Controller;
+use AbuseIO\Models\User;
+use Input;
+use Redirect;
+use Validator;
+use Hash;
 
 class ProfilesController extends Controller
 {
@@ -74,12 +79,39 @@ class ProfilesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $input = array_except(Input::all(), '_method');
+
+        // Should be in a model or form?
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name'  => 'required',
+            'email'      => 'required|unique:users,email,' . $this->user->id .'|email',
+            'password'   => 'sometimes|confirmed|min:6'
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::route('admin.profile.index')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $data = [
+            "first_name" => $input['first_name'],
+            "last_name" => $input['last_name'],
+            "email" => $input['email']
+        ];
+
+        if (!empty($input['password']))
+            $data['password'] = Hash::make($input['password']);
+
+        $this->user->update($data);
+
+        return Redirect::route('admin.profile.index')
+            ->with('message', 'Profile has been updated.');
     }
 
     /**
