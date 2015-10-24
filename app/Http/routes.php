@@ -110,7 +110,6 @@ Route::group(
         Route::model('users', 'AbuseIO\Models\User');
         Route::resource('users', 'UsersController');
 
-        Route::model('profile', 'AbuseIO\Models\Profile');
         Route::resource('profile', 'ProfilesController');
     }
 );

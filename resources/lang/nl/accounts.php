@@ -10,5 +10,9 @@ return [
 
     // Accounts - Miscellaneous
     'no_accounts'           => 'Geen accounts',
-    'linked_users'          => 'Gekoppelde gebruikers'
+    'linked_users'          => 'Gekoppelde gebruikers',
+
+    // Profile and others
+   'first_name'             => 'Voornaam',
+   'last_name'              => 'Achternaam'
 ];
