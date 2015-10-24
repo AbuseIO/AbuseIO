@@ -7,7 +7,7 @@ return [
     'headers.detail'    => 'Contact details for',
 
     // Contacts - Buttons
-    'button.new_contact'    => 'Nieuw Contact',
+    'button.new_contact'    => 'New Contact',
 
     // Contacts - Miscellaneous
     'csv_export'        => 'CSV Export',
