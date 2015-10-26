@@ -48,8 +48,8 @@ class FindContact extends Job
         if (isset($netblock[0])) {
             return $netblock[0]->contact;
 
-        } elseif (class_exists('AbuseIO::Custom::FindContact') === true
-            && is_callable('\AbuseIO\Custom\FindContact->byIP') === true
+        } elseif (class_exists('AbuseIO::FindContact::ByIp') === true
+            && is_callable('\AbuseIO\FindContact\ByIp->collect') === true
         ) {
             // Call custom function
         }
@@ -72,10 +72,11 @@ class FindContact extends Job
         if (isset($domain[0])) {
             return $domain[0]->contact;
 
-        } elseif (class_exists('AbuseIO::Custom::FindContact') === true
-            && is_callable('\AbuseIO\Custom\FindContact->byDomain') === true
+        } elseif (class_exists('AbuseIO::FindContact::ByDomain') === true
+            && is_callable('\AbuseIO\FindContact\ByDomain->collect') === true
         ) {
             // Call custom function
+
         }
 
         return FindContact::undefined();
@@ -96,8 +97,8 @@ class FindContact extends Job
         if (isset($contact[0])) {
             return $contact[0];
 
-        } elseif (class_exists('AbuseIO::Custom::FindContact') === true
-            && is_callable('\AbuseIO\Custom\FindContact->byCode') === true
+        } elseif (class_exists('AbuseIO::FindContact::ById') === true
+            && is_callable('\AbuseIO\FindContact\ById->collect') === true
         ) {
             // Call custom function
         }
