@@ -4,11 +4,11 @@ namespace AbuseIO\Http\Controllers;
 
 use Illuminate\Http\Request;
 use AbuseIO\Http\Requests;
+use AbuseIO\Http\Requests\ProfileFormRequest;
 use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\User;
 use Input;
 use Redirect;
-use Validator;
 use Hash;
 
 class ProfilesController extends Controller
@@ -81,23 +81,9 @@ class ProfilesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(ProfileFormRequest $request)
     {
         $input = array_except(Input::all(), '_method');
-
-        // Should be in a model or form?
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required',
-            'last_name'  => 'required',
-            'email'      => 'required|unique:users,email,' . $this->user->id .'|email',
-            'password'   => 'sometimes|confirmed|min:6'
-        ]);
-
-        if ($validator->fails()) {
-            return Redirect::route('admin.profile.index')
-                ->withErrors($validator)
-                ->withInput();
-        }
 
         $data = [
             "first_name" => $input['first_name'],
