@@ -34,7 +34,7 @@ class NotesTableSeeder extends Seeder
                 'id'                        => '3',
                 'ticket_id'                 => '1',
                 'submitter'                 => 'abusedesk',
-                'text'                      => 'to bad then!',
+                'text'                      => 'Well too bad!',
                 'hidden'                    => true,
                 'viewed'                    => false,
                 'created_at'                => new DateTime,
