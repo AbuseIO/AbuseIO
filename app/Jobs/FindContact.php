@@ -31,13 +31,39 @@ class FindContact extends Job
     }
 
     /**
+     * Return the class and methdod to do external calls
+     * @return object
+     */
+    public static function getExternalResolver($section, $search)
+    {
+        if (!empty(config("main.resolvers.findcontact.{$section}.class"))
+            && !empty(config("main.resolvers.findcontact.{$section}.method"))
+        ) {
+            $class = 'AbuseIO::FindContact::' . config("main.resolvers.findcontact.{$section}.class");
+            $method = '\\' . str_replace('::', '\\', $class) . '->'
+                . config("main.resolvers.findcontact.{$section}.method");
+
+            if (class_exists($class) === true && is_callable($method) === true) {
+                $reflectionMethod = new ReflectionMethod($class, $method);
+                $resolver = $reflectionMethod->invoke(new $$method, $search);
+
+                if (!empty($resolver)) {
+                    return $resolver;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Return contact by Netblock
      * @param  string $ip
      * @return object
      */
     public static function byIP($ip)
     {
-        $netblock = Netblock::
+        $result = Netblock::
         where('first_ip', '<=', ICF::inetPtoi($ip))
             ->where('last_ip', '>=', ICF::inetPtoi($ip))
             ->where('enabled', '=', true)
@@ -46,25 +72,13 @@ class FindContact extends Job
             ->take(1)
             ->get();
 
-        if (!empty(config('main.resolvers.findcontact.ip.class'))
-            && !empty(config('main.resolvers.findcontact.ip.method'))
-        ) {
-            $class = 'AbuseIO::FindContact::' . config('main.resolvers.findcontact.ip.class');
-            $method = '\\' . str_replace('::', '\\', $class) . '->' . config('main.resolvers.findcontact.ip.method');
+        if (isset($result[0])) {
+            return $result[0]->contact;
         }
 
-        if (isset($netblock[0])) {
-            return $netblock[0]->contact;
-
-        } elseif (!empty($class)
-            && (!empty($method))
-            && class_exists($class) === true
-            && is_callable($method) === true
-        ) {
-            $reflectionMethod = new ReflectionMethod($class, $method);
-            $callback = $reflectionMethod->invoke(new $$method, $ip);
-
-            return (!empty($callback)) ? $callback : FindContact::undefined();
+        $findContact = FindContact::getExternalResolver('ip', $ip);
+        if (!empty($findContact)) {
+            return $findContact;
         }
 
         return FindContact::undefined();
@@ -75,21 +89,20 @@ class FindContact extends Job
      * @param  string $domainName
      * @return object
      */
-    public static function byDomain($domainName)
+    public static function byDomain($domain)
     {
-        $domain = Domain::where('name', '=', $domainName)
+        $result = Domain::where('name', '=', $domain)
                     ->where('enabled', '=', true)
                     ->take(1)
                     ->get();
 
-        if (isset($domain[0])) {
-            return $domain[0]->contact;
+        if (isset($result[0])) {
+            return $result[0]->contact;
+        }
 
-        } elseif (class_exists('AbuseIO::FindContact::ByDomain') === true
-            && is_callable('\AbuseIO\FindContact\ByDomain->collect') === true
-        ) {
-            // Call custom function
-
+        $findContact = FindContact::getExternalResolver('domain', $domain);
+        if (!empty($findContact)) {
+            return $findContact;
         }
 
         return FindContact::undefined();
@@ -100,20 +113,20 @@ class FindContact extends Job
      * @param  string $reference
      * @return object
      */
-    public static function byCode($reference)
+    public static function byId($id)
     {
-        $contact = Contact::where('reference', '=', $reference)
+        $result = Contact::where('reference', '=', $id)
                     ->where('enabled', '=', true)
                     ->take(1)
                     ->get();
 
-        if (isset($contact[0])) {
-            return $contact[0];
+        if (isset($result[0])) {
+            return $result[0];
+        }
 
-        } elseif (class_exists('AbuseIO::FindContact::ById') === true
-            && is_callable('\AbuseIO\FindContact\ById->collect') === true
-        ) {
-            // Call custom function
+        $findContact = FindContact::getExternalResolver('id', $id);
+        if (!empty($findContact)) {
+            return $findContact;
         }
 
         return FindContact::undefined();
