@@ -125,6 +125,9 @@ Route::group(
 
         // Language switcher
         Route::get('locale/{locale?}', 'LocaleController@setLocale');
+
+        // Logos
+        Route::get('logo/{id}', 'BrandsController@logo');
     }
 );
 
