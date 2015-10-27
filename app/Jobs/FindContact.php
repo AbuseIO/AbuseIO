@@ -39,13 +39,12 @@ class FindContact extends Job
         if (!empty(config("main.resolvers.findcontact.{$section}.class"))
             && !empty(config("main.resolvers.findcontact.{$section}.method"))
         ) {
-            $class = 'AbuseIO::FindContact::' . config("main.resolvers.findcontact.{$section}.class");
-            $method = '\\' . str_replace('::', '\\', $class) . '->'
-                . config("main.resolvers.findcontact.{$section}.method");
+            $class = '\AbuseIO\FindContact\\' . config("main.resolvers.findcontact.{$section}.class");
+            $method = config("main.resolvers.findcontact.{$section}.method");
 
-            if (class_exists($class) === true && is_callable($method) === true) {
+            if (class_exists($class) === true && method_exists($class, $method) === true) {
                 $reflectionMethod = new ReflectionMethod($class, $method);
-                $resolver = $reflectionMethod->invoke(new $$method, $search);
+                $resolver = $reflectionMethod->invoke(new $class, $search);
 
                 if (!empty($resolver)) {
                     return $resolver;
