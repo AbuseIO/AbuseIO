@@ -106,6 +106,7 @@ Route::group(
 
         Route::model('brands', 'AbuseIO\Models\Brand');
         Route::resource('brands', 'BrandsController');
+        Route::get('logo/{id}', 'BrandsController@logo');
 
         Route::model('users', 'AbuseIO\Models\User');
         Route::resource('users', 'UsersController');

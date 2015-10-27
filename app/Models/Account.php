@@ -29,7 +29,6 @@ class Account extends Model
     |--------------------------------------------------------------------------
     */
 
-
     /**
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -47,6 +46,14 @@ class Account extends Model
     {
         return $this->hasMany('AbuseIO\Models\Contact');
 
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function brand()
+    {
+        return $this->hasOne('AbuseIO\Models\Brand');
     }
 
 }

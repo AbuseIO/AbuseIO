@@ -5,6 +5,8 @@ namespace AbuseIO\Http\Controllers;
 use Illuminate\Http\Request;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Controllers\Controller;
+use AbuseIO\Models\Brand;
+
 
 class BrandsController extends Controller
 {
@@ -57,6 +59,28 @@ class BrandsController extends Controller
     public function show($id)
     {
         //
+    }
+
+    /**
+     * return the logo as an image
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function logo($id)
+    {
+        $brand = Brand::find($id);
+
+        // if the brand with the specified id doesn't exist return nothing
+        if (!$brand) return;
+
+        // get the mime type
+        $finfo = new \finfo(FILEINFO_MIME_TYPE);
+        $mimetype = $finfo->buffer($brand->logo);
+
+        return response($brand->logo)
+            ->header('Content-Type', $mimetype);
+
     }
 
     /**

@@ -19,6 +19,7 @@ class CreateAccountsTable extends Migration
                 $table->string('name')->unique();
                 $table->string('description');
                 $table->timestamps();
+                $table->integer('brand_id');
             }
         );
 
@@ -27,7 +28,6 @@ class CreateAccountsTable extends Migration
 
     public function addDefaultAccount()
     {
-
         // Always recreate the default account for the system
         DB::table('accounts')->where('id', '=', '1')->delete();
 
@@ -35,7 +35,8 @@ class CreateAccountsTable extends Migration
             [
                 'id'                        => 1,
                 'name'                      => 'default',
-                'description'               => 'The default account'
+                'description'               => 'The default account',
+                'brand_id'                  => 1,
             ],
         ];
 
