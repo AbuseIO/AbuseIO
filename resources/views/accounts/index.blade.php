@@ -28,6 +28,7 @@
                     <td class="text-right">
                         {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.accounts.destroy', $account->id]]) !!}
                         {!! link_to_route('admin.accounts.show', trans('misc.button.details'), $account->id, ['class' => 'btn btn-info btn-xs']) !!}
+                        {!! link_to_route('admin.accounts.edit', trans('misc.button.edit'), $account->id, ['class' => 'btn btn-info btn-xs']) !!}
                         {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger btn-xs'.(($account->id == 1) ? ' disabled' : '')]) !!}
                         {!! Form::close() !!}
                     </td>

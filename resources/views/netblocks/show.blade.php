@@ -1,33 +1,33 @@
 @extends('app')
 
 @section('content')
-    <h1 class="page-header">{{ trans('netblocks.headers.detail') }}: {{ $netblock->name }}</h1>
-    <div class="row">
-        <div  class="col-md-3 col-md-offset-9 text-right">
-            {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.netblocks.destroy', $netblock->id]]) !!}
-            {!! link_to_route('admin.netblocks.edit', trans('misc.button.edit'), [$netblock->id], ['class' => 'btn btn-info']) !!}
-            {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger']) !!}
-            {!! Form::close() !!}
-        </div>
+<h1 class="page-header">{{ trans('netblocks.headers.detail') }}: {{ $netblock->name }}</h1>
+<div class="row">
+    <div  class="col-md-3 col-md-offset-9 text-right">
+        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.netblocks.destroy', $netblock->id]]) !!}
+        {!! link_to_route('admin.netblocks.edit', trans('misc.button.edit'), [$netblock->id], ['class' => 'btn btn-info']) !!}
+        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
     </div>
-    <dl class="dl-horizontal">
-        <dt>{{ trans('misc.database_id') }}</dt>
-        <dd>{{ $netblock->id }}</dd>
+</div>
+<dl class="dl-horizontal">
+    <dt>{{ trans('misc.database_id') }}</dt>
+    <dd>{{ $netblock->id }}</dd>
 
-        <dt>{{ trans('netblocks.first_ip') }}</dt>
-        <dd>{{ ICF::inetItop($netblock->first_ip) }}</dd>
+    <dt>{{ trans('netblocks.first_ip') }}</dt>
+    <dd>{{ ICF::inetItop($netblock->first_ip) }}</dd>
 
-        <dt>{{ trans('netblocks.last_ip') }}</dt>
-        <dd>{{ ICF::inetItop($netblock->last_ip) }}</dd>
+    <dt>{{ trans('netblocks.last_ip') }}</dt>
+    <dd>{{ ICF::inetItop($netblock->last_ip) }}</dd>
 
-        <dt>{{ trans('misc.contact') }}</dt>
-        <dd>{{ $netblock->contact->name }} ({{ $netblock->contact->reference }})</dd>
+    <dt>{{ trans('misc.contact') }}</dt>
+    <dd>{{ $netblock->contact->name }} ({{ $netblock->contact->reference }})</dd>
 
-        <dt>{{ trans('misc.description') }}</dt>
-        <dd>{{ $netblock->description }}</dd>
+    <dt>{{ trans('misc.description') }}</dt>
+    <dd>{{ $netblock->description }}</dd>
 
-        <dt>Status</dt>
-        <dd>{{ $netblock->enabled ? trans('misc.enabled') : trans('misc.disabled') }}</dd>
-    </dl>
-    {!! link_to(URL::previous(), trans('misc.button.back'), ['class' => 'btn btn-default']) !!}
+    <dt>Status</dt>
+    <dd>{{ $netblock->enabled ? trans('misc.enabled') : trans('misc.disabled') }}</dd>
+</dl>
+{!! link_to_route('admin.netblocks.index', trans('misc.button.back'), [], ['class' => 'btn btn-default top-buffer']) !!}
 @endsection

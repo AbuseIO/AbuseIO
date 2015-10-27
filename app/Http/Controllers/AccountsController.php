@@ -93,9 +93,19 @@ class AccountsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    /**
+     * Update the specified resource in storage.
+     * @param  AccountFormRequest $request FormRequest
+     * @param  Account            $account Account
+     * @return \Illuminate\Http\Response
+     */
+    public function update(AccountFormRequest $request, Account $account)
     {
-        //
+        $input = array_except(Input::all(), '_method');
+        $account->update($input);
+
+        return Redirect::route('admin.accounts.show', $account->id)
+            ->with('message', 'Account has been updated.');
     }
 
     /**

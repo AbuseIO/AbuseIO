@@ -3,6 +3,7 @@
 return [
     // Accounts - Headers
     'headers.new'           => 'Nieuw Account',
+    'headers.edit'          => 'Bewerk Account',
     'headers.detail'        => 'Account details voor',
 
     // Accounts - Buttons
