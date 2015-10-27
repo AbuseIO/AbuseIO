@@ -10,8 +10,6 @@ use ICF;
 
 class FindContact extends Job
 {
-    // Todo add custom lookup module (package / own repo template)
-
     /**
      * Return undefined contact
      * @return object
