@@ -58,7 +58,20 @@ return [
     ],
 
     'resolvers' => [
-        'contact'                           => 'custom_find_contact'
+        'findcontact'                      => [
+            'id' => [
+                'class'                     => 'Custom',
+                'method'                    => 'getContactById'
+            ],
+            'ip' => [
+                'class'                     => 'Custom',
+                'method'                    => 'getContactByIp'
+            ],
+            'domain' => [
+                'class'                     => 'Custom',
+                'method'                    => 'getContactByDomain'
+            ],
+        ],
     ],
 
 ];

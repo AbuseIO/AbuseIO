@@ -5,6 +5,7 @@ namespace AbuseIO\Jobs;
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\Contact;
+use ReflectionMethod;
 use ICF;
 
 class FindContact extends Job
@@ -45,13 +46,25 @@ class FindContact extends Job
             ->take(1)
             ->get();
 
+        if (!empty(config('main.resolvers.findcontact.ip.class'))
+            && !empty(config('main.resolvers.findcontact.ip.method'))
+        ) {
+            $class = 'AbuseIO::FindContact::' . config('main.resolvers.findcontact.ip.class');
+            $method = '\\' . str_replace('::', '\\', $class) . '->' . config('main.resolvers.findcontact.ip.method');
+        }
+
         if (isset($netblock[0])) {
             return $netblock[0]->contact;
 
-        } elseif (class_exists('AbuseIO::FindContact::ByIp') === true
-            && is_callable('\AbuseIO\FindContact\ByIp->collect') === true
+        } elseif (!empty($class)
+            && (!empty($method))
+            && class_exists($class) === true
+            && is_callable($method) === true
         ) {
-            // Call custom function
+            $reflectionMethod = new ReflectionMethod($class, $method);
+            $callback = $reflectionMethod->invoke(new $$method, $ip);
+
+            return (!empty($callback)) ? $callback : FindContact::undefined();
         }
 
         return FindContact::undefined();
