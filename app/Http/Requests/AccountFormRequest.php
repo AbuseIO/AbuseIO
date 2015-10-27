@@ -21,18 +21,8 @@ class AccountFormRequest extends Request
      */
     public function rules()
     {
-        switch ($this->method()) {
-            case 'POST':
-                return [
-                    'name'       => 'required|unique:accounts,name',
-                ];
-            case 'PATCH':
-                return [
-                    'name'       => 'required',
-                ];
-            default:
-                break;
-        }
-
+        return [
+            'name'       => 'required|unique:accounts',
+        ];
     }
 }
