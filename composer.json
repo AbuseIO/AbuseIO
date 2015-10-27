@@ -54,6 +54,9 @@
 		"abuseio/parser-webiron": "dev-master",
         "abuseio/parser-woody": "dev-master",
         "abuseio/collector-common": "dev-master",
+        "abuseio/findcontact-custom": "dev-master",
+        "abuseio/findcontact-nipap": "dev-master",
+        "abuseio/findcontact-phpipam": "dev-master",
 		"barryvdh/laravel-ide-helper": "^2.0",
 		"pda/pheanstalk": "~3.0",
 		"ddeboer/data-import": "^0.18.0"
