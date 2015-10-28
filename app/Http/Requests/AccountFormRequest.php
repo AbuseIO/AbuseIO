@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Http\Requests\Request;
+use AbuseIO\Models\User;
 
 class AccountFormRequest extends Request
 {
@@ -21,8 +22,18 @@ class AccountFormRequest extends Request
      */
     public function rules()
     {
-        return [
-            'name'       => 'required|unique:accounts',
-        ];
+        switch ($this->method) {
+            case 'POST':
+                return [
+                    'name'       => 'required|unique:accounts',
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'name'       => 'required|unique:accounts,name,'. $this->id,
+                ];
+            default:
+                break;
+        }
     }
 }
