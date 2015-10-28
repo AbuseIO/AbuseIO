@@ -40,6 +40,7 @@ return [
     'disabled'          => 'Inactief',
     'action'            => 'Actie',
     'name'              => 'Naam',
+    'company_name'      => 'Bedrijfsnaam',
     'email'             => 'E-Mail',
     'settings'          => 'Instellingen',
     'accounts'          => 'Account|Accounts',
@@ -63,4 +64,6 @@ return [
     'status'            => 'Status',
     'ticket_state'      => 'Ticket status',
     'id'                => 'Nr',
+    'text'              => 'Tekst',
+
 ];

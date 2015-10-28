@@ -40,6 +40,7 @@ return [
     'disabled'          => 'Disabled',
     'action'            => 'Action',
     'name'              => 'Name',
+    'company_name'      => 'Company Name',
     'email'             => 'E-Mail',
     'settings'          => 'Settings',
     'accounts'          => 'Account|Accounts',
@@ -63,4 +64,5 @@ return [
     'status'            => 'State',
     'ticket_state'      => 'Ticket state',
     'id'                => 'Id',
+    'text'              => 'Text',
 ];
