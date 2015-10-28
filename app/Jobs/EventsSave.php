@@ -74,12 +74,14 @@ class EventsSave extends Job implements SelfHandling
             if ($event['domain'] != '') {
                 $domainContact = FindContact::byDomain($event['domain']);
             } else {
-                $domainContact = '';
+                $domainContact = false;
             }
 
-            // Search to see if there is an existing ticket for this event classification
             // Todo: somehow add the domain too!!!!
 
+            /*
+             * Search to see if there is an existing ticket for this event classification
+             */
             $search = Ticket::where('ip', '=', $event['ip'])
                         ->where('class_id', '=', $event['class'], 'AND')
                         ->where('type_id', '=', $event['type'], 'AND')
@@ -87,8 +89,11 @@ class EventsSave extends Job implements SelfHandling
                         ->where('status_id', '!=', 2, 'AND')
                         ->get();
 
+
             if ($search->count() === 0) {
-                // Build an array with all new tickes and save it with its related event and evidence link.
+                /*
+                 * If there are no search results then there is no existing ticket and we should create one
+                 */
                 $ticketCount++;
 
                 $newTicket = new Ticket;
@@ -103,7 +108,7 @@ class EventsSave extends Job implements SelfHandling
                 $newTicket->ip_contact_rpckey          = $ipContact->rpc_key;
                 $newTicket->ip_contact_auto_notify     = $ipContact->auto_notify;
 
-                if (!empty($event['domain'])) {
+                if (!empty($event['domain']) && $domainContact !== false) {
                     $newTicket->domain_contact_reference   = $domainContact->reference;
                     $newTicket->domain_contact_name        = $domainContact->name;
                     $newTicket->domain_contact_email       = $domainContact->email;
@@ -128,10 +133,14 @@ class EventsSave extends Job implements SelfHandling
 
                 $newEvent->save();
 
-                // Call notifier action handler, type new
+                // TODO - Call notifier action handler, type new
+
 
             } elseif ($search->count() === 1) {
-                // This is an existing ticket
+                /*
+                 * There is an existing ticket, so we just need to add the event to this ticket. If the event is an
+                 * exact match we consider it a duplicate and will ignore it.
+                 */
                 $ticketID = $search[0]->id;
 
                 if (Event::where('information', '=', $event['information'])
@@ -152,14 +161,18 @@ class EventsSave extends Job implements SelfHandling
                     $newEvent->source       = $event['source'];
                     $newEvent->ticket_id    = $ticketID;
                     $newEvent->timestamp    = $event['timestamp'];
-
-                    // TODO - look into combining this as a whole
                     $newEvent->save();
 
-                    // Call notifier action handler, type update
+                    // TODO - Update domain owner if changed
+
+                    // TODO - Call notifier action handler, type update
                 }
 
             } else {
+                /*
+                 * We should not never have more then two open tickets for the same case. If this happens there is a
+                 * fault in the aggregator which must be resolved first. Until then we will permfail here.
+                 */
                 $this->failed('Unable to link to ticket, multiple open tickets found for same event type');
             }
         }
