@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\TicketsFormRequest;
-use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Note;
 use Redirect;
@@ -30,42 +29,44 @@ class TicketsController extends Controller
     public function index()
     {
         // When we came from the search page, create a Query
-        $tickets = Ticket::where(function ($query) {
-            if (!empty(Input::get('ticket_id'))) {
-                $query->where('id', Input::get('ticket_id'));
-            }
-            if (!empty(Input::get('ip_address'))) {
-                $query->where('ip', Input::get('ip_address'));
-            }
-            if (!empty(Input::get('customer_code'))) {
-                $query->where('ip_contact_reference', Input::get('customer_code'));
-            }
-            if (!empty(Input::get('customer_name'))) {
-                $query->where('ip_contact_name', 'like', '%'.Input::get('customer_name').'%');
-            }
-            if (Input::get('classification') > 0) {
-                $query->where('class_id', Input::get('classification'));
-            }
-            if (Input::get('type') > 0) {
-                $query->where('type_id', Input::get('type'));
-            }
-            if (Input::get('status') > 0) {
-                $query->where('status_id', Input::get('status'));
-            }
-            if (Input::get('state') > 0) {
-                switch (Input::get('state')) {
-                    case 1:
-                        // Notified
-                        $query->where('notified_count', '>=', 1);
-                        break;
-                    case 2:
-                        // Not notified
-                    default:
-                        $query->where('notified_count', 0);
-                        break;
+        $tickets = Ticket::where(
+            function ($query) {
+                if (!empty(Input::get('ticket_id'))) {
+                    $query->where('id', Input::get('ticket_id'));
+                }
+                if (!empty(Input::get('ip_address'))) {
+                    $query->where('ip', Input::get('ip_address'));
+                }
+                if (!empty(Input::get('customer_code'))) {
+                    $query->where('ip_contact_reference', Input::get('customer_code'));
+                }
+                if (!empty(Input::get('customer_name'))) {
+                    $query->where('ip_contact_name', 'like', '%'.Input::get('customer_name').'%');
+                }
+                if (Input::get('classification') > 0) {
+                    $query->where('class_id', Input::get('classification'));
+                }
+                if (Input::get('type') > 0) {
+                    $query->where('type_id', Input::get('type'));
+                }
+                if (Input::get('status') > 0) {
+                    $query->where('status_id', Input::get('status'));
+                }
+                if (Input::get('state') > 0) {
+                    switch (Input::get('state')) {
+                        case 1:
+                            // Notified
+                            $query->where('notified_count', '>=', 1);
+                            break;
+                        case 2:
+                            // Not notified
+                        default:
+                            $query->where('notified_count', 0);
+                            break;
+                    }
                 }
             }
-        })->paginate(10);
+        )->paginate(10);
 
         return view('tickets.index')
             ->with('tickets', $tickets)
