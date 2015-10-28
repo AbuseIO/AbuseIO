@@ -17,6 +17,7 @@ class Account extends Model
     protected $fillable = [
         'name',
         'description',
+        'brand_id',
     ];
 
     protected $guarded  = [

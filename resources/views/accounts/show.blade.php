@@ -19,6 +19,9 @@
 
     <dt>{{ trans('misc.description') }}</dt>
     <dd>{{ $account->description }}</dd>
+
+    <dt>{{ trans_choice('misc.brands', 1) }}</dt>
+    <dd>{{ $brand->name }}</dd>
 </dl>
 
 @if ( $account->users->count() )

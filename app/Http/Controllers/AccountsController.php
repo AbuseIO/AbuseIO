@@ -8,6 +8,7 @@ use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\AccountFormRequest;
 use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Account;
+use AbuseIO\Models\Brand;
 use AbuseIO\Models\User;
 use Redirect;
 use Input;
@@ -70,8 +71,11 @@ class AccountsController extends Controller
      */
     public function show(Account $account)
     {
+        $brand = Brand::find($account->brand_id);
+
         return view('accounts.show')
             ->with('account', $account)
+            ->with('brand', $brand)
             ->with('user', $this->user);
     }
 
@@ -83,8 +87,12 @@ class AccountsController extends Controller
      */
     public function edit(Account $account)
     {
+        $brands = Brand::lists('name', 'id');
+
         return view('accounts.edit')
             ->with('account', $account)
+            ->with('brand_selection', $brands)
+            ->with('selected', $account->brand_id)
             ->with('user', $this->user);
     }
 
