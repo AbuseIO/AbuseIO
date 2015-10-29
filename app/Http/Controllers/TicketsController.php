@@ -10,6 +10,7 @@ use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Note;
 use Redirect;
 use Input;
+use Lang;
 
 class TicketsController extends Controller
 {
@@ -185,9 +186,15 @@ class TicketsController extends Controller
      */
     public function update(Ticket $ticket)
     {
+        if (config('main.notes.show_abusedesk_names') === true) {
+            $postingUser = ' (' . $this->user->first_name . ' ' . $this->user->last_name . ')';
+        } else {
+            $postingUser = '';
+        }
+
         $note = new Note;
         $note->ticket_id = $ticket->id;
-        $note->submitter = 'abusedesk';
+        $note->submitter = Lang::get('ash.communication.abusedesk'). $postingUser;
         $note->text = Input::get('text');
         $note->save();
 

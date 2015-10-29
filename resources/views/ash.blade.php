@@ -179,7 +179,7 @@
 
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h3 class="panel-title">{{ Lang::get('ash.communication.responseFrom') }} {{ Lang::get('ash.communication.'.$note->submitter) }}</h3>
+                                    <h3 class="panel-title">{{ Lang::get('ash.communication.responseFrom') }} {{ $note->submitter }}</h3>
                                 </div>
                                 <div class="pull-right">
                                     <span>{{ $note->created_at }}</span>

@@ -39,6 +39,7 @@ return [
     'notes' => [
         'enabled'                           => true,
         'deletable'                         => true,
+        'show_abusedesk_names'              => true,
     ],
 
     'notifications' => [
