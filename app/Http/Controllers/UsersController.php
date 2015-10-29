@@ -3,8 +3,15 @@
 namespace AbuseIO\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
+use AbuseIO\Http\Requests\UserFormRequest;
 use AbuseIO\Http\Controllers\Controller;
+use AbuseIO\Models\Account;
+use AbuseIO\Models\User;
+use Redirect;
+use Input;
+use Hash;
 
 class UsersController extends Controller
 {
@@ -23,7 +30,10 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $users = User::paginate(10); // ::with('user')
+
         return view('users.index')
+            ->with('users', $users)
             ->with('user', $this->user);
     }
 
@@ -34,7 +44,12 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $accounts = Account::lists('name', 'id');
+
+        return view('users.create')
+            ->with('account_selection', $accounts)
+            ->with('selected', null)
+            ->with('user', $this->user);
     }
 
     /**
@@ -43,9 +58,13 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserFormRequest $user)
     {
-        //
+        $input = Input::all();
+        User::create($input);
+
+        return Redirect::route('admin.users.index')
+            ->with('message', 'User has been created');
     }
 
     /**
@@ -54,9 +73,14 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $luser)
     {
-        //
+        $account = Account::find($luser->account_id);
+
+        return view('users.show')
+            ->with('account', $account)
+            ->with('luser', $luser)
+            ->with('user', $this->user);
     }
 
     /**
@@ -65,21 +89,35 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $luser)
     {
-        //
+        $accounts = Account::lists('name', 'id');
+
+        return view('users.edit')
+            ->with('luser', $luser)
+            ->with('account_selection', $accounts)
+            ->with('selected', $luser->account_id)
+            ->with('user', $this->user);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  UserFormRequest $request [description]
+     * @param  User            $luser   [description]
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserFormRequest $request, User $luser)
     {
-        //
+        $input = array_except(Input::all(), '_method');
+
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        }
+
+        $luser->update($input);
+
+        return Redirect::route('admin.users.show', $luser->id)
+            ->with('message', 'User has been updated.');
     }
 
     /**
@@ -88,8 +126,18 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $luser)
     {
-        //
+        // Do not allow the default admin user account to be deleted.
+        if ($luser->id == 1) {
+            return Redirect::back()
+                ->with('message', 'Not allowed to delete the default admin user.');
+        }
+
+        $luser->delete();
+        // todo: delete related users/brands as well
+
+        return Redirect::route('admin.users.index')
+            ->with('message', 'User has been deleted.');
     }
 }
