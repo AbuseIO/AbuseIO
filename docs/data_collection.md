@@ -103,6 +103,27 @@ create a blackhole for the IP).
 Based on the ticket type (Info, Abuse, Escalation) the notifications hve configurable intervals. By default we
 send abuse every 15 minutes and informational every 90 days.
 
+## Data collection errors
+
+Parsers that only set a warning counter that increase when the parsers has hit a snag. Additional warnings
+are automaticly added by parser-common for events like where a parser did not return any event at all.
+
+By default the handler is set to threat these warnings as errors and will not even try to continue validating
+or saving the found events. Instead the original EML file is added onto a e-mail which is sent to the admin
+to investigate. In most cases this is the result of a notifier changing the format or misconfiguration.
+
+If you want to continue and try to save the stuff you did find you can change the setting parser_warnings_are_errors
+to false.
+
+## Retrying data collection
+
+If a parser had problems and only partially saves the events found in the data set, you can simply just retry
+the parsing by reintroducing the e-mail onto the system (either by bouncing the EML or using CLI tools) so the
+parser will try to handle the e-mail again.
+
+You will not have to worry about getting duplicates, as there is a filter on saving events that are an exact match.
+Only is there is actually over data (e.g. timestamp, or a infoblob value) then the event will be saved.
+
 # Local and remote contact data
 
 The system comes with a built-in database for registering IP owners, netblocks and domains. This local database always
