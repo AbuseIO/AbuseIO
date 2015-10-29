@@ -91,8 +91,9 @@ class ProfilesController extends Controller
             "email" => $input['email']
         ];
 
-        if (!empty($input['password']))
+        if (!empty($input['password'])) {
             $data['password'] = Hash::make($input['password']);
+        }
 
         $this->user->update($data);
 
