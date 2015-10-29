@@ -77,8 +77,6 @@ class EventsSave extends Job implements SelfHandling
                 $domainContact = false;
             }
 
-            // Todo: somehow add the domain too!!!!
-
             /*
              * Search to see if there is an existing ticket for this event classification
              */
@@ -163,7 +161,7 @@ class EventsSave extends Job implements SelfHandling
                     $newEvent->timestamp    = $event['timestamp'];
                     $newEvent->save();
 
-                    // TODO - Update domain owner if changed
+                    // TODO - Update domain owner if changed based on the contactID (reference)
 
                     // TODO - Call notifier action handler, type update
                 }
