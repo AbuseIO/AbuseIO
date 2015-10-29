@@ -161,8 +161,8 @@ class ContactsController extends Controller
         if ($contact->netblocks->count() > 0) {
             return Redirect::route('admin.contacts.index')->with(
                 'message',
-                "Contact could not be deleted because ".  $contact->domains->count()
-                . " domain(s) is stil pointing to this contact."
+                "Contact could not be deleted because ".  $contact->netblocks->count()
+                . " netblock(s) is stil pointing to this contact."
             );
         }
 
