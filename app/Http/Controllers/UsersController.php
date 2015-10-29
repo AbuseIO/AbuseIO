@@ -54,8 +54,7 @@ class UsersController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UserFormRequest $user
      * @return \Illuminate\Http\Response
      */
     public function store(UserFormRequest $user)
@@ -69,8 +68,7 @@ class UsersController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param  User   $luser
      * @return \Illuminate\Http\Response
      */
     public function show(User $luser)
@@ -85,8 +83,7 @@ class UsersController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
+     * @param  User   $luser
      * @return \Illuminate\Http\Response
      */
     public function edit(User $luser)
@@ -102,8 +99,8 @@ class UsersController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param  UserFormRequest $request [description]
-     * @param  User            $luser   [description]
+     * @param  UserFormRequest $request
+     * @param  User            $luser
      * @return \Illuminate\Http\Response
      */
     public function update(UserFormRequest $request, User $luser)
@@ -122,8 +119,7 @@ class UsersController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param  User   $luser
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $luser)
@@ -135,7 +131,6 @@ class UsersController extends Controller
         }
 
         $luser->delete();
-        // todo: delete related users/brands as well
 
         return Redirect::route('admin.users.index')
             ->with('message', 'User has been deleted.');
