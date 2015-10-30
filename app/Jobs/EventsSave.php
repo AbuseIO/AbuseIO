@@ -26,6 +26,35 @@ class EventsSave extends Job implements SelfHandling
         $this->evidenceID   = $evidenceID;
     }
 
+    public function customNotification($ticket, $event, $type)
+    {
+        if (!empty(config("main.external.notification.class"))
+            && !empty(config("main.external.notification.class"))
+        ) {
+            $class = '\AbuseIO\Notification\\' . config("main.external.notification.class");
+            $method = config("main.external.notification.method");
+
+            if (class_exists($class) === true && method_exists($class, $method) === true) {
+                $reflectionMethod = new ReflectionMethod($class, $method);
+                $notification = $reflectionMethod->invoke(new $class, [$ticket, $event, $type]);
+
+                if ($notification !== true) {
+                    Log::error(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        "Notifications with {$class} did not succeed"
+                    );
+                } else {
+                    Log::error(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        "Notifications with {$class} was successfull"
+                    );
+                }
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Execute the command.
      * @return array
@@ -131,7 +160,7 @@ class EventsSave extends Job implements SelfHandling
 
                 $newEvent->save();
 
-                // TODO - Call notifier action handler, type new
+                $this->customNotification($newTicket, $event, 'new');
 
 
             } elseif ($search->count() === 1) {
@@ -139,11 +168,11 @@ class EventsSave extends Job implements SelfHandling
                  * There is an existing ticket, so we just need to add the event to this ticket. If the event is an
                  * exact match we consider it a duplicate and will ignore it.
                  */
-                $ticketID = $search[0]->id;
+                $ticket = $search[0];
 
                 if (Event::where('information', '=', $event['information'])
                         ->where('source', '=', $event['source'])
-                        ->where('ticket_id', '=', $ticketID)
+                        ->where('ticket_id', '=', $ticket->id)
                         ->where('timestamp', '=', $event['timestamp'])
                         ->exists()
                 ) {
@@ -157,13 +186,29 @@ class EventsSave extends Job implements SelfHandling
                     $newEvent->evidence_id  = $this->evidenceID;
                     $newEvent->information  = $event['information'];
                     $newEvent->source       = $event['source'];
-                    $newEvent->ticket_id    = $ticketID;
+                    $newEvent->ticket_id    = $ticket->id;
                     $newEvent->timestamp    = $event['timestamp'];
                     $newEvent->save();
 
-                    // TODO - Update domain owner if changed based on the contactID (reference)
+                    /*
+                     * If the reference has changed for the domain owner, then we update the ticket with the new
+                     * domain owner. We not check if anything else then the reference has changed. If you change the
+                     * contact data you have the option to propogate it onto open tickets.
+                     */
+                    if (!empty($event['domain']) &&
+                        $domainContact !== false &&
+                        $domainContact->reference !== $ticket->domain_contact_reference
+                    ) {
+                        $ticket->domain_contact_reference   = $domainContact->reference;
+                        $ticket->domain_contact_name        = $domainContact->name;
+                        $ticket->domain_contact_email       = $domainContact->email;
+                        $ticket->domain_contact_rpchost     = $domainContact->rpc_host;
+                        $ticket->domain_contact_rpckey      = $domainContact->rpc_key;
+                        $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
+                        $ticket->save();
+                    }
 
-                    // TODO - Call notifier action handler, type update
+                    $this->customNotification($ticket, $event, 'update');
                 }
 
             } else {

@@ -32,13 +32,13 @@ class FindContact extends Job
      * Return the class and methdod to do external calls
      * @return object
      */
-    public static function getExternalResolver($section, $search)
+    public static function getExternalContact($section, $search)
     {
-        if (!empty(config("main.resolvers.findcontact.{$section}.class"))
-            && !empty(config("main.resolvers.findcontact.{$section}.method"))
+        if (!empty(config("main.external.findcontact.{$section}.class"))
+            && !empty(config("main.external.findcontact.{$section}.method"))
         ) {
-            $class = '\AbuseIO\FindContact\\' . config("main.resolvers.findcontact.{$section}.class");
-            $method = config("main.resolvers.findcontact.{$section}.method");
+            $class = '\AbuseIO\FindContact\\' . config("main.external.findcontact.{$section}.class");
+            $method = config("main.external.findcontact.{$section}.method");
 
             if (class_exists($class) === true && method_exists($class, $method) === true) {
                 $reflectionMethod = new ReflectionMethod($class, $method);
@@ -73,7 +73,7 @@ class FindContact extends Job
             return $result[0]->contact;
         }
 
-        $findContact = FindContact::getExternalResolver('ip', $ip);
+        $findContact = FindContact::getExternalContact('ip', $ip);
         if (!empty($findContact)) {
             return $findContact;
         }
@@ -97,7 +97,7 @@ class FindContact extends Job
             return $result[0]->contact;
         }
 
-        $findContact = FindContact::getExternalResolver('domain', $domain);
+        $findContact = FindContact::getExternalContact('domain', $domain);
         if (!empty($findContact)) {
             return $findContact;
         }
@@ -121,7 +121,7 @@ class FindContact extends Job
             return $result[0];
         }
 
-        $findContact = FindContact::getExternalResolver('id', $id);
+        $findContact = FindContact::getExternalContact('id', $id);
         if (!empty($findContact)) {
             return $findContact;
         }
