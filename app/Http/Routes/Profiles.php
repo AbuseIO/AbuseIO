@@ -9,7 +9,7 @@ Route::group(
         route::get(
             '',
             [
-                'middleware' => 'acl:admin_profiles_view',
+                'middleware' => 'permission:admin_profiles_view',
                 'as' => 'admin.profiles.index',
                 'uses' => 'ProfilesController@index'
             ]
@@ -19,7 +19,7 @@ Route::group(
         route::get(
             '{profiles}',
             [
-                'middleware' => 'acl:admin_profiles_view',
+                'middleware' => 'permission:admin_profiles_view',
                 'as' => 'admin.profiles.show',
                 'uses' => 'ProfilesController@show'
             ]
@@ -29,7 +29,7 @@ Route::group(
         route::get(
             'export',
             [
-                'middleware' => 'acl:admin_profiles_export2',
+                'middleware' => 'permission:admin_profiles_export2',
                 'as' => 'admin.profiles.export',
                 'uses' => 'ProfilesController@export'
             ]
@@ -39,7 +39,7 @@ Route::group(
         route::get(
             'create',
             [
-                'middleware' => 'acl:admin_profiles_create',
+                'middleware' => 'permission:admin_profiles_create',
                 'as' => 'admin.profiles.create',
                 'uses' => 'ProfilesController@create'
             ]
@@ -47,7 +47,7 @@ Route::group(
         route::post(
             '',
             [
-                'middleware' => 'acl:admin_profiles_create',
+                'middleware' => 'permission:admin_profiles_create',
                 'as' => 'admin.profiles.store',
                 'uses' => 'ProfilesController@store'
             ]
@@ -57,7 +57,7 @@ Route::group(
         route::get(
             '{profiles}/edit',
             [
-                'middleware' => 'acl:admin_profiles_edit',
+                'middleware' => 'permission:admin_profiles_edit',
                 'as' => 'admin.profiles.edit',
                 'uses' => 'ProfilesController@edit'
             ]
@@ -65,7 +65,7 @@ Route::group(
         route::patch(
             '{profiles}',
             [
-                'middleware' => 'acl:admin_profiles_edit',
+                'middleware' => 'permission:admin_profiles_edit',
                 'as' => '',
                 'uses' => 'ProfilesController@update'
             ]
@@ -73,7 +73,7 @@ Route::group(
         route::put(
             '{profiles}',
             [
-                'middleware' => 'acl:admin_profiles_edit',
+                'middleware' => 'permission:admin_profiles_edit',
                 'as' => 'admin.profiles.update',
                 'uses' => 'ProfilesController@update'
             ]
@@ -83,7 +83,7 @@ Route::group(
         route::delete(
             '/{profiles}',
             [
-                'middleware' => 'acl:admin_profiles_delete',
+                'middleware' => 'permission:admin_profiles_delete',
                 'as' => 'admin.profiles.destroy',
                 'uses' => 'ProfilesController@destroy'
             ]

@@ -9,7 +9,7 @@ Route::group(
         route::get(
             '',
             [
-                'middleware' => 'acl:admin_brands_view',
+                'middleware' => 'permission:admin_brands_view',
                 'as' => 'admin.brands.index',
                 'uses' => 'BrandsController@index'
             ]
@@ -19,7 +19,7 @@ Route::group(
         route::get(
             '{brands}',
             [
-                'middleware' => 'acl:admin_brands_view',
+                'middleware' => 'permission:admin_brands_view',
                 'as' => 'admin.brands.show',
                 'uses' => 'BrandsController@show'
             ]
@@ -29,7 +29,7 @@ Route::group(
         route::get(
             'export',
             [
-                'middleware' => 'acl:admin_brands_export2',
+                'middleware' => 'permission:admin_brands_export2',
                 'as' => 'admin.brands.export',
                 'uses' => 'BrandsController@export'
             ]
@@ -39,7 +39,7 @@ Route::group(
         route::get(
             'create',
             [
-                'middleware' => 'acl:admin_brands_create',
+                'middleware' => 'permission:admin_brands_create',
                 'as' => 'admin.brands.create',
                 'uses' => 'BrandsController@create'
             ]
@@ -47,7 +47,7 @@ Route::group(
         route::post(
             '',
             [
-                'middleware' => 'acl:admin_brands_create',
+                'middleware' => 'permission:admin_brands_create',
                 'as' => 'admin.brands.store',
                 'uses' => 'BrandsController@store'
             ]
@@ -57,7 +57,7 @@ Route::group(
         route::get(
             '{brands}/edit',
             [
-                'middleware' => 'acl:admin_brands_edit',
+                'middleware' => 'permission:admin_brands_edit',
                 'as' => 'admin.brands.edit',
                 'uses' => 'BrandsController@edit'
             ]
@@ -65,7 +65,7 @@ Route::group(
         route::patch(
             '{brands}',
             [
-                'middleware' => 'acl:admin_brands_edit',
+                'middleware' => 'permission:admin_brands_edit',
                 'as' => '',
                 'uses' => 'BrandsController@update'
             ]
@@ -73,7 +73,7 @@ Route::group(
         route::put(
             '{brands}',
             [
-                'middleware' => 'acl:admin_brands_edit',
+                'middleware' => 'permission:admin_brands_edit',
                 'as' => 'admin.brands.update',
                 'uses' => 'BrandsController@update'
             ]
@@ -83,7 +83,7 @@ Route::group(
         route::delete(
             '/{brands}',
             [
-                'middleware' => 'acl:admin_brands_delete',
+                'middleware' => 'permission:admin_brands_delete',
                 'as' => 'admin.brands.destroy',
                 'uses' => 'BrandsController@destroy'
             ]

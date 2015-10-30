@@ -9,7 +9,7 @@ Route::group(
         route::get(
             '',
             [
-                'middleware' => 'acl:admin_netblocks_view',
+                'middleware' => 'permission:admin_netblocks_view',
                 'as' => 'admin.netblocks.index',
                 'uses' => 'NetblocksController@index'
             ]
@@ -19,7 +19,7 @@ Route::group(
         route::get(
             '{netblocks}',
             [
-                'middleware' => 'acl:admin_netblocks_view',
+                'middleware' => 'permission:admin_netblocks_view',
                 'as' => 'admin.netblocks.show',
                 'uses' => 'NetblocksController@show'
             ]
@@ -29,7 +29,7 @@ Route::group(
         route::get(
             'export',
             [
-                'middleware' => 'acl:admin_netblocks_export2',
+                'middleware' => 'permission:admin_netblocks_export2',
                 'as' => 'admin.netblocks.export',
                 'uses' => 'NetblocksController@export'
             ]
@@ -39,7 +39,7 @@ Route::group(
         route::get(
             'create',
             [
-                'middleware' => 'acl:admin_netblocks_create',
+                'middleware' => 'permission:admin_netblocks_create',
                 'as' => 'admin.netblocks.create',
                 'uses' => 'NetblocksController@create'
             ]
@@ -47,7 +47,7 @@ Route::group(
         route::post(
             '',
             [
-                'middleware' => 'acl:admin_netblocks_create',
+                'middleware' => 'permission:admin_netblocks_create',
                 'as' => 'admin.netblocks.store',
                 'uses' => 'NetblocksController@store'
             ]
@@ -57,7 +57,7 @@ Route::group(
         route::get(
             '{netblocks}/edit',
             [
-                'middleware' => 'acl:admin_netblocks_edit',
+                'middleware' => 'permission:admin_netblocks_edit',
                 'as' => 'admin.netblocks.edit',
                 'uses' => 'NetblocksController@edit'
             ]
@@ -65,7 +65,7 @@ Route::group(
         route::patch(
             '{netblocks}',
             [
-                'middleware' => 'acl:admin_netblocks_edit',
+                'middleware' => 'permission:admin_netblocks_edit',
                 'as' => '',
                 'uses' => 'NetblocksController@update'
             ]
@@ -73,7 +73,7 @@ Route::group(
         route::put(
             '{netblocks}',
             [
-                'middleware' => 'acl:admin_netblocks_edit',
+                'middleware' => 'permission:admin_netblocks_edit',
                 'as' => 'admin.netblocks.update',
                 'uses' => 'NetblocksController@update'
             ]
@@ -83,7 +83,7 @@ Route::group(
         route::delete(
             '/{netblocks}',
             [
-                'middleware' => 'acl:admin_netblocks_delete',
+                'middleware' => 'permission:admin_netblocks_delete',
                 'as' => 'admin.netblocks.destroy',
                 'uses' => 'NetblocksController@destroy'
             ]

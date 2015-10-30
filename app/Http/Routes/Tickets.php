@@ -9,7 +9,7 @@ Route::group(
         route::get(
             '',
             [
-                'middleware' => 'acl:admin_tickets_view',
+                'middleware' => 'permission:admin_tickets_view',
                 'as' => 'admin.tickets.index',
                 'uses' => 'TicketsController@index'
             ]
@@ -19,7 +19,7 @@ Route::group(
         route::get(
             '{tickets}',
             [
-                'middleware' => 'acl:admin_tickets_view',
+                'middleware' => 'permission:admin_tickets_view',
                 'as' => 'admin.tickets.show',
                 'uses' => 'TicketsController@show'
             ]
@@ -29,7 +29,7 @@ Route::group(
         route::get(
             'export',
             [
-                'middleware' => 'acl:admin_tickets_export2',
+                'middleware' => 'permission:admin_tickets_export2',
                 'as' => 'admin.tickets.export',
                 'uses' => 'TicketsController@export'
             ]
@@ -39,7 +39,7 @@ Route::group(
         route::get(
             'create',
             [
-                'middleware' => 'acl:admin_tickets_create',
+                'middleware' => 'permission:admin_tickets_create',
                 'as' => 'admin.tickets.create',
                 'uses' => 'TicketsController@create'
             ]
@@ -47,7 +47,7 @@ Route::group(
         route::post(
             '',
             [
-                'middleware' => 'acl:admin_tickets_create',
+                'middleware' => 'permission:admin_tickets_create',
                 'as' => 'admin.tickets.store',
                 'uses' => 'TicketsController@store'
             ]
@@ -57,7 +57,7 @@ Route::group(
         route::get(
             '{tickets}/edit',
             [
-                'middleware' => 'acl:admin_tickets_edit',
+                'middleware' => 'permission:admin_tickets_edit',
                 'as' => 'admin.tickets.edit',
                 'uses' => 'TicketsController@edit'
             ]
@@ -65,7 +65,7 @@ Route::group(
         route::patch(
             '{tickets}',
             [
-                'middleware' => 'acl:admin_tickets_edit',
+                'middleware' => 'permission:admin_tickets_edit',
                 'as' => '',
                 'uses' => 'TicketsController@update'
             ]
@@ -73,7 +73,7 @@ Route::group(
         route::put(
             '{tickets}',
             [
-                'middleware' => 'acl:admin_tickets_edit',
+                'middleware' => 'permission:admin_tickets_edit',
                 'as' => 'admin.tickets.update',
                 'uses' => 'TicketsController@update'
             ]
@@ -83,7 +83,7 @@ Route::group(
         route::delete(
             '/{tickets}',
             [
-                'middleware' => 'acl:admin_tickets_delete',
+                'middleware' => 'permission:admin_tickets_delete',
                 'as' => 'admin.tickets.destroy',
                 'uses' => 'TicketsController@destroy'
             ]

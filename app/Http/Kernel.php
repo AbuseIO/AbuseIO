@@ -30,6 +30,6 @@ class Kernel extends HttpKernel
         'auth' => \AbuseIO\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \AbuseIO\Http\Middleware\RedirectIfAuthenticated::class,
-        'acl' => \AbuseIO\Http\Middleware\CheckPermission::class,
+        'permission' => \AbuseIO\Http\Middleware\CheckPermission::class,
     ];
 }

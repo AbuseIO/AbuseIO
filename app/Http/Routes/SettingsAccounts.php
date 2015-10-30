@@ -9,7 +9,7 @@ Route::group(
         route::get(
             '',
             [
-                'middleware' => 'acl:admin_accounts_view',
+                'middleware' => 'permission:admin_accounts_view',
                 'as' => 'admin.accounts.index',
                 'uses' => 'AccountsController@index'
             ]
@@ -19,7 +19,7 @@ Route::group(
         route::get(
             '{accounts}',
             [
-                'middleware' => 'acl:admin_accounts_view',
+                'middleware' => 'permission:admin_accounts_view',
                 'as' => 'admin.accounts.show',
                 'uses' => 'AccountsController@show'
             ]
@@ -29,7 +29,7 @@ Route::group(
         route::get(
             'export',
             [
-                'middleware' => 'acl:admin_accounts_export2',
+                'middleware' => 'permission:admin_accounts_export2',
                 'as' => 'admin.accounts.export',
                 'uses' => 'AccountsController@export'
             ]
@@ -39,7 +39,7 @@ Route::group(
         route::get(
             'create',
             [
-                'middleware' => 'acl:admin_accounts_create',
+                'middleware' => 'permission:admin_accounts_create',
                 'as' => 'admin.accounts.create',
                 'uses' => 'AccountsController@create'
             ]
@@ -47,7 +47,7 @@ Route::group(
         route::post(
             '',
             [
-                'middleware' => 'acl:admin_accounts_create',
+                'middleware' => 'permission:admin_accounts_create',
                 'as' => 'admin.accounts.store',
                 'uses' => 'AccountsController@store'
             ]
@@ -57,7 +57,7 @@ Route::group(
         route::get(
             '{accounts}/edit',
             [
-                'middleware' => 'acl:admin_accounts_edit',
+                'middleware' => 'permission:admin_accounts_edit',
                 'as' => 'admin.accounts.edit',
                 'uses' => 'AccountsController@edit'
             ]
@@ -65,7 +65,7 @@ Route::group(
         route::patch(
             '{accounts}',
             [
-                'middleware' => 'acl:admin_accounts_edit',
+                'middleware' => 'permission:admin_accounts_edit',
                 'as' => '',
                 'uses' => 'AccountsController@update'
             ]
@@ -73,7 +73,7 @@ Route::group(
         route::put(
             '{accounts}',
             [
-                'middleware' => 'acl:admin_accounts_edit',
+                'middleware' => 'permission:admin_accounts_edit',
                 'as' => 'admin.accounts.update',
                 'uses' => 'AccountsController@update'
             ]
@@ -83,7 +83,7 @@ Route::group(
         route::delete(
             '/{accounts}',
             [
-                'middleware' => 'acl:admin_accounts_delete',
+                'middleware' => 'permission:admin_accounts_delete',
                 'as' => 'admin.accounts.destroy',
                 'uses' => 'AccountsController@destroy'
             ]

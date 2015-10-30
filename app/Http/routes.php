@@ -36,7 +36,7 @@ Route::group(
         'prefix' => 'api',
         'middleware' => [
             'auth',
-            'acl:api_login'
+            'permission:api_login'
         ],
     ],
     function () {
@@ -52,7 +52,7 @@ Route::group(
         'prefix' => 'admin',
         'middleware' => [
             'auth',
-            'acl:admin_login'
+            'permission:admin_login'
         ],
     ],
     function () {
