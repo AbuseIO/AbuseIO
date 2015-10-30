@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-3 col-md-offset-9 text-right">
             {!! link_to_route('admin.contacts.create', trans('contacts.button.new_contact'), [ ], ['class' => 'btn btn-info']) !!}
-            {!! link_to_route('admin.export.contacts', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
+            {!! link_to_route('admin.contacts.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
         </div>
     </div>
 
