@@ -65,9 +65,12 @@ Route::group(
 
         // Dashboard
         Route::get(
-            'home',
-            'HomeController@index'
+            '/',
+            function () {
+                return Redirect::to('/admin/home');
+            }
         );
+        Route::get('/home', 'HomeController@index');
 
         // Contacts
         Route::resource('contacts', 'ContactsController');
