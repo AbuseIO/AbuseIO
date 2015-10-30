@@ -22,7 +22,7 @@ class NetblocksController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -36,7 +36,7 @@ class NetblocksController extends Controller
 
         return view('netblocks.index')
             ->with('netblocks', $netblocks)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -50,7 +50,7 @@ class NetblocksController extends Controller
         return view('netblocks.create')
             ->with('contact_selection', $contacts)
             ->with('selected', null)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -112,7 +112,7 @@ class NetblocksController extends Controller
     {
         return view('netblocks.show')
             ->with('netblock', $netblock)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -132,7 +132,7 @@ class NetblocksController extends Controller
             ->with('netblock', $netblock)
             ->with('contact_selection', $contacts)
             ->with('selected', $netblock->contact_id)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**

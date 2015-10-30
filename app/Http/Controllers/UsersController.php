@@ -20,7 +20,7 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -34,7 +34,7 @@ class UsersController extends Controller
 
         return view('users.index')
             ->with('users', $users)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -49,7 +49,7 @@ class UsersController extends Controller
         return view('users.create')
             ->with('account_selection', $accounts)
             ->with('selected', null)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -68,42 +68,42 @@ class UsersController extends Controller
 
     /**
      * Display the specified resource.
-     * @param  User   $luser
+     * @param  User   $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $luser)
+    public function show(User $user)
     {
-        $account = Account::find($luser->account_id);
+        $account = Account::find($user->account_id);
 
         return view('users.show')
             ->with('account', $account)
-            ->with('luser', $luser)
-            ->with('user', $this->user);
+            ->with('user', $user)
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param  User   $luser
+     * @param  User   $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $luser)
+    public function edit(User $user)
     {
         $accounts = Account::lists('name', 'id');
 
         return view('users.edit')
-            ->with('luser', $luser)
+            ->with('user', $user)
             ->with('account_selection', $accounts)
-            ->with('selected', $luser->account_id)
-            ->with('user', $this->user);
+            ->with('selected', $user->account_id)
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
      * Update the specified resource in storage.
      * @param  UserFormRequest $request
-     * @param  User            $luser
+     * @param  User            $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UserFormRequest $request, User $luser)
+    public function update(UserFormRequest $request, User $user)
     {
         $input = array_except(Input::all(), '_method');
 
@@ -111,26 +111,26 @@ class UsersController extends Controller
             $input['password'] = Hash::make($input['password']);
         }
 
-        $luser->update($input);
+        $user->update($input);
 
-        return Redirect::route('admin.users.show', $luser->id)
+        return Redirect::route('admin.users.show', $user->id)
             ->with('message', 'User has been updated.');
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param  User   $luser
+     * @param  User   $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $luser)
+    public function destroy(User $user)
     {
         // Do not allow the default admin user account to be deleted.
-        if ($luser->id == 1) {
+        if ($user->id == 1) {
             return Redirect::back()
                 ->with('message', 'Not allowed to delete the default admin user.');
         }
 
-        $luser->delete();
+        $user->delete();
 
         return Redirect::route('admin.users.index')
             ->with('message', 'User has been deleted.');

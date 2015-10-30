@@ -13,14 +13,14 @@ abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public $user = false;
+    public $auth_user = false;
 
     public function __construct()
     {
         // Globalize user information
         $user = Auth::user();
         if ($user) {
-            $this->user = $user;
+            $this->auth_user = $user;
         }
 
     }

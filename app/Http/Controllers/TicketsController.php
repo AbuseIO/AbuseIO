@@ -20,7 +20,7 @@ class TicketsController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -71,7 +71,7 @@ class TicketsController extends Controller
 
         return view('tickets.index')
             ->with('tickets', $tickets)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -83,7 +83,7 @@ class TicketsController extends Controller
         $tickets = Ticket::where('status_id', 1)->paginate(10);
         return view('tickets.index')
             ->with('tickets', $tickets)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -96,7 +96,7 @@ class TicketsController extends Controller
         $tickets = Ticket::where('status_id', 2)->paginate(10);
         return view('tickets.index')
             ->with('tickets', $tickets)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -108,7 +108,7 @@ class TicketsController extends Controller
     {
 
         return view('tickets.create')
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
 
     }
 
@@ -164,7 +164,7 @@ class TicketsController extends Controller
 
         return view('tickets.show')
             ->with('ticket', $ticket)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
 
     }
 
@@ -187,7 +187,7 @@ class TicketsController extends Controller
     public function update(Ticket $ticket)
     {
         if (config('main.notes.show_abusedesk_names') === true) {
-            $postingUser = ' (' . $this->user->first_name . ' ' . $this->user->last_name . ')';
+            $postingUser = ' (' . $this->auth_user->fullName() . ')';
         } else {
             $postingUser = '';
         }

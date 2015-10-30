@@ -1,24 +1,24 @@
 @extends('app')
 
 @section('content')
-<h1 class="page-header">{{ trans('users.headers.detail') }}: {{ $luser->first_name }} {{ $luser->last_name }}</h1>
+<h1 class="page-header">{{ trans('users.headers.detail') }}: {{ $user->first_name }} {{ $user->last_name }}</h1>
 <div class="row">
     <div class="col-md-3 col-md-offset-9 text-right">
-        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.users.destroy', $luser->id]]) !!}
-        {!! link_to_route('admin.users.edit', trans('misc.button.edit'), $luser->id, ['class' => 'btn btn-info']) !!}
-        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger'.(($luser->id == 1) ? ' disabled' : '')]) !!}
+        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.users.destroy', $user->id]]) !!}
+        {!! link_to_route('admin.users.edit', trans('misc.button.edit'), $user->id, ['class' => 'btn btn-info']) !!}
+        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger'.(($user->id == 1) ? ' disabled' : '')]) !!}
         {!! Form::close() !!}
     </div>
 </div>
 <dl class="dl-horizontal">
     <dt>{{ trans('misc.id') }}</dt>
-    <dd>{{ $luser->id }}</dd>
+    <dd>{{ $user->id }}</dd>
 
     <dt>{{ trans('misc.name') }}</dt>
-    <dd>{{ $luser->first_name }} {{ $luser->last_name }}</dd>
+    <dd>{{ $user->first_name }} {{ $user->last_name }}</dd>
 
     <dt>{{ trans('misc.email') }}</dt>
-    <dd><a href="mailto:{{ $luser->email }}">{{ $luser->email }}</a></dd>
+    <dd><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></dd>
 
     <dt>{{ trans('users.linked_account') }}</dt>
     <dd>{{ $account->name }}</dd>

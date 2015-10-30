@@ -15,7 +15,7 @@ class AnalyticsController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -45,6 +45,6 @@ class AnalyticsController extends Controller
 
         return view('analytics')
             ->with('classCounts', $classCounts)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 }

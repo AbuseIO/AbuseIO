@@ -17,7 +17,7 @@ class HomeController extends Controller
         return view(
             'home',
             [
-                'user' => $this->user
+                'auth_user' => $this->auth_user,
             ]
         );
     }

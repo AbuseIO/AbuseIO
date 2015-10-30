@@ -20,7 +20,7 @@ class AccountsController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -34,7 +34,7 @@ class AccountsController extends Controller
 
         return view('accounts.index')
             ->with('accounts', $accounts)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -45,7 +45,7 @@ class AccountsController extends Controller
     public function create()
     {
         return view('accounts.create')
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -76,7 +76,7 @@ class AccountsController extends Controller
         return view('accounts.show')
             ->with('account', $account)
             ->with('brand', $brand)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -93,7 +93,7 @@ class AccountsController extends Controller
             ->with('account', $account)
             ->with('brand_selection', $brands)
             ->with('selected', $account->brand_id)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**

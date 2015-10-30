@@ -21,7 +21,7 @@ class DomainsController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -35,7 +35,7 @@ class DomainsController extends Controller
 
         return view('domains.index')
             ->with('domains', $domains)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -49,7 +49,7 @@ class DomainsController extends Controller
         return view('domains.create')
             ->with('contact_selection', $contacts)
             ->with('selected', null)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -108,7 +108,7 @@ class DomainsController extends Controller
     {
         return view('domains.show')
             ->with('domain', $domain)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -125,7 +125,7 @@ class DomainsController extends Controller
             ->with('domain', $domain)
             ->with('contact_selection', $contacts)
             ->with('selected', $domain->contact_id)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**

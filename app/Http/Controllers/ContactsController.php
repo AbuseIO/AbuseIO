@@ -19,7 +19,7 @@ class ContactsController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -32,7 +32,7 @@ class ContactsController extends Controller
 
         return view('contacts.index')
             ->with('contacts', $contacts)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -42,7 +42,7 @@ class ContactsController extends Controller
     public function create()
     {
         return view('contacts.create')
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -90,7 +90,7 @@ class ContactsController extends Controller
      */
     public function store(ContactFormRequest $contact)
     {
-        $account = $this->user->account;
+        $account = $this->auth_user->account;
         $input = Input::all();
         $input['account_id'] = $account->id;
 
@@ -123,7 +123,7 @@ class ContactsController extends Controller
     {
         return view('contacts.edit')
             ->with('contact', $contact)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -133,7 +133,7 @@ class ContactsController extends Controller
      */
     public function update(Contact $contact)
     {
-        $account = $this->user->account;
+        $account = $this->auth_user->account;
         $input = array_except(Input::all(), '_method');
         $input['account_id'] = $account->id;
 

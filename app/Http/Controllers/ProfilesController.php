@@ -18,7 +18,7 @@ class ProfilesController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -29,7 +29,7 @@ class ProfilesController extends Controller
     public function index()
     {
         return view('profile.index')
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -95,7 +95,7 @@ class ProfilesController extends Controller
             $data['password'] = Hash::make($input['password']);
         }
 
-        $this->user->update($data);
+        $this->auth_user->update($data);
 
         return Redirect::route('admin.profile.index')
             ->with('message', 'Profile has been updated.');

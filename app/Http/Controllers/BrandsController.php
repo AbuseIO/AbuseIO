@@ -7,7 +7,6 @@ use AbuseIO\Http\Requests;
 use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Brand;
 
-
 class BrandsController extends Controller
 {
     /*
@@ -15,7 +14,7 @@ class BrandsController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -26,7 +25,7 @@ class BrandsController extends Controller
     public function index()
     {
         return view('brands.index')
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -72,7 +71,9 @@ class BrandsController extends Controller
         $brand = Brand::find($id);
 
         // if the brand with the specified id doesn't exist return nothing
-        if (!$brand) return;
+        if (!$brand) {
+            return false;
+        }
 
         // get the mime type
         $finfo = new \finfo(FILEINFO_MIME_TYPE);
