@@ -151,7 +151,7 @@ class EventsSave extends Job implements SelfHandling
 
                 $newTicket->save();
 
-                $newEvent  = new Event;
+                $newEvent = new Event;
                 $newEvent->evidence_id = $this->evidenceID;
                 $newEvent->information = $event['information'];
                 $newEvent->source      = $event['source'];
@@ -183,11 +183,13 @@ class EventsSave extends Job implements SelfHandling
                     $eventCount++;
 
                     $newEvent = new Event;
+
                     $newEvent->evidence_id  = $this->evidenceID;
                     $newEvent->information  = $event['information'];
                     $newEvent->source       = $event['source'];
                     $newEvent->ticket_id    = $ticket->id;
                     $newEvent->timestamp    = $event['timestamp'];
+
                     $newEvent->save();
 
                     /*
@@ -205,6 +207,7 @@ class EventsSave extends Job implements SelfHandling
                         $ticket->domain_contact_rpchost     = $domainContact->rpc_host;
                         $ticket->domain_contact_rpckey      = $domainContact->rpc_key;
                         $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
+
                         $ticket->save();
                     }
 
