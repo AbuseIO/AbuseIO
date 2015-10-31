@@ -29,7 +29,7 @@ Route::group(
 
         // Access to export object
         route::get(
-            'export',
+            'export/{format}',
             [
                 'middleware' => 'permission:users_export',
                 'as' => 'admin.users.export',

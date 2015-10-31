@@ -47,39 +47,45 @@ class ContactsController extends Controller
      * Export listing to CSV format.
      * @return Response
      */
-    public function export()
+    public function export($format)
     {
         $contacts  = Contact::all();
 
-        $columns = [
-            'reference'     => 'Reference',
-            'contact'       => 'name',
-            'enabled'       => 'Status',
-            'email'         => 'E-Mail address',
-            'rpc_host'      => 'RPC address',
-            'rpc_key'       => 'RPC key',
-            'auto_notify'   => 'Notifications',
-        ];
+        if ($format === 'csv') {
 
-        $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
-
-        foreach ($contacts as $contact) {
-            $row = [
-                $contact->reference,
-                $contact->name,
-                $contact['enabled'] ? 'Enabled' : 'Disabled',
-                $contact['email'],
-                $contact['rpc_host'],
-                $contact['rpc_key'],
-                $contact['auto_notify'] ? 'Automatic' : 'Manual',
+            $columns = [
+                'reference'     => 'Reference',
+                'contact'       => 'name',
+                'enabled'       => 'Status',
+                'email'         => 'E-Mail address',
+                'rpc_host'      => 'RPC address',
+                'rpc_key'       => 'RPC key',
+                'auto_notify'   => 'Notifications',
             ];
 
-            $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+            $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+
+            foreach ($contacts as $contact) {
+                $row = [
+                    $contact->reference,
+                    $contact->name,
+                    $contact['enabled'] ? 'Enabled' : 'Disabled',
+                    $contact['email'],
+                    $contact['rpc_host'],
+                    $contact['rpc_key'],
+                    $contact['auto_notify'] ? 'Automatic' : 'Manual',
+                ];
+
+                $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+            }
+
+            return response(substr($output, 0, -1), 200)
+                ->header('Content-Type', 'text/csv')
+                ->header('Content-Disposition', 'attachment; filename="Contacts.csv"');
         }
 
-        return response(substr($output, 0, -1), 200)
-            ->header('Content-Type', 'text/csv')
-            ->header('Content-Disposition', 'attachment; filename="Contacts.csv"');
+        return Redirect::route('admin.contacts.index')
+            ->with('message', "The requested format {$format} is not available for exports");
     }
 
     /**

@@ -29,7 +29,7 @@ Route::group(
 
         // Access to export object
         route::get(
-            'export',
+            'export/{format}',
             [
                 'middleware' => 'permission:brands_export',
                 'as' => 'admin.brands.export',

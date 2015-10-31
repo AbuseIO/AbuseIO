@@ -116,27 +116,47 @@ class TicketsController extends Controller
      * Export tickets to CSV format.
      * @return Response
      */
-    public function export()
+    public function export($format)
     {
 
         $tickets = Ticket::all();
-        $columns = [
-            'id' => 'Ticket ID',
-        ];
 
-        $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
-
-        foreach ($tickets as $ticket) {
-            $row = [
-                $ticket->id,
+        if ($format === 'csv') {
+            $columns = [
+                'id'            => 'Ticket ID',
+                'ip'            => 'IP address',
+                'class_id'      => 'Classification',
+                'type_id'       => 'Type',
+                'first_seen'    => 'First seen',
+                'last_seen'     => 'Last seen',
+                'event_count'   => 'Events',
+                'status_id'     => 'Ticket Status',
             ];
 
-            $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+            $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+
+            foreach ($tickets as $ticket) {
+                $row = [
+                    $ticket->id,
+                    $ticket->ip,
+                    $ticket->class_id,
+                    $ticket->type_id,
+                    $ticket->firstEvent[0]->timestamp,
+                    $ticket->lastEvent[0]->timestamp,
+                    $ticket->events->count(),
+                    $ticket->status_id,
+                ];
+
+                $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+            }
+
+            return response(substr($output, 0, -1), 200)
+                ->header('Content-Type', 'text/csv')
+                ->header('Content-Disposition', 'attachment; filename="Tickets.csv"');
         }
 
-        return response(substr($output, 0, -1), 200)
-            ->header('Content-Type', 'text/csv')
-            ->header('Content-Disposition', 'attachment; filename="Tickets.csv"');
+        return Redirect::route('admin.contacts.index')
+            ->with('message', "The requested format {$format} is not available for exports");
     }
 
     /**

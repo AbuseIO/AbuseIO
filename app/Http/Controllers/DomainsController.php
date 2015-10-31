@@ -56,31 +56,36 @@ class DomainsController extends Controller
      * Export listing to CSV format.
      * @return Response
      */
-    public function export()
+    public function export($format)
     {
         $domains = Domain::all();
 
-        $columns = [
-            'contact' => 'Contact',
-            'domain' => 'Domain name',
-            'enabled' => 'Status',
-        ];
-
-        $output = '"' . implode('","', $columns) . '"' . PHP_EOL;
-
-        foreach ($domains as $domain) {
-            $row = [
-                $domain->contact->name . ' (' . $domain->contact->reference . ')',
-                $domain['name'],
-                $domain['enabled'] ? 'Enabled' : 'Disabled',
+        if ($format === 'csv') {
+            $columns = [
+                'contact'   => 'Contact',
+                'domain'    => 'Domain name',
+                'enabled'   => 'Status',
             ];
 
-            $output .= '"' . implode('","', $row) . '"' . PHP_EOL;
+            $output = '"' . implode('","', $columns) . '"' . PHP_EOL;
+
+            foreach ($domains as $domain) {
+                $row = [
+                    $domain->contact->name . ' (' . $domain->contact->reference . ')',
+                    $domain['name'],
+                    $domain['enabled'] ? 'Enabled' : 'Disabled',
+                ];
+
+                $output .= '"' . implode('","', $row) . '"' . PHP_EOL;
+            }
+
+            return response(substr($output, 0, -1), 200)
+                ->header('Content-Type', 'text/csv')
+                ->header('Content-Disposition', 'attachment; filename="Domains.csv"');
         }
 
-        return response(substr($output, 0, -1), 200)
-            ->header('Content-Type', 'text/csv')
-            ->header('Content-Disposition', 'attachment; filename="Domains.csv"');
+        return Redirect::route('admin.domains.index')
+            ->with('message', "The requested format {$format} is not available for exports");
     }
 
     /**

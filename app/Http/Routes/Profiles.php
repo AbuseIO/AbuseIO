@@ -28,7 +28,7 @@ Route::group(
 
         // Access to export object
         route::get(
-            'export',
+            'export/{format}',
             [
                 'middleware' => 'permission:profiles_export',
                 'as' => 'admin.profiles.export',
