@@ -2,6 +2,7 @@
 Route::group(
     [
         'prefix' => 'search',
+        'as' => 'search.',
     ],
     function () {
         // Access to index list
@@ -9,7 +10,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:search_view',
-                'as' => 'admin.search',
+                'as' => 'view',
                 'uses' => 'SearchController@index'
             ]
         );

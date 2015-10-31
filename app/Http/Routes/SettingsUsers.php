@@ -5,6 +5,7 @@ Route::resource('users', 'UsersController');
 Route::group(
     [
         'prefix' => 'users',
+        'as' => 'users.',
     ],
     function () {
         // Access to index list
@@ -12,7 +13,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:users_view',
-                'as' => 'admin.users.index',
+                'as' => 'index',
                 'uses' => 'UsersController@index'
             ]
         );
@@ -22,7 +23,7 @@ Route::group(
             '{users}',
             [
                 'middleware' => 'permission:users_view',
-                'as' => 'admin.users.show',
+                'as' => 'show',
                 'uses' => 'UsersController@show'
             ]
         );
@@ -32,7 +33,7 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:users_export',
-                'as' => 'admin.users.export',
+                'as' => 'export',
                 'uses' => 'UsersController@export'
             ]
         );
@@ -42,7 +43,7 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:users_create',
-                'as' => 'admin.users.create',
+                'as' => 'create',
                 'uses' => 'UsersController@create'
             ]
         );
@@ -50,7 +51,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:users_create',
-                'as' => 'admin.users.store',
+                'as' => 'store',
                 'uses' => 'UsersController@store'
             ]
         );
@@ -60,7 +61,7 @@ Route::group(
             '{users}/edit',
             [
                 'middleware' => 'permission:users_edit',
-                'as' => 'admin.users.edit',
+                'as' => 'edit',
                 'uses' => 'UsersController@edit'
             ]
         );
@@ -68,7 +69,7 @@ Route::group(
             '{users}',
             [
                 'middleware' => 'permission:users_edit',
-                'as' => '',
+                'as' => 'update',
                 'uses' => 'UsersController@update'
             ]
         );
@@ -76,7 +77,7 @@ Route::group(
             '{users}',
             [
                 'middleware' => 'permission:users_edit',
-                'as' => 'admin.users.update',
+                'as' => 'update',
                 'uses' => 'UsersController@update'
             ]
         );
@@ -86,7 +87,7 @@ Route::group(
             '/{users}',
             [
                 'middleware' => 'permission:users_delete',
-                'as' => 'admin.users.destroy',
+                'as' => 'destroy',
                 'uses' => 'UsersController@destroy'
             ]
         );

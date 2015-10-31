@@ -5,6 +5,7 @@ Route::resource('tickets', 'TicketsController');
 Route::group(
     [
         'prefix' => 'tickets',
+        'as' => 'tickets.',
     ],
     function () {
         // Access to index list
@@ -12,7 +13,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:tickets_view',
-                'as' => 'admin.tickets.index',
+                'as' => 'index',
                 'uses' => 'TicketsController@index'
             ]
         );
@@ -22,7 +23,7 @@ Route::group(
             '{tickets}',
             [
                 'middleware' => 'permission:tickets_view',
-                'as' => 'admin.tickets.show',
+                'as' => 'show',
                 'uses' => 'TicketsController@show'
             ]
         );
@@ -32,7 +33,7 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:tickets_export',
-                'as' => 'admin.tickets.export',
+                'as' => 'export',
                 'uses' => 'TicketsController@export'
             ]
         );
@@ -42,7 +43,7 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:tickets_create',
-                'as' => 'admin.tickets.create',
+                'as' => 'create',
                 'uses' => 'TicketsController@create'
             ]
         );
@@ -50,7 +51,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:tickets_create',
-                'as' => 'admin.tickets.store',
+                'as' => 'store',
                 'uses' => 'TicketsController@store'
             ]
         );
@@ -60,7 +61,7 @@ Route::group(
             '{tickets}/edit',
             [
                 'middleware' => 'permission:tickets_edit',
-                'as' => 'admin.tickets.edit',
+                'as' => 'edit',
                 'uses' => 'TicketsController@edit'
             ]
         );
@@ -68,7 +69,7 @@ Route::group(
             '{tickets}',
             [
                 'middleware' => 'permission:tickets_edit',
-                'as' => '',
+                'as' => 'update',
                 'uses' => 'TicketsController@update'
             ]
         );
@@ -76,7 +77,7 @@ Route::group(
             '{tickets}',
             [
                 'middleware' => 'permission:tickets_edit',
-                'as' => 'admin.tickets.update',
+                'as' => 'update',
                 'uses' => 'TicketsController@update'
             ]
         );
@@ -86,7 +87,7 @@ Route::group(
             '/{tickets}',
             [
                 'middleware' => 'permission:tickets_delete',
-                'as' => 'admin.tickets.destroy',
+                'as' => 'destroy',
                 'uses' => 'TicketsController@destroy'
             ]
         );
@@ -102,7 +103,7 @@ Route::group(
                     'open',
                     [
                         'middleware' => 'permission:tickets_view',
-                        'as' => 'admin.tickets.showOpen',
+                        'as' => 'showOpen',
                         'uses' => 'TicketsController@statusOpen'
                     ]
                 );
@@ -110,7 +111,7 @@ Route::group(
                     'closed',
                     [
                         'middleware' => 'permission:tickets_view',
-                        'as' => 'admin.tickets.showClosed',
+                        'as' => 'showClosed',
                         'uses' => 'TicketsController@showClosed'
                     ]
                 );

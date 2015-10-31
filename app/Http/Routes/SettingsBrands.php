@@ -5,6 +5,7 @@ Route::resource('brands', 'BrandsController');
 Route::group(
     [
         'prefix' => 'brands',
+        'as' => 'brands.',
     ],
     function () {
         // Access to index list
@@ -12,7 +13,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:brands_view',
-                'as' => 'admin.brands.index',
+                'as' => 'index',
                 'uses' => 'BrandsController@index'
             ]
         );
@@ -22,7 +23,7 @@ Route::group(
             '{brands}',
             [
                 'middleware' => 'permission:brands_view',
-                'as' => 'admin.brands.show',
+                'as' => 'show',
                 'uses' => 'BrandsController@show'
             ]
         );
@@ -32,7 +33,7 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:brands_export',
-                'as' => 'admin.brands.export',
+                'as' => 'export',
                 'uses' => 'BrandsController@export'
             ]
         );
@@ -42,7 +43,7 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:brands_create',
-                'as' => 'admin.brands.create',
+                'as' => 'create',
                 'uses' => 'BrandsController@create'
             ]
         );
@@ -50,7 +51,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:brands_create',
-                'as' => 'admin.brands.store',
+                'as' => 'store',
                 'uses' => 'BrandsController@store'
             ]
         );
@@ -60,7 +61,7 @@ Route::group(
             '{brands}/edit',
             [
                 'middleware' => 'permission:brands_edit',
-                'as' => 'admin.brands.edit',
+                'as' => 'edit',
                 'uses' => 'BrandsController@edit'
             ]
         );
@@ -68,7 +69,7 @@ Route::group(
             '{brands}',
             [
                 'middleware' => 'permission:brands_edit',
-                'as' => '',
+                'as' => 'update',
                 'uses' => 'BrandsController@update'
             ]
         );
@@ -76,7 +77,7 @@ Route::group(
             '{brands}',
             [
                 'middleware' => 'permission:brands_edit',
-                'as' => 'admin.brands.update',
+                'as' => 'update',
                 'uses' => 'BrandsController@update'
             ]
         );
@@ -86,7 +87,7 @@ Route::group(
             '/{brands}',
             [
                 'middleware' => 'permission:brands_delete',
-                'as' => 'admin.brands.destroy',
+                'as' => 'destroy',
                 'uses' => 'BrandsController@destroy'
             ]
         );

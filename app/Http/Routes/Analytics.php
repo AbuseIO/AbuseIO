@@ -2,6 +2,7 @@
 Route::group(
     [
         'prefix' => 'analytics',
+        'as' => 'analytics.',
     ],
     function () {
         // Access to index list
@@ -9,7 +10,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:analytics_view',
-                'as' => 'admin.analytics',
+                'as' => 'view',
                 'uses' => 'AnalyticsController@index'
             ]
         );

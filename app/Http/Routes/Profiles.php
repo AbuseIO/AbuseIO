@@ -4,6 +4,7 @@ Route::resource('profile', 'ProfilesController');
 Route::group(
     [
         'prefix' => 'profiles',
+        'as' => 'profiles.',
     ],
     function () {
         // Access to index list
@@ -11,7 +12,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:profiles_view',
-                'as' => 'admin.profiles.index',
+                'as' => 'index',
                 'uses' => 'ProfilesController@index'
             ]
         );
@@ -21,7 +22,7 @@ Route::group(
             '{profiles}',
             [
                 'middleware' => 'permission:profiles_view',
-                'as' => 'admin.profiles.show',
+                'as' => 'show',
                 'uses' => 'ProfilesController@show'
             ]
         );
@@ -31,7 +32,7 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:profiles_export',
-                'as' => 'admin.profiles.export',
+                'as' => 'export',
                 'uses' => 'ProfilesController@export'
             ]
         );
@@ -41,7 +42,7 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:profiles_create',
-                'as' => 'admin.profiles.create',
+                'as' => 'create',
                 'uses' => 'ProfilesController@create'
             ]
         );
@@ -49,7 +50,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:profiles_create',
-                'as' => 'admin.profiles.store',
+                'as' => 'store',
                 'uses' => 'ProfilesController@store'
             ]
         );
@@ -59,7 +60,7 @@ Route::group(
             '{profiles}/edit',
             [
                 'middleware' => 'permission:profiles_edit',
-                'as' => 'admin.profiles.edit',
+                'as' => 'edit',
                 'uses' => 'ProfilesController@edit'
             ]
         );
@@ -67,7 +68,7 @@ Route::group(
             '{profiles}',
             [
                 'middleware' => 'permission:profiles_edit',
-                'as' => '',
+                'as' => 'update',
                 'uses' => 'ProfilesController@update'
             ]
         );
@@ -75,7 +76,7 @@ Route::group(
             '{profiles}',
             [
                 'middleware' => 'permission:profiles_edit',
-                'as' => 'admin.profiles.update',
+                'as' => 'update',
                 'uses' => 'ProfilesController@update'
             ]
         );
@@ -85,7 +86,7 @@ Route::group(
             '/{profiles}',
             [
                 'middleware' => 'permission:profiles_delete',
-                'as' => 'admin.profiles.destroy',
+                'as' => 'destroy',
                 'uses' => 'ProfilesController@destroy'
             ]
         );

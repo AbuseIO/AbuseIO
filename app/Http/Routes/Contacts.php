@@ -5,14 +5,24 @@ Route::model('contacts', 'AbuseIO\Models\Contact');
 Route::group(
     [
         'prefix' => 'contacts',
+        'as' => 'contacts.',
     ],
     function () {
+        Route::get(
+            'search/{one?}/{two?}/{three?}/{four?}/{five?}',
+            [
+                'middleware' => 'permission:contacts_view',
+                'as' => 'search',
+                'uses' => 'ContactsController@search'
+            ]
+        );
+
         // Access to index list
         route::get(
             '',
             [
                 'middleware' => 'permission:contacts_view',
-                'as' => 'admin.contacts.index',
+                'as' => 'index',
                 'uses' => 'ContactsController@index'
             ]
         );
@@ -22,7 +32,7 @@ Route::group(
             '{contacts}',
             [
                 'middleware' => 'permission:contacts_view',
-                'as' => 'admin.contacts.show',
+                'as' => 'show',
                 'uses' => 'ContactsController@show'
             ]
         );
@@ -32,7 +42,7 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:contacts_export',
-                'as' => 'admin.contacts.export',
+                'as' => 'export',
                 'uses' => 'ContactsController@export'
             ]
         );
@@ -42,7 +52,7 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:contacts_create',
-                'as' => 'admin.contacts.create',
+                'as' => 'create',
                 'uses' => 'ContactsController@create'
             ]
         );
@@ -50,7 +60,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:contacts_create',
-                'as' => 'admin.contacts.store',
+                'as' => 'store',
                 'uses' => 'ContactsController@store'
             ]
         );
@@ -60,7 +70,7 @@ Route::group(
             '{contacts}/edit',
             [
                 'middleware' => 'permission:contacts_edit',
-                'as' => 'admin.contacts.edit',
+                'as' => 'edit',
                 'uses' => 'ContactsController@edit'
             ]
         );
@@ -68,7 +78,7 @@ Route::group(
             '{contacts}',
             [
                 'middleware' => 'permission:contacts_edit',
-                'as' => '',
+                'as' => 'update',
                 'uses' => 'ContactsController@update'
             ]
         );
@@ -76,7 +86,7 @@ Route::group(
             '{contacts}',
             [
                 'middleware' => 'permission:contacts_edit',
-                'as' => 'admin.contacts.update',
+                'as' => 'update',
                 'uses' => 'ContactsController@update'
             ]
         );
@@ -86,7 +96,7 @@ Route::group(
             '{contacts}',
             [
                 'middleware' => 'permission:contacts_delete',
-                'as' => 'admin.contacts.destroy',
+                'as' => 'destroy',
                 'uses' => 'ContactsController@destroy'
             ]
         );

@@ -5,6 +5,7 @@ Route::resource('accounts', 'AccountsController');
 Route::group(
     [
         'prefix' => 'accounts',
+        'as' => 'accounts.',
     ],
     function () {
         // Access to index list
@@ -12,7 +13,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:accounts_view',
-                'as' => 'admin.accounts.index',
+                'as' => 'index',
                 'uses' => 'AccountsController@index'
             ]
         );
@@ -22,7 +23,7 @@ Route::group(
             '{accounts}',
             [
                 'middleware' => 'permission:accounts_view',
-                'as' => 'admin.accounts.show',
+                'as' => 'show',
                 'uses' => 'AccountsController@show'
             ]
         );
@@ -32,7 +33,7 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:accounts_export',
-                'as' => 'admin.accounts.export',
+                'as' => 'export',
                 'uses' => 'AccountsController@export'
             ]
         );
@@ -42,7 +43,7 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:accounts_create',
-                'as' => 'admin.accounts.create',
+                'as' => 'create',
                 'uses' => 'AccountsController@create'
             ]
         );
@@ -50,7 +51,7 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:accounts_create',
-                'as' => 'admin.accounts.store',
+                'as' => 'store',
                 'uses' => 'AccountsController@store'
             ]
         );
@@ -60,7 +61,7 @@ Route::group(
             '{accounts}/edit',
             [
                 'middleware' => 'permission:accounts_edit',
-                'as' => 'admin.accounts.edit',
+                'as' => 'edit',
                 'uses' => 'AccountsController@edit'
             ]
         );
@@ -76,7 +77,7 @@ Route::group(
             '{accounts}',
             [
                 'middleware' => 'permission:accounts_edit',
-                'as' => 'admin.accounts.update',
+                'as' => 'update',
                 'uses' => 'AccountsController@update'
             ]
         );
@@ -86,7 +87,7 @@ Route::group(
             '/{accounts}',
             [
                 'middleware' => 'permission:accounts_delete',
-                'as' => 'admin.accounts.destroy',
+                'as' => 'destroy',
                 'uses' => 'AccountsController@destroy'
             ]
         );
