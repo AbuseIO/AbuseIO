@@ -11,7 +11,7 @@ Route::group(
         route::get(
             '',
             [
-                'middleware' => 'permission:admin_contacts_view',
+                'middleware' => 'permission:contacts_view',
                 'as' => 'admin.contacts.index',
                 'uses' => 'ContactsController@index'
             ]
@@ -21,7 +21,7 @@ Route::group(
         route::get(
             '{contacts}',
             [
-                'middleware' => 'permission:admin_contacts_view',
+                'middleware' => 'permission:contacts_view',
                 'as' => 'admin.contacts.show',
                 'uses' => 'ContactsController@show'
             ]
@@ -31,7 +31,7 @@ Route::group(
         route::get(
             'export',
             [
-                'middleware' => 'permission:admin_contacts_export2',
+                'middleware' => 'permission:contacts_export',
                 'as' => 'admin.contacts.export',
                 'uses' => 'ContactsController@export'
             ]
@@ -41,7 +41,7 @@ Route::group(
         route::get(
             'create',
             [
-                'middleware' => 'permission:admin_contacts_create',
+                'middleware' => 'permission:contacts_create',
                 'as' => 'admin.contacts.create',
                 'uses' => 'ContactsController@create'
             ]
@@ -49,7 +49,7 @@ Route::group(
         route::post(
             '',
             [
-                'middleware' => 'permission:admin_contacts_create',
+                'middleware' => 'permission:contacts_create',
                 'as' => 'admin.contacts.store',
                 'uses' => 'ContactsController@store'
             ]
@@ -59,7 +59,7 @@ Route::group(
         route::get(
             '{contacts}/edit',
             [
-                'middleware' => 'permission:admin_contacts_edit',
+                'middleware' => 'permission:contacts_edit',
                 'as' => 'admin.contacts.edit',
                 'uses' => 'ContactsController@edit'
             ]
@@ -67,7 +67,7 @@ Route::group(
         route::patch(
             '{contacts}',
             [
-                'middleware' => 'permission:admin_contacts_edit',
+                'middleware' => 'permission:contacts_edit',
                 'as' => '',
                 'uses' => 'ContactsController@update'
             ]
@@ -75,7 +75,7 @@ Route::group(
         route::put(
             '{contacts}',
             [
-                'middleware' => 'permission:admin_contacts_edit',
+                'middleware' => 'permission:contacts_edit',
                 'as' => 'admin.contacts.update',
                 'uses' => 'ContactsController@update'
             ]
@@ -85,7 +85,7 @@ Route::group(
         route::delete(
             '/{contacts}',
             [
-                'middleware' => 'permission:admin_contacts_delete',
+                'middleware' => 'permission:contacts_delete',
                 'as' => 'admin.contacts.destroy',
                 'uses' => 'ContactsController@destroy'
             ]

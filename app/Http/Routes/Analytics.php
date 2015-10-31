@@ -8,7 +8,7 @@ Route::group(
         route::get(
             '',
             [
-                'middleware' => 'permission:admin_analytics_view',
+                'middleware' => 'permission:analytics_view',
                 'as' => 'admin.analytics',
                 'uses' => 'AnalyticsController@index'
             ]

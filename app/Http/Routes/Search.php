@@ -8,7 +8,7 @@ Route::group(
         route::get(
             '',
             [
-                'middleware' => 'permission:admin_search_view',
+                'middleware' => 'permission:search_view',
                 'as' => 'admin.search',
                 'uses' => 'SearchController@index'
             ]

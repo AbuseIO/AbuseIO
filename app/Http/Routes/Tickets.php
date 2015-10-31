@@ -11,7 +11,7 @@ Route::group(
         route::get(
             '',
             [
-                'middleware' => 'permission:admin_tickets_view',
+                'middleware' => 'permission:tickets_view',
                 'as' => 'admin.tickets.index',
                 'uses' => 'TicketsController@index'
             ]
@@ -21,7 +21,7 @@ Route::group(
         route::get(
             '{tickets}',
             [
-                'middleware' => 'permission:admin_tickets_view',
+                'middleware' => 'permission:tickets_view',
                 'as' => 'admin.tickets.show',
                 'uses' => 'TicketsController@show'
             ]
@@ -31,7 +31,7 @@ Route::group(
         route::get(
             'export',
             [
-                'middleware' => 'permission:admin_tickets_export2',
+                'middleware' => 'permission:tickets_export',
                 'as' => 'admin.tickets.export',
                 'uses' => 'TicketsController@export'
             ]
@@ -41,7 +41,7 @@ Route::group(
         route::get(
             'create',
             [
-                'middleware' => 'permission:admin_tickets_create',
+                'middleware' => 'permission:tickets_create',
                 'as' => 'admin.tickets.create',
                 'uses' => 'TicketsController@create'
             ]
@@ -49,7 +49,7 @@ Route::group(
         route::post(
             '',
             [
-                'middleware' => 'permission:admin_tickets_create',
+                'middleware' => 'permission:tickets_create',
                 'as' => 'admin.tickets.store',
                 'uses' => 'TicketsController@store'
             ]
@@ -59,7 +59,7 @@ Route::group(
         route::get(
             '{tickets}/edit',
             [
-                'middleware' => 'permission:admin_tickets_edit',
+                'middleware' => 'permission:tickets_edit',
                 'as' => 'admin.tickets.edit',
                 'uses' => 'TicketsController@edit'
             ]
@@ -67,7 +67,7 @@ Route::group(
         route::patch(
             '{tickets}',
             [
-                'middleware' => 'permission:admin_tickets_edit',
+                'middleware' => 'permission:tickets_edit',
                 'as' => '',
                 'uses' => 'TicketsController@update'
             ]
@@ -75,7 +75,7 @@ Route::group(
         route::put(
             '{tickets}',
             [
-                'middleware' => 'permission:admin_tickets_edit',
+                'middleware' => 'permission:tickets_edit',
                 'as' => 'admin.tickets.update',
                 'uses' => 'TicketsController@update'
             ]
@@ -85,7 +85,7 @@ Route::group(
         route::delete(
             '/{tickets}',
             [
-                'middleware' => 'permission:admin_tickets_delete',
+                'middleware' => 'permission:tickets_delete',
                 'as' => 'admin.tickets.destroy',
                 'uses' => 'TicketsController@destroy'
             ]

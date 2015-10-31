@@ -11,7 +11,7 @@ Route::group(
         route::get(
             '',
             [
-                'middleware' => 'permission:admin_domains_view',
+                'middleware' => 'permission:domains_view',
                 'as' => 'admin.domains.index',
                 'uses' => 'DomainsController@index'
             ]
@@ -21,7 +21,7 @@ Route::group(
         route::get(
             '{domains}',
             [
-                'middleware' => 'permission:admin_domains_view',
+                'middleware' => 'permission:domains_view',
                 'as' => 'admin.domains.show',
                 'uses' => 'DomainsController@show'
             ]
@@ -31,7 +31,7 @@ Route::group(
         route::get(
             'export',
             [
-                'middleware' => 'permission:admin_domains_export2',
+                'middleware' => 'permission:domains_export',
                 'as' => 'admin.domains.export',
                 'uses' => 'DomainsController@export'
             ]
@@ -41,7 +41,7 @@ Route::group(
         route::get(
             'create',
             [
-                'middleware' => 'permission:admin_domains_create',
+                'middleware' => 'permission:domains_create',
                 'as' => 'admin.domains.create',
                 'uses' => 'DomainsController@create'
             ]
@@ -49,7 +49,7 @@ Route::group(
         route::post(
             '',
             [
-                'middleware' => 'permission:admin_domains_create',
+                'middleware' => 'permission:domains_create',
                 'as' => 'admin.domains.store',
                 'uses' => 'DomainsController@store'
             ]
@@ -59,7 +59,7 @@ Route::group(
         route::get(
             '{domains}/edit',
             [
-                'middleware' => 'permission:admin_domains_edit',
+                'middleware' => 'permission:domains_edit',
                 'as' => 'admin.domains.edit',
                 'uses' => 'DomainsController@edit'
             ]
@@ -67,7 +67,7 @@ Route::group(
         route::patch(
             '{domains}',
             [
-                'middleware' => 'permission:admin_domains_edit',
+                'middleware' => 'permission:domains_edit',
                 'as' => '',
                 'uses' => 'DomainsController@update'
             ]
@@ -75,7 +75,7 @@ Route::group(
         route::put(
             '{domains}',
             [
-                'middleware' => 'permission:admin_domains_edit',
+                'middleware' => 'permission:domains_edit',
                 'as' => 'admin.domains.update',
                 'uses' => 'DomainsController@update'
             ]
@@ -85,7 +85,7 @@ Route::group(
         route::delete(
             '/{domains}',
             [
-                'middleware' => 'permission:admin_domains_delete',
+                'middleware' => 'permission:domains_delete',
                 'as' => 'admin.domains.destroy',
                 'uses' => 'DomainsController@destroy'
             ]

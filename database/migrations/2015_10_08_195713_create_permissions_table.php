@@ -71,7 +71,7 @@ class CreatePermissionsTable extends Migration
             foreach ($actions as $action) {
                 $permissions[] = [
                     'permission_title'          => "{$action} {$controller}",
-                    'permission_slug'           => "admin_{$controller}_{$action}",
+                    'permission_slug'           => "{$controller}_{$action}",
                     'permission_description'    => "Allow to {$action} {$controller}",
                 ];
             }
