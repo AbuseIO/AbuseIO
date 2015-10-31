@@ -92,14 +92,28 @@ Route::group(
         );
 
         // Filter options
-        // TODO: replace with search filter instead of method? Currently no ACL's applied to these resources!
+        // TODO: replace with search filter instead of method?
         Route::group(
             [
                 'prefix' => 'status'
             ],
             function () {
-                Route::resource('open', 'TicketsController@statusOpen');
-                Route::resource('closed', 'TicketsController@statusClosed');
+                Route::get(
+                    'open',
+                    [
+                        'middleware' => 'permission:tickets_view',
+                        'as' => 'admin.tickets.showOpen',
+                        'uses' => 'TicketsController@statusOpen'
+                    ]
+                );
+                Route::get(
+                    'closed',
+                    [
+                        'middleware' => 'permission:tickets_view',
+                        'as' => 'admin.tickets.showClosed',
+                        'uses' => 'TicketsController@showClosed'
+                    ]
+                );
             }
         );
 
