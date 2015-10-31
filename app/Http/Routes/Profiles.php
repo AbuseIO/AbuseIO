@@ -1,5 +1,5 @@
 <?php
-Route::resource('profile', 'ProfilesController');
+Route::resource('profiles', 'ProfilesController');
 
 Route::group(
     [
