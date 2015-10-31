@@ -35,13 +35,13 @@ Route::group(
     [
         'prefix' => 'api',
         'middleware' => [
-            'auth',
-            'permission:api_login'
+            'auth.basic',
+            'permission:login_api'
         ],
     ],
     function () {
 
-        //
+        // TODO
 
     }
 );
@@ -52,7 +52,8 @@ Route::group(
         'prefix' => 'admin',
         'middleware' => [
             'auth',
-            'permission:admin_login'
+            'auth.basic',
+            'permission:login_portal'
         ],
     ],
     function () {
