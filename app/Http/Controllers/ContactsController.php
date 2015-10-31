@@ -2,11 +2,9 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ContactFormRequest;
-use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Contact;
 use Redirect;
 use Input;
@@ -106,11 +104,11 @@ class ContactsController extends Controller
      * @return Response
      * @internal param int $id
      */
-    public function show(Request $request, Contact $contact)
+    public function show(Contact $contact)
     {
         return view('contacts.show')
             ->with('contact', $contact)
-            ->with('user', $request->user());
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
