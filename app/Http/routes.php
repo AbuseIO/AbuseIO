@@ -52,7 +52,6 @@ Route::group(
         'prefix' => 'admin',
         'middleware' => [
             'auth',
-            'auth.basic',
             'permission:login_portal'
         ],
     ],
