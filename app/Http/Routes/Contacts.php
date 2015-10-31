@@ -83,7 +83,7 @@ Route::group(
 
         // Access to delete object
         route::delete(
-            '/{contacts}',
+            '{contacts}',
             [
                 'middleware' => 'permission:contacts_delete',
                 'as' => 'admin.contacts.destroy',
