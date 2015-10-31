@@ -1,4 +1,6 @@
 <?php
+Route::resource('contacts', 'ContactsController');
+Route::model('contacts', 'AbuseIO\Models\Contact');
 
 Route::group(
     [

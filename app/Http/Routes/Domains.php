@@ -1,4 +1,6 @@
 <?php
+Route::resource('domains', 'DomainsController');
+Route::model('domains', 'AbuseIO\Models\Domain');
 
 Route::group(
     [

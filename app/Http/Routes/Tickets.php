@@ -1,4 +1,6 @@
 <?php
+Route::model('tickets', 'AbuseIO\Models\Ticket');
+Route::resource('tickets', 'TicketsController');
 
 Route::group(
     [

@@ -1,4 +1,6 @@
 <?php
+Route::model('users', 'AbuseIO\Models\User');
+Route::resource('users', 'UsersController');
 
 Route::group(
     [

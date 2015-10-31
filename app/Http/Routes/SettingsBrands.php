@@ -1,4 +1,6 @@
 <?php
+Route::model('brands', 'AbuseIO\Models\Brand');
+Route::resource('brands', 'BrandsController');
 
 Route::group(
     [

@@ -1,4 +1,6 @@
 <?php
+Route::resource('netblocks', 'NetblocksController');
+Route::model('netblocks', 'AbuseIO\Models\Netblock');
 
 Route::group(
     [

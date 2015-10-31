@@ -1,4 +1,6 @@
 <?php
+Route::model('accounts', 'AbuseIO\Models\Account');
+Route::resource('accounts', 'AccountsController');
 
 Route::group(
     [
