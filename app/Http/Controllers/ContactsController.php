@@ -30,10 +30,9 @@ class ContactsController extends Controller
     {
         $contacts = Contact::paginate(10);
 
-        return [
-            'contacts' => $contacts,
-            'auth_user' => $this->auth_user,
-            ];
+        return view('contacts.index')
+            ->with('contacts', $contacts)
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
