@@ -18,15 +18,54 @@ Route::get(
 Route::group(
     [
         'prefix' => 'ash',
+        'as' => 'ash.',
     ],
     function () {
-        Route::get('collect/{ticketID}/{token}', 'AshController@index');
+        Route::get(
+            'collect/{ticketID}/{token}',
+            [
+                'as' => 'show',
+                'uses' => 'AshController@index',
+                'middleware' => [
+                    'ash.token'
+                ]
+            ]
+        );
+
+        Route::post(
+            'collect/{ticketID}/{token}',
+            [
+                'as' => 'update',
+                'uses' => 'AshController@addNote',
+                'middleware' => [
+                    'ash.token'
+                ]
+            ]
+        );
 
         // Language switcher
-        Route::get('locale/{locale?}', 'LocaleController@setLocale');
+        Route::get(
+            'locale/{locale?}',
+            [
+                'as' => 'setlocale',
+                'uses' => 'LocaleController@setLocale',
+                'middleware' => [
+                    'ash.token'
+                ]
+            ]
+        );
 
         // Logos
-        Route::get('logo/{id}', 'BrandsController@logo');
+        Route::get(
+            'logo/{id}',
+            [
+                'as' => 'logo',
+                'uses' => 'BrandsController@logo',
+                'middleware' => [
+                    'ash.token'
+                ]
+            ]
+        );
     }
 );
 
@@ -54,6 +93,7 @@ Route::group(
             'auth',
             'permission:login_portal'
         ],
+        'as' => 'admin.',
     ],
     function () {
 
