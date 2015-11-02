@@ -60,7 +60,21 @@ class UsersController extends Controller
     public function store(UserFormRequest $user)
     {
         $input = Input::all();
-        User::create($input);
+
+        try {
+            User::create($input);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'Another account with this e-mail address already exists.';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.users.index')
             ->with('message', 'User has been created');
@@ -111,7 +125,20 @@ class UsersController extends Controller
             $input['password'] = Hash::make($input['password']);
         }
 
-        $user->update($input);
+        try {
+            $user->update($input);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'Another account with this e-mail address already exists.';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.users.show', $user->id)
             ->with('message', 'User has been updated.');

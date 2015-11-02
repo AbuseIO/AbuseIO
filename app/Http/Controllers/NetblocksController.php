@@ -102,7 +102,20 @@ class NetblocksController extends Controller
         $input['first_ip'] =  ICF::inetPtoi($input['first_ip']);
         $input['last_ip']  =  ICF::inetPtoi($input['last_ip']);
 
-        Netblock::create($input);
+        try {
+            Netblock::create($input);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'Another netblock with this start/end address already exists';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.netblocks.index')
             ->with('message', 'Netblock has been created');
@@ -152,7 +165,20 @@ class NetblocksController extends Controller
         $input['first_ip'] =  ICF::inetPtoi($input['first_ip']);
         $input['last_ip']  =  ICF::inetPtoi($input['last_ip']);
 
-        $netblock->update($input);
+        try {
+            $netblock->update($input);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'Another netblock with this start/end address already exists';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.netblocks.show', $netblock->id)
             ->with('message', 'Netblock has been updated.');

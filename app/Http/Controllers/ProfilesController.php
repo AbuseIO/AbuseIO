@@ -95,7 +95,20 @@ class ProfilesController extends Controller
             $data['password'] = Hash::make($input['password']);
         }
 
-        $this->auth_user->update($data);
+        try {
+            $this->auth_user->update($data);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'You cannot use this e-mail address.';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.profile.index')
             ->with('message', 'Profile has been updated.');

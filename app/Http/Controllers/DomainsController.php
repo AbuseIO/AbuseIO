@@ -96,7 +96,20 @@ class DomainsController extends Controller
     {
         $input = Input::all();
 
-        Domain::create($input);
+        try {
+            Domain::create($input);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'Another domain with this name already exists';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.domains.index')
             ->with('message', 'Domain has been created');
@@ -143,7 +156,20 @@ class DomainsController extends Controller
     {
         $input = array_except(Input::all(), '_method');
 
-        $domain->update($input);
+        try {
+            $domain->update($input);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'Another domain with this name already exists';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.domains.show', $domain->id)
             ->with('message', 'Domain has been updated.');

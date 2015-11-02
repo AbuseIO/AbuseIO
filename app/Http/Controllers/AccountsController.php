@@ -57,7 +57,21 @@ class AccountsController extends Controller
     public function store(AccountFormRequest $account)
     {
         $input = Input::all();
-        Account::create($input);
+
+        try {
+            Account::create($input);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'Another account with this name already exists';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.accounts.index')
             ->with('message', 'Account has been created');
@@ -110,7 +124,21 @@ class AccountsController extends Controller
     public function update(AccountFormRequest $request, Account $account)
     {
         $input = array_except(Input::all(), '_method');
-        $account->update($input);
+
+        try {
+            $account->update($input);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'Another account with this name already exists';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.accounts.show', $account->id)
             ->with('message', 'Account has been updated.');

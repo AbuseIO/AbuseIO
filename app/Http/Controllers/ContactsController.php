@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ContactFormRequest;
@@ -125,7 +126,20 @@ class ContactsController extends Controller
         $input = Input::all();
         $input['account_id'] = $account->id;
 
-        Contact::create($input);
+        try {
+            Contact::create($input);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'Another contact with this reference already exists';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.contacts.index')
             ->with('message', 'Contact has been created');
@@ -168,7 +182,20 @@ class ContactsController extends Controller
         $input = array_except(Input::all(), '_method');
         $input['account_id'] = $account->id;
 
-        $contact->update($input);
+        try {
+            $contact->update($input);
+
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $message = 'Unknown error code: ' . $errorCode;
+
+            if ($errorCode === 1062) {
+                $message = 'Another contact with this reference already exists';
+            }
+
+            return Redirect::back()
+                ->with('message', $message);
+        }
 
         return Redirect::route('admin.contacts.show', $contact->id)
             ->with('message', 'Contact has been updated.');
