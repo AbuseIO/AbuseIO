@@ -18,7 +18,7 @@ class CreateEvidencesTable extends Migration
             function (Blueprint $table) {
 
                 $table->increments('id');
-                $table->string('filename');
+                $table->string('filename')->unique();
                 $table->string('sender');
                 $table->string('subject');
                 $table->timestamps();
