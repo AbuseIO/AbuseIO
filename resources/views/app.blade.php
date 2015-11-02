@@ -48,7 +48,11 @@
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">{{ trans('misc.language') }}</li>
 							@foreach(Config::get('app.locales') as $locale => $localeData)
-							<li><a href="/admin/locale/{{$locale}}"><span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}</a></li>
+							<li><a href="/admin/locale/{{$locale}}"><span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}
+							@if ($locale == $auth_user->locale)
+							<span class="glyphicon glyphicon-ok"></span>
+							@endif
+							</a></li>
 							@endforeach
 							<li role="separator" class="divider"></li>
 							<li><a href="/admin/profile"><span class="glyphicon glyphicon-file"></span> {{ trans_choice('misc.profile', 2) }}</a></li>
