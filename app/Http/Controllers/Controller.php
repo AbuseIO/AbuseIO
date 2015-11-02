@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Auth;
+use Session;
 use URL;
 
 abstract class Controller extends BaseController
@@ -21,6 +22,8 @@ abstract class Controller extends BaseController
         $user = Auth::user();
         if ($user) {
             $this->auth_user = $user;
+            Session::put('locale', $user->locale);
+
         }
 
     }
