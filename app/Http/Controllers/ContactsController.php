@@ -8,6 +8,7 @@ use AbuseIO\Http\Requests\ContactFormRequest;
 use AbuseIO\Models\Contact;
 use Redirect;
 use Input;
+use yajra\Datatables\Datatables;
 
 class ContactsController extends Controller
 {
@@ -18,6 +19,32 @@ class ContactsController extends Controller
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $dataset = Contact::select('*');
+
+        return Datatables::of($dataset)
+            ->addColumn(
+                'actions',
+                function ($user) {
+                    $actions  = ' <a href="contacts/' . $user->id .
+                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> Show</a>';
+                    $actions .= ' <a href="contacts/' . $user->id .
+                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                    $actions .= ' <a href="contacts/' . $user->id .
+                        '/delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                    return $actions;
+                }
+            )
+            ->editColumn('auto_notify', '{{ empty($auto_notify) ? trans(\'misc.manual\') : trans(\'misc.automatic\')}}')
+            ->make(true);
     }
 
     /**

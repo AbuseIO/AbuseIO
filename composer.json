@@ -59,7 +59,8 @@
         "abuseio/findcontact-phpipam": "dev-master",
 		"barryvdh/laravel-ide-helper": "^2.0",
 		"pda/pheanstalk": "~3.0",
-		"ddeboer/data-import": "^0.18.0"
+		"ddeboer/data-import": "^0.18.0",
+		"yajra/laravel-datatables-oracle": "~5.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

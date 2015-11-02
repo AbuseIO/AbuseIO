@@ -12,36 +12,50 @@
     @if ( !$contacts->count() )
         <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('contacts.no_contacts')}}</div>
     @else
-        {!! $contacts->render() !!}
-        <table class="table table-striped table-condensed">
+        <br>
+        <table class="table table-striped" id="contacts-table">
             <thead>
-                <tr>
-                    <th>{{ trans('contacts.reference') }}</th>
-                    <th>{{ trans('misc.name') }}</th>
-                    <th>{{ trans('misc.email') }}</th>
-                    <th>{{ trans('contacts.rpchost') }}</th>
-                    <th>{{ trans('contacts.notification') }}</th>
-                    <th class="text-right">{{ trans('misc.action') }}</th>
-                </tr>
+            <tr>
+                <th>{{ trans('contacts.reference') }}</th>
+                <th>{{ trans('misc.name') }}</th>
+                <th>{{ trans('misc.email') }}</th>
+                <th>{{ trans('contacts.rpchost') }}</th>
+                <th>{{ trans('contacts.notification') }}</th>
+                <th>{{ trans('misc.action') }}</th>
+            </tr>
             </thead>
-            <tbody>
-                @foreach( $contacts as $contact )
-                <tr>
-                    <td>{{ $contact->reference }}</td>
-                    <td>{{ $contact->name }}</td>
-                    <td>{{ $contact->email }}</td>
-                    <td>{{ $contact->rpc_host }}</td>
-                    <td>{{ $contact->auto_notify ? trans('misc.automatic') : trans('misc.manual') }}</td>
-                    <td class="text-right">
-                        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.contacts.destroy', $contact->id]]) !!}
-                        {!! link_to_route('admin.contacts.show', trans('misc.button.details'), $contact->id, ['class' => 'btn btn-info btn-xs']) !!}
-                        {!! link_to_route('admin.contacts.edit', trans('misc.button.edit'), $contact->id, ['class' => 'btn btn-info btn-xs']) !!}
-                        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger btn-xs']) !!}
-                        {!! Form::close() !!}
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
         </table>
     @endif
+
 @endsection
+
+@push('ajaxSearch')
+<script>
+     $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#contacts-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{!! route('admin.contacts.search') .'/query/' !!}',
+            columnDefs: [ {
+                targets: -1,
+                data: null,
+                defaultContent: "<button>Click!</button>"
+            } ],
+            columns: [
+                { data: 'reference', name: 'reference' },
+                { data: 'name', name: 'name' },
+                { data: 'email', name: 'email' },
+                { data: 'rpc_host', name: 'rpc_host' },
+                { data: 'auto_notify', name: 'auto_notify' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false },
+            ]
+        });
+    });
+</script>
+@endpush
