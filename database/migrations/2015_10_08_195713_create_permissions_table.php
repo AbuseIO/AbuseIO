@@ -39,9 +39,14 @@ class CreatePermissionsTable extends Migration
         // Add single permissions
         $permissions = [
             [
-                'permission_title'          => 'login admin',
-                'permission_slug'           => 'admin_login',
-                'permission_description'    => 'Login to admin portal',
+                'permission_title'          => 'login using portal',
+                'permission_slug'           => 'login_portal',
+                'permission_description'    => 'Login to portal',
+            ],
+            [
+                'permission_title'          => 'login using api',
+                'permission_slug'           => 'login_api',
+                'permission_description'    => 'Login to api',
             ],
         ];
 
@@ -71,7 +76,7 @@ class CreatePermissionsTable extends Migration
             foreach ($actions as $action) {
                 $permissions[] = [
                     'permission_title'          => "{$action} {$controller}",
-                    'permission_slug'           => "admin_{$controller}_{$action}",
+                    'permission_slug'           => "{$controller}_{$action}",
                     'permission_description'    => "Allow to {$action} {$controller}",
                 ];
             }

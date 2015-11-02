@@ -12,7 +12,6 @@ return [
     // Accounts - Miscellaneous
     'no_accounts'           => 'No accounts',
     'linked_users'          => 'Linked users',
-
     'first_name'            => 'First name',
     'last_name'             => 'Last name'
 ];

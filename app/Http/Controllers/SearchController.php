@@ -19,7 +19,7 @@ class SearchController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -29,7 +29,15 @@ class SearchController extends Controller
      */
     public function index()
     {
-        $classifications = array_combine(array_keys(trans('classifications')), array_column(trans('classifications'), 'name'));
+        $classifications = array_combine(
+            array_keys(
+                trans('classifications')
+            ),
+            array_column(
+                trans('classifications'),
+                'name'
+            )
+        );
         $classifications = [0 => trans('misc.all')]+$classifications;
         $types = array_merge([trans('misc.all')], array_column(trans('types.type'), 'name'));
         $status = array_merge([trans('misc.all')], array_column(trans('types.status'), 'name'));
@@ -40,6 +48,6 @@ class SearchController extends Controller
             ->with('type_selection', $types)
             ->with('status_selection', $status)
             ->with('state_selection', $state)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 }

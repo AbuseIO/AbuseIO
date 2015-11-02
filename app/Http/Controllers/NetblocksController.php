@@ -22,7 +22,7 @@ class NetblocksController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -36,7 +36,7 @@ class NetblocksController extends Controller
 
         return view('netblocks.index')
             ->with('netblocks', $netblocks)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -50,40 +50,46 @@ class NetblocksController extends Controller
         return view('netblocks.create')
             ->with('contact_selection', $contacts)
             ->with('selected', null)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
      * Export listing to CSV format.
      * @return Response
      */
-    public function export()
+    public function export($format)
     {
         $netblocks  = Netblock::all();
 
-        $columns = [
-            'contact'   => 'Contact',
-            'enabled'   => 'Status',
-            'first_ip'  => 'First IP',
-            'last_ip'   => 'Last IP'
-        ];
+        if ($format === 'csv') {
 
-        $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
-
-        foreach ($netblocks as $netblock) {
-            $row = [
-                $netblock->contact->name . ' (' .$netblock->contact->reference . ')',
-                ICF::inetItop($netblock['first_ip']),
-                ICF::inetItop($netblock['last_ip']),
-                $netblock['enabled'] ? 'Enabled' : 'Disabled',
+            $columns = [
+                'contact'   => 'Contact',
+                'enabled'   => 'Status',
+                'first_ip'  => 'First IP',
+                'last_ip'   => 'Last IP'
             ];
 
-            $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+            $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+
+            foreach ($netblocks as $netblock) {
+                $row = [
+                    $netblock->contact->name . ' (' . $netblock->contact->reference . ')',
+                    ICF::inetItop($netblock['first_ip']),
+                    ICF::inetItop($netblock['last_ip']),
+                    $netblock['enabled'] ? 'Enabled' : 'Disabled',
+                ];
+
+                $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+            }
+
+            return response(substr($output, 0, -1), 200)
+                ->header('Content-Type', 'text/csv')
+                ->header('Content-Disposition', 'attachment; filename="Netblocks.csv"');
         }
 
-        return response(substr($output, 0, -1), 200)
-            ->header('Content-Type', 'text/csv')
-            ->header('Content-Disposition', 'attachment; filename="Netblocks.csv"');
+        return Redirect::route('admin.contacts.index')
+            ->with('message', "The requested format {$format} is not available for exports");
     }
 
     /**
@@ -112,7 +118,7 @@ class NetblocksController extends Controller
     {
         return view('netblocks.show')
             ->with('netblock', $netblock)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -132,7 +138,7 @@ class NetblocksController extends Controller
             ->with('netblock', $netblock)
             ->with('contact_selection', $contacts)
             ->with('selected', $netblock->contact_id)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**

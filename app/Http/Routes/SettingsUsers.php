@@ -1,0 +1,96 @@
+<?php
+Route::model('users', 'AbuseIO\Models\User');
+Route::resource('users', 'UsersController');
+
+Route::group(
+    [
+        'prefix' => 'users',
+        'as' => 'users.',
+    ],
+    function () {
+        // Access to index list
+        route::get(
+            '',
+            [
+                'middleware' => 'permission:users_view',
+                'as' => 'index',
+                'uses' => 'UsersController@index'
+            ]
+        );
+
+        // Access to show object
+        route::get(
+            '{users}',
+            [
+                'middleware' => 'permission:users_view',
+                'as' => 'show',
+                'uses' => 'UsersController@show'
+            ]
+        );
+
+        // Access to export object
+        route::get(
+            'export/{format}',
+            [
+                'middleware' => 'permission:users_export',
+                'as' => 'export',
+                'uses' => 'UsersController@export'
+            ]
+        );
+
+        // Access to create object
+        route::get(
+            'create',
+            [
+                'middleware' => 'permission:users_create',
+                'as' => 'create',
+                'uses' => 'UsersController@create'
+            ]
+        );
+        route::post(
+            '',
+            [
+                'middleware' => 'permission:users_create',
+                'as' => 'store',
+                'uses' => 'UsersController@store'
+            ]
+        );
+
+        // Access to edit object
+        route::get(
+            '{users}/edit',
+            [
+                'middleware' => 'permission:users_edit',
+                'as' => 'edit',
+                'uses' => 'UsersController@edit'
+            ]
+        );
+        route::patch(
+            '{users}',
+            [
+                'middleware' => 'permission:users_edit',
+                'as' => 'update',
+                'uses' => 'UsersController@update'
+            ]
+        );
+        route::put(
+            '{users}',
+            [
+                'middleware' => 'permission:users_edit',
+                'as' => 'update',
+                'uses' => 'UsersController@update'
+            ]
+        );
+
+        // Access to delete object
+        route::delete(
+            '/{users}',
+            [
+                'middleware' => 'permission:users_delete',
+                'as' => 'destroy',
+                'uses' => 'UsersController@destroy'
+            ]
+        );
+
+    }
+);

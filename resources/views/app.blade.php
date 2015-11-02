@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ Config::get('app.name') }} {{ Config::get('app.version') }} - {{ trans('misc.'.Request::segment(2)) }}</title>
+	<title>{{ Config::get('app.name') }} {{ Config::get('app.version') }} - {{ trans_choice('misc.'.Request::segment(2), 2) }}</title>
 
 	<link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
@@ -41,7 +41,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							<span class="glyphicon glyphicon-user"></span> {{ $user->fullName() . ' ( '  . $user->account->name .' )' }} <span class="caret"></span></a>
+							<span class="glyphicon glyphicon-user"></span> {{ $auth_user->fullName() . ' ( '  . $auth_user->account->name .' )' }} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">{{ trans('misc.language') }}</li>
 							@foreach(Config::get('app.locales') as $locale => $localeData)

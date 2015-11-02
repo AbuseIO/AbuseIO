@@ -21,7 +21,7 @@ class DomainsController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -35,7 +35,7 @@ class DomainsController extends Controller
 
         return view('domains.index')
             ->with('domains', $domains)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -49,38 +49,43 @@ class DomainsController extends Controller
         return view('domains.create')
             ->with('contact_selection', $contacts)
             ->with('selected', null)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
      * Export listing to CSV format.
      * @return Response
      */
-    public function export()
+    public function export($format)
     {
         $domains = Domain::all();
 
-        $columns = [
-            'contact' => 'Contact',
-            'domain' => 'Domain name',
-            'enabled' => 'Status',
-        ];
-
-        $output = '"' . implode('","', $columns) . '"' . PHP_EOL;
-
-        foreach ($domains as $domain) {
-            $row = [
-                $domain->contact->name . ' (' . $domain->contact->reference . ')',
-                $domain['name'],
-                $domain['enabled'] ? 'Enabled' : 'Disabled',
+        if ($format === 'csv') {
+            $columns = [
+                'contact'   => 'Contact',
+                'domain'    => 'Domain name',
+                'enabled'   => 'Status',
             ];
 
-            $output .= '"' . implode('","', $row) . '"' . PHP_EOL;
+            $output = '"' . implode('","', $columns) . '"' . PHP_EOL;
+
+            foreach ($domains as $domain) {
+                $row = [
+                    $domain->contact->name . ' (' . $domain->contact->reference . ')',
+                    $domain['name'],
+                    $domain['enabled'] ? 'Enabled' : 'Disabled',
+                ];
+
+                $output .= '"' . implode('","', $row) . '"' . PHP_EOL;
+            }
+
+            return response(substr($output, 0, -1), 200)
+                ->header('Content-Type', 'text/csv')
+                ->header('Content-Disposition', 'attachment; filename="Domains.csv"');
         }
 
-        return response(substr($output, 0, -1), 200)
-            ->header('Content-Type', 'text/csv')
-            ->header('Content-Disposition', 'attachment; filename="Domains.csv"');
+        return Redirect::route('admin.domains.index')
+            ->with('message', "The requested format {$format} is not available for exports");
     }
 
     /**
@@ -108,7 +113,7 @@ class DomainsController extends Controller
     {
         return view('domains.show')
             ->with('domain', $domain)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -125,7 +130,7 @@ class DomainsController extends Controller
             ->with('domain', $domain)
             ->with('contact_selection', $contacts)
             ->with('selected', $domain->contact_id)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**

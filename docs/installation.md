@@ -1,6 +1,6 @@
 # Requirements
 
-PHP 5.x or better
+PHP 5.5.9 or better
 MTA that can redirect into pipes (e.g. Exim or Postfix)
 Apache 2.x or better
 Database backend (mysql, postgres, etc)
@@ -127,7 +127,6 @@ a2enmod ssl
 a2enmod rewrite
 a2enmod headers
 mkdir /etc/apache2/ssl
-htpasswd -b -c /opt/abuseio/htpasswd admin password
 ```
 
 create config /etc/apache2/sites-available/abuseio.conf
@@ -144,8 +143,6 @@ create config /etc/apache2/sites-available/abuseio.conf
 </VirtualHost>
 <IfModule mod_ssl.c>
         <VirtualHost _default_:443>
-                # Dont forget to protect /admin with an IP/User ACL!
-
                 ServerAdmin webmaster@localhost
                 DocumentRoot /opt/abuseio/public
 
@@ -180,12 +177,6 @@ create config /etc/apache2/sites-available/abuseio.conf
                     Require all granted 
                 </Directory>
 
-                <Location /admin>
-                    AuthUserFile /opt/abuseio/htpasswd
-                    AuthName "Password Protected"
-                    AuthType Basic
-                    require valid-user
-                </Location>
 
         </VirtualHost>
 </IfModule>
@@ -236,7 +227,7 @@ Create the file /opt/abuseio/.env with the following hints:
 
 ```bash
 APP_ENV=production (change to development if needed)
-APP_DEBUG=true (change to false if needed)
+APP_DEBUG=false (change to true if needed)
 APP_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 DB_HOST=localhost
 DB_DATABASE=abuseio

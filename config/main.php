@@ -39,6 +39,7 @@ return [
     'notes' => [
         'enabled'                           => true,
         'deletable'                         => true,
+        'show_abusedesk_names'              => true,
     ],
 
     'notifications' => [
@@ -57,7 +58,7 @@ return [
         'url'                               => 'https://abuseio.isp.local/ash/'
     ],
 
-    'resolvers' => [
+    'external' => [
         'findcontact'                      => [
             'id' => [
                 'class'                     => 'Custom',
@@ -71,6 +72,10 @@ return [
                 'class'                     => 'Custom',
                 'method'                    => 'getContactByDomain'
             ],
+        ],
+        'notification'                      => [
+            'class'                     => 'Custom',
+            'method'                    => 'notifyEvent'
         ],
     ],
 

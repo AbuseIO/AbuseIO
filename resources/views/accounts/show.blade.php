@@ -19,30 +19,33 @@
 
     <dt>{{ trans('misc.description') }}</dt>
     <dd>{{ $account->description }}</dd>
+
+    <dt>{{ trans_choice('misc.brands', 1) }}</dt>
+    <dd>{{ $brand->name }}</dd>
 </dl>
 
 @if ( $account->users->count() )
 <h3 class="page-header">{{ trans('accounts.linked_users') }}: {{ $account->users->count() }}</h3>
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>{{ trans('misc.id') }}</th>
+            <th>{{ trans('misc.name') }}</th>
+            <th class="text-right">{{ trans('misc.action') }}</th>
+        </tr>
+    </thead>
+    <tbody>
     @foreach( $account->users as $user )
-    <table class="table table-striped table-condensed">
-        <thead>
-            <tr>
-                <th>{{ trans('misc.id') }}</th>
-                <th>{{ trans('misc.name') }}</th>
-                <th class="text-right">{{ trans('misc.action') }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-                <td class="text-right">
-                    {!! link_to_route('admin.users.show', trans('misc.button.details'), $user->id, ['class' => 'btn btn-info btn-xs']) !!}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <tr>
+        <td>{{ $user->id }}</td>
+        <td>{{ $user->first_name }} {{ $user->last_name }}</td>
+        <td class="text-right">
+            {!! link_to_route('admin.users.show', trans('misc.button.details'), $user->id, ['class' => 'btn btn-info btn-xs']) !!}
+        </td>
+    </tr>
     @endforeach
+    </tbody>
+    </table>
 @endif
 {!! link_to_route('admin.accounts.index', trans('misc.button.back'), [], ['class' => 'btn btn-default top-buffer']) !!}
 @endsection

@@ -5,7 +5,7 @@
     <div class="row">
         <div  class="col-md-3 col-md-offset-9 text-right">
             {!! link_to_route('admin.netblocks.create', trans('netblocks.button.new_netblock'), [], ['class' => 'btn btn-info']) !!}
-            {!! link_to_route('admin.export.netblocks', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
+            {!! link_to_route('admin.netblocks.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
         </div>
     </div>
     @if ( !$netblocks->count() )

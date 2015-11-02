@@ -6,7 +6,6 @@ use AbuseIO\Jobs\EmailProcess;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Symfony\Component\Console\Input\InputOption;
 use Log;
 use Uuid;
 use Carbon;
@@ -20,7 +19,9 @@ class EmailReceiveCommand extends Command
      * The console command name.
      * @var string
      */
-    protected $name = 'email:receive';
+    protected $signature = 'email:receive
+                            {--noQueue : Do not queue the message, but directly handle it }
+    ';
 
     /**
      * The console command description.
@@ -42,19 +43,12 @@ class EmailReceiveCommand extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         Log::info(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
             'Being called upon to receive an incoming e-mail'
         );
-
-        if ($this->option('debug') === true) {
-            Log::debug(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                'Debug mode has been enabled'
-            );
-        }
 
         // Read from stdin (should be piped from cat or MDA)
         $fd = fopen("php://stdin", "r");
@@ -100,11 +94,11 @@ class EmailReceiveCommand extends Command
             $this->exception($rawEmail);
         }
 
-        if ($this->option('debug') == true) {
+        if ($this->option('noQueue') == true) {
             // In debug mode we don't queue the job
             Log::debug(
                 '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                'Directly handling message file: ' . $filename
+                'Queuing disabled. Directly handling message file: ' . $filename
             );
 
             $processer = new EmailProcess($filename);
@@ -123,33 +117,6 @@ class EmailReceiveCommand extends Command
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
             'Successfully received the incoming e-mail'
         );
-    }
-
-    /**
-     * Get the console command arguments.
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [ ];
-    }
-
-    /**
-     * Get the console command options.
-     * @return array
-     */
-    protected function getOptions()
-    {
-        // TODO: logging to console instead in addition to logfile
-        return [
-            [
-                'debug',
-                'd',
-                InputOption::VALUE_OPTIONAL,
-                'Enable debugging while pushing e-mail from CLI.',
-                false
-            ],
-        ];
     }
 
     /**

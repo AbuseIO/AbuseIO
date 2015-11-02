@@ -172,7 +172,7 @@
                     <div class="col-xs-11 {{ ($note->submitter != 'contact') ? 'col-xs-offset-1' : '' }}">
                         <div class="panel panel-{{ ($note->submitter == 'contact') ? 'default' : 'primary' }}">
                             <div class="panel-heading clearfix">
-                                <h3 class="panel-title pull-left">{{ Lang::get('ash.communication.responseFrom') }}: {{ Lang::get('ash.communication.'.$note->submitter) }}</h3>
+                                <h3 class="panel-title pull-left">{{ Lang::get('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
                                 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
                             </div>
                             <div class="panel-body">

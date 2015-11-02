@@ -13,33 +13,14 @@ abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public $user = false;
+    public $auth_user = false;
 
-    public function __construct($createAcl = false)
+    public function __construct()
     {
-        if ($createAcl !== false) {
-            /*
-             * Apply ACL restrictions to resource controller
-             *
-             * This is based on the main route e.g. /admin/contacts/1/delete were we just need 'contacts' to
-             * determine the ACL to be applied. With the Request::path returning / we need to parse the URL ourselves
-             *
-             */
-            $resourceAcl = parse_url(URL::current());
-            $resourceAcl = explode('/', $resourceAcl['path']);
-            $resourceAcl = $resourceAcl[2];
-
-            $this->middleware("acl:admin_{$resourceAcl}_view", ['only' => ['index', 'show']]);
-            $this->middleware("acl:admin_{$resourceAcl}_create", ['only' => ['create', 'store']]);
-            $this->middleware("acl:admin_{$resourceAcl}_export", ['only' => ['export']]);
-            $this->middleware("acl:admin_{$resourceAcl}_delete", ['only' => ['destroy']]);
-            $this->middleware("acl:admin_{$resourceAcl}_edit", ['only' => ['edit', 'update']]);
-        }
-
         // Globalize user information
         $user = Auth::user();
         if ($user) {
-            $this->user = $user;
+            $this->auth_user = $user;
         }
 
     }

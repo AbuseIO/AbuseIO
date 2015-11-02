@@ -13,7 +13,7 @@
                 </ul>
             </div>
             {!! link_to_route('admin.tickets.create', trans('tickets.button.new_ticket'), [], ['class' => 'btn btn-info']) !!}
-            {!! link_to_route('admin.export.tickets', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
+            {!! link_to_route('admin.tickets.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
         </div>
     </div>
     @if ( !$tickets->count() )

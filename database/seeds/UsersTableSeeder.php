@@ -21,8 +21,8 @@ class UsersTableSeeder extends Seeder
             [
                 'id'                        => 1,
                 'email'                     => $defaultAdminUsername,
-                'first_name'                => 'default',
-                'last_name'                 => 'admin',
+                'first_name'                => 'Default',
+                'last_name'                 => 'Admin',
                 'password'                  => Hash::make($defaultAdminPassword),
                 'account_id'                => 1
             ],

@@ -2,11 +2,9 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ContactFormRequest;
-use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Contact;
 use Redirect;
 use Input;
@@ -19,7 +17,7 @@ class ContactsController extends Controller
      */
     public function __construct()
     {
-        parent::__construct('createDynamicACL');
+        parent::__construct();
     }
 
     /**
@@ -32,7 +30,7 @@ class ContactsController extends Controller
 
         return view('contacts.index')
             ->with('contacts', $contacts)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -42,46 +40,52 @@ class ContactsController extends Controller
     public function create()
     {
         return view('contacts.create')
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
      * Export listing to CSV format.
      * @return Response
      */
-    public function export()
+    public function export($format)
     {
         $contacts  = Contact::all();
 
-        $columns = [
-            'reference'     => 'Reference',
-            'contact'       => 'name',
-            'enabled'       => 'Status',
-            'email'         => 'E-Mail address',
-            'rpc_host'      => 'RPC address',
-            'rpc_key'       => 'RPC key',
-            'auto_notify'   => 'Notifications',
-        ];
+        if ($format === 'csv') {
 
-        $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
-
-        foreach ($contacts as $contact) {
-            $row = [
-                $contact->reference,
-                $contact->name,
-                $contact['enabled'] ? 'Enabled' : 'Disabled',
-                $contact['email'],
-                $contact['rpc_host'],
-                $contact['rpc_key'],
-                $contact['auto_notify'] ? 'Automatic' : 'Manual',
+            $columns = [
+                'reference'     => 'Reference',
+                'contact'       => 'name',
+                'enabled'       => 'Status',
+                'email'         => 'E-Mail address',
+                'rpc_host'      => 'RPC address',
+                'rpc_key'       => 'RPC key',
+                'auto_notify'   => 'Notifications',
             ];
 
-            $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+            $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+
+            foreach ($contacts as $contact) {
+                $row = [
+                    $contact->reference,
+                    $contact->name,
+                    $contact['enabled'] ? 'Enabled' : 'Disabled',
+                    $contact['email'],
+                    $contact['rpc_host'],
+                    $contact['rpc_key'],
+                    $contact['auto_notify'] ? 'Automatic' : 'Manual',
+                ];
+
+                $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+            }
+
+            return response(substr($output, 0, -1), 200)
+                ->header('Content-Type', 'text/csv')
+                ->header('Content-Disposition', 'attachment; filename="Contacts.csv"');
         }
 
-        return response(substr($output, 0, -1), 200)
-            ->header('Content-Type', 'text/csv')
-            ->header('Content-Disposition', 'attachment; filename="Contacts.csv"');
+        return Redirect::route('admin.contacts.index')
+            ->with('message', "The requested format {$format} is not available for exports");
     }
 
     /**
@@ -90,7 +94,7 @@ class ContactsController extends Controller
      */
     public function store(ContactFormRequest $contact)
     {
-        $account = $this->user->account;
+        $account = $this->auth_user->account;
         $input = Input::all();
         $input['account_id'] = $account->id;
 
@@ -106,11 +110,11 @@ class ContactsController extends Controller
      * @return Response
      * @internal param int $id
      */
-    public function show(Request $request, Contact $contact)
+    public function show(Contact $contact)
     {
         return view('contacts.show')
             ->with('contact', $contact)
-            ->with('user', $request->user());
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -123,7 +127,7 @@ class ContactsController extends Controller
     {
         return view('contacts.edit')
             ->with('contact', $contact)
-            ->with('user', $this->user);
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
@@ -133,7 +137,7 @@ class ContactsController extends Controller
      */
     public function update(Contact $contact)
     {
-        $account = $this->user->account;
+        $account = $this->auth_user->account;
         $input = array_except(Input::all(), '_method');
         $input['account_id'] = $account->id;
 
@@ -161,8 +165,8 @@ class ContactsController extends Controller
         if ($contact->netblocks->count() > 0) {
             return Redirect::route('admin.contacts.index')->with(
                 'message',
-                "Contact could not be deleted because ".  $contact->domains->count()
-                . " domain(s) is stil pointing to this contact."
+                "Contact could not be deleted because ".  $contact->netblocks->count()
+                . " netblock(s) is stil pointing to this contact."
             );
         }
 
