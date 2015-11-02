@@ -25,5 +25,6 @@ body { padding-top: 70px; }
     margin-bottom: 0;
 }
 
-/* Helper class for more vertical spacing */
+/* Helper classes for more vertical spacing */
 .top-buffer { margin-top:20px; }
+.dataTables_wrapper { margin-top:20px; }
