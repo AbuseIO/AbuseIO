@@ -29,6 +29,8 @@ class CreateNetblocksTable extends Migration
                 $table->index('enabled');
                 $table->index('first_ip');
                 $table->index('last_ip');
+
+                $table->unique(['first_ip', 'last_ip']);
     
             }
         );
