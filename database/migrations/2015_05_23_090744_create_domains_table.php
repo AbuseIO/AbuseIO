@@ -18,7 +18,7 @@ class CreateDomainsTable extends Migration
             function (Blueprint $table) {
 
                 $table->increments('id');
-                $table->string('name');
+                $table->string('name')->unique();
                 $table->integer('contact_id')->unsigned();
                 $table->boolean('enabled')->unsigned();
                 $table->timestamps();
