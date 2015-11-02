@@ -21,6 +21,7 @@ return [
     'analytics' => 'Statistieken',
 
     // Button labels
+    'button.show'           => 'Bekijken',
     'button.details'        => 'Details',
     'button.edit'           => 'Bewerken',
     'button.delete'         => 'Verwijder',

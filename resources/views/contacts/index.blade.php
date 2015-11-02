@@ -12,24 +12,22 @@
     @if ( !$contacts->count() )
         <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('contacts.no_contacts')}}</div>
     @else
-        <br>
-        <table class="table table-striped" id="contacts-table">
+        <table class="table table-striped top-buffer" id="contacts-table">
             <thead>
-            <tr>
-                <th>{{ trans('contacts.reference') }}</th>
-                <th>{{ trans('misc.name') }}</th>
-                <th>{{ trans('misc.email') }}</th>
-                <th>{{ trans('contacts.rpchost') }}</th>
-                <th>{{ trans('contacts.notification') }}</th>
-                <th>{{ trans('misc.action') }}</th>
-            </tr>
+                <tr>
+                    <th>{{ trans('contacts.reference') }}</th>
+                    <th>{{ trans('misc.name') }}</th>
+                    <th>{{ trans('misc.email') }}</th>
+                    <th>{{ trans('contacts.rpchost') }}</th>
+                    <th>{{ trans('contacts.notification') }}</th>
+                    <th class="text-right">{{ trans('misc.action') }}</th>
+                </tr>
             </thead>
         </table>
     @endif
-
 @endsection
 
-@push('ajaxSearch')
+@section('extrajs')
 <script>
      $(function() {
         $.ajaxSetup({
@@ -41,11 +39,12 @@
         $('#contacts-table').DataTable({
             processing: true,
             serverSide: true,
+            sort: false,
             ajax: '{!! route('admin.contacts.search') .'/query/' !!}',
             columnDefs: [ {
                 targets: -1,
                 data: null,
-                defaultContent: "<button>Click!</button>"
+                defaultContent: " "
             } ],
             columns: [
                 { data: 'reference', name: 'reference' },
@@ -53,9 +52,9 @@
                 { data: 'email', name: 'email' },
                 { data: 'rpc_host', name: 'rpc_host' },
                 { data: 'auto_notify', name: 'auto_notify' },
-                { data: 'actions', name: 'actions', orderable: false, searchable: false },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
             ]
         });
     });
 </script>
-@endpush
+@endsection

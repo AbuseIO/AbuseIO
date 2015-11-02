@@ -5,14 +5,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
 	<title>{{ Config::get('app.name') }} {{ Config::get('app.version') }} - {{ trans_choice('misc.'.Request::segment(2), 2) }}</title>
-
-	<link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/flag-icon-min.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('/css/dataTables.bootstrap.min.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('/css/flag-icon-min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/css/custom.css') }}">
+	<script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
+	@yield('extrajs')
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -84,11 +86,5 @@
 	@yield('content')
 	</div>
 
-	<!-- Location for all scripts -->
-	<script src="{{ asset('/js/jquery.min.js') }}"></script>
-	<script src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
-	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-	@yield('extrajs')
-	@stack('ajaxSearch')
 </body>
 </html>

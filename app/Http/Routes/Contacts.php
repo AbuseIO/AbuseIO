@@ -8,6 +8,7 @@ Route::group(
         'as' => 'contacts.',
     ],
     function () {
+        // Search contacts
         Route::get(
             'search/{one?}/{two?}/{three?}/{four?}/{five?}',
             [

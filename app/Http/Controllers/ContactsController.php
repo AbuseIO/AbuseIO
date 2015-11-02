@@ -6,9 +6,9 @@ use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ContactFormRequest;
 use AbuseIO\Models\Contact;
+use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
-use yajra\Datatables\Datatables;
 
 class ContactsController extends Controller
 {
@@ -28,21 +28,21 @@ class ContactsController extends Controller
      */
     public function search()
     {
-        $dataset = Contact::select('*');
+        $contacts = Contact::all();
 
-        return Datatables::of($dataset)
-            ->addColumn(
-                'actions',
-                function ($user) {
-                    $actions  = ' <a href="contacts/' . $user->id .
-                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> Show</a>';
-                    $actions .= ' <a href="contacts/' . $user->id .
-                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-                    $actions .= ' <a href="contacts/' . $user->id .
-                        '/delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+        return Datatables::of($contacts)
+            ->addColumn('actions', function ($contact) {
+                    $actions = \Form::open(['route' => ['admin.contacts.destroy', $contact->id], 'method' => 'DELETE', 'class' => 'form-inline']);
+                    $actions .= ' <a href="contacts/' . $contact->id .
+                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        trans('misc.button.show').'</a> ';
+                    $actions .= ' <a href="contacts/' . $contact->id .
+                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                        trans('misc.button.edit').'</a> ';
+                    $actions .= \Form::button('<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'), ['type' => 'submit', 'class' => 'btn btn-danger btn-xs']);
+                    $actions .= \Form::close();
                     return $actions;
-                }
-            )
+            })
             ->editColumn('auto_notify', '{{ empty($auto_notify) ? trans(\'misc.manual\') : trans(\'misc.automatic\')}}')
             ->make(true);
     }

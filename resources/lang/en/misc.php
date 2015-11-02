@@ -21,6 +21,7 @@ return [
     'analytics' => 'Analytics',
 
     // Button labels
+    'button.show'           => 'Show',
     'button.details'        => 'Details',
     'button.edit'           => 'Edit',
     'button.delete'         => 'Delete',
