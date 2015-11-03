@@ -95,21 +95,7 @@ class DomainsController extends Controller
     public function store(DomainFormRequest $domain)
     {
         $input = Input::all();
-
-        try {
-            Domain::create($input);
-
-        } catch (QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            $message = 'Unknown error code: ' . $errorCode;
-
-            if ($errorCode === 1062) {
-                $message = 'Another domain with this name already exists';
-            }
-
-            return Redirect::back()
-                ->with('message', $message);
-        }
+        Domain::create($input);
 
         return Redirect::route('admin.domains.index')
             ->with('message', 'Domain has been created');
@@ -152,24 +138,10 @@ class DomainsController extends Controller
      * @return Response
      * @internal param int $id
      */
-    public function update(Domain $domain)
+    public function update(DomainFormRequest $request, Domain $domain)
     {
         $input = array_except(Input::all(), '_method');
-
-        try {
-            $domain->update($input);
-
-        } catch (QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            $message = 'Unknown error code: ' . $errorCode;
-
-            if ($errorCode === 1062) {
-                $message = 'Another domain with this name already exists';
-            }
-
-            return Redirect::back()
-                ->with('message', $message);
-        }
+        $domain->update($input);
 
         return Redirect::route('admin.domains.show', $domain->id)
             ->with('message', 'Domain has been updated.');
