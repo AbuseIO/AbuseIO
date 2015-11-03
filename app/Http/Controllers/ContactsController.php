@@ -10,6 +10,7 @@ use AbuseIO\Models\Contact;
 use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
+use Form;
 
 class ContactsController extends Controller
 {
@@ -32,19 +33,36 @@ class ContactsController extends Controller
         $contacts = Contact::all();
 
         return Datatables::of($contacts)
+            // Create the action buttons
             ->addColumn('actions', function ($contact) {
-                    $actions = \Form::open(['route' => ['admin.contacts.destroy', $contact->id], 'method' => 'DELETE', 'class' => 'form-inline']);
+                    $actions = Form::open(
+                        [
+                            'route'     => ['admin.contacts.destroy', $contact->id],
+                            'method'    => 'DELETE',
+                            'class'     => 'form-inline'
+                        ]
+                    );
                     $actions .= ' <a href="contacts/' . $contact->id .
                         '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
                         trans('misc.button.show').'</a> ';
                     $actions .= ' <a href="contacts/' . $contact->id .
                         '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
                         trans('misc.button.edit').'</a> ';
-                    $actions .= \Form::button('<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'), ['type' => 'submit', 'class' => 'btn btn-danger btn-xs']);
-                    $actions .= \Form::close();
+                    $actions .= Form::button(
+                        '<i class="glyphicon glyphicon-remove"></i> '.
+                        trans('misc.button.delete'),
+                        [
+                            'type'  => 'submit',
+                            'class' => 'btn btn-danger btn-xs'
+                        ]
+                    );
+                    $actions .= Form::close();
                     return $actions;
             })
-            ->editColumn('auto_notify', '{{ empty($auto_notify) ? trans(\'misc.manual\') : trans(\'misc.automatic\')}}')
+            // Replace auto_notify values for something readable.
+            ->editColumn('auto_notify', function ($contact) {
+                return empty($auto_notify) ? trans('misc.manual') : trans('misc.automatic');
+            })
             ->make(true);
     }
 
@@ -80,7 +98,6 @@ class ContactsController extends Controller
         $contacts  = Contact::all();
 
         if ($format === 'csv') {
-
             $columns = [
                 'reference'     => 'Reference',
                 'contact'       => 'name',
@@ -124,22 +141,9 @@ class ContactsController extends Controller
     {
         $account = $this->auth_user->account;
         $input = Input::all();
+
         $input['account_id'] = $account->id;
-
-        try {
-            Contact::create($input);
-
-        } catch (QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            $message = 'Unknown error code: ' . $errorCode;
-
-            if ($errorCode === 1062) {
-                $message = 'Another contact with this reference already exists';
-            }
-
-            return Redirect::back()
-                ->with('message', $message);
-        }
+        Contact::create($input);
 
         return Redirect::route('admin.contacts.index')
             ->with('message', 'Contact has been created');
@@ -173,29 +177,17 @@ class ContactsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param  int  $id
-     * @return Response
+     * @param  ContactFormRequest $request FormRequest
+     * @param  Contact            $contact Contact
+     * @return \Illuminate\Http\Response
      */
-    public function update(Contact $contact)
+    public function update(ContactFormRequest $request, Contact $contact)
     {
         $account = $this->auth_user->account;
         $input = array_except(Input::all(), '_method');
+
         $input['account_id'] = $account->id;
-
-        try {
-            $contact->update($input);
-
-        } catch (QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            $message = 'Unknown error code: ' . $errorCode;
-
-            if ($errorCode === 1062) {
-                $message = 'Another contact with this reference already exists';
-            }
-
-            return Redirect::back()
-                ->with('message', $message);
-        }
+        $contact->update($input);
 
         return Redirect::route('admin.contacts.show', $contact->id)
             ->with('message', 'Contact has been updated.');

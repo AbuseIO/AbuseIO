@@ -39,13 +39,15 @@
         $('#contacts-table').DataTable({
             processing: true,
             serverSide: true,
-            sort: false,
             ajax: '{!! route('admin.contacts.search') .'/query/' !!}',
             columnDefs: [ {
                 targets: -1,
                 data: null,
                 defaultContent: " "
             } ],
+            language: {
+                url: '{{ asset("/i18n/$auth_user->locale.json") }}'
+            },
             columns: [
                 { data: 'reference', name: 'reference' },
                 { data: 'name', name: 'name' },

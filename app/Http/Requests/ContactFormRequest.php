@@ -21,11 +21,24 @@ class ContactFormRequest extends Request
      */
     public function rules()
     {
-        return [
-            'reference' => 'required',
-            'name'      => 'required',
-            'email'     => 'required|email',
-            'rpc_host'  => 'sometimes|url'
-        ];
+        switch ($this->method) {
+            case 'POST':
+                return [
+                    'reference' => 'required|unique:contacts,reference',
+                    'name'      => 'required',
+                    'email'     => 'required|email',
+                    'rpc_host'  => 'sometimes|url',
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'reference' => 'required|unique:contacts,reference,'. $this->id,
+                    'name'      => 'required',
+                    'email'     => 'required|email',
+                    'rpc_host'  => 'sometimes|url',
+                ];
+            default:
+                break;
+        }
     }
 }
