@@ -48,6 +48,11 @@ class CreatePermissionsTable extends Migration
                 'permission_slug'           => 'login_api',
                 'permission_description'    => 'Login to api',
             ],
+            [
+                'permission_title'          => 'manage profile',
+                'permission_slug'           => 'profile_manage',
+                'permission_description'    => 'Manage own profile',
+            ],
         ];
 
         // Add scripted permissions (controllers)
@@ -62,7 +67,6 @@ class CreatePermissionsTable extends Migration
             'users',
             'brands',
             'templates',
-            'profile',
         ];
         $actions = [
             'view',
