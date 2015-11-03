@@ -11,14 +11,16 @@ return [
                          hiervan te verbeteren en automatiseren.',
 
     // Navigation bar
-    'language'  => 'Taal',
-    'home'      => 'Home',
-    'contacts'  => 'Contacten',
-    'netblocks' => 'Netwerk Blokken',
-    'domains'   => 'Domeinen',
-    'tickets'   => 'Tickets',
-    'search'    => 'Zoeken',
-    'analytics' => 'Statistieken',
+    'language'   => 'Taal',
+    'home'       => 'Home',
+    'contacts'   => 'Contacten',
+    'netblocks'  => 'Netwerk Blokken',
+    'domains'    => 'Domeinen',
+    'tickets'    => 'Tickets',
+    'search'     => 'Zoeken',
+    'analytics'  => 'Statistieken',
+    'nav_brands' => 'Merken',
+
 
     // Button labels
     'button.show'           => 'Bekijken',

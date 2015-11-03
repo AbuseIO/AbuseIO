@@ -11,5 +11,5 @@ return [
 
     // Brands - Miscellaneous
     'no_brands'           => 'Geen merken',
-    'logo'                => 'Bedrijfs logo',
+    'logo'                => 'Bedrijfslogo',
 ];

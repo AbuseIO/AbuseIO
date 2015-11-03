@@ -6,12 +6,43 @@ use Illuminate\Http\Request;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Brand;
+use yajra\Datatables\Datatables;
+
 
 class BrandsController extends Controller
 {
-    /*
-     * Call the parent constructor to generate a base ACL
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
+    public function search()
+    {
+        $brands = Brand::all();
+
+        return Datatables::of($brands)
+            ->addColumn('actions', function ($brand) {
+                $actions = \Form::open(['route' => ['admin.brands.destroy', $brand->id], 'method' => 'DELETE', 'class' => 'form-inline']);
+                $actions .= ' <a href="brands/' . $brand->id .
+                    '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                    trans('misc.button.show').'</a> ';
+                $actions .= ' <a href="brands/' . $brand->id .
+                    '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                    trans('misc.button.edit').'</a> ';
+                $actions .= \Form::button('<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'), ['type' => 'submit', 'class' => 'btn btn-danger btn-xs']);
+                $actions .= \Form::close();
+                return $actions;
+            })
+            ->addColumn('logo', function ($brand) {
+                $logo = '<img src="/admin/logo/' . $brand->id .'" height="40px"/>';
+                return $logo;
+            })
+            ->make(true);
+    }
+
+    /*
+      * Call the parent constructor to generate a base ACL
+      */
     public function __construct()
     {
         parent::__construct();

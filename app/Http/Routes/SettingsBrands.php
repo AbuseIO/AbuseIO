@@ -8,6 +8,16 @@ Route::group(
         'as' => 'brands.',
     ],
     function () {
+        // Search contacts
+        Route::get(
+            'search/{one?}/{two?}/{three?}/{four?}/{five?}',
+            [
+                'middleware' => 'permission:brands_view',
+                'as' => 'search',
+                'uses' => 'BrandsController@search'
+            ]
+        );
+
         // Access to index list
         route::get(
             '',
