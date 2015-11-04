@@ -36,16 +36,6 @@ class CreateRolesTable extends Migration
                 'role_title'                => 'System Administrator',
                 'role_slug'                 => 'admin',
             ],
-            [
-                'id'                        => 2,
-                'role_title'                => 'Abusedesk User',
-                'role_slug'                 => 'abusedesk',
-            ],
-            [
-                'id'                        => 3,
-                'role_title'                => 'Servicedesk User',
-                'role_slug'                 => 'servicedesk',
-            ],
         ];
         DB::table('roles')->insert($roles);
 
