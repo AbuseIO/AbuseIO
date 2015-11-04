@@ -12,10 +12,12 @@ class UpdateContactsTable extends Migration
      */
     public function up()
     {
-        Schema::table('contacts', function ($table)
-        {
-            $table->integer('account_id');
-        });
+        Schema::table(
+            'contacts',
+            function ($table) {
+                $table->integer('account_id');
+            }
+        );
     }
 
     /**
