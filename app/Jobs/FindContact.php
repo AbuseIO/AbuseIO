@@ -21,9 +21,9 @@ class FindContact extends Job
         $contact->name          = 'Undefined customer';
         $contact->enabled       = true;
         $contact->auto_notify   = false;
-        $contact->email         = 'undef@isp.local';
-        $contact->rpc_host      = 'https://under.isp.local/rpc/';
-        $contact->rpc_key       = 'idkfaiddqd';
+        $contact->email         = '';
+        $contact->rpc_host      = '';
+        $contact->rpc_key       = '';
 
         return $contact;
     }
