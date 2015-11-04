@@ -27,7 +27,7 @@ class EmailReceiveCommand extends Command
      * The console command description.
      * @var string
      */
-    protected $description = 'Parses an incoming email into abuse events.';
+    protected $description = 'Parses an (piped) email into abuse events.';
 
     /**
      * Create a new command instance.
