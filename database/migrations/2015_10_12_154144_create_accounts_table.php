@@ -18,6 +18,7 @@ class CreateAccountsTable extends Migration
                 $table->increments('id');
                 $table->string('name')->unique();
                 $table->string('description');
+                $table->boolean('disabled')->default(false);
                 $table->timestamps();
                 $table->integer('brand_id');
             }
@@ -36,6 +37,7 @@ class CreateAccountsTable extends Migration
                 'id'                        => 1,
                 'name'                      => 'default',
                 'description'               => 'The default account',
+                'disabled'                  => false,
                 'brand_id'                  => 1,
             ],
         ];

@@ -18,6 +18,7 @@ class Account extends Model
         'name',
         'description',
         'brand_id',
+        'disabled',
     ];
 
     protected $guarded  = [

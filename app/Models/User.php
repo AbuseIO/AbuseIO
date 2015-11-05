@@ -33,6 +33,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'password',
         'account_id',
         'locale',
+        'disabled',
     ];
 
     /**
@@ -119,6 +120,37 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    /**
+     * Check if the current user is allowed to login
+     *
+     * @param $messages
+     * @return bool
+     */
+    public function mayLogin(&$messages)
+    {
+        // first user is always allowed to login, early return
+        if ($this->id == 1) {
+            return true;
+        }
+
+        $result = true;
+
+        // check if the account is disabled (system account is never disabled)
+        $account = $this->account;
+        if ($account->disabled && $account->id != 1)
+        {
+            array_push($messages, 'The account "' . $account->name . '" for this login is disabled.');
+            if ($result) $result = false;
+        }
+
+        if ($this->disabled)
+        {
+            array_push($messages, 'This login is disabled.');
+            if ($result) $result = false;
+        }
+
+        return $result;
+    }
 
     /*
     |--------------------------------------------------------------------------
