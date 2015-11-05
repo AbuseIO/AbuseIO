@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Permission\AssignCommand',
         'AbuseIO\Console\Commands\Permission\RevokeCommand',
 
+        'AbuseIO\Console\Commands\Housekeeper\RunCommand',
+        'AbuseIO\Console\Commands\Housekeeper\NotificationsCommand',
+
     ];
 
     /**
