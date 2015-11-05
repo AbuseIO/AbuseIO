@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Jobs;
 
-use AbuseIO\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 class Notification extends Job implements SelfHandling
@@ -45,7 +44,7 @@ class Notification extends Job implements SelfHandling
 
                 if (class_exists($class) === true && method_exists($class, $method) === true) {
                     $reflectionMethod = new ReflectionMethod($class, $method);
-                    $notification = $reflectionMethod->invoke(new $class, [$ticket, $event, $type]);
+                    $notification = $reflectionMethod->invoke(new $class, [ $ticket ]);
 
                     if ($notification !== true) {
                         Log::error(
