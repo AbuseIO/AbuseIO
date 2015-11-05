@@ -25,6 +25,13 @@ class CheckPermission
             'message',
             "Sorry! You are not authorized to access that resource. Missing permission : {$permission}"
         );
+
+        // If we are redirecting back to the current page then return a 403 error instead of looping
+        if (strpos(back(), '>' . $request->fullUrl() . '</a>') !== false) {
+            abort(403);
+        }
+
+        // If not authorized then return a 401 for AJAX or redirect back with a message
         return $request->ajax ? response('Unauthorized.', 401) : redirect()->back();
 
     }
