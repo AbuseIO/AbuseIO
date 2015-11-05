@@ -73,9 +73,15 @@ return [
                 'method'                    => 'getContactByDomain'
             ],
         ],
-        'notification'                      => [
-            'class'                     => 'Custom',
-            'method'                    => 'notifyEvent'
+        'notifications' => [
+            'email' => [
+                'class'                     => 'Email',
+                'method'                    => 'send',
+            ],
+            'rpc' => [
+                'class'                     => 'Rpc',
+                'method'                    => 'send',
+            ],
         ],
     ],
 

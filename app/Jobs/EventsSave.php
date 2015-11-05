@@ -26,35 +26,6 @@ class EventsSave extends Job implements SelfHandling
         $this->evidenceID   = $evidenceID;
     }
 
-    public function customNotification($ticket, $event, $type)
-    {
-        if (!empty(config("main.external.notification.class"))
-            && !empty(config("main.external.notification.class"))
-        ) {
-            $class = '\AbuseIO\Notification\\' . config("main.external.notification.class");
-            $method = config("main.external.notification.method");
-
-            if (class_exists($class) === true && method_exists($class, $method) === true) {
-                $reflectionMethod = new ReflectionMethod($class, $method);
-                $notification = $reflectionMethod->invoke(new $class, [$ticket, $event, $type]);
-
-                if ($notification !== true) {
-                    Log::error(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        "Notifications with {$class} did not succeed"
-                    );
-                } else {
-                    Log::error(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        "Notifications with {$class} was successfull"
-                    );
-                }
-            }
-        }
-
-        return false;
-    }
-
     /**
      * Execute the command.
      * @return array
@@ -160,9 +131,6 @@ class EventsSave extends Job implements SelfHandling
 
                 $newEvent->save();
 
-                $this->customNotification($newTicket, $event, 'new');
-
-
             } elseif ($search->count() === 1) {
                 /*
                  * There is an existing ticket, so we just need to add the event to this ticket. If the event is an
@@ -211,7 +179,6 @@ class EventsSave extends Job implements SelfHandling
                         $ticket->save();
                     }
 
-                    $this->customNotification($ticket, $event, 'update');
                 }
 
             } else {

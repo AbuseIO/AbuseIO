@@ -4,6 +4,7 @@ namespace AbuseIO\Console\Commands\Housekeeper;
 
 use Illuminate\Console\Command;
 use Carbon;
+use AbuseIO\Jobs\Notification;
 
 class NotificationsCommand extends Command
 {
@@ -39,5 +40,6 @@ class NotificationsCommand extends Command
      */
     public function handle()
     {
+
     }
 }
