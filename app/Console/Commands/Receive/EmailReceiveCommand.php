@@ -1,6 +1,6 @@
 <?php
 
-namespace AbuseIO\Console\Commands;
+namespace AbuseIO\Console\Commands\Receive;
 
 use AbuseIO\Jobs\EmailProcess;
 use Illuminate\Console\Command;
@@ -11,7 +11,7 @@ use Uuid;
 use Carbon;
 use Config;
 
-class EmailReceiveCommand extends Command
+class EmailCommand extends Command
 {
     use DispatchesJobs;
 
@@ -19,7 +19,7 @@ class EmailReceiveCommand extends Command
      * The console command name.
      * @var string
      */
-    protected $signature = 'email:receive
+    protected $signature = 'receive:email
                             {--noQueue : Do not queue the message, but directly handle it }
     ';
 

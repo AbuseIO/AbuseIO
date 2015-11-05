@@ -101,7 +101,7 @@ To test your mail route, send a e-mail to notifier@your-MTA-domain.lan and if yo
 send a EML file into the parser using:
 
 ```bash
-cat file.eml | /usr/bin/php -q /opt/abuseio/artisan --env=production email:receive
+cat file.eml | /usr/bin/php -q /opt/abuseio/artisan --env=production receive:email
 ```
 
 Please note that using the 'cat' option might give you a difference with email bodies, for example with line 
@@ -111,7 +111,7 @@ always use the MTA address to validate your work!
 ### Postfix
  
 ```bash
-echo 'notifier: | "| /usr/bin/php -q /opt/abuseio/artisan --env=production email:receive"' >> /etc/aliasses
+echo 'notifier: | "| /usr/bin/php -q /opt/abuseio/artisan --env=production receive:email"' >> /etc/aliasses
 newaliasses
 ```
 

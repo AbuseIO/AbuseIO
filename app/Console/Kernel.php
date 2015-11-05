@@ -8,7 +8,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
-        'AbuseIO\Console\Commands\EmailReceiveCommand',
+        'AbuseIO\Console\Commands\Receive\EmailCommand',
 
         'AbuseIO\Console\Commands\User\CreateCommand',
         'AbuseIO\Console\Commands\User\EditCommand',
