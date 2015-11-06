@@ -27,7 +27,7 @@ class UserFormRequest extends Request
                 return [
                     'first_name'    => 'required',
                     'last_name'     => 'sometimes|required',
-                    'email'         => 'required|unique:users,email|email',
+                    'email'         => 'required|email|unique:users,email',
                     'password'      => 'sometimes|confirmed|min:6',
                     'account_id'    => 'required',
                 ];
@@ -36,7 +36,7 @@ class UserFormRequest extends Request
                 return [
                     'first_name'    => 'required',
                     'last_name'     => 'sometimes|required',
-                    'email'         => 'required|unique:users,email,'. $this->id .'|email',
+                    'email'         => 'required|email|unique:users,email,'. $this->id,
                     'password'      => 'sometimes|confirmed|min:6',
                     'account_id'    => 'required',
 
