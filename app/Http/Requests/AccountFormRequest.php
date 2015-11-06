@@ -25,12 +25,12 @@ class AccountFormRequest extends Request
         switch ($this->method) {
             case 'POST':
                 return [
-                    'name'       => 'required|unique:accounts',
+                    'name'  => 'required|unique:accounts',
                 ];
             case 'PUT':
             case 'PATCH':
                 return [
-                    'name'       => 'required|unique:accounts,name,'. $this->id,
+                    'name'  => 'required|unique:accounts,name,'. $this->id,
                 ];
             default:
                 break;
