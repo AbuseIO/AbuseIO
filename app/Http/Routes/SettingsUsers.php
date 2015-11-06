@@ -8,6 +8,16 @@ Route::group(
         'as' => 'users.',
     ],
     function () {
+        // Search users
+        Route::get(
+            'search/{one?}/{two?}/{three?}',
+            [
+                'middleware' => 'permission:users_view',
+                'as' => 'search',
+                'uses' => 'UsersController@search'
+            ]
+        );
+
         // Access to index list
         route::get(
             '',

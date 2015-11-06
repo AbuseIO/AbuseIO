@@ -3,11 +3,10 @@
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
-//use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-//use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Hash;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -137,16 +136,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         // check if the account is disabled (system account is never disabled)
         $account = $this->account;
-        if ($account->disabled && $account->id != 1)
-        {
+        if ($account->disabled && $account->id != 1) {
             array_push($messages, 'The account "' . $account->name . '" for this login is disabled.');
-            if ($result) $result = false;
+            if ($result) {
+                $result = false;
+            }
         }
 
-        if ($this->disabled)
-        {
+        if ($this->disabled) {
             array_push($messages, 'This login is disabled.');
-            if ($result) $result = false;
+            if ($result) {
+                $result = false;
+            }
         }
 
         return $result;
@@ -175,8 +176,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function account()
     {
-
         return $this->belongsTo('AbuseIO\Models\Account');
+    }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors & Mutators
+    |--------------------------------------------------------------------------
+    */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
     }
 }

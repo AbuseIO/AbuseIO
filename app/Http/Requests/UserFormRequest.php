@@ -39,8 +39,6 @@ class UserFormRequest extends Request
                     'email'         => 'required|email|unique:users,email,'. $this->id,
                     'password'      => 'sometimes|confirmed|min:6',
                     'account_id'    => 'required',
-
-                    //|unique:user,name,'. $this->id,
                 ];
             default:
                 break;

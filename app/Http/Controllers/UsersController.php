@@ -9,9 +9,11 @@ use AbuseIO\Http\Requests\UserFormRequest;
 use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\User;
+use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
 use Hash;
+use Form;
 
 class UsersController extends Controller
 {
@@ -24,13 +26,51 @@ class UsersController extends Controller
     }
 
     /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $users = User::select('users.*', 'accounts.name as account_name')
+            ->leftJoin('accounts', 'accounts.id', '=', 'users.account_id');
+
+        return Datatables::of($users)
+            ->addColumn('actions', function ($user) {
+                    $actions = Form::open(
+                        [
+                            'route' => ['admin.users.destroy', $user->id],
+                            'method' => 'DELETE',
+                            'class' => 'form-inline'
+                        ]
+                    );
+                    $actions .= ' <a href="users/' . $user->id .
+                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        trans('misc.button.show').'</a> ';
+                    $actions .= ' <a href="users/' . $user->id .
+                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                        trans('misc.button.edit').'</a> ';
+                    $actions .= Form::button(
+                        '<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'),
+                        [
+                            'type' => 'submit',
+                            'class' => 'btn btn-danger btn-xs'
+                        ]
+                    );
+                    $actions .= Form::close();
+                    return $actions;
+            })
+            ->make(true);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users = User::paginate(10); // ::with('user')
+        $users = User::paginate(10);
 
         return view('users.index')
             ->with('users', $users)
@@ -60,21 +100,7 @@ class UsersController extends Controller
     public function store(UserFormRequest $user)
     {
         $input = Input::all();
-
-        try {
-            User::create($input);
-
-        } catch (QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            $message = 'Unknown error code: ' . $errorCode;
-
-            if ($errorCode === 1062) {
-                $message = 'Another account with this e-mail address already exists.';
-            }
-
-            return Redirect::back()
-                ->with('message', $message);
-        }
+        User::create($input);
 
         return Redirect::route('admin.users.index')
             ->with('message', 'User has been created');
@@ -120,25 +146,7 @@ class UsersController extends Controller
     public function update(UserFormRequest $request, User $user)
     {
         $input = array_except(Input::all(), '_method');
-
-        if (!empty($input['password'])) {
-            $input['password'] = Hash::make($input['password']);
-        }
-
-        try {
-            $user->update($input);
-
-        } catch (QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            $message = 'Unknown error code: ' . $errorCode;
-
-            if ($errorCode === 1062) {
-                $message = 'Another account with this e-mail address already exists.';
-            }
-
-            return Redirect::back()
-                ->with('message', $message);
-        }
+        $user->update($input);
 
         return Redirect::route('admin.users.show', $user->id)
             ->with('message', 'User has been updated.');

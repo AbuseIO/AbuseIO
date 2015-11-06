@@ -12,30 +12,49 @@
         <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('users.no_users')}}</div>
     @else
         {!! $users->render() !!}
-        <table class="table table-striped table-condensed">
+        <table class="table table-striped" id="users-table">
             <thead>
                 <tr>
                     <th>{{ trans('misc.id') }}</th>
                     <th>{{ trans('users.first_name') }}</th>
                     <th>{{ trans('users.last_name') }}</th>
+                    <th>{{ trans_choice('misc.accounts', 1) }}</th>
                     <th class="text-right">{{ trans('misc.action') }}</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach( $users as $l_user )
-                <tr>
-                    <td>{{ $l_user->id }}</td>
-                    <td>{{ $l_user->first_name }}</td>
-                    <td>{{ $l_user->last_name }}</td>
-                    <td class="text-right">
-                        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.users.destroy', $l_user->id]]) !!}
-                        {!! link_to_route('admin.users.show', trans('misc.button.details'), $l_user->id, ['class' => 'btn btn-info btn-xs']) !!}
-                        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger btn-xs'.(($l_user->id == 1) ? ' disabled' : '')]) !!}
-                        {!! Form::close() !!}
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
         </table>
     @endif
+@endsection
+
+@section('extrajs')
+<script>
+     $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#users-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{!! route('admin.users.search') .'/query/' !!}',
+            columnDefs: [{
+                targets: -1,
+                data: null,
+                defaultContent: ''
+            }],
+            language: {
+                url: '{{ asset("/i18n/$auth_user->locale.json") }}'
+            },
+            columns: [
+                { data: 'id', name: 'users.id' },
+                { data: 'first_name', name: 'users.first_name' },
+                { data: 'last_name', name: 'users.last_name' },
+                { data: 'account_name', name: 'accounts.name' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
+            ]
+        });
+    });
+</script>
 @endsection
