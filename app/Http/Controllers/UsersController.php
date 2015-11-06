@@ -12,7 +12,6 @@ use AbuseIO\Models\User;
 use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
-use Hash;
 use Form;
 
 class UsersController extends Controller
