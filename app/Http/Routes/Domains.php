@@ -8,6 +8,16 @@ Route::group(
         'as' => 'domains.',
     ],
     function () {
+        // Search domains
+        Route::get(
+            'search/{one?}/{two?}',
+            [
+                'middleware' => 'permission:domains_view',
+                'as' => 'search',
+                'uses' => 'DomainsController@search'
+            ]
+        );
+
         // Access to index list
         route::get(
             '',

@@ -9,8 +9,10 @@ use AbuseIO\Http\Requests\DomainFormRequest;
 use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\Contact;
+use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
+use Form;
 
 class DomainsController extends Controller
 {
@@ -22,6 +24,44 @@ class DomainsController extends Controller
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $domains = Domain::select('domains.*', 'contacts.name as contacts_name')
+            ->leftJoin('contacts', 'contacts.id', '=', 'domains.contact_id');
+
+        return Datatables::of($domains)
+            ->addColumn('actions', function ($domain) {
+                    $actions = Form::open(
+                        [
+                            'route' => ['admin.domains.destroy', $domain->id],
+                            'method' => 'DELETE',
+                            'class' => 'form-inline'
+                        ]
+                    );
+                    $actions .= ' <a href="domains/' . $domain->id .
+                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        trans('misc.button.show').'</a> ';
+                    $actions .= ' <a href="domains/' . $domain->id .
+                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                        trans('misc.button.edit').'</a> ';
+                    $actions .= Form::button(
+                        '<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'),
+                        [
+                            'type' => 'submit',
+                            'class' => 'btn btn-danger btn-xs'
+                        ]
+                    );
+                    $actions .= Form::close();
+                    return $actions;
+            })
+            ->make(true);
     }
 
     /**

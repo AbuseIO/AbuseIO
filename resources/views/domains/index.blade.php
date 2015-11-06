@@ -11,8 +11,7 @@
     @if ( !$domains->count() )
         <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('domains.no_domains') }}</div>
     @else
-        {!! $domains->render() !!}
-        <table class="table table-striped table-condensed">
+        <table class="table table-striped" id="domains-table">
             <thead>
                 <tr>
                     <th>{{ trans('misc.contact') }}</th>
@@ -20,21 +19,37 @@
                     <th class="text-right">{{ trans('misc.action') }}</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach( $domains as $domain )
-                <tr>
-                    <td>{{ $domain->contact->name }} ({{ $domain->contact->reference }})</td>
-                    <td>{{ $domain->name }}</td>
-                    <td class="text-right">
-                        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.domains.destroy', $domain->id]]) !!}
-                        {!! link_to_route('admin.domains.show', trans('misc.button.details'), [$domain->id], ['class' => 'btn btn-info btn-xs']) !!}
-                        {!! link_to_route('admin.domains.edit', trans('misc.button.edit'), [$domain->id], ['class' => 'btn btn-info btn-xs']) !!}
-                        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger btn-xs']) !!}
-                        {!! Form::close() !!}
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
         </table>
     @endif
+@endsection
+
+@section('extrajs')
+<script>
+     $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#domains-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{!! route('admin.domains.search') .'/query/' !!}',
+            columnDefs: [{
+                targets: -1,
+                data: null,
+                defaultContent: ''
+            }],
+            language: {
+                url: '{{ asset("/i18n/$auth_user->locale.json") }}'
+            },
+            columns: [
+                { data: 'contacts_name', name: 'contacts.name' },
+                { data: 'name', name: 'domains.name' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
+            ]
+        });
+    });
+</script>
 @endsection
