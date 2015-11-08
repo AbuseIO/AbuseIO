@@ -75,7 +75,7 @@ return [
         ],
         'notifications' => [
             'email' => [
-                'class'                     => 'Email',
+                'class'                     => 'Mail',
                 'method'                    => 'send',
             ],
             'rpc' => [
