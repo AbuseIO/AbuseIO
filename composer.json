@@ -57,6 +57,8 @@
         "abuseio/findcontact-custom": "dev-master",
         "abuseio/findcontact-nipap": "dev-master",
         "abuseio/findcontact-phpipam": "dev-master",
+        "abuseio/notification-common": "dev-master",
+        "abuseio/notification-mail": "dev-master",
 		"barryvdh/laravel-ide-helper": "^2.0",
 		"pda/pheanstalk": "~3.0",
 		"ddeboer/data-import": "^0.18.0",
