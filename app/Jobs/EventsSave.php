@@ -96,7 +96,7 @@ class EventsSave extends Job implements SelfHandling
 
                 $newTicket = new Ticket;
                 $newTicket->ip                         = $event['ip'];
-                $newTicket->domain                     = $event['domain'];
+                $newTicket->domain                     = empty($event['domain']) ? '' : $event['domain'];
                 $newTicket->class_id                   = $event['class'];
                 $newTicket->type_id                    = $event['type'];
                 $newTicket->ip_contact_reference       = $ipContact->reference;
