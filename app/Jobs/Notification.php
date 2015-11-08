@@ -29,11 +29,14 @@ class Notification extends Job implements SelfHandling
 
     /**
      * Sends out notifications based on the configured notification modules.
+     * Returns false on failed or havent done anything at all.
      * @param  object $ticket
      * @return array
      */
     public function send($ticket)
     {
+        $return = true;
+
         if (!empty(config("main.external.notifications"))
             && is_array(config("main.external.notifications"))
         ) {
@@ -43,6 +46,8 @@ class Notification extends Job implements SelfHandling
                 $method = $notificationMethod['method'];
 
                 if (class_exists($class) === true && method_exists($class, $method) === true) {
+                    $return = true;
+
                     $reflectionMethod = new ReflectionMethod($class, $method);
                     $notification = $reflectionMethod->invoke(new $class, [ $ticket ]);
 
@@ -51,16 +56,19 @@ class Notification extends Job implements SelfHandling
                             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
                             "Notifications with {$class} did not succeed"
                         );
+                        return false;
+
                     } else {
                         Log::debug(
                             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
                             "Notifications with {$class} was successfull"
                         );
+
                     }
                 }
             }
         }
 
-        return false;
+        return $return;
     }
 }
