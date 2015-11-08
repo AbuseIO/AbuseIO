@@ -3,6 +3,7 @@
 namespace AbuseIO\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
+use Log;
 
 class Notification extends Job implements SelfHandling
 {
@@ -35,7 +36,7 @@ class Notification extends Job implements SelfHandling
      */
     public function send($ticket)
     {
-        $return = true;
+        $return = false;
 
         if (!empty(config("main.external.notifications"))
             && is_array(config("main.external.notifications"))
@@ -65,10 +66,23 @@ class Notification extends Job implements SelfHandling
                         );
 
                     }
+                } else {
+                    Log::debug(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        "Can not use notification class {$class} because it is not installed " .
+                        "or the method {$method} was not available"
+                    );
+
                 }
             }
         }
 
+        if ($return === false) {
+            Log::warning(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                "None of the notifications configured could be used, check configuration!"
+            );
+        }
         return $return;
     }
 }

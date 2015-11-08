@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Carbon;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Models\Ticket;
-use AbuseIO\Models\Event;
+use Log;
 
 class NotificationsCommand extends Command
 {
@@ -96,6 +96,11 @@ class NotificationsCommand extends Command
         }
 
         if (!empty($this->option('send')) && $this->option('send') === true) {
+            Log::debug(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                "A notification run has been started"
+            );
+
             $tickets = $this->notificationList();
             if (empty($tickets)) {
                 $this->info("No tickets that need to send out notifications");
@@ -113,7 +118,10 @@ class NotificationsCommand extends Command
                 $result = $notification->send($ticket);
 
                 if (!$result) {
-                    $this->error('Errors occured when sending out notifications, check the log or run in debug mode');
+                    Log::debug(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        "Errors occured when sending out notifications, check the log or run in debug mode"
+                    );
                     return false;
                 } else {
                     $ticket->last_notify_count      = $ticket->events->count();
@@ -124,7 +132,10 @@ class NotificationsCommand extends Command
                 }
             }
 
-            $this->info("Successfully send out {$counter} ticket notifications");
+            Log::debug(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                "Successfully send out {$counter} ticket notifications"
+            );
         }
 
         return true;
