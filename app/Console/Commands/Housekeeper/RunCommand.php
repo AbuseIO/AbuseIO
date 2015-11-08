@@ -38,5 +38,11 @@ class RunCommand extends Command
      */
     public function handle()
     {
+        // TODO - Walk thru all collectors to gather information.
+
+        // TODO - Walk thru all tickets to see which need closing
+
+        // TODO - Send out all notifications / Call housekeeper:notifications(send) ?
+
     }
 }
