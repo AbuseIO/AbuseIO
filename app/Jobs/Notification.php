@@ -21,12 +21,25 @@ class Notification extends Job implements SelfHandling
     }
 
     /**
+     * Sends out a notification for a single ticket by building it into a array the normal send($notifications) can
+     * understand and returns the result. This could be called from the GUI ticket view for example
+     *
+     * @param  object $ticket
+     * @return boolean
+     */
+    public function sendTicket($ticket)
+    {
+
+    }
+
+    /**
      * Sends out notifications based on the configured notification modules.
      * Returns false on failed or havent done anything at all.
-     * @param  object $ticket
+     *
+     * @param  array $notifications ($notifications[$reference][$type] => array $tickets)
      * @return array
      */
-    public function send($ticket)
+    public function send($notifications)
     {
         $return = false;
 
@@ -40,27 +53,35 @@ class Notification extends Job implements SelfHandling
 
                 if (class_exists($class) === true && method_exists($class, $method) === true) {
                     $reflectionMethod = new ReflectionMethod($class, $method);
-                    $notification = $reflectionMethod->invoke(new $class, [ $ticket ]);
+                    $notificationResult = $reflectionMethod->invoke(new $class, $notifications);
 
-                    if ($notification !== true) {
+                    if ($notificationResult !== true) {
                         Log::error(
                             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                            "Notifications with {$class} did not succeed for ticket {$ticket->id}"
+                            "Notifications with {$class} did not succeed"
                         );
 
                     } else {
+                        /*
+                         * We need to update all the tickets that a notification was send
+                         */
                         $return = true;
 
-                        $ticket->last_notify_count      = $ticket->events->count();
-                        $ticket->last_notify_timestamp  = time();
-                        $ticket->notified_count         = $ticket->notified_count + 1;
-                        $ticket->save();
+                        foreach ($notifications as $customerReference => $notificationTypes) {
+                            foreach ($notificationTypes as $notificationType => $tickets) {
+                                foreach ($tickets as $ticket) {
+                                    $ticket->last_notify_count      = $ticket->events->count();
+                                    $ticket->last_notify_timestamp  = time();
+                                    $ticket->notified_count         = $ticket->notified_count + 1;
+                                    //$ticket->save();
+                                }
+                            }
+                        }
 
                         Log::debug(
                             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                            "Notifications with {$class} was successfull for ticket {$ticket->id}"
+                            "Notifications with {$class} was successfull for contact reference: " . key($notifications)
                         );
-
                     }
 
                 } else {
@@ -77,21 +98,19 @@ class Notification extends Job implements SelfHandling
         return $return;
     }
 
-    public function walkList($tickets = false)
+    public function walkList()
     {
         Log::info(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
             "A notification run has been started"
         );
 
-        if ($tickets === false) {
-            $tickets = $this->buildList();
-        }
+        $notifications = $this->buildList();
 
-        if (empty($tickets)) {
+        if (empty($notifications)) {
             Log::info(
                 '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                "No tickets that need to send out notifications"
+                "No contacts that need notifications"
             );
             return true;
         }
@@ -99,8 +118,8 @@ class Notification extends Job implements SelfHandling
         $counter = 0;
         $errors = 0;
 
-        foreach ($tickets as $ticket) {
-            $result = $this->send($ticket);
+        foreach ($notifications as $reference => $referenceData) {
+            $result = $this->send([$reference => $referenceData]);
 
             if (!$result) {
                 $errors++;
@@ -109,12 +128,19 @@ class Notification extends Job implements SelfHandling
             }
         }
 
+        if ($errors !== 0) {
+            Log::debug(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                "Failed sending out {$counter} ticket notifications. Encountered {$errors} errors."
+            );
+            return false;
+        }
+
         Log::debug(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-            "Successfully send out {$counter} ticket notifications"
+            "Successfully send out notifications to {$counter} contacts"
         );
-
-        return $errors;
+        return true;
     }
 
     /**
@@ -144,7 +170,30 @@ class Notification extends Job implements SelfHandling
             ) {
                 continue;
             } else {
-                $selection[] = $ticket;
+                /*
+                 * Filter outgoing notifications and aggregate them by reference so we can send out a single
+                 * notifications for multiple tickets if needed.
+                 */
+                /*
+                 * TODO - Add continue on stuff like
+                 * - too old event (based on config)
+                 * - abuse/info/escalate types and their interval
+                 * - if the customer (or admin) set the ticket to ignore
+                 */
+                if (!empty($ticket->ip_contact_reference) &&
+                    $ticket->ip_contact_reference != 'UNDEF' &&
+                    $ticket->ip_contact_auto_notify != 0
+                ) {
+                    $selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
+                }
+
+                if (!empty($ticket->domain_contact_reference) &&
+                    $ticket->domain_contact_reference != 'UNDEF' &&
+                    $ticket->ip_contact_auto_notify != 0 &&
+                    $ticket->domain_contact_reference != $ticket->ip_contact_reference
+                ) {
+                    $selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
+                }
             }
         }
 

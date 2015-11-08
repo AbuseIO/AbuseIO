@@ -63,6 +63,8 @@ class NotificationsCommand extends Command
     public function __construct()
     {
         parent::__construct();
+
+        $this->fields = array_combine($this->fields, $this->fields);
     }
 
     /**
@@ -83,9 +85,9 @@ class NotificationsCommand extends Command
         $notification = new Notification;
 
         if (!empty($this->option('list')) && $this->option('list') === true) {
-            $tickets = $notification->buildList();
+            $notifications = $notification->buildList();
 
-            if (empty($tickets)) {
+            if (empty($notifications)) {
                 return true;
             }
 
@@ -93,18 +95,27 @@ class NotificationsCommand extends Command
              * Apply field filtering for output
              */
             $list = [];
-            foreach ($tickets as $ticket) {
-                $list = $ticket->get($this->fields);
+
+            foreach ($notifications as $customerReference => $notificationTypes) {
+                foreach ($notificationTypes as $notificationType => $tickets) {
+                    foreach ($tickets as $ticket) {
+                        $list[$notificationType][] = array_intersect_key($ticket->toArray(), $this->fields);
+                    }
+                }
             }
 
-            $this->table($this->headers, $list);
+            foreach ($list as $notificationType => $table) {
+                $this->info("Notifications for {$notificationType} contacts:");
+                $this->table($this->headers, $table);
+                $this->info('');
+            }
         }
 
         if (!empty($this->option('send')) && $this->option('send') === true) {
 
             $errors = $notification->walkList();
 
-            if ($errors !== 0) {
+            if ($errors !== true) {
                 $this->error("Errors ({$errors}) while sending notifications. Details logged under JOB " . getmypid());
             } else {
                 $this->info("Successfully send out notifications. Details logged under JOB " . getmypid());
