@@ -54,7 +54,7 @@ class Notification extends Job implements SelfHandling
                         $ticket->last_notify_count      = $ticket->events->count();
                         $ticket->last_notify_timestamp  = time();
                         $ticket->notified_count         = $ticket->notified_count + 1;
-                        //$ticket->save();
+                        $ticket->save();
 
                         Log::debug(
                             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
