@@ -1,6 +1,7 @@
 <?php namespace AbuseIO\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CheckPermission
 {
@@ -21,10 +22,22 @@ class CheckPermission
             }
         }
 
+
+        $message = "Sorry! You are not authorized to access that resource. Missing permission : {$permission}";
+
         $request->session()->flash(
             'message',
-            "Sorry! You are not authorized to access that resource. Missing permission : {$permission}"
+            $message
         );
+
+        // If we don't have the permission 'login_portal' and it is requested redirect to logout
+        if ($permission === 'login_portal')
+        {
+            //Auth::logout();
+            //$request->session()->flush();
+            return redirect('/auth/logout')
+                ->withErrors([$message]);  //todo: doesn't seem to propagate to the login screen
+        }
 
         // If we are redirecting back to the current page then return a 403 error instead of looping
         if (strpos(back(), '>' . $request->fullUrl() . '</a>') !== false) {
