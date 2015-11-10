@@ -89,9 +89,12 @@ class BrandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Brand $brand)
     {
-        //
+
+        return view('brands.show')
+            ->with('brand', $brand)
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
