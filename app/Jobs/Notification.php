@@ -93,6 +93,11 @@ class Notification extends Job implements SelfHandling
 
                 }
             }
+        } else {
+            Log::debug(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                "No notification methods are configured, no sense into calling unexisting methods"
+            );
         }
 
         return $return;
@@ -100,6 +105,17 @@ class Notification extends Job implements SelfHandling
 
     public function walkList()
     {
+
+        if (empty(config("main.external.notifications"))
+            && !is_array(config("main.external.notifications"))
+        ) {
+            Log::debug(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                "No notification methods are configured, no sense into calling unexisting methods"
+            );
+            return true;
+        }
+
         Log::info(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
             "A notification run has been started"

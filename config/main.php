@@ -43,7 +43,6 @@ return [
     ],
 
     'notifications' => [
-        'enabled'                           => true,
         'info_interval'                     => '90 days',
         'abuse_interval'                    => '0 minutes',
         'min_lastseen'                      => '30 days',
