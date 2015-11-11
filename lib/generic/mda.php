@@ -61,7 +61,7 @@ function receive_mail($call) {
         $raw = $call['message'];
     } elseif ($call['type'] == "EXTERNAL") {
         $raw = file_get_contents("php://stdin");
-	// postfix gives you the data in mbox format (zee https://tools.ietf.org/html/rfc4155)
+	// postfix gives you the data in mbox format (see https://tools.ietf.org/html/rfc4155)
 	// if the first row indicates it is a mbox style, we strip the first line
 	if(strpos($raw,'From ') === 0) {
 		$raw = preg_replace('/^.+\n/','',$raw);
