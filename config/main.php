@@ -47,6 +47,10 @@ return [
         'info_interval'                     => '90 days',
         'abuse_interval'                    => '0 minutes',
         'min_lastseen'                      => '30 days',
+        'from_address'                      => 'abuse@isp.local',
+        'from_name'                         => 'ISP Abusedesk',
+        'bcc_enabled'                       => false,
+        'bcc_address'                       => 'management@isp.local',
     ],
 
     'ash' => [
