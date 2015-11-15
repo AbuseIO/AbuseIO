@@ -248,4 +248,12 @@ php artisan key:generate
 php artisan db:seed < run this only if you want demo material in your installation.
 ```
 
+## Creating an admin user for the GUI
 
+By default no accounts are installed and you will need to create accounts with the needed permissions on the console:
+
+```
+cd /opt/abuseio
+php artisan user:create
+php artisan role:assign
+```
