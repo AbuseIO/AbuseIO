@@ -12,6 +12,7 @@ use Redirect;
 use Input;
 use ICF;
 use Form;
+use Illuminate\Http\Request;
 
 class NetblocksController extends Controller
 {
@@ -28,12 +29,22 @@ class NetblocksController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function search()
+    public function search(Request $request)
     {
         $netblocks = Netblock::select('netblocks.*', 'contacts.name as contacts_name')
             ->leftJoin('contacts', 'contacts.id', '=', 'netblocks.contact_id');
 
         return Datatables::of($netblocks)
+            ->filter(
+                function ($query) use ($request) {
+                    $searchValue = $request->get('search')['value'];
+
+                    if (!filter_var($searchValue, FILTER_VALIDATE_IP) === false) {
+                        $query->where('first_ip', '<=', ICF::inetPtoi($searchValue));
+                        $query->where('last_ip', '>=', ICF::inetPtoi($searchValue));
+                    }
+                }
+            )
             ->addColumn(
                 'actions',
                 function ($netblock) {
