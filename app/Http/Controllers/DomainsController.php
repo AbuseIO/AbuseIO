@@ -37,7 +37,9 @@ class DomainsController extends Controller
             ->leftJoin('contacts', 'contacts.id', '=', 'domains.contact_id');
 
         return Datatables::of($domains)
-            ->addColumn('actions', function ($domain) {
+            ->addColumn(
+                'actions',
+                function ($domain) {
                     $actions = Form::open(
                         [
                             'route' => ['admin.domains.destroy', $domain->id],
@@ -60,7 +62,8 @@ class DomainsController extends Controller
                     );
                     $actions .= Form::close();
                     return $actions;
-            })
+                }
+            )
             ->make(true);
     }
 
