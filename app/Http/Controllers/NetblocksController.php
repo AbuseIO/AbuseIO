@@ -34,7 +34,9 @@ class NetblocksController extends Controller
             ->leftJoin('contacts', 'contacts.id', '=', 'netblocks.contact_id');
 
         return Datatables::of($netblocks)
-            ->addColumn('actions', function ($netblock) {
+            ->addColumn(
+                'actions',
+                function ($netblock) {
                     $actions = Form::open(
                         [
                             'route' => ['admin.netblocks.destroy', $netblock->id],
@@ -57,7 +59,8 @@ class NetblocksController extends Controller
                     );
                     $actions .= Form::close();
                     return $actions;
-            })
+                }
+            )
             ->make(true);
     }
 
