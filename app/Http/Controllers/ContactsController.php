@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ContactFormRequest;
@@ -34,7 +33,9 @@ class ContactsController extends Controller
 
         return Datatables::of($contacts)
             // Create the action buttons
-            ->addColumn('actions', function ($contact) {
+            ->addColumn(
+                'actions',
+                function ($contact) {
                     $actions = Form::open(
                         [
                             'route'     => ['admin.contacts.destroy', $contact->id],
@@ -58,11 +59,15 @@ class ContactsController extends Controller
                     );
                     $actions .= Form::close();
                     return $actions;
-            })
+                }
+            )
             // Replace auto_notify values for something readable.
-            ->editColumn('auto_notify', function ($contact) {
-                return empty($auto_notify) ? trans('misc.manual') : trans('misc.automatic');
-            })
+            ->editColumn(
+                'auto_notify',
+                function ($contact) {
+                    return empty($contact->auto_notify) ? trans('misc.manual') : trans('misc.automatic');
+                }
+            )
             ->make(true);
     }
 
