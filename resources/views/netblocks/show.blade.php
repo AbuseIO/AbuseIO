@@ -15,10 +15,10 @@
     <dd>{{ $netblock->id }}</dd>
 
     <dt>{{ trans('netblocks.first_ip') }}</dt>
-    <dd>{{ ICF::inetItop($netblock->first_ip) }}</dd>
+    <dd>{{ $netblock->first_ip }}</dd>
 
     <dt>{{ trans('netblocks.last_ip') }}</dt>
-    <dd>{{ ICF::inetItop($netblock->last_ip) }}</dd>
+    <dd>{{ $netblock->last_ip }}</dd>
 
     <dt>{{ trans('misc.contact') }}</dt>
     <dd>{{ $netblock->contact->name }} ({{ $netblock->contact->reference }})</dd>

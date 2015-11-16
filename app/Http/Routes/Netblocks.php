@@ -8,6 +8,16 @@ Route::group(
         'as' => 'netblocks.',
     ],
     function () {
+        // Search netblock
+        Route::get(
+            'search/{one?}/{two?}/{three?}',
+            [
+                'middleware' => 'permission:netblocks_view',
+                'as' => 'search',
+                'uses' => 'NetblocksController@search'
+            ]
+        );
+
         // Access to index list
         route::get(
             '',

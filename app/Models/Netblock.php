@@ -1,6 +1,7 @@
 <?php namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use ICF;
 
 /**
  * Class Netblock
@@ -28,10 +29,31 @@ class Netblock extends Model
         'id'
     ];
 
+    // Relationships
     public function contact()
     {
-
         return $this->belongsTo('AbuseIO\Models\Contact');
+    }
 
+    // Accessors
+    public function getFirstIpAttribute($value)
+    {
+        return ICF::inetItop($value);
+    }
+
+    public function getLastIpAttribute($value)
+    {
+        return ICF::inetItop($value);
+    }
+
+    // Mutators
+    public function setFirstIpAttribute($value)
+    {
+        $this->attributes['first_ip'] = ICF::inetPtoi($value);
+    }
+
+    public function setLastIpAttribute($value)
+    {
+        $this->attributes['last_ip'] = ICF::inetPtoi($value);
     }
 }

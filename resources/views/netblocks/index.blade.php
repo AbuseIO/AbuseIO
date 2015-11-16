@@ -11,8 +11,7 @@
     @if ( !$netblocks->count() )
         <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('netblocks.no_netblocks')}}</div>
     @else
-        {!! $netblocks->render() !!}
-        <table class="table table-striped table-condensed">
+        <table class="table table-striped" id="netblocks-table">
             <thead>
                 <tr>
                     <th>{{ trans('misc.contact') }}</th>
@@ -21,22 +20,38 @@
                     <th class="text-right">{{ trans('misc.action') }}</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach( $netblocks as $netblock )
-                <tr>
-                    <td>{{ $netblock->contact->name }} ({{ $netblock->contact->reference }})</td>
-                    <td>{{ ICF::inetItop($netblock->first_ip) }}</td>
-                    <td>{{ ICF::inetItop($netblock->last_ip) }}</td>
-                    <td class="text-right">
-                        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.netblocks.destroy', $netblock->id]]) !!}
-                        {!! link_to_route('admin.netblocks.show', trans('misc.button.details'), [$netblock->id], ['class' => 'btn btn-info btn-xs']) !!}
-                        {!! link_to_route('admin.netblocks.edit', trans('misc.button.edit'), [$netblock->id], ['class' => 'btn btn-info btn-xs']) !!}
-                        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger btn-xs']) !!}
-                        {!! Form::close() !!}
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
         </table>
     @endif
+@endsection
+
+@section('extrajs')
+<script>
+     $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#netblocks-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{!! route('admin.netblocks.search') .'/query/' !!}',
+            columnDefs: [{
+                targets: -1,
+                data: null,
+                defaultContent: ''
+            }],
+            language: {
+                url: '{{ asset("/i18n/$auth_user->locale.json") }}'
+            },
+            columns: [
+                { data: 'contacts_name', name: 'contacts.name' },
+                { data: 'first_ip', name: 'first_ip' },
+                { data: 'last_ip', name: 'last_ip' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
+            ]
+        });
+    });
+</script>
 @endsection

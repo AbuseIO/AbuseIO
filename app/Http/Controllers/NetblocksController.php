@@ -2,21 +2,19 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\NetblockFormRequest;
-use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Contact;
+use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
 use ICF;
+use Form;
 
 class NetblocksController extends Controller
 {
-
-
     /*
      * Call the parent constructor to generate a base ACL
      */
@@ -26,13 +24,50 @@ class NetblocksController extends Controller
     }
 
     /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $netblocks = Netblock::select('netblocks.*', 'contacts.name as contacts_name')
+            ->leftJoin('contacts', 'contacts.id', '=', 'netblocks.contact_id');
+
+        return Datatables::of($netblocks)
+            ->addColumn('actions', function ($netblock) {
+                    $actions = Form::open(
+                        [
+                            'route' => ['admin.netblocks.destroy', $netblock->id],
+                            'method' => 'DELETE',
+                            'class' => 'form-inline'
+                        ]
+                    );
+                    $actions .= ' <a href="netblocks/' . $netblock->id .
+                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        trans('misc.button.show').'</a> ';
+                    $actions .= ' <a href="netblocks/' . $netblock->id .
+                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                        trans('misc.button.edit').'</a> ';
+                    $actions .= Form::button(
+                        '<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'),
+                        [
+                            'type' => 'submit',
+                            'class' => 'btn btn-danger btn-xs'
+                        ]
+                    );
+                    $actions .= Form::close();
+                    return $actions;
+            })
+            ->make(true);
+    }
+
+    /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        $netblocks = Netblock::with('contact')
-                        ->paginate(10);
+        $netblocks = Netblock::paginate(10);
 
         return view('netblocks.index')
             ->with('netblocks', $netblocks)
@@ -62,7 +97,6 @@ class NetblocksController extends Controller
         $netblocks  = Netblock::all();
 
         if ($format === 'csv') {
-
             $columns = [
                 'contact'   => 'Contact',
                 'enabled'   => 'Status',
@@ -99,23 +133,10 @@ class NetblocksController extends Controller
     public function store(NetblockFormRequest $netblock)
     {
         $input = Input::all();
-        $input['first_ip'] =  ICF::inetPtoi($input['first_ip']);
-        $input['last_ip']  =  ICF::inetPtoi($input['last_ip']);
+        $input['first_ip'] = ICF::inetPtoi($input['first_ip']);
+        $input['last_ip'] = ICF::inetPtoi($input['last_ip']);
 
-        try {
-            Netblock::create($input);
-
-        } catch (QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            $message = 'Unknown error code: ' . $errorCode;
-
-            if ($errorCode === 1062) {
-                $message = 'Another netblock with this start/end address already exists';
-            }
-
-            return Redirect::back()
-                ->with('message', $message);
-        }
+        Netblock::create($input);
 
         return Redirect::route('admin.netblocks.index')
             ->with('message', 'Netblock has been created');
@@ -145,7 +166,7 @@ class NetblocksController extends Controller
         $contacts = Contact::lists('name', 'id');
 
         $netblock->first_ip = ICF::inetItop($netblock->first_ip);
-        $netblock->last_ip  = ICF::inetItop($netblock->last_ip);
+        $netblock->last_ip = ICF::inetItop($netblock->last_ip);
 
         return view('netblocks.edit')
             ->with('netblock', $netblock)
@@ -162,23 +183,10 @@ class NetblocksController extends Controller
     public function update(Netblock $netblock)
     {
         $input = array_except(Input::all(), '_method');
-        $input['first_ip'] =  ICF::inetPtoi($input['first_ip']);
-        $input['last_ip']  =  ICF::inetPtoi($input['last_ip']);
+        $input['first_ip'] = ICF::inetPtoi($input['first_ip']);
+        $input['last_ip'] = ICF::inetPtoi($input['last_ip']);
 
-        try {
-            $netblock->update($input);
-
-        } catch (QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            $message = 'Unknown error code: ' . $errorCode;
-
-            if ($errorCode === 1062) {
-                $message = 'Another netblock with this start/end address already exists';
-            }
-
-            return Redirect::back()
-                ->with('message', $message);
-        }
+        $netblock->update($input);
 
         return Redirect::route('admin.netblocks.show', $netblock->id)
             ->with('message', 'Netblock has been updated.');
