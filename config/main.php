@@ -22,11 +22,9 @@ return [
 
     'reports' => [
         'match_period'                      => '14 days',
+        'min_lastseen'                      => '30 days',
         'close_after'                       => '21 days',
         'resolvable_only'                   => false, // This drops anything if a domain or netblock cannot be found
-        'resolvable_netblocks'              => [
-            // Overlapping netblocks defined here if IPA only lists IP's that are in use, which is a fallback check.
-        ],
     ],
 
     'notes' => [
@@ -38,7 +36,6 @@ return [
     'notifications' => [
         'info_interval'                     => '90 days',
         'abuse_interval'                    => '0 minutes',
-        'min_lastseen'                      => '30 days',
         'from_address'                      => 'abuse@isp.local',
         'from_name'                         => 'ISP Abusedesk',
         'bcc_enabled'                       => false,

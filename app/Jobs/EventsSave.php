@@ -54,6 +54,19 @@ class EventsSave extends Job implements SelfHandling
              * have any access to the ticket anymore.
              */
 
+            // If an event is too old we are ignoring it
+            if (config('main.reports.min_lastseen') !== false &&
+                strtotime(config('main.reports.min_lastseen')) !== false &&
+                strtotime(config('main.reports.min_lastseen') . ' ago') < $event['timestamp']
+            ) {
+                Log::debug(
+                    '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                    "is ignoring event because its older then" . config('main.reports.min_lastseen')
+                );
+
+                continue;
+            }
+
             // Start with building a classification lookup table  and switch out name for ID
             foreach ((array)Lang::get('classifications') as $classID => $class) {
                 if ($class['name'] == $event['class']) {
@@ -78,14 +91,29 @@ class EventsSave extends Job implements SelfHandling
             }
 
             /*
+             * Ignore the event if both ip and domain contacts are undefined and the resolving of an contact
+             * was required. This is handy to ignore any reports that are not considered local, but use
+             * with caution as it might just ignore anything if your IP/domains are not correctly configured
+             */
+            if ($ipContact->reference == 'UNDEF' &&
+                $domainContact->reference == 'UNDEF' &&
+                config('main.reports.resolvable_only') === true
+            ) {
+
+            }
+
+            /*
              * Search to see if there is an existing ticket for this event classification
              */
+            $matchPeriod = strtotime(config('main.reports.match_period' . ' ago'));
+            // TODO - howto match this on the last event, needs a join?
+
             $search = Ticket::where('ip', '=', $event['ip'])
-                        ->where('class_id', '=', $event['class'], 'AND')
-                        ->where('type_id', '=', $event['type'], 'AND')
-                        ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
-                        ->where('status_id', '!=', 2, 'AND')
-                        ->get();
+                ->where('class_id', '=', $event['class'], 'AND')
+                ->where('type_id', '=', $event['type'], 'AND')
+                ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
+                ->where('status_id', '!=', 2, 'AND')
+                ->get();
 
 
             if ($search->count() === 0) {
