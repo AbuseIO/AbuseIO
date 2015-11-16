@@ -96,10 +96,18 @@ class EventsSave extends Job implements SelfHandling
              * with caution as it might just ignore anything if your IP/domains are not correctly configured
              */
             if ($ipContact->reference == 'UNDEF' &&
-                $domainContact->reference == 'UNDEF' &&
                 config('main.reports.resolvable_only') === true
             ) {
+                if ((!empty($domainContact) && $domainContact->reference == 'UNDEF') ||
+                    empty($domainContact)
+                ) {
+                    Log::debug(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        "is ignoring event because there is no IP or Domain contact"
+                    );
 
+                    continue;
+                }
             }
 
             /*
