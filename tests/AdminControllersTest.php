@@ -79,18 +79,6 @@ class AdminControllersTest extends TestCase
     /**
      * @return void
      */
-    public function testAdminSearch()
-    {
-        $this->be($this->user);
-        // TODO mark, fix search forms
-        // $response = $this->call('GET', '/admin/search');
-        // $this->assertEquals(200, $response->getStatusCode());
-    }
-
-
-    /**
-     * @return void
-     */
     public function testAdminAnalytics()
     {
         $this->be($this->user);
