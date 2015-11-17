@@ -9,7 +9,7 @@ return [
 
     'interface' => [
         'language' => 'en',
-        'navigation' => ['home', 'contacts', 'netblocks', 'domains' , 'tickets', 'search', 'analytics']
+        'navigation' => ['home', 'contacts', 'netblocks', 'domains' , 'tickets', 'analytics']
     ],
 
     'emailparser' => [
