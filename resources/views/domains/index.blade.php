@@ -8,19 +8,17 @@
             {!! link_to_route('admin.domains.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
         </div>
     </div>
-    @if ( !$domains->count() )
-        <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('domains.no_domains') }}</div>
-    @else
-        <table class="table table-striped" id="domains-table">
-            <thead>
-                <tr>
-                    <th>{{ trans('misc.contact') }}</th>
-                    <th>{{ trans('domains.domainname') }}</th>
-                    <th class="text-right">{{ trans('misc.action') }}</th>
-                </tr>
-            </thead>
-        </table>
-    @endif
+
+    <table class="table table-striped" id="domains-table">
+        <thead>
+        <tr>
+            <th>{{ trans('misc.contact') }}</th>
+            <th>{{ trans('domains.domainname') }}</th>
+            <th class="text-right">{{ trans('misc.action') }}</th>
+        </tr>
+        </thead>
+    </table>
+
 @endsection
 
 @section('extrajs')

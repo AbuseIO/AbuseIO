@@ -77,10 +77,7 @@ class ContactsController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::paginate(10);
-
         return view('contacts.index')
-            ->with('contacts', $contacts)
             ->with('auth_user', $this->auth_user);
     }
 

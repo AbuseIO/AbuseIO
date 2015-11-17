@@ -9,22 +9,19 @@
         </div>
     </div>
 
-    @if ( !$contacts->count() )
-        <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('contacts.no_contacts')}}</div>
-    @else
-        <table class="table table-striped top-buffer" id="contacts-table">
-            <thead>
-                <tr>
-                    <th>{{ trans('contacts.reference') }}</th>
-                    <th>{{ trans('misc.name') }}</th>
-                    <th>{{ trans('misc.email') }}</th>
-                    <th>{{ trans('contacts.rpchost') }}</th>
-                    <th>{{ trans('contacts.notification') }}</th>
-                    <th class="text-right">{{ trans('misc.action') }}</th>
-                </tr>
-            </thead>
-        </table>
-    @endif
+    <table class="table table-striped top-buffer" id="contacts-table">
+        <thead>
+        <tr>
+            <th>{{ trans('contacts.reference') }}</th>
+            <th>{{ trans('misc.name') }}</th>
+            <th>{{ trans('misc.email') }}</th>
+            <th>{{ trans('contacts.rpchost') }}</th>
+            <th>{{ trans('contacts.notification') }}</th>
+            <th class="text-right">{{ trans('misc.action') }}</th>
+        </tr>
+        </thead>
+    </table>
+
 @endsection
 
 @section('extrajs')

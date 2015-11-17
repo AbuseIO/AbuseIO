@@ -8,20 +8,18 @@
             {!! link_to_route('admin.netblocks.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
         </div>
     </div>
-    @if ( !$netblocks->count() )
-        <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('netblocks.no_netblocks')}}</div>
-    @else
-        <table class="table table-striped" id="netblocks-table">
-            <thead>
-                <tr>
-                    <th>{{ trans('misc.contact') }}</th>
-                    <th>{{ trans('netblocks.first_ip') }}</th>
-                    <th>{{ trans('netblocks.last_ip') }}</th>
-                    <th class="text-right">{{ trans('misc.action') }}</th>
-                </tr>
-            </thead>
-        </table>
-    @endif
+
+    <table class="table table-striped" id="netblocks-table">
+        <thead>
+        <tr>
+            <th>{{ trans('misc.contact') }}</th>
+            <th>{{ trans('netblocks.first_ip') }}</th>
+            <th>{{ trans('netblocks.last_ip') }}</th>
+            <th class="text-right">{{ trans('misc.action') }}</th>
+        </tr>
+        </thead>
+    </table>
+
 @endsection
 
 @section('extrajs')

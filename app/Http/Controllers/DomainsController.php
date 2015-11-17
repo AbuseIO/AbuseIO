@@ -73,11 +73,7 @@ class DomainsController extends Controller
      */
     public function index()
     {
-        $domains = Domain::with('contact')
-            ->paginate(10);
-
         return view('domains.index')
-            ->with('domains', $domains)
             ->with('auth_user', $this->auth_user);
     }
 

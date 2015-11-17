@@ -81,10 +81,7 @@ class NetblocksController extends Controller
      */
     public function index()
     {
-        $netblocks = Netblock::paginate(10);
-
         return view('netblocks.index')
-            ->with('netblocks', $netblocks)
             ->with('auth_user', $this->auth_user);
     }
 

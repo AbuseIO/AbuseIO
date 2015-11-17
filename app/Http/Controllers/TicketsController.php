@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\TicketsFormRequest;
+use yajra\Datatables\Datatables;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Note;
 use Redirect;
@@ -24,78 +25,36 @@ class TicketsController extends Controller
     }
 
     /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $tickets = Ticket::all();
+
+        return Datatables::of($tickets)
+            // Create the action buttons
+            ->addColumn(
+                'actions',
+                function ($ticket) {
+                    $actions = ' <a href="tickets/' . $ticket->id .
+                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        trans('misc.button.show').'</a> ';
+
+                    return $actions;
+                }
+            )
+            ->make(true);
+    }
+
+    /**
      * Display all tickets
      * @return Response
      */
     public function index()
     {
-        // When we came from the search page, create a Query
-        $tickets = Ticket::where(
-            function ($query) {
-                if (!empty(Input::get('ticket_id'))) {
-                    $query->where('id', Input::get('ticket_id'));
-                }
-                if (!empty(Input::get('ip_address'))) {
-                    $query->where('ip', Input::get('ip_address'));
-                }
-                if (!empty(Input::get('customer_code'))) {
-                    $query->where('ip_contact_reference', Input::get('customer_code'));
-                }
-                if (!empty(Input::get('customer_name'))) {
-                    $query->where('ip_contact_name', 'like', '%'.Input::get('customer_name').'%');
-                }
-                if (Input::get('classification') > 0) {
-                    $query->where('class_id', Input::get('classification'));
-                }
-                if (Input::get('type') > 0) {
-                    $query->where('type_id', Input::get('type'));
-                }
-                if (Input::get('status') > 0) {
-                    $query->where('status_id', Input::get('status'));
-                }
-                if (Input::get('state') > 0) {
-                    switch (Input::get('state')) {
-                        case 1:
-                            // Notified
-                            $query->where('notified_count', '>=', 1);
-                            break;
-                        case 2:
-                            // Not notified
-                        default:
-                            $query->where('notified_count', 0);
-                            break;
-                    }
-                }
-            }
-        )->paginate(10);
-
         return view('tickets.index')
-            ->with('tickets', $tickets)
-            ->with('auth_user', $this->auth_user);
-    }
-
-    /**
-     * Display all open tickets
-     * @return Response
-     */
-    public function statusOpen()
-    {
-        $tickets = Ticket::where('status_id', 1)->paginate(10);
-        return view('tickets.index')
-            ->with('tickets', $tickets)
-            ->with('auth_user', $this->auth_user);
-    }
-
-    /**
-     * Display all closed tickets
-     * @param Request $request
-     * @return Response
-     */
-    public function statusClosed()
-    {
-        $tickets = Ticket::where('status_id', 2)->paginate(10);
-        return view('tickets.index')
-            ->with('tickets', $tickets)
             ->with('auth_user', $this->auth_user);
     }
 

@@ -8,6 +8,16 @@ Route::group(
         'as' => 'tickets.',
     ],
     function () {
+        // Search Tickets
+        Route::get(
+            'search/{one?}/{two?}/{three?}/{four?}/{five?}',
+            [
+                'middleware' => 'permission:tickets_view',
+                'as' => 'search',
+                'uses' => 'TicketsController@search'
+            ]
+        );
+
         // Access to index list
         route::get(
             '',
