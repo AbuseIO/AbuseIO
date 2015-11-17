@@ -28,3 +28,14 @@ body { padding-top: 70px; }
 /* Helper classes for more vertical spacing */
 .top-buffer { margin-top:20px; }
 .dataTables_wrapper { margin-top:20px; }
+
+/* Ticket details for row extensions */
+td.details-control {
+    font-family: 'Glyphicons Halflings';
+    content: "\e237";
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    font-family: 'Glyphicons Halflings';
+    content: "\e238";
+}

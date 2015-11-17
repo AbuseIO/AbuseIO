@@ -12,13 +12,12 @@
     <table class="table table-striped table-condensed top-buffer" id="tickets-table">
         <thead>
         <tr>
+            <th></th>
             <th>{{ trans('misc.ticket_id') }}</th>
             <th>{{ trans('misc.ip') }}</th>
-            <th>{{ trans('misc.contact') }}</th>
+            <th>{{ trans('misc.domain') }}</th>
             <th>{{ trans('misc.type') }}</th>
             <th>{{ trans('misc.classification') }}</th>
-            <th>{{ trans('tickets.first_seen') }}</th>
-            <th>{{ trans('tickets.last_seen') }}</th>
             <th>{{ trans('tickets.count') }}</th>
             <th>{{ trans('misc.status') }}</th>
             <th class="text-right">{{ trans('misc.action') }}</th>
@@ -30,14 +29,32 @@
 
 @section('extrajs')
     <script>
-        $(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        function format ( d ) {
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;" width="90%" align="center">'+
+                    '<tr>'+
+                        '<td><b><u>IP Contact: </u></b></td>'+
+                        '<td><b><u>Domain Contact: </u></b></td>'+
+                    '</tr>'+
 
-            $('#tickets-table').DataTable({
+                    '<tr>'+
+                        '<td>'+
+                            '<table width="100%">'+
+                                '<tr><td><b>Reference: </b></td><td>' + d.ip_contact_reference + '</td></tr>'+
+                                '<tr><td><b>Name: </b></td><td>' + d.ip_contact_name + '</td></tr>'+
+                            '</table>'+
+                        '</td>'+
+                        '<td>'+
+                            '<table width="100%">'+
+                                '<tr><td><b>Reference: </b></td><td>' + d.domain_contact_reference + '</td></tr>'+
+                                '<tr><td><b>Name: </b></td><td>' + d.domain_contact_name + '</td></tr>'+
+                            '</table>'+
+                        '</td>'+
+                    '</tr>'+
+                    '</table>';
+        }
+
+        $(document).ready(function() {
+            var table = $('#tickets-table').DataTable( {
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('admin.tickets.search') .'/query/' !!}',
@@ -50,18 +67,39 @@
                     url: '{{ asset("/i18n/$auth_user->locale.json") }}'
                 },
                 columns: [
-                    { data: 'id', name: 'ticket td' },
-                    { data: 'ip', name: 'ip' },
-                    { data: null, name: 'ip contact' },
-                    { data: 'type_id', name: 'type' },
-                    { data: 'class_id', name: 'class' },
-                    { data: null, name: 'first seen' },
-                    { data: null, name: 'last seen' },
-                    { data: null, name: 'event count' },
-                    { data: 'status_id', name: 'status' },
-                    { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
+                    {
+                        className:      'details-control',
+                        orderable:      false,
+                        data:           null,
+                        defaultContent: ''
+                    },
+                    { data: 'id' },
+                    { data: 'ip' },
+                    { data: 'domain' },
+                    { data: 'type_id' },
+                    { data: 'class_id' },
+                    { data: null },
+                    { data: 'status_id' },
+                    { data: 'actions', orderable: false, searchable: false, class: "text-right" }
                 ]
-            });
-        });
+            } );
+
+            $('#tickets-table tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child( format(row.data()) ).show();
+                    tr.addClass('shown');
+                }
+            } );
+        } );
+
     </script>
 @endsection
