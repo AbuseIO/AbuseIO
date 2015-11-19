@@ -153,6 +153,29 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $result;
     }
 
+    /**
+     * Checks if the user has a specific role
+     *
+     * @param $role_slug
+     * @return bool
+     */
+    public function hasRole($role_slug)
+    {
+        $result = false;
+        $roles = $this->roles;
+        foreach ($roles as $role)
+        {
+            if ($role->role_slug == $role_slug)
+            {
+                $result = true;
+                break;
+            }
+        }
+
+        return $result;
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | Relationship Methods

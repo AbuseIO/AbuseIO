@@ -14,11 +14,16 @@ class UsersTableSeeder extends Seeder
          */
         DB::table('users')->delete();
 
-        // Add the admin user
+        // Add the example users
         $defaultAdminUsername = 'admin@isp.local';
         $defaultAdminPassword = substr(md5(rand()), 0, 8);
+        //$defaultAdminPassword = 'admin';
         $defaultUserUsername  = 'user@isp.local';
         $defaultUserPassword = substr(md5(rand()), 0, 8);
+        //$defaultUserPassword = 'user';
+        $secondAccountAdminUsername = 'admin@account2.local';
+        $secondAccountAdminPassword = substr(md5(rand()), 0, 8);
+        //$secondAccountAdminPassword = 'admin';
 
         $users = [
             [
@@ -36,6 +41,14 @@ class UsersTableSeeder extends Seeder
                 'last_name'                 => 'User',
                 'password'                  => Hash::make($defaultUserPassword),
                 'account_id'                => 1
+            ],
+            [
+                'id'                        => 3,
+                'email'                     => $secondAccountAdminUsername,
+                'first_name'                => 'Default',
+                'last_name'                 => 'Admin',
+                'password'                  => Hash::make($secondAccountAdminPassword),
+                'account_id'                => 2
             ],
 
         ];
@@ -93,6 +106,11 @@ class UsersTableSeeder extends Seeder
                 'role_id'                   => 2,
                 'user_id'                   => 2,
             ],
+            [
+                'id'                        => 3,
+                'role_id'                   => 1,
+                'user_id'                   => 3,
+            ],
         ];
         DB::table('role_user')->insert($role_user);
 
@@ -101,6 +119,9 @@ class UsersTableSeeder extends Seeder
             PHP_EOL . PHP_EOL;
         // Show the password in CLI that was generated when seeding the test user
         echo PHP_EOL ."Default user '{$defaultUserUsername}' created with password: '{$defaultUserPassword}'" .
+            PHP_EOL . PHP_EOL;
+        // Show the password in CLI that was generated when seeding the test secondd account admin user
+        echo PHP_EOL ."Default second account admin user '{$secondAccountAdminUsername}' created with password: '{$secondAccountAdminPassword}'" .
             PHP_EOL . PHP_EOL;
 
     }

@@ -2,12 +2,19 @@
 
 namespace AbuseIO\Http\Controllers;
 
+use AbuseIO\Http\Requests\BrandFormRequest;
+use DB;
+use File;
+use Illuminate\Database\Connection;
 use Illuminate\Http\Request;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Brand;
+use AbuseIO\Models\Account;
+use Illuminate\Http\Response;
 use yajra\Datatables\Datatables;
-
+use Redirect;
+use Input;
 
 class BrandsController extends Controller
 {
@@ -18,7 +25,17 @@ class BrandsController extends Controller
      */
     public function search()
     {
-        $brands = Brand::all();
+        $account = $this->auth_user->account;
+
+        //return all brands when we are in the system account
+        //in a normal account only show the current linked one
+
+        if ($account->isSystemAccount()) {
+            $brands = Brand::all();
+        } else {
+            // retrieve it as a collection
+            $brands = Brand::where('id','=',$account->brand->id)->get();
+        }
 
         return Datatables::of($brands)
             ->addColumn('actions', function ($brand) {
@@ -51,7 +68,7 @@ class BrandsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -65,29 +82,83 @@ class BrandsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-        //
+        return view('brands.create')
+            ->with('brand', null)
+            ->with('auth_user', $this->auth_user);
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param BrandFormRequest $request
+     * @return mixed
      */
-    public function store(Request $request)
+    public function store(BrandFormRequest $request)
     {
-        //
+        $connection = DB::connection();
+        $input = Input::all();
+        $account = $this->auth_user->account;
+
+
+        if ($request->hasFile('logo') && $request->file('logo')->isValid())
+        {
+            $errors = [];
+
+            if (!Brand::checkUploadedLogo($request->file('logo'), $errors)) {
+                return Redirect::route('admin.brands.create')
+                    ->withInput($input)
+                    ->withErrors(['logo' => $errors]);
+            }
+
+            // all ok
+            $input['logo'] = file_get_contents($request->file('logo')->getRealPath());
+
+        }
+        else
+        {
+            return Redirect::route('admin.brands.create')
+                ->withInput($input)
+                ->withErrors(['logo' => 'Something went wrong, while uploading the logo']);
+        }
+        // begin transaction
+        $connection->beginTransaction();
+
+        $brand = Brand::create($input);
+
+        // if our current account isn't the system account,
+        // link the new brand to the current account
+        if (!$account->isSystemAccount())
+        {
+            $account->brand_id = $brand->id;
+            $result = $account->save();
+
+            // when we can't save the account, rollback
+            if (!$result)
+            {
+                $connection->rollBack();
+                return Redirect::route('admin.brands.create')
+                    ->withInput($input)
+                    ->with('message', 'Something went wrong, while linking the brand to its account');
+            }
+        }
+
+        // commit
+        $connection->commit();
+
+        return Redirect::route('admin.brands.index')
+            ->with('message', 'Brand has been created');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Brand $brand)
     {
@@ -101,7 +172,7 @@ class BrandsController extends Controller
      * return the logo as an image
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function logo($id)
     {
@@ -125,30 +196,75 @@ class BrandsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function edit($id)
+    public function edit(Brand $brand)
     {
-        //
+
+        // may we edit this brand (is the brand connected to our account)
+        if (!$brand->mayEdit($this->auth_user))
+        {
+            return Redirect::route('admin.brands.show', $brand->id)
+                ->with('message', 'User is not authorized to edit this brand.');
+        }
+
+        // if we are authorized, but the brand is the default brand and we
+        // are not part of the system account, we probably want to create a new
+        // brand instead
+        if ($brand->isDefault() && !$this->auth_user->account->isSystemAccount())
+        {
+            return Redirect::route('admin.brands.create');
+        }
+
+        return view('brands.edit')
+            ->with('brand', $brand)
+            ->with('auth_user', $this->auth_user);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param BrandFormRequest $request
+     * @param Brand $brand
+     * @return mixed
      */
-    public function update(Request $request, $id)
+    public function update(BrandFormRequest $request, Brand $brand)
     {
-        //
+
+        // may we edit this brand
+        if (!$brand->mayEdit($this->auth_user))
+        {
+            return Redirect::route('admin.brands.show', $brand->id)
+                ->with('message', 'User is not authorized to edit this brand.');
+        }
+
+        $input = array_except(Input::all(), '_method');
+
+        if ($request->hasFile('logo') && $request->file('logo')->isValid())
+        {
+            $errors = [];
+
+            if (!Brand::checkUploadedLogo($request->file('logo'), $errors)) {
+                return Redirect::route('admin.brands.edit', $brand->id)
+                    ->withErrors(['logo' => $errors]);
+            }
+
+            // all ok
+            $input['logo'] = file_get_contents($request->file('logo')->getRealPath());
+
+        }
+
+        $brand->update($input);
+
+        return Redirect::route('admin.brands.show', $brand->id)
+            ->with('message', 'Brands has been updated.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

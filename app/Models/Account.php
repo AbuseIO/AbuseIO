@@ -25,6 +25,17 @@ class Account extends Model
         'id'
     ];
 
+
+    /**
+     * Return if the account is the system account
+     *
+     * @return bool
+     */
+    public function isSystemAccount()
+    {
+        return ($this->id == 1);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Relationship Methods
@@ -55,7 +66,7 @@ class Account extends Model
      */
     public function brand()
     {
-        return $this->hasOne('AbuseIO\Models\Brand');
+        return $this->belongsTo('AbuseIO\Models\Brand');
     }
 
 }
