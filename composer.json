@@ -29,7 +29,7 @@
 	"require": {
 		"laravel/framework": "5.1.*",
         "laravelcollective/html": "~5.0",
-        "php-mime-mail-parser/php-mime-mail-parser": "dev-master",
+        "php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
         "webpatser/laravel-uuid": "1.*",
         "Chumper/Zipper": "0.6.x",
         "abuseio/parser-common": "dev-master",
