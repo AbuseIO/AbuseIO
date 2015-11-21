@@ -215,6 +215,10 @@ class EventsSave extends Job implements SelfHandling
                         $ticket->save();
                     }
 
+                    // TODO: If this is an abuse/escalation ticket and currently 'resolved' then put status back to Open
+
+                    // TODO: Implement escalation triggers
+
                 }
 
             } else {
