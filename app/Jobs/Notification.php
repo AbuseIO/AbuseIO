@@ -163,16 +163,12 @@ class Notification extends Job implements SelfHandling
      * Create a list of tickets that need outgoing notifications.
      * @return array
      */
-    public function buildList($filter = false)
+    public function buildList()
     {
         /*
          * Select a list of tickets that are not closed(2).
          */
         $selection = [ ];
-
-        if ($filter) {
-            // TODO - Add extra filtering
-        }
 
         $tickets = Ticket::where('status_id', '!=', '2')->get();
 
