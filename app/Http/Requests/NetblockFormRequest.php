@@ -25,7 +25,10 @@ class NetblockFormRequest extends Request
         switch ($this->method) {
             case 'POST':
                 return [
-                    /* marksg: not working as intended (yet) */
+                    /*
+                     * TODO : marksg: not working as intended (yet)
+                     *
+                     */
                     'first_ip'      => 'required|ip|unique:netblocks,first_ip,NULL,id,'.$this->last_ip.',last_ip,'.$this->first_ip.',first_ip',
                     'last_ip'       => 'required|ip',
                     'contact_id'    => 'required|integer',
