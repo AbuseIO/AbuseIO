@@ -31,13 +31,10 @@ class EventsValidate extends Job implements SelfHandling
         }
 
         foreach ($this->events as $event) {
-            /**
-             *  TODO - implement a lot of validation here
-             *  TODO - Requires some extending validation rules
-             *  http://laravel.com/docs/4.2/validation#custom-validation-rules
-             */
 
-            // Check valid IP
+            /*
+             * Common Laravel validations
+             */
             $validator = Validator::make(
                 [
                     'source' => $event['source'],
@@ -50,14 +47,14 @@ class EventsValidate extends Job implements SelfHandling
                     'information' => $event['information'],
                 ],
                 [
-                    'source' => 'required',
+                    'source' => 'required:string',
                     'ip' => 'required|ip',
-                    'domain' => 'required',
-                    'uri' => 'required',
-                    'class' => 'required',
-                    'type' => 'required',
-                    'timestamp' => 'required',
-                    'information' => 'required',
+                    'domain' => 'required:string',
+                    'uri' => 'required:string',
+                    'class' => 'required:string',
+                    'type' => 'required:string',
+                    'timestamp' => 'required:integer',
+                    'information' => 'required:json',
                 ]
             );
 
@@ -71,12 +68,29 @@ class EventsValidate extends Job implements SelfHandling
                 return $this->failed($message);
             }
 
+            /*
+             * Manual validations, the ones that laravel does not provide
+             * or require some manual tinkering
+             */
+
             // check valid domain name
             if ($event['domain'] !== false) {
+                if (!preg_match("/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i", $event['domain'])
+                    || !preg_match("/^.{1,253}$/", $event['domain'])
+                    || !preg_match("/^[^\.]{1,63}(\.[^\.]{1,63})*$/", $event['domain'])
+                ) {
+                    return $this->failed('Invalid domain name used:' . $event['domain']);
+                }
             }
 
             // check valid URI
             if ($event['uri'] !== false) {
+                if (filter_var(
+                    'http://test.for.var.com' . $event['uri'],
+                    FILTER_VALIDATE_URL
+                ) === false ) {
+                    return $this->failed('Invalid URI used' . $event['uri']);
+                }
             }
 
             // check valid timestamp
@@ -103,14 +117,9 @@ class EventsValidate extends Job implements SelfHandling
                     break;
                 }
             }
-
             if ($validClass !== true) {
                 return $this->failed("Invalid classification used: {$event['class']}");
             }
-
-            // Check if information is json encoded
-
-            // This any failed, we call a $this->failed($message)
 
         }
         return $this->success('');
