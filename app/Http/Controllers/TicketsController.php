@@ -100,10 +100,10 @@ class TicketsController extends Controller
                     $ticket->ip,
                     $ticket->class_id,
                     $ticket->type_id,
-                    $ticket->firstEvent[0]->timestamp,
-                    $ticket->lastEvent[0]->timestamp,
+                    date('d-m-Y H:i:s e', $ticket->firstEvent[0]->timestamp),
+                    date('d-m-Y H:i:s e', $ticket->lastEvent[0]->timestamp),
                     $ticket->events->count(),
-                    $ticket->status_id,
+                    trans('types.status.'.$ticket->status_id.'.name'),
                 ];
 
                 $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
