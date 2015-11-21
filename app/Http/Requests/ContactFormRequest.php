@@ -28,6 +28,7 @@ class ContactFormRequest extends Request
                     'name'      => 'required',
                     'email'     => 'required|email',
                     'rpc_host'  => 'sometimes|url',
+                    'enabled'   => 'required|boolean',
                 ];
             case 'PUT':
             case 'PATCH':
@@ -36,6 +37,7 @@ class ContactFormRequest extends Request
                     'name'      => 'required',
                     'email'     => 'required|email',
                     'rpc_host'  => 'sometimes|url',
+                    'enabled'   => 'required|boolean',
                 ];
             default:
                 break;

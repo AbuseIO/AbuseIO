@@ -26,12 +26,14 @@ class DomainFormRequest extends Request
                 return [
                     'name'       => 'required|unique:domains',
                     'contact_id' => 'required|integer',
+                    'enabled'   => 'required|boolean',
                 ];
             case 'PUT':
             case 'PATCH':
                 return [
                     'name'       => 'required|unique:domains,name,'. $this->id,
                     'contact_id' => 'required|integer',
+                    'enabled'   => 'required|boolean',
                 ];
             default:
                 break;

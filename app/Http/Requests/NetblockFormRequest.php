@@ -30,6 +30,7 @@ class NetblockFormRequest extends Request
                     'last_ip'       => 'required|ip',
                     'contact_id'    => 'required|integer',
                     'description'   => 'required',
+                    'enabled'       => 'required|boolean',
                 ];
             case 'PUT':
             case 'PATCH':
@@ -38,6 +39,7 @@ class NetblockFormRequest extends Request
                     'last_ip'       => 'required|ip',
                     'contact_id'    => 'required|integer',
                     'description'   => 'required',
+                    'enabled'       => 'required|boolean',
                 ];
             default:
                 break;
