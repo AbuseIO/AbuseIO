@@ -12,6 +12,7 @@ use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Brand;
 use AbuseIO\Models\Account;
 use Illuminate\Http\Response;
+use PhpMimeMailParser\Exception;
 use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
@@ -100,7 +101,6 @@ class BrandsController extends Controller
      */
     public function store(BrandFormRequest $request)
     {
-        $connection = DB::connection();
         $input = Input::all();
         $account = $this->auth_user->account;
 
@@ -125,30 +125,37 @@ class BrandsController extends Controller
                 ->withInput($input)
                 ->withErrors(['logo' => 'Something went wrong, while uploading the logo']);
         }
-        // begin transaction
-        $connection->beginTransaction();
 
-        $brand = Brand::create($input);
+        try {
+            // begin transaction pass both $input and $account to the closure
+            DB::transaction(function () use ($input, $account) {
 
-        // if our current account isn't the system account,
-        // link the new brand to the current account
-        if (!$account->isSystemAccount())
-        {
-            $account->brand_id = $brand->id;
-            $result = $account->save();
+                $brand = Brand::create($input);
+                if (!$brand) {
+                    // when we can't save the brand, throw an exception
+                    throw new Exception("Couldn't create new brand");
+                }
 
-            // when we can't save the account, rollback
-            if (!$result)
-            {
-                $connection->rollBack();
-                return Redirect::route('admin.brands.create')
-                    ->withInput($input)
-                    ->with('message', 'Something went wrong, while linking the brand to its account');
-            }
+                // if our current account isn't the system account,
+                // link the new brand to the current account
+                if (!$account->isSystemAccount()) {
+                    $account->brand_id = $brand->id;
+                    $result = $account->save();
+
+                    // when we can't save the account, throw an exception
+                    // DB::transaction will automatically rollback
+                    if (!$result) {
+                        throw new Exception('Something went wrong, while linking the brand to the account');
+                    }
+                }
+            });
         }
-
-        // commit
-        $connection->commit();
+        catch (Exception $e)
+        {
+            return Redirect::route('admin.brands.create')
+                ->withInput($input)
+                ->with('message', $e->getMessage());
+        }
 
         return Redirect::route('admin.brands.index')
             ->with('message', 'Brand has been created');
