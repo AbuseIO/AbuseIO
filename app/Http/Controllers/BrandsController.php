@@ -4,6 +4,7 @@ namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\BrandFormRequest;
 use DB;
+use Exception;
 use File;
 use Illuminate\Database\Connection;
 use Illuminate\Http\Request;
@@ -12,7 +13,6 @@ use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Brand;
 use AbuseIO\Models\Account;
 use Illuminate\Http\Response;
-use PhpMimeMailParser\Exception;
 use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
