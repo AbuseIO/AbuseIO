@@ -84,7 +84,7 @@ class Brand extends Model
         $mimetype = $file->getMimeType();
         if (!preg_match('/^image/', $mimetype))
         {
-            array_push($messages, "Uploaded logo is not an image, it has mimetype: $mimetype");
+            array_push($messages, "Uploaded logo is not an image, its mimetype is: $mimetype");
         }
 
         return (empty($messages));
@@ -96,7 +96,7 @@ class Brand extends Model
      | Relationship Methods
      |--------------------------------------------------------------------------
     */
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
