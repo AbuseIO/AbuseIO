@@ -90,6 +90,13 @@ class Brand extends Model
         return (empty($messages));
     }
 
+
+    /*
+     |--------------------------------------------------------------------------
+     | Relationship Methods
+     |--------------------------------------------------------------------------
+    */
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
