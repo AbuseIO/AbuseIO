@@ -111,8 +111,20 @@ class Ticket extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function account()
+    public function accountIp()
     {
-        return $this->belongsTo('AbuseIO\Models\Account');
+
+        return $this->belongsTo('AbuseIO\Models\Account', 'ip_contact_account_id');
+
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function accountDomain()
+    {
+
+        return $this->belongsTo('AbuseIO\Models\Account', 'domain_contact_account_id');
+
     }
 }

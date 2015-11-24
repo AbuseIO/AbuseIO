@@ -2,7 +2,7 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
+use Request;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Note;
 use Input;
@@ -15,8 +15,20 @@ class AshController extends Controller
      */
     public function index($ticketID, $token)
     {
+        $brand = false;
         $ticket = Ticket::find($ticketID);
-        $brand = $ticket->account->brand;
+        $AshAuthorisedBy = Request::instance()->query('AshAuthorisedBy');
+
+        if ($AshAuthorisedBy == 'TokenIP') {
+            $brand = $ticket->accountIp->brand;
+        }
+        if ($AshAuthorisedBy == 'TokenDomain') {
+            $brand = $ticket->accountDomain->brand;
+        }
+
+        if (empty($brand)) {
+            abort(500);
+        }
 
         return view('ash')
             ->with('brand', $brand)

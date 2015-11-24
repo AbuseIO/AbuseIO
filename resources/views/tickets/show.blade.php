@@ -58,7 +58,8 @@
                 <dt>{{ trans('tickets.reply_status') }}</dt>
                 <dd></dd>
 
-                <dt>{{ trans('tickets.ashlink') }}</dt>
+                @if ($ticket->ip_contact_reference != 'UNDEF')
+                <dt>{{ trans('tickets.ashlink.ip') }}</dt>
                 <dd>
                     {!! link_to(
                         "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference),
@@ -66,8 +67,21 @@
                          . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference)
                     ) !!}
                 </dd>
+                @endif
+
+                @if ($ticket->domain_contact_reference != 'UNDEF')
+                <dt>{{ trans('tickets.ashlink.domain') }}</dt>
+                <dd>
+                    {!! link_to(
+                        "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference),
+                        'http://' . Request::server('SERVER_NAME') . "/ash/collect/$ticket->id/"
+                         . md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference)
+                    ) !!}
+                </dd>
+                @endif
             </dl>
 
+            @if ($ticket->ip_contact_reference != 'UNDEF')
             <h4>{{ trans('misc.ip') }} {{ trans('misc.contact') }}:</h4>
             <dl class="dl-horizontal">
                 <dt>{{ trans('contacts.account') }}</dt>
@@ -88,7 +102,9 @@
                 <dt>{{ trans('contacts.rpckey') }}</dt>
                 <dd>{{ $ticket->ip_contact_rpc_key }}</dd>
             </dl>
+            @endif
 
+            @if ($ticket->domain_contact_reference != 'UNDEF')
             <h4>{{ trans('misc.domain') }} {{ trans('misc.contact') }}:</h4>
             <dl class="dl-horizontal">
                 <dt>{{ trans('contacts.account') }}</dt>
@@ -109,6 +125,8 @@
                 <dt>{{ trans('contacts.rpckey') }}</dt>
                 <dd>{{ $ticket->domain_contact_rpc_key }}</dd>
             </dl>
+            @endif
+
         </div>
         <div id="events" class="tab-pane fade">
         @if ( !$ticket->events->count() )
