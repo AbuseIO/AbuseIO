@@ -48,7 +48,7 @@ return [
     'settings'          => 'Instellingen',
     'accounts'          => 'Account|Accounts',
     'users'             => 'Gebruiker|Gebruikers',
-    'profile'           => 'Mijn account',
+    'profile'           => 'Mijn profiel',
     'logout'            => 'Uitloggen',
     'brands'            => 'Merk|Merken',
     'options'           => 'Opties',

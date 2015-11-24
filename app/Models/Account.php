@@ -69,4 +69,11 @@ class Account extends Model
         return $this->belongsTo('AbuseIO\Models\Brand');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tickets()
+    {
+        return $this->hasMany('AbuseIO\Models\Ticket');
+    }
 }

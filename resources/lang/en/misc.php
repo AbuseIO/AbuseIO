@@ -47,7 +47,7 @@ return [
     'settings'          => 'Settings',
     'accounts'          => 'Account|Accounts',
     'users'             => 'User|Users',
-    'profile'           => 'My account',
+    'profile'           => 'My profile',
     'logout'            => 'Logout',
     'brands'            => 'Brand|Brands',
     'options'           => 'Options',

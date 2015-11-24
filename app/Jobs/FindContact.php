@@ -24,6 +24,7 @@ class FindContact extends Job
         $contact->email         = '';
         $contact->rpc_host      = '';
         $contact->rpc_key       = '';
+        $contact->account_id    = 1;
 
         return $contact;
     }

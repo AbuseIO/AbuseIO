@@ -16,8 +16,10 @@ class AshController extends Controller
     public function index($ticketID, $token)
     {
         $ticket = Ticket::find($ticketID);
+        $brand = $ticket->account->brand;
 
         return view('ash')
+            ->with('brand', $brand)
             ->with('ticket', $ticket)
             ->with('token', $token);
 
@@ -26,11 +28,13 @@ class AshController extends Controller
     public function addNote($ticketID, $token)
     {
         $ticket = Ticket::find($ticketID);
+        $brand = $ticket->account->brand;
 
         $text = Input::get('text');
         if (empty($text)) {
 
             return view('ash')
+                ->with('brand', $brand)
                 ->with('ticket', $ticket)
                 ->with('token', $token)
                 ->with('message', 'You cannot add an empty message!');
@@ -43,6 +47,7 @@ class AshController extends Controller
         $note->save();
 
         return view('ash')
+            ->with('brand', $brand)
             ->with('ticket', $ticket)
             ->with('token', $token)
             ->with('message', 'Ticket has been updated.');

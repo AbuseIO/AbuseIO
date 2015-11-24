@@ -4,20 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ Lang::get('ash.title') }} {{ $ticket->id }}</title>
-    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
+    <title>{{ Lang::get('ash.title') }} - {{ Lang::get('ash.ticket') }} {{ $ticket->id }}</title>
     <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/flag-icon-min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 </head>
 <body>
     <div class="header_wrapper">
-        <div class="container header"><img class="img-responsive" src="{{ asset('/images/logo_150.png') }}" alt='AbuseIO' /></div>
+        <div class="container header">
+            <div class="headers">
+                <img class="img-responsive img-inline" src="/ash/logo/{{ $brand->id }}" alt='{{ $brand->company_name }}' />
+            </div>
+            <div class="headers">
+                <h1>{{ Lang::get('ash.title') }}</h1>
+                <h2>{{ $brand->company_name }}</h2>
+            </div>
+        </div>
     </div>
     <div class="container">
-        <h1 class="page-header">{{ Lang::get('ash.title') }} {{ $ticket->id }}</h1>
+        <h1 class="page-header">{{ Lang::get('ash.ticket') }} {{ $ticket->id }}</h1>
         <div class="row">
             <div class="col-md-3 col-md-offset-9 text-right">
                 <div class="btn-group">
@@ -33,6 +41,11 @@
         <div class="panel panel-danger top-buffer">
             <div class="panel-heading">
                 {{ Lang::get('ash.intro') }}
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                {{ $brand->introduction_text }}
             </div>
         </div>
 

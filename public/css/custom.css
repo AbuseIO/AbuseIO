@@ -13,6 +13,10 @@ body { padding-top: 70px; }
     max-width: 250px;
 }
 
+.img-inline {
+    display: inline;
+}
+
 .tab-pane {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
@@ -23,6 +27,18 @@ body { padding-top: 70px; }
 
 .nav-tabs {
     margin-bottom: 0;
+}
+
+div .headers {
+    position: relative;
+    float: left;
+    display: inline;
+    margin-left: 10px;
+    vertical-align: top;
+}
+
+div .headers h2 {
+    color: #8c8c8c;
 }
 
 /* Helper classes for more vertical spacing */

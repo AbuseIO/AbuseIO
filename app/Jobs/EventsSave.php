@@ -37,7 +37,7 @@ class EventsSave extends Job implements SelfHandling
         $eventsIgnored = 0;
 
         foreach ($this->events as $event) {
-            /* Here we will thru all the events and look if these is an existing ticket. We will split them up into
+            /* Here we will seek through all the events and look if there is an existing ticket. We will split them up into
              * two seperate arrays: $eventsNew and $events$known. We can save all the known events in the DB with
              * a single event saving loads of queries
              *
@@ -110,6 +110,15 @@ class EventsSave extends Job implements SelfHandling
                 }
             }
 
+            // get the account first from the ipContact, if this contact is undefined
+            // get the account from the domainContact. When both contacts are undefined
+            // use the account (default) specified in the undefined contact
+            $account = $ipContact->account;
+
+            if ($ipContact->reference == 'UNDEF') {
+                $account = $domainContact->account;
+            }
+
             /*
              * Search to see if there is an existing ticket for this event classification
              */
@@ -152,6 +161,7 @@ class EventsSave extends Job implements SelfHandling
                 }
 
                 $newTicket->status_id               = 1;
+                $newTicket->account_id              = $account->id;
                 $newTicket->notified_count          = 0;
                 $newTicket->last_notify_count       = 0;
                 $newTicket->last_notify_timestamp   = 0;
@@ -211,6 +221,7 @@ class EventsSave extends Job implements SelfHandling
                         $ticket->domain_contact_rpchost     = $domainContact->rpc_host;
                         $ticket->domain_contact_rpckey      = $domainContact->rpc_key;
                         $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
+                        $ticket->account_id                 = $domainContact->account->id;
 
                         $ticket->save();
                     }

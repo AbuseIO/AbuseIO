@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $domain_contact_rpckey
  * @property string $domain_contact_auto_notify
  * @property integer $status_id
+ * @property integer $account_id
  * @property boolean auto_notify
  * @property integer $notified_count
  * @property integer $last_notify_count
@@ -51,6 +52,7 @@ class Ticket extends Model
         'domain_contact_rpckey',
         'domain_contact_auto_notify',
         'status_id',
+        'account_id',
         'notified_count',
         'last_notify_count',
         'last_notify_timestamp'
@@ -60,6 +62,9 @@ class Ticket extends Model
         'id'
     ];
 
+    /**
+     * @return mixed
+     */
     public function events()
     {
 
@@ -68,6 +73,9 @@ class Ticket extends Model
 
     }
 
+    /**
+     * @return mixed
+     */
     public function firstEvent()
     {
 
@@ -77,6 +85,9 @@ class Ticket extends Model
 
     }
 
+    /**
+     * @return mixed
+     */
     public function lastEvent()
     {
 
@@ -86,10 +97,21 @@ class Ticket extends Model
 
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function notes()
     {
 
         return $this->hasMany('AbuseIO\Models\Note');
 
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function account()
+    {
+        return $this->belongsTo('AbuseIO\Models\Account');
     }
 }
