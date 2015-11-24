@@ -50,7 +50,7 @@ Route::group(
                 'as' => 'setlocale',
                 'uses' => 'LocaleController@setLocale',
                 'middleware' => [
-                    'ash.token'
+                    //
                 ]
             ]
         );
@@ -62,7 +62,7 @@ Route::group(
                 'as' => 'logo',
                 'uses' => 'BrandsController@logo',
                 'middleware' => [
-                    'ash.token'
+                    //
                 ]
             ]
         );
