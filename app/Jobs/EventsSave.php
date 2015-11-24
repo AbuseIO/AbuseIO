@@ -137,7 +137,7 @@ class EventsSave extends Job implements SelfHandling
                 $newTicket->class_id                   = $event['class'];
                 $newTicket->type_id                    = $event['type'];
 
-                $newTicket->ip_contact_account_id      = $ipContact->account;
+                $newTicket->ip_contact_account_id      = $ipContact->account_id;
                 $newTicket->ip_contact_reference       = $ipContact->reference;
                 $newTicket->ip_contact_name            = $ipContact->name;
                 $newTicket->ip_contact_email           = $ipContact->email;
@@ -145,7 +145,7 @@ class EventsSave extends Job implements SelfHandling
                 $newTicket->ip_contact_rpckey          = $ipContact->rpc_key;
                 $newTicket->ip_contact_auto_notify     = $ipContact->auto_notify;
 
-                $newTicket->domain_contact_account_id  = $domainContact->account;
+                $newTicket->domain_contact_account_id  = $domainContact->account_id;
                 $newTicket->domain_contact_reference   = $domainContact->reference;
                 $newTicket->domain_contact_name        = $domainContact->name;
                 $newTicket->domain_contact_email       = $domainContact->email;
