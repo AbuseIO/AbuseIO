@@ -3,6 +3,7 @@
 use Closure;
 use Request;
 use AbuseIO\Models\Ticket;
+use Uuid;
 
 class CheckAshToken
 {
@@ -20,12 +21,26 @@ class CheckAshToken
             $ticket = Ticket::find($ticketID);
 
             if (!empty($ticket)) {
-                $validTokenIP       = md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference);
-                $validTokenDomain   = md5($ticket->id . $ticket->ip . $ticket->domain_contact_reference);
+                // Prevent unauthorized access by UNDEF contact tokens(default)
+                $validTokenIP = md5(Uuid::generate(4));
+                $validTokenDomain = md5(Uuid::generate(4));
 
-                if ($token == $validTokenIP || $token == $validTokenDomain) {
+                if ($ticket->ip_contact_reference != 'UNDEF') {
+                    $validTokenIP = md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference);
+                }
+                if ($token == $validTokenIP) {
+                    $request->merge(['AshAuthorisedBy' => 'TokenIP']);
                     return $next($request);
                 }
+
+                if ($ticket->domain_contact_reference != 'UNDEF') {
+                    $request->merge(['AshAuthorisedBy' => 'TokenDomain']);
+                    $validTokenDomain = md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference);
+                }
+                if ($token == $validTokenDomain) {
+                    return $next($request);
+                }
+
             }
         }
 
