@@ -30,12 +30,12 @@ body { padding-top: 70px; }
 .dataTables_wrapper { margin-top:20px; }
 
 /* Ticket details for row extensions */
-td.details-control {
+td.details-control:before {
     font-family: 'Glyphicons Halflings';
-    content: "\e237";
+    content: "\e081";
     cursor: pointer;
 }
-tr.shown td.details-control {
+tr.shown td.details-control:before {
     font-family: 'Glyphicons Halflings';
-    content: "\e238";
+    content: "\e082";
 }

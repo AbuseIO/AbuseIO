@@ -39,7 +39,7 @@ class TicketsController extends Controller
                 'actions',
                 function ($ticket) {
                     $actions = ' <a href="tickets/' . $ticket->id .
-                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
                         trans('misc.button.show').'</a> ';
 
                     return $actions;
