@@ -110,13 +110,20 @@ class EventsSave extends Job implements SelfHandling
                 }
             }
 
-            // get the account first from the ipContact, if this contact is undefined
-            // get the account from the domainContact. When both contacts are undefined
-            // use the account (default) specified in the undefined contact
+            // get the account from the contacts or use the system default
             $account = $ipContact->account;
 
             if ($ipContact->reference == 'UNDEF') {
-                $account = $domainContact->account;
+
+                // $domainContact could be a boolean
+                if (!$domainContact)
+                {
+                    $account = FindContact::undefined()->account;
+                }
+                else
+                {
+                    $account = $domainContact->account;
+                }
             }
 
             /*
