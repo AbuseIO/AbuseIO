@@ -70,6 +70,9 @@
 
             <h4>{{ trans('misc.ip') }} {{ trans('misc.contact') }}:</h4>
             <dl class="dl-horizontal">
+                <dt>{{ trans('contacts.account') }}</dt>
+                <dd>{{ $ticket->ip_contact_account_id }}</dd>
+
                 <dt>{{ trans('contacts.reference') }}</dt>
                 <dd>{{ $ticket->ip_contact_reference }}</dd>
 
@@ -86,9 +89,11 @@
                 <dd>{{ $ticket->ip_contact_rpc_key }}</dd>
             </dl>
 
-            @if ( $ticket->domain_contact_reference )
             <h4>{{ trans('misc.domain') }} {{ trans('misc.contact') }}:</h4>
             <dl class="dl-horizontal">
+                <dt>{{ trans('contacts.account') }}</dt>
+                <dd>{{ $ticket->domain_contact_account_id }}</dd>
+
                 <dt>{{ trans('contacts.reference') }}</dt>
                 <dd>{{ $ticket->domain_contact_reference }}</dd>
 
@@ -104,7 +109,6 @@
                 <dt>{{ trans('contacts.rpckey') }}</dt>
                 <dd>{{ $ticket->domain_contact_rpc_key }}</dd>
             </dl>
-            @endif
         </div>
         <div id="events" class="tab-pane fade">
         @if ( !$ticket->events->count() )

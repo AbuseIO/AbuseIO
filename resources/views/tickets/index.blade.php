@@ -39,12 +39,14 @@
                     '<tr>'+
                         '<td>'+
                             '<table width="100%">'+
+                                '<tr><td><b>Account: </b></td><td>' + d.ip_contact_account_id + '</td></tr>'+
                                 '<tr><td><b>Reference: </b></td><td>' + d.ip_contact_reference + '</td></tr>'+
                                 '<tr><td><b>Name: </b></td><td>' + d.ip_contact_name + '</td></tr>'+
                             '</table>'+
                         '</td>'+
                         '<td>'+
                             '<table width="100%">'+
+                                '<tr><td><b>Account: </b></td><td>' + d.domain_contact_account_id + '</td></tr>'+
                                 '<tr><td><b>Reference: </b></td><td>' + d.domain_contact_reference + '</td></tr>'+
                                 '<tr><td><b>Name: </b></td><td>' + d.domain_contact_name + '</td></tr>'+
                             '</table>'+

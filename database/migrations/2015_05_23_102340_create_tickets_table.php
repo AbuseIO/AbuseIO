@@ -22,12 +22,14 @@ class CreateTicketsTable extends Migration
                 $table->string('domain');
                 $table->integer('class_id')->unsigned();
                 $table->integer('type_id')->unsigned();
+                $table->integer('ip_contact_account_id')->unsigned();
                 $table->string('ip_contact_reference');
                 $table->string('ip_contact_name');
                 $table->string('ip_contact_email');
                 $table->string('ip_contact_rpchost');
                 $table->string('ip_contact_rpckey');
                 $table->boolean('ip_contact_auto_notify')->unsigned();
+                $table->integer('domain_contact_account_id')->unsigned();
                 $table->string('domain_contact_reference');
                 $table->string('domain_contact_name');
                 $table->string('domain_contact_email');
@@ -35,7 +37,6 @@ class CreateTicketsTable extends Migration
                 $table->string('domain_contact_rpckey');
                 $table->boolean('domain_contact_auto_notify')->unsigned();
                 $table->integer('status_id')->unsigned();
-                $table->integer('account_id')->unsigned();
                 $table->integer('notified_count')->unsigned();
                 $table->integer('last_notify_count')->unsigned();
                 $table->integer('last_notify_timestamp');

@@ -18,6 +18,7 @@ class CreateContactsTable extends Migration
             function (Blueprint $table) {
 
                 $table->increments('id');
+                $table->integer('account_id');
                 $table->string('reference')->unique();
                 $table->string('name');
                 $table->string('email');

@@ -87,7 +87,7 @@ class EventsSave extends Job implements SelfHandling
             if ($event['domain'] != '') {
                 $domainContact = FindContact::byDomain($event['domain']);
             } else {
-                $domainContact = false;
+                $domainContact = FindContact::undefined();
             }
 
             /*
@@ -96,6 +96,7 @@ class EventsSave extends Job implements SelfHandling
              * with caution as it might just ignore anything if your IP/domains are not correctly configured
              */
             if ($ipContact->reference == 'UNDEF' &&
+                $domainContact->reference == 'UNDEF' &&
                 config('main.reports.resolvable_only') === true
             ) {
                 if ((!empty($domainContact) && $domainContact->reference == 'UNDEF') ||
@@ -107,22 +108,6 @@ class EventsSave extends Job implements SelfHandling
                     );
 
                     continue;
-                }
-            }
-
-            // get the account from the contacts or use the system default
-            $account = $ipContact->account;
-
-            if ($ipContact->reference == 'UNDEF') {
-
-                // $domainContact could be a boolean
-                if (!$domainContact)
-                {
-                    $account = FindContact::undefined()->account;
-                }
-                else
-                {
-                    $account = $domainContact->account;
                 }
             }
 
@@ -151,6 +136,8 @@ class EventsSave extends Job implements SelfHandling
                 $newTicket->domain                     = empty($event['domain']) ? '' : $event['domain'];
                 $newTicket->class_id                   = $event['class'];
                 $newTicket->type_id                    = $event['type'];
+
+                $newTicket->ip_contact_account_id      = $ipContact->account;
                 $newTicket->ip_contact_reference       = $ipContact->reference;
                 $newTicket->ip_contact_name            = $ipContact->name;
                 $newTicket->ip_contact_email           = $ipContact->email;
@@ -158,17 +145,15 @@ class EventsSave extends Job implements SelfHandling
                 $newTicket->ip_contact_rpckey          = $ipContact->rpc_key;
                 $newTicket->ip_contact_auto_notify     = $ipContact->auto_notify;
 
-                if (!empty($event['domain']) && $domainContact !== false) {
-                    $newTicket->domain_contact_reference   = $domainContact->reference;
-                    $newTicket->domain_contact_name        = $domainContact->name;
-                    $newTicket->domain_contact_email       = $domainContact->email;
-                    $newTicket->domain_contact_rpchost     = $domainContact->rpc_host;
-                    $newTicket->domain_contact_rpckey      = $domainContact->rpc_key;
-                    $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
-                }
+                $newTicket->domain_contact_account_id  = $domainContact->account;
+                $newTicket->domain_contact_reference   = $domainContact->reference;
+                $newTicket->domain_contact_name        = $domainContact->name;
+                $newTicket->domain_contact_email       = $domainContact->email;
+                $newTicket->domain_contact_rpchost     = $domainContact->rpc_host;
+                $newTicket->domain_contact_rpckey      = $domainContact->rpc_key;
+                $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
 
                 $newTicket->status_id               = 1;
-                $newTicket->account_id              = $account->id;
                 $newTicket->notified_count          = 0;
                 $newTicket->last_notify_count       = 0;
                 $newTicket->last_notify_timestamp   = 0;
