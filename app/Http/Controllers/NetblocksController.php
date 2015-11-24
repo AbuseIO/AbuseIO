@@ -120,8 +120,8 @@ class NetblocksController extends Controller
             foreach ($netblocks as $netblock) {
                 $row = [
                     $netblock->contact->name . ' (' . $netblock->contact->reference . ')',
-                    ICF::inetItop($netblock['first_ip']),
-                    ICF::inetItop($netblock['last_ip']),
+                    $netblock['first_ip'],
+                    $netblock['last_ip'],
                     $netblock['enabled'] ? 'Enabled' : 'Disabled',
                 ];
 
@@ -144,9 +144,6 @@ class NetblocksController extends Controller
     public function store(NetblockFormRequest $netblock)
     {
         $input = Input::all();
-        $input['first_ip'] = ICF::inetPtoi($input['first_ip']);
-        $input['last_ip'] = ICF::inetPtoi($input['last_ip']);
-
         Netblock::create($input);
 
         return Redirect::route('admin.netblocks.index')
@@ -176,9 +173,6 @@ class NetblocksController extends Controller
     {
         $contacts = Contact::lists('name', 'id');
 
-        $netblock->first_ip = ICF::inetItop($netblock->first_ip);
-        $netblock->last_ip = ICF::inetItop($netblock->last_ip);
-
         return view('netblocks.edit')
             ->with('netblock', $netblock)
             ->with('contact_selection', $contacts)
@@ -194,9 +188,6 @@ class NetblocksController extends Controller
     public function update(Netblock $netblock)
     {
         $input = array_except(Input::all(), '_method');
-        $input['first_ip'] = ICF::inetPtoi($input['first_ip']);
-        $input['last_ip'] = ICF::inetPtoi($input['last_ip']);
-
         $netblock->update($input);
 
         return Redirect::route('admin.netblocks.show', $netblock->id)

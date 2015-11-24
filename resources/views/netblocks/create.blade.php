@@ -7,7 +7,7 @@
 
 @section('content')
     <h1 class="page-header">{{ trans('netblocks.headers.new') }}</h1>
-    {!! Form::model(new AbuseIO\Models\Netblock, ['route' => 'admin.netblocks.store', 'class' => 'form-horizontal']) !!}
+    {!! Form::open(['route' => 'admin.netblocks.store', 'class' => 'form-horizontal']) !!}
     @include('netblocks/partials/_form', ['submit_text' => trans('misc.button.save')])
     {!! Form::close() !!}
 @endsection
