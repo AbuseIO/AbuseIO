@@ -16,11 +16,6 @@ class Netblock extends Model
 {
     protected $table    = 'netblocks';
 
-    protected $appends = [
-        'first_ip_int',
-        'last_ip_int'
-    ];
-
     protected $fillable = [
         'first_ip',
         'last_ip',
@@ -39,14 +34,16 @@ class Netblock extends Model
         return $this->belongsTo('AbuseIO\Models\Contact');
     }
 
-    // Accessors
-    public function getFirstIpIntAttribute()
+    // Mutators
+    public function setFirstIpAttribute($value)
     {
-        return ICF::InetPtoi($this->first_ip);
+        $this->attributes['first_ip'] = $value;
+        $this->attributes['first_ip_int'] = ICF::InetPtoi($value);
     }
 
-    public function getLastIpIntAttribute()
+    public function setLastIpAttribute($value)
     {
-        return ICF::InetPtoi($this->last_ip);
+        $this->attributes['last_ip'] = $value;
+        $this->attributes['last_ip_int'] = ICF::InetPtoi($value);
     }
 }

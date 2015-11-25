@@ -65,8 +65,8 @@ class FindContact extends Job
             where('first_ip_int', '<=', ICF::inetPtoi($ip))
             ->where('last_ip_int', '>=', ICF::inetPtoi($ip))
             ->where('enabled', '=', true)
-            ->orderBy('first_ip', 'desc')
-            ->orderBy('last_ip', 'asc')
+            ->orderBy('first_ip_int', 'desc')
+            ->orderBy('last_ip_int', 'asc')
             ->take(1)
             ->get();
 
