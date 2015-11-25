@@ -75,13 +75,13 @@
                         data:           null,
                         defaultContent: ''
                     },
-                    { data: 'id' },
-                    { data: 'ip' },
-                    { data: 'domain' },
-                    { data: 'type_id' },
-                    { data: 'class_id' },
-                    { data: 'event_count' },
-                    { data: 'status_id' },
+                    { data: 'id', name: 'id' },
+                    { data: 'ip', name: 'ip' },
+                    { data: 'domain', name: 'domain' },
+                    { data: 'type_id', name: 'type_id' },
+                    { data: 'class_id', name: 'class_id' },
+                    { data: 'event_count', name: 'event_count' },
+                    { data: 'status_id', name: 'status_id' },
                     { data: 'actions', orderable: false, searchable: false, class: "text-right" }
                 ]
             } );
