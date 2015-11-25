@@ -48,7 +48,7 @@ class AccountsController extends Controller
 
         return view('accounts.create')
             ->with('brand_selection', $brands)
-            ->with('selected', NULL)
+            ->with('selected', null)
             ->with('auth_user', $this->auth_user);
     }
 
