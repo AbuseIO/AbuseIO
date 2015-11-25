@@ -35,7 +35,9 @@ class UsersController extends Controller
             ->leftJoin('accounts', 'accounts.id', '=', 'users.account_id');
 
         return Datatables::of($users)
-            ->addColumn('actions', function ($user) {
+            ->addColumn(
+                'actions',
+                function ($user) {
                     $actions = Form::open(
                         [
                             'route' => ['admin.users.destroy', $user->id],
@@ -58,7 +60,8 @@ class UsersController extends Controller
                     );
                     $actions .= Form::close();
                     return $actions;
-            })
+                }
+            )
             ->make(true);
     }
 
