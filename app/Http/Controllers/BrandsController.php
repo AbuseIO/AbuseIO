@@ -35,26 +35,48 @@ class BrandsController extends Controller
             $brands = Brand::all();
         } else {
             // retrieve it as a collection
-            $brands = Brand::where('id','=',$account->brand->id)->get();
+            $brands = Brand::where('id', '=', $account->brand->id)->get();
         }
 
         return Datatables::of($brands)
-            ->addColumn('actions', function ($brand) {
-                $actions = \Form::open(['route' => ['admin.brands.destroy', $brand->id], 'method' => 'DELETE', 'class' => 'form-inline']);
-                $actions .= ' <a href="brands/' . $brand->id .
-                    '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
-                    trans('misc.button.show').'</a> ';
-                $actions .= ' <a href="brands/' . $brand->id .
-                    '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
-                    trans('misc.button.edit').'</a> ';
-                $actions .= \Form::button('<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'), ['type' => 'submit', 'class' => 'btn btn-danger btn-xs']);
-                $actions .= \Form::close();
-                return $actions;
-            })
-            ->addColumn('logo', function ($brand) {
-                $logo = '<img src="/admin/logo/' . $brand->id .'" height="40px"/>';
-                return $logo;
-            })
+            ->addColumn(
+                'actions',
+                function ($brand) {
+                    $actions = \Form::open(
+                        [
+                            'route' => [
+                                'admin.brands.destroy',
+                                $brand->id
+                            ],
+                            'method' => 'DELETE',
+                            'class' => 'form-inline'
+                        ]
+                    );
+                    $actions .= ' <a href="brands/' . $brand->id .
+                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        trans('misc.button.show').'</a> ';
+                    $actions .= ' <a href="brands/' . $brand->id .
+                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                        trans('misc.button.edit').'</a> ';
+                    $actions .= \Form::button(
+                        '<i class="glyphicon glyphicon-remove"></i> '
+                        . trans('misc.button.delete'),
+                        [
+                            'type' => 'submit',
+                            'class' => 'btn btn-danger btn-xs'
+                        ]
+                    );
+                    $actions .= \Form::close();
+                    return $actions;
+                }
+            )
+            ->addColumn(
+                'logo',
+                function ($brand) {
+                    $logo = '<img src="/admin/logo/' . $brand->id .'" height="40px"/>';
+                    return $logo;
+                }
+            )
             ->make(true);
     }
 
@@ -105,8 +127,7 @@ class BrandsController extends Controller
         $account = $this->auth_user->account;
 
 
-        if ($request->hasFile('logo') && $request->file('logo')->isValid())
-        {
+        if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
             $errors = [];
 
             if (!Brand::checkUploadedLogo($request->file('logo'), $errors)) {
@@ -118,9 +139,7 @@ class BrandsController extends Controller
             // all ok
             $input['logo'] = file_get_contents($request->file('logo')->getRealPath());
 
-        }
-        else
-        {
+        } else {
             return Redirect::route('admin.brands.create')
                 ->withInput($input)
                 ->withErrors(['logo' => 'Something went wrong, while uploading the logo']);
@@ -128,30 +147,30 @@ class BrandsController extends Controller
 
         try {
             // begin transaction pass both $input and $account to the closure
-            DB::transaction(function () use ($input, $account) {
+            DB::transaction(
+                function () use ($input, $account) {
 
-                $brand = Brand::create($input);
-                if (!$brand) {
-                    // when we can't save the brand, throw an exception
-                    throw new Exception("Couldn't create new brand");
-                }
+                    $brand = Brand::create($input);
+                    if (!$brand) {
+                        // when we can't save the brand, throw an exception
+                        throw new Exception("Couldn't create new brand");
+                    }
 
-                // if our current account isn't the system account,
-                // link the new brand to the current account
-                if (!$account->isSystemAccount()) {
-                    $account->brand_id = $brand->id;
-                    $result = $account->save();
+                    // if our current account isn't the system account,
+                    // link the new brand to the current account
+                    if (!$account->isSystemAccount()) {
+                        $account->brand_id = $brand->id;
+                        $result = $account->save();
 
-                    // when we can't save the account, throw an exception
-                    // DB::transaction will automatically rollback
-                    if (!$result) {
-                        throw new Exception('Something went wrong, while linking the brand to the account');
+                        // when we can't save the account, throw an exception
+                        // DB::transaction will automatically rollback
+                        if (!$result) {
+                            throw new Exception('Something went wrong, while linking the brand to the account');
+                        }
                     }
                 }
-            });
-        }
-        catch (Exception $e)
-        {
+            );
+        } catch (Exception $e) {
             return Redirect::route('admin.brands.create')
                 ->withInput($input)
                 ->with('message', $e->getMessage());
@@ -209,8 +228,7 @@ class BrandsController extends Controller
     {
 
         // may we edit this brand (is the brand connected to our account)
-        if (!$brand->mayEdit($this->auth_user))
-        {
+        if (!$brand->mayEdit($this->auth_user)) {
             return Redirect::route('admin.brands.show', $brand->id)
                 ->with('message', 'User is not authorized to edit this brand.');
         }
@@ -218,8 +236,7 @@ class BrandsController extends Controller
         // if we are authorized, but the brand is the default brand and we
         // are not part of the system account, we probably want to create a new
         // brand instead
-        if ($brand->isDefault() && !$this->auth_user->account->isSystemAccount())
-        {
+        if ($brand->isDefault() && !$this->auth_user->account->isSystemAccount()) {
             return Redirect::route('admin.brands.create');
         }
 
@@ -239,16 +256,14 @@ class BrandsController extends Controller
     {
 
         // may we edit this brand
-        if (!$brand->mayEdit($this->auth_user))
-        {
+        if (!$brand->mayEdit($this->auth_user)) {
             return Redirect::route('admin.brands.show', $brand->id)
                 ->with('message', 'User is not authorized to edit this brand.');
         }
 
         $input = array_except(Input::all(), '_method');
 
-        if ($request->hasFile('logo') && $request->file('logo')->isValid())
-        {
+        if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
             $errors = [];
 
             if (!Brand::checkUploadedLogo($request->file('logo'), $errors)) {
