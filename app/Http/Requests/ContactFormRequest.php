@@ -3,9 +3,38 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Http\Requests\Request;
+use Validator;
 
 class ContactFormRequest extends Request
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        Validator::extend(
+            'emails',
+            function ($attribute, $value, $parameters) {
+                $rules = [
+                    'email' => 'required|email',
+                ];
+
+                $value = explode(',', $value);
+
+                foreach ($value as $email) {
+                    $data = [
+                        'email' => $email
+                    ];
+                    $validator = Validator::make($data, $rules);
+                    if ($validator->fails()) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        );
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      * @return bool
@@ -26,7 +55,7 @@ class ContactFormRequest extends Request
                 return [
                     'reference' => 'required|unique:contacts,reference',
                     'name'      => 'required',
-                    'email'     => 'required|email',
+                    'email'     => 'required|emails',
                     'rpc_host'  => 'sometimes|url',
                     'enabled'   => 'required|boolean',
                 ];
@@ -35,7 +64,7 @@ class ContactFormRequest extends Request
                 return [
                     'reference' => 'required|unique:contacts,reference,'. $this->id,
                     'name'      => 'required',
-                    'email'     => 'required|email',
+                    'email'     => 'required|emails',
                     'rpc_host'  => 'sometimes|url',
                     'enabled'   => 'required|boolean',
                 ];
