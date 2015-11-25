@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use AbuseIO\ICF;
 
 class NetblocksTableSeeder extends Seeder
 {
@@ -14,8 +13,8 @@ class NetblocksTableSeeder extends Seeder
         $netblocks = [
             [
                 'id' => 1,
-                'first_ip' => ICF::inetPtoi('0.0.0.0'),
-                'last_ip' => ICF::inetPtoi('255.255.255.255'),
+                'first_ip' => '0.0.0.0',
+                'last_ip' => '255.255.255.255',
                 'description' => 'This is a description',
                 'contact_id' => 1,
                 'enabled' => 1,
@@ -24,8 +23,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'first_ip' => ICF::inetPtoi('10.0.2.0'),
-                'last_ip' => ICF::inetPtoi('10.0.2.255'),
+                'first_ip' => '10.0.2.0',
+                'last_ip' => '10.0.2.255',
                 'description' => 'This is a description',
                 'contact_id' => 2,
                 'enabled' => 1,
@@ -34,8 +33,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'first_ip' => ICF::inetPtoi('10.0.3.0'),
-                'last_ip' => ICF::inetPtoi('10.0.3.255'),
+                'first_ip' => '10.0.3.0',
+                'last_ip' => '10.0.3.255',
                 'description' => 'This is a description',
                 'contact_id' => 2,
                 'enabled' => 1,
@@ -44,8 +43,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'first_ip' => ICF::inetPtoi('2001:0000:0000:0000:0000:0000:0000:0000'),
-                'last_ip' => ICF::inetPtoi('2001:ffff:ffff:ffff:ffff:ffff:ffff:ffff'),
+                'first_ip' => '2001:0000:0000:0000:0000:0000:0000:0000',
+                'last_ip' => '2001:ffff:ffff:ffff:ffff:ffff:ffff:ffff',
                 'description' => 'This is a description',
                 'contact_id' => 1,
                 'enabled' => 1,
@@ -54,8 +53,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'first_ip' => ICF::inetPtoi('2001:0666:0000:0000:0000:0000:0000:0000'),
-                'last_ip' => ICF::inetPtoi('2001:0666:ffff:ffff:ffff:ffff:ffff:ffff'),
+                'first_ip' => '2001:0666:0000:0000:0000:0000:0000:0000',
+                'last_ip' => '2001:0666:ffff:ffff:ffff:ffff:ffff:ffff',
                 'description' => 'This is a description',
                 'contact_id' => 2,
                 'enabled' => 1,
@@ -64,8 +63,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 6,
-                'first_ip' => ICF::inetPtoi('2001:0777:0000:0000:0000:0000:0000:0000'),
-                'last_ip' => ICF::inetPtoi('2001:0777:ffff:ffff:ffff:ffff:ffff:ffff'),
+                'first_ip' => '2001:0777:0000:0000:0000:0000:0000:0000',
+                'last_ip' => '2001:0777:ffff:ffff:ffff:ffff:ffff:ffff',
                 'description' => 'This is a description',
                 'contact_id' => 3,
                 'enabled' => 1,
@@ -74,8 +73,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 7,
-                'first_ip' => ICF::inetPtoi('10.0.4.0'),
-                'last_ip' => ICF::inetPtoi('10.0.4.255'),
+                'first_ip' => '10.0.4.0',
+                'last_ip' => '10.0.4.255',
                 'description' => 'This is a description',
                 'contact_id' => 2,
                 'enabled' => 1,
@@ -84,8 +83,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 8,
-                'first_ip' => ICF::inetPtoi('10.0.5.0'),
-                'last_ip' => ICF::inetPtoi('10.0.5.255'),
+                'first_ip' => '10.0.5.0',
+                'last_ip' => '10.0.5.255',
                 'description' => 'This is a description',
                 'contact_id' => 3,
                 'enabled' => 1,
@@ -94,8 +93,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 9,
-                'first_ip' => ICF::inetPtoi('10.0.6.0'),
-                'last_ip' => ICF::inetPtoi('10.0.6.255'),
+                'first_ip' => '10.0.6.0',
+                'last_ip' => '10.0.6.255',
                 'description' => 'This is a description',
                 'contact_id' => 3,
                 'enabled' => 1,
@@ -104,8 +103,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 10,
-                'first_ip' => ICF::inetPtoi('10.0.7.0'),
-                'last_ip' => ICF::inetPtoi('10.0.7.255'),
+                'first_ip' => '10.0.7.0',
+                'last_ip' => '10.0.7.255',
                 'description' => 'This is a description',
                 'contact_id' => 3,
                 'enabled' => 1,
@@ -114,8 +113,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 11,
-                'first_ip' => ICF::inetPtoi('10.0.8.0'),
-                'last_ip' => ICF::inetPtoi('10.0.8.255'),
+                'first_ip' => '10.0.8.0',
+                'last_ip' => '10.0.8.255',
                 'description' => 'This is a description',
                 'contact_id' => 3,
                 'enabled' => 1,
@@ -124,8 +123,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 12,
-                'first_ip' => ICF::inetPtoi('10.0.9.0'),
-                'last_ip' => ICF::inetPtoi('10.0.9.255'),
+                'first_ip' => '10.0.9.0',
+                'last_ip' => '10.0.9.255',
                 'description' => 'This is a description',
                 'contact_id' => 3,
                 'enabled' => 1,
@@ -134,8 +133,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 21,
-                'first_ip' => ICF::inetPtoi('10.1.11.0'),
-                'last_ip' => ICF::inetPtoi('10.1.11.255'),
+                'first_ip' => '10.1.11.0',
+                'last_ip' => '10.1.11.255',
                 'description' => 'This is a description',
                 'contact_id' => 11,
                 'enabled' => 1,
@@ -144,8 +143,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 22,
-                'first_ip' => ICF::inetPtoi('10.1.12.12'),
-                'last_ip' => ICF::inetPtoi('10.1.12.14'),
+                'first_ip' => '10.1.12.12',
+                'last_ip' => '10.1.12.14',
                 'description' => 'This is a description',
                 'contact_id' => 12,
                 'enabled' => 1,
@@ -154,8 +153,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 13,
-                'first_ip' => ICF::inetPtoi('10.1.13.0'),
-                'last_ip' => ICF::inetPtoi('10.1.13.255'),
+                'first_ip' => '10.1.13.0',
+                'last_ip' => '10.1.13.255',
                 'description' => 'This is a description',
                 'contact_id' => 13,
                 'enabled' => 1,
@@ -164,8 +163,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 14,
-                'first_ip' => ICF::inetPtoi('10.1.14.0'),
-                'last_ip' => ICF::inetPtoi('10.1.14.127'),
+                'first_ip' => '10.1.14.0',
+                'last_ip' => '10.1.14.127',
                 'description' => 'This is a description',
                 'contact_id' => 14,
                 'enabled' => 1,
@@ -174,8 +173,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 15,
-                'first_ip' => ICF::inetPtoi('10.1.15.0'),
-                'last_ip' => ICF::inetPtoi('10.1.15.255'),
+                'first_ip' => '10.1.15.0',
+                'last_ip' => '10.1.15.255',
                 'description' => 'This is a description',
                 'contact_id' => 15,
                 'enabled' => 1,
@@ -184,8 +183,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 16,
-                'first_ip' => ICF::inetPtoi('10.1.16.128'),
-                'last_ip' => ICF::inetPtoi('10.1.16.195'),
+                'first_ip' => '10.1.16.128',
+                'last_ip' => '10.1.16.195',
                 'description' => 'This is a description',
                 'contact_id' => 16,
                 'enabled' => 1,
@@ -194,8 +193,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 17,
-                'first_ip' => ICF::inetPtoi('10.1.17.0'),
-                'last_ip' => ICF::inetPtoi('10.1.17.255'),
+                'first_ip' => '10.1.17.0',
+                'last_ip' => '10.1.17.255',
                 'description' => 'This is a description',
                 'contact_id' => 17,
                 'enabled' => 1,
@@ -204,8 +203,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 18,
-                'first_ip' => ICF::inetPtoi('10.1.18.0'),
-                'last_ip' => ICF::inetPtoi('10.1.18.255'),
+                'first_ip' => '10.1.18.0',
+                'last_ip' => '10.1.18.255',
                 'description' => 'This is a description',
                 'contact_id' => 18,
                 'enabled' => 1,
@@ -214,8 +213,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 19,
-                'first_ip' => ICF::inetPtoi('10.1.19.0'),
-                'last_ip' => ICF::inetPtoi('10.1.19.255'),
+                'first_ip' => '10.1.19.0',
+                'last_ip' => '10.1.19.255',
                 'description' => 'This is a description',
                 'contact_id' => 19,
                 'enabled' => 1,
@@ -224,8 +223,8 @@ class NetblocksTableSeeder extends Seeder
             ],
             [
                 'id' => 20,
-                'first_ip' => ICF::inetPtoi('10.1.19.5'),
-                'last_ip' => ICF::inetPtoi('10.1.19.9'),
+                'first_ip' => '10.1.19.5',
+                'last_ip' => '10.1.19.9',
                 'description' => 'This is a description',
                 'contact_id' => 19,
                 'enabled' => 1,

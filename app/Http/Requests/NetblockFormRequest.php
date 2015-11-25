@@ -3,7 +3,6 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Http\Requests\Request;
-use ICF;
 
 class NetblockFormRequest extends Request
 {
@@ -27,12 +26,9 @@ class NetblockFormRequest extends Request
                 return [
                     /*
                      * TODO : marksg: not working as intended (yet)
-                     * For now, no mixed unique validation
                      */
-                    //'first_ip'      => 'required|ip|unique:netblocks,first_ip,last_ip,'.$this->last_ip.',first_ip,'.$this->first_ip,
-                    //'first_ip'      => 'required|ip|unique_with:netblocks,last_ip',
-                    'first_ip'      => 'required|ip',
-                    'last_ip'       => 'required|ip',
+                    'first_ip'      => "required|ip|unique:netblocks,first_ip,NULL,id,last_ip,{$this->last_ip}",
+                    'last_ip'       => "required|ip|unique:netblocks,last_ip,NULL,id,first_ip,{$this->first_ip}",
                     'contact_id'    => 'required|integer',
                     'description'   => 'required',
                     'enabled'       => 'required|boolean',
@@ -40,8 +36,8 @@ class NetblockFormRequest extends Request
             case 'PUT':
             case 'PATCH':
                 return [
-                    'first_ip'      => 'required|ip|unique:netblocks,first_ip,'. $this->id,
-                    'last_ip'       => 'required|ip',
+                    'first_ip'      => "required|ip|unique:netblocks,first_ip,{$this->id},id,last_ip,{$this->last_ip}",
+                    'last_ip'       => "required|ip|unique:netblocks,last_ip,{$this->id},id,first_ip,{$this->first_ip}",
                     'contact_id'    => 'required|integer',
                     'description'   => 'required',
                     'enabled'       => 'required|boolean',

@@ -62,8 +62,8 @@ class FindContact extends Job
     public static function byIP($ip)
     {
         $result = Netblock::
-        where('first_ip', '<=', ICF::inetPtoi($ip))
-            ->where('last_ip', '>=', ICF::inetPtoi($ip))
+            where('first_ip_int', '<=', ICF::inetPtoi($ip))
+            ->where('last_ip_int', '>=', ICF::inetPtoi($ip))
             ->where('enabled', '=', true)
             ->orderBy('first_ip', 'desc')
             ->orderBy('last_ip', 'asc')

@@ -86,8 +86,11 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'first_ip' => [
+            'unique' => 'The first and last ip address combination already exists.',
+        ],
+        'last_ip' => [
+            'unique' => 'The first and last ip address combination already exists.',
         ],
     ],
 

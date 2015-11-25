@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Controllers;
 
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\NetblockFormRequest;
 use AbuseIO\Models\Netblock;
@@ -10,9 +11,7 @@ use AbuseIO\Models\Contact;
 use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
-use ICF;
 use Form;
-use Illuminate\Http\Request;
 
 class NetblocksController extends Controller
 {
@@ -35,16 +34,6 @@ class NetblocksController extends Controller
             ->leftJoin('contacts', 'contacts.id', '=', 'netblocks.contact_id');
 
         return Datatables::of($netblocks)
-            ->filter(
-                function ($query) use ($request) {
-                    $searchValue = $request->get('search')['value'];
-
-                    if (!filter_var($searchValue, FILTER_VALIDATE_IP) === false) {
-                        $query->where('first_ip', '<=', ICF::inetPtoi($searchValue));
-                        $query->where('last_ip', '>=', ICF::inetPtoi($searchValue));
-                    }
-                }
-            )
             ->addColumn(
                 'actions',
                 function ($netblock) {
@@ -56,13 +45,13 @@ class NetblocksController extends Controller
                         ]
                     );
                     $actions .= ' <a href="netblocks/' . $netblock->id .
-                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
                         trans('misc.button.show').'</a> ';
                     $actions .= ' <a href="netblocks/' . $netblock->id .
-                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                        '/edit" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> '.
                         trans('misc.button.edit').'</a> ';
                     $actions .= Form::button(
-                        '<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'),
+                        '<span class="glyphicon glyphicon-remove"></span> '. trans('misc.button.delete'),
                         [
                             'type' => 'submit',
                             'class' => 'btn btn-danger btn-xs'
@@ -147,7 +136,7 @@ class NetblocksController extends Controller
         Netblock::create($input);
 
         return Redirect::route('admin.netblocks.index')
-            ->with('message', 'Netblock has been created');
+            ->with('message', trans('netblocks.msg.created'));
     }
 
     /**
@@ -185,13 +174,13 @@ class NetblocksController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Netblock $netblock)
+    public function update(NetblockFormRequest $request, Netblock $netblock)
     {
         $input = array_except(Input::all(), '_method');
         $netblock->update($input);
 
         return Redirect::route('admin.netblocks.show', $netblock->id)
-            ->with('message', 'Netblock has been updated.');
+            ->with('message', trans('netblocks.msg.updated'));
     }
 
     /**
@@ -204,6 +193,6 @@ class NetblocksController extends Controller
         $netblock->delete();
 
         return Redirect::route('admin.netblocks.index')
-            ->with('message', 'Netblock has been deleted.');
+            ->with('message', trans('netblocks.msg.deleted'));
     }
 }

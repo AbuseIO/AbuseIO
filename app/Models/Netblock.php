@@ -14,8 +14,12 @@ use ICF;
  */
 class Netblock extends Model
 {
-
     protected $table    = 'netblocks';
+
+    protected $appends = [
+        'first_ip_int',
+        'last_ip_int'
+    ];
 
     protected $fillable = [
         'first_ip',
@@ -36,24 +40,13 @@ class Netblock extends Model
     }
 
     // Accessors
-    public function getFirstIpAttribute($value)
+    public function getFirstIpIntAttribute()
     {
-        return ICF::inetItop($value);
+        return ICF::InetPtoi($this->first_ip);
     }
 
-    public function getLastIpAttribute($value)
+    public function getLastIpIntAttribute()
     {
-        return ICF::inetItop($value);
-    }
-
-    // Mutators
-    public function setFirstIpAttribute($value)
-    {
-        $this->attributes['first_ip'] = ICF::inetPtoi($value);
-    }
-
-    public function setLastIpAttribute($value)
-    {
-        $this->attributes['last_ip'] = ICF::inetPtoi($value);
+        return ICF::InetPtoi($this->last_ip);
     }
 }
