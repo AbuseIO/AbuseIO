@@ -51,19 +51,19 @@ class TicketsController extends Controller
                     return $ticket->events->count();
                 }
             )
-            ->addColumn(
+            ->editColumn(
                 'type_id',
                 function ($ticket) {
                     return trans('types.type.' . $ticket->type_id . '.name');
                 }
             )
-            ->addColumn(
+            ->editColumn(
                 'class_id',
                 function ($ticket) {
                     return trans('classifications.' . $ticket->class_id . '.name');
                 }
             )
-            ->addColumn(
+            ->editColumn(
                 'status_id',
                 function ($ticket) {
                     return trans('types.status.' . $ticket->status_id . '.name');

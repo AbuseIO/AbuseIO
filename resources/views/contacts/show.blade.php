@@ -14,6 +14,9 @@
     <dt>{{ trans('misc.database_id') }}</dt>
     <dd>{{ $contact->id }}</dd>
 
+    <dt>{{ trans_choice('misc.accounts', 1) }}</dt>
+    <dd>{{ $contact->account->name }}</dd>
+
     <dt>{{ trans('contacts.reference') }}</dt>
     <dd>{{ $contact->reference }}</dd>
 

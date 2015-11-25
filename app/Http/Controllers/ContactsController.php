@@ -6,6 +6,7 @@ use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ContactFormRequest;
 use AbuseIO\Models\Contact;
+use AbuseIO\Models\Account;
 use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
@@ -59,6 +60,12 @@ class ContactsController extends Controller
                     );
                     $actions .= Form::close();
                     return $actions;
+                }
+            )
+            ->editColumn(
+                'account_id',
+                function ($contact) {
+                    return $contact->account->name;
                 }
             )
             // Replace auto_notify values for something readable.
