@@ -80,7 +80,7 @@
                     { data: 'domain' },
                     { data: 'type_id' },
                     { data: 'class_id' },
-                    { data: null },
+                    { data: 'event_count' },
                     { data: 'status_id' },
                     { data: 'actions', orderable: false, searchable: false, class: "text-right" }
                 ]
