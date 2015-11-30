@@ -11,15 +11,16 @@ return [
                          process.',
 
     // Navigation bar
-    'language'   => 'Language',
-    'home'       => 'Home',
-    'contacts'   => 'Contacts',
-    'netblocks'  => 'Netblocks',
-    'domains'    => 'Domains',
-    'tickets'    => 'Tickets',
-    'search'     => 'Search',
-    'analytics'  => 'Analytics',
-    'nav_brands' => 'Brands',
+    'language'     => 'Language',
+    'home'         => 'Home',
+    'contacts'     => 'Contacts',
+    'netblocks'    => 'Netblocks',
+    'domains'      => 'Domains',
+    'tickets'      => 'Tickets',
+    'search'       => 'Search',
+    'analytics'    => 'Analytics',
+    'nav_brands'   => 'Brands',
+    'nav_accounts' => 'Accounts',
 
     // Button labels
     'button.show'           => 'Show',

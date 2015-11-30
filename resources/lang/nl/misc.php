@@ -11,15 +11,16 @@ return [
                          hiervan te verbeteren en automatiseren.',
 
     // Navigation bar
-    'language'   => 'Taal',
-    'home'       => 'Home',
-    'contacts'   => 'Contacten',
-    'netblocks'  => 'Netwerk Blokken',
-    'domains'    => 'Domeinen',
-    'tickets'    => 'Tickets',
-    'search'     => 'Zoeken',
-    'analytics'  => 'Statistieken',
-    'nav_brands' => 'Merken',
+    'language'     => 'Taal',
+    'home'         => 'Home',
+    'contacts'     => 'Contacten',
+    'netblocks'    => 'Netwerk Blokken',
+    'domains'      => 'Domeinen',
+    'tickets'      => 'Tickets',
+    'search'       => 'Zoeken',
+    'analytics'    => 'Statistieken',
+    'nav_brands'   => 'Merken',
+    'nav_accounts' => 'Accounts',
 
 
     // Button labels

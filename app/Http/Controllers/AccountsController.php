@@ -10,6 +10,7 @@ use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use AbuseIO\Models\User;
+use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
 
@@ -35,6 +36,60 @@ class AccountsController extends Controller
         return view('accounts.index')
             ->with('accounts', $accounts)
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $auth_account = $this->auth_user->account;
+
+        //return all accounts when we are in the system account
+        //in a normal account only show the current linked one
+
+        if ($auth_account->isSystemAccount()) {
+            $accounts = Account::all();
+        } else {
+            // retrieve the account as a collection
+            $accounts = Account::where('id', '=', $auth_account->id)->get();
+        }
+
+        return Datatables::of($accounts)
+            ->addColumn(
+                'actions',
+                function ($account) {
+                    $actions = \Form::open(
+                        [
+                            'route' => [
+                                'admin.accounts.destroy',
+                                $account->id
+                            ],
+                            'method' => 'DELETE',
+                            'class' => 'form-inline'
+                        ]
+                    );
+                    $actions .= ' <a href="accounts/' . $account->id .
+                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        trans('misc.button.show').'</a> ';
+                    $actions .= ' <a href="accounts/' . $account->id .
+                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                        trans('misc.button.edit').'</a> ';
+                    $actions .= \Form::button(
+                        '<i class="glyphicon glyphicon-remove"></i> '
+                        . trans('misc.button.delete'),
+                        [
+                            'type' => 'submit',
+                            'class' => 'btn btn-danger btn-xs'
+                        ]
+                    );
+                    $actions .= \Form::close();
+                    return $actions;
+                }
+            )
+            ->make(true);
     }
 
     /**
@@ -91,6 +146,12 @@ class AccountsController extends Controller
      */
     public function edit(Account $account)
     {
+        // may we edit this brand (is the brand connected to our account)
+        if (!$account->mayEdit($this->auth_user)) {
+            return Redirect::route('admin.accounts.show', $account->id)
+                ->with('message', 'User is not authorized to edit this account.');
+        }
+
         $brands = Brand::lists('name', 'id');
 
         return view('accounts.edit')
@@ -113,6 +174,12 @@ class AccountsController extends Controller
      */
     public function update(AccountFormRequest $request, Account $account)
     {
+        // may we edit this brand (is the brand connected to our account)
+        if (!$account->mayEdit($this->auth_user)) {
+            return Redirect::route('admin.accounts.show', $account->id)
+                ->with('message', 'User is not authorized to edit this account.');
+        }
+
         $input = array_except(Input::all(), '_method');
         $account->update($input);
 
@@ -128,6 +195,13 @@ class AccountsController extends Controller
      */
     public function destroy(Account $account)
     {
+        // may we edit this brand (is the brand connected to our account)
+        if (!$account->mayDestroy($this->auth_user)) {
+            return Redirect::route('admin.accounts.index')
+                ->with('message', 'User is not authorized to edit this account.');
+        }
+
+
         // Do not allow the default admin user account to be deleted.
         if ($account->id == 1) {
             return Redirect::back()

@@ -8,6 +8,16 @@ Route::group(
         'as' => 'accounts.',
     ],
     function () {
+        // Search contacts
+        Route::get(
+            'search/{one?}/{two?}/{three?}/{four?}/{five?}',
+            [
+                'middleware' => 'permission:accounts_view',
+                'as' => 'search',
+                'uses' => 'AccountsController@search'
+            ]
+        );
+
         // Access to index list
         route::get(
             '',

@@ -36,6 +36,44 @@ class Account extends Model
         return ($this->id == 1);
     }
 
+    /**
+     * Checks if the current user may edit the account
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function mayEdit(User $user)
+    {
+        $auth_account = $user->account;
+
+        // System admin may always edit
+        if ($auth_account->isSystemAccount() && $user->hasRole('admin'))
+        {
+            return true;
+        }
+
+        if ($auth_account->id == $this->id && $user->hasRole('admin'))
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if the current user may destroy the account
+     * todo: currently use the mayEdit method to check
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function mayDestroy(User $user)
+    {
+        return $this->mayEdit($user);
+    }
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Relationship Methods
