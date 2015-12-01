@@ -77,6 +77,19 @@ class AccountsController extends Controller
                     $actions .= ' <a href="accounts/' . $account->id .
                         '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
                         trans('misc.button.edit').'</a> ';
+                    if ($account->disabled) {
+                        $actions .= ' <a href="accounts/' . $account->id .
+                            '/enable'.
+                            '" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok-circle"></i> '.
+                            trans('misc.button.enable')
+                            .'</a> ';
+                    } else {
+                        $actions .= ' <a href="accounts/' . $account->id .
+                            '/disable'.
+                            '" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-ban-circle"></i> '.
+                            trans('misc.button.disable')
+                            .'</a> ';
+                    }
                     $actions .= \Form::button(
                         '<i class="glyphicon glyphicon-remove"></i> '
                         . trans('misc.button.delete'),
@@ -163,11 +176,6 @@ class AccountsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /**
-     * Update the specified resource in storage.
      * @param  AccountFormRequest $request FormRequest
      * @param  Account            $account Account
      * @return \Illuminate\Http\Response
@@ -185,6 +193,47 @@ class AccountsController extends Controller
 
         return Redirect::route('admin.accounts.show', $account->id)
             ->with('message', 'Account has been updated.');
+    }
+
+
+    /**
+     * Disable the account
+     *
+     * @param Account $account
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function disable(Account $account)
+    {
+        if (!$account->mayDisable($this->auth_user)) {
+            return Redirect::route('admin.accounts.index')
+                ->with('message', 'User is not authorized to disable account "'. $account->name . '"');
+        }
+
+        $account->disabled = true;
+        $account->save();
+
+        return Redirect::route('admin.accounts.index')
+            ->with('message', 'Account "'. $account->name . '" has been disabled');
+    }
+
+    /**
+     * Enable the account
+     *
+     * @param Account $account
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function enable(Account $account)
+    {
+        if (!$account->mayEnable($this->auth_user)) {
+            return Redirect::route('admin.accounts.index')
+                ->with('message', 'User is not authorized to enable account "'. $account->name . '"');
+        }
+
+        $account->disabled = false;
+        $account->save();
+
+        return Redirect::route('admin.accounts.index')
+            ->with('message', 'Account "'. $account->name . '" has been enabled');
     }
 
     /**

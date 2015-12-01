@@ -34,6 +34,8 @@ return [
     'button.cancel'         => 'Annuleren',
     'button.filters'        => 'Filters',
     'button.reset'          => 'Reset',
+    'button.enable'         => 'Aanzetten ',
+    'button.disable'        => 'Uitzetten',
 
     // Miscellaneous
     'all'               => 'Alle',

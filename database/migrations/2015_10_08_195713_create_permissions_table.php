@@ -86,6 +86,17 @@ class CreatePermissionsTable extends Migration
             }
         }
 
+        // disable / enable for accounts and users
+        foreach (['accounts', 'users'] as $controller) {
+            foreach (['disable', 'enable'] as $action) {
+                $permissions[] = [
+                    'permission_title'          => "{$action} {$controller}",
+                    'permission_slug'           => "{$controller}_{$action}",
+                    'permission_description'    => "Allow to {$action} {$controller}",
+                ];
+            }
+        }
+
         // Write permissions into database
         DB::table('permissions')->insert($permissions);
 

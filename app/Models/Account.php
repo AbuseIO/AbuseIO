@@ -46,13 +46,14 @@ class Account extends Model
     {
         $auth_account = $user->account;
 
-        // System admin may always edit
-        if ($auth_account->isSystemAccount() && $user->hasRole('admin'))
+        // System user
+        if ($auth_account->isSystemAccount())
         {
             return true;
         }
 
-        if ($auth_account->id == $this->id && $user->hasRole('admin'))
+        // you can only edit your own account
+        if ($auth_account->id == $this->id)
         {
             return true;
         } else {
@@ -72,6 +73,39 @@ class Account extends Model
         return $this->mayEdit($user);
     }
 
+
+    /**
+     * Checks if the current user may disable the account
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function mayDisable(User $user)
+    {
+        $auth_account = $user->account;
+
+        // never disable the system account
+        if ($this->isSystemAccount())
+        {
+            return false;
+        }
+
+        // only the system account may disable/enable accounts
+        return ($auth_account->isSystemAccount());
+    }
+
+
+    /**
+     * Check if the user may enable the account
+     * (use the same logic as mayDisable() )
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function mayEnable(User $user)
+    {
+        return $this->mayDisable($user);
+    }
 
 
     /*

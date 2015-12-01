@@ -66,6 +66,26 @@ Route::group(
             ]
         );
 
+        // Access to disable object
+        route::get(
+            '{users}/disable',
+            [
+                'middleware' => 'permission:users_disable',
+                'as' => 'disable',
+                'uses' => 'UsersController@disable'
+            ]
+        );
+
+        // Access to enable object
+        route::get(
+            '{users}/enable',
+            [
+                'middleware' => 'permission:users_enable',
+                'as' => 'enable',
+                'uses' => 'UsersController@enable'
+            ]
+        );
+
         // Access to edit object
         route::get(
             '{users}/edit',

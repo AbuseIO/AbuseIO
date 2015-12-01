@@ -33,6 +33,8 @@ return [
     'button.cancel'         => 'Cancel',
     'button.filters'        => 'Filters',
     'button.reset'          => 'Reset',
+    'button.enable'         => 'Enable ',
+    'button.disable'        => 'Disable',
 
     // Miscellaneous
     'all'               => 'All',

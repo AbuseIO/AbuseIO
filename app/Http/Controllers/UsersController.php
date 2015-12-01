@@ -51,6 +51,16 @@ class UsersController extends Controller
                     $actions .= ' <a href="users/' . $user->id .
                         '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
                         trans('misc.button.edit').'</a> ';
+                    if ($user->disabled)
+                    {
+                        $actions .= ' <a href="users/' . $user->id .
+                            '/enable" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok-circle"></i> '.
+                            trans('misc.button.enable').'</a> ';
+                    } else {
+                        $actions .= ' <a href="users/' . $user->id .
+                            '/disable" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-ban-circle"></i> '.
+                            trans('misc.button.disable').'</a> ';
+                    }
                     $actions .= Form::button(
                         '<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'),
                         [
@@ -152,6 +162,46 @@ class UsersController extends Controller
 
         return Redirect::route('admin.users.show', $user->id)
             ->with('message', 'User has been updated.');
+    }
+
+    /**
+     * Enable the user
+     *
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function enable(User $user)
+    {
+        if (!$user->mayEnable($this->auth_user)) {
+            return Redirect::route('admin.users.index')
+                ->with('message', 'User is not authorized to enable user "'. $user->fullName() . '"');
+        }
+
+        $user->disabled = false;
+        $user->save();
+
+        return Redirect::route('admin.users.index')
+            ->with('message', 'User "'. $user->fullName() . '" has been enabled');
+    }
+
+    /**
+     * Disable the user
+     *
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function disable(User $user)
+    {
+        if (!$user->mayDisable($this->auth_user)) {
+            return Redirect::route('admin.users.index')
+                ->with('message', 'User is not authorized to disable user "'. $user->fullName() . '"');
+        }
+
+        $user->disabled = true;
+        $user->save();
+
+        return Redirect::route('admin.users.index')
+            ->with('message', 'User "'. $user->fullName() . '" has been disabled');
     }
 
     /**

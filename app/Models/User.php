@@ -175,6 +175,44 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $result;
     }
 
+    /**
+     * Check to see if we can disable the user
+     *
+     * @param User $auth_user
+     * @return bool
+     */
+    public function mayDisable(User $auth_user)
+    {
+        $account = $this->account;
+        $auth_account = $auth_user->account;
+
+        // can't disable/enable ourselves
+        if ($auth_user->id == $this->id)
+        {
+            return false;
+        }
+
+        // can only enable/disable users from our own account, except for the systemaccount
+        if ($auth_account->id == $account->id || $auth_account->isSystemAccount())
+        {
+            return true;
+        }
+
+        // all other cases
+        return false;
+    }
+
+    /**
+     * Check to see if we can enable the user
+     * (using the logic in mayDisable())
+     *
+     * @param User $auth_user
+     * @return bool
+     */
+    public function mayEnable(User $auth_user)
+    {
+        return $this->mayDisable($auth_user);
+    }
 
     /*
     |--------------------------------------------------------------------------
