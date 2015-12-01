@@ -62,6 +62,8 @@
 						</ul>
 					</li>
 				</ul>
+
+				@if ($auth_user->hasRole('admin'))
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> {{ trans('misc.settings') }} <span class="caret"></span></a>
@@ -73,6 +75,8 @@
 						</ul>
 					</li>
 				</ul>
+				@endif
+
             </div>
         </div>
     </nav>
