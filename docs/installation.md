@@ -81,7 +81,7 @@ chmod 775 abuseio/bootstrap/cache
 ##### /etc/supervisor/conf.d/abuseio_queue_email.conf
 ```
 [program:abuseio_queue_emails]
-command=php artisan queue:listen --tries=1 --sleep=3 --memory=128 --delay=0 --queue=emails
+command=php artisan queue:listen --timeout=300 --tries=1 --sleep=3 --memory=256 --delay=0 --queue=emails
 directory=/opt/abuseio
 stdout_logfile=/opt/abuseio/storage/logs/queue-emails.log
 redirect_stderr=true
