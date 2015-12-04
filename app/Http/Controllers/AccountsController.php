@@ -72,21 +72,21 @@ class AccountsController extends Controller
                         ]
                     );
                     $actions .= ' <a href="accounts/' . $account->id .
-                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
                         trans('misc.button.show').'</a> ';
                     $actions .= ' <a href="accounts/' . $account->id .
-                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                        '/edit" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> '.
                         trans('misc.button.edit').'</a> ';
                     if ($account->disabled) {
                         $actions .= ' <a href="accounts/' . $account->id .
                             '/enable'.
-                            '" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok-circle"></i> '.
+                            '" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-ok-circle"></span> '.
                             trans('misc.button.enable')
                             .'</a> ';
                     } else {
                         $actions .= ' <a href="accounts/' . $account->id .
                             '/disable'.
-                            '" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-ban-circle"></i> '.
+                            '" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-ban-circle"></span> '.
                             trans('misc.button.disable')
                             .'</a> ';
                     }

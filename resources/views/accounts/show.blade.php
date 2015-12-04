@@ -6,6 +6,11 @@
     <div class="col-md-3 col-md-offset-9 text-right">
         {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.accounts.destroy', $account->id]]) !!}
         {!! link_to_route('admin.accounts.edit', trans('misc.button.edit'), $account->id, ['class' => 'btn btn-info']) !!}
+        @if ( $account->disabled )
+            {!! link_to_route('admin.accounts.enable', trans('misc.button.enable'), $account->id, ['class' => 'btn btn-success']) !!}
+        @else
+            {!! link_to_route('admin.accounts.disable', trans('misc.button.disable'), $account->id, ['class' => 'btn btn-warning']) !!}
+        @endif
         {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger'.(($account->id == 1) ? ' disabled' : '')]) !!}
         {!! Form::close() !!}
     </div>
