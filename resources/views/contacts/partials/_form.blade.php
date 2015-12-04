@@ -15,7 +15,7 @@
 <div class="form-group @if ($errors->has('email')) has-error @endif">
     {!! Form::label('email', trans('misc.email').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::email('email', null, ['class' => 'form-control']) !!}
+        {!! Form::email('email', null, ['class' => 'form-control', 'multiple' => 'true']) !!}
         @if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
     </div>
 </div>
