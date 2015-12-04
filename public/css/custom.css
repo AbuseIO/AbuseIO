@@ -1,14 +1,10 @@
 /* Prevent overlapping of the top navbar */
 body { padding-top: 70px; }
 
-.header {
-    padding: 10px 0px 10px 10px;
-}
+/* No the ASH page we want less padding on the top */
+body.ash { padding-top: 20px; }
 
-.header_wrapper {
-    background-color: #ecedef;
-}
-
+/* ASH Logo styles */
 .img-responsive {
     max-width: 250px;
 }
@@ -17,6 +13,7 @@ body { padding-top: 70px; }
     display: inline;
 }
 
+/* Give tab content panes a border */
 .tab-pane {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
@@ -37,7 +34,7 @@ div .headers {
     vertical-align: top;
 }
 
-div .headers h2 {
+div .media-body h2 {
     color: #8c8c8c;
 }
 

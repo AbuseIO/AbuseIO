@@ -36,6 +36,7 @@ return [
     'button.reset'          => 'Reset',
     'button.enable'         => 'Aanzetten ',
     'button.disable'        => 'Uitzetten',
+    'button.close'          => 'Sluiten',
 
     // Miscellaneous
     'all'               => 'Alle',
@@ -71,5 +72,5 @@ return [
     'ticket_state'      => 'Ticket status',
     'id'                => 'Nr',
     'text'              => 'Tekst',
-
+    'both'              => 'Beide',
 ];

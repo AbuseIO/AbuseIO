@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ Lang::get('ash.title') }} - {{ Lang::get('ash.ticket') }} {{ $ticket->id }}</title>
+    <title>{{ trans('ash.title') }} - {{ trans('ash.ticket') }} {{ $ticket->id }}</title>
     <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/flag-icon-min.css') }}" rel="stylesheet">
@@ -12,20 +12,20 @@
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 </head>
-<body>
-    <div class="header_wrapper">
-        <div class="container header">
-            <div class="headers">
-                <img class="img-responsive img-inline" src="/ash/logo/{{ $brand->id }}" alt='{{ $brand->company_name }}' />
-            </div>
-            <div class="headers">
-                <h1>{{ Lang::get('ash.title') }}</h1>
-                <h2>{{ $brand->company_name }}</h2>
+<body class="ash">
+    <div class="container">
+        <div class="jumbotron">
+            <div class="media">
+                <div class="media-left">
+                    <img class="img-responsive img-inline" src="/ash/logo/{{ $brand->id }}" alt='{{ $brand->company_name }}' />
+                </div>
+                <div class="media-body">
+                    <h1>{{ trans('ash.title') }}</h1>
+                    <h2>{{ $brand->company_name }}</h2>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <h1 class="page-header">{{ Lang::get('ash.ticket') }} {{ $ticket->id }}</h1>
+        <h1 class="page-header">{{ trans('ash.ticket') }} {{ $ticket->id }}</h1>
         <div class="row">
             <div class="col-md-3 col-md-offset-9 text-right">
                 <div class="btn-group">
@@ -40,7 +40,7 @@
         </div>
         <div class="panel panel-danger top-buffer">
             <div class="panel-heading">
-                {{ Lang::get('ash.intro') }}
+                {{ trans('ash.intro') }}
             </div>
         </div>
         <div class="panel">
@@ -52,61 +52,61 @@
         @if (Session::has('message'))
             <div class="alert alert-{{ Session::get('messageType') }}">
                 <span class="glyphicon glyphicon-{{ Session::get('messageIcon') }}"></span>
-                {{ Lang::get('ash.messages.'. Session::get('message')) }}
+                {{ trans('ash.messages.'. Session::get('message')) }}
             </div>
         @endif
 
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#basicinfo"><span class="glyphicon glyphicon-file"></span> {{ Lang::get('ash.menu.basic') }}</a></li>
-            <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ Lang::get('ash.menu.technical') }}</a></li>
-            <li><a data-toggle="tab" href="#whatsthis"><span class="glyphicon glyphicon-question-sign"></span> {{ Lang::get('ash.menu.about') }}</a></li>
-            <li><a data-toggle="tab" href="#resolved"><span class="glyphicon glyphicon-ok"></span> {{ Lang::get('ash.menu.communication') }}</a></li>
+            <li class="active"><a data-toggle="tab" href="#basicinfo"><span class="glyphicon glyphicon-file"></span> {{ trans('ash.menu.basic') }}</a></li>
+            <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ trans('ash.menu.technical') }}</a></li>
+            <li><a data-toggle="tab" href="#whatsthis"><span class="glyphicon glyphicon-question-sign"></span> {{ trans('ash.menu.about') }}</a></li>
+            <li><a data-toggle="tab" href="#resolved"><span class="glyphicon glyphicon-ok"></span> {{ trans('ash.menu.communication') }}</a></li>
         </ul>
         <div class="tab-content">
             <div id="basicinfo" class="tab-pane fade in active">
                 <dl class="dl-horizontal">
 
-                    <dt>{{ Lang::get('ash.basic.ip') }}</dt>
+                    <dt>{{ trans('ash.basic.ip') }}</dt>
                     <dd>{{ $ticket->ip }}</dd>
 
                     @if (gethostbyaddr($ticket->ip) !== false)
-                        <dt>{{ Lang::get('ash.basic.ptr') }}</dt>
+                        <dt>{{ trans('ash.basic.ptr') }}</dt>
                         <dd>{{ gethostbyaddr($ticket->ip) }}</dd>
                     @endif
 
                     @if (!empty($ticket->domain))
-                        <dt>{{ Lang::get('ash.basic.domain') }}</dt>
+                        <dt>{{ trans('ash.basic.domain') }}</dt>
                         <dd>{{ $ticket->domain }}</dd>
                     @endif
 
-                    <dt>{{ Lang::get('ash.basic.class') }}</dt>
-                    <dd>{{ Lang::get('classifications.' . $ticket->class_id . '.name') }}</dd>
+                    <dt>{{ trans('ash.basic.class') }}</dt>
+                    <dd>{{ trans('classifications.' . $ticket->class_id . '.name') }}</dd>
 
-                    <dt>{{ Lang::get('ash.basic.type') }}</dt>
-                    <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.name') }}</dd>
+                    <dt>{{ trans('ash.basic.type') }}</dt>
+                    <dd>{{ trans('types.type.' . $ticket->type_id . '.name') }}</dd>
 
-                    <dt>{{ Lang::get('ash.basic.suggest') }}</dt>
-                    <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.description') }}</dd>
+                    <dt>{{ trans('ash.basic.suggest') }}</dt>
+                    <dd>{{ trans('types.type.' . $ticket->type_id . '.description') }}</dd>
 
-                    <dt>{{ Lang::get('ash.basic.firstSeen') }}</dt>
+                    <dt>{{ trans('ash.basic.firstSeen') }}</dt>
                     <dd>{{ date('d-m-Y H:i', $ticket->firstEvent[0]->timestamp) }}</dd>
 
-                    <dt>{{ Lang::get('ash.basic.lastSeen') }}</dt>
+                    <dt>{{ trans('ash.basic.lastSeen') }}</dt>
                     <dd>{{ date('d-m-Y H:i', $ticket->lastEvent[0]->timestamp) }}</dd>
 
-                    <dt>{{ Lang::get('ash.basic.reportCount') }}</dt>
+                    <dt>{{ trans('ash.basic.reportCount') }}</dt>
                     <dd>{{ $ticket->events->count() }}</dd>
 
-                    <dt>{{ Lang::get('ash.basic.ticketStatus') }}</dt>
-                    <dd>{{ Lang::get('types.status.' . $ticket->status_id . '.name') }}</dd>
+                    <dt>{{ trans('ash.basic.ticketStatus') }}</dt>
+                    <dd>{{ trans('types.status.' . $ticket->status_id . '.name') }}</dd>
 
-                    <dt>{{ Lang::get('ash.basic.ticketCreated') }}</dt>
+                    <dt>{{ trans('ash.basic.ticketCreated') }}</dt>
                     <dd>{{ $ticket->created_at }}</dd>
 
-                    <dt>{{ Lang::get('ash.basic.ticketModified') }}</dt>
+                    <dt>{{ trans('ash.basic.ticketModified') }}</dt>
                     <dd>{{ $ticket->updated_at }}</dd>
 
-                    <dt>{{ Lang::get('ash.basic.replyStatus') }}</dt>
+                    <dt>{{ trans('ash.basic.replyStatus') }}</dt>
                     <dd></dd>
 
                 </dl>
@@ -114,14 +114,14 @@
 
             <div id="events" class="tab-pane fade">
                 @if ( !$ticket->events->count() )
-                    {{ Lang::get('ash.technical.collectError') }}
+                    {{ trans('ash.technical.collectError') }}
                 @else
                     <table class="table table-striped table-condensed">
                         <thead>
                         <tr>
-                            <th>{{ Lang::get('ash.technical.timestamp') }}</th>
-                            <th>{{ Lang::get('ash.technical.source') }}</th>
-                            <th>{{ Lang::get('ash.technical.information') }}</th>
+                            <th>{{ trans('ash.technical.timestamp') }}</th>
+                            <th>{{ trans('ash.technical.source') }}</th>
+                            <th>{{ trans('ash.technical.information') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -166,44 +166,39 @@
             </div>
 
             <div id="whatsthis" class="tab-pane fade">
-                {!! Lang::get('classifications.' . $ticket->class_id . '.description') !!}
+                {!! trans('classifications.' . $ticket->class_id . '.description') !!}
             </div>
 
             <div id="resolved" class="tab-pane fade">
-                <p>{{ Lang::get('ash.communication.header') }}</p>
+                <p>{{ trans('ash.communication.header') }}</p>
 
                 {!! Form::model(['method' => 'put']) !!}
                 <div class="form-group">
-                    {!! Form::label('text', Lang::get('ash.communication.reply').':') !!}
-                    {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => Lang::get('ash.communication.placeholder'), 'class' => 'form-control']) !!}
+                    {!! Form::label('text', trans('ash.communication.reply').':') !!}
+                    {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder'), 'class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::submit(Lang::get('ash.communication.submit'), ['class'=>'btn primary']) !!}
+                    {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
                 </div>
                 {!! Form::close() !!}
 
-                <h4>{{ Lang::get('ash.communication.previousCommunication') }}</h4>
+                <h4>{{ trans('ash.communication.previousCommunication') }}</h4>
                 @if ( !$ticket->notes->count() )
-                    {{ Lang::get('ash.communication.noMessages') }}
+                    {{ trans('ash.communication.noMessages') }}
                 @else
                     @foreach ($ticket->notes as $note)
-
-                        <div class="panel panel-{{ ($note->submitter == 'contact') ? 'default' : 'primary' }}">
-
-                            <div class="panel-heading">
-                                <div class="pull-left">
-                                    <h3 class="panel-title">{{ Lang::get('ash.communication.responseFrom') }} {{ $note->submitter }}</h3>
+                        <div class="row">
+                            <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
+                                <div class="panel panel-{{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary' }}">
+                                    <div class="panel-heading clearfix">
+                                        <h3 class="panel-title pull-left">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
+                                        <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
+                                    </div>
+                                    <div class="panel-body">
+                                        {{ htmlentities($note->text) }}
+                                    </div>
                                 </div>
-                                <div class="pull-right">
-                                    <span>{{ $note->created_at }}</span>
-                                </div>
-                                <div class="clearfix"></div>
                             </div>
-
-                            <div class="panel-body">
-                                {{ htmlentities($note->text) }}
-                            </div>
-
                         </div>
                     @endforeach
                 @endif

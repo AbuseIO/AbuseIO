@@ -11,7 +11,6 @@ use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Note;
 use Redirect;
 use Input;
-use Lang;
 
 class TicketsController extends Controller
 {
@@ -197,7 +196,7 @@ class TicketsController extends Controller
 
         $note = new Note;
         $note->ticket_id = $ticket->id;
-        $note->submitter = Lang::get('ash.communication.abusedesk'). $postingUser;
+        $note->submitter = trans('ash.communication.abusedesk'). $postingUser;
         $note->text = Input::get('text');
         $note->save();
 

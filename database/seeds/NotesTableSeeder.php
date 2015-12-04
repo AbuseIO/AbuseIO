@@ -53,7 +53,7 @@ class NotesTableSeeder extends Seeder
             [
                 'id'                        => '5',
                 'ticket_id'                 => '2',
-                'submitter'                 => 'Abusedesk (John Smith)',
+                'submitter'                 => 'Abusedesk (Default Admin)',
                 'text'                      => 'Placed in quarantine until client is contacted',
                 'hidden'                    => true,
                 'viewed'                    => false,
@@ -63,7 +63,7 @@ class NotesTableSeeder extends Seeder
             [
                 'id'                        => '6',
                 'ticket_id'                 => '2',
-                'submitter'                 => 'IP Contant',
+                'submitter'                 => 'IP Contact',
                 'text'                      => 'Antivirus has removed malware',
                 'hidden'                    => false,
                 'viewed'                    => false,

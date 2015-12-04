@@ -35,6 +35,7 @@ return [
     'button.reset'          => 'Reset',
     'button.enable'         => 'Enable ',
     'button.disable'        => 'Disable',
+    'button.close'          => 'Close',
 
     // Miscellaneous
     'all'               => 'All',
@@ -70,4 +71,5 @@ return [
     'ticket_state'      => 'Ticket state',
     'id'                => 'Id',
     'text'              => 'Text',
+    'both'              => 'Both',
 ];

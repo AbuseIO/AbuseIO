@@ -3,8 +3,32 @@
 @section('content')
     <h1 class="page-header">{{ trans('tickets.headers.detail') }}: {{ $ticket->id }}</h1>
     <div class="row">
-        <div class="col-md-4 col-md-offset-8 text-right">
-            {!! link_to(URL::previous(), trans('misc.button.back'), ['class' => 'btn btn-default']) !!}
+        <div class="col-md-8 col-md-offset-4 text-right">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {!! trans('tickets.button.update_customer') !!} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="#">{{ trans('misc.ip') }} {{ trans('misc.contact') }}</a></li>
+                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="#">{{ trans('misc.domain') }} {{ trans('misc.contact') }}</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">{!! trans('misc.both') !!}</a></li>
+                </ul>
+            </div>
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ trans('tickets.button.send_notification') }} <span class="caret">
+                </button>
+                <ul class="dropdown-menu">
+                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="#">{{ trans('misc.ip') }} {{ trans('misc.contact') }}</a></li>
+                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="#">{{ trans('misc.domain') }} {{ trans('misc.contact') }}</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">{!! trans('misc.both') !!}</a></li>
+                </ul>
+            </div>
+            {!! link_to_route('admin.tickets.show', trans('tickets.button.resolved'), [$ticket->id], ['class' => 'btn btn-success']) !!}
+            {!! link_to_route('admin.tickets.show', trans('misc.button.close'), [$ticket->id], ['class' => 'btn btn-warning']) !!}
+            {!! link_to_route('admin.tickets.show', trans('tickets.button.ignore'), [$ticket->id], ['class' => 'btn btn-danger']) !!}
         </div>
     </div>
     <ul class="nav nav-tabs">
@@ -59,7 +83,7 @@
                 <dd></dd>
 
                 @if ($ticket->ip_contact_reference != 'UNDEF')
-                <dt>{{ trans('tickets.ashlink.ip') }}</dt>
+                <dt>{{ trans('tickets.ashlink') }} {{ trans('misc.ip')}}</dt>
                 <dd>
                     {!! link_to(
                         "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference),
@@ -70,7 +94,7 @@
                 @endif
 
                 @if ($ticket->domain_contact_reference != 'UNDEF')
-                <dt>{{ trans('tickets.ashlink.domain') }}</dt>
+                <dt>{{ trans('tickets.ashlink') }} {{ trans('misc.domain')}}</dt>
                 <dd>
                     {!! link_to(
                         "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference),
@@ -149,8 +173,8 @@
                         <td>
                             <dl class="dl-horizontal">
                             @if (!is_array(json_decode($event->information, true)))
-                                    <dt>Parser Error</dt>
-                                    <dd>The parser not provider valid event data. Contact the administrator for the evidence related to this event</dd>
+                                <dt>Parser Error</dt>
+                                <dd>The parser not provider valid event data. Contact the administrator for the evidence related to this event</dd>
                             @else
                                 @foreach (json_decode($event->information, true) as $l1field => $l1value)
                                     @if (is_array($l1value))
@@ -183,6 +207,13 @@
                 @endforeach
                 </tbody>
             </table>
+            {!! Form::open(['method' => 'post', 'files' => true]) !!}
+            <div class="form-group">
+                {!! Form::label('text', trans('tickets.add_evidence')) !!}
+                {!! Form::file('image') !!}
+            </div>
+            {!! Form::submit('Submit', ['class' => 'btn btn-success']) !!}
+            {!! Form::close() !!}
         @endif
         </div>
         <div id="communication" class="tab-pane fade">
@@ -191,10 +222,10 @@
             @else
                 @foreach ($ticket->notes as $note)
                 <div class="row">
-                    <div class="col-xs-11 {{ ($note->submitter != 'contact') ? 'col-xs-offset-1' : '' }}">
-                        <div class="panel panel-{{ ($note->submitter == 'contact') ? 'default' : 'primary' }}">
+                    <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
+                        <div class="panel panel-{{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary' }}">
                             <div class="panel-heading clearfix">
-                                <h3 class="panel-title pull-left">{{ Lang::get('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
+                                <h3 class="panel-title pull-left">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
                                 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
                             </div>
                             <div class="panel-body">
@@ -209,16 +240,16 @@
                 <div class="row">
                     <div class="col-xs-11 col-xs-offset-1">
                         <div class="form-group">
-                            {!! Form::label('text', Lang::get('ash.communication.reply')) !!}
-                            {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => Lang::get('ash.communication.placeholder_admin'), 'class' => 'form-control']) !!}
+                            {!! Form::label('text', trans('ash.communication.reply')) !!}
+                            {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder_admin'), 'class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::submit(Lang::get('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
+                            {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
                         </div>
                     </div>
                 </div>
             {!! Form::close() !!}
-
         </div>
+        {!! link_to(URL::previous(), trans('misc.button.back'), ['class' => 'btn btn-default top-buffer']) !!}
     </div>
 @endsection

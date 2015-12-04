@@ -7,10 +7,14 @@ return [
     'headers.detail'    => 'Ticket details for',
 
     // Tickets - Buttons
-    'button.new_ticket'     => 'New ticket',
-    'button.all_tickets'    => 'All tickets',
-    'button.open_tickets'   => 'Open tickets',
-    'button.closed_tickets' => 'Closed tickets',
+    'button.new_ticket'         => 'New ticket',
+    'button.all_tickets'        => 'All tickets',
+    'button.open_tickets'       => 'Open tickets',
+    'button.closed_tickets'     => 'Closed tickets',
+    'button.update_customer'    => 'Update customer',
+    'button.send_notification'  => 'Send notification',
+    'button.ignore'             => 'Ignore',
+    'button.resolved'           => 'Resolved',
 
     // Tickets - Miscellaneous
     'no_tickets'    => 'You do not yet have any tickets',
@@ -29,5 +33,5 @@ return [
     'timestamp'     => 'Date / Time',
     'source'        => 'Source',
     'evidence'      => 'Evidence',
-
+    'add_evidence'  => 'Add evidence',
 ];
