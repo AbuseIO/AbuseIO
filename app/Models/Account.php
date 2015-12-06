@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
  * Class Account
  * @package AbuseIO\Models
  * @property string $name
+ * @property string $description
+ * @property int $brand_id
+ * @property boolean $disabled
+ * @property int $id
  */
 class Account extends Model
 {
