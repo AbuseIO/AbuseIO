@@ -1,12 +1,11 @@
 <?php
 
-namespace AbuseIO\Console\Commands\Permission;
+namespace AbuseIO\Console\Commands\Role;
 
 use Illuminate\Console\Command;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\User;
-use AbuseIO\Models\Permission;
-use AbuseIO\Models\PermissionRole;
+use AbuseIO\Models\RoleUser;
 use Carbon;
 
 class RevokeCommand extends Command
@@ -16,8 +15,7 @@ class RevokeCommand extends Command
      * The console command name.
      * @var string
      */
-    protected $signature = 'permission:revoke
-                            {--permission= : The permission name or ID to revoke }
+    protected $signature = 'role:revoke
                             {--role= : The role name or ID where the permission will be revoked from }
                             {--user= : The user name(e-mail) or ID of which role the permission will be revoked from }
     ';
@@ -26,7 +24,7 @@ class RevokeCommand extends Command
      * The console command description.
      * @var string
      */
-    protected $description = 'Revokes a permission from a role';
+    protected $description = 'Revokes a role from a user';
 
     /**
      * Create a new command instance.
@@ -55,6 +53,7 @@ class RevokeCommand extends Command
          * Detect the role->id and lookup the user if its thru a user assignment.
          */
         $role = false;
+        $user = false;
 
         if (!empty($this->option('role'))) {
 
@@ -70,61 +69,39 @@ class RevokeCommand extends Command
 
         if (!empty($this->option('user'))) {
 
-            if (!is_object($role)) {
+            if (!is_object($user)) {
                 $user = User::where('email', $this->option('user'))->first();
-                if (is_object($user)) {
-                    $role = $user->roles->first();
-                }
             }
 
-            if (!is_object($role)) {
+            if (!is_object($user)) {
                 $user = Role::find($this->option('user'));
-                if (is_object($user)) {
-                    $role = $user->roles->first();
-                }
             }
 
         }
 
-        if (!is_object($role)) {
+        if (!is_object($role) || !is_object($user)) {
             $this->error('Unable to find role with this criteria');
             return false;
         }
 
-        /*
-         * Detect the permission->id and lookup the name if needed
-         */
-        $permission = false;
-        if (!is_object($permission)) {
-            $permission = Permission::where('name', $this->option('permission'))->first();
-        }
 
-        if (!is_object($permission)) {
-            $permission = Permission::find($this->option('permission'));
-        }
-
-        if (!is_object($permission)) {
-            $this->error('Unable to find permission with this criteria');
-            return false;
-        }
-
-        $permissionRole = PermissionRole::all()
+        $roleUser = RoleUser::all()
             ->where('role_id', $role->id)
-            ->where('permission_id', $permission->id)
+            ->where('user_id', $user->id)
             ->first();
 
-        if (!is_object($permissionRole)) {
+        if (!is_object($roleUser)) {
             $this->error('Nothing to delete, this {$permission->name} permission is not linked to the role {$role->name}');
             return false;
         }
 
-        if (!$permissionRole->delete()) {
+        if (!$roleUser->delete()) {
             $this->error('Failed to remove the permission into the database');
 
             return false;
         }
 
-        $this->info("The permission {$permission->name} has been revoked from role {$role->name}");
+        $this->info("The role {$role->name} has been revoked from role {$user->email}");
 
         return true;
     }

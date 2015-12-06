@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Validator;
 
+/**
+ * Class Role
+ * @package AbuseIO\Models
+ * @property integer $id
+ * @property string $name
+ * @property string $description
+ */
 class Role extends Model
 {
     use SoftDeletes;
@@ -28,38 +35,35 @@ class Role extends Model
     ];
 
     /*
-     * The default model validation rules on creation
-     */
-    private $createRules = [
-        'name'              => 'required|string|min:1|unique:roles,name',
-        'description'       => 'required|string|min:1',
-    ];
-
-    /*
-     * The default model validation rules on update
-     */
-    private $updateRules = [
-        'id'                => 'required|exists:roles,id',
-        'name'              => 'required|string|min:1|unique:roles,name',
-        'description'       => 'required|string|min:1',
-    ];
-
-    /*
      * Validation method for this model being created
+     * $rules is inside function because of interaction with $data
      */
     public function validateCreate($data)
     {
-        $validation = Validator::make($data, $this->createRules);
+        $rules = [
+            'name'              => 'required|string|min:1|unique:roles,name',
+            'description'       => 'required|string|min:1',
+        ];
+
+        $validation = Validator::make($data, $rules);
 
         return $validation;
     }
 
     /*
      * Validation method for this model being updated
+     * $rules is inside function because of interaction with $data
      */
     public function validateUpdate($data)
     {
-        $validation = Validator::make($data, $this->updateRules);
+
+        $rules = [
+            'id'                => 'required|exists:roles,id',
+            'name'              => 'required|string|min:1|unique:roles,name',
+            'description'       => 'required|string|min:1',
+        ];
+
+        $validation = Validator::make($data, $rules);
 
         return $validation;
     }

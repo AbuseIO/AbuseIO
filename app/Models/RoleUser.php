@@ -5,13 +5,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Validator;
 
 /**
- * Class PermissionRole
+ * Class RoleUser
  * @package AbuseIO\Models
  * @property integer $id
  * @property integer $role_id
- * @property integer $permission_id
+ * @property integer $user_id
  */
-class PermissionRole extends Model
+class RoleUser extends Model
 {
     use SoftDeletes;
 
@@ -20,7 +20,7 @@ class PermissionRole extends Model
      *
      * @var string
      */
-    protected $table = 'permission_role';
+    protected $table = 'role_user';
 
     /**
      * The attributes that are mass assignable.
@@ -29,7 +29,7 @@ class PermissionRole extends Model
      */
     protected $fillable = [
         'role_id',
-        'permission_id',
+        'user_id',
     ];
 
     /*
@@ -39,8 +39,8 @@ class PermissionRole extends Model
     public function validateCreate($data)
     {
         $rules = [
-            'role_id'               => "required|integer|unique:permission_role,role_id,NULL,id,permission_id,{$data['permission_id']}",
-            'permission_id'         => "required|integer|unique:permission_role,permission_id,NULL,id,role_id,{$data['role_id']}",
+            'role_id' => "required|integer|unique:role_user,role_id,NULL,id,user_id,{$data['user_id']}",
+            'user_id' => "required|integer|unique:role_user,user_id,NULL,id,role_id,{$data['role_id']}",
         ];
 
         $validation = Validator::make($data, $rules);
@@ -55,9 +55,9 @@ class PermissionRole extends Model
     public function validateUpdate($data)
     {
         $rules = [
-            'id'                    => 'required|exists:permissions_role,id',
-            'role_id'               => "required|integer|unique:permission_role,role_id,NULL,id,permission_id,{$data['permission_id']}",
-            'permission_id'         => "required|integer|unique:permission_role,permission_id,NULL,id,role_id,{$data['role_id']}",
+            'id'      => 'required|exists:permissions_role,id',
+            'role_id' => "required|integer|unique:role_user,role_id,NULL,id,user_id,{$data['user_id']}",
+            'user_id' => "required|integer|unique:role_user,user_id,NULL,id,role_id,{$data['role_id']}",
         ];
 
         $validation = Validator::make($data, $rules);
@@ -86,8 +86,8 @@ class PermissionRole extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function permission()
+    public function user()
     {
-        return $this->belongsTo('AbuseIO\Models\Permission');
+        return $this->belongsTo('AbuseIO\Models\User');
     }
 }

@@ -23,6 +23,10 @@ class CreatePermissionRoleTable extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
+                $table->index('permission_id');
+                $table->index('role_id');
+
+                $table->unique(['permission_id', 'role_id']);
             }
         );
 

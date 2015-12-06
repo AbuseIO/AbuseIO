@@ -3,6 +3,13 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Permission
+ * @package AbuseIO\Models
+ * @property integer $id
+ * @property integer $name
+ * @property integer $description
+ */
 class Permission extends Model
 {
     use SoftDeletes;
@@ -13,6 +20,15 @@ class Permission extends Model
      * @var string
      */
     protected $table = 'permissions';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+
+    ];
 
     /*
     |--------------------------------------------------------------------------

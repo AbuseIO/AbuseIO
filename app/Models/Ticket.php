@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $domain_contact_auto_notify
  * @property integer $status_id
  * @property integer $account_id
- * @property boolean auto_notify
+ * @property boolean $auto_notify
  * @property integer $notified_count
  * @property integer $last_notify_count
  * @property integer $last_notify_timestamp

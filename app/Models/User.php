@@ -9,6 +9,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Hash;
 use Validator;
 
+/**
+ * Class User
+ * @package AbuseIO\Models
+ * @property integer $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $email
+ * @property string $password
+ * @property integer $account_id
+ * @property string $locale
+ * @property boolean $disabled
+ */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, SoftDeletes;
@@ -46,48 +58,44 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     /*
-     * The default model validation rules on creation
-     */
-    private $createRules = [
-        'first_name'    => 'required|string',
-        'last_name'     => 'required|string',
-        'email'         => 'required|email|unique:users,email',
-        'password'      => 'required|string|min:6|max:32',
-        'account_id'    => 'required|integer',
-        'locale'        => 'required|min:2|max:3',
-        'disabled'      => 'required:boolean',
-    ];
-
-    /*
-     * The default model validation rules on update
-     */
-    private $updateRules = [
-        'id'            => 'required|exists:users,id',
-        'first_name'    => 'required|string',
-        'last_name'     => 'required|string',
-        'email'         => 'required|email|exists:users,email',
-        'password'      => 'string|min:6|max:32', //protect field only availabe if being updated
-        'account_id'    => 'required|integer',
-        'locale'        => 'required|min:2|max:3',
-        'disabled'      => 'required|boolean',
-    ];
-
-    /*
      * Validation method for this model being created
+     * $rules is inside function because of interaction with $data
      */
     public function validateCreate($data)
     {
-        $validation = Validator::make($data, $this->createRules);
+        $rules = [
+            'first_name'    => 'required|string',
+            'last_name'     => 'required|string',
+            'email'         => 'required|email|unique:users,email',
+            'password'      => 'required|string|min:6|max:32',
+            'account_id'    => 'required|integer',
+            'locale'        => 'required|min:2|max:3',
+            'disabled'      => 'required:boolean',
+        ];
+
+        $validation = Validator::make($data, $rules);
 
         return $validation;
     }
 
     /*
      * Validation method for this model being updated
+     * $rules is inside function because of interaction with $data
      */
     public function validateUpdate($data)
     {
-        $validation = Validator::make($data, $this->updateRules);
+        $rules = [
+            'id'            => 'required|exists:users,id',
+            'first_name'    => 'required|string',
+            'last_name'     => 'required|string',
+            'email'         => 'required|email|exists:users,email',
+            'password'      => 'string|min:6|max:32', //protected field is only availabe if being created
+            'account_id'    => 'required|integer',
+            'locale'        => 'required|min:2|max:3',
+            'disabled'      => 'required|boolean',
+        ];
+
+        $validation = Validator::make($data, $rules);
 
         return $validation;
     }
