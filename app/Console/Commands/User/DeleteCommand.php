@@ -14,7 +14,7 @@ class DeleteCommand extends Command
      * @var string
      */
     protected $signature = 'user:delete
-                            {--user= : Use the user email or id to delete }
+                            {--user= : Use the user email or id to delete it }
     ';
 
     /**

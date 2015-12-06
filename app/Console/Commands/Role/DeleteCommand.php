@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Role;
 
 use Illuminate\Console\Command;
+use AbuseIO\Models\Role;
 use Carbon;
 
 class DeleteCommand extends Command
@@ -13,15 +14,14 @@ class DeleteCommand extends Command
      * @var string
      */
     protected $signature = 'role:delete
-                            {--id : x }
-                            {--name : x }
+                            {--role= : Use the role name or id to delete it }
     ';
 
     /**
      * The console command description.
      * @var string
      */
-    protected $description = 'Deletes a role';
+    protected $description = 'Deletes a role (without confirmation!)';
 
     /**
      * Create a new command instance.
@@ -39,5 +39,32 @@ class DeleteCommand extends Command
      */
     public function handle()
     {
+        if (empty($this->option('role'))) {
+            $this->warn('no name or id argument was passed, try help');
+            return false;
+        }
+
+        $role = false;
+        if (!is_object($role)) {
+            $role = Role::where('role_name', $this->option('role'))->first();
+        }
+
+        if (!is_object($role)) {
+            $role = Role::find($this->option('role'));
+        }
+
+        if (!is_object($role)) {
+            $this->error('Unable to find role with this criteria');
+            return false;
+        }
+
+        if (!$role->delete()) {
+            $this->error('Unable to delete role from the system');
+            return false;
+        }
+
+        $this->info('The role has been deleted from the system');
+
+        return true;
     }
 }

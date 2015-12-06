@@ -59,7 +59,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     /*
-     * The default model validation rules on creation
+     * The default model validation rules on update
      */
     private $updateRules = [
         'first_name'    => 'required|string',
@@ -72,7 +72,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     /*
-     * Validation method for this model
+     * Validation method for this model being created
      */
     public function validateCreate($data)
     {
@@ -82,7 +82,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /*
-     * Validation method for this model
+     * Validation method for this model being updated
      */
     public function validateUpdate($data)
     {
@@ -112,7 +112,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Check if the permission matches with any permission user has
      *
-     * @param  String permission slug of a permission
+     * @param  String permission name of a permission
      * @return Boolean true if permission exists, otherwise false
      */
     protected function checkPermission($perm)
@@ -125,9 +125,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Get all permission slugs from all permissions of all roles
+     * Get all permission names from all permissions of all roles
      *
-     * @return Array of permission slugs
+     * @return Array of permission names
      */
     protected function getAllPermissionsFromAllRoles()
     {
@@ -203,16 +203,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Checks if the user has a specific role
      *
-     * @param $role_slug
+     * @param $role_name
      * @return bool
      */
-    public function hasRole($role_slug)
+    public function hasRole($role_name)
     {
         $result = false;
         $roles = $this->roles;
         foreach ($roles as $role)
         {
-            if ($role->role_slug == $role_slug)
+            if ($role->role_name == $role_name)
             {
                 $result = true;
                 break;

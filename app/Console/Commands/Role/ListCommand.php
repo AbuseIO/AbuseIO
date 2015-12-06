@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Role;
 
 use Illuminate\Console\Command;
+use AbuseIO\Models\Role;
 use Carbon;
 
 class ListCommand extends Command
@@ -13,7 +14,7 @@ class ListCommand extends Command
      * @var string
      */
     protected $signature = 'role:list
-                            {--filter : x }
+                            {--filter : Applies a filter on the role name }
     ';
 
     /**
@@ -21,6 +22,18 @@ class ListCommand extends Command
      * @var string
      */
     protected $description = 'Shows a list of all available roles';
+
+    /**
+     * The headers of the table
+     * @var array
+     */
+    protected $headers = ['ID', 'Name', 'Description'];
+
+    /**
+     * The fields of the table / database row
+     * @var array
+     */
+    protected $fields = ['id', 'role_name', 'role_description'];
 
     /**
      * Create a new command instance.
@@ -38,5 +51,13 @@ class ListCommand extends Command
      */
     public function handle()
     {
+
+        if (!empty($this->option('filter'))) {
+            $roles = Role::where('role_name', 'like', "%{$this->option('filter')}%")->get($this->fields);
+        } else {
+            $roles = Role::all($this->fields);
+        }
+
+        $this->table($this->headers, $roles);
     }
 }

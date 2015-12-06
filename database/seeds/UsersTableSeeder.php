@@ -64,8 +64,8 @@ class UsersTableSeeder extends Seeder
         $roles =  [
             [
                 'id'                        => 2,
-                'role_title'                => 'Abuse User',
-                'role_slug'                 => 'abuse',
+                'role_name'                 => 'abuse',
+                'role_description'          => 'Abuse User',
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],

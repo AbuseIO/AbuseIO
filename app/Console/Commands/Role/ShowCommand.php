@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Role;
 
 use Illuminate\Console\Command;
+use AbuseIO\Models\Role;
 use Carbon;
 
 class ShowCommand extends Command
@@ -13,8 +14,7 @@ class ShowCommand extends Command
      * @var string
      */
     protected $signature = 'role:show
-                            {--id : x }
-                            {--name : x }
+                            {--role= : Use the role name or id to show role details }
     ';
 
     /**
@@ -22,6 +22,18 @@ class ShowCommand extends Command
      * @var string
      */
     protected $description = 'Shows the details of a role';
+
+    /**
+     * The headers of the table
+     * @var array
+     */
+    protected $headers = ['ID', 'Name', 'Description'];
+
+    /**
+     * The fields of the table / database row
+     * @var array
+     */
+    protected $fields = ['id', 'role_name', 'role_description'];
 
     /**
      * Create a new command instance.
@@ -39,5 +51,35 @@ class ShowCommand extends Command
      */
     public function handle()
     {
+        if (empty($this->option('role'))) {
+            $this->warn('no email or id argument was passed, try help');
+            return false;
+        }
+
+        $role = false;
+        if (!is_object($role)) {
+            $role = Role::where('role_name', $this->option('role'))->first();
+        }
+
+        if (!is_object($role)) {
+            $role = Role::find($this->option('role'));
+        }
+
+        if (!is_object($role)) {
+            $this->error('Unable to find role with this criteria');
+            return false;
+        }
+
+        $table = [ ];
+        $counter = 0;
+        foreach (array_combine($this->headers, $this->fields) as $header => $field) {
+            $counter++;
+            $table[$counter][] = $header;
+            $table[$counter][] = (string)$role->$field;
+        }
+
+        $this->table(['Role Setting', 'Role Value'], $table);
+
+        return true;
     }
 }

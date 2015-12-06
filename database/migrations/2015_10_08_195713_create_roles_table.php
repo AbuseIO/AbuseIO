@@ -17,8 +17,8 @@ class CreateRolesTable extends Migration
             function (Blueprint $table) {
 
                 $table->increments('id');
-                $table->string('role_title');
-                $table->string('role_slug');
+                $table->string('role_name');
+                $table->string('role_description');
                 $table->timestamps();
                 $table->softDeletes();
 
@@ -35,8 +35,8 @@ class CreateRolesTable extends Migration
         $roles = [
             [
                 'id'                        => 1,
-                'role_title'                => 'System Administrator',
-                'role_slug'                 => 'admin',
+                'role_name'                 => 'admin',
+                'role_description'          => 'System Administrator',
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
