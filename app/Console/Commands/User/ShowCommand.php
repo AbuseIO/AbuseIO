@@ -13,8 +13,8 @@ class ShowCommand extends Command
      * @var string
      */
     protected $signature = 'user:show
-                            {--email : x }
-                            {--id : x }
+                            {email? : Use the email/login to show user details [OR] }
+                            {id? : Use the user id to show user details }
     ';
 
     /**
@@ -39,5 +39,11 @@ class ShowCommand extends Command
      */
     public function handle()
     {
+        if (empty($this->option('email')) &&
+            empty($this->option('id'))
+        ) {
+            $this->warn('no email or id argument was passed, try help');
+            return false;
+        }
     }
 }

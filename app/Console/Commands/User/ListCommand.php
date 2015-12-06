@@ -14,7 +14,7 @@ class ListCommand extends Command
      * @var string
      */
     protected $signature = 'user:list
-                            {--filter= : Applies a filter on the email (username login) }
+                            {filter? : Applies a filter on the email (username login) }
     ';
 
     /**
