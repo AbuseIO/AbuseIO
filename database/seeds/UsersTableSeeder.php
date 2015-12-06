@@ -32,7 +32,9 @@ class UsersTableSeeder extends Seeder
                 'first_name'                => 'Default',
                 'last_name'                 => 'Admin',
                 'password'                  => Hash::make($defaultAdminPassword),
-                'account_id'                => 1
+                'account_id'                => 1,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
             [
                 'id'                        => 2,
@@ -40,7 +42,9 @@ class UsersTableSeeder extends Seeder
                 'first_name'                => 'Isp',
                 'last_name'                 => 'User',
                 'password'                  => Hash::make($defaultUserPassword),
-                'account_id'                => 1
+                'account_id'                => 1,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
             [
                 'id'                        => 3,
@@ -48,7 +52,9 @@ class UsersTableSeeder extends Seeder
                 'first_name'                => 'Default',
                 'last_name'                 => 'Admin',
                 'password'                  => Hash::make($secondAccountAdminPassword),
-                'account_id'                => 2
+                'account_id'                => 2,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
 
         ];
@@ -82,7 +88,7 @@ class UsersTableSeeder extends Seeder
         // abuseio User role permissions
         foreach ($permissions as $permission_name) {
 
-            $permission = Permission::where('permission_slug','=', $permission_name)->first();
+            $permission = Permission::where('permission_slug', '=', $permission_name)->first();
 
             $permission_role[] = [
                 'permission_id'             => $permission->id,
