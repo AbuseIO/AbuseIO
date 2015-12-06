@@ -27,13 +27,13 @@ class ShowCommand extends Command
      * The headers of the table
      * @var array
      */
-    protected $headers = ['User ID', 'User', 'First Name', 'Last Name', 'Language', 'Disabled', 'Created', 'Last modified'];
+    protected $headers = ['User ID', 'User', 'Account', 'Role', 'First Name', 'Last Name', 'Language', 'Disabled', 'Created', 'Last modified'];
 
     /**
      * The fields of the table / database row
      * @var array
      */
-    protected $fields = ['id', 'email', 'first_name', 'last_name', 'locale', 'disabled', 'created_at', 'updated_at'];
+    protected $fields = ['id', 'email', 'account', 'role', 'first_name', 'last_name', 'locale', 'disabled', 'created_at', 'updated_at'];
 
     /**
      * Create a new command instance.
@@ -70,6 +70,20 @@ class ShowCommand extends Command
             return false;
         }
 
+        $role = $user->roles()->first();
+        if (!is_object($role)) {
+            $role = 'None';
+        } else {
+            $role = $role->description;
+        }
+
+        $account = $user->account()->first();
+        if (!is_object($account)) {
+            $account = 'None';
+        } else {
+            $account = $account->name;
+        }
+
         $table = [ ];
         $counter = 0;
         foreach (array_combine($this->headers, $this->fields) as $header => $field) {
@@ -78,10 +92,16 @@ class ShowCommand extends Command
 
             if ($header == 'Disabled') {
                 $table[$counter][] = (boolean)$user->$field ? 'YES' : 'NO';
+            } elseif ($header == 'Account') {
+                $table[$counter][] = $account;
+            } elseif ($header == 'Role') {
+                $table[$counter][] = $role;
             } else {
                 $table[$counter][] = (string)$user->$field;
             }
         }
+
+        $userlist[] = $user;
 
         $this->table(['User Setting', 'User Value'], $table);
 

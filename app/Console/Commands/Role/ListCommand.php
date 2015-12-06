@@ -27,7 +27,7 @@ class ListCommand extends Command
      * The headers of the table
      * @var array
      */
-    protected $headers = ['ID', 'Name', 'Description'];
+    protected $headers = ['ID', 'Name', 'Description', 'Permissions'];
 
     /**
      * The fields of the table / database row
@@ -51,13 +51,24 @@ class ListCommand extends Command
      */
     public function handle()
     {
-
         if (!empty($this->option('filter'))) {
             $roles = Role::where('name', 'like', "%{$this->option('filter')}%")->get($this->fields);
         } else {
             $roles = Role::all($this->fields);
         }
 
-        $this->table($this->headers, $roles);
+        $rolelist = [];
+        foreach ($roles as $role) {
+
+            $permissionCount = $role->permissions()->count();
+
+            $role = $role->toArray();
+            $role['permissions'] = $permissionCount;
+
+            $rolelist[] = $role;
+        }
+
+
+        $this->table($this->headers, $rolelist);
     }
 }

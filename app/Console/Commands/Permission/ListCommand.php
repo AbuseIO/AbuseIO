@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
+use AbuseIO\Models\Permission;
 use Carbon;
 
 class ListCommand extends Command
@@ -13,7 +14,7 @@ class ListCommand extends Command
      * @var string
      */
     protected $signature = 'permission:list
-                            {--filter : x }
+                            {--filter : Applies a filter on the permission name }
     ';
 
     /**
@@ -21,6 +22,18 @@ class ListCommand extends Command
      * @var string
      */
     protected $description = 'Shows a list of all available permissions';
+
+    /**
+     * The headers of the table
+     * @var array
+     */
+    protected $headers = ['ID', 'Name', 'Description'];
+
+    /**
+     * The fields of the table / database row
+     * @var array
+     */
+    protected $fields = ['id', 'name', 'description'];
 
     /**
      * Create a new command instance.
@@ -38,5 +51,12 @@ class ListCommand extends Command
      */
     public function handle()
     {
+        if (!empty($this->option('filter'))) {
+            $permissions = Permission::where('name', 'like', "%{$this->option('filter')}%")->get($this->fields);
+        } else {
+            $permissions = Permission::all($this->fields);
+        }
+
+        $this->table($this->headers, $permissions);
     }
 }

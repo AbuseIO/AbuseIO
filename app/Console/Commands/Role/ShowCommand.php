@@ -27,13 +27,13 @@ class ShowCommand extends Command
      * The headers of the table
      * @var array
      */
-    protected $headers = ['ID', 'Name', 'Description'];
+    protected $headers = ['ID', 'Name', 'Description', 'Permissions'];
 
     /**
      * The fields of the table / database row
      * @var array
      */
-    protected $fields = ['id', 'name', 'description'];
+    protected $fields = ['id', 'name', 'description', 'permissions'];
 
     /**
      * Create a new command instance.
@@ -70,12 +70,22 @@ class ShowCommand extends Command
             return false;
         }
 
+        $permissions = '';
+        foreach ($role->permissions as $permission) {
+            $permissions .= $permission->name . PHP_EOL;
+        }
+
         $table = [ ];
         $counter = 0;
         foreach (array_combine($this->headers, $this->fields) as $header => $field) {
             $counter++;
-            $table[$counter][] = $header;
-            $table[$counter][] = (string)$role->$field;
+            if ($header == 'Permissions') {
+                $table[$counter][] = $header;
+                $table[$counter][] = chop($permissions);
+            } else {
+                $table[$counter][] = $header;
+                $table[$counter][] = (string)$role->$field;
+            }
         }
 
         $this->table(['Role Setting', 'Role Value'], $table);
