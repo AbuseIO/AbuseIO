@@ -245,7 +245,8 @@ cd /opt/abuseio
 php artisan migrate:install
 php artisan migrate
 php artisan key:generate
-php artisan db:seed < run this only if you want demo material in your installation.
+
+php artisan db:seed < run this only if you want demo material in your installation, like users, tickets, etc
 ```
 
 ## Creating an admin user for the GUI
@@ -254,6 +255,8 @@ By default no accounts are installed and you will need to create accounts with t
 
 ```
 cd /opt/abuseio
-php artisan user:create
-php artisan role:assign
+php artisan user:create --email admin@isp.local
+php artisan role:assign --role admin --user admin@isp.local
 ```
+
+The user:create command also access items like --password, however if not selected a password will be generated and default settings will be used
