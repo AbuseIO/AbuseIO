@@ -14,7 +14,7 @@ class ListCommand extends Command
      * @var string
      */
     protected $signature = 'user:list
-                            {--filter : x }
+                            {--filter= : Applies a filter on the email (username login) }
     ';
 
     /**
@@ -51,7 +51,11 @@ class ListCommand extends Command
      */
     public function handle()
     {
-        $users = User::all($this->fields);
+        if (!empty($this->option('filter'))) {
+            $users = User::where('email', 'like', "%{$this->option('filter')}%")->get($this->fields);
+        } else {
+            $users = User::all($this->fields);
+        }
 
         $this->table($this->headers, $users);
     }
