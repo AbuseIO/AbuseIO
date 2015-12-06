@@ -17,8 +17,9 @@ class CreateCommand extends Command
     protected $signature = 'user:create
                             {--email= : The e-mail address and login username }
                             {--password= : The password for the account }
-                            {--firstname=Unknown : The first name of the users account, default: Unknown }
-                            {--lastname=Unknown : The last name of the users account, default: Unknown }
+                            {--firstname=Unknown : The first name of the users account }
+                            {--lastname=Unknown : The last name of the users account }
+                            {--language=en : The default language for the users account, in country code }
                             {--account=default : The account name where this user is linked to }
                             {--disabled=false : Set the account to be disabled }
     ';
@@ -65,12 +66,13 @@ class CreateCommand extends Command
             'password'      => empty($this->option('password')) ? $generatedPassword : $this->option('password'),
             'first_name'    => $this->option('firstname'),
             'last_name'     => $this->option('lastname'),
+            'locale'        => $this->option('language'),
             'account_id'    => $account->id,
             'disabled'      => $this->option('disabled'),
         ];
 
         $user = new User();
-        $validation = $user->validate($useradd);
+        $validation = $user->validateCreate($useradd);
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {

@@ -4,6 +4,7 @@ namespace AbuseIO\Console\Commands\User;
 
 use Illuminate\Console\Command;
 use AbuseIO\Models\User;
+use AbuseIO\Models\Account;
 use Carbon;
 
 class EditCommand extends Command
@@ -18,8 +19,9 @@ class EditCommand extends Command
                             {--email= : The new e-mail address and login username }
                             {--password= : The new password for the account }
                             {--autopassword : Generate a new password and set it for the account }
-                            {--firstname= : The new first name of the users account, default: Unknown }
-                            {--lastname= : The new last name of the users account, default: Unknown }
+                            {--firstname= : The new first name of the users account }
+                            {--lastname= : The new last name of the users account }
+                            {--language= : The default language for the users account, in country code }
                             {--account= : The new account name where this user is linked to }
                             {--disable : Set the new account status to be disabled }
                             {--enable : Set the new account status to be enabled }
@@ -66,7 +68,60 @@ class EditCommand extends Command
             return false;
         }
 
-        print_r($user->toArray());
+        // Apply changes to the user object
+        if (!empty($this->option('email'))) {
+            $user->email = $this->option('email');
+        }
+        if (!empty($this->option('password'))) {
+            $user->password = $this->option('password');
+        }
+        if (!empty($this->option('autopassword'))) {
+            $generatedPassword = substr(md5(rand()), 0, 8);
+            $this->info("Using auto generated password: {$generatedPassword}");
+            $user->password = $generatedPassword;
+        }
+        if (!empty($this->option('firstname'))) {
+            $user->first_name = $this->option('firstname');
+        }
+        if (!empty($this->option('lastname'))) {
+            $user->last_name = $this->option('lastname');
+        }
+        if (!empty($this->option('account'))) {
+            $account = Account::where('name', '=', $this->option('account'))->first();
+            if (!is_object($account)) {
+                $this->error("The account named {$this->option('account')} was not found");
+                return false;
+            }
+
+            $user->account_id = $account->id;
+        }
+        if (!empty($this->option('language'))) {
+            $user->locale = $this->option('language');
+        }
+        if (!empty($this->option('disable'))) {
+            $user->disabled = true;
+        }
+        if (!empty($this->option('enable'))) {
+            $user->disabled = false;
+        }
+
+        // Validate the changes
+        $validation = $user->validateUpdate($user->toArray());
+
+        if ($validation->fails()) {
+            foreach ($validation->messages()->all() as $message) {
+                $this->warn($message);
+            }
+
+            $this->error('Failed to create the user due to validation warnings');
+
+            return false;
+        }
+
+        // Save the object
+        $user->save();
+
+        $this->info("User has been successfully updated");
 
         return true;
     }
