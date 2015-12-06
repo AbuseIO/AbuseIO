@@ -78,7 +78,7 @@ class NotificationsCommand extends Command
             empty($this->option('send'))
 
         ) {
-            $this->error('Invalid option(s) used, try --help');
+            $this->error('Invalid or incomplete option(s) used, try --help');
             return false;
         }
 
