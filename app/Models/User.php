@@ -46,24 +46,47 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     /*
-     * The default model validation rules
+     * The default model validation rules on creation
      */
-    private $rules = [
-        'first_name'    => 'required:string',
-        'last_name'     => 'required:string',
+    private $createRules = [
+        'first_name'    => 'required|string',
+        'last_name'     => 'required|string',
         'email'         => 'required|email|unique:users,email',
-        'password'      => 'required|min:6',
-        'account_id'    => 'required',
-        'locale'        => 'optional|min:2|max:3',
+        'password'      => 'required|string|min:6|max:32',
+        'account_id'    => 'required|integer',
+        'locale'        => 'required|min:2|max:3',
         'disabled'      => 'required:boolean',
+    ];
+
+    /*
+     * The default model validation rules on creation
+     */
+    private $updateRules = [
+        'first_name'    => 'required|string',
+        'last_name'     => 'required|string',
+        'email'         => 'required|email|exists:users,email',
+        'password'      => 'string|min:6|max:32', //protect field only availabe if being updated
+        'account_id'    => 'required|integer',
+        'locale'        => 'required|min:2|max:3',
+        'disabled'      => 'required|boolean',
     ];
 
     /*
      * Validation method for this model
      */
-    public function validate($data)
+    public function validateCreate($data)
     {
-        $validation = Validator::make($data, $this->rules);
+        $validation = Validator::make($data, $this->createRules);
+
+        return $validation;
+    }
+
+    /*
+     * Validation method for this model
+     */
+    public function validateUpdate($data)
+    {
+        $validation = Validator::make($data, $this->updateRules);
 
         return $validation;
     }
