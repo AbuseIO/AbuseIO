@@ -39,7 +39,7 @@ class Role extends Model
      * The default model validation rules on update
      */
     private $updateRules = [
-        'id'                => 'required|exists',
+        'id'                => 'required|exists:roles,id',
         'role_name'         => 'required|string|min:1|unique:roles,role_name',
         'role_description'  => 'required|string|min:1',
     ];

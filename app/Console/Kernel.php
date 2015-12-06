@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\User\DeleteCommand',
 
         'AbuseIO\Console\Commands\Role\CreateCommand',
+        'AbuseIO\Console\Commands\Role\EditCommand',
         'AbuseIO\Console\Commands\Role\ListCommand',
         'AbuseIO\Console\Commands\Role\ShowCommand',
         'AbuseIO\Console\Commands\Role\DeleteCommand',

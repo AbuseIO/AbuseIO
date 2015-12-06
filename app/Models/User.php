@@ -62,6 +62,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * The default model validation rules on update
      */
     private $updateRules = [
+        'id'            => 'required|exists:users,id',
         'first_name'    => 'required|string',
         'last_name'     => 'required|string',
         'email'         => 'required|email|exists:users,email',
