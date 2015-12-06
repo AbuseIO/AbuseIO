@@ -19,14 +19,13 @@ class AssignCommand extends Command
     protected $signature = 'permission:assign
                             {--permission= : The permission name or ID to assign }
                             {--role= : The role name or ID where the permission will be assigned to }
-                            {--user= : The user name(e-mail) or ID of which role the permission will be assigned to }
     ';
 
     /**
      * The console command description.
      * @var string
      */
-    protected $description = 'Assign a permission to a (users) role ';
+    protected $description = 'Assign a permission to a role ';
 
     /**
      * Create a new command instance.
@@ -44,10 +43,10 @@ class AssignCommand extends Command
      */
     public function handle()
     {
-        if (empty($this->option('role')) &&
-            empty($this->option('user'))
+        if (empty($this->option('role')) ||
+            empty($this->option('permission'))
         ) {
-            $this->error('Missing options for role and/or user(e-mail) to select');
+            $this->error('Missing options for role and/or permission to select');
             return false;
         }
 
@@ -56,34 +55,12 @@ class AssignCommand extends Command
          */
         $role = false;
 
-        if (!empty($this->option('role'))) {
-
-            if (!is_object($role)) {
-                $role = Role::where('name', $this->option('role'))->first();
-            }
-
-            if (!is_object($role)) {
-                $role = Role::find($this->option('role'));
-            }
-
+        if (!is_object($role)) {
+            $role = Role::where('name', $this->option('role'))->first();
         }
 
-        if (!empty($this->option('user'))) {
-
-            if (!is_object($role)) {
-                $user = User::where('email', $this->option('user'))->first();
-                if (is_object($user)) {
-                    $role = $user->roles->first();
-                }
-            }
-
-            if (!is_object($role)) {
-                $user = Role::find($this->option('user'));
-                if (is_object($user)) {
-                    $role = $user->roles->first();
-                }
-            }
-
+        if (!is_object($role)) {
+            $role = Role::find($this->option('role'));
         }
 
         if (!is_object($role)) {

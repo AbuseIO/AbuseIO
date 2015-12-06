@@ -19,7 +19,6 @@ class RevokeCommand extends Command
     protected $signature = 'permission:revoke
                             {--permission= : The permission name or ID to revoke }
                             {--role= : The role name or ID where the permission will be revoked from }
-                            {--user= : The user name(e-mail) or ID of which role the permission will be revoked from }
     ';
 
     /**
@@ -44,10 +43,10 @@ class RevokeCommand extends Command
      */
     public function handle()
     {
-        if (empty($this->option('role')) &&
-            empty($this->option('user'))
+        if (empty($this->option('role')) ||
+            empty($this->option('permission'))
         ) {
-            $this->error('Missing options for role and/or user(e-mail) to select');
+            $this->error('Missing options for role and/or permission to select');
             return false;
         }
 

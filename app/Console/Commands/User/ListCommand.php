@@ -27,7 +27,7 @@ class ListCommand extends Command
      * The headers of the table
      * @var array
      */
-    protected $headers = ['ID', 'Account', 'User', 'First Name', 'Last Name', 'Role'];
+    protected $headers = ['ID', 'Account', 'User', 'First Name', 'Last Name', 'Roles'];
 
     /**
      * The fields of the table / database row
@@ -61,11 +61,12 @@ class ListCommand extends Command
         $userlist = [];
         foreach ($users as $user) {
 
-            $role = $user->roles()->first();
-            if (!is_object($role)) {
-                $role = 'None';
-            } else {
-                $role = $role->description;
+            $roleList = [];
+            $roles = $user->roles()->get();
+            foreach ($roles as $role) {
+                if (is_object($role)) {
+                    $roleList[] = $role->description;
+                }
             }
 
             $account = $user->account()->first();
@@ -76,7 +77,7 @@ class ListCommand extends Command
             }
 
             $user = $user->toArray();
-            $user['role'] = $role;
+            $user['roles'] = implode(', ', $roleList);
             $user['account_id'] = $account;
 
             $userlist[] = $user;

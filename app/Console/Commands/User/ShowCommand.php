@@ -27,13 +27,13 @@ class ShowCommand extends Command
      * The headers of the table
      * @var array
      */
-    protected $headers = ['User ID', 'User', 'Account', 'Role', 'First Name', 'Last Name', 'Language', 'Disabled', 'Created', 'Last modified'];
+    protected $headers = ['User ID', 'User', 'Account', 'Roles', 'First Name', 'Last Name', 'Language', 'Disabled', 'Created', 'Last modified'];
 
     /**
      * The fields of the table / database row
      * @var array
      */
-    protected $fields = ['id', 'email', 'account', 'role', 'first_name', 'last_name', 'locale', 'disabled', 'created_at', 'updated_at'];
+    protected $fields = ['id', 'email', 'account', 'roles', 'first_name', 'last_name', 'locale', 'disabled', 'created_at', 'updated_at'];
 
     /**
      * Create a new command instance.
@@ -70,11 +70,12 @@ class ShowCommand extends Command
             return false;
         }
 
-        $role = $user->roles()->first();
-        if (!is_object($role)) {
-            $role = 'None';
-        } else {
-            $role = $role->description;
+        $roleList = [];
+        $roles = $user->roles()->get();
+        foreach ($roles as $role) {
+            if (is_object($role)) {
+                $roleList[] = $role->description;
+            }
         }
 
         $account = $user->account()->first();
@@ -94,8 +95,8 @@ class ShowCommand extends Command
                 $table[$counter][] = (boolean)$user->$field ? 'YES' : 'NO';
             } elseif ($header == 'Account') {
                 $table[$counter][] = $account;
-            } elseif ($header == 'Role') {
-                $table[$counter][] = $role;
+            } elseif ($header == 'Roles') {
+                $table[$counter][] = implode(', ', $roleList);
             } else {
                 $table[$counter][] = (string)$user->$field;
             }
