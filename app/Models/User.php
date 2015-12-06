@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Hash;
+use Validator;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -27,7 +28,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $fillable = [
         'first_name',
         'last_name',
-        'username',
         'email',
         'password',
         'account_id',
@@ -44,6 +44,30 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'password',
         'remember_token'
     ];
+
+    /*
+     * The default model validation rules
+     */
+    private $rules = [
+        'first_name'    => 'required:string',
+        'last_name'     => 'required:string',
+        'email'         => 'required|email|unique:users,email',
+        'password'      => 'required|min:6',
+        'account_id'    => 'required',
+        'locale'        => 'optional|min:2|max:3',
+        'disabled'      => 'required:boolean',
+    ];
+
+    /*
+     * Validation method for this model
+     */
+    public function validate($data)
+    {
+        $validation = Validator::make($data, $this->rules);
+
+        return $validation;
+    }
+
 
     /*
     |--------------------------------------------------------------------------
