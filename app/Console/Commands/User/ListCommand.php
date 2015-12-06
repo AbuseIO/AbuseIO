@@ -14,7 +14,7 @@ class ListCommand extends Command
      * @var string
      */
     protected $signature = 'user:list
-                            {filter? : Applies a filter on the email (username login) }
+                            {--filter= : Applies a filter on the email (username login) }
     ';
 
     /**
@@ -24,13 +24,13 @@ class ListCommand extends Command
     protected $description = 'Shows a list of all available users';
 
     /**
-     * They headers of the table
+     * The headers of the table
      * @var array
      */
     protected $headers = ['ID', 'Account', 'User', 'First Name', 'Last Name', 'Role'];
 
     /**
-     * They fields of the table / database row
+     * The fields of the table / database row
      * @var array
      */
     protected $fields = ['id', 'account_id', 'email', 'first_name', 'last_name'];
@@ -51,12 +51,37 @@ class ListCommand extends Command
      */
     public function handle()
     {
+
         if (!empty($this->option('filter'))) {
             $users = User::where('email', 'like', "%{$this->option('filter')}%")->get($this->fields);
         } else {
             $users = User::all($this->fields);
         }
 
-        $this->table($this->headers, $users);
+        $userlist = [];
+        foreach ($users as $user) {
+
+            $role = $user->roles()->first();
+            if (!is_object($role)) {
+                $role = 'None';
+            } else {
+                $role = $role->role_title;
+            }
+
+            $account = $user->account()->first();
+            if (!is_object($account)) {
+                $account = 'None';
+            } else {
+                $account = $account->name;
+            }
+
+            $user = $user->toArray();
+            $user['role'] = $role;
+            $user['account_id'] = $account;
+
+            $userlist[] = $user;
+        }
+
+        $this->table($this->headers, $userlist);
     }
 }
