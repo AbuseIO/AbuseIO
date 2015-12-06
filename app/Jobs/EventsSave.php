@@ -37,8 +37,8 @@ class EventsSave extends Job implements SelfHandling
         $eventsIgnored = 0;
 
         foreach ($this->events as $event) {
-            /* Here we will seek through all the events and look if there is an existing ticket. We will split them up into
-             * two seperate arrays: $eventsNew and $events$known. We can save all the known events in the DB with
+            /* Here we will seek through all the events and look if there is an existing ticket. We will split them up
+             * into two seperate arrays: $eventsNew and $events$known. We can save all the known events in the DB with
              * a single event saving loads of queries
              *
              * IP Owner is leading, as in most cases even if the domain is moved
