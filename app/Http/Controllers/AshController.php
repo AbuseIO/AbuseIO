@@ -52,7 +52,7 @@ class AshController extends Controller
                 ->with('message', 'You cannot add an empty message!');
         }
 
-        $note = new Note;
+        $note = new Note();
         $note->ticket_id = $ticket->id;
         $note->submitter = trans('ash.communication.contact');
         $note->text = $text;

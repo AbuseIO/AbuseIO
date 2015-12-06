@@ -131,7 +131,7 @@ class EventsSave extends Job implements SelfHandling
                  */
                 $ticketCount++;
 
-                $newTicket = new Ticket;
+                $newTicket = new Ticket();
                 $newTicket->ip                         = $event['ip'];
                 $newTicket->domain                     = empty($event['domain']) ? '' : $event['domain'];
                 $newTicket->class_id                   = $event['class'];
@@ -160,7 +160,7 @@ class EventsSave extends Job implements SelfHandling
 
                 $newTicket->save();
 
-                $newEvent = new Event;
+                $newEvent = new Event();
                 $newEvent->evidence_id = $this->evidenceID;
                 $newEvent->information = $event['information'];
                 $newEvent->source      = $event['source'];
@@ -188,7 +188,7 @@ class EventsSave extends Job implements SelfHandling
                     // New unique event, so we will save this
                     $eventCount++;
 
-                    $newEvent = new Event;
+                    $newEvent = new Event();
 
                     $newEvent->evidence_id  = $this->evidenceID;
                     $newEvent->information  = $event['information'];

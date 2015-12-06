@@ -16,7 +16,7 @@ class FindContact extends Job
      */
     public static function undefined()
     {
-        $contact = new Contact;
+        $contact = new Contact();
         $contact->reference     = 'UNDEF';
         $contact->name          = 'Undefined customer';
         $contact->enabled       = true;
