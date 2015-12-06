@@ -10,12 +10,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $class_id
  * @property integer $type_id
  * @property string $email
+ * @property string $ip_contact_account_id
  * @property string $ip_contact_reference
  * @property string $ip_contact_name
  * @property string $ip_contact_email
  * @property string $ip_contact_rpchost
  * @property string $ip_contact_rpckey
  * @property string $ip_contact_auto_notify
+ * @property string $domain_contact_account_id
  * @property string $domain_contact_reference
  * @property string $domain_contact_name
  * @property string $domain_contact_email
