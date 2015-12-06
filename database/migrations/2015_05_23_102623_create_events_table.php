@@ -24,6 +24,7 @@ class CreateEventsTable extends Migration
                 $table->integer('timestamp');
                 $table->longText('information');
                 $table->timestamps();
+                $table->softDeletes();
 
                 $table->index('ticket_id');
                 $table->index('evidence_id');

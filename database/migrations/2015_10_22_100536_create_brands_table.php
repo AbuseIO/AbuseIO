@@ -21,6 +21,7 @@ class CreateBrandsTable extends Migration
                 $table->string('introduction_text');
                 $table->binary('logo');
                 $table->timestamps();
+                $table->softDeletes();
             }
         );
 
@@ -43,7 +44,9 @@ class CreateBrandsTable extends Migration
                 'name'                      => 'default',
                 'company_name'              => 'AbuseIO',
                 'introduction_text'         => 'This is an introduction text',
-                'logo'                      => $abuseio_logo
+                'logo'                      => $abuseio_logo,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
         ];
 

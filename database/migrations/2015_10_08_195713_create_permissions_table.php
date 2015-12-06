@@ -20,6 +20,8 @@ class CreatePermissionsTable extends Migration
                 $table->string('permission_title');
                 $table->string('permission_slug');
                 $table->string('permission_description')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
 
             }
         );
@@ -42,16 +44,22 @@ class CreatePermissionsTable extends Migration
                 'permission_title'          => 'login using portal',
                 'permission_slug'           => 'login_portal',
                 'permission_description'    => 'Login to portal',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
             [
                 'permission_title'          => 'login using api',
                 'permission_slug'           => 'login_api',
                 'permission_description'    => 'Login to api',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
             [
                 'permission_title'          => 'manage profile',
                 'permission_slug'           => 'profile_manage',
                 'permission_description'    => 'Manage own profile',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
         ];
 
@@ -82,6 +90,8 @@ class CreatePermissionsTable extends Migration
                     'permission_title'          => "{$action} {$controller}",
                     'permission_slug'           => "{$controller}_{$action}",
                     'permission_description'    => "Allow to {$action} {$controller}",
+                    'created_at'                => new DateTime,
+                    'updated_at'                => new DateTime,
                 ];
             }
         }
@@ -93,6 +103,8 @@ class CreatePermissionsTable extends Migration
                     'permission_title'          => "{$action} {$controller}",
                     'permission_slug'           => "{$controller}_{$action}",
                     'permission_description'    => "Allow to {$action} {$controller}",
+                    'created_at'                => new DateTime,
+                    'updated_at'                => new DateTime,
                 ];
             }
         }

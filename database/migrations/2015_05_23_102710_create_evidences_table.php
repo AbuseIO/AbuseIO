@@ -22,6 +22,7 @@ class CreateEvidencesTable extends Migration
                 $table->string('sender');
                 $table->string('subject');
                 $table->timestamps();
+                $table->softDeletes();
     
                 $table->index('filename');
                 $table->index('sender');

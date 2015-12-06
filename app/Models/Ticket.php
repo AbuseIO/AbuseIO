@@ -1,6 +1,7 @@
 <?php namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Ticket
@@ -33,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Ticket extends Model
 {
+
+    use SoftDeletes;
 
     /**
      * The database table used by the model.

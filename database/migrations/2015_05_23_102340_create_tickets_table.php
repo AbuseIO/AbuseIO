@@ -41,6 +41,7 @@ class CreateTicketsTable extends Migration
                 $table->integer('last_notify_count')->unsigned();
                 $table->integer('last_notify_timestamp');
                 $table->timestamps();
+                $table->softDeletes();
 
                 $table->index('ip');
                 $table->index('domain');

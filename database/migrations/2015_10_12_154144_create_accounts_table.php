@@ -19,8 +19,9 @@ class CreateAccountsTable extends Migration
                 $table->string('name')->unique();
                 $table->string('description');
                 $table->boolean('disabled')->default(false);
-                $table->timestamps();
                 $table->integer('brand_id');
+                $table->timestamps();
+                $table->softDeletes();
             }
         );
 
@@ -39,6 +40,8 @@ class CreateAccountsTable extends Migration
                 'description'               => 'The default account',
                 'disabled'                  => false,
                 'brand_id'                  => 1,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
         ];
 

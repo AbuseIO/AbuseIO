@@ -66,6 +66,8 @@ class UsersTableSeeder extends Seeder
                 'id'                        => 2,
                 'role_title'                => 'Abuse User',
                 'role_slug'                 => 'abuse',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
         ];
 
@@ -93,6 +95,8 @@ class UsersTableSeeder extends Seeder
             $permission_role[] = [
                 'permission_id'             => $permission->id,
                 'role_id'                   => '2',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ];
         }
 
@@ -106,16 +110,22 @@ class UsersTableSeeder extends Seeder
                 'id'                        => 1,
                 'role_id'                   => 1,
                 'user_id'                   => 1,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
             [
                 'id'                        => 2,
                 'role_id'                   => 2,
                 'user_id'                   => 2,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
             [
                 'id'                        => 3,
                 'role_id'                   => 1,
                 'user_id'                   => 3,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
         ];
         DB::table('role_user')->insert($role_user);

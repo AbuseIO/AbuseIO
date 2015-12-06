@@ -1,6 +1,7 @@
 <?php namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Contact
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Contact extends Model
 {
+    use SoftDeletes;
 
     protected $table    = 'contacts';
 

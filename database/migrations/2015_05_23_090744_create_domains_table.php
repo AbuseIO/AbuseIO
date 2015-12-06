@@ -22,6 +22,7 @@ class CreateDomainsTable extends Migration
                 $table->integer('contact_id')->unsigned();
                 $table->boolean('enabled')->unsigned();
                 $table->timestamps();
+                $table->softDeletes();
 
                 $table->index('name');
                 $table->index('contact_id');

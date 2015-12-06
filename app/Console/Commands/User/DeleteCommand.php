@@ -14,8 +14,7 @@ class DeleteCommand extends Command
      * @var string
      */
     protected $signature = 'user:delete
-                            {--email= : Use the email/login to show user details [OR] }
-                            {--id= : Use the user id to show user details }
+                            {--user= : Use the user email or id to delete }
     ';
 
     /**
@@ -40,20 +39,18 @@ class DeleteCommand extends Command
      */
     public function handle()
     {
-        if (empty($this->option('email')) &&
-            empty($this->option('id'))
-        ) {
+        if (empty($this->option('user'))) {
             $this->warn('no email or id argument was passed, try help');
             return false;
         }
 
         $user = false;
-        if (!empty($this->option('email'))) {
-            $user = User::where('email', $this->option('email'))->first();
+        if (!is_object($user)) {
+            $user = User::where('email', $this->option('user'))->first();
         }
 
-        if (!empty($this->option('id'))) {
-            $user = User::find($this->option('id'));
+        if (!is_object($user)) {
+            $user = User::find($this->option('user'));
         }
 
         if (!is_object($user)) {

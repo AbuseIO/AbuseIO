@@ -26,6 +26,7 @@ class CreateNetblocksTable extends Migration
                 $table->string('description');
                 $table->boolean('enabled')->unsigned();
                 $table->timestamps();
+                $table->softDeletes();
 
                 $table->index('contact_id');
                 $table->index('enabled');

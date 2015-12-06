@@ -20,6 +20,8 @@ class CreatePermissionRoleTable extends Migration
                 $table->increments('id');
                 $table->integer('permission_id');
                 $table->integer('role_id');
+                $table->timestamps();
+                $table->softDeletes();
 
             }
         );
@@ -38,6 +40,8 @@ class CreatePermissionRoleTable extends Migration
             $permission_role[] = [
                 'permission_id'             => $permission->id,
                 'role_id'                   => '1',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ];
         }
 

@@ -1,6 +1,7 @@
 <?php namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Domain
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Domain extends Model
 {
+    use SoftDeletes;
 
     protected $table    = 'domains';
 

@@ -19,6 +19,8 @@ class CreateRolesTable extends Migration
                 $table->increments('id');
                 $table->string('role_title');
                 $table->string('role_slug');
+                $table->timestamps();
+                $table->softDeletes();
 
             }
         );
@@ -35,6 +37,8 @@ class CreateRolesTable extends Migration
                 'id'                        => 1,
                 'role_title'                => 'System Administrator',
                 'role_slug'                 => 'admin',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
             ],
         ];
         DB::table('roles')->insert($roles);

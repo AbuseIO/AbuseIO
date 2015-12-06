@@ -24,6 +24,7 @@ class CreateNotesTable extends Migration
                 $table->boolean('hidden')->unsigned();
                 $table->boolean('viewed')->unsigned();
                 $table->timestamps();
+                $table->softDeletes();
 
                 $table->index('ticket_id');
 

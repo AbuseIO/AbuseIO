@@ -1,6 +1,7 @@
 <?php namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use ICF;
 
 /**
@@ -14,6 +15,8 @@ use ICF;
  */
 class Netblock extends Model
 {
+    use SoftDeletes;
+
     protected $table    = 'netblocks';
 
     protected $fillable = [

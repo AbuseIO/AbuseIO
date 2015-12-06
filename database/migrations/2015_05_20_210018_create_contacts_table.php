@@ -27,6 +27,7 @@ class CreateContactsTable extends Migration
                 $table->boolean('auto_notify')->unsigned();
                 $table->boolean('enabled')->unsigned();
                 $table->timestamps();
+                $table->softDeletes();
 
                 $table->index('reference');
                 $table->index('name');
