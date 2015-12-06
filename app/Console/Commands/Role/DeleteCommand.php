@@ -46,7 +46,7 @@ class DeleteCommand extends Command
 
         $role = false;
         if (!is_object($role)) {
-            $role = Role::where('role_name', $this->option('role'))->first();
+            $role = Role::where('name', $this->option('role'))->first();
         }
 
         if (!is_object($role)) {

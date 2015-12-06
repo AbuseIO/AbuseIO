@@ -64,8 +64,8 @@ class UsersTableSeeder extends Seeder
         $roles =  [
             [
                 'id'                        => 2,
-                'role_name'                 => 'abuse',
-                'role_description'          => 'Abuse User',
+                'name'                      => 'abuse',
+                'description'               => 'Abuse User',
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
@@ -90,7 +90,7 @@ class UsersTableSeeder extends Seeder
         // abuseio User role permissions
         foreach ($permissions as $permission_name) {
 
-            $permission = Permission::where('permission_slug', '=', $permission_name)->first();
+            $permission = Permission::where('name', '=', $permission_name)->first();
 
             $permission_role[] = [
                 'permission_id'             => $permission->id,

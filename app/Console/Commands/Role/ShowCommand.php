@@ -33,7 +33,7 @@ class ShowCommand extends Command
      * The fields of the table / database row
      * @var array
      */
-    protected $fields = ['id', 'role_name', 'role_description'];
+    protected $fields = ['id', 'name', 'description'];
 
     /**
      * Create a new command instance.
@@ -58,7 +58,7 @@ class ShowCommand extends Command
 
         $role = false;
         if (!is_object($role)) {
-            $role = Role::where('role_name', $this->option('role'))->first();
+            $role = Role::where('name', $this->option('role'))->first();
         }
 
         if (!is_object($role)) {

@@ -23,16 +23,16 @@ class Role extends Model
      * @var array
      */
     protected $fillable = [
-        'role_name',
-        'role_description',
+        'name',
+        'description',
     ];
 
     /*
      * The default model validation rules on creation
      */
     private $createRules = [
-        'role_name'         => 'required|string|min:1|unique:roles,role_name',
-        'role_description'  => 'required|string|min:1',
+        'name'              => 'required|string|min:1|unique:roles,name',
+        'description'       => 'required|string|min:1',
     ];
 
     /*
@@ -40,8 +40,8 @@ class Role extends Model
      */
     private $updateRules = [
         'id'                => 'required|exists:roles,id',
-        'role_name'         => 'required|string|min:1|unique:roles,role_name',
-        'role_description'  => 'required|string|min:1',
+        'name'              => 'required|string|min:1|unique:roles,name',
+        'description'       => 'required|string|min:1',
     ];
 
     /*

@@ -33,7 +33,7 @@ class ListCommand extends Command
      * The fields of the table / database row
      * @var array
      */
-    protected $fields = ['id', 'role_name', 'role_description'];
+    protected $fields = ['id', 'name', 'description'];
 
     /**
      * Create a new command instance.
@@ -53,7 +53,7 @@ class ListCommand extends Command
     {
 
         if (!empty($this->option('filter'))) {
-            $roles = Role::where('role_name', 'like', "%{$this->option('filter')}%")->get($this->fields);
+            $roles = Role::where('name', 'like', "%{$this->option('filter')}%")->get($this->fields);
         } else {
             $roles = Role::all($this->fields);
         }

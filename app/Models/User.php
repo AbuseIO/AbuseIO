@@ -141,7 +141,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                     array_map(
                         function ($permission) {
 
-                            return array_fetch($permission, 'permission_slug');
+                            return array_fetch($permission, 'name');
 
                         },
                         $permissions
@@ -213,7 +213,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $roles = $this->roles;
         foreach ($roles as $role)
         {
-            if ($role->role_name == $role_name)
+            if ($role->name == $role_name)
             {
                 $result = true;
                 break;

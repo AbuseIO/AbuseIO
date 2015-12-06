@@ -17,9 +17,8 @@ class CreatePermissionsTable extends Migration
             function (Blueprint $table) {
 
                 $table->increments('id');
-                $table->string('permission_title');
-                $table->string('permission_slug');
-                $table->string('permission_description')->nullable();
+                $table->string('name');
+                $table->string('description')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
 
@@ -41,23 +40,20 @@ class CreatePermissionsTable extends Migration
         // Add single permissions
         $permissions = [
             [
-                'permission_title'          => 'login using portal',
-                'permission_slug'           => 'login_portal',
-                'permission_description'    => 'Login to portal',
+                'name'                      => 'login_portal',
+                'description'               => 'Login to portal',
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
             [
-                'permission_title'          => 'login using api',
-                'permission_slug'           => 'login_api',
-                'permission_description'    => 'Login to api',
+                'name'                      => 'login_api',
+                'description'               => 'Login to api',
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
             [
-                'permission_title'          => 'manage profile',
-                'permission_slug'           => 'profile_manage',
-                'permission_description'    => 'Manage own profile',
+                'name'                      => 'profile_manage',
+                'description'               => 'Manage own profile',
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
@@ -87,9 +83,8 @@ class CreatePermissionsTable extends Migration
         foreach ($controllers as $controller) {
             foreach ($actions as $action) {
                 $permissions[] = [
-                    'permission_title'          => "{$action} {$controller}",
-                    'permission_slug'           => "{$controller}_{$action}",
-                    'permission_description'    => "Allow to {$action} {$controller}",
+                    'name'                      => "{$controller}_{$action}",
+                    'description'               => "Allow to {$action} {$controller}",
                     'created_at'                => new DateTime,
                     'updated_at'                => new DateTime,
                 ];
@@ -100,9 +95,8 @@ class CreatePermissionsTable extends Migration
         foreach (['accounts', 'users'] as $controller) {
             foreach (['disable', 'enable'] as $action) {
                 $permissions[] = [
-                    'permission_title'          => "{$action} {$controller}",
-                    'permission_slug'           => "{$controller}_{$action}",
-                    'permission_description'    => "Allow to {$action} {$controller}",
+                    'name'                      => "{$controller}_{$action}",
+                    'description'               => "Allow to {$action} {$controller}",
                     'created_at'                => new DateTime,
                     'updated_at'                => new DateTime,
                 ];

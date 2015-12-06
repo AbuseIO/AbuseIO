@@ -65,7 +65,7 @@ class ListCommand extends Command
             if (!is_object($role)) {
                 $role = 'None';
             } else {
-                $role = $role->role_description;
+                $role = $role->description;
             }
 
             $account = $user->account()->first();

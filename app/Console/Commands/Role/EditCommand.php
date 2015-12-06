@@ -49,7 +49,7 @@ class EditCommand extends Command
 
         $role = false;
         if (!is_object($role)) {
-            $role = Role::where('role_name', $this->option('role'))->first();
+            $role = Role::where('name', $this->option('role'))->first();
         }
 
         if (!is_object($role)) {
@@ -63,10 +63,10 @@ class EditCommand extends Command
 
         // Apply changes to the role object
         if (!empty($this->option('name'))) {
-            $role->role_name = $this->option('name');
+            $role->name = $this->option('name');
         }
         if (!empty($this->option('description'))) {
-            $role->role_description = $this->option('description');
+            $role->description = $this->option('description');
         }
 
         // Validate the changes

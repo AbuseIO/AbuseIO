@@ -48,8 +48,8 @@ class CreateCommand extends Command
         }
 
         $roleadd = [
-            'role_name'         => empty($this->option('name')) ? false : $this->option('name'),
-            'role_description'  => empty($this->option('description')) ? false : $this->option('description'),
+            'name'         => empty($this->option('name')) ? false : $this->option('name'),
+            'description'  => empty($this->option('description')) ? false : $this->option('description'),
         ];
 
         $role = new Role();
