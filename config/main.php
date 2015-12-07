@@ -47,7 +47,8 @@ return [
     ],
 
     'external' => [
-        'findcontact'                      => [
+        'prefer_local'                      => true,
+        'findcontact'                       => [
             'id' => [
                 'class'                     => 'Custom',
                 'method'                    => 'getContactById'

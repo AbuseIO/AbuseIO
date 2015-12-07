@@ -61,6 +61,15 @@ class FindContact extends Job
      */
     public static function byIP($ip)
     {
+        // If local lookups are not preferred, then do the remote lookup first
+        if (config('main.external.prefer_local') === false) {
+            $findContact = FindContact::getExternalContact('ip', $ip);
+            if (!empty($findContact)) {
+                return $findContact;
+            }
+        }
+
+        // Do a local lookup
         $result = Netblock::
             where('first_ip_int', '<=', ICF::inetPtoi($ip))
             ->where('last_ip_int', '>=', ICF::inetPtoi($ip))
@@ -74,9 +83,12 @@ class FindContact extends Job
             return $result[0]->contact;
         }
 
-        $findContact = FindContact::getExternalContact('ip', $ip);
-        if (!empty($findContact)) {
-            return $findContact;
+        // Do a remote lookup, if local lookups are preferred. Else skip this as this was already done.
+        if (config('main.external.prefer_local') === true) {
+            $findContact = FindContact::getExternalContact('ip', $ip);
+            if (!empty($findContact)) {
+                return $findContact;
+            }
         }
 
         return FindContact::undefined();
@@ -89,6 +101,15 @@ class FindContact extends Job
      */
     public static function byDomain($domain)
     {
+        // If local lookups are not preferred, then do the remote lookup first
+        if (config('main.external.prefer_local') === false) {
+            $findContact = FindContact::getExternalContact('domain', $domain);
+            if (!empty($findContact)) {
+                return $findContact;
+            }
+        }
+
+        // Do a local lookup
         $result = Domain::where('name', '=', $domain)
                     ->where('enabled', '=', true)
                     ->take(1)
@@ -98,9 +119,12 @@ class FindContact extends Job
             return $result[0]->contact;
         }
 
-        $findContact = FindContact::getExternalContact('domain', $domain);
-        if (!empty($findContact)) {
-            return $findContact;
+        // Do a remote lookup, if local lookups are preferred. Else skip this as this was already done.
+        if (config('main.external.prefer_local') === true) {
+            $findContact = FindContact::getExternalContact('domain', $domain);
+            if (!empty($findContact)) {
+                return $findContact;
+            }
         }
 
         return FindContact::undefined();
@@ -113,6 +137,15 @@ class FindContact extends Job
      */
     public static function byId($id)
     {
+        // If local lookups are not preferred, then do the remote lookup first
+        if (config('main.external.prefer_local') === false) {
+            $findContact = FindContact::getExternalContact('id', $id);
+            if (!empty($findContact)) {
+                return $findContact;
+            }
+        }
+
+        // Do a local lookup
         $result = Contact::where('reference', '=', $id)
                     ->where('enabled', '=', true)
                     ->take(1)
@@ -122,11 +155,14 @@ class FindContact extends Job
             return $result[0];
         }
 
-        $findContact = FindContact::getExternalContact('id', $id);
-        if (!empty($findContact)) {
-            return $findContact;
+        // Do a remote lookup, if local lookups are preferred. Else skip this as this was already done.
+        if (config('main.external.prefer_local') === true) {
+            $findContact = FindContact::getExternalContact('id', $id);
+            if (!empty($findContact)) {
+                return $findContact;
+            }
         }
-
+        
         return FindContact::undefined();
     }
 }
