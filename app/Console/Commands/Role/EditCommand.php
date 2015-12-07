@@ -4,7 +4,7 @@ namespace AbuseIO\Console\Commands\Role;
 
 use Illuminate\Console\Command;
 use AbuseIO\Models\Role;
-use AbuseIO\Models\Account;
+use Validator;
 use Carbon;
 
 class EditCommand extends Command
@@ -70,7 +70,9 @@ class EditCommand extends Command
         }
 
         // Validate the changes
-        $validation = $role->validateUpdate($role->toArray());
+        $roleChange = $role->toArray();
+
+        $validation = Validator::make($roleChange, $role->updateRules($roleChange));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {

@@ -7,7 +7,6 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Hash;
-use Validator;
 
 /**
  * Class User
@@ -58,10 +57,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     /*
-     * Validation method for this model being created
-     * $rules is inside function because of interaction with $data
+     * Validation rules for this model being created
+     *
+     * @param  Array $data
+     * @return Array $rules
      */
-    public function validateCreate($data)
+    public function createRules($data)
     {
         $rules = [
             'first_name'    => 'required|string',
@@ -73,31 +74,28 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'disabled'      => 'required:boolean',
         ];
 
-        $validation = Validator::make($data, $rules);
-
-        return $validation;
+        return $rules;
     }
 
     /*
-     * Validation method for this model being updated
-     * $rules is inside function because of interaction with $data
+     * Validation rules for this model being updated
+     *
+     * @param  Array $data
+     * @return Array $rules
      */
-    public function validateUpdate($data)
+    public function updateRules($data)
     {
         $rules = [
-            'id'            => 'required|exists:users,id',
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'email'         => 'required|email|exists:users,email',
+            'email'         => "required|email|unique:users,email,{$data['email']}",
             'password'      => 'string|min:6|max:32', //protected field is only availabe if being created
             'account_id'    => 'required|integer',
             'locale'        => 'required|min:2|max:3',
             'disabled'      => 'required|boolean',
         ];
 
-        $validation = Validator::make($data, $rules);
-
-        return $validation;
+        return $rules;
     }
 
 

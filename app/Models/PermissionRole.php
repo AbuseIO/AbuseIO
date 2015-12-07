@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Validator;
 
 /**
  * Class PermissionRole
@@ -33,36 +32,40 @@ class PermissionRole extends Model
     ];
 
     /*
-     * Validation method for this model being created
-     * $rules is inside function because of interaction with $data
+     * Validation rules for this model being created
+     *
+     * @param  Array $data
+     * @return Array $rules
      */
-    public function validateCreate($data)
+    public function createRules($data)
     {
         $rules = [
-            'role_id'               => "required|integer|unique:permission_role,role_id,NULL,id,permission_id,{$data['permission_id']}",
-            'permission_id'         => "required|integer|unique:permission_role,permission_id,NULL,id,role_id,{$data['role_id']}",
+            'role_id'               => "required|integer|".
+                "unique:permission_role,role_id,NULL,id,permission_id,{$data['permission_id']}",
+            'permission_id'         => "required|integer|".
+                "unique:permission_role,permission_id,NULL,id,role_id,{$data['role_id']}",
         ];
 
-        $validation = Validator::make($data, $rules);
-
-        return $validation;
+        return $rules;
     }
 
     /*
-     * Validation method for this model being updated
-     * $rules is inside function because of interaction with $data
+     * Validation rules for this model being updated
+     *
+     * @param  Array $data
+     * @return Array $rules
      */
-    public function validateUpdate($data)
+    public function updateRules($data)
     {
         $rules = [
             'id'                    => 'required|exists:permissions_role,id',
-            'role_id'               => "required|integer|unique:permission_role,role_id,NULL,id,permission_id,{$data['permission_id']}",
-            'permission_id'         => "required|integer|unique:permission_role,permission_id,NULL,id,role_id,{$data['role_id']}",
+            'role_id'               => "required|integer|".
+                "unique:permission_role,role_id,NULL,id,permission_id,{$data['permission_id']}",
+            'permission_id'         => "required|integer|".
+                "unique:permission_role,permission_id,NULL,id,role_id,{$data['role_id']}",
         ];
 
-        $validation = Validator::make($data, $rules);
-
-        return $validation;
+        return $rules;
     }
 
     /*

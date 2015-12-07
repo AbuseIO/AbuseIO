@@ -5,6 +5,7 @@ namespace AbuseIO\Console\Commands\User;
 use Illuminate\Console\Command;
 use AbuseIO\Models\User;
 use AbuseIO\Models\Account;
+use Validator;
 use Carbon;
 
 class EditCommand extends Command
@@ -106,7 +107,9 @@ class EditCommand extends Command
         }
 
         // Validate the changes
-        $validation = $user->validateUpdate($user->toArray());
+        $userChange = $user->toArray();
+
+        $validation = Validator::make($userChange, $user->createRules($userChange));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {

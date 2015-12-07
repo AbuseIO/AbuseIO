@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Validator;
 
 /**
  * Class RoleUser
@@ -33,26 +32,28 @@ class RoleUser extends Model
     ];
 
     /*
-     * Validation method for this model being created
-     * $rules is inside function because of interaction with $data
+     * Validation rules for this model being created
+     *
+     * @param  Array $data
+     * @return Array $rules
      */
-    public function validateCreate($data)
+    public function createRules($data)
     {
         $rules = [
             'role_id' => "required|integer|unique:role_user,role_id,NULL,id,user_id,{$data['user_id']}",
             'user_id' => "required|integer|unique:role_user,user_id,NULL,id,role_id,{$data['role_id']}",
         ];
 
-        $validation = Validator::make($data, $rules);
-
-        return $validation;
+        return $rules;
     }
 
     /*
-     * Validation method for this model being updated
-     * $rules is inside function because of interaction with $data
+     * Validation rules for this model being updated
+     *
+     * @param  Array $data
+     * @return Array $rules
      */
-    public function validateUpdate($data)
+    public function updateRules($data)
     {
         $rules = [
             'id'      => 'required|exists:permissions_role,id',
@@ -60,9 +61,7 @@ class RoleUser extends Model
             'user_id' => "required|integer|unique:role_user,user_id,NULL,id,role_id,{$data['role_id']}",
         ];
 
-        $validation = Validator::make($data, $rules);
-
-        return $validation;
+        return $rules;
     }
 
     /*

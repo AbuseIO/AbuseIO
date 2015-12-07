@@ -70,5 +70,4 @@ class ProfileController extends Controller
         return Redirect::route('admin.profile.index')
             ->with('message', 'Profile has been updated.');
     }
-
 }

@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\User;
 use AbuseIO\Models\RoleUser;
+use Validator;
 use Carbon;
 
 class AssignCommand extends Command
@@ -90,7 +91,8 @@ class AssignCommand extends Command
         ];
 
         $RoleUser = new RoleUser();
-        $validation = $RoleUser->validateCreate($RoleUserAdd);
+
+        $validation = Validator::make($RoleUserAdd, $RoleUser->createRules($RoleUserAdd));
 
         if ($validation->fails()) {
             $this->warn('The role has already been granted this permission');

@@ -91,7 +91,9 @@ class RevokeCommand extends Command
             ->first();
 
         if (!is_object($roleUser)) {
-            $this->error('Nothing to delete, this {$permission->name} permission is not linked to the role {$role->name}');
+            $this->error(
+                'Nothing to delete, this {$permission->name} permission is not linked to the role {$role->name}'
+            );
             return false;
         }
 

@@ -5,6 +5,7 @@ namespace AbuseIO\Console\Commands\Role;
 use Illuminate\Console\Command;
 use AbuseIO\Models\Role;
 use Carbon;
+use Validator;
 
 class CreateCommand extends Command
 {
@@ -47,13 +48,13 @@ class CreateCommand extends Command
             return false;
         }
 
-        $roleadd = [
+        $roleAdd = [
             'name'         => empty($this->option('name')) ? false : $this->option('name'),
             'description'  => empty($this->option('description')) ? false : $this->option('description'),
         ];
 
         $role = new Role();
-        $validation = $role->validateCreate($roleadd);
+        $validation = Validator::make($roleAdd, $role->createRules($roleAdd));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
@@ -65,7 +66,7 @@ class CreateCommand extends Command
             return false;
         }
 
-        $role->fill($roleadd);
+        $role->fill($roleAdd);
 
         if (!$role->save()) {
             $this->error('Failed to save the role into the database');

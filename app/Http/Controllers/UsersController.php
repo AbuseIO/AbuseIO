@@ -51,8 +51,7 @@ class UsersController extends Controller
                     $actions .= ' <a href="users/' . $user->id .
                         '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
                         trans('misc.button.edit').'</a> ';
-                    if ($user->disabled)
-                    {
+                    if ($user->disabled) {
                         $actions .= ' <a href="users/' . $user->id .
                             '/enable" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok-circle"></i> '.
                             trans('misc.button.enable').'</a> ';

@@ -28,8 +28,9 @@ class LocaleController extends Controller
 
         if ($validator->passes()) {
             Session::put('locale', $locale);
-            return redirect(url(URL::previous()));
         }
+
+        return redirect(url(URL::previous()));
 
     }
 }

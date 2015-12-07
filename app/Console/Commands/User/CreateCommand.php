@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Carbon;
 use AbuseIO\Models\User;
 use AbuseIO\Models\Account;
+use Validator;
 
 class CreateCommand extends Command
 {
@@ -61,7 +62,7 @@ class CreateCommand extends Command
             }
         }
 
-        $useradd = [
+        $userAdd = [
             'email'         => empty($this->option('email')) ? false : $this->option('email'),
             'password'      => empty($this->option('password')) ? $generatedPassword : $this->option('password'),
             'first_name'    => $this->option('firstname'),
@@ -72,7 +73,7 @@ class CreateCommand extends Command
         ];
 
         $user = new User();
-        $validation = $user->validateCreate($useradd);
+        $validation = Validator::make($userAdd, $user->createRules($userAdd));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
@@ -84,7 +85,7 @@ class CreateCommand extends Command
             return false;
         }
 
-        $user->fill($useradd);
+        $user->fill($userAdd);
 
         if (!$user->save()) {
             $this->error('Failed to save the user into the database');

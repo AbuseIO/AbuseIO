@@ -4,7 +4,6 @@ namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Validator;
 
 /**
  * Class Role
@@ -35,26 +34,28 @@ class Role extends Model
     ];
 
     /*
-     * Validation method for this model being created
-     * $rules is inside function because of interaction with $data
+     * Validation rules for this model being created
+     *
+     * @param  Array $data
+     * @return Array $rules
      */
-    public function validateCreate($data)
+    public function createRules($data)
     {
         $rules = [
             'name'              => 'required|string|min:1|unique:roles,name',
             'description'       => 'required|string|min:1',
         ];
 
-        $validation = Validator::make($data, $rules);
-
-        return $validation;
+        return $rules;
     }
 
     /*
-     * Validation method for this model being updated
-     * $rules is inside function because of interaction with $data
+     * Validation rules for this model being updated
+     *
+     * @param  Array $data
+     * @return Array $rules
      */
-    public function validateUpdate($data)
+    public function updateRules($data)
     {
 
         $rules = [
@@ -63,9 +64,7 @@ class Role extends Model
             'description'       => 'required|string|min:1',
         ];
 
-        $validation = Validator::make($data, $rules);
-
-        return $validation;
+        return $rules;
     }
 
     /*

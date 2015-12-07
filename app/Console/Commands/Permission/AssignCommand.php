@@ -4,9 +4,9 @@ namespace AbuseIO\Console\Commands\Permission;
 
 use Illuminate\Console\Command;
 use AbuseIO\Models\Role;
-use AbuseIO\Models\User;
 use AbuseIO\Models\Permission;
 use AbuseIO\Models\PermissionRole;
+use Validator;
 use Carbon;
 
 class AssignCommand extends Command
@@ -92,7 +92,8 @@ class AssignCommand extends Command
         ];
 
         $permissionRole = new PermissionRole();
-        $validation = $permissionRole->validateCreate($permissionRoleAdd);
+
+        $validation = Validator::make($permissionRoleAdd, $permissionRole->createRules($permissionRoleAdd));
 
         if ($validation->fails()) {
             $this->warn('The role has already been granted this permission');
