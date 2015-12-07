@@ -59,16 +59,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /*
      * Validation rules for this model being created
      *
-     * @param  Array $data
+     * @param  Model $user
      * @return Array $rules
      */
-    public function createRules($data)
+    public function createRules($user)
     {
         $rules = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'email'         => 'required|email|unique:users,email',
-            'password'      => 'required|string|min:6|max:32',
+            'password'      => 'sometimes|confirmed|min:6|max:32',
             'account_id'    => 'required|integer',
             'locale'        => 'required|min:2|max:3',
             'disabled'      => 'required:boolean',
@@ -80,16 +80,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /*
      * Validation rules for this model being updated
      *
-     * @param  Array $data
+     * @param  Model $user
      * @return Array $rules
      */
-    public function updateRules($data)
+    public function updateRules($user)
     {
         $rules = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'email'         => "required|email|unique:users,email,{$data['email']}",
-            'password'      => 'string|min:6|max:32', //protected field is only availabe if being created
+            'email'         => 'required|email|unique:users,email,' . $user->id,
+            'password'      => 'sometimes|confirmed|min:6|max:32',
             'account_id'    => 'required|integer',
             'locale'        => 'required|min:2|max:3',
             'disabled'      => 'required|boolean',

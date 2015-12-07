@@ -34,14 +34,14 @@ class RoleUser extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Array $data
+     * @param  Model $roleUser
      * @return Array $rules
      */
-    public function createRules($data)
+    public function createRules($roleUser)
     {
         $rules = [
-            'role_id' => "required|integer|unique:role_user,role_id,NULL,id,user_id,{$data['user_id']}",
-            'user_id' => "required|integer|unique:role_user,user_id,NULL,id,role_id,{$data['role_id']}",
+            'role_id' => 'required|integer|unique:role_user,role_id,NULL,id,user_id,' . $roleUser->user_id,
+            'user_id' => 'required|integer|unique:role_user,user_id,NULL,id,role_id,' . $roleUser->role_id,
         ];
 
         return $rules;
@@ -50,15 +50,15 @@ class RoleUser extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Array $data
+     * @param  Model $roleUser
      * @return Array $rules
      */
-    public function updateRules($data)
+    public function updateRules($roleUser)
     {
         $rules = [
             'id'      => 'required|exists:permissions_role,id',
-            'role_id' => "required|integer|unique:role_user,role_id,NULL,id,user_id,{$data['user_id']}",
-            'user_id' => "required|integer|unique:role_user,user_id,NULL,id,role_id,{$data['role_id']}",
+            'role_id' => 'required|integer|unique:role_user,role_id,NULL,id,user_id,' . $roleUser->user_id,
+            'user_id' => 'required|integer|unique:role_user,user_id,NULL,id,role_id,' . $roleUser->role_id,
         ];
 
         return $rules;

@@ -85,14 +85,12 @@ class AssignCommand extends Command
             return false;
         }
 
-        $RoleUserAdd = [
-            'user_id'     => $user->id,
-            'role_id'     => $role->id,
-        ];
-
         $RoleUser = new RoleUser();
 
-        $validation = Validator::make($RoleUserAdd, $RoleUser->createRules($RoleUserAdd));
+        $RoleUser->user_id = $user->id;
+        $RoleUser->role_id = $role->id;
+
+        $validation = Validator::make($RoleUser->toArray(), $RoleUser->createRules($RoleUser));
 
         if ($validation->fails()) {
             $this->warn('The role has already been granted this permission');
@@ -101,8 +99,6 @@ class AssignCommand extends Command
 
             return false;
         }
-
-        $RoleUser->fill($RoleUserAdd);
 
         if (!$RoleUser->save()) {
             $this->error('Failed to save the permission into the database');

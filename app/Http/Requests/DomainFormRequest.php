@@ -21,20 +21,14 @@ class DomainFormRequest extends Request
      */
     public function rules()
     {
+        $domain = new Domain();
+
         switch ($this->method) {
             case 'POST':
-                return [
-                    'name'       => 'required|unique:domains',
-                    'contact_id' => 'required|integer',
-                    'enabled'   => 'required|boolean',
-                ];
+                return $domain->createRules($this);
             case 'PUT':
             case 'PATCH':
-                return [
-                    'name'       => 'required|unique:domains,name,'. $this->id,
-                    'contact_id' => 'required|integer',
-                    'enabled'   => 'required|boolean',
-                ];
+                return $domain->updateRules($this);
             default:
                 break;
         }

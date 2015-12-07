@@ -22,24 +22,14 @@ class UserFormRequest extends Request
      */
     public function rules()
     {
+        $user = new User();
+
         switch ($this->method) {
             case 'POST':
-                return [
-                    'first_name'    => 'required',
-                    'last_name'     => 'sometimes|required',
-                    'email'         => 'required|email|unique:users,email',
-                    'password'      => 'sometimes|confirmed|min:6',
-                    'account_id'    => 'required',
-                ];
+                return $user->createRules($this);
             case 'PUT':
             case 'PATCH':
-                return [
-                    'first_name'    => 'required',
-                    'last_name'     => 'sometimes|required',
-                    'email'         => 'required|email|unique:users,email,'. $this->id,
-                    'password'      => 'sometimes|confirmed|min:6',
-                    'account_id'    => 'required',
-                ];
+                return $user->updateRules($this);
             default:
                 break;
         }

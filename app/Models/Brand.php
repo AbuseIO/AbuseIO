@@ -32,6 +32,41 @@ class Brand extends Model
         'id'
     ];
 
+    /*
+     * Validation rules for this model being created
+     *
+     * @param  Model $brand
+     * @return Array $rules
+     */
+    public function createRules($brand)
+    {
+        $rules = [
+            'name'              => 'required|unique:brands,name',
+            'company_name'      => 'required',
+            'introduction_text' => 'required',
+            'logo'              => 'required'
+        ];
+
+        return $rules;
+    }
+
+    /*
+     * Validation rules for this model being updated
+     *
+     * @param  Model $brand
+     * @return Array $rules
+     */
+    public function updateRules($brand)
+    {
+        $rules = [
+            'name'              => 'required|unique:brands,name,'. $brand->id,
+            'company_name'      => 'required',
+            'introduction_text' => 'required',
+        ];
+
+        return $rules;
+    }
+
     /**
      * Checks if the current user may edit the brand
      *

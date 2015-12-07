@@ -48,13 +48,12 @@ class CreateCommand extends Command
             return false;
         }
 
-        $roleAdd = [
-            'name'         => empty($this->option('name')) ? false : $this->option('name'),
-            'description'  => empty($this->option('description')) ? false : $this->option('description'),
-        ];
-
         $role = new Role();
-        $validation = Validator::make($roleAdd, $role->createRules($roleAdd));
+
+        $role->name         = empty($this->option('name')) ? false : $this->option('name');
+        $role->description  = empty($this->option('description')) ? false : $this->option('description');
+
+        $validation = Validator::make($role->toArray(), $role->createRules($role));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
@@ -65,8 +64,6 @@ class CreateCommand extends Command
 
             return false;
         }
-
-        $role->fill($roleAdd);
 
         if (!$role->save()) {
             $this->error('Failed to save the role into the database');

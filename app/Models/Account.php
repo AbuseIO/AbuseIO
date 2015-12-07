@@ -31,6 +31,36 @@ class Account extends Model
         'id'
     ];
 
+    /*
+     * Validation rules for this model being created
+     *
+     * @param  Model $account
+     * @return Array $rules
+     */
+    public function createRules($account)
+    {
+        $rules = [
+            'name'  => 'required|unique:accounts',
+        ];
+
+        return $rules;
+    }
+
+    /*
+     * Validation rules for this model being updated
+     *
+     * @param  Model $account
+     * @return Array $rules
+     */
+    public function updateRules($account)
+    {
+        $rules = [
+            'name'  => 'required|unique:accounts,name,'. $account->id,
+        ];
+
+        return $rules;
+    }
+
 
     /**
      * Return if the account is the system account
@@ -53,14 +83,12 @@ class Account extends Model
         $auth_account = $user->account;
 
         // System user
-        if ($auth_account->isSystemAccount())
-        {
+        if ($auth_account->isSystemAccount()) {
             return true;
         }
 
         // you can only edit your own account
-        if ($auth_account->id == $this->id)
-        {
+        if ($auth_account->id == $this->id) {
             return true;
         } else {
             return false;
@@ -91,8 +119,7 @@ class Account extends Model
         $auth_account = $user->account;
 
         // never disable the system account
-        if ($this->isSystemAccount())
-        {
+        if ($this->isSystemAccount()) {
             return false;
         }
 

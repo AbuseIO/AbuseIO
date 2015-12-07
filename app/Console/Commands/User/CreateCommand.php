@@ -62,18 +62,17 @@ class CreateCommand extends Command
             }
         }
 
-        $userAdd = [
-            'email'         => empty($this->option('email')) ? false : $this->option('email'),
-            'password'      => empty($this->option('password')) ? $generatedPassword : $this->option('password'),
-            'first_name'    => $this->option('firstname'),
-            'last_name'     => $this->option('lastname'),
-            'locale'        => $this->option('language'),
-            'account_id'    => $account->id,
-            'disabled'      => $this->option('disabled'),
-        ];
-
         $user = new User();
-        $validation = Validator::make($userAdd, $user->createRules($userAdd));
+
+        $user->email         = empty($this->option('email')) ? false : $this->option('email');
+        $user->password      = empty($this->option('password')) ? $generatedPassword : $this->option('password');
+        $user->first_name    = $this->option('firstname');
+        $user->last_name     = $this->option('lastname');
+        $user->locale        = $this->option('language');
+        $user->account_id    = $account->id;
+        $user->disabled      = $this->option('disabled');
+
+        $validation = Validator::make($user->toArray(), $user->createRules($user));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
@@ -84,8 +83,6 @@ class CreateCommand extends Command
 
             return false;
         }
-
-        $user->fill($userAdd);
 
         if (!$user->save()) {
             $this->error('Failed to save the user into the database');

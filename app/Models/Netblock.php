@@ -31,6 +31,44 @@ class Netblock extends Model
         'id'
     ];
 
+    /*
+     * Validation rules for this model being created
+     *
+     * @param  Model $netblock
+     * @return Array $rules
+     */
+    public function createRules($netblock)
+    {
+        $rules = [
+            'first_ip'      => "required|ip|unique:netblocks,first_ip,NULL,id,last_ip,{$netblock->last_ip}",
+            'last_ip'       => "required|ip|unique:netblocks,last_ip,NULL,id,first_ip,{$netblock->first_ip}",
+            'contact_id'    => 'required|integer',
+            'description'   => 'required',
+            'enabled'       => 'required|boolean',
+        ];
+
+        return $rules;
+    }
+
+    /*
+     * Validation rules for this model being updated
+     *
+     * @param  Model $netblock
+     * @return Array $rules
+     */
+    public function updateRules($netblock)
+    {
+        $rules = [
+            'first_ip'      => "required|ip|unique:netblocks,first_ip,{$netblock->id},id,last_ip,{$netblock->last_ip}",
+            'last_ip'       => "required|ip|unique:netblocks,last_ip,{$netblock->id},id,first_ip,{$netblock->first_ip}",
+            'contact_id'    => 'required|integer',
+            'description'   => 'required',
+            'enabled'       => 'required|boolean',
+        ];
+
+        return $rules;
+    }
+
     // Relationships
     public function contact()
     {

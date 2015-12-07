@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Http\Requests\Request;
+use AbuseIO\Models\Contact;
 use Validator;
 
 class ContactFormRequest extends Request
@@ -50,24 +51,14 @@ class ContactFormRequest extends Request
      */
     public function rules()
     {
+        $contact = new Contact();
+
         switch ($this->method) {
             case 'POST':
-                return [
-                    'reference' => 'required|unique:contacts,reference',
-                    'name'      => 'required',
-                    'email'     => 'required|emails',
-                    'rpc_host'  => 'sometimes|url',
-                    'enabled'   => 'required|boolean',
-                ];
+                return $contact->createRules($this);
             case 'PUT':
             case 'PATCH':
-                return [
-                    'reference' => 'required|unique:contacts,reference,'. $this->id,
-                    'name'      => 'required',
-                    'email'     => 'required|emails',
-                    'rpc_host'  => 'sometimes|url',
-                    'enabled'   => 'required|boolean',
-                ];
+                return $contact->updateRules($this);
             default:
                 break;
         }

@@ -26,6 +26,40 @@ class Domain extends Model
         'id'
     ];
 
+    /*
+     * Validation rules for this model being created
+     *
+     * @param  Model $domain
+     * @return Array $rules
+     */
+    public function createRules($domain)
+    {
+        $rules = [
+            'name'          => 'required|unique:domains',
+            'contact_id'    => 'required|integer',
+            'enabled'       => 'required|boolean',
+        ];
+
+        return $rules;
+    }
+
+    /*
+     * Validation rules for this model being updated
+     *
+     * @param  Model $domain
+     * @return Array $rules
+     */
+    public function updateRules($domain)
+    {
+        $rules = [
+            'name'          => 'required|unique:domains,name,'. $domain->id,
+            'contact_id'    => 'required|integer',
+            'enabled'       => 'required|boolean',
+        ];
+
+        return $rules;
+    }
+
     public function contact()
     {
 

@@ -26,6 +26,36 @@ class Evidence extends Model
         'id'
     ];
 
+    /*
+     * Validation rules for this model being created
+     *
+     * @param  Model $evidence
+     * @return Array $rules
+     */
+    public function createRules($evidence)
+    {
+        $rules = [
+            // TODO: Create validation rules instead of EventValidator
+        ];
+
+        return $rules;
+    }
+
+    /*
+     * Validation rules for this model being updated
+     *
+     * @param  Model $evidence
+     * @return Array $rules
+     */
+    public function updateRules($evidence)
+    {
+        $rules = [
+            // TODO: Create validation rules instead of EventValidator
+        ];
+
+        return $rules;
+    }
+
     public function event()
     {
 

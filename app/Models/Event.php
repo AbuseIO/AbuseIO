@@ -30,6 +30,36 @@ class Event extends Model
         'id'
     ];
 
+    /*
+     * Validation rules for this model being created
+     *
+     * @param  Model $event
+     * @return Array $rules
+     */
+    public function createRules($event)
+    {
+        $rules = [
+            // TODO: Create validation rules instead of EventValidator
+        ];
+
+        return $rules;
+    }
+
+    /*
+     * Validation rules for this model being updated
+     *
+     * @param  Model $event
+     * @return Array $rules
+     */
+    public function updateRules($event)
+    {
+        $rules = [
+            // TODO: Create validation rules instead of EventValidator
+        ];
+
+        return $rules;
+    }
+
     public function evidences()
     {
 

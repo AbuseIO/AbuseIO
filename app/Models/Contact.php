@@ -36,6 +36,44 @@ class Contact extends Model
         'id'
     ];
 
+    /*
+     * Validation rules for this model being created
+     *
+     * @param  Model $contact
+     * @return Array $rules
+     */
+    public function createRules($contact)
+    {
+        $rules = [
+            'reference' => 'required|unique:contacts,reference',
+            'name'      => 'required',
+            'email'     => 'required|emails',
+            'rpc_host'  => 'sometimes|url',
+            'enabled'   => 'required|boolean',
+        ];
+
+        return $rules;
+    }
+
+    /*
+     * Validation rules for this model being updated
+     *
+     * @param  Model $contact
+     * @return Array $rules
+     */
+    public function updateRules($contact)
+    {
+        $rules = [
+            'reference' => 'required|unique:contacts,reference,'. $contact->id,
+            'name'      => 'required',
+            'email'     => 'required|emails',
+            'rpc_host'  => 'sometimes|url',
+            'enabled'   => 'required|boolean',
+        ];
+
+        return $rules;
+    }
+
     public function shortlist()
     {
 

@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Http\Requests\Request;
+use AbuseIO\Models\Brand;
 
 class BrandFormRequest extends Request
 {
@@ -21,21 +22,14 @@ class BrandFormRequest extends Request
      */
     public function rules()
     {
+        $brand = new Brand();
+
         switch ($this->method) {
             case 'POST':
-                return [
-                    'name'              => 'required|unique:brands,name',
-                    'company_name'      => 'required',
-                    'introduction_text' => 'required',
-                    'logo'              => 'required'
-                ];
+                return $brand->createRules($this);
             case 'PUT':
             case 'PATCH':
-                return [
-                    'name'              => 'required|unique:brands,name,'. $this->id,
-                    'company_name'      => 'required',
-                    'introduction_text' => 'required',
-                ];
+                return $brand->updateRules($this);
             default:
                 break;
         }

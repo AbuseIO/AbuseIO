@@ -30,4 +30,34 @@ class Note extends Model
     protected $guarded  = [
         'id'
     ];
+
+    /*
+     * Validation rules for this model being created
+     *
+     * @param  Model $note
+     * @return Array $rules
+     */
+    public function createRules($note)
+    {
+        $rules = [
+            // TODO : No validation implemented at all?
+        ];
+
+        return $rules;
+    }
+
+    /*
+     * Validation rules for this model being updated
+     *
+     * @param  Model $note
+     * @return Array $rules
+     */
+    public function updateRules($note)
+    {
+        $rules = [
+            // TODO : No validation implemented at all?
+        ];
+
+        return $rules;
+    }
 }

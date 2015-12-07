@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Http\Requests\Request;
+use AbuseIO\Models\Netblock;
 
 class NetblockFormRequest extends Request
 {
@@ -21,27 +22,14 @@ class NetblockFormRequest extends Request
      */
     public function rules()
     {
+        $netblock = new Netblock();
+
         switch ($this->method) {
             case 'POST':
-                return [
-                    /*
-                     * TODO : marksg: not working as intended (yet)
-                     */
-                    'first_ip'      => "required|ip|unique:netblocks,first_ip,NULL,id,last_ip,{$this->last_ip}",
-                    'last_ip'       => "required|ip|unique:netblocks,last_ip,NULL,id,first_ip,{$this->first_ip}",
-                    'contact_id'    => 'required|integer',
-                    'description'   => 'required',
-                    'enabled'       => 'required|boolean',
-                ];
+                return $netblock->createRules($this);
             case 'PUT':
             case 'PATCH':
-                return [
-                    'first_ip'      => "required|ip|unique:netblocks,first_ip,{$this->id},id,last_ip,{$this->last_ip}",
-                    'last_ip'       => "required|ip|unique:netblocks,last_ip,{$this->id},id,first_ip,{$this->first_ip}",
-                    'contact_id'    => 'required|integer',
-                    'description'   => 'required',
-                    'enabled'       => 'required|boolean',
-                ];
+                return $netblock->updateRules($this);
             default:
                 break;
         }

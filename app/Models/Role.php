@@ -36,10 +36,10 @@ class Role extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Array $data
+     * @param  Model $role
      * @return Array $rules
      */
-    public function createRules($data)
+    public function createRules($role)
     {
         $rules = [
             'name'              => 'required|string|min:1|unique:roles,name',
@@ -52,15 +52,15 @@ class Role extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Array $data
+     * @param  Model $data
      * @return Array $rules
      */
-    public function updateRules($data)
+    public function updateRules($role)
     {
 
         $rules = [
             'id'                => 'required|exists:roles,id',
-            'name'              => 'required|string|min:1|unique:roles,name',
+            'name'              => 'required|string|min:1|unique:roles,name,' . $role->id,
             'description'       => 'required|string|min:1',
         ];
 

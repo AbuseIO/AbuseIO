@@ -34,16 +34,16 @@ class PermissionRole extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Array $data
+     * @param  Model $permissionRole
      * @return Array $rules
      */
-    public function createRules($data)
+    public function createRules($permissionRole)
     {
         $rules = [
-            'role_id'               => "required|integer|".
-                "unique:permission_role,role_id,NULL,id,permission_id,{$data['permission_id']}",
-            'permission_id'         => "required|integer|".
-                "unique:permission_role,permission_id,NULL,id,role_id,{$data['role_id']}",
+            'role_id'               => 'required|integer|' .
+                'unique:permission_role,role_id,NULL,id,permission_id,' . $permissionRole->permission_id,
+            'permission_id'         => 'required|integer|' .
+                'unique:permission_role,permission_id,NULL,id,role_id,' . $permissionRole->role_id,
         ];
 
         return $rules;
@@ -52,17 +52,17 @@ class PermissionRole extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Array $data
+     * @param  Model $permissionRole
      * @return Array $rules
      */
-    public function updateRules($data)
+    public function updateRules($permissionRole)
     {
         $rules = [
             'id'                    => 'required|exists:permissions_role,id',
-            'role_id'               => "required|integer|".
-                "unique:permission_role,role_id,NULL,id,permission_id,{$data['permission_id']}",
-            'permission_id'         => "required|integer|".
-                "unique:permission_role,permission_id,NULL,id,role_id,{$data['role_id']}",
+            'role_id'               => 'required|integer|' .
+                'unique:permission_role,role_id,NULL,id,permission_id,' . $permissionRole->permission_id,
+            'permission_id'         => 'required|integer|' .
+                'unique:permission_role,permission_id,NULL,id,role_id,' . $permissionRole->role_id,
         ];
 
         return $rules;

@@ -78,6 +78,36 @@ class Ticket extends Model
         'id'
     ];
 
+    /*
+     * Validation rules for this model being created
+     *
+     * @param  Model $ticket
+     * @return Array $rules
+     */
+    public function createRules($ticket)
+    {
+        $rules = [
+            // TODO: Create validation rules instead of EventValidator
+        ];
+
+        return $rules;
+    }
+
+    /*
+     * Validation rules for this model being updated
+     *
+     * @param  Model $ticket
+     * @return Array $rules
+     */
+    public function updateRules($ticket)
+    {
+        $rules = [
+            // TODO: Create validation rules instead of EventValidator
+        ];
+
+        return $rules;
+    }
+
     /**
      * @return mixed
      */
