@@ -34,8 +34,8 @@ class Netblock extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $netblock
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Netblock $netblock
+     * @return array $rules
      */
     public function createRules($netblock)
     {
@@ -53,8 +53,8 @@ class Netblock extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $netblock
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Netblock $netblock
+     * @return array $rules
      */
     public function updateRules($netblock)
     {

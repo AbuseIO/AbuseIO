@@ -29,8 +29,8 @@ class Domain extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $domain
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Domain $domain
+     * @return array $rules
      */
     public function createRules($domain)
     {
@@ -46,8 +46,8 @@ class Domain extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $domain
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Domain $domain
+     * @return array $rules
      */
     public function updateRules($domain)
     {

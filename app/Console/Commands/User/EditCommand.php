@@ -46,7 +46,7 @@ class EditCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return boolean
      */
     public function handle()
     {

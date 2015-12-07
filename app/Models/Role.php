@@ -36,8 +36,8 @@ class Role extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $role
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Role $role
+     * @return array $rules
      */
     public function createRules($role)
     {
@@ -52,8 +52,8 @@ class Role extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $data
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Role $data
+     * @return array $rules
      */
     public function updateRules($role)
     {

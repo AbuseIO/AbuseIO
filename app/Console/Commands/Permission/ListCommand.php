@@ -47,7 +47,7 @@ class ListCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return boolean
      */
     public function handle()
     {
@@ -58,5 +58,7 @@ class ListCommand extends Command
         }
 
         $this->table($this->headers, $permissions);
+
+        return true;
     }
 }

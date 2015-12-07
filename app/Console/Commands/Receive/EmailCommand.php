@@ -41,7 +41,7 @@ class EmailCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return boolean
      */
     public function handle()
     {
@@ -117,6 +117,8 @@ class EmailCommand extends Command
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
             'Successfully received the incoming e-mail'
         );
+
+        return true;
     }
 
     /**

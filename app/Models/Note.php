@@ -34,8 +34,8 @@ class Note extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $note
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Note $note
+     * @return array $rules
      */
     public function createRules($note)
     {
@@ -49,8 +49,8 @@ class Note extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $note
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Note $note
+     * @return array $rules
      */
     public function updateRules($note)
     {

@@ -33,8 +33,8 @@ class Event extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $event
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Event $event
+     * @return array $rules
      */
     public function createRules($event)
     {
@@ -48,8 +48,8 @@ class Event extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $event
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Event $event
+     * @return array $rules
      */
     public function updateRules($event)
     {

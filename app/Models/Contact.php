@@ -39,8 +39,8 @@ class Contact extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $contact
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Contact $contact
+     * @return array $rules
      */
     public function createRules($contact)
     {
@@ -58,8 +58,8 @@ class Contact extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $contact
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Contact $contact
+     * @return array $rules
      */
     public function updateRules($contact)
     {

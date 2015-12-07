@@ -29,8 +29,8 @@ class Evidence extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $evidence
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Evidence $evidence
+     * @return array $rules
      */
     public function createRules($evidence)
     {
@@ -44,8 +44,8 @@ class Evidence extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $evidence
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Evidence $evidence
+     * @return array $rules
      */
     public function updateRules($evidence)
     {

@@ -34,8 +34,8 @@ class PermissionRole extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $permissionRole
-     * @return Array $rules
+     * @param  \AbuseIO\Models\PermissionRole $permissionRole
+     * @return array $rules
      */
     public function createRules($permissionRole)
     {
@@ -52,8 +52,8 @@ class PermissionRole extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $permissionRole
-     * @return Array $rules
+     * @param  \AbuseIO\Models\PermissionRole $permissionRole
+     * @return array $rules
      */
     public function updateRules($permissionRole)
     {

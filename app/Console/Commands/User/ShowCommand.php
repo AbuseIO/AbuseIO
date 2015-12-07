@@ -27,13 +27,15 @@ class ShowCommand extends Command
      * The headers of the table
      * @var array
      */
-    protected $headers = ['User ID', 'User', 'Account', 'Roles', 'First Name', 'Last Name', 'Language', 'Disabled', 'Created', 'Last modified'];
+    protected $headers = ['User ID', 'User', 'Account', 'Roles', 'First Name', 'Last Name', 'Language', 'Disabled',
+        'Created', 'Last modified'];
 
     /**
      * The fields of the table / database row
      * @var array
      */
-    protected $fields = ['id', 'email', 'account', 'roles', 'first_name', 'last_name', 'locale', 'disabled', 'created_at', 'updated_at'];
+    protected $fields = ['id', 'email', 'account', 'roles', 'first_name', 'last_name', 'locale', 'disabled',
+        'created_at', 'updated_at'];
 
     /**
      * Create a new command instance.
@@ -47,7 +49,7 @@ class ShowCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return boolean
      */
     public function handle()
     {

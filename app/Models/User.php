@@ -59,8 +59,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $user
-     * @return Array $rules
+     * @param  \AbuseIO\Models\User $user
+     * @return array $rules
      */
     public function createRules($user)
     {
@@ -80,8 +80,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $user
-     * @return Array $rules
+     * @param  \AbuseIO\Models\User $user
+     * @return array $rules
      */
     public function updateRules($user)
     {
@@ -108,8 +108,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Checks a Permission
      *
-     * @param  String permission Slug of a permission (i.e: manage_user)
-     * @return Boolean true if has permission, otherwise false
+     * @param  string permission Slug of a permission (i.e: manage_user)
+     * @return boolean true if has permission, otherwise false
      */
     public function can($permission = null)
     {
@@ -119,8 +119,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Check if the permission matches with any permission user has
      *
-     * @param  String permission name of a permission
-     * @return Boolean true if permission exists, otherwise false
+     * @param  string permission name of a permission
+     * @return boolean true if permission exists, otherwise false
      */
     protected function checkPermission($perm)
     {
@@ -134,7 +134,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Get all permission names from all permissions of all roles
      *
-     * @return Array of permission names
+     * @return array of permission names
      */
     protected function getAllPermissionsFromAllRoles()
     {
@@ -217,10 +217,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $result = false;
         $roles = $this->roles;
-        foreach ($roles as $role)
-        {
-            if ($role->name == $role_name)
-            {
+        foreach ($roles as $role) {
+            if ($role->name == $role_name) {
                 $result = true;
                 break;
             }
@@ -241,14 +239,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $auth_account = $auth_user->account;
 
         // can't disable/enable ourselves
-        if ($auth_user->id == $this->id)
-        {
+        if ($auth_user->id == $this->id) {
             return false;
         }
 
         // can only enable/disable users from our own account, except for the systemaccount
-        if ($auth_account->id == $account->id || $auth_account->isSystemAccount())
-        {
+        if ($auth_account->id == $account->id || $auth_account->isSystemAccount()) {
             return true;
         }
 

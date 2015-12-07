@@ -81,8 +81,8 @@ class Ticket extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $ticket
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Ticket $ticket
+     * @return array $rules
      */
     public function createRules($ticket)
     {
@@ -96,8 +96,8 @@ class Ticket extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $ticket
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Ticket $ticket
+     * @return array $rules
      */
     public function updateRules($ticket)
     {

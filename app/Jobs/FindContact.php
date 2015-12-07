@@ -162,7 +162,7 @@ class FindContact extends Job
                 return $findContact;
             }
         }
-        
+
         return FindContact::undefined();
     }
 }

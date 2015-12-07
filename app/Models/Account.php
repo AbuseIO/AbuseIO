@@ -34,8 +34,8 @@ class Account extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $account
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Account $account
+     * @return array $rules
      */
     public function createRules($account)
     {
@@ -49,8 +49,8 @@ class Account extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $account
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Account $account
+     * @return array $rules
      */
     public function updateRules($account)
     {

@@ -34,8 +34,8 @@ class RoleUser extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $roleUser
-     * @return Array $rules
+     * @param  \AbuseIO\Models\RoleUser $roleUser
+     * @return array $rules
      */
     public function createRules($roleUser)
     {
@@ -50,8 +50,8 @@ class RoleUser extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $roleUser
-     * @return Array $rules
+     * @param  \AbuseIO\Models\RoleUser $roleUser
+     * @return array $rules
      */
     public function updateRules($roleUser)
     {

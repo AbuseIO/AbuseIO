@@ -35,8 +35,8 @@ class Brand extends Model
     /*
      * Validation rules for this model being created
      *
-     * @param  Model $brand
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Brand $brand
+     * @return array $rules
      */
     public function createRules($brand)
     {
@@ -53,8 +53,8 @@ class Brand extends Model
     /*
      * Validation rules for this model being updated
      *
-     * @param  Model $brand
-     * @return Array $rules
+     * @param  \AbuseIO\Models\Brand $brand
+     * @return array $rules
      */
     public function updateRules($brand)
     {
@@ -78,13 +78,11 @@ class Brand extends Model
         $account = $user->account;
 
         // System admin may always edit
-        if ($account->isSystemAccount() && $user->hasRole('admin'))
-        {
+        if ($account->isSystemAccount() && $user->hasRole('admin')) {
             return true;
         }
 
-        if ($account->brand->id == $this->id && $user->hasRole('admin'))
-        {
+        if ($account->brand->id == $this->id && $user->hasRole('admin')) {
             return true;
         } else {
             return false;
@@ -114,14 +112,12 @@ class Brand extends Model
         // check for a valid image
         $maxsize = 64 * 1024; // 64kb max size of a database blob
 
-        if ($file->getSize() > $maxsize)
-        {
+        if ($file->getSize() > $maxsize) {
             array_push($messages, "Logo exceeding max size of 64kb");
         }
 
         $mimetype = $file->getMimeType();
-        if (!preg_match('/^image/', $mimetype))
-        {
+        if (!preg_match('/^image/', $mimetype)) {
             array_push($messages, "Uploaded logo is not an image, its mimetype is: $mimetype");
         }
 
@@ -143,4 +139,3 @@ class Brand extends Model
         return $this->hasMany('AbuseIO\Models\Account');
     }
 }
-

@@ -34,7 +34,7 @@ class RunCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return boolean
      */
     public function handle()
     {
@@ -43,6 +43,8 @@ class RunCommand extends Command
         // TODO - Walk thru all tickets to see which need closing
 
         // TODO - Send out all notifications / Call housekeeper:notifications(send) ?
+
+        return true;
 
     }
 }
