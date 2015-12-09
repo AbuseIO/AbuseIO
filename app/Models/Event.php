@@ -36,7 +36,7 @@ class Event extends Model
      * @param  \AbuseIO\Models\Event $event
      * @return array $rules
      */
-    public function createRules($event)
+    public static function createRules($event)
     {
         $rules = [
             // TODO: Create validation rules instead of EventValidator
@@ -51,7 +51,7 @@ class Event extends Model
      * @param  \AbuseIO\Models\Event $event
      * @return array $rules
      */
-    public function updateRules($event)
+    public static function updateRules($event)
     {
         $rules = [
             // TODO: Create validation rules instead of EventValidator

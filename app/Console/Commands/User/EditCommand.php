@@ -107,7 +107,7 @@ class EditCommand extends Command
         }
 
         // Validate the changes
-        $validation = Validator::make($user->toArray(), $user->updateRules($user));
+        $validation = Validator::make($user->toArray(), User::updateRules($user));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {

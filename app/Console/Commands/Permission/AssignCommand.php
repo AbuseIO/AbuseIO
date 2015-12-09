@@ -90,7 +90,7 @@ class AssignCommand extends Command
         $permissionRole->permission_id     = $permission->id;
         $permissionRole->role_id           = $role->id;
 
-        $validation = Validator::make($permissionRole->toArray(), $permissionRole->createRules($permissionRole));
+        $validation = Validator::make($permissionRole->toArray(), PermissionRole::createRules($permissionRole));
 
         if ($validation->fails()) {
             $this->warn('The role has already been granted this permission');

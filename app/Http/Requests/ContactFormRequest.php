@@ -51,14 +51,12 @@ class ContactFormRequest extends Request
      */
     public function rules()
     {
-        $contact = new Contact();
-
         switch ($this->method) {
             case 'POST':
-                return $contact->createRules($this);
+                return Contact::createRules($this);
             case 'PUT':
             case 'PATCH':
-                return $contact->updateRules($this);
+                return Contact::updateRules($this);
             default:
                 break;
         }

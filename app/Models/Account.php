@@ -37,7 +37,7 @@ class Account extends Model
      * @param  \AbuseIO\Models\Account $account
      * @return array $rules
      */
-    public function createRules($account)
+    public static function createRules($account)
     {
         $rules = [
             'name'  => 'required|unique:accounts',
@@ -52,7 +52,7 @@ class Account extends Model
      * @param  \AbuseIO\Models\Account $account
      * @return array $rules
      */
-    public function updateRules($account)
+    public static function updateRules($account)
     {
         $rules = [
             'name'  => 'required|unique:accounts,name,'. $account->id,

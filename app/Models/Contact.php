@@ -42,7 +42,7 @@ class Contact extends Model
      * @param  \AbuseIO\Models\Contact $contact
      * @return array $rules
      */
-    public function createRules($contact)
+    public static function createRules($contact)
     {
         $rules = [
             'reference' => 'required|unique:contacts,reference',
@@ -61,7 +61,7 @@ class Contact extends Model
      * @param  \AbuseIO\Models\Contact $contact
      * @return array $rules
      */
-    public function updateRules($contact)
+    public static function updateRules($contact)
     {
         $rules = [
             'reference' => 'required|unique:contacts,reference,'. $contact->id,

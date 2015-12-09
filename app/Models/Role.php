@@ -39,7 +39,7 @@ class Role extends Model
      * @param  \AbuseIO\Models\Role $role
      * @return array $rules
      */
-    public function createRules($role)
+    public static function createRules($role)
     {
         $rules = [
             'name'              => 'required|string|min:1|unique:roles,name',
@@ -55,7 +55,7 @@ class Role extends Model
      * @param  \AbuseIO\Models\Role $data
      * @return array $rules
      */
-    public function updateRules($role)
+    public static function updateRules($role)
     {
 
         $rules = [

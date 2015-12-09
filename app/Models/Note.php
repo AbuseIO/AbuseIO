@@ -37,7 +37,7 @@ class Note extends Model
      * @param  \AbuseIO\Models\Note $note
      * @return array $rules
      */
-    public function createRules($note)
+    public static function createRules($note)
     {
         $rules = [
             // TODO : No validation implemented at all?
@@ -52,7 +52,7 @@ class Note extends Model
      * @param  \AbuseIO\Models\Note $note
      * @return array $rules
      */
-    public function updateRules($note)
+    public static function updateRules($note)
     {
         $rules = [
             // TODO : No validation implemented at all?

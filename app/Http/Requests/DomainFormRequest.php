@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Http\Requests\Request;
+use AbuseIO\Models\Domain;
 
 class DomainFormRequest extends Request
 {
@@ -21,14 +22,12 @@ class DomainFormRequest extends Request
      */
     public function rules()
     {
-        $domain = new Domain();
-
         switch ($this->method) {
             case 'POST':
-                return $domain->createRules($this);
+                return Domain::createRules($this);
             case 'PUT':
             case 'PATCH':
-                return $domain->updateRules($this);
+                return Domain::updateRules($this);
             default:
                 break;
         }

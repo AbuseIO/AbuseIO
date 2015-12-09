@@ -22,14 +22,12 @@ class AccountFormRequest extends Request
      */
     public function rules()
     {
-        $account = new Account();
-
         switch ($this->method) {
             case 'POST':
-                return $account->createRules($this);
+                return Account::createRules($this);
             case 'PUT':
             case 'PATCH':
-                return $account->updateRules($this);
+                return Account::updateRules($this);
             default:
                 break;
         }

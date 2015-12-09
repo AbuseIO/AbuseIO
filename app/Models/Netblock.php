@@ -37,7 +37,7 @@ class Netblock extends Model
      * @param  \AbuseIO\Models\Netblock $netblock
      * @return array $rules
      */
-    public function createRules($netblock)
+    public static function createRules($netblock)
     {
         $rules = [
             'first_ip'      => "required|ip|unique:netblocks,first_ip,NULL,id,last_ip,{$netblock->last_ip}",
@@ -56,7 +56,7 @@ class Netblock extends Model
      * @param  \AbuseIO\Models\Netblock $netblock
      * @return array $rules
      */
-    public function updateRules($netblock)
+    public static function updateRules($netblock)
     {
         $rules = [
             'first_ip'      => "required|ip|unique:netblocks,first_ip,{$netblock->id},id,last_ip,{$netblock->last_ip}",

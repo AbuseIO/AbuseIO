@@ -22,14 +22,12 @@ class NetblockFormRequest extends Request
      */
     public function rules()
     {
-        $netblock = new Netblock();
-
         switch ($this->method) {
             case 'POST':
-                return $netblock->createRules($this);
+                return Netblock::createRules($this);
             case 'PUT':
             case 'PATCH':
-                return $netblock->updateRules($this);
+                return Netblock::updateRules($this);
             default:
                 break;
         }

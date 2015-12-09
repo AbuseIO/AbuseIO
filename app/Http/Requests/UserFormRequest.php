@@ -22,14 +22,12 @@ class UserFormRequest extends Request
      */
     public function rules()
     {
-        $user = new User();
-
         switch ($this->method) {
             case 'POST':
-                return $user->createRules($this);
+                return User::createRules($this);
             case 'PUT':
             case 'PATCH':
-                return $user->updateRules($this);
+                return User::updateRules($this);
             default:
                 break;
         }

@@ -84,7 +84,7 @@ class Ticket extends Model
      * @param  \AbuseIO\Models\Ticket $ticket
      * @return array $rules
      */
-    public function createRules($ticket)
+    public static function createRules($ticket)
     {
         $rules = [
             // TODO: Create validation rules instead of EventValidator
@@ -99,7 +99,7 @@ class Ticket extends Model
      * @param  \AbuseIO\Models\Ticket $ticket
      * @return array $rules
      */
-    public function updateRules($ticket)
+    public static function updateRules($ticket)
     {
         $rules = [
             // TODO: Create validation rules instead of EventValidator

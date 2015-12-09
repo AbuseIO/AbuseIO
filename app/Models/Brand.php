@@ -38,7 +38,7 @@ class Brand extends Model
      * @param  \AbuseIO\Models\Brand $brand
      * @return array $rules
      */
-    public function createRules($brand)
+    public static function createRules($brand)
     {
         $rules = [
             'name'              => 'required|unique:brands,name',
@@ -56,7 +56,7 @@ class Brand extends Model
      * @param  \AbuseIO\Models\Brand $brand
      * @return array $rules
      */
-    public function updateRules($brand)
+    public static function updateRules($brand)
     {
         $rules = [
             'name'              => 'required|unique:brands,name,'. $brand->id,

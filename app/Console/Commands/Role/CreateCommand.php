@@ -53,7 +53,7 @@ class CreateCommand extends Command
         $role->name         = empty($this->option('name')) ? false : $this->option('name');
         $role->description  = empty($this->option('description')) ? false : $this->option('description');
 
-        $validation = Validator::make($role->toArray(), $role->createRules($role));
+        $validation = Validator::make($role->toArray(), Role::createRules($role));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {

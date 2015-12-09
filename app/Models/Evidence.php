@@ -32,7 +32,7 @@ class Evidence extends Model
      * @param  \AbuseIO\Models\Evidence $evidence
      * @return array $rules
      */
-    public function createRules($evidence)
+    public static function createRules($evidence)
     {
         $rules = [
             // TODO: Create validation rules instead of EventValidator
@@ -47,7 +47,7 @@ class Evidence extends Model
      * @param  \AbuseIO\Models\Evidence $evidence
      * @return array $rules
      */
-    public function updateRules($evidence)
+    public static function updateRules($evidence)
     {
         $rules = [
             // TODO: Create validation rules instead of EventValidator

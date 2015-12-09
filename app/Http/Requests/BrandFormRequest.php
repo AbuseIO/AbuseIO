@@ -22,14 +22,12 @@ class BrandFormRequest extends Request
      */
     public function rules()
     {
-        $brand = new Brand();
-
         switch ($this->method) {
             case 'POST':
-                return $brand->createRules($this);
+                return Brand::createRules($this);
             case 'PUT':
             case 'PATCH':
-                return $brand->updateRules($this);
+                return Brand::updateRules($this);
             default:
                 break;
         }

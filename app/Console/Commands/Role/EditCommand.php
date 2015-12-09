@@ -69,7 +69,7 @@ class EditCommand extends Command
             $role->description = $this->option('description');
         }
 
-        $validation = Validator::make($role->toArray(), $role->updateRules($role));
+        $validation = Validator::make($role->toArray(), Role::updateRules($role));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {

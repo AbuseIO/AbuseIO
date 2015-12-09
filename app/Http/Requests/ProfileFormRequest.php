@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Http\Requests\Request;
+use AbuseIO\Models\User;
 use Auth;
 
 class ProfileFormRequest extends Request
@@ -22,11 +23,16 @@ class ProfileFormRequest extends Request
      */
     public function rules()
     {
-        return [
-            'first_name' => 'required',
-            'last_name'  => 'required',
-            'email'      => 'required|unique:users,email,' . Auth::id() .'|email',
-            'password'   => 'sometimes|confirmed|min:6'
-        ];
+        switch ($this->method) {
+            case 'POST':
+                return User::createRules($this);
+            case 'PUT':
+            case 'PATCH':
+                // Force Authenticated user_id
+                $this->id = Auth::id();
+                return User::updateRules($this);
+            default:
+                break;
+        }
     }
 }

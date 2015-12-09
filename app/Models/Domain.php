@@ -32,7 +32,7 @@ class Domain extends Model
      * @param  \AbuseIO\Models\Domain $domain
      * @return array $rules
      */
-    public function createRules($domain)
+    public static function createRules($domain)
     {
         $rules = [
             'name'          => 'required|unique:domains',
@@ -49,7 +49,7 @@ class Domain extends Model
      * @param  \AbuseIO\Models\Domain $domain
      * @return array $rules
      */
-    public function updateRules($domain)
+    public static function updateRules($domain)
     {
         $rules = [
             'name'          => 'required|unique:domains,name,'. $domain->id,

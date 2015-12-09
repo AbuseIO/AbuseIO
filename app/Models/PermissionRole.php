@@ -37,7 +37,7 @@ class PermissionRole extends Model
      * @param  \AbuseIO\Models\PermissionRole $permissionRole
      * @return array $rules
      */
-    public function createRules($permissionRole)
+    public static function createRules($permissionRole)
     {
         $rules = [
             'role_id'               => 'required|integer|' .
@@ -55,7 +55,7 @@ class PermissionRole extends Model
      * @param  \AbuseIO\Models\PermissionRole $permissionRole
      * @return array $rules
      */
-    public function updateRules($permissionRole)
+    public static function updateRules($permissionRole)
     {
         $rules = [
             'id'                    => 'required|exists:permissions_role,id',

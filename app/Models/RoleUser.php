@@ -37,7 +37,7 @@ class RoleUser extends Model
      * @param  \AbuseIO\Models\RoleUser $roleUser
      * @return array $rules
      */
-    public function createRules($roleUser)
+    public static function createRules($roleUser)
     {
         $rules = [
             'role_id' => 'required|integer|unique:role_user,role_id,NULL,id,user_id,' . $roleUser->user_id,
@@ -53,7 +53,7 @@ class RoleUser extends Model
      * @param  \AbuseIO\Models\RoleUser $roleUser
      * @return array $rules
      */
-    public function updateRules($roleUser)
+    public static function updateRules($roleUser)
     {
         $rules = [
             'id'      => 'required|exists:permissions_role,id',
