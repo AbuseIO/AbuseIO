@@ -35,6 +35,10 @@ return [
             'name' => 'Escalated',
             'description' => 'Escalated tickets',
         ],
+        '4' => [
+            'name' => 'Ignored',
+            'description' => 'Ignored tickets',
+        ],
     ],
 
     'state' => [
