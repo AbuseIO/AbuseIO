@@ -47,14 +47,14 @@ class EventsValidate extends Job implements SelfHandling
                     'information' => $event['information'],
                 ],
                 [
-                    'source' => 'required:string',
+                    'source' => 'required|string',
                     'ip' => 'required|ip',
-                    'domain' => 'required:string',
-                    'uri' => 'required:string',
-                    'class' => 'required:string',
-                    'type' => 'required:string',
-                    'timestamp' => 'required:integer',
-                    'information' => 'required:json',
+                    'domain' => 'required|string',
+                    'uri' => 'required|string',
+                    'class' => 'required|string',
+                    'type' => 'required|string',
+                    'timestamp' => 'required|integer',
+                    'information' => 'required|json',
                 ]
             );
 
