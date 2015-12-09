@@ -69,10 +69,12 @@ return [
                 'class'                     => 'Mail',
                 'method'                    => 'send',
             ],
+            /*
             'rpc' => [
                 'class'                     => 'Rpc',
                 'method'                    => 'send',
             ],
+            */
         ],
     ],
 
