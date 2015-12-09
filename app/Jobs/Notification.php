@@ -259,25 +259,28 @@ class Notification extends Job implements SelfHandling
                  * notifications for multiple tickets if needed.
                  */
 
-                // Skip if type Info (1) and status Ignored (4) TODO test / validate this
+                // Skip if type Info (1) and status Ignored (4)
                 if ($ticket->type_id == '1' && $ticket->status_id == '4') {
                     continue;
                 }
-                // Skip if type Info (1) and last notification was send after info interval TODO test / validate this
+
+                // Skip if type Info (1) and last notification was send after info interval
                 if ($ticket->last_notify_count != 0 &&
                     $ticket->type_id == '1' &&
-                    $ticket->last_notify_timestamp <= $sendInfoAfter
+                    $ticket->last_notify_timestamp >= $sendInfoAfter
                 ) {
                     continue;
                 }
-                // Skip if type Info (1) and last notification was send after abuse interval TODO test / validate this
+
+                // Skip if type Info (1) and last notification was send after abuse interval
                 if ($ticket->last_notify_count != 0 &&
                     $ticket->type_id != '1' &&
-                    $ticket->last_notify_timestamp <= $sendAbuseAfter
+                    $ticket->last_notify_timestamp >= $sendAbuseAfter
                 ) {
                     continue;
                 }
-                // Skip if the event received is older the minimal last seen TODO test / validate this
+
+                // Skip if the event received is older the minimal last seen
                 if ($ticket->lastEvent[0]->timestamp <= $sendNotOlderThen) {
                     continue;
                 }
