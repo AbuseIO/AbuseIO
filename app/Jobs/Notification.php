@@ -5,6 +5,7 @@ namespace AbuseIO\Jobs;
 use Illuminate\Contracts\Bus\SelfHandling;
 use ReflectionMethod;
 use AbuseIO\Models\Ticket;
+use Validator;
 use Log;
 
 class Notification extends Job implements SelfHandling
@@ -17,7 +18,18 @@ class Notification extends Job implements SelfHandling
      */
     public function __construct()
     {
+        Validator::extend(
+            'timestamp',
+            function ($attribute, $value, $parameters) {
+                $check = (is_int($value) or is_float($value))
+                    ? $value
+                    : (string) (int) $value;
 
+                return ($check === $value)
+                        && ($value <= PHP_INT_MAX)
+                        && ($value >= ~PHP_INT_MAX);
+            }
+        );
     }
 
     /**
@@ -172,6 +184,33 @@ class Notification extends Job implements SelfHandling
 
         $tickets = Ticket::where('status_id', '!=', '2')->get();
 
+        $validator = Validator::make(
+            [
+                'notification info_interval'    => strtotime(config('main.notifications.info_interval') . " ago"),
+                'notification abuse_interval'   => strtotime(config('main.notifications.abuse_interval') . " ago"),
+                'notification min_lastseen'     => strtotime(config('main.notifications.min_lastseen') . " ago"),
+            ],
+            [
+                'notification info_interval'    => 'required|timestamp',
+                'notification abuse_interval'   => 'required|timestamp',
+                'notification min_lastseen'     => 'required|timestamp',
+            ]
+        );
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+
+            $message = '';
+            foreach ($messages->all() as $messagePart) {
+                $message .= $messagePart . PHP_EOL;
+            }
+            return $message;
+        }
+
+        $sendInfoAfter = strtotime(config('main.notifications.info_interval') . " ago");
+        $sendAbuseAfter = strtotime(config('main.notifications.abuse_interval') . " ago");
+        $sendNotOlderThen = strtotime(config('main.notifications.min_lastseen') . " ago");
+
         foreach ($tickets as $ticket) {
             /*
              * Only send a notification if there is something new to report
@@ -181,31 +220,52 @@ class Notification extends Job implements SelfHandling
                 $ticket->last_notify_count != 0
             ) {
                 continue;
+
             } else {
                 /*
                  * Filter outgoing notifications and aggregate them by reference so we can send out a single
                  * notifications for multiple tickets if needed.
                  */
-                /*
-                 * TODO - Add continue on stuff like
-                 * - too old event (based on config)
-                 * - abuse/info/escalate types and their interval
-                 * - if the customer (or admin) set the ticket to ignore
-                 */
+                //echo "ticket : ". $ticket->lastEvent[0]->timestamp . " >= interval : ". $sendNotOlderThen . ' filter:';
+
+                // Skip if type Info (1) and status Ignored (4)
+                if (($ticket->type_id == '1' && $ticket->status_id == '4')) {
+                    //echo "1" . PHP_EOL;
+                    continue;
+                }
+                // Skip if type Info (1) and last notification was send after info interval
+                if (($ticket->type_id == '1' && $ticket->last_notify_timestamp <= $sendInfoAfter)) {
+                    //echo "2" . PHP_EOL;
+                    continue;
+                }
+                // Skip if type Info (1) and last notification was send after abuse interval
+                if (($ticket->type_id != '1' && $ticket->last_notify_timestamp <= $sendAbuseAfter)) {
+                    //echo "3" . PHP_EOL;
+                    continue;
+                }
+                // Skip if the event received is older the minimal last seen
+                if (($ticket->lastEvent[0]->timestamp <= $sendNotOlderThen)) {
+                    //echo "4" . PHP_EOL;
+                    continue;
+                }
+
+                // Conditions just for IP contacts
                 if (!empty($ticket->ip_contact_reference) &&
                     $ticket->ip_contact_reference != 'UNDEF' &&
-                    $ticket->ip_contact_auto_notify == 1
+                    $ticket->ip_contact_auto_notify == true
                 ) {
                     $selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
                 }
 
+                // Conditions just for Domain contacts
                 if (!empty($ticket->domain_contact_reference) &&
                     $ticket->domain_contact_reference != 'UNDEF' &&
-                    $ticket->ip_contact_auto_notify == 1 &&
+                    $ticket->ip_contact_auto_notify == true &&
                     $ticket->domain_contact_reference != $ticket->ip_contact_reference
                 ) {
                     $selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
                 }
+
             }
         }
 
