@@ -34,8 +34,10 @@ return [
     ],
 
     'notifications' => [
+        'enabled'                           => true,
         'info_interval'                     => '90 days',
         'abuse_interval'                    => '0 minutes',
+        'min_lastseen'                      => '14 days',
         'from_address'                      => 'abuse@isp.local',
         'from_name'                         => 'ISP Abusedesk',
         'bcc_enabled'                       => false,
