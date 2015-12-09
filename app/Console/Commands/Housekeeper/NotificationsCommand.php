@@ -90,6 +90,10 @@ class NotificationsCommand extends Command
             if (empty($notifications)) {
                 return true;
             }
+            if (!is_array($notifications)) {
+                $this->error('Error(s) received while building notifications list:' . PHP_EOL . $notifications);
+                return false;
+            }
 
             /*
              * Apply field filtering for output
