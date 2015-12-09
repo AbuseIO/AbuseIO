@@ -49,7 +49,23 @@ class EvidencesTableSeeder extends Seeder
                 'subject'                   => 'i say 5',
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
-            ]
+            ],
+            [
+                'id'                        => '6',
+                'filename'                  => '20150906/6_messageid',
+                'sender'                    => '6 me',
+                'subject'                   => 'i say 6',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime
+            ],
+            [
+                'id'                        => '7',
+                'filename'                  => '20150906/7_messageid',
+                'sender'                    => '7 me',
+                'subject'                   => 'i say 7',
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime
+            ],
         ];
 
         DB::table('evidences')->insert($evidences);

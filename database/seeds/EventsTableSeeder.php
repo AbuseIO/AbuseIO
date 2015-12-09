@@ -86,7 +86,37 @@ class EventsTableSeeder extends Seeder
                 ),
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
-            ]
+            ],
+            [
+                'id'                        => '6',
+                'ticket_id'                 => '3',
+                'evidence_id'               => '6',
+                'source'                    => 'DNS project',
+                'timestamp'                 => time(),
+                'information'               => json_encode(
+                    [
+                        'software' => 'powerdns',
+                        'port' => '53'
+                    ]
+                ),
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime
+            ],
+            [
+                'id'                        => '7',
+                'ticket_id'                 => '3',
+                'evidence_id'               => '7',
+                'source'                    => 'DNS project',
+                'timestamp'                 => time(),
+                'information'               => json_encode(
+                    [
+                        'software' => 'powerdns',
+                        'port' => '53'
+                    ]
+                ),
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime
+            ],
         ];
 
         DB::table('events')->insert($events);

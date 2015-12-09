@@ -63,7 +63,34 @@ class TicketsTableSeeder extends Seeder
                 'last_notify_timestamp'     => null,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime
-            ]
+            ],
+            [
+                'id'                        => 3,
+                'ip'                        => '10.1.14.77',
+                'domain'                    => null,
+                'class_id'                  => 109,
+                'type_id'                   => 1,
+                'ip_contact_account_id'     => 1,
+                'ip_contact_reference'      => 'CUST5',
+                'ip_contact_name'           => 'Customer 5',
+                'ip_contact_email'          => 'cust1@local.lan',
+                'ip_contact_rpchost'        => null,
+                'ip_contact_rpckey'         => null,
+                'ip_contact_auto_notify'    => 1,
+                'domain_contact_account_id' => 1,
+                'domain_contact_reference'  => 'UNDEF',
+                'domain_contact_name'       => 'Undefined Contact',
+                'domain_contact_email'      => null,
+                'domain_contact_rpchost'    => null,
+                'domain_contact_rpckey'     => null,
+                'domain_contact_auto_notify'=> 0,
+                'status_id'                 => 1,
+                'notified_count'            => 0,
+                'last_notify_count'         => 0,
+                'last_notify_timestamp'     => null,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime
+            ],
         ];
 
         DB::table('tickets')->insert($tickets);
