@@ -53,8 +53,18 @@ class Notification extends Job implements SelfHandling
      */
     public function send($notifications)
     {
-        $return = false;
+        /*
+         * If notifications are not enabled, silently 'die' here
+         */
+        if (config('main.notifications.enabled') !== true) {
+            return true;
+        }
 
+        /*
+         * First check if all the notification methods are available. If not stop directly, else we would be marking
+         * all the tickets notified while one of the methods wasn't used. So only update tickets if all the methods
+         * actually worked
+         */
         if (!empty(config("main.external.notifications"))
             && is_array(config("main.external.notifications"))
         ) {
@@ -63,46 +73,20 @@ class Notification extends Job implements SelfHandling
                 $class = '\AbuseIO\Notification\\' . $notificationMethod['class'];
                 $method = $notificationMethod['method'];
 
-                if (class_exists($class) === true && method_exists($class, $method) === true) {
-                    $reflectionMethod = new ReflectionMethod($class, $method);
-                    $notificationResult = $reflectionMethod->invoke(new $class, $notifications);
-
-                    if ($notificationResult !== true) {
-                        Log::error(
-                            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                            "Notifications with {$class} did not succeed"
-                        );
-
-                    } else {
-                        /*
-                         * We need to update all the tickets that a notification was send
-                         */
-                        $return = true;
-
-                        foreach ($notifications as $customerReference => $notificationTypes) {
-                            foreach ($notificationTypes as $notificationType => $tickets) {
-                                foreach ($tickets as $ticket) {
-                                    $ticket->last_notify_count      = $ticket->events->count();
-                                    $ticket->last_notify_timestamp  = time();
-                                    $ticket->notified_count         = $ticket->notified_count + 1;
-                                    //$ticket->save();
-                                }
-                            }
-                        }
-
-                        Log::debug(
-                            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                            "Notifications with {$class} was successfull for contact reference: " . key($notifications)
-                        );
-                    }
-
-                } else {
-                    Log::warning(
+                if (!class_exists($class)) {
+                    Log::error(
                         '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        "Notifications with class {$class} cannot be send because it is not installed " .
-                        "or the method {$method} was not available"
+                        "Notifications did not start because the defined class {$class} is missing"
                     );
+                    return false;
+                }
 
+                if (!method_exists($class, $method)) {
+                    Log::error(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        "Notifications did not start because the defined method {$method} in class {$class} is missing"
+                    );
+                    return false;
                 }
             }
         } else {
@@ -110,9 +94,57 @@ class Notification extends Job implements SelfHandling
                 '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
                 "No notification methods are configured, no sense into calling unexisting methods"
             );
+
+            return false;
         }
 
-        return $return;
+        /*
+         * Now that we have checked we can actually send out notifications, lets do so
+         */
+        if (!empty(config("main.external.notifications"))
+            && is_array(config("main.external.notifications"))
+        ) {
+            foreach (config("main.external.notifications") as $notificationMethod) {
+
+                $class = '\AbuseIO\Notification\\' . $notificationMethod['class'];
+                $method = $notificationMethod['method'];
+
+                $reflectionMethod = new ReflectionMethod($class, $method);
+                $notificationResult = $reflectionMethod->invoke(new $class, $notifications);
+
+                if ($notificationResult !== true) {
+                    Log::error(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        "Notifications with {$class} did not succeed"
+                    );
+
+                    return false;
+
+                } else {
+                    Log::debug(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        "Notifications with {$class} was successfull for contact reference: " . key($notifications)
+                    );
+                }
+
+            }
+        }
+
+        /*
+         * We need to update all the tickets that a notification was send
+         */
+        foreach ($notifications as $customerReference => $notificationTypes) {
+            foreach ($notificationTypes as $notificationType => $tickets) {
+                foreach ($tickets as $ticket) {
+                    $ticket->last_notify_count      = $ticket->events->count();
+                    $ticket->last_notify_timestamp  = time();
+                    $ticket->notified_count         = $ticket->notified_count + 1;
+                    $ticket->save();
+                }
+            }
+        }
+
+        return true;
     }
 
     public function walkList()
@@ -226,26 +258,27 @@ class Notification extends Job implements SelfHandling
                  * Filter outgoing notifications and aggregate them by reference so we can send out a single
                  * notifications for multiple tickets if needed.
                  */
-                //echo "ticket : ". $ticket->lastEvent[0]->timestamp . " >= interval : ". $sendNotOlderThen . ' filter:';
 
-                // Skip if type Info (1) and status Ignored (4)
-                if (($ticket->type_id == '1' && $ticket->status_id == '4')) {
-                    //echo "1" . PHP_EOL;
+                // Skip if type Info (1) and status Ignored (4) TODO test / validate this
+                if ($ticket->type_id == '1' && $ticket->status_id == '4') {
                     continue;
                 }
-                // Skip if type Info (1) and last notification was send after info interval
-                if (($ticket->type_id == '1' && $ticket->last_notify_timestamp <= $sendInfoAfter)) {
-                    //echo "2" . PHP_EOL;
+                // Skip if type Info (1) and last notification was send after info interval TODO test / validate this
+                if ($ticket->last_notify_count != 0 &&
+                    $ticket->type_id == '1' &&
+                    $ticket->last_notify_timestamp <= $sendInfoAfter
+                ) {
                     continue;
                 }
-                // Skip if type Info (1) and last notification was send after abuse interval
-                if (($ticket->type_id != '1' && $ticket->last_notify_timestamp <= $sendAbuseAfter)) {
-                    //echo "3" . PHP_EOL;
+                // Skip if type Info (1) and last notification was send after abuse interval TODO test / validate this
+                if ($ticket->last_notify_count != 0 &&
+                    $ticket->type_id != '1' &&
+                    $ticket->last_notify_timestamp <= $sendAbuseAfter
+                ) {
                     continue;
                 }
-                // Skip if the event received is older the minimal last seen
-                if (($ticket->lastEvent[0]->timestamp <= $sendNotOlderThen)) {
-                    //echo "4" . PHP_EOL;
+                // Skip if the event received is older the minimal last seen TODO test / validate this
+                if ($ticket->lastEvent[0]->timestamp <= $sendNotOlderThen) {
                     continue;
                 }
 
