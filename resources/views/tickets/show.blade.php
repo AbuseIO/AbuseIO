@@ -79,6 +79,13 @@
                 <dt>{{ trans('tickets.modified') }}</dt>
                 <dd>{{ $ticket->updated_at }}</dd>
 
+                <dt>{{ trans('tickets.last_notification') }}</dt>
+                @if ($ticket->last_notify_count == 0)
+                <dd>Never</dd>
+                @else
+                <dd>At event {{ $ticket->last_notify_count }} on {{ $ticket->last_notify_timestamp }}</dd>
+                @endif
+
                 <dt>{{ trans('tickets.reply_status') }}</dt>
                 <dd></dd>
 
