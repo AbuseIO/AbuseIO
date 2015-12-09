@@ -32,6 +32,7 @@ class EventsValidate extends Job implements SelfHandling
 
         foreach ($this->events as $event) {
 
+
             /*
              * Common Laravel validations
              */
@@ -49,8 +50,12 @@ class EventsValidate extends Job implements SelfHandling
                 [
                     'source' => 'required|string',
                     'ip' => 'required|ip',
-                    'domain' => 'required|string',
-                    'uri' => 'required|string',
+                    /* TODO FIX THIS
+                     * temp fix because domain/uri can hold false if not set and required_unless:domain,false
+                     * does not seem to be working to skip domain validating string if false
+                     */
+                    //'domain' => 'sometimes|string',
+                    //'uri' => 'sometimes|string',
                     'class' => 'required|string',
                     'type' => 'required|string',
                     'timestamp' => 'required|integer',
@@ -65,6 +70,7 @@ class EventsValidate extends Job implements SelfHandling
                 foreach ($messages->all() as $messagePart) {
                     $message .= $messagePart;
                 }
+
                 return $this->failed($message);
             }
 
