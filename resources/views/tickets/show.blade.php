@@ -62,10 +62,10 @@
                 <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.description') }}</dd>
 
                 <dt>{{ trans('tickets.first_seen') }}</dt>
-                <dd>{{ $ticket->firstEvent[0]->first_seen }}</dd>
+                <dd>{{ $ticket->firstEvent[0]->seen }}</dd>
 
                 <dt>{{ trans('tickets.last_seen') }}</dt>
-                <dd>{{ $ticket->lastEvent[0]->last_seen }}</dd>
+                <dd>{{ $ticket->lastEvent[0]->seen }}</dd>
 
                 <dt>{{ trans('tickets.count') }}</dt>
                 <dd>{{ $ticket->events->count() }}</dd>
@@ -80,10 +80,10 @@
                 <dd>{{ $ticket->updated_at }}</dd>
 
                 <dt>{{ trans('tickets.last_notification') }}</dt>
-                @if ($ticket->last_notify_count == 0)
+                @if (!$ticket->last_notify_count == 0)
                 <dd>Never</dd>
                 @else
-                <dd>At event {{ $ticket->last_notify_count }} on {{ date(config('app.date_format').' '.config('app.time_format'), $ticket->last_notify_timestamp) }}</dd>
+                <dd>{{ $ticket->last_notified }} (event: {{ $ticket->last_notify_count }})</dd>
                 @endif
 
                 <dt>{{ trans('tickets.total_notifications') }}</dt>
@@ -178,7 +178,7 @@
                 <tbody>
                 @foreach ($ticket->events as $event)
                     <tr>
-                        <td>{{ date(config('app.date_format').' '.config('app.time_format'), $event->timestamp) }}</td>
+                        <td>{{ $event->seen }}</td>
                         <td>{{ $event->source }}</td>
                         <td>
                             <dl class="dl-horizontal">

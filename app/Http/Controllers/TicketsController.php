@@ -123,8 +123,8 @@ class TicketsController extends Controller
                     $ticket->ip,
                     $ticket->class_id,
                     $ticket->type_id,
-                    date(config('app.date_format').' '.config('app.time_format'), $ticket->firstEvent[0]->timestamp),
-                    date(config('app.date_format').' '.config('app.time_format'), $ticket->lastEvent[0]->timestamp),
+                    $ticket->firstEvent[0]->seen,
+                    $ticket->lastEvent[0]->seen,
                     $ticket->events->count(),
                     trans('types.status.'.$ticket->status_id.'.name'),
                 ];

@@ -60,4 +60,20 @@ class Note extends Model
 
         return $rules;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors & Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
+    }
 }

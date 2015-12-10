@@ -179,6 +179,11 @@ class Ticket extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getLastNotifiedAttribute()
+    {
+        return date(config('app.date_format').' '.config('app.time_format'), $this->attributes['last_notify_timestamp']);
+    }
+
     public function getUpdatedAtAttribute($date)
     {
         return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));

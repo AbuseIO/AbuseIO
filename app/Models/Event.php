@@ -73,12 +73,7 @@ class Event extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getFirstSeenAttribute()
-    {
-        return date(config('app.date_format').' '.config('app.time_format'), $this->attributes['timestamp']);
-    }
-
-    public function getLastSeenAttribute()
+    public function getSeenAttribute()
     {
         return date(config('app.date_format').' '.config('app.time_format'), $this->attributes['timestamp']);
     }
