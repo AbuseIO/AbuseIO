@@ -44,8 +44,8 @@
     @foreach( $contact->netblocks as $netblock )
     <div class="row">
         <div class="col-md-2">{{ trans('contacts.netblock_id') }}: {{ $netblock->id }}</div>
-        <div class="col-md-2">{{ $netblock->first_ip }}</div>
-        <div class="col-md-2">{{ $netblock->last_ip }}</div>
+        <div class="col-md-4">{{ $netblock->first_ip }}</div>
+        <div class="col-md-4">{{ $netblock->last_ip }}</div>
     </div>
     @endforeach
 @endif
@@ -54,8 +54,8 @@
 <h3 class="page-header">{{ trans('contacts.linked_domains') }}</h3>
     @foreach( $contact->domains as $domain )
     <div class="row">
-        <div class="col-md-2">{{ trans('contacts.domain_id') }}: {{ $domain->id }}</div>
-        <div class="col-md-2">{{ $domain->name }}</div>
+        <div class="col-md-4">{{ trans('contacts.domain_id') }}: {{ $domain->id }}</div>
+        <div class="col-md-4">{{ $domain->name }}</div>
     </div>
     @endforeach
 @endif
