@@ -6,7 +6,9 @@ use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\Contact;
 use ReflectionMethod;
+use Validator;
 use ICF;
+use Log;
 
 class FindContact extends Job
 {
@@ -30,6 +32,29 @@ class FindContact extends Job
     }
 
     /**
+     * Validates an contact object before passing it along. On error it will return UNDEF
+     * @param  object $contact
+     * @return boolean $valid
+     */
+    public static function validateContact($contact)
+    {
+        $validation = Validator::make($contact->toArray(), Contact::createRules($contact));
+
+        if ($validation->fails()) {
+            $messages = implode(' ', $validation->messages()->all());
+
+            Log::error(
+                '(JOB ' . getmypid() . ') FindContact: ' .
+                "A contact object that was returned was not correctly formatted ({$messages}). Falling back to UNDEF"
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Return the class and methdod to do external calls
      * @return object
      */
@@ -45,7 +70,7 @@ class FindContact extends Job
                 $reflectionMethod = new ReflectionMethod($class, $method);
                 $resolver = $reflectionMethod->invoke(new $class, $search);
 
-                if (!empty($resolver)) {
+                if (!empty($resolver) && self::validateContact($resolver)) {
                     return $resolver;
                 }
             }
