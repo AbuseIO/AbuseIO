@@ -172,4 +172,20 @@ class Ticket extends Model
         return $this->belongsTo('AbuseIO\Models\Account', 'domain_contact_account_id');
 
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors & Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
+    }
 }

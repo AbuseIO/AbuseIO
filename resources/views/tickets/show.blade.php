@@ -62,10 +62,10 @@
                 <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.description') }}</dd>
 
                 <dt>{{ trans('tickets.first_seen') }}</dt>
-                <dd>{{ date('d-m-Y H:i', $ticket->firstEvent[0]->timestamp) }}</dd>
+                <dd>{{ $ticket->firstEvent[0]->first_seen }}</dd>
 
                 <dt>{{ trans('tickets.last_seen') }}</dt>
-                <dd>{{ date('d-m-Y H:i', $ticket->lastEvent[0]->timestamp) }}</dd>
+                <dd>{{ $ticket->lastEvent[0]->last_seen }}</dd>
 
                 <dt>{{ trans('tickets.count') }}</dt>
                 <dd>{{ $ticket->events->count() }}</dd>
@@ -83,7 +83,7 @@
                 @if ($ticket->last_notify_count == 0)
                 <dd>Never</dd>
                 @else
-                <dd>At event {{ $ticket->last_notify_count }} on {{ date('d-m-Y H:i', $ticket->last_notify_timestamp) }}</dd>
+                <dd>At event {{ $ticket->last_notify_count }} on {{ date(config('app.date_format').' '.config('app.time_format'), $ticket->last_notify_timestamp) }}</dd>
                 @endif
 
                 <dt>{{ trans('tickets.total_notifications') }}</dt>
@@ -118,7 +118,7 @@
             @if ($ticket->ip_contact_reference != 'UNDEF')
             <h4>{{ trans('misc.ip') }} {{ trans('misc.contact') }}:</h4>
             <dl class="dl-horizontal">
-                <dt>{{ trans('contacts.account') }}</dt>
+                <dt>{{ trans('misc.database_id') }}</dt>
                 <dd>{{ $ticket->ip_contact_account_id }}</dd>
 
                 <dt>{{ trans('contacts.reference') }}</dt>
@@ -141,7 +141,7 @@
             @if ($ticket->domain_contact_reference != 'UNDEF')
             <h4>{{ trans('misc.domain') }} {{ trans('misc.contact') }}:</h4>
             <dl class="dl-horizontal">
-                <dt>{{ trans('contacts.account') }}</dt>
+                <dt>{{ trans('misc.database_id') }}</dt>
                 <dd>{{ $ticket->domain_contact_account_id }}</dd>
 
                 <dt>{{ trans('contacts.reference') }}</dt>
@@ -178,7 +178,7 @@
                 <tbody>
                 @foreach ($ticket->events as $event)
                     <tr>
-                        <td>{{ date('d-m-Y H:i', $event->timestamp) }}</td>
+                        <td>{{ date(config('app.date_format').' '.config('app.time_format'), $event->timestamp) }}</td>
                         <td>{{ $event->source }}</td>
                         <td>
                             <dl class="dl-horizontal">

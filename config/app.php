@@ -45,6 +45,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Date & Time format
+    |--------------------------------------------------------------------------
+    |
+    | See http://php.net/manual/en/function.date.php for more information
+    | about setting your own format.
+    */
+
+    'date_format' => 'd-m-Y',
+    'time_format' => 'H:i:s e',
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------
     |

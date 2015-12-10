@@ -89,10 +89,10 @@
                     <dd>{{ trans('types.type.' . $ticket->type_id . '.description') }}</dd>
 
                     <dt>{{ trans('ash.basic.firstSeen') }}</dt>
-                    <dd>{{ date('d-m-Y H:i', $ticket->firstEvent[0]->timestamp) }}</dd>
+                    <dd>{{ date(config('app.date_format').' '.config('app.time_format'), $ticket->firstEvent[0]->timestamp) }}</dd>
 
                     <dt>{{ trans('ash.basic.lastSeen') }}</dt>
-                    <dd>{{ date('d-m-Y H:i', $ticket->lastEvent[0]->timestamp) }}</dd>
+                    <dd>{{ date(config('app.date_format').' '.config('app.time_format'), $ticket->lastEvent[0]->timestamp) }}</dd>
 
                     <dt>{{ trans('ash.basic.reportCount') }}</dt>
                     <dd>{{ $ticket->events->count() }}</dd>
@@ -129,7 +129,7 @@
                         @foreach ($ticket->events as $event)
 
                             <tr>
-                                <td>{{ date('d-m-Y H:i', $event->timestamp) }}</td>
+                                <td>{{ date(config('app.date_format').' '.config('app.time_format'), $event->timestamp) }}</td>
                                 <td>{{ $event->source }}</td>
                                 <td>
                                     <dl class="dl-horizontal">

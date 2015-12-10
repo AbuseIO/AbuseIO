@@ -66,4 +66,20 @@ class Event extends Model
         return $this->hasMany('AbuseIO\Models\Evidence', 'id', 'evidence_id');
 
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors & Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    public function getFirstSeenAttribute()
+    {
+        return date(config('app.date_format').' '.config('app.time_format'), $this->attributes['timestamp']);
+    }
+
+    public function getLastSeenAttribute()
+    {
+        return date(config('app.date_format').' '.config('app.time_format'), $this->attributes['timestamp']);
+    }
 }
