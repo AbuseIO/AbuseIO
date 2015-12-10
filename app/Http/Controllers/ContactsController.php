@@ -112,8 +112,8 @@ class ContactsController extends Controller
                 'contact'       => 'name',
                 'enabled'       => 'Status',
                 'email'         => 'E-Mail address',
-                'rpc_host'      => 'RPC address',
-                'rpc_key'       => 'RPC key',
+                'api_host'      => 'RPC address',
+                'api_key'       => 'RPC key',
                 'auto_notify'   => 'Notifications',
             ];
 
@@ -125,8 +125,8 @@ class ContactsController extends Controller
                     $contact->name,
                     $contact['enabled'] ? 'Enabled' : 'Disabled',
                     $contact['email'],
-                    $contact['rpc_host'],
-                    $contact['rpc_key'],
+                    $contact['api_host'],
+                    $contact['api_key'],
                     $contact['auto_notify'] ? 'Automatic' : 'Manual',
                 ];
 

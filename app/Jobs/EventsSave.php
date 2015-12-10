@@ -137,16 +137,16 @@ class EventsSave extends Job implements SelfHandling
                 $newTicket->ip_contact_reference       = $ipContact->reference;
                 $newTicket->ip_contact_name            = $ipContact->name;
                 $newTicket->ip_contact_email           = $ipContact->email;
-                $newTicket->ip_contact_rpchost         = $ipContact->rpc_host;
-                $newTicket->ip_contact_rpckey          = $ipContact->rpc_key;
+                $newTicket->ip_contact_api_host        = $ipContact->api_host;
+                $newTicket->ip_contact_api_key         = $ipContact->api_key;
                 $newTicket->ip_contact_auto_notify     = $ipContact->auto_notify;
 
                 $newTicket->domain_contact_account_id  = $domainContact->account_id;
                 $newTicket->domain_contact_reference   = $domainContact->reference;
                 $newTicket->domain_contact_name        = $domainContact->name;
                 $newTicket->domain_contact_email       = $domainContact->email;
-                $newTicket->domain_contact_rpchost     = $domainContact->rpc_host;
-                $newTicket->domain_contact_rpckey      = $domainContact->rpc_key;
+                $newTicket->domain_contact_api_host    = $domainContact->api_host;
+                $newTicket->domain_contact_api_key     = $domainContact->api_key;
                 $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
 
                 $newTicket->status_id               = 1;
@@ -206,8 +206,8 @@ class EventsSave extends Job implements SelfHandling
                         $ticket->domain_contact_reference   = $domainContact->reference;
                         $ticket->domain_contact_name        = $domainContact->name;
                         $ticket->domain_contact_email       = $domainContact->email;
-                        $ticket->domain_contact_rpchost     = $domainContact->rpc_host;
-                        $ticket->domain_contact_rpckey      = $domainContact->rpc_key;
+                        $ticket->domain_contact_api_host    = $domainContact->api_host;
+                        $ticket->domain_contact_api_key     = $domainContact->api_key;
                         $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
                         $ticket->account_id                 = $domainContact->account->id;
 

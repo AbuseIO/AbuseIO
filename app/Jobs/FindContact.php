@@ -24,8 +24,8 @@ class FindContact extends Job
         $contact->enabled       = true;
         $contact->auto_notify   = false;
         $contact->email         = '';
-        $contact->rpc_host      = '';
-        $contact->rpc_key       = '';
+        $contact->api_host      = '';
+        $contact->api_key       = '';
         $contact->account_id    = 1;
 
         return $contact;

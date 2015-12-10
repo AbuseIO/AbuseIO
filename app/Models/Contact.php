@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $reference
  * @property string $name
  * @property string $email
- * @property string $rpc_host
- * @property string $rpc_key
+ * @property string $api_host
+ * @property string $api_key
  * @property boolean $auto_notify
  * @property boolean $enabled
  * @property integer account_id
@@ -25,8 +25,8 @@ class Contact extends Model
         'reference',
         'name',
         'email',
-        'rpc_host',
-        'rpc_key',
+        'api_host',
+        'api_key',
         'auto_notify',
         'enabled',
         'account_id',
@@ -48,8 +48,10 @@ class Contact extends Model
             'reference' => 'required|unique:contacts,reference',
             'name'      => 'required',
             'email'     => 'sometimes|emails',
-            'rpc_host'  => 'sometimes|url',
+            'api_host'  => 'sometimes|url',
+            'api_key'   => 'sometimes|string',
             'enabled'   => 'required|boolean',
+            'account_id'=> 'required|integer'
         ];
 
         return $rules;
@@ -67,8 +69,10 @@ class Contact extends Model
             'reference' => 'required|unique:contacts,reference,'. $contact->id,
             'name'      => 'required',
             'email'     => 'sometimes|emails',
-            'rpc_host'  => 'sometimes|url',
+            'api_host'  => 'sometimes|url',
+            'api_key'   => 'sometimes|string',
             'enabled'   => 'required|boolean',
+            'account_id'=> 'required|integer'
         ];
 
         return $rules;

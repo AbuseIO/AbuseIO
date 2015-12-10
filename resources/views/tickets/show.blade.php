@@ -130,11 +130,11 @@
                 <dt>{{ trans('misc.email') }}</dt>
                 <dd>{{ $ticket->ip_contact_email }}</dd>
 
-                <dt>{{ trans('contacts.rpchost') }}</dt>
-                <dd>{{ $ticket->ip_contact_rpc_host }}</dd>
+                <dt>{{ trans('contacts.api_host') }}</dt>
+                <dd>{{ $ticket->ip_contact_api_host }}</dd>
 
-                <dt>{{ trans('contacts.rpckey') }}</dt>
-                <dd>{{ $ticket->ip_contact_rpc_key }}</dd>
+                <dt>{{ trans('contacts.api_key') }}</dt>
+                <dd>{{ $ticket->ip_contact_api_key }}</dd>
             </dl>
             @endif
 
@@ -153,11 +153,11 @@
                 <dt>{{ trans('misc.email') }}</dt>
                 <dd>{{ $ticket->domain_contact_email }}</dd>
 
-                <dt>{{ trans('contacts.rpchost') }}</dt>
-                <dd>{{ $ticket->domain_contact_rpc_host }}</dd>
+                <dt>{{ trans('contacts.api_host') }}</dt>
+                <dd>{{ $ticket->domain_contact_api_host }}</dd>
 
-                <dt>{{ trans('contacts.rpckey') }}</dt>
-                <dd>{{ $ticket->domain_contact_rpc_key }}</dd>
+                <dt>{{ trans('contacts.api_key') }}</dt>
+                <dd>{{ $ticket->domain_contact_api_key }}</dd>
             </dl>
             @endif
 

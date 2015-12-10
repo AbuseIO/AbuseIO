@@ -16,7 +16,7 @@
             <th>{{ trans('contacts.reference') }}</th>
             <th>{{ trans('misc.name') }}</th>
             <th>{{ trans('misc.email') }}</th>
-            <th>{{ trans('contacts.rpchost') }}</th>
+            <th>{{ trans('contacts.api_host') }}</th>
             <th>{{ trans('contacts.notification') }}</th>
             <th class="text-right">{{ trans('misc.action') }}</th>
         </tr>
@@ -51,7 +51,7 @@
                 { data: 'reference', name: 'reference' },
                 { data: 'name', name: 'name' },
                 { data: 'email', name: 'email' },
-                { data: 'rpc_host', name: 'rpc_host' },
+                { data: 'api_host', name: 'api_host' },
                 { data: 'auto_notify', name: 'auto_notify' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
             ]

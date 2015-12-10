@@ -22,8 +22,8 @@ class CreateContactsTable extends Migration
                 $table->string('reference')->unique();
                 $table->string('name');
                 $table->string('email');
-                $table->string('rpc_host');
-                $table->string('rpc_key');
+                $table->string('api_host');
+                $table->string('api_key');
                 $table->boolean('auto_notify')->unsigned();
                 $table->boolean('enabled')->unsigned();
                 $table->timestamps();
@@ -32,7 +32,7 @@ class CreateContactsTable extends Migration
                 $table->index('reference');
                 $table->index('name');
                 $table->index('email');
-                $table->index('rpc_host');
+                $table->index('api_host');
                 $table->index('auto_notify');
 
             }

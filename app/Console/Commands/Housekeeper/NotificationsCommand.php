@@ -49,11 +49,11 @@ class NotificationsCommand extends Command
         'ip',
         'ip_contact_reference',
         'ip_contact_email',
-        'ip_contact_rpchost',
+        'ip_contact_api_host',
         'domain',
         'domain_contact_reference',
         'domain_contact_email',
-        'domain_contact_rpchost'
+        'domain_contact_api_host'
     ];
 
     /**
