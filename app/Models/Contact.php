@@ -47,7 +47,7 @@ class Contact extends Model
         $rules = [
             'reference' => 'required|unique:contacts,reference',
             'name'      => 'required',
-            'email'     => 'required|emails',
+            'email'     => 'sometimes|emails',
             'rpc_host'  => 'sometimes|url',
             'enabled'   => 'required|boolean',
         ];
@@ -66,7 +66,7 @@ class Contact extends Model
         $rules = [
             'reference' => 'required|unique:contacts,reference,'. $contact->id,
             'name'      => 'required',
-            'email'     => 'required|emails',
+            'email'     => 'sometimes|emails',
             'rpc_host'  => 'sometimes|url',
             'enabled'   => 'required|boolean',
         ];
