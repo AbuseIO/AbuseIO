@@ -9,10 +9,10 @@
                     {!! trans('tickets.button.update_customer') !!} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="#">{{ trans('misc.ip') }} {{ trans('misc.contact') }}</a></li>
-                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="#">{{ trans('misc.domain') }} {{ trans('misc.contact') }}</a></li>
+                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.update.ip', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
+                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.update.domain', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">{!! trans('misc.both') !!}</a></li>
+                    <li>{!! link_to_route('admin.tickets.update.both', trans('misc.both'), [$ticket->id]) !!}</li>
                 </ul>
             </div>
             <div class="btn-group" role="group" aria-label="...">
@@ -20,15 +20,15 @@
                     {{ trans('tickets.button.send_notification') }} <span class="caret">
                 </button>
                 <ul class="dropdown-menu">
-                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="#">{{ trans('misc.ip') }} {{ trans('misc.contact') }}</a></li>
-                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="#">{{ trans('misc.domain') }} {{ trans('misc.contact') }}</a></li>
+                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.ip', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
+                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.domain', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">{!! trans('misc.both') !!}</a></li>
+                    <li>{!! link_to_route('admin.tickets.both', trans('misc.both'), [$ticket->id]) !!}</li>
                 </ul>
             </div>
-            {!! link_to_route('admin.tickets.show', trans('tickets.button.resolved'), [$ticket->id], ['class' => 'btn btn-success']) !!}
-            {!! link_to_route('admin.tickets.show', trans('misc.button.close'), [$ticket->id], ['class' => 'btn btn-warning']) !!}
-            {!! link_to_route('admin.tickets.show', trans('tickets.button.ignore'), [$ticket->id], ['class' => 'btn btn-danger']) !!}
+            {!! link_to_route('admin.tickets.status.solved', trans('tickets.button.resolved'), [$ticket->id], ['class' => 'btn btn-success']) !!}
+            {!! link_to_route('admin.tickets.status.close', trans('misc.button.close'), [$ticket->id], ['class' => 'btn btn-warning']) !!}
+            {!! link_to_route('admin.tickets.status.ignore', trans('tickets.button.ignore'), [$ticket->id], ['class' => 'btn btn-danger']) !!}
         </div>
     </div>
     <ul class="nav nav-tabs">

@@ -215,4 +215,37 @@ class TicketsController extends Controller
         //
         //return Redirect::route('admin.tickets.index')->with('message', 'Ticket has been deleted.');
     }
+
+    /**
+     * Updates the ticket to the given status.
+     * @param Ticket $ticket
+     * @return Response
+     */
+    public function status(Ticket $ticket)
+    {
+        // TODO: (mark) Maybe use existing update() for this?
+        return Redirect::route('admin.tickets.show', $ticket->id)->with('message', '{PLACEHOLDER} Ticket status has been updated.');
+    }
+
+    /**
+     * Send a notification for this ticket.
+     * @param Ticket $ticket
+     * @return Response
+     */
+    public function notify(Ticket $ticket)
+    {
+        // TODO: (mark) Or are we going to call the notification functions directly?
+        return Redirect::route('admin.tickets.show', $ticket->id)->with('message', '{PLACEHOLDER} Ticket contact(s) notified.');
+    }
+
+    /**
+     * Updates the requested contact information.
+     * @param Ticket $ticket
+     * @return Response
+     */
+    public function updatecontact(Ticket $ticket)
+    {
+        // TODO: (mark) Maybe use existing update() for this?
+        return Redirect::route('admin.tickets.show', $ticket->id)->with('message', '{PLACEHOLDER} Ticket contact(s) updated.');
+    }
 }
