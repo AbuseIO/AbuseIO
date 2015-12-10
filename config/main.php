@@ -21,9 +21,8 @@ return [
     ],
 
     'reports' => [
-        'match_period'                      => '14 days',
         'min_lastseen'                      => '30 days',
-        'close_after'                       => '21 days',
+        'close_after'                       => '14 days',
         'resolvable_only'                   => false, // This drops anything if a domain or netblock cannot be found
     ],
 

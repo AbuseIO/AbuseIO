@@ -114,18 +114,14 @@ class EventsSave extends Job implements SelfHandling
             /*
              * Search to see if there is an existing ticket for this event classification
              */
-            $matchPeriod = strtotime(config('main.reports.match_period' . ' ago'));
-            // TODO - howto match this on the last event, needs a join?
-
-            $search = Ticket::where('ip', '=', $event['ip'])
+            $ticket = Ticket::where('ip', '=', $event['ip'])
                 ->where('class_id', '=', $event['class'], 'AND')
                 ->where('type_id', '=', $event['type'], 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 2, 'AND')
                 ->get();
 
-
-            if ($search->count() === 0) {
+            if ($ticket->count() === 0) {
                 /*
                  * If there are no search results then there is no existing ticket and we should create one
                  */
@@ -169,12 +165,12 @@ class EventsSave extends Job implements SelfHandling
 
                 $newEvent->save();
 
-            } elseif ($search->count() === 1) {
+            } elseif ($ticket->count() === 1) {
                 /*
                  * There is an existing ticket, so we just need to add the event to this ticket. If the event is an
                  * exact match we consider it a duplicate and will ignore it.
                  */
-                $ticket = $search[0];
+                $ticket = $ticket[0];
 
                 if (Event::where('information', '=', $event['information'])
                         ->where('source', '=', $event['source'])
