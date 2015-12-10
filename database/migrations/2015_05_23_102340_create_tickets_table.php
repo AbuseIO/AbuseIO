@@ -18,7 +18,7 @@ class CreateTicketsTable extends Migration
             function (Blueprint $table) {
 
                 $table->increments('id');
-                $table->string('ip');
+                $table->string('ip', 45);
                 $table->string('domain');
                 $table->integer('class_id')->unsigned();
                 $table->integer('type_id')->unsigned();

@@ -16,7 +16,7 @@ class CreateAccountsTable extends Migration
             'accounts',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name')->unique();
+                $table->string('name', 80)->unique();
                 $table->string('description');
                 $table->boolean('disabled')->default(false);
                 $table->integer('brand_id');

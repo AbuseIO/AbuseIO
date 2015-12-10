@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
                 $table->integer('account_id')->unsigned();
                 $table->string('email')->unique();
                 $table->string('password');
-                $table->string('first_name');
-                $table->string('last_name');
-                $table->string('locale')->default('en');
+                $table->string('first_name', 80);
+                $table->string('last_name', 80);
+                $table->string('locale', 3)->default('en');
                 $table->boolean('disabled')->default(false);
                 $table->rememberToken();
                 $table->timestamps();

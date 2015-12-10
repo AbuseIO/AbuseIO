@@ -19,7 +19,7 @@ class CreateNotesTable extends Migration
 
                 $table->increments('id');
                 $table->integer('ticket_id')->unsigned();
-                $table->string('submitter');
+                $table->string('submitter', 80);
                 $table->longText('text');
                 $table->boolean('hidden')->unsigned();
                 $table->boolean('viewed')->unsigned();

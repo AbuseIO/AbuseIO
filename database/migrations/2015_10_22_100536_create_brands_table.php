@@ -16,8 +16,8 @@ class CreateBrandsTable extends Migration
             'brands',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name')->unique();
-                $table->string('company_name');
+                $table->string('name', 80)->unique();
+                $table->string('company_name', 80);
                 $table->string('introduction_text');
                 $table->binary('logo');
                 $table->timestamps();
