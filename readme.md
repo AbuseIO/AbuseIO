@@ -36,5 +36,3 @@ If you discover a security vulnerability within AbuseIO, please send an e-mail t
 ### License
 
 AbuseIO is open-sourced software licensed under the [GNUv2 license](http://www.gnu.org/licenses/gpl-2.0.en.html)
-
-
