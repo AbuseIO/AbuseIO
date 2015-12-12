@@ -4,7 +4,6 @@ namespace AbuseIO\Console\Commands\Netblock;
 
 use AbuseIO\Models\Netblock;
 use Illuminate\Console\Command;
-use AbuseIO\Models\User;
 use Carbon;
 
 class ListCommand extends Command
