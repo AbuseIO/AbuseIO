@@ -187,19 +187,21 @@
                     {{ trans('ash.communication.noMessages') }}
                 @else
                     @foreach ($ticket->notes as $note)
-                        <div class="row">
-                            <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
-                                <div class="panel panel-{{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary' }}">
-                                    <div class="panel-heading clearfix">
-                                        <h3 class="panel-title pull-left">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
-                                        <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
-                                    </div>
-                                    <div class="panel-body">
-                                        {{ htmlentities($note->text) }}
+                        @if ($note->hidden != true)
+                            <div class="row">
+                                <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
+                                    <div class="panel panel-{{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary' }}">
+                                        <div class="panel-heading clearfix">
+                                            <h3 class="panel-title pull-left">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
+                                            <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
+                                        </div>
+                                        <div class="panel-body">
+                                            {{ htmlentities($note->text) }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 @endif
             </div>

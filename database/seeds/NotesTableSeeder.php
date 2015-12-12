@@ -33,7 +33,7 @@ class NotesTableSeeder extends Seeder
             [
                 'id'                        => '3',
                 'ticket_id'                 => '1',
-                'submitter'                 => 'IP Contact',
+                'submitter'                 => 'Abusedesk',
                 'text'                      => 'Well too bad!',
                 'hidden'                    => true,
                 'viewed'                    => false,
