@@ -50,6 +50,12 @@ class TicketsController extends Controller
                     return $ticket->events->count();
                 }
             )
+            ->addColumn(
+                'notes_count',
+                function ($ticket) {
+                    return $ticket->unreadNotes->count();
+                }
+            )
             ->editColumn(
                 'type_id',
                 function ($ticket) {
@@ -198,7 +204,8 @@ class TicketsController extends Controller
         $note->ticket_id = $ticket->id;
         $note->submitter = trans('ash.communication.abusedesk'). $postingUser;
         $note->text = Input::get('text');
-        $note->hidden = Input::get('hidden');
+        $note->hidden = empty(Input::get('hidden')) ? false : true;
+        $note->viewed = true;
         $note->save();
 
         return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');

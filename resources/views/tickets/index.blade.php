@@ -18,7 +18,8 @@
             <th>{{ trans('misc.domain') }}</th>
             <th>{{ trans('misc.type') }}</th>
             <th>{{ trans('misc.classification') }}</th>
-            <th>{{ trans('tickets.count') }}</th>
+            <th>{{ trans('tickets.events') }}</th>
+            <th>{{ trans('tickets.notes') }}</th>
             <th>{{ trans('misc.status') }}</th>
             <th class="text-right">{{ trans('misc.action') }}</th>
         </tr>
@@ -80,7 +81,8 @@
                     { data: 'domain', name: 'domain' },
                     { data: 'type_id', name: 'type_id' },
                     { data: 'class_id', name: 'class_id' },
-                    { data: 'event_count', name: 'event_count' },
+                    { data: 'event_count', name: 'event_count', searchable: false },
+                    { data: 'notes_count', name: 'notes_count', searchable: false },
                     { data: 'status_id', name: 'status_id' },
                     { data: 'actions', orderable: false, searchable: false, class: "text-right" }
                 ]

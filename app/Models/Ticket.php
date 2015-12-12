@@ -122,6 +122,17 @@ class Ticket extends Model
     /**
      * @return mixed
      */
+    public function unreadNotes()
+    {
+
+        return $this->hasMany('AbuseIO\Models\Note')
+            ->where('viewed', 'false');
+
+    }
+
+    /**
+     * @return mixed
+     */
     public function firstEvent()
     {
 
