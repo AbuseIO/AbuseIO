@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Console;
 
+use AbuseIO\Models\Netblock;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -31,6 +32,8 @@ class Kernel extends ConsoleKernel
 
         'AbuseIO\Console\Commands\Housekeeper\RunCommand',
         'AbuseIO\Console\Commands\Housekeeper\NotificationsCommand',
+
+        'AbuseIO\Console\Commands\Netblock\ListCommand',
 
     ];
 
