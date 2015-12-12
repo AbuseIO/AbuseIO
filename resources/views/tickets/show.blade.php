@@ -17,7 +17,7 @@
             </div>
             <div class="btn-group" role="group" aria-label="...">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ trans('tickets.button.send_notification') }} <span class="caret">
+                    {{ trans('tickets.button.send_notification') }} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
                     <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.ip', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
@@ -236,7 +236,24 @@
                         <div class="panel panel-{{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary' }}">
                             <div class="panel-heading clearfix">
                                 <h3 class="panel-title pull-left">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
+
                                 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
+
+                                @if ($note->hidden == true)
+                                    <span style='color:red;margin-right:1em' class="pull-right"><span class="glyphicon glyphicon-eye-close"></span> <a href="" title="Click to mark as visible again">{{ trans('misc.button.hidden') }}</a></span>
+                                @else
+                                    <span style='color:green;margin-right:1em' class="pull-right"><span class="glyphicon glyphicon-eye-open"></span> <a href="" title="Click to hide this note">{{ trans('misc.button.visible') }}</a></span>
+                                @endif
+
+                                @if ($note->viewed == true)
+                                    <span style='color:green;margin-right:1em' class="pull-right"><span class="glyphicon glyphicon-ok-circle"></span> <a href="" title="Click to mark as unread again">{{ trans('misc.button.read') }}</a></span>
+                                @else
+                                    <span style='color:darkorange;margin-right:1em' class="pull-right"><span class="glyphicon glyphicon-ban-circle"></span> <a href="" title="Click to mark as read">{{ trans('misc.button.unread') }}</a></span>
+                                @endif
+
+                                @if (config('main.notes.deletable') === true)
+                                    <span style='color:red;margin-right:1em' class="pull-right"><span class="glyphicon glyphicon-remove-circle"></span> <a href="" title="Click to delete this now">{{ trans('misc.button.delete') }}</a></span>
+                                @endif
                             </div>
                             <div class="panel-body">
                                 {{ htmlentities($note->text) }}
@@ -252,6 +269,9 @@
                         <div class="form-group">
                             {!! Form::label('text', trans('ash.communication.reply')) !!}
                             {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder_admin'), 'class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::checkbox('hidden') !!} {!! trans('misc.button.hidden') !!}
                         </div>
                         <div class="form-group">
                             {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}

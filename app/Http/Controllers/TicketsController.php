@@ -198,6 +198,7 @@ class TicketsController extends Controller
         $note->ticket_id = $ticket->id;
         $note->submitter = trans('ash.communication.abusedesk'). $postingUser;
         $note->text = Input::get('text');
+        $note->hidden = Input::get('hidden');
         $note->save();
 
         return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');

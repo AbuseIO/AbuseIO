@@ -37,6 +37,10 @@ return [
     'button.enable'         => 'Aanzetten ',
     'button.disable'        => 'Uitzetten',
     'button.close'          => 'Sluiten',
+    'button.hidden'         => 'Onzichtbaar',
+    'button.visible'        => 'Zichtbaar',
+    'button.read'           => 'Gelezen',
+    'button.unread'         => 'Ongelezen',
 
     // Miscellaneous
     'all'               => 'Alle',
@@ -68,7 +72,6 @@ return [
     'revdns'            => 'Reverse DNS',
     'domain'            => 'Domein',
     'ticket_id'         => 'Ticket Nr',
-    'status'            => 'Status',
     'ticket_state'      => 'Ticket status',
     'id'                => 'Nr',
     'text'              => 'Tekst',

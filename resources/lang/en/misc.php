@@ -36,6 +36,10 @@ return [
     'button.enable'         => 'Enable ',
     'button.disable'        => 'Disable',
     'button.close'          => 'Close',
+    'button.hidden'         => 'Hidden',
+    'button.visible'        => 'Visible',
+    'button.read'           => 'Read',
+    'button.unread'         => 'Unread',
 
     // Miscellaneous
     'all'               => 'All',
