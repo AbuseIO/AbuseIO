@@ -16,9 +16,7 @@ use Form;
 
 class UsersController extends Controller
 {
-    /*
-     * Call the parent constructor to generate a base ACL
-     */
+
     public function __construct()
     {
         parent::__construct();
