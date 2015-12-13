@@ -15,9 +15,6 @@ use Input;
 class TicketsController extends Controller
 {
 
-    /*
-     * Call the parent constructor to generate a base ACL
-     */
     public function __construct()
     {
         parent::__construct();
@@ -153,11 +150,7 @@ class TicketsController extends Controller
      */
     public function store(TicketsFormRequest $ticket)
     {
-        //only allowed in debug mode or something
-        //$input = Input::all();
-        //Ticket::create( $input );
-        //
-        //return Redirect::route('admin.tickets.index')->with('message', 'Ticket has been created');
+        // Todo, implement new ticket
     }
 
     /**
@@ -183,8 +176,7 @@ class TicketsController extends Controller
      */
     public function edit(Ticket $ticket)
     {
-        //only allowed in debug mode or something
-        //return view('tickets.edit')->with('ticket', $ticket);
+        // We don't allow tickets to be editted directly (only subfunctions like contactUpdate)
     }
 
     /**
@@ -218,10 +210,7 @@ class TicketsController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        //only allowed in debug mode or something
-        //$ticket->delete();
-        //
-        //return Redirect::route('admin.tickets.index')->with('message', 'Ticket has been deleted.');
+        // We don't allow tickets to be deleted
     }
 
     /**
@@ -232,7 +221,10 @@ class TicketsController extends Controller
     public function status(Ticket $ticket)
     {
         // TODO: (mark) Maybe use existing update() for this?
-        return Redirect::route('admin.tickets.show', $ticket->id)->with('message', '{PLACEHOLDER} Ticket status has been updated.');
+        return Redirect::route(
+            'admin.tickets.show',
+            $ticket->id
+        )->with('message', '{PLACEHOLDER} Ticket status has been updated.');
     }
 
     /**
@@ -243,7 +235,10 @@ class TicketsController extends Controller
     public function notify(Ticket $ticket)
     {
         // TODO: (mark) Or are we going to call the notification functions directly?
-        return Redirect::route('admin.tickets.show', $ticket->id)->with('message', '{PLACEHOLDER} Ticket contact(s) notified.');
+        return Redirect::route(
+            'admin.tickets.show',
+            $ticket->id
+        )->with('message', '{PLACEHOLDER} Ticket contact(s) notified.');
     }
 
     /**
@@ -254,6 +249,9 @@ class TicketsController extends Controller
     public function updatecontact(Ticket $ticket)
     {
         // TODO: (mark) Maybe use existing update() for this?
-        return Redirect::route('admin.tickets.show', $ticket->id)->with('message', '{PLACEHOLDER} Ticket contact(s) updated.');
+        return Redirect::route(
+            'admin.tickets.show',
+            $ticket->id
+        )->with('message', '{PLACEHOLDER} Ticket contact(s) updated.');
     }
 }
