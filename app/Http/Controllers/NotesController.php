@@ -82,7 +82,33 @@ class NotesController extends Controller
      */
     public function update(NoteFormRequest $request, Note $note)
     {
+        $input = Input::all();
 
+        if (isset($input['hidden'])) {
+            $note->hidden = $input['hidden'];
+            if ($input['hidden'] == true) {
+                $message = 'hidden';
+            }
+            if ($input['hidden'] != true) {
+                $message = 'unhidden';
+            }
+        }
+        if (isset($input['viewed'])) {
+            $note->viewed = $input['viewed'];
+            if ($input['viewed'] == true) {
+                $message = 'read';
+            }
+            if ($input['viewed'] != true) {
+                $message = 'unread';
+            }
+        }
+
+        $note->save();
+
+        return Redirect::route(
+            'admin.tickets.show',
+            $note->ticket_id
+        )->with('message', 'The note has been marked ' . $message);
     }
 
     /**
@@ -92,6 +118,13 @@ class NotesController extends Controller
      */
     public function destroy(Note $note)
     {
+        $returnTicket = $note->ticket_id;
 
+        $note->delete();
+
+        return Redirect::route(
+            'admin.tickets.show',
+            $returnTicket
+        )->with('message', 'The note has been deleted');
     }
 }

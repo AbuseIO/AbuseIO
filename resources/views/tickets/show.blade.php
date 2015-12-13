@@ -240,19 +240,33 @@
                                 <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
 
                                 @if ($note->hidden == true)
-                                    <span style='color:red;margin-right:1em' class="pull-right"><span class="glyphicon glyphicon-eye-close"></span> <a href="" title="Click to mark as visible again">{{ trans('misc.button.hidden') }}</a></span>
+                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'PATCH', 'route' => ['admin.notes.update', $note->id], 'class' => 'form-horizontal']) !!}
+                                        {!! Form::hidden('hidden', false) !!}
+                                        {!! Form::submit(trans('misc.button.hidden'), ['class'=>'pull-right btn btn-xs btn-warning']) !!}
+                                    {!! Form::close() !!}
                                 @else
-                                    <span style='color:green;margin-right:1em' class="pull-right"><span class="glyphicon glyphicon-eye-open"></span> <a href="" title="Click to hide this note">{{ trans('misc.button.visible') }}</a></span>
+                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'PATCH', 'route' => ['admin.notes.update', $note->id], 'class' => 'form-horizontal']) !!}
+                                        {!! Form::hidden('hidden', true) !!}
+                                        {!! Form::submit(trans('misc.button.visible'), ['class'=>'pull-right btn btn-xs btn-success']) !!}
+                                    {!! Form::close() !!}
                                 @endif
 
                                 @if ($note->viewed == true)
-                                    <span style='color:green;margin-right:1em' class="pull-right"><span class="glyphicon glyphicon-ok-circle"></span> <a href="" title="Click to mark as unread again">{{ trans('misc.button.read') }}</a></span>
+                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'PATCH', 'route' => ['admin.notes.update', $note->id], 'class' => 'form-horizontal']) !!}
+                                    {!! Form::hidden('viewed', false) !!}
+                                    {!! Form::submit(trans('misc.button.read'), ['class'=>'pull-right btn btn-xs btn-success']) !!}
+                                    {!! Form::close() !!}
                                 @else
-                                    <span style='color:darkorange;margin-right:1em' class="pull-right"><span class="glyphicon glyphicon-ban-circle"></span> <a href="" title="Click to mark as read">{{ trans('misc.button.unread') }}</a></span>
+                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'PATCH', 'route' => ['admin.notes.update', $note->id], 'class' => 'form-horizontal']) !!}
+                                    {!! Form::hidden('viewed', true) !!}
+                                    {!! Form::submit(trans('misc.button.unread'), ['class'=>'pull-right btn btn-xs btn-warning']) !!}
+                                    {!! Form::close() !!}
                                 @endif
 
                                 @if (config('main.notes.deletable') === true)
-                                    <span style='color:red;margin-right:1em' class="pull-right"><span class="glyphicon glyphicon-remove-circle"></span> <a href="" title="Click to delete this now">{{ trans('misc.button.delete') }}</a></span>
+                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'DELETE', 'route' => ['admin.notes.destroy', $note->id], 'class' => 'form-horizontal']) !!}
+                                    {!! Form::submit(trans('misc.button.delete'), ['class'=>'pull-right btn btn-xs btn-danger']) !!}
+                                    {!! Form::close() !!}
                                 @endif
                             </div>
                             <div class="panel-body">
