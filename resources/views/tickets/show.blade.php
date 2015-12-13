@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-4 text-right">
             <div class="btn-group" role="group" aria-label="...">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {!! trans('tickets.button.update_customer') !!} <span class="caret"></span>
+                    {!! trans('tickets.button.update_contact') !!} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
                     <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.update.ip', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id]) !!}</li>

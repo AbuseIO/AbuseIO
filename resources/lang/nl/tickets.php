@@ -11,7 +11,7 @@ return [
     'button.all_tickets'        => 'Alle tickets',
     'button.open_tickets'       => 'Open tickets',
     'button.closed_tickets'     => 'Gesloten tickets',
-    'button.update_customer'    => 'Contact bijwerken',
+    'button.update_contact'     => 'Contact bijwerken',
     'button.send_notification'  => 'Verstuur notificatie',
     'button.ignore'             => 'Negeer',
     'button.resolved'           => 'Opgelost',
