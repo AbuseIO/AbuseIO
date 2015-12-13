@@ -263,7 +263,8 @@
                 </div>
                 @endforeach
             @endif
-            {!! Form::open(['method' => 'put']) !!}
+            {!! Form::model(new AbuseIO\Models\Note, ['route' => 'admin.notes.store', 'class' => 'form-horizontal']) !!}
+                {!! Form::hidden('ticket_id', $ticket->id) !!}
                 <div class="row">
                     <div class="col-xs-11 col-xs-offset-1">
                         <div class="form-group">

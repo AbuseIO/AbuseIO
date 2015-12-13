@@ -186,21 +186,7 @@ class TicketsController extends Controller
      */
     public function update(Ticket $ticket)
     {
-        if (config('main.notes.show_abusedesk_names') === true) {
-            $postingUser = ' (' . $this->auth_user->fullName() . ')';
-        } else {
-            $postingUser = '';
-        }
-
-        $note = new Note;
-        $note->ticket_id = $ticket->id;
-        $note->submitter = trans('ash.communication.abusedesk'). $postingUser;
-        $note->text = Input::get('text');
-        $note->hidden = empty(Input::get('hidden')) ? false : true;
-        $note->viewed = true;
-        $note->save();
-
-        return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');
+        //return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');
     }
 
     /**

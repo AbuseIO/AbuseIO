@@ -65,6 +65,7 @@ class CreatePermissionsTable extends Migration
             'netblocks',
             'domains',
             'tickets',
+            'notes',
             'search',
             'analytics',
             'accounts',

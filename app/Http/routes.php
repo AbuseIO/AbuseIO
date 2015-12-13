@@ -124,6 +124,9 @@ Route::group(
         // Tickets
         require app_path() . '/Http/Routes/Tickets.php';
 
+        // Notes
+        require app_path() . '/Http/Routes/Notes.php';
+
         // Analytics
         require app_path() . '/Http/Routes/Analytics.php';
 
