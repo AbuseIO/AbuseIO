@@ -40,7 +40,11 @@ class Note extends Model
     public static function createRules($note)
     {
         $rules = [
-            // TODO : No validation implemented at all?
+            'ticket_id' => 'sometimes|integer',
+            'submitter' => 'sometimes|string',
+            'text'      => 'required|string',
+            'hidden'    => 'sometimes|boolean',
+            'viewed'    => 'sometimes|boolean',
         ];
 
         return $rules;
@@ -55,7 +59,8 @@ class Note extends Model
     public static function updateRules($note)
     {
         $rules = [
-            // TODO : No validation implemented at all?
+            'hidden' => 'sometimes|boolean',
+            'viewed' => 'sometimes|boolean',
         ];
 
         return $rules;
