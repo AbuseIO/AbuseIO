@@ -11,7 +11,7 @@ return [
     'button.all_tickets'        => 'All tickets',
     'button.open_tickets'       => 'Open tickets',
     'button.closed_tickets'     => 'Closed tickets',
-    'button.update_customer'    => 'Update customer',
+    'button.update_contact'     => 'Update contact',
     'button.send_notification'  => 'Send notification',
     'button.ignore'             => 'Ignore',
     'button.resolved'           => 'Resolved',
