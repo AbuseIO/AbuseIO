@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
+
 class NetblockCommandTest extends TestCase{
 
     public function testNetBlockListCommand()
@@ -118,6 +120,5 @@ class NetblockCommandTest extends TestCase{
             Artisan::output()
         );
     }
-
-
 }
+

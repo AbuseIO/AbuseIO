@@ -45,12 +45,10 @@ class CreateCommand extends Command
      */
     public function handle()
     {
-        /*
-         * TODO implement handle method.
-         */
         $netblock = new Netblock();
 
-        $contact = User::find($this->option('contact'))?: User::where('email', '=', $this->option("contact"))->first();
+        $contact = $this->findUserByIdOrEmail($this->option("contact"));
+
         if (null === $contact) {
             $this->error("Failed to find contact, could\'nt save netblock");
             return false;
@@ -84,4 +82,15 @@ class CreateCommand extends Command
 
         return true;
     }
+
+    /**
+     * @return mixed
+     */
+    private function findUserByIdOrEmail($param)
+    {
+        $contact = User::find($param) ?:
+            User::where('email', '=', $param)->first();
+        return $contact;
+    }
 }
+
