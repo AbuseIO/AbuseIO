@@ -1,16 +1,13 @@
 <?php
 
+class NetblockCommandTest extends TestCase{
 
-class NetblockCommandTest extends TestCase
-{
     public function testNetBlockListCommand()
     {
         $exitCode = Artisan::call('netblock:list', []);
 
-        $output = Artisan::output();
-
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Global internet", $output);
+        $this->assertContains("Global internet", Artisan::output());
     }
 
     public function testNetBlockListCommandWithValidFilter()
@@ -19,11 +16,9 @@ class NetblockCommandTest extends TestCase
             "--filter" => "10.1.16.128"
         ]);
 
-        $output = Artisan::output();
-
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 6", $output);
-        $this->assertNotContains("Global internet", $output);
+        $this->assertContains("Customer 6", Artisan::output());
+        $this->assertNotContains("Global internet", Artisan::output());
     }
 
     public function testNetBlockShowWithValidContactFilter()
@@ -32,10 +27,8 @@ class NetblockCommandTest extends TestCase
             "--filter" => "Customer 6"
         ]);
 
-        $output = Artisan::output();
-
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 6", $output);
+        $this->assertContains("Customer 6", Artisan::output());
     }
 
     public function testNetBlockShowWithInvalidFilter()
@@ -43,10 +36,9 @@ class NetblockCommandTest extends TestCase
         $exitCode = Artisan::call('netblock:show', [
             "--filter" => "xxx"
         ]);
-        $output = Artisan::output();
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No matching netblocks where found.", $output);
+        $this->assertContains("No matching netblocks where found.", Artisan::output());
     }
 
     public function testNetBlockShowWithStartIpFilter()
@@ -54,10 +46,9 @@ class NetblockCommandTest extends TestCase
         $exitCode = Artisan::call('netblock:show', [
             "--filter" => "10.1.18.0"
         ]);
-        $output = Artisan::output();
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 8", $output);
+        $this->assertContains("Customer 8",  Artisan::output());
     }
 
     public function testNetBlockShowWithStartEndFilter()
@@ -65,9 +56,34 @@ class NetblockCommandTest extends TestCase
         $exitCode = Artisan::call('netblock:show', [
             "--filter" => "10.1.16.195"
         ]);
-        $output = Artisan::output();
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 6", $output);
+        $this->assertContains("Customer 6", Artisan::output());
     }
+
+    public function testNetBlockDeleteValid()
+    {
+        $exitCode = Artisan::call('netblock:delete', [
+            "--id" => "1"
+        ]);
+
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains("netblock has been deleted", Artisan::output());
+        /**
+         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
+         */
+        $this->seed('NetblocksTableSeeder');
+    }
+
+    public function testNetBlockDeleteInvalidId()
+    {
+        $exitCode = Artisan::call('netblock:delete', [
+            "--id" => "1000"
+        ]);
+
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains("Unable to find netblock", Artisan::output());
+    }
+
+
 }
