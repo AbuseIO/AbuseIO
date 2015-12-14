@@ -28,7 +28,7 @@ class ShowCommand extends Command
      * The headers of the table
      * @var array
      */
-    protected $headers =['Contact', 'First IP', 'Last IP','Description', 'Enabled'];
+    protected $headers =['Id', 'Contact', 'First IP', 'Last IP','Description', 'Enabled'];
 
     /**
      * The fields of the table / database row
@@ -77,6 +77,7 @@ class ShowCommand extends Command
     private function transformNetblockToTableBody(Netblock $netblock)
     {
         return  [[
+            $netblock->id,
             $netblock->contact->name,
             $netblock->first_ip,
             $netblock->last_ip,
@@ -126,7 +127,7 @@ class ShowCommand extends Command
     {
         $netblock = null;
         $allowedFields = ["first_ip", "last_ip"];
-        printf("%s, %s\n", $ip, $field);
+
         if (in_array($field, $allowedFields)) {
             $filter = '%'.$this->option('filter').'%';
             $netblock = Netblock::where($field, "like", $filter)->first();

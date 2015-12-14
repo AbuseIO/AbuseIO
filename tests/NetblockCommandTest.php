@@ -9,9 +9,7 @@ class NetblockCommandTest extends TestCase
 
         $output = Artisan::output();
 
-        // TODO findout how the exitCode works so I can test for it.
-        //$this->assertEquals($exitCode, 0);
-
+        $this->assertEquals($exitCode, 0);
         $this->assertContains("Global internet", $output);
     }
 
@@ -23,10 +21,8 @@ class NetblockCommandTest extends TestCase
 
         $output = Artisan::output();
 
-        // TODO findout how the exitCode works so I can test for it.
-        //$this->assertEquals($exitCode, 0);
+        $this->assertEquals($exitCode, 0);
         $this->assertContains("Customer 6", $output);
-
         $this->assertNotContains("Global internet", $output);
     }
 
@@ -35,7 +31,10 @@ class NetblockCommandTest extends TestCase
         $exitCode = Artisan::call('netblock:show', [
             "--filter" => "Customer 6"
         ]);
+
         $output = Artisan::output();
+
+        $this->assertEquals($exitCode, 0);
         $this->assertContains("Customer 6", $output);
     }
 
@@ -45,6 +44,8 @@ class NetblockCommandTest extends TestCase
             "--filter" => "xxx"
         ]);
         $output = Artisan::output();
+
+        $this->assertEquals($exitCode, 0);
         $this->assertContains("No matching netblocks where found.", $output);
     }
 
@@ -54,6 +55,8 @@ class NetblockCommandTest extends TestCase
             "--filter" => "10.1.18.0"
         ]);
         $output = Artisan::output();
+
+        $this->assertEquals($exitCode, 0);
         $this->assertContains("Customer 8", $output);
     }
 
@@ -63,6 +66,8 @@ class NetblockCommandTest extends TestCase
             "--filter" => "10.1.16.195"
         ]);
         $output = Artisan::output();
+
+        $this->assertEquals($exitCode, 0);
         $this->assertContains("Customer 6", $output);
     }
 }

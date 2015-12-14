@@ -27,7 +27,7 @@ class ListCommand extends Command
      * The headers of the table
      * @var array
      */
-    protected $headers = ['Contact', 'First IP', 'Last IP'];
+    protected $headers = ['Id', 'Contact', 'First IP', 'Last IP'];
 
     /**
      * The fields of the table / database row
@@ -57,14 +57,26 @@ class ListCommand extends Command
         } else {
             $netblockList = Netblock::all();
         }
-
-        $netblocks = [];
-        foreach ($netblockList as $netblock) {
-            $netblocks[] = array($netblock->contact->name, $netblock->first_ip, $netblock->last_ip);
-        }
-
-        $this->table($this->headers, $netblocks);
+        $this->table(
+            $this->headers,
+            $this->transformNetblockListToTableBody($netblockList, $netblockList)
+        );
 
         return true;
+    }
+
+    /**
+     * @param $netblockList
+     * @param $netblocks
+     * @return array
+     */
+    public function transformNetblockListToTableBody($netblockList, $netblocks)
+    {
+        $netblocks = [];
+        /* @var $netblock  \AbuseIO\Models\Netblock|null */
+        foreach ($netblockList as $netblock) {
+            $netblocks[] = [$netblock->id, $netblock->contact->name, $netblock->first_ip, $netblock->last_ip];
+        }
+        return $netblocks;
     }
 }
