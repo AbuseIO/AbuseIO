@@ -61,7 +61,7 @@ return [
     'brands'            => 'Merk|Merken',
     'options'           => 'Opties',
     'misc'              => 'Algemeen',
-    'database_id'       => 'Database Nr',
+    'database_id'       => 'Nr',
     'contact'           => 'Contact',
     'description'       => 'Omschrijving',
     'ip'                => 'IP',

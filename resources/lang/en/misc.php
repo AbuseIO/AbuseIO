@@ -60,7 +60,7 @@ return [
     'brands'            => 'Brand|Brands',
     'options'           => 'Options',
     'misc'              => 'Miscellaneous',
-    'database_id'       => 'Database Id',
+    'database_id'       => 'ID',
     'contact'           => 'Contact',
     'description'       => 'Description',
     'ip'                => 'IP',
