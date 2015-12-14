@@ -34,6 +34,7 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Housekeeper\NotificationsCommand',
 
         'AbuseIO\Console\Commands\Netblock\ListCommand',
+        'AbuseIO\Console\Commands\Netblock\ShowCommand',
 
     ];
 
