@@ -48,35 +48,40 @@ class CreateCommand extends Command
         /*
          * TODO implement handle method.
          */
-//        $netblock = new Netblock();
-//
-//        $netblock->contact = User::find($this->option('contact'))?: User::where('email', '=', $this->option("contact"))->first();
-//        $netblock->first_ip = $this->option('first_ip');
-//        $netblock->last_ip = $this->option('last_ip');
-//        $netblock->description = $this->option('description');
-//        $netblock->enabled = $this->option('enabled') === "true" ? true : false;
-//
-//
-//        $validation = Validator::make($netblock->toArray(), Netblock::createRules($netblock));
-//
-//        if ($validation->fails()) {
-//            foreach ($validation->messages()->all() as $message) {
-//                $this->warn($message);
-//            }
-//
-//            $this->error('Failed to create the netblock due to validation warnings');
-//
-//            return false;
-//        }
-//
-//        if (!$netblock->save()) {
-//            $this->error('Failed to save the netblock into the database');
-//
-//            return false;
-//        }
-//
-//        $this->info("The netblock has been created");
-//
-//        return true;
+        $netblock = new Netblock();
+
+        $contact = User::find($this->option('contact'))?: User::where('email', '=', $this->option("contact"))->first();
+        if (null === $contact) {
+            $this->error("Failed to find contact, could\'nt save netblock");
+            return false;
+        }
+        $netblock->contact()->associate($contact);
+        $netblock->first_ip = $this->option('first_ip');
+        $netblock->last_ip = $this->option('last_ip');
+        $netblock->description = $this->option('description');
+        $netblock->enabled = $this->option('enabled') === "true" ? true : false;
+
+
+        $validation = Validator::make($netblock->toArray(), Netblock::createRules($netblock));
+
+        if ($validation->fails()) {
+            foreach ($validation->messages()->all() as $message) {
+                $this->warn($message);
+            }
+
+            $this->error('Failed to create the netblock due to validation warnings');
+
+            return false;
+        }
+
+        if (!$netblock->save()) {
+            $this->error('Failed to save the netblock into the database');
+
+            return false;
+        }
+
+        $this->info("The netblock has been created");
+
+        return true;
     }
 }
