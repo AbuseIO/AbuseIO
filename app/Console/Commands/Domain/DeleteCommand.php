@@ -3,7 +3,7 @@
 namespace AbuseIO\Console\Commands\Domain;
 
 use Illuminate\Console\Command;
-use AbuseIO\Models\Netblock;
+use AbuseIO\Models\Domain;
 use Carbon;
 
 class DeleteCommand extends Command
@@ -14,7 +14,7 @@ class DeleteCommand extends Command
      * @var string
      */
     protected $signature = 'domain:delete
-                            {--id= : Use the netblock id to delete it }
+                            {--id= : Use the domain id to delete it }
     ';
 
     /**
@@ -45,20 +45,20 @@ class DeleteCommand extends Command
         }
 
         /* @var $netblock  \AbuseIO\Models\Netblock|null */
-        $netblock = Netblock::find($this->option("id"));
-        if (null === $netblock) {
+        $domain = Domain::find($this->option("id"));
+        if (null === $domain) {
             $this->error(
-                    sprintf('Unable to find netblock with id:%d', $this->option("id"))
+                    sprintf('Unable to find domain with id:%d', $this->option("id"))
                 );
             return false;
         }
 
-        if (!$netblock->delete()) {
-            $this->error('Unable to delete netblock from the system');
+        if (!$domain->delete()) {
+            $this->error('Unable to delete domain from the system');
             return false;
         }
 
-        $this->info('The netblock has been deleted from the system');
+        $this->info('The domain has been deleted from the system');
         return true;
     }
 }
