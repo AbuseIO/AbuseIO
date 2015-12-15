@@ -139,7 +139,7 @@ class NetblockCommandTest extends TestCase{
          */
         $this->seed('NetblocksTableSeeder');
     }
-    
+
     public function testNetblockCreate()
     {
         $exitCode = Artisan::call("netblock:create",[
