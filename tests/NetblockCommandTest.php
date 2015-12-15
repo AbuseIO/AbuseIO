@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Artisan;
 
 class NetblockCommandTest extends TestCase{
 
+    /**
+     * List test
+     */
     public function testNetBlockListCommand()
     {
         $exitCode = Artisan::call('netblock:list', []);
@@ -23,6 +26,9 @@ class NetblockCommandTest extends TestCase{
         $this->assertNotContains("Global internet", Artisan::output());
     }
 
+    /**
+     * Show test
+     */
     public function testNetBlockShowWithValidContactFilter()
     {
         $exitCode = Artisan::call('netblock:show', [
@@ -63,6 +69,9 @@ class NetblockCommandTest extends TestCase{
         $this->assertContains("Customer 6", Artisan::output());
     }
 
+    /**
+     * Delete Test
+     */
     public function testNetBlockDeleteValid()
     {
         $exitCode = Artisan::call('netblock:delete', [
@@ -87,6 +96,50 @@ class NetblockCommandTest extends TestCase{
         $this->assertContains("Unable to find netblock", Artisan::output());
     }
 
+
+    /**
+     * Edit test
+     */
+    public function testNetBlockEditWithoutId()
+    {
+        $exitCode = Artisan::call('netblock:edit');
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains("The required id argument was not passed, try help", Artisan::output());
+    }
+
+    public function testNetBlockEditWithInvalidId()
+    {
+        $exitCode = Artisan::call('netblock:edit', [
+            "--id" => "10000"
+        ]);
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains("Unable to find netblock with this criteria", Artisan::output());
+    }
+
+    public function testNetBlockEditWithInvalidContact()
+    {
+        $exitCode = Artisan::call('netblock:edit', [
+            "--id" => "1",
+            "--contact" => "1000"
+        ]);
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains("Unable to find contact with this criteria", Artisan::output());
+    }
+
+    public function testNetBlockEditEnabled()
+    {
+        $exitCode = Artisan::call('netblock:edit', [
+            "--id" => "1",
+            "--enabled" => "false"
+        ]);
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains("Netblock has been successfully updated", Artisan::output());
+        /**
+         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
+         */
+        $this->seed('NetblocksTableSeeder');
+    }
+    
     public function testNetblockCreate()
     {
         $exitCode = Artisan::call("netblock:create",[

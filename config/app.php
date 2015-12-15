@@ -168,6 +168,7 @@ return [
         'AbuseIO\Providers\RouteServiceProvider',
         'AbuseIO\Providers\ParserconfigServiceProvider',
         'AbuseIO\Providers\MainconfigServiceProvider',
+        'AbuseIO\Providers\HelperServiceProvider',
         'Chumper\Zipper\ZipperServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
 

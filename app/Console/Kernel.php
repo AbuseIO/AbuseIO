@@ -37,6 +37,13 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Netblock\ShowCommand',
         'AbuseIO\Console\Commands\Netblock\DeleteCommand',
         'AbuseIO\Console\Commands\Netblock\CreateCommand',
+        'AbuseIO\Console\Commands\Netblock\EditCommand',
+
+        'AbuseIO\Console\Commands\Domain\ListCommand',
+//        'AbuseIO\Console\Commands\Domain\ShowCommand',
+        'AbuseIO\Console\Commands\Domain\DeleteCommand',
+        'AbuseIO\Console\Commands\Domain\CreateCommand',
+        'AbuseIO\Console\Commands\Domain\EditCommand',
 
     ];
 
