@@ -130,7 +130,7 @@ class NetblockCommandTest extends TestCase{
             "--enabled" => "false"
         ]);
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("User has been successfully updated", Artisan::output());
+        $this->assertContains("Netblock has been successfully updated", Artisan::output());
         /**
          * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
          */

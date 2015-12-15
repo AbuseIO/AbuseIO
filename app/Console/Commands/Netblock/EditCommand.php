@@ -87,13 +87,13 @@ class EditCommand extends Command
                 $this->warn($message);
             }
 
-            $this->error('Failed to create the user due to validation warnings');
+            $this->error('Failed to create the netblock due to validation warnings');
 
             return false;
         }
         $netblock->save();
 
-        $this->info("User has been successfully updated");
+        $this->info("Netblock has been successfully updated");
 
         return true;
     }
