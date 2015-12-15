@@ -12,4 +12,9 @@ class CastToBoolTest extends TestCase{
         $this->assertFalse(castStringToBool("false"));
     }
 
+    public function testAnyStringIsFalse()
+    {
+        $this->assertFalse(castStringToBool("anyString"));
+    }
+
 }
