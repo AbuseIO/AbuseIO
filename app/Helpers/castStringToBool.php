@@ -2,5 +2,5 @@
 
 function castStringToBool($str)
 {
-    return $str;
+    return $str === "false" ? false : true;
 }

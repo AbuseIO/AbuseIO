@@ -76,7 +76,7 @@ class EditCommand extends Command
         }
 
         if (!empty($this->option("enabled"))) {
-            $netblock->enabled = $this->option("enabled") === "false" ? false : true;
+            $netblock->enabled = castStringToBool($this->option("enabled"));
         }
 
 
