@@ -42,8 +42,8 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Domain\ListCommand',
 //        'AbuseIO\Console\Commands\Domain\ShowCommand',
         'AbuseIO\Console\Commands\Domain\DeleteCommand',
-//        'AbuseIO\Console\Commands\Domain\CreateCommand',
-//        'AbuseIO\Console\Commands\Domain\EditCommand',
+        'AbuseIO\Console\Commands\Domain\CreateCommand',
+        'AbuseIO\Console\Commands\Domain\EditCommand',
 
     ];
 

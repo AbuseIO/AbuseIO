@@ -4,7 +4,7 @@ namespace AbuseIO\Console\Commands\Domain;
 
 use Illuminate\Console\Command;
 use AbuseIO\Models\User;
-use AbuseIO\Models\Netblock;
+use AbuseIO\Models\Domain;
 use Validator;
 use Carbon;
 
@@ -18,9 +18,7 @@ class EditCommand extends Command
     protected $signature = 'domain:edit
                             {--id : Id for the block you wish to update }
                             {--contact : e-mail address or id from contact }
-                            {--first_ip : Start Ip address from netblock  }
-                            {--last_ip : End Ip addres from netblock }
-                            {--description : Description }
+                            {--name : domain name  }
                             {--enabled : Set the account to be enabled }
     ';
 
@@ -28,7 +26,7 @@ class EditCommand extends Command
      * The console command description.
      * @var string
      */
-    protected $description = 'Changes information from a netblock';
+    protected $description = 'Changes information from a domain';
 
     /**
      * Create a new command instance.
@@ -50,11 +48,11 @@ class EditCommand extends Command
             $this->warn('The required id argument was not passed, try help');
             return false;
         }
-        /** @var Netblock|null $netblock */
-        $netblock = Netblock::find($this->option('id'));
+        /** @var Domain|null $domain */
+        $domain = Domain::find($this->option('id'));
 
-        if (null === $netblock) {
-            $this->error('Unable to find netblock with this criteria');
+        if (null === $domain) {
+            $this->error('Unable to find domain with this criteria');
             return false;
         }
 
@@ -65,35 +63,31 @@ class EditCommand extends Command
                 $this->error("Unable to find contact with this criteria");
                 return false;
             }
-            $netblock->contact()->associate($user);
+            $domain->contact()->associate($user);
         }
 
-        $stringOptions = ["first_ip", "last_ip", "description"];
-        foreach ($stringOptions as $option) {
-            if (!empty($this->option($option))) {
-                $netblock->$option = $this->option($option);
-            }
+        if (!empty($this->option("name"))) {
+            $domain->name = $this->option("name");
         }
 
         if (!empty($this->option("enabled"))) {
-            $netblock->enabled = castStringToBool($this->option("enabled"));
+            $domain->enabled = castStringToBool($this->option("enabled"));
         }
 
-
-        $validation = Validator::make($netblock->toArray(), Netblock::updateRules($netblock));
+        $validation = Validator::make($domain->toArray(), Domain::updateRules($domain));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
                 $this->warn($message);
             }
 
-            $this->error('Failed to create the user due to validation warnings');
+            $this->error('Failed to create the domain due to validation warnings');
 
             return false;
         }
-        $netblock->save();
+        $domain->save();
 
-        $this->info("User has been successfully updated");
+        $this->info("Domain has been successfully updated");
 
         return true;
     }

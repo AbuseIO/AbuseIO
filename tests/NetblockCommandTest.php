@@ -2,6 +2,9 @@
 
 class NetblockCommandTest extends TestCase{
 
+    /**
+     * List test
+     */
     public function testNetBlockListCommand()
     {
         $exitCode = Artisan::call('netblock:list', []);
@@ -21,6 +24,9 @@ class NetblockCommandTest extends TestCase{
         $this->assertNotContains("Global internet", Artisan::output());
     }
 
+    /**
+     * Show test
+     */
     public function testNetBlockShowWithValidContactFilter()
     {
         $exitCode = Artisan::call('netblock:show', [
@@ -61,6 +67,9 @@ class NetblockCommandTest extends TestCase{
         $this->assertContains("Customer 6", Artisan::output());
     }
 
+    /**
+     * Delete Test
+     */
     public function testNetBlockDeleteValid()
     {
         $exitCode = Artisan::call('netblock:delete', [
@@ -85,14 +94,17 @@ class NetblockCommandTest extends TestCase{
         $this->assertContains("Unable to find netblock", Artisan::output());
     }
 
-    public function testNetBlockUpdateWithoutId()
+    /**
+     * Edit test
+     */
+    public function testNetBlockEditWithoutId()
     {
         $exitCode = Artisan::call('netblock:edit');
         $this->assertEquals($exitCode, 0);
         $this->assertContains("The required id argument was not passed, try help", Artisan::output());
     }
 
-    public function testNetBlockUpdateWithInvalidId()
+    public function testNetBlockEditWithInvalidId()
     {
         $exitCode = Artisan::call('netblock:edit', [
             "--id" => "10000"
@@ -101,7 +113,7 @@ class NetblockCommandTest extends TestCase{
         $this->assertContains("Unable to find netblock with this criteria", Artisan::output());
     }
 
-    public function testNetBlockUpdateWithInvalidContact()
+    public function testNetBlockEditWithInvalidContact()
     {
         $exitCode = Artisan::call('netblock:edit', [
             "--id" => "1",
@@ -111,7 +123,7 @@ class NetblockCommandTest extends TestCase{
         $this->assertContains("Unable to find contact with this criteria", Artisan::output());
     }
 
-    public function testNetBlockUpdateEnabled()
+    public function testNetBlockEditEnabled()
     {
         $exitCode = Artisan::call('netblock:edit', [
             "--id" => "1",

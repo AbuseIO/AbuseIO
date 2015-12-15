@@ -17,9 +17,7 @@ class CreateCommand extends Command
      */
     protected $signature = 'domain:create
                             {--contact : e-mail address or id from contact }
-                            {--first_ip : Start Ip address from netblock  }
-                            {--last_ip : End Ip addres from netblock }
-                            {--description : Description }
+                            {--name : domain name  }
                             {--enabled=false : true|false, Set the account to be enabled }
     ';
 
@@ -27,7 +25,7 @@ class CreateCommand extends Command
      * The console command description.
      * @var string
      */
-    protected $description = 'Creates a new netblock';
+    protected $description = 'Creates a new domain';
 
     /**
      * Create a new command instance.
@@ -45,37 +43,36 @@ class CreateCommand extends Command
      */
     public function handle()
     {
-        /*
-         * TODO implement handle method.
+        /**
+         * TODO HAndle function sync with create command from NetBlocks.
          */
-//        $netblock = new Netblock();
+
+//        $domain = new Domain();
 //
-//        $netblock->contact = User::find($this->option('contact'))?: User::where('email', '=', $this->option("contact"))->first();
-//        $netblock->first_ip = $this->option('first_ip');
-//        $netblock->last_ip = $this->option('last_ip');
-//        $netblock->description = $this->option('description');
-//        $netblock->enabled = $this->option('enabled') === "true" ? true : false;
+//        $domain->contact = User::find($this->option('contact'))?: User::where('email', '=', $this->option("contact"))->first();
+//        $domain->name = $this->option('name');
+//        $domain->enabled = $this->option('enabled') === "true" ? true : false;
 //
-//
-//        $validation = Validator::make($netblock->toArray(), Netblock::createRules($netblock));
-//
+//        /** @var  $validation */
+//        $validation = Validator::make($domain->toArray(), Domain::createRules($domain));
+//dd(get_class($validation));
 //        if ($validation->fails()) {
 //            foreach ($validation->messages()->all() as $message) {
 //                $this->warn($message);
 //            }
 //
-//            $this->error('Failed to create the netblock due to validation warnings');
+//            $this->error('Failed to create the domain due to validation warnings');
 //
 //            return false;
 //        }
 //
-//        if (!$netblock->save()) {
-//            $this->error('Failed to save the netblock into the database');
+//        if (!$domain->save()) {
+//            $this->error('Failed to save the domain into the database');
 //
 //            return false;
 //        }
 //
-//        $this->info("The netblock has been created");
+//        $this->info("The domain has been created");
 //
 //        return true;
     }
