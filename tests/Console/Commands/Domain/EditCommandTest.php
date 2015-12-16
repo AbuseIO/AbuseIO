@@ -1,8 +1,10 @@
 <?php
 
+namespace tests\Console\Commands\Domain;
+
 use Illuminate\Support\Facades\Artisan;
 
-class EditCommandTest extends TestCase
+class EditCommandTest extends \TestCase
 {
     public function testWithoutId()
     {

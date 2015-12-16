@@ -1,8 +1,10 @@
 <?php
 
+namespace tests\Console\Commands\Domain;
+
 use Illuminate\Support\Facades\Artisan;
 
-class ListCommandTest extends TestCase
+class ListCommandTest extends \TestCase
 {
     public function testHeaders()
     {

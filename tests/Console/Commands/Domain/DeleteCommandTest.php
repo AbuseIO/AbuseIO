@@ -1,8 +1,10 @@
 <?php
 
+namespace tests\Console\Commands\Domain;
+
 use Illuminate\Support\Facades\Artisan;
 
-class DeleteCommandTest extends TestCase{
+class DeleteCommandTest extends \TestCase{
 
     public function testValid()
     {
