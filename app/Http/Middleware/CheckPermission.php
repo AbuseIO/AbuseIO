@@ -31,12 +31,9 @@ class CheckPermission
         );
 
         // If we don't have the permission 'login_portal' and it is requested redirect to logout
-        if ($permission === 'login_portal')
-        {
-            //Auth::logout();
-            //$request->session()->flush();
+        if ($permission === 'login_portal') {
             return redirect('/auth/logout')
-                ->withErrors([$message]);  //todo: doesn't seem to propagate to the login screen
+                ->with(['message', $message]);
         }
 
         // If we are redirecting back to the current page then return a 403 error instead of looping
