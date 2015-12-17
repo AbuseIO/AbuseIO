@@ -6,6 +6,7 @@ class HelperServiceProvider extends ServiceProvider
 {
     protected $helpers = [
         'castStringToBool',
+        'castBoolToString'
     ];
 
     /**

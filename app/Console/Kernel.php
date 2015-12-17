@@ -45,6 +45,7 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Domain\CreateCommand',
         'AbuseIO\Console\Commands\Domain\EditCommand',
 
+        'AbuseIO\Console\Commands\Account\ListCommand',
     ];
 
     /**
