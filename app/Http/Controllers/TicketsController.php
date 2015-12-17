@@ -150,7 +150,7 @@ class TicketsController extends Controller
      */
     public function store(TicketsFormRequest $ticket)
     {
-        // Todo, implement new ticket
+        // TODO: #AIO-39 Interaction tickets - (bart) implement new ticket by adding events(data)?
     }
 
     /**
@@ -206,7 +206,7 @@ class TicketsController extends Controller
      */
     public function status(Ticket $ticket)
     {
-        // TODO: (mark) Maybe use existing update() for this?
+        // TODO: #AIO-39 Interaction tickets - (mark) Maybe use existing update() for this?
         return Redirect::route(
             'admin.tickets.show',
             $ticket->id
@@ -220,7 +220,7 @@ class TicketsController extends Controller
      */
     public function notify(Ticket $ticket)
     {
-        // TODO: (mark) Or are we going to call the notification functions directly?
+        // TODO: #AIO-39 Interaction tickets - (mark) Or are we going to call the notification functions directly?
         return Redirect::route(
             'admin.tickets.show',
             $ticket->id
@@ -234,7 +234,7 @@ class TicketsController extends Controller
      */
     public function updatecontact(Ticket $ticket)
     {
-        // TODO: (mark) Maybe use existing update() for this?
+        // TODO: #AIO-39 Interaction tickets - (mark) Maybe use existing update() for this?
         return Redirect::route(
             'admin.tickets.show',
             $ticket->id
