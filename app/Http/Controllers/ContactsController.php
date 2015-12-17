@@ -150,6 +150,11 @@ class ContactsController extends Controller
 
         $input['account_id'] = $account->id;
 
+        /*
+         * TODO: #AIO-53 Input forms should use passed request instead of grabbing input?
+         */
+        // $input = $contact->all();
+
         Contact::create($input);
 
         return Redirect::route('admin.contacts.index')
