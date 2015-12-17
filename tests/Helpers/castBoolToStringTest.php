@@ -1,6 +1,6 @@
 <?php
 
-class CastToBoolTest extends TestCase{
+class CastBoolToStringTest extends TestCase{
 
     public function testTrueIsStringTrue()
     {
