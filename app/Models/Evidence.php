@@ -35,7 +35,9 @@ class Evidence extends Model
     public static function createRules($evidence)
     {
         $rules = [
-            // TODO: Create validation rules instead of EventValidator
+            'filename'          => 'required|file',
+            'sender'            => 'required|string',
+            'subject'           => 'required|string',
         ];
 
         return $rules;
@@ -50,7 +52,9 @@ class Evidence extends Model
     public static function updateRules($evidence)
     {
         $rules = [
-            // TODO: Create validation rules instead of EventValidator
+            'filename'          => 'required|file',
+            'sender'            => 'required|string',
+            'subject'           => 'required|string',
         ];
 
         return $rules;

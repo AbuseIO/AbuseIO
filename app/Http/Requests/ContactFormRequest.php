@@ -4,7 +4,7 @@ namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Http\Requests\Request;
 use AbuseIO\Models\Contact;
-use Validator;
+use Auth;
 
 class ContactFormRequest extends Request
 {
@@ -12,28 +12,6 @@ class ContactFormRequest extends Request
     {
         parent::__construct();
 
-        Validator::extend(
-            'emails',
-            function ($attribute, $value, $parameters) {
-                $rules = [
-                    'email' => 'required|email',
-                ];
-
-                $value = explode(',', $value);
-
-                foreach ($value as $email) {
-                    $data = [
-                        'email' => $email
-                    ];
-                    $validator = Validator::make($data, $rules);
-                    if ($validator->fails()) {
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-        );
     }
 
     /**

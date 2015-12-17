@@ -18,18 +18,7 @@ class Notification extends Job implements SelfHandling
      */
     public function __construct()
     {
-        Validator::extend(
-            'timestamp',
-            function ($attribute, $value, $parameters) {
-                $check = (is_int($value) or is_float($value))
-                    ? $value
-                    : (string) (int) $value;
-
-                return ($check === $value)
-                        && ($value <= PHP_INT_MAX)
-                        && ($value >= ~PHP_INT_MAX);
-            }
-        );
+        //
     }
 
     /**

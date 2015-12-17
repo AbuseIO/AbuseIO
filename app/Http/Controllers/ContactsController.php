@@ -149,6 +149,7 @@ class ContactsController extends Controller
         $input = Input::all();
 
         $input['account_id'] = $account->id;
+
         Contact::create($input);
 
         return Redirect::route('admin.contacts.index')
