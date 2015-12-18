@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Console;
 
-use AbuseIO\Models\Netblock;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -46,6 +45,7 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Domain\EditCommand',
 
         'AbuseIO\Console\Commands\Account\ListCommand',
+        'AbuseIO\Console\Commands\Account\ShowCommand',
     ];
 
     /**
