@@ -10,7 +10,7 @@ class EditCommandTest extends \TestCase
     {
         $exitCode = Artisan::call('domain:edit');
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("The required id argument was not passed, try help", Artisan::output());
+        $this->assertContains("The required id argument was not passed, try --help", Artisan::output());
     }
 
     public function testWithInvalidId()
