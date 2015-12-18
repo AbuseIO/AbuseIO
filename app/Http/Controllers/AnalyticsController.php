@@ -17,6 +17,7 @@ class AnalyticsController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
      * @param Request $request
      * @return Response
      */

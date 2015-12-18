@@ -2,8 +2,8 @@
 
 namespace AbuseIO\Http\Requests;
 
-use AbuseIO\Http\Requests\Request;
 use AbuseIO\Models\Note;
+use Auth;
 
 class NoteFormRequest extends Request
 {
@@ -31,5 +31,36 @@ class NoteFormRequest extends Request
             default:
                 break;
         }
+    }
+
+    public function initialize(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
+    {
+        parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
+
+        if (config('main.notes.show_abusedesk_names') === true) {
+            $postingUser = ' (' . Auth::user()->fullName() . ')';
+        } else {
+            $postingUser = '';
+        }
+
+        switch ($this->method()) {
+            case 'POST':
+                $this->getInputSource()->add(
+                    [
+                        'submitter'     => trans('ash.communication.abusedesk'). $postingUser,
+                        'viewed'        => true,
+                    ]
+                );
+            case 'PUT':
+            case 'PATCH':
+                $this->getInputSource()->add(
+                    [
+                        'submitter'     => trans('ash.communication.abusedesk'). $postingUser,
+                    ]
+                );
+            default:
+                break;
+        }
+
     }
 }

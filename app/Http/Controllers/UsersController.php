@@ -2,11 +2,8 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\UserFormRequest;
-use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\User;
 use yajra\Datatables\Datatables;
@@ -103,13 +100,13 @@ class UsersController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @param  UserFormRequest $user
      * @return \Illuminate\Http\Response
      */
-    public function store(UserFormRequest $user)
+    public function store(UserFormRequest $userForm)
     {
-        $input = Input::all();
-        User::create($input);
+        User::create($userForm->all());
 
         return Redirect::route('admin.users.index')
             ->with('message', 'User has been created');
@@ -117,6 +114,7 @@ class UsersController extends Controller
 
     /**
      * Display the specified resource.
+     *
      * @param  User   $user
      * @return \Illuminate\Http\Response
      */
@@ -132,6 +130,7 @@ class UsersController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
      * @param  User   $user
      * @return \Illuminate\Http\Response
      */
@@ -148,14 +147,14 @@ class UsersController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
      * @param  UserFormRequest $request
      * @param  User            $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UserFormRequest $request, User $user)
+    public function update(UserFormRequest $userForm, User $user)
     {
-        $input = array_except(Input::all(), '_method');
-        $user->update($input);
+        $user->update($userForm->all());
 
         return Redirect::route('admin.users.show', $user->id)
             ->with('message', 'User has been updated.');
@@ -203,6 +202,7 @@ class UsersController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
      * @param  User   $user
      * @return \Illuminate\Http\Response
      */

@@ -24,15 +24,23 @@ class ProfileFormRequest extends Request
     public function rules()
     {
         switch ($this->method) {
-            case 'POST':
-                return User::createRules($this);
             case 'PUT':
             case 'PATCH':
-                // Force Authenticated user_id
-                $this->id = Auth::id();
                 return User::updateRules($this);
             default:
                 break;
         }
+    }
+
+    public function initialize(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
+    {
+        parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
+
+        $this->getInputSource()->add(
+            [
+                'id' => (int)Auth::id(),
+                'account_id' => (int)Auth::user()->account->id,
+            ]
+        );
     }
 }

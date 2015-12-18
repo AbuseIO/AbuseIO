@@ -6,12 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\DomainFormRequest;
-use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\Contact;
 use yajra\Datatables\Datatables;
 use Redirect;
-use Input;
 use Form;
 
 class DomainsController extends Controller
@@ -65,6 +63,7 @@ class DomainsController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      */
     public function index()
@@ -75,6 +74,7 @@ class DomainsController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Response
      */
     public function create()
@@ -89,6 +89,7 @@ class DomainsController extends Controller
 
     /**
      * Export listing to CSV format.
+     *
      * @return Response
      */
     public function export($format)
@@ -125,12 +126,12 @@ class DomainsController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Response
      */
-    public function store(DomainFormRequest $domain)
+    public function store(DomainFormRequest $domainForm)
     {
-        $input = Input::all();
-        Domain::create($input);
+        Domain::create($domainForm->all());
 
         return Redirect::route('admin.domains.index')
             ->with('message', 'Domain has been created');
@@ -138,6 +139,7 @@ class DomainsController extends Controller
 
     /**
      * Display the specified resource.
+     *
      * @param Request $request
      * @param Domain $domain
      * @return Response
@@ -152,6 +154,7 @@ class DomainsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
      * @param Domain $domain
      * @return Response
      * @internal param int $id
@@ -169,14 +172,14 @@ class DomainsController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
      * @param Domain $domain
      * @return Response
      * @internal param int $id
      */
-    public function update(DomainFormRequest $request, Domain $domain)
+    public function update(DomainFormRequest $domainForm, Domain $domain)
     {
-        $input = array_except(Input::all(), '_method');
-        $domain->update($input);
+        $domain->update($domainForm->all());
 
         return Redirect::route('admin.domains.show', $domain->id)
             ->with('message', 'Domain has been updated.');
@@ -184,6 +187,7 @@ class DomainsController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
      * @param  int $id
      * @return Response
      */

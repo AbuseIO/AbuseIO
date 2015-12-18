@@ -3,22 +3,40 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\BrandFormRequest;
+use Illuminate\Filesystem\Filesystem;
 use DB;
 use Exception;
-use File;
-use Illuminate\Database\Connection;
-use Illuminate\Http\Request;
 use AbuseIO\Http\Requests;
-use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Brand;
-use AbuseIO\Models\Account;
 use Illuminate\Http\Response;
 use yajra\Datatables\Datatables;
 use Redirect;
-use Input;
 
 class BrandsController extends Controller
 {
+    /*
+     * Call the parent constructor to generate a base ACL
+     *
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $brands = Brand::paginate(10);
+
+        return view('brands.index')
+            ->with('brands', $brands)
+            ->with('auth_user', $this->auth_user);
+    }
+
     /**
      * Process datatables ajax request.
      *
@@ -80,28 +98,6 @@ class BrandsController extends Controller
             ->make(true);
     }
 
-    /*
-      * Call the parent constructor to generate a base ACL
-      */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $brands = Brand::paginate(10);
-
-        return view('brands.index')
-            ->with('brands', $brands)
-            ->with('auth_user', $this->auth_user);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -112,7 +108,6 @@ class BrandsController extends Controller
         return view('brands.create')
             ->with('brand', null)
             ->with('auth_user', $this->auth_user);
-
     }
 
     /**
@@ -121,23 +116,22 @@ class BrandsController extends Controller
      * @param BrandFormRequest $request
      * @return mixed
      */
-    public function store(BrandFormRequest $request)
+    public function store(BrandFormRequest $brandForm)
     {
-        $input = Input::all();
+        $input = $brandForm->all();
         $account = $this->auth_user->account;
 
-
-        if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+        if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $errors = [];
 
-            if (!Brand::checkUploadedLogo($request->file('logo'), $errors)) {
+            if (!Brand::checkUploadedLogo($brandForm->file('logo'), $errors)) {
                 return Redirect::route('admin.brands.create')
                     ->withInput($input)
                     ->withErrors(['logo' => $errors]);
             }
 
             // all ok
-            $input['logo'] = file_get_contents($request->file('logo')->getRealPath());
+            $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
 
         } else {
             return Redirect::route('admin.brands.create')
@@ -188,7 +182,6 @@ class BrandsController extends Controller
      */
     public function show(Brand $brand)
     {
-
         return view('brands.show')
             ->with('brand', $brand)
             ->with('auth_user', $this->auth_user);
@@ -215,7 +208,6 @@ class BrandsController extends Controller
 
         return response($brand->logo)
             ->header('Content-Type', $mimetype);
-
     }
 
     /**
@@ -226,7 +218,6 @@ class BrandsController extends Controller
      */
     public function edit(Brand $brand)
     {
-
         // may we edit this brand (is the brand connected to our account)
         if (!$brand->mayEdit($this->auth_user)) {
             return Redirect::route('admin.brands.show', $brand->id)
@@ -252,27 +243,27 @@ class BrandsController extends Controller
      * @param Brand $brand
      * @return mixed
      */
-    public function update(BrandFormRequest $request, Brand $brand)
+    public function update(BrandFormRequest $brandForm, Brand $brand)
     {
-
         // may we edit this brand
         if (!$brand->mayEdit($this->auth_user)) {
             return Redirect::route('admin.brands.show', $brand->id)
                 ->with('message', 'User is not authorized to edit this brand.');
         }
 
-        $input = array_except(Input::all(), '_method');
+        $input = $brandForm->all();
 
-        if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+        if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $errors = [];
 
-            if (!Brand::checkUploadedLogo($request->file('logo'), $errors)) {
+            if (!Brand::checkUploadedLogo($brandForm->file('logo'), $errors)) {
                 return Redirect::route('admin.brands.edit', $brand->id)
                     ->withErrors(['logo' => $errors]);
             }
 
             // all ok
-            $input['logo'] = file_get_contents($request->file('logo')->getRealPath());
+            $filesystem = new Filesystem;
+            $input['logo'] = $filesystem->get($brandForm->file('logo')->getRealPath());
 
         }
 

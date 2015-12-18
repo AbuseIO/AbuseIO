@@ -40,8 +40,8 @@ class Note extends Model
     public static function createRules($note)
     {
         $rules = [
-            'ticket_id' => 'sometimes|integer',
-            'submitter' => 'sometimes|string',
+            'ticket_id' => 'required|integer',
+            'submitter' => 'required|string',
             'text'      => 'required|string',
             'hidden'    => 'sometimes|boolean',
             'viewed'    => 'sometimes|boolean',
@@ -59,6 +59,8 @@ class Note extends Model
     public static function updateRules($note)
     {
         $rules = [
+            'ticket_id' => 'sometimes|integer',
+            'submitter' => 'required|string',
             'hidden' => 'sometimes|boolean',
             'viewed' => 'sometimes|boolean',
         ];

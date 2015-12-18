@@ -2,17 +2,12 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\AccountFormRequest;
-use AbuseIO\Http\Controllers\Controller;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
-use AbuseIO\Models\User;
 use yajra\Datatables\Datatables;
 use Redirect;
-use Input;
 
 class AccountsController extends Controller
 {
@@ -124,10 +119,9 @@ class AccountsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AccountFormRequest $account)
+    public function store(AccountFormRequest $accountForm)
     {
-        $input = Input::all();
-        Account::create($input);
+        Account::create($accountForm->all());
 
         return Redirect::route('admin.accounts.index')
             ->with('message', 'Account has been created');
@@ -174,11 +168,12 @@ class AccountsController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
      * @param  AccountFormRequest $request FormRequest
      * @param  Account            $account Account
      * @return \Illuminate\Http\Response
      */
-    public function update(AccountFormRequest $request, Account $account)
+    public function update(AccountFormRequest $accountForm, Account $account)
     {
         // may we edit this brand (is the brand connected to our account)
         if (!$account->mayEdit($this->auth_user)) {
@@ -186,8 +181,7 @@ class AccountsController extends Controller
                 ->with('message', 'User is not authorized to edit this account.');
         }
 
-        $input = array_except(Input::all(), '_method');
-        $account->update($input);
+        $account->update($accountForm->all());
 
         return Redirect::route('admin.accounts.show', $account->id)
             ->with('message', 'Account has been updated.');

@@ -40,9 +40,6 @@ class ContactFormRequest extends Request
         }
     }
 
-    /*
-     * TODO: #AIO-53 Input forms should use passed request instead of grabbing input?
-     * To discuss, better way to add input values manually? This way we can validate them too!
     public function initialize(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
     {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
@@ -53,6 +50,4 @@ class ContactFormRequest extends Request
             ]
         );
     }
-    */
-
 }

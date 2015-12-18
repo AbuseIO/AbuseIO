@@ -6,10 +6,8 @@ use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ContactFormRequest;
 use AbuseIO\Models\Contact;
-use AbuseIO\Models\Account;
 use yajra\Datatables\Datatables;
 use Redirect;
-use Input;
 use Form;
 
 class ContactsController extends Controller
@@ -77,6 +75,7 @@ class ContactsController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      */
     public function index()
@@ -87,6 +86,7 @@ class ContactsController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Response
      */
     public function create()
@@ -97,6 +97,7 @@ class ContactsController extends Controller
 
     /**
      * Export listing to CSV format.
+     *
      * @return Response
      */
     public function export($format)
@@ -141,21 +142,14 @@ class ContactsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @return Response
+     *
+     * @param  ContactFormRequest $contactForm FormRequest
+     * @param  Contact            $contact Contact
+     * @return \Illuminate\Http\Response
      */
-    public function store(ContactFormRequest $contact)
+    public function store(ContactFormRequest $contactForm, Contact $contact)
     {
-        $account = $this->auth_user->account;
-        $input = Input::all();
-
-        $input['account_id'] = $account->id;
-
-        /*
-         * TODO: #AIO-53 Input forms should use passed request instead of grabbing input?
-         */
-        // $input = $contact->all();
-
-        Contact::create($input);
+        $contact->create($contactForm->all());
 
         return Redirect::route('admin.contacts.index')
             ->with('message', 'Contact has been created');
@@ -163,12 +157,14 @@ class ContactsController extends Controller
 
     /**
      * Display the specified resource.
+     *
      * @param Contact $contact
-     * @return Response
      * @internal param int $id
+     * @return Response
      */
     public function show(Contact $contact)
     {
+
         return view('contacts.show')
             ->with('contact', $contact)
             ->with('auth_user', $this->auth_user);
@@ -176,9 +172,10 @@ class ContactsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
      * @param Contact $contact
-     * @return Response
      * @internal param int $id
+     * @return \Illuminate\Http\Response
      */
     public function edit(Contact $contact)
     {
@@ -189,17 +186,15 @@ class ContactsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param  ContactFormRequest $request FormRequest
-     * @param  Contact            $contact Contact
+     *
+     * @param ContactFormRequest $contactForm FormRequest
+     * @param Contact $contact Contact
+     * @internal param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ContactFormRequest $request, Contact $contact)
+    public function update(ContactFormRequest $contactForm, Contact $contact)
     {
-        $account = $this->auth_user->account;
-        $input = array_except(Input::all(), '_method');
-
-        $input['account_id'] = $account->id;
-        $contact->update($input);
+        $contact->update($contactForm->all());
 
         return Redirect::route('admin.contacts.show', $contact->id)
             ->with('message', 'Contact has been updated.');
@@ -207,8 +202,10 @@ class ContactsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param  int  $id
-     * @return Response
+     *
+     * @param Contact $contact Contact
+     * @internal param int $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Contact $contact)
     {

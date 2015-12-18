@@ -8,9 +8,7 @@ use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\TicketsFormRequest;
 use yajra\Datatables\Datatables;
 use AbuseIO\Models\Ticket;
-use AbuseIO\Models\Note;
 use Redirect;
-use Input;
 
 class TicketsController extends Controller
 {
@@ -76,6 +74,7 @@ class TicketsController extends Controller
 
     /**
      * Display all tickets
+     *
      * @return Response
      */
     public function index()
@@ -86,24 +85,25 @@ class TicketsController extends Controller
 
     /**
      * Show the form for creating a ticket
+     *
      * @param Request $request
      * @return Response
      */
     public function create()
     {
+        // TODO: #AIO-39 Interaction tickets - (bart) implement new ticket by adding events(data)?
 
         return view('tickets.create')
             ->with('auth_user', $this->auth_user);
-
     }
 
     /**
      * Export tickets to CSV format.
+     *
      * @return Response
      */
     public function export($format)
     {
-
         $tickets = Ticket::all();
 
         if ($format === 'csv') {
@@ -146,6 +146,7 @@ class TicketsController extends Controller
 
     /**
      * Store a newly created ticket in storage.
+     *
      * @return Response
      */
     public function store(TicketsFormRequest $ticket)
@@ -155,6 +156,7 @@ class TicketsController extends Controller
 
     /**
      * Display the specified ticket.
+     *
      * @param Request $request
      * @param Ticket $ticket
      * @return Response
@@ -162,15 +164,14 @@ class TicketsController extends Controller
      */
     public function show(Ticket $ticket)
     {
-
         return view('tickets.show')
             ->with('ticket', $ticket)
             ->with('auth_user', $this->auth_user);
-
     }
 
     /**
      * Show the form for editing the specified ticket.
+     *
      * @param  int  $id
      * @return Response
      */
@@ -181,6 +182,7 @@ class TicketsController extends Controller
 
     /**
      * Update the specified ticket in storage.
+     *
      * @param  int  $id
      * @return Response
      */
@@ -191,6 +193,7 @@ class TicketsController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
      * @param  int  $id
      * @return Response
      */
@@ -201,6 +204,7 @@ class TicketsController extends Controller
 
     /**
      * Updates the ticket to the given status.
+     *
      * @param Ticket $ticket
      * @return Response
      */
@@ -215,6 +219,7 @@ class TicketsController extends Controller
 
     /**
      * Send a notification for this ticket.
+     *
      * @param Ticket $ticket
      * @return Response
      */
@@ -229,6 +234,7 @@ class TicketsController extends Controller
 
     /**
      * Updates the requested contact information.
+     *
      * @param Ticket $ticket
      * @return Response
      */

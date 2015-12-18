@@ -3,14 +3,12 @@
 namespace AbuseIO\Http\Controllers;
 
 use Illuminate\Http\Response;
-use Illuminate\Http\Request;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\NetblockFormRequest;
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Contact;
 use yajra\Datatables\Datatables;
 use Redirect;
-use Input;
 use Form;
 
 class NetblocksController extends Controller
@@ -26,7 +24,7 @@ class NetblocksController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function search(Request $request)
+    public function search()
     {
         $netblocks = Netblock::select('netblocks.*', 'contacts.name as contacts_name')
             ->leftJoin('contacts', 'contacts.id', '=', 'netblocks.contact_id');
@@ -64,6 +62,7 @@ class NetblocksController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      */
     public function index()
@@ -74,6 +73,7 @@ class NetblocksController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Response
      */
     public function create()
@@ -88,6 +88,7 @@ class NetblocksController extends Controller
 
     /**
      * Export listing to CSV format.
+     *
      * @return Response
      */
     public function export($format)
@@ -126,12 +127,12 @@ class NetblocksController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @return Response
      */
-    public function store(NetblockFormRequest $netblock)
+    public function store(NetblockFormRequest $netblockForm)
     {
-        $input = Input::all();
-        Netblock::create($input);
+        Netblock::create($netblockForm->all());
 
         return Redirect::route('admin.netblocks.index')
             ->with('message', trans('netblocks.msg.created'));
@@ -139,6 +140,7 @@ class NetblocksController extends Controller
 
     /**
      * Display the specified resource.
+     *
      * @param Netblock $netblock
      * @return Response
      * @internal param int $id
@@ -152,6 +154,7 @@ class NetblocksController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
      * @param Netblock $netblock
      * @return Response
      * @internal param int $id
@@ -169,13 +172,13 @@ class NetblocksController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
      * @param  int  $id
      * @return Response
      */
-    public function update(NetblockFormRequest $request, Netblock $netblock)
+    public function update(NetblockFormRequest $netblockForm, Netblock $netblock)
     {
-        $input = array_except(Input::all(), '_method');
-        $netblock->update($input);
+        $netblock->update($netblockForm->all());
 
         return Redirect::route('admin.netblocks.show', $netblock->id)
             ->with('message', trans('netblocks.msg.updated'));
@@ -183,6 +186,7 @@ class NetblocksController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
      * @param  int  $id
      * @return Response
      */

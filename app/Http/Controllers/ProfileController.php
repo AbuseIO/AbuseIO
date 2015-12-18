@@ -2,12 +2,8 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Request;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ProfileFormRequest;
-use AbuseIO\Http\Controllers\Controller;
-use AbuseIO\Models\User;
-use Input;
 use Redirect;
 use Hash;
 
@@ -36,9 +32,9 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileFormRequest $request)
+    public function update(ProfileFormRequest $profileForm)
     {
-        $input = array_except(Input::all(), '_method');
+        $input = $profileForm->all();
 
         $data = [
             "first_name" => $input['first_name'],
