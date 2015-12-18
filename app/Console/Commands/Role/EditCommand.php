@@ -43,7 +43,7 @@ class EditCommand extends Command
     public function handle()
     {
         if (empty($this->option('role'))) {
-            $this->warn('the required role argument was not passed, try help');
+            $this->warn('the required role argument was not passed, try --help');
             return false;
         }
 

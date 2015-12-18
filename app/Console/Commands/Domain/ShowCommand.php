@@ -52,7 +52,7 @@ class ShowCommand extends Command
     public function handle()
     {
         if (empty($this->option('filter'))) {
-            $this->warn('no email or ip argument was passed, try help');
+            $this->warn('no email or ip argument was passed, try --help');
             return false;
         }
         /* @var $netblock  \AbuseIO\Models\Netblock|null */

@@ -52,7 +52,7 @@ class ShowCommand extends Command
     public function handle()
     {
         if (empty($this->option('permission'))) {
-            $this->warn('no email or id argument was passed, try help');
+            $this->warn('no email or id argument was passed, try --help');
             return false;
         }
 

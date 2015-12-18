@@ -46,7 +46,7 @@ class AssignCommand extends Command
         if (empty($this->option('role')) ||
             empty($this->option('permission'))
         ) {
-            $this->error('Missing options for role and/or permission to select');
+            $this->error('Missing options for role and/or permission to select, try --help');
             return false;
         }
 

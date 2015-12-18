@@ -51,7 +51,7 @@ class EditCommand extends Command
     public function handle()
     {
         if (empty($this->option('user'))) {
-            $this->warn('the required user argument was not passed, try help');
+            $this->warn('the required user argument was not passed, try --help');
             return false;
         }
 

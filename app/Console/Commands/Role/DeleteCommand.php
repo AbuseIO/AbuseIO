@@ -40,7 +40,7 @@ class DeleteCommand extends Command
     public function handle()
     {
         if (empty($this->option('role'))) {
-            $this->warn('no name or id argument was passed, try help');
+            $this->warn('no name or id argument was passed, try --help');
             return false;
         }
 
