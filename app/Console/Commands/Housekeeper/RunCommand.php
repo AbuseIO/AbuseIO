@@ -44,7 +44,7 @@ class RunCommand extends Command
      */
     public function handle()
     {
-        // TODO - Walk thru all collectors to gather information.
+        // TODO: #AIO-22 Create housekeeping - Walk thru all collectors to gather information.
 
         /*
          * Walk thru all tickets to see which need closing
