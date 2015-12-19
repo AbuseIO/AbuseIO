@@ -14,15 +14,11 @@ return [
 
     'emailparser' => [
         'fallback_mail'                     => 'admin@isp.local',
-        'store_mail'                        => true,
-        'store_evidence'                    => true,
-        'remove_evidence'                   => '500 days',
         'notify_on_warnings'                => true,
     ],
 
     'reports' => [
         'min_lastseen'                      => '30 days',
-        'close_after'                       => '14 days',
         'resolvable_only'                   => false, // This drops anything if a domain or netblock cannot be found
     ],
 
@@ -41,6 +37,11 @@ return [
         'from_name'                         => 'ISP Abusedesk',
         'bcc_enabled'                       => false,
         'bcc_address'                       => 'management@isp.local',
+    ],
+
+    'housekeeping' => [
+        'mailarchive_remove_after'          => '500 days',
+        'tickets_close_after'               => '14 days',
     ],
 
     'ash' => [
