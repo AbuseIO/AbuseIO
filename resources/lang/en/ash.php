@@ -18,7 +18,6 @@ return [
                                        ' problem.',
     'ticket'                        => ' Ticket',
 
-
     'menu' => [
         'basic'                     => 'Basic Information',
         'technical'                 => 'Technical Details',
@@ -27,9 +26,11 @@ return [
     ],
 
     'basic' => [
-        'ip'                        => 'IP address',
+        'ip'                        => 'IP',
+        'ipAddress'                 => 'IP address',
         'ptr'                       => 'Reverse DNS',
-        'domain'                    => 'Domain name',
+        'domain'                    => 'Domain',
+        'domainName'                => 'Domain name',
         'class'                     => 'Classification',
         'type'                      => 'Type',
         'firstSeen'                 => 'First seen',
@@ -56,7 +57,7 @@ return [
         'placeholder_admin'         => 'Enter a reply to the customer',
         'previousCommunication'     => 'Previous communication',
         'responseFrom'              => 'Response from',
-        'contact'                   => 'Customer',
+        'contact'                   => 'Contact',
         'abusedesk'                 => 'Abusedesk',
         'submit'                    => 'Submit',
         'reply'                     => 'Reply',

@@ -17,7 +17,7 @@ class AshController extends Controller
     {
         $brand = false;
         $ticket = Ticket::find($ticketID);
-        $AshAuthorisedBy = Request::instance()->query('AshAuthorisedBy');
+        $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
         if ($AshAuthorisedBy == 'TokenIP') {
             $brand = $ticket->accountIp->brand;
@@ -39,30 +39,42 @@ class AshController extends Controller
 
     public function addNote($ticketID, $token)
     {
+        $brand = false;
+        $submittor = false;
+
         $ticket = Ticket::find($ticketID);
-        $brand = $ticket->account->brand;
+        $AshAuthorisedBy = Request::get('AshAuthorisedBy');
+
+        if ($AshAuthorisedBy == 'TokenIP') {
+            $brand = $ticket->accountIp->brand;
+            $submittor = trans('ash.basic.ip') . ' ' . trans('ash.communication.contact');
+        }
+        if ($AshAuthorisedBy == 'TokenDomain') {
+            $brand = $ticket->accountDomain->brand;
+            $submittor = trans('ash.basic.domain') . ' ' . trans('ash.communication.contact');
+        }
+
+        if (empty($brand) || empty($submittor)) {
+            //abort(500);
+        }
 
         $text = Input::get('text');
         if (empty($text)) {
+            $message = 'You cannot add an empty message!';
+        } else {
+            $message = 'Note has been added.';
 
-            return view('ash')
-                ->with('brand', $brand)
-                ->with('ticket', $ticket)
-                ->with('token', $token)
-                ->with('message', 'You cannot add an empty message!');
+            $note = new Note();
+            $note->ticket_id = $ticket->id;
+            $note->submitter = $submittor;
+            $note->text = $text;
+            $note->save();
         }
-
-        $note = new Note();
-        $note->ticket_id = $ticket->id;
-        $note->submitter = trans('ash.communication.contact');
-        $note->text = $text;
-        $note->save();
 
         return view('ash')
             ->with('brand', $brand)
             ->with('ticket', $ticket)
             ->with('token', $token)
-            ->with('message', 'Ticket has been updated.');
-
+            ->with('message', $message);
     }
 }

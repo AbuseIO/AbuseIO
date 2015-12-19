@@ -66,7 +66,7 @@
             <div id="basicinfo" class="tab-pane fade in active">
                 <dl class="dl-horizontal">
 
-                    <dt>{{ trans('ash.basic.ip') }}</dt>
+                    <dt>{{ trans('ash.basic.ipAddress') }}</dt>
                     <dd>{{ $ticket->ip }}</dd>
 
                     @if (gethostbyaddr($ticket->ip) !== false)
@@ -75,7 +75,7 @@
                     @endif
 
                     @if (!empty($ticket->domain))
-                        <dt>{{ trans('ash.basic.domain') }}</dt>
+                        <dt>{{ trans('ash.basic.domainName') }}</dt>
                         <dd>{{ $ticket->domain }}</dd>
                     @endif
 

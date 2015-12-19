@@ -26,9 +26,11 @@ return [
     ],
 
     'basic' => [
-        'ip'                        => 'IP adres',
+        'ip'                        => 'IP',
+        'ipAddress'                 => 'IP adres',
         'ptr'                       => 'Reverse DNS',
-        'domain'                    => 'Domein naam',
+        'domain'                    => 'Domein',
+        'domainName'                => 'Domein naam',
         'class'                     => 'Klassificatie',
         'type'                      => 'Type',
         'firstSeen'                 => 'Eerst gezien',
@@ -55,7 +57,7 @@ return [
         'placeholder_admin'         => 'Reactie richting klant',
         'previousCommunication'     => 'Voorgaande communicatie',
         'responseFrom'              => 'Reactie van',
-        'contact'                   => 'Klant',
+        'contact'                   => 'Contact',
         'abusedesk'                 => 'Abusedesk',
         'submit'                    => 'Opslaan',
         'reply'                     => 'Reactie',
