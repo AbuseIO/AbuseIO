@@ -23,6 +23,9 @@ class NetblockFormRequest extends Request
     public function rules()
     {
         switch ($this->method) {
+            case 'GET':
+            case 'DELETE':
+                return [ ];
             case 'POST':
                 return Netblock::createRules($this);
             case 'PUT':

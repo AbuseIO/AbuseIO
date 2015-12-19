@@ -23,6 +23,9 @@ class NoteFormRequest extends Request
     public function rules()
     {
         switch ($this->method) {
+            case 'GET':
+            case 'DELETE':
+                return [ ];
             case 'POST':
                 return Note::createRules($this);
             case 'PUT':
@@ -51,7 +54,6 @@ class NoteFormRequest extends Request
                         'viewed'        => true,
                     ]
                 );
-            case 'PUT':
             case 'PATCH':
                 $this->getInputSource()->add(
                     [

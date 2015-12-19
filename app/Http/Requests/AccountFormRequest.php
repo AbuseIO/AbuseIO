@@ -23,6 +23,9 @@ class AccountFormRequest extends Request
     public function rules()
     {
         switch ($this->method) {
+            case 'GET':
+            case 'DELETE':
+                return [ ];
             case 'POST':
                 return Account::createRules($this);
             case 'PUT':

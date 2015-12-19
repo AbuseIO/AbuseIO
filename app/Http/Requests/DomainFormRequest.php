@@ -23,6 +23,9 @@ class DomainFormRequest extends Request
     public function rules()
     {
         switch ($this->method) {
+            case 'GET':
+            case 'DELETE':
+                return [ ];
             case 'POST':
                 return Domain::createRules($this);
             case 'PUT':

@@ -24,6 +24,14 @@ class ProfileFormRequest extends Request
     public function rules()
     {
         switch ($this->method) {
+            case 'GET':
+            case 'DELETE':
+                return [ ];
+            /*
+             * POST (create) is not allowed selfEdit.
+             */
+            case 'POST':
+                return response('Unauthorized.', 401);
             case 'PUT':
             case 'PATCH':
                 return User::updateRules($this);

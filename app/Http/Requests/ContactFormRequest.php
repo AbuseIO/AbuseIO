@@ -30,6 +30,9 @@ class ContactFormRequest extends Request
     public function rules()
     {
         switch ($this->method) {
+            case 'GET':
+            case 'DELETE':
+                return [ ];
             case 'POST':
                 return Contact::createRules($this);
             case 'PUT':

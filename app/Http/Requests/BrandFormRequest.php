@@ -23,6 +23,9 @@ class BrandFormRequest extends Request
     public function rules()
     {
         switch ($this->method) {
+            case 'GET':
+            case 'DELETE':
+                return [ ];
             case 'POST':
                 return Brand::createRules($this);
             case 'PUT':
