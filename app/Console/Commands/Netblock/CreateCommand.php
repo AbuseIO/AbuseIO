@@ -84,7 +84,7 @@ class CreateCommand extends Command
     }
 
     /**
-     * @return mixed
+     * @return User|null
      */
     private function findUserByIdOrEmail($param)
     {
