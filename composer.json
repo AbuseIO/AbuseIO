@@ -57,6 +57,8 @@
 		"abuseio/parser-usgo": "dev-master",
 		"abuseio/parser-webiron": "dev-master",
         "abuseio/parser-woody": "dev-master",
+        "abuseio/collector-rbl": "dev-master",
+        "abuseio/collector-snds": "dev-master",
         "abuseio/findcontact-custom": "dev-master",
         "abuseio/findcontact-nipap": "dev-master",
         "abuseio/findcontact-phpipam": "dev-master",
