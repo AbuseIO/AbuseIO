@@ -2,11 +2,10 @@
 
 namespace AbuseIO\Console\Commands\User;
 
-use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\User;
-use Carbon;
 
-class ListCommand extends Command
+class ListCommand extends AbstractListCommand
 {
 
     /**
@@ -35,29 +34,46 @@ class ListCommand extends Command
      */
     protected $fields = ['id', 'account_id', 'email', 'first_name', 'last_name'];
 
+
     /**
-     * Create a new command instance.
-     * @return void
+     * {@inheritdoc }
      */
-    public function __construct()
+    protected function transformListToTableBody($list)
     {
-        parent::__construct();
+        return $list;
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return boolean
+     * {@inheritdoc }
      */
-    public function handle()
+    protected function findWithCondition($filter)
     {
+        $users = User::where('email', 'like', "%{$filter}%")->get($this->fields);
+        return $this->hydrateWithRoles($users);
+    }
 
-        if (!empty($this->option('filter'))) {
-            $users = User::where('email', 'like', "%{$this->option('filter')}%")->get($this->fields);
-        } else {
-            $users = User::all($this->fields);
-        }
+    /**
+     * {@inheritdoc }
+     */
+    protected function findAll()
+    {
+        $users = User::all($this->fields);
+        return $this->hydrateWithRoles($users);
+    }
 
+    /**
+     * {@inheritdoc }
+     */
+    protected function getAsNoun()
+    {
+        return "user";
+    }
+
+    /**
+     * @param $users
+     */
+    private function hydrateWithRoles($users)
+    {
         $userlist = [];
         foreach ($users as $user) {
 
@@ -82,9 +98,6 @@ class ListCommand extends Command
 
             $userlist[] = $user;
         }
-
-        $this->table($this->headers, $userlist);
-
-        return true;
+        return $userlist;
     }
 }
