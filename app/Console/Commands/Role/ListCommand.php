@@ -2,11 +2,10 @@
 
 namespace AbuseIO\Console\Commands\Role;
 
-use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Role;
-use Carbon;
 
-class ListCommand extends Command
+class ListCommand extends AbstractListCommand
 {
 
     /**
@@ -35,28 +34,13 @@ class ListCommand extends Command
      */
     protected $fields = ['id', 'name', 'description'];
 
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
-     * Execute the console command.
-     *
-     * @return boolean
+     * @param $roles
+     * @return array
      */
-    public function handle()
+    private function hydrateRolesWithPermissionCount($roles)
     {
-        if (!empty($this->option('filter'))) {
-            $roles = Role::where('name', 'like', "%{$this->option('filter')}%")->get($this->fields);
-        } else {
-            $roles = Role::all($this->fields);
-        }
-
         $rolelist = [];
         foreach ($roles as $role) {
 
@@ -67,8 +51,40 @@ class ListCommand extends Command
 
             $rolelist[] = $role;
         }
+        return $rolelist;
+    }
 
+    /**
+     * {@inheritdoc }
+     */
+    protected function transformListToTableBody($list)
+    {
+        return $list;
+    }
 
-        $this->table($this->headers, $rolelist);
+    /**
+     * {@inheritdoc }
+     */
+    protected function findWithCondition($filter)
+    {
+        $roles = Role::where('name', 'like', "%{$filter}%")->get($this->fields);
+        return $this->hydrateRolesWithPermissionCount($roles);
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function findAll()
+    {
+        $roles = Role::all($this->fields);
+        return $this->hydrateRolesWithPermissionCount($roles);
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function getAsNoun()
+    {
+        return "role";
     }
 }
