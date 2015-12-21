@@ -2,11 +2,10 @@
 
 namespace AbuseIO\Console\Commands\Netblock;
 
+use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Netblock;
-use Illuminate\Console\Command;
-use Carbon;
 
-class ListCommand extends Command
+class ListCommand extends AbstractListCommand
 {
 
     /**
@@ -36,47 +35,39 @@ class ListCommand extends Command
     protected $fields = ['first_ip', 'last_ip']; // don't know how to do the field contact conform this syntax.
 
     /**
-     * Create a new command instance.
-     * @return void
+     * {@inheritdoc }
      */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return boolean
-     */
-    public function handle()
-    {
-
-        if (!empty($this->option('filter'))) {
-            $netblockList = Netblock::where('first_ip', 'like', "%{$this->option('filter')}%")->get();
-        } else {
-            $netblockList = Netblock::all();
-        }
-        $this->table(
-            $this->headers,
-            $this->transformNetblockListToTableBody($netblockList, $netblockList)
-        );
-
-        return true;
-    }
-
-    /**
-     * @param $netblockList
-     * @param $netblocks
-     * @return array
-     */
-    public function transformNetblockListToTableBody($netblockList, $netblocks)
+    protected function transformListToTableBody($list)
     {
         $netblocks = [];
         /* @var $netblock  \AbuseIO\Models\Netblock|null */
-        foreach ($netblockList as $netblock) {
+        foreach ($list as $netblock) {
             $netblocks[] = [$netblock->id, $netblock->contact->name, $netblock->first_ip, $netblock->last_ip];
         }
         return $netblocks;
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function findWithCondition($filter)
+    {
+        return Netblock::where('first_ip', 'like', "%{$filter}%")->get();
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function findAll()
+    {
+        return Netblock::all();
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function getAsNoun()
+    {
+        return "netblock";
     }
 }

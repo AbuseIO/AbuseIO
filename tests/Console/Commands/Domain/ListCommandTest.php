@@ -46,7 +46,7 @@ class ListCommandTest extends TestCase
         ]);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No domains found for given filter.", Artisan::output());
+        $this->assertContains("No domain found for given filter.", Artisan::output());
     }
 }
 

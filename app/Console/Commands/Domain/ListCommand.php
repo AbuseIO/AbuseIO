@@ -2,13 +2,15 @@
 
 namespace AbuseIO\Console\Commands\Domain;
 
+use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Domain;
-use Illuminate\Console\Command;
-use Carbon;
 
-class ListCommand extends Command
+/**
+ * Class ListCommand
+ * @package AbuseIO\Console\Commands\Domain
+ */
+class ListCommand extends AbstractListCommand
 {
-
     /**
      * The console command name.
      * @var string
@@ -30,51 +32,39 @@ class ListCommand extends Command
     protected $headers = ['Id', 'Contact', 'Name', "Enabled"];
 
     /**
-     * Create a new command instance.
-     * @return void
+     * {@inheritdoc }
      */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return boolean
-     */
-    public function handle()
-    {
-
-        if (!empty($this->option('filter'))) {
-            $domainList = Domain::where('name', 'like', "%{$this->option('filter')}%")->get();
-        } else {
-            $domainList = Domain::all();
-        }
-
-        if (count($domainList) === 0) {
-            $this->error("No domains found for given filter.");
-        } else {
-            $this->table(
-                $this->headers,
-                $this->transformDomainListToTableBody($domainList)
-            );
-        }
-        return true;
-    }
-
-    /**
-     * @param $netblockList
-     * @param $netblocks
-     * @return array
-     */
-    public function transformDomainListToTableBody($domainList)
+    protected function transformListToTableBody($list)
     {
         $result = [];
         /* @var $domain  \AbuseIO\Models\Domain|null */
-        foreach ($domainList as $domain) {
+        foreach ($list as $domain) {
             $result[] = [$domain->id, $domain->contact->name, $domain->name, $domain->enabled];
         }
         return $result;
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function findWithCondition($filter)
+    {
+        return Domain::where('name', 'like', "%{$this->option('filter')}%")->get();
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function findAll()
+    {
+        return Domain::all();
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function getAsNoun()
+    {
+        return "domain";
     }
 }

@@ -2,15 +2,14 @@
 
 namespace AbuseIO\Console\Commands\Brand;
 
+use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Brand;
-use Illuminate\Console\Command;
-use Carbon;
 
 /**
  * Class ListCommand
  * @package AbuseIO\Console\Commands\Brand
  */
-class ListCommand extends Command
+class ListCommand extends AbstractListCommand
 {
 
     /**
@@ -18,7 +17,7 @@ class ListCommand extends Command
      * @var string
      */
     protected $signature = 'brand:list
-                            {--filter= : Applies a filter on the account name }
+                            {--filter= : Applies a filter on the brand name }
     ';
 
     /**
@@ -34,50 +33,40 @@ class ListCommand extends Command
     protected $headers = ['Id', 'Name', 'Company name'];
 
     /**
-     * Create a new command instance.
-     * @return void
+     * {@inheritdoc }
      */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return boolean
-     */
-    public function handle()
-    {
-        if (!empty($this->option('filter'))) {
-            $brandList = Brand::where('name', 'like', "%{$this->option('filter')}%")->get();
-        } else {
-            $brandList = Brand::all();
-        }
-
-        if (count($brandList) === 0) {
-            $this->error("No brand found for given filter.");
-        } else {
-            $this->table(
-                $this->headers,
-                $this->transformAccountListToTableBody($brandList)
-            );
-        }
-        return true;
-    }
-
-
-    /**
-     * @param $brandList
-     * @return array
-     */
-    public function transformAccountListToTableBody($brandList)
+    protected function transformListToTableBody($list)
     {
         $result = [];
         /* @var $brand  \AbuseIO\Models\Brand|null */
-        foreach ($brandList as $brand) {
+        foreach ($list as $brand) {
             $result[] = [$brand->id, $brand->name, $brand->company_name];
         }
         return $result;
     }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function findWithCondition($filter)
+    {
+        return Brand::where('name', 'like', "%{$filter}%")->get();
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function findAll()
+    {
+        return Brand::all();
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function getAsNoun()
+    {
+        return "brand";
+    }
 }
+

@@ -29,22 +29,7 @@ class ListCommand extends AbstractListCommand
      */
     protected $headers = ['Id', 'Name', 'Brand', "Disabled"];
 
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
-    /**
-     * {@inheritdoc }
-     */
-    protected function getAsNoun()
-    {
-        return "account";
-    }
 
     /**
      * {@inheritdoc }
@@ -74,4 +59,13 @@ class ListCommand extends AbstractListCommand
         }
         return $result;
     }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function getAsNoun()
+    {
+        return "account";
+    }
 }
+

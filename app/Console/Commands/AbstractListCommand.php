@@ -11,6 +11,15 @@ abstract class AbstractListCommand extends Command
 
 
     /**
+     * Create a new command instance.
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
      * Execute the console command.
      *
      * @return bool
@@ -50,14 +59,12 @@ abstract class AbstractListCommand extends Command
     abstract protected function findWithCondition($filter);
 
     /**
-     * @param $filter
      * @return mixed
      */
     abstract protected function findAll();
 
     /**
-     * @param $filter
-     * @return mixed
+     * @return string
      */
     abstract protected function getAsNoun();
 }
