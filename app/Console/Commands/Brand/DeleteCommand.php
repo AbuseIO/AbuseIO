@@ -3,7 +3,7 @@
 namespace AbuseIO\Console\Commands\Brand;
 
 use Illuminate\Console\Command;
-use AbuseIO\Models\Account;
+use AbuseIO\Models\Brand;
 use Carbon;
 
 class DeleteCommand extends Command
@@ -14,14 +14,14 @@ class DeleteCommand extends Command
      * @var string
      */
     protected $signature = 'brand:delete
-                            {--id= : Use the account id to delete it }
+                            {--id= : Use the brand id to delete it }
     ';
 
     /**
      * The console command description.
      * @var string
      */
-    protected $description = 'Deletes account (without confirmation!)';
+    protected $description = 'Deletes brand (without confirmation!)';
 
     /**
      * Create a new command instance.
@@ -45,20 +45,20 @@ class DeleteCommand extends Command
         }
 
         /* @var $netblock  \AbuseIO\Models\Account|null */
-        $account = Account::find($this->option("id"));
-        if (null === $account) {
+        $brand = Brand::find($this->option("id"));
+        if (null === $brand) {
             $this->error(
-                    sprintf('Unable to find account with id:%d', $this->option("id"))
+                    sprintf('Unable to find brand with id:%d', $this->option("id"))
                 );
             return false;
         }
 
-        if (!$account->delete()) {
-            $this->error('Unable to delete account from the system');
+        if (!$brand->delete()) {
+            $this->error('Unable to delete brand from the system');
             return false;
         }
 
-        $this->info('The account has been deleted from the system');
+        $this->info('The brand has been deleted from the system');
         return true;
     }
 }
