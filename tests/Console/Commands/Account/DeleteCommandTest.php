@@ -7,6 +7,8 @@ use \TestCase;
 
 class DeleteCommandTest extends TestCase{
 
+// TODO not working because seeder is not deleting and id=1 is in te schema.
+
 //    public function testValid()
 //    {
 //        $exitCode = Artisan::call('account:delete', [
