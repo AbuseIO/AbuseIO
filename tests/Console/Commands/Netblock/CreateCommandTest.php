@@ -2,8 +2,9 @@
 namespace tests\Console\Commands\Netblock;
 
 use Illuminate\Support\Facades\Artisan;
+use \TestCase;
 
-class CreateCommandTest extends \TestCase{
+class CreateCommandTest extends TestCase{
 
     public function testCreate()
     {

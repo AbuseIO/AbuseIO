@@ -3,8 +3,9 @@
 namespace tests\Console\Commands\Netblock;
 
 use Illuminate\Support\Facades\Artisan;
+use \TestCase;
 
-class DeleteCommandTest extends \TestCase{
+class DeleteCommandTest extends TestCase{
 
     public function testValid()
     {

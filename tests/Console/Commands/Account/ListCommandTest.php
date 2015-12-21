@@ -3,9 +3,9 @@
 namespace tests\Console\Commands\Account;
 
 use Illuminate\Support\Facades\Artisan;
+use \TestCase;
 
-
-class ListCommandTest extends \TestCase
+class ListCommandTest extends TestCase
 {
     public function testHeaders()
     {

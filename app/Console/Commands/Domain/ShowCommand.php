@@ -14,7 +14,8 @@ class ShowCommand extends Command
      * @var string
      */
     protected $signature = 'domain:show
-                            {--filter= : Use the contact email or ip_first or ip_last to show details }
+                            {--id= : Use the id to show details }
+                            {--name= : Use the name show details }
     ';
 
     /**
@@ -27,7 +28,7 @@ class ShowCommand extends Command
      * The headers of the table
      * @var array
      */
-    protected $headers =['Id', 'Contact', 'First IP', 'Last IP','Description', 'Enabled'];
+    protected $headers =['Id', 'Name', 'Contact', 'Enabled','Created', 'Updated', 'Deleted'];
 
     /**
      * The fields of the table / database row
@@ -51,20 +52,19 @@ class ShowCommand extends Command
      */
     public function handle()
     {
-        if (empty($this->option('filter'))) {
-            $this->warn('no email or ip argument was passed, try --help');
+        if (empty($this->option('id')) && empty($this->option("name"))) {
+            $this->warn('no --id or --name argument was passed, try --help');
             return false;
         }
-        /* @var $netblock  \AbuseIO\Models\Netblock|null */
-        $netblock = $this->findByContactName($this->option("filter")) ?:
-                    $this->findByFirstIp($this->option("filter")) ?:
-                    $this->findByLastIp($this->option("filter"));
+        /* @var $domain \AbuseIO\Models\Domain|null */
+        $domain = Domain::find($this->option("id")) ?:
+                    $this->findByName($this->option("name"));
 
 
-        if (null !== $netblock) {
-            $this->table($this->headers, $this->transformNetblockToTableBody($netblock));
+        if (null !== $domain) {
+            $this->table($this->headers, $this->transformDomainToTableBody($domain));
         } else {
-            $this->warn("No matching netblocks where found.");
+            $this->warn("No matching domain where found.");
         }
         return true;
     }
@@ -73,64 +73,29 @@ class ShowCommand extends Command
      * @param Netblock $netblock
      * @return array
      */
-    private function transformNetblockToTableBody(Netblock $netblock)
+    private function transformDomainToTableBody(Domain $domain)
     {
         return  [[
-            $netblock->id,
-            $netblock->contact->name,
-            $netblock->first_ip,
-            $netblock->last_ip,
-            $netblock->description,
-            $netblock->enabled
+            $domain->id,
+            $domain->name,
+            $domain->contact->name,
+            castBoolToString($domain->enabled),
+            $domain->created_at,
+            $domain->updated_at,
+            $domain->deleted_at
         ]];
     }
 
 
     /**
      * @param $name
-     * @return Netblock|null
+     * @return Domain|null
      */
-    private function findByContactName($name)
+    private function findByName($name)
     {
-        $netblock = null;
-        $contact = Contact::where('name', "=", $this->option('filter'))->first();
-        if (null !== $contact) {
-            $netblock = $contact->netblocks->first();
+        if (strlen($name) > 0) {
+            return Domain::where("name", "like", '%' . $this->option("name"))->first();
         }
-        return $netblock;
-    }
-
-    /**
-     * @param $ip
-     * @return Netblock|null
-     */
-    private function findByFirstIp($ip)
-    {
-        return $this->findByIp("first_ip", $ip);
-    }
-
-    /**
-     * @param $ip
-     * @return Netblock|null
-     */
-    private function findByLastIp($ip)
-    {
-        return $this->findByIp("last_ip", $ip);
-    }
-
-    /**
-     * @param $name
-     * @return Netblock|null
-     */
-    private function findByIp($field, $ip)
-    {
-        $netblock = null;
-        $allowedFields = ["first_ip", "last_ip"];
-
-        if (in_array($field, $allowedFields)) {
-            $filter = '%'.$this->option('filter').'%';
-            $netblock = Netblock::where($field, "like", $filter)->first();
-        }
-        return $netblock;
+        return null;
     }
 }

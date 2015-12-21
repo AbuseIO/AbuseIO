@@ -3,8 +3,9 @@
 namespace tests\Console\Commands\Netblock;
 
 use Illuminate\Support\Facades\Artisan;
+use \TestCase;
 
-class EditCommandTest extends \TestCase
+class EditCommandTest extends TestCase
 {
     public function testWithoutId()
     {

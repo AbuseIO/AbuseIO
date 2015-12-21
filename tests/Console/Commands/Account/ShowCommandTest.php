@@ -3,8 +3,9 @@
 namespace tests\Console\Commands\Account;
 
 use Illuminate\Support\Facades\Artisan;
+use \TestCase;
 
-class ShowCommandTest extends \TestCase{
+class ShowCommandTest extends TestCase{
 
     public function testWithValidIdFilter()
     {
