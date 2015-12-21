@@ -3,31 +3,32 @@
 namespace tests\Console\Commands\Account;
 
 use Illuminate\Support\Facades\Artisan;
+use \TestCase;
 
-//class DeleteCommandTest extends \TestCase{
-//
+class DeleteCommandTest extends TestCase{
+
 //    public function testValid()
 //    {
-//        $exitCode = Artisan::call('domain:delete', [
-//            "--id" => "1"
+//        $exitCode = Artisan::call('account:delete', [
+//            "--id" => "2"
 //        ]);
 //
 //        $this->assertEquals($exitCode, 0);
-//        $this->assertContains("domain has been deleted", Artisan::output());
+//        $this->assertContains("The account has been deleted from the system", Artisan::output());
 //        /**
 //         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
 //         */
-//        $this->seed('DomainsTableSeeder');
+//        //$this->seed('AccountsTableSeeder');
 //    }
-//
-//    public function testInvalidId()
-//    {
-//        $exitCode = Artisan::call('domain:delete', [
-//            "--id" => "1000"
-//        ]);
-//
-//        $this->assertEquals($exitCode, 0);
-//        $this->assertContains("Unable to find domain", Artisan::output());
-//    }
-//}
+
+    public function testInvalidId()
+    {
+        $exitCode = Artisan::call('account:delete', [
+            "--id" => "1000"
+        ]);
+
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains("Unable to find account", Artisan::output());
+    }
+}
 
