@@ -1,7 +1,8 @@
 <?php namespace AbuseIO\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use AbuseIO\Parsers\Factory;
+use AbuseIO\Parsers\Factory as ParserFactory;
+use AbuseIO\Collectors\Factory as CollectorFactory;
 use File;
 
 class ConfigServiceProvider extends ServiceProvider
@@ -39,23 +40,32 @@ class ConfigServiceProvider extends ServiceProvider
         // Publish config files of all installed Parsers
         // All parser configs we will put into the master 'parsers' tree of the config
         // So we can easily walk through all of them based on the active configuration
-        $parserList = Factory::getParsers();
-        foreach ($parserList as $parser) {
-            $basePath = base_path().'/vendor/abuseio/parser-'.strtolower($parser) . '/config';
+        $parserList = ParserFactory::getParsers();
+        $this->buildConfig($parserList, 'parser');
 
-            $parserConfig = $basePath . "/{$parser}.php";
+        // Publish config files of all installed Collectors the same way
+        $collectorList = CollectorFactory::getCollectors();
+        $this->buildConfig($collectorList, 'collector');
+    }
+
+    private function buildConfig($list, $type)
+    {
+        foreach ($list as $handler) {
+            $basePath = base_path() . "/vendor/abuseio/{$type}-" . strtolower($handler) . '/config';
+
+            $parserConfig = $basePath . "/{$handler}.php";
             if (File::exists($parserConfig)) {
                 $this->mergeConfigFrom(
                     $parserConfig,
-                    'parsers.' . $parser
+                    "{$type}s.{$handler}"
                 );
             }
 
-            $parserOverride = $basePath . '/' . app()->environment() . "/{$parser}.php";
+            $parserOverride = $basePath . '/' . app()->environment() . "/{$handler}.php";
             if (File::exists($parserOverride)) {
                 $this->mergeConfigFrom(
                     $parserOverride,
-                    app()->environment() . '.parsers.' . $parser
+                    app()->environment() . ".{$type}s.{$handler}"
                 );
             }
         }
