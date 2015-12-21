@@ -3,7 +3,7 @@
 namespace AbuseIO\Console\Commands\Brand;
 
 use Illuminate\Console\Command;
-use AbuseIO\Models\Account;
+use AbuseIO\Models\Brand;
 use Carbon;
 
 class ShowCommand extends Command
@@ -44,28 +44,29 @@ class ShowCommand extends Command
             $this->warn('Pass a name or id via the filter argument or try --help');
             return false;
         }
-        /* @var $account  \AbuseIO\Models\Account|null */
-        $account = $this->findByNameOrId($this->option("name"), $this->option("id"));
+        /* @var $brand  \AbuseIO\Models\Brand|null */
+        $brand = $this->findByNameOrId($this->option("name"), $this->option("id"));
 
-        if (null !== $account) {
-            $this->table([], $this->transformNetblockToTableBody($account));
+        if (null !== $brand) {
+            $this->table([], $this->transformBrandToTableBody($brand));
         } else {
-            $this->warn("No matching accounts where found.");
+            $this->warn("No matching brand was found.");
         }
         return true;
     }
 
+
     /**
-     * @param Account $account
+     * @param Brand $brand
      * @return array
      */
-    private function transformNetblockToTableBody(Account $account)
+    private function transformBrandToTableBody(Brand $brand)
     {
         return  [
-            ["Id", $account->id],
-            ["Name", $account->name],
-            ["Brand", $account->brand->name],
-            ["Description", $account->description]
+            ["Id", $brand->id],
+            ["Name", $brand->name],
+            ["Company name", $brand->company_name],
+            ["Introduction text", $brand->introduction_text]
         ];
     }
 
@@ -85,19 +86,19 @@ class ShowCommand extends Command
 
     /**
      * @param $id
-     * @return Account|null
+     * @return Brand|null
      */
     private function findById($id)
     {
-        return Account::find($id);
+        return Brand::find($id);
     }
 
     /**
      * @param $name
-     * @return Account|null
+     * @return Brand|null
      */
     private function findByName($name)
     {
-        return Account::where("name", "like", "%".$name."%")->first();
+        return Brand::where("name", "like", "%".$name."%")->first();
     }
 }

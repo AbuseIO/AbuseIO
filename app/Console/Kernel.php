@@ -49,6 +49,7 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Account\DeleteCommand',
 
         'AbuseIO\Console\Commands\Brand\ListCommand',
+        'AbuseIO\Console\Commands\Brand\ShowCommand',
         'AbuseIO\Console\Commands\Brand\DeleteCommand',
     ];
 
