@@ -41,7 +41,7 @@ class ShowCommand extends Command
     public function handle()
     {
         if (empty($this->option('id')) && empty($this->option('name'))) {
-            $this->warn('Pass a name or id via the filter argument or try --help');
+            $this->warn('Pass a name or id argument or try --help');
             return false;
         }
         /* @var $brand  \AbuseIO\Models\Brand|null */
