@@ -67,7 +67,7 @@
                 <dt>{{ trans('tickets.last_seen') }}</dt>
                 <dd>{{ $ticket->lastEvent[0]->seen }}</dd>
 
-                <dt>{{ trans('tickets.count') }}</dt>
+                <dt>{{ trans('tickets.events') }}</dt>
                 <dd>{{ $ticket->events->count() }}</dd>
 
                 <dt>{{ trans('misc.status') }}</dt>
