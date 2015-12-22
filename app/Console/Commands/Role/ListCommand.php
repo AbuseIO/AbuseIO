@@ -13,7 +13,7 @@ class ListCommand extends AbstractListCommand
      * @var string
      */
     protected $signature = 'role:list
-                            {--filter : Applies a filter on the role name }
+                            {--filter= : Applies a filter on the role name }
     ';
 
     /**
