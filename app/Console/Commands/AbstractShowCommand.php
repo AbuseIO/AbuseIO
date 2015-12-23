@@ -5,7 +5,7 @@ namespace AbuseIO\Console\Commands;
 use Illuminate\Console\Command;
 
 
-abstract class AbstractListCommand extends Command
+abstract class AbstractShowCommand extends Command
 {
     protected $headers = [];
 
@@ -26,11 +26,8 @@ abstract class AbstractListCommand extends Command
      */
     public final function handle()
     {
-        $arguments = $this->argument();
-        $options = $this->option();
-
-        if (!empty($options['filter'])) {
-            $list = $this->findWithCondition($this->option("filter"));
+        if (!empty($this->argument('name'))) {
+            $list = $this->findWithCondition($this->argument("name"));
         } else {
             $list = $this->findAll();
         }

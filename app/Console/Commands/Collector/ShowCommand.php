@@ -2,11 +2,10 @@
 
 namespace AbuseIO\Console\Commands\Collector;
 
-use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Collectors\Factory as CollectorFactory;
-use Carbon;
+use AbuseIO\Console\Commands\AbstractShowCommand;
 
-class ShowCommand extends AbstractListCommand
+class ShowCommand extends AbstractShowCommand
 {
 
     /**
@@ -36,9 +35,10 @@ class ShowCommand extends AbstractListCommand
     /**
      * Execute the console command.
      *
+     * @param array $collectors
      * @return boolean
      */
-    public function hydrateCollectorWithFields($collectors)
+    public function hydrateCollectorWithFields(array $collectors)
     {
         $objects = [];
 
