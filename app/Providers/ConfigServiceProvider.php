@@ -3,6 +3,7 @@
 use Illuminate\Support\ServiceProvider;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use AbuseIO\Collectors\Factory as CollectorFactory;
+use Config;
 use File;
 
 class ConfigServiceProvider extends ServiceProvider
@@ -20,13 +21,14 @@ class ConfigServiceProvider extends ServiceProvider
          * environments called development, testing and production. Each of these environments has a directory
          * inside config where an config override can be made.
          */
-        $envConfig = $this->app['config']->get(app()->environment());
+        $envConfig = Config::get(app()->environment());
         if (!empty($envConfig) && is_array($envConfig)) {
             foreach ($envConfig as $configKey => $configElement) {
                 $overrideConfig = $envConfig[$configKey];
-                $defaultConfig = $this->app['config']->get($configKey, []);
+                $defaultConfig = Config::get($configKey);
 
-                $this->app['config']->set($configKey, array_replace_recursive($defaultConfig, $overrideConfig));
+                $configWithOverrides = array_replace_recursive($defaultConfig, $overrideConfig);
+                Config::set($configKey, $configWithOverrides);
             }
         }
 
@@ -52,7 +54,7 @@ class ConfigServiceProvider extends ServiceProvider
     {
         foreach ($list as $handler) {
             $defaultConfig = [];
-            $configOverride = [];
+            $overrideConfig = [];
             $configKey = "{$type}s.{$handler}";
 
             $basePath = base_path() . "/vendor/abuseio/{$type}-" . strtolower($handler) . '/config';
@@ -64,10 +66,12 @@ class ConfigServiceProvider extends ServiceProvider
 
             $configOverrideFile = $basePath . '/' . app()->environment() . "/{$handler}.php";
             if (File::exists($configOverrideFile)) {
-                $configOverride = include($configOverrideFile);
+                $overrideConfig = include($configOverrideFile);
             }
 
-            $this->app['config']->set($configKey, array_replace_recursive($defaultConfig, $configOverride));
+            $configWithOverrides = array_replace_recursive($defaultConfig, $overrideConfig);
+
+            Config::set($configKey, $configWithOverrides);
 
         }
     }
