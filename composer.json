@@ -41,7 +41,6 @@
         "pda/pheanstalk": "~3.0",
         "ddeboer/data-import": "^0.18.0",
         "yajra/laravel-datatables-oracle": "~5.0",
-        "marknl/iodef": "dev-master",
 
         "abuseio/parser-common": "dev-master",
 		"abuseio/parser-abusehub": "dev-master",
