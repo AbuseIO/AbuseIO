@@ -59,12 +59,12 @@ class ConfigServiceProvider extends ServiceProvider
 
             $defaultConfigFile = $basePath . "/{$handler}.php";
             if (File::exists($defaultConfigFile)) {
-                $defaultConfig = include_once($defaultConfigFile);
+                $defaultConfig = include($defaultConfigFile);
             }
 
             $configOverrideFile = $basePath . '/' . app()->environment() . "/{$handler}.php";
             if (File::exists($configOverrideFile)) {
-                $configOverride = include_once($configOverrideFile);
+                $configOverride = include($configOverrideFile);
             }
 
             $this->app['config']->set($configKey, array_replace_recursive($defaultConfig, $configOverride));
