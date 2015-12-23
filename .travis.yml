@@ -14,7 +14,7 @@ env:
   - DB=mysql
 
 before_script:
-  - echo 'yes' | pecl install mailparse
+  - echo 'yes' | pecl install mailparse-2.1.6
   - mysql -e 'CREATE DATABASE `abuseio`;'
   - composer self-update
   - composer install --dev --prefer-source --no-interaction

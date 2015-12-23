@@ -33,7 +33,7 @@ mv composer.phar /usr/local/bin/composer
 ## Install global dependencies
 
 ```bash
-pecl install mailparse (note: mbstring should be installed on linux systems, if not add mbstring to the install command)
+pecl install mailparse-2.1.6 (note: mbstring should be installed on linux systems, if not add mbstring to the install command)
 echo "extension=mailparse.so" > /etc/php5/mods-available/mailparse.ini
 php5enmod mailparse
 php5enmod mcrypt
