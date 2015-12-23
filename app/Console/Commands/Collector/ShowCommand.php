@@ -13,9 +13,7 @@ class ShowCommand extends AbstractListCommand
      * The console command name.
      * @var string
      */
-    protected $signature = 'collector:show
-                            {--filter= : Use the name to show collector details }
-    ';
+    protected $signature = 'collector:show {name}';
 
     /**
      * The console command description.

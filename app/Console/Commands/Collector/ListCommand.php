@@ -14,7 +14,7 @@ class ListCommand extends AbstractListCommand
      * @var string
      */
     protected $signature = 'collector:list
-                            {--filter= : Applies a filter on the collector (namen) }
+                            {--filter= : Applies a filter on the collector (name) }
     ';
 
     /**

@@ -13,8 +13,7 @@ class RunCommand extends Command
      * The console command name.
      * @var string
      */
-    protected $signature = 'collector:run
-                            {--name= : Name of the collector }
+    protected $signature = 'collector:run {name}
                             {--debug : Do not create events, just display the results }
     ';
 
@@ -40,11 +39,11 @@ class RunCommand extends Command
      */
     public function handle()
     {
-        $collector = collectorFactory::create($this->option('name'));
+        $collector = collectorFactory::create($this->argument('name'));
 
         if (!$collector) {
             $this->error(
-                "The requested collector {$this->option('name')} could not be started check logs for PID:"
+                "The requested collector {$this->argument('name')} could not be started check logs for PID:"
                 . getmypid()
             );
             return false;

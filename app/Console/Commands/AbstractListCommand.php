@@ -26,7 +26,12 @@ abstract class AbstractListCommand extends Command
      */
     public final function handle()
     {
-        if (!empty($this->option('filter'))) {
+        $arguments = $this->argument();
+        $options = $this->option();
+
+        if (!empty($arguments['name'])) {
+            $list = $this->findWithCondition($this->argument("name"));
+        } elseif (!empty($options['filter'])) {
             $list = $this->findWithCondition($this->option("filter"));
         } else {
             $list = $this->findAll();
