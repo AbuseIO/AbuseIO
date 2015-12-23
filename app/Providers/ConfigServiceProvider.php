@@ -51,23 +51,24 @@ class ConfigServiceProvider extends ServiceProvider
     private function buildConfig($list, $type)
     {
         foreach ($list as $handler) {
+            $defaultConfig = [];
+            $configOverride = [];
+            $configKey = "{$type}s.{$handler}";
+
             $basePath = base_path() . "/vendor/abuseio/{$type}-" . strtolower($handler) . '/config';
 
-            $parserConfig = $basePath . "/{$handler}.php";
-            if (File::exists($parserConfig)) {
-                $this->mergeConfigFrom(
-                    $parserConfig,
-                    "{$type}s.{$handler}"
-                );
+            $defaultConfigFile = $basePath . "/{$handler}.php";
+            if (File::exists($defaultConfigFile)) {
+                $defaultConfig = include_once($defaultConfigFile);
             }
 
-            $parserOverride = $basePath . '/' . app()->environment() . "/{$handler}.php";
-            if (File::exists($parserOverride)) {
-                $this->mergeConfigFrom(
-                    $parserOverride,
-                    app()->environment() . ".{$type}s.{$handler}"
-                );
+            $configOverrideFile = $basePath . '/' . app()->environment() . "/{$handler}.php";
+            if (File::exists($configOverrideFile)) {
+                $configOverride = include_once($configOverrideFile);
             }
+
+            $this->app['config']->set($configKey, array_replace_recursive($defaultConfig, $configOverride));
+
         }
     }
 
