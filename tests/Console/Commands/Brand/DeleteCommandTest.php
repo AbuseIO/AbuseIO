@@ -27,7 +27,7 @@ class DeleteCommandTest extends TestCase{
     public function testInvalidId()
     {
         $exitCode = Artisan::call('brand:delete', [
-            "--id" => "1000"
+            'id' => '1000'
         ]);
 
         $this->assertEquals($exitCode, 0);

@@ -29,7 +29,7 @@ abstract class AbstractDeleteCommand extends Command
      *
      * @return boolean
      */
-    public function handle()
+    public final function handle()
     {
         /** @var Model $object */
         $object = $this->getObjectByArguments();
