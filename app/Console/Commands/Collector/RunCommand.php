@@ -49,7 +49,9 @@ class RunCommand extends Command
             return false;
         }
 
-        // TODO : Bart Continue here
+        $results = $collector->parse();
+
+        print_r($results);
 
         return true;
     }
