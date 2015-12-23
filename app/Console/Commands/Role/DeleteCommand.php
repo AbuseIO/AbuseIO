@@ -2,48 +2,32 @@
 
 namespace AbuseIO\Console\Commands\Role;
 
-use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\AbstractDeleteCommand;
 use AbuseIO\Models\Role;
-use Carbon;
+use Symfony\Component\Console\Input\InputArgument;
 
-class DeleteCommand extends Command
+
+class DeleteCommand extends AbstractDeleteCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'role:delete
-                            {--role= : Use the role name or id to delete it }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Deletes a role (without confirmation!)';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    public function defineInput()
     {
-        parent::__construct();
+        return array(
+                new InputArgument(
+                    'role',
+                    InputArgument::REQUIRED,
+                    'Use the name or the id for a role to delete it.'
+                )
+        );
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return boolean
-     */
-    public function handle()
+    protected function getAllowedArguments()
     {
-        if (empty($this->option('role'))) {
-            $this->warn('no name or id argument was passed, try --help');
-            return false;
-        }
+        return ["name", "id"];
+    }
 
+    protected function getObjectByArguments()
+    {
         $role = false;
         if (!is_object($role)) {
             $role = Role::where('name', $this->option('role'))->first();
@@ -52,19 +36,11 @@ class DeleteCommand extends Command
         if (!is_object($role)) {
             $role = Role::find($this->option('role'));
         }
+        return $role;
+    }
 
-        if (!is_object($role)) {
-            $this->error('Unable to find role with this criteria');
-            return false;
-        }
-
-        if (!$role->delete()) {
-            $this->error('Unable to delete role from the system');
-            return false;
-        }
-
-        $this->info('The role has been deleted from the system');
-
-        return true;
+    protected function getAsNoun()
+    {
+        return "role";
     }
 }

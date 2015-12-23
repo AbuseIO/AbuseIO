@@ -37,7 +37,7 @@ class ListCommand extends AbstractListCommand
     protected function transformListToTableBody($list)
     {
         $result = [];
-        /* @var $domain  \AbuseIO\Models\Domain|null */
+        /* @var $domain  \AbuseIO\Models\Domain */
         foreach ($list as $domain) {
             $result[] = [$domain->id, $domain->contact->name, $domain->name, $domain->enabled];
         }

@@ -2,63 +2,50 @@
 
 namespace AbuseIO\Console\Commands\Account;
 
-use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\AbstractDeleteCommand;
 use AbuseIO\Models\Account;
-use Carbon;
+use Symfony\Component\Console\Input\InputArgument;
 
-class DeleteCommand extends Command
+/**
+ * Class DeleteCommand
+ * @package AbuseIO\Console\Commands\Account
+ */
+class DeleteCommand extends AbstractDeleteCommand
 {
-
     /**
-     * The console command name.
-     * @var string
+     * {@inheritdoc }
      */
-    protected $signature = 'account:delete
-                            {--id= : Use the account id to delete it }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Deletes account (without confirmation!)';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    protected function getAsNoun()
     {
-        parent::__construct();
+        return "account";
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return boolean
+     * {@inheritdoc }
      */
-    public function handle()
+    protected function getAllowedArguments()
     {
-        if (empty($this->option('id'))) {
-            $this->warn('no id argument was passed, try --help');
-            return false;
-        }
+        return ["id"];
+    }
 
-        /* @var $netblock  \AbuseIO\Models\Account|null */
-        $account = Account::find($this->option("id"));
-        if (null === $account) {
-            $this->error(
-                    sprintf('Unable to find account with id:%d', $this->option("id"))
-                );
-            return false;
-        }
+    /**
+     * {@inheritdoc }
+     */
+    protected function getObjectByArguments()
+    {
+        return Account::find($this->argument("id"));
+    }
 
-        if (!$account->delete()) {
-            $this->error('Unable to delete account from the system');
-            return false;
-        }
-
-        $this->info('The account has been deleted from the system');
-        return true;
+    /**
+     * {@inheritdoc }
+     */
+    protected function defineInput()
+    {
+        return array(
+            new InputArgument(
+                'id',
+                InputArgument::REQUIRED,
+                'Use the id for a account to delete it.')
+        );
     }
 }
