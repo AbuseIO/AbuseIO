@@ -46,6 +46,12 @@ class ShowCommand extends AbstractShowCommand
             if(is_bool($value)) {
                 $value = castBoolToString($value);
             }
+            if(empty($value)) {
+                $value = 'Unconfigured';
+            }
+            if(is_array($value)) {
+                $value = implode(PHP_EOL, $value);
+            }
             $objects[] =
                 [
                     ucfirst($field),
