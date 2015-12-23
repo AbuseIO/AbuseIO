@@ -2,48 +2,37 @@
 
 namespace AbuseIO\Console\Commands\User;
 
-use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\AbstractDeleteCommand;
 use AbuseIO\Models\User;
-use Carbon;
+use Symfony\Component\Console\Input\InputArgument;
 
-class DeleteCommand extends Command
+/**
+ * Class DeleteCommand
+ * @package AbuseIO\Console\Commands\User
+ */
+class DeleteCommand extends AbstractDeleteCommand
 {
-
     /**
-     * The console command name.
-     * @var string
+     * {@inheritdoc }
      */
-    protected $signature = 'user:delete
-                            {--user= : Use the user email or id to delete it }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Deletes an user (without confirmation!)';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    protected function getAsNoun()
     {
-        parent::__construct();
+        return "user";
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return boolean
+     * {@inheritdoc }
      */
-    public function handle()
+    protected function getAllowedArguments()
     {
-        if (empty($this->option('user'))) {
-            $this->warn('no email or id argument was passed, try --help');
-            return false;
-        }
+        return ["name", "email"];
+    }
 
+    /**
+     * {@inheritdoc }
+     */
+    protected function getObjectByArguments()
+    {
         $user = false;
         if (!is_object($user)) {
             $user = User::where('email', $this->option('user'))->first();
@@ -52,19 +41,19 @@ class DeleteCommand extends Command
         if (!is_object($user)) {
             $user = User::find($this->option('user'));
         }
+        return $user;
+    }
 
-        if (!is_object($user)) {
-            $this->error('Unable to find user with this criteria');
-            return false;
-        }
-
-        if (!$user->delete()) {
-            $this->error('Unable to delete user from the system');
-            return false;
-        }
-
-        $this->info('The user has been deleted from the system');
-
-        return true;
+    /**
+     * {@inheritdoc }
+     */
+    protected function defineInput()
+    {
+        return array(
+            new InputArgument(
+                'user',
+                InputArgument::REQUIRED,
+                'Use the name or email for a user to delete it.')
+        );
     }
 }

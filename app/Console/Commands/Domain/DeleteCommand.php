@@ -2,63 +2,47 @@
 
 namespace AbuseIO\Console\Commands\Domain;
 
-use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\AbstractDeleteCommand;
 use AbuseIO\Models\Domain;
-use Carbon;
+use Symfony\Component\Console\Input\InputArgument;
 
-class DeleteCommand extends Command
+class DeleteCommand extends AbstractDeleteCommand
 {
-
     /**
-     * The console command name.
-     * @var string
+     * {@inheritdoc }
      */
-    protected $signature = 'domain:delete
-                            {--id= : Use the domain id to delete it }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Deletes domain (without confirmation!)';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    protected function getAsNoun()
     {
-        parent::__construct();
+        return "domain";
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return boolean
+     * {@inheritdoc }
      */
-    public function handle()
+    protected function getAllowedArguments()
     {
-        if (empty($this->option('id'))) {
-            $this->warn('no id argument was passed, try --help');
-            return false;
-        }
+        return ["id"];
+    }
 
-        /* @var $netblock  \AbuseIO\Models\Netblock|null */
-        $domain = Domain::find($this->option("id"));
-        if (null === $domain) {
-            $this->error(
-                    sprintf('Unable to find domain with id:%d', $this->option("id"))
-                );
-            return false;
-        }
+    /**
+     * {@inheritdoc }
+     */
+    protected function getObjectByArguments()
+    {
+        return Domain::find($this->argument("id"));
+    }
 
-        if (!$domain->delete()) {
-            $this->error('Unable to delete domain from the system');
-            return false;
-        }
-
-        $this->info('The domain has been deleted from the system');
-        return true;
+    /**
+     * {@inheritdoc }
+     */
+    protected function defineInput()
+    {
+        return array(
+            new InputArgument(
+                'id',
+                InputArgument::REQUIRED,
+                'Use the id for a domain to delete it.')
+        );
     }
 }
+

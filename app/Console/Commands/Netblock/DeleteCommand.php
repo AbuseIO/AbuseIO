@@ -2,63 +2,49 @@
 
 namespace AbuseIO\Console\Commands\Netblock;
 
-use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\AbstractDeleteCommand;
 use AbuseIO\Models\Netblock;
-use Carbon;
+use Symfony\Component\Console\Input\InputArgument;
 
-class DeleteCommand extends Command
+class DeleteCommand extends AbstractDeleteCommand
 {
 
     /**
-     * The console command name.
-     * @var string
+     * {@inheritdoc }
      */
-    protected $signature = 'netblock:delete
-                            {--id= : Use the netblock id to delete it }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Deletes netblock (without confirmation!)';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    protected function getAsNoun()
     {
-        parent::__construct();
+        return "netblock";
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return boolean
+     * {@inheritdoc }
      */
-    public function handle()
+    protected function getAllowedArguments()
     {
-        if (empty($this->option('id'))) {
-            $this->warn('no id argument was passed, try --help');
-            return false;
-        }
-
-        /* @var $netblock  \AbuseIO\Models\Netblock|null */
-        $netblock = Netblock::find($this->option("id"));
-        if (null === $netblock) {
-            $this->error(
-                    sprintf('Unable to find netblock with id:%d', $this->option("id"))
-                );
-            return false;
-        }
-
-        if (!$netblock->delete()) {
-            $this->error('Unable to delete netblock from the system');
-            return false;
-        }
-
-        $this->info('The netblock has been deleted from the system');
-        return true;
+        return ["id"];
     }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function getObjectByArguments()
+    {
+        return Netblock::find($this->argument("id"));
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function defineInput()
+    {
+        return array(
+            new InputArgument(
+                'id',
+                InputArgument::REQUIRED,
+                'Use the id for a netblock to delete it.')
+        );
+    }
+
+
 }

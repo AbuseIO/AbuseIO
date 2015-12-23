@@ -10,7 +10,7 @@ class DeleteCommandTest extends TestCase{
     public function testValid()
     {
         $exitCode = Artisan::call('netblock:delete', [
-            "--id" => "1"
+            "id" => "1"
         ]);
 
         $this->assertEquals($exitCode, 0);
@@ -24,7 +24,7 @@ class DeleteCommandTest extends TestCase{
     public function testInvalidId()
     {
         $exitCode = Artisan::call('netblock:delete', [
-            "--id" => "1000"
+            "id" => "1000"
         ]);
 
         $this->assertEquals($exitCode, 0);
