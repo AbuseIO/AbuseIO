@@ -34,6 +34,4 @@ class DeleteCommand extends AbstractDeleteCommand
             )
         );
     }
-
-
 }

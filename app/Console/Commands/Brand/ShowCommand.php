@@ -2,103 +2,55 @@
 
 namespace AbuseIO\Console\Commands\Brand;
 
-use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\AbstractShowCommand2;
 use AbuseIO\Models\Brand;
-use Carbon;
+use Symfony\Component\Console\Input\InputArgument;
 
-class ShowCommand extends Command
+class ShowCommand extends AbstractShowCommand2
 {
-
     /**
-     * The console command name.
-     * @var string
+     * {@inherit docs}
      */
-    protected $signature = 'brand:show
-                            {--id= : Use the id to show details }
-                            {--name= : Use the name show details }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows the details of an account';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    protected function getAsNoun()
     {
-        parent::__construct();
+        return "brand";
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return boolean
+     * {@inherit docs}
      */
-    public function handle()
+    protected function getAllowedArguments()
     {
-        if (empty($this->option('id')) && empty($this->option('name'))) {
-            $this->warn('Pass a name or id argument or try --help');
-            return false;
-        }
-        /* @var $brand  \AbuseIO\Models\Brand|null */
-        $brand = $this->findByNameOrId($this->option("name"), $this->option("id"));
-
-        if (null !== $brand) {
-            $this->table([], $this->transformBrandToTableBody($brand));
-        } else {
-            $this->warn("No matching brand was found.");
-        }
-        return true;
+        return ["id", "name"];
     }
 
+    /**
+     * {@inherit docs}
+     */
+    protected function getFields()
+    {
+        return ["id", "name", "company_name", "introduction_text"];
+    }
 
     /**
-     * @param Brand $brand
-     * @return array
+     * {@inherit docs}
      */
-    private function transformBrandToTableBody(Brand $brand)
+    protected function getCollectionWithArguments()
     {
-        return  [
-            ["Id", $brand->id],
-            ["Name", $brand->name],
-            ["Company name", $brand->company_name],
-            ["Introduction text", $brand->introduction_text]
+        return Brand::where("name", "like", "%".$this->argument("brand")."%")
+            ->orWhere("id", $this->argument("brand"));
+    }
+
+    /**
+     * {@inherit docs}
+     */
+    protected function defineInput()
+    {
+        return [
+            new InputArgument(
+                'brand',
+                InputArgument::REQUIRED,
+                'Use the id or name for a brand to show it.')
         ];
-    }
-
-    /**
-     * @param $name
-     * @param $id
-     * @return Account|null
-     */
-    private function findByNameOrId($name, $id)
-    {
-        if ($name) {
-            return $this->findByName($name);
-        }
-        return $this->findById($id);
-    }
-
-
-    /**
-     * @param $id
-     * @return Brand|null
-     */
-    private function findById($id)
-    {
-        return Brand::find($id);
-    }
-
-    /**
-     * @param $name
-     * @return Brand|null
-     */
-    private function findByName($name)
-    {
-        return Brand::where("name", "like", "%".$name."%")->first();
     }
 }
