@@ -9,6 +9,7 @@ use AbuseIO\Http\Requests\TicketsFormRequest;
 use yajra\Datatables\Datatables;
 use AbuseIO\Models\Ticket;
 use Redirect;
+use DB;
 
 class TicketsController extends Controller
 {
@@ -25,7 +26,22 @@ class TicketsController extends Controller
      */
     public function search()
     {
-        $tickets = Ticket::all();
+        //$tickets = Ticket::all();
+        $tickets = Ticket::select(
+            "tickets.*",
+            DB::raw("count(distinct events.id) as event_count"),
+            DB::raw("count(distinct notes.id) as notes_count")
+        )
+            ->leftJoin('events', 'events.ticket_id', '=', 'tickets.id')
+            ->leftJoin('notes', function ($join) {
+                // We need a LEFT JOIN .. ON .. AND ..).
+                // This doesn't exist within Illuminate's JoinClause class
+                // Sp we use some nesting foo
+                $join->on('notes.ticket_id', '=', 'tickets.id')->nest(function ($join) {
+                    $join->on('notes.viewed', '=', DB::raw("'false'"));
+                });
+            })
+            ->groupBy('tickets.id');
 
         return Datatables::of($tickets)
             // Create the action buttons
@@ -37,18 +53,6 @@ class TicketsController extends Controller
                         trans('misc.button.show').'</a> ';
 
                     return $actions;
-                }
-            )
-            ->addColumn(
-                'event_count',
-                function ($ticket) {
-                    return $ticket->events->count();
-                }
-            )
-            ->addColumn(
-                'notes_count',
-                function ($ticket) {
-                    return $ticket->unreadNotes->count();
                 }
             )
             ->editColumn(

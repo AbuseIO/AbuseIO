@@ -52,3 +52,8 @@ tr.shown td.details-control:before {
     font-family: 'Glyphicons Halflings';
     content: "\e082";
 }
+
+/* Show Note options when hovering a note */
+.ticket-hover-group:hover .ticket-hover-toggle {
+  visibility: visible;
+}

@@ -233,43 +233,23 @@
                 @foreach ($ticket->notes as $note)
                 <div class="row">
                     <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
-                        <div class="panel panel-{{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary' }}">
+                        <div class="panel ticket-hover-group panel-{{ ($note->viewed == true) ? 'default' : ((stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary') }}">
                             <div class="panel-heading clearfix">
-                                <h3 class="panel-title pull-left">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
+                                <h3 class="panel-title pull-left{{ ($note->viewed == true) ? ' text-muted' : '' }}">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
+                                <span class="pull-left">&nbsp;</span>
+                                <div class="pull-left ticket-hover-toggle invisible">
+                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'DELETE', 'route' => ['admin.notes.destroy', $note->id], 'class' => 'form-inline']) !!}
+                                    {!! link_to_route('admin.notes.update', ($note->hidden == true) ? trans('misc.button.visible') : trans('misc.button.hidden'), [$note->id], ['class' => 'btn btn-xs btn-warning']) !!}
+                                    {!! link_to_route('admin.notes.update', ($note->viewed == true) ? trans('misc.button.read') : trans('misc.button.unread'), [$note->id], ['class' => 'btn btn-xs btn-success']) !!}
+                                    @if (config('main.notes.deletable') === true)
+                                        {!! Form::submit(trans('misc.button.delete'), ['class'=>'btn btn-xs btn-danger']) !!}
+                                    @endif
+                                    {!! Form::close() !!}
+                                </div>
 
-                                <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
-
-                                @if ($note->hidden == true)
-                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'PATCH', 'route' => ['admin.notes.update', $note->id], 'class' => 'form-horizontal']) !!}
-                                        {!! Form::hidden('hidden', false) !!}
-                                        {!! Form::submit(trans('misc.button.hidden'), ['class'=>'pull-right btn btn-xs btn-warning']) !!}
-                                    {!! Form::close() !!}
-                                @else
-                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'PATCH', 'route' => ['admin.notes.update', $note->id], 'class' => 'form-horizontal']) !!}
-                                        {!! Form::hidden('hidden', true) !!}
-                                        {!! Form::submit(trans('misc.button.visible'), ['class'=>'pull-right btn btn-xs btn-success']) !!}
-                                    {!! Form::close() !!}
-                                @endif
-
-                                @if ($note->viewed == true)
-                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'PATCH', 'route' => ['admin.notes.update', $note->id], 'class' => 'form-horizontal']) !!}
-                                    {!! Form::hidden('viewed', false) !!}
-                                    {!! Form::submit(trans('misc.button.read'), ['class'=>'pull-right btn btn-xs btn-success']) !!}
-                                    {!! Form::close() !!}
-                                @else
-                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'PATCH', 'route' => ['admin.notes.update', $note->id], 'class' => 'form-horizontal']) !!}
-                                    {!! Form::hidden('viewed', true) !!}
-                                    {!! Form::submit(trans('misc.button.unread'), ['class'=>'pull-right btn btn-xs btn-warning']) !!}
-                                    {!! Form::close() !!}
-                                @endif
-
-                                @if (config('main.notes.deletable') === true)
-                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'DELETE', 'route' => ['admin.notes.destroy', $note->id], 'class' => 'form-horizontal']) !!}
-                                    {!! Form::submit(trans('misc.button.delete'), ['class'=>'pull-right btn btn-xs btn-danger']) !!}
-                                    {!! Form::close() !!}
-                                @endif
+                                <span class="pull-right{{ ($note->viewed == true) ? ' text-muted' : '' }}"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body{{ ($note->viewed == true) ? ' text-muted' : '' }}">
                                 {{ htmlentities($note->text) }}
                             </div>
                         </div>
@@ -277,23 +257,17 @@
                 </div>
                 @endforeach
             @endif
-            {!! Form::model(new AbuseIO\Models\Note, ['route' => 'admin.notes.store', 'class' => 'form-horizontal']) !!}
-                {!! Form::hidden('ticket_id', $ticket->id) !!}
                 <div class="row">
                     <div class="col-xs-11 col-xs-offset-1">
-                        <div class="form-group">
-                            {!! Form::label('text', trans('ash.communication.reply')) !!}
-                            {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder_admin'), 'class' => 'form-control']) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::checkbox('hidden') !!} {!! trans('misc.button.hidden') !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
-                        </div>
+                        {!! Form::model(new AbuseIO\Models\Note, ['route' => 'admin.notes.store', 'class' => 'form-horizontal']) !!}
+                        {!! Form::hidden('ticket_id', $ticket->id) !!}
+                        {!! Form::label('text', trans('ash.communication.reply')) !!}
+                        {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder_admin'), 'class' => 'form-control']) !!}
+                        <div class="checkbox"><label>{!! Form::checkbox('hidden') !!} {!! trans('misc.button.hidden') !!}</label></div>
+                        {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
-            {!! Form::close() !!}
         </div>
         {!! link_to(URL::previous(), trans('misc.button.back'), ['class' => 'btn btn-default top-buffer']) !!}
     </div>
