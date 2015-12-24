@@ -73,37 +73,25 @@ class NotesController extends Controller
      * @return Response
      * @internal param int $id
      */
-    public function update(NoteFormRequest $noteForm, Note $note)
+    public function update(NoteFormRequest $noteForm)
     {
-        $message = 'unknown';
-
         $input = $noteForm->all();
+        $note = Note::find($input['note']);
 
-        if (isset($input['hidden'])) {
-            $note->hidden = $input['hidden'];
-            if ($input['hidden'] == true) {
-                $message = 'hidden';
-            }
-            if ($input['hidden'] != true) {
-                $message = 'unhidden';
-            }
+        switch ($input['action']) {
+            case 'hide':
+                $note->hidden = !$note->hidden;
+                break;
+            case 'view':
+                $note->viewed = !$note->viewed;
+                break;
+            default:
+                # code...
+                break;
         }
-        if (isset($input['viewed'])) {
-            $note->viewed = $input['viewed'];
-            if ($input['viewed'] == true) {
-                $message = 'read';
-            }
-            if ($input['viewed'] != true) {
-                $message = 'unread';
-            }
-        }
-
         $note->save();
 
-        return Redirect::route(
-            'admin.tickets.show',
-            $note->ticket_id
-        )->with('message', 'The note has been marked as ' . $message);
+        return 'flip:OK';
     }
 
     /**
@@ -112,15 +100,12 @@ class NotesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy(Note $note)
+    public function destroy(NoteFormRequest $noteForm)
     {
-        $returnTicket = $note->ticket_id;
-
+        $input = $noteForm->all();
+        $note = Note::find($input['note']);
         $note->delete();
 
-        return Redirect::route(
-            'admin.tickets.show',
-            $returnTicket
-        )->with('message', 'The note has been deleted');
+        return 'delete:OK';
     }
 }

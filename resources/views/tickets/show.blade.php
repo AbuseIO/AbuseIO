@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('extrajs')
+    <script src="{{ asset('/js/tickets.js') }}"></script>
+@stop
+
 @section('content')
     <h1 class="page-header">{{ trans('tickets.headers.detail') }}: {{ $ticket->id }}</h1>
     <div class="row">
@@ -233,18 +237,18 @@
                 @foreach ($ticket->notes as $note)
                 <div class="row">
                     <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
-                        <div class="panel ticket-hover-group{{ (($note->hidden == true) ? ' panel-hidden' : '') }} panel-{{ ($note->viewed == true) ? 'default' : ((stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary') }}">
+                        <div class="ticket-note panel ticket-hover-group panel-default{{ $note->hidden == true ? ' panel-hidden' : '' }}{{ $note->viewed == false ? ' panel-info' : '' }}">
                             <div class="panel-heading clearfix">
                                 <h3 class="panel-title pull-left{{ ($note->viewed == true) ? ' text-muted' : '' }}">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
                                 <span class="pull-left">&nbsp;</span>
                                 <div class="pull-left ticket-hover-toggle invisible">
-                                    {!! Form::model(new AbuseIO\Models\Note, ['method' => 'DELETE', 'route' => ['admin.notes.destroy', $note->id], 'class' => 'form-inline']) !!}
-                                    {!! link_to_route('admin.notes.update', ($note->hidden == true) ? trans('misc.button.hidden') : trans('misc.button.visible'), [$note->id], ['class' => 'btn btn-xs btn-warning']) !!}
-                                    {!! link_to_route('admin.notes.update', ($note->viewed == true) ? trans('misc.button.read') : trans('misc.button.unread'), [$note->id], ['class' => 'btn btn-xs btn-success']) !!}
-                                    @if (config('main.notes.deletable') === true)
-                                        {!! Form::submit(trans('misc.button.delete'), ['class'=>'btn btn-xs btn-danger']) !!}
-                                    @endif
-                                    {!! Form::close() !!}
+                                    <button type="button" class="btn btnFlip btnHide btn-xs btn-{{ ($note->hidden == true) ? 'warning' : 'success' }}" value="{{ $note->id }}">
+                                        <span {!! ($note->hidden == true) ? '' : 'class="hidden"' !!}>{{ trans('misc.button.hidden') }}</span><span {!! ($note->hidden == true) ? 'class="hidden"' : '' !!}>{{ trans('misc.button.visible') }}</span>
+                                    </button>
+                                    <button type="button" class="btn btnFlip btnRead btn-xs btn-{{ ($note->viewed == true) ? 'success' : 'warning' }}" value="{{ $note->id }}">
+                                        <span {!! ($note->viewed == true) ? '' : 'class="hidden"' !!} >{{ trans('misc.button.read') }}</span><span {!! ($note->viewed == true) ? 'class="hidden"' : '' !!}>{{ trans('misc.button.unread') }}</span>
+                                    </button>
+                                    <button type="button" class="btn btnFlip btnDelete btn-xs btn-danger" value="{{ $note->id }}">Delete</button>
                                 </div>
 
                                 <span class="pull-right{{ ($note->viewed == true) ? ' text-muted' : '' }}"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
