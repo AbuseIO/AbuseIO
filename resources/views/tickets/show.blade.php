@@ -233,13 +233,13 @@
                 @foreach ($ticket->notes as $note)
                 <div class="row">
                     <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
-                        <div class="panel ticket-hover-group panel-{{ ($note->viewed == true) ? 'default' : ((stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary') }}">
+                        <div class="panel ticket-hover-group{{ (($note->hidden == true) ? ' panel-hidden' : '') }} panel-{{ ($note->viewed == true) ? 'default' : ((stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary') }}">
                             <div class="panel-heading clearfix">
                                 <h3 class="panel-title pull-left{{ ($note->viewed == true) ? ' text-muted' : '' }}">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
                                 <span class="pull-left">&nbsp;</span>
                                 <div class="pull-left ticket-hover-toggle invisible">
                                     {!! Form::model(new AbuseIO\Models\Note, ['method' => 'DELETE', 'route' => ['admin.notes.destroy', $note->id], 'class' => 'form-inline']) !!}
-                                    {!! link_to_route('admin.notes.update', ($note->hidden == true) ? trans('misc.button.visible') : trans('misc.button.hidden'), [$note->id], ['class' => 'btn btn-xs btn-warning']) !!}
+                                    {!! link_to_route('admin.notes.update', ($note->hidden == true) ? trans('misc.button.hidden') : trans('misc.button.visible'), [$note->id], ['class' => 'btn btn-xs btn-warning']) !!}
                                     {!! link_to_route('admin.notes.update', ($note->viewed == true) ? trans('misc.button.read') : trans('misc.button.unread'), [$note->id], ['class' => 'btn btn-xs btn-success']) !!}
                                     @if (config('main.notes.deletable') === true)
                                         {!! Form::submit(trans('misc.button.delete'), ['class'=>'btn btn-xs btn-danger']) !!}

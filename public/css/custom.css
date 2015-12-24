@@ -55,5 +55,20 @@ tr.shown td.details-control:before {
 
 /* Show Note options when hovering a note */
 .ticket-hover-group:hover .ticket-hover-toggle {
-  visibility: visible;
+    visibility: visible;
+    z-index: 11;
+    position: relative;
+}
+
+/* Semi fade out hidden notes to the background */
+.panel-hidden:after {
+    content: " ";
+    z-index: 10;
+    display: block;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.5);
 }
