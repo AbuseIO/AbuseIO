@@ -35,7 +35,6 @@
         "laravelcollective/html": "~5.0",
         "php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
         "webpatser/laravel-uuid": "1.*",
-        "yajra/laravel-datatables-oracle": "~5.0",
         "Chumper/Zipper": "0.6.x",
         "barryvdh/laravel-ide-helper": "^2.0",
         "pda/pheanstalk": "~3.0",
