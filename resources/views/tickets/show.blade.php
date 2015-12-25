@@ -46,11 +46,6 @@
                 <dt>{{ trans('misc.ip_address') }}</dt>
                 <dd>{{ $ticket->ip }}</dd>
 
-                @if (gethostbyaddr($ticket->ip) !== false)
-                    <dt>{{ trans('misc.revdns') }}</dt>
-                    <dd>{{ gethostbyaddr($ticket->ip) }}</dd>
-                @endif
-
                 @if (!empty($ticket->domain))
                     <dt>Domain name</dt>
                     <dd>{{ $ticket->domain }}</dd>
