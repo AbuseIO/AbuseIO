@@ -221,13 +221,6 @@
                 @endforeach
                 </tbody>
             </table>
-            {!! Form::open(['method' => 'post', 'files' => true]) !!}
-            <div class="form-group">
-                {!! Form::label('text', trans('tickets.add_evidence')) !!}
-                {!! Form::file('image') !!}
-            </div>
-            {!! Form::submit('Submit', ['class' => 'btn btn-success']) !!}
-            {!! Form::close() !!}
         @endif
         </div>
         <div id="communication" class="tab-pane fade">
