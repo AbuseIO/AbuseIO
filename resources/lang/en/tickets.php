@@ -2,12 +2,13 @@
 
 return [
     // Tickets - Headers
-    'headers.new'       => 'New Ticket',
+    'headers.new'       => 'New Event',
     'headers.edit'      => 'Edit Ticket',
-    'headers.detail'    => 'Ticket details for',
+    'headers.detail'    => 'Details for ticket',
 
     // Tickets - Buttons
     'button.new_ticket'         => 'New ticket',
+    'button.new_event'          => 'New event',
     'button.all_tickets'        => 'All tickets',
     'button.open_tickets'       => 'Open tickets',
     'button.closed_tickets'     => 'Closed tickets',

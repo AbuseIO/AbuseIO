@@ -37,7 +37,7 @@
     </div>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#info"><span class="glyphicon glyphicon-file"></span> {{ trans('tickets.information') }}</a></li>
-        <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ trans('tickets.incidents') }}</a></li>
+        <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ trans('tickets.events') }}</a></li>
         <li><a data-toggle="tab" href="#communication"><span class="glyphicon glyphicon-envelope"></span> {{ trans('tickets.communication') }}</a></li>
     </ul>
     <div class="tab-content">

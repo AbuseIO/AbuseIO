@@ -2,12 +2,13 @@
 
 return [
     // Tickets - Headers
-    'headers.new'       => 'Nieuw Ticket',
+    'headers.new'       => 'Nieuwe melding',
     'headers.edit'      => 'Bewerk Ticket',
-    'headers.detail'    => 'Ticket details voor',
+    'headers.detail'    => 'Details voor ticket',
 
     // Tickets - Buttons
     'button.new_ticket'         => 'Nieuw ticket',
+    'button.new_event'          => 'Nieuwe melding',
     'button.all_tickets'        => 'Alle tickets',
     'button.open_tickets'       => 'Open tickets',
     'button.closed_tickets'     => 'Gesloten tickets',
