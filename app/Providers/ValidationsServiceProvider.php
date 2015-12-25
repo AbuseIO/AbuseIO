@@ -2,6 +2,7 @@
 
 use Validator;
 use Illuminate\Support\ServiceProvider;
+use Lang;
 
 class ValidationsServiceProvider extends ServiceProvider
 {
@@ -73,6 +74,131 @@ class ValidationsServiceProvider extends ServiceProvider
                 }
 
                 return true;
+
+            }
+        );
+
+        /*
+         * Add validation for abuse class
+         */
+        Validator::extend(
+            'abuseclass',
+            function ($attribute, $value, $parameters, $validator) {
+
+                $classes = Lang::get('classifications');
+                if (!is_array($classes)) {
+                    return false;
+                }
+
+                foreach ($classes as $classID => $class) {
+                    if ($class['name'] == $value) {
+                        return true;
+                    }
+                }
+
+                return false;
+
+            }
+        );
+
+        /*
+         * Add validation for abuse type
+         */
+        Validator::extend(
+            'abusetype',
+            function ($attribute, $value, $parameters, $validator) {
+
+                $types = Lang::get('types.type');
+                if (!is_array($types)) {
+                    return false;
+                }
+
+                foreach ($types as $typeID => $type) {
+                    if ($type['name'] == $value) {
+                        return true;
+                    }
+                }
+
+                return false;
+
+            }
+        );
+
+        /*
+         * Add validation for string or boolean
+         */
+        Validator::extend(
+            'stringorboolean',
+            function ($attribute, $value, $parameters, $validator) {
+
+                foreach (['string', 'boolean'] as $validation) {
+
+                    $validator = Validator::make(
+                        [ 'field' => $value ],
+                        [ 'field' => "required|{$validation}" ]
+                    );
+
+                    if (!$validator->fails()) {
+                        return true;
+                    }
+                }
+
+                return false;
+
+            }
+        );
+
+        /*
+         * Add validation for domain
+         */
+        Validator::extend(
+            'domain',
+            function ($attribute, $value, $parameters, $validator) {
+
+                if (is_bool($value)) {
+                    return true;
+                }
+
+                if (!preg_match("/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i", $value)
+                    || !preg_match("/^.{1,253}$/", $value)
+                    || !preg_match("/^[^\.]{1,63}(\.[^\.]{1,63})*$/", $value)
+                ) {
+                    return false;
+                }
+
+                if (!filter_var(
+                        'http://' . $value,
+                        FILTER_VALIDATE_URL
+                    ) === false
+                ) {
+                    return true;
+                }
+
+                return true;
+
+            }
+        );
+
+        /*
+         * Add validation for URI
+         */
+        Validator::extend(
+            'uri',
+            function ($attribute, $value, $parameters, $validator) {
+
+                if (is_bool($value)) {
+                    return true;
+                }
+
+                if (!filter_var(
+                        'http://test.for.var.com' . $value,
+                        FILTER_VALIDATE_URL
+                    ) === false
+                ) {
+                    return true;
+                }
+
+                return false;
 
             }
         );

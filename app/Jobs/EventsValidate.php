@@ -32,102 +32,35 @@ class EventsValidate extends Job implements SelfHandling
 
         foreach ($this->events as $event) {
 
-
-            /*
-             * Common Laravel validations
-             */
             $validator = Validator::make(
                 [
-                    'source' => $event['source'],
-                    'ip' => $event['ip'],
-                    'domain' => $event['domain'],
-                    'uri' => $event['uri'],
-                    'class' => $event['class'],
-                    'type' => $event['type'],
-                    'timestamp' => $event['timestamp'],
-                    'information' => $event['information'],
+                    'source'        => $event['source'],
+                    'ip'            => $event['ip'],
+                    'domain'        => $event['domain'],
+                    'uri'           => $event['uri'],
+                    'class'         => $event['class'],
+                    'type'          => $event['type'],
+                    'timestamp'     => $event['timestamp'],
+                    'information'   => $event['information'],
                 ],
                 [
-                    'source' => 'required|string',
-                    'ip' => 'required|ip',
-                    /* TODO FIX THIS
-                     * temp fix because domain/uri can hold false if not set and required_unless:domain,false
-                     * does not seem to be working to skip domain validating string if false
-                     */
-                    //'domain' => 'sometimes|string',
-                    //'uri' => 'sometimes|string',
-                    'class' => 'required|string',
-                    'type' => 'required|string',
-                    'timestamp' => 'required|integer',
-                    'information' => 'required|json',
+                    'source'        => 'required|string',
+                    'ip'            => 'required|ip',
+                    'domain'        => 'required|stringorboolean|domain',
+                    'uri'           => 'required|stringorboolean|uri',
+                    'class'         => 'required|string|abuseclass',
+                    'type'          => 'required|string|abusetype',
+                    'timestamp'     => 'required|int|timestamp',
+                    'information'   => 'required|json',
                 ]
             );
 
             if ($validator->fails()) {
-                $messages = $validator->messages();
-
-                $message = '';
-                foreach ($messages->all() as $messagePart) {
-                    $message .= $messagePart;
-                }
-
-                return $this->failed($message);
-            }
-
-            /*
-             * Manual validations, the ones that laravel does not provide
-             * or require some manual tinkering
-             */
-
-            // check valid domain name
-            if ($event['domain'] !== false) {
-                if (!preg_match("/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i", $event['domain'])
-                    || !preg_match("/^.{1,253}$/", $event['domain'])
-                    || !preg_match("/^[^\.]{1,63}(\.[^\.]{1,63})*$/", $event['domain'])
-                ) {
-                    return $this->failed('Invalid domain name used:' . $event['domain']);
-                }
-            }
-
-            // check valid URI
-            if ($event['uri'] !== false) {
-                if (filter_var(
-                    'http://test.for.var.com' . $event['uri'],
-                    FILTER_VALIDATE_URL
-                ) === false ) {
-                    return $this->failed('Invalid URI used' . $event['uri']);
-                }
-            }
-
-            // check valid timestamp
-            if ($event['timestamp'] === false) {
-                return $this->failed('Invalid timestamp used');
-            }
-
-            // check valid Type
-            $validType = false;
-            foreach (Lang::get('types.type') as $typeID => $type) {
-                if ($type['name'] == $event['type']) {
-                    $validType = true;
-                }
-            }
-            if ($validType !== true) {
-                return $this->failed("Invalid type used: {$event['type']}");
-            }
-
-            // Check valid Class
-            $validClass = false;
-            foreach (Lang::get('classifications') as $classID => $class) {
-                if ($class['name'] == $event['class']) {
-                    $validClass = true;
-                    break;
-                }
-            }
-            if ($validClass !== true) {
-                return $this->failed("Invalid classification used: {$event['class']}");
+                return $this->failed(implode(' ', $validator->messages()->all()));
             }
 
         }
+
         return $this->success('');
     }
 }
