@@ -15,6 +15,18 @@ apt-get install php5 mysql-server php5-mysql beanstalkd apache2 apache2-utils po
 
 # Installation (as root)
 
+## Note on Queuing
+
+By default we use the beanstalk queue driver for performance, however you can choose to change the configuration to use
+either 'sync' or 'database' backends. These do not require any installation of third party software for Queuing.
+
+NOTE!: After installing beanstalk you are wise to change the /etc/default/beanstalk and uncomment the line:
+```
+BEANSTALKD_EXTRA="-b /var/lib/beanstalkd"
+```
+
+This will make your queue persistant so restarts/reboots/etc will not affect the queuing.
+
 ## Setup local resolving
 
 Some parsers produce high amounts of DNS queries, so your better off using a local resolve (e.g. bind)
