@@ -30,7 +30,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
      * Name of the beandstalk queue to be used
      * @var string
      */
-    public $queueName = 'emails';
+    public $queueName = 'abuseio_email_incoming';
 
     /**
      * Create a new EmailProcess instance

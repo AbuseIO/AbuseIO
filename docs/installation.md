@@ -90,14 +90,31 @@ chmod 775 abuseio/bootstrap/cache
 
 ## Setup supervisor:
 
-##### /etc/supervisor/conf.d/abuseio_queue_email.conf
+##### /etc/supervisor/conf.d/abuseio_email_incoming.conf
 ```
-[program:abuseio_queue_emails]
-command=php artisan queue:listen --timeout=300 --tries=1 --sleep=3 --memory=256 --delay=0 --queue=emails
+[program:abuseio_queue_email_incoming]
+command=php artisan queue:listen --timeout=300 --tries=1 --sleep=3 --memory=256 --delay=0 --queue=abuseio_email_incoming
 directory=/opt/abuseio
-stdout_logfile=/opt/abuseio/storage/logs/queue-emails.log
+stdout_logfile=/opt/abuseio/storage/logs/queue_email_incoming.log
 redirect_stderr=true
 ```
+##### /etc/supervisor/conf.d/abuseio_email_outgoing.conf
+```
+[program:abuseio_queue_email_incoming]
+command=php artisan queue:listen --timeout=300 --tries=1 --sleep=3 --memory=256 --delay=0 --queue=abuseio_email_outgoing
+directory=/opt/abuseio
+stdout_logfile=/opt/abuseio/storage/logs/queue_email_outgoing.log
+redirect_stderr=true
+```
+##### /etc/supervisor/conf.d/abuseio_collector.conf
+```
+[program:abuseio_queue_collector]
+command=php artisan queue:listen --timeout=300 --tries=1 --sleep=3 --memory=256 --delay=0 --queue=abuseio_collector
+directory=/opt/abuseio
+stdout_logfile=/opt/abuseio/storage/logs/queue_collector.log
+redirect_stderr=true
+```
+
 
 then:
 

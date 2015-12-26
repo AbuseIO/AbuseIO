@@ -56,6 +56,9 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Collector\ShowCommand',
         'AbuseIO\Console\Commands\Collector\RunCommand',
 
+        'AbuseIO\Console\Commands\Queue\ListCommand',
+        'AbuseIO\Console\Commands\Queue\ShowCommand',
+
     ];
 
     /**
