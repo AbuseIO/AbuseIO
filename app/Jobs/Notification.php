@@ -285,7 +285,7 @@ class Notification extends Job implements SelfHandling
                 // Conditions just for Domain contacts
                 if (!empty($ticket->domain_contact_reference) &&
                     $ticket->domain_contact_reference != 'UNDEF' &&
-                    $ticket->ip_contact_auto_notify == true &&
+                    $ticket->domain_contact_auto_notify == true &&
                     $ticket->domain_contact_reference != $ticket->ip_contact_reference
                 ) {
                     $selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
