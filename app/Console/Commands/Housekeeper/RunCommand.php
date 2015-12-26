@@ -45,6 +45,10 @@ class RunCommand extends Command
     public function handle()
     {
         // TODO: #AIO-22 Create housekeeping - Walk thru all collectors to gather information.
+        // TODO: Extra: Collectors should be kicked into a queue, but only if there isn't one running yet with the same name
+
+        // TODO: Add queue watchers, check weither queues are actually running (have watchers)
+        // TODO: perhaps using a testjob that we can stick into each queue we operate?
 
         /*
          * Walk thru all tickets to see which need closing
