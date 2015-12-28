@@ -5,6 +5,7 @@ namespace AbuseIO\Http\Controllers;
 use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\NoteFormRequest;
+use AbuseIO\Jobs\Notification;
 use AbuseIO\Models\Note;
 use Redirect;
 
@@ -39,6 +40,15 @@ class NotesController extends Controller
     public function store(NoteFormRequest $noteForm)
     {
         Note::create($noteForm->all());
+
+        /*
+         * send notication if a new note is added
+         */
+        if ($noteForm->hidden !== true){
+            $notification       = new Notification;
+            $notifications = $notification->buildList($noteForm->ticket_id, false, false);
+            $notification->walkList($notifications);
+        }
 
         return Redirect::route(
             'admin.tickets.show',

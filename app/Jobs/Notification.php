@@ -22,18 +22,6 @@ class Notification extends Job implements SelfHandling
     }
 
     /**
-     * Sends out a notification for a single ticket by building it into a array the normal send($notifications) can
-     * understand and returns the result. This could be called from the GUI ticket view for example
-     *
-     * @param  object $ticket
-     * @return boolean
-     */
-    public function sendTicket($ticket)
-    {
-
-    }
-
-    /**
      * Sends out notifications based on the configured notification modules.
      * Returns false on failed or havent done anything at all.
      *
@@ -136,7 +124,7 @@ class Notification extends Job implements SelfHandling
         return true;
     }
 
-    public function walkList()
+    public function walkList($notifications)
     {
 
         if (empty(config("main.external.notifications"))
@@ -153,8 +141,6 @@ class Notification extends Job implements SelfHandling
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
             "A notification run has been started"
         );
-
-        $notifications = $this->buildList();
 
         if (empty($notifications)) {
             Log::info(
@@ -194,16 +180,33 @@ class Notification extends Job implements SelfHandling
 
     /**
      * Create a list of tickets that need outgoing notifications.
-     * @return array
+     *
+     * @param integer $ticket
+     * @param string $reference
+     * @param boolean $force
+     * @return array $notificationList
      */
-    public function buildList()
+    public function buildList($ticket = false, $reference = false, $force = false)
     {
         /*
-         * Select a list of tickets that are not closed(2).
+         * Select a list of tickets that are not closed(2) by default or add ticket / reference
+         * conditions if options were passed along.
          */
         $selection = [ ];
 
-        $tickets = Ticket::where('status_id', '!=', '2')->get();
+        $search = Ticket::where('status_id', '!=', '2');
+
+        if ($ticket !== false) {
+            $search->where('id', '=', $ticket);
+        }
+
+        if ($reference !== false) {
+            $search->where('ip_contact_reference', '=', $reference)
+                ->orwhere('domain_contact_reference', '=', $reference);
+
+        }
+
+        $tickets = $search->get();
 
         $validator = Validator::make(
             [
@@ -247,50 +250,68 @@ class Notification extends Job implements SelfHandling
                  * Filter outgoing notifications and aggregate them by reference so we can send out a single
                  * notifications for multiple tickets if needed.
                  */
+                if ($force === false) {
+                    // Skip if type Info (1) and status Ignored (4)
+                    if ($ticket->type_id == '1' && $ticket->status_id == '4') {
+                        continue;
+                    }
 
-                // Skip if type Info (1) and status Ignored (4)
-                if ($ticket->type_id == '1' && $ticket->status_id == '4') {
-                    continue;
+                    // Skip if type Info (1) and last notification was send after info interval
+                    if ($ticket->last_notify_count != 0 &&
+                        $ticket->type_id == '1' &&
+                        $ticket->last_notify_timestamp >= $sendInfoAfter
+                    ) {
+                        continue;
+                    }
+
+                    // Skip if type Info (1) and last notification was send after abuse interval
+                    if ($ticket->last_notify_count != 0 &&
+                        $ticket->type_id != '1' &&
+                        $ticket->last_notify_timestamp >= $sendAbuseAfter
+                    ) {
+                        continue;
+                    }
+
+                    // Skip if the event received is older the minimal last seen
+                    if ($ticket->lastEvent[0]->timestamp <= $sendNotOlderThen) {
+                        continue;
+                    }
+
+                    // Conditions just for IP contacts
+                    if (!empty($ticket->ip_contact_reference) &&
+                        $ticket->ip_contact_reference != 'UNDEF' &&
+                        $ticket->ip_contact_auto_notify == true
+                    ) {
+                        $selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
+                    }
+
+                    // Conditions just for Domain contacts
+                    if (!empty($ticket->domain_contact_reference) &&
+                        $ticket->domain_contact_reference != 'UNDEF' &&
+                        $ticket->domain_contact_auto_notify == true &&
+                        $ticket->domain_contact_reference != $ticket->ip_contact_reference
+                    ) {
+                        $selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
+                    }
+                } else {
+                    /*
+                     * Notifications are forced, therefor we skip all the checks except empty/undef
+                     */
+                    // Conditions just for IP contacts
+                    if (!empty($ticket->ip_contact_reference) &&
+                        $ticket->ip_contact_reference != 'UNDEF'
+                    ) {
+                        $selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
+                    }
+
+                    // Conditions just for Domain contacts
+                    if (!empty($ticket->domain_contact_reference) &&
+                        $ticket->domain_contact_reference != 'UNDEF' &&
+                        $ticket->domain_contact_reference != $ticket->ip_contact_reference
+                    ) {
+                        $selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
+                    }
                 }
-
-                // Skip if type Info (1) and last notification was send after info interval
-                if ($ticket->last_notify_count != 0 &&
-                    $ticket->type_id == '1' &&
-                    $ticket->last_notify_timestamp >= $sendInfoAfter
-                ) {
-                    continue;
-                }
-
-                // Skip if type Info (1) and last notification was send after abuse interval
-                if ($ticket->last_notify_count != 0 &&
-                    $ticket->type_id != '1' &&
-                    $ticket->last_notify_timestamp >= $sendAbuseAfter
-                ) {
-                    continue;
-                }
-
-                // Skip if the event received is older the minimal last seen
-                if ($ticket->lastEvent[0]->timestamp <= $sendNotOlderThen) {
-                    continue;
-                }
-
-                // Conditions just for IP contacts
-                if (!empty($ticket->ip_contact_reference) &&
-                    $ticket->ip_contact_reference != 'UNDEF' &&
-                    $ticket->ip_contact_auto_notify == true
-                ) {
-                    $selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
-                }
-
-                // Conditions just for Domain contacts
-                if (!empty($ticket->domain_contact_reference) &&
-                    $ticket->domain_contact_reference != 'UNDEF' &&
-                    $ticket->domain_contact_auto_notify == true &&
-                    $ticket->domain_contact_reference != $ticket->ip_contact_reference
-                ) {
-                    $selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
-                }
-
             }
         }
 

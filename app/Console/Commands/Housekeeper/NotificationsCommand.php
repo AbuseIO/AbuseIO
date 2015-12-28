@@ -14,8 +14,11 @@ class NotificationsCommand extends Command
      * @var string
      */
     protected $signature = 'housekeeper:notifications
-                            {--list : Shows a list of pending notifications }
-                            {--send : Sends out pending notifications manually }
+                            {--l|list : Shows a list of pending notifications }
+                            {--s|send : Sends out pending notifications manually }
+                            {--t|ticket= : Sends out notification for a specific ticket }
+                            {--r|reference= : Sends out notification for a specific contact reference }
+                            {--f|force : Sends out notification, regardless if there pending notifications }
     ';
 
     /**
@@ -82,10 +85,24 @@ class NotificationsCommand extends Command
             return false;
         }
 
-        $notification = new Notification;
+        $notification       = new Notification;
+        $searchTicket       = false;
+        $searchReference    = false;
+        $searchForce        = false;
+
+        if ($this->option('ticket') !== null) {
+            $searchTicket = $this->option('ticket');
+        }
+        if ($this->option('reference') !== null) {
+            $searchReference = $this->option('reference');
+        }
+        if ($this->option('force') !== null) {
+            $searchForce = $this->option('force');
+        }
+
+        $notifications = $notification->buildList($searchTicket, $searchReference, $searchForce);
 
         if (!empty($this->option('list')) && $this->option('list') === true) {
-            $notifications = $notification->buildList();
 
             if (empty($notifications)) {
                 return true;
@@ -117,7 +134,7 @@ class NotificationsCommand extends Command
 
         if (!empty($this->option('send')) && $this->option('send') === true) {
 
-            $errors = $notification->walkList();
+            $errors = $notification->walkList($notifications);
 
             if ($errors !== true) {
                 $this->error("Errors ({$errors}) while sending notifications. Details logged under JOB " . getmypid());
