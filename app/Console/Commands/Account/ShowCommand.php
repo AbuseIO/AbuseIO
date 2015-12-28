@@ -2,102 +2,64 @@
 
 namespace AbuseIO\Console\Commands\Account;
 
-use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\AbstractShowCommand2;
 use AbuseIO\Models\Account;
-use Carbon;
+use Symfony\Component\Console\Input\InputArgument;
 
-class ShowCommand extends Command
+class ShowCommand extends AbstractShowCommand2
 {
-
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'account:show
-                            {--id= : Use the id to show details }
-                            {--name= : Use the name show details }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows the details of an account';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    protected function transformObjectToTableBody($model)
     {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return boolean
-     */
-    public function handle()
-    {
-        if (empty($this->option('id')) && empty($this->option('name'))) {
-            $this->warn('Pass a name or id via the filter argument or try --help');
-            return false;
-        }
-        /* @var $account  \AbuseIO\Models\Account|null */
-        $account = $this->findByNameOrId($this->option("name"), $this->option("id"));
-
-        if (null !== $account) {
-            $this->table([], $this->transformNetblockToTableBody($account));
-        } else {
-            $this->warn("No matching accounts where found.");
-        }
-        return true;
-    }
-
-    /**
-     * @param Account $account
-     * @return array
-     */
-    private function transformNetblockToTableBody(Account $account)
-    {
-        return  [
-            ["Id", $account->id],
-            ["Name", $account->name],
-            ["Brand", $account->brand->name],
-            ["Description", $account->description]
+        return [
+            ["Id", $model->id],
+            ["Name", $model->name],
+            ["Brand", $model->brand->name],
+            ["Description", $model->description],
         ];
     }
-
     /**
-     * @param $name
-     * @param $id
-     * @return Account|null
+     * {@inherit docs}
      */
-    private function findByNameOrId($name, $id)
+    protected function getAsNoun()
     {
-        if ($name) {
-            return $this->findByName($name);
-        }
-        return $this->findById($id);
-    }
-
-
-    /**
-     * @param $id
-     * @return Account|null
-     */
-    private function findById($id)
-    {
-        return Account::find($id);
+        return "account";
     }
 
     /**
-     * @param $name
-     * @return Account|null
+     * {@inherit docs}
      */
-    private function findByName($name)
+    protected function getAllowedArguments()
     {
-        return Account::where("name", "like", "%".$name."%")->first();
+        return ["id", "name"];
+    }
+
+    /**
+     * {@inherit docs}
+     */
+    protected function getFields()
+    {
+        return ["id", "name", "description","brand"];
+    }
+
+    /**
+     * {@inherit docs}
+     */
+    protected function getCollectionWithArguments()
+    {
+        return Account::where("name", "like", "%".$this->argument("account")."%")
+            ->orWhere("id", $this->argument("account"));
+    }
+
+    /**
+     * {@inherit docs}
+     */
+    protected function defineInput()
+    {
+        return [
+            new InputArgument(
+                'account',
+                InputArgument::REQUIRED,
+                'Use the id or name for a account to show it.')
+        ];
     }
 }

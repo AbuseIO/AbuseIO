@@ -33,13 +33,15 @@ abstract class AbstractShowCommand2 extends Command
     {
         $object = $this
             ->getCollectionWithArguments()
-            ->first($this->getFields());
+            ->first();
 
         if (!is_object($object)) {
             $this->error(
                 sprintf("No matching %s was found.", $this->getAsNoun())
             );
         } else {
+            //dd($this->transformObjectToTableBody($object));
+
             $this->table(
                 [],
                 $this->transformObjectToTableBody($object)
@@ -98,10 +100,10 @@ abstract class AbstractShowCommand2 extends Command
     abstract protected function defineInput();
 
     /**
-     * @param Model $queryResult
+     * @param $model
      * @return array
      */
-    protected function transformObjectToTableBody(Model $model)
+    protected function transformObjectToTableBody($model)
     {
         $result = [];
         foreach ($model->getAttributes() as $key => $value) {

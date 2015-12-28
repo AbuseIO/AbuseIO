@@ -10,7 +10,7 @@ class ShowCommandTest extends TestCase{
     public function testWithValidIdFilter()
     {
         $exitCode = Artisan::call('account:show', [
-            "--id" => "1"
+            "account" => "1"
         ]);
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
@@ -22,7 +22,7 @@ class ShowCommandTest extends TestCase{
     public function testWithValidNameFilter()
     {
         $exitCode = Artisan::call('account:show', [
-            "--name" => "Account 2"
+            "account" => "Account 2"
         ]);
         $this->assertEquals($exitCode, 0);
         $this->assertContains("Account",Artisan::output());
@@ -31,11 +31,11 @@ class ShowCommandTest extends TestCase{
     public function testWithInvalidFilter()
     {
         $exitCode = Artisan::call('account:show', [
-            "--id" => "xxx"
+            "account" => "xxx"
         ]);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No matching accounts where found.", Artisan::output());
+        $this->assertContains("No matching account was found.", Artisan::output());
     }
 
 
