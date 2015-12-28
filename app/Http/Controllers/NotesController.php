@@ -44,9 +44,9 @@ class NotesController extends Controller
         /*
          * send notication if a new note is added
          */
-        if ($noteForm->hidden !== true){
-            $notification       = new Notification;
-            $notifications = $notification->buildList($noteForm->ticket_id, false, false);
+        if ($noteForm->hidden != true){
+            $notification = new Notification;
+            $notifications = $notification->buildList($noteForm->ticket_id, false, true);
             $notification->walkList($notifications);
         }
 

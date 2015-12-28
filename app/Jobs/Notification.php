@@ -241,7 +241,8 @@ class Notification extends Job implements SelfHandling
              * or if this is the first notification.
              */
             if ($ticket->last_notify_count == $ticket->events->count() &&
-                $ticket->last_notify_count != 0
+                $ticket->last_notify_count != 0 &&
+                $force !== true
             ) {
                 continue;
 
@@ -250,7 +251,7 @@ class Notification extends Job implements SelfHandling
                  * Filter outgoing notifications and aggregate them by reference so we can send out a single
                  * notifications for multiple tickets if needed.
                  */
-                if ($force === false) {
+                if ($force !== true) {
                     // Skip if type Info (1) and status Ignored (4)
                     if ($ticket->type_id == '1' && $ticket->status_id == '4') {
                         continue;
