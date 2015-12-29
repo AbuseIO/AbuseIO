@@ -4,7 +4,6 @@ namespace AbuseIO\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 use AbuseIO\Notification\Factory as NotificationFactory;
-use ReflectionMethod;
 use AbuseIO\Models\Ticket;
 use Validator;
 use Log;
@@ -39,11 +38,7 @@ class Notification extends Job implements SelfHandling
                 $notification = notificationFactory::create($module);
 
                 if (!$notification) {
-                    $this->error(
-                        "The requested collector {$module} could not be started check logs for PID:"
-                        . getmypid()
-                    );
-                    return false;
+                    return true;
                 }
 
                 $notificationResult = $notification->send($notifications);
@@ -67,7 +62,7 @@ class Notification extends Job implements SelfHandling
         } else {
             Log::debug(
                 '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                "No notification methods are configured, no sense into calling unexisting methods"
+                "No notification methods are installed, skipping notifications"
             );
 
             return false;
