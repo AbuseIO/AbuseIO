@@ -3,6 +3,7 @@
 namespace AbuseIO\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
+use AbuseIO\Notification\Factory as NotificationFactory;
 use ReflectionMethod;
 use AbuseIO\Models\Ticket;
 use Validator;
@@ -30,41 +31,38 @@ class Notification extends Job implements SelfHandling
      */
     public function send($notifications)
     {
-        /*
-         * If notifications are not enabled, silently 'die' here
-         */
-        if (config('main.notifications.enabled') !== true) {
-            return true;
-        }
 
-        /*
-         * First check if all the notification methods are available. If not stop directly, else we would be marking
-         * all the tickets notified while one of the methods wasn't used. So only update tickets if all the methods
-         * actually worked
-         */
-        if (!empty(config("main.external.notifications"))
-            && is_array(config("main.external.notifications"))
+        if (!empty(config("notifications"))
+            && is_array(config("notifications"))
         ) {
-            foreach (config("main.external.notifications") as $notificationMethod) {
+            foreach (config("notifications") as $module => $config) {
+                $notification = notificationFactory::create($module);
 
-                $class = '\AbuseIO\Notification\\' . $notificationMethod['class'];
-                $method = $notificationMethod['method'];
-
-                if (!class_exists($class)) {
-                    Log::error(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        "Notifications did not start because the defined class {$class} is missing"
+                if (!$notification) {
+                    $this->error(
+                        "The requested collector {$module} could not be started check logs for PID:"
+                        . getmypid()
                     );
                     return false;
                 }
 
-                if (!method_exists($class, $method)) {
+                $notificationResult = $notification->send($notifications);
+
+                if ($notificationResult['errorStatus']) {
                     Log::error(
                         '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        "Notifications did not start because the defined method {$method} in class {$class} is missing"
+                        "Notifications with {$module} did not succeed"
                     );
+
                     return false;
+
+                } else {
+                    Log::debug(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        "Notifications with {$module} was successfull for contact reference: " . key($notifications)
+                    );
                 }
+
             }
         } else {
             Log::debug(
@@ -73,38 +71,6 @@ class Notification extends Job implements SelfHandling
             );
 
             return false;
-        }
-
-        /*
-         * Now that we have checked we can actually send out notifications, lets do so
-         */
-        if (!empty(config("main.external.notifications"))
-            && is_array(config("main.external.notifications"))
-        ) {
-            foreach (config("main.external.notifications") as $notificationMethod) {
-
-                $class = '\AbuseIO\Notification\\' . $notificationMethod['class'];
-                $method = $notificationMethod['method'];
-
-                $reflectionMethod = new ReflectionMethod($class, $method);
-                $notificationResult = $reflectionMethod->invoke(new $class, $notifications);
-
-                if ($notificationResult !== true) {
-                    Log::error(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        "Notifications with {$class} did not succeed"
-                    );
-
-                    return false;
-
-                } else {
-                    Log::debug(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        "Notifications with {$class} was successfull for contact reference: " . key($notifications)
-                    );
-                }
-
-            }
         }
 
         /*
@@ -127,8 +93,8 @@ class Notification extends Job implements SelfHandling
     public function walkList($notifications)
     {
 
-        if (empty(config("main.external.notifications"))
-            && !is_array(config("main.external.notifications"))
+        if (empty(config("notifications"))
+            && !is_array(config("notifications"))
         ) {
             Log::debug(
                 '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
@@ -156,7 +122,7 @@ class Notification extends Job implements SelfHandling
         foreach ($notifications as $reference => $referenceData) {
             $result = $this->send([$reference => $referenceData]);
 
-            if (!$result) {
+            if ($result !== true) {
                 $errors++;
             } else {
                 $counter++;
@@ -166,7 +132,7 @@ class Notification extends Job implements SelfHandling
         if ($errors !== 0) {
             Log::debug(
                 '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                "Failed sending out {$counter} ticket notifications. Encountered {$errors} errors."
+                "Failed sending out notifications. Encountered {$errors} errors."
             );
             return false;
         }

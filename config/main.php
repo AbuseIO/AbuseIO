@@ -64,18 +64,6 @@ return [
                 'method'                    => 'getContactByDomain'
             ],
         ],
-        'notifications' => [
-            'email' => [
-                'class'                     => 'Mail',
-                'method'                    => 'send',
-            ],
-            /*
-            'rpc' => [
-                'class'                     => 'Rpc',
-                'method'                    => 'send',
-            ],
-            */
-        ],
     ],
 
 ];
