@@ -7,11 +7,20 @@ use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Note;
 use Input;
 
+/**
+ * Controller handling the ASH interface to contacts
+ *
+ * Class AshController
+ * @package AbuseIO\Http\Controllers
+ */
 class AshController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @return Response
+     *
+     * @param integer $ticketID
+     * @param string $token
+     * @return \Illuminate\Http\Response
      */
     public function index($ticketID, $token)
     {
@@ -37,6 +46,13 @@ class AshController extends Controller
 
     }
 
+    /**
+     * Method to add a note to a ticket
+     *
+     * @param integer $ticketID
+     * @param string $token
+     * @return \Illuminate\Http\Response
+     */
     public function addNote($ticketID, $token)
     {
         $brand = false;
@@ -55,7 +71,7 @@ class AshController extends Controller
         }
 
         if (empty($brand) || empty($submittor)) {
-            //abort(500);
+            abort(500);
         }
 
         $text = Input::get('text');

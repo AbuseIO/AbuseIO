@@ -7,11 +7,16 @@ use Validator;
 use Session;
 use URL;
 
+/**
+ * Class LocaleController
+ * @package AbuseIO\Http\Controllers
+ */
 class LocaleController extends Controller
 {
     /**
      * Change the locale
      *
+     * @param string $locale default 'en'
      * @return \Illuminate\Http\Response
      */
     public function setLocale($locale = 'en')

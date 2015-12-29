@@ -8,12 +8,18 @@ use AbuseIO\Models\Account;
 use AbuseIO\Models\User;
 use yajra\Datatables\Datatables;
 use Redirect;
-use Input;
 use Form;
 
+/**
+ * Class UsersController
+ * @package AbuseIO\Http\Controllers
+ */
 class UsersController extends Controller
 {
 
+    /**
+     * UsersController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -101,7 +107,7 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UserFormRequest $user
+     * @param UserFormRequest $userForm
      * @return \Illuminate\Http\Response
      */
     public function store(UserFormRequest $userForm)
@@ -148,7 +154,7 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserFormRequest $request
+     * @param  UserFormRequest $userForm
      * @param  User            $user
      * @return \Illuminate\Http\Response
      */

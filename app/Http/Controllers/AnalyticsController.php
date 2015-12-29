@@ -4,12 +4,17 @@ namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests;
 use AbuseIO\Models\Ticket;
-use Illuminate\Http\Request;
 use Lang;
 
+/**
+ * Class AnalyticsController
+ * @package AbuseIO\Http\Controllers
+ */
 class AnalyticsController extends Controller
 {
-
+    /**
+     * AnalyticsController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -18,14 +23,13 @@ class AnalyticsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function index()
     {
         $classCounts = [ ];
 
-        foreach (Lang::get('classifications') as $classID => $classInfo) {
+        foreach ((array)Lang::get('classifications') as $classID => $classInfo) {
             $classTotal = new \stdClass();
 
             $tickets = Ticket::where('class_id', $classID);

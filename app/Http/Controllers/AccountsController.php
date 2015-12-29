@@ -6,12 +6,18 @@ use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\AccountFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
-use yajra\Datatables\Datatables;
 use Redirect;
+use yajra\Datatables\Datatables;
 
+/**
+ * Class AccountsController
+ * @package AbuseIO\Http\Controllers
+ */
 class AccountsController extends Controller
 {
-
+    /**
+     * AccountsController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -116,7 +122,7 @@ class AccountsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  AccountFormRequest $accountForm
      * @return \Illuminate\Http\Response
      */
     public function store(AccountFormRequest $accountForm)
@@ -130,7 +136,7 @@ class AccountsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Account $account
      * @return \Illuminate\Http\Response
      */
     public function show(Account $account)
@@ -146,7 +152,7 @@ class AccountsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Account $account
      * @return \Illuminate\Http\Response
      */
     public function edit(Account $account)
@@ -169,7 +175,7 @@ class AccountsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  AccountFormRequest $request FormRequest
+     * @param  AccountFormRequest $accountForm FormRequest
      * @param  Account            $account Account
      * @return \Illuminate\Http\Response
      */
@@ -231,8 +237,8 @@ class AccountsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Account $account
+     * @return \\Illuminate\Http\RedirectResponse
      */
     public function destroy(Account $account)
     {
@@ -250,7 +256,7 @@ class AccountsController extends Controller
         }
 
         $account->delete();
-        // todo: delete related users/brands as well
+        // TODO: delete related users/brands as well
 
         return Redirect::route('admin.accounts.index')
             ->with('message', 'Account and it\'s related users and brands have been deleted.');

@@ -32,7 +32,7 @@ class Brand extends Model
         'id'
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\Brand $brand
@@ -50,7 +50,7 @@ class Brand extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Brand $brand

@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\NetblockFormRequest;
 use AbuseIO\Models\Netblock;
@@ -11,9 +10,16 @@ use yajra\Datatables\Datatables;
 use Redirect;
 use Form;
 
+/**
+ * Class NetblocksController
+ * @package AbuseIO\Http\Controllers
+ */
 class NetblocksController extends Controller
 {
 
+    /**
+     * NetblocksController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -63,7 +69,7 @@ class NetblocksController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -74,7 +80,7 @@ class NetblocksController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -89,7 +95,8 @@ class NetblocksController extends Controller
     /**
      * Export listing to CSV format.
      *
-     * @return Response
+     * @param  string $format
+     * @return \Illuminate\Http\Response
      */
     public function export($format)
     {
@@ -128,7 +135,8 @@ class NetblocksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @param NetblockFormRequest $netblockForm
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(NetblockFormRequest $netblockForm)
     {
@@ -142,8 +150,7 @@ class NetblocksController extends Controller
      * Display the specified resource.
      *
      * @param Netblock $netblock
-     * @return Response
-     * @internal param int $id
+     * @return \Illuminate\Http\Response
      */
     public function show(Netblock $netblock)
     {
@@ -156,8 +163,7 @@ class NetblocksController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Netblock $netblock
-     * @return Response
-     * @internal param int $id
+     * @return \Illuminate\Http\Response
      */
     public function edit(Netblock $netblock)
     {
@@ -173,8 +179,9 @@ class NetblocksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  NetblockFormRequest $netblockForm
+     * @param Netblock $netblock
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(NetblockFormRequest $netblockForm, Netblock $netblock)
     {
@@ -187,8 +194,8 @@ class NetblocksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param Netblock $netblock
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Netblock $netblock)
     {

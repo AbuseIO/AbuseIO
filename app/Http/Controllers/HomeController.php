@@ -4,12 +4,16 @@ namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests;
 
+/**
+ * Class HomeController
+ * @package AbuseIO\Http\Controllers
+ */
 class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {

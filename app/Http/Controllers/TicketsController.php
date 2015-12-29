@@ -2,8 +2,6 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\TicketsFormRequest;
 use yajra\Datatables\Datatables;
@@ -11,9 +9,16 @@ use AbuseIO\Models\Ticket;
 use Redirect;
 use DB;
 
+/**
+ * Class TicketsController
+ * @package AbuseIO\Http\Controllers
+ */
 class TicketsController extends Controller
 {
 
+    /**
+     * TicketsController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -33,14 +38,20 @@ class TicketsController extends Controller
             DB::raw("count(distinct notes.id) as notes_count")
         )
             ->leftJoin('events', 'events.ticket_id', '=', 'tickets.id')
-            ->leftJoin('notes', function ($join) {
+            ->leftJoin(
+                'notes',
+                function ($join) {
                 // We need a LEFT JOIN .. ON .. AND ..).
                 // This doesn't exist within Illuminate's JoinClause class
                 // Sp we use some nesting foo
-                $join->on('notes.ticket_id', '=', 'tickets.id')->nest(function ($join) {
-                    $join->on('notes.viewed', '=', DB::raw("'false'"));
-                });
-            })
+                $join->on('notes.ticket_id', '=', 'tickets.id')
+                    ->nest(
+                        function ($join) {
+                            $join->on('notes.viewed', '=', DB::raw("'false'"));
+                        }
+                    );
+                }
+            )
             ->groupBy('tickets.id');
 
         return Datatables::of($tickets)
@@ -79,7 +90,7 @@ class TicketsController extends Controller
     /**
      * Display all tickets
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -90,8 +101,7 @@ class TicketsController extends Controller
     /**
      * Show the form for creating a ticket
      *
-     * @param Request $request
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -104,7 +114,8 @@ class TicketsController extends Controller
     /**
      * Export tickets to CSV format.
      *
-     * @return Response
+     * @param string $format
+     * @return \Illuminate\Http\Response
      */
     public function export($format)
     {
@@ -151,7 +162,8 @@ class TicketsController extends Controller
     /**
      * Store a newly created ticket in storage.
      *
-     * @return Response
+     * @param TicketsFormRequest $ticket
+     * @return \Illuminate\Http\Response
      */
     public function store(TicketsFormRequest $ticket)
     {
@@ -161,10 +173,8 @@ class TicketsController extends Controller
     /**
      * Display the specified ticket.
      *
-     * @param Request $request
      * @param Ticket $ticket
-     * @return Response
-     * @internal param int $id
+     * @return \Illuminate\Http\Response
      */
     public function show(Ticket $ticket)
     {
@@ -176,8 +186,8 @@ class TicketsController extends Controller
     /**
      * Show the form for editing the specified ticket.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  Ticket $ticket
+     * @return \Illuminate\Http\Response
      */
     public function edit(Ticket $ticket)
     {
@@ -187,8 +197,8 @@ class TicketsController extends Controller
     /**
      * Update the specified ticket in storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  Ticket $ticket
+     * @return \Illuminate\Http\Response
      */
     public function update(Ticket $ticket)
     {
@@ -198,8 +208,8 @@ class TicketsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  Ticket $ticket
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Ticket $ticket)
     {
@@ -210,7 +220,7 @@ class TicketsController extends Controller
      * Updates the ticket to the given status.
      *
      * @param Ticket $ticket
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function status(Ticket $ticket)
     {
@@ -225,7 +235,7 @@ class TicketsController extends Controller
      * Send a notification for this ticket.
      *
      * @param Ticket $ticket
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function notify(Ticket $ticket)
     {
@@ -240,7 +250,7 @@ class TicketsController extends Controller
      * Updates the requested contact information.
      *
      * @param Ticket $ticket
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function updatecontact(Ticket $ticket)
     {

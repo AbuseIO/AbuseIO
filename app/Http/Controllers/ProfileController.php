@@ -7,9 +7,16 @@ use AbuseIO\Http\Requests\ProfileFormRequest;
 use Redirect;
 use Hash;
 
+/**
+ * Class ProfileController
+ * @package AbuseIO\Http\Controllers
+ */
 class ProfileController extends Controller
 {
 
+    /**
+     * ProfileController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -29,7 +36,7 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ProfileFormRequest $profileForm
      * @return \Illuminate\Http\Response
      */
     public function update(ProfileFormRequest $profileForm)

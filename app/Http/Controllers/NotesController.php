@@ -2,20 +2,31 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\NoteFormRequest;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Models\Note;
 use Redirect;
 
+/**
+ * Class NotesController
+ * @package AbuseIO\Http\Controllers
+ */
 class NotesController extends Controller
 {
 
     /**
+     * NetblocksController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -25,7 +36,7 @@ class NotesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -35,7 +46,8 @@ class NotesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @param NoteFormRequest $noteForm
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(NoteFormRequest $noteForm)
     {
@@ -44,7 +56,7 @@ class NotesController extends Controller
         /*
          * send notication if a new note is added
          */
-        if ($noteForm->hidden != true){
+        if ($noteForm->hidden != true) {
             $notification = new Notification;
             $notifications = $notification->buildList($noteForm->ticket_id, false, true);
             $notification->walkList($notifications);
@@ -59,7 +71,7 @@ class NotesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show()
     {
@@ -69,7 +81,8 @@ class NotesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @return Response
+     * @param Note $note
+     * @return \Illuminate\Http\Response
      */
     public function edit(Note $note)
     {
@@ -79,9 +92,8 @@ class NotesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Domain $domain
-     * @return Response
-     * @internal param int $id
+     * @param NoteFormRequest $noteForm
+     * @return \Illuminate\Http\Response
      */
     public function update(NoteFormRequest $noteForm)
     {
@@ -107,8 +119,8 @@ class NotesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  NoteFormRequest $noteForm
+     * @return \Illuminate\Http\Response
      */
     public function destroy(NoteFormRequest $noteForm)
     {

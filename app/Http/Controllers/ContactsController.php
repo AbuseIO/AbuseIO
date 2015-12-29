@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ContactFormRequest;
 use AbuseIO\Models\Contact;
@@ -10,9 +9,16 @@ use yajra\Datatables\Datatables;
 use Redirect;
 use Form;
 
+/**
+ * Class ContactsController
+ * @package AbuseIO\Http\Controllers
+ */
 class ContactsController extends Controller
 {
 
+    /**
+     * ContactsController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -76,7 +82,7 @@ class ContactsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -87,7 +93,7 @@ class ContactsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -98,7 +104,8 @@ class ContactsController extends Controller
     /**
      * Export listing to CSV format.
      *
-     * @return Response
+     * @param string $format
+     * @return \Illuminate\Http\Response
      */
     public function export($format)
     {
@@ -159,8 +166,7 @@ class ContactsController extends Controller
      * Display the specified resource.
      *
      * @param Contact $contact
-     * @internal param int $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show(Contact $contact)
     {
@@ -174,7 +180,6 @@ class ContactsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Contact $contact
-     * @internal param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Contact $contact)
@@ -189,7 +194,6 @@ class ContactsController extends Controller
      *
      * @param ContactFormRequest $contactForm FormRequest
      * @param Contact $contact Contact
-     * @internal param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(ContactFormRequest $contactForm, Contact $contact)
@@ -204,7 +208,6 @@ class ContactsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Contact $contact Contact
-     * @internal param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Contact $contact)

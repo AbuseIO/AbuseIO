@@ -2,8 +2,6 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\DomainFormRequest;
 use AbuseIO\Models\Domain;
@@ -12,9 +10,16 @@ use yajra\Datatables\Datatables;
 use Redirect;
 use Form;
 
+/**
+ * Class DomainsController
+ * @package AbuseIO\Http\Controllers
+ */
 class DomainsController extends Controller
 {
 
+    /**
+     * DomainsController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -64,7 +69,7 @@ class DomainsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -75,7 +80,7 @@ class DomainsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -90,7 +95,8 @@ class DomainsController extends Controller
     /**
      * Export listing to CSV format.
      *
-     * @return Response
+     * @param  string $format
+     * @return \Illuminate\Http\Response
      */
     public function export($format)
     {
@@ -127,7 +133,8 @@ class DomainsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @param DomainFormRequest $domainForm
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(DomainFormRequest $domainForm)
     {
@@ -140,10 +147,8 @@ class DomainsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Request $request
      * @param Domain $domain
-     * @return Response
-     * @internal param int $id
+     * @return \Illuminate\Http\Response
      */
     public function show(Domain $domain)
     {
@@ -156,8 +161,7 @@ class DomainsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Domain $domain
-     * @return Response
-     * @internal param int $id
+     * @return \Illuminate\Http\Response
      */
     public function edit(Domain $domain)
     {
@@ -173,9 +177,9 @@ class DomainsController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param DomainFormRequest $domainForm
      * @param Domain $domain
-     * @return Response
-     * @internal param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(DomainFormRequest $domainForm, Domain $domain)
     {
@@ -188,8 +192,8 @@ class DomainsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     * @return Response
+     * @param Domain $domain
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Domain $domain)
     {

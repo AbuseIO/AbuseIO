@@ -8,15 +8,18 @@ use DB;
 use Exception;
 use AbuseIO\Http\Requests;
 use AbuseIO\Models\Brand;
-use Illuminate\Http\Response;
 use yajra\Datatables\Datatables;
 use Redirect;
 
+/**
+ * Class BrandsController
+ * @package AbuseIO\Http\Controllers
+ */
 class BrandsController extends Controller
 {
-    /*
-     * Call the parent constructor to generate a base ACL
-     *
+
+    /**
+     * BrandsController constructor.
      */
     public function __construct()
     {
@@ -26,7 +29,7 @@ class BrandsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -101,7 +104,7 @@ class BrandsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -113,8 +116,8 @@ class BrandsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param BrandFormRequest $request
-     * @return mixed
+     * @param BrandFormRequest $brandForm
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(BrandFormRequest $brandForm)
     {
@@ -177,8 +180,8 @@ class BrandsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  Brand $brand
+     * @return \Illuminate\Http\Response
      */
     public function show(Brand $brand)
     {
@@ -190,8 +193,8 @@ class BrandsController extends Controller
     /**
      * return the logo as an image
      *
-     * @param int $id
-     * @return Response
+     * @param integer $id
+     * @return \Illuminate\Http\Response
      */
     public function logo($id)
     {
@@ -213,8 +216,8 @@ class BrandsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  Brand $brand
+     * @return \Illuminate\Http\Response
      */
     public function edit(Brand $brand)
     {
@@ -239,9 +242,9 @@ class BrandsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param BrandFormRequest $request
+     * @param BrandFormRequest $brandForm
      * @param Brand $brand
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(BrandFormRequest $brandForm, Brand $brand)
     {
@@ -276,8 +279,8 @@ class BrandsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  integer  $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
