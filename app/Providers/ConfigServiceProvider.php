@@ -3,6 +3,7 @@
 use Illuminate\Support\ServiceProvider;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use AbuseIO\Collectors\Factory as CollectorFactory;
+use AbuseIO\Notification\Factory as NotificationFactory;
 use Config;
 use File;
 
@@ -48,11 +49,16 @@ class ConfigServiceProvider extends ServiceProvider
         // Publish config files of all installed Collectors the same way
         $collectorList = CollectorFactory::getCollectors();
         $this->buildConfig($collectorList, 'collector');
+
+        // Publish config files of all installed Collectors the same way
+        $notificationList = NotificationFactory::getNotification();
+        $this->buildConfig($notificationList, 'notification');
     }
 
     private function buildConfig($list, $type)
     {
         foreach ($list as $handler) {
+
             $defaultConfig = [];
             $overrideConfig = [];
             $configKey = "{$type}s.{$handler}";
@@ -60,6 +66,7 @@ class ConfigServiceProvider extends ServiceProvider
             $basePath = base_path() . "/vendor/abuseio/{$type}-" . strtolower($handler) . '/config';
 
             $defaultConfigFile = $basePath . "/{$handler}.php";
+
             if (File::exists($defaultConfigFile)) {
                 $defaultConfig = include($defaultConfigFile);
             }
