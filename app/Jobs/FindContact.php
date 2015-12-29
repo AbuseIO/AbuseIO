@@ -10,10 +10,16 @@ use Validator;
 use ICF;
 use Log;
 
+/**
+ * This FindContact class provide lookup methods to find contacts
+ *
+ * Class FindContact
+ */
 class FindContact extends Job
 {
     /**
      * Return undefined contact
+     *
      * @return object
      */
     public static function undefined()
@@ -33,6 +39,7 @@ class FindContact extends Job
 
     /**
      * Validates an contact object before passing it along. On error it will return UNDEF
+     *
      * @param  object $contact
      * @return boolean $valid
      */
@@ -56,6 +63,9 @@ class FindContact extends Job
 
     /**
      * Return the class and methdod to do external calls
+     *
+     * @param string $section
+     * @param string $search
      * @return object
      */
     public static function getExternalContact($section, $search)
@@ -81,6 +91,7 @@ class FindContact extends Job
 
     /**
      * Return contact by Netblock
+     *
      * @param  string $ip
      * @return object
      */
@@ -121,6 +132,7 @@ class FindContact extends Job
 
     /**
      * Return contact by Domain
+     *
      * @param  string $domainName
      * @return object
      */
@@ -157,6 +169,7 @@ class FindContact extends Job
 
     /**
      * Return contact by Code
+     *
      * @param  string $reference
      * @return object
      */

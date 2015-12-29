@@ -2,41 +2,41 @@
 
 namespace AbuseIO\Jobs;
 
-use AbuseIO\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Event;
-use AbuseIO\Jobs\FindContact;
-use AbuseIO\Models\Evidence;
 use Lang;
 use Log;
 
+/**
+ * This EventsSave class handles the actual writing of events to the database
+ *
+ * Class EventsSave
+  */
 class EventsSave extends Job implements SelfHandling
 {
-    public $events;
-    public $evidenceID;
 
     /**
      * Create a new command instance.
-     * @return void
+     *
      */
-    public function __construct($events, $evidenceID)
+    public function __construct()
     {
-        $this->events       = $events;
-        $this->evidenceID   = $evidenceID;
+        //
     }
 
     /**
      * Execute the command.
+     *
      * @return array
      */
-    public function handle()
+    public function save($events, $evidenceID)
     {
         $ticketCount = 0;
         $eventCount = 0;
         $eventsIgnored = 0;
 
-        foreach ($this->events as $event) {
+        foreach ($events as $event) {
             /* Here we will seek through all the events and look if there is an existing ticket. We will split them up
              * into two seperate arrays: $eventsNew and $events$known. We can save all the known events in the DB with
              * a single event saving loads of queries
@@ -82,12 +82,14 @@ class EventsSave extends Job implements SelfHandling
             }
 
             // Lookup the ip contact and if needed the domain contact too
-            $ipContact = FindContact::byIP($event['ip']);
+            $findContact = new FindContact();
+
+            $ipContact = $findContact->byIP($event['ip']);
 
             if ($event['domain'] != '') {
-                $domainContact = FindContact::byDomain($event['domain']);
+                $domainContact = $findContact->byDomain($event['domain']);
             } else {
-                $domainContact = FindContact::undefined();
+                $domainContact = $findContact->undefined();
             }
 
             /*
@@ -158,7 +160,7 @@ class EventsSave extends Job implements SelfHandling
                 $newTicket->save();
 
                 $newEvent = new Event();
-                $newEvent->evidence_id = $this->evidenceID;
+                $newEvent->evidence_id = $evidenceID;
                 $newEvent->information = $event['information'];
                 $newEvent->source      = $event['source'];
                 $newEvent->ticket_id   = $newTicket->id;
@@ -187,7 +189,7 @@ class EventsSave extends Job implements SelfHandling
 
                     $newEvent = new Event();
 
-                    $newEvent->evidence_id  = $this->evidenceID;
+                    $newEvent->evidence_id  = $evidenceID;
                     $newEvent->information  = $event['information'];
                     $newEvent->source       = $event['source'];
                     $newEvent->ticket_id    = $ticket->id;

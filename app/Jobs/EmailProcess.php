@@ -10,32 +10,37 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Filesystem\Filesystem;
 use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
-use AbuseIO\Jobs\EventsValidate;
-use AbuseIO\Jobs\EventsSave;
 use Config;
 use Log;
 use Mail;
 
+/**
+ * This EmailProcess class handles incoming mail messages and transform them into events
+ *
+ * Class EmailProcess
+ */
 class EmailProcess extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
     /**
      * Filename of the email to be processed
+     *
      * @var string
      */
     public $filename;
 
     /**
      * Name of the beandstalk queue to be used
+     *
      * @var string
      */
     public $queueName = 'abuseio_email_incoming';
 
     /**
      * Create a new EmailProcess instance
+     *
      * @param string $filename
-     * @return void
      */
     public function __construct($filename)
     {
@@ -44,6 +49,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
     /**
      * Queue command into named tube.
+     *
      * @param  object $queue
      * @param  string $command
      * @return void
@@ -55,6 +61,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
     /**
      * Execute the command
+     *
      * @return void
      */
     public function handle()
@@ -171,8 +178,8 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
         if (count($parserResult['data']) !== 0) {
             // Call validator
-            $validator = new EventsValidate($parserResult['data']);
-            $validatorResult = $validator->handle();
+            $validator = new EventsValidate();
+            $validatorResult = $validator->check($parserResult['data']);
 
             if ($validatorResult['errorStatus'] === true) {
                 Log::error(
@@ -201,8 +208,8 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             /**
              * call saver
              **/
-            $saver = new EventsSave($parserResult['data'], $evidence->id);
-            $saverResult = $saver->handle();
+            $saver = new EventsSave();
+            $saverResult = $saver->save($parserResult['data'], $evidence->id);
 
             /**
              * We've hit a snag, so we are gracefully killing ourselves
@@ -238,6 +245,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
     /**
      * alert administrator when problems happens. We will add the received message as attachment or bounce the original
+     *
      * @return Boolean
      */
     protected function alertAdmin()

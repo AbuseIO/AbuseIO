@@ -2,35 +2,41 @@
 
 namespace AbuseIO\Jobs;
 
-use AbuseIO\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Validator;
-use Lang;
 
+/**
+ * This EventsValidate class handles validation of multiple events
+ *
+ * Class EventsValidate
+ */
 class EventsValidate extends Job implements SelfHandling
 {
     public $events;
 
     /**
      * Create a new command instance.
-     * @return void
+     *
+
      */
-    public function __construct($events)
+    public function __construct()
     {
-        $this->events = $events;
+        //
     }
 
     /**
      * Execute the command.
+     *
      * @return array
+     * @param array $events
      */
-    public function handle()
+    public function check($events)
     {
-        if (empty($this->events)) {
+        if (empty($events)) {
             return $this->failed("Empty resultset cannot be validated");
         }
 
-        foreach ($this->events as $event) {
+        foreach ($events as $event) {
 
             $validator = Validator::make(
                 [

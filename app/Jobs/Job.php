@@ -4,6 +4,10 @@ namespace AbuseIO\Jobs;
 
 use Illuminate\Bus\Queueable;
 
+/**
+ * Abstract Class Job
+ *
+ */
 abstract class Job
 {
 
@@ -11,6 +15,8 @@ abstract class Job
 
     /**
      * Command has failed
+     *
+     * @param string $message
      * @return array
      */
     protected function failed($message)
@@ -24,6 +30,8 @@ abstract class Job
 
     /**
      * Command is OK
+     *
+     * @param  array $data
      * @return array
      */
     protected function success($data)

@@ -8,13 +8,18 @@ use AbuseIO\Models\Ticket;
 use Validator;
 use Log;
 
+/**
+ * Class Notification provides notification methods
+ *
+ * Class Notification
+ */
 class Notification extends Job implements SelfHandling
 {
     public $ticket;
 
     /**
      * Create a new command instance.
-     * @return void
+     *
      */
     public function __construct()
     {
@@ -59,7 +64,8 @@ class Notification extends Job implements SelfHandling
                 } else {
                     Log::debug(
                         '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        "Notifications with {$notificationModule} was successfull for contact reference: " . key($notifications)
+                        "Notifications with {$notificationModule} was successfull for contact reference: " .
+                        key($notifications)
                     );
                 }
 
@@ -76,6 +82,12 @@ class Notification extends Job implements SelfHandling
         return true;
     }
 
+    /**
+     * Walks a list of notifications (build from BuildList)
+     *
+     * @param array $notifications
+     * @return boolean
+     */
     public function walkList($notifications)
     {
 
@@ -160,9 +172,9 @@ class Notification extends Job implements SelfHandling
     /**
      * Create a list of tickets that need outgoing notifications.
      *
-     * @param integer $ticket
-     * @param string $reference
-     * @param boolean $force
+     * @param integer|boolean $ticket
+     * @param string|boolean $reference
+     * @param boolean|boolean $force
      * @return array $notificationList
      */
     public function buildList($ticket = false, $reference = false, $force = false)
