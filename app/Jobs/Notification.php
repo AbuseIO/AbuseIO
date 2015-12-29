@@ -34,11 +34,16 @@ class Notification extends Job implements SelfHandling
         if (!empty(config("notifications"))
             && is_array(config("notifications"))
         ) {
-            foreach (config("notifications") as $module => $config) {
-                $notification = notificationFactory::create($module);
+            foreach (config("notifications") as $notificationModule => $notificationConfig) {
+
+                $notification = notificationFactory::create($notificationModule);
+
+                if (config("notifications.{$notificationModule}.notification.enabled") !== true) {
+                    return 'disabled';
+                }
 
                 if (!$notification) {
-                    return true;
+                    return false;
                 }
 
                 $notificationResult = $notification->send($notifications);
@@ -46,7 +51,7 @@ class Notification extends Job implements SelfHandling
                 if ($notificationResult['errorStatus']) {
                     Log::error(
                         '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        "Notifications with {$module} did not succeed"
+                        "Notifications with {$notificationModule} did not succeed"
                     );
 
                     return false;
@@ -54,7 +59,7 @@ class Notification extends Job implements SelfHandling
                 } else {
                     Log::debug(
                         '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                        "Notifications with {$module} was successfull for contact reference: " . key($notifications)
+                        "Notifications with {$notificationModule} was successfull for contact reference: " . key($notifications)
                     );
                 }
 
@@ -66,20 +71,6 @@ class Notification extends Job implements SelfHandling
             );
 
             return false;
-        }
-
-        /*
-         * We need to update all the tickets that a notification was send
-         */
-        foreach ($notifications as $customerReference => $notificationTypes) {
-            foreach ($notificationTypes as $notificationType => $tickets) {
-                foreach ($tickets as $ticket) {
-                    $ticket->last_notify_count      = $ticket->events->count();
-                    $ticket->last_notify_timestamp  = time();
-                    $ticket->notified_count         = $ticket->notified_count + 1;
-                    $ticket->save();
-                }
-            }
         }
 
         return true;
@@ -117,10 +108,29 @@ class Notification extends Job implements SelfHandling
         foreach ($notifications as $reference => $referenceData) {
             $result = $this->send([$reference => $referenceData]);
 
-            if ($result !== true) {
+            if ($result === 'disabled') {
+                // Do nothing
+            } elseif ($result !== true) {
                 $errors++;
             } else {
                 $counter++;
+
+                /*
+                 * We need to update all the tickets that a notification was send
+                 */
+                foreach ($referenceData as $notificationType => $tickets) {
+                    foreach ($tickets as $ticket) {
+                        $ticket->last_notify_count      = $ticket->events->count();
+                        $ticket->last_notify_timestamp  = time();
+                        if ($notificationType == 'ip') {
+                            $ticket->ip_contact_notified_count = $ticket->ip_contact_notified_count + 1;
+                        }
+                        if ($notificationType == 'domain') {
+                            $ticket->domain_contact_notified_count = $ticket->domain_contact_notified_count + 1;
+                        }
+                        $ticket->save();
+                    }
+                }
             }
         }
 
@@ -130,6 +140,14 @@ class Notification extends Job implements SelfHandling
                 "Failed sending out notifications. Encountered {$errors} errors."
             );
             return false;
+        }
+
+        if ($counter === 0) {
+            Log::debug(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                "None of the notification methods seem to be enabled"
+            );
+            return true;
         }
 
         Log::debug(

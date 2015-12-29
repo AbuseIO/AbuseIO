@@ -22,24 +22,28 @@ class CreateTicketsTable extends Migration
                 $table->string('domain');
                 $table->integer('class_id')->unsigned();
                 $table->integer('type_id')->unsigned();
+                $table->integer('status_id')->unsigned();
+                $table->integer('last_notify_count')->unsigned();
+                $table->integer('last_notify_timestamp');
+
                 $table->integer('ip_contact_account_id')->unsigned();
                 $table->string('ip_contact_reference');
                 $table->string('ip_contact_name');
                 $table->string('ip_contact_email');
                 $table->string('ip_contact_api_host');
                 $table->string('ip_contact_api_key');
+                $table->integer('ip_contact_notified_count')->unsigned();
                 $table->boolean('ip_contact_auto_notify')->unsigned();
+
                 $table->integer('domain_contact_account_id')->unsigned();
                 $table->string('domain_contact_reference');
                 $table->string('domain_contact_name');
                 $table->string('domain_contact_email');
                 $table->string('domain_contact_api_host');
                 $table->string('domain_contact_api_key');
+                $table->integer('domain_contact_notified_count')->unsigned();
                 $table->boolean('domain_contact_auto_notify')->unsigned();
-                $table->integer('status_id')->unsigned();
-                $table->integer('notified_count')->unsigned();
-                $table->integer('last_notify_count')->unsigned();
-                $table->integer('last_notify_timestamp');
+
                 $table->timestamps();
                 $table->softDeletes();
 

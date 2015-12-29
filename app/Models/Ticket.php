@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $ip_contact_api_host
  * @property string $ip_contact_api_key
  * @property string $ip_contact_auto_notify
+ * @property integer $ip_contact_notified_count
  * @property string $domain_contact_account_id
  * @property string $domain_contact_reference
  * @property string $domain_contact_name
@@ -25,10 +26,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $domain_contact_api_host
  * @property string $domain_contact_api_key
  * @property string $domain_contact_auto_notify
+ * @property integer $domain_contact_notified_count
  * @property integer $status_id
  * @property integer $account_id
  * @property boolean $auto_notify
- * @property integer $notified_count
  * @property integer $last_notify_count
  * @property integer $last_notify_timestamp
  */
@@ -61,6 +62,7 @@ class Ticket extends Model
         'ip_contact_api_host',
         'ip_contact_api_key',
         'ip_contact_auto_notify',
+        'ip_contact_notified_count',
         'domain_contact_account_id',
         'domain_contact_reference',
         'domain_contact_name',
@@ -68,8 +70,8 @@ class Ticket extends Model
         'domain_contact_api_host',
         'domain_contact_api_key',
         'domain_contact_auto_notify',
+        'domain_contact_notified_count',
         'status_id',
-        'notified_count',
         'last_notify_count',
         'last_notify_timestamp'
     ];

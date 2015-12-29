@@ -79,14 +79,17 @@
                 <dd>{{ $ticket->updated_at }}</dd>
 
                 <dt>{{ trans('tickets.last_notification') }}</dt>
-                @if (!$ticket->last_notify_count == 0)
+                @if ($ticket->last_notify_count == 0)
                 <dd>Never</dd>
                 @else
                 <dd>{{ $ticket->last_notified }} (event: {{ $ticket->last_notify_count }})</dd>
                 @endif
 
-                <dt>{{ trans('tickets.total_notifications') }}</dt>
-                <dd>{{ $ticket->notified_count }}</dd>
+                <dt>{{ trans('tickets.total_notifications') }} {{ trans('misc.ip') }}</dt>
+                <dd>{{ $ticket->ip_contact_notified_count }}</dd>
+
+                <dt>{{ trans('tickets.total_notifications') }} {{ trans('misc.domain') }}</dt>
+                <dd>{{ $ticket->domain_contact_notified_count }}</dd>
 
                 <dt>{{ trans('tickets.reply_status') }}</dt>
                 <dd></dd>
