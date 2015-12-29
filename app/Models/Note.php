@@ -31,13 +31,13 @@ class Note extends Model
         'id'
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\Note $note
      * @return array $rules
      */
-    public static function createRules($note)
+    public static function createRules(/** @noinspection PhpUnusedParameterInspection */$note)
     {
         $rules = [
             'ticket_id' => 'required|integer',
@@ -50,13 +50,13 @@ class Note extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Note $note
      * @return array $rules
      */
-    public static function updateRules($note)
+    public static function updateRules(/** @noinspection PhpUnusedParameterInspection */ $note)
     {
         $rules = [
             'ticket_id' => 'sometimes|integer',
@@ -74,11 +74,23 @@ class Note extends Model
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * Updates the updated at before passing it along
+     *
+     * @param $date
+     * @return bool|string
+     */
     public function getUpdatedAtAttribute($date)
     {
         return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
     }
 
+    /**
+     * Updates the created at before passing it along
+     *
+     * @param $date
+     * @return bool|string
+     */
     public function getCreatedAtAttribute($date)
     {
         return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));

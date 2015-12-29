@@ -30,13 +30,13 @@ class Event extends Model
         'id'
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\Event $event
      * @return array $rules
      */
-    public static function createRules($event)
+    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $event)
     {
         $rules = [
             // TODO: Create validation rules instead of EventValidator
@@ -45,13 +45,13 @@ class Event extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Event $event
      * @return array $rules
      */
-    public static function updateRules($event)
+    public static function updateRules(/** @noinspection PhpUnusedParameterInspection */ $event)
     {
         $rules = [
             // TODO: Create validation rules instead of EventValidator
@@ -60,6 +60,11 @@ class Event extends Model
         return $rules;
     }
 
+    /**
+     * Return the evidence for this event
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function evidences()
     {
 
@@ -72,7 +77,11 @@ class Event extends Model
     | Accessors & Mutators
     |--------------------------------------------------------------------------
     */
-
+    /**
+     * Mutates the seen attribute to a date format
+     *
+     * @return bool|string
+     */
     public function getSeenAttribute()
     {
         return date(config('app.date_format').' '.config('app.time_format'), $this->attributes['timestamp']);

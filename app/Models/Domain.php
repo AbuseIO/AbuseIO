@@ -26,13 +26,13 @@ class Domain extends Model
         'id'
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\Domain $domain
      * @return array $rules
      */
-    public static function createRules($domain)
+    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $domain)
     {
         $rules = [
             'name'          => 'required|unique:domains',
@@ -43,7 +43,7 @@ class Domain extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Domain $domain
@@ -60,6 +60,11 @@ class Domain extends Model
         return $rules;
     }
 
+    /**
+     * Returns the contact for this domain
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function contact()
     {
 

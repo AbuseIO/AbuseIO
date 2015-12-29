@@ -2,13 +2,17 @@
 
 namespace AbuseIO\Http\Requests;
 
-use AbuseIO\Http\Requests\Request;
 use AbuseIO\Models\Netblock;
 
+/**
+ * Class NetblockFormRequest
+ * @package AbuseIO\Http\Requests
+ */
 class NetblockFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
      * @return bool
      */
     public function authorize()
@@ -18,6 +22,7 @@ class NetblockFormRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
+     *
      * @return array
      */
     public function rules()
@@ -25,7 +30,6 @@ class NetblockFormRequest extends Request
         switch ($this->method) {
             case 'GET':
             case 'DELETE':
-                return [ ];
             case 'POST':
                 return Netblock::createRules($this);
             case 'PUT':
@@ -34,5 +38,7 @@ class NetblockFormRequest extends Request
             default:
                 break;
         }
+
+        return [ ];
     }
 }

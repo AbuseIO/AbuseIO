@@ -31,7 +31,7 @@ class PermissionRole extends Model
         'permission_id',
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\PermissionRole $permissionRole
@@ -49,7 +49,7 @@ class PermissionRole extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\PermissionRole $permissionRole

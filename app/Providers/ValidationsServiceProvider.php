@@ -4,6 +4,12 @@ use Validator;
 use Illuminate\Support\ServiceProvider;
 use Lang;
 
+/**
+ * Extends the default laravel validations
+ *
+ * Class ValidationsServiceProvider
+ * @package AbuseIO\Providers
+ */
 class ValidationsServiceProvider extends ServiceProvider
 {
 
@@ -17,6 +23,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add timestamp validation
          */
+        /** @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'timestamp',
             function ($attribute, $value, $parameters, $validator) {
@@ -33,6 +40,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for multiple comma seperated e-mails
          */
+        /** @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'emails',
             function ($attribute, $value, $parameters, $validator) {
@@ -61,6 +69,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for valid and existing files on the filesystem
          */
+        /** @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'file',
             function ($attribute, $value, $parameters, $validator) {
@@ -81,6 +90,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for abuse class
          */
+        /** @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'abuseclass',
             function ($attribute, $value, $parameters, $validator) {
@@ -104,6 +114,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for abuse type
          */
+        /** @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'abusetype',
             function ($attribute, $value, $parameters, $validator) {
@@ -127,6 +138,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for string or boolean
          */
+        /** @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'stringorboolean',
             function ($attribute, $value, $parameters, $validator) {
@@ -151,6 +163,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for domain
          */
+        /** @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'domain',
             function ($attribute, $value, $parameters, $validator) {
@@ -167,10 +180,9 @@ class ValidationsServiceProvider extends ServiceProvider
                 }
 
                 if (!filter_var(
-                        'http://' . $value,
-                        FILTER_VALIDATE_URL
-                    ) === false
-                ) {
+                    'http://' . $value,
+                    FILTER_VALIDATE_URL
+                ) === false) {
                     return true;
                 }
 
@@ -182,6 +194,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for URI
          */
+        /** @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'uri',
             function ($attribute, $value, $parameters, $validator) {
@@ -191,10 +204,9 @@ class ValidationsServiceProvider extends ServiceProvider
                 }
 
                 if (!filter_var(
-                        'http://test.for.var.com' . $value,
-                        FILTER_VALIDATE_URL
-                    ) === false
-                ) {
+                    'http://test.for.var.com' . $value,
+                    FILTER_VALIDATE_URL
+                ) === false) {
                     return true;
                 }
 

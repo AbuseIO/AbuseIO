@@ -26,13 +26,13 @@ class Evidence extends Model
         'id'
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\Evidence $evidence
      * @return array $rules
      */
-    public static function createRules($evidence)
+    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $evidence)
     {
         $rules = [
             'filename'          => 'required|file',
@@ -43,13 +43,13 @@ class Evidence extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Evidence $evidence
      * @return array $rules
      */
-    public static function updateRules($evidence)
+    public static function updateRules(/** @noinspection PhpUnusedParameterInspection */ $evidence)
     {
         $rules = [
             'filename'          => 'required|file',
@@ -60,6 +60,11 @@ class Evidence extends Model
         return $rules;
     }
 
+    /**
+     * Returns the event for this evidence
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function event()
     {
 

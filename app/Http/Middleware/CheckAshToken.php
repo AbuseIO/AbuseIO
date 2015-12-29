@@ -1,12 +1,27 @@
-<?php namespace AbuseIO\Http\Middleware;
+<?php
+
+namespace AbuseIO\Http\Middleware;
 
 use Closure;
 use Request;
 use AbuseIO\Models\Ticket;
 use Uuid;
 
+/**
+ * Class CheckAshToken
+ * @package AbuseIO\Http\Middleware
+ */
 class CheckAshToken
 {
+    /**
+     * @param $request
+     * @param Closure $next
+     * @return \BladeView|bool|\Illuminate\Contracts\Routing\ResponseFactory
+     *         \Illuminate\Contracts\View\Factory
+     *         \Illuminate\View\View
+     *         \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function handle($request, Closure $next)
     {
         /*

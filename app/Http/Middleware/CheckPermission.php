@@ -1,15 +1,19 @@
 <?php namespace AbuseIO\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class CheckPermission
+ * @package AbuseIO\Http\Middleware
+ */
 class CheckPermission
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
+     * @param  string                   $permission
      * @return mixed
      */
     public function handle($request, Closure $next, $permission = null)

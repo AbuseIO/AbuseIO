@@ -31,7 +31,7 @@ class Netblock extends Model
         'id'
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\Netblock $netblock
@@ -50,7 +50,7 @@ class Netblock extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Netblock $netblock
@@ -70,18 +70,35 @@ class Netblock extends Model
     }
 
     // Relationships
+
+    /**
+     * Returns the contact for this netblock
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function contact()
     {
         return $this->belongsTo('AbuseIO\Models\Contact');
     }
 
     // Mutators
+
+    /**
+     * Updates the first IP attribute before giving it
+     *
+     * @param $value
+     */
     public function setFirstIpAttribute($value)
     {
         $this->attributes['first_ip'] = $value;
         $this->attributes['first_ip_int'] = ICF::InetPtoi($value);
     }
 
+    /**
+     * Updates the last IP attribute before giving it
+     *
+     * @param $value
+     */
     public function setLastIpAttribute($value)
     {
         $this->attributes['last_ip'] = $value;

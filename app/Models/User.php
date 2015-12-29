@@ -56,13 +56,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'remember_token'
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\User $user
      * @return array $rules
      */
-    public static function createRules($user)
+    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $user)
     {
         $rules = [
             'first_name'    => 'required|string',
@@ -77,7 +77,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\User $user
@@ -147,7 +147,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                     array_map(
                         function ($permission) {
 
-                            return array_fetch($permission, 'name');
+                            return array_pluck($permission, 'name');
 
                         },
                         $permissions
@@ -273,7 +273,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Many-To-Many Relationship Method for accessing the User->roles
      *
-     * @return QueryBuilder Object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles()
     {
@@ -295,6 +295,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     | Accessors & Mutators
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Encrypt password to hash
+     *
+     * @param $value
+     */
     public function setPasswordAttribute($value)
     {
         if (!empty($value)) {

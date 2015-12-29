@@ -2,13 +2,17 @@
 
 namespace AbuseIO\Http\Requests;
 
-use AbuseIO\Http\Requests\Request;
 use AbuseIO\Models\Account;
 
+/**
+ * Class AccountFormRequest
+ * @package AbuseIO\Http\Requests
+ */
 class AccountFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
      * @return bool
      */
     public function authorize()
@@ -18,21 +22,26 @@ class AccountFormRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
+     *
      * @return array
      */
     public function rules()
     {
         switch ($this->method) {
             case 'GET':
+                break;
             case 'DELETE':
-                return [ ];
+                break;
             case 'POST':
                 return Account::createRules($this);
             case 'PUT':
+                break;
             case 'PATCH':
                 return Account::updateRules($this);
             default:
                 break;
         }
+
+        return [ ];
     }
 }

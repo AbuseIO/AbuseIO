@@ -4,6 +4,10 @@ namespace AbuseIO\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+/**
+ * Class Kernel
+ * @package AbuseIO\Http
+ */
 class Kernel extends HttpKernel
 {
     /**

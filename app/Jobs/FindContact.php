@@ -92,7 +92,7 @@ class FindContact extends Job
     /**
      * Return contact by Netblock
      *
-     * @param  string $ip
+     * @param  string $ip IP address
      * @return object
      */
     public static function byIP($ip)
@@ -133,7 +133,7 @@ class FindContact extends Job
     /**
      * Return contact by Domain
      *
-     * @param  string $domainName
+     * @param  string $domain domain name
      * @return object
      */
     public static function byDomain($domain)
@@ -170,7 +170,7 @@ class FindContact extends Job
     /**
      * Return contact by Code
      *
-     * @param  string $reference
+     * @param  string $id contact reference
      * @return object
      */
     public static function byId($id)

@@ -7,6 +7,10 @@ use AbuseIO\Notification\Factory as NotificationFactory;
 use Config;
 use File;
 
+/**
+ * Class ConfigServiceProvider
+ * @package AbuseIO\Providers
+ */
 class ConfigServiceProvider extends ServiceProvider
 {
 
@@ -55,6 +59,12 @@ class ConfigServiceProvider extends ServiceProvider
         $this->buildConfig($notificationList, 'notification');
     }
 
+    /**
+     * Method to build different types of configuration trees
+     *
+     * @param $list
+     * @param $type
+     */
     private function buildConfig($list, $type)
     {
         foreach ($list as $handler) {

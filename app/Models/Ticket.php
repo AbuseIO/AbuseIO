@@ -80,13 +80,13 @@ class Ticket extends Model
         'id'
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\Ticket $ticket
      * @return array $rules
      */
-    public static function createRules($ticket)
+    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $ticket)
     {
         $rules = [
             // TODO: Create validation rules instead of EventValidator
@@ -95,13 +95,13 @@ class Ticket extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Ticket $ticket
      * @return array $rules
      */
-    public static function updateRules($ticket)
+    public static function updateRules(/** @noinspection PhpUnusedParameterInspection */ $ticket)
     {
         $rules = [
             // TODO: Create validation rules instead of EventValidator
@@ -192,18 +192,38 @@ class Ticket extends Model
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * @return bool|string
+     */
     public function getLastNotifiedAttribute()
     {
-        return date(config('app.date_format').' '.config('app.time_format'), $this->attributes['last_notify_timestamp']);
+        return date(
+            config('app.date_format').' ' . config('app.time_format'),
+            $this->attributes['last_notify_timestamp']
+        );
     }
 
+    /**
+     * @param $date
+     * @return bool|string
+     */
     public function getUpdatedAtAttribute($date)
     {
-        return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
+        return date(
+            config('app.date_format').' ' .config('app.time_format'),
+            strtotime($date)
+        );
     }
 
+    /**
+     * @param $date
+     * @return bool|string
+     */
     public function getCreatedAtAttribute($date)
     {
-        return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
+        return date(
+            config('app.date_format').' '.config('app.time_format'),
+            strtotime($date)
+        );
     }
 }

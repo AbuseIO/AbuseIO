@@ -2,6 +2,12 @@
 
 namespace AbuseIO;
 
+/**
+ * Integrated Control Functions
+ *
+ * Class ICF
+ * @package AbuseIO
+ */
 class ICF
 {
     /**

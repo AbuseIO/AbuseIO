@@ -38,7 +38,7 @@ class Brand extends Model
      * @param  \AbuseIO\Models\Brand $brand
      * @return array $rules
      */
-    public static function createRules($brand)
+    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $brand)
     {
         $rules = [
             'name'              => 'required|unique:brands,name',

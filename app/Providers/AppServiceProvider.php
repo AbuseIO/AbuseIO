@@ -2,6 +2,10 @@
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class AppServiceProvider
+ * @package AbuseIO\Providers
+ */
 class AppServiceProvider extends ServiceProvider
 {
 
@@ -24,5 +28,4 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
-
 }

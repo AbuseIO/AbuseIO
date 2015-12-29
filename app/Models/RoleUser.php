@@ -31,7 +31,7 @@ class RoleUser extends Model
         'user_id',
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\RoleUser $roleUser
@@ -47,7 +47,7 @@ class RoleUser extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\RoleUser $roleUser

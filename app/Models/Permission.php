@@ -39,7 +39,7 @@ class Permission extends Model
     /**
      * many-to-many relationship method
      *
-     * @return QueryBuilder
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles()
     {

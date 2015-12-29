@@ -3,6 +3,10 @@
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+/**
+ * Class RouteServiceProvider
+ * @package AbuseIO\Providers
+ */
 class RouteServiceProvider extends ServiceProvider
 {
 
@@ -36,6 +40,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
+        /** @noinspection PhpUnusedParameterInspection */
         $router->group(
             [
             'namespace' => $this->namespace

@@ -33,13 +33,13 @@ class Role extends Model
         'description',
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\Role $role
      * @return array $rules
      */
-    public static function createRules($role)
+    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $role)
     {
         $rules = [
             'name'              => 'required|string|min:1|unique:roles,name',
@@ -49,10 +49,10 @@ class Role extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
-     * @param  \AbuseIO\Models\Role $data
+     * @param  \AbuseIO\Models\Role $role
      * @return array $rules
      */
     public static function updateRules($role)
@@ -76,7 +76,7 @@ class Role extends Model
     /**
      * many-to-many relationship method.
      *
-     * @return QueryBuilder
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
     {
@@ -86,7 +86,7 @@ class Role extends Model
     /**
      * many-to-many relationship method.
      *
-     * @return QueryBuilder
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function permissions()
     {

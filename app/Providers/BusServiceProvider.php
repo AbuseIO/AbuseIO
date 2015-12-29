@@ -3,6 +3,10 @@
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class BusServiceProvider
+ * @package AbuseIO\Providers
+ */
 class BusServiceProvider extends ServiceProvider
 {
 
@@ -15,10 +19,11 @@ class BusServiceProvider extends ServiceProvider
     public function boot(Dispatcher $dispatcher)
     {
         $dispatcher->mapUsing(
-            function($command)
-            {
+            function ($command) {
                 return Dispatcher::simpleMapping(
-                    $command, 'AbuseIO\Commands', 'AbuseIO\Handlers\Commands'
+                    $command,
+                    'AbuseIO\Commands',
+                    'AbuseIO\Handlers\Commands'
                 );
             }
         );
@@ -33,5 +38,4 @@ class BusServiceProvider extends ServiceProvider
     {
         //
     }
-
 }

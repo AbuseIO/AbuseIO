@@ -36,13 +36,13 @@ class Contact extends Model
         'id'
     ];
 
-    /*
+    /**
      * Validation rules for this model being created
      *
      * @param  \AbuseIO\Models\Contact $contact
      * @return array $rules
      */
-    public static function createRules($contact)
+    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $contact)
     {
         $rules = [
             'reference' => 'required|unique:contacts,reference',
@@ -57,7 +57,7 @@ class Contact extends Model
         return $rules;
     }
 
-    /*
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Contact $contact
@@ -78,6 +78,11 @@ class Contact extends Model
         return $rules;
     }
 
+    /**
+     * Creates a shortlist of the table with ID and Name for pulldown menu's
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function shortlist()
     {
 
@@ -86,6 +91,8 @@ class Contact extends Model
     }
 
     /**
+     * Returns the account for this contact
+     *
      * @return Account
      */
     public function account()
@@ -93,6 +100,11 @@ class Contact extends Model
         return $this->belongsTo('AbuseIO\Models\Account');
     }
 
+    /**
+     * Returns the domains for this contact
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function domains()
     {
 
@@ -100,6 +112,11 @@ class Contact extends Model
 
     }
 
+    /**
+     * Returns the netblocks from this contact
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function netblocks()
     {
 

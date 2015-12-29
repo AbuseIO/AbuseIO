@@ -2,13 +2,17 @@
 
 namespace AbuseIO\Http\Requests;
 
-use AbuseIO\Http\Requests\Request;
 use AbuseIO\Models\Brand;
 
+/**
+ * Class BrandFormRequest
+ * @package AbuseIO\Http\Requests
+ */
 class BrandFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
      * @return bool
      */
     public function authorize()
@@ -18,21 +22,26 @@ class BrandFormRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
+     *
      * @return array
      */
     public function rules()
     {
         switch ($this->method) {
             case 'GET':
+                break;
             case 'DELETE':
-                return [ ];
+                break;
             case 'POST':
                 return Brand::createRules($this);
             case 'PUT':
+                break;
             case 'PATCH':
                 return Brand::updateRules($this);
             default:
                 break;
         }
+
+        return [ ];
     }
 }

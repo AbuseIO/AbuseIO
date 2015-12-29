@@ -5,6 +5,10 @@ namespace AbuseIO\Providers;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+/**
+ * Class AuthServiceProvider
+ * @package AbuseIO\Providers
+ */
 class AuthServiceProvider extends ServiceProvider
 {
     /**

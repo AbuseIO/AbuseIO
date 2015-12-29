@@ -28,6 +28,8 @@ class EventsSave extends Job implements SelfHandling
     /**
      * Execute the command.
      *
+     * @param array $events
+     * @param integer $evidenceID
      * @return array
      */
     public function save($events, $evidenceID)

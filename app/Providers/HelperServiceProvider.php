@@ -2,6 +2,10 @@
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class HelperServiceProvider
+ * @package AbuseIO\Providers
+ */
 class HelperServiceProvider extends ServiceProvider
 {
     protected $helpers = [

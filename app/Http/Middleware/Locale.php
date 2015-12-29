@@ -8,10 +8,23 @@ use Closure;
 use Session;
 use Config;
 
+/**
+ * Class Locale
+ * @package AbuseIO\Http\Middleware
+ */
 class Locale implements Middleware
 {
+    /**
+     * @var array
+     */
     protected $languages = ['en'];
 
+    /**
+     * Locale constructor.
+     * @param Application $app
+     * @param Redirector $redirector
+     * @param Request $request
+     */
     public function __construct(Application $app, Redirector $redirector, Request $request)
     {
         $this->app = $app;

@@ -2,12 +2,20 @@
 
 namespace AbuseIO\Http\Requests;
 
-use AbuseIO\Http\Requests\Request;
 use AbuseIO\Models\Contact;
 use Auth;
 
+/**
+ * Class ContactFormRequest
+ * @package AbuseIO\Http\Requests
+ */
 class ContactFormRequest extends Request
 {
+
+    /**
+     * ContactFormRequest constructor.
+     *
+     */
     public function __construct()
     {
         parent::__construct();
@@ -16,6 +24,7 @@ class ContactFormRequest extends Request
 
     /**
      * Determine if the user is authorized to make this request.
+     *
      * @return bool
      */
     public function authorize()
@@ -25,26 +34,49 @@ class ContactFormRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
+     *
      * @return array
      */
     public function rules()
     {
         switch ($this->method) {
             case 'GET':
+                break;
             case 'DELETE':
-                return [ ];
+                break;
             case 'POST':
                 return Contact::createRules($this);
             case 'PUT':
+                break;
             case 'PATCH':
                 return Contact::updateRules($this);
             default:
                 break;
         }
+
+        return [ ];
     }
 
-    public function initialize(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null)
-    {
+    /**
+     * Transform the form results before sending it to validation
+     *
+     * @param array $query
+     * @param array $request
+     * @param array $attributes
+     * @param array $cookies
+     * @param array $files
+     * @param array $server
+     * @param null $content
+     */
+    public function initialize(
+        array $query = array(),
+        array $request = array(),
+        array $attributes = array(),
+        array $cookies = array(),
+        array $files = array(),
+        array $server = array(),
+        $content = null
+    ) {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
         $this->getInputSource()->add(

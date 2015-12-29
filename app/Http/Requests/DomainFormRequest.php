@@ -2,9 +2,12 @@
 
 namespace AbuseIO\Http\Requests;
 
-use AbuseIO\Http\Requests\Request;
 use AbuseIO\Models\Domain;
 
+/**
+ * Class DomainFormRequest
+ * @package AbuseIO\Http\Requests
+ */
 class DomainFormRequest extends Request
 {
     /**
@@ -24,15 +27,19 @@ class DomainFormRequest extends Request
     {
         switch ($this->method) {
             case 'GET':
+                break;
             case 'DELETE':
-                return [ ];
+                break;
             case 'POST':
                 return Domain::createRules($this);
             case 'PUT':
+                break;
             case 'PATCH':
                 return Domain::updateRules($this);
             default:
                 break;
         }
+
+        return [ ];
     }
 }

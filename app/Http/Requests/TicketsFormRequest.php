@@ -2,12 +2,15 @@
 
 namespace AbuseIO\Http\Requests;
 
-use AbuseIO\Http\Requests\Request;
-
+/**
+ * Class TicketsFormRequest
+ * @package AbuseIO\Http\Requests
+ */
 class TicketsFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
      * @return bool
      */
     public function authorize()
@@ -17,6 +20,7 @@ class TicketsFormRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
+     *
      * @return array
      */
     public function rules()
