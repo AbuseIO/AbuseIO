@@ -6,13 +6,22 @@ use Illuminate\Console\Command;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Evidence;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use AbuseIO\Jobs\QueueTest;
 use Validator;
 use Artisan;
 use Carbon;
+use Queue;
 use Log;
 
+/**
+ * Class RunCommand
+ * @package AbuseIO\Console\Commands\Housekeeper
+ */
 class RunCommand extends Command
 {
+
+    use DispatchesJobs;
 
     /**
      * The console command name.
@@ -30,7 +39,6 @@ class RunCommand extends Command
 
     /**
      * Create a new command instance.
-     * @return void
      */
     public function __construct()
     {
@@ -45,10 +53,28 @@ class RunCommand extends Command
     public function handle()
     {
         // TODO: #AIO-22 Create housekeeping - Walk thru all collectors to gather information.
-        // TODO: Extra: Collectors should be kicked into a queue, but only if there isn't one running yet with the same name
+        // TODO: Extra: Collectors should be kicked into a queue, only if there isn't one running yet with the same name
 
         // TODO: Add queue watchers, check weither queues are actually running (have watchers)
         // TODO: perhaps using a testjob that we can stick into each queue we operate?
+        // TODO: Add failed to all queued jobs to handle them code-wise!
+        // TODO: Add view of failed jobs and start alarm bells on that too
+        // TODO: Built a generic alarm job for contacting the admin
+
+        $pheanstalk = Queue::getPheanstalk();
+        foreach ($pheanstalk->listTubes() as $queue) {
+            if (preg_match('#^abuseio#', $queue) === 1) {
+                $queueStatus = $pheanstalk->statsTube($queue);
+                if ($queueStatus['current-watching'] == 0) {
+                    //Fatal there are no watchers! Supervisor gone, Start alarm bells here
+                }
+
+                // Handling of the result is done at the QueueTest->failed() method
+                $this->dispatch(new QueueTest($queue));
+            }
+        }
+
+        die();
 
         /*
          * Walk thru all tickets to see which need closing
@@ -75,7 +101,7 @@ class RunCommand extends Command
 
     }
 
-    /*
+    /**
      * Walk thru all tickets to see which need closing
      *
      * @return boolean
@@ -120,7 +146,7 @@ class RunCommand extends Command
         return true;
     }
 
-    /*
+    /**
      * Walk thru mailarchive to see which need pruning
      *
      * @return boolean
@@ -163,7 +189,7 @@ class RunCommand extends Command
         return true;
     }
 
-    /*
+    /**
      * Send out all notifications by calling the housekeeper notifications command
      *
      * @return boolean

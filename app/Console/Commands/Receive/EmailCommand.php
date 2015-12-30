@@ -11,12 +11,17 @@ use Uuid;
 use Carbon;
 use Config;
 
+/**
+ * Class EmailCommand
+ * @package AbuseIO\Console\Commands\Receive
+ */
 class EmailCommand extends Command
 {
     use DispatchesJobs;
 
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $signature = 'receive:email
@@ -25,13 +30,14 @@ class EmailCommand extends Command
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Parses an (piped) email into abuse events.';
 
     /**
      * Create a new command instance.
-     * @return void
+     *
      */
     public function __construct()
     {
