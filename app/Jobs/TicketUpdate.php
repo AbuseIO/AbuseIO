@@ -4,8 +4,17 @@ namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Ticket;
 
+/**
+ * Class TicketUpdate
+ * @package AbuseIO\Jobs
+ */
 class TicketUpdate extends Job
 {
+    /**
+     * Update domain contact for a ticket
+     *
+     * @param Ticket $ticket
+     */
     public static function domainContact($ticket)
     {
         $domainContact = FindContact::byDomain($ticket['domain']);
@@ -21,6 +30,11 @@ class TicketUpdate extends Job
         $ticket->save();
     }
 
+    /**
+     * Update IP contact for a ticket
+     *
+     * @param Ticket $ticket
+     */
     public static function ipContact($ticket)
     {
         $ipContact = FindContact::byIP($ticket['ip']);
