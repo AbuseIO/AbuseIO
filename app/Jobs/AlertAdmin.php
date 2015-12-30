@@ -16,10 +16,10 @@ class AlertAdmin extends Job
      * Execute the command
      *
      * @param string $message
-     * @param array $attachments format: ['name' => 'data']
+     * @param array $attachments [optional] format: ['name' => 'data']
      * @return void
      */
-    public static function send($message, $attachments)
+    public static function send($message, $attachments = [])
     {
         $sent = Mail::raw(
             $message,

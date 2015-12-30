@@ -8,6 +8,7 @@ use AbuseIO\Models\Evidence;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use AbuseIO\Jobs\QueueTest;
+use AbuseIO\Jobs\AlertAdmin;
 use Validator;
 use Artisan;
 use Carbon;
