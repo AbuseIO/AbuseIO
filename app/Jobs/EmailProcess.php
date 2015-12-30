@@ -12,7 +12,7 @@ use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use Config;
 use Log;
-use Mail;
+use AbuseIO\Jobs\AlertAdmin;
 
 /**
  * This EmailProcess class handles incoming mail messages and transform them into events
@@ -246,7 +246,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
     /**
      * alert administrator when problems happens. We will add the received message as attachment or bounce the original
      *
-     * @return Boolean
+     * @return void
      */
     protected function alertAdmin()
     {
@@ -258,39 +258,16 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             'archive and bounced to the admin for investigation'
         );
 
-        $filename = $this->filename;
-
-        // Send a e-mail to the admin about the failed parse attempt
-        $sent = Mail::raw(
-            'AbuseIO was not able to handle an incoming message. This message is attached to this email.',
-            function ($message) use ($filename) {
-                $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailProcess');
-                $message->to(Config::get('main.emailparser.fallback_mail'));
-                $message->attach(
-                    $filename,
-                    [
-                        'as' => 'failed_message.eml',
-                        'mime' => 'message/rfc822',
-                    ]
-                );
-            }
+        AlertAdmin::send(
+            'AbuseIO was not able to process an incoming message. This message is attached to this email.',
+            [
+                'failed_message.eml' => @file_get_contents($this->filename)
+            ]
         );
-
-        if (!$sent) {
-            Log::error(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                'Unable to send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
-            );
-        } else {
-            Log::info(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                'Successfully send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
-            );
-        }
 
         // Delete the evidence file as we are not using it.
         $filesystem = new Filesystem;
-        $filesystem->delete($filename);
+        $filesystem->delete($this->filename);
 
     }
 }

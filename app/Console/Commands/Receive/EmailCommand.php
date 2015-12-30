@@ -9,7 +9,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
 use Uuid;
 use Carbon;
-use Config;
+use AbuseIO\Jobs\AlertAdmin;
 
 /**
  * Class EmailCommand
@@ -129,6 +129,8 @@ class EmailCommand extends Command
 
     /**
      * We've hit a snag, so we are gracefully killing ourselves after we contact the admin about it.
+     *
+     * @param string $rawEmail
      * @return mixed
      */
     protected function exception($rawEmail)
@@ -140,32 +142,12 @@ class EmailCommand extends Command
             'Email receiver is ending with errors. The received e-mail will be bounced to the admin for investigation'
         );
 
-        $sent = Mail::raw(
+        AlertAdmin::send(
             'AbuseIO was not able to receive an incoming message. This message is attached to this email.',
-            function ($message) use ($rawEmail) {
-                $message->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailReceiver');
-                $message->to(Config::get('main.emailparser.fallback_mail'));
-                $message->attachData(
-                    $rawEmail,
-                    'failed_message.eml',
-                    [
-                        'as' => 'failed_message.eml',
-                        'mime' => 'message/rfc822',
-                    ]
-                );
-            }
+            [
+                'failed_message.eml' => $rawEmail
+            ]
         );
 
-        if (!$sent) {
-            Log::error(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                'Unable to send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
-            );
-        } else {
-            Log::info(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                'Successfully send out a bounce to ' . Config::get('main.emailparser.fallback_mail')
-            );
-        }
     }
 }
