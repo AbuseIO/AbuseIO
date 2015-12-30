@@ -4,8 +4,10 @@ namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\TicketsFormRequest;
-use yajra\Datatables\Datatables;
+use AbuseIO\Jobs\Notification;
+use AbuseIO\Jobs\TicketUpdate;
 use AbuseIO\Models\Ticket;
+use yajra\Datatables\Datatables;
 use Redirect;
 use DB;
 
@@ -43,13 +45,13 @@ class TicketsController extends Controller
                 function ($join) {
                 // We need a LEFT JOIN .. ON .. AND ..).
                 // This doesn't exist within Illuminate's JoinClause class
-                // Sp we use some nesting foo
-                $join->on('notes.ticket_id', '=', 'tickets.id')
-                    ->nest(
-                        function ($join) {
-                            $join->on('notes.viewed', '=', DB::raw("'false'"));
-                        }
-                    );
+                // So we use some nesting foo here
+                    $join->on('notes.ticket_id', '=', 'tickets.id')
+                        ->nest(
+                            function ($join) {
+                                $join->on('notes.viewed', '=', DB::raw("'false'"));
+                            }
+                        );
                 }
             )
             ->groupBy('tickets.id');
@@ -119,6 +121,7 @@ class TicketsController extends Controller
      */
     public function export($format)
     {
+        // TODO #AIO-?? ExportProvider - (mark) Move this into an ExportProvider or something s?
         $tickets = Ticket::all();
 
         if ($format === 'csv') {
@@ -184,17 +187,6 @@ class TicketsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified ticket.
-     *
-     * @param  Ticket $ticket
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ticket $ticket)
-    {
-        // We don't allow tickets to be editted directly (only subfunctions like contactUpdate)
-    }
-
-    /**
      * Update the specified ticket in storage.
      *
      * @param  Ticket $ticket
@@ -203,17 +195,6 @@ class TicketsController extends Controller
     public function update(Ticket $ticket)
     {
         //return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  Ticket $ticket
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Ticket $ticket)
-    {
-        // We don't allow tickets to be deleted
     }
 
     /**
@@ -232,32 +213,108 @@ class TicketsController extends Controller
     }
 
     /**
-     * Send a notification for this ticket.
+     * Send a notification for this ticket to the IP contact.
      *
      * @param Ticket $ticket
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function notify(Ticket $ticket)
+    public function notifyIpContact(Ticket $ticket)
     {
-        // TODO: #AIO-39 Interaction tickets - (mark) Or are we going to call the notification functions directly?
+        $notification = new Notification;
+        $notification->walkList(
+            $notification->buildList($ticket->id, false, true, 'ip')
+        );
+
         return Redirect::route(
             'admin.tickets.show',
             $ticket->id
-        )->with('message', '{PLACEHOLDER} Ticket contact(s) notified.');
+        )->with('message', 'IP Contact has been notified.');
     }
 
     /**
-     * Updates the requested contact information.
+     * Send a notification for this ticket to the domain contact.
      *
      * @param Ticket $ticket
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updatecontact(Ticket $ticket)
+    public function notifyDomainContact(Ticket $ticket)
     {
-        // TODO: #AIO-39 Interaction tickets - (mark) Maybe use existing update() for this?
+        $notification = new Notification;
+        $notification->walkList(
+            $notification->buildList($ticket->id, false, true, 'domain')
+        );
+
         return Redirect::route(
             'admin.tickets.show',
             $ticket->id
-        )->with('message', '{PLACEHOLDER} Ticket contact(s) updated.');
+        )->with('message', 'Domain Contact has been notified.');
+    }
+
+    /**
+     * Send a notification for this ticket to both contacts.
+     *
+     * @param Ticket $ticket
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function notifyBothContacts(Ticket $ticket)
+    {
+        $notification = new Notification;
+        $notification->walkList(
+            $notification->buildList($ticket->id, false, true)
+        );
+
+        return Redirect::route(
+            'admin.tickets.show',
+            $ticket->id
+        )->with('message', 'IP and Domain Contact have been notified.');
+    }
+
+    /**
+     * Updates the requested IP contact information.
+     *
+     * @param Ticket $ticket
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateIpContact(Ticket $ticket)
+    {
+        TicketUpdate::ipContact($ticket);
+
+        return Redirect::route(
+            'admin.tickets.show',
+            $ticket->id
+        )->with('message', 'IP Contact has been updated.');
+    }
+
+    /**
+     * Updates the requested domain contact information.
+     *
+     * @param Ticket $ticket
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateDomainContact(Ticket $ticket)
+    {
+        TicketUpdate::domainContact($ticket);
+
+        return Redirect::route(
+            'admin.tickets.show',
+            $ticket->id
+        )->with('message', 'Domain Contact has been updated.');
+    }
+
+    /**
+     * Updates the requested contacts information.
+     *
+     * @param Ticket $ticket
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateBothContacts(Ticket $ticket)
+    {
+        TicketUpdate::ipContact($ticket);
+        TicketUpdate::domainContact($ticket);
+
+        return Redirect::route(
+            'admin.tickets.show',
+            $ticket->id
+        )->with('message', 'IP and Domain Contact has been updated.');
     }
 }

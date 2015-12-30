@@ -18,15 +18,6 @@ class Notification extends Job implements SelfHandling
     public $ticket;
 
     /**
-     * Create a new command instance.
-     *
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Sends out notifications based on the configured notification modules.
      * Returns false on failed or havent done anything at all.
      *
@@ -172,12 +163,13 @@ class Notification extends Job implements SelfHandling
     /**
      * Create a list of tickets that need outgoing notifications.
      *
-     * @param integer|boolean $ticket
-     * @param string|boolean $reference
-     * @param boolean|boolean $force
-     * @return array $notificationList
+     * @param integer|boolean   $ticket             Ticket ID
+     * @param string|boolean    $reference          ReferenceName of contact in ticket
+     * @param boolean|boolean   $force              Force sending even when there are no new events
+     * @param string            $only               Only send to ('ip', 'domain' or null (both))
+     * @return array            $notificationList   List of notifications to send
      */
-    public function buildList($ticket = false, $reference = false, $force = false)
+    public function buildList($ticket = false, $reference = false, $force = false, $only = null)
     {
         /*
          * Select a list of tickets that are not closed(2) by default or add ticket / reference
@@ -272,7 +264,8 @@ class Notification extends Job implements SelfHandling
                     // Conditions just for IP contacts
                     if (!empty($ticket->ip_contact_reference) &&
                         $ticket->ip_contact_reference != 'UNDEF' &&
-                        $ticket->ip_contact_auto_notify == true
+                        $ticket->ip_contact_auto_notify == true &&
+                        $only != 'domain'
                     ) {
                         $selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
                     }
@@ -281,7 +274,8 @@ class Notification extends Job implements SelfHandling
                     if (!empty($ticket->domain_contact_reference) &&
                         $ticket->domain_contact_reference != 'UNDEF' &&
                         $ticket->domain_contact_auto_notify == true &&
-                        $ticket->domain_contact_reference != $ticket->ip_contact_reference
+                        $ticket->domain_contact_reference != $ticket->ip_contact_reference &&
+                        $only != 'ip'
                     ) {
                         $selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
                     }
@@ -291,7 +285,8 @@ class Notification extends Job implements SelfHandling
                      */
                     // Conditions just for IP contacts
                     if (!empty($ticket->ip_contact_reference) &&
-                        $ticket->ip_contact_reference != 'UNDEF'
+                        $ticket->ip_contact_reference != 'UNDEF' &&
+                        $only != 'domain'
                     ) {
                         $selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
                     }
@@ -299,7 +294,8 @@ class Notification extends Job implements SelfHandling
                     // Conditions just for Domain contacts
                     if (!empty($ticket->domain_contact_reference) &&
                         $ticket->domain_contact_reference != 'UNDEF' &&
-                        $ticket->domain_contact_reference != $ticket->ip_contact_reference
+                        $ticket->domain_contact_reference != $ticket->ip_contact_reference &&
+                        $only != 'ip'
                     ) {
                         $selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
                     }

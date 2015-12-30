@@ -37,5 +37,5 @@ return [
     'evidence'              => 'Evidence',
     'add_evidence'          => 'Add evidence',
     'last_notification'     => 'Last notification',
-    'total_notifications'   => 'Notifications count',
+    'total_notifications'   => 'Notify count',
 ];

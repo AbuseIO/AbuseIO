@@ -16,7 +16,7 @@
                     <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.update.ip', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
                     <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.update.domain', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
                     <li role="separator" class="divider"></li>
-                    <li>{!! link_to_route('admin.tickets.update.both', trans('misc.both'), [$ticket->id]) !!}</li>
+                    <li{!! ($ticket->ip_contact_reference == 'UNDEF' || $ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.update.both', trans('misc.both'), [$ticket->id]) !!}</li>
                 </ul>
             </div>
             <div class="btn-group" role="group" aria-label="...">
@@ -24,10 +24,10 @@
                     {{ trans('tickets.button.send_notification') }} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.ip', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
-                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.domain', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
+                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify.ip', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
+                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify.domain', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id]) !!}</li>
                     <li role="separator" class="divider"></li>
-                    <li>{!! link_to_route('admin.tickets.both', trans('misc.both'), [$ticket->id]) !!}</li>
+                    <li{!! ($ticket->ip_contact_reference == 'UNDEF' || $ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify.both', trans('misc.both'), [$ticket->id]) !!}</li>
                 </ul>
             </div>
             {!! link_to_route('admin.tickets.status.solved', trans('tickets.button.resolved'), [$ticket->id], ['class' => 'btn btn-success']) !!}
@@ -120,9 +120,6 @@
             @if ($ticket->ip_contact_reference != 'UNDEF')
             <h4>{{ trans('misc.ip') }} {{ trans('misc.contact') }}:</h4>
             <dl class="dl-horizontal">
-                <dt>{{ trans('misc.database_id') }}</dt>
-                <dd>{{ $ticket->ip_contact_account_id }}</dd>
-
                 <dt>{{ trans('contacts.reference') }}</dt>
                 <dd>{{ $ticket->ip_contact_reference }}</dd>
 
@@ -143,9 +140,6 @@
             @if ($ticket->domain_contact_reference != 'UNDEF')
             <h4>{{ trans('misc.domain') }} {{ trans('misc.contact') }}:</h4>
             <dl class="dl-horizontal">
-                <dt>{{ trans('misc.database_id') }}</dt>
-                <dd>{{ $ticket->domain_contact_account_id }}</dd>
-
                 <dt>{{ trans('contacts.reference') }}</dt>
                 <dd>{{ $ticket->domain_contact_reference }}</dd>
 

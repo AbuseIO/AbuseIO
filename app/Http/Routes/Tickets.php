@@ -164,24 +164,24 @@ Route::group(
                     'ip',
                     [
                         'middleware' => 'permission:tickets_edit',
-                        'as' => 'ip',
-                        'uses' => 'TicketsController@notify'
+                        'as' => 'notify.ip',
+                        'uses' => 'TicketsController@notifyIpContact'
                     ]
                 );
                 Route::get(
                     'domain',
                     [
                         'middleware' => 'permission:tickets_edit',
-                        'as' => 'domain',
-                        'uses' => 'TicketsController@notify'
+                        'as' => 'notify.domain',
+                        'uses' => 'TicketsController@notifyDomainContact'
                     ]
                 );
                 Route::get(
                     'both',
                     [
                         'middleware' => 'permission:tickets_edit',
-                        'as' => 'both',
-                        'uses' => 'TicketsController@notify'
+                        'as' => 'notify.both',
+                        'uses' => 'TicketsController@notifyBothContacts'
                     ]
                 );
             }
@@ -200,7 +200,7 @@ Route::group(
                     [
                         'middleware' => 'permission:tickets_edit',
                         'as' => 'update.ip',
-                        'uses' => 'TicketsController@updatecontact'
+                        'uses' => 'TicketsController@updateIpContact'
                     ]
                 );
                 Route::get(
@@ -208,7 +208,7 @@ Route::group(
                     [
                         'middleware' => 'permission:tickets_edit',
                         'as' => 'update.domain',
-                        'uses' => 'TicketsController@updatecontact'
+                        'uses' => 'TicketsController@updateDomainContact'
                     ]
                 );
                 Route::get(
@@ -216,7 +216,7 @@ Route::group(
                     [
                         'middleware' => 'permission:tickets_edit',
                         'as' => 'update.both',
-                        'uses' => 'TicketsController@updatecontact'
+                        'uses' => 'TicketsController@updateBothContacts'
                     ]
                 );
             }

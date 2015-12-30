@@ -72,3 +72,21 @@ tr.shown td.details-control:before {
     right: 0;
     background: rgba(255, 255, 255, 0.5);
 }
+
+/**
+Bootstrap 3 - Disabled dropdown links
+More information here: http://blog.craigsworks.com/bootstrap-3-disabled-dropdown-links/
+**/
+
+/*
+Mimic cursor style from native .dropdown-menu > .disabled > a{} styles,
+since `pointer-events: none` kills the cursor state, too.
+*/
+.dropdown-menu > .disabled{
+ cursor: not-allowed;
+}
+
+/* The real magic ;) */
+.dropdown-menu > .disabled > a{
+ pointer-events: none;
+}
