@@ -177,7 +177,11 @@ class Notification extends Job implements SelfHandling
          */
         $selection = [ ];
 
-        $search = Ticket::where('status_id', '!=', '2');
+        $search = Ticket::where('id', '>', '0');
+
+        if (!$force) {
+            $search = Ticket::where('status_id', '!=', '2');
+        }
 
         if ($ticket !== false) {
             $search->where('id', '=', $ticket);
