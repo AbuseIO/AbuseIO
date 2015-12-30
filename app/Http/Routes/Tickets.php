@@ -23,7 +23,7 @@ Route::group(
         /*
         | Index tickets
         */
-        route::get(
+        Route::get(
             '',
             [
                 'middleware' => 'permission:tickets_view',
@@ -35,7 +35,7 @@ Route::group(
         /*
         | Show ticket
         */
-        route::get(
+        Route::get(
             '{tickets}',
             [
                 'middleware' => 'permission:tickets_view',
@@ -47,7 +47,7 @@ Route::group(
         /*
         | Export tickets
         */
-        route::get(
+        Route::get(
             'export/{format}',
             [
                 'middleware' => 'permission:tickets_export',
@@ -59,7 +59,7 @@ Route::group(
         /*
         | Create ticket
         */
-        route::get(
+        Route::get(
             'create',
             [
                 'middleware' => 'permission:tickets_create',
@@ -67,7 +67,7 @@ Route::group(
                 'uses' => 'TicketsController@create'
             ]
         );
-        route::post(
+        Route::post(
             '',
             [
                 'middleware' => 'permission:tickets_create',
@@ -79,7 +79,7 @@ Route::group(
         /*
         | Edit ticket
         */
-        route::get(
+        Route::get(
             '{tickets}/edit',
             [
                 'middleware' => 'permission:tickets_edit',
@@ -87,7 +87,7 @@ Route::group(
                 'uses' => 'TicketsController@edit'
             ]
         );
-        route::patch(
+        Route::patch(
             '{tickets}',
             [
                 'middleware' => 'permission:tickets_edit',
@@ -95,7 +95,7 @@ Route::group(
                 'uses' => 'TicketsController@update'
             ]
         );
-        route::put(
+        Route::put(
             '{tickets}',
             [
                 'middleware' => 'permission:tickets_edit',
@@ -103,42 +103,6 @@ Route::group(
                 'uses' => 'TicketsController@update'
             ]
         );
-
-        /*
-        | Edit ticket status
-        */
-        Route::group(
-            [
-                'prefix' => '{tickets}/status'
-            ],
-            function () {
-                Route::get(
-                    'solved',
-                    [
-                        'middleware' => 'permission:tickets_edit',
-                        'as' => 'status.solved',
-                        'uses' => 'TicketsController@status'
-                    ]
-                );
-                Route::get(
-                    'close',
-                    [
-                        'middleware' => 'permission:tickets_edit',
-                        'as' => 'status.close',
-                        'uses' => 'TicketsController@status'
-                    ]
-                );
-                Route::get(
-                    'ignore',
-                    [
-                        'middleware' => 'permission:tickets_edit',
-                        'as' => 'status.ignore',
-                        'uses' => 'TicketsController@status'
-                    ]
-                );
-            }
-        );
-
 
         /*
         | Delete ticket
@@ -153,6 +117,25 @@ Route::group(
         );
 
         /*
+        | Contact information
+        */
+        Route::group(
+            [
+                'prefix' => '{tickets}/update'
+            ],
+            function () {
+                Route::get(
+                    '{who?}',
+                    [
+                        'middleware' => 'permission:tickets_edit',
+                        'as' => 'update',
+                        'uses' => 'TicketsController@update'
+                    ]
+                );
+            }
+        );
+
+        /*
         | Notifications
         */
         Route::group(
@@ -161,92 +144,33 @@ Route::group(
             ],
             function () {
                 Route::get(
-                    'ip',
+                    '{who?}',
                     [
                         'middleware' => 'permission:tickets_edit',
-                        'as' => 'notify.ip',
-                        'uses' => 'TicketsController@notifyIpContact'
-                    ]
-                );
-                Route::get(
-                    'domain',
-                    [
-                        'middleware' => 'permission:tickets_edit',
-                        'as' => 'notify.domain',
-                        'uses' => 'TicketsController@notifyDomainContact'
-                    ]
-                );
-                Route::get(
-                    'both',
-                    [
-                        'middleware' => 'permission:tickets_edit',
-                        'as' => 'notify.both',
-                        'uses' => 'TicketsController@notifyBothContacts'
+                        'as' => 'notify',
+                        'uses' => 'TicketsController@notify'
                     ]
                 );
             }
         );
 
         /*
-        | Update contact information
+        | Edit ticket status
         */
         Route::group(
             [
-                'prefix' => '{tickets}/update'
+                'prefix' => '{tickets}/status'
             ],
             function () {
                 Route::get(
-                    'ip',
+                    '{status}',
                     [
                         'middleware' => 'permission:tickets_edit',
-                        'as' => 'update.ip',
-                        'uses' => 'TicketsController@updateIpContact'
-                    ]
-                );
-                Route::get(
-                    'domain',
-                    [
-                        'middleware' => 'permission:tickets_edit',
-                        'as' => 'update.domain',
-                        'uses' => 'TicketsController@updateDomainContact'
-                    ]
-                );
-                Route::get(
-                    'both',
-                    [
-                        'middleware' => 'permission:tickets_edit',
-                        'as' => 'update.both',
-                        'uses' => 'TicketsController@updateBothContacts'
+                        'as' => 'status',
+                        'uses' => 'TicketsController@status'
                     ]
                 );
             }
         );
-
-        // Filter options
-        // TODO: replace with search filter instead of method?
-        Route::group(
-            [
-                'prefix' => 'status'
-            ],
-            function () {
-                Route::get(
-                    'open',
-                    [
-                        'middleware' => 'permission:tickets_view',
-                        'as' => 'showOpen',
-                        'uses' => 'TicketsController@statusOpen'
-                    ]
-                );
-                Route::get(
-                    'closed',
-                    [
-                        'middleware' => 'permission:tickets_view',
-                        'as' => 'showClosed',
-                        'uses' => 'TicketsController@showClosed'
-                    ]
-                );
-            }
-        );
-
     }
 );

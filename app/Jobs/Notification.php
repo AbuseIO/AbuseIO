@@ -214,6 +214,11 @@ class Notification extends Job implements SelfHandling
             return $message;
         }
 
+        // If an invalid value for $only is given, set default (null = both)
+        if (!in_array($only, ['ip', 'domain'])) {
+            $only = null;
+        }
+
         $sendInfoAfter = strtotime(config('main.notifications.info_interval') . " ago");
         $sendAbuseAfter = strtotime(config('main.notifications.abuse_interval') . " ago");
         $sendNotOlderThen = strtotime(config('main.notifications.min_lastseen') . " ago");

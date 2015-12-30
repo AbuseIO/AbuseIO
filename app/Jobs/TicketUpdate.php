@@ -49,4 +49,51 @@ class TicketUpdate extends Job
         $ticket->ip_contact_auto_notify     = $ipContact->auto_notify;
         $ticket->save();
     }
+
+    public static function contact($ticket, $only)
+    {
+        // If an invalid value for $only is given, set default (null = both)
+        if (!in_array($only, ['ip', 'domain'])) {
+            $only = null;
+        }
+
+        switch ($only) {
+            case 'ip':
+                static::ipContact($ticket);
+                break;
+            case 'domain':
+                static::domainContact($ticket);
+                break;
+            default:
+                static::ipContact($ticket);
+                static::domainContact($ticket);
+        }
+    }
+
+    public static function status($ticket, $newstatus = null)
+    {
+        /**
+         * status list is defined in resources/lang/<lang>/types.php
+         * 1: Open
+         * 2: Closed
+         * 3: Escalated
+         * 4: Ignored
+         * 5: Resolved
+         */
+
+        $statuslist = [
+            'open'      => 1,
+            'closed'    => 2,
+            'escalated' => 3,
+            'ignored'   => 4,
+            'resolved'  => 5,
+        ];
+
+        if (array_key_exists($newstatus, $statuslist)) {
+            $ticket->status_id = $statuslist[$newstatus];
+            $ticket->save();
+        } else {
+            echo "wrong status given.";
+        }
+    }
 }

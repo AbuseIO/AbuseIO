@@ -14,8 +14,6 @@ return [
     'button.closed_tickets'     => 'Gesloten tickets',
     'button.update_contact'     => 'Contact bijwerken',
     'button.send_notification'  => 'Verstuur notificatie',
-    'button.ignore'             => 'Negeer',
-    'button.resolved'           => 'Opgelost',
 
     // Tickets - Miscellaneous
     'no_tickets'            => 'U heeft nog geen tickets',
@@ -38,4 +36,9 @@ return [
     'add_evidence'          => 'Voeg bewijsmateriaal toe',
     'last_notification'     => 'Laatste notificatie',
     'total_notifications'   => 'Aantal notificaties',
+    'open'                  => 'Open',
+    'closed'                => 'Gesloten',
+    'escalated'             => 'Geëscaleerd',
+    'ignored'               => 'Genegeerd',
+    'resolved'              => 'Opgelost',
 ];

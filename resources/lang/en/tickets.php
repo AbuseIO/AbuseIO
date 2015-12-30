@@ -14,8 +14,6 @@ return [
     'button.closed_tickets'     => 'Closed tickets',
     'button.update_contact'     => 'Update contact',
     'button.send_notification'  => 'Send notification',
-    'button.ignore'             => 'Ignore',
-    'button.resolved'           => 'Resolved',
 
     // Tickets - Miscellaneous
     'no_tickets'            => 'You do not yet have any tickets',
@@ -38,4 +36,9 @@ return [
     'add_evidence'          => 'Add evidence',
     'last_notification'     => 'Last notification',
     'total_notifications'   => 'Notify count',
+    'open'                  => 'Open',
+    'closed'                => 'Closed',
+    'escalated'             => 'Escalated',
+    'ignored'               => 'Ignored',
+    'resolved'              => 'Resolved',
 ];

@@ -181,140 +181,58 @@ class TicketsController extends Controller
      */
     public function show(Ticket $ticket)
     {
+        $class = trans("types.status.{$ticket->status_id}.class");
+
         return view('tickets.show')
             ->with('ticket', $ticket)
+            ->with('ticket_class', $class)
             ->with('auth_user', $this->auth_user);
     }
 
     /**
-     * Update the specified ticket in storage.
+     * Update the requested contact information.
      *
-     * @param  Ticket $ticket
-     * @return \Illuminate\Http\Response
+     * @param  Ticket $ticket    Ticket Model
+     * @param  string $only      Only send to ('ip', 'domain' or null (both))
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Ticket $ticket)
+    public function update(Ticket $ticket, $only = null)
     {
-        //return Redirect::route('admin.tickets.show', $ticket->id)->with('message', 'Ticket has been updated.');
+        TicketUpdate::contact($ticket, $only);
+
+        return Redirect::route('admin.tickets.show', $ticket->id)
+            ->with('message', 'Contact has been updated.');
     }
 
     /**
-     * Updates the ticket to the given status.
+     * Set the status of a tickets
      *
-     * @param Ticket $ticket
+     * @param  Ticket $ticket    Ticket Model
+     * @param  string $newstatus String version of the new status
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function status(Ticket $ticket)
+    public function status(Ticket $ticket, $newstatus)
     {
-        // TODO: #AIO-39 Interaction tickets - (mark) Maybe use existing update() for this?
-        return Redirect::route(
-            'admin.tickets.show',
-            $ticket->id
-        )->with('message', '{PLACEHOLDER} Ticket status has been updated.');
+        TicketUpdate::status($ticket, $newstatus);
+        return Redirect::route('admin.tickets.show', $ticket->id)
+            ->with('message', 'Ticket status has been updated.');
     }
 
     /**
      * Send a notification for this ticket to the IP contact.
      *
-     * @param Ticket $ticket
+     * @param Ticket $ticket    Ticket Model
+     * @param string $only      Only send to ('ip', 'domain' or null (both))
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function notifyIpContact(Ticket $ticket)
+    public function notify(Ticket $ticket, $only = null)
     {
         $notification = new Notification;
         $notification->walkList(
-            $notification->buildList($ticket->id, false, true, 'ip')
+            $notification->buildList($ticket->id, false, true, $only)
         );
 
-        return Redirect::route(
-            'admin.tickets.show',
-            $ticket->id
-        )->with('message', 'IP Contact has been notified.');
-    }
-
-    /**
-     * Send a notification for this ticket to the domain contact.
-     *
-     * @param Ticket $ticket
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function notifyDomainContact(Ticket $ticket)
-    {
-        $notification = new Notification;
-        $notification->walkList(
-            $notification->buildList($ticket->id, false, true, 'domain')
-        );
-
-        return Redirect::route(
-            'admin.tickets.show',
-            $ticket->id
-        )->with('message', 'Domain Contact has been notified.');
-    }
-
-    /**
-     * Send a notification for this ticket to both contacts.
-     *
-     * @param Ticket $ticket
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function notifyBothContacts(Ticket $ticket)
-    {
-        $notification = new Notification;
-        $notification->walkList(
-            $notification->buildList($ticket->id, false, true)
-        );
-
-        return Redirect::route(
-            'admin.tickets.show',
-            $ticket->id
-        )->with('message', 'IP and Domain Contact have been notified.');
-    }
-
-    /**
-     * Updates the requested IP contact information.
-     *
-     * @param Ticket $ticket
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updateIpContact(Ticket $ticket)
-    {
-        TicketUpdate::ipContact($ticket);
-
-        return Redirect::route(
-            'admin.tickets.show',
-            $ticket->id
-        )->with('message', 'IP Contact has been updated.');
-    }
-
-    /**
-     * Updates the requested domain contact information.
-     *
-     * @param Ticket $ticket
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updateDomainContact(Ticket $ticket)
-    {
-        TicketUpdate::domainContact($ticket);
-
-        return Redirect::route(
-            'admin.tickets.show',
-            $ticket->id
-        )->with('message', 'Domain Contact has been updated.');
-    }
-
-    /**
-     * Updates the requested contacts information.
-     *
-     * @param Ticket $ticket
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updateBothContacts(Ticket $ticket)
-    {
-        TicketUpdate::ipContact($ticket);
-        TicketUpdate::domainContact($ticket);
-
-        return Redirect::route(
-            'admin.tickets.show',
-            $ticket->id
-        )->with('message', 'IP and Domain Contact has been updated.');
+        return Redirect::route('admin.tickets.show', $ticket->id)
+            ->with('message', 'Contact has been notified.');
     }
 }

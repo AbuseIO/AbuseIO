@@ -19,16 +19,29 @@ return [
 
     'status' => [
         1 => [
-            'name' => 'Open',
-            'description' => 'Open tickets',
+            'name'          => 'Open',
+            'description'   => 'Open tickets',
+            'class'         => 'primary',
         ],
         2 => [
-            'name' => 'Gesloten',
-            'description' => 'Gesloten tickets',
+            'name'          => 'Gesloten',
+            'description'   => 'Gesloten tickets',
+            'class'         => 'success',
         ],
         3 => [
-            'name' => 'Geëscaleerd',
-            'description' => 'Geëscaleerde tickets',
+            'name'          => 'Geëscaleerd',
+            'description'   => 'Geëscaleerde tickets',
+            'class'         => 'danger',
+        ],
+        4 => [
+            'name'          => 'Genegeerd',
+            'description'   => 'Genegeerde tickets',
+            'class'         => 'default',
+        ],
+        5 => [
+            'name'          => 'Opgelost',
+            'description'   => 'Opgeloste tickets',
+            'class'         => 'info',
         ],
     ],
 

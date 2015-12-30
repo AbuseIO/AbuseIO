@@ -22,7 +22,6 @@ return [
     'nav_brands'   => 'Merken',
     'nav_accounts' => 'Accounts',
 
-
     // Button labels
     'button.show'           => 'Bekijken',
     'button.details'        => 'Details',
@@ -36,6 +35,7 @@ return [
     'button.reset'          => 'Reset',
     'button.enable'         => 'Aanzetten ',
     'button.disable'        => 'Uitzetten',
+    'button.open'           => 'Openen',
     'button.close'          => 'Sluiten',
     'button.hidden'         => 'Onzichtbaar',
     'button.visible'        => 'Zichtbaar',
