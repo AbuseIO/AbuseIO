@@ -24,8 +24,9 @@ class AlertAdmin extends Job
         $sent = Mail::raw(
             $message,
             function ($mail) use ($attachments) {
-                $mail->from(Config::get('main.notifications.from_address'), 'AbuseIO EmailReceiver');
+                $mail->from(Config::get('main.notifications.from_address'), 'AbuseIO Alerter');
                 $mail->to(Config::get('main.emailparser.fallback_mail'));
+                $mail->subject('Exception notification');
 
                 foreach ($attachments as $attachmentName => $attachmentData) {
                     $mail->attachData(
