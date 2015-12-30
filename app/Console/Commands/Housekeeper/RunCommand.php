@@ -56,22 +56,31 @@ class RunCommand extends Command
         // TODO: #AIO-22 Create housekeeping - Walk thru all collectors to gather information.
         // TODO: Extra: Collectors should be kicked into a queue, only if there isn't one running yet with the same name
 
-        // TODO: Add queue watchers, check weither queues are actually running (have watchers)
-        // TODO: perhaps using a testjob that we can stick into each queue we operate?
-        // TODO: Add failed to all queued jobs to handle them code-wise!
-        // TODO: Add view of failed jobs and start alarm bells on that too
-        // TODO: Built a generic alarm job for contacting the admin
-
         $pheanstalk = Queue::getPheanstalk();
         foreach ($pheanstalk->listTubes() as $queue) {
             if (preg_match('#^abuseio#', $queue) === 1) {
+                /*
+                 * Fire an test jobs into the abuseio queue selected.
+                 * Handling of the result is done at the QueueTest->failed() method
+                 */
+                $this->dispatch(new QueueTest($queue));
+
+                /*
+                 * Check all queues to have a watcher (queue listener) without it jobs would not be started
+                 */
                 $queueStatus = $pheanstalk->statsTube($queue);
                 if ($queueStatus['current-watching'] == 0) {
-                    //Fatal there are no watchers! Supervisor gone, Start alarm bells here
+                    AlertAdmin::send(
+                        "Warning the queue runner for {$queue} does not seem to be running. All jobs in this queue " .
+                        "are affected and this problem should be resolved ASAP."
+                    );
                 }
 
-                // Handling of the result is done at the QueueTest->failed() method
-                $this->dispatch(new QueueTest($queue));
+                /*
+                 * Check if the queue has failed jobs
+                 */
+
+
             }
         }
 
