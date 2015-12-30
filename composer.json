@@ -37,7 +37,6 @@
         "webpatser/laravel-uuid": "1.*",
         "Chumper/Zipper": "0.6.x",
         "barryvdh/laravel-ide-helper": "^2.0",
-        "pda/pheanstalk": "~3.0",
         "ddeboer/data-import": "^0.18.0",
         "yajra/laravel-datatables-oracle": "~5.0",
         "guzzlehttp/guzzle": "6.1.1",

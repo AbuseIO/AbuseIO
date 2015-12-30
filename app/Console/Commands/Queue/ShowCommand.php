@@ -50,22 +50,7 @@ class ShowCommand extends AbstractShowCommand
     {
         $queue = ($filter) ? "abuseio_". $filter : Config::get('queue.connections.beanstalkd.queue');
 
-        $pheanstalk = Queue::getPheanstalk();
-        $pheanstalk->useTube($queue);
-        $pheanstalk->watch($queue);
-
-        $jobs = [];
-        while ($job = $pheanstalk->reserve(0)) {
-            $jobData = json_decode($job->getData());
-            $jobCommand = unserialize($jobData->data->command);
-
-            $jobs[] = [
-                'id'        =>  $job->getId(),
-                'worker'    => class_basename($jobCommand),
-            ];
-        }
-
-        return $jobs;
+        //TODO Fix
     }
 
     /**

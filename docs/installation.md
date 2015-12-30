@@ -4,28 +4,15 @@ PHP 5.5.9 or better
 MTA that can redirect into pipes (e.g. Exim or Postfix)
 Apache 2.x or better
 Database backend (mysql, postgres, etc)
-Beanstalk Queueing server
 Bind or pDNS-recursor
 
 for ubuntu
 
 ```bash
-apt-get install php5 mysql-server php5-mysql beanstalkd apache2 apache2-utils postfix supervisor bind9 php-pear php5-dev php5-mcrypt git
+apt-get install php5 mysql-server php5-mysql apache2 apache2-utils postfix supervisor bind9 php-pear php5-dev php5-mcrypt git
 ```
 
 # Installation (as root)
-
-## Note on Queuing
-
-By default we use the beanstalk queue driver for performance, however you can choose to change the configuration to use
-either 'sync' or 'database' backends. These do not require any installation of third party software for Queuing.
-
-NOTE!: After installing beanstalk you are wise to change the /etc/default/beanstalk and uncomment the line:
-```
-BEANSTALKD_EXTRA="-b /var/lib/beanstalkd"
-```
-
-This will make your queue persistant so restarts/reboots/etc will not affect the queuing.
 
 ## Setup local resolving
 
@@ -258,13 +245,16 @@ Create the file /opt/abuseio/.env with the following hints:
 APP_ENV=production (change to development if needed)
 APP_DEBUG=false (change to true if needed)
 APP_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+DB_DRIVER=mysql
 DB_HOST=localhost
 DB_DATABASE=abuseio
 DB_USERNAME=username
 DB_PASSWORD=password
+
 CACHE_DRIVER=file
 SESSION_DRIVER=file
-QUEUE_DRIVER=sync
+QUEUE_DRIVER=database
 ```
 
 ## Installing and seeding database

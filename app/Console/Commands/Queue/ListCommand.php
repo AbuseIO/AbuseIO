@@ -57,33 +57,7 @@ class ListCommand extends AbstractListCommand
     protected function findAll()
     {
 
-        $pheanstalk = Queue::getPheanstalk();
-        $queues = [];
-
-        foreach ($pheanstalk->listTubes() as $queue) {
-            if (preg_match('#^abuseio#', $queue) === 1) {
-                $queueStatus = $pheanstalk->statsTube($queue);
-
-                $queues[] = [
-                    'name'          => substr($queueStatus['name'], 8),
-                    'urgent'        => $queueStatus['current-jobs-urgent'],
-                    'ready'         => $queueStatus['current-jobs-ready'],
-                    'reserved'      => $queueStatus['current-jobs-reserved'],
-                    'delayed'       => $queueStatus['current-jobs-delayed'],
-                    'buried'        => $queueStatus['current-jobs-buried'],
-                    'total'         => $queueStatus['total-jobs'],
-                    'using'         => $queueStatus['current-using'],
-                    'watching'      => $queueStatus['current-watching'],
-                    'waiting'       => $queueStatus['current-waiting'],
-                    'deleted'       => $queueStatus['cmd-delete'],
-                    'paused'        => $queueStatus['cmd-pause-tube'],
-
-
-                ];
-            }
-        }
-
-        return $queues;
+        //TODO Fix
 
     }
 

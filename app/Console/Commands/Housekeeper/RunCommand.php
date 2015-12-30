@@ -9,11 +9,10 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use AbuseIO\Jobs\QueueTest;
 use AbuseIO\Jobs\AlertAdmin;
+use Illuminate\Support\Arr;
 use Validator;
 use Artisan;
 use Carbon;
-use Queue;
-use Log;
 
 /**
  * Class RunCommand
@@ -56,35 +55,48 @@ class RunCommand extends Command
         // TODO: #AIO-22 Create housekeeping - Walk thru all collectors to gather information.
         // TODO: Extra: Collectors should be kicked into a queue, only if there isn't one running yet with the same name
 
-        $pheanstalk = Queue::getPheanstalk();
-        foreach ($pheanstalk->listTubes() as $queue) {
-            if (preg_match('#^abuseio#', $queue) === 1) {
-                /*
-                 * Fire an test jobs into the abuseio queue selected.
-                 * Handling of the result is done at the QueueTest->failed() method
-                 */
-                $this->dispatch(new QueueTest($queue));
+        /*
+         * Checks for beanstalk queue
+         */
+        // TODO: Somehow check howlong a job is running? Or self-kill it in 1 hour?
 
-                /*
-                 * Check all queues to have a watcher (queue listener) without it jobs would not be started
-                 */
-                $queueStatus = $pheanstalk->statsTube($queue);
-                if ($queueStatus['current-watching'] == 0) {
-                    AlertAdmin::send(
-                        "Warning the queue runner for {$queue} does not seem to be running. All jobs in this queue " .
-                        "are affected and this problem should be resolved ASAP."
+
+        /*
+         * Fire an test jobs into the abuseio queue selected.
+         * Handling of the result is done at the QueueTest->failed() method
+         */
+        // Todo how to get a list of queues, make it fixed?
+        //$this->dispatch(new QueueTest($queue));
+
+
+        /*
+         * Check for any kind of failed jobs
+         */
+        $jobs = $this->getFailedJobs();
+        $jobsMask = "|%-8.8s |%-20.20s |%-35.35s |%-35.35s |%-30.30s |" . PHP_EOL . PHP_EOL;
+        $jobsList[] = sprintf($jobsMask, 'ID', 'Connection', 'Queue', 'Class', 'Failed At');
+
+        if (count($jobs) != 0) {
+            foreach ($jobs as $job) {
+                if (count($job) == 5) {
+                    $jobsList[] = sprintf(
+                        $jobsMask,
+                        $job[0],
+                        $job[1],
+                        $job[2],
+                        $job[3],
+                        $job[4]
                     );
                 }
+            }
 
-                /*
-                 * Check if the queue has failed jobs
-                 */
-
-
+            if (count($jobsList) > 2) {
+                AlertAdmin::send(
+                    "Alert: There are " . count($jobs) . " jobs in the queue that have failed:" . PHP_EOL . PHP_EOL .
+                    implode(PHP_EOL, $jobsList)
+                );
             }
         }
-
-        die();
 
         /*
          * Walk thru all tickets to see which need closing
@@ -216,5 +228,63 @@ class RunCommand extends Command
         echo Artisan::output();
 
         return true;
+    }
+
+    /**
+     * Compile the failed jobs into a displayable format.
+     *
+     * @return array
+     */
+    protected function getFailedJobs()
+    {
+        $results = [];
+
+        foreach ($this->laravel['queue.failer']->all() as $failed) {
+            $results[] = $this->parseFailedJob((array) $failed);
+        }
+
+        return array_filter($results);
+    }
+
+    /**
+     * Parse the failed job row.
+     *
+     * @param  array  $failed
+     * @return array
+     */
+    protected function parseFailedJob(array $failed)
+    {
+        $row = array_values(Arr::except($failed, ['payload']));
+
+        array_splice($row, 3, 0, $this->extractJobName($failed['payload']));
+
+        return $row;
+    }
+
+    /**
+     * Extract the failed job name from payload.
+     *
+     * @param  string  $payload
+     * @return string|null
+     */
+    private function extractJobName($payload)
+    {
+        $payload = json_decode($payload, true);
+
+        if ($payload && (! isset($payload['data']['command']))) {
+            return Arr::get($payload, 'job');
+        }
+
+        if ($payload && isset($payload['data']['command'])) {
+            preg_match('/"([^"]+)"/', $payload['data']['command'], $matches);
+
+            if (isset($matches[1])) {
+                return $matches[1];
+            } else {
+                return Arr::get($payload, 'job');
+            }
+        }
+
+        return null;
     }
 }
