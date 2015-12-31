@@ -6,7 +6,10 @@ use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\TicketsFormRequest;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Jobs\TicketUpdate;
+use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Ticket;
+use Illuminate\Filesystem\Filesystem;
+use PhpMimeMailParser\Parser as MimeParser;
 use yajra\Datatables\Datatables;
 use Redirect;
 use DB;
@@ -234,5 +237,109 @@ class TicketsController extends Controller
 
         return Redirect::route('admin.tickets.show', $ticket->id)
             ->with('message', 'Contact has been notified.');
+    }
+
+    /**
+     * Shows the evidence for this ticket as webpage.
+     *
+     * @param Ticket $ticket        Ticket Model
+     * @param integer $evidenceId
+     * @return \Illuminate\Http\Response
+     */
+    public function viewEvidence(Ticket $ticket, $evidenceId)
+    {
+        $evidence = Evidence::find($evidenceId);
+
+        if (!$evidence) {
+            return Redirect::route('admin.tickets.show', $ticket->id)
+                ->with('message', 'The evidence is no longer available for this event.');
+        }
+
+        if (is_file($evidence->filename)) {
+            $evidenceData = file_get_contents($evidence->filename);
+
+            $evidenceParsed = new MimeParser();
+            $evidenceParsed->setText($evidenceData);
+
+            $filesystem = new Filesystem;
+            $evidenceTempDir = "/tmp/abuseio/cache/{$ticket->id}/{$evidenceId}/";
+            if (!$filesystem->isDirectory($evidenceTempDir)) {
+                if (!$filesystem->makeDirectory($evidenceTempDir, 0755, true)) {
+                    Log::error(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        'Unable to create temp directory: ' . $evidenceTempDir
+                    );
+                }
+                $evidenceParsed->saveAttachments($evidenceTempDir);
+            }
+
+            return view('tickets.evidence')
+                ->with('ticket', $ticket)
+                ->with('evidence', $evidenceParsed)
+                ->with('evidenceId', $evidenceId)
+                ->with('evidenceTempDir', $evidenceTempDir)
+                ->with('auth_user', $this->auth_user);
+
+        } else {
+            return Redirect::route('admin.tickets.show', $ticket->id)
+                ->with('message', 'ERROR: The file was not available on the filesystem.');
+        }
+
+    }
+
+    /**
+     * Downloads an evidence attachment for this tickets evidence
+     *
+     * @param Ticket $ticket        Ticket Model
+     * @param integer $evidenceId
+     * @param string $attachmentFile
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadEvidenceAttachment(Ticket $ticket, $evidenceId, $attachmentFile)
+    {
+        $evidenceTempDir = "/tmp/abuseio/cache/{$ticket->id}/{$evidenceId}/";
+        $downloadFile = $evidenceTempDir . $attachmentFile;
+
+        if (is_file($downloadFile)) {
+            $evidenceData = file_get_contents($downloadFile);
+
+            return response($evidenceData, 200)
+                ->header('Content-Type', 'message/rfc822')
+                ->header('Content-Transfer-Encoding', 'Binary')
+                ->header('Content-Disposition', 'attachment; filename="' . $attachmentFile . '"');
+        } else {
+            return Redirect::route('admin.tickets.show', $ticket->id)
+                ->with('message', 'ERROR: The file was not available on the filesystem.');
+        }
+    }
+
+    /**
+     * Downloads the evidence for this ticket as EML
+     *
+     * @param Ticket $ticket        Ticket Model
+     * @param integer $evidenceId
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadEvidence(Ticket $ticket, $evidenceId)
+    {
+        $evidence = Evidence::find($evidenceId);
+
+        if (!$evidence) {
+            return Redirect::route('admin.tickets.show', $ticket->id)
+                ->with('message', 'The evidence is no longer available for this event.');
+        }
+
+        if (is_file($evidence->filename)) {
+            $evidenceData = file_get_contents($evidence->filename);
+            $outputFilename = "ticket_{$ticket->id}_evidence_{$evidenceId}.eml";
+
+            return response($evidenceData, 200)
+                ->header('Content-Type', 'message/rfc822')
+                ->header('Content-Transfer-Encoding', 'Binary')
+                ->header('Content-Disposition', 'attachment; filename="' . $outputFilename . '"');
+        } else {
+            return Redirect::route('admin.tickets.show', $ticket->id)
+                ->with('message', 'ERROR: The file was not available on the filesystem.');
+        }
     }
 }

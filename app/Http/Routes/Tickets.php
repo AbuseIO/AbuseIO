@@ -172,5 +172,62 @@ Route::group(
                 );
             }
         );
+
+        /*
+        | Evidence view
+        */
+        Route::group(
+            [
+                'prefix' => '{tickets}/evidence'
+            ],
+            function () {
+                Route::get(
+                    '{id}/view',
+                    [
+                        'middleware' => 'permission:tickets_view',
+                        'as' => 'notify',
+                        'uses' => 'TicketsController@viewEvidence'
+                    ]
+                );
+            }
+        );
+
+        /*
+        | Evidence view
+        */
+        Route::group(
+            [
+                'prefix' => '{tickets}/evidence'
+            ],
+            function () {
+                Route::get(
+                    '{id}/view/attachment/{file}',
+                    [
+                        'middleware' => 'permission:tickets_view',
+                        'as' => 'notify',
+                        'uses' => 'TicketsController@downloadEvidenceAttachment'
+                    ]
+                );
+            }
+        );
+
+        /*
+        | Evidence download
+        */
+        Route::group(
+            [
+                'prefix' => '{tickets}/evidence'
+            ],
+            function () {
+                Route::get(
+                    '{id}/download',
+                    [
+                        'middleware' => 'permission:tickets_view',
+                        'as' => 'status',
+                        'uses' => 'TicketsController@downloadEvidence'
+                    ]
+                );
+            }
+        );
     }
 );

@@ -219,7 +219,7 @@
                             @endif
                             </dl>
                         </td>
-                        <td><a href='{{ Request::url() }}/evidence/{{ $event->evidences[0]->filename }}'>{{ trans('ash.communication.download') }}</a> - <a href="#">{{ trans('ash.communication.view') }}</a></td>
+                        <td><a href='{{ Request::url() }}/evidence/{{ $event->evidences[0]->id }}/download'>{{ trans('ash.communication.download') }}</a> - <a href="{{ Request::url() }}/evidence/{{ $event->evidences[0]->id }}/view">{{ trans('ash.communication.view') }}</a></td>
                     </tr>
                 @endforeach
                 </tbody>
