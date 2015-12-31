@@ -185,7 +185,7 @@ Route::group(
                     '{id}/view',
                     [
                         'middleware' => 'permission:tickets_view',
-                        'as' => 'notify',
+                        'as' => 'evidence.view',
                         'uses' => 'TicketsController@viewEvidence'
                     ]
                 );
@@ -204,7 +204,7 @@ Route::group(
                     '{id}/view/attachment/{file}',
                     [
                         'middleware' => 'permission:tickets_view',
-                        'as' => 'notify',
+                        'as' => 'evidence.attachment',
                         'uses' => 'TicketsController@downloadEvidenceAttachment'
                     ]
                 );
@@ -223,7 +223,7 @@ Route::group(
                     '{id}/download',
                     [
                         'middleware' => 'permission:tickets_view',
-                        'as' => 'status',
+                        'as' => 'evidence.download',
                         'uses' => 'TicketsController@downloadEvidence'
                     ]
                 );
