@@ -3,10 +3,14 @@
 namespace AbuseIO\Console\Commands\Queue;
 
 use AbuseIO\Console\Commands\AbstractListCommand;
+use AbuseIO\Models\Job;
 use Carbon;
-use Config;
 use Queue;
 
+/**
+ * Class ListCommand
+ * @package AbuseIO\Console\Commands\Queue
+ */
 class ListCommand extends AbstractListCommand
 {
 
@@ -15,19 +19,20 @@ class ListCommand extends AbstractListCommand
      * @var string
      */
     protected $signature = 'queue:list
+                                {--filter= : Applies a filter on the queue name }
     ';
 
     /**
      * The console command description.
      * @var string
      */
-    protected $description = 'Show all use queues in Beanstalkd';
+    protected $description = 'Show all queue usage';
 
     /**
      * The headers of the table
      * @var array
      */
-    protected $headers = [ 'Name', 'Urgent', 'Ready', 'Reserved', 'delayed', 'buried', 'total', 'using', 'watching', 'waiting', 'deleted', 'paused' ];
+    protected $headers = [ 'Name', 'Jobs' ];
 
     /**
      * The fields of the table / database row
@@ -40,7 +45,24 @@ class ListCommand extends AbstractListCommand
      */
     protected function transformListToTableBody($list)
     {
-        return $list;
+        $counters = [];
+        $result = [];
+
+        foreach ($list as $key => $job) {
+
+            if (empty($counters[$job->queue])) {
+                $counters[$job->queue] = 0;
+            }
+
+            $counters[$job->queue]++;
+
+            $result[$job->queue] = [
+                $job->queue,
+                $counters[$job->queue]
+            ];
+        }
+
+        return $result;
     }
 
     /**
@@ -48,7 +70,7 @@ class ListCommand extends AbstractListCommand
      */
     protected function findWithCondition($filter)
     {
-
+        return Job::where('queue', 'like', "%{$this->option('filter')}%")->get();
     }
 
     /**
@@ -56,9 +78,7 @@ class ListCommand extends AbstractListCommand
      */
     protected function findAll()
     {
-
-        //TODO Fix
-
+        return Job::all();
     }
 
     /**
@@ -66,6 +86,6 @@ class ListCommand extends AbstractListCommand
      */
     protected function getAsNoun()
     {
-        return "queue";
+        return "Queues";
     }
 }

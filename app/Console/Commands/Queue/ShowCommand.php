@@ -3,10 +3,13 @@
 namespace AbuseIO\Console\Commands\Queue;
 
 use AbuseIO\Console\Commands\AbstractShowCommand;
+use AbuseIO\Models\Job;
 use Carbon;
-use Config;
-use Queue;
 
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Queue
+ */
 class ShowCommand extends AbstractShowCommand
 {
 
@@ -21,26 +24,39 @@ class ShowCommand extends AbstractShowCommand
      * The console command description.
      * @var string
      */
-    protected $description = 'Show all pending jobs from a specific Beanstalkd queue';
+    protected $description = 'Show all pending jobs from a specific queue';
 
     /**
      * The headers of the table
      * @var array
      */
-    protected $headers = [ 'ID', 'Worker' ];
+    protected $headers = [ 'ID', 'Queue', 'Worker', 'Attempts', 'Created' ];
 
     /**
      * The fields of the table / database row
      * @var array
      */
-    protected $fields = [ ];
+    protected $fields = [ 'id', 'queue', 'method', 'attempts', 'created_at' ];
 
     /**
      * {@inheritdoc }
      */
     protected function transformListToTableBody($list)
     {
-        return $list;
+        $result = [];
+        foreach ($list as $key => $job) {
+            $payload = unserialize(json_decode($job->payload)->data->command);
+            $method = class_basename($payload);
+
+            $result[] = [
+                $job->id,
+                $job->queue,
+                $method,
+                $job->attempts,
+                $job->created_at
+            ];
+        }
+        return $result;
     }
 
     /**
@@ -48,9 +64,7 @@ class ShowCommand extends AbstractShowCommand
      */
     protected function findWithCondition($filter)
     {
-        $queue = ($filter) ? "abuseio_". $filter : Config::get('queue.connections.beanstalkd.queue');
-
-        //TODO Fix
+        return Job::where('queue', '=', "{$this->argument('name')}")->get();
     }
 
     /**
