@@ -6,6 +6,10 @@ use Illuminate\Console\Command;
 use Carbon;
 use AbuseIO\Jobs\Notification;
 
+/**
+ * Class NotificationsCommand
+ * @package AbuseIO\Console\Commands\Housekeeper
+ */
 class NotificationsCommand extends Command
 {
 
@@ -61,7 +65,6 @@ class NotificationsCommand extends Command
 
     /**
      * Create a new command instance.
-     * @return void
      */
     public function __construct()
     {
