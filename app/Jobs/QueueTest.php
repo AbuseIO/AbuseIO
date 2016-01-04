@@ -15,8 +15,6 @@ use Log;
  */
 class QueueTest extends Job implements SelfHandling, ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels;
-
     /**
      * Name of the beandstalk queue to be used
      *
@@ -55,14 +53,14 @@ class QueueTest extends Job implements SelfHandling, ShouldQueue
     {
         Log::info(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-            "Queue checks starting for queue {$this->queueName}"
+            "TestJob starting for queue {$this->queueName}"
         );
 
         // TODO - do stuff here
 
         Log::info(
             '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-            "Queue checks completed for queue {$this->queueName}"
+            "TestJob completed for queue {$this->queueName}"
         );
     }
 
