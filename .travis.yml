@@ -18,7 +18,7 @@ before_script:
   - mysql -e 'CREATE DATABASE `abuseio`;'
   - composer self-update
   - composer install --dev --prefer-source --no-interaction
-  - chmod -R 777 storage
+  - chmod -R 770 storage
   - php artisan migrate:install --no-interaction -vvv
   - chmod +x extra/notifier-samples/runall
 
