@@ -9,9 +9,9 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use AbuseIO\Jobs\QueueTest;
 use AbuseIO\Jobs\AlertAdmin;
-use Illuminate\Support\Arr;
+use AbuseIO\Models\Job;
 use Validator;
-use Artisan;
+use Log;
 use Carbon;
 
 /**
@@ -28,7 +28,6 @@ class RunCommand extends Command
      * @var string
      */
     protected $signature = 'housekeeper:run
-                            {--noNotifications : Do not send out pending notifications }
     ';
 
     /**
@@ -52,56 +51,25 @@ class RunCommand extends Command
      */
     public function handle()
     {
-        // TODO: #AIO-22 Create housekeeping - Walk thru all collectors to gather information.
-        // TODO: Extra: Collectors should be kicked into a queue, only if there isn't one running yet with the same name
+        Log::debug(
+            '(JOB ' . getmypid() . ') KNOCK KNOCK! Housekeeping'
+        );
 
         /*
-         * Checks for beanstalk queue
+         * Check all queue's their status
          */
-        // TODO: Somehow check howlong a job is running? Or self-kill it in 1 hour?
-
-
-        /*
-         * Fire an test jobs into the abuseio queue selected.
-         * Handling of the result is done at the QueueTest->failed() method
-         */
-        // Todo how to get a list of queues, make it fixed?
-        //$this->dispatch(new QueueTest($queue));
-
-
-        /*
-         * Check for any kind of failed jobs
-         */
-        $jobs = $this->getFailedJobs();
-        $jobsMask = "|%-8.8s |%-20.20s |%-35.35s |%-35.35s |%-30.30s |" . PHP_EOL . PHP_EOL;
-        $jobsList[] = sprintf($jobsMask, 'ID', 'Connection', 'Queue', 'Class', 'Failed At');
-
-        if (count($jobs) != 0) {
-            foreach ($jobs as $job) {
-                if (count($job) == 5) {
-                    $jobsList[] = sprintf(
-                        $jobsMask,
-                        $job[0],
-                        $job[1],
-                        $job[2],
-                        $job[3],
-                        $job[4]
-                    );
-                }
-            }
-
-            if (count($jobsList) > 2) {
-                AlertAdmin::send(
-                    "Alert: There are " . count($jobs) . " jobs in the queue that have failed:" . PHP_EOL . PHP_EOL .
-                    implode(PHP_EOL, $jobsList)
-                );
-            }
-        }
+        Log::info(
+            '(JOB ' . getmypid() . ') Housekeeper is starting queue checks'
+        );
+        $this->checkQueues();
 
         /*
          * Walk thru all tickets to see which need closing
          */
         if (config('main.housekeeping.tickets_close_after') !== false) {
+            Log::info(
+                '(JOB ' . getmypid() . ') Housekeeper is starting to close old tickets'
+            );
             $this->ticketsClosing();
         }
 
@@ -109,18 +77,72 @@ class RunCommand extends Command
          * Walk thru mailarchive to see which need pruning
          */
         if (config('main.housekeeping.mailarchive_remove_after') !== false) {
+            Log::info(
+                '(JOB ' . getmypid() . ') Housekeeper is starting to remove old mailarchive items'
+            );
             $this->mailarchivePruning();
-        }
-
-        /*
-         * Send out all notifications by calling the housekeeper notifications command
-         */
-        if ($this->option('noNotifications') !== true) {
-            $this->sendNotifications();
         }
 
         return true;
 
+    }
+
+    /**
+     * Walk thru all jobs and queues to make sure they are working, including firing a testjob at them
+     *
+     * @return boolean
+     */
+    private function checkQueues()
+    {
+        $jobLimit = new Carbon('1 hour ago');
+
+        $hangs = [];
+        foreach (config('queue.queues') as $queue) {
+            /*
+             * Fire an test jobs into the abuseio queue selected.
+             * Handling of the result is done at the QueueTest->failed() method
+             */
+            $this->dispatch(new QueueTest($queue));
+
+            /*
+             * Check all created jobs not to be older then 1 hour
+             */
+            $jobs = Job::where('queue', '=', $queue)->get();
+
+            foreach ($jobs as $job) {
+                $created = $job->created_at;
+
+                if ($jobLimit->gt($created)) {
+                    $hangs [] = $job;
+                }
+            }
+        }
+        /*
+         * Send alarm on hanging jobs
+         */
+        if (count($hangs) != 0) {
+            AlertAdmin::send(
+                "Alert: There are " . count($hangs) . " jobs that are stuck:" . PHP_EOL . PHP_EOL .
+                implode(PHP_EOL, $hangs)
+            );
+        }
+
+        /*
+         * Check for any kind of failed jobs, if any found start alarm bells
+         */
+        $failed = $this->laravel['queue.failer']->all();
+        if (count($failed) != 0) {
+            AlertAdmin::send(
+                "Alert: There are " . count($failed) . " jobs that have failed:" . PHP_EOL . PHP_EOL .
+                implode(PHP_EOL, $failed)
+            );
+        }
+
+        if (count($failed) != 0 || count($hangs) != 0) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -209,82 +231,5 @@ class RunCommand extends Command
         }
 
         return true;
-    }
-
-    /**
-     * Send out all notifications by calling the housekeeper notifications command
-     *
-     * @return boolean
-     */
-    private function sendNotifications()
-    {
-        $exitCode = Artisan::call(
-            'housekeeper:notifications',
-            [
-                "--send" => true,
-            ]
-        );
-
-        echo Artisan::output();
-
-        return true;
-    }
-
-    /**
-     * Compile the failed jobs into a displayable format.
-     *
-     * @return array
-     */
-    protected function getFailedJobs()
-    {
-        $results = [];
-
-        foreach ($this->laravel['queue.failer']->all() as $failed) {
-            $results[] = $this->parseFailedJob((array) $failed);
-        }
-
-        return array_filter($results);
-    }
-
-    /**
-     * Parse the failed job row.
-     *
-     * @param  array  $failed
-     * @return array
-     */
-    protected function parseFailedJob(array $failed)
-    {
-        $row = array_values(Arr::except($failed, ['payload']));
-
-        array_splice($row, 3, 0, $this->extractJobName($failed['payload']));
-
-        return $row;
-    }
-
-    /**
-     * Extract the failed job name from payload.
-     *
-     * @param  string  $payload
-     * @return string|null
-     */
-    private function extractJobName($payload)
-    {
-        $payload = json_decode($payload, true);
-
-        if ($payload && (! isset($payload['data']['command']))) {
-            return Arr::get($payload, 'job');
-        }
-
-        if ($payload && isset($payload['data']['command'])) {
-            preg_match('/"([^"]+)"/', $payload['data']['command'], $matches);
-
-            if (isset($matches[1])) {
-                return $matches[1];
-            } else {
-                return Arr::get($payload, 'job');
-            }
-        }
-
-        return null;
     }
 }
