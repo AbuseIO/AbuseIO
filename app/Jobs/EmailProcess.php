@@ -21,7 +21,7 @@ use AbuseIO\Jobs\AlertAdmin;
  */
 class EmailProcess extends Job implements SelfHandling, ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels;
+    use SerializesModels;
 
     /**
      * Filename of the email to be processed
