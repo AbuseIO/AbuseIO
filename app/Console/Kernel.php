@@ -5,6 +5,10 @@ namespace AbuseIO\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+/**
+ * Class Kernel
+ * @package AbuseIO\Console
+ */
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
@@ -68,6 +72,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('housekeeper:run')->cron('*/1 * * * * *');
 
+        $schedule->command('housekeeper:notifications --send')->cron('*/1 * * * * *');
+
+        $schedule->command('collector:runall')->cron('*/1 * * * * *');
     }
 }
