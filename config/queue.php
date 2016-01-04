@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_DRIVER', 'beanstalkd'),
+    'default' => env('QUEUE_DRIVER', 'database'),
 
     /*
     |--------------------------------------------------------------------------
@@ -72,6 +72,21 @@ return [
             'expire' => 60,
         ],
 
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Available queues
+    |--------------------------------------------------------------------------
+    |
+    | This options allows you to configure all the queues that can be used
+    | as well as should be monitored by the housekeeper
+    |
+     */
+    'queues' => [
+        'abuseio_collector',
+        'abuseio_email_incoming',
+        'abuseio_email_outgoing',
     ],
 
     /*
