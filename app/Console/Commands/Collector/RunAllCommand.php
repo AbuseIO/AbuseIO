@@ -7,25 +7,24 @@ use AbuseIO\Collectors\Factory as CollectorFactory;
 use Carbon;
 
 /**
- * Class RunCommand
+ * Class RunAllCommand
  * @package AbuseIO\Console\Commands\Collector
  */
-class RunCommand extends Command
+class RunAllCommand extends Command
 {
 
     /**
      * The console command name.
      * @var string
      */
-    protected $signature = 'collector:run {name}
-                            {--debug : Do not create events, just display the results }
+    protected $signature = 'collector:runall
     ';
 
     /**
      * The console command description.
      * @var string
      */
-    protected $description = 'Run collection processes for a specific collector';
+    protected $description = 'Run all enabled collection processes';
 
     /**
      * Create a new command instance.
@@ -42,6 +41,7 @@ class RunCommand extends Command
      */
     public function handle()
     {
+        /*
         $collector = collectorFactory::create($this->argument('name'));
 
         if (!$collector) {
@@ -55,6 +55,7 @@ class RunCommand extends Command
         $results = $collector->parse();
 
         print_r($results);
+        */
 
         return true;
     }
