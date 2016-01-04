@@ -44,6 +44,14 @@ php5enmod mcrypt
 adduser abuseio
 ```
 
+and add your apache user (www-data) and MTA user (postfix) to the abuseio group
+
+addgroup abuseio abuseio
+addgroup postfix abuseio
+addgroup www-data abuseio
+
+NOTE: You will need to restart apache and postfix in this example to effecticly add these groups to the process!
+
 ## checkout git
 
 Please note that a composer update is required to install all other required packages and dependancies!
@@ -68,11 +76,11 @@ composer update
 ```bash
 cd /opt
 chown -R abuseio:abuseio abuseio
-chmod -R 775 abuseio/storage
+chmod -R 770 abuseio/storage
 chown -R abuseio:www-data abuseio/storage
 chown -R abuseio:postfix abuseio/storage/mailarchive
 chown abuseio:www-data abuseio/bootstrap/cache
-chmod 775 abuseio/bootstrap/cache
+chmod 770 abuseio/bootstrap/cache
 ```
 
 ## Setup supervisor:
