@@ -279,3 +279,13 @@ php artisan role:assign --role admin --user admin@isp.local
 ```
 
 The user:create command also access items like --password, however if not selected a password will be generated and default settings will be used
+
+## Add cron job
+
+add a crontab for the user abuseio. This schedular job needs to run every minute and will be kicking off internal jobs
+at the configured intervals from the main configuration. Example:
+
+```
+crontab -e -u abuseio
+* * * * * php /opt/abuseio/artisan schedule:run >> /dev/null 2>&1
+```
