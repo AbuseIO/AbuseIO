@@ -5,7 +5,6 @@ namespace AbuseIO\Console\Commands\Queue;
 use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Job;
 use Carbon;
-use Queue;
 
 /**
  * Class ListCommand
@@ -45,20 +44,13 @@ class ListCommand extends AbstractListCommand
      */
     protected function transformListToTableBody($list)
     {
-        $counters = [];
         $result = [];
 
-        foreach ($list as $key => $job) {
+        foreach ($list as $queue) {
 
-            if (empty($counters[$job->queue])) {
-                $counters[$job->queue] = 0;
-            }
-
-            $counters[$job->queue]++;
-
-            $result[$job->queue] = [
-                $job->queue,
-                $counters[$job->queue]
+            $result[$queue] = [
+                $queue,
+                Job::where('queue', '=', $queue)->count(),
             ];
         }
 
@@ -70,7 +62,7 @@ class ListCommand extends AbstractListCommand
      */
     protected function findWithCondition($filter)
     {
-        return Job::where('queue', 'like', "%{$this->option('filter')}%")->get();
+        return config('queue.queues');
     }
 
     /**
@@ -78,7 +70,7 @@ class ListCommand extends AbstractListCommand
      */
     protected function findAll()
     {
-        return Job::all();
+        return config('queue.queues');
     }
 
     /**
