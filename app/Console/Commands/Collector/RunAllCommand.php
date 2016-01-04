@@ -5,6 +5,7 @@ namespace AbuseIO\Console\Commands\Collector;
 use Illuminate\Console\Command;
 use AbuseIO\Collectors\Factory as CollectorFactory;
 use Carbon;
+use Log;
 
 /**
  * Class RunAllCommand
@@ -41,6 +42,11 @@ class RunAllCommand extends Command
      */
     public function handle()
     {
+
+        Log::info(
+            '(JOB ' . getmypid() . ') Starting a collection run for all enabled collectors'
+        );
+
         /*
         $collector = collectorFactory::create($this->argument('name'));
 
