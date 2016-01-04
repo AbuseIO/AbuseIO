@@ -177,7 +177,9 @@ class RunCommand extends Command
             $tickets = Ticket::where('status_id', '!=', '2')->get();
 
             foreach ($tickets as $ticket) {
-                if ($ticket->lastEvent[0]->timestamp <= $closeOlderThen) {
+                if ($ticket->lastEvent[0]->timestamp <= $closeOlderThen &&
+                    strtotime($ticket->created_at) <= $closeOlderThen
+                ) {
                     $ticket->update(
                         [
                             'status_id' => 2,
