@@ -31,7 +31,7 @@ script:
 
 after_script:
   - ls -laR storage/mailarchive
-  - cat storage/logs/*.log
+  - cat /var/log/abuseio/*.log
 
 notifications:
   email:
