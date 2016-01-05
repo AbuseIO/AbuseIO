@@ -36,6 +36,8 @@ pecl install mailparse-2.1.6 (note: mbstring should be installed on linux system
 echo "extension=mailparse.so" > /etc/php5/mods-available/mailparse.ini
 php5enmod mailparse
 php5enmod mcrypt
+mkdir /var/log/abuseio
+chown syslog:adm /var/log/abuseio
 ```
 
 ## Create local user 
@@ -77,41 +79,14 @@ composer update
 cd /opt
 chown -R abuseio:abuseio abuseio
 chmod -R 770 abuseio/storage
-chown -R abuseio:www-data abuseio/storage
-chown -R abuseio:postfix abuseio/storage/mailarchive
-chown abuseio:www-data abuseio/bootstrap/cache
 chmod 770 abuseio/bootstrap/cache
 ```
 
-## Setup supervisor:
+## Setup supervisor, logrotate, rsyslog:
 
-For easy access you will find these examples in the extra/supervisor-examples/ directory
+For easy access you will find these examples in the extra/etc/ directory to be used with 
 
-##### /etc/supervisor/conf.d/abuseio_email_incoming.conf
-```
-[program:abuseio_queue_email_incoming]
-command=php artisan queue:listen --timeout=300 --tries=1 --sleep=3 --memory=256 --delay=0 --queue=abuseio_email_incoming
-directory=/opt/abuseio
-stdout_logfile=/opt/abuseio/storage/logs/queue_email_incoming.log
-redirect_stderr=true
-```
-##### /etc/supervisor/conf.d/abuseio_email_outgoing.conf
-```
-[program:abuseio_queue_email_incoming]
-command=php artisan queue:listen --timeout=300 --tries=1 --sleep=3 --memory=256 --delay=0 --queue=abuseio_email_outgoing
-directory=/opt/abuseio
-stdout_logfile=/opt/abuseio/storage/logs/queue_email_outgoing.log
-redirect_stderr=true
-```
-##### /etc/supervisor/conf.d/abuseio_collector.conf
-```
-[program:abuseio_queue_collector]
-command=php artisan queue:listen --timeout=300 --tries=1 --sleep=3 --memory=256 --delay=0 --queue=abuseio_collector
-directory=/opt/abuseio
-stdout_logfile=/opt/abuseio/storage/logs/queue_collector.log
-redirect_stderr=true
-```
-
+rsync -vr /opt/abuseio/extra/etc/ /etc/
 
 then:
 
@@ -119,6 +94,7 @@ then:
 supervisorctl reread
 supervisorctl add abuseio_queue_emails
 supervisorctl start abuseio_queue_emails
+service rsyslog restart
 ```
 
 ## Creating MTA delivery

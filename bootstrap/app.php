@@ -45,11 +45,18 @@ $app->singleton(
  * Configure Monolog.
  */
 $app->configureMonologUsing(
+
     function (Monolog\Logger $monolog) {
-        $filename = storage_path('/logs/laravel-'.php_sapi_name().'.log');
-        $handler = new Monolog\Handler\RotatingFileHandler($filename);
-        $monolog->pushHandler($handler);
+
+        $syslog = new \Monolog\Handler\SyslogHandler('abuseio');
+
+        $formatter = new \Monolog\Formatter\LineFormatter('%channel%.%level_name%: %message%');
+
+        $syslog->setFormatter($formatter);
+
+        $monolog->pushHandler($syslog);
     }
+
 );
 
 /*
