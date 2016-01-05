@@ -127,7 +127,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | When this option is enabled, e-mail can be signed with the selected
-    | PEM key
+    | PEM key and certificate placed in ./config/smime/ dir
     |
     */
     'smime' => [
