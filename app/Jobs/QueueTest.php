@@ -52,15 +52,13 @@ class QueueTest extends Job implements SelfHandling, ShouldQueue
     public function handle()
     {
         Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-            "TestJob starting for queue {$this->queueName}"
+            get_class($this) . ': ' . "TestJob starting for queue {$this->queueName}"
         );
 
         // TODO - do stuff here
 
         Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-            "TestJob completed for queue {$this->queueName}"
+            get_class($this) . ': ' . "TestJob completed for queue {$this->queueName}"
         );
     }
 
@@ -75,8 +73,7 @@ class QueueTest extends Job implements SelfHandling, ShouldQueue
         // Start alarm bells
 
         Log::error(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-            "Queue checked FAILED for queue {$this->queueName}"
+            get_class($this) . ': ' . "Queue checked FAILED for queue {$this->queueName}"
         );
     }
 }

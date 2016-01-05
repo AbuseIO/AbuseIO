@@ -6,6 +6,10 @@ use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Collectors\Factory as CollectorFactory;
 use Carbon;
 
+/**
+ * Class ListCommand
+ * @package AbuseIO\Console\Commands\Collector
+ */
 class ListCommand extends AbstractListCommand
 {
 
@@ -38,12 +42,13 @@ class ListCommand extends AbstractListCommand
     /**
      * Execute the console command.
      *
+     * @param array $collectors
      * @return boolean
      */
     public function hydrateCollectorsWithDescription($collectors)
     {
         $objects = [];
-        foreach($collectors as $collector) {
+        foreach ($collectors as $collector) {
             $objects[] =
                 [
                     'name'          => $collector,

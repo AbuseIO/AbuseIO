@@ -68,7 +68,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
     {
 
         Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             'Queued worker is starting the processing of email file: ' . $this->filename
         );
 
@@ -81,7 +81,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         // Sanity checks
         if (empty($parsedMail->getHeader('from')) || empty($parsedMail->getMessageBody())) {
             Log::warning(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'Missing e-mail headers from and/or empty body: ' . $this->filename
             );
 
@@ -92,7 +92,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         // Ignore email from our own notification address to prevent mail loops
         if (preg_match('/' . Config::get('main.notifications.from_address') . '/', $parsedMail->getHeader('from'))) {
             Log::warning(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'Loop prevention: Ignoring email from self ' . Config::get('main.notifications.from_address')
             );
 
@@ -140,7 +140,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             $parserResult = $parser->parse();
         } else {
             Log::error(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 ': No parser available to handle message from : ' . $parsedMail->getHeader('from') .
                 ' with subject: ' . $parsedMail->getHeader('subject')
             );
@@ -151,7 +151,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
         if ($parserResult !== false && $parserResult['errorStatus'] === true) {
             Log::error(
-                '(JOB ' . getmypid() . ') ' . get_class($parser) . ': ' .
+                get_class($parser) . ': ' .
                 ': Parser has ended with fatal errors ! : ' . $parserResult['errorMessage']
             );
 
@@ -159,7 +159,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             return;
         } else {
             Log::info(
-                '(JOB ' . getmypid() . ') ' . get_class($parser) . ': ' .
+                get_class($parser) . ': ' .
                 ': Parser completed with ' . $parserResult['warningCount'] .
                 ' warnings and collected ' . count($parserResult['data']) . ' events to save'
             );
@@ -167,7 +167,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
         if ($parserResult['warningCount'] !== 0 && Config::get('main.emailparser.notify_on_warnings') === true) {
             Log::error(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'Configuration has warnings set as critical and ' .
                 $parserResult['warningCount'] . ' warnings were detected. Sending alert to administrator'
             );
@@ -183,7 +183,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
             if ($validatorResult['errorStatus'] === true) {
                 Log::error(
-                    '(JOB ' . getmypid() . ') ' . get_class($validator) . ': ' .
+                    get_class($validator) . ': ' .
                     'Validator has ended with errors ! : ' . $validatorResult['errorMessage']
                 );
 
@@ -191,7 +191,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
                 return;
             } else {
                 Log::info(
-                    '(JOB ' . getmypid() . ') ' . get_class($validator) . ': ' .
+                    get_class($validator) . ': ' .
                     'Validator has ended without errors'
                 );
             }
@@ -218,7 +218,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
              **/
             if ($saverResult['errorStatus'] === true) {
                 Log::error(
-                    '(JOB ' . getmypid() . ') ' . get_class($saver) . ': ' .
+                    get_class($saver) . ': ' .
                     'Saver has ended with errors ! : ' . $saverResult['errorMessage']
                 );
 
@@ -226,19 +226,19 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
                 return;
             } else {
                 Log::info(
-                    '(JOB ' . getmypid() . ') ' . get_class($saver) . ': ' .
+                    get_class($saver) . ': ' .
                     'Saver has ended without errors'
                 );
             }
         } else {
             Log::warning(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'Parser did not return any events therefore skipping validation and saving a empty event set'
             );
         }
 
         Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             'Queued worker has ended the processing of email file: ' . $this->filename
         );
     }
@@ -253,7 +253,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         // we have $this->filename and $this->rawMail
         // and this Config::get('main.emailparser.fallback_mail')
         Log::error(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             'Email processor ending with errors. The received e-mail will be deleted from ' .
             'archive and bounced to the admin for investigation'
         );

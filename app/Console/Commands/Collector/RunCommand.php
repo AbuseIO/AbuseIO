@@ -50,7 +50,7 @@ class RunCommand extends Command
         if ($this->option('noQueue') == true) {
             // In debug mode we don't queue the job
             Log::debug(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'Queuing disabled. Directly handling message file: ' . $this->argument('name')
             );
 
@@ -59,7 +59,7 @@ class RunCommand extends Command
 
         } else {
             Log::info(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'Pushing collector into queue: ' . $this->argument('name')
             );
             $this->dispatch(new CollectorProcess($this->argument('name')));

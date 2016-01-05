@@ -12,6 +12,7 @@ use Illuminate\Filesystem\Filesystem;
 use PhpMimeMailParser\Parser as MimeParser;
 use yajra\Datatables\Datatables;
 use Redirect;
+use Log;
 use DB;
 
 /**
@@ -266,7 +267,7 @@ class TicketsController extends Controller
             if (!$filesystem->isDirectory($evidenceTempDir)) {
                 if (!$filesystem->makeDirectory($evidenceTempDir, 0755, true)) {
                     Log::error(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        get_class($this) . ': ' .
                         'Unable to create temp directory: ' . $evidenceTempDir
                     );
                 }

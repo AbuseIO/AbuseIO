@@ -46,7 +46,7 @@ class Notification extends Job implements SelfHandling
 
                 if ($notificationResult['errorStatus']) {
                     Log::error(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        get_class($this) . ': ' .
                         "Notifications with {$notificationModule} did not succeed"
                     );
 
@@ -54,7 +54,7 @@ class Notification extends Job implements SelfHandling
 
                 } else {
                     Log::debug(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        get_class($this) . ': ' .
                         "Notifications with {$notificationModule} was successfull for contact reference: " .
                         key($notifications)
                     );
@@ -63,7 +63,7 @@ class Notification extends Job implements SelfHandling
             }
         } else {
             Log::debug(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 "No notification methods are installed, skipping notifications"
             );
 
@@ -86,20 +86,20 @@ class Notification extends Job implements SelfHandling
             && !is_array(config("notifications"))
         ) {
             Log::debug(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 "No notification methods are configured, no sense into calling unexisting methods"
             );
             return true;
         }
 
         Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             "A notification run has been started"
         );
 
         if (empty($notifications)) {
             Log::info(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 "No contacts that need notifications"
             );
             return true;
@@ -139,7 +139,7 @@ class Notification extends Job implements SelfHandling
 
         if ($errors !== 0) {
             Log::debug(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 "Failed sending out notifications. Encountered {$errors} errors."
             );
             return false;
@@ -147,14 +147,14 @@ class Notification extends Job implements SelfHandling
 
         if ($counter === 0) {
             Log::debug(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 "None of the notification methods seem to be enabled"
             );
             return true;
         }
 
         Log::debug(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             "Successfully send out notifications to {$counter} contacts"
         );
         return true;

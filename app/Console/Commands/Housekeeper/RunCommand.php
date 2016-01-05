@@ -52,14 +52,14 @@ class RunCommand extends Command
     public function handle()
     {
         Log::debug(
-            '(JOB ' . getmypid() . ') KNOCK KNOCK! Housekeeping'
+            get_class($this) . ': KNOCK KNOCK! Housekeeping'
         );
 
         /*
          * Check all queue's their status
          */
         Log::info(
-            '(JOB ' . getmypid() . ') Housekeeper is starting queue checks'
+            get_class($this) . ': Housekeeper is starting queue checks'
         );
         $this->checkQueues();
 
@@ -68,7 +68,7 @@ class RunCommand extends Command
          */
         if (config('main.housekeeping.tickets_close_after') !== false) {
             Log::info(
-                '(JOB ' . getmypid() . ') Housekeeper is starting to close old tickets'
+                get_class($this) . ': Housekeeper is starting to close old tickets'
             );
             $this->ticketsClosing();
         }
@@ -78,7 +78,7 @@ class RunCommand extends Command
          */
         if (config('main.housekeeping.mailarchive_remove_after') !== false) {
             Log::info(
-                '(JOB ' . getmypid() . ') Housekeeper is starting to remove old mailarchive items'
+                get_class($this) . ': Housekeeper is starting to remove old mailarchive items'
             );
             $this->mailarchivePruning();
         }

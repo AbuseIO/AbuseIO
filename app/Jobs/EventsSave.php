@@ -62,7 +62,7 @@ class EventsSave extends Job implements SelfHandling
                 strtotime(config('main.reports.min_lastseen') . ' ago') > $event['timestamp']
             ) {
                 Log::debug(
-                    '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                    get_class($this) . ': ' .
                     "is ignoring event because its older then " . config('main.reports.min_lastseen')
                 );
 
@@ -107,7 +107,7 @@ class EventsSave extends Job implements SelfHandling
                     empty($domainContact)
                 ) {
                     Log::debug(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        get_class($this) . ': ' .
                         "is ignoring event because there is no IP or Domain contact"
                     );
 
@@ -235,7 +235,7 @@ class EventsSave extends Job implements SelfHandling
         }
 
         Log::debug(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             "has completed creating {$ticketCount} new tickets, " .
             "linking {$eventCount} new events and ignored $eventsIgnored duplicates"
         );

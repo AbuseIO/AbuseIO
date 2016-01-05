@@ -2,9 +2,12 @@
 
 namespace AbuseIO\Console\Commands\Collector;
 
-use AbuseIO\Collectors\Factory as CollectorFactory;
 use AbuseIO\Console\Commands\AbstractShowCommand;
 
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Collector
+ */
 class ShowCommand extends AbstractShowCommand
 {
 
@@ -42,14 +45,14 @@ class ShowCommand extends AbstractShowCommand
     {
         $objects = [];
 
-        foreach($collectors as $field => $value) {
-            if(is_bool($value)) {
+        foreach ($collectors as $field => $value) {
+            if (is_bool($value)) {
                 $value = castBoolToString($value);
             }
-            if(empty($value)) {
+            if (empty($value)) {
                 $value = 'Unconfigured';
             }
-            if(is_array($value)) {
+            if (is_array($value)) {
                 $value = implode(PHP_EOL, $value);
             }
             $objects[] =

@@ -48,7 +48,8 @@ class RunAllCommand extends Command
     {
 
         Log::info(
-            '(JOB ' . getmypid() . ') Starting a collection run for all enabled collectors'
+            get_class($this) . ': ' .
+            'Starting a collection run for all enabled collectors'
         );
 
         $collectors = collectorFactory::getCollectors();
@@ -60,7 +61,7 @@ class RunAllCommand extends Command
                 if ($this->option('noQueue') == true) {
                     // In debug mode we don't queue the job
                     Log::debug(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        get_class($this) . ': ' .
                         'Queuing disabled. Directly handling message file: ' . $collectorName
                     );
 
@@ -69,7 +70,7 @@ class RunAllCommand extends Command
 
                 } else {
                     Log::info(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        get_class($this) . ': ' .
                         'Pushing collector into queue: ' . $collectorName
                     );
                     $this->dispatch(new CollectorProcess($collectorName));
@@ -81,7 +82,7 @@ class RunAllCommand extends Command
         }
 
         Log::info(
-            '(JOB ' . getmypid() . ') Completed collections startup for all enabled collectors'
+            'Completed collections startup for all enabled collectors'
         );
 
         return true;

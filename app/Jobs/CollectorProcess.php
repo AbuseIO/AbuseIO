@@ -68,7 +68,7 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
     {
 
         Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             'Queued worker is starting the collector: ' . $this->collector
         );
 
@@ -97,7 +97,7 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
 
             if ($validatorResult['errorStatus'] === true) {
                 Log::error(
-                    '(JOB ' . getmypid() . ') ' . get_class($validator) . ': ' .
+                    get_class($validator) . ': ' .
                     'Validator has ended with errors ! : ' . $validatorResult['errorMessage']
                 );
 
@@ -105,7 +105,7 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
                 return;
             } else {
                 Log::info(
-                    '(JOB ' . getmypid() . ') ' . get_class($validator) . ': ' .
+                    get_class($validator) . ': ' .
                     'Validator has ended without errors'
                 );
             }
@@ -123,23 +123,25 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
                 // If a datefolder does not exist, then create it or die trying
                 if (!$filesystem->makeDirectory($path)) {
                     Log::error(
-                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        get_class($this) . ': ' .
                         'Unable to create directory: ' . $path
                     );
                     $this->exception();
                 }
+                chown($path, 'abuseio');
+                chgrp($path, 'abuseio');
             }
 
-            if ($filesystem->isFile($path . $file)) {
+            if ($filesystem->isFile($filename)) {
                 Log::error(
-                    '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                    get_class($this) . ': ' .
                     'File aready exists: ' . $filename
                 );
                 $this->exception();
             }
 
             if ($filesystem->put(
-                $path . $file,
+                $filename,
                 json_encode(
                     [
                         'collectorName' => $this->collector,
@@ -148,12 +150,14 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
                 )
             ) === false) {
                 Log::error(
-                    '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                    get_class($this) . ': ' .
                     'Unable to write file: ' . $filename
                 );
 
                 $this->exception();
             }
+            chown($path . $filename, 'abuseio');
+            chgrp($path . $filename, 'abuseio');
 
             /**
              * save evidence into table
@@ -177,7 +181,7 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
              **/
             if ($saverResult['errorStatus'] === true) {
                 Log::error(
-                    '(JOB ' . getmypid() . ') ' . get_class($saver) . ': ' .
+                    get_class($saver) . ': ' .
                     'Saver has ended with errors ! : ' . $saverResult['errorMessage']
                 );
 
@@ -185,19 +189,19 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
                 return;
             } else {
                 Log::info(
-                    '(JOB ' . getmypid() . ') ' . get_class($saver) . ': ' .
+                    get_class($saver) . ': ' .
                     'Saver has ended without errors'
                 );
             }
         } else {
             Log::warning(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'Collector did not return any events therefore skipping validation and saving a empty event set'
             );
         }
 
         Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             'Queued worker has ended the processing of collector: ' . $this->collector
         );
 
@@ -211,7 +215,7 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
     protected function exception()
     {
         Log::error(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             'Collector processor ending with errors.'
         );
 

@@ -52,7 +52,7 @@ class EmailCommand extends Command
     public function handle()
     {
         Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             'Being called upon to receive an incoming e-mail'
         );
 
@@ -76,7 +76,7 @@ class EmailCommand extends Command
             // If a datefolder does not exist, then create it or die trying
             if (!$filesystem->makeDirectory($path)) {
                 Log::error(
-                    '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                    get_class($this) . ': ' .
                     'Unable to create directory: ' . $path
                 );
                 $this->exception($rawEmail);
@@ -85,9 +85,9 @@ class EmailCommand extends Command
             chgrp($path, 'abuseio');
         }
 
-        if ($filesystem->isFile($path . $file)) {
+        if ($filesystem->isFile($filename)) {
             Log::error(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'File already exists: ' . $path . $filename
             );
             $this->exception($rawEmail);
@@ -95,9 +95,9 @@ class EmailCommand extends Command
             chgrp($path . $filename, 'abuseio');
         }
 
-        if ($filesystem->put($path . $file, $rawEmail) === false) {
+        if ($filesystem->put($filename, $rawEmail) === false) {
             Log::error(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'Unable to write file: ' . $filename
             );
 
@@ -107,7 +107,7 @@ class EmailCommand extends Command
         if ($this->option('noQueue') == true) {
             // In debug mode we don't queue the job
             Log::debug(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'Queuing disabled. Directly handling message file: ' . $filename
             );
 
@@ -116,7 +116,7 @@ class EmailCommand extends Command
 
         } else {
             Log::info(
-                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                get_class($this) . ': ' .
                 'Pushing incoming email into queue file: ' . $filename
             );
             $this->dispatch(new EmailProcess($filename));
@@ -124,7 +124,7 @@ class EmailCommand extends Command
         }
 
         Log::info(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             'Successfully received the incoming e-mail'
         );
 
@@ -142,7 +142,7 @@ class EmailCommand extends Command
         // This only bounces with config errors or problems with installations where we cannot accept
         // the email at all. In normal cases the bounce will be handled within EmailProcess::()
         Log::error(
-            '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+            get_class($this) . ': ' .
             'Email receiver is ending with errors. The received e-mail will be bounced to the admin for investigation'
         );
 

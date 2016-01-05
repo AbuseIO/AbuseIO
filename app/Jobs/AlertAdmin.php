@@ -43,12 +43,12 @@ class AlertAdmin extends Job
 
         if (!$sent) {
             Log::error(
-                '(JOB ' . getmypid() . ') AlertAdmin: ' .
+                'AlertAdmin: ' .
                 'Unable to send out alert to admin ' . Config::get('main.emailparser.fallback_mail')
             );
         } else {
             Log::info(
-                '(JOB ' . getmypid() . ') AlertAdmin: ' .
+                'AlertAdmin: ' .
                 'Successfully send out alert to admin ' . Config::get('main.emailparser.fallback_mail')
             );
         }

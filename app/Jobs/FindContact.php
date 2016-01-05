@@ -40,7 +40,7 @@ class FindContact extends Job
     /**
      * Validates an contact object before passing it along. On error it will return UNDEF
      *
-     * @param  object $contact
+     * @param  \AbuseIO\Models\Contact $contact
      * @return boolean $valid
      */
     public static function validateContact($contact)
@@ -51,7 +51,7 @@ class FindContact extends Job
             $messages = implode(' ', $validation->messages()->all());
 
             Log::error(
-                '(JOB ' . getmypid() . ') FindContact: ' .
+                'FindContact: ' .
                 "A contact object that was returned was not correctly formatted ({$messages}). Falling back to UNDEF"
             );
 
