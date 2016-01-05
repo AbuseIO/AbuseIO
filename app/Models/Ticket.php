@@ -89,7 +89,29 @@ class Ticket extends Model
     public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $ticket)
     {
         $rules = [
-            // TODO: Create validation rules instead of EventValidator
+            'ip'                                => 'required|integer',
+            'domain'                            => 'sometimes|string',
+            'class_id'                          => 'required|integer',
+            'type_id'                           => 'required|integer',
+            'ip_contact_account_id'             => 'required|integer',
+            'ip_contact_reference'              => 'required|string',
+            'ip_contact_name'                   => 'required|string',
+            'ip_contact_email'                  => 'required|emails',
+            'ip_contact_api_host'               => 'required|string',
+            'ip_contact_api_key'                => 'required|string',
+            'ip_contact_auto_notify'            => 'required|integer',
+            'ip_contact_notified_count'         => 'required|integer',
+            'domain_contact_account_id'         => 'required|integer',
+            'domain_contact_reference'          => 'required|string',
+            'domain_contact_name'               => 'required|string',
+            'domain_contact_email'              => 'required|emails',
+            'domain_contact_api_host'           => 'required|string',
+            'domain_contact_api_key'            => 'required|string',
+            'domain_contact_auto_notify'        => 'required|integer',
+            'domain_contact_notified_count'     => 'required|integer',
+            'status_id'                         => 'required|integer',
+            'last_notify_count'                 => 'required|integer',
+            'last_notify_timestamp'             => 'required|timestamp',
         ];
 
         return $rules;
@@ -104,7 +126,29 @@ class Ticket extends Model
     public static function updateRules(/** @noinspection PhpUnusedParameterInspection */ $ticket)
     {
         $rules = [
-            // TODO: Create validation rules instead of EventValidator
+            'ip'                                => 'required|integer',
+            'domain'                            => 'sometimes|string',
+            'class_id'                          => 'required|integer',
+            'type_id'                           => 'required|integer',
+            'ip_contact_account_id'             => 'required|integer',
+            'ip_contact_reference'              => 'required|string',
+            'ip_contact_name'                   => 'required|string',
+            'ip_contact_email'                  => 'required|emails',
+            'ip_contact_api_host'               => 'required|string',
+            'ip_contact_api_key'                => 'required|string',
+            'ip_contact_auto_notify'            => 'required|integer',
+            'ip_contact_notified_count'         => 'required|integer',
+            'domain_contact_account_id'         => 'required|integer',
+            'domain_contact_reference'          => 'required|string',
+            'domain_contact_name'               => 'required|string',
+            'domain_contact_email'              => 'required|emails',
+            'domain_contact_api_host'           => 'required|string',
+            'domain_contact_api_key'            => 'required|string',
+            'domain_contact_auto_notify'        => 'required|integer',
+            'domain_contact_notified_count'     => 'required|integer',
+            'status_id'                         => 'required|integer',
+            'last_notify_count'                 => 'required|integer',
+            'last_notify_timestamp'             => 'required|timestamp',
         ];
 
         return $rules;

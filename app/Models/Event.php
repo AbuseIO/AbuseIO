@@ -39,7 +39,11 @@ class Event extends Model
     public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $event)
     {
         $rules = [
-            // TODO: Create validation rules instead of EventValidator
+            'ticket_id'             => 'required|integer',
+            'evidence_id'           => 'required|integer',
+            'source'                => 'required|string',
+            'timestamp'             => 'required|timestamp',
+            'information'           => 'required|json',
         ];
 
         return $rules;
@@ -54,7 +58,11 @@ class Event extends Model
     public static function updateRules(/** @noinspection PhpUnusedParameterInspection */ $event)
     {
         $rules = [
-            // TODO: Create validation rules instead of EventValidator
+            'ticket_id'             => 'required|integer',
+            'evidence_id'           => 'required|integer',
+            'source'                => 'required|string',
+            'timestamp'             => 'required|timestamp',
+            'information'           => 'required|json',
         ];
 
         return $rules;
