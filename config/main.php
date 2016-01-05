@@ -42,6 +42,9 @@ return [
     'housekeeping' => [
         'mailarchive_remove_after'          => '500 days',
         'tickets_close_after'               => '14 days',
+        'notifications_cron'                => '*/15 * * * * *',
+        'collectors_cron'                   => '*/60 * * * * *',
+        'housekeeper_cron'                  => '*/1 * * * * *',
     ],
 
     'ash' => [
