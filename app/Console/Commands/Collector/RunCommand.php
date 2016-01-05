@@ -3,8 +3,10 @@
 namespace AbuseIO\Console\Commands\Collector;
 
 use Illuminate\Console\Command;
-use AbuseIO\Collectors\Factory as CollectorFactory;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use AbuseIO\Jobs\CollectorProcess;
 use Carbon;
+use Log;
 
 /**
  * Class RunCommand
@@ -12,6 +14,7 @@ use Carbon;
  */
 class RunCommand extends Command
 {
+    use DispatchesJobs;
 
     /**
      * The console command name.
@@ -19,6 +22,7 @@ class RunCommand extends Command
      */
     protected $signature = 'collector:run {name}
                             {--debug : Do not create events, just display the results }
+                            {--noQueue : Do not queue the collectors, but directly handle it }
     ';
 
     /**
@@ -42,19 +46,25 @@ class RunCommand extends Command
      */
     public function handle()
     {
-        $collector = collectorFactory::create($this->argument('name'));
 
-        if (!$collector) {
-            $this->error(
-                "The requested collector {$this->argument('name')} could not be started check logs for PID:"
-                . getmypid()
+        if ($this->option('noQueue') == true) {
+            // In debug mode we don't queue the job
+            Log::debug(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                'Queuing disabled. Directly handling message file: ' . $this->argument('name')
             );
-            return false;
+
+            $processer = new CollectorProcess($this->argument('name'));
+            $processer->handle();
+
+        } else {
+            Log::info(
+                '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                'Pushing collector into queue: ' . $this->argument('name')
+            );
+            $this->dispatch(new CollectorProcess($this->argument('name')));
+
         }
-
-        $results = $collector->parse();
-
-        print_r($results);
 
         return true;
     }

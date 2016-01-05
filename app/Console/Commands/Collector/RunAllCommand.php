@@ -4,6 +4,8 @@ namespace AbuseIO\Console\Commands\Collector;
 
 use Illuminate\Console\Command;
 use AbuseIO\Collectors\Factory as CollectorFactory;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use AbuseIO\Jobs\CollectorProcess;
 use Carbon;
 use Log;
 
@@ -13,12 +15,14 @@ use Log;
  */
 class RunAllCommand extends Command
 {
+    use DispatchesJobs;
 
     /**
      * The console command name.
      * @var string
      */
     protected $signature = 'collector:runall
+                                {--noQueue : Do not queue the collectors, but directly handle it }
     ';
 
     /**
@@ -47,21 +51,38 @@ class RunAllCommand extends Command
             '(JOB ' . getmypid() . ') Starting a collection run for all enabled collectors'
         );
 
-        /*
-        $collector = collectorFactory::create($this->argument('name'));
+        $collectors = collectorFactory::getCollectors();
 
-        if (!$collector) {
-            $this->error(
-                "The requested collector {$this->argument('name')} could not be started check logs for PID:"
-                . getmypid()
-            );
-            return false;
+        foreach ($collectors as $collectorName) {
+
+            if (config("collectors.{$collectorName}.collector.enabled") === true) {
+
+                if ($this->option('noQueue') == true) {
+                    // In debug mode we don't queue the job
+                    Log::debug(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        'Queuing disabled. Directly handling message file: ' . $collectorName
+                    );
+
+                    $processer = new CollectorProcess($collectorName);
+                    $processer->handle();
+
+                } else {
+                    Log::info(
+                        '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
+                        'Pushing collector into queue: ' . $collectorName
+                    );
+                    $this->dispatch(new CollectorProcess($collectorName));
+
+                }
+
+            }
+
         }
 
-        $results = $collector->parse();
-
-        print_r($results);
-        */
+        Log::info(
+            '(JOB ' . getmypid() . ') Completed collections startup for all enabled collectors'
+        );
 
         return true;
     }
