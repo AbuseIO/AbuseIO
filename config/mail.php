@@ -121,4 +121,19 @@ return [
 
     'pretend' => false,
 
+    /*
+    |--------------------------------------------------------------------------
+    | S/MIME Signing options
+    |--------------------------------------------------------------------------
+    |
+    | When this option is enabled, e-mail can be signed with the selected
+    | PEM key
+    |
+    */
+    'smime' => [
+        'enabled'       => false,
+        'key'           => 'key.pem',
+        'certificate'   => 'certificate.pem',
+    ]
+
 ];
