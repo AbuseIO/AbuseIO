@@ -59,11 +59,11 @@ class EventsSave extends Job implements SelfHandling
             // If an event is too old we are ignoring it
             if (config('main.reports.min_lastseen') !== false &&
                 strtotime(config('main.reports.min_lastseen')) !== false &&
-                strtotime(config('main.reports.min_lastseen') . ' ago') < $event['timestamp']
+                strtotime(config('main.reports.min_lastseen') . ' ago') > $event['timestamp']
             ) {
                 Log::debug(
                     '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                    "is ignoring event because its older then" . config('main.reports.min_lastseen')
+                    "is ignoring event because its older then " . config('main.reports.min_lastseen')
                 );
 
                 continue;
