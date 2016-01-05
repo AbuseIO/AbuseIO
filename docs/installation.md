@@ -85,6 +85,8 @@ chmod 770 abuseio/bootstrap/cache
 
 ## Setup supervisor:
 
+For easy access you will find these examples in the extra/supervisor-examples/ directory
+
 ##### /etc/supervisor/conf.d/abuseio_email_incoming.conf
 ```
 [program:abuseio_queue_email_incoming]
