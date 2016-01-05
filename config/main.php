@@ -18,7 +18,7 @@ return [
     ],
 
     'reports' => [
-        'min_lastseen'                      => '30 days',
+        'min_lastseen'                      => false, //This ignores any event older then threshold
         'resolvable_only'                   => false, // This drops anything if a domain or netblock cannot be found
     ],
 
