@@ -81,14 +81,18 @@ class EmailCommand extends Command
                 );
                 $this->exception($rawEmail);
             }
+            chown($path, 'abuseio');
+            chgrp($path, 'abuseio');
         }
 
         if ($filesystem->isFile($path . $file)) {
             Log::error(
                 '(JOB ' . getmypid() . ') ' . get_class($this) . ': ' .
-                'File aready exists: ' . $filename
+                'File already exists: ' . $path . $filename
             );
             $this->exception($rawEmail);
+            chown($path . $filename, 'abuseio');
+            chgrp($path . $filename, 'abuseio');
         }
 
         if ($filesystem->put($path . $file, $rawEmail) === false) {

@@ -92,8 +92,7 @@ then:
 
 ```bash
 supervisorctl reread
-supervisorctl add abuseio_queue_emails
-supervisorctl start abuseio_queue_emails
+/etc/init.d/supervisor restart
 service rsyslog restart
 ```
 
