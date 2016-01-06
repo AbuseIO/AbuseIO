@@ -6,12 +6,7 @@ use AbuseIO\Collectors\Factory as CollectorFactory;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Filesystem\Filesystem;
 use AbuseIO\Models\Evidence;
-use AbuseIO\Jobs\AlertAdmin;
-use Config;
-use Carbon;
-use Uuid;
 use Log;
 
 /**
@@ -90,114 +85,49 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
             $this->exception();
         }
 
-        if (count($collectorResult['data']) !== 0) {
-            // Call validator
-            $validator = new EventsValidate();
-            $validatorResult = $validator->check($collectorResult['data']);
 
-            if ($validatorResult['errorStatus'] === true) {
-                Log::error(
-                    get_class($validator) . ': ' .
-                    'Validator has ended with errors ! : ' . $validatorResult['errorMessage']
-                );
+        /**
+         * save evidence onto disk
+         */
+        $evidence = new EvidenceSave;
+        $evidenceData = json_encode(
+            [
+                'collectorName' => $this->collector,
+                'collectorData' => $collectorResult,
+            ]
+        );
+        $evidenceFile = $evidence->save($evidenceData);
 
-                $this->exception();
-                return;
-            } else {
-                Log::info(
-                    get_class($validator) . ': ' .
-                    'Validator has ended without errors'
-                );
-            }
-
-            /**
-             * save evidence onto disk
-             */
-            $filesystem = new Filesystem;
-            $datefolder = Carbon::now()->format('Ymd');
-            $path       = storage_path() . '/mailarchive/' . $datefolder . '/';
-            $file       = Uuid::generate(4) . '.eml';
-            $filename   = $path . $file;
-
-            if (!$filesystem->isDirectory($path)) {
-                // If a datefolder does not exist, then create it or die trying
-                if (!$filesystem->makeDirectory($path)) {
-                    Log::error(
-                        get_class($this) . ': ' .
-                        'Unable to create directory: ' . $path
-                    );
-                    $this->exception();
-                }
-                chown($path, config('app.user'));
-                chgrp($path, config('app.group'));
-            }
-
-            if ($filesystem->isFile($filename)) {
-                Log::error(
-                    get_class($this) . ': ' .
-                    'File aready exists: ' . $filename
-                );
-                $this->exception();
-            }
-
-            if ($filesystem->put(
-                $filename,
-                json_encode(
-                    [
-                        'collectorName' => $this->collector,
-                        'collectorData' => $collectorResult,
-                    ]
-                )
-            ) === false) {
-                Log::error(
-                    get_class($this) . ': ' .
-                    'Unable to write file: ' . $filename
-                );
-
-                $this->exception();
-            }
-            chown($path . $filename, config('app.user'));
-            chgrp($path . $filename, config('app.group'));
-
-            /**
-             * save evidence into table
-             **/
-            $evidence = new Evidence();
-            $evidence->filename = $filename;
-            $evidence->sender = 'abuse@localhost';
-            $evidence->subject = "CLI Collector {$this->collector}";
-            $evidence->save();
-
-            /**
-             * call saver
-             **/
-            $saver = new EventsSave();
-            $saverResult = $saver->save($collectorResult['data'], $evidence->id);
-
-            /**
-             * We've hit a snag, so we are gracefully killing ourselves
-             * after we contact the admin about it. EventsSave should never
-             * end with problems unless the mysql died while doing transactions
-             **/
-            if ($saverResult['errorStatus'] === true) {
-                Log::error(
-                    get_class($saver) . ': ' .
-                    'Saver has ended with errors ! : ' . $saverResult['errorMessage']
-                );
-
-                $this->exception();
-                return;
-            } else {
-                Log::info(
-                    get_class($saver) . ': ' .
-                    'Saver has ended without errors'
-                );
-            }
-        } else {
-            Log::warning(
+        if (!$evidenceFile) {
+            Log::error(
                 get_class($this) . ': ' .
-                'Collector did not return any events therefore skipping validation and saving a empty event set'
+                'Error returned while asking to write evidence file, cannot continue'
             );
+            $this->exception();
+        }
+
+        /**
+         * build evidence model, but wait with saving it
+         **/
+        $evidence = new Evidence();
+        $evidence->filename = $evidenceFile;
+        $evidence->sender = 'abuse@localhost';
+        $evidence->subject = "CLI Collector {$this->collector}";
+
+        /**
+         * Call EventsProcess to validate, store evidence and save events
+         */
+        $eventsProcess = new EventsProcess($collectorResult['data'], $evidence);
+        $eventsProcessResult = $eventsProcess->fire();
+
+        if (!$eventsProcessResult) {
+            Log::error(
+                get_class($this) . ': ' .
+                'The event processor ended with errors, cannot continue'
+            );
+
+            $this->exception();
+            return;
         }
 
         Log::info(

@@ -85,7 +85,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
                 'Missing e-mail headers from and/or empty body: ' . $this->filename
             );
 
-            $this->alertAdmin();
+            $this->exception();
             return;
         }
 
@@ -96,7 +96,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
                 'Loop prevention: Ignoring email from self ' . Config::get('main.notifications.from_address')
             );
 
-            $this->alertAdmin();
+            $this->exception();
             return;
         }
 
@@ -145,7 +145,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
                 ' with subject: ' . $parsedMail->getHeader('subject')
             );
 
-            $this->alertAdmin();
+            $this->exception();
             return;
         }
 
@@ -155,7 +155,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
                 ': Parser has ended with fatal errors ! : ' . $parserResult['errorMessage']
             );
 
-            $this->alertAdmin();
+            $this->exception();
             return;
         } else {
             Log::info(
@@ -172,69 +172,32 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
                 $parserResult['warningCount'] . ' warnings were detected. Sending alert to administrator'
             );
 
-            $this->alertAdmin();
+            $this->exception();
             return;
         }
 
-        if (count($parserResult['data']) !== 0) {
-            // Call validator
-            $validator = new EventsValidate();
-            $validatorResult = $validator->check($parserResult['data']);
+        /**
+         * build evidence model, but wait with saving it
+         **/
+        $evidence = new Evidence();
+        $evidence->filename = $this->filename;
+        $evidence->sender = $parsedMail->getHeader('from');
+        $evidence->subject = $parsedMail->getHeader('subject');
 
-            if ($validatorResult['errorStatus'] === true) {
-                Log::error(
-                    get_class($validator) . ': ' .
-                    'Validator has ended with errors ! : ' . $validatorResult['errorMessage']
-                );
+        /**
+         * Call EventsProcess to validate, store evidence and save events
+         */
+        $eventsProcess = new EventsProcess($parserResult['data'], $evidence);
+        $eventsProcessResult = $eventsProcess->fire();
 
-                $this->alertAdmin();
-                return;
-            } else {
-                Log::info(
-                    get_class($validator) . ': ' .
-                    'Validator has ended without errors'
-                );
-            }
-
-            /**
-             * save evidence into table
-             **/
-            $evidence = new Evidence();
-            $evidence->filename = $this->filename;
-            $evidence->sender = $parsedMail->getHeader('from');
-            $evidence->subject = $parsedMail->getHeader('subject');
-            $evidence->save();
-
-            /**
-             * call saver
-             **/
-            $saver = new EventsSave();
-            $saverResult = $saver->save($parserResult['data'], $evidence->id);
-
-            /**
-             * We've hit a snag, so we are gracefully killing ourselves
-             * after we contact the admin about it. EventsSave should never
-             * end with problems unless the mysql died while doing transactions
-             **/
-            if ($saverResult['errorStatus'] === true) {
-                Log::error(
-                    get_class($saver) . ': ' .
-                    'Saver has ended with errors ! : ' . $saverResult['errorMessage']
-                );
-
-                $this->alertAdmin();
-                return;
-            } else {
-                Log::info(
-                    get_class($saver) . ': ' .
-                    'Saver has ended without errors'
-                );
-            }
-        } else {
-            Log::warning(
+        if (!$eventsProcessResult) {
+            Log::error(
                 get_class($this) . ': ' .
-                'Parser did not return any events therefore skipping validation and saving a empty event set'
+                'The event processor ended with errors, cannot continue'
             );
+
+            $this->exception();
+            return;
         }
 
         Log::info(
@@ -248,7 +211,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
      *
      * @return void
      */
-    protected function alertAdmin()
+    protected function exception()
     {
         // we have $this->filename and $this->rawMail
         // and this Config::get('main.emailparser.fallback_mail')

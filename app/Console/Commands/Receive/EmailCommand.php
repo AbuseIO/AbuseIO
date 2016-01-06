@@ -4,10 +4,9 @@ namespace AbuseIO\Console\Commands\Receive;
 
 use AbuseIO\Jobs\EmailProcess;
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
-use Uuid;
+use AbuseIO\Jobs\EvidenceSave;
 use Carbon;
 use AbuseIO\Jobs\AlertAdmin;
 
@@ -66,41 +65,18 @@ class EmailCommand extends Command
 
         fclose($fd);
 
-        $filesystem = new Filesystem;
-        $datefolder = Carbon::now()->format('Ymd');
-        $path       = storage_path() . '/mailarchive/' . $datefolder . '/';
-        $file       = Uuid::generate(4) . '.eml';
-        $filename   = $path . $file;
+        /**
+         * save evidence onto disk
+         */
+        $evidence = new EvidenceSave;
+        $evidenceData = $rawEmail;
+        $evidenceFile = $evidence->save($evidenceData);
 
-        if (!$filesystem->isDirectory($path)) {
-            // If a datefolder does not exist, then create it or die trying
-            if (!$filesystem->makeDirectory($path)) {
-                Log::error(
-                    get_class($this) . ': ' .
-                    'Unable to create directory: ' . $path
-                );
-                $this->exception($rawEmail);
-            }
-            chown($path, config('app.user'));
-            chgrp($path, config('app.group'));
-        }
-
-        if ($filesystem->isFile($filename)) {
+        if (!$evidenceFile) {
             Log::error(
                 get_class($this) . ': ' .
-                'File already exists: ' . $path . $filename
+                'Error returned while asking to write evidence file, cannot continue'
             );
-            $this->exception($rawEmail);
-            chown($path . $filename, config('app.user'));
-            chgrp($path . $filename, config('app.group'));
-        }
-
-        if ($filesystem->put($filename, $rawEmail) === false) {
-            Log::error(
-                get_class($this) . ': ' .
-                'Unable to write file: ' . $filename
-            );
-
             $this->exception($rawEmail);
         }
 
@@ -108,18 +84,18 @@ class EmailCommand extends Command
             // In debug mode we don't queue the job
             Log::debug(
                 get_class($this) . ': ' .
-                'Queuing disabled. Directly handling message file: ' . $filename
+                'Queuing disabled. Directly handling message file: ' . $evidenceFile
             );
 
-            $processer = new EmailProcess($filename);
+            $processer = new EmailProcess($evidenceFile);
             $processer->handle();
 
         } else {
             Log::info(
                 get_class($this) . ': ' .
-                'Pushing incoming email into queue file: ' . $filename
+                'Pushing incoming email into queue file: ' . $evidenceFile
             );
-            $this->dispatch(new EmailProcess($filename));
+            $this->dispatch(new EmailProcess($evidenceFile));
 
         }
 
