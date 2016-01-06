@@ -11,11 +11,10 @@ return [
     | This excludes the general field mapping of names (like data from info blobs)
     */
 
-    'title'                         => 'AbuseIO Zelfhelp',
-    'intro'                         => 'You are seeing this page because we have detected suspicious activities'.
-                                       ' from your IP address, Domain name or E-Mail address. On this page you'.
-                                       ' will find all the information about these activities and the underlying'.
-                                       ' problem.',
+    'title'                         => 'AbuseIO Zelfhulp',
+    'intro'                         => 'Je krijgt deze pagina te zien omdat we verdachte activiteiten hebben'.
+                                       ' waargenomen vanaf jouw IP adres, domeinnaam of e-mail adres. Op deze'.
+                                       ' pagina vind je alle informatie over deze activiteiten en het probleem.',
     'ticket'                        => ' Ticket',
 
     'menu' => [
