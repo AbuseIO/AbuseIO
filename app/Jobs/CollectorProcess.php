@@ -128,8 +128,8 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
                     );
                     $this->exception();
                 }
-                chown($path, 'abuseio');
-                chgrp($path, 'abuseio');
+                chown($path, config('app.user'));
+                chgrp($path, config('app.group'));
             }
 
             if ($filesystem->isFile($filename)) {
@@ -156,8 +156,8 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
 
                 $this->exception();
             }
-            chown($path . $filename, 'abuseio');
-            chgrp($path . $filename, 'abuseio');
+            chown($path . $filename, config('app.user'));
+            chgrp($path . $filename, config('app.group'));
 
             /**
              * save evidence into table

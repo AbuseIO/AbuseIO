@@ -4,6 +4,21 @@ return [
 
     'name' => 'AbuseIO',
     'version' => '4.0.0',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application filesystem/environment permissions
+    |--------------------------------------------------------------------------
+    |
+    | By default installations should be using a dedicated user 'abuseio' with
+    | the group 'abuseio' on the system. However in some case you cannot use
+    | these names and with the below settings you can override the defaults
+    |
+    */
+
+    'user' => env('APP_LOCALUSER', 'abuseio'),
+    'group' => env('APP_LOCALGROUP', 'abuseio'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

@@ -81,8 +81,8 @@ class EmailCommand extends Command
                 );
                 $this->exception($rawEmail);
             }
-            chown($path, 'abuseio');
-            chgrp($path, 'abuseio');
+            chown($path, config('app.user'));
+            chgrp($path, config('app.group'));
         }
 
         if ($filesystem->isFile($filename)) {
@@ -91,8 +91,8 @@ class EmailCommand extends Command
                 'File already exists: ' . $path . $filename
             );
             $this->exception($rawEmail);
-            chown($path . $filename, 'abuseio');
-            chgrp($path . $filename, 'abuseio');
+            chown($path . $filename, config('app.user'));
+            chgrp($path . $filename, config('app.group'));
         }
 
         if ($filesystem->put($filename, $rawEmail) === false) {
