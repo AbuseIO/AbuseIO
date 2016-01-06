@@ -14,6 +14,7 @@ env:
   - DB=mysql
 
 before_script:
+  - cp .env.travis .env
   - echo 'yes' | pecl install mailparse-2.1.6
   - mysql -e 'CREATE DATABASE `abuseio`;'
   - composer self-update
@@ -31,7 +32,7 @@ script:
 
 after_script:
   - ls -laR storage/mailarchive
-  - cat /var/log/abuseio/*.log
+  - cat /var/log/syslog.log | grep abuseio
 
 notifications:
   email:
