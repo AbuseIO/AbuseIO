@@ -56,7 +56,8 @@ NOTE: You will need to restart apache and postfix in this example to effecticly 
 
 ## checkout git
 
-Please note that a composer update is required to install all other required packages and dependancies!
+Please note that a composer install is required to install all other required packages and dependancies! Do _NOT_
+run the composer update, unless you are a developer.
 
 using Composer:
 ```bash
@@ -95,6 +96,10 @@ supervisorctl reread
 /etc/init.d/supervisor restart
 service rsyslog restart
 ```
+
+Importent: The supervisord worker threads run in daemon mode. This will allow the framework to
+be cached and saves a lot of CPU cycles. However if you edit the code in _ANY_ way you will need
+to restart these daemons (or better: stop -> code change -> start) to prevent jobs from failing!
 
 ## Creating MTA delivery
 
@@ -219,7 +224,7 @@ service nginx reload
 
 ```bash
 cd /opt/abuseio
-composer update
+composer install
 ```
 
 ## Setting up configuration
