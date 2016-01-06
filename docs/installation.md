@@ -113,7 +113,7 @@ always use the MTA address to validate your work!
  
 ```bash
 echo 'notifier: | "| /usr/bin/php -q /opt/abuseio/artisan --env=production receive:email"' >> /etc/aliasses
-newaliasses
+newaliases
 ```
 
 ## Configuring Webserver
