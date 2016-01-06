@@ -76,14 +76,14 @@
                         data:           null,
                         defaultContent: ''
                     },
-                    { data: 'id', name: 'id' },
-                    { data: 'ip', name: 'ip' },
-                    { data: 'domain', name: 'domain' },
-                    { data: 'type_id', name: 'type_id' },
-                    { data: 'class_id', name: 'class_id' },
+                    { data: 'id', name: 'tickets.id' },
+                    { data: 'ip', name: 'tickets.ip' },
+                    { data: 'domain', name: 'tickets.domain' },
+                    { data: 'type_id', name: 'tickets.type_id' },
+                    { data: 'class_id', name: 'tickets.class_id' },
                     { data: 'event_count', name: 'event_count', searchable: false },
                     { data: 'notes_count', name: 'notes_count', searchable: false },
-                    { data: 'status_id', name: 'status_id' },
+                    { data: 'status_id', name: 'tickets.status_id' },
                     { data: 'actions', orderable: false, searchable: false, class: "text-right" }
                 ]
             } );

@@ -39,7 +39,12 @@ class TicketsController extends Controller
     {
         //$tickets = Ticket::all();
         $tickets = Ticket::select(
-            "tickets.*",
+            'tickets.id',
+            'tickets.ip',
+            'tickets.domain',
+            'tickets.type_id',
+            'tickets.class_id',
+            'tickets.status_id',
             DB::raw("count(distinct events.id) as event_count"),
             DB::raw("count(distinct notes.id) as notes_count")
         )
