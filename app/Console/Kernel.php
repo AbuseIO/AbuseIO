@@ -64,6 +64,8 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Queue\ListCommand',
         'AbuseIO\Console\Commands\Queue\ShowCommand',
 
+        'AbuseIO\Console\Commands\Contact\ShowCommand',
+
     ];
 
     /**
