@@ -115,11 +115,26 @@ termination you'd see a \r\n instead of \n or vice versa. Once you have tested y
 always use the MTA address to validate your work!
 
 ### Postfix
- 
+
+Configure delivery using transport maps
+
+/etc/postfix/main.cf:
 ```bash
-echo 'notifier: | "| /usr/bin/php -q /opt/abuseio/artisan --env=production receive:email"' >> /etc/aliasses
-newaliases
+postconf -e transport_maps = hash:/etc/postfix/transport
 ```
+
+/etc/postfix/transport:
+```bash
+echo "notifier@your-MTA-domain.lan	:notifier" >> /etc/postfix/transport
+postmap /etc/postfix/transport
+```
+
+/etc/postfix/master.cf:
+```bash
+notifier   unix  -       n       n       -       -       pipe
+    flags=Rq user=abuseio argv=/usr/bin/php -q /opt/abuseio/artisan --env=production receive:email
+```
+
 
 ## Configuring Webserver
 You should be able to visit the website at URI /admin/ with a document root at /opt/abuseio/public/
