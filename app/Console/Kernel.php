@@ -68,6 +68,8 @@ class Kernel extends ConsoleKernel
 
         'AbuseIO\Console\Commands\Event\ShowCommand',
 
+        'AbuseIO\Console\Commands\Evidence\ShowCommand',
+
     ];
 
     /**
