@@ -51,6 +51,17 @@ class Brand extends Model
     }
 
     /**
+     * return the default Brand
+     *
+     * @return mixed
+     */
+    public static function getDefault()
+    {
+        $brand = Brand::find(1);
+        return $brand;
+    }
+
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Brand $brand
@@ -122,6 +133,27 @@ class Brand extends Model
         }
 
         return (empty($messages));
+    }
+
+    /**
+     * Check to see if we can delete the current brand
+     * The brand can only be deleted, if it isn't linked to accounts anymore
+     * and if it isn't the default brand
+     *
+     * @return bool
+     */
+    public function canDelete()
+    {
+        $result = false;
+
+        // not linked to an account and not the default account
+        if (count($this->accounts) == 0 && !$this->isDefault())
+        {
+            // we can delete the brand
+            $result = true;
+        }
+
+        return $result;
     }
 
 

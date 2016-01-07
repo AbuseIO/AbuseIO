@@ -2,10 +2,13 @@
 
 namespace AbuseIO\Http\Controllers;
 
+use PhpMimeMailParser\Exception;
 use Request;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Note;
 use Input;
+use AbuseIO\Models\Brand;
+use AbuseIO\Models\Account;
 
 /**
  * Controller handling the ASH interface to contacts
@@ -29,10 +32,12 @@ class AshController extends Controller
         $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
         if ($AshAuthorisedBy == 'TokenIP') {
-            $brand = $ticket->accountIp->brand;
+            $account = Account::find($ticket->accountIp);
+            $brand = empty($account) ? Brand::getDefault() : $account->brand;
         }
         if ($AshAuthorisedBy == 'TokenDomain') {
-            $brand = $ticket->accountDomain->brand;
+            $account = Account::find($ticket->accountDomain);
+            $brand = empty($account) ? Brand::getDefault() : $account->brand;
         }
 
         if (empty($brand)) {
@@ -62,11 +67,13 @@ class AshController extends Controller
         $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
         if ($AshAuthorisedBy == 'TokenIP') {
-            $brand = $ticket->accountIp->brand;
+            $account = Account::find($ticket->accountIp);
+            $brand = empty($account) ? Brand::getDefault() : $account->brand;
             $submittor = trans('ash.basic.ip') . ' ' . trans('ash.communication.contact');
         }
         if ($AshAuthorisedBy == 'TokenDomain') {
-            $brand = $ticket->accountDomain->brand;
+            $account = Account::find($ticket->accountDomain);
+            $brand = empty($account) ? Brand::getDefault() : $account->brand;
             $submittor = trans('ash.basic.domain') . ' ' . trans('ash.communication.contact');
         }
 

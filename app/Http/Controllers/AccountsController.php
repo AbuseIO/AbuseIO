@@ -242,12 +242,13 @@ class AccountsController extends Controller
      */
     public function destroy(Account $account)
     {
+        $brand = $account->brand;
+
         // may we edit this brand (is the brand connected to our account)
         if (!$account->mayDestroy($this->auth_user)) {
             return Redirect::route('admin.accounts.index')
                 ->with('message', 'User is not authorized to edit this account.');
         }
-
 
         // Do not allow the default admin user account to be deleted.
         if ($account->id == 1) {
@@ -255,8 +256,20 @@ class AccountsController extends Controller
                 ->with('message', 'Not allowed to delete the default admin account.');
         }
 
+        // delete the linked users
+        foreach ($account->users as $user)
+        {
+            $user->delete();
+        }
+
+        // delete the account
         $account->delete();
-        // TODO: delete related users/brands as well
+
+        // delete the brand
+        if ($brand->canDelete())
+        {
+            $brand->delete();
+        }
 
         return Redirect::route('admin.accounts.index')
             ->with('message', 'Account and it\'s related users and brands have been deleted.');
