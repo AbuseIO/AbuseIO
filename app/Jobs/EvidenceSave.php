@@ -39,9 +39,11 @@ class EvidenceSave extends Job implements SelfHandling
         $file       = Uuid::generate(4) . '.eml';
         $filename   = $path . $file;
 
+        umask(0007);
+
         if (!$filesystem->isDirectory($path)) {
             // If a datefolder does not exist, then create it or die trying
-            if (!$filesystem->makeDirectory($path)) {
+            if (!$filesystem->makeDirectory($path, 0770)) {
                 Log::error(
                     get_class($this) . ': ' .
                     'Unable to create directory: ' . $path
@@ -59,7 +61,6 @@ class EvidenceSave extends Job implements SelfHandling
                 return false;
             }
 
-            chown($path, config('app.user'));
             chgrp($path, config('app.group'));
         }
 
@@ -90,7 +91,6 @@ class EvidenceSave extends Job implements SelfHandling
             return false;
         }
 
-        chown($filename, config('app.user'));
         chgrp($filename, config('app.group'));
 
         return $filename;
