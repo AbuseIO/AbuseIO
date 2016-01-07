@@ -32,7 +32,9 @@ mv composer.phar /usr/local/bin/composer
 ## Install global dependencies
 
 ```bash
-pecl install mailparse-2.1.6 (note: mbstring should be installed on linux systems, if not add mbstring to the install command)
+pecl install mailparse-2.1.6 
+(note: mbstring should be installed on linux systems, if not add mbstring to the install command)
+(note: if pecl fails, try pecl install -Z mailparse-2.1.6
 echo "extension=mailparse.so" > /etc/php5/mods-available/mailparse.ini
 php5enmod mailparse
 php5enmod mcrypt
@@ -48,9 +50,11 @@ adduser abuseio
 
 and add your apache user (www-data) and MTA user (postfix) to the abuseio group
 
+```
 addgroup abuseio abuseio
 addgroup postfix abuseio
 addgroup www-data abuseio
+```
 
 NOTE: You will need to restart apache and postfix in this example to effecticly add these groups to the process!
 
