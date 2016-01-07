@@ -21,29 +21,6 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*
-         * Provide a method to override the default configuration per environment. We only accept three named
-         * environments called development, testing and production. Each of these environments has a directory
-         * inside config where an config override can be made.
-         */
-        $envConfig = Config::get(app()->environment());
-        if (!empty($envConfig) && is_array($envConfig)) {
-            foreach ($envConfig as $configKey => $configElement) {
-                $overrideConfig = $envConfig[$configKey];
-                $defaultConfig = Config::get($configKey);
-
-                $configWithOverrides = array_replace_recursive($defaultConfig, $overrideConfig);
-                Config::set($configKey, $configWithOverrides);
-            }
-        }
-
-        /*
-         * Were updating the timezone manually because we are updating the config later then boot. Using method from:
-         * vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadConfiguration.php
-         * This enforces the timezone we use in the override config file.
-         */
-        date_default_timezone_set(config('app.timezone'));
-
         // Publish config files of all installed Parsers
         // All parser configs we will put into the master 'parsers' tree of the config
         // So we can easily walk through all of them based on the active configuration
@@ -57,6 +34,32 @@ class ConfigServiceProvider extends ServiceProvider
         // Publish config files of all installed Collectors the same way
         $notificationList = NotificationFactory::getNotification();
         $this->buildConfig($notificationList, 'notification');
+
+        /*
+         * Provide a method to override the default configuration per environment. We only accept three named
+         * environments called development, testing and production. Each of these environments has a directory
+         * inside config where an config override can be made.
+         */
+        $envConfig = Config::get(app()->environment());
+        if (!empty($envConfig) && is_array($envConfig)) {
+            foreach ($envConfig as $configKey => $configElement) {
+                $overrideConfig = $envConfig[$configKey];
+                $defaultConfig = Config::get($configKey);
+
+                if (is_array($defaultConfig) && is_array($overrideConfig)) {
+                    $configWithOverrides = array_replace_recursive($defaultConfig, $overrideConfig);
+                    Config::set($configKey, $configWithOverrides);
+                }
+            }
+        }
+
+        /*
+         * Were updating the timezone manually because we are updating the config later then boot. Using method from:
+         * vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadConfiguration.php
+         * This enforces the timezone we use in the override config file.
+         */
+        date_default_timezone_set(config('app.timezone'));
+
     }
 
     /**
@@ -70,7 +73,7 @@ class ConfigServiceProvider extends ServiceProvider
         foreach ($list as $handler) {
 
             $defaultConfig = [];
-            $overrideConfig = [];
+
             $configKey = "{$type}s.{$handler}";
 
             $basePath = base_path() . "/vendor/abuseio/{$type}-" . strtolower($handler) . '/config';
@@ -81,14 +84,7 @@ class ConfigServiceProvider extends ServiceProvider
                 $defaultConfig = include($defaultConfigFile);
             }
 
-            $configOverrideFile = $basePath . '/' . app()->environment() . "/{$handler}.php";
-            if (File::exists($configOverrideFile)) {
-                $overrideConfig = include($configOverrideFile);
-            }
-
-            $configWithOverrides = array_replace_recursive($defaultConfig, $overrideConfig);
-
-            Config::set($configKey, $configWithOverrides);
+            Config::set($configKey, $defaultConfig);
 
         }
     }
