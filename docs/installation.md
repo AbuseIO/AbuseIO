@@ -122,21 +122,31 @@ always use the MTA address to validate your work!
 
 Configure delivery using transport maps
 
+1. make sure isp.local is in your local domains
+
 /etc/postfix/main.cf:
 ```bash
-postconf -e transport_maps = hash:/etc/postfix/transport
+postconf -e transport_maps=hash:/etc/postfix/transport
 ```
 
 /etc/postfix/transport:
 ```bash
-echo "notifier@your-MTA-domain.lan	:notifier" >> /etc/postfix/transport
+echo "notifier@isp.local	notifier:" >> /etc/postfix/transport
 postmap /etc/postfix/transport
+```
+
+/etc/aliases:
+```bash
+echo "notifier: notifier.isp.local" >> /etc/aliases
+newaliasses
 ```
 
 /etc/postfix/master.cf:
 ```bash
-notifier   unix  -       n       n       -       -       pipe
-    flags=Rq user=abuseio argv=/usr/bin/php -q /opt/abuseio/artisan --env=production receive:email
+notifier  unix  -       n       n       -       -       pipe
+  flags=Rq user=abuseio argv=/usr/bin/php -q /opt/abuseio/artisan --env=production receive:email
+  
+/etc/init.d/postfix restart
 ```
 
 
