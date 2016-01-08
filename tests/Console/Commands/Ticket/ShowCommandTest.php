@@ -1,0 +1,62 @@
+<?php
+
+namespace tests\Console\Commands\Ticket;
+
+use Illuminate\Support\Facades\Artisan;
+use \TestCase;
+
+class ShowCommandTest extends TestCase{
+
+    public function testWithValidIdFilter()
+    {
+        $exitCode = Artisan::call('ticket:show', [
+            "ticket" => "1"
+        ]);
+        $this->assertEquals($exitCode, 0);
+        $output = Artisan::output();
+        $fields = [
+                    'Id',
+                    'Ip',
+                    'Domain',
+                    'Class id',
+                    'Type id',
+//                    'ip_contact_account_id',
+//                    'ip_contact_reference',
+//                    'ip_contact_name',
+//                    'ip_contact_email',
+//                    'ip_contact_api_host',
+//                    'ip_contact_api_key',
+//                    'ip_contact_auto_notify',
+//                    'ip_contact_notified_count',
+//                    'domain_contact_account_id',
+//                    'domain_contact_reference',
+//                    'domain_contact_name',
+//                    'domain_contact_email',
+//                    'domain_contact_api_host',
+//                    'domain_contact_api_key',
+//                    'domain_contact_auto_notify',
+//                    'domain_contact_notified_count',
+//                    'status_id',
+//                    'last_notify_count',
+                    'Last notify timestamp'];
+
+
+        foreach($fields as $el) {
+            $this->assertContains($el,$output);
+        }
+    }
+
+
+
+    public function testWithInvalidFilter()
+    {
+        $exitCode = Artisan::call('ticket:show', [
+            "ticket" => "xxx"
+        ]);
+
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains("No matching ticket was found.", Artisan::output());
+    }
+
+
+}
