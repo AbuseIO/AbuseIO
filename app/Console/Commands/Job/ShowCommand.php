@@ -3,7 +3,7 @@
 namespace AbuseIO\Console\Commands\Job;
 
 use AbuseIO\Console\Commands\AbstractShowCommand2;
-use AbuseIO\Models\Note;
+use AbuseIO\Models\Job;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ShowCommand extends AbstractShowCommand2
@@ -46,7 +46,7 @@ class ShowCommand extends AbstractShowCommand2
      */
     protected function getCollectionWithArguments()
     {
-        return Note::Where("id", $this->argument("job"));
+        return Job::Where("id", $this->argument("job"));
     }
 
     /**
