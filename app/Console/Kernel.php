@@ -72,6 +72,8 @@ class Kernel extends ConsoleKernel
 
         'AbuseIO\Console\Commands\Note\ShowCommand',
 
+        'AbuseIO\Console\Commands\Job\ShowCommand',
+
     ];
 
     /**
