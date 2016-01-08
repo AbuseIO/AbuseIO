@@ -74,6 +74,7 @@ class Kernel extends ConsoleKernel
 
         'AbuseIO\Console\Commands\Evidence\ShowCommand',
         'AbuseIO\Console\Commands\Evidence\DeleteCommand',
+        'AbuseIO\Console\Commands\Evidence\ListCommand',
 
         'AbuseIO\Console\Commands\Note\ShowCommand',
         'AbuseIO\Console\Commands\Note\DeleteCommand',
