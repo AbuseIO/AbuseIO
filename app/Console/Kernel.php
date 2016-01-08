@@ -65,16 +65,22 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Queue\ShowCommand',
 
         'AbuseIO\Console\Commands\Contact\ShowCommand',
+        'AbuseIO\Console\Commands\Contact\DeleteCommand',
 
         'AbuseIO\Console\Commands\Event\ShowCommand',
+        'AbuseIO\Console\Commands\Event\DeleteCommand',
 
         'AbuseIO\Console\Commands\Evidence\ShowCommand',
+        'AbuseIO\Console\Commands\Evidence\DeleteCommand',
 
         'AbuseIO\Console\Commands\Note\ShowCommand',
+        'AbuseIO\Console\Commands\Note\DeleteCommand',
 
         'AbuseIO\Console\Commands\Job\ShowCommand',
+        'AbuseIO\Console\Commands\Job\DeleteCommand',
 
         'AbuseIO\Console\Commands\Ticket\ShowCommand',
+        'AbuseIO\Console\Commands\Ticket\DeleteCommand',
 
     ];
 

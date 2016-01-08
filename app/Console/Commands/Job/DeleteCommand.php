@@ -1,14 +1,14 @@
 <?php
 
-namespace AbuseIO\Console\Commands\User;
+namespace AbuseIO\Console\Commands\Job;
 
 use AbuseIO\Console\Commands\AbstractDeleteCommand;
-use AbuseIO\Models\User;
+use AbuseIO\Models\Job;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Class DeleteCommand
- * @package AbuseIO\Console\Commands\User
+ * @package AbuseIO\Console\Commands\Account
  */
 class DeleteCommand extends AbstractDeleteCommand
 {
@@ -17,7 +17,7 @@ class DeleteCommand extends AbstractDeleteCommand
      */
     protected function getAsNoun()
     {
-        return "user";
+        return "job";
     }
 
     /**
@@ -25,7 +25,7 @@ class DeleteCommand extends AbstractDeleteCommand
      */
     protected function getAllowedArguments()
     {
-        return ["user"];
+        return ["id"];
     }
 
     /**
@@ -33,15 +33,7 @@ class DeleteCommand extends AbstractDeleteCommand
      */
     protected function getObjectByArguments()
     {
-        $user = false;
-        if (!is_object($user)) {
-            $user = User::where('email', $this->argument('user'))->first();
-        }
-
-        if (!is_object($user)) {
-            $user = User::find($this->argument('user'));
-        }
-        return $user;
+        return Job::find($this->argument("id"));
     }
 
     /**
@@ -51,9 +43,9 @@ class DeleteCommand extends AbstractDeleteCommand
     {
         return array(
             new InputArgument(
-                'user',
+                'id',
                 InputArgument::REQUIRED,
-                'Use the name or email for a user to delete it.')
+                'Use the id for a job to delete it.')
         );
     }
 }
