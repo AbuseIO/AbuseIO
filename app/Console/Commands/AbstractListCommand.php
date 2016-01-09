@@ -31,7 +31,7 @@ abstract class AbstractListCommand extends Command
                 "json",
                 null,
                 InputOption::VALUE_OPTIONAL,
-                "use to output result as JSON"
+                "use --json=true to output result as JSON"
             );
 
     }

@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputDefinition;
-
+use Symfony\Component\Console\Input\InputOption;
 
 abstract class AbstractShowCommand2 extends Command
 {
@@ -21,7 +21,13 @@ abstract class AbstractShowCommand2 extends Command
             ->setDefinition(
                 new InputDefinition(
                     $this->defineInput()
-                ));
+                ))
+            ->addOption(
+                "json",
+                null,
+                InputOption::VALUE_OPTIONAL,
+                "use --json=true to output result as JSON"
+            );
     }
 
     /**
@@ -39,9 +45,9 @@ abstract class AbstractShowCommand2 extends Command
             $this->error(
                 sprintf("No matching %s was found.", $this->getAsNoun())
             );
+        } else if($this->option("json")) {
+            echo $object->toJson();
         } else {
-            //dd($this->transformObjectToTableBody($object));
-
             $this->table(
                 [],
                 $this->transformObjectToTableBody($object)
