@@ -9,19 +9,7 @@ use AbuseIO\Console\Commands\AbstractListCommand;
 class ListCommand extends AbstractListCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'account:list
-                            {--filter= : Applies a filter on the account name }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available account';
+   protected $filterArguments = ["name"];
 
     /**
      * The headers of the table

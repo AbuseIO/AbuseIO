@@ -8,20 +8,7 @@ use AbuseIO\Models\User;
 class ListCommand extends AbstractListCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'user:list
-                            {--filter= : Applies a filter on the email (username login) }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available users';
-
+    protected $filterArguments = ["email"];
     /**
      * The headers of the table
      * @var array

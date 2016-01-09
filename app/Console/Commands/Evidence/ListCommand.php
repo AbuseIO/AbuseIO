@@ -12,20 +12,7 @@ use AbuseIO\Models\Evidence;
 class ListCommand extends AbstractListCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'evidence:list
-                            {--filter= : Applies a filter on the evidence id or sender }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available evidence';
-
+    protected $filterArguments = ["id", "sender"];
     /**
      * The headers of the table
      * @var array

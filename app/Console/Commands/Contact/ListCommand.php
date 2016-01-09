@@ -12,19 +12,7 @@ use AbuseIO\Models\Contact;
 class ListCommand extends AbstractListCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'contact:list
-                            {--filter= : Applies a filter on the contact name }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available contacts';
+    protected $filterArguments = ["name"];
 
     /**
      * The headers of the table

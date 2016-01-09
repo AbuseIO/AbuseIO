@@ -8,20 +8,7 @@ use AbuseIO\Models\Netblock;
 class ListCommand extends AbstractListCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'netblock:list
-                            {--filter= : Applies a filter on the first_ip }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available netblocks';
-
+    protected $filterArguments = ["first ip"];
     /**
      * The headers of the table
      * @var array

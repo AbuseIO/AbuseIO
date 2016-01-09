@@ -8,20 +8,7 @@ use AbuseIO\Models\Role;
 class ListCommand extends AbstractListCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'role:list
-                            {--filter= : Applies a filter on the role name }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available roles';
-
+   protected $filterArguments = ["name"];
     /**
      * The headers of the table
      * @var array

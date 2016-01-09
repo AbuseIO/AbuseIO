@@ -13,20 +13,7 @@ use Carbon;
 class ListCommand extends AbstractListCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'queue:list
-                                {--filter= : Applies a filter on the queue name }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Show all queue usage';
-
+   protected $filterArguments = ["name"];
     /**
      * The headers of the table
      * @var array

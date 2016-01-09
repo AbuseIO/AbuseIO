@@ -3,12 +3,61 @@
 namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
+
 
 
 abstract class AbstractListCommand extends Command
 {
     protected $headers = [];
 
+    protected $filterArguments = [];
+
+
+    /**
+     * Configure the console command.
+     */
+    protected final function configure()
+    {
+        $this
+            ->setName($this->getName())
+            ->setDescription($this->getDescription())
+            ->addOption(
+                "filter",
+                null,
+                InputOption::VALUE_NONE,
+                $this->getFilterMessage()
+            );
+
+    }
+
+
+
+    protected function getFilterMessage()
+    {
+        return sprintf("Applies a filter on the %s %s", $this->getAsNoun(), $this->getParsedFilterArguments());
+    }
+
+    private function getParsedFilterArguments()
+    {
+        return implode(" or ", $this->filterArguments);
+    }
+
+    /**
+     * @return string
+     */
+    public final function getDescription()
+    {
+        return sprintf('Shows a list of available %ss', $this->getAsNoun());
+    }
+
+    /**
+     * @return string
+     */
+    public final function getName()
+    {
+        return sprintf('%s:list', $this->getAsNoun());
+    }
 
     /**
      * Create a new command instance.

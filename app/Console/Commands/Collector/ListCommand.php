@@ -12,20 +12,7 @@ use Carbon;
  */
 class ListCommand extends AbstractListCommand
 {
-
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'collector:list
-                            {--filter= : Applies a filter on the collector (name) }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available collectors';
+    protected $filterArguments = ["name"];
 
     /**
      * The headers of the table

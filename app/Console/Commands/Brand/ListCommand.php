@@ -11,20 +11,7 @@ use AbuseIO\Models\Brand;
  */
 class ListCommand extends AbstractListCommand
 {
-
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'brand:list
-                            {--filter= : Applies a filter on the brand name }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available brands';
+    protected $filterArguments = ["name"];
 
     /**
      * The headers of the table

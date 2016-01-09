@@ -11,19 +11,7 @@ use AbuseIO\Models\Domain;
  */
 class ListCommand extends AbstractListCommand
 {
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'domain:list
-                            {--filter= : Applies a filter on the domain name }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available domains';
+    protected $filterArguments = ["name"];
 
     /**
      * The headers of the table

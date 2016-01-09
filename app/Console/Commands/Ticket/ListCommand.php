@@ -12,20 +12,7 @@ use AbuseIO\Models\Ticket;
 class ListCommand extends AbstractListCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'ticket:list
-                            {--filter= : Applies a filter on the ticket id }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available tickets';
-
+    protected $filterArguments = ["id"];
     /**
      * The headers of the table
      * @var array

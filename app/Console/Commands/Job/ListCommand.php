@@ -11,20 +11,7 @@ use AbuseIO\Models\Job;
  */
 class ListCommand extends AbstractListCommand
 {
-
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'job:list
-                            {--filter= : Applies a filter on the job id or queue }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available jobs';
+    protected $filterArguments = ["id", "queue"];
 
     /**
      * The headers of the table

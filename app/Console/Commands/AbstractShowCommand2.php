@@ -66,6 +66,7 @@ abstract class AbstractShowCommand2 extends Command
         return sprintf('Shows a %s (without confirmation!)', $this->getAsNoun());
     }
 
+
     /**
      * Create a new command instance.
      */

@@ -12,20 +12,7 @@ use AbuseIO\Models\Event;
 class ListCommand extends AbstractListCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'event:list
-                            {--filter= : Applies a filter on the event source }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available events';
-
+    protected $filterArguments =["source"];
     /**
      * The headers of the table
      * @var array
