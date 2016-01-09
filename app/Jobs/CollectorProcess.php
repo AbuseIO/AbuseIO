@@ -118,15 +118,25 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
          * Call EventsProcess to validate, store evidence and save events
          */
         $eventsProcess = new EventsProcess($collectorResult['data'], $evidence);
-        $eventsProcessResult = $eventsProcess->fire();
 
-        if (!$eventsProcessResult) {
-            Log::error(
-                get_class($this) . ': ' .
-                'The event processor ended with errors, cannot continue'
-            );
+        // Only continue if not empty, empty set is acceptable (exit OK)
+        if (!$eventsProcess->notEmpty()) {
+            return;
+        }
+
+        // Validate the data set
+        if (!$eventsProcess->validate()) {
 
             $this->exception();
+
+            return;
+        }
+
+        // Write the data set to database
+        if (!$eventsProcess->save()) {
+
+            $this->exception();
+
             return;
         }
 
