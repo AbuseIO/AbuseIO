@@ -38,68 +38,93 @@ class EventsProcess extends Job implements SelfHandling
     }
 
     /**
-     * Execute the command.
+     * Checks if the event set is not empty
      *
-     * @return boolean
+     * @return bool
      */
-    public function fire()
+    public function notEmpty()
     {
-
-        if (count($this->events) !== 0) {
-            // Call validator
-            $validator = new EventsValidate();
-            $validatorResult = $validator->check($this->events);
-
-            if ($validatorResult['errorStatus'] === true) {
-                Log::error(
-                    get_class($validator) . ': ' .
-                    'Validator has ended with errors ! : ' . $validatorResult['errorMessage']
-                );
-
-                return false;
-            } else {
-                Log::info(
-                    get_class($validator) . ': ' .
-                    'Validator has ended without errors'
-                );
-            }
-
-            /**
-             * save evidence into table
-             **/
-            $this->evidence->save();
-
-            /**
-             * call saver
-             **/
-            $saver = new EventsSave();
-            $saverResult = $saver->save($this->events, $this->evidence->id);
-
-            /**
-             * We've hit a snag, so we are gracefully killing ourselves
-             * after we contact the admin about it. EventsSave should never
-             * end with problems unless the mysql died while doing transactions
-             **/
-            if ($saverResult['errorStatus'] === true) {
-                Log::error(
-                    get_class($saver) . ': ' .
-                    'Saver has ended with errors ! : ' . $saverResult['errorMessage']
-                );
-
-                return false;
-            } else {
-                Log::info(
-                    get_class($saver) . ': ' .
-                    'Saver has ended without errors'
-                );
-            }
-        } else {
+        if (count($this->events) === 0) {
             Log::warning(
                 get_class($this) . ': ' .
                 'Empty set of events therefore skipping validation and saving'
             );
+
+            return false;
         }
 
         return true;
+    }
+
+    /**
+     *  Wrapper for validate data
+     *
+     * @return bool
+     */
+    public function validate()
+    {
+        // Call validator
+        $validator = new EventsValidate();
+        $validatorResult = $validator->check($this->events);
+
+        if ($validatorResult['errorStatus'] === true) {
+            Log::error(
+                get_class($validator) . ': ' .
+                'Validator has ended with errors ! : ' . $validatorResult['errorMessage']
+            );
+
+            return false;
+
+        }
+
+        // Todo validate evidence too
+
+        Log::info(
+            get_class($validator) . ': ' .
+            'Validator has ended without errors'
+        );
+
+        return true;
+    }
+
+    /**
+     * Wrapper for save data
+     *
+     * @return bool
+     */
+    public function save()
+    {
+        /**
+         * save evidence into table
+         **/
+        $this->evidence->save();
+
+        /**
+         * call saver
+         **/
+        $saver = new EventsSave();
+        $saverResult = $saver->save($this->events, $this->evidence->id);
+
+        /**
+         * We've hit a snag, so we are gracefully killing ourselves
+         * after we contact the admin about it. EventsSave should never
+         * end with problems unless the mysql died while doing transactions
+         **/
+        if ($saverResult['errorStatus'] === true) {
+            Log::error(
+                get_class($saver) . ': ' .
+                'Saver has ended with errors ! : ' . $saverResult['errorMessage']
+            );
+
+            return false;
+
+        } else {
+            Log::info(
+                get_class($saver) . ': ' .
+                'Saver has ended without errors'
+            );
+
+            return true;
+        }
     }
 }
