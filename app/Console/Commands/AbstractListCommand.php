@@ -27,6 +27,11 @@ abstract class AbstractListCommand extends Command
                 null,
                 InputOption::VALUE_NONE,
                 $this->getFilterMessage()
+            )->addOption(
+                "json",
+                null,
+                InputOption::VALUE_OPTIONAL,
+                "use to output result as JSON"
             );
 
     }
@@ -88,6 +93,8 @@ abstract class AbstractListCommand extends Command
             $this->error(
                 sprintf("No %s found for given filter.", $this->getAsNoun())
             );
+        } if ($this->option("json")) {
+            echo $list->toJson();
         } else {
             $this->table(
                 $this->headers,
