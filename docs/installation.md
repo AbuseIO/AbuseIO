@@ -258,12 +258,16 @@ composer install
 
 ## Setting up configuration
 
-Create the file /opt/abuseio/.env with the following hints:
+Once installed the installation in most cases has copied the .env.example into .env.
+
+The .env file contains your base configuration and must be set correctly because you set the application
+configuration. An example of the file:
 
 ```bash
-APP_ENV=production (change to development if needed)
-APP_DEBUG=false (change to true if needed)
+APP_ENV=production
+APP_DEBUG=false
 APP_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+APP_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 DB_DRIVER=mysql
 DB_HOST=localhost
@@ -276,13 +280,24 @@ SESSION_DRIVER=file
 QUEUE_DRIVER=database
 ```
 
+In most cases the APP_KEY has been set, if not (or set to DEFAULT) you can set the key with the command:
+
+```bash
+php artisan key:generate
+```
+
+In most cases the APP_ID has been set, if not you can set the installation ID with the command:
+
+```bash
+php artisan app:id
+```
+
 ## Installing and seeding database
 
 ```bash
 cd /opt/abuseio
 php artisan migrate:install
 php artisan migrate
-php artisan key:generate
 
 php artisan db:seed < run this only if you want demo material in your installation, like users, tickets, etc
 ```
@@ -293,7 +308,9 @@ By default no accounts are installed and you will need to create accounts with t
 
 ```
 cd /opt/abuseio
-php artisan user:create --email admin@isp.local
+php artisan brand:create [TODO]
+php artisan account:create [TODO] --brand
+php artisan user:create --email admin@isp.local --acount
 php artisan role:assign --role admin --user admin@isp.local
 ```
 

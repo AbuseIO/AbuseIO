@@ -119,6 +119,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Installation ID
+    |--------------------------------------------------------------------------
+    |
+    | This key is used to identify this installation when using inter-AbuseIO
+    | communications with one or more instances. Once set you should never
+    | change this ID unless you are very sure!
+    |
+    */
+
+    'id' => env('APP_ID', 'DEFAULT'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Logging Configuration
     |--------------------------------------------------------------------------
     |

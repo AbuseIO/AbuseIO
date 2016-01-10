@@ -12,6 +12,8 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
+        'AbuseIO\Console\Commands\App\InstallationID',
+
         'AbuseIO\Console\Commands\Receive\EmailCommand',
 
         'AbuseIO\Console\Commands\User\CreateCommand',

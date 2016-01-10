@@ -105,7 +105,8 @@
 		],
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
-			"php artisan key:generate"
+			"php artisan key:generate",
+            "php artisan app:id"
 		]
 	},
 	"config": {
