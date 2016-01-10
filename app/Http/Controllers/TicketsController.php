@@ -45,6 +45,12 @@ class TicketsController extends Controller
             'tickets.type_id',
             'tickets.class_id',
             'tickets.status_id',
+            'tickets.ip_contact_account_id',
+            'tickets.ip_contact_reference',
+            'tickets.ip_contact_name',
+            'tickets.domain_contact_account_id',
+            'tickets.domain_contact_reference',
+            'tickets.domain_contact_name',
             DB::raw("count(distinct events.id) as event_count"),
             DB::raw("count(distinct notes.id) as notes_count")
         )
