@@ -17,14 +17,13 @@
             <dt>Attachments :</dt>
             <dd>
                 <table class="table table-condensed">
-                    <tr>
-                        @foreach ($evidence->getAttachments() as $attachment)
-                            <td>{{ filesize($evidenceTempDir.$attachment->getFilename()) }} bytes</td>
+                    @foreach ($evidence->getAttachments() as $attachment)
+                        <tr>
                             <td><a href='{{ Request::url() }}/attachment/{{ $attachment->getFilename() }}'>{{ $attachment->getFilename() }}</a></td>
+                            <td>{{ filesize($evidenceTempDir.$attachment->getFilename()) }} bytes</td>
                             <td>{{ $attachment->getContentType() }}</td>
-
-                        @endforeach
-                    </tr>
+                        </tr>
+                    @endforeach
                 </table>
             </dd>
         @endif
