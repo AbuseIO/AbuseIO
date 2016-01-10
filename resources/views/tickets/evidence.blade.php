@@ -9,8 +9,10 @@
 
     <dl class="dl-horizontal">
         @foreach (['from', 'to', 'cc', 'subject'] as $header)
-            <dt>{{ ucfirst($header) }} :</dt>
-            <dd>{{ $evidence->getHeader($header) }}</dd>
+            @if(!empty($evidence->getHeader($header)))
+                <dt>{{ ucfirst($header) }} :</dt>
+                <dd>{{ $evidence->getHeader($header) }}</dd>
+            @endif
         @endforeach
 
         @if (count($evidence->getAttachments()) > 0)
