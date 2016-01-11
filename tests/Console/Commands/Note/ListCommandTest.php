@@ -5,6 +5,10 @@ namespace tests\Console\Commands\Note;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
+/**
+ * Class ListCommandTest
+ * @package tests\Console\Commands\Note
+ */
 class ListCommandTest extends TestCase
 {
     public function testHeaders()
@@ -32,9 +36,12 @@ class ListCommandTest extends TestCase
 
     public function testFilter()
     {
-        $exitCode = Artisan::call('note:list', [
-            "--filter" => "Abusedesk"
-        ]);
+        $exitCode = Artisan::call(
+            'note:list',
+            [
+                "--filter" => "Abusedesk"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
@@ -44,12 +51,14 @@ class ListCommandTest extends TestCase
 
     public function testNotFoundFilter()
     {
-        $exitCode = Artisan::call('note:list', [
-            "--filter" => "xxx"
-        ]);
+        $exitCode = Artisan::call(
+            'note:list',
+            [
+                "--filter" => "xxx"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("No note found for given filter.", Artisan::output());
     }
 }
-

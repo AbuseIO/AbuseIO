@@ -5,6 +5,10 @@ namespace tests\Console\Commands\Evidence;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
+/**
+ * Class ListCommandTest
+ * @package tests\Console\Commands\Evidence
+ */
 class ListCommandTest extends TestCase
 {
     public function testHeaders()
@@ -32,9 +36,12 @@ class ListCommandTest extends TestCase
 
     public function testFilter()
     {
-        $exitCode = Artisan::call('evidence:list', [
-            "--filter" => "1 me"
-        ]);
+        $exitCode = Artisan::call(
+            'evidence:list',
+            [
+                "--filter" => "1 me"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
@@ -44,12 +51,14 @@ class ListCommandTest extends TestCase
 
     public function testNotFoundFilter()
     {
-        $exitCode = Artisan::call('evidence:list', [
-            "--filter" => "xxx"
-        ]);
+        $exitCode = Artisan::call(
+            'evidence:list',
+            [
+                "--filter" => "xxx"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("No evidence found for given filter.", Artisan::output());
     }
 }
-

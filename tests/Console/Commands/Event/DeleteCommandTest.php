@@ -5,6 +5,10 @@ namespace tests\Console\Commands\Event;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
+/**
+ * Class DeleteCommandTest
+ * @package tests\Console\Commands\Event
+ */
 class DeleteCommandTest extends TestCase{
 
 // TODO not working because seeder is not deleting and id=1 is in te schema.
@@ -25,12 +29,14 @@ class DeleteCommandTest extends TestCase{
 
     public function testInvalidId()
     {
-        $exitCode = Artisan::call('event:delete', [
-            'id' => '1000'
-        ]);
+        $exitCode = Artisan::call(
+            'event:delete',
+            [
+                'id' => '1000'
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("Unable to find event", Artisan::output());
     }
 }
-

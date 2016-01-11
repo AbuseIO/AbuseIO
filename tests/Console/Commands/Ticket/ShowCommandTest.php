@@ -5,13 +5,21 @@ namespace tests\Console\Commands\Ticket;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
-class ShowCommandTest extends TestCase{
+/**
+ * Class ShowCommandTest
+ * @package tests\Console\Commands\Ticket
+ */
+class ShowCommandTest extends TestCase
+{
 
     public function testWithValidIdFilter()
     {
-        $exitCode = Artisan::call('ticket:show', [
-            "ticket" => "1"
-        ]);
+        $exitCode = Artisan::call(
+            'ticket:show',
+            [
+                "ticket" => "1"
+            ]
+        );
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
         $fields = [
@@ -48,13 +56,14 @@ class ShowCommandTest extends TestCase{
 
     public function testWithInvalidFilter()
     {
-        $exitCode = Artisan::call('ticket:show', [
-            "ticket" => "xxx"
-        ]);
+        $exitCode = Artisan::call(
+            'ticket:show',
+            [
+                "ticket" => "xxx"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("No matching ticket was found.", Artisan::output());
     }
-
-
 }

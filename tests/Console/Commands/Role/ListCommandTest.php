@@ -5,11 +5,20 @@ namespace tests\Console\Commands\Role;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
+/**
+ * Class ListCommandTest
+ * @package tests\Console\Commands\Role
+ */
 class ListCommandTest extends TestCase
 {
     public function testNetBlockListCommand()
     {
-        $exitCode = Artisan::call('role:list', []);
+        $exitCode = Artisan::call(
+            'role:list',
+            [
+                //
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("System Administrator", Artisan::output());
@@ -17,9 +26,12 @@ class ListCommandTest extends TestCase
 
     public function testNetBlockListCommandWithValidFilter()
     {
-        $exitCode = Artisan::call('role:list', [
-            "--filter" => "Abuse"
-        ]);
+        $exitCode = Artisan::call(
+            'role:list',
+            [
+                "--filter" => "Abuse"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
 
@@ -28,4 +40,3 @@ class ListCommandTest extends TestCase
         $this->assertNotContains("System Administrator", $output);
     }
 }
-

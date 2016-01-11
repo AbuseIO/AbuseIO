@@ -5,7 +5,12 @@ namespace tests\Console\Commands\Evidence;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
-class DeleteCommandTest extends TestCase{
+/**
+ * Class DeleteCommandTest
+ * @package tests\Console\Commands\Evidence
+ */
+class DeleteCommandTest extends TestCase
+{
 
 // TODO not working because seeder is not deleting and id=1 is in te schema.
 
@@ -25,12 +30,14 @@ class DeleteCommandTest extends TestCase{
 
     public function testInvalidId()
     {
-        $exitCode = Artisan::call('evidence:delete', [
-            'id' => '1000'
-        ]);
+        $exitCode = Artisan::call(
+            'evidence:delete',
+            [
+                'id' => '1000'
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("Unable to find evidence", Artisan::output());
     }
 }
-

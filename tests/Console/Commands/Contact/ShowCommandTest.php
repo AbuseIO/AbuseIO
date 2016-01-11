@@ -5,7 +5,12 @@ namespace tests\Console\Commands\Contact;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
-class ShowCommandTest extends TestCase{
+/**
+ * Class ShowCommandTest
+ * @package tests\Console\Commands\Contact
+ */
+class ShowCommandTest extends TestCase
+{
 
     public function testWithValidIdFilter()
     {
@@ -46,6 +51,4 @@ class ShowCommandTest extends TestCase{
         $this->assertEquals($exitCode, 0);
         $this->assertContains("No matching contact was found.", Artisan::output());
     }
-
-
 }

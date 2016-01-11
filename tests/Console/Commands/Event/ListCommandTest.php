@@ -5,6 +5,10 @@ namespace tests\Console\Commands\Event;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
+/**
+ * Class ListCommandTest
+ * @package tests\Console\Commands\Event
+ */
 class ListCommandTest extends TestCase
 {
     public function testHeaders()
@@ -32,9 +36,12 @@ class ListCommandTest extends TestCase
 
     public function testFilter()
     {
-        $exitCode = Artisan::call('event:list', [
-            "--filter" => "Simon says"
-        ]);
+        $exitCode = Artisan::call(
+            'event:list',
+            [
+                "--filter" => "Simon says"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
@@ -44,12 +51,14 @@ class ListCommandTest extends TestCase
 
     public function testNotFoundFilter()
     {
-        $exitCode = Artisan::call('event:list', [
-            "--filter" => "xxx"
-        ]);
+        $exitCode = Artisan::call(
+            'event:list',
+            [
+                "--filter" => "xxx"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("No event found for given filter.", Artisan::output());
     }
 }
-

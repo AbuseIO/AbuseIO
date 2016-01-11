@@ -5,6 +5,10 @@ namespace tests\Console\Commands\Account;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
+/**
+ * Class ListCommandTest
+ * @package tests\Console\Commands\Account
+ */
 class ListCommandTest extends TestCase
 {
     public function testHeaders()
@@ -32,9 +36,12 @@ class ListCommandTest extends TestCase
 
     public function testFilter()
     {
-        $exitCode = Artisan::call('account:list', [
-            "--filter" => "Account 2"
-        ]);
+        $exitCode = Artisan::call(
+            'account:list',
+            [
+                "--filter" => "Account 2"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
@@ -44,12 +51,14 @@ class ListCommandTest extends TestCase
 
     public function testNotFoundFilter()
     {
-        $exitCode = Artisan::call('account:list', [
-            "--filter" => "xxx"
-        ]);
+        $exitCode = Artisan::call(
+            'account:list',
+            [
+                "--filter" => "xxx"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("No account found for given filter.", Artisan::output());
     }
 }
-

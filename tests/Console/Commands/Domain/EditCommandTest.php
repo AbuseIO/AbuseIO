@@ -5,6 +5,10 @@ namespace tests\Console\Commands\Domain;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
+/**
+ * Class EditCommandTest
+ * @package tests\Console\Commands\Domain
+ */
 class EditCommandTest extends TestCase
 {
     public function testWithoutId()
@@ -16,29 +20,38 @@ class EditCommandTest extends TestCase
 
     public function testWithInvalidId()
     {
-        $exitCode = Artisan::call('domain:edit', [
-            "--id" => "10000"
-        ]);
+        $exitCode = Artisan::call(
+            'domain:edit',
+            [
+                "--id" => "10000"
+            ]
+        );
         $this->assertEquals($exitCode, 0);
         $this->assertContains("Unable to find domain with this criteria", Artisan::output());
     }
 
     public function testWithInvalidContact()
     {
-        $exitCode = Artisan::call('domain:edit', [
-            "--id" => "1",
-            "--contact" => "1000"
-        ]);
+        $exitCode = Artisan::call(
+            'domain:edit',
+            [
+                "--id" => "1",
+                "--contact" => "1000"
+            ]
+        );
         $this->assertEquals($exitCode, 0);
         $this->assertContains("Unable to find contact with this criteria", Artisan::output());
     }
 
     public function testEnabled()
     {
-        $exitCode = Artisan::call('domain:edit', [
-            "--id" => "1",
-            "--enabled" => "false"
-        ]);
+        $exitCode = Artisan::call(
+            'domain:edit',
+            [
+                "--id" => "1",
+                "--enabled" => "false"
+            ]
+        );
         $this->assertEquals($exitCode, 0);
         $this->assertContains("Domain has been successfully updated", Artisan::output());
         /**
@@ -47,4 +60,3 @@ class EditCommandTest extends TestCase
         $this->seed('DomainsTableSeeder');
     }
 }
-

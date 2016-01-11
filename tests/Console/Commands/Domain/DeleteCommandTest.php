@@ -5,13 +5,21 @@ namespace tests\Console\Commands\Domain;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
-class DeleteCommandTest extends TestCase{
+/**
+ * Class DeleteCommandTest
+ * @package tests\Console\Commands\Domain
+ */
+class DeleteCommandTest extends TestCase
+{
 
     public function testValid()
     {
-        $exitCode = Artisan::call('domain:delete', [
-            "id" => "1"
-        ]);
+        $exitCode = Artisan::call(
+            'domain:delete',
+            [
+                "id" => "1"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("domain has been deleted", Artisan::output());
@@ -23,12 +31,14 @@ class DeleteCommandTest extends TestCase{
 
     public function testInvalidId()
     {
-        $exitCode = Artisan::call('domain:delete', [
-            "id" => "1000"
-        ]);
+        $exitCode = Artisan::call(
+            'domain:delete',
+            [
+                "id" => "1000"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("Unable to find domain", Artisan::output());
     }
 }
-

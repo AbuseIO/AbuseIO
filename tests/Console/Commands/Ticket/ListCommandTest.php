@@ -5,11 +5,20 @@ namespace tests\Console\Commands\Ticket;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
+/**
+ * Class ListCommandTest
+ * @package tests\Console\Commands\Ticket
+ */
 class ListCommandTest extends TestCase
 {
     public function testHeaders()
     {
-        $exitCode = Artisan::call('ticket:list', []);
+        $exitCode = Artisan::call(
+            'ticket:list',
+            [
+                //
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
 
@@ -22,7 +31,12 @@ class ListCommandTest extends TestCase
 
     public function testAll()
     {
-        $exitCode = Artisan::call('ticket:list', []);
+        $exitCode = Artisan::call(
+            'ticket:list',
+            [
+                //
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
@@ -32,9 +46,12 @@ class ListCommandTest extends TestCase
 
     public function testFilter()
     {
-        $exitCode = Artisan::call('ticket:list', [
-            "--filter" => "1"
-        ]);
+        $exitCode = Artisan::call(
+            'ticket:list',
+            [
+                "--filter" => "1"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
@@ -44,12 +61,14 @@ class ListCommandTest extends TestCase
 
     public function testNotFoundFilter()
     {
-        $exitCode = Artisan::call('ticket:list', [
-            "--filter" => "xxx"
-        ]);
+        $exitCode = Artisan::call(
+            'ticket:list',
+            [
+                "--filter" => "xxx"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("No ticket found for given filter.", Artisan::output());
     }
 }
-

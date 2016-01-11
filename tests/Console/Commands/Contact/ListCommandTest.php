@@ -5,6 +5,10 @@ namespace tests\Console\Commands\Contact;
 use Illuminate\Support\Facades\Artisan;
 use \TestCase;
 
+/**
+ * Class ListCommandTest
+ * @package tests\Console\Commands\Contact
+ */
 class ListCommandTest extends TestCase
 {
     public function testHeaders()
@@ -32,9 +36,12 @@ class ListCommandTest extends TestCase
 
     public function testFilter()
     {
-        $exitCode = Artisan::call('contact:list', [
-            "--filter" => "Customer 2"
-        ]);
+        $exitCode = Artisan::call(
+            'contact:list',
+            [
+                "--filter" => "Customer 2"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
@@ -44,12 +51,14 @@ class ListCommandTest extends TestCase
 
     public function testNotFoundFilter()
     {
-        $exitCode = Artisan::call('contact:list', [
-            "--filter" => "xxx"
-        ]);
+        $exitCode = Artisan::call(
+            'contact:list',
+            [
+                "--filter" => "xxx"
+            ]
+        );
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains("No contact found for given filter.", Artisan::output());
     }
 }
-
