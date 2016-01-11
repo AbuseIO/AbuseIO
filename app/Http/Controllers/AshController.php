@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use PhpMimeMailParser\Exception;
 use Request;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Note;
@@ -27,7 +26,6 @@ class AshController extends Controller
      */
     public function index($ticketID, $token)
     {
-        $brand = false;
         $ticket = Ticket::find($ticketID);
         $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
@@ -60,7 +58,6 @@ class AshController extends Controller
      */
     public function addNote($ticketID, $token)
     {
-        $brand = false;
         $submittor = false;
 
         $ticket = Ticket::find($ticketID);

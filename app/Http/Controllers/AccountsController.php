@@ -257,8 +257,7 @@ class AccountsController extends Controller
         }
 
         // delete the linked users
-        foreach ($account->users as $user)
-        {
+        foreach ($account->users as $user) {
             $user->delete();
         }
 
@@ -266,8 +265,7 @@ class AccountsController extends Controller
         $account->delete();
 
         // delete the brand
-        if ($brand->canDelete())
-        {
+        if ($brand->canDelete()) {
             $brand->delete();
         }
 
