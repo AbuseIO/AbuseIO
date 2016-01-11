@@ -6,26 +6,49 @@ use AbuseIO\Models\Domain;
 use Illuminate\Console\Command;
 use Carbon;
 use AbuseIO\Models\User;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
 class CreateCommand extends Command
 {
 
     /**
-     * The console command name.
-     * @var string
+     * Configure the console command.
      */
-    protected $signature = 'domain:create
-                            {--contact : e-mail address or id from contact }
-                            {--name : domain name  }
-                            {--enabled=false : true|false, Set the account to be enabled }
-    ';
+    protected final function configure()
+    {
+        $this
+            ->setName($this->getName())
+            ->setDescription($this->getDescription())
+            ->setDefinition(
+                $this->getArguments()
+            );
+    }
 
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Creates a new domain';
+    public function getArguments()
+    {
+        return new InputDefinition([
+            new InputArgument('name', null, 'domain name'),
+            new InputArgument('contact_id', null,  'the contact_id'),
+            new InputArgument('enabled', null, 'true|false, Set the account to be enabled', false),
+        ]);
+    }
+
+    public function getName()
+    {
+        return sprintf("%s:create", $this->getAsNoun());
+    }
+
+    public function getDescription()
+    {
+        return sprintf("Creates a new %s", $this->getAsNoun());
+    }
+
+    public function getAsNoun()
+    {
+        return "domain";
+    }
 
     /**
      * Create a new command instance.
@@ -43,37 +66,32 @@ class CreateCommand extends Command
      */
     public function handle()
     {
-        /**
-         * TODO HAndle function sync with create command from NetBlocks.
-         */
+        $domain = new Domain();
 
-//        $domain = new Domain();
-//
-//        $domain->contact = User::find($this->option('contact'))?: User::where('email', '=', $this->option("contact"))->first();
-//        $domain->name = $this->option('name');
-//        $domain->enabled = $this->option('enabled') === "true" ? true : false;
-//
-//        /** @var  $validation */
-//        $validation = Validator::make($domain->toArray(), Domain::createRules($domain));
-//dd(get_class($validation));
-//        if ($validation->fails()) {
-//            foreach ($validation->messages()->all() as $message) {
-//                $this->warn($message);
-//            }
-//
-//            $this->error('Failed to create the domain due to validation warnings');
-//
-//            return false;
-//        }
-//
-//        if (!$domain->save()) {
-//            $this->error('Failed to save the domain into the database');
-//
-//            return false;
-//        }
-//
-//        $this->info("The domain has been created");
-//
-//        return true;
+        $domain->contact_id = $this->argument('contact_id');
+        $domain->name = $this->argument('name');
+        $domain->enabled = $this->argument('enabled') === "true" ? true : false;
+
+        /** @var  $validation */
+        $validation = Validator::make($domain->toArray(), Domain::createRules($domain));
+        if ($validation->fails()) {
+            foreach ($validation->messages()->all() as $message) {
+                $this->warn($message);
+            }
+
+            $this->error('Failed to create the domain due to validation warnings');
+
+            return false;
+        }
+
+        if (!$domain->save()) {
+            $this->error('Failed to save the domain into the database');
+
+            return false;
+        }
+
+        $this->info("The domain has been created");
+
+        return true;
     }
 }
