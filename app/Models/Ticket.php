@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $ip_contact_name
  * @property string $ip_contact_email
  * @property string $ip_contact_api_host
- * @property string $ip_contact_api_key
  * @property string $ip_contact_auto_notify
  * @property integer $ip_contact_notified_count
  * @property string $domain_contact_account_id
@@ -24,7 +23,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $domain_contact_name
  * @property string $domain_contact_email
  * @property string $domain_contact_api_host
- * @property string $domain_contact_api_key
  * @property string $domain_contact_auto_notify
  * @property integer $domain_contact_notified_count
  * @property integer $status_id
@@ -60,7 +58,6 @@ class Ticket extends Model
         'ip_contact_name',
         'ip_contact_email',
         'ip_contact_api_host',
-        'ip_contact_api_key',
         'ip_contact_auto_notify',
         'ip_contact_notified_count',
         'domain_contact_account_id',
@@ -68,7 +65,6 @@ class Ticket extends Model
         'domain_contact_name',
         'domain_contact_email',
         'domain_contact_api_host',
-        'domain_contact_api_key',
         'domain_contact_auto_notify',
         'domain_contact_notified_count',
         'status_id',
@@ -98,7 +94,6 @@ class Ticket extends Model
             'ip_contact_name'                   => 'required|string',
             'ip_contact_email'                  => 'required|emails',
             'ip_contact_api_host'               => 'required|string',
-            'ip_contact_api_key'                => 'required|string',
             'ip_contact_auto_notify'            => 'required|integer',
             'ip_contact_notified_count'         => 'required|integer',
             'domain_contact_account_id'         => 'required|integer',
@@ -106,7 +101,6 @@ class Ticket extends Model
             'domain_contact_name'               => 'required|string',
             'domain_contact_email'              => 'required|emails',
             'domain_contact_api_host'           => 'required|string',
-            'domain_contact_api_key'            => 'required|string',
             'domain_contact_auto_notify'        => 'required|integer',
             'domain_contact_notified_count'     => 'required|integer',
             'status_id'                         => 'required|integer',
@@ -135,7 +129,6 @@ class Ticket extends Model
             'ip_contact_name'                   => 'required|string',
             'ip_contact_email'                  => 'required|emails',
             'ip_contact_api_host'               => 'required|string',
-            'ip_contact_api_key'                => 'required|string',
             'ip_contact_auto_notify'            => 'required|integer',
             'ip_contact_notified_count'         => 'required|integer',
             'domain_contact_account_id'         => 'required|integer',
@@ -143,7 +136,6 @@ class Ticket extends Model
             'domain_contact_name'               => 'required|string',
             'domain_contact_email'              => 'required|emails',
             'domain_contact_api_host'           => 'required|string',
-            'domain_contact_api_key'            => 'required|string',
             'domain_contact_auto_notify'        => 'required|integer',
             'domain_contact_notified_count'     => 'required|integer',
             'status_id'                         => 'required|integer',

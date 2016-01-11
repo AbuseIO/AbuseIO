@@ -29,7 +29,7 @@ class ShowCommand extends AbstractShowCommand2
      */
     protected function getFields()
     {
-        return ["id", "reference", "name", "email", "api_host", "api_key", "auto_notify", "enabled", "account_id"];
+        return ["id", "reference", "name", "email", "api_host", "auto_notify", "enabled", "account_id"];
     }
 
     /**

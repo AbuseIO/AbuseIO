@@ -23,7 +23,6 @@ class CreateContactsTable extends Migration
                 $table->string('name');
                 $table->string('email');
                 $table->string('api_host');
-                $table->string('api_key');
                 $table->boolean('auto_notify')->unsigned();
                 $table->boolean('enabled')->unsigned();
                 $table->timestamps();

@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $name
  * @property string $email
  * @property string $api_host
- * @property string $api_key
  * @property boolean $auto_notify
  * @property boolean $enabled
  * @property integer account_id
@@ -26,7 +25,6 @@ class Contact extends Model
         'name',
         'email',
         'api_host',
-        'api_key',
         'auto_notify',
         'enabled',
         'account_id',
@@ -49,7 +47,6 @@ class Contact extends Model
             'name'      => 'required',
             'email'     => 'sometimes|emails',
             'api_host'  => 'sometimes|url',
-            'api_key'   => 'sometimes|string',
             'enabled'   => 'required|boolean',
             'account_id'=> 'required|integer'
         ];
@@ -70,7 +67,6 @@ class Contact extends Model
             'name'      => 'required',
             'email'     => 'sometimes|emails',
             'api_host'  => 'sometimes|url',
-            'api_key'   => 'sometimes|string',
             'enabled'   => 'required|boolean',
             'account_id'=> 'required|integer'
         ];

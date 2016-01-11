@@ -29,9 +29,6 @@
     <dt>{{ trans('contacts.api_host') }}</dt>
     <dd>{{ $contact->api_host }}</dd>
 
-    <dt>{{ trans('contacts.api_key') }}</dt>
-    <dd>{{ $contact->api_key }}</dd>
-
     <dt>{{ trans('contacts.notification') }}</dt>
     <dd>{{ $contact->auto_notify ? trans('misc.automatic') : trans('misc.manual') }}</dd>
 

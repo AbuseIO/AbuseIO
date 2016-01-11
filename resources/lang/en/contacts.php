@@ -14,7 +14,6 @@ return [
     'no_contacts'       => 'You do not yet have any contacts.',
     'reference'         => 'Reference',
     'api_host'          => 'API Host',
-    'api_key'           => 'API Key',
     'notification'      => 'Notification',
     'details_for'       => 'Contact details for',
     'linked_netblocks'  => 'Linked Netblocks',

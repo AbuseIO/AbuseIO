@@ -18,7 +18,7 @@ class ListCommand extends AbstractListCommand
      * The headers of the table
      * @var array
      */
-    protected $headers = ['Id', "Name", "Email", "Api host", "Api key"];
+    protected $headers = ['Id', "Name", "Email", "Api host"];
 
     /**
      * {@inheritdoc }
@@ -28,7 +28,7 @@ class ListCommand extends AbstractListCommand
         $result = [];
         /* @var $contact  \AbuseIO\Models\Contact|null */
         foreach ($list as $contact) {
-            $result[] = [$contact->id, $contact->name, $contact->email, $contact->api_host, $contact->api_key];
+            $result[] = [$contact->id, $contact->name, $contact->email, $contact->api_host];
         }
         return $result;
     }

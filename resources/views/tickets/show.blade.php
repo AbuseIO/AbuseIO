@@ -142,9 +142,6 @@
 
                 <dt>{{ trans('contacts.api_host') }}</dt>
                 <dd>{{ $ticket->ip_contact_api_host }}</dd>
-
-                <dt>{{ trans('contacts.api_key') }}</dt>
-                <dd>{{ $ticket->ip_contact_api_key }}</dd>
             </dl>
             @endif
 
@@ -162,9 +159,6 @@
 
                 <dt>{{ trans('contacts.api_host') }}</dt>
                 <dd>{{ $ticket->domain_contact_api_host }}</dd>
-
-                <dt>{{ trans('contacts.api_key') }}</dt>
-                <dd>{{ $ticket->domain_contact_api_key }}</dd>
             </dl>
             @endif
 

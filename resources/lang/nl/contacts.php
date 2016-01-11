@@ -14,7 +14,6 @@ return [
     'no_contacts'       => 'U heeft nog geen contacten.',
     'reference'         => 'Referentie',
     'api_host'          => 'API Server',
-    'api_key'           => 'API Sleutel',
     'notification'      => 'Notificatie',
     'details_for'       => 'Contact details voor',
     'linked_netblocks'  => 'Gekoppelde Netwerken',

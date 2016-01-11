@@ -26,13 +26,6 @@
         @if ($errors->has('api_host')) <p class="help-block">{{ $errors->first('api_host') }}</p> @endif
     </div>
 </div>
-<div class="form-group @if ($errors->has('api_key')) has-error @endif">
-    {!! Form::label('api_key', trans('contacts.apikey').':', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-10">
-        {!! Form::text('api_key', null, ['class' => 'form-control']) !!}
-        @if ($errors->has('api_key')) <p class="help-block">{{ $errors->first('api_key') }}</p> @endif
-    </div>
-</div>
 <div class="form-group">
     {!! Form::label('auto_notify', trans('contacts.notification').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">

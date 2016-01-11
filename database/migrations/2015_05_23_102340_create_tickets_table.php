@@ -31,7 +31,6 @@ class CreateTicketsTable extends Migration
                 $table->string('ip_contact_name');
                 $table->string('ip_contact_email');
                 $table->string('ip_contact_api_host');
-                $table->string('ip_contact_api_key');
                 $table->integer('ip_contact_notified_count')->unsigned();
                 $table->boolean('ip_contact_auto_notify')->unsigned();
 
@@ -40,7 +39,6 @@ class CreateTicketsTable extends Migration
                 $table->string('domain_contact_name');
                 $table->string('domain_contact_email');
                 $table->string('domain_contact_api_host');
-                $table->string('domain_contact_api_key');
                 $table->integer('domain_contact_notified_count')->unsigned();
                 $table->boolean('domain_contact_auto_notify')->unsigned();
 
