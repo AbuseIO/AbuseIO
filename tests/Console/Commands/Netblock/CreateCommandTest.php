@@ -47,8 +47,8 @@ class CreateCommandTest extends TestCase
         );
         $this->assertEquals(0, $exitCode);
         $this->assertContains(
-            'The first ip must be a valid IP address.\nThe last ip must be a valid IP address.\n' .
-            'Failed to create the netblock due to validation warnings\n',
+            "The first ip must be a valid IP address.\nThe last ip must be a valid IP address.\n" .
+            "Failed to create the netblock due to validation warnings\n",
             Artisan::output()
         );
     }
