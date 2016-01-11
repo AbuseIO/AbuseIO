@@ -13,7 +13,7 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
 
-        $headers = ["Id", "Name", "Email", "Api host", "Api key"];
+        $headers = ["Id", "Name", "Email", "Api host"];
         $output = Artisan::output();
         foreach ($headers as $header) {
             $this->assertContains($header, $output);
