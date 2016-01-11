@@ -6,24 +6,55 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Domain
  * @package AbuseIO\Models
+ * @property integer $id guarded
  * @property string $name
  * @property integer $contact_id
  * @property boolean $enabled
+ * @property integer $created_at guarded
+ * @property integer $updated_at guarded
+ * @property integer $deleted_at guarded
  */
 class Domain extends Model
 {
     use SoftDeletes;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table    = 'domains';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'contact_id',
         'enabled'
     ];
 
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        //
+    ];
+
+    /**
+     * The attributes that cannot be changed
+     *
+     * @var array
+     */
     protected $guarded  = [
-        'id'
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

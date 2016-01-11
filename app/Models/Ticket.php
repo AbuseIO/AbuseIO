@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Ticket
  * @package AbuseIO\Models
+ * @property integer $id guarded
  * @property string $ip
  * @property string $domain
  * @property integer $class_id
@@ -30,6 +31,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property boolean $auto_notify
  * @property integer $last_notify_count
  * @property integer $last_notify_timestamp
+ * @property integer $created_at guarded
+ * @property integer $updated_at guarded
+ * @property integer $deleted_at guarded
  */
 class Ticket extends Model
 {
@@ -72,8 +76,25 @@ class Ticket extends Model
         'last_notify_timestamp'
     ];
 
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        //
+    ];
+
+    /**
+     * The attributes that cannot be changed
+     *
+     * @var array
+     */
     protected $guarded  = [
-        'id'
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

@@ -6,24 +6,55 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Evidence
  * @package AbuseIO\Models
+ * @property integer $id guarded
  * @property string $filename
  * @property string $sender
  * @property string $subject
+ * @property integer $created_at guarded
+ * @property integer $updated_at guarded
+ * @property integer $deleted_at guarded
  */
 class Evidence extends Model
 {
     use SoftDeletes;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table    = 'evidences';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'filename',
         'sender',
         'subject'
     ];
 
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        //
+    ];
+
+    /**
+     * The attributes that cannot be changed
+     *
+     * @var array
+     */
     protected $guarded  = [
-        'id'
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Role
  * @package AbuseIO\Models
- * @property integer $id
+ * @property integer $id guarded
  * @property string $name
  * @property string $description
+ * @property integer $created_at guarded
+ * @property integer $updated_at guarded
+ * @property integer $deleted_at guarded
  */
 class Role extends Model
 {
@@ -31,6 +34,27 @@ class Role extends Model
     protected $fillable = [
         'name',
         'description',
+    ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        //
+    ];
+
+    /**
+     * The attributes that cannot be changed
+     *
+     * @var array
+     */
+    protected $guarded  = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

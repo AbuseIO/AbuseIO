@@ -7,18 +7,32 @@ use ICF;
 /**
  * Class Netblock
  * @package AbuseIO\Models
+ * @property integer $id guarded
  * @property string $first_ip
  * @property string $last_ip
  * @property string $description
  * @property integer $contact_id
  * @property boolean $enabled
+ * @property integer $created_at guarded
+ * @property integer $updated_at guarded
+ * @property integer $deleted_at guarded
  */
 class Netblock extends Model
 {
     use SoftDeletes;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table    = 'netblocks';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'first_ip',
         'last_ip',
@@ -27,8 +41,25 @@ class Netblock extends Model
         'enabled'
     ];
 
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        //
+    ];
+
+    /**
+     * The attributes that cannot be changed
+     *
+     * @var array
+     */
     protected $guarded  = [
-        'id'
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

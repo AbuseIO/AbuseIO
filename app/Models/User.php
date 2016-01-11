@@ -11,14 +11,18 @@ use Hash;
 /**
  * Class User
  * @package AbuseIO\Models
- * @property integer $id
+ * @property integer $id guarded
  * @property string $first_name
  * @property string $last_name
  * @property string $email
- * @property string $password
+ * @property string $password hidden
+ * @property string $remember_token hidden
  * @property integer $account_id
  * @property string $locale
  * @property boolean $disabled
+ * @property integer $created_at guarded
+ * @property integer $updated_at guarded
+ * @property integer $deleted_at guarded
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -54,6 +58,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = [
         'password',
         'remember_token'
+    ];
+
+    /**
+     * The attributes that cannot be changed
+     *
+     * @var array
+     */
+    protected $guarded  = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

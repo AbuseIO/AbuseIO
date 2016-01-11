@@ -6,18 +6,32 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Event
  * @package AbuseIO\Models
+ * @property integer $id guarded
  * @property integer $ticket_id
  * @property integer $evidence_id
  * @property string $source
  * @property integer $timestamp
  * @property string $information
+ * @property integer $created_at guarded
+ * @property integer $updated_at guarded
+ * @property integer $deleted_at guarded
  */
 class Event extends Model
 {
     use SoftDeletes;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table    = 'events';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'ticket_id',
         'evidence_id',
@@ -26,8 +40,25 @@ class Event extends Model
         'information'
     ];
 
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        //
+    ];
+
+    /**
+     * The attributes that cannot be changed
+     *
+     * @var array
+     */
     protected $guarded  = [
-        'id'
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

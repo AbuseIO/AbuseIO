@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Contact
  * @package AbuseIO\Models
+ * @property integer $id guarded
  * @property string $reference
  * @property string $name
  * @property string $email
@@ -13,13 +14,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property boolean $auto_notify
  * @property boolean $enabled
  * @property integer account_id
+ * @property integer $created_at guarded
+ * @property integer $updated_at guarded
+ * @property integer $deleted_at guarded
  */
 class Contact extends Model
 {
     use SoftDeletes;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table    = 'contacts';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'reference',
         'name',
@@ -30,8 +44,25 @@ class Contact extends Model
         'account_id',
     ];
 
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        //
+    ];
+
+    /**
+     * The attributes that cannot be changed
+     *
+     * @var array
+     */
     protected $guarded  = [
-        'id'
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**
