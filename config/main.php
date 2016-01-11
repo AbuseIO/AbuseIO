@@ -17,6 +17,12 @@ return [
         'notify_on_warnings'                => true,
     ],
 
+    // A list of installation UUID's which are considered to be parents allowing them to push events thru the API
+    // as well as sync notes and retrieve this child's status updates on tickets.
+    'parent_instances' => [
+
+    ],
+
     'reports' => [
         'min_lastseen'                      => false, //This ignores any event older then threshold
         'resolvable_only'                   => false, // This drops anything if a domain or netblock cannot be found
