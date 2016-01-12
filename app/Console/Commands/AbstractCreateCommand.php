@@ -5,22 +5,15 @@ namespace AbuseIO\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
 
 abstract class AbstractCreateCommand extends Command
 {
     /**
-     * Configure the console command.
+     * Create a new command instance
      */
-    protected final function configure()
+    public function __construct()
     {
-        $this
-            ->setName($this->getName())
-            ->setDescription($this->getDescription())
-            ->setDefinition(
-                $this->getArgumentsList()
-            );
+        parent::__construct();
     }
 
     /**
@@ -28,7 +21,7 @@ abstract class AbstractCreateCommand extends Command
      *
      * @return boolean
      */
-    public final function handle()
+    final public function handle()
     {
         $model = $this->getModelFromRequest();
 
@@ -61,9 +54,26 @@ abstract class AbstractCreateCommand extends Command
         return true;
     }
 
-    abstract public function getArgumentsList();
+    abstract protected function getModelFromRequest();
 
-    public final function getName()
+    abstract protected function getValidator($model);
+
+    abstract public function getAsNoun();
+
+    /**
+     * Configure the console command.
+     */
+    final protected function configure()
+    {
+        $this
+            ->setName($this->getName())
+            ->setDescription($this->getDescription())
+            ->setDefinition(
+                $this->getArgumentsList()
+            );
+    }
+
+    final public function getName()
     {
         return sprintf("%s:create", $this->getAsNoun());
     }
@@ -73,18 +83,5 @@ abstract class AbstractCreateCommand extends Command
         return sprintf("Creates a new %s", $this->getAsNoun());
     }
 
-    abstract public function getAsNoun();
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    abstract protected function getModelFromRequest();
-
-    abstract protected function getValidator($model);
+    abstract public function getArgumentsList();
 }
