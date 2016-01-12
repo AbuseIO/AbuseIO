@@ -70,7 +70,7 @@
     <div class="form-group @if ($errors->has('evidenceFile')) has-error @endif">
         {!! Form::label('evidenceFile', trans('tickets.evidence').':', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::file('evidenceFile', ['class' => 'form-control']) !!}
+            {!! Form::file('evidenceFile', []) !!}
             @if ($errors->has('evidenceFile')) <p class="help-block">{{ $errors->first('evidenceFile') }}</p> @endif
         </div>
     </div>
