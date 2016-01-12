@@ -70,19 +70,18 @@ Route::group(
 );
 
 // Api routes
-Route::group(
-    [
-        'prefix' => 'api',
-        'middleware' => [
-            'auth.basic',
-            'permission:login_api'
-        ],
+Route::post(
+    'api',
+    /*
+    'middleware' => [
+        'auth.basic',
+        'permission:login_api'
     ],
-    function () {
-
-        // TODO: #AIO-52 Implement API Tools
-
-    }
+    */
+    [
+        'as' => 'api',
+        'uses' => 'ApiController@server'
+    ]
 );
 
 // Admin routes
@@ -134,7 +133,6 @@ Route::group(
         require app_path() . '/Http/Routes/SettingsAccounts.php';
 
         require app_path() . '/Http/Routes/SettingsBrands.php';
-
 
         require app_path() . '/Http/Routes/SettingsUsers.php';
 
