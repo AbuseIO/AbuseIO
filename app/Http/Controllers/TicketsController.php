@@ -124,7 +124,6 @@ class TicketsController extends Controller
      */
     public function create()
     {
-        // TODO: #AIO-39 Interaction tickets - (bart) implement new ticket by adding events(data)?
         $event = new Event;
 
         return view('tickets.create')
