@@ -59,7 +59,7 @@ class EventsSave extends Job implements SelfHandling
             // If an event is too old we are ignoring it
             if (config('main.reports.min_lastseen') !== false &&
                 strtotime(config('main.reports.min_lastseen')) !== false &&
-                strtotime(config('main.reports.min_lastseen') . ' ago') > $event['timestamp']
+                strtotime(config('main.reports.min_lastseen') . ' ago') > $event->timestamp
             ) {
                 Log::debug(
                     get_class($this) . ': ' .
@@ -71,25 +71,25 @@ class EventsSave extends Job implements SelfHandling
 
             // Start with building a classification lookup table  and switch out name for ID
             foreach ((array)Lang::get('classifications') as $classID => $class) {
-                if ($class['name'] == $event['class']) {
-                    $event['class'] = $classID;
+                if ($class['name'] == $event->class) {
+                    $event->class = $classID;
                 }
             }
 
             // Also build a types lookup table and switch out name for ID
             foreach ((array)Lang::get('types.type') as $typeID => $type) {
-                if ($type['name'] == $event['type']) {
-                    $event['type'] = $typeID;
+                if ($type['name'] == $event->type) {
+                    $event->type = $typeID;
                 }
             }
 
             // Lookup the ip contact and if needed the domain contact too
             $findContact = new FindContact();
 
-            $ipContact = $findContact->byIP($event['ip']);
+            $ipContact = $findContact->byIP($event->ip);
 
-            if ($event['domain'] != '') {
-                $domainContact = $findContact->byDomain($event['domain']);
+            if ($event->domain != '') {
+                $domainContact = $findContact->byDomain($event->domain);
             } else {
                 $domainContact = $findContact->undefined();
             }
@@ -118,9 +118,9 @@ class EventsSave extends Job implements SelfHandling
             /*
              * Search to see if there is an existing ticket for this event classification
              */
-            $ticket = Ticket::where('ip', '=', $event['ip'])
-                ->where('class_id', '=', $event['class'], 'AND')
-                ->where('type_id', '=', $event['type'], 'AND')
+            $ticket = Ticket::where('ip', '=', $event->ip)
+                ->where('class_id', '=', $event->class, 'AND')
+                ->where('type_id', '=', $event->type, 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 2, 'AND')
                 ->get();
@@ -132,10 +132,10 @@ class EventsSave extends Job implements SelfHandling
                 $ticketCount++;
 
                 $newTicket = new Ticket();
-                $newTicket->ip                         = $event['ip'];
-                $newTicket->domain                     = empty($event['domain']) ? '' : $event['domain'];
-                $newTicket->class_id                   = $event['class'];
-                $newTicket->type_id                    = $event['type'];
+                $newTicket->ip                         = $event->ip;
+                $newTicket->domain                     = empty($event->domain) ? '' : $event->domain;
+                $newTicket->class_id                   = $event->class;
+                $newTicket->type_id                    = $event->type;
 
                 $newTicket->ip_contact_account_id      = $ipContact->account_id;
                 $newTicket->ip_contact_reference       = $ipContact->reference;
@@ -161,10 +161,10 @@ class EventsSave extends Job implements SelfHandling
 
                 $newEvent = new Event();
                 $newEvent->evidence_id = $evidenceID;
-                $newEvent->information = $event['information'];
-                $newEvent->source      = $event['source'];
+                $newEvent->information = $event->information;
+                $newEvent->source      = $event->source;
                 $newEvent->ticket_id   = $newTicket->id;
-                $newEvent->timestamp   = $event['timestamp'];
+                $newEvent->timestamp   = $event->timestamp;
 
                 $newEvent->save();
 
@@ -175,10 +175,10 @@ class EventsSave extends Job implements SelfHandling
                  */
                 $ticket = $ticket[0];
 
-                if (Event::where('information', '=', $event['information'])
-                        ->where('source', '=', $event['source'])
+                if (Event::where('information', '=', $event->information)
+                        ->where('source', '=', $event->source)
                         ->where('ticket_id', '=', $ticket->id)
-                        ->where('timestamp', '=', $event['timestamp'])
+                        ->where('timestamp', '=', $event->timestamp)
                         ->exists()
                 ) {
                     $eventsIgnored++;
@@ -190,10 +190,10 @@ class EventsSave extends Job implements SelfHandling
                     $newEvent = new Event();
 
                     $newEvent->evidence_id  = $evidenceID;
-                    $newEvent->information  = $event['information'];
-                    $newEvent->source       = $event['source'];
+                    $newEvent->information  = $event->information;
+                    $newEvent->source       = $event->source;
                     $newEvent->ticket_id    = $ticket->id;
-                    $newEvent->timestamp    = $event['timestamp'];
+                    $newEvent->timestamp    = $event->timestamp;
 
                     $newEvent->save();
 
@@ -202,7 +202,7 @@ class EventsSave extends Job implements SelfHandling
                      * domain owner. We not check if anything else then the reference has changed. If you change the
                      * contact data you have the option to propogate it onto open tickets.
                      */
-                    if (!empty($event['domain']) &&
+                    if (!empty($event->domain) &&
                         $domainContact !== false &&
                         $domainContact->reference !== $ticket->domain_contact_reference
                     ) {

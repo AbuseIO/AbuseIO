@@ -40,17 +40,19 @@ class EventsValidate extends Job implements SelfHandling
 
             $validator = Validator::make(
                 [
-                    'source'        => $event['source'],
-                    'ip'            => $event['ip'],
-                    'domain'        => $event['domain'],
-                    'uri'           => $event['uri'],
-                    'class'         => $event['class'],
-                    'type'          => $event['type'],
-                    'timestamp'     => $event['timestamp'],
-                    'information'   => $event['information'],
+                    'source'        => $event->source,
+                    'source_id'     => $event->source_id,
+                    'ip'            => $event->ip,
+                    'domain'        => $event->domain,
+                    'uri'           => $event->uri,
+                    'class'         => $event->class,
+                    'type'          => $event->type,
+                    'timestamp'     => $event->timestamp,
+                    'information'   => $event->information,
                 ],
                 [
                     'source'        => 'required|string',
+                    'source_id'     => 'required|stringorboolean',
                     'ip'            => 'required|ip',
                     'domain'        => 'required|stringorboolean|domain',
                     'uri'           => 'required|stringorboolean|uri',
