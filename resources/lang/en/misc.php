@@ -60,6 +60,7 @@ return [
     'logout'            => 'Logout',
     'brands'            => 'Brand|Brands',
     'options'           => 'Options',
+    'optional'          => 'Optional',
     'misc'              => 'Miscellaneous',
     'database_id'       => 'ID',
     'contact'           => 'Contact',
@@ -76,4 +77,5 @@ return [
     'id'                => 'Id',
     'text'              => 'Text',
     'both'              => 'Both',
+    'uri'               => 'URI / Path',
 ];

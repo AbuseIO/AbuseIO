@@ -81,6 +81,29 @@ class Event extends Model
     }
 
     /**
+     * Validation rules for this model being created using a form
+     *
+     * @param  \AbuseIO\Models\Event $event
+     * @return array $rules
+     */
+    public static function formRules(/** @noinspection PhpUnusedParameterInspection */ $event)
+    {
+        $rules = [
+            'source'                => 'required|string',
+            'ip'                    => 'required|integer',
+            'domain'                => 'sometimes|string',
+            'uri'                   => 'sometimes|uri',
+            'timestamp'             => 'required|timestamp',
+            'information'           => 'required|json',
+            'type_id'               => 'required|abusetype',
+            'class_id'              => 'required|abuseclass',
+            'evidenceFile'          => 'required|file'
+        ];
+
+        return $rules;
+    }
+
+    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Event $event
@@ -124,5 +147,37 @@ class Event extends Model
     public function getSeenAttribute()
     {
         return date(config('app.date_format').' '.config('app.time_format'), $this->attributes['timestamp']);
+    }
+
+    /**
+     * Return a list of all known types, usefull for selections
+     *
+     * @return array $types
+     */
+    public function getTypes()
+    {
+        $types = [ ];
+
+        foreach (trans('types.type') as $id => $type) {
+            $types[$id] = $type['name'];
+        }
+
+        return $types;
+    }
+
+    /**
+     * Return a list of all known classifications, usefull for selections
+     *
+     * @return array $classifications
+     */
+    public function getClassifications()
+    {
+        $classifications = [ ];
+
+        foreach (trans('classifications') as $id => $class) {
+            $classifications[$id] = $class['name'];
+        }
+
+        return $classifications;
     }
 }

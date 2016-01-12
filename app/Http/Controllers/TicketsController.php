@@ -3,11 +3,12 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests;
-use AbuseIO\Http\Requests\TicketsFormRequest;
+use AbuseIO\Http\Requests\TicketFormRequest;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Jobs\TicketUpdate;
 use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Ticket;
+use AbuseIO\Models\Event;
 use Illuminate\Filesystem\Filesystem;
 use PhpMimeMailParser\Parser as MimeParser;
 use yajra\Datatables\Datatables;
@@ -124,8 +125,11 @@ class TicketsController extends Controller
     public function create()
     {
         // TODO: #AIO-39 Interaction tickets - (bart) implement new ticket by adding events(data)?
+        $event = new Event;
 
         return view('tickets.create')
+            ->with('classes', array_merge(['select' => 'Select one'], $event->getClassifications()))
+            ->with('types', array_merge(['select' => 'Select one'], $event->getTypes()))
             ->with('auth_user', $this->auth_user);
     }
 
@@ -181,12 +185,13 @@ class TicketsController extends Controller
     /**
      * Store a newly created ticket in storage.
      *
-     * @param TicketsFormRequest $ticket
+     * @param TicketFormRequest $ticket
      * @return \Illuminate\Http\Response
      */
-    public function store(TicketsFormRequest $ticket)
+    public function store(TicketFormRequest $ticket)
     {
         // TODO: #AIO-39 Interaction tickets - (bart) implement new ticket by adding events(data)?
+        echo "bart";
     }
 
     /**

@@ -60,6 +60,7 @@ return [
     'logout'            => 'Uitloggen',
     'brands'            => 'Merk|Merken',
     'options'           => 'Opties',
+    'optional'          => 'Optioneel',
     'misc'              => 'Algemeen',
     'database_id'       => 'Nr',
     'contact'           => 'Contact',
@@ -76,4 +77,5 @@ return [
     'id'                => 'Nr',
     'text'              => 'Tekst',
     'both'              => 'Beide',
+    'uri'               => 'URI / Pad',
 ];
