@@ -10,14 +10,11 @@ use Validator;
 
 class CreateCommand extends AbstractCreateCommand
 {
-
-
-
     public function getArgumentsList()
     {
         return new InputDefinition([
             new InputArgument('name', null, 'domain name'),
-            new InputArgument('contact_id', null,  'the contact_id'),
+            new InputArgument('contact_id', null, 'the contact_id'),
             new InputArgument('enabled', null, 'true|false, Set the account to be enabled', false),
         ]);
     }
@@ -40,8 +37,7 @@ class CreateCommand extends AbstractCreateCommand
 
     protected function getValidator($model)
     {
-       return Validator::make($model->toArray(), Domain::createRules($model));
+        return Validator::make($model->toArray(), Domain::createRules($model));
     }
-
-
 }
+
