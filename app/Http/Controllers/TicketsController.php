@@ -12,6 +12,7 @@ use Illuminate\Filesystem\Filesystem;
 use PhpMimeMailParser\Parser as MimeParser;
 use yajra\Datatables\Datatables;
 use Redirect;
+use Lang;
 use Log;
 use DB;
 
@@ -157,8 +158,8 @@ class TicketsController extends Controller
                 $row = [
                     $ticket->id,
                     $ticket->ip,
-                    $ticket->class_id,
-                    $ticket->type_id,
+                    Lang::get('classifications.' . $ticket->class_id . '.name'),
+                    Lang::get('types.type.' . $ticket->type_id . '.name'),
                     $ticket->firstEvent[0]->seen,
                     $ticket->lastEvent[0]->seen,
                     $ticket->events->count(),
