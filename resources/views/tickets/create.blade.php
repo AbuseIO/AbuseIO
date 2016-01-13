@@ -40,7 +40,7 @@
     <div class="form-group">
         {!! Form::label('class_id', trans('misc.classification').':', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::select('class_id', $classes, null, ['class_id' => 'form-control']) !!}
+            {!! Form::select('class_id', $classes, null, ['class' => 'form-control']) !!}
             @if ($errors->has('class_id')) <p class="help-block">{{ $errors->first('class_id') }}</p> @endif
         </div>
     </div>
@@ -48,7 +48,7 @@
     <div class="form-group">
         {!! Form::label('type_id', trans('misc.type').':', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::select('type_id', $types, null, ['type_id' => 'form-control']) !!}
+            {!! Form::select('type_id', $types, null, ['class' => 'form-control']) !!}
             @if ($errors->has('type_id')) <p class="help-block">{{ $errors->first('type_id') }}</p> @endif
         </div>
     </div>
