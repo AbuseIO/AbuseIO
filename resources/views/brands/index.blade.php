@@ -2,6 +2,14 @@
 
 @section('content')
 <h1 class="page-header">{{ trans('misc.nav_brands') }}</h1>
+<div class="row">
+    <div class="col-md-3 col-md-offset-9 text-right">
+        @if ($auth_user->account->isSystemAccount() )
+        {!! link_to_route('admin.brands.create', trans('brands.button.new_brand'), [ ], ['class' => 'btn btn-info']) !!}
+        @endif
+    </div>
+</div>
+
 
 @if ( !$brands->count() )
 <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('brands.no_brands')}}</div>
