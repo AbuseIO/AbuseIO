@@ -38,6 +38,7 @@ class Account extends Model
         'description',
         'brand_id',
         'disabled',
+        'systemaccount',
     ];
 
     /**
@@ -99,7 +100,7 @@ class Account extends Model
      */
     public function isSystemAccount()
     {
-        return ($this->id == 1);
+        return ($this->systemaccount);
     }
 
     /**

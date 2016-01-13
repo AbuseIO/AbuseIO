@@ -2,6 +2,13 @@
 
 @section('content')
 <h1 class="page-header">{{ trans('misc.nav_accounts') }}</h1>
+<div class="row">
+    <div class="col-md-3 col-md-offset-9 text-right">
+        @if ($auth_user->account->isSystemAccount() )
+            {!! link_to_route('admin.accounts.create', trans('accounts.button.new_account'), [ ], ['class' => 'btn btn-info']) !!}
+        @endif
+    </div>
+</div>
 
 @if ( !$accounts->count() )
 <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('accounts.no_accounts')}}</div>

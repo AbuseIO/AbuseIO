@@ -20,6 +20,7 @@ class CreateAccountsTable extends Migration
                 $table->string('description');
                 $table->boolean('disabled')->default(false);
                 $table->integer('brand_id');
+                $table->boolean('systemaccount')->default(false);
                 $table->timestamps();
                 $table->softDeletes();
             }
@@ -37,9 +38,10 @@ class CreateAccountsTable extends Migration
             [
                 'id'                        => 1,
                 'name'                      => 'default',
-                'description'               => 'The default account',
+                'description'               => 'The default system account',
                 'disabled'                  => false,
                 'brand_id'                  => 1,
+                'systemaccount'             => true,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
