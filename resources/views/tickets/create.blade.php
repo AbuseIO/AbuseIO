@@ -62,18 +62,10 @@
     </div>
 
     <div class="form-group @if ($errors->has('information')) has-error @endif">
-        {!! Form::label('information', trans('tickets.information').':', ['class' => 'col-sm-2 control-label']) !!}
+        {!! Form::label('information', trans('tickets.information'), ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('information', null, ['class' => 'form-control']) !!}
+            {!! Form::textarea('information', null, ['size' => '30x5', 'placeholder' => 'YAML formatted dataset (field: value<NEWLINE>)', 'class' => 'form-control']) !!}
             @if ($errors->has('information')) <p class="help-block">{{ $errors->first('information') }}</p> @endif
-        </div>
-    </div>
-
-    <div class="form-group @if ($errors->has('evidenceText')) has-error @endif">
-        {!! Form::label('evidenceText', trans('tickets.evidence').' (' . trans('misc.manual') . '):', ['class' => 'col-sm-2 control-label']) !!}
-        <div class="col-sm-10">
-            {!! Form::text('evidenceText', null, ['class' => 'form-control']) !!}
-            @if ($errors->has('evidenceData')) <p class="help-block">{{ $errors->first('evidenceData') }}</p> @endif
         </div>
     </div>
 
