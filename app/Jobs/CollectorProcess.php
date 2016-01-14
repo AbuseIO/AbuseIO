@@ -10,7 +10,7 @@ use AbuseIO\Models\Evidence;
 use Log;
 
 /**
- * This CollectorProcess class handles collections and transform them into events
+ * This CollectorProcess class handles collections and transform them into incidents
  *
  * Class CollectorProcess
  */
@@ -115,17 +115,17 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
         $evidence->subject = "CLI Collector {$this->collector}";
 
         /**
-         * Call EventsProcess to validate, store evidence and save events
+         * Call IncidentsProcess to validate, store evidence and save incidents
          */
-        $eventsProcess = new EventsProcess($collectorResult['data'], $evidence);
+        $incidentsProcess = new IncidentsProcess($collectorResult['data'], $evidence);
 
         // Only continue if not empty, empty set is acceptable (exit OK)
-        if (!$eventsProcess->notEmpty()) {
+        if (!$incidentsProcess->notEmpty()) {
             return;
         }
 
         // Validate the data set
-        if (!$eventsProcess->validate()) {
+        if (!$incidentsProcess->validate()) {
 
             $this->exception();
 
@@ -133,7 +133,7 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
         }
 
         // Write the data set to database
-        if (!$eventsProcess->save()) {
+        if (!$incidentsProcess->save()) {
 
             $this->exception();
 

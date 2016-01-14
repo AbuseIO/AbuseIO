@@ -6,13 +6,13 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Validator;
 
 /**
- * This EventsValidate class handles validation of multiple events
+ * This IncidentsValidate class handles validation of multiple incidents
  *
- * Class EventsValidate
+ * Class IncidentsValidate
  */
-class EventsValidate extends Job implements SelfHandling
+class IncidentsValidate extends Job implements SelfHandling
 {
-    public $events;
+    public $incidents;
 
     /**
      * Create a new command instance.
@@ -28,31 +28,31 @@ class EventsValidate extends Job implements SelfHandling
      * Execute the command.
      *
      * @return array
-     * @param array $events
+     * @param array $incidents
      */
-    public function check($events)
+    public function check($incidents)
     {
-        if (empty($events)) {
+        if (empty($incidents)) {
             return $this->failed("Empty resultset cannot be validated");
         }
 
-        foreach ($events as $event) {
+        foreach ($incidents as $incident) {
 
-            if (!is_object($event)) {
+            if (!is_object($incident)) {
                 return $this->failed("Parser did not gave the correct incident objects in an array");
             }
 
             $validator = Validator::make(
                 [
-                    'source'        => $event->source,
-                    'source_id'     => $event->source_id,
-                    'ip'            => $event->ip,
-                    'domain'        => $event->domain,
-                    'uri'           => $event->uri,
-                    'class'         => $event->class,
-                    'type'          => $event->type,
-                    'timestamp'     => $event->timestamp,
-                    'information'   => $event->information,
+                    'source'        => $incident->source,
+                    'source_id'     => $incident->source_id,
+                    'ip'            => $incident->ip,
+                    'domain'        => $incident->domain,
+                    'uri'           => $incident->uri,
+                    'class'         => $incident->class,
+                    'type'          => $incident->type,
+                    'timestamp'     => $incident->timestamp,
+                    'information'   => $incident->information,
                 ],
                 [
                     'source'        => 'required|string',

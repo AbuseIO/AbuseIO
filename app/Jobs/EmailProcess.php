@@ -4,7 +4,6 @@ namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Evidence;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Filesystem\Filesystem;
@@ -12,10 +11,9 @@ use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use Config;
 use Log;
-use AbuseIO\Jobs\AlertAdmin;
 
 /**
- * This EmailProcess class handles incoming mail messages and transform them into events
+ * This EmailProcess class handles incoming mail messages and transform them into incidents
  *
  * Class EmailProcess
  */
@@ -161,7 +159,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             Log::info(
                 get_class($parser) . ': ' .
                 ': Parser completed with ' . $parserResult['warningCount'] .
-                ' warnings and collected ' . count($parserResult['data']) . ' events to save'
+                ' warnings and collected ' . count($parserResult['data']) . ' incidents to save'
             );
         }
 
@@ -185,17 +183,17 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         $evidence->subject = $parsedMail->getHeader('subject');
 
         /**
-         * Call EventsProcess to validate, store evidence and save events
+         * Call IncidentsProcess to validate, store evidence and save incidents
          */
-        $eventsProcess = new EventsProcess($parserResult['data'], $evidence);
+        $incidentsProcess = new IncidentsProcess($parserResult['data'], $evidence);
 
         // Only continue if not empty, empty set is acceptable (exit OK)
-        if (!$eventsProcess->notEmpty()) {
+        if (!$incidentsProcess->notEmpty()) {
             return;
         }
 
         // Validate the data set
-        if (!$eventsProcess->validate()) {
+        if (!$incidentsProcess->validate()) {
 
             $this->exception();
 
@@ -203,7 +201,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         }
 
         // Write the data set to database
-        if (!$eventsProcess->save()) {
+        if (!$incidentsProcess->save()) {
 
             $this->exception();
 

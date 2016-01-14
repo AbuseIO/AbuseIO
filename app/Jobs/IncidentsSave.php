@@ -9,11 +9,11 @@ use Lang;
 use Log;
 
 /**
- * This EventsSave class handles the actual writing of events to the database
+ * This incidentsSave class handles the actual writing of incidents to the database
  *
- * Class EventsSave
+ * Class incidentsSave
   */
-class EventsSave extends Job implements SelfHandling
+class IncidentsSave extends Job implements SelfHandling
 {
 
     /**
@@ -28,20 +28,20 @@ class EventsSave extends Job implements SelfHandling
     /**
      * Execute the command.
      *
-     * @param array $events
+     * @param array $incidents
      * @param integer $evidenceID
      * @return array
      */
-    public function save($events, $evidenceID)
+    public function save($incidents, $evidenceID)
     {
         $ticketCount = 0;
-        $eventCount = 0;
-        $eventsIgnored = 0;
+        $incidentCount = 0;
+        $incidentsIgnored = 0;
 
-        foreach ($events as $event) {
-            /* Here we will seek through all the events and look if there is an existing ticket. We will split them up
-             * into two seperate arrays: $eventsNew and $events$known. We can save all the known events in the DB with
-             * a single event saving loads of queries
+        foreach ($incidents as $incident) {
+            /* Here we will seek through all the incidents and look if there is an existing ticket. We will split
+             * them up into two seperate arrays: $incidentsNew and $incidents$known. We can save all the known 
+             * incidents in the DB with a single incident saving loads of queries
              *
              * IP Owner is leading, as in most cases even if the domain is moved
              * The server might still have a problem. Next to the fact that domains
@@ -56,14 +56,14 @@ class EventsSave extends Job implements SelfHandling
              * have any access to the ticket anymore.
              */
 
-            // If an event is too old we are ignoring it
+            // If an incident is too old we are ignoring it
             if (config('main.reports.min_lastseen') !== false &&
                 strtotime(config('main.reports.min_lastseen')) !== false &&
-                strtotime(config('main.reports.min_lastseen') . ' ago') > $event->timestamp
+                strtotime(config('main.reports.min_lastseen') . ' ago') > $incident->timestamp
             ) {
                 Log::debug(
                     get_class($this) . ': ' .
-                    "is ignoring event because its older then " . config('main.reports.min_lastseen')
+                    "is ignoring incident because its older then " . config('main.reports.min_lastseen')
                 );
 
                 continue;
@@ -71,31 +71,31 @@ class EventsSave extends Job implements SelfHandling
 
             // Start with building a classification lookup table  and switch out name for ID
             foreach ((array)Lang::get('classifications') as $classID => $class) {
-                if ($class['name'] == $event->class) {
-                    $event->class = $classID;
+                if ($class['name'] == $incident->class) {
+                    $incident->class = $classID;
                 }
             }
 
             // Also build a types lookup table and switch out name for ID
             foreach ((array)Lang::get('types.type') as $typeID => $type) {
-                if ($type['name'] == $event->type) {
-                    $event->type = $typeID;
+                if ($type['name'] == $incident->type) {
+                    $incident->type = $typeID;
                 }
             }
 
             // Lookup the ip contact and if needed the domain contact too
             $findContact = new FindContact();
 
-            $ipContact = $findContact->byIP($event->ip);
+            $ipContact = $findContact->byIP($incident->ip);
 
-            if ($event->domain != '') {
-                $domainContact = $findContact->byDomain($event->domain);
+            if ($incident->domain != '') {
+                $domainContact = $findContact->byDomain($incident->domain);
             } else {
                 $domainContact = $findContact->undefined();
             }
 
             /*
-             * Ignore the event if both ip and domain contacts are undefined and the resolving of an contact
+             * Ignore the incident if both ip and domain contacts are undefined and the resolving of an contact
              * was required. This is handy to ignore any reports that are not considered local, but use
              * with caution as it might just ignore anything if your IP/domains are not correctly configured
              */
@@ -108,7 +108,7 @@ class EventsSave extends Job implements SelfHandling
                 ) {
                     Log::debug(
                         get_class($this) . ': ' .
-                        "is ignoring event because there is no IP or Domain contact"
+                        "is ignoring incident because there is no IP or Domain contact"
                     );
 
                     continue;
@@ -116,11 +116,11 @@ class EventsSave extends Job implements SelfHandling
             }
 
             /*
-             * Search to see if there is an existing ticket for this event classification
+             * Search to see if there is an existing ticket for this incident classification
              */
-            $ticket = Ticket::where('ip', '=', $event->ip)
-                ->where('class_id', '=', $event->class, 'AND')
-                ->where('type_id', '=', $event->type, 'AND')
+            $ticket = Ticket::where('ip', '=', $incident->ip)
+                ->where('class_id', '=', $incident->class, 'AND')
+                ->where('type_id', '=', $incident->type, 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 2, 'AND')
                 ->get();
@@ -132,10 +132,10 @@ class EventsSave extends Job implements SelfHandling
                 $ticketCount++;
 
                 $newTicket = new Ticket();
-                $newTicket->ip                         = $event->ip;
-                $newTicket->domain                     = empty($event->domain) ? '' : $event->domain;
-                $newTicket->class_id                   = $event->class;
-                $newTicket->type_id                    = $event->type;
+                $newTicket->ip                         = $incident->ip;
+                $newTicket->domain                     = empty($incident->domain) ? '' : $incident->domain;
+                $newTicket->class_id                   = $incident->class;
+                $newTicket->type_id                    = $incident->type;
 
                 $newTicket->ip_contact_account_id      = $ipContact->account_id;
                 $newTicket->ip_contact_reference       = $ipContact->reference;
@@ -159,42 +159,39 @@ class EventsSave extends Job implements SelfHandling
 
                 $newTicket->save();
 
-                $newEvent = new Event();
-                $newEvent->evidence_id = $evidenceID;
-                $newEvent->information = $event->information;
-                $newEvent->source      = $event->source;
-                $newEvent->ticket_id   = $newTicket->id;
-                $newEvent->timestamp   = $event->timestamp;
-
+                $newEvent = new Event;
+                $newEvent->evidence_id  = $evidenceID;
+                $newEvent->information  = $incident->information;
+                $newEvent->source       = $incident->source;
+                $newEvent->ticket_id    = $newTicket->id;
+                $newEvent->timestamp    = $incident->timestamp;
                 $newEvent->save();
 
             } elseif ($ticket->count() === 1) {
                 /*
-                 * There is an existing ticket, so we just need to add the event to this ticket. If the event is an
-                 * exact match we consider it a duplicate and will ignore it.
+                 * There is an existing ticket, so we just need to add the incident to this ticket. If the 
+                 * incident is an exact match we consider it a duplicate and will ignore it.
                  */
                 $ticket = $ticket[0];
 
-                if (Event::where('information', '=', $event->information)
-                        ->where('source', '=', $event->source)
+                if (Event::where('information', '=', $incident->information)
+                        ->where('source', '=', $incident->source)
                         ->where('ticket_id', '=', $ticket->id)
-                        ->where('timestamp', '=', $event->timestamp)
+                        ->where('timestamp', '=', $incident->timestamp)
                         ->exists()
                 ) {
-                    $eventsIgnored++;
+                    $incidentsIgnored++;
 
                 } else {
-                    // New unique event, so we will save this
-                    $eventCount++;
+                    // New unique incident, so we will save this
+                    $incidentCount++;
 
-                    $newEvent = new Event();
-
+                    $newEvent = new Event;
                     $newEvent->evidence_id  = $evidenceID;
-                    $newEvent->information  = $event->information;
-                    $newEvent->source       = $event->source;
+                    $newEvent->information  = $incident->information;
+                    $newEvent->source       = $incident->source;
                     $newEvent->ticket_id    = $ticket->id;
-                    $newEvent->timestamp    = $event->timestamp;
-
+                    $newEvent->timestamp    = $incident->timestamp;
                     $newEvent->save();
 
                     /*
@@ -202,7 +199,7 @@ class EventsSave extends Job implements SelfHandling
                      * domain owner. We not check if anything else then the reference has changed. If you change the
                      * contact data you have the option to propogate it onto open tickets.
                      */
-                    if (!empty($event->domain) &&
+                    if (!empty($incident->domain) &&
                         $domainContact !== false &&
                         $domainContact->reference !== $ticket->domain_contact_reference
                     ) {
@@ -227,14 +224,14 @@ class EventsSave extends Job implements SelfHandling
                  * We should not never have more then two open tickets for the same case. If this happens there is a
                  * fault in the aggregator which must be resolved first. Until then we will permfail here.
                  */
-                $this->failed('Unable to link to ticket, multiple open tickets found for same event type');
+                $this->failed('Unable to link to ticket, multiple open tickets found for same incident type');
             }
         }
 
         Log::debug(
             get_class($this) . ': ' .
             "has completed creating {$ticketCount} new tickets, " .
-            "linking {$eventCount} new events and ignored $eventsIgnored duplicates"
+            "linking {$incidentCount} new incidents and ignored $incidentsIgnored duplicates"
         );
 
         $this->success('');

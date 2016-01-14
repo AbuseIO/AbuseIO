@@ -6,19 +6,19 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Log;
 
 /**
- * This EventsProcess class handles events after processing
+ * This IncidentsProcess class handles incidents after processing
  * This will provide centralized calling of the Validator, Saver, EvidenceSave, etc
- * and can be called by HTTP/API/CLI to manually add events
+ * and can be called by HTTP/API/CLI to manually add incidents
  *
- * Class EventsProcess
+ * Class IncidentsProcess
  */
-class EventsProcess extends Job implements SelfHandling
+class IncidentsProcess extends Job implements SelfHandling
 {
 
     /**
      * @var array
      */
-    private $events;
+    private $incidents;
 
     /**
      * @var \AbuseIO\Models\Evidence
@@ -28,26 +28,26 @@ class EventsProcess extends Job implements SelfHandling
     /**
      * Create a new command instance.
      *
-     * @param array $events
+     * @param array $incidents
      * @param \AbuseIO\Models\Evidence $evidence
      */
-    public function __construct($events, $evidence)
+    public function __construct($incidents, $evidence)
     {
-        $this->events   = $events;
-        $this->evidence = $evidence;
+        $this->incidents = $incidents;
+        $this->evidence  = $evidence;
     }
 
     /**
-     * Checks if the event set is not empty
+     * Checks if the incidents set is not empty
      *
      * @return bool
      */
     public function notEmpty()
     {
-        if (count($this->events) === 0) {
+        if (count($this->incidents) === 0) {
             Log::warning(
                 get_class($this) . ': ' .
-                'Empty set of events therefore skipping validation and saving'
+                'Empty set of incidents therefore skipping validation and saving'
             );
 
             return false;
@@ -64,8 +64,8 @@ class EventsProcess extends Job implements SelfHandling
     public function validate()
     {
         // Call validator
-        $validator = new EventsValidate();
-        $validatorResult = $validator->check($this->events);
+        $validator = new IncidentsValidate();
+        $validatorResult = $validator->check($this->incidents);
 
         if ($validatorResult['errorStatus'] === true) {
             Log::error(
@@ -102,12 +102,12 @@ class EventsProcess extends Job implements SelfHandling
         /**
          * call saver
          **/
-        $saver = new EventsSave();
-        $saverResult = $saver->save($this->events, $this->evidence->id);
+        $saver = new IncidentsSave();
+        $saverResult = $saver->save($this->incidents, $this->evidence->id);
 
         /**
          * We've hit a snag, so we are gracefully killing ourselves
-         * after we contact the admin about it. EventsSave should never
+         * after we contact the admin about it. IncidentsSave should never
          * end with problems unless the mysql died while doing transactions
          **/
         if ($saverResult['errorStatus'] === true) {
