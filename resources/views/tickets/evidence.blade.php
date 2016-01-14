@@ -45,6 +45,9 @@
     @endif
 
             <dt>Message :</dt>
-            <dd><pre>{{ print_r($evidence['message']) }}</pre></dd>
+            <dd>
+                This incident was created by an CLI, GUI or API command. The received payload is displayed below:
+                <pre>{{ print_r($evidence['message'], true) }}</pre>
+            </dd>
         </dl>
 @endsection

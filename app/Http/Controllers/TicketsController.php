@@ -212,7 +212,8 @@ class TicketsController extends Controller
         $evidence = new EvidenceSave;
         $evidenceData = json_encode(
             [
-                'AbuseDesk CreatedBy' => trim($this->auth_user->fullName()) . ' (' . $this->auth_user->email .')',
+                'CreatedBy' => trim($this->auth_user->fullName()) . ' (' . $this->auth_user->email .')',
+                'receivedOn' => time(),
                 'submittedData' => $ticket->all(),
             ]
         );
