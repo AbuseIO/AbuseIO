@@ -26,15 +26,22 @@ class IncidentsProcess extends Job implements SelfHandling
     private $evidence;
 
     /**
+     * @var \AbuseIO\Models\Origin
+     */
+    private $origin;
+
+    /**
      * Create a new command instance.
      *
      * @param array $incidents
      * @param \AbuseIO\Models\Evidence $evidence
+     * @param \AbuseIO\Models\Origin $origin
      */
-    public function __construct($incidents, $evidence)
+    public function __construct($incidents, $evidence, $origin = null)
     {
         $this->incidents = $incidents;
         $this->evidence  = $evidence;
+        $this->origin    = $origin;
     }
 
     /**
