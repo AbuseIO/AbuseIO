@@ -132,6 +132,11 @@ class RunCommand extends Command
          */
         $failed = $this->laravel['queue.failer']->all();
         if (count($failed) != 0) {
+            // Reset object to string for reporting
+            foreach ($failed as $key => $job) {
+                $failed[$key] = implode(' ', get_object_vars($job));
+            }
+
             AlertAdmin::send(
                 "Alert: There are " . count($failed) . " jobs that have failed:" . PHP_EOL . PHP_EOL .
                 implode(PHP_EOL, $failed)
