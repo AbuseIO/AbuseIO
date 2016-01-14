@@ -3,6 +3,7 @@
 namespace AbuseIO\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
+use AbuseIO\Models\Incident;
 use Validator;
 
 /**
@@ -43,28 +44,8 @@ class IncidentsValidate extends Job implements SelfHandling
             }
 
             $validator = Validator::make(
-                [
-                    'source'        => $incident->source,
-                    'source_id'     => $incident->source_id,
-                    'ip'            => $incident->ip,
-                    'domain'        => $incident->domain,
-                    'uri'           => $incident->uri,
-                    'class'         => $incident->class,
-                    'type'          => $incident->type,
-                    'timestamp'     => $incident->timestamp,
-                    'information'   => $incident->information,
-                ],
-                [
-                    'source'        => 'required|string',
-                    'source_id'     => 'required|stringorboolean',
-                    'ip'            => 'required|ip',
-                    'domain'        => 'required|stringorboolean|domain',
-                    'uri'           => 'required|stringorboolean|uri',
-                    'class'         => 'required|string|abuseclass',
-                    'type'          => 'required|string|abusetype',
-                    'timestamp'     => 'required|int|timestamp',
-                    'information'   => 'required|json',
-                ]
+                json_decode(json_encode($incident), true),
+                Incident::createRules()
             );
 
             if ($validator->fails()) {

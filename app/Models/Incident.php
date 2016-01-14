@@ -71,13 +71,13 @@ class Incident
     {
         $rules = [
             'source'                => 'required|string',
-            'source_id'             => 'sometimes|string',
-            'ip'                    => 'required|integer',
-            'domain'                => 'sometimes|string',
-            'uri'                   => 'sometimes|uri',
-            'timestamp'             => 'required|timestamp',
-            'class_id'              => 'required|abuseclass',
-            'type_id'               => 'required|abusetype',
+            'source_id'             => 'sometimes|stringorboolean',
+            'ip'                    => 'required|ip',
+            'domain'                => 'sometimes|stringorboolean|domain',
+            'uri'                   => 'sometimes|stringorboolean|uri',
+            'timestamp'             => 'required|int|timestamp',
+            'class'                 => 'required|abuseclass',
+            'type'                  => 'required|abusetype',
             'information'           => 'required|json',
         ];
 
