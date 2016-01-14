@@ -100,10 +100,9 @@ class Ticket extends Model
     /**
      * Validation rules for this model being created
      *
-     * @param  \AbuseIO\Models\Ticket $ticket
      * @return array $rules
      */
-    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $ticket)
+    public static function createRules()
     {
         $rules = [
             'ip'                                => 'required|integer',
@@ -135,10 +134,9 @@ class Ticket extends Model
     /**
      * Validation rules for this model being updated
      *
-     * @param  \AbuseIO\Models\Ticket $ticket
      * @return array $rules
      */
-    public static function updateRules(/** @noinspection PhpUnusedParameterInspection */ $ticket)
+    public static function updateRules()
     {
         $rules = [
             'ip'                                => 'required|integer',

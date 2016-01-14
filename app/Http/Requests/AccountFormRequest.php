@@ -33,7 +33,7 @@ class AccountFormRequest extends Request
             case 'DELETE':
                 break;
             case 'POST':
-                return Account::createRules($this);
+                return Account::createRules();
             case 'PUT':
                 break;
             case 'PATCH':

@@ -2,7 +2,8 @@
 
 namespace AbuseIO\Http\Requests;
 
-use AbuseIO\Models\Event;
+use AbuseIO\Http\Api\Incident;
+use AbuseIO\Models\Evidence;
 
 /**
  * Class TicketFormRequest
@@ -33,7 +34,7 @@ class TicketFormRequest extends Request
             case 'DELETE':
                 break;
             case 'POST':
-                return Event::formRules($this);
+                return Incident::createRules($this);
             case 'PUT':
                 break;
             case 'PATCH':

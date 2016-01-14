@@ -33,7 +33,7 @@ class UserFormRequest extends Request
             case 'DELETE':
                 break;
             case 'POST':
-                return User::createRules($this);
+                return User::createRules();
             case 'PUT':
                 break;
             case 'PATCH':

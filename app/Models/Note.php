@@ -64,10 +64,9 @@ class Note extends Model
     /**
      * Validation rules for this model being created
      *
-     * @param  \AbuseIO\Models\Note $note
      * @return array $rules
      */
-    public static function createRules(/** @noinspection PhpUnusedParameterInspection */$note)
+    public static function createRules()
     {
         $rules = [
             'ticket_id' => 'required|integer',
@@ -83,10 +82,9 @@ class Note extends Model
     /**
      * Validation rules for this model being updated
      *
-     * @param  \AbuseIO\Models\Note $note
      * @return array $rules
      */
-    public static function updateRules(/** @noinspection PhpUnusedParameterInspection */ $note)
+    public static function updateRules()
     {
         $rules = [
             'ticket_id' => 'sometimes|integer',

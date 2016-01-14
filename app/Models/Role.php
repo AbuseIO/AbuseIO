@@ -60,10 +60,9 @@ class Role extends Model
     /**
      * Validation rules for this model being created
      *
-     * @param  \AbuseIO\Models\Role $role
      * @return array $rules
      */
-    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $role)
+    public static function createRules()
     {
         $rules = [
             'name'              => 'required|string|min:1|unique:roles,name',

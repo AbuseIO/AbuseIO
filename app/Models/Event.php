@@ -64,52 +64,9 @@ class Event extends Model
     /**
      * Validation rules for this model being created
      *
-     * @param  \AbuseIO\Models\Event $event
      * @return array $rules
      */
-    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $event)
-    {
-        $rules = [
-            'ticket_id'             => 'required|integer',
-            'evidence_id'           => 'required|integer',
-            'source'                => 'required|string',
-            'timestamp'             => 'required|timestamp',
-            'information'           => 'required|json',
-        ];
-
-        return $rules;
-    }
-
-    /**
-     * Validation rules for this model being created using a form
-     *
-     * @param  \AbuseIO\Models\Event $event
-     * @return array $rules
-     */
-    public static function formRules(/** @noinspection PhpUnusedParameterInspection */ $event)
-    {
-        $rules = [
-            'source'                => 'required|string',
-            'ip'                    => 'required|integer',
-            'domain'                => 'sometimes|string',
-            'uri'                   => 'sometimes|uri',
-            'timestamp'             => 'required|timestamp',
-            'information'           => 'required|json',
-            'type_id'               => 'required|abusetype',
-            'class_id'              => 'required|abuseclass',
-            'evidenceFile'          => 'required|file'
-        ];
-
-        return $rules;
-    }
-
-    /**
-     * Validation rules for this model being updated
-     *
-     * @param  \AbuseIO\Models\Event $event
-     * @return array $rules
-     */
-    public static function updateRules(/** @noinspection PhpUnusedParameterInspection */ $event)
+    public static function createRules()
     {
         $rules = [
             'ticket_id'             => 'required|integer',

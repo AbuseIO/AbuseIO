@@ -60,27 +60,9 @@ class Evidence extends Model
     /**
      * Validation rules for this model being created
      *
-     * @param  \AbuseIO\Models\Evidence $evidence
      * @return array $rules
      */
-    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $evidence)
-    {
-        $rules = [
-            'filename'          => 'required|file',
-            'sender'            => 'required|string',
-            'subject'           => 'required|string',
-        ];
-
-        return $rules;
-    }
-
-    /**
-     * Validation rules for this model being updated
-     *
-     * @param  \AbuseIO\Models\Evidence $evidence
-     * @return array $rules
-     */
-    public static function updateRules(/** @noinspection PhpUnusedParameterInspection */ $evidence)
+    public static function createRules()
     {
         $rules = [
             'filename'          => 'required|file',

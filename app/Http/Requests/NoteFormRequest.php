@@ -34,11 +34,11 @@ class NoteFormRequest extends Request
             case 'DELETE':
                 break;
             case 'POST':
-                return Note::createRules($this);
+                return Note::createRules();
             case 'PUT':
                 break;
             case 'PATCH':
-                return Note::updateRules($this);
+                return Note::updateRules();
             default:
                 break;
         }

@@ -68,10 +68,9 @@ class Contact extends Model
     /**
      * Validation rules for this model being created
      *
-     * @param  \AbuseIO\Models\Contact $contact
      * @return array $rules
      */
-    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $contact)
+    public static function createRules()
     {
         $rules = [
             'reference' => 'required|unique:contacts,reference',

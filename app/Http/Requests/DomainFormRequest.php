@@ -31,7 +31,7 @@ class DomainFormRequest extends Request
             case 'DELETE':
                 break;
             case 'POST':
-                return Domain::createRules($this);
+                return Domain::createRules();
             case 'PUT':
                 break;
             case 'PATCH':

@@ -45,6 +45,11 @@ class Incident
     /**
      * @var
      */
+    public $timestamp;
+
+    /**
+     * @var
+     */
     public $class;
 
     /**
@@ -55,10 +60,27 @@ class Incident
     /**
      * @var
      */
-    public $timestamp;
+    public $information;
 
     /**
-     * @var
+     * Validation rules for this model being created
+     *
+     * @return array $rules
      */
-    public $information;
+    public static function createRules()
+    {
+        $rules = [
+            'source'                => 'required|string',
+            'source_id'             => 'sometimes|string',
+            'ip'                    => 'required|integer',
+            'domain'                => 'sometimes|string',
+            'uri'                   => 'sometimes|uri',
+            'timestamp'             => 'required|timestamp',
+            'class_id'              => 'required|abuseclass',
+            'type_id'               => 'required|abusetype',
+            'information'           => 'required|json',
+        ];
+
+        return $rules;
+    }
 }

@@ -33,7 +33,7 @@ class BrandFormRequest extends Request
             case 'DELETE':
                 break;
             case 'POST':
-                return Brand::createRules($this);
+                return Brand::createRules();
             case 'PUT':
                 break;
             case 'PATCH':

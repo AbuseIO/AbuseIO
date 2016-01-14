@@ -65,10 +65,9 @@ class Brand extends Model
     /**
      * Validation rules for this model being created
      *
-     * @param  \AbuseIO\Models\Brand $brand
      * @return array $rules
      */
-    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $brand)
+    public static function createRules()
     {
         $rules = [
             'name'              => 'required|unique:brands,name',

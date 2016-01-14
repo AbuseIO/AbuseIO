@@ -45,7 +45,7 @@ class ContactFormRequest extends Request
             case 'DELETE':
                 break;
             case 'POST':
-                return Contact::createRules($this);
+                return Contact::createRules();
             case 'PUT':
                 break;
             case 'PATCH':

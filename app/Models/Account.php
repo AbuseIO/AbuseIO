@@ -65,10 +65,9 @@ class Account extends Model
     /**
      * Validation rules for this model being created
      *
-     * @param  \AbuseIO\Models\Account $account
      * @return array $rules
      */
-    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $account)
+    public static function createRules()
     {
         $rules = [
             'name'  => 'required|unique:accounts',

@@ -75,10 +75,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Validation rules for this model being created
      *
-     * @param  \AbuseIO\Models\User $user
      * @return array $rules
      */
-    public static function createRules(/** @noinspection PhpUnusedParameterInspection */ $user)
+    public static function createRules()
     {
         $rules = [
             'first_name'    => 'required|string',
