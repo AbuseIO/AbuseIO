@@ -38,6 +38,10 @@ class EventsValidate extends Job implements SelfHandling
 
         foreach ($events as $event) {
 
+            if (!is_object($event)) {
+                return $this->failed("Parser did not gave the correct incident objects in an array");
+            }
+
             $validator = Validator::make(
                 [
                     'source'        => $event->source,
