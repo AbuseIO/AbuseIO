@@ -2,8 +2,9 @@
 
 namespace AbuseIO\Http\Requests;
 
-use AbuseIO\Http\Api\Incident;
+use AbuseIO\Models\Incident;
 use AbuseIO\Models\Evidence;
+use Input;
 
 /**
  * Class TicketFormRequest
@@ -65,12 +66,17 @@ class TicketFormRequest extends Request
         array $files = array(),
         array $server = array(),
         $content = null
-    ) {
+    )
+    {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
-        //Check evidence
-        //Save it
-        //transform event to include the evidence ID
-        //transform information into json
+        $input = Input::get();
+
+        if (strtotime($input['timestamp']) !== false) {
+            $input['timestamp'] = strtotime($input['timestamp']);
+        }
+        $input['information'] = json_encode(['report' => $input['information']]);
+
+        $this->getInputSource()->replace($input);
     }
 }

@@ -7,8 +7,11 @@ use AbuseIO\Http\Requests\TicketFormRequest;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Jobs\TicketUpdate;
 use AbuseIO\Models\Evidence;
+use AbuseIO\Models\Incident;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Event;
+use AbuseIO\Jobs\EvidenceSave;
+use AbuseIO\Jobs\IncidentsProcess;
 use Illuminate\Filesystem\Filesystem;
 use PhpMimeMailParser\Parser as MimeParser;
 use yajra\Datatables\Datatables;
@@ -126,9 +129,15 @@ class TicketsController extends Controller
     {
         $event = new Event;
 
+        $tmp = array_values($event->getTypes());
+        $eventTypes = array_combine($tmp, $tmp);
+
+        $tmp = array_values($event->getClassifications());
+        $eventClassifications = array_combine($tmp, $tmp);
+
         return view('tickets.create')
-            ->with('classes', array_merge(['select' => 'Select one'], $event->getClassifications()))
-            ->with('types', array_merge(['select' => 'Select one'], $event->getTypes()))
+            ->with('classes', array_merge(['select' => 'Select one'], $eventClassifications))
+            ->with('types', array_merge(['select' => 'Select one'], $eventTypes))
             ->with('auth_user', $this->auth_user);
     }
 
@@ -189,8 +198,58 @@ class TicketsController extends Controller
      */
     public function store(TicketFormRequest $ticket)
     {
-        // TODO: #AIO-39 Interaction tickets - (bart) implement new ticket by adding events(data)?
-        echo "bart";
+        $incident = new Incident;
+        foreach ($ticket->all() as $key => $value) {
+            if ($key != '_token') {
+                $incident->$key = $value;
+            }
+        }
+
+        $incidents = [
+            0 => $incident
+        ];
+
+        $evidence = new EvidenceSave;
+        $evidenceData = json_encode(
+            [
+                'AbuseDesk CreatedBy' => trim($this->auth_user->fullName()) . ' (' . $this->auth_user->email .')',
+                'submittedData' => $ticket->all(),
+            ]
+        );
+        $evidenceFile = $evidence->save($evidenceData);
+
+        if (!$evidenceFile) {
+            Log::error(
+                get_class($this) . ': ' .
+                'Error returned while asking to write evidence file, cannot continue'
+            );
+            $this->exception();
+        }
+
+        $evidence = new Evidence();
+        $evidence->filename = $evidenceFile;
+        $evidence->sender = $this->auth_user->email;
+        $evidence->subject = 'AbuseDesk Created Incident';
+
+        /**
+         * Call IncidentsProcess to validate, store evidence and save incidents
+         */
+        $incidentsProcess = new IncidentsProcess($incidents, $evidence);
+
+        // Validate the data set
+        $validated = $incidentsProcess->validate();
+        if (!$validated) {
+            return Redirect::back()->with('message', "Failed to validate incident model {$validated}");
+        }
+
+        // Write the data set to database
+        if (!$incidentsProcess->save()) {
+            return Redirect::back()->with('message', 'Failed to write to database');
+        }
+
+        return Redirect::route(
+            'admin.tickets.index'
+        )->with('message', 'A new incident has been created. Depending on the aggregator result a new ticket will be created or existing ticket updated');
     }
 
     /**
@@ -275,19 +334,38 @@ class TicketsController extends Controller
         if (is_file($evidence->filename)) {
             $evidenceData = file_get_contents($evidence->filename);
 
-            $evidenceParsed = new MimeParser();
-            $evidenceParsed->setText($evidenceData);
-
-            $filesystem = new Filesystem;
-            $evidenceTempDir = "/tmp/abuseio/cache/{$ticket->id}/{$evidenceId}/";
-            if (!$filesystem->isDirectory($evidenceTempDir)) {
-                if (!$filesystem->makeDirectory($evidenceTempDir, 0755, true)) {
-                    Log::error(
-                        get_class($this) . ': ' .
-                        'Unable to create temp directory: ' . $evidenceTempDir
-                    );
+            if (is_object(json_decode($evidenceData))) {
+                // No need to process a raw mail, its a API/submitted JSON blob
+                // We just need to set the expected fields
+                $fileData = '';
+                if (is_file($evidence->filename)) {
+                    $fileData = json_decode(file_get_contents($evidence->filename));
                 }
-                $evidenceParsed->saveAttachments($evidenceTempDir);
+
+                $evidenceParsed = [
+                    'from'      => $evidence->sender,
+                    'subject'   => $evidence->subject,
+                    'message'   => $fileData,
+                ];
+
+                $evidenceTempDir = false;
+
+            } else {
+                // ItsaMail parse it!
+                $evidenceParsed = new MimeParser();
+                $evidenceParsed->setText($evidenceData);
+
+                $filesystem = new Filesystem;
+                $evidenceTempDir = "/tmp/abuseio/cache/{$ticket->id}/{$evidenceId}/";
+                if (!$filesystem->isDirectory($evidenceTempDir)) {
+                    if (!$filesystem->makeDirectory($evidenceTempDir, 0755, true)) {
+                        Log::error(
+                            get_class($this) . ': ' .
+                            'Unable to create temp directory: ' . $evidenceTempDir
+                        );
+                    }
+                    $evidenceParsed->saveAttachments($evidenceTempDir);
+                }
             }
 
             return view('tickets.evidence')

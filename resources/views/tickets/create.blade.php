@@ -38,18 +38,18 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('class_id', trans('misc.classification').':', ['class' => 'col-sm-2 control-label']) !!}
+        {!! Form::label('class', trans('misc.classification').':', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::select('class_id', $classes, null, ['class' => 'form-control']) !!}
-            @if ($errors->has('class_id')) <p class="help-block">{{ $errors->first('class_id') }}</p> @endif
+            {!! Form::select('class', $classes, null, ['class' => 'form-control']) !!}
+            @if ($errors->has('class')) <p class="help-block">{{ $errors->first('class') }}</p> @endif
         </div>
     </div>
 
     <div class="form-group">
-        {!! Form::label('type_id', trans('misc.type').':', ['class' => 'col-sm-2 control-label']) !!}
+        {!! Form::label('type', trans('misc.type').':', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::select('type_id', $types, null, ['class' => 'form-control']) !!}
-            @if ($errors->has('type_id')) <p class="help-block">{{ $errors->first('type_id') }}</p> @endif
+            {!! Form::select('type', $types, null, ['class' => 'form-control']) !!}
+            @if ($errors->has('type')) <p class="help-block">{{ $errors->first('type') }}</p> @endif
         </div>
     </div>
 
