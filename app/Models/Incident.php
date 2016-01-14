@@ -17,13 +17,48 @@ namespace AbuseIO\Models;
  */
 class Incident
 {
-    var $source;
-    var $source_id;
-    var $ip;
-    var $domain;
-    var $uri;
-    var $class;
-    var $type;
-    var $timestamp;
-    var $information;
+    /**
+     * @var
+     */
+    public $source;
+
+    /**
+     * @var
+     */
+    public $source_id;
+
+    /**
+     * @var
+     */
+    public $ip;
+
+    /**
+     * @var
+     */
+    public $domain;
+
+    /**
+     * @var
+     */
+    public $uri;
+
+    /**
+     * @var
+     */
+    public $class;
+
+    /**
+     * @var
+     */
+    public $type;
+
+    /**
+     * @var
+     */
+    public $timestamp;
+
+    /**
+     * @var
+     */
+    public $information;
 }
