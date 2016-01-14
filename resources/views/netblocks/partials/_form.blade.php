@@ -30,7 +30,7 @@
 <div class="form-group">
     {!! Form::label('enabled', trans('misc.status').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::select('enabled', [0 => trans('misc.disabled'), 1 => trans('misc.enabled')], null, ['class' => 'form-control']) !!}
+        {!! Form::select('enabled', [1 => trans('misc.enabled'), 0 => trans('misc.disabled')], null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">
