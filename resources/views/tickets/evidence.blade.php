@@ -42,7 +42,6 @@
                 <dd>{{ $evidence[$header] }}</dd>
              @endif
         @endforeach
-    @endif
 
             <dt>Message :</dt>
             <dd>
@@ -50,4 +49,5 @@
                 <pre>{{ print_r($evidence['message'], true) }}</pre>
             </dd>
         </dl>
+    @endif
 @endsection
