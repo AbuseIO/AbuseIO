@@ -3,21 +3,19 @@
 namespace tests\Console\Commands\Ticket;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ShowCommandTest
- * @package tests\Console\Commands\Ticket
+ * Class ShowCommandTest.
  */
 class ShowCommandTest extends TestCase
 {
-
     public function testWithValidIdFilter()
     {
         $exitCode = Artisan::call(
             'ticket:show',
             [
-                "ticket" => "1"
+                'ticket' => '1',
             ]
         );
         $this->assertEquals($exitCode, 0);
@@ -44,26 +42,23 @@ class ShowCommandTest extends TestCase
 //                    'domain_contact_notified_count',
 //                    'status_id',
 //                    'last_notify_count',
-                    'Last notify timestamp'];
+                    'Last notify timestamp', ];
 
-
-        foreach($fields as $el) {
-            $this->assertContains($el,$output);
+        foreach ($fields as $el) {
+            $this->assertContains($el, $output);
         }
     }
-
-
 
     public function testWithInvalidFilter()
     {
         $exitCode = Artisan::call(
             'ticket:show',
             [
-                "ticket" => "xxx"
+                'ticket' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No matching ticket was found.", Artisan::output());
+        $this->assertContains('No matching ticket was found.', Artisan::output());
     }
 }

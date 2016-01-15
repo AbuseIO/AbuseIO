@@ -3,21 +3,19 @@
 namespace tests\Console\Commands\Event;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ShowCommandTest
- * @package tests\Console\Commands\Event
+ * Class ShowCommandTest.
  */
 class ShowCommandTest extends TestCase
 {
-
     public function testWithValidIdFilter()
     {
         $exitCode = Artisan::call(
             'event:show',
             [
-                "event" => "1"
+                'event' => '1',
             ]
         );
         $this->assertEquals($exitCode, 0);
@@ -32,11 +30,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'event:show',
             [
-                "event" => "xxx"
+                'event' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No matching event was found.", Artisan::output());
+        $this->assertContains('No matching event was found.', Artisan::output());
     }
 }

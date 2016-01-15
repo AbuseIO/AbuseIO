@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\Domain;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ListCommandTest
- * @package tests\Console\Commands\Domain
+ * Class ListCommandTest.
  */
 class ListCommandTest extends TestCase
 {
@@ -17,7 +16,7 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
 
-        $headers = ["Id", "Contact", "Name", "Enabled"];
+        $headers = ['Id', 'Contact', 'Name', 'Enabled'];
         $output = Artisan::output();
         foreach ($headers as $header) {
             $this->assertContains($header, $output);
@@ -29,7 +28,7 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call('domain:list', []);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 1", Artisan::output());
+        $this->assertContains('Customer 1', Artisan::output());
     }
 
     public function testFilter()
@@ -37,13 +36,13 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:list',
             [
-                "--filter" => "domain1.com"
+                '--filter' => 'domain1.com',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("domain1.com", Artisan::output());
-        $this->assertNotContains("domain2.com", Artisan::output());
+        $this->assertContains('domain1.com', Artisan::output());
+        $this->assertNotContains('domain2.com', Artisan::output());
     }
 
     public function testNotFoundFilter()
@@ -51,11 +50,11 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:list',
             [
-                "--filter" => "domain_unknown.com"
+                '--filter' => 'domain_unknown.com',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No domain found for given filter.", Artisan::output());
+        $this->assertContains('No domain found for given filter.', Artisan::output());
     }
 }

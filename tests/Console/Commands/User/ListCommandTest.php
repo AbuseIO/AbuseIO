@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\User;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ListCommandTest
- * @package tests\Console\Commands\User
+ * Class ListCommandTest.
  */
 class ListCommandTest extends TestCase
 {
@@ -21,7 +20,7 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("admin@isp.local", Artisan::output());
+        $this->assertContains('admin@isp.local', Artisan::output());
     }
 
     public function testNetBlockListCommandWithValidFilter()
@@ -29,14 +28,14 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'user:list',
             [
-                "--filter" => "user"
+                '--filter' => 'user',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
 
         $output = Artisan::output();
-        $this->assertContains("user@isp.local", $output);
-        $this->assertNotContains("admin@account2.local", $output);
+        $this->assertContains('user@isp.local', $output);
+        $this->assertNotContains('admin@account2.local', $output);
     }
 }

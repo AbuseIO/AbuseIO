@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\Brand;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ListCommandTest
- * @package tests\Console\Commands\Brand
+ * Class ListCommandTest.
  */
 class ListCommandTest extends TestCase
 {
@@ -30,7 +29,7 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("AbuseIO", $output);
+        $this->assertContains('AbuseIO', $output);
     }
 
     public function testFilter()
@@ -38,13 +37,13 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'brand:list',
             [
-                "--filter" => "default"
+                '--filter' => 'default',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("AbuseIO", $output);
+        $this->assertContains('AbuseIO', $output);
     }
 
     public function testNotFoundFilter()
@@ -52,11 +51,11 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'brand:list',
             [
-                "--filter" => "xxx"
+                '--filter' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No brand found for given filter.", Artisan::output());
+        $this->assertContains('No brand found for given filter.', Artisan::output());
     }
 }

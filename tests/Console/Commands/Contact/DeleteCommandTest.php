@@ -3,16 +3,14 @@
 namespace tests\Console\Commands\Contact;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class DeleteCommandTest
- * @package tests\Console\Commands\Contact
+ * Class DeleteCommandTest.
  */
 class DeleteCommandTest extends TestCase
 {
-
-// TODO not working because seeder is not deleting and id=1 is in te schema.
+    // TODO not working because seeder is not deleting and id=1 is in te schema.
 
 //    public function testValid()
 //    {
@@ -33,11 +31,11 @@ class DeleteCommandTest extends TestCase
         $exitCode = Artisan::call(
             'contact:delete',
             [
-                'id' => '1000'
+                'id' => '1000',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Unable to find contact", Artisan::output());
+        $this->assertContains('Unable to find contact', Artisan::output());
     }
 }

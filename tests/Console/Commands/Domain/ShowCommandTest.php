@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\Domain;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ShowCommandTest
- * @package tests\Console\Commands\Domain
+ * Class ShowCommandTest.
  */
 class ShowCommandTest extends TestCase
 {
@@ -16,12 +15,12 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:show',
             [
-                "--name" => "domain1.com"
+                '--name' => 'domain1.com',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 1", Artisan::output());
+        $this->assertContains('Customer 1', Artisan::output());
     }
 
     public function testWithValidIdFilter()
@@ -29,12 +28,12 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:show',
             [
-                "--id" => "1"
+                '--id' => '1',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 1", Artisan::output());
+        $this->assertContains('Customer 1', Artisan::output());
     }
 
     public function testWithInvalidIdFilter()
@@ -42,11 +41,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:show',
             [
-                "--id" => "1000"
+                '--id' => '1000',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No matching domain where found.", Artisan::output());
+        $this->assertContains('No matching domain where found.', Artisan::output());
     }
 }

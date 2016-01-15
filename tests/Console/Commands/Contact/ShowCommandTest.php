@@ -3,21 +3,19 @@
 namespace tests\Console\Commands\Contact;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ShowCommandTest
- * @package tests\Console\Commands\Contact
+ * Class ShowCommandTest.
  */
 class ShowCommandTest extends TestCase
 {
-
     public function testWithValidIdFilter()
     {
         $exitCode = Artisan::call(
             'contact:show',
             [
-                "contact" => "1"
+                'contact' => '1',
             ]
         );
         $this->assertEquals($exitCode, 0);
@@ -32,11 +30,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'contact:show',
             [
-                "contact" => "Global internet"
+                'contact' => 'Global internet',
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("internet@local.lan", Artisan::output());
+        $this->assertContains('internet@local.lan', Artisan::output());
     }
 
     public function testWithInvalidFilter()
@@ -44,11 +42,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'contact:show',
             [
-                "contact" => "xxx"
+                'contact' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No matching contact was found.", Artisan::output());
+        $this->assertContains('No matching contact was found.', Artisan::output());
     }
 }

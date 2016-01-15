@@ -3,16 +3,13 @@
 namespace tests\Console\Commands\Brand;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class DeleteCommandTest
- * @package tests\Console\Commands\Brand
+ * Class DeleteCommandTest.
  */
 class DeleteCommandTest extends TestCase
 {
-
-
     public function testValid()
     {
         //TODO make brand table seeder;
@@ -34,11 +31,11 @@ class DeleteCommandTest extends TestCase
         $exitCode = Artisan::call(
             'brand:delete',
             [
-                'id' => '1000'
+                'id' => '1000',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Unable to find brand", Artisan::output());
+        $this->assertContains('Unable to find brand', Artisan::output());
     }
 }

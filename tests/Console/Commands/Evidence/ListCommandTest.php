@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\Evidence;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ListCommandTest
- * @package tests\Console\Commands\Evidence
+ * Class ListCommandTest.
  */
 class ListCommandTest extends TestCase
 {
@@ -17,7 +16,7 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
 
-        $headers = ["Id", "Filename", "Sender", "Subject", "Created at"];
+        $headers = ['Id', 'Filename', 'Sender', 'Subject', 'Created at'];
         $output = Artisan::output();
         foreach ($headers as $header) {
             $this->assertContains($header, $output);
@@ -30,8 +29,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("i say 1", $output);
-        $this->assertContains("i say 2", $output);
+        $this->assertContains('i say 1', $output);
+        $this->assertContains('i say 2', $output);
     }
 
     public function testFilter()
@@ -39,14 +38,14 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'evidence:list',
             [
-                "--filter" => "1 me"
+                '--filter' => '1 me',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("i say 1", $output);
-        $this->assertNotContains("i say 2", $output);
+        $this->assertContains('i say 1', $output);
+        $this->assertNotContains('i say 2', $output);
     }
 
     public function testNotFoundFilter()
@@ -54,11 +53,11 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'evidence:list',
             [
-                "--filter" => "xxx"
+                '--filter' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No evidence found for given filter.", Artisan::output());
+        $this->assertContains('No evidence found for given filter.', Artisan::output());
     }
 }

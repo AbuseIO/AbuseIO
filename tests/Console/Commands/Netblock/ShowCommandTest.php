@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\Netblock;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ShowCommandTest
- * @package tests\Console\Commands\Netblock
+ * Class ShowCommandTest.
  */
 class ShowCommandTest extends TestCase
 {
@@ -16,12 +15,12 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                "--filter" => "Customer 6"
+                '--filter' => 'Customer 6',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 6", Artisan::output());
+        $this->assertContains('Customer 6', Artisan::output());
     }
 
     public function testWithInvalidFilter()
@@ -29,12 +28,12 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                "--filter" => "xxx"
+                '--filter' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No matching netblocks where found.", Artisan::output());
+        $this->assertContains('No matching netblocks where found.', Artisan::output());
     }
 
     public function testWithStartIpFilter()
@@ -42,12 +41,12 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                "--filter" => "10.1.18.0"
+                '--filter' => '10.1.18.0',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 8", Artisan::output());
+        $this->assertContains('Customer 8', Artisan::output());
     }
 
     public function testNetBlockShowWithStartEndFilter()
@@ -55,11 +54,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                "--filter" => "10.1.16.195"
+                '--filter' => '10.1.16.195',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 6", Artisan::output());
+        $this->assertContains('Customer 6', Artisan::output());
     }
 }

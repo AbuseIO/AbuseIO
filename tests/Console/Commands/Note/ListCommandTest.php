@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\Note;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ListCommandTest
- * @package tests\Console\Commands\Note
+ * Class ListCommandTest.
  */
 class ListCommandTest extends TestCase
 {
@@ -17,7 +16,7 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
 
-        $headers = ['Id', "Ticket id", "Submitter", "text", "Hidden", "Viewed"];
+        $headers = ['Id', 'Ticket id', 'Submitter', 'text', 'Hidden', 'Viewed'];
         $output = Artisan::output();
         foreach ($headers as $header) {
             $this->assertContains($header, $output);
@@ -30,8 +29,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("Abusedesk", $output);
-        $this->assertContains("Domain Contact", $output);
+        $this->assertContains('Abusedesk', $output);
+        $this->assertContains('Domain Contact', $output);
     }
 
     public function testFilter()
@@ -39,14 +38,14 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'note:list',
             [
-                "--filter" => "Abusedesk"
+                '--filter' => 'Abusedesk',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("Abusedesk", $output);
-        $this->assertNotContains("Domain Contact", $output);
+        $this->assertContains('Abusedesk', $output);
+        $this->assertNotContains('Domain Contact', $output);
     }
 
     public function testNotFoundFilter()
@@ -54,11 +53,11 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'note:list',
             [
-                "--filter" => "xxx"
+                '--filter' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No note found for given filter.", Artisan::output());
+        $this->assertContains('No note found for given filter.', Artisan::output());
     }
 }

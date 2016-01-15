@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\Ticket;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ListCommandTest
- * @package tests\Console\Commands\Ticket
+ * Class ListCommandTest.
  */
 class ListCommandTest extends TestCase
 {
@@ -22,7 +21,7 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
 
-        $headers = ['Id', "Ip", "Domain", "Class id", "Type id"];
+        $headers = ['Id', 'Ip', 'Domain', 'Class id', 'Type id'];
         $output = Artisan::output();
         foreach ($headers as $header) {
             $this->assertContains($header, $output);
@@ -40,8 +39,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("domain13", $output);
-        $this->assertContains("10.1.11.77", $output);
+        $this->assertContains('domain13', $output);
+        $this->assertContains('10.1.11.77', $output);
     }
 
     public function testFilter()
@@ -49,14 +48,14 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'ticket:list',
             [
-                "--filter" => "1"
+                '--filter' => '1',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("domain13", $output);
-        $this->assertNotContains("10.1.11.77", $output);
+        $this->assertContains('domain13', $output);
+        $this->assertNotContains('10.1.11.77', $output);
     }
 
     public function testNotFoundFilter()
@@ -64,11 +63,11 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'ticket:list',
             [
-                "--filter" => "xxx"
+                '--filter' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No ticket found for given filter.", Artisan::output());
+        $this->assertContains('No ticket found for given filter.', Artisan::output());
     }
 }

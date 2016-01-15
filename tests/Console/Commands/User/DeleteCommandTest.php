@@ -3,16 +3,14 @@
 namespace tests\Console\Commands\User;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class DeleteCommandTest
- * @package tests\Console\Commands\User
+ * Class DeleteCommandTest.
  */
 class DeleteCommandTest extends TestCase
 {
-
-// TODO not working because seeder is not deleting and id=1 is in te schema.
+    // TODO not working because seeder is not deleting and id=1 is in te schema.
 
 //    public function testValid()
 //    {
@@ -33,11 +31,11 @@ class DeleteCommandTest extends TestCase
         $exitCode = Artisan::call(
             'user:delete',
             [
-                'user' => '1000'
+                'user' => '1000',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Unable to find user", Artisan::output());
+        $this->assertContains('Unable to find user', Artisan::output());
     }
 }

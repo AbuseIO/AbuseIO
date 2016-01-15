@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\Netblock;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ListCommandTest
- * @package tests\Console\Commands\Netblock
+ * Class ListCommandTest.
  */
 class ListCommandTest extends TestCase
 {
@@ -16,7 +15,7 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call('netblock:list', []);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Global internet", Artisan::output());
+        $this->assertContains('Global internet', Artisan::output());
     }
 
     public function testNetBlockListCommandWithValidFilter()
@@ -24,12 +23,12 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'netblock:list',
             [
-                "--filter" => "10.1.16.128"
+                '--filter' => '10.1.16.128',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("Customer 6", Artisan::output());
-        $this->assertNotContains("Global internet", Artisan::output());
+        $this->assertContains('Customer 6', Artisan::output());
+        $this->assertNotContains('Global internet', Artisan::output());
     }
 }

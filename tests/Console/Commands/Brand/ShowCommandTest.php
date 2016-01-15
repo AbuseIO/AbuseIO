@@ -3,26 +3,24 @@
 namespace tests\Console\Commands\Brand;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ShowCommandTest
- * @package tests\Console\Commands\Brand
+ * Class ShowCommandTest.
  */
 class ShowCommandTest extends TestCase
 {
-
     public function testWithValidIdFilter()
     {
         $exitCode = Artisan::call(
             'brand:show',
             [
-                "brand" => "1"
+                'brand' => '1',
             ]
         );
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        foreach (["Name", "Company name", "Introduction text", "Id"] as $el) {
+        foreach (['Name', 'Company name', 'Introduction text', 'Id'] as $el) {
             $this->assertContains($el, $output);
         }
     }
@@ -32,11 +30,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'brand:show',
             [
-                "brand"=>"default"
+                'brand' => 'default',
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("AbuseIO", Artisan::output());
+        $this->assertContains('AbuseIO', Artisan::output());
     }
 
     public function testWithInvalidFilter()
@@ -44,11 +42,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'brand:show',
             [
-                "brand"=>"xxx"
+                'brand' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No matching brand was found.", Artisan::output());
+        $this->assertContains('No matching brand was found.', Artisan::output());
     }
 }

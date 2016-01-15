@@ -3,21 +3,19 @@
 namespace tests\Console\Commands\Note;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ShowCommandTest
- * @package tests\Console\Commands\Note
+ * Class ShowCommandTest.
  */
 class ShowCommandTest extends TestCase
 {
-
     public function testWithValidIdFilter()
     {
         $exitCode = Artisan::call(
             'note:show',
             [
-                "note" => "1"
+                'note' => '1',
             ]
         );
         $this->assertEquals($exitCode, 0);
@@ -32,11 +30,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'note:show',
             [
-                "note" => "xxx"
+                'note' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No matching note was found.", Artisan::output());
+        $this->assertContains('No matching note was found.', Artisan::output());
     }
 }

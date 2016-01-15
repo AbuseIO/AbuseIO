@@ -3,21 +3,19 @@
 namespace tests\Console\Commands\Evidence;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ShowCommandTest
- * @package tests\Console\Commands\Evidence
+ * Class ShowCommandTest.
  */
 class ShowCommandTest extends TestCase
 {
-
     public function testWithValidIdFilter()
     {
         $exitCode = Artisan::call(
             'evidence:show',
             [
-                "evidence" => "1"
+                'evidence' => '1',
             ]
         );
         $this->assertEquals($exitCode, 0);
@@ -32,11 +30,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'evidence:show',
             [
-                "evidence" => "xxx"
+                'evidence' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No matching evidence was found.", Artisan::output());
+        $this->assertContains('No matching evidence was found.', Artisan::output());
     }
 }

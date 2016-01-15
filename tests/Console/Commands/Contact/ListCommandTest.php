@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\Contact;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ListCommandTest
- * @package tests\Console\Commands\Contact
+ * Class ListCommandTest.
  */
 class ListCommandTest extends TestCase
 {
@@ -17,7 +16,7 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
 
-        $headers = ["Id", "Name", "Email", "Api host"];
+        $headers = ['Id', 'Name', 'Email', 'Api host'];
         $output = Artisan::output();
         foreach ($headers as $header) {
             $this->assertContains($header, $output);
@@ -30,8 +29,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("Customer 2", $output);
-        $this->assertContains("Customer 3", $output);
+        $this->assertContains('Customer 2', $output);
+        $this->assertContains('Customer 3', $output);
     }
 
     public function testFilter()
@@ -39,14 +38,14 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'contact:list',
             [
-                "--filter" => "Customer 2"
+                '--filter' => 'Customer 2',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("Customer 2", $output);
-        $this->assertNotContains("Customer 3", $output);
+        $this->assertContains('Customer 2', $output);
+        $this->assertNotContains('Customer 3', $output);
     }
 
     public function testNotFoundFilter()
@@ -54,11 +53,11 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'contact:list',
             [
-                "--filter" => "xxx"
+                '--filter' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No contact found for given filter.", Artisan::output());
+        $this->assertContains('No contact found for given filter.', Artisan::output());
     }
 }

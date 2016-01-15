@@ -3,11 +3,10 @@
 namespace tests\Console\Commands\Event;
 
 use Illuminate\Support\Facades\Artisan;
-use \TestCase;
+use TestCase;
 
 /**
- * Class ListCommandTest
- * @package tests\Console\Commands\Event
+ * Class ListCommandTest.
  */
 class ListCommandTest extends TestCase
 {
@@ -17,7 +16,7 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
 
-        $headers = ["Id", "Source", "Ticket id", "Information"];
+        $headers = ['Id', 'Source', 'Ticket id', 'Information'];
         $output = Artisan::output();
         foreach ($headers as $header) {
             $this->assertContains($header, $output);
@@ -30,8 +29,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("Simon Says", $output);
-        $this->assertContains("DNS project", $output);
+        $this->assertContains('Simon Says', $output);
+        $this->assertContains('DNS project', $output);
     }
 
     public function testFilter()
@@ -39,14 +38,14 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'event:list',
             [
-                "--filter" => "Simon says"
+                '--filter' => 'Simon says',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains("Simon Says", $output);
-        $this->assertNotContains("DNS project", $output);
+        $this->assertContains('Simon Says', $output);
+        $this->assertNotContains('DNS project', $output);
     }
 
     public function testNotFoundFilter()
@@ -54,11 +53,11 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'event:list',
             [
-                "--filter" => "xxx"
+                '--filter' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("No event found for given filter.", Artisan::output());
+        $this->assertContains('No event found for given filter.', Artisan::output());
     }
 }
