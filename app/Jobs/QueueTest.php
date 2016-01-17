@@ -15,6 +15,9 @@ use Log;
  */
 class QueueTest extends Job implements SelfHandling, ShouldQueue
 {
+
+    use SerializesModels;
+
     /**
      * Name of the beandstalk queue to be used
      *
@@ -45,6 +48,21 @@ class QueueTest extends Job implements SelfHandling, ShouldQueue
     }
 
     /**
+     * This method is called by laravel when the job fails on a exception
+     *
+     * @param string $message
+     * @return void
+     */
+    public function failed($message)
+    {
+        // Start alarm bells
+
+        Log::error(
+            get_class($this) . ': ' . "Queue checked FAILED for queue {$this->queueName}"
+        );
+    }
+
+    /**
      * Execute the command
      *
      * @return void
@@ -59,21 +77,6 @@ class QueueTest extends Job implements SelfHandling, ShouldQueue
 
         Log::info(
             get_class($this) . ': ' . "TestJob completed for queue {$this->queueName}"
-        );
-    }
-
-    /**
-     * Log when failed
-     *
-     * @param string $message
-     * @return void
-     */
-    public function failed($message)
-    {
-        // Start alarm bells
-
-        Log::error(
-            get_class($this) . ': ' . "Queue checked FAILED for queue {$this->queueName}"
         );
     }
 }
