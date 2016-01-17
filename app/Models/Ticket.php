@@ -107,8 +107,8 @@ class Ticket extends Model
         $rules = [
             'ip'                                => 'required|ip',
             'domain'                            => 'sometimes|string',
-            'class_id'                          => 'required|integer',
-            'type_id'                           => 'required|integer',
+            'class_id'                          => 'required|integer|min:100|max:999',
+            'type_id'                           => 'required|integer|min:1|max:3',
             'ip_contact_account_id'             => 'required|integer',
             'ip_contact_reference'              => 'required|string',
             'ip_contact_name'                   => 'required|string',
@@ -123,7 +123,7 @@ class Ticket extends Model
             'domain_contact_api_host'           => 'sometimes|string',
             'domain_contact_auto_notify'        => 'required|boolean',
             'domain_contact_notified_count'     => 'required|integer',
-            'status_id'                         => 'required|integer',
+            'status_id'                         => 'required|integer|min:1|max:5',
             'last_notify_count'                 => 'required|integer',
             'last_notify_timestamp'             => 'required|timestamp',
         ];
@@ -141,8 +141,8 @@ class Ticket extends Model
         $rules = [
             'ip'                                => 'required|ip',
             'domain'                            => 'sometimes|string',
-            'class_id'                          => 'required|integer',
-            'type_id'                           => 'required|integer',
+            'class_id'                          => 'required|integer|min:100|max:999',
+            'type_id'                           => 'required|integer|min:1|max:3',
             'ip_contact_account_id'             => 'required|integer',
             'ip_contact_reference'              => 'required|string',
             'ip_contact_name'                   => 'required|string',
@@ -157,7 +157,7 @@ class Ticket extends Model
             'domain_contact_api_host'           => 'sometimes|string',
             'domain_contact_auto_notify'        => 'required|boolean',
             'domain_contact_notified_count'     => 'required|integer',
-            'status_id'                         => 'required|integer',
+            'status_id'                         => 'required|integer|min:1|max:5',
             'last_notify_count'                 => 'required|integer',
             'last_notify_timestamp'             => 'required|timestamp',
         ];
