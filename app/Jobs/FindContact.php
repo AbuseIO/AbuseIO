@@ -44,7 +44,7 @@ class FindContact extends Job
      */
     public static function validateContact($contact)
     {
-        $validation = Validator::make($contact->toArray(), Contact::createRules($contact));
+        $validation = Validator::make($contact->toArray(), Contact::createRules());
 
         if ($validation->fails()) {
             $messages = implode(' ', $validation->messages()->all());
