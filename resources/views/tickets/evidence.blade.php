@@ -43,6 +43,21 @@
              @endif
         @endforeach
 
+            @if (count($evidence['message']->attachments) > 0)
+                <dt>Attachments :</dt>
+                <dd>
+                    <table class="table table-condensed">
+                        @foreach ($evidence['message']->attachments as $attachment)
+                            <tr>
+                                <td><a href='{{ Request::url() }}/attachment/{{ $attachment->filename }}'>{{ $attachment->filename }}</a></td>
+                                <td>{{ $attachment->size }} bytes</td>
+                                <td>{{ $attachment->contentType }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </dd>
+            @endif
+
             <dt>Message :</dt>
             <dd>
                 This incident was created by an CLI, GUI or API command. The received payload is displayed below:

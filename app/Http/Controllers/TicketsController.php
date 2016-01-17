@@ -16,6 +16,7 @@ use Illuminate\Filesystem\Filesystem;
 use PhpMimeMailParser\Parser as MimeParser;
 use yajra\Datatables\Datatables;
 use Redirect;
+use Input;
 use Lang;
 use Log;
 use DB;
@@ -198,6 +199,27 @@ class TicketsController extends Controller
      */
     public function store(TicketFormRequest $ticket)
     {
+        /*
+         * If there was a file attached then we add this to the evidence as attachment
+         */
+        $attachment = [];
+        $uploadedFile = Input::file('evidenceFile');
+        if ($uploadedFile->getError() === 0 &&
+            is_file($uploadedFile->getPathname())
+        ) {
+            $attachment = [
+                'filename' => $uploadedFile->getClientOriginalName(),
+                'size' => $uploadedFile->getSize(),
+                'contentType' => $uploadedFile->getMimeType(),
+                'data' => file_get_contents($uploadedFile->getPathname())
+            ];
+        }
+
+        /*
+         * Grab the form and build a incident model from it. The form should be having all the fields except
+         * the form token. We don't need to validate the data as the formRequest already to care of this and
+         * IncidentsSave will do another validation on this.
+         */
         $incident = new Incident;
         foreach ($ticket->all() as $key => $value) {
             if ($key != '_token') {
@@ -205,19 +227,26 @@ class TicketsController extends Controller
             }
         }
 
+        /*
+         * Incident process required all incidents to be wrapped in an array.
+         */
         $incidents = [
             0 => $incident
         ];
 
+        /*
+         * Save the evidence as its required to save events
+         */
         $evidence = new EvidenceSave;
-        $evidenceData = json_encode(
-            [
-                'CreatedBy' => trim($this->auth_user->fullName()) . ' (' . $this->auth_user->email .')',
-                'receivedOn' => time(),
-                'submittedData' => $ticket->all(),
-            ]
-        );
-        $evidenceFile = $evidence->save($evidenceData);
+        $evidenceData = [
+            'CreatedBy' => trim($this->auth_user->fullName()) . ' (' . $this->auth_user->email .')',
+            'receivedOn' => time(),
+            'submittedData' => $ticket->all(),
+        ];
+        if (!empty($attachment)) {
+            $evidenceData['attachments'][0] = $attachment;
+        }
+        $evidenceFile = $evidence->save(json_encode($evidenceData));
 
         if (!$evidenceFile) {
             Log::error(
@@ -226,6 +255,7 @@ class TicketsController extends Controller
             );
             $this->exception();
         }
+
 
         $evidence = new Evidence();
         $evidence->filename = $evidenceFile;
@@ -250,7 +280,11 @@ class TicketsController extends Controller
 
         return Redirect::route(
             'admin.tickets.index'
-        )->with('message', 'A new incident has been created. Depending on the aggregator result a new ticket will be created or existing ticket updated');
+        )->with(
+            'message',
+            'A new incident has been created. Depending on the aggregator result a new ' .
+            'ticket will be created or existing ticket updated'
+        );
     }
 
     /**
@@ -327,13 +361,34 @@ class TicketsController extends Controller
     {
         $evidence = Evidence::find($evidenceId);
 
+        /*
+         * First check if the evidence was ever saved into the database
+         */
         if (!$evidence) {
             return Redirect::route('admin.tickets.show', $ticket->id)
                 ->with('message', 'The evidence is no longer available for this event.');
         }
 
+        /*
+         * Now check if the listed evidence is still available (might be pruned away or saving
+         * was entirely disabled)
+         */
         if (is_file($evidence->filename)) {
             $evidenceData = file_get_contents($evidence->filename);
+
+            /*
+             * Create a temp workdir to save attachments in for easy access to these files
+             */
+            $filesystem = new Filesystem;
+            $evidenceTempDir = "/tmp/abuseio/cache/{$ticket->id}/{$evidenceId}/";
+            if (!$filesystem->isDirectory($evidenceTempDir)) {
+                if (!$filesystem->makeDirectory($evidenceTempDir, 0755, true)) {
+                    Log::error(
+                        get_class($this) . ': ' .
+                        'Unable to create temp directory: ' . $evidenceTempDir
+                    );
+                }
+            }
 
             if (is_object(json_decode($evidenceData))) {
                 // No need to process a raw mail, its a API/submitted JSON blob
@@ -349,26 +404,24 @@ class TicketsController extends Controller
                     'message'   => $fileData,
                 ];
 
-                $evidenceTempDir = false;
+                foreach ($fileData->attachments as $attachment) {
+                    file_put_contents(
+                        $evidenceTempDir . $attachment->filename,
+                        $attachment->data
+                    );
+                }
 
             } else {
                 // ItsaMail parse it!
                 $evidenceParsed = new MimeParser();
                 $evidenceParsed->setText($evidenceData);
 
-                $filesystem = new Filesystem;
-                $evidenceTempDir = "/tmp/abuseio/cache/{$ticket->id}/{$evidenceId}/";
-                if (!$filesystem->isDirectory($evidenceTempDir)) {
-                    if (!$filesystem->makeDirectory($evidenceTempDir, 0755, true)) {
-                        Log::error(
-                            get_class($this) . ': ' .
-                            'Unable to create temp directory: ' . $evidenceTempDir
-                        );
-                    }
-                    $evidenceParsed->saveAttachments($evidenceTempDir);
-                }
+                $evidenceParsed->saveAttachments($evidenceTempDir);
             }
 
+            /*
+             * Return the data to the view and display it
+             */
             return view('tickets.evidence')
                 ->with('ticket', $ticket)
                 ->with('evidence', $evidenceParsed)
