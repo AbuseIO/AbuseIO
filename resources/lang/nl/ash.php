@@ -62,9 +62,13 @@ return [
         'reply'                     => 'Reactie',
         'download'                  => 'Download',
         'view'                      => 'Bekijk',
+        'closed'                    => 'Het is niet mogelijk om een reactie te geven op dit ticket, omdat het ticket gesloten is of de reacties zijn uitgeschakeld.',
+        'unchanged'                 => 'Ticket status niet veranderen'
     ],
 
     'messages' => [
         'alertTest'                 => 'Dit is een alert bericht!',
+        'noteAdded'                 => 'Het bericht is toegevoegd aan het ticket',
+        'noteEmpty'                 => 'U kunt geen lege berichten toevoegen!',
     ],
 ];
