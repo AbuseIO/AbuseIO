@@ -260,7 +260,7 @@ class IncidentsSave extends Job implements SelfHandling
                      * If the ticket was set to resolved, move it back to open
                      */
                     if ($ticket->status_id == 5) {
-                        $ticket->status_id = 0;
+                        $ticket->status_id = 1;
                     }
 
                     // Validate the model before saving
