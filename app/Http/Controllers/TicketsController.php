@@ -204,7 +204,9 @@ class TicketsController extends Controller
          */
         $attachment = [];
         $uploadedFile = Input::file('evidenceFile');
-        if ($uploadedFile->getError() === 0 &&
+        if (!empty($uploadedFile) &&
+            is_object($uploadedFile) &&
+            $uploadedFile->getError() === 0 &&
             is_file($uploadedFile->getPathname())
         ) {
             $attachment = [
