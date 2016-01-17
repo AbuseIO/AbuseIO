@@ -46,7 +46,8 @@ class AshController extends Controller
             ->with('brand', $brand)
             ->with('ticket', $ticket)
             ->with('allowedChanges', $this->allowedStatusChanges($ticket))
-            ->with('token', $token);
+            ->with('token', $token)
+            ->with('message', '');
 
     }
 
@@ -81,7 +82,7 @@ class AshController extends Controller
 
         $changeStatus = Input::get('changeStatus');
 
-        if ($changeStatus == 5 || $changeStatus == 6) {
+        if ($changeStatus == 4 || $changeStatus == 5) {
             $ticket->status_id = $changeStatus;
             $ticket->save();
         }
