@@ -121,7 +121,6 @@ class IncidentsSave extends Job implements SelfHandling
              */
             $ticket = Ticket::where('ip', '=', $incident->ip)
                 ->where('class_id', '=', $incident->class, 'AND')
-                ->where('type_id', '=', $incident->type, 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 2, 'AND')
                 ->get();
@@ -249,6 +248,20 @@ class IncidentsSave extends Job implements SelfHandling
                         $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
                         $ticket->account_id                 = $domainContact->account->id;
 
+                        /*
+                         * Upgrade the type if the received event has a higher type included
+                         */
+                        if ($ticket->type_id < $incident->type) {
+                            $ticket->type_id = $incident->type;
+                        }
+
+                        /*
+                         * If the ticket was set to resolved, move it back to open
+                         */
+                        if ($ticket->status_id == 5) {
+                            $ticket->status_id = 0;
+                        }
+
                         // Validate the model before saving
                         $validator = Validator::make(
                             json_decode(json_encode($ticket), true),
@@ -263,11 +276,6 @@ class IncidentsSave extends Job implements SelfHandling
 
                         $ticket->save();
                     }
-
-                    // TODO: If this is an abuse/escalation ticket and currently 'resolved' then put status back to Open
-
-                    // TODO: Implement escalation triggers
-
                 }
 
             } else {
