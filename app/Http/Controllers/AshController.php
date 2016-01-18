@@ -45,7 +45,9 @@ class AshController extends Controller
         return view('ash')
             ->with('brand', $brand)
             ->with('ticket', $ticket)
-            ->with('token', $token);
+            ->with('allowedChanges', $this->allowedStatusChanges($ticket))
+            ->with('token', $token)
+            ->with('message', '');
 
     }
 
@@ -78,11 +80,18 @@ class AshController extends Controller
             abort(500);
         }
 
+        $changeStatus = Input::get('changeStatus');
+
+        if ($changeStatus == 4 || $changeStatus == 5) {
+            $ticket->status_id = $changeStatus;
+            $ticket->save();
+        }
+
         $text = Input::get('text');
-        if (empty($text)) {
-            $message = 'You cannot add an empty message!';
+        if (empty($text) || strlen($text) < 1) {
+            $message = 'noteEmpty';
         } else {
-            $message = 'Note has been added.';
+            $message = 'noteAdded';
 
             $note = new Note();
             $note->ticket_id = $ticket->id;
@@ -94,7 +103,26 @@ class AshController extends Controller
         return view('ash')
             ->with('brand', $brand)
             ->with('ticket', $ticket)
+            ->with('allowedChanges', $this->allowedStatusChanges($ticket))
             ->with('token', $token)
             ->with('message', $message);
+    }
+
+    /**
+     * @param $ticket
+     * @return array $allowChanges
+     */
+    private function allowedStatusChanges($ticket)
+    {
+        $allowedChanges = [
+            '1' => trans('ash.communication.unchanged'),
+            '5' => trans('types.status.5.name'),
+        ];
+
+        if ($ticket->type_id == 1) {
+            $allowedChanges['5'] = trans('types.status.5.name');
+        }
+
+        return $allowedChanges;
     }
 }

@@ -49,7 +49,7 @@ class IncidentsValidate extends Job implements SelfHandling
             );
 
             if ($validator->fails()) {
-                return $this->failed(implode(' ', $validator->messages()->all()));
+                return $this->error(implode(' ', $validator->messages()->all()));
             }
 
         }

@@ -49,10 +49,9 @@
             </div>
         </div>
 
-        @if (Session::has('message'))
-            <div class="alert alert-{{ Session::get('messageType') }}">
-                <span class="glyphicon glyphicon-{{ Session::get('messageIcon') }}"></span>
-                {{ trans('ash.messages.'. Session::get('message')) }}
+        @if ($message)
+            <div class="alert alert-info">
+                {{ trans('ash.messages.'. $message) }}
             </div>
         @endif
 
@@ -170,41 +169,61 @@
             </div>
 
             <div id="resolved" class="tab-pane fade">
-                <p>{{ trans('ash.communication.header') }}</p>
+                @if (config('main.notes.enabled') == true && $ticket->status_id != 2)
+                    <p>{{ trans('ash.communication.header') }}</p>
+                    {!! Form::model(['method' => 'put']) !!}
+                    <div class="form-group">
+                        {!! Form::label('text', trans('ash.communication.reply').':') !!}
+                        {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder'), 'class' => 'form-control']) !!}
+                    </div>
 
-                {!! Form::model(['method' => 'put']) !!}
-                <div class="form-group">
-                    {!! Form::label('text', trans('ash.communication.reply').':') !!}
-                    {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder'), 'class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
-                </div>
-                {!! Form::close() !!}
+                    <div class="form-group">
+                        {!! Form::label('enabled', trans('misc.status').':', ['class' => 'col-sm-2 control-label']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select(
+                                'changeStatus',
+                                $allowedChanges,
+                                null,
+                                [
+                                    'class' => 'form-control'
+                                ]
+                            ) !!}
+                        </div>
+                    </div>
 
-                <h4>{{ trans('ash.communication.previousCommunication') }}</h4>
-                @if ( !$ticket->notes->count() )
-                    {{ trans('ash.communication.noMessages') }}
-                @else
-                    @foreach ($ticket->notes as $note)
-                        @if ($note->hidden != true)
-                            <div class="row">
-                                <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
-                                    <div class="panel panel-{{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary' }}">
-                                        <div class="panel-heading clearfix">
-                                            <h3 class="panel-title pull-left">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
-                                            <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
-                                        </div>
-                                        <div class="panel-body">
-                                            {{ htmlentities($note->text) }}
+                    <div class="form-group">
+                        {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
+                    </div>
+                    {!! Form::close() !!}
+
+                    <h4>{{ trans('ash.communication.previousCommunication') }}</h4>
+                    @if ( !$ticket->notes->count() )
+                        {{ trans('ash.communication.noMessages') }}
+                    @else
+                        @foreach ($ticket->notes as $note)
+                            @if ($note->hidden != true)
+                                <div class="row">
+                                    <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
+                                        <div class="panel panel-{{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary' }}">
+                                            <div class="panel-heading clearfix">
+                                                <h3 class="panel-title pull-left">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
+                                                <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
+                                            </div>
+                                            <div class="panel-body">
+                                                {{ htmlentities($note->text) }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
-                    @endforeach
+                            @endif
+                        @endforeach
+                    @endif
+                @else
+                    <p>{{ trans('ash.communication.closed') }}</p>
                 @endif
             </div>
+
+
         </div>
     </div>
 </body>

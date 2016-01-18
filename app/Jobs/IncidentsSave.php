@@ -5,6 +5,7 @@ namespace AbuseIO\Jobs;
 use Illuminate\Contracts\Bus\SelfHandling;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Event;
+use Validator;
 use Lang;
 use Log;
 
@@ -120,7 +121,6 @@ class IncidentsSave extends Job implements SelfHandling
              */
             $ticket = Ticket::where('ip', '=', $incident->ip)
                 ->where('class_id', '=', $incident->class, 'AND')
-                ->where('type_id', '=', $incident->type, 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 2, 'AND')
                 ->get();
@@ -157,6 +157,18 @@ class IncidentsSave extends Job implements SelfHandling
                 $newTicket->last_notify_count       = 0;
                 $newTicket->last_notify_timestamp   = 0;
 
+                // Validate the model before saving
+                $validator = Validator::make(
+                    json_decode(json_encode($newTicket), true),
+                    Ticket::createRules()
+                );
+                if ($validator->fails()) {
+                    return $this->error(
+                        'DevError: Internal validation failed when saving the Ticket object ' .
+                        implode(' ', $validator->messages()->all())
+                    );
+                }
+
                 $newTicket->save();
 
                 $newEvent = new Event;
@@ -165,6 +177,19 @@ class IncidentsSave extends Job implements SelfHandling
                 $newEvent->source       = $incident->source;
                 $newEvent->ticket_id    = $newTicket->id;
                 $newEvent->timestamp    = $incident->timestamp;
+
+                // Validate the model before saving
+                $validator = Validator::make(
+                    json_decode(json_encode($newEvent), true),
+                    Event::createRules()
+                );
+                if ($validator->fails()) {
+                    return $this->error(
+                        'DevError: Internal validation failed when saving the Event object ' .
+                        implode(' ', $validator->messages()->all())
+                    );
+                }
+
                 $newEvent->save();
 
             } elseif ($ticket->count() === 1) {
@@ -192,6 +217,19 @@ class IncidentsSave extends Job implements SelfHandling
                     $newEvent->source       = $incident->source;
                     $newEvent->ticket_id    = $ticket->id;
                     $newEvent->timestamp    = $incident->timestamp;
+
+                    // Validate the model before saving
+                    $validator = Validator::make(
+                        json_decode(json_encode($newEvent), true),
+                        Event::createRules()
+                    );
+                    if ($validator->fails()) {
+                        return $this->error(
+                            'DevError: Internal validation failed when saving the Event object ' .
+                            implode(' ', $validator->messages()->all())
+                        );
+                    }
+
                     $newEvent->save();
 
                     /*
@@ -209,14 +247,35 @@ class IncidentsSave extends Job implements SelfHandling
                         $ticket->domain_contact_api_host    = $domainContact->api_host;
                         $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
                         $ticket->account_id                 = $domainContact->account->id;
-
-                        $ticket->save();
                     }
 
-                    // TODO: If this is an abuse/escalation ticket and currently 'resolved' then put status back to Open
+                    /*
+                       * Upgrade the type if the received event has a higher type included
+                       */
+                    if ($ticket->type_id < $incident->type) {
+                        $ticket->type_id = $incident->type;
+                    }
 
-                    // TODO: Implement escalation triggers
+                    /*
+                     * If the ticket was set to resolved, move it back to open
+                     */
+                    if ($ticket->status_id == 5) {
+                        $ticket->status_id = 1;
+                    }
 
+                    // Validate the model before saving
+                    $validator = Validator::make(
+                        json_decode(json_encode($ticket), true),
+                        Ticket::createRules()
+                    );
+                    if ($validator->fails()) {
+                        return $this->error(
+                            'DevError: Internal validation failed when saving the Ticket object ' .
+                            implode(' ', $validator->messages()->all())
+                        );
+                    }
+
+                    $ticket->save();
                 }
 
             } else {
@@ -224,7 +283,7 @@ class IncidentsSave extends Job implements SelfHandling
                  * We should not never have more then two open tickets for the same case. If this happens there is a
                  * fault in the aggregator which must be resolved first. Until then we will permfail here.
                  */
-                $this->failed('Unable to link to ticket, multiple open tickets found for same incident type');
+                $this->error('Unable to link to ticket, multiple open tickets found for same incident type');
             }
         }
 
@@ -234,6 +293,6 @@ class IncidentsSave extends Job implements SelfHandling
             "linking {$incidentCount} new incidents and ignored $incidentsIgnored duplicates"
         );
 
-        $this->success('');
+        return $this->success('');
     }
 }

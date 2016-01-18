@@ -58,6 +58,21 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
     }
 
     /**
+     * This method is called by laravel when the job fails on a exception
+     *
+     */
+    protected function failed()
+    {
+        Log::error(
+            get_class($this) . ': ' .
+            'Unexpected exception was raised from the framework. This useally indicates an error within the ' .
+            'framework code. A full strace can be found in the logs and should be reported to the developers'
+        );
+
+        $this->exception();
+    }
+
+    /**
      * Execute the command
      *
      * @return void

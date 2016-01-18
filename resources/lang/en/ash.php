@@ -63,9 +63,13 @@ return [
         'reply'                     => 'Reply',
         'download'                  => 'Download',
         'view'                      => 'View',
+        'closed'                    => 'You can not add notes to this ticket because it was closed or notes have been disabled',
+        'unchanged'                 => 'Do not change the ticket status',
     ],
 
     'messages' => [
         'alertTest'                 => 'This is an alert message',
+        'noteAdded'                 => 'Note has been added.',
+        'noteEmpty'                 => 'You cannot add an empty message!',
     ],
 ];

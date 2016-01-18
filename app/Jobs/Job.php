@@ -19,7 +19,7 @@ abstract class Job
      * @param string $message
      * @return array
      */
-    protected function failed($message)
+    protected function error($message)
     {
         return [
             'errorStatus'   => true,
