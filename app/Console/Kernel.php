@@ -73,6 +73,7 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Contact\ShowCommand',
         'AbuseIO\Console\Commands\Contact\ListCommand',
         'AbuseIO\Console\Commands\Contact\DeleteCommand',
+        'AbuseIO\Console\Commands\Contact\CreateCommand',
 
         'AbuseIO\Console\Commands\Event\ShowCommand',
         'AbuseIO\Console\Commands\Event\DeleteCommand',
