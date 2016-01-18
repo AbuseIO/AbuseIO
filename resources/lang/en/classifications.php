@@ -1711,9 +1711,9 @@ return [
     ],
 
     133 => [
-        'name' => 'Open Portmapper server',
+        'name' => 'Open Portmapper Server',
         'description' => "
-            <h2>What is an 'Open Portmapper server'?</h2>
+            <h2>What is an 'Open Portmapper Server'?</h2>
 
             <p>The port mapper (rpc.portmap or rpcbind) is a remote procedure call (RPC) service
             running on TCP or UDP port 111 that runs on servers to provide information about
