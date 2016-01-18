@@ -78,4 +78,6 @@ return [
     'text'              => 'Tekst',
     'both'              => 'Beide',
     'uri'               => 'URI / Pad',
+    'roles'             => 'Rol|Rollen',
+
 ];
