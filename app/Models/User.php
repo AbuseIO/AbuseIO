@@ -84,7 +84,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'email'         => 'required|email|unique:users,email',
-            'password'      => 'required|confirmed|min:6|max:32',
+            'password'      => 'sometimes|confirmed|min:6|max:32',
             'account_id'    => 'required|integer',
             'locale'        => 'required|min:2|max:3',
             'disabled'      => 'required|string',
