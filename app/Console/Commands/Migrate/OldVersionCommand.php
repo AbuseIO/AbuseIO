@@ -5,6 +5,7 @@ namespace AbuseIO\Console\Commands\Migrate;
 use Illuminate\Console\Command;
 use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
+use AbuseIO\Jobs\EvidenceSave;
 use AbuseIO\Jobs\IncidentsValidate;
 use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Jobs\FindContact;
@@ -54,6 +55,7 @@ class OldVersionCommand extends Command
      */
     public function handle()
     {
+        // todo - dont forget the notes!
         if (!empty($this->option('prepare'))) {
             $this->info('building required evidence cache files');
 
@@ -168,7 +170,17 @@ class OldVersionCommand extends Command
                     $this->exception();
                 }
 
+                // Write the evidence into the archive
+                $evidenceWrite = new EvidenceSave;
+                $evidenceData = $rawEmail;
+                $evidenceFile = $evidenceWrite->save($evidenceData);
+
+                // Save the file reference into the database
                 $evidenceSave = new Evidence();
+                $evidenceSave->filename = $evidenceFile;
+                $evidenceSave->sender = $parsedMail->getHeader('from');
+                $evidenceSave->subject = $parsedMail->getHeader('subject');
+
                 $incidentsProcess = new IncidentsProcess($parserResult['data'], $evidenceSave);
 
                 /*
@@ -214,10 +226,6 @@ class OldVersionCommand extends Command
                     $this->error(
                         'Validation failed of object.'
                     );
-
-                    var_dump($rawEmail);
-                    var_dump($parserResult['data']);
-
                     $this->exception();
                 }
 
@@ -227,12 +235,16 @@ class OldVersionCommand extends Command
                     $incidents[$incident->ip][] = $incident;
                 }
 
+                DB::setDefaultConnection('mysql');
+                $evidenceSave->save();
+                DB::setDefaultConnection('abuseio3');
+
                 $output = [
                     'evidenceId' => $evidence->ID,
                     'evidenceData' => $evidence->Data,
                     'incidents' => $incidents,
+                    'newId' => $evidenceSave->id,
                 ];
-
 
                 if ($filesystem->put($filename, json_encode($output)) === false) {
                     $this->error(
@@ -317,14 +329,21 @@ class OldVersionCommand extends Command
 
             $this->info('starting migration - phase 3 - ticket and evidence data');
 
+            DB::setDefaultConnection('abuseio3');
+
             $tickets = DB::table('Reports')
                 ->get();
 
+            DB::setDefaultConnection('mysql');
+
             foreach ($tickets as $ticket) {
                 // Get the list of evidence ID's related to this ticket
+                DB::setDefaultConnection('abuseio3');
                 $evidenceLinks = DB::table('EvidenceLinks')
                     ->where('ReportID', '=', $ticket->ID)
                     ->get();
+
+                DB::setDefaultConnection('mysql');
 
                 // DO NOT REMOVE! Legacy versions (1.0 / 2.0) have imports without evidence.
                 // These dont have any linked evidence and will require a manual building of evidence
@@ -339,6 +358,9 @@ class OldVersionCommand extends Command
                 if (count($evidenceLinks) != (int)$ticket->ReportCount) {
                     // Count does not match, known 3.0 bug so we will do a little magic to fix that
                 } else {
+                    foreach ($evidenceLinks as $evidenceLink) {
+
+                    }
                     var_dump($ticket);
                     var_dump($evidenceLinks);
                     die();
