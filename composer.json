@@ -40,7 +40,7 @@
         "ddeboer/data-import": "^0.18.0",
         "yajra/laravel-datatables-oracle": "~5.0",
         "guzzlehttp/guzzle": "6.1.1",
-        "marknl/iodef": "dev-master",
+        "marknl/iodef": "1.0.3",
 
         "abuseio/parser-common": "1.1.*",
 		"abuseio/parser-abusehub": "1.1.*",
