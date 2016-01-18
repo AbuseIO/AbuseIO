@@ -33,6 +33,14 @@
         @if ($errors->has('password_confirmation')) <p class="help-block">{{ $errors->first('password_confirmation') }}</p> @endif
     </div>
 </div>
+<div class="form-group @if ($errors->has('locale')) has-error @endif">
+    {!! Form::label('locale', trans('misc.language').':', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-10">
+        {!! Form::select('locale', $locale_selection, $locale_selected, ['class' => 'form-control']) !!}
+        @if ($errors->has('locale')) <p class="help-block">{{ $errors->first('locale') }}</p> @endif
+    </div>
+</div>
+@if ($auth_user->account->isSystemAccount())
 <div class="form-group @if ($errors->has('account_id')) has-error @endif">
     {!! Form::label('account_id', trans_choice('misc.accounts', 1).':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
@@ -40,6 +48,32 @@
         @if ($errors->has('account_id')) <p class="help-block">{{ $errors->first('account_id') }}</p> @endif
     </div>
 </div>
+@endif
+<div class="form-group @if ($errors->has('roles')) has-error @endif">
+    {!! Form::label('roles', trans_choice('misc.roles', 2).':', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-10">
+        {!! Form::select('roles[]',
+        $roles,
+        $selected_roles,
+        ['class' => 'form-control',
+        'multiple' => 'multiple']) !!}
+        @if ($errors->has('roles')) <p class="help-block">{{ $errors->first('roles') }}</p> @endif
+    </div>
+</div>
+<div class="form-group @if ($errors->has('disable')) has-error @endif">
+    {!! Form::label('disabled', trans('misc.disabled').':', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-10">
+        {!! Form::hidden('disabled', 'false') !!}
+        {!! Form::checkbox('disableddummy', true, $disabled_checked, ['class' => 'form-control']) !!}
+        @if ($errors->has('disabled')) <p class="help-block">{{ $errors->first('disabled') }}</p> @endif
+    </div>
+</div>
+<script>
+    $('input:checkbox[name="disableddummy"]').change(function() {
+        $('#disabled').val($(this).is(':checked'));
+    });
+</script>
+
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         {!! Form::submit($submit_text, ['class'=>'btn btn-success']) !!}

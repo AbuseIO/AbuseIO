@@ -78,4 +78,5 @@ return [
     'text'              => 'Text',
     'both'              => 'Both',
     'uri'               => 'URI / Path',
+    'roles'             => 'Role|Roles',
 ];

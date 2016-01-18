@@ -5,7 +5,10 @@ namespace AbuseIO\Http\Controllers;
 use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\UserFormRequest;
 use AbuseIO\Models\Account;
+use AbuseIO\Models\Role;
 use AbuseIO\Models\User;
+use Config;
+use Log;
 use yajra\Datatables\Datatables;
 use Redirect;
 use Form;
@@ -97,10 +100,21 @@ class UsersController extends Controller
     public function create()
     {
         $accounts = Account::lists('name', 'id');
+        $roles = Role::lists('name', 'id');
+
+        $locales = array();
+        foreach (Config::get('app.locales') as $locale => $locale_data) {
+            $locales[$locale] = $locale_data[0];
+        }
 
         return view('users.create')
             ->with('account_selection', $accounts)
             ->with('selected', null)
+            ->with('locale_selection', $locales)
+            ->with('locale_selected', null)
+            ->with('disabled_checked', 0)
+            ->with('roles', $roles)
+            ->with('selected_roles', null)
             ->with('auth_user', $this->auth_user);
     }
 
@@ -112,7 +126,15 @@ class UsersController extends Controller
      */
     public function store(UserFormRequest $userForm)
     {
-        User::create($userForm->all());
+        $userData = $userForm->all();
+
+        // update data for the create method
+        $userData['disabled'] = ($userData['disabled'] == 'true');
+
+        $user = User::create($userData);
+
+        // link the roles to the user
+        $user->roles()->sync($userForm->get('roles'));
 
         return Redirect::route('admin.users.index')
             ->with('message', 'User has been created');
@@ -128,9 +150,13 @@ class UsersController extends Controller
     {
         $account = Account::find($user->account_id);
 
+        $locale = Config::get('app.locales');
+
         return view('users.show')
             ->with('account', $account)
             ->with('user', $user)
+            ->with('roles', $user->roles)
+            ->with('language', $locale[$user->locale][0])
             ->with('auth_user', $this->auth_user);
     }
 
@@ -143,11 +169,22 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $accounts = Account::lists('name', 'id');
+        $roles = Role::lists('name', 'id');
+
+        $locales = array();
+        foreach (Config::get('app.locales') as $locale => $locale_data) {
+            $locales[$locale] = $locale_data[0];
+        }
 
         return view('users.edit')
             ->with('user', $user)
             ->with('account_selection', $accounts)
             ->with('selected', $user->account_id)
+            ->with('locale_selection', $locales)
+            ->with('locale_selected', null)
+            ->with('disabled_checked', $user->disabled)
+            ->with('roles', $roles)
+            ->with('selected_roles', $user->roles->lists('id')->toArray())
             ->with('auth_user', $this->auth_user);
     }
 
@@ -160,7 +197,21 @@ class UsersController extends Controller
      */
     public function update(UserFormRequest $userForm, User $user)
     {
-        $user->update($userForm->all());
+        $userData = $userForm->all();
+
+        // massage data
+        $userData['disabled'] = ($userData['disabled'] == 'true' ? true : false);
+
+        Log::info($userData);
+
+        if (empty($userData['password']))
+            unset($userData['password']);
+
+        // update the user with the data
+        $user->update($userData);
+
+        // link the roles to the user
+        $user->roles()->sync($userForm->get('roles'));
 
         return Redirect::route('admin.users.show', $user->id)
             ->with('message', 'User has been updated.');

@@ -79,14 +79,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public static function createRules()
     {
+        // disabled is sent as a string
         $rules = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'email'         => 'required|email|unique:users,email',
-            'password'      => 'sometimes|confirmed|min:6|max:32',
+            'password'      => 'required|confirmed|min:6|max:32',
             'account_id'    => 'required|integer',
             'locale'        => 'required|min:2|max:3',
-            'disabled'      => 'required:boolean',
+            'disabled'      => 'required|string',
+            'roles'         => 'sometimes',
         ];
 
         return $rules;
@@ -100,6 +102,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public static function updateRules($user)
     {
+        // disabled is sent as a string
         $rules = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
@@ -107,7 +110,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'password'      => 'sometimes|confirmed|min:6|max:32',
             'account_id'    => 'required|integer',
             'locale'        => 'sometimes|required|min:2|max:3',
-            'disabled'      => 'sometimes|required|boolean',
+            'disabled'      => 'sometimes|required|string',
+            'roles'         => 'sometimes',
         ];
 
         return $rules;

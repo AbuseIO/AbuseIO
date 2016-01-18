@@ -20,8 +20,23 @@
     <dt>{{ trans('misc.email') }}</dt>
     <dd><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></dd>
 
+    <dt>{{ trans('misc.language') }}</dt>
+    <dd>{{ $language }}</dd>
+
+    <dt>{{ trans('misc.status') }}</dt>
+    <dd>{{ $user->disabled ? trans('misc.disabled') : trans('misc.enabled') }}</dd>
+
     <dt>{{ trans('users.linked_account') }}</dt>
     <dd>{{ $account->name }}</dd>
+
+    <dt>{{ trans_choice('misc.roles', 2) }}</dt>
+    <dd>
+        <ul>
+            @foreach ( $roles as $role)
+                <li>{{ $role->name }}</li>
+            @endforeach
+        </ul>
+    </dd>
 </dl>
 
 {!! link_to_route('admin.users.index', trans('misc.button.back'), [], ['class' => 'btn btn-default top-buffer']) !!}
