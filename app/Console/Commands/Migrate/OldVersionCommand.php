@@ -7,8 +7,12 @@ use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use AbuseIO\Jobs\IncidentsValidate;
 use AbuseIO\Jobs\IncidentsProcess;
+use AbuseIO\Jobs\FindContact;
 use AbuseIO\Models\Evidence;
+use AbuseIO\Models\Contact;
+use AbuseIO\Models\Netblock;
 use Illuminate\Filesystem\Filesystem;
+use Validator;
 use Carbon;
 use Config;
 use DB;
@@ -26,6 +30,7 @@ class OldVersionCommand extends Command
      */
     protected $signature = 'migrate:oldversion
                             {--p|prepare : Prepares the migration by building all required caches}
+                            {--s|start : Start the migration using cached evidence }
     ';
 
     /**
@@ -50,6 +55,8 @@ class OldVersionCommand extends Command
     public function handle()
     {
         if (!empty($this->option('prepare'))) {
+            $this->info('building required evidence cache files');
+
             $filesystem = new Filesystem;
             $path       = storage_path() . '/migratation/';
             umask(0007);
@@ -125,6 +132,16 @@ class OldVersionCommand extends Command
                 if ($parser !== false) {
                     $parserResult = $parser->parse();
                 } else {
+                    // Before we go into an error, lets see if this evidence was even linked to any ticket at all
+                    // If not we can ignore the error and just smile and wave
+                    $evidenceLinks = DB::table('EvidenceLinks')
+                        ->where('EvidenceID', '=', $evidence->ID)
+                        ->get();
+
+                    if (count($evidenceLinks) === 0) {
+                        continue;
+                    }
+
                     $this->error(
                         'No parser available to handle message '.$evidence->ID.' from : ' . $evidence->Sender .
                         ' with subject: ' . $evidence->Subject
@@ -137,10 +154,7 @@ class OldVersionCommand extends Command
                         'Parser has ended with fatal errors ! : ' . $parserResult['errorMessage']
                     );
 
-                    var_dump($rawEmail);
-                    var_dump($parserResult['data']);
                     $this->exception();
-                    return;
                 }
 
                 if ($parserResult['warningCount'] !== 0 &&
@@ -151,10 +165,7 @@ class OldVersionCommand extends Command
                         $parserResult['warningCount'] . ' warnings were detected.'
                     );
 
-                    var_dump($rawEmail);
-                    var_dump($parserResult['data']);
                     $this->exception();
-                    return;
                 }
 
                 $evidenceSave = new Evidence();
@@ -206,9 +217,8 @@ class OldVersionCommand extends Command
 
                     var_dump($rawEmail);
                     var_dump($parserResult['data']);
-                    $this->exception();
 
-                    return;
+                    $this->exception();
                 }
 
 
@@ -234,6 +244,110 @@ class OldVersionCommand extends Command
             }
         }
 
+
+
+        if (!empty($this->option('start'))) {
+            /*
+            $this->info('starting migration - phase 1 - contact data');
+
+            DB::setDefaultConnection('abuseio3');
+
+            $customers = DB::table('Customers')
+                ->get();
+
+            DB::setDefaultConnection('mysql');
+
+            foreach ($customers as $customer) {
+                $newContact = new Contact();
+                $newContact->reference = $customer->Code;
+                $newContact->name = $customer->Name;
+                $newContact->email = $customer->Contact;
+                $newContact->auto_notify = $customer->AutoNotify;
+                $newContact->enabled = 1;
+                $newContact->account_id = 1;
+
+                $validation = Validator::make($newContact->toArray(), Contact::createRules());
+
+                if ($validation->fails()) {
+                    $message = implode(' ', $validation->messages()->all());
+                    $this->error('fatal error while creating contacts :' . $message);
+                    $this->exception();
+                } else {
+                    $newContact->save();
+                }
+            }
+            */
+
+            /*
+            $this->info('starting migration - phase 2 - netblock data');
+
+            DB::setDefaultConnection('abuseio3');
+
+            $netblocks = DB::table('Netblocks')
+                ->get();
+
+            DB::setDefaultConnection('mysql');
+
+            foreach ($netblocks as $netblock) {
+                $contact = FindContact::byId($netblock->CustomerCode);
+
+                if ($contact->reference != $netblock->CustomerCode) {
+                    $this->error('Contact lookup failed, mismatched results');
+                    $this->$this->exception();
+                }
+
+                $newNetblock = new Netblock();
+                $newNetblock->first_ip = long2ip($netblock->begin_in);
+                $newNetblock->last_ip = long2ip($netblock->end_in);
+                $newNetblock->description = 'Imported from previous AbuseIO version which did not include a description';
+                $newNetblock->contact_id = $contact->id;
+                $newNetblock->enabled = 1;
+
+                $validation = Validator::make($newNetblock->toArray(), Netblock::createRules($newNetblock));
+
+                if ($validation->fails()) {
+                    $message = implode(' ', $validation->messages()->all());
+                    $this->error('fatal error while creating contacts :' . $message);
+                    $this->exception();
+                } else {
+                    $newNetblock->save();
+                }
+            }
+            */
+
+            $this->info('starting migration - phase 3 - ticket and evidence data');
+
+            $tickets = DB::table('Reports')
+                ->get();
+
+            foreach ($tickets as $ticket) {
+                // Get the list of evidence ID's related to this ticket
+                $evidenceLinks = DB::table('EvidenceLinks')
+                    ->where('ReportID', '=', $ticket->ID)
+                    ->get();
+
+                // DO NOT REMOVE! Legacy versions (1.0 / 2.0) have imports without evidence.
+                // These dont have any linked evidence and will require a manual building of evidence
+                // for now we ignore them. This will not affect any 3.x installations
+                if ($ticket->CustomerName == 'Imported from AbuseReporter' ||
+                    !empty(json_decode($ticket->Information)->importnote)
+                ) {
+                    continue;
+                }
+
+
+                if (count($evidenceLinks) != (int)$ticket->ReportCount) {
+                    // Count does not match, known 3.0 bug so we will do a little magic to fix that
+                } else {
+                    var_dump($ticket);
+                    var_dump($evidenceLinks);
+                    die();
+                }
+
+
+            }
+        }
+
         return true;
     }
 
@@ -242,7 +356,7 @@ class OldVersionCommand extends Command
      */
     private function exception()
     {
-        $this->error('fatal error');
+        $this->error('fatal error happend, ending migration (empty DB, fix problem, try again)');
         die();
     }
 }
