@@ -5,6 +5,7 @@ namespace AbuseIO\Jobs;
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\Contact;
+use AbuseIO\Models\Account;
 use ReflectionMethod;
 use Validator;
 use ICF;
@@ -24,6 +25,8 @@ class FindContact extends Job
      */
     public static function undefined()
     {
+        $account = Account::system();
+
         $contact = new Contact();
         $contact->reference     = 'UNDEF';
         $contact->name          = 'Undefined customer';
@@ -31,7 +34,7 @@ class FindContact extends Job
         $contact->auto_notify   = false;
         $contact->email         = '';
         $contact->api_host      = '';
-        $contact->account_id    = 1;
+        $contact->account_id    = $account->id;
 
         return $contact;
     }

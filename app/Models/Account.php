@@ -4,6 +4,7 @@ namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Log;
 
 /**
  * Class Account
@@ -91,7 +92,6 @@ class Account extends Model
         return $rules;
     }
 
-
     /**
      * Return if the account is the system account
      *
@@ -100,6 +100,27 @@ class Account extends Model
     public function isSystemAccount()
     {
         return ($this->systemaccount);
+    }
+
+    /**
+     * Return the account that currently is the system account
+     * If there is none, we die as its impossible to function without it
+     *
+     * @param \Illuminate\Database\Eloquent\Builder
+     * @return \AbuseIO\Models\Account $account
+     */
+    public function scopeSystem($query)
+    {
+        $result =  $query->where('systemaccount', '=', 1);
+
+        if (count($result) !== 1) {
+            Log::error(
+                'FindContact: ' .
+                "FATAL ERROR - DEFAULT ACCOUNT (SYSTEMACCOUNT) MISSING"
+            );
+            dd();
+        }
+        return $result->first();
     }
 
     /**
