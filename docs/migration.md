@@ -14,6 +14,8 @@ Requirements
 
 - create a readonly user to the old abuseio 3.x database. All the data required is stored in the database. The old database wil not need any changes
 
+- in the config/database.php file create a copy of the 'mysql' element and name it abuseio3 with the server, user, password to access the database.
+
 Preperations
 
 - make sure you followed the installation guidelines correctly and setup the default account/brand. The name of the default account is required and all data will be linked to this account.
