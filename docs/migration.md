@@ -72,6 +72,7 @@ etc). From this point, you are in maintaince mode.
 - make sure the supervisored daemons have been stopped
 - make sure the webserver has been stopped
 - make sure the MTA has been stopped
+- make sure the cron task has been disabled (housekeeper)
 
 - Now run the cache builder again for any changes that might have happend since the last run, this wouldn't take 
 long if there are not a lot of changes:
