@@ -134,7 +134,11 @@ class UsersController extends Controller
         $user = User::create($userData);
 
         // link the roles to the user
-        $user->roles()->sync($userForm->get('roles'));
+        $roles = $userForm->get('roles');
+
+        if ($roles != null) {
+            $user->roles()->sync();
+        }
 
         return Redirect::route('admin.users.index')
             ->with('message', 'User has been created');
@@ -211,7 +215,11 @@ class UsersController extends Controller
         $user->update($userData);
 
         // link the roles to the user
-        $user->roles()->sync($userForm->get('roles'));
+        $roles = $userForm->get('roles');
+        if ($roles == null ) {
+            $roles = [];
+        }
+        $user->roles()->sync($roles);
 
         return Redirect::route('admin.users.show', $user->id)
             ->with('message', 'User has been updated.');
