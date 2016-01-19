@@ -2,16 +2,30 @@
 
 namespace AbuseIO\Console\Commands\Queue;
 
-use AbuseIO\Console\Commands\AbstractShowCommand2;
-use Symfony\Component\Console\Input\InputArgument;
+use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Job;
 
 /**
  * Class ListCommand
  * @package AbuseIO\Console\Commands\Queue
  */
-class ShowCommand extends AbstractShowCommand2
+class ShowCommand extends AbstractListCommand
 {
+    protected $filterArguments = [
+        'queue'
+    ];
+
+    /**
+     * The headers of the table
+     * @var array
+     */
+    protected $headers = [
+        'id',
+        'Queue',
+        'Job name',
+        'created',
+    ];
+
     /**
      * {@inheritdoc }
      */
@@ -19,15 +33,8 @@ class ShowCommand extends AbstractShowCommand2
     {
         /*
          * TODO:
-         * remove payload and just show the class
-         *
-         * $payload = unserialize(json_decode($job->payload)->data->command);
-         * $method = class_basename($payload);
-         *
-         * TODO:
-         * aanroep queue:show $queue
-         *
-         * output: alle jobs van deze queue.
+         * Zie headers, list laat alleen een overzicht van de gebruikte queues zien en het aantal jobs
+         * per queue. Details per queue is te zien met 'show' command.
          */
         $result = [];
 
@@ -37,15 +44,32 @@ class ShowCommand extends AbstractShowCommand2
 
             $result[] = [
                 $job->id,
+                $job->queue,
                 $method,
-                $job->created_at
+                $job->created_at,
             ];
         }
         return $result;
     }
 
     /**
-     * {@inherit docs}
+     * {@inheritdoc }
+     */
+    protected function findWithCondition($filter)
+    {
+        return Job::where('queue', 'like', "%{$filter}%")->get();
+    }
+
+    /**
+     * {@inheritdoc }
+     */
+    protected function findAll()
+    {
+        return Job::all();
+    }
+
+    /**
+     * {@inheritdoc }
      */
     protected function getAsNoun()
     {
@@ -55,38 +79,8 @@ class ShowCommand extends AbstractShowCommand2
     /**
      * {@inherit docs}
      */
-    protected function getAllowedArguments()
+    public function setCommandName()
     {
-        return ["queue"];
-    }
-
-    /**
-     * {@inherit docs}
-     */
-    protected function getFields()
-    {
-        return ["id", "method", "created"];
-    }
-
-    /**
-     * {@inherit docs}
-     */
-    protected function getCollectionWithArguments()
-    {
-        return Job::where("queue", "like", "%".$this->argument("queue")."%");
-    }
-
-    /**
-     * {@inherit docs}
-     */
-    protected function defineInput()
-    {
-        return [
-            new InputArgument(
-                'queue',
-                InputArgument::REQUIRED,
-                'Use the name for a queue to show it.'
-            )
-        ];
+        return 'jobs';
     }
 }

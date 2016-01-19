@@ -11,7 +11,9 @@ use AbuseIO\Models\Job;
  */
 class ListCommand extends AbstractListCommand
 {
-    protected $filterArguments = ["id", "queue"];
+    protected $filterArguments = [
+        'queue'
+    ];
 
     /**
      * The headers of the table
@@ -27,11 +29,6 @@ class ListCommand extends AbstractListCommand
      */
     protected function transformListToTableBody($list)
     {
-        /*
-         * TODO:
-         * Zie headers, list laat alleen een overzicht van de gebruikte queues zien en het aantal jobs
-         * per queue. Details per queue is te zien met 'show' command.
-         */
         $result = [];
 
         foreach ($list as $queue) {
@@ -50,7 +47,14 @@ class ListCommand extends AbstractListCommand
     {
         $queues = config('queue.queues');
 
-        // todo build filter, return filtered
+        $results = [];
+        foreach ($queues as $queue) {
+            if (preg_match("/$filter/", $queue)) {
+                $results[] = $queue;
+            }
+        }
+
+        return $results;
     }
 
     /**
