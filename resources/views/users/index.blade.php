@@ -11,8 +11,7 @@
     @if ( !$users->count() )
         <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('users.no_users')}}</div>
     @else
-        {!! $users->render() !!}
-        <table class="table table-striped" id="users-table">
+        <table class="table table-striped top-buffer" id="users-table">
             <thead>
                 <tr>
                     <th>{{ trans('misc.id') }}</th>
