@@ -72,7 +72,11 @@ class CreateCommand extends Command
         $user->account_id    = $account->id;
         $user->disabled      = $this->option('disabled');
 
-        $validation = Validator::make($user->toArray(), User::createRules());
+        $validationUser = $user->toArray();
+        $validationUser['password'] = empty($this->option('password')) ? $generatedPassword : $this->option('password');
+        $validationUser['password_confirmation'] = $validationUser['password'];
+
+        $validation = Validator::make($validationUser, User::createRules());
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
