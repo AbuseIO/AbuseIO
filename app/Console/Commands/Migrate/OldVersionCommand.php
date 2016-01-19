@@ -14,6 +14,8 @@ use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Event;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
+use AbuseIO\Models\Note;
+use AbuseIO\Models\Account;
 use Illuminate\Filesystem\Filesystem;
 use Validator;
 use Carbon;
@@ -33,7 +35,7 @@ class OldVersionCommand extends Command
      * @var string
      */
     protected $signature = 'migrate:oldversion
-                            {--p|prepare : Prepares the migration by building all required caches}
+                            {--p|prepare : Prepares the migration by building all required caches }
                             {--s|start : Start the migration using cached evidence }
     ';
 
@@ -58,7 +60,8 @@ class OldVersionCommand extends Command
      */
     public function handle()
     {
-        // todo - dont forget the notes!
+        $account = Account::system();
+
         if (!empty($this->option('prepare'))) {
             $this->info('building required evidence cache files');
 
@@ -72,14 +75,14 @@ class OldVersionCommand extends Command
                     $this->error(
                         'Unable to create directory: ' . $path
                     );
-                    return false;
+                    $this->exception();
                 }
 
                 if (!is_dir($path)) {
                     $this->error(
                         'Path vanished after write: ' . $path
                     );
-                    return false;
+                    $this->exception();
                 }
                 chgrp($path, config('app.group'));
             }
@@ -163,9 +166,7 @@ class OldVersionCommand extends Command
                     $this->exception();
                 }
 
-                if ($parserResult['warningCount'] !== 0 &&
-                    Config::get('main.emailparser.notify_on_warnings') === true
-                ) {
+                if ($parserResult['warningCount'] !== 0) {
                     $this->error(
                         'Configuration has warnings set as critical and ' .
                         $parserResult['warningCount'] . ' warnings were detected.'
@@ -244,10 +245,10 @@ class OldVersionCommand extends Command
                 DB::setDefaultConnection('abuseio3');
 
                 $output = [
-                    'evidenceId' => $evidence->ID,
-                    'evidenceData' => $evidence->Data,
-                    'incidents' => $incidents,
-                    'newId' => $evidenceSave->id,
+                    'evidenceId'    => $evidence->ID,
+                    'evidenceData'  => $evidence->Data,
+                    'incidents'     => $incidents,
+                    'newId'         => $evidenceSave->id,
                 ];
 
                 if ($filesystem->put($filename, json_encode($output)) === false) {
@@ -276,14 +277,17 @@ class OldVersionCommand extends Command
 
             DB::setDefaultConnection('mysql');
 
+            $this->output->progressStart(count($customers));
             foreach ($customers as $customer) {
                 $newContact = new Contact();
-                $newContact->reference = $customer->Code;
-                $newContact->name = $customer->Name;
-                $newContact->email = $customer->Contact;
-                $newContact->auto_notify = $customer->AutoNotify;
-                $newContact->enabled = 1;
-                $newContact->account_id = 1;
+                $newContact->reference      = $customer->Code;
+                $newContact->name           = $customer->Name;
+                $newContact->email          = $customer->Contact;
+                $newContact->auto_notify    = $customer->AutoNotify;
+                $newContact->enabled        = 1;
+                $newContact->account_id     = $account->id;
+                $newContact->created_at     = Carbon::parse($customer->LastModified);
+                $newContact->updated_at     = Carbon::parse($customer->LastModified);
 
                 $validation = Validator::make($newContact->toArray(), Contact::createRules());
 
@@ -294,7 +298,14 @@ class OldVersionCommand extends Command
                 } else {
                     $newContact->save();
                 }
+
+                $this->output->progressAdvance();
+                echo " Working on contact {$customer->Code}      ";
             }
+            $this->output->progressFinish();
+
+
+
 
             $this->info('starting migration - phase 2 - netblock data');
 
@@ -305,6 +316,7 @@ class OldVersionCommand extends Command
 
             DB::setDefaultConnection('mysql');
 
+            $this->output->progressStart(count($netblocks));
             foreach ($netblocks as $netblock) {
                 $contact = FindContact::byId($netblock->CustomerCode);
 
@@ -314,11 +326,13 @@ class OldVersionCommand extends Command
                 }
 
                 $newNetblock = new Netblock();
-                $newNetblock->first_ip = long2ip($netblock->begin_in);
-                $newNetblock->last_ip = long2ip($netblock->end_in);
-                $newNetblock->description = 'Imported from previous AbuseIO version which did not include a description';
-                $newNetblock->contact_id = $contact->id;
-                $newNetblock->enabled = 1;
+                $newNetblock->first_ip      = long2ip($netblock->begin_in);
+                $newNetblock->last_ip       = long2ip($netblock->end_in);
+                $newNetblock->description   = 'Imported from previous AbuseIO version which did not include a description';
+                $newNetblock->contact_id    = $contact->id;
+                $newNetblock->enabled       = 1;
+                $newNetblock->created_at    = Carbon::parse($netblock->LastModified);
+                $newNetblock->updated_at    = Carbon::parse($netblock->LastModified);
 
                 $validation = Validator::make($newNetblock->toArray(), Netblock::createRules($newNetblock));
 
@@ -329,9 +343,53 @@ class OldVersionCommand extends Command
                 } else {
                     $newNetblock->save();
                 }
-            }
 
-            $this->info('starting migration - phase 3 - ticket and evidence data');
+                $this->output->progressAdvance();
+                echo " Working on netblock ". long2ip($netblock->begin_in) . "       ";
+            }
+            $this->output->progressFinish();
+
+
+
+            $this->info('starting migration - phase 4 - Notes');
+
+            DB::setDefaultConnection('abuseio3');
+
+            $notes = DB::table('Notes')
+                ->get();
+
+            DB::setDefaultConnection('mysql');
+
+            $this->output->progressStart(count($notes));
+            foreach ($notes as $note) {
+                $newNote = new Note();
+
+                $newNote->ticket_id     = $note->ReportID;
+                $newNote->submitter     = $note->Submittor;
+                $newNote->text          = $note->Text;
+                $newNote->hidden        = true;
+                $newNote->viewed        = true;
+                $newNote->created_at    = Carbon::parse($note->LastModified);
+                $newNote->updated_at    = Carbon::parse($note->LastModified);
+
+                $validation = Validator::make($newNote->toArray(), Note::createRules());
+
+                if ($validation->fails()) {
+                    $message = implode(' ', $validation->messages()->all());
+                    $this->error('fatal error while creating contacts :' . $message);
+                    $this->exception();
+                } else {
+                    $newNote->save();
+                }
+
+                $this->output->progressAdvance();
+                echo " Working on note {$note->ID}       ";
+            }
+            $this->output->progressFinish();
+
+
+
+            $this->info('starting migration - phase 4 - ticket and evidence data');
 
             DB::setDefaultConnection('abuseio3');
 
@@ -401,31 +459,34 @@ class OldVersionCommand extends Command
                     // Create the ticket
                     $newTicket = new Ticket();
 
-                    $newTicket->id                         = $ticket->ID;
-                    $newTicket->ip                         = $ticket->IP;
-                    $newTicket->domain                     = empty($ticket->Domain) ? '' : $ticket->Domain;
-                    $newTicket->class_id                   = $ticket->Class;
-                    $newTicket->type_id                    = $ticket->Type;
+                    $newTicket->id                          = $ticket->ID;
+                    $newTicket->ip                          = $ticket->IP;
+                    $newTicket->domain                      = empty($ticket->Domain) ? '' : $ticket->Domain;
+                    $newTicket->class_id                    = $ticket->Class;
+                    $newTicket->type_id                     = $ticket->Type;
 
-                    $newTicket->ip_contact_account_id      = 1;
-                    $newTicket->ip_contact_reference       = $ticket->CustomerCode;
-                    $newTicket->ip_contact_name            = $ticket->CustomerName;
-                    $newTicket->ip_contact_email           = $ticket->CustomerContact;
-                    $newTicket->ip_contact_api_host        = '';
-                    $newTicket->ip_contact_auto_notify     = $ticket->AutoNotify;
-                    $newTicket->ip_contact_notified_count  = $ticket->NotifiedCount;
+                    $newTicket->ip_contact_account_id       = $account->id;
+                    $newTicket->ip_contact_reference        = $ticket->CustomerCode;
+                    $newTicket->ip_contact_name             = $ticket->CustomerName;
+                    $newTicket->ip_contact_email            = $ticket->CustomerContact;
+                    $newTicket->ip_contact_api_host         = '';
+                    $newTicket->ip_contact_auto_notify      = $ticket->AutoNotify;
+                    $newTicket->ip_contact_notified_count   = $ticket->NotifiedCount;
 
                     $domainContact = FindContact::undefined();
-                    $newTicket->domain_contact_account_id  = $domainContact->account_id;
-                    $newTicket->domain_contact_reference   = $domainContact->reference;
-                    $newTicket->domain_contact_name        = $domainContact->name;
-                    $newTicket->domain_contact_email       = $domainContact->email;
-                    $newTicket->domain_contact_api_host    = $domainContact->api_host;
-                    $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
+                    $newTicket->domain_contact_account_id   = $domainContact->account_id;
+                    $newTicket->domain_contact_reference    = $domainContact->reference;
+                    $newTicket->domain_contact_name         = $domainContact->name;
+                    $newTicket->domain_contact_email        = $domainContact->email;
+                    $newTicket->domain_contact_api_host     = $domainContact->api_host;
+                    $newTicket->domain_contact_auto_notify  = $domainContact->auto_notify;
                     $newTicket->domain_contact_notified_count = 0;
 
-                    $newTicket->last_notify_count       = $ticket->LastNotifyReportCount;
-                    $newTicket->last_notify_timestamp   = $ticket->LastNotifyTimestamp;
+                    $newTicket->last_notify_count           = $ticket->LastNotifyReportCount;
+                    $newTicket->last_notify_timestamp       = $ticket->LastNotifyTimestamp;
+
+                    $newTicket->created_at                  = Carbon::createFromTimestamp($ticket->FirstSeen);
+                    $newTicket->updated_at                  = Carbon::parse($ticket->LastModified);
 
                     if ($ticket->Status == 'CLOSED') {
                         $newTicket->status_id               = 2;
