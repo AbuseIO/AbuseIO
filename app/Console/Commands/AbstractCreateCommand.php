@@ -75,7 +75,17 @@ abstract class AbstractCreateCommand extends Command
 
     final public function getName()
     {
-        return sprintf("%s:create", $this->getAsNoun());
+        return sprintf("%s:%s", $this->getAsNoun(), $this->setCommandName());
+    }
+
+    /**
+     * Default subcommand name
+     *
+     * @return string
+     */
+    public function setCommandName()
+    {
+        return 'create';
     }
 
     public final function getDescription()

@@ -61,7 +61,17 @@ abstract class AbstractShowCommand2 extends Command
      */
     public final function getName()
     {
-        return sprintf('%s:show', $this->getAsNoun());
+        return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
+    }
+
+    /**
+     * Default subcommand name
+     *
+     * @return string
+     */
+    public function setCommandName()
+    {
+        return 'show';
     }
 
     /**
@@ -71,7 +81,6 @@ abstract class AbstractShowCommand2 extends Command
     {
         return sprintf('Shows a %s (without confirmation!)', $this->getAsNoun());
     }
-
 
     /**
      * Create a new command instance.

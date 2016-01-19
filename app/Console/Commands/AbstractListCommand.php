@@ -61,12 +61,21 @@ abstract class AbstractListCommand extends Command
      */
     public final function getName()
     {
-        return sprintf('%s:list', $this->getAsNoun());
+        return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
+    }
+
+    /**
+     * Default subcommand name
+     *
+     * @return string
+     */
+    public function setCommandName()
+    {
+        return 'list';
     }
 
     /**
      * Create a new command instance.
-     * @return void
      */
     public function __construct()
     {

@@ -56,7 +56,17 @@ abstract class AbstractDeleteCommand extends Command
 
     public final function getName()
     {
-        return sprintf('%s:delete', $this->getAsNoun());
+        return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
+    }
+
+    /**
+     * Default subcommand name
+     *
+     * @return string
+     */
+    public function setCommandName()
+    {
+        return 'delete';
     }
 
     public final function getDescription()
