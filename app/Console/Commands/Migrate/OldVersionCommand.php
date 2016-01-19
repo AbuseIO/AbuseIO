@@ -10,12 +10,15 @@ use AbuseIO\Jobs\IncidentsValidate;
 use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Jobs\FindContact;
 use AbuseIO\Models\Evidence;
+use AbuseIO\Models\Ticket;
+use AbuseIO\Models\Event;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
 use Illuminate\Filesystem\Filesystem;
 use Validator;
 use Carbon;
 use Config;
+use Lang;
 use DB;
 
 /**
@@ -87,6 +90,7 @@ class OldVersionCommand extends Command
             $evidences = DB::table('Evidence')
                 ->get();
 
+            $this->output->progressStart(count($evidences));
             foreach ($evidences as $evidence) {
                 //echo $evidence->ID . PHP_EOL;
                 $filename = $path . "evidence_id_{$evidence->ID}.data";
@@ -253,7 +257,11 @@ class OldVersionCommand extends Command
 
                     return false;
                 }
+
+                $this->output->progressAdvance();
             }
+
+            $this->output->progressFinish();
         }
 
 
@@ -334,7 +342,18 @@ class OldVersionCommand extends Command
             $tickets = DB::table('Reports')
                 ->get();
 
+            $migrateCount = 0;
+            foreach ($tickets as $ticket) {
+                $evidenceLinks = DB::table('EvidenceLinks')
+                    ->where('ReportID', '=', $ticket->ID)
+                    ->get();
+
+                $migrateCount = $migrateCount + count($evidenceLinks);
+            }
+
             DB::setDefaultConnection('mysql');
+
+            $this->output->progressStart($migrateCount);
 
             foreach ($tickets as $ticket) {
                 // Get the list of evidence ID's related to this ticket
@@ -351,6 +370,7 @@ class OldVersionCommand extends Command
                 if ($ticket->CustomerName == 'Imported from AbuseReporter' ||
                     !empty(json_decode($ticket->Information)->importnote)
                 ) {
+                    // Manually build the evidence
                     continue;
                 }
 
@@ -358,16 +378,133 @@ class OldVersionCommand extends Command
                 if (count($evidenceLinks) != (int)$ticket->ReportCount) {
                     // Count does not match, known 3.0 bug so we will do a little magic to fix that
                 } else {
-                    foreach ($evidenceLinks as $evidenceLink) {
-
+                    // Start with building a classification lookup table  and switch out name for ID
+                    // But first fix the names:
+                    $replaces = [
+                        'Possible DDOS sending NTP Server' => 'Possible DDoS sending Server',
+                    ];
+                    $old = array_keys($replaces);
+                    $new = array_values($replaces);
+                    $ticket->Class = str_replace($old, $new, $ticket->Class);
+                    foreach ((array)Lang::get('classifications') as $classID => $class) {
+                        if ($class['name'] == $ticket->Class) {
+                            $ticket->Class = $classID;
+                        }
                     }
-                    var_dump($ticket);
-                    var_dump($evidenceLinks);
-                    die();
+
+                    // Also build a types lookup table and switch out name for ID
+                    foreach ((array)Lang::get('types.type') as $typeID => $type) {
+                        // Consistancy fixes:
+                        $ticket->Type = ucfirst(strtolower($ticket->Type));
+
+                        if ($type['name'] == $ticket->Type) {
+                            $ticket->Type = $typeID;
+                        }
+                    }
+
+                    // Create the ticket
+                    $newTicket = new Ticket();
+
+                    $newTicket->ip                         = $ticket->IP;
+                    $newTicket->domain                     = empty($ticket->Domain) ? '' : $ticket->Domain;
+                    $newTicket->class_id                   = $ticket->Class;
+                    $newTicket->type_id                    = $ticket->Type;
+
+                    $newTicket->ip_contact_account_id      = 1;
+                    $newTicket->ip_contact_reference       = $ticket->CustomerCode;
+                    $newTicket->ip_contact_name            = $ticket->CustomerName;
+                    $newTicket->ip_contact_email           = $ticket->CustomerContact;
+                    $newTicket->ip_contact_api_host        = '';
+                    $newTicket->ip_contact_auto_notify     = $ticket->AutoNotify;
+                    $newTicket->ip_contact_notified_count  = $ticket->NotifiedCount;
+
+                    $domainContact = FindContact::undefined();
+                    $newTicket->domain_contact_account_id  = $domainContact->account_id;
+                    $newTicket->domain_contact_reference   = $domainContact->reference;
+                    $newTicket->domain_contact_name        = $domainContact->name;
+                    $newTicket->domain_contact_email       = $domainContact->email;
+                    $newTicket->domain_contact_api_host    = $domainContact->api_host;
+                    $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
+                    $newTicket->domain_contact_notified_count = 0;
+
+                    $newTicket->last_notify_count       = $ticket->LastNotifyReportCount;
+                    $newTicket->last_notify_timestamp   = $ticket->LastNotifyTimestamp;
+
+                    if ($ticket->Status == 'CLOSED') {
+                        $newTicket->status_id               = 2;
+                    } elseif ($ticket->Status == 'OPEN') {
+                        $newTicket->status_id               = 1;
+                    } else {
+                        $this->error('Unknown ticket status');
+                        $this->exception();
+                    }
+
+                    // Validate the model before saving
+                    $validator = Validator::make(
+                        json_decode(json_encode($newTicket), true),
+                        Ticket::createRules()
+                    );
+                    if ($validator->fails()) {
+                        $this->error(
+                            'DevError: Internal validation failed when saving the Ticket object ' .
+                            implode(' ', $validator->messages()->all())
+                        );
+                        var_dump($ticket);
+                        $this->exception();
+                    }
+
+                    //$newTicket->save();
+
+                    // Create all the events
+                    foreach ($evidenceLinks as $evidenceLink) {
+                        echo ".";
+                        $path       = storage_path() . '/migratation/';
+                        $filename = $path . "evidence_id_{$evidenceLink->EvidenceID}.data";
+
+                        if (!is_file($filename)) {
+                            $this->error('missing cache file ');
+                            $this->exception();
+                        }
+
+                        $evidence = json_decode(file_get_contents($filename));
+                        $evidenceID = $evidence->evidenceId;
+                        $incidents = $evidence->incidents;
+
+                        // Yes we only grab nr 0 from the array, because that is what the old aggregator did
+                        // which basicly ignored a few incidents because they werent considered unique (which
+                        // they were with the domain name)
+                        $ip = $newTicket->ip;
+                        $incidentTmp = $incidents->$ip;
+                        $incident = $incidentTmp[0];
+
+                        $newEvent = new Event;
+                        $newEvent->evidence_id  = $evidenceID;
+                        $newEvent->information  = $incident->information;
+                        $newEvent->source       = $incident->source;
+                        $newEvent->ticket_id    = 1; //$newTicket->id;
+                        $newEvent->timestamp    = $incident->timestamp;
+
+                        // Validate the model before saving
+                        $validator = Validator::make(
+                            json_decode(json_encode($newEvent), true),
+                            Event::createRules()
+                        );
+                        if ($validator->fails()) {
+                            $this->error(
+                                'DevError: Internal validation failed when saving the Event object ' .
+                                implode(' ', $validator->messages()->all())
+                            );
+                            $this->exception();
+                        }
+
+                        //$newEvent->save();
+
+                        $this->output->progressAdvance();
+                        echo " Working on events from ticket {$ticket->ID}";
+                    }
                 }
-
-
             }
+            $this->output->progressFinish();
         }
 
         return true;
