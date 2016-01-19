@@ -88,10 +88,6 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Note\DeleteCommand',
         'AbuseIO\Console\Commands\Note\ListCommand',
 
-        'AbuseIO\Console\Commands\Job\ShowCommand',
-        'AbuseIO\Console\Commands\Job\DeleteCommand',
-        'AbuseIO\Console\Commands\Job\ListCommand',
-
         'AbuseIO\Console\Commands\Ticket\ShowCommand',
         'AbuseIO\Console\Commands\Ticket\DeleteCommand',
         'AbuseIO\Console\Commands\Ticket\ListCommand',

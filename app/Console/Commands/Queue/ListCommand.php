@@ -4,7 +4,6 @@ namespace AbuseIO\Console\Commands\Queue;
 
 use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Job;
-use Carbon;
 
 /**
  * Class ListCommand
@@ -12,35 +11,35 @@ use Carbon;
  */
 class ListCommand extends AbstractListCommand
 {
+    protected $filterArguments = ["id", "queue"];
 
-   protected $filterArguments = ["name"];
     /**
      * The headers of the table
      * @var array
      */
-    protected $headers = [ 'Name', 'Jobs' ];
-
-    /**
-     * The fields of the table / database row
-     * @var array
-     */
-    protected $fields = [ ];
+    protected $headers = [
+        'Queue',
+        'Jobs',
+    ];
 
     /**
      * {@inheritdoc }
      */
     protected function transformListToTableBody($list)
     {
+        /*
+         * TODO:
+         * Zie headers, list laat alleen een overzicht van de gebruikte queues zien en het aantal jobs
+         * per queue. Details per queue is te zien met 'show' command.
+         */
         $result = [];
 
         foreach ($list as $queue) {
-
-            $result[$queue] = [
+            $result[] = [
                 $queue,
                 Job::where('queue', '=', $queue)->count(),
             ];
         }
-
         return $result;
     }
 
@@ -49,7 +48,9 @@ class ListCommand extends AbstractListCommand
      */
     protected function findWithCondition($filter)
     {
-        return config('queue.queues');
+        $queues = config('queue.queues');
+
+        // todo build filter, return filtered
     }
 
     /**
@@ -65,6 +66,6 @@ class ListCommand extends AbstractListCommand
      */
     protected function getAsNoun()
     {
-        return "Queues";
+        return "queue";
     }
 }
