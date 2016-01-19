@@ -107,7 +107,11 @@ class EditCommand extends Command
         }
 
         // Validate the changes
-        $validation = Validator::make($user->toArray(), User::updateRules($user));
+        $validationUser = $user->toArray();
+        $validationUser['password'] = empty($this->option('password')) ? $generatedPassword : $this->option('password');
+        $validationUser['password_confirmation'] = $validationUser['password'];
+
+        $validation = Validator::make($validationUser, User::updateRules($user));
 
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
