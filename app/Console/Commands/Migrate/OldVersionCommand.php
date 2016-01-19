@@ -267,7 +267,6 @@ class OldVersionCommand extends Command
 
 
         if (!empty($this->option('start'))) {
-            /*
             $this->info('starting migration - phase 1 - contact data');
 
             DB::setDefaultConnection('abuseio3');
@@ -296,9 +295,7 @@ class OldVersionCommand extends Command
                     $newContact->save();
                 }
             }
-            */
 
-            /*
             $this->info('starting migration - phase 2 - netblock data');
 
             DB::setDefaultConnection('abuseio3');
@@ -333,7 +330,6 @@ class OldVersionCommand extends Command
                     $newNetblock->save();
                 }
             }
-            */
 
             $this->info('starting migration - phase 3 - ticket and evidence data');
 
@@ -405,6 +401,7 @@ class OldVersionCommand extends Command
                     // Create the ticket
                     $newTicket = new Ticket();
 
+                    $newTicket->id                         = $ticket->ID;
                     $newTicket->ip                         = $ticket->IP;
                     $newTicket->domain                     = empty($ticket->Domain) ? '' : $ticket->Domain;
                     $newTicket->class_id                   = $ticket->Class;
@@ -453,7 +450,7 @@ class OldVersionCommand extends Command
                         $this->exception();
                     }
 
-                    //$newTicket->save();
+                    $newTicket->save();
 
                     // Create all the events
                     foreach ($evidenceLinks as $evidenceLink) {
@@ -481,7 +478,7 @@ class OldVersionCommand extends Command
                         $newEvent->evidence_id  = $evidenceID;
                         $newEvent->information  = $incident->information;
                         $newEvent->source       = $incident->source;
-                        $newEvent->ticket_id    = 1; //$newTicket->id;
+                        $newEvent->ticket_id    = $newTicket->id;
                         $newEvent->timestamp    = $incident->timestamp;
 
                         // Validate the model before saving
@@ -497,7 +494,7 @@ class OldVersionCommand extends Command
                             $this->exception();
                         }
 
-                        //$newEvent->save();
+                        $newEvent->save();
 
                         $this->output->progressAdvance();
                         echo " Working on events from ticket {$ticket->ID}";
