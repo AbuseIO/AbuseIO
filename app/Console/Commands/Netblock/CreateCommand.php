@@ -14,12 +14,6 @@ class CreateCommand extends AbstractCreateCommand
     // TODO validation of file not working
     public function getArgumentsList()
     {
-        //        {--contact : e-mail address or id from contact }
-//                            {--first_ip : Start Ip address from netblock  }
-//                            {--last_ip : End Ip addres from netblock }
-//                            {--description : Description }
-//                            {--enabled=false : true|false, Set the account to be enabled }
-
         return new InputDefinition([
             new InputArgument('contact', null, 'Id from contact'),
             new InputArgument('first_ip', null, 'Start Ip address from netblock'),
