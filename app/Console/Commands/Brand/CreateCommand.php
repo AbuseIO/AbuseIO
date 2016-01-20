@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
-// TODO logo must be resolved, cann't resolve logo from CLI maybe a default or change required in model?
 
 class CreateCommand extends AbstractCreateCommand
 {
@@ -34,7 +33,7 @@ class CreateCommand extends AbstractCreateCommand
         $brand->name = $this->argument('name');
         $brand->company_name = $this->argument('company_name');
         $brand->introduction_text = $this->argument('introduction_text');
-        $brand->logo = "none";
+        $brand->logo = Brand::getDefaultLogo();
 
         return $brand;
     }

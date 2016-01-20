@@ -218,4 +218,12 @@ class Brand extends Model
     {
         return $this->belongsTo('AbuseIO\Models\Account');
     }
+
+    /**
+     * @return string
+     */
+    public static function getDefaultLogo()
+    {
+        return file_get_contents(base_path('public/images/logo_150.png'));
+    }
 }
