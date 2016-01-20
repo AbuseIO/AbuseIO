@@ -18,7 +18,6 @@ class CreateCommand extends AbstractCreateCommand
             new InputArgument("brand_id", null, "brand id"),
             //new InputArgument('description', null, 'description'),
             new InputArgument('disabled', null, 'true|false, Set the account to be enabled', false),
-            //new InputArgument('system_account', null, 'true|false, Set true if system account', false),
         ]);
     }
 
@@ -35,7 +34,6 @@ class CreateCommand extends AbstractCreateCommand
         $account->brand_id = $this->argument('brand_id');
         //$account->description = $this->argument('description');
         $account->disabled = $this->argument('disabled') === "true" ? true : false;
-        //$account->systemaccount = $this->argument('system_account') === "true" ? true : false;
 
         return $account;
     }
