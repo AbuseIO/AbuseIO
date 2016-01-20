@@ -227,7 +227,7 @@ class OldVersionCommand extends Command
 
                 // Only continue if not empty, empty set is acceptable (exit OK)
                 if (!$incidentsProcess->notEmpty()) {
-                    $this->warning("No evidence build, no results from parser for {$evidence->ID}");
+                    $this->warn("No evidence build, no results from parser for {$evidence->ID}");
                     continue;
                 }
 
