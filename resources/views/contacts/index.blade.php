@@ -15,8 +15,6 @@
             <th>{{ trans_choice('misc.accounts', 1) }}</th>
             <th>{{ trans('contacts.reference') }}</th>
             <th>{{ trans('misc.name') }}</th>
-            <th>{{ trans('misc.email') }}</th>
-            <th>{{ trans('contacts.api_host') }}</th>
             <th>{{ trans('contacts.notification') }}</th>
             <th class="text-right">{{ trans('misc.action') }}</th>
         </tr>
@@ -50,8 +48,6 @@
                 { data: 'account_id', name: 'account_id' },
                 { data: 'reference', name: 'reference' },
                 { data: 'name', name: 'name' },
-                { data: 'email', name: 'email' },
-                { data: 'api_host', name: 'api_host' },
                 { data: 'auto_notify', name: 'auto_notify' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
             ]
