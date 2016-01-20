@@ -36,5 +36,6 @@ class Kernel extends HttpKernel
         'guest' => \AbuseIO\Http\Middleware\RedirectIfAuthenticated::class,
         'permission' => \AbuseIO\Http\Middleware\CheckPermission::class,
         'ash.token' => \AbuseIO\Http\Middleware\CheckAshToken::class,
+        'checkaccount' => \AbuseIO\Http\Middleware\CheckAccount::class,
     ];
 }

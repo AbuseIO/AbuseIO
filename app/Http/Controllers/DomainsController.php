@@ -23,6 +23,10 @@ class DomainsController extends Controller
     public function __construct()
     {
         parent::__construct();
+
+        // is the logged in account allowed to execute an action on the Domain
+        $this->middleware('checkaccount:Domain', ['except' => ['search', 'index', 'create', 'store']]);
+
     }
 
     /**

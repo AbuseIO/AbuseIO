@@ -91,6 +91,24 @@ class Domain extends Model
     }
 
     /**
+     * Static method to check if the account has access to the model instance
+     *
+     * @param $model_id
+     * @param $account
+     * @return bool
+     */
+    public static function checkAccountAccess($model_id, $account)
+    {
+        // early return when we are in the system account
+        if ($account->isSystemAccount())
+            return true;
+
+        $domain = Domain::find($model_id);
+        return ($domain->contact->account->id == $account->id);
+    }
+
+
+    /**
      * Returns the contact for this domain
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

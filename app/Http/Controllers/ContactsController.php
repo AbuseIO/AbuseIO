@@ -22,6 +22,9 @@ class ContactsController extends Controller
     public function __construct()
     {
         parent::__construct();
+
+        // is the logged in account allowed to execute an action on the Contact
+        $this->middleware('checkaccount:Contact', ['except' => ['search', 'index', 'create', 'store']]);
     }
 
     /**
@@ -31,7 +34,12 @@ class ContactsController extends Controller
      */
     public function search()
     {
-        $contacts = Contact::all();
+        $auth_account = $this->auth_user->account;
+        if ($auth_account->isSystemAccount()) {
+            $contacts = Contact::all();
+        } else {
+            $contacts = Contact::where('account_id', '=', $auth_account->id);
+        }
 
         return Datatables::of($contacts)
             // Create the action buttons
