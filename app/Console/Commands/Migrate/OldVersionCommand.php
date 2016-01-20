@@ -37,6 +37,10 @@ class OldVersionCommand extends Command
     protected $signature = 'migrate:oldversion
                             {--p|prepare : Prepares the migration by building all required caches }
                             {--s|start : Start the migration using cached evidence }
+                            {--skipContacts : Skip importing the contacts }
+                            {--skipNetblocks : Skip importing the netblocks }
+                            {--skipNotes : Skip importing the notes }
+                            {--startFrom=1 : Start from ticket ID }
     ';
 
     /**
@@ -268,125 +272,134 @@ class OldVersionCommand extends Command
 
 
         if (!empty($this->option('start'))) {
-            $this->info('starting migration - phase 1 - contact data');
 
-            DB::setDefaultConnection('abuseio3');
+            if (empty($this->option('skipContacts'))) {
+                $this->info('starting migration - phase 1 - contact data');
 
-            $customers = DB::table('Customers')
-                ->get();
+                DB::setDefaultConnection('abuseio3');
 
-            DB::setDefaultConnection('mysql');
+                $customers = DB::table('Customers')
+                    ->get();
 
-            $this->output->progressStart(count($customers));
-            foreach ($customers as $customer) {
-                $newContact = new Contact();
-                $newContact->reference      = $customer->Code;
-                $newContact->name           = $customer->Name;
-                $newContact->email          = $customer->Contact;
-                $newContact->auto_notify    = $customer->AutoNotify;
-                $newContact->enabled        = 1;
-                $newContact->account_id     = $account->id;
-                $newContact->created_at     = Carbon::parse($customer->LastModified);
-                $newContact->updated_at     = Carbon::parse($customer->LastModified);
+                DB::setDefaultConnection('mysql');
 
-                $validation = Validator::make($newContact->toArray(), Contact::createRules());
+                $this->output->progressStart(count($customers));
+                foreach ($customers as $customer) {
+                    $newContact = new Contact();
+                    $newContact->reference      = $customer->Code;
+                    $newContact->name           = $customer->Name;
+                    $newContact->email          = $customer->Contact;
+                    $newContact->auto_notify    = $customer->AutoNotify;
+                    $newContact->enabled        = 1;
+                    $newContact->account_id     = $account->id;
+                    $newContact->created_at     = Carbon::parse($customer->LastModified);
+                    $newContact->updated_at     = Carbon::parse($customer->LastModified);
 
-                if ($validation->fails()) {
-                    $message = implode(' ', $validation->messages()->all());
-                    $this->error('fatal error while creating contacts :' . $message);
-                    $this->exception();
-                } else {
-                    $newContact->save();
+                    $validation = Validator::make($newContact->toArray(), Contact::createRules());
+
+                    if ($validation->fails()) {
+                        $message = implode(' ', $validation->messages()->all());
+                        $this->error('fatal error while creating contacts :' . $message);
+                        $this->exception();
+                    } else {
+                        $newContact->save();
+                    }
+
+                    $this->output->progressAdvance();
+                    echo " Working on contact {$customer->Code}      ";
                 }
-
-                $this->output->progressAdvance();
-                echo " Working on contact {$customer->Code}      ";
+                $this->output->progressFinish();
+            } else {
+                $this->info('skipping migration - phase 1 - contact data');
             }
-            $this->output->progressFinish();
 
+            if (empty($this->option('skipNetblocks'))) {
+                $this->info('starting migration - phase 2 - netblock data');
 
+                DB::setDefaultConnection('abuseio3');
 
+                $netblocks = DB::table('Netblocks')
+                    ->get();
 
-            $this->info('starting migration - phase 2 - netblock data');
+                DB::setDefaultConnection('mysql');
 
-            DB::setDefaultConnection('abuseio3');
+                $this->output->progressStart(count($netblocks));
+                foreach ($netblocks as $netblock) {
+                    $contact = FindContact::byId($netblock->CustomerCode);
 
-            $netblocks = DB::table('Netblocks')
-                ->get();
+                    if ($contact->reference != $netblock->CustomerCode) {
+                        $this->error('Contact lookup failed, mismatched results');
+                        $this->$this->exception();
+                    }
 
-            DB::setDefaultConnection('mysql');
+                    $newNetblock = new Netblock();
+                    $newNetblock->first_ip      = long2ip($netblock->begin_in);
+                    $newNetblock->last_ip       = long2ip($netblock->end_in);
+                    $newNetblock->description   =
+                        'Imported from previous AbuseIO version which did not include a description';
+                    $newNetblock->contact_id    = $contact->id;
+                    $newNetblock->enabled       = 1;
+                    $newNetblock->created_at    = Carbon::parse($netblock->LastModified);
+                    $newNetblock->updated_at    = Carbon::parse($netblock->LastModified);
 
-            $this->output->progressStart(count($netblocks));
-            foreach ($netblocks as $netblock) {
-                $contact = FindContact::byId($netblock->CustomerCode);
+                    $validation = Validator::make($newNetblock->toArray(), Netblock::createRules($newNetblock));
 
-                if ($contact->reference != $netblock->CustomerCode) {
-                    $this->error('Contact lookup failed, mismatched results');
-                    $this->$this->exception();
+                    if ($validation->fails()) {
+                        $message = implode(' ', $validation->messages()->all());
+                        $this->error('fatal error while creating contacts :' . $message);
+                        $this->exception();
+                    } else {
+                        $newNetblock->save();
+                    }
+
+                    $this->output->progressAdvance();
+                    echo " Working on netblock ". long2ip($netblock->begin_in) . "       ";
                 }
-
-                $newNetblock = new Netblock();
-                $newNetblock->first_ip      = long2ip($netblock->begin_in);
-                $newNetblock->last_ip       = long2ip($netblock->end_in);
-                $newNetblock->description   = 'Imported from previous AbuseIO version which did not include a description';
-                $newNetblock->contact_id    = $contact->id;
-                $newNetblock->enabled       = 1;
-                $newNetblock->created_at    = Carbon::parse($netblock->LastModified);
-                $newNetblock->updated_at    = Carbon::parse($netblock->LastModified);
-
-                $validation = Validator::make($newNetblock->toArray(), Netblock::createRules($newNetblock));
-
-                if ($validation->fails()) {
-                    $message = implode(' ', $validation->messages()->all());
-                    $this->error('fatal error while creating contacts :' . $message);
-                    $this->exception();
-                } else {
-                    $newNetblock->save();
-                }
-
-                $this->output->progressAdvance();
-                echo " Working on netblock ". long2ip($netblock->begin_in) . "       ";
+                $this->output->progressFinish();
+            } else {
+                $this->info('skipping migration - phase 2 - netblock data');
             }
-            $this->output->progressFinish();
 
+            if (empty($this->option('skipNotes'))) {
+                $this->info('starting migration - phase 4 - Notes');
 
+                DB::setDefaultConnection('abuseio3');
 
-            $this->info('starting migration - phase 4 - Notes');
+                $notes = DB::table('Notes')
+                    ->get();
 
-            DB::setDefaultConnection('abuseio3');
+                DB::setDefaultConnection('mysql');
 
-            $notes = DB::table('Notes')
-                ->get();
+                $this->output->progressStart(count($notes));
+                foreach ($notes as $note) {
+                    $newNote = new Note();
 
-            DB::setDefaultConnection('mysql');
+                    $newNote->id            = $note->ID;
+                    $newNote->ticket_id     = $note->ReportID;
+                    $newNote->submitter     = $note->Submittor;
+                    $newNote->text          = $note->Text;
+                    $newNote->hidden        = true;
+                    $newNote->viewed        = true;
+                    $newNote->created_at    = Carbon::parse($note->LastModified);
+                    $newNote->updated_at    = Carbon::parse($note->LastModified);
 
-            $this->output->progressStart(count($notes));
-            foreach ($notes as $note) {
-                $newNote = new Note();
+                    $validation = Validator::make($newNote->toArray(), Note::createRules());
 
-                $newNote->ticket_id     = $note->ReportID;
-                $newNote->submitter     = $note->Submittor;
-                $newNote->text          = $note->Text;
-                $newNote->hidden        = true;
-                $newNote->viewed        = true;
-                $newNote->created_at    = Carbon::parse($note->LastModified);
-                $newNote->updated_at    = Carbon::parse($note->LastModified);
+                    if ($validation->fails()) {
+                        $message = implode(' ', $validation->messages()->all());
+                        $this->error('fatal error while creating contacts :' . $message);
+                        $this->exception();
+                    } else {
+                        $newNote->save();
+                    }
 
-                $validation = Validator::make($newNote->toArray(), Note::createRules());
-
-                if ($validation->fails()) {
-                    $message = implode(' ', $validation->messages()->all());
-                    $this->error('fatal error while creating contacts :' . $message);
-                    $this->exception();
-                } else {
-                    $newNote->save();
+                    $this->output->progressAdvance();
+                    echo " Working on note {$note->ID}       ";
                 }
-
-                $this->output->progressAdvance();
-                echo " Working on note {$note->ID}       ";
+                $this->output->progressFinish();
+            } else {
+                $this->info('skipping migration - phase 3 - Notes');
             }
-            $this->output->progressFinish();
-
 
 
             $this->info('starting migration - phase 4 - ticket and evidence data');
@@ -410,6 +423,12 @@ class OldVersionCommand extends Command
             $this->output->progressStart($migrateCount);
 
             foreach ($tickets as $ticket) {
+                // Skip from, usefull when migration stopped at a certain point you can continue from
+                if ($ticket->ID <= $this->option('startFrom')) {
+                    $this->output->progressAdvance();
+                    echo " skipping events from ticket {$ticket->ID}";
+                    continue;
+                }
                 // Get the list of evidence ID's related to this ticket
                 DB::setDefaultConnection('abuseio3');
                 $evidenceLinks = DB::table('EvidenceLinks')
@@ -532,15 +551,26 @@ class OldVersionCommand extends Command
                         // which basicly ignored a few incidents because they werent considered unique (which
                         // they were with the domain name)
                         $ip = $newTicket->ip;
-                        $incidentTmp = $incidents->$ip;
-                        $incident = $incidentTmp[0];
+                        if (property_exists($incidents, $ip)) {
+                            $incidentTmp = $incidents->$ip;
+                            $incident = $incidentTmp[0];
 
-                        $newEvent = new Event;
-                        $newEvent->evidence_id  = $evidenceID;
-                        $newEvent->information  = $incident->information;
-                        $newEvent->source       = $incident->source;
-                        $newEvent->ticket_id    = $newTicket->id;
-                        $newEvent->timestamp    = $incident->timestamp;
+                            $newEvent = new Event;
+                            $newEvent->evidence_id  = $evidenceID;
+                            $newEvent->information  = $incident->information;
+                            $newEvent->source       = $incident->source;
+                            $newEvent->ticket_id    = $newTicket->id;
+                            $newEvent->timestamp    = $incident->timestamp;
+                        } else {
+                            // Parser did not find any related evidence so replay it from the ticket only reason
+                            // Why it happends here if DNS has changed and google report cannot be matched
+                            $newEvent = new Event;
+                            $newEvent->evidence_id  = $evidenceID;
+                            $newEvent->information  = $ticket->Information;
+                            $newEvent->source       = $ticket->Source;
+                            $newEvent->ticket_id    = $newTicket->id;
+                            $newEvent->timestamp    = $ticket->FirstSeen;
+                        }
 
                         // Validate the model before saving
                         $validator = Validator::make(
