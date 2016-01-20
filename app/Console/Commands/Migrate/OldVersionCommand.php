@@ -227,6 +227,7 @@ class OldVersionCommand extends Command
 
                 // Only continue if not empty, empty set is acceptable (exit OK)
                 if (!$incidentsProcess->notEmpty()) {
+                    $this->warning("No evidence build, no results from parser for {$evidence->ID}");
                     continue;
                 }
 
@@ -444,12 +445,15 @@ class OldVersionCommand extends Command
                     !empty(json_decode($ticket->Information)->importnote)
                 ) {
                     // Manually build the evidence
+                    $this->warning("Ticket {$ticket->ID} needs a lot of magic");
                     continue;
                 }
 
 
                 if (count($evidenceLinks) != (int)$ticket->ReportCount) {
                     // Count does not match, known 3.0 bug so we will do a little magic to fix that
+                    $this->warning("Ticket {$ticket->ID} needs a little magic");
+                    continue;
                 } else {
                     // Start with building a classification lookup table  and switch out name for ID
                     // But first fix the names:
