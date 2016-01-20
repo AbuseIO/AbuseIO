@@ -54,5 +54,3 @@ class CreateCommand extends AbstractCreateCommand
         return Validator::make($model->toArray(), Netblock::createRules($model));
     }
 }
-
-
