@@ -19,6 +19,15 @@
         @if ($errors->has('introduction_text')) <p class="help-block">{{ $errors->first('introduction_text') }}</p> @endif
     </div>
 </div>
+@if ($auth_user->account->isSystemAccount())
+<div class="form-group @if ($errors->has('account_id')) has-error @endif">
+    {!! Form::label('account_id', trans_choice('misc.accounts', 1).':', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-10">
+        {!! Form::select('account_id', $account_selection, $selected, ['class' => 'form-control']) !!}
+        @if ($errors->has('account_id')) <p class="help-block">{{ $errors->first('account_id') }}</p> @endif
+    </div>
+</div>
+@endif
 <div class="form-group @if ($errors->has('introduction_text')) has-error @endif">
     {!! Form::label('logo', trans('brands.logo').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">

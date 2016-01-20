@@ -75,6 +75,15 @@ Route::group(
                 'uses' => 'BrandsController@edit'
             ]
         );
+        // Access to activate object
+        route::get(
+            '{brands}/activate',
+            [
+                'middleware' => 'permission:brands_edit',
+                'as' => 'activate',
+                'uses' => 'BrandsController@activate'
+            ]
+        );
         route::patch(
             '{brands}',
             [

@@ -3,11 +3,13 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\BrandFormRequest;
+use AbuseIO\Models\Account;
 use Illuminate\Filesystem\Filesystem;
 use DB;
 use Exception;
 use AbuseIO\Http\Requests;
 use AbuseIO\Models\Brand;
+use Log;
 use yajra\Datatables\Datatables;
 use Redirect;
 
@@ -50,19 +52,35 @@ class BrandsController extends Controller
         $account = $this->auth_user->account;
 
         //return all brands when we are in the system account
-        //in a normal account only show the current linked one
+        //in a normal account only show the active and the created
 
         if ($account->isSystemAccount()) {
             $brands = Brand::all();
         } else {
-            // retrieve it as a collection
-            $brands = Brand::where('id', '=', $account->brand->id)->get();
+            // retrieve the active brand as a collection
+            $active_brands = Brand::where('id', '=', $account->active_brand->id)->get();
+
+            // retrieve the created accounts
+            $created_brands = Brand::whereIn('id', $account->brands->lists('id'))->get();
+
+            $brands = $active_brands->merge($created_brands);
+
         }
 
         return Datatables::of($brands)
             ->addColumn(
+                'status',
+                function ($brand) use ($account)
+                {
+                  if ($account->brand_id == $brand->id) {
+                      return trans('misc.active');
+                  } else {
+                      return trans('misc.inactive');
+                  }
+                })
+            ->addColumn(
                 'actions',
-                function ($brand) {
+                function ($brand) use ($account){
                     $actions = \Form::open(
                         [
                             'route' => [
@@ -73,6 +91,11 @@ class BrandsController extends Controller
                             'class' => 'form-inline'
                         ]
                     );
+                    if ($account->brand_id != $brand->id) {
+                        $actions .= ' <a href="brands/' . $brand->id .
+                            '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> ' .
+                            trans('misc.button.activate') . '</a> ';
+                    }
                     $actions .= ' <a href="brands/' . $brand->id .
                         '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
                         trans('misc.button.show').'</a> ';
@@ -94,7 +117,7 @@ class BrandsController extends Controller
             ->addColumn(
                 'logo',
                 function ($brand) {
-                    $logo = '<img src="/admin/logo/' . $brand->id .'" height="40px"/>';
+                    $logo = '<img src="/admin/logo/' . $brand->id .'" width="60px"/>';
                     return $logo;
                 }
             )
@@ -108,7 +131,11 @@ class BrandsController extends Controller
      */
     public function create()
     {
+        $accounts = Account::lists('name', 'id');
+
         return view('brands.create')
+            ->with('account_selection', $accounts)
+            ->with('selected', null)
             ->with('brand', null)
             ->with('auth_user', $this->auth_user);
     }
@@ -143,30 +170,16 @@ class BrandsController extends Controller
         }
 
         try {
-            // begin transaction pass both $input and $account to the closure
-            DB::transaction(
-                function () use ($input, $account) {
+            if (!$account->isSystemAccount()) {
+                $input['account_id'] = $account->id;
+            }
 
-                    $brand = Brand::create($input);
-                    if (!$brand) {
-                        // when we can't save the brand, throw an exception
-                        throw new Exception("Couldn't create new brand");
-                    }
+            $brand = Brand::create($input);
 
-                    // if our current account isn't the system account,
-                    // link the new brand to the current account
-                    if (!$account->isSystemAccount()) {
-                        $account->brand_id = $brand->id;
-                        $result = $account->save();
-
-                        // when we can't save the account, throw an exception
-                        // DB::transaction will automatically rollback
-                        if (!$result) {
-                            throw new Exception('Something went wrong, while linking the brand to the account');
-                        }
-                    }
-                }
-            );
+            if (!$brand) {
+                // when we can't save the brand, throw an exception
+                throw new Exception("Couldn't create new brand");
+            }
         } catch (Exception $e) {
             return Redirect::route('admin.brands.create')
                 ->withInput($input)
@@ -187,6 +200,7 @@ class BrandsController extends Controller
     {
         return view('brands.show')
             ->with('brand', $brand)
+            ->with('account', $brand->account)
             ->with('auth_user', $this->auth_user);
     }
 
@@ -221,20 +235,18 @@ class BrandsController extends Controller
      */
     public function edit(Brand $brand)
     {
+
+        $accounts = Account::lists('name', 'id');
+
         // may we edit this brand (is the brand connected to our account)
         if (!$brand->mayEdit($this->auth_user)) {
             return Redirect::route('admin.brands.show', $brand->id)
                 ->with('message', 'User is not authorized to edit this brand.');
         }
 
-        // if we are authorized, but the brand is the default brand and we
-        // are not part of the system account, we probably want to create a new
-        // brand instead
-        if ($brand->isDefault() && !$this->auth_user->account->isSystemAccount()) {
-            return Redirect::route('admin.brands.create');
-        }
-
         return view('brands.edit')
+            ->with('account_selection', $accounts)
+            ->with('selected', $brand->account_id)
             ->with('brand', $brand)
             ->with('auth_user', $this->auth_user);
     }
@@ -285,5 +297,22 @@ class BrandsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Set the brand as the active brand on the current account
+     *
+     * @param Brand $brand
+     */
+    public function activate(Brand $brand)
+    {
+        $account = $this->auth_user->account;
+        $account->brand_id = $brand->id;
+        $account->save();
+
+        //dd($account);
+
+        return Redirect::route('admin.brands.show', $brand->id)
+            ->with('message', 'Brand has been activated.');
     }
 }

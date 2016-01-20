@@ -41,6 +41,7 @@ return [
     'button.visible'        => 'Zichtbaar',
     'button.read'           => 'Gelezen',
     'button.unread'         => 'Ongelezen',
+    'button.activate'       => 'Activeer',
 
     // Miscellaneous
     'all'               => 'Alle',
@@ -79,5 +80,8 @@ return [
     'both'              => 'Beide',
     'uri'               => 'URI / Pad',
     'roles'             => 'Rol|Rollen',
+    'active'            => 'Actief',
+    'inactive'          => 'Inactief',
+
 
 ];

@@ -4,9 +4,7 @@
 <h1 class="page-header">{{ trans('misc.nav_brands') }}</h1>
 <div class="row">
     <div class="col-md-3 col-md-offset-9 text-right">
-        @if ($auth_user->account->isSystemAccount() )
         {!! link_to_route('admin.brands.create', trans('brands.button.new_brand'), [ ], ['class' => 'btn btn-info']) !!}
-        @endif
     </div>
 </div>
 
@@ -21,6 +19,7 @@
         <th>{{ trans('misc.company_name') }}</th>
         <th>{{ trans('misc.text') }}</th>
         <th>{{ trans('brands.logo') }}</th>
+        <th>{{ trans('misc.status') }}</th>
         <th class="text-right">{{ trans('misc.action') }}</th>
     </tr>
     </thead>
@@ -52,6 +51,7 @@
             { data: 'company_name', name: 'company_name' },
             { data: 'introduction_text', name: 'introduction_text' },
             { data: 'logo', name: 'logo' },
+            { data: 'status', name: 'status' },
             { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
         ]
     });

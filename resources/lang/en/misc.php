@@ -41,6 +41,8 @@ return [
     'button.visible'        => 'Visible',
     'button.read'           => 'Read',
     'button.unread'         => 'Unread',
+    'button.activate'       => 'Activate',
+
 
     // Miscellaneous
     'all'               => 'All',
@@ -79,4 +81,6 @@ return [
     'both'              => 'Both',
     'uri'               => 'URI / Path',
     'roles'             => 'Role|Roles',
+    'active'            => 'Active',
+    'inactive'          => 'Inactive',
 ];

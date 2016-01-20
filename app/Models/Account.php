@@ -4,8 +4,9 @@ namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use AbuseIO\Models\Brand;
 use Log;
-
+    
 /**
  * Class Account
  * @package AbuseIO\Models
@@ -191,6 +192,25 @@ class Account extends Model
         return $this->mayDisable($user);
     }
 
+    /**
+     * Accessor for the active brand
+     *
+     * @return Brand
+     */
+    public function getActiveBrandAttribute()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * Mutator for the active brand
+     * @param \AbuseIO\Models\Brand $brand
+     *
+     */
+    public function setActiveBrandAttribute (Brand $brand)
+    {
+        $this->brand = $brand;
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -205,7 +225,6 @@ class Account extends Model
     public function users()
     {
         return $this->hasMany('AbuseIO\Models\User');
-
     }
 
     /**
@@ -223,6 +242,14 @@ class Account extends Model
     public function brand()
     {
         return $this->belongsTo('AbuseIO\Models\Brand');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function brands()
+    {
+        return $this->hasMany('AbuseIO\Models\Brand');
     }
 
     /**

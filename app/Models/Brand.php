@@ -4,6 +4,7 @@ namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use AbuseIO\Models\Account;
 
 /**
  * Class Account
@@ -39,6 +40,7 @@ class Brand extends Model
         'company_name',
         'logo',
         'introduction_text',
+        'account_id',
     ];
 
     /**
@@ -186,6 +188,15 @@ class Brand extends Model
     }
 
 
+    /**
+     * @return Account
+     */
+    public function getCreatorAccountAttribute()
+    {
+        return $this->account;
+    }
+
+
     /*
      |--------------------------------------------------------------------------
      | Relationship Methods
@@ -198,5 +209,13 @@ class Brand extends Model
     public function accounts()
     {
         return $this->hasMany('AbuseIO\Models\Account');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function account()
+    {
+        return $this->belongsTo('AbuseIO\Models\Account');
     }
 }

@@ -23,6 +23,9 @@
     <dt>{{ trans('misc.text') }}</dt>
     <dd>{{ $brand->introduction_text }}</dd>
 
+    <dt>{{ trans_choice('misc.accounts',1) }}</dt>
+    <dd>{{ $account->name }}</dd>
+
     <dt>{{ trans('brands.logo') }}</dt>
     <dd><img src="/admin/logo/{{ $brand->id }}" alt="{{ $brand->company_name }}"/></dd>
 
