@@ -445,14 +445,14 @@ class OldVersionCommand extends Command
                     !empty(json_decode($ticket->Information)->importnote)
                 ) {
                     // Manually build the evidence
-                    $this->warning("Ticket {$ticket->ID} needs a lot of magic");
+                    $this->warn("Ticket {$ticket->ID} needs a lot of magic");
                     continue;
                 }
 
 
                 if (count($evidenceLinks) != (int)$ticket->ReportCount) {
                     // Count does not match, known 3.0 bug so we will do a little magic to fix that
-                    $this->warning("Ticket {$ticket->ID} needs a little magic");
+                    $this->warn("Ticket {$ticket->ID} needs a little magic");
                     continue;
                 } else {
                     // Start with building a classification lookup table  and switch out name for ID
