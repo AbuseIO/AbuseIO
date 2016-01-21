@@ -25,7 +25,7 @@ class DomainsController extends Controller
         parent::__construct();
 
         // is the logged in account allowed to execute an action on the Domain
-        $this->middleware('checkaccount:Domain', ['except' => ['search', 'index', 'create', 'store']]);
+        $this->middleware('checkaccount:Domain', ['except' => ['search', 'index', 'create', 'store', 'export']]);
 
     }
 
@@ -36,8 +36,16 @@ class DomainsController extends Controller
      */
     public function search()
     {
+        $auth_account = $this->auth_user->account;
+
         $domains = Domain::select('domains.*', 'contacts.name as contacts_name')
             ->leftJoin('contacts', 'contacts.id', '=', 'domains.contact_id');
+
+        if (!$auth_account->isSystemAccount()) {
+            $domains = $domains
+                ->leftJoin('accounts', 'accounts.id', '=', 'contacts.account_id')
+                ->where('accounts.id', '=', $auth_account->id);
+        }
 
         return Datatables::of($domains)
             ->addColumn(
@@ -104,7 +112,17 @@ class DomainsController extends Controller
      */
     public function export($format)
     {
-        $domains = Domain::all();
+        $auth_account = $this->auth_user->account;
+
+        if ($auth_account->isSystemAccount()) {
+            $domains = Domain::all();
+        } else {
+            $domains = Domain::select('domains.*')
+                ->leftJoin('contacts', 'contacts.id', '=', 'domains.contact_id')
+                ->leftJoin('accounts', 'accounts.id', '=', 'contacts.account_id')
+                ->where('accounts.id', '=', $auth_account->id);
+        }
+
 
         if ($format === 'csv') {
             $columns = [

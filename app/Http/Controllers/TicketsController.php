@@ -34,6 +34,10 @@ class TicketsController extends Controller
     public function __construct()
     {
         parent::__construct();
+
+        // is the logged in account allowed to execute an action on the Domain
+        $this->middleware('checkaccount:Ticket', ['except' => ['search', 'index', 'create', 'store', 'export']]);
+
     }
 
     /**
@@ -43,7 +47,9 @@ class TicketsController extends Controller
      */
     public function search()
     {
-        //$tickets = Ticket::all();
+
+        $auth_account = $this->auth_user->account;
+
         $tickets = Ticket::select(
             'tickets.id',
             'tickets.ip',
@@ -76,6 +82,12 @@ class TicketsController extends Controller
                 }
             )
             ->groupBy('tickets.id');
+
+        if (!$auth_account->isSystemAccount())
+        {
+            $tickets = $tickets->where('tickets.ip_contact_account_id', '=', $auth_account->id)
+                ->orWhere('tickets.domain_contact_account_id', '=', $auth_account->id);
+        }
 
         return Datatables::of($tickets)
             // Create the action buttons

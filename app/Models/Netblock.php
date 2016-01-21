@@ -100,6 +100,25 @@ class Netblock extends Model
         return $rules;
     }
 
+    /**
+     * Static method to check if the account has access to the model instance
+     *
+     * @param $model_id
+     * @param $account
+     * @return bool
+     */
+    public static function checkAccountAccess($model_id, $account)
+    {
+        // early return when we are in the system account
+        if ($account->isSystemAccount())
+            return true;
+
+        $netblock = Netblock::find($model_id);
+
+        return ($netblock->contact->account->id == $account->id);
+    }
+
+
     // Relationships
 
     /**

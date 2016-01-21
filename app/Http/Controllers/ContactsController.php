@@ -24,7 +24,7 @@ class ContactsController extends Controller
         parent::__construct();
 
         // is the logged in account allowed to execute an action on the Contact
-        $this->middleware('checkaccount:Contact', ['except' => ['search', 'index', 'create', 'store']]);
+        $this->middleware('checkaccount:Contact', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
 
     /**
@@ -117,7 +117,16 @@ class ContactsController extends Controller
      */
     public function export($format)
     {
-        $contacts  = Contact::all();
+
+        $auth_account = $this->auth_user->account;
+
+        if ($auth_account->isSystemAccount()) {
+            $contacts = Contact::all();
+        } else {
+            $contacts = Contact::select('contacts.*')
+                ->leftJoin('accounts', 'accounts.id', '=', 'contacts.account_id')
+                ->where('accounts.id', '=', $auth_account->id);
+        }
 
         if ($format === 'csv') {
             $columns = [

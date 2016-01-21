@@ -23,6 +23,10 @@ class NetblocksController extends Controller
     public function __construct()
     {
         parent::__construct();
+
+        // is the logged in account allowed to execute an action on the Domain
+        $this->middleware('checkaccount:Netblock', ['except' => ['search', 'index', 'create', 'store', 'export']]);
+
     }
 
     /**
@@ -32,10 +36,19 @@ class NetblocksController extends Controller
      */
     public function search()
     {
+
+        $auth_account = $this->auth_user->account;
+
         $netblocks = Netblock::select('netblocks.*', 'contacts.name as contacts_name')
             ->leftJoin('contacts', 'contacts.id', '=', 'netblocks.contact_id');
 
-        return Datatables::of($netblocks)
+        if (!$auth_account->isSystemAccount()) {
+            $netblocks = $netblocks
+                ->leftJoin('accounts', 'accounts.id', '=', 'contacts.account_id')
+                ->where('accounts.id', '=', $auth_account->id);
+        }
+
+            return Datatables::of($netblocks)
             ->addColumn(
                 'actions',
                 function ($netblock) {
@@ -100,7 +113,16 @@ class NetblocksController extends Controller
      */
     public function export($format)
     {
-        $netblocks  = Netblock::all();
+        $auth_account = $this->auth_user->account;
+
+        if ($auth_account->isSystemAccount()) {
+            $netblocks = Netblock::all();
+        } else {
+            $netblocks = Netblock::select('netblocks.*')
+                ->leftJoin('contacts', 'contacts.id', '=', 'netblocks.contact_id')
+                ->leftJoin('accounts', 'accounts.id', '=', 'contacts.account_id')
+                ->where('accounts.id', '=', $auth_account->id);
+        }
 
         if ($format === 'csv') {
             $columns = [
