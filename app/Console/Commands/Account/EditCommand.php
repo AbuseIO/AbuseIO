@@ -29,7 +29,7 @@ class EditCommand extends AbstractEditCommand
 
     protected function getModelFromRequest()
     {
-        $account = Account::find($this->argument('id'))->first();
+        $account = Account::find($this->argument('id'));
 
         $this->updateFieldWithOption($account, 'name');
         $this->updateFieldWithOption($account, 'brand_id');
@@ -40,6 +40,6 @@ class EditCommand extends AbstractEditCommand
 
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Account::createRules($model));
+        return Validator::make($model->toArray(), Account::updateRules($model));
     }
 }

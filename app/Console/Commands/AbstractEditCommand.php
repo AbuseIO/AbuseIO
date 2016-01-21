@@ -95,13 +95,11 @@ abstract class AbstractEditCommand extends Command
 
     protected function updateFieldWithOption($model, $option)
     {
-        $model->name = "abc";
-//        if ($model->hasAttribute($option)) {
-//            dd($option);
-//            if (! empty($this->getOption($option))) {
-//                $this->$option = $this->option($option);
-//            }
-//        }
+        if (array_key_exists($option, $model->getAttributes())) {
+            if (! empty($this->option($option))) {
+                $model->$option = $this->option($option);
+            }
+        }
     }
 
     abstract public function getOptionsList();
