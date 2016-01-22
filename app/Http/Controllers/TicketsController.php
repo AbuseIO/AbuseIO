@@ -253,9 +253,10 @@ class TicketsController extends Controller
          */
         $evidence = new EvidenceSave;
         $evidenceData = [
-            'CreatedBy' => trim($this->auth_user->fullName()) . ' (' . $this->auth_user->email .')',
-            'receivedOn' => time(),
+            'CreatedBy'     => trim($this->auth_user->fullName()) . ' (' . $this->auth_user->email .')',
+            'receivedOn'    => time(),
             'submittedData' => $ticket->all(),
+            'attachments'   => [],
         ];
         if (!empty($attachment)) {
             $evidenceData['attachments'][0] = $attachment;
