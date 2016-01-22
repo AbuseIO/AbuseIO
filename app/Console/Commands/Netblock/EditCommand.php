@@ -2,99 +2,48 @@
 
 namespace AbuseIO\Console\Commands\Netblock;
 
-use Illuminate\Console\Command;
-use AbuseIO\Models\User;
+use AbuseIO\Console\Commands\AbstractEditCommand;
 use AbuseIO\Models\Netblock;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
-use Carbon;
 
-class EditCommand extends Command
+class EditCommand extends AbstractEditCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'netblock:edit
-                            {--id : Id for the block you wish to update }
-                            {--contact : e-mail address or id from contact }
-                            {--first_ip : Start Ip address from netblock  }
-                            {--last_ip : End Ip addres from netblock }
-                            {--description : Description }
-                            {--enabled : Set the account to be enabled }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Changes information from a netblock';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    public function getOptionsList()
     {
-        parent::__construct();
+        return new InputDefinition([
+            new inputArgument('id', null, 'Netblock id to edit'),
+            new InputOption('contact_id', null, InputOption::VALUE_OPTIONAL, 'Id for contact'),
+            new InputOption('first_ip', null, InputOption::VALUE_OPTIONAL,  'First ip'),
+            new InputOption('last_ip', null, InputOption::VALUE_OPTIONAL, 'Last ip'),
+            new InputOption('description',  null, InputOption::VALUE_OPTIONAL,  'Description'),
+            new InputOption('enabled',  null, InputOption::VALUE_OPTIONAL,  'Enabled')
+        ]);
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return boolean
-     */
-    public function handle()
+    public function getAsNoun()
     {
-        if (empty($this->option('id'))) {
-            $this->warn('The required id argument was not passed, try --help');
-            return false;
-        }
-        /** @var Netblock|null $netblock */
-        $netblock = Netblock::find($this->option('id'));
+        return 'netblock';
+    }
 
-        if (null === $netblock) {
-            $this->error('Unable to find netblock with this criteria');
-            return false;
-        }
+    protected function getModelFromRequest()
+    {
+        $model = Netblock::find($this->argument('id'));
 
-        if (!empty($this->option("contact"))) {
-            /** @var User|null $user */
-            $user = User::find($this->option('contact'))?: User::where('email', '=', $this->option("contact"))->first();
-            if (null === $user) {
-                $this->error("Unable to find contact with this criteria");
-                return false;
-            }
-            $netblock->contact()->associate($user);
-        }
+        $this->updateFieldWithOption($model, 'contact_id');
+        $this->updateFieldWithOption($model, 'first_ip');
+        $this->updateFieldWithOption($model, 'last_ip');
+        $this->updateFieldWithOption($model, 'description');
+        $this->updateFieldWithOption($model, 'enabled');
 
-        $stringOptions = ["first_ip", "last_ip", "description"];
-        foreach ($stringOptions as $option) {
-            if (!empty($this->option($option))) {
-                $netblock->$option = $this->option($option);
-            }
-        }
+        return $model;
+    }
 
-        if (!empty($this->option("enabled"))) {
-            $netblock->enabled = castStringToBool($this->option("enabled"));
-        }
-
-
-        $validation = Validator::make($netblock->toArray(), Netblock::updateRules($netblock));
-
-        if ($validation->fails()) {
-            foreach ($validation->messages()->all() as $message) {
-                $this->warn($message);
-            }
-
-            $this->error('Failed to create the netblock due to validation warnings');
-
-            return false;
-        }
-        $netblock->save();
-
-        $this->info("Netblock has been successfully updated");
-
-        return true;
+    protected function getValidator($model)
+    {
+        return Validator::make($model->toArray(), Netblock::updateRules($model));
     }
 }
