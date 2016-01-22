@@ -108,7 +108,7 @@ class OldVersionCommand extends Command
                     ->get();
 
                 if (count($evidenceLinks) === 0) {
-                    echo " skipping unlinked evidence ID {$evidence->ID}";
+                    echo " skipping unlinked evidence ID {$evidence->ID}         ";
                     continue;
                 }
 
@@ -121,7 +121,7 @@ class OldVersionCommand extends Command
                 if (is_file($filename)) {
                     continue;
                 } else {
-                    echo " working on evidence ID {$evidence->ID}";
+                    echo " working on evidence ID {$evidence->ID}                    ";
                 }
 
                 $rawEmail = $evidence->Data;
