@@ -4,7 +4,6 @@ namespace AbuseIO\Console\Commands\Account;
 
 use AbuseIO\Console\Commands\AbstractEditCommand;
 use AbuseIO\Models\Account;
-use Prophecy\Argument;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -29,13 +28,13 @@ class EditCommand extends AbstractEditCommand
 
     protected function getModelFromRequest()
     {
-        $account = Account::find($this->argument('id'));
+        $model = Account::find($this->argument('id'));
 
-        $this->updateFieldWithOption($account, 'name');
-        $this->updateFieldWithOption($account, 'brand_id');
-        $this->updateFieldWithOption($account, 'disabled');
+        $this->updateFieldWithOption($model, 'name');
+        $this->updateFieldWithOption($model, 'brand_id');
+        $this->updateFieldWithOption($model, 'disabled');
 
-        return $account;
+        return $model;
     }
 
     protected function getValidator($model)
