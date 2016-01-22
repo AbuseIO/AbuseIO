@@ -23,5 +23,5 @@
     <dt>Status</dt>
     <dd>{{ $domain->enabled ? trans('misc.enabled') : trans('misc.disabled') }}</dd>
 </dl>
-{!! link_to_route('admin.domains.index', trans('misc.button.back'), [], ['class' => 'btn btn-default top-buffer']) !!}
+
 @endsection

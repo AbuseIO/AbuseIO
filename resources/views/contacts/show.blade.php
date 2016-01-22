@@ -77,5 +77,5 @@
     </table>
 </div>
 @endif
-{!! link_to_route('admin.contacts.index', trans('misc.button.back'), [], ['class' => 'btn btn-default']) !!}
+
 @endsection

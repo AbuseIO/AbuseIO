@@ -52,5 +52,5 @@
     </tbody>
     </table>
 @endif
-{!! link_to_route('admin.accounts.index', trans('misc.button.back'), [], ['class' => 'btn btn-default top-buffer']) !!}
+
 @endsection

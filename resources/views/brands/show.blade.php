@@ -31,5 +31,4 @@
 
 </dl>
 
-{!! link_to_route('admin.brands.index', trans('misc.button.back'), [], ['class' => 'btn btn-default top-buffer']) !!}
 @endsection

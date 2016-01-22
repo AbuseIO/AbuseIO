@@ -39,5 +39,4 @@
     </dd>
 </dl>
 
-{!! link_to_route('admin.users.index', trans('misc.button.back'), [], ['class' => 'btn btn-default top-buffer']) !!}
 @endsection

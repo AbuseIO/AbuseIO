@@ -29,5 +29,5 @@
     <dt>Status</dt>
     <dd>{{ $netblock->enabled ? trans('misc.enabled') : trans('misc.disabled') }}</dd>
 </dl>
-{!! link_to_route('admin.netblocks.index', trans('misc.button.back'), [], ['class' => 'btn btn-default top-buffer']) !!}
+
 @endsection

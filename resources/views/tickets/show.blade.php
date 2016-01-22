@@ -263,6 +263,5 @@
                     </div>
                 </div>
         </div>
-        {!! link_to(URL::previous(), trans('misc.button.back'), ['class' => 'btn btn-default top-buffer']) !!}
     </div>
 @endsection
