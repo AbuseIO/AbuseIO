@@ -1,7 +1,7 @@
 {
 	"name": "abuseio/abuseio",
 	"description": "Open Source abusemanagement tool",
-	"version": "4.0.0-alpha2",
+	"version": "4.0.0-alpha3",
 	"keywords": ["abuse", "abuseio"],
 	"homepage": "http://abuse.io",
 	"type": "project",
@@ -65,8 +65,8 @@
         "abuseio/parser-woody": "1.1.*",
 
         "abuseio/collector-common": "1.1.*",
-        "abuseio/collector-rbl": "1.1.*",
-        "abuseio/collector-snds": "1.1.*",
+        "abuseio/collector-rbl": "1.2.*",
+        "abuseio/collector-snds": "1.2.*",
 
         "abuseio/notification-common": "1.1.*",
         "abuseio/notification-mail": "1.1.*",
