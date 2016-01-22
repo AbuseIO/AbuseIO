@@ -639,6 +639,7 @@ class OldVersionCommand extends Command
         // But first fix the names:
         $replaces = [
             'Possible DDOS sending NTP Server' => 'Possible DDoS sending Server',
+            'Possible DDOS sending DNS Server' => 'Possible DDoS sending Server',
         ];
         $old = array_keys($replaces);
         $new = array_values($replaces);
