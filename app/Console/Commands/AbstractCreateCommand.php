@@ -3,13 +3,11 @@
 namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 abstract class AbstractCreateCommand extends Command
 {
     /**
-     * Create a new command instance
+     * Create a new command instance.
      */
     public function __construct()
     {
@@ -19,7 +17,7 @@ abstract class AbstractCreateCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     final public function handle()
     {
@@ -46,10 +44,11 @@ abstract class AbstractCreateCommand extends Command
 
             return false;
         }
-
-        $this->info(
-            sprintf("The %s has been created", $this->getAsNoun())
-        );
+        $msg = sprintf('The %s has been created', $this->getAsNoun());
+        if (array_key_exists('id', $model->getAttributes())) {
+            $msg = sprintf('The %s has been created (id: %d)', $this->getAsNoun(), $model->id);
+        }
+        $this->info($msg);
 
         return true;
     }
@@ -75,11 +74,11 @@ abstract class AbstractCreateCommand extends Command
 
     final public function getName()
     {
-        return sprintf("%s:%s", $this->getAsNoun(), $this->setCommandName());
+        return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
     }
 
     /**
-     * Default subcommand name
+     * Default subcommand name.
      *
      * @return string
      */
@@ -88,9 +87,9 @@ abstract class AbstractCreateCommand extends Command
         return 'create';
     }
 
-    public final function getDescription()
+    final public function getDescription()
     {
-        return sprintf("Creates a new %s", $this->getAsNoun());
+        return sprintf('Creates a new %s', $this->getAsNoun());
     }
 
     abstract public function getArgumentsList();
