@@ -70,7 +70,7 @@ class OldVersionCommand extends Command
             $this->info('building required evidence cache files');
 
             $filesystem = new Filesystem;
-            $path       = storage_path() . '/migratation/';
+            $path       = storage_path() . '/migration/';
             umask(0007);
 
             if (!$filesystem->isDirectory($path)) {
