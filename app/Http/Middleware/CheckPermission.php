@@ -1,6 +1,7 @@
 <?php namespace AbuseIO\Http\Middleware;
 
 use Closure;
+use Auth;
 
 /**
  * Class CheckPermission
@@ -27,7 +28,9 @@ class CheckPermission
         }
 
 
-        $message = "Sorry! You are not authorized to access that resource. Missing permission : {$permission}";
+        Auth::logout();
+        $message = "Sorry! You are not authorized to access that resource and have been logged out." .
+            " Missing permission : {$permission}";
 
         $request->session()->flash(
             'message',
@@ -36,7 +39,7 @@ class CheckPermission
 
         // If we don't have the permission 'login_portal' and it is requested redirect to logout
         if ($permission === 'login_portal') {
-            return redirect('/auth/logout')
+            return redirect('/auth/login')
                 ->with(['message', $message]);
         }
 
