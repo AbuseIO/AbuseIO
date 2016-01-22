@@ -2,93 +2,46 @@
 
 namespace AbuseIO\Console\Commands\Domain;
 
-use Illuminate\Console\Command;
-use AbuseIO\Models\User;
+use AbuseIO\Console\Commands\AbstractEditCommand;
 use AbuseIO\Models\Domain;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
-use Carbon;
 
-class EditCommand extends Command
+class EditCommand extends AbstractEditCommand
 {
-
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'domain:edit
-                            {--id : Id for the block you wish to update }
-                            {--contact : e-mail address or id from contact }
-                            {--name : domain name  }
-                            {--enabled : Set the account to be enabled }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Changes information from a domain';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    public function getOptionsList()
     {
-        parent::__construct();
+        return new InputDefinition([
+            new inputArgument('id', InputArgument::REQUIRED, 'Account id to edit'),
+            new InputOption('contact', null, InputOption::VALUE_OPTIONAL, 'Contact id for domain'),
+            new InputOption('name', null, InputOption::VALUE_OPTIONAL,  'Name'),
+            new InputOption('enabled', null, InputOption::VALUE_OPTIONAL, 'true|false, Set the domain to be enabled'),
+        ]);
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return boolean
-     */
-    public function handle()
+    public function getAsNoun()
     {
-        if (empty($this->option('id'))) {
-            $this->warn('The required id argument was not passed, try --help');
-            return false;
+        return 'domain';
+    }
+
+    protected function getModelFromRequest()
+    {
+        return Domain::find($this->argument('id'));
+    }
+
+    protected function handleOptions($model)
+    {
+        $this->updateFieldWithOption($model, 'name');
+        $this->updateFieldWithOption($model, 'contact_id');
+        $this->updateFieldWithOption($model, 'enabled');
+    }
+
+    protected function getValidator($model)
+    {
+        if (null !== $model) {
+            return Validator::make($model->toArray(), Domain::updateRules($model));
         }
-        /** @var Domain|null $domain */
-        $domain = Domain::find($this->option('id'));
-
-        if (null === $domain) {
-            $this->error('Unable to find domain with this criteria');
-            return false;
-        }
-
-        if (!empty($this->option("contact"))) {
-            /** @var User|null $user */
-            $user = User::find($this->option('contact'))?: User::where('email', '=', $this->option("contact"))->first();
-            if (null === $user) {
-                $this->error("Unable to find contact with this criteria");
-                return false;
-            }
-            $domain->contact()->associate($user);
-        }
-
-        if (!empty($this->option("name"))) {
-            $domain->name = $this->option("name");
-        }
-
-        if (!empty($this->option("enabled"))) {
-            $domain->enabled = castStringToBool($this->option("enabled"));
-        }
-
-        $validation = Validator::make($domain->toArray(), Domain::updateRules($domain));
-
-        if ($validation->fails()) {
-            foreach ($validation->messages()->all() as $message) {
-                $this->warn($message);
-            }
-
-            $this->error('Failed to create the domain due to validation warnings');
-
-            return false;
-        }
-        $domain->save();
-
-        $this->info("Domain has been successfully updated");
-
-        return true;
     }
 }

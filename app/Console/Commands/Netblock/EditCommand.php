@@ -31,8 +31,11 @@ class EditCommand extends AbstractEditCommand
 
     protected function getModelFromRequest()
     {
-        $model = Netblock::find($this->argument('id'));
+        return Netblock::find($this->argument('id'));
+    }
 
+    protected function handleOptions($model)
+    {
         $this->updateFieldWithOption($model, 'contact_id');
         $this->updateFieldWithOption($model, 'first_ip');
         $this->updateFieldWithOption($model, 'last_ip');

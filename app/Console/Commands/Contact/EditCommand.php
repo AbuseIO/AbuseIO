@@ -31,16 +31,17 @@ class EditCommand extends AbstractEditCommand
 
     protected function getModelFromRequest()
     {
-        $model = Contact::find($this->argument('id'));
+        return Contact::find($this->argument('id'));
+    }
 
+    protected function handleOptions($model)
+    {
         $this->updateFieldWithOption($model, 'name');
         $this->updateFieldWithOption($model, 'reference');
         $this->updateFieldWithOption($model, 'account_id');
         $this->updateFieldWithOption($model, 'enabled');
         $this->updateFieldWithOption($model, 'mail');
         $this->updateFieldWithOption($model, 'api_host');
-
-        return $model;
     }
 
     protected function getValidator($model)

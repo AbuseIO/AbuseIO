@@ -28,13 +28,14 @@ class EditCommand extends AbstractEditCommand
 
     protected function getModelFromRequest()
     {
-        $model = Brand::find($this->argument('id'));
+        return Brand::find($this->argument('id'));
+    }
 
+    protected function handleOptions($model)
+    {
         $this->updateFieldWithOption($model, 'name');
         $this->updateFieldWithOption($model, 'company_name');
         $this->updateFieldWithOption($model, 'introduction_text');
-
-        return $model;
     }
 
     protected function getValidator($model)

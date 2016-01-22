@@ -24,9 +24,19 @@ abstract class AbstractEditCommand extends Command
     final public function handle()
     {
         $model = $this->getModelFromRequest();
+        if (null === $model) {
+            $this->error(
+                sprintf('Unable to find %s with this criteria', $this->getAsNoun())
+            );
+            return false;
+        }
+
+        $this->handleOptions($model);
+
+        $validation = $this->getValidator($model);
 
         /** @var  $validation */
-        $validation = $this->getValidator($model);
+
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
                 $this->warn($message);
@@ -55,6 +65,8 @@ abstract class AbstractEditCommand extends Command
     }
 
     abstract protected function getModelFromRequest();
+
+    abstract protected function handleOptions($model);
 
     abstract protected function getValidator($model);
 
@@ -95,9 +107,11 @@ abstract class AbstractEditCommand extends Command
 
     protected function updateFieldWithOption($model, $option)
     {
-        if (array_key_exists($option, $model->getAttributes())) {
-            if (! empty($this->option($option))) {
-                $model->$option = $this->option($option);
+        if ($model !== null) {
+            if (array_key_exists($option, $model->getAttributes())) {
+                if (!empty($this->option($option))) {
+                    $model->$option = $this->option($option);
+                }
             }
         }
     }
