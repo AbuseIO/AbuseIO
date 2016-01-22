@@ -99,11 +99,29 @@ class OldVersionCommand extends Command
 
             $this->output->progressStart(count($evidences));
             foreach ($evidences as $evidence) {
-                //echo $evidence->ID . PHP_EOL;
+                $this->output->progressAdvance();
+
+                // Before we go into an error, lets see if this evidence was even linked to any ticket at all
+                // If not we can ignore the error and just smile and wave
+                $evidenceLinks = DB::table('EvidenceLinks')
+                    ->where('EvidenceID', '=', $evidence->ID)
+                    ->get();
+
+                if (count($evidenceLinks) === 0) {
+                    echo " skipping unlinked evidence ID {$evidence->ID}";
+                    continue;
+                }
+
+                //if ($evidence->ID != 1305) {
+                //    continue;
+                //}
+
                 $filename = $path . "evidence_id_{$evidence->ID}.data";
 
                 if (is_file($filename)) {
                     continue;
+                } else {
+                    echo " working on evidence ID {$evidence->ID}";
                 }
 
                 $rawEmail = $evidence->Data;
@@ -145,16 +163,6 @@ class OldVersionCommand extends Command
                 if ($parser !== false) {
                     $parserResult = $parser->parse();
                 } else {
-                    // Before we go into an error, lets see if this evidence was even linked to any ticket at all
-                    // If not we can ignore the error and just smile and wave
-                    $evidenceLinks = DB::table('EvidenceLinks')
-                        ->where('EvidenceID', '=', $evidence->ID)
-                        ->get();
-
-                    if (count($evidenceLinks) === 0) {
-                        continue;
-                    }
-
                     $this->error(
                         'No parser available to handle message '.$evidence->ID.' from : ' . $evidence->Sender .
                         ' with subject: ' . $evidence->Subject
@@ -175,7 +183,7 @@ class OldVersionCommand extends Command
                         'Configuration has warnings set as critical and ' .
                         $parserResult['warningCount'] . ' warnings were detected.'
                     );
-
+                    //var_dump($rawEmail);
                     $this->exception();
                 }
 
@@ -263,8 +271,6 @@ class OldVersionCommand extends Command
 
                     return false;
                 }
-
-                $this->output->progressAdvance();
             }
 
             $this->output->progressFinish();
@@ -451,90 +457,88 @@ class OldVersionCommand extends Command
 
 
                 if (count($evidenceLinks) != (int)$ticket->ReportCount) {
-                    // Count does not match, known 3.0 bug so we will do a little magic to fix that
-                    $this->warn("Ticket {$ticket->ID} needs a little magic");
+                    // Count does not match, known 3.0 limitation related to not always saving all the data
+                    // so we will do a little magic to fix that
+
+                    // Create the ticket as usual
+                    $newTicket = $this->createTicket($ticket, $account);
+
+                    // Now this is the little magic, we need to calculate the offset and make sure that the first
+                    // and lastseen moments exactly match and the increments between those events are within that
+                    // same timeframe, but NOT duplicate.
+                    $firstSeen = (int)$ticket->FirstSeen;
+                    $lastSeen  = (int)$ticket->LastSeen;
+                    $elapsed = $lastSeen - $firstSeen;
+                    $step = (int)round($elapsed / $ticket->ReportCount);
+
+                    $offset = [
+                        'first'     => $firstSeen,
+                        'last'      => $lastSeen,
+                        'elapsed'   => $elapsed,
+                        'step'      => $step,
+                    ];
+                    for ($counter = 0; $counter <= $ticket->ReportCount; $counter++) {
+                        $offset[$counter] = $firstSeen + ($counter * $step);
+                    }
+
+                    // Make sure we end at the right point in time
+                    end($offset);
+                    $key = key($offset);
+                    $offset[$key] = $lastSeen;
+
+                    // Now recreate all the events
+                    for ($counter = 0; $counter <= $ticket->ReportCount; $counter++) {
+                        // Build new evidence file and write the evidence into the archive
+                        $evidence = new EvidenceSave;
+                        $evidenceData = [
+                            'CreatedBy'     => 'root@localhost.lan',
+                            'receivedOn'    => time(),
+                            'submittedData' => json_decode(json_encode($ticket), true),
+                            'attachments'   => [],
+                        ];
+                        if (!empty($attachment)) {
+                            $evidenceData['attachments'][0] = $attachment;
+                        }
+                        $evidenceFile = $evidence->save(json_encode($evidenceData));
+
+                        // Save the file reference into the database
+                        $evidenceSave = new Evidence();
+                        $evidenceSave->filename = $evidenceFile;
+                        $evidenceSave->sender   = 'root@localhost.lan';
+                        $evidenceSave->subject  = 'Migrated evidence with a little magic';
+                        $evidenceSave->save();
+
+                        // Write the event
+                        $newEvent = new Event;
+                        $newEvent->evidence_id  = $evidenceSave->id;
+                        $newEvent->information  = $ticket->Information;
+                        $newEvent->source       = $ticket->Source;
+                        $newEvent->ticket_id    = $newTicket->id;
+                        $newEvent->timestamp    = $offset[$counter];
+
+                        // Validate the model before saving
+                        $validator = Validator::make(
+                            json_decode(json_encode($newEvent), true),
+                            Event::createRules()
+                        );
+                        if ($validator->fails()) {
+                            $this->error(
+                                'DevError: Internal validation failed when saving the Event object ' .
+                                implode(' ', $validator->messages()->all())
+                            );
+                            $this->exception();
+                        }
+
+                        $newEvent->save();
+
+                        $this->output->progressAdvance();
+                        echo " Working on events from ticket {$ticket->ID}";
+                    }
+                    die();
                     continue;
                 } else {
-                    // Start with building a classification lookup table  and switch out name for ID
-                    // But first fix the names:
-                    $replaces = [
-                        'Possible DDOS sending NTP Server' => 'Possible DDoS sending Server',
-                    ];
-                    $old = array_keys($replaces);
-                    $new = array_values($replaces);
-                    $ticket->Class = str_replace($old, $new, $ticket->Class);
-                    foreach ((array)Lang::get('classifications') as $classID => $class) {
-                        if ($class['name'] == $ticket->Class) {
-                            $ticket->Class = $classID;
-                        }
-                    }
 
-                    // Also build a types lookup table and switch out name for ID
-                    foreach ((array)Lang::get('types.type') as $typeID => $type) {
-                        // Consistancy fixes:
-                        $ticket->Type = ucfirst(strtolower($ticket->Type));
-
-                        if ($type['name'] == $ticket->Type) {
-                            $ticket->Type = $typeID;
-                        }
-                    }
-
-                    // Create the ticket
-                    $newTicket = new Ticket();
-
-                    $newTicket->id                          = $ticket->ID;
-                    $newTicket->ip                          = $ticket->IP;
-                    $newTicket->domain                      = empty($ticket->Domain) ? '' : $ticket->Domain;
-                    $newTicket->class_id                    = $ticket->Class;
-                    $newTicket->type_id                     = $ticket->Type;
-
-                    $newTicket->ip_contact_account_id       = $account->id;
-                    $newTicket->ip_contact_reference        = $ticket->CustomerCode;
-                    $newTicket->ip_contact_name             = $ticket->CustomerName;
-                    $newTicket->ip_contact_email            = $ticket->CustomerContact;
-                    $newTicket->ip_contact_api_host         = '';
-                    $newTicket->ip_contact_auto_notify      = $ticket->AutoNotify;
-                    $newTicket->ip_contact_notified_count   = $ticket->NotifiedCount;
-
-                    $domainContact = FindContact::undefined();
-                    $newTicket->domain_contact_account_id   = $domainContact->account_id;
-                    $newTicket->domain_contact_reference    = $domainContact->reference;
-                    $newTicket->domain_contact_name         = $domainContact->name;
-                    $newTicket->domain_contact_email        = $domainContact->email;
-                    $newTicket->domain_contact_api_host     = $domainContact->api_host;
-                    $newTicket->domain_contact_auto_notify  = $domainContact->auto_notify;
-                    $newTicket->domain_contact_notified_count = 0;
-
-                    $newTicket->last_notify_count           = $ticket->LastNotifyReportCount;
-                    $newTicket->last_notify_timestamp       = $ticket->LastNotifyTimestamp;
-
-                    $newTicket->created_at                  = Carbon::createFromTimestamp($ticket->FirstSeen);
-                    $newTicket->updated_at                  = Carbon::parse($ticket->LastModified);
-
-                    if ($ticket->Status == 'CLOSED') {
-                        $newTicket->status_id               = 2;
-                    } elseif ($ticket->Status == 'OPEN') {
-                        $newTicket->status_id               = 1;
-                    } else {
-                        $this->error('Unknown ticket status');
-                        $this->exception();
-                    }
-
-                    // Validate the model before saving
-                    $validator = Validator::make(
-                        json_decode(json_encode($newTicket), true),
-                        Ticket::createRules()
-                    );
-                    if ($validator->fails()) {
-                        $this->error(
-                            'DevError: Internal validation failed when saving the Ticket object ' .
-                            implode(' ', $validator->messages()->all())
-                        );
-                        var_dump($ticket);
-                        $this->exception();
-                    }
-
-                    $newTicket->save();
+                    $newTicket = $this->createTicket($ticket, $account);
 
                     // Create all the events
                     foreach ($evidenceLinks as $evidenceLink) {
@@ -609,5 +613,104 @@ class OldVersionCommand extends Command
     {
         $this->error('fatal error happend, ending migration (empty DB, fix problem, try again)');
         die();
+    }
+
+    /**
+     * @param object $ticket
+     */
+    private function replayTicket($ticket)
+    {
+
+    }
+
+    /**
+     * @param $ticket
+     * @param $account
+     * @return Ticket
+     */
+    private function createTicket($ticket, $account)
+    {
+        // Start with building a classification lookup table  and switch out name for ID
+        // But first fix the names:
+        $replaces = [
+            'Possible DDOS sending NTP Server' => 'Possible DDoS sending Server',
+        ];
+        $old = array_keys($replaces);
+        $new = array_values($replaces);
+        $ticket->Class = str_replace($old, $new, $ticket->Class);
+        foreach ((array)Lang::get('classifications') as $classID => $class) {
+            if ($class['name'] == $ticket->Class) {
+                $ticket->Class = $classID;
+            }
+        }
+
+        // Also build a types lookup table and switch out name for ID
+        foreach ((array)Lang::get('types.type') as $typeID => $type) {
+            // Consistancy fixes:
+            $ticket->Type = ucfirst(strtolower($ticket->Type));
+
+            if ($type['name'] == $ticket->Type) {
+                $ticket->Type = $typeID;
+            }
+        }
+
+        // Create the ticket
+        $newTicket = new Ticket();
+
+        $newTicket->id                          = $ticket->ID;
+        $newTicket->ip                          = $ticket->IP;
+        $newTicket->domain                      = empty($ticket->Domain) ? '' : $ticket->Domain;
+        $newTicket->class_id                    = $ticket->Class;
+        $newTicket->type_id                     = $ticket->Type;
+
+        $newTicket->ip_contact_account_id       = $account->id;
+        $newTicket->ip_contact_reference        = $ticket->CustomerCode;
+        $newTicket->ip_contact_name             = $ticket->CustomerName;
+        $newTicket->ip_contact_email            = $ticket->CustomerContact;
+        $newTicket->ip_contact_api_host         = '';
+        $newTicket->ip_contact_auto_notify      = $ticket->AutoNotify;
+        $newTicket->ip_contact_notified_count   = $ticket->NotifiedCount;
+
+        $domainContact = FindContact::undefined();
+        $newTicket->domain_contact_account_id   = $domainContact->account_id;
+        $newTicket->domain_contact_reference    = $domainContact->reference;
+        $newTicket->domain_contact_name         = $domainContact->name;
+        $newTicket->domain_contact_email        = $domainContact->email;
+        $newTicket->domain_contact_api_host     = $domainContact->api_host;
+        $newTicket->domain_contact_auto_notify  = $domainContact->auto_notify;
+        $newTicket->domain_contact_notified_count = 0;
+
+        $newTicket->last_notify_count           = $ticket->LastNotifyReportCount;
+        $newTicket->last_notify_timestamp       = $ticket->LastNotifyTimestamp;
+
+        $newTicket->created_at                  = Carbon::createFromTimestamp($ticket->FirstSeen);
+        $newTicket->updated_at                  = Carbon::parse($ticket->LastModified);
+
+        if ($ticket->Status == 'CLOSED') {
+            $newTicket->status_id               = 2;
+        } elseif ($ticket->Status == 'OPEN') {
+            $newTicket->status_id               = 1;
+        } else {
+            $this->error('Unknown ticket status');
+            $this->exception();
+        }
+
+        // Validate the model before saving
+        $validator = Validator::make(
+            json_decode(json_encode($newTicket), true),
+            Ticket::createRules()
+        );
+        if ($validator->fails()) {
+            $this->error(
+                'DevError: Internal validation failed when saving the Ticket object ' .
+                implode(' ', $validator->messages()->all())
+            );
+            var_dump($ticket);
+            $this->exception();
+        }
+
+        $newTicket->save();
+
+        return $newTicket;
     }
 }
