@@ -480,7 +480,7 @@ class OldVersionCommand extends Command
                     // Create all the events
                     foreach ($evidenceLinks as $evidenceLink) {
                         echo ".";
-                        $path       = storage_path() . '/migratation/';
+                        $path       = storage_path() . '/migration/';
                         $filename = $path . "evidence_id_{$evidenceLink->EvidenceID}.data";
 
                         if (!is_file($filename)) {
