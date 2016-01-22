@@ -54,7 +54,10 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'root@localhost.net'),
+        'name' => env('MAIL_FROM_NAME', 'AbuseIO Password Reset'),
+    ],
 
     /*
     |--------------------------------------------------------------------------
