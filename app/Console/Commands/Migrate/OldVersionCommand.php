@@ -451,92 +451,29 @@ class OldVersionCommand extends Command
                     !empty(json_decode($ticket->Information)->importnote)
                 ) {
                     // Manually build the evidence
-                    $this->warn("Ticket {$ticket->ID} needs a lot of magic");
+                    $this->output->progressAdvance();
+                    echo " Working on events from ticket {$ticket->ID}";
+
+                    $this->replayTicket($ticket, $account);
+
                     continue;
                 }
-
 
                 if (count($evidenceLinks) != (int)$ticket->ReportCount) {
                     // Count does not match, known 3.0 limitation related to not always saving all the data
                     // so we will do a little magic to fix that
 
-                    // Create the ticket as usual
-                    $newTicket = $this->createTicket($ticket, $account);
+                    $this->output->progressAdvance();
+                    echo " Working on events from ticket {$ticket->ID}";
 
-                    // Now this is the little magic, we need to calculate the offset and make sure that the first
-                    // and lastseen moments exactly match and the increments between those events are within that
-                    // same timeframe, but NOT duplicate.
-                    $firstSeen = (int)$ticket->FirstSeen;
-                    $lastSeen  = (int)$ticket->LastSeen;
-                    $elapsed = $lastSeen - $firstSeen;
-                    $step = (int)round($elapsed / $ticket->ReportCount);
+                    $this->replayTicket($ticket, $account);
 
-                    $offset = [
-                        'first'     => $firstSeen,
-                        'last'      => $lastSeen,
-                        'elapsed'   => $elapsed,
-                        'step'      => $step,
-                    ];
-                    for ($counter = 0; $counter <= $ticket->ReportCount; $counter++) {
-                        $offset[$counter] = $firstSeen + ($counter * $step);
-                    }
-
-                    // Make sure we end at the right point in time
-                    end($offset);
-                    $key = key($offset);
-                    $offset[$key] = $lastSeen;
-
-                    // Now recreate all the events
-                    for ($counter = 0; $counter <= $ticket->ReportCount; $counter++) {
-                        // Build new evidence file and write the evidence into the archive
-                        $evidence = new EvidenceSave;
-                        $evidenceData = [
-                            'CreatedBy'     => 'root@localhost.lan',
-                            'receivedOn'    => time(),
-                            'submittedData' => json_decode(json_encode($ticket), true),
-                            'attachments'   => [],
-                        ];
-                        if (!empty($attachment)) {
-                            $evidenceData['attachments'][0] = $attachment;
-                        }
-                        $evidenceFile = $evidence->save(json_encode($evidenceData));
-
-                        // Save the file reference into the database
-                        $evidenceSave = new Evidence();
-                        $evidenceSave->filename = $evidenceFile;
-                        $evidenceSave->sender   = 'root@localhost.lan';
-                        $evidenceSave->subject  = 'Migrated evidence with a little magic';
-                        $evidenceSave->save();
-
-                        // Write the event
-                        $newEvent = new Event;
-                        $newEvent->evidence_id  = $evidenceSave->id;
-                        $newEvent->information  = $ticket->Information;
-                        $newEvent->source       = $ticket->Source;
-                        $newEvent->ticket_id    = $newTicket->id;
-                        $newEvent->timestamp    = $offset[$counter];
-
-                        // Validate the model before saving
-                        $validator = Validator::make(
-                            json_decode(json_encode($newEvent), true),
-                            Event::createRules()
-                        );
-                        if ($validator->fails()) {
-                            $this->error(
-                                'DevError: Internal validation failed when saving the Event object ' .
-                                implode(' ', $validator->messages()->all())
-                            );
-                            $this->exception();
-                        }
-
-                        $newEvent->save();
-
-                        $this->output->progressAdvance();
-                        echo " Working on events from ticket {$ticket->ID}";
-                    }
-                    die();
                     continue;
                 } else {
+                    // Just work as normal
+
+                    $this->output->progressAdvance();
+                    echo " Working on events from ticket {$ticket->ID}";
 
                     $newTicket = $this->createTicket($ticket, $account);
 
@@ -594,9 +531,6 @@ class OldVersionCommand extends Command
                         }
 
                         $newEvent->save();
-
-                        $this->output->progressAdvance();
-                        echo " Working on events from ticket {$ticket->ID}";
                     }
                 }
             }
@@ -616,11 +550,82 @@ class OldVersionCommand extends Command
     }
 
     /**
-     * @param object $ticket
+     * @param $ticket
+     * @param $account
      */
-    private function replayTicket($ticket)
+    private function replayTicket($ticket, $account)
     {
+        // Create the ticket as usual
+        $newTicket = $this->createTicket($ticket, $account);
 
+        // Now this is the little magic, we need to calculate the offset and make sure that the first
+        // and lastseen moments exactly match and the increments between those events are within that
+        // same timeframe, but NOT duplicate.
+        $firstSeen = (int)$ticket->FirstSeen;
+        $lastSeen  = (int)$ticket->LastSeen;
+        $elapsed = $lastSeen - $firstSeen;
+        $step = (int)round($elapsed / $ticket->ReportCount);
+
+        $offset = [
+            'first'     => $firstSeen,
+            'last'      => $lastSeen,
+            'elapsed'   => $elapsed,
+            'step'      => $step,
+        ];
+        for ($counter = 0; $counter <= $ticket->ReportCount; $counter++) {
+            $offset[$counter] = $firstSeen + ($counter * $step);
+        }
+
+        // Make sure we end at the right point in time
+        end($offset);
+        $key = key($offset);
+        $offset[$key] = $lastSeen;
+
+        // Now recreate all the events
+        for ($counter = 0; $counter <= $ticket->ReportCount; $counter++) {
+            // Build new evidence file and write the evidence into the archive
+            $evidence = new EvidenceSave;
+            $evidenceData = [
+                'CreatedBy'     => 'root@localhost.lan',
+                'receivedOn'    => time(),
+                'submittedData' => json_decode(json_encode($ticket), true),
+                'attachments'   => [],
+            ];
+            if (!empty($attachment)) {
+                $evidenceData['attachments'][0] = $attachment;
+            }
+            $evidenceFile = $evidence->save(json_encode($evidenceData));
+
+            // Save the file reference into the database
+            $evidenceSave = new Evidence();
+            $evidenceSave->filename = $evidenceFile;
+            $evidenceSave->sender   = 'root@localhost.lan';
+            $evidenceSave->subject  = 'Migrated evidence with a little magic';
+            $evidenceSave->save();
+
+            // Write the event
+            $newEvent = new Event;
+            $newEvent->evidence_id  = $evidenceSave->id;
+            $newEvent->information  = $ticket->Information;
+            $newEvent->source       = $ticket->Source;
+            $newEvent->ticket_id    = $newTicket->id;
+            $newEvent->timestamp    = $offset[$counter];
+
+            // Validate the model before saving
+            $validator = Validator::make(
+                json_decode(json_encode($newEvent), true),
+                Event::createRules()
+            );
+            if ($validator->fails()) {
+                $this->error(
+                    'DevError: Internal validation failed when saving the Event object ' .
+                    implode(' ', $validator->messages()->all())
+                );
+                $this->exception();
+            }
+
+            $newEvent->save();
+        }
     }
 
     /**
