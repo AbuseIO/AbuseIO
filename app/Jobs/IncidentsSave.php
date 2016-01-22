@@ -41,7 +41,7 @@ class IncidentsSave extends Job implements SelfHandling
 
         foreach ($incidents as $incident) {
             /* Here we will seek through all the incidents and look if there is an existing ticket. We will split
-             * them up into two seperate arrays: $incidentsNew and $incidents$known. We can save all the known 
+             * them up into two seperate arrays: $incidentsNew and $incidents$known. We can save all the known
              * incidents in the DB with a single incident saving loads of queries
              *
              * IP Owner is leading, as in most cases even if the domain is moved
@@ -68,13 +68,6 @@ class IncidentsSave extends Job implements SelfHandling
                 );
 
                 continue;
-            }
-
-            // Start with building a classification lookup table  and switch out name for ID
-            foreach ((array)Lang::get('classifications') as $classID => $class) {
-                if ($class['name'] == $incident->class) {
-                    $incident->class = $classID;
-                }
             }
 
             // Also build a types lookup table and switch out name for ID
@@ -194,7 +187,7 @@ class IncidentsSave extends Job implements SelfHandling
 
             } elseif ($ticket->count() === 1) {
                 /*
-                 * There is an existing ticket, so we just need to add the incident to this ticket. If the 
+                 * There is an existing ticket, so we just need to add the incident to this ticket. If the
                  * incident is an exact match we consider it a duplicate and will ignore it.
                  */
                 $ticket = $ticket[0];

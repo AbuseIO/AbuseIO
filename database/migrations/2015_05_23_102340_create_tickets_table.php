@@ -20,7 +20,7 @@ class CreateTicketsTable extends Migration
                 $table->increments('id');
                 $table->string('ip', 45);
                 $table->string('domain');
-                $table->integer('class_id')->unsigned();
+                $table->string('class_id', 100);
                 $table->integer('type_id')->unsigned();
                 $table->integer('status_id')->unsigned();
                 $table->integer('last_notify_count')->unsigned();

@@ -94,20 +94,8 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'abuseclass',
             function ($attribute, $value, $parameters, $validator) {
-
                 $classes = Lang::get('classifications');
-                if (!is_array($classes)) {
-                    return false;
-                }
-
-                foreach ($classes as $classID => $class) {
-                    if ($class['name'] == $value) {
-                        return true;
-                    }
-                }
-
-                return false;
-
+                return array_key_exists($value, $classes);
             }
         );
 

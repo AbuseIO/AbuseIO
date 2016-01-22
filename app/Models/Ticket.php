@@ -107,7 +107,7 @@ class Ticket extends Model
         $rules = [
             'ip'                                => 'required|ip',
             'domain'                            => 'sometimes|string',
-            'class_id'                          => 'required|integer|min:100|max:999',
+            'class_id'                          => 'required|string|max:100',
             'type_id'                           => 'required|integer|min:1|max:3',
             'ip_contact_account_id'             => 'required|integer',
             'ip_contact_reference'              => 'required|string',
@@ -141,7 +141,7 @@ class Ticket extends Model
         $rules = [
             'ip'                                => 'required|ip',
             'domain'                            => 'sometimes|string',
-            'class_id'                          => 'required|integer|min:100|max:999',
+            'class_id'                          => 'required|string|max:100',
             'type_id'                           => 'required|integer|min:1|max:3',
             'ip_contact_account_id'             => 'required|integer',
             'ip_contact_reference'              => 'required|string',

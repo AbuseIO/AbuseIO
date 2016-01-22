@@ -13,15 +13,19 @@ return [
      * This page may defer from PSR-2
      *
      */
+    'DEFAULT' => [
+        'name' => 'Generic message',
+        'description' => "This classification has no information text yet."
+    ],
 
-    100 => [
+    'BOTNET_CONTROLLER' => [
         'name' => 'Botnet controller',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    101 => [
+    'BOTNET_INFECTION' => [
         'name' => 'Botnet infection',
         'description' => "
              <h2>What is a 'Botnet infection'?</h2>
@@ -98,14 +102,14 @@ return [
             "
     ],
 
-    102 => [
+    'COMPROMISED_SERVER' => [
         'name' => 'Compromised server',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    103 => [
+    'COMPROMISED_WEBSITE' => [
         'name' => 'Compromised website',
         'description' => "
             <h2>What is a 'Compromised website'?</h2>
@@ -198,7 +202,7 @@ return [
             "
     ],
 
-    104 => [
+    'DISTRIBUTION_WEBSITE' => [
         'name' => 'Distribution website',
         'description' => "
             <h2>What is a 'Distribution Website'?</h2>
@@ -232,7 +236,7 @@ return [
             "
     ],
 
-    105 => [
+    'FREAK_VULNERABLE_SERVER' => [
         'name' => 'FREAK Vulnerable Server',
         'description' => "
 
@@ -286,7 +290,7 @@ return [
             "
     ],
 
-    106 => [
+    'HARVESTING' => [
         'name' => 'Harvesting',
         'description' => "
 
@@ -324,14 +328,14 @@ return [
             "
     ],
 
-    107 => [
+    'NOTICE_AND_TAKEDOWN_REQUEST' => [
         'name' => 'Notice and Take Down request',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    108 => [
+    'OPEN_CHARGEN_SERVER' => [
         'name' => 'Open Chargen Server',
         'description' => "
             <h2>What is an 'Open Chargen server'?</h2>
@@ -387,7 +391,7 @@ return [
             "
     ],
 
-    109 => [
+    'OPEN_DNS_RESOLVER' => [
         'name' => 'Open DNS Resolver',
         'description' => "
             <h2>What is an 'Open DNS Resolver'?</h2>
@@ -509,7 +513,7 @@ return [
             "
     ],
 
-    110 => [
+    'OPEN_IMPI_SERVER' => [
         'name' => 'Open IPMI Server',
         'description' => "
             <h2>What is an 'Open IPMI Server'?</h2>
@@ -555,7 +559,7 @@ return [
             "
     ],
 
-    111 => [
+    'OPEN_MEMCACHED_SERVER' => [
         'name' => 'Open MemCached Server',
         'description' => "
             <h2>What is an 'Open Memcached Server'?</h2>
@@ -651,7 +655,7 @@ return [
             "
     ],
 
-    112 => [
+    'OPEN_MSSQL_SERVER' => [
         'name' => 'Open Microsoft SQL Server',
         'description' => "
             <h2>What is an 'Open Microsoft SQL Server'?</h2>
@@ -701,7 +705,7 @@ return [
             "
     ],
 
-    113 => [
+    'OPEN_MONGODB_SERVER' => [
         'name' => 'Open MongoDB Server',
         'description' => "
             <h2>What is an 'Open MongoDB Server'?</h2>
@@ -766,7 +770,7 @@ return [
             "
     ],
 
-    114 => [
+    'OPEN_NATPMP_SERVER' => [
         'name' => 'Open NAT_PMP Server',
         'description' => "
             <h2>What is an 'Open NAT-PMP Server'?</h2>
@@ -819,7 +823,7 @@ return [
             "
     ],
 
-    115 => [
+    'OPEN_NTP_SERVER' => [
         'name' => 'Open NTP Server',
         'description' => "
             <h2>What is an 'Open NTP Server'?</h2>
@@ -916,7 +920,7 @@ return [
             "
     ],
 
-    116 => [
+    'OPEN_NETBIOS_SERVER' => [
         'name' => 'Open Netbios Server',
         'description' => "
             <h2>What is an 'Open Netbios server'?</h2>
@@ -998,7 +1002,7 @@ return [
             "
     ],
 
-    117 => [
+    'OPEN_QOTD_SERVER' => [
         'name' => 'Open QOTD Server',
         'description' => "
             <h2>What is an 'Open QOTD Server'?</h2>
@@ -1072,7 +1076,7 @@ return [
             "
     ],
 
-    118 => [
+    'OPEN_REDIS_SERVER' => [
         'name' => 'Open REDIS Server',
         'description' => "
             <h2>What is an 'Open REDIS Server'?</h2>
@@ -1160,7 +1164,7 @@ return [
             "
     ],
 
-    119 => [
+    'OPEN_SNMP_SERVER' => [
         'name' => 'Open SNMP Server',
         'description' => "
             <h2>What is an 'Open SNMP Server'?</h2>
@@ -1269,7 +1273,7 @@ return [
             "
     ],
 
-    120 => [
+    'OPEN_SSDP_SERVER' => [
         'name' => 'Open SSDP Server',
         'description' => "
             <h2>What is an 'Open SSDP Server'?</h2>
@@ -1319,7 +1323,7 @@ return [
             "
     ],
 
-    121 => [
+    'PHISING_WEBSITE' => [
         'name' => 'Phishing website',
         'description' => "
             <h2>What is a 'Phishing website'?</h2>
@@ -1390,7 +1394,7 @@ return [
             "
     ],
 
-    124 => [
+    'RBL_LISTED' => [
         'name' => 'RBL Listed',
         'description' => "
             <h2>What does 'RBL Listed' mean?</h2>
@@ -1439,7 +1443,7 @@ return [
             "
     ],
 
-    125 => [
+    'SPAM' => [
         'name' => 'SPAM',
         'description' => "
             <h2>What is 'Spam'?</h2>
@@ -1487,7 +1491,7 @@ return [
             "
     ],
 
-    126 => [
+    'SPAMTRAP' => [
         'name' => 'SPAM Trap',
         'description' => "
             <h2>What is a SPAM Trap?</h2>
@@ -1536,7 +1540,7 @@ return [
             "
     ],
 
-    127 => [
+    'SSLV3_VULNERABLE_SERVER' => [
         'name' => 'SSLv3 Vulnerable Server',
         'description' => "
             <h2>What is a 'SSLv3 Vulnerable Server'?</h2>
@@ -1620,7 +1624,7 @@ return [
             "
     ],
 
-    128 => [
+    'SPAMVERTISED_WEBSITE' => [
         'name' => 'Spamvertised web site',
         'description' => "
             <h2>What is a 'Spamvertised web site'?</h2>
@@ -1653,7 +1657,7 @@ return [
             "
     ],
 
-    129 => [
+    'OPEN_ELASTICSEARCH_SERVER' => [
         'name' => 'Open ElasticSearch Server',
         'description' => "
             <h2>What is an 'Open ElasticSearch Server'?</h2>
@@ -1689,28 +1693,28 @@ return [
             "
     ],
 
-    130 => [
+    'COPYRIGHT_INFRINGEMENT' => [
         'name' => 'Copyright Infringement',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    131 => [
+    'POSSIBLE_DDOS_SENDING_SERVER' => [
         'name' => 'Possible DDoS sending Server',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    132 => [
+    'DDOS_SENDING_SERVER' => [
         'name' => 'DDoS sending Server',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    133 => [
+    'OPEN_PORTMAP_SERVER' => [
         'name' => 'Open Portmapper Server',
         'description' => "
             <h2>What is an 'Open Portmapper Server'?</h2>
@@ -1755,49 +1759,49 @@ return [
             "
     ],
 
-    134 => [
+    'MALWARE_INFECTION' => [
         'name' => 'Malware infection',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    135 => [
+    'COMMENT_SPAM' => [
         'name' => 'Comment Spam',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    136 => [
+    'HACK_ATTACK' => [
         'name' => 'Hack attack',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    137 => [
+    'INFORMATIONAL' => [
         'name' => 'Informational',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    138 => [
+    'LOGIN_ATTACK' => [
         'name' => 'Login attack',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    139 => [
+    'DICTIONARY_ATTACK' => [
         'name' => 'Dictionary attack',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
-    140 => [
+    'RULE_BREAKER' => [
         'name' => 'Rule Breaker',
         'description' => "
             This classification has no information text yet.
