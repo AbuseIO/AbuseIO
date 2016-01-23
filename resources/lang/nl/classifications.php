@@ -14,19 +14,19 @@ return [
      *
      */
     'DEFAULT' => [
-        'name' => 'Generic message',
+        'name' => 'Generiek bericht',
         'description' => "This classification has no information text yet."
     ],
 
     'BOTNET_CONTROLLER' => [
-        'name' => 'Botnet controller',
+        'name' => 'Botnet server',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
     'BOTNET_INFECTION' => [
-        'name' => 'Botnet infection',
+        'name' => 'Botnet infectie',
         'description' => "
              <h2>What is a 'Botnet infection'?</h2>
 
@@ -103,14 +103,14 @@ return [
     ],
 
     'COMPROMISED_SERVER' => [
-        'name' => 'Compromised server',
+        'name' => 'Gecompromitteerde server',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
     'COMPROMISED_WEBSITE' => [
-        'name' => 'Compromised website',
+        'name' => 'Gecompromitteerde website',
         'description' => "
             <h2>What is a 'Compromised website'?</h2>
 
@@ -203,7 +203,7 @@ return [
     ],
 
     'DISTRIBUTION_WEBSITE' => [
-        'name' => 'Distribution website',
+        'name' => 'Distributie website',
         'description' => "
             <h2>What is a 'Distribution Website'?</h2>
 
@@ -237,7 +237,7 @@ return [
     ],
 
     'FREAK_VULNERABLE_SERVER' => [
-        'name' => 'FREAK Vulnerable Server',
+        'name' => 'FREAK kwetsbare server',
         'description' => "
 
             <h2>What is a 'FREAK Vulnerable Server'?</h2>
@@ -291,7 +291,7 @@ return [
     ],
 
     'HARVESTING' => [
-        'name' => 'Harvesting',
+        'name' => 'Oogsten',
         'description' => "
 
             <h2>What is 'Harvesting'?</h2>
@@ -329,7 +329,7 @@ return [
     ],
 
     'NOTICE_AND_TAKEDOWN_REQUEST' => [
-        'name' => 'Notice and Take Down request',
+        'name' => 'Notice and Takedown verzoek',
         'description' => "
             This classification has no information text yet.
             "
@@ -560,7 +560,7 @@ return [
     ],
 
     'OPEN_MEMCACHED_SERVER' => [
-        'name' => 'Open MemCached Server',
+        'name' => 'Open Memcached Server',
         'description' => "
             <h2>What is an 'Open Memcached Server'?</h2>
 
@@ -1324,7 +1324,7 @@ return [
     ],
 
     'PHISING_WEBSITE' => [
-        'name' => 'Phishing website',
+        'name' => 'Phishing Website',
         'description' => "
             <h2>What is a 'Phishing website'?</h2>
 
@@ -1395,7 +1395,7 @@ return [
     ],
 
     'RBL_LISTED' => [
-        'name' => 'RBL Listed',
+        'name' => 'RBL Notatie',
         'description' => "
             <h2>What does 'RBL Listed' mean?</h2>
 
@@ -1444,7 +1444,7 @@ return [
     ],
 
     'SPAM' => [
-        'name' => 'SPAM',
+        'name' => 'Spam',
         'description' => "
             <h2>What is 'Spam'?</h2>
 
@@ -1492,7 +1492,7 @@ return [
     ],
 
     'SPAMTRAP' => [
-        'name' => 'SPAM Trap',
+        'name' => 'Spamval',
         'description' => "
             <h2>What is a SPAM Trap?</h2>
 
@@ -1541,7 +1541,7 @@ return [
     ],
 
     'SSLV3_VULNERABLE_SERVER' => [
-        'name' => 'SSLv3 Vulnerable Server',
+        'name' => 'SSLv3 kwetsbare server',
         'description' => "
             <h2>What is a 'SSLv3 Vulnerable Server'?</h2>
 
@@ -1625,7 +1625,7 @@ return [
     ],
 
     'SPAMVERTISED_WEBSITE' => [
-        'name' => 'Spamvertised web site',
+        'name' => 'Spamvertised website',
         'description' => "
             <h2>What is a 'Spamvertised web site'?</h2>
 
@@ -1694,21 +1694,21 @@ return [
     ],
 
     'COPYRIGHT_INFRINGEMENT' => [
-        'name' => 'Copyright Infringement',
+        'name' => 'Copyright schending',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
     'POSSIBLE_DDOS_SENDING_SERVER' => [
-        'name' => 'Possible DDoS sending Server',
+        'name' => 'Mogelijke DDoS Server',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
     'DDOS_SENDING_SERVER' => [
-        'name' => 'DDoS sending Server',
+        'name' => 'DDoS Server',
         'description' => "
             This classification has no information text yet.
             "
@@ -1760,49 +1760,49 @@ return [
     ],
 
     'MALWARE_INFECTION' => [
-        'name' => 'Malware infection',
+        'name' => 'Malware infectie',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
     'COMMENT_SPAM' => [
-        'name' => 'Comment Spam',
+        'name' => 'Commentaar Spam',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
     'HACK_ATTACK' => [
-        'name' => 'Hack attack',
+        'name' => 'Hack aanval',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
     'INFORMATIONAL' => [
-        'name' => 'Informational',
+        'name' => 'Informationeel',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
     'LOGIN_ATTACK' => [
-        'name' => 'Login attack',
+        'name' => 'Login aanval',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
     'DICTIONARY_ATTACK' => [
-        'name' => 'Dictionary attack',
+        'name' => 'Woordenboek aanval',
         'description' => "
             This classification has no information text yet.
             "
     ],
 
     'RULE_BREAKER' => [
-        'name' => 'Rule Breaker',
+        'name' => 'Regel breker',
         'description' => "
             This classification has no information text yet.
             "
