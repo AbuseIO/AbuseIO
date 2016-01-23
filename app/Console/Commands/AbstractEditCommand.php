@@ -31,7 +31,9 @@ abstract class AbstractEditCommand extends Command
             return false;
         }
 
-        $this->handleOptions($model);
+        if (!$this->handleOptions($model)) {
+            return false;
+        }
 
         $validation = $this->getValidator($model);
 
@@ -105,15 +107,29 @@ abstract class AbstractEditCommand extends Command
         return sprintf("Edit a %s", $this->getAsNoun());
     }
 
-    protected function updateFieldWithOption($model, $option)
+    protected function updateFieldWithOption($model, $option, $fieldType='string')
     {
         if ($model !== null) {
             if (array_key_exists($option, $model->getAttributes())) {
                 if (!empty($this->option($option))) {
-                    $model->$option = $this->option($option);
+                    switch ($fieldType) {
+                        case "bool":
+                        case "boolean":
+                            $value = castStringToBool($this->option($option));
+                            break;
+                        default:
+                            $value = $this->option($option);
+                            break;
+                    }
+                    $model->$option = $value;
                 }
             }
         }
+    }
+
+    protected function updateBooleanFieldWithOption($model, $option)
+    {
+        $this->updateFieldWithOption($model, $option, "bool");
     }
 
     abstract public function getOptionsList();

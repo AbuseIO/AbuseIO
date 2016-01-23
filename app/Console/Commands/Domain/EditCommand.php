@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Domain;
 
 use AbuseIO\Console\Commands\AbstractEditCommand;
+use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,7 +16,7 @@ class EditCommand extends AbstractEditCommand
     {
         return new InputDefinition([
             new inputArgument('id', InputArgument::REQUIRED, 'Account id to edit'),
-            new InputOption('contact', null, InputOption::VALUE_OPTIONAL, 'Contact id for domain'),
+            new InputOption('contact_id', null, InputOption::VALUE_OPTIONAL, 'Contact id for domain'),
             new InputOption('name', null, InputOption::VALUE_OPTIONAL,  'Name'),
             new InputOption('enabled', null, InputOption::VALUE_OPTIONAL, 'true|false, Set the domain to be enabled'),
         ]);
@@ -34,8 +35,20 @@ class EditCommand extends AbstractEditCommand
     protected function handleOptions($model)
     {
         $this->updateFieldWithOption($model, 'name');
+
+        if ($this->option('contact_id')){
+
+            if (null === Contact::find($this->option("contact_id"))) {
+                $this->error('Unable to find contact with this criteria');
+                return false;
+            }
+
+        }
         $this->updateFieldWithOption($model, 'contact_id');
-        $this->updateFieldWithOption($model, 'enabled');
+
+        $this->updateBooleanFieldWithOption($model, 'enabled');
+
+        return true;
     }
 
     protected function getValidator($model)
