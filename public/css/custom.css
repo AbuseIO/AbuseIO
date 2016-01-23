@@ -42,17 +42,6 @@ div .media-body h2 {
 .top-buffer { margin-top:20px; }
 .dataTables_wrapper { margin-top:20px; }
 
-/* Ticket details for row extensions */
-td.details-control:before {
-    font-family: 'Glyphicons Halflings';
-    content: "\e081";
-    cursor: pointer;
-}
-tr.shown td.details-control:before {
-    font-family: 'Glyphicons Halflings';
-    content: "\e082";
-}
-
 /* Show Note options when hovering a note */
 .ticket-hover-group:hover .ticket-hover-toggle {
     visibility: visible;
@@ -73,25 +62,19 @@ tr.shown td.details-control:before {
     background: rgba(255, 255, 255, 0.5);
 }
 
-/**
-Bootstrap 3 - Disabled dropdown links
-More information here: http://blog.craigsworks.com/bootstrap-3-disabled-dropdown-links/
-**/
-
-/*
-Mimic cursor style from native .dropdown-menu > .disabled > a{} styles,
-since `pointer-events: none` kills the cursor state, too.
-*/
+/* Disabled links */
+.btn.disabled,
 .dropdown-menu > .disabled{
  cursor: not-allowed;
 }
 
-/* The real magic ;) */
+.btn.disabled,
 .dropdown-menu > .disabled > a{
  pointer-events: none;
 }
 
-/* This layours the 'progressing' text while database changes, e.g. by pagination */
+/* This layours the 'progressing' text
+while database changes, e.g. by pagination */
 .dataTables_processing {
     position: absolute;
     top: 50%;

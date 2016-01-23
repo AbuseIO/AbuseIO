@@ -64,11 +64,13 @@ class UsersController extends Controller
                             '/disable" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-ban-circle"></i> '.
                             trans('misc.button.disable').'</a> ';
                     }
+                    $disabled = ($user->id == 1) ? ' disabled' : '';
+
                     $actions .= Form::button(
                         '<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'),
                         [
                             'type' => 'submit',
-                            'class' => 'btn btn-danger btn-xs'
+                            'class' => 'btn btn-danger btn-xs'. $disabled
                         ]
                     );
                     $actions .= Form::close();
