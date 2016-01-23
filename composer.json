@@ -63,6 +63,7 @@
 		"abuseio/parser-usgo": "1.1.*",
 		"abuseio/parser-webiron": "1.2.*",
         "abuseio/parser-woody": "1.1.*",
+        "abuseio/parser-fbl": "1.0.*",
 
         "abuseio/collector-common": "1.1.*",
         "abuseio/collector-rbl": "1.2.*",
