@@ -19,7 +19,7 @@ $(document).ready(function() {
 
         // Execute this ajax request
         $.ajax({
-            url: '/admin/notes/1',
+            url: '/admin/notes/'+ this.value,
             type: type,
             data: {
                 'action': action,
@@ -58,80 +58,5 @@ $(document).ready(function() {
                 }
             }
         });
-    });
-
-    var table = $('#tickets-table').DataTable( {
-        processing: true,
-        serverSide: true,
-        ajax: '{!! route('admin.tickets.search') .'/query/' !!}',
-        columnDefs: [ {
-            targets: -1,
-            data: null,
-            defaultContent: " "
-        } ],
-        language: {
-            url: '{{ asset("/i18n/$auth_user->locale.json") }}'
-        },
-        columns: [
-            {
-                className:      'details-control',
-                orderable:      false,
-                data:           null,
-                defaultContent: ''
-            },
-            { data: 'id', name: 'tickets.id' },
-            { data: 'ip', name: 'tickets.ip' },
-            { data: 'domain', name: 'tickets.domain' },
-            { data: 'type_id', name: 'tickets.type_id' },
-            { data: 'class_id', name: 'tickets.class_id' },
-            { data: 'event_count', name: 'event_count', searchable: false },
-            { data: 'notes_count', name: 'notes_count', searchable: false },
-            { data: 'status_id', name: 'tickets.status_id' },
-            { data: 'actions', orderable: false, searchable: false, class: "text-right" }
-        ]
-    } );
-
-    $('#tickets-table tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
-
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            row.child( format(row.data()) ).show();
-            tr.addClass('shown');
-        }
-    } );
-    
-    $('#tickets-table').DataTable( {
-        initComplete: function () {
-            // Grab the selects and add a search event onChange
-
-            alert('hoi');
-
-            /*this.api().columns().every( function () {
-                var column = this;
-
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
-
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
-
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            });*/
-        }
     });
 });

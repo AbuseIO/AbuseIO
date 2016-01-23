@@ -20,7 +20,6 @@
     <table class="table table-striped table-condensed top-buffer" id="tickets-table">
         <thead>
             <tr>
-                <th></th>
                 <th>{{ trans('misc.ticket_id') }}</th>
                 <th>{{ trans('misc.ip') }}</th>
                 <th>{{ trans('misc.domain') }}</th>
@@ -34,7 +33,6 @@
         </thead>
         <tfoot>
             <tr>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
