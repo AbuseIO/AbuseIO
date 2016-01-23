@@ -1,5 +1,13 @@
 @extends('app')
 
+@section('extrajs')
+    <script>
+        var searchroute = '{!! route('admin.tickets.search') .'/query/' !!}';
+        var locale = '{{ asset("/i18n/$auth_user->locale.json") }}';
+    </script>
+    <script src="{{ asset('/js/tickets.index.js') }}"></script>
+@stop
+
 @section('content')
     <h1 class="page-header">{{ trans('misc.tickets') }}</h1>
     <div class="row">
@@ -11,99 +19,32 @@
 
     <table class="table table-striped table-condensed top-buffer" id="tickets-table">
         <thead>
-        <tr>
-            <th></th>
-            <th>{{ trans('misc.ticket_id') }}</th>
-            <th>{{ trans('misc.ip') }}</th>
-            <th>{{ trans('misc.domain') }}</th>
-            <th>{{ trans('misc.type') }}</th>
-            <th>{{ trans('misc.classification') }}</th>
-            <th>{{ trans('tickets.events') }}</th>
-            <th>{{ trans('tickets.notes') }}</th>
-            <th>{{ trans('misc.status') }}</th>
-            <th class="text-right">{{ trans('misc.action') }}</th>
-        </tr>
+            <tr>
+                <th></th>
+                <th>{{ trans('misc.ticket_id') }}</th>
+                <th>{{ trans('misc.ip') }}</th>
+                <th>{{ trans('misc.domain') }}</th>
+                <th>{{ trans('misc.type') }}</th>
+                <th>{{ trans('misc.classification') }}</th>
+                <th>{{ trans('tickets.events') }}</th>
+                <th>{{ trans('tickets.notes') }}</th>
+                <th>{{ trans('misc.status') }}</th>
+                <th class="text-right">{{ trans('misc.action') }}</th>
+            </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{!! Form::select('type_id', $types, null, ['placeholder' => '', 'id' => 'type_id', 'class' => 'form-control']) !!}</td>
+                <td>{!! Form::select('class_id', $classes, null, ['placeholder' => '', 'id' => 'class_id', 'class' => 'form-control']) !!}</td>
+                <td></td>
+                <td></td>
+                <td>{!! Form::select('statuses', $statuses, null, ['placeholder' => '', 'id' => 'statuses', 'class' => 'form-control']) !!}</th>
+                <td></td>
+            </tr>
+        </tfoot>
     </table>
-
-@endsection
-
-@section('extrajs')
-    <script>
-        function format ( d ) {
-            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;" width="90%" align="center">'+
-                    '<tr>'+
-                        '<td><b><u>IP Contact: </u></b></td>'+
-                        '<td><b><u>Domain Contact: </u></b></td>'+
-                    '</tr>'+
-
-                    '<tr>'+
-                        '<td>'+
-                            '<table width="100%">'+
-                                '<tr><td><b>Account: </b></td><td>' + d.ip_contact_account_id + '</td></tr>'+
-                                '<tr><td><b>Reference: </b></td><td>' + d.ip_contact_reference + '</td></tr>'+
-                                '<tr><td><b>Name: </b></td><td>' + d.ip_contact_name + '</td></tr>'+
-                            '</table>'+
-                        '</td>'+
-                        '<td>'+
-                            '<table width="100%">'+
-                                '<tr><td><b>Account: </b></td><td>' + d.domain_contact_account_id + '</td></tr>'+
-                                '<tr><td><b>Reference: </b></td><td>' + d.domain_contact_reference + '</td></tr>'+
-                                '<tr><td><b>Name: </b></td><td>' + d.domain_contact_name + '</td></tr>'+
-                            '</table>'+
-                        '</td>'+
-                    '</tr>'+
-                    '</table>';
-        }
-
-        $(document).ready(function() {
-            var table = $('#tickets-table').DataTable( {
-                processing: true,
-                serverSide: true,
-                ajax: '{!! route('admin.tickets.search') .'/query/' !!}',
-                columnDefs: [ {
-                    targets: -1,
-                    data: null,
-                    defaultContent: " "
-                } ],
-                language: {
-                    url: '{{ asset("/i18n/$auth_user->locale.json") }}'
-                },
-                columns: [
-                    {
-                        className:      'details-control',
-                        orderable:      false,
-                        data:           null,
-                        defaultContent: ''
-                    },
-                    { data: 'id', name: 'tickets.id' },
-                    { data: 'ip', name: 'tickets.ip' },
-                    { data: 'domain', name: 'tickets.domain' },
-                    { data: 'type_id', name: 'tickets.type_id' },
-                    { data: 'class_id', name: 'tickets.class_id' },
-                    { data: 'event_count', name: 'event_count', searchable: false },
-                    { data: 'notes_count', name: 'notes_count', searchable: false },
-                    { data: 'status_id', name: 'tickets.status_id' },
-                    { data: 'actions', orderable: false, searchable: false, class: "text-right" }
-                ]
-            } );
-
-            $('#tickets-table tbody').on('click', 'td.details-control', function () {
-                var tr = $(this).closest('tr');
-                var row = table.row( tr );
-
-                if ( row.child.isShown() ) {
-                    // This row is already open - close it
-                    row.child.hide();
-                    tr.removeClass('shown');
-                }
-                else {
-                    // Open this row
-                    row.child( format(row.data()) ).show();
-                    tr.addClass('shown');
-                }
-            } );
-        } );
-
-    </script>
 @endsection

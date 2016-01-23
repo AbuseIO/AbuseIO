@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('extrajs')
-    <script src="{{ asset('/js/tickets.js') }}"></script>
+    <script src="{{ asset('/js/tickets.show.js') }}"></script>
 @stop
 
 @section('content')

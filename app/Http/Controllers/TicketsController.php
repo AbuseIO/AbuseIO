@@ -83,8 +83,7 @@ class TicketsController extends Controller
             )
             ->groupBy('tickets.id');
 
-        if (!$auth_account->isSystemAccount())
-        {
+        if (!$auth_account->isSystemAccount()) {
             $tickets = $tickets->where('tickets.ip_contact_account_id', '=', $auth_account->id)
                 ->orWhere('tickets.domain_contact_account_id', '=', $auth_account->id);
         }
@@ -129,7 +128,25 @@ class TicketsController extends Controller
      */
     public function index()
     {
+        $types = trans('types.type');
+        foreach (array_keys($types) as $key) {
+            $types[$key] = $types[$key]['name'];
+        }
+
+        $classifications = trans('classifications');
+        foreach (array_keys($classifications) as $key) {
+            $classifications[$key] = $classifications[$key]['name'];
+        }
+
+        $statuses = trans('types.status');
+        foreach (array_keys($statuses) as $key) {
+            $statuses[$key] = $statuses[$key]['name'];
+        }
+
         return view('tickets.index')
+            ->with('types', $types)
+            ->with('classes', $classifications)
+            ->with('statuses', $statuses)
             ->with('auth_user', $this->auth_user);
     }
 
