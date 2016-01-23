@@ -58,6 +58,6 @@ class EditCommandTest extends TestCase
         /*
          * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
          */
-        //$this->seed('NetblockTableSeeder');
+        $this->seed('NetblocksTableSeeder');
     }
 }
