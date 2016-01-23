@@ -1,0 +1,117 @@
+From feedbackloop@feedback.bluetie.com Tue Jan 19 16:54:53 2016
+Return-Path: fblbounces@senderscore.net
+Received: from correo.domain1.tld (LHLO correo.domain1.tld) (XX.YY.ZZ.6)
+ by correo.domain1.tld with LMTP; Tue, 19 Jan 2016 17:54:56 +0100 (CET)
+Received: from correo.domain1.tld (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTPS id BCBCB3A4B4E0C
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 17:54:56 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTP id B0CC03A4B4E07
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 17:54:56 +0100 (CET)
+Received: from correo.domain1.tld ([127.0.0.1])
+	by localhost (correo.domain1.tld [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id LDn3rSqBMYHt for <abuse@domain2.tld>;
+	Tue, 19 Jan 2016 17:54:56 +0100 (CET)
+Received: from rl3.domain1.tld (rl3.domain1.tld [XX.YY.ZZ.53])
+	by correo.domain1.tld (Postfix) with ESMTP id 8EEF03A4B4E01
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 17:54:56 +0100 (CET)
+Received-SPF: Pass (sender SPF authorized) identity=mailfrom; client-ip=66.45.29.179; helo=mrb-fbl.returnpath.net; envelope-from=fblbounces@senderscore.net; receiver=abuse@domain2.tld 
+Received: from mrb-fbl.returnpath.net (mrb-fbl.returnpath.net [66.45.29.179])
+	by rl3.domain1.tld (Postfix) with ESMTP id 3DFB5618AC
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 17:54:53 +0100 (CET)
+Received: from poma00.lan.returnpath.net (poma00.lan.returnpath.net [10.2.0.104])
+	by mrb-fbl.returnpath.net (Postfix) with ESMTP id 8E1F961B31
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 09:54:53 -0700 (MST)
+Received: by poma00.lan.returnpath.net (Postfix, from userid 106706)
+	id 7F02B6084D; Tue, 19 Jan 2016 09:54:53 -0700 (MST)
+Content-Type: multipart/report; boundary="_----------=_14532224933257828988"; report-type="feedback-report"
+MIME-Version: 1.0
+X-Mailer: MIME::Lite 3.029 (F2.84; T2.04; A2.12; B3.13; Q3.13)
+Date: Tue, 19 Jan 2016 09:54:53 -0700
+Subject: Bluetie Abuse Report
+To: abuse@domain2.tld
+From: feedbackloop@feedback.bluetie.com
+Message-Id: <20160119165453.7F02B6084D@poma00.lan.returnpath.net>
+Content-Transfer-Encoding: 7bit
+
+This is a multi-part message in MIME format.
+
+--_----------=_14532224933257828988
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+
+This is a Bluetie email abuse report for an email message received from IP 10.17.18.3 on Sat, 16 Jan 2016 06:10:14 +0000
+
+
+--_----------=_14532224933257828988
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: message/feedback-report
+
+User-Agent: ReturnPathFBL/1.0
+Abuse-Type: complaint
+Arrival-Date: Sat, 16 Jan 2016 06:10:14 +0000
+Feedback-Type: abuse
+Version: 1
+Source-IP: 10.17.18.3
+Original-Rcpt-To: c05e6794fd2ea6ffa2c7b8257138ecc0@excite.com
+Original-Mail-From: madeleine_barry@domain3.tld
+Reported-Domain: excite.com
+
+--_----------=_14532224933257828988
+Content-Disposition: inline
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 7bit
+
+Received: from outbound004.roc2.bluetie.com (outbound004.roc2.bluetie.com
+  [208.89.132.144]) by mxh.senderscore.net (Postfix) with ESMTP id DEFD9800021
+  for <bluetiecomp@senderscore.net>; Tue, 19 Jan 2016 09:54:46 -0700 (MST)
+Received: from mstore010.roc2.bluetie.com ([10.200.3.104]) by
+  outbound004.roc2.bluetie.com with outbound004 id 7sum1s0052Ef3y201sumwB;
+  Tue, 19 Jan 2016 11:54:46 -0500
+X-BT-OutboundSpamChecked: true
+Received: by mstore010.roc2.bluetie.com (Postfix, from userid 3118234) id
+  7EE28AEC5B1; Tue, 19 Jan 2016 11:54:46 -0500 (EST)
+X-Original-To:
+  c05e6794fd2ea6ffa2c7b8257138ecc0.excite@mstore010.roc2.bluetie.com
+Delivered-To:
+  c05e6794fd2ea6ffa2c7b8257138ecc0.excite@mstore010.roc2.bluetie.com
+Received: from inbound004.roc2.bluetie.com (inbound004.roc2.bluetie.com
+  [10.200.2.204]) by mstore010.roc2.bluetie.com (Postfix) with ESMTP id
+  D5589AEC6BF for
+  <c05e6794fd2ea6ffa2c7b8257138ecc0.excite@mstore010.roc2.bluetie.com>; Sat,
+  16 Jan 2016 01:10:14 -0500 (EST)
+Received: from domain3.tld ([10.17.18.3]) by
+  inbound004.roc2.bluetie.com with inbound001 id 6WAD1s00c2yRj8401WADi6; Sat,
+  16 Jan 2016 01:10:14 -0500
+X-BT-Recipient: c05e6794fd2ea6ffa2c7b8257138ecc0@excite.com
+X-CMAE-Score: 0.00
+X-CMAE-Analysis: v=2.1 cv=ZLV74yPb c=1 sm=1 tr=0
+  a=fECI2wj0qV3x9aG1ZDVc4w==:117 a=fECI2wj0qV3x9aG1ZDVc4w==:17
+  a=ZOhvbxcnAAAA:8 a=QoHJ8kPOAAAA:8 a=L9H7d07YOLsA:10 a=9cW_t1CCXrUA:10
+  a=s5jvgZ67dGcA:10 a=8nJEP1OIZ-IA:10 a=2YaKUmU1AAAA:8
+  a=Vd-MN3ofluStc8x4lJMA:9 a=wPNLvfGTeEIA:10 a=fyFnJVr7a3YA:10
+  a=KKje78z-8psA:10
+Date: Sat, 16 Jan 2016 7:10:13 +0100
+From: "Madeleine Barry" <madeleine_barry@domain3.tld>
+Reply-To: "Madeleine Barry" <madeleine_barry@domain3.tld>
+Message-ID: <f690adc-cf090-87@domain3.tld>
+Subject: Fw:  Two girls get machine fucked
+X-Priority: 3 (Normal)
+MIME-Version: 1.0
+Content-Type: text/html; charset="iso-8859-1"
+X-BtMT: Sat, 16 Jan 2016 01:10:14 -0500 (EST)
+To: c05e6794fd2ea6ffa2c7b8257138ecc0@excite.com
+Content-Transfer-Encoding: quoted-printable
+
+
+<div>
+<div>Two girls get machine fucked <a href=3D"http://jadecut.com.au/pretty=
+Photo/images/footer.php?YG1xdm1sMTFCZ3pha3ZnLGFtbw=3D=3D">here</a></div>
+</div>
+
+
+--_----------=_14532224933257828988--
+
+

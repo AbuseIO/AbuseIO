@@ -1,0 +1,95 @@
+From feedbackloop@fbl.zoho.com Tue Sep 15 01:06:27 2015
+Return-Path: feedbackloop@fbl.zoho.com
+Received: from correo.domain1.tld (LHLO correo.domain1.tld) (XX.YY.ZZ.6)
+ by correo.domain1.tld with LMTP; Tue, 15 Sep 2015 03:06:33 +0200 (CEST)
+Received: from correo.domain1.tld (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTPS id A7F4D3A4B4E09
+	for <abuse@domain2.tld>; Tue, 15 Sep 2015 03:06:33 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTP id 8A9A93A4B4E0B
+	for <abuse@domain2.tld>; Tue, 15 Sep 2015 03:06:33 +0200 (CEST)
+Received: from correo.domain1.tld ([127.0.0.1])
+	by localhost (correo.domain1.tld [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id RcUes6c3lAGg for <abuse@domain2.tld>;
+	Tue, 15 Sep 2015 03:06:33 +0200 (CEST)
+Received: from rl4.domain1.tld (rl4.domain1.tld [XX.YY.ZZ.54])
+	by correo.domain1.tld (Postfix) with ESMTP id 3C78F3A4B4E09
+	for <abuse@domain2.tld>; Tue, 15 Sep 2015 03:06:33 +0200 (CEST)
+Received-SPF: Pass (sender SPF authorized) identity=mailfrom; client-ip=74.201.84.163; helo=sender163-mail.zoho.com; envelope-from=feedbackloop@fbl.zoho.com; receiver=abuse@domain2.tld 
+Received: from sender163-mail.zoho.com (sender163-mail.zoho.com [74.201.84.163])
+	by rl4.domain1.tld (Postfix) with ESMTP id BCA4E10284C
+	for <abuse@domain2.tld>; Tue, 15 Sep 2015 03:06:27 +0200 (CEST)
+Received: from mail.zoho.com by mx.zohomail.com
+	with SMTP id 1442279187187289.33884714925625; Mon, 14 Sep 2015 18:06:27 -0700 (PDT)
+Message-ID: <96406168.1442279187118.JavaMail.sas@172.31.240.77>
+Date: Mon, 14 Sep 2015 18:06:27 -0700 (PDT)
+From: Zoho Feedback Loop Report <feedbackloop@fbl.zoho.com>
+To: abuse@domain2.tld
+Subject: Email Feedback Report for IP 10.17.18.29
+Mime-Version: 1.0
+Content-Type: multipart/report; report-type=feedback-report; 
+	boundary="----=_Part_2043_1538082015.1442279187114"
+
+
+------=_Part_2043_1538082015.1442279187114
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+
+This is an email abuse report for an email with the message id <a3cfa726bfe56e942d015893388fed76@server.domain3.tld> received from IP address 10.17.18.29 on Mon, 14 Sep 2015 10:24:01 -0700 (PDT)
+
+If you would like to disable or modify the configuration for your Feedback Loop please login to http://fbl.zoho.com
+
+Please find below the feedback report and original message header in message/rfc822 format(message content has been truncated).
+
+
+------=_Part_2043_1538082015.1442279187114
+Content-Type: message/feedback-report
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Feedback-Type: abuse
+User-Agent: Zoho Mail
+Version: 0.1
+Received-Date: Mon, 14 Sep 2015 10:24:01 -0700 (PDT)
+Source-IP: 10.17.18.29
+
+------=_Part_2043_1538082015.1442279187114
+Content-Type: message/rfc822
+Content-Disposition: inline
+
+Delivered-To: gfong@nuvo.pe
+Received-SPF: Pass (zoho.com: domain of mailer@domain4.tld designates 10.17.18.29 as permitted sender )  client-ip: 10.17.18.29
+Return-Path: zmgrbounces+1082700000059118488@zoho.com
+Return-Path: <mailer@domain4.tld>
+Received: from mta1.domain4.tld (mta1.domain4.tld [10.17.18.29]) by mx.zohomail.com
+	with SMTP id 1442251441932973.2797427510232; Mon, 14 Sep 2015 10:24:01 -0700 (PDT)
+Received: from localhost.localdomain (memdoo01.domain4.tld [10.17.18.29])
+	by mta1.domain4.tld (Postfix) with ESMTPA id 919C5209FC
+	for <gfong@insumos.com.pe>; Mon, 14 Sep 2015 19:23:40 +0200 (CEST)
+Date: Mon, 14 Sep 2015 19:23:41 +0200
+Sender: mailer@domain4.tld
+To: gfong@insumos.com.pe
+From: =?UTF-8?B?VGFyamV0YXMgeSB2b2xhbnRlcw==?= <email@domain5.tld>
+Reply-To: =?UTF-8?B?VGFyamV0YXMgeSB2b2xhbnRlcw==?= <email@domain5.tld>
+Subject: =?UTF-8?B?UHJvbW9jacOzbiBwYXJhIGVtcHJlc2FzLCBhcHJvdmVjaGUgbnVlc3Ryb3MgcHJlY2lvcyEhIeKAjw==?=
+Message-ID: <a3cfa726bfe56e942d015893388fed76@server.domain3.tld>
+X-Priority: 3
+X-Mailer: Mandoo 2.0
+List-Unsubscribe: <mailto:unsubscribe@domain4.tld?subject=unsubscribe&id=q51l>, <https://newsletters.domain4.tld/removal.php?id=q51ljpFQYaerYZpn&lang=es_ES>
+X-Subscription: Subscribed on 2015-09-09 05:12:14, via web, by 10.17.18.29, from domain4.tld
+X-Complaints-To: abuse@domain4.tld
+X-Return: 179104;gfong@insumos.com.pe;6522
+MIME-Version: 1.0
+Precedence: bulk
+Content-Type: multipart/alternative;
+	boundary="b1_a3cfa726bfe56e942d015893388fed76"
+X-ZohoMail-Owner: <a3cfa726bfe56e942d015893388fed76@server.domain3.tld>+zmo_0_<mailer@domain4.tld>
+X-ZohoMail-Sender: 10.17.18.29
+X-Zoho-Virus-Status: 2
+X-Zoho-List-Id: gfong.insumos.com.pe
+
+
+------=_Part_2043_1538082015.1442279187114--
+
+
+

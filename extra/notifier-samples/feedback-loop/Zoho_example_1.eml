@@ -1,0 +1,89 @@
+From feedbackloop@fbl.zoho.com Tue Sep 08 03:17:03 2015
+Return-Path: feedbackloop@fbl.zoho.com
+Received: from correo.domain1.tld (LHLO correo.domain1.tld) (XX.YY.ZZ.6)
+ by correo.domain1.tld with LMTP; Tue, 8 Sep 2015 05:17:08 +0200 (CEST)
+Received: from correo.domain1.tld (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTPS id 19D1C3A4B4E05
+	for <abuse@domain2.tld>; Tue,  8 Sep 2015 05:17:08 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTP id 0752C3A4B4E07
+	for <abuse@domain2.tld>; Tue,  8 Sep 2015 05:17:08 +0200 (CEST)
+Received: from correo.domain1.tld ([127.0.0.1])
+	by localhost (correo.domain1.tld [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id 5JnkOfoezxAL for <abuse@domain2.tld>;
+	Tue,  8 Sep 2015 05:17:07 +0200 (CEST)
+Received: from rl3.domain1.tld (rl3.domain1.tld [XX.YY.ZZ.53])
+	by correo.domain1.tld (Postfix) with ESMTP id E1BCC3A4B4E05
+	for <abuse@domain2.tld>; Tue,  8 Sep 2015 05:17:07 +0200 (CEST)
+Received-SPF: Pass (sender SPF authorized) identity=mailfrom; client-ip=74.201.84.163; helo=sender163-mail.zoho.com; envelope-from=feedbackloop@fbl.zoho.com; receiver=abuse@domain2.tld 
+Received: from sender163-mail.zoho.com (sender163-mail.zoho.com [74.201.84.163])
+	by rl3.domain1.tld (Postfix) with ESMTP id 639AAE1E53
+	for <abuse@domain2.tld>; Tue,  8 Sep 2015 05:17:05 +0200 (CEST)
+Received: from mail.zoho.com by mx.zohomail.com
+	with SMTP id 1441682223439882.5838600927134; Mon, 7 Sep 2015 20:17:03 -0700 (PDT)
+Message-ID: <471568356.1441682223367.JavaMail.sas@172.31.240.77>
+Date: Mon, 7 Sep 2015 20:17:03 -0700 (PDT)
+From: Zoho Feedback Loop Report <feedbackloop@fbl.zoho.com>
+To: abuse@domain2.tld
+Subject: Email Feedback Report for IP 10.17.18.28
+Mime-Version: 1.0
+Content-Type: multipart/report; report-type=feedback-report; 
+	boundary="----=_Part_1273_600163861.1441682223349"
+
+
+------=_Part_1273_600163861.1441682223349
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+
+This is an email abuse report for an email with the message id <004701d0e986$181bf800$4853e800$@com> received from IP address 10.17.18.28 on Mon, 7 Sep 2015 08:58:04 -0700 (PDT)
+
+If you would like to disable or modify the configuration for your Feedback Loop please login to http://fbl.zoho.com
+
+Please find below the feedback report and original message header in message/rfc822 format(message content has been truncated).
+
+
+------=_Part_1273_600163861.1441682223349
+Content-Type: message/feedback-report
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Feedback-Type: abuse
+User-Agent: Zoho Mail
+Version: 0.1
+Received-Date: Mon, 7 Sep 2015 08:58:04 -0700 (PDT)
+Source-IP: 10.17.18.28
+
+------=_Part_1273_600163861.1441682223349
+Content-Type: message/rfc822
+Content-Disposition: inline
+
+Delivered-To: espinosa@espinosaviveros.com
+Received-SPF: Pass (zoho.com: domain of orihuela@domain4.tld designates 10.17.18.28 as permitted sender )  client-ip: 10.17.18.28
+Return-Path: <orihuela@domain4.tld>
+Received: from server.domain3.tld (server.domain3.tld [10.17.18.28]) by mx.zohomail.com
+	with SMTPS id 1441641484757320.61742361464894; Mon, 7 Sep 2015 08:58:04 -0700 (PDT)
+Received: from TiendaOrihuela (unknown [90.164.188.206])
+	by server.domain3.tld (Postfix) with ESMTPA id C75331E2917;
+	Mon,  7 Sep 2015 17:57:08 +0200 (CEST)
+From: "Orihuela" <orihuela@domain4.tld>
+To: "Orihuela" <orihuela@domain4.tld>
+Subject: =?iso-8859-1?Q?NECESITAS_TINTA/TONER..AQUI_TIENES_LA_MEJOR_ATENCI=D3N.?=
+Date: Mon, 7 Sep 2015 17:58:14 +0200
+Message-ID: <004701d0e986$181bf800$4853e800$@com>
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	boundary="----=_NextPart_000_0048_01D0E996.DBA4C800"
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AdDphf+wZKi2lRE0TkeJn8eBUmd4aA==
+Content-Language: es
+X-PPP-Message-ID: <20150907155752.13796.88153@server.domain3.tld>
+X-PPP-Vhost: domain4.tld
+X-Zoho-Virus-Status: 1
+X-ZohoMail-Owner: <004701d0e986$181bf800$4853e800$@com>+zmo_0_<orihuela@domain4.tld>
+X-ZohoMail-Sender: 90.164.188.206
+
+
+------=_Part_1273_600163861.1441682223349--
+
+
+

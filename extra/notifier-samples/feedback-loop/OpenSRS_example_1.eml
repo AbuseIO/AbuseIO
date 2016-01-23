@@ -1,0 +1,147 @@
+From feedbackloop@fbl.hostedemail.com Sun Jan 17 06:59:21 2016
+Return-Path: fblbounces@senderscore.net
+Received: from correo.domain1.tld (LHLO correo.domain1.tld) (XX.YY.ZZ.6)
+ by correo.domain1.tld with LMTP; Sun, 17 Jan 2016 07:59:28 +0100 (CET)
+Received: from correo.domain1.tld (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTPS id 22F9E3A4B4E20
+	for <abuse@domain2.tld>; Sun, 17 Jan 2016 07:59:28 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTP id 116963A4B4E22
+	for <abuse@domain2.tld>; Sun, 17 Jan 2016 07:59:28 +0100 (CET)
+Received: from correo.domain1.tld ([127.0.0.1])
+	by localhost (correo.domain1.tld [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id gj9jhBhcf9mK for <abuse@domain2.tld>;
+	Sun, 17 Jan 2016 07:59:27 +0100 (CET)
+Received: from rl1.domain1.tld (rl1.domain1.tld [XX.YY.ZZ.51])
+	by correo.domain1.tld (Postfix) with ESMTP id DE8993A4B4E20
+	for <abuse@domain2.tld>; Sun, 17 Jan 2016 07:59:27 +0100 (CET)
+Received-SPF: Pass (sender SPF authorized) identity=mailfrom; client-ip=66.45.29.179; helo=mrb-fbl.returnpath.net; envelope-from=fblbounces@senderscore.net; receiver=abuse@domain2.tld 
+Received: from mrb-fbl.returnpath.net (mrb-fbl.returnpath.net [66.45.29.179])
+	by rl1.domain1.tld (Postfix) with ESMTP id 5EBB460A3B
+	for <abuse@domain2.tld>; Sun, 17 Jan 2016 07:59:23 +0100 (CET)
+Received: from poma01.lan.returnpath.net (poma01.lan.returnpath.net [10.2.0.106])
+	by mrb-fbl.returnpath.net (Postfix) with ESMTP id EA15E6146D
+	for <abuse@domain2.tld>; Sat, 16 Jan 2016 23:59:21 -0700 (MST)
+Received: by poma01.lan.returnpath.net (Postfix, from userid 106706)
+	id D99146069F; Sat, 16 Jan 2016 23:59:21 -0700 (MST)
+Content-Type: multipart/report; boundary="_----------=_14530139612790047056"; report-type="feedback-report"
+MIME-Version: 1.0
+X-Mailer: MIME::Lite 3.029 (F2.84; T2.04; A2.12; B3.13; Q3.13)
+Date: Sat, 16 Jan 2016 23:59:21 -0700
+Subject: OpenSRS Abuse Report
+To: abuse@domain2.tld
+From: feedbackloop@fbl.hostedemail.com
+Message-Id: <20160117065921.D99146069F@poma01.lan.returnpath.net>
+Content-Transfer-Encoding: 7bit
+
+This is a multi-part message in MIME format.
+
+--_----------=_14530139612790047056
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+
+This is a OpenSRS email abuse report for an email message received from IP 10.17.18.12 on Sun, 17 Jan 2016 06:57:49 +0000
+
+
+--_----------=_14530139612790047056
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: message/feedback-report
+
+User-Agent: ReturnPathFBL/1.0
+Abuse-Type: complaint
+Arrival-Date: Sun, 17 Jan 2016 06:57:49 +0000
+Feedback-Type: abuse
+Version: 1
+Source-IP: 10.17.18.12
+Original-Rcpt-To: 06b17a35259424d71a396bd1f6b356e0@bex.net
+Original-Mail-From: krista_montgomery@domain3.tld
+Reported-Domain: bex.net
+
+--_----------=_14530139612790047056
+Content-Disposition: inline
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 7bit
+
+Received: from smtprelay.b.hostedemail.com (smtprelay0086.b.hostedemail.com
+  [64.98.42.86]) by abuse1.tucows.com (Postfix) with ESMTP id 7C2F210A4C12 for
+  <mailtrain.spam@emaildefenseservice.com>; Sun, 17 Jan 2016 06:58:56 +0000
+  (UTC)
+Received: from localhost.localdomain (10.5.19.248.rfc1918.com [10.5.19.248])
+  by smtprelay02.b.hostedemail.com (Postfix) with ESMTP id C3A7ED39D6 for
+  <mailtrain.spam@emaildefenseservice.com>; Sun, 17 Jan 2016 06:58:51 +0000
+  (UTC)
+Delivered-To: 06b17a35259424d71a396bd1f6b356e0@bex.net
+X-FDA: 71084544258.21.can31_7e79d7e488410
+Authentication-Results: auth.b.hostedemail.com; dkim=none reason="no
+  signature"; dkim-adsp=none (insecure policy); dkim-atps=neutral
+X-Spam-Summary:
+  1,0,0,,d41d8cd98f00b204,krista_montgomery@domain3.tld,:,RULES_HIT:30054:30070,0,RBL:10.17.18.12:@domain3.tld:.lbl8.mailshell.net-62.2.11.2 64.100.201.201,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:fp,MSBL:0,DNSBL:neutral,Custom_rules:0:3:0,LFtime:72,LUA_SUMMARY:none
+X-HE-Tag: can31_7e79d7e488410
+X-Filterd-Recvd-Size: 1457
+Received: from ecrlin.ecran.es (ecrlin.ecran.es [10.17.18.12]) by
+  imf12.b.hostedemail.com (Postfix) with ESMTP for
+  <06b17a35259424d71a396bd1f6b356e0@bex.net>; Sun, 17 Jan 2016 06:57:49 +0000
+  (UTC)
+Received: by ecrlin.ecran.es (Postfix, from userid 48) id 29AD11DBC71; Sun,
+  17 Jan 2016 07:57:48 +0100 (CET)
+Subject: Wet penties
+Date: Sun, 17 Jan 2016 07:57:48 +0100
+From: Krista Montgomery <krista_montgomery@domain3.tld>
+Message-ID: <ae08021e4ef68b8032025fa78730ba60@domain3.tld>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+  boundary="b1_ae08021e4ef68b8032025fa78730ba60"
+To: 06b17a35259424d71a396bd1f6b356e0@bex.net
+Content-Transfer-Encoding: 7bit
+
+
+--b1_ae08021e4ef68b8032025fa78730ba60
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+Hi, What do you like to get pleasured?
+
+I want to swallow your warm jizz
+
+I know how to give a pleasant massage
+
+[ http://webhostnr1.com/diff.php?h=3D41&4Am=3D9hvUjQL7pmX9RNdsBr ] Check =
+out my boobies
+
+Bye cutie
+
+
+
+--b1_ae08021e4ef68b8032025fa78730ba60
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<body>
+
+Hi, What do you like to get pleasured?
+<br><br>
+I want to swallow your warm jizz
+<br><br>
+I know how to give a pleasant massage
+
+<a href=3D"http://webhostnr1.com/diff.php?h=3D41&4Am=3D9hvUjQL7pmX9RNdsBr=
+">Check out my boobies</a>
+
+Bye cutie
+
+</body>
+</html>
+
+
+
+
+--b1_ae08021e4ef68b8032025fa78730ba60--
+
+--_----------=_14530139612790047056--
+
+

@@ -1,0 +1,167 @@
+From feedbackloop@fbl.usa.net Sat Jan 09 03:56:44 2016
+Return-Path: fblbounces@senderscore.net
+Received: from correo.domain1.tld (LHLO correo.domain1.tld) (XX.YY.ZZ.6)
+ by correo.domain1.tld with LMTP; Sat, 9 Jan 2016 04:56:54 +0100 (CET)
+Received: from correo.domain1.tld (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTPS id 8007F3A4B4E0D
+	for <abuse@domain2.tld>; Sat,  9 Jan 2016 04:56:54 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTP id 68A793A4B4E19
+	for <abuse@domain2.tld>; Sat,  9 Jan 2016 04:56:54 +0100 (CET)
+Received: from correo.domain1.tld ([127.0.0.1])
+	by localhost (correo.domain1.tld [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id hXSbORvvbI41 for <abuse@domain2.tld>;
+	Sat,  9 Jan 2016 04:56:54 +0100 (CET)
+Received: from rl4.domain1.tld (rl4.domain1.tld [XX.YY.ZZ.54])
+	by correo.domain1.tld (Postfix) with ESMTP id 211783A4B4E0D
+	for <abuse@domain2.tld>; Sat,  9 Jan 2016 04:56:54 +0100 (CET)
+Received-SPF: Pass (sender SPF authorized) identity=mailfrom; client-ip=66.45.29.179; helo=mrb-fbl.returnpath.net; envelope-from=fblbounces@senderscore.net; receiver=abuse@domain2.tld 
+Received: from mrb-fbl.returnpath.net (mrb-fbl.returnpath.net [66.45.29.179])
+	by rl4.domain1.tld (Postfix) with ESMTP id 24B6F60E3D
+	for <abuse@domain2.tld>; Sat,  9 Jan 2016 04:56:46 +0100 (CET)
+Received: from poma01.lan.returnpath.net (poma01.lan.returnpath.net [10.2.0.106])
+	by mrb-fbl.returnpath.net (Postfix) with ESMTP id 46D5B60C0F
+	for <abuse@domain2.tld>; Fri,  8 Jan 2016 20:56:44 -0700 (MST)
+Received: by poma01.lan.returnpath.net (Postfix, from userid 106706)
+	id 3305F6069F; Fri,  8 Jan 2016 20:56:44 -0700 (MST)
+Content-Type: multipart/report; boundary="_----------=_1452311804245423585"; report-type="feedback-report"
+MIME-Version: 1.0
+X-Mailer: MIME::Lite 3.029 (F2.84; T2.04; A2.12; B3.13; Q3.13)
+Date: Fri, 8 Jan 2016 20:56:44 -0700
+Subject: USA.net Abuse Report
+To: abuse@domain2.tld
+From: feedbackloop@fbl.usa.net
+Message-Id: <20160109035644.3305F6069F@poma01.lan.returnpath.net>
+Content-Transfer-Encoding: 7bit
+
+This is a multi-part message in MIME format.
+
+--_----------=_1452311804245423585
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+
+This is a USA.net email abuse report for an email message received from IP 10.17.18.23 on Wed, 14 Oct 2015 06:59:38 +0000
+
+
+--_----------=_1452311804245423585
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: message/feedback-report
+
+User-Agent: ReturnPathFBL/1.0
+Abuse-Type: complaint
+Arrival-Date: Wed, 14 Oct 2015 06:59:38 +0000
+Feedback-Type: abuse
+Version: 1
+Source-IP: 10.17.18.23
+Original-Rcpt-To: c92c34de884224fbae01bb3472c17c92@kjo.com.sa
+Original-Mail-From: info@kjo.com.sa
+Reported-Domain: kjo.com.sa
+
+--_----------=_1452311804245423585
+Content-Disposition: inline
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 7bit
+
+Received: from netmail11.mx.net (netmail11.mx.net [165.212.10.31]) by
+  mxg.senderscore.net (Postfix) with ESMTP id A25DF300038 for
+  <usanet@senderscore.net>; Fri,  8 Jan 2016 20:56:32 -0700 (MST)
+Received: from nm11.cms.usa.net (localhost [127.0.0.1]) by netmail11.mx.net
+  (Postfix) with ESMTP id 69EE9FF7F2A for <usanet@senderscore.net>; Sat,  9
+  Jan 2016 03:56:32 +0000 (UTC)
+X-USANET-Received: from nm11.cms.usa.net [127.0.0.1] by nm11.cms.usa.net via
+  mtad (C8.MAIN.3.95M)  with ESMTP id 908uaiD5b7776M11; Sat, 09 Jan 2016
+  03:56:27 -0000
+X-USANET-GWS2-Tagid: UNKN
+Received: from co03.mbox.net [165.212.64.33] by nm11.cms.usa.net via smtad
+  (C8.MAIN.4.04K)  with ESMTPS id XID920uaiD5b9887X11; Sat, 09 Jan 2016
+  03:56:27 -0000
+X-USANET-Source: 165.212.64.33   IN   <> co03.mbox.net TLS
+X-USANET-MsgId: XID920uaiD5b9887X11
+Received: from co03.mbox.net (localhost [127.0.0.1]) by co03.mbox.net
+  (Postfix) with ESMTP id 3pcnXq1cMQz5Hx1 for <abuse-ops@usa.net>; Sat,  9 Jan
+  2016 03:56:27 +0000 (UTC)
+X-USANET-Received: from co03.mbox.net [127.0.0.1] by co03.mbox.net via mtad
+  (C8.MAIN.4.02J)  with ESMTP id 598uaiDO81888M03; Sat, 09 Jan 2016 03:40:59
+  -0000
+Received: from ca34.cms.usa.net [165.212.11.134] by co03.mbox.net via smtad
+  (C8.MAIN.4.02Q)  with ESMTP id XID019uaiDO88804X03; Sat, 09 Jan 2016
+  03:40:59 -0000
+Z-USANET-MsgId: XID019uaiDO88804X03
+Received: from web01.cms.usa.net [165.212.8.201] by ca34.cms.usa.net
+  (ESMTP/<>) via mtad (C8.MAIN.3.95M)  with ESMTP id 643uaiDO85760M34; Sat, 09
+  Jan 2016 03:40:59 -0000
+X-USANET-Received: from nm11.cms.usa.net [127.0.0.1] by nm11.cms.usa.net via
+  mtad (C8.MAIN.3.95M)  with ESMTP id 996TJNg8z2384M11; Wed, 14 Oct 2015
+  06:59:51 -0000
+Received: from server.domain3.tld [10.17.18.23] by
+  nm11.cms.usa.net via smtad (C8.MAIN.4.00L)  with ESMTPS id
+  XID821TJNg8z9785X11; Wed, 14 Oct 2015 06:59:50 -0000
+Z-USANET-MsgId: XID821TJNg8z9785X11
+Received: from [78.129.181.48] (unknown [78.129.181.48]) by
+  server.domain3.tld (Postfix) with ESMTPA id 7490920155; Wed, 14
+  Oct 2015 08:59:38 +0200 (CEST)
+MIME-Version: 1.0
+Subject: PLEASE QUOTE YOUR BEST PRICE AS PER ATTACHED..
+From: Minna Abhil' <c92c34de884224fbae01bb3472c17c92@kjo.com.sa>
+Date: Tue, 13 Oct 2015 23:59:32 -0700
+Reply-To: trade_track@hotmail.com
+Message-ID: <821TJNg7z9785S11@nm11.cms.usa.net>
+Content-Type: multipart/mixed; boundary="===============1780848645=="
+To: c92c34de884224fbae01bb3472c17c92@kjo.com.sa
+
+You will not see this in a MIME-aware mail reader.
+
+
+--===============1780848645==
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="===============1887739349=="
+
+
+--===============1887739349==
+Content-Type: text/plain; charset="iso-8859-1"
+MIME-Version: 1.0
+Content-Description: Mail message body
+Content-Transfer-Encoding: quoted-printable
+
+GREETINGS FROM Al-Khafji Joint Operations ,
+PLEASE QUOTE BEST PRICES, TERMS AND DELIVERY TIME FOR THE ORDERS AS PER ATT=
+ACHED REQUISITION, STATING ALSO THE CIF(Dhiba Port Suadi Arabia) AS WELL AS=
+ ANY ANCILLARY CHARGES.
+
+WE REMAIN AT YOUR DISPOSAL IF ANY ADDITIONAL INFORMATION IS REQUIRED. THANK=
+ YOU IN ADVANCE FOR YOUR KIND COOPERATION AND PROMPT REPLY.
+
+BEST REGARDS
+
+Minna Abhil
+PURCHASING DEPT
+
+P.O.Box 256 Al-Khafji 31971
+Saudi Arabia
+Tel:  +966 37652020
+Web Site: www.kjo.com.sa=20
+
+--===============1887739349==
+Content-Type: text/html; charset="iso-8859-1"
+MIME-Version: 1.0
+Content-Description: Mail message body
+Content-Transfer-Encoding: quoted-printable
+
+<HTML><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3Diso-8859-1"/></head><BODY><DIV dir=3Dltr><I>GREETINGS FROM Al-Khafji Joi=
+nt Operations ,<BR>PLEASE QUOTE BEST PRICES, TERMS AND DELIVERY TIME FOR TH=
+E ORDERS AS PER ATTACHED REQUISITION, STATING ALSO THE CIF(Dhiba Port Suadi=
+ Arabia) AS WELL AS ANY ANCILLARY CHARGES.<BR><BR>WE REMAIN AT YOUR DISPOSA=
+L IF ANY ADDITIONAL INFORMATION IS REQUIRED. THANK YOU IN ADVANCE FOR YOUR =
+KIND COOPERATION AND PROMPT REPLY.</I><BR><BR><I><B>BEST REGARDS<BR><BR>Min=
+na Abhil<BR>PURCHASING DEPT<BR><BR>P.O.Box 256 Al-Khafji 31971<BR>Saudi Ara=
+bia<BR>Tel:&nbsp; +966 37652020<BR>Web Site: <A href=3D"http://www.kjo.com.=
+sa/" target=3D"">www.kjo.com.sa</A></B></I> </DIV></BODY></HTML>
+
+--===============1887739349==--
+
+--_----------=_1452311804245423585--
+
+

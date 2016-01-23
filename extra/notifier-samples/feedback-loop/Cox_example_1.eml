@@ -1,0 +1,106 @@
+From feedbackloop@fbl.cox.net Tue Jan 19 16:22:55 2016
+Return-Path: fblbounces@senderscore.net
+Received: from correo.domain1.tld (LHLO correo.domain1.tld) (XX.YY.ZZ.6)
+ by correo.domain1.tld with LMTP; Tue, 19 Jan 2016 17:23:02 +0100 (CET)
+Received: from correo.domain1.tld (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTPS id 750683A4B4E0C
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 17:23:02 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTP id 6513E3A4B4E07
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 17:23:02 +0100 (CET)
+Received: from correo.domain1.tld ([127.0.0.1])
+	by localhost (correo.domain1.tld [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id hFpcb5DKyY1C for <abuse@domain2.tld>;
+	Tue, 19 Jan 2016 17:23:02 +0100 (CET)
+Received: from rl4.domain1.tld (rl4.domain1.tld [XX.YY.ZZ.54])
+	by correo.domain1.tld (Postfix) with ESMTP id 4AC113A4B4E01
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 17:23:02 +0100 (CET)
+Received-SPF: Pass (sender SPF authorized) identity=mailfrom; client-ip=66.45.29.179; helo=mrb-fbl.returnpath.net; envelope-from=fblbounces@senderscore.net; receiver=abuse@domain2.tld 
+Received: from mrb-fbl.returnpath.net (mrb-fbl.returnpath.net [66.45.29.179])
+	by rl4.domain1.tld (Postfix) with ESMTP id 587A761806
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 17:22:57 +0100 (CET)
+Received: from poma00.lan.returnpath.net (poma00.lan.returnpath.net [10.2.0.104])
+	by mrb-fbl.returnpath.net (Postfix) with ESMTP id 4D1BA60D7B
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 09:22:56 -0700 (MST)
+Received: by poma00.lan.returnpath.net (Postfix, from userid 106706)
+	id 39FB46084D; Tue, 19 Jan 2016 09:22:56 -0700 (MST)
+Content-Type: multipart/report; boundary="_----------=_145322057567258324"; report-type="feedback-report"
+MIME-Version: 1.0
+X-Mailer: MIME::Lite 3.029 (F2.84; T2.04; A2.12; B3.13; Q3.13)
+Date: Tue, 19 Jan 2016 09:22:55 -0700
+Subject: Cox Abuse Report
+To: abuse@domain2.tld
+From: feedbackloop@fbl.cox.net
+Message-Id: <20160119162256.39FB46084D@poma00.lan.returnpath.net>
+Content-Transfer-Encoding: 7bit
+
+This is a multi-part message in MIME format.
+
+--_----------=_145322057567258324
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+
+This is a Cox email abuse report for an email message received from IP 10.17.18.7 on Mon, 21 Dec 2015 22:52:30 +0000
+
+
+--_----------=_145322057567258324
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: message/feedback-report
+
+User-Agent: ReturnPathFBL/1.0
+Abuse-Type: complaint
+Arrival-Date: Mon, 21 Dec 2015 22:52:30 +0000
+Feedback-Type: abuse
+Version: 1
+Source-IP: 10.17.18.7
+Original-Rcpt-To: 275b86f68f4c15e341a5188e416c44b6@cox.net
+Original-Mail-From: hallie_wilson@domain3.tld
+Reported-Domain: cox.net
+
+--_----------=_145322057567258324
+Content-Disposition: inline
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 7bit
+
+Return-Path: <hallie_wilson@domain3.tld>
+Received: from fed1rmimpi210 ([68.230.241.25]) by fed1rmfepi202.cox.net
+  (InterMail vM.8.01.05.15 201-2260-151-145-20131218) with ESMTP id
+  <20151221225231.COAJ17492.fed1rmfepi202.cox.net@fed1rmimpi210> for
+  <275b86f68f4c15e341a5188e416c44b6@cox.net>; Mon, 21 Dec 2015 17:52:31 -0500
+Received: from domain3.tld ([10.17.18.7]) by fed1rmimpi210 with cox
+  id wNsU1r00f2yRj8401NsV8s; Mon, 21 Dec 2015 17:52:30 -0500
+Message-Id: <wNsU1r00f2yRj8401NsV8s>
+X-CT-Class: Clean
+X-CT-Score: 0.00
+X-CT-RefID: str=0001.0A020201.567882AF.018B,ss=1,re=0.000,fgs=0
+X-CT-Spam: 0
+X-Authority-Analysis: v=2.0 cv=Yq7RsfkX c=1 sm=1
+  a=fECI2wj0qV3x9aG1ZDVc4w==:17 a=ZOhvbxcnAAAA:8 a=Siiu0HSQAAAA:8
+  a=LCRtoLYJc96XoZw9dK0A:9 a=wPNLvfGTeEIA:10 a=Ao7nmr-H9vAA:10
+  a=-sMPM9ncfZ8A:10 a=zSNXC-rwxtAA:10 a=-FEs8UIgK8oA:10 a=NWVoK91CQyQA:10
+  a=L4gZQ64ega+x55OlyDWTNvZT6KQ=:19 a=fECI2wj0qV3x9aG1ZDVc4w==:117
+X-CM-Score: 0.00
+Date: Mon, 21 Dec 2015 23:52:28 +0100
+From: "Hallie Wilson" <hallie_wilson@domain3.tld>
+Reply-To: "Hallie Wilson" <hallie_wilson@domain3.tld>
+Message-ID: <51ca092-66ab5-3a@domain3.tld>
+Subject: RE:  Lol Kinky hungarian babe gets wild sofa fuck
+X-Priority: 3 (Normal)
+MIME-Version: 1.0
+Content-Type: text/html; charset="iso-8859-1"
+To: 275b86f68f4c15e341a5188e416c44b6@cox.net
+Content-Transfer-Encoding: quoted-printable
+
+
+<div>
+<div>Kinky hungarian babe gets wild sofa fuck <a href=3D"http://matrix-de=
+sign.be/libraries/cegcore/assets/css/stats.php?ZnN3Z3Bha21sZ0JhbXosbGd2">=
+click here</a></h2>
+</div>
+
+
+--_----------=_145322057567258324--
+
+

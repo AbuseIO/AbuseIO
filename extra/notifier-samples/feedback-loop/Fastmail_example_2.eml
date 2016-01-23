@@ -1,0 +1,128 @@
+From feedbackloop@fbl.fastmail.com Tue Jan 19 12:13:25 2016
+Return-Path: fblbounces@senderscore.net
+Received: from correo.domain1.tld (LHLO correo.domain1.tld) (XX.YY.ZZ.6)
+ by correo.domain1.tld with LMTP; Tue, 19 Jan 2016 13:13:31 +0100 (CET)
+Received: from correo.domain1.tld (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTPS id 086893A4B4E0C
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 13:13:31 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+	by correo.domain1.tld (Postfix) with ESMTP id EE4CB3A4B4E07
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 13:13:30 +0100 (CET)
+Received: from correo.domain1.tld ([127.0.0.1])
+	by localhost (correo.domain1.tld [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id bKbZzDUh--q2 for <abuse@domain2.tld>;
+	Tue, 19 Jan 2016 13:13:30 +0100 (CET)
+Received: from rl3.domain1.tld (rl3.domain1.tld [XX.YY.ZZ.53])
+	by correo.domain1.tld (Postfix) with ESMTP id 805E43A4B4E01
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 13:13:30 +0100 (CET)
+Received-SPF: Pass (sender SPF authorized) identity=mailfrom; client-ip=66.45.29.178; helo=mra-fbl.returnpath.net; envelope-from=fblbounces@senderscore.net; receiver=abuse@domain2.tld 
+Received: from mra-fbl.returnpath.net (mra-fbl.returnpath.net [66.45.29.178])
+	by rl3.domain1.tld (Postfix) with ESMTP id C2A796171F
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 13:13:26 +0100 (CET)
+Received: from poma01.lan.returnpath.net (poma01.lan.returnpath.net [10.2.0.106])
+	by mra-fbl.returnpath.net (Postfix) with ESMTP id 702B560B4E
+	for <abuse@domain2.tld>; Tue, 19 Jan 2016 05:13:25 -0700 (MST)
+Received: by poma01.lan.returnpath.net (Postfix, from userid 106706)
+	id 6A0FD606B4; Tue, 19 Jan 2016 05:13:25 -0700 (MST)
+Content-Type: multipart/report; boundary="_----------=_14532056052052215165"; report-type="feedback-report"
+MIME-Version: 1.0
+X-Mailer: MIME::Lite 3.029 (F2.84; T2.04; A2.12; B3.13; Q3.13)
+Date: Tue, 19 Jan 2016 05:13:25 -0700
+Subject: Fastmail Abuse Report
+To: abuse@domain2.tld
+From: feedbackloop@fbl.fastmail.com
+Message-Id: <20160119121325.6A0FD606B4@poma01.lan.returnpath.net>
+Content-Transfer-Encoding: 7bit
+
+This is a multi-part message in MIME format.
+
+--_----------=_14532056052052215165
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+
+This is a Fastmail email abuse report for an email message received from IP 10.17.18.11 on Sat, 16 Jan 2016 11:52:00 +0000
+
+
+--_----------=_14532056052052215165
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: message/feedback-report
+
+User-Agent: ReturnPathFBL/1.0
+Abuse-Type: complaint
+Arrival-Date: Sat, 16 Jan 2016 11:52:00 +0000
+Feedback-Type: abuse
+Version: 1
+Source-IP: 10.17.18.11
+Original-Rcpt-To: e706e595ba0bb1b7fb130a8e1b928a33@myfastmail.com
+Original-Mail-From: ashlee_huffman@domain3.tld
+Reported-Domain: myfastmail.com
+
+--_----------=_14532056052052215165
+Content-Disposition: inline
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 7bit
+
+Received: from forward5-smtp.messagingengine.com
+  (forward5-smtp.messagingengine.com [66.111.4.239]) by mxf.senderscore.net
+  (Postfix) with ESMTP id 0124215C0036 for <fastmailcomp@senderscore.net>;
+  Tue, 19 Jan 2016 05:13:12 -0700 (MST)
+Received: from imap34.nyi.internal (imap34.nyi.internal [10.202.2.84]) by
+  mailforward.nyi.internal (Postfix) with ESMTP id B3206203C1; Tue, 19 Jan
+  2016 07:13:12 -0500 (EST)
+Received: by imap34.nyi.internal (Postfix, from userid 99) id ABADA1284A4A;
+  Tue, 19 Jan 2016 07:13:12 -0500 (EST)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41]) by
+  sloti34d1t06 (Cyrus 3.0.0-beta1-git-fastmail-12369) with LMTPA; Sat, 16 Jan
+  2016 06:52:02 -0500
+Received: from mx5 ([10.202.2.204]) by compute1.internal (LMTPProxy); Sat,
+  16 Jan 2016 06:52:02 -0500
+Received: from mx5.messagingengine.com (localhost [127.0.0.1]) by
+  mx5.nyi.internal (Postfix) with ESMTP id CE9C0280D16 for
+  <e706e595ba0bb1b7fb130a8e1b928a33@myfastmail.com>; Sat, 16 Jan 2016 06:52:01
+  -0500 (EST)
+Received: from mx5.nyi.internal (localhost [127.0.0.1]) by
+  mx5.messagingengine.com (Authentication Milter) with ESMTP id
+  BD1E792C591.EAD12280D14; Sat, 16 Jan 2016 06:52:01 -0500
+Authentication-Results: mx5.messagingengine.com; dkim=none (no signatures
+  found); dmarc=fail (p=none) header.from=domain3.tld; spf=softfail
+  smtp.mailfrom=ashlee_huffman@domain3.tld smtp.helo=server.domain4.tld
+Received-SPF: softfail (domain3.tld: Sender is not authorized by default
+  to use 'ashlee_huffman@domain3.tld' in 'mfrom' identity, however domain
+  is not currently prepared for false failures (mechanism '~all' matched))
+  receiver=mx5.messagingengine.com; identity=mailfrom;
+  envelope-from="ashlee_huffman@domain3.tld"; helo=server.domain4.tld;
+  client-ip=10.17.18.11
+Received: from server.domain4.tld (unknown [10.17.18.11]) (using TLSv1 with
+  cipher DHE-RSA-AES256-SHA (256/256 bits)) (No client certificate requested)
+  by mx5.messagingengine.com (Postfix) with ESMTPS id EAD12280D14 for
+  <e706e595ba0bb1b7fb130a8e1b928a33@myfastmail.com>; Sat, 16 Jan 2016 06:52:00
+  -0500 (EST)
+Received: by server.domain4.tld (Postfix, from userid 48) id 4017ABD02B7; Sat,
+  16 Jan 2016 12:51:57 +0100 (CET)
+Subject: RE:  Shy petite teen stripping
+X-PHP-Originating-Script: 48:functions.php
+From: "Ashlee Huffman" <ashlee_huffman@domain3.tld>
+Reply-To: "Ashlee Huffman" <ashlee_huffman@domain3.tld>
+X-Priority: 3 (Normal)
+MIME-Version: 1.0
+Content-Type: text/html; charset="iso-8859-1"
+X-PPP-Message-ID: <20160116115155.3506.65184@server.domain4.tld>
+X-PPP-Vhost: domain3.tld
+Message-Id: <20160116115158.4017ABD02B7@server.domain4.tld>
+Date: Sat, 16 Jan 2016 12:51:57 +0100 (CET)
+To: e706e595ba0bb1b7fb130a8e1b928a33@myfastmail.com
+Content-Transfer-Encoding: quoted-printable
+
+
+<div>
+<div>Shy petite teen stripping <a href=3D"http://aren-stroy.ru/components=
+/com_phocagallery/views/ratingimga/press.php?b2Fwd2BsdndlQm97ZGNxdm9ja24s=
+YW1v">here</a></div>
+</div>
+
+
+--_----------=_14532056052052215165--
+
+
