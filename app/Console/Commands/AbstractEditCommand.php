@@ -68,6 +68,10 @@ abstract class AbstractEditCommand extends Command
 
     abstract protected function getModelFromRequest();
 
+    /**
+     * @param $model
+     * @return bool
+     */
     abstract protected function handleOptions($model);
 
     abstract protected function getValidator($model);

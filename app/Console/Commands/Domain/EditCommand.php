@@ -32,6 +32,10 @@ class EditCommand extends AbstractEditCommand
         return Domain::find($this->argument('id'));
     }
 
+    /**
+     * @param $model
+     * @return bool
+     */
     protected function handleOptions($model)
     {
         $this->updateFieldWithOption($model, 'name');
