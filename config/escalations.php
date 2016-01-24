@@ -11,7 +11,7 @@ return [
     | if that part of the path is enabled.
     |
     */
-    'default' => [
+    'DEFAULT' => [
 
         // By default leaving info tickets at info, and dont advance them to abuse
         'abuse' => [

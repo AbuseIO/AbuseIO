@@ -256,6 +256,62 @@ class IncidentsSave extends Job implements SelfHandling
                         $ticket->status_id = 1;
                     }
 
+                    /*
+                     * Walk thru the escalation upgrade path, and upgrade if required
+                     */
+                    //echo config("escalations.{$ticket->class_id}.abuse.enabled");
+                    if (is_array(config("escalations.{$ticket->class_id}"))) {
+                        // There is a specific escalation path for this class
+                        $escalationPath = $ticket->class_id;
+                    } else {
+                        // Use the default escalation path
+                        $escalationPath = 'DEFAULT';
+                    }
+
+                    // Check if all the values are set, or log a warning that were skipping escalation paths
+                    if (!is_bool(empty(config("escalations.{$escalationPath}.abuse.enabled"))) ||
+                        !is_numeric(config("escalations.{$escalationPath}.abuse.threshold")) ||
+                        !is_bool(empty(config("escalations.{$escalationPath}.escalation.enabled"))) ||
+                        !is_numeric(config("escalations.{$escalationPath}.escalation.threshold"))
+                    ) {
+                        Log::warning(
+                            get_class($this) . ': ' .
+                            "Escalation path settings are missing or incomplete. Skipping this phase"
+                        );
+                    } else {
+
+                        // Now actually check if anything needs to be changed and if so, change it.
+                        if (!empty(config("escalations.{$escalationPath}.abuse.enabled")) &&
+                            !empty(config("escalations.{$escalationPath}.abuse.threshold")) &&
+                            $ticket->events->count() > config("escalations.{$escalationPath}.abuse.threshold") &&
+                            $ticket->type_id == 1
+                        ) {
+                            // Upgrade to abuse
+                            Log::debug(
+                                get_class($this) . ': ' .
+                                "An escalation path threshold has been reached for ticket {$ticket->id}, " .
+                                "threshold: " . config("escalations.{$escalationPath}.abuse.threshold") . ", " .
+                                "setting: info -> abuse"
+                            );
+                            $ticket->type_id = 2;
+                        }
+
+                        if (!empty(config("escalations.{$escalationPath}.escalation.enabled")) &&
+                            !empty(config("escalations.{$escalationPath}.escalation.threshold")) &&
+                            $ticket->events->count() > config("escalations.{$escalationPath}.escalation.threshold") &&
+                            $ticket->type_id == 2
+                        ) {
+                            // Upgrade to escalation
+                            Log::debug(
+                                get_class($this) . ': ' .
+                                "An escalation path threshold has been reached for ticket {$ticket->id}, " .
+                                "threshold: " . config("escalations.{$escalationPath}.escalation.threshold") . ", " .
+                                "setting: abuse -> escalation"
+                            );
+                            $ticket->type_id = 3;
+                        }
+                    }
+
                     // Validate the model before saving
                     $validator = Validator::make(
                         json_decode(json_encode($ticket), true),
