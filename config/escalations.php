@@ -14,12 +14,16 @@ return [
     'default' => [
 
         // By default leaving info tickets at info, and dont advance them to abuse
-        'abuse_enabled'             => false,
-        'abuse_threshold'           => false,
-        
+        'abuse' => [
+            'enabled'               => false,
+            'threshold'             => false,
+        ],
+
         // By default upgrade abuse tickets to escalation once there are 25 or more events
-        'escalation_enabled'        => true,
-        'escalation_threshold'      => 25,
+        'escalation' => [
+            'enabled'               => true,
+            'threshold'             => 25,
+        ],
     ],
 
     /*
@@ -41,11 +45,14 @@ return [
     'FEEDBACK_LOOP' => [
 
         // By default upgrade info tickets to abuse once there are 25 or more events
-        'abuse_enabled'             => true,
-        'abuse_threshold'           => 25,
-
+        'abuse' => [
+            'enabled'               => true,
+            'threshold'             => 25,
+        ],
         // By default upgrade abuse tickets to escalation once there are 100 or more events
-        'escalation_enabled'        => true,
-        'escalation_threshold'      => 100,
+        'escalation' => [
+            'enabled'               => true,
+            'threshold'             => 100,
+        ],
     ],
 ];
