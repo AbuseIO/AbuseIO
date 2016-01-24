@@ -22,6 +22,7 @@ before_script:
   - chmod -R 770 storage
   - php artisan migrate:install --no-interaction -vvv
   - chmod +x extra/notifier-samples/runall
+  - wget -O bootstrap/app.php https://raw.githubusercontent.com/laravel/laravel/master/bootstrap/app.php
 
 script:
   - php artisan migrate --env=testing --no-interaction -vvv
@@ -32,7 +33,6 @@ script:
 
 after_script:
   - ls -laR storage/mailarchive
-  - ls -laR /var/log/
   - cat storage/logs/*
 
 notifications:
