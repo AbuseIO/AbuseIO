@@ -32,7 +32,8 @@ script:
 
 after_script:
   - ls -laR storage/mailarchive
-  - cat /var/log/syslog.log | grep abuseio
+  - cat /var/log/syslog | grep abuseio
+  - cat /var/log/messages | grep abuseio
 
 notifications:
   email:
