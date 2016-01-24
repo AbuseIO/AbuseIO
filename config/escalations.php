@@ -16,7 +16,7 @@ return [
         // By default leaving info tickets at info, and dont advance them to abuse
         'abuse' => [
             'enabled'               => false,
-            'threshold'             => false,
+            'threshold'             => 10,
         ],
 
         // By default upgrade abuse tickets to escalation once there are 25 or more events
