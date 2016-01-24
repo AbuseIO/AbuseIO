@@ -41,7 +41,7 @@ Content-Disposition: inline
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain
 
-This is a Synacor email abuse report for an email message received from IP AA.BB.CC.DD on Tue, 10 Feb 2015 01:36:04 +0000
+This is a Synacor email abuse report for an email message received from IP 10.18.19.20 on Tue, 10 Feb 2015 01:36:04 +0000
 
 
 --_----------=_145193546711976827926
@@ -54,7 +54,7 @@ Abuse-Type: complaint
 Arrival-Date: Tue, 10 Feb 2015 01:36:04 +0000
 Feedback-Type: abuse
 Version: 1
-Source-IP: AA.BB.CC.DD
+Source-IP: 10.18.19.20
 Original-Mail-From: rhejda@charter.net
 
 --_----------=_145193546711976827926
@@ -78,7 +78,7 @@ X_CMAE_Category: , ,
 X-CNFS-Analysis: 
 X-CM-Score: 
 X-Scanned-by: Cloudmark Authority Engine
-Received: from [AA.BB.CC.DD] ([AA.BB.CC.DD:4769]
+Received: from [10.18.19.20] ([10.18.19.20:4769]
   helo=server.domain2.tld) by mx.knology.net (envelope-from
   <rhejda@charter.net>) (ecelerity 3.6.1.42806 r(Platform:3.6.1.1)) with ESMTP
   id E3/31-02192-FB069D45; Mon, 09 Feb 2015 20:37:04 -0500
