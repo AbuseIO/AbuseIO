@@ -15,14 +15,12 @@ return [
      */
     'DEFAULT' => [
         'name' => 'Generiek bericht',
-        'description' => "This classification has no information text yet."
+        'description' => "Deze klassificatie heeft nog informatie."
     ],
 
     'BOTNET_CONTROLLER' => [
         'name' => 'Botnet server',
-        'description' => "
-            This classification has no information text yet.
-            "
+        'description' => "Deze klassificatie heeft nog informatie."
     ],
 
     'BOTNET_INFECTION' => [
@@ -104,9 +102,7 @@ return [
 
     'COMPROMISED_SERVER' => [
         'name' => 'Gecompromitteerde server',
-        'description' => "
-            This classification has no information text yet.
-            "
+        'description' => "Deze klassificatie heeft nog informatie."
     ],
 
     'COMPROMISED_WEBSITE' => [
@@ -236,6 +232,80 @@ return [
             "
     ],
 
+    'FEEDBACK_LOOP' => [
+            'name' => 'Feedback Loop (FBL) bericht',
+            'description' => "
+                <h2>What is A Feedback Loop?</h2>
+
+                <p>In general, a feedback loop (FBL) or complaint feedback loop is
+                an inter-organizational form of feedback, by which an Internet service provider (ISP) forwards
+                email complaints originating from their users, back to the senders' organizations. Generally,
+                ISPs expect that these transactions are processed as unsubscribe requests and that the sender
+                researches the nature of the request, to reduce the incidence of such complaints.</p>
+
+                <p>The most common method for ISPs to receive users' complaints is by placing a report spam button
+                on their webmail pages or in their email client. Or, the user may send the email to the ISP
+                Postmaster. In rare cases, these feedback loops may not be based on user reports. For example,
+                they may be based on automated virus detection, or similar mechanisms.</p>
+
+                <p>Some ISPs remove the email address of its customer before returning the message to the sender,
+                for privacy or legal reasons. This means it is important for senders to utilize some method
+                other than an email address within a message, in order to identify the recipient.</p>
+
+                <h2>Why Is A Feedback Loop Important?</h2>
+
+                <p>As of May 2008, there were 12 FBLs in place at several of the world's largest ISPs including
+                AOL, Hotmail and Yahoo. Feedback loops have become an email industry standard. The data
+                returned as part of the feedback loop system is extremely valuable in a couple of ways:</p>
+
+                <p> - The first is for list hygiene: Members who complain through a feedback loop can be
+                unsubscribed, thereby reducing future complaints. Some may call this list-washing, but
+                it's just common sense. Even if someone previously opted in to receive messages, if the
+                user complains, the first thing you should do is cease mailing to that user.</p>
+
+                <p> - The second use of FBLs is to analyze the complaints. There is a wealth of data in who
+                complains and what they complain about. Regardless of whether you believe the complaints are
+                unfounded, if they complained they were dissatisfied. Smart marketers aim to avoid dissatisfied
+                customers or prospective customers.</p>
+
+                <h2>What can i do?</h2>
+
+                <p>Campaigns, subject lines and \"from\" addresses can also be monitored to ensure that campaign
+                elements are working well. You can identify areas that need improvement. If a particular mailing,
+                list, or list segment produces too many complaints, it bears further investigation. Many
+                complaints are caused by a failure to meet expectations. As an example, there may be a high
+                complaint rate among new subscribers. This can be caused by subscribers not getting what
+                they thought they signed up for or by a long delay between sign-up and the first mailing.</p>
+
+                <p>To further complicate matters, most ISPs have complaint rate thresholds above which your
+                messages may be filtered or blocked. Unfortunately, most ISPs don't publish these
+                thresholds, which vary by ISP. Monitoring the FBL data will improve your email practices,
+                while ensuring complaint rates do not exceed Internet Service Provider (ISP) thresholds.</p>
+
+                <h2>But i am not sending these e-mails</h2>
+
+                <p>If you receive a high number of FBL complaints on messages that you did not send yourself
+                you should consider the host being reported on (e.g. the IP) to be comprimised as these e-mails
+                did originate from your system. In these cases your advised to shutdown the mailserver and
+                clean the system and its mailqueues before taking it online again.</p>
+
+                <h2>What Is Questionable About Feedback Loops?</h2>
+
+                <p>The spam button brings some very imprecise functionality. Automatic unsubscribe is an
+                example. For years, end users have been told not to trust email unsubscribe links, to avoid
+                confirming that the message was received and opened. So, many users hit the spam button as
+                a way of unsubscribing. Users have to trust their ISP to not get into agreements with
+                spammers, in the strict sense of the latter term.</p>
+
+                <p>The spam button may also be used in error, as a means of expressing disagreement with the
+                message content, or as a means of expressing antipathy towards the message sender. Using
+                the same button for multiple conditions implies guesswork in interpreting the data.</p>
+
+                <p>The bottom line, however, is that the benefits of FBLs far outweigh the cons and the the
+                receiver of the Feedback loop must descide on its correct action.</p>
+            "
+    ],
+
     'FREAK_VULNERABLE_SERVER' => [
         'name' => 'FREAK kwetsbare server',
         'description' => "
@@ -291,7 +361,7 @@ return [
     ],
 
     'HARVESTING' => [
-        'name' => 'Oogsten',
+        'name' => 'Harvesting',
         'description' => "
 
             <h2>What is 'Harvesting'?</h2>
