@@ -3,8 +3,8 @@
 /**
  * Function to test a regular expression for it's validity.
  *
- * @param $bool
- * @return string
+ * @param string $regex
+ * @return boolean
  */
 function isValidRegex($regex)
 {
