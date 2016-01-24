@@ -32,6 +32,7 @@ script:
 
 after_script:
   - ls -laR storage/mailarchive
+  - ls -laR /var/log/
   - cat storage/logs/*
 
 notifications:
