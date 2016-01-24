@@ -23,6 +23,7 @@ before_script:
   - php artisan migrate:install --no-interaction -vvv
   - chmod +x extra/notifier-samples/runall
   - wget -O bootstrap/app.php https://raw.githubusercontent.com/laravel/laravel/master/bootstrap/app.php
+  - sed -i 's/App\\/AbuseIO\\/g' bootstrap/app.php
 
 script:
   - php artisan migrate --env=testing --no-interaction -vvv
