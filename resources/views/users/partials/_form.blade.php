@@ -64,7 +64,7 @@
     {!! Form::label('disabled', trans('misc.disabled').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
         {!! Form::hidden('disabled', 'false') !!}
-        {!! Form::checkbox('disableddummy', true, $disabled_checked, ['class' => 'form-control']) !!}
+        {!! Form::checkbox('disableddummy', true, $disabled_checked) !!}
         @if ($errors->has('disabled')) <p class="help-block">{{ $errors->first('disabled') }}</p> @endif
     </div>
 </div>

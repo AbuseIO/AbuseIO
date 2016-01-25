@@ -26,6 +26,9 @@ class BrandsController extends Controller
     public function __construct()
     {
         parent::__construct();
+
+        // is the logged in account allowed to execute an action on the Brand
+        $this->middleware('checkaccount:Brand', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo']]);
     }
 
     /**
@@ -91,25 +94,28 @@ class BrandsController extends Controller
                             'class' => 'form-inline'
                         ]
                     );
-                    if ($account->brand_id != $brand->id) {
+                    if (!$brand->isDefault() or $account->isSystemAccount())
+                    {
+                        if ($account->brand_id != $brand->id) {
+                            $actions .= ' <a href="brands/' . $brand->id .
+                                '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> ' .
+                                trans('misc.button.activate') . '</a> ';
+                        }
                         $actions .= ' <a href="brands/' . $brand->id .
-                            '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> ' .
-                            trans('misc.button.activate') . '</a> ';
+                            '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> ' .
+                            trans('misc.button.show') . '</a> ';
+                        $actions .= ' <a href="brands/' . $brand->id .
+                            '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> ' .
+                            trans('misc.button.edit') . '</a> ';
+                        $actions .= \Form::button(
+                            '<i class="glyphicon glyphicon-remove"></i> '
+                            . trans('misc.button.delete'),
+                            [
+                                'type' => 'submit',
+                                'class' => 'btn btn-danger btn-xs'
+                            ]
+                        );
                     }
-                    $actions .= ' <a href="brands/' . $brand->id .
-                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
-                        trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="brands/' . $brand->id .
-                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
-                        trans('misc.button.edit').'</a> ';
-                    $actions .= \Form::button(
-                        '<i class="glyphicon glyphicon-remove"></i> '
-                        . trans('misc.button.delete'),
-                        [
-                            'type' => 'submit',
-                            'class' => 'btn btn-danger btn-xs'
-                        ]
-                    );
                     $actions .= \Form::close();
                     return $actions;
                 }
@@ -235,14 +241,7 @@ class BrandsController extends Controller
      */
     public function edit(Brand $brand)
     {
-
         $accounts = Account::lists('name', 'id');
-
-        // may we edit this brand (is the brand connected to our account)
-        if (!$brand->mayEdit($this->auth_user)) {
-            return Redirect::route('admin.brands.show', $brand->id)
-                ->with('message', 'User is not authorized to edit this brand.');
-        }
 
         return view('brands.edit')
             ->with('account_selection', $accounts)
@@ -260,12 +259,6 @@ class BrandsController extends Controller
      */
     public function update(BrandFormRequest $brandForm, Brand $brand)
     {
-        // may we edit this brand
-        if (!$brand->mayEdit($this->auth_user)) {
-            return Redirect::route('admin.brands.show', $brand->id)
-                ->with('message', 'User is not authorized to edit this brand.');
-        }
-
         $input = $brandForm->all();
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
@@ -310,9 +303,7 @@ class BrandsController extends Controller
         $account->brand_id = $brand->id;
         $account->save();
 
-        //dd($account);
-
-        return Redirect::route('admin.brands.show', $brand->id)
+        return Redirect::route('admin.brands.index', $brand->id)
             ->with('message', 'Brand has been activated.');
     }
 }

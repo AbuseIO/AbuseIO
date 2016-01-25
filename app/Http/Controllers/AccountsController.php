@@ -21,6 +21,10 @@ class AccountsController extends Controller
     public function __construct()
     {
         parent::__construct();
+
+        // is the logged in account allowed to execute an action on the account
+        $this->middleware('checkaccount:Account', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo']]);
+
     }
 
     /**

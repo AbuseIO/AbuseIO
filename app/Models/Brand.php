@@ -82,17 +82,6 @@ class Brand extends Model
     }
 
     /**
-     * return the default Brand
-     *
-     * @return mixed
-     */
-    public static function getDefault()
-    {
-        $brand = Brand::find(1);
-        return $brand;
-    }
-
-    /**
      * Validation rules for this model being updated
      *
      * @param  \AbuseIO\Models\Brand $brand
@@ -110,25 +99,34 @@ class Brand extends Model
     }
 
     /**
-     * Checks if the current user may edit the brand
+     * Static method to check if the account has access to the model instance
      *
-     * @param User $user
+     * @param $model_id
+     * @param $account
      * @return bool
      */
-    public function mayEdit(User $user)
+    public static function checkAccountAccess($model_id, $account)
     {
-        $account = $user->account;
-
-        // System admin may always edit
-        if ($account->isSystemAccount() && $user->hasRole('admin')) {
+        // early return when we are in the system account
+        if ($account->isSystemAccount())
             return true;
-        }
 
-        if ($account->brand->id == $this->id && $user->hasRole('admin')) {
-            return true;
-        } else {
-            return false;
-        }
+        $brand = Brand::find($model_id);
+
+        $allowed = $brand->account_id == $account->id;
+
+        return ($allowed);
+    }
+
+    /**
+     * return the default Brand
+     *
+     * @return mixed
+     */
+    public static function getDefault()
+    {
+        $brand = Brand::find(1);
+        return $brand;
     }
 
     /**

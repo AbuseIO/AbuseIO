@@ -26,6 +26,9 @@ class UsersController extends Controller
     public function __construct()
     {
         parent::__construct();
+
+        // is the logged in account allowed to execute an action on the User
+        $this->middleware('checkaccount:User', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
 
     /**
@@ -35,8 +38,15 @@ class UsersController extends Controller
      */
     public function search()
     {
+        $auth_account = $this->auth_user->account;
+
         $users = User::select('users.*', 'accounts.name as account_name')
             ->leftJoin('accounts', 'accounts.id', '=', 'users.account_id');
+
+        if (!$auth_account->isSystemAccount())
+        {
+            $users = $users->where('accounts.id', '=', $auth_account->id);
+        }
 
         return Datatables::of($users)
             ->addColumn(
@@ -275,10 +285,11 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        // Do not allow the default admin user account to be deleted.
-        if ($user->id == 1) {
+        // Do not allow our own user to be destroyed.
+        if ($user->id == $this->auth_user->id)
+        {
             return Redirect::back()
-                ->with('message', 'Not allowed to delete the default admin user.');
+                ->with('message', 'Not allowed to delete current.');
         }
 
         $user->delete();

@@ -117,6 +117,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $rules;
     }
 
+    /**
+     * Static method to check if the account has access to the model instance
+     *
+     * @param $model_id
+     * @param $account
+     * @return bool
+     */
+    public static function checkAccountAccess($model_id, $account)
+    {
+        // early return when we are in the system account
+        if ($account->isSystemAccount())
+            return true;
+
+        $user = User::find($model_id);
+
+        $allowed = $user->account_id == $account->id;
+
+        return ($allowed);
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -262,13 +281,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return false;
         }
 
-        // can only enable/disable users from our own account, except for the systemaccount
-        if ($auth_account->id == $account->id || $auth_account->isSystemAccount()) {
-            return true;
-        }
-
         // all other cases
-        return false;
+        return true;
     }
 
     /**

@@ -94,6 +94,27 @@ class Account extends Model
     }
 
     /**
+     * Static method to check if the account has access to the model instance
+     *
+     * @param $model_id
+     * @param $account
+     * @return bool
+     */
+    public static function checkAccountAccess($model_id, $account)
+    {
+        // early return when we are in the system account
+        if ($account->isSystemAccount())
+            return true;
+
+        $my_account = Account::find($model_id);
+
+        $allowed = $my_account->account_id == $account->id;
+
+        return ($allowed);
+    }
+
+
+    /**
      * Return if the account is the system account
      *
      * @return bool
