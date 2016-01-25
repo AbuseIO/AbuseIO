@@ -121,10 +121,16 @@ class RunCommand extends Command
          * Send alarm on hanging jobs
          */
         if (count($hangs) != 0) {
-            AlertAdmin::send(
-                "Alert: There are " . count($hangs) . " jobs that are stuck:" . PHP_EOL . PHP_EOL .
-                implode(PHP_EOL, $hangs)
+            Log::warning(
+                get_class($this) . ': Housekeeper detected jobs that are stuck in one or more queues!'
             );
+
+            if (config('main.housekeeping.enable_queue_problem_alerts')) {
+                AlertAdmin::send(
+                    "Alert: There are " . count($hangs) . " jobs that are stuck:" . PHP_EOL . PHP_EOL .
+                    implode(PHP_EOL, $hangs)
+                );
+            }
         }
 
         /*
@@ -137,10 +143,16 @@ class RunCommand extends Command
                 $failed[$key] = implode(' ', get_object_vars($job));
             }
 
-            AlertAdmin::send(
-                "Alert: There are " . count($failed) . " jobs that have failed:" . PHP_EOL . PHP_EOL .
-                implode(PHP_EOL, $failed)
+            Log::warning(
+                get_class($this) . ': Housekeeper detected failed jobs which need to be handled!'
             );
+
+            if (config('main.housekeeping.enable_queue_problem_alerts')) {
+                AlertAdmin::send(
+                    "Alert: There are " . count($failed) . " jobs that have failed:" . PHP_EOL . PHP_EOL .
+                    implode(PHP_EOL, $failed)
+                );
+            }
         }
 
         if (count($failed) != 0 || count($hangs) != 0) {

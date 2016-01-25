@@ -51,6 +51,7 @@ return [
         'notifications_cron'                => '*/15 * * * * *',
         'collectors_cron'                   => '*/60 * * * * *',
         'housekeeper_cron'                  => '*/1 * * * * *',
+        'enable_queue_problem_alerts'       => true,
     ],
 
     'ash' => [

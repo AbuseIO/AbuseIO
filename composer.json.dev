@@ -1,7 +1,7 @@
 {
 	"name": "abuseio/abuseio",
 	"description": "Open Source abusemanagement tool",
-	"version": "4.0.0-alpha2",
+	"version": "4.0.0-alpha3",
 	"keywords": ["abuse", "abuseio"],
 	"homepage": "http://abuse.io",
 	"type": "project",
@@ -63,6 +63,7 @@
 		"abuseio/parser-usgo": "dev-master",
 		"abuseio/parser-webiron": "dev-master",
         "abuseio/parser-woody": "dev-master",
+        "abuseio/parser-fbl": "dev-master",
 
         "abuseio/collector-common": "dev-master",
         "abuseio/collector-rbl": "dev-master",
