@@ -244,8 +244,13 @@ class Notification extends Job implements SelfHandling
                  * notifications for multiple tickets if needed.
                  */
                 if ($force !== true) {
-                    // Skip if type Info and status Ignored
-                    if ($ticket->type_id == 'INFO' && $ticket->status_id == 'IGNORED') {
+                    // Skip if status Ignored
+                    if ($ticket->status_id == 'IGNORED') {
+                        continue;
+                    }
+
+                    // Skip if type Info and customer status Ignored
+                    if ($ticket->type_id == 'INFO' && $ticket->contact_status_id == 'IGNORED') {
                         continue;
                     }
 
