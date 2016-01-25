@@ -34,6 +34,8 @@ class EditCommandTest extends TestCase
 
     public function testWithHidden()
     {
+        $this->assertFalse((bool) Note::find(1)->hidden);
+
         $exitCode = Artisan::call(
             'note:edit',
             [
@@ -43,16 +45,21 @@ class EditCommandTest extends TestCase
         );
         $this->assertEquals($exitCode, 0);
         $this->assertContains('The note has been updated', Artisan::output());
+
+        $this->assertTrue((bool) Note::find(1)->hidden);
+
         $this->seed('NotesTableSeeder');
     }
 
     public function testEnabled()
     {
+        $this->assertFalse((bool) Note::find(1)->viewed);
+
         $exitCode = Artisan::call(
             'note:edit',
             [
                 'id' => '1',
-                '--viewed' => 'false',
+                '--viewed' => 'true',
             ]
         );
         $this->assertEquals($exitCode, 0);
@@ -60,8 +67,8 @@ class EditCommandTest extends TestCase
         /*
          * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
          */
-        $this->assertFalse((bool) Note::find(1)->viewed);
+        $this->assertTrue((bool) Note::find(1)->viewed);
 
-        $this->seed('DomainsTableSeeder');
+        $this->seed('NotesTableSeeder');
     }
 }
