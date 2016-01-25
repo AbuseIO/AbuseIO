@@ -1,58 +1,74 @@
 <?php
 
 return [
-
+    // Ticket types
     'type' => [
-        1 => [
-            'name' => 'Info',
-            'description' => 'We strongly suggest you resolve this matter, but no actual abuse has been recorded yet',
+        'INFO' => [
+            'name'          => 'Info',
+            'description'   => 'We strongly suggest you resolve this matter, but no actual abuse has been recorded yet',
         ],
-        2 => [
-            'name' => 'Abuse',
-            'description' => 'We require you to resolve this matter swiftly or we are required to intervene',
+        'ABUSE' => [
+            'name'          => 'Abuse',
+            'description'   => 'We require you to resolve this matter swiftly or we are required to intervene',
         ],
-        3 => [
-            'name' => 'Escalation',
-            'description' => 'We have taken steps to prevent further abuse. These limitations will be lifted after the matter is resolved',
+        'ESCALATION' => [
+            'name'          => 'Escalation',
+            'description'   => 'We have taken steps to prevent further abuse. These limitations will be lifted after '.
+                               'the matter is resolved',
         ],
     ],
 
+    // Ticket statuses
     'status' => [
-        1 => [
-            'name'          => 'Open',
-            'description'   => 'Open tickets',
-            'class'         => 'primary',
+        // Abusedesk ticket statuses
+        'abusedesk' => [
+            'OPEN' => [
+                'name'          => 'Open',
+                'description'   => 'Open tickets',
+            ],
+            'CLOSED' => [
+                'name'          => 'Closed',
+                'description'   => 'Closed tickets',
+            ],
+            'ESCALATED' => [
+                'name'          => 'Escalated',
+                'description'   => 'Escalated tickets',
+            ],
+            'RESOLVED' => [
+                'name'          => 'Resolved',
+                'description'   => 'Resolved tickets',
+            ],
+            'IGNORED' => [
+                'name'          => 'Ignored',
+                'description'   => 'Ignored tickets',
+            ],
         ],
-        2 => [
-            'name'          => 'Closed',
-            'description'   => 'Closed tickets',
-            'class'         => 'success',
-        ],
-        3 => [
-            'name'          => 'Escalated',
-            'description'   => 'Escalated tickets',
-            'class'         => 'danger',
-        ],
-        4 => [
-            'name'          => 'Ignored',
-            'description'   => 'Ignored tickets',
-            'class'         => 'default',
-        ],
-        5 => [
-            'name'          => 'Resolved',
-            'description'   => 'Resolved tickets',
-            'class'         => 'info',
+        // Customer ticket statuses
+        'customer' => [
+            'OPEN' => [
+                'name'          => 'Open',
+                'description'   => 'Open tickets',
+            ],
+            'RESOLVED' => [
+                'name'          => 'Resolved',
+                'description'   => 'Customer resolved tickets',
+            ],
+            'IGNORED' => [
+                'name'          => 'Ignored',
+                'description'   => 'Customer ignored tickets',
+            ],
         ],
     ],
 
+    // Ticket notification states
     'state' => [
-        1 => [
-            'name' => 'Notified',
-            'description' => 'Tickets where the customer have been nofitied.'
+        'NOTIFIED' => [
+            'name'          => 'Notified',
+            'description'   => 'Tickets where the customer has been notified.'
         ],
-        2 => [
-            'name' => 'Unnotified',
-            'description' => 'Tickets where the customer have not been nofitied.'
+        'NOT_NOTIFIED' => [
+            'name'          => 'Unnotified',
+            'description'   => 'Tickets where the customer has not been notified.'
         ],
     ]
 ];

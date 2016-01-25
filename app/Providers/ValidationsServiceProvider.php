@@ -107,19 +107,8 @@ class ValidationsServiceProvider extends ServiceProvider
             'abusetype',
             function ($attribute, $value, $parameters, $validator) {
 
-                $types = Lang::get('types.type');
-                if (!is_array($types)) {
-                    return false;
-                }
-
-                foreach ($types as $typeID => $type) {
-                    if ($type['name'] == $value) {
-                        return true;
-                    }
-                }
-
-                return false;
-
+                $types = config('types.type');
+                return in_array($value, $types);
             }
         );
 

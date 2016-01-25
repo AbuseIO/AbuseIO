@@ -49,6 +49,7 @@ return [
     'automatic'         => 'Automatic',
     'manual'            => 'Manual',
     'status'            => 'Status',
+    'cust_status'       => 'Customer Status',
     'enabled'           => 'Enabled',
     'disabled'          => 'Disabled',
     'action'            => 'Action',
@@ -83,4 +84,5 @@ return [
     'roles'             => 'Role|Roles',
     'active'            => 'Active',
     'inactive'          => 'Inactive',
+    'select_one'        => 'Select one',
 ];

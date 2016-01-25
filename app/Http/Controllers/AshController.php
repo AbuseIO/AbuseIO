@@ -2,12 +2,12 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Request;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Note;
-use Input;
 use AbuseIO\Models\Brand;
 use AbuseIO\Models\Account;
+use Request;
+use Input;
 
 /**
  * Controller handling the ASH interface to contacts
@@ -82,8 +82,8 @@ class AshController extends Controller
 
         $changeStatus = Input::get('changeStatus');
 
-        if ($changeStatus == 4 || $changeStatus == 5) {
-            $ticket->status_id = $changeStatus;
+        if ($changeStatus == 'IGNORED' || $changeStatus == 'RESOLVED') {
+            $ticket->cust_status_id = $changeStatus;
             $ticket->save();
         }
 
@@ -115,12 +115,12 @@ class AshController extends Controller
     private function allowedStatusChanges($ticket)
     {
         $allowedChanges = [
-            '1' => trans('ash.communication.unchanged'),
-            '5' => trans('types.status.5.name'),
+            'OPEN' => trans('ash.communication.open'),
+            'RESOLVED' => trans('ash.communication.resolved'),
         ];
 
-        if ($ticket->type_id == 1) {
-            $allowedChanges['5'] = trans('types.status.5.name');
+        if ($ticket->type_id == 'INFO') {
+            $allowedChanges['IGNORED'] = trans('ash.communication.ignored');
         }
 
         return $allowedChanges;

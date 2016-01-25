@@ -36,12 +36,12 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-header">Set new status to:</li>
-                    <li{!! ($ticket->status_id == 1) ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.open'), [$ticket->id, 'open']) !!}</li>
-                    <li{!! ($ticket->status_id == 2) ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.closed'), [$ticket->id, 'closed']) !!}</li>
+                    <li{!! ($ticket->status_id == 'OPEN') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.open'), [$ticket->id, 'open']) !!}</li>
+                    <li{!! ($ticket->status_id == 'CLOSED') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.closed'), [$ticket->id, 'closed']) !!}</li>
                     <li role="separator" class="divider"></li>
-                    <li{!! ($ticket->status_id == 3) ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.escalated'), [$ticket->id, 'escalated']) !!}</li>
-                    <li{!! ($ticket->status_id == 4) ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.ignored'), [$ticket->id, 'ignored']) !!}</li>
-                    <li{!! ($ticket->status_id == 5) ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.resolved'), [$ticket->id, 'resolved']) !!}</li>
+                    <li{!! ($ticket->status_id == 'ESCALATED') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.escalated'), [$ticket->id, 'escalated']) !!}</li>
+                    <li{!! ($ticket->status_id == 'IGNORED') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.ignored'), [$ticket->id, 'ignored']) !!}</li>
+                    <li{!! ($ticket->status_id == 'RESOLVED') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.resolved'), [$ticket->id, 'resolved']) !!}</li>
                 </ul>
             </div>
         </div>
@@ -63,13 +63,13 @@
                 @endif
 
                 <dt>{{ trans('misc.classification') }}</dt>
-                <dd>{{ Lang::get('classifications.' . $ticket->class_id . '.name') }}</dd>
+                <dd>{{ trans("classifications.{$ticket->class_id}.name") }}</dd>
 
                 <dt>{{ trans('misc.type') }}</dt>
-                <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.name') }}</dd>
+                <dd>{{ trans("types.type.{$ticket->type_id}.name") }}</dd>
 
                 <dt>{{ trans('tickets.action_req') }}</dt>
-                <dd>{{ Lang::get('types.type.' . $ticket->type_id . '.description') }}</dd>
+                <dd>{{ trans("types.type.{$ticket->type_id}.description") }}</dd>
 
                 <dt>{{ trans('tickets.first_seen') }}</dt>
                 <dd>{{ $ticket->firstEvent[0]->seen }}</dd>
@@ -81,7 +81,10 @@
                 <dd>{{ $ticket->events->count() }}</dd>
 
                 <dt>{{ trans('misc.status') }}</dt>
-                <dd><span class="label label-{{ $ticket_class }}">{{ trans('types.status.' . $ticket->status_id . '.name') }}</span></dd>
+                <dd><span class="label label-{{ $ticket_class }}">{{ trans("types.status.abusedesk.{$ticket->status_id}.name") }}</span></dd>
+
+                <dt>{{ trans('misc.cust_status') }}</dt>
+                <dd><span class="label label-{{ $cust_ticket_class }}">{{ trans("types.status.customer.{$ticket->cust_status_id}.name") }}</span></dd>
 
                 <dt>{{ trans('tickets.created') }}</dt>
                 <dd>{{ $ticket->created_at }}</dd>

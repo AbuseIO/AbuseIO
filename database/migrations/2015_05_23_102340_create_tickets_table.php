@@ -21,8 +21,9 @@ class CreateTicketsTable extends Migration
                 $table->string('ip', 45);
                 $table->string('domain');
                 $table->string('class_id', 100);
-                $table->integer('type_id')->unsigned();
-                $table->integer('status_id')->unsigned();
+                $table->enum('type_id', ['INFO', 'ABUSE', 'ESCALATED']);
+                $table->enum('status_id', ['OPEN', 'CLOSED', 'ESCALATED', 'IGNORED', 'RESOLVED']);
+                $table->enum('cust_status_id', ['OPEN', 'IGNORED', 'RESOLVED'])->default('OPEN');
                 $table->integer('last_notify_count')->unsigned();
                 $table->integer('last_notify_timestamp');
 

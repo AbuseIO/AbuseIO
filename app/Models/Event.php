@@ -111,14 +111,12 @@ class Event extends Model
      *
      * @return array $types
      */
-    public function getTypes()
+    public static function getTypes()
     {
-        $types = [ ];
-
-        foreach (trans('types.type') as $id => $type) {
-            $types[$id] = $type['name'];
+        $types = [];
+        foreach (config('types.type') as $key) {
+            $types[$key] = trans("types.type.{$key}.name");
         }
-
         return $types;
     }
 
@@ -127,14 +125,37 @@ class Event extends Model
      *
      * @return array $classifications
      */
-    public function getClassifications()
+    public static function getClassifications()
     {
-        $classifications = [ ];
-
-        foreach (trans('classifications') as $id => $class) {
-            $classifications[$id] = $class['name'];
+        $classifications = [];
+        foreach (trans('classifications') as $key => $class) {
+            $classifications[$key] = $class['name'];
         }
 
         return $classifications;
+    }
+
+    /**
+     * Return a list of all known statuses in the currently selected locale
+     * @param  string $entity   Entity can be: 'abusedesk', 'customer', 'all'(default)
+     * @return array  $statuses Array of statuses
+     */
+    public static function getStatuses($entity = 'all')
+    {
+        if (in_array($entity, ['abusedesk', 'customer', 'all'])) {
+            if ($entity == 'all') {
+                foreach (config('types.status') as $entity => $data) {
+                    foreach (array_keys($data) as $key) {
+                        $statuses[$entity][$key] = trans("types.status.{$entity}.{$key}.name");
+                    }
+                }
+            } else {
+                foreach (config("types.status.{$entitiy}") as $key) {
+                    $statuses[$key] = trans("types.status.{$entitiy}.{$key}.name");
+                }
+            }
+        }
+
+        return $statuses;
     }
 }

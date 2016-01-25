@@ -71,11 +71,13 @@ class IncidentsSave extends Job implements SelfHandling
             }
 
             // Also build a types lookup table and switch out name for ID
+            /* TODO: marknl, not needed anymore?
             foreach ((array)Lang::get('types.type') as $typeID => $type) {
                 if ($type['name'] == $incident->type) {
                     $incident->type = $typeID;
                 }
             }
+            */
 
             // Lookup the ip contact and if needed the domain contact too
             $findContact = new FindContact();
@@ -115,7 +117,7 @@ class IncidentsSave extends Job implements SelfHandling
             $ticket = Ticket::where('ip', '=', $incident->ip)
                 ->where('class_id', '=', $incident->class, 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
-                ->where('status_id', '!=', 2, 'AND')
+                ->where('status_id', '!=', 'CLOSED', 'AND')
                 ->get();
 
             if ($ticket->count() === 0) {
@@ -146,7 +148,7 @@ class IncidentsSave extends Job implements SelfHandling
                 $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
                 $newTicket->domain_contact_notified_count = 0;
 
-                $newTicket->status_id               = 1;
+                $newTicket->status_id               = 'OPEN';
                 $newTicket->last_notify_count       = 0;
                 $newTicket->last_notify_timestamp   = 0;
 
@@ -252,8 +254,8 @@ class IncidentsSave extends Job implements SelfHandling
                     /*
                      * If the ticket was set to resolved, move it back to open
                      */
-                    if ($ticket->status_id == 5) {
-                        $ticket->status_id = 1;
+                    if ($ticket->status_id == 'RESOLVED') {
+                        $ticket->status_id = 'OPEN';
                     }
 
                     /*
@@ -284,7 +286,7 @@ class IncidentsSave extends Job implements SelfHandling
                         if (!empty(config("escalations.{$escalationPath}.abuse.enabled")) &&
                             !empty(config("escalations.{$escalationPath}.abuse.threshold")) &&
                             $ticket->events->count() > config("escalations.{$escalationPath}.abuse.threshold") &&
-                            $ticket->type_id == 1
+                            $ticket->type_id == 'INFO'
                         ) {
                             // Upgrade to abuse
                             Log::debug(
@@ -293,13 +295,13 @@ class IncidentsSave extends Job implements SelfHandling
                                 "threshold: " . config("escalations.{$escalationPath}.abuse.threshold") . ", " .
                                 "setting: info -> abuse"
                             );
-                            $ticket->type_id = 2;
+                            $ticket->type_id = 'ABUSE';
                         }
 
                         if (!empty(config("escalations.{$escalationPath}.escalation.enabled")) &&
                             !empty(config("escalations.{$escalationPath}.escalation.threshold")) &&
                             $ticket->events->count() > config("escalations.{$escalationPath}.escalation.threshold") &&
-                            $ticket->type_id == 2
+                            $ticket->type_id == 'ABUSE'
                         ) {
                             // Upgrade to escalation
                             Log::debug(
@@ -308,7 +310,7 @@ class IncidentsSave extends Job implements SelfHandling
                                 "threshold: " . config("escalations.{$escalationPath}.escalation.threshold") . ", " .
                                 "setting: abuse -> escalation"
                             );
-                            $ticket->type_id = 3;
+                            $ticket->type_id = 'ESCALATION';
                         }
                     }
 

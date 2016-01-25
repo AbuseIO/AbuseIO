@@ -63,7 +63,10 @@ return [
         'download'                  => 'Download',
         'view'                      => 'Bekijk',
         'closed'                    => 'Het is niet mogelijk om een reactie te geven op dit ticket, omdat het ticket gesloten is of de reacties zijn uitgeschakeld.',
-        'unchanged'                 => 'Ticket status niet veranderen'
+        'unchanged'                 => 'Ticket status niet veranderen',
+        'open'                      => 'Ticket status open laten',
+        'resolved'                  => 'Ik heb het probleem opgelost',
+        'ignored'                   => 'Dit probleem kan worden genegeerd',
     ],
 
     'messages' => [

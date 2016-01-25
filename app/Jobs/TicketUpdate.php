@@ -81,27 +81,14 @@ class TicketUpdate extends Job
     public static function status($ticket, $newstatus = null)
     {
         /**
-         * status list is defined in resources/lang/<lang>/types.php
-         * 1: Open
-         * 2: Closed
-         * 3: Escalated
-         * 4: Ignored
-         * 5: Resolved
+         * status list is defined in config/types.php
          */
-
-        $statuslist = [
-            'open'      => 1,
-            'closed'    => 2,
-            'escalated' => 3,
-            'ignored'   => 4,
-            'resolved'  => 5,
-        ];
-
-        if (array_key_exists($newstatus, $statuslist)) {
-            $ticket->status_id = $statuslist[$newstatus];
+        if (array_key_exists(strtoupper($newstatus), config('types.status.abusedesk'))) {
+            $ticket->status_id = $newstatus;
             $ticket->save();
+            return true;
         } else {
-            echo "wrong status given.";
+            return false;
         }
     }
 }

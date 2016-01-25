@@ -108,7 +108,7 @@ class Ticket extends Model
             'ip'                                => 'required|ip',
             'domain'                            => 'sometimes|string',
             'class_id'                          => 'required|string|max:100',
-            'type_id'                           => 'required|integer|min:1|max:3',
+            'type_id'                           => 'required|in:INFO,ABUSE,ESCALATION',
             'ip_contact_account_id'             => 'required|integer',
             'ip_contact_reference'              => 'required|string',
             'ip_contact_name'                   => 'required|string',
@@ -123,7 +123,8 @@ class Ticket extends Model
             'domain_contact_api_host'           => 'sometimes|string',
             'domain_contact_auto_notify'        => 'required|boolean',
             'domain_contact_notified_count'     => 'required|integer',
-            'status_id'                         => 'required|integer|min:1|max:5',
+            'status_id'                         => 'required|in:OPEN,CLOSED,ESCALATED,RESOLVED,IGNORED',
+            'cust_status_id'                    => 'sometimes|in:OPEN,RESOLVED,IGNORED',
             'last_notify_count'                 => 'required|integer',
             'last_notify_timestamp'             => 'required|timestamp',
         ];
@@ -142,7 +143,7 @@ class Ticket extends Model
             'ip'                                => 'required|ip',
             'domain'                            => 'sometimes|string',
             'class_id'                          => 'required|string|max:100',
-            'type_id'                           => 'required|integer|min:1|max:3',
+            'type_id'                           => 'required|in:INFO,ABUSE,ESCALATION',
             'ip_contact_account_id'             => 'required|integer',
             'ip_contact_reference'              => 'required|string',
             'ip_contact_name'                   => 'required|string',
@@ -157,7 +158,8 @@ class Ticket extends Model
             'domain_contact_api_host'           => 'sometimes|string',
             'domain_contact_auto_notify'        => 'required|boolean',
             'domain_contact_notified_count'     => 'required|integer',
-            'status_id'                         => 'required|integer|min:1|max:5',
+            'status_id'                         => 'required|in:OPEN,CLOSED,ESCALATED,RESOLVED,IGNORED',
+            'cust_status_id'                    => 'sometimes|in:OPEN,RESOLVED,IGNORED',
             'last_notify_count'                 => 'required|integer',
             'last_notify_timestamp'             => 'required|timestamp',
         ];
@@ -175,8 +177,9 @@ class Ticket extends Model
     public static function checkAccountAccess($model_id, $account)
     {
         // early return when we are in the system account
-        if ($account->isSystemAccount())
+        if ($account->isSystemAccount()) {
             return true;
+        }
 
         $ticket = Ticket::find($model_id);
 

@@ -48,6 +48,7 @@ return [
     'automatic'         => 'Automatisch',
     'manual'            => 'Handmatig',
     'status'            => 'Status',
+    'cust_status'       => 'Klant Status',
     'enabled'           => 'Actief',
     'disabled'          => 'Inactief',
     'action'            => 'Actie',
@@ -82,6 +83,5 @@ return [
     'roles'             => 'Rol|Rollen',
     'active'            => 'Actief',
     'inactive'          => 'Inactief',
-
-
+    'select_one'        => 'Maak een keuze',
 ];

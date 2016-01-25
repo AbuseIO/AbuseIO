@@ -31,7 +31,7 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ trans('misc.language') }} <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        @foreach(Config::get('app.locales') as $locale => $localeData)
+                        @foreach(config('app.locales') as $locale => $localeData)
                             <li><a href="/ash/locale/{{$locale}}"><span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}</a></li>
                         @endforeach
                     </ul>
@@ -97,7 +97,7 @@
                     <dd>{{ $ticket->events->count() }}</dd>
 
                     <dt>{{ trans('ash.basic.ticketStatus') }}</dt>
-                    <dd>{{ trans('types.status.' . $ticket->status_id . '.name') }}</dd>
+                    <dd>{{ trans('types.status.abusedesk.' . $ticket->status_id . '.name') }}</dd>
 
                     <dt>{{ trans('ash.basic.ticketCreated') }}</dt>
                     <dd>{{ $ticket->created_at }}</dd>
@@ -178,17 +178,8 @@
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label('enabled', trans('misc.status').':', ['class' => 'col-sm-2 control-label']) !!}
-                        <div class="col-sm-10">
-                            {!! Form::select(
-                                'changeStatus',
-                                $allowedChanges,
-                                null,
-                                [
-                                    'class' => 'form-control'
-                                ]
-                            ) !!}
-                        </div>
+                        {!! Form::label('enabled', trans('misc.status').':', ['class' => 'control-label']) !!}
+                        {!! Form::select('changeStatus', $allowedChanges, $ticket->cust_status_id, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group">

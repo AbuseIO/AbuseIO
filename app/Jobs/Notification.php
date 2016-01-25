@@ -180,7 +180,7 @@ class Notification extends Job implements SelfHandling
         $search = Ticket::where('id', '>', '0');
 
         if (!$force) {
-            $search = Ticket::where('status_id', '!=', '2');
+            $search = Ticket::where('status_id', '!=', 'CLOSED');
         }
 
         if ($ticket !== false) {
@@ -244,14 +244,14 @@ class Notification extends Job implements SelfHandling
                  * notifications for multiple tickets if needed.
                  */
                 if ($force !== true) {
-                    // Skip if type Info (1) and status Ignored (4)
-                    if ($ticket->type_id == '1' && $ticket->status_id == '4') {
+                    // Skip if type Info and status Ignored
+                    if ($ticket->type_id == 'INFO' && $ticket->status_id == 'IGNORED') {
                         continue;
                     }
 
                     // Skip if type Info (1) and last notification was send after info interval
                     if ($ticket->last_notify_count != 0 &&
-                        $ticket->type_id == '1' &&
+                        $ticket->type_id == 'INFO' &&
                         $ticket->last_notify_timestamp >= $sendInfoAfter
                     ) {
                         continue;
@@ -259,7 +259,7 @@ class Notification extends Job implements SelfHandling
 
                     // Skip if type Info (1) and last notification was send after abuse interval
                     if ($ticket->last_notify_count != 0 &&
-                        $ticket->type_id != '1' &&
+                        $ticket->type_id != 'INFO' &&
                         $ticket->last_notify_timestamp >= $sendAbuseAfter
                     ) {
                         continue;

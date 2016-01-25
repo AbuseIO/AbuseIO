@@ -65,6 +65,9 @@ return [
         'view'                      => 'View',
         'closed'                    => 'You can not add notes to this ticket because it was closed or notes have been disabled',
         'unchanged'                 => 'Do not change the ticket status',
+        'open'                      => 'Leave ticket status open',
+        'resolved'                  => 'I have resolved the issue',
+        'ignored'                   => 'This issue can be ignored',
     ],
 
     'messages' => [

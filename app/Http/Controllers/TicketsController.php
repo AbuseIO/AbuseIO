@@ -115,7 +115,7 @@ class TicketsController extends Controller
             ->editColumn(
                 'status_id',
                 function ($ticket) {
-                    return trans('types.status.' . $ticket->status_id . '.name');
+                    return trans('types.status.abusedesk.' . $ticket->status_id . '.name');
                 }
             )
             ->make(true);
@@ -128,25 +128,14 @@ class TicketsController extends Controller
      */
     public function index()
     {
-        $types = trans('types.type');
-        foreach (array_keys($types) as $key) {
-            $types[$key] = $types[$key]['name'];
-        }
-
-        $classifications = trans('classifications');
-        foreach (array_keys($classifications) as $key) {
-            $classifications[$key] = $classifications[$key]['name'];
-        }
-
-        $statuses = trans('types.status');
-        foreach (array_keys($statuses) as $key) {
-            $statuses[$key] = $statuses[$key]['name'];
-        }
+        // Get translations for all statuses
+        $statuses = Event::getStatuses();
 
         return view('tickets.index')
-            ->with('types', $types)
-            ->with('classes', $classifications)
-            ->with('statuses', $statuses)
+            ->with('types', Event::getTypes())
+            ->with('classes', Event::getClassifications())
+            ->with('statuses', $statuses['abusedesk'])
+            ->with('cstatuses', $statuses['customer'])
             ->with('auth_user', $this->auth_user);
     }
 
@@ -157,17 +146,9 @@ class TicketsController extends Controller
      */
     public function create()
     {
-        $event = new Event;
-
-        $tmp = array_values($event->getTypes());
-        $eventTypes = array_combine($tmp, $tmp);
-
-        $tmp = array_values($event->getClassifications());
-        $eventClassifications = array_combine($tmp, $tmp);
-
         return view('tickets.create')
-            ->with('classes', array_merge(['select' => 'Select one'], $eventClassifications))
-            ->with('types', array_merge(['select' => 'Select one'], $eventTypes))
+            ->with('classes', Event::getClassifications())
+            ->with('types', Event::getTypes())
             ->with('auth_user', $this->auth_user);
     }
 
@@ -179,7 +160,7 @@ class TicketsController extends Controller
      */
     public function export($format)
     {
-        // TODO #AIO-?? ExportProvider - (mark) Move this into an ExportProvider or something s?
+        // TODO #AIO-?? ExportProvider - (mark) Move this into an ExportProvider or something?
         $tickets = Ticket::all();
 
         if ($format === 'csv') {
@@ -200,12 +181,12 @@ class TicketsController extends Controller
                 $row = [
                     $ticket->id,
                     $ticket->ip,
-                    Lang::get('classifications.' . $ticket->class_id . '.name'),
-                    Lang::get('types.type.' . $ticket->type_id . '.name'),
+                    trans("classifications.{$ticket->class_id}.name"),
+                    trans("types.type.{$ticket->type_id}.name"),
                     $ticket->firstEvent[0]->seen,
                     $ticket->lastEvent[0]->seen,
                     $ticket->events->count(),
-                    trans('types.status.'.$ticket->status_id.'.name'),
+                    trans("types.status.abusedesk.{$ticket->status_id}.name"),
                 ];
 
                 $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
@@ -327,11 +308,10 @@ class TicketsController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        $class = trans("types.status.{$ticket->status_id}.class");
-
         return view('tickets.show')
             ->with('ticket', $ticket)
-            ->with('ticket_class', $class)
+            ->with('ticket_class', config("types.status.abusedesk.{$ticket->status_id}.class"))
+            ->with('cust_ticket_class', config("types.status.customer.{$ticket->cust_status_id}.class"))
             ->with('auth_user', $this->auth_user);
     }
 
