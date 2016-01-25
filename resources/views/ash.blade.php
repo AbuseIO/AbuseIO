@@ -68,11 +68,6 @@
                     <dt>{{ trans('ash.basic.ipAddress') }}</dt>
                     <dd>{{ $ticket->ip }}</dd>
 
-                    @if (gethostbyaddr($ticket->ip) !== false)
-                        <dt>{{ trans('ash.basic.ptr') }}</dt>
-                        <dd>{{ gethostbyaddr($ticket->ip) }}</dd>
-                    @endif
-
                     @if (!empty($ticket->domain))
                         <dt>{{ trans('ash.basic.domainName') }}</dt>
                         <dd>{{ $ticket->domain }}</dd>
