@@ -42,6 +42,8 @@ class EditCommand extends AbstractEditCommand
         $this->updateFieldWithOption($model, 'enabled');
         $this->updateFieldWithOption($model, 'mail');
         $this->updateFieldWithOption($model, 'api_host');
+
+        return true;
     }
 
     protected function getValidator($model)

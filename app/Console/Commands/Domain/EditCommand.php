@@ -34,19 +34,19 @@ class EditCommand extends AbstractEditCommand
 
     /**
      * @param $model
+     *
      * @return bool
      */
     protected function handleOptions($model)
     {
         $this->updateFieldWithOption($model, 'name');
 
-        if ($this->option('contact_id')){
-
-            if (null === Contact::find($this->option("contact_id"))) {
+        if ($this->option('contact_id')) {
+            if (null === Contact::find($this->option('contact_id'))) {
                 $this->error('Unable to find contact with this criteria');
+
                 return false;
             }
-
         }
         $this->updateFieldWithOption($model, 'contact_id');
 

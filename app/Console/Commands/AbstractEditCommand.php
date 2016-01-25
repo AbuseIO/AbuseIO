@@ -3,13 +3,11 @@
 namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 abstract class AbstractEditCommand extends Command
 {
     /**
-     * Create a new command instance
+     * Create a new command instance.
      */
     public function __construct()
     {
@@ -19,7 +17,7 @@ abstract class AbstractEditCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     final public function handle()
     {
@@ -28,17 +26,16 @@ abstract class AbstractEditCommand extends Command
             $this->error(
                 sprintf('Unable to find %s with this criteria', $this->getAsNoun())
             );
+
             return false;
         }
 
         if (!$this->handleOptions($model)) {
             return false;
         }
-
         $validation = $this->getValidator($model);
 
         /** @var  $validation */
-
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
                 $this->warn($message);
@@ -60,7 +57,7 @@ abstract class AbstractEditCommand extends Command
         }
 
         $this->info(
-            sprintf("The %s has been updated", $this->getAsNoun())
+            sprintf('The %s has been updated', $this->getAsNoun())
         );
 
         return true;
@@ -70,6 +67,7 @@ abstract class AbstractEditCommand extends Command
 
     /**
      * @param $model
+     *
      * @return bool
      */
     abstract protected function handleOptions($model);
@@ -93,11 +91,11 @@ abstract class AbstractEditCommand extends Command
 
     final public function getName()
     {
-        return sprintf("%s:%s", $this->getAsNoun(), $this->setCommandName());
+        return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
     }
 
     /**
-     * Default subcommand name
+     * Default subcommand name.
      *
      * @return string
      */
@@ -106,19 +104,19 @@ abstract class AbstractEditCommand extends Command
         return 'edit';
     }
 
-    public final function getDescription()
+    final public function getDescription()
     {
-        return sprintf("Edit a %s", $this->getAsNoun());
+        return sprintf('Edit a %s', $this->getAsNoun());
     }
 
-    protected function updateFieldWithOption($model, $option, $fieldType='string')
+    protected function updateFieldWithOption($model, $option, $fieldType = 'string')
     {
         if ($model !== null) {
             if (array_key_exists($option, $model->getAttributes())) {
                 if (!empty($this->option($option))) {
                     switch ($fieldType) {
-                        case "bool":
-                        case "boolean":
+                        case 'bool':
+                        case 'boolean':
                             $value = castStringToBool($this->option($option));
                             break;
                         default:
@@ -133,7 +131,7 @@ abstract class AbstractEditCommand extends Command
 
     protected function updateBooleanFieldWithOption($model, $option)
     {
-        $this->updateFieldWithOption($model, $option, "bool");
+        $this->updateFieldWithOption($model, $option, 'bool');
     }
 
     abstract public function getOptionsList();

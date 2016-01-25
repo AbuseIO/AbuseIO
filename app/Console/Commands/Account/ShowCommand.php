@@ -14,6 +14,7 @@ class ShowCommand extends AbstractShowCommand2
             ["Id", $model->id],
             ["Name", $model->name],
             ["Brand", $model->brand->name],
+            ["Disabled", $model->disabled],
             ["Description", $model->description],
         ];
     }
@@ -38,7 +39,7 @@ class ShowCommand extends AbstractShowCommand2
      */
     protected function getFields()
     {
-        return ["id", "name", "description","brand"];
+        return ["id", "name","brand","disabled", "description"];
     }
 
     /**
