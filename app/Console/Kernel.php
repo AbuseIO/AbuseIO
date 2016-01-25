@@ -92,6 +92,7 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Note\DeleteCommand',
         'AbuseIO\Console\Commands\Note\ListCommand',
         'AbuseIO\Console\Commands\Note\CreateCommand',
+        'AbuseIO\Console\Commands\Note\EditCommand',
 
         'AbuseIO\Console\Commands\Ticket\ShowCommand',
         'AbuseIO\Console\Commands\Ticket\DeleteCommand',
