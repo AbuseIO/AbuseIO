@@ -38,7 +38,7 @@ class ShowCommand extends AbstractShowCommand2
     protected function getCollectionWithArguments()
     {
         return Brand::where("name", "like", "%".$this->argument("brand")."%")
-            ->orWhere("id", $this->argument("brand"));
+            ->orWhere("id", $this->argument("brand"))->get($this->getFields());
     }
 
     /**

@@ -14,7 +14,7 @@ class EditCommand extends AbstractEditCommand
     public function getOptionsList()
     {
         return new InputDefinition([
-            new inputArgument('id', null, 'Brand id to edit'),
+            new inputArgument('id', InputArgument::REQUIRED, 'Brand id to edit'),
             new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'brand name'),
             new InputOption('company_name', null, InputOption::VALUE_OPTIONAL,  'company name'),
             new InputOption('introduction_text', null, InputOption::VALUE_OPTIONAL, 'Introduction text'),
@@ -36,6 +36,8 @@ class EditCommand extends AbstractEditCommand
         $this->updateFieldWithOption($model, 'name');
         $this->updateFieldWithOption($model, 'company_name');
         $this->updateFieldWithOption($model, 'introduction_text');
+
+        return true;
     }
 
     protected function getValidator($model)
