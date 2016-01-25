@@ -2,29 +2,58 @@
 
 namespace AbuseIO\Console\Commands\Queue;
 
-use AbuseIO\Console\Commands\AbstractListCommand;
+use AbuseIO\Console\Commands\AbstractShowCommand2;
 use AbuseIO\Models\Job;
+use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ListCommand
+ * Class ShowCommand
  * @package AbuseIO\Console\Commands\Queue
  */
-class ShowCommand extends AbstractListCommand
+class ShowCommand extends AbstractShowCommand2
 {
-    protected $filterArguments = [
-        'queue'
-    ];
 
     /**
-     * The headers of the table
-     * @var array
+     * {@inherit docs}
      */
-    protected $headers = [
-        'id',
-        'Queue',
-        'Job name',
-        'created',
-    ];
+    protected function getAllowedArguments()
+    {
+        return ["name"];
+    }
+
+    /**
+     * {@inherit docs}
+     */
+    protected function getFields()
+    {
+        return [
+            'id',
+            'Queue',
+            'Job name',
+            'created',
+        ];
+    }
+
+    /**
+     * {@inherit docs}
+     */
+    protected function getCollectionWithArguments()
+    {
+        return $this->findWithCondition($this->argument('queue'));
+    }
+
+    /**
+     * {@inherit docs}
+     */
+    protected function defineInput()
+    {
+        return [
+            new InputArgument(
+                'queue',
+                InputArgument::REQUIRED,
+                'Use the name for a queue to show it.')
+        ];
+    }
 
     /**
      * {@inheritdoc }
@@ -74,13 +103,5 @@ class ShowCommand extends AbstractListCommand
     protected function getAsNoun()
     {
         return "queue";
-    }
-
-    /**
-     * {@inherit docs}
-     */
-    public function setCommandName()
-    {
-        return 'jobs';
     }
 }
