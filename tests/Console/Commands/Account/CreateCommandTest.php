@@ -1,7 +1,8 @@
 <?php
 
-namespace AbuseIO\Console\Commands\Domain;
+namespace tests\Console\Commands\Account;
 
+use AbuseIO\Models\Contact;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -12,11 +13,10 @@ class CreateCommandTest extends TestCase
 {
     public function testWithoutArguments()
     {
-        Artisan::call('domain:create');
+        Artisan::call('account:create');
         $output = Artisan::output();
 
         $this->assertContains('The name field is required.', $output);
-        $this->assertContains('The contact id field is required.', $output);
-        $this->assertContains('Failed to create the domain due to validation warnings', $output);
+        $this->assertContains('Failed to create the account due to validation warnings', $output);
     }
 }

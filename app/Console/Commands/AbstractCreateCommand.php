@@ -27,7 +27,7 @@ abstract class AbstractCreateCommand extends Command
         $validation = $this->getValidator($model);
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
-                $this->warn($message);
+                $this->error($message);
             }
 
             $this->error(
