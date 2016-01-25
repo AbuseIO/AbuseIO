@@ -2,25 +2,22 @@
 
 namespace AbuseIO\Console\Commands\Account;
 
-
 use AbuseIO\Models\Account;
 use AbuseIO\Console\Commands\AbstractListCommand;
 
 class ListCommand extends AbstractListCommand
 {
-
-   protected $filterArguments = ["name"];
+    protected $filterArguments = ['name'];
 
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
-    protected $headers = ['Id', 'Name', 'Brand', "Disabled"];
-
-
+    protected $headers = ['Id', 'Name', 'Brand', 'Disabled'];
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
@@ -28,7 +25,7 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
@@ -36,7 +33,7 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -45,15 +42,15 @@ class ListCommand extends AbstractListCommand
         foreach ($list as $account) {
             $result[] = [$account->id, $account->name, $account->brand->name,  castBoolToString($account->disabled)];
         }
+
         return $result;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "account";
+        return 'account';
     }
 }
-
