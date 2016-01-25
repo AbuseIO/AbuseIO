@@ -249,7 +249,7 @@ class Notification extends Job implements SelfHandling
                         continue;
                     }
 
-                    // Skip if type Info and customer status Ignored
+                    // Skip if type Info and contact status Ignored
                     if ($ticket->type_id == 'INFO' && $ticket->contact_status_id == 'IGNORED') {
                         continue;
                     }

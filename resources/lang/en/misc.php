@@ -49,7 +49,7 @@ return [
     'automatic'         => 'Automatic',
     'manual'            => 'Manual',
     'status'            => 'Status',
-    'cust_status'       => 'Customer Status',
+    'contact_status'    => 'Contact Status',
     'enabled'           => 'Enabled',
     'disabled'          => 'Disabled',
     'action'            => 'Action',

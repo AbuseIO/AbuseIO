@@ -83,8 +83,8 @@
                 <dt>{{ trans('misc.status') }}</dt>
                 <dd><span class="label label-{{ $ticket_class }}">{{ trans("types.status.abusedesk.{$ticket->status_id}.name") }}</span></dd>
 
-                <dt>{{ trans('misc.cust_status') }}</dt>
-                <dd><span class="label label-{{ $cust_ticket_class }}">{{ trans("types.status.customer.{$ticket->cust_status_id}.name") }}</span></dd>
+                <dt>{{ trans('misc.contact_status') }}</dt>
+                <dd><span class="label label-{{ $contact_ticket_class }}">{{ trans("types.status.contact.{$ticket->contact_status_id}.name") }}</span></dd>
 
                 <dt>{{ trans('tickets.created') }}</dt>
                 <dd>{{ $ticket->created_at }}</dd>

@@ -83,7 +83,7 @@ class AshController extends Controller
         $changeStatus = Input::get('changeStatus');
 
         if ($changeStatus == 'IGNORED' || $changeStatus == 'RESOLVED') {
-            $ticket->cust_status_id = $changeStatus;
+            $ticket->contact_status_id = $changeStatus;
             $ticket->save();
         }
 

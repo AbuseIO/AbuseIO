@@ -20,7 +20,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Customer 1', Artisan::output());
+        $this->assertContains('Contact 1', Artisan::output());
     }
 
     public function testWithValidIdFilter()
@@ -33,7 +33,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Customer 1', Artisan::output());
+        $this->assertContains('Contact 1', Artisan::output());
     }
 
     public function testWithInvalidIdFilter()

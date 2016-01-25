@@ -28,7 +28,7 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call('domain:list', []);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Customer 1', Artisan::output());
+        $this->assertContains('Contact 1', Artisan::output());
     }
 
     public function testFilter()

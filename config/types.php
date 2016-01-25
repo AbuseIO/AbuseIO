@@ -3,7 +3,7 @@
 /*
  * Types.php:
  * This file described the types of tickets, the ticket statuses
- * (abusedesk and customer) and the notification states of a ticket.
+ * (abusedesk and contact) and the notification states of a ticket.
  * Translations for these types/statuses can be done with the file:
  * resources/lang/../types.php
  */
@@ -37,13 +37,13 @@ return [
             ],
         ],
         /*
-         * Customer ticket statuses
-         * When the ticket type is INFO; setting the customer status to
+         * Contact ticket statuses
+         * When the ticket type is INFO; setting the contact status to
          * RESOLVED or IGNORED will stop sending notifications. All other
          * ticket types will ignore this status and is purely informational
          * towards the Abusedesk.
          */
-        'customer' => [
+        'contact' => [
             'OPEN' => [
                 'class' => 'primary',
             ],
@@ -59,7 +59,7 @@ return [
     /*
      * Notification statuses
      * This status defines if the latest incoming notification has also been
-     * send to the customer.
+     * send to the contact.
      */
     'state' => [
         'NOTIFIED',

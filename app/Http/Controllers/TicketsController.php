@@ -135,7 +135,7 @@ class TicketsController extends Controller
             ->with('types', Event::getTypes())
             ->with('classes', Event::getClassifications())
             ->with('statuses', $statuses['abusedesk'])
-            ->with('cstatuses', $statuses['customer'])
+            ->with('contact_statuses', $statuses['contact'])
             ->with('auth_user', $this->auth_user);
     }
 
@@ -311,7 +311,7 @@ class TicketsController extends Controller
         return view('tickets.show')
             ->with('ticket', $ticket)
             ->with('ticket_class', config("types.status.abusedesk.{$ticket->status_id}.class"))
-            ->with('cust_ticket_class', config("types.status.customer.{$ticket->cust_status_id}.class"))
+            ->with('contact_ticket_class', config("types.status.contact.{$ticket->contact_status_id}.class"))
             ->with('auth_user', $this->auth_user);
     }
 

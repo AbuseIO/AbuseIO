@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $id guarded
  * @property string $ip
  * @property string $domain
- * @property integer $class_id
- * @property integer $type_id
+ * @property string $class_id
+ * @property string $type_id
  * @property string $email
  * @property string $ip_contact_account_id
  * @property string $ip_contact_reference
@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $domain_contact_auto_notify
  * @property integer $domain_contact_notified_count
  * @property integer $status_id
+ * @property string $contact_status_id
  * @property integer $account_id
  * @property boolean $auto_notify
  * @property integer $last_notify_count
@@ -72,6 +73,7 @@ class Ticket extends Model
         'domain_contact_auto_notify',
         'domain_contact_notified_count',
         'status_id',
+        'contact_status_id',
         'last_notify_count',
         'last_notify_timestamp'
     ];
@@ -124,7 +126,7 @@ class Ticket extends Model
             'domain_contact_auto_notify'        => 'required|boolean',
             'domain_contact_notified_count'     => 'required|integer',
             'status_id'                         => 'required|in:OPEN,CLOSED,ESCALATED,RESOLVED,IGNORED',
-            'cust_status_id'                    => 'sometimes|in:OPEN,RESOLVED,IGNORED',
+            'contact_status_id'                 => 'sometimes|in:OPEN,RESOLVED,IGNORED',
             'last_notify_count'                 => 'required|integer',
             'last_notify_timestamp'             => 'required|timestamp',
         ];
@@ -159,7 +161,7 @@ class Ticket extends Model
             'domain_contact_auto_notify'        => 'required|boolean',
             'domain_contact_notified_count'     => 'required|integer',
             'status_id'                         => 'required|in:OPEN,CLOSED,ESCALATED,RESOLVED,IGNORED',
-            'cust_status_id'                    => 'sometimes|in:OPEN,RESOLVED,IGNORED',
+            'contact_status_id'                 => 'sometimes|in:OPEN,RESOLVED,IGNORED',
             'last_notify_count'                 => 'required|integer',
             'last_notify_timestamp'             => 'required|timestamp',
         ];

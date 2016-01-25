@@ -23,7 +23,7 @@ class CreateTicketsTable extends Migration
                 $table->string('class_id', 100);
                 $table->enum('type_id', ['INFO', 'ABUSE', 'ESCALATED']);
                 $table->enum('status_id', ['OPEN', 'CLOSED', 'ESCALATED', 'IGNORED', 'RESOLVED']);
-                $table->enum('cust_status_id', ['OPEN', 'IGNORED', 'RESOLVED'])->default('OPEN');
+                $table->enum('contact_status_id', ['OPEN', 'IGNORED', 'RESOLVED'])->default('OPEN');
                 $table->integer('last_notify_count')->unsigned();
                 $table->integer('last_notify_timestamp');
 

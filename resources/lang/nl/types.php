@@ -44,19 +44,19 @@ return [
                 'description'   => 'Genegeerde tickets',
             ],
         ],
-        // Customer ticket statuses
-        'customer' => [
+        // Contact ticket statuses
+        'contact' => [
             'OPEN' => [
                 'name'          => 'Open',
                 'description'   => 'Open tickets',
             ],
             'RESOLVED' => [
                 'name'          => 'Opgelost',
-                'description'   => 'Klant opgeloste tickets',
+                'description'   => 'Contact opgeloste tickets',
             ],
             'IGNORED' => [
                 'name'          => 'Genegeerd',
-                'description'   => 'Klant genegeerde tickets',
+                'description'   => 'Contact genegeerde tickets',
             ],
         ],
     ],
@@ -64,12 +64,12 @@ return [
     // Ticket notification states
     'state' => [
         'NOTIFIED' => [
-            'name'          => 'Aangemeld bij klant',
-            'description'   => 'Tickets welke zijn aangemeld bij de klant.'
+            'name'          => 'Aangemeld bij contact',
+            'description'   => 'Tickets welke zijn aangemeld bij de contact.'
         ],
         'NOT_NOTIFIED' => [
-            'name'          => 'Niet aangemeld bij klant',
-            'description'   => 'Tickets welke nog niet zijn aangemeld bij de klant.'
+            'name'          => 'Niet aangemeld bij contact',
+            'description'   => 'Tickets welke nog niet zijn aangemeld bij de contact.'
         ],
     ]
 ];

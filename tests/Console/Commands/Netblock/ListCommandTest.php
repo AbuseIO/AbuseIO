@@ -28,7 +28,7 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Customer 6', Artisan::output());
+        $this->assertContains('Contact 6', Artisan::output());
         $this->assertNotContains('Global internet', Artisan::output());
     }
 }

@@ -54,7 +54,7 @@ return [
         'header'                    => 'You can use the form below to reply to this ticket.',
         'noMessages'                => 'No interaction has been done yet.',
         'placeholder'               => 'Use this text box to ask your question or your applied solution.',
-        'placeholder_admin'         => 'Enter a reply to the customer',
+        'placeholder_admin'         => 'Enter a reply to the contact',
         'previousCommunication'     => 'Previous communication',
         'responseFrom'              => 'Response from',
         'contact'                   => 'Contact',

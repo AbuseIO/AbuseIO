@@ -43,19 +43,19 @@ return [
                 'description'   => 'Ignored tickets',
             ],
         ],
-        // Customer ticket statuses
-        'customer' => [
+        // Contact ticket statuses
+        'contact' => [
             'OPEN' => [
                 'name'          => 'Open',
                 'description'   => 'Open tickets',
             ],
             'RESOLVED' => [
                 'name'          => 'Resolved',
-                'description'   => 'Customer resolved tickets',
+                'description'   => 'Contact resolved tickets',
             ],
             'IGNORED' => [
                 'name'          => 'Ignored',
-                'description'   => 'Customer ignored tickets',
+                'description'   => 'Contact ignored tickets',
             ],
         ],
     ],
@@ -64,11 +64,11 @@ return [
     'state' => [
         'NOTIFIED' => [
             'name'          => 'Notified',
-            'description'   => 'Tickets where the customer has been notified.'
+            'description'   => 'Tickets where the contact has been notified.'
         ],
         'NOT_NOTIFIED' => [
             'name'          => 'Unnotified',
-            'description'   => 'Tickets where the customer has not been notified.'
+            'description'   => 'Tickets where the contact has not been notified.'
         ],
     ]
 ];

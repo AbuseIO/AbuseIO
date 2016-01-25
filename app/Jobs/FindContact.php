@@ -29,7 +29,7 @@ class FindContact extends Job
 
         $contact = new Contact();
         $contact->reference     = 'UNDEF';
-        $contact->name          = 'Undefined customer';
+        $contact->name          = 'Undefined Contact';
         $contact->enabled       = true;
         $contact->auto_notify   = false;
         $contact->email         = '';

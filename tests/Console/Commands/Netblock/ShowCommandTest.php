@@ -15,12 +15,12 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                '--filter' => 'Customer 6',
+                '--filter' => 'Contact 6',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Customer 6', Artisan::output());
+        $this->assertContains('Contact 6', Artisan::output());
     }
 
     public function testWithInvalidFilter()
@@ -46,7 +46,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Customer 8', Artisan::output());
+        $this->assertContains('Contact 8', Artisan::output());
     }
 
     public function testNetBlockShowWithStartEndFilter()
@@ -59,6 +59,6 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Customer 6', Artisan::output());
+        $this->assertContains('Contact 6', Artisan::output());
     }
 }

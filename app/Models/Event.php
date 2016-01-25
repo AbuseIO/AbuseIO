@@ -137,12 +137,12 @@ class Event extends Model
 
     /**
      * Return a list of all known statuses in the currently selected locale
-     * @param  string $entity   Entity can be: 'abusedesk', 'customer', 'all'(default)
+     * @param  string $entity   Entity can be: 'abusedesk', 'contact', 'all'(default)
      * @return array  $statuses Array of statuses
      */
     public static function getStatuses($entity = 'all')
     {
-        if (in_array($entity, ['abusedesk', 'customer', 'all'])) {
+        if (in_array($entity, ['abusedesk', 'contact', 'all'])) {
             if ($entity == 'all') {
                 foreach (config('types.status') as $entity => $data) {
                     foreach (array_keys($data) as $key) {

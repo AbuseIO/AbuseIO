@@ -48,7 +48,7 @@ return [
     'automatic'         => 'Automatisch',
     'manual'            => 'Handmatig',
     'status'            => 'Status',
-    'cust_status'       => 'Klant Status',
+    'contact_status'    => 'Klant Status',
     'enabled'           => 'Actief',
     'disabled'          => 'Inactief',
     'action'            => 'Actie',

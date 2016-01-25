@@ -7,6 +7,6 @@ return [
     'button.search'     => 'Search',
 
     // Search - Miscellaneous
-    'customer_code'     => 'Customer Code',
-    'customer_name'     => 'Customer Name',
+    'customer_code'     => 'Contact Code',
+    'customer_name'     => 'Contact Name',
 ];
