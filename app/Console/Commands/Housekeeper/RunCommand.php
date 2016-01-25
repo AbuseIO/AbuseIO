@@ -191,7 +191,7 @@ class RunCommand extends Command
             return false;
         } else {
 
-            $tickets = Ticket::where('status_id', '!=', '2')->get();
+            $tickets = Ticket::where('status_id', '!=', 'CLOSED')->get();
 
             foreach ($tickets as $ticket) {
                 if ($ticket->lastEvent[0]->timestamp <= $closeOlderThen &&
@@ -199,7 +199,7 @@ class RunCommand extends Command
                 ) {
                     $ticket->update(
                         [
-                            'status_id' => 2,
+                            'status_id' => 'CLOSED',
                         ]
                     );
                 }
