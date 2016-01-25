@@ -14,9 +14,9 @@ class EditCommand extends AbstractEditCommand
     public function getOptionsList()
     {
         return new InputDefinition([
-            new inputArgument('id', null, 'Contact id to edit'),
+            new inputArgument('id', InputArgument::REQUIRED, 'Contact id to edit'),
             new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'contact name'),
-            new InputOption('reference', null, InputOption::VALUE_OPTIONAL,  'company name'),
+            new InputOption('reference', null, InputOption::VALUE_OPTIONAL,  'Reference'),
             new InputOption('account_id', null, InputOption::VALUE_OPTIONAL, 'Account id'),
             new InputOption('enabled',  null, InputOption::VALUE_OPTIONAL,  'Enabled'),
             new InputOption('email',  null, InputOption::VALUE_OPTIONAL,  'Email'),
