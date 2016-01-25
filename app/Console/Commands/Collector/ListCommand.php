@@ -4,33 +4,34 @@ namespace AbuseIO\Console\Commands\Collector;
 
 use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Collectors\Factory as CollectorFactory;
-use Carbon;
 
 /**
- * Class ListCommand
- * @package AbuseIO\Console\Commands\Collector
+ * Class ListCommand.
  */
 class ListCommand extends AbstractListCommand
 {
-    protected $filterArguments = ["name"];
+    protected $filterArguments = ['name'];
 
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
-    protected $headers = [ 'Name', 'Description' ];
+    protected $headers = ['Name', 'Description'];
 
     /**
-     * The fields of the table / database row
+     * The fields of the table / database row.
+     *
      * @var array
      */
-    protected $fields = [ ];
+    protected $fields = [];
 
     /**
      * Execute the console command.
      *
      * @param array $collectors
-     * @return boolean
+     *
+     * @return bool
      */
     public function hydrateCollectorsWithDescription($collectors)
     {
@@ -38,18 +39,16 @@ class ListCommand extends AbstractListCommand
         foreach ($collectors as $collector) {
             $objects[] =
                 [
-                    'name'          => $collector,
-                    'description'   => config("collectors.{$collector}.collector.description"),
+                    'name' => $collector,
+                    'description' => config("collectors.{$collector}.collector.description"),
                 ];
-
         }
 
         return $objects;
-
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -57,7 +56,7 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
@@ -70,7 +69,7 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
@@ -80,10 +79,10 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "collector";
+        return 'collector';
     }
 }
