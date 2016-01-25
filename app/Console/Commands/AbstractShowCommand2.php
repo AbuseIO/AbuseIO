@@ -20,8 +20,8 @@ abstract class AbstractShowCommand2 extends Command
             ->setDefinition(
                 new InputDefinition(
                     $this->defineInput()
-                ))
-            ->addOption(
+                )
+            )->addOption(
                 'json',
                 null,
                 InputOption::VALUE_OPTIONAL,
@@ -94,10 +94,12 @@ abstract class AbstractShowCommand2 extends Command
      * @return string
      */
     abstract protected function getAsNoun();
+
     /**
      * @return array
      */
     abstract protected function getFields();
+
     /**
      * @return array
      */

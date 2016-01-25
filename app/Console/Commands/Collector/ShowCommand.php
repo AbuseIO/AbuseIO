@@ -35,6 +35,11 @@ class ShowCommand extends AbstractShowCommand2
         return ['name'];
     }
 
+    /**
+     * @param array $collectors
+     *
+     * @return array
+     */
     public function hydrateCollectorWithFields(array $collectors)
     {
         $objects = [];
@@ -49,8 +54,8 @@ class ShowCommand extends AbstractShowCommand2
             if (is_array($value)) {
                 $value = implode(PHP_EOL, $value);
             }
-            $objects[] =
-                [
+            $objects[]
+                = [
                     ucfirst($field),
                     $value,
                 ];
