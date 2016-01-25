@@ -3,7 +3,6 @@
 namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
@@ -13,7 +12,7 @@ abstract class AbstractShowCommand2 extends Command
     /**
      * Configure the console command.
      */
-    protected final function configure()
+    final protected function configure()
     {
         $this
             ->setName($this->getName())
@@ -23,10 +22,10 @@ abstract class AbstractShowCommand2 extends Command
                     $this->defineInput()
                 ))
             ->addOption(
-                "json",
+                'json',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                "use --json=true to output result as JSON"
+                'use --json=true to output result as JSON'
             );
     }
 
@@ -35,7 +34,7 @@ abstract class AbstractShowCommand2 extends Command
      *
      * @return bool
      */
-    public final function handle()
+    final public function handle()
     {
         $object = $this
             ->getCollectionWithArguments()
@@ -43,9 +42,9 @@ abstract class AbstractShowCommand2 extends Command
 
         if (!is_object($object)) {
             $this->error(
-                sprintf("No matching %s was found.", $this->getAsNoun())
+                sprintf('No matching %s was found.', $this->getAsNoun())
             );
-        } else if($this->option("json")) {
+        } elseif ($this->option('json')) {
             echo $object->toJson();
         } else {
             $this->table(
@@ -53,19 +52,20 @@ abstract class AbstractShowCommand2 extends Command
                 $this->transformObjectToTableBody($object)
             );
         }
+
         return true;
     }
 
     /**
      * @return string
      */
-    public final function getName()
+    final public function getName()
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
     }
 
     /**
-     * Default subcommand name
+     * Default subcommand name.
      *
      * @return string
      */
@@ -77,7 +77,7 @@ abstract class AbstractShowCommand2 extends Command
     /**
      * @return string
      */
-    public final function getDescription()
+    final public function getDescription()
     {
         return sprintf('Shows a %s (without confirmation!)', $this->getAsNoun());
     }
@@ -97,12 +97,10 @@ abstract class AbstractShowCommand2 extends Command
     /**
      * @return array
      */
-
     abstract protected function getFields();
     /**
      * @return array
      */
-
     abstract protected function getAllowedArguments();
 
     /**
@@ -112,20 +110,21 @@ abstract class AbstractShowCommand2 extends Command
     /**
      * @return array
      */
-
     abstract protected function defineInput();
 
     /**
      * @param $model
+     *
      * @return array
      */
     protected function transformObjectToTableBody($model)
     {
         $result = [];
         foreach ($model->getAttributes() as $key => $value) {
-            $heading = ucfirst(str_replace("_", " ", $key));
+            $heading = ucfirst(str_replace('_', ' ', $key));
             $result[] = [$heading, $value];
         }
+
         return $result;
     }
 }

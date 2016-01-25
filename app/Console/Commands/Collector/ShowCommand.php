@@ -2,45 +2,39 @@
 
 namespace AbuseIO\Console\Commands\Collector;
 
-use AbuseIO\Console\Commands\AbstractShowCommand;
+use AbuseIO\Console\Commands\AbstractShowCommand2;
+use Illuminate\Support\Collection;
+use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\Collector
+ * Class ShowCommand.
  */
-class ShowCommand extends AbstractShowCommand
+class ShowCommand extends AbstractShowCommand2
 {
+    /**
+     * {@inherit docs}.
+     */
+    protected function getAsNoun()
+    {
+        return 'collector';
+    }
 
     /**
-     * The console command name.
-     * @var string
+     * {@inherit docs}.
      */
-    protected $signature = 'collector:show {name}';
+    protected function getAllowedArguments()
+    {
+        return ['name', 'description', 'enabled', 'location', 'key'];
+    }
 
     /**
-     * The console command description.
-     * @var string
+     * {@inherit docs}.
      */
-    protected $description = 'Shows the details of an collector';
+    protected function getFields()
+    {
+        return ['name'];
+    }
 
-    /**
-     * The headers of the table
-     * @var array
-     */
-    protected $headers = [ 'Collector' ];
-
-    /**
-     * The fields of the table / database row
-     * @var array
-     */
-    protected $fields = [ 'Collector' ];
-
-    /**
-     * Execute the console command.
-     *
-     * @param array $collectors
-     * @return boolean
-     */
     public function hydrateCollectorWithFields(array $collectors)
     {
         $objects = [];
@@ -63,11 +57,10 @@ class ShowCommand extends AbstractShowCommand
         }
 
         return $objects;
-
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -75,29 +68,60 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
         $collector = ucfirst($filter);
-        $collector = config("collectors.{$collector}.collector");
 
-        return $this->hydrateCollectorWithFields($collector);
+        $result = config("collectors.{$collector}.collector");
+
+        if (null !== $result) {
+            return collect(
+                [(object) $result]
+            );
+        }
+
+        return collect(null);
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
-        return [ ];
+        return [];
     }
 
     /**
-     * {@inheritdoc }
+     * @return Collection
      */
-    protected function getAsNoun()
+    protected function getCollectionWithArguments()
     {
-        return "collector";
+        return $this->findWithCondition($this->argument('collector'));
+    }
+
+    /**
+     * @return array
+     */
+    protected function defineInput()
+    {
+        return [
+            new InputArgument(
+                'collector',
+                InputArgument::REQUIRED,
+                'Use the name of a collector to show it.'),
+        ];
+    }
+
+    protected function transformObjectToTableBody($model)
+    {
+        return [
+            ['Name', $model->name],
+            ['Description', $model->description],
+            ['Enabled', $model->enabled],
+            ['Location', $model->location],
+            ['Key', $model->key],
+        ];
     }
 }
