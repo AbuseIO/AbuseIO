@@ -5,10 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
-
     public function run()
     {
         Model::unguard();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
         $this->call('ContactsTableSeeder');
         $this->call('NetblocksTableSeeder');
@@ -22,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call('AccountsTableSeeder');
         $this->call('UsersTableSeeder');
 
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

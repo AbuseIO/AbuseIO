@@ -73,17 +73,17 @@ class BrandsController extends Controller
         return Datatables::of($brands)
             ->addColumn(
                 'status',
-                function ($brand) use ($account)
-                {
-                  if ($account->brand_id == $brand->id) {
-                      return trans('misc.active');
-                  } else {
-                      return trans('misc.inactive');
-                  }
-                })
+                function ($brand) use ($account) {
+                    if ($account->brand_id == $brand->id) {
+                        return trans('misc.active');
+                    } else {
+                        return trans('misc.inactive');
+                    }
+                }
+            )
             ->addColumn(
                 'actions',
-                function ($brand) use ($account){
+                function ($brand) use ($account) {
                     $actions = \Form::open(
                         [
                             'route' => [
@@ -94,8 +94,7 @@ class BrandsController extends Controller
                             'class' => 'form-inline'
                         ]
                     );
-                    if (!$brand->isDefault() or $account->isSystemAccount())
-                    {
+                    if (!$brand->isDefault() or $account->isSystemAccount()) {
                         if ($account->brand_id != $brand->id) {
                             $actions .= ' <a href="brands/' . $brand->id .
                                 '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> ' .
@@ -177,7 +176,7 @@ class BrandsController extends Controller
 
         try {
             if (!$account->isSystemAccount()) {
-                $input['account_id'] = $account->id;
+                $input['creator_id'] = $account->id;
             }
 
             $brand = Brand::create($input);
@@ -204,9 +203,10 @@ class BrandsController extends Controller
      */
     public function show(Brand $brand)
     {
+        //dd($brand->creator);
         return view('brands.show')
             ->with('brand', $brand)
-            ->with('account', $brand->account)
+            ->with('creator', $brand->creator)
             ->with('auth_user', $this->auth_user);
     }
 
@@ -245,7 +245,7 @@ class BrandsController extends Controller
 
         return view('brands.edit')
             ->with('account_selection', $accounts)
-            ->with('selected', $brand->account_id)
+            ->with('selected', $brand->creator_id)
             ->with('brand', $brand)
             ->with('auth_user', $this->auth_user);
     }

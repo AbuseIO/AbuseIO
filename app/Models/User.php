@@ -1,10 +1,10 @@
 <?php namespace AbuseIO\Models;
 
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Hash;
 
@@ -75,11 +75,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Validation rules for this model being created
      *
-     * @return array $rules
+     * @return array
      */
     public static function createRules()
     {
-        // disabled is sent as a string
+
         $rules = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
@@ -87,7 +87,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'password'      => 'required|confirmed|min:6|max:32',
             'account_id'    => 'required|integer',
             'locale'        => 'required|min:2|max:3',
-            'disabled'      => 'required|string',
+            'disabled'      => 'required|string', // disabled is sent as a string
             'roles'         => 'sometimes',
         ];
 
@@ -97,12 +97,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Validation rules for this model being updated
      *
-     * @param  \AbuseIO\Models\User $user
-     * @return array $rules
+     * @param  \AbuseIO\Models\User $user The User Model
+     * @return array
      */
-    public static function updateRules($user)
+    public static function updateRules(User $user)
     {
-        // disabled is sent as a string
         $rules = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
@@ -110,7 +109,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'password'      => 'required|confirmed|min:6|max:32',
             'account_id'    => 'required|integer',
             'locale'        => 'sometimes|required|min:2|max:3',
-            'disabled'      => 'sometimes|required|string',
+            'disabled'      => 'sometimes|required|string', // disabled is sent as a string
             'roles'         => 'sometimes',
         ];
 
@@ -120,15 +119,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Static method to check if the account has access to the model instance
      *
-     * @param $model_id
-     * @param $account
-     * @return bool
+     * @param   int $model_id                    Model Id
+     * @param   \AbuseIO\Models\Account $account The Account Model
+     * @return  bool
      */
-    public static function checkAccountAccess($model_id, $account)
+    public static function checkAccountAccess($model_id, Account $account)
     {
-        // early return when we are in the system account
-        if ($account->isSystemAccount())
+        // Early return when we are in the system account
+        if ($account->isSystemAccount()) {
             return true;
+        }
 
         $user = User::find($model_id);
 
@@ -146,8 +146,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Checks a Permission
      *
-     * @param  string permission Slug of a permission (i.e: manage_user)
-     * @return boolean true if has permission, otherwise false
+     * @param  string $permission Permission Slug of a permission (i.e: manage_user)
+     * @return bool
      */
     public function can($permission = null)
     {
@@ -157,8 +157,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Check if the permission matches with any permission user has
      *
-     * @param  string permission name of a permission
-     * @return boolean true if permission exists, otherwise false
+     * @param  string $perm Permission name of a permission
+     * @return bool
      */
     protected function checkPermission($perm)
     {
@@ -172,7 +172,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Get all permission names from all permissions of all roles
      *
-     * @return array of permission names
+     * @return array
      */
     protected function getAllPermissionsFromAllRoles()
     {
@@ -184,9 +184,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 array_flatten(
                     array_map(
                         function ($permission) {
-
                             return array_pluck($permission, 'name');
-
                         },
                         $permissions
                     )
@@ -202,34 +200,34 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
 
     /**
-     * return the fullname of the user
+     * Return the fullname of the user
      *
      * @return string
      */
     public function fullName()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return "{$this->first_name} {$this->last_name}";
     }
 
     /**
      * Check if the current user is allowed to login
      *
-     * @param $messages
+     * @param  array &$messages Array of messages
      * @return bool
      */
     public function mayLogin(&$messages)
     {
-        // first user is always allowed to login, early return
+        // First user is always allowed to login, early return
         if ($this->id == 1) {
             return true;
         }
 
         $result = true;
 
-        // check if the account is disabled (system account is never disabled)
+        // Check if the account is disabled (system account is never disabled)
         $account = $this->account;
         if ($account->disabled && $account->id != 1) {
-            array_push($messages, 'The account "' . $account->name . '" for this login is disabled.');
+            array_push($messages, "The account {$account->name} for this login is disabled.");
             if ($result) {
                 $result = false;
             }
@@ -248,7 +246,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Checks if the user has a specific role
      *
-     * @param $role_name
+     * @param  string $role_name Name of the role
      * @return bool
      */
     public function hasRole($role_name)
@@ -268,7 +266,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Check to see if we can disable the user
      *
-     * @param User $auth_user
+     * @param  \AbuseIO\Models\User $auth_user The User Model
      * @return bool
      */
     public function mayDisable(User $auth_user)
@@ -289,7 +287,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * Check to see if we can enable the user
      * (using the logic in mayDisable())
      *
-     * @param User $auth_user
+     * @param  \AbuseIO\Models\User $auth_user The User Model
      * @return bool
      */
     public function mayEnable(User $auth_user)
@@ -306,7 +304,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Many-To-Many Relationship Method for accessing the User->roles
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function roles()
     {
@@ -316,7 +314,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * One-To-Many relation to account
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \AbuseIO\Models\Account
      */
     public function account()
     {
@@ -332,7 +330,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Encrypt password to hash
      *
-     * @param $value
+     * @param $value The password to set
      */
     public function setPasswordAttribute($value)
     {

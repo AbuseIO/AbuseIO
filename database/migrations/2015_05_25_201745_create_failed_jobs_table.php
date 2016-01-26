@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateFailedJobsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -16,13 +15,12 @@ class CreateFailedJobsTable extends Migration
         Schema::create(
             'failed_jobs',
             function (Blueprint $table) {
-
+                // Columns
                 $table->increments('id');
                 $table->text('connection');
                 $table->text('queue');
                 $table->text('payload');
                 $table->timestamp('failed_at');
-
             }
         );
     }

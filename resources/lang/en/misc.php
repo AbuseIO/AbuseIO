@@ -85,4 +85,5 @@ return [
     'active'            => 'Active',
     'inactive'          => 'Inactive',
     'select_one'        => 'Select one',
+    'creator'           => 'Owner',
 ];

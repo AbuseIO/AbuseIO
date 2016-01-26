@@ -85,7 +85,7 @@ class Evidence extends Model
      */
     public function event()
     {
-        return $this->belongsTo('AbuseIO\Models\event');
+        return $this->belongsTo('AbuseIO\Models\Event');
     }
 
     /**

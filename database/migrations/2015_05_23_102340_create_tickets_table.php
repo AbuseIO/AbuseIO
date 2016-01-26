@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTicketsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -16,7 +15,7 @@ class CreateTicketsTable extends Migration
         Schema::create(
             'tickets',
             function (Blueprint $table) {
-
+                // Columns
                 $table->increments('id');
                 $table->string('ip', 45);
                 $table->string('domain');
@@ -26,7 +25,6 @@ class CreateTicketsTable extends Migration
                 $table->enum('contact_status_id', ['OPEN', 'IGNORED', 'RESOLVED'])->default('OPEN');
                 $table->integer('last_notify_count')->unsigned();
                 $table->integer('last_notify_timestamp');
-
                 $table->integer('ip_contact_account_id')->unsigned();
                 $table->string('ip_contact_reference');
                 $table->string('ip_contact_name');
@@ -34,7 +32,6 @@ class CreateTicketsTable extends Migration
                 $table->string('ip_contact_api_host');
                 $table->integer('ip_contact_notified_count')->unsigned();
                 $table->boolean('ip_contact_auto_notify')->unsigned();
-
                 $table->integer('domain_contact_account_id')->unsigned();
                 $table->string('domain_contact_reference');
                 $table->string('domain_contact_name');
@@ -42,10 +39,10 @@ class CreateTicketsTable extends Migration
                 $table->string('domain_contact_api_host');
                 $table->integer('domain_contact_notified_count')->unsigned();
                 $table->boolean('domain_contact_auto_notify')->unsigned();
-
                 $table->timestamps();
                 $table->softDeletes();
 
+                // Indexes
                 $table->index('ip');
                 $table->index('domain');
                 $table->index('class_id');
@@ -53,7 +50,6 @@ class CreateTicketsTable extends Migration
                 $table->index('ip_contact_reference');
                 $table->index('domain_contact_reference');
                 $table->index('status_id');
-
             }
         );
     }

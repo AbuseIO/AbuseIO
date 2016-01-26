@@ -16,18 +16,18 @@ class CreateEvidencesTable extends Migration
         Schema::create(
             'evidences',
             function (Blueprint $table) {
-
+                // Columns
                 $table->increments('id');
                 $table->string('filename')->unique();
                 $table->string('sender');
                 $table->string('subject');
                 $table->timestamps();
                 $table->softDeletes();
-    
+
+                // Indexes
                 $table->index('filename');
                 $table->index('sender');
                 $table->index('subject');
-
             }
         );
     }

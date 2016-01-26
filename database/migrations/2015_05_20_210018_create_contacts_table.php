@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateContactsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -16,9 +15,9 @@ class CreateContactsTable extends Migration
         Schema::create(
             'contacts',
             function (Blueprint $table) {
-
+                // Columns
                 $table->increments('id');
-                $table->integer('account_id');
+                $table->integer('account_id')->unsigned();
                 $table->string('reference')->unique();
                 $table->string('name');
                 $table->string('email');
@@ -28,12 +27,12 @@ class CreateContactsTable extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
+                // Indexes
                 $table->index('reference');
                 $table->index('name');
                 $table->index('email');
                 $table->index('api_host');
                 $table->index('auto_notify');
-
             }
         );
     }

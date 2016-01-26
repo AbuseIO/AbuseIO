@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateNetblocksTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -16,7 +15,7 @@ class CreateNetblocksTable extends Migration
         Schema::create(
             'netblocks',
             function (Blueprint $table) {
-
+                // Columns
                 $table->increments('id');
                 $table->integer('contact_id')->unsigned();
                 $table->string('first_ip', 45);
@@ -28,11 +27,13 @@ class CreateNetblocksTable extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
+                // Indexes
                 $table->index('contact_id');
                 $table->index('enabled');
                 $table->index('first_ip');
                 $table->index('last_ip');
 
+                // Uniques
                 $table->unique(['first_ip', 'last_ip']);
                 $table->unique(['first_ip_int', 'last_ip_int']);
             }
@@ -46,7 +47,6 @@ class CreateNetblocksTable extends Migration
      */
     public function down()
     {
-
         Schema::drop('netblocks');
     }
 }

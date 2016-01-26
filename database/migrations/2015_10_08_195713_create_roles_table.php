@@ -15,13 +15,12 @@ class CreateRolesTable extends Migration
         Schema::create(
             'roles',
             function (Blueprint $table) {
-
+                // Columns
                 $table->increments('id');
                 $table->string('name', 80);
                 $table->string('description');
                 $table->timestamps();
                 $table->softDeletes();
-
             }
         );
 
@@ -30,19 +29,17 @@ class CreateRolesTable extends Migration
 
     public function addDefaultRoles()
     {
-
         DB::table('roles')->where('id', '=', '1')->delete();
         $roles = [
             [
-                'id'                        => 1,
-                'name'                      => 'admin',
-                'description'               => 'System Administrator',
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'id'            => 1,
+                'name'          => 'admin',
+                'description'   => 'System Administrator',
+                'created_at'    => new DateTime,
+                'updated_at'    => new DateTime,
             ],
         ];
         DB::table('roles')->insert($roles);
-
     }
 
     /**

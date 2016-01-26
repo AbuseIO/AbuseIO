@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDomainsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -16,7 +15,7 @@ class CreateDomainsTable extends Migration
         Schema::create(
             'domains',
             function (Blueprint $table) {
-
+                // Columns
                 $table->increments('id');
                 $table->string('name')->unique();
                 $table->integer('contact_id')->unsigned();
@@ -24,6 +23,7 @@ class CreateDomainsTable extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
+                // Indexes
                 $table->index('name');
                 $table->index('contact_id');
             }

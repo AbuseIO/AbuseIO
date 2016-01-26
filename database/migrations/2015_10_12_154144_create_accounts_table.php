@@ -15,11 +15,12 @@ class CreateAccountsTable extends Migration
         Schema::create(
             'accounts',
             function (Blueprint $table) {
+                // Columns
                 $table->increments('id');
                 $table->string('name', 80)->unique();
                 $table->string('description');
                 $table->boolean('disabled')->default(false);
-                $table->integer('brand_id');
+                $table->integer('brand_id')->unsigned();
                 $table->boolean('systemaccount')->default(false);
                 $table->timestamps();
                 $table->softDeletes();

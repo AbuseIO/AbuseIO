@@ -23,7 +23,7 @@
     <dt>{{ trans('misc.text') }}</dt>
     <dd>{{ $brand->introduction_text }}</dd>
 
-    <dt>{{ trans_choice('misc.accounts',1) }}</dt>
+    <dt>{{ trans('misc.creator') }}</dt>
     <dd>{{ $account->name }}</dd>
 
     <dt>{{ trans('brands.logo') }}</dt>

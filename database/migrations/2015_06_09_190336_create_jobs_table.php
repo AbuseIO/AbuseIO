@@ -15,7 +15,7 @@ class CreateJobsTable extends Migration
         Schema::create(
             'jobs',
             function (Blueprint $table) {
-
+                // Columns
                 $table->bigIncrements('id');
                 $table->string('queue');
                 $table->longText('payload');
@@ -24,7 +24,6 @@ class CreateJobsTable extends Migration
                 $table->unsignedInteger('reserved_at')->nullable();
                 $table->unsignedInteger('available_at');
                 $table->unsignedInteger('created_at');
-
             }
         );
     }

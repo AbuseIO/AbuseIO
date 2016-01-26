@@ -38,7 +38,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Ticket extends Model
 {
-
     use SoftDeletes;
 
     /**
@@ -46,7 +45,7 @@ class Ticket extends Model
      *
      * @var string
      */
-    protected $table    = 'tickets';
+    protected $table = 'tickets';
 
     /**
      * The attributes that are mass assignable.
@@ -102,33 +101,33 @@ class Ticket extends Model
     /**
      * Validation rules for this model being created
      *
-     * @return array $rules
+     * @return array
      */
     public static function createRules()
     {
         $rules = [
-            'ip'                                => 'required|ip',
-            'domain'                            => 'sometimes|string',
-            'class_id'                          => 'required|string|max:100',
-            'type_id'                           => 'required|in:INFO,ABUSE,ESCALATION',
-            'ip_contact_account_id'             => 'required|integer',
-            'ip_contact_reference'              => 'required|string',
-            'ip_contact_name'                   => 'required|string',
-            'ip_contact_email'                  => 'sometimes|emails',
-            'ip_contact_api_host'               => 'sometimes|string',
-            'ip_contact_auto_notify'            => 'required|boolean',
-            'ip_contact_notified_count'         => 'required|integer',
-            'domain_contact_account_id'         => 'required|integer',
-            'domain_contact_reference'          => 'required|string',
-            'domain_contact_name'               => 'required|string',
-            'domain_contact_email'              => 'sometimes|emails',
-            'domain_contact_api_host'           => 'sometimes|string',
-            'domain_contact_auto_notify'        => 'required|boolean',
-            'domain_contact_notified_count'     => 'required|integer',
-            'status_id'                         => 'required|in:OPEN,CLOSED,ESCALATED,RESOLVED,IGNORED',
-            'contact_status_id'                 => 'sometimes|in:OPEN,RESOLVED,IGNORED',
-            'last_notify_count'                 => 'required|integer',
-            'last_notify_timestamp'             => 'required|timestamp',
+            'ip'                            => 'required|ip',
+            'domain'                        => 'sometimes|string',
+            'class_id'                      => 'required|string|max:100',
+            'type_id'                       => 'required|in:INFO,ABUSE,ESCALATION',
+            'ip_contact_account_id'         => 'required|integer',
+            'ip_contact_reference'          => 'required|string',
+            'ip_contact_name'               => 'required|string',
+            'ip_contact_email'              => 'sometimes|emails',
+            'ip_contact_api_host'           => 'sometimes|string',
+            'ip_contact_auto_notify'        => 'required|boolean',
+            'ip_contact_notified_count'     => 'required|integer',
+            'domain_contact_account_id'     => 'required|integer',
+            'domain_contact_reference'      => 'required|string',
+            'domain_contact_name'           => 'required|string',
+            'domain_contact_email'          => 'sometimes|emails',
+            'domain_contact_api_host'       => 'sometimes|string',
+            'domain_contact_auto_notify'    => 'required|boolean',
+            'domain_contact_notified_count' => 'required|integer',
+            'status_id'                     => 'required|in:OPEN,CLOSED,ESCALATED,RESOLVED,IGNORED',
+            'contact_status_id'             => 'sometimes|in:OPEN,RESOLVED,IGNORED',
+            'last_notify_count'             => 'required|integer',
+            'last_notify_timestamp'         => 'required|timestamp',
         ];
 
         return $rules;
@@ -137,33 +136,33 @@ class Ticket extends Model
     /**
      * Validation rules for this model being updated
      *
-     * @return array $rules
+     * @return array
      */
     public static function updateRules()
     {
         $rules = [
-            'ip'                                => 'required|ip',
-            'domain'                            => 'sometimes|string',
-            'class_id'                          => 'required|string|max:100',
-            'type_id'                           => 'required|in:INFO,ABUSE,ESCALATION',
-            'ip_contact_account_id'             => 'required|integer',
-            'ip_contact_reference'              => 'required|string',
-            'ip_contact_name'                   => 'required|string',
-            'ip_contact_email'                  => 'sometimes|emails',
-            'ip_contact_api_host'               => 'sometimes|string',
-            'ip_contact_auto_notify'            => 'required|boolean',
-            'ip_contact_notified_count'         => 'required|integer',
-            'domain_contact_account_id'         => 'required|integer',
-            'domain_contact_reference'          => 'required|string',
-            'domain_contact_name'               => 'required|string',
-            'domain_contact_email'              => 'sometimes|emails',
-            'domain_contact_api_host'           => 'sometimes|string',
-            'domain_contact_auto_notify'        => 'required|boolean',
-            'domain_contact_notified_count'     => 'required|integer',
-            'status_id'                         => 'required|in:OPEN,CLOSED,ESCALATED,RESOLVED,IGNORED',
-            'contact_status_id'                 => 'sometimes|in:OPEN,RESOLVED,IGNORED',
-            'last_notify_count'                 => 'required|integer',
-            'last_notify_timestamp'             => 'required|timestamp',
+            'ip'                            => 'required|ip',
+            'domain'                        => 'sometimes|string',
+            'class_id'                      => 'required|string|max:100',
+            'type_id'                       => 'required|in:INFO,ABUSE,ESCALATION',
+            'ip_contact_account_id'         => 'required|integer',
+            'ip_contact_reference'          => 'required|string',
+            'ip_contact_name'               => 'required|string',
+            'ip_contact_email'              => 'sometimes|emails',
+            'ip_contact_api_host'           => 'sometimes|string',
+            'ip_contact_auto_notify'        => 'required|boolean',
+            'ip_contact_notified_count'     => 'required|integer',
+            'domain_contact_account_id'     => 'required|integer',
+            'domain_contact_reference'      => 'required|string',
+            'domain_contact_name'           => 'required|string',
+            'domain_contact_email'          => 'sometimes|emails',
+            'domain_contact_api_host'       => 'sometimes|string',
+            'domain_contact_auto_notify'    => 'required|boolean',
+            'domain_contact_notified_count' => 'required|integer',
+            'status_id'                     => 'required|in:OPEN,CLOSED,ESCALATED,RESOLVED,IGNORED',
+            'contact_status_id'             => 'sometimes|in:OPEN,RESOLVED,IGNORED',
+            'last_notify_count'             => 'required|integer',
+            'last_notify_timestamp'         => 'required|timestamp',
         ];
 
         return $rules;
@@ -172,58 +171,56 @@ class Ticket extends Model
     /**
      * Static method to check if the account has access to the model instance
      *
-     * @param $model_id
-     * @param $account
+     * @param  $model_id                        Model Id
+     * @param  \AbuseIO\Models\Account $account The Account Model
      * @return bool
      */
-    public static function checkAccountAccess($model_id, $account)
+    public static function checkAccountAccess($model_id, Account $account)
     {
-        // early return when we are in the system account
+        // Early return when we are in the system account
         if ($account->isSystemAccount()) {
             return true;
         }
 
         $ticket = Ticket::find($model_id);
 
-        $allowed = $ticket->ip_contact_account_id == $account->id or
-          $ticket->domain_contact_account_id == $account->id;
+        $allowed = ($ticket->ip_contact_account_id == $account->id) ||
+                   ($ticket->domain_contact_account_id == $account->id);
 
         return ($allowed);
     }
 
     /**
-     * @return mixed
+     * one-to-many relationship method.
+     *
+     * @param  string $order Sorting order 'desc' or 'asc'
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function events()
+    public function events($order = 'asc')
     {
-
         return $this->hasMany('AbuseIO\Models\Event')
-            ->orderBy('timestamp', 'desc');
-
+            ->orderBy('timestamp', $order);
     }
 
     /**
-     * @return mixed
+     * one-to-many relationship method.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function unreadNotes()
     {
-
         return $this->hasMany('AbuseIO\Models\Note')
             ->where('viewed', 'false');
-
     }
 
-
     /**
-     * @return mixed
+     * one-to-many relationship method.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function firstEvent()
     {
-
-        return $this->hasMany('AbuseIO\Models\Event')
-            ->orderBy('timestamp', 'asc')
-            ->take(1);
-
+        return $this->events('asc')->take(1);
     }
 
     /**
@@ -231,11 +228,7 @@ class Ticket extends Model
      */
     public function lastEvent()
     {
-
-        return $this->hasMany('AbuseIO\Models\Event')
-            ->orderBy('timestamp', 'desc')
-            ->take(1);
-
+        return $this->events('desc')->take(1);
     }
 
     /**

@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
         Schema::create(
             'users',
             function (Blueprint $table) {
-
+                // Columns
                 $table->increments('id')->unsigned();
                 $table->integer('account_id')->unsigned();
                 $table->string('email')->unique();
@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
+                // Indexes
                 $table->index('account_id');
                 $table->index('email');
                 $table->index('first_name');

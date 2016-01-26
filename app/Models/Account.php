@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use AbuseIO\Models\Brand;
 use Log;
-    
+
 /**
  * Class Account
  * @package AbuseIO\Models
@@ -28,7 +28,7 @@ class Account extends Model
      *
      * @var string
      */
-    protected $table    = 'accounts';
+    protected $table = 'accounts';
 
     /**
      * The attributes that are mass assignable.
@@ -102,9 +102,10 @@ class Account extends Model
      */
     public static function checkAccountAccess($model_id, $account)
     {
-        // early return when we are in the system account
-        if ($account->isSystemAccount())
+        // Early return when we are in the system account
+        if ($account->isSystemAccount()) {
             return true;
+        }
 
         $my_account = Account::find($model_id);
 

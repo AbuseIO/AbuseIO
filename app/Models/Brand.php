@@ -28,7 +28,7 @@ class Brand extends Model
      *
      * @var string
      */
-    protected $table    = 'brands';
+    protected $table = 'brands';
 
     /**
      * The attributes that are mass assignable.
@@ -40,7 +40,7 @@ class Brand extends Model
         'company_name',
         'logo',
         'introduction_text',
-        'account_id',
+        'creator_id',
     ];
 
     /**
@@ -108,12 +108,13 @@ class Brand extends Model
     public static function checkAccountAccess($model_id, $account)
     {
         // early return when we are in the system account
-        if ($account->isSystemAccount())
+        if ($account->isSystemAccount()) {
             return true;
+        }
 
         $brand = Brand::find($model_id);
 
-        $allowed = $brand->account_id == $account->id;
+        $allowed = $brand->creator_id == $account->id;
 
         return ($allowed);
     }
@@ -147,7 +148,7 @@ class Brand extends Model
      * @param $messages
      * @return bool
      */
-    static public function checkUploadedLogo($file, &$messages)
+    public static function checkUploadedLogo($file, &$messages)
     {
         // check for a valid image
         $maxsize = 64 * 1024; // 64kb max size of a database blob
@@ -175,9 +176,8 @@ class Brand extends Model
     {
         $result = false;
 
-        // not linked to an account and not the default account
-        if (count($this->accounts) == 0 && !$this->isDefault())
-        {
+        // Not linked to an account and not the default account
+        if (count($this->accounts) == 0 && !$this->isDefault()) {
             // we can delete the brand
             $result = true;
         }
@@ -194,6 +194,15 @@ class Brand extends Model
         return $this->account;
     }
 
+    /**
+     * Returns the Account where this brand was made UnderflowException
+     *
+     * @return \AbuseIO\Models\Account
+     */
+    public function getCreatorAttribute()
+    {
+        return $this->account;
+    }
 
     /*
      |--------------------------------------------------------------------------
@@ -214,7 +223,7 @@ class Brand extends Model
      */
     public function account()
     {
-        return $this->belongsTo('AbuseIO\Models\Account');
+        return $this->belongsTo('AbuseIO\Models\Account', 'creator_id');
     }
 
     /**

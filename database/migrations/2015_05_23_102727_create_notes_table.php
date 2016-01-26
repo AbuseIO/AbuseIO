@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateNotesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -16,7 +15,7 @@ class CreateNotesTable extends Migration
         Schema::create(
             'notes',
             function (Blueprint $table) {
-
+                // Columns
                 $table->increments('id');
                 $table->integer('ticket_id')->unsigned();
                 $table->string('submitter', 80);
@@ -26,8 +25,8 @@ class CreateNotesTable extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
+                // Indexes
                 $table->index('ticket_id');
-
             }
         );
     }

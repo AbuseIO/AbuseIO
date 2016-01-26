@@ -16,12 +16,13 @@ class CreateBrandsTable extends Migration
         Schema::create(
             'brands',
             function (Blueprint $table) {
+                // Columns
                 $table->increments('id');
                 $table->string('name', 80)->unique();
                 $table->string('company_name', 80);
                 $table->string('introduction_text');
+                $table->integer('creator_id')->unsigned();
                 $table->binary('logo');
-                $table->integer('account_id');
                 $table->timestamps();
                 $table->softDeletes();
             }
@@ -44,8 +45,8 @@ class CreateBrandsTable extends Migration
                 'name'                      => 'default',
                 'company_name'              => 'AbuseIO',
                 'introduction_text'         => 'This is an introduction text',
+                'creator_id'                => 1,
                 'logo'                      => Brand::getDefaultLogo(),
-                'account_id'                => 1,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
@@ -53,7 +54,6 @@ class CreateBrandsTable extends Migration
 
         DB::table('brands')->insert($brands);
     }
-
 
     /**
      * Reverse the migrations.

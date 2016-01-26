@@ -84,4 +84,5 @@ return [
     'active'            => 'Actief',
     'inactive'          => 'Inactief',
     'select_one'        => 'Maak een keuze',
+    'creator'           => 'Eigenaar',
 ];
