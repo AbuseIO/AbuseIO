@@ -203,7 +203,6 @@ class BrandsController extends Controller
      */
     public function show(Brand $brand)
     {
-        //dd($brand->creator);
         return view('brands.show')
             ->with('brand', $brand)
             ->with('creator', $brand->creator)
