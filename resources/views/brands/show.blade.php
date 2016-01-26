@@ -24,7 +24,7 @@
     <dd>{{ $brand->introduction_text }}</dd>
 
     <dt>{{ trans('misc.creator') }}</dt>
-    <dd>{{ $account->name }}</dd>
+    <dd>{{ $creator->name }}</dd>
 
     <dt>{{ trans('brands.logo') }}</dt>
     <dd><img src="/admin/logo/{{ $brand->id }}" alt="{{ $brand->company_name }}"/></dd>

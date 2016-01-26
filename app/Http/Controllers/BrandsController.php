@@ -2,16 +2,16 @@
 
 namespace AbuseIO\Http\Controllers;
 
+use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\BrandFormRequest;
 use AbuseIO\Models\Account;
-use Illuminate\Filesystem\Filesystem;
-use DB;
-use Exception;
-use AbuseIO\Http\Requests;
 use AbuseIO\Models\Brand;
-use Log;
+use Illuminate\Filesystem\Filesystem;
 use yajra\Datatables\Datatables;
 use Redirect;
+use Exception;
+use Log;
+use DB;
 
 /**
  * Class BrandsController
