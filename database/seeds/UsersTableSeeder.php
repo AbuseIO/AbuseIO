@@ -16,14 +16,14 @@ class UsersTableSeeder extends Seeder
 
         // Add the example users
         $defaultAdminUsername = 'admin@isp.local';
-        $defaultAdminPassword = substr(md5(rand()), 0, 8);
-        //$defaultAdminPassword = 'admin';
+        $defaultAdminPassword = (app()->environment() == 'development') ? 'admin' : substr(md5(rand()), 0, 8);
+
         $defaultUserUsername  = 'user@isp.local';
-        $defaultUserPassword = substr(md5(rand()), 0, 8);
-        //$defaultUserPassword = 'user';
+        $defaultUserPassword = (app()->environment() == 'development') ? 'user' : substr(md5(rand()), 0, 8);
+
         $secondAccountAdminUsername = 'admin@account2.local';
-        $secondAccountAdminPassword = substr(md5(rand()), 0, 8);
-        //$secondAccountAdminPassword = 'admin';
+        $secondAccountAdminPassword = (app()->environment() == 'development') ? 'admin' : substr(md5(rand()), 0, 8);
+
 
         $users = [
             [
