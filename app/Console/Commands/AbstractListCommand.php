@@ -25,7 +25,7 @@ abstract class AbstractListCommand extends Command
             ->addOption(
                 "filter",
                 null,
-                InputOption::VALUE_NONE,
+                InputOption::VALUE_OPTIONAL,
                 $this->getFilterMessage()
             )->addOption(
                 "json",
@@ -87,9 +87,8 @@ abstract class AbstractListCommand extends Command
      *
      * @return bool
      */
-    public final function handle()
+    final public function handle()
     {
-        $arguments = $this->argument();
         $options = $this->option();
 
         if (!empty($options['filter'])) {
