@@ -86,9 +86,17 @@ class Event extends Model
      */
     public function evidences()
     {
-
         return $this->hasMany('AbuseIO\Models\Evidence', 'id', 'evidence_id');
+    }
 
+    /**
+     * Return the evidence for this event
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function evidence()
+    {
+        return $this->belongsTo('AbuseIO\Models\Evidence');
     }
 
     /*

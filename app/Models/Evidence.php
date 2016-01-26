@@ -1,18 +1,20 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Evidence
- * @package AbuseIO\Models
- * @property integer $id guarded
+ * Class Evidence.
+ *
+ * @property int $id guarded
  * @property string $filename
  * @property string $sender
  * @property string $subject
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property int $created_at guarded
+ * @property int $updated_at guarded
+ * @property int $deleted_at guarded
  */
 class Evidence extends Model
 {
@@ -23,7 +25,7 @@ class Evidence extends Model
      *
      * @var string
      */
-    protected $table    = 'evidences';
+    protected $table = 'evidences';
 
     /**
      * The attributes that are mass assignable.
@@ -33,7 +35,7 @@ class Evidence extends Model
     protected $fillable = [
         'filename',
         'sender',
-        'subject'
+        'subject',
     ];
 
     /**
@@ -46,11 +48,11 @@ class Evidence extends Model
     ];
 
     /**
-     * The attributes that cannot be changed
+     * The attributes that cannot be changed.
      *
      * @var array
      */
-    protected $guarded  = [
+    protected $guarded = [
         'id',
         'created_at',
         'updated_at',
@@ -58,30 +60,41 @@ class Evidence extends Model
     ];
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array $rules
      */
     public static function createRules()
     {
         $rules = [
-            'filename'          => 'required|file',
-            'sender'            => 'required|string',
-            'subject'           => 'required|string',
+            'filename' => 'required|file',
+            'sender' => 'required|string',
+            'subject' => 'required|string',
         ];
 
         return $rules;
     }
 
     /**
-     * Returns the event for this evidence
+     * Returns the event for this evidence.
+     *
+     * TODO: remove this method when relation are fixed
+     * https://abuseio.myjetbrains.com/youtrack/issue/AIO-77
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function event()
     {
-
         return $this->belongsTo('AbuseIO\Models\event');
+    }
 
+    /**
+     * Returns the events for this evidence.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function events()
+    {
+        return $this->hasMany('AbuseIO\Models\Event');
     }
 }

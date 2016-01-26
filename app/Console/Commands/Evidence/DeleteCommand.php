@@ -7,37 +7,44 @@ use AbuseIO\Models\Evidence;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class DeleteCommand
- * @package AbuseIO\Console\Commands\Account
+ * Class DeleteCommand.
  */
 class DeleteCommand extends AbstractDeleteCommand
 {
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "evidence";
+        return 'evidence';
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAllowedArguments()
     {
-        return ["id"];
+        return ['id'];
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getObjectByArguments()
     {
-        return Evidence::find($this->argument("id"));
+        $evidence = Evidence::find($this->argument('id'));
+
+        if ($evidence && $evidence->events->count() > 0) {
+            $this->error('couldn\'t delete evidence because it is used in events');
+
+            return null;
+        }
+
+        return $evidence;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function defineInput()
     {
@@ -45,7 +52,7 @@ class DeleteCommand extends AbstractDeleteCommand
             new InputArgument(
                 'id',
                 InputArgument::REQUIRED,
-                'Use the id for evidence to delete it.')
+                'Use the id for evidence to delete it.'),
         );
     }
 }
