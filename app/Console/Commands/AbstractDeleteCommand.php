@@ -41,6 +41,10 @@ abstract class AbstractDeleteCommand extends Command
             return false;
         }
 
+        if ($this->stopDeleteAndThrowAnErrorBecauseRelations($object)) {
+            return false;
+        }
+
         if (!$object->delete()) {
             $this->error(
                 sprintf('Unable to delete %s from the system', $this->getAsNoun())
@@ -72,6 +76,11 @@ abstract class AbstractDeleteCommand extends Command
     public final function getDescription()
     {
         return sprintf('Deletes a %s (without confirmation!)', $this->getAsNoun());
+    }
+
+    protected function stopDeleteAndThrowAnErrorBecauseRelations($object)
+    {
+        return false;
     }
 
 

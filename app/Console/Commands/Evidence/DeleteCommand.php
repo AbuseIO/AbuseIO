@@ -34,13 +34,18 @@ class DeleteCommand extends AbstractDeleteCommand
     {
         $evidence = Evidence::find($this->argument('id'));
 
-        if ($evidence && $evidence->events->count() > 0) {
-            $this->error('couldn\'t delete evidence because it is used in events');
+        return $evidence;
+    }
 
-            return null;
+    protected function stopDeleteAndThrowAnErrorBecauseRelations($object)
+    {
+        if ($object->events->count() > 0) {
+            $this->error('Couldn\'t delete evidence because it is used in events');
+
+            return true;
         }
 
-        return $evidence;
+        return false;
     }
 
     /**

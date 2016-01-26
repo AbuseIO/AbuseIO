@@ -10,22 +10,6 @@ use TestCase;
  */
 class DeleteCommandTest extends TestCase
 {
-    // TODO not working because seeder is not deleting and id=1 is in te schema.
-
-//    public function testValid()
-//    {
-//        $exitCode = Artisan::call('account:delete', [
-//            "--id" => "2"
-//        ]);
-//
-//        $this->assertEquals($exitCode, 0);
-//        $this->assertContains("The account has been deleted from the system", Artisan::output());
-//        /**
-//         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-//         */
-//        //$this->seed('AccountsTableSeeder');
-//    }
-
     public function testInvalidId()
     {
         $exitCode = Artisan::call(
@@ -37,5 +21,18 @@ class DeleteCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains('Unable to find evidence', Artisan::output());
+    }
+
+    public function testValidIdButWithEvents()
+    {
+        $exitCode = Artisan::call(
+            'evidence:delete',
+            [
+                'id' => '1',
+            ]
+        );
+
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains('Couldn\'t delete evidence because it is used in events' , Artisan::output());
     }
 }
