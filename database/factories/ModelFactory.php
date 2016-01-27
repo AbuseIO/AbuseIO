@@ -11,6 +11,28 @@
 |
 */
 
+
+
+$factory->define(AbuseIO\Models\Account::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'description' => $faker->sentence(rand(6, 10)),
+        'disabled' =>  rand(0, 1),
+        'systemaccount' => 0,
+        'brand_id' => 1,
+    ];
+});
+
+$factory->define(AbuseIO\Models\Brand::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'company_name' => $faker->company,
+        'logo' => \AbuseIO\Models\Brand::getDefaultLogo(),
+        'introduction_text' => $faker->realText(),
+        'creator_id' => 1,
+    ];
+});
+
 $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
@@ -19,4 +41,7 @@ $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+
 
