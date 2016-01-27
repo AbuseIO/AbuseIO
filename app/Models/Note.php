@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Note
  * @package AbuseIO\Models
- * @property integer $id guarded
- * @property integer $ticket_id
- * @property string $submitter
- * @property string $text
- * @property boolean $hidden
- * @property boolean $viewed
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property integer $id
+ * @property integer $ticket_id fillable
+ * @property string $submitter fillable
+ * @property string $text fillable
+ * @property boolean $hidden fillable
+ * @property boolean $viewed fillable
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $deleted_at
  */
 class Note extends Model
 {
@@ -25,7 +25,7 @@ class Note extends Model
      *
      * @var string
      */
-    protected $table    = 'notes';
+    protected $table = 'notes';
 
     /**
      * The attributes that are mass assignable.
@@ -40,26 +40,11 @@ class Note extends Model
         'viewed',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The attributes that cannot be changed
-     *
-     * @var array
-     */
-    protected $guarded  = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Rules
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Validation rules for this model being created
@@ -69,7 +54,7 @@ class Note extends Model
     public static function createRules()
     {
         $rules = [
-            'ticket_id' => 'required|integer',
+            'ticket_id' => 'required|integer|exists:tickets,id',
             'submitter' => 'required|string',
             'text'      => 'required|string',
             'hidden'    => 'sometimes|boolean',
@@ -87,10 +72,10 @@ class Note extends Model
     public static function updateRules()
     {
         $rules = [
-            'ticket_id' => 'sometimes|integer',
+            'ticket_id' => 'required|integer|exists:tickets,id',
             'submitter' => 'required|string',
-            'hidden' => 'sometimes|boolean',
-            'viewed' => 'sometimes|boolean',
+            'hidden'    => 'sometimes|boolean',
+            'viewed'    => 'sometimes|boolean',
         ];
 
         return $rules;
@@ -105,7 +90,7 @@ class Note extends Model
     /**
      * Updates the updated at before passing it along
      *
-     * @param $date
+     * @param  string $date
      * @return bool|string
      */
     public function getUpdatedAtAttribute($date)
@@ -116,7 +101,7 @@ class Note extends Model
     /**
      * Updates the created at before passing it along
      *
-     * @param $date
+     * @param string $date
      * @return bool|string
      */
     public function getCreatedAtAttribute($date)

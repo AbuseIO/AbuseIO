@@ -11,18 +11,18 @@ use Hash;
 /**
  * Class User
  * @package AbuseIO\Models
- * @property integer $id guarded
- * @property string $first_name
- * @property string $last_name
- * @property string $email
+ * @property integer $id
+ * @property string $first_name fillable
+ * @property string $last_name fillable
+ * @property string $email fillable
  * @property string $password hidden
  * @property string $remember_token hidden
- * @property integer $account_id
- * @property string $locale
- * @property boolean $disabled
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property integer $account_id fillable
+ * @property string $locale fillable
+ * @property boolean $disabled fillable
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $deleted_at
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -60,17 +60,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'remember_token'
     ];
 
-    /**
-     * The attributes that cannot be changed
-     *
-     * @var array
-     */
-    protected $guarded  = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Rules
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Validation rules for this model being created
@@ -85,7 +79,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'last_name'     => 'required|string',
             'email'         => 'required|email|unique:users,email',
             'password'      => 'required|confirmed|min:6|max:32',
-            'account_id'    => 'required|integer',
+            'account_id'    => 'required|integer|exists:accounts,id',
             'locale'        => 'required|min:2|max:3',
             'disabled'      => 'required|string', // disabled is sent as a string
             'roles'         => 'sometimes',
@@ -97,7 +91,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Validation rules for this model being updated
      *
-     * @param  \AbuseIO\Models\User $user The User Model
+     * @param  \AbuseIO\Models\User $user
      * @return array
      */
     public static function updateRules($user)
@@ -107,7 +101,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'last_name'     => 'required|string',
             'email'         => 'required|email|unique:users,email,' . $user->id,
             'password'      => 'required|confirmed|min:6|max:32',
-            'account_id'    => 'required|integer',
+            'account_id'    => 'required|integer|exists:accounts,id',
             'locale'        => 'sometimes|required|min:2|max:3',
             'disabled'      => 'sometimes|required|string', // disabled is sent as a string
             'roles'         => 'sometimes',
@@ -116,25 +110,30 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $rules;
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship Methods
+    |--------------------------------------------------------------------------
+    */
+
     /**
-     * Static method to check if the account has access to the model instance
+     * Many-To-Many Relationship Method for accessing the User->roles
      *
-     * @param   int $model_id                    Model Id
-     * @param   \AbuseIO\Models\Account $account The Account Model
-     * @return  bool
+     * @return \Illuminate\Database\Eloquent\Relationship\belongsToMany
      */
-    public static function checkAccountAccess($model_id, Account $account)
+    public function roles()
     {
-        // Early return when we are in the system account
-        if ($account->isSystemAccount()) {
-            return true;
-        }
+        return $this->belongsToMany('AbuseIO\Models\Role');
+    }
 
-        $user = User::find($model_id);
-
-        $allowed = $user->account_id == $account->id;
-
-        return ($allowed);
+    /**
+     * One-To-Many relation to account
+     *
+     * @return \Illuminate\Database\Eloquent\Relationship\belongsTo
+     */
+    public function account()
+    {
+        return $this->belongsTo('AbuseIO\Models\Account');
     }
 
     /*
@@ -195,9 +194,48 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     /*
     |--------------------------------------------------------------------------
-    | Internal Methods
+    | Accessors & Mutators
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Encrypt password to hash
+     *
+     * @param $value The password to set
+     */
+    public function setPasswordAttribute($value)
+    {
+        if (!empty($value)) {
+            $this->attributes['password'] = Hash::make($value);
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Static method to check if the account has access to the model instance
+     *
+     * @param   int $model_id
+     * @param   \AbuseIO\Models\Account $account
+     * @return  bool
+     */
+    public static function checkAccountAccess($model_id, Account $account)
+    {
+        // Early return when we are in the system account
+        if ($account->isSystemAccount()) {
+            return true;
+        }
+
+        $user = User::find($model_id);
+
+        $allowed = $user->account_id == $account->id;
+
+        return ($allowed);
+    }
 
     /**
      * Return the fullname of the user
@@ -293,49 +331,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function mayEnable(User $auth_user)
     {
         return $this->mayDisable($auth_user);
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Relationship Methods
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Many-To-Many Relationship Method for accessing the User->roles
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function roles()
-    {
-        return $this->belongsToMany('AbuseIO\Models\Role');
-    }
-
-    /**
-     * One-To-Many relation to account
-     *
-     * @return \AbuseIO\Models\Account
-     */
-    public function account()
-    {
-        return $this->belongsTo('AbuseIO\Models\Account');
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Accessors & Mutators
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Encrypt password to hash
-     *
-     * @param $value The password to set
-     */
-    public function setPasswordAttribute($value)
-    {
-        if (!empty($value)) {
-            $this->attributes['password'] = Hash::make($value);
-        }
     }
 }

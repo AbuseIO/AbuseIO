@@ -5,16 +5,16 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Event
  * @package AbuseIO\Models
- * @property integer $id guarded
- * @property string $queue guarded
- * @property string $payload guarded
- * @property integer $attempts guarded
- * @property integer $reserved guarded
- * @property integer $reserved_at guarded
- * @property integer $available_at guarded
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property integer $id
+ * @property string $queue
+ * @property string $payload
+ * @property integer $attempts
+ * @property integer $reserved
+ * @property integer $reserved_at
+ * @property integer $available_at
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $deleted_at
  */
 class Job extends Model
 {
@@ -23,7 +23,7 @@ class Job extends Model
      *
      * @var string
      */
-    protected $table    = 'jobs';
+    protected $table = 'jobs';
 
     /**
      * The attributes that are mass assignable.
@@ -32,32 +32,5 @@ class Job extends Model
      */
     protected $fillable = [
         //
-    ];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The attributes that cannot be changed
-     *
-     * @var array
-     */
-    protected $guarded  = [
-        'id',
-        'queue',
-        'payload',
-        'attempts',
-        'reserved',
-        'reserved_at',
-        'available_at',
-        'created_at',
-        'updated_at',
-        'deleted_at',
     ];
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Evidence.
- *
+ * @package AbuseIO\Models
  * @property int $id guarded
  * @property string $filename
  * @property string $sender
@@ -38,26 +38,11 @@ class Evidence extends Model
         'subject',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The attributes that cannot be changed.
-     *
-     * @var array
-     */
-    protected $guarded = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Rules
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Validation rules for this model being created.
@@ -67,13 +52,19 @@ class Evidence extends Model
     public static function createRules()
     {
         $rules = [
-            'filename' => 'required|file',
-            'sender' => 'required|string',
-            'subject' => 'required|string',
+            'filename'  => 'required|file',
+            'sender'    => 'required|string',
+            'subject'   => 'required|string',
         ];
 
         return $rules;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship Methods
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Returns the event for this evidence.

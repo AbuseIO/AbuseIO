@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Contact
  * @package AbuseIO\Models
- * @property integer $id guarded
- * @property string $reference
- * @property string $name
- * @property string $email
- * @property string $api_host
- * @property boolean $auto_notify
- * @property boolean $enabled
- * @property integer account_id
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property integer $id
+ * @property string $reference fillable
+ * @property string $name fillable
+ * @property string $email fillable
+ * @property string $api_host fillable
+ * @property boolean $auto_notify fillable
+ * @property boolean $enabled fillable
+ * @property integer account_id fillable
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $deleted_at
  */
 class Contact extends Model
 {
@@ -27,7 +27,7 @@ class Contact extends Model
      *
      * @var string
      */
-    protected $table    = 'contacts';
+    protected $table = 'contacts';
 
     /**
      * The attributes that are mass assignable.
@@ -44,26 +44,11 @@ class Contact extends Model
         'account_id',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The attributes that cannot be changed
-     *
-     * @var array
-     */
-    protected $guarded  = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Rules
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Validation rules for this model being created
@@ -73,12 +58,12 @@ class Contact extends Model
     public static function createRules()
     {
         $rules = [
-            'reference' => 'required|unique:contacts,reference',
-            'name'      => 'required',
-            'email'     => 'sometimes|emails',
-            'api_host'  => 'sometimes|url',
-            'enabled'   => 'required|boolean',
-            'account_id'=> 'required|integer'
+            'reference'     => 'required|unique:contacts,reference',
+            'name'          => 'required',
+            'email'         => 'sometimes|emails',
+            'api_host'      => 'sometimes|url',
+            'enabled'       => 'required|boolean',
+            'account_id'    => 'required|integer|exists:accounts,id',
         ];
 
         return $rules;
@@ -93,51 +78,27 @@ class Contact extends Model
     public static function updateRules($contact)
     {
         $rules = [
-            'reference' => 'required|unique:contacts,reference,'. $contact->id,
-            'name'      => 'required',
-            'email'     => 'sometimes|emails',
-            'api_host'  => 'sometimes|url',
-            'enabled'   => 'required|boolean',
-            'account_id'=> 'required|integer'
+            'reference'     => 'required|unique:contacts,reference,'. $contact->id,
+            'name'          => 'required',
+            'email'         => 'sometimes|emails',
+            'api_host'      => 'sometimes|url',
+            'enabled'       => 'required|boolean',
+            'account_id'    => 'required|integer|exists:accounts,id',
         ];
 
         return $rules;
     }
 
-    /**
-     * Static method to check if the account has access to the model instance
-     *
-     * @param $model_id
-     * @param $account
-     * @return bool
-     */
-    public static function checkAccountAccess($model_id, $account)
-    {
-        // early return when we are in the system account
-        if ($account->isSystemAccount())
-            return true;
-
-        $contact = Contact::find($model_id);
-        return ($contact->account->id == $account->id);
-    }
-
-
-    /**
-     * Creates a shortlist of the table with ID and Name for pulldown menu's
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function shortlist()
-    {
-
-        return $this->belongsTo('id', 'name');
-
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship Methods
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Returns the account for this contact
      *
-     * @return Account
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function account()
     {
@@ -151,9 +112,7 @@ class Contact extends Model
      */
     public function domains()
     {
-
         return $this->hasMany('AbuseIO\Models\Domain');
-
     }
 
     /**
@@ -163,8 +122,41 @@ class Contact extends Model
      */
     public function netblocks()
     {
-
         return $this->hasMany('AbuseIO\Models\Netblock');
+    }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Static method to check if the account has access to the model instance
+     *
+     * @param  int                     $model_id
+     * @param  \AbuseIO\Models\Account $account
+     * @return bool
+     */
+    public static function checkAccountAccess($model_id, Account $account)
+    {
+        // Early return when we are in the system account
+        if ($account->isSystemAccount()) {
+            return true;
+        }
+
+        $contact = Contact::find($model_id);
+        return ($contact->account->id == $account->id);
+    }
+
+
+    /**
+     * Creates a shortlist of the table with ID and Name for pulldown menu's
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function shortlist()
+    {
+        return $this->belongsTo('id', 'name');
     }
 }

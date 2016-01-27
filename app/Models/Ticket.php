@@ -6,35 +6,35 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Ticket
  * @package AbuseIO\Models
- * @property integer $id guarded
- * @property string $ip
- * @property string $domain
- * @property string $class_id
- * @property string $type_id
- * @property string $email
- * @property string $ip_contact_account_id
- * @property string $ip_contact_reference
- * @property string $ip_contact_name
- * @property string $ip_contact_email
- * @property string $ip_contact_api_host
- * @property string $ip_contact_auto_notify
- * @property integer $ip_contact_notified_count
- * @property string $domain_contact_account_id
- * @property string $domain_contact_reference
- * @property string $domain_contact_name
- * @property string $domain_contact_email
- * @property string $domain_contact_api_host
- * @property string $domain_contact_auto_notify
- * @property integer $domain_contact_notified_count
- * @property integer $status_id
- * @property string $contact_status_id
- * @property integer $account_id
- * @property boolean $auto_notify
- * @property integer $last_notify_count
- * @property integer $last_notify_timestamp
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property integer $id
+ * @property string $ip fillable
+ * @property string $domain fillable
+ * @property string $class_id fillable
+ * @property string $type_id fillable
+ * @property string $email fillable
+ * @property string $ip_contact_account_id fillable
+ * @property string $ip_contact_reference fillable
+ * @property string $ip_contact_name fillable
+ * @property string $ip_contact_email fillable
+ * @property string $ip_contact_api_host fillable
+ * @property string $ip_contact_auto_notify fillable
+ * @property integer $ip_contact_notified_count fillable
+ * @property string $domain_contact_account_id fillable
+ * @property string $domain_contact_reference fillable
+ * @property string $domain_contact_name fillable
+ * @property string $domain_contact_email fillable
+ * @property string $domain_contact_api_host fillable
+ * @property string $domain_contact_auto_notify fillable
+ * @property integer $domain_contact_notified_count fillable
+ * @property integer $status_id fillable
+ * @property string $contact_status_id fillable
+ * @property integer $account_id fillable
+ * @property boolean $auto_notify fillable
+ * @property integer $last_notify_count fillable
+ * @property integer $last_notify_timestamp fillable
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $deleted_at
  */
 class Ticket extends Model
 {
@@ -77,26 +77,11 @@ class Ticket extends Model
         'last_notify_timestamp'
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The attributes that cannot be changed
-     *
-     * @var array
-     */
-    protected $guarded  = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Rules
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Validation rules for this model being created
@@ -110,14 +95,14 @@ class Ticket extends Model
             'domain'                        => 'sometimes|string',
             'class_id'                      => 'required|string|max:100',
             'type_id'                       => 'required|in:INFO,ABUSE,ESCALATION',
-            'ip_contact_account_id'         => 'required|integer',
+            'ip_contact_account_id'         => 'required|integer|exists:contacts,id',
             'ip_contact_reference'          => 'required|string',
             'ip_contact_name'               => 'required|string',
             'ip_contact_email'              => 'sometimes|emails',
             'ip_contact_api_host'           => 'sometimes|string',
             'ip_contact_auto_notify'        => 'required|boolean',
             'ip_contact_notified_count'     => 'required|integer',
-            'domain_contact_account_id'     => 'required|integer',
+            'domain_contact_account_id'     => 'required|integer|exists:contacts,id',
             'domain_contact_reference'      => 'required|string',
             'domain_contact_name'           => 'required|string',
             'domain_contact_email'          => 'sometimes|emails',
@@ -145,14 +130,14 @@ class Ticket extends Model
             'domain'                        => 'sometimes|string',
             'class_id'                      => 'required|string|max:100',
             'type_id'                       => 'required|in:INFO,ABUSE,ESCALATION',
-            'ip_contact_account_id'         => 'required|integer',
+            'ip_contact_account_id'         => 'required|integer|exists:contacts,id',
             'ip_contact_reference'          => 'required|string',
             'ip_contact_name'               => 'required|string',
             'ip_contact_email'              => 'sometimes|emails',
             'ip_contact_api_host'           => 'sometimes|string',
             'ip_contact_auto_notify'        => 'required|boolean',
             'ip_contact_notified_count'     => 'required|integer',
-            'domain_contact_account_id'     => 'required|integer',
+            'domain_contact_account_id'     => 'required|integer|exists:contacts,id',
             'domain_contact_reference'      => 'required|string',
             'domain_contact_name'           => 'required|string',
             'domain_contact_email'          => 'sometimes|emails',
@@ -167,6 +152,132 @@ class Ticket extends Model
 
         return $rules;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship Methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * One-to-Many relationship to Event
+     *
+     * @param  string $order
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function events($order = 'asc')
+    {
+        return $this->hasMany('AbuseIO\Models\Event')
+            ->orderBy('timestamp', $order);
+    }
+
+    /**
+     * One-to-Many relationship to Note
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notes()
+    {
+        return $this->hasMany('AbuseIO\Models\Note');
+    }
+
+
+    /**
+     * one-to-many relationship to Note.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function unreadNotes()
+    {
+        return $this->hasMany('AbuseIO\Models\Note')
+            ->where('viewed', 'false');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function firstEvent()
+    {
+        return $this->events('asc')->take(1);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function lastEvent()
+    {
+        return $this->events('desc')->take(1);
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function accountIp()
+    {
+        return $this->belongsTo('AbuseIO\Models\Account', 'ip_contact_account_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function accountDomain()
+    {
+        return $this->belongsTo('AbuseIO\Models\Account', 'domain_contact_account_id');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors & Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Return the Last Notified attribute
+     *
+     * @return bool|string
+     */
+    public function getLastNotifiedAttribute()
+    {
+        return date(
+            config('app.date_format').' ' . config('app.time_format'),
+            $this->attributes['last_notify_timestamp']
+        );
+    }
+
+    /**
+     * Return the Updated attribute
+     *
+     * @param string $date
+     * @return bool|string
+     */
+    public function getUpdatedAtAttribute($date)
+    {
+        return date(
+            config('app.date_format').' ' .config('app.time_format'),
+            strtotime($date)
+        );
+    }
+
+    /**
+     * Return the Created Ar attribute
+     *
+     * @param $date
+     * @return bool|string
+     */
+    public function getCreatedAtAttribute($date)
+    {
+        return date(
+            config('app.date_format').' '.config('app.time_format'),
+            strtotime($date)
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Methods
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Static method to check if the account has access to the model instance
@@ -188,117 +299,5 @@ class Ticket extends Model
                    ($ticket->domain_contact_account_id == $account->id);
 
         return ($allowed);
-    }
-
-    /**
-     * one-to-many relationship method.
-     *
-     * @param  string $order Sorting order 'desc' or 'asc'
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function events($order = 'asc')
-    {
-        return $this->hasMany('AbuseIO\Models\Event')
-            ->orderBy('timestamp', $order);
-    }
-
-    /**
-     * one-to-many relationship method.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function unreadNotes()
-    {
-        return $this->hasMany('AbuseIO\Models\Note')
-            ->where('viewed', 'false');
-    }
-
-    /**
-     * one-to-many relationship method.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function firstEvent()
-    {
-        return $this->events('asc')->take(1);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function lastEvent()
-    {
-        return $this->events('desc')->take(1);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function notes()
-    {
-
-        return $this->hasMany('AbuseIO\Models\Note');
-
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function accountIp()
-    {
-
-        return $this->belongsTo('AbuseIO\Models\Account', 'ip_contact_account_id');
-
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function accountDomain()
-    {
-
-        return $this->belongsTo('AbuseIO\Models\Account', 'domain_contact_account_id');
-
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Accessors & Mutators
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * @return bool|string
-     */
-    public function getLastNotifiedAttribute()
-    {
-        return date(
-            config('app.date_format').' ' . config('app.time_format'),
-            $this->attributes['last_notify_timestamp']
-        );
-    }
-
-    /**
-     * @param $date
-     * @return bool|string
-     */
-    public function getUpdatedAtAttribute($date)
-    {
-        return date(
-            config('app.date_format').' ' .config('app.time_format'),
-            strtotime($date)
-        );
-    }
-
-    /**
-     * @param $date
-     * @return bool|string
-     */
-    public function getCreatedAtAttribute($date)
-    {
-        return date(
-            config('app.date_format').' '.config('app.time_format'),
-            strtotime($date)
-        );
     }
 }

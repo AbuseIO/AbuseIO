@@ -2,22 +2,22 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Models\Account;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use AbuseIO\Models\Account;
 
 /**
  * Class Account
  * @package AbuseIO\Models
  *
- * @property integer $id guarded
- * @property string $name
- * @property string $company_name
- * @property string $logo
- * @property string $introduction_text
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property integer $id
+ * @property string $name fillable
+ * @property string $company_name fillable
+ * @property string $logo fillable
+ * @property string $introduction_text fillable
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $deleted_at
  */
 class Brand extends Model
 {
@@ -43,26 +43,11 @@ class Brand extends Model
         'creator_id',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The attributes that cannot be changed
-     *
-     * @var array
-     */
-    protected $guarded  = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Rules
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Validation rules for this model being created
@@ -75,7 +60,8 @@ class Brand extends Model
             'name'              => 'required|unique:brands,name',
             'company_name'      => 'required',
             'introduction_text' => 'required',
-            'logo'              => 'required'
+            'logo'              => 'required',
+            'creator_id'        => 'required|integer|exists:accounts,id',
         ];
 
         return $rules;
@@ -93,19 +79,82 @@ class Brand extends Model
             'name'              => 'required|unique:brands,name,'. $brand->id,
             'company_name'      => 'required',
             'introduction_text' => 'required',
+            'creator_id'        => 'required|integer|exists:accounts,id',
         ];
 
         return $rules;
     }
 
+    /*
+     |--------------------------------------------------------------------------
+     | Relationship Methods
+     |--------------------------------------------------------------------------
+    */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function accounts()
+    {
+        return $this->hasMany('AbuseIO\Models\Account');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function account()
+    {
+        return $this->belongsTo('AbuseIO\Models\Account', 'creator_id');
+    }
+
+    /**
+     * @return string
+     */
+    public static function getDefaultLogo()
+    {
+        return file_get_contents(base_path('public/images/logo_150.png'));
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors & Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Returns the owner of this brand
+     *
+     * @return \AbuseIO\Models\Account
+     */
+    public function getCreatorAccountAttribute()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Returns the owner (Account) of this brand
+     *
+     * @return \AbuseIO\Models\Account
+     */
+    public function getCreatorAttribute()
+    {
+        return $this->account;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Methods
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Static method to check if the account has access to the model instance
      *
-     * @param $model_id
-     * @param $account
+     * @param int                     $model_id
+     * @param \AbuseIO\Models\Account $account
      * @return bool
      */
-    public static function checkAccountAccess($model_id, $account)
+    public static function checkAccountAccess($model_id, Account $account)
     {
         // early return when we are in the system account
         if ($account->isSystemAccount()) {
@@ -120,14 +169,13 @@ class Brand extends Model
     }
 
     /**
-     * return the default Brand
+     * Return the default Brand
      *
      * @return mixed
      */
     public static function getDefault()
     {
-        $brand = Brand::find(1);
-        return $brand;
+        return Brand::find(1);
     }
 
     /**
@@ -144,13 +192,13 @@ class Brand extends Model
      * Check if the uploaded logo is a valid image, not bigger then
      * 64kb
      *
-     * @param $file
-     * @param $messages
+     * @param  object $file
+     * @param  array  &$messages
      * @return bool
      */
     public static function checkUploadedLogo($file, &$messages)
     {
-        // check for a valid image
+        // Check for a valid image
         $maxsize = 64 * 1024; // 64kb max size of a database blob
 
         if ($file->getSize() > $maxsize) {
@@ -183,54 +231,5 @@ class Brand extends Model
         }
 
         return $result;
-    }
-
-
-    /**
-     * @return Account
-     */
-    public function getCreatorAccountAttribute()
-    {
-        return $this->account;
-    }
-
-    /**
-     * Returns the Account where this brand was made UnderflowException
-     *
-     * @return \AbuseIO\Models\Account
-     */
-    public function getCreatorAttribute()
-    {
-        return $this->account;
-    }
-
-    /*
-     |--------------------------------------------------------------------------
-     | Relationship Methods
-     |--------------------------------------------------------------------------
-    */
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function accounts()
-    {
-        return $this->hasMany('AbuseIO\Models\Account');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function account()
-    {
-        return $this->belongsTo('AbuseIO\Models\Account', 'creator_id');
-    }
-
-    /**
-     * @return string
-     */
-    public static function getDefaultLogo()
-    {
-        return file_get_contents(base_path('public/images/logo_150.png'));
     }
 }

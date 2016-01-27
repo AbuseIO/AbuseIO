@@ -62,6 +62,12 @@ class Incident
      */
     public $information;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Rules
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Validation rules for this model being created
      *

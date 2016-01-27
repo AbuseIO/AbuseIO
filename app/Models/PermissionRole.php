@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class PermissionRole
  * @package AbuseIO\Models
- * @property integer $id guarded
- * @property integer $role_id
- * @property integer $permission_id
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property integer $id
+ * @property integer $role_id fillable
+ * @property integer $permission_id fillable
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $deleted_at
  */
 class PermissionRole extends Model
 {
@@ -34,26 +34,11 @@ class PermissionRole extends Model
         'permission_id',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The attributes that cannot be changed
-     *
-     * @var array
-     */
-    protected $guarded  = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Rules
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Validation rules for this model being created
@@ -64,10 +49,10 @@ class PermissionRole extends Model
     public static function createRules($permissionRole)
     {
         $rules = [
-            'role_id'               => 'required|integer|' .
-                'unique:permission_role,role_id,NULL,id,permission_id,' . $permissionRole->permission_id,
-            'permission_id'         => 'required|integer|' .
-                'unique:permission_role,permission_id,NULL,id,role_id,' . $permissionRole->role_id,
+            'role_id'       => 'required|integer|exists:roles,id|'.
+                               'unique:permission_role,role_id,NULL,id,permission_id,'. $permissionRole->permission_id,
+            'permission_id' => 'required|integer|exists:permissions,id|'.
+                               'unique:permission_role,permission_id,NULL,id,role_id,'. $permissionRole->role_id,
         ];
 
         return $rules;
@@ -82,11 +67,11 @@ class PermissionRole extends Model
     public static function updateRules($permissionRole)
     {
         $rules = [
-            'id'                    => 'required|exists:permissions_role,id',
-            'role_id'               => 'required|integer|' .
-                'unique:permission_role,role_id,NULL,id,permission_id,' . $permissionRole->permission_id,
-            'permission_id'         => 'required|integer|' .
-                'unique:permission_role,permission_id,NULL,id,role_id,' . $permissionRole->role_id,
+            'id'            => 'required|exists:permissions_role,id',
+            'role_id'       => 'required|integer|exists:roles,id|'.
+                               'unique:permission_role,role_id,NULL,id,permission_id,'. $permissionRole->permission_id,
+            'permission_id' => 'required|integer|exists:permissions,id|' .
+                               'unique:permission_role,permission_id,NULL,id,role_id,'. $permissionRole->role_id,
         ];
 
         return $rules;

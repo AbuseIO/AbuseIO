@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Event
  * @package AbuseIO\Models
- * @property integer $id guarded
- * @property integer $ticket_id
- * @property integer $evidence_id
- * @property string $source
- * @property integer $timestamp
- * @property string $information
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property integer $id
+ * @property integer $ticket_id fillable
+ * @property integer $evidence_id fillable
+ * @property string $source fillable
+ * @property integer $timestamp fillable
+ * @property string $information fillable
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $deleted_at
  */
 class Event extends Model
 {
@@ -25,7 +25,7 @@ class Event extends Model
      *
      * @var string
      */
-    protected $table    = 'events';
+    protected $table = 'events';
 
     /**
      * The attributes that are mass assignable.
@@ -40,26 +40,11 @@ class Event extends Model
         'information'
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The attributes that cannot be changed
-     *
-     * @var array
-     */
-    protected $guarded  = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Rules
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Validation rules for this model being created
@@ -69,8 +54,8 @@ class Event extends Model
     public static function createRules()
     {
         $rules = [
-            'ticket_id'             => 'required|integer',
-            'evidence_id'           => 'required|integer',
+            'ticket_id'             => 'required|integer|exists:tickets,id',
+            'evidence_id'           => 'required|integer|exists:evidences,id',
             'source'                => 'required|string',
             'timestamp'             => 'required|timestamp',
             'information'           => 'required|json',
@@ -78,6 +63,12 @@ class Event extends Model
 
         return $rules;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship Methods
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Return the evidence for this event
@@ -104,6 +95,7 @@ class Event extends Model
     | Accessors & Mutators
     |--------------------------------------------------------------------------
     */
+
     /**
      * Mutates the seen attribute to a date format
      *
@@ -113,6 +105,12 @@ class Event extends Model
     {
         return date(config('app.date_format').' '.config('app.time_format'), $this->attributes['timestamp']);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Methods
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Return a list of all known types, usefull for selections
@@ -125,6 +123,7 @@ class Event extends Model
         foreach (config('types.type') as $key) {
             $types[$key] = trans("types.type.{$key}.name");
         }
+
         return $types;
     }
 
@@ -145,6 +144,7 @@ class Event extends Model
 
     /**
      * Return a list of all known statuses in the currently selected locale
+     *
      * @param  string $entity   Entity can be: 'abusedesk', 'contact', 'all'(default)
      * @return array  $statuses Array of statuses
      */

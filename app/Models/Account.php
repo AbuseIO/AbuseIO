@@ -2,22 +2,22 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Models\Brand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use AbuseIO\Models\Brand;
 use Log;
 
 /**
  * Class Account
  * @package AbuseIO\Models
- * @property integer $id guarded
- * @property string $name
- * @property string $description
- * @property int $brand_id
- * @property boolean $disabled
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property integer $id
+ * @property string $name fillable
+ * @property string $description fillable
+ * @property int $brand_id fillable
+ * @property boolean $disabled fillable
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $deleted_at
  */
 class Account extends Model
 {
@@ -43,26 +43,11 @@ class Account extends Model
         'systemaccount',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //
-    ];
-
-    /**
-     * The attributes that cannot be changed
-     *
-     * @var array
-     */
-    protected $guarded  = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Rules
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Validation rules for this model being created
@@ -72,7 +57,8 @@ class Account extends Model
     public static function createRules()
     {
         $rules = [
-            'name'  => 'required|unique:accounts',
+            'name'      => 'required|unique:accounts',
+            'brand_id'  => 'required|integer|exists:brands,id',
         ];
 
         return $rules;
@@ -87,11 +73,92 @@ class Account extends Model
     public static function updateRules($account)
     {
         $rules = [
-            'name'  => 'required|unique:accounts,name,'. $account->id,
+            'name'      => 'required|unique:accounts,name,'. $account->id,
+            'brand_id'  => 'required|integer|exists:brands,id',
         ];
 
         return $rules;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship Methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany('AbuseIO\Models\User');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contacts()
+    {
+        return $this->hasMany('AbuseIO\Models\Contact');
+
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function brand()
+    {
+        return $this->belongsTo('AbuseIO\Models\Brand');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function brands()
+    {
+        return $this->hasMany('AbuseIO\Models\Brand');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tickets()
+    {
+        return $this->hasMany('AbuseIO\Models\Ticket');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors & Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Accessor for the active brand
+     *
+     * @return Brand
+     */
+    public function getActiveBrandAttribute()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * Mutator for the active brand
+     *
+     * @param \AbuseIO\Models\Brand $brand
+     */
+    public function setActiveBrandAttribute(Brand $brand)
+    {
+        $this->brand = $brand;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Methods
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Static method to check if the account has access to the model instance
@@ -181,7 +248,6 @@ class Account extends Model
         return $this->mayEdit($user);
     }
 
-
     /**
      * Checks if the current user may disable the account
      *
@@ -201,7 +267,6 @@ class Account extends Model
         return ($auth_account->isSystemAccount());
     }
 
-
     /**
      * Check if the user may enable the account
      * (use the same logic as mayDisable() )
@@ -212,73 +277,5 @@ class Account extends Model
     public function mayEnable(User $user)
     {
         return $this->mayDisable($user);
-    }
-
-    /**
-     * Accessor for the active brand
-     *
-     * @return Brand
-     */
-    public function getActiveBrandAttribute()
-    {
-        return $this->brand;
-    }
-
-    /**
-     * Mutator for the active brand
-     * @param \AbuseIO\Models\Brand $brand
-     *
-     */
-    public function setActiveBrandAttribute (Brand $brand)
-    {
-        $this->brand = $brand;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Relationship Methods
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function users()
-    {
-        return $this->hasMany('AbuseIO\Models\User');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function contacts()
-    {
-        return $this->hasMany('AbuseIO\Models\Contact');
-
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function brand()
-    {
-        return $this->belongsTo('AbuseIO\Models\Brand');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function brands()
-    {
-        return $this->hasMany('AbuseIO\Models\Brand');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function tickets()
-    {
-        return $this->hasMany('AbuseIO\Models\Ticket');
     }
 }
