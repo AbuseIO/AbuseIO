@@ -25,6 +25,9 @@ class CreateBrandsTable extends Migration
                 $table->binary('logo');
                 $table->timestamps();
                 $table->softDeletes();
+
+                // Indexes
+                $table->index('creator_id');
             }
         );
 

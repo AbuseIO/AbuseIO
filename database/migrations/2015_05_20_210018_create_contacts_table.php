@@ -33,6 +33,7 @@ class CreateContactsTable extends Migration
                 $table->index('email');
                 $table->index('api_host');
                 $table->index('auto_notify');
+                $table->index('account_id');
             }
         );
     }

@@ -50,6 +50,8 @@ class CreateTicketsTable extends Migration
                 $table->index('ip_contact_reference');
                 $table->index('domain_contact_reference');
                 $table->index('status_id');
+                $table->index('ip_contact_account_id');
+                $table->index('domain_contact_account_id');
             }
         );
     }

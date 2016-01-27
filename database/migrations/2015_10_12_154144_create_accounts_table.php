@@ -24,6 +24,9 @@ class CreateAccountsTable extends Migration
                 $table->boolean('systemaccount')->default(false);
                 $table->timestamps();
                 $table->softDeletes();
+
+                // Indexes
+                $table->index('brand_id');
             }
         );
 
