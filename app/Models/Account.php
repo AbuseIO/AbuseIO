@@ -271,7 +271,7 @@ class Account extends Model
      */
     public function brands()
     {
-        return $this->hasMany('AbuseIO\Models\Brand');
+        return $this->hasMany('AbuseIO\Models\Brand', 'creator_id', 'id');
     }
 
     /**

@@ -15,6 +15,7 @@ use AbuseIO\Models\Account;
  * @property string $company_name
  * @property string $logo
  * @property string $introduction_text
+ * @property boolean $systembrand
  * @property integer $created_at guarded
  * @property integer $updated_at guarded
  * @property integer $deleted_at guarded
@@ -49,7 +50,7 @@ class Brand extends Model
      * @var array
      */
     protected $hidden = [
-        //
+        'systembrand',
     ];
 
     /**
@@ -124,9 +125,9 @@ class Brand extends Model
      *
      * @return mixed
      */
-    public static function getDefault()
+    public static function getSystemBrand()
     {
-        $brand = Brand::find(1);
+        $brand = Brand::where('systembrand', true)->first();
         return $brand;
     }
 
@@ -135,9 +136,9 @@ class Brand extends Model
      *
      * @return bool
      */
-    public function isDefault()
+    public function isSystemBrand()
     {
-        return ($this->id == 1);
+        return ($this->systembrand);
     }
 
     /**
@@ -168,7 +169,7 @@ class Brand extends Model
     /**
      * Check to see if we can delete the current brand
      * The brand can only be deleted, if it isn't linked to accounts anymore
-     * and if it isn't the default brand
+     * and if it isn't the system brand
      *
      * @return bool
      */
@@ -176,8 +177,8 @@ class Brand extends Model
     {
         $result = false;
 
-        // Not linked to an account and not the default account
-        if (count($this->accounts) == 0 && !$this->isDefault()) {
+        // Not linked to an account and not the system account
+        if (count($this->accounts) == 0 && !$this->isSystemBrand()) {
             // we can delete the brand
             $result = true;
         }

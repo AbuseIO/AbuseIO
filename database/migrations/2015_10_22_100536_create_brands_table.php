@@ -23,6 +23,7 @@ class CreateBrandsTable extends Migration
                 $table->string('introduction_text');
                 $table->integer('creator_id')->unsigned();
                 $table->binary('logo');
+                $table->boolean('systembrand')->default(false);
                 $table->timestamps();
                 $table->softDeletes();
             }
@@ -47,6 +48,7 @@ class CreateBrandsTable extends Migration
                 'introduction_text'         => 'This is an introduction text',
                 'creator_id'                => 1,
                 'logo'                      => Brand::getDefaultLogo(),
+                'systembrand'               => true,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],

@@ -248,14 +248,13 @@ class AccountsController extends Controller
     {
         $brand = $account->brand;
 
-        // may we edit this brand (is the brand connected to our account)
         if (!$account->mayDestroy($this->auth_user)) {
             return Redirect::route('admin.accounts.index')
                 ->with('message', 'User is not authorized to edit this account.');
         }
 
-        // Do not allow the default admin user account to be deleted.
-        if ($account->id == 1) {
+        // Do not allow the system admin user account to be deleted.
+        if ($account->isSystemAccount()) {
             return Redirect::back()
                 ->with('message', 'Not allowed to delete the default admin account.');
         }
