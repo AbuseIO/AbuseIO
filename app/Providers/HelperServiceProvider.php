@@ -12,6 +12,7 @@ class HelperServiceProvider extends ServiceProvider
         'castStringToBool',
         'castBoolToString',
         'isValidRegex',
+        'hFileSize',
     ];
 
     /**
