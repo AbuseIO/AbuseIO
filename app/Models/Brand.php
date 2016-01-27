@@ -10,14 +10,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class Account
  * @package AbuseIO\Models
  *
+
  * @property integer $id
  * @property string $name fillable
  * @property string $company_name fillable
  * @property string $logo fillable
  * @property string $introduction_text fillable
+ * @property boolean $systembrand fillable
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $deleted_at
+
  */
 class Brand extends Model
 {
@@ -41,6 +44,15 @@ class Brand extends Model
         'logo',
         'introduction_text',
         'creator_id',
+    ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'systembrand',
     ];
 
     /*
@@ -173,9 +185,9 @@ class Brand extends Model
      *
      * @return mixed
      */
-    public static function getDefault()
+    public static function getSystemBrand()
     {
-        return Brand::find(1);
+        return Brand::where('systembrand', true)->first();
     }
 
     /**
@@ -183,9 +195,9 @@ class Brand extends Model
      *
      * @return bool
      */
-    public function isDefault()
+    public function isSystemBrand()
     {
-        return ($this->id == 1);
+        return ($this->systembrand);
     }
 
     /**
@@ -216,7 +228,7 @@ class Brand extends Model
     /**
      * Check to see if we can delete the current brand
      * The brand can only be deleted, if it isn't linked to accounts anymore
-     * and if it isn't the default brand
+     * and if it isn't the system brand
      *
      * @return bool
      */
@@ -224,8 +236,8 @@ class Brand extends Model
     {
         $result = false;
 
-        // Not linked to an account and not the default account
-        if (count($this->accounts) == 0 && !$this->isDefault()) {
+        // Not linked to an account and not the system account
+        if (count($this->accounts) == 0 && !$this->isSystemBrand()) {
             // we can delete the brand
             $result = true;
         }

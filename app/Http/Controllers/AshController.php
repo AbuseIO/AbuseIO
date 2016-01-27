@@ -30,13 +30,13 @@ class AshController extends Controller
         $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
         if ($AshAuthorisedBy == 'TokenIP') {
-            $account = Account::find($ticket->ip_contact_account_ip);
+            $account = Account::find($ticket->ip_contact_account_id);
         }
         if ($AshAuthorisedBy == 'TokenDomain') {
             $account = Account::find($ticket->domain_contact_account_id);
         }
 
-        $brand = empty($account) ? Brand::getDefault() : $account->active_brand;
+        $brand = empty($account) ? Brand::getSystemBrand() : $account->active_brand;
 
         if (empty($brand)) {
             abort(500);
@@ -74,7 +74,7 @@ class AshController extends Controller
             $submittor = trans('ash.basic.domain') . ' ' . trans('ash.communication.contact');
         }
 
-        $brand = empty($account) ? Brand::getDefault() : $account->brand;
+        $brand = empty($account) ? Brand::getSystemBrand() : $account->brand;
 
         if (empty($brand) || empty($submittor)) {
             abort(500);

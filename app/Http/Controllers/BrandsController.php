@@ -94,7 +94,7 @@ class BrandsController extends Controller
                             'class' => 'form-inline'
                         ]
                     );
-                    if (!$brand->isDefault() or $account->isSystemAccount()) {
+                    if (!$brand->isSystemBrand() or $account->isSystemAccount()) {
                         if ($account->brand_id != $brand->id) {
                             $actions .= ' <a href="brands/' . $brand->id .
                                 '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> ' .
@@ -277,18 +277,26 @@ class BrandsController extends Controller
         $brand->update($input);
 
         return Redirect::route('admin.brands.show', $brand->id)
-            ->with('message', 'Brands has been updated.');
+            ->with('message', 'Brand has been updated.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  integer  $id
+     * @param Brand $brand
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
-        //
+        if ($brand->canDelete()) {
+            $brand->delete();
+        } else {
+            return Redirect::back()
+                ->with('message', "Can't delete an active and/or system brand.");
+        }
+
+        return Redirect::route('admin.brands.index')
+            ->with('message', 'Brand has been deleted.');
     }
 
     /**

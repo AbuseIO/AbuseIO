@@ -278,4 +278,72 @@ class Account extends Model
     {
         return $this->mayDisable($user);
     }
+
+    /**
+     * Accessor for the active brand
+     *
+     * @return Brand
+     */
+    public function getActiveBrandAttribute()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * Mutator for the active brand
+     * @param \AbuseIO\Models\Brand $brand
+     *
+     */
+    public function setActiveBrandAttribute(Brand $brand)
+    {
+        $this->brand = $brand;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship Methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany('AbuseIO\Models\User');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contacts()
+    {
+        return $this->hasMany('AbuseIO\Models\Contact');
+
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function brand()
+    {
+        return $this->belongsTo('AbuseIO\Models\Brand');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function brands()
+    {
+        return $this->hasMany('AbuseIO\Models\Brand', 'creator_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tickets()
+    {
+        return $this->hasMany('AbuseIO\Models\Ticket');
+    }
 }
