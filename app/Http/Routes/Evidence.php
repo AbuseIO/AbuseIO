@@ -1,0 +1,56 @@
+<?php
+Route::resource('evidence', 'EvidenceController');
+Route::model('evidence', 'AbuseIO\Models\Evidence');
+
+Route::group(
+    [
+        'prefix' => 'evidence',
+        'as' => 'evidence.',
+    ],
+    function () {
+        /*
+         * Index evidence
+         */
+        Route::get(
+            '',
+            [
+                'middleware' => 'permission:tickets_view',
+                'as' => 'index',
+                'uses' => 'EvidenceController@index'
+            ]
+        );
+
+        /*
+        | Show evidence
+        */
+        Route::get(
+            '{evidence}',
+            [
+                'middleware' => 'permission:tickets_view',
+                'as' => 'show',
+                'uses' => 'EvidenceController@show'
+            ]
+        );
+
+        /*
+        | Download evidence
+        */
+        Route::get(
+            '{evidence}/download',
+            [
+                'middleware' => 'permission:tickets_view',
+                'as' => 'download',
+                'uses' => 'EvidenceController@download'
+            ]
+        );
+
+        Route::get(
+            '{evidence}/attachment/{file}',
+            [
+                'middleware' => 'permission:tickets_view',
+                'as' => 'attachment',
+                'uses' => 'EvidenceController@attachment'
+            ]
+        );
+    }
+);

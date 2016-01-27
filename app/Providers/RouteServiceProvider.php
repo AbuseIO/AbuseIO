@@ -28,8 +28,6 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         parent::boot($router);
-
-        //
     }
 
     /**
@@ -43,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
         /** @noinspection PhpUnusedParameterInspection */
         $router->group(
             [
-            'namespace' => $this->namespace
+                'namespace' => $this->namespace
             ],
             function ($router) {
                 require app_path('Http/routes.php');

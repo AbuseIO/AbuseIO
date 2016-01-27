@@ -216,7 +216,11 @@
                             @endif
                             </dl>
                         </td>
-                        <td><a href='{{ Request::url() }}/evidence/{{ $event->evidences[0]->id }}/download'>{{ trans('ash.communication.download') }}</a> - <a href="{{ Request::url() }}/evidence/{{ $event->evidences[0]->id }}/view">{{ trans('ash.communication.view') }}</a></td>
+                        <td>
+                            {!! link_to_route('admin.evidence.download', trans('ash.communication.download'), [$event->evidence->id]) !!}
+                            -
+                            {!! link_to_route('admin.evidence.show', trans('ash.communication.view'), [$event->evidence->id]) !!}
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
