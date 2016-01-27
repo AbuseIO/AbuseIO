@@ -9,11 +9,19 @@ class AccountTest extends \TestCase
 {
     use DatabaseTransactions;
 
-    function testModelFactory()
+    public function testModelFactory()
     {
         $account = factory(Account::class)->create();
         $accountFromDB = Account::where("name", $account->name)->first();
         $this->assertEquals($account->name, $accountFromDB->name);
+    }
+
+    public function testGetSystemAccount()
+    {
+        $this->assertEquals(
+            Account::getSystemAccount(),
+            Account::find(1)
+        );
     }
 }
 
