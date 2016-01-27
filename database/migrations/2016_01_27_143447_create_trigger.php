@@ -26,7 +26,7 @@ class CreateTrigger extends Migration
             "CREATE TRIGGER systembrand_update BEFORE UPDATE ON brands ".
             "   FOR EACH ROW ".
             "   BEGIN ".
-            "       IF NEW.`systembrand` = true AND EXISTS(select * from brands where systembrand = true) THEN ".
+            "       IF NEW.`systembrand` = true AND NOT OLD.`systembrand` = true AND EXISTS(select * from brands where systembrand = true) THEN ".
             "           signal sqlstate '45000' set message_text = 'There is already a systembrand defined'; ".
             "       END IF; ".
             "END;"
@@ -46,7 +46,7 @@ class CreateTrigger extends Migration
             "CREATE TRIGGER systemaccount_update BEFORE UPDATE ON accounts ".
             "   FOR EACH ROW ".
             "   BEGIN ".
-            "       IF NEW.`systemaccount` = true AND EXISTS(select * from accounts where systemaccount = true) THEN ".
+            "       IF NEW.`systemaccount` = true AND NOT OLD.`systemaccount` = true AND EXISTS(select * from accounts where systemaccount = true) THEN ".
             "           signal sqlstate '45000' set message_text = 'There is already a systemaccount defined'; ".
             "       END IF; ".
             "END;"
