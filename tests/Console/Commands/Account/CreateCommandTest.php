@@ -2,7 +2,8 @@
 
 namespace tests\Console\Commands\Account;
 
-use AbuseIO\Models\Contact;
+use AbuseIO\Models\Account;
+use AbuseIO\Models\Brand;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -18,5 +19,21 @@ class CreateCommandTest extends TestCase
 
         $this->assertContains('The name field is required.', $output);
         $this->assertContains('Failed to create the account due to validation warnings', $output);
+    }
+
+    public function testCreateValid()
+    {
+        $brand = factory(Brand::class)->create();
+
+        Artisan::call('account:create', [
+            "name" => "test_dummy",
+            "brand_id" => $brand->id
+        ]);
+        $output = Artisan::output();
+
+        $this->assertContains('The account has been created', $output);
+
+        $brand->forceDelete();
+        Account::where("name", "test_dummy")->forceDelete();
     }
 }
