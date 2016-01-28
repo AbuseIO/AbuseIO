@@ -50,11 +50,9 @@ class CreateCommandTest extends TestCase
     public function testCreateWithInvalidAccountId()
     {
         $faker = Factory::create();
-        $name = $faker->name;
-
 
         Artisan::call('contact:create', [
-            'name' => $name,
+            'name' => $faker->name,
             'reference' => $faker->domainWord,
             'account_id' => '10000',
             'enabled' => $faker->boolean(),
@@ -66,7 +64,5 @@ class CreateCommandTest extends TestCase
             'The selected account id is invalid.',
             Artisan::output()
         );
-
-
     }
 }
