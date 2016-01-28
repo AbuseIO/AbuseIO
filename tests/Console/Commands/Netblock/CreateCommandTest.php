@@ -2,6 +2,7 @@
 
 namespace tests\Console\Commands\Netblock;
 
+use AbuseIO\Models\Netblock;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -12,21 +13,33 @@ class CreateCommandTest extends TestCase
 {
     public function testCreate()
     {
+        /** @var Netblock $dummyBlock */
+
+        $dummyBlock = factory(Netblock::class)->make();
+
         $exitCode = Artisan::call(
             'netblock:create',
             [
-                'contact' => '1',
-                'first_ip' => '192.168.0.0',
-                'last_ip' => '192.168.255.255',
-                'description' => '16-bit block',
-                'enabled' => 'true',
+                'contact' => $dummyBlock->contact_id,
+                'first_ip' => $dummyBlock->first_ip,
+                'last_ip' => $dummyBlock->last_ip,
+                'description' => $dummyBlock->description,
+                'enabled' => $dummyBlock->enabled,
             ]
         );
 
         $this->assertEquals(0, $exitCode);
         $this->assertContains('created', Artisan::output());
 
-        $this->seed('NetblocksTableSeeder');
+        Netblock::where([
+            'contact_id' => $dummyBlock->contact_id,
+            'first_ip' => $dummyBlock->first_ip,
+            'last_ip' => $dummyBlock->last_ip,
+            'description' => $dummyBlock->description,
+            'enabled' => $dummyBlock->enabled,
+        ])->forceDelete();
+
+        //$this->seed('NetblocksTableSeeder');
     }
 
     public function testCreateWithoutParams()

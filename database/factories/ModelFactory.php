@@ -42,6 +42,21 @@ $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $faker) {
+    $first_ip = $faker->ipv4;
+    $last_ip = long2ip(ip2long($first_ip) + rand(1, 100));
+
+    return [
+        'contact_id' => \AbuseIO\Models\Contact::all()->first()->id,
+        'first_ip' => $first_ip,
+        'last_ip' => $last_ip,
+        'description' => $faker->sentence(rand(6, 24)),
+        'enabled' => $faker->boolean(),
+    ];
+});
+
+
+
 
 
 
