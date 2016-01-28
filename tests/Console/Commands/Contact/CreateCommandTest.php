@@ -46,4 +46,27 @@ class CreateCommandTest extends TestCase
 
         Contact::where("name", $name)->forceDelete();
     }
+
+    public function testCreateWithInvalidAccountId()
+    {
+        $faker = Factory::create();
+        $name = $faker->name;
+
+
+        Artisan::call('contact:create', [
+            'name' => $name,
+            'reference' => $faker->domainWord,
+            'account_id' => '10000',
+            'enabled' => $faker->boolean(),
+            'email' => $faker->email,
+            'api_host' => $faker->url,
+        ]);
+
+        $this->assertContains(
+            'The selected account id is invalid.',
+            Artisan::output()
+        );
+
+
+    }
 }
