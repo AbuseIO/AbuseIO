@@ -2,6 +2,7 @@
 
 namespace tests\Console\Commands\Brand;
 
+use AbuseIO\Models\Brand;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -19,5 +20,20 @@ class CreateCommandTest extends TestCase
         $this->assertContains('The company name field is required.', $output);
         $this->assertContains('The introduction text field is required.', $output);
         $this->assertContains('Failed to create the brand due to validation warnings', $output);
+    }
+
+    public function testCreateValid()
+    {
+        Artisan::call('brand:create', [
+            "name" => "test_dummy",
+            "company_name" => "test_company_name",
+            "introduction_text" => "abcdefg"
+        ]);
+        $output = Artisan::output();
+
+        $this->assertContains('The brand has been created', $output);
+
+        Brand::where("name", "test_dummy")->forceDelete();
+
     }
 }

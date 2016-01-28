@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Brand;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use Prophecy\Argument;
 use Symfony\Component\Console\Input\InputArgument;
@@ -34,6 +35,7 @@ class CreateCommand extends AbstractCreateCommand
         $brand->company_name = $this->argument('company_name');
         $brand->introduction_text = $this->argument('introduction_text');
         $brand->logo = Brand::getDefaultLogo();
+        $brand->creator_id = Account::getSystemAccount()->id;
 
         return $brand;
     }
