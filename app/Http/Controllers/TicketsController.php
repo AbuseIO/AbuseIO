@@ -84,8 +84,12 @@ class TicketsController extends Controller
             ->groupBy('tickets.id');
 
         if (!$auth_account->isSystemAccount()) {
-            $tickets = $tickets->where('tickets.ip_contact_account_id', '=', $auth_account->id)
-                ->orWhere('tickets.domain_contact_account_id', '=', $auth_account->id);
+            // We're using a grouped where clause here, otherwise the filtering option
+            // will always show the same result (all tickets)
+            $tickets = $tickets->where(function ($query) use ($auth_account) {
+                $query->where('tickets.ip_contact_account_id', '=', $auth_account->id)
+                    ->orWhere('tickets.domain_contact_account_id', '=', $auth_account->id);
+            });
         }
 
         return Datatables::of($tickets)

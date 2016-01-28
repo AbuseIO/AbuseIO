@@ -78,6 +78,21 @@ class Evidence extends Model
         return $this->hasMany('AbuseIO\Models\Event');
     }
 
+    /**
+     * Return the tickets that have this evidence in it's events
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function tickets()
+    {
+        return $this->hasManyThrough(
+            'AbuseIO\Models\Ticket',
+            'AbuseIO\Models\Event',
+            'evidence_id',
+            'id'
+        );
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Accessors & Mutators
@@ -93,7 +108,6 @@ class Evidence extends Model
     public function getDataAttribute()
     {
         if (is_file($this->filename)) {
-
             $data = file_get_contents($this->filename);
 
             if (is_object(json_decode($data))) {
@@ -160,6 +174,36 @@ class Evidence extends Model
     | Custom Methods
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Static method to check if the account has access to the model instance
+     *
+     * @param int                     $model_id
+     * @param \AbuseIO\Models\Account $account
+     * @return bool
+     */
+    public static function checkAccountAccess($model_id, Account $account)
+    {
+        // Early return when we are in the system account
+        if ($account->isSystemAccount()) {
+            return true;
+        }
+
+        // Get all tickets related to this evidence
+        $tickets = Evidence::find($model_id)->tickets;
+
+        // If tickets ip or domain contact is the same as current account
+        // then allow access to this evidence
+        foreach ($tickets as $ticket) {
+            if (($ticket->ip_contact_account_id == $account->id) ||
+                ($ticket->domain_contact_account_id == $account->id)
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public function getCacheDir()
     {

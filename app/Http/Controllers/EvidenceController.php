@@ -12,6 +12,17 @@ use AbuseIO\Models\Evidence;
 class EvidenceController extends Controller
 {
     /**
+     * EvidenceController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        // Is the logged in account allowed to execute an action on the Evidence
+        $this->middleware('checkaccount:Evidence');
+    }
+
+    /**
      * Display the specified evidence.
      *
      * @param \AbuseIO\Models\Evidence $evidence
