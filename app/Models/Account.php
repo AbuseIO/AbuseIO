@@ -59,7 +59,7 @@ class Account extends Model
         $rules = [
             'name'          => 'required|unique:accounts',
             'brand_id'      => 'required|integer|exists:brands,id',
-            'systemaccount' => 'sometimes|required|string|uniqueflag:accounts:systemaccount',
+            'systemaccount' => 'sometimes|required|uniqueflag:accounts:systemaccount',
         ];
 
         return $rules;
@@ -76,7 +76,7 @@ class Account extends Model
         $rules = [
             'name'          => 'required|unique:accounts,name,'. $account->id,
             'brand_id'      => 'required|integer|exists:brands,id',
-            'systemaccount' => 'sometimes|required|string|uniqueflag:accounts:systemaccount',
+            'systemaccount' => 'sometimes|required|uniqueflag:accounts:systemaccount',
         ];
 
         return $rules;

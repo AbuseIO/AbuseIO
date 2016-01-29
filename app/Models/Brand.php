@@ -74,7 +74,7 @@ class Brand extends Model
             'introduction_text' => 'required',
             'logo'              => 'required',
             'creator_id'        => 'required|integer|exists:accounts,id',
-            'systembrand'       => 'sometimes|required|string|uniqueflag:brands:systembrand',
+            'systembrand'       => 'sometimes|required|uniqueflag:brands:systembrand',
 
         ];
 
@@ -94,7 +94,7 @@ class Brand extends Model
             'company_name'      => 'required',
             'introduction_text' => 'required',
             'creator_id'        => 'required|integer|exists:accounts,id',
-            'systembrand'       => 'sometimes|required|string|uniqueflag:brands:systembrand',
+            'systembrand'       => 'sometimes|required|uniqueflag:brands:systembrand',
         ];
 
         return $rules;
