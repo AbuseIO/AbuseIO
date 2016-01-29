@@ -3,6 +3,7 @@
 namespace AbuseIO\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
+use AbuseIO\Models\Event;
 use Log;
 
 /**
@@ -124,14 +125,23 @@ class IncidentsProcess extends Job implements SelfHandling
             );
 
             return false;
+        }
 
-        } else {
+        $linkedEvents = Event::where('evidence_id', '=', $this->evidence->id);
+        if ($linkedEvents->count() == 0) {
             Log::info(
                 get_class($saver) . ': ' .
-                'Saver has ended without errors'
+                'The evidence submitted was never linked to any ticket, thus removing it from the DB again'
             );
 
-            return true;
+            $this->evidence->delete();
         }
+
+        Log::info(
+            get_class($saver) . ': ' .
+            'Saver has ended without errors'
+        );
+
+        return true;
     }
 }
