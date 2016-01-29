@@ -1,5 +1,7 @@
 <?php namespace AbuseIO\Providers;
 
+use Illuminate\Database\QueryException;
+use Log;
 use Validator;
 use Illuminate\Support\ServiceProvider;
 use Lang;
@@ -20,6 +22,7 @@ class ValidationsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         /*
          * Add timestamp validation
          */
@@ -190,6 +193,58 @@ class ValidationsServiceProvider extends ServiceProvider
                 return false;
 
             }
+        );
+
+        /*
+         * Validator that checks that only one flag is set in all the row of the model
+         */
+        Validator::extend(
+            'uniqueflag',
+            function ($attribute, $value, $parameters, $validator) {
+
+                // gather data
+                $data = $validator->getData();
+
+                // check parameters
+                if (count($parameters) != 2) {
+                    Log::alert("uniqueflag validator: called without the needed parameters");
+                    return true;
+                }
+
+                // if it is a string convert to boolean
+                if (gettype($value) == "string") {
+                    $value = ($value == "true" or $value == "1" ? true : false);
+                }
+
+                if ($value) {
+                    $table = $parameters[0];
+                    $field = $parameters[1];
+
+                    // create the query
+                    $query=\DB::table($table)->where($field, true);
+
+                    // are we in an update (id is set)
+                    if (array_key_exists('id', $data)) {
+                        $query = $query->andWhereNot('id', $data[id]);
+                    }
+
+                    try {
+                        $object = $query->first();
+                    } catch (QueryException $e) {
+                        $message = $e->getMessage();
+                        Log::alert("uniqueflag validator: unexpected QueryException [$message], possible wrong parameters ?");
+                        return true;
+                    }
+
+                    if (!empty($object)) {
+                        return false;
+                    }
+
+                }
+
+                return true;
+            }
+
         );
     }
 

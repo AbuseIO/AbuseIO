@@ -98,6 +98,8 @@ return [
     "abusetype"             => "Het :attribute veld moet selecteerd worden",
     "json"                  => "Het :attribute veld kon niet omgezet worden in een geldig JSON object",
     "uri"                   => "Het :attribute veld is verplicht en moet een geldige URI of Pad zijn",
+    "uniqueflag"            => "Het :attribute vlaggetje is al gezet in een ander object",
+
 
     /*
     |--------------------------------------------------------------------------

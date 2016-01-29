@@ -25,6 +25,9 @@ class AccountsController extends Controller
         // is the logged in account allowed to execute an action on the account
         $this->middleware('checkaccount:Account', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo']]);
 
+        // method that only may be executed by the systemaccount
+        $this->middleware('checksystemaccount', ['only' => ['create','store']]);
+
     }
 
     /**

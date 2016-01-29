@@ -98,6 +98,7 @@ return [
     "abusetype"             => "The :attribute field must be selected",
     "json"                  => "The :attribute field did not transform into a valid JSON object",
     "uri"                   => "The :attribute field must be a valid URI or Path",
+    "uniqueflag"            => "The :attribute flag is already set on another object",
 
     /*
     |--------------------------------------------------------------------------

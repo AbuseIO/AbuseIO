@@ -57,8 +57,9 @@ class Account extends Model
     public static function createRules()
     {
         $rules = [
-            'name'      => 'required|unique:accounts',
-            'brand_id'  => 'required|integer|exists:brands,id',
+            'name'          => 'required|unique:accounts',
+            'brand_id'      => 'required|integer|exists:brands,id',
+            'systemaccount' => 'sometimes|required|string|uniqueflag:accounts:systemaccount',
         ];
 
         return $rules;
@@ -73,8 +74,9 @@ class Account extends Model
     public static function updateRules($account)
     {
         $rules = [
-            'name'      => 'required|unique:accounts,name,'. $account->id,
-            'brand_id'  => 'required|integer|exists:brands,id',
+            'name'          => 'required|unique:accounts,name,'. $account->id,
+            'brand_id'      => 'required|integer|exists:brands,id',
+            'systemaccount' => 'sometimes|required|string|uniqueflag:accounts:systemaccount',
         ];
 
         return $rules;
