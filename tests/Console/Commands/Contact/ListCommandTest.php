@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Contact;
 
+use AbuseIO\Models\Contact;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -10,8 +12,34 @@ use TestCase;
  */
 class ListCommandTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    private $contacts;
+
+    private $name1;
+
+    private $name2;
+
+    /**
+     * this should not be part of the setUp method because the database connection
+     * has NOT been setUp properly at that moment
+     */
+    private function initDB()
+    {
+//        \DB::table('domains')->truncate();
+//        \DB::table('contacts')->truncate();
+//        Contact::all()->delete();
+
+        $this->contacts = factory(Contact::class, 10)->create();
+
+        $this->name1 = $this->contacts->first()->name;
+        $this->name2 = $this->contacts->get(1)->name;
+    }
+
     public function testHeaders()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call('contact:list', []);
 
         $this->assertEquals($exitCode, 0);
@@ -25,31 +53,37 @@ class ListCommandTest extends TestCase
 
     public function testAll()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call('contact:list', []);
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('Contact 2', $output);
-        $this->assertContains('Contact 3', $output);
+        $this->assertContains($this->name1, $output);
+        $this->assertContains($this->name2, $output);
     }
 
     public function testFilter()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call(
             'contact:list',
             [
-                '--filter' => 'Contact 2',
+                '--filter' => $this->name1,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('Contact 2', $output);
-        $this->assertNotContains('Contact 3', $output);
+        $this->assertContains($this->name1, $output);
+        $this->assertNotContains($this->name2, $output);
     }
 
     public function testNotFoundFilter()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call(
             'contact:list',
             [

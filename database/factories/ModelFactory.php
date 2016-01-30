@@ -55,7 +55,17 @@ $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $fake
     ];
 });
 
-
+$factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker) {
+    return [
+        'reference' => "reference".rand(1, 100).rand(1, 100),
+        'name' => $faker->name,
+        'email' => $faker->email,
+        'api_host' => 'api_host',
+        'auto_notify' => 'auto_notify',
+        'enabled' => $faker->boolean(),
+        'account_id' => AbuseIO\Models\Account::all()->first()->id,
+    ];
+});
 
 
 
