@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Brand;
 
+use AbuseIO\Models\Brand;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -10,8 +12,31 @@ use TestCase;
  */
 class ListCommandTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    private $name1;
+
+    private $name2;
+
+    private $brands;
+
+    /**
+     * this should not be part of the setUp method because the database connection
+     * has NOT been setUp properly at that moment
+     */
+    private function initDB()
+    {
+        Brand::where("id", "!=", 1)->delete();
+
+        $this->brands = factory(Brand::class, 10)->create();
+
+        $this->name1 = $this->brands->first()->name;
+        $this->name2 = $this->brands->get(1)->name;
+    }
+
     public function testHeaders()
     {
+        $this->initDB();
         $exitCode = Artisan::call('brand:list', []);
 
         $this->assertEquals($exitCode, 0);
@@ -25,29 +50,35 @@ class ListCommandTest extends TestCase
 
     public function testAll()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call('brand:list', []);
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('AbuseIO', $output);
+        $this->assertContains($this->name1, $output);
     }
 
     public function testFilter()
     {
+        $this->initDB();
         $exitCode = Artisan::call(
             'brand:list',
             [
-                '--filter' => 'default',
+                '--filter' => $this->name2,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('AbuseIO', $output);
+        $this->assertContains($this->name2, $output);
+        $this->assertNotContains($this->name1, $output);
     }
 
     public function testNotFoundFilter()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call(
             'brand:list',
             [
