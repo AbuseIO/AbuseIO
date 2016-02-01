@@ -16,4 +16,3 @@ class BrandTest extends \TestCase
         $this->assertEquals($account->name, $accountFromDB->name);
     }
 }
-

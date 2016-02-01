@@ -91,18 +91,6 @@ $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) 
 //    ];
 //});
 
-
-
-
-$factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
-    ];
-});
-
 $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $faker) {
     $first_ip = $faker->ipv4;
     $last_ip = long2ip(ip2long($first_ip) + rand(1, 100));
@@ -115,6 +103,42 @@ $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $fake
         'enabled' => $faker->boolean(),
     ];
 });
+
+$factory->define(AbuseIO\Models\Job::class, function (Faker\Generator $faker) {
+    return [];
+});
+
+$factory->define(AbuseIO\Models\Note::class, function (Faker\Generator $faker) {
+    return [];
+});
+
+$factory->define(AbuseIO\Models\Origin::class, function (Faker\Generator $faker) {
+    return [];
+});
+
+$factory->define(AbuseIO\Models\Permission::class, function (Faker\Generator $faker) {
+    return [];
+});
+$factory->define(AbuseIO\Models\Role::class, function (Faker\Generator $faker) {
+    return [];
+});
+$factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker) {
+    return [];
+});
+
+
+
+
+
+$factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'email' => $faker->email,
+        'password' => bcrypt(str_random(10)),
+        'remember_token' => str_random(10),
+    ];
+});
+
 
 
 
