@@ -34,12 +34,19 @@ $factory->define(AbuseIO\Models\Brand::class, function (Faker\Generator $faker) 
 });
 
 $factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker) {
+    global $contact_reference_counter;
+    if (! $contact_reference_counter) {
+        $contact_reference_counter = 1;
+    } else {
+        $contact_reference_counter++;
+    }
+
     return [
-        'reference' => "reference".rand(1, 100).rand(1, 100),
+        'reference' => sprintf("reference_%d", $contact_reference_counter),
         'name' => $faker->name,
         'email' => $faker->email,
         'api_host' => 'api_host',
-        'auto_notify' => 'auto_notify',
+        'auto_notify' => $faker->boolean(),
         'enabled' => $faker->boolean(),
         'account_id' => AbuseIO\Models\Account::all()->first()->id,
     ];
