@@ -37,10 +37,10 @@ class OldVersionCommand extends Command
     protected $signature = 'migrate:oldversion
                             {--p|prepare : Prepares the migration by building all required caches }
                             {--s|start : Start the migration using cached evidence }
-                            {--skipContacts : Skip importing the contacts }
-                            {--skipNetblocks : Skip importing the netblocks }
-                            {--skipNotes : Skip importing the notes }
-                            {--startFrom=1 : Start from ticket ID }
+                            {--skipcontacts : Skip importing the contacts }
+                            {--skipnetblocks : Skip importing the netblocks }
+                            {--skipnotes : Skip importing the notes }
+                            {--startfrom=1 : Start from ticket ID }
     ';
 
     /**
@@ -280,7 +280,7 @@ class OldVersionCommand extends Command
 
         if (!empty($this->option('start'))) {
 
-            if (empty($this->option('skipContacts'))) {
+            if (empty($this->option('skipcontacts'))) {
                 $this->info('starting migration - phase 1 - contact data');
 
                 DB::setDefaultConnection('abuseio3');
@@ -320,7 +320,7 @@ class OldVersionCommand extends Command
                 $this->info('skipping migration - phase 1 - contact data');
             }
 
-            if (empty($this->option('skipNetblocks'))) {
+            if (empty($this->option('skipnetblocks'))) {
                 $this->info('starting migration - phase 2 - netblock data');
 
                 DB::setDefaultConnection('abuseio3');
@@ -367,7 +367,7 @@ class OldVersionCommand extends Command
                 $this->info('skipping migration - phase 2 - netblock data');
             }
 
-            if (empty($this->option('skipNotes'))) {
+            if (empty($this->option('skipnotes'))) {
                 $this->info('starting migration - phase 4 - Notes');
 
                 DB::setDefaultConnection('abuseio3');
@@ -431,7 +431,7 @@ class OldVersionCommand extends Command
 
             foreach ($tickets as $ticket) {
                 // Skip from, usefull when migration stopped at a certain point you can continue from
-                if ($ticket->ID <= $this->option('startFrom')) {
+                if ($ticket->ID <= $this->option('startfrom')) {
                     $this->output->progressAdvance();
                     echo " skipping events from ticket {$ticket->ID}";
                     continue;

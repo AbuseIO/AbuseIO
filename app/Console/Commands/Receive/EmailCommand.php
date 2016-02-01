@@ -24,7 +24,7 @@ class EmailCommand extends Command
      * @var string
      */
     protected $signature = 'receive:email
-                            {--noQueue : Do not queue the message, but directly handle it }
+                            {--noqueue : Do not queue the message, but directly handle it }
     ';
 
     /**
@@ -80,7 +80,7 @@ class EmailCommand extends Command
             $this->exception($rawEmail);
         }
 
-        if ($this->option('noQueue') == true) {
+        if ($this->option('noqueue') == true) {
             // In debug mode we don't queue the job
             Log::debug(
                 get_class($this) . ': ' .

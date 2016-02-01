@@ -22,7 +22,7 @@ class RunAllCommand extends Command
      * @var string
      */
     protected $signature = 'collector:runall
-                                {--noQueue : Do not queue the collectors, but directly handle it }
+                                {--noqueue : Do not queue the collectors, but directly handle it }
     ';
 
     /**
@@ -58,7 +58,7 @@ class RunAllCommand extends Command
 
             if (config("collectors.{$collectorName}.collector.enabled") === true) {
 
-                if ($this->option('noQueue') == true) {
+                if ($this->option('noqueue') == true) {
                     // In debug mode we don't queue the job
                     Log::debug(
                         get_class($this) . ': ' .

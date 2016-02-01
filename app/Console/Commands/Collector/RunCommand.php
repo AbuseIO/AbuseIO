@@ -22,7 +22,7 @@ class RunCommand extends Command
      */
     protected $signature = 'collector:run {name}
                             {--debug : Do not create events, just display the results }
-                            {--noQueue : Do not queue the collectors, but directly handle it }
+                            {--noqueue : Do not queue the collectors, but directly handle it }
     ';
 
     /**
@@ -47,7 +47,7 @@ class RunCommand extends Command
     public function handle()
     {
 
-        if ($this->option('noQueue') == true) {
+        if ($this->option('noqueue') == true) {
             // In debug mode we don't queue the job
             Log::debug(
                 get_class($this) . ': ' .
