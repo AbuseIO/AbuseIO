@@ -52,6 +52,21 @@ $factory->define(AbuseIO\Models\Domain::class, function (Faker\Generator $faker)
         'enabled' => $faker->boolean(),
     ];
 });
+$factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) {
+    return [
+        'ticket_id'                 => \AbuseIO\Models\Ticket::all()->first()->id,
+        'evidence_id'               => 1,
+        'source'                    => $faker->name,
+        'timestamp'                 => time(),
+        'information'               => json_encode(
+            [
+                'engine' => $faker->sentence(5),
+                'uri' => $faker->url
+            ]
+        )
+    ];
+});
+
 
 
 

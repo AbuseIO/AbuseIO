@@ -15,5 +15,12 @@ class EventTest extends \TestCase
             Event::find(1)->evidence
         );
     }
+
+    public function testModelFactory()
+    {
+        $event = factory(Event::class)->create();
+        $eventFromDB = Event::where("source", $event->source)->first();
+        $this->assertEquals($event->source, $eventFromDB->source);
+    }
 }
 
