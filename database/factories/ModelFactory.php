@@ -33,6 +33,28 @@ $factory->define(AbuseIO\Models\Brand::class, function (Faker\Generator $faker) 
     ];
 });
 
+$factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker) {
+    return [
+        'reference' => "reference".rand(1, 100).rand(1, 100),
+        'name' => $faker->name,
+        'email' => $faker->email,
+        'api_host' => 'api_host',
+        'auto_notify' => 'auto_notify',
+        'enabled' => $faker->boolean(),
+        'account_id' => AbuseIO\Models\Account::all()->first()->id,
+    ];
+});
+
+$factory->define(AbuseIO\Models\Domain::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->domainName,
+        'contact_id' => AbuseIO\Models\Contact::all()->first()->id,
+        'enabled' => $faker->boolean(),
+    ];
+});
+
+
+
 $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
@@ -55,17 +77,6 @@ $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $fake
     ];
 });
 
-$factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker) {
-    return [
-        'reference' => "reference".rand(1, 100).rand(1, 100),
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'api_host' => 'api_host',
-        'auto_notify' => 'auto_notify',
-        'enabled' => $faker->boolean(),
-        'account_id' => AbuseIO\Models\Account::all()->first()->id,
-    ];
-});
 
 
 
