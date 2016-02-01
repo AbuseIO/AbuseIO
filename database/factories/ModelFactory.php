@@ -70,19 +70,19 @@ $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) 
 /**
  * TODO: figure out how to use Incident model factory and what values are relevant.
  */
-$factory->define(AbuseIO\Models\Incident::class, function (Faker\Generator $faker) {
-    return [
-        'source' => 'source',
-        'source_id' => 1,
-        'ip' => $faker->ip,
-        'domain' => $faker->domainName,
-        'uri' => $faker->url,
-        'timestamp' => time(),
-        'class' => 'class',
-        'type' => 'type',
-        'information' => $faker->sentence(60),
-    ];
-});
+//$factory->define(AbuseIO\Models\Incident::class, function (Faker\Generator $faker) {
+//    return [
+//        'source' => 'source',
+//        'source_id' => 1,
+//        'ip' => $faker->ipv4,
+//        'domain' => $faker->domainName,
+//        'uri' => $faker->url,
+//        'timestamp' => time(),
+//        'class' =>  array_rand((trans('classifications'))),
+//        'type' => array_rand(config('types.type')),
+//        'information' => $faker->sentence(60),
+//    ];
+//});
 
 
 
