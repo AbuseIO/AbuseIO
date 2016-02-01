@@ -2,11 +2,9 @@
 
 namespace tests\Models;
 
-use AbuseIO\Models\Event;
-use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Incident;
 
-class EventTest extends \TestCase
+class IncidentTest extends \TestCase
 {
     public function testModelFactory()
     {
