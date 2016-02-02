@@ -14,7 +14,7 @@ Route::group(
         Route::get(
             '',
             [
-                'middleware' => 'permission:tickets_view',
+                'middleware' => 'permission:evidence_view',
                 'as' => 'index',
                 'uses' => 'EvidenceController@index'
             ]
@@ -26,7 +26,7 @@ Route::group(
         Route::get(
             '{evidence}',
             [
-                'middleware' => 'permission:tickets_view',
+                'middleware' => 'permission:evidence_view',
                 'as' => 'show',
                 'uses' => 'EvidenceController@show'
             ]
@@ -38,7 +38,7 @@ Route::group(
         Route::get(
             '{evidence}/download',
             [
-                'middleware' => 'permission:tickets_view',
+                'middleware' => 'permission:evidence_view',
                 'as' => 'download',
                 'uses' => 'EvidenceController@download'
             ]
@@ -47,7 +47,7 @@ Route::group(
         Route::get(
             '{evidence}/attachment/{file}',
             [
-                'middleware' => 'permission:tickets_view',
+                'middleware' => 'permission:evidence_view',
                 'as' => 'attachment',
                 'uses' => 'EvidenceController@attachment'
             ]

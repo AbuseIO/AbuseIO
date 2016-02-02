@@ -85,11 +85,11 @@ class UsersTableSeeder extends Seeder
             'accounts_view', 'accounts_create', 'accounts_edit', 'accounts_delete', 'accounts_export',
             'profile_manage',
             'users_view', 'users_edit',
+            'evidence_view',
         ];
 
         // abuseio User role permissions
         foreach ($permissions as $permission_name) {
-
             $permission = Permission::where('name', '=', $permission_name)->first();
 
             $permission_role[] = [
