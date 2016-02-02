@@ -12,10 +12,10 @@
     <table class="table table-striped top-buffer" id="contacts-table">
         <thead>
         <tr>
-            <th>{{ trans_choice('misc.accounts', 1) }}</th>
-            <th>{{ trans('contacts.reference') }}</th>
             <th>{{ trans('misc.name') }}</th>
+            <th>{{ trans('contacts.reference') }}</th>
             <th>{{ trans('contacts.notification') }}</th>
+            <th>{{ trans_choice('misc.accounts', 1) }}</th>
             <th class="text-right">{{ trans('misc.action') }}</th>
         </tr>
         </thead>
@@ -45,10 +45,10 @@
                 url: '{{ asset("/i18n/$auth_user->locale.json") }}'
             },
             columns: [
-                { data: 'account_id', name: 'account_id' },
-                { data: 'reference', name: 'reference' },
                 { data: 'name', name: 'name' },
+                { data: 'reference', name: 'reference' },
                 { data: 'auto_notify', name: 'auto_notify' },
+                { data: 'account_id', name: 'account_id' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
             ]
         });
