@@ -12,8 +12,8 @@
     <table class="table table-striped" id="domains-table">
         <thead>
         <tr>
-            <th>{{ trans('misc.contact') }}</th>
             <th>{{ trans('domains.domainname') }}</th>
+            <th>{{ trans('misc.contact') }}</th>
             <th class="text-right">{{ trans('misc.action') }}</th>
         </tr>
         </thead>
@@ -43,8 +43,8 @@
                 url: '{{ asset("/i18n/$auth_user->locale.json") }}'
             },
             columns: [
-                { data: 'contacts_name', name: 'contacts.name' },
                 { data: 'name', name: 'domains.name' },
+                { data: 'contacts_name', name: 'contacts.name' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
             ]
         });
