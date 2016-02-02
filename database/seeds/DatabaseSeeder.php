@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
         $this->call('NetblocksTableSeeder');
         $this->call('DomainsTableSeeder');
 
-        $this->call('EvidencesTableSeeder');
-        $this->call('EventsTableSeeder');
-        $this->call('TicketsTableSeeder');
-        $this->call('NotesTableSeeder');
+//        $this->call('EvidencesTableSeeder');
+//        $this->call('EventsTableSeeder');
+//        $this->call('TicketsTableSeeder');
+//        $this->call('NotesTableSeeder');
 
         $this->call('AccountsTableSeeder');
         $this->call('UsersTableSeeder');

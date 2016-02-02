@@ -15,44 +15,57 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
 
         // Add the example users
-        $defaultAdminUsername = 'admin@isp.local';
-        $defaultAdminPassword = (app()->environment() == 'development') ? 'admin' : substr(md5(rand()), 0, 8);
-
-        $defaultUserUsername  = 'user@isp.local';
-        $defaultUserPassword = (app()->environment() == 'development') ? 'user' : substr(md5(rand()), 0, 8);
-
-        $secondAccountAdminUsername = 'admin@account2.local';
-        $secondAccountAdminPassword = (app()->environment() == 'development') ? 'admin' : substr(md5(rand()), 0, 8);
-
+        $adminPassword  = (app()->environment() == 'development') ? 'admin' : substr(md5(rand()), 0, 8);
+        $userPassword   = (app()->environment() == 'development') ? 'user' : substr(md5(rand()), 0, 8);
 
         $users = [
             [
                 'id'                        => 1,
-                'email'                     => $defaultAdminUsername,
-                'first_name'                => 'Default',
+                'email'                     => 'admin@isp.local',
+                'first_name'                => 'System',
                 'last_name'                 => 'Admin',
-                'password'                  => Hash::make($defaultAdminPassword),
+                'password'                  => Hash::make($adminPassword),
                 'account_id'                => 1,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
             [
                 'id'                        => 2,
-                'email'                     => $defaultUserUsername,
-                'first_name'                => 'Isp',
-                'last_name'                 => 'User',
-                'password'                  => Hash::make($defaultUserPassword),
+                'email'                     => 'user@isp.local',
+                'first_name'                => 'Elizabeth',
+                'last_name'                 => 'Smith',
+                'password'                  => Hash::make($userPassword),
                 'account_id'                => 1,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
             [
                 'id'                        => 3,
-                'email'                     => $secondAccountAdminUsername,
-                'first_name'                => 'Default',
-                'last_name'                 => 'Admin',
-                'password'                  => Hash::make($secondAccountAdminPassword),
+                'email'                     => 'admin@isp2.local',
+                'first_name'                => 'Warren',
+                'last_name'                 => 'King',
+                'password'                  => Hash::make($adminPassword),
                 'account_id'                => 2,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
+            ],
+            [
+                'id'                        => 4,
+                'email'                     => 'user@isp2.local',
+                'first_name'                => 'Sophie',
+                'last_name'                 => 'Davidson',
+                'password'                  => Hash::make($userPassword),
+                'account_id'                => 2,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
+            ],
+            [
+                'id'                        => 5,
+                'email'                     => 'admin@isp3.local',
+                'first_name'                => 'Richard',
+                'last_name'                 => 'Paterson',
+                'password'                  => Hash::make($adminPassword),
+                'account_id'                => 3,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
@@ -64,8 +77,8 @@ class UsersTableSeeder extends Seeder
         $roles =  [
             [
                 'id'                        => 2,
-                'name'                      => 'abuse',
-                'description'               => 'Abuse User',
+                'name'                      => 'Abuse',
+                'description'               => 'Abusedesk User',
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
@@ -88,7 +101,7 @@ class UsersTableSeeder extends Seeder
             'evidence_view',
         ];
 
-        // abuseio User role permissions
+        // User role permissions
         foreach ($permissions as $permission_name) {
             $permission = Permission::where('name', '=', $permission_name)->first();
 
@@ -108,22 +121,36 @@ class UsersTableSeeder extends Seeder
         $role_user = [
             [
                 'id'                        => 1,
-                'role_id'                   => 1,
+                'role_id'                   => 1,   // Admin user role
                 'user_id'                   => 1,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
             [
                 'id'                        => 2,
-                'role_id'                   => 2,
+                'role_id'                   => 2,   // Abusedesk user role
                 'user_id'                   => 2,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
             [
                 'id'                        => 3,
-                'role_id'                   => 1,
+                'role_id'                   => 1,   // Admin user role
                 'user_id'                   => 3,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
+            ],
+            [
+                'id'                        => 4,
+                'role_id'                   => 2,   // Abusedesk user role
+                'user_id'                   => 4,
+                'created_at'                => new DateTime,
+                'updated_at'                => new DateTime,
+            ],
+            [
+                'id'                        => 5,
+                'role_id'                   => 1,   // Admin user role
+                'user_id'                   => 5,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,
             ],
@@ -131,14 +158,14 @@ class UsersTableSeeder extends Seeder
         DB::table('role_user')->insert($role_user);
 
         // Show the password in CLI that was generated when seeding the test admin user
-        echo PHP_EOL ."Default admin user '{$defaultAdminUsername}' created with password: '{$defaultAdminPassword}'" .
-            PHP_EOL . PHP_EOL;
-        // Show the password in CLI that was generated when seeding the test user
-        echo PHP_EOL ."Default user '{$defaultUserUsername}' created with password: '{$defaultUserPassword}'" .
-            PHP_EOL . PHP_EOL;
-        // Show the password in CLI that was generated when seeding the test secondd account admin user
-        echo PHP_EOL ."Default second account admin user '{$secondAccountAdminUsername}' created with password: '{$secondAccountAdminPassword}'" .
-            PHP_EOL . PHP_EOL;
-
+        echo "\nDefault admin user '{$users[0]['email']}' created with password: '{$adminPassword}'";
+        // Show the password in CLI that was generated when seeding the test abusedesk user
+        echo "\nDefault user '{$users[1]['email']}' created with password: '{$userPassword}'";
+        // Show the password in CLI that was generated when seeding the test second account admin user
+        echo "\nSecond admin user '{$users[2]['email']}' created with password: '{$adminPassword}'";
+        // Show the password in CLI that was generated when seeding the test second account abusedesk user
+        echo "\nSecond user '{$users[3]['email']}' created with password: '{$userPassword}'";
+        // Show the password in CLI that was generated when seeding the test second account admin user
+        echo "\nThird admin user '{$users[4]['email']}' created with password: '{$adminPassword}'\n\n";
     }
 }
