@@ -30,7 +30,7 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'brand:show',
             [
-                'brand' => 'default',
+                'brand' => 'AbuseIO',
             ]
         );
         $this->assertEquals($exitCode, 0);

@@ -30,11 +30,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'contact:show',
             [
-                'contact' => 'Global internet',
+                'contact' => 'John Doe',
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('internet@local.lan', Artisan::output());
+        $this->assertContains('j.doe@customers.isp.local', Artisan::output());
     }
 
     public function testWithInvalidFilter()

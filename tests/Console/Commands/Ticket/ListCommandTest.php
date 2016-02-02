@@ -39,8 +39,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('domain13', $output);
-        $this->assertContains('10.1.11.77', $output);
+        $this->assertContains('customer1.tld', $output);
+        $this->assertContains('10.19.3.1', $output);
     }
 
     public function testFilter()
@@ -54,8 +54,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('domain13', $output);
-        $this->assertNotContains('10.1.11.77', $output);
+        $this->assertContains('victim.tld', $output);
+        $this->assertNotContains('192.168.2.20', $output);
     }
 
     public function testNotFoundFilter()

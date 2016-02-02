@@ -34,7 +34,7 @@ class EditCommandTest extends TestCase
 
     public function testName()
     {
-        $this->assertEquals('Global internet', Contact::find(1)->name);
+        $this->assertEquals('John Doe', Contact::find(1)->name);
 
         $exitCode = Artisan::call(
             'contact:edit',
@@ -48,13 +48,13 @@ class EditCommandTest extends TestCase
 
         $contact = Contact::find(1);
         $this->assertEquals('New name', $contact->name);
-        $contact->name = 'Global internet';
+        $contact->name = 'John Doe';
         $contact->save();
     }
 
     public function testCompanyName()
     {
-        $this->assertEquals('INTERNET', Contact::find(1)->reference);
+        $this->assertEquals('JOHND', Contact::find(1)->reference);
 
         $exitCode = Artisan::call(
             'contact:edit',
@@ -68,7 +68,7 @@ class EditCommandTest extends TestCase
 
         $contact = Contact::find(1);
         $this->assertEquals('New reference', $contact->reference);
-        $contact->reference = 'INTERNET';
+        $contact->reference = 'JOHND';
         $contact->save();
     }
 }

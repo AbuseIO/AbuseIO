@@ -15,12 +15,12 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:show',
             [
-                '--name' => 'domain1.com',
+                '--name' => 'john-doe.tld',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Contact 1', Artisan::output());
+        $this->assertContains('John Doe', Artisan::output());
     }
 
     public function testWithValidIdFilter()
@@ -33,7 +33,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Contact 1', Artisan::output());
+        $this->assertContains('John Doe', Artisan::output());
     }
 
     public function testWithInvalidIdFilter()

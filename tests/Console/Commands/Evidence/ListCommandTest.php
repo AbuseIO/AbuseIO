@@ -29,8 +29,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('i say 1', $output);
-        $this->assertContains('i say 2', $output);
+        $this->assertContains('Shadowserver scan_mssql-sample Report: 2015-01-01', $output);
+        $this->assertContains('USA.net Abuse Report', $output);
     }
 
     public function testFilter()
@@ -38,14 +38,14 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'evidence:list',
             [
-                '--filter' => '1 me',
+                '--filter' => 'Shadowserver',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('i say 1', $output);
-        $this->assertNotContains('i say 2', $output);
+        $this->assertContains('Shadowserver scan_nat_pmp Report: 2015-01-01', $output);
+        $this->assertNotContains('Notice of Unauthorized Use of Starz Entertainment, LLC ("Starz") Property', $output);
     }
 
     public function testNotFoundFilter()

@@ -29,8 +29,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('Simon Says', $output);
-        $this->assertContains('DNS project', $output);
+        $this->assertContains('123456789@blocklist.de', $output);
+        $this->assertContains('min_amplification":"1.3810', $output);
     }
 
     public function testFilter()
@@ -38,14 +38,14 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'event:list',
             [
-                '--filter' => 'Simon says',
+                '--filter' => 'Abusehub',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('Simon Says', $output);
-        $this->assertNotContains('DNS project', $output);
+        $this->assertContains('Abusehub', $output);
+        $this->assertNotContains('regbot', $output);
     }
 
     public function testNotFoundFilter()

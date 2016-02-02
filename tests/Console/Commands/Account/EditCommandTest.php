@@ -47,7 +47,7 @@ class EditCommandTest extends TestCase
 
     public function testName()
     {
-        $this->assertEquals('default', Account::find(1)->name);
+        $this->assertEquals('Default', Account::find(1)->name);
 
         $exitCode = Artisan::call(
             'account:edit',
@@ -62,7 +62,7 @@ class EditCommandTest extends TestCase
         $account = Account::find(1);
         $this->assertEquals('somebogusstring', $account->name);
 
-        $account->name = 'default';
+        $account->name = 'Default';
         $account->save();
     }
 

@@ -20,7 +20,7 @@ class ShowCommandTest extends TestCase
         );
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        foreach (['Name', 'default', 'Brand', 'Id', 'Description'] as $el) {
+        foreach (['Name', 'Default', 'Brand', 'Id', 'Description'] as $el) {
             $this->assertContains($el, $output);
         }
     }
@@ -30,11 +30,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'account:show',
             [
-                'account' => 'Account 2',
+                'account' => 'Customer Internet',
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Account', Artisan::output());
+        $this->assertContains('Customer Internet', Artisan::output());
     }
 
     public function testWithInvalidFilter()

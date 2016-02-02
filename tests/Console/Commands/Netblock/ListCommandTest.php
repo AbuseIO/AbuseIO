@@ -15,7 +15,7 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call('netblock:list', []);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Global internet', Artisan::output());
+        $this->assertContains('John Doe', Artisan::output());
     }
 
     public function testNetBlockListCommandWithValidFilter()
@@ -23,12 +23,12 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'netblock:list',
             [
-                '--filter' => '10.1.16.128',
+                '--filter' => '192.168.1.0',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Contact 6', Artisan::output());
-        $this->assertNotContains('Global internet', Artisan::output());
+        $this->assertContains('ISP Business Internet', Artisan::output());
+        $this->assertNotContains('Customer 1', Artisan::output());
     }
 }

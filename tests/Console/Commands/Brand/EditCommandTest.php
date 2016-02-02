@@ -34,7 +34,7 @@ class EditCommandTest extends TestCase
 
     public function testName()
     {
-        $this->assertEquals('default', Brand::find(1)->name);
+        $this->assertEquals('AbuseIO', Brand::find(1)->name);
 
         $exitCode = Artisan::call(
             'brand:edit',
@@ -48,7 +48,7 @@ class EditCommandTest extends TestCase
 
         $brand = Brand::find(1);
         $this->assertEquals('New name', $brand->name);
-        $brand->name = 'default';
+        $brand->name = 'AbuseIO';
         $brand->save();
     }
 
