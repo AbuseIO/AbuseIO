@@ -109,26 +109,65 @@ $factory->define(AbuseIO\Models\Job::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(AbuseIO\Models\Note::class, function (Faker\Generator $faker) {
-    return [];
+    return [
+        'ticket_id' => \AbuseIO\Models\Ticket::all()->first()->id,
+        'submitter' => $faker->userName,
+        'text' => $faker->sentence($faker->numberBetween(5,10)),
+        'hidden' => $faker->boolean(),
+        'viewed' => $faker->boolean(),
+    ];
 });
 
-$factory->define(AbuseIO\Models\Origin::class, function (Faker\Generator $faker) {
-    return [];
-});
 
-$factory->define(AbuseIO\Models\Permission::class, function (Faker\Generator $faker) {
-    return [];
-});
-$factory->define(AbuseIO\Models\Role::class, function (Faker\Generator $faker) {
-    return [];
-});
+//
+//$factory->define(AbuseIO\Models\Origin::class, function (Faker\Generator $faker) {
+//    return [];
+//});
+//
+//$factory->define(AbuseIO\Models\Permission::class, function (Faker\Generator $faker) {
+//    return [];
+//});
+//$factory->define(AbuseIO\Models\Role::class, function (Faker\Generator $faker) {
+//    return [];
+//});
+
+
 $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker) {
-    return [];
+
+    $contactList = \AbuseIO\Models\Contact::all();
+
+    /** @var \AbuseIO\Models\Contact $ipContact */
+    $ipContact = $contactList->random();
+
+
+    /** @var \AbuseIO\Models\Contact $domainContact */
+    $domainContact = $contactList->random();
+
+    return [
+        'ip' => array_rand([$faker->ipv4, $faker->ipv6]),
+        'domain' => $faker->domainName,
+        'class_id' => array_rand((trans('classifications'))),
+        'type_id' => array_rand(config('types.type')),
+        'ip_contact_account_id' => $ipContact->account_id,
+        'ip_contact_reference' => $ipContact->reference,
+        'ip_contact_name' => $ipContact->name,
+        'ip_contact_email'=> $ipContact->email,
+        'ip_contact_api_host' => $ipContact->api_host,
+        'ip_contact_auto_notify'=> $ipContact->auto_notify,
+        'ip_contact_notified_count' => 0,
+        'domain_contact_account_id' => $domainContact->account_id,
+        'domain_contact_reference' => $domainContact->reference,
+        'domain_contact_name' => $domainContact->name,
+        'domain_contact_email' => $domainContact->email,
+        'domain_contact_api_host' => $domainContact->api_host,
+        'domain_contact_auto_notify' => $domainContact->auto_notify,
+        'domain_contact_notified_count' => 0,
+        'status_id' => 'OPEN', //key(array_rand(config('status.abusedesk'))),
+        'contact_status_id' => 'OPEN',// key(array_rand(config('status.abusedesk'))),
+        'last_notify_count' => '',
+        'last_notify_timestamp' => $faker->dateTime(),
+    ];
 });
-
-
-
-
 
 $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
     return [
