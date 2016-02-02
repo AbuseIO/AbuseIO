@@ -41,8 +41,8 @@ class CreateAccountsTable extends Migration
         $accounts = [
             [
                 'id'                        => 1,
-                'name'                      => 'default',
-                'description'               => 'The default system account',
+                'name'                      => 'Default',
+                'description'               => 'Default system account',
                 'disabled'                  => false,
                 'brand_id'                  => 1,
                 'systemaccount'             => true,

@@ -292,7 +292,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $result = false;
         $roles = $this->roles;
         foreach ($roles as $role) {
-            if ($role->name == $role_name) {
+            if ($role->name == ucfirst($role_name)) {
                 $result = true;
                 break;
             }

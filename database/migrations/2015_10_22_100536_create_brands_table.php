@@ -46,9 +46,9 @@ class CreateBrandsTable extends Migration
         $brands = [
             [
                 'id'                        => 1,
-                'name'                      => 'default',
+                'name'                      => 'AbuseIO',
                 'company_name'              => 'AbuseIO',
-                'introduction_text'         => 'This is an introduction text',
+                'introduction_text'         => 'Open Source abusemanagement',
                 'creator_id'                => 1,
                 'logo'                      => Brand::getDefaultLogo(),
                 'systembrand'               => true,

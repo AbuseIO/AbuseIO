@@ -33,7 +33,7 @@ class CreateRolesTable extends Migration
         $roles = [
             [
                 'id'            => 1,
-                'name'          => 'admin',
+                'name'          => 'Admin',
                 'description'   => 'System Administrator',
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
