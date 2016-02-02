@@ -36,6 +36,7 @@ return [
     'add_evidence'          => 'Voeg bewijsmateriaal toe',
     'last_notification'     => 'Laatste notificatie',
     'total_notifications'   => 'Aantal notificaties',
+    'set_ticket_status'     => 'Zet nieuwe status op',
     'open'                  => 'Open',
     'closed'                => 'Gesloten',
     'escalated'             => 'Geëscaleerd',

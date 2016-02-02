@@ -36,6 +36,7 @@ return [
     'add_evidence'          => 'Add evidence',
     'last_notification'     => 'Last notification',
     'total_notifications'   => 'Notify count',
+    'set_ticket_status'     => 'Set new status to',
     'open'                  => 'Open',
     'closed'                => 'Closed',
     'escalated'             => 'Escalated',

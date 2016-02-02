@@ -35,7 +35,7 @@
                     {{ trans('tickets.ticket') }} {{ trans('misc.status') }} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li class="dropdown-header">Set new status to:</li>
+                    <li class="dropdown-header">{{ trans('tickets.set_ticket_status') }}:</li>
                     <li{!! ($ticket->status_id == 'OPEN') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.open'), [$ticket->id, 'open']) !!}</li>
                     <li{!! ($ticket->status_id == 'CLOSED') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.closed'), [$ticket->id, 'closed']) !!}</li>
                     <li role="separator" class="divider"></li>
