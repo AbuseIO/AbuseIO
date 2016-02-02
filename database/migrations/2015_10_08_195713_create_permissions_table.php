@@ -71,6 +71,7 @@ class CreatePermissionsTable extends Migration
             'users',
             'brands',
             'templates',
+            'evidence',
         ];
         $actions = [
             'view',
