@@ -1,13 +1,13 @@
 X-Account-Key: account2
 X-UIDL: UID25041-1437487710
-X-Mozilla-Keys:                                                                                 
+X-Mozilla-Keys:
 DomainKey-Status: no signature
 Return-Path: <notices.warner@ip-echelon.com>
 X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on plesk2.mailserver.tld
-X-Spam-Level: 
+X-Spam-Level:
 X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,INVALID_MSGID,
 	RCVD_IN_DNSWL_LOW,T_RP_MATCHES_RCVD autolearn=no version=3.3.2
-X-Spam-Report: 
+X-Spam-Report:
 	* -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at http://www.dnswl.org/, low
 	*      trust
 	*      [67.43.165.164 listed in list.dnswl.org]
@@ -65,7 +65,7 @@ Title 17 United States Code Section 106(3).  This conduct may also
 violate the laws of other countries, international law, and/or treaty
 obligations.
 
-Since you own this IP address (127.0.3.230),
+Since you own this IP address (192.168.3.2),
 we request that you immediately do the following:
 
   1) Contact the subscriber who has engaged in the conduct described
@@ -103,7 +103,7 @@ Address: 6715 Hollywood Blvd, Los Angeles, 90028, United States
 - ------------- Infringement Details ----------------------------------
 Title:        Black Mass
 Timestamp:    2015-11-27T11:58:43Z
-IP Address:   127.0.3.230
+IP Address:   192.168.3.2
 Port:         50321
 Type:         BitTorrent
 Torrent Hash: 22d10ee6371b4a1ba259d003cc308d6a4577899c
@@ -138,7 +138,7 @@ Filesize:     902 MB
  </Service_Provider>
  <Source>
   <TimeStamp>2015-11-27T11:58:43Z</TimeStamp>
-  <IP_Address>127.0.3.230</IP_Address>
+  <IP_Address>192.168.3.2</IP_Address>
   <Port>50321</Port>
   <Type>BitTorrent</Type>
   <SubType BaseType="P2P" Protocol="BITTORRENT"/>
@@ -201,7 +201,7 @@ Content-Disposition: attachment; filename="324415991.xml"
  </Service_Provider>
  <Source>
   <TimeStamp>2015-11-27T11:58:43Z</TimeStamp>
-  <IP_Address>127.0.3.230</IP_Address>
+  <IP_Address>192.168.3.2</IP_Address>
   <Port>50321</Port>
   <Type>BitTorrent</Type>
   <SubType BaseType="P2P" Protocol="BITTORRENT"/>
@@ -222,4 +222,3 @@ Content-Disposition: attachment; filename="324415991.xml"
 </Infringement>
 
 --1448817299.B37F2926457.1162--
-

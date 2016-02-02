@@ -12,7 +12,7 @@ Content-Type: multipart/mixed; boundary="_----------=_144423504429199124"
 MIME-Version: 1.0
 Date: Wed, 7 Oct 2015 16:24:04 UT
 From: Netcraft Takedown Service <takedown-response+0524495@netcraft.com>
-Subject: Issue 0524495: [Abuse204.nl] phishing attack at http://www.attacker.com/modules/3xt/
+Subject: Issue 0524495: [Abuse204.nl] phishing attack at http://www.johndoe.tld/modules/3xt/
 To: abuse@isp.tld
 Message-ID: <84fbbfa36bceaef4e3a0594ff5f4de22@takedown.netcraft.com>
 Auto-Submitted: auto-generated
@@ -43,7 +43,7 @@ Geachte heer, mevrouw,
 
 Recent hebben wij een phishing site op uw netwerk gelokaliseerd:
 
-http://www.attacker.com/modules/3xt/ [10.2.2.15]
+http://www.johndoe.tld/modules/3xt/ [10.2.2.15]
 
 Deze site is gericht tegen victim.com.
 
@@ -68,7 +68,7 @@ Dear Sir or Madam,
 
 We have discovered a phishing attack located on your network:
 
-http://www.attacker.com/modules/3xt/ [10.2.2.15]
+http://www.johndoe.tld/modules/3xt/ [10.2.2.15]
 
 This attack targets victim.com.
 
@@ -98,17 +98,15 @@ Content-Type: text/plain; charset=utf-8; name="report.txt"; name="report.txt"
 Attachment: none
 Category: fraud
 Date: 2015-10-07T16:18:18+00:00
-Domain: attacker.com
+Domain: johndoe.tld
 Port: 80
 Report-ID: takedown-response+0524495@netcraft.com
 Report-Type: phishing
 Reported-From: takedown@netcraft.com
 Schema-URL: http://www.x-arf.org/schema/fraud_0.1.4.json
 Service: http
-Source: http://www.attacker.com/modules/3xt/492fa6b3ede550428e9760cdefb33582/
+Source: http://www.johndoe.tld/modules/3xt/492fa6b3ede550428e9760cdefb33582/
 Source-Type: uri
 User-Agent: Netcraft Takedown
 
 --_----------=_144423504429199124--
-
-

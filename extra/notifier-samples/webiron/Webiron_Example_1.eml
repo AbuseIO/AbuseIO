@@ -33,7 +33,7 @@ Content-Type: multipart/mixed; boundary="===============5041964308446317290=="
 MIME-Version: 1.0
 From: Webiron Abuse Team
  <removes_abuse-AT-domain.tld@abuse-reporting.webiron.com>
-Subject: Batched Abuse Report - Web and network attacks from IP 172.16.31.20
+Subject: Batched Abuse Report - Web and network attacks from IP 172.16.10.13
 Date: Fri, 15 May 2015 17:03:13 -0700
 To: Abuse Department <abuse@domain.tld>
 Disposition-Notification-To: opened_abuse-AT-domain.tld@abuse-reporting.webiron.com
@@ -59,7 +59,7 @@ Hello!
 --- WE DO NOT RESPOND TO REPORT REPLIES - Please read the entire e-mail ---
 
 
-You are receiving this e-mail in regard to abuse issues for the host at IP 172.16.31.20.
+You are receiving this e-mail in regard to abuse issues for the host at IP 172.16.10.13.
 
 
 Webiron is a security service and this e-mail is being sent on behalf of our customers. We do not control how our customers configure the protection and as a result do not control how blocks and bans are generated.
@@ -93,7 +93,7 @@ For further details on WARB see: https://www.webiron.com/warb.html
 
 Unwanted and or Abusive Web Requests:
 
-Offending IP:  172.16.31.20
+Offending IP:  172.16.10.13
 
        - Issue: Client software detected as known botware. Blocks of this nature require blocked automation to be distributed among serveral source hosts (IE: botnets).
 
@@ -141,7 +141,7 @@ Hello!<br />
 
 <br />
 
-You are receiving this e-mail in regards to abuse issues for the host at IP 172.16.31.20. <br />
+You are receiving this e-mail in regards to abuse issues for the host at IP 172.16.10.13. <br />
 
 <br />
 
@@ -183,7 +183,7 @@ For further details on WARB see: <a href="https://www.webiron.com/warb.html">WAR
 
 Unwanted and or Abusive Web Requests:<br />
 
-Offending IP:  172.16.31.20<br />
+Offending IP:  172.16.10.13<br />
 
        - Issue: Client software detected as known botware. Blocks of this nature require blocked automation to be distributed among serveral source hosts (IE: botnets).<br />
 

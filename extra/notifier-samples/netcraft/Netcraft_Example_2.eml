@@ -51,7 +51,7 @@ We have identified a site on your network that has been compromised, such=
 
 http://www.domain6.tld/guestbook.html
 http://www.domain6.tld/contact.html
-[2/25] [fd09:f127:e098:e750::1]
+[2/25] [fdf1:cb9d:f59e:19b0:0:0:0:1]
 
 For more information please see https://incident.netcraft.com/55a23f3cda/
 
@@ -90,7 +90,7 @@ Report-ID: takedown-response+0317484@netcraft.com
 Report-Type: malware-attack
 Reported-From: takedown@netcraft.com
 Schema-URL: http://www.x-arf.org/schema/abuse_malware-attack_0.1.4.json
-Source: fd09:f127:e098:e750::1
+Source: fdf1:cb9d:f59e:19b0:0:0:0:1
 Source-Type: ipv6
 User-Agent: Netcraft Takedown
 

@@ -13,7 +13,7 @@ Content-Type: multipart/mixed; boundary="_----------=_1445858907295041"
 MIME-Version: 1.0
 Date: Mon, 26 Oct 2015 11:28:27 UTz
 From: Netcraft Takedown Service <takedown-response+0536145@netcraft.com>
-Subject: Issue 0536145: [Abuse204.nl] phishing attack at http://uk.example.com/~newhtvzr/files/update/files/others/ii.php?rand=13InboxLightaspxn.1774256418&fid.4.1252899642&fid=1&fav.1&rand.13InboxLight.aspxn.1774256418&fid.1252899642&fid.1&fav.1&username=&username1=&domain=&.rand=13InboxLight.aspx?n=1774256
+Subject: Issue 0536145: [Abuse204.nl] phishing attack at http://uk.john-doe.tld/~newhtvzr/files/update/files/others/ii.php?rand=13InboxLightaspxn.1774256418&fid.4.1252899642&fid=1&fav.1&rand.13InboxLight.aspxn.1774256418&fid.1252899642&fid.1&fav.1&username=&username1=&domain=&.rand=13InboxLight.aspx?n=1774256
 To: <abuse@isp.tld>
 Message-ID: <9ef20ae804c70930bf4cec79b8124aa0@takedown.netcraft.com>
 Auto-Submitted: auto-generated
@@ -95,14 +95,14 @@ Content-Type: text/plain; charset=utf-8; name="report.txt"; name="report.txt"
 Attachment: none
 Category: fraud
 Date: 2015-10-26T11:27:58+00:00
-Domain: example.com
+Domain: john-doe.tld
 Port: 80
 Report-ID: takedown-response+0536145@netcraft.com
 Report-Type: phishing
 Reported-From: takedown@netcraft.com
 Schema-URL: http://www.x-arf.org/schema/fraud_0.1.4.json
 Service: http
-Source: http://www.example.com/~newhtvzr/files/update/files/others/ii.php?rand=13InboxLightaspxn.1774256418&fid.4.1252899642&fid=1&fav.1&rand.13InboxLight.aspxn.1774256418&fid.1252899642&fid.1&fav.1&username=&username1=&domain=&.rand=13InboxLight.aspx?n=1774256
+Source: http://www.john-doe.tld/~newhtvzr/files/update/files/others/ii.php?rand=13InboxLightaspxn.1774256418&fid.4.1252899642&fid=1&fav.1&rand.13InboxLight.aspxn.1774256418&fid.1252899642&fid.1&fav.1&username=&username1=&domain=&.rand=13InboxLight.aspx?n=1774256
 Source-Type: uri
 User-Agent: Netcraft Takedown
 

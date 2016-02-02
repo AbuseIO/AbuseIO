@@ -1,5 +1,5 @@
 Return-Path: <monitor-bounce@projecthoneypot.org>
-Received: from www.projecthoneypot.org (www.projecthoneypot.org [1.1.1.1])
+Received: from www.projecthoneypot.org (www.projecthoneypot.org [10.0.2.1])
     by mail.isp.local (8.14.4/8.14.4/Debian-2ubuntu2.1) with ESMTP id t946jDgZ017166
     for <projecthoneypot@abuseio.isp.local>; Sun, 4 Oct 2015 08:45:15 +0200
 Received: by www.projecthoneypot.org (Postfix, from userid 1002)
@@ -44,9 +44,9 @@ Other Potentially Suspicious IPs : 0
 
 IPs Engaged In Harvesting On Your Network:
 
-1.1.1.1
-2.2.2.2
-3.3.3.3
+10.0.2.1
+10.0.2.2
+10.0.2.3
 
 
 IPs Engaged In Email Spamming On Your Network:
@@ -61,8 +61,8 @@ none
 
 IPs Engaged In Comment Spamming On Your Network:
 
-4.4.4.4
-5.5.5.5
+10.0.2.4
+10.0.2.5
 
 
 Other Potentially Suspicious IPs On Your Network:
@@ -88,4 +88,3 @@ Project Honey Pot (http://www.projecthoneypot.org/)
 c/o Unspam Technologies, Inc. (http://www.unspam.com/)
 P.O. Box 57265
 Murray, Utah 84157-0265  USA
-

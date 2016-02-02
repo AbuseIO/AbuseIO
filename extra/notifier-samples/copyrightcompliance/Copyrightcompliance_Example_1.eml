@@ -81,7 +81,7 @@ Evidentiary Information:
 Notice ID: 312-200234534
 Initial Infringement Timestamp: 04 Sep 2015 13:19:53 GMT
 Recent Infringement Timestamp: 04 Sep 2015 13:19:53 GMT
-Infringers IP Address: 176.16.1.2
+Infringers IP Address: 10.0.2.100
 Protocol: BitTorrent
 Infringed Work: Power
 Infringing File Name: Power 2014 S01E02 HDTV x264-KILLERS [eztv]
@@ -110,7 +110,7 @@ Infringer's User Name:
     </Service_Provider>
     <Source>
         <TimeStamp>2015-09-04T13:19:53.000Z</TimeStamp>
-        <IP_Address>176.16.1.2</IP_Address>
+        <IP_Address>10.0.2.100</IP_Address>
         <Port>34890</Port>
         <Type>BitTorrent</Type>
         <Number_Files>1</Number_Files>

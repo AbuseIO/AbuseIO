@@ -18,7 +18,7 @@ Received: from 07: 14:40 +0200 (CEST)
 Received: from dib.webiron.com Fri, 25 Sep 2015 22: 14:39 -0700 (MST)
 MIME-Version: 1.0
 From: Webiron Abuse Team <removes_abuse-AT-domain.tld@abuse-reporting.webiron.com>
-Subject: 172.16.31.21
+Subject: 172.16.10.13
 Date: Fri, 25 Sep 2015 22:14:39 -0700
 To: Abuse Department <abuse@domain.tld>
 Disposition-Notification-To: opened_abuse-AT-domain.tld@abuse-reporting.webiron.com
@@ -34,7 +34,7 @@ Content-Transfer-Encoding: 7bit
 Hello!
 
 
---- Automated our guide on blocking traffic from exit nodes here:  https: //www.webiron.com/supporthome/view-article/32-blocking-traffic-from-https: //www.webiron.com/iplookup/172.16.31.21
+--- Automated our guide on blocking traffic from exit nodes here:  https: //www.webiron.com/supporthome/view-article/32-blocking-traffic-from-https: //www.webiron.com/iplookup/172.16.10.13
 
 
 Please feel https: //www.webiron.com/abuse-soc-issues.html
@@ -45,7 +45,7 @@ Please feel https: //www.webiron.com/abuse-soc-issues.html
 
 and or Abusive Web Requests:
 
-Offending/Source IP:  172.16.31.21
+Offending/Source IP:  172.16.10.13
        - Issue:  Client software hosts (IE:  botnets).
        - Block Type: New Ban
        - Time:  2015-09-25 22:14:33-07:00
@@ -62,11 +62,11 @@ Offending/Source IP:  172.16.31.21
 --D14432240689150374
 Content-Type: text/html; charset="us-ascii"
 
-<a href="https: //www.webiron.com/" border="0"><img src="https: //www.webiron.com/images/misc/172.16.31.21/abuse@domain.tld/href="https: //www.webiron.com/supporthome/view-article/32-blocking-traffhref="https: //www.webiron.com/iplookup/172.16.31.21">lookup</a> href="mailto: support@webiron.com">support@webiron.com</a>, however href="https: //www.webiron.com/abuse-soc-issues.html">Webiron.com</a><br details on WARB see:  <a href="https: //www.webiron.com/warb.html">WARB</a><br />
+<a href="https: //www.webiron.com/" border="0"><img src="https: //www.webiron.com/images/misc/172.16.10.13/abuse@domain.tld/href="https: //www.webiron.com/supporthome/view-article/32-blocking-traffhref="https: //www.webiron.com/iplookup/172.16.10.13">lookup</a> href="mailto: support@webiron.com">support@webiron.com</a>, however href="https: //www.webiron.com/abuse-soc-issues.html">Webiron.com</a><br details on WARB see:  <a href="https: //www.webiron.com/warb.html">WARB</a><br />
 
 <hr Requests: <br />
 
-Offending/Source IP:  172.16.31.21<br />
+Offending/Source IP:  172.16.10.13<br />
        - Issue:  Client software detected (IE:  botnets).<br />
        - Block Type: New Ban<br />
        - Time:  2015-09-25 22:14:33-07:00<br />

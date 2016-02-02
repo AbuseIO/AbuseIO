@@ -46,7 +46,7 @@ Received: from www.c-sirt.org (81-7-10-39.blue.kundencontroller.de [81.7.10.39])
 MIME-Version: 1.0
 X-Mailer: MIME-tools 5.505 (Entity 5.505)
 Subject: [CSIRT#2015092310000001] Malicious content (CYSC.MALWARE.URL.GEN)
- hosted on fd30::1:ff4e:3e:5:3 within your network!
+ hosted on fdf1:cb9d:f59e:19b0:ff3:567:0:33 within your network!
 Date: Wed, 23 Sep 2015 04:04:19 +0200
 Auto-Submitted: auto-generated
 Message-ID: <1442973859.730849.108702605.3773518.8@www.c-sirt.org>
@@ -81,7 +81,7 @@ hreat Detection System:
 ########################################################################
 # begin logs
 
-IP:             fd30::1:ff4e:3e:5:3
+IP:             fdf1:cb9d:f59e:19b0:ff3:567:0:33
 URL:            http://malware.cust.domain.tld/
 Tested on:      2015-09-23 04:04:18 +0200
 Result:         CYSC.MALWARE.URL.GEN
@@ -162,7 +162,7 @@ uri: http://malware.cust.domain.tld/
 asn: AS00000
 country: NL
 domain: malware.cust.domain.tld
-ip: fd30::1:ff4e:3e:5:3
+ip: fdf1:cb9d:f59e:19b0:ff3:567:0:33
 file_sha256: 2771175506e881b00ec5a50b3b49e38aa55d3d15ad1dca3e3bd7e
 first_seen: 2015-09-23 04:04:18 +0200
 signature: CYSC.MALWARE.URL.GEN

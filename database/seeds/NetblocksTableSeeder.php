@@ -60,6 +60,30 @@ class NetblocksTableSeeder extends Seeder
                 'created_at' => new DateTime,
                 'updated_at' => new DateTime,
             ],
+            [
+                'id' => 5,
+                'first_ip' => '10.17.18.0',
+                'last_ip' => '10.17.18.255',
+                'first_ip_int' => ICF::InetPtoi('10.17.18.0'),
+                'last_ip_int' => ICF::InetPtoi('10.17.18.255'),
+                'description' => 'Netblock for ISP1',
+                'contact_id' => 3,
+                'enabled' => 1,
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
+            ],
+            [
+                'id' => 6,
+                'first_ip' => '0.0.0.0',
+                'last_ip' => '255.255.255.255',
+                'first_ip_int' => ICF::InetPtoi('0.0.0.0'),
+                'last_ip_int' => ICF::InetPtoi('255.255.255.255'),
+                'description' => 'Fallback netblock for demo purposes',
+                'contact_id' => 3,
+                'enabled' => 1,
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
+            ],
         ];
 
         DB::table('netblocks')->insert($netblocks);

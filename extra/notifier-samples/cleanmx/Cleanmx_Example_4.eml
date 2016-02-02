@@ -1,6 +1,6 @@
 Return-Path: <abuse@clean-mx.de>
 Delivered-To: abuseio@domain.tld
-Received: from amavisd-new (mailscanner [fd30::1:ff4e:3e:8:1])
+Received: from amavisd-new (mailscanner [fdf1:cb9d:f59e:19b0:45ff:0:0:1])
         by server (Postfix) with ESMTP id 24A0E3E0E10
         for <abuseio@domain.tld>; Tue, 15 Sep 2015 02:16:33 +0200 (CEST)
 X-Spam-Flag: NO
@@ -16,7 +16,7 @@ Authentication-Results: mailscanner (amavisd-new);
         domainkeys=pass (1024-bit key) header.from=abuse@clean-mx.de
         header.d=clean-mx.de; dkim=pass (1024-bit key) header.d=clean-mx.de
 Received: from server ([fd30::1:ff4e:3e:8:2])
-        by amavisd-new (mailscanner [fd30::1:ff4e:3e:8:1]) (amavisd-new, port 10024)
+        by amavisd-new (mailscanner [fdf1:cb9d:f59e:19b0:45ff:0:0:1]) (amavisd-new, port 10024)
         with ESMTP for <abuseio@domain.tld>;
         Tue, 15 Sep 2015 02:16:32 +0200 (CEST)
 Received: from relayn.net4sec.com (relay.domain.tld [fd30::1:ff4e:3e:8:3])
@@ -41,7 +41,7 @@ Received: from dbserv (unknown [fd30::1:ff4e:3e:8:4])
         for <abuseio@domain.tld>; Tue, 15 Sep 2015 00:16:30 +0000 (UTC)
 From: abuse@clean-mx.de
 to: abuseio@domain.tld
-Subject: [clean-mx-viruses-81328588](fd30::1:ff4e:3e:8:1)-->(abuseio@domain.tld) viruses sites (1  so far) within your network, please close them!  status: As of 2015-09-15 02:16:17 CEST
+Subject: [clean-mx-viruses-81328588](fdf1:cb9d:f59e:19b0:45ff:0:0:1)-->(abuseio@domain.tld) viruses sites (1  so far) within your network, please close them!  status: As of 2015-09-15 02:16:17 CEST
 MIME-Version: 1.0
 X-Mailer: clean mx secure mailer
 X-Virus-Scanned: by net4sec UG at clean-mx.de
@@ -73,7 +73,7 @@ Notice: We do NOT urge you to shutdown your customer, but to inform him about a 
 
 status: As of 2015-09-15 02:16:17 CEST
 
-Please preserve on any reply our Subject: [clean-mx-viruses-81328588](fd30::1:ff4e:3e:8:1)-->(abuseio@domain.tld) viruses sites (1  so far) within your network, please close them!  status: As of 2015-09-15 02:16:17 CEST
+Please preserve on any reply our Subject: [clean-mx-viruses-81328588](fdf1:cb9d:f59e:19b0:45ff:0:0:1)-->(abuseio@domain.tld) viruses sites (1  so far) within your network, please close them!  status: As of 2015-09-15 02:16:17 CEST
 
 
 http://support.clean-mx.de/clean-mx/viruses.php?email=abuseio@domain.tld&response=alive
@@ -105,7 +105,7 @@ other responsible admins, or similar agencies.
 
 |date                          |id     |virusname     |ip            |domain         |Url|
 +-----------------------------------------------------------------------------------------------
-|2015-09-14 07:49:54 CEST    |81328588      |JS/iFrame.cqq |fd30::1:ff4e:3e:8:1 |victim.tld        |http://8f2e67c462.victim.tld/
+|2015-09-14 07:49:54 CEST    |81328588      |JS/iFrame.cqq |fdf1:cb9d:f59e:19b0:45ff:0:0:1 |victim.tld        |http://8f2e67c462.victim.tld/
 +-----------------------------------------------------------------------------------------------
 
 

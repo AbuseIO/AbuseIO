@@ -38,12 +38,12 @@ X-Arf:  yes
 
 --Abuse-9b0db457995512c8ddeba310a4697d80
 MIME-Version:  1.0
-IP:  fd30::1:ff4e:3e:9:137 has attacked one of our server on the service:
+IP:  fdf1:cb9d:f59e:19b0:45ff:0:0:1 has attacked one of our server on the service:
 "postfix"  on Time: Sun, 07 Jun 2015 21: 09:11 +0200
 The IP was automatically blocked for more
 real-time data for this day available at:
 
-http: //support.clean-mx.de/clean-mx/publog?ip=fd30::1:ff4e:3e:9:20
+http: //support.clean-mx.de/clean-mx/publog?ip=fdf1:cb9d:f59e:19b0:45ff:0:0:1
 
 
 http: //www.x-arf.org/specification.html
@@ -67,7 +67,7 @@ attacked server: victim.domain.tld
 envelopesender: someone@somewhere.tld
 enveloperecpient:  someone@else.tld
 Helo:  vps01.victim.tld
-source-ip: fd30::1:ff4e:3e:9:20
+source-ip: fdf1:cb9d:f59e:19b0:45ff:0:0:1
 protocol: ESMTP
 instance:  predata05.706.557496d7.b6675.0
 size: 2905
@@ -89,7 +89,7 @@ Version: 0.1
 User-Agent: V2.1.8(09.10.2013) anti-scam-bot clean-mx.de
 Date:  Sun, 07 Jun 2015 21:09:11 +0200
 Source-Type:  ip-address
-Source: fd30::1:ff4e:3e:9:20
+Source: fdf1:cb9d:f59e:19b0:45ff:0:0:1
 Port: 25
 Report-ID:  91942290@postfix.clean-mx.de
 Schema-URL: http: //support.clean-mx.de/schema/xarf.json
@@ -104,7 +104,7 @@ attacked server: victim.domain.tld
 envelopesender: someone@somewhere.tld
 enveloperecpient:  someone@else.tld
 Helo: vps01.victim.tld
-source-ip: fd30::1:ff4e:3e:9:20
+source-ip: fdf1:cb9d:f59e:19b0:45ff:0:0:1
 protocol: ESMTP
 instance:  predata05.706.557496d7.b6675.0
 size: 2905

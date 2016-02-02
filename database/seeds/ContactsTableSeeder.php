@@ -25,7 +25,7 @@ class ContactsTableSeeder extends Seeder
                 'id'            => 2,
                 'reference'     => 'CUST1',
                 'name'          => 'Customer 1',
-                'email'         => 'cert@local.lan',
+                'email'         => 'cust1@local.lan',
                 'api_host'      => null,
                 'enabled'       => 1,
                 'created_at'    => new DateTime,

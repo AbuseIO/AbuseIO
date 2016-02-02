@@ -45,7 +45,7 @@ Content-Type: text/plain; charset="UTF-8"
 
 Door middel van deze e-mail willen u op de hoogte brengen van een phishingaanval:
 
-http://testdomain.nl/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogins/
+http://john-doe.tld/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogins/
 
 U bent de upstream provider voor de frauderende website, geregistreerd onder IP 10.1.17.34.
 
@@ -81,7 +81,7 @@ This mail can be parsed with x-arf tools. Visit http://www.x-arf.org/ for more i
 -------------------
 This e-mail is to notify you of a phishing attack:
 
-http://testdomain.nl/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogins/
+http://john-doe.tld/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogins/
 
 You are the immediate upstream provider for this website, located at IP address 10.1.17.34.
 
@@ -124,14 +124,14 @@ Content-Type: text/plain; charset=utf-8; name="report.txt"; name="report.txt"
 Attachment: none
 Category: fraud
 Date: 2015-10-12T06:40:56+00:00
-Domain: testdomain.nl
+Domain: john-doe.tld
 Port: 80
 Report-ID: takedown-response+0527363@netcraft.com
 Report-Type: phishing
 Reported-From: takedown@netcraft.com
 Schema-URL: http://www.x-arf.org/schema/fraud_0.1.4.json
 Service: http
-Source: http://testdomain.nl/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogin2/
+Source: http://john-doe.tld/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogin2/
 Source-Type: uri
 User-Agent: Netcraft Takedown
 

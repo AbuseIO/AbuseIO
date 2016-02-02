@@ -47,7 +47,7 @@ Geachte heer, mevrouw,
 
 Recent hebben wij een phishing site op uw netwerk gelokaliseerd:
 
-http://testdomain.nl/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogins/ [10.1.17.34]
+http://customer1.tld/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogins/ [10.0.2.11]
 
 Deze site is gericht tegen Apple.
 
@@ -72,7 +72,7 @@ Dear Sir or Madam,
 
 We have discovered a phishing attack located on your network:
 
-http://testdomain.nl/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogins/ [10.1.17.34]
+http://customer1.tld/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogins/ [10.0.2.11]
 
 This attack targets Apple.
 
@@ -102,14 +102,14 @@ Content-Type: text/plain; charset=utf-8; name="report.txt"; name="report.txt"
 Attachment: none
 Category: fraud
 Date: 2015-10-12T06:40:56+00:00
-Domain: testdomain.nl
+Domain: customer1.tld
 Port: 80
 Report-ID: takedown-response+0527363@netcraft.com
 Report-Type: phishing
 Reported-From: takedown@netcraft.com
 Schema-URL: http://www.x-arf.org/schema/fraud_0.1.4.json
 Service: http
-Source: http://testdomain.nl/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogin2/
+Source: http://customer1.tld/ints.cancellation.form.your.pc.is.now.connected/to.ituneserver.with.ssl2active.applecustomers.webformlogin2/
 Source-Type: uri
 User-Agent: Netcraft Takedown
 

@@ -6,12 +6,12 @@ To: abuse@isp.tld
 
 <notification_message asn="64512" date="2015-01-01">
  <list type="0">
-  <url_info url="http://nacions.com/" ip="100.61.25.125" />
-  <url_info url="http://nacions.com/wordpress/" ip="100.61.25.125" />
-  <url_info url="http://nacions.com/gallery2/" ip="100.61.25.125" />
+  <url_info url="http://nacions.com/" ip="10.0.2.23" />
+  <url_info url="http://nacions.com/wordpress/" ip="10.0.2.23" />
+  <url_info url="http://nacions.com/gallery2/" ip="10.0.2.23" />
  </list>
  <list type="1">
-  <url_info url="http://100.61.24.41:2222/CMD_FILE_MANAGER/domains/derada.com/public_html/wp-content/themes/econature/framework/class" />
-  <url_info url="http://100.61.24.44:2222/CMD_FILE_MANAGER/domains/zacater.com/public_html/wp-content/plugins/flexicache/_data" />
+  <url_info url="http://10.0.2.26:2222/CMD_FILE_MANAGER/domains/derada.com/public_html/wp-content/themes/econature/framework/class" />
+  <url_info url="http://10.0.2.26:2222/CMD_FILE_MANAGER/domains/zacater.com/public_html/wp-content/plugins/flexicache/_data" />
  </list>
 </notification_message>

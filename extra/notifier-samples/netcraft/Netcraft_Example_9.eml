@@ -12,7 +12,7 @@ Content-Type: multipart/mixed; boundary="_----------=_1443809825170946033"
 MIME-Version: 1.0
 Date: Fri, 2 Oct 2015 18:17:05 UT
 From: Netcraft Takedown Service <takedown-response+0521829@netcraft.com>
-Subject: Issue 0521829: [Abuse204.nl] phishing attack at http://www.attacker.com/w/www.victim.co.uk/index.php
+Subject: Issue 0521829: [Abuse204.nl] phishing attack at http://www.johndoe.tld/w/www.victim.co.uk/index.php
 To: abuse@isp.tld
 Message-ID: <bc11f14bc6b1cfde334eff7fdb13ee94@takedown.netcraft.com>
 Auto-Submitted: auto-generated
@@ -43,7 +43,7 @@ Geachte heer, mevrouw,
 
 Recent hebben wij een phishing site op uw netwerk gelokaliseerd:
 
-http://www.attacker.com/w/www.victim.co.uk/index.php [10.2.2.15]
+http://www.johndoe.tld/w/www.victim.co.uk/index.php [10.2.2.15]
 
 Deze site is gericht tegen victim.
 
@@ -68,7 +68,7 @@ Dear Sir or Madam,
 
 We have discovered a phishing attack located on your network:
 
-http://www.attacker.com/w/www.victim.co.uk/index.php [10.2.2.15]
+http://www.johndoe.tld/w/www.victim.co.uk/index.php [10.2.2.15]
 
 This attack targets victim.
 
@@ -98,17 +98,15 @@ Content-Type: text/plain; charset=utf-8; name="report.txt"; name="report.txt"
 Attachment: none
 Category: fraud
 Date: 2015-10-02T18:16:57+00:00
-Domain: attacker.com
+Domain: johndoe.tld
 Port: 80
 Report-ID: takedown-response+0521829@netcraft.com
 Report-Type: phishing
 Reported-From: takedown@netcraft.com
 Schema-URL: http://www.x-arf.org/schema/fraud_0.1.4.json
 Service: http
-Source: http://www.attacker.com/w/www.victim.co.uk/index.php
+Source: http://www.johndoe.tld/w/www.victim.co.uk/index.php
 Source-Type: uri
 User-Agent: Netcraft Takedown
 
 --_----------=_1443809825170946033--
-
-
