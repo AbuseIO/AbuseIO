@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Note;
 
+use AbuseIO\Models\Note;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -10,8 +12,21 @@ use TestCase;
  */
 class ListCommandTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    private $note;
+    private $note1;
+
+    public function initDB()
+    {
+        $this->note = factory(Note::class)->create();
+
+        $this->note1 = factory(Note::class)->create();
+    }
+    
     public function testHeaders()
     {
+        $this->initDB();
         $exitCode = Artisan::call('note:list', []);
 
         $this->assertEquals($exitCode, 0);
@@ -25,6 +40,7 @@ class ListCommandTest extends TestCase
 
     public function testAll()
     {
+        $this->initDB();
         $exitCode = Artisan::call('note:list', []);
 
         $this->assertEquals($exitCode, 0);
@@ -35,21 +51,23 @@ class ListCommandTest extends TestCase
 
     public function testFilter()
     {
+        $this->initDB();
         $exitCode = Artisan::call(
             'note:list',
             [
-                '--filter' => 'Abusedesk',
+                '--filter' => $this->note->submitter,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('Abusedesk', $output);
-        $this->assertNotContains('Domain Contact', $output);
+        $this->assertContains($this->note->submitter, $output);
+        $this->assertNotContains($this->note1->submitter, $output);
     }
 
     public function testNotFoundFilter()
     {
+        $this->initDB();
         $exitCode = Artisan::call(
             'note:list',
             [
