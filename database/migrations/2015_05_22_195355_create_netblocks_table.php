@@ -19,9 +19,9 @@ class CreateNetblocksTable extends Migration
                 $table->increments('id');
                 $table->integer('contact_id')->unsigned();
                 $table->string('first_ip', 45);
-                $table->decimal('first_ip_int', 38, 0);
+                $table->decimal('first_ip_int', 39, 0);
                 $table->string('last_ip', 45);
-                $table->decimal('last_ip_int', 38, 0);
+                $table->decimal('last_ip_int', 39, 0);
                 $table->string('description');
                 $table->boolean('enabled')->unsigned();
                 $table->timestamps();
