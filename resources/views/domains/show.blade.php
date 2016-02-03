@@ -20,7 +20,7 @@
     <dt>{{ trans('misc.contact') }}</dt>
     <dd>{{ $domain->contact->name }} ({{ $domain->contact->reference }})</dd>
 
-    <dt>Status</dt>
+    <dt>{{ trans('misc.status') }}</dt>
     <dd>{{ $domain->enabled ? trans('misc.enabled') : trans('misc.disabled') }}</dd>
 </dl>
 

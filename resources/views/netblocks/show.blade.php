@@ -26,7 +26,7 @@
     <dt>{{ trans('misc.description') }}</dt>
     <dd>{{ $netblock->description }}</dd>
 
-    <dt>Status</dt>
+    <dt>{{ trans('misc.status') }}</dt>
     <dd>{{ $netblock->enabled ? trans('misc.enabled') : trans('misc.disabled') }}</dd>
 </dl>
 

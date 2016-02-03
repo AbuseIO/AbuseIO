@@ -85,4 +85,6 @@ return [
     'inactive'          => 'Inactief',
     'select_one'        => 'Maak een keuze',
     'creator'           => 'Eigenaar',
+    'never'             => 'Nooit',
+    'notification'      => 'Notificatie|Notificaties',
 ];

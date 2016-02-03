@@ -86,4 +86,6 @@ return [
     'inactive'          => 'Inactive',
     'select_one'        => 'Select one',
     'creator'           => 'Owner',
+    'never'             => 'Never',
+    'notification'      => 'Notification|Notifications',
 ];

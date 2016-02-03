@@ -7,7 +7,11 @@ return [
     'headers.detail'    => 'Details voor bewijs #',
 
     // Evidence - Buttons
-    'button.download'  => 'Download',
+    'button.download'   => 'Download',
 
     // Evidence - Miscellaneous
+    'attachment'        => 'Bijlagen',
+    'message'           => 'Bericht',
+    'from'              => 'Van',
+    'subject'           => 'Onderwerp',
 ];

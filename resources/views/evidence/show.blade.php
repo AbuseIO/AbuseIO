@@ -14,12 +14,12 @@
 <dl class="dl-horizontal">
     @foreach (['from', 'subject'] as $header)
         @if(!empty($evidence->data['headers'][$header]))
-            <dt>{{ ucfirst($header) }} :</dt>
+            <dt>{{ trans("evidence.{$header}") }} :</dt>
             <dd>{{ $evidence->data['headers'][$header] }}</dd>
         @endif
     @endforeach
     @if (count($evidence->data['files']) > 0)
-        <dt>Attachments :</dt>
+        <dt>{{ trans('evidence.attachment') }} :</dt>
         <dd>
             <table class="table table-condensed">
             @foreach ($evidence->data['files'] as $attachment)
@@ -34,7 +34,7 @@
             </table>
         </dd>
     @endif
-    <dt>Message :</dt>
+    <dt>{{ trans('evidence.message') }} :</dt>
     <dd><pre>{{ (is_object($evidence->data['message'])) ? print_r($evidence->data['message'], true) : $evidence->data['message'] }}</pre></dd>
 </dl>
 @endif

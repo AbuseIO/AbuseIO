@@ -7,7 +7,11 @@ return [
     'headers.detail'    => 'Detail for evidence #',
 
     // Evidence - Buttons
-    'button.download'  => 'Download',
+    'button.download'   => 'Download',
 
     // Evidence - Miscellaneous
+    'attachment'        => 'Attachments',
+    'message'           => 'Message',
+    'from'              => 'From',
+    'subject'           => 'Subject',
 ];

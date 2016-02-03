@@ -48,7 +48,7 @@
     </div>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#info"><span class="glyphicon glyphicon-file"></span> {{ trans('tickets.information') }}</a></li>
-        <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ trans('tickets.events') }}</a></li>
+        <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ trans('tickets.evidence') }}</a></li>
         <li><a data-toggle="tab" href="#communication"><span class="glyphicon glyphicon-envelope"></span> {{ trans('tickets.communication') }}</a></li>
     </ul>
     <div class="tab-content">
@@ -58,7 +58,7 @@
                 <dd>{{ $ticket->ip }}</dd>
 
                 @if (!empty($ticket->domain))
-                    <dt>Domain name</dt>
+                    <dt>{{ trans('misc.domain') }}</dt>
                     <dd>{{ $ticket->domain }}</dd>
                 @endif
 
@@ -94,19 +94,16 @@
 
                 <dt>{{ trans('tickets.last_notification') }}</dt>
                 @if ($ticket->last_notify_count == 0)
-                <dd>Never</dd>
+                <dd>{{ trans('misc.never') }}</dd>
                 @else
                 <dd>{{ $ticket->last_notified }} (event: {{ $ticket->last_notify_count }})</dd>
                 @endif
 
-                <dt>{{ trans('tickets.total_notifications') }} {{ trans('misc.ip') }}</dt>
+                <dt>{{ trans('misc.ip') }} {{ strtolower(trans_choice('misc.notification', 2)) }}</dt>
                 <dd>{{ $ticket->ip_contact_notified_count }}</dd>
 
-                <dt>{{ trans('tickets.total_notifications') }} {{ trans('misc.domain') }}</dt>
+                <dt>{{ trans('misc.domain') }} {{ strtolower(trans_choice('misc.notification', 2)) }}</dt>
                 <dd>{{ $ticket->domain_contact_notified_count }}</dd>
-
-                <dt>{{ trans('tickets.reply_status') }}</dt>
-                <dd></dd>
 
                 @if ($ticket->ip_contact_reference != 'UNDEF')
                 <dt>{{ trans('tickets.ashlink') }} {{ trans('misc.ip')}}</dt>
@@ -187,8 +184,8 @@
                         <td>
                             <dl class="dl-horizontal">
                             @if (!is_array(json_decode($event->information, true)))
-                                <dt>Parser Error</dt>
-                                <dd>The parser not provider valid event data. Contact the administrator for the evidence related to this event</dd>
+                                <dt>{{ trans('tickets.parser_error') }}</dt>
+                                <dd>{{ trans('tickets.parser_error_msg') }}</dd>
                             @else
                                 @foreach (json_decode($event->information, true) as $l1field => $l1value)
                                     @if (is_array($l1value))
@@ -197,7 +194,7 @@
                                                 @foreach ($l2value as $l3field=>$l3value)
                                                     @if (is_array($l3value))
                                                         <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
-                                                        <dd>This is filtered due to fourth layer nesting</dd>
+                                                        <dd>{{ trans('tickets.fourth_layer_filter') }}</dd>
                                                     @else
                                                         <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
                                                         <dd>{{ htmlentities($l3value) }}</dd>
@@ -245,7 +242,7 @@
                                     <button type="button" class="btn btnFlip btnRead btn-xs btn-{{ ($note->viewed == true) ? 'success' : 'warning' }}" value="{{ $note->id }}">
                                         <span {!! ($note->viewed == true) ? '' : 'class="hidden"' !!} >{{ trans('misc.button.read') }}</span><span {!! ($note->viewed == true) ? 'class="hidden"' : '' !!}>{{ trans('misc.button.unread') }}</span>
                                     </button>
-                                    <button type="button" class="btn btnFlip btnDelete btn-xs btn-danger" value="{{ $note->id }}">Delete</button>
+                                    <button type="button" class="btn btnFlip btnDelete btn-xs btn-danger" value="{{ $note->id }}">{{ trans('misc.button.delete') }}</button>
                                 </div>
 
                                 <span class="pull-right{{ ($note->viewed == true) ? ' text-muted' : '' }}"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
