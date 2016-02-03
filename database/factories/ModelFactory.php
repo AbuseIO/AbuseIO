@@ -83,7 +83,7 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
     if ($runnerCount > 0) {
         $runnerCount ++;
     } else {
-        $runnerCount = 12;
+        $runnerCount = 1;
     }
     // TODO: this filename is one based on the original
     // from the seeding command should be replace with something from
@@ -114,7 +114,7 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
 //});
 
 $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $faker) {
-    $first_ip = long2ip(ip2long($faker->numberBetween(5, 100)));
+    $first_ip = $faker->ipv4;
     $last_ip = long2ip(ip2long($first_ip) + $faker->numberBetween(5, 100));
 
     return [
@@ -132,7 +132,7 @@ $factory->define(AbuseIO\Models\Job::class, function (Faker\Generator $faker) {
 
 $factory->define(AbuseIO\Models\Note::class, function (Faker\Generator $faker) {
     return [
-        'ticket_id' => \AbuseIO\Models\Ticket::all()->first()->id,
+        'ticket_id' => factory(\AbuseIO\Models\Ticket::class)->create()->id,
         'submitter' => $faker->userName,
         'text' => $faker->sentence($faker->numberBetween(5,10)),
         'hidden' => $faker->boolean(),

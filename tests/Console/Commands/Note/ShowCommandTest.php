@@ -3,7 +3,6 @@
 namespace tests\Console\Commands\Note;
 
 use AbuseIO\Models\Note;
-use AbuseIO\Models\Ticket;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
@@ -24,7 +23,6 @@ class ShowCommandTest extends TestCase
 
     public function initDB()
     {
-        factory(Ticket::class)->create();
         $this->noteList = factory(Note::class, 10)->create();
     }
 
