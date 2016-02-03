@@ -60,9 +60,12 @@ $factory->define(AbuseIO\Models\Domain::class, function (Faker\Generator $faker)
     ];
 });
 $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) {
+
+    $evidence = factory(\AbuseIO\Models\Evidence::class)->create();
+    $ticket = factory(\AbuseIO\Models\Ticket::class)->create();
     return [
-        'ticket_id'                 => \AbuseIO\Models\Ticket::all()->first()->id,
-        'evidence_id'               => 1,
+        'ticket_id'                 => $ticket->id, //\AbuseIO\Models\Ticket::all()->first()->id,
+        'evidence_id'               => $evidence->id,
         'source'                    => $faker->name,
         'timestamp'                 => time(),
         'information'               => json_encode(
@@ -80,7 +83,7 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
     if ($runnerCount > 0) {
         $runnerCount ++;
     } else {
-        $runnerCount = 1;
+        $runnerCount = 12;
     }
     // TODO: this filename is one based on the original
     // from the seeding command should be replace with something from
