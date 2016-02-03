@@ -30,7 +30,7 @@ apt-get install curl git mysql-server apache2 apache2-utils postfix supervisor l
 
 
 #### Composer
-Download the latest version of [composer](https://getcomposer.org/) and make it system wise accessible.
+Download the latest version of [composer](https://getcomposer.org/) and make it system wide accessible.
 ```bash
 cd /tmp
 curl -sS https://getcomposer.org/installer | php
