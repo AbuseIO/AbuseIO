@@ -15,7 +15,7 @@
 + MTA (Postfix 2.9.1+, Exim 4.76+)
 + Webserver software (Apache 2.22+ or Nginx 1.1.19+)
 + Database backend (MySQL 5.5+, Postgres 9.1+)
-+ PHP 5.5.9+ (apache module
++ PHP 5.5.9+ (Both CLI as apache module)
 + (__optional__) Local resolving nameserver (Bind, pDNSRecursor) ([more info](#resolving))
 
 
@@ -114,7 +114,9 @@ service rsyslog restart
 be cached and saves a lot of CPU cycles. However if you edit the code in _ANY_ way you will need
 to restart these daemons (or better: stop -> code change -> start) to prevent jobs from failing!
 
-
+> Note: If you get messages on 'hanging' jobs its most likely these supervisor jobs are not running.
+please make sure you see running processes from the configured supervisor jobs before submitting
+a bug report.
 
 #### MTA Delivery
 
