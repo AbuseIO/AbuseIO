@@ -97,7 +97,15 @@ class NetblocksController extends Controller
      */
     public function create()
     {
-        $contacts = Contact::lists('name', 'id');
+        $auth_account = $this->auth_user->account;
+
+        if (!$auth_account->isSystemAccount()) {
+            $contacts = Contact::select('contacts.*')
+                ->where('account_id', $auth_account->id )
+                ->get()->lists('name', 'id');
+        } else {
+            $contacts = Contact::lists('name', 'id');
+        }
 
         return view('netblocks.create')
             ->with('contact_selection', $contacts)
@@ -165,7 +173,7 @@ class NetblocksController extends Controller
         Netblock::create($netblockForm->all());
 
         return Redirect::route('admin.netblocks.index')
-            ->with('message', trans('netblocks.msg.created'));
+            ->with('message', trans('netblocks.msg.added'));
     }
 
     /**
@@ -189,7 +197,15 @@ class NetblocksController extends Controller
      */
     public function edit(Netblock $netblock)
     {
-        $contacts = Contact::lists('name', 'id');
+        $auth_account = $this->auth_user->account;
+
+        if (!$auth_account->isSystemAccount()) {
+            $contacts = Contact::select('contacts.*')
+                ->where('account_id', $auth_account->id )
+                ->get()->lists('name', 'id');
+        } else {
+            $contacts = Contact::lists('name', 'id');
+        }
 
         return view('netblocks.edit')
             ->with('netblock', $netblock)

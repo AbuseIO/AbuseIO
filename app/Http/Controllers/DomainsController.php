@@ -96,7 +96,16 @@ class DomainsController extends Controller
      */
     public function create()
     {
-        $contacts = Contact::lists('name', 'id');
+
+        $auth_account = $this->auth_user->account;
+
+        if (!$auth_account->isSystemAccount()) {
+            $contacts = Contact::select('contacts.*')
+                ->where('account_id', $auth_account->id )
+                ->get()->lists('name', 'id');
+        } else {
+            $contacts = Contact::lists('name', 'id');
+        }
 
         return view('domains.create')
             ->with('contact_selection', $contacts)
@@ -187,7 +196,15 @@ class DomainsController extends Controller
      */
     public function edit(Domain $domain)
     {
-        $contacts = Contact::lists('name', 'id');
+        $auth_account = $this->auth_user->account;
+
+        if (!$auth_account->isSystemAccount()) {
+            $contacts = Contact::select('contacts.*')
+                ->where('account_id', $auth_account->id )
+                ->get()->lists('name', 'id');
+        } else {
+            $contacts = Contact::lists('name', 'id');
+        }
 
         return view('domains.edit')
             ->with('domain', $domain)
