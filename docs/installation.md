@@ -58,7 +58,18 @@ addgroup www-data abuseio
 
 NOTE: You will need to restart apache and postfix in this example to effecticly add these groups to the process!
 
-## checkout git
+## using latest stable version
+
+Download the file from our website, place it into /opt and extract it. This package will include a full 
+installation including all dependencies. 
+
+https://abuse.io/download/
+
+Once done, you can ignore the step of installing the unstable version.
+
+## using latest (unstable) version
+
+Note: Updating/installing packages with composer might require a GIT account and a generated token.
 
 Please note that a composer install is required to install all other required packages and dependancies! Do _NOT_
 run the composer update, unless you are a developer.
@@ -66,8 +77,8 @@ run the composer update, unless you are a developer.
 using Composer:
 ```bash
 cd /opt
-composer create-project abuseio/abuseio
-or composer create-project -s dev abuseio/abuseio if you want latest development release
+composer create-project abuseio/abuseio (installs latest stable release)
+or composer create-project -s dev abuseio/abuseio (if you want latest development release)
 ```
 
 using GIT:
