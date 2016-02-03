@@ -82,11 +82,10 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
     } else {
         $runnerCount = 1;
     }
-
+    // TODO: this filename is one based on the original
+    // from the seeding command should be replace with something from
+    // /storage/mailarchive/$datefolder/$fileuuid.eml
     return [
-        // TODO: this filename is one based on the original
-        // from the seeding command should be replace with something from
-        // /storage/mailarchive/$datefolder/$fileuuid.eml
         'filename' => sprintf('20150906/%d_messageid', $runnerCount),
         'sender' => $faker->name,
         'subject' => $faker->sentence(),
