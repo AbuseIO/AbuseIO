@@ -11,7 +11,7 @@
 <a name="requirements"></a>
 ### 1. System Requirements
 
-+ Linux based distribution
++ 64 Bits Linux based distribution
 + MTA (Postfix 2.9.1+, Exim 4.76+)
 + Webserver software (Apache 2.22+ or Nginx 1.1.19+)
 + Database backend (MySQL 5.5+, Postgres 9.1+)
