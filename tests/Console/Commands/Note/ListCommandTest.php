@@ -18,7 +18,7 @@ class ListCommandTest extends TestCase
 
     /**
      * the list of test fixture to test against
-     * @var Illuminate\Database\Eloquent\Collection
+     * @var \Illuminate\Database\Eloquent\Collection
      */
     public function initDB()
     {

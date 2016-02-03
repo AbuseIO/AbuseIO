@@ -3,6 +3,7 @@
 namespace tests\Console\Commands\Note;
 
 use AbuseIO\Models\Note;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -11,6 +12,24 @@ use TestCase;
  */
 class EditCommandTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    /**
+     * @var \AbuseIO\Models\Note $noteHidden
+     */
+    private $noteHidden;
+
+    /**
+     * @var \AbuseIO\Models\Note $noteViewed
+     */
+    private $noteViewed;
+
+    private function initDB()
+    {
+        $this->noteHidden = factory(Note::class)->create(["hidden" => false]);
+        $this->noteViewed = factory(Note::class)->create(["viewed" => false]);
+    }
+
     /**
     * @expectedException RuntimeException
     * @expectedExceptionMessage Not enough arguments (missing: "id").
@@ -32,43 +51,43 @@ class EditCommandTest extends TestCase
         $this->assertContains('Unable to find note with this criteria', Artisan::output());
     }
 
-//    public function testWithHidden()
-//    {
-//        $this->assertFalse((bool) Note::find(1)->hidden);
-//
-//        $exitCode = Artisan::call(
-//            'note:edit',
-//            [
-//                'id' => '1',
-//                '--hidden' => 'true',
-//            ]
-//        );
-//        $this->assertEquals($exitCode, 0);
-//        $this->assertContains('The note has been updated', Artisan::output());
-//
-//        $this->assertTrue((bool) Note::find(1)->hidden);
-//
-//        $this->seed('NotesTableSeeder');
-//    }
+    public function testWithHidden()
+    {
+        $this->initDB();
 
-//    public function testEnabled()
-//    {
-//        $this->assertFalse((bool) Note::find(1)->viewed);
-//
-//        $exitCode = Artisan::call(
-//            'note:edit',
-//            [
-//                'id' => '1',
-//                '--viewed' => 'true',
-//            ]
-//        );
-//        $this->assertEquals($exitCode, 0);
-//        $this->assertContains('The note has been updated', Artisan::output());
-//        /*
-//         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-//         */
-//        $this->assertTrue((bool) Note::find(1)->viewed);
-//
-//        $this->seed('NotesTableSeeder');
-//    }
+        $this->assertFalse((bool) $this->noteHidden->hidden);
+
+        $exitCode = Artisan::call(
+            'note:edit',
+            [
+                'id' => $this->noteHidden->id,
+                '--hidden' => 'true',
+            ]
+        );
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains('The note has been updated', Artisan::output());
+
+        $this->assertTrue((bool) Note::find($this->noteHidden->id)->hidden);
+    }
+
+    public function testEnabled()
+    {
+        $this->initDB();
+
+        $this->assertFalse((bool) Note::find($this->noteViewed->id)->viewed);
+
+        $exitCode = Artisan::call(
+            'note:edit',
+            [
+                'id' => $this->noteViewed->id,
+                '--viewed' => 'true',
+            ]
+        );
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains('The note has been updated', Artisan::output());
+        /*
+         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
+         */
+        $this->assertTrue((bool) Note::find($this->noteViewed->id)->viewed);
+    }
 }
