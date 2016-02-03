@@ -18,7 +18,6 @@ class ListCommandTest extends TestCase
      * the list of test fixture to test against
      * @var Illuminate\Database\Eloquent\Collection
      */
-
     private $eventList;
 
     private function initDB()

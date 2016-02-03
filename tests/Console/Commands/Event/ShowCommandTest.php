@@ -14,6 +14,10 @@ class ShowCommandTest extends TestCase
 {
     use DatabaseTransactions;
 
+    /**
+     * the list of test fixture to test against
+     * @var Illuminate\Database\Eloquent\Collection
+     */
     private $eventList;
 
     private function initDB()

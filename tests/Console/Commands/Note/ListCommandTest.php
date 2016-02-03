@@ -14,14 +14,15 @@ class ListCommandTest extends TestCase
 {
     use DatabaseTransactions;
 
-    private $note;
-    private $note1;
+    private $noteList;
 
+    /**
+     * the list of test fixture to test against
+     * @var Illuminate\Database\Eloquent\Collection
+     */
     public function initDB()
     {
-        $this->note = factory(Note::class)->create();
-
-        $this->note1 = factory(Note::class)->create();
+        $this->noteList = factory(Note::class, 10)->create();
     }
     
     public function testHeaders()
@@ -45,8 +46,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('Abusedesk', $output);
-        $this->assertContains('Domain Contact', $output);
+        $this->assertContains($this->noteList->get(0)->submitter, $output);
+        $this->assertContains($this->noteList->get(1)->submitter, $output);
     }
 
     public function testFilter()
@@ -55,14 +56,14 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call(
             'note:list',
             [
-                '--filter' => $this->note->submitter,
+                '--filter' => $this->noteList->get(0)->submitter,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains($this->note->submitter, $output);
-        $this->assertNotContains($this->note1->submitter, $output);
+        $this->assertContains($this->noteList->get(0)->submitter, $output);
+        $this->assertNotContains($this->noteList->get(1)->submitter, $output);
     }
 
     public function testNotFoundFilter()
