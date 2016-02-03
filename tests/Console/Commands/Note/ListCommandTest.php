@@ -22,7 +22,7 @@ class ListCommandTest extends TestCase
      */
     public function testinitDB()
     {
-        $this->asertTrue(true);
+        $this->assertTrue(true);
         //$this->noteList = factory(Note::class, 10)->create();
     }
     
