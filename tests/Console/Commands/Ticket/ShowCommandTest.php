@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Ticket;
 
+use AbuseIO\Models\Ticket;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -10,12 +12,27 @@ use TestCase;
  */
 class ShowCommandTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    /**
+     * The list of testing fixtures to test against.
+     *
+     * @var Illuminate\Database\Eloquent\Collection
+     */
+    private $ticketList;
+
+    public function initDB()
+    {
+        $this->ticketList = factory(Ticket::class, 10)->create();
+    }
+
     public function testWithValidIdFilter()
     {
+        $this->initDB();
         $exitCode = Artisan::call(
             'ticket:show',
             [
-                'ticket' => '1',
+                'ticket' => $this->ticketList->get(1)->id,
             ]
         );
         $this->assertEquals($exitCode, 0);
