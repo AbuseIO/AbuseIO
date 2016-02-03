@@ -144,7 +144,7 @@ $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker)
     $domainContact = $contactList->random();
 
     return [
-        'ip' => array_rand([$faker->ipv4, $faker->ipv6]),
+        'ip' => $faker->boolean()? $faker->ipv4: $faker->ipv6,
         'domain' => $faker->domainName,
         'class_id' => array_rand((trans('classifications'))),
         'type_id' => array_rand(config('types.type')),

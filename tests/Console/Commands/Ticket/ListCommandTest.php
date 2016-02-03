@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Ticket;
 
+use AbuseIO\Models\Ticket;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -10,6 +12,20 @@ use TestCase;
  */
 class ListCommandTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    /**
+     * The list of testing fixtures to test against.
+     *
+     * @var Illuminate\Database\Eloquent\Collection
+     */
+    private $ticketList;
+
+    public function initDB()
+    {
+        $this->ticketList = factory(Ticket::class, 10)->create();
+    }
+
     public function testHeaders()
     {
         $exitCode = Artisan::call(
@@ -30,6 +46,8 @@ class ListCommandTest extends TestCase
 
     public function testAll()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call(
             'ticket:list',
             [
@@ -39,27 +57,31 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('customer1.tld', $output);
-        $this->assertContains('10.19.3.1', $output);
+        $this->assertContains($this->ticketList->get(0)->domain, $output);
+        $this->assertContains($this->ticketList->get(0)->ip, $output);
     }
 
     public function testFilter()
     {
+       $this->initDB();
+
         $exitCode = Artisan::call(
             'ticket:list',
             [
-                '--filter' => '1',
+                '--filter' => $this->ticketList->get(0)->id,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('172.16.10.13', $output);
-        $this->assertNotContains('customer1.tld', $output);
+        $this->assertContains($this->ticketList->get(0)->ip, $output);
+        $this->assertNotContains($this->ticketList->get(1)->domain, $output);
     }
 
     public function testNotFoundFilter()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call(
             'ticket:list',
             [
@@ -69,5 +91,22 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains('No ticket found for given filter.', Artisan::output());
+    }
+
+    public function testJson()
+    {
+        $this->initDB();
+
+        $exitCode = Artisan::call(
+            'ticket:list',
+            [
+                '--json' => 'true',
+            ]
+        );
+
+        $this->assertEquals($exitCode, 0);
+
+        json_decode(Artisan::output());
+        $this->assertEquals(json_last_error(), JSON_ERROR_NONE);
     }
 }
