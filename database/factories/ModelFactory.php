@@ -114,14 +114,14 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
 //});
 
 $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $faker) {
-    $first_ip = $faker->ipv4;
-    $last_ip = long2ip(ip2long($first_ip) + rand(1, 100));
+    $first_ip = long2ip(ip2long($faker->numberBetween(5, 100)));
+    $last_ip = long2ip(ip2long($first_ip) + $faker->numberBetween(5, 100));
 
     return [
         'contact_id' => \AbuseIO\Models\Contact::all()->first()->id,
         'first_ip' => $first_ip,
         'last_ip' => $last_ip,
-        'description' => $faker->sentence(rand(6, 24)),
+        'description' => $faker->sentence($faker->numberBetween(3, 5)),
         'enabled' => $faker->boolean(),
     ];
 });
