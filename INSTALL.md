@@ -126,9 +126,7 @@ Simply add the following line to your /etc/aliases file to enable email delivery
 
     notifier: |"/path/to/libexec/mda"
 
-    example:
-
-    notifier: | "php -q /opt/abuseio/libexec/mda"
+For example ``` notifier: | "php -q /opt/abuseio/libexec/mda```
 
 (Do not forget to run the newaliases command to inform your MTA that the aliases file has been updated.)
 
