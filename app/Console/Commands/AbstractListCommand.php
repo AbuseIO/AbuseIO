@@ -102,7 +102,8 @@ abstract class AbstractListCommand extends Command
                 sprintf("No %s found for given filter.", $this->getAsNoun())
             );
         } if ($this->option("json")) {
-            echo $list->toJson();
+            /** the juggling from and to json is a way of ensuring pretty_print */
+            $this->output->write(json_encode(json_decode($list->toJson()), JSON_PRETTY_PRINT));
         } else {
             $this->table(
                 $this->headers,
