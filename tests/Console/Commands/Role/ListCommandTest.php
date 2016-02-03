@@ -10,7 +10,7 @@ use TestCase;
  */
 class ListCommandTest extends TestCase
 {
-    public function testNetBlockListCommand()
+    public function testAll()
     {
         $exitCode = Artisan::call(
             'role:list',
@@ -23,7 +23,7 @@ class ListCommandTest extends TestCase
         $this->assertContains('System Administrator', Artisan::output());
     }
 
-    public function testNetBlockListCommandWithValidFilter()
+    public function testWithValidFilter()
     {
         $exitCode = Artisan::call(
             'role:list',
