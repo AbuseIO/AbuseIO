@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Evidence;
 
+use AbuseIO\Models\Evidence;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -10,8 +12,21 @@ use TestCase;
  */
 class ListCommandTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    /**
+     * @var Illuminate\Database\Eloquent\Collection
+     */
+    private $evidenceList;
+
+    private function initDB()
+    {
+        $this->evidenceList = factory(Evidence::class, 10)->create();;
+    }
+
     public function testHeaders()
     {
+        $this->initDB();
         $exitCode = Artisan::call('evidence:list', []);
 
         $this->assertEquals($exitCode, 0);
@@ -25,31 +40,37 @@ class ListCommandTest extends TestCase
 
     public function testAll()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call('evidence:list', []);
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('Shadowserver scan_mssql-sample Report: 2015-01-01', $output);
-        $this->assertContains('USA.net Abuse Report', $output);
+        $this->assertContains($this->evidenceList->get(0)->subject, $output);
+        $this->assertContains($this->evidenceList->get(1)->subject, $output);
     }
 
     public function testFilter()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call(
             'evidence:list',
             [
-                '--filter' => 'Shadowserver',
+                '--filter' => $this->evidenceList->get(3)->sender,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('Shadowserver scan_nat_pmp Report: 2015-01-01', $output);
-        $this->assertNotContains('Notice of Unauthorized Use of Starz Entertainment, LLC ("Starz") Property', $output);
+        $this->assertContains($this->evidenceList->get(3)->subject, $output);
+        $this->assertNotContains($this->evidenceList->get(0)->subject, $output);
     }
 
     public function testNotFoundFilter()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call(
             'evidence:list',
             [
