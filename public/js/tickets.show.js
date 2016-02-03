@@ -24,6 +24,7 @@ $(document).ready(function() {
             data: {
                 'action': action,
                 'note': this.value,
+                'ticket_id': $('input[name=ticket_id]').val(),
                 '_token': $('input[name=_token]').val()
             },
             context: this,
