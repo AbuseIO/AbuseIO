@@ -68,6 +68,7 @@ class ShowCommandTest extends TestCase
 
     public function testWithInvalidFilter()
     {
+        $this->initDB();
         $exitCode = Artisan::call(
             'ticket:show',
             [
