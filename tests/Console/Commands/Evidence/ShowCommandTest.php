@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Evidence;
 
+use AbuseIO\Models\Evidence;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -10,12 +12,28 @@ use TestCase;
  */
 class ShowCommandTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    /**
+     * The list of testing fixtures to test against.
+     *
+     * @var Illuminate\Database\Eloquent\Collection
+     */
+    private $evidenceList;
+
+    private function initDB()
+    {
+        $this->evidenceList = factory(Evidence::class, 10)->create();
+    }
+
     public function testWithValidIdFilter()
     {
+        $this->initDB();
+
         $exitCode = Artisan::call(
             'evidence:show',
             [
-                'evidence' => '1',
+                'evidence' => $this->evidenceList->get(0)->id,
             ]
         );
         $this->assertEquals($exitCode, 0);
@@ -27,6 +45,7 @@ class ShowCommandTest extends TestCase
 
     public function testWithInvalidFilter()
     {
+        $this->initDB();
         $exitCode = Artisan::call(
             'evidence:show',
             [

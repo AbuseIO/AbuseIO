@@ -74,6 +74,26 @@ $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) 
     ];
 });
 
+$factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $faker) {
+    global $runnerCount;
+
+    if ($runnerCount > 0) {
+        $runnerCount ++;
+    } else {
+        $runnerCount = 1;
+    }
+
+    return [
+        // TODO: this filename is one based on the original
+        // from the seeding command should be replace with something from
+        // /storage/mailarchive/$datefolder/$fileuuid.eml
+        'filename' => sprintf('20150906/%d_messageid', $runnerCount),
+        'sender' => $faker->name,
+        'subject' => $faker->sentence(),
+    ];
+});
+
+
 /**
  * TODO: figure out how to use Incident model factory and what values are relevant.
  */
