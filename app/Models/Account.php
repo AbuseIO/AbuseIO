@@ -5,6 +5,7 @@ namespace AbuseIO\Models;
 use AbuseIO\Models\Brand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Log;
 
 /**
@@ -154,6 +155,18 @@ class Account extends Model
     public function setActiveBrandAttribute(Brand $brand)
     {
         $this->brand = $brand;
+    }
+
+    /**
+     * Mutator for systemaccount
+     */
+
+    public function setSystemaccountAttribute()
+    {
+        //Account::where('systemaccount', 1)->get()->update(['systemaccount' => 0]);
+
+        //$this->update(['systemaccount' => 1]);
+
     }
 
     /*

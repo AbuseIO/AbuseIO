@@ -18,7 +18,8 @@ class EditCommand extends AbstractEditCommand
             new inputArgument('id', inputArgument::REQUIRED, 'Account id to edit'),
             new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'account name'),
             new InputOption('brand_id', null, InputOption::VALUE_OPTIONAL,  'brand id'),
-            new InputOption('disabled', null, InputOption::VALUE_OPTIONAL, 'true|false, Set the account to be enabled'),
+            new InputOption('disabled', null, InputOption::VALUE_OPTIONAL, 'true|false, Set the account to be enabled.'),
+            new InputOption('systemaccount', null, InputOption::VALUE_OPTIONAL, 'true|false, Set default system account.')
         ]);
     }
 
@@ -43,6 +44,8 @@ class EditCommand extends AbstractEditCommand
             }
         }
 
+
+        $this->setSystemAccount($model);
         $this->updateFieldWithOption($model, 'brand_id');
         $this->updateBooleanFieldWithOption($model, 'disabled');
 
@@ -52,5 +55,13 @@ class EditCommand extends AbstractEditCommand
     protected function getValidator($model)
     {
         return Validator::make($model->toArray(), Account::updateRules($model));
+    }
+
+    private function setSystemAccount($model)
+    {
+        if ($this->option("systemaccount") == true) {
+            /** @var Account $model */
+            $model->systemaccount = true;
+        }
     }
 }

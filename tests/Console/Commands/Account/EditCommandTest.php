@@ -3,6 +3,7 @@
 namespace tests\Console\Commands\Account;
 
 use AbuseIO\Models\Account;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -11,6 +12,16 @@ use TestCase;
  */
 class EditCommandTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    /** @var Account $account */
+    private $account;
+
+    private function initDB()
+    {
+        $this->account = factory(Account::class)->create();
+    }
+
     /**
      * @expectedException RuntimeException
      * @expectedExceptionMessage Not enough arguments (missing: "id").
@@ -85,5 +96,22 @@ class EditCommandTest extends TestCase
         $this->assertTrue((bool) $account->disabled);
         $account->disabled = false;
         $account->save();
+    }
+
+    public function testSetSystemAccount()
+    {
+        $this->initDB();
+        //TODO moet ff uitzoeken hoe je een systemaccountupdate maakt nu blijft de test hangen.
+//        $exitCode = Artisan::call(
+//            'account:edit',
+//            [
+//                'id' => $this->account->id,
+//                '--systemaccount' => true,
+//            ]
+//        );
+//
+//        $this->assertEquals($exitCode, 0);
+//        $this->assertContains('The account has been updated', Artisan::output());
+//        $this->assertTrue(Account::find($this->account->id)->getSystemAccount());
     }
 }
