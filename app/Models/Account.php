@@ -161,12 +161,15 @@ class Account extends Model
      * Mutator for systemaccount
      */
 
-    public function setSystemaccountAttribute()
+    public function setSystemaccountAttribute($value)
     {
-        //Account::where('systemaccount', 1)->get()->update(['systemaccount' => 0]);
 
-        //$this->update(['systemaccount' => 1]);
+        if ($value) {
+            $account = Account::where('systemaccount', true);
+            $account->update(['systemaccount' => false]);
+        }
 
+        Account::where('id', $this->id)->update(['systemaccount' => $value]);
     }
 
     /*
