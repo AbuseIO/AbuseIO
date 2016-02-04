@@ -60,17 +60,14 @@ class ShowCommand extends AbstractShowCommand2
         ];
     }
 
+    /**
+     * {@inherit docs}
+     */
     protected function transformObjectToTableBody($model)
     {
         $result = parent::transformObjectToTableBody($model);
-
         $result[] = ["Evidences", $model->evidence->filename];
-//        /** @var \AbuseIO\Models\Evidence $evidence */
-//        dd($model);
-//
-//        foreach ($model->evidences as $evidence) {
-//            $result[] = [$evidence->id, $evidence->filename];
-//        }
+
         return $result;
     }
 }
