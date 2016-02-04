@@ -75,4 +75,20 @@ class ShowCommand extends AbstractShowCommand2
                 'Use the id for a ticket to show it.')
         ];
     }
+
+    /**
+     * {@inherit docs}
+     */
+    protected function transformObjectToTableBody($model)
+    {
+        $result = parent::transformObjectToTableBody($model);
+        $result[] = ["[Events ID]", "[Events Source]"];
+        foreach($model->events as $event) {
+            $result[] = [$event->id, $event->source];
+        }
+
+        return $result;
+    }
+
+
 }
