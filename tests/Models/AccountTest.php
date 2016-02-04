@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AccountTest extends \TestCase
 {
-    //use DatabaseTransactions;
+    use DatabaseTransactions;
 
     public function testModelFactory()
     {
@@ -24,10 +24,11 @@ class AccountTest extends \TestCase
         );
     }
 
-    public function testMakeMeSystemAccount()
+
+    public function testSetSystemAccount()
     {
         $account = factory(Account::class)->create();
-        $account->makeMeSystemAccount();
+        $account->systemaccount = true;
         $this->assertTrue((bool)Account::find($account->id)->systemaccount);
     }
 }

@@ -15,7 +15,7 @@ class ListCommandTest extends TestCase
     use DatabaseTransactions;
 
     /**
-     * @var Illuminate\Database\Eloquent\Collection
+     * @var \Illuminate\Database\Eloquent\Collection
      */
     private $evidenceList;
 
