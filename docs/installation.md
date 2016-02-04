@@ -11,9 +11,9 @@
 <a name="requirements"></a>
 ### 1. System Requirements
 
-+ 64 Bits Linux based distribution
++ 64-bit Linux based distribution
 + MTA (Postfix 2.9.1+, Exim 4.76+)
-+ Webserver software (Apache 2.22+ or Nginx 1.1.19+)
++ Web server software (Apache 2.22+ or Nginx 1.1.19+)
 + Database backend (MySQL 5.5+, Postgres 9.1+)
 + PHP 5.5.9+ (Both CLI as apache module)
 + (__optional__) Local resolving nameserver (Bind, pDNSRecursor) ([more info](#resolving))
@@ -30,7 +30,7 @@ apt-get install curl git mysql-server apache2 apache2-utils postfix supervisor l
 
 
 #### Composer
-Download the latest version of [composer](https://getcomposer.org/) and make it system wide accessible.
+Download the latest version of [composer](https://getcomposer.org/) and make it accessible system-wide.
 ```bash
 cd /tmp
 curl -sS https://getcomposer.org/installer | php
@@ -43,7 +43,7 @@ This is a pecl module for php that has to be downloaded and compiled before you 
 ```bash
 pecl install mailparse-2.1.6
 ```
-On some systems, the above command fails. If so, try adding -Z after 'install'.
+On some systems, the above command fails. If it does, try adding -Z after 'install'.
 
 ```bash
 echo "extension=mailparse.so" > /etc/php5/mods-available/mailparse.ini
@@ -69,7 +69,7 @@ addgroup www-data abuseio
 
 
 #### AbuseIO
-You can install AbuseIO in a few ways. You can download a tarball or install with composer. Either way is fine.
+There are a few ways you can install AbuseIO: you can download a tarball or install with composer. Either way is fine.
 
 > Keep note of the following:  
 > - Updating/Installing packages with composer might require a GitHub account and a generated token.
@@ -89,7 +89,7 @@ composer create-project abuseio/abuseio
 ```
 
 
-#### Permission
+#### Permissions
 Some parts of the installation had to be done as root and the application will run as user 'abuseio', so we need to set some permissions.
 
 ```bash
@@ -115,7 +115,7 @@ be cached and saves a lot of CPU cycles. However if you edit the code in _ANY_ w
 to restart these daemons (or better: stop -> code change -> start) to prevent jobs from failing!
 
 > Note: If you get messages on 'hanging' jobs its most likely these supervisor jobs are not running.
-please make sure you see running processes from the configured supervisor jobs before submitting
+Please make sure you see running processes from the configured supervisor jobs before submitting
 a bug report.
 
 #### MTA Delivery
@@ -126,7 +126,7 @@ Configure delivery using transport maps
 > make sure 'isp.local' is in your local domains
 
 
-Create a file /etc/postfix/transport:
+Create file /etc/postfix/transport:
 ```bash
 echo "notifier@isp.local notifier:" >> /etc/postfix/transport
 postmap /etc/postfix/transport
@@ -168,7 +168,7 @@ a2enmod rewrite
 a2enmod headers
 ```
 
-Create a file /etc/apache2/sites-available/abuseio.conf containing:
+Create file /etc/apache2/sites-available/abuseio.conf containing:
 ```
 <VirtualHost _default_:80>
   ServerAdmin webmaster@localhost
@@ -196,10 +196,10 @@ service apache2 reload
 ```
 
 ##### Nginx
-This is an example configuration for AbuseIO via Nginx with php fpm. Change it to suit your own setup.  
-Make sure the php-fpm processes run as user abuseio.
+This is an example configuration for AbuseIO via Nginx with PHP-fpm. Change it to suit your own setup.  
+Make sure the PHP-fpm processes run as user abuseio.
 
-Create a file /etc/nginx/sites-available/abuseio containing:
+Create file /etc/nginx/sites-available/abuseio containing:
 ```
 server {
   listen 80;
@@ -228,7 +228,7 @@ service nginx reload
 #### Database setup
 
 ##### MySQL
-Create a database and a user with permissions. This example will use the local database server.
+Create a database and a user with permissions to the database. This example will use the local database server.
 
 ```bash
 mysqladmin -p create abuseio
@@ -240,11 +240,11 @@ mysql -p -Be "GRANT ALL on abuseio.* to 'abuseio'@'localhost'"
 
 <a name="install_abuseio"></a>
 ### Installation (as abuseio)
-All these things should be done as user 'abuseio', from within the folder /opt/abuseio.
+All these things should be done as user 'abuseio' from within the folder /opt/abuseio.
 
 #### Configuration
 
-The .env file contains your base configuration and must be set correctly because you set the application
+The .env file contains your base configuration and must be set correctly because you will be setting the application's
 configuration. An example of the file:
 
 ```bash
@@ -277,7 +277,7 @@ extra/notifier-samples/runall-noqueue
 ```
 
 ##### Creating an admin user for the GUI
-In the default installation there isn't a (admin) user, so we must create it first.
+In the default installation there isn't an admin user, so we must create one first.
 
 ```
 cd /opt/abuseio
@@ -285,7 +285,7 @@ php artisan user:create --email admin@isp.local
 php artisan role:assign --role admin --user admin@isp.local
 ```
 
-The user:create command also access items like --password, however if not selected a password will be generated and default settings will be used
+The user:create command also accepts options such as --password, however if not specified a password will be generated and default settings will be used.
 
 ##### Cronjobs
 Add a crontab for the user abuseio.  
@@ -301,8 +301,8 @@ Run: `crontab -e -u abuseio`
 <a name="resolving"></a>
 ### Setup local resolving
 
-Some parsers produce high amounts of DNS queries, so your better off using a local resolve (e.g. bind)
-in the above install example bind is installed and you only need to update your /etc/resolv.conf (or
-with newer ubuntu versions the /etc/network/interfaces) to use 127.0.0.1 as the FIRST resolver, but make
+Some parsers produce high amounts of DNS queries, so you're better off using a local resolve (e.g. bind).
+In the above install example, bind is installed and you only need to update your /etc/resolv.conf (or
+with newer ubuntu versions the /etc/network/interfaces) to use 127.0.0.1 as the FIRST resolver -- but make
 sure you leave a 2nd or 3rd with your 'normal' resolvers.
 
