@@ -59,4 +59,18 @@ class ShowCommand extends AbstractShowCommand2
                 'Use the id for an event to show it.')
         ];
     }
+
+    protected function transformObjectToTableBody($model)
+    {
+        $result = parent::transformObjectToTableBody($model);
+
+        $result[] = ["Evidences", $model->evidence->filename];
+//        /** @var \AbuseIO\Models\Evidence $evidence */
+//        dd($model);
+//
+//        foreach ($model->evidences as $evidence) {
+//            $result[] = [$evidence->id, $evidence->filename];
+//        }
+        return $result;
+    }
 }
