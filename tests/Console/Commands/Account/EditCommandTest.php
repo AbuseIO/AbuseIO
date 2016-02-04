@@ -101,17 +101,16 @@ class EditCommandTest extends TestCase
     public function testSetSystemAccount()
     {
         $this->initDB();
-        //TODO moet ff uitzoeken hoe je een systemaccountupdate maakt nu blijft de test hangen.
-//        $exitCode = Artisan::call(
-//            'account:edit',
-//            [
-//                'id' => $this->account->id,
-//                '--systemaccount' => true,
-//            ]
-//        );
-//
-//        $this->assertEquals($exitCode, 0);
-//        $this->assertContains('The account has been updated', Artisan::output());
-//        $this->assertTrue(Account::find($this->account->id)->getSystemAccount());
+        $exitCode = Artisan::call(
+            'account:edit',
+            [
+                'id' => $this->account->id,
+                '--systemaccount' => true,
+            ]
+        );
+
+        $this->assertEquals($exitCode, 0);
+        $this->assertContains('The account has been updated', Artisan::output());
+        $this->assertTrue((bool) Account::find($this->account->id)->systemaccount);
     }
 }

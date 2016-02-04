@@ -61,7 +61,7 @@ class EditCommand extends AbstractEditCommand
     {
         if ($this->option("systemaccount") == true) {
             /** @var Account $model */
-            $model->systemaccount = true;
+            $model->makeMeSystemAccount();
         }
     }
 }

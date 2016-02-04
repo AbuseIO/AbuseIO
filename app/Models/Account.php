@@ -157,19 +157,24 @@ class Account extends Model
         $this->brand = $brand;
     }
 
-    /**
-     * Mutator for systemaccount
-     */
 
-    public function setSystemaccountAttribute($value)
+
+//    public function setSystemaccountAttribute($value)
+//    {
+//
+//        if ($value) {
+//            $account = Account::where('systemaccount', true);
+//            $account->update(['systemaccount' => false]);
+//        }
+//
+//        Account::where('id', $this->id)->update(['systemaccount' => $value]);
+//    }
+    public function makeMeSystemAccount()
     {
-
-        if ($value) {
-            $account = Account::where('systemaccount', true);
-            $account->update(['systemaccount' => false]);
-        }
-
-        Account::where('id', $this->id)->update(['systemaccount' => $value]);
+        Account::where('systemaccount', true)->update(['systemaccount' => false]);
+        $this->systemaccount = true;
+        // must call save method otherwise it won't save changes!
+        $this->save();
     }
 
     /*
