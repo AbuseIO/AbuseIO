@@ -25,7 +25,7 @@
 
 #### Packages (ubuntu)
 ```bash
-apt-get install curl git mysql-server apache2 apache2-utils postfix supervisor libapache2-mod-php5 php5 php-pear php5-dev php5-mcrypt php5-mysql php5-pgsql
+apt-get install curl git mysql-server apache2 apache2-utils postfix supervisor libapache2-mod-php5 php5 php-pear php5-dev php5-mcrypt php5-mysql php5-pgsql php-curl
 ```
 
 
@@ -72,17 +72,17 @@ addgroup www-data abuseio
 You can install AbuseIO in a few ways. You can download a tarball or install with composer. Either way is fine.
 
 > Keep note of the following:  
-> - Updating/Installing packages with composer might require a GIT account and a generated token.
+> - Updating/Installing packages with composer might require a GitHub account and a generated token.
 > - You should __NOT__ run the `composer update` command, unless you know exactly what you are doing.
 
-##### Install stable from tarball
+##### Install from tarball
 ```bash
 cd /opt
 wget https://abuse.io/releases/abuseio-4.0.0.tar.gz
 tar zxf abuseio-4.0.0.tar.gz
 ```
 
-##### Install stable with composer
+##### Install with composer
 ```bash
 cd /opt
 composer create-project abuseio/abuseio
@@ -277,12 +277,10 @@ extra/notifier-samples/runall-noqueue
 ```
 
 ##### Creating an admin user for the GUI
-
-By default no accounts are created and you will need to create accounts with the needed permissions on the console. The '1' in the account:create is the number of the brand (1: default brand) You may change this to another value if you have a different brand that you want to attach to this account.
+In the default installation there isn't a (admin) user, so we must create it first.
 
 ```
 cd /opt/abuseio
-php artisan account:create <name> 1
 php artisan user:create --email admin@isp.local
 php artisan role:assign --role admin --user admin@isp.local
 ```
