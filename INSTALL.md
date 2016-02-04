@@ -2,13 +2,13 @@
 
 ## Getting Started
 
-This getting starting document will guide you quickly through the installation and setup. A more
-detailed instruction document and documenation can be found on our website https://abuse.io/
+This getting started document will guide you quickly through the installation and setup. A more
+detailed instruction document and documentation can be found on our [website](https://abuse.io)
 
 ## Requirements
 
 A simple virtual machine (1 core, 1 GB ram) will suffice for normal operations. If you intend to
-use the RBL scanner in combination with rbldnsd zonefiles 4 GB ram is recommended.
+use the RBL scanner in combination with rbldnsd zonefiles then 4 GB ram is recommended.
 
 ### Dependencies
 
@@ -24,30 +24,36 @@ Some additional packages are required:
 
 #### Ubuntu
 
-* apt-get install php-mail-mimedecode php5-cli php5-curl php5-mysql apache2 php5 postfix mysql-server
+```
+apt-get install php-mail-mimedecode php5-cli php5-curl php5-mysql apache2 php5 postfix mysql-server
+```
 
 #### CentOS
 
-* yum install php-cli php-mysql php-pear-Mail-mimeDecode
+```
+yum install php-cli php-mysql php-pear-Mail-mimeDecode
+```
 
 ### Required configuration
 
  - Setup your DNS:
 
-    DNS configuration is importent, but it allows you access to the three differente hosted vhosts within
-    AbuseIO. In addition placing a MX record is mostly required for AbuseIO to receive abuse events from 
+    DNS configuration is important, but it allows you access to the three different hosted vhosts within
+    AbuseIO. In addition, placing an MX record is mostly required for AbuseIO to receive abuse events from 
     remote feeds.
 
-    for example like:
+    For example with the following DNS setup:
 
+    ```
     abuseio.isp.tld IN A 10.0.0.1i  
     mx.isp.tld IN A 10.0.0.1  
     abuseio.isp.tld IN MX 100 mx.isp.tld.  
     admin.abuseio.isp.tld IN CNAME abuseio.isp.tld.  
     ash.abuseio.isp.tld IN CNAME abuseio.isp.tld.  
     rpc.abuseio.isp.tld IN CNAME abuseio.isp.tld.  
+    ```
 
-    your servername would be abuseio.isp.tld under IP 10.0.0.1. The MX record is important! It will allow you
+    Your servername would be abuseio.isp.tld under IP 10.0.0.1. The MX record is important! It will allow you
     to forward email directly into AbuseIO for parsing. The e-mail domain would be @abuseio.isp.tld.
 
 
@@ -60,14 +66,16 @@ Some additional packages are required:
 
  - Set permissions:
  
-    Preferable create a new user (e.g. abuseio) and set ownership with mod 755 to the entire base. The
+    Preferably create a new user (e.g. abuseio) and set ownership with mod 755 to the entire installation base. The
     http server (e.g. apache) should only have read permissions to the install base
 
-    - chmod -R 777 tmp  
-    - chmod -R 664 archive 
+    ```
+    chmod -R 777 tmp  
+    chmod -R 664 archive 
+    ```
     
     please make sure that the archive folder ownership is correctly set. The group should be set to 
-    your MTA group, so your MTA can actually write here.
+    your MTA group, so that your MTA can actually write there.
 
 
  - Set configuration
@@ -92,9 +100,9 @@ Some additional packages are required:
 
     About these cronjobs:
 
-        - housekeeper does regular maintainance task as well as using collectors (if enabled) to fetch information that arent send by mail
+    - housekeeper does regular maintainance tasks as well as using collectors (if enabled) to fetch information that isn't sent by mail
 
-        - notifier is a script that send out notifications to customers (if enabled)
+    - notifier is a script that sends out notifications to customers (if enabled)
 
 
 ### Optional configuration
@@ -112,21 +120,19 @@ Hooking up your abuse mail can be implemented in various ways:
 
 #### Option 1: Hook up your MTA directly to AbuseIO (Best way)
 
-Make sure you configured DNS correctly. The delivery address for abuse mails to be parsed would be notifier@isp.tld
+Make sure you configured the DNS correctly. The delivery address for abuse mails to be parsed would be notifier@isp.tld
 
 Simply add the following line to your /etc/aliases file to enable email delivery directly to AbuseIO:
 
     notifier: |"/path/to/libexec/mda"
 
-    example:
-
-    notifier: | "php -q /opt/abuseio/libexec/mda"
+For example ``` notifier: | "php -q /opt/abuseio/libexec/mda```
 
 (Do not forget to run the newaliases command to inform your MTA that the aliases file has been updated.)
 
 After that you will need to forward either abuse@isp.tld to abuse@abuseio.isp.tld so that incoming e-mails 
 are redirected to AbuseIO. In addition a lot of feeds have the option to deliver on a custom address. Using 
-addresses like spamcop-abuse@isp.tld and forwardding them to abuse@abuseio.isp.tld will give you more control 
+addresses like spamcop-abuse@isp.tld and forwarding them to abuse@abuseio.isp.tld will give you more control 
 to enable or disable individual feeds, for example:
 
     alias spamcop@isp.tld deliver to abuse@isp.tld AND notifier@abusio.isp.tld  
@@ -141,7 +147,7 @@ to enable or disable individual feeds, for example:
 Install the fetchmail package using your package manager and configure it by placing the following contents 
 in your ~/.fetchmailrc:
 
-poll myserver.com proto imap
+    poll myserver.com proto imap
     user "account"
     pass "password"
     keep
