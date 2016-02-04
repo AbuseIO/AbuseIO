@@ -87,4 +87,8 @@ return [
     'creator'           => 'Eigenaar',
     'never'             => 'Nooit',
     'notification'      => 'Notificatie|Notificaties',
+    'versioncheck'      => 'Controleer versie',
+    'available'         => 'Beschikbaar',
+    'noupdate'          => 'Geen update',
+    'error'             => 'Fout',
 ];

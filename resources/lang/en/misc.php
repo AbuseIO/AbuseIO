@@ -88,4 +88,8 @@ return [
     'creator'           => 'Owner',
     'never'             => 'Never',
     'notification'      => 'Notification|Notifications',
+    'versioncheck'      => 'Check version',
+    'available'         => 'Available',
+    'noupdate'          => 'No update',
+    'error'             => 'Error',
 ];

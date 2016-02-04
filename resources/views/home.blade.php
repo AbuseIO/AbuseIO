@@ -6,4 +6,9 @@
             <p>{{ trans('misc.abuseio_intro1') }}</p>
             <p>{{ trans('misc.abuseio_intro2') }}</p>
         </div>
+        <div class="pull-right">
+            <p>
+                v{!! $version !!} ({!! $update !!})
+            </p>
+        </div>
 @endsection
