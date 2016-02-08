@@ -25,7 +25,7 @@
 
 #### Packages (ubuntu)
 ```bash
-apt-get install curl git mysql-server apache2 apache2-utils postfix supervisor libapache2-mod-php5 php5 php-pear php5-dev php5-mcrypt php5-mysql php5-pgsql php-curl
+apt-get install curl git mysql-server apache2 apache2-utils postfix supervisor libapache2-mod-php5 php5 php-pear php5-dev php5-mcrypt php5-mysql php5-pgsql php5-curl
 ```
 
 
