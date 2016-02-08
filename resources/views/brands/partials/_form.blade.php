@@ -27,6 +27,8 @@
         @if ($errors->has('creator_id')) <p class="help-block">{{ $errors->first('creator_id') }}</p> @endif
     </div>
 </div>
+@else
+{!! Form::hidden('creator_id', $auth_user->account->id) !!}
 @endif
 <div class="form-group @if ($errors->has('introduction_text')) has-error @endif">
     {!! Form::label('logo', trans('brands.logo').':', ['class' => 'col-sm-2 control-label']) !!}
