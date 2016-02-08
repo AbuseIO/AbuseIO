@@ -28,6 +28,11 @@
 apt-get install curl git mysql-server apache2 apache2-utils postfix supervisor libapache2-mod-php5 php5 php-pear php5-dev php5-mcrypt php5-mysql php5-pgsql php5-curl
 ```
 
+#### Packages (centos)
+Still a work in progress, but minimal:
+```bash
+php-bcmath
+```
 
 #### Composer
 Download the latest version of [composer](https://getcomposer.org/) and make it accessible system-wide.
