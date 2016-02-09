@@ -91,4 +91,5 @@ return [
     'available'         => 'Beschikbaar',
     'noupdate'          => 'Geen update',
     'error'             => 'Fout',
+    'login'             => 'Inloggen',
 ];

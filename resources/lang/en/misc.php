@@ -92,4 +92,5 @@ return [
     'available'         => 'Available',
     'noupdate'          => 'No update',
     'error'             => 'Error',
+    'login'             => 'Login',
 ];
