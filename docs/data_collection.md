@@ -40,7 +40,7 @@ event object for each event found in the database which contains:
 - **source**: the name of the notifier/parser name that handled the event
 - **information**: a multilayered array of data regarding the event
 - **class**: the internal classification, using a preset list to be used for showing information texts
-- **type**: if the event is informational, abuse or escalated. This triggers different kinds of notifications
+- **type**: if the event is informational, abuse or escalation. This triggers different kinds of notifications
 - **ip address**: the ip address of the events
 - **domain name**: optional: the domainname regarding the event
 - **uri**: optional: the URI where the event was found/directed to
