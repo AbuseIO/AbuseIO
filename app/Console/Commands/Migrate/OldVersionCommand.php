@@ -39,6 +39,7 @@ class OldVersionCommand extends Command
                             {--s|start : Start the migration using cached evidence }
                             {--skipcontacts : Skip importing the contacts }
                             {--skipnetblocks : Skip importing the netblocks }
+                            {--skiptickets : Skip importing the tickets }
                             {--skipnotes : Skip importing the notes }
                             {--startfrom=1 : Start from ticket ID }
     ';
@@ -367,6 +368,135 @@ class OldVersionCommand extends Command
                 $this->info('skipping migration - phase 2 - netblock data');
             }
 
+            if (empty($this->option('skiptickets'))) {
+                $this->info('starting migration - phase 3 - ticket and evidence data');
+
+                DB::setDefaultConnection('abuseio3');
+
+                $tickets = DB::table('Reports')
+                    ->get();
+
+                $migrateCount = 0;
+                foreach ($tickets as $ticket) {
+                    $evidenceLinks = DB::table('EvidenceLinks')
+                        ->where('ReportID', '=', $ticket->ID)
+                        ->get();
+
+                    $migrateCount = $migrateCount + count($evidenceLinks);
+                }
+
+                DB::setDefaultConnection('mysql');
+
+                $this->output->progressStart($migrateCount);
+
+                foreach ($tickets as $ticket) {
+                    // Skip from, usefull when migration stopped at a certain point you can continue from
+                    if ($ticket->ID <= $this->option('startfrom')) {
+                        $this->output->progressAdvance();
+                        echo " skipping events from ticket {$ticket->ID}";
+                        continue;
+                    }
+                    // Get the list of evidence ID's related to this ticket
+                    DB::setDefaultConnection('abuseio3');
+                    $evidenceLinks = DB::table('EvidenceLinks')
+                        ->where('ReportID', '=', $ticket->ID)
+                        ->get();
+
+                    DB::setDefaultConnection('mysql');
+
+                    // DO NOT REMOVE! Legacy versions (1.0 / 2.0) have imports without evidence.
+                    // These dont have any linked evidence and will require a manual building of evidence
+                    // for now we ignore them. This will not affect any 3.x installations
+                    if ($ticket->CustomerName == 'Imported from AbuseReporter' ||
+                        !empty(json_decode($ticket->Information)->importnote)
+                    ) {
+                        // Manually build the evidence
+                        $this->output->progressAdvance();
+                        echo " Working on events from ticket {$ticket->ID}";
+
+                        $this->replayTicket($ticket, $account);
+
+                        continue;
+                    }
+
+                    if (count($evidenceLinks) != (int)$ticket->ReportCount) {
+                        // Count does not match, known 3.0 limitation related to not always saving all the data
+                        // so we will do a little magic to fix that
+
+                        $this->output->progressAdvance();
+                        echo " Working on events from ticket {$ticket->ID}";
+
+                        $this->replayTicket($ticket, $account);
+
+                        continue;
+                    } else {
+                        // Just work as normal
+
+                        $this->output->progressAdvance();
+                        echo " Working on events from ticket {$ticket->ID}";
+
+                        $newTicket = $this->createTicket($ticket, $account);
+
+                        // Create all the events
+                        foreach ($evidenceLinks as $evidenceLink) {
+                            $path       = storage_path() . '/migration/';
+                            $filename = $path . "evidence_id_{$evidenceLink->EvidenceID}.data";
+
+                            if (!is_file($filename)) {
+                                $this->error('missing cache file ');
+                                $this->exception();
+                            }
+
+                            $evidence = json_decode(file_get_contents($filename));
+                            $evidenceID = $evidence->evidenceId;
+                            $incidents = $evidence->incidents;
+
+                            // Yes we only grab nr 0 from the array, because that is what the old aggregator did
+                            // which basicly ignored a few incidents because they werent considered unique (which
+                            // they were with the domain name)
+                            $ip = $newTicket->ip;
+                            if (property_exists($incidents, $ip)) {
+                                $incidentTmp = $incidents->$ip;
+                                $incident = $incidentTmp[0];
+
+                                $newEvent = new Event;
+                                $newEvent->evidence_id  = $evidenceID;
+                                $newEvent->information  = $incident->information;
+                                $newEvent->source       = $incident->source;
+                                $newEvent->ticket_id    = $newTicket->id;
+                                $newEvent->timestamp    = $incident->timestamp;
+                            } else {
+                                // Parser did not find any related evidence so replay it from the ticket only reason
+                                // Why it happends here if DNS has changed and google report cannot be matched
+                                $newEvent = new Event;
+                                $newEvent->evidence_id  = $evidenceID;
+                                $newEvent->information  = $ticket->Information;
+                                $newEvent->source       = $ticket->Source;
+                                $newEvent->ticket_id    = $newTicket->id;
+                                $newEvent->timestamp    = $ticket->FirstSeen;
+                            }
+
+                            // Validate the model before saving
+                            $validator = Validator::make(
+                                json_decode(json_encode($newEvent), true),
+                                Event::createRules()
+                            );
+                            if ($validator->fails()) {
+                                $this->error(
+                                    'DevError: Internal validation failed when saving the Event object ' .
+                                    implode(' ', $validator->messages()->all())
+                                );
+                                $this->exception();
+                            }
+
+                            $newEvent->save();
+                        }
+                    }
+                }
+            } else {
+                $this->info('skipping migration - phase 3 - Tickets');
+            }
+
             if (empty($this->option('skipnotes'))) {
                 $this->info('starting migration - phase 4 - Notes');
 
@@ -405,136 +535,13 @@ class OldVersionCommand extends Command
                 }
                 $this->output->progressFinish();
             } else {
-                $this->info('skipping migration - phase 3 - Notes');
+                $this->info('skipping migration - phase 4 - Notes');
             }
 
-
-            $this->info('starting migration - phase 4 - ticket and evidence data');
-
-            DB::setDefaultConnection('abuseio3');
-
-            $tickets = DB::table('Reports')
-                ->get();
-
-            $migrateCount = 0;
-            foreach ($tickets as $ticket) {
-                $evidenceLinks = DB::table('EvidenceLinks')
-                    ->where('ReportID', '=', $ticket->ID)
-                    ->get();
-
-                $migrateCount = $migrateCount + count($evidenceLinks);
-            }
-
-            DB::setDefaultConnection('mysql');
-
-            $this->output->progressStart($migrateCount);
-
-            foreach ($tickets as $ticket) {
-                // Skip from, usefull when migration stopped at a certain point you can continue from
-                if ($ticket->ID <= $this->option('startfrom')) {
-                    $this->output->progressAdvance();
-                    echo " skipping events from ticket {$ticket->ID}";
-                    continue;
-                }
-                // Get the list of evidence ID's related to this ticket
-                DB::setDefaultConnection('abuseio3');
-                $evidenceLinks = DB::table('EvidenceLinks')
-                    ->where('ReportID', '=', $ticket->ID)
-                    ->get();
-
-                DB::setDefaultConnection('mysql');
-
-                // DO NOT REMOVE! Legacy versions (1.0 / 2.0) have imports without evidence.
-                // These dont have any linked evidence and will require a manual building of evidence
-                // for now we ignore them. This will not affect any 3.x installations
-                if ($ticket->CustomerName == 'Imported from AbuseReporter' ||
-                    !empty(json_decode($ticket->Information)->importnote)
-                ) {
-                    // Manually build the evidence
-                    $this->output->progressAdvance();
-                    echo " Working on events from ticket {$ticket->ID}";
-
-                    $this->replayTicket($ticket, $account);
-
-                    continue;
-                }
-
-                if (count($evidenceLinks) != (int)$ticket->ReportCount) {
-                    // Count does not match, known 3.0 limitation related to not always saving all the data
-                    // so we will do a little magic to fix that
-
-                    $this->output->progressAdvance();
-                    echo " Working on events from ticket {$ticket->ID}";
-
-                    $this->replayTicket($ticket, $account);
-
-                    continue;
-                } else {
-                    // Just work as normal
-
-                    $this->output->progressAdvance();
-                    echo " Working on events from ticket {$ticket->ID}";
-
-                    $newTicket = $this->createTicket($ticket, $account);
-
-                    // Create all the events
-                    foreach ($evidenceLinks as $evidenceLink) {
-                        $path       = storage_path() . '/migration/';
-                        $filename = $path . "evidence_id_{$evidenceLink->EvidenceID}.data";
-
-                        if (!is_file($filename)) {
-                            $this->error('missing cache file ');
-                            $this->exception();
-                        }
-
-                        $evidence = json_decode(file_get_contents($filename));
-                        $evidenceID = $evidence->evidenceId;
-                        $incidents = $evidence->incidents;
-
-                        // Yes we only grab nr 0 from the array, because that is what the old aggregator did
-                        // which basicly ignored a few incidents because they werent considered unique (which
-                        // they were with the domain name)
-                        $ip = $newTicket->ip;
-                        if (property_exists($incidents, $ip)) {
-                            $incidentTmp = $incidents->$ip;
-                            $incident = $incidentTmp[0];
-
-                            $newEvent = new Event;
-                            $newEvent->evidence_id  = $evidenceID;
-                            $newEvent->information  = $incident->information;
-                            $newEvent->source       = $incident->source;
-                            $newEvent->ticket_id    = $newTicket->id;
-                            $newEvent->timestamp    = $incident->timestamp;
-                        } else {
-                            // Parser did not find any related evidence so replay it from the ticket only reason
-                            // Why it happends here if DNS has changed and google report cannot be matched
-                            $newEvent = new Event;
-                            $newEvent->evidence_id  = $evidenceID;
-                            $newEvent->information  = $ticket->Information;
-                            $newEvent->source       = $ticket->Source;
-                            $newEvent->ticket_id    = $newTicket->id;
-                            $newEvent->timestamp    = $ticket->FirstSeen;
-                        }
-
-                        // Validate the model before saving
-                        $validator = Validator::make(
-                            json_decode(json_encode($newEvent), true),
-                            Event::createRules()
-                        );
-                        if ($validator->fails()) {
-                            $this->error(
-                                'DevError: Internal validation failed when saving the Event object ' .
-                                implode(' ', $validator->messages()->all())
-                            );
-                            $this->exception();
-                        }
-
-                        $newEvent->save();
-                    }
-                }
-            }
             $this->output->progressFinish();
         }
+
+
 
         return true;
     }
@@ -652,7 +659,7 @@ class OldVersionCommand extends Command
         // Also build a types lookup table and switch out name for ID
         foreach ((array)Lang::get('types.type') as $typeID => $type) {
             // Consistancy fixes:
-            $ticket->Type = ucfirst(strtolower($ticket->Type));
+            $ticket->Type = strtoupper($ticket->Type);
 
             if ($type['name'] == $ticket->Type) {
                 $ticket->Type = $typeID;
@@ -692,9 +699,9 @@ class OldVersionCommand extends Command
         $newTicket->updated_at                  = Carbon::parse($ticket->LastModified);
 
         if ($ticket->Status == 'CLOSED') {
-            $newTicket->status_id               = 2;
+            $newTicket->status_id               = 'CLOSED';
         } elseif ($ticket->Status == 'OPEN') {
-            $newTicket->status_id               = 1;
+            $newTicket->status_id               = 'OPEN';
         } else {
             $this->error('Unknown ticket status');
             $this->exception();
