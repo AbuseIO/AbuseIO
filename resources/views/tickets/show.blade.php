@@ -13,10 +13,10 @@
                     {!! trans('tickets.button.update_contact') !!} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.update', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id, 'ip']) !!}</li>
-                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.update', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id, 'domain']) !!}</li>
+                    <li>{!! link_to_route('admin.tickets.update', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id, 'ip']) !!}</li>
+                    <li>{!! link_to_route('admin.tickets.update', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id, 'domain']) !!}</li>
                     <li role="separator" class="divider"></li>
-                    <li{!! ($ticket->ip_contact_reference == 'UNDEF' || $ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.update', trans('misc.both'), [$ticket->id]) !!}</li>
+                    <li>{!! link_to_route('admin.tickets.update', trans('misc.both'), [$ticket->id]) !!}</li>
                 </ul>
             </div>
             <div class="btn-group" role="group" aria-label="...">
