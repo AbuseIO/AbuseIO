@@ -134,7 +134,7 @@ class IncidentsProcess extends Job implements SelfHandling
                 'The evidence submitted was never linked to any ticket, thus removing it from the DB again'
             );
 
-            $this->evidence->delete();
+            $this->evidence->forceDelete();
         }
 
         Log::info(
