@@ -12,12 +12,9 @@ use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Event;
 use AbuseIO\Jobs\EvidenceSave;
 use AbuseIO\Jobs\IncidentsProcess;
-use Illuminate\Filesystem\Filesystem;
-use PhpMimeMailParser\Parser as MimeParser;
 use yajra\Datatables\Datatables;
 use Redirect;
 use Input;
-use Lang;
 use Log;
 use DB;
 
@@ -86,10 +83,12 @@ class TicketsController extends Controller
         if (!$auth_account->isSystemAccount()) {
             // We're using a grouped where clause here, otherwise the filtering option
             // will always show the same result (all tickets)
-            $tickets = $tickets->where(function ($query) use ($auth_account) {
-                $query->where('tickets.ip_contact_account_id', '=', $auth_account->id)
-                    ->orWhere('tickets.domain_contact_account_id', '=', $auth_account->id);
-            });
+            $tickets = $tickets->where(
+                function ($query) use ($auth_account) {
+                    $query->where('tickets.ip_contact_account_id', '=', $auth_account->id)
+                        ->orWhere('tickets.domain_contact_account_id', '=', $auth_account->id);
+                }
+            );
         }
 
         return Datatables::of($tickets)

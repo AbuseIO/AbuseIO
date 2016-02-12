@@ -3,7 +3,7 @@
 namespace AbuseIO\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Filesystem\Filesystem;
+use Storage;
 use Carbon;
 use Uuid;
 use Log;
@@ -33,17 +33,16 @@ class EvidenceSave extends Job implements SelfHandling
      */
     public function save($fileData)
     {
-        $filesystem = new Filesystem;
         $datefolder = Carbon::now()->format('Ymd');
-        $path       = storage_path() . '/mailarchive/' . $datefolder . '/';
-        $file       = Uuid::generate(4) . '.eml';
-        $filename   = $path . $file;
+        $path       = 'mailarchive/' . $datefolder;
+        $fileName   = Uuid::generate(4) . '.eml';
+        $file       = "${path}/{$fileName}";
 
         umask(0007);
 
-        if (!$filesystem->isDirectory($path)) {
+        if (!Storage::exists($path)) {
             // If a datefolder does not exist, then create it or die trying
-            if (!$filesystem->makeDirectory($path, 0770)) {
+            if (!Storage::makeDirectory($path, 0770)) {
                 Log::error(
                     get_class($this) . ': ' .
                     'Unable to create directory: ' . $path
@@ -52,7 +51,7 @@ class EvidenceSave extends Job implements SelfHandling
                 return false;
             }
 
-            if (!is_dir($path)) {
+            if (!Storage::exists($path)) {
                 Log::error(
                     get_class($this) . ': ' .
                     'Path vanished after write: ' . $path
@@ -61,38 +60,40 @@ class EvidenceSave extends Job implements SelfHandling
                 return false;
             }
 
-            chgrp($path, config('app.group'));
+            // Temporally hack until we can do this with Storage::
+            chgrp(storage_path() . "/{$path}", config('app.group'));
         }
 
-        if ($filesystem->isFile($filename)) {
+        if (Storage::exists($file)) {
             Log::error(
                 get_class($this) . ': ' .
-                'File aready exists: ' . $filename
+                'File aready exists: ' . $file
             );
 
             return false;
         }
 
-        if ($filesystem->put($filename, $fileData) === false) {
+        if (Storage::put($file, $fileData) === false) {
             Log::error(
                 get_class($this) . ': ' .
-                'Unable to write file: ' . $filename
+                'Unable to write file: ' . $file
             );
 
             return false;
         }
 
-        if (!is_file($filename)) {
+        if (!Storage::exists($file)) {
             Log::error(
                 get_class($this) . ': ' .
-                'File vanished after write: ' . $filename
+                'File vanished after write: ' . $file
             );
 
             return false;
         }
 
-        chgrp($filename, config('app.group'));
+        // Temporally hack until we can do this with Storage::
+        chgrp(storage_path() . "/{$file}", config('app.group'));
 
-        return $filename;
+        return $file;
     }
 }

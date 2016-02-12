@@ -4,7 +4,8 @@ namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Filesystem\Filesystem;
+use Storage;
+use Log;
 use PhpMimeMailParser\Parser as MimeParser;
 
 /**
@@ -113,8 +114,6 @@ class Evidence extends Model
             if (is_object(json_decode($data))) {
                 // It's json data
 
-                $jsondata = json_decode($data);
-
                 return [
                     'headers' => [
                         'from'      => $this->sender,
@@ -125,10 +124,10 @@ class Evidence extends Model
                 ];
             } else {
                 // It's a regular email, parse it!
-                $fs = new Filesystem;
                 $cacheDir = $this->getCacheDir();
-                if (!$fs->isDirectory($cacheDir)) {
-                    if (!$fs->makeDirectory($cacheDir, 0755, true)) {
+
+                if (!Storage::exists($cacheDir)) {
+                    if (!Storage::makeDirectory($cacheDir, 0755, true)) {
                         Log::error(
                             get_class($this) . ': ' .
                             'Unable to create temp directory: ' . $cacheDir
@@ -205,11 +204,18 @@ class Evidence extends Model
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function getCacheDir()
     {
         return "/tmp/abuseio/cache/evidence_{$this->id}/";
     }
 
+    /**
+     * @param $filename
+     * @return bool
+     */
     public function getAttachment($filename)
     {
         $email = new MimeParser();

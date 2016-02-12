@@ -6,7 +6,7 @@ use AbuseIO\Models\Evidence;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Filesystem\Filesystem;
+use Storage;
 use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use Config;
@@ -85,8 +85,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             'Queued worker is starting the processing of email file: ' . $this->filename
         );
 
-        $filesystem = new Filesystem;
-        $rawEmail = $filesystem->get($this->filename);
+        $rawEmail = Storage::get($this->filename);
 
         $parsedMail = new MimeParser();
         $parsedMail->setText($rawEmail);
@@ -244,16 +243,20 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             'archive and bounced to the admin for investigation'
         );
 
+        $fileContents = null;
+        if (Storage::exists($this->filename)) {
+            $fileContents = Storage::get($this->filename);
+        }
+
         AlertAdmin::send(
             'AbuseIO was not able to process an incoming message. This message is attached to this email.',
             [
-                'failed_message.eml' => @file_get_contents($this->filename)
+                'failed_message.eml' => $fileContents
             ]
         );
 
         // Delete the evidence file as we are not using it.
-        $filesystem = new Filesystem;
-        $filesystem->delete($this->filename);
+        Storage::delete($this->filename);
 
     }
 }
