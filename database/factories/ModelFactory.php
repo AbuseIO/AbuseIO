@@ -89,7 +89,7 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
     // from the seeding command should be replace with something from
     // /storage/mailarchive/$datefolder/$fileuuid.eml
     return [
-        'filename' => sprintf('20150906/%d_messageid', $runnerCount),
+        'filename' => sprintf('mailarchive/20150906/%d_messageid', $runnerCount),
         'sender' => $faker->name,
         'subject' => $faker->sentence(),
     ];

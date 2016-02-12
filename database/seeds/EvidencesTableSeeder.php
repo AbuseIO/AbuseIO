@@ -12,7 +12,7 @@ class EvidencesTableSeeder extends Seeder
         $evidences = [
             [
                 'id'                        => '1',
-                'filename'                  => '20150906/1_messageid',
+                'filename'                  => 'mailarchive/20150906/1_messageid',
                 'sender'                    => '1 me',
                 'subject'                   => 'i say 1',
                 'created_at'                => new DateTime,
