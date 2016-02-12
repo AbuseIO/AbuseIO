@@ -121,7 +121,7 @@ the parsing by reintroducing the e-mail onto the system (either by bouncing the 
 parser will try to handle the e-mail again.
 
 You will not have to worry about getting duplicates, as there is a filter on saving events that are an exact match.
-Only is there is actually over data (e.g. timestamp, or a infoblob value) then the event will be saved.
+Only if there is actually other data (e.g. timestamp, or a infoblob value) then the event will be saved.
 
 # Local and remote contact data
 
