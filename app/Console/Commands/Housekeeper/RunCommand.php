@@ -58,18 +58,12 @@ class RunCommand extends Command
         /*
          * Check all queue's their status
          */
-        Log::info(
-            get_class($this) . ': Housekeeper is starting queue checks'
-        );
         $this->checkQueues();
 
         /*
          * Walk thru all tickets to see which need closing
          */
         if (config('main.housekeeping.tickets_close_after') !== false) {
-            Log::info(
-                get_class($this) . ': Housekeeper is starting to close old tickets'
-            );
             $this->ticketsClosing();
         }
 
@@ -77,9 +71,6 @@ class RunCommand extends Command
          * Walk thru mailarchive to see which need pruning
          */
         if (config('main.housekeeping.mailarchive_remove_after') !== false) {
-            Log::info(
-                get_class($this) . ': Housekeeper is starting to remove old mailarchive items'
-            );
             $this->mailarchivePruning();
         }
 
@@ -87,9 +78,6 @@ class RunCommand extends Command
          * Walk thru mailarchive to see which files are ophpaned
          */
         if (config('main.housekeeping.mailarchive_remove_orphaned') !== false) {
-            Log::info(
-                get_class($this) . ': Housekeeper is starting to remove orphaned mailarchive items'
-            );
             $this->removeUnlinkedEvidence();
         }
 
@@ -104,6 +92,10 @@ class RunCommand extends Command
      */
     private function removeUnlinkedEvidence()
     {
+        Log::info(
+            get_class($this) . ': Housekeeper is starting to remove orphaned mailarchive items'
+        );
+
         $path = '/mailarchive/';
 
         $directories = Storage::directories($path);
@@ -111,7 +103,14 @@ class RunCommand extends Command
         foreach ($directories as $directory) {
             $files = Storage::files($directory);
 
-            //var_dump($files);
+            foreach ($files as $file) {
+                if (Evidence::where('filename', '=', $file)->count() === 0) {
+                    Log::warning(
+                        get_class($this) . ": removing orphaned mailarchive item {$file}"
+                    );
+                    Storage::delete($file);
+                }
+            }
         }
     }
 
@@ -122,6 +121,10 @@ class RunCommand extends Command
      */
     private function checkQueues()
     {
+        Log::info(
+            get_class($this) . ': Housekeeper is starting queue checks'
+        );
+
         $jobLimit = new Carbon('1 hour ago');
 
         $hangs = [];
@@ -197,6 +200,10 @@ class RunCommand extends Command
      */
     private function ticketsClosing()
     {
+        Log::info(
+            get_class($this) . ': Housekeeper is starting to close old tickets'
+        );
+
         $closeOlderThen = strtotime(config('main.housekeeping.tickets_close_after') . " ago");
         $validator = Validator::make(
             [
@@ -244,6 +251,10 @@ class RunCommand extends Command
      */
     private function mailarchivePruning()
     {
+        Log::info(
+            get_class($this) . ': Housekeeper is starting to remove old mailarchive items'
+        );
+
         $deleteOlderThen = strtotime(config('main.housekeeping.mailarchive_remove_after') . " ago");
         $validator = Validator::make(
             [
