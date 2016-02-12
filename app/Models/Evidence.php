@@ -108,8 +108,10 @@ class Evidence extends Model
      */
     public function getDataAttribute()
     {
-        if (is_file($this->filename)) {
-            $data = file_get_contents($this->filename);
+        $tempFilesystem = Storage::disk('local_temp');
+
+        if (Storage::exists($this->filename)) {
+            $data = Storage::get($this->filename);
 
             if (is_object(json_decode($data))) {
                 // It's json data
@@ -126,18 +128,22 @@ class Evidence extends Model
                 // It's a regular email, parse it!
                 $cacheDir = $this->getCacheDir();
 
-                if (!Storage::exists($cacheDir)) {
-                    if (!Storage::makeDirectory($cacheDir, 0755, true)) {
+                if (!$tempFilesystem->exists($cacheDir)) {
+                    if (!$tempFilesystem->makeDirectory($cacheDir)) {
                         Log::error(
                             get_class($this) . ': ' .
                             'Unable to create temp directory: ' . $cacheDir
                         );
                     }
                 }
-                $email = new MimeParser();
-                $email->setPath($this->filename);
 
-                $email->saveAttachments($cacheDir);
+                $email = new MimeParser();
+                $email->setText($data);
+
+                foreach ($email->getAttachments() as $index => $attachment) {
+                    $tempFilesystem->put("{$cacheDir}/{$attachment->filename}", $attachment->getContent());
+                    $fileSizes[$index] = strlen($email->getMessageBody('text'));
+                }
 
                 return [
                     'headers' => [
@@ -209,7 +215,7 @@ class Evidence extends Model
      */
     public function getCacheDir()
     {
-        return "/tmp/abuseio/cache/evidence_{$this->id}/";
+        return "evidence_{$this->id}";
     }
 
     /**
@@ -218,8 +224,10 @@ class Evidence extends Model
      */
     public function getAttachment($filename)
     {
+        $data = Storage::get($this->filename);
+        
         $email = new MimeParser();
-        $email->setPath($this->filename);
+        $email->setText($data);
 
         foreach ($email->getAttachments() as $attachment) {
             if ($attachment->getFilename() == $filename) {

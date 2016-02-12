@@ -48,6 +48,11 @@ return [
             'root'   => storage_path(),
         ],
 
+        'local_temp' => [
+            'driver' => 'local',
+            'root'   => '/tmp/abuseio/',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key'    => 'your-key',

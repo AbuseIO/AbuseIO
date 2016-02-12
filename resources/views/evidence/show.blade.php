@@ -22,11 +22,11 @@
         <dt>{{ trans('evidence.attachment') }} :</dt>
         <dd>
             <table class="table table-condensed">
-            @foreach ($evidence->data['files'] as $attachment)
+            @foreach ($evidence->data['files'] as $index => $attachment)
                 <tr>
                     <td>
                         {!! link_to_route('admin.evidence.attachment', $attachment->getFilename(), [$evidence->id, $attachment->getFilename()]) !!}
-                        <span class="badge">{{ hFileSize(filesize($evidence->data['files_dir'].$attachment->getFilename())) }}</span>
+                        <span class="badge">{{ hFileSize(Storage::disk('local_temp')->size("{$evidence->data['files_dir']}/{$attachment->getFilename()}")) }}</span>
                         <span class="label label-primary">{{ $attachment->getContentType() }}</span>
                     </td>
                 </tr>
