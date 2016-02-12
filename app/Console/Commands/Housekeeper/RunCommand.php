@@ -5,7 +5,7 @@ namespace AbuseIO\Console\Commands\Housekeeper;
 use Illuminate\Console\Command;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Evidence;
-use Illuminate\Filesystem\Filesystem;
+use Storage;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use AbuseIO\Jobs\QueueTest;
 use AbuseIO\Jobs\AlertAdmin;
@@ -83,8 +83,36 @@ class RunCommand extends Command
             $this->mailarchivePruning();
         }
 
+        /*
+         * Walk thru mailarchive to see which files are ophpaned
+         */
+        if (config('main.housekeeping.mailarchive_remove_orphaned') !== false) {
+            Log::info(
+                get_class($this) . ': Housekeeper is starting to remove orphaned mailarchive items'
+            );
+            $this->removeUnlinkedEvidence();
+        }
+
         return true;
 
+    }
+
+    /**
+     * Walk thru all files in the mailarchive folder and remove them from the system.
+     *
+     * @return boolean
+     */
+    private function removeUnlinkedEvidence()
+    {
+        $path = '/mailarchive/';
+
+        $directories = Storage::directories($path);
+
+        foreach ($directories as $directory) {
+            $files = Storage::files($directory);
+
+            //var_dump($files);
+        }
     }
 
     /**
@@ -240,11 +268,9 @@ class RunCommand extends Command
 
             $evidences = Evidence::where('created_at', '<=', date('Y-m-d H:i:s', $deleteOlderThen))->get();
 
-            $filesystem = new Filesystem;
-
             foreach ($evidences as $evidence) {
                 $path = storage_path() . '/mailarchive/';
-                $filesystem->delete($path . $evidence->filename);
+                Storage::delete($path . $evidence->filename);
                 $evidence->delete();
             }
         }

@@ -47,6 +47,7 @@ return [
 
     'housekeeping' => [
         'mailarchive_remove_after'          => '500 days',
+        'mailarchive_remove_orphaned'       => true,
         'tickets_close_after'               => '14 days',
         'notifications_cron'                => '*/15 * * * * *',
         'collectors_cron'                   => '*/60 * * * * *',
