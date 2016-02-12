@@ -75,7 +75,10 @@ class TicketFormRequest extends Request
         if (strtotime($input['timestamp']) !== false) {
             $input['timestamp'] = strtotime($input['timestamp']);
         }
-        $input['information'] = json_encode(['report' => $input['information']]);
+        
+        if (!json_decode($input['information'])) {
+            $input['information'] = json_encode(['report' => $input['information']]);
+        }
 
         $this->getInputSource()->replace($input);
     }
