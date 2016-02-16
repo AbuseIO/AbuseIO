@@ -4,7 +4,6 @@ namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
 
-
 abstract class AbstractShowCommand extends Command
 {
     protected $headers = [];
@@ -24,7 +23,7 @@ abstract class AbstractShowCommand extends Command
      *
      * @return bool
      */
-    public final function handle()
+    final public function handle()
     {
         if (!empty($this->argument('name'))) {
             $list = $this->findWithCondition($this->argument("name"));

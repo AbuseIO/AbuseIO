@@ -5,8 +5,6 @@ namespace AbuseIO\Console\Commands;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
-
-
 abstract class AbstractListCommand extends Command
 {
     protected $headers = [];
@@ -17,7 +15,7 @@ abstract class AbstractListCommand extends Command
     /**
      * Configure the console command.
      */
-    protected final function configure()
+    final protected function configure()
     {
         $this
             ->setName($this->getName())
@@ -51,7 +49,7 @@ abstract class AbstractListCommand extends Command
     /**
      * @return string
      */
-    public final function getDescription()
+    final public function getDescription()
     {
         return sprintf('Shows a list of available %ss', $this->getAsNoun());
     }
@@ -59,7 +57,7 @@ abstract class AbstractListCommand extends Command
     /**
      * @return string
      */
-    public final function getName()
+    final public function getName()
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
     }

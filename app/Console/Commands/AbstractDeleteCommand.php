@@ -8,15 +8,16 @@ use Symfony\Component\Console\Input\InputDefinition;
 
 abstract class AbstractDeleteCommand extends Command
 {
-    protected final function configure()
+    final protected function configure()
     {
         $this
             ->setName($this->getName())
             ->setDescription($this->getDescription())
             ->setDefinition(
                 new InputDefinition(
-                        $this->defineInput()
-                ));
+                    $this->defineInput()
+                )
+            );
     }
 
     public function __construct()
@@ -29,7 +30,7 @@ abstract class AbstractDeleteCommand extends Command
      *
      * @return boolean
      */
-    public final function handle()
+    final public function handle()
     {
         /** @var Model $object */
         $object = $this->getObjectByArguments();
@@ -58,7 +59,7 @@ abstract class AbstractDeleteCommand extends Command
         return true;
     }
 
-    public final function getName()
+    final public function getName()
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
     }
@@ -73,7 +74,7 @@ abstract class AbstractDeleteCommand extends Command
         return 'delete';
     }
 
-    public final function getDescription()
+    final public function getDescription()
     {
         return sprintf('Deletes a %s (without confirmation!)', $this->getAsNoun());
     }
@@ -82,7 +83,6 @@ abstract class AbstractDeleteCommand extends Command
     {
         return false;
     }
-
 
     abstract protected function getAsNoun();
 
