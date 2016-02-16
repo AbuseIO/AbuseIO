@@ -42,6 +42,10 @@ class OldVersionCommand extends Command
                             {--skiptickets : Skip importing the tickets }
                             {--skipnotes : Skip importing the notes }
                             {--startfrom=1 : Start from ticket ID }
+                            {--endwith=9999999999 : End with ticket ID }
+                            {--t|threaded : Use threading algoritm, ID and size are required }
+                            {--threadid= : thread ID, needed to calculate start ticket ID [REQUIRD WITH --threaded] }
+                            {--threadsize= : thread size, needed to calculate last ticekt ID [REQUIRD WITH --threaded] }
     ';
 
     /**
@@ -66,6 +70,13 @@ class OldVersionCommand extends Command
     public function handle()
     {
         $account = Account::system();
+
+        if (empty($this->option('start')) &&
+            empty($this->option('prepare'))
+        ) {
+            $this->error('You need to either prepare or start the migration. try --help');
+            die();
+        }
 
         if (!empty($this->option('prepare'))) {
             $this->info('building required evidence cache files');
@@ -373,29 +384,40 @@ class OldVersionCommand extends Command
 
                 DB::setDefaultConnection('abuseio3');
 
-                $tickets = DB::table('Reports')
-                    ->get();
+                $startFrom = $this->option('startfrom');
+                $endWith = $this->option('endwith');
 
-                $migrateCount = 0;
-                foreach ($tickets as $ticket) {
-                    $evidenceLinks = DB::table('EvidenceLinks')
-                        ->where('ReportID', '=', $ticket->ID)
-                        ->get();
+                if (!empty($this->option('threaded'))) {
+                    if (empty($this->option('threadid')) ||
+                       empty($this->option('threadsize'))
+                    ) {
+                        $this->error('threadid and threadsize are required to calculate this threads start/stop ID');
+                        die();
+                    }
+                    $this->info("*** using threaded mode, instance ID {$this->option('threadid')}");
+                    $startFrom =
+                        $this->option('threadid') * $this->option('threadsize') - $this->option('threadsize') + 1;
+                    $endWith =
+                        $startFrom + $this->option('threadsize') - 1;
 
-                    $migrateCount = $migrateCount + count($evidenceLinks);
+                    $this->info(
+                        "*** starting with ticket {$startFrom} " .
+                        "and ending with ticket {$endWith} "
+                    );
                 }
+
+                $ticketRows     = DB::table('Reports')
+                    ->where('id', '>=', $startFrom)
+                    ->where('id', '<=', $endWith);
+
+                $migrateCount   = $ticketRows->count();
+                $tickets        = $ticketRows->get();
 
                 DB::setDefaultConnection('mysql');
 
                 $this->output->progressStart($migrateCount);
 
                 foreach ($tickets as $ticket) {
-                    // Skip from, usefull when migration stopped at a certain point you can continue from
-                    if ($ticket->ID <= $this->option('startfrom')) {
-                        $this->output->progressAdvance();
-                        echo " skipping events from ticket {$ticket->ID}";
-                        continue;
-                    }
                     // Get the list of evidence ID's related to this ticket
                     DB::setDefaultConnection('abuseio3');
                     $evidenceLinks = DB::table('EvidenceLinks')
