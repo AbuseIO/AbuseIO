@@ -1,7 +1,7 @@
 {
 	"name": "abuseio/abuseio",
 	"description": "Open Source abusemanagement tool",
-	"version": "4.0.0-alpha3",
+	"version": "4.0.0-beta1",
 	"keywords": ["abuse", "abuseio"],
 	"homepage": "http://abuse.io",
 	"type": "project",
@@ -72,6 +72,7 @@
         "abuseio/notification-common": "dev-master",
         "abuseio/notification-mail": "dev-master",
 		"zendframework/zend-xmlrpc": "^2.5"
+		"jeremykendall/php-domain-parser": "^3.0"
 
 	},
 	"require-dev": {

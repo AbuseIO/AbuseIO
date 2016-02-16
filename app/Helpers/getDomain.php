@@ -8,14 +8,19 @@
  */
 function getDomain($url)
 {
-    $pslManager = new Pdp\PublicSuffixListManager();
-    $urlParser = new Pdp\Parser($pslManager->getList());
-    $urlData = $urlParser->parseUrl($url)->toArray();
-    if ($urlParser->isSuffixValid($urlData['registerableDomain']) === false) {
-        // No need to continue, domain is invalid
-        return false;
+    if (!empty($url)) {
+        $pslManager = new Pdp\PublicSuffixListManager();
+        $urlParser = new Pdp\Parser($pslManager->getList());
+        $urlData = $urlParser->parseUrl($url)->toArray();
+
+        if ($urlParser->isSuffixValid($urlData['registerableDomain']) === false) {
+            // No need to continue, domain is invalid
+            return false;
+        } else {
+            // Return valid domain
+            return $urlData['registerableDomain'];
+        }
     } else {
-        // Return valid domain
-        return $urlData['registerableDomain'];
+        return false;
     }
 }
