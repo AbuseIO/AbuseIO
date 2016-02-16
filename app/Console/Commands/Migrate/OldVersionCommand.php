@@ -188,7 +188,18 @@ class OldVersionCommand extends Command
                 $filename = $path . "evidence_id_{$evidence->ID}.data";
 
                 if (is_file($filename)) {
+                    // Check weither the evidence was actually created in the database
+                    DB::setDefaultConnection('mysql');
+
+                    $evidenceCheck = Evidence::where('id', $evidence->ID);
+                    if ($evidenceCheck->count() !== 1) {
+                        $this->error("file {$filename} exists however not in database. try deleting it to retry");
+                        die();
+                    }
+
+                    DB::setDefaultConnection('abuseio3');
                     continue;
+
                 } else {
                     echo " working on evidence ID {$evidence->ID}                    ";
                 }
@@ -263,6 +274,7 @@ class OldVersionCommand extends Command
 
                 // Save the file reference into the database
                 $evidenceSave = new Evidence();
+                $evidenceSave->id = $evidence->ID;
                 $evidenceSave->filename = $evidenceFile;
                 $evidenceSave->sender = $parsedMail->getHeader('from');
                 $evidenceSave->subject = $parsedMail->getHeader('subject');
@@ -511,7 +523,7 @@ class OldVersionCommand extends Command
                             }
 
                             $evidence = json_decode(file_get_contents($filename));
-                            $evidenceID = $evidence->evidenceId;
+                            $evidenceID = (int)$evidence->evidenceId;
                             $incidents = $evidence->incidents;
 
                             // Yes we only grab nr 0 from the array, because that is what the old aggregator did

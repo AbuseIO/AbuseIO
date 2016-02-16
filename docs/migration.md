@@ -45,6 +45,10 @@ user and password to access the database.
 
 # Preperations (-p / --prepare)
 
+- make sure you have disabled the cron (housekeeper)! if you do not disable this it will start to prune data
+while migration is running because it would think the data is unlinked. That is true, but during the migration
+these links are being created which takes time!
+
 - make sure you followed the installation guidelines correctly and setup the default account (system account). 
 The default system account is required and all data will be linked to this account!
 
