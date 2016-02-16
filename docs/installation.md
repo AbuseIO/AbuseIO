@@ -88,11 +88,17 @@ tar zxf abuseio-4.0.0.tar.gz
 ```
 
 ##### Install with composer
+Install the latest stable version:
 ```bash
 cd /opt
 composer create-project abuseio/abuseio
 ```
 
+Install the latest version:
+```
+cd /opt
+composer create-project abuseio/abuseio --stability=beta (options are: stable, RC, beta, alpha, dev)
+```
 
 #### Permissions
 Some parts of the installation had to be done as root and the application will run as user 'abuseio', so we need to set some permissions.
