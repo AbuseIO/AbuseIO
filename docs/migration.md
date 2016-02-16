@@ -91,6 +91,14 @@ php artisan migrate:oldversion --start
 
 Again this might take a while depending on how deep existing evidence was linked. A progress incidator is shown.
 
+## Running multithreaded:
+
+This will start thread number 1, which calculates (based on size) itself to tickets 1 - 1000. If you start thread 2, you will get 1001 tru 2000, etc. You can check the ticket amount of tickets in your old installation and run the right amount of processes for the migration. On a 8 Core VM (1,8Ghz) and 8GB RAM tests were completed without problems with 25 threads, in batches of 1000 simultaniously.
+
+````screen -dmS thread1 php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=1 --threadsize=1000```
+
+In addition you could consider using a RAMDISK if your backend storage is not SSD. After the prepare process rename storage/migration/ to storage/migration-disk and check the size of this folder and create a RAMDISK of that same size +376MB reserve on the storage/migration/ place. Then copy all the files from the -disk folder to the ramdisk.
+
 # Post installation
 
 Once your migration has been completed without errors (and you will notice them because they are big and red) you 
