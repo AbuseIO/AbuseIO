@@ -36,6 +36,7 @@ class OldVersionCommand extends Command
      */
     protected $signature = 'migrate:oldversion
                             {--p|prepare : Prepares the migration by building all required caches }
+                            {--c|clean : Removes ALL data from the database except prepared data }
                             {--s|start : Start the migration using cached evidence }
                             {--skipcontacts : Skip importing the contacts }
                             {--skipnetblocks : Skip importing the netblocks }
@@ -72,10 +73,59 @@ class OldVersionCommand extends Command
         $account = Account::system();
 
         if (empty($this->option('start')) &&
-            empty($this->option('prepare'))
+            empty($this->option('prepare'))&&
+            empty($this->option('clean'))
         ) {
             $this->error('You need to either prepare or start the migration. try --help');
             die();
+        }
+
+        if (!empty($this->option('clean'))) {
+            $this->warn(
+                'This will remove all data from the database except prepared data. Do not run '.
+                'this in producion and only when a migration has gone bad and you want to restart it'
+            );
+            if ($this->confirm('Do you wish to continue? [y|N]')) {
+                $this->info('starting clean up');
+                DB::statement("SET foreign_key_checks=0");
+                Note::truncate();
+                Event::truncate();
+                Ticket::truncate();
+                Netblock::truncate();
+                Contact::truncate();
+                DB::statement("SET foreign_key_checks=1");
+            } else {
+                $this->info('cancelled clean up');
+            }
+        }
+
+        /*
+         * Combine the use of start/stop and threading here for usage with prepare and start of migration
+         */
+        $startFrom = $this->option('startfrom');
+        $endWith = $this->option('endwith');
+
+        if (!empty($this->option('prepare')) ||
+            !empty($this->option('start'))
+        ) {
+            if (!empty($this->option('threaded'))) {
+                if (empty($this->option('threadid')) ||
+                    empty($this->option('threadsize'))
+                ) {
+                    $this->error('threadid and threadsize are required to calculate this threads start/stop ID');
+                    die();
+                }
+                $this->info("*** using threaded mode, instance ID {$this->option('threadid')}");
+                $startFrom =
+                    $this->option('threadid') * $this->option('threadsize') - $this->option('threadsize') + 1;
+                $endWith =
+                    $startFrom + $this->option('threadsize') - 1;
+
+                $this->info(
+                    "*** starting with ticket {$startFrom} " .
+                    "and ending with ticket {$endWith} "
+                );
+            }
         }
 
         if (!empty($this->option('prepare'))) {
@@ -106,10 +156,21 @@ class OldVersionCommand extends Command
 
             DB::setDefaultConnection('abuseio3');
 
-            $evidences = DB::table('Evidence')
-                ->get();
+            $evidenceRows = DB::table('Evidence')
+                ->where('id', '>=', $startFrom)
+                ->where('id', '<=', $endWith);
 
-            $this->output->progressStart(count($evidences));
+            $migrateCount   = $evidenceRows->count();
+            $evidences      = $evidenceRows->get();
+
+            $this->output->progressStart($migrateCount);
+
+            // If there are now rows to do, advance to complete
+            if ($migrateCount === 0) {
+                $this->output->progressAdvance();
+                echo " nothing to do, because there are no records in this selection";
+            }
+
             foreach ($evidences as $evidence) {
                 $this->output->progressAdvance();
 
@@ -123,10 +184,6 @@ class OldVersionCommand extends Command
                     echo " skipping unlinked evidence ID {$evidence->ID}         ";
                     continue;
                 }
-
-                //if ($evidence->ID != 1305) {
-                //    continue;
-                //}
 
                 $filename = $path . "evidence_id_{$evidence->ID}.data";
 
@@ -383,28 +440,6 @@ class OldVersionCommand extends Command
                 $this->info('starting migration - phase 3 - ticket and evidence data');
 
                 DB::setDefaultConnection('abuseio3');
-
-                $startFrom = $this->option('startfrom');
-                $endWith = $this->option('endwith');
-
-                if (!empty($this->option('threaded'))) {
-                    if (empty($this->option('threadid')) ||
-                       empty($this->option('threadsize'))
-                    ) {
-                        $this->error('threadid and threadsize are required to calculate this threads start/stop ID');
-                        die();
-                    }
-                    $this->info("*** using threaded mode, instance ID {$this->option('threadid')}");
-                    $startFrom =
-                        $this->option('threadid') * $this->option('threadsize') - $this->option('threadsize') + 1;
-                    $endWith =
-                        $startFrom + $this->option('threadsize') - 1;
-
-                    $this->info(
-                        "*** starting with ticket {$startFrom} " .
-                        "and ending with ticket {$endWith} "
-                    );
-                }
 
                 $ticketRows     = DB::table('Reports')
                     ->where('id', '>=', $startFrom)
