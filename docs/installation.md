@@ -25,7 +25,7 @@
 
 #### Packages (ubuntu)
 ```bash
-apt-get install curl git mysql-server apache2 apache2-utils postfix supervisor libapache2-mod-php5 php5 php-pear php5-dev php5-mcrypt php5-mysql php5-pgsql php5-curl
+apt-get install curl git mysql-server apache2 apache2-utils postfix supervisor libapache2-mod-php5 php5 php-pear php5-dev php5-mcrypt php5-mysql php5-pgsql php5-curl php5-intl
 ```
 
 #### Packages (centos)
@@ -190,7 +190,7 @@ Create file /etc/apache2/sites-available/abuseio.conf containing:
   <Directory /opt/abuseio/public/>
     Options Indexes FollowSymLinks
     AllowOverride All
-    Require all granted 
+    Require all granted
   </Directory>
 </VirtualHost>
 ```
@@ -211,7 +211,7 @@ server {
   server_name abuseio.myserver.tld;
   root /opt/abuseio/public;
   index index.php;
- 
+
   location ~ \.php$ {
     try_files $uri =404;
     fastcgi_pass unix:/var/run/fpm_abuseio.socket;
@@ -310,4 +310,3 @@ Some parsers produce high amounts of DNS queries, so you're better off using a l
 In the above install example, bind is installed and you only need to update your /etc/resolv.conf (or
 with newer ubuntu versions the /etc/network/interfaces) to use 127.0.0.1 as the FIRST resolver -- but make
 sure you leave a 2nd or 3rd with your 'normal' resolvers.
-
