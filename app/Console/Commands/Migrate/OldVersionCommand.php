@@ -417,6 +417,12 @@ class OldVersionCommand extends Command
 
                 $this->output->progressStart($migrateCount);
 
+                // If there are now rows to do, advance to complete
+                if ($migrateCount === 0) {
+                    $this->output->progressAdvance();
+                    echo " nothing to do, because there are no records in this selection";
+                }
+
                 foreach ($tickets as $ticket) {
                     // Get the list of evidence ID's related to this ticket
                     DB::setDefaultConnection('abuseio3');
@@ -515,6 +521,7 @@ class OldVersionCommand extends Command
                         }
                     }
                 }
+                $this->output->progressFinish();
             } else {
                 $this->info('skipping migration - phase 3 - Tickets');
             }
