@@ -4,6 +4,7 @@ use Illuminate\Support\ServiceProvider;
 
 /**
  * Class HelperServiceProvider
+ *
  * @package AbuseIO\Providers
  */
 class HelperServiceProvider extends ServiceProvider
@@ -13,6 +14,8 @@ class HelperServiceProvider extends ServiceProvider
         'castBoolToString',
         'isValidRegex',
         'hFileSize',
+        'getDomain',
+        'getUri',
     ];
 
     /**
