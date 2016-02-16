@@ -537,11 +537,7 @@ class OldVersionCommand extends Command
             } else {
                 $this->info('skipping migration - phase 4 - Notes');
             }
-
-            $this->output->progressFinish();
         }
-
-
 
         return true;
     }
