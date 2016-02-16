@@ -99,9 +99,54 @@ Again this might take a while depending on how deep existing evidence was linked
 
 This will start thread number 1, which calculates (based on size) itself to tickets 1 - 1000. If you start thread 2, you will get 1001 tru 2000, etc. You can check the ticket amount of tickets in your old installation and run the right amount of processes for the migration. On a 8 Core VM (1,8Ghz) and 8GB RAM tests were completed without problems with 25 threads, in batches of 1000 simultaniously.
 
-````screen -L -dmS thread1 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=1 --threadsize=1000; exec bash"```
-
 In addition you could consider using a RAMDISK if your backend storage is not SSD. After the prepare process rename storage/migration/ to storage/migration-disk and check the size of this folder and create a RAMDISK of that same size +376MB reserve on the storage/migration/ place. Then copy all the files from the -disk folder to the ramdisk.
+
+i have 7341 evidences to be prepared, therefor i need to spawn 8 chunks of 1000
+i have 21520 tickets to generate, therefor i need to spam 22 chuncks of 1000, but i add more to be safe
+After running all the commands i can screen -r to each thread to view the results, anything red is bad
+
+Example:
+```
+screen -dmS pthread1  bash -c "php artisan migrate:oldversion -p --threaded --threadid=1  --threadsize=1000; exec bash"
+screen -dmS pthread2  bash -c "php artisan migrate:oldversion -p --threaded --threadid=2  --threadsize=1000; exec bash"
+screen -dmS pthread3  bash -c "php artisan migrate:oldversion -p --threaded --threadid=3  --threadsize=1000; exec bash"
+screen -dmS pthread4  bash -c "php artisan migrate:oldversion -p --threaded --threadid=4  --threadsize=1000; exec bash"
+screen -dmS pthread5  bash -c "php artisan migrate:oldversion -p --threaded --threadid=5  --threadsize=1000; exec bash"
+screen -dmS pthread6  bash -c "php artisan migrate:oldversion -p --threaded --threadid=6  --threadsize=1000; exec bash"
+screen -dmS pthread7  bash -c "php artisan migrate:oldversion -p --threaded --threadid=7  --threadsize=1000; exec bash"
+screen -dmS pthread8  bash -c "php artisan migrate:oldversion -p --threaded --threadid=8  --threadsize=1000; exec bash"
+
+php artisan migrate:oldversion -s --skiptickets --skipnotes
+
+screen -dmS thread1  bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=1  --threadsize=1000; exec bash"
+screen -dmS thread2  bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=2  --threadsize=1000; exec bash"
+screen -dmS thread3  bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=3  --threadsize=1000; exec bash"
+screen -dmS thread4  bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=4  --threadsize=1000; exec bash"
+screen -dmS thread5  bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=5  --threadsize=1000; exec bash"
+screen -dmS thread6  bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=6  --threadsize=1000; exec bash"
+screen -dmS thread7  bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=7  --threadsize=1000; exec bash"
+screen -dmS thread8  bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=8  --threadsize=1000; exec bash"
+screen -dmS thread9  bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=9  --threadsize=1000; exec bash"
+screen -dmS thread10 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=10 --threadsize=1000; exec bash"
+screen -dmS thread10 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=10 --threadsize=1000; exec bash"
+screen -dmS thread11 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=11 --threadsize=1000; exec bash"
+screen -dmS thread12 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=12 --threadsize=1000; exec bash"
+screen -dmS thread13 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=13 --threadsize=1000; exec bash"
+screen -dmS thread14 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=14 --threadsize=1000; exec bash"
+screen -dmS thread15 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=15 --threadsize=1000; exec bash"
+screen -dmS thread16 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=16 --threadsize=1000; exec bash"
+screen -dmS thread17 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=17 --threadsize=1000; exec bash"
+screen -dmS thread18 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=18 --threadsize=1000; exec bash"
+screen -dmS thread19 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=19 --threadsize=1000; exec bash"
+screen -dmS thread20 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=20 --threadsize=1000; exec bash"
+screen -dmS thread21 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=21 --threadsize=1000; exec bash"
+screen -dmS thread22 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=22 --threadsize=1000; exec bash"
+screen -dmS thread23 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=23 --threadsize=1000; exec bash"
+screen -dmS thread24 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=24 --threadsize=1000; exec bash"
+screen -dmS thread25 bash -c "php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skipnotes --threaded --threadid=25 --threadsize=1000; exec bash"
+
+php artisan migrate:oldversion -s --skipcontacts --skipnetblocks --skiptickets
+```
 
 # Post installation
 
