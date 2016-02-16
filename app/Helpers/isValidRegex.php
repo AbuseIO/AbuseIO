@@ -3,7 +3,7 @@
 /**
  * Function to test a regular expression for it's validity.
  *
- * @param string $regex
+ * @param  string $regex
  * @return boolean
  */
 function isValidRegex($regex)

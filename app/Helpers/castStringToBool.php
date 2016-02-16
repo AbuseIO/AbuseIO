@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Function to covert a string to its name in boolean
+ * Function to convert a string to its name in boolean
  *
- * @param string $str
+ * @param  string $str
  * @return bool
  */
 function castStringToBool($str)

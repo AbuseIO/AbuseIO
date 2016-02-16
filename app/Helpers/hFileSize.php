@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Function to covert bytes to human readable format
+ * Function to convert bytes to human readable format
  *
  * @param  int $bytes
  * @param  int $decimals
