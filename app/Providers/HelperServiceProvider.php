@@ -16,6 +16,7 @@ class HelperServiceProvider extends ServiceProvider
         'hFileSize',
         'getDomain',
         'getUri',
+        'getUrlData',
     ];
 
     /**

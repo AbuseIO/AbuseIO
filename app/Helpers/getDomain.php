@@ -14,7 +14,7 @@ function getDomain($url)
         $urlData = $urlParser->parseUrl($url)->toArray();
 
         if ($urlParser->isSuffixValid($urlData['registerableDomain']) === false) {
-            // No need to continue, domain is invalid
+            // Not a valid domain.
             return false;
         } else {
             // Return valid domain
