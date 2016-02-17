@@ -9,15 +9,8 @@
 function getDomain($url)
 {
     if (!empty($url)) {
-        //Sanitize URL first by removing unwanted chars
-        $url = str_replace(
-            [
-                "\n",
-                "\r",
-            ],
-            '',
-            $url
-        );
+        // Sanitize URL first by removing unwanted chars
+        $url = preg_replace("/[\n\r]/", "", $url);
 
         $pslManager = new Pdp\PublicSuffixListManager();
         $urlParser = new Pdp\Parser($pslManager->getList());
