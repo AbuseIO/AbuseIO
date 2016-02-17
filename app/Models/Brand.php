@@ -72,7 +72,7 @@ class Brand extends Model
             'name'              => 'required|unique:brands,name',
             'company_name'      => 'required',
             'introduction_text' => 'required',
-            'logo'              => 'required',
+            'logo'              => 'required|image|max:64',
             'creator_id'        => 'required|integer|exists:accounts,id',
             'systembrand'       => 'sometimes|required|uniqueflag:brands:systembrand',
 
@@ -94,6 +94,7 @@ class Brand extends Model
             'company_name'      => 'required',
             'introduction_text' => 'required',
             'creator_id'        => 'required|integer|exists:accounts,id',
+            'logo'              => 'sometimes|image|max:64',
             'systembrand'       => 'sometimes|required|uniqueflag:brands:systembrand',
         ];
 
@@ -201,31 +202,6 @@ class Brand extends Model
     public function isSystemBrand()
     {
         return ($this->systembrand);
-    }
-
-    /**
-     * Check if the uploaded logo is a valid image, not bigger then
-     * 64kb
-     *
-     * @param  object $file
-     * @param  array  &$messages
-     * @return bool
-     */
-    public static function checkUploadedLogo($file, &$messages)
-    {
-        // Check for a valid image
-        $maxsize = 64 * 1024; // 64kb max size of a database blob
-
-        if ($file->getSize() > $maxsize) {
-            array_push($messages, "Logo exceeding max size of 64kb");
-        }
-
-        $mimetype = $file->getMimeType();
-        if (!preg_match('/^image/', $mimetype)) {
-            array_push($messages, "Uploaded logo is not an image, its mimetype is: $mimetype");
-        }
-
-        return (empty($messages));
     }
 
     /**

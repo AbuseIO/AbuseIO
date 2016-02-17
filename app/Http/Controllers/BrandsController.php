@@ -157,17 +157,7 @@ class BrandsController extends Controller
         $account = $this->auth_user->account;
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
-            $errors = [];
-
-            if (!Brand::checkUploadedLogo($brandForm->file('logo'), $errors)) {
-                return Redirect::route('admin.brands.create')
-                    ->withInput($input)
-                    ->withErrors(['logo' => $errors]);
-            }
-
-            // all ok
             $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
-
         } else {
             return Redirect::route('admin.brands.create')
                 ->withInput($input)
@@ -261,17 +251,7 @@ class BrandsController extends Controller
         $input = $brandForm->all();
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
-            $errors = [];
-
-            if (!Brand::checkUploadedLogo($brandForm->file('logo'), $errors)) {
-                return Redirect::route('admin.brands.edit', $brand->id)
-                    ->withErrors(['logo' => $errors]);
-            }
-
-            // all ok
-            $filesystem = new Filesystem;
-            $input['logo'] = $filesystem->get($brandForm->file('logo')->getRealPath());
-
+            $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
         }
 
         $brand->update($input);
