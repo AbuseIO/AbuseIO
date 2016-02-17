@@ -50,7 +50,7 @@ class CreateBrandsTable extends Migration
                 'company_name'              => 'AbuseIO',
                 'introduction_text'         => 'Open Source abusemanagement',
                 'creator_id'                => 1,
-                'logo'                      => Brand::getDefaultLogo(),
+                'logo'                      => file_get_contents(Brand::getDefaultLogo()->getPathname()),
                 'systembrand'               => true,
                 'created_at'                => new DateTime,
                 'updated_at'                => new DateTime,

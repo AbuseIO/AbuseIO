@@ -27,7 +27,7 @@ $factory->define(AbuseIO\Models\Brand::class, function (Faker\Generator $faker) 
     return [
         'name' => $faker->name,
         'company_name' => $faker->company,
-        'logo' => \AbuseIO\Models\Brand::getDefaultLogo(),
+        'logo' => file_get_contents(\AbuseIO\Models\Brand::getDefaultLogo()->getPathname()),
         'introduction_text' => $faker->realText(),
         'creator_id' => 1,
     ];

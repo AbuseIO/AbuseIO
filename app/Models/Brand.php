@@ -95,7 +95,7 @@ class Brand extends Model
             'company_name'      => 'required',
             'introduction_text' => 'required',
             'creator_id'        => 'required|integer|exists:accounts,id',
-            'logo'              => 'sometimes|image|max:64',
+            'logo'              => 'sometimes|required|image|max:64',
             'systembrand'       => 'sometimes|required|uniqueflag:brands:systembrand',
         ];
 
