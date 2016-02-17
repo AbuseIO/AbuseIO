@@ -5,6 +5,7 @@ namespace AbuseIO\Models;
 use AbuseIO\Models\Account;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class Account
@@ -123,12 +124,14 @@ class Brand extends Model
         return $this->belongsTo('AbuseIO\Models\Account', 'creator_id');
     }
 
+
     /**
-     * @return string
+     * @return File
      */
     public static function getDefaultLogo()
     {
-        return file_get_contents(base_path('public/images/logo_150.png'));
+        $logo = new File(base_path('public/images/logo_150.png'), true);
+        return $logo;
     }
 
     /*
