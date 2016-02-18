@@ -12,6 +12,11 @@ function getDomain($url)
         // Sanitize URL first by removing unwanted chars
         $url = preg_replace("/[\n\r]/", "", $url);
 
+        // Check weither the URL is actually valid
+        if (!filter_var($url, FILTER_VALIDATE_URL) === true) {
+            return false;
+        }
+
         $pslManager = new Pdp\PublicSuffixListManager();
         $urlParser = new Pdp\Parser($pslManager->getList());
         $urlData = $urlParser->parseUrl($url)->toArray();
