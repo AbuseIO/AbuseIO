@@ -167,7 +167,12 @@ function parse_shadowserver($message) {
                                                     'fields'    => 'protocol port tag programs mountd_port exports',
                                                     'type'      => 'INFO',
                                                  ),
-              );
+                'scan_mdns'          => array (
+                    'class'     => 'Open mDNS Server',
+                    'fields'    => 'protocol port tag services workstation_name',
+                    'type'      => 'INFO',
+                ),
+            );
 
     // ==================
 
