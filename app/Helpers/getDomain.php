@@ -12,6 +12,15 @@ function getDomain($url)
         // Sanitize URL first by removing unwanted chars
         $url = preg_replace("/[\n\r]/", "", $url);
 
+        // Sanitize accourding to RFC1738 (perhaps use RFC3986?)
+        $entities = [
+            ' ',
+        ];
+        $replacements = [
+            '%20',
+        ];
+        $url = str_replace($entities, $replacements, $url);
+
         // Check weither the URL is actually valid
         if (!filter_var($url, FILTER_VALIDATE_URL) === true) {
             return false;
