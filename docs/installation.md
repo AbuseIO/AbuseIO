@@ -316,3 +316,19 @@ Some parsers produce high amounts of DNS queries, so you're better off using a l
 In the above install example, bind is installed and you only need to update your /etc/resolv.conf (or
 with newer ubuntu versions the /etc/network/interfaces) to use 127.0.0.1 as the FIRST resolver -- but make
 sure you leave a 2nd or 3rd with your 'normal' resolvers.
+
+### Finalizing configuration
+
+Once completed there are a few settings you will need to configure.
+
+Start with `/opt/abuseio/config/main.php` to and copy the main.php into the `/opt/abuseio/config/$ENV` folder. then
+setup stuff like the sender of your e-mails, where to bounce, etc in the file `/opt/abuseio/config/$ENV/main.php`.
+
+Also if you have changed the username and/or group where you run AbuseIO under, you will need to update the 
+config `/opt/abuseio/config/app.php` as well.
+
+Creating a copy into the #ENV folder with the giving example from above you create a 'override' from the default 
+config where you copied it from. Its a overlay override method. So only variables in your override config you have set
+(changed) will be actually used. If in the default config there is a option called 'bla' and you remove it from your
+override config, then the default option will be used. So you are not required to copy the entire file, but you can 
+just copy the elements needed into a new file (although a full copy will simplify things)
