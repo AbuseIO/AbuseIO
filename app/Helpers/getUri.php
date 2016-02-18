@@ -12,11 +12,24 @@ function getUri($url)
         // Sanitize URL first by removing unwanted chars
         $url = preg_replace("/[\n\r]/", "", $url);
 
+        // Check weither the domain is actually valid
+        if (getDomain($url) == false) {
+            return false;
+        }
+
         $pslManager = new Pdp\PublicSuffixListManager();
         $urlParser = new Pdp\Parser($pslManager->getList());
         $urlData = $urlParser->parseUrl($url)->toArray();
 
-        return $urlData['path'] . (!empty($urlData['query']) ? '?'. $urlData['query'] : '');
+        $path = $urlData['path'] . (!empty($urlData['query']) ? '?'. $urlData['query'] : '');
+
+        // Set the path to root if empty (default)
+        if (empty($path)) {
+            $path = '/';
+        }
+
+        return $path;
+
     } else {
         return false;
     }
