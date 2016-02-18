@@ -167,8 +167,8 @@ class Evidence extends Model
      */
     public function getEmlAttribute()
     {
-        if (is_file($this->filename)) {
-            return file_get_contents($this->filename);
+        if (Storage::exists($this->filename)) {
+            return Storage::get($this->filename);
         }
 
         return false;
