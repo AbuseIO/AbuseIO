@@ -12,7 +12,7 @@ function getDomain($url)
         // Sanitize URL first by removing unwanted chars
         $url = preg_replace("/[\n\r]/", "", $url);
 
-        // Sanitize accourding to RFC1738 (perhaps use RFC3986?)
+        // Sanitize URL accourding to RFC1738 (perhaps use RFC3986?)
         $entities = [
             ' ',
         ];
