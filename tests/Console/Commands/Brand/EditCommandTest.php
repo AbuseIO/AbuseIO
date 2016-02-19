@@ -60,14 +60,15 @@ class EditCommandTest extends TestCase
             'brand:edit',
             [
                 'id' => '1',
-                '--company_name' => 'New name',
+                '--company_name' => 'New name 1',
             ]
         );
         $this->assertEquals($exitCode, 0);
         $this->assertContains('The brand has been updated', Artisan::output());
 
         $brand = Brand::find(1);
-        $this->assertEquals('New name', $brand->company_name);
+
+        $this->assertEquals('New name 1', $brand->company_name);
         $brand->company_name = 'AbuseIO';
         $brand->save();
     }

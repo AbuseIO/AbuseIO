@@ -42,8 +42,10 @@ class EditCommand extends AbstractEditCommand
 
     protected function getValidator($model)
     {
-        $data = $model->toArray();
-        unset($data['logo']);
-        return Validator::make($data, Brand::updateRules($model));
+        $data = $this->getModelAsArrayForDirtyAttributes($model);
+        $updateRules = $this->getUpdateRulesForDirtyAttributes(Brand::updateRules($model));
+
+
+        return Validator::make($data, $updateRules);
     }
 }

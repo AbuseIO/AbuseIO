@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 
 abstract class AbstractEditCommand extends Command
 {
+    private $dirtyAttributes = [];
+
     /**
      * Create a new command instance.
      */
@@ -48,14 +50,15 @@ abstract class AbstractEditCommand extends Command
             return false;
         }
 
-        if (!$model->save()) {
+
+
+        if (!$model->update()) {
             $this->error(
                 sprintf('Failed to save the %s into the database', $this->getAsNoun())
             );
 
             return false;
         }
-
         $this->info(
             sprintf('The %s has been updated', $this->getAsNoun())
         );
@@ -124,9 +127,38 @@ abstract class AbstractEditCommand extends Command
                             break;
                     }
                     $model->$option = $value;
+                    $this->addToDirtyAttributes($option);
                 }
             }
         }
+    }
+
+    private function addToDirtyAttributes($attribute)
+    {
+        $this->dirtyAttributes[] = $attribute;
+    }
+
+    public function getUpdateRulesForDirtyAttributes($updateRules)
+    {
+        return $this->returnOnlyKeysInFilter($this->dirtyAttributes, $updateRules);
+    }
+
+    protected function getModelAsArrayForDirtyAttributes($model)
+    {
+
+        return $this->returnOnlyKeysInFilter($this->dirtyAttributes, $model->toArray());
+    }
+
+    private function returnOnlyKeysInFilter($keys, $array) {
+
+        $result = [];
+
+        foreach($keys as $key) {
+            if (array_key_exists($key, $array)) {
+                $result[$key] = $array[$key];
+            }
+        }
+        return $result;
     }
 
     protected function updateBooleanFieldWithOption($model, $option)
