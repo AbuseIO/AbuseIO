@@ -237,8 +237,8 @@ return [
     ],
 
     'FEEDBACK_LOOP' => [
-            'name' => 'Feedback loop (FBL) message',
-            'description' => "
+        'name' => 'Feedback loop (FBL) message',
+        'description' => "
                 <h2>What is A Feedback Loop?</h2>
 
                 <p>In general, a feedback loop (FBL) or complaint feedback loop is
@@ -583,6 +583,69 @@ return [
             <a target'_blank' href='http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf'>http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf</a><br>
             <a target'_blank' href='http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification'>http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification</a><br>
             <a target'_blank' href='http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf'>http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf</a><br>
+
+            "
+    ],
+
+    'OPEN_MDNS_SERVICE' => [
+        'name' => 'Open mDNS Service',
+        'description' => "
+            <h2>What is an 'Open mDNS Service'?</h2>
+
+            <p>An Open mDNS Service is a mDNS server which is willing to resolve
+            recursive DNS queries for anyone on the Internet.</p>
+
+            <p>When a DNS server resolves a recursive DNS query, it tracks down
+            information about a domain name hosted on some other DNS server
+            somewhere else on the Internet (a recursive process involving
+            several other DNS servers in the DNS hierarchy).</p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>Running an open (UDP) service is not bad on its own and it is mostly
+            a required dependancy when installing a system.
+            Unfortunately, hackers have also found this feature useful in performing a
+            special type of DDoS attack called a 'Amplification Attack'.</p>
+
+            <p>The attacker sends a packet apparently from the intended victim to some
+            server on the Internet that will reply immediately. Because the source
+            IP address is forged, the remote Internet server replies and sends data
+            to the victim.</p>
+
+            <p>That has two effects: the actual source of the attack is hidden and is
+            very hard to trace, and, if many Internet servers are used, an attack
+            can consist of an overwhelming number of packets hitting a victim from
+            all over the world.</p>
+
+            <p>But what makes reflection attacks really powerful is when they are
+            also amplified: when a small forged packet elicits a large reply from
+            the server (or servers). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server (or
+            servers) send large replies to the victim.</p>
+
+            <p>Amplification attacks like that result in an attacker turning a small
+            amount of bandwidth coming from a small number of machines into a massive
+            traffic load hitting a victim from around the Internet.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>In most cases the computer has installed a DNS service as an dependancy
+            as resolving is needed on that computer. However its only required to do
+            local resolving, thus the added 'external access' to this service is
+            unneeded. In such cases we recommend either changing the configuration
+            of your DNS service or to firewall port 5353 for external hosts.</p>
+
+            <p>If you are running a DNS resolver for multiple computers, then consider
+            to limit access to the required group of computer or implement safegaurds
+            like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
+
+            <h2>Tips to resolve this matter</h2>
+
+            <h3>Firewalling the DNS Service</h3>
+
+            <p>To block incoming remote requests you will need to filter UDP/port 5353. You
+            service might also be listening on TCP/port 5353, however only UDP services
+            are used in DNS Amplification Attacks. </p>
 
             "
     ],
