@@ -779,6 +779,14 @@ class OldVersionCommand extends Command
             $this->exception();
         }
 
+        if ($ticket->CustomerResolved == 1) {
+            $newTicket->contact_status_id = 'RESOLVED';
+        } elseif ($ticket->CustomerIgnored == 1) {
+            $newTicket->contact_status_id = 'IGNORED';
+        } else {
+            $newTicket->contact_status_id = 'OPEN';
+        }
+
         // Validate the model before saving
         $validator = Validator::make(
             json_decode(json_encode($newTicket), true),
