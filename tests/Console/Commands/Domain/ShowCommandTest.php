@@ -15,12 +15,12 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:show',
             [
-                '--name' => 'john-doe.tld',
+                'domain' => 'john-doe.tld',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('John Doe', Artisan::output());
+        $this->assertContains('john-doe.tld', Artisan::output());
     }
 
     public function testWithValidIdFilter()
@@ -28,12 +28,12 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:show',
             [
-                '--id' => '1',
+                'domain' => '1',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('John Doe', Artisan::output());
+        $this->assertContains('john-doe.tld', Artisan::output());
     }
 
     public function testWithInvalidIdFilter()
@@ -41,11 +41,11 @@ class ShowCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:show',
             [
-                '--id' => '1000',
+                'domain' => '1000',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching domain where found.', Artisan::output());
+        $this->assertContains('No matching domain was found.', Artisan::output());
     }
 }
