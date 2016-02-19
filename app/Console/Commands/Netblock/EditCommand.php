@@ -55,6 +55,9 @@ class EditCommand extends AbstractEditCommand
 
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Netblock::updateRules($model));
+        $data = $this->getModelAsArrayForDirtyAttributes($model);
+        $updateRules = $this->getUpdateRulesForDirtyAttributes(Netblock::updateRules($model));
+
+        return Validator::make($data, $updateRules);
     }
 }

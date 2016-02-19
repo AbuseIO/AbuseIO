@@ -58,7 +58,10 @@ class EditCommand extends AbstractEditCommand
     protected function getValidator($model)
     {
         if (null !== $model) {
-            return Validator::make($model->toArray(), Domain::updateRules($model));
+            $data = $this->getModelAsArrayForDirtyAttributes($model);
+            $updateRules = $this->getUpdateRulesForDirtyAttributes(Domain::updateRules($model));
+
+            return Validator::make($data, $updateRules);
         }
     }
 }

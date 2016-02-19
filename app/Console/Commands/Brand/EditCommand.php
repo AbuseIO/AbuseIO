@@ -45,7 +45,6 @@ class EditCommand extends AbstractEditCommand
         $data = $this->getModelAsArrayForDirtyAttributes($model);
         $updateRules = $this->getUpdateRulesForDirtyAttributes(Brand::updateRules($model));
 
-
         return Validator::make($data, $updateRules);
     }
 }
