@@ -2,7 +2,7 @@
 
 namespace AbuseIO\Console\Commands\Queue;
 
-use AbuseIO\Console\Commands\AbstractShowCommand2;
+use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Job;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputArgument;
  * Class ShowCommand
  * @package AbuseIO\Console\Commands\Queue
  */
-class ShowCommand extends AbstractShowCommand2
+class ShowCommand extends AbstractShowCommand
 {
 
     /**

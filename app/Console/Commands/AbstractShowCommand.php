@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 
-abstract class AbstractShowCommand2 extends Command
+abstract class AbstractShowCommand extends Command
 {
     /**
      * Configure the console command.

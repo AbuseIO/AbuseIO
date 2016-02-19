@@ -2,14 +2,14 @@
 
 namespace AbuseIO\Console\Commands\Collector;
 
-use AbuseIO\Console\Commands\AbstractShowCommand2;
+use AbuseIO\Console\Commands\AbstractShowCommand;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Class ShowCommand.
  */
-class ShowCommand extends AbstractShowCommand2
+class ShowCommand extends AbstractShowCommand
 {
     /**
      * {@inherit docs}.

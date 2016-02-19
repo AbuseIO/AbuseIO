@@ -2,11 +2,11 @@
 
 namespace AbuseIO\Console\Commands\Ticket;
 
-use AbuseIO\Console\Commands\AbstractShowCommand2;
+use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Ticket;
 use Symfony\Component\Console\Input\InputArgument;
 
-class ShowCommand extends AbstractShowCommand2
+class ShowCommand extends AbstractShowCommand
 {
     /**
      * {@inherit docs}
