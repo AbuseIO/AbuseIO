@@ -2,6 +2,9 @@
 
 namespace tests\Console\Commands\Netblock;
 
+use AbuseIO\Models\Netblock;
+use AbuseIO\Models\Contact;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -10,55 +13,76 @@ use TestCase;
  */
 class ShowCommandTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    /** @var  Netblock */
+    private $netblock;
+
+    private function initDB()
+    {
+        $this->netblock = factory(Netblock::class)->create(
+            ["contact_id" => factory(Contact::class)->create()->id]
+        );
+    }
+
+
     public function testWithValidContactFilter()
     {
+        $this->initDB();
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                '--filter' => 'Customer 1',
+                'netblock' => $this->netblock->contact->name,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Customer 1', Artisan::output());
+        $this->assertContains($this->netblock->contact->name, Artisan::output());
     }
 
     public function testWithInvalidFilter()
     {
+        $this->initDB();
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                '--filter' => 'xxx',
+                'netblock' => 'xxx',
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching netblocks where found.', Artisan::output());
+        $this->assertContains('No matching netblock was found.', Artisan::output());
     }
 
     public function testWithStartIpFilter()
     {
+        $this->initDB();
+        $ip = $this->netblock->first_ip;
+
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                '--filter' => '172.16.10.13',
+                'netblock' => $ip,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('John Doe', Artisan::output());
+        $this->assertContains($this->netblock->contact->name, Artisan::output());
     }
 
     public function testNetBlockShowWithStartEndFilter()
     {
+        $this->initDB();
+        $ip = $this->netblock->last_ip;
+
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                '--filter' => 'fdf1:cb9d:f59e:19b0:ffff:ffff:ffff:ffff',
+                'netblock' => $ip,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('ISP Business Internet', Artisan::output());
+        $this->assertContains($this->netblock->contact->name, Artisan::output());
     }
 }
