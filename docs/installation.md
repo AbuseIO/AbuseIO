@@ -319,7 +319,10 @@ sure you leave a 2nd or 3rd with your 'normal' resolvers.
 
 ### Finalizing configuration
 
-Once completed there are a few settings you will need to configure.
+Once completed there are a few settings you will need to configure. First off you need to be aware that by default your
+queue runners are running in --daemon mode (the services from supervisord). This is greate for saving CPU and is a lot
+faster, however does not reread the configuration until the daemon has been restarted. So if you change the confguration
+you will need to restart the supervisord services too!
 
 Start with `/opt/abuseio/config/main.php` to and copy the main.php into the `/opt/abuseio/config/$ENV` folder. then
 setup stuff like the sender of your e-mails, where to bounce, etc in the file `/opt/abuseio/config/$ENV/main.php`.
