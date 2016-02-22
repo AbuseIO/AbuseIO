@@ -149,9 +149,12 @@ $factory->define(AbuseIO\Models\Note::class, function (Faker\Generator $faker) {
 //$factory->define(AbuseIO\Models\Permission::class, function (Faker\Generator $faker) {
 //    return [];
 //});
-//$factory->define(AbuseIO\Models\Role::class, function (Faker\Generator $faker) {
-//    return [];
-//});
+$factory->define(AbuseIO\Models\Role::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'description' => $faker->sentence()
+    ];
+});
 
 
 $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker) {
