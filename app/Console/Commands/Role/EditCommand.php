@@ -2,90 +2,48 @@
 
 namespace AbuseIO\Console\Commands\Role;
 
-use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\AbstractEditCommand;
 use AbuseIO\Models\Role;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
-use Carbon;
 
-class EditCommand extends Command
+class EditCommand extends AbstractEditCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'role:edit
-                            {--role= : The role name or id of the role you want to change }
-                            {--name= : The new name of the role }
-                            {--description= : The new description of the role }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Changes information from a role';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    public function getOptionsList()
     {
-        parent::__construct();
+        return new InputDefinition([
+            new inputArgument('id', InputArgument::REQUIRED, 'Role id to edit'),
+            new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'Name for role'),
+            new InputOption('description', null, InputOption::VALUE_OPTIONAL,  'Description')
+        ]);
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return boolean
-     */
-    public function handle()
+    public function getAsNoun()
     {
-        if (empty($this->option('role'))) {
-            $this->warn('the required role argument was not passed, try --help');
-            return false;
-        }
+        return 'role';
+    }
 
-        $role = false;
-        if (!is_object($role)) {
-            $role = Role::where('name', $this->option('role'))->first();
-        }
+    protected function getModelFromRequest()
+    {
+        return Role::find($this->argument('id'));
+    }
 
-        if (!is_object($role)) {
-            $role = Role::find($this->option('role'));
-        }
-
-        if (!is_object($role)) {
-            $this->error('Unable to find role with this criteria');
-            return false;
-        }
-
-        // Apply changes to the role object
-        if (!empty($this->option('name'))) {
-            $role->name = $this->option('name');
-        }
-        if (!empty($this->option('description'))) {
-            $role->description = $this->option('description');
-        }
-
-        $validation = Validator::make($role->toArray(), Role::updateRules($role));
-
-        if ($validation->fails()) {
-            foreach ($validation->messages()->all() as $message) {
-                $this->warn($message);
-            }
-
-            $this->error('Failed to create the role due to validation warnings');
-
-            return false;
-        }
-
-        // Save the object
-        $role->save();
-
-        $this->info("Role has been successfully updated");
+    protected function handleOptions($model)
+    {
+        $this->updateFieldWithOption($model, 'name');
+        $this->updateFieldWithOption($model, 'description');
 
         return true;
+    }
+
+    protected function getValidator($model)
+    {
+        $data = $this->getModelAsArrayForDirtyAttributes($model);
+        $updateRules = $this->getUpdateRulesForDirtyAttributes(Role::updateRules($model));
+
+        return Validator::make($data, $updateRules);
     }
 }
