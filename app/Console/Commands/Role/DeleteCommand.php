@@ -30,11 +30,11 @@ class DeleteCommand extends AbstractDeleteCommand
     {
         $role = false;
         if (!is_object($role)) {
-            $role = Role::where('name', $this->option('role'))->first();
+            $role = Role::where('name', $this->argument('role'))->first();
         }
 
         if (!is_object($role)) {
-            $role = Role::find($this->option('role'));
+            $role = Role::find($this->argument('role'));
         }
         return $role;
     }
