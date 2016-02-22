@@ -146,9 +146,12 @@ $factory->define(AbuseIO\Models\Note::class, function (Faker\Generator $faker) {
 //    return [];
 //});
 //
-//$factory->define(AbuseIO\Models\Permission::class, function (Faker\Generator $faker) {
-//    return [];
-//});
+$factory->define(AbuseIO\Models\Permission::class, function (Faker\Generator $faker) {
+    return [
+        "name" => $faker->name,
+        "description" => $faker->sentence(6),
+    ];
+});
 $factory->define(AbuseIO\Models\Role::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,

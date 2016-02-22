@@ -2,63 +2,129 @@
 
 namespace AbuseIO\Console\Commands\Permission;
 
-use Illuminate\Console\Command;
-use AbuseIO\Models\Permission;
-use Carbon;
 
-class ListCommand extends Command
+use AbuseIO\Console\Commands\AbstractListCommand;
+use AbuseIO\Models\Permission;
+
+/**
+ * Class ListCommand
+ * @package AbuseIO\Console\Commands\Permission
+ */
+class ListCommand extends AbstractListCommand
 {
 
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'permission:list
-                            {--filter : Applies a filter on the permission name }
-    ';
+    protected $filterArguments = ["id"];
 
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Shows a list of all available permissions';
 
     /**
      * The headers of the table
      * @var array
      */
-    protected $headers = ['ID', 'Name', 'Description'];
+    protected $headers = ['Id', "Name", "Description"];
 
     /**
-     * The fields of the table / database row
-     * @var array
+     * {@inheritdoc }
      */
-    protected $fields = ['id', 'name', 'description'];
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    protected function transformListToTableBody($list)
     {
-        parent::__construct();
+        $result = [];
+        /* @var $permission  \AbuseIO\Models\Permission|null */
+        foreach ($list as $permission) {
+            $result[] = [
+                $permission->id,
+                $permission->name,
+                $permission->description,
+            ];
+        }
+        return $result;
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return boolean
+     * {@inheritdoc }
      */
-    public function handle()
+    protected function findWithCondition($filter)
     {
-        if (!empty($this->option('filter'))) {
-            $permissions = Permission::where('name', 'like', "%{$this->option('filter')}%")->get($this->fields);
-        } else {
-            $permissions = Permission::all($this->fields);
-        }
+        return Permission::where('id',  $filter)
+            ->orWhere('name', 'like', '%'.$filter.'%')
+            ->get();
+    }
 
-        $this->table($this->headers, $permissions);
+    /**
+     * {@inheritdoc }
+     */
+    protected function findAll()
+    {
+        return Permission::all();
+    }
 
-        return true;
+    /**
+     * {@inheritdoc }
+     */
+    protected function getAsNoun()
+    {
+        return "permission";
     }
 }
+
+
+
+//use Illuminate\Console\Command;
+//use AbuseIO\Models\Permission;
+//use Carbon;
+//
+//class ListCommand extends Command
+//{
+//
+//    /**
+//     * The console command name.
+//     * @var string
+//     */
+//    protected $signature = 'permission:list
+//                            {--filter : Applies a filter on the permission name }
+//    ';
+//
+//    /**
+//     * The console command description.
+//     * @var string
+//     */
+//    protected $description = 'Shows a list of all available permissions';
+//
+//    /**
+//     * The headers of the table
+//     * @var array
+//     */
+//    protected $headers = ['ID', 'Name', 'Description'];
+//
+//    /**
+//     * The fields of the table / database row
+//     * @var array
+//     */
+//    protected $fields = ['id', 'name', 'description'];
+//
+//    /**
+//     * Create a new command instance.
+//     * @return void
+//     */
+//    public function __construct()
+//    {
+//        parent::__construct();
+//    }
+//
+//    /**
+//     * Execute the console command.
+//     *
+//     * @return boolean
+//     */
+//    public function handle()
+//    {
+//        if (!empty($this->option('filter'))) {
+//            $permissions = Permission::where('name', 'like', "%{$this->option('filter')}%")->get($this->fields);
+//        } else {
+//            $permissions = Permission::all($this->fields);
+//        }
+//
+//        $this->table($this->headers, $permissions);
+//
+//        return true;
+//    }
+//}
