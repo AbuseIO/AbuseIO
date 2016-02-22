@@ -129,4 +129,14 @@ abstract class AbstractShowCommand extends Command
 
         return $result;
     }
+
+    protected function hideProperty($resultSet, $property)
+    {
+        foreach ($resultSet as $key => $result) {
+            if ($result[0] === $property) {
+                unset($resultSet[$key]);
+            }
+        }
+        return $resultSet;
+    }
 }
