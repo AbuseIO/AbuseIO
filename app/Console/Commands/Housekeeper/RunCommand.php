@@ -174,14 +174,15 @@ class RunCommand extends Command
         /*
          * Send alarm on hanging jobs
          */
-        if (count($hangs) != 0) {
+        $hangCount = count($hangs);
+        if ($hangCount != 0) {
             Log::warning(
-                get_class($this) . ': Housekeeper detected jobs that are stuck in one or more queues!'
+                get_class($this) . ": Housekeeper detected {$hangCount} jobs that are stuck in one or more queues!"
             );
 
             if (config('main.housekeeping.enable_queue_problem_alerts')) {
                 AlertAdmin::send(
-                    "Alert: There are " . count($hangs) . " jobs that are stuck:" . PHP_EOL . PHP_EOL .
+                    "Alert: There are {$hangCount} jobs that are stuck:" . PHP_EOL . PHP_EOL .
                     implode(PHP_EOL, $hangs)
                 );
             }
@@ -191,25 +192,26 @@ class RunCommand extends Command
          * Check for any kind of failed jobs, if any found start alarm bells
          */
         $failed = $this->laravel['queue.failer']->all();
-        if (count($failed) != 0) {
+        $failedCount = count($failed;
+        if ($failedCount != 0) {
             // Reset object to string for reporting
             foreach ($failed as $key => $job) {
                 $failed[$key] = implode(' ', get_object_vars($job));
             }
 
             Log::warning(
-                get_class($this) . ': Housekeeper detected failed jobs which need to be handled!'
+                get_class($this) . ": Housekeeper detected failed {$failedCount} jobs which need to be handled!"
             );
 
             if (config('main.housekeeping.enable_queue_problem_alerts')) {
                 AlertAdmin::send(
-                    "Alert: There are " . count($failed) . " jobs that have failed:" . PHP_EOL . PHP_EOL .
+                    "Alert: There are {$failedCount} jobs that have failed:" . PHP_EOL . PHP_EOL .
                     implode(PHP_EOL, $failed)
                 );
             }
         }
 
-        if (count($failed) != 0 || count($hangs) != 0) {
+        if ($hangCount != 0 || $failedCount != 0) {
             return false;
         }
 
