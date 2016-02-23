@@ -152,18 +152,12 @@ class ValidationsServiceProvider extends ServiceProvider
                     return true;
                 }
 
-                if (!preg_match("/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i", $value)
-                    || !preg_match("/^.{1,253}$/", $value)
-                    || !preg_match("/^[^\.]{1,63}(\.[^\.]{1,63})*$/", $value)
-                ) {
-                    return false;
-                }
+                $url = 'http://' . $value;
 
-                if (!filter_var(
-                    'http://' . $value,
-                    FILTER_VALIDATE_URL
-                ) === false) {
-                    return true;
+                $domain = getDomain($url);
+
+                if ($value !== $domain) {
+                    return false;
                 }
 
                 return true;
@@ -225,14 +219,16 @@ class ValidationsServiceProvider extends ServiceProvider
 
                     // are we in an update (id is set)
                     if (array_key_exists('id', $data)) {
-                        $query = $query->andWhereNot('id', $data[id]);
+                        $query = $query->andWhereNot('id', $data['id']);
                     }
 
                     try {
                         $object = $query->first();
                     } catch (QueryException $e) {
                         $message = $e->getMessage();
-                        Log::alert("uniqueflag validator: unexpected QueryException [$message], possible wrong parameters ?");
+                        Log::alert(
+                            "uniqueflag validator: unexpected QueryException [$message], possible wrong parameters ?"
+                        );
                         return true;
                     }
 

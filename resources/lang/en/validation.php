@@ -35,7 +35,6 @@ return [
     "digits"               => "The :attribute must be :digits digits.",
     "digits_between"       => "The :attribute must be between :min and :max digits.",
     "email"                => "The :attribute must be a valid email address.",
-    "emails"               => "All :attribute addresses should be valid.",
     "filled"               => "The :attribute field is required.",
     "exists"               => "The selected :attribute is invalid.",
     "image"                => "The :attribute must be an image.",
@@ -99,6 +98,12 @@ return [
     "json"                  => "The :attribute field did not transform into a valid JSON object",
     "uri"                   => "The :attribute field must be a valid URI or Path",
     "uniqueflag"            => "The :attribute flag is already set on another object",
+    "domain"                => "The :attribute field requires a valid domain name",
+    "string"                => "The :attribute field must be a string",
+    "stringorboolean"       => "The :attribute field must be a string or a boolean",
+    "file"                  => "The :attribute field must contain a valid file location",
+    "emails"                => "All :attribute addresses should be valid.",
+    "timestamp"             => "The :attribute field must contain a valid timestamp integer",
 
     /*
     |--------------------------------------------------------------------------

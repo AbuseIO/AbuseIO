@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 return [
 
@@ -35,7 +35,6 @@ return [
     "digits"               => ":attribute moet :digits cijfers zijn.",
     "digits_between"       => ":attribute moet tussen :min en :max cijfers zijn.",
     "email"                => ":attribute dient een geldig emailadres te zijn.",
-    "emails"               => "Alle :attribute adressen moeten een geldig emailadres zijn.",
     "filled"               => ":attribute veld is verplicht.",
     "exists"               => "Het geselecteerde :attribute is ongeldig.",
     "image"                => ":attribute dient een afbeelding te zijn.",
@@ -99,7 +98,12 @@ return [
     "json"                  => "Het :attribute veld kon niet omgezet worden in een geldig JSON object",
     "uri"                   => "Het :attribute veld is verplicht en moet een geldige URI of Pad zijn",
     "uniqueflag"            => "Het :attribute vlaggetje is al gezet in een ander object",
-
+    "domain"                => "The :attribute field requires a valid domain name",
+    "string"                => "Het :attribute veld moet enkel tekst bevatten",
+    "stringorboolean"       => "Het :attribute veld moet ja/nee (boolean) zijn",
+    "file"                  => "Het :attribute veld moet een geldige locatie naar een bestand zijn",
+    "emails"                => "Alle :attribute adressen moeten een geldig emailadres zijn.",
+    "timestamp"             => "Het :attribute veld moet unix tijdstempel (timestamp) zijn",
 
     /*
     |--------------------------------------------------------------------------
