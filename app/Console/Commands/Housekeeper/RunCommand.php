@@ -100,10 +100,25 @@ class RunCommand extends Command
 
         $directories = Storage::directories($path);
 
+        // For each dated directory in the mail archive
         foreach ($directories as $directory) {
+            // Get a list of all the files
             $files = Storage::files($directory);
 
+            // then check for each file check if its linked to a database entry
             foreach ($files as $file) {
+                // Check if there might be a pending job for the file
+                $basenameFile = basename($file);
+                if (Job::where('payload', 'like', "%{$basenameFile}%")->count() !== 0) {
+                    continue;
+                }
+
+                // Check filesystem if its actually old and not just created
+                if (Storage::lastModified($file) > (time() - 3600)) {
+                    continue;
+                }
+
+                // Check the database if it exists
                 if (Evidence::where('filename', '=', $file)->count() === 0) {
                     Log::warning(
                         get_class($this) . ": removing orphaned mailarchive item {$file}"
