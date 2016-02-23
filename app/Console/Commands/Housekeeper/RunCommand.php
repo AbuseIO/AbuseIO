@@ -192,7 +192,7 @@ class RunCommand extends Command
          * Check for any kind of failed jobs, if any found start alarm bells
          */
         $failed = $this->laravel['queue.failer']->all();
-        $failedCount = count($failed;
+        $failedCount = count($failed);
         if ($failedCount != 0) {
             // Reset object to string for reporting
             foreach ($failed as $key => $job) {
