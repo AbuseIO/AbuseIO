@@ -61,6 +61,8 @@ class Account extends Model
             'name'          => 'required|unique:accounts',
             'brand_id'      => 'required|integer|exists:brands,id',
             'systemaccount' => 'sometimes|required|uniqueflag:accounts:systemaccount',
+            'disabled'      => 'required|stringorboolean', // disabled is sent as a string
+
         ];
 
         return $rules;
@@ -78,6 +80,7 @@ class Account extends Model
             'name'          => 'required|unique:accounts,name,'. $account->id,
             'brand_id'      => 'required|integer|exists:brands,id',
             'systemaccount' => 'sometimes|required|uniqueflag:accounts:systemaccount',
+            'disabled'      => 'sometimes|required|stringorboolean', // disabled is sent as a string
         ];
 
         return $rules;

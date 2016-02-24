@@ -123,6 +123,7 @@ class AccountsController extends Controller
         return view('accounts.create')
             ->with('brand_selection', $brands)
             ->with('selected', null)
+            ->with('disabled_checked', 0)
             ->with('auth_user', $this->auth_user);
     }
 
@@ -134,6 +135,13 @@ class AccountsController extends Controller
      */
     public function store(AccountFormRequest $accountForm)
     {
+        $accountData=$accountForm->all();
+
+        // massage data
+        if (gettype($accountData['disabled']) == 'string') {
+            $accountData['disabled'] = ($accountData['disabled'] == 'true');
+        }
+
         Account::create($accountForm->all());
 
         return Redirect::route('admin.accounts.index')
@@ -175,6 +183,7 @@ class AccountsController extends Controller
         return view('accounts.edit')
             ->with('account', $account)
             ->with('brand_selection', $brands)
+            ->with('disabled_checked', $account->disabled)
             ->with('selected', $account->brand_id)
             ->with('auth_user', $this->auth_user);
     }
@@ -188,13 +197,27 @@ class AccountsController extends Controller
      */
     public function update(AccountFormRequest $accountForm, Account $account)
     {
-        // may we edit this brand (is the brand connected to our account)
+        $accountData = $accountForm->all();
+
+        // may we edit this account
         if (!$account->mayEdit($this->auth_user)) {
-            return Redirect::route('admin.accounts.show', $account->id)
+            return Redirect::back()
                 ->with('message', 'User is not authorized to edit this account.');
         }
 
-        $account->update($accountForm->all());
+        // massage data
+        if (gettype($accountData['disabled']) == 'string') {
+            $accountData['disabled'] = ($accountData['disabled'] == 'true');
+        }
+
+        // may we disable the account, when requested
+        if ($account->isSystemAccount() && $accountData['disabled'])
+        {
+            return Redirect::back()
+                ->with('message', "System account can't be disabled.");
+        }
+
+        $account->update($accountData);
 
         return Redirect::route('admin.accounts.show', $account->id)
             ->with('message', 'Account has been updated.');

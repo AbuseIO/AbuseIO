@@ -140,7 +140,9 @@ class UsersController extends Controller
         $userData = $userForm->all();
 
         // update data for the create method
-        $userData['disabled'] = ($userData['disabled'] == 'true');
+        if (gettype($userData['disabled']) == 'string') {
+            $userData['disabled'] = ($userData['disabled'] == 'true');
+        }
 
         $user = User::create($userData);
 
@@ -215,7 +217,9 @@ class UsersController extends Controller
         $userData = $userForm->all();
 
         // massage data
-        $userData['disabled'] = ($userData['disabled'] == 'true' ? true : false);
+        if (gettype($userData['disabled']) == 'string') {
+            $userData['disabled'] = ($userData['disabled'] == 'true');
+        }
 
         Log::info($userData);
 

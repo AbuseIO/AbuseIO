@@ -27,6 +27,11 @@
 
     <dt>{{ trans_choice('misc.brands', 1) }}</dt>
     <dd>{{ $brand->name }}</dd>
+
+    <dt>{{ trans('misc.status') }}</dt>
+    <dd>{{ $account->disabled ? trans('misc.disabled') : trans('misc.enabled') }}</dd>
+
+
 </dl>
 
 @if ( $account->users->count() )
