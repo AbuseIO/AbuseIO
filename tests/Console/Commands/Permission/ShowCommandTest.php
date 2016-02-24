@@ -17,7 +17,7 @@ class ShowCommandTest extends TestCase
     /**
      * The list of testing fixtures to test against.
      *
-     * @var Illuminate\Database\Eloquent\Collection
+     * @var \Illuminate\Database\Eloquent\Collection
      */
     private $list;
 

@@ -198,11 +198,13 @@ $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker)
 });
 
 $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
+    $password = $faker->password(6);
+
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->email,
-        'password' => $faker->password(6),
+        'password' => $password,
         'account_id' => 1, //factory(\AbuseIO\Models\Account::class)->create(['disabled' => false]),
         'locale' => 'en',
         'disabled' => true,
