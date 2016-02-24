@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Console\Commands\Account;
+namespace tests\Console\Commands\User;
 
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -42,44 +42,23 @@ class EditCommandTest extends TestCase
         $this->assertContains('Unable to find user with this criteria', Artisan::output());
     }
 
-    public function testChangeAutoGenPassword()
-    {
-       $this->initDB();
-       $exitCode = Artisan::call(
-           'user:edit',
-           [
-               'user' => $this->dummy->id,
-               'autogeneratepassword'
-           ]
-       );
-       $this->assertEquals($exitCode, 0);
-
-        $output = Artisan::output();
-        $this->assertContains('new password', $output);
-
-
-    }
-
     public function testChangeFirstName()
     {
         $this->initDB();
         $exitCode = Artisan::call(
             'user:edit',
             [
-                '--user' => $this->dummy->id,
-                '--firstname' => "jip"
+                'user' => $this->dummy->id,
+                '--first_name' => "jip"
             ]
         );
         $this->assertEquals($exitCode, 0);
 
-//dd(User::find($this->dummy->id)->toArray());
-//        $this->assertEquals(
-//            User::find($this->dummy->id)->first_name,
-//            'jip'
-//        );
-
         $output = Artisan::output();
-        dd($output);
+        $this->assertContains(
+            'The user has been updated',
+            $output
+        );
     }
 
     public function testChangeFirstNameWithPassword()
@@ -88,8 +67,8 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'user:edit',
             [
-                '--user' => $this->dummy->id,
-                '--firstname' => "jip",
+                'user' => $this->dummy->id,
+                '--first_name' => "jip",
                 '--password' => "fbjldkjldj",
             ]
         );
@@ -97,8 +76,34 @@ class EditCommandTest extends TestCase
 
 
         $output = Artisan::output();
-        dd($output);
+        $this->assertContains(
+            'The user has been updated',
+            $output
+        );
 
+    }
+
+    public function testChangeWithAutoPassword()
+    {
+        $this->initDB();
+        $exitCode = Artisan::call(
+            'user:edit',
+            [
+                'user' => $this->dummy->id,
+                '--autopassword' => 'some dummy value' // I don't know how to test a InputOption::VALUE_NONE but this works
+            ]
+        );
+        $this->assertEquals($exitCode, 0);
+
+        $output = Artisan::output();
+        $this->assertContains(
+            'The user has been updated',
+            $output
+        );
+        $this->assertContains(
+            'Using auto generated password',
+            $output
+        );
     }
 
 }
