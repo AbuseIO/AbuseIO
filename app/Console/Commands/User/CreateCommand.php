@@ -2,100 +2,80 @@
 
 namespace AbuseIO\Console\Commands\User;
 
-use Illuminate\Console\Command;
-use Carbon;
-use AbuseIO\Models\User;
+
+use AbuseIO\Console\Commands\AbstractCreateCommand;
 use AbuseIO\Models\Account;
+use AbuseIO\Models\User;
+use Prophecy\Argument;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 use Validator;
 
-class CreateCommand extends Command
+class CreateCommand extends AbstractCreateCommand
 {
-
-    /**
-     * The console command name.
-     * @var string
-     */
-    protected $signature = 'user:create
-                            {--email= : The e-mail address and login username }
-                            {--password= : The password for the account }
-                            {--firstname=Unknown : The first name of the users account }
-                            {--lastname=Unknown : The last name of the users account }
-                            {--language=en : The default language for the users account, in country code }
-                            {--account=default : The account name where this user is linked to }
-                            {--disabled=false : Set the account to be disabled }
-    ';
-
-    /**
-     * The console command description.
-     * @var string
-     */
-    protected $description = 'Creates a new user';
-
-    /**
-     * Create a new command instance.
-     * @return void
-     */
-    public function __construct()
+    public function getArgumentsList()
     {
-        parent::__construct();
+        return new InputDefinition([
+            new InputArgument('email', null, 'The emailaddres for the account.', null),
+            new InputArgument('password', null, 'The new password for the account', null),
+            new InputArgument('first_name', null,'the new first name of the users account.', null),
+            new inputargument('last_name', null, 'the new last name of the users account', null),
+            new inputargument('language', null, 'the default language for the users account, in country code ', null),
+            new inputargument('account', null, 'the new account name where this user is linked to', null),
+            new inputargument('disabled', null, 'set the new account status to be disabled', 'false')
+        ]);
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return boolean
-     */
-    public function handle()
+    public function getAsNoun()
     {
-        $generatedPassword = substr(md5(rand()), 0, 8);
-        if (empty($this->option('password'))) {
-            $this->info("Using auto generated password: {$generatedPassword}");
-        }
+        return "user";
+    }
 
-        if (empty($this->option('account'))) {
-            $account = Account::where('name', '=', 'default')->first();
-        } else {
-            $account = Account::where('name', '=', $this->option('account'))->first();
-            if (!is_object($account)) {
-                $this->error("The account named {$this->option('account')} was not found");
-                return false;
+    protected function getModelFromRequest()
+    {
+        $user = new User;
+
+        $user->first_name = $this->argument('first_name');
+        $user->last_name = $this->argument('last_name');
+        $user->email = $this->argument('email');
+
+        $account = $this->findAccountByName($this->argument('account'));
+        $user->account_id = $account->id;
+
+        $user->password = $this->argument('password');
+        $user->locale = $this->argument('language');
+        $user->disabled = castStringToBool($this->argument('disabled'));
+
+        return $user;
+    }
+
+    protected function getValidator($model)
+    {
+        $arr = $model->toArray();
+
+        $arr['password'] = $this->argument("password");
+        $arr['password_confirmation'] = $this->argument("password");
+
+        return Validator::make($arr, User::createRules($model));
+    }
+
+    protected function findAccountByName($name)
+    {
+       $account = Account::find(array("name"=>$name))->first();
+
+        if ($account === null) {
+            $account = Account::find(array("name" => 'Default'))->first();
+
+            if ($account === null) {
+                $account = Account::all()->first();
             }
+
+            $this->info(
+                sprintf("No account was found for given account name so '%s' was used", $account->name)
+            );
         }
-
-        $user = new User();
-
-        $user->email         = empty($this->option('email')) ? false : $this->option('email');
-        $user->password      = empty($this->option('password')) ? $generatedPassword : $this->option('password');
-        $user->first_name    = $this->option('firstname');
-        $user->last_name     = $this->option('lastname');
-        $user->locale        = $this->option('language');
-        $user->account_id    = $account->id;
-        $user->disabled      = $this->option('disabled');
-
-        $validationUser = $user->toArray();
-        $validationUser['password'] = empty($this->option('password')) ? $generatedPassword : $this->option('password');
-        $validationUser['password_confirmation'] = $validationUser['password'];
-
-        $validation = Validator::make($validationUser, User::createRules());
-
-        if ($validation->fails()) {
-            foreach ($validation->messages()->all() as $message) {
-                $this->warn($message);
-            }
-
-            $this->error('Failed to create the user due to validation warnings');
-
-            return false;
-        }
-
-        if (!$user->save()) {
-            $this->error('Failed to save the user into the database');
-
-            return false;
-        }
-
-        $this->info("The user {$this->option('email')} has been created");
-
-        return true;
+        return $account;
     }
 }
+
