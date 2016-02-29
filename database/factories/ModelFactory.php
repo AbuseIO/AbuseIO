@@ -211,6 +211,11 @@ $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(AbuseIO\Models\Job::class, function () {
+
+    return [];
+});
+
 
 
 

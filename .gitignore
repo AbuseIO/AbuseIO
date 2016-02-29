@@ -1,8 +1,9 @@
-/vendor
-/node_modules
 .env
+.phpstorm.meta.php
 /.idea
-composer.lock
-_ide_helper.php
-htpasswd
+/node_modules
+/vendor
 AbuseIO.iml
+_ide_helper.php
+composer.lock
+htpasswd

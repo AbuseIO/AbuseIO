@@ -2,106 +2,80 @@
 
 namespace AbuseIO\Console\Commands\Queue;
 
-use AbuseIO\Console\Commands\AbstractShowCommand;
+
 use AbuseIO\Models\Job;
-use Symfony\Component\Console\Input\InputArgument;
+use Illuminate\Console\Command;
 
 /**
  * Class ShowCommand
  * @package AbuseIO\Console\Commands\Queue
  */
-class ShowCommand extends AbstractShowCommand
+class ShowCommand extends Command
 {
 
+    protected $signature = 'queue:show
+                            {queue : use the name of the queue to list the jobs}
+                            ';
+
+    private $headers = ['Id', 'Queue', 'Method','Attempts', 'Created at'];
+
+
     /**
-     * {@inherit docs}
+     * @return bool
      */
-    protected function getAllowedArguments()
+    public function fire()
     {
-        return ["name"];
+        $jobs = $this->findWithCondition($this->argument('queue'));
+
+        if ($jobs->count() === 0) {
+            $this->error(
+                'No matching queue was found.'
+            );
+
+            return false;
+        }
+
+        $this->table(
+            $this->headers,
+            $this->transformListToTableBody($jobs)
+        );
+
+        return true;
     }
 
     /**
-     * {@inherit docs}
-     */
-    protected function getFields()
-    {
-        return [
-            'id',
-            'Queue',
-            'Job name',
-            'created',
-        ];
-    }
-
-    /**
-     * {@inherit docs}
-     */
-    protected function getCollectionWithArguments()
-    {
-        return $this->findWithCondition($this->argument('queue'));
-    }
-
-    /**
-     * {@inherit docs}
-     */
-    protected function defineInput()
-    {
-        return [
-            new InputArgument(
-                'queue',
-                InputArgument::REQUIRED,
-                'Use the name for a queue to show it.')
-        ];
-    }
-
-    /**
-     * {@inheritdoc }
+     * @param $list
+     * @return array
      */
     protected function transformListToTableBody($list)
     {
-        /*
-         * TODO:
-         * Zie headers, list laat alleen een overzicht van de gebruikte queues zien en het aantal jobs
-         * per queue. Details per queue is te zien met 'show' command.
-         */
         $result = [];
 
         foreach ($list as $job) {
-            $payload = unserialize(json_decode($job->payload)->data->command);
-            $method = class_basename($payload);
+            $method = '';
+            if ($job->payload) {
+                $payload = unserialize(json_decode($job->payload)->data->command);
+                $method = class_basename($payload);
+            }
 
             $result[] = [
                 $job->id,
                 $job->queue,
                 $method,
+                $job->attempts,
                 $job->created_at,
             ];
         }
+
         return $result;
     }
 
     /**
-     * {@inheritdoc }
+     * @param $filter
+     * @return mixed
      */
     protected function findWithCondition($filter)
     {
         return Job::where('queue', 'like', "%{$filter}%")->get();
-    }
-
-    /**
-     * {@inheritdoc }
-     */
-    protected function findAll()
-    {
-        return Job::all();
-    }
-
-    /**
-     * {@inheritdoc }
-     */
-    protected function getAsNoun()
-    {
-        return "queue";
     }
 }
