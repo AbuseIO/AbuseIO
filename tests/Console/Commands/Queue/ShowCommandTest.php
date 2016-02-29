@@ -1,9 +1,9 @@
 <?php
 
-namespace tests\Console\Commands\Permission;
+namespace tests\Console\Commands\Queue;
 
-use AbuseIO\Models\Job;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+//use AbuseIO\Models\Job;
+//use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use TestCase;
 
@@ -21,28 +21,28 @@ class ShowCommandTest extends TestCase
      */
     private $list;
 
-    public function initDB()
-    {
-        $this->list = factory(Job::class, 10)->create();
-    }
+//    public function initDB()
+//    {
+//        $this->list = factory(Job::class, 10)->create();
+//    }
 
-    public function testWithValidIdFilter()
-    {
-        //$this->initDB();
-
-        $exitCode = Artisan::call(
-            'queue:show',
-            [
-                'queue' => 'abuseio_collector'
-            ]
-        );
-        $this->assertEquals($exitCode, 0);
-        $output = Artisan::output();
-
-        foreach (['Id', 'Queue', 'Attempts',] as $el) {
-            $this->assertContains($el, $output);
-        }
-    }
+//    public function testWithValidIdFilter()
+//    {
+//        //$this->initDB();
+//
+//        $exitCode = Artisan::call(
+//            'queue:show',
+//            [
+//                'queue' => 'abuseio_collector'
+//            ]
+//        );
+//        $this->assertEquals($exitCode, 0);
+//        $output = Artisan::output();
+//
+//        foreach (['Id', 'Queue', 'Attempts',] as $el) {
+//            $this->assertContains($el, $output);
+//        }
+//    }
 
     public function testWithInvalidFilter()
     {
