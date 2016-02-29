@@ -14,6 +14,8 @@ use Validator;
 
 class CreateCommand extends AbstractCreateCommand
 {
+    private $password;
+
     public function getArgumentsList()
     {
         return new InputDefinition([
@@ -43,26 +45,41 @@ class CreateCommand extends AbstractCreateCommand
         $account = $this->findAccountByName($this->argument('account'));
         $user->account_id = $account->id;
 
-        $user->password = $this->argument('password');
+        $user->password = $this->getPassword();
         $user->locale = $this->argument('language');
         $user->disabled = castStringToBool($this->argument('disabled'));
 
         return $user;
     }
 
+    protected function getPassword()
+    {
+        $this->password = $this->argument('password');
+
+        if (empty($this->password)) {
+            $this->password = substr(md5(rand()), 0, 8);
+
+            $this->info(
+                sprintf('Using auto generated password: %s', $this->password)
+            );
+        };
+
+        return $this->password;
+    }
+
     protected function getValidator($model)
     {
         $arr = $model->toArray();
 
-        $arr['password'] = $this->argument("password");
-        $arr['password_confirmation'] = $this->argument("password");
+        $arr['password'] = $this->password;
+        $arr['password_confirmation'] = $this->password;
 
         return Validator::make($arr, User::createRules($model));
     }
 
     protected function findAccountByName($name)
     {
-       $account = Account::find(array("name"=>$name))->first();
+        $account = Account::where('id', $name)->orWhere('name', $name)->first();
 
         if ($account === null) {
             $account = Account::find(array("name" => 'Default'))->first();

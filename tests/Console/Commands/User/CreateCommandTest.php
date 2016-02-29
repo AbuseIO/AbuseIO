@@ -107,6 +107,25 @@ class CreateCommandTest extends TestCase
         $this->assertContains('The user has been created', $output);
     }
 
+    public function testIfNoPasswordIsSuppliedPasswordIsGenerated()
+    {
+        $user = factory(User::class)->make();
+
+        Artisan::call('user:create', [
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+
+            'account' => 'Default',
+            'language' => $user->locale,
+            'disabled' => $user->disabled,
+        ]);
+        $output = Artisan::output();
+
+        $this->assertContains('Using auto generated password: ', $output);
+        $this->assertContains('The user has been created', $output);
+    }
+
     /**
      * @param $output
      * @return $id
