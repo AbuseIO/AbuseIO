@@ -68,7 +68,7 @@ class CreateCommandTest extends TestCase
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'email' => $user->email,
-            'password' => 'jiperish',
+            'password' => 'jiberish',
             'account' => 'Default',
             'language' => $user->locale,
         ]);

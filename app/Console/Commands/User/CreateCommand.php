@@ -57,7 +57,7 @@ class CreateCommand extends AbstractCreateCommand
         $this->password = $this->argument('password');
 
         if (empty($this->password)) {
-            $this->password = substr(md5(rand()), 0, 8);
+            $this->password = generatePassword();
 
             $this->info(
                 sprintf('Using auto generated password: %s', $this->password)

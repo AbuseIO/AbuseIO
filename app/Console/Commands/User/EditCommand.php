@@ -107,7 +107,7 @@ class EditCommand extends AbstractEditCommand
             $this->updatedPassword = $this->option('password');
         }
         if (!empty($this->option('autopassword'))) {
-            $generatedPassword = substr(md5(rand()), 0, 8);
+            $generatedPassword = generatePassword();
             $this->info(
                 "Using auto generated password: {$generatedPassword}"
             );

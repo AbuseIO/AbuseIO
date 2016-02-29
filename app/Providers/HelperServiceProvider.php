@@ -10,13 +10,14 @@ use Illuminate\Support\ServiceProvider;
 class HelperServiceProvider extends ServiceProvider
 {
     protected $helpers = [
-        'castStringToBool',
         'castBoolToString',
-        'isValidRegex',
-        'hFileSize',
+        'castStringToBool',
+        'generatePassword',
         'getDomain',
         'getUri',
         'getUrlData',
+        'hFileSize',
+        'isValidRegex',
     ];
 
     /**
