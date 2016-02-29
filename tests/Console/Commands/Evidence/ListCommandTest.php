@@ -5,7 +5,7 @@ namespace tests\Console\Commands\Evidence;
 use AbuseIO\Models\Evidence;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class ListCommandTest.

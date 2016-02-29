@@ -1,10 +1,10 @@
 <?php
-
 namespace tests\Models;
 
 use AbuseIO\Models\User;
+use tests\TestCase;
 
-class UserTest extends \TestCase
+class UserTest extends TestCase
 {
     public function testUserModelFactory()
     {

@@ -1,10 +1,10 @@
 <?php
-
 namespace tests\Models;
 
 use AbuseIO\Models\Incident;
+use tests\TestCase;
 
-class IncidentTest extends \TestCase
+class IncidentTest extends TestCase
 {
     public function testModelFactory()
     {

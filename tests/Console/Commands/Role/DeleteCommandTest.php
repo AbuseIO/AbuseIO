@@ -5,7 +5,7 @@ namespace tests\Console\Commands\Role;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use AbuseIO\Models\Role;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class DeleteCommandTest.

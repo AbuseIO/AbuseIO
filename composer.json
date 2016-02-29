@@ -91,9 +91,9 @@
 		}
 	},
 	"autoload-dev": {
-		"classmap": [
-			"tests/TestCase.php"
-		]
+		"psr-4": {
+			"tests\\": "tests/"
+		}
 	},
 	"scripts": {
 		"post-install-cmd": [

@@ -1,11 +1,11 @@
 <?php
-
 namespace tests\Models;
 
 use AbuseIO\Models\Brand;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use tests\TestCase;
 
-class BrandTest extends \TestCase
+class BrandTest extends TestCase
 {
     use DatabaseTransactions;
 

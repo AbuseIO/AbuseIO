@@ -3,7 +3,7 @@
 namespace tests\Console\Commands\Collector;
 
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class ListCommandTest.

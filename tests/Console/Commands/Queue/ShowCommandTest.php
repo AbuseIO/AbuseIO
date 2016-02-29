@@ -5,7 +5,7 @@ namespace tests\Console\Commands\Queue;
 //use AbuseIO\Models\Job;
 //use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class ShowCommandTest.

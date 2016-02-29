@@ -6,7 +6,7 @@ use AbuseIO\Models\Account;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class ListCommandTest.

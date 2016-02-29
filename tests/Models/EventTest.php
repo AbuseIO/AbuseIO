@@ -1,12 +1,12 @@
 <?php
-
 namespace tests\Models;
 
 use AbuseIO\Models\Event;
 use AbuseIO\Models\Evidence;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use tests\TestCase;
 
-class EventTest extends \TestCase
+class EventTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -41,4 +41,3 @@ class EventTest extends \TestCase
         $this->assertEquals($event->source, $eventFromDB->source);
     }
 }
-

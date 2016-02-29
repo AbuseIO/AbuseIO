@@ -1,11 +1,11 @@
 <?php
-
 namespace tests\Models;
 
 use AbuseIO\Models\Account;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use tests\TestCase;
 
-class AccountTest extends \TestCase
+class AccountTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -32,4 +32,3 @@ class AccountTest extends \TestCase
         $this->assertTrue((bool)Account::find($account->id)->systemaccount);
     }
 }
-

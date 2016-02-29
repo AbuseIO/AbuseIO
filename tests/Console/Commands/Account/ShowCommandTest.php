@@ -3,7 +3,7 @@
 namespace tests\Console\Commands\Account;
 
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class ShowCommandTest.

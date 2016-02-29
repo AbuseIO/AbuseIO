@@ -3,7 +3,7 @@
 namespace tests\Console\Commands\Note;
 
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class DeleteCommandTest.

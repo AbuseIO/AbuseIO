@@ -4,7 +4,7 @@ namespace tests\Console\Commands\Role;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 use AbuseIO\Models\Role;
 
 /**

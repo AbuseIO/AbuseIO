@@ -4,8 +4,9 @@ namespace tests\Models;
 
 use AbuseIO\Models\Netblock;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use tests\TestCase;
 
-class NetblockTest extends \TestCase
+class NetblockTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -19,9 +20,7 @@ class NetblockTest extends \TestCase
             ]
         )->first();
 
-
         $this->assertEquals($netblock->first_ip, $netblockFromDB->first_ip);
         $this->assertEquals($netblock->last_ip, $netblockFromDB->last_ip);
     }
 }
-

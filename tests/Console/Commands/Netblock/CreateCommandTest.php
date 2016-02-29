@@ -4,7 +4,7 @@ namespace tests\Console\Commands\Netblock;
 
 use AbuseIO\Models\Netblock;
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class CreateCommandTest.

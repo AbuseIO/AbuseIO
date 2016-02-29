@@ -4,7 +4,7 @@ namespace tests\Console\Commands\Brand;
 
 use AbuseIO\Models\Brand;
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class CreateCommandTest.

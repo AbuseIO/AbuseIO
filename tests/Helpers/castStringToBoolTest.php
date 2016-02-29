@@ -1,4 +1,7 @@
 <?php
+namespace tests\Helpers;
+
+use tests\TestCase;
 
 class CastStringToBoolTest extends TestCase{
 

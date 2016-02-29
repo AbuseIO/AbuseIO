@@ -6,7 +6,7 @@ use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Contact;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class ShowCommandTest.

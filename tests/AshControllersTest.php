@@ -1,4 +1,5 @@
 <?php
+namespace tests;
 
 class AshControllersTest extends TestCase
 {
@@ -20,5 +21,4 @@ class AshControllersTest extends TestCase
         $response = $this->call('GET', '/ash/collect/2/92d74aa22a225708cc9092340b3b79be');
         $this->assertEquals(200, $response->getStatusCode());
     }
-
 }

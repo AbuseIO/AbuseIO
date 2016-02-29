@@ -1,11 +1,11 @@
 <?php
-
 namespace tests\Models;
 
 use AbuseIO\Models\Contact;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use tests\TestCase;
 
-class ContactTest extends \TestCase
+class ContactTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -16,4 +16,3 @@ class ContactTest extends \TestCase
         $this->assertEquals($contact->name, $contactFromDB->name);
     }
 }
-

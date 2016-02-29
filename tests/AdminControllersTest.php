@@ -1,6 +1,6 @@
 <?php
+namespace tests;
 
-use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class AdminControllersTest extends TestCase

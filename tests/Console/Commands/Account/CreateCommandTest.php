@@ -1,11 +1,10 @@
 <?php
-
 namespace tests\Console\Commands\Account;
 
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class CreateCommandTest.

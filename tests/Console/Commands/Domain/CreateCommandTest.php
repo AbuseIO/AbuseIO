@@ -6,7 +6,7 @@ use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
 use Faker\Factory;
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class CreateCommandTest.

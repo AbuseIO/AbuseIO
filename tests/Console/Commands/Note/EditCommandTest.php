@@ -5,7 +5,7 @@ namespace tests\Console\Commands\Note;
 use AbuseIO\Models\Note;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
-use TestCase;
+use tests\TestCase;
 
 /**
  * Class EditCommandTest.

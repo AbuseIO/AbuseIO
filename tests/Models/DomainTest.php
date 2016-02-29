@@ -1,11 +1,11 @@
 <?php
-
 namespace tests\Models;
 
 use AbuseIO\Models\Domain;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use tests\TestCase;
 
-class DomainTest extends \TestCase
+class DomainTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -16,4 +16,3 @@ class DomainTest extends \TestCase
         $this->assertEquals($domain->name, $domainFromDB->name);
     }
 }
-
