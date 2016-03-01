@@ -8,7 +8,12 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Artisan;
 
+/**
+ * Class AbstractShowCommand
+ * @package AbuseIO\Console\Commands
+ */
 abstract class AbstractShowCommand extends Command
 {
     /**
@@ -31,15 +36,26 @@ abstract class AbstractShowCommand extends Command
             );
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
     public function run(InputInterface $input, OutputInterface $output)
     {
         try {
             return parent::run($input, $output);
         } catch (\RuntimeException $e) {
             $this->error($e->getMessage());
-            $this->error(
-                sprintf("Please try %s --help", $this->getName())
+            Artisan::call(
+                $this->getName(),
+                [
+                "--help" => "true",
+                ]
             );
+            echo Artisan::output();
+
+            return false;
         }
     }
 
