@@ -4,6 +4,10 @@ namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
 
+/**
+ * Class AbstractEditCommand
+ * @package AbuseIO\Console\Commands
+ */
 abstract class AbstractEditCommand extends Command
 {
     private $dirtyAttributes = [];
@@ -75,8 +79,15 @@ abstract class AbstractEditCommand extends Command
      */
     abstract protected function handleOptions($model);
 
+    /**
+     * @param $model
+     * @return mixed
+     */
     abstract protected function getValidator($model);
 
+    /**
+     * @return mixed
+     */
     abstract public function getAsNoun();
 
     /**
@@ -92,6 +103,9 @@ abstract class AbstractEditCommand extends Command
             );
     }
 
+    /**
+     * @return string
+     */
     final public function getName()
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
@@ -107,11 +121,19 @@ abstract class AbstractEditCommand extends Command
         return 'edit';
     }
 
+    /**
+     * @return string
+     */
     final public function getDescription()
     {
         return sprintf('Edit a %s', $this->getAsNoun());
     }
 
+    /**
+     * @param $model
+     * @param $option
+     * @param string $fieldType
+     */
     protected function updateFieldWithOption($model, $option, $fieldType = 'string')
     {
         if ($model !== null) {
@@ -133,27 +155,43 @@ abstract class AbstractEditCommand extends Command
         }
     }
 
+    /**
+     * @param $attribute
+     */
     private function addToDirtyAttributes($attribute)
     {
         $this->dirtyAttributes[] = $attribute;
     }
 
+    /**
+     * @param $updateRules
+     * @return array
+     */
     public function getUpdateRulesForDirtyAttributes($updateRules)
     {
         return $this->returnOnlyKeysInFilter($this->dirtyAttributes, $updateRules);
     }
 
+    /**
+     * @param $model
+     * @return array
+     */
     protected function getModelAsArrayForDirtyAttributes($model)
     {
 
         return $this->returnOnlyKeysInFilter($this->dirtyAttributes, $model->toArray());
     }
 
-    private function returnOnlyKeysInFilter($keys, $array) {
-
+    /**
+     * @param $keys
+     * @param $array
+     * @return array
+     */
+    private function returnOnlyKeysInFilter($keys, $array)
+    {
         $result = [];
 
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             if (array_key_exists($key, $array)) {
                 $result[$key] = $array[$key];
             }
@@ -161,10 +199,17 @@ abstract class AbstractEditCommand extends Command
         return $result;
     }
 
+    /**
+     * @param $model
+     * @param $option
+     */
     protected function updateBooleanFieldWithOption($model, $option)
     {
         $this->updateFieldWithOption($model, $option, 'bool');
     }
 
+    /**
+     * @return mixed
+     */
     abstract public function getOptionsList();
 }

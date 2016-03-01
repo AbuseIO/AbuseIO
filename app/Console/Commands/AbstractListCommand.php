@@ -5,12 +5,15 @@ namespace AbuseIO\Console\Commands;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
+/**
+ * Class AbstractListCommand
+ * @package AbuseIO\Console\Commands
+ */
 abstract class AbstractListCommand extends Command
 {
     protected $headers = [];
 
     protected $filterArguments = [];
-
 
     /**
      * Configure the console command.
@@ -34,13 +37,17 @@ abstract class AbstractListCommand extends Command
 
     }
 
-
-
+    /**
+     * @return string
+     */
     protected function getFilterMessage()
     {
         return sprintf("Applies a filter on the %s %s", $this->getAsNoun(), $this->getParsedFilterArguments());
     }
 
+    /**
+     * @return string
+     */
     private function getParsedFilterArguments()
     {
         return implode(" or ", $this->filterArguments);
@@ -116,7 +123,6 @@ abstract class AbstractListCommand extends Command
      * @return array
      */
     abstract protected function transformListToTableBody($list);
-
 
     /**
      * @param $filter

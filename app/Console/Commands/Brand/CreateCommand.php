@@ -10,23 +10,37 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
-
+/**
+ * Class CreateCommand
+ * @package AbuseIO\Console\Commands\Brand
+ */
 class CreateCommand extends AbstractCreateCommand
 {
+    /**
+     * @return InputDefinition
+     */
     public function getArgumentsList()
     {
-        return new InputDefinition([
-            new InputArgument('name', null, 'brand name'),
-            new InputArgument('company_name', null, 'Company name'),
-            new InputArgument('introduction_text', null, 'Introduction text'),
-        ]);
+        return new InputDefinition(
+            [
+                new InputArgument('name', null, 'brand name'),
+                new InputArgument('company_name', null, 'Company name'),
+                new InputArgument('introduction_text', null, 'Introduction text'),
+            ]
+        );
     }
 
+    /**
+     * @return string
+     */
     public function getAsNoun()
     {
         return 'brand';
     }
 
+    /**
+     * @return Brand
+     */
     protected function getModelFromRequest()
     {
         $brand = new Brand();
@@ -40,6 +54,9 @@ class CreateCommand extends AbstractCreateCommand
         return $brand;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getValidator($model)
     {
         return Validator::make($model->toArray(), Brand::createRules($model));

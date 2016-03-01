@@ -5,6 +5,10 @@ namespace AbuseIO\Console\Commands\Account;
 use AbuseIO\Models\Account;
 use AbuseIO\Console\Commands\AbstractListCommand;
 
+/**
+ * Class ListCommand
+ * @package AbuseIO\Console\Commands\Account
+ */
 class ListCommand extends AbstractListCommand
 {
     protected $filterArguments = ['name'];

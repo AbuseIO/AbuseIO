@@ -9,23 +9,38 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
+/**
+ * Class CreateCommand
+ * @package AbuseIO\Console\Commands\Account
+ */
 class CreateCommand extends AbstractCreateCommand
 {
+    /**
+     * @return InputDefinition
+     */
     public function getArgumentsList()
     {
-        return new InputDefinition([
-            new InputArgument('name', null, 'account name'),
-            new InputArgument("brand_id", null, "brand id"),
-            //new InputArgument('description', null, 'description'),
-            new InputArgument('disabled', null, 'true|false, Set the account to be enabled', false),
-        ]);
+        return new InputDefinition(
+            [
+                new InputArgument('name', null, 'account name'),
+                new InputArgument("brand_id", null, "brand id"),
+                //new InputArgument('description', null, 'description'),
+                new InputArgument('disabled', null, 'true|false, Set the account to be enabled', false),
+            ]
+        );
     }
 
+    /**
+     * {@inheritdoc }
+     */
     public function getAsNoun()
     {
         return "account";
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getModelFromRequest()
     {
         $account = new Account();
@@ -38,9 +53,11 @@ class CreateCommand extends AbstractCreateCommand
         return $account;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Account::createRules($model));
+        return Validator::make($model->toArray(), Account::createRules());
     }
 }
-

@@ -6,8 +6,16 @@ use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Account;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Account
+ */
 class ShowCommand extends AbstractShowCommand
 {
+    /**
+     * @param Account $model
+     * @return array
+     */
     protected function transformObjectToTableBody($model)
     {
         return [
@@ -18,6 +26,7 @@ class ShowCommand extends AbstractShowCommand
             ["Description", $model->description],
         ];
     }
+
     /**
      * {@inherit docs}
      */

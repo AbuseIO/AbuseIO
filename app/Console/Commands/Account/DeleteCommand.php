@@ -26,6 +26,8 @@ class DeleteCommand extends AbstractDeleteCommand
             $this->error(
                 sprintf("Please try %s --help", $this->getName())
             );
+
+            return false;
         }
     }
 
@@ -62,7 +64,8 @@ class DeleteCommand extends AbstractDeleteCommand
             new InputArgument(
                 'id',
                 InputArgument::REQUIRED,
-                'Use the id for a account to delete it.')
+                'Use the id for a account to delete it.'
+            )
         );
     }
 }

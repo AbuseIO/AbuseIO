@@ -3,6 +3,10 @@ namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
 
+/**
+ * Class AbstractCreateCommand
+ * @package AbuseIO\Console\Commands
+ */
 abstract class AbstractCreateCommand extends Command
 {
     /**
@@ -52,10 +56,20 @@ abstract class AbstractCreateCommand extends Command
         return true;
     }
 
+    /**
+     * @return mixed
+     */
     abstract protected function getModelFromRequest();
 
+    /**
+     * @param $model
+     * @return mixed
+     */
     abstract protected function getValidator($model);
 
+    /**
+     * @return mixed
+     */
     abstract public function getAsNoun();
 
     /**
@@ -71,6 +85,9 @@ abstract class AbstractCreateCommand extends Command
             );
     }
 
+    /**
+     * @return string
+     */
     final public function getName()
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
@@ -86,6 +103,9 @@ abstract class AbstractCreateCommand extends Command
         return 'create';
     }
 
+    /**
+     * @return string
+     */
     final public function getDescription()
     {
         return sprintf('Creates a new %s', $this->getAsNoun());

@@ -6,6 +6,10 @@ use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Brand;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Brand
+ */
 class ShowCommand extends AbstractShowCommand
 {
     /**
@@ -50,7 +54,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'brand',
                 InputArgument::REQUIRED,
-                'Use the id or name for a brand to show it.')
+                'Use the id or name for a brand to show it.'
+            )
         ];
     }
 }

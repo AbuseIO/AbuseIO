@@ -169,5 +169,4 @@ abstract class AbstractShowCommand extends Command
         }
         return $resultSet;
     }
-
 }

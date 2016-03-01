@@ -9,28 +9,46 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
+/**
+ * Class EditCommand
+ * @package AbuseIO\Console\Commands\Brand
+ */
 class EditCommand extends AbstractEditCommand
 {
+    /**
+     * {@inheritdoc }
+     */
     public function getOptionsList()
     {
-        return new InputDefinition([
+        return new InputDefinition(
+            [
             new inputArgument('id', InputArgument::REQUIRED, 'Brand id to edit'),
-            new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'brand name'),
-            new InputOption('company_name', null, InputOption::VALUE_OPTIONAL,  'company name'),
-            new InputOption('introduction_text', null, InputOption::VALUE_OPTIONAL, 'Introduction text'),
-        ]);
+                new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'brand name'),
+                new InputOption('company_name', null, InputOption::VALUE_OPTIONAL, 'company name'),
+                new InputOption('introduction_text', null, InputOption::VALUE_OPTIONAL, 'Introduction text'),
+            ]
+        );
     }
 
+    /**
+     * {@inheritdoc }
+     */
     public function getAsNoun()
     {
         return 'brand';
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getModelFromRequest()
     {
         return Brand::find($this->argument('id'));
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function handleOptions($model)
     {
         $this->updateFieldWithOption($model, 'name');
@@ -40,6 +58,9 @@ class EditCommand extends AbstractEditCommand
         return true;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getValidator($model)
     {
         $data = $this->getModelAsArrayForDirtyAttributes($model);

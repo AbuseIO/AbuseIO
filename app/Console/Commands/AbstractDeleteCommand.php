@@ -6,6 +6,10 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\Console\Input\InputDefinition;
 
+/**
+ * Class AbstractDeleteCommand
+ * @package AbuseIO\Console\Commands
+ */
 abstract class AbstractDeleteCommand extends Command
 {
     final protected function configure()
@@ -20,6 +24,9 @@ abstract class AbstractDeleteCommand extends Command
             );
     }
 
+    /**
+     * AbstractDeleteCommand constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -59,6 +66,9 @@ abstract class AbstractDeleteCommand extends Command
         return true;
     }
 
+    /**
+     * @return string
+     */
     final public function getName()
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
@@ -74,21 +84,40 @@ abstract class AbstractDeleteCommand extends Command
         return 'delete';
     }
 
+    /**
+     * @return string
+     */
     final public function getDescription()
     {
         return sprintf('Deletes a %s (without confirmation!)', $this->getAsNoun());
     }
 
+    /**
+     * @param $object
+     * @return bool
+     */
     protected function stopDeleteAndThrowAnErrorBecauseRelations($object)
     {
         return false;
     }
 
+    /**
+     * @return mixed
+     */
     abstract protected function getAsNoun();
 
+    /**
+     * @return mixed
+     */
     abstract protected function getAllowedArguments();
 
+    /**
+     * @return mixed
+     */
     abstract protected function getObjectByArguments();
 
+    /**
+     * @return mixed
+     */
     abstract protected function defineInput();
 }

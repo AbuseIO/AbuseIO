@@ -10,28 +10,57 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
+/**
+ * Class EditCommand
+ * @package AbuseIO\Console\Commands\Account
+ */
 class EditCommand extends AbstractEditCommand
 {
+    /**
+     * @return InputDefinition
+     */
     public function getOptionsList()
     {
-        return new InputDefinition([
-            new inputArgument('id', inputArgument::REQUIRED, 'Account id to edit'),
-            new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'account name'),
-            new InputOption('brand_id', null, InputOption::VALUE_OPTIONAL,  'brand id'),
-            new InputOption('disabled', null, InputOption::VALUE_OPTIONAL, 'true|false, Set the account to be enabled.'),
-            new InputOption('systemaccount', null, InputOption::VALUE_OPTIONAL, 'true|false, Set default system account.')
-        ]);
+        return new InputDefinition(
+            [
+                new inputArgument('id', inputArgument::REQUIRED, 'Account id to edit'),
+                new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'account name'),
+                new InputOption('brand_id', null, InputOption::VALUE_OPTIONAL, 'brand id'),
+                new InputOption(
+                    'disabled',
+                    null,
+                    InputOption::VALUE_OPTIONAL,
+                    'true|false, Set the account to be enabled.'
+                ),
+                new InputOption(
+                    'systemaccount',
+                    null,
+                    InputOption::VALUE_OPTIONAL,
+                    'true|false, Set default system account.'
+                )
+            ]
+        );
     }
 
+    /**
+     * {@inheritdoc }
+     */
     public function getAsNoun()
     {
         return 'account';
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getModelFromRequest()
     {
         return Account::find($this->argument('id'));
     }
+
+    /**
+     * {@inheritdoc }
+     */
     protected function handleOptions($model)
     {
         $this->updateFieldWithOption($model, 'name');
@@ -52,11 +81,17 @@ class EditCommand extends AbstractEditCommand
         return true;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getValidator($model)
     {
         return Validator::make($model->toArray(), Account::updateRules($model));
     }
 
+    /**
+     * {@inheritdoc }
+     */
     private function setSystemAccount($model)
     {
         if ($this->option("systemaccount") == true) {
