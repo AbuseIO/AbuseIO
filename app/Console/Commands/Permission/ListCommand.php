@@ -12,9 +12,10 @@ use AbuseIO\Models\Permission;
  */
 class ListCommand extends AbstractListCommand
 {
-
+    /**
+     * @var array
+     */
     protected $filterArguments = ["id"];
-
 
     /**
      * The headers of the table
@@ -44,7 +45,7 @@ class ListCommand extends AbstractListCommand
      */
     protected function findWithCondition($filter)
     {
-        return Permission::where('id',  $filter)
+        return Permission::where('id', $filter)
             ->orWhere('name', 'like', '%'.$filter.'%')
             ->get();
     }

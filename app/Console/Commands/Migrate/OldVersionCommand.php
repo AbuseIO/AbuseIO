@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use AbuseIO\Jobs\EvidenceSave;
-use AbuseIO\Jobs\IncidentsValidate;
 use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Jobs\FindContact;
 use AbuseIO\Models\Evidence;
@@ -19,7 +18,6 @@ use AbuseIO\Models\Account;
 use Illuminate\Filesystem\Filesystem;
 use Validator;
 use Carbon;
-use Config;
 use Lang;
 use DB;
 
@@ -70,7 +68,7 @@ class OldVersionCommand extends Command
      */
     public function handle()
     {
-        $account = Account::system();
+        $account = Account::getSystemAccount();
 
         if (empty($this->option('start')) &&
             empty($this->option('prepare'))&&

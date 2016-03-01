@@ -5,6 +5,10 @@ namespace AbuseIO\Console\Commands\User;
 use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\User;
 
+/**
+ * Class ListCommand
+ * @package AbuseIO\Console\Commands\User
+ */
 class ListCommand extends AbstractListCommand
 {
 

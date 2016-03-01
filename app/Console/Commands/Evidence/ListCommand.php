@@ -27,7 +27,15 @@ class ListCommand extends AbstractListCommand
         $result = [];
         /* @var $evidence  \AbuseIO\Models\Evidence|null */
         foreach ($list as $evidence) {
-            $result[] = [$evidence->id, $evidence->filename, $evidence->sender, $evidence->subject, $evidence->created_at, $evidence->updated_at, $evidence->deleted_at];
+            $result[] = [
+                $evidence->id,
+                $evidence->filename,
+                $evidence->sender,
+                $evidence->subject,
+                $evidence->created_at,
+                $evidence->updated_at,
+                $evidence->deleted_at
+            ];
         }
         return $result;
     }
@@ -37,7 +45,7 @@ class ListCommand extends AbstractListCommand
      */
     protected function findWithCondition($filter)
     {
-        return Evidence::where('id',  $filter)
+        return Evidence::where('id', $filter)
                 ->orWhere("sender", "like", '%'.$filter.'%')
                 ->get();
     }
@@ -58,4 +66,3 @@ class ListCommand extends AbstractListCommand
         return "evidence";
     }
 }
-

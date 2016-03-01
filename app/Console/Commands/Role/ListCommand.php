@@ -5,10 +5,17 @@ namespace AbuseIO\Console\Commands\Role;
 use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Role;
 
+/**
+ * Class ListCommand
+ * @package AbuseIO\Console\Commands\Role
+ */
 class ListCommand extends AbstractListCommand
 {
+    /**
+     * @var array
+     */
+    protected $filterArguments = ["name"];
 
-   protected $filterArguments = ["name"];
     /**
      * The headers of the table
      * @var array
@@ -21,10 +28,8 @@ class ListCommand extends AbstractListCommand
      */
     protected $fields = ['id', 'name', 'description'];
 
-
     /**
-     * @param $roles
-     * @return array
+     * {@inheritdoc }
      */
     private function hydrateRolesWithPermissionCount($roles)
     {

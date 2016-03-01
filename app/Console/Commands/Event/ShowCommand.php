@@ -6,6 +6,10 @@ use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Event;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Event
+ */
 class ShowCommand extends AbstractShowCommand
 {
     /**
@@ -56,7 +60,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'event',
                 InputArgument::REQUIRED,
-                'Use the id for an event to show it.')
+                'Use the id for an event to show it.'
+            )
         ];
     }
 

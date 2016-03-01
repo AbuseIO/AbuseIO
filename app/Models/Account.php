@@ -300,6 +300,9 @@ class Account extends Model
         return $this->mayDisable($user);
     }
 
+    /**
+     * @return mixed
+     */
     public static function getSystemAccount()
     {
         return self::where("systemaccount", 1)->first();

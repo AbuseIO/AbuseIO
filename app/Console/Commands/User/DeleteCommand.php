@@ -53,7 +53,8 @@ class DeleteCommand extends AbstractDeleteCommand
             new InputArgument(
                 'user',
                 InputArgument::REQUIRED,
-                'Use the name or email for a user to delete it.')
+                'Use the name or email for a user to delete it.'
+            )
         );
     }
 }

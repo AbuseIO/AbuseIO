@@ -160,6 +160,11 @@ abstract class AbstractShowCommand extends Command
         return $result;
     }
 
+    /**
+     * @param $resultSet
+     * @param $property
+     * @return mixed
+     */
     protected function hideProperty($resultSet, $property)
     {
         foreach ($resultSet as $key => $result) {

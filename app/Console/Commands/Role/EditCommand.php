@@ -9,28 +9,45 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
+/**
+ * Class EditCommand
+ * @package AbuseIO\Console\Commands\Role
+ */
 class EditCommand extends AbstractEditCommand
 {
-
+    /**
+     * {@inheritdoc }
+     */
     public function getOptionsList()
     {
-        return new InputDefinition([
-            new inputArgument('id', InputArgument::REQUIRED, 'Role id to edit'),
-            new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'Name for role'),
-            new InputOption('description', null, InputOption::VALUE_OPTIONAL,  'Description')
-        ]);
+        return new InputDefinition(
+            [
+                new inputArgument('id', InputArgument::REQUIRED, 'Role id to edit'),
+                new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'Name for role'),
+                new InputOption('description', null, InputOption::VALUE_OPTIONAL, 'Description')
+            ]
+        );
     }
 
+    /**
+     * {@inheritdoc }
+     */
     public function getAsNoun()
     {
         return 'role';
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getModelFromRequest()
     {
         return Role::find($this->argument('id'));
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function handleOptions($model)
     {
         $this->updateFieldWithOption($model, 'name');
@@ -39,6 +56,9 @@ class EditCommand extends AbstractEditCommand
         return true;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getValidator($model)
     {
         $data = $this->getModelAsArrayForDirtyAttributes($model);

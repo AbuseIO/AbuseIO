@@ -9,6 +9,10 @@ use AbuseIO\Models\PermissionRole;
 use Validator;
 use Carbon;
 
+/**
+ * Class AssignCommand
+ * @package AbuseIO\Console\Commands\Permission
+ */
 class AssignCommand extends Command
 {
 
@@ -28,8 +32,7 @@ class AssignCommand extends Command
     protected $description = 'Assign a permission to a role ';
 
     /**
-     * Create a new command instance.
-     * @return void
+     * {@inheritdoc }
      */
     public function __construct()
     {

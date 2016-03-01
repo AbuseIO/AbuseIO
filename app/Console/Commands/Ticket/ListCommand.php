@@ -43,7 +43,7 @@ class ListCommand extends AbstractListCommand
      */
     protected function findWithCondition($filter)
     {
-        return Ticket::where('id',  $filter)
+        return Ticket::where('id', $filter)
                 ->get();
     }
 
@@ -63,4 +63,3 @@ class ListCommand extends AbstractListCommand
         return "ticket";
     }
 }
-

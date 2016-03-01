@@ -37,6 +37,9 @@ class DeleteCommand extends AbstractDeleteCommand
         return $evidence;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function stopDeleteAndThrowAnErrorBecauseRelations($object)
     {
         if ($object->events->count() > 0) {
@@ -57,7 +60,8 @@ class DeleteCommand extends AbstractDeleteCommand
             new InputArgument(
                 'id',
                 InputArgument::REQUIRED,
-                'Use the id for evidence to delete it.'),
+                'Use the id for evidence to delete it.'
+            ),
         );
     }
 }

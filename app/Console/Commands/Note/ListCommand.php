@@ -46,7 +46,7 @@ class ListCommand extends AbstractListCommand
      */
     protected function findWithCondition($filter)
     {
-        return Note::where('id',  $filter)
+        return Note::where('id', $filter)
             ->orWhere('submitter', 'like', '%'.$filter.'%')
                 ->get();
     }
@@ -67,4 +67,3 @@ class ListCommand extends AbstractListCommand
         return "note";
     }
 }
-

@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Console\Commands\User;
 
-
 use AbuseIO\Console\Commands\AbstractCreateCommand;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\User;
@@ -12,28 +11,51 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Validator;
 
+/**
+ * Class CreateCommand
+ * @package AbuseIO\Console\Commands\User
+ */
 class CreateCommand extends AbstractCreateCommand
 {
+    /**
+     * @var
+     */
     private $password;
 
+    /**
+     * {@inheritdoc }
+     */
     public function getArgumentsList()
     {
-        return new InputDefinition([
-            new InputArgument('email', null, 'The emailaddres for the account.', null),
-            new InputArgument('password', null, 'The new password for the account', null),
-            new InputArgument('first_name', null,'the new first name of the users account.', null),
-            new inputargument('last_name', null, 'the new last name of the users account', null),
-            new inputargument('language', null, 'the default language for the users account, in country code ', null),
-            new inputargument('account', null, 'the new account name where this user is linked to', null),
-            new inputargument('disabled', null, 'set the new account status to be disabled', 'false')
-        ]);
+        return new InputDefinition(
+            [
+                new InputArgument('email', null, 'The emailaddres for the account.', null),
+                new InputArgument('password', null, 'The new password for the account', null),
+                new InputArgument('first_name', null, 'the new first name of the users account.', null),
+                new inputargument('last_name', null, 'the new last name of the users account', null),
+                new inputargument(
+                    'language',
+                    null,
+                    'the default language for the users account, in country code ',
+                    null
+                ),
+                new inputargument('account', null, 'the new account name where this user is linked to', null),
+                new inputargument('disabled', null, 'set the new account status to be disabled', 'false')
+            ]
+        );
     }
 
+    /**
+     * {@inheritdoc }
+     */
     public function getAsNoun()
     {
         return "user";
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getModelFromRequest()
     {
         $user = new User;
@@ -52,6 +74,9 @@ class CreateCommand extends AbstractCreateCommand
         return $user;
     }
 
+    /**
+     * @return array|string
+     */
     protected function getPassword()
     {
         $this->password = $this->argument('password');
@@ -67,6 +92,9 @@ class CreateCommand extends AbstractCreateCommand
         return $this->password;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getValidator($model)
     {
         $arr = $model->toArray();
@@ -77,6 +105,10 @@ class CreateCommand extends AbstractCreateCommand
         return Validator::make($arr, User::createRules($model));
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     protected function findAccountByName($name)
     {
         $account = Account::where('id', $name)->orWhere('name', $name)->first();
@@ -95,4 +127,3 @@ class CreateCommand extends AbstractCreateCommand
         return $account;
     }
 }
-

@@ -8,6 +8,10 @@ use AbuseIO\Models\User;
 use AbuseIO\Models\RoleUser;
 use Carbon;
 
+/**
+ * Class RevokeCommand
+ * @package AbuseIO\Console\Commands\Role
+ */
 class RevokeCommand extends Command
 {
 
@@ -27,8 +31,7 @@ class RevokeCommand extends Command
     protected $description = 'Revokes a role from a user';
 
     /**
-     * Create a new command instance.
-     * @return void
+     * {@inheritdoc }
      */
     public function __construct()
     {

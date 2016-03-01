@@ -2,11 +2,14 @@
 
 namespace AbuseIO\Console\Commands\Role;
 
-
 use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Role;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Role
+ */
 class ShowCommand extends AbstractShowCommand
 {
     /**
@@ -54,7 +57,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'role',
                 InputArgument::REQUIRED,
-                'Use the id or the name for a role to show it.')
+                'Use the id or the name for a role to show it.'
+            )
         ];
     }
 

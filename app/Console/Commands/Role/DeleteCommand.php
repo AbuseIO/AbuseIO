@@ -6,10 +6,15 @@ use AbuseIO\Console\Commands\AbstractDeleteCommand;
 use AbuseIO\Models\Role;
 use Symfony\Component\Console\Input\InputArgument;
 
-
+/**
+ * Class DeleteCommand
+ * @package AbuseIO\Console\Commands\Role
+ */
 class DeleteCommand extends AbstractDeleteCommand
 {
-
+    /**
+     * {@inheritdoc }
+     */
     public function defineInput()
     {
         return array(
@@ -21,11 +26,17 @@ class DeleteCommand extends AbstractDeleteCommand
         );
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getAllowedArguments()
     {
         return ["name", "id"];
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getObjectByArguments()
     {
         $role = false;
@@ -39,6 +50,9 @@ class DeleteCommand extends AbstractDeleteCommand
         return $role;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getAsNoun()
     {
         return "role";

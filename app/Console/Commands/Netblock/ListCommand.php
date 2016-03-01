@@ -5,6 +5,10 @@ namespace AbuseIO\Console\Commands\Netblock;
 use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Netblock;
 
+/**
+ * Class ListCommand
+ * @package AbuseIO\Console\Commands\Netblock
+ */
 class ListCommand extends AbstractListCommand
 {
 

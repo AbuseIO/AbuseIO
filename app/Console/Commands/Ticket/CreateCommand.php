@@ -10,27 +10,42 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
+/**
+ * Class CreateCommand
+ * @package AbuseIO\Console\Commands\Ticket
+ */
 class CreateCommand extends AbstractCreateCommand
 {
     // TODO don't know how a ticket works.
+    /**
+     * {@inheritdoc }
+     */
     public function getArgumentsList()
     {
-        return new InputDefinition([
-            new InputArgument('ip', null, 'Ip'),
-            new InputArgument('domain_id', null, 'ID from domain of which to copy the properties'),
-            new InputArgument('class_id', null, 'Class id'),
-            new InputArgument('type_id', null, 'Type id'),
-            new InputArgument('contact_id', null, 'ID from contact of which to copy the properties'),
-            new InputArgument('status_id', null, 'Status id'),
+        return new InputDefinition(
+            [
+                new InputArgument('ip', null, 'Ip'),
+                new InputArgument('domain_id', null, 'ID from domain of which to copy the properties'),
+                new InputArgument('class_id', null, 'Class id'),
+                new InputArgument('type_id', null, 'Type id'),
+                new InputArgument('contact_id', null, 'ID from contact of which to copy the properties'),
+                new InputArgument('status_id', null, 'Status id'),
 
-        ]);
+            ]
+        );
     }
 
+    /**
+     * {@inheritdoc }
+     */
     public function getAsNoun()
     {
         return 'ticket';
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getModelFromRequest()
     {
         $ticket = new Ticket();
@@ -67,13 +82,14 @@ class CreateCommand extends AbstractCreateCommand
         $ticket->last_notify_count = 0;
         $ticket->last_notify_timestamp = time();
 
-
-
         return $ticket;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Ticket::createRules($model));
+        return Validator::make($model->toArray(), Ticket::createRules());
     }
 }

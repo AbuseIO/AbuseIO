@@ -6,6 +6,9 @@ use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Note;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * {@inheritdoc }
+ */
 class ShowCommand extends AbstractShowCommand
 {
     /**
@@ -56,7 +59,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'note',
                 InputArgument::REQUIRED,
-                'Use the id for a note to show it.')
+                'Use the id for a note to show it.'
+            )
         ];
     }
 }

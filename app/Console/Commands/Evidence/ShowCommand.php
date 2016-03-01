@@ -6,6 +6,10 @@ use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Evidence;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Evidence
+ */
 class ShowCommand extends AbstractShowCommand
 {
     /**
@@ -54,7 +58,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'evidence',
                 InputArgument::REQUIRED,
-                'Use the id for an evidence to show it.')
+                'Use the id for an evidence to show it.'
+            )
         ];
     }
 }

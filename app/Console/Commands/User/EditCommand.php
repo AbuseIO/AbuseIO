@@ -10,39 +10,59 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
+/**
+ * Class EditCommand
+ * @package AbuseIO\Console\Commands\User
+ */
 class EditCommand extends AbstractEditCommand
 {
+    /**
+     * @var
+     */
     private $updatedPassword;
 
+    /**
+     * {@inheritdoc }
+     */
     public function getOptionsList()
     {
-        return new InputDefinition([
-            new inputArgument('user', inputArgument::REQUIRED, 'The user id or e-mail of you want to edit'),
-            new InputOption('email', null, InputOption::VALUE_OPTIONAL, 'The new e-mail address and login username'),
-            new InputOption('password', null, InputOption::VALUE_OPTIONAL, 'The new password for the account '),
-            new InputOption('autopassword', null, InputOption::VALUE_NONE,'Generate a new password and set it for the account'),
-            new InputOption('first_name', null, InputOption::VALUE_OPTIONAL,'The new first name of the users account.'),
-            new InputOption('last_name', null, InputOption::VALUE_OPTIONAL, 'The new last name of the users account'),
-            new InputOption('language', null, InputOption::VALUE_OPTIONAL, 'The default language for the users account, in country code '),
-            new InputOption('account', null, InputOption::VALUE_OPTIONAL, 'The new account name where this user is linked to'),
-            new InputOption('disable', null, InputOption::VALUE_NONE, 'Set the new account status to be disabled'),
-            new InputOption('enable', null, InputOption::VALUE_NONE, 'Set the new account status to be enabled'),
-        ]);
+        return new InputDefinition(
+            [
+                new inputArgument('user', inputArgument::REQUIRED, 'The user id or e-mail of you want to edit'),
+                new InputOption('email', null, InputOption::VALUE_OPTIONAL, 'The new e-mail address and login username'),
+                new InputOption('password', null, InputOption::VALUE_OPTIONAL, 'The new password for the account '),
+                new InputOption('autopassword', null, InputOption::VALUE_NONE,'Generate a new password and set it for the account'),
+                new InputOption('first_name', null, InputOption::VALUE_OPTIONAL,'The new first name of the users account.'),
+                new InputOption('last_name', null, InputOption::VALUE_OPTIONAL, 'The new last name of the users account'),
+                new InputOption('language', null, InputOption::VALUE_OPTIONAL, 'The default language for the users account, in country code '),
+                new InputOption('account', null, InputOption::VALUE_OPTIONAL, 'The new account name where this user is linked to'),
+                new InputOption('disable', null, InputOption::VALUE_NONE, 'Set the new account status to be disabled'),
+                new InputOption('enable', null, InputOption::VALUE_NONE, 'Set the new account status to be enabled'),
+            ]
+        );
     }
 
+    /**
+     * {@inheritdoc }
+     */
     public function getAsNoun()
     {
         return 'user';
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getModelFromRequest()
     {
-        return User::where('id',$this->argument('user'))
+        return User::where('id', $this->argument('user'))
                 ->orWhere('email', $this->argument('user'))
             ->first();
     }
 
-
+    /**
+     * {@inheritdoc }
+     */
     protected function handleOptions($model)
     {
         $this->updateFieldWithOption($model, 'first_name');
@@ -68,6 +88,9 @@ class EditCommand extends AbstractEditCommand
         return true;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getValidator($model)
     {
         $user = $model->toArray();
@@ -126,5 +149,4 @@ class EditCommand extends AbstractEditCommand
             $model->locale = $this->option('language');
         }
     }
-
 }

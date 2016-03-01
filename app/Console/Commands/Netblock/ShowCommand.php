@@ -2,13 +2,15 @@
 
 namespace AbuseIO\Console\Commands\Netblock;
 
-
 use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Contact;
 use Symfony\Component\Console\Input\InputArgument;
 
-
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Netblock
+ */
 class ShowCommand extends AbstractShowCommand
 {
     /**
@@ -61,7 +63,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'netblock',
                 InputArgument::REQUIRED,
-                'Use the firstIp, lastIp or contact name for a netblock to show it.')
+                'Use the firstIp, lastIp or contact name for a netblock to show it.'
+            )
         ];
     }
 

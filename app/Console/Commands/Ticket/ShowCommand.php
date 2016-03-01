@@ -6,6 +6,10 @@ use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Ticket;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Ticket
+ */
 class ShowCommand extends AbstractShowCommand
 {
     /**
@@ -72,7 +76,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'ticket',
                 InputArgument::REQUIRED,
-                'Use the id for a ticket to show it.')
+                'Use the id for a ticket to show it.'
+            )
         ];
     }
 
@@ -83,12 +88,10 @@ class ShowCommand extends AbstractShowCommand
     {
         $result = parent::transformObjectToTableBody($model);
         $result[] = ["[Events ID]", "[Events Source]"];
-        foreach($model->events as $event) {
+        foreach ($model->events as $event) {
             $result[] = [$event->id, $event->source];
         }
 
         return $result;
     }
-
-
 }

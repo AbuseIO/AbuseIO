@@ -6,6 +6,10 @@ use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Permission;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Permission
+ */
 class ShowCommand extends AbstractShowCommand
 {
     /**
@@ -53,7 +57,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'permission',
                 InputArgument::REQUIRED,
-                'Use the id for a permission to show it.')
+                'Use the id for a permission to show it.'
+            )
         ];
     }
     /**
