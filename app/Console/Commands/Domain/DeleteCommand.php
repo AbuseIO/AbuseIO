@@ -6,6 +6,10 @@ use AbuseIO\Console\Commands\AbstractDeleteCommand;
 use AbuseIO\Models\Domain;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class DeleteCommand
+ * @package AbuseIO\Console\Commands\Domain
+ */
 class DeleteCommand extends AbstractDeleteCommand
 {
     /**
@@ -41,8 +45,8 @@ class DeleteCommand extends AbstractDeleteCommand
             new InputArgument(
                 'id',
                 InputArgument::REQUIRED,
-                'Use the id for a domain to delete it.')
+                'Use the id for a domain to delete it.'
+            )
         );
     }
 }
-

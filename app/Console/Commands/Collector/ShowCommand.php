@@ -3,7 +3,6 @@
 namespace AbuseIO\Console\Commands\Collector;
 
 use AbuseIO\Console\Commands\AbstractShowCommand;
-use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
@@ -36,9 +35,7 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * @param array $collectors
-     *
-     * @return array
+     * {@inheritdoc }
      */
     public function hydrateCollectorWithFields(array $collectors)
     {
@@ -99,7 +96,7 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc }
      */
     protected function getCollectionWithArguments()
     {
@@ -107,7 +104,7 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * @return array
+     * {@inheritdoc }
      */
     protected function defineInput()
     {
@@ -115,10 +112,14 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'collector',
                 InputArgument::REQUIRED,
-                'Use the name of a collector to show it.'),
+                'Use the name of a collector to show it.'
+            ),
         ];
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function transformObjectToTableBody($model)
     {
         return [

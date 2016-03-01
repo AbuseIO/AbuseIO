@@ -10,32 +10,50 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
+/**
+ * Class EditCommand
+ * @package AbuseIO\Console\Commands\Domain
+ */
 class EditCommand extends AbstractEditCommand
 {
+    /**
+     * {@inheritdoc }
+     */
     public function getOptionsList()
     {
-        return new InputDefinition([
-            new inputArgument('id', InputArgument::REQUIRED, 'Account id to edit'),
-            new InputOption('contact_id', null, InputOption::VALUE_OPTIONAL, 'Contact id for domain'),
-            new InputOption('name', null, InputOption::VALUE_OPTIONAL,  'Name'),
-            new InputOption('enabled', null, InputOption::VALUE_OPTIONAL, 'true|false, Set the domain to be enabled'),
-        ]);
+        return new InputDefinition(
+            [
+                new inputArgument('id', InputArgument::REQUIRED, 'Account id to edit'),
+                new InputOption('contact_id', null, InputOption::VALUE_OPTIONAL, 'Contact id for domain'),
+                new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'Name'),
+                new InputOption(
+                    'enabled',
+                    null,
+                    InputOption::VALUE_OPTIONAL,
+                    'true|false, Set the domain to be enabled'
+                ),
+            ]
+        );
     }
 
+    /**
+     * {@inheritdoc }
+     */
     public function getAsNoun()
     {
         return 'domain';
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getModelFromRequest()
     {
         return Domain::find($this->argument('id'));
     }
 
     /**
-     * @param $model
-     *
-     * @return bool
+     * {@inheritdoc }
      */
     protected function handleOptions($model)
     {
@@ -55,6 +73,9 @@ class EditCommand extends AbstractEditCommand
         return true;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getValidator($model)
     {
         if (null !== $model) {
@@ -63,5 +84,7 @@ class EditCommand extends AbstractEditCommand
 
             return Validator::make($data, $updateRules);
         }
+
+        return false;
     }
 }

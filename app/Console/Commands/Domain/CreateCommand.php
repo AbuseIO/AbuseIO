@@ -8,22 +8,37 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
+/**
+ * Class CreateCommand
+ * @package AbuseIO\Console\Commands\Domain
+ */
 class CreateCommand extends AbstractCreateCommand
 {
+    /**
+     * {@inheritdoc }
+     */
     public function getArgumentsList()
     {
-        return new InputDefinition([
-            new InputArgument('name', null, 'domain name'),
-            new InputArgument('contact_id', null, 'the contact_id'),
-            new InputArgument('enabled', null, 'true|false, Set the account to be enabled', false),
-        ]);
+        return new InputDefinition(
+            [
+                new InputArgument('name', null, 'domain name'),
+                new InputArgument('contact_id', null, 'the contact_id'),
+                new InputArgument('enabled', null, 'true|false, Set the account to be enabled', false),
+            ]
+        );
     }
 
+    /**
+     * {@inheritdoc }
+     */
     public function getAsNoun()
     {
         return "domain";
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getModelFromRequest()
     {
         $domain = new Domain();
@@ -35,9 +50,11 @@ class CreateCommand extends AbstractCreateCommand
         return $domain;
     }
 
+    /**
+     * {@inheritdoc }
+     */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Domain::createRules($model));
+        return Validator::make($model->toArray(), Domain::createRules());
     }
 }
-

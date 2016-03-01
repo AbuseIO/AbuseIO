@@ -6,7 +6,10 @@ use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Domain;
 use Symfony\Component\Console\Input\InputArgument;
 
-
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Domain
+ */
 class ShowCommand extends AbstractShowCommand
 {
     /**
@@ -51,9 +54,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'domain',
                 InputArgument::REQUIRED,
-                'Use the id or name for a domain to show it.')
+                'Use the id or name for a domain to show it.'
+            )
         ];
     }
 }
-
-

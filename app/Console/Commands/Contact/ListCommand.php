@@ -57,4 +57,3 @@ class ListCommand extends AbstractListCommand
         return "contact";
     }
 }
-

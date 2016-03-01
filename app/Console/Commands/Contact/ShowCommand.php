@@ -6,6 +6,10 @@ use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Contact;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class ShowCommand
+ * @package AbuseIO\Console\Commands\Contact
+ */
 class ShowCommand extends AbstractShowCommand
 {
     /**
@@ -50,7 +54,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'contact',
                 InputArgument::REQUIRED,
-                'Use the id or name for a contact to show it.')
+                'Use the id or name for a contact to show it.'
+            )
         ];
     }
 }
