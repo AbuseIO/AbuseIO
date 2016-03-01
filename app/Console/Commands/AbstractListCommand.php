@@ -26,10 +26,10 @@ abstract class AbstractListCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 $this->getFilterMessage()
             )->addOption(
-                "json",
+                'json',
                 null,
-                InputOption::VALUE_OPTIONAL,
-                "use --json=true to output result as JSON"
+                InputOption::VALUE_NONE,
+                'Output result as JSON'
             );
 
     }

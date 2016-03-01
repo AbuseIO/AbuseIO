@@ -24,8 +24,8 @@ abstract class AbstractShowCommand extends Command
             )->addOption(
                 'json',
                 null,
-                InputOption::VALUE_OPTIONAL,
-                'use --json=true to output result as JSON'
+                InputOption::VALUE_NONE,
+                'Output result as JSON'
             );
     }
 

@@ -39,7 +39,7 @@ class ShowCommand extends AbstractShowCommand
      */
     protected function getFields()
     {
-        return ["id", "name","brand","disabled", "description"];
+        return ["id", "name", "brand", "disabled", "description"];
     }
 
     /**
@@ -60,7 +60,8 @@ class ShowCommand extends AbstractShowCommand
             new InputArgument(
                 'account',
                 InputArgument::REQUIRED,
-                'Use the id or name for a account to show it.')
+                'Use the id or name for a account to show it.'
+            )
         ];
     }
 }
