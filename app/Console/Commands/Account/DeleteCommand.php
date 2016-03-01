@@ -5,6 +5,8 @@ namespace AbuseIO\Console\Commands\Account;
 use AbuseIO\Console\Commands\AbstractDeleteCommand;
 use AbuseIO\Models\Account;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class DeleteCommand
@@ -12,6 +14,21 @@ use Symfony\Component\Console\Input\InputArgument;
  */
 class DeleteCommand extends AbstractDeleteCommand
 {
+    /**
+     * {@inheritdoc }
+     */
+    public function run(InputInterface $input, OutputInterface $output)
+    {
+        try {
+            return parent::run($input, $output);
+        } catch (\RuntimeException $e) {
+            $this->error($e->getMessage());
+            $this->error(
+                sprintf("Please try %s --help", $this->getName())
+            );
+        }
+    }
+
     /**
      * {@inheritdoc }
      */
