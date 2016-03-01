@@ -5,7 +5,9 @@ namespace AbuseIO\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractShowCommand extends Command
 {
@@ -27,6 +29,18 @@ abstract class AbstractShowCommand extends Command
                 InputOption::VALUE_NONE,
                 'Output result as JSON'
             );
+    }
+
+    public function run(InputInterface $input, OutputInterface $output)
+    {
+        try {
+            return parent::run($input, $output);
+        } catch (\RuntimeException $e) {
+            $this->error($e->getMessage());
+            $this->error(
+                sprintf("Please try %s --help", $this->getName())
+            );
+        }
     }
 
     /**
@@ -139,4 +153,5 @@ abstract class AbstractShowCommand extends Command
         }
         return $resultSet;
     }
+
 }

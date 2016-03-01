@@ -1,5 +1,4 @@
 <?php
-
 namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
