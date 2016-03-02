@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Models\Event;
 use AbuseIO\Models\Evidence;
 
 /**

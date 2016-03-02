@@ -6,12 +6,9 @@ use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\BrandFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
-use Illuminate\Filesystem\Filesystem;
 use yajra\Datatables\Datatables;
 use Redirect;
 use Exception;
-use Log;
-use DB;
 
 /**
  * Class BrandsController

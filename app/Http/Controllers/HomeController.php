@@ -3,7 +3,6 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests;
-use File;
 
 /**
  * Class HomeController
