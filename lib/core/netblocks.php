@@ -118,7 +118,7 @@ function netblockUpdate() {
 function netblockList($filter) {
     $reports = array();
 
-    $query = "SELECT Netblocks.begin_in, Netblocks.end_in, Netblocks.CustomerCode, Customers.Code, Customers.Name FROM Netblocks, Customers WHERE 1 AND Customers.Code = Netblocks.CustomerCode ${filter}"; 
+    $query = "SELECT Netblocks.begin_in, Netblocks.end_in, Netblocks.CustomerCode, Customers.Code, Customers.Name FROM Netblocks LEFT JOIN Customers ON Customers.Code = Netblocks.CustomerCode WHERE 1 ${filter}";
     $reports = _mysqli_fetch($query);
 
     return $reports;
