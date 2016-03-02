@@ -3,8 +3,9 @@
 /**
  * This helper function can be used to get the url data.
  *
- * @param  string $str
+ * @param $url
  * @return mixed
+ * @internal param string $str
  */
 function getUrlData($url)
 {

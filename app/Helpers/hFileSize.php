@@ -10,6 +10,6 @@
 function hFileSize($bytes, $decimals = 2)
 {
     $size = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
-    $factor = floor((strlen($bytes) - 1) / 3);
+    $factor = (integer) floor((strlen($bytes) - 1) / 3);
     return  str_replace('.00', '', sprintf("%.{$decimals}f", $bytes / pow(1024, $factor))).' '. @$size[$factor];
 }
