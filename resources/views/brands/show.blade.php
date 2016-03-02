@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<h1 class="page-header">{{ trans('brands.headers.detail') }}: {{ $brand->name }}</h1>
+<h1 class="page-header">{{ trans('brands.header.detail') }}: {{ $brand->name }}</h1>
 <div class="row">
     <div class="col-md-3 col-md-offset-9 text-right">
         {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.brands.destroy', $brand->id]]) !!}
@@ -28,7 +28,5 @@
 
     <dt>{{ trans('brands.logo') }}</dt>
     <dd><img src="/admin/logo/{{ $brand->id }}" alt="{{ $brand->company_name }}"/></dd>
-
 </dl>
-
 @endsection

@@ -1,15 +1,18 @@
 <?php
 
+/**
+ * Translations for Evidence
+ */
 return [
-    // Evidence - Headers
-    'headers.new'       => 'Nieuw Bewijs',
-    'headers.edit'      => 'Bewerk Bewijs',
-    'headers.detail'    => 'Details voor bewijs #',
+    // Headers
+    'header.new'        => 'Nieuw Bewijs',
+    'header.edit'       => 'Bewerk Bewijs',
+    'header.detail'     => 'Details voor bewijs #',
 
-    // Evidence - Buttons
+    // Buttons
     'button.download'   => 'Download',
 
-    // Evidence - Miscellaneous
+    // Miscellaneous
     'attachment'        => 'Bijlagen',
     'message'           => 'Bericht',
     'from'              => 'Van',

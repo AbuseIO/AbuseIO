@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<h1 class="page-header">{{ trans('netblocks.headers.detail') }}: {{ $netblock->name }}</h1>
+<h1 class="page-header">{{ trans('netblocks.header.detail') }}:</h1>
 <div class="row">
     <div  class="col-md-3 col-md-offset-9 text-right">
         {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.netblocks.destroy', $netblock->id]]) !!}
@@ -29,5 +29,4 @@
     <dt>{{ trans('misc.status') }}</dt>
     <dd>{{ $netblock->enabled ? trans('misc.enabled') : trans('misc.disabled') }}</dd>
 </dl>
-
 @endsection

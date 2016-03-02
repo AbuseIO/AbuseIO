@@ -49,7 +49,7 @@
     </div>
 </div>
 @else
-    {!! Form::hidden('account_id', $auth_user->account->id) !!}
+{!! Form::hidden('account_id', $auth_user->account->id) !!}
 @endif
 <div class="form-group @if ($errors->has('roles')) has-error @endif">
     {!! Form::label('roles', trans_choice('misc.roles', 2).':', ['class' => 'col-sm-2 control-label']) !!}

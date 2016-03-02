@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<h1 class="page-header">{{ trans('users.headers.detail') }}: {{ $user->first_name }} {{ $user->last_name }}</h1>
+<h1 class="page-header">{{ trans('users.header.detail') }}: {{ $user->first_name }} {{ $user->last_name }}</h1>
 <div class="row">
     <div class="col-md-3 col-md-offset-9 text-right">
         {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.users.destroy', $user->id]]) !!}
@@ -38,5 +38,4 @@
         </ul>
     </dd>
 </dl>
-
 @endsection

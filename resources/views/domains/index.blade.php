@@ -1,24 +1,23 @@
 @extends('app')
 
 @section('content')
-    <h1 class="page-header">{{ trans('misc.domains') }}</h1>
-    <div class="row">
-        <div  class="col-md-3 col-md-offset-9 text-right">
-            {!! link_to_route('admin.domains.create', trans('domains.button.new_domain'), [ ], ['class' => 'btn btn-info']) !!}
-            {!! link_to_route('admin.domains.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
-        </div>
+<h1 class="page-header">{{ trans('misc.domains') }}</h1>
+<div class="row">
+    <div  class="col-md-3 col-md-offset-9 text-right">
+        {!! link_to_route('admin.domains.create', trans('domains.button.new_domain'), [ ], ['class' => 'btn btn-info']) !!}
+        {!! link_to_route('admin.domains.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
     </div>
+</div>
 
-    <table class="table table-striped" id="domains-table">
-        <thead>
-        <tr>
-            <th>{{ trans('domains.domainname') }}</th>
-            <th>{{ trans('misc.contact') }}</th>
-            <th class="text-right">{{ trans('misc.action') }}</th>
-        </tr>
-        </thead>
-    </table>
-
+<table class="table table-striped" id="domains-table">
+    <thead>
+    <tr>
+        <th>{{ trans('domains.domainname') }}</th>
+        <th>{{ trans('misc.contact') }}</th>
+        <th class="text-right">{{ trans('misc.action') }}</th>
+    </tr>
+    </thead>
+</table>
 @endsection
 
 @section('extrajs')

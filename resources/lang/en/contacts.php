@@ -1,23 +1,26 @@
 <?php
 
+/**
+ * Translations for Contacts
+ */
 return [
-    // Contacts - Headers
-    'headers.new'       => 'New Contact',
-    'headers.edit'      => 'Edit Contact',
-    'headers.detail'    => 'Contact details for',
+    // Headers
+    'header.new'            => 'New Contact',
+    'header.edit'           => 'Edit Contact',
+    'header.detail'         => 'Contact details for',
 
-    // Contacts - Buttons
+    // Buttons
     'button.new_contact'    => 'New Contact',
 
-    // Contacts - Miscellaneous
-    'csv_export'        => 'CSV Export',
-    'no_contacts'       => 'You do not yet have any contacts.',
-    'reference'         => 'Reference',
-    'api_host'          => 'API Host',
-    'notification'      => 'Notification',
-    'details_for'       => 'Contact details for',
-    'linked_netblocks'  => 'Linked Netblocks',
-    'linked_domains'    => 'Linked Domains',
-    'netblock_id'       => 'Netblock Id',
-    'domain_id'         => 'Domain Id',
+    // Miscellaneous
+    'csv_export'            => 'CSV Export',
+    'no_contacts'           => 'You do not yet have any contacts.',
+    'reference'             => 'Reference',
+    'api_host'              => 'API Host',
+    'notification'          => 'Notification',
+    'details_for'           => 'Contact details for',
+    'linked_netblocks'      => 'Linked Netblocks',
+    'linked_domains'        => 'Linked Domains',
+    'netblock_id'           => 'Netblock Id',
+    'domain_id'             => 'Domain Id',
 ];

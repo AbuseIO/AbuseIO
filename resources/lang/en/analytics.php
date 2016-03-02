@@ -1,11 +1,14 @@
 <?php
 
+/**
+ * Translations for Analytics
+ */
 return [
-    // Analytics - Headers
+    // Headers
 
-    // Analytics - Buttons
+    // Buttons
     //'button.<name>'     => 'Translation'
 
-    // Analytics - Miscellaneous
+    // Miscellaneous
     //'<custom_trans>'    => 'Translation',
 ];

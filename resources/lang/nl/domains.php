@@ -1,15 +1,18 @@
 <?php
 
+/**
+ * Translations for Domains
+ */
 return [
-    // Domains - Headers
-    'headers.new'       => 'Nieuw Domein',
-    'headers.edit'      => 'Bewerk Domein',
-    'headers.detail'    => 'Domein details voor',
+    // Headers
+    'header.new'        => 'Nieuw Domein',
+    'header.edit'       => 'Bewerk Domein',
+    'header.detail'     => 'Domein details voor',
 
-    // Domains - Buttons
+    // Buttons
     'button.new_domain' => 'Nieuw Domein',
 
-    // Domains - Miscellaneous
-    'no_domains'    => 'U heeft nog geen domeinen',
-    'domainname'    => 'Domein naam',
+    // Miscellaneous
+    'no_domains'        => 'U heeft nog geen domeinen',
+    'domainname'        => 'Domein naam',
 ];

@@ -7,8 +7,6 @@
         {!! link_to_route('admin.brands.create', trans('brands.button.new_brand'), [ ], ['class' => 'btn btn-info']) !!}
     </div>
 </div>
-
-
 @if ( !$brands->count() )
 <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('brands.no_brands')}}</div>
 @else

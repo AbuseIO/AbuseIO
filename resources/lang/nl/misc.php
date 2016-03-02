@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Miscellaneous translations
+ */
 return [
     // AbuseIO intro
     'abuseio_intro1' => 'AbuseIO is een gereedschap voor het ontvangen, verwerken, correleren

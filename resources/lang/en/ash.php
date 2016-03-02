@@ -1,16 +1,9 @@
 <?php
 
+/**
+ * Translations for AbuseIO Self Help (ash)
+ */
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | ASH Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used by the ASH views
-    | This excludes the general field mapping of names (like data from info blobs)
-    */
-
     'title'                         => 'AbuseIO Self-help',
     'intro'                         => 'You are seeing this page because we have detected suspicious activities'.
                                        ' from your IP address, Domain name or E-Mail address. On this page you'.

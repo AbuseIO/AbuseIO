@@ -9,7 +9,6 @@
         @endif
     </div>
 </div>
-
 @if ( !$accounts->count() )
 <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('accounts.no_accounts')}}</div>
 @else
@@ -53,4 +52,3 @@
     });
 </script>
 @endsection
-

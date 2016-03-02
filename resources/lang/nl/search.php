@@ -1,12 +1,15 @@
 <?php
 
+/**
+ * Translations for Search
+ */
 return [
-    // Search - Headers
+    // Headers
 
-    // Search - Buttons
-    'button.search'     => 'Zoek',
+    // Buttons
+    'button.search' => 'Zoek',
 
-    // Search - Miscellaneous
-    'customer_code'     => 'Klant Code',
-    'customer_name'     => 'Klant Naam',
+    // Miscellaneous
+    'customer_code' => 'Klant Code',
+    'customer_name' => 'Klant Naam',
 ];

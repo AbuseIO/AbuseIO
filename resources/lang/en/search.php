@@ -1,12 +1,12 @@
 <?php
 
 return [
-    // Search - Headers
+    // Headers
 
-    // Search - Buttons
+    // Buttons
     'button.search'     => 'Search',
 
-    // Search - Miscellaneous
+    // Miscellaneous
     'customer_code'     => 'Contact Code',
     'customer_name'     => 'Contact Name',
 ];

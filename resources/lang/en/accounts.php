@@ -1,15 +1,18 @@
 <?php
 
+/**
+ * Translations for Accounts
+ */
 return [
-    // Accounts - Headers
-    'headers.new'           => 'New Account',
-    'headers.edit'          => 'Edit Account',
-    'headers.detail'        => 'Account details for',
+    // Headers
+    'header.new'            => 'New Account',
+    'header.edit'           => 'Edit Account',
+    'header.detail'         => 'Account details for',
 
-    // Accounts - Buttons
+    // Buttons
     'button.new_account'    => 'New Account',
 
-    // Accounts - Miscellaneous
+    // Miscellaneous
     'no_accounts'           => 'No accounts',
     'linked_users'          => 'Linked users',
     'first_name'            => 'First name',

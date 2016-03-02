@@ -1,10 +1,13 @@
 <?php
 
+/**
+ * Translations for Evidence
+ */
 return [
     // Evidence - Headers
-    'headers.new'       => 'New Evidence',
-    'headers.edit'      => 'Edit Evidence',
-    'headers.detail'    => 'Detail for evidence #',
+    'header.new'        => 'New Evidence',
+    'header.edit'       => 'Edit Evidence',
+    'header.detail'     => 'Detail for evidence #',
 
     // Evidence - Buttons
     'button.download'   => 'Download',

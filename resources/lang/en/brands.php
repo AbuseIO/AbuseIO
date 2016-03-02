@@ -1,14 +1,17 @@
 <?php
 
+/**
+ * Translations for Brands
+ */
 return [
-    // Brands - Headers
-    'headers.new'       => 'New Brand',
-    'headers.edit'      => 'Edit Brand',
-    'headers.detail'    => 'Brand details for',
+    // Headers
+    'header.new'        => 'New Brand',
+    'header.edit'       => 'Edit Brand',
+    'header.detail'     => 'Brand details for',
 
-    // Brands - Buttons
-    'button.new_brand'    => 'New Brand',
+    // Buttons
+    'button.new_brand'  => 'New Brand',
 
-    // Brands - Miscellaneous
-    'no_brands'           => 'No brands',
-    'logo'                => 'Company logo',];
+    // Miscellaneous
+    'no_brands'         => 'No brands',
+    'logo'              => 'Company logo',];
