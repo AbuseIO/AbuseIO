@@ -100,7 +100,7 @@ class Domain extends Model
     /**
      * Static method to check if the account has access to the model instance
      *
-     * @param into                    $model_id
+     * @param integer                 $model_id
      * @param \AbuseIO\Models\Account $account
      * @return bool
      */
