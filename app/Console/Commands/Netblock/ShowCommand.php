@@ -101,8 +101,9 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
+     * @param $field
      * @param $ip
-     * @return $collection \Illuminate\Support\Collection||null
+     * @return null $collection \Illuminate\Support\Collection||null
      */
     private function findByIp($field, $ip)
     {

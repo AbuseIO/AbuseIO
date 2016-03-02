@@ -54,7 +54,7 @@ class AssignCommand extends Command
         }
 
         /*
-         * Detect the role->id and lookup the user if its thru a user assignment.
+         * Detect the role->id and lookup the user if its through a user assignment.
          */
         $role = false;
         $user = false;

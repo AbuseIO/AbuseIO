@@ -102,7 +102,7 @@ class CreateCommand extends AbstractCreateCommand
         $arr['password'] = $this->password;
         $arr['password_confirmation'] = $this->password;
 
-        return Validator::make($arr, User::createRules($model));
+        return Validator::make($arr, User::createRules());
     }
 
     /**

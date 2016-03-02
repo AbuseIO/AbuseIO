@@ -62,6 +62,7 @@ class ListCommand extends AbstractListCommand
 
     /**
      * @param $users
+     * @return array
      */
     private function hydrateWithRoles($users)
     {

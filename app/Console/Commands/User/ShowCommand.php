@@ -49,7 +49,7 @@ class ShowCommand extends AbstractShowCommand
      */
     protected function getCollectionWithArguments()
     {
-        return User::Where("id", $this->argument("user"));
+        return User::where("id", $this->argument("user"));
     }
 
     /**

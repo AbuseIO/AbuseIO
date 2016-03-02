@@ -45,7 +45,7 @@ class ShowCommand extends AbstractShowCommand
      */
     protected function getCollectionWithArguments()
     {
-        return Role::Where("id", $this->argument("role"))->orWhere("name", $this->argument("role"));
+        return Role::where("id", $this->argument("role"))->orWhere("name", $this->argument("role"));
     }
 
     /**

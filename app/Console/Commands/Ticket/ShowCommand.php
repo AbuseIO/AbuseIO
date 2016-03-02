@@ -64,7 +64,7 @@ class ShowCommand extends AbstractShowCommand
      */
     protected function getCollectionWithArguments()
     {
-        return Ticket::Where("id", $this->argument("ticket"));
+        return Ticket::where("id", $this->argument("ticket"));
     }
 
     /**
