@@ -77,6 +77,7 @@ class TicketUpdate extends Job
     /**
      * @param Ticket $ticket
      * @param integer|null $newstatus
+     * @return bool
      */
     public static function status($ticket, $newstatus = null)
     {
