@@ -148,8 +148,8 @@ class Event extends Model
                     }
                 }
             } else {
-                foreach (config("types.status.{$entitiy}") as $key) {
-                    $statuses[$key] = trans("types.status.{$entitiy}.{$key}.name");
+                foreach (config("types.status.{$entity}") as $key) {
+                    $statuses[$key] = trans("types.status.{$entity}.{$key}.name");
                 }
             }
         }
