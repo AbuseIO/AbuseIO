@@ -35,7 +35,7 @@ class TicketFormRequest extends Request
             case 'DELETE':
                 break;
             case 'POST':
-                return Incident::createRules($this);
+                return Incident::createRules();
             case 'PUT':
                 break;
             case 'PATCH':
@@ -70,7 +70,7 @@ class TicketFormRequest extends Request
     {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
-        $input = Input::get();
+        $input = Input::all();
 
         if (strtotime($input['timestamp']) !== false) {
             $input['timestamp'] = strtotime($input['timestamp']);

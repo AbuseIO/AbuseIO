@@ -9,11 +9,13 @@ use Log;
 class CheckAccount
 {
     const IDSEGMENT = 3;
+
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @param $model
      * @return mixed
      */
     public function handle($request, Closure $next, $model)
