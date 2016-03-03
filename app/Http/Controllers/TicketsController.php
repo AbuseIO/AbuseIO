@@ -164,7 +164,19 @@ class TicketsController extends Controller
     public function export($format)
     {
         // TODO #AIO-?? ExportProvider - (mark) Move this into an ExportProvider or something?
-        $tickets = Ticket::all();
+
+        // only export all tickets when we are in the systemaccount
+        $auth_account = $this->auth_user->account;
+        if ($auth_account->isSystemAccount())
+        {
+            $tickets = Ticket::all();
+        }
+        else
+        {
+            $tickets = Ticket::select('tickets.*')
+              ->where('ip_contact_account_id', $auth_account->id)
+              ->orWhere('domain_contact_account_id', $auth_account);
+        }
 
         if ($format === 'csv') {
             $columns = [
