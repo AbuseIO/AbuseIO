@@ -26,6 +26,8 @@ trait ShowHelpWhenRunTimeExceptionOccurs
                 ]
             );
 
+            echo Artisan::output();
+
             return false;
         }
     }

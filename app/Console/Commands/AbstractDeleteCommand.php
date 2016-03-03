@@ -5,8 +5,6 @@ namespace AbuseIO\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class AbstractDeleteCommand
@@ -14,6 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class AbstractDeleteCommand extends Command
 {
+    use ShowHelpWhenRunTimeExceptionOccurs;
+
     final protected function configure()
     {
         $this
@@ -24,29 +24,6 @@ abstract class AbstractDeleteCommand extends Command
                     $this->defineInput()
                 )
             );
-    }
-
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int
-     */
-    public function run(InputInterface $input, OutputInterface $output)
-    {
-        try {
-            return parent::run($input, $output);
-        } catch (\RuntimeException $e) {
-            $this->error($e->getMessage());
-            Artisan::call(
-                $this->getName(),
-                [
-                    "--help" => "true",
-                ]
-            );
-            echo Artisan::output();
-
-            return false;
-        }
     }
 
     /**
