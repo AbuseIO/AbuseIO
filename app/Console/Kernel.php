@@ -78,16 +78,6 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Contact\CreateCommand',
         'AbuseIO\Console\Commands\Contact\EditCommand',
 
-        'AbuseIO\Console\Commands\Event\ShowCommand',
-        'AbuseIO\Console\Commands\Event\DeleteCommand',
-        'AbuseIO\Console\Commands\Event\ListCommand',
-        'AbuseIO\Console\Commands\Event\CreateCommand',
-
-        'AbuseIO\Console\Commands\Evidence\ShowCommand',
-        'AbuseIO\Console\Commands\Evidence\DeleteCommand',
-        'AbuseIO\Console\Commands\Evidence\ListCommand',
-        'AbuseIO\Console\Commands\Evidence\CreateCommand',
-
         'AbuseIO\Console\Commands\Note\ShowCommand',
         'AbuseIO\Console\Commands\Note\DeleteCommand',
         'AbuseIO\Console\Commands\Note\ListCommand',
@@ -97,7 +87,6 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Ticket\ShowCommand',
         'AbuseIO\Console\Commands\Ticket\DeleteCommand',
         'AbuseIO\Console\Commands\Ticket\ListCommand',
-        'AbuseIO\Console\Commands\Ticket\CreateCommand',
 
     ];
 
