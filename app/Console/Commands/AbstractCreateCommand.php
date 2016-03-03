@@ -9,6 +9,9 @@ use Illuminate\Console\Command;
  */
 abstract class AbstractCreateCommand extends Command
 {
+
+    use ShowHelpWhenRunTimeExceptionOccurs;
+
     /**
      * Create a new command instance.
      */

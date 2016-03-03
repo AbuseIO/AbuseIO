@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Brand;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
+use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use Prophecy\Argument;
@@ -16,6 +17,7 @@ use Validator;
  */
 class CreateCommand extends AbstractCreateCommand
 {
+
     /**
      * @return InputDefinition
      */
@@ -23,9 +25,9 @@ class CreateCommand extends AbstractCreateCommand
     {
         return new InputDefinition(
             [
-                new InputArgument('name', null, 'brand name'),
-                new InputArgument('company_name', null, 'Company name'),
-                new InputArgument('introduction_text', null, 'Introduction text'),
+                new InputArgument('name', InputArgument::REQUIRED, 'brand name'),
+                new InputArgument('company_name', InputArgument::REQUIRED, 'Company name'),
+                new InputArgument('introduction_text', InputArgument::OPTIONAL, 'Introduction text'),
             ]
         );
     }

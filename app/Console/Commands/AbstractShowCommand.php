@@ -5,10 +5,7 @@ namespace AbuseIO\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
-use Artisan;
 
 /**
  * Class AbstractShowCommand
@@ -16,6 +13,8 @@ use Artisan;
  */
 abstract class AbstractShowCommand extends Command
 {
+    use ShowHelpWhenRunTimeExceptionOccurs;
+
     /**
      * Configure the console command.
      */
@@ -36,28 +35,7 @@ abstract class AbstractShowCommand extends Command
             );
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int
-     */
-    public function run(InputInterface $input, OutputInterface $output)
-    {
-        try {
-            return parent::run($input, $output);
-        } catch (\RuntimeException $e) {
-            $this->error($e->getMessage());
-            Artisan::call(
-                $this->getName(),
-                [
-                "--help" => "true",
-                ]
-            );
-            echo Artisan::output();
 
-            return false;
-        }
-    }
 
     /**
      * Execute the console command.
