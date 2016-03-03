@@ -23,7 +23,7 @@ class EmailCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'receive:email
+    protected $signature = 'email:receive
                             {--noqueue : Do not queue the message, but directly handle it }
     ';
 

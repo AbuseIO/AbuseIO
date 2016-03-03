@@ -157,7 +157,7 @@ newaliasses
 Add this to /etc/postfix/master.cf:
 ```bash
 notifier  unix  -       n       n       -       -       pipe
- flags=Rq user=abuseio argv=/usr/bin/php -q /opt/abuseio/artisan --env=production receive:email
+ flags=Rq user=abuseio argv=/usr/bin/php -q /opt/abuseio/artisan --env=production email:receive
 
 ```
 
@@ -327,11 +327,11 @@ you will need to restart the supervisord services too!
 Start with `/opt/abuseio/config/main.php` to and copy the main.php into the `/opt/abuseio/config/$ENV` folder. then
 setup stuff like the sender of your e-mails, where to bounce, etc in the file `/opt/abuseio/config/$ENV/main.php`.
 
-Also if you have changed the username and/or group where you run AbuseIO under, you will need to update the 
+Also if you have changed the username and/or group where you run AbuseIO under, you will need to update the
 config `/opt/abuseio/config/app.php` as well.
 
-Creating a copy into the #ENV folder with the giving example from above you create a 'override' from the default 
+Creating a copy into the #ENV folder with the giving example from above you create a 'override' from the default
 config where you copied it from. Its a overlay override method. So only variables in your override config you have set
 (changed) will be actually used. If in the default config there is a option called 'bla' and you remove it from your
-override config, then the default option will be used. So you are not required to copy the entire file, but you can 
+override config, then the default option will be used. So you are not required to copy the entire file, but you can
 just copy the elements needed into a new file (although a full copy will simplify things)
