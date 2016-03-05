@@ -67,6 +67,19 @@ $parserMap = array(
     '/@mailpit.powerweb.de/'                => 'dnsbl_de',
     '/dmca@cegtek.com/'                     => 'cegtek',
     '/nobody@woody.ch/'                     => 'woody_ch',
+    '/scomp@aol.net/'                       => 'feedbackloop',
+    '/feedbackloop@feedback.bluetie.com/'   => 'feedbackloop',
+    '/feedbackloop@comcastfbl.senderscore.net/' => 'feedbackloop',
+    '/feedbackloop@fbl.cox.net/'            => 'feedbackloop',
+    '/feedbackloop@fbl.fastmail.com/'       => 'feedbackloop',
+    '/feedbackloop@fbl.hostedemail.com/'    => 'feedbackloop',
+    '/feedbackloop@fbl.apps.rackspace.com/' => 'feedbackloop',
+    '/feedbackloop@feedback.postmaster.rr.com/' => 'feedbackloop',
+    '/feedbackloop@fbl.synacor.com/'        => 'feedbackloop',
+    '/feedbackloop@fbl.usa.net/'            => 'feedbackloop',
+    '/feedbackloop@fbl.zoho.com/'           => 'feedbackloop',
+    '/feedback@arf.mail.yahoo.com/'         => 'feedbackloop',
+    '/feedbackloop@fbl.xs4all.net/'         => 'feedbackloop',
 );
 
 // Maps regular expressions to match body to the corresponding parser in case from matching failed
