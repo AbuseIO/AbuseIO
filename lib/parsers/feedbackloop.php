@@ -19,14 +19,8 @@
 ******************************************************************************/
 
 /*
-** Parser       : AbuseHub / AbuseIX
-** Description  : The parser will read and parse AbuseHub mails
-** Configuration: You can define the following settings in settings.conf
-**                to overwrite the defaults.
-**                ABUSEHUB_DEFAULTTYPE: Report type (default: INFO)
-**                ABUSEHUB_FEED_IGNORE: What feeds to ignore (default: none)
-**                ABUSEHUB_FEED_ABUSE: What feeds to mark as 'ABUSE' (default: none)
-**                ABUSEHUB_FEED_INFO: What feeds to mark as 'INFO' (default: none)
+** Parser       : Feedbackloop
+** Description  : The parser will read and parse feedbackloop mails
 */
 
 /*
@@ -53,6 +47,7 @@ function parse_feedbackloop($message) {
         '/feedbackloop@fbl.xs4all.net/'                 => 'XS4ALL',
     );
 
+    $source = null;
     foreach ($sourceMap as $regex => $s) {
         if (preg_match($regex, $message['from'])) {
             $source = $s;
@@ -92,6 +87,9 @@ function parse_feedbackloop($message) {
 
     if (preg_match('/Reported\-Domain\: ([^\n]+)/', $message['arf']['report'], $matches)) {
         $information['Reported domain'] = $matches[1];
+        if (is_null($source)) {
+            $source = $matches[1];
+        }
     }
 
     $outReport = array(

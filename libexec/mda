@@ -70,6 +70,7 @@ $parserMap = array(
     '/scomp@aol.net/'                       => 'feedbackloop',
     '/feedbackloop@feedback.bluetie.com/'   => 'feedbackloop',
     '/feedbackloop@comcastfbl.senderscore.net/' => 'feedbackloop',
+    '/feedbackloop@fbl.senderscore.net/'    => 'feedbackloop',
     '/feedbackloop@fbl.cox.net/'            => 'feedbackloop',
     '/feedbackloop@fbl.fastmail.com/'       => 'feedbackloop',
     '/feedbackloop@fbl.hostedemail.com/'    => 'feedbackloop',
