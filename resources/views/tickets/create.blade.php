@@ -1,5 +1,23 @@
 @extends('app')
 
+@section('extrajs')
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap-datetimepicker.min.css') }}">
+    <script type="text/javascript" src="{{ asset('/js/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //Make the timestamp human-readable
+            var timestampInput = $('input[name=timestamp]');
+
+            @if(old('timestamp'))
+                timestampInput.val('{{{ date("d-m-Y H:i", old("timestamp")) }}}');
+            @endif
+
+            timestampInput.datetimepicker({sideBySide: true,format: 'DD-MM-YYYY HH:mm'});
+        });
+    </script>
+@endsection
+
 @section('content')
 <h1 class="page-header">{{ trans('tickets.header.new') }}</h1>
 
