@@ -11,9 +11,9 @@ namespace AbuseIO\Models;
  * @property string $domain
  * @property string $uri
  * @property string $class
- * @property string type
- * @property string timestamp
- * @property string information;
+ * @property string $type
+ * @property integer $timestamp
+ * @property string $information;
  */
 class Incident
 {
