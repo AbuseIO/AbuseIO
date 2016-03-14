@@ -89,4 +89,12 @@ class Incident
 
         return $rules;
     }
+
+    /**
+     * Add toArray method manually as this is not a SQL model
+     */
+    public function toArray()
+    {
+        return json_decode(json_encode($this), true);
+    }
 }

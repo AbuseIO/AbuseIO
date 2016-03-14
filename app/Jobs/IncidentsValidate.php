@@ -44,7 +44,7 @@ class IncidentsValidate extends Job implements SelfHandling
             }
 
             $validator = Validator::make(
-                json_decode(json_encode($incident), true),
+                $incident->toArray(),
                 Incident::createRules()
             );
 
