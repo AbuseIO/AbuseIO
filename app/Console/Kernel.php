@@ -88,6 +88,8 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Ticket\DeleteCommand',
         'AbuseIO\Console\Commands\Ticket\ListCommand',
 
+        'AbuseIO\Console\Commands\Incident\CreateCommand',
+
     ];
 
     /**
