@@ -10,6 +10,8 @@ use AbuseIO\Console\Commands\AbstractListCommand;
  */
 class ListTypesCommand extends AbstractListCommand
 {
+    //TODO: implement setCommandDescription to overrule the default model description
+    //TODO: Currently not possible as the command has a FINAL implementation in abstract
     /**
      * @var array
      */
@@ -26,7 +28,6 @@ class ListTypesCommand extends AbstractListCommand
      * @var array
      */
     protected $fields = ['Tag', 'Name'];
-
 
     /**
      * {@inheritdoc }

@@ -16,6 +16,10 @@ use AbuseIO\Jobs\EvidenceSave;
  */
 class CreateCommand extends AbstractCreateCommand
 {
+    // TODO: Somehow call evidenceProcess(with incident wrapped in array, with evidence build)
+    // TODO: Somehow check if the evidence is used (incident did not fail) or remote it if not used
+    // TODO: Idea is to make a custom handle() however thats currently not possible due to final functions in abstract
+
     /**
      * @return InputDefinition
      */
@@ -106,8 +110,6 @@ class CreateCommand extends AbstractCreateCommand
             die();
         }
 
-        // Somehow call evidenceProcess(with incident wrapped in array, with evidence build)
-        // Somehow check if the evidence is used (incident did not fail) or remote it if not used
         return $incident;
     }
 
