@@ -87,7 +87,7 @@ abstract class AbstractShowCommand extends Command
      */
     final public function getDescription()
     {
-        return sprintf('Shows a %s (without confirmation!)', $this->getAsNoun());
+        return sprintf('Shows a %s', $this->getAsNoun());
     }
 
     /**
