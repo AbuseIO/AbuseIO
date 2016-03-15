@@ -90,6 +90,9 @@ class Kernel extends ConsoleKernel
 
         'AbuseIO\Console\Commands\Incident\CreateCommand',
 
+        'AbuseIO\Console\Commands\Info\ListClassesCommand',
+        'AbuseIO\Console\Commands\Info\ListTypesCommand',
+
     ];
 
     /**
