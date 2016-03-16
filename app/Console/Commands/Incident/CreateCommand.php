@@ -167,7 +167,7 @@ class CreateCommand extends Command
          */
         $evidence = new EvidenceSave;
         $evidenceData = [
-            'CreatedBy'     => trim(posix_getpwuid(posix_geteuid())['name']) . ' (CLI)',
+            'createdBy'     => trim(posix_getpwuid(posix_geteuid())['name']) . ' (CLI)',
             'receivedOn'    => time(),
             'submittedData' => $incident->toArray(),
             'attachments'   => [],

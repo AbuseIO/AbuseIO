@@ -662,7 +662,7 @@ class OldVersionCommand extends Command
             // Build new evidence file and write the evidence into the archive
             $evidence = new EvidenceSave;
             $evidenceData = [
-                'CreatedBy'     => 'root@localhost.lan',
+                'createdBy'     => 'root@localhost.lan',
                 'receivedOn'    => time(),
                 'submittedData' => json_decode(json_encode($ticket), true),
                 'attachments'   => [],

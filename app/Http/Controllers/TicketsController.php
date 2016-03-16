@@ -266,7 +266,7 @@ class TicketsController extends Controller
          */
         $evidence = new EvidenceSave;
         $evidenceData = [
-            'CreatedBy'     => trim($this->auth_user->fullName()) . ' (' . $this->auth_user->email .')',
+            'createdBy'     => trim($this->auth_user->fullName()) . ' (' . $this->auth_user->email .')',
             'receivedOn'    => time(),
             'submittedData' => $ticket->all(),
             'attachments'   => [],
