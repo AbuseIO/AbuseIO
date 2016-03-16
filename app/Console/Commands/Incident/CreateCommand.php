@@ -48,6 +48,13 @@ class CreateCommand extends Command
     {
         $incident = $this->getModelFromRequest();
 
+        $this->setEvidenceFile($incident, $this->argument('file'));
+
+        if (empty($this->evidenceFile)) {
+            $this->error('Error returned while asking to write evidence file, cannot continue');
+            return false;
+        }
+
         /** @var  $validation */
         $validation = $this->getValidator($incident);
         if ($validation->fails()) {
@@ -162,9 +169,17 @@ class CreateCommand extends Command
             );
         }
 
-        /*
-         * Save the evidence as its required to save incidents
-         */
+        return $incident;
+    }
+
+    /**
+     * Build the evidence object as its required to save incidents
+     *
+     * @param $incident object AbuseIO\Models\Incident
+     * @param $addFile string File
+     */
+    protected function setEvidenceFile($incident, $addFile)
+    {
         $evidence = new EvidenceSave;
         $evidenceData = [
             'createdBy'     => trim(posix_getpwuid(posix_geteuid())['name']) . ' (CLI)',
@@ -192,12 +207,7 @@ class CreateCommand extends Command
 
         $this->evidenceFile = $evidence->save(json_encode($evidenceData));
 
-        if (empty($this->evidenceFile)) {
-            $this->error('Error returned while asking to write evidence file, cannot continue');
-            die();
-        }
 
-        return $incident;
     }
 
     /**
