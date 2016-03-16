@@ -245,9 +245,10 @@ class IncidentsSave extends Job implements SelfHandling
                     }
 
                     /*
-                       * Upgrade the type if the received event has a higher type included
-                       */
-                    if ($ticket->type_id < $incident->type) {
+                     * Upgrade the type if the received event has a higher priority type included
+                     */
+                    $priority = [ 'INFO', 'ABUSE', 'ESCALATION' ];
+                    if (array_search($ticket->type_id, $priority) < array_search($incident->type, $priority)) {
                         $ticket->type_id = $incident->type;
                     }
 
