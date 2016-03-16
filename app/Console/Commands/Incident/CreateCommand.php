@@ -127,7 +127,7 @@ class CreateCommand extends Command
     }
 
     /**
-     * {@inheritdoc }
+     * @return mixed
      */
     public function getAsNoun()
     {
@@ -135,7 +135,7 @@ class CreateCommand extends Command
     }
 
     /**
-     * {@inheritdoc }
+     * @return mixed
      */
     protected function getModelFromRequest()
     {
@@ -201,7 +201,8 @@ class CreateCommand extends Command
     }
 
     /**
-     * {@inheritdoc }
+     * @param $model
+     * @return mixed
      */
     protected function getValidator($model)
     {
