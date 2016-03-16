@@ -110,7 +110,7 @@ abstract class AbstractEditCommand extends Command
      */
     final public function getName()
     {
-        return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
+        return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
     }
 
     /**
@@ -118,8 +118,12 @@ abstract class AbstractEditCommand extends Command
      *
      * @return string
      */
-    public function setCommandName()
+    final public function getCommandName()
     {
+        if (!empty($this->commandName)) {
+            return $this->commandName;
+        }
+
         return 'edit';
     }
 
@@ -128,6 +132,10 @@ abstract class AbstractEditCommand extends Command
      */
     final public function getDescription()
     {
+        if (!empty($this->commandDescription)) {
+            return $this->commandDescription;
+        }
+
         return sprintf('Edit a %s', $this->getAsNoun());
     }
 

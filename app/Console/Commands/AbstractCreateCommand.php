@@ -93,7 +93,7 @@ abstract class AbstractCreateCommand extends Command
      */
     final public function getName()
     {
-        return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
+        return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
     }
 
     /**
@@ -101,8 +101,12 @@ abstract class AbstractCreateCommand extends Command
      *
      * @return string
      */
-    public function setCommandName()
+    final public function getCommandName()
     {
+        if (!empty($this->commandName)) {
+            return $this->commandName;
+        }
+
         return 'create';
     }
 
@@ -111,6 +115,10 @@ abstract class AbstractCreateCommand extends Command
      */
     final public function getDescription()
     {
+        if (!empty($this->commandDescription)) {
+            return $this->commandDescription;
+        }
+
         return sprintf('Creates a new %s', $this->getAsNoun());
     }
 

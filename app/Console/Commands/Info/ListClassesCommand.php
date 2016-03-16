@@ -10,12 +10,22 @@ use AbuseIO\Console\Commands\AbstractListCommand;
  */
 class ListClassesCommand extends AbstractListCommand
 {
-    //TODO: implement setCommandDescription to overrule the default model description
-    //TODO: Currently not possible as the command has a FINAL implementation in abstract
     /**
      * @var array
      */
     protected $filterArguments = [ ];
+
+    /**
+     * Override to the command description field
+     * @var string
+     */
+    protected $commandDescription = 'Shows a list of available classes';
+
+    /**
+     * Override to the command name field
+     * @var string
+     */
+    protected $commandName = 'listclasses';
 
     /**
      * The headers of the table
@@ -79,15 +89,5 @@ class ListClassesCommand extends AbstractListCommand
     protected function getAsNoun()
     {
         return "info";
-    }
-
-    /**
-     * Default subcommand name
-     *
-     * @return string
-     */
-    public function setCommandName()
-    {
-        return 'listclasses';
     }
 }

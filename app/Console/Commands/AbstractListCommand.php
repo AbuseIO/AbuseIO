@@ -58,6 +58,10 @@ abstract class AbstractListCommand extends Command
      */
     final public function getDescription()
     {
+        if (!empty($this->commandDescription)) {
+            return $this->commandDescription;
+        }
+
         return sprintf('Shows a list of available %ss', $this->getAsNoun());
     }
 
@@ -66,7 +70,7 @@ abstract class AbstractListCommand extends Command
      */
     final public function getName()
     {
-        return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
+        return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
     }
 
     /**
@@ -74,8 +78,12 @@ abstract class AbstractListCommand extends Command
      *
      * @return string
      */
-    public function setCommandName()
+    final public function getCommandName()
     {
+        if (!empty($this->commandName)) {
+            return $this->commandName;
+        }
+
         return 'list';
     }
 

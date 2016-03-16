@@ -73,7 +73,7 @@ abstract class AbstractDeleteCommand extends Command
      */
     final public function getName()
     {
-        return sprintf('%s:%s', $this->getAsNoun(), $this->setCommandName());
+        return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
     }
 
     /**
@@ -81,8 +81,12 @@ abstract class AbstractDeleteCommand extends Command
      *
      * @return string
      */
-    public function setCommandName()
+    final public function getCommandName()
     {
+        if (!empty($this->commandName)) {
+            return $this->commandName;
+        }
+
         return 'delete';
     }
 
@@ -91,6 +95,10 @@ abstract class AbstractDeleteCommand extends Command
      */
     final public function getDescription()
     {
+        if (!empty($this->commandDescription)) {
+            return $this->commandDescription;
+        }
+
         return sprintf('Deletes a %s (without confirmation!)', $this->getAsNoun());
     }
 

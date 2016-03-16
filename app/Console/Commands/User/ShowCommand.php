@@ -1,6 +1,6 @@
 <?php
 
-namespace AbuseIO\Console\Commands\User;
+    namespace AbuseIO\Console\Commands\User;
 
 use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\User;
