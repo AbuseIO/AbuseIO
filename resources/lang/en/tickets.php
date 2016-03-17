@@ -37,6 +37,8 @@ return [
     'source'                    => 'Source',
     'evidence'                  => 'Evidence',
     'add_evidence'              => 'Add evidence',
+    'last_notification'         => 'Last notification',
+    'total_notifications'       => 'Total notifications',
     'set_ticket_status'         => 'Set new status to',
     'open'                      => 'Open',
     'closed'                    => 'Closed',
