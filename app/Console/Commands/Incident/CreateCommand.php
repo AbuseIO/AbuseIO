@@ -120,7 +120,6 @@ class CreateCommand extends Command
                 new InputArgument('source', InputArgument::REQUIRED, 'Name of the source'),
                 new InputArgument("ip", InputArgument::REQUIRED, "ip address"),
                 new InputArgument("domain", InputArgument::REQUIRED, "domain name"),
-                new InputArgument('uri', InputArgument::REQUIRED, 'uri or path'),
                 new InputArgument("class", InputArgument::REQUIRED, "a preconfigured abuse classification"),
                 new InputArgument("type", InputArgument::REQUIRED, "a preconfigured abuse type"),
                 new InputArgument("timestamp", InputArgument::REQUIRED, "UNIX timestamp"),
@@ -148,7 +147,6 @@ class CreateCommand extends Command
         $incident->source = $this->argument('source');
         $incident->ip = $this->argument('ip');
         $incident->domain = $this->argument('domain');
-        $incident->uri = $this->argument('uri');
         $incident->class = $this->argument('class');
         $incident->type = $this->argument('type');
         $incident->timestamp = $this->argument('timestamp');

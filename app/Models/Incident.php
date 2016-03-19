@@ -9,7 +9,6 @@ namespace AbuseIO\Models;
  * @property string $source_id
  * @property string $ip
  * @property string $domain
- * @property string $uri
  * @property string $class
  * @property string $type
  * @property integer $timestamp
@@ -36,11 +35,6 @@ class Incident
      * @var
      */
     public $domain;
-
-    /**
-     * @var
-     */
-    public $uri;
 
     /**
      * @var
@@ -80,7 +74,6 @@ class Incident
             'source_id'             => 'sometimes|stringorboolean',
             'ip'                    => 'required|ip',
             'domain'                => 'sometimes|stringorboolean|domain',
-            'uri'                   => 'sometimes|stringorboolean|uri',
             'timestamp'             => 'required|int|timestamp',
             'class'                 => 'required|abuseclass',
             'type'                  => 'required|abusetype',

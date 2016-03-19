@@ -29,14 +29,6 @@
     </div>
 </div>
 
-<div class="form-group @if ($errors->has('uri')) has-error @endif">
-    {!! Form::label('uri', trans('misc.uri') . ' (' . trans('misc.optional') .'):', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-10">
-        {!! Form::text('uri', null, ['class' => 'form-control']) !!}
-        @if ($errors->has('uri')) <p class="help-block">{{ $errors->first('uri') }}</p> @endif
-    </div>
-</div>
-
 <div class="form-group">
     {!! Form::label('class', trans('misc.classification').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
