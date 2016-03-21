@@ -44,6 +44,7 @@
 
         "abuseio/parser-common": "1.1.*",
 		"abuseio/parser-abusehub": "1.3.*",
+        "abuseio/parser-arf": "1.0.*",
 		"abuseio/parser-blocklistde": "1.3.*",
 		"abuseio/parser-cegtek": "1.3.*",
 		"abuseio/parser-cleanmx": "1.3.*",
