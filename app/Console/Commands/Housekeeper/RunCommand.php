@@ -9,6 +9,7 @@ use Storage;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use AbuseIO\Jobs\QueueTest;
 use AbuseIO\Jobs\AlertAdmin;
+use AbuseIO\Models\FailedJob;
 use AbuseIO\Models\Job;
 use Validator;
 use Log;
@@ -115,6 +116,12 @@ class RunCommand extends Command
                 // Check if there might be a pending job for the file
                 $basenameFile = basename($file);
                 if (Job::where('payload', 'like', "%{$basenameFile}%")->count() !== 0) {
+                    continue;
+                }
+
+                // Check if there might be a failed job for the file
+                $basenameFile = basename($file);
+                if (FailedJob::where('payload', 'like', "%{$basenameFile}%")->count() !== 0) {
                     continue;
                 }
 
