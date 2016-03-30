@@ -1,7 +1,7 @@
 {
 	"name": "abuseio/abuseio",
 	"description": "Open Source abusemanagement tool",
-	"version": "4.0.0-rc4",
+	"version": "4.0.0",
 	"keywords": ["abuse", "abuseio"],
 	"homepage": "http://abuse.io",
 	"type": "project",
@@ -14,11 +14,6 @@
 			"role": "Lead"
 		}
 	],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "4.0-dev"
-        }
-    },
 	"support": {
 		"email": "dev@abuse.io",
 		"issues": "https://github.com/AbuseIO/AbuseIO/issues",
