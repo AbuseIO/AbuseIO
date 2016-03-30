@@ -2,17 +2,13 @@
 
 [![Build Status](https://api.travis-ci.org/AbuseIO/AbuseIO.svg)](https://travis-ci.org/AbuseIO/AbuseIO)
 [![Total Downloads](https://poser.pugx.org/abuseio/abuseio/d/total.svg)](https://packagist.org/packages/abuseio/abuseio)
-[![Latest Stable Version](https://poser.pugx.org/abuseio/abuseio/v/stable.svg)](https://packagist.org/abuseio/abuseio)
+[![Latest Stable Version](https://poser.pugx.org/abuseio/abuseio/v/stable.svg)](https://packagist.org/packages/abuseio/abuseio)
 [![Latest Unstable Version](https://poser.pugx.org/abuseio/abuseio/v/unstable.svg)](https://packagist.org/packages/abuseio/abuseio)
 [![License](https://poser.pugx.org/abuseio/abuseio/license.svg)](https://packagist.org/packages/abuseio/abuseio)
 
-AbuseIO is a toolkit to receive, process, correlate and notify endusers about abuse reports received by network operators, typically
-hosting and access providers. The purpose is to consolidate efforts by various companies and individuals to automate and improve 
+AbuseIO is a toolkit to receive, process, correlate and notify end users about abuse reports received by network operators, typically
+hosting and access providers. The purpose is to consolidate efforts by various companies and individuals to automate and improve
 the abuse handling process.
-
-## Notice
-
-This is release candidate for AbuseIO 4.0
 
 ## Official Documentation
 
