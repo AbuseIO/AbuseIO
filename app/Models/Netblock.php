@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use ICF;
 
 /**
  * Class Netblock
@@ -115,7 +114,7 @@ class Netblock extends Model
     public function setFirstIpAttribute($value)
     {
         $this->attributes['first_ip'] = $value;
-        $this->attributes['first_ip_int'] = ICF::InetPtoi($value);
+        $this->attributes['first_ip_int'] = inetPtoi($value);
     }
 
     /**
@@ -126,7 +125,7 @@ class Netblock extends Model
     public function setLastIpAttribute($value)
     {
         $this->attributes['last_ip'] = $value;
-        $this->attributes['last_ip_int'] = ICF::InetPtoi($value);
+        $this->attributes['last_ip_int'] = inetPtoi($value);
     }
 
     /*

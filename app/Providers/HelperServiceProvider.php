@@ -18,6 +18,8 @@ class HelperServiceProvider extends ServiceProvider
         'getUrlData',
         'hFileSize',
         'isValidRegex',
+        'inetPtoi',
+        'inetItop',
     ];
 
     /**

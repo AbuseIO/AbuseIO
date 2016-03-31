@@ -8,7 +8,6 @@ use AbuseIO\Models\Contact;
 use AbuseIO\Models\Account;
 use ReflectionMethod;
 use Validator;
-use ICF;
 use Log;
 
 /**
@@ -109,8 +108,8 @@ class FindContact extends Job
 
         // Do a local lookup
         $result = Netblock::
-            where('first_ip_int', '<=', ICF::inetPtoi($ip))
-            ->where('last_ip_int', '>=', ICF::inetPtoi($ip))
+            where('first_ip_int', '<=', inetPtoi($ip))
+            ->where('last_ip_int', '>=', inetPtoi($ip))
             ->where('enabled', '=', true)
             ->orderBy('first_ip_int', 'desc')
             ->orderBy('last_ip_int', 'asc')

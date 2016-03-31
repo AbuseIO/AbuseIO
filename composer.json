@@ -73,8 +73,7 @@
 	"autoload": {
 		"classmap": [
 			"database",
-			"vendor/abuseio/",
-			"app/Libraries/"
+			"vendor/abuseio/"
 		],
 		"psr-4": {
 			"AbuseIO\\": "app/"

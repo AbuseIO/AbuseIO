@@ -258,7 +258,6 @@ return [
         'Uuid'      => 'Webpatser\Uuid\Uuid',
         'Carbon'    => 'Carbon\Carbon',
         'Zipper'    => 'Chumper\Zipper\Zipper',
-        'ICF'       => 'AbuseIO\ICF',
 
     ],
 
