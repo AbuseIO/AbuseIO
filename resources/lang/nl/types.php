@@ -65,11 +65,11 @@ return [
     'state' => [
         'NOTIFIED' => [
             'name'          => 'Aangemeld bij contact',
-            'description'   => 'Tickets welke zijn aangemeld bij de contact.'
+            'description'   => 'Tickets welke zijn aangemeld bij de contact.',
         ],
         'NOT_NOTIFIED' => [
             'name'          => 'Niet aangemeld bij contact',
-            'description'   => 'Tickets welke nog niet zijn aangemeld bij de contact.'
+            'description'   => 'Tickets welke nog niet zijn aangemeld bij de contact.',
         ],
-    ]
+    ],
 ];

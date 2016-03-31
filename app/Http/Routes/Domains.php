@@ -1,11 +1,12 @@
 <?php
+
 Route::resource('domains', 'DomainsController');
 Route::model('domains', 'AbuseIO\Models\Domain');
 
 Route::group(
     [
         'prefix' => 'domains',
-        'as' => 'domains.',
+        'as'     => 'domains.',
     ],
     function () {
         // Search domains
@@ -13,8 +14,8 @@ Route::group(
             'search/{one?}/{two?}',
             [
                 'middleware' => 'permission:domains_view',
-                'as' => 'search',
-                'uses' => 'DomainsController@search'
+                'as'         => 'search',
+                'uses'       => 'DomainsController@search',
             ]
         );
 
@@ -23,8 +24,8 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:domains_view',
-                'as' => 'index',
-                'uses' => 'DomainsController@index'
+                'as'         => 'index',
+                'uses'       => 'DomainsController@index',
             ]
         );
 
@@ -33,8 +34,8 @@ Route::group(
             '{domains}',
             [
                 'middleware' => 'permission:domains_view',
-                'as' => 'show',
-                'uses' => 'DomainsController@show'
+                'as'         => 'show',
+                'uses'       => 'DomainsController@show',
             ]
         );
 
@@ -43,8 +44,8 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:domains_export',
-                'as' => 'export',
-                'uses' => 'DomainsController@export'
+                'as'         => 'export',
+                'uses'       => 'DomainsController@export',
             ]
         );
 
@@ -53,16 +54,16 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:domains_create',
-                'as' => 'create',
-                'uses' => 'DomainsController@create'
+                'as'         => 'create',
+                'uses'       => 'DomainsController@create',
             ]
         );
         route::post(
             '',
             [
                 'middleware' => 'permission:domains_create',
-                'as' => 'store',
-                'uses' => 'DomainsController@store'
+                'as'         => 'store',
+                'uses'       => 'DomainsController@store',
             ]
         );
 
@@ -71,24 +72,24 @@ Route::group(
             '{domains}/edit',
             [
                 'middleware' => 'permission:domains_edit',
-                'as' => 'edit',
-                'uses' => 'DomainsController@edit'
+                'as'         => 'edit',
+                'uses'       => 'DomainsController@edit',
             ]
         );
         route::patch(
             '{domains}',
             [
                 'middleware' => 'permission:domains_edit',
-                'as' => 'update',
-                'uses' => 'DomainsController@update'
+                'as'         => 'update',
+                'uses'       => 'DomainsController@update',
             ]
         );
         route::put(
             '{domains}',
             [
                 'middleware' => 'permission:domains_edit',
-                'as' => 'update',
-                'uses' => 'DomainsController@update'
+                'as'         => 'update',
+                'uses'       => 'DomainsController@update',
             ]
         );
 
@@ -97,8 +98,8 @@ Route::group(
             '/{domains}',
             [
                 'middleware' => 'permission:domains_delete',
-                'as' => 'destroy',
-                'uses' => 'DomainsController@destroy'
+                'as'         => 'destroy',
+                'uses'       => 'DomainsController@destroy',
             ]
         );
 

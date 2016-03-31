@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for Contacts
+ * Translations for Contacts.
  */
 return [
     // Headers

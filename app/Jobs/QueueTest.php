@@ -2,31 +2,29 @@
 
 namespace AbuseIO\Jobs;
 
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
 use Log;
 
 /**
- * This QueueTest class checks this queue to be actually working
+ * This QueueTest class checks this queue to be actually working.
  *
  * Class QueueTest
  */
 class QueueTest extends Job implements SelfHandling, ShouldQueue
 {
-
     use SerializesModels;
 
     /**
-     * Name of the beandstalk queue to be used
+     * Name of the beandstalk queue to be used.
      *
      * @var string
      */
     public $queueName;
 
     /**
-     * Create a new EmailProcess instance
+     * Create a new EmailProcess instance.
      *
      * @param string $queueName
      */
@@ -38,8 +36,9 @@ class QueueTest extends Job implements SelfHandling, ShouldQueue
     /**
      * Queue command into named tube.
      *
-     * @param  object $queue
-     * @param  string $command
+     * @param object $queue
+     * @param string $command
+     *
      * @return void
      */
     public function queue($queue, $command)
@@ -48,9 +47,10 @@ class QueueTest extends Job implements SelfHandling, ShouldQueue
     }
 
     /**
-     * This method is called by laravel when the job fails on a exception
+     * This method is called by laravel when the job fails on a exception.
      *
      * @param string $message
+     *
      * @return void
      */
     public function failed($message)
@@ -58,25 +58,25 @@ class QueueTest extends Job implements SelfHandling, ShouldQueue
         // Start alarm bells
 
         Log::error(
-            get_class($this) . ': ' . "Queue checked FAILED for queue {$this->queueName}"
+            get_class($this).': '."Queue checked FAILED for queue {$this->queueName}"
         );
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      *
      * @return void
      */
     public function handle()
     {
         Log::info(
-            get_class($this) . ': ' . "TestJob starting for queue {$this->queueName}"
+            get_class($this).': '."TestJob starting for queue {$this->queueName}"
         );
 
         // TODO - do stuff here
 
         Log::info(
-            get_class($this) . ': ' . "TestJob completed for queue {$this->queueName}"
+            get_class($this).': '."TestJob completed for queue {$this->queueName}"
         );
     }
 }

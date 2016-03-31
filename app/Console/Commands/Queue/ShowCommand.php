@@ -2,23 +2,19 @@
 
 namespace AbuseIO\Console\Commands\Queue;
 
-
 use AbuseIO\Models\Job;
 use Illuminate\Console\Command;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\Queue
+ * Class ShowCommand.
  */
 class ShowCommand extends Command
 {
-
     protected $signature = 'queue:show
                             {queue : use the name of the queue to list the jobs}
                             ';
 
-    private $headers = ['Id', 'Queue', 'Method','Attempts', 'Created at'];
-
+    private $headers = ['Id', 'Queue', 'Method', 'Attempts', 'Created at'];
 
     /**
      * @return bool
@@ -45,6 +41,7 @@ class ShowCommand extends Command
 
     /**
      * @param $list
+     *
      * @return array
      */
     protected function transformListToTableBody($list)
@@ -72,6 +69,7 @@ class ShowCommand extends Command
 
     /**
      * @param $filter
+     *
      * @return mixed
      */
     protected function findWithCondition($filter)

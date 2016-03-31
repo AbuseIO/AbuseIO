@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for Brands
+ * Translations for Brands.
  */
 return [
     // Headers

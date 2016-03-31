@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Translations for Profile
+ * Translations for Profile.
  */
 return [
     'password'              => 'Password',
-    'password_confirmation' => 'Password (repeat)'
+    'password_confirmation' => 'Password (repeat)',
 ];

@@ -2,11 +2,8 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
-
 /**
- * Class HomeController
- * @package AbuseIO\Http\Controllers
+ * Class HomeController.
  */
 class HomeController extends Controller
 {
@@ -21,8 +18,8 @@ class HomeController extends Controller
             'home',
             [
                 'auth_user' => $this->auth_user,
-                'version' => config('app.version'),
-                'update' => link_to_route('admin.version', trans('misc.versioncheck')),
+                'version'   => config('app.version'),
+                'update'    => link_to_route('admin.version', trans('misc.versioncheck')),
             ]
         );
     }
@@ -63,8 +60,8 @@ class HomeController extends Controller
             'home',
             [
                 'auth_user' => $this->auth_user,
-                'version' => config('app.version'),
-                'update' => "{$message}",
+                'version'   => config('app.version'),
+                'update'    => "{$message}",
             ]
         );
     }

@@ -2,12 +2,11 @@
 
 namespace AbuseIO\Console\Commands\Account;
 
-use AbuseIO\Models\Account;
 use AbuseIO\Console\Commands\AbstractListCommand;
+use AbuseIO\Models\Account;
 
 /**
- * Class ListCommand
- * @package AbuseIO\Console\Commands\Account
+ * Class ListCommand.
  */
 class ListCommand extends AbstractListCommand
 {

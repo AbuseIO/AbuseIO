@@ -2,8 +2,8 @@
 
 namespace tests\Console\Commands\Netblock;
 
-use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Contact;
+use AbuseIO\Models\Netblock;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
@@ -15,16 +15,15 @@ class ShowCommandTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @var  Netblock */
+    /** @var Netblock */
     private $netblock;
 
     private function initDB()
     {
         $this->netblock = factory(Netblock::class)->create(
-            ["contact_id" => factory(Contact::class)->create()->id]
+            ['contact_id' => factory(Contact::class)->create()->id]
         );
     }
-
 
     public function testWithValidContactFilter()
     {

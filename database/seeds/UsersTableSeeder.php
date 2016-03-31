@@ -5,7 +5,6 @@ use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
-
     public function run()
     {
         /*
@@ -15,8 +14,8 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
 
         // Add the example users
-        $adminPassword  = (app()->environment() == 'development') ? 'admin' : substr(md5(rand()), 0, 8);
-        $userPassword   = (app()->environment() == 'development') ? 'user' : substr(md5(rand()), 0, 8);
+        $adminPassword = (app()->environment() == 'development') ? 'admin' : substr(md5(rand()), 0, 8);
+        $userPassword = (app()->environment() == 'development') ? 'user' : substr(md5(rand()), 0, 8);
 
         $users = [
             [
@@ -26,8 +25,8 @@ class UsersTableSeeder extends Seeder
                 'last_name'                 => 'Admin',
                 'password'                  => Hash::make($adminPassword),
                 'account_id'                => 1,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => 2,
@@ -36,8 +35,8 @@ class UsersTableSeeder extends Seeder
                 'last_name'                 => 'Smith',
                 'password'                  => Hash::make($userPassword),
                 'account_id'                => 1,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => 3,
@@ -46,8 +45,8 @@ class UsersTableSeeder extends Seeder
                 'last_name'                 => 'King',
                 'password'                  => Hash::make($adminPassword),
                 'account_id'                => 2,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => 4,
@@ -56,8 +55,8 @@ class UsersTableSeeder extends Seeder
                 'last_name'                 => 'Davidson',
                 'password'                  => Hash::make($userPassword),
                 'account_id'                => 2,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => 5,
@@ -66,26 +65,25 @@ class UsersTableSeeder extends Seeder
                 'last_name'                 => 'Paterson',
                 'password'                  => Hash::make($adminPassword),
                 'account_id'                => 3,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
 
         ];
         DB::table('users')->insert($users);
 
         // New role for the user
-        $roles =  [
+        $roles = [
             [
                 'id'                        => 2,
                 'name'                      => 'Abuse',
                 'description'               => 'Abusedesk User',
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
         ];
 
         DB::table('roles')->insert($roles);
-
 
         // Permissions for the User role
         $permissions = [
@@ -108,13 +106,12 @@ class UsersTableSeeder extends Seeder
             $permission_role[] = [
                 'permission_id'             => $permission->id,
                 'role_id'                   => '2',
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ];
         }
 
         DB::table('permission_role')->insert($permission_role);
-
 
         // Give the admin user the default role as system administrator (1) and the user the user role (2)
         DB::table('role_user')->delete();
@@ -123,36 +120,36 @@ class UsersTableSeeder extends Seeder
                 'id'                        => 1,
                 'role_id'                   => 1,   // Admin user role
                 'user_id'                   => 1,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => 2,
                 'role_id'                   => 2,   // Abusedesk user role
                 'user_id'                   => 2,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => 3,
                 'role_id'                   => 1,   // Admin user role
                 'user_id'                   => 3,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => 4,
                 'role_id'                   => 2,   // Abusedesk user role
                 'user_id'                   => 4,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => 5,
                 'role_id'                   => 1,   // Admin user role
                 'user_id'                   => 5,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
         ];
         DB::table('role_user')->insert($role_user);

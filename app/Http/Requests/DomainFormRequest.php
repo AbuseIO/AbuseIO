@@ -5,13 +5,13 @@ namespace AbuseIO\Http\Requests;
 use AbuseIO\Models\Domain;
 
 /**
- * Class DomainFormRequest
- * @package AbuseIO\Http\Requests
+ * Class DomainFormRequest.
  */
 class DomainFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
      * @return bool
      */
     public function authorize()
@@ -21,6 +21,7 @@ class DomainFormRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
+     *
      * @return array
      */
     public function rules()
@@ -40,6 +41,6 @@ class DomainFormRequest extends Request
                 break;
         }
 
-        return [ ];
+        return [];
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateRolesTable extends Migration
 {
@@ -35,8 +35,8 @@ class CreateRolesTable extends Migration
                 'id'            => 1,
                 'name'          => 'Admin',
                 'description'   => 'System Administrator',
-                'created_at'    => new DateTime,
-                'updated_at'    => new DateTime,
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime(),
             ],
         ];
         DB::table('roles')->insert($roles);

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for Pagination
+ * Translations for Pagination.
  */
 return [
     'previous'  => '&laquo; Previous',

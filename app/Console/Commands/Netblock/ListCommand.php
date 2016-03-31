@@ -6,27 +6,27 @@ use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Netblock;
 
 /**
- * Class ListCommand
- * @package AbuseIO\Console\Commands\Netblock
+ * Class ListCommand.
  */
 class ListCommand extends AbstractListCommand
 {
-
-    protected $filterArguments = ["first ip"];
+    protected $filterArguments = ['first ip'];
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
     protected $headers = ['Id', 'Contact', 'First IP', 'Last IP'];
 
     /**
-     * The fields of the table / database row
+     * The fields of the table / database row.
+     *
      * @var array
      */
     protected $fields = ['first_ip', 'last_ip']; // don't know how to do the field contact conform this syntax.
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -35,11 +35,12 @@ class ListCommand extends AbstractListCommand
         foreach ($list as $netblock) {
             $netblocks[] = [$netblock->id, $netblock->contact->name, $netblock->first_ip, $netblock->last_ip];
         }
+
         return $netblocks;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
@@ -47,7 +48,7 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
@@ -55,10 +56,10 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "netblock";
+        return 'netblock';
     }
 }

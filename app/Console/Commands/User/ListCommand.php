@@ -6,28 +6,27 @@ use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\User;
 
 /**
- * Class ListCommand
- * @package AbuseIO\Console\Commands\User
+ * Class ListCommand.
  */
 class ListCommand extends AbstractListCommand
 {
-
-    protected $filterArguments = ["email"];
+    protected $filterArguments = ['email'];
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
     protected $headers = ['ID', 'Account', 'User', 'First Name', 'Last Name', 'Roles'];
 
     /**
-     * The fields of the table / database row
+     * The fields of the table / database row.
+     *
      * @var array
      */
     protected $fields = ['id', 'account_id', 'email', 'first_name', 'last_name'];
 
-
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -35,40 +34,42 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
         $users = User::where('email', 'like', "%{$filter}%")->get($this->fields);
+
         return $this->hydrateWithRoles($users);
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
         $users = User::all($this->fields);
+
         return $this->hydrateWithRoles($users);
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "user";
+        return 'user';
     }
 
     /**
      * @param $users
+     *
      * @return array
      */
     private function hydrateWithRoles($users)
     {
         $userlist = [];
         foreach ($users as $user) {
-
             $roleList = [];
             $roles = $user->roles()->get();
             foreach ($roles as $role) {
@@ -90,6 +91,7 @@ class ListCommand extends AbstractListCommand
 
             $userlist[] = $user;
         }
+
         return $userlist;
     }
 }

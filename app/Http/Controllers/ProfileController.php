@@ -2,18 +2,15 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ProfileFormRequest;
-use Redirect;
 use Hash;
+use Redirect;
 
 /**
- * Class ProfileController
- * @package AbuseIO\Http\Controllers
+ * Class ProfileController.
  */
 class ProfileController extends Controller
 {
-
     /**
      * ProfileController constructor.
      */
@@ -36,7 +33,8 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ProfileFormRequest $profileForm
+     * @param ProfileFormRequest $profileForm
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(ProfileFormRequest $profileForm)
@@ -44,9 +42,9 @@ class ProfileController extends Controller
         $input = $profileForm->all();
 
         $data = [
-            "first_name" => $input['first_name'],
-            "last_name" => $input['last_name'],
-            "email" => $input['email']
+            'first_name' => $input['first_name'],
+            'last_name'  => $input['last_name'],
+            'email'      => $input['email'],
         ];
 
         if (!empty($input['password'])) {
@@ -55,10 +53,9 @@ class ProfileController extends Controller
 
         try {
             $this->auth_user->update($data);
-
         } catch (QueryException $e) {
             $errorCode = $e->errorInfo[1];
-            $message = 'Unknown error code: ' . $errorCode;
+            $message = 'Unknown error code: '.$errorCode;
 
             if ($errorCode === 1062) {
                 $message = 'You cannot use this e-mail address.';

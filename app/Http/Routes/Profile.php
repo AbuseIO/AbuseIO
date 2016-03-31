@@ -1,10 +1,11 @@
 <?php
+
 Route::resource('profile', 'ProfileController');
 
 Route::group(
     [
         'prefix' => 'profile',
-        'as' => 'profile.',
+        'as'     => 'profile.',
     ],
     function () {
         // Access to index list
@@ -12,8 +13,8 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:profile_manage',
-                'as' => 'index',
-                'uses' => 'ProfileController@edit'
+                'as'         => 'index',
+                'uses'       => 'ProfileController@edit',
             ]
         );
 
@@ -22,16 +23,16 @@ Route::group(
             '{profile}',
             [
                 'middleware' => 'permission:profile_manage',
-                'as' => 'update',
-                'uses' => 'ProfileController@update'
+                'as'         => 'update',
+                'uses'       => 'ProfileController@update',
             ]
         );
         route::put(
             '{profile}',
             [
                 'middleware' => 'permission:profile_manage',
-                'as' => 'update',
-                'uses' => 'ProfileController@update'
+                'as'         => 'update',
+                'uses'       => 'ProfileController@update',
             ]
         );
 

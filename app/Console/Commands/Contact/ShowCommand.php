@@ -7,46 +7,45 @@ use AbuseIO\Models\Contact;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\Contact
+ * Class ShowCommand.
  */
 class ShowCommand extends AbstractShowCommand
 {
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAsNoun()
     {
-        return "contact";
+        return 'contact';
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAllowedArguments()
     {
-        return ["id", "name"];
+        return ['id', 'name'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getFields()
     {
-        return ["id", "reference", "name", "email", "api_host", "auto_notify", "enabled", "account_id"];
+        return ['id', 'reference', 'name', 'email', 'api_host', 'auto_notify', 'enabled', 'account_id'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getCollectionWithArguments()
     {
-        return Contact::where("name", "like", "%".$this->argument("contact")."%")
-            ->orWhere("id", $this->argument("contact"));
+        return Contact::where('name', 'like', '%'.$this->argument('contact').'%')
+            ->orWhere('id', $this->argument('contact'));
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function defineInput()
     {
@@ -55,7 +54,7 @@ class ShowCommand extends AbstractShowCommand
                 'contact',
                 InputArgument::REQUIRED,
                 'Use the id or name for a contact to show it.'
-            )
+            ),
         ];
     }
 }

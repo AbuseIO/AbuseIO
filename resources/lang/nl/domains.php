@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for Domains
+ * Translations for Domains.
  */
 return [
     // Headers

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for Netblocks
+ * Translations for Netblocks.
  */
 return [
     // Headers

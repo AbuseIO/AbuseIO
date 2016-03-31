@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for Tickets
+ * Translations for Tickets.
  */
 return [
     // Headers

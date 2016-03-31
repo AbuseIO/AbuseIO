@@ -6,23 +6,21 @@ use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Note;
 
 /**
- * Class ListCommand
- * @package AbuseIO\Console\Commands\Note
+ * Class ListCommand.
  */
 class ListCommand extends AbstractListCommand
 {
-
-    protected $filterArguments = ["id", "submitter"];
-
+    protected $filterArguments = ['id', 'submitter'];
 
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
-    protected $headers = ['Id', "Ticket id", "Submitter", "text", "Hidden", "Viewed"];
+    protected $headers = ['Id', 'Ticket id', 'Submitter', 'text', 'Hidden', 'Viewed'];
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -38,11 +36,12 @@ class ListCommand extends AbstractListCommand
                 $note->viewed,
             ];
         }
+
         return $result;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
@@ -52,7 +51,7 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
@@ -60,10 +59,10 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "note";
+        return 'note';
     }
 }

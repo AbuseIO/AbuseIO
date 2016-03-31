@@ -17,7 +17,8 @@ class ListCommandTest extends TestCase
     private $noteList;
 
     /**
-     * the list of test fixture to test against
+     * the list of test fixture to test against.
+     *
      * @var \Illuminate\Database\Eloquent\Collection
      */
     public function initDB()
@@ -25,7 +26,7 @@ class ListCommandTest extends TestCase
         //$this->assertTrue(true);
         $this->noteList = factory(Note::class, 10)->create();
     }
-    
+
     public function testHeaders()
     {
         $this->initDB();

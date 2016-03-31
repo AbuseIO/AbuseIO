@@ -7,61 +7,61 @@ use AbuseIO\Models\Account;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\Account
+ * Class ShowCommand.
  */
 class ShowCommand extends AbstractShowCommand
 {
     /**
      * @param Account $model
+     *
      * @return array
      */
     protected function transformObjectToTableBody($model)
     {
         return [
-            ["Id", $model->id],
-            ["Name", $model->name],
-            ["Brand", $model->brand->name],
-            ["Disabled", $model->disabled],
-            ["Description", $model->description],
+            ['Id', $model->id],
+            ['Name', $model->name],
+            ['Brand', $model->brand->name],
+            ['Disabled', $model->disabled],
+            ['Description', $model->description],
         ];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAsNoun()
     {
-        return "account";
+        return 'account';
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAllowedArguments()
     {
-        return ["id", "name"];
+        return ['id', 'name'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getFields()
     {
-        return ["id", "name", "brand", "disabled", "description"];
+        return ['id', 'name', 'brand', 'disabled', 'description'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getCollectionWithArguments()
     {
-        return Account::where("name", "like", "%".$this->argument("account")."%")
-            ->orWhere("id", $this->argument("account"));
+        return Account::where('name', 'like', '%'.$this->argument('account').'%')
+            ->orWhere('id', $this->argument('account'));
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function defineInput()
     {
@@ -70,7 +70,7 @@ class ShowCommand extends AbstractShowCommand
                 'account',
                 InputArgument::REQUIRED,
                 'Use the id or name for a account to show it.'
-            )
+            ),
         ];
     }
 }

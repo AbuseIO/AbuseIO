@@ -1,11 +1,12 @@
 <?php
+
 Route::resource('evidence', 'EvidenceController');
 Route::model('evidence', 'AbuseIO\Models\Evidence');
 
 Route::group(
     [
         'prefix' => 'evidence',
-        'as' => 'evidence.',
+        'as'     => 'evidence.',
     ],
     function () {
         /*
@@ -15,8 +16,8 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:evidence_view',
-                'as' => 'index',
-                'uses' => 'EvidenceController@index'
+                'as'         => 'index',
+                'uses'       => 'EvidenceController@index',
             ]
         );
 
@@ -27,8 +28,8 @@ Route::group(
             '{evidence}',
             [
                 'middleware' => 'permission:evidence_view',
-                'as' => 'show',
-                'uses' => 'EvidenceController@show'
+                'as'         => 'show',
+                'uses'       => 'EvidenceController@show',
             ]
         );
 
@@ -39,8 +40,8 @@ Route::group(
             '{evidence}/download',
             [
                 'middleware' => 'permission:evidence_view',
-                'as' => 'download',
-                'uses' => 'EvidenceController@download'
+                'as'         => 'download',
+                'uses'       => 'EvidenceController@download',
             ]
         );
 
@@ -48,8 +49,8 @@ Route::group(
             '{evidence}/attachment/{file}',
             [
                 'middleware' => 'permission:evidence_view',
-                'as' => 'attachment',
-                'uses' => 'EvidenceController@attachment'
+                'as'         => 'attachment',
+                'uses'       => 'EvidenceController@attachment',
             ]
         );
     }

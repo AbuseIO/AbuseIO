@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Miscellaneous translations
+ * Miscellaneous translations.
  */
 return [
     // AbuseIO intro

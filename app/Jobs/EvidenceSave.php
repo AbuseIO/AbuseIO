@@ -2,23 +2,21 @@
 
 namespace AbuseIO\Jobs;
 
-use Illuminate\Contracts\Bus\SelfHandling;
-use Storage;
 use Carbon;
-use Uuid;
+use Illuminate\Contracts\Bus\SelfHandling;
 use Log;
+use Storage;
+use Uuid;
 
 /**
- * This EvidenceSave class handles the writing of evidence files to FS
+ * This EvidenceSave class handles the writing of evidence files to FS.
  *
  * Class EvidenceSave
  */
 class EvidenceSave extends Job implements SelfHandling
 {
-
     /**
      * Create a new command instance.
-     *
      */
     public function __construct()
     {
@@ -28,15 +26,16 @@ class EvidenceSave extends Job implements SelfHandling
     /**
      * Execute the command.
      *
-     * @return string $fileName
      * @param string $fileData
+     *
+     * @return string $fileName
      */
     public function save($fileData)
     {
         $datefolder = Carbon::now()->format('Ymd');
-        $path       = 'mailarchive/' . $datefolder;
-        $fileName   = Uuid::generate(4) . '.eml';
-        $file       = "${path}/{$fileName}";
+        $path = 'mailarchive/'.$datefolder;
+        $fileName = Uuid::generate(4).'.eml';
+        $file = "${path}/{$fileName}";
 
         umask(0007);
 
@@ -44,8 +43,8 @@ class EvidenceSave extends Job implements SelfHandling
             // If a datefolder does not exist, then create it or die trying
             if (!Storage::makeDirectory($path, 0770)) {
                 Log::error(
-                    get_class($this) . ': ' .
-                    'Unable to create directory: ' . $path
+                    get_class($this).': '.
+                    'Unable to create directory: '.$path
                 );
 
                 return false;
@@ -53,21 +52,21 @@ class EvidenceSave extends Job implements SelfHandling
 
             if (!Storage::exists($path)) {
                 Log::error(
-                    get_class($this) . ': ' .
-                    'Path vanished after write: ' . $path
+                    get_class($this).': '.
+                    'Path vanished after write: '.$path
                 );
 
                 return false;
             }
 
             // Temporally hack until we can do this with Storage::
-            chgrp(storage_path() . "/{$path}", config('app.group'));
+            chgrp(storage_path()."/{$path}", config('app.group'));
         }
 
         if (Storage::exists($file)) {
             Log::error(
-                get_class($this) . ': ' .
-                'File aready exists: ' . $file
+                get_class($this).': '.
+                'File aready exists: '.$file
             );
 
             return false;
@@ -75,8 +74,8 @@ class EvidenceSave extends Job implements SelfHandling
 
         if (Storage::put($file, $fileData) === false) {
             Log::error(
-                get_class($this) . ': ' .
-                'Unable to write file: ' . $file
+                get_class($this).': '.
+                'Unable to write file: '.$file
             );
 
             return false;
@@ -84,15 +83,15 @@ class EvidenceSave extends Job implements SelfHandling
 
         if (!Storage::exists($file)) {
             Log::error(
-                get_class($this) . ': ' .
-                'File vanished after write: ' . $file
+                get_class($this).': '.
+                'File vanished after write: '.$file
             );
 
             return false;
         }
 
         // Temporally hack until we can do this with Storage::
-        chgrp(storage_path() . "/{$file}", config('app.group'));
+        chgrp(storage_path()."/{$file}", config('app.group'));
 
         return $file;
     }

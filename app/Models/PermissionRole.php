@@ -1,17 +1,19 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class PermissionRole
- * @package AbuseIO\Models
- * @property integer $id
- * @property integer $role_id fillable
- * @property integer $permission_id fillable
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * Class PermissionRole.
+ *
+ * @property int $id
+ * @property int $role_id fillable
+ * @property int $permission_id fillable
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class PermissionRole extends Model
 {
@@ -41,27 +43,29 @@ class PermissionRole extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
-     * @param  \AbuseIO\Models\PermissionRole $permissionRole
+     * @param \AbuseIO\Models\PermissionRole $permissionRole
+     *
      * @return array $rules
      */
     public static function createRules($permissionRole)
     {
         $rules = [
             'role_id'       => 'required|integer|exists:roles,id|'.
-                               'unique:permission_role,role_id,NULL,id,permission_id,'. $permissionRole->permission_id,
+                               'unique:permission_role,role_id,NULL,id,permission_id,'.$permissionRole->permission_id,
             'permission_id' => 'required|integer|exists:permissions,id|'.
-                               'unique:permission_role,permission_id,NULL,id,role_id,'. $permissionRole->role_id,
+                               'unique:permission_role,permission_id,NULL,id,role_id,'.$permissionRole->role_id,
         ];
 
         return $rules;
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
-     * @param  \AbuseIO\Models\PermissionRole $permissionRole
+     * @param \AbuseIO\Models\PermissionRole $permissionRole
+     *
      * @return array $rules
      */
     public static function updateRules($permissionRole)
@@ -69,9 +73,9 @@ class PermissionRole extends Model
         $rules = [
             'id'            => 'required|exists:permissions_role,id',
             'role_id'       => 'required|integer|exists:roles,id|'.
-                               'unique:permission_role,role_id,NULL,id,permission_id,'. $permissionRole->permission_id,
-            'permission_id' => 'required|integer|exists:permissions,id|' .
-                               'unique:permission_role,permission_id,NULL,id,role_id,'. $permissionRole->role_id,
+                               'unique:permission_role,role_id,NULL,id,permission_id,'.$permissionRole->permission_id,
+            'permission_id' => 'required|integer|exists:permissions,id|'.
+                               'unique:permission_role,permission_id,NULL,id,role_id,'.$permissionRole->role_id,
         ];
 
         return $rules;
@@ -84,7 +88,7 @@ class PermissionRole extends Model
     */
 
     /**
-     * One-To-Many relation to account
+     * One-To-Many relation to account.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -94,7 +98,7 @@ class PermissionRole extends Model
     }
 
     /**
-     * One-To-Many relation to account
+     * One-To-Many relation to account.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -3,15 +3,15 @@
 namespace AbuseIO;
 
 /**
- * Integrated Control Functions
+ * Integrated Control Functions.
  *
  * Class ICF
- * @package AbuseIO
  */
-class ICF
+class Functions
 {
     /**
      * @param string $ip IPv4 or IPv6 address to convert
+     *
      * @return string 128bit string that can be used with DECIMNAL(39,0) or false
      */
     public static function inetPtoi($ip)
@@ -25,7 +25,7 @@ class ICF
 
         // fix IPv4
         if (strpos($ip, '.') !== false) {
-            $parts = array(1 => 0, 2 => 0, 3 => 0, 4 => $parts[1]);
+            $parts = [1 => 0, 2 => 0, 3 => 0, 4 => $parts[1]];
         }
 
         foreach ($parts as &$part) {
@@ -55,11 +55,13 @@ class ICF
 
             $decimal = $decimal->toString();
         }
+
         return $decimal;
     }
 
     /**
      * @param string $decimal 128bit int
+     *
      * @return string IPv4 or IPv6
      */
     public static function inetItop($decimal)
@@ -67,10 +69,10 @@ class ICF
         // QuickFix: Decimal 0 is both for ::0 and 0.0.0.0, however it defaults to IPv6, while there is now way a
         // ::/64 will ever be used.
         if ($decimal < 255) {
-            return '0.0.0.' . $decimal;
+            return '0.0.0.'.$decimal;
         }
 
-        $parts = array();
+        $parts = [];
 
         if (function_exists('bcadd')) {
             // Use BCMath if available
@@ -84,11 +86,11 @@ class ICF
         } else {
             // Otherwise use the pure PHP BigInteger class
             $decimal = new Math_BigInteger($decimal);
-            list($parts[1],) = $decimal->divide(new Math_BigInteger('79228162514264337593543950336'));
+            list($parts[1]) = $decimal->divide(new Math_BigInteger('79228162514264337593543950336'));
             $decimal = $decimal->subtract($parts[1]->multiply(new Math_BigInteger('79228162514264337593543950336')));
-            list($parts[2],) = $decimal->divide(new Math_BigInteger('18446744073709551616'));
+            list($parts[2]) = $decimal->divide(new Math_BigInteger('18446744073709551616'));
             $decimal = $decimal->subtract($parts[2]->multiply(new Math_BigInteger('18446744073709551616')));
-            list($parts[3],) = $decimal->divide(new Math_BigInteger('4294967296'));
+            list($parts[3]) = $decimal->divide(new Math_BigInteger('4294967296'));
             $decimal = $decimal->subtract($parts[3]->multiply(new Math_BigInteger('4294967296')));
             $parts[4] = $decimal;
 
@@ -112,6 +114,7 @@ class ICF
         if (strpos($ip, '.') !== false) {
             return substr($ip, 2);
         }
+
         return $ip;
     }
 }

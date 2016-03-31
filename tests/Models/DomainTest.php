@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Models;
 
 use AbuseIO\Models\Domain;
@@ -12,7 +13,7 @@ class DomainTest extends TestCase
     public function testModelFactory()
     {
         $domain = factory(Domain::class)->create();
-        $domainFromDB = Domain::where("name", $domain->name)->first();
+        $domainFromDB = Domain::where('name', $domain->name)->first();
         $this->assertEquals($domain->name, $domainFromDB->name);
     }
 }

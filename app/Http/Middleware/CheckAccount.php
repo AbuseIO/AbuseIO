@@ -13,15 +13,16 @@ class CheckAccount
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
      * @param $model
+     *
      * @return mixed
      */
     public function handle($request, Closure $next, $model)
     {
         // gather info
-        $model = '\AbuseIO\Models\\' . $model;
+        $model = '\AbuseIO\Models\\'.$model;
         $account = Auth::user()->account;
 
         // try to retrieve the id of the model (by getting it out the request segment or out the input)
@@ -37,13 +38,13 @@ class CheckAccount
             if (method_exists($model, 'checkAccountAccess')) {
                 if (!$model::checkAccountAccess($model_id, $account)) {
                     // if the checkAccountAccess() fails return to the last page
-                    return back()->with('message', 'Account [' . $account->name .'] is not allowed to access this object');
+                    return back()->with('message', 'Account ['.$account->name.'] is not allowed to access this object');
                 }
             } else {
                 Log::notice("CheckAccount Middleware is called for $model, which doesn't have a checkAccountAccess method");
             }
         } else {
-            Log::notice("CheckAccount Middleware is called, with model_id [$model_id] for $model, which doesn't match the model_id format" );
+            Log::notice("CheckAccount Middleware is called, with model_id [$model_id] for $model, which doesn't match the model_id format");
         }
 
         return $next($request);

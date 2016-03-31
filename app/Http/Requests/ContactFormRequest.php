@@ -6,20 +6,16 @@ use AbuseIO\Models\Contact;
 use Auth;
 
 /**
- * Class ContactFormRequest
- * @package AbuseIO\Http\Requests
+ * Class ContactFormRequest.
  */
 class ContactFormRequest extends Request
 {
-
     /**
      * ContactFormRequest constructor.
-     *
      */
     public function __construct()
     {
         parent::__construct();
-
     }
 
     /**
@@ -54,11 +50,11 @@ class ContactFormRequest extends Request
                 break;
         }
 
-        return [ ];
+        return [];
     }
 
     /**
-     * Transform the form results before sending it to validation
+     * Transform the form results before sending it to validation.
      *
      * @param array $query
      * @param array $request
@@ -66,22 +62,22 @@ class ContactFormRequest extends Request
      * @param array $cookies
      * @param array $files
      * @param array $server
-     * @param null $content
+     * @param null  $content
      */
     public function initialize(
-        array $query = array(),
-        array $request = array(),
-        array $attributes = array(),
-        array $cookies = array(),
-        array $files = array(),
-        array $server = array(),
+        array $query = [],
+        array $request = [],
+        array $attributes = [],
+        array $cookies = [],
+        array $files = [],
+        array $server = [],
         $content = null
     ) {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
         $this->getInputSource()->add(
             [
-                'account_id' => (int)Auth::user()->account->id
+                'account_id' => (int) Auth::user()->account->id,
             ]
         );
     }

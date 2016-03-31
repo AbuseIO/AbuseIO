@@ -22,11 +22,11 @@ class ListCommandTest extends TestCase
 
     /**
      * this should not be part of the setUp method because the database connection
-     * has NOT been setUp properly at that moment
+     * has NOT been setUp properly at that moment.
      */
     private function initDB()
     {
-        Brand::where("id", "!=", 1)->delete();
+        Brand::where('id', '!=', 1)->delete();
 
         $this->brands = factory(Brand::class, 10)->create();
 

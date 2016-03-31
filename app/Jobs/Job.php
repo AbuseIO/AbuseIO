@@ -5,18 +5,17 @@ namespace AbuseIO\Jobs;
 use Illuminate\Bus\Queueable;
 
 /**
- * Abstract Class Job
- *
+ * Abstract Class Job.
  */
 abstract class Job
 {
-
     use Queueable;
 
     /**
-     * Command has failed
+     * Command has failed.
      *
      * @param string $message
+     *
      * @return array
      */
     protected function error($message)
@@ -29,9 +28,10 @@ abstract class Job
     }
 
     /**
-     * Command is OK
+     * Command is OK.
      *
-     * @param  array $data
+     * @param array $data
+     *
      * @return array
      */
     protected function success($data)

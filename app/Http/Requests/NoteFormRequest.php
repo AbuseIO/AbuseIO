@@ -6,8 +6,7 @@ use AbuseIO\Models\Note;
 use Auth;
 
 /**
- * Class NoteFormRequest
- * @package AbuseIO\Http\Requests
+ * Class NoteFormRequest.
  */
 class NoteFormRequest extends Request
 {
@@ -43,11 +42,11 @@ class NoteFormRequest extends Request
                 break;
         }
 
-        return [ ];
+        return [];
     }
 
     /**
-     * Transform the form results before sending it to validation
+     * Transform the form results before sending it to validation.
      *
      * @param array $query
      * @param array $request
@@ -55,21 +54,21 @@ class NoteFormRequest extends Request
      * @param array $cookies
      * @param array $files
      * @param array $server
-     * @param null $content
+     * @param null  $content
      */
     public function initialize(
-        array $query = array(),
-        array $request = array(),
-        array $attributes = array(),
-        array $cookies = array(),
-        array $files = array(),
-        array $server = array(),
+        array $query = [],
+        array $request = [],
+        array $attributes = [],
+        array $cookies = [],
+        array $files = [],
+        array $server = [],
         $content = null
     ) {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
         if (config('main.notes.show_abusedesk_names') === true) {
-            $postingUser = ' (' . Auth::user()->fullName() . ')';
+            $postingUser = ' ('.Auth::user()->fullName().')';
         } else {
             $postingUser = '';
         }
@@ -78,7 +77,7 @@ class NoteFormRequest extends Request
             case 'POST':
                 $this->getInputSource()->add(
                     [
-                        'submitter'     => trans('ash.communication.abusedesk'). $postingUser,
+                        'submitter'     => trans('ash.communication.abusedesk').$postingUser,
                         'viewed'        => true,
                     ]
                 );
@@ -86,13 +85,12 @@ class NoteFormRequest extends Request
             case 'PATCH':
                 $this->getInputSource()->add(
                     [
-                        'submitter'     => trans('ash.communication.abusedesk'). $postingUser,
+                        'submitter'     => trans('ash.communication.abusedesk').$postingUser,
                     ]
                 );
                 break;
             default:
                 break;
         }
-
     }
 }

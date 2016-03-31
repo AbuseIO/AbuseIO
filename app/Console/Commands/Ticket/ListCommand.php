@@ -6,21 +6,20 @@ use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Ticket;
 
 /**
- * Class ListCommand
- * @package AbuseIO\Console\Commands\Note
+ * Class ListCommand.
  */
 class ListCommand extends AbstractListCommand
 {
-
-    protected $filterArguments = ["id"];
+    protected $filterArguments = ['id'];
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
-    protected $headers = ['Id', "Ip", "Domain", "Class id", "Type id"];
+    protected $headers = ['Id', 'Ip', 'Domain', 'Class id', 'Type id'];
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -35,11 +34,12 @@ class ListCommand extends AbstractListCommand
                 $ticket->type_id,
             ];
         }
+
         return $result;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
@@ -48,7 +48,7 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
@@ -56,10 +56,10 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "ticket";
+        return 'ticket';
     }
 }
