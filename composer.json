@@ -1,7 +1,6 @@
 {
 	"name": "abuseio/abuseio",
 	"description": "Open Source abusemanagement tool",
-	"version": "4.0.0",
 	"keywords": ["abuse", "abuseio"],
 	"homepage": "http://abuse.io",
 	"type": "project",
@@ -21,29 +20,29 @@
 		"source": "https://github.com/AbuseIO/AbuseIO",
 		"docs": "https://abuse.io/resources/documentation/"
 	},
-    "suggest": {
-        "ext-mcrypt": "Laravel / AbuseIO requirement"
-    },
+	"suggest": {
+		"ext-mcrypt": "Laravel / AbuseIO requirement"
+	},
 	"require": {
-        "ext-mcrypt": "*",
+		"ext-mcrypt": "*",
 		"laravel/framework": "5.1.*",
-        "laravelcollective/html": "~5.0",
-        "php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
-        "webpatser/laravel-uuid": "1.*",
-        "Chumper/Zipper": "0.6.x",
-        "barryvdh/laravel-ide-helper": "^2.0",
-        "ddeboer/data-import": "^0.18.0",
-        "yajra/laravel-datatables-oracle": "~5.0",
-        "guzzlehttp/guzzle": "6.1.1",
-        "marknl/iodef": "~1.0.3",
+		"laravelcollective/html": "~5.0",
+		"php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
+		"webpatser/laravel-uuid": "1.*",
+		"Chumper/Zipper": "0.6.x",
+		"barryvdh/laravel-ide-helper": "^2.0",
+		"ddeboer/data-import": "^0.18.0",
+		"yajra/laravel-datatables-oracle": "~5.0",
+		"guzzlehttp/guzzle": "6.1.1",
+		"marknl/iodef": "~1.0.3",
 
-        "abuseio/parser-common": "1.1.*",
+		"abuseio/parser-common": "1.1.*",
 		"abuseio/parser-abusehub": "1.3.*",
-        "abuseio/parser-arf": "1.0.*",
+		"abuseio/parser-arf": "1.0.*",
 		"abuseio/parser-blocklistde": "1.3.*",
 		"abuseio/parser-cegtek": "1.3.*",
 		"abuseio/parser-cleanmx": "1.3.*",
-        "abuseio/parser-copyrightcompliance": "1.3.*",
+		"abuseio/parser-copyrightcompliance": "1.3.*",
 		"abuseio/parser-cyscon": "1.3.*",
 		"abuseio/parser-google": "1.3.*",
 		"abuseio/parser-ipechelon": "1.3.*",
@@ -53,14 +52,14 @@
 		"abuseio/parser-spamcop": "1.3.*",
 		"abuseio/parser-spamexperts": "1.3.*",
 		"abuseio/parser-webiron": "1.3.*",
-        "abuseio/parser-fbl": "1.3.*",
+		"abuseio/parser-fbl": "1.3.*",
 
-        "abuseio/collector-common": "1.1.*",
-        "abuseio/collector-rbl": "1.3.*",
-        "abuseio/collector-snds": "1.3.*",
-
-        "abuseio/notification-common": "1.1.*",
-        "abuseio/notification-mail": "1.2.*",
+		"abuseio/collector-common": "1.1.*",
+		"abuseio/collector-rbl": "1.3.*",
+		"abuseio/collector-snds": "1.3.*",
+		
+		"abuseio/notification-common": "1.1.*",
+		"abuseio/notification-mail": "1.2.*",
 		"zendframework/zend-xmlrpc": "^2.5",
 		"jeremykendall/php-domain-parser": "^3.0"
 
@@ -73,8 +72,8 @@
 	"autoload": {
 		"classmap": [
 			"database",
-            "vendor/abuseio/",
-            "app/Libraries/"
+			"vendor/abuseio/",
+			"app/Libraries/"
 		],
 		"psr-4": {
 			"AbuseIO\\": "app/"
@@ -89,21 +88,26 @@
 		"post-install-cmd": [
 			"php artisan clear-compiled",
 			"php artisan optimize",
-            "php artisan queue:restart"
+			"php artisan queue:restart"
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
-            "php artisan ide-helper:generate",
+			"php artisan ide-helper:generate",
 			"php artisan optimize",
-            "php artisan queue:restart"
+			"php artisan queue:restart"
 		],
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
 			"php artisan key:generate",
-            "php artisan app:id"
+			"php artisan app:id"
 		]
 	},
 	"config": {
 		"preferred-install": "dist"
+	}
+	"extra": {
+		"branch-alias": {
+			"dev-master": "4.0"
+		}
 	}
 }
