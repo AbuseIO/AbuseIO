@@ -9,13 +9,12 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
 /**
- * Class CreateCommand
- * @package AbuseIO\Console\Commands\Domain
+ * Class CreateCommand.
  */
 class CreateCommand extends AbstractCreateCommand
 {
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getArgumentsList()
     {
@@ -29,15 +28,15 @@ class CreateCommand extends AbstractCreateCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getAsNoun()
     {
-        return "domain";
+        return 'domain';
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getModelFromRequest()
     {
@@ -45,13 +44,13 @@ class CreateCommand extends AbstractCreateCommand
 
         $domain->contact_id = $this->argument('contact_id');
         $domain->name = $this->argument('name');
-        $domain->enabled = $this->argument('enabled') === "true" ? true : false;
+        $domain->enabled = $this->argument('enabled') === 'true' ? true : false;
 
         return $domain;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getValidator($model)
     {

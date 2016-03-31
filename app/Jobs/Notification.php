@@ -2,14 +2,14 @@
 
 namespace AbuseIO\Jobs;
 
-use Illuminate\Contracts\Bus\SelfHandling;
-use AbuseIO\Notification\Factory as NotificationFactory;
 use AbuseIO\Models\Ticket;
-use Validator;
+use AbuseIO\Notification\Factory as NotificationFactory;
+use Illuminate\Contracts\Bus\SelfHandling;
 use Log;
+use Validator;
 
 /**
- * Class Notification provides notification methods
+ * Class Notification provides notification methods.
  *
  * Class Notification
  */
@@ -21,17 +21,16 @@ class Notification extends Job implements SelfHandling
      * Sends out notifications based on the configured notification modules.
      * Returns false on failed or havent done anything at all.
      *
-     * @param  array $notifications ($notifications[$reference][$type] => array $tickets)
+     * @param array $notifications ($notifications[$reference][$type] => array $tickets)
+     *
      * @return array
      */
     public function send($notifications)
     {
-
-        if (!empty(config("notifications"))
-            && is_array(config("notifications"))
+        if (!empty(config('notifications'))
+            && is_array(config('notifications'))
         ) {
-            foreach (config("notifications") as $notificationModule => $notificationConfig) {
-
+            foreach (config('notifications') as $notificationModule => $notificationConfig) {
                 $notification = notificationFactory::create($notificationModule);
 
                 if (config("notifications.{$notificationModule}.notification.enabled") !== true) {
@@ -46,25 +45,23 @@ class Notification extends Job implements SelfHandling
 
                 if ($notificationResult['errorStatus']) {
                     Log::error(
-                        get_class($this) . ': ' .
+                        get_class($this).': '.
                         "Notifications with {$notificationModule} did not succeed"
                     );
 
                     return false;
-
                 } else {
                     Log::debug(
-                        get_class($this) . ': ' .
-                        "Notifications with {$notificationModule} was successfull for contact reference: " .
+                        get_class($this).': '.
+                        "Notifications with {$notificationModule} was successfull for contact reference: ".
                         key($notifications)
                     );
                 }
-
             }
         } else {
             Log::debug(
-                get_class($this) . ': ' .
-                "No notification methods are installed, skipping notifications"
+                get_class($this).': '.
+                'No notification methods are installed, skipping notifications'
             );
 
             return false;
@@ -74,34 +71,36 @@ class Notification extends Job implements SelfHandling
     }
 
     /**
-     * Walks a list of notifications (build from BuildList)
+     * Walks a list of notifications (build from BuildList).
      *
      * @param array $notifications
-     * @return boolean
+     *
+     * @return bool
      */
     public function walkList($notifications)
     {
-
-        if (empty(config("notifications"))
-            && !is_array(config("notifications"))
+        if (empty(config('notifications'))
+            && !is_array(config('notifications'))
         ) {
             Log::debug(
-                get_class($this) . ': ' .
-                "No notification methods are configured, no sense into calling unexisting methods"
+                get_class($this).': '.
+                'No notification methods are configured, no sense into calling unexisting methods'
             );
+
             return true;
         }
 
         Log::info(
-            get_class($this) . ': ' .
-            "A notification run has been started"
+            get_class($this).': '.
+            'A notification run has been started'
         );
 
         if (empty($notifications)) {
             Log::info(
-                get_class($this) . ': ' .
-                "No contacts that need notifications"
+                get_class($this).': '.
+                'No contacts that need notifications'
             );
+
             return true;
         }
 
@@ -123,8 +122,8 @@ class Notification extends Job implements SelfHandling
                  */
                 foreach ($referenceData as $notificationType => $tickets) {
                     foreach ($tickets as $ticket) {
-                        $ticket->last_notify_count      = $ticket->events->count();
-                        $ticket->last_notify_timestamp  = time();
+                        $ticket->last_notify_count = $ticket->events->count();
+                        $ticket->last_notify_timestamp = time();
                         if ($notificationType == 'ip') {
                             $ticket->ip_contact_notified_count = $ticket->ip_contact_notified_count + 1;
                         }
@@ -139,35 +138,39 @@ class Notification extends Job implements SelfHandling
 
         if ($errors !== 0) {
             Log::debug(
-                get_class($this) . ': ' .
+                get_class($this).': '.
                 "Failed sending out notifications. Encountered {$errors} errors."
             );
+
             return false;
         }
 
         if ($counter === 0) {
             Log::debug(
-                get_class($this) . ': ' .
-                "None of the notification methods seem to be enabled"
+                get_class($this).': '.
+                'None of the notification methods seem to be enabled'
             );
+
             return true;
         }
 
         Log::debug(
-            get_class($this) . ': ' .
+            get_class($this).': '.
             "Successfully send out notifications to {$counter} contacts"
         );
+
         return true;
     }
 
     /**
      * Create a list of tickets that need outgoing notifications.
      *
-     * @param integer|boolean   $ticket             Ticket ID
-     * @param string|boolean    $reference          ReferenceName of contact in ticket
-     * @param boolean|boolean   $force              Force sending even when there are no new events
-     * @param string            $only               Only send to ('ip', 'domain' or null (both))
-     * @return array            $notificationList   List of notifications to send
+     * @param int|bool    $ticket    Ticket ID
+     * @param string|bool $reference ReferenceName of contact in ticket
+     * @param bool|bool   $force     Force sending even when there are no new events
+     * @param string      $only      Only send to ('ip', 'domain' or null (both))
+     *
+     * @return array $notificationList   List of notifications to send
      */
     public function buildList($ticket = false, $reference = false, $force = false, $only = null)
     {
@@ -175,7 +178,7 @@ class Notification extends Job implements SelfHandling
          * Select a list of tickets that are not closed(2) by default or add ticket / reference
          * conditions if options were passed along.
          */
-        $selection = [ ];
+        $selection = [];
 
         $search = Ticket::where('id', '>', '0');
 
@@ -190,16 +193,15 @@ class Notification extends Job implements SelfHandling
         if ($reference !== false) {
             $search->where('ip_contact_reference', '=', $reference)
                 ->orwhere('domain_contact_reference', '=', $reference);
-
         }
 
         $tickets = $search->get();
 
         $validator = Validator::make(
             [
-                'notification info_interval'    => strtotime(config('main.notifications.info_interval') . " ago"),
-                'notification abuse_interval'   => strtotime(config('main.notifications.abuse_interval') . " ago"),
-                'notification min_lastseen'     => strtotime(config('main.notifications.min_lastseen') . " ago"),
+                'notification info_interval'    => strtotime(config('main.notifications.info_interval').' ago'),
+                'notification abuse_interval'   => strtotime(config('main.notifications.abuse_interval').' ago'),
+                'notification min_lastseen'     => strtotime(config('main.notifications.min_lastseen').' ago'),
             ],
             [
                 'notification info_interval'    => 'required|timestamp',
@@ -213,8 +215,9 @@ class Notification extends Job implements SelfHandling
 
             $message = '';
             foreach ($messages->all() as $messagePart) {
-                $message .= $messagePart . PHP_EOL;
+                $message .= $messagePart.PHP_EOL;
             }
+
             return $message;
         }
 
@@ -223,9 +226,9 @@ class Notification extends Job implements SelfHandling
             $only = null;
         }
 
-        $sendInfoAfter = strtotime(config('main.notifications.info_interval') . " ago");
-        $sendAbuseAfter = strtotime(config('main.notifications.abuse_interval') . " ago");
-        $sendNotOlderThen = strtotime(config('main.notifications.min_lastseen') . " ago");
+        $sendInfoAfter = strtotime(config('main.notifications.info_interval').' ago');
+        $sendAbuseAfter = strtotime(config('main.notifications.abuse_interval').' ago');
+        $sendNotOlderThen = strtotime(config('main.notifications.min_lastseen').' ago');
 
         foreach ($tickets as $ticket) {
             /*
@@ -237,7 +240,6 @@ class Notification extends Job implements SelfHandling
                 $force !== true
             ) {
                 continue;
-
             } else {
                 /*
                  * Filter outgoing notifications and aggregate them by reference so we can send out a single

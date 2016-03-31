@@ -1,11 +1,12 @@
 <?php
+
 Route::resource('netblocks', 'NetblocksController');
 Route::model('netblocks', 'AbuseIO\Models\Netblock');
 
 Route::group(
     [
         'prefix' => 'netblocks',
-        'as' => 'netblocks.',
+        'as'     => 'netblocks.',
     ],
     function () {
         // Search netblock
@@ -13,8 +14,8 @@ Route::group(
             'search/{one?}/{two?}/{three?}',
             [
                 'middleware' => 'permission:netblocks_view',
-                'as' => 'search',
-                'uses' => 'NetblocksController@search'
+                'as'         => 'search',
+                'uses'       => 'NetblocksController@search',
             ]
         );
 
@@ -23,8 +24,8 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:netblocks_view',
-                'as' => 'index',
-                'uses' => 'NetblocksController@index'
+                'as'         => 'index',
+                'uses'       => 'NetblocksController@index',
             ]
         );
 
@@ -33,8 +34,8 @@ Route::group(
             '{netblocks}',
             [
                 'middleware' => 'permission:netblocks_view',
-                'as' => 'show',
-                'uses' => 'NetblocksController@show'
+                'as'         => 'show',
+                'uses'       => 'NetblocksController@show',
             ]
         );
 
@@ -43,8 +44,8 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:netblocks_export',
-                'as' => 'export',
-                'uses' => 'NetblocksController@export'
+                'as'         => 'export',
+                'uses'       => 'NetblocksController@export',
             ]
         );
 
@@ -53,16 +54,16 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:netblocks_create',
-                'as' => 'create',
-                'uses' => 'NetblocksController@create'
+                'as'         => 'create',
+                'uses'       => 'NetblocksController@create',
             ]
         );
         route::post(
             '',
             [
                 'middleware' => 'permission:netblocks_create',
-                'as' => 'store',
-                'uses' => 'NetblocksController@store'
+                'as'         => 'store',
+                'uses'       => 'NetblocksController@store',
             ]
         );
 
@@ -71,24 +72,24 @@ Route::group(
             '{netblocks}/edit',
             [
                 'middleware' => 'permission:netblocks_edit',
-                'as' => 'edit',
-                'uses' => 'NetblocksController@edit'
+                'as'         => 'edit',
+                'uses'       => 'NetblocksController@edit',
             ]
         );
         route::patch(
             '{netblocks}',
             [
                 'middleware' => 'permission:netblocks_edit',
-                'as' => 'update',
-                'uses' => 'NetblocksController@update'
+                'as'         => 'update',
+                'uses'       => 'NetblocksController@update',
             ]
         );
         route::put(
             '{netblocks}',
             [
                 'middleware' => 'permission:netblocks_edit',
-                'as' => 'update',
-                'uses' => 'NetblocksController@update'
+                'as'         => 'update',
+                'uses'       => 'NetblocksController@update',
             ]
         );
 
@@ -97,8 +98,8 @@ Route::group(
             '/{netblocks}',
             [
                 'middleware' => 'permission:netblocks_delete',
-                'as' => 'destroy',
-                'uses' => 'NetblocksController@destroy'
+                'as'         => 'destroy',
+                'uses'       => 'NetblocksController@destroy',
             ]
         );
 

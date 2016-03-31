@@ -15,28 +15,28 @@ class EditCommandTest extends TestCase
     use DatabaseTransactions;
 
     /**
-     * @var \AbuseIO\Models\Note $noteHidden
+     * @var \AbuseIO\Models\Note
      */
     private $noteHidden;
 
     /**
-     * @var \AbuseIO\Models\Note $noteViewed
+     * @var \AbuseIO\Models\Note
      */
     private $noteViewed;
 
     private function initDB()
     {
-        $this->noteHidden = factory(Note::class)->create(["hidden" => false]);
-        $this->noteViewed = factory(Note::class)->create(["viewed" => false]);
+        $this->noteHidden = factory(Note::class)->create(['hidden' => false]);
+        $this->noteViewed = factory(Note::class)->create(['viewed' => false]);
     }
 
     /**
-    * @expectedException RuntimeException
-    * @expectedExceptionMessage Not enough arguments (missing: "id").
-    */
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage Not enough arguments (missing: "id").
+     */
     public function testWithoutId()
     {
-         Artisan::call('note:edit');
+        Artisan::call('note:edit');
     }
 
     public function testWithInvalidId()
@@ -60,7 +60,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'note:edit',
             [
-                'id' => $this->noteHidden->id,
+                'id'       => $this->noteHidden->id,
                 '--hidden' => 'true',
             ]
         );
@@ -79,7 +79,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'note:edit',
             [
-                'id' => $this->noteViewed->id,
+                'id'       => $this->noteViewed->id,
                 '--viewed' => 'true',
             ]
         );

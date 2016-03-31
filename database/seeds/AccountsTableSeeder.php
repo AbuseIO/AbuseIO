@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 
 class AccountsTableSeeder extends Seeder
 {
-
     public function run()
     {
         $accounts = [
@@ -13,16 +12,16 @@ class AccountsTableSeeder extends Seeder
                 'name'          => 'Customer Internet',
                 'description'   => 'Customer internet department',
                 'brand_id'      => 1,
-                'created_at'    => new DateTime,
-                'updated_at'    => new DateTime,
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime(),
             ],
             [
                 'id'            => 3,
                 'name'          => 'Business Internet',
                 'description'   => 'Business internet department',
                 'brand_id'      => 1,
-                'created_at'    => new DateTime,
-                'updated_at'    => new DateTime,
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime(),
             ],
         ];
 

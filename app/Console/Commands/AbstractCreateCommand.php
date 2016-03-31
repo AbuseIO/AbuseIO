@@ -1,15 +1,14 @@
 <?php
+
 namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
 
 /**
- * Class AbstractCreateCommand
- * @package AbuseIO\Console\Commands
+ * Class AbstractCreateCommand.
  */
 abstract class AbstractCreateCommand extends Command
 {
-
     use ShowHelpWhenRunTimeExceptionOccurs;
 
     /**
@@ -29,7 +28,7 @@ abstract class AbstractCreateCommand extends Command
     {
         $model = $this->getModelFromRequest();
 
-        /** @var  $validation */
+        /** @var $validation */
         $validation = $this->getValidator($model);
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
@@ -66,6 +65,7 @@ abstract class AbstractCreateCommand extends Command
 
     /**
      * @param $model
+     *
      * @return mixed
      */
     abstract protected function getValidator($model);

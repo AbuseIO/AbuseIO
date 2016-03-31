@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\Console\Input\InputDefinition;
 
 /**
- * Class AbstractDeleteCommand
- * @package AbuseIO\Console\Commands
+ * Class AbstractDeleteCommand.
  */
 abstract class AbstractDeleteCommand extends Command
 {
@@ -37,7 +36,7 @@ abstract class AbstractDeleteCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     final public function handle()
     {
@@ -48,6 +47,7 @@ abstract class AbstractDeleteCommand extends Command
             $this->error(
                 sprintf('Unable to find %s with this criteria', $this->getAsNoun())
             );
+
             return false;
         }
 
@@ -59,12 +59,14 @@ abstract class AbstractDeleteCommand extends Command
             $this->error(
                 sprintf('Unable to delete %s from the system', $this->getAsNoun())
             );
+
             return false;
         }
 
         $this->info(
             sprintf('The %s has been deleted from the system', $this->getAsNoun())
         );
+
         return true;
     }
 
@@ -77,7 +79,7 @@ abstract class AbstractDeleteCommand extends Command
     }
 
     /**
-     * Default subcommand name
+     * Default subcommand name.
      *
      * @return string
      */
@@ -104,6 +106,7 @@ abstract class AbstractDeleteCommand extends Command
 
     /**
      * @param $object
+     *
      * @return bool
      */
     protected function stopDeleteAndThrowAnErrorBecauseRelations($object)

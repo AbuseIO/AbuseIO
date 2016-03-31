@@ -2,16 +2,14 @@
 
 namespace AbuseIO\Console\Commands\Collector;
 
-use Illuminate\Console\Command;
 use AbuseIO\Collectors\Factory as CollectorFactory;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use AbuseIO\Jobs\CollectorProcess;
-use Carbon;
+use Illuminate\Console\Command;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
 
 /**
- * Class RunAllCommand
- * @package AbuseIO\Console\Commands\Collector
+ * Class RunAllCommand.
  */
 class RunAllCommand extends Command
 {
@@ -19,6 +17,7 @@ class RunAllCommand extends Command
 
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $signature = 'collector:runall
@@ -27,6 +26,7 @@ class RunAllCommand extends Command
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Run all enabled collection processes';
@@ -42,43 +42,36 @@ class RunAllCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     public function handle()
     {
-
         Log::info(
-            get_class($this) . ': ' .
+            get_class($this).': '.
             'Starting a collection run for all enabled collectors'
         );
 
         $collectors = collectorFactory::getCollectors();
 
         foreach ($collectors as $collectorName) {
-
             if (config("collectors.{$collectorName}.collector.enabled") === true) {
-
                 if ($this->option('noqueue') == true) {
                     // In debug mode we don't queue the job
                     Log::debug(
-                        get_class($this) . ': ' .
-                        'Queuing disabled. Directly handling message file: ' . $collectorName
+                        get_class($this).': '.
+                        'Queuing disabled. Directly handling message file: '.$collectorName
                     );
 
                     $processer = new CollectorProcess($collectorName);
                     $processer->handle();
-
                 } else {
                     Log::info(
-                        get_class($this) . ': ' .
-                        'Pushing collector into queue: ' . $collectorName
+                        get_class($this).': '.
+                        'Pushing collector into queue: '.$collectorName
                     );
                     $this->dispatch(new CollectorProcess($collectorName));
-
                 }
-
             }
-
         }
 
         Log::info(

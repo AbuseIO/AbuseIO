@@ -7,35 +7,34 @@ use AbuseIO\Models\Role;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class DeleteCommand
- * @package AbuseIO\Console\Commands\Role
+ * Class DeleteCommand.
  */
 class DeleteCommand extends AbstractDeleteCommand
 {
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function defineInput()
     {
-        return array(
+        return [
                 new InputArgument(
                     'role',
                     InputArgument::REQUIRED,
                     'Use the name or the id for a role to delete it.'
-                )
-        );
+                ),
+        ];
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAllowedArguments()
     {
-        return ["name", "id"];
+        return ['name', 'id'];
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getObjectByArguments()
     {
@@ -47,14 +46,15 @@ class DeleteCommand extends AbstractDeleteCommand
         if (!is_object($role)) {
             $role = Role::find($this->argument('role'));
         }
+
         return $role;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "role";
+        return 'role';
     }
 }

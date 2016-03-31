@@ -7,29 +7,28 @@ use AbuseIO\Models\User;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class DeleteCommand
- * @package AbuseIO\Console\Commands\User
+ * Class DeleteCommand.
  */
 class DeleteCommand extends AbstractDeleteCommand
 {
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "user";
+        return 'user';
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAllowedArguments()
     {
-        return ["user"];
+        return ['user'];
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getObjectByArguments()
     {
@@ -41,20 +40,21 @@ class DeleteCommand extends AbstractDeleteCommand
         if (!is_object($user)) {
             $user = User::find($this->argument('user'));
         }
+
         return $user;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function defineInput()
     {
-        return array(
+        return [
             new InputArgument(
                 'user',
                 InputArgument::REQUIRED,
                 'Use the name or email for a user to delete it.'
-            )
-        );
+            ),
+        ];
     }
 }

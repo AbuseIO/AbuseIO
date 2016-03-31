@@ -2,12 +2,11 @@
 
 namespace AbuseIO\Console\Commands\App;
 
-use Uuid;
 use Illuminate\Console\Command;
+use Uuid;
 
 /**
- * Class InstallationID
- * @package Illuminate\Foundation\Console
+ * Class InstallationID.
  */
 class InstallationID extends Command
 {
@@ -31,13 +30,13 @@ class InstallationID extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     public function fire()
     {
-
         if ($this->option('show')) {
             $this->line('<comment>'.$this->laravel['config']['app.id'].'</comment>');
+
             return true;
         }
 
@@ -45,6 +44,7 @@ class InstallationID extends Command
             empty($this->option('force'))
         ) {
             $this->info('You already have an installation ID. Not changing the ID unless --force is used');
+
             return false;
         }
 
@@ -52,10 +52,10 @@ class InstallationID extends Command
             !empty($this->option('force'))
         ) {
             $this->warn(
-                'Changing your installation ID will break your parent relation to any child instance'. PHP_EOL .
-                'this is receiving an AbuseIO downstream from you. Doing so will prevent you from  ' . PHP_EOL .
-                'receiveing updates from these instances!' . PHP_EOL .
-                'In nearly all operations you should never change the installation ID, unless you are' . PHP_EOL .
+                'Changing your installation ID will break your parent relation to any child instance'.PHP_EOL.
+                'this is receiving an AbuseIO downstream from you. Doing so will prevent you from  '.PHP_EOL.
+                'receiveing updates from these instances!'.PHP_EOL.
+                'In nearly all operations you should never change the installation ID, unless you are'.PHP_EOL.
                 'very sure you are not using any kind of communication with other AbuseIO installations'
             );
 
@@ -81,11 +81,13 @@ class InstallationID extends Command
             );
         } else {
             $this->error('Unable to set Application key becayse the .env file is not present');
+
             return false;
         }
 
         if ($replaces === 0) {
             $this->error('Unable to set Application key into the .env file, because the variable is not configured');
+
             return false;
         }
 

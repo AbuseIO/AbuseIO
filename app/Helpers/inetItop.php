@@ -10,10 +10,10 @@ function inetItop($decimal)
     // QuickFix: Decimal 0 is both for ::0 and 0.0.0.0, however it defaults to IPv6, while there is now way a
     // ::/64 will ever be used.
     if ($decimal < 255) {
-        return '0.0.0.' . $decimal;
+        return '0.0.0.'.$decimal;
     }
 
-    $parts = array();
+    $parts = [];
 
     if (function_exists('bcadd')) {
         // Use BCMath if available
@@ -27,11 +27,11 @@ function inetItop($decimal)
     } else {
         // Otherwise use the pure PHP BigInteger class
         $decimal = new Math_BigInteger($decimal);
-        list($parts[1],) = $decimal->divide(new Math_BigInteger('79228162514264337593543950336'));
+        list($parts[1]) = $decimal->divide(new Math_BigInteger('79228162514264337593543950336'));
         $decimal = $decimal->subtract($parts[1]->multiply(new Math_BigInteger('79228162514264337593543950336')));
-        list($parts[2],) = $decimal->divide(new Math_BigInteger('18446744073709551616'));
+        list($parts[2]) = $decimal->divide(new Math_BigInteger('18446744073709551616'));
         $decimal = $decimal->subtract($parts[2]->multiply(new Math_BigInteger('18446744073709551616')));
-        list($parts[3],) = $decimal->divide(new Math_BigInteger('4294967296'));
+        list($parts[3]) = $decimal->divide(new Math_BigInteger('4294967296'));
         $decimal = $decimal->subtract($parts[3]->multiply(new Math_BigInteger('4294967296')));
         $parts[4] = $decimal;
 

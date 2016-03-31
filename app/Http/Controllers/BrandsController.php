@@ -2,21 +2,18 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\BrandFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
-use yajra\Datatables\Datatables;
-use Redirect;
 use Exception;
+use Redirect;
+use yajra\Datatables\Datatables;
 
 /**
- * Class BrandsController
- * @package AbuseIO\Http\Controllers
+ * Class BrandsController.
  */
 class BrandsController extends Controller
 {
-
     /**
      * BrandsController constructor.
      */
@@ -64,7 +61,6 @@ class BrandsController extends Controller
             $created_brands = Brand::whereIn('id', $account->brands->lists('id'))->get();
 
             $brands = $active_brands->merge($created_brands);
-
         }
 
         return Datatables::of($brands)
@@ -85,41 +81,43 @@ class BrandsController extends Controller
                         [
                             'route' => [
                                 'admin.brands.destroy',
-                                $brand->id
+                                $brand->id,
                             ],
                             'method' => 'DELETE',
-                            'class' => 'form-inline'
+                            'class'  => 'form-inline',
                         ]
                     );
                     if (!$brand->isSystemBrand() or $account->isSystemAccount()) {
                         if ($account->brand_id != $brand->id) {
-                            $actions .= ' <a href="brands/' . $brand->id .
-                                '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> ' .
-                                trans('misc.button.activate') . '</a> ';
+                            $actions .= ' <a href="brands/'.$brand->id.
+                                '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> '.
+                                trans('misc.button.activate').'</a> ';
                         }
-                        $actions .= ' <a href="brands/' . $brand->id .
-                            '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> ' .
-                            trans('misc.button.show') . '</a> ';
-                        $actions .= ' <a href="brands/' . $brand->id .
-                            '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> ' .
-                            trans('misc.button.edit') . '</a> ';
+                        $actions .= ' <a href="brands/'.$brand->id.
+                            '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                            trans('misc.button.show').'</a> ';
+                        $actions .= ' <a href="brands/'.$brand->id.
+                            '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                            trans('misc.button.edit').'</a> ';
                         $actions .= \Form::button(
                             '<i class="glyphicon glyphicon-remove"></i> '
-                            . trans('misc.button.delete'),
+                            .trans('misc.button.delete'),
                             [
-                                'type' => 'submit',
-                                'class' => 'btn btn-danger btn-xs'
+                                'type'  => 'submit',
+                                'class' => 'btn btn-danger btn-xs',
                             ]
                         );
                     }
                     $actions .= \Form::close();
+
                     return $actions;
                 }
             )
             ->addColumn(
                 'logo',
                 function ($brand) {
-                    $logo = '<img src="/admin/logo/' . $brand->id .'" width="60px"/>';
+                    $logo = '<img src="/admin/logo/'.$brand->id.'" width="60px"/>';
+
                     return $logo;
                 }
             )
@@ -146,6 +144,7 @@ class BrandsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param BrandFormRequest $brandForm
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(BrandFormRequest $brandForm)
@@ -185,7 +184,8 @@ class BrandsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Brand $brand
+     * @param Brand $brand
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Brand $brand)
@@ -197,9 +197,10 @@ class BrandsController extends Controller
     }
 
     /**
-     * return the logo as an image
+     * return the logo as an image.
      *
-     * @param integer $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function logo($id)
@@ -222,7 +223,8 @@ class BrandsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Brand $brand
+     * @param Brand $brand
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Brand $brand)
@@ -240,7 +242,8 @@ class BrandsController extends Controller
      * Update the specified resource in storage.
      *
      * @param BrandFormRequest $brandForm
-     * @param Brand $brand
+     * @param Brand            $brand
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(BrandFormRequest $brandForm, Brand $brand)
@@ -261,6 +264,7 @@ class BrandsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Brand $brand
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Brand $brand)
@@ -277,9 +281,10 @@ class BrandsController extends Controller
     }
 
     /**
-     * Set the brand as the active brand on the current account
+     * Set the brand as the active brand on the current account.
      *
      * @param Brand $brand
+     * @return Redirect
      */
     public function activate(Brand $brand)
     {

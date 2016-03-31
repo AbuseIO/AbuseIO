@@ -22,11 +22,11 @@ class ListCommandTest extends TestCase
 
     /**
      * this should not be part of the setUp method because the database connection
-     * has NOT been setUp properly at that moment
+     * has NOT been setUp properly at that moment.
      */
     private function initDB()
     {
-//        \DB::table('domains')->truncate();
+        //        \DB::table('domains')->truncate();
 //        \DB::table('contacts')->truncate();
 //        Contact::all()->delete();
 

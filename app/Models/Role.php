@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Role
- * @package AbuseIO\Models
- * @property integer $id guarded
+ * Class Role.
+ *
+ * @property int $id guarded
  * @property string $name fillable
  * @property string $description fillable
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * @property int $created_at guarded
+ * @property int $updated_at guarded
+ * @property int $deleted_at guarded
  */
 class Role extends Model
 {
@@ -43,7 +43,7 @@ class Role extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array $rules
      */
@@ -58,17 +58,17 @@ class Role extends Model
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
-     * @param  \AbuseIO\Models\Role $role
+     * @param \AbuseIO\Models\Role $role
+     *
      * @return array $rules
      */
     public static function updateRules($role)
     {
-
         $rules = [
             'id'                => 'required|exists:roles,id',
-            'name'              => 'required|string|min:1|unique:roles,name,' . $role->id,
+            'name'              => 'required|string|min:1|unique:roles,name,'.$role->id,
             'description'       => 'required|string|min:1',
         ];
 

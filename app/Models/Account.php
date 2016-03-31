@@ -2,23 +2,21 @@
 
 namespace AbuseIO\Models;
 
-use AbuseIO\Models\Brand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 use Log;
 
 /**
- * Class Account
- * @package AbuseIO\Models
- * @property integer $id
+ * Class Account.
+ *
+ * @property int $id
  * @property string $name fillable
  * @property string $description fillable
  * @property int $brand_id fillable
- * @property boolean $disabled fillable
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * @property bool $disabled fillable
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class Account extends Model
 {
@@ -51,7 +49,7 @@ class Account extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array $rules
      */
@@ -69,15 +67,16 @@ class Account extends Model
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
-     * @param  \AbuseIO\Models\Account $account
+     * @param \AbuseIO\Models\Account $account
+     *
      * @return array $rules
      */
     public static function updateRules($account)
     {
         $rules = [
-            'name'          => 'required|unique:accounts,name,'. $account->id,
+            'name'          => 'required|unique:accounts,name,'.$account->id,
             'brand_id'      => 'required|integer|exists:brands,id',
             'systemaccount' => 'sometimes|required|uniqueflag:accounts:systemaccount',
             'disabled'      => 'sometimes|required|stringorboolean', // disabled is sent as a string
@@ -93,7 +92,6 @@ class Account extends Model
     */
 
     /**
-     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function users()
@@ -107,7 +105,6 @@ class Account extends Model
     public function contacts()
     {
         return $this->hasMany('AbuseIO\Models\Contact');
-
     }
 
     /**
@@ -141,7 +138,7 @@ class Account extends Model
     */
 
     /**
-     * Accessor for the active brand
+     * Accessor for the active brand.
      *
      * @return Brand
      */
@@ -151,7 +148,7 @@ class Account extends Model
     }
 
     /**
-     * Mutator for the active brand
+     * Mutator for the active brand.
      *
      * @param \AbuseIO\Models\Brand $brand
      */
@@ -161,18 +158,18 @@ class Account extends Model
     }
 
     /**
-     * Mutator for the active brand
+     * Mutator for the active brand.
      *
-     * @param boolean $value
+     * @param bool $value
      */
     public function setSystemaccountAttribute($value)
     {
         if ($value) {
-            $account = Account::where('systemaccount', true);
+            $account = self::where('systemaccount', true);
             $account->update(['systemaccount' => false]);
         }
 
-        Account::where('id', $this->id)->update(['systemaccount' => $value]);
+        self::where('id', $this->id)->update(['systemaccount' => $value]);
     }
 
     /*
@@ -182,10 +179,11 @@ class Account extends Model
     */
 
     /**
-     * Static method to check if the account has access to the model instance
+     * Static method to check if the account has access to the model instance.
      *
      * @param $model_id
      * @param $account
+     *
      * @return bool
      */
     public static function checkAccountAccess($model_id, $account)
@@ -195,49 +193,51 @@ class Account extends Model
             return true;
         }
 
-        $my_account = Account::find($model_id);
+        $my_account = self::find($model_id);
 
         $allowed = $my_account->account_id == $account->id;
 
-        return ($allowed);
+        return $allowed;
     }
 
-
     /**
-     * Return if the account is the system account
+     * Return if the account is the system account.
      *
      * @return bool
      */
     public function isSystemAccount()
     {
-        return ($this->systemaccount);
+        return $this->systemaccount;
     }
 
     /**
      * Return the account that currently is the system account
-     * If there is none, we die as its impossible to function without it
+     * If there is none, we die as its impossible to function without it.
      *
      * @param \Illuminate\Database\Eloquent\Builder
+     *
      * @return \AbuseIO\Models\Account $account
      */
     public function scopeSystem($query)
     {
-        $result =  $query->where('systemaccount', '=', 1);
+        $result = $query->where('systemaccount', '=', 1);
 
         if (count($result) !== 1) {
             Log::error(
-                'FindContact: ' .
-                "FATAL ERROR - DEFAULT ACCOUNT (SYSTEMACCOUNT) MISSING"
+                'FindContact: '.
+                'FATAL ERROR - DEFAULT ACCOUNT (SYSTEMACCOUNT) MISSING'
             );
             dd();
         }
+
         return $result->first();
     }
 
     /**
-     * Checks if the current user may edit the account
+     * Checks if the current user may edit the account.
      *
      * @param User $user
+     *
      * @return bool
      */
     public function mayEdit(User $user)
@@ -259,9 +259,10 @@ class Account extends Model
 
     /**
      * Checks if the current user may destroy the account
-     * todo: currently use the mayEdit method to check
+     * todo: currently use the mayEdit method to check.
      *
      * @param User $user
+     *
      * @return bool
      */
     public function mayDestroy(User $user)
@@ -270,9 +271,10 @@ class Account extends Model
     }
 
     /**
-     * Checks if the current user may disable the account
+     * Checks if the current user may disable the account.
      *
      * @param User $user
+     *
      * @return bool
      */
     public function mayDisable(User $user)
@@ -285,14 +287,15 @@ class Account extends Model
         }
 
         // only the system account may disable/enable accounts
-        return ($auth_account->isSystemAccount());
+        return $auth_account->isSystemAccount();
     }
 
     /**
      * Check if the user may enable the account
-     * (use the same logic as mayDisable() )
+     * (use the same logic as mayDisable() ).
      *
      * @param User $user
+     *
      * @return bool
      */
     public function mayEnable(User $user)
@@ -305,6 +308,6 @@ class Account extends Model
      */
     public static function getSystemAccount()
     {
-        return self::where("systemaccount", 1)->first();
+        return self::where('systemaccount', 1)->first();
     }
 }

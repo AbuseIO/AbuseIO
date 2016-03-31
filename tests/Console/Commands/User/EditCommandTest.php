@@ -48,8 +48,8 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'user:edit',
             [
-                'user' => $this->dummy->id,
-                '--first_name' => "jip"
+                'user'         => $this->dummy->id,
+                '--first_name' => 'jip',
             ]
         );
         $this->assertEquals($exitCode, 0);
@@ -67,20 +67,18 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'user:edit',
             [
-                'user' => $this->dummy->id,
-                '--first_name' => "jip",
-                '--password' => "fbjldkjldj",
+                'user'         => $this->dummy->id,
+                '--first_name' => 'jip',
+                '--password'   => 'fbjldkjldj',
             ]
         );
         $this->assertEquals($exitCode, 0);
-
 
         $output = Artisan::output();
         $this->assertContains(
             'The user has been updated',
             $output
         );
-
     }
 
     public function testChangeWithAutoPassword()
@@ -89,8 +87,8 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'user:edit',
             [
-                'user' => $this->dummy->id,
-                '--autopassword' => 'some dummy value' // I don't know how to test a InputOption::VALUE_NONE but this works
+                'user'           => $this->dummy->id,
+                '--autopassword' => 'some dummy value', // I don't know how to test a InputOption::VALUE_NONE but this works
             ]
         );
         $this->assertEquals($exitCode, 0);
@@ -105,5 +103,4 @@ class EditCommandTest extends TestCase
             $output
         );
     }
-
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for AbuseIO Self Help (ash)
+ * Translations for AbuseIO Self Help (ash).
  */
 return [
     'title'                         => 'AbuseIO Zelfhulp',

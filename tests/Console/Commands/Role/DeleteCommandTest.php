@@ -2,9 +2,9 @@
 
 namespace tests\Console\Commands\Role;
 
+use AbuseIO\Models\Role;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
-use AbuseIO\Models\Role;
 use tests\TestCase;
 
 /**
@@ -20,7 +20,6 @@ class DeleteCommandTest extends TestCase
     {
         $this->role = factory(Role::class)->create();
     }
-
 
     public function testValid()
     {

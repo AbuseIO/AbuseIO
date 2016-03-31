@@ -5,8 +5,7 @@ namespace AbuseIO\Http\Requests;
 use AbuseIO\Models\Brand;
 
 /**
- * Class BrandFormRequest
- * @package AbuseIO\Http\Requests
+ * Class BrandFormRequest.
  */
 class BrandFormRequest extends Request
 {
@@ -42,6 +41,6 @@ class BrandFormRequest extends Request
                 break;
         }
 
-        return [ ];
+        return [];
     }
 }

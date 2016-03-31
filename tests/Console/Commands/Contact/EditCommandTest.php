@@ -39,7 +39,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'contact:edit',
             [
-                'id' => '1',
+                'id'     => '1',
                 '--name' => 'New name',
             ]
         );
@@ -59,7 +59,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'contact:edit',
             [
-                'id' => '1',
+                'id'          => '1',
                 '--reference' => 'New reference',
             ]
         );

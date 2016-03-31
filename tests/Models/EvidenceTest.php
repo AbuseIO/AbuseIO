@@ -1,14 +1,14 @@
 <?php
+
 namespace tests\Models;
 
-use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Event;
+use AbuseIO\Models\Evidence;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use tests\TestCase;
 
 class EvidenceTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     private $eventId;
@@ -37,4 +37,3 @@ class EvidenceTest extends TestCase
         );
     }
 }
-

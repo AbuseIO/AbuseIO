@@ -64,11 +64,11 @@ return [
     'state' => [
         'NOTIFIED' => [
             'name'          => 'Notified',
-            'description'   => 'Tickets where the contact has been notified.'
+            'description'   => 'Tickets where the contact has been notified.',
         ],
         'NOT_NOTIFIED' => [
             'name'          => 'Unnotified',
-            'description'   => 'Tickets where the contact has not been notified.'
+            'description'   => 'Tickets where the contact has not been notified.',
         ],
-    ]
+    ],
 ];

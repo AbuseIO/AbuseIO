@@ -2,25 +2,26 @@
 
 namespace AbuseIO\Http\Middleware;
 
+use AbuseIO\Models\Ticket;
 use Closure;
 use Request;
-use AbuseIO\Models\Ticket;
 use Uuid;
 
 /**
- * Class CheckAshToken
- * @package AbuseIO\Http\Middleware
+ * Class CheckAshToken.
  */
 class CheckAshToken
 {
     /**
      * @param $request
      * @param Closure $next
-     * @return \BladeView|bool|\Illuminate\Contracts\Routing\ResponseFactory
-     *         \Illuminate\Contracts\View\Factory
-     *         \Illuminate\View\View
-     *         \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Exception
+     *
+     * @return \BladeView|bool|\Illuminate\Contracts\Routing\ResponseFactory
+     *                                                                       \Illuminate\Contracts\View\Factory
+     *                                                                       \Illuminate\View\View
+     *                                                                       \Symfony\Component\HttpFoundation\Response
      */
     public function handle($request, Closure $next)
     {
@@ -41,21 +42,21 @@ class CheckAshToken
                 $validTokenDomain = md5(Uuid::generate(4));
 
                 if ($ticket->ip_contact_reference != 'UNDEF') {
-                    $validTokenIP = md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference);
+                    $validTokenIP = md5($ticket->id.$ticket->ip.$ticket->ip_contact_reference);
                 }
                 if ($token == $validTokenIP) {
                     $request->merge(['AshAuthorisedBy' => 'TokenIP']);
+
                     return $next($request);
                 }
 
                 if ($ticket->domain_contact_reference != 'UNDEF') {
                     $request->merge(['AshAuthorisedBy' => 'TokenDomain']);
-                    $validTokenDomain = md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference);
+                    $validTokenDomain = md5($ticket->id.$ticket->domain.$ticket->domain_contact_reference);
                 }
                 if ($token == $validTokenDomain) {
                     return $next($request);
                 }
-
             }
         }
 

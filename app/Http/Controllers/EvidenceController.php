@@ -5,8 +5,7 @@ namespace AbuseIO\Http\Controllers;
 use AbuseIO\Models\Evidence;
 
 /**
- * Class EvidenceController
- * @package AbuseIO\Http\Controllers
+ * Class EvidenceController.
  */
 class EvidenceController extends Controller
 {
@@ -25,6 +24,7 @@ class EvidenceController extends Controller
      * Display the specified evidence.
      *
      * @param \AbuseIO\Models\Evidence $evidence
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Evidence $evidence)
@@ -35,9 +35,10 @@ class EvidenceController extends Controller
     }
 
     /**
-     * Download eml evidence
+     * Download eml evidence.
      *
-     * @param  \AbuseIO\Models\Evidence $evidence
+     * @param \AbuseIO\Models\Evidence $evidence
+     *
      * @return \Illuminate\Http\Response
      */
     public function download(Evidence $evidence)
@@ -55,10 +56,11 @@ class EvidenceController extends Controller
     }
 
     /**
-     * Download a specific attachment
+     * Download a specific attachment.
      *
-     * @param  \AbuseIO\Models\Evidence $evidence
-     * @param  string                   $filename [description]
+     * @param \AbuseIO\Models\Evidence $evidence
+     * @param string                   $filename [description]
+     *
      * @return \Illuminate\Http\Response
      */
     public function attachment(Evidence $evidence, $filename)

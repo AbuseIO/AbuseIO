@@ -1,11 +1,12 @@
 <?php
+
 Route::resource('contacts', 'ContactsController');
 Route::model('contacts', 'AbuseIO\Models\Contact');
 
 Route::group(
     [
         'prefix' => 'contacts',
-        'as' => 'contacts.',
+        'as'     => 'contacts.',
     ],
     function () {
         // Search contacts
@@ -13,8 +14,8 @@ Route::group(
             'search/{one?}/{two?}/{three?}/{four?}/{five?}',
             [
                 'middleware' => 'permission:contacts_view',
-                'as' => 'search',
-                'uses' => 'ContactsController@search'
+                'as'         => 'search',
+                'uses'       => 'ContactsController@search',
             ]
         );
 
@@ -23,8 +24,8 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:contacts_view',
-                'as' => 'index',
-                'uses' => 'ContactsController@index'
+                'as'         => 'index',
+                'uses'       => 'ContactsController@index',
             ]
         );
 
@@ -33,8 +34,8 @@ Route::group(
             '{contacts}',
             [
                 'middleware' => 'permission:contacts_view',
-                'as' => 'show',
-                'uses' => 'ContactsController@show'
+                'as'         => 'show',
+                'uses'       => 'ContactsController@show',
             ]
         );
 
@@ -43,8 +44,8 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:contacts_export',
-                'as' => 'export',
-                'uses' => 'ContactsController@export'
+                'as'         => 'export',
+                'uses'       => 'ContactsController@export',
             ]
         );
 
@@ -53,16 +54,16 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:contacts_create',
-                'as' => 'create',
-                'uses' => 'ContactsController@create'
+                'as'         => 'create',
+                'uses'       => 'ContactsController@create',
             ]
         );
         route::post(
             '',
             [
                 'middleware' => 'permission:contacts_create',
-                'as' => 'store',
-                'uses' => 'ContactsController@store'
+                'as'         => 'store',
+                'uses'       => 'ContactsController@store',
             ]
         );
 
@@ -71,24 +72,24 @@ Route::group(
             '{contacts}/edit',
             [
                 'middleware' => 'permission:contacts_edit',
-                'as' => 'edit',
-                'uses' => 'ContactsController@edit'
+                'as'         => 'edit',
+                'uses'       => 'ContactsController@edit',
             ]
         );
         route::patch(
             '{contacts}',
             [
                 'middleware' => 'permission:contacts_edit',
-                'as' => 'update',
-                'uses' => 'ContactsController@update'
+                'as'         => 'update',
+                'uses'       => 'ContactsController@update',
             ]
         );
         route::put(
             '{contacts}',
             [
                 'middleware' => 'permission:contacts_edit',
-                'as' => 'update',
-                'uses' => 'ContactsController@update'
+                'as'         => 'update',
+                'uses'       => 'ContactsController@update',
             ]
         );
 
@@ -97,8 +98,8 @@ Route::group(
             '{contacts}',
             [
                 'middleware' => 'permission:contacts_delete',
-                'as' => 'destroy',
-                'uses' => 'ContactsController@destroy'
+                'as'         => 'destroy',
+                'uses'       => 'ContactsController@destroy',
             ]
         );
 

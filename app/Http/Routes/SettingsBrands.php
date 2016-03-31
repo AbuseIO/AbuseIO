@@ -1,11 +1,12 @@
 <?php
+
 Route::model('brands', 'AbuseIO\Models\Brand');
 Route::resource('brands', 'BrandsController');
 
 Route::group(
     [
         'prefix' => 'brands',
-        'as' => 'brands.',
+        'as'     => 'brands.',
     ],
     function () {
         // Search contacts
@@ -13,8 +14,8 @@ Route::group(
             'search/{one?}/{two?}/{three?}/{four?}/{five?}',
             [
                 'middleware' => 'permission:brands_view',
-                'as' => 'search',
-                'uses' => 'BrandsController@search'
+                'as'         => 'search',
+                'uses'       => 'BrandsController@search',
             ]
         );
 
@@ -23,8 +24,8 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:brands_view',
-                'as' => 'index',
-                'uses' => 'BrandsController@index'
+                'as'         => 'index',
+                'uses'       => 'BrandsController@index',
             ]
         );
 
@@ -33,8 +34,8 @@ Route::group(
             '{brands}',
             [
                 'middleware' => 'permission:brands_view',
-                'as' => 'show',
-                'uses' => 'BrandsController@show'
+                'as'         => 'show',
+                'uses'       => 'BrandsController@show',
             ]
         );
 
@@ -43,8 +44,8 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:brands_export',
-                'as' => 'export',
-                'uses' => 'BrandsController@export'
+                'as'         => 'export',
+                'uses'       => 'BrandsController@export',
             ]
         );
 
@@ -53,16 +54,16 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:brands_create',
-                'as' => 'create',
-                'uses' => 'BrandsController@create'
+                'as'         => 'create',
+                'uses'       => 'BrandsController@create',
             ]
         );
         route::post(
             '',
             [
                 'middleware' => 'permission:brands_create',
-                'as' => 'store',
-                'uses' => 'BrandsController@store'
+                'as'         => 'store',
+                'uses'       => 'BrandsController@store',
             ]
         );
 
@@ -71,8 +72,8 @@ Route::group(
             '{brands}/edit',
             [
                 'middleware' => 'permission:brands_edit',
-                'as' => 'edit',
-                'uses' => 'BrandsController@edit'
+                'as'         => 'edit',
+                'uses'       => 'BrandsController@edit',
             ]
         );
         // Access to activate object
@@ -80,24 +81,24 @@ Route::group(
             '{brands}/activate',
             [
                 'middleware' => 'permission:brands_edit',
-                'as' => 'activate',
-                'uses' => 'BrandsController@activate'
+                'as'         => 'activate',
+                'uses'       => 'BrandsController@activate',
             ]
         );
         route::patch(
             '{brands}',
             [
                 'middleware' => 'permission:brands_edit',
-                'as' => 'update',
-                'uses' => 'BrandsController@update'
+                'as'         => 'update',
+                'uses'       => 'BrandsController@update',
             ]
         );
         route::put(
             '{brands}',
             [
                 'middleware' => 'permission:brands_edit',
-                'as' => 'update',
-                'uses' => 'BrandsController@update'
+                'as'         => 'update',
+                'uses'       => 'BrandsController@update',
             ]
         );
 
@@ -106,8 +107,8 @@ Route::group(
             '/{brands}',
             [
                 'middleware' => 'permission:brands_delete',
-                'as' => 'destroy',
-                'uses' => 'BrandsController@destroy'
+                'as'         => 'destroy',
+                'uses'       => 'BrandsController@destroy',
             ]
         );
 

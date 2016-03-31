@@ -1,9 +1,10 @@
 <?php
+
 namespace tests\Helpers;
 
 use tests\TestCase;
 
-class GeneratePasswordTest extends TestCase
+class generatePasswordTest extends TestCase
 {
     public function testMd5()
     {

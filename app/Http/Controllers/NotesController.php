@@ -2,19 +2,16 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\NoteFormRequest;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Models\Note;
 use Redirect;
 
 /**
- * Class NotesController
- * @package AbuseIO\Http\Controllers
+ * Class NotesController.
  */
 class NotesController extends Controller
 {
-
     /**
      * NetblocksController constructor.
      */
@@ -47,6 +44,7 @@ class NotesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param NoteFormRequest $noteForm
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(NoteFormRequest $noteForm)
@@ -57,7 +55,7 @@ class NotesController extends Controller
          * send notication if a new note is added
          */
         if ($noteForm->hidden != true) {
-            $notification = new Notification;
+            $notification = new Notification();
             $notifications = $notification->buildList($noteForm->ticket_id, false, true);
             $notification->walkList($notifications);
         }
@@ -82,6 +80,7 @@ class NotesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Note $note
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Note $note)
@@ -93,6 +92,7 @@ class NotesController extends Controller
      * Update the specified resource in storage.
      *
      * @param NoteFormRequest $noteForm
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(NoteFormRequest $noteForm)
@@ -108,7 +108,7 @@ class NotesController extends Controller
                 $note->viewed = !$note->viewed;
                 break;
             default:
-                # code...
+                // code...
                 break;
         }
         $note->save();
@@ -119,7 +119,8 @@ class NotesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  NoteFormRequest $noteForm
+     * @param NoteFormRequest $noteForm
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(NoteFormRequest $noteForm)

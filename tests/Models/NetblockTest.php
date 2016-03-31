@@ -16,7 +16,7 @@ class NetblockTest extends TestCase
         $netblockFromDB = Netblock::where(
             [
                 'first_ip' => $netblock->first_ip,
-                'last_ip' => $netblock->last_ip,
+                'last_ip'  => $netblock->last_ip,
             ]
         )->first();
 

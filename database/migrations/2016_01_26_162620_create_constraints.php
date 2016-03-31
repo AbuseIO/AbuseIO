@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateConstraints extends Migration
 {
@@ -54,7 +54,6 @@ class CreateConstraints extends Migration
         Schema::table('brands', function (Blueprint $table) {
             $table->foreign('creator_id')->references('id')->on('accounts');
         });
-
     }
 
     public function down()
@@ -101,6 +100,5 @@ class CreateConstraints extends Migration
         Schema::table('contacts', function (Blueprint $table) {
             $table->dropForeign('contacts_account_id_foreign');
         });
-
     }
 }

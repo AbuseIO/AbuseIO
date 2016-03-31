@@ -1,8 +1,8 @@
 <?php
 
 use AbuseIO\Models\Brand;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateBrandsTable extends Migration
 {
@@ -36,7 +36,7 @@ class CreateBrandsTable extends Migration
     }
 
     /**
-     * Add the default branding
+     * Add the default branding.
      */
     public function addDefaultBrand()
     {
@@ -52,8 +52,8 @@ class CreateBrandsTable extends Migration
                 'creator_id'                => 1,
                 'logo'                      => file_get_contents(Brand::getDefaultLogo()->getPathname()),
                 'systembrand'               => true,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
         ];
 

@@ -2,21 +2,18 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\NetblockFormRequest;
-use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Contact;
-use yajra\Datatables\Datatables;
-use Redirect;
+use AbuseIO\Models\Netblock;
 use Form;
+use Redirect;
+use yajra\Datatables\Datatables;
 
 /**
- * Class NetblocksController
- * @package AbuseIO\Http\Controllers
+ * Class NetblocksController.
  */
 class NetblocksController extends Controller
 {
-
     /**
      * NetblocksController constructor.
      */
@@ -26,7 +23,6 @@ class NetblocksController extends Controller
 
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Netblock', ['except' => ['search', 'index', 'create', 'store', 'export']]);
-
     }
 
     /**
@@ -36,7 +32,6 @@ class NetblocksController extends Controller
      */
     public function search()
     {
-
         $auth_account = $this->auth_user->account;
 
         $netblocks = Netblock::select('netblocks.*', 'contacts.name as contacts_name')
@@ -48,31 +43,32 @@ class NetblocksController extends Controller
                 ->where('accounts.id', '=', $auth_account->id);
         }
 
-            return Datatables::of($netblocks)
+        return Datatables::of($netblocks)
             ->addColumn(
                 'actions',
                 function ($netblock) {
                     $actions = Form::open(
                         [
-                            'route' => ['admin.netblocks.destroy', $netblock->id],
+                            'route'  => ['admin.netblocks.destroy', $netblock->id],
                             'method' => 'DELETE',
-                            'class' => 'form-inline'
+                            'class'  => 'form-inline',
                         ]
                     );
-                    $actions .= ' <a href="netblocks/' . $netblock->id .
+                    $actions .= ' <a href="netblocks/'.$netblock->id.
                         '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
                         trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="netblocks/' . $netblock->id .
+                    $actions .= ' <a href="netblocks/'.$netblock->id.
                         '/edit" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> '.
                         trans('misc.button.edit').'</a> ';
                     $actions .= Form::button(
-                        '<span class="glyphicon glyphicon-remove"></span> '. trans('misc.button.delete'),
+                        '<span class="glyphicon glyphicon-remove"></span> '.trans('misc.button.delete'),
                         [
-                            'type' => 'submit',
-                            'class' => 'btn btn-danger btn-xs'
+                            'type'  => 'submit',
+                            'class' => 'btn btn-danger btn-xs',
                         ]
                     );
                     $actions .= Form::close();
+
                     return $actions;
                 }
             )
@@ -101,7 +97,7 @@ class NetblocksController extends Controller
 
         if (!$auth_account->isSystemAccount()) {
             $contacts = Contact::select('contacts.*')
-                ->where('account_id', $auth_account->id )
+                ->where('account_id', $auth_account->id)
                 ->get()->lists('name', 'id');
         } else {
             $contacts = Contact::lists('name', 'id');
@@ -116,7 +112,8 @@ class NetblocksController extends Controller
     /**
      * Export listing to CSV format.
      *
-     * @param  string $format
+     * @param string $format
+     *
      * @return \Illuminate\Http\Response
      */
     public function export($format)
@@ -137,20 +134,20 @@ class NetblocksController extends Controller
                 'contact'   => 'Contact',
                 'enabled'   => 'Status',
                 'first_ip'  => 'First IP',
-                'last_ip'   => 'Last IP'
+                'last_ip'   => 'Last IP',
             ];
 
-            $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+            $output = '"'.implode('", "', $columns).'"'.PHP_EOL;
 
             foreach ($netblocks as $netblock) {
                 $row = [
-                    $netblock->contact->name . ' (' . $netblock->contact->reference . ')',
+                    $netblock->contact->name.' ('.$netblock->contact->reference.')',
                     $netblock['first_ip'],
                     $netblock['last_ip'],
                     $netblock['enabled'] ? 'Enabled' : 'Disabled',
                 ];
 
-                $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+                $output .= '"'.implode('", "', $row).'"'.PHP_EOL;
             }
 
             return response(substr($output, 0, -1), 200)
@@ -166,6 +163,7 @@ class NetblocksController extends Controller
      * Store a newly created resource in storage.
      *
      * @param NetblockFormRequest $netblockForm
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(NetblockFormRequest $netblockForm)
@@ -180,6 +178,7 @@ class NetblocksController extends Controller
      * Display the specified resource.
      *
      * @param Netblock $netblock
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Netblock $netblock)
@@ -193,6 +192,7 @@ class NetblocksController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Netblock $netblock
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Netblock $netblock)
@@ -201,7 +201,7 @@ class NetblocksController extends Controller
 
         if (!$auth_account->isSystemAccount()) {
             $contacts = Contact::select('contacts.*')
-                ->where('account_id', $auth_account->id )
+                ->where('account_id', $auth_account->id)
                 ->get()->lists('name', 'id');
         } else {
             $contacts = Contact::lists('name', 'id');
@@ -217,8 +217,9 @@ class NetblocksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  NetblockFormRequest $netblockForm
-     * @param Netblock $netblock
+     * @param NetblockFormRequest $netblockForm
+     * @param Netblock            $netblock
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(NetblockFormRequest $netblockForm, Netblock $netblock)
@@ -233,6 +234,7 @@ class NetblocksController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Netblock $netblock
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Netblock $netblock)

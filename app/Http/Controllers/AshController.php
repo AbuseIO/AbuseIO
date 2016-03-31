@@ -2,26 +2,26 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Models\Ticket;
-use AbuseIO\Models\Note;
-use AbuseIO\Models\Brand;
 use AbuseIO\Models\Account;
-use Request;
+use AbuseIO\Models\Brand;
+use AbuseIO\Models\Note;
+use AbuseIO\Models\Ticket;
 use Input;
+use Request;
 
 /**
- * Controller handling the ASH interface to contacts
+ * Controller handling the ASH interface to contacts.
  *
  * Class AshController
- * @package AbuseIO\Http\Controllers
  */
 class AshController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param integer $ticketID
+     * @param int    $ticketID
      * @param string $token
+     *
      * @return \Illuminate\Http\Response
      */
     public function index($ticketID, $token)
@@ -48,14 +48,14 @@ class AshController extends Controller
             ->with('allowedChanges', $this->allowedStatusChanges($ticket))
             ->with('token', $token)
             ->with('message', '');
-
     }
 
     /**
-     * Method to add a note to a ticket
+     * Method to add a note to a ticket.
      *
-     * @param integer $ticketID
+     * @param int    $ticketID
      * @param string $token
+     *
      * @return \Illuminate\Http\Response
      */
     public function addNote($ticketID, $token)
@@ -67,11 +67,11 @@ class AshController extends Controller
 
         if ($AshAuthorisedBy == 'TokenIP') {
             $account = Account::find($ticket->ip_contact_account_ip);
-            $submittor = trans('ash.basic.ip') . ' ' . trans('ash.communication.contact');
+            $submittor = trans('ash.basic.ip').' '.trans('ash.communication.contact');
         }
         if ($AshAuthorisedBy == 'TokenDomain') {
             $account = Account::find($ticket->domain_contact_account_id);
-            $submittor = trans('ash.basic.domain') . ' ' . trans('ash.communication.contact');
+            $submittor = trans('ash.basic.domain').' '.trans('ash.communication.contact');
         }
 
         $brand = empty($account) ? Brand::getSystemBrand() : $account->brand;
@@ -110,12 +110,13 @@ class AshController extends Controller
 
     /**
      * @param $ticket
+     *
      * @return array $allowChanges
      */
     private function allowedStatusChanges($ticket)
     {
         $allowedChanges = [
-            'OPEN' => trans('ash.communication.open'),
+            'OPEN'     => trans('ash.communication.open'),
             'RESOLVED' => trans('ash.communication.resolved'),
         ];
 

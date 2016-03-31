@@ -1,20 +1,22 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Netblock
- * @package AbuseIO\Models
- * @property integer $id
+ * Class Netblock.
+ *
+ * @property int $id
  * @property string $first_ip fillable
  * @property string $last_ip fillable
  * @property string $description fillable
- * @property integer $contact_id fillable
- * @property boolean $enabled fillable
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * @property int $contact_id fillable
+ * @property bool $enabled fillable
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class Netblock extends Model
 {
@@ -37,7 +39,7 @@ class Netblock extends Model
         'last_ip',
         'description',
         'contact_id',
-        'enabled'
+        'enabled',
     ];
 
     /*
@@ -47,9 +49,10 @@ class Netblock extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
-     * @param  \AbuseIO\Models\Netblock $netblock
+     * @param \AbuseIO\Models\Netblock $netblock
+     *
      * @return array $rules
      */
     public static function createRules($netblock)
@@ -66,9 +69,10 @@ class Netblock extends Model
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
-     * @param  \AbuseIO\Models\Netblock $netblock
+     * @param \AbuseIO\Models\Netblock $netblock
+     *
      * @return array $rules
      */
     public static function updateRules($netblock)
@@ -91,7 +95,7 @@ class Netblock extends Model
     */
 
     /**
-     * Returns the contact for this netblock
+     * Returns the contact for this netblock.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -107,7 +111,7 @@ class Netblock extends Model
     */
 
     /**
-     * Updates the first IP attribute before giving it
+     * Updates the first IP attribute before giving it.
      *
      * @param string $value
      */
@@ -118,7 +122,7 @@ class Netblock extends Model
     }
 
     /**
-     * Updates the last IP attribute before giving it
+     * Updates the last IP attribute before giving it.
      *
      * @param string $value
      */
@@ -135,10 +139,11 @@ class Netblock extends Model
     */
 
     /**
-     * Static method to check if the account has access to the model instance
+     * Static method to check if the account has access to the model instance.
      *
-     * @param  int                     $model_id
-     * @param  \AbuseIO\Models\Account $account
+     * @param int                     $model_id
+     * @param \AbuseIO\Models\Account $account
+     *
      * @return bool
      */
     public static function checkAccountAccess($model_id, Account $account)
@@ -148,8 +153,8 @@ class Netblock extends Model
             return true;
         }
 
-        $netblock = Netblock::find($model_id);
+        $netblock = self::find($model_id);
 
-        return ($netblock->contact->account->id == $account->id);
+        return $netblock->contact->account->id == $account->id;
     }
 }

@@ -15,7 +15,7 @@ class CreateCommandTest extends TestCase
 {
     public function testWithoutArguments()
     {
-//        Artisan::call('contact:create');
+        //        Artisan::call('contact:create');
 //        $output = Artisan::output();
 //
 //        $this->assertContains('The reference field is required.', $output);
@@ -29,14 +29,13 @@ class CreateCommandTest extends TestCase
         $faker = Factory::create();
         $name = $faker->name;
 
-
         Artisan::call('contact:create', [
-            'name' => $name,
-            'reference' => $faker->domainWord,
+            'name'       => $name,
+            'reference'  => $faker->domainWord,
             'account_id' => Account::getSystemAccount()->id,
-            'enabled' => $faker->boolean(),
-            'email' => $faker->email,
-            'api_host' => $faker->url,
+            'enabled'    => $faker->boolean(),
+            'email'      => $faker->email,
+            'api_host'   => $faker->url,
         ]);
 
         $this->assertContains(
@@ -44,7 +43,7 @@ class CreateCommandTest extends TestCase
             Artisan::output()
         );
 
-        Contact::where("name", $name)->forceDelete();
+        Contact::where('name', $name)->forceDelete();
     }
 
     public function testCreateWithInvalidAccountId()
@@ -52,12 +51,12 @@ class CreateCommandTest extends TestCase
         $faker = Factory::create();
 
         Artisan::call('contact:create', [
-            'name' => $faker->name,
-            'reference' => $faker->domainWord,
+            'name'       => $faker->name,
+            'reference'  => $faker->domainWord,
             'account_id' => '10000',
-            'enabled' => $faker->boolean(),
-            'email' => $faker->email,
-            'api_host' => $faker->url,
+            'enabled'    => $faker->boolean(),
+            'email'      => $faker->email,
+            'api_host'   => $faker->url,
         ]);
 
         $this->assertContains(

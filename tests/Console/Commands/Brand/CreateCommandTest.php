@@ -27,15 +27,14 @@ class CreateCommandTest extends TestCase
     public function testCreateValid()
     {
         Artisan::call('brand:create', [
-            "name" => "test_dummy",
-            "company_name" => "test_company_name",
-            "introduction_text" => "abcdefg"
+            'name'              => 'test_dummy',
+            'company_name'      => 'test_company_name',
+            'introduction_text' => 'abcdefg',
         ]);
         $output = Artisan::output();
 
         $this->assertContains('The brand has been created', $output);
 
-        Brand::where("name", "test_dummy")->forceDelete();
-
+        Brand::where('name', 'test_dummy')->forceDelete();
     }
 }

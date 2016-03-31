@@ -56,7 +56,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'root@localhost.net'),
-        'name' => env('MAIL_FROM_NAME', 'AbuseIO Password Reset'),
+        'name'    => env('MAIL_FROM_NAME', 'AbuseIO Password Reset'),
     ],
 
     /*
@@ -139,6 +139,6 @@ return [
         'enabled'       => false,
         'key'           => '/opt/abuseio/config/smikme/key.pem',
         'certificate'   => '/opt/abuseio/config/smikme/certificate.pem',
-    ]
+    ],
 
 ];

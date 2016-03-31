@@ -1,11 +1,12 @@
 <?php
+
 Route::model('users', 'AbuseIO\Models\User');
 Route::resource('users', 'UsersController');
 
 Route::group(
     [
         'prefix' => 'users',
-        'as' => 'users.',
+        'as'     => 'users.',
     ],
     function () {
         // Search users
@@ -13,8 +14,8 @@ Route::group(
             'search/{one?}/{two?}/{three?}',
             [
                 'middleware' => 'permission:users_view',
-                'as' => 'search',
-                'uses' => 'UsersController@search'
+                'as'         => 'search',
+                'uses'       => 'UsersController@search',
             ]
         );
 
@@ -23,8 +24,8 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:users_view',
-                'as' => 'index',
-                'uses' => 'UsersController@index'
+                'as'         => 'index',
+                'uses'       => 'UsersController@index',
             ]
         );
 
@@ -33,8 +34,8 @@ Route::group(
             '{users}',
             [
                 'middleware' => 'permission:users_view',
-                'as' => 'show',
-                'uses' => 'UsersController@show'
+                'as'         => 'show',
+                'uses'       => 'UsersController@show',
             ]
         );
 
@@ -43,8 +44,8 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:users_export',
-                'as' => 'export',
-                'uses' => 'UsersController@export'
+                'as'         => 'export',
+                'uses'       => 'UsersController@export',
             ]
         );
 
@@ -53,16 +54,16 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:users_create',
-                'as' => 'create',
-                'uses' => 'UsersController@create'
+                'as'         => 'create',
+                'uses'       => 'UsersController@create',
             ]
         );
         route::post(
             '',
             [
                 'middleware' => 'permission:users_create',
-                'as' => 'store',
-                'uses' => 'UsersController@store'
+                'as'         => 'store',
+                'uses'       => 'UsersController@store',
             ]
         );
 
@@ -71,8 +72,8 @@ Route::group(
             '{users}/disable',
             [
                 'middleware' => 'permission:users_disable',
-                'as' => 'disable',
-                'uses' => 'UsersController@disable'
+                'as'         => 'disable',
+                'uses'       => 'UsersController@disable',
             ]
         );
 
@@ -81,8 +82,8 @@ Route::group(
             '{users}/enable',
             [
                 'middleware' => 'permission:users_enable',
-                'as' => 'enable',
-                'uses' => 'UsersController@enable'
+                'as'         => 'enable',
+                'uses'       => 'UsersController@enable',
             ]
         );
 
@@ -91,24 +92,24 @@ Route::group(
             '{users}/edit',
             [
                 'middleware' => 'permission:users_edit',
-                'as' => 'edit',
-                'uses' => 'UsersController@edit'
+                'as'         => 'edit',
+                'uses'       => 'UsersController@edit',
             ]
         );
         route::patch(
             '{users}',
             [
                 'middleware' => 'permission:users_edit',
-                'as' => 'update',
-                'uses' => 'UsersController@update'
+                'as'         => 'update',
+                'uses'       => 'UsersController@update',
             ]
         );
         route::put(
             '{users}',
             [
                 'middleware' => 'permission:users_edit',
-                'as' => 'update',
-                'uses' => 'UsersController@update'
+                'as'         => 'update',
+                'uses'       => 'UsersController@update',
             ]
         );
 
@@ -117,8 +118,8 @@ Route::group(
             '/{users}',
             [
                 'middleware' => 'permission:users_delete',
-                'as' => 'destroy',
-                'uses' => 'UsersController@destroy'
+                'as'         => 'destroy',
+                'uses'       => 'UsersController@destroy',
             ]
         );
 

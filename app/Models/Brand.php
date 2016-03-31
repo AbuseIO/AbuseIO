@@ -2,25 +2,23 @@
 
 namespace AbuseIO\Models;
 
-use AbuseIO\Models\Account;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * Class Account
- * @package AbuseIO\Models
+ * Class Account.
  *
 
- * @property integer $id
+ * @property int $id
  * @property string $name fillable
  * @property string $company_name fillable
  * @property string $logo fillable
  * @property string $introduction_text fillable
- * @property boolean $systembrand fillable
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * @property bool $systembrand fillable
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
 
  */
 class Brand extends Model
@@ -63,7 +61,7 @@ class Brand extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array $rules
      */
@@ -83,15 +81,16 @@ class Brand extends Model
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
-     * @param  \AbuseIO\Models\Brand $brand
+     * @param \AbuseIO\Models\Brand $brand
+     *
      * @return array $rules
      */
     public static function updateRules($brand)
     {
         $rules = [
-            'name'              => 'required|unique:brands,name,'. $brand->id,
+            'name'              => 'required|unique:brands,name,'.$brand->id,
             'company_name'      => 'required',
             'introduction_text' => 'required',
             'creator_id'        => 'required|integer|exists:accounts,id',
@@ -124,13 +123,13 @@ class Brand extends Model
         return $this->belongsTo('AbuseIO\Models\Account', 'creator_id');
     }
 
-
     /**
      * @return File
      */
     public static function getDefaultLogo()
     {
         $logo = new File(base_path('public/images/logo_150.png'), true);
+
         return $logo;
     }
 
@@ -141,7 +140,7 @@ class Brand extends Model
     */
 
     /**
-     * Returns the owner of this brand
+     * Returns the owner of this brand.
      *
      * @return \AbuseIO\Models\Account
      */
@@ -151,7 +150,7 @@ class Brand extends Model
     }
 
     /**
-     * Returns the owner (Account) of this brand
+     * Returns the owner (Account) of this brand.
      *
      * @return \AbuseIO\Models\Account
      */
@@ -167,10 +166,11 @@ class Brand extends Model
     */
 
     /**
-     * Static method to check if the account has access to the model instance
+     * Static method to check if the account has access to the model instance.
      *
      * @param int                     $model_id
      * @param \AbuseIO\Models\Account $account
+     *
      * @return bool
      */
     public static function checkAccountAccess($model_id, Account $account)
@@ -180,37 +180,37 @@ class Brand extends Model
             return true;
         }
 
-        $brand = Brand::find($model_id);
+        $brand = self::find($model_id);
 
         $allowed = $brand->creator_id == $account->id;
 
-        return ($allowed);
+        return $allowed;
     }
 
     /**
-     * Return the default Brand
+     * Return the default Brand.
      *
      * @return mixed
      */
     public static function getSystemBrand()
     {
-        return Brand::where('systembrand', true)->first();
+        return self::where('systembrand', true)->first();
     }
 
     /**
-     * Return true when the current brand is the system default
+     * Return true when the current brand is the system default.
      *
      * @return bool
      */
     public function isSystemBrand()
     {
-        return ($this->systembrand);
+        return $this->systembrand;
     }
 
     /**
      * Check to see if we can delete the current brand
      * The brand can only be deleted, if it isn't linked to accounts anymore
-     * and if it isn't the system brand
+     * and if it isn't the system brand.
      *
      * @return bool
      */

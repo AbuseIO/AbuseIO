@@ -10,8 +10,7 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
 /**
- * Class CreateCommand
- * @package AbuseIO\Console\Commands\Account
+ * Class CreateCommand.
  */
 class CreateCommand extends AbstractCreateCommand
 {
@@ -23,7 +22,7 @@ class CreateCommand extends AbstractCreateCommand
         return new InputDefinition(
             [
                 new InputArgument('name', InputArgument::REQUIRED, 'account name'),
-                new InputArgument("brand_id", InputArgument::REQUIRED, "brand id"),
+                new InputArgument('brand_id', InputArgument::REQUIRED, 'brand id'),
                 //new InputArgument('description', null, 'description'),
                 new InputArgument('disabled', InputArgument::OPTIONAL, 'true|false, Set the account to be enabled'),
             ]
@@ -31,15 +30,15 @@ class CreateCommand extends AbstractCreateCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getAsNoun()
     {
-        return "account";
+        return 'account';
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getModelFromRequest()
     {
@@ -48,13 +47,13 @@ class CreateCommand extends AbstractCreateCommand
         $account->name = $this->argument('name');
         $account->brand_id = $this->argument('brand_id');
         //$account->description = $this->argument('description');
-        $account->disabled = $this->argument('disabled') === "true" ? true : false;
+        $account->disabled = $this->argument('disabled') === 'true' ? true : false;
 
         return $account;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getValidator($model)
     {

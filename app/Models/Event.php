@@ -1,20 +1,22 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Event
- * @package AbuseIO\Models
- * @property integer $id
- * @property integer $ticket_id fillable
- * @property integer $evidence_id fillable
+ * Class Event.
+ *
+ * @property int $id
+ * @property int $ticket_id fillable
+ * @property int $evidence_id fillable
  * @property string $source fillable
- * @property integer $timestamp fillable
+ * @property int $timestamp fillable
  * @property string $information fillable
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class Event extends Model
 {
@@ -37,7 +39,7 @@ class Event extends Model
         'evidence_id',
         'source',
         'timestamp',
-        'information'
+        'information',
     ];
 
     /*
@@ -47,7 +49,7 @@ class Event extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array $rules
      */
@@ -71,7 +73,7 @@ class Event extends Model
     */
 
     /**
-     * Return the evidence for this event
+     * Return the evidence for this event.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -87,7 +89,7 @@ class Event extends Model
     */
 
     /**
-     * Mutates the seen attribute to a date format
+     * Mutates the seen attribute to a date format.
      *
      * @return bool|string
      */
@@ -103,7 +105,7 @@ class Event extends Model
     */
 
     /**
-     * Return a list of all known types, usefull for selections
+     * Return a list of all known types, usefull for selections.
      *
      * @return array $types
      */
@@ -118,7 +120,7 @@ class Event extends Model
     }
 
     /**
-     * Return a list of all known classifications, usefull for selections
+     * Return a list of all known classifications, usefull for selections.
      *
      * @return array $classifications
      */
@@ -133,10 +135,11 @@ class Event extends Model
     }
 
     /**
-     * Return a list of all known statuses in the currently selected locale
+     * Return a list of all known statuses in the currently selected locale.
      *
-     * @param  string $entity   Entity can be: 'abusedesk', 'contact', 'all'(default)
-     * @return array  $statuses Array of statuses
+     * @param string $entity Entity can be: 'abusedesk', 'contact', 'all'(default)
+     *
+     * @return array $statuses Array of statuses
      */
     public static function getStatuses($entity = 'all')
     {

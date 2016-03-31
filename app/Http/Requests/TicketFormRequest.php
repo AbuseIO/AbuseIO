@@ -3,12 +3,10 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Incident;
-use AbuseIO\Models\Evidence;
 use Input;
 
 /**
- * Class TicketFormRequest
- * @package AbuseIO\Http\Requests
+ * Class TicketFormRequest.
  */
 class TicketFormRequest extends Request
 {
@@ -44,11 +42,11 @@ class TicketFormRequest extends Request
                 break;
         }
 
-        return [ ];
+        return [];
     }
 
     /**
-     * Transform the form results before sending it to validation
+     * Transform the form results before sending it to validation.
      *
      * @param array $query
      * @param array $request
@@ -56,18 +54,17 @@ class TicketFormRequest extends Request
      * @param array $cookies
      * @param array $files
      * @param array $server
-     * @param null $content
+     * @param null  $content
      */
     public function initialize(
-        array $query = array(),
-        array $request = array(),
-        array $attributes = array(),
-        array $cookies = array(),
-        array $files = array(),
-        array $server = array(),
+        array $query = [],
+        array $request = [],
+        array $attributes = [],
+        array $cookies = [],
+        array $files = [],
+        array $server = [],
         $content = null
-    )
-    {
+    ) {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
         $input = Input::all();
@@ -75,7 +72,7 @@ class TicketFormRequest extends Request
         if (strtotime($input['timestamp']) !== false) {
             $input['timestamp'] = strtotime($input['timestamp']);
         }
-        
+
         if (!json_decode($input['information'])) {
             $input['information'] = json_encode(['report' => $input['information']]);
         }

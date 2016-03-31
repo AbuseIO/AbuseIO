@@ -1,11 +1,12 @@
 <?php
+
 Route::model('tickets', 'AbuseIO\Models\Ticket');
 Route::resource('tickets', 'TicketsController');
 
 Route::group(
     [
         'prefix' => 'tickets',
-        'as' => 'tickets.',
+        'as'     => 'tickets.',
     ],
     function () {
         /*
@@ -15,8 +16,8 @@ Route::group(
             'search/{one?}/{two?}/{three?}/{four?}/{five?}',
             [
                 'middleware' => 'permission:tickets_view',
-                'as' => 'search',
-                'uses' => 'TicketsController@search'
+                'as'         => 'search',
+                'uses'       => 'TicketsController@search',
             ]
         );
 
@@ -27,8 +28,8 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:tickets_view',
-                'as' => 'index',
-                'uses' => 'TicketsController@index'
+                'as'         => 'index',
+                'uses'       => 'TicketsController@index',
             ]
         );
 
@@ -39,8 +40,8 @@ Route::group(
             '{tickets}',
             [
                 'middleware' => 'permission:tickets_view',
-                'as' => 'show',
-                'uses' => 'TicketsController@show'
+                'as'         => 'show',
+                'uses'       => 'TicketsController@show',
             ]
         );
 
@@ -51,8 +52,8 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:tickets_export',
-                'as' => 'export',
-                'uses' => 'TicketsController@export'
+                'as'         => 'export',
+                'uses'       => 'TicketsController@export',
             ]
         );
 
@@ -63,16 +64,16 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:tickets_create',
-                'as' => 'create',
-                'uses' => 'TicketsController@create'
+                'as'         => 'create',
+                'uses'       => 'TicketsController@create',
             ]
         );
         Route::post(
             '',
             [
                 'middleware' => 'permission:tickets_create',
-                'as' => 'store',
-                'uses' => 'TicketsController@store'
+                'as'         => 'store',
+                'uses'       => 'TicketsController@store',
             ]
         );
 
@@ -83,24 +84,24 @@ Route::group(
             '{tickets}/edit',
             [
                 'middleware' => 'permission:tickets_edit',
-                'as' => 'edit',
-                'uses' => 'TicketsController@edit'
+                'as'         => 'edit',
+                'uses'       => 'TicketsController@edit',
             ]
         );
         Route::patch(
             '{tickets}',
             [
                 'middleware' => 'permission:tickets_edit',
-                'as' => 'update',
-                'uses' => 'TicketsController@update'
+                'as'         => 'update',
+                'uses'       => 'TicketsController@update',
             ]
         );
         Route::put(
             '{tickets}',
             [
                 'middleware' => 'permission:tickets_edit',
-                'as' => 'update',
-                'uses' => 'TicketsController@update'
+                'as'         => 'update',
+                'uses'       => 'TicketsController@update',
             ]
         );
 
@@ -111,8 +112,8 @@ Route::group(
             '/{tickets}',
             [
                 'middleware' => 'permission:tickets_delete',
-                'as' => 'destroy',
-                'uses' => 'TicketsController@destroy'
+                'as'         => 'destroy',
+                'uses'       => 'TicketsController@destroy',
             ]
         );
 
@@ -121,15 +122,15 @@ Route::group(
         */
         Route::group(
             [
-                'prefix' => '{tickets}/update'
+                'prefix' => '{tickets}/update',
             ],
             function () {
                 Route::get(
                     '{who?}',
                     [
                         'middleware' => 'permission:tickets_edit',
-                        'as' => 'update',
-                        'uses' => 'TicketsController@update'
+                        'as'         => 'update',
+                        'uses'       => 'TicketsController@update',
                     ]
                 );
             }
@@ -140,15 +141,15 @@ Route::group(
         */
         Route::group(
             [
-                'prefix' => '{tickets}/notify'
+                'prefix' => '{tickets}/notify',
             ],
             function () {
                 Route::get(
                     '{who?}',
                     [
                         'middleware' => 'permission:tickets_edit',
-                        'as' => 'notify',
-                        'uses' => 'TicketsController@notify'
+                        'as'         => 'notify',
+                        'uses'       => 'TicketsController@notify',
                     ]
                 );
             }
@@ -159,15 +160,15 @@ Route::group(
         */
         Route::group(
             [
-                'prefix' => '{tickets}/status'
+                'prefix' => '{tickets}/status',
             ],
             function () {
                 Route::get(
                     '{status}',
                     [
                         'middleware' => 'permission:tickets_edit',
-                        'as' => 'status',
-                        'uses' => 'TicketsController@status'
+                        'as'         => 'status',
+                        'uses'       => 'TicketsController@status',
                     ]
                 );
             }

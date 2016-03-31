@@ -16,7 +16,7 @@ class CreateCommandTest extends TestCase
 
     public function testWithoutArguments()
     {
-//        Artisan::call('user:create');
+        //        Artisan::call('user:create');
 //        $output = Artisan::output();
 //
 //        $this->assertContains('The first name field is required.', $output);
@@ -29,12 +29,12 @@ class CreateCommandTest extends TestCase
 
         Artisan::call('user:create', [
             'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'email' => $user->email,
-            'password' => 'jiperish',
-            'account' => $user->account_id,
-            'language' => $user->locale,
-            'disabled' => $user->disabled,
+            'last_name'  => $user->last_name,
+            'email'      => $user->email,
+            'password'   => 'jiperish',
+            'account'    => $user->account_id,
+            'language'   => $user->locale,
+            'disabled'   => $user->disabled,
         ]);
         $output = Artisan::output();
 
@@ -47,12 +47,12 @@ class CreateCommandTest extends TestCase
 
         Artisan::call('user:create', [
             'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'email' => $user->email,
-            'password' => 'jiperish',
-            'account' => 'not_a_valid_account_name',
-            'language' => $user->locale,
-            'disabled' => $user->disabled,
+            'last_name'  => $user->last_name,
+            'email'      => $user->email,
+            'password'   => 'jiperish',
+            'account'    => 'not_a_valid_account_name',
+            'language'   => $user->locale,
+            'disabled'   => $user->disabled,
         ]);
         $output = Artisan::output();
 
@@ -66,11 +66,11 @@ class CreateCommandTest extends TestCase
 
         Artisan::call('user:create', [
             'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'email' => $user->email,
-            'password' => 'jiberish',
-            'account' => 'Default',
-            'language' => $user->locale,
+            'last_name'  => $user->last_name,
+            'email'      => $user->email,
+            'password'   => 'jiberish',
+            'account'    => 'Default',
+            'language'   => $user->locale,
         ]);
         $output = Artisan::output();
 
@@ -89,12 +89,12 @@ class CreateCommandTest extends TestCase
 
         Artisan::call('user:create', [
             'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'email' => $user->email,
-            'password' => 'jiperish',
-            'account' => 'Default',
-            'language' => $user->locale,
-            'disabled' => 'true'
+            'last_name'  => $user->last_name,
+            'email'      => $user->email,
+            'password'   => 'jiperish',
+            'account'    => 'Default',
+            'language'   => $user->locale,
+            'disabled'   => 'true',
         ]);
         $output = Artisan::output();
 
@@ -113,10 +113,10 @@ class CreateCommandTest extends TestCase
 
         Artisan::call('user:create', [
             'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'email' => $user->email,
+            'last_name'  => $user->last_name,
+            'email'      => $user->email,
 
-            'account' => 'Default',
+            'account'  => 'Default',
             'language' => $user->locale,
             'disabled' => $user->disabled,
         ]);
@@ -128,12 +128,13 @@ class CreateCommandTest extends TestCase
 
     /**
      * @param $output
+     *
      * @return $id
      */
     protected function returnIdFromSuccessOutput($output)
     {
-        $startPos = strpos($output, "id: ") + 4;
-        $endPos = strpos($output, ")");
+        $startPos = strpos($output, 'id: ') + 4;
+        $endPos = strpos($output, ')');
         $length = $endPos - $startPos;
 
         return substr($output, $startPos, $length);

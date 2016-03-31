@@ -7,46 +7,45 @@ use AbuseIO\Models\Brand;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\Brand
+ * Class ShowCommand.
  */
 class ShowCommand extends AbstractShowCommand
 {
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAsNoun()
     {
-        return "brand";
+        return 'brand';
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAllowedArguments()
     {
-        return ["id", "name"];
+        return ['id', 'name'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getFields()
     {
-        return ["id", "name", "company_name", "introduction_text"];
+        return ['id', 'name', 'company_name', 'introduction_text'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getCollectionWithArguments()
     {
-        return Brand::where("name", "like", "%".$this->argument("brand")."%")
-            ->orWhere("id", $this->argument("brand"))->get($this->getFields());
+        return Brand::where('name', 'like', '%'.$this->argument('brand').'%')
+            ->orWhere('id', $this->argument('brand'))->get($this->getFields());
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function defineInput()
     {
@@ -55,7 +54,7 @@ class ShowCommand extends AbstractShowCommand
                 'brand',
                 InputArgument::REQUIRED,
                 'Use the id or name for a brand to show it.'
-            )
+            ),
         ];
     }
 }

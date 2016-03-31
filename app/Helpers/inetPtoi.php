@@ -16,7 +16,7 @@ function inetPtoi($ip)
 
     // fix IPv4
     if (strpos($ip, '.') !== false) {
-        $parts = array(1 => 0, 2 => 0, 3 => 0, 4 => $parts[1]);
+        $parts = [1 => 0, 2 => 0, 3 => 0, 4 => $parts[1]];
     }
 
     foreach ($parts as &$part) {
