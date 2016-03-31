@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for Analytics
+ * Translations for Analytics.
  */
 return [
     // Headers

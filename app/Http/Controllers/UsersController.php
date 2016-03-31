@@ -2,24 +2,21 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\UserFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\User;
 use Config;
-use Log;
-use yajra\Datatables\Datatables;
-use Redirect;
 use Form;
+use Log;
+use Redirect;
+use yajra\Datatables\Datatables;
 
 /**
- * Class UsersController
- * @package AbuseIO\Http\Controllers
+ * Class UsersController.
  */
 class UsersController extends Controller
 {
-
     /**
      * UsersController constructor.
      */
@@ -53,36 +50,37 @@ class UsersController extends Controller
                 function ($user) {
                     $actions = Form::open(
                         [
-                            'route' => ['admin.users.destroy', $user->id],
+                            'route'  => ['admin.users.destroy', $user->id],
                             'method' => 'DELETE',
-                            'class' => 'form-inline'
+                            'class'  => 'form-inline',
                         ]
                     );
-                    $actions .= ' <a href="users/' . $user->id .
+                    $actions .= ' <a href="users/'.$user->id.
                         '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
                         trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="users/' . $user->id .
+                    $actions .= ' <a href="users/'.$user->id.
                         '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
                         trans('misc.button.edit').'</a> ';
                     if ($user->disabled) {
-                        $actions .= ' <a href="users/' . $user->id .
+                        $actions .= ' <a href="users/'.$user->id.
                             '/enable" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok-circle"></i> '.
                             trans('misc.button.enable').'</a> ';
                     } else {
-                        $actions .= ' <a href="users/' . $user->id .
+                        $actions .= ' <a href="users/'.$user->id.
                             '/disable" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-ban-circle"></i> '.
                             trans('misc.button.disable').'</a> ';
                     }
                     $disabled = ($user->id == 1) ? ' disabled' : '';
 
                     $actions .= Form::button(
-                        '<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'),
+                        '<i class="glyphicon glyphicon-remove"></i> '.trans('misc.button.delete'),
                         [
-                            'type' => 'submit',
-                            'class' => 'btn btn-danger btn-xs'. $disabled
+                            'type'  => 'submit',
+                            'class' => 'btn btn-danger btn-xs'.$disabled,
                         ]
                     );
                     $actions .= Form::close();
+
                     return $actions;
                 }
             )
@@ -113,7 +111,7 @@ class UsersController extends Controller
         $accounts = Account::lists('name', 'id');
         $roles = Role::lists('name', 'id');
 
-        $locales = array();
+        $locales = [];
         foreach (Config::get('app.locales') as $locale => $locale_data) {
             $locales[$locale] = $locale_data[0];
         }
@@ -133,6 +131,7 @@ class UsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param UserFormRequest $userForm
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(UserFormRequest $userForm)
@@ -160,7 +159,8 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  User   $user
+     * @param User $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -180,7 +180,8 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  User   $user
+     * @param User $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -188,7 +189,7 @@ class UsersController extends Controller
         $accounts = Account::lists('name', 'id');
         $roles = Role::lists('name', 'id');
 
-        $locales = array();
+        $locales = [];
         foreach (Config::get('app.locales') as $locale => $locale_data) {
             $locales[$locale] = $locale_data[0];
         }
@@ -208,8 +209,9 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserFormRequest $userForm
-     * @param  User            $user
+     * @param UserFormRequest $userForm
+     * @param User            $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UserFormRequest $userForm, User $user)
@@ -242,49 +244,52 @@ class UsersController extends Controller
     }
 
     /**
-     * Enable the user
+     * Enable the user.
      *
      * @param User $user
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function enable(User $user)
     {
         if (!$user->mayEnable($this->auth_user)) {
             return Redirect::route('admin.users.index')
-                ->with('message', 'User is not authorized to enable user "'. $user->fullName() . '"');
+                ->with('message', 'User is not authorized to enable user "'.$user->fullName().'"');
         }
 
         $user->disabled = false;
         $user->save();
 
         return Redirect::route('admin.users.index')
-            ->with('message', 'User "'. $user->fullName() . '" has been enabled');
+            ->with('message', 'User "'.$user->fullName().'" has been enabled');
     }
 
     /**
-     * Disable the user
+     * Disable the user.
      *
      * @param User $user
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function disable(User $user)
     {
         if (!$user->mayDisable($this->auth_user)) {
             return Redirect::route('admin.users.index')
-                ->with('message', 'User is not authorized to disable user "'. $user->fullName() . '"');
+                ->with('message', 'User is not authorized to disable user "'.$user->fullName().'"');
         }
 
         $user->disabled = true;
         $user->save();
 
         return Redirect::route('admin.users.index')
-            ->with('message', 'User "'. $user->fullName() . '" has been disabled');
+            ->with('message', 'User "'.$user->fullName().'" has been disabled');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  User   $user
+     * @param User $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)

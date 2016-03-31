@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 
 class EventsTableSeeder extends Seeder
 {
-
     public function run()
     {
         DB::table('events')->delete();
@@ -19,11 +18,11 @@ class EventsTableSeeder extends Seeder
                 'information'               => json_encode(
                     [
                     'engine' => 'infected website blob',
-                    'uri' => '/dir1'
+                    'uri'    => '/dir1',
                     ]
                 ),
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
         ];
 

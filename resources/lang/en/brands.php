@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for Brands
+ * Translations for Brands.
  */
 return [
     // Headers
@@ -14,4 +14,4 @@ return [
 
     // Miscellaneous
     'no_brands'         => 'No brands',
-    'logo'              => 'Company logo',];
+    'logo'              => 'Company logo', ];

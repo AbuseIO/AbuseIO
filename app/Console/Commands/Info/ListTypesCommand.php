@@ -5,42 +5,45 @@ namespace AbuseIO\Console\Commands\Info;
 use AbuseIO\Console\Commands\AbstractListCommand;
 
 /**
- * Class ListTypesCommand
- * @package AbuseIO\Console\Commands\Info
+ * Class ListTypesCommand.
  */
 class ListTypesCommand extends AbstractListCommand
 {
     /**
      * @var array
      */
-    protected $filterArguments = [ ];
+    protected $filterArguments = [];
 
     /**
-     * Override to the command description field
+     * Override to the command description field.
+     *
      * @var string
      */
     protected $commandDescription = 'Shows a list of available types';
 
     /**
-     * Override to the command name field
+     * Override to the command name field.
+     *
      * @var string
      */
     protected $commandName = 'listtypes';
 
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
     protected $headers = ['Tag', 'Name'];
 
     /**
-     * The fields of the table / database row
+     * The fields of the table / database row.
+     *
      * @var array
      */
     protected $fields = ['Tag', 'Name'];
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -48,7 +51,7 @@ class ListTypesCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
@@ -60,15 +63,16 @@ class ListTypesCommand extends AbstractListCommand
                 $taglist[$tag] =
                     [
                         $tag,
-                        $typeInfo['name']
+                        $typeInfo['name'],
                     ];
             }
         }
+
         return $taglist;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
@@ -77,17 +81,18 @@ class ListTypesCommand extends AbstractListCommand
             $taglist[$tag] =
                 [
                     $tag,
-                    $typeInfo['name']
+                    $typeInfo['name'],
                 ];
         }
+
         return $taglist;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "info";
+        return 'info';
     }
 }

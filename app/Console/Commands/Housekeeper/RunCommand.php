@@ -2,30 +2,29 @@
 
 namespace AbuseIO\Console\Commands\Housekeeper;
 
-use Illuminate\Console\Command;
-use AbuseIO\Models\Ticket;
-use AbuseIO\Models\Evidence;
-use Storage;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use AbuseIO\Jobs\QueueTest;
 use AbuseIO\Jobs\AlertAdmin;
+use AbuseIO\Jobs\QueueTest;
+use AbuseIO\Models\Evidence;
 use AbuseIO\Models\FailedJob;
 use AbuseIO\Models\Job;
-use Validator;
-use Log;
+use AbuseIO\Models\Ticket;
 use Carbon;
+use Illuminate\Console\Command;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Log;
+use Storage;
+use Validator;
 
 /**
- * Class RunCommand
- * @package AbuseIO\Console\Commands\Housekeeper
+ * Class RunCommand.
  */
 class RunCommand extends Command
 {
-
     use DispatchesJobs;
 
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $signature = 'housekeeper:run
@@ -33,6 +32,7 @@ class RunCommand extends Command
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Run housekeeping processes';
@@ -48,12 +48,12 @@ class RunCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     public function handle()
     {
         Log::debug(
-            get_class($this) . ': KNOCK KNOCK! Housekeeping'
+            get_class($this).': KNOCK KNOCK! Housekeeping'
         );
 
         /*
@@ -83,18 +83,17 @@ class RunCommand extends Command
         }
 
         return true;
-
     }
 
     /**
      * Walk thru all files in the mailarchive folder and remove them from the system.
      *
-     * @return boolean
+     * @return bool
      */
     private function removeUnlinkedEvidence()
     {
         Log::info(
-            get_class($this) . ': Housekeeper is starting to remove orphaned mailarchive items'
+            get_class($this).': Housekeeper is starting to remove orphaned mailarchive items'
         );
 
         $path = '/mailarchive/';
@@ -128,31 +127,30 @@ class RunCommand extends Command
                 // Check the database if it exists
                 if (Evidence::where('filename', '=', $file)->count() === 0) {
                     Log::warning(
-                        get_class($this) . ": removing orphaned mailarchive item {$file}"
+                        get_class($this).": removing orphaned mailarchive item {$file}"
                     );
 
                     try {
                         Storage::delete($file);
                     } catch (\Exception $e) {
                         Log::error(
-                            get_class($this) . ": unable to remove orphaned mailarchive item {$file}"
+                            get_class($this).": unable to remove orphaned mailarchive item {$file}"
                         );
                     }
-
                 }
             }
         }
     }
 
     /**
-     * Walk thru all jobs and queues to make sure they are working, including firing a testjob at them
+     * Walk thru all jobs and queues to make sure they are working, including firing a testjob at them.
      *
-     * @return boolean
+     * @return bool
      */
     private function checkQueues()
     {
         Log::info(
-            get_class($this) . ': Housekeeper is starting queue checks'
+            get_class($this).': Housekeeper is starting queue checks'
         );
 
         $jobLimit = new Carbon('1 hour ago');
@@ -184,12 +182,12 @@ class RunCommand extends Command
         $hangCount = count($hangs);
         if ($hangCount != 0) {
             Log::warning(
-                get_class($this) . ": Housekeeper detected {$hangCount} jobs that are stuck in one or more queues!"
+                get_class($this).": Housekeeper detected {$hangCount} jobs that are stuck in one or more queues!"
             );
 
             if (config('main.housekeeping.enable_queue_problem_alerts')) {
                 AlertAdmin::send(
-                    "Alert: There are {$hangCount} jobs that are stuck:" . PHP_EOL . PHP_EOL .
+                    "Alert: There are {$hangCount} jobs that are stuck:".PHP_EOL.PHP_EOL.
                     implode(PHP_EOL, $hangs)
                 );
             }
@@ -207,12 +205,12 @@ class RunCommand extends Command
             }
 
             Log::warning(
-                get_class($this) . ": Housekeeper detected failed {$failedCount} jobs which need to be handled!"
+                get_class($this).": Housekeeper detected failed {$failedCount} jobs which need to be handled!"
             );
 
             if (config('main.housekeeping.enable_queue_problem_alerts')) {
                 AlertAdmin::send(
-                    "Alert: There are {$failedCount} jobs that have failed:" . PHP_EOL . PHP_EOL .
+                    "Alert: There are {$failedCount} jobs that have failed:".PHP_EOL.PHP_EOL.
                     implode(PHP_EOL, $failed)
                 );
             }
@@ -226,17 +224,17 @@ class RunCommand extends Command
     }
 
     /**
-     * Walk thru all tickets to see which need closing
+     * Walk thru all tickets to see which need closing.
      *
-     * @return boolean
+     * @return bool
      */
     private function ticketsClosing()
     {
         Log::info(
-            get_class($this) . ': Housekeeper is starting to close old tickets'
+            get_class($this).': Housekeeper is starting to close old tickets'
         );
 
-        $closeOlderThen = strtotime(config('main.housekeeping.tickets_close_after') . " ago");
+        $closeOlderThen = strtotime(config('main.housekeeping.tickets_close_after').' ago');
         $validator = Validator::make(
             [
                 'mailarchive_remove_after'    => $closeOlderThen,
@@ -251,13 +249,12 @@ class RunCommand extends Command
 
             $message = '';
             foreach ($messages->all() as $messagePart) {
-                $message .= $messagePart . PHP_EOL;
+                $message .= $messagePart.PHP_EOL;
             }
             echo $message;
 
             return false;
         } else {
-
             $tickets = Ticket::where('status_id', '!=', 'CLOSED')->get();
 
             foreach ($tickets as $ticket) {
@@ -277,17 +274,17 @@ class RunCommand extends Command
     }
 
     /**
-     * Walk thru mailarchive to see which need pruning
+     * Walk thru mailarchive to see which need pruning.
      *
-     * @return boolean
+     * @return bool
      */
     private function mailarchivePruning()
     {
         Log::info(
-            get_class($this) . ': Housekeeper is starting to remove old mailarchive items'
+            get_class($this).': Housekeeper is starting to remove old mailarchive items'
         );
 
-        $deleteOlderThen = strtotime(config('main.housekeeping.mailarchive_remove_after') . " ago");
+        $deleteOlderThen = strtotime(config('main.housekeeping.mailarchive_remove_after').' ago');
         $validator = Validator::make(
             [
                 'mailarchive_remove_after'    => $deleteOlderThen,
@@ -302,18 +299,17 @@ class RunCommand extends Command
 
             $message = '';
             foreach ($messages->all() as $messagePart) {
-                $message .= $messagePart . PHP_EOL;
+                $message .= $messagePart.PHP_EOL;
             }
             echo $message;
 
             return false;
         } else {
-
             $evidences = Evidence::where('created_at', '<=', date('Y-m-d H:i:s', $deleteOlderThen))->get();
 
             foreach ($evidences as $evidence) {
-                $path = storage_path() . '/mailarchive/';
-                Storage::delete($path . $evidence->filename);
+                $path = storage_path().'/mailarchive/';
+                Storage::delete($path.$evidence->filename);
                 $evidence->delete();
             }
         }

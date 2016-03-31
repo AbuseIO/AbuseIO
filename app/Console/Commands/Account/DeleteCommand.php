@@ -6,48 +6,46 @@ use AbuseIO\Console\Commands\AbstractDeleteCommand;
 use AbuseIO\Models\Account;
 use Symfony\Component\Console\Input\InputArgument;
 
-
 /**
- * Class DeleteCommand
- * @package AbuseIO\Console\Commands\Account
+ * Class DeleteCommand.
  */
 class DeleteCommand extends AbstractDeleteCommand
 {
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "account";
+        return 'account';
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAllowedArguments()
     {
-        return ["id"];
+        return ['id'];
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getObjectByArguments()
     {
-        return Account::find($this->argument("id"));
+        return Account::find($this->argument('id'));
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function defineInput()
     {
-        return array(
+        return [
             new InputArgument(
                 'id',
                 InputArgument::REQUIRED,
                 'Use the id for a account to delete it.'
-            )
-        );
+            ),
+        ];
     }
 }

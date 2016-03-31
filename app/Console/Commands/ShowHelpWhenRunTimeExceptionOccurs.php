@@ -2,15 +2,16 @@
 
 namespace AbuseIO\Console\Commands;
 
+use Artisan;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Artisan;
 
 trait ShowHelpWhenRunTimeExceptionOccurs
 {
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
+     *
      * @return int
      */
     public function run(InputInterface $input, OutputInterface $output)
@@ -22,7 +23,7 @@ trait ShowHelpWhenRunTimeExceptionOccurs
             Artisan::call(
                 $this->getName(),
                 [
-                    "--help" => "true",
+                    '--help' => 'true',
                 ]
             );
 

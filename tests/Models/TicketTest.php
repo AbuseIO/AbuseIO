@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Models;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;

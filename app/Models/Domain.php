@@ -1,18 +1,20 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Domain
- * @package AbuseIO\Models
- * @property integer $id
+ * Class Domain.
+ *
+ * @property int $id
  * @property string $name fillable
- * @property integer $contact_id fillable
- * @property boolean $enabled fillable
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * @property int $contact_id fillable
+ * @property bool $enabled fillable
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class Domain extends Model
 {
@@ -43,7 +45,7 @@ class Domain extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array $rules
      */
@@ -59,15 +61,16 @@ class Domain extends Model
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
-     * @param  \AbuseIO\Models\Domain $domain
+     * @param \AbuseIO\Models\Domain $domain
+     *
      * @return array $rules
      */
     public static function updateRules($domain)
     {
         $rules = [
-            'name'          => 'required|stringorboolean|domain|unique:domains,name,'. $domain->id,
+            'name'          => 'required|stringorboolean|domain|unique:domains,name,'.$domain->id,
             'contact_id'    => 'required|integer|exists:contacts,id',
             'enabled'       => 'required|boolean',
         ];
@@ -82,7 +85,7 @@ class Domain extends Model
     */
 
     /**
-     * Returns the contact for this domain
+     * Returns the contact for this domain.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -98,10 +101,11 @@ class Domain extends Model
     */
 
     /**
-     * Static method to check if the account has access to the model instance
+     * Static method to check if the account has access to the model instance.
      *
-     * @param integer                 $model_id
+     * @param int                     $model_id
      * @param \AbuseIO\Models\Account $account
+     *
      * @return bool
      */
     public static function checkAccountAccess($model_id, Account $account)
@@ -111,8 +115,8 @@ class Domain extends Model
             return true;
         }
 
-        $domain = Domain::find($model_id);
+        $domain = self::find($model_id);
 
-        return ($domain->contact->account->id == $account->id);
+        return $domain->contact->account->id == $account->id;
     }
 }

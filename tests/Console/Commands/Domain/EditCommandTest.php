@@ -11,12 +11,12 @@ use tests\TestCase;
 class EditCommandTest extends TestCase
 {
     /**
-    * @expectedException RuntimeException
-    * @expectedExceptionMessage Not enough arguments (missing: "id").
-    */
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage Not enough arguments (missing: "id").
+     */
     public function testWithoutId()
     {
-         Artisan::call('domain:edit');
+        Artisan::call('domain:edit');
     }
 
     public function testWithInvalidId()
@@ -36,7 +36,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:edit',
             [
-                'id' => '1',
+                'id'           => '1',
                 '--contact_id' => '1000',
             ]
         );
@@ -49,7 +49,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'domain:edit',
             [
-                'id' => '1',
+                'id'        => '1',
                 '--enabled' => 'false',
             ]
         );

@@ -15,7 +15,7 @@ class CreateCommandTest extends TestCase
 {
     public function testWithoutArguments()
     {
-//        $exitCode = Artisan::call('domain:create');
+        //        $exitCode = Artisan::call('domain:create');
 //        $this->assertEquals(0, $exitCode);
 
 //        $output = Artisan::output();
@@ -32,8 +32,8 @@ class CreateCommandTest extends TestCase
         $domainName = $faker->domainName;
 
         Artisan::call('domain:create', [
-            'name' => $domainName,
-            'contact_id' => Contact::all()->first()->id
+            'name'       => $domainName,
+            'contact_id' => Contact::all()->first()->id,
         ]);
 
         $this->assertContains(

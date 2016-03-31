@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use AbuseIO\Models\Permission;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePermissionRoleTable extends Migration
 {
@@ -46,8 +46,8 @@ class CreatePermissionRoleTable extends Migration
             $permission_role[] = [
                 'permission_id'             => $permission->id,
                 'role_id'                   => '1',
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ];
         }
 

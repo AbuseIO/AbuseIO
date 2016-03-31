@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Models;
 
 use AbuseIO\Models\Account;
@@ -12,7 +13,7 @@ class AccountTest extends TestCase
     public function testModelFactory()
     {
         $account = factory(Account::class)->create();
-        $accountFromDB = Account::where("name", $account->name)->first();
+        $accountFromDB = Account::where('name', $account->name)->first();
         $this->assertEquals($account->name, $accountFromDB->name);
     }
 
@@ -24,11 +25,10 @@ class AccountTest extends TestCase
         );
     }
 
-
     public function testSetSystemAccount()
     {
         $account = factory(Account::class)->create();
         $account->systemaccount = true;
-        $this->assertTrue((bool)Account::find($account->id)->systemaccount);
+        $this->assertTrue((bool) Account::find($account->id)->systemaccount);
     }
 }

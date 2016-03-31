@@ -2,10 +2,10 @@
 
 namespace tests\Console\Commands\Role;
 
+use AbuseIO\Models\Role;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
-use AbuseIO\Models\Role;
 
 /**
  * Class EditCommandTest.
@@ -15,12 +15,12 @@ class EditCommandTest extends TestCase
     use DatabaseTransactions;
 
     /**
-    * @expectedException RuntimeException
-    * @expectedExceptionMessage Not enough arguments (missing: "id").
-    */
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage Not enough arguments (missing: "id").
+     */
     public function testWithoutId()
     {
-         Artisan::call('role:edit');
+        Artisan::call('role:edit');
     }
 
     public function testWithInvalidId()
@@ -35,8 +35,6 @@ class EditCommandTest extends TestCase
         $this->assertContains('Unable to find role with this criteria', Artisan::output());
     }
 
-
-
     public function testEnabled()
     {
         $this->initDB();
@@ -44,7 +42,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'role:edit',
             [
-                'id' => $this->role->id,
+                'id'     => $this->role->id,
                 '--name' => 'some bogus value',
             ]
         );

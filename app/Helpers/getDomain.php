@@ -3,14 +3,15 @@
 /**
  * This helper function can be used to get a valid domain.tld from an url and return it.
  *
- * @param  string $url
+ * @param string $url
+ *
  * @return mixed
  */
 function getDomain($url)
 {
     if (!empty($url)) {
         // Sanitize URL first by removing unwanted chars
-        $url = preg_replace("/[\n\r]/", "", $url);
+        $url = preg_replace("/[\n\r]/", '', $url);
 
         // Sanitize URL accourding to RFC1738 (perhaps use RFC3986?)
         $entities = [

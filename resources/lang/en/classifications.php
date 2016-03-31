@@ -14,19 +14,19 @@ return [
      *
      */
     'DEFAULT' => [
-        'name' => 'Generic message',
-        'description' => "This classification has no information text yet."
+        'name'        => 'Generic message',
+        'description' => 'This classification has no information text yet.',
     ],
 
     'BOTNET_CONTROLLER' => [
-        'name' => 'Botnet controller',
-        'description' => "
+        'name'        => 'Botnet controller',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'BOTNET_INFECTION' => [
-        'name' => 'Botnet infection',
+        'name'        => 'Botnet infection',
         'description' => "
              <h2>What is a 'Botnet infection'?</h2>
 
@@ -99,18 +99,18 @@ return [
 
             <a target'_blank' href='https://www.ncsc.nl/binaries/content/documents/ncsc-en/current-topics/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet</a><br>
 
-            "
+            ",
     ],
 
     'COMPROMISED_SERVER' => [
-        'name' => 'Compromised server',
-        'description' => "
+        'name'        => 'Compromised server',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'COMPROMISED_WEBSITE' => [
-        'name' => 'Compromised website',
+        'name'        => 'Compromised website',
         'description' => "
             <h2>What is a 'Compromised website'?</h2>
 
@@ -199,11 +199,11 @@ return [
             <a target'_blank' href='http://www.stopbadware.org/'>stopbadware.org has great information, and their forums have a number of helpful and knowledgeable volunteers who may be able to help.</a><br>
             <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
-            "
+            ",
     ],
 
     'DISTRIBUTION_WEBSITE' => [
-        'name' => 'Distribution website',
+        'name'        => 'Distribution website',
         'description' => "
             <h2>What is a 'Distribution Website'?</h2>
 
@@ -233,11 +233,11 @@ return [
             <a target'_blank' href='https://support.google.com/webmasters/topic/4598410?hl=en&ref_topic=4596795'>Google Webmaster tools for infected sites</a><br>
             <a target'_blank' href='http://www.bing.com/webmaster/help/malware-re-evaluation-e6982183'>Bing Reevaluation site</a><br>
 
-            "
+            ",
     ],
 
     'FEEDBACK_LOOP' => [
-        'name' => 'Feedback loop (FBL) message',
+        'name'        => 'Feedback loop (FBL) message',
         'description' => "
                 <h2>What is A Feedback Loop?</h2>
 
@@ -307,11 +307,11 @@ return [
 
                 <p>The bottom line, however, is that the benefits of FBLs far outweigh the cons and the the
                 receiver of the Feedback loop must descide on its correct action.</p>
-            "
+            ",
     ],
 
     'FREAK_VULNERABLE_SERVER' => [
-        'name' => 'FREAK Vulnerable Server',
+        'name'        => 'FREAK Vulnerable Server',
         'description' => "
 
             <h2>What is a 'FREAK Vulnerable Server'?</h2>
@@ -361,11 +361,11 @@ return [
             <a target'_blank' href='https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations'>Mozilla’s security configuration guide</a><br>
             <a target'_blank' href='https://mozilla.github.io/server-side-tls/ssl-config-generator/'>SSL configuration generator</a><br>
 
-            "
+            ",
     ],
 
     'HARVESTING' => [
-        'name' => 'Harvesting',
+        'name'        => 'Harvesting',
         'description' => "
 
             <h2>What is 'Harvesting'?</h2>
@@ -399,18 +399,18 @@ return [
 
             <h2>Getting more information</h2>
 
-            "
+            ",
     ],
 
     'NOTICE_AND_TAKEDOWN_REQUEST' => [
-        'name' => 'Notice and Take Down request',
-        'description' => "
+        'name'        => 'Notice and Take Down request',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'OPEN_CHARGEN_SERVER' => [
-        'name' => 'Open Chargen Server',
+        'name'        => 'Open Chargen Server',
         'description' => "
             <h2>What is an 'Open Chargen server'?</h2>
 
@@ -462,11 +462,11 @@ return [
             <h2>Getting more information</h2>
 
             <a target'_blank' href='http://dnsamplificationattacks.blogspot.nl/2013/07/source-port-chargen-destination-port.html'>Amplification Attacks Observer</a><br>
-            "
+            ",
     ],
 
     'OPEN_DNS_RESOLVER' => [
-        'name' => 'Open DNS Resolver',
+        'name'        => 'Open DNS Resolver',
         'description' => "
             <h2>What is an 'Open DNS Resolver'?</h2>
 
@@ -584,11 +584,11 @@ return [
             <a target'_blank' href='http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification'>http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification</a><br>
             <a target'_blank' href='http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf'>http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf</a><br>
 
-            "
+            ",
     ],
 
     'OPEN_MDNS_SERVICE' => [
-        'name' => 'Open mDNS Service',
+        'name'        => 'Open mDNS Service',
         'description' => "
             <h2>What is an 'Open mDNS Service'?</h2>
 
@@ -647,11 +647,11 @@ return [
             service might also be listening on TCP/port 5353, however only UDP services
             are used in DNS Amplification Attacks. </p>
 
-            "
+            ",
     ],
 
     'OPEN_IMPI_SERVER' => [
-        'name' => 'Open IPMI Server',
+        'name'        => 'Open IPMI Server',
         'description' => "
             <h2>What is an 'Open IPMI Server'?</h2>
 
@@ -693,11 +693,11 @@ return [
             <a target'_blank' href='http://fish2.com/ipmi/'>Dan Farmer on IPMI security issues</a><br>
             <a target'_blank' href='https://www.us-cert.gov/ncas/alerts/TA13-207A'>US-CERT alert TA13-207A</a><br>
 
-            "
+            ",
     ],
 
     'OPEN_MEMCACHED_SERVER' => [
-        'name' => 'Open MemCached Server',
+        'name'        => 'Open MemCached Server',
         'description' => "
             <h2>What is an 'Open Memcached Server'?</h2>
 
@@ -789,11 +789,11 @@ return [
 
             <atarget'_blank'  href='http://blog.codesherpas.com/on_the_path/2010/08/securing-memcache-in-2-minutes.html'>David Bock - Securing Memcache in 2 Minutes</a><br>
 
-            "
+            ",
     ],
 
     'OPEN_MSSQL_SERVER' => [
-        'name' => 'Open Microsoft SQL Server',
+        'name'        => 'Open Microsoft SQL Server',
         'description' => "
             <h2>What is an 'Open Microsoft SQL Server'?</h2>
 
@@ -839,11 +839,11 @@ return [
 
             <a target'_blank' href='https://msdn.microsoft.com/en-us/library/ms175043.aspx'>Configure a Windows Firewall for Database Engine Access</a><br>
 
-            "
+            ",
     ],
 
     'OPEN_MONGODB_SERVER' => [
-        'name' => 'Open MongoDB Server',
+        'name'        => 'Open MongoDB Server',
         'description' => "
             <h2>What is an 'Open MongoDB Server'?</h2>
 
@@ -904,11 +904,11 @@ return [
 
             <a target'_blank' href='http://cispa.saarland/wp-content/uploads/2015/02/MongoDB_documentation.pdf'>MongoDB databases at risk</a><br>
 
-            "
+            ",
     ],
 
     'OPEN_NATPMP_SERVER' => [
-        'name' => 'Open NAT_PMP Server',
+        'name'        => 'Open NAT_PMP Server',
         'description' => "
             <h2>What is an 'Open NAT-PMP Server'?</h2>
 
@@ -957,11 +957,11 @@ return [
             <a target'_blank' href='http://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
             <a target'_blank' href='https://community.rapid7.com/community/metasploit/blog/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities'>NAT-PMP Implementation and Configuration Vulnerabilities</a>
 
-            "
+            ",
     ],
 
     'OPEN_NTP_SERVER' => [
-        'name' => 'Open NTP Server',
+        'name'        => 'Open NTP Server',
         'description' => "
             <h2>What is an 'Open NTP Server'?</h2>
 
@@ -1054,11 +1054,11 @@ return [
             <a target'_blank' href='http://www.team-cymru.org/secure-ntp-template.html'>Examples in securing a NTP service</a>
             <a target'_blank' href='http://www.internetsociety.org/sites/default/files/01_5.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
 
-            "
+            ",
     ],
 
     'OPEN_NETBIOS_SERVER' => [
-        'name' => 'Open Netbios Server',
+        'name'        => 'Open Netbios Server',
         'description' => "
             <h2>What is an 'Open Netbios server'?</h2>
 
@@ -1136,11 +1136,11 @@ return [
 
             <a target'_blank' href='https://technet.microsoft.com/en-us/library/cc940063.aspx'>Microsoft NetBIOS Over TCP/IP guide</a>
 
-            "
+            ",
     ],
 
     'OPEN_QOTD_SERVER' => [
-        'name' => 'Open QOTD Server',
+        'name'        => 'Open QOTD Server',
         'description' => "
             <h2>What is an 'Open QOTD Server'?</h2>
 
@@ -1210,11 +1210,11 @@ return [
             net start simptcp
             </pre>
 
-            "
+            ",
     ],
 
     'OPEN_REDIS_SERVER' => [
-        'name' => 'Open REDIS Server',
+        'name'        => 'Open REDIS Server',
         'description' => "
             <h2>What is an 'Open REDIS Server'?</h2>
 
@@ -1298,11 +1298,11 @@ return [
 
             <a target'_blank' href='http://redis.io/topics/security'>Redis Security advisory</a><br>
 
-            "
+            ",
     ],
 
     'OPEN_SNMP_SERVER' => [
-        'name' => 'Open SNMP Server',
+        'name'        => 'Open SNMP Server',
         'description' => "
             <h2>What is an 'Open SNMP Server'?</h2>
 
@@ -1407,11 +1407,11 @@ return [
 
             <h2>Getting more information</h2>
 
-            "
+            ",
     ],
 
     'OPEN_SSDP_SERVER' => [
-        'name' => 'Open SSDP Server',
+        'name'        => 'Open SSDP Server',
         'description' => "
             <h2>What is an 'Open SSDP Server'?</h2>
 
@@ -1457,11 +1457,11 @@ return [
             interface. You should either stop te service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
-            "
+            ",
     ],
 
     'PHISING_WEBSITE' => [
-        'name' => 'Phishing website',
+        'name'        => 'Phishing website',
         'description' => "
             <h2>What is a 'Phishing website'?</h2>
 
@@ -1528,11 +1528,11 @@ return [
             <a target'_blank' href='http://www.stopbadware.org/'>stopbadware.org has great information, and their forums have a number of helpful and knowledgeable volunteers who may be able to help.</a><br>
             <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
-            "
+            ",
     ],
 
     'RBL_LISTED' => [
-        'name' => 'RBL Listed',
+        'name'        => 'RBL Listed',
         'description' => "
             <h2>What does 'RBL Listed' mean?</h2>
 
@@ -1577,11 +1577,11 @@ return [
 
             <a target'_blank' href='http://www.anti-abuse.org/multi-rbl-check'>Anti-abuse multi-rbl-check</a><br>
 
-            "
+            ",
     ],
 
     'SPAM' => [
-        'name' => 'SPAM',
+        'name'        => 'SPAM',
         'description' => "
             <h2>What is 'Spam'?</h2>
 
@@ -1625,11 +1625,11 @@ return [
             <p>If you are unable to or unsure how to resolve this issue,
             please contact our abuse department for support.</p>
 
-            "
+            ",
     ],
 
     'SPAMTRAP' => [
-        'name' => 'SPAM Trap',
+        'name'        => 'SPAM Trap',
         'description' => "
             <h2>What is a SPAM Trap?</h2>
 
@@ -1674,11 +1674,11 @@ return [
             <a target'_blank' href='http://blog.returnpath.com/blog/jamie-lawler/trap-tips-avoiding-and-removing-spam-traps'>Tips to avoid SpamTraps</a><br>
             <a target'_blank' href='http://www.activecampaign.com/help/bounces-soft-bounce-vs-hard-bounce/'>Hard/Soft Bounce configuration</a><br>
 
-            "
+            ",
     ],
 
     'SSLV3_VULNERABLE_SERVER' => [
-        'name' => 'SSLv3 Vulnerable Server',
+        'name'        => 'SSLv3 Vulnerable Server',
         'description' => "
             <h2>What is a 'SSLv3 Vulnerable Server'?</h2>
 
@@ -1758,11 +1758,11 @@ return [
             <a target'_blank' href='http://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
             <a target'_blank' href='https://www.poodletest.com/'>SSLv3 / POODLE Test</a><br>
 
-            "
+            ",
     ],
 
     'SPAMVERTISED_WEBSITE' => [
-        'name' => 'Spamvertised web site',
+        'name'        => 'Spamvertised web site',
         'description' => "
             <h2>What is a 'Spamvertised web site'?</h2>
 
@@ -1791,11 +1791,11 @@ return [
             <a target'_blank' href='https://wordpress.org/plugins/sucuri-scanner/'>WordPress Security scanner (Sucuri)</a><br>
             <a target'_blank' href='http://spamvertised.abusebutler.com/'>List of Spamvertised websites</a><br>
 
-            "
+            ",
     ],
 
     'OPEN_ELASTICSEARCH_SERVER' => [
-        'name' => 'Open ElasticSearch Server',
+        'name'        => 'Open ElasticSearch Server',
         'description' => "
             <h2>What is an 'Open ElasticSearch Server'?</h2>
 
@@ -1827,32 +1827,32 @@ return [
             <h2>Getting more information</h2>
 
             <a href='http://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution</a><br>
-            "
+            ",
     ],
 
     'COPYRIGHT_INFRINGEMENT' => [
-        'name' => 'Copyright Infringement',
-        'description' => "
+        'name'        => 'Copyright Infringement',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'POSSIBLE_DDOS_SENDING_SERVER' => [
-        'name' => 'Possible DDoS sending Server',
-        'description' => "
+        'name'        => 'Possible DDoS sending Server',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'DDOS_SENDING_SERVER' => [
-        'name' => 'DDoS sending Server',
-        'description' => "
+        'name'        => 'DDoS sending Server',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'OPEN_PORTMAP_SERVER' => [
-        'name' => 'Open Portmapper Server',
+        'name'        => 'Open Portmapper Server',
         'description' => "
             <h2>What is an 'Open Portmapper Server'?</h2>
 
@@ -1893,55 +1893,55 @@ return [
             <p>We recommend you to only allow RPC calls from trusted sources. This
             can be achieved by dropping all traffic for RPC services on your local
             firewall and only allowing connections from trusted IP addresses.
-            "
+            ",
     ],
 
     'MALWARE_INFECTION' => [
-        'name' => 'Malware infection',
-        'description' => "
+        'name'        => 'Malware infection',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'COMMENT_SPAM' => [
-        'name' => 'Comment Spam',
-        'description' => "
+        'name'        => 'Comment Spam',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'HACK_ATTACK' => [
-        'name' => 'Hack attack',
-        'description' => "
+        'name'        => 'Hack attack',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'INFORMATIONAL' => [
-        'name' => 'Informational',
-        'description' => "
+        'name'        => 'Informational',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'LOGIN_ATTACK' => [
-        'name' => 'Login attack',
-        'description' => "
+        'name'        => 'Login attack',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'DICTIONARY_ATTACK' => [
-        'name' => 'Dictionary attack',
-        'description' => "
+        'name'        => 'Dictionary attack',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 
     'RULE_BREAKER' => [
-        'name' => 'Rule Breaker',
-        'description' => "
+        'name'        => 'Rule Breaker',
+        'description' => '
             This classification has no information text yet.
-            "
+            ',
     ],
 ];

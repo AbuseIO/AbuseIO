@@ -1,12 +1,14 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Ticket
- * @package AbuseIO\Models
- * @property integer $id
+ * Class Ticket.
+ *
+ * @property int $id
  * @property string $ip fillable
  * @property string $domain fillable
  * @property string $class_id fillable
@@ -18,23 +20,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $ip_contact_email fillable
  * @property string $ip_contact_api_host fillable
  * @property string $ip_contact_auto_notify fillable
- * @property integer $ip_contact_notified_count fillable
+ * @property int $ip_contact_notified_count fillable
  * @property string $domain_contact_account_id fillable
  * @property string $domain_contact_reference fillable
  * @property string $domain_contact_name fillable
  * @property string $domain_contact_email fillable
  * @property string $domain_contact_api_host fillable
  * @property string $domain_contact_auto_notify fillable
- * @property integer $domain_contact_notified_count fillable
- * @property integer $status_id fillable
+ * @property int $domain_contact_notified_count fillable
+ * @property int $status_id fillable
  * @property string $contact_status_id fillable
- * @property integer $account_id fillable
- * @property boolean $auto_notify fillable
- * @property integer $last_notify_count fillable
- * @property integer $last_notify_timestamp fillable
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * @property int $account_id fillable
+ * @property bool $auto_notify fillable
+ * @property int $last_notify_count fillable
+ * @property int $last_notify_timestamp fillable
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class Ticket extends Model
 {
@@ -74,7 +76,7 @@ class Ticket extends Model
         'status_id',
         'contact_status_id',
         'last_notify_count',
-        'last_notify_timestamp'
+        'last_notify_timestamp',
     ];
 
     /*
@@ -84,7 +86,7 @@ class Ticket extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array
      */
@@ -119,7 +121,7 @@ class Ticket extends Model
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
      * @return array
      */
@@ -160,9 +162,10 @@ class Ticket extends Model
     */
 
     /**
-     * One-to-Many relationship to Event
+     * One-to-Many relationship to Event.
      *
-     * @param  string $order
+     * @param string $order
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function events($order = 'asc')
@@ -172,7 +175,7 @@ class Ticket extends Model
     }
 
     /**
-     * One-to-Many relationship to Note
+     * One-to-Many relationship to Note.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -180,7 +183,6 @@ class Ticket extends Model
     {
         return $this->hasMany('AbuseIO\Models\Note');
     }
-
 
     /**
      * one-to-many relationship to Note.
@@ -209,7 +211,6 @@ class Ticket extends Model
         return $this->events('desc')->take(1);
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -233,36 +234,38 @@ class Ticket extends Model
     */
 
     /**
-     * Return the Last Notified attribute
+     * Return the Last Notified attribute.
      *
      * @return bool|string
      */
     public function getLastNotifiedAttribute()
     {
         return date(
-            config('app.date_format').' ' . config('app.time_format'),
+            config('app.date_format').' '.config('app.time_format'),
             $this->attributes['last_notify_timestamp']
         );
     }
 
     /**
-     * Return the Updated attribute
+     * Return the Updated attribute.
      *
      * @param string $date
+     *
      * @return bool|string
      */
     public function getUpdatedAtAttribute($date)
     {
         return date(
-            config('app.date_format').' ' .config('app.time_format'),
+            config('app.date_format').' '.config('app.time_format'),
             strtotime($date)
         );
     }
 
     /**
-     * Return the Created Ar attribute
+     * Return the Created Ar attribute.
      *
      * @param $date
+     *
      * @return bool|string
      */
     public function getCreatedAtAttribute($date)
@@ -280,10 +283,11 @@ class Ticket extends Model
     */
 
     /**
-     * Static method to check if the account has access to the model instance
+     * Static method to check if the account has access to the model instance.
      *
      * @param  $model_id                        Model Id
-     * @param  \AbuseIO\Models\Account $account The Account Model
+     * @param \AbuseIO\Models\Account $account The Account Model
+     *
      * @return bool
      */
     public static function checkAccountAccess($model_id, Account $account)
@@ -293,11 +297,11 @@ class Ticket extends Model
             return true;
         }
 
-        $ticket = Ticket::find($model_id);
+        $ticket = self::find($model_id);
 
         $allowed = ($ticket->ip_contact_account_id == $account->id) ||
                    ($ticket->domain_contact_account_id == $account->id);
 
-        return ($allowed);
+        return $allowed;
     }
 }

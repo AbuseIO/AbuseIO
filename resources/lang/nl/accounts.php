@@ -1,6 +1,6 @@
 <?php
 /**
- * Translations for Accounts
+ * Translations for Accounts.
  */
 return [
     // Headers
@@ -15,5 +15,5 @@ return [
     'no_accounts'           => 'Geen accounts',
     'linked_users'          => 'Gekoppelde gebruikers',
     'first_name'            => 'Voornaam',
-    'last_name'             => 'Achternaam'
+    'last_name'             => 'Achternaam',
 ];

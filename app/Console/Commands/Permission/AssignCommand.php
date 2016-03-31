@@ -2,22 +2,20 @@
 
 namespace AbuseIO\Console\Commands\Permission;
 
-use Illuminate\Console\Command;
-use AbuseIO\Models\Role;
 use AbuseIO\Models\Permission;
 use AbuseIO\Models\PermissionRole;
+use AbuseIO\Models\Role;
+use Illuminate\Console\Command;
 use Validator;
-use Carbon;
 
 /**
- * Class AssignCommand
- * @package AbuseIO\Console\Commands\Permission
+ * Class AssignCommand.
  */
 class AssignCommand extends Command
 {
-
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $signature = 'permission:assign
@@ -27,12 +25,13 @@ class AssignCommand extends Command
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Assign a permission to a role ';
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function __construct()
     {
@@ -42,7 +41,7 @@ class AssignCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     public function handle()
     {
@@ -50,6 +49,7 @@ class AssignCommand extends Command
             empty($this->option('permission'))
         ) {
             $this->error('Missing options for role and/or permission to select, try --help');
+
             return false;
         }
 
@@ -68,6 +68,7 @@ class AssignCommand extends Command
 
         if (!is_object($role)) {
             $this->error('Unable to find role with this criteria');
+
             return false;
         }
 
@@ -85,13 +86,14 @@ class AssignCommand extends Command
 
         if (!is_object($permission)) {
             $this->error('Unable to find permission with this criteria');
+
             return false;
         }
 
         $permissionRole = new PermissionRole();
 
-        $permissionRole->permission_id     = $permission->id;
-        $permissionRole->role_id           = $role->id;
+        $permissionRole->permission_id = $permission->id;
+        $permissionRole->role_id = $role->id;
 
         $validation = Validator::make($permissionRole->toArray(), PermissionRole::createRules($permissionRole));
 

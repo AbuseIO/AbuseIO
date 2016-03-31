@@ -2,21 +2,19 @@
 
 namespace AbuseIO\Console\Commands\Role;
 
-use Illuminate\Console\Command;
 use AbuseIO\Models\Role;
-use AbuseIO\Models\User;
 use AbuseIO\Models\RoleUser;
-use Carbon;
+use AbuseIO\Models\User;
+use Illuminate\Console\Command;
 
 /**
- * Class RevokeCommand
- * @package AbuseIO\Console\Commands\Role
+ * Class RevokeCommand.
  */
 class RevokeCommand extends Command
 {
-
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $signature = 'role:revoke
@@ -26,12 +24,13 @@ class RevokeCommand extends Command
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Revokes a role from a user';
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function __construct()
     {
@@ -41,7 +40,7 @@ class RevokeCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     public function handle()
     {
@@ -49,6 +48,7 @@ class RevokeCommand extends Command
             empty($this->option('user'))
         ) {
             $this->error('Missing options for role and/or user(e-mail) to select');
+
             return false;
         }
 
@@ -59,7 +59,6 @@ class RevokeCommand extends Command
         $user = false;
 
         if (!empty($this->option('role'))) {
-
             if (!is_object($role)) {
                 $role = Role::where('name', $this->option('role'))->first();
             }
@@ -67,11 +66,9 @@ class RevokeCommand extends Command
             if (!is_object($role)) {
                 $role = Role::find($this->option('role'));
             }
-
         }
 
         if (!empty($this->option('user'))) {
-
             if (!is_object($user)) {
                 $user = User::where('email', $this->option('user'))->first();
             }
@@ -79,14 +76,13 @@ class RevokeCommand extends Command
             if (!is_object($user)) {
                 $user = Role::find($this->option('user'));
             }
-
         }
 
         if (!is_object($role) || !is_object($user)) {
             $this->error('Unable to find role with this criteria');
+
             return false;
         }
-
 
         $roleUser = RoleUser::all()
             ->where('role_id', $role->id)
@@ -97,6 +93,7 @@ class RevokeCommand extends Command
             $this->error(
                 'Nothing to delete, this {$permission->name} permission is not linked to the role {$role->name}'
             );
+
             return false;
         }
 

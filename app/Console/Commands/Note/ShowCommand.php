@@ -7,28 +7,28 @@ use AbuseIO\Models\Note;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * {@inheritdoc }
+ * {@inheritdoc}.
  */
 class ShowCommand extends AbstractShowCommand
 {
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAsNoun()
     {
-        return "note";
+        return 'note';
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAllowedArguments()
     {
-        return ["id"];
+        return ['id'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getFields()
     {
@@ -43,15 +43,15 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getCollectionWithArguments()
     {
-        return Note::Where("id", $this->argument("note"));
+        return Note::Where('id', $this->argument('note'));
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function defineInput()
     {
@@ -60,7 +60,7 @@ class ShowCommand extends AbstractShowCommand
                 'note',
                 InputArgument::REQUIRED,
                 'Use the id for a note to show it.'
-            )
+            ),
         ];
     }
 }

@@ -7,29 +7,28 @@ use AbuseIO\Models\Ticket;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\Ticket
+ * Class ShowCommand.
  */
 class ShowCommand extends AbstractShowCommand
 {
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAsNoun()
     {
-        return "ticket";
+        return 'ticket';
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAllowedArguments()
     {
-        return ["id"];
+        return ['id'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getFields()
     {
@@ -60,15 +59,15 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getCollectionWithArguments()
     {
-        return Ticket::where("id", $this->argument("ticket"));
+        return Ticket::where('id', $this->argument('ticket'));
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function defineInput()
     {
@@ -77,17 +76,17 @@ class ShowCommand extends AbstractShowCommand
                 'ticket',
                 InputArgument::REQUIRED,
                 'Use the id for a ticket to show it.'
-            )
+            ),
         ];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function transformObjectToTableBody($model)
     {
         $result = parent::transformObjectToTableBody($model);
-        $result[] = ["[Events ID]", "[Events Source]"];
+        $result[] = ['[Events ID]', '[Events Source]'];
         foreach ($model->events as $event) {
             $result[] = [$event->id, $event->source];
         }

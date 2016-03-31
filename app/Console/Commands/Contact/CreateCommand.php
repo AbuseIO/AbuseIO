@@ -12,13 +12,12 @@ use Validator;
 // TODO logo must be resolved, cann't resolve logo from CLI maybe a default or change required in model?
 
 /**
- * Class CreateCommand
- * @package AbuseIO\Console\Commands\Contact
+ * Class CreateCommand.
  */
 class CreateCommand extends AbstractCreateCommand
 {
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getArgumentsList()
     {
@@ -35,7 +34,7 @@ class CreateCommand extends AbstractCreateCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getAsNoun()
     {
@@ -43,7 +42,7 @@ class CreateCommand extends AbstractCreateCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getModelFromRequest()
     {
@@ -60,7 +59,7 @@ class CreateCommand extends AbstractCreateCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getValidator($model)
     {

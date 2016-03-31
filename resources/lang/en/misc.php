@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Miscellaneous translations
+ * Miscellaneous translations.
  */
 return [
     // AbuseIO intro
@@ -45,7 +45,6 @@ return [
     'button.read'           => 'Read',
     'button.unread'         => 'Unread',
     'button.activate'       => 'Activate',
-
 
     // Miscellaneous
     'all'               => 'All',

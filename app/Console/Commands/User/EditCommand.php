@@ -6,13 +6,12 @@ use AbuseIO\Console\Commands\AbstractEditCommand;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\User;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 use Validator;
 
 /**
- * Class EditCommand
- * @package AbuseIO\Console\Commands\User
+ * Class EditCommand.
  */
 class EditCommand extends AbstractEditCommand
 {
@@ -22,7 +21,7 @@ class EditCommand extends AbstractEditCommand
     private $updatedPassword;
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getOptionsList()
     {
@@ -31,8 +30,8 @@ class EditCommand extends AbstractEditCommand
                 new inputArgument('user', inputArgument::REQUIRED, 'The user id or e-mail of you want to edit'),
                 new InputOption('email', null, InputOption::VALUE_OPTIONAL, 'The new e-mail address and login username'),
                 new InputOption('password', null, InputOption::VALUE_OPTIONAL, 'The new password for the account '),
-                new InputOption('autopassword', null, InputOption::VALUE_NONE,'Generate a new password and set it for the account'),
-                new InputOption('first_name', null, InputOption::VALUE_OPTIONAL,'The new first name of the users account.'),
+                new InputOption('autopassword', null, InputOption::VALUE_NONE, 'Generate a new password and set it for the account'),
+                new InputOption('first_name', null, InputOption::VALUE_OPTIONAL, 'The new first name of the users account.'),
                 new InputOption('last_name', null, InputOption::VALUE_OPTIONAL, 'The new last name of the users account'),
                 new InputOption('language', null, InputOption::VALUE_OPTIONAL, 'The default language for the users account, in country code '),
                 new InputOption('account', null, InputOption::VALUE_OPTIONAL, 'The new account name where this user is linked to'),
@@ -43,7 +42,7 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getAsNoun()
     {
@@ -51,7 +50,7 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getModelFromRequest()
     {
@@ -61,7 +60,7 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function handleOptions($model)
     {
@@ -89,7 +88,7 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getValidator($model)
     {
@@ -109,12 +108,12 @@ class EditCommand extends AbstractEditCommand
     protected function handleEnableDisable($model)
     {
         if ($this->option('enable')) {
-            /** @var User $model */
+            /* @var User $model */
             $model->disabled = false;
         }
 
         if ($this->option('disable')) {
-            /** @var User $model */
+            /* @var User $model */
             $model->disabled = true;
         }
     }

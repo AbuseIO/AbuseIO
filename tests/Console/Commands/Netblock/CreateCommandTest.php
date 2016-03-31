@@ -14,17 +14,16 @@ class CreateCommandTest extends TestCase
     public function testCreate()
     {
         /** @var Netblock $dummyBlock */
-
         $dummyBlock = factory(Netblock::class)->make();
 
         $exitCode = Artisan::call(
             'netblock:create',
             [
-                'contact' => $dummyBlock->contact_id,
-                'first_ip' => $dummyBlock->first_ip,
-                'last_ip' => $dummyBlock->last_ip,
+                'contact'     => $dummyBlock->contact_id,
+                'first_ip'    => $dummyBlock->first_ip,
+                'last_ip'     => $dummyBlock->last_ip,
                 'description' => $dummyBlock->description,
-                'enabled' => $dummyBlock->enabled,
+                'enabled'     => $dummyBlock->enabled,
             ]
         );
 
@@ -32,11 +31,11 @@ class CreateCommandTest extends TestCase
         $this->assertContains('created', Artisan::output());
 
         Netblock::where([
-            'contact_id' => $dummyBlock->contact_id,
-            'first_ip' => $dummyBlock->first_ip,
-            'last_ip' => $dummyBlock->last_ip,
+            'contact_id'  => $dummyBlock->contact_id,
+            'first_ip'    => $dummyBlock->first_ip,
+            'last_ip'     => $dummyBlock->last_ip,
             'description' => $dummyBlock->description,
-            'enabled' => $dummyBlock->enabled,
+            'enabled'     => $dummyBlock->enabled,
         ])->forceDelete();
 
         //$this->seed('NetblocksTableSeeder');
@@ -44,7 +43,7 @@ class CreateCommandTest extends TestCase
 
     public function testWithoutArguments()
     {
-//        $exitCode = Artisan::call('netblock:create');
+        //        $exitCode = Artisan::call('netblock:create');
 //        $this->assertEquals(0, $exitCode);
 //        $this->assertContains('The description field is required.', Artisan::output());
     }

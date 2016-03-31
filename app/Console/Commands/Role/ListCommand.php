@@ -6,36 +6,36 @@ use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Role;
 
 /**
- * Class ListCommand
- * @package AbuseIO\Console\Commands\Role
+ * Class ListCommand.
  */
 class ListCommand extends AbstractListCommand
 {
     /**
      * @var array
      */
-    protected $filterArguments = ["name"];
+    protected $filterArguments = ['name'];
 
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
     protected $headers = ['ID', 'Name', 'Description', 'Permissions'];
 
     /**
-     * The fields of the table / database row
+     * The fields of the table / database row.
+     *
      * @var array
      */
     protected $fields = ['id', 'name', 'description'];
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     private function hydrateRolesWithPermissionCount($roles)
     {
         $rolelist = [];
         foreach ($roles as $role) {
-
             $permissionCount = $role->permissions()->count();
 
             $role = $role->toArray();
@@ -43,11 +43,12 @@ class ListCommand extends AbstractListCommand
 
             $rolelist[] = $role;
         }
+
         return $rolelist;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -55,28 +56,30 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
         $roles = Role::where('name', 'like', "%{$filter}%")->get($this->fields);
+
         return $this->hydrateRolesWithPermissionCount($roles);
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
         $roles = Role::all($this->fields);
+
         return $this->hydrateRolesWithPermissionCount($roles);
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "role";
+        return 'role';
     }
 }

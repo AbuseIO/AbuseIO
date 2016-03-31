@@ -2,29 +2,26 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\TicketFormRequest;
+use AbuseIO\Jobs\EvidenceSave;
+use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Jobs\TicketUpdate;
+use AbuseIO\Models\Event;
 use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Incident;
 use AbuseIO\Models\Ticket;
-use AbuseIO\Models\Event;
-use AbuseIO\Jobs\EvidenceSave;
-use AbuseIO\Jobs\IncidentsProcess;
-use yajra\Datatables\Datatables;
-use Redirect;
+use DB;
 use Input;
 use Log;
-use DB;
+use Redirect;
+use yajra\Datatables\Datatables;
 
 /**
- * Class TicketsController
- * @package AbuseIO\Http\Controllers
+ * Class TicketsController.
  */
 class TicketsController extends Controller
 {
-
     /**
      * TicketsController constructor.
      */
@@ -34,7 +31,6 @@ class TicketsController extends Controller
 
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Ticket', ['except' => ['search', 'index', 'create', 'store', 'export']]);
-
     }
 
     /**
@@ -44,7 +40,6 @@ class TicketsController extends Controller
      */
     public function search()
     {
-
         $auth_account = $this->auth_user->account;
 
         $tickets = Ticket::select(
@@ -60,8 +55,8 @@ class TicketsController extends Controller
             'tickets.domain_contact_account_id',
             'tickets.domain_contact_reference',
             'tickets.domain_contact_name',
-            DB::raw("count(distinct events.id) as event_count"),
-            DB::raw("count(distinct notes.id) as notes_count")
+            DB::raw('count(distinct events.id) as event_count'),
+            DB::raw('count(distinct notes.id) as notes_count')
         )
             ->leftJoin('events', 'events.ticket_id', '=', 'tickets.id')
             ->leftJoin(
@@ -96,7 +91,7 @@ class TicketsController extends Controller
             ->addColumn(
                 'actions',
                 function ($ticket) {
-                    $actions = ' <a href="tickets/' . $ticket->id .
+                    $actions = ' <a href="tickets/'.$ticket->id.
                         '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
                         trans('misc.button.show').'</a> ';
 
@@ -106,26 +101,26 @@ class TicketsController extends Controller
             ->editColumn(
                 'type_id',
                 function ($ticket) {
-                    return trans('types.type.' . $ticket->type_id . '.name');
+                    return trans('types.type.'.$ticket->type_id.'.name');
                 }
             )
             ->editColumn(
                 'class_id',
                 function ($ticket) {
-                    return trans('classifications.' . $ticket->class_id . '.name');
+                    return trans('classifications.'.$ticket->class_id.'.name');
                 }
             )
             ->editColumn(
                 'status_id',
                 function ($ticket) {
-                    return trans('types.status.abusedesk.' . $ticket->status_id . '.name');
+                    return trans('types.status.abusedesk.'.$ticket->status_id.'.name');
                 }
             )
             ->make(true);
     }
 
     /**
-     * Display all tickets
+     * Display all tickets.
      *
      * @return \Illuminate\Http\Response
      */
@@ -143,7 +138,7 @@ class TicketsController extends Controller
     }
 
     /**
-     * Show the form for creating a ticket
+     * Show the form for creating a ticket.
      *
      * @return \Illuminate\Http\Response
      */
@@ -159,6 +154,7 @@ class TicketsController extends Controller
      * Export tickets to CSV format.
      *
      * @param string $format
+     *
      * @return \Illuminate\Http\Response
      */
     public function export($format)
@@ -167,12 +163,9 @@ class TicketsController extends Controller
 
         // only export all tickets when we are in the systemaccount
         $auth_account = $this->auth_user->account;
-        if ($auth_account->isSystemAccount())
-        {
+        if ($auth_account->isSystemAccount()) {
             $tickets = Ticket::all();
-        }
-        else
-        {
+        } else {
             $tickets = Ticket::select('tickets.*')
               ->where('ip_contact_account_id', $auth_account->id)
               ->orWhere('domain_contact_account_id', $auth_account);
@@ -190,7 +183,7 @@ class TicketsController extends Controller
                 'status_id'     => 'Ticket Status',
             ];
 
-            $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+            $output = '"'.implode('", "', $columns).'"'.PHP_EOL;
 
             foreach ($tickets as $ticket) {
                 $row = [
@@ -204,7 +197,7 @@ class TicketsController extends Controller
                     trans("types.status.abusedesk.{$ticket->status_id}.name"),
                 ];
 
-                $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+                $output .= '"'.implode('", "', $row).'"'.PHP_EOL;
             }
 
             return response(substr($output, 0, -1), 200)
@@ -220,6 +213,7 @@ class TicketsController extends Controller
      * Store a newly created ticket in storage.
      *
      * @param TicketFormRequest $ticket
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(TicketFormRequest $ticket)
@@ -235,10 +229,10 @@ class TicketsController extends Controller
             is_file($uploadedFile->getPathname())
         ) {
             $attachment = [
-                'filename' => $uploadedFile->getClientOriginalName(),
-                'size' => $uploadedFile->getSize(),
+                'filename'    => $uploadedFile->getClientOriginalName(),
+                'size'        => $uploadedFile->getSize(),
                 'contentType' => $uploadedFile->getMimeType(),
-                'data' => file_get_contents($uploadedFile->getPathname())
+                'data'        => file_get_contents($uploadedFile->getPathname()),
             ];
         }
 
@@ -247,7 +241,7 @@ class TicketsController extends Controller
          * the form token. We don't need to validate the data as the formRequest already to care of this and
          * IncidentsSave will do another validation on this.
          */
-        $incident = new Incident;
+        $incident = new Incident();
         foreach ($ticket->all() as $key => $value) {
             if ($key != '_token') {
                 $incident->$key = $value;
@@ -258,15 +252,15 @@ class TicketsController extends Controller
          * Incident process required all incidents to be wrapped in an array.
          */
         $incidents = [
-            0 => $incident
+            0 => $incident,
         ];
 
         /*
          * Save the evidence as its required to save events
          */
-        $evidence = new EvidenceSave;
+        $evidence = new EvidenceSave();
         $evidenceData = [
-            'createdBy'     => trim($this->auth_user->fullName()) . ' (' . $this->auth_user->email .')',
+            'createdBy'     => trim($this->auth_user->fullName()).' ('.$this->auth_user->email.')',
             'receivedOn'    => time(),
             'submittedData' => $ticket->all(),
             'attachments'   => [],
@@ -278,19 +272,18 @@ class TicketsController extends Controller
 
         if (!$evidenceFile) {
             Log::error(
-                get_class($this) . ': ' .
+                get_class($this).': '.
                 'Error returned while asking to write evidence file, cannot continue'
             );
             $this->exception();
         }
-
 
         $evidence = new Evidence();
         $evidence->filename = $evidenceFile;
         $evidence->sender = $this->auth_user->email;
         $evidence->subject = 'AbuseDesk Created Incident';
 
-        /**
+        /*
          * Call IncidentsProcess to validate, store evidence and save incidents
          */
         $incidentsProcess = new IncidentsProcess($incidents, $evidence);
@@ -310,7 +303,7 @@ class TicketsController extends Controller
             'admin.tickets.index'
         )->with(
             'message',
-            'A new incident has been created. Depending on the aggregator result a new ' .
+            'A new incident has been created. Depending on the aggregator result a new '.
             'ticket will be created or existing ticket updated'
         );
     }
@@ -319,6 +312,7 @@ class TicketsController extends Controller
      * Display the specified ticket.
      *
      * @param Ticket $ticket
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Ticket $ticket)
@@ -333,8 +327,9 @@ class TicketsController extends Controller
     /**
      * Update the requested contact information.
      *
-     * @param  Ticket $ticket
-     * @param  string $only
+     * @param Ticket $ticket
+     * @param string $only
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Ticket $ticket, $only = null)
@@ -346,15 +341,17 @@ class TicketsController extends Controller
     }
 
     /**
-     * Set the status of a tickets
+     * Set the status of a tickets.
      *
-     * @param  Ticket $ticket
-     * @param  string $newstatus
+     * @param Ticket $ticket
+     * @param string $newstatus
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function status(Ticket $ticket, $newstatus)
     {
         TicketUpdate::status($ticket, $newstatus);
+
         return Redirect::route('admin.tickets.show', $ticket->id)
             ->with('message', 'Ticket status has been updated.');
     }
@@ -364,11 +361,12 @@ class TicketsController extends Controller
      *
      * @param Ticket $ticket
      * @param string $only
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function notify(Ticket $ticket, $only = null)
     {
-        $notification = new Notification;
+        $notification = new Notification();
         $notification->walkList(
             $notification->buildList($ticket->id, false, true, $only)
         );

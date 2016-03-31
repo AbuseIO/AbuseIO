@@ -6,17 +6,17 @@ use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Job;
 
 /**
- * Class ListCommand
- * @package AbuseIO\Console\Commands\Queue
+ * Class ListCommand.
  */
 class ListCommand extends AbstractListCommand
 {
     protected $filterArguments = [
-        'queue'
+        'queue',
     ];
 
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
     protected $headers = [
@@ -25,7 +25,7 @@ class ListCommand extends AbstractListCommand
     ];
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -37,11 +37,12 @@ class ListCommand extends AbstractListCommand
                 Job::where('queue', '=', $queue)->count(),
             ];
         }
+
         return $result;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
@@ -58,7 +59,7 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
@@ -66,10 +67,10 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "queue";
+        return 'queue';
     }
 }

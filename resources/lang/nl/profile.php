@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Translations for Profile
+ * Translations for Profile.
  */
 return [
     'password'              => 'Wachtwoord',
-    'password_confirmation' => 'Wachtwoord (herhaal)'
+    'password_confirmation' => 'Wachtwoord (herhaal)',
 ];

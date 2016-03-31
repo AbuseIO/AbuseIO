@@ -8,45 +8,44 @@ use AbuseIO\Models\Evidence;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\Event
+ * Class ShowCommand.
  */
 class ShowCommand extends AbstractShowCommand
 {
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAsNoun()
     {
-        return "event";
+        return 'event';
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAllowedArguments()
     {
-        return ["id"];
+        return ['id'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getFields()
     {
-        return ["id", "ticket_id", "evidence_id", "source", "timestamp", "information"];
+        return ['id', 'ticket_id', 'evidence_id', 'source', 'timestamp', 'information'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getCollectionWithArguments()
     {
-        return Event::where("id", $this->argument("event"));
+        return Event::where('id', $this->argument('event'));
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function defineInput()
     {
@@ -55,12 +54,12 @@ class ShowCommand extends AbstractShowCommand
                 'event',
                 InputArgument::REQUIRED,
                 'Use the id for a event to show it.'
-            )
+            ),
         ];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function transformObjectToTableBody($model)
     {
@@ -74,7 +73,7 @@ class ShowCommand extends AbstractShowCommand
 
         $result[] = ['Evidence File',  $model->evidence->filename];
 
-        $result[] = ["[Information Field]", "[Information Data]"];
+        $result[] = ['[Information Field]', '[Information Data]'];
         foreach (json_decode($model->information) as $field => $data) {
             $result[] = [$field, $data];
         }

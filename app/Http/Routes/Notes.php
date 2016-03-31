@@ -1,11 +1,12 @@
 <?php
+
 Route::resource('notes', 'NotesController');
 Route::model('notes', 'AbuseIO\Models\Note');
 
 Route::group(
     [
         'prefix' => 'notes',
-        'as' => 'notes.',
+        'as'     => 'notes.',
     ],
     function () {
         // Access to index list
@@ -13,8 +14,8 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:notes_view',
-                'as' => 'index',
-                'uses' => 'NotesController@index'
+                'as'         => 'index',
+                'uses'       => 'NotesController@index',
             ]
         );
 
@@ -23,8 +24,8 @@ Route::group(
             '{notes}',
             [
                 'middleware' => 'permission:notes_view',
-                'as' => 'show',
-                'uses' => 'NotesController@show'
+                'as'         => 'show',
+                'uses'       => 'NotesController@show',
             ]
         );
 
@@ -33,16 +34,16 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:notes_create',
-                'as' => 'create',
-                'uses' => 'NotesController@create'
+                'as'         => 'create',
+                'uses'       => 'NotesController@create',
             ]
         );
         route::post(
             '',
             [
                 'middleware' => 'permission:notes_create',
-                'as' => 'store',
-                'uses' => 'NotesController@store'
+                'as'         => 'store',
+                'uses'       => 'NotesController@store',
             ]
         );
 
@@ -51,24 +52,24 @@ Route::group(
             '{notes}/edit',
             [
                 'middleware' => 'permission:notes_edit',
-                'as' => 'edit',
-                'uses' => 'NotesController@edit'
+                'as'         => 'edit',
+                'uses'       => 'NotesController@edit',
             ]
         );
         route::patch(
             '{notes}',
             [
                 'middleware' => 'permission:notes_edit',
-                'as' => 'update',
-                'uses' => 'NotesController@update'
+                'as'         => 'update',
+                'uses'       => 'NotesController@update',
             ]
         );
         route::put(
             '{notes}',
             [
                 'middleware' => 'permission:notes_edit',
-                'as' => 'update',
-                'uses' => 'NotesController@update'
+                'as'         => 'update',
+                'uses'       => 'NotesController@update',
             ]
         );
 
@@ -77,8 +78,8 @@ Route::group(
             '/{notes}',
             [
                 'middleware' => 'permission:notes_delete',
-                'as' => 'destroy',
-                'uses' => 'NotesController@destroy'
+                'as'         => 'destroy',
+                'uses'       => 'NotesController@destroy',
             ]
         );
 

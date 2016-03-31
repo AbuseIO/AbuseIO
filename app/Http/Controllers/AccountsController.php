@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\AccountFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
@@ -10,8 +9,7 @@ use Redirect;
 use yajra\Datatables\Datatables;
 
 /**
- * Class AccountsController
- * @package AbuseIO\Http\Controllers
+ * Class AccountsController.
  */
 class AccountsController extends Controller
 {
@@ -26,8 +24,7 @@ class AccountsController extends Controller
         $this->middleware('checkaccount:Account', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo']]);
 
         // method that only may be executed by the systemaccount
-        $this->middleware('checksystemaccount', ['only' => ['create','store']]);
-
+        $this->middleware('checksystemaccount', ['only' => ['create', 'store']]);
     }
 
     /**
@@ -71,26 +68,26 @@ class AccountsController extends Controller
                         [
                             'route' => [
                                 'admin.accounts.destroy',
-                                $account->id
+                                $account->id,
                             ],
                             'method' => 'DELETE',
-                            'class' => 'form-inline'
+                            'class'  => 'form-inline',
                         ]
                     );
-                    $actions .= ' <a href="accounts/' . $account->id .
+                    $actions .= ' <a href="accounts/'.$account->id.
                         '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
                         trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="accounts/' . $account->id .
+                    $actions .= ' <a href="accounts/'.$account->id.
                         '/edit" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> '.
                         trans('misc.button.edit').'</a> ';
                     if ($account->disabled) {
-                        $actions .= ' <a href="accounts/' . $account->id .
+                        $actions .= ' <a href="accounts/'.$account->id.
                             '/enable'.
                             '" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-ok-circle"></span> '.
                             trans('misc.button.enable')
                             .'</a> ';
                     } else {
-                        $actions .= ' <a href="accounts/' . $account->id .
+                        $actions .= ' <a href="accounts/'.$account->id.
                             '/disable'.
                             '" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-ban-circle"></span> '.
                             trans('misc.button.disable')
@@ -98,13 +95,14 @@ class AccountsController extends Controller
                     }
                     $actions .= \Form::button(
                         '<i class="glyphicon glyphicon-remove"></i> '
-                        . trans('misc.button.delete'),
+                        .trans('misc.button.delete'),
                         [
-                            'type' => 'submit',
-                            'class' => 'btn btn-danger btn-xs'
+                            'type'  => 'submit',
+                            'class' => 'btn btn-danger btn-xs',
                         ]
                     );
                     $actions .= \Form::close();
+
                     return $actions;
                 }
             )
@@ -130,12 +128,13 @@ class AccountsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  AccountFormRequest $accountForm
+     * @param AccountFormRequest $accountForm
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(AccountFormRequest $accountForm)
     {
-        $accountData=$accountForm->all();
+        $accountData = $accountForm->all();
 
         // massage data
         if (gettype($accountData['disabled']) == 'string') {
@@ -152,6 +151,7 @@ class AccountsController extends Controller
      * Display the specified resource.
      *
      * @param Account $account
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Account $account)
@@ -167,7 +167,8 @@ class AccountsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Account $account
+     * @param Account $account
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Account $account)
@@ -191,8 +192,9 @@ class AccountsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  AccountFormRequest $accountForm FormRequest
-     * @param  Account            $account Account
+     * @param AccountFormRequest $accountForm FormRequest
+     * @param Account            $account     Account
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(AccountFormRequest $accountForm, Account $account)
@@ -211,8 +213,7 @@ class AccountsController extends Controller
         }
 
         // may we disable the account, when requested
-        if ($account->isSystemAccount() && $accountData['disabled'])
-        {
+        if ($account->isSystemAccount() && $accountData['disabled']) {
             return Redirect::back()
                 ->with('message', "System account can't be disabled.");
         }
@@ -223,51 +224,53 @@ class AccountsController extends Controller
             ->with('message', 'Account has been updated.');
     }
 
-
     /**
-     * Disable the account
+     * Disable the account.
      *
      * @param Account $account
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function disable(Account $account)
     {
         if (!$account->mayDisable($this->auth_user)) {
             return Redirect::route('admin.accounts.index')
-                ->with('message', 'User is not authorized to disable account "'. $account->name . '"');
+                ->with('message', 'User is not authorized to disable account "'.$account->name.'"');
         }
 
         $account->disabled = true;
         $account->save();
 
         return Redirect::route('admin.accounts.index')
-            ->with('message', 'Account "'. $account->name . '" has been disabled');
+            ->with('message', 'Account "'.$account->name.'" has been disabled');
     }
 
     /**
-     * Enable the account
+     * Enable the account.
      *
      * @param Account $account
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function enable(Account $account)
     {
         if (!$account->mayEnable($this->auth_user)) {
             return Redirect::route('admin.accounts.index')
-                ->with('message', 'User is not authorized to enable account "'. $account->name . '"');
+                ->with('message', 'User is not authorized to enable account "'.$account->name.'"');
         }
 
         $account->disabled = false;
         $account->save();
 
         return Redirect::route('admin.accounts.index')
-            ->with('message', 'Account "'. $account->name . '" has been enabled');
+            ->with('message', 'Account "'.$account->name.'" has been enabled');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Account $account
+     * @param Account $account
+     *
      * @return \\Illuminate\Http\RedirectResponse
      */
     public function destroy(Account $account)

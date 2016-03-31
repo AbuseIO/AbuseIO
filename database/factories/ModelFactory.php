@@ -11,58 +11,57 @@
 |
 */
 
-
-
 $factory->define(AbuseIO\Models\Account::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'description' => $faker->sentence(rand(6, 10)),
-        'disabled' =>  rand(0, 1),
+        'name'          => $faker->name,
+        'description'   => $faker->sentence(rand(6, 10)),
+        'disabled'      => rand(0, 1),
         'systemaccount' => 0,
-        'brand_id' => 1,
+        'brand_id'      => 1,
     ];
 });
 
 $factory->define(AbuseIO\Models\Brand::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'company_name' => $faker->company,
-        'logo' => file_get_contents(\AbuseIO\Models\Brand::getDefaultLogo()->getPathname()),
+        'name'              => $faker->name,
+        'company_name'      => $faker->company,
+        'logo'              => file_get_contents(\AbuseIO\Models\Brand::getDefaultLogo()->getPathname()),
         'introduction_text' => $faker->realText(),
-        'creator_id' => 1,
+        'creator_id'        => 1,
     ];
 });
 
 $factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker) {
     global $contact_reference_counter;
-    if (! $contact_reference_counter) {
+    if (!$contact_reference_counter) {
         $contact_reference_counter = 1;
     } else {
         $contact_reference_counter++;
     }
 
     return [
-        'reference' => sprintf("reference_%d", $contact_reference_counter),
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'api_host' => 'api_host',
+        'reference'   => sprintf('reference_%d', $contact_reference_counter),
+        'name'        => $faker->name,
+        'email'       => $faker->email,
+        'api_host'    => 'api_host',
         'auto_notify' => $faker->boolean(),
-        'enabled' => $faker->boolean(),
-        'account_id' => AbuseIO\Models\Account::all()->first()->id,
+        'enabled'     => $faker->boolean(),
+        'account_id'  => AbuseIO\Models\Account::all()->first()->id,
     ];
 });
 
 $factory->define(AbuseIO\Models\Domain::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->domainName,
+        'name'       => $faker->domainName,
         'contact_id' => AbuseIO\Models\Contact::all()->first()->id,
-        'enabled' => $faker->boolean(),
+        'enabled'    => $faker->boolean(),
     ];
 });
 $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) {
 
     $evidence = factory(\AbuseIO\Models\Evidence::class)->create();
     $ticket = factory(\AbuseIO\Models\Ticket::class)->create();
+
     return [
         'ticket_id'                 => $ticket->id, //\AbuseIO\Models\Ticket::all()->first()->id,
         'evidence_id'               => $evidence->id,
@@ -71,9 +70,9 @@ $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) 
         'information'               => json_encode(
             [
                 'engine' => $faker->sentence(5),
-                'uri' => $faker->url
+                'uri'    => $faker->url,
             ]
-        )
+        ),
     ];
 });
 
@@ -81,7 +80,7 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
     global $runnerCount;
 
     if ($runnerCount > 0) {
-        $runnerCount ++;
+        $runnerCount++;
     } else {
         $runnerCount = 1;
     }
@@ -90,13 +89,12 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
     // /storage/mailarchive/$datefolder/$fileuuid.eml
     return [
         'filename' => sprintf('mailarchive/20150906/%d_messageid', $runnerCount),
-        'sender' => $faker->name,
-        'subject' => $faker->sentence(),
+        'sender'   => $faker->name,
+        'subject'  => $faker->sentence(),
     ];
 });
 
-
-/**
+/*
  * TODO: figure out how to use Incident model factory and what values are relevant.
  */
 //$factory->define(AbuseIO\Models\Incident::class, function (Faker\Generator $faker) {
@@ -118,11 +116,11 @@ $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $fake
     $last_ip = long2ip(ip2long($first_ip) + $faker->numberBetween(5, 100));
 
     return [
-        'contact_id' => \AbuseIO\Models\Contact::all()->first()->id,
-        'first_ip' => $first_ip,
-        'last_ip' => $last_ip,
+        'contact_id'  => \AbuseIO\Models\Contact::all()->first()->id,
+        'first_ip'    => $first_ip,
+        'last_ip'     => $last_ip,
         'description' => $faker->sentence($faker->numberBetween(3, 5)),
-        'enabled' => $faker->boolean(),
+        'enabled'     => $faker->boolean(),
     ];
 });
 
@@ -134,12 +132,11 @@ $factory->define(AbuseIO\Models\Note::class, function (Faker\Generator $faker) {
     return [
         'ticket_id' => factory(\AbuseIO\Models\Ticket::class)->create()->id,
         'submitter' => $faker->userName,
-        'text' => $faker->sentence($faker->numberBetween(5,10)),
-        'hidden' => $faker->boolean(),
-        'viewed' => $faker->boolean(),
+        'text'      => $faker->sentence($faker->numberBetween(5, 10)),
+        'hidden'    => $faker->boolean(),
+        'viewed'    => $faker->boolean(),
     ];
 });
-
 
 //
 //$factory->define(AbuseIO\Models\Origin::class, function (Faker\Generator $faker) {
@@ -148,17 +145,16 @@ $factory->define(AbuseIO\Models\Note::class, function (Faker\Generator $faker) {
 //
 $factory->define(AbuseIO\Models\Permission::class, function (Faker\Generator $faker) {
     return [
-        "name" => $faker->name,
-        "description" => $faker->sentence(6),
+        'name'        => $faker->name,
+        'description' => $faker->sentence(6),
     ];
 });
 $factory->define(AbuseIO\Models\Role::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'description' => $faker->sentence()
+        'name'        => $faker->name,
+        'description' => $faker->sentence(),
     ];
 });
-
 
 $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker) {
 
@@ -167,33 +163,32 @@ $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker)
     /** @var \AbuseIO\Models\Contact $ipContact */
     $ipContact = $contactList->random();
 
-
     /** @var \AbuseIO\Models\Contact $domainContact */
     $domainContact = $contactList->random();
 
     return [
-        'ip' => $faker->boolean()? $faker->ipv4: $faker->ipv6,
-        'domain' => $faker->domainName,
-        'class_id' => array_rand((trans('classifications'))),
-        'type_id' => array_rand(config('types.type')),
-        'ip_contact_account_id' => $ipContact->account_id,
-        'ip_contact_reference' => $ipContact->reference,
-        'ip_contact_name' => $ipContact->name,
-        'ip_contact_email'=> $ipContact->email,
-        'ip_contact_api_host' => $ipContact->api_host,
-        'ip_contact_auto_notify'=> $ipContact->auto_notify,
-        'ip_contact_notified_count' => 0,
-        'domain_contact_account_id' => $domainContact->account_id,
-        'domain_contact_reference' => $domainContact->reference,
-        'domain_contact_name' => $domainContact->name,
-        'domain_contact_email' => $domainContact->email,
-        'domain_contact_api_host' => $domainContact->api_host,
-        'domain_contact_auto_notify' => $domainContact->auto_notify,
+        'ip'                            => $faker->boolean() ? $faker->ipv4 : $faker->ipv6,
+        'domain'                        => $faker->domainName,
+        'class_id'                      => array_rand((trans('classifications'))),
+        'type_id'                       => array_rand(config('types.type')),
+        'ip_contact_account_id'         => $ipContact->account_id,
+        'ip_contact_reference'          => $ipContact->reference,
+        'ip_contact_name'               => $ipContact->name,
+        'ip_contact_email'              => $ipContact->email,
+        'ip_contact_api_host'           => $ipContact->api_host,
+        'ip_contact_auto_notify'        => $ipContact->auto_notify,
+        'ip_contact_notified_count'     => 0,
+        'domain_contact_account_id'     => $domainContact->account_id,
+        'domain_contact_reference'      => $domainContact->reference,
+        'domain_contact_name'           => $domainContact->name,
+        'domain_contact_email'          => $domainContact->email,
+        'domain_contact_api_host'       => $domainContact->api_host,
+        'domain_contact_auto_notify'    => $domainContact->auto_notify,
         'domain_contact_notified_count' => 0,
-        'status_id' => 'OPEN', //key(array_rand(config('status.abusedesk'))),
-        'contact_status_id' => 'OPEN',// key(array_rand(config('status.abusedesk'))),
-        'last_notify_count' => '',
-        'last_notify_timestamp' => $faker->dateTime(),
+        'status_id'                     => 'OPEN', //key(array_rand(config('status.abusedesk'))),
+        'contact_status_id'             => 'OPEN', // key(array_rand(config('status.abusedesk'))),
+        'last_notify_count'             => '',
+        'last_notify_timestamp'         => $faker->dateTime(),
     ];
 });
 
@@ -202,12 +197,12 @@ $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
 
     return [
         'first_name' => $faker->firstName,
-        'last_name' => $faker->lastName,
-        'email' => $faker->email,
-        'password' => $password,
+        'last_name'  => $faker->lastName,
+        'email'      => $faker->email,
+        'password'   => $password,
         'account_id' => 1, //factory(\AbuseIO\Models\Account::class)->create(['disabled' => false]),
-        'locale' => 'en',
-        'disabled' => true,
+        'locale'     => 'en',
+        'disabled'   => true,
     ];
 });
 
@@ -215,9 +210,3 @@ $factory->define(AbuseIO\Models\Job::class, function () {
 
     return [];
 });
-
-
-
-
-
-

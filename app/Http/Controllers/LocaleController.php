@@ -2,27 +2,26 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
-use Validator;
 use Session;
 use URL;
+use Validator;
 
 /**
- * Class LocaleController
- * @package AbuseIO\Http\Controllers
+ * Class LocaleController.
  */
 class LocaleController extends Controller
 {
     /**
-     * Change the locale
+     * Change the locale.
      *
      * @param string $locale default 'en'
+     *
      * @return \Illuminate\Http\Response
      */
     public function setLocale($locale = 'en')
     {
         $rules = [
-            'locales' => 'in:en,nl' // List of supported locales
+            'locales' => 'in:en,nl', // List of supported locales
         ];
 
         $validator = Validator::make(compact($locale), $rules);
@@ -36,6 +35,5 @@ class LocaleController extends Controller
         }
 
         return redirect(url(URL::previous()));
-
     }
 }

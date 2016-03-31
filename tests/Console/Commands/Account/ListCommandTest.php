@@ -5,7 +5,6 @@ namespace tests\Console\Commands\Account;
 use AbuseIO\Models\Account;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
 use tests\TestCase;
 
 /**
@@ -13,13 +12,11 @@ use tests\TestCase;
  */
 class ListCommandTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     private $accounts;
     private $name1;
     private $name2;
-
 
     public function testHeaders()
     {
@@ -79,11 +76,11 @@ class ListCommandTest extends TestCase
 
     /**
      * this should not be part of the setUp method because the database connection
-     * has NOT been setUp properly at that moment
+     * has NOT been setUp properly at that moment.
      */
     private function initDB()
     {
-        Account::where("id", "!=", 1)->delete();
+        Account::where('id', '!=', 1)->delete();
 
         $this->accounts = factory(Account::class, 10)->create();
 

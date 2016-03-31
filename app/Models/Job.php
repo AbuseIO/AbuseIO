@@ -1,20 +1,22 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Event
- * @package AbuseIO\Models
- * @property integer $id
+ * Class Event.
+ *
+ * @property int $id
  * @property string $queue
  * @property string $payload
- * @property integer $attempts
- * @property integer $reserved
- * @property integer $reserved_at
- * @property integer $available_at
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * @property int $attempts
+ * @property int $reserved
+ * @property int $reserved_at
+ * @property int $available_at
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class Job extends Model
 {

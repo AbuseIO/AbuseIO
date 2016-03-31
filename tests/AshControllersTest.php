@@ -1,9 +1,9 @@
 <?php
+
 namespace tests;
 
 class AshControllersTest extends TestCase
 {
-
     /**
      * @return void
      */

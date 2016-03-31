@@ -5,8 +5,7 @@ namespace AbuseIO\Console\Commands;
 use Illuminate\Console\Command;
 
 /**
- * Class AbstractEditCommand
- * @package AbuseIO\Console\Commands
+ * Class AbstractEditCommand.
  */
 abstract class AbstractEditCommand extends Command
 {
@@ -43,7 +42,7 @@ abstract class AbstractEditCommand extends Command
         }
         $validation = $this->getValidator($model);
 
-        /** @var  $validation */
+        /** @var $validation */
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
                 $this->warn($message);
@@ -55,8 +54,6 @@ abstract class AbstractEditCommand extends Command
 
             return false;
         }
-
-
 
         if (!$model->update()) {
             $this->error(
@@ -83,6 +80,7 @@ abstract class AbstractEditCommand extends Command
 
     /**
      * @param $model
+     *
      * @return mixed
      */
     abstract protected function getValidator($model);
@@ -175,6 +173,7 @@ abstract class AbstractEditCommand extends Command
 
     /**
      * @param $updateRules
+     *
      * @return array
      */
     public function getUpdateRulesForDirtyAttributes($updateRules)
@@ -184,17 +183,18 @@ abstract class AbstractEditCommand extends Command
 
     /**
      * @param $model
+     *
      * @return array
      */
     protected function getModelAsArrayForDirtyAttributes($model)
     {
-
         return $this->returnOnlyKeysInFilter($this->dirtyAttributes, $model->toArray());
     }
 
     /**
      * @param $keys
      * @param $array
+     *
      * @return array
      */
     private function returnOnlyKeysInFilter($keys, $array)
@@ -206,6 +206,7 @@ abstract class AbstractEditCommand extends Command
                 $result[$key] = $array[$key];
             }
         }
+
         return $result;
     }
 
