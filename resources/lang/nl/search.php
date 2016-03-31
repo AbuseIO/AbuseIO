@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for Search
+ * Translations for Search.
  */
 return [
     // Headers

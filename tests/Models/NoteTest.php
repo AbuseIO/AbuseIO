@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Models;
 
 use AbuseIO\Models\Note;
@@ -12,7 +13,7 @@ class NoteTest extends TestCase
     public function testModelFactory()
     {
         $note = factory(Note::class)->create();
-        $noteFromDB = Note::where("submitter", $note->submitter)->first();
+        $noteFromDB = Note::where('submitter', $note->submitter)->first();
         $this->assertEquals($note->submitter, $noteFromDB->submitter);
     }
 }

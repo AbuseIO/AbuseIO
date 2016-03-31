@@ -63,7 +63,7 @@ class ListCommandTest extends TestCase
 
     public function testFilter()
     {
-       $this->initDB();
+        $this->initDB();
 
         $exitCode = Artisan::call(
             'ticket:list',

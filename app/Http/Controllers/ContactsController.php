@@ -2,20 +2,17 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\ContactFormRequest;
 use AbuseIO\Models\Contact;
-use yajra\Datatables\Datatables;
-use Redirect;
 use Form;
+use Redirect;
+use yajra\Datatables\Datatables;
 
 /**
- * Class ContactsController
- * @package AbuseIO\Http\Controllers
+ * Class ContactsController.
  */
 class ContactsController extends Controller
 {
-
     /**
      * ContactsController constructor.
      */
@@ -50,13 +47,13 @@ class ContactsController extends Controller
                         [
                             'route'     => ['admin.contacts.destroy', $contact->id],
                             'method'    => 'DELETE',
-                            'class'     => 'form-inline'
+                            'class'     => 'form-inline',
                         ]
                     );
-                    $actions .= ' <a href="contacts/' . $contact->id .
+                    $actions .= ' <a href="contacts/'.$contact->id.
                         '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
                         trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="contacts/' . $contact->id .
+                    $actions .= ' <a href="contacts/'.$contact->id.
                         '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
                         trans('misc.button.edit').'</a> ';
                     $actions .= Form::button(
@@ -64,10 +61,11 @@ class ContactsController extends Controller
                         trans('misc.button.delete'),
                         [
                             'type'  => 'submit',
-                            'class' => 'btn btn-danger btn-xs'
+                            'class' => 'btn btn-danger btn-xs',
                         ]
                     );
                     $actions .= Form::close();
+
                     return $actions;
                 }
             )
@@ -113,11 +111,11 @@ class ContactsController extends Controller
      * Export listing to CSV format.
      *
      * @param string $format
+     *
      * @return \Illuminate\Http\Response
      */
     public function export($format)
     {
-
         $auth_account = $this->auth_user->account;
 
         if ($auth_account->isSystemAccount()) {
@@ -138,7 +136,7 @@ class ContactsController extends Controller
                 'auto_notify'   => 'Notifications',
             ];
 
-            $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+            $output = '"'.implode('", "', $columns).'"'.PHP_EOL;
 
             foreach ($contacts as $contact) {
                 $row = [
@@ -150,7 +148,7 @@ class ContactsController extends Controller
                     $contact['auto_notify'] ? 'Automatic' : 'Manual',
                 ];
 
-                $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+                $output .= '"'.implode('", "', $row).'"'.PHP_EOL;
             }
 
             return response(substr($output, 0, -1), 200)
@@ -165,8 +163,9 @@ class ContactsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ContactFormRequest $contactForm FormRequest
-     * @param  Contact            $contact Contact
+     * @param ContactFormRequest $contactForm FormRequest
+     * @param Contact            $contact     Contact
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(ContactFormRequest $contactForm, Contact $contact)
@@ -181,11 +180,11 @@ class ContactsController extends Controller
      * Display the specified resource.
      *
      * @param Contact $contact
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Contact $contact)
     {
-
         return view('contacts.show')
             ->with('contact', $contact)
             ->with('auth_user', $this->auth_user);
@@ -195,6 +194,7 @@ class ContactsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Contact $contact
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Contact $contact)
@@ -208,7 +208,8 @@ class ContactsController extends Controller
      * Update the specified resource in storage.
      *
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact $contact Contact
+     * @param Contact            $contact     Contact
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(ContactFormRequest $contactForm, Contact $contact)
@@ -223,6 +224,7 @@ class ContactsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Contact $contact Contact
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Contact $contact)
@@ -230,16 +232,16 @@ class ContactsController extends Controller
         if ($contact->domains->count() > 0) {
             return Redirect::route('admin.contacts.index')->with(
                 'message',
-                "Contact could not be deleted because ".  $contact->domains->count()
-                . " domain(s) is stil pointing to this contact."
+                'Contact could not be deleted because '.$contact->domains->count()
+                .' domain(s) is stil pointing to this contact.'
             );
         }
 
         if ($contact->netblocks->count() > 0) {
             return Redirect::route('admin.contacts.index')->with(
                 'message',
-                "Contact could not be deleted because ".  $contact->netblocks->count()
-                . " netblock(s) is stil pointing to this contact."
+                'Contact could not be deleted because '.$contact->netblocks->count()
+                .' netblock(s) is stil pointing to this contact.'
             );
         }
 

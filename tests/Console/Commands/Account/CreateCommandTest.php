@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Console\Commands\Account;
 
 use AbuseIO\Models\Account;
@@ -25,14 +26,14 @@ class CreateCommandTest extends TestCase
         $brand = factory(Brand::class)->create();
 
         Artisan::call('account:create', [
-            "name" => "test_dummy",
-            "brand_id" => $brand->id
+            'name'     => 'test_dummy',
+            'brand_id' => $brand->id,
         ]);
         $output = Artisan::output();
 
         $this->assertContains('The account has been created', $output);
 
-        Account::where("name", "test_dummy")->forceDelete();
+        Account::where('name', 'test_dummy')->forceDelete();
         $brand->forceDelete();
     }
 }

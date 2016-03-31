@@ -3,23 +3,21 @@
 namespace AbuseIO\Console\Commands\Incident;
 
 use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputArgument;
-use AbuseIO\Jobs\IncidentsProcess;
-use Illuminate\Console\Command;
 use AbuseIO\Jobs\EvidenceSave;
+use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Incident;
+use Illuminate\Console\Command;
 use Prophecy\Argument;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
 /**
- * Class CreateCommand
- * @package AbuseIO\Console\Commands\Account
+ * Class CreateCommand.
  */
 class CreateCommand extends Command
 {
-
     use ShowHelpWhenRunTimeExceptionOccurs;
 
     /*
@@ -49,10 +47,11 @@ class CreateCommand extends Command
 
         if (empty($this->evidenceFile)) {
             $this->error('Error returned while asking to write evidence file, cannot continue');
+
             return false;
         }
 
-        /** @var  $validation */
+        /** @var $validation */
         $validation = $this->getValidator($incident);
         if ($validation->fails()) {
             foreach ($validation->messages()->all() as $message) {
@@ -66,30 +65,27 @@ class CreateCommand extends Command
             return false;
         }
 
-        /**
+        /*
          * build evidence model, but wait with saving it
          **/
         $evidence = new Evidence();
         $evidence->filename = $this->evidenceFile;
-        $evidence->sender = trim(posix_getpwuid(posix_geteuid())['name']) . ' (CLI)';
+        $evidence->sender = trim(posix_getpwuid(posix_geteuid())['name']).' (CLI)';
         $evidence->subject = 'CLI Created Incident';
 
-        /**
+        /*
          * Call IncidentsProcess to validate, store evidence and save incidents
          */
-        $incidentsProcess = new IncidentsProcess([ $incident ], $evidence);
+        $incidentsProcess = new IncidentsProcess([$incident], $evidence);
 
         // Validate the data set
         if (!$incidentsProcess->validate()) {
-
             return $this->exception('validation of generated objects failed while processing');
         }
 
         // Write the data set to database
         if (!$incidentsProcess->save()) {
-
             return $this->exception('unable to save generated objects');
-
         }
 
         $msg = sprintf('The %s has been created', $this->getAsNoun());
@@ -99,13 +95,15 @@ class CreateCommand extends Command
     }
 
     /**
-     * Call exception with error message
+     * Call exception with error message.
+     *
      * @param $message
-     * @return boolean
+     *
+     * @return bool
      */
     private function exception($message)
     {
-        $this->error('ERROR: ' . $message);
+        $this->error('ERROR: '.$message);
 
         return false;
     }
@@ -118,12 +116,12 @@ class CreateCommand extends Command
         return new InputDefinition(
             [
                 new InputArgument('source', InputArgument::REQUIRED, 'Name of the source'),
-                new InputArgument("ip", InputArgument::REQUIRED, "ip address"),
-                new InputArgument("domain", InputArgument::REQUIRED, "domain name"),
-                new InputArgument("class", InputArgument::REQUIRED, "a preconfigured abuse classification"),
-                new InputArgument("type", InputArgument::REQUIRED, "a preconfigured abuse type"),
-                new InputArgument("timestamp", InputArgument::REQUIRED, "UNIX timestamp"),
-                new InputArgument("information", InputArgument::REQUIRED, "information data in single string or JSON"),
+                new InputArgument('ip', InputArgument::REQUIRED, 'ip address'),
+                new InputArgument('domain', InputArgument::REQUIRED, 'domain name'),
+                new InputArgument('class', InputArgument::REQUIRED, 'a preconfigured abuse classification'),
+                new InputArgument('type', InputArgument::REQUIRED, 'a preconfigured abuse type'),
+                new InputArgument('timestamp', InputArgument::REQUIRED, 'UNIX timestamp'),
+                new InputArgument('information', InputArgument::REQUIRED, 'information data in single string or JSON'),
                 new InputArgument('file', InputArgument::OPTIONAL, 'Optionally add a file as evidence'),
             ]
         );
@@ -134,7 +132,7 @@ class CreateCommand extends Command
      */
     public function getAsNoun()
     {
-        return "incident";
+        return 'incident';
     }
 
     /**
@@ -154,7 +152,6 @@ class CreateCommand extends Command
         if (is_object(json_decode($this->argument('information')))) {
             // JSON object given which we can directly use in the incident
             $incident->information = $this->argument('information');
-
         } else {
             // String given so wrapping it into a data json object
             $incident->information = json_encode(
@@ -168,45 +165,44 @@ class CreateCommand extends Command
     }
 
     /**
-     * Build the evidence object as its required to save incidents
+     * Build the evidence object as its required to save incidents.
      *
      * @param $incident object AbuseIO\Models\Incident
-     * @param $addFile string File
+     * @param $file string File
      */
-    protected function setEvidenceFile($incident, $addFile)
+    protected function setEvidenceFile($incident, $file)
     {
-        $evidence = new EvidenceSave;
+        $evidence = new EvidenceSave();
         $evidenceData = [
-            'createdBy'     => trim(posix_getpwuid(posix_geteuid())['name']) . ' (CLI)',
+            'createdBy'     => trim(posix_getpwuid(posix_geteuid())['name']).' (CLI)',
             'receivedOn'    => time(),
             'submittedData' => $incident->toArray(),
             'attachments'   => [],
         ];
 
         // Add the file to evidence object if it was given
-        if ($this->argument('file') !== null) {
+        if ($file !== null) {
             // Build evidence with added file
-            if (!is_file($this->argument('file'))) {
-                $this->error('File does not exist: ' . $this->argument('file'));
+            if (!is_file($file)) {
+                $this->error('File does not exist: '.$file);
                 die();
             }
 
             $attachment = [
-                'filename' => basename($this->argument('file')),
-                'size' => filesize($this->argument('file')),
-                'contentType' => mime_content_type($this->argument('file')),
-                'data' => file_get_contents($this->argument('file'))
+                'filename'    => basename($file),
+                'size'        => filesize($file),
+                'contentType' => mime_content_type($file),
+                'data'        => file_get_contents($file),
             ];
             $evidenceData['attachments'][] = $attachment;
         }
 
         $this->evidenceFile = $evidence->save(json_encode($evidenceData));
-
-
     }
 
     /**
      * @param $model
+     *
      * @return mixed
      */
     protected function getValidator($model)

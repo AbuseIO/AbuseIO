@@ -2,21 +2,18 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
 use AbuseIO\Http\Requests\DomainFormRequest;
-use AbuseIO\Models\Domain;
 use AbuseIO\Models\Contact;
-use yajra\Datatables\Datatables;
-use Redirect;
+use AbuseIO\Models\Domain;
 use Form;
+use Redirect;
+use yajra\Datatables\Datatables;
 
 /**
- * Class DomainsController
- * @package AbuseIO\Http\Controllers
+ * Class DomainsController.
  */
 class DomainsController extends Controller
 {
-
     /**
      * DomainsController constructor.
      */
@@ -26,7 +23,6 @@ class DomainsController extends Controller
 
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Domain', ['except' => ['search', 'index', 'create', 'store', 'export']]);
-
     }
 
     /**
@@ -53,25 +49,26 @@ class DomainsController extends Controller
                 function ($domain) {
                     $actions = Form::open(
                         [
-                            'route' => ['admin.domains.destroy', $domain->id],
+                            'route'  => ['admin.domains.destroy', $domain->id],
                             'method' => 'DELETE',
-                            'class' => 'form-inline'
+                            'class'  => 'form-inline',
                         ]
                     );
-                    $actions .= ' <a href="domains/' . $domain->id .
+                    $actions .= ' <a href="domains/'.$domain->id.
                         '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
                         trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="domains/' . $domain->id .
+                    $actions .= ' <a href="domains/'.$domain->id.
                         '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
                         trans('misc.button.edit').'</a> ';
                     $actions .= Form::button(
-                        '<i class="glyphicon glyphicon-remove"></i> '. trans('misc.button.delete'),
+                        '<i class="glyphicon glyphicon-remove"></i> '.trans('misc.button.delete'),
                         [
-                            'type' => 'submit',
-                            'class' => 'btn btn-danger btn-xs'
+                            'type'  => 'submit',
+                            'class' => 'btn btn-danger btn-xs',
                         ]
                     );
                     $actions .= Form::close();
+
                     return $actions;
                 }
             )
@@ -96,12 +93,11 @@ class DomainsController extends Controller
      */
     public function create()
     {
-
         $auth_account = $this->auth_user->account;
 
         if (!$auth_account->isSystemAccount()) {
             $contacts = Contact::select('contacts.*')
-                ->where('account_id', $auth_account->id )
+                ->where('account_id', $auth_account->id)
                 ->get()->lists('name', 'id');
         } else {
             $contacts = Contact::lists('name', 'id');
@@ -116,7 +112,8 @@ class DomainsController extends Controller
     /**
      * Export listing to CSV format.
      *
-     * @param  string $format
+     * @param string $format
+     *
      * @return \Illuminate\Http\Response
      */
     public function export($format)
@@ -132,7 +129,6 @@ class DomainsController extends Controller
                 ->where('accounts.id', '=', $auth_account->id);
         }
 
-
         if ($format === 'csv') {
             $columns = [
                 'contact'   => 'Contact',
@@ -140,16 +136,16 @@ class DomainsController extends Controller
                 'enabled'   => 'Status',
             ];
 
-            $output = '"' . implode('","', $columns) . '"' . PHP_EOL;
+            $output = '"'.implode('","', $columns).'"'.PHP_EOL;
 
             foreach ($domains as $domain) {
                 $row = [
-                    $domain->contact->name . ' (' . $domain->contact->reference . ')',
+                    $domain->contact->name.' ('.$domain->contact->reference.')',
                     $domain['name'],
                     $domain['enabled'] ? 'Enabled' : 'Disabled',
                 ];
 
-                $output .= '"' . implode('","', $row) . '"' . PHP_EOL;
+                $output .= '"'.implode('","', $row).'"'.PHP_EOL;
             }
 
             return response(substr($output, 0, -1), 200)
@@ -165,6 +161,7 @@ class DomainsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param DomainFormRequest $domainForm
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(DomainFormRequest $domainForm)
@@ -179,6 +176,7 @@ class DomainsController extends Controller
      * Display the specified resource.
      *
      * @param Domain $domain
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Domain $domain)
@@ -192,6 +190,7 @@ class DomainsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Domain $domain
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Domain $domain)
@@ -200,7 +199,7 @@ class DomainsController extends Controller
 
         if (!$auth_account->isSystemAccount()) {
             $contacts = Contact::select('contacts.*')
-                ->where('account_id', $auth_account->id )
+                ->where('account_id', $auth_account->id)
                 ->get()->lists('name', 'id');
         } else {
             $contacts = Contact::lists('name', 'id');
@@ -217,7 +216,8 @@ class DomainsController extends Controller
      * Update the specified resource in storage.
      *
      * @param DomainFormRequest $domainForm
-     * @param Domain $domain
+     * @param Domain            $domain
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(DomainFormRequest $domainForm, Domain $domain)
@@ -232,6 +232,7 @@ class DomainsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Domain $domain
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Domain $domain)

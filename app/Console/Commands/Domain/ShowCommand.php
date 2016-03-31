@@ -7,46 +7,45 @@ use AbuseIO\Models\Domain;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\Domain
+ * Class ShowCommand.
  */
 class ShowCommand extends AbstractShowCommand
 {
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAsNoun()
     {
-        return "domain";
+        return 'domain';
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAllowedArguments()
     {
-        return ["id", "name"];
+        return ['id', 'name'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getFields()
     {
-        return ['first_ip', 'last_ip','description', 'enabled'];
+        return ['first_ip', 'last_ip', 'description', 'enabled'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getCollectionWithArguments()
     {
-        return Domain::where("name", "like", "%".$this->argument("domain")."%")
-            ->orWhere("id", $this->argument("domain"));
+        return Domain::where('name', 'like', '%'.$this->argument('domain').'%')
+            ->orWhere('id', $this->argument('domain'));
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function defineInput()
     {
@@ -55,7 +54,7 @@ class ShowCommand extends AbstractShowCommand
                 'domain',
                 InputArgument::REQUIRED,
                 'Use the id or name for a domain to show it.'
-            )
+            ),
         ];
     }
 }

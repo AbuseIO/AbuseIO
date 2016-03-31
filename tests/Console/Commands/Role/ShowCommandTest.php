@@ -14,7 +14,6 @@ class ShowCommandTest extends TestCase
 {
     use DatabaseTransactions;
 
-
     public function testWithInvalidFilter()
     {
         $exitCode = Artisan::call(
@@ -41,4 +40,3 @@ class ShowCommandTest extends TestCase
         $this->assertContains('Admin', Artisan::output());
     }
 }
-

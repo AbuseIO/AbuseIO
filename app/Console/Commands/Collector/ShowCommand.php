@@ -35,7 +35,7 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function hydrateCollectorWithFields(array $collectors)
     {
@@ -96,7 +96,7 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getCollectionWithArguments()
     {
@@ -104,7 +104,7 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function defineInput()
     {
@@ -118,7 +118,7 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformObjectToTableBody($model)
     {

@@ -41,7 +41,7 @@ $app->singleton(
     'AbuseIO\Exceptions\Handler'
 );
 
-/**
+/*
  * Configure Monolog.
  */
 $app->configureMonologUsing(

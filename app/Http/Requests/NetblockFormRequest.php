@@ -5,8 +5,7 @@ namespace AbuseIO\Http\Requests;
 use AbuseIO\Models\Netblock;
 
 /**
- * Class NetblockFormRequest
- * @package AbuseIO\Http\Requests
+ * Class NetblockFormRequest.
  */
 class NetblockFormRequest extends Request
 {
@@ -39,6 +38,6 @@ class NetblockFormRequest extends Request
                 break;
         }
 
-        return [ ];
+        return [];
     }
 }

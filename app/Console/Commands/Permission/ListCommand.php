@@ -2,29 +2,28 @@
 
 namespace AbuseIO\Console\Commands\Permission;
 
-
 use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Permission;
 
 /**
- * Class ListCommand
- * @package AbuseIO\Console\Commands\Permission
+ * Class ListCommand.
  */
 class ListCommand extends AbstractListCommand
 {
     /**
      * @var array
      */
-    protected $filterArguments = ["id"];
+    protected $filterArguments = ['id'];
 
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
-    protected $headers = ['Id', "Name", "Description"];
+    protected $headers = ['Id', 'Name', 'Description'];
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -37,11 +36,12 @@ class ListCommand extends AbstractListCommand
                 $permission->description,
             ];
         }
+
         return $result;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
@@ -51,7 +51,7 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
@@ -59,10 +59,10 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "permission";
+        return 'permission';
     }
 }

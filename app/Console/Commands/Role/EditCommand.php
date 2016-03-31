@@ -5,18 +5,17 @@ namespace AbuseIO\Console\Commands\Role;
 use AbuseIO\Console\Commands\AbstractEditCommand;
 use AbuseIO\Models\Role;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 use Validator;
 
 /**
- * Class EditCommand
- * @package AbuseIO\Console\Commands\Role
+ * Class EditCommand.
  */
 class EditCommand extends AbstractEditCommand
 {
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getOptionsList()
     {
@@ -24,13 +23,13 @@ class EditCommand extends AbstractEditCommand
             [
                 new inputArgument('id', InputArgument::REQUIRED, 'Role id to edit'),
                 new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'Name for role'),
-                new InputOption('description', null, InputOption::VALUE_OPTIONAL, 'Description')
+                new InputOption('description', null, InputOption::VALUE_OPTIONAL, 'Description'),
             ]
         );
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getAsNoun()
     {
@@ -38,7 +37,7 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getModelFromRequest()
     {
@@ -46,7 +45,7 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function handleOptions($model)
     {
@@ -57,7 +56,7 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getValidator($model)
     {

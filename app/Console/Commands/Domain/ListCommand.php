@@ -6,21 +6,21 @@ use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Models\Domain;
 
 /**
- * Class ListCommand
- * @package AbuseIO\Console\Commands\Domain
+ * Class ListCommand.
  */
 class ListCommand extends AbstractListCommand
 {
-    protected $filterArguments = ["name"];
+    protected $filterArguments = ['name'];
 
     /**
-     * The headers of the table
+     * The headers of the table.
+     *
      * @var array
      */
-    protected $headers = ['Id', 'Contact', 'Name', "Enabled"];
+    protected $headers = ['Id', 'Contact', 'Name', 'Enabled'];
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function transformListToTableBody($list)
     {
@@ -29,11 +29,12 @@ class ListCommand extends AbstractListCommand
         foreach ($list as $domain) {
             $result[] = [$domain->id, $domain->contact->name, $domain->name, $domain->enabled];
         }
+
         return $result;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findWithCondition($filter)
     {
@@ -41,7 +42,7 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function findAll()
     {
@@ -49,10 +50,10 @@ class ListCommand extends AbstractListCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "domain";
+        return 'domain';
     }
 }

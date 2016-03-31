@@ -1,22 +1,22 @@
-<?php namespace AbuseIO\Providers;
+<?php
+
+namespace AbuseIO\Providers;
 
 use Illuminate\Database\QueryException;
-use Log;
-use Validator;
 use Illuminate\Support\ServiceProvider;
 use Lang;
+use Log;
+use Validator;
 
 /**
- * Extends the default laravel validations
+ * Extends the default laravel validations.
  *
  * Class ValidationsServiceProvider
- * @package AbuseIO\Providers
  */
 class ValidationsServiceProvider extends ServiceProvider
 {
-
     /**
-     * Contains the added validations centralized on a single loaded place
+     * Contains the added validations centralized on a single loaded place.
      *
      * @return void
      */
@@ -26,7 +26,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add timestamp validation
          */
-        /** @noinspection PhpUnusedParameterInspection */
+        /* @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'timestamp',
             function ($attribute, $value, $parameters, $validator) {
@@ -43,7 +43,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for multiple comma seperated e-mails
          */
-        /** @noinspection PhpUnusedParameterInspection */
+        /* @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'emails',
             function ($attribute, $value, $parameters, $validator) {
@@ -55,7 +55,7 @@ class ValidationsServiceProvider extends ServiceProvider
 
                 foreach ($value as $email) {
                     $data = [
-                        'email' => $email
+                        'email' => $email,
                     ];
 
                     $validator = Validator::make($data, $rules);
@@ -72,7 +72,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for valid and existing files on the filesystem
          */
-        /** @noinspection PhpUnusedParameterInspection */
+        /* @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'file',
             function ($attribute, $value, $parameters, $validator) {
@@ -93,11 +93,12 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for abuse class
          */
-        /** @noinspection PhpUnusedParameterInspection */
+        /* @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'abuseclass',
             function ($attribute, $value, $parameters, $validator) {
                 $classes = Lang::get('classifications');
+
                 return array_key_exists($value, $classes);
             }
         );
@@ -105,12 +106,13 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for abuse type
          */
-        /** @noinspection PhpUnusedParameterInspection */
+        /* @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'abusetype',
             function ($attribute, $value, $parameters, $validator) {
 
                 $types = config('types.type');
+
                 return in_array($value, $types);
             }
         );
@@ -118,16 +120,15 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for string or boolean
          */
-        /** @noinspection PhpUnusedParameterInspection */
+        /* @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'stringorboolean',
             function ($attribute, $value, $parameters, $validator) {
 
                 foreach (['string', 'boolean'] as $validation) {
-
                     $validator = Validator::make(
-                        [ 'field' => $value ],
-                        [ 'field' => "required|{$validation}" ]
+                        ['field' => $value],
+                        ['field' => "required|{$validation}"]
                     );
 
                     if (!$validator->fails()) {
@@ -143,7 +144,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for domain
          */
-        /** @noinspection PhpUnusedParameterInspection */
+        /* @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'domain',
             function ($attribute, $value, $parameters, $validator) {
@@ -152,7 +153,7 @@ class ValidationsServiceProvider extends ServiceProvider
                     return true;
                 }
 
-                $url = 'http://' . $value;
+                $url = 'http://'.$value;
 
                 $domain = getDomain($url);
 
@@ -168,7 +169,7 @@ class ValidationsServiceProvider extends ServiceProvider
         /*
          * Add validation for URI
          */
-        /** @noinspection PhpUnusedParameterInspection */
+        /* @noinspection PhpUnusedParameterInspection */
         Validator::extend(
             'uri',
             function ($attribute, $value, $parameters, $validator) {
@@ -178,7 +179,7 @@ class ValidationsServiceProvider extends ServiceProvider
                 }
 
                 if (!filter_var(
-                    'http://test.for.var.com' . $value,
+                    'http://test.for.var.com'.$value,
                     FILTER_VALIDATE_URL
                 ) === false) {
                     return true;
@@ -201,13 +202,14 @@ class ValidationsServiceProvider extends ServiceProvider
 
                 // check parameters
                 if (count($parameters) != 2) {
-                    Log::alert("uniqueflag validator: called without the needed parameters");
+                    Log::alert('uniqueflag validator: called without the needed parameters');
+
                     return true;
                 }
 
                 // if it is a string convert to boolean
-                if (gettype($value) == "string") {
-                    $value = ($value == "true" or $value == "1" ? true : false);
+                if (gettype($value) == 'string') {
+                    $value = ($value == 'true' or $value == '1' ? true : false);
                 }
 
                 if ($value) {
@@ -215,7 +217,7 @@ class ValidationsServiceProvider extends ServiceProvider
                     $field = $parameters[1];
 
                     // create the query
-                    $query=\DB::table($table)->where($field, true);
+                    $query = \DB::table($table)->where($field, true);
 
                     // are we in an update (id is set)
                     if (array_key_exists('id', $data)) {
@@ -229,13 +231,13 @@ class ValidationsServiceProvider extends ServiceProvider
                         Log::alert(
                             "uniqueflag validator: unexpected QueryException [$message], possible wrong parameters ?"
                         );
+
                         return true;
                     }
 
                     if (!empty($object)) {
                         return false;
                     }
-
                 }
 
                 return true;

@@ -1,17 +1,19 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Permission
- * @package AbuseIO\Models
- * @property integer $id
- * @property integer $name
- * @property integer $description
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * Class Permission.
+ *
+ * @property int $id
+ * @property int $name
+ * @property int $description
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class Permission extends Model
 {
@@ -40,7 +42,7 @@ class Permission extends Model
     */
 
     /**
-     * many-to-many relationship method
+     * many-to-many relationship method.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

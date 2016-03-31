@@ -5,6 +5,9 @@ namespace AbuseIO\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
+/**
+ * Class Authenticate.
+ */
 class Authenticate
 {
     /**
@@ -17,7 +20,7 @@ class Authenticate
     /**
      * Create a new filter instance.
      *
-     * @param  Guard $auth
+     * @param Guard $auth
      */
     public function __construct(Guard $auth)
     {
@@ -27,8 +30,9 @@ class Authenticate
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)

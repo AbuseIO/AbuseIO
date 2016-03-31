@@ -21,7 +21,6 @@ class ListCommandTest extends TestCase
         $this->list = factory(Permission::class, 3)->create();
     }
 
-
     public function testHeaders()
     {
         $this->initDB();
@@ -30,7 +29,7 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
 
-        $headers = ['Id', 'Name', 'Description',];
+        $headers = ['Id', 'Name', 'Description'];
         $output = Artisan::output();
         foreach ($headers as $header) {
             $this->assertContains($header, $output);
@@ -62,7 +61,7 @@ class ListCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
 
-        $this->assertContains((string)$this->list->get(0)->id, $output);
+        $this->assertContains((string) $this->list->get(0)->id, $output);
         $this->assertNotContains((string) $this->list->get(1)->id, $output);
     }
 

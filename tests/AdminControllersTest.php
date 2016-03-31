@@ -1,12 +1,12 @@
 <?php
+
 namespace tests;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class AdminControllersTest extends TestCase
 {
-
-    /**
+    /*
      * This is required else it would generate:
      *  Fatal error:  Maximum function nesting level of '100' reached, aborting
      */
@@ -31,7 +31,6 @@ class AdminControllersTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-
     /**
      * @return void
      */
@@ -41,7 +40,6 @@ class AdminControllersTest extends TestCase
         $response = $this->call('GET', '/admin/contacts');
         $this->assertEquals(200, $response->getStatusCode());
     }
-
 
     /**
      * @return void
@@ -53,7 +51,6 @@ class AdminControllersTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-
     /**
      * @return void
      */
@@ -64,7 +61,6 @@ class AdminControllersTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-
     /**
      * @return void
      */
@@ -74,7 +70,6 @@ class AdminControllersTest extends TestCase
         $response = $this->call('GET', '/admin/tickets');
         $this->assertEquals(200, $response->getStatusCode());
     }
-
 
     /**
      * @return void

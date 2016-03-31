@@ -2,19 +2,17 @@
 
 namespace AbuseIO\Console\Commands\Housekeeper;
 
-use Illuminate\Console\Command;
-use Carbon;
 use AbuseIO\Jobs\Notification;
+use Illuminate\Console\Command;
 
 /**
- * Class NotificationsCommand
- * @package AbuseIO\Console\Commands\Housekeeper
+ * Class NotificationsCommand.
  */
 class NotificationsCommand extends Command
 {
-
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $signature = 'housekeeper:notifications
@@ -27,12 +25,14 @@ class NotificationsCommand extends Command
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'List of send out pending notifications';
 
     /**
-     * They headers of the table
+     * They headers of the table.
+     *
      * @var array
      */
     protected $headers = [
@@ -44,11 +44,12 @@ class NotificationsCommand extends Command
         'Domain name',
         'Domain Contact Reference',
         'Domain Contact Email',
-        'Domain Contact RPC host'
+        'Domain Contact RPC host',
     ];
 
     /**
-     * They fields of the table / database row
+     * They fields of the table / database row.
+     *
      * @var array
      */
     protected $fields = [
@@ -60,7 +61,7 @@ class NotificationsCommand extends Command
         'domain',
         'domain_contact_reference',
         'domain_contact_email',
-        'domain_contact_api_host'
+        'domain_contact_api_host',
     ];
 
     /**
@@ -76,7 +77,7 @@ class NotificationsCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     public function handle()
     {
@@ -85,13 +86,14 @@ class NotificationsCommand extends Command
 
         ) {
             $this->error('Invalid or incomplete option(s) used, try --help');
+
             return false;
         }
 
-        $notification       = new Notification;
-        $searchTicket       = false;
-        $searchReference    = false;
-        $searchForce        = false;
+        $notification = new Notification();
+        $searchTicket = false;
+        $searchReference = false;
+        $searchForce = false;
 
         if ($this->option('ticket') !== null) {
             $searchTicket = $this->option('ticket');
@@ -106,12 +108,12 @@ class NotificationsCommand extends Command
         $notifications = $notification->buildList($searchTicket, $searchReference, $searchForce);
 
         if (!empty($this->option('list')) && $this->option('list') === true) {
-
             if (empty($notifications)) {
                 return true;
             }
             if (!is_array($notifications)) {
-                $this->error('Error(s) received while building notifications list:' . PHP_EOL . $notifications);
+                $this->error('Error(s) received while building notifications list:'.PHP_EOL.$notifications);
+
                 return false;
             }
 
@@ -136,15 +138,13 @@ class NotificationsCommand extends Command
         }
 
         if (!empty($this->option('send')) && $this->option('send') === true) {
-
             $errors = $notification->walkList($notifications);
 
             if ($errors !== true) {
-                $this->error("Errors ({$errors}) while sending notifications. Details logged under JOB " . getmypid());
+                $this->error("Errors ({$errors}) while sending notifications. Details logged under JOB ".getmypid());
             } else {
-                $this->info("Successfully send out notifications. Details logged under JOB " . getmypid());
+                $this->info('Successfully send out notifications. Details logged under JOB '.getmypid());
             }
-
         }
 
         return true;

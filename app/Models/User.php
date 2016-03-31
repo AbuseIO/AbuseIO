@@ -1,28 +1,30 @@
-<?php namespace AbuseIO\Models;
+<?php
 
+namespace AbuseIO\Models;
+
+use Hash;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Hash;
 
 /**
- * Class User
- * @package AbuseIO\Models
- * @property integer $id
+ * Class User.
+ *
+ * @property int $id
  * @property string $first_name fillable
  * @property string $last_name fillable
  * @property string $email fillable
  * @property string $password hidden
  * @property string $remember_token hidden
- * @property integer $account_id fillable
+ * @property int $account_id fillable
  * @property string $locale fillable
- * @property boolean $disabled fillable
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * @property bool $disabled fillable
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -57,7 +59,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = [
         'password',
-        'remember_token'
+        'remember_token',
     ];
 
     /*
@@ -67,13 +69,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array
      */
     public static function createRules()
     {
-
         $rules = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
@@ -89,9 +90,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
-     * @param  \AbuseIO\Models\User $user
+     * @param \AbuseIO\Models\User $user
+     *
      * @return array
      */
     public static function updateRules($user)
@@ -99,7 +101,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $rules = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'email'         => 'required|email|unique:users,email,' . $user->id,
+            'email'         => 'required|email|unique:users,email,'.$user->id,
             'password'      => 'sometimes|confirmed|min:6|max:32',
             'account_id'    => 'required|integer|exists:accounts,id',
             'locale'        => 'sometimes|required|min:2|max:3',
@@ -117,7 +119,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
 
     /**
-     * Many-To-Many Relationship Method for accessing the User->roles
+     * Many-To-Many Relationship Method for accessing the User->roles.
      *
      * @return \Illuminate\Database\Eloquent\Relationship\belongsToMany
      */
@@ -127,7 +129,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * One-To-Many relation to account
+     * One-To-Many relation to account.
      *
      * @return \Illuminate\Database\Eloquent\Relationship\belongsTo
      */
@@ -143,9 +145,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
 
     /**
-     * Checks a Permission
+     * Checks a Permission.
      *
-     * @param  string $permission Permission Slug of a permission (i.e: manage_user)
+     * @param string $permission Permission Slug of a permission (i.e: manage_user)
+     *
      * @return bool
      */
     public function can($permission = null)
@@ -154,9 +157,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Check if the permission matches with any permission user has
+     * Check if the permission matches with any permission user has.
      *
-     * @param  string $perm Permission name of a permission
+     * @param string $perm Permission name of a permission
+     *
      * @return bool
      */
     protected function checkPermission($perm)
@@ -169,7 +173,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Get all permission names from all permissions of all roles
+     * Get all permission names from all permissions of all roles.
      *
      * @return array
      */
@@ -199,7 +203,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
 
     /**
-     * Encrypt password to hash
+     * Encrypt password to hash.
      *
      * @param $value The password to set
      */
@@ -217,11 +221,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
 
     /**
-     * Static method to check if the account has access to the model instance
+     * Static method to check if the account has access to the model instance.
      *
-     * @param   int $model_id
-     * @param   \AbuseIO\Models\Account $account
-     * @return  bool
+     * @param int                     $model_id
+     * @param \AbuseIO\Models\Account $account
+     *
+     * @return bool
      */
     public static function checkAccountAccess($model_id, Account $account)
     {
@@ -230,15 +235,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return true;
         }
 
-        $user = User::find($model_id);
+        $user = self::find($model_id);
 
         $allowed = $user->account_id == $account->id;
 
-        return ($allowed);
+        return $allowed;
     }
 
     /**
-     * Return the fullname of the user
+     * Return the fullname of the user.
      *
      * @return string
      */
@@ -248,9 +253,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Check if the current user is allowed to login
+     * Check if the current user is allowed to login.
      *
-     * @param  array &$messages Array of messages
+     * @param array &$messages Array of messages
+     *
      * @return bool
      */
     public function mayLogin(&$messages)
@@ -282,9 +288,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Checks if the user has a specific role
+     * Checks if the user has a specific role.
      *
-     * @param  string $role_name Name of the role
+     * @param string $role_name Name of the role
+     *
      * @return bool
      */
     public function hasRole($role_name)
@@ -302,9 +309,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Check to see if we can disable the user
+     * Check to see if we can disable the user.
      *
-     * @param  \AbuseIO\Models\User $auth_user The User Model
+     * @param \AbuseIO\Models\User $auth_user The User Model
+     *
      * @return bool
      */
     public function mayDisable(User $auth_user)
@@ -320,9 +328,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     /**
      * Check to see if we can enable the user
-     * (using the logic in mayDisable())
+     * (using the logic in mayDisable()).
      *
-     * @param  \AbuseIO\Models\User $auth_user The User Model
+     * @param \AbuseIO\Models\User $auth_user The User Model
+     *
      * @return bool
      */
     public function mayEnable(User $auth_user)

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePermissionsTable extends Migration
 {
@@ -41,20 +41,20 @@ class CreatePermissionsTable extends Migration
             [
                 'name'                      => 'login_portal',
                 'description'               => 'Login to portal',
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'name'                      => 'login_api',
                 'description'               => 'Login to api',
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'name'                      => 'profile_manage',
                 'description'               => 'Manage own profile',
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
         ];
 
@@ -86,8 +86,8 @@ class CreatePermissionsTable extends Migration
                 $permissions[] = [
                     'name'                      => "{$controller}_{$action}",
                     'description'               => "Allow to {$action} {$controller}",
-                    'created_at'                => new DateTime,
-                    'updated_at'                => new DateTime,
+                    'created_at'                => new DateTime(),
+                    'updated_at'                => new DateTime(),
                 ];
             }
         }
@@ -98,15 +98,14 @@ class CreatePermissionsTable extends Migration
                 $permissions[] = [
                     'name'                      => "{$controller}_{$action}",
                     'description'               => "Allow to {$action} {$controller}",
-                    'created_at'                => new DateTime,
-                    'updated_at'                => new DateTime,
+                    'created_at'                => new DateTime(),
+                    'updated_at'                => new DateTime(),
                 ];
             }
         }
 
         // Write permissions into database
         DB::table('permissions')->insert($permissions);
-
     }
 
     /**

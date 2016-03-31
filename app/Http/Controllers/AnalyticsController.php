@@ -2,13 +2,11 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests;
 use AbuseIO\Models\Ticket;
 use Lang;
 
 /**
- * Class AnalyticsController
- * @package AbuseIO\Http\Controllers
+ * Class AnalyticsController.
  */
 class AnalyticsController extends Controller
 {
@@ -27,9 +25,9 @@ class AnalyticsController extends Controller
      */
     public function index()
     {
-        $classCounts = [ ];
+        $classCounts = [];
 
-        foreach ((array)Lang::get('classifications') as $classID => $classInfo) {
+        foreach ((array) Lang::get('classifications') as $classID => $classInfo) {
             $classTotal = new \stdClass();
 
             $tickets = Ticket::where('class_id', $classID);
@@ -42,7 +40,6 @@ class AnalyticsController extends Controller
 
                 $classCounts[] = $classTotal;
             }
-
         }
 
         return view('analytics')

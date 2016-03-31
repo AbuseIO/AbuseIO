@@ -2,24 +2,21 @@
 
 namespace AbuseIO\Jobs;
 
-use Illuminate\Contracts\Bus\SelfHandling;
-use AbuseIO\Models\Ticket;
 use AbuseIO\Models\Event;
-use Validator;
-use Lang;
+use AbuseIO\Models\Ticket;
+use Illuminate\Contracts\Bus\SelfHandling;
 use Log;
+use Validator;
 
 /**
- * This incidentsSave class handles the actual writing of incidents to the database
+ * This incidentsSave class handles the actual writing of incidents to the database.
  *
  * Class incidentsSave
-  */
+ */
 class IncidentsSave extends Job implements SelfHandling
 {
-
     /**
      * Create a new command instance.
-     *
      */
     public function __construct()
     {
@@ -30,7 +27,8 @@ class IncidentsSave extends Job implements SelfHandling
      * Execute the command.
      *
      * @param array $incidents
-     * @param integer $evidenceID
+     * @param int   $evidenceID
+     *
      * @return array
      */
     public function save($incidents, $evidenceID)
@@ -60,24 +58,15 @@ class IncidentsSave extends Job implements SelfHandling
             // If an incident is too old we are ignoring it
             if (config('main.reports.min_lastseen') !== false &&
                 strtotime(config('main.reports.min_lastseen')) !== false &&
-                strtotime(config('main.reports.min_lastseen') . ' ago') > $incident->timestamp
+                strtotime(config('main.reports.min_lastseen').' ago') > $incident->timestamp
             ) {
                 Log::debug(
-                    get_class($this) . ': ' .
-                    "is ignoring incident because its older then " . config('main.reports.min_lastseen')
+                    get_class($this).': '.
+                    'is ignoring incident because its older then '.config('main.reports.min_lastseen')
                 );
 
                 continue;
             }
-
-            // Also build a types lookup table and switch out name for ID
-            /* TODO: marknl, not needed anymore?
-            foreach ((array)Lang::get('types.type') as $typeID => $type) {
-                if ($type['name'] == $incident->type) {
-                    $incident->type = $typeID;
-                }
-            }
-            */
 
             // Lookup the ip contact and if needed the domain contact too
             $findContact = new FindContact();
@@ -103,8 +92,8 @@ class IncidentsSave extends Job implements SelfHandling
                     empty($domainContact)
                 ) {
                     Log::debug(
-                        get_class($this) . ': ' .
-                        "is ignoring incident because there is no IP or Domain contact"
+                        get_class($this).': '.
+                        'is ignoring incident because there is no IP or Domain contact'
                     );
 
                     continue;
@@ -127,30 +116,30 @@ class IncidentsSave extends Job implements SelfHandling
                 $ticketCount++;
 
                 $newTicket = new Ticket();
-                $newTicket->ip                         = $incident->ip;
-                $newTicket->domain                     = empty($incident->domain) ? '' : $incident->domain;
-                $newTicket->class_id                   = $incident->class;
-                $newTicket->type_id                    = $incident->type;
+                $newTicket->ip = $incident->ip;
+                $newTicket->domain = empty($incident->domain) ? '' : $incident->domain;
+                $newTicket->class_id = $incident->class;
+                $newTicket->type_id = $incident->type;
 
-                $newTicket->ip_contact_account_id      = $ipContact->account_id;
-                $newTicket->ip_contact_reference       = $ipContact->reference;
-                $newTicket->ip_contact_name            = $ipContact->name;
-                $newTicket->ip_contact_email           = $ipContact->email;
-                $newTicket->ip_contact_api_host        = $ipContact->api_host;
-                $newTicket->ip_contact_auto_notify     = $ipContact->auto_notify;
-                $newTicket->ip_contact_notified_count  = 0;
+                $newTicket->ip_contact_account_id = $ipContact->account_id;
+                $newTicket->ip_contact_reference = $ipContact->reference;
+                $newTicket->ip_contact_name = $ipContact->name;
+                $newTicket->ip_contact_email = $ipContact->email;
+                $newTicket->ip_contact_api_host = $ipContact->api_host;
+                $newTicket->ip_contact_auto_notify = $ipContact->auto_notify;
+                $newTicket->ip_contact_notified_count = 0;
 
-                $newTicket->domain_contact_account_id  = $domainContact->account_id;
-                $newTicket->domain_contact_reference   = $domainContact->reference;
-                $newTicket->domain_contact_name        = $domainContact->name;
-                $newTicket->domain_contact_email       = $domainContact->email;
-                $newTicket->domain_contact_api_host    = $domainContact->api_host;
+                $newTicket->domain_contact_account_id = $domainContact->account_id;
+                $newTicket->domain_contact_reference = $domainContact->reference;
+                $newTicket->domain_contact_name = $domainContact->name;
+                $newTicket->domain_contact_email = $domainContact->email;
+                $newTicket->domain_contact_api_host = $domainContact->api_host;
                 $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
                 $newTicket->domain_contact_notified_count = 0;
 
-                $newTicket->status_id               = 'OPEN';
-                $newTicket->last_notify_count       = 0;
-                $newTicket->last_notify_timestamp   = 0;
+                $newTicket->status_id = 'OPEN';
+                $newTicket->last_notify_count = 0;
+                $newTicket->last_notify_timestamp = 0;
 
                 // Validate the model before saving
                 $validator = Validator::make(
@@ -159,19 +148,19 @@ class IncidentsSave extends Job implements SelfHandling
                 );
                 if ($validator->fails()) {
                     return $this->error(
-                        'DevError: Internal validation failed when saving the Ticket object ' .
+                        'DevError: Internal validation failed when saving the Ticket object '.
                         implode(' ', $validator->messages()->all())
                     );
                 }
 
                 $newTicket->save();
 
-                $newEvent = new Event;
-                $newEvent->evidence_id  = $evidenceID;
-                $newEvent->information  = $incident->information;
-                $newEvent->source       = $incident->source;
-                $newEvent->ticket_id    = $newTicket->id;
-                $newEvent->timestamp    = $incident->timestamp;
+                $newEvent = new Event();
+                $newEvent->evidence_id = $evidenceID;
+                $newEvent->information = $incident->information;
+                $newEvent->source = $incident->source;
+                $newEvent->ticket_id = $newTicket->id;
+                $newEvent->timestamp = $incident->timestamp;
 
                 // Validate the model before saving
                 $validator = Validator::make(
@@ -180,13 +169,12 @@ class IncidentsSave extends Job implements SelfHandling
                 );
                 if ($validator->fails()) {
                     return $this->error(
-                        'DevError: Internal validation failed when saving the Event object ' .
+                        'DevError: Internal validation failed when saving the Event object '.
                         implode(' ', $validator->messages()->all())
                     );
                 }
 
                 $newEvent->save();
-
             } elseif ($ticket->count() === 1) {
                 /*
                  * There is an existing ticket, so we just need to add the incident to this ticket. If the
@@ -201,17 +189,16 @@ class IncidentsSave extends Job implements SelfHandling
                         ->exists()
                 ) {
                     $incidentsIgnored++;
-
                 } else {
                     // New unique incident, so we will save this
                     $incidentCount++;
 
-                    $newEvent = new Event;
-                    $newEvent->evidence_id  = $evidenceID;
-                    $newEvent->information  = $incident->information;
-                    $newEvent->source       = $incident->source;
-                    $newEvent->ticket_id    = $ticket->id;
-                    $newEvent->timestamp    = $incident->timestamp;
+                    $newEvent = new Event();
+                    $newEvent->evidence_id = $evidenceID;
+                    $newEvent->information = $incident->information;
+                    $newEvent->source = $incident->source;
+                    $newEvent->ticket_id = $ticket->id;
+                    $newEvent->timestamp = $incident->timestamp;
 
                     // Validate the model before saving
                     $validator = Validator::make(
@@ -220,7 +207,7 @@ class IncidentsSave extends Job implements SelfHandling
                     );
                     if ($validator->fails()) {
                         return $this->error(
-                            'DevError: Internal validation failed when saving the Event object ' .
+                            'DevError: Internal validation failed when saving the Event object '.
                             implode(' ', $validator->messages()->all())
                         );
                     }
@@ -236,18 +223,18 @@ class IncidentsSave extends Job implements SelfHandling
                         $domainContact !== false &&
                         $domainContact->reference !== $ticket->domain_contact_reference
                     ) {
-                        $ticket->domain_contact_reference   = $domainContact->reference;
-                        $ticket->domain_contact_name        = $domainContact->name;
-                        $ticket->domain_contact_email       = $domainContact->email;
-                        $ticket->domain_contact_api_host    = $domainContact->api_host;
+                        $ticket->domain_contact_reference = $domainContact->reference;
+                        $ticket->domain_contact_name = $domainContact->name;
+                        $ticket->domain_contact_email = $domainContact->email;
+                        $ticket->domain_contact_api_host = $domainContact->api_host;
                         $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
-                        $ticket->account_id                 = $domainContact->account->id;
+                        $ticket->account_id = $domainContact->account->id;
                     }
 
                     /*
                      * Upgrade the type if the received event has a higher priority type included
                      */
-                    $priority = [ 'INFO', 'ABUSE', 'ESCALATION' ];
+                    $priority = ['INFO', 'ABUSE', 'ESCALATION'];
                     if (array_search($ticket->type_id, $priority) < array_search($incident->type, $priority)) {
                         $ticket->type_id = $incident->type;
                     }
@@ -278,8 +265,8 @@ class IncidentsSave extends Job implements SelfHandling
                         !is_numeric(config("escalations.{$escalationPath}.escalation.threshold"))
                     ) {
                         Log::warning(
-                            get_class($this) . ': ' .
-                            "Escalation path settings are missing or incomplete. Skipping this phase"
+                            get_class($this).': '.
+                            'Escalation path settings are missing or incomplete. Skipping this phase'
                         );
                     } else {
 
@@ -291,10 +278,10 @@ class IncidentsSave extends Job implements SelfHandling
                         ) {
                             // Upgrade to abuse
                             Log::debug(
-                                get_class($this) . ': ' .
-                                "An escalation path threshold has been reached for ticket {$ticket->id}, " .
-                                "threshold: " . config("escalations.{$escalationPath}.abuse.threshold") . ", " .
-                                "setting: info -> abuse"
+                                get_class($this).': '.
+                                "An escalation path threshold has been reached for ticket {$ticket->id}, ".
+                                'threshold: '.config("escalations.{$escalationPath}.abuse.threshold").', '.
+                                'setting: info -> abuse'
                             );
                             $ticket->type_id = 'ABUSE';
                         }
@@ -306,10 +293,10 @@ class IncidentsSave extends Job implements SelfHandling
                         ) {
                             // Upgrade to escalation
                             Log::debug(
-                                get_class($this) . ': ' .
-                                "An escalation path threshold has been reached for ticket {$ticket->id}, " .
-                                "threshold: " . config("escalations.{$escalationPath}.escalation.threshold") . ", " .
-                                "setting: abuse -> escalation"
+                                get_class($this).': '.
+                                "An escalation path threshold has been reached for ticket {$ticket->id}, ".
+                                'threshold: '.config("escalations.{$escalationPath}.escalation.threshold").', '.
+                                'setting: abuse -> escalation'
                             );
                             $ticket->type_id = 'ESCALATION';
                         }
@@ -322,14 +309,13 @@ class IncidentsSave extends Job implements SelfHandling
                     );
                     if ($validator->fails()) {
                         return $this->error(
-                            'DevError: Internal validation failed when saving the Ticket object ' .
+                            'DevError: Internal validation failed when saving the Ticket object '.
                             implode(' ', $validator->messages()->all())
                         );
                     }
 
                     $ticket->save();
                 }
-
             } else {
                 /*
                  * We should not never have more then two open tickets for the same case. If this happens there is a
@@ -340,8 +326,8 @@ class IncidentsSave extends Job implements SelfHandling
         }
 
         Log::debug(
-            get_class($this) . ': ' .
-            "has completed creating {$ticketCount} new tickets, " .
+            get_class($this).': '.
+            "has completed creating {$ticketCount} new tickets, ".
             "linking {$incidentCount} new incidents and ignored $incidentsIgnored duplicates"
         );
 

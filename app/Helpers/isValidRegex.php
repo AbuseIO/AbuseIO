@@ -3,10 +3,11 @@
 /**
  * Function to test a regular expression for it's validity.
  *
- * @param  string $regex
- * @return boolean
+ * @param string $regex
+ *
+ * @return bool
  */
 function isValidRegex($regex)
 {
-    return (@preg_match($regex, null) !== false);
+    return @preg_match($regex, null) !== false;
 }

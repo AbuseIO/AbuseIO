@@ -7,46 +7,45 @@ use AbuseIO\Models\Domain;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class DeleteCommand
- * @package AbuseIO\Console\Commands\Domain
+ * Class DeleteCommand.
  */
 class DeleteCommand extends AbstractDeleteCommand
 {
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "domain";
+        return 'domain';
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAllowedArguments()
     {
-        return ["id"];
+        return ['id'];
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getObjectByArguments()
     {
-        return Domain::find($this->argument("id"));
+        return Domain::find($this->argument('id'));
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function defineInput()
     {
-        return array(
+        return [
             new InputArgument(
                 'id',
                 InputArgument::REQUIRED,
                 'Use the id for a domain to delete it.'
-            )
-        );
+            ),
+        ];
     }
 }

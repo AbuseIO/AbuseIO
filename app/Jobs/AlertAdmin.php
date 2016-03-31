@@ -3,20 +3,20 @@
 namespace AbuseIO\Jobs;
 
 use Config;
-use Mail;
 use Log;
+use Mail;
 
 /**
- * Class AlertAdmin
+ * Class AlertAdmin.
  */
 class AlertAdmin extends Job
 {
-
     /**
-     * Execute the command
+     * Execute the command.
      *
      * @param string $message
-     * @param array $attachments [optional] format: ['name' => 'data']
+     * @param array  $attachments [optional] format: ['name' => 'data']
+     *
      * @return void
      */
     public static function send($message, $attachments = [])
@@ -33,7 +33,7 @@ class AlertAdmin extends Job
                         $attachmentData,
                         $attachmentName,
                         [
-                            'as' => $attachmentName,
+                            'as'   => $attachmentName,
                             'mime' => 'text/plain',
                         ]
                     );
@@ -43,13 +43,13 @@ class AlertAdmin extends Job
 
         if (!$sent) {
             Log::error(
-                'AlertAdmin: ' .
-                'Unable to send out alert to admin ' . Config::get('main.emailparser.fallback_mail')
+                'AlertAdmin: '.
+                'Unable to send out alert to admin '.Config::get('main.emailparser.fallback_mail')
             );
         } else {
             Log::info(
-                'AlertAdmin: ' .
-                'Successfully send out alert to admin ' . Config::get('main.emailparser.fallback_mail')
+                'AlertAdmin: '.
+                'Successfully send out alert to admin '.Config::get('main.emailparser.fallback_mail')
             );
         }
     }

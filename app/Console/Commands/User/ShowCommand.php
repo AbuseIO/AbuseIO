@@ -7,29 +7,28 @@ use AbuseIO\Models\User;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\User
+ * Class ShowCommand.
  */
 class ShowCommand extends AbstractShowCommand
 {
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAsNoun()
     {
-        return "user";
+        return 'user';
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAllowedArguments()
     {
-        return ["user"];
+        return ['user'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getFields()
     {
@@ -45,15 +44,15 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getCollectionWithArguments()
     {
-        return User::where("id", $this->argument("user"));
+        return User::where('id', $this->argument('user'));
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function defineInput()
     {
@@ -62,22 +61,22 @@ class ShowCommand extends AbstractShowCommand
                 'user',
                 InputArgument::REQUIRED,
                 'Use the id for a user to show it.'
-            )
+            ),
         ];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function transformObjectToTableBody($model)
     {
         $result = parent::transformObjectToTableBody($model);
 
-        $result = $this->hideProperty($result, "Password");
-        $result = $this->hideProperty($result, "Account id");
-        $result = $this->hideProperty($result, "Remember token");
+        $result = $this->hideProperty($result, 'Password');
+        $result = $this->hideProperty($result, 'Account id');
+        $result = $this->hideProperty($result, 'Remember token');
 
-        $result[] = ["Account", $model->account->name];
+        $result[] = ['Account', $model->account->name];
 
         $roleList = [];
         foreach ($model->roles as $role) {
@@ -85,9 +84,9 @@ class ShowCommand extends AbstractShowCommand
         }
 
         if ($roleList) {
-            $roleCaption = "Roles";
+            $roleCaption = 'Roles';
             if (count($roleList) === 1) {
-                $roleCaption = "Role";
+                $roleCaption = 'Role';
             }
             $result[] = [$roleCaption, implode(PHP_EOL, $roleList)];
         }

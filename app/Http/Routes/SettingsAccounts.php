@@ -1,11 +1,12 @@
 <?php
+
 Route::model('accounts', 'AbuseIO\Models\Account');
 Route::resource('accounts', 'AccountsController');
 
 Route::group(
     [
         'prefix' => 'accounts',
-        'as' => 'accounts.',
+        'as'     => 'accounts.',
     ],
     function () {
         // Search contacts
@@ -13,8 +14,8 @@ Route::group(
             'search/{one?}/{two?}/{three?}/{four?}/{five?}',
             [
                 'middleware' => 'permission:accounts_view',
-                'as' => 'search',
-                'uses' => 'AccountsController@search'
+                'as'         => 'search',
+                'uses'       => 'AccountsController@search',
             ]
         );
 
@@ -23,8 +24,8 @@ Route::group(
             '',
             [
                 'middleware' => 'permission:accounts_view',
-                'as' => 'index',
-                'uses' => 'AccountsController@index'
+                'as'         => 'index',
+                'uses'       => 'AccountsController@index',
             ]
         );
 
@@ -33,8 +34,8 @@ Route::group(
             '{accounts}',
             [
                 'middleware' => 'permission:accounts_view',
-                'as' => 'show',
-                'uses' => 'AccountsController@show'
+                'as'         => 'show',
+                'uses'       => 'AccountsController@show',
             ]
         );
 
@@ -43,8 +44,8 @@ Route::group(
             'export/{format}',
             [
                 'middleware' => 'permission:accounts_export',
-                'as' => 'export',
-                'uses' => 'AccountsController@export'
+                'as'         => 'export',
+                'uses'       => 'AccountsController@export',
             ]
         );
 
@@ -53,16 +54,16 @@ Route::group(
             'create',
             [
                 'middleware' => 'permission:accounts_create',
-                'as' => 'create',
-                'uses' => 'AccountsController@create'
+                'as'         => 'create',
+                'uses'       => 'AccountsController@create',
             ]
         );
         route::post(
             '',
             [
                 'middleware' => 'permission:accounts_create',
-                'as' => 'store',
-                'uses' => 'AccountsController@store'
+                'as'         => 'store',
+                'uses'       => 'AccountsController@store',
             ]
         );
 
@@ -71,8 +72,8 @@ Route::group(
             '{accounts}/disable',
             [
                 'middleware' => 'permission:accounts_disable',
-                'as' => 'disable',
-                'uses' => 'AccountsController@disable'
+                'as'         => 'disable',
+                'uses'       => 'AccountsController@disable',
             ]
         );
 
@@ -81,8 +82,8 @@ Route::group(
             '{accounts}/enable',
             [
                 'middleware' => 'permission:accounts_enable',
-                'as' => 'enable',
-                'uses' => 'AccountsController@enable'
+                'as'         => 'enable',
+                'uses'       => 'AccountsController@enable',
             ]
         );
 
@@ -91,24 +92,24 @@ Route::group(
             '{accounts}/edit',
             [
                 'middleware' => 'permission:accounts_edit',
-                'as' => 'edit',
-                'uses' => 'AccountsController@edit'
+                'as'         => 'edit',
+                'uses'       => 'AccountsController@edit',
             ]
         );
         route::patch(
             '{accounts}',
             [
                 'middleware' => 'permission:accounts_edit',
-                'as' => '',
-                'uses' => 'AccountsController@update'
+                'as'         => '',
+                'uses'       => 'AccountsController@update',
             ]
         );
         route::put(
             '{accounts}',
             [
                 'middleware' => 'permission:accounts_edit',
-                'as' => 'update',
-                'uses' => 'AccountsController@update'
+                'as'         => 'update',
+                'uses'       => 'AccountsController@update',
             ]
         );
 
@@ -117,8 +118,8 @@ Route::group(
             '/{accounts}',
             [
                 'middleware' => 'permission:accounts_delete',
-                'as' => 'destroy',
-                'uses' => 'AccountsController@destroy'
+                'as'         => 'destroy',
+                'uses'       => 'AccountsController@destroy',
             ]
         );
 

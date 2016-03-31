@@ -1,20 +1,22 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Note
- * @package AbuseIO\Models
- * @property integer $id
- * @property integer $ticket_id fillable
+ * Class Note.
+ *
+ * @property int $id
+ * @property int $ticket_id fillable
  * @property string $submitter fillable
  * @property string $text fillable
- * @property boolean $hidden fillable
- * @property boolean $viewed fillable
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * @property bool $hidden fillable
+ * @property bool $viewed fillable
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class Note extends Model
 {
@@ -47,7 +49,7 @@ class Note extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array $rules
      */
@@ -65,7 +67,7 @@ class Note extends Model
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
      * @return array $rules
      */
@@ -88,9 +90,10 @@ class Note extends Model
     */
 
     /**
-     * Updates the updated at before passing it along
+     * Updates the updated at before passing it along.
      *
-     * @param  string $date
+     * @param string $date
+     *
      * @return bool|string
      */
     public function getUpdatedAtAttribute($date)
@@ -99,9 +102,10 @@ class Note extends Model
     }
 
     /**
-     * Updates the created at before passing it along
+     * Updates the created at before passing it along.
      *
      * @param string $date
+     *
      * @return bool|string
      */
     public function getCreatedAtAttribute($date)

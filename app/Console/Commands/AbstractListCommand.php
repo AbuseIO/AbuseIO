@@ -6,8 +6,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class AbstractListCommand
- * @package AbuseIO\Console\Commands
+ * Class AbstractListCommand.
  */
 abstract class AbstractListCommand extends Command
 {
@@ -24,7 +23,7 @@ abstract class AbstractListCommand extends Command
             ->setName($this->getName())
             ->setDescription($this->getDescription())
             ->addOption(
-                "filter",
+                'filter',
                 null,
                 InputOption::VALUE_OPTIONAL,
                 $this->getFilterMessage()
@@ -34,7 +33,6 @@ abstract class AbstractListCommand extends Command
                 InputOption::VALUE_NONE,
                 'Output result as JSON'
             );
-
     }
 
     /**
@@ -42,7 +40,7 @@ abstract class AbstractListCommand extends Command
      */
     protected function getFilterMessage()
     {
-        return sprintf("Applies a filter on the %s %s", $this->getAsNoun(), $this->getParsedFilterArguments());
+        return sprintf('Applies a filter on the %s %s', $this->getAsNoun(), $this->getParsedFilterArguments());
     }
 
     /**
@@ -50,7 +48,7 @@ abstract class AbstractListCommand extends Command
      */
     private function getParsedFilterArguments()
     {
-        return implode(" or ", $this->filterArguments);
+        return implode(' or ', $this->filterArguments);
     }
 
     /**
@@ -74,7 +72,7 @@ abstract class AbstractListCommand extends Command
     }
 
     /**
-     * Default subcommand name
+     * Default subcommand name.
      *
      * @return string
      */
@@ -105,17 +103,18 @@ abstract class AbstractListCommand extends Command
         $options = $this->option();
 
         if (!empty($options['filter'])) {
-            $list = $this->findWithCondition($this->option("filter"));
+            $list = $this->findWithCondition($this->option('filter'));
         } else {
             $list = $this->findAll();
         }
 
         if (count($list) === 0) {
             $this->error(
-                sprintf("No %s found for given filter.", $this->getAsNoun())
+                sprintf('No %s found for given filter.', $this->getAsNoun())
             );
-        } if ($this->option("json")) {
-            /** the juggling from and to json is a way of ensuring pretty_print */
+        }
+        if ($this->option('json')) {
+            /* the juggling from and to json is a way of ensuring pretty_print */
             $this->output->write(json_encode(json_decode($list->toJson()), JSON_PRETTY_PRINT));
         } else {
             $this->table(
@@ -123,17 +122,20 @@ abstract class AbstractListCommand extends Command
                 $this->transformListToTableBody($list)
             );
         }
+
         return true;
     }
 
     /**
      * @param array $list
+     *
      * @return array
      */
     abstract protected function transformListToTableBody($list);
 
     /**
      * @param $filter
+     *
      * @return mixed
      */
     abstract protected function findWithCondition($filter);

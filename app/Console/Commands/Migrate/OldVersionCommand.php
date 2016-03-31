@@ -2,34 +2,33 @@
 
 namespace AbuseIO\Console\Commands\Migrate;
 
-use Illuminate\Console\Command;
-use PhpMimeMailParser\Parser as MimeParser;
-use AbuseIO\Parsers\Factory as ParserFactory;
 use AbuseIO\Jobs\EvidenceSave;
-use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Jobs\FindContact;
-use AbuseIO\Models\Evidence;
-use AbuseIO\Models\Ticket;
-use AbuseIO\Models\Event;
+use AbuseIO\Jobs\IncidentsProcess;
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
+use AbuseIO\Models\Event;
+use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Note;
-use AbuseIO\Models\Account;
-use Illuminate\Filesystem\Filesystem;
-use Validator;
+use AbuseIO\Models\Ticket;
+use AbuseIO\Parsers\Factory as ParserFactory;
 use Carbon;
-use Lang;
 use DB;
+use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
+use Lang;
+use PhpMimeMailParser\Parser as MimeParser;
+use Validator;
 
 /**
- * Class OldVersionCommand
- * @package AbuseIO\Console\Commands\Migrate
+ * Class OldVersionCommand.
  */
 class OldVersionCommand extends Command
 {
-
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $signature = 'migrate:oldversion
@@ -49,6 +48,7 @@ class OldVersionCommand extends Command
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'List of send out pending notifications';
@@ -64,14 +64,14 @@ class OldVersionCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     public function handle()
     {
         $account = Account::getSystemAccount();
 
         if (empty($this->option('start')) &&
-            empty($this->option('prepare'))&&
+            empty($this->option('prepare')) &&
             empty($this->option('clean'))
         ) {
             $this->error('You need to either prepare or start the migration. try --help');
@@ -85,13 +85,13 @@ class OldVersionCommand extends Command
             );
             if ($this->confirm('Do you wish to continue? [y|N]')) {
                 $this->info('starting clean up');
-                DB::statement("SET foreign_key_checks=0");
+                DB::statement('SET foreign_key_checks=0');
                 Note::truncate();
                 Event::truncate();
                 Ticket::truncate();
                 Netblock::truncate();
                 Contact::truncate();
-                DB::statement("SET foreign_key_checks=1");
+                DB::statement('SET foreign_key_checks=1');
             } else {
                 $this->info('cancelled clean up');
             }
@@ -120,7 +120,7 @@ class OldVersionCommand extends Command
                     $startFrom + $this->option('threadsize') - 1;
 
                 $this->info(
-                    "*** starting with ticket {$startFrom} " .
+                    "*** starting with ticket {$startFrom} ".
                     "and ending with ticket {$endWith} "
                 );
             }
@@ -129,28 +129,27 @@ class OldVersionCommand extends Command
         if (!empty($this->option('prepare'))) {
             $this->info('building required evidence cache files');
 
-            $filesystem = new Filesystem;
-            $path       = storage_path() . '/migration/';
+            $filesystem = new Filesystem();
+            $path = storage_path().'/migration/';
             umask(0007);
 
             if (!$filesystem->isDirectory($path)) {
                 // If a datefolder does not exist, then create it or die trying
                 if (!$filesystem->makeDirectory($path, 0770)) {
                     $this->error(
-                        'Unable to create directory: ' . $path
+                        'Unable to create directory: '.$path
                     );
                     $this->exception();
                 }
 
                 if (!is_dir($path)) {
                     $this->error(
-                        'Path vanished after write: ' . $path
+                        'Path vanished after write: '.$path
                     );
                     $this->exception();
                 }
                 chgrp($path, config('app.group'));
             }
-
 
             DB::setDefaultConnection('abuseio3');
 
@@ -158,15 +157,15 @@ class OldVersionCommand extends Command
                 ->where('id', '>=', $startFrom)
                 ->where('id', '<=', $endWith);
 
-            $migrateCount   = $evidenceRows->count();
-            $evidences      = $evidenceRows->get();
+            $migrateCount = $evidenceRows->count();
+            $evidences = $evidenceRows->get();
 
             $this->output->progressStart($migrateCount);
 
             // If there are now rows to do, advance to complete
             if ($migrateCount === 0) {
                 $this->output->progressAdvance();
-                echo " nothing to do, because there are no records in this selection";
+                echo ' nothing to do, because there are no records in this selection';
             }
 
             foreach ($evidences as $evidence) {
@@ -183,7 +182,7 @@ class OldVersionCommand extends Command
                     continue;
                 }
 
-                $filename = $path . "evidence_id_{$evidence->ID}.data";
+                $filename = $path."evidence_id_{$evidence->ID}.data";
 
                 if (is_file($filename)) {
                     // Check weither the evidence was actually created in the database
@@ -197,7 +196,6 @@ class OldVersionCommand extends Command
 
                     DB::setDefaultConnection('abuseio3');
                     continue;
-
                 } else {
                     echo " working on evidence ID {$evidence->ID}                    ";
                 }
@@ -242,15 +240,15 @@ class OldVersionCommand extends Command
                     $parserResult = $parser->parse();
                 } else {
                     $this->error(
-                        'No parser available to handle message '.$evidence->ID.' from : ' . $evidence->Sender .
-                        ' with subject: ' . $evidence->Subject
+                        'No parser available to handle message '.$evidence->ID.' from : '.$evidence->Sender.
+                        ' with subject: '.$evidence->Subject
                     );
                     continue;
                 }
 
                 if ($parserResult !== false && $parserResult['errorStatus'] === true) {
                     $this->error(
-                        'Parser has ended with fatal errors ! : ' . $parserResult['errorMessage']
+                        'Parser has ended with fatal errors ! : '.$parserResult['errorMessage']
                     );
 
                     $this->exception();
@@ -258,15 +256,15 @@ class OldVersionCommand extends Command
 
                 if ($parserResult['warningCount'] !== 0) {
                     $this->error(
-                        'Configuration has warnings set as critical and ' .
-                        $parserResult['warningCount'] . ' warnings were detected.'
+                        'Configuration has warnings set as critical and '.
+                        $parserResult['warningCount'].' warnings were detected.'
                     );
                     //var_dump($rawEmail);
                     $this->exception();
                 }
 
                 // Write the evidence into the archive
-                $evidenceWrite = new EvidenceSave;
+                $evidenceWrite = new EvidenceSave();
                 $evidenceData = $rawEmail;
                 $evidenceFile = $evidenceWrite->save($evidenceData);
 
@@ -311,7 +309,6 @@ class OldVersionCommand extends Command
                     }
                 }
 
-
                 // Only continue if not empty, empty set is acceptable (exit OK)
                 if (!$incidentsProcess->notEmpty()) {
                     $this->warn("No evidence build, no results from parser for {$evidence->ID}");
@@ -325,7 +322,6 @@ class OldVersionCommand extends Command
                     );
                     $this->exception();
                 }
-
 
                 $incidents = [];
                 foreach ($parserResult['data'] as $incident) {
@@ -345,7 +341,7 @@ class OldVersionCommand extends Command
 
                 if ($filesystem->put($filename, json_encode($output)) === false) {
                     $this->error(
-                        'Unable to write file: ' . $filename
+                        'Unable to write file: '.$filename
                     );
 
                     return false;
@@ -355,10 +351,7 @@ class OldVersionCommand extends Command
             $this->output->progressFinish();
         }
 
-
-
         if (!empty($this->option('start'))) {
-
             if (empty($this->option('skipcontacts'))) {
                 $this->info('starting migration - phase 1 - contact data');
 
@@ -372,20 +365,20 @@ class OldVersionCommand extends Command
                 $this->output->progressStart(count($customers));
                 foreach ($customers as $customer) {
                     $newContact = new Contact();
-                    $newContact->reference      = $customer->Code;
-                    $newContact->name           = $customer->Name;
-                    $newContact->email          = $customer->Contact;
-                    $newContact->auto_notify    = $customer->AutoNotify;
-                    $newContact->enabled        = 1;
-                    $newContact->account_id     = $account->id;
-                    $newContact->created_at     = Carbon::parse($customer->LastModified);
-                    $newContact->updated_at     = Carbon::parse($customer->LastModified);
+                    $newContact->reference = $customer->Code;
+                    $newContact->name = $customer->Name;
+                    $newContact->email = $customer->Contact;
+                    $newContact->auto_notify = $customer->AutoNotify;
+                    $newContact->enabled = 1;
+                    $newContact->account_id = $account->id;
+                    $newContact->created_at = Carbon::parse($customer->LastModified);
+                    $newContact->updated_at = Carbon::parse($customer->LastModified);
 
                     $validation = Validator::make($newContact->toArray(), Contact::createRules());
 
                     if ($validation->fails()) {
                         $message = implode(' ', $validation->messages()->all());
-                        $this->error('fatal error while creating contacts :' . $message);
+                        $this->error('fatal error while creating contacts :'.$message);
                         $this->exception();
                     } else {
                         $newContact->save();
@@ -419,27 +412,27 @@ class OldVersionCommand extends Command
                     }
 
                     $newNetblock = new Netblock();
-                    $newNetblock->first_ip      = long2ip($netblock->begin_in);
-                    $newNetblock->last_ip       = long2ip($netblock->end_in);
-                    $newNetblock->description   =
+                    $newNetblock->first_ip = long2ip($netblock->begin_in);
+                    $newNetblock->last_ip = long2ip($netblock->end_in);
+                    $newNetblock->description =
                         'Imported from previous AbuseIO version which did not include a description';
-                    $newNetblock->contact_id    = $contact->id;
-                    $newNetblock->enabled       = 1;
-                    $newNetblock->created_at    = Carbon::parse($netblock->LastModified);
-                    $newNetblock->updated_at    = Carbon::parse($netblock->LastModified);
+                    $newNetblock->contact_id = $contact->id;
+                    $newNetblock->enabled = 1;
+                    $newNetblock->created_at = Carbon::parse($netblock->LastModified);
+                    $newNetblock->updated_at = Carbon::parse($netblock->LastModified);
 
                     $validation = Validator::make($newNetblock->toArray(), Netblock::createRules($newNetblock));
 
                     if ($validation->fails()) {
                         $message = implode(' ', $validation->messages()->all());
-                        $this->error('fatal error while creating contacts :' . $message);
+                        $this->error('fatal error while creating contacts :'.$message);
                         $this->exception();
                     } else {
                         $newNetblock->save();
                     }
 
                     $this->output->progressAdvance();
-                    echo " Working on netblock ". long2ip($netblock->begin_in) . "       ";
+                    echo ' Working on netblock '.long2ip($netblock->begin_in).'       ';
                 }
                 $this->output->progressFinish();
             } else {
@@ -451,12 +444,12 @@ class OldVersionCommand extends Command
 
                 DB::setDefaultConnection('abuseio3');
 
-                $ticketRows     = DB::table('Reports')
+                $ticketRows = DB::table('Reports')
                     ->where('id', '>=', $startFrom)
                     ->where('id', '<=', $endWith);
 
-                $migrateCount   = $ticketRows->count();
-                $tickets        = $ticketRows->get();
+                $migrateCount = $ticketRows->count();
+                $tickets = $ticketRows->get();
 
                 DB::setDefaultConnection('mysql');
 
@@ -465,7 +458,7 @@ class OldVersionCommand extends Command
                 // If there are now rows to do, advance to complete
                 if ($migrateCount === 0) {
                     $this->output->progressAdvance();
-                    echo " nothing to do, because there are no records in this selection";
+                    echo ' nothing to do, because there are no records in this selection';
                 }
 
                 foreach ($tickets as $ticket) {
@@ -492,7 +485,7 @@ class OldVersionCommand extends Command
                         continue;
                     }
 
-                    if (count($evidenceLinks) != (int)$ticket->ReportCount) {
+                    if (count($evidenceLinks) != (int) $ticket->ReportCount) {
                         // Count does not match, known 3.0 limitation related to not always saving all the data
                         // so we will do a little magic to fix that
 
@@ -512,8 +505,8 @@ class OldVersionCommand extends Command
 
                         // Create all the events
                         foreach ($evidenceLinks as $evidenceLink) {
-                            $path       = storage_path() . '/migration/';
-                            $filename = $path . "evidence_id_{$evidenceLink->EvidenceID}.data";
+                            $path = storage_path().'/migration/';
+                            $filename = $path."evidence_id_{$evidenceLink->EvidenceID}.data";
 
                             if (!is_file($filename)) {
                                 $this->error('missing cache file ');
@@ -521,7 +514,7 @@ class OldVersionCommand extends Command
                             }
 
                             $evidence = json_decode(file_get_contents($filename));
-                            $evidenceID = (int)$evidence->evidenceId;
+                            $evidenceID = (int) $evidence->evidenceId;
                             $incidents = $evidence->incidents;
 
                             // Yes we only grab nr 0 from the array, because that is what the old aggregator did
@@ -532,21 +525,21 @@ class OldVersionCommand extends Command
                                 $incidentTmp = $incidents->$ip;
                                 $incident = $incidentTmp[0];
 
-                                $newEvent = new Event;
-                                $newEvent->evidence_id  = $evidenceID;
-                                $newEvent->information  = $incident->information;
-                                $newEvent->source       = $incident->source;
-                                $newEvent->ticket_id    = $newTicket->id;
-                                $newEvent->timestamp    = $incident->timestamp;
+                                $newEvent = new Event();
+                                $newEvent->evidence_id = $evidenceID;
+                                $newEvent->information = $incident->information;
+                                $newEvent->source = $incident->source;
+                                $newEvent->ticket_id = $newTicket->id;
+                                $newEvent->timestamp = $incident->timestamp;
                             } else {
                                 // Parser did not find any related evidence so replay it from the ticket only reason
                                 // Why it happends here if DNS has changed and google report cannot be matched
-                                $newEvent = new Event;
-                                $newEvent->evidence_id  = $evidenceID;
-                                $newEvent->information  = $ticket->Information;
-                                $newEvent->source       = $ticket->Source;
-                                $newEvent->ticket_id    = $newTicket->id;
-                                $newEvent->timestamp    = $ticket->FirstSeen;
+                                $newEvent = new Event();
+                                $newEvent->evidence_id = $evidenceID;
+                                $newEvent->information = $ticket->Information;
+                                $newEvent->source = $ticket->Source;
+                                $newEvent->ticket_id = $newTicket->id;
+                                $newEvent->timestamp = $ticket->FirstSeen;
                             }
 
                             // Validate the model before saving
@@ -556,7 +549,7 @@ class OldVersionCommand extends Command
                             );
                             if ($validator->fails()) {
                                 $this->error(
-                                    'DevError: Internal validation failed when saving the Event object ' .
+                                    'DevError: Internal validation failed when saving the Event object '.
                                     implode(' ', $validator->messages()->all())
                                 );
                                 $this->exception();
@@ -585,20 +578,20 @@ class OldVersionCommand extends Command
                 foreach ($notes as $note) {
                     $newNote = new Note();
 
-                    $newNote->id            = $note->ID;
-                    $newNote->ticket_id     = $note->ReportID;
-                    $newNote->submitter     = $note->Submittor;
-                    $newNote->text          = $note->Text;
-                    $newNote->hidden        = true;
-                    $newNote->viewed        = true;
-                    $newNote->created_at    = Carbon::parse($note->LastModified);
-                    $newNote->updated_at    = Carbon::parse($note->LastModified);
+                    $newNote->id = $note->ID;
+                    $newNote->ticket_id = $note->ReportID;
+                    $newNote->submitter = $note->Submittor;
+                    $newNote->text = $note->Text;
+                    $newNote->hidden = true;
+                    $newNote->viewed = true;
+                    $newNote->created_at = Carbon::parse($note->LastModified);
+                    $newNote->updated_at = Carbon::parse($note->LastModified);
 
                     $validation = Validator::make($newNote->toArray(), Note::createRules());
 
                     if ($validation->fails()) {
                         $message = implode(' ', $validation->messages()->all());
-                        $this->error('fatal error while creating contacts :' . $message);
+                        $this->error('fatal error while creating contacts :'.$message);
                         $this->exception();
                     } else {
                         $newNote->save();
@@ -616,9 +609,6 @@ class OldVersionCommand extends Command
         return true;
     }
 
-    /**
-     *
-     */
     private function exception()
     {
         $this->error('fatal error happend, ending migration (empty DB, fix problem, try again)');
@@ -637,10 +627,10 @@ class OldVersionCommand extends Command
         // Now this is the little magic, we need to calculate the offset and make sure that the first
         // and lastseen moments exactly match and the increments between those events are within that
         // same timeframe, but NOT duplicate.
-        $firstSeen = (int)$ticket->FirstSeen;
-        $lastSeen  = (int)$ticket->LastSeen;
+        $firstSeen = (int) $ticket->FirstSeen;
+        $lastSeen = (int) $ticket->LastSeen;
         $elapsed = $lastSeen - $firstSeen;
-        $step = (int)round($elapsed / $ticket->ReportCount);
+        $step = (int) round($elapsed / $ticket->ReportCount);
 
         $offset = [
             'first'     => $firstSeen,
@@ -660,7 +650,7 @@ class OldVersionCommand extends Command
         // Now recreate all the events
         for ($counter = 0; $counter <= $ticket->ReportCount; $counter++) {
             // Build new evidence file and write the evidence into the archive
-            $evidence = new EvidenceSave;
+            $evidence = new EvidenceSave();
             $evidenceData = [
                 'createdBy'     => 'root@localhost.lan',
                 'receivedOn'    => time(),
@@ -675,17 +665,17 @@ class OldVersionCommand extends Command
             // Save the file reference into the database
             $evidenceSave = new Evidence();
             $evidenceSave->filename = $evidenceFile;
-            $evidenceSave->sender   = 'root@localhost.lan';
-            $evidenceSave->subject  = 'Migrated evidence with a little magic';
+            $evidenceSave->sender = 'root@localhost.lan';
+            $evidenceSave->subject = 'Migrated evidence with a little magic';
             $evidenceSave->save();
 
             // Write the event
-            $newEvent = new Event;
-            $newEvent->evidence_id  = $evidenceSave->id;
-            $newEvent->information  = $ticket->Information;
-            $newEvent->source       = $ticket->Source;
-            $newEvent->ticket_id    = $newTicket->id;
-            $newEvent->timestamp    = $offset[$counter];
+            $newEvent = new Event();
+            $newEvent->evidence_id = $evidenceSave->id;
+            $newEvent->information = $ticket->Information;
+            $newEvent->source = $ticket->Source;
+            $newEvent->ticket_id = $newTicket->id;
+            $newEvent->timestamp = $offset[$counter];
 
             // Validate the model before saving
             $validator = Validator::make(
@@ -694,7 +684,7 @@ class OldVersionCommand extends Command
             );
             if ($validator->fails()) {
                 $this->error(
-                    'DevError: Internal validation failed when saving the Event object ' .
+                    'DevError: Internal validation failed when saving the Event object '.
                     implode(' ', $validator->messages()->all())
                 );
                 $this->exception();
@@ -707,6 +697,7 @@ class OldVersionCommand extends Command
     /**
      * @param $ticket
      * @param $account
+     *
      * @return Ticket
      */
     private function createTicket($ticket, $account)
@@ -720,14 +711,14 @@ class OldVersionCommand extends Command
         $old = array_keys($replaces);
         $new = array_values($replaces);
         $ticket->Class = str_replace($old, $new, $ticket->Class);
-        foreach ((array)Lang::get('classifications') as $classID => $class) {
+        foreach ((array) Lang::get('classifications') as $classID => $class) {
             if ($class['name'] == $ticket->Class) {
                 $ticket->Class = $classID;
             }
         }
 
         // Also build a types lookup table and switch out name for ID
-        foreach ((array)Lang::get('types.type') as $typeID => $type) {
+        foreach ((array) Lang::get('types.type') as $typeID => $type) {
             // Consistancy fixes:
             $ticket->Type = strtoupper($ticket->Type);
 
@@ -739,39 +730,39 @@ class OldVersionCommand extends Command
         // Create the ticket
         $newTicket = new Ticket();
 
-        $newTicket->id                          = $ticket->ID;
-        $newTicket->ip                          = $ticket->IP;
-        $newTicket->domain                      = empty($ticket->Domain) ? '' : $ticket->Domain;
-        $newTicket->class_id                    = $ticket->Class;
-        $newTicket->type_id                     = $ticket->Type;
+        $newTicket->id = $ticket->ID;
+        $newTicket->ip = $ticket->IP;
+        $newTicket->domain = empty($ticket->Domain) ? '' : $ticket->Domain;
+        $newTicket->class_id = $ticket->Class;
+        $newTicket->type_id = $ticket->Type;
 
-        $newTicket->ip_contact_account_id       = $account->id;
-        $newTicket->ip_contact_reference        = $ticket->CustomerCode;
-        $newTicket->ip_contact_name             = $ticket->CustomerName;
-        $newTicket->ip_contact_email            = $ticket->CustomerContact;
-        $newTicket->ip_contact_api_host         = '';
-        $newTicket->ip_contact_auto_notify      = $ticket->AutoNotify;
-        $newTicket->ip_contact_notified_count   = $ticket->NotifiedCount;
+        $newTicket->ip_contact_account_id = $account->id;
+        $newTicket->ip_contact_reference = $ticket->CustomerCode;
+        $newTicket->ip_contact_name = $ticket->CustomerName;
+        $newTicket->ip_contact_email = $ticket->CustomerContact;
+        $newTicket->ip_contact_api_host = '';
+        $newTicket->ip_contact_auto_notify = $ticket->AutoNotify;
+        $newTicket->ip_contact_notified_count = $ticket->NotifiedCount;
 
         $domainContact = FindContact::undefined();
-        $newTicket->domain_contact_account_id   = $domainContact->account_id;
-        $newTicket->domain_contact_reference    = $domainContact->reference;
-        $newTicket->domain_contact_name         = $domainContact->name;
-        $newTicket->domain_contact_email        = $domainContact->email;
-        $newTicket->domain_contact_api_host     = $domainContact->api_host;
-        $newTicket->domain_contact_auto_notify  = $domainContact->auto_notify;
+        $newTicket->domain_contact_account_id = $domainContact->account_id;
+        $newTicket->domain_contact_reference = $domainContact->reference;
+        $newTicket->domain_contact_name = $domainContact->name;
+        $newTicket->domain_contact_email = $domainContact->email;
+        $newTicket->domain_contact_api_host = $domainContact->api_host;
+        $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
         $newTicket->domain_contact_notified_count = 0;
 
-        $newTicket->last_notify_count           = $ticket->LastNotifyReportCount;
-        $newTicket->last_notify_timestamp       = $ticket->LastNotifyTimestamp;
+        $newTicket->last_notify_count = $ticket->LastNotifyReportCount;
+        $newTicket->last_notify_timestamp = $ticket->LastNotifyTimestamp;
 
-        $newTicket->created_at                  = Carbon::createFromTimestamp($ticket->FirstSeen);
-        $newTicket->updated_at                  = Carbon::parse($ticket->LastModified);
+        $newTicket->created_at = Carbon::createFromTimestamp($ticket->FirstSeen);
+        $newTicket->updated_at = Carbon::parse($ticket->LastModified);
 
         if ($ticket->Status == 'CLOSED') {
-            $newTicket->status_id               = 'CLOSED';
+            $newTicket->status_id = 'CLOSED';
         } elseif ($ticket->Status == 'OPEN') {
-            $newTicket->status_id               = 'OPEN';
+            $newTicket->status_id = 'OPEN';
         } else {
             $this->error('Unknown ticket status');
             $this->exception();
@@ -792,7 +783,7 @@ class OldVersionCommand extends Command
         );
         if ($validator->fails()) {
             $this->error(
-                'DevError: Internal validation failed when saving the Ticket object ' .
+                'DevError: Internal validation failed when saving the Ticket object '.
                 implode(' ', $validator->messages()->all())
             );
             var_dump($ticket);
