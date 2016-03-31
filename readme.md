@@ -1,5 +1,6 @@
 ## AbuseIO - Abusemanagement tools
 
+[![StyleCI](https://styleci.io/repos/31737623/shield?style=flat&branch=4.0)](https://styleci.io/repos/31737623?branch=4.0)
 [![Build Status](https://api.travis-ci.org/AbuseIO/AbuseIO.svg)](https://travis-ci.org/AbuseIO/AbuseIO)
 [![Total Downloads](https://poser.pugx.org/abuseio/abuseio/d/total.svg)](https://packagist.org/packages/abuseio/abuseio)
 [![Latest Stable Version](https://poser.pugx.org/abuseio/abuseio/v/stable.svg)](https://packagist.org/packages/abuseio/abuseio)
