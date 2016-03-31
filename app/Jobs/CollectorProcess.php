@@ -67,6 +67,8 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
         );
 
         $this->exception();
+
+        return;
     }
 
     /**
@@ -89,6 +91,8 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
                 "The requested collector {$this->collector} could not be started check logs for PID:" . getmypid()
             );
             $this->exception();
+
+            return;
         }
 
         $collectorResult = $collector->parse();
@@ -98,6 +102,8 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
                 "The requested collector {$this->collector} returned an error. check logs for PID:" . getmypid()
             );
             $this->exception();
+
+            return;
         }
 
 
@@ -119,6 +125,8 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
                 'Error returned while asking to write evidence file, cannot continue'
             );
             $this->exception();
+
+            return;
         }
 
         /**
