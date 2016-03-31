@@ -24,6 +24,7 @@
 		"ext-mcrypt": "Laravel / AbuseIO requirement"
 	},
 	"require": {
+		"php": ">=5.5.9",
 		"ext-mcrypt": "*",
 		"laravel/framework": "5.1.*",
 		"laravelcollective/html": "~5.0",
