@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
- * Class Authenticate
+ * Class Authenticate.
  */
 class Authenticate
 {

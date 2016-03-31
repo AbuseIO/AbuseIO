@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Validator;
 
 /**
- * Class AuthController
+ * Class AuthController.
  */
 class AuthController extends Controller
 {

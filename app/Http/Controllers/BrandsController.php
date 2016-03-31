@@ -284,6 +284,7 @@ class BrandsController extends Controller
      * Set the brand as the active brand on the current account.
      *
      * @param Brand $brand
+     *
      * @return Redirect
      */
     public function activate(Brand $brand)

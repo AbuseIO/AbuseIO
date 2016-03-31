@@ -25,7 +25,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Checks the version of this installation and reports newer version
+     * Checks the version of this installation and reports newer version.
      *
      * @return \BladeView|bool|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

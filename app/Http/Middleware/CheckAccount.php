@@ -7,7 +7,7 @@ use Closure;
 use Log;
 
 /**
- * Class CheckAccount
+ * Class CheckAccount.
  */
 class CheckAccount
 {
