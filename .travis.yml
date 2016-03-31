@@ -38,8 +38,8 @@ after_script:
   - cat storage/logs/*
 
 notifications:
-#  email:
-#    - dev@abuse.io
+  email:
+    - dev@abuse.io
   irc:
     channels:
       - "irc.freenode.net#abuseio"
