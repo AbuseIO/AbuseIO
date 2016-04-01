@@ -26,6 +26,8 @@
 	"require": {
 		"php": ">=5.5.9",
 		"ext-mcrypt": "*",
+		"ext-intl" : "*",
+		"ext-curl" : "*",
 		"laravel/framework": "5.1.*",
 		"laravelcollective/html": "~5.0",
 		"php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
