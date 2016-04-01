@@ -275,6 +275,12 @@ SESSION_DRIVER=file
 QUEUE_DRIVER=database
 ```
 
+If you installed AbuseIO by tarball, you need to set a Application Key and Application Id. The best way to do this is run the following two commands:
+```bash
+php artisan key:generate
+php artisan app:id
+```
+
 ##### Initializing the database
 ```bash
 cd /opt/abuseio
