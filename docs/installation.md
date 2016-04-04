@@ -151,7 +151,7 @@ postconf -e transport_maps=hash:/etc/postfix/transport
 /etc/aliases:
 ```bash
 echo "notifier: notifier.isp.local" >> /etc/aliases
-newaliasses
+newaliases
 ```
 
 Add this to /etc/postfix/master.cf:
@@ -275,6 +275,12 @@ SESSION_DRIVER=file
 QUEUE_DRIVER=database
 ```
 
+If you installed AbuseIO by tarball, you need to set a Application Key and Application Id. The best way to do this is run the following two commands:
+```bash
+php artisan key:generate
+php artisan app:id
+```
+
 ##### Initializing the database
 ```bash
 cd /opt/abuseio
@@ -292,7 +298,7 @@ In the default installation there isn't an admin user, so we must create one fir
 
 ```
 cd /opt/abuseio
-php artisan user:create --email admin@isp.local
+php artisan user:create admin@isp.local
 php artisan role:assign --role admin --user admin@isp.local
 ```
 
@@ -320,19 +326,15 @@ sure you leave a 2nd or 3rd with your 'normal' resolvers.
 ### Finalizing configuration
 
 Once completed there are a few settings you will need to configure. First off you need to be aware that by default your
-queue runners are running in --daemon mode (the services from supervisord). This is greate for saving CPU and is a lot
+queue runners are running in --daemon mode (the services from supervisord). This is great for saving CPU and is a lot
 faster, however does not reread the configuration until the daemon has been restarted. So if you change the confguration
 you will need to restart the supervisord services too!
 
-Copy `/opt/abuseio/config/main.php` to the environment folder `/opt/abuseio/config/$ENV`.
+Copy `/opt/abuseio/config/main.php` to the environment folder `/opt/abuseio/config/$ENV`. ($ENV being either 'development', 'production' or 'testing')
 f.e. If you want to configure you production environment do
 `cp /opt/abuseio/config/main.php /opt/abuseio/config/production/main.php`. Then setup stuff like the sender of your e-mails, where to bounce, etc in the file `/opt/abuseio/config/$ENV/main.php`.
 
-Also if you have changed the username and/or group where you run AbuseIO under, you will need to update the
+If you have changed the username and/or group where you run AbuseIO under, you will need to update the
 config `/opt/abuseio/config/app.php` as well.
 
-Creating a copy into the $ENV folder with the giving example from above you create a 'override' from the default
-config where you copied it from. Its a overlay override method. So only variables in your override config you have set
-(changed) will be actually used. If in the default config there is a option called 'bla' and you remove it from your
-override config, then the default option will be used. So you are not required to copy the entire file, but you can
-just copy the elements needed into a new file (although a full copy will simplify things)
+Copying a configuration file to the $ENV folder will create a 'override' of the defaults in the original file. Its a overlay override method. Only the variables in your override config will change. So you are not required to copy the entire file, but you can just copy the elements needed into a new file (although a full copy will simplify things).
