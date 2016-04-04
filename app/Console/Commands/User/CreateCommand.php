@@ -85,7 +85,7 @@ class CreateCommand extends AbstractCreateCommand
             $this->info(
                 sprintf('Using auto generated password: %s', $this->password)
             );
-        };
+        }
 
         return $this->password;
     }
