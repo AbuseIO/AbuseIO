@@ -48,7 +48,7 @@ class ProfileController extends Controller
         ];
 
         if (!empty($input['password'])) {
-            $data['password'] = Hash::make($input['password']);
+            $data['password'] = $input['password'];
         }
 
         try {
