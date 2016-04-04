@@ -3,7 +3,6 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\ProfileFormRequest;
-use Hash;
 use Redirect;
 
 /**
@@ -48,7 +47,7 @@ class ProfileController extends Controller
         ];
 
         if (!empty($input['password'])) {
-            $data['password'] = Hash::make($input['password']);
+            $data['password'] = $input['password'];
         }
 
         try {
