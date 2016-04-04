@@ -151,7 +151,7 @@ postconf -e transport_maps=hash:/etc/postfix/transport
 /etc/aliases:
 ```bash
 echo "notifier: notifier.isp.local" >> /etc/aliases
-newaliasses
+newaliases
 ```
 
 Add this to /etc/postfix/master.cf:
@@ -298,7 +298,7 @@ In the default installation there isn't an admin user, so we must create one fir
 
 ```
 cd /opt/abuseio
-php artisan user:create --email admin@isp.local
+php artisan user:create admin@isp.local
 php artisan role:assign --role admin --user admin@isp.local
 ```
 
