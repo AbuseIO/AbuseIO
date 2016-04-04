@@ -3,7 +3,6 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\ProfileFormRequest;
-use Hash;
 use Redirect;
 
 /**
