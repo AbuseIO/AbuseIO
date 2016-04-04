@@ -23,3 +23,14 @@ Solution:
 Restart the supervisord services (currently 3) or the entire supervisord daemon, which is safe to do if this is system
 is dedicated to AbuseIO. After restarting it you will see in the /var/log/abuseio/queue* files the workers to pick up
 work and start handling the data from the received e-mails.
+
+## 2. Call to undefined function mailparse_msg_create() in ../src/Parser.php on line 128
+
+The module is installed and enabled, but I stil lget this error.
+
+Possible cause:
+Postfix is not allowed to read mailparse.ini so it will not enable the module. Some user ran into this problem because of OS hardening.
+
+Solution:
+
+Make sure the mailparse.ini file is readable by the postfix user.
