@@ -3,15 +3,15 @@
 namespace AbuseIO\Models;
 
 /**
- * Class Incident
- * @package AbuseIO\Models
+ * Class Incident.
+ *
  * @property string $source
  * @property string $source_id
  * @property string $ip
  * @property string $domain
  * @property string $class
  * @property string $type
- * @property integer $timestamp
+ * @property int $timestamp
  * @property string $information;
  */
 class Incident
@@ -63,7 +63,7 @@ class Incident
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array $rules
      */
@@ -84,7 +84,7 @@ class Incident
     }
 
     /**
-     * Add toArray method manually as this is not a SQL model
+     * Add toArray method manually as this is not a SQL model.
      */
     public function toArray()
     {

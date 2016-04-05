@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Models;
 
 use AbuseIO\Models\Event;
@@ -10,7 +11,7 @@ class EventTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @var  int  $eventId*/
+    /** @var int $eventId */
     private $eventId;
 
     /** @var int $evidenceId */
@@ -24,7 +25,7 @@ class EventTest extends TestCase
         $this->evidenceId = $event->evidence_id;
     }
 
-    function testBelongsToRelation()
+    public function testBelongsToRelation()
     {
         $this->initDB();
 
@@ -37,7 +38,7 @@ class EventTest extends TestCase
     public function testModelFactory()
     {
         $event = factory(Event::class)->create();
-        $eventFromDB = Event::where("source", $event->source)->first();
+        $eventFromDB = Event::where('source', $event->source)->first();
         $this->assertEquals($event->source, $eventFromDB->source);
     }
 }

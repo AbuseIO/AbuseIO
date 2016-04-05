@@ -1,17 +1,19 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class RoleUser
- * @package AbuseIO\Models
- * @property integer $id guarded
- * @property integer $role_id
- * @property integer $user_id
- * @property integer $created_at guarded
- * @property integer $updated_at guarded
- * @property integer $deleted_at guarded
+ * Class RoleUser.
+ *
+ * @property int $id guarded
+ * @property int $role_id
+ * @property int $user_id
+ * @property int $created_at guarded
+ * @property int $updated_at guarded
+ * @property int $deleted_at guarded
  */
 class RoleUser extends Model
 {
@@ -41,27 +43,29 @@ class RoleUser extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
-     * @param  \AbuseIO\Models\RoleUser $roleUser
+     * @param \AbuseIO\Models\RoleUser $roleUser
+     *
      * @return array $rules
      */
     public static function createRules($roleUser)
     {
         $rules = [
             'role_id' => 'required|integer|exists:roles,id|'.
-                         'unique:role_user,role_id,NULL,id,user_id,' . $roleUser->user_id,
+                         'unique:role_user,role_id,NULL,id,user_id,'.$roleUser->user_id,
             'user_id' => 'required|integer|exists:users,id|'.
-                         'unique:role_user,user_id,NULL,id,role_id,' . $roleUser->role_id,
+                         'unique:role_user,user_id,NULL,id,role_id,'.$roleUser->role_id,
         ];
 
         return $rules;
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
-     * @param  \AbuseIO\Models\RoleUser $roleUser
+     * @param \AbuseIO\Models\RoleUser $roleUser
+     *
      * @return array $rules
      */
     public static function updateRules($roleUser)
@@ -69,9 +73,9 @@ class RoleUser extends Model
         $rules = [
             'id'      => 'required|exists:permissions_role,id',
             'role_id' => 'required|integer|exists:roles,id|'.
-                         'unique:role_user,role_id,NULL,id,user_id,' . $roleUser->user_id,
+                         'unique:role_user,role_id,NULL,id,user_id,'.$roleUser->user_id,
             'user_id' => 'required|integer|exists:users,id|'.
-                         'unique:role_user,user_id,NULL,id,role_id,' . $roleUser->role_id,
+                         'unique:role_user,user_id,NULL,id,role_id,'.$roleUser->role_id,
         ];
 
         return $rules;
@@ -84,7 +88,7 @@ class RoleUser extends Model
     */
 
     /**
-     * One-To-Many relation to account
+     * One-To-Many relation to account.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -94,7 +98,7 @@ class RoleUser extends Model
     }
 
     /**
-     * One-To-Many relation to account
+     * One-To-Many relation to account.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -2,22 +2,20 @@
 
 namespace AbuseIO\Console\Commands\Role;
 
-use Illuminate\Console\Command;
 use AbuseIO\Models\Role;
-use AbuseIO\Models\User;
 use AbuseIO\Models\RoleUser;
+use AbuseIO\Models\User;
+use Illuminate\Console\Command;
 use Validator;
-use Carbon;
 
 /**
- * Class AssignCommand
- * @package AbuseIO\Console\Commands\Role
+ * Class AssignCommand.
  */
 class AssignCommand extends Command
 {
-
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $signature = 'role:assign
@@ -27,12 +25,13 @@ class AssignCommand extends Command
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Assign a role to a users';
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function __construct()
     {
@@ -42,7 +41,7 @@ class AssignCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return boolean
+     * @return bool
      */
     public function handle()
     {
@@ -50,6 +49,7 @@ class AssignCommand extends Command
             empty($this->option('user'))
         ) {
             $this->error('Missing options for role and/or user(e-mail) to select');
+
             return false;
         }
 
@@ -60,7 +60,6 @@ class AssignCommand extends Command
         $user = false;
 
         if (!empty($this->option('role'))) {
-
             if (!is_object($role)) {
                 $role = Role::where('name', $this->option('role'))->first();
             }
@@ -68,11 +67,9 @@ class AssignCommand extends Command
             if (!is_object($role)) {
                 $role = Role::find($this->option('role'));
             }
-
         }
 
         if (!empty($this->option('user'))) {
-
             if (!is_object($user)) {
                 $user = User::where('email', $this->option('user'))->first();
             }
@@ -80,11 +77,11 @@ class AssignCommand extends Command
             if (!is_object($user)) {
                 $user = Role::find($this->option('user'));
             }
-
         }
 
         if (!is_object($role) || !is_object($user)) {
             $this->error('Unable to find role with this criteria');
+
             return false;
         }
 

@@ -1,15 +1,15 @@
-<?php namespace AbuseIO\Providers;
+<?php
+
+namespace AbuseIO\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Log;
 
 /**
- * Class AppServiceProvider
- * @package AbuseIO\Providers
+ * Class AppServiceProvider.
  */
 class AppServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap any application services.
      *

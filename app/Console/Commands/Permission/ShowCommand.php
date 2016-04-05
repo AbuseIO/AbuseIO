@@ -7,29 +7,28 @@ use AbuseIO\Models\Permission;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\Permission
+ * Class ShowCommand.
  */
 class ShowCommand extends AbstractShowCommand
 {
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAsNoun()
     {
-        return "permission";
+        return 'permission';
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAllowedArguments()
     {
-        return ["id"];
+        return ['id'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getFields()
     {
@@ -41,15 +40,15 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getCollectionWithArguments()
     {
-        return Permission::Where("id", $this->argument("permission"));
+        return Permission::Where('id', $this->argument('permission'));
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function defineInput()
     {
@@ -58,11 +57,12 @@ class ShowCommand extends AbstractShowCommand
                 'permission',
                 InputArgument::REQUIRED,
                 'Use the id for a permission to show it.'
-            )
+            ),
         ];
     }
+
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function transformObjectToTableBody($model)
     {

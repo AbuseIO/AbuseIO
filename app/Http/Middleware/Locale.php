@@ -1,16 +1,17 @@
-<?php namespace AbuseIO\Http\Middleware;
+<?php
 
-use Illuminate\Routing\Redirector;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Application;
-use Illuminate\Contracts\Routing\Middleware;
+namespace AbuseIO\Http\Middleware;
+
 use Closure;
-use Session;
 use Config;
+use Illuminate\Contracts\Routing\Middleware;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Session;
 
 /**
- * Class Locale
- * @package AbuseIO\Http\Middleware
+ * Class Locale.
  */
 class Locale implements Middleware
 {
@@ -21,9 +22,10 @@ class Locale implements Middleware
 
     /**
      * Locale constructor.
+     *
      * @param Application $app
-     * @param Redirector $redirector
-     * @param Request $request
+     * @param Redirector  $redirector
+     * @param Request     $request
      */
     public function __construct(Application $app, Redirector $redirector, Request $request)
     {
@@ -35,8 +37,9 @@ class Locale implements Middleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)

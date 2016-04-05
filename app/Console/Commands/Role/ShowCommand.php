@@ -7,29 +7,28 @@ use AbuseIO\Models\Role;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ShowCommand
- * @package AbuseIO\Console\Commands\Role
+ * Class ShowCommand.
  */
 class ShowCommand extends AbstractShowCommand
 {
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAsNoun()
     {
-        return "role";
+        return 'role';
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getAllowedArguments()
     {
-        return ["role"];
+        return ['role'];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getFields()
     {
@@ -41,15 +40,15 @@ class ShowCommand extends AbstractShowCommand
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function getCollectionWithArguments()
     {
-        return Role::where("id", $this->argument("role"))->orWhere("name", $this->argument("role"));
+        return Role::where('id', $this->argument('role'))->orWhere('name', $this->argument('role'));
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function defineInput()
     {
@@ -58,12 +57,12 @@ class ShowCommand extends AbstractShowCommand
                 'role',
                 InputArgument::REQUIRED,
                 'Use the id or the name for a role to show it.'
-            )
+            ),
         ];
     }
 
     /**
-     * {@inherit docs}
+     * {@inherit docs}.
      */
     protected function transformObjectToTableBody($model)
     {
@@ -71,9 +70,9 @@ class ShowCommand extends AbstractShowCommand
 
         $permissions = '';
         foreach ($model->permissions as $permission) {
-            $permissions .= $permission->name . PHP_EOL;
+            $permissions .= $permission->name.PHP_EOL;
         }
-        $result[] = ["Permissions", $permissions];
+        $result[] = ['Permissions', $permissions];
 
         return $result;
     }

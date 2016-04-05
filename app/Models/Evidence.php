@@ -4,13 +4,13 @@ namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Storage;
 use Log;
 use PhpMimeMailParser\Parser as MimeParser;
+use Storage;
 
 /**
  * Class Evidence.
- * @package AbuseIO\Models
+ *
  * @property int $id
  * @property string $filename fillable
  * @property string $sender fillable
@@ -80,7 +80,7 @@ class Evidence extends Model
     }
 
     /**
-     * Return the tickets that have this evidence in it's events
+     * Return the tickets that have this evidence in it's events.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -102,7 +102,7 @@ class Evidence extends Model
 
     /**
      * Return the raw evidence data
-     * TODO: Need to fix json evidence. Needs to be treated the same as eml
+     * TODO: Need to fix json evidence. Needs to be treated the same as eml.
      *
      * @return bool|string
      */
@@ -131,8 +131,8 @@ class Evidence extends Model
                 if (!$tempFilesystem->exists($cacheDir)) {
                     if (!$tempFilesystem->makeDirectory($cacheDir)) {
                         Log::error(
-                            get_class($this) . ': ' .
-                            'Unable to create temp directory: ' . $cacheDir
+                            get_class($this).': '.
+                            'Unable to create temp directory: '.$cacheDir
                         );
                     }
                 }
@@ -154,7 +154,6 @@ class Evidence extends Model
                     'files'         => $email->getAttachments(),
                     'files_dir'     => $cacheDir,
                 ];
-
             }
         }
 
@@ -162,7 +161,8 @@ class Evidence extends Model
     }
 
     /**
-     * Return the complete eml data from the evidence file
+     * Return the complete eml data from the evidence file.
+     *
      * @return bool|string
      */
     public function getEmlAttribute()
@@ -181,10 +181,11 @@ class Evidence extends Model
     */
 
     /**
-     * Static method to check if the account has access to the model instance
+     * Static method to check if the account has access to the model instance.
      *
      * @param int                     $model_id
      * @param \AbuseIO\Models\Account $account
+     *
      * @return bool
      */
     public static function checkAccountAccess($model_id, Account $account)
@@ -195,7 +196,7 @@ class Evidence extends Model
         }
 
         // Get all tickets related to this evidence
-        $tickets = Evidence::find($model_id)->tickets;
+        $tickets = self::find($model_id)->tickets;
 
         // If tickets ip or domain contact is the same as current account
         // then allow access to this evidence
@@ -220,12 +221,13 @@ class Evidence extends Model
 
     /**
      * @param $filename
+     *
      * @return bool
      */
     public function getAttachment($filename)
     {
         $data = Storage::get($this->filename);
-        
+
         $email = new MimeParser();
         $email->setText($data);
 

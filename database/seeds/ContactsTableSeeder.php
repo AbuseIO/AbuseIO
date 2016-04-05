@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 
 class ContactsTableSeeder extends Seeder
 {
-
     public function run()
     {
         DB::table('contacts')->delete();
@@ -17,8 +16,8 @@ class ContactsTableSeeder extends Seeder
                 'email'         => 'j.doe@customers.isp.local',
                 'api_host'      => null,
                 'enabled'       => 1,
-                'created_at'    => new DateTime,
-                'updated_at'    => new DateTime,
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime(),
                 'account_id'    => 1,
             ],
             [
@@ -28,8 +27,8 @@ class ContactsTableSeeder extends Seeder
                 'email'         => 'cust1@local.lan',
                 'api_host'      => null,
                 'enabled'       => 1,
-                'created_at'    => new DateTime,
-                'updated_at'    => new DateTime,
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime(),
                 'account_id'    => 2,
             ],
             [
@@ -39,8 +38,8 @@ class ContactsTableSeeder extends Seeder
                 'email'         => 'abuse@business.isp.local',
                 'api_host'      => null,
                 'enabled'       => 1,
-                'created_at'    => new DateTime,
-                'updated_at'    => new DateTime,
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime(),
                 'account_id'    => 3,
             ],
         ];

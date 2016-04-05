@@ -48,7 +48,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'account:edit',
             [
-                'id' => '1',
+                'id'         => '1',
                 '--brand_id' => '1000',
             ]
         );
@@ -63,7 +63,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'account:edit',
             [
-                'id' => '1',
+                'id'     => '1',
                 '--name' => 'somebogusstring',
             ]
         );
@@ -84,7 +84,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'account:edit',
             [
-                'id' => '1',
+                'id'         => '1',
                 '--disabled' => 'true',
             ]
         );
@@ -104,7 +104,7 @@ class EditCommandTest extends TestCase
         $exitCode = Artisan::call(
             'account:edit',
             [
-                'id' => $this->account->id,
+                'id'              => $this->account->id,
                 '--systemaccount' => true,
             ]
         );

@@ -7,47 +7,45 @@ use AbuseIO\Models\Netblock;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class DeleteCommand
- * @package AbuseIO\Console\Commands\Netblock
+ * Class DeleteCommand.
  */
 class DeleteCommand extends AbstractDeleteCommand
 {
-
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "netblock";
+        return 'netblock';
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAllowedArguments()
     {
-        return ["id"];
+        return ['id'];
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getObjectByArguments()
     {
-        return Netblock::find($this->argument("id"));
+        return Netblock::find($this->argument('id'));
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function defineInput()
     {
-        return array(
+        return [
             new InputArgument(
                 'id',
                 InputArgument::REQUIRED,
                 'Use the id for a netblock to delete it.'
-            )
-        );
+            ),
+        ];
     }
 }

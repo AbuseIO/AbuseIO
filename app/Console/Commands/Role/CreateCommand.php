@@ -9,27 +9,27 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
 /**
- * Class CreateCommand
- * @package AbuseIO\Console\Commands\Role
+ * Class CreateCommand.
  */
 class CreateCommand extends AbstractCreateCommand
 {
     // TODO validation of file not working
+
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getArgumentsList()
     {
         return new InputDefinition(
             [
                 new InputArgument('name', null, 'Name'),
-                new InputArgument('description', null, 'Description')
+                new InputArgument('description', null, 'Description'),
             ]
         );
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getAsNoun()
     {
@@ -37,7 +37,7 @@ class CreateCommand extends AbstractCreateCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getModelFromRequest()
     {
@@ -50,7 +50,7 @@ class CreateCommand extends AbstractCreateCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getValidator($model)
     {

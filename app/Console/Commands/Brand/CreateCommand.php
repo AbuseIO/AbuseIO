@@ -3,7 +3,6 @@
 namespace AbuseIO\Console\Commands\Brand;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
-use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use Prophecy\Argument;
@@ -12,12 +11,10 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
 /**
- * Class CreateCommand
- * @package AbuseIO\Console\Commands\Brand
+ * Class CreateCommand.
  */
 class CreateCommand extends AbstractCreateCommand
 {
-
     /**
      * @return InputDefinition
      */
@@ -57,10 +54,10 @@ class CreateCommand extends AbstractCreateCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Brand::createRules($model));
+        return Validator::make($model->toArray(), Brand::createRules());
     }
 }

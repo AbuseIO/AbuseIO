@@ -6,8 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 /**
- * Class Kernel
- * @package AbuseIO\Console
+ * Class Kernel.
  */
 class Kernel extends ConsoleKernel
 {
@@ -98,8 +97,10 @@ class Kernel extends ConsoleKernel
     ];
 
     /**
-     * Schedule method
-     * @param  Schedule $schedule
+     * Schedule method.
+     *
+     * @param Schedule $schedule
+     *
      * @return void
      */
     protected function schedule(Schedule $schedule)

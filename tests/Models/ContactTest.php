@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Models;
 
 use AbuseIO\Models\Contact;
@@ -12,7 +13,7 @@ class ContactTest extends TestCase
     public function testModelFactory()
     {
         $contact = factory(Contact::class)->create();
-        $contactFromDB = Contact::where("name", $contact->name)->first();
+        $contactFromDB = Contact::where('name', $contact->name)->first();
         $this->assertEquals($contact->name, $contactFromDB->name);
     }
 }

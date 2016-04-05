@@ -2,8 +2,8 @@
 
 namespace AbuseIO\Console\Commands\Collector;
 
-use AbuseIO\Console\Commands\AbstractListCommand;
 use AbuseIO\Collectors\Factory as CollectorFactory;
+use AbuseIO\Console\Commands\AbstractListCommand;
 
 /**
  * Class ListCommand.
@@ -39,7 +39,7 @@ class ListCommand extends AbstractListCommand
         foreach ($collectors as $collector) {
             $objects[] =
                 [
-                    'name' => $collector,
+                    'name'        => $collector,
                     'description' => config("collectors.{$collector}.collector.description"),
                 ];
         }

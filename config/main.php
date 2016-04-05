@@ -8,8 +8,8 @@
 return [
 
     'interface' => [
-        'language' => 'en',
-        'navigation' => ['home', 'contacts', 'netblocks', 'domains' , 'tickets', 'analytics']
+        'language'   => 'en',
+        'navigation' => ['home', 'contacts', 'netblocks', 'domains', 'tickets', 'analytics'],
     ],
 
     'emailparser' => [
@@ -56,7 +56,7 @@ return [
     ],
 
     'ash' => [
-        'url'                               => 'https://abuseio.isp.local/ash/'
+        'url'                               => 'https://abuseio.isp.local/ash/',
     ],
 
     'external' => [
@@ -64,15 +64,15 @@ return [
         'findcontact'                       => [
             'id' => [
                 'class'                     => 'Custom',
-                'method'                    => 'getContactById'
+                'method'                    => 'getContactById',
             ],
             'ip' => [
                 'class'                     => 'Custom',
-                'method'                    => 'getContactByIp'
+                'method'                    => 'getContactByIp',
             ],
             'domain' => [
                 'class'                     => 'Custom',
-                'method'                    => 'getContactByDomain'
+                'method'                    => 'getContactByDomain',
             ],
         ],
     ],

@@ -3,17 +3,17 @@
 namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Evidence;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Storage;
-use PhpMimeMailParser\Parser as MimeParser;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use Config;
+use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
 use Log;
+use PhpMimeMailParser\Parser as MimeParser;
+use Storage;
 
 /**
- * This EmailProcess class handles incoming mail messages and transform them into incidents
+ * This EmailProcess class handles incoming mail messages and transform them into incidents.
  *
  * Class EmailProcess
  */
@@ -22,21 +22,21 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
     use SerializesModels;
 
     /**
-     * Filename of the email to be processed
+     * Filename of the email to be processed.
      *
      * @var string
      */
     public $filename;
 
     /**
-     * Name of the beandstalk queue to be used
+     * Name of the beandstalk queue to be used.
      *
      * @var string
      */
     public $queueName = 'abuseio_email_incoming';
 
     /**
-     * Create a new EmailProcess instance
+     * Create a new EmailProcess instance.
      *
      * @param string $filename
      */
@@ -48,8 +48,9 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
     /**
      * Queue command into named tube.
      *
-     * @param  object $queue
-     * @param  string $command
+     * @param object $queue
+     * @param string $command
+     *
      * @return void
      */
     public function queue($queue, $command)
@@ -58,14 +59,13 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
     }
 
     /**
-     * This method is called by laravel when the job fails on a exception
-     *
+     * This method is called by laravel when the job fails on a exception.
      */
     protected function failed()
     {
         Log::error(
-            get_class($this) . ': ' .
-            'Unexpected exception was raised from the framework. This useally indicates an error within the ' .
+            get_class($this).': '.
+            'Unexpected exception was raised from the framework. This useally indicates an error within the '.
             'framework code. A full strace can be found in the logs and should be reported to the developers'
         );
 
@@ -73,16 +73,15 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      *
      * @return void
      */
     public function handle()
     {
-
         Log::info(
-            get_class($this) . ': ' .
-            'Queued worker is starting the processing of email file: ' . $this->filename
+            get_class($this).': '.
+            'Queued worker is starting the processing of email file: '.$this->filename
         );
 
         $rawEmail = Storage::get($this->filename);
@@ -93,22 +92,24 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         // Sanity checks
         if (empty($parsedMail->getHeader('from')) || empty($parsedMail->getMessageBody())) {
             Log::warning(
-                get_class($this) . ': ' .
-                'Missing e-mail headers from and/or empty body: ' . $this->filename
+                get_class($this).': '.
+                'Missing e-mail headers from and/or empty body: '.$this->filename
             );
 
             $this->exception();
+
             return;
         }
 
         // Ignore email from our own notification address to prevent mail loops
-        if (preg_match('/' . Config::get('main.notifications.from_address') . '/', $parsedMail->getHeader('from'))) {
+        if (preg_match('/'.Config::get('main.notifications.from_address').'/', $parsedMail->getHeader('from'))) {
             Log::warning(
-                get_class($this) . ': ' .
-                'Loop prevention: Ignoring email from self ' . Config::get('main.notifications.from_address')
+                get_class($this).': '.
+                'Loop prevention: Ignoring email from self '.Config::get('main.notifications.from_address')
             );
 
             $this->exception();
+
             return;
         }
 
@@ -152,43 +153,46 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             $parserResult = $parser->parse();
         } else {
             Log::error(
-                get_class($this) . ': ' .
-                ': No parser available to handle message from : ' . $parsedMail->getHeader('from') .
-                ' with subject: ' . $parsedMail->getHeader('subject')
+                get_class($this).': '.
+                ': No parser available to handle message from : '.$parsedMail->getHeader('from').
+                ' with subject: '.$parsedMail->getHeader('subject')
             );
 
             $this->exception();
+
             return;
         }
 
         if ($parserResult !== false && $parserResult['errorStatus'] === true) {
             Log::error(
-                get_class($parser) . ': ' .
-                ': Parser has ended with fatal errors ! : ' . $parserResult['errorMessage']
+                get_class($parser).': '.
+                ': Parser has ended with fatal errors ! : '.$parserResult['errorMessage']
             );
 
             $this->exception();
+
             return;
         } else {
             Log::info(
-                get_class($parser) . ': ' .
-                ': Parser completed with ' . $parserResult['warningCount'] .
-                ' warnings and collected ' . count($parserResult['data']) . ' incidents to save'
+                get_class($parser).': '.
+                ': Parser completed with '.$parserResult['warningCount'].
+                ' warnings and collected '.count($parserResult['data']).' incidents to save'
             );
         }
 
         if ($parserResult['warningCount'] !== 0 && Config::get('main.emailparser.notify_on_warnings') === true) {
             Log::error(
-                get_class($this) . ': ' .
-                'Configuration has warnings set as critical and ' .
-                $parserResult['warningCount'] . ' warnings were detected. Sending alert to administrator'
+                get_class($this).': '.
+                'Configuration has warnings set as critical and '.
+                $parserResult['warningCount'].' warnings were detected. Sending alert to administrator'
             );
 
             $this->exception();
+
             return;
         }
 
-        /**
+        /*
          * build evidence model, but wait with saving it
          **/
         $evidence = new Evidence();
@@ -196,7 +200,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         $evidence->sender = $parsedMail->getHeader('from');
         $evidence->subject = $parsedMail->getHeader('subject');
 
-        /**
+        /*
          * Call IncidentsProcess to validate, store evidence and save incidents
          */
         $incidentsProcess = new IncidentsProcess($parserResult['data'], $evidence);
@@ -208,7 +212,6 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
         // Validate the data set
         if (!$incidentsProcess->validate()) {
-
             $this->exception();
 
             return;
@@ -216,20 +219,19 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
         // Write the data set to database
         if (!$incidentsProcess->save()) {
-
             $this->exception();
 
             return;
         }
 
         Log::info(
-            get_class($this) . ': ' .
-            'Queued worker has ended the processing of email file: ' . $this->filename
+            get_class($this).': '.
+            'Queued worker has ended the processing of email file: '.$this->filename
         );
     }
 
     /**
-     * alert administrator when problems happens. We will add the received message as attachment or bounce the original
+     * alert administrator when problems happens. We will add the received message as attachment or bounce the original.
      *
      * @return void
      */
@@ -238,8 +240,8 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         // we have $this->filename and $this->rawMail
         // and this Config::get('main.emailparser.fallback_mail')
         Log::error(
-            get_class($this) . ': ' .
-            'Email processor ending with errors. The received e-mail will be deleted from ' .
+            get_class($this).': '.
+            'Email processor ending with errors. The received e-mail will be deleted from '.
             'archive and bounced to the admin for investigation'
         );
 
@@ -251,12 +253,11 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         AlertAdmin::send(
             'AbuseIO was not able to process an incoming message. This message is attached to this email.',
             [
-                'failed_message.eml' => $fileContents
+                'failed_message.eml' => $fileContents,
             ]
         );
 
         // Delete the evidence file as we are not using it.
         Storage::delete($this->filename);
-
     }
 }

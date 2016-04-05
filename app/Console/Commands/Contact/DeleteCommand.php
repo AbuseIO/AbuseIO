@@ -7,46 +7,45 @@ use AbuseIO\Models\Contact;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class DeleteCommand
- * @package AbuseIO\Console\Commands\Account
+ * Class DeleteCommand.
  */
 class DeleteCommand extends AbstractDeleteCommand
 {
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAsNoun()
     {
-        return "contact";
+        return 'contact';
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getAllowedArguments()
     {
-        return ["id"];
+        return ['id'];
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getObjectByArguments()
     {
-        return Contact::find($this->argument("id"));
+        return Contact::find($this->argument('id'));
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function defineInput()
     {
-        return array(
+        return [
             new InputArgument(
                 'id',
                 InputArgument::REQUIRED,
                 'Use the id for a contact to delete it.'
-            )
-        );
+            ),
+        ];
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translations for Evidence
+ * Translations for Evidence.
  */
 return [
     // Evidence - Headers

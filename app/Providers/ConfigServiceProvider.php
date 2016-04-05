@@ -1,19 +1,19 @@
-<?php namespace AbuseIO\Providers;
+<?php
 
-use Illuminate\Support\ServiceProvider;
-use AbuseIO\Parsers\Factory as ParserFactory;
+namespace AbuseIO\Providers;
+
 use AbuseIO\Collectors\Factory as CollectorFactory;
 use AbuseIO\Notification\Factory as NotificationFactory;
+use AbuseIO\Parsers\Factory as ParserFactory;
 use Config;
 use File;
+use Illuminate\Support\ServiceProvider;
 
 /**
- * Class ConfigServiceProvider
- * @package AbuseIO\Providers
+ * Class ConfigServiceProvider.
  */
 class ConfigServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap the application services.
      *
@@ -59,11 +59,10 @@ class ConfigServiceProvider extends ServiceProvider
          * This enforces the timezone we use in the override config file.
          */
         date_default_timezone_set(config('app.timezone'));
-
     }
 
     /**
-     * Method to build different types of configuration trees
+     * Method to build different types of configuration trees.
      *
      * @param $list
      * @param $type
@@ -71,21 +70,19 @@ class ConfigServiceProvider extends ServiceProvider
     private function buildConfig($list, $type)
     {
         foreach ($list as $handler) {
-
             $defaultConfig = [];
 
             $configKey = "{$type}s.{$handler}";
 
-            $basePath = base_path() . "/vendor/abuseio/{$type}-" . strtolower($handler) . '/config';
+            $basePath = base_path()."/vendor/abuseio/{$type}-".strtolower($handler).'/config';
 
-            $defaultConfigFile = $basePath . "/{$handler}.php";
+            $defaultConfigFile = $basePath."/{$handler}.php";
 
             if (File::exists($defaultConfigFile)) {
-                $defaultConfig = include($defaultConfigFile);
+                $defaultConfig = include $defaultConfigFile;
             }
 
             Config::set($configKey, $defaultConfig);
-
         }
     }
 

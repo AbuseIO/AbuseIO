@@ -17,14 +17,13 @@ class CreateCommandTest extends TestCase
     public function testCreate()
     {
         /** @var Role $dummy */
-
         $dummy = factory(Role::class)->make();
 
         $exitCode = Artisan::call(
             'role:create',
             [
-                'name' => $dummy->name,
-                'description' => $dummy->description
+                'name'        => $dummy->name,
+                'description' => $dummy->description,
             ]
         );
 
@@ -32,10 +31,9 @@ class CreateCommandTest extends TestCase
         $this->assertContains('created', Artisan::output());
 
         Role::where([
-            'name' => $dummy->name,
+            'name'        => $dummy->name,
             'description' => $dummy->description,
         ])->forceDelete();
-
     }
 
     public function testCreateWithoutParams()

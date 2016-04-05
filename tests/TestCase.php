@@ -1,4 +1,5 @@
 <?php
+
 namespace tests;
 
 use AbuseIO\Models\User;

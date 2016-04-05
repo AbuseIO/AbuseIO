@@ -1,11 +1,11 @@
-<?php namespace AbuseIO\Providers;
+<?php
+
+namespace AbuseIO\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Class HelperServiceProvider
- *
- * @package AbuseIO\Providers
+ * Class HelperServiceProvider.
  */
 class HelperServiceProvider extends ServiceProvider
 {
@@ -18,6 +18,8 @@ class HelperServiceProvider extends ServiceProvider
         'getUrlData',
         'hFileSize',
         'isValidRegex',
+        'inetPtoi',
+        'inetItop',
     ];
 
     /**
@@ -37,7 +39,7 @@ class HelperServiceProvider extends ServiceProvider
             $helper_file = app_path().'/Helpers/'.$helper.'.php';
 
             if (\File::isFile($helper_file)) {
-                require_once($helper_file);
+                require_once $helper_file;
             }
         }
     }

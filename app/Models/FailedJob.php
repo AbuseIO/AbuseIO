@@ -1,15 +1,17 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Event
- * @package AbuseIO\Models
- * @property integer $id
- * @property integer $connection
+ * Class Event.
+ *
+ * @property int $id
+ * @property int $connection
  * @property string $queue
  * @property string $payload
- * @property integer $failed_at
+ * @property int $failed_at
  */
 class FailedJob extends Model
 {

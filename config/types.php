@@ -52,7 +52,7 @@ return [
             ],
             'IGNORED' => [
                 'class' => 'warning',
-            ]
+            ],
         ],
     ],
 
@@ -64,5 +64,5 @@ return [
     'state' => [
         'NOTIFIED',
         'NOT_NOTIFIED',
-    ]
+    ],
 ];

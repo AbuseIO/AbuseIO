@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 
 class NotesTableSeeder extends Seeder
 {
-
     public function run()
     {
         DB::table('notes')->delete();
@@ -17,8 +16,8 @@ class NotesTableSeeder extends Seeder
                 'text'                      => 'Warned client that we will terminate service until resolved',
                 'hidden'                    => false,
                 'viewed'                    => false,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => '2',
@@ -27,8 +26,8 @@ class NotesTableSeeder extends Seeder
                 'text'                      => 'Oh please dont shut my internet off!',
                 'hidden'                    => false,
                 'viewed'                    => false,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => '3',
@@ -37,8 +36,8 @@ class NotesTableSeeder extends Seeder
                 'text'                      => 'Well too bad!',
                 'hidden'                    => true,
                 'viewed'                    => false,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => '4',
@@ -47,8 +46,8 @@ class NotesTableSeeder extends Seeder
                 'text'                      => 'Hoster ... Please fix the problem ...',
                 'hidden'                    => false,
                 'viewed'                    => false,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => '5',
@@ -57,8 +56,8 @@ class NotesTableSeeder extends Seeder
                 'text'                      => 'Placed in quarantine until client is contacted',
                 'hidden'                    => true,
                 'viewed'                    => false,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
             [
                 'id'                        => '6',
@@ -67,9 +66,9 @@ class NotesTableSeeder extends Seeder
                 'text'                      => 'Antivirus has removed malware',
                 'hidden'                    => false,
                 'viewed'                    => false,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime
-            ]
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
+            ],
         ];
 
         DB::table('notes')->insert($notes);

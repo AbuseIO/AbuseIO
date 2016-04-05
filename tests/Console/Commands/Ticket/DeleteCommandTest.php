@@ -14,7 +14,7 @@ class DeleteCommandTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @var  \AbuseIO\Models\Ticket $ticket */
+    /** @var \AbuseIO\Models\Ticket $ticket */
     private $ticket;
 
     private function initDB()
@@ -27,12 +27,12 @@ class DeleteCommandTest extends TestCase
         $this->initDB();
 
         $exitCode = Artisan::call('ticket:delete', [
-            "id" => $this->ticket->id
+            'id' => $this->ticket->id,
         ]);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains("The ticket has been deleted from the system", Artisan::output());
-        /**
+        $this->assertContains('The ticket has been deleted from the system', Artisan::output());
+        /*
          * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
          */
         //$this->seed('AccountsTableSeeder');

@@ -47,4 +47,3 @@ class ShowCommandTest extends TestCase
         $this->assertContains($this->user->first_name, Artisan::output());
     }
 }
-

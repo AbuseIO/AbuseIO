@@ -6,18 +6,17 @@ use AbuseIO\Console\Commands\AbstractEditCommand;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 use Validator;
 
 /**
- * Class EditCommand
- * @package AbuseIO\Console\Commands\Netblock
+ * Class EditCommand.
  */
 class EditCommand extends AbstractEditCommand
 {
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getOptionsList()
     {
@@ -28,13 +27,13 @@ class EditCommand extends AbstractEditCommand
                 new InputOption('first_ip', null, InputOption::VALUE_OPTIONAL, 'First ip'),
                 new InputOption('last_ip', null, InputOption::VALUE_OPTIONAL, 'Last ip'),
                 new InputOption('description', null, InputOption::VALUE_OPTIONAL, 'Description'),
-                new InputOption('enabled', null, InputOption::VALUE_OPTIONAL, 'Enabled')
+                new InputOption('enabled', null, InputOption::VALUE_OPTIONAL, 'Enabled'),
             ]
         );
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getAsNoun()
     {
@@ -42,7 +41,7 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getModelFromRequest()
     {
@@ -50,13 +49,14 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function handleOptions($model)
     {
         if ($this->option('contact_id')) {
-            if (null === Contact::find($this->option("contact_id"))) {
+            if (null === Contact::find($this->option('contact_id'))) {
                 $this->error('Unable to find contact with this criteria');
+
                 return false;
             }
         }
@@ -71,7 +71,7 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getValidator($model)
     {

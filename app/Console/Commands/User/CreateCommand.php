@@ -8,12 +8,10 @@ use AbuseIO\Models\User;
 use Prophecy\Argument;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
 use Validator;
 
 /**
- * Class CreateCommand
- * @package AbuseIO\Console\Commands\User
+ * Class CreateCommand.
  */
 class CreateCommand extends AbstractCreateCommand
 {
@@ -23,7 +21,7 @@ class CreateCommand extends AbstractCreateCommand
     private $password;
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getArgumentsList()
     {
@@ -40,25 +38,25 @@ class CreateCommand extends AbstractCreateCommand
                     null
                 ),
                 new inputargument('account', null, 'the new account name where this user is linked to', null),
-                new inputargument('disabled', null, 'set the new account status to be disabled', 'false')
+                new inputargument('disabled', null, 'set the new account status to be disabled', 'false'),
             ]
         );
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getAsNoun()
     {
-        return "user";
+        return 'user';
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getModelFromRequest()
     {
-        $user = new User;
+        $user = new User();
 
         $user->first_name = $this->argument('first_name');
         $user->last_name = $this->argument('last_name');
@@ -87,13 +85,13 @@ class CreateCommand extends AbstractCreateCommand
             $this->info(
                 sprintf('Using auto generated password: %s', $this->password)
             );
-        };
+        }
 
         return $this->password;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getValidator($model)
     {
@@ -107,6 +105,7 @@ class CreateCommand extends AbstractCreateCommand
 
     /**
      * @param $name
+     *
      * @return mixed
      */
     protected function findAccountByName($name)
@@ -114,7 +113,7 @@ class CreateCommand extends AbstractCreateCommand
         $account = Account::where('id', $name)->orWhere('name', $name)->first();
 
         if ($account === null) {
-            $account = Account::find(array("name" => 'Default'))->first();
+            $account = Account::find(['name' => 'Default'])->first();
 
             if ($account === null) {
                 $account = Account::all()->first();
@@ -124,6 +123,7 @@ class CreateCommand extends AbstractCreateCommand
                 sprintf("No account was found for given account name so '%s' was used", $account->name)
             );
         }
+
         return $account;
     }
 }

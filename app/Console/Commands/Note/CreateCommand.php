@@ -9,14 +9,14 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
 
 /**
- * Class CreateCommand
- * @package AbuseIO\Console\Commands\Note
+ * Class CreateCommand.
  */
 class CreateCommand extends AbstractCreateCommand
 {
     // TODO validation of file not working
+
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getArgumentsList()
     {
@@ -32,7 +32,7 @@ class CreateCommand extends AbstractCreateCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     public function getAsNoun()
     {
@@ -40,7 +40,7 @@ class CreateCommand extends AbstractCreateCommand
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getModelFromRequest()
     {
@@ -49,14 +49,14 @@ class CreateCommand extends AbstractCreateCommand
         $note->ticket_id = $this->argument('ticket_id');
         $note->submitter = $this->argument('submitter');
         $note->text = $this->argument('text');
-        $note->viewed = $this->argument('viewed')=== 'true' ? true : false;
+        $note->viewed = $this->argument('viewed') === 'true' ? true : false;
         $note->hidden = $this->argument('hidden') === 'true' ? true : false;
 
         return $note;
     }
 
     /**
-     * {@inheritdoc }
+     * {@inheritdoc}.
      */
     protected function getValidator($model)
     {

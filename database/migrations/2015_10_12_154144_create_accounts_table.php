@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateAccountsTable extends Migration
 {
@@ -46,8 +46,8 @@ class CreateAccountsTable extends Migration
                 'disabled'                  => false,
                 'brand_id'                  => 1,
                 'systemaccount'             => true,
-                'created_at'                => new DateTime,
-                'updated_at'                => new DateTime,
+                'created_at'                => new DateTime(),
+                'updated_at'                => new DateTime(),
             ],
         ];
 

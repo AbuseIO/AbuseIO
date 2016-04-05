@@ -8,8 +8,7 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class AbstractShowCommand
- * @package AbuseIO\Console\Commands
+ * Class AbstractShowCommand.
  */
 abstract class AbstractShowCommand extends Command
 {
@@ -123,6 +122,7 @@ abstract class AbstractShowCommand extends Command
      * @return Collection
      */
     abstract protected function getCollectionWithArguments();
+
     /**
      * @return array
      */
@@ -147,6 +147,7 @@ abstract class AbstractShowCommand extends Command
     /**
      * @param $resultSet
      * @param $property
+     *
      * @return mixed
      */
     protected function hideProperty($resultSet, $property)
@@ -156,6 +157,7 @@ abstract class AbstractShowCommand extends Command
                 unset($resultSet[$key]);
             }
         }
+
         return $resultSet;
     }
 }

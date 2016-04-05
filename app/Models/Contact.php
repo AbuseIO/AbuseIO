@@ -1,22 +1,24 @@
-<?php namespace AbuseIO\Models;
+<?php
+
+namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Contact
- * @package AbuseIO\Models
- * @property integer $id
+ * Class Contact.
+ *
+ * @property int $id
  * @property string $reference fillable
  * @property string $name fillable
  * @property string $email fillable
  * @property string $api_host fillable
- * @property boolean $auto_notify fillable
- * @property boolean $enabled fillable
- * @property integer account_id fillable
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $deleted_at
+ * @property bool $auto_notify fillable
+ * @property bool $enabled fillable
+ * @property int account_id fillable
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $deleted_at
  */
 class Contact extends Model
 {
@@ -51,7 +53,7 @@ class Contact extends Model
     */
 
     /**
-     * Validation rules for this model being created
+     * Validation rules for this model being created.
      *
      * @return array $rules
      */
@@ -70,15 +72,16 @@ class Contact extends Model
     }
 
     /**
-     * Validation rules for this model being updated
+     * Validation rules for this model being updated.
      *
-     * @param  \AbuseIO\Models\Contact $contact
+     * @param \AbuseIO\Models\Contact $contact
+     *
      * @return array $rules
      */
     public static function updateRules($contact)
     {
         $rules = [
-            'reference'     => 'required|unique:contacts,reference,'. $contact->id,
+            'reference'     => 'required|unique:contacts,reference,'.$contact->id,
             'name'          => 'required',
             'email'         => 'sometimes|emails',
             'api_host'      => 'sometimes|url',
@@ -96,7 +99,7 @@ class Contact extends Model
     */
 
     /**
-     * Returns the account for this contact
+     * Returns the account for this contact.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -106,7 +109,7 @@ class Contact extends Model
     }
 
     /**
-     * Returns the domains for this contact
+     * Returns the domains for this contact.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -116,7 +119,7 @@ class Contact extends Model
     }
 
     /**
-     * Returns the netblocks from this contact
+     * Returns the netblocks from this contact.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -132,10 +135,11 @@ class Contact extends Model
     */
 
     /**
-     * Static method to check if the account has access to the model instance
+     * Static method to check if the account has access to the model instance.
      *
-     * @param  int                     $model_id
-     * @param  \AbuseIO\Models\Account $account
+     * @param int                     $model_id
+     * @param \AbuseIO\Models\Account $account
+     *
      * @return bool
      */
     public static function checkAccountAccess($model_id, Account $account)
@@ -145,13 +149,13 @@ class Contact extends Model
             return true;
         }
 
-        $contact = Contact::find($model_id);
-        return ($contact->account->id == $account->id);
+        $contact = self::find($model_id);
+
+        return $contact->account->id == $account->id;
     }
 
-
     /**
-     * Creates a shortlist of the table with ID and Name for pulldown menu's
+     * Creates a shortlist of the table with ID and Name for pulldown menu's.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

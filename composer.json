@@ -26,6 +26,8 @@
 	"require": {
 		"php": ">=5.5.9",
 		"ext-mcrypt": "*",
+		"ext-intl" : "*",
+		"ext-curl" : "*",
 		"laravel/framework": "5.1.*",
 		"laravelcollective/html": "~5.0",
 		"php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
@@ -57,7 +59,7 @@
 
 		"abuseio/collector-common": "1.1.*",
 		"abuseio/collector-rbl": "1.3.*",
-		"abuseio/collector-snds": "1.3.*",
+		"abuseio/collector-snds": "1.4.*",
 		
 		"abuseio/notification-common": "1.1.*",
 		"abuseio/notification-mail": "1.2.*",
@@ -73,8 +75,7 @@
 	"autoload": {
 		"classmap": [
 			"database",
-			"vendor/abuseio/",
-			"app/Libraries/"
+			"vendor/abuseio/"
 		],
 		"psr-4": {
 			"AbuseIO\\": "app/"

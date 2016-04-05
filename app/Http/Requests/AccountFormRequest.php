@@ -5,8 +5,7 @@ namespace AbuseIO\Http\Requests;
 use AbuseIO\Models\Account;
 
 /**
- * Class AccountFormRequest
- * @package AbuseIO\Http\Requests
+ * Class AccountFormRequest.
  */
 class AccountFormRequest extends Request
 {
@@ -42,6 +41,6 @@ class AccountFormRequest extends Request
                 break;
         }
 
-        return [ ];
+        return [];
     }
 }
