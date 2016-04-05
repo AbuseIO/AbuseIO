@@ -68,10 +68,7 @@ class TicketFormRequest extends Request
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
         $input = Input::all();
-
-        if (strtotime($input['timestamp']) !== false) {
-            $input['timestamp'] = strtotime($input['timestamp']);
-        }
+        $input['timestamp'] = strtotime($input['timestamp']);
 
         if (!json_decode($input['information'])) {
             $input['information'] = json_encode(['report' => $input['information']]);
