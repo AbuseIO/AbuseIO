@@ -1456,6 +1456,34 @@ return [
             ",
     ],
 
+    'OPEN_TFTP_SERVER' => [
+        'name'          => 'Open TFTP Server',
+        'description'   => "
+            <h2>Wat is een 'Open TFTP Server'?</h2>
+
+            <p>Trivial File Transfer Protocol, afgekort TFTP, is een eenvoudig
+            bestandsoverdracht protocol dat veel gebruikt wordt om computers vanaf
+            een netwerk te starten. Als de TCP/IP stack reeds draait kan TFTP ook
+            gebruikt worden om andere apparatuur zoals routers, switches, ADSL- en
+            kabelmodems van firmware en configuraties te voorzien. TFTP werd voor
+            het eerst gedefinieerd in 1980.</p>
+
+            <h2>Waarom is dit slecht?</h2>
+
+            <p>TFTP heeft geen enkele vorm van authentication of encryptie. Dit maakt
+            het erg eenvoudig voor iemand om al je configuratie bestanden te downloaden
+            of een corrupte firmware te uploaden!</p>
+
+            <h2>Advies</h2>
+
+            <p>Er is geen reden om deze dienst op een publieke interface aan te bieden.
+            Het advies is om deze dienst te stoppen of ervoor te zorgen dat het niet
+            mogelijk is deze dienst via het internet te bereiken is. Dit kan door gebruik
+            te maken van RFC1918 ip reeksen of een firewall.</p>
+
+            ",
+    ],
+
     'PHISING_WEBSITE' => [
         'name'        => 'Phishing Website',
         'description' => "
