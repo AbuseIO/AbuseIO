@@ -1460,6 +1460,31 @@ return [
             ",
     ],
 
+    'OPEN_TFTP_SERVER' => [
+        'name'          => 'Open TFTP Server',
+        'description'   => "
+            <h2>What is a 'Open TFTP Server'?</h2>
+
+            <p>Trivial File Transfer Protocol (TFTP) is a simple File Transfer Protocol
+            which allows a client to get from or put a file onto a remote host. One of
+            its primary uses is in the early stages of nodes booting from a local area
+            network. TFTP has been used for this application because it is very simple
+            to implement.</p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>TFTP has no authentication or encryption. This makes it easy for someone
+            to download all your configurations or even upload malicious firmware!</p>
+
+            <h2>Recommended action</h2>
+
+            <p>There is no reason to have this TFTP service enabled on a public facing
+            interface. You should either stop te service or make sure it is not reachable
+            from the internet by using RFC1918 spaces or a firewall.</p>
+
+            ",
+    ],
+
     'PHISING_WEBSITE' => [
         'name'        => 'Phishing website',
         'description' => "
