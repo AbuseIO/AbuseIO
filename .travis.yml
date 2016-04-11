@@ -10,15 +10,13 @@ os:
 php:
   - 5.5.9
   - 7.0
-  - hhvm
-  - nightly
 
 env:
   - DB=mysql
 
 before_script:
   - cp .env.travis .env
-  - echo 'yes' | pecl install mailparse-2.1.6
+  - echo 'yes' | pecl install mailparse
   - mysql -e 'CREATE DATABASE `abuseio`;'
   - composer self-update
   - composer install --dev --prefer-source --no-interaction
