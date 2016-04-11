@@ -16,6 +16,7 @@ env:
 
 before_script:
   - cp .env.travis .env
+  - echo ${TRAVIS_PHP_VERSION:0:3}
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5.9" ]]; then echo 'yes' | pecl install mailparse-2.1.6; fi
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then echo 'yes' | pecl install; fi
   - mysql -e 'CREATE DATABASE `abuseio`;'
