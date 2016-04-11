@@ -1,0 +1,4 @@
+[submodule "gitmodules/abuseio-docs"]
+	path = gitmodules/abuseio-docs
+	url = git@github.com:AbuseIO/abuseio-docs.git
+	branch = master
