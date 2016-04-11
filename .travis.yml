@@ -9,6 +9,9 @@ os:
 
 php:
   - 5.5.9
+  - 7.0
+  - hhvm
+  - nightly
 
 env:
   - DB=mysql
