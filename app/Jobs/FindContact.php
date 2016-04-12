@@ -50,7 +50,7 @@ class FindContact extends Job
         if (!is_object($contact)) {
             Log::error(
                 'FindContact: '.
-                "Method did not return a Contact object. Falling back to UNDEF"
+                'Method did not return a Contact object. Falling back to UNDEF'
             );
 
             return false;
@@ -58,9 +58,9 @@ class FindContact extends Job
         if (!method_exists($contact, 'toArray')) {
             Log::error(
                 'FindContact: '.
-                "Method did not return a valid Contact object. Falling back to UNDEF"
+                'Method did not return a valid Contact object. Falling back to UNDEF'
             );
-            
+
             return false;
         }
 
