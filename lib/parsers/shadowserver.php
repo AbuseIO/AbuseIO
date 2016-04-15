@@ -172,6 +172,11 @@ function parse_shadowserver($message) {
                     'fields'    => 'protocol port tag services workstation_name',
                     'type'      => 'INFO',
                 ),
+                'scan_tftp'          => array (
+                    'class'     => 'Open TFTP Server',
+                    'fields'    => 'protocol port',
+                    'type'      => 'INFO',
+                ),
             );
 
     // ==================
