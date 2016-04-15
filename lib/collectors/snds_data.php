@@ -60,7 +60,7 @@ function collect_snds_data($config=array()) {
                     'timestamp'=>strtotime($time_ago),
                     'information'=>array(
                         'recipients'=>$recipients[$k],
-                        'complaint rate'=>$data[$k],
+                        'complaint rate'=>$complaints[$k],
                         'rcpt_commands'=>$rcpt[$k],
                         'data_commands'=>$data[$k],
                     )
