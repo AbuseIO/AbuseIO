@@ -25,12 +25,12 @@
 
 
 /*
-** Function: collect_snds
+** Function: collect_snds_ipstatus
 ** Parameters:
 **  config (array): a set of configuration options
 ** Returns: True when the collection was successfully completed (or false when it doenst)
 */
-function collect_snds($config) {
+function collect_snds_ipstatus($config) {
     // Fetch Microsoft SNDS report for IP status
     if (COLLECTOR_SNDS_KEY == "") {
         logger(LOG_DEBUG,'No SNDS key specified in config, skipping SNDS reporting');

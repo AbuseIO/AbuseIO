@@ -71,7 +71,8 @@ $modules = array(
                                              ),
                 "collectors"        => array (
                                                 "osint",
-                                                "snds",
+                                                "snds_ipstatus",
+                                                "snds_data",
                                                 "rblscan",
                                              ),
                 "core"              => array (

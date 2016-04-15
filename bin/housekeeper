@@ -48,8 +48,11 @@ if (defined('COLLECTOR_SNDS_ENABLED') && COLLECTOR_SNDS_ENABLED == true) {
     logger(LOG_DEBUG, "Housekeeper - starting SNDS collector");
 
     $config = array();
-    if(!collect_snds($config)) {
-        logger(LOG_ERR, "Housekeeper failed to run SNDS collector");
+    if(!collect_snds_ipstatus($config)) {
+        logger(LOG_ERR, "Housekeeper failed to run SNDS IP status collector");
+    }
+    if(!collect_snds_data($config)) {
+        logger(LOG_ERR, "Housekeeper failed to run SNDS data collector");
     }
 }
 
