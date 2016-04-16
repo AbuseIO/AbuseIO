@@ -47,6 +47,23 @@ class FindContact extends Job
      */
     public static function validateContact($contact)
     {
+        if (!is_object($contact)) {
+            Log::error(
+                'FindContact: '.
+                'Method did not return a Contact object. Falling back to UNDEF'
+            );
+
+            return false;
+        }
+        if (!method_exists($contact, 'toArray')) {
+            Log::error(
+                'FindContact: '.
+                'Method did not return a valid Contact object. Falling back to UNDEF'
+            );
+
+            return false;
+        }
+
         $validation = Validator::make($contact->toArray(), Contact::createRules());
 
         if ($validation->fails()) {
