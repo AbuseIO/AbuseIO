@@ -16,7 +16,7 @@ class IndexTest extends TestCase
     {
         parent::setUp();
 
-        $response = $this->call('GET', '/api/brands');
+        $response = $this->call('GET', '/api/v1/brands');
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

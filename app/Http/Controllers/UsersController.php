@@ -6,6 +6,11 @@ use AbuseIO\Http\Requests\UserFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\User;
+use AbuseIO\Transformers\UserTransformer;
+use AbuseIO\Traits\Api;
+
+use League\Fractal\Manager;
+
 use Config;
 use Form;
 use Log;
@@ -15,15 +20,21 @@ use yajra\Datatables\Datatables;
 /**
  * Class UsersController.
  */
-class UsersController extends Controller
+class UsersController extends Controller 
 {
+    use Api;
+
     /**
      * UsersController constructor.
+     * @param Manager $fractal
      */
-    public function __construct()
+    public function __construct(Manager $fractal)
     {
         parent::__construct();
 
+        // initialize the Api methods
+        $this->apiInit($fractal);
+        
         // is the logged in account allowed to execute an action on the User
         $this->middleware('checkaccount:User', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
@@ -101,6 +112,12 @@ class UsersController extends Controller
             ->with('auth_user', $this->auth_user);
     }
 
+    public function apiIndex()
+    {
+        $users = User::all();
+        return $this->respondWithCollection($users, new UserTransformer());
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -165,7 +182,9 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        $account = Account::find($user->account_id);
+        $data = $this->handleShow($user);
+        $user = $data['user'];
+        $account = $data['account'];
 
         $locale = Config::get('app.locales');
 
@@ -175,6 +194,32 @@ class UsersController extends Controller
             ->with('roles', $user->roles)
             ->with('language', $locale[$user->locale][0])
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * retrieve the necessary data for the show and apiShow functions
+     *
+     * @param User $user
+     *
+     * @return array
+     */
+    private function handleShow(User $user) {
+        return [
+            'user'    => $user,
+            'account' => $user->account
+        ];
+    }
+
+    public function apiShow($id) {
+        $user = User::find($id);
+
+        if (!$user) {
+            return $this->errorNotFound("User Not Found");
+        }
+
+        $data = $this->handleShow($user);
+
+        return $this->respondWithItem($data['user'], new UserTransformer());
     }
 
     /**

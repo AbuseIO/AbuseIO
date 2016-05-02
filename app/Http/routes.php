@@ -141,31 +141,47 @@ Route::group(
 );
 
 /*
- * Api routes
+ * API routes group
  */
 Route::group(
     [
-        'prefix' => 'api',
-        'middleware' => [],
-        'as'     => 'api.',
+        'prefix'     => 'api',
+        'as'         => 'api.',
+        //'middleware' => 'auth.basic',
     ],
     function () {
-        Route::get(
-            'brands',
+        Route::group(
             [
-                'as' => 'index',
-                'uses' => 'BrandsController@apiIndex',
-            ]
-        );
+                'prefix' => 'v1',
+                'as'     => 'v1.'
+            ],
+            function () {
+                // Contacts
+                //require app_path().'/Api/Routes/Contacts.php';
 
-        Route::get(
-            'brands/{id}',
-            [
-                'as' => 'index',
-                'uses' => 'BrandsController@apiShow',
-            ]
+                // Netblocks
+                //require app_path().'/Api/Routes/Netblocks.php';
+
+                // Domains
+                //require app_path().'/Api/Routes/Domains.php';
+
+                // Tickets
+                //require app_path().'/Api/Routes/Tickets.php';
+
+                // Evidence
+                //require app_path().'/Api/Routes/Evidence.php';
+
+                // Notes
+                //require app_path().'/Api/Routes/Notes.php';
+
+                // Analytics
+                //require app_path().'/Api/Routes/Analytics.php';
+
+                // Settings related
+                require app_path().'/Api/Routes/Accounts.php';
+                require app_path().'/Api/Routes/Brands.php';
+                require app_path().'/Api/Routes/Users.php';
+            }
         );
     }
-
-
 );

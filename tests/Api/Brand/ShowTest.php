@@ -14,7 +14,7 @@ class ShowTest extends TestCase
 
     public function initWithValidResponse()
     {
-        $response = $this->call('GET', '/api/brands/1');
+        $response = $this->call('GET', '/api/v1/brands/1');
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
@@ -22,7 +22,7 @@ class ShowTest extends TestCase
 
     public function initWithInvalidResponse()
     {
-        $response = $this->call('GET', '/api/brands/200');
+        $response = $this->call('GET', '/api/v1/brands/200');
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

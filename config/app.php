@@ -198,6 +198,7 @@ return [
         'AbuseIO\Providers\HelperServiceProvider',
         'Chumper\Zipper\ZipperServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
+        'Sorskod\Larasponse\LarasponseServiceProvider',
 
         /*
          * Developer Providers
