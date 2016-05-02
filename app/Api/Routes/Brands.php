@@ -9,7 +9,7 @@ Route::group(
         Route::get(
             '',
             [
-                'as' => 'index',
+                'as'   => 'index',
                 'uses' => 'BrandsController@apiIndex',
             ]
         );
@@ -17,7 +17,7 @@ Route::group(
         Route::get(
             '{id}',
             [
-                'as' => 'index',
+                'as'   => 'index',
                 'uses' => 'BrandsController@apiShow',
             ]
         );

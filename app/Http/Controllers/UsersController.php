@@ -6,13 +6,11 @@ use AbuseIO\Http\Requests\UserFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\User;
-use AbuseIO\Transformers\UserTransformer;
 use AbuseIO\Traits\Api;
-
-use League\Fractal\Manager;
-
+use AbuseIO\Transformers\UserTransformer;
 use Config;
 use Form;
+use League\Fractal\Manager;
 use Log;
 use Redirect;
 use yajra\Datatables\Datatables;
@@ -20,12 +18,13 @@ use yajra\Datatables\Datatables;
 /**
  * Class UsersController.
  */
-class UsersController extends Controller 
+class UsersController extends Controller
 {
     use Api;
 
     /**
      * UsersController constructor.
+     *
      * @param Manager $fractal
      */
     public function __construct(Manager $fractal)
@@ -34,7 +33,7 @@ class UsersController extends Controller
 
         // initialize the Api methods
         $this->apiInit($fractal);
-        
+
         // is the logged in account allowed to execute an action on the User
         $this->middleware('checkaccount:User', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
@@ -115,6 +114,7 @@ class UsersController extends Controller
     public function apiIndex()
     {
         $users = User::all();
+
         return $this->respondWithCollection($users, new UserTransformer());
     }
 
@@ -197,24 +197,26 @@ class UsersController extends Controller
     }
 
     /**
-     * retrieve the necessary data for the show and apiShow functions
+     * retrieve the necessary data for the show and apiShow functions.
      *
      * @param User $user
      *
      * @return array
      */
-    private function handleShow(User $user) {
+    private function handleShow(User $user)
+    {
         return [
             'user'    => $user,
-            'account' => $user->account
+            'account' => $user->account,
         ];
     }
 
-    public function apiShow($id) {
+    public function apiShow($id)
+    {
         $user = User::find($id);
 
         if (!$user) {
-            return $this->errorNotFound("User Not Found");
+            return $this->errorNotFound('User Not Found');
         }
 
         $data = $this->handleShow($user);
