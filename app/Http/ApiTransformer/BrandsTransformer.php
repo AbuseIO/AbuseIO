@@ -6,7 +6,8 @@ use AbuseIO\Models\Brand;
 
 class BrandsTransformer
 {
-    public function transform($obj) {
+    public function transform($obj)
+    {
         if ($obj instanceof Brand) {
             return $this->transformBrand($obj);
         }
@@ -19,12 +20,12 @@ class BrandsTransformer
         return $return;
     }
 
-    private function transformBrand(Brand $brand) {
-
+    private function transformBrand(Brand $brand)
+    {
         return [
-            'id' => (int) $brand->id,
+            'id'           => (int) $brand->id,
             'company_name' => $brand->company_name,
-            'created_at' => $brand->created_at
+            'created_at'   => $brand->created_at,
         ];
     }
 }

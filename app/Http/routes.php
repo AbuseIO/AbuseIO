@@ -145,15 +145,15 @@ Route::group(
  */
 Route::group(
     [
-        'prefix' => 'api',
+        'prefix'     => 'api',
         'middleware' => [],
-        'as'     => 'api.',
+        'as'         => 'api.',
     ],
     function () {
         Route::get(
             'brands',
             [
-                'as' => 'index',
+                'as'   => 'index',
                 'uses' => 'BrandsController@apiIndex',
             ]
         );
@@ -161,11 +161,10 @@ Route::group(
         Route::get(
             'brands/{id}',
             [
-                'as' => 'index',
+                'as'   => 'index',
                 'uses' => 'BrandsController@apiShow',
             ]
         );
     }
-
 
 );
