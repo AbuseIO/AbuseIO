@@ -2,8 +2,8 @@
 
 namespace tests\Api\Brand;
 
-use tests\TestCase;
 use tests\Api\IndexTestHelper;
+use tests\TestCase;
 
 class IndexTest extends TestCase
 {
@@ -11,4 +11,3 @@ class IndexTest extends TestCase
 
     const URL = '/api/v1/brands';
 }
-

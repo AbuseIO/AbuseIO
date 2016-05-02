@@ -2,8 +2,6 @@
 
 namespace tests\Api;
 
-use tests\Api\ShowTestHelper;
-
 trait ShowTestHelper
 {
     private $statusCode;
