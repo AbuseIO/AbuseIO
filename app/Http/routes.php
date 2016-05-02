@@ -153,7 +153,7 @@ Route::group(
         Route::group(
             [
                 'prefix' => 'v1',
-                'as'     => 'v1.'
+                'as'     => 'v1.',
             ],
             function () {
                 // Contacts

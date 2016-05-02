@@ -1,17 +1,15 @@
 <?php
+
 namespace AbuseIO\Traits;
 
+use AbuseIO\Api\ErrorCodes;
+use League\Fractal\Manager;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
-use League\Fractal\Manager;
-use AbuseIO\Api\ErrorCodes;
 use Response;
 
 /**
- * Class Api
- * @package AbuseIO\Traits
- *
- * extends the base class with response methods specific for the api
+ * Class Api.
  */
 trait Api
 {
@@ -27,6 +25,7 @@ trait Api
 
     /**
      * @param Manager $fractal
+     *
      * @internal param array $args
      */
     protected function apiInit(Manager $fractal)
@@ -44,17 +43,20 @@ trait Api
 
     /**
      * @param int $statusCode
+     *
      * @return $this
      */
     public function setStatusCode($statusCode)
     {
         $this->statusCode = $statusCode;
+
         return $this;
     }
 
     /**
      * @param $item
      * @param $callback
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithItem($item, $callback)
@@ -65,11 +67,11 @@ trait Api
             $rootScope->toArray(),
             [
                 'message' => [
-                    'code' => ErrorCodes::CODE_SUCCESSFULL,
-                    'message' => 'success',
+                    'code'      => ErrorCodes::CODE_SUCCESSFULL,
+                    'message'   => 'success',
                     'http_code' => $this->statusCode,
-                    'success' => $this->statusCode == 200 ? 'true' : 'false'
-                ]
+                    'success'   => $this->statusCode == 200 ? 'true' : 'false',
+                ],
             ]);
 
         return $this->respondWithArray($data);
@@ -78,6 +80,7 @@ trait Api
     /**
      * @param $collection
      * @param $callback
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithCollection($collection, $callback)
@@ -88,11 +91,11 @@ trait Api
             $rootScope->toArray(),
             [
                 'message' => [
-                    'code' => ErrorCodes::CODE_SUCCESSFULL,
-                    'message' => 'success',
+                    'code'      => ErrorCodes::CODE_SUCCESSFULL,
+                    'message'   => 'success',
                     'http_code' => $this->statusCode,
-                    'success' => $this->statusCode == 200 ? 'true' : 'false'
-                ]
+                    'success'   => $this->statusCode == 200 ? 'true' : 'false',
+                ],
             ]);
 
         return $this->respondWithArray($data);
@@ -101,9 +104,10 @@ trait Api
     /**
      * @param array $array
      * @param array $headers
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected  function respondWithArray(array $array, array $headers = [])
+    protected function respondWithArray(array $array, array $headers = [])
     {
         return response()->json($array, $this->statusCode, $headers);
     }
@@ -111,29 +115,31 @@ trait Api
     /**
      * @param $message
      * @param $errorCode
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithError($message, $errorCode)
     {
         if ($this->statusCode === 200) {
             trigger_error(
-                "Error with status 200, strange", E_USER_WARNING
+                'Error with status 200, strange', E_USER_WARNING
             );
         }
 
         return $this->respondWithArray([
-            'data' => [],
+            'data'    => [],
             'message' => [
-                'code' => $errorCode,
-                'message' => $message,
+                'code'      => $errorCode,
+                'message'   => $message,
                 'http_code' => $this->statusCode,
-                'success' => $this->statusCode == 200 ? 'true' : 'false'
-            ]
+                'success'   => $this->statusCode == 200 ? 'true' : 'false',
+            ],
         ]);
     }
 
     /**
      * @param string $message
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function errorForbidden($message = 'Forbidden')
@@ -144,6 +150,7 @@ trait Api
 
     /**
      * @param string $message
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function errorInternalError($message = 'Internal Error')
@@ -154,6 +161,7 @@ trait Api
 
     /**
      * @param string $message
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function errorNotFound($message = 'Resource Not Found')
@@ -164,6 +172,7 @@ trait Api
 
     /**
      * @param string $message
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function errorUnauthorized($message = 'Unauthorized')
@@ -174,6 +183,7 @@ trait Api
 
     /**
      * @param string $message
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function errorWrongArgs($message = 'Wrong Arguments')
