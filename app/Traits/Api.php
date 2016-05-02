@@ -62,6 +62,7 @@ trait Api
     protected function respondWithItem($item, $callback)
     {
         $resource = new Item($item, $callback);
+
         return $this->respondWithResource($resource);
     }
 
@@ -74,6 +75,7 @@ trait Api
     protected function respondWithCollection($collection, $callback)
     {
         $resource = new Collection($collection, $callback);
+
         return $this->respondWithResource($resource);
     }
 
@@ -111,6 +113,7 @@ trait Api
     /**
      * @param $message
      * @param $errorCode
+     *
      * @return array
      */
     protected function getMessage($message, $errorCode)
@@ -180,6 +183,7 @@ trait Api
 
     /**
      * @param $resource
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithResource($resource)
@@ -188,7 +192,7 @@ trait Api
         $data = array_merge(
             $rootScope->toArray(),
             [
-                'message' => $this->getMessage('success', ErrorCodes::CODE_SUCCESSFULL)
+                'message' => $this->getMessage('success', ErrorCodes::CODE_SUCCESSFULL),
             ]);
 
         return $this->respondWithArray($data);

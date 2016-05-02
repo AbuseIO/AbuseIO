@@ -2,15 +2,15 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Traits\Api;
-use AbuseIO\Transformers\BrandTransformer;
 use AbuseIO\Http\Requests\BrandFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\BrandTransformer;
 use Exception;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
-use League\Fractal\Manager;
 
 /**
  * Class BrandsController.
