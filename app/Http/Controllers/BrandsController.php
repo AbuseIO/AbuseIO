@@ -6,8 +6,10 @@ use AbuseIO\Http\Requests\BrandFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use Exception;
+use Illuminate\Http\Request;
 use Redirect;
 use yajra\Datatables\Datatables;
+use AbuseIO\Http\ApiTransformer\BrandsTransformer;
 
 /**
  * Class BrandsController.
@@ -22,7 +24,7 @@ class BrandsController extends Controller
         parent::__construct();
 
         // is the logged in account allowed to execute an action on the Brand
-        $this->middleware('checkaccount:Brand', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo']]);
+        $this->middleware('checkaccount:Brand', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiShow']]);
     }
 
     /**
@@ -37,6 +39,25 @@ class BrandsController extends Controller
         return view('brands.index')
             ->with('brands', $brands)
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex()
+    {
+        $brands = Brand::all();
+
+        return response()->json(
+            [
+                'data' => (new BrandsTransformer)->transform($brands),
+                'message' => [
+                    'success' => true
+                ]
+            ]
+        )->setStatusCode(200);
     }
 
     /**
@@ -84,26 +105,26 @@ class BrandsController extends Controller
                                 $brand->id,
                             ],
                             'method' => 'DELETE',
-                            'class'  => 'form-inline',
+                            'class' => 'form-inline',
                         ]
                     );
                     if (!$brand->isSystemBrand() or $account->isSystemAccount()) {
                         if ($account->brand_id != $brand->id) {
-                            $actions .= ' <a href="brands/'.$brand->id.
-                                '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> '.
-                                trans('misc.button.activate').'</a> ';
+                            $actions .= ' <a href="brands/' . $brand->id .
+                                '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> ' .
+                                trans('misc.button.activate') . '</a> ';
                         }
-                        $actions .= ' <a href="brands/'.$brand->id.
-                            '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
-                            trans('misc.button.show').'</a> ';
-                        $actions .= ' <a href="brands/'.$brand->id.
-                            '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
-                            trans('misc.button.edit').'</a> ';
+                        $actions .= ' <a href="brands/' . $brand->id .
+                            '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> ' .
+                            trans('misc.button.show') . '</a> ';
+                        $actions .= ' <a href="brands/' . $brand->id .
+                            '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> ' .
+                            trans('misc.button.edit') . '</a> ';
                         $actions .= \Form::button(
                             '<i class="glyphicon glyphicon-remove"></i> '
-                            .trans('misc.button.delete'),
+                            . trans('misc.button.delete'),
                             [
-                                'type'  => 'submit',
+                                'type' => 'submit',
                                 'class' => 'btn btn-danger btn-xs',
                             ]
                         );
@@ -116,7 +137,7 @@ class BrandsController extends Controller
             ->addColumn(
                 'logo',
                 function ($brand) {
-                    $logo = '<img src="/admin/logo/'.$brand->id.'" width="60px"/>';
+                    $logo = '<img src="/admin/logo/' . $brand->id . '" width="60px"/>';
 
                     return $logo;
                 }
@@ -190,10 +211,43 @@ class BrandsController extends Controller
      */
     public function show(Brand $brand)
     {
+
         return view('brands.show')
             ->with('brand', $brand)
             ->with('creator', $brand->creator)
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiShow($id)
+    {
+        $brand = Brand::find($id);
+
+        if (!$brand) {
+            return response()->json(
+                [
+                    'message' => [
+                        'success' => false,
+                        'error' => 'Brand was not found'
+                    ]
+                ]
+            )->setStatusCode(404);
+        }
+
+        return response()->json(
+            [
+                'data' => (new BrandsTransformer)->transform($brand),
+                'message' => [
+                    'success' => true
+                ]
+            ]
+        )->setStatusCode(200);
     }
 
     /**
@@ -242,7 +296,7 @@ class BrandsController extends Controller
      * Update the specified resource in storage.
      *
      * @param BrandFormRequest $brandForm
-     * @param Brand            $brand
+     * @param Brand $brand
      *
      * @return \Illuminate\Http\RedirectResponse
      */

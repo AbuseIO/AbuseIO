@@ -139,3 +139,33 @@ Route::group(
         );
     }
 );
+
+/*
+ * Api routes
+ */
+Route::group(
+    [
+        'prefix' => 'api',
+        'middleware' => [],
+        'as'     => 'api.',
+    ],
+    function () {
+        Route::get(
+            'brands',
+            [
+                'as' => 'index',
+                'uses' => 'BrandsController@apiIndex',
+            ]
+        );
+
+        Route::get(
+            'brands/{id}',
+            [
+                'as' => 'index',
+                'uses' => 'BrandsController@apiShow',
+            ]
+        );
+    }
+
+
+);
