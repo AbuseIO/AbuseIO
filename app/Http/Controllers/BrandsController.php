@@ -2,26 +2,32 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\ApiTransformer\BrandsTransformer;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\BrandTransformer;
 use AbuseIO\Http\Requests\BrandFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use Exception;
-use Illuminate\Http\Request;
 use Redirect;
 use yajra\Datatables\Datatables;
+use League\Fractal\Manager;
 
 /**
  * Class BrandsController.
  */
 class BrandsController extends Controller
 {
+    use Api;
+
     /**
-     * BrandsController constructor.
+     * @param Manager $fractal
      */
-    public function __construct()
+    public function __construct(Manager $fractal)
     {
         parent::__construct();
+
+        // initialize the Api methods
+        $this->apiInit($fractal);
 
         // is the logged in account allowed to execute an action on the Brand
         $this->middleware('checkaccount:Brand', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiShow']]);
@@ -50,14 +56,7 @@ class BrandsController extends Controller
     {
         $brands = Brand::all();
 
-        return response()->json(
-            [
-                'data'    => (new BrandsTransformer())->transform($brands),
-                'message' => [
-                    'success' => true,
-                ],
-            ]
-        )->setStatusCode(200);
+        return $this->respondWithCollection($brands, new BrandTransformer());
     }
 
     /**
@@ -229,24 +228,10 @@ class BrandsController extends Controller
         $brand = Brand::find($id);
 
         if (!$brand) {
-            return response()->json(
-                [
-                    'message' => [
-                        'success' => false,
-                        'error'   => 'Brand was not found',
-                    ],
-                ]
-            )->setStatusCode(404);
+            return $this->errorNotFound('Brand Not Found');
         }
 
-        return response()->json(
-            [
-                'data'    => (new BrandsTransformer())->transform($brand),
-                'message' => [
-                    'success' => true,
-                ],
-            ]
-        )->setStatusCode(200);
+        return $this->respondWithItem($brand, new BrandTransformer());
     }
 
     /**

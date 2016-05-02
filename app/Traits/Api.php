@@ -62,19 +62,7 @@ trait Api
     protected function respondWithItem($item, $callback)
     {
         $resource = new Item($item, $callback);
-        $rootScope = $this->fractal->createData($resource);
-        $data = array_merge(
-            $rootScope->toArray(),
-            [
-                'message' => [
-                    'code'      => ErrorCodes::CODE_SUCCESSFULL,
-                    'message'   => 'success',
-                    'http_code' => $this->statusCode,
-                    'success'   => $this->statusCode == 200 ? 'true' : 'false',
-                ],
-            ]);
-
-        return $this->respondWithArray($data);
+        return $this->respondWithResource($resource);
     }
 
     /**
@@ -86,19 +74,7 @@ trait Api
     protected function respondWithCollection($collection, $callback)
     {
         $resource = new Collection($collection, $callback);
-        $rootScope = $this->fractal->createData($resource);
-        $data = array_merge(
-            $rootScope->toArray(),
-            [
-                'message' => [
-                    'code'      => ErrorCodes::CODE_SUCCESSFULL,
-                    'message'   => 'success',
-                    'http_code' => $this->statusCode,
-                    'success'   => $this->statusCode == 200 ? 'true' : 'false',
-                ],
-            ]);
-
-        return $this->respondWithArray($data);
+        return $this->respondWithResource($resource);
     }
 
     /**
@@ -128,13 +104,23 @@ trait Api
 
         return $this->respondWithArray([
             'data'    => [],
-            'message' => [
-                'code'      => $errorCode,
-                'message'   => $message,
-                'http_code' => $this->statusCode,
-                'success'   => $this->statusCode == 200 ? 'true' : 'false',
-            ],
+            'message' => $this->getMessage($message, $errorCode),
         ]);
+    }
+
+    /**
+     * @param $message
+     * @param $errorCode
+     * @return array
+     */
+    protected function getMessage($message, $errorCode)
+    {
+        return [
+            'code'      => $errorCode,
+            'message'   => $message,
+            'http_code' => $this->statusCode,
+            'success'   => (bool) ($this->statusCode == 200),
+        ];
     }
 
     /**
@@ -190,5 +176,21 @@ trait Api
     {
         return $this->setStatusCode(400)
             ->respondWithError($message, ErrorCodes::CODE_WRONG_ARGS);
+    }
+
+    /**
+     * @param $resource
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithResource($resource)
+    {
+        $rootScope = $this->fractal->createData($resource);
+        $data = array_merge(
+            $rootScope->toArray(),
+            [
+                'message' => $this->getMessage('success', ErrorCodes::CODE_SUCCESSFULL)
+            ]);
+
+        return $this->respondWithArray($data);
     }
 }
