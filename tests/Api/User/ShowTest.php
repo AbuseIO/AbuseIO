@@ -1,14 +1,15 @@
 <?php
 
-namespace tests\Api\Brand;
+namespace tests\Api\User;
 
 use tests\TestCase;
+
 use tests\Api\ShowTestHelper;
 
 class ShowTest extends TestCase
 {
     use ShowTestHelper;
 
-    const URL = '/api/v1/brands';
+    const URL = '/api/v1/users';
 }
 

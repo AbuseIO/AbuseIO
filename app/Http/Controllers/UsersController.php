@@ -35,7 +35,7 @@ class UsersController extends Controller
         $this->apiInit($fractal);
 
         // is the logged in account allowed to execute an action on the User
-        $this->middleware('checkaccount:User', ['except' => ['search', 'index', 'create', 'store', 'export']]);
+        $this->middleware('checkaccount:User', ['except' => ['search', 'index', 'create', 'store', 'export', 'apiIndex', 'apiShow']]);
     }
 
     /**

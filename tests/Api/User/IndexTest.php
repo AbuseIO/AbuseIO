@@ -1,14 +1,15 @@
 <?php
 
-namespace tests\Api\Brand;
+namespace tests\Api\User;
 
 use tests\TestCase;
+
 use tests\Api\IndexTestHelper;
 
 class IndexTest extends TestCase
 {
     use IndexTestHelper;
 
-    const URL = '/api/v1/brands';
-}
+    const URL = '/api/v1/users';
 
+}
