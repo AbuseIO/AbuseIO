@@ -2,8 +2,8 @@
 
 namespace tests\Api\Brand;
 
-use tests\TestCase;
 use tests\Api\ShowTestHelper;
+use tests\TestCase;
 
 class ShowTest extends TestCase
 {
@@ -11,4 +11,3 @@ class ShowTest extends TestCase
 
     const URL = '/api/v1/brands';
 }
-
