@@ -2,9 +2,7 @@
 
 namespace tests\Api\Brand;
 
-
 use tests\TestCase;
-
 
 class ShowTest extends TestCase
 {
@@ -47,7 +45,7 @@ class ShowTest extends TestCase
     {
         $this->initWithValidResponse();
         $obj = json_decode($this->content);
-        $this->assertTrue(property_exists($obj, "data"));
+        $this->assertTrue(property_exists($obj, 'data'));
     }
 
     /**
@@ -79,7 +77,7 @@ class ShowTest extends TestCase
         $obj = json_decode($this->content);
 
         $this->assertTrue(
-            property_exists($obj, "message")
+            property_exists($obj, 'message')
         );
 
         $this->assertFalse($obj->message->success);

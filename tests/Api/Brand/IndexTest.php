@@ -2,9 +2,7 @@
 
 namespace tests\Api\Brand;
 
-
 use tests\TestCase;
-
 
 class IndexTest extends TestCase
 {
@@ -36,7 +34,7 @@ class IndexTest extends TestCase
     public function testHasDataAttribute()
     {
         $obj = json_decode($this->content);
-        $this->assertTrue(property_exists($obj, "data"));
+        $this->assertTrue(property_exists($obj, 'data'));
     }
 
     /**
