@@ -12,7 +12,8 @@ trait IndexTestHelper
     {
         parent::setUp();
 
-        $response = $this->call('GET', self::URL);
+        $response = $this->call('GET', self::URL, [], [], [],
+            ['PHP_AUTH_USER' => 'admin@isp.local', 'PHP_AUTH_PW' => 'admin']);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

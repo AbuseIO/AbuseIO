@@ -8,22 +8,6 @@ trait ShowTestHelper
 
     private $content;
 
-    public function initWithValidResponse()
-    {
-        $response = $this->call('GET', self::URL.'/1');
-
-        $this->statusCode = $response->getStatusCode();
-        $this->content = $response->getContent();
-    }
-
-    public function initWithInvalidResponse()
-    {
-        $response = $this->call('GET', self::URL.'/200');
-
-        $this->statusCode = $response->getStatusCode();
-        $this->content = $response->getContent();
-    }
-
     /**
      * @return void
      */
@@ -34,6 +18,15 @@ trait ShowTestHelper
 
         $obj = json_decode($this->content);
         $this->assertTrue($obj->message->success);
+    }
+
+    public function initWithValidResponse()
+    {
+        $response = $this->call('GET', self::URL . '/1', [], [], [],
+            ['PHP_AUTH_USER' => 'admin@isp.local', 'PHP_AUTH_PW' => 'admin']);
+
+        $this->statusCode = $response->getStatusCode();
+        $this->content = $response->getContent();
     }
 
     /**
@@ -61,8 +54,16 @@ trait ShowTestHelper
     public function testStatusCodeInvalidRequest()
     {
         $this->initWithInvalidResponse();
-
         $this->assertEquals(404, $this->statusCode);
+    }
+
+    public function initWithInvalidResponse()
+    {
+        $response = $this->call('GET', self::URL . '/200', [], [], [],
+            ['PHP_AUTH_USER' => 'admin@isp.local', 'PHP_AUTH_PW' => 'admin']);
+
+        $this->statusCode = $response->getStatusCode();
+        $this->content = $response->getContent();
     }
 
     /**
@@ -71,7 +72,6 @@ trait ShowTestHelper
     public function testResponseInvalidRequest()
     {
         $this->initWithInvalidResponse();
-
         $obj = json_decode($this->content);
 
         $this->assertTrue(
