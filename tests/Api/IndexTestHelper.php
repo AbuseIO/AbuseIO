@@ -2,6 +2,8 @@
 
 namespace tests\Api;
 
+use AbuseIO\Models\User;
+
 trait IndexTestHelper
 {
     private $statusCode;
@@ -12,8 +14,9 @@ trait IndexTestHelper
     {
         parent::setUp();
 
-        $response = $this->call('GET', self::URL, [], [], [],
-            ['PHP_AUTH_USER' => 'admin@isp.local', 'PHP_AUTH_PW' => 'admin']);
+        $user = User::find(1);
+
+        $response = $this->actingAs($user)->call('GET', self::URL);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

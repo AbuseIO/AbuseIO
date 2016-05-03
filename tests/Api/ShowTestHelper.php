@@ -2,6 +2,8 @@
 
 namespace tests\Api;
 
+use AbuseIO\Models\User;
+
 trait ShowTestHelper
 {
     private $statusCode;
@@ -22,8 +24,9 @@ trait ShowTestHelper
 
     public function initWithValidResponse()
     {
-        $response = $this->call('GET', self::URL.'/1', [], [], [],
-            ['PHP_AUTH_USER' => 'admin@isp.local', 'PHP_AUTH_PW' => 'admin']);
+        $user = User::find(1);
+
+        $response = $this->actingAs($user)->call('GET', self::URL.'/1');
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
@@ -59,8 +62,9 @@ trait ShowTestHelper
 
     public function initWithInvalidResponse()
     {
-        $response = $this->call('GET', self::URL.'/200', [], [], [],
-            ['PHP_AUTH_USER' => 'admin@isp.local', 'PHP_AUTH_PW' => 'admin']);
+        $user = User::find(1);
+
+        $response = $this->actingAs($user)->call('GET', self::URL.'/200');
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
