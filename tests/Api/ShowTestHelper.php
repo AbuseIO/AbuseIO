@@ -22,7 +22,7 @@ trait ShowTestHelper
 
     public function initWithValidResponse()
     {
-        $response = $this->call('GET', self::URL . '/1', [], [], [],
+        $response = $this->call('GET', self::URL.'/1', [], [], [],
             ['PHP_AUTH_USER' => 'admin@isp.local', 'PHP_AUTH_PW' => 'admin']);
 
         $this->statusCode = $response->getStatusCode();
@@ -59,7 +59,7 @@ trait ShowTestHelper
 
     public function initWithInvalidResponse()
     {
-        $response = $this->call('GET', self::URL . '/200', [], [], [],
+        $response = $this->call('GET', self::URL.'/200', [], [], [],
             ['PHP_AUTH_USER' => 'admin@isp.local', 'PHP_AUTH_PW' => 'admin']);
 
         $this->statusCode = $response->getStatusCode();
