@@ -121,7 +121,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Many-To-Many Relationship Method for accessing the User->roles.
      *
-     * @return \Illuminate\Database\Eloquent\Relationship\belongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function roles()
     {
@@ -131,7 +131,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * One-To-Many relation to account.
      *
-     * @return \Illuminate\Database\Eloquent\Relationship\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
     public function account()
     {
@@ -179,7 +179,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected function getAllPermissionsFromAllRoles()
     {
-        $permissions = $this->roles->load('permissions')->fetch('permissions')->toArray();
+        $permissions = 
+            $this->roles
+            ->load('permissions')
+            ->fetch('permissions')
+            ->toArray();
 
         return array_map(
             'strtolower',
