@@ -328,15 +328,14 @@ class BrandsController extends Controller
     public function apiDestroy($id)
     {
         $brand = Brand::find($id);
-        
+
         if (!$brand) {
-            
             return $this->errorNotFound('Brand Not Found');
         }
-        
-        if (! $brand->canDelete()) {
+
+        if (!$brand->canDelete()) {
             $brand->delete();
-            
+
             return $this->errorForbidden("Can't Delete an active and/or system brand.");
         }
 
