@@ -2,14 +2,14 @@
 
 Route::group(
     [
-        'prefix'     => 'brands',
-        'as'         => 'brands.',
+        'prefix' => 'brands',
+        'as' => 'brands.',
     ],
     function () {
         Route::get(
             '',
             [
-                'as'   => 'index',
+                'as' => 'index',
                 'uses' => 'BrandsController@apiIndex',
             ]
         );
@@ -17,8 +17,16 @@ Route::group(
         Route::get(
             '{id}',
             [
-                'as'   => 'index',
+                'as' => 'index',
                 'uses' => 'BrandsController@apiShow',
+            ]
+        );
+
+        Route::delete(
+            '{id}',
+            [
+                'as' => 'delete',
+                'uses' => "BrandsController@apiDestroy",
             ]
         );
     }

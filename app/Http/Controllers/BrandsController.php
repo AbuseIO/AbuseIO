@@ -30,7 +30,7 @@ class BrandsController extends Controller
         $this->apiInit($fractal);
 
         // is the logged in account allowed to execute an action on the Brand
-        $this->middleware('checkaccount:Brand', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiShow']]);
+        $this->middleware('checkaccount:Brand', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiShow', 'apiDestroy']]);
     }
 
     /**
@@ -316,6 +316,31 @@ class BrandsController extends Controller
 
         return Redirect::route('admin.brands.index')
             ->with('message', 'Brand has been deleted.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiDestroy($id)
+    {
+        $brand = Brand::find($id);
+        
+        if (!$brand) {
+            
+            return $this->errorNotFound('Brand Not Found');
+        }
+        
+        if (! $brand->canDelete()) {
+            $brand->delete();
+            
+            return $this->errorForbidden("Can't Delete an active and/or system brand.");
+        }
+
+        return $this->respondWithItem($brand, new BrandTransformer());
     }
 
     /**
