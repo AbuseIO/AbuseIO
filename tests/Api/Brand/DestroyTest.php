@@ -7,7 +7,7 @@ use AbuseIO\Models\User;
 use tests\Api\DestroyTestHelper;
 use tests\TestCase;
 
-class DestoyTest extends TestCase
+class DestroyTest extends TestCase
 {
     use DestroyTestHelper;
 
@@ -27,7 +27,7 @@ class DestoyTest extends TestCase
 
     private static function getURLWithId($id)
     {
-        return sprintf("%s/%s", self::URL, $id);
+        return sprintf('%s/%s', self::URL, $id);
     }
 
     public function testWithUndeleteable()

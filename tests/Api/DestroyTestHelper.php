@@ -25,8 +25,6 @@ trait DestroyTestHelper
         $this->assertTrue($obj->message->success);
     }
 
-
-
     /**
      * @return void
      */
