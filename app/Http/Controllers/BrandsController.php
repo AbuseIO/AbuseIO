@@ -202,6 +202,47 @@ class BrandsController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param BrandFormRequest $brandForm
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiStore(BrandFormRequest $brandForm)
+    {
+        $input = $brandForm->all();
+        $account = $this->auth_user->account;
+
+//        if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
+//            $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
+//        } else {
+//            return Redirect::route('admin.brands.create')
+//                ->withInput($input)
+//                ->withErrors(['logo' => 'Something went wrong, while uploading the logo']);
+//        }
+
+        try {
+            if (!$account->isSystemAccount()) {
+                $input['creator_id'] = $account->id;
+            }
+
+            $brand = Brand::create($input);
+
+            if (!$brand) {
+                // when we can't save the brand, throw an exception
+                throw new Exception("Couldn't create new brand");
+            }
+        } catch (Exception $e) {
+            return Redirect::route('admin.brands.create')
+                ->withInput($input)
+                ->with('message', $e->getMessage());
+        }
+
+        return Redirect::route('admin.brands.index')
+            ->with('message', 'Brand has been created');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param Brand $brand

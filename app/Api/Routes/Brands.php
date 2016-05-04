@@ -17,7 +17,7 @@ Route::group(
         Route::get(
             '{id}',
             [
-                'as'   => 'index',
+                'as'   => 'show',
                 'uses' => 'BrandsController@apiShow',
             ]
         );
@@ -27,6 +27,14 @@ Route::group(
             [
                 'as'   => 'delete',
                 'uses' => 'BrandsController@apiDestroy',
+            ]
+        );
+
+        Route::post(
+            '',
+            [
+                'as' => 'store',
+                'uses' => "BrandsController@apiStore",
             ]
         );
     }
