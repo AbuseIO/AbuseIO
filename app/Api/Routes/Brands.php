@@ -37,5 +37,13 @@ Route::group(
                 'uses' => 'BrandsController@apiStore',
             ]
         );
+
+        Route::put(
+            '{brands}',
+            [
+                'as'   => 'update',
+                'uses' => 'BrandsController@apiUpdate',
+            ]
+        );
     }
 );

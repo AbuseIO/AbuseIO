@@ -210,16 +210,17 @@ class BrandsController extends Controller
      */
     public function apiStore(BrandFormRequest $brandForm)
     {
+
         $input = $brandForm->all();
         $account = $this->auth_user->account;
 
-//        if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
-//            $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
-//        } else {
-//            return Redirect::route('admin.brands.create')
-//                ->withInput($input)
-//                ->withErrors(['logo' => 'Something went wrong, while uploading the logo']);
-//        }
+        if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
+            $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
+        } else {
+            return Redirect::route('admin.brands.create')
+                ->withInput($input)
+                ->withErrors(['logo' => 'Something went wrong, while uploading the logo']);
+        }
 
         try {
             if (!$account->isSystemAccount()) {
@@ -337,6 +338,28 @@ class BrandsController extends Controller
 
         return Redirect::route('admin.brands.show', $brand->id)
             ->with('message', 'Brand has been updated.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param BrandFormRequest $brandForm
+     * @param Brand            $brand
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiUpdate(BrandFormRequest $brandForm, Brand $brand)
+    {
+        $input = $brandForm->all();
+
+//        if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
+//            $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
+//        }
+//
+        $brand->update($input);
+
+        return $this->respondWithItem($brand, new BrandTransformer);
+
     }
 
     /**

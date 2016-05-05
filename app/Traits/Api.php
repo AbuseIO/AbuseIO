@@ -111,6 +111,21 @@ trait Api
     }
 
     /**
+     * @param $messages
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithValidationErrors($messages)
+    {
+        $this->setStatusCode(422);
+
+        return $this->respondWithArray([
+            'data'    => [],
+            'message' => $this->getMessage($messages, ErrorCodes::CODE_WRONG_ARGS),
+        ]);
+    }
+
+    /**
      * @param $message
      * @param $errorCode
      *

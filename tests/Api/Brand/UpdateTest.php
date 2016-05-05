@@ -6,22 +6,24 @@ use AbuseIO\Models\Brand;
 use AbuseIO\Models\User;
 use tests\TestCase;
 
-class StoreTest extends TestCase
+class UpdateTest extends TestCase
 {
-    const URL = '/api/v1/brands';
+    const URL = '/api/v1/brands/1';
 
-    public function testValidationErrors()
+    public function testEmptyUpdate()
     {
         $user = User::find(1);
         $this->actingAs($user);
 
         $server = $this->transformHeadersToServerVars(["Accept" => 'application/json']);
 
-        $response = $this->call('POST', self::URL, [], [], [], $server);
+        $response = $this->call('PUT', self::URL, [], [], [], $server);
 
         $this->assertContains(
-            'The name field is required.',
+            'AbuseIO',
             $response->getContent()
         );
+
+        $this->assertEquals($response->getStatusCode(), 200);
     }
 }
