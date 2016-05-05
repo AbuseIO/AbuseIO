@@ -33,8 +33,8 @@ Route::group(
         Route::post(
             '',
             [
-                'as' => 'store',
-                'uses' => "BrandsController@apiStore",
+                'as'   => 'store',
+                'uses' => 'BrandsController@apiStore',
             ]
         );
     }
