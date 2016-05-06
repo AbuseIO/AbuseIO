@@ -1,8 +1,8 @@
 <?php
 
 Route::resource('evidence', 'EvidenceController');
-Route::model('evidence', 'AbuseIO\Models\Evidence', function() {
-    throw new \Illuminate\Database\Eloquent\ModelNotFoundException;
+Route::model('evidence', 'AbuseIO\Models\Evidence', function () {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
 });
 
 Route::group(

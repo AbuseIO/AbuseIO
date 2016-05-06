@@ -210,7 +210,6 @@ class BrandsController extends Controller
      */
     public function apiStore(BrandFormRequest $brandForm)
     {
-
         $input = $brandForm->all();
         $account = $this->auth_user->account;
 
@@ -352,8 +351,7 @@ class BrandsController extends Controller
 //
         $brand->update($input);
 
-        return $this->respondWithItem($brand, new BrandTransformer);
-
+        return $this->respondWithItem($brand, new BrandTransformer());
     }
 
     /**

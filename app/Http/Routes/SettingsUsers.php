@@ -1,6 +1,6 @@
 <?php
 
-Route::model('users', 'AbuseIO\Models\User', function() {
+Route::model('users', 'AbuseIO\Models\User', function () {
     throw new \Illuminate\Database\Eloquent\ModelNotFoundException('User Not Found.');
 });
 
