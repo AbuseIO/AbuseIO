@@ -40,7 +40,7 @@ return [
     'button.disable'        => 'Απενεργοποίηση',
     'button.open'           => 'Άνοιγμα',
     'button.close'          => 'Κλείσιμο',
-    'button.hidden'         => 'Απόκρυψη',
+    'button.hidden'         => 'Απόκρυψη από τον χρήστη',
     'button.visible'        => 'Εμφάνιση',
     'button.read'           => 'Αναγνωσμένο',
     'button.unread'         => 'Μη αναγνωσμένο',

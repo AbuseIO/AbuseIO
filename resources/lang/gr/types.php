@@ -22,39 +22,39 @@ return [
         // Abusedesk ticket statuses
         'abusedesk' => [
             'OPEN' => [
-                'name'          => 'Ανοικτά',
-                'description'   => 'Ανοικτά δελτία',
+                'name'          => 'Ανοικτό',
+                'description'   => 'Ανοικτό δελτίο',
             ],
             'CLOSED' => [
-                'name'          => 'Κλεισμένα',
-                'description'   => 'Κλεισμένα δελτία',
+                'name'          => 'Κλεισμένo',
+                'description'   => 'Κλεισμένο δελτίο',
             ],
             'ESCALATED' => [
-                'name'          => 'Κλιμακωμένα',
-                'description'   => 'Κλιμακωμένα δελτία',
+                'name'          => 'Κλιμακωμένο',
+                'description'   => 'Κλιμακωμένο δελτίο',
             ],
             'RESOLVED' => [
-                'name'          => 'Επιλυμένα',
-                'description'   => 'Επιλυμένα δελτία',
+                'name'          => 'Επιλυμένο',
+                'description'   => 'Επιλυμένο δελτίο',
             ],
             'IGNORED' => [
-                'name'          => 'Αγνοημένα',
-                'description'   => 'Αγνοημένα δελτία',
+                'name'          => 'Αγνοημένο',
+                'description'   => 'Αγνοημένο δελτίο',
             ],
         ],
         // Contact ticket statuses
         'contact' => [
             'OPEN' => [
-                'name'          => 'Ανοικτά',
-                'description'   => 'Ανοικτά δελτία',
+                'name'          => 'Ανοικτό',
+                'description'   => 'Ανοικτό δελτίο',
             ],
             'RESOLVED' => [
-                'name'          => 'Επιλυμένα',
-                'description'   => 'Επιλυμένα δελτία επαφής',
+                'name'          => 'Επιλυμένο',
+                'description'   => 'Επιλυμένο δελτίο επαφής',
             ],
             'IGNORED' => [
-                'name'          => 'Αγνοημένα',
-                'description'   => 'Αγνοημένα δελτία επαφής',
+                'name'          => 'Αγνοημένο',
+                'description'   => 'Αγνοημένο δελτίο επαφής',
             ],
         ],
     ],
