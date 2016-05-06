@@ -17,7 +17,7 @@ Route::group(
 
         // Access to show object
         route::get(
-            '{id}',
+            '{users}',
             [
                 'as'         => 'show',
                 'uses'       => 'UsersController@apiShow',

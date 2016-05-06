@@ -1,7 +1,7 @@
 <?php
 
 Route::model('users', 'AbuseIO\Models\User', function() {
-    throw new \Illuminate\Database\Eloquent\ModelNotFoundException;
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException('User Not Found.');
 });
 
 Route::resource('users', 'UsersController');

@@ -211,14 +211,8 @@ class UsersController extends Controller
         ];
     }
 
-    public function apiShow($id)
+    public function apiShow(User $user)
     {
-        $user = User::find($id);
-
-        if (!$user) {
-            return $this->errorNotFound('User Not Found');
-        }
-
         $data = $this->handleShow($user);
 
         return $this->respondWithItem($data['user'], new UserTransformer());
