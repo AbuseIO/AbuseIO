@@ -15,7 +15,7 @@ Route::group(
         );
 
         Route::get(
-            '{id}',
+            '{brands}',
             [
                 'as'   => 'show',
                 'uses' => 'BrandsController@apiShow',

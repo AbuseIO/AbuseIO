@@ -22,11 +22,14 @@ trait ShowTestHelper
         $this->assertTrue($obj->message->success);
     }
 
+    /**
+     * @return void
+     */
     public function initWithValidResponse()
     {
         $user = User::find(1);
-
-        $response = $this->actingAs($user)->call('GET', self::URL.'/1');
+        $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
+        $response = $this->actingAs($user)->call('GET', self::URL . '/1', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
@@ -60,11 +63,14 @@ trait ShowTestHelper
         $this->assertEquals(404, $this->statusCode);
     }
 
+    /**
+     * @return void
+     */
     public function initWithInvalidResponse()
     {
         $user = User::find(1);
-
-        $response = $this->actingAs($user)->call('GET', self::URL.'/200');
+        $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
+        $response = $this->actingAs($user)->call('GET', self::URL . '/200', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

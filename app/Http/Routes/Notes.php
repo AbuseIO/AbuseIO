@@ -1,7 +1,10 @@
 <?php
 
 Route::resource('notes', 'NotesController');
-Route::model('notes', 'AbuseIO\Models\Note');
+
+Route::model('notes', 'AbuseIO\Models\Note', function() {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException;
+});
 
 Route::group(
     [

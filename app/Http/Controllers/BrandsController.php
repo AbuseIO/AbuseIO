@@ -261,18 +261,12 @@ class BrandsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param $id
+     * @param Brand $brand
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiShow($id)
+    public function apiShow(Brand $brand)
     {
-        $brand = Brand::find($id);
-
-        if (!$brand) {
-            return $this->errorNotFound('Brand Not Found');
-        }
-
         return $this->respondWithItem($brand, new BrandTransformer());
     }
 

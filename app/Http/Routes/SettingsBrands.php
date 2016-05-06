@@ -1,6 +1,8 @@
 <?php
 
-Route::model('brands', 'AbuseIO\Models\Brand');
+Route::model('brands', 'AbuseIO\Models\Brand', function() {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException;
+});
 Route::resource('brands', 'BrandsController');
 
 Route::group(

@@ -1,6 +1,9 @@
 <?php
 
-Route::model('accounts', 'AbuseIO\Models\Account');
+Route::model('accounts', 'AbuseIO\Models\Account', function() {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException;
+});
+
 Route::resource('accounts', 'AccountsController');
 
 Route::group(

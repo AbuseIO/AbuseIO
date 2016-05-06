@@ -1,6 +1,9 @@
 <?php
 
-Route::model('users', 'AbuseIO\Models\User');
+Route::model('users', 'AbuseIO\Models\User', function() {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException;
+});
+
 Route::resource('users', 'UsersController');
 
 Route::group(
