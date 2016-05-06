@@ -18,8 +18,9 @@ class BrandTransformer extends TransformerAbstract
     {
         return [
             'id'           => (int) $brand->id,
-            'company_name' => $brand->company_name,
-            'created_at'   => $brand->created_at,
+            'name'         => (string) $brand->name,
+            'company_name' => (string) $brand->company_name,
+            'created_at'   => (string) $brand->created_at,
         ];
     }
 }
