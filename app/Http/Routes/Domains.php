@@ -1,8 +1,8 @@
 <?php
 
 Route::resource('domains', 'DomainsController');
-Route::model('domains', 'AbuseIO\Models\Domain', function() {
-    throw new \Illuminate\Database\Eloquent\ModelNotFoundException;
+Route::model('domains', 'AbuseIO\Models\Domain', function () {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
 });
 
 Route::group(

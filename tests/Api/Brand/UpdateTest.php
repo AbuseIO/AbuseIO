@@ -47,13 +47,13 @@ class UpdateTest extends TestCase
         $user = User::find(1);
         $this->actingAs($user);
 
-        $server = $this->transformHeadersToServerVars(["Accept" => 'application/json']);
+        $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
 
         return parent::call('PUT', $this->getUri($id), $parameters, [], [], $server);
     }
 
     private function getUri($id)
     {
-        return self::URL . $id;
+        return self::URL.$id;
     }
 }
