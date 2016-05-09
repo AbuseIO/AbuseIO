@@ -40,4 +40,38 @@ class DestroyTest extends TestCase
 
         $this->assertJson($response->getContent());
     }
+
+    /**
+     * @return void
+     */
+    public function testStatusCodeInvalidRequest()
+    {
+        $this->initWithInvalidResponse();
+        $this->assertEquals(404, $this->statusCode);
+    }
+
+    public function initWithInvalidResponse()
+    {
+        $user = User::find(1);
+
+        $response = $this->actingAs($user)->call('DELETE', self::URL.'/200');
+
+        $this->statusCode = $response->getStatusCode();
+        $this->content = $response->getContent();
+    }
+
+    /**
+     * @return void
+     */
+    public function testResponseInvalidRequest()
+    {
+        $this->initWithInvalidResponse();
+        $obj = json_decode($this->content);
+
+        $this->assertTrue(
+            property_exists($obj, 'message')
+        );
+
+        $this->assertFalse($obj->message->success);
+    }
 }

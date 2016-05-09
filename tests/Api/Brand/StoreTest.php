@@ -23,8 +23,6 @@ class StoreTest extends TestCase
     public function testSuccesfullCreate()
     {
         $brand = factory(Brand::class)->make()->toArray();
-        unset($brand["logo"]);
-        unset($brand["creator_id"]);
 
 
         $response = $this->call($brand);

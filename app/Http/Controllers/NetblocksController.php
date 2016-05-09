@@ -5,7 +5,10 @@ namespace AbuseIO\Http\Controllers;
 use AbuseIO\Http\Requests\NetblockFormRequest;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\NetblockTransformer;
 use Form;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
 
@@ -14,12 +17,16 @@ use yajra\Datatables\Datatables;
  */
 class NetblocksController extends Controller
 {
+    use Api;
+
     /**
      * NetblocksController constructor.
      */
-    public function __construct()
+    public function __construct(Manager $fractal)
     {
         parent::__construct();
+
+        $this->apiInit($fractal);
 
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Netblock', ['except' => ['search', 'index', 'create', 'store', 'export']]);
@@ -84,6 +91,23 @@ class NetblocksController extends Controller
     {
         return view('netblocks.index')
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiIndex()
+    {
+        $netblocks = Netblock::all();
+
+        if (count($netblocks) === 0) {
+
+            return $this->errorNotFound('No netblocks where found in this system');
+        }
+        
+        return $this->respondWithCollection($netblocks, new NetblockTransformer());
     }
 
     /**
@@ -189,6 +213,18 @@ class NetblocksController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param Netblock $netblock
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiShow(Netblock $netblock)
+    {
+        return $this->respondWithItem($netblock, new NetblockTransformer());
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param Netblock $netblock
@@ -243,5 +279,20 @@ class NetblocksController extends Controller
 
         return Redirect::route('admin.netblocks.index')
             ->with('message', trans('netblocks.msg.deleted'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Netblock $netblock
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiDestroy(Netblock $netblock)
+    {
+        //$netblock->delete();
+
+        return $this->respondWithItem($netblock, new NetblockTransformer());
+
     }
 }
