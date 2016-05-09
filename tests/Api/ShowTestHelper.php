@@ -29,7 +29,7 @@ trait ShowTestHelper
     {
         $user = User::find(1);
         $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
-        $response = $this->actingAs($user)->call('GET', self::URL . '/1', [], [], [], $server);
+        $response = $this->actingAs($user)->call('GET', self::URL.'/1', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
@@ -70,7 +70,7 @@ trait ShowTestHelper
     {
         $user = User::find(1);
         $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
-        $response = $this->actingAs($user)->call('GET', self::URL . '/200', [], [], [], $server);
+        $response = $this->actingAs($user)->call('GET', self::URL.'/200', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

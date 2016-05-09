@@ -23,7 +23,12 @@ class StoreTest extends TestCase
     public function testSuccesfullCreate()
     {
         $brand = factory(Brand::class)->make()->toArray();
+<<<<<<< HEAD
 
+=======
+        unset($brand['logo']);
+        unset($brand['creator_id']);
+>>>>>>> origin/4.1
 
         $response = $this->call($brand);
 
@@ -43,10 +48,8 @@ class StoreTest extends TestCase
         $user = User::find(1);
         $this->actingAs($user);
 
-        $server = $this->transformHeadersToServerVars(["Accept" => 'application/json']);
+        $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
 
         return parent::call('POST', self::URL, $parameters, [], [], $server);
     }
-
-
 }

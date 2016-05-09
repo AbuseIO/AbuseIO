@@ -4,7 +4,6 @@ namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Brand;
 use AbuseIO\Traits\Api;
-use Illuminate\Http\JsonResponse;
 
 /**
  * Class BrandFormRequest.
@@ -12,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 class BrandFormRequest extends Request
 {
     use Api;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -49,8 +49,7 @@ class BrandFormRequest extends Request
 
     public function response(array $errors)
     {
-        if ($this->wantsJson())
-        {
+        if ($this->wantsJson()) {
             return $this->respondWithValidationErrors($errors);
         }
 
