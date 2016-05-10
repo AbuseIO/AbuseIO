@@ -29,14 +29,14 @@ Route::group(
                 'uses' => 'DomainsController@apiDestroy',
             ]
         );
-//
-//        Route::post(
-//            '',
-//            [
-//                'as'   => 'store',
-//                'uses' => 'DomainsController@apiStore',
-//            ]
-//        );
+
+        Route::post(
+            '',
+            [
+                'as'   => 'store',
+                'uses' => 'DomainsController@apiStore',
+            ]
+        );
 //
 //        Route::put(
 //            '{domains}',

@@ -3,12 +3,15 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Domain;
+use AbuseIO\Traits\Api;
 
 /**
  * Class DomainFormRequest.
  */
 class DomainFormRequest extends Request
 {
+    use Api;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -42,5 +45,16 @@ class DomainFormRequest extends Request
         }
 
         return [];
+    }
+
+    public function response(array $errors)
+    {
+        if ($this->wantsJson()) {
+            return $this->respondWithValidationErrors($errors);
+        }
+
+        return $this->redirector->to($this->getRedirectUrl())
+            ->withInput($this->except($this->dontFlash))
+            ->withErrors($errors);
     }
 }

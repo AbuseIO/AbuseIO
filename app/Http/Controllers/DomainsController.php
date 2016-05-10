@@ -198,6 +198,21 @@ class DomainsController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param DomainFormRequest $domainForm
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiStore(DomainFormRequest $domainForm)
+    {
+        $domain = Domain::create($domainForm->all());
+
+        return $this->respondWithItem($domain, new DomainTransformer());
+
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param Domain $domain
