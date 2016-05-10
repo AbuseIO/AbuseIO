@@ -217,6 +217,18 @@ class ContactsController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param Contact $contact
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiShow(Contact $contact)
+    {
+        return $this->respondWithItem($contact, new ContactTransformer());
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param Contact $contact

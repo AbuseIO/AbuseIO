@@ -14,13 +14,13 @@ Route::group(
             ]
         );
 
-//        Route::get(
-//            '{contacts}',
-//            [
-//                'as'   => 'show',
-//                'uses' => 'ContactsController@apiShow',
-//            ]
-//        );
+        Route::get(
+            '{contacts}',
+            [
+                'as'   => 'show',
+                'uses' => 'ContactsController@apiShow',
+            ]
+        );
 //
 //        Route::delete(
 //            '{contacts}',
