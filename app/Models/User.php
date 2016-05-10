@@ -179,7 +179,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected function getAllPermissionsFromAllRoles()
     {
-        $permissions = 
+        $permissions =
             $this->roles
             ->load('permissions')
             ->fetch('permissions')

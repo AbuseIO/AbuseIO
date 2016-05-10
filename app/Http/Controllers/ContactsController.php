@@ -22,6 +22,7 @@ class ContactsController extends Controller
 
     /**
      * ContactsController constructor.
+     *
      * @param Manager $fractal
      */
     public function __construct(Manager $fractal)
@@ -55,22 +56,22 @@ class ContactsController extends Controller
                 function ($contact) {
                     $actions = Form::open(
                         [
-                            'route' => ['admin.contacts.destroy', $contact->id],
+                            'route'  => ['admin.contacts.destroy', $contact->id],
                             'method' => 'DELETE',
-                            'class' => 'form-inline',
+                            'class'  => 'form-inline',
                         ]
                     );
-                    $actions .= ' <a href="contacts/' . $contact->id .
-                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> ' .
-                        trans('misc.button.show') . '</a> ';
-                    $actions .= ' <a href="contacts/' . $contact->id .
-                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> ' .
-                        trans('misc.button.edit') . '</a> ';
+                    $actions .= ' <a href="contacts/'.$contact->id.
+                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        trans('misc.button.show').'</a> ';
+                    $actions .= ' <a href="contacts/'.$contact->id.
+                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                        trans('misc.button.edit').'</a> ';
                     $actions .= Form::button(
-                        '<i class="glyphicon glyphicon-remove"></i> ' .
+                        '<i class="glyphicon glyphicon-remove"></i> '.
                         trans('misc.button.delete'),
                         [
-                            'type' => 'submit',
+                            'type'  => 'submit',
                             'class' => 'btn btn-danger btn-xs',
                         ]
                     );
@@ -116,7 +117,6 @@ class ContactsController extends Controller
         $contacts = Contact::all();
 
         if (count($contacts) === 0) {
-
             return $this->errorNotFound('No contacts where found in this system.');
         }
 
@@ -155,15 +155,15 @@ class ContactsController extends Controller
 
         if ($format === 'csv') {
             $columns = [
-                'reference' => 'Reference',
-                'contact' => 'name',
-                'enabled' => 'Status',
-                'email' => 'E-Mail address',
-                'api_host' => 'RPC address',
+                'reference'   => 'Reference',
+                'contact'     => 'name',
+                'enabled'     => 'Status',
+                'email'       => 'E-Mail address',
+                'api_host'    => 'RPC address',
                 'auto_notify' => 'Notifications',
             ];
 
-            $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+            $output = '"'.implode('", "', $columns).'"'.PHP_EOL;
 
             foreach ($contacts as $contact) {
                 $row = [
@@ -175,7 +175,7 @@ class ContactsController extends Controller
                     $contact['auto_notify'] ? 'Automatic' : 'Manual',
                 ];
 
-                $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+                $output .= '"'.implode('", "', $row).'"'.PHP_EOL;
             }
 
             return response(substr($output, 0, -1), 200)
@@ -191,10 +191,9 @@ class ContactsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact $contact Contact
+     * @param Contact            $contact     Contact
      *
      * @return \Illuminate\Http\Response
-     *
      */
     public function store(ContactFormRequest $contactForm, Contact $contact)
     {
@@ -208,7 +207,7 @@ class ContactsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact $contact Contact
+     * @param Contact            $contact     Contact
      *
      * @return \Illuminate\Http\Response
      */
@@ -263,7 +262,7 @@ class ContactsController extends Controller
      * Update the specified resource in storage.
      *
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact $contact Contact
+     * @param Contact            $contact     Contact
      *
      * @return \Illuminate\Http\Response
      */
@@ -279,7 +278,7 @@ class ContactsController extends Controller
      * Update the specified resource in storage.
      *
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact $contact Contact
+     * @param Contact            $contact     Contact
      *
      * @return \Illuminate\Http\Response
      */
@@ -301,7 +300,7 @@ class ContactsController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        if (! $this->handleDestroy($contact)) {
+        if (!$this->handleDestroy($contact)) {
             return Redirect::route('admin.contacts.index')->with(
                 'message',
                 $this->getError()
@@ -321,7 +320,7 @@ class ContactsController extends Controller
      */
     public function apiDestroy(Contact $contact)
     {
-        if (! $this->handleDestroy($contact)) {
+        if (!$this->handleDestroy($contact)) {
             $this->respondWithValidationErrors($this->getError());
         }
 

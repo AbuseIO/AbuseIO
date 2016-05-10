@@ -17,13 +17,13 @@ class ContactTransformer extends TransformerAbstract
     public function transform(Contact $contact)
     {
         return [
-            'id' => (int) $contact->id,
-            'reference' => (string) $contact->reference,
-            'name' => (string) $contact->name,
-            'email' => (string) $contact->email,
-            'api_host' => (string) $contact->api_host,
+            'id'          => (int) $contact->id,
+            'reference'   => (string) $contact->reference,
+            'name'        => (string) $contact->name,
+            'email'       => (string) $contact->email,
+            'api_host'    => (string) $contact->api_host,
             'auto_notify' => (bool) $contact->auto_notify,
-            'enabled' => (bool) $contact->enabled,
+            'enabled'     => (bool) $contact->enabled,
             //'account' => (new AccountTransformer)->transform($this->account);
         ];
     }

@@ -103,10 +103,9 @@ class NetblocksController extends Controller
         $netblocks = Netblock::all();
 
         if (count($netblocks) === 0) {
-
             return $this->errorNotFound('No netblocks where found in this system');
         }
-        
+
         return $this->respondWithCollection($netblocks, new NetblockTransformer());
     }
 
@@ -293,6 +292,5 @@ class NetblocksController extends Controller
         //$netblock->delete();
 
         return $this->respondWithItem($netblock, new NetblockTransformer());
-
     }
 }

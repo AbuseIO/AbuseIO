@@ -4,9 +4,7 @@ namespace AbuseIO\Http\Middleware;
 
 use Closure;
 use Config;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use Session;
 
 /**

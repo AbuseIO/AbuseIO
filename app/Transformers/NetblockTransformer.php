@@ -17,11 +17,11 @@ class NetblockTransformer extends TransformerAbstract
     public function transform(Netblock $netblock)
     {
         return [
-            'first_ip' => (string) $netblock->first_ip,
-            'last_ip' => (string) $netblock->last_ip,
+            'first_ip'    => (string) $netblock->first_ip,
+            'last_ip'     => (string) $netblock->last_ip,
             'description' => (string) $netblock->description,
-            'contact' => (new ContactTransformer)->transform($netblock->contact),
-            'enabled' => (bool) $netblock->enabled,
+            'contact'     => (new ContactTransformer())->transform($netblock->contact),
+            'enabled'     => (bool) $netblock->enabled,
         ];
     }
 }
