@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Contact;
+use AbuseIO\Traits\Api;
 use Auth;
 
 /**
@@ -10,6 +11,8 @@ use Auth;
  */
 class ContactFormRequest extends Request
 {
+    use Api;
+
     /**
      * ContactFormRequest constructor.
      */
@@ -80,5 +83,16 @@ class ContactFormRequest extends Request
                 'account_id' => (int) Auth::user()->account->id,
             ]
         );
+    }
+
+    public function response(array $errors)
+    {
+        if ($this->wantsJson()) {
+            return $this->respondWithValidationErrors($errors);
+        }
+
+        return $this->redirector->to($this->getRedirectUrl())
+            ->withInput($this->except($this->dontFlash))
+            ->withErrors($errors);
     }
 }

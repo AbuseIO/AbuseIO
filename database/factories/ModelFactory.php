@@ -43,7 +43,7 @@ $factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker
         'reference'   => sprintf('reference_%d', $contact_reference_counter),
         'name'        => $faker->name,
         'email'       => $faker->email,
-        'api_host'    => 'api_host',
+        'api_host'    => $faker->url,//'api_host',
         'auto_notify' => $faker->boolean(),
         'enabled'     => $faker->boolean(),
         'account_id'  => AbuseIO\Models\Account::all()->first()->id,

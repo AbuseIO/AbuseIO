@@ -194,6 +194,7 @@ class ContactsController extends Controller
      * @param Contact $contact Contact
      *
      * @return \Illuminate\Http\Response
+     *
      */
     public function store(ContactFormRequest $contactForm, Contact $contact)
     {
@@ -201,6 +202,21 @@ class ContactsController extends Controller
 
         return Redirect::route('admin.contacts.index')
             ->with('message', 'Contact has been created');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param ContactFormRequest $contactForm FormRequest
+     * @param Contact $contact Contact
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiStore(ContactFormRequest $contactForm, Contact $contact)
+    {
+        $c = $contact->create($contactForm->all());
+
+        return $this->respondWithItem($c, new ContactTransformer());
     }
 
     /**
@@ -257,6 +273,23 @@ class ContactsController extends Controller
 
         return Redirect::route('admin.contacts.show', $contact->id)
             ->with('message', 'Contact has been updated.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param ContactFormRequest $contactForm FormRequest
+     * @param Contact $contact Contact
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiUpdate(ContactFormRequest $contactForm, Contact $contact)
+    {
+        $contact->update(
+            $contactForm->all()
+        );
+
+        return $this->respondWithItem($contact, new ContactTransformer());
     }
 
     /**
@@ -333,6 +366,4 @@ class ContactsController extends Controller
     {
         return $this->error;
     }
-
-
 }

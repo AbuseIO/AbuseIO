@@ -29,21 +29,21 @@ Route::group(
                 'uses' => 'ContactsController@apiDestroy',
             ]
         );
-//
-//        Route::post(
-//            '',
-//            [
-//                'as'   => 'store',
-//                'uses' => 'BrandsController@apiStore',
-//            ]
-//        );
-//
-//        Route::put(
-//            '{brands}',
-//            [
-//                'as'   => 'update',
-//                'uses' => 'BrandsController@apiUpdate',
-//            ]
-//        );
+
+        Route::post(
+            '',
+            [
+                'as'   => 'store',
+                'uses' => 'ContactsController@apiStore',
+            ]
+        );
+
+        Route::put(
+            '{contacts}',
+            [
+                'as'   => 'update',
+                'uses' => 'ContactsController@apiUpdate',
+            ]
+        );
     }
 );

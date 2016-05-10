@@ -39,10 +39,10 @@ Route::group(
 //        );
 //
 //        Route::put(
-//            '{brands}',
+//            '{netblocks}',
 //            [
 //                'as'   => 'update',
-//                'uses' => 'BrandsController@apiUpdate',
+//                'uses' => 'NetblocksController@apiUpdate',
 //            ]
 //        );
     }
