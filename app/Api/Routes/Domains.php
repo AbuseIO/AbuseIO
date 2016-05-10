@@ -21,14 +21,14 @@ Route::group(
                 'uses' => 'DomainsController@apiShow',
             ]
         );
-//
-//        Route::delete(
-//            '{domains}',
-//            [
-//                'as'   => 'delete',
-//                'uses' => 'DomainsController@apiDestroy',
-//            ]
-//        );
+
+        Route::delete(
+            '{domains}',
+            [
+                'as'   => 'delete',
+                'uses' => 'DomainsController@apiDestroy',
+            ]
+        );
 //
 //        Route::post(
 //            '',

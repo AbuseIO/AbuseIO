@@ -279,4 +279,18 @@ class DomainsController extends Controller
         return Redirect::route('admin.domains.index')
             ->with('message', 'Domain has been deleted.');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Domain $domain
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiDestroy(Domain $domain)
+    {
+        $domain->delete();
+
+        return $this->respondWithItem($domain, new DomainTransformer());
+    }
 }

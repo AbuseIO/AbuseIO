@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\Api\Netblock;
+namespace tests\Api\Domain;
 
-use AbuseIO\Models\Netblock;
+use AbuseIO\Models\Domain;
 use AbuseIO\Models\User;
 use tests\Api\DestroyTestHelper;
 use tests\TestCase;
@@ -11,15 +11,15 @@ class DestroyTest extends TestCase
 {
     use DestroyTestHelper;
 
-    const URL = '/api/v1/netblocks';
+    const URL = '/api/v1/domains';
 
     public function initWithValidResponse()
     {
         $user = User::find(1);
 
-        $netblock = factory(Netblock::class)->create();
+        $domain = factory(Domain::class)->create();
 
-        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($netblock->id));
+        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($domain->id));
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
