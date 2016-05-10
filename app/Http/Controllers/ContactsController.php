@@ -4,8 +4,12 @@ namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\ContactFormRequest;
 use AbuseIO\Models\Contact;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\ContactTransformer;
 use Form;
+use League\Fractal\Manager;
 use Redirect;
+use tests\Models\ContactTest;
 use yajra\Datatables\Datatables;
 
 /**
@@ -13,13 +17,18 @@ use yajra\Datatables\Datatables;
  */
 class ContactsController extends Controller
 {
+    use Api;
+
     /**
      * ContactsController constructor.
+     * @param Manager $fractal
      */
-    public function __construct()
+    public function __construct(Manager $fractal)
     {
         parent::__construct();
 
+        // initialize the Api methods
+        $this->apiInit($fractal);
         // is the logged in account allowed to execute an action on the Contact
         $this->middleware('checkaccount:Contact', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
@@ -94,6 +103,23 @@ class ContactsController extends Controller
     {
         return view('contacts.index')
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiIndex()
+    {
+        $contacts = Contact::all();
+
+        if (count($contacts) === 0) {
+
+            return $this->errorNotFound('No contacts where found in this system.');
+        }
+
+        return $this->respondWithCollection($contacts, new ContactTransformer());
     }
 
     /**
