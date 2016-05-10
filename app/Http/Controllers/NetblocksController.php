@@ -198,6 +198,20 @@ class NetblocksController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param NetblockFormRequest $netblockForm
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiStore(NetblockFormRequest $netblockForm)
+    {
+        $netblock = Netblock::create($netblockForm->all());
+
+        return  $this->respondWithItem($netblock, new NetblockTransformer());
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param Netblock $netblock

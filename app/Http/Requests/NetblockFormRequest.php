@@ -3,12 +3,15 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Netblock;
+use AbuseIO\Traits\Api;
 
 /**
  * Class NetblockFormRequest.
  */
 class NetblockFormRequest extends Request
 {
+    use Api;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -39,5 +42,16 @@ class NetblockFormRequest extends Request
         }
 
         return [];
+    }
+
+    public function response(array $errors)
+    {
+        if ($this->wantsJson()) {
+            return $this->respondWithValidationErrors($errors);
+        }
+
+        return $this->redirector->to($this->getRedirectUrl())
+            ->withInput($this->except($this->dontFlash))
+            ->withErrors($errors);
     }
 }

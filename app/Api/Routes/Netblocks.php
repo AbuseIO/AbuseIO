@@ -29,14 +29,14 @@ Route::group(
                 'uses' => 'NetblocksController@apiDestroy',
             ]
         );
-//
-//        Route::post(
-//            '',
-//            [
-//                'as'   => 'store',
-//                'uses' => 'BrandsController@apiStore',
-//            ]
-//        );
+
+        Route::post(
+            '',
+            [
+                'as'   => 'store',
+                'uses' => 'NetblocksController@apiStore',
+            ]
+        );
 //
 //        Route::put(
 //            '{netblocks}',
