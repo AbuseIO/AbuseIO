@@ -21,14 +21,14 @@ Route::group(
                 'uses' => 'ContactsController@apiShow',
             ]
         );
-//
-//        Route::delete(
-//            '{contacts}',
-//            [
-//                'as'   => 'delete',
-//                'uses' => 'ContactsController@apiDestroy',
-//            ]
-//        );
+
+        Route::delete(
+            '{contacts}',
+            [
+                'as'   => 'delete',
+                'uses' => 'ContactsController@apiDestroy',
+            ]
+        );
 //
 //        Route::post(
 //            '',

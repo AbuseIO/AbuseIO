@@ -9,7 +9,6 @@ use AbuseIO\Transformers\ContactTransformer;
 use Form;
 use League\Fractal\Manager;
 use Redirect;
-use tests\Models\ContactTest;
 use yajra\Datatables\Datatables;
 
 /**
@@ -18,6 +17,8 @@ use yajra\Datatables\Datatables;
 class ContactsController extends Controller
 {
     use Api;
+
+    private $error;
 
     /**
      * ContactsController constructor.
@@ -54,22 +55,22 @@ class ContactsController extends Controller
                 function ($contact) {
                     $actions = Form::open(
                         [
-                            'route'     => ['admin.contacts.destroy', $contact->id],
-                            'method'    => 'DELETE',
-                            'class'     => 'form-inline',
+                            'route' => ['admin.contacts.destroy', $contact->id],
+                            'method' => 'DELETE',
+                            'class' => 'form-inline',
                         ]
                     );
-                    $actions .= ' <a href="contacts/'.$contact->id.
-                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
-                        trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="contacts/'.$contact->id.
-                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
-                        trans('misc.button.edit').'</a> ';
+                    $actions .= ' <a href="contacts/' . $contact->id .
+                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> ' .
+                        trans('misc.button.show') . '</a> ';
+                    $actions .= ' <a href="contacts/' . $contact->id .
+                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> ' .
+                        trans('misc.button.edit') . '</a> ';
                     $actions .= Form::button(
-                        '<i class="glyphicon glyphicon-remove"></i> '.
+                        '<i class="glyphicon glyphicon-remove"></i> ' .
                         trans('misc.button.delete'),
                         [
-                            'type'  => 'submit',
+                            'type' => 'submit',
                             'class' => 'btn btn-danger btn-xs',
                         ]
                     );
@@ -154,15 +155,15 @@ class ContactsController extends Controller
 
         if ($format === 'csv') {
             $columns = [
-                'reference'     => 'Reference',
-                'contact'       => 'name',
-                'enabled'       => 'Status',
-                'email'         => 'E-Mail address',
-                'api_host'      => 'RPC address',
-                'auto_notify'   => 'Notifications',
+                'reference' => 'Reference',
+                'contact' => 'name',
+                'enabled' => 'Status',
+                'email' => 'E-Mail address',
+                'api_host' => 'RPC address',
+                'auto_notify' => 'Notifications',
             ];
 
-            $output = '"'.implode('", "', $columns).'"'.PHP_EOL;
+            $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
 
             foreach ($contacts as $contact) {
                 $row = [
@@ -174,7 +175,7 @@ class ContactsController extends Controller
                     $contact['auto_notify'] ? 'Automatic' : 'Manual',
                 ];
 
-                $output .= '"'.implode('", "', $row).'"'.PHP_EOL;
+                $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
             }
 
             return response(substr($output, 0, -1), 200)
@@ -190,7 +191,7 @@ class ContactsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact            $contact     Contact
+     * @param Contact $contact Contact
      *
      * @return \Illuminate\Http\Response
      */
@@ -246,7 +247,7 @@ class ContactsController extends Controller
      * Update the specified resource in storage.
      *
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact            $contact     Contact
+     * @param Contact $contact Contact
      *
      * @return \Illuminate\Http\Response
      */
@@ -267,25 +268,71 @@ class ContactsController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        if ($contact->domains->count() > 0) {
+        if (! $this->handleDestroy($contact)) {
             return Redirect::route('admin.contacts.index')->with(
                 'message',
-                'Contact could not be deleted because '.$contact->domains->count()
-                .' domain(s) is stil pointing to this contact.'
+                $this->getError()
             );
         }
-
-        if ($contact->netblocks->count() > 0) {
-            return Redirect::route('admin.contacts.index')->with(
-                'message',
-                'Contact could not be deleted because '.$contact->netblocks->count()
-                .' netblock(s) is stil pointing to this contact.'
-            );
-        }
-
-        $contact->delete();
 
         return Redirect::route('admin.contacts.index')
             ->with('message', 'Contact has been deleted.');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Contact $contact Contact
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiDestroy(Contact $contact)
+    {
+        if (! $this->handleDestroy($contact)) {
+            $this->respondWithValidationErrors($this->getError());
+        }
+
+        return $this->respondWithItem($contact, new ContactTransformer());
+    }
+
+    private function handleDestroy(Contact $contact)
+    {
+        if ($contact->domains->count() > 0) {
+            $this->setError(
+                sprintf(
+                    'Contact could not be deleted because %d domain(s) is still pointing to this contact.',
+                    $contact->domains->count()
+                )
+            );
+
+            return false;
+        }
+
+        if ($contact->netblocks->count() > 0) {
+            $this->setError(
+                sprintf(
+                    'Contact could not be deleted because %s netblock(s) is still pointing to this contact.',
+                    $contact->netblocks->count()
+                )
+            );
+
+            return false;
+        }
+
+        $contact->delete();
+
+        return true;
+    }
+
+    private function setError($error)
+    {
+        $this->error = $error;
+    }
+
+    private function getError()
+    {
+        return $this->error;
+    }
+
+
 }
