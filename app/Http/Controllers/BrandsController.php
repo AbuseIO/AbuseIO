@@ -56,6 +56,10 @@ class BrandsController extends Controller
     {
         $brands = Brand::all();
 
+        if (count($brands) === 0) {
+            return $this->errorNotFound('No brands where found in this system');
+        }
+
         return $this->respondWithCollection($brands, new BrandTransformer());
     }
 

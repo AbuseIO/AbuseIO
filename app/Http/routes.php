@@ -183,6 +183,7 @@ Route::group(
                 require app_path().'/Api/Routes/Users.php';
                 require app_path().'/Api/Routes/Netblocks.php';
                 require app_path().'/Api/Routes/Contacts.php';
+                require app_path().'/Api/Routes/Domains.php';
             }
         );
     }

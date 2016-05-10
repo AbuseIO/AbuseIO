@@ -21,6 +21,8 @@ class NetblocksController extends Controller
 
     /**
      * NetblocksController constructor.
+     *
+     * @param Manager $fractal
      */
     public function __construct(Manager $fractal)
     {
@@ -96,7 +98,7 @@ class NetblocksController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function apiIndex()
     {

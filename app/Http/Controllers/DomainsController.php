@@ -5,7 +5,10 @@ namespace AbuseIO\Http\Controllers;
 use AbuseIO\Http\Requests\DomainFormRequest;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\DomainTransformer;
 use Form;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
 
@@ -14,12 +17,18 @@ use yajra\Datatables\Datatables;
  */
 class DomainsController extends Controller
 {
+    use Api;
+    
     /**
      * DomainsController constructor.
+     *
+     * @param Manager $fractal
      */
-    public function __construct()
+    public function __construct(Manager $fractal)
     {
         parent::__construct();
+
+        $this->apiInit($fractal);
 
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Domain', ['except' => ['search', 'index', 'create', 'store', 'export']]);
@@ -84,6 +93,22 @@ class DomainsController extends Controller
     {
         return view('domains.index')
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex()
+    {
+        $domains = Domain::all();
+        
+        if (count($domains) === 0) {
+            return $this->errorNotFound('No domains where found in this system');
+        } 
+        
+        return $this->respondWithCollection($domains, new DomainTransformer());
     }
 
     /**
