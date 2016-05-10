@@ -102,7 +102,7 @@ class DomainsController extends Controller
      */
     public function apiIndex()
     {
-        $domains = Domain::all();
+        $domains = Domain::with('contact')->get();
         
         if (count($domains) === 0) {
             return $this->errorNotFound('No domains where found in this system');
