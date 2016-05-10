@@ -212,6 +212,18 @@ class DomainsController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param Domain $domain
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiShow(Domain $domain)
+    {
+        return $this->respondWithItem($domain, new DomainTransformer());
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param Domain $domain

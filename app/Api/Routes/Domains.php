@@ -14,13 +14,13 @@ Route::group(
             ]
         );
 
-//        Route::get(
-//            '{domains}',
-//            [
-//                'as'   => 'show',
-//                'uses' => 'DomainsController@apiShow',
-//            ]
-//        );
+        Route::get(
+            '{domains}',
+            [
+                'as'   => 'show',
+                'uses' => 'DomainsController@apiShow',
+            ]
+        );
 //
 //        Route::delete(
 //            '{domains}',
