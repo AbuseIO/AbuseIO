@@ -2,7 +2,6 @@
 
 namespace tests\Api;
 
-use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 trait DestroyTestHelper
@@ -42,5 +41,5 @@ trait DestroyTestHelper
     {
         $this->initWithValidResponse();
         $this->assertJson($this->content);
-    }    
+    }
 }

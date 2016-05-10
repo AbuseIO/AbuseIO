@@ -35,7 +35,7 @@ class StoreTest extends TestCase
 
         $obj = $response->getContent();
 
-        unset($contact["account_id"]);
+        unset($contact['account_id']);
 
         foreach ($contact as $value) {
             if ($value) {
