@@ -38,7 +38,7 @@ class StoreTest extends TestCase
         unset($contact['account_id']);
 
         foreach ($contact as $value) {
-            if ($value) {
+            if ($value && $value != 1) {
                 $value = str_replace('/', '\/', $value);
                 $this->assertContains(
                     $value,
