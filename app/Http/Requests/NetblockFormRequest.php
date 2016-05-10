@@ -35,6 +35,7 @@ class NetblockFormRequest extends Request
             case 'POST':
                 return Netblock::createRules($this);
             case 'PUT':
+                break;
             case 'PATCH':
                 return Netblock::updateRules($this);
             default:

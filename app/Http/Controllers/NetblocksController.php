@@ -280,6 +280,21 @@ class NetblocksController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param NetblockFormRequest $netblockForm
+     * @param Netblock            $netblock
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiUpdate(NetblockFormRequest $netblockForm, Netblock $netblock)
+    {
+        $netblock->update($netblockForm->all());
+
+        return $this->respondWithItem($netblock, new NetblockTransformer());
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Netblock $netblock

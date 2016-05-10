@@ -37,13 +37,13 @@ Route::group(
                 'uses' => 'NetblocksController@apiStore',
             ]
         );
-//
-//        Route::put(
-//            '{netblocks}',
-//            [
-//                'as'   => 'update',
-//                'uses' => 'NetblocksController@apiUpdate',
-//            ]
-//        );
+
+        Route::put(
+            '{netblocks}',
+            [
+                'as'   => 'update',
+                'uses' => 'NetblocksController@apiUpdate',
+            ]
+        );
     }
 );
