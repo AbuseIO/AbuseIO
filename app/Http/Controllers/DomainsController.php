@@ -18,7 +18,7 @@ use yajra\Datatables\Datatables;
 class DomainsController extends Controller
 {
     use Api;
-    
+
     /**
      * DomainsController constructor.
      *
@@ -103,11 +103,11 @@ class DomainsController extends Controller
     public function apiIndex()
     {
         $domains = Domain::with('contact')->get();
-        
+
         if (count($domains) === 0) {
             return $this->errorNotFound('No domains where found in this system');
-        } 
-        
+        }
+
         return $this->respondWithCollection($domains, new DomainTransformer());
     }
 
@@ -209,7 +209,6 @@ class DomainsController extends Controller
         $domain = Domain::create($domainForm->all());
 
         return $this->respondWithItem($domain, new DomainTransformer());
-
     }
 
     /**
