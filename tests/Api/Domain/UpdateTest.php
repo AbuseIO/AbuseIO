@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\Api\Domain;
+namespace tests\Api\Contact;
 
-use AbuseIO\Models\Domain;
+use AbuseIO\Models\Contact;
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use tests\TestCase;
@@ -11,7 +11,7 @@ class UpdateTest extends TestCase
 {
     use DatabaseTransactions;
 
-    const URL = '/api/v1/domains/';
+    const URL = '/api/v1/contacts/';
 
     public function testEmptyUpdate()
     {
@@ -27,18 +27,18 @@ class UpdateTest extends TestCase
 
     public function testUpdateName()
     {
-        $domain1 = factory(Domain::class)->create();
-        $domain2 = factory(Domain::class)->make();
+        $contact1 = factory(Contact::class)->create();
+        $contact2 = factory(Contact::class)->make();
 
-        $response = $this->call(['name' => $domain2->name], $domain1->id);
+        $response = $this->call(['name' => $contact2->name], $contact1->id);
 
         $this->assertTrue(
             $response->isSuccessful()
         );
 
         $this->assertEquals(
-            Domain::find($domain1->id)->name,
-            $domain2->name
+            Contact::find($contact1->id)->name,
+            $contact2->name
         );
     }
 

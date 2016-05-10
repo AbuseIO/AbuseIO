@@ -37,13 +37,13 @@ Route::group(
                 'uses' => 'DomainsController@apiStore',
             ]
         );
-//
-//        Route::put(
-//            '{domains}',
-//            [
-//                'as'   => 'update',
-//                'uses' => 'DomainsController@apiUpdate',
-//            ]
-//        );
+
+        Route::put(
+            '{domains}',
+            [
+                'as'   => 'update',
+                'uses' => 'DomainsController@apiUpdate',
+            ]
+        );
     }
 );

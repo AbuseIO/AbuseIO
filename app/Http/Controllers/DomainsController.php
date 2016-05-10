@@ -281,6 +281,21 @@ class DomainsController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param DomainFormRequest $domainForm
+     * @param Domain            $domain
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiUpdate(DomainFormRequest $domainForm, Domain $domain)
+    {
+        $domain->update($domainForm->all());
+
+        return $this->respondWithItem($domain, new DomainTransformer());
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Domain $domain
