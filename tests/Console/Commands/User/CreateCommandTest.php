@@ -3,10 +3,10 @@
 namespace tests\Console\Commands\User;
 
 use AbuseIO\Models\User;
+use Hash;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
-use Hash;
 
 /**
  * Class CreateCommandTest.
@@ -33,9 +33,9 @@ class CreateCommandTest extends TestCase
         Artisan::call('user:create', [
             '--first_name' => $user->first_name,
             '--last_name'  => $user->last_name,
-            'email'      => $user->email,
+            'email'        => $user->email,
             '--password'   => $password,
-            'account'    => $user->account_id,
+            'account'      => $user->account_id,
             '--language'   => $user->locale,
             '--disabled'   => $user->disabled,
         ]);
@@ -53,9 +53,9 @@ class CreateCommandTest extends TestCase
         Artisan::call('user:create', [
             '--first_name' => $user->first_name,
             '--last_name'  => $user->last_name,
-            'email'      => $user->email,
+            'email'        => $user->email,
             '--password'   => 'jiperish',
-            'account'    => 'not_a_valid_account_name',
+            'account'      => 'not_a_valid_account_name',
             '--language'   => $user->locale,
             '--disabled'   => $user->disabled,
         ]);
@@ -78,7 +78,7 @@ class CreateCommandTest extends TestCase
         );
 
         $this->assertTrue(
-            Hash::check($password,$user2->password),
+            Hash::check($password, $user2->password),
             'The password is not correct'
         );
     }
@@ -90,9 +90,9 @@ class CreateCommandTest extends TestCase
         Artisan::call('user:create', [
             '--first_name' => $user->first_name,
             '--last_name'  => $user->last_name,
-            'email'      => $user->email,
+            'email'        => $user->email,
             '--password'   => 'jiberish',
-            'account'    => 'Default',
+            'account'      => 'Default',
             '--language'   => $user->locale,
         ]);
         $output = Artisan::output();
@@ -113,9 +113,9 @@ class CreateCommandTest extends TestCase
         Artisan::call('user:create', [
             '--first_name' => $user->first_name,
             '--last_name'  => $user->last_name,
-            'email'      => $user->email,
+            'email'        => $user->email,
             '--password'   => $password,
-            'account'    => 'Default',
+            'account'      => 'Default',
             '--language'   => $user->locale,
             '--disabled'   => 'true',
         ]);
@@ -141,9 +141,9 @@ class CreateCommandTest extends TestCase
         Artisan::call('user:create', [
             '--first_name' => $user->first_name,
             '--last_name'  => $user->last_name,
-            'email'      => $user->email,
+            'email'        => $user->email,
 
-            'account'  => 'Default',
+            'account'    => 'Default',
             '--language' => $user->locale,
             '--disabled' => $user->disabled,
         ]);
