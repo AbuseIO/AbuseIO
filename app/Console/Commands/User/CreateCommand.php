@@ -8,6 +8,7 @@ use AbuseIO\Models\User;
 use Prophecy\Argument;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 use Validator;
 
 /**
@@ -27,18 +28,13 @@ class CreateCommand extends AbstractCreateCommand
     {
         return new InputDefinition(
             [
-                new InputArgument('email', null, 'The emailaddres for the account.', null),
-                new InputArgument('password', null, 'The new password for the account', null),
-                new InputArgument('first_name', null, 'the new first name of the users account.', null),
-                new inputargument('last_name', null, 'the new last name of the users account', null),
-                new inputargument(
-                    'language',
-                    null,
-                    'the default language for the users account, in country code ',
-                    null
-                ),
-                new inputargument('account', null, 'the new account name where this user is linked to', null),
-                new inputargument('disabled', null, 'set the new account status to be disabled', 'false'),
+                new InputArgument('email', InputArgument::REQUIRED, 'The email addres for the account.'),
+                new inputArgument('account', InputArgument::OPTIONAL, 'The new account name where this user is linked to', null),
+                new InputOption('password', null, InputOption::VALUE_OPTIONAL, 'The new password for the account.'),
+                new InputOption('first_name', null, InputOption::VALUE_OPTIONAL, 'The first name of the users account.', 'dummy'),
+                new InputOption('last_name', null, InputOption::VALUE_OPTIONAL, 'The last name of the users account.', 'dummy'),
+                new inputOption('language', null, InputOption::VALUE_OPTIONAL, 'the default language for the users account, in country code ', 'en'),
+                new inputOption('disabled', null, InputOption::VALUE_OPTIONAL, 'set the new account status to be disabled', 'false'),
             ]
         );
     }
@@ -58,16 +54,15 @@ class CreateCommand extends AbstractCreateCommand
     {
         $user = new User();
 
-        $user->first_name = $this->argument('first_name');
-        $user->last_name = $this->argument('last_name');
+        $user->first_name = $this->option('first_name');
+        $user->last_name = $this->option('last_name');
         $user->email = $this->argument('email');
 
-        $account = $this->findAccountByName($this->argument('account'));
-        $user->account_id = $account->id;
+        $user->account_id = $this->findAccountByName($this->argument('account'))->id;
 
         $user->password = $this->getPassword();
-        $user->locale = $this->argument('language');
-        $user->disabled = castStringToBool($this->argument('disabled'));
+        $user->locale = $this->option('language');
+        $user->disabled = castStringToBool($this->option('disabled'));
 
         return $user;
     }
@@ -77,7 +72,7 @@ class CreateCommand extends AbstractCreateCommand
      */
     protected function getPassword()
     {
-        $this->password = $this->argument('password');
+        $this->password = $this->option('password');
 
         if (empty($this->password)) {
             $this->password = generatePassword();
