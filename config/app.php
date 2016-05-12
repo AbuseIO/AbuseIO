@@ -87,6 +87,7 @@ return [
     'locales' => [
         'en' => ['English', 'gb'],
         'nl' => ['Nederlands', 'nl'],
+        'gr' => ['Ελληνικά', 'gr'],
     ],
 
     /*
