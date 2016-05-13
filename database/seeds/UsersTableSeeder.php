@@ -154,15 +154,18 @@ class UsersTableSeeder extends Seeder
         ];
         DB::table('role_user')->insert($role_user);
 
-        // Show the password in CLI that was generated when seeding the test admin user
-        echo "\nDefault admin user '{$users[0]['email']}' created with password: '{$adminPassword}'";
-        // Show the password in CLI that was generated when seeding the test abusedesk user
-        echo "\nDefault user '{$users[1]['email']}' created with password: '{$userPassword}'";
-        // Show the password in CLI that was generated when seeding the test second account admin user
-        echo "\nSecond admin user '{$users[2]['email']}' created with password: '{$adminPassword}'";
-        // Show the password in CLI that was generated when seeding the test second account abusedesk user
-        echo "\nSecond user '{$users[3]['email']}' created with password: '{$userPassword}'";
-        // Show the password in CLI that was generated when seeding the test second account admin user
-        echo "\nThird admin user '{$users[4]['email']}' created with password: '{$adminPassword}'\n\n";
+// Stop output when run from with testframework;
+        if (defined('PHPUNIT_YOURAPPLICATION_TESTSUITE') === false) {
+            // Show the password in CLI that was generated when seeding the test admin user
+            echo "\nDefault admin user '{$users[0]['email']}' created with password: '{$adminPassword}'";
+            // Show the password in CLI that was generated when seeding the test abusedesk user
+            echo "\nDefault user '{$users[1]['email']}' created with password: '{$userPassword}'";
+            // Show the password in CLI that was generated when seeding the test second account admin user
+            echo "\nSecond admin user '{$users[2]['email']}' created with password: '{$adminPassword}'";
+            // Show the password in CLI that was generated when seeding the test second account abusedesk user
+            echo "\nSecond user '{$users[3]['email']}' created with password: '{$userPassword}'";
+            // Show the password in CLI that was generated when seeding the test second account admin user
+            echo "\nThird admin user '{$users[4]['email']}' created with password: '{$adminPassword}'\n\n";
+        }
     }
 }

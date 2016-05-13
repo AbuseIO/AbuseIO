@@ -4,6 +4,7 @@ namespace tests;
 
 use AbuseIO\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
 
 class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {
@@ -41,5 +42,12 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
         });
 
         parent::tearDown();
+    }
+
+    protected function runMigration()
+    {
+        Artisan::call(
+            'migrate:refresh', ['--seed' => 'true]']
+        );
     }
 }

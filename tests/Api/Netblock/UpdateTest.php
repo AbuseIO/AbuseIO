@@ -30,15 +30,18 @@ class UpdateTest extends TestCase
         $netblock1 = factory(Netblock::class)->create();
         $netblock2 = factory(Netblock::class)->make();
 
-        $response = $this->call(['name' => $netblock2->name], $netblock1->id);
+        $response = $this->call(['description' => $netblock2->description], $netblock1->id);
 
         $this->assertTrue(
             $response->isSuccessful()
         );
 
+        $description = Netblock::find($netblock1->id)->description;
+
         $this->assertEquals(
-            Netblock::find($netblock1->id)->name,
-            $netblock2->name
+            $description,
+            $netblock2->description,
+            sprintf("netblock1->description:%s , netblock2->description:%s", $description, $netblock2->description)
         );
     }
 

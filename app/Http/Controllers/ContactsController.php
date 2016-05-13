@@ -116,10 +116,6 @@ class ContactsController extends Controller
     {
         $contacts = Contact::all();
 
-        if (count($contacts) === 0) {
-            return $this->errorNotFound('No contacts where found in this system.');
-        }
-
         return $this->respondWithCollection($contacts, new ContactTransformer());
     }
 

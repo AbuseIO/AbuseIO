@@ -56,10 +56,6 @@ class BrandsController extends Controller
     {
         $brands = Brand::all();
 
-        if (count($brands) === 0) {
-            return $this->errorNotFound('No brands where found in this system');
-        }
-
         return $this->respondWithCollection($brands, new BrandTransformer());
     }
 
@@ -394,10 +390,10 @@ class BrandsController extends Controller
         }
 
         if (!$brand->canDelete()) {
-            $brand->delete();
 
             return $this->errorForbidden("Can't Delete an active and/or system brand.");
         }
+        $brand->delete();
 
         return $this->respondWithItem($brand, new BrandTransformer());
     }

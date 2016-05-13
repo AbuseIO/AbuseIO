@@ -104,10 +104,6 @@ class DomainsController extends Controller
     {
         $domains = Domain::with('contact')->get();
 
-        if (count($domains) === 0) {
-            return $this->errorNotFound('No domains where found in this system');
-        }
-
         return $this->respondWithCollection($domains, new DomainTransformer());
     }
 
