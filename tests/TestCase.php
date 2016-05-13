@@ -3,8 +3,8 @@
 namespace tests;
 
 use AbuseIO\Models\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {

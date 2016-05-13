@@ -41,7 +41,7 @@ class UpdateTest extends TestCase
         $this->assertEquals(
             $description,
             $netblock2['description'],
-            sprintf("netblock1->description:%s , netblock2->description:%s", $description, $netblock2['description'])
+            sprintf('netblock1->description:%s , netblock2->description:%s', $description, $netblock2['description'])
         );
     }
 

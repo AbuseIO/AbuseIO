@@ -47,7 +47,7 @@ class UpdateTest extends TestCase
         $contact1 = factory(Contact::class)->create();
         $contact2 = factory(Contact::class)->make()->toArray();
 
-        unset($contact2["name"]);
+        unset($contact2['name']);
 
         $response = $this->call($contact2, $contact1->id);
 
@@ -73,6 +73,6 @@ class UpdateTest extends TestCase
 
     private function getUri($id)
     {
-        return self::URL . $id;
+        return self::URL.$id;
     }
 }
