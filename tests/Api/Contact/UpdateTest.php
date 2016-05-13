@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\Api\Domain;
+namespace tests\Api\Contact;
 
-use AbuseIO\Models\Domain;
+use AbuseIO\Models\Contact;
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use tests\TestCase;
@@ -11,34 +11,53 @@ class UpdateTest extends TestCase
 {
     use DatabaseTransactions;
 
-    const URL = '/api/v1/domains/';
+    const URL = '/api/v1/contacts/';
 
     public function testEmptyUpdate()
     {
         $response = $this->call([]);
 
         $this->assertContains(
-            'reference',
+            'ERR_WRONGARGS',
             $response->getContent()
         );
 
-        $this->assertEquals($response->getStatusCode(), 200);
+        $this->assertEquals($response->getStatusCode(), 422);
     }
 
-    public function testUpdateName()
+    public function testUpdate()
     {
-        $domain1 = factory(Domain::class)->create();
-        $domain2 = factory(Domain::class)->make();
+        $contact1 = factory(Contact::class)->create();
+        $contact2 = factory(Contact::class)->make()->toArray();
 
-        $response = $this->call(['name' => $domain2->name], $domain1->id);
+        $response = $this->call($contact2, $contact1->id);
 
         $this->assertTrue(
             $response->isSuccessful()
         );
 
         $this->assertEquals(
-            Domain::find($domain1->id)->name,
-            $domain2->name
+            Contact::find($contact1->id)->name,
+            $contact2['name']
+        );
+    }
+
+    public function testUpdateWithMissingPropertyName()
+    {
+        $contact1 = factory(Contact::class)->create();
+        $contact2 = factory(Contact::class)->make()->toArray();
+
+        unset($contact2["name"]);
+
+        $response = $this->call($contact2, $contact1->id);
+
+        $this->assertFalse(
+            $response->isSuccessful()
+        );
+
+        $this->assertContains(
+            'The name field is required.',
+            $response->getContent()
         );
     }
 
@@ -54,6 +73,6 @@ class UpdateTest extends TestCase
 
     private function getUri($id)
     {
-        return self::URL.$id;
+        return self::URL . $id;
     }
 }

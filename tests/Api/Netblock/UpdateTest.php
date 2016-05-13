@@ -18,19 +18,19 @@ class UpdateTest extends TestCase
         $response = $this->call([]);
 
         $this->assertContains(
-            'reference',
+            'ERR_WRONGARGS',
             $response->getContent()
         );
 
-        $this->assertEquals($response->getStatusCode(), 200);
+        $this->assertEquals($response->getStatusCode(), 422);
     }
 
-    public function testUpdateName()
+    public function testUpdate()
     {
         $netblock1 = factory(Netblock::class)->create();
-        $netblock2 = factory(Netblock::class)->make();
+        $netblock2 = factory(Netblock::class)->make()->toArray();
 
-        $response = $this->call(['description' => $netblock2->description], $netblock1->id);
+        $response = $this->call($netblock2, $netblock1->id);
 
         $this->assertTrue(
             $response->isSuccessful()
@@ -40,8 +40,27 @@ class UpdateTest extends TestCase
 
         $this->assertEquals(
             $description,
-            $netblock2->description,
-            sprintf("netblock1->description:%s , netblock2->description:%s", $description, $netblock2->description)
+            $netblock2['description'],
+            sprintf("netblock1->description:%s , netblock2->description:%s", $description, $netblock2['description'])
+        );
+    }
+
+    public function testUpdateWithMissingProperty()
+    {
+        $netblock1 = factory(Netblock::class)->create();
+        $netblock2 = factory(Netblock::class)->make()->toArray();
+
+        unset($netblock2['description']);
+
+        $response = $this->call($netblock2, $netblock1->id);
+
+        $this->assertFalse(
+            $response->isSuccessful()
+        );
+
+        $this->assertContains(
+            'The description field is required.',
+            $response->getContent()
         );
     }
 
