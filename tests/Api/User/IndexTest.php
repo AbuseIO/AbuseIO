@@ -2,7 +2,6 @@
 
 namespace tests\Api\User;
 
-use Illuminate\Support\Facades\DB;
 use tests\Api\IndexTestHelper;
 use tests\TestCase;
 

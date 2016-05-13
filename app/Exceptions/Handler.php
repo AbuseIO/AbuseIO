@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
 
-        if($request->wantsJson()) {
+        if ($request->wantsJson()) {
             return $this->errorInternalError($e->getMessage());
         }
 

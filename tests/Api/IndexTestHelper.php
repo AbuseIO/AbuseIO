@@ -2,7 +2,6 @@
 
 namespace tests\Api;
 
-use AbuseIO\Models\Brand;
 use AbuseIO\Models\User;
 
 trait IndexTestHelper

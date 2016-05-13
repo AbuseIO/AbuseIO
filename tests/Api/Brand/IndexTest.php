@@ -2,7 +2,6 @@
 
 namespace tests\Api\Brand;
 
-use AbuseIO\Models\Brand;
 use Illuminate\Support\Facades\DB;
 use tests\Api\IndexTestHelper;
 use tests\TestCase;

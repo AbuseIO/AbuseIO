@@ -76,4 +76,3 @@ class UpdateTest extends TestCase
         return self::URL.$id;
     }
 }
-
