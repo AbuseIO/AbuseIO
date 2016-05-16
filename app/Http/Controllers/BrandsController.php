@@ -390,6 +390,7 @@ class BrandsController extends Controller
         }
 
         if (!$brand->canDelete()) {
+            
             return $this->errorForbidden("Can't Delete an active and/or system brand.");
         }
         $brand->delete();
