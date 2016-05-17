@@ -45,15 +45,4 @@ class DomainFormRequest extends Request
 
         return [];
     }
-
-    public function response(array $errors)
-    {
-        if ($this->wantsJson()) {
-            return $this->respondWithValidationErrors($errors);
-        }
-
-        return $this->redirector->to($this->getRedirectUrl())
-            ->withInput($this->except($this->dontFlash))
-            ->withErrors($errors);
-    }
 }

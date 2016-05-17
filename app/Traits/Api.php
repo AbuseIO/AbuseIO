@@ -212,4 +212,20 @@ trait Api
 
         return $this->respondWithArray($data);
     }
+
+    /**
+     * @param array $errors
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function response(array $errors)
+    {
+        if ($this->wantsJson()) {
+            return $this->respondWithValidationErrors($errors);
+        }
+
+        return $this->redirector->to($this->getRedirectUrl())
+            ->withInput($this->except($this->dontFlash))
+            ->withErrors($errors);
+    }
 }
