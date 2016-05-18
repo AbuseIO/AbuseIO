@@ -11,8 +11,8 @@ class AccountTransformer extends TransformerAbstract
      * converts the account object to a generic array.
      *
      * @param Account $account
-     * @return array
      *
+     * @return array
      */
     public function transform(Account $account)
     {

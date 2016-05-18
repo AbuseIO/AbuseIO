@@ -66,9 +66,9 @@ class DestroyTest extends TestCase
     public function testResponseInvalidRequest()
     {
         $this->initWithInvalidResponse();
-        
+
         //todo: fix laravel 404 message
-        
+
         //$obj = json_decode($this->content);
 
         //dd($this->content);
