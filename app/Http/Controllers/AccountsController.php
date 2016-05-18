@@ -5,6 +5,9 @@ namespace AbuseIO\Http\Controllers;
 use AbuseIO\Http\Requests\AccountFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\AccountTransformer;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
 
@@ -13,17 +16,22 @@ use yajra\Datatables\Datatables;
  */
 class AccountsController extends Controller
 {
+    use Api;
+
     /**
      * AccountsController constructor.
      */
-    public function __construct()
+    public function __construct(Manager $fractal)
     {
         parent::__construct();
+
+        // initialize the Api methods
+        $this->apiInit($fractal);
 
         // is the logged in account allowed to execute an action on the account
         $this->middleware(
             'checkaccount:Account',
-            ['except' => ['search', 'index', 'create', 'store', 'export', 'logo']]
+            ['except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']]
         );
 
         // method that only may be executed by the systemaccount
@@ -42,6 +50,16 @@ class AccountsController extends Controller
         return view('accounts.index')
             ->with('accounts', $accounts)
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex()
+    {
+        $accounts = Account::all();
+
+        return $this->respondWithCollection($accounts, new AccountTransformer());
     }
 
     /**
@@ -151,6 +169,20 @@ class AccountsController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param AccountFormRequest $accountForm
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiStore(AccountFormRequest $accountForm)
+    {
+        $account = Account::create($accountForm->all());
+
+        return  $this->respondWithItem($account, new AccountTransformer());
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param Account $account
@@ -165,6 +197,15 @@ class AccountsController extends Controller
             ->with('account', $account)
             ->with('brand', $brand)
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * @param Account $account
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiShow(Account $account)
+    {
+        return $this->respondWithItem($account, new AccountTransformer());
     }
 
     /**
@@ -225,6 +266,26 @@ class AccountsController extends Controller
 
         return Redirect::route('admin.accounts.show', $account->id)
             ->with('message', 'Account has been updated.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param AccountFormRequest $accountForm
+     * @param Account $account
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiUpdate(AccountFormRequest $accountForm, Account $account)
+    {
+        // may we edit this account
+        if (!$account->mayEdit($this->auth_user)) {
+            $this->errorUnauthorized();
+        }
+        
+        $account->update($accountForm->all());
+
+        return $this->respondWithItem($account, new AccountTransformer());
     }
 
     /**
@@ -306,5 +367,41 @@ class AccountsController extends Controller
 
         return Redirect::route('admin.accounts.index')
             ->with('message', 'Account and it\'s related users and brands have been deleted.');
+    }
+
+    /**
+     * Remove the specified resource from storage
+     * 
+     * @param Account $account
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function apiDestroy(Account $account)
+    {
+        $brand = $account->brand;
+        
+        if (!$account->mayDestroy($this->auth_user)) {
+            return $this->errorUnauthorized();
+        }
+
+        // Do not allow the system admin user account to be deleted.
+        if ($account->isSystemAccount()) {
+            return $this->errorForbidden("Can delete the systemaccount");
+        }
+
+        // delete the linked users
+        foreach ($account->users as $user) {
+            $user->delete();
+        }
+
+        // delete the account
+        $account->delete();
+
+        // delete the brand
+        if ($brand->canDelete()) {
+            $brand->delete();
+        }
+
+        return $this->respondWithItem($account, new AccountTransformer());
     }
 }

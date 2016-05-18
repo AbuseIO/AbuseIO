@@ -6,12 +6,46 @@ Route::group(
         'as'         => 'accounts.',
     ],
     function () {
-        Route::get(
+        // Access to index list
+        route::get(
             '',
-            function () {
-                return 'hello world';
-            }
+            [
+                'as'   => 'index',
+                'uses' => 'AccountsController@apiIndex',
+            ]
         );
 
+        // Access to show object
+        route::get(
+            '{accounts}',
+            [
+                'as'   => 'show',
+                'uses' => 'AccountsController@apiShow',
+            ]
+        );
+
+        Route::delete(
+            '{accounts}',
+            [
+                'as'   => 'delete',
+                'uses' => 'AccountsController@apiDestroy',
+            ]
+        );
+
+        Route::post(
+            '',
+            [
+                'as'   => 'store',
+                'uses' => 'AccountsController@apiStore',
+            ]
+        );
+
+        Route::put(
+            '{accounts}',
+            [
+                'as'   => 'update',
+                'uses' => 'AccountsController@apiUpdate',
+            ]
+        );
     }
 );

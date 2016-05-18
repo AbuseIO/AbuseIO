@@ -74,6 +74,7 @@ trait Api
      */
     protected function respondWithCollection($collection, $callback)
     {
+
         $resource = new Collection($collection, $callback);
 
         return $this->respondWithResource($resource);

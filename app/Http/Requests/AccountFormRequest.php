@@ -3,12 +3,15 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Account;
+use AbuseIO\Traits\Api;
 
 /**
  * Class AccountFormRequest.
  */
 class AccountFormRequest extends Request
 {
+    use Api;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -34,7 +37,6 @@ class AccountFormRequest extends Request
             case 'POST':
                 return Account::createRules();
             case 'PUT':
-                break;
             case 'PATCH':
                 return Account::updateRules($this);
             default:
