@@ -172,7 +172,7 @@ class AccountsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param AccountFormRequest $accountForm
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function apiStore(AccountFormRequest $accountForm)
@@ -201,6 +201,7 @@ class AccountsController extends Controller
 
     /**
      * @param Account $account
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiShow(Account $account)
@@ -272,8 +273,8 @@ class AccountsController extends Controller
      * Update the specified resource in storage.
      *
      * @param AccountFormRequest $accountForm
-     * @param Account $account
-     * 
+     * @param Account            $account
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiUpdate(AccountFormRequest $accountForm, Account $account)
@@ -282,7 +283,7 @@ class AccountsController extends Controller
         if (!$account->mayEdit($this->auth_user)) {
             $this->errorUnauthorized();
         }
-        
+
         $account->update($accountForm->all());
 
         return $this->respondWithItem($account, new AccountTransformer());
@@ -370,23 +371,25 @@ class AccountsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage
-     * 
+     * Remove the specified resource from storage.
+     *
      * @param Account $account
-     * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \Exception
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function apiDestroy(Account $account)
     {
         $brand = $account->brand;
-        
+
         if (!$account->mayDestroy($this->auth_user)) {
             return $this->errorUnauthorized();
         }
 
         // Do not allow the system admin user account to be deleted.
         if ($account->isSystemAccount()) {
-            return $this->errorForbidden("Can delete the systemaccount");
+            return $this->errorForbidden('Can delete the systemaccount');
         }
 
         // delete the linked users

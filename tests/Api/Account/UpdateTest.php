@@ -29,7 +29,7 @@ class UpdateTest extends TestCase
     {
         $account1 = factory(Account::class)->create();
         $account2 = factory(Account::class)->make();
-        
+
         $response = $this->call(['name' => $account2->name, 'brand_id' => $account1->brand_id], $account1->id);
 
         $this->assertTrue(
