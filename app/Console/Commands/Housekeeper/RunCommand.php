@@ -258,7 +258,17 @@ class RunCommand extends Command
             $tickets = Ticket::where('status_id', '!=', 'CLOSED')->get();
 
             foreach ($tickets as $ticket) {
-                if ($ticket->lastEvent[0]->timestamp <= $closeOlderThen &&
+                /*
+                 * If there something is a ticket without an event we need to use the created_at field instead
+                 * to prevent an index error on the event check
+                 */
+                if (empty($ticket->lastEvent[0])) {
+                    $lastEventTimestamp = strtotime($ticket->created_at);
+                } else {
+                    $lastEventTimestamp = $ticket->lastEvent[0]->timestamp;
+                }
+
+                if ($lastEventTimestamp <= $closeOlderThen &&
                     strtotime($ticket->created_at) <= $closeOlderThen
                 ) {
                     $ticket->update(
