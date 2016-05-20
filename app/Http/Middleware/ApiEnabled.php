@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jover
- * Date: 20-5-16
- * Time: 11:05.
- */
+
 namespace AbuseIO\Http\Middleware;
 
 use AbuseIO\Traits\Api;
