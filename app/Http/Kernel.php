@@ -37,5 +37,6 @@ class Kernel extends HttpKernel
         'ash.token'          => \AbuseIO\Http\Middleware\CheckAshToken::class,
         'checkaccount'       => \AbuseIO\Http\Middleware\CheckAccount::class,
         'checksystemaccount' => \AbuseIO\Http\Middleware\CheckSystemAccount::class,
+        'apienabled'         => \AbuseIO\Http\Middleware\ApiEnabled::class,
     ];
 }

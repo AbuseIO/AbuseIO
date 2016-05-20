@@ -147,7 +147,7 @@ Route::group(
     [
         'prefix'     => 'api',
         'as'         => 'api.',
-        'middleware' => 'auth.basic',
+        'middleware' => ['apienabled','auth.basic'],
     ],
     function () {
         Route::group(

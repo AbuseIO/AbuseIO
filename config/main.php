@@ -77,4 +77,7 @@ return [
         ],
     ],
 
+    'api' => [
+        'enabled'                           => true,
+    ],
 ];
