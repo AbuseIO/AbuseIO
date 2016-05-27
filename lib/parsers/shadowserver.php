@@ -228,9 +228,17 @@ function parse_shadowserver($message) {
                                 'ip'            => $report['ip'], 
                                 'class'         => $class,
                                 'type'          => $type,
-                                'timestamp'     => strtotime($report['timestamp']),
                                 'information'   => $information
                               );
+
+            if (isset($report['timestamp'])) {
+                $outReport['timestamp'] = strtotime($report['timestamp']);
+            } else if (isset($report['first_seen'])) {
+                $outReport['timestamp'] = strtotime($report['first_seen']);
+            } else {
+                logger(LOG_ERR, __FUNCTION__ . " Unable to parse report: Missing timestamp");
+                return false;
+            }
 
             //These reports have a domain, which we want to register seperatly
             if($feed == "spam_url") {
