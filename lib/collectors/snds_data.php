@@ -51,7 +51,7 @@ function collect_snds_data($config=array()) {
         $result = $regs[7];
         $complaints = $regs[8];
         foreach ($ips as $k => $ip) {
-            if ($result[$k] == 'RED') {
+            if ($result[$k] == 'RED' && $complaints[$k] != '< 0.1%') {
                 reportAdd(array(
                     'source'=>'Microsoft SNDS',
                     'ip'=>$ip,
