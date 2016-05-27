@@ -41,22 +41,26 @@ function collect_snds_ipstatus($config) {
             'E-mail address harvesting'=>array(
                 'class'=>'Harvesting',
                 'information'=>array(),
+                'enabled' => true,
             ),
             'Symantec Brightmail'=>array(
                 'class'=>'RBL Listed',
                 'information'=>array(
                     'delisting_url'=>'http://ipremoval.sms.symantec.com/'
                 ),
+                'enabled' => true,
             ),
             'SpamHaus SBL/XBL'=>array(
                 'class'=>'RBL Listed',
                 'information'=>array(
                     'delisting_url'=>'https://www.spamhaus.org/lookup/',
                 ),
+                'enabled' => false,
             ),
             'Blocked due to user complaints or other evidence of spamming'=>array(
                 'class'=>'SPAM',
                 'information'=>array(),
+                'enabled' => false,
             ),
         );
         preg_match_all('/([^,]+),([^,]+),([^,]+),([^\r\n]+)\r?\n/',$data, $regs);
@@ -71,16 +75,18 @@ function collect_snds_ipstatus($config) {
                 if (!empty($first) && !empty($last) && $first <= $last) {
                     for ($x = $first; $x <= $last; $x++) {
                         if (array_key_exists($source[$k],$sndsMap)) {
-                            if (!reportAdd(array(
-                                'source'=>'Microsoft SNDS',
-                                'ip'=>long2ip($x),
-                                'class'=>$sndsMap[$source[$k]]['class'],
-                                'type'=>'INFO',
-                                'timestamp'=>time(),
-                                'information'=>array_merge($sndsMap[$source[$k]]['information'],array(
-                                    'details'=>$source[$k]
-                                ))
-                            ))) break;
+                            if ($sndsMap[$source[$k]]['enabled']) {
+                                if (!reportAdd(array(
+                                    'source'=>'Microsoft SNDS',
+                                    'ip'=>long2ip($x),
+                                    'class'=>$sndsMap[$source[$k]]['class'],
+                                    'type'=>'INFO',
+                                    'timestamp'=>time(),
+                                    'information'=>array_merge($sndsMap[$source[$k]]['information'],array(
+                                        'details'=>$source[$k]
+                                    ))
+                                ))) break;
+                            }
                         } else {
                             logger(LOG_ERR,'Unknown class when importing SNDS report: '.$source[$k]);
                             continue;
