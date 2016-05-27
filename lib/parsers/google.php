@@ -31,6 +31,8 @@ function parse_google($message) {
                     0 => "Compromised website",
                     1 => "Phishing website",
                     2 => "Distribution website",
+                    3 => "Malware infection",
+                    4 => "Malware infection",
                   );
     // ==================
 
