@@ -79,7 +79,6 @@ Route::group(
         require app_path().'/Http/Routes/SettingsBrands.php';
         require app_path().'/Http/Routes/SettingsUsers.php';
         require app_path().'/Http/Routes/Profile.php';
-
     }
 );
 
@@ -175,7 +174,6 @@ Route::group(
                 require app_path().'/Api/Routes/Netblocks.php';
                 require app_path().'/Api/Routes/Contacts.php';
                 require app_path().'/Api/Routes/Domains.php';
-
             }
         );
 
@@ -184,7 +182,7 @@ Route::group(
         // in the group
         //
         // token is a md5 hash
-        foreach($group->getRoutes() as $route){
+        foreach ($group->getRoutes() as $route) {
             $route->where('apitoken', '[[:xdigit:]]{32}');
         }
     }

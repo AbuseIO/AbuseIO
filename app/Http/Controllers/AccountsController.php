@@ -171,8 +171,9 @@ class AccountsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param string $token
+     * @param string             $token
      * @param AccountFormRequest $accountForm
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function apiStore($token, AccountFormRequest $accountForm)
@@ -202,6 +203,7 @@ class AccountsController extends Controller
     /**
      * @param $token
      * @param Account $account
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiShow($token, Account $account)
@@ -274,7 +276,8 @@ class AccountsController extends Controller
      *
      * @param $token
      * @param AccountFormRequest $accountForm
-     * @param Account $account
+     * @param Account            $account
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiUpdate($token, AccountFormRequest $accountForm, Account $account)
@@ -375,8 +378,10 @@ class AccountsController extends Controller
      *
      * @param $token
      * @param Account $account
-     * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \Exception
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function apiDestroy($token, Account $account)
     {

@@ -105,6 +105,5 @@ Route::group(
                 'uses'       => 'ContactsController@destroy',
             ]
         );
-
     }
 );

@@ -206,6 +206,7 @@ class BrandsController extends Controller
      *
      * @param $token
      * @param BrandFormRequest $brandForm
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiStore($token, BrandFormRequest $brandForm)
@@ -262,6 +263,7 @@ class BrandsController extends Controller
      *
      * @param $token
      * @param Brand $brand
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiShow($token, Brand $brand)
@@ -338,7 +340,8 @@ class BrandsController extends Controller
      *
      * @param $token
      * @param BrandFormRequest $brandForm
-     * @param Brand $brand
+     * @param Brand            $brand
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function apiUpdate($token, BrandFormRequest $brandForm, Brand $brand)
@@ -379,6 +382,7 @@ class BrandsController extends Controller
      *
      * @param $token
      * @param $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiDestroy($token, $id)

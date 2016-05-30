@@ -217,6 +217,7 @@ class UsersController extends Controller
     /**
      * @param $token
      * @param User $user
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiShow($token, User $user)
