@@ -145,26 +145,17 @@ Route::group(
  */
 Route::group(
     [
-        'prefix'     => 'api',
+        'prefix'     => 'api/{token}',
         'as'         => 'api.',
-        'middleware' => ['apienabled', 'auth.basic'],
+        'middleware' => ['apienabled', 'checkapitoken'],
     ],
-    function () {
+    function ($group) {
         Route::group(
             [
                 'prefix' => 'v1',
                 'as'     => 'v1.',
             ],
             function () {
-                // Contacts
-                //require app_path().'/Api/Routes/Contacts.php';
-
-                // Netblocks
-                //require app_path().'/Api/Routes/Netblocks.php';
-
-                // Domains
-                //require app_path().'/Api/Routes/Domains.php';
-
                 // Tickets
                 //require app_path().'/Api/Routes/Tickets.php';
 
@@ -184,7 +175,17 @@ Route::group(
                 require app_path().'/Api/Routes/Netblocks.php';
                 require app_path().'/Api/Routes/Contacts.php';
                 require app_path().'/Api/Routes/Domains.php';
+
             }
         );
+
+        // no regular expressions on Route::group
+        // so add them on every get/post/delete etc
+        // in the group
+        //
+        // token is a md5 hash
+        foreach($group->getRoutes() as $route){
+            $route->where('token', '[[:xdigit:]]{32}');
+        }
     }
 );
