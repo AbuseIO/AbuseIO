@@ -11,7 +11,7 @@ class DestroyTest extends TestCase
 {
     use DestroyTestHelper;
 
-    const URL = '/api/v1/brands';
+    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/brands';
 
     public function initWithValidResponse()
     {

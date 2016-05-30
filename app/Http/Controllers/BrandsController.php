@@ -204,11 +204,11 @@ class BrandsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param $token
      * @param BrandFormRequest $brandForm
-     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiStore(BrandFormRequest $brandForm)
+    public function apiStore($token, BrandFormRequest $brandForm)
     {
         $input = $brandForm->all();
         $account = $this->auth_user->account;
@@ -260,11 +260,11 @@ class BrandsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param $token
      * @param Brand $brand
-     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiShow(Brand $brand)
+    public function apiShow($token, Brand $brand)
     {
         return $this->respondWithItem($brand, new BrandTransformer());
     }
@@ -336,12 +336,12 @@ class BrandsController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param $token
      * @param BrandFormRequest $brandForm
-     * @param Brand            $brand
-     *
+     * @param Brand $brand
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiUpdate(BrandFormRequest $brandForm, Brand $brand)
+    public function apiUpdate($token, BrandFormRequest $brandForm, Brand $brand)
     {
         $input = $brandForm->all();
 
@@ -377,11 +377,11 @@ class BrandsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param $token
      * @param $id
-     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiDestroy($id)
+    public function apiDestroy($token, $id)
     {
         $brand = Brand::find($id);
 

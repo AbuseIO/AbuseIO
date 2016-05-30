@@ -15,7 +15,7 @@ class UpdateAccountsTable extends Migration
     {
         // add a token column to the table
         Schema::table('accounts', function ($table) {
-            $table->string('token')->unique();
+            $table->string('token');
         });
 
         // fill the token in the systemaccount

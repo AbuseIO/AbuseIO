@@ -12,6 +12,6 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        '/api/v1/*', // Exclude API calls from token verification
+        '/api/*', // Exclude API calls from token verification
     ];
 }

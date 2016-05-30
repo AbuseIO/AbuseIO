@@ -18,7 +18,7 @@ class CheckApiToken
     public function handle($request, Closure $next)
     {
         //todo: check the token
-        $token=$request->route()->parameters()['token'];
+        $token=$request->route()->parameters()['apitoken'];
 
         //dd($token);
         return $next($request);

@@ -171,11 +171,11 @@ class AccountsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param string $token
      * @param AccountFormRequest $accountForm
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiStore(AccountFormRequest $accountForm)
+    public function apiStore($token, AccountFormRequest $accountForm)
     {
         $account = Account::create($accountForm->all());
 
@@ -200,11 +200,11 @@ class AccountsController extends Controller
     }
 
     /**
+     * @param $token
      * @param Account $account
-     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiShow(Account $account)
+    public function apiShow($token, Account $account)
     {
         return $this->respondWithItem($account, new AccountTransformer());
     }
@@ -272,12 +272,12 @@ class AccountsController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param $token
      * @param AccountFormRequest $accountForm
-     * @param Account            $account
-     *
+     * @param Account $account
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiUpdate(AccountFormRequest $accountForm, Account $account)
+    public function apiUpdate($token, AccountFormRequest $accountForm, Account $account)
     {
         // may we edit this account
         if (!$account->mayEdit($this->auth_user)) {
@@ -373,13 +373,12 @@ class AccountsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param $token
      * @param Account $account
-     *
-     * @throws \Exception
-     *
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-    public function apiDestroy(Account $account)
+    public function apiDestroy($token, Account $account)
     {
         $brand = $account->brand;
 

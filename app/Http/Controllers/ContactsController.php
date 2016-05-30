@@ -202,12 +202,12 @@ class ContactsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param $token
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact            $contact     Contact
-     *
+     * @param Contact $contact Contact
      * @return \Illuminate\Http\Response
      */
-    public function apiStore(ContactFormRequest $contactForm, Contact $contact)
+    public function apiStore($token, ContactFormRequest $contactForm, Contact $contact)
     {
         $c = $contact->create($contactForm->all());
 
@@ -231,11 +231,11 @@ class ContactsController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param $token
      * @param Contact $contact
-     *
      * @return \Illuminate\Http\Response
      */
-    public function apiShow(Contact $contact)
+    public function apiShow($token, Contact $contact)
     {
         return $this->respondWithItem($contact, new ContactTransformer());
     }
@@ -273,12 +273,12 @@ class ContactsController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param $token
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact            $contact     Contact
-     *
+     * @param Contact $contact Contact
      * @return \Illuminate\Http\Response
      */
-    public function apiUpdate(ContactFormRequest $contactForm, Contact $contact)
+    public function apiUpdate($token, ContactFormRequest $contactForm, Contact $contact)
     {
         $contact->update(
             $contactForm->all()
@@ -310,11 +310,11 @@ class ContactsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param $token
      * @param Contact $contact Contact
-     *
      * @return \Illuminate\Http\Response
      */
-    public function apiDestroy(Contact $contact)
+    public function apiDestroy($token, Contact $contact)
     {
         if (!$this->handleDestroy($contact)) {
             $this->respondWithValidationErrors($this->getError());

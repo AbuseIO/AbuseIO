@@ -196,11 +196,11 @@ class DomainsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param $token
      * @param DomainFormRequest $domainForm
-     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiStore(DomainFormRequest $domainForm)
+    public function apiStore($token, DomainFormRequest $domainForm)
     {
         $domain = Domain::create($domainForm->all());
 
@@ -224,11 +224,11 @@ class DomainsController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param $token
      * @param Domain $domain
-     *
      * @return \Illuminate\Http\Response
      */
-    public function apiShow(Domain $domain)
+    public function apiShow($token, Domain $domain)
     {
         return $this->respondWithItem($domain, new DomainTransformer());
     }
@@ -278,12 +278,12 @@ class DomainsController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param $token
      * @param DomainFormRequest $domainForm
-     * @param Domain            $domain
-     *
+     * @param Domain $domain
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiUpdate(DomainFormRequest $domainForm, Domain $domain)
+    public function apiUpdate($token, DomainFormRequest $domainForm, Domain $domain)
     {
         $domain->update($domainForm->all());
 
@@ -308,11 +308,12 @@ class DomainsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param $token
      * @param Domain $domain
-     *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function apiDestroy(Domain $domain)
+    public function apiDestroy($token, Domain $domain)
     {
         $domain->delete();
 

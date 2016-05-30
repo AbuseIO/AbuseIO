@@ -11,7 +11,7 @@ class StoreTest extends TestCase
 {
     use DatabaseTransactions;
 
-    const URL = '/api/v1/netblocks';
+    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/netblocks';
 
     public function testValidationErrors()
     {

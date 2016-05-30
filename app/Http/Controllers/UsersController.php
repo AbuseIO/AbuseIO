@@ -111,6 +111,9 @@ class UsersController extends Controller
             ->with('auth_user', $this->auth_user);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function apiIndex()
     {
         $users = User::all();
@@ -211,7 +214,12 @@ class UsersController extends Controller
         ];
     }
 
-    public function apiShow(User $user)
+    /**
+     * @param $token
+     * @param User $user
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiShow($token, User $user)
     {
         $data = $this->handleShow($user);
 

@@ -16,6 +16,7 @@ $factory->define(AbuseIO\Models\Account::class, function (Faker\Generator $faker
         'name'          => $faker->name,
         'description'   => $faker->sentence(rand(6, 10)),
         'disabled'      => rand(0, 1),
+        'token'         => md5($faker->name . time()),
         'systemaccount' => 0,
         'brand_id'      => 1,
     ];

@@ -198,11 +198,11 @@ class NetblocksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param $token
      * @param NetblockFormRequest $netblockForm
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiStore(NetblockFormRequest $netblockForm)
+    public function apiStore($token, NetblockFormRequest $netblockForm)
     {
         $netblock = Netblock::create($netblockForm->all());
 
@@ -226,11 +226,11 @@ class NetblocksController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param $token
      * @param Netblock $netblock
-     *
      * @return \Illuminate\Http\Response
      */
-    public function apiShow(Netblock $netblock)
+    public function apiShow($token, Netblock $netblock)
     {
         return $this->respondWithItem($netblock, new NetblockTransformer());
     }
@@ -280,12 +280,12 @@ class NetblocksController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param $token
      * @param NetblockFormRequest $netblockForm
-     * @param Netblock            $netblock
-     *
+     * @param Netblock $netblock
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiUpdate(NetblockFormRequest $netblockForm, Netblock $netblock)
+    public function apiUpdate($token, NetblockFormRequest $netblockForm, Netblock $netblock)
     {
         $netblock->update($netblockForm->all());
 
@@ -310,11 +310,11 @@ class NetblocksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param $token
      * @param Netblock $netblock
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiDestroy(Netblock $netblock)
+    public function apiDestroy($token, Netblock $netblock)
     {
         //$netblock->delete();
 

@@ -145,7 +145,7 @@ Route::group(
  */
 Route::group(
     [
-        'prefix'     => 'api/{token}',
+        'prefix'     => 'api/{apitoken}',
         'as'         => 'api.',
         'middleware' => ['apienabled', 'checkapitoken'],
     ],
@@ -185,7 +185,7 @@ Route::group(
         //
         // token is a md5 hash
         foreach($group->getRoutes() as $route){
-            $route->where('token', '[[:xdigit:]]{32}');
+            $route->where('apitoken', '[[:xdigit:]]{32}');
         }
     }
 );

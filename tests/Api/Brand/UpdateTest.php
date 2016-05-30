@@ -11,7 +11,7 @@ class UpdateTest extends TestCase
 {
     use DatabaseTransactions;
 
-    const URL = '/api/v1/brands/';
+    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/brands/';
 // TODO fix logo problem in FromRequest so controller can execute BrandFromRequest before entering controller;
 //    public function testEmptyUpdate()
 //    {
