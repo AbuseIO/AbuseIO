@@ -204,7 +204,8 @@ class ContactsController extends Controller
      *
      * @param $token
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact $contact Contact
+     * @param Contact            $contact     Contact
+     *
      * @return \Illuminate\Http\Response
      */
     public function apiStore($token, ContactFormRequest $contactForm, Contact $contact)
@@ -233,6 +234,7 @@ class ContactsController extends Controller
      *
      * @param $token
      * @param Contact $contact
+     *
      * @return \Illuminate\Http\Response
      */
     public function apiShow($token, Contact $contact)
@@ -275,7 +277,8 @@ class ContactsController extends Controller
      *
      * @param $token
      * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact $contact Contact
+     * @param Contact            $contact     Contact
+     *
      * @return \Illuminate\Http\Response
      */
     public function apiUpdate($token, ContactFormRequest $contactForm, Contact $contact)
@@ -312,6 +315,7 @@ class ContactsController extends Controller
      *
      * @param $token
      * @param Contact $contact Contact
+     *
      * @return \Illuminate\Http\Response
      */
     public function apiDestroy($token, Contact $contact)

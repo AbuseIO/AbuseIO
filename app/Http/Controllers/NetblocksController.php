@@ -200,6 +200,7 @@ class NetblocksController extends Controller
      *
      * @param $token
      * @param NetblockFormRequest $netblockForm
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function apiStore($token, NetblockFormRequest $netblockForm)
@@ -228,6 +229,7 @@ class NetblocksController extends Controller
      *
      * @param $token
      * @param Netblock $netblock
+     *
      * @return \Illuminate\Http\Response
      */
     public function apiShow($token, Netblock $netblock)
@@ -282,7 +284,8 @@ class NetblocksController extends Controller
      *
      * @param $token
      * @param NetblockFormRequest $netblockForm
-     * @param Netblock $netblock
+     * @param Netblock            $netblock
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiUpdate($token, NetblockFormRequest $netblockForm, Netblock $netblock)
@@ -312,6 +315,7 @@ class NetblocksController extends Controller
      *
      * @param $token
      * @param Netblock $netblock
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function apiDestroy($token, Netblock $netblock)

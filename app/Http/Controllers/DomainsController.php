@@ -198,6 +198,7 @@ class DomainsController extends Controller
      *
      * @param $token
      * @param DomainFormRequest $domainForm
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiStore($token, DomainFormRequest $domainForm)
@@ -226,6 +227,7 @@ class DomainsController extends Controller
      *
      * @param $token
      * @param Domain $domain
+     *
      * @return \Illuminate\Http\Response
      */
     public function apiShow($token, Domain $domain)
@@ -280,7 +282,8 @@ class DomainsController extends Controller
      *
      * @param $token
      * @param DomainFormRequest $domainForm
-     * @param Domain $domain
+     * @param Domain            $domain
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function apiUpdate($token, DomainFormRequest $domainForm, Domain $domain)
@@ -310,8 +313,10 @@ class DomainsController extends Controller
      *
      * @param $token
      * @param Domain $domain
-     * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function apiDestroy($token, Domain $domain)
     {

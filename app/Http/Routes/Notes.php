@@ -85,6 +85,5 @@ Route::group(
                 'uses'       => 'NotesController@destroy',
             ]
         );
-
     }
 );

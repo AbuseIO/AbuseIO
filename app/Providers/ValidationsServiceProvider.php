@@ -76,7 +76,6 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'file',
             function ($attribute, $value, $parameters, $validator) {
-
                 if (!is_file($value)) {
                     return false;
                 }
@@ -86,7 +85,6 @@ class ValidationsServiceProvider extends ServiceProvider
                 }
 
                 return true;
-
             }
         );
 
@@ -110,7 +108,6 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'abusetype',
             function ($attribute, $value, $parameters, $validator) {
-
                 $types = config('types.type');
 
                 return in_array($value, $types);
@@ -124,7 +121,6 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'stringorboolean',
             function ($attribute, $value, $parameters, $validator) {
-
                 foreach (['string', 'boolean'] as $validation) {
                     $validator = Validator::make(
                         ['field' => $value],
@@ -137,7 +133,6 @@ class ValidationsServiceProvider extends ServiceProvider
                 }
 
                 return false;
-
             }
         );
 
@@ -148,7 +143,6 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'domain',
             function ($attribute, $value, $parameters, $validator) {
-
                 if (is_bool($value)) {
                     return true;
                 }
@@ -162,7 +156,6 @@ class ValidationsServiceProvider extends ServiceProvider
                 }
 
                 return true;
-
             }
         );
 
@@ -173,7 +166,6 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'uri',
             function ($attribute, $value, $parameters, $validator) {
-
                 if (is_bool($value)) {
                     return true;
                 }
@@ -186,7 +178,6 @@ class ValidationsServiceProvider extends ServiceProvider
                 }
 
                 return false;
-
             }
         );
 

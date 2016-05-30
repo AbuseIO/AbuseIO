@@ -16,7 +16,7 @@ $factory->define(AbuseIO\Models\Account::class, function (Faker\Generator $faker
         'name'          => $faker->name,
         'description'   => $faker->sentence(rand(6, 10)),
         'disabled'      => rand(0, 1),
-        'token'         => md5($faker->name . time()),
+        'token'         => md5($faker->name.time()),
         'systemaccount' => 0,
         'brand_id'      => 1,
     ];
@@ -59,7 +59,6 @@ $factory->define(AbuseIO\Models\Domain::class, function (Faker\Generator $faker)
     ];
 });
 $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) {
-
     $evidence = factory(\AbuseIO\Models\Evidence::class)->create();
     $ticket = factory(\AbuseIO\Models\Ticket::class)->create();
 
@@ -158,7 +157,6 @@ $factory->define(AbuseIO\Models\Role::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker) {
-
     $contactList = \AbuseIO\Models\Contact::all();
 
     /** @var \AbuseIO\Models\Contact $ipContact */
@@ -208,6 +206,5 @@ $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(AbuseIO\Models\Job::class, function () {
-
     return [];
 });

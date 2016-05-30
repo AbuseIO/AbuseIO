@@ -38,6 +38,6 @@ class Kernel extends HttpKernel
         'checkaccount'       => \AbuseIO\Http\Middleware\CheckAccount::class,
         'checksystemaccount' => \AbuseIO\Http\Middleware\CheckSystemAccount::class,
         'apienabled'         => \AbuseIO\Http\Middleware\ApiEnabled::class,
-        'checkapitoken'    => \AbuseIO\Http\Middleware\CheckApiToken::class,
+        'checkapitoken'      => \AbuseIO\Http\Middleware\CheckApiToken::class,
     ];
 }

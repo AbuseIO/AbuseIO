@@ -35,6 +35,5 @@ Route::group(
                 'uses'       => 'ProfileController@update',
             ]
         );
-
     }
 );
