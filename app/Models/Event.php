@@ -96,7 +96,7 @@ class Event extends Model
     public function getSeenAttribute()
     {
         return date(
-            config('app.date_format').' '. config('app.time_format'),
+            config('app.date_format').' '.config('app.time_format'),
             $this->attributes['timestamp']
         );
     }
