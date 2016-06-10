@@ -47,14 +47,14 @@ $factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker
         'api_host'    => $faker->url, //'api_host',
         'auto_notify' => $faker->boolean(),
         'enabled'     => $faker->boolean(),
-        'account_id'  => AbuseIO\Models\Account::all()->first()->id,
+        'account_id'  => AbuseIO\Models\Account::all()->random()->id,
     ];
 });
 
 $factory->define(AbuseIO\Models\Domain::class, function (Faker\Generator $faker) {
     return [
         'name'       => $faker->domainName,
-        'contact_id' => AbuseIO\Models\Contact::all()->first()->id,
+        'contact_id' => AbuseIO\Models\Contact::all()->random()->id,
         'enabled'    => $faker->boolean(),
     ];
 });
@@ -63,7 +63,7 @@ $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) 
     $ticket = factory(\AbuseIO\Models\Ticket::class)->create();
 
     return [
-        'ticket_id'                 => $ticket->id, //\AbuseIO\Models\Ticket::all()->first()->id,
+        'ticket_id'                 => $ticket->id, //\AbuseIO\Models\Ticket::all()->random()->id,
         'evidence_id'               => $evidence->id,
         'source'                    => $faker->name,
         'timestamp'                 => time(),
@@ -84,11 +84,15 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
     } else {
         $runnerCount = 1;
     }
-    // TODO: this filename is one based on the original
-    // from the seeding command should be replace with something from
-    // /storage/mailarchive/$datefolder/$fileuuid.eml
+    /*
+     TODO: this filename is one based on the original
+     from the seeding command should be replace with something from
+     /storage/mailarchive/$datefolder/$fileuuid.eml
+    */
+
+    $today = date('Ymd');
     return [
-        'filename' => sprintf('mailarchive/20150906/%d_messageid', $runnerCount),
+        'filename' => sprintf('mailarchive/%s/%d_messageid', $today, $runnerCount),
         'sender'   => $faker->name,
         'subject'  => $faker->sentence(),
     ];
@@ -116,7 +120,7 @@ $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $fake
     $last_ip = long2ip(ip2long($first_ip) + $faker->numberBetween(5, 100));
 
     return [
-        'contact_id'  => \AbuseIO\Models\Contact::all()->first()->id,
+        'contact_id'  => \AbuseIO\Models\Contact::all()->random()->id,
         'first_ip'    => $first_ip,
         'last_ip'     => $last_ip,
         'description' => $faker->sentence($faker->numberBetween(3, 5)),
