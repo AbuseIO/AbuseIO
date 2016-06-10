@@ -96,7 +96,7 @@ class Account extends Model
      */
     public function users()
     {
-        return $this->hasMany('AbuseIO\Models\User');
+        return $this->hasMany(User::class);
     }
 
     /**
@@ -104,15 +104,15 @@ class Account extends Model
      */
     public function contacts()
     {
-        return $this->hasMany('AbuseIO\Models\Contact');
+        return $this->hasMany(Contact::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function brand()
     {
-        return $this->belongsTo('AbuseIO\Models\Brand');
+        return $this->belongsTo(Brand::class);
     }
 
     /**
@@ -120,7 +120,7 @@ class Account extends Model
      */
     public function brands()
     {
-        return $this->hasMany('AbuseIO\Models\Brand', 'creator_id', 'id');
+        return $this->hasMany(Brand::class, 'creator_id', 'id');
     }
 
     /**
@@ -128,7 +128,7 @@ class Account extends Model
      */
     public function tickets()
     {
-        return $this->hasMany('AbuseIO\Models\Ticket');
+        return $this->hasMany(Brand::class);
     }
 
     /*
@@ -144,11 +144,12 @@ class Account extends Model
      */
     public function getActiveBrandAttribute()
     {
-        return $this->brand;
+        return $this->brand();
     }
 
     /**
      * Mutator for the active brand.
+     * TODO: Note mark: put a brand in a relationship?
      *
      * @param \AbuseIO\Models\Brand $brand
      */
@@ -182,11 +183,11 @@ class Account extends Model
      * Static method to check if the account has access to the model instance.
      *
      * @param $model_id
-     * @param $account
+     * @param \AbuseIO\Models\Account $account
      *
      * @return bool
      */
-    public static function checkAccountAccess($model_id, $account)
+    public static function checkAccountAccess($model_id, Account $account)
     {
         // Early return when we are in the system account
         if ($account->isSystemAccount()) {
@@ -195,7 +196,7 @@ class Account extends Model
 
         $my_account = self::find($model_id);
 
-        $allowed = $my_account->account_id == $account->id;
+        $allowed = ($my_account->account_id == $account->id);
 
         return $allowed;
     }
@@ -214,7 +215,7 @@ class Account extends Model
      * Return the account that currently is the system account
      * If there is none, we die as its impossible to function without it.
      *
-     * @param \Illuminate\Database\Eloquent\Builder
+     * @param \Illuminate\Database\Eloquent\Builder $query
      *
      * @return \AbuseIO\Models\Account $account
      */
@@ -261,7 +262,7 @@ class Account extends Model
      * Checks if the current user may destroy the account
      * todo: currently use the mayEdit method to check.
      *
-     * @param User $user
+     * @param \AbuseIO\Models\User $user
      *
      * @return bool
      */
@@ -273,7 +274,7 @@ class Account extends Model
     /**
      * Checks if the current user may disable the account.
      *
-     * @param User $user
+     * @param \AbuseIO\Models\User $user
      *
      * @return bool
      */
@@ -294,7 +295,7 @@ class Account extends Model
      * Check if the user may enable the account
      * (use the same logic as mayDisable() ).
      *
-     * @param User $user
+     * @param \AbuseIO\Models\User $user
      *
      * @return bool
      */

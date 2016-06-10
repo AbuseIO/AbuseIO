@@ -94,7 +94,7 @@ class PermissionRole extends Model
      */
     public function role()
     {
-        return $this->belongsTo('AbuseIO\Models\Role');
+        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -104,6 +104,6 @@ class PermissionRole extends Model
      */
     public function permission()
     {
-        return $this->belongsTo('AbuseIO\Models\Permission');
+        return $this->belongsTo(Permission::class);
     }
 }

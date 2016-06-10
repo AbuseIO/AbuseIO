@@ -105,7 +105,7 @@ class Contact extends Model
      */
     public function account()
     {
-        return $this->belongsTo('AbuseIO\Models\Account');
+        return $this->belongsTo(Account::class);
     }
 
     /**
@@ -115,7 +115,7 @@ class Contact extends Model
      */
     public function domains()
     {
-        return $this->hasMany('AbuseIO\Models\Domain');
+        return $this->hasMany(Domain::class);
     }
 
     /**
@@ -125,7 +125,7 @@ class Contact extends Model
      */
     public function netblocks()
     {
-        return $this->hasMany('AbuseIO\Models\Netblock');
+        return $this->hasMany(Netblock::class);
     }
 
     /*

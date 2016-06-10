@@ -79,7 +79,7 @@ class Event extends Model
      */
     public function evidence()
     {
-        return $this->belongsTo('AbuseIO\Models\Evidence');
+        return $this->belongsTo(Evidence::class);
     }
 
     /*
@@ -95,7 +95,10 @@ class Event extends Model
      */
     public function getSeenAttribute()
     {
-        return date(config('app.date_format').' '.config('app.time_format'), $this->attributes['timestamp']);
+        return date(
+            config('app.date_format').' '. config('app.time_format'),
+            $this->attributes['timestamp']
+        );
     }
 
     /*
@@ -143,6 +146,7 @@ class Event extends Model
      */
     public static function getStatuses($entity = 'all')
     {
+        $statuses = [];
         if (in_array($entity, ['abusedesk', 'contact', 'all'])) {
             if ($entity == 'all') {
                 foreach (config('types.status') as $entity => $data) {

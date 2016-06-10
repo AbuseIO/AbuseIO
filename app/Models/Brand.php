@@ -112,7 +112,7 @@ class Brand extends Model
      */
     public function accounts()
     {
-        return $this->hasMany('AbuseIO\Models\Account');
+        return $this->hasMany(Account::class);
     }
 
     /**
@@ -120,7 +120,7 @@ class Brand extends Model
      */
     public function account()
     {
-        return $this->belongsTo('AbuseIO\Models\Account', 'creator_id');
+        return $this->belongsTo(Account::class, 'creator_id');
     }
 
     /**

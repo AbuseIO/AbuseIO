@@ -125,7 +125,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function roles()
     {
-        return $this->belongsToMany('AbuseIO\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 
     /**
@@ -135,7 +135,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function account()
     {
-        return $this->belongsTo('AbuseIO\Models\Account');
+        return $this->belongsTo(Account::class);
     }
 
     /*
@@ -182,7 +182,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $permissions =
             $this->roles
             ->load('permissions')
-            ->fetch('permissions')
+            ->pluck('permissions')
             ->toArray();
 
         return array_map(
@@ -209,7 +209,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Encrypt password to hash.
      *
-     * @param $value The password to set
+     * @param $value String The password to set
      */
     public function setPasswordAttribute($value)
     {
@@ -282,7 +282,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
 
         if ($this->disabled) {
-            array_push($messages, 'This login is disabled.');
+            array_push($messages, trans('users.login_disabled'));
             if ($result) {
                 $result = false;
             }

@@ -170,7 +170,7 @@ class Ticket extends Model
      */
     public function events($order = 'asc')
     {
-        return $this->hasMany('AbuseIO\Models\Event')
+        return $this->hasMany(Event::class)
             ->orderBy('timestamp', $order);
     }
 
@@ -181,7 +181,7 @@ class Ticket extends Model
      */
     public function notes()
     {
-        return $this->hasMany('AbuseIO\Models\Note');
+        return $this->hasMany(Note::class);
     }
 
     /**
@@ -191,7 +191,7 @@ class Ticket extends Model
      */
     public function unreadNotes()
     {
-        return $this->hasMany('AbuseIO\Models\Note')
+        return $this->hasMany(Note::class)
             ->where('viewed', 'false');
     }
 
@@ -216,7 +216,7 @@ class Ticket extends Model
      */
     public function accountIp()
     {
-        return $this->belongsTo('AbuseIO\Models\Account', 'ip_contact_account_id');
+        return $this->belongsTo(Account::class, 'ip_contact_account_id');
     }
 
     /**
@@ -224,7 +224,7 @@ class Ticket extends Model
      */
     public function accountDomain()
     {
-        return $this->belongsTo('AbuseIO\Models\Account', 'domain_contact_account_id');
+        return $this->belongsTo(Account::class, 'domain_contact_account_id');
     }
 
     /*

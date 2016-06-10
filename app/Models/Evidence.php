@@ -76,7 +76,7 @@ class Evidence extends Model
      */
     public function events()
     {
-        return $this->hasMany('AbuseIO\Models\Event');
+        return $this->hasMany(Event::class);
     }
 
     /**
@@ -86,12 +86,7 @@ class Evidence extends Model
      */
     public function tickets()
     {
-        return $this->hasManyThrough(
-            'AbuseIO\Models\Ticket',
-            'AbuseIO\Models\Event',
-            'evidence_id',
-            'id'
-        );
+        return $this->hasManyThrough(Ticket::class, Event::class, 'evidence_id', 'id');
     }
 
     /*

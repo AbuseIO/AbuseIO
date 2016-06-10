@@ -101,7 +101,7 @@ class Netblock extends Model
      */
     public function contact()
     {
-        return $this->belongsTo('AbuseIO\Models\Contact');
+        return $this->belongsTo(Contact::class);
     }
 
     /*
