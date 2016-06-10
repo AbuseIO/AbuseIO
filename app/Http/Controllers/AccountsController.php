@@ -223,7 +223,7 @@ class AccountsController extends Controller
         // may we edit this brand (is the brand connected to our account)
         if (!$account->mayEdit($this->auth_user)) {
             return Redirect::route('admin.accounts.show', $account->id)
-                ->with('message', 'User is not authorized to edit this account.');
+                ->with('message', trans('accounts.no_edit_permissions'));
         }
 
         $brands = Brand::lists('name', 'id');
@@ -251,7 +251,7 @@ class AccountsController extends Controller
         // may we edit this account
         if (!$account->mayEdit($this->auth_user)) {
             return Redirect::back()
-                ->with('message', 'User is not authorized to edit this account.');
+                ->with('message', trans('accounts.no_edit_permissions'));
         }
 
         // massage data
@@ -262,13 +262,13 @@ class AccountsController extends Controller
         // may we disable the account, when requested
         if ($account->isSystemAccount() && $accountData['disabled']) {
             return Redirect::back()
-                ->with('message', "System account can't be disabled.");
+                ->with('message', trans('accounts.cannot_disable_sys_acc'));
         }
 
         $account->update($accountData);
 
         return Redirect::route('admin.accounts.show', $account->id)
-            ->with('message', 'Account has been updated.');
+            ->with('message', trans('accounts.account_updated'));
     }
 
     /**
@@ -303,7 +303,7 @@ class AccountsController extends Controller
     {
         if (!$account->mayDisable($this->auth_user)) {
             return Redirect::route('admin.accounts.index')
-                ->with('message', 'User is not authorized to disable account "'.$account->name.'"');
+                ->with('message', trans('accounts.no_disable_permissions').' '.$account->name.'"');
         }
 
         $account->disabled = true;
@@ -324,7 +324,7 @@ class AccountsController extends Controller
     {
         if (!$account->mayEnable($this->auth_user)) {
             return Redirect::route('admin.accounts.index')
-                ->with('message', 'User is not authorized to enable account "'.$account->name.'"');
+                ->with('message', trans('accounts.no_enable_permissions').' '.$account->name.'"');
         }
 
         $account->disabled = false;
@@ -347,7 +347,7 @@ class AccountsController extends Controller
 
         if (!$account->mayDestroy($this->auth_user)) {
             return Redirect::route('admin.accounts.index')
-                ->with('message', 'User is not authorized to edit this account.');
+                ->with('message', trans('accounts.no_edit_permissions'));
         }
 
         // Do not allow the system admin user account to be deleted.
