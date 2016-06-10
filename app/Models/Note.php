@@ -85,6 +85,20 @@ class Note extends Model
 
     /*
     |--------------------------------------------------------------------------
+    | Relationship Methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function ticket()
+    {
+        return $this->belongsTo('AbuseIO\Models\Ticket');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | Accessors & Mutators
     |--------------------------------------------------------------------------
     */
