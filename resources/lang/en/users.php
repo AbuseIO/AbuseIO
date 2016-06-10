@@ -17,5 +17,5 @@ return [
     'linked_account'    => 'Linked account',
     'first_name'        => 'First name',
     'last_name'         => 'Last name',
-    'login_disabled'    => 'This login is disabled.'
+    'login_disabled'    => 'This login is disabled.',
 ];
