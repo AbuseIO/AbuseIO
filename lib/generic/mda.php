@@ -167,20 +167,13 @@ function receive_mail($call) {
                 }
 
             } elseif (isset($part->headers['content-type'])) {
-                if (strpos($part->headers['content-type'],'name=')!==false){
+                if (preg_match("/name=\"(.*)\"/mi", $part->headers['content-type'], $match)) {
                     // This is a mime multipart attachment!
-                    $regex = "name=\"(.*)\"";
-                    preg_match("/${regex}/m", $part->headers['content-type'], $match);
-                    if (count($match) === 2) {
-                        $attachment_counter++;
-                        $filename = $match[1];
-                        $attachment_file = "${message_store}/${attachment_counter}/" . $filename;
-                        if (!empty($part->body) && $saved_file = save_attachment($attachment_file, $part->body)) {
-                            $attachments[$attachment_counter] = $saved_file;
-                        }
-                    } else {
-                        logger(LOG_ERR, "Unknown mime type in parsing e-mail");
-                        return false;
+                    $attachment_counter++;
+                    $filename = $match[1];
+                    $attachment_file = "${message_store}/${attachment_counter}/" . $filename;
+                    if (!empty($part->body) && $saved_file = save_attachment($attachment_file, $part->body)) {
+                        $attachments[$attachment_counter] = $saved_file;
                     }
                 } elseif(strpos($part->headers['content-type'],'text/plain')!==false){
                     $plain .= $part->body;
