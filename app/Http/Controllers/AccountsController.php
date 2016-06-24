@@ -7,8 +7,8 @@ use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\AccountTransformer;
-use League\Fractal\Manager;
 use Illuminate\Http\Request;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
 
@@ -21,6 +21,7 @@ class AccountsController extends Controller
 
     /**
      * AccountsController constructor.
+     *
      * @param Manager $fractal
      * @param Request $request
      */

@@ -31,7 +31,7 @@ trait ShowTestHelper
         $user = User::find(1);
         $server = $this->transformHeadersToServerVars(
             [
-                'Accept' => 'application/json',
+                'Accept'      => 'application/json',
                 'X_API_TOKEN' => Account::getSystemAccount()->token,
             ]);
         $response = $this->actingAs($user)->call('GET', self::URL.'/1', [], [], [], $server);
