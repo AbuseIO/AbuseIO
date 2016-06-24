@@ -33,9 +33,7 @@ class CheckAccount
         if (!is_null($auth_user)) {
             // web ui
             $account = $auth_user->account;
-        }
-        else
-        {
+        } else {
             // api
             $account = $request->api_account;
         }

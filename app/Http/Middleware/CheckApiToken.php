@@ -23,15 +23,15 @@ class CheckApiToken
 
         // no token given
         if (is_null($api_token)) {
-            return $this->errorForbidden("No api token");
+            return $this->errorForbidden('No api token');
         }
-        
+
         // find a matching account a save it in the request
         $api_account = Account::where('token', $api_token)->first();
         if (!$api_account) {
-            return $this->errorUnauthorized("Unauthorized token");
+            return $this->errorUnauthorized('Unauthorized token');
         }
-        
+
         $request->api_account = $api_account;
 
         return $next($request);
