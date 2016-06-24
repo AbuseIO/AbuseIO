@@ -8,6 +8,7 @@ use AbuseIO\Models\Brand;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\AccountTransformer;
 use League\Fractal\Manager;
+use Illuminate\Http\Request;
 use Redirect;
 use yajra\Datatables\Datatables;
 
@@ -20,13 +21,15 @@ class AccountsController extends Controller
 
     /**
      * AccountsController constructor.
+     * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct(Manager $fractal)
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
         // initialize the Api methods
-        $this->apiInit($fractal);
+        $this->apiInit($fractal, $request);
 
         // is the logged in account allowed to execute an action on the account
         $this->middleware(
@@ -171,12 +174,11 @@ class AccountsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param string             $token
      * @param AccountFormRequest $accountForm
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiStore($token, AccountFormRequest $accountForm)
+    public function apiStore(AccountFormRequest $accountForm)
     {
         $account = Account::create($accountForm->all());
 
@@ -201,12 +203,11 @@ class AccountsController extends Controller
     }
 
     /**
-     * @param $token
      * @param Account $account
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiShow($token, Account $account)
+    public function apiShow(Account $account)
     {
         return $this->respondWithItem($account, new AccountTransformer());
     }
@@ -274,13 +275,12 @@ class AccountsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param $token
      * @param AccountFormRequest $accountForm
      * @param Account            $account
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiUpdate($token, AccountFormRequest $accountForm, Account $account)
+    public function apiUpdate(AccountFormRequest $accountForm, Account $account)
     {
         // may we edit this account
         if (!$account->mayEdit($this->auth_user)) {
@@ -376,14 +376,13 @@ class AccountsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $token
      * @param Account $account
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiDestroy($token, Account $account)
+    public function apiDestroy(Account $account)
     {
         $brand = $account->brand;
 

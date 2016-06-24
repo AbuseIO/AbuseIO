@@ -8,6 +8,7 @@ use AbuseIO\Models\Netblock;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\NetblockTransformer;
 use Form;
+use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
@@ -23,12 +24,13 @@ class NetblocksController extends Controller
      * NetblocksController constructor.
      *
      * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct(Manager $fractal)
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
-        $this->apiInit($fractal);
+        $this->apiInit($fractal, $request);
 
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Netblock', ['except' => ['search', 'index', 'create', 'store', 'export']]);
@@ -198,12 +200,11 @@ class NetblocksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param $token
      * @param NetblockFormRequest $netblockForm
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiStore($token, NetblockFormRequest $netblockForm)
+    public function apiStore(NetblockFormRequest $netblockForm)
     {
         $netblock = Netblock::create($netblockForm->all());
 
@@ -227,12 +228,11 @@ class NetblocksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param $token
      * @param Netblock $netblock
      *
      * @return \Illuminate\Http\Response
      */
-    public function apiShow($token, Netblock $netblock)
+    public function apiShow(Netblock $netblock)
     {
         return $this->respondWithItem($netblock, new NetblockTransformer());
     }
@@ -282,13 +282,12 @@ class NetblocksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param $token
      * @param NetblockFormRequest $netblockForm
      * @param Netblock            $netblock
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiUpdate($token, NetblockFormRequest $netblockForm, Netblock $netblock)
+    public function apiUpdate(NetblockFormRequest $netblockForm, Netblock $netblock)
     {
         $netblock->update($netblockForm->all());
 
@@ -313,12 +312,11 @@ class NetblocksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $token
      * @param Netblock $netblock
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiDestroy($token, Netblock $netblock)
+    public function apiDestroy(Netblock $netblock)
     {
         //$netblock->delete();
 

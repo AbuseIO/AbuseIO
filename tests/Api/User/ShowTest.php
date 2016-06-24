@@ -9,5 +9,5 @@ class ShowTest extends TestCase
 {
     use ShowTestHelper;
 
-    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/users';
+    const URL = '/api/v1/users';
 }

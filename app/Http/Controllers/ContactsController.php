@@ -7,6 +7,7 @@ use AbuseIO\Models\Contact;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\ContactTransformer;
 use Form;
+use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
@@ -24,13 +25,14 @@ class ContactsController extends Controller
      * ContactsController constructor.
      *
      * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct(Manager $fractal)
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
         // initialize the Api methods
-        $this->apiInit($fractal);
+        $this->apiInit($fractal, $request);
         // is the logged in account allowed to execute an action on the Contact
         $this->middleware('checkaccount:Contact', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
@@ -202,13 +204,12 @@ class ContactsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param $token
      * @param ContactFormRequest $contactForm FormRequest
      * @param Contact            $contact     Contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function apiStore($token, ContactFormRequest $contactForm, Contact $contact)
+    public function apiStore(ContactFormRequest $contactForm, Contact $contact)
     {
         $c = $contact->create($contactForm->all());
 
@@ -232,12 +233,11 @@ class ContactsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param $token
      * @param Contact $contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function apiShow($token, Contact $contact)
+    public function apiShow(Contact $contact)
     {
         return $this->respondWithItem($contact, new ContactTransformer());
     }
@@ -275,13 +275,12 @@ class ContactsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param $token
      * @param ContactFormRequest $contactForm FormRequest
      * @param Contact            $contact     Contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function apiUpdate($token, ContactFormRequest $contactForm, Contact $contact)
+    public function apiUpdate(ContactFormRequest $contactForm, Contact $contact)
     {
         $contact->update(
             $contactForm->all()
@@ -313,12 +312,11 @@ class ContactsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $token
      * @param Contact $contact Contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function apiDestroy($token, Contact $contact)
+    public function apiDestroy(Contact $contact)
     {
         if (!$this->handleDestroy($contact)) {
             $this->respondWithValidationErrors($this->getError());

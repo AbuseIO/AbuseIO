@@ -40,6 +40,7 @@ class Account extends Model
         'brand_id',
         'disabled',
         'systemaccount',
+        'token',
     ];
 
     /*

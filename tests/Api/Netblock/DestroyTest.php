@@ -2,6 +2,7 @@
 
 namespace tests\Api\Netblock;
 
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\User;
 use tests\Api\DestroyTestHelper;
@@ -11,7 +12,7 @@ class DestroyTest extends TestCase
 {
     use DestroyTestHelper;
 
-    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/netblocks';
+    const URL = '/api/v1/netblocks';
 
     public function initWithValidResponse()
     {
@@ -19,7 +20,12 @@ class DestroyTest extends TestCase
 
         $netblock = factory(Netblock::class)->create();
 
-        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($netblock->id));
+        $server = $this->transformHeadersToServerVars(
+            [
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
+
+        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($netblock->id), [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

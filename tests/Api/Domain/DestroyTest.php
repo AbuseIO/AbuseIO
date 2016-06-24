@@ -2,6 +2,7 @@
 
 namespace tests\Api\Domain;
 
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\User;
 use tests\Api\DestroyTestHelper;
@@ -11,7 +12,7 @@ class DestroyTest extends TestCase
 {
     use DestroyTestHelper;
 
-    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/domains';
+    const URL = '/api/v1/domains';
 
     public function initWithValidResponse()
     {
@@ -19,7 +20,12 @@ class DestroyTest extends TestCase
 
         $domain = factory(Domain::class)->create();
 
-        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($domain->id));
+        $server = $this->transformHeadersToServerVars(
+            [
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
+
+        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($domain->id), [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

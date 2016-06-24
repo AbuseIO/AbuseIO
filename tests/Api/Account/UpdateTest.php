@@ -11,7 +11,7 @@ class UpdateTest extends TestCase
 {
     use DatabaseTransactions;
 
-    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/accounts/';
+    const URL = '/api/v1/accounts/';
 
     public function testEmptyUpdate()
     {
@@ -47,7 +47,11 @@ class UpdateTest extends TestCase
         $user = User::find(1);
         $this->actingAs($user);
 
-        $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
+        $server = $this->transformHeadersToServerVars(
+            [
+                'Accept' => 'application/json',
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
 
         return parent::call('PUT', $this->getUri($id), $parameters, [], [], $server);
     }

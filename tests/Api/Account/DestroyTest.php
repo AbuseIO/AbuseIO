@@ -11,7 +11,7 @@ class DestroyTest extends TestCase
 {
     use DestroyTestHelper;
 
-    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/accounts';
+    const URL = '/api/v1/accounts';
 
     public function initWithValidResponse()
     {
@@ -19,7 +19,12 @@ class DestroyTest extends TestCase
 
         $account = factory(Account::class)->create();
 
-        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($account->id));
+        $server = $this->transformHeadersToServerVars(
+            [
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
+        
+        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($account->id), [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
@@ -54,7 +59,11 @@ class DestroyTest extends TestCase
     {
         $user = User::find(1);
 
-        $response = $this->actingAs($user)->call('DELETE', self::URL.'/200');
+        $server = $this->transformHeadersToServerVars(
+            [
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
+        $response = $this->actingAs($user)->call('DELETE', self::URL.'/200', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

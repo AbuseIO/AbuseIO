@@ -3,6 +3,8 @@
 namespace AbuseIO\Traits;
 
 use AbuseIO\Api\ErrorCodes;
+use AbuseIO\Models\Account;
+use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
@@ -13,6 +15,11 @@ use Response;
  */
 trait Api
 {
+    /**
+     * @var Account which is used for the api
+     */
+    protected $api_account = null;
+
     /**
      * @var int
      */
@@ -25,11 +32,13 @@ trait Api
 
     /**
      * @param Manager $fractal
-     *
-     * @internal param array $args
+     * @param Request $request
      */
-    protected function apiInit(Manager $fractal)
+    protected function apiInit(Manager $fractal, Request $request)
     {
+        // save the api_account in the controller
+        $this->api_account = $request->api_account;
+
         $this->fractal = $fractal;
     }
 

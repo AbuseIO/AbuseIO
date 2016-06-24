@@ -8,6 +8,7 @@ use AbuseIO\Models\Brand;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\BrandTransformer;
 use Exception;
+use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
@@ -21,13 +22,14 @@ class BrandsController extends Controller
 
     /**
      * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct(Manager $fractal)
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
         // initialize the Api methods
-        $this->apiInit($fractal);
+        $this->apiInit($fractal, $request);
 
         // is the logged in account allowed to execute an action on the Brand
         $this->middleware('checkaccount:Brand', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiShow', 'apiDestroy']]);
@@ -204,15 +206,14 @@ class BrandsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param $token
      * @param BrandFormRequest $brandForm
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiStore($token, BrandFormRequest $brandForm)
+    public function apiStore(BrandFormRequest $brandForm)
     {
         $input = $brandForm->all();
-        $account = $this->auth_user->account;
+        $account = $this->api_account;
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
@@ -261,12 +262,11 @@ class BrandsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param $token
      * @param Brand $brand
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiShow($token, Brand $brand)
+    public function apiShow(Brand $brand)
     {
         return $this->respondWithItem($brand, new BrandTransformer());
     }
@@ -338,13 +338,12 @@ class BrandsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param $token
      * @param BrandFormRequest $brandForm
      * @param Brand            $brand
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiUpdate($token, BrandFormRequest $brandForm, Brand $brand)
+    public function apiUpdate(BrandFormRequest $brandForm, Brand $brand)
     {
         $input = $brandForm->all();
 
@@ -380,12 +379,11 @@ class BrandsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $token
      * @param $id
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiDestroy($token, $id)
+    public function apiDestroy($id)
     {
         $brand = Brand::find($id);
 

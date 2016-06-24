@@ -10,6 +10,7 @@ use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\UserTransformer;
 use Config;
 use Form;
+use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use Log;
 use Redirect;
@@ -26,13 +27,14 @@ class UsersController extends Controller
      * UsersController constructor.
      *
      * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct(Manager $fractal)
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
         // initialize the Api methods
-        $this->apiInit($fractal);
+        $this->apiInit($fractal, $request);
 
         // is the logged in account allowed to execute an action on the User
         $this->middleware('checkaccount:User', ['except' => ['search', 'index', 'create', 'store', 'export', 'apiIndex', 'apiShow']]);
@@ -215,12 +217,11 @@ class UsersController extends Controller
     }
 
     /**
-     * @param $token
      * @param User $user
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiShow($token, User $user)
+    public function apiShow(User $user)
     {
         $data = $this->handleShow($user);
 

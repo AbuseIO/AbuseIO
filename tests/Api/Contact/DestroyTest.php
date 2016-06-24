@@ -2,6 +2,7 @@
 
 namespace tests\Api\Contact;
 
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\User;
 use tests\Api\DestroyTestHelper;
@@ -11,15 +12,19 @@ class DestroyTest extends TestCase
 {
     use DestroyTestHelper;
 
-    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/contacts';
+    const URL = '/api/v1/contacts';
 
     public function initWithValidResponse()
     {
         $user = User::find(1);
+        $server = $this->transformHeadersToServerVars(
+            [
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
 
         $contact = factory(Contact::class)->create();
 
-        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($contact->id));
+        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($contact->id), [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

@@ -2,6 +2,7 @@
 
 namespace tests\Api\Brand;
 
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -11,7 +12,7 @@ class UpdateTest extends TestCase
 {
     use DatabaseTransactions;
 
-    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/brands/';
+    const URL = '/api/v1/brands/';
 // TODO fix logo problem in FromRequest so controller can execute BrandFromRequest before entering controller;
 //    public function testEmptyUpdate()
 //    {
@@ -49,7 +50,11 @@ class UpdateTest extends TestCase
         $user = User::find(1);
         $this->actingAs($user);
 
-        $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
+        $server = $this->transformHeadersToServerVars(
+            [
+                'Accept' => 'application/json',
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
 
         return parent::call('PUT', $this->getUri($id), $parameters, [], [], $server);
     }

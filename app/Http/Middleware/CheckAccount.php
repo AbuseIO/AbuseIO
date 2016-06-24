@@ -24,9 +24,21 @@ class CheckAccount
      */
     public function handle($request, Closure $next, $model)
     {
+        $account = null;
+
         // gather info
         $model = '\AbuseIO\Models\\'.$model;
-        $account = Auth::user()->account;
+        $auth_user = Auth::user();
+
+        if (!is_null($auth_user)) {
+            // web ui
+            $account = $auth_user->account;
+        }
+        else
+        {
+            // api
+            $account = $request->api_account;
+        }
 
         // try to retrieve the id of the model (by getting it out the request segment or out the input)
         $model_id = $request->segment(self::IDSEGMENT);

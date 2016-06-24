@@ -3,10 +3,12 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\DomainFormRequest;
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\DomainTransformer;
+use Illuminate\Http\Request;
 use Form;
 use League\Fractal\Manager;
 use Redirect;
@@ -23,12 +25,14 @@ class DomainsController extends Controller
      * DomainsController constructor.
      *
      * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct(Manager $fractal)
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
-        $this->apiInit($fractal);
+        // initialize the api
+        $this->apiInit($fractal, $request);
 
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Domain', ['except' => ['search', 'index', 'create', 'store', 'export']]);
@@ -196,12 +200,11 @@ class DomainsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param $token
      * @param DomainFormRequest $domainForm
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiStore($token, DomainFormRequest $domainForm)
+    public function apiStore(DomainFormRequest $domainForm)
     {
         $domain = Domain::create($domainForm->all());
 
@@ -225,12 +228,11 @@ class DomainsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param $token
      * @param Domain $domain
      *
      * @return \Illuminate\Http\Response
      */
-    public function apiShow($token, Domain $domain)
+    public function apiShow(Domain $domain)
     {
         return $this->respondWithItem($domain, new DomainTransformer());
     }
@@ -280,13 +282,12 @@ class DomainsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param $token
      * @param DomainFormRequest $domainForm
      * @param Domain            $domain
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiUpdate($token, DomainFormRequest $domainForm, Domain $domain)
+    public function apiUpdate(DomainFormRequest $domainForm, Domain $domain)
     {
         $domain->update($domainForm->all());
 
@@ -311,14 +312,13 @@ class DomainsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $token
      * @param Domain $domain
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiDestroy($token, Domain $domain)
+    public function apiDestroy(Domain $domain)
     {
         $domain->delete();
 

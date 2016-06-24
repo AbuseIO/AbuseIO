@@ -144,7 +144,7 @@ Route::group(
  */
 Route::group(
     [
-        'prefix'     => 'api/{apitoken}',
+        'prefix'     => 'api',
         'as'         => 'api.',
         'middleware' => ['apienabled', 'checkapitoken'],
     ],
@@ -176,14 +176,5 @@ Route::group(
                 require app_path().'/Api/Routes/Domains.php';
             }
         );
-
-        // no regular expressions on Route::group
-        // so add them on every get/post/delete etc
-        // in the group
-        //
-        // token is a md5 hash
-        foreach ($group->getRoutes() as $route) {
-            $route->where('apitoken', '[[:xdigit:]]{32}');
-        }
     }
 );

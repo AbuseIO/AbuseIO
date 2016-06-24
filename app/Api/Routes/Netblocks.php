@@ -10,7 +10,7 @@ Route::group(
             '',
             [
                 'as'   => 'index',
-                'uses' => 'NetBlocksController@apiIndex',
+                'uses' => 'NetblocksController@apiIndex',
             ]
         );
 

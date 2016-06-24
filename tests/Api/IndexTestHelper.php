@@ -3,6 +3,7 @@
 namespace tests\Api;
 
 use AbuseIO\Models\User;
+use AbuseIO\Models\Account;
 
 trait IndexTestHelper
 {
@@ -58,27 +59,17 @@ trait IndexTestHelper
     protected function executeCall()
     {
         $user = User::find(1);
+        $account = $user->account;
 
-        $response = $this->actingAs($user)->call('GET', self::URL);
+        $server = $this->transformHeadersToServerVars(
+            [
+                'X_API_TOKEN' => $account->token,
+            ]
+        );
+
+        $response = $this->actingAs($user)->call('GET', self::URL, [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
-    }
-
-    public function testEmptyResponse()
-    {
-        if (method_exists($this, 'truncateTables')) {
-            $this->truncateTables();
-            $this->executeCall();
-
-            $obj = json_decode($this->content);
-
-            $this->assertEquals([], $obj->data);
-            $this->assertEquals(200, $this->statusCode);
-
-            $this->runMigration();
-        } else {
-            $this->assertTrue(true);
-        }
     }
 }

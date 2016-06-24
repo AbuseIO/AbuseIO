@@ -2,6 +2,7 @@
 
 namespace tests\Api\Brand;
 
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use AbuseIO\Models\User;
 use tests\Api\DestroyTestHelper;
@@ -11,15 +12,18 @@ class DestroyTest extends TestCase
 {
     use DestroyTestHelper;
 
-    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/brands';
+    const URL = '/api/v1/brands';
 
     public function initWithValidResponse()
     {
         $user = User::find(1);
 
         $brand = factory(Brand::class)->create();
-
-        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($brand->id));
+        $server = $this->transformHeadersToServerVars(
+            [
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
+        $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($brand->id), [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
@@ -53,8 +57,12 @@ class DestroyTest extends TestCase
     public function initWithInvalidResponse()
     {
         $user = User::find(1);
+        $server = $this->transformHeadersToServerVars(
+            [
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
 
-        $response = $this->actingAs($user)->call('DELETE', self::URL.'/200');
+        $response = $this->actingAs($user)->call('DELETE', self::URL.'/200', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

@@ -2,6 +2,7 @@
 
 namespace tests\Api;
 
+use AbuseIO\Models\Account;
 use AbuseIO\Models\User;
 
 trait ShowTestHelper
@@ -28,7 +29,11 @@ trait ShowTestHelper
     public function initWithValidResponse()
     {
         $user = User::find(1);
-        $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
+        $server = $this->transformHeadersToServerVars(
+            [
+                'Accept' => 'application/json',
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
         $response = $this->actingAs($user)->call('GET', self::URL.'/1', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();

@@ -2,13 +2,14 @@
 
 namespace tests\Api\Brand;
 
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use AbuseIO\Models\User;
 use tests\TestCase;
 
 class StoreTest extends TestCase
 {
-    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/brands';
+    const URL = '/api/v1/brands';
 
     public function testValidationErrors()
     {
@@ -45,7 +46,11 @@ class StoreTest extends TestCase
         $user = User::find(1);
         $this->actingAs($user);
 
-        $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
+        $server = $this->transformHeadersToServerVars(
+            [
+                'Accept' => 'application/json',
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
 
         return parent::call('POST', self::URL, $parameters, [], [], $server);
     }

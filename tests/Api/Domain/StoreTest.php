@@ -2,6 +2,7 @@
 
 namespace tests\Api\Domain;
 
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -11,7 +12,7 @@ class StoreTest extends TestCase
 {
     use DatabaseTransactions;
 
-    const URL = '/api/d41d8cd98f00b204e8000998ecf8427e/v1/domains';
+    const URL = '/api/v1/domains';
 
     public function testValidationErrors()
     {
@@ -50,7 +51,11 @@ class StoreTest extends TestCase
         $user = User::find(1);
         $this->actingAs($user);
 
-        $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
+        $server = $this->transformHeadersToServerVars(
+            [
+                'Accept' => 'application/json',
+                'X_API_TOKEN' => Account::getSystemAccount()->token,
+            ]);
 
         return parent::call('POST', self::URL, $parameters, [], [], $server);
     }
