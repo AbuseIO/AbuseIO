@@ -63,16 +63,22 @@ return [
         'prefer_local'                      => true,
         'findcontact'                       => [
             'id' => [
-                'class'                     => 'Custom',
-                'method'                    => 'getContactById',
+                [
+                    'class'                     => 'Custom', 
+                    'method'                    => 'getContactById',
+                ],
             ],
             'ip' => [
-                'class'                     => 'Custom',
-                'method'                    => 'getContactByIp',
+                [
+                    'class'                     => 'Custom',
+                    'method'                    => 'getContactByIp',
+                ],
             ],
             'domain' => [
-                'class'                     => 'Custom',
-                'method'                    => 'getContactByDomain',
+                [
+                    'class'                     => 'Custom',
+                    'method'                    => 'getContactByDomain',
+                ],
             ],
         ],
     ],

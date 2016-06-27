@@ -81,32 +81,51 @@ class FindContact extends Job
     }
 
     /**
-     * Return the class and methdod to do external calls.
+     * Return the contact from the external method;
      *
      * @param string $section
      * @param string $search
      *
-     * @return object
+     * @return object | false
      */
     public static function getExternalContact($section, $search)
     {
-        if (!empty(config("main.external.findcontact.{$section}.class"))
-            && !empty(config("main.external.findcontact.{$section}.method"))
-        ) {
-            $class = '\AbuseIO\FindContact\\'.config("main.external.findcontact.{$section}.class");
-            $method = config("main.external.findcontact.{$section}.method");
+        $result = false;
+        $contact = null;
 
-            if (class_exists($class) === true && method_exists($class, $method) === true) {
-                $reflectionMethod = new ReflectionMethod($class, $method);
-                $resolver = $reflectionMethod->invoke(new $class(), $search);
+        foreach (config("main.external.findcontact.{$section}") as $config)
+        {
+            // skip part on invalid config
+            if (
+                !is_array($config) ||
+                !array_key_exists('class', $config) ||
+                !array_key_exists('method', $config)
+            )
+            {
+                continue;
+            }
 
-                if (!empty($resolver) && self::validateContact($resolver)) {
-                    return $resolver;
+            if (!empty($config['class']) &&
+                !empty($config['method'])
+            ) {
+                $class = '\AbuseIO\FindContact\\'.$config['class'];
+                $method = $config['method'];
+
+                if (class_exists($class) === true && method_exists($class, $method) === true) {
+                    $reflectionMethod = new ReflectionMethod($class, $method);
+                    $contact = $reflectionMethod->invoke(new $class(), $search);
+
+                    if (!empty($r) && self::validateContact($r)) {
+                        $result = $contact;
+
+                        // exit the loop, when we find a contact
+                        break;
+                    }
                 }
             }
         }
 
-        return false;
+        return $result;
     }
 
     /**
