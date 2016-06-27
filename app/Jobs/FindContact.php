@@ -81,7 +81,7 @@ class FindContact extends Job
     }
 
     /**
-     * Return the contact from the external method;
+     * Return the contact from the external method;.
      *
      * @param string $section
      * @param string $search
@@ -93,15 +93,13 @@ class FindContact extends Job
         $result = false;
         $contact = null;
 
-        foreach (config("main.external.findcontact.{$section}") as $config)
-        {
+        foreach (config("main.external.findcontact.{$section}") as $config) {
             // skip part on invalid config
             if (
                 !is_array($config) ||
                 !array_key_exists('class', $config) ||
                 !array_key_exists('method', $config)
-            )
-            {
+            ) {
                 continue;
             }
 
