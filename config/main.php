@@ -64,7 +64,7 @@ return [
         'findcontact'                       => [
             'id' => [
                 [
-                    'class'                     => 'Custom', 
+                    'class'                     => 'Custom',
                     'method'                    => 'getContactById',
                 ],
             ],
