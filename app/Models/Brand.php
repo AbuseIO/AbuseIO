@@ -227,9 +227,8 @@ class Brand extends Model
         return $result;
     }
 
-
     /**
-     * writes the logo to a tempfile and returns the filepath
+     * writes the logo to a tempfile and returns the filepath.
      *
      * @return string
      */
@@ -238,7 +237,7 @@ class Brand extends Model
         $path = '';
 
         $path = tempnam(sys_get_temp_dir(), 'ABUSEIO');
-        $logo = fopen($path, "w");
+        $logo = fopen($path, 'w');
         fwrite($logo, $this->logo);
         fclose($logo);
 
