@@ -36,7 +36,7 @@ class AshController extends Controller
             $account = Account::find($ticket->domain_contact_account_id);
         }
 
-        $brand = empty($account) ? Brand::getSystemBrand() : $account->active_brand;
+        $brand = empty($account) ? Brand::getSystemBrand() : $account->brand;
 
         if (empty($brand)) {
             abort(500);
