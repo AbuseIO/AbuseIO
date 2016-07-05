@@ -113,7 +113,7 @@ class FindContact extends Job
                     $reflectionMethod = new ReflectionMethod($class, $method);
                     $contact = $reflectionMethod->invoke(new $class(), $search);
 
-                    if (!empty($r) && self::validateContact($r)) {
+                    if (!empty($contact) && self::validateContact($contact)) {
                         $result = $contact;
 
                         // exit the loop, when we find a contact
