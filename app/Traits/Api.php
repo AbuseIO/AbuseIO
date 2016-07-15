@@ -126,12 +126,8 @@ trait Api
      */
     protected function respondWithValidationErrors($messages)
     {
-        $this->setStatusCode(422);
-
-        return $this->respondWithArray([
-            'data'    => [],
-            'message' => $this->getMessage($messages, ErrorCodes::CODE_WRONG_ARGS),
-        ]);
+        return $this->setStatusCode(422)
+            ->respondWithError($messages, ErrorCodes::CODE_WRONG_ARGS);
     }
 
     /**

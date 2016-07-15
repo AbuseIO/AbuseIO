@@ -170,11 +170,13 @@ $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker)
     /** @var \AbuseIO\Models\Contact $domainContact */
     $domainContact = $contactList->random();
 
+    $types = config('types.type');
+
     return [
         'ip'                            => $faker->boolean() ? $faker->ipv4 : $faker->ipv6,
         'domain'                        => $faker->domainName,
         'class_id'                      => array_rand((trans('classifications'))),
-        'type_id'                       => array_rand(config('types.type')),
+        'type_id'                       => $types[array_rand($types)],
         'ip_contact_account_id'         => $ipContact->account_id,
         'ip_contact_reference'          => $ipContact->reference,
         'ip_contact_name'               => $ipContact->name,
@@ -191,8 +193,8 @@ $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker)
         'domain_contact_notified_count' => 0,
         'status_id'                     => 'OPEN', //key(array_rand(config('status.abusedesk'))),
         'contact_status_id'             => 'OPEN', // key(array_rand(config('status.abusedesk'))),
-        'last_notify_count'             => '',
-        'last_notify_timestamp'         => $faker->dateTime(),
+        'last_notify_count'             => '1',
+        'last_notify_timestamp'         => $faker->dateTime()->getTimestamp(),
     ];
 });
 

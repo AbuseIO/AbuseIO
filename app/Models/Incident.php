@@ -62,6 +62,27 @@ class Incident
     |--------------------------------------------------------------------------
     */
 
+
+    /**
+     * creates a new Incident object
+     *
+     * @param array $values
+     * @return Incident
+     */
+    public static function create($values = [])
+    {
+        $incident = new Incident();
+        if (!empty($values)) {
+            foreach ($values as $key => $value) {
+                if (!strstr($key, '_token')) {
+                    $incident->$key = $value;
+                }
+            }
+        }
+
+        return $incident;
+    }
+
     /**
      * Validation rules for this model being created.
      *

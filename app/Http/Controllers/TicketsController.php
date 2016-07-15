@@ -3,17 +3,15 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\TicketFormRequest;
-use AbuseIO\Jobs\EvidenceSave;
-use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Jobs\TicketUpdate;
 use AbuseIO\Models\Event;
-use AbuseIO\Models\Evidence;
-use AbuseIO\Models\Incident;
 use AbuseIO\Models\Ticket;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\TicketTransformer;
 use DB;
-use Input;
-use Log;
+use Illuminate\Http\Request;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
 
@@ -22,13 +20,18 @@ use yajra\Datatables\Datatables;
  */
 class TicketsController extends Controller
 {
+    use Api;
+    
     /**
      * TicketsController constructor.
      */
-    public function __construct()
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
+        // initialize the api
+        $this->apiInit($fractal, $request);
+        
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Ticket', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
@@ -137,19 +140,19 @@ class TicketsController extends Controller
             ->with('auth_user', $this->auth_user);
     }
 
-    /**
-     * Show the form for creating a ticket.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('tickets.create')
-            ->with('classes', Event::getClassifications())
-            ->with('types', Event::getTypes())
-            ->with('auth_user', $this->auth_user);
-    }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex()
+    {
+        $tickets = Ticket::all();
+
+        return $this->respondWithCollection($tickets, new TicketTransformer());
+    }
+    
     /**
      * Export tickets to CSV format.
      *
@@ -209,104 +212,21 @@ class TicketsController extends Controller
             ->with('message', "The requested format {$format} is not available for exports");
     }
 
+
     /**
-     * Store a newly created ticket in storage.
+     * Store a newly created resource in storage.
      *
-     * @param TicketFormRequest $ticket
+     * @param TicketFormRequest $ticketForm
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(TicketFormRequest $ticket)
+    public function apiStore(TicketFormRequest $ticketForm)
     {
-        /*
-         * If there was a file attached then we add this to the evidence as attachment
-         */
-        $attachment = [];
-        $uploadedFile = Input::file('evidenceFile');
-        if (!empty($uploadedFile) &&
-            is_object($uploadedFile) &&
-            $uploadedFile->getError() === 0 &&
-            is_file($uploadedFile->getPathname())
-        ) {
-            $attachment = [
-                'filename'    => $uploadedFile->getClientOriginalName(),
-                'size'        => $uploadedFile->getSize(),
-                'contentType' => $uploadedFile->getMimeType(),
-                'data'        => file_get_contents($uploadedFile->getPathname()),
-            ];
-        }
+        $ticket = Ticket::create($ticketForm->all());
 
-        /*
-         * Grab the form and build a incident model from it. The form should be having all the fields except
-         * the form token. We don't need to validate the data as the formRequest already to care of this and
-         * IncidentsSave will do another validation on this.
-         */
-        $incident = new Incident();
-        foreach ($ticket->all() as $key => $value) {
-            if ($key != '_token') {
-                $incident->$key = $value;
-            }
-        }
-
-        /*
-         * Incident process required all incidents to be wrapped in an array.
-         */
-        $incidents = [
-            0 => $incident,
-        ];
-
-        /*
-         * Save the evidence as its required to save events
-         */
-        $evidence = new EvidenceSave();
-        $evidenceData = [
-            'createdBy'     => trim($this->auth_user->fullName()).' ('.$this->auth_user->email.')',
-            'receivedOn'    => time(),
-            'submittedData' => $ticket->all(),
-            'attachments'   => [],
-        ];
-        if (!empty($attachment)) {
-            $evidenceData['attachments'][0] = $attachment;
-        }
-        $evidenceFile = $evidence->save(json_encode($evidenceData));
-
-        if (!$evidenceFile) {
-            Log::error(
-                get_class($this).': '.
-                'Error returned while asking to write evidence file, cannot continue'
-            );
-            $this->exception();
-        }
-
-        $evidence = new Evidence();
-        $evidence->filename = $evidenceFile;
-        $evidence->sender = $this->auth_user->email;
-        $evidence->subject = 'AbuseDesk Created Incident';
-
-        /*
-         * Call IncidentsProcess to validate, store evidence and save incidents
-         */
-        $incidentsProcess = new IncidentsProcess($incidents, $evidence);
-
-        // Validate the data set
-        $validated = $incidentsProcess->validate();
-        if (!$validated) {
-            return Redirect::back()->with('message', "Failed to validate incident model {$validated}");
-        }
-
-        // Write the data set to database
-        if (!$incidentsProcess->save()) {
-            return Redirect::back()->with('message', 'Failed to write to database');
-        }
-
-        return Redirect::route(
-            'admin.tickets.index'
-        )->with(
-            'message',
-            'A new incident has been created. Depending on the aggregator result a new '.
-            'ticket will be created or existing ticket updated'
-        );
+        return $this->respondWithItem($ticket, new TicketTransformer());
     }
+
 
     /**
      * Display the specified ticket.
@@ -325,6 +245,18 @@ class TicketsController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param Ticket $ticket
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiShow(Ticket $ticket)
+    {
+        return $this->respondWithItem($ticket, new TicketTransformer());
+    }
+    
+    /**
      * Update the requested contact information.
      *
      * @param Ticket $ticket
@@ -339,7 +271,22 @@ class TicketsController extends Controller
         return Redirect::route('admin.tickets.show', $ticket->id)
             ->with('message', 'Contact has been updated.');
     }
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param TicketFormRequest $ticketForm
+     * @param Ticket            $ticket
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiUpdate(TicketFormRequest $ticketForm, Ticket $ticket)
+    {
+        $ticket->update($ticketForm->all());
 
+        return $this->respondWithItem($ticket, new TicketTransformer());
+    }
+    
     /**
      * Set the status of a tickets.
      *

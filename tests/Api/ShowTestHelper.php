@@ -65,6 +65,7 @@ trait ShowTestHelper
     public function testStatusCodeInvalidRequest()
     {
         $this->initWithInvalidResponse();
+        //dd($this->content);
         $this->assertEquals(404, $this->statusCode);
     }
 
@@ -74,8 +75,15 @@ trait ShowTestHelper
     public function initWithInvalidResponse()
     {
         $user = User::find(1);
-        $server = $this->transformHeadersToServerVars(['Accept' => 'application/json']);
-        $response = $this->actingAs($user)->call('GET', self::URL.'/200', [], [], [], $server);
+        $account = $user->account;
+
+        $server = $this->transformHeadersToServerVars(
+            [
+                'Accept' => 'application/json',
+                'X_API_TOKEN' => $account->token,
+            ]
+        );
+        $response = $this->actingAs($user)->call('GET', self::URL.'/20000', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();

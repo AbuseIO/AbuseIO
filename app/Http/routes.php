@@ -64,6 +64,9 @@ Route::group(
 
         // Tickets
         require app_path().'/Http/Routes/Tickets.php';
+        
+        // Incidents
+        require app_path().'/Http/Routes/Incidents.php';
 
         // Evidence
         require app_path().'/Http/Routes/Evidence.php';
@@ -155,9 +158,6 @@ Route::group(
                 'as'     => 'v1.',
             ],
             function () {
-                // Tickets
-                //require app_path().'/Api/Routes/Tickets.php';
-
                 // Evidence
                 //require app_path().'/Api/Routes/Evidence.php';
 
@@ -167,13 +167,14 @@ Route::group(
                 // Analytics
                 //require app_path().'/Api/Routes/Analytics.php';
 
-                // Settings related
                 require app_path().'/Api/Routes/Accounts.php';
                 require app_path().'/Api/Routes/Brands.php';
                 require app_path().'/Api/Routes/Users.php';
                 require app_path().'/Api/Routes/Netblocks.php';
                 require app_path().'/Api/Routes/Contacts.php';
                 require app_path().'/Api/Routes/Domains.php';
+                require app_path().'/Api/Routes/Tickets.php';
+                //require app_path().'/Api/Routes/Incidents.php';
             }
         );
     }

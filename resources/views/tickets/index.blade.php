@@ -12,7 +12,7 @@
 <h1 class="page-header">{{ trans('misc.tickets') }}</h1>
 <div class="row">
     <div class="col-md-4 col-md-offset-8 text-right">
-        {!! link_to_route('admin.tickets.create', trans('tickets.button.new_event'), [], ['class' => 'btn btn-info']) !!}
+        {!! link_to_route('admin.incidents.create', trans('tickets.button.new_event'), [], ['class' => 'btn btn-info']) !!}
         {!! link_to_route('admin.tickets.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
     </div>
 </div>
