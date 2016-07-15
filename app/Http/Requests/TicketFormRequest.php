@@ -4,7 +4,6 @@ namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Ticket;
 use AbuseIO\Traits\Api;
-use Input;
 
 /**
  * Class TicketFormRequest.

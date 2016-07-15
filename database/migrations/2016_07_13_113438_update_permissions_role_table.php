@@ -1,7 +1,6 @@
 <?php
 
 use AbuseIO\Models\Permission;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class UpdatePermissionsRoleTable extends Migration
@@ -34,7 +33,7 @@ class UpdatePermissionsRoleTable extends Migration
 
         DB::table('permission_role')->insert($permission_role);
     }
-    
+
     /**
      * Reverse the migrations.
      *

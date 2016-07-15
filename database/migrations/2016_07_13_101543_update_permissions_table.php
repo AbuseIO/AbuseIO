@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class UpdatePermissionsTable extends Migration
@@ -25,10 +24,10 @@ class UpdatePermissionsTable extends Migration
         $controller = 'incidents';
         foreach ($actions as $action) {
             $permissions[] = [
-                'name' => "{$controller}_{$action}",
+                'name'        => "{$controller}_{$action}",
                 'description' => "Allow to {$action} {$controller}",
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
+                'created_at'  => new DateTime(),
+                'updated_at'  => new DateTime(),
             ];
         }
 

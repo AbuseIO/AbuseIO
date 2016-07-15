@@ -9,17 +9,13 @@ use AbuseIO\Models\Account;
 use AbuseIO\Models\Event;
 use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Incident;
-use AbuseIO\Models\Role;
 use AbuseIO\Traits\Api;
-use AbuseIO\Transformers\IncidentTransformer;
-use Config;
 use Form;
-use Input;
 use Illuminate\Http\Request;
+use Input;
 use League\Fractal\Manager;
 use Log;
 use Redirect;
-use yajra\Datatables\Datatables;
 
 /**
  * Class IncidentsController.
@@ -87,7 +83,7 @@ class IncidentsController extends Controller
                 'data'        => file_get_contents($uploadedFile->getPathname()),
             ];
         }
-        
+
         /*
          * Incident process required all incidents to be wrapped in an array.
          */
@@ -147,6 +143,4 @@ class IncidentsController extends Controller
             'ticket will be created or existing ticket updated'
         );
     }
-
-
 }

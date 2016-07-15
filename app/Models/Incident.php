@@ -62,16 +62,16 @@ class Incident
     |--------------------------------------------------------------------------
     */
 
-
     /**
-     * creates a new Incident object
+     * creates a new Incident object.
      *
      * @param array $values
+     *
      * @return Incident
      */
     public static function create($values = [])
     {
-        $incident = new Incident();
+        $incident = new self();
         if (!empty($values)) {
             foreach ($values as $key => $value) {
                 if (!strstr($key, '_token')) {
