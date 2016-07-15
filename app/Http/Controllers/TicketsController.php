@@ -21,7 +21,7 @@ use yajra\Datatables\Datatables;
 class TicketsController extends Controller
 {
     use Api;
-    
+
     /**
      * TicketsController constructor.
      */
@@ -31,7 +31,7 @@ class TicketsController extends Controller
 
         // initialize the api
         $this->apiInit($fractal, $request);
-        
+
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Ticket', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
@@ -140,7 +140,6 @@ class TicketsController extends Controller
             ->with('auth_user', $this->auth_user);
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -152,7 +151,7 @@ class TicketsController extends Controller
 
         return $this->respondWithCollection($tickets, new TicketTransformer());
     }
-    
+
     /**
      * Export tickets to CSV format.
      *
@@ -212,7 +211,6 @@ class TicketsController extends Controller
             ->with('message', "The requested format {$format} is not available for exports");
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -226,7 +224,6 @@ class TicketsController extends Controller
 
         return $this->respondWithItem($ticket, new TicketTransformer());
     }
-
 
     /**
      * Display the specified ticket.
@@ -255,7 +252,7 @@ class TicketsController extends Controller
     {
         return $this->respondWithItem($ticket, new TicketTransformer());
     }
-    
+
     /**
      * Update the requested contact information.
      *
@@ -271,7 +268,7 @@ class TicketsController extends Controller
         return Redirect::route('admin.tickets.show', $ticket->id)
             ->with('message', 'Contact has been updated.');
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -286,7 +283,7 @@ class TicketsController extends Controller
 
         return $this->respondWithItem($ticket, new TicketTransformer());
     }
-    
+
     /**
      * Set the status of a tickets.
      *

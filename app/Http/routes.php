@@ -64,7 +64,7 @@ Route::group(
 
         // Tickets
         require app_path().'/Http/Routes/Tickets.php';
-        
+
         // Incidents
         require app_path().'/Http/Routes/Incidents.php';
 

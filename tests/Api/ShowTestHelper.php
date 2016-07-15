@@ -79,7 +79,7 @@ trait ShowTestHelper
 
         $server = $this->transformHeadersToServerVars(
             [
-                'Accept' => 'application/json',
+                'Accept'      => 'application/json',
                 'X_API_TOKEN' => $account->token,
             ]
         );
