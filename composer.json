@@ -30,6 +30,7 @@
 		"ext-curl" : "*",
 		"laravel/framework": "5.1.*",
 		"laravelcollective/html": "~5.0",
+		"wpb/string-blade-compiler": "3.0.*",
 		"php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
 		"webpatser/laravel-uuid": "1.*",
 		"Chumper/Zipper": "0.6.x",

@@ -184,7 +184,7 @@ return [
         'Illuminate\Session\SessionServiceProvider',
         'Illuminate\Translation\TranslationServiceProvider',
         'Illuminate\Validation\ValidationServiceProvider',
-        'Illuminate\View\ViewServiceProvider',
+        'Wpb\String_Blade_Compiler\ViewServiceProvider',
         'Collective\Html\HtmlServiceProvider',
 
         /*
