@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class UpdateBrandsTable extends Migration
@@ -18,7 +17,6 @@ class UpdateBrandsTable extends Migration
             $table->text('mail_template_plain')->default('');
             $table->text('mail_template_html')->default('');
         });
-
     }
 
     /**

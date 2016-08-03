@@ -19,5 +19,5 @@ return [
     // templates
     'mail_custom_template' => 'Custom mail templates',
     'mail_template_plain'  => 'Plain mail template',
-    'mail_template_html'   => 'Html mail template'
+    'mail_template_html'   => 'Html mail template',
 ];
