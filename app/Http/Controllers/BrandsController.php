@@ -174,6 +174,8 @@ class BrandsController extends Controller
         $input = $brandForm->all();
         $account = $this->auth_user->account;
 
+        $input['mail_custom_template'] = $input['mail_custom_template'] == 'true';
+
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
         } else {
@@ -181,6 +183,7 @@ class BrandsController extends Controller
                 ->withInput($input)
                 ->withErrors(['logo' => 'Something went wrong, while uploading the logo']);
         }
+
 
         try {
             if (!$account->isSystemAccount()) {
@@ -324,6 +327,8 @@ class BrandsController extends Controller
     public function update(BrandFormRequest $brandForm, Brand $brand)
     {
         $input = $brandForm->all();
+
+        $input['mail_custom_template'] = $input['mail_custom_template'] == 'true';
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());

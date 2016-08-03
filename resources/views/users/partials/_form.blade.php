@@ -70,11 +70,6 @@
         @if ($errors->has('disabled')) <p class="help-block">{{ $errors->first('disabled') }}</p> @endif
     </div>
 </div>
-<script>
-    $('input:checkbox[name="disableddummy"]').change(function() {
-        $('#disabled').val($(this).is(':checked'));
-    });
-</script>
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -82,3 +77,11 @@
         {!! link_to(URL::previous(), trans('misc.button.cancel'), ['class' => 'btn btn-default']) !!}
     </div>
 </div>
+
+@section('extrajs')
+    <script>
+        $('input:checkbox[name="disableddummy"]').change(function() {
+            $('#disabled').val($(this).is(':checked'));
+        });
+    </script>
+@stop

@@ -28,5 +28,37 @@
 
     <dt>{{ trans('brands.logo') }}</dt>
     <dd><img src="/admin/logo/{{ $brand->id }}" alt="{{ $brand->company_name }}"/></dd>
+
+
+    <dt></dt>
+    <dd>&nbsp;</dd>
+
+    @if ( $brand->mail_custom_template)
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-10" style="padding-left: 0;">
+                <div class="panel panel-default panel_info">
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left">{{ trans('brands.mail_template_plain') }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{ htmlentities($brand->mail_template_plain) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-10" style="padding-left: 0;">
+                <div class="panel panel-default panel_info">
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left">{{ trans('brands.mail_template_html') }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{ htmlentities($brand->mail_template_html) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
 </dl>
 @endsection

@@ -42,9 +42,55 @@
         @if ($errors->has('logo')) <p class="help-block">{{ $errors->first('logo') }}</p> @endif
     </div>
 </div>
+<div class="form-group @if ($errors->has('mail_custom_template')) has-error @endif">
+    {!! Form::label('mail_custom_template', trans('brands.mail_custom_template').':', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-10">
+        {!! Form::hidden('mail_custom_template', $brand->mail_custom_template) !!}
+        {!! Form::checkbox('mail_custom_templatedummy', true, $brand->mail_custom_template, ['id' => 'mail_custom_templatedummy']) !!}
+        @if ($errors->has('mail_custom_template')) <p class="help-block">{{ $errors->first('mail_custom_template') }}</p> @endif
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10 mail_template" style="padding-left: 0;">
+        <div class="panel panel-default panel_info">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title pull-left">{{ trans('brands.mail_template_plain') }}</h3>
+            </div>
+            <div class="panel-body">
+                {!! Form::textarea('mail_template_plain', htmlentities($brand->mail_template_plain), ['id' => 'mail_template_plain', 'style' => 'width: 100%']) !!}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10 mail_template" style="padding-left: 0;">
+        <div class="panel panel-default panel_info">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title pull-left">{{ trans('brands.mail_template_html') }}</h3>
+            </div>
+            <div class="panel-body">
+                {!! Form::textarea('mail_template_html', htmlentities($brand->mail_template_html), ['id' => 'mail_template_html', 'style' => 'width: 100%']) !!}
+            </div>
+        </div>
+    </div>
+</div>
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         {!! Form::submit($submit_text, ['class'=>'btn btn-success']) !!}
         {!! link_to(URL::previous(), trans('misc.button.cancel'), ['class' => 'btn btn-default']) !!}
     </div>
 </div>
+
+@section('extrajs')
+<script>
+    /* mail template handling */
+    if (!{{ $brand->mail_custom_template }}) {
+        $('.mail_template').hide();
+    }
+
+    $('input:checkbox[name="mail_custom_templatedummy"]').change(function() {
+        $('#mail_custom_template').val($(this).is(':checked'));
+        $('.mail_template').toggle();
+    });
+</script>
+@stop

@@ -43,6 +43,9 @@ class Brand extends Model
         'logo',
         'introduction_text',
         'creator_id',
+        'mail_custom_template',
+        'mail_template_plain',
+        'mail_template_html'
     ];
 
     /**
