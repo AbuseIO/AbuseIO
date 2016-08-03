@@ -45,7 +45,7 @@ class Brand extends Model
         'creator_id',
         'mail_custom_template',
         'mail_template_plain',
-        'mail_template_html'
+        'mail_template_html',
     ];
 
     /**
