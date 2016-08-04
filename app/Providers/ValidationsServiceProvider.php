@@ -243,13 +243,12 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'bladetemplate',
             function ($attribute, $value, $parameters, $validator) {
-
                 $result = false;
 
                 $view = view(
                     [
-                        'template' => $value,
-                        'cache_key' => md5($value),
+                        'template'                    => $value,
+                        'cache_key'                   => md5($value),
                         'secondsTemplateCacheExpires' => 5,
                     ],
                     []
@@ -268,12 +267,12 @@ class ValidationsServiceProvider extends ServiceProvider
                     $result = runkit_lint_file($compiledPath);
                 } else {
                     Log::warning(
-                        "no runkit pecl extension installed, falling back to exec() to check the php syntax"
+                        'no runkit pecl extension installed, falling back to exec() to check the php syntax'
                     );
                     $phpfinder = new PhpExecutableFinder();
-                    $command = $phpfinder->find() . " -l $compiledPath";
+                    $command = $phpfinder->find()." -l $compiledPath";
                     $output = exec($command);
-                    if (strstr($output, "No syntax errors detected") !== false) {
+                    if (strstr($output, 'No syntax errors detected') !== false) {
                         $result = true;
                     }
                 }
