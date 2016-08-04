@@ -6,6 +6,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
 use Lang;
 use Log;
+use Symfony\Component\Process\PhpExecutableFinder;
 use Validator;
 
 /**
@@ -234,6 +235,51 @@ class ValidationsServiceProvider extends ServiceProvider
                 return true;
             }
 
+        );
+
+        /*
+         * Validator that checks if the string is a valid blade template
+         */
+        Validator::extend(
+            'bladetemplate',
+            function ($attribute, $value, $parameters, $validator) {
+
+                $result = false;
+
+                $view = view(
+                    [
+                        'template' => $value,
+                        'cache_key' => md5($value),
+                        'secondsTemplateCacheExpires' => 5,
+                    ],
+                    []
+                );
+
+                // compile the template and get the path to the compiled file
+                $viewPath = $view->getPath();
+                $engine = $view->getEngine();
+                $compiler = $engine->getCompiler();
+                $compiler->compile($viewPath);
+                $compiledPath = $compiler->getCompiledPath($viewPath);
+
+                // check php syntax of the compiled file
+                // runkit_lint_file() is preferred, but we can fallback on exec() calling php -l
+                if (function_exists('runkit_lint_file')) {
+                    $result = runkit_lint_file($compiledPath);
+                } else {
+                    Log::warning(
+                        "no runkit pecl extension installed, falling back to exec() to check the php syntax"
+                    );
+                    $phpfinder = new PhpExecutableFinder();
+                    $command = $phpfinder->find() . " -l $compiledPath";
+                    $output = exec($command);
+                    if (strstr($output, "No syntax errors detected") !== false) {
+                        $result = true;
+                    }
+                }
+
+                return $result;
+            }
         );
     }
 

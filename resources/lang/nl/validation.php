@@ -104,6 +104,7 @@ return [
     'file'                  => 'Het :attribute veld moet een geldige locatie naar een bestand zijn',
     'emails'                => 'Alle :attribute adressen moeten een geldig emailadres zijn.',
     'timestamp'             => 'Het :attribute veld moet unix tijdstempel (timestamp) zijn',
+    'bladetemplate'         => 'Er moet een valide Blade template in het :attribute veld zitten',
 
     /*
     |--------------------------------------------------------------------------

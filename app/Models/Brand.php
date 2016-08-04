@@ -71,13 +71,14 @@ class Brand extends Model
     public static function createRules()
     {
         $rules = [
-            'name'              => 'required|unique:brands,name',
-            'company_name'      => 'required',
-            'introduction_text' => 'required',
-            'logo'              => 'required|image|max:64',
-            'creator_id'        => 'required|integer|exists:accounts,id',
-            'systembrand'       => 'sometimes|required|uniqueflag:brands:systembrand',
-
+            'name'                => 'required|unique:brands,name',
+            'company_name'        => 'required',
+            'introduction_text'   => 'required',
+            'logo'                => 'required|image|max:64',
+            'creator_id'          => 'required|integer|exists:accounts,id',
+            'systembrand'         => 'sometimes|required|uniqueflag:brands:systembrand',
+            'mail_template_plain' => 'sometimes|required|bladetemplate',
+            'mail_template_html'  => 'sometimes|required|bladetemplate',
         ];
 
         return $rules;
@@ -93,12 +94,14 @@ class Brand extends Model
     public static function updateRules($brand)
     {
         $rules = [
-            'name'              => 'required|unique:brands,name,'.$brand->id,
-            'company_name'      => 'required',
-            'introduction_text' => 'required',
-            'creator_id'        => 'required|integer|exists:accounts,id',
-            'logo'              => 'sometimes|required|image|max:64',
-            'systembrand'       => 'sometimes|required|uniqueflag:brands:systembrand',
+            'name'                => 'required|unique:brands,name,'.$brand->id,
+            'company_name'        => 'required',
+            'introduction_text'   => 'required',
+            'creator_id'          => 'required|integer|exists:accounts,id',
+            'logo'                => 'sometimes|required|image|max:64',
+            'systembrand'         => 'sometimes|required|uniqueflag:brands:systembrand',
+            'mail_template_plain' => 'sometimes|required|bladetemplate',
+            'mail_template_html'  => 'sometimes|required|bladetemplate',
         ];
 
         return $rules;

@@ -57,6 +57,7 @@
                 <h3 class="panel-title pull-left">{{ trans('brands.mail_template_plain') }}</h3>
             </div>
             <div class="panel-body">
+                @if ($errors->has('mail_template_plain')) <p class=""help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_plain')}}</p> @endif
                 {!! Form::textarea('mail_template_plain', htmlentities($brand->mail_template_plain), ['id' => 'mail_template_plain', 'style' => 'width: 100%']) !!}
             </div>
         </div>
@@ -69,6 +70,7 @@
                 <h3 class="panel-title pull-left">{{ trans('brands.mail_template_html') }}</h3>
             </div>
             <div class="panel-body">
+                @if ($errors->has('mail_template_html')) <p class="help-block has-error"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_html')}}</p> @endif
                 {!! Form::textarea('mail_template_html', htmlentities($brand->mail_template_html), ['id' => 'mail_template_html', 'style' => 'width: 100%']) !!}
             </div>
         </div>
@@ -84,7 +86,7 @@
 @section('extrajs')
 <script>
     /* mail template handling */
-    if (!{{ $brand->mail_custom_template }}) {
+    if ({{ ($brand->mail_custom_template ? 1 : 0) }} == 0) {
         $('.mail_template').hide();
     }
 
