@@ -86,8 +86,12 @@
 @section('extrajs')
 <script>
     /* mail template handling */
+
     if ({{ ($brand->mail_custom_template ? 1 : 0) }} == 0) {
         $('.mail_template').hide();
+        $('#mail_custom_template').val(false);
+    } else {
+        $('#mail_custom_template').val(true);
     }
 
     $('input:checkbox[name="mail_custom_templatedummy"]').change(function() {
