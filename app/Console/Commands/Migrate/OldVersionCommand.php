@@ -732,7 +732,7 @@ class OldVersionCommand extends Command
 
         $newTicket->id = $ticket->ID;
         $newTicket->ip = $ticket->IP;
-        $newTicket->domain = empty($ticket->Domain) ? '' : $ticket->Domain;
+        $newTicket->domain = getDomain($ticket->Domain);
         $newTicket->class_id = $ticket->Class;
         $newTicket->type_id = $ticket->Type;
 
