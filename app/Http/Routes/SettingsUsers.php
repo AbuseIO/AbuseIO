@@ -122,6 +122,5 @@ Route::group(
                 'uses'       => 'UsersController@destroy',
             ]
         );
-
     }
 );

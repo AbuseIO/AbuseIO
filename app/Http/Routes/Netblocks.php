@@ -102,6 +102,5 @@ Route::group(
                 'uses'       => 'NetblocksController@destroy',
             ]
         );
-
     }
 );
