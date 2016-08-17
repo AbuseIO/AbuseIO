@@ -111,6 +111,5 @@ Route::group(
                 'uses'       => 'BrandsController@destroy',
             ]
         );
-
     }
 );

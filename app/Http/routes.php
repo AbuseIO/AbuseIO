@@ -79,7 +79,6 @@ Route::group(
         require app_path().'/Http/Routes/SettingsBrands.php';
         require app_path().'/Http/Routes/SettingsUsers.php';
         require app_path().'/Http/Routes/Profile.php';
-
     }
 );
 
