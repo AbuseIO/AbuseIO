@@ -277,7 +277,7 @@ class Ticket extends Model
     }
 
     /**
-     * return the numbers of events
+     * return the numbers of events.
      *
      * @return int
      */
