@@ -276,6 +276,16 @@ class Ticket extends Model
         );
     }
 
+    /**
+     * return the numbers of events
+     *
+     * @return int
+     */
+    public function getEventCountAttribute()
+    {
+        return count($this->events);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Custom Methods

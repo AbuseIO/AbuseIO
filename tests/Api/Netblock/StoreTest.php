@@ -56,7 +56,7 @@ class StoreTest extends TestCase
         $server = $this->transformHeadersToServerVars(
             [
                 'Accept'      => 'application/json',
-                'X_API_TOKEN' => Account::getSystemAccount()->token,
+                'X-API-TOKEN' => Account::getSystemAccount()->token,
             ]);
 
         return parent::call('POST', self::URL, $parameters, [], [], $server);

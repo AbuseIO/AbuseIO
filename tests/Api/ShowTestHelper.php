@@ -32,7 +32,7 @@ trait ShowTestHelper
         $server = $this->transformHeadersToServerVars(
             [
                 'Accept'      => 'application/json',
-                'X_API_TOKEN' => Account::getSystemAccount()->token,
+                'X-API-TOKEN' => Account::getSystemAccount()->token,
             ]);
         $response = $this->actingAs($user)->call('GET', self::URL.'/1', [], [], [], $server);
 
@@ -80,7 +80,7 @@ trait ShowTestHelper
         $server = $this->transformHeadersToServerVars(
             [
                 'Accept'      => 'application/json',
-                'X_API_TOKEN' => $account->token,
+                'X-API-TOKEN' => $account->token,
             ]
         );
         $response = $this->actingAs($user)->call('GET', self::URL.'/20000', [], [], [], $server);

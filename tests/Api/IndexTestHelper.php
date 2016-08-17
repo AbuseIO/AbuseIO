@@ -63,7 +63,7 @@ trait IndexTestHelper
 
         $server = $this->transformHeadersToServerVars(
             [
-                'X_API_TOKEN' => $account->token,
+                'X-API-TOKEN' => $account->token,
             ]
         );
 

@@ -21,7 +21,7 @@ class DestroyTest extends TestCase
         $brand = factory(Brand::class)->create();
         $server = $this->transformHeadersToServerVars(
             [
-                'X_API_TOKEN' => Account::getSystemAccount()->token,
+                'X-API-TOKEN' => Account::getSystemAccount()->token,
             ]);
         $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($brand->id), [], [], [], $server);
 
@@ -59,7 +59,7 @@ class DestroyTest extends TestCase
         $user = User::find(1);
         $server = $this->transformHeadersToServerVars(
             [
-                'X_API_TOKEN' => Account::getSystemAccount()->token,
+                'X-API-TOKEN' => Account::getSystemAccount()->token,
             ]);
 
         $response = $this->actingAs($user)->call('DELETE', self::URL.'/200', [], [], [], $server);

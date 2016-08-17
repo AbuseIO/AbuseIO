@@ -19,7 +19,7 @@ class DestroyTest extends TestCase
         $user = User::find(1);
         $server = $this->transformHeadersToServerVars(
             [
-                'X_API_TOKEN' => Account::getSystemAccount()->token,
+                'X-API-TOKEN' => Account::getSystemAccount()->token,
             ]);
 
         $contact = factory(Contact::class)->create();

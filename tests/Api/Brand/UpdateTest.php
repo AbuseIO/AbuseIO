@@ -53,7 +53,7 @@ class UpdateTest extends TestCase
         $server = $this->transformHeadersToServerVars(
             [
                 'Accept'      => 'application/json',
-                'X_API_TOKEN' => Account::getSystemAccount()->token,
+                'X-API-TOKEN' => Account::getSystemAccount()->token,
             ]);
 
         return parent::call('PUT', $this->getUri($id), $parameters, [], [], $server);

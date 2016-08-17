@@ -40,6 +40,7 @@ class TicketTransformer extends TransformerAbstract
             'contact_status_id'                     => (string) $ticket->contact_status_id,
             'last_notify_count'                     => (int) $ticket->last_notify_count,
             'last_notify_timestamp'                 => (int) $ticket->last_notify_timestamp,
+            'event_count'                           => (int) $ticket->event_count,
         ];
     }
 }

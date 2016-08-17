@@ -19,7 +19,7 @@ class CheckApiToken
     public function handle($request, Closure $next)
     {
         // read the token
-        $api_token = $request->header('X_API_TOKEN');
+        $api_token = $request->header('X-API-TOKEN');
 
         // no token given
         if (is_null($api_token)) {
