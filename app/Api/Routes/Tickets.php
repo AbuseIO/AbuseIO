@@ -45,5 +45,13 @@ Route::group(
                 'uses' => 'TicketsController@apiUpdate',
             ]
         );
+
+        Route::get(
+            '{tickets}/notify',
+            [
+                'as'   => 'notify',
+                'uses' => 'TicketsController@apiNotify',
+            ]
+        );
     }
 );

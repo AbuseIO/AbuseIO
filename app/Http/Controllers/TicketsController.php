@@ -318,4 +318,24 @@ class TicketsController extends Controller
         return Redirect::route('admin.tickets.show', $ticket->id)
             ->with('message', 'Contact has been notified.');
     }
+
+    /**
+     * Send a notification for this ticket to the contacts.
+     * api method.
+     *
+     * @param Ticket $ticket
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiNotify(Ticket $ticket)
+    {
+        $notification = new Notification();
+        $notification->walkList(
+            $notification->buildList($ticket->id, false, true, null)
+        );
+
+        // refresh ticket
+        $ticket = Ticket::find($ticket->id);
+
+        return $this->respondWithItem($ticket, new TicketTransformer());
+    }
 }
