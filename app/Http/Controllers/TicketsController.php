@@ -324,6 +324,7 @@ class TicketsController extends Controller
      * api method.
      *
      * @param Ticket $ticket
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiNotify(Ticket $ticket)
