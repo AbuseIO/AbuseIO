@@ -64,7 +64,8 @@
 		"abuseio/collector-snds": "1.4.*",
 		
 		"abuseio/notification-common": "1.1.*",
-		"abuseio/notification-mail": "1.2.*",
+		"abuseio/notification-mail": "1.3.*",
+
 		"zendframework/zend-xmlrpc": "^2.5",
 		"jeremykendall/php-domain-parser": "^3.0"
 
