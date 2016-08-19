@@ -43,11 +43,11 @@ class AshController extends Controller
         }
 
         $replacements = [
-            'brand' => $brand,
-            'ticket' => $ticket,
+            'brand'          => $brand,
+            'ticket'         => $ticket,
             'allowedChanges' => $this->allowedStatusChanges($ticket),
-            'token' => $token,
-            'message' => ''
+            'token'          => $token,
+            'message'        => '',
         ];
 
         $view = view('ash', $replacements);
@@ -73,7 +73,7 @@ class AshController extends Controller
                     // no errors occurred while rendering
                     $view = $custom_view;
                 } catch (\ErrorException $e) {
-                    \Log::warning("Incorrect ash template, falling back to default: " . $e->getMessage());
+                    \Log::warning('Incorrect ash template, falling back to default: '.$e->getMessage());
                 }
             } else {
                 \Log::warning("Template isn't a valid blade template, falling back to default");
@@ -134,11 +134,11 @@ class AshController extends Controller
         }
 
         $replacements = [
-            'brand' => $brand,
-            'ticket' => $ticket,
+            'brand'          => $brand,
+            'ticket'         => $ticket,
             'allowedChanges' => $this->allowedStatusChanges($ticket),
-            'token' => $token,
-            'message' => $message
+            'token'          => $token,
+            'message'        => $message,
         ];
 
         $view = view('ash', $replacements);
@@ -164,7 +164,7 @@ class AshController extends Controller
                     // no errors occurred while rendering
                     $view = $custom_view;
                 } catch (\ErrorException $e) {
-                    \Log::warning("Incorrect ash template, falling back to default: " . $e->getMessage());
+                    \Log::warning('Incorrect ash template, falling back to default: '.$e->getMessage());
                 }
             } else {
                 \Log::warning("Template isn't a valid blade template, falling back to default");
