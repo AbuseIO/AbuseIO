@@ -60,5 +60,21 @@
         </div>
     @endif
 
+    @if ( $brand->ash_custom_template)
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-10" style="padding-left: 0;">
+            <div class="panel panel-default panel_info">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title pull-left">{{ trans('brands.ash_template') }}</h3>
+                </div>
+                <div class="panel-body">
+                    {{ htmlentities($brand->ash_template) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+
 </dl>
 @endsection

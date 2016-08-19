@@ -154,11 +154,16 @@ class BrandsController extends Controller
     public function create()
     {
         $accounts = Account::lists('name', 'id');
+        $templates = Brand::getDefaultMailTemplate();
+        $templates['ash'] = Brand::getDefaultASHTemplate();
 
         return view('brands.create')
             ->with('account_selection', $accounts)
             ->with('selected', null)
             ->with('brand', null)
+            ->with('ash_custom_template', false)
+            ->with('mail_custom_template', false)
+            ->with('templates', $templates)
             ->with('auth_user', $this->auth_user);
     }
 
@@ -175,6 +180,7 @@ class BrandsController extends Controller
         $account = $this->auth_user->account;
 
         $input['mail_custom_template'] = $input['mail_custom_template'] == 'true';
+        $input['ash_custom_template']  = $input['ash_custom_template'] == 'true';
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
@@ -308,12 +314,21 @@ class BrandsController extends Controller
     public function edit(Brand $brand)
     {
         $accounts = Account::lists('name', 'id');
+        $templates = [
+            'plain_mail' => $brand->mail_template_plain,
+            'html_mail'  => $brand->mail_template_html,
+            'ash'        => $brand->ash_template,
+        ];
 
         return view('brands.edit')
             ->with('account_selection', $accounts)
             ->with('selected', $brand->creator_id)
             ->with('brand', $brand)
-            ->with('auth_user', $this->auth_user);
+            ->with('auth_user', $this->auth_user)
+            ->with('ash_custom_template', $brand->ash_custom_template)
+            ->with('mail_custom_template', $brand->mail_custom_template)
+            ->with('templates', $templates);
+
     }
 
     /**
@@ -329,6 +344,8 @@ class BrandsController extends Controller
         $input = $brandForm->all();
 
         $input['mail_custom_template'] = $input['mail_custom_template'] == 'true';
+        $input['ash_custom_template']  = $input['ash_custom_template'] == 'true';
+
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());

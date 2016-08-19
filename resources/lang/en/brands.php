@@ -20,4 +20,6 @@ return [
     'mail_custom_template' => 'Custom mail templates',
     'mail_template_plain'  => 'Plain mail template',
     'mail_template_html'   => 'Html mail template',
+    'ash_custom_template'  => 'Custom ASH template',
+    'ash_template'         => 'ASH template',
 ];

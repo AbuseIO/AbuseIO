@@ -20,5 +20,8 @@ return [
     'mail_custom_template' => 'Aangepaste mail templates',
     'mail_template_plain'  => 'Platte tekst template',
     'mail_template_html'   => 'Html template',
+    'ash_custom_template'  => 'Aangepaste ASH template',
+    'ash_template'         => 'ASH template',
+
 
 ];

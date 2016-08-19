@@ -45,8 +45,8 @@
 <div class="form-group @if ($errors->has('mail_custom_template')) has-error @endif">
     {!! Form::label('mail_custom_template', trans('brands.mail_custom_template').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::hidden('mail_custom_template', $brand->mail_custom_template) !!}
-        {!! Form::checkbox('mail_custom_templatedummy', true, $brand->mail_custom_template, ['id' => 'mail_custom_templatedummy']) !!}
+        {!! Form::hidden('mail_custom_template', $mail_custom_template) !!}
+        {!! Form::checkbox('mail_custom_templatedummy', true, $mail_custom_template, ['id' => 'mail_custom_templatedummy']) !!}
         @if ($errors->has('mail_custom_template')) <p class="help-block">{{ $errors->first('mail_custom_template') }}</p> @endif
     </div>
 </div>
@@ -58,7 +58,7 @@
             </div>
             <div class="panel-body">
                 @if ($errors->has('mail_template_plain')) <p class=""help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_plain')}}</p> @endif
-                {!! Form::textarea('mail_template_plain', htmlentities($brand->mail_template_plain), ['id' => 'mail_template_plain', 'style' => 'width: 100%']) !!}
+                {!! Form::textarea('mail_template_plain', htmlentities($templates['plain_mail']), ['id' => 'mail_template_plain', 'style' => 'width: 100%']) !!}
             </div>
         </div>
     </div>
@@ -71,7 +71,28 @@
             </div>
             <div class="panel-body">
                 @if ($errors->has('mail_template_html')) <p class="help-block has-error"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_html')}}</p> @endif
-                {!! Form::textarea('mail_template_html', htmlentities($brand->mail_template_html), ['id' => 'mail_template_html', 'style' => 'width: 100%']) !!}
+                {!! Form::textarea('mail_template_html', htmlentities($templates['html_mail']), ['id' => 'mail_template_html', 'style' => 'width: 100%']) !!}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group @if ($errors->has('ash_custom_template')) has-error @endif">
+    {!! Form::label('ash_custom_template', trans('brands.ash_custom_template').':', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-10">
+        {!! Form::hidden('ash_custom_template', $ash_custom_template) !!}
+        {!! Form::checkbox('ash_custom_templatedummy', true, $ash_custom_template, ['id' => 'ash_custom_templatedummy']) !!}
+        @if ($errors->has('ash_custom_template')) <p class="help-block">{{ $errors->first('ash_custom_template') }}</p> @endif
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10 ash_template" style="padding-left: 0;">
+        <div class="panel panel-default panel_info">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title pull-left">{{ trans('brands.ash_template') }}</h3>
+            </div>
+            <div class="panel-body">
+                @if ($errors->has('ash_template')) <p class=""help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('ash_template')}}</p> @endif
+                {!! Form::textarea('ash_template', htmlentities($templates['ash']), ['id' => 'ash_template', 'style' => 'width: 100%']) !!}
             </div>
         </div>
     </div>
@@ -85,18 +106,32 @@
 
 @section('extrajs')
 <script>
-    /* mail template handling */
+    /* mail/ash template handling */
 
-    if ({{ ($brand->mail_custom_template ? 1 : 0) }} == 0) {
+    if ({{ ($mail_custom_template ? 1 : 0) }} == 0) {
         $('.mail_template').hide();
         $('#mail_custom_template').val(false);
     } else {
         $('#mail_custom_template').val(true);
     }
 
+    if ({{ ($ash_custom_template ? 1 : 0) }} == 0) {
+        $('.ash_template').hide();
+        $('#ash_custom_template').val(false);
+    } else {
+        $('#ash_custom_template').val(true);
+    }
+
     $('input:checkbox[name="mail_custom_templatedummy"]').change(function() {
         $('#mail_custom_template').val($(this).is(':checked'));
         $('.mail_template').toggle();
     });
+
+    $('input:checkbox[name="ash_custom_templatedummy"]').change(function() {
+        $('#ash_custom_template').val($(this).is(':checked'));
+        $('.ash_template').toggle();
+    });
+
+
 </script>
 @stop

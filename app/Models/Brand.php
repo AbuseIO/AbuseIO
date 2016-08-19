@@ -46,6 +46,8 @@ class Brand extends Model
         'mail_custom_template',
         'mail_template_plain',
         'mail_template_html',
+        'ash_custom_template',
+        'ash_template',
     ];
 
     /**
@@ -79,6 +81,7 @@ class Brand extends Model
             'systembrand'         => 'sometimes|required|uniqueflag:brands:systembrand',
             'mail_template_plain' => 'sometimes|required|bladetemplate',
             'mail_template_html'  => 'sometimes|required|bladetemplate',
+            'ash_template'        => 'sometimes|required|bladetemplate',
         ];
 
         return $rules;
@@ -102,6 +105,7 @@ class Brand extends Model
             'systembrand'         => 'sometimes|required|uniqueflag:brands:systembrand',
             'mail_template_plain' => 'sometimes|required|bladetemplate',
             'mail_template_html'  => 'sometimes|required|bladetemplate',
+            'ash_template'        => 'sometimes|required|bladetemplate',
         ];
 
         return $rules;
@@ -248,5 +252,36 @@ class Brand extends Model
         fclose($logo);
 
         return $path;
+    }
+
+    /**
+     * Returns the default mail templates as defined in notification-mail.
+     * If the config option can't be found, it will return null.
+     *
+     * @return null|array
+     */
+    static public function getDefaultMailTemplate()
+    {
+        return config("notifications.Mail.templates");
+    }
+
+
+    /**
+     * Returns the default ASH template as a string or null on failure.
+     *
+     * @return null|string
+     */
+    static public function getDefaultASHTemplate()
+    {
+        $result = null;
+
+        $path = view('ash')->getPath();
+        $template = file_get_contents($path);
+
+        if ($template !== false) {
+            $result = $template;
+        }
+
+        return $result;
     }
 }
