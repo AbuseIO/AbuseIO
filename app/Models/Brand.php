@@ -260,18 +260,17 @@ class Brand extends Model
      *
      * @return null|array
      */
-    static public function getDefaultMailTemplate()
+    public static function getDefaultMailTemplate()
     {
-        return config("notifications.Mail.templates");
+        return config('notifications.Mail.templates');
     }
-
 
     /**
      * Returns the default ASH template as a string or null on failure.
      *
      * @return null|string
      */
-    static public function getDefaultASHTemplate()
+    public static function getDefaultASHTemplate()
     {
         $result = null;
 

@@ -180,7 +180,7 @@ class BrandsController extends Controller
         $account = $this->auth_user->account;
 
         $input['mail_custom_template'] = $input['mail_custom_template'] == 'true';
-        $input['ash_custom_template']  = $input['ash_custom_template'] == 'true';
+        $input['ash_custom_template'] = $input['ash_custom_template'] == 'true';
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
@@ -328,7 +328,6 @@ class BrandsController extends Controller
             ->with('ash_custom_template', $brand->ash_custom_template)
             ->with('mail_custom_template', $brand->mail_custom_template)
             ->with('templates', $templates);
-
     }
 
     /**
@@ -344,7 +343,7 @@ class BrandsController extends Controller
         $input = $brandForm->all();
 
         $input['mail_custom_template'] = $input['mail_custom_template'] == 'true';
-        $input['ash_custom_template']  = $input['ash_custom_template'] == 'true';
+        $input['ash_custom_template'] = $input['ash_custom_template'] == 'true';
 
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
