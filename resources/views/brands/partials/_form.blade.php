@@ -57,7 +57,7 @@
                 <h3 class="panel-title pull-left">{{ trans('brands.mail_template_plain') }}</h3>
             </div>
             <div class="panel-body">
-                @if ($errors->has('mail_template_plain')) <p class=""help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_plain')}}</p> @endif
+                @if ($errors->has('mail_template_plain')) <p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_plain')}}</p> @endif
                 {!! Form::textarea('mail_template_plain', htmlentities($templates['plain_mail']), ['id' => 'mail_template_plain', 'style' => 'width: 100%']) !!}
             </div>
         </div>
@@ -91,7 +91,7 @@
                 <h3 class="panel-title pull-left">{{ trans('brands.ash_template') }}</h3>
             </div>
             <div class="panel-body">
-                @if ($errors->has('ash_template')) <p class=""help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('ash_template')}}</p> @endif
+                @if ($errors->has('ash_template')) <p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('ash_template')}}</p> @endif
                 {!! Form::textarea('ash_template', htmlentities($templates['ash']), ['id' => 'ash_template', 'style' => 'width: 100%']) !!}
             </div>
         </div>

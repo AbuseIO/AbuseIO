@@ -249,7 +249,7 @@ class ValidationsServiceProvider extends ServiceProvider
                     [
                         'template'                    => $value,
                         'cache_key'                   => md5($value),
-                        'secondsTemplateCacheExpires' => 5,
+                        'secondsTemplateCacheExpires' => 0,
                     ],
                     []
                 );
@@ -259,7 +259,7 @@ class ValidationsServiceProvider extends ServiceProvider
                 $engine = $view->getEngine();
                 $compiler = $engine->getCompiler();
                 $compiler->compile($viewPath);
-                $compiledPath = $compiler->getCompiledPath($viewPath);
+                $compiledPath = escapeshellarg($compiler->getCompiledPath($viewPath));
 
                 // check php syntax of the compiled file
                 // runkit_lint_file() is preferred, but we can fallback on exec() calling php -l
