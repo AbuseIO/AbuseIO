@@ -41,7 +41,9 @@
                         <h3 class="panel-title pull-left">{{ trans('brands.mail_template_plain') }}</h3>
                     </div>
                     <div class="panel-body">
-                        {{ htmlentities($brand->mail_template_plain) }}
+                        <pre class="prettyprint">
+                            {{ htmlentities($brand->mail_template_plain) }}
+                        </pre>
                     </div>
                 </div>
             </div>
@@ -53,7 +55,9 @@
                         <h3 class="panel-title pull-left">{{ trans('brands.mail_template_html') }}</h3>
                     </div>
                     <div class="panel-body">
-                        {{ htmlentities($brand->mail_template_html) }}
+                        <pre class="prettyprint">
+                            {{ htmlentities($brand->mail_template_html) }}
+                        </pre>
                     </div>
                 </div>
             </div>
@@ -68,7 +72,9 @@
                     <h3 class="panel-title pull-left">{{ trans('brands.ash_template') }}</h3>
                 </div>
                 <div class="panel-body">
-                    {{ htmlentities($brand->ash_template) }}
+                        <pre class="prettyprint">
+                            {{ htmlentities($brand->ash_template) }}
+                        </pre>
                 </div>
             </div>
         </div>
