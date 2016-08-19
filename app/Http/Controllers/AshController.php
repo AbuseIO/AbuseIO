@@ -42,12 +42,45 @@ class AshController extends Controller
             abort(500);
         }
 
-        return view('ash')
-            ->with('brand', $brand)
-            ->with('ticket', $ticket)
-            ->with('allowedChanges', $this->allowedStatusChanges($ticket))
-            ->with('token', $token)
-            ->with('message', '');
+        $replacements = [
+            'brand' => $brand,
+            'ticket' => $ticket,
+            'allowedChanges' => $this->allowedStatusChanges($ticket),
+            'token' => $token,
+            'message' => ''
+        ];
+
+        $view = view('ash', $replacements);
+
+        if ($brand->ash_custom_template) {
+            // defensive programming, doubble check the templates
+            $validator = \Validator::make(
+                [
+                    'ash'  => $brand->ash_template,
+                ],
+                [
+                    'ash'  => 'required|bladetemplate',
+                ]);
+
+            if ($validator->passes()) {
+                try {
+                    // only use the template if they pass the validation
+                    $custom_view = view(['template' => $brand->ash_template], $replacements);
+
+                    // try to render the view (missing vars will throw an exception)
+                    $custom_view->render();
+
+                    // no errors occurred while rendering
+                    $view = $custom_view;
+                } catch (\ErrorException $e) {
+                    \Log::warning("Incorrect ash template, falling back to default: " . $e->getMessage());
+                }
+            } else {
+                \Log::warning("Template isn't a valid blade template, falling back to default");
+            }
+        }
+
+        return $view;
     }
 
     /**
@@ -100,12 +133,45 @@ class AshController extends Controller
             $note->save();
         }
 
-        return view('ash')
-            ->with('brand', $brand)
-            ->with('ticket', $ticket)
-            ->with('allowedChanges', $this->allowedStatusChanges($ticket))
-            ->with('token', $token)
-            ->with('message', $message);
+        $replacements = [
+            'brand' => $brand,
+            'ticket' => $ticket,
+            'allowedChanges' => $this->allowedStatusChanges($ticket),
+            'token' => $token,
+            'message' => $message
+        ];
+
+        $view = view('ash', $replacements);
+
+        if ($brand->ash_custom_template) {
+            // defensive programming, doubble check the templates
+            $validator = \Validator::make(
+                [
+                    'ash'  => $brand->ash_template,
+                ],
+                [
+                    'ash'  => 'required|bladetemplate',
+                ]);
+
+            if ($validator->passes()) {
+                try {
+                    // only use the template if they pass the validation
+                    $custom_view = view(['template' => $brand->ash_template], $replacements);
+
+                    // try to render the view (missing vars will throw an exception)
+                    $custom_view->render();
+
+                    // no errors occurred while rendering
+                    $view = $custom_view;
+                } catch (\ErrorException $e) {
+                    \Log::warning("Incorrect ash template, falling back to default: " . $e->getMessage());
+                }
+            } else {
+                \Log::warning("Template isn't a valid blade template, falling back to default");
+            }
+        }
+
+        return $view;
     }
 
     /**
