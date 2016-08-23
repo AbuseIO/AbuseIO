@@ -144,9 +144,10 @@ class TicketsController extends Controller
      *   ],
      *   "orderby": "ip",
      *   "limit": "5"
-     * }
+     * }.
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiSearch(Request $request)
@@ -159,10 +160,8 @@ class TicketsController extends Controller
 
         try {
             $query = Json::decode($body, Json::TYPE_OBJECT);
-        }
-        catch (\Exception $e)
-        {
-            return $this->errorInternalError("Faulty JSON request");
+        } catch (\Exception $e) {
+            return $this->errorInternalError('Faulty JSON request');
         }
 
         // construct model query
@@ -171,7 +170,7 @@ class TicketsController extends Controller
             foreach ($query->criteria as $c) {
                 // check if we have al the right properties in the criteria
                 if (!(isset($c->column) && isset($c->value))) {
-                    return $this->errorWrongArgs("Criteria field is missing");
+                    return $this->errorWrongArgs('Criteria field is missing');
                 }
 
                 // no operator, set it to 'equals'
@@ -202,20 +201,21 @@ class TicketsController extends Controller
                 $value = $object->$column;
 
                 switch ($c->operator) {
-                    case '>' :
+                    case '>':
                         $success = $value > $c->value;
                         break;
-                    case '<' :
+                    case '<':
                         $success = $value < $c->value;
                         break;
-                    case '=' :
+                    case '=':
                         $success = $value == $c->value;
                         break;
-                    default :
+                    default:
                         // unknown / not implemented operator
                         $success = true;
                         break;
                 }
+
                 return $success;
             });
         }
@@ -224,6 +224,7 @@ class TicketsController extends Controller
         if (isset($query->orderby)) {
             $result = $result->sortBy(function ($object) use ($query) {
                 $column = $query->orderby;
+
                 return $object->$column;
             });
         }
