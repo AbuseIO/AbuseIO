@@ -67,7 +67,8 @@
 		"abuseio/notification-mail": "1.3.*",
 
 		"zendframework/zend-xmlrpc": "^2.5",
-		"jeremykendall/php-domain-parser": "^3.0"
+		"jeremykendall/php-domain-parser": "^3.0",
+		"zendframework/zend-json": "^3.0"
 
 	},
 	"require-dev": {

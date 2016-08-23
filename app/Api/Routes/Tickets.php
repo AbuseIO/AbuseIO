@@ -9,32 +9,32 @@ Route::group(
         route::get(
             '',
             [
-                'as'         => 'index',
-                'uses'       => 'TicketsController@apiIndex',
+                'as'   => 'index',
+                'uses' => 'TicketsController@apiIndex',
             ]
         );
 
         Route::get(
             '{tickets}',
             [
-                'as'         => 'show',
-                'uses'       => 'TicketsController@apiShow',
+                'as'   => 'show',
+                'uses' => 'TicketsController@apiShow',
             ]
         );
 
         Route::delete(
             '{tickets}',
             [
-                'as'         => 'delete',
-                'uses'       => 'TicketsController@apiDestroy',
+                'as'   => 'delete',
+                'uses' => 'TicketsController@apiDestroy',
             ]
         );
 
         Route::post(
             '',
             [
-                'as'         => 'store',
-                'uses'       => 'TicketsController@apiStore',
+                'as'   => 'store',
+                'uses' => 'TicketsController@apiStore',
             ]
         );
 
@@ -51,6 +51,14 @@ Route::group(
             [
                 'as'   => 'notify',
                 'uses' => 'TicketsController@apiNotify',
+            ]
+        );
+
+        Route::post(
+            'search',
+            [
+                'as'   => 'search',
+                'uses' => 'TicketsController@apiSearch',
             ]
         );
     }

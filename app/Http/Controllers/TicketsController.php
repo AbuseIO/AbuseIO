@@ -10,10 +10,12 @@ use AbuseIO\Models\Ticket;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\TicketTransformer;
 use DB;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
+use Zend\Json\Json;
 
 /**
  * Class TicketsController.
@@ -32,7 +34,7 @@ class TicketsController extends Controller
         // initialize the api
         $this->apiInit($fractal, $request);
 
-        // is the logged in account allowed to execute an action on the Domain
+        // is the logged in account allowed to execute an action on the Ticket
         $this->middleware('checkaccount:Ticket', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
 
@@ -120,6 +122,118 @@ class TicketsController extends Controller
                 }
             )
             ->make(true);
+    }
+
+    /**
+     * api search
+     * expects query criteria in the body of the request
+     * eg :
+     * {
+     *   "criteria":
+     *   [
+     *     {
+     *        "column": "ip",
+     *        "operator": "like",
+     *        "value": "%10%"
+     *     },
+     *     {
+     *        "column": "id",
+     *        "operator": ">",
+     *        "value": 7
+     *     }
+     *   ],
+     *   "orderby": "ip",
+     *   "limit": "5"
+     * }
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiSearch(Request $request)
+    {
+        $body = $request->getContent();
+        $post_process = [];
+        $mapped_columns = [
+            'event_count',
+        ];
+
+        try {
+            $query = Json::decode($body, Json::TYPE_OBJECT);
+        }
+        catch (\Exception $e)
+        {
+            return $this->errorInternalError("Faulty JSON request");
+        }
+
+        // construct model query
+        $tickets = Ticket::query();
+        if (isset($query->criteria)) {
+            foreach ($query->criteria as $c) {
+                // check if we have al the right properties in the criteria
+                if (!(isset($c->column) && isset($c->value))) {
+                    return $this->errorWrongArgs("Criteria field is missing");
+                }
+
+                // no operator, set it to 'equals'
+                $c->operator = isset($c->operator) ? $c->operator : '=';
+
+                // skip mapped columns, to process them later
+                if (in_array($c->column, $mapped_columns)) {
+                    array_push($post_process, $c);
+                    continue;
+                }
+
+                $tickets = $tickets->where($c->column, $c->operator, $c->value);
+            }
+        }
+
+        // execute the db query
+        try {
+            $result = $tickets->get();
+        } catch (QueryException $e) {
+            return $this->errorInternalError($e->getMessage());
+        }
+
+        // post process the collection, filter on the the dynamic fields (currently only integer fields)
+        // todo: refactor/cleanup
+        foreach ($post_process as $c) {
+            $result = $result->filter(function ($object) use ($c) {
+                $column = $c->column;
+                $value = $object->$column;
+
+                switch ($c->operator) {
+                    case '>' :
+                        $success = $value > $c->value;
+                        break;
+                    case '<' :
+                        $success = $value < $c->value;
+                        break;
+                    case '=' :
+                        $success = $value == $c->value;
+                        break;
+                    default :
+                        // unknown / not implemented operator
+                        $success = true;
+                        break;
+                }
+                return $success;
+            });
+        }
+
+        // order the results
+        if (isset($query->orderby)) {
+            $result = $result->sortBy(function ($object) use ($query) {
+                $column = $query->orderby;
+                return $object->$column;
+            });
+        }
+
+        // limit the results
+        if (isset($query->limit)) {
+            $result = $result->take($query->limit);
+        }
+
+        return $this->respondWithCollection($result, new TicketTransformer());
     }
 
     /**
