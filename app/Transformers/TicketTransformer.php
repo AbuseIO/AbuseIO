@@ -41,6 +41,7 @@ class TicketTransformer extends TransformerAbstract
             'last_notify_count'                     => (int) $ticket->last_notify_count,
             'last_notify_timestamp'                 => (int) $ticket->last_notify_timestamp,
             'event_count'                           => (int) $ticket->event_count,
+            'note_count'                            => (int) $ticket->note_count,
         ];
     }
 }

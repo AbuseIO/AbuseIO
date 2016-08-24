@@ -286,6 +286,17 @@ class Ticket extends Model
         return count($this->events);
     }
 
+    /**
+     * return the numbers of notes.
+     *
+     * @return int
+     */
+    public function getNoteCountAttribute()
+    {
+        return count($this->notes);
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | Custom Methods

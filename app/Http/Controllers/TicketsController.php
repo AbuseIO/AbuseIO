@@ -143,6 +143,7 @@ class TicketsController extends Controller
      *     }
      *   ],
      *   "orderby": "ip",
+     *   "desc": true,
      *   "limit": "5"
      * }.
      *
@@ -156,6 +157,7 @@ class TicketsController extends Controller
         $post_process = [];
         $mapped_columns = [
             'event_count',
+            'note_count',
         ];
 
         try {
@@ -176,7 +178,7 @@ class TicketsController extends Controller
                 // no operator, set it to 'equals'
                 $c->operator = isset($c->operator) ? $c->operator : '=';
 
-                // skip mapped columns, to process them later
+                // skip mapped columns, process them later
                 if (in_array($c->column, $mapped_columns)) {
                     array_push($post_process, $c);
                     continue;
@@ -193,27 +195,20 @@ class TicketsController extends Controller
             return $this->errorInternalError($e->getMessage());
         }
 
-        // post process the collection, filter on the the dynamic fields (currently only integer fields)
-        // todo: refactor/cleanup
+        // post process the collection, filter on the the dynamic fields
         foreach ($post_process as $c) {
             $result = $result->filter(function ($object) use ($c) {
                 $column = $c->column;
                 $value = $object->$column;
 
                 switch ($c->operator) {
-                    case '>':
-                        $success = $value > $c->value;
-                        break;
-                    case '<':
-                        $success = $value < $c->value;
-                        break;
-                    case '=':
-                        $success = $value == $c->value;
-                        break;
-                    default:
-                        // unknown / not implemented operator
-                        $success = true;
-                        break;
+                    case '>': $success = $value > $c->value; break;
+                    case '<': $success = $value < $c->value; break;
+                    case '=': $success = $value == $c->value; break;
+                    case '!=': $success = $value != $c->value; break;
+                    case '>=': $success = $value >= $c->value; break;
+                    case '<=': $success = $value <= $c->value; break;
+                    default: $success = true; break;  // not implemented or unknown operator
                 }
 
                 return $success;
@@ -221,10 +216,13 @@ class TicketsController extends Controller
         }
 
         // order the results
+        $sortmethod = 'sortBy';
+        if (isset($query->desc) && $query->desc) {
+            $sortmethod = 'sortByDesc';
+        }
         if (isset($query->orderby)) {
-            $result = $result->sortBy(function ($object) use ($query) {
+            $result = $result->$sortmethod(function ($object) use ($query) {
                 $column = $query->orderby;
-
                 return $object->$column;
             });
         }
