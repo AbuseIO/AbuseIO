@@ -35,7 +35,7 @@ class TicketsController extends Controller
         $this->apiInit($fractal, $request);
 
         // is the logged in account allowed to execute an action on the Ticket
-        $this->middleware('checkaccount:Ticket', ['except' => ['search', 'index', 'create', 'store', 'export']]);
+        $this->middleware('checkaccount:Ticket', ['except' => ['apiSearch', 'search', 'apiIndex', 'index', 'create', 'apiStore', 'store', 'export']]);
     }
 
     /**
@@ -153,6 +153,7 @@ class TicketsController extends Controller
      */
     public function apiSearch(Request $request)
     {
+        $api_account = $this->api_account;
         $body = $request->getContent();
         $post_process = [];
         $mapped_columns = [
@@ -186,6 +187,16 @@ class TicketsController extends Controller
 
                 $tickets = $tickets->where($c->column, $c->operator, $c->value);
             }
+        }
+
+        // only show the tickets from the authorized account (or all if it is the system account)
+        if (!$api_account->isSystemAccount()) {
+            $tickets = $tickets->where(
+                function ($query) use ($api_account) {
+                    $query->where('ip_contact_account_id', '=', $api_account->id)
+                        ->orWhere('domain_contact_account_id', '=', $api_account->id);
+                }
+            );
         }
 
         // execute the db query
@@ -261,7 +272,21 @@ class TicketsController extends Controller
      */
     public function apiIndex()
     {
-        $tickets = Ticket::all();
+        $api_account = $this->api_account;
+
+        $tickets = Ticket::query();
+
+        // only show the tickets from the authorized account (or all if it is the system account)
+        if (!$api_account->isSystemAccount()) {
+            $tickets = $tickets->where(
+                function ($query) use ($api_account) {
+                    $query->where('ip_contact_account_id', '=', $api_account->id)
+                        ->orWhere('domain_contact_account_id', '=', $api_account->id);
+                }
+            );
+        }
+
+        $tickets = $tickets->get();
 
         return $this->respondWithCollection($tickets, new TicketTransformer());
     }
