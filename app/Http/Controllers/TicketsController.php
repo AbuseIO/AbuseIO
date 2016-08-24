@@ -223,6 +223,7 @@ class TicketsController extends Controller
         if (isset($query->orderby)) {
             $result = $result->$sortmethod(function ($object) use ($query) {
                 $column = $query->orderby;
+
                 return $object->$column;
             });
         }

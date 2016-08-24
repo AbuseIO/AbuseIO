@@ -296,7 +296,6 @@ class Ticket extends Model
         return count($this->notes);
     }
 
-
     /*
     |--------------------------------------------------------------------------
     | Custom Methods
