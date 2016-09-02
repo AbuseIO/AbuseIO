@@ -318,8 +318,8 @@ class RunCommand extends Command
             $evidences = Evidence::where('created_at', '<=', date('Y-m-d H:i:s', $deleteOlderThen))->get();
 
             foreach ($evidences as $evidence) {
-                $path = storage_path().'/mailarchive/';
-                Storage::delete($path.$evidence->filename);
+                $path = storage_path().'/';
+                Storage::delete($path . $evidence->filename);
                 $evidence->delete();
             }
         }
