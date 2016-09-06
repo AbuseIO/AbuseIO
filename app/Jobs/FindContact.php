@@ -129,8 +129,9 @@ class FindContact extends Job
     /**
      * Return contact by Netblock.
      *
-     * @param string $ip IP address
-     * @param bool $local only local lookup
+     * @param string $ip    IP address
+     * @param bool   $local only local lookup
+     *
      * @return object
      */
     public static function byIP($ip, $local = false)
@@ -150,7 +151,8 @@ class FindContact extends Job
      * Return contact by Domain.
      *
      * @param string $domain domain name
-     * @param bool $local only local lookup
+     * @param bool   $local  only local lookup
+     *
      * @return object
      */
     public static function byDomain($domain, $local = false)
@@ -166,8 +168,9 @@ class FindContact extends Job
     /**
      * Return contact by Code.
      *
-     * @param string $id contact reference
-     * @param bool $local only local lookup
+     * @param string $id    contact reference
+     * @param bool   $local only local lookup
+     *
      * @return object
      */
     public static function byId($id, $local = false)
@@ -182,12 +185,13 @@ class FindContact extends Job
 
     /**
      * Helper method that retrieves the external or internal contact
-     * does most of the work ;)
+     * does most of the work ;).
      *
      * @param string $type ip, domain or id
      * @param string $term search the contact for this term
      * @param $local_query $query to retrieve the local contact
-     * @param boolean $local only return the local contact
+     * @param bool $local only return the local contact
+     *
      * @return object
      */
     public static function getContact($type, $term, $local_query, $local)
@@ -214,8 +218,7 @@ class FindContact extends Job
         if (((config('main.external.prefer_local') === false) ||
                 (config('main.external.prefer_local') === true &&
                     $contact->reference === 'UNDEF')) &&
-            (!empty($external_contact)))
-        {
+            (!empty($external_contact))) {
             $contact = $external_contact;
         }
 
