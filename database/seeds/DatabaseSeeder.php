@@ -11,17 +11,25 @@ class DatabaseSeeder extends Seeder
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
-        $this->call('ContactsTableSeeder');
-        $this->call('NetblocksTableSeeder');
-        $this->call('DomainsTableSeeder');
+        factory(AbuseIO\Models\Contact::class, 5)->create(
+            [
+                'auto_notify' => 0
+            ]
+        );
+        factory(AbuseIO\Models\Netblock::class, 10)->create();
+        factory(AbuseIO\Models\Domain::class, 10)->create();
+        factory(AbuseIO\Models\Account::class, 4)->create();
+        factory(AbuseIO\Models\User::class, 4)->create();
 
-//        $this->call('EvidencesTableSeeder');
-//        $this->call('EventsTableSeeder');
-//        $this->call('TicketsTableSeeder');
-//        $this->call('NotesTableSeeder');
+        factory(AbuseIO\Models\Role::class)->create(
+            [
+                'name'          => 'Abuse',
+                'description'   => 'Abusedesk User',
+            ]
+        );
 
-        $this->call('AccountsTableSeeder');
-        $this->call('UsersTableSeeder');
+        // Seed the permissions and roles AbuseIO uses.
+        $this->call('RolePermissionSeeder');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }

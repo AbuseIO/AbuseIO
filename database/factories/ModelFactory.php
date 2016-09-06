@@ -117,15 +117,26 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
 //});
 
 $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $faker) {
-    $first_ip = $faker->ipv4;
-    $last_ip = long2ip(ip2long($first_ip) + $faker->numberBetween(5, 100));
+
+    // Randomize ipv4 or ipv6 generation
+    if ($faker->boolean()) {
+        $first_ip = $faker->ipv4;
+        $last_ip = long2ip(ip2long($first_ip) + $faker->numberBetween(5, 100));
+    } else {
+        $first_ip = $faker->ipv6;
+        $last_ip_int = inetPtoi($first_ip);
+        $last_ip_int = bcadd($last_ip_int, $faker->numberBetween(1, 68719476736));
+        $last_ip = inetItop($last_ip_int);
+    }
 
     return [
-        'contact_id'  => \AbuseIO\Models\Contact::all()->random()->id,
-        'first_ip'    => $first_ip,
-        'last_ip'     => $last_ip,
-        'description' => $faker->sentence($faker->numberBetween(3, 5)),
-        'enabled'     => $faker->boolean(),
+        'contact_id'    => \AbuseIO\Models\Contact::all()->random()->id,
+        'first_ip'      => $first_ip,
+        'last_ip'       => $last_ip,
+        'first_ip_int'  => inetPtoi($first_ip),
+        'last_ip_int'   => inetPtoi($last_ip),
+        'description'   => $faker->sentence($faker->numberBetween(3, 5)),
+        'enabled'       => $faker->boolean(),
     ];
 });
 
@@ -199,16 +210,14 @@ $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker)
 });
 
 $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
-    $password = $faker->password(6);
-
     return [
         'first_name' => $faker->firstName,
         'last_name'  => $faker->lastName,
         'email'      => $faker->email,
-        'password'   => $password,
+        'password'   => $faker->password(6),
         'account_id' => 1, //factory(\AbuseIO\Models\Account::class)->create(['disabled' => false]),
         'locale'     => 'en',
-        'disabled'   => true,
+        'disabled'   => $faker->boolean(),
     ];
 });
 
