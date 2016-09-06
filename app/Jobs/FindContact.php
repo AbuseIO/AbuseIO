@@ -130,117 +130,95 @@ class FindContact extends Job
      * Return contact by Netblock.
      *
      * @param string $ip IP address
-     *
+     * @param bool $local only local lookup
      * @return object
      */
-    public static function byIP($ip)
+    public static function byIP($ip, $local = false)
     {
-        // If local lookups are not preferred, then do the remote lookup first
-        if (config('main.external.prefer_local') === false) {
-            $findContact = self::getExternalContact('ip', $ip);
-            if (!empty($findContact)) {
-                return $findContact;
-            }
-        }
-
-        // Do a local lookup
-        $result = Netblock::
-            where('first_ip_int', '<=', inetPtoi($ip))
-            ->where('last_ip_int', '>=', inetPtoi($ip))
-            ->where('enabled', '=', true)
-            ->orderBy('first_ip_int', 'desc')
-            ->orderBy('last_ip_int', 'asc')
-            ->take(1)
-            ->get();
-
-        if (isset($result[0])) {
-            return $result[0]->contact;
-        }
-
-        // Do a remote lookup, if local lookups are preferred. Else skip this as this was already done.
-        if (config('main.external.prefer_local') === true) {
-            $findContact = self::getExternalContact('ip', $ip);
-            if (!empty($findContact)) {
-                return $findContact;
-            }
-        }
-
-        return self::undefined();
+        return self::getContact(
+            'ip', $ip,
+            Netblock::where('first_ip_int', '<=', inetPtoi($ip))
+                ->where('last_ip_int', '>=', inetPtoi($ip))
+                ->where('enabled', '=', true)
+                ->orderBy('first_ip_int', 'desc')
+                ->orderBy('last_ip_int', 'asc')
+                ->take(1),
+            $local);
     }
 
     /**
      * Return contact by Domain.
      *
      * @param string $domain domain name
-     *
+     * @param bool $local only local lookup
      * @return object
      */
-    public static function byDomain($domain)
+    public static function byDomain($domain, $local = false)
     {
-        // If local lookups are not preferred, then do the remote lookup first
-        if (config('main.external.prefer_local') === false) {
-            $findContact = self::getExternalContact('domain', $domain);
-            if (!empty($findContact)) {
-                return $findContact;
-            }
-        }
-
-        // Do a local lookup
-        $result = Domain::where('name', '=', $domain)
-                    ->where('enabled', '=', true)
-                    ->take(1)
-                    ->get();
-
-        if (isset($result[0])) {
-            return $result[0]->contact;
-        }
-
-        // Do a remote lookup, if local lookups are preferred. Else skip this as this was already done.
-        if (config('main.external.prefer_local') === true) {
-            $findContact = self::getExternalContact('domain', $domain);
-            if (!empty($findContact)) {
-                return $findContact;
-            }
-        }
-
-        return self::undefined();
+        return self::getContact(
+            'domain', $domain,
+            Domain::where('name', '=', $domain)
+                ->where('enabled', '=', true)
+                ->take(1),
+            $local);
     }
 
     /**
      * Return contact by Code.
      *
      * @param string $id contact reference
-     *
+     * @param bool $local only local lookup
      * @return object
      */
-    public static function byId($id)
+    public static function byId($id, $local = false)
     {
-        // If local lookups are not preferred, then do the remote lookup first
-        if (config('main.external.prefer_local') === false) {
-            $findContact = self::getExternalContact('id', $id);
-            if (!empty($findContact)) {
-                return $findContact;
-            }
-        }
+        return self::getContact(
+            'id', $id,
+            Contact::where('reference', '=', $id)
+                ->where('enabled', '=', true)
+                ->take(1),
+            $local);
+    }
 
-        // Do a local lookup
-        $result = Contact::where('reference', '=', $id)
-                    ->where('enabled', '=', true)
-                    ->take(1)
-                    ->get();
+    /**
+     * Helper method that retrieves the external or internal contact
+     * does most of the work ;)
+     *
+     * @param string $type ip, domain or id
+     * @param string $term search the contact for this term
+     * @param $local_query $query to retrieve the local contact
+     * @param boolean $local only return the local contact
+     * @return object
+     */
+    public static function getContact($type, $term, $local_query, $local)
+    {
+        $contact = self::undefined();
+
+        // internal lookup
+        $result = $local_query->get();
 
         if (isset($result[0])) {
-            return $result[0];
+            $contact = $result[0]->contact;
         }
 
-        // Do a remote lookup, if local lookups are preferred. Else skip this as this was already done.
-        if (config('main.external.prefer_local') === true) {
-            $findContact = self::getExternalContact('id', $id);
-            if (!empty($findContact)) {
-                return $findContact;
-            }
+        if ($local) {
+            // early return if the local flag is called, prevent loops
+            return $contact;
         }
 
-        return self::undefined();
+        // external lookup
+        $external_contact = self::getExternalContact($type, $term);
+
+        // if external lookups are preferred or if the local lookup fails
+        // and the external lookup succeeded return the external lookup
+        if (((config('main.external.prefer_local') === false) ||
+                (config('main.external.prefer_local') === true &&
+                    $contact->reference === 'UNDEF')) &&
+            (!empty($external_contact)))
+        {
+            $contact = $external_contact;
+        }
+
+        return $contact;
     }
 }
