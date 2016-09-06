@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
 
         factory(AbuseIO\Models\Contact::class, 5)->create(
             [
-                'auto_notify' => 0
+                'auto_notify' => 0,
             ]
         );
         factory(AbuseIO\Models\Netblock::class, 10)->create();
