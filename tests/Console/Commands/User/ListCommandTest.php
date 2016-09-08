@@ -13,7 +13,6 @@ class ListCommandTest extends TestCase
 {
     public function testUserListCommand()
     {
-
         $user = User::all()->random();
 
         $exitCode = Artisan::call(
@@ -30,7 +29,7 @@ class ListCommandTest extends TestCase
     public function testUserListCommandWithValidFilter()
     {
         $user = User::all()->random();
-        $other_user = User::where('id','!=', $user->id)->get()->random();
+        $other_user = User::where('id', '!=', $user->id)->get()->random();
 
         $exitCode = Artisan::call(
             'user:list',
