@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         factory(AbuseIO\Models\Domain::class, 10)->create();
         factory(AbuseIO\Models\Account::class, 4)->create();
         factory(AbuseIO\Models\User::class, 4)->create();
+        factory(AbuseIO\Models\Ticket::class, 10)->create();
 
         factory(AbuseIO\Models\Role::class)->create(
             [

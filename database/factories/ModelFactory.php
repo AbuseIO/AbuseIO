@@ -33,15 +33,8 @@ $factory->define(AbuseIO\Models\Brand::class, function (Faker\Generator $faker) 
 });
 
 $factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker) {
-    global $contact_reference_counter;
-    if (!$contact_reference_counter) {
-        $contact_reference_counter = 1;
-    } else {
-        $contact_reference_counter++;
-    }
-
     return [
-        'reference'   => sprintf('reference_%d', $contact_reference_counter),
+        'reference'   => sprintf('reference_%s',uniqid()),
         'name'        => $faker->name,
         'email'       => $faker->email,
         'api_host'    => $faker->url, //'api_host',

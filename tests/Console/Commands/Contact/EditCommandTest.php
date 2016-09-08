@@ -34,41 +34,45 @@ class EditCommandTest extends TestCase
 
     public function testName()
     {
-        $this->assertEquals('John Doe', Contact::find(1)->name);
+        $contact = Contact::all()->random();
+        $oldname = $contact->name;
 
         $exitCode = Artisan::call(
             'contact:edit',
             [
-                'id'     => '1',
+                'id'     => $contact->id,
                 '--name' => 'New name',
             ]
         );
         $this->assertEquals($exitCode, 0);
         $this->assertContains('The contact has been updated', Artisan::output());
 
-        $contact = Contact::find(1);
+        // update contact
+        $contact = Contact::find($contact->id);
         $this->assertEquals('New name', $contact->name);
-        $contact->name = 'John Doe';
+        $contact->name = $oldname;
         $contact->save();
     }
 
     public function testCompanyName()
     {
-        $this->assertEquals('JOHND', Contact::find(1)->reference);
+        $contact = Contact::all()->random();
+        $oldref = $contact->reference;
 
         $exitCode = Artisan::call(
             'contact:edit',
             [
-                'id'          => '1',
+                'id'          => $contact->id,
                 '--reference' => 'New reference',
             ]
         );
         $this->assertEquals($exitCode, 0);
         $this->assertContains('The contact has been updated', Artisan::output());
 
-        $contact = Contact::find(1);
+        // update contact
+        $contact = Contact::find($contact->id);
         $this->assertEquals('New reference', $contact->reference);
-        $contact->reference = 'JOHND';
+        $contact->reference = $oldref;
         $contact->save();
     }
 }
