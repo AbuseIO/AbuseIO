@@ -4,8 +4,8 @@ namespace tests\Api\Brand;
 
 use AbuseIO\Models\Brand;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use tests\TestCase;
 use tests\Api\UpdateTestHelper;
+use tests\TestCase;
 
 class UpdateTest extends TestCase
 {
