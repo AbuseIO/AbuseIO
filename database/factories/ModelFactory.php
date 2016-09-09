@@ -46,7 +46,7 @@ $factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker
 
 $factory->define(AbuseIO\Models\Domain::class, function (Faker\Generator $faker) {
     return [
-        'name'       => uniqid() . $faker->domainName,
+        'name'       => uniqid().$faker->domainName,
         'contact_id' => AbuseIO\Models\Contact::all()->random()->id,
         'enabled'    => $faker->boolean(),
     ];
