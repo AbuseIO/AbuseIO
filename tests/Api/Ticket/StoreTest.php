@@ -2,9 +2,7 @@
 
 namespace tests\Api\Ticket;
 
-use AbuseIO\Models\Account;
 use AbuseIO\Models\Ticket;
-use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use tests\Api\StoreTestHelper;
 use tests\TestCase;
