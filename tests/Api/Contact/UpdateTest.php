@@ -2,21 +2,21 @@
 
 namespace tests\Api\Contact;
 
-use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
-use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use tests\Api\UpdateTestHelper;
 use tests\TestCase;
 
 class UpdateTest extends TestCase
 {
     use DatabaseTransactions;
+    use UpdateTestHelper;
 
     const URL = '/api/v1/contacts/';
 
     public function testEmptyUpdate()
     {
-        $response = $this->call([]);
+        $response = $this->executeCall([]);
 
         $this->assertContains(
             'ERR_WRONGARGS',
@@ -31,7 +31,7 @@ class UpdateTest extends TestCase
         $contact1 = factory(Contact::class)->create();
         $contact2 = factory(Contact::class)->make()->toArray();
 
-        $response = $this->call($contact2, $contact1->id);
+        $response = $this->executeCall($contact2, $contact1->id);
 
         $this->assertTrue(
             $response->isSuccessful()
@@ -50,7 +50,7 @@ class UpdateTest extends TestCase
 
         unset($contact2['name']);
 
-        $response = $this->call($contact2, $contact1->id);
+        $response = $this->executeCall($contact2, $contact1->id);
 
         $this->assertFalse(
             $response->isSuccessful()
@@ -60,24 +60,5 @@ class UpdateTest extends TestCase
             'The name field is required.',
             $response->getContent()
         );
-    }
-
-    public function call($parameters, $id = 1)
-    {
-        $user = User::find(1);
-        $this->actingAs($user);
-
-        $server = $this->transformHeadersToServerVars(
-            [
-                'Accept'      => 'application/json',
-                'X-API-TOKEN' => Account::getSystemAccount()->token,
-            ]);
-
-        return parent::call('PUT', $this->getUri($id), $parameters, [], [], $server);
-    }
-
-    private function getUri($id)
-    {
-        return self::URL.$id;
     }
 }

@@ -3,16 +3,18 @@
 namespace tests\Api\Account;
 
 use AbuseIO\Models\Account;
-use AbuseIO\Models\User;
+use tests\Api\StoreTestHelper;
 use tests\TestCase;
 
 class StoreTest extends TestCase
 {
+    use StoreTestHelper;
+
     const URL = '/api/v1/accounts';
 
     public function testValidationErrors()
     {
-        $response = $this->call([]);
+        $response = $this->executeCall([]);
 
         $this->assertContains(
             'The name field is required.',
@@ -24,7 +26,7 @@ class StoreTest extends TestCase
     {
         $account = factory(Account::class)->make()->toArray();
 
-        $response = $this->call($account);
+        $response = $this->executeCall($account);
 
         $this->assertTrue(
             $response->isSuccessful()
@@ -32,21 +34,6 @@ class StoreTest extends TestCase
 
         $obj = json_decode($response->getContent());
 
-        //dd($obj);
         $this->assertTrue($account['name'] == $obj->data->name);
-    }
-
-    public function call($parameters)
-    {
-        $user = User::find(1);
-        $this->actingAs($user);
-
-        $server = $this->transformHeadersToServerVars(
-            [
-                'Accept'      => 'application/json',
-                'X-API-TOKEN' => Account::getSystemAccount()->token,
-            ]);
-
-        return parent::call('POST', self::URL, $parameters, [], [], $server);
     }
 }

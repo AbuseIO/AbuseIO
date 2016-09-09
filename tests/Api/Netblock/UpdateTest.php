@@ -2,21 +2,21 @@
 
 namespace tests\Api\Netblock;
 
-use AbuseIO\Models\Account;
 use AbuseIO\Models\Netblock;
-use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use tests\Api\UpdateTestHelper;
 use tests\TestCase;
 
 class UpdateTest extends TestCase
 {
     use DatabaseTransactions;
+    use UpdateTestHelper;
 
     const URL = '/api/v1/netblocks/';
 
     public function testEmptyUpdate()
     {
-        $response = $this->call([]);
+        $response = $this->executeCall([]);
 
         $this->assertContains(
             'ERR_WRONGARGS',
@@ -31,7 +31,7 @@ class UpdateTest extends TestCase
         $netblock1 = factory(Netblock::class)->create();
         $netblock2 = factory(Netblock::class)->make()->toArray();
 
-        $response = $this->call($netblock2, $netblock1->id);
+        $response = $this->executeCall($netblock2, $netblock1->id);
 
         $this->assertTrue(
             $response->isSuccessful()
@@ -53,7 +53,7 @@ class UpdateTest extends TestCase
 
         unset($netblock2['description']);
 
-        $response = $this->call($netblock2, $netblock1->id);
+        $response = $this->executeCall($netblock2, $netblock1->id);
 
         $this->assertFalse(
             $response->isSuccessful()
@@ -63,25 +63,5 @@ class UpdateTest extends TestCase
             'The description field is required.',
             $response->getContent()
         );
-    }
-
-    public function call($parameters, $id = 1)
-    {
-        $user = User::find(1);
-        $this->actingAs($user);
-
-        $server = $this->transformHeadersToServerVars(
-            [
-                'Accept'      => 'application/json',
-                'X-API-TOKEN' => Account::getSystemAccount()->token,
-            ]
-        );
-
-        return parent::call('PUT', $this->getUri($id), $parameters, [], [], $server);
-    }
-
-    private function getUri($id)
-    {
-        return self::URL.$id;
     }
 }

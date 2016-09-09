@@ -285,7 +285,7 @@ class AccountsController extends Controller
     {
         // may we edit this account
         if (!$account->mayEdit($this->auth_user)) {
-            $this->errorUnauthorized();
+            return $this->errorUnauthorized();
         }
 
         $account->update($accountForm->all());

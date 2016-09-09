@@ -6,17 +6,19 @@ use AbuseIO\Models\Account;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use tests\Api\StoreTestHelper;
 use tests\TestCase;
 
 class StoreTest extends TestCase
 {
+    use StoreTestHelper;
     use DatabaseTransactions;
 
     const URL = '/api/v1/tickets';
 
     public function testValidationErrors()
     {
-        $response = $this->call([]);
+        $response = $this->executeCall([]);
 
         $this->assertContains(
             'The ip field is required.',
@@ -28,7 +30,7 @@ class StoreTest extends TestCase
     {
         $ticket = factory(Ticket::class)->make()->toArray();
 
-        $response = $this->call($ticket);
+        $response = $this->executeCall($ticket);
 
         //$this->assertTrue(
         //    $response->isSuccessful()
@@ -45,19 +47,5 @@ class StoreTest extends TestCase
                 $obj
             );
         }
-    }
-
-    public function call($parameters)
-    {
-        $user = User::find(1);
-        $this->actingAs($user);
-
-        $server = $this->transformHeadersToServerVars(
-            [
-                'Accept'      => 'application/json',
-                'X-API-TOKEN' => Account::getSystemAccount()->token,
-            ]);
-
-        return parent::call('POST', self::URL, $parameters, [], [], $server);
     }
 }

@@ -2,18 +2,19 @@
 
 namespace tests\Api\Brand;
 
-use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
-use AbuseIO\Models\User;
+use tests\Api\StoreTestHelper;
 use tests\TestCase;
 
 class StoreTest extends TestCase
 {
+    use StoreTestHelper;
+
     const URL = '/api/v1/brands';
 
     public function testValidationErrors()
     {
-        $response = $this->call([]);
+        $response = $this->executeCall([]);
 
         $this->assertContains(
             'The name field is required.',
@@ -28,7 +29,7 @@ class StoreTest extends TestCase
         unset($brand['logo']);
         unset($brand['creator_id']);
 
-//        $response = $this->call($brand);
+//        $response = $this->executeCall($brand);
 
 //        dd($response->getContent());
 //
@@ -39,19 +40,5 @@ class StoreTest extends TestCase
 //        $obj = json_decode($response->getContent());
 //
 //        dd($obj->data);
-    }
-
-    public function call($parameters)
-    {
-        $user = User::find(1);
-        $this->actingAs($user);
-
-        $server = $this->transformHeadersToServerVars(
-            [
-                'Accept'      => 'application/json',
-                'X-API-TOKEN' => Account::getSystemAccount()->token,
-            ]);
-
-        return parent::call('POST', self::URL, $parameters, [], [], $server);
     }
 }
