@@ -4,7 +4,7 @@ namespace AbuseIO\Console\Commands\Netblock;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
 use AbuseIO\Models\Netblock;
-use AbuseIO\Models\User;
+use AbuseIO\Models\Contact;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
@@ -48,7 +48,7 @@ class CreateCommand extends AbstractCreateCommand
         $netblock = new Netblock();
 
         $netblock->contact()->associate(
-            User::find($this->argument('contact'))
+            Contact::find($this->argument('contact'))
         );
         $netblock->first_ip = $this->argument('first_ip');
         $netblock->last_ip = $this->argument('last_ip');
