@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
 
         // give the ticket some events
         \AbuseIO\Models\Ticket::all()->each(function ($ticket) {
-            $events = random_int(1,24);
+            $events = random_int(1, 24);
             factory(AbuseIO\Models\Event::class, $events)->create(['ticket_id' => $ticket->id]);
         });
 
