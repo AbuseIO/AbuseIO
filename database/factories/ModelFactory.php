@@ -53,10 +53,15 @@ $factory->define(AbuseIO\Models\Domain::class, function (Faker\Generator $faker)
 });
 $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) {
     $evidence = factory(\AbuseIO\Models\Evidence::class)->create();
-    $ticket = factory(\AbuseIO\Models\Ticket::class)->create();
+
+    // get a random ticket
+    $ticket = \AbuseIO\Models\Ticket::all()->random();
+
+    // if no ticket found, we create our own
+    $ticket = $ticket ?: factory(\AbuseIO\Models\Ticket::class)->create();
 
     return [
-        'ticket_id'                 => $ticket->id, //\AbuseIO\Models\Ticket::all()->random()->id,
+        'ticket_id'                 => $ticket->id,
         'evidence_id'               => $evidence->id,
         'source'                    => $faker->name,
         'timestamp'                 => time(),
@@ -70,13 +75,6 @@ $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) 
 });
 
 $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $faker) {
-    global $runnerCount;
-
-    if ($runnerCount > 0) {
-        $runnerCount++;
-    } else {
-        $runnerCount = 1;
-    }
     /*
      TODO: this filename is one based on the original
      from the seeding command should be replace with something from
@@ -86,7 +84,7 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
     $today = date('Ymd');
 
     return [
-        'filename' => sprintf('mailarchive/%s/%d_messageid', $today, $runnerCount),
+        'filename' => sprintf('mailarchive/%s/%s_messageid', $today, uniqid()),
         'sender'   => $faker->name,
         'subject'  => $faker->sentence(),
     ];
