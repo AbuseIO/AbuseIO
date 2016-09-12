@@ -3,8 +3,8 @@
 namespace AbuseIO\Console\Commands\Netblock;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
-use AbuseIO\Models\Netblock;
 use AbuseIO\Models\Contact;
+use AbuseIO\Models\Netblock;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
