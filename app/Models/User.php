@@ -360,7 +360,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param $name
      * @param $value
      */
-    public function setOption($name, $value) {
+    public function setOption($name, $value)
+    {
         // can't access the array directly so retrieve it,
         // edit it and write it back.
 
@@ -375,9 +376,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * Retrieve an option from the user.
      *
      * @param $name
+     *
      * @return null
      */
-    public function getOption($name) {
+    public function getOption($name)
+    {
         $result = null;
 
         $options = $this->options;
