@@ -59,13 +59,11 @@ class TicketsController extends Controller
                 'ticket_classification_filter' => 4,
                 'ticket_status_filter' => 7,
                 ] as $filter => $column
-            )
-            {
+            ) {
                 // save the type filter option in the user
                 if (array_key_exists($column, $columns) &&
                     array_key_exists('search', $columns[$column]) &&
-                    array_key_exists('value', $columns[$column]['search']))
-                {
+                    array_key_exists('value', $columns[$column]['search'])) {
                     $auth_user->setOption($filter, $columns[$column]['search']['value']);
                 }
             }
@@ -74,7 +72,7 @@ class TicketsController extends Controller
         // check to see if an order is given and save it in the user
         if (is_array($order)) {
             if (array_key_exists(0, $order)) {
-                $auth_user->setOption("ticket_sort_order", $order[0]);
+                $auth_user->setOption('ticket_sort_order', $order[0]);
             }
         }
 
