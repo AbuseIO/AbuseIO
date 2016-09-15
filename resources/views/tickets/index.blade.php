@@ -4,6 +4,7 @@
 <script>
     var searchroute = '{!! route('admin.tickets.search') .'/query/' !!}';
     var locale = '{{ asset("/i18n/$auth_user->locale.json") }}';
+    var user_options = jQuery.parseJSON('{!! $user_options !!}');
 </script>
 <script src="{{ asset('/js/tickets.index.js') }}"></script>
 @stop

@@ -50,6 +50,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'account_id',
         'locale',
         'disabled',
+        'options',
     ];
 
     /**
@@ -60,6 +61,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = [
         'password',
         'remember_token',
+        'options',
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'options' => 'array',
     ];
 
     /*
@@ -341,5 +352,39 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function mayEnable(User $auth_user)
     {
         return $this->mayDisable($auth_user);
+    }
+
+    /**
+     * Save an option in the user.
+     *
+     * @param $name
+     * @param $value
+     */
+    public function setOption($name, $value) {
+        // can't access the array directly so retrieve it,
+        // edit it and write it back.
+
+        $options = $this->options;
+        $options[$name] = $value;
+        $this->options = $options;
+
+        $this->save();
+    }
+
+    /**
+     * Retrieve an option from the user.
+     *
+     * @param $name
+     * @return null
+     */
+    public function getOption($name) {
+        $result = null;
+
+        $options = $this->options;
+        if (array_key_exists($name, $options)) {
+            $result = $options[$name];
+        }
+
+        return $result;
     }
 }

@@ -43,9 +43,40 @@ class TicketsController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function search()
+    public function search(Request $request)
     {
         $auth_account = $this->auth_user->account;
+        $auth_user = $this->auth_user;
+
+        // retrieve the filters and column order
+        $columns = $request->input('columns');
+        $order = $request->input('order');
+
+        if (is_array($columns)) {
+            foreach (
+                [
+                'ticket_type_filter' => 3,
+                'ticket_classification_filter' => 4,
+                'ticket_status_filter' => 7,
+                ] as $filter => $column
+            )
+            {
+                // save the type filter option in the user
+                if (array_key_exists($column, $columns) &&
+                    array_key_exists('search', $columns[$column]) &&
+                    array_key_exists('value', $columns[$column]['search']))
+                {
+                    $auth_user->setOption($filter, $columns[$column]['search']['value']);
+                }
+            }
+        }
+
+        // check to see if an order is given and save it in the user
+        if (is_array($order)) {
+            if (array_key_exists(0, $order)) {
+                $auth_user->setOption("ticket_sort_order", $order[0]);
+            }
+        }
 
         $tickets = Ticket::select(
             'tickets.id',
@@ -256,13 +287,17 @@ class TicketsController extends Controller
     {
         // Get translations for all statuses
         $statuses = Event::getStatuses();
+        $user = $this->auth_user;
+
+        $json_options = json_encode($user->options ? $user->options : []);
 
         return view('tickets.index')
             ->with('types', Event::getTypes())
             ->with('classes', Event::getClassifications())
             ->with('statuses', $statuses['abusedesk'])
             ->with('contact_statuses', $statuses['contact'])
-            ->with('auth_user', $this->auth_user);
+            ->with('auth_user', $this->auth_user)
+            ->with('user_options', $json_options);
     }
 
     /**
