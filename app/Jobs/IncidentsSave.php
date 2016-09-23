@@ -104,7 +104,8 @@ class IncidentsSave extends Job implements SelfHandling
              * Search to see if there is an existing ticket for this incident classification
              */
             $ticket = Ticket::where('ip', '=', $incident->ip)
-                ->where('domain', '=', $incident->domain, 'AND')
+                ->where('domain', '=',
+                    empty($incident->domain) ? '' : $incident->domain, 'AND')
                 ->where('class_id', '=', $incident->class, 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 'CLOSED', 'AND')
