@@ -323,7 +323,7 @@ class IncidentsSave extends Job implements SelfHandling
                  * We should not never have more then two open tickets for the same case. If this happens there is a
                  * fault in the aggregator which must be resolved first. Until then we will permfail here.
                  */
-                $this->error('Unable to link to ticket, multiple open tickets found for same incident type');
+                return $this->error('Unable to link to ticket, multiple open tickets found for same incident type');
             }
         }
 
