@@ -319,7 +319,7 @@ class RunCommand extends Command
 
             foreach ($evidences as $evidence) {
                 $path = storage_path().'/';
-                Storage::delete($path . $evidence->filename);
+                Storage::delete($path.$evidence->filename);
                 $evidence->delete();
             }
         }
