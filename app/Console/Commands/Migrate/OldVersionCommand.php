@@ -684,7 +684,7 @@ class OldVersionCommand extends Command
             );
             if ($validator->fails()) {
                 $this->error(
-                    'DevError: Internal validation failed when saving the Event object '.
+                    'DevError: Internal validation failed when saving the reply Event object '.
                     implode(' ', $validator->messages()->all())
                 );
                 $this->exception();
