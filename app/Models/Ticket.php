@@ -77,6 +77,8 @@ class Ticket extends Model
         'contact_status_id',
         'last_notify_count',
         'last_notify_timestamp',
+        'ash_token_ip',
+        'ash_token_domain'
     ];
 
     /*

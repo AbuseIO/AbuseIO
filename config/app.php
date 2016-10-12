@@ -191,6 +191,7 @@ return [
          * Application Service Providers...
          */
         'AbuseIO\Providers\AppServiceProvider',
+        'AbuseIO\Providers\AshServiceProvider',
         'AbuseIO\Providers\BusServiceProvider',
         'AbuseIO\Providers\ConfigServiceProvider',
         'AbuseIO\Providers\RouteServiceProvider',

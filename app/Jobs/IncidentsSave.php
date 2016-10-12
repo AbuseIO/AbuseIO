@@ -249,7 +249,7 @@ class IncidentsSave extends Job implements SelfHandling
                     }
 
                     /*
-                     * Walk thru the escalation upgrade path, and upgrade if required
+                     * Walk through the escalation upgrade path, and upgrade if required
                      */
                     //echo config("escalations.{$ticket->class_id}.abuse.enabled");
                     if (is_array(config("escalations.{$ticket->class_id}"))) {

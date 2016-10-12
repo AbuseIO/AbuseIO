@@ -109,9 +109,9 @@
             <dt>{{ trans('tickets.ashlink') }} {{ trans('misc.ip')}}</dt>
             <dd>
                 {!! link_to(
-                    "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference),
+                    "/ash/collect/$ticket->id/" . $ticket->ash_token_ip,
                     'http://' . Request::server('SERVER_NAME') . "/ash/collect/$ticket->id/"
-                     . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference)
+                     . $ticket->ash_token_ip
                 ) !!}
             </dd>
             @endif
@@ -120,9 +120,9 @@
             <dt>{{ trans('tickets.ashlink') }} {{ trans('misc.domain')}}</dt>
             <dd>
                 {!! link_to(
-                    "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference),
+                    "/ash/collect/$ticket->id/" . $ticket->ash_token_domain,
                     'http://' . Request::server('SERVER_NAME') . "/ash/collect/$ticket->id/"
-                     . md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference)
+                     . $ticket->ash_token_domain
                 ) !!}
             </dd>
             @endif
