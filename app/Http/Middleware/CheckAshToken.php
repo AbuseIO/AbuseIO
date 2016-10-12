@@ -36,9 +36,11 @@ class CheckAshToken
 
             if ($token == $validTokenIP) {
                 $request->merge(['AshAuthorisedBy' => 'TokenIP']);
+
                 return $next($request);
             } elseif ($token == $validTokenDomain) {
                 $request->merge(['AshAuthorisedBy' => 'TokenDomain']);
+
                 return $next($request);
             }
         }
