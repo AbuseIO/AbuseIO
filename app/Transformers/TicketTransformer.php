@@ -43,7 +43,7 @@ class TicketTransformer extends TransformerAbstract
             'event_count'                           => (int) $ticket->event_count,
             'note_count'                            => (int) $ticket->note_count,
             'ash_token_ip'                          => (string) $ticket->ash_token_ip,
-            'ash_token_domain'                      => (string) $ticket->ash_token_domain
+            'ash_token_domain'                      => (string) $ticket->ash_token_domain,
         ];
     }
 }
