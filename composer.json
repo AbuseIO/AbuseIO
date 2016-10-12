@@ -59,9 +59,6 @@
 		"abuseio/parser-webiron": "1.3.*",
 		"abuseio/parser-fbl": "1.3.*",
 
-		"abuseio/findcontact-ciot": "dev-master",
-		"abuseio/data-ciot": "dev-master",
-
 		"abuseio/collector-common": "1.1.*",
 		"abuseio/collector-rbl": "1.3.*",
 		"abuseio/collector-snds": "1.4.*",
@@ -69,7 +66,7 @@
 		"abuseio/notification-common": "1.1.*",
 		"abuseio/notification-mail": "1.3.*",
 
-		"zendframework/zend-xmlrpc": "2.5.*",
+		"zendframework/zend-xmlrpc": "^2.5",
 		"jeremykendall/php-domain-parser": "^3.0",
 		"zendframework/zend-json": "^3.0"
 
@@ -79,16 +76,6 @@
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1"
 	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "ssh://git@stash01.wrt-nm.internl.net:7999/ab/findcontact-ciot.git"
-		},
-		{
-			"type": "vcs",
-			"url": "ssh://git@stash01.wrt-nm.internl.net:7999/ab/data-ciot.git"
-		}
-	],
 	"autoload": {
 		"classmap": [
 			"database",
