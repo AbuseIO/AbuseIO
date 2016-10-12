@@ -19,13 +19,12 @@ class UpdateTicketsTable extends Migration
         });
 
         $this->_updateTokens();
-
     }
 
     /**
      * update all existing tickets with the ashtokens
      * These are automatically added when the ticket is
-     * saved
+     * saved.
      */
     private function _updateTokens()
     {
