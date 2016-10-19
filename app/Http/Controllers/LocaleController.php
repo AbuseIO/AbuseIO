@@ -27,7 +27,7 @@ class LocaleController extends Controller
         $validator = Validator::make(compact($locale), $rules);
 
         // update the locale setting in the user
-        if(!empty($this->auth_user)) {
+        if (!empty($this->auth_user)) {
             $this->auth_user->locale = $locale;
             $this->auth_user->save();
         }
