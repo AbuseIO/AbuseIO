@@ -3,7 +3,6 @@
 namespace AbuseIO\Transformers;
 
 use AbuseIO\Models\Ticket;
-use AbuseIO\Models\Event;
 use League\Fractal\TransformerAbstract;
 
 class TicketTransformer extends TransformerAbstract
@@ -22,11 +21,11 @@ class TicketTransformer extends TransformerAbstract
         $notes = [];
 
         foreach ($ticket->events as $event) {
-            $events[] = (new EventTransformer)->transform($event);
+            $events[] = (new EventTransformer())->transform($event);
         }
 
         foreach ($ticket->notes as $note) {
-            $notes[] = (new NoteTransformer)->transform($note);
+            $notes[] = (new NoteTransformer())->transform($note);
         }
 
 
