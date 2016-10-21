@@ -3,6 +3,7 @@
 namespace AbuseIO\Transformers;
 
 use AbuseIO\Models\Ticket;
+use AbuseIO\Models\Event;
 use League\Fractal\TransformerAbstract;
 
 class TicketTransformer extends TransformerAbstract
@@ -16,6 +17,19 @@ class TicketTransformer extends TransformerAbstract
      */
     public function transform(Ticket $ticket)
     {
+        // transform the events and notes
+        $events = [];
+        $notes = [];
+
+        foreach ($ticket->events as $event) {
+            $events[] = (new EventTransformer)->transform($event);
+        }
+
+        foreach ($ticket->notes as $note) {
+            $notes[] = (new NoteTransformer)->transform($note);
+        }
+
+
         return [
             'id'                                    => (int) $ticket->id,
             'ip'                                    => (string) $ticket->ip,
@@ -44,6 +58,8 @@ class TicketTransformer extends TransformerAbstract
             'note_count'                            => (int) $ticket->note_count,
             'ash_token_ip'                          => (string) $ticket->ash_token_ip,
             'ash_token_domain'                      => (string) $ticket->ash_token_domain,
+            'events'                                => $events,
+            'notes'                                 => $notes,
         ];
     }
 }
