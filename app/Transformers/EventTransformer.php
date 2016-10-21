@@ -23,7 +23,7 @@ class EventTransformer extends TransformerAbstract
             'source'      => (string) $event->source,
             'timestamp'   => (int) $event->timestamp,
             'information' => (string) $event->information,
-            'evidence'    => (new EvidenceTransformer)->transform($event->evidence),
+            'evidence'    => (new EvidenceTransformer())->transform($event->evidence),
         ];
     }
 }
