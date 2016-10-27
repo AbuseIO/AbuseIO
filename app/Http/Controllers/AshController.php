@@ -6,6 +6,7 @@ use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use AbuseIO\Models\Note;
 use AbuseIO\Models\Ticket;
+use App;
 use Input;
 use Request;
 
@@ -48,6 +49,7 @@ class AshController extends Controller
             'allowedChanges' => $this->allowedStatusChanges($ticket),
             'token'          => $token,
             'message'        => '',
+            'language'       => App::getLocale(),
         ];
 
         $view = view('ash', $replacements);
@@ -139,6 +141,7 @@ class AshController extends Controller
             'allowedChanges' => $this->allowedStatusChanges($ticket),
             'token'          => $token,
             'message'        => $message,
+            'language'       => App::getLocale(),
         ];
 
         $view = view('ash', $replacements);
