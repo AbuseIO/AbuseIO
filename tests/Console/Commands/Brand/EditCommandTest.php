@@ -11,8 +11,6 @@ use tests\TestCase;
  */
 class EditCommandTest extends TestCase
 {
-
-
     public function testWithoutId()
     {
         ob_start();
