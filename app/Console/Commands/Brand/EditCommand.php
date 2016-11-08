@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Brand;
 
 use AbuseIO\Console\Commands\AbstractEditCommand;
+use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Brand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
