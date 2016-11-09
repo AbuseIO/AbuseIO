@@ -18,9 +18,7 @@ class CreateCommandTest extends TestCase
         ob_start();
         Artisan::call('contact:create');
         $output = ob_get_clean();
-
         $this->assertContains('Creates a new contact' , $output);
-
     }
 
     public function testValidCreate()
