@@ -52,6 +52,7 @@ class AssignCommand extends Command
             empty($this->option('user'))
         ) {
             throw new \RuntimeException('Missing options for role and/or user(e-mail) to select');
+
             return false;
         }
 
