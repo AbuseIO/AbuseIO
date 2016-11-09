@@ -131,4 +131,14 @@ class AuthController extends Controller
                 $this->loginUsername() => $this->getFailedLoginMessage(),
             ]);
     }
+
+    public function postRegister() {
+        return abort(404);
+    }
+
+    public function getRegister() {
+        return redirect('/');
+    }
+
+
 }
