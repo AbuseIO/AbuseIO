@@ -21,9 +21,9 @@ class CreateCommandTest extends TestCase
             [
                'ticket_id' => $dummy->ticket->id,
                'submitter' => $dummy->submitter,
-               'text' => $dummy->text,
-               'hidden' => $dummy->hidden,
-               'viewed' => $dummy->viewed,
+               'text'      => $dummy->text,
+               'hidden'    => $dummy->hidden,
+               'viewed'    => $dummy->viewed,
             ]
         );
 
@@ -33,9 +33,9 @@ class CreateCommandTest extends TestCase
         Note::where([
             'ticket_id' => $dummy->ticket->id,
             'submitter' => $dummy->submitter,
-            'text' => $dummy->text,
-            'hidden' => $dummy->hidden,
-            'viewed' => $dummy->viewed,
+            'text'      => $dummy->text,
+            'hidden'    => $dummy->hidden,
+            'viewed'    => $dummy->viewed,
         ])->forceDelete();
     }
 

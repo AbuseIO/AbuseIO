@@ -3,7 +3,6 @@
 namespace tests\Console\Commands\Permission;
 
 use AbuseIO\Models\Permission;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -19,5 +18,4 @@ class RevokeCommandTest extends TestCase
         $this->assertEquals(0, $exitCode);
         $this->assertContains('Revokes a permission from a role', ob_get_clean());
     }
-
 }
