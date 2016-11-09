@@ -57,7 +57,7 @@ return [
     'not_in'               => 'Het geselecteerde :attribute is ongeldig.',
     'numeric'              => 'Het :attribute dient een nummer te zijn.',
     'regex'                => 'Het :attribute formaat is ongeldig.',
-    'required'             => 'Het :attribute veld is verplicht.',
+    'required'             => 'Het veld :attribute is verplicht.',
     'required_if'          => 'Het :attribute veld is verplicht wanneer :other is :value.',
     'required_with'        => 'Het :attribute veld is verplicht wanneer :values aanwezig is.',
     'required_with_all'    => 'Het :attribute veld is verplicht wanneer :values aanwezig is.',
@@ -117,6 +117,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'email' => 'e-mailadres',
+        'password' => 'wachtwoord',
+    ],
 
 ];
