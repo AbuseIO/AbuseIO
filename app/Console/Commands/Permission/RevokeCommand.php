@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Console\Commands\Permission;
 
+use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Permission;
 use AbuseIO\Models\PermissionRole;
 use AbuseIO\Models\Role;
@@ -13,6 +14,8 @@ use Illuminate\Console\Command;
  */
 class RevokeCommand extends Command
 {
+    use ShowHelpWhenRunTimeExceptionOccurs;
+
     /**
      * The console command name.
      *
@@ -48,7 +51,7 @@ class RevokeCommand extends Command
         if (empty($this->option('role')) ||
             empty($this->option('permission'))
         ) {
-            $this->error('Missing options for role and/or permission to select, try --help');
+            throw new \RuntimeException('Missing options for role and/or permission to select');
 
             return false;
         }
