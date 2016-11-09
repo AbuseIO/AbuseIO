@@ -132,13 +132,13 @@ class AuthController extends Controller
             ]);
     }
 
-    public function postRegister() {
+    public function postRegister()
+    {
         return abort(404);
     }
 
-    public function getRegister() {
+    public function getRegister()
+    {
         return redirect('/');
     }
-
-
 }

@@ -118,7 +118,7 @@ return [
     */
 
     'attributes' => [
-        'email' => 'e-mailadres',
+        'email'    => 'e-mailadres',
         'password' => 'wachtwoord',
     ],
 
