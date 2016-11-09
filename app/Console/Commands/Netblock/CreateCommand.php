@@ -23,10 +23,10 @@ class CreateCommand extends AbstractCreateCommand
     {
         return new InputDefinition(
             [
-                new InputArgument('contact', null, 'Id from contact'),
-                new InputArgument('first_ip', null, 'Start Ip address from netblock'),
-                new InputArgument('last_ip', null, 'Last Ip address from netblock'),
-                new InputArgument('description', null, 'Description'),
+                new InputArgument('contact', InputArgument::REQUIRED, 'Id from contact'),
+                new InputArgument('first_ip', InputArgument::REQUIRED, 'Start Ip address from netblock'),
+                new InputArgument('last_ip', InputArgument::REQUIRED, 'Last Ip address from netblock'),
+                new InputArgument('description', InputArgument::REQUIRED, 'Description'),
                 new InputArgument('enabled', null, 'Set the account to be enabled', false),
             ]
         );

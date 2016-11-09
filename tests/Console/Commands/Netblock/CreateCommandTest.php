@@ -43,9 +43,10 @@ class CreateCommandTest extends TestCase
 
     public function testWithoutArguments()
     {
-        //        $exitCode = Artisan::call('netblock:create');
-//        $this->assertEquals(0, $exitCode);
-//        $this->assertContains('The description field is required.', Artisan::output());
+        ob_start();
+        $exitCode = Artisan::call('netblock:create');
+        $this->assertEquals(0, $exitCode);
+        $this->assertContains('Creates a new netblock', ob_get_clean());
     }
 
     public function testCreateWithoutParamsButValidUser()
