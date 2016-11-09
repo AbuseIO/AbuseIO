@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Console\Commands\Role;
 
+use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\RoleUser;
 use AbuseIO\Models\User;
@@ -13,6 +14,8 @@ use Validator;
  */
 class AssignCommand extends Command
 {
+    use ShowHelpWhenRunTimeExceptionOccurs;
+
     /**
      * The console command name.
      *
@@ -28,7 +31,7 @@ class AssignCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Assign a role to a users';
+    protected $description = 'Assign a role to a user';
 
     /**
      * {@inheritdoc}.
@@ -48,8 +51,7 @@ class AssignCommand extends Command
         if (empty($this->option('role')) &&
             empty($this->option('user'))
         ) {
-            $this->error('Missing options for role and/or user(e-mail) to select');
-
+            throw new \RuntimeException('Missing options for role and/or user(e-mail) to select');
             return false;
         }
 

@@ -36,10 +36,11 @@ class CreateCommandTest extends TestCase
         ])->forceDelete();
     }
 
-    public function testCreateWithoutParams()
+    public function testWithoutParams()
     {
+        ob_start();
         $exitCode = Artisan::call('role:create');
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('The description field is required.', Artisan::output());
+        $this->assertContains('Creates a new role', ob_get_clean());
     }
 }
