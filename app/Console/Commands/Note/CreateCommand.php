@@ -22,9 +22,9 @@ class CreateCommand extends AbstractCreateCommand
     {
         return new InputDefinition(
             [
-                new InputArgument('ticket_id', null, 'Ticket id'),
-                new InputArgument('submitter', null, 'Submitter'),
-                new InputArgument('text', null, 'Text'),
+                new InputArgument('ticket_id', InputArgument::REQUIRED, 'Ticket id'),
+                new InputArgument('submitter', InputArgument::REQUIRED, 'Submitter'),
+                new InputArgument('text', InputArgument::REQUIRED, 'Text'),
                 new InputArgument('viewed', null, 'viewed', false),
                 new InputArgument('hidden', null, 'Hidden', false),
             ]
