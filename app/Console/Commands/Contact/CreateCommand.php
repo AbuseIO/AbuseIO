@@ -23,9 +23,9 @@ class CreateCommand extends AbstractCreateCommand
     {
         return new InputDefinition(
             [
-                new InputArgument('name', null, 'Name'),
-                new InputArgument('reference', null, 'Reference'),
-                new InputArgument('account_id', null, 'Account id'),
+                new InputArgument('name', InputArgument::REQUIRED, 'Name'),
+                new InputArgument('reference', InputArgument::REQUIRED, 'Reference'),
+                new InputArgument('account_id', InputArgument::REQUIRED, 'Account id'),
                 new InputArgument('enabled', null, 'enabled'),
                 new InputArgument('email', null, 'Email address'),
                 new InputArgument('api_host', null, 'Api host'),

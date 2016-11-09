@@ -15,13 +15,12 @@ class CreateCommandTest extends TestCase
 {
     public function testWithoutArguments()
     {
-        //        Artisan::call('contact:create');
-//        $output = Artisan::output();
-//
-//        $this->assertContains('The reference field is required.', $output);
-//        $this->assertContains('The name field is required.', $output);
-//        $this->assertContains('The account id field is required.', $output);
-//        $this->assertContains('Failed to create the contact due to validation warnings', $output);
+        ob_start();
+        Artisan::call('contact:create');
+        $output = ob_get_clean();
+
+        $this->assertContains('Creates a new contact' , $output);
+
     }
 
     public function testValidCreate()
