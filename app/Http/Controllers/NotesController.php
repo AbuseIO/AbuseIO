@@ -7,8 +7,8 @@ use AbuseIO\Jobs\Notification;
 use AbuseIO\Models\Note;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\NoteTransformer;
-use League\Fractal\Manager;
 use Illuminate\Http\Request;
+use League\Fractal\Manager;
 use Redirect;
 
 /**
@@ -99,7 +99,6 @@ class NotesController extends Controller
     {
         return $this->respondWithItem($note, new NoteTransformer());
     }
-
 
     /**
      * Show the form for editing the specified resource.

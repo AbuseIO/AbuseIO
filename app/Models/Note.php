@@ -148,5 +148,4 @@ class Note extends Model
         return  ($ip_account->account_id == $account->id)
             || ($domain_account->account_id == $account->id);
     }
-
 }

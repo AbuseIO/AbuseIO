@@ -188,7 +188,7 @@ class Brand extends Model
         // early return when we are in the system account
         if ($account->isSystemAccount()) {
             return true;
-        }            
+        }
 
         return self::find($model_id)->creator_id === $account->id;
     }
