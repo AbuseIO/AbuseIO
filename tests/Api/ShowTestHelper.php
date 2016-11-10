@@ -20,7 +20,6 @@ trait ShowTestHelper
 
         $this->assertEquals(200, $this->statusCode);
 
-
         $obj = json_decode($this->content);
         $this->assertTrue($obj->message->success);
     }

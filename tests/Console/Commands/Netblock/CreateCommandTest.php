@@ -51,6 +51,7 @@ class CreateCommandTest extends TestCase
 
     public function testCreateWithoutParamsButValidUser()
     {
+        ob_start();
         $exitCode = Artisan::call(
             'netblock:create',
             [
@@ -58,9 +59,6 @@ class CreateCommandTest extends TestCase
             ]
         );
         $this->assertEquals(0, $exitCode);
-        $this->assertNotContains(
-            'The contact id field is required',
-            Artisan::output()
-        );
+        $this->assertContains('Creates a new netblock', ob_get_clean());
     }
 }

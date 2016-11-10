@@ -126,4 +126,27 @@ class Note extends Model
     {
         return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
     }
+
+    /**
+     * Static method to check if the account has access to the model instance.
+     *
+     * @param $model_id
+     * @param \AbuseIO\Models\Account $account
+     *
+     * @return bool
+     */
+    public static function checkAccountAccess($model_id, Account $account)
+    {
+        // Early return when we are in the system account
+        if ($account->isSystemAccount()) {
+            return true;
+        }
+
+        $ip_account = self::find($model_id)->ticket->accountIp;
+        $domain_account = self::find($model_id)->ticket->domainIp;
+
+        return  ($ip_account->account_id == $account->id)
+            || ($domain_account->account_id == $account->id);
+    }
+
 }

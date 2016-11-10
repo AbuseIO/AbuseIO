@@ -5,6 +5,10 @@ namespace AbuseIO\Http\Controllers;
 use AbuseIO\Http\Requests\NoteFormRequest;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Models\Note;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\NoteTransformer;
+use League\Fractal\Manager;
+use Illuminate\Http\Request;
 use Redirect;
 
 /**
@@ -12,12 +16,22 @@ use Redirect;
  */
 class NotesController extends Controller
 {
+    use Api;
+
     /**
-     * NetblocksController constructor.
+     * NotesController constructor.
+     *
+     * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
+
+        $this->apiInit($fractal, $request);
+
+        // is the logged in account allowed to execute an action on the Domain
+        //$this->middleware('checkaccount:Notes', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
 
     /**
@@ -75,6 +89,17 @@ class NotesController extends Controller
     {
         // No requirement for implementation
     }
+
+    /**
+     * @param Note $note
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiShow(Note $note)
+    {
+        return $this->respondWithItem($note, new NoteTransformer());
+    }
+
 
     /**
      * Show the form for editing the specified resource.
