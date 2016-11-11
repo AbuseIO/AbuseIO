@@ -35,7 +35,7 @@ class StoreTest extends TestCase
 //        $mailer->expects($this->once())
 //            ->method('send');
         global $testrunner;
-        $testrunner= true;
+        $testrunner = true;
 
         $response = $this->executeCall($note);
 

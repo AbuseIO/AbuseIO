@@ -54,7 +54,6 @@ class NotesController extends Controller
         // No requirement for implementation
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -72,6 +71,7 @@ class NotesController extends Controller
             $noteForm->ticket_id
         )->with('message', 'A new note for this ticket has been created');
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -85,7 +85,7 @@ class NotesController extends Controller
 
         $note = Note::create($noteForm->all());
 
-        if (! $testrunner) {
+        if (!$testrunner) {
             $this->sendNotification($noteForm);
         }
 
@@ -169,7 +169,7 @@ class NotesController extends Controller
     }
 
     /**
-     * Send notifiction if NoteForm not is hidden;
+     * Send notifiction if NoteForm not is hidden;.
      *
      * @param NoteFormRequest $noteForm
      */
