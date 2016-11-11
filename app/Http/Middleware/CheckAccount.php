@@ -5,7 +5,6 @@ namespace AbuseIO\Http\Middleware;
 use Auth;
 use Closure;
 use Log;
-use PhpMimeMailParser\Exception;
 
 /**
  * Class CheckAccount.
@@ -30,7 +29,7 @@ class CheckAccount
         // gather info
 
         //if (is_string($model)) {
-            $model = '\AbuseIO\Models\\' . $model;
+            $model = '\AbuseIO\Models\\'.$model;
         //}
 
         $auth_user = Auth::user();
@@ -52,7 +51,6 @@ class CheckAccount
         if (!empty($model_id) and preg_match('/\d+/', $model_id)) {
             // only check if the checkAccountAccess exists
             if (method_exists($model, 'checkAccountAccess')) {
-
                 if (!$model::checkAccountAccess($model_id, $account)) {
                     // if the checkAccountAccess() fails return to the last page
                     return back()->with('message', 'Account ['.$account->name.'] is not allowed to access this object');

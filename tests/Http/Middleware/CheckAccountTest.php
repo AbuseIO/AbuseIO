@@ -3,19 +3,17 @@
  * Created by PhpStorm.
  * User: martin
  * Date: 11/11/16
- * Time: 15:02
+ * Time: 15:02.
  */
-
 namespace tests\Http\Middleware;
-
 
 use AbuseIO\Http\Middleware\CheckAccount;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use tests\TestCase;
-use Illuminate\Http\RedirectResponse;
 
 class CheckAccountTest extends TestCase
 {
@@ -37,7 +35,7 @@ class CheckAccountTest extends TestCase
 
         $callback = $this->middleware->handle(
             new Request(),
-            function($request){
+            function ($request) {
                 return 'ok';
             },
             $model
@@ -57,18 +55,17 @@ class CheckAccountTest extends TestCase
 
         $model = factory(Account::class)->create();
 
-        $r = new Request(['id' => $model->id ]);
+        $r = new Request(['id' => $model->id]);
 
 
         $callback = $this->middleware->handle(
             $r,
-            function($request){
+            function ($request) {
                 return 'ok';
             },
             $model
         );
 
         $this->isInstanceOf(RedirectResponse::class, $callback);
-
     }
 }
