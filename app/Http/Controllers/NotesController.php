@@ -54,6 +54,7 @@ class NotesController extends Controller
         // No requirement for implementation
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -64,20 +65,31 @@ class NotesController extends Controller
     public function store(NoteFormRequest $noteForm)
     {
         Note::create($noteForm->all());
-
-        /*
-         * send notication if a new note is added
-         */
-        if ($noteForm->hidden != true) {
-            $notification = new Notification();
-            $notifications = $notification->buildList($noteForm->ticket_id, false, true);
-            $notification->walkList($notifications);
-        }
+        $this->sendNotification($noteForm);
 
         return Redirect::route(
             'admin.tickets.show',
             $noteForm->ticket_id
         )->with('message', 'A new note for this ticket has been created');
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param NoteFormRequest $noteForm
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiStore(NoteFormRequest $noteForm)
+    {
+        global $testrunner;
+
+        $note = Note::create($noteForm->all());
+
+        if (! $testrunner) {
+            $this->sendNotification($noteForm);
+        }
+
+        return  $this->respondWithItem($note, new NoteTransformer());
     }
 
     /**
@@ -154,5 +166,19 @@ class NotesController extends Controller
         $note->delete();
 
         return 'delete:OK';
+    }
+
+    /**
+     * Send notifiction if NoteForm not is hidden;
+     *
+     * @param NoteFormRequest $noteForm
+     */
+    protected function sendNotification(NoteFormRequest $noteForm)
+    {
+        if ($noteForm->hidden != true) {
+            $notification = new Notification();
+            $notifications = $notification->buildList($noteForm->ticket_id, false, true);
+            $notification->walkList($notifications);
+        }
     }
 }

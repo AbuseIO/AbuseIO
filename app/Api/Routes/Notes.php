@@ -32,13 +32,13 @@ Route::group(
 //            ]
 //        );
 //
-//        Route::post(
-//            '',
-//            [
-//                'as'   => 'store',
-//                'uses' => 'NotesController@apiStore',
-//            ]
-//        );
+        Route::post(
+            '',
+            [
+                'as'   => 'store',
+                'uses' => 'NotesController@apiStore',
+            ]
+        );
 //
 //        Route::put(
 //            '{notes}',
