@@ -51,8 +51,10 @@ class CheckAccount
             Log::notice(
                 "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, which doesn't match the model_id format"
             );
+
             return false;
         }
+
         return true;
     }
 
@@ -69,13 +71,12 @@ class CheckAccount
         return back()->with('message', 'Account ['.$this->account->name.'] is not allowed to access this object');
     }
 
-
     /**
      * @return Account
      */
     private function getAccount()
     {
-        return $this->request->ajax() ? $this->request->api_account: Auth::user()->account;
+        return $this->request->ajax() ? $this->request->api_account : Auth::user()->account;
     }
 
     /**
@@ -104,6 +105,7 @@ class CheckAccount
         Log::notice(
             "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, which doesn't match the model_id format"
         );
+
         return false;
     }
 }
