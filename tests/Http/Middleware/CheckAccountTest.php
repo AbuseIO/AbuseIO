@@ -9,7 +9,6 @@ namespace tests\Http\Middleware;
 
 use AbuseIO\Http\Middleware\CheckAccount;
 use AbuseIO\Models\Account;
-use AbuseIO\Models\Event;
 use AbuseIO\Models\Job;
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -110,9 +109,9 @@ class CheckAccountTest extends TestCase
 
         $this->middleware->handle(
             $r,
-            function($request){},
+            function ($request) {
+            },
             $model
         );
-
     }
 }
