@@ -230,7 +230,7 @@ class IncidentsSave extends Job implements SelfHandling
                         $ticket->domain_contact_email = $domainContact->email;
                         $ticket->domain_contact_api_host = $domainContact->api_host;
                         $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
-                        $ticket->domain_contact_account_id = $domainContact->account->id;
+                        $ticket->accountDomain($domainContact->account);
                     }
 
                     /*

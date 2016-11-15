@@ -284,18 +284,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         // Check if the account is disabled (system account is never disabled)
         $account = $this->account;
-        if ($account->disabled && $account->id != 1) {
+        if ($account->disabled && !$account->isSystemAccount()) {
             array_push($messages, "The account {$account->name} for this login is disabled.");
-            if ($result) {
-                $result = false;
-            }
+            $result = false;
         }
 
         if ($this->disabled) {
             array_push($messages, trans('users.login_disabled'));
-            if ($result) {
-                $result = false;
-            }
+            $result = false;
         }
 
         return $result;
