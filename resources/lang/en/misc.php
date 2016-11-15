@@ -96,4 +96,7 @@ return [
     'error'             => 'Error',
     'login'             => 'Login',
     'refresh'           => 'Refresh',
+    'copy_to_clipboard' => 'Copy to Clipboard',
+    'please_press_ctrl_cmd_to_copy' => 'Please press Control+C to copy.',
+    'copied'            => 'Copied',
 ];
