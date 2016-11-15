@@ -346,7 +346,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         // Do not allow our own user to be destroyed.
-        if ($user->id == $this->auth_user->id) {
+        if ($user->is($this->auth_user)) {
             return Redirect::back()
                 ->with('message', 'Not allowed to delete current.');
         }

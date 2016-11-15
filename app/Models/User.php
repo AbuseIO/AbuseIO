@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Traits\InstanceComparable;
 use Hash;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -28,7 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, SoftDeletes;
+    use Authenticatable, CanResetPassword, SoftDeletes, InstanceComparable;
 
     /**
      * The database table used by the model.
@@ -333,12 +334,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function mayDisable(User $auth_user)
     {
         // can't disable/enable ourselves
-        if ($auth_user->id == $this->id) {
-            return false;
-        }
-
-        // all other cases
-        return true;
+        return ! $auth_user->is($this);
     }
 
     /**
