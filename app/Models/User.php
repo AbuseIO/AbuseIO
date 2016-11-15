@@ -253,9 +253,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         $user = self::find($model_id);
 
-        $allowed = $user->account_id == $account->id;
-
-        return $allowed;
+        return $user->account->is($account);
     }
 
     /**
