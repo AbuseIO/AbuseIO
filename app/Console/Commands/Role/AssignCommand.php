@@ -90,8 +90,8 @@ class AssignCommand extends Command
 
         $RoleUser = new RoleUser();
 
-        $RoleUser->user_id = $user->id;
-        $RoleUser->role_id = $role->id;
+        $RoleUser->user()->associate($user);
+        $RoleUser->role()->associate($role);
 
         $validation = Validator::make($RoleUser->toArray(), RoleUser::createRules($RoleUser));
 

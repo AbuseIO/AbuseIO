@@ -416,7 +416,7 @@ class OldVersionCommand extends Command
                     $newNetblock->last_ip = long2ip($netblock->end_in);
                     $newNetblock->description =
                         'Imported from previous AbuseIO version which did not include a description';
-                    $newNetblock->contact_id = $contact->id;
+                    $newNetblock->contact($contact);
                     $newNetblock->enabled = 1;
                     $newNetblock->created_at = Carbon::parse($netblock->LastModified);
                     $newNetblock->updated_at = Carbon::parse($netblock->LastModified);
