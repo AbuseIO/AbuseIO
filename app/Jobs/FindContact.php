@@ -24,8 +24,6 @@ class FindContact extends Job
      */
     public static function undefined()
     {
-        $account = Account::system();
-
         $contact = new Contact();
         $contact->reference = 'UNDEF';
         $contact->name = 'Undefined Contact';
@@ -33,7 +31,7 @@ class FindContact extends Job
         $contact->auto_notify = false;
         $contact->email = '';
         $contact->api_host = '';
-        $contact->account_id = $account->id;
+        $contact->account(Account::getSystemAccount());
 
         return $contact;
     }
