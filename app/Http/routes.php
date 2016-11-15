@@ -15,6 +15,7 @@ Route::get(
     }
 );
 
+
 /*
  * Admin routes
  */
@@ -28,6 +29,11 @@ Route::group(
         'as' => 'admin.',
     ],
     function () {
+        // Api key generator;
+
+        Route::post('apikey', function(){
+            return response()->json(['data' => generateGuid()]);
+        });
 
         // Language switcher
         Route::get('locale/{locale?}', 'LocaleController@setLocale');

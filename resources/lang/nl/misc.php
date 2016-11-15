@@ -95,4 +95,5 @@ return [
     'noupdate'          => 'Geen update',
     'error'             => 'Fout',
     'login'             => 'Inloggen',
+    'refresh'           => 'Ververs',
 ];

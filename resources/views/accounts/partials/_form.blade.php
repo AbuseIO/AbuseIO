@@ -27,6 +27,18 @@
         @if ($errors->has('disabled')) <p class="help-block">{{ $errors->first('disabled') }}</p> @endif
     </div>
 </div>
+<div class="form-group">
+    {!! Form::label('api-key', trans('accounts.api_key').':', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-10">
+        <div class="input-group">
+            {!! Form::text('token', null, ['class' => 'form-control', 'id' => 'apikey']) !!}
+            <span class="input-group-btn">
+                <button id="refreshApiKey" title="{!! trans('misc.refresh') !!}" class="btn"  type="button"><i class="glyphicon glyphicon-refresh"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -37,8 +49,23 @@
 
 @section('extrajs')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $('input:checkbox[name="disableddummy"]').change(function() {
             $('#disabled').val($(this).is(':checked'));
+        });
+        $(document).on('click', '#refreshApiKey', function() {
+            $.post('/admin/apikey', function(data) {
+                $('#apikey').val(data.data);
+            })
+                .fail(function(data) {
+                    alert('Error, please look in your console!');
+                    console.dir(data);
+                });
         });
     </script>
 @stop

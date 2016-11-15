@@ -95,4 +95,5 @@ return [
     'noupdate'          => 'No update',
     'error'             => 'Error',
     'login'             => 'Login',
+    'refresh'           => 'Refresh',
 ];

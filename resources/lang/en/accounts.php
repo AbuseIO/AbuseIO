@@ -22,4 +22,5 @@ return [
     'no_enable_permissions'     => 'User is not authorized to enable this account.',
     'cannot_disable_sys_acc'    => 'System account cannot be disabled.',
     'account_updated'           => 'Account has been updated.',
+    'api_key'                   => 'Api key',
 ];

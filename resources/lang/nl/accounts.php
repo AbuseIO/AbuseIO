@@ -21,4 +21,5 @@ return [
     'no_enable_permissions'     => 'Gebruiker heeft geen rectehn om dit acccount aan te zetten.',
     'cannot_disable_sys_acc'    => 'Systeem account kan niet worden uitgezet.',
     'account_updated'           => 'Account is bijgewerkt.',
+    'api_key'                   => 'Api key',
 ];
