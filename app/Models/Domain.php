@@ -117,6 +117,6 @@ class Domain extends Model
 
         $domain = self::find($model_id);
 
-        return $domain->contact->account->id == $account->id;
+        return $domain->contact->account->is($account);
     }
 }

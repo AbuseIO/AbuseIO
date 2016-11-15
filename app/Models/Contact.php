@@ -151,7 +151,7 @@ class Contact extends Model
 
         $contact = self::find($model_id);
 
-        return $contact->account->id == $account->id;
+        return $contact->account->is($account);
     }
 
     /**

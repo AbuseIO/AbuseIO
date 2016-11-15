@@ -155,6 +155,6 @@ class Netblock extends Model
 
         $netblock = self::find($model_id);
 
-        return $netblock->contact->account->id == $account->id;
+        return $netblock->contact->account->is($account);
     }
 }

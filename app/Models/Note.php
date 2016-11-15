@@ -142,10 +142,9 @@ class Note extends Model
             return true;
         }
 
-        $ip_account = self::find($model_id)->ticket->accountIp;
-        $domain_account = self::find($model_id)->ticket->domainIp;
+        $ticket = self::find($model_id)->ticket;
 
-        return  ($ip_account->account_id == $account->id)
-            || ($domain_account->account_id == $account->id);
+        return  ($ticket->accountIp->is($account))
+            || ($ticket->domainIp->is($account));
     }
 }

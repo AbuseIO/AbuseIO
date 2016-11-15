@@ -196,8 +196,8 @@ class Evidence extends Model
         // If tickets ip or domain contact is the same as current account
         // then allow access to this evidence
         foreach ($tickets as $ticket) {
-            if (($ticket->ip_contact_account_id == $account->id) ||
-                ($ticket->domain_contact_account_id == $account->id)
+            if (($ticket->accountIp->is($account)) ||
+                ($ticket->accountDomain->is($account))
             ) {
                 return true;
             }

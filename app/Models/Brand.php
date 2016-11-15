@@ -190,7 +190,7 @@ class Brand extends Model
             return true;
         }
 
-        return self::find($model_id)->creator_id === $account->id;
+        return self::find($model_id)->creator->is($account);
     }
 
     /**

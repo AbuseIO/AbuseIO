@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Traits\InstanceComparable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
@@ -22,7 +23,7 @@ use Log;
  */
 class Account extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, InstanceComparable;
 
     /**
      * The database table used by the model.
@@ -199,9 +200,7 @@ class Account extends Model
 
         $my_account = self::find($model_id);
 
-        $allowed = ($my_account->account_id == $account->id);
-
-        return $allowed;
+        return $my_account->is($account);
     }
 
     /**
@@ -246,19 +245,12 @@ class Account extends Model
      */
     public function mayEdit(User $user)
     {
-        $auth_account = $user->account;
-
-        // System user
-        if ($auth_account->isSystemAccount()) {
+        if ($user->account->isSystemAccount()) {
             return true;
         }
 
         // you can only edit your own account
-        if ($auth_account->id == $this->id) {
-            return true;
-        } else {
-            return false;
-        }
+        return $user->account->is($this);
     }
 
     /**

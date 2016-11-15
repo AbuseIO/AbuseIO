@@ -321,9 +321,7 @@ class Ticket extends Model
 
         $ticket = self::find($model_id);
 
-        $allowed = ($ticket->ip_contact_account_id == $account->id) ||
-                   ($ticket->domain_contact_account_id == $account->id);
-
-        return $allowed;
+        return ($ticket->accountIp->is($account)) ||
+            ($ticket->accountDomain->is($account));
     }
 }
