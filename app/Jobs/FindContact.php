@@ -31,7 +31,7 @@ class FindContact extends Job
         $contact->auto_notify = false;
         $contact->email = '';
         $contact->api_host = '';
-        $contact->account(Account::getSystemAccount());
+        $contact->account()->associate(Account::getSystemAccount());
 
         return $contact;
     }
