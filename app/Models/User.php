@@ -334,7 +334,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function mayDisable(User $auth_user)
     {
         // can't disable/enable ourselves
-        return ! $auth_user->is($this);
+        return !$auth_user->is($this);
     }
 
     /**
