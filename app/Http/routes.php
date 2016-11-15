@@ -31,7 +31,7 @@ Route::group(
     function () {
         // Api key generator;
 
-        Route::post('apikey', function(){
+        Route::post('apikey', function () {
             return response()->json(['data' => generateGuid()]);
         });
 
