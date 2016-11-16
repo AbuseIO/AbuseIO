@@ -22,7 +22,12 @@
 <div class="form-group @if ($errors->has('api_host')) has-error @endif">
     {!! Form::label('api_host', trans('contacts.api_host').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::url('api_host', null, ['class' => 'form-control', 'placeholder'=> 'http://api.domain.tld:1234/RPC']) !!}
+        <div class="input-group">
+            {!! Form::url('api_host', null, ['class' => 'form-control', 'placeholder'=> 'http://api.domain.tld:1234/RPC']) !!}
+            <span class="input-group-btn">
+                <button id="checkApiURL" title="{!! trans('misc.refresh') !!}" class="btn"  type="button"><i class="glyphicon glyphicon-refresh"></i></button>
+            </span>
+        </div>
         @if ($errors->has('api_host')) <p class="help-block">{{ $errors->first('api_host') }}</p> @endif
     </div>
 </div>
@@ -44,3 +49,23 @@
         {!! link_to(URL::previous(), trans('misc.button.cancel'), ['class' => 'btn btn-default']) !!}
     </div>
 </div>
+
+
+@section('extrajs')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).on('click', '#checkApiURL', function() {
+            $.post('/admin/verifyexternalapi', {url: $('#api_host').val()}, function(data) {
+               console.dir(data);
+            })
+                    .fail(function(data) {
+                        alert('Error, please look in your console!');
+                        console.dir(data);
+                    });
+        });
+    </script>
+@stop
