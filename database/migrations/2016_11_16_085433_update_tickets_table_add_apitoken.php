@@ -1,9 +1,10 @@
 <?php
 
 use AbuseIO\Models\Ticket;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateTicketsTable extends Migration
+class UpdateTicketsTableAddApitoken extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +13,15 @@ class UpdateTicketsTable extends Migration
      */
     public function up()
     {
-        // create the ash_token fields
-        Schema::table('tickets', function ($table) {
-            $table->string('ash_token_ip');
-            $table->string('ash_token_domain');
+        Schema::table('tickets', function($table) {
+            $table->string('api_token', 32)->nullable();
         });
 
         $this->_updateTokens();
     }
 
     /**
-     * update all existing tickets with the ashtokens
+     * update all existing tickets with the apiToken
      * These are automatically added when the ticket is
      * saved.
      *
@@ -42,6 +41,8 @@ class UpdateTicketsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('tickets', function ($table) {
+            $table->dropColumn('api_token');
+        });
     }
 }

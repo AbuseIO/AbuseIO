@@ -12,6 +12,7 @@ class HelperServiceProvider extends ServiceProvider
     protected $helpers = [
         'castBoolToString',
         'castStringToBool',
+        'generateApiToken',
         'generateGuid',
         'generatePassword',
         'getDomain',

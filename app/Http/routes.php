@@ -32,7 +32,7 @@ Route::group(
         // Api key generator;
 
         Route::post('apikey', function () {
-            return response()->json(['data' => generateGuid()]);
+            return response()->json(['data' => generateApiToken()]);
         });
 
         // Language switcher

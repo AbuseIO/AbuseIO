@@ -194,12 +194,13 @@ return [
         'AbuseIO\Providers\AshServiceProvider',
         'AbuseIO\Providers\BusServiceProvider',
         'AbuseIO\Providers\ConfigServiceProvider',
-        'AbuseIO\Providers\RouteServiceProvider',
-        'AbuseIO\Providers\ValidationsServiceProvider',
         'AbuseIO\Providers\HelperServiceProvider',
+        'AbuseIO\Providers\RouteServiceProvider',
+        'AbuseIO\Providers\TicketApiTokenProvider',
+        'AbuseIO\Providers\ValidationsServiceProvider',
         'Chumper\Zipper\ZipperServiceProvider',
-        'yajra\Datatables\DatatablesServiceProvider',
         'Sorskod\Larasponse\LarasponseServiceProvider',
+        'yajra\Datatables\DatatablesServiceProvider',
 
         /*
          * Developer Providers
