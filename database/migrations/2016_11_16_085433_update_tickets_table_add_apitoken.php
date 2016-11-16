@@ -1,7 +1,6 @@
 <?php
 
 use AbuseIO\Models\Ticket;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class UpdateTicketsTableAddApitoken extends Migration
@@ -13,7 +12,7 @@ class UpdateTicketsTableAddApitoken extends Migration
      */
     public function up()
     {
-        Schema::table('tickets', function($table) {
+        Schema::table('tickets', function ($table) {
             $table->string('api_token', 32)->nullable();
         });
 
@@ -29,7 +28,7 @@ class UpdateTicketsTableAddApitoken extends Migration
      */
     private function _updateTokens()
     {
-        Ticket::all()->map(function($ticket) {
+        Ticket::all()->map(function ($ticket) {
             $ticket->save();
         });
     }

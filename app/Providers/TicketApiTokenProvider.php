@@ -15,7 +15,7 @@ class TicketApiTokenProvider extends ServiceProvider
     public function boot()
     {
         Ticket::saving(function ($ticket) {
-            /** @var Ticket $ticket */
+            /* @var Ticket $ticket */
             $ticket->generateApiToken();
         });
     }

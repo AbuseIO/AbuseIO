@@ -1,6 +1,6 @@
 <?php
 
-function generateApiToken ()
+function generateApiToken()
 {
     return md5(generateGuid());
 }

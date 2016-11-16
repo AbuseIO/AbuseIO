@@ -30,7 +30,7 @@ class UpdateTicketsTable extends Migration
      */
     private function _updateTokens()
     {
-        Ticket::all()->map(function($ticket) {
+        Ticket::all()->map(function ($ticket) {
             $ticket->save();
         });
     }
