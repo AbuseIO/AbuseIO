@@ -50,7 +50,7 @@ class Ticket extends Model
     protected $table = 'tickets';
 
     /**
-     * a readonly property containing the apiToken;
+     * a readonly property containing the apiToken;.
      *
      * @var string
      */
@@ -333,7 +333,7 @@ class Ticket extends Model
     }
 
     /**
-     * method to set api token on the ticket; Can savely be called, does not change current value;
+     * method to set api token on the ticket; Can savely be called, does not change current value;.
      *
      * @return void
      */
