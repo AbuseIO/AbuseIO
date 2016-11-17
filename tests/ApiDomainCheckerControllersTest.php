@@ -17,7 +17,7 @@ class ApiDomainCheckerControllersTest extends TestCase
      */
     public function testAdminRedirect()
     {
-        $response = $this->call('POST', '/admin/verifyexternalapi', ['url' => 'http://localhost:80']);
+        $response = $this->call('POST', '/admin/verifyexternalapi', ['url' => 'http://localhost']);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
