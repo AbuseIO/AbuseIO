@@ -5,7 +5,6 @@ namespace AbuseIO\Http\Controllers;
 use Illuminate\Http\Request;
 use Sabre\Uri as Uri;
 
-
 class ApiDomainCheckerController extends Controller
 {
     /**
@@ -25,9 +24,8 @@ class ApiDomainCheckerController extends Controller
                 return response()->json(['data' => $response]);
             }
         } catch (\ErrorException $e) {
-
         }
 
-        return response()->json(['error' => 'couldn\'t resolve domain ['. $url .']'])->setStatusCode(422);
+        return response()->json(['error' => 'couldn\'t resolve domain ['.$url.']'])->setStatusCode(422);
     }
 }

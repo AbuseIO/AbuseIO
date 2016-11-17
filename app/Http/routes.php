@@ -153,7 +153,7 @@ Route::group(
  * API routes group
  */
 
-Route::get('api/getversioninfo', function(){
+Route::get('api/getversioninfo', function () {
     return response()->json(['version' => 'v1']);
 });
 
