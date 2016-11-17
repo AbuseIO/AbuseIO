@@ -38,14 +38,18 @@ class UrlCheckerTest extends TestCase
 
     public function testResolveUrl($basePath, $relativeUrl, $result)
     {
-        $this->assertEquals(Uri\resolve($basePath, $relativeUrl), $result);
+        $this->assertEquals(
+            Uri\resolve($basePath, $relativeUrl),
+            $result
+        );
     }
 
     public function getResolverDataset()
     {
         return [
-            ['http://www.example.com', 'api', 'http://www.example.com/api'],
+            ['http://www.example.com', '/api', 'http://www.example.com/api'],
             ['https://WWW.examPle.com', '/api/', 'https://WWW.examPle.com/api/'],
+            ['https://WWW.examPle.com/hier/', '../api/', 'https://WWW.examPle.com/api/'],
         ];
     }
 }
