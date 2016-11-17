@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         // give the tickets some notes
         \AbuseIO\Models\Ticket::all()->each(function ($ticket) {
-            $notes = random_int(1,24);
+            $notes = random_int(1, 24);
             factory(AbuseIO\Models\Note::class, $notes)->create(['ticket_id' => $ticket->id]);
         });
 
