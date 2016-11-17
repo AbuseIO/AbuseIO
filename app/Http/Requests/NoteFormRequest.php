@@ -11,7 +11,6 @@ use Auth;
  */
 class NoteFormRequest extends Request
 {
-
     use Api;
 
     /**
@@ -72,7 +71,7 @@ class NoteFormRequest extends Request
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
         if (config('main.notes.show_abusedesk_names') === true and !Auth::guest()) {
-            $postingUser = ' (' . Auth::user()->fullName().')';
+            $postingUser = ' ('.Auth::user()->fullName().')';
         } else {
             $postingUser = '';
         }

@@ -2,9 +2,6 @@
 
 namespace tests\Api\Account;
 
-use AbuseIO\Models\Account;
-use AbuseIO\Models\User;
-use tests\Api\DestroyTestHelper;
 use tests\TestCase;
 
 class ApiVersionTest extends TestCase
@@ -12,7 +9,6 @@ class ApiVersionTest extends TestCase
     const URL = '/api/getversioninfo';
     protected $statusCode;
     protected $content;
-
 
     public function testApiVersionCall()
     {
@@ -25,7 +21,6 @@ class ApiVersionTest extends TestCase
 
     protected function executeCall()
     {
-
         $server = $this->transformHeadersToServerVars([]);
 
         $response = $this->call('GET', self::URL, [], [], [], $server);
@@ -33,5 +28,4 @@ class ApiVersionTest extends TestCase
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
     }
-
 }
