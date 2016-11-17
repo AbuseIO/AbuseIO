@@ -275,16 +275,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function mayLogin(&$messages)
     {
+        $account = $this->account;
         // First user is always allowed to login, early return
-        if ($this->id == 1) {
+        if ($account->isSystemAccount()) {
             return true;
         }
 
         $result = true;
 
         // Check if the account is disabled (system account is never disabled)
-        $account = $this->account;
-        if ($account->disabled && !$account->isSystemAccount()) {
+
+        if ($account->disabled) {
             array_push($messages, "The account {$account->name} for this login is disabled.");
             $result = false;
         }
