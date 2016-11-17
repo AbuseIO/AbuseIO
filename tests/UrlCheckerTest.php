@@ -4,7 +4,6 @@ namespace tests;
 
 use Sabre\Uri as Uri;
 
-
 class UrlCheckerTest extends TestCase
 {
     /**
@@ -35,7 +34,6 @@ class UrlCheckerTest extends TestCase
      *
      * @dataProvider getResolverDataset
      */
-
     public function testResolveUrl($basePath, $relativeUrl, $result)
     {
         $this->assertEquals(

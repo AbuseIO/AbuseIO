@@ -5,18 +5,14 @@ namespace AbuseIO\Http\Controllers;
 use Illuminate\Http\Request;
 use Sabre\Uri as Uri;
 
-use AbuseIO\Http\Requests;
-use AbuseIO\Http\Controllers\Controller;
 
 class ApiDomainCheckerController extends Controller
 {
-
-   
-
     /**
-     * check an external domain if it is a valid abuseIO domain
+     * check an external domain if it is a valid abuseIO domain.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -35,5 +31,3 @@ class ApiDomainCheckerController extends Controller
         return response()->json(['error' => 'couldn\'t resolve domain ['. $url .']'])->setStatusCode(422);
     }
 }
-
-

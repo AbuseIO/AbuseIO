@@ -30,8 +30,8 @@ class NotesController extends Controller
 
         $this->apiInit($fractal, $request);
 
-        // is the logged in account allowed to execute an action on the Domain
-        //$this->middleware('checkaccount:Notes', ['except' => ['search', 'index', 'create', 'store', 'export']]);
+        // is the logged in account allowed to execute an action on the Note
+        $this->middleware('checkaccount:Note', ['only' => ['apiShow']]);
     }
 
     /**
