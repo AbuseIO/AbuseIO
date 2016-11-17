@@ -22,16 +22,17 @@ class ApiDomainCheckerController extends Controller
     public function store(Request $request)
     {
         $url = Uri\normalize(
-            Uri\resolve($request->url, '/apiversion/')
+            Uri\resolve($request->url, '/api/getversioninfo/')
         );
-
         try {
             if ($response = file_get_contents($url)) {
                 return response()->json(['data' => $response]);
             }
-        } catch (\ErrorException $e) {}
+        } catch (\ErrorException $e) {
 
-        return response()->json(['error' => 'couldn\'t resolve domain'])->setStatusCode(422);
+        }
+
+        return response()->json(['error' => 'couldn\'t resolve domain ['. $url .']'])->setStatusCode(422);
     }
 }
 

@@ -152,6 +152,11 @@ Route::group(
 /*
  * API routes group
  */
+
+Route::get('api/getversioninfo', function(){
+    return response()->json(['version' => 'v1']);
+});
+
 Route::group(
     [
         'prefix'     => 'api',
