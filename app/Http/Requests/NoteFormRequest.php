@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Note;
+use AbuseIO\Traits\Api;
 use Auth;
 
 /**
@@ -10,6 +11,9 @@ use Auth;
  */
 class NoteFormRequest extends Request
 {
+
+    use Api;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -67,8 +71,8 @@ class NoteFormRequest extends Request
     ) {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
-        if (config('main.notes.show_abusedesk_names') === true) {
-            $postingUser = ' ('.Auth::user()->fullName().')';
+        if (config('main.notes.show_abusedesk_names') === true and !Auth::guest()) {
+            $postingUser = ' (' . Auth::user()->fullName().')';
         } else {
             $postingUser = '';
         }
