@@ -44,7 +44,7 @@ Route::group(
         route::post(
             '',
             [
-                'middleware' => 'permission:notes_create',
+                'middleware' => ['permission:notes_create', 'appendnotesubmitter'],
                 'as'         => 'store',
                 'uses'       => 'NotesController@store',
             ]
@@ -62,7 +62,7 @@ Route::group(
         route::patch(
             '{notes}',
             [
-                'middleware' => 'permission:notes_edit',
+                'middleware' => ['permission:notes_edit', 'appendnotesubmitter'],
                 'as'         => 'update',
                 'uses'       => 'NotesController@update',
             ]
@@ -70,7 +70,7 @@ Route::group(
         route::put(
             '{notes}',
             [
-                'middleware' => 'permission:notes_edit',
+                'middleware' => ['permission:notes_edit', 'appendnotesubmitter'],
                 'as'         => 'update',
                 'uses'       => 'NotesController@update',
             ]

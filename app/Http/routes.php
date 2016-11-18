@@ -173,9 +173,6 @@ Route::group(
                 // Evidence
                 //require app_path().'/Api/Routes/Evidence.php';
 
-                // Notes
-                //require app_path().'/Api/Routes/Notes.php';
-
                 // Analytics
                 //require app_path().'/Api/Routes/Analytics.php';
 

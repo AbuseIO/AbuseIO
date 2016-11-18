@@ -30,14 +30,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'               => \AbuseIO\Http\Middleware\Authenticate::class,
-        'auth.basic'         => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest'              => \AbuseIO\Http\Middleware\RedirectIfAuthenticated::class,
-        'permission'         => \AbuseIO\Http\Middleware\CheckPermission::class,
-        'ash.token'          => \AbuseIO\Http\Middleware\CheckAshToken::class,
-        'checkaccount'       => \AbuseIO\Http\Middleware\CheckAccount::class,
-        'checksystemaccount' => \AbuseIO\Http\Middleware\CheckSystemAccount::class,
-        'apienabled'         => \AbuseIO\Http\Middleware\ApiEnabled::class,
-        'checkapitoken'      => \AbuseIO\Http\Middleware\CheckApiToken::class,
+        'auth'                => \AbuseIO\Http\Middleware\Authenticate::class,
+        'auth.basic'          => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'guest'               => \AbuseIO\Http\Middleware\RedirectIfAuthenticated::class,
+        'permission'          => \AbuseIO\Http\Middleware\CheckPermission::class,
+        'ash.token'           => \AbuseIO\Http\Middleware\CheckAshToken::class,
+        'checkaccount'        => \AbuseIO\Http\Middleware\CheckAccount::class,
+        'checksystemaccount'  => \AbuseIO\Http\Middleware\CheckSystemAccount::class,
+        'apienabled'          => \AbuseIO\Http\Middleware\ApiEnabled::class,
+        'checkapitoken'       => \AbuseIO\Http\Middleware\CheckApiToken::class,
+        'appendnotesubmitter' => \AbuseIO\Http\Middleware\AppendNoteSubmitter::class,
     ];
 }
