@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class AppendNoteSubmitter
 {
-
     /**
      * @param $request
      * @param Closure $next
@@ -20,7 +19,7 @@ class AppendNoteSubmitter
         // merge the submitter
 
         if (config('main.notes.show_abusedesk_names') === true) {
-            $postingUser = ' (' . Auth::user()->fullName() . ')';
+            $postingUser = ' ('.Auth::user()->fullName().')';
         } else {
             $postingUser = '';
         }
@@ -29,8 +28,8 @@ class AppendNoteSubmitter
             case 'POST':
                 $request->merge(
                     [
-                        'submitter' => trans('ash.communication.abusedesk') . $postingUser,
-                        'viewed' => true,
+                        'submitter' => trans('ash.communication.abusedesk').$postingUser,
+                        'viewed'    => true,
                     ]
                 );
                 break;
@@ -38,7 +37,7 @@ class AppendNoteSubmitter
             case 'PUT':
                 $request->merge(
                     [
-                        'submitter' => trans('ash.communication.abusedesk') . $postingUser,
+                        'submitter' => trans('ash.communication.abusedesk').$postingUser,
                     ]
                 );
                 break;
