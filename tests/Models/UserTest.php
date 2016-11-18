@@ -23,7 +23,7 @@ class UserTest extends TestCase
         $this->assertTrue($user->mayLogin($messages));
         $this->assertTrue(empty($messages));
     }
-testMayLoginWithDisabledAccount
+
     public function testMayLoginWithDisabledAccount()
     {
 //        $user = factory(User::class)->make();
