@@ -230,7 +230,6 @@ class Account extends Model
                 'FindContact: '.
                 'FATAL ERROR - DEFAULT ACCOUNT (SYSTEMACCOUNT) MISSING'
             );
-            dd();
         }
 
         return $result->first();
