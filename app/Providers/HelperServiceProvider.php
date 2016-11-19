@@ -13,7 +13,6 @@ class HelperServiceProvider extends ServiceProvider
         'castBoolToString',
         'castStringToBool',
         'generateApiToken',
-        'generateGuid',
         'generatePassword',
         'getDomain',
         'getUri',
