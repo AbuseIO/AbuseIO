@@ -40,6 +40,12 @@ class EditCommand extends AbstractEditCommand
                     InputOption::VALUE_OPTIONAL,
                     'true|false, Set default system account.'
                 ),
+                new InputOption(
+                    'refres_api_token',
+                    null,
+                    InputOption::VALUE_NONE,
+                    'Refresh the api token for this account.'
+                ),
             ]
         );
     }

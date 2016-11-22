@@ -24,6 +24,7 @@ class ShowCommand extends AbstractShowCommand
             ['Brand', $model->brand->name],
             ['Disabled', $model->disabled],
             ['Description', $model->description],
+            ['Api token', $model->token]
         ];
     }
 

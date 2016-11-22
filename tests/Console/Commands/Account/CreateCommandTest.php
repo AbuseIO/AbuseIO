@@ -21,6 +21,7 @@ class CreateCommandTest extends TestCase
 //        $this->assertContains('account:create', $output);
     }
 
+
     public function testCreateValid()
     {
         $brand = factory(Brand::class)->create();
@@ -33,7 +34,32 @@ class CreateCommandTest extends TestCase
 
         $this->assertContains('The account has been created', $output);
 
-        Account::where('name', 'test_dummy')->forceDelete();
+        $account = Account::where('name', 'test_dummy')->first();
+
+        $this->assertEquals('', $account->token);
+
+        $account->forceDelete();
+        $brand->forceDelete();
+    }
+
+    public function testCreateValidWithApiToken()
+    {
+        $brand = factory(Brand::class)->create();
+
+        Artisan::call('account:create', [
+            'name'     => 'test_dummy',
+            'brand_id' => $brand->id,
+            '--with_api_key',
+        ]);
+        $output = Artisan::output();
+
+        $this->assertContains('The account has been created', $output);
+
+        $account = Account::where('name', 'test_dummy')->first();
+
+        $this->assertNotNull($account->token);
+
+        $account->forceDelete();
         $brand->forceDelete();
     }
 }
