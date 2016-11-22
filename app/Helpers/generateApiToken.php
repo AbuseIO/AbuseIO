@@ -5,7 +5,5 @@
  */
 function generateApiToken()
 {
-    return Uuid::generate(4);
-
-    return md5(generateGuid());
+    return Uuid::generate(4)->__toString();
 }

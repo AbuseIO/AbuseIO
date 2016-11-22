@@ -99,4 +99,5 @@ return [
     'copy_to_clipboard'             => 'Kopieer naar klembord',
     'please_press_ctrl_cmd_to_copy' => 'Gebruik Control+C om te kopieren',
     'copied'                        => 'Gekopieerd',
+    'api-key'                        => 'Api key',
 ];

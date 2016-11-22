@@ -44,6 +44,17 @@
     </div>
 </div>
 <div class="form-group">
+    {!! Form::label('api-key', trans('misc.api_key').':', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-10">
+        <div class="input-group">
+            {!! Form::text('token', null, ['class' => 'form-control', 'id' => 'apikey']) !!}
+            <span class="input-group-btn">
+                <button id="refreshApiKey" title="{!! trans('misc.refresh') !!}" class="btn"  type="button"><i class="glyphicon glyphicon-refresh"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         {!! Form::submit($submit_text, ['class'=>'btn btn-success']) !!}
         {!! link_to(URL::previous(), trans('misc.button.cancel'), ['class' => 'btn btn-default']) !!}
@@ -59,13 +70,20 @@
             }
         });
         $(document).on('click', '#checkApiURL', function() {
-            $.post('/admin/verifyexternalapi', {url: $('#api_host').val()}, function(data) {
-               console.dir(data);
+            $.post('/admin/verifyexternalapi', {url: $('#api_host').val()}, function (data) {
+                console.dir(data);
             })
-                    .fail(function(data) {
-                        alert('Error, please look in your console!');
-                        console.dir(data);
+                    .fail(function (data) {
+                        alert('Error, ' + data.responseJSON.error);
                     });
+        });
+        $(document).on('click', '#refreshApiKey', function() {
+            $.post('/admin/apikey', function(data) {
+                $('#apikey').val(data.data);
+            }).fail(function(data) {
+                alert('Error, please look in your console!');
+                console.dir(data);
+            });
         });
     </script>
 @stop
