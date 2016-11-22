@@ -21,7 +21,6 @@ class CreateCommandTest extends TestCase
 //        $this->assertContains('account:create', $output);
     }
 
-
     public function testCreateValid()
     {
         $brand = factory(Brand::class)->create();
@@ -47,8 +46,8 @@ class CreateCommandTest extends TestCase
         $brand = factory(Brand::class)->create();
 
         Artisan::call('account:create', [
-            'name'     => 'test_dummy',
-            'brand_id' => $brand->id,
+            'name'           => 'test_dummy',
+            'brand_id'       => $brand->id,
             '--with_api_key' => true,
         ]);
         $output = Artisan::output();
