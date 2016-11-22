@@ -49,7 +49,7 @@ class CreateCommandTest extends TestCase
         Artisan::call('account:create', [
             'name'     => 'test_dummy',
             'brand_id' => $brand->id,
-            '--with_api_key',
+            '--with_api_key' => true,
         ]);
         $output = Artisan::output();
 

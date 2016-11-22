@@ -13,7 +13,7 @@ class AddApiTokenToContactsTable extends Migration
     public function up()
     {
         Schema::table('contacts', function (Blueprint $table) {
-            $table->string('api_token', 32)->nullable();
+            $table->string('token', 32)->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddApiTokenToContactsTable extends Migration
     public function down()
     {
         Schema::table('contacts', function (Blueprint $table) {
-            $table->dropColumn('api_token');
+            $table->dropColumn('token');
         });
     }
 }

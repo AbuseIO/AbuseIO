@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property bool $auto_notify fillable
  * @property bool $enabled fillable
  * @property int account_id fillable
+ * @property string $token
  * @property int $created_at
  * @property int $updated_at
  * @property int $deleted_at
@@ -44,6 +45,7 @@ class Contact extends Model
         'auto_notify',
         'enabled',
         'account_id',
+        'contact',
     ];
 
     /*

@@ -40,6 +40,37 @@ class CreateCommandTest extends TestCase
             Artisan::output()
         );
 
+        $contact = Contact::where('name', $name)->first();
+
+        $this->assertEquals('', $contact->token);
+
+        $contact->forceDelete();
+    }
+
+    public function testValidCreateWithApiToken()
+    {
+        $faker = Factory::create();
+        $name = $faker->name;
+
+        Artisan::call('contact:create', [
+            'name'              => $name,
+            'reference'         => $faker->domainWord,
+            'account_id'        => Account::getSystemAccount()->id,
+            'enabled'           => $faker->boolean(),
+            'email'             => $faker->email,
+            'api_host'          => $faker->url,
+            '--with_api_key'    => true,
+        ]);
+
+        $contact = Contact::where('name', $name)->first();
+
+        $this->assertNotNull($contact->token);
+
+        $this->assertContains(
+            'The contact has been created',
+            Artisan::output()
+        );
+
         Contact::where('name', $name)->forceDelete();
     }
 
