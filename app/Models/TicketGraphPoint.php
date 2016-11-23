@@ -37,12 +37,12 @@ class TicketGraphPoint extends Model
 
     public static function createNewWithDataForToday($data)
     {
-        return self::createWithDataDateAndLifecycle($data, Carbon::now, 'created_at');
+        return self::createWithDataDateAndLifecycle($data, Carbon::now(), 'created_at');
     }
 
     public static function createTouchedDataForToday($data)
     {
-        return self::createWithDataDateAndLifecycle($data, Carbon::now, 'updated_at');
+        return self::createWithDataDateAndLifecycle($data, Carbon::now(), 'updated_at');
     }
 
     private static function createWithDataDateAndLifecycle($data, Carbon $date, $lifecycle)

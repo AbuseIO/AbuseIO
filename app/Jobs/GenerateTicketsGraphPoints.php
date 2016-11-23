@@ -33,37 +33,33 @@ class GenerateTicketsGraphPoints extends Job implements SelfHandling
 
     public static function getNewDataPointsForToday()
     {
-        return self::getDataPointsForDateWithScope(Carbon::now(), 'created_at');
-    }
+        //dd(self::getDataPointsForDateWithScope(Carbon::now(), 'created_at')->toSql());
 
-    public static function getNewDataPointsForYesterday()
-    {
-        return self::getDataPointsForDateWithScope(Carbon::yesterday(), 'created_at');
+        return collect(
+            self::getDataPointsForDateWithScope(Carbon::now(), 'created_at')->get()
+        );
     }
 
     public static function getTouchedDataPointsForToday()
     {
-        return self::getDataPointsForDateWithScope(Carbon::now(), 'updated_at');
-    }
-
-    public static function getTouchedDataPointsForYesterday()
-    {
-        return self::getDataPointsForDateWithScope(Carbon::yesterday(), 'updated_at');
-    }
-
-    private static function getDataPointsForDateWithScope(Carbon $date, $scope)
-    {
-        return collect(DB::table('tickets')
-            ->select(
-                DB::raw('count(*) as cnt, class_id, type_id, status_id, contact_status_id')
-            )
-            ->whereDay($scope, '=', $date->toDateString())
-            ->groupBy(['class_id', 'type_id', 'status_id', 'contact_status_id'])
+        return collect(
+            self::getDataPointsForDateWithScope(Carbon::now(), 'updated_at')
+                ->AddWhere('updated_at', '<>', 'created_at')
             ->get()
         );
     }
 
-    private function storeNewTicketDataForToday()
+    private static function getDataPointsForDateWithScope(Carbon $date, $scope)
+    {
+        return DB::table('tickets')
+            ->select(
+                DB::raw('count(*) as cnt, class_id, type_id, status_id, contact_status_id')
+            )
+            ->whereDate($scope, '=', '2016-11-23')
+            ->groupBy(['class_id', 'type_id', 'status_id', 'contact_status_id']);
+    }
+
+    public function storeNewTicketDataForToday()
     {
         self::getNewDataPointsForToday()
             ->map(
@@ -75,7 +71,7 @@ class GenerateTicketsGraphPoints extends Job implements SelfHandling
         return $this;
     }
 
-    private function storeTouchedDataForToday()
+    public function storeTouchedDataForToday()
     {
         self::getTouchedDataPointsForToday()
             ->map(
