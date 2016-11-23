@@ -45,7 +45,6 @@ class TicketGraphPoint extends Model
         return self::createWithDataDateAndLifecycle($data, Carbon::now, 'updated_at');
     }
 
-
     private static function createWithDataDateAndLifecycle($data, Carbon $date, $lifecycle)
     {
         return self::makeWithDataDateAndLifcycle($data, $date, $lifecycle)->save();
@@ -60,7 +59,7 @@ class TicketGraphPoint extends Model
             'status'            => $data->status_id,
             'contact_status'    => $data->contact_status_id,
             'lifecycle'         => $lifecycle,
-            'day_date'          => $date->toDateString()
+            'day_date'          => $date->toDateString(),
         ]);
     }
 }

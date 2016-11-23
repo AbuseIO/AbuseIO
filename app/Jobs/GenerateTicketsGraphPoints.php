@@ -71,6 +71,7 @@ class GenerateTicketsGraphPoints extends Job implements SelfHandling
                     TicketGraphPoint::createNewWithDataForToday($data);
                 }
             );
+
         return $this;
     }
 
@@ -78,10 +79,11 @@ class GenerateTicketsGraphPoints extends Job implements SelfHandling
     {
         self::getTouchedDataPointsForToday()
             ->map(
-                function($data) {
+                function ($data) {
                     TicketGraphPoint::createTouchedDataForToday($data);
                 }
             );
+
         return $this;
     }
 }
