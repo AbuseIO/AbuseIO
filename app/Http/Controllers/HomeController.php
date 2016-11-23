@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', ['auth_user' => $this->auth_user,]);
+        return view('home', ['auth_user' => $this->auth_user]);
     }
 
     /**
@@ -26,13 +26,14 @@ class HomeController extends Controller
     {
         $response = [
             'statusCode' => 200,
-            'version' => config('app.version'),
-            'status' => session()->get('updated_status'),
-            'action' => 'nothing',
+            'version'    => config('app.version'),
+            'status'     => session()->get('updated_status'),
+            'action'     => 'nothing',
         ];
 
         if (session()->has('updated_status')) {
             $response['body'] = trans('misc.'.$response['status']);
+
             return response()->json($response);
         }
 
