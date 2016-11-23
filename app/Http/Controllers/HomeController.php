@@ -14,23 +14,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view(
-            'home',
-            [
-                'auth_user' => $this->auth_user,
-                'version'   => config('app.version'),
-                'update'    => link_to_route('admin.version', trans('misc.versioncheck')),
-            ]
-        );
+        return view('home', ['auth_user' => $this->auth_user,]);
     }
 
     /**
      * Checks the version of this installation and reports newer version.
      *
-     * @return \BladeView|bool|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\JsonResponse
      */
     public function version()
     {
+        $response = [
+            'statusCode' => 200,
+            'version' => config('app.version'),
+            'status' => session()->get('updated_status'),
+            'action' => 'nothing',
+        ];
+
+        if (session()->has('updated_status')) {
+            $response['body'] = trans('misc.'.$response['status']);
+            return response()->json($response);
+        }
+
         $url = 'https://abuse.io/version.json';
 
         $curl_options = [
@@ -43,31 +48,31 @@ class HomeController extends Controller
         curl_setopt_array($ch, $curl_options);
         if (($contents = curl_exec($ch)) === false) {
             // Failed to fetch the file.
-            $message = trans('misc.error');
+            $response['error'] = trans('misc.error');
+            $response['statusCode'] = 500;
         } else {
             // Fetched file, check if it's valid json
             if (gettype(json_decode(trim($contents))) == 'object') {
                 // Valid json data
                 $info = json_decode(trim($contents));
                 if (version_compare($info->version, config('app.version'), '>')) {
-                    $message = trans('misc.available').": <a href=\"{$info->url}\">{$info->version}</a>";
+                    $response['status'] = 'available';
+                    $response['body'] = trans('misc.available');
+                    $response['action'] = 'showDialog';
                 } else {
-                    $message = trans('misc.noupdate');
+                    $response['status'] = 'noupdate';
+                    $response['body'] = trans('misc.noupdate');
                 }
             } else {
                 // No (valid) json data
-                $message = trans('misc.error');
+                $response['error'] = trans('misc.error');
+                $response['statusCode'] = 500;
             }
         }
         curl_close($ch);
 
-        return view(
-            'home',
-            [
-                'auth_user' => $this->auth_user,
-                'version'   => config('app.version'),
-                'update'    => "{$message}",
-            ]
-        );
+        session()->put('updated_status', $response['status']);
+
+        return response()->json($response)->setStatusCode($response['statusCode']);
     }
 }
