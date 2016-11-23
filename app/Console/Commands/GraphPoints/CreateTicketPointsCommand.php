@@ -2,10 +2,9 @@
 
 namespace AbuseIO\Console\Commands\GraphPoints;
 
+use AbuseIO\Jobs\GenerateTicketsGraphPoints;
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Console\Command;
-use AbuseIO\Jobs\GenerateTicketsGraphPoints;
-
 
 /**
  * Class ListCommand.
@@ -25,8 +24,6 @@ class CreateTicketPointsCommand extends Command
      * @var string
      */
     protected $description = 'generates the ticket points for today';
-
-
 
     /**
      * Execute the console command.
