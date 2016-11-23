@@ -94,6 +94,8 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Info\ListClassesCommand',
         'AbuseIO\Console\Commands\Info\ListTypesCommand',
 
+        'AbuseIO\Console\Commands\GraphPoints\CreateTicketPointsCommand',
+
     ];
 
     /**
