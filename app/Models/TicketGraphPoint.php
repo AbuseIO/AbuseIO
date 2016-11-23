@@ -7,18 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class TicketGraphPoint extends Model
 {
     /**
-     * Class TicketGraphPoint
-     * 
-     * @property integer id
+     * Class TicketGraphPoint.
+     *
+     * @property int id
      * @property date day_date
      * @property string class
      * @property string type
      * @property string status
-     * @property integer count
+     * @property int count
      * @property string lifecycle
-     * 
      */
-
     public $timestamps = false;
 
 
@@ -33,7 +31,6 @@ class TicketGraphPoint extends Model
         'type',
         'status',
         'count',
-        'lifecycle'
+        'lifecycle',
     ];
-
 }
