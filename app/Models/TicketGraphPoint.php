@@ -4,6 +4,7 @@ namespace AbuseIO\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class TicketGraphPoint extends Model
 {
@@ -73,5 +74,19 @@ class TicketGraphPoint extends Model
             'lifecycle'         => $lifecycle,
             'day_date'          => $date->toDateString(),
         ]);
+    }
+
+    public static function getTotalSeries()
+    {
+        return [
+            'legend' => 'total',
+            'data' => DB::table('ticket_graph_points')
+                ->selectRaw('day_date, sum(count) as count')
+                ->where('lifecycle', '=', 'created_at')
+                ->groupBy('day_date')
+                ->orderBy('day_date')
+                ->get()
+            ];
+
     }
 }
