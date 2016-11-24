@@ -36,12 +36,12 @@ class TicketGraphPointTest extends TestCase
         foreach ($dateRange as $date) {
             factory(TicketGraphPoint::class, 10)
                 ->create([
-                    'day_date' => $date,
-                    'class' => 'demo',
-                    'type' => 'demo',
-                    'status' => 'demo',
-                    'count' => rand(10, 100),
-                    'lifecycle' => $lifecycle
+                    'day_date'  => $date,
+                    'class'     => 'demo',
+                    'type'      => 'demo',
+                    'status'    => 'demo',
+                    'count'     => rand(10, 100),
+                    'lifecycle' => $lifecycle,
                 ]);
         }
     }

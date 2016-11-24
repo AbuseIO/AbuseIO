@@ -80,8 +80,7 @@ class TicketGraphPoint extends Model
     {
         return [
             'legend' => 'total',
-            'data' =>
-                self::getData('updated_at')
+            'data'   => self::getData('updated_at'),
         ];
     }
 
@@ -89,8 +88,7 @@ class TicketGraphPoint extends Model
     {
         return [
             'legend' => 'total',
-            'data' =>
-                self::getData('created_at')
+            'data'   => self::getData('created_at'),
             ];
     }
 
@@ -110,6 +108,7 @@ class TicketGraphPoint extends Model
         foreach ($result as $data) {
             $return[$data->day_date] = $data->count;
         }
+
         return $return;
     }
 }
