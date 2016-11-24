@@ -35,6 +35,18 @@ class TicketGraphPoint extends Model
         'lifecycle',
     ];
 
+    public static function getNewDataPointsForToday()
+    {
+        return self::where('day_date', '=', Carbon::now()->toDateString())
+            ->where('lifecycle', '=', 'created_at')->get();
+    }
+
+    public static function getTouchedDataPointsForToday()
+    {
+        return self::where('day_date', '=', Carbon::now()->toDateString())
+            ->where('lifecycle', '=', 'updated_at')->get();
+    }
+
     public static function createNewWithDataForToday($data)
     {
         return self::createWithDataDateAndLifecycle($data, Carbon::now(), 'created_at');
