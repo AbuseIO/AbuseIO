@@ -10,24 +10,30 @@ class TicketGraphPointTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testDailyGraph()
+    public function testDailyTotalNewGraph()
     {
-        $this->createDateSeries();
-
-        $this->assertEquals(TicketGraphPoint::getTotalSeries()['legend'], 'total');
-        $this->assertCount(31, TicketGraphPoint::getTotalSeries()['data']);
+        $this->createDateSeries('1-8-2016', '31-8-2016', 'created_at');
+        $this->assertEquals(TicketGraphPoint::getTotalNewSeries()['legend'], 'total');
+        $this->assertCount(31, TicketGraphPoint::getTotalNewSeries()['data']);
     }
 
-    private function createDateSeries()
+    public function testDailyTotalTouchedGraph()
     {
-        $begin = new \DateTime( '2016-08-01' );
-        $end = new \DateTime( '2016-08-31' );
-        $end = $end->modify( '+1 day' );
+        $this->createDateSeries('1-8-2016', '31-8-2016', 'updated_at');
+        $this->assertEquals(TicketGraphPoint::getTotalTouchedSeries()['legend'], 'total');
+        $this->assertCount(31, TicketGraphPoint::getTotalTouchedSeries()['data']);
+    }
+
+    private function createDateSeries($startDate, $endDate, $lifecycle)
+    {
+        $begin = new \DateTime($startDate);
+        $end = new \DateTime($endDate);
+        $end = $end->modify('+1 day');
 
         $interval = new \DateInterval('P1D');
-        $daterange = new \DatePeriod($begin, $interval ,$end);
+        $dateRange = new \DatePeriod($begin, $interval, $end);
 
-        foreach($daterange as $date) {
+        foreach ($dateRange as $date) {
             factory(TicketGraphPoint::class, 10)
                 ->create([
                     'day_date' => $date,
@@ -35,7 +41,7 @@ class TicketGraphPointTest extends TestCase
                     'type' => 'demo',
                     'status' => 'demo',
                     'count' => rand(10, 100),
-                    'lifecycle' => 'created_at'
+                    'lifecycle' => $lifecycle
                 ]);
         }
     }

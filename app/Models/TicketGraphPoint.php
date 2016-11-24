@@ -60,10 +60,10 @@ class TicketGraphPoint extends Model
 
     private static function createWithDataDateAndLifecycle($data, Carbon $date, $lifecycle)
     {
-        return self::makeWithDataDateAndLifcycle($data, $date, $lifecycle)->save();
+        return self::makeWithDataDateAndLifecycle($data, $date, $lifecycle)->save();
     }
 
-    private static function makeWithDataDateAndLifcycle($data, Carbon $date, $lifecycle)
+    private static function makeWithDataDateAndLifecycle($data, Carbon $date, $lifecycle)
     {
         return new self([
             'count'             => $data->cnt,
@@ -76,17 +76,40 @@ class TicketGraphPoint extends Model
         ]);
     }
 
-    public static function getTotalSeries()
+    public static function getTotalTouchedSeries()
     {
         return [
             'legend' => 'total',
-            'data' => DB::table('ticket_graph_points')
-                ->selectRaw('day_date, sum(count) as count')
-                ->where('lifecycle', '=', 'created_at')
-                ->groupBy('day_date')
-                ->orderBy('day_date')
-                ->get()
-            ];
+            'data' =>
+                self::getData('updated_at')
+        ];
+    }
 
+    public static function getTotalNewSeries()
+    {
+        return [
+            'legend' => 'total',
+            'data' =>
+                self::getData('created_at')
+            ];
+    }
+
+    /**
+     * @return mixed
+     */
+    private static function getData($lifecycle)
+    {
+        $result = DB::table('ticket_graph_points')
+            ->selectRaw('day_date, sum(count) as count')
+            ->where('lifecycle', '=', $lifecycle)
+            ->groupBy('day_date')
+            ->orderBy('day_date')
+            ->get();
+
+        $return = [];
+        foreach ($result as $data) {
+            $return[$data->day_date] = $data->count;
+        }
+        return $return;
     }
 }
