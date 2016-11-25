@@ -10,22 +10,55 @@ class TicketGraphPointTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testDailyTotalNewGraph()
+    public function testTotalNewGraph()
     {
         $this->createDateSeries('1-8-2016', '31-8-2016', 'created_at');
-        $this->assertEquals(TicketGraphPoint::getTotalNewSeries()['legend'], 'total');
-        $this->assertCount(31, TicketGraphPoint::getTotalNewSeries()['data']);
+        $this->assertEquals(TicketGraphPoint::getLifecycle('created_at')['legend'], 'Total new');
+        $this->assertCount(31, TicketGraphPoint::getLifecycle('created_at')['data']);
     }
 
-    public function testDailyTotalTouchedGraph()
+    public function testTotalTouchedGraph()
     {
         $this->createDateSeries('1-8-2016', '31-8-2016', 'updated_at');
-        $this->assertEquals(TicketGraphPoint::getTotalTouchedSeries()['legend'], 'total');
-        $this->assertCount(31, TicketGraphPoint::getTotalTouchedSeries()['data']);
+        $this->assertEquals(TicketGraphPoint::getLifecycle('updated_at')['legend'], 'Total touched');
+        $this->assertCount(31, TicketGraphPoint::getLifecycle('updated_at')['data']);
     }
 
-    private function createDateSeries($startDate, $endDate, $lifecycle)
+    public function testNewGraphWithTwoClasses()
     {
+        $this->createDateSeries('1-8-2016', '31-8-2016', 'created_at', ['class' => ['red', 'blue']]);
+
+        $red = TicketGraphPoint::getLifecycleClass('created_at','red');
+        $blue = TicketGraphPoint::getLifecycleClass('created_at','blue');
+        $total = TicketGraphPoint::getLifecycle('created_at');
+
+        //$this->assertEquals('blue', $blue['legend']);
+        $this->assertEquals(31, count($blue['data']) + count($red['data']));
+        $this->assertCount(31, $total["data"]);
+
+    }
+
+    public function testNewGraphWithTwoClassesOverlappingTimeseries()
+    {
+        $this->createDateSeries('10-8-2016', '31-8-2016', 'created_at', ['class' => ['blue']]);
+        $this->createDateSeries('1-8-2016', '31-8-2016', 'created_at', ['class' => ['red']]);
+
+        $red = TicketGraphPoint::getLifecycleClass('created_at', 'red');
+        $blue = TicketGraphPoint::getLifecycleClass('created_at', 'blue');
+
+        $this->assertCount(31, TicketGraphPoint::getLifecycle('created_at')['data']);
+
+        //$this->assertEquals('red', $red['legend']);
+        $this->assertCount(31, $red['data']);
+
+        //$this->assertEquals('blue', $blue['legend']);
+        $this->assertCount(22, $blue['data']);
+    }
+
+    private function createDateSeries($startDate, $endDate, $lifecycle, $config = [])
+    {
+        $config = $this->loadConfig($config);
+
         $begin = new \DateTime($startDate);
         $end = new \DateTime($endDate);
         $end = $end->modify('+1 day');
@@ -34,15 +67,32 @@ class TicketGraphPointTest extends TestCase
         $dateRange = new \DatePeriod($begin, $interval, $end);
 
         foreach ($dateRange as $date) {
-            factory(TicketGraphPoint::class, 10)
+            factory(TicketGraphPoint::class)
                 ->create([
                     'day_date'  => $date,
-                    'class'     => 'demo',
-                    'type'      => 'demo',
-                    'status'    => 'demo',
+                    'class'     => $config['class'][array_rand($config['class'], 1)],
+                    'type'      => $config['type'][array_rand($config['type'], 1)],
+                    'status'    => $config['status'][array_rand($config['status'], 1)],
                     'count'     => rand(10, 100),
                     'lifecycle' => $lifecycle,
                 ]);
         }
+    }
+
+    private function loadConfig($config)
+    {
+        $defaultConfig = [
+            'class' => ['demo'],
+            'type' => ['demo'],
+            'status' => ['demo'],
+        ];
+
+        foreach ($defaultConfig as $key => $value) {
+            if (!array_key_exists($key, $config)) {
+                $config[$key] = $value;
+            }
+        }
+
+        return $config;
     }
 }

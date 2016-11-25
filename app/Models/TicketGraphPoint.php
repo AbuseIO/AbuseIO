@@ -79,36 +79,78 @@ class TicketGraphPoint extends Model
     public static function getTotalTouchedSeries()
     {
         return [
-            'legend' => 'total',
-            'data'   => self::getData('updated_at'),
+            'legend' => 'total touched',
+            'data'   => self::getDataWithLifecycle('updated_at'),
+        ];
+    }   
+    
+    public static function getSeriesByClass($class)
+    {
+        return [
+            'legend' => $class,
+            'data' => self::getDataForLifecycleClass('created_at', $class)
         ];
     }
 
-    public static function getTotalNewSeries()
+    public static function __callStatic($name, $arguments)
     {
-        return [
-            'legend' => 'total',
-            'data'   => self::getData('created_at'),
-            ];
-    }
+        $params = array_reverse(
+            explode("_", snake_case($name))
+        );
 
-    /**
-     * @return mixed
-     */
-    private static function getData($lifecycle)
-    {
-        $result = DB::table('ticket_graph_points')
-            ->selectRaw('day_date, sum(count) as count')
-            ->where('lifecycle', '=', $lifecycle)
-            ->groupBy('day_date')
-            ->orderBy('day_date')
-            ->get();
+        $arguments = array_reverse($arguments);
 
-        $return = [];
-        foreach ($result as $data) {
-            $return[$data->day_date] = $data->count;
+        foreach ($arguments as $key => $argument) {
+            $$params[$key] = $argument;
         }
 
-        return $return;
+        $qb = self::getQueryBuilder($lifecycle);
+        
+        $validScopes = [];
+
+        foreach (['class', 'status', 'type'] as $scope) {
+            if (isset($$scope)) {
+                self::scope($scope, $$scope, $qb);
+                $validScopes[] = $scope;
+            }
+        }       
+
+        $dataPoints = [];
+        foreach ($qb->get() as $data) {
+            $dataPoints[$data->day_date] = $data->count;
+        }      
+        
+        return [
+            'legend' => self::resolveLegend($lifecycle, $validScopes),
+            'data' => $dataPoints,
+        ];
+    }
+    
+    private static function resolveLegend($lifecycle, $validScopes) {
+        if (empty ($validScopes)) {
+            if ($lifecycle === 'created_at') return 'Total new';
+            return 'Total touched';
+        }
+    }
+
+    private static function scope($name, $value, $qb)
+    {
+        $value = is_string($value) ? [$value] : $value;
+        $qb->where(function ($query) use ($value, $name) {
+            foreach ($value as $valueItem) {
+                $query->orWhere($name, '=', $valueItem);
+            }
+        });
+
+        $qb->groupBy($name);
+    }
+
+    private static function getQueryBuilder($lifecycle)
+    {
+        return DB::table('ticket_graph_points')
+        ->selectRaw('day_date, sum(count) as count')
+        ->where('lifecycle', '=', $lifecycle)
+        ->groupBy('day_date')
+        ->orderBy('day_date');
     }
 }
