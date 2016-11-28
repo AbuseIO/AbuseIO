@@ -3,6 +3,7 @@
 namespace tests\Jobs;
 
 use AbuseIO\Jobs\GenerateTicketsGraphPoints;
+
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\TicketGraphPoint;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -25,12 +26,12 @@ class GenerateTicketsGraphPointsTest extends TestCase
         factory(Ticket::class, 10)->create();
         $job = new GenerateTicketsGraphPoints();
         $job->storeNewTicketDataForToday();
-        $this->assertEquals($this->countTicketsNewToday(), 10);
+        $this->assertEquals(10, $this->countTicketsNewToday());
     }
 
     private function countTicketsNewToday()
     {
-        return TicketGraphPoint::getNewDataPointsForToday()->reduce(function ($sum, $graphPoint) {
+        return TicketGraphPoint::getNewDataPointsForToday()->reduce(function($sum, $graphPoint) {
             return $sum + (int) ($graphPoint->count);
         });
     }
@@ -44,12 +45,12 @@ class GenerateTicketsGraphPointsTest extends TestCase
 
         $job = new GenerateTicketsGraphPoints();
         $job->storeTouchedDataForToday();
-        $this->assertEquals($this->countTicketsTouchedToday(), 10);
+        $this->assertEquals(10, $this->countTicketsTouchedToday());
     }
 
     private function countTicketsTouchedToday()
     {
-        return TicketGraphPoint::getTouchedDataPointsForToday()->reduce(function ($sum, $graphPoint) {
+        return TicketGraphPoint::getTouchedDataPointsForToday()->reduce(function($sum, $graphPoint) {
             return $sum + (int) ($graphPoint->count);
         });
     }

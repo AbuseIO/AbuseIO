@@ -36,6 +36,24 @@ class TicketGraphPoint extends Model
         'lifecycle',
     ];
 
+    public static function getStatistics($lifecycle)
+    {
+        $today = date('Y-m-d');
+        $oneYearAgo = date('Y-m-d', strtotime($today.' -1 year'));
+
+        $collection = self::where('day_date', '>=', $oneYearAgo)
+            ->where('lifecycle', '=', $lifecycle)
+            ->groupBy('day_date')
+            ->orderBy('day_date', 'desc')
+            ->get();
+
+        return [
+            "year" => $collection->take(365)->sum('count'),
+            "month" => $collection->take(30)->sum('count'),
+            "day" => $collection->take(1)->sum('count')
+        ];
+    }
+
     public static function getNewDataPointsForToday()
     {
         return self::where('day_date', '=', Carbon::now()->toDateString())
@@ -82,7 +100,7 @@ class TicketGraphPoint extends Model
             'legend' => 'total touched',
             'data'   => self::getDataWithLifecycle('updated_at'),
         ];
-    }   
+    }
     
     public static function getSeriesByClass($class)
     {
@@ -98,14 +116,20 @@ class TicketGraphPoint extends Model
             explode("_", snake_case($name))
         );
 
+        if (!in_array('lifecycle', $params)) {
+            return  parent::__callStatic($name, $arguments);
+        }
+
         $arguments = array_reverse($arguments);
+
+        /** @var string $lifecycle **/
 
         foreach ($arguments as $key => $argument) {
             $$params[$key] = $argument;
         }
 
         $qb = self::getQueryBuilder($lifecycle);
-        
+
         $validScopes = [];
 
         foreach (['class', 'status', 'type'] as $scope) {
@@ -113,22 +137,25 @@ class TicketGraphPoint extends Model
                 self::scope($scope, $$scope, $qb);
                 $validScopes[] = $scope;
             }
-        }       
+        }
 
         $dataPoints = [];
         foreach ($qb->get() as $data) {
             $dataPoints[$data->day_date] = $data->count;
-        }      
-        
+        }
+
         return [
-            'legend' => self::resolveLegend($lifecycle, $validScopes),
-            'data' => $dataPoints,
-        ];
+                'legend' => self::resolveLegend($lifecycle, $validScopes),
+                'data' => $dataPoints,
+            ];
     }
     
-    private static function resolveLegend($lifecycle, $validScopes) {
-        if (empty ($validScopes)) {
-            if ($lifecycle === 'created_at') return 'Total new';
+    private static function resolveLegend($lifecycle, $validScopes)
+    {
+        if (empty($validScopes)) {
+            if ($lifecycle === 'created_at') {
+                return 'Total new';
+            }
             return 'Total touched';
         }
     }
@@ -152,5 +179,9 @@ class TicketGraphPoint extends Model
         ->where('lifecycle', '=', $lifecycle)
         ->groupBy('day_date')
         ->orderBy('day_date');
+    }
+    
+    public function getCompoundStatistics()
+    {
     }
 }

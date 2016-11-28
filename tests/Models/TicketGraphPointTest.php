@@ -10,6 +10,19 @@ class TicketGraphPointTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function testGetCompoundStatistics()
+    {
+        $today = date('Y-m-d');
+        $oneYearAgo = date('Y-m-d', strtotime($today.' -1 year'));     
+        $this->createDateSeries($oneYearAgo, $today, 'created_at');
+        
+        $statistics = (TicketGraphPoint::getStatistics('created_at'));
+
+        $this->assertArrayHasKey('year', $statistics);
+        $this->assertArrayHasKey('month', $statistics);
+        $this->assertArrayHasKey('day', $statistics);
+    }
+
     public function testTotalNewGraph()
     {
         $this->createDateSeries('1-8-2016', '31-8-2016', 'created_at');
@@ -92,7 +105,6 @@ class TicketGraphPointTest extends TestCase
                 $config[$key] = $value;
             }
         }
-
         return $config;
     }
 }
