@@ -303,6 +303,6 @@ class Account extends Model
      */
     public static function getSystemAccount()
     {
-        return self::where('systemaccount', 1)->first();
+        return self::where('systemaccount', true)->first();
     }
 }

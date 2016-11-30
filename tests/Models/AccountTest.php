@@ -20,7 +20,8 @@ class AccountTest extends TestCase
     public function testGetSystemAccount()
     {
         $this->assertTrue(
-            Account::getSystemAccount()->is(Account::find(1))
+            Account::getSystemAccount()->is(Account::find(1)),
+            var_dump(Account::where('systemaccount', '=', true)->first()->id)
         );
     }
 
