@@ -8,7 +8,7 @@ use tests\TestCase;
 
 class TicketGraphPointTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     public function testGetCompoundStatistics()
     {
@@ -26,14 +26,14 @@ class TicketGraphPointTest extends TestCase
     public function testTotalNewGraph()
     {
         $this->createDateSeries('1-8-2016', '31-8-2016', 'created_at');
-        $this->assertEquals(TicketGraphPoint::getLifecycle('created_at')['legend'], 'Total new');
+        $this->assertEquals(TicketGraphPoint::getLifecycle('created_at')['legend'], 'Total new by day');
         $this->assertCount(31, TicketGraphPoint::getLifecycle('created_at')['data']);
     }
 
     public function testTotalTouchedGraph()
     {
         $this->createDateSeries('1-8-2016', '31-8-2016', 'updated_at');
-        $this->assertEquals(TicketGraphPoint::getLifecycle('updated_at')['legend'], 'Total touched');
+        $this->assertEquals(TicketGraphPoint::getLifecycle('updated_at')['legend'], 'Total touched by day');
         $this->assertCount(31, TicketGraphPoint::getLifecycle('updated_at')['data']);
     }
 
