@@ -170,11 +170,11 @@ class Account extends Model
     public function setSystemaccountAttribute($value)
     {
         if ($value) {
-            $account = self::where('systemaccount', true);
+            $account = self::where('systemaccount', 1);
             $account->update(['systemaccount' => false]);
         }
 
-        self::where('id', $this->id)->update(['systemaccount' => $value]);
+        $this->attributes['systemaccount'] = ($value);
     }
 
     /*
