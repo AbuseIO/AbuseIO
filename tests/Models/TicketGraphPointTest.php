@@ -13,9 +13,9 @@ class TicketGraphPointTest extends TestCase
     public function testGetCompoundStatistics()
     {
         $today = date('Y-m-d');
-        $oneYearAgo = date('Y-m-d', strtotime($today.' -1 year'));     
+        $oneYearAgo = date('Y-m-d', strtotime($today.' -1 year'));
         $this->createDateSeries($oneYearAgo, $today, 'created_at');
-        
+
         $statistics = (TicketGraphPoint::getStatistics('created_at'));
 
         $this->assertArrayHasKey('year', $statistics);
@@ -41,14 +41,13 @@ class TicketGraphPointTest extends TestCase
     {
         $this->createDateSeries('1-8-2016', '31-8-2016', 'created_at', ['class' => ['red', 'blue']]);
 
-        $red = TicketGraphPoint::getLifecycleClass('created_at','red');
-        $blue = TicketGraphPoint::getLifecycleClass('created_at','blue');
+        $red = TicketGraphPoint::getLifecycleClass('created_at', 'red');
+        $blue = TicketGraphPoint::getLifecycleClass('created_at', 'blue');
         $total = TicketGraphPoint::getLifecycle('created_at');
 
         //$this->assertEquals('blue', $blue['legend']);
         $this->assertEquals(31, count($blue['data']) + count($red['data']));
-        $this->assertCount(31, $total["data"]);
-
+        $this->assertCount(31, $total['data']);
     }
 
     public function testNewGraphWithTwoClassesOverlappingTimeseries()
@@ -95,8 +94,8 @@ class TicketGraphPointTest extends TestCase
     private function loadConfig($config)
     {
         $defaultConfig = [
-            'class' => ['demo'],
-            'type' => ['demo'],
+            'class'  => ['demo'],
+            'type'   => ['demo'],
             'status' => ['demo'],
         ];
 
@@ -105,6 +104,7 @@ class TicketGraphPointTest extends TestCase
                 $config[$key] = $value;
             }
         }
+
         return $config;
     }
 }
