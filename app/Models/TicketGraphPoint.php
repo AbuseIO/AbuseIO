@@ -127,7 +127,7 @@ class TicketGraphPoint extends Model
          **/
 
         foreach ($arguments as $key => $argument) {
-            $$params[$key] = $argument;
+            ${$params[$key]} = $argument;
         }
 
         $qb = self::getQueryBuilder($lifecycle);
