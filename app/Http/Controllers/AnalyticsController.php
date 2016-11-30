@@ -2,9 +2,9 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use Illuminate\Http\Request;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\TicketGraphPoint;
+use Illuminate\Http\Request;
 use Lang;
 
 /**
@@ -42,8 +42,8 @@ class AnalyticsController extends Controller
 
                 $classCounts[] = $classTotal;
             }
-        }        
-        
+        }
+
         return view('analytics')
             ->with('classCounts', $classCounts)
             ->with('new', TicketGraphPoint::getStatistics('created_at'))
@@ -59,23 +59,23 @@ class AnalyticsController extends Controller
     {
         $getParams = [
             'lifecycle' => $request->get('s_lifecycle') ?: 'created_at',
-            'from' => $request->get('s_from') ?: false,
-            'till' => $request->get('s_till') ?: false,
-            'class' => $request->get('s_classification') ?: false,
-            'status' => $request->get('s_status') ?: false,
-            'type' => $request->get('s_type') ?: false,
+            'from'      => $request->get('s_from') ?: false,
+            'till'      => $request->get('s_till') ?: false,
+            'class'     => $request->get('s_classification') ?: false,
+            'status'    => $request->get('s_status') ?: false,
+            'type'      => $request->get('s_type') ?: false,
         ];
 
         $methodName = 'getDataFor';
         $params = [];
 
-        foreach($getParams as $key => $value) {
+        foreach ($getParams as $key => $value) {
             if ($value) {
                 $methodName .= ucfirst($key);
                 $params[] = $value;
             }
         }
-        
+
         return TicketGraphPoint::forwardCallToApi($methodName, $params);
     }
 }
