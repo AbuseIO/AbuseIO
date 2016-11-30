@@ -36,6 +36,11 @@ class TicketGraphPoint extends Model
         'lifecycle',
     ];
 
+    public static function getDistinctFiltersFor($column)
+    {
+        return self::distinct($column)->lists($column, $column)->toArray();
+    }
+
     public static function getStatistics($lifecycle)
     {
         $today = date('Y-m-d');
@@ -48,9 +53,10 @@ class TicketGraphPoint extends Model
             ->get();
 
         return [
-            "year" => $collection->take(365)->sum('count'),
-            "month" => $collection->take(30)->sum('count'),
-            "day" => $collection->take(1)->sum('count')
+            'year' => $collection->take(365)->sum('count'),
+            'month' => $collection->take(30)->sum('count'),
+            'week' => $collection->take(7)->sum('count'),
+            'day' => $collection->take(1)->sum('count')
         ];
     }
 
@@ -94,14 +100,6 @@ class TicketGraphPoint extends Model
         ]);
     }
 
-    public static function getTotalTouchedSeries()
-    {
-        return [
-            'legend' => 'total touched',
-            'data'   => self::getDataWithLifecycle('updated_at'),
-        ];
-    }
-    
     public static function getSeriesByClass($class)
     {
         return [
@@ -122,13 +120,20 @@ class TicketGraphPoint extends Model
 
         $arguments = array_reverse($arguments);
 
-        /** @var string $lifecycle **/
+        /**
+         * @var string $lifecycle
+         * @var string $from
+         * @var string $till
+         **/
 
         foreach ($arguments as $key => $argument) {
             $$params[$key] = $argument;
         }
 
         $qb = self::getQueryBuilder($lifecycle);
+
+        if (!empty($from)) $qb->where('day_date', '>=', $from);
+        if (!empty($till)) $qb->where('day_date', '<=', $till);
 
         $validScopes = [];
 
@@ -146,7 +151,7 @@ class TicketGraphPoint extends Model
 
         return [
                 'legend' => self::resolveLegend($lifecycle, $validScopes),
-                'data' => $dataPoints,
+                'data' => self::transformToEChart($dataPoints),
             ];
     }
     
@@ -154,10 +159,18 @@ class TicketGraphPoint extends Model
     {
         if (empty($validScopes)) {
             if ($lifecycle === 'created_at') {
-                return 'Total new';
+                return trans('misc.total_new_by_day');
             }
-            return 'Total touched';
+            return trans('misc.total_touched_by_day');
         }
+
+        $legend = [];
+
+        foreach ($validScopes as $scope) {
+            $legend[] = trans('misc.scope_'.$scope);
+        }
+
+        return trans('misc.scope_total') .' '. trans('misc.lifecycle_'.$lifecycle). ' '.trans('misc.scope_by'). ' ' . implode(", ", $legend);
     }
 
     private static function scope($name, $value, $qb)
@@ -172,6 +185,8 @@ class TicketGraphPoint extends Model
         $qb->groupBy($name);
     }
 
+
+
     private static function getQueryBuilder($lifecycle)
     {
         return DB::table('ticket_graph_points')
@@ -180,8 +195,28 @@ class TicketGraphPoint extends Model
         ->groupBy('day_date')
         ->orderBy('day_date');
     }
-    
-    public function getCompoundStatistics()
+
+    public static function getFiltersForLifecycle()
     {
+        return [
+            'created_at' => ucfirst(trans('misc.lifecycle_created_at')),
+            'touched_at' => ucfirst(trans('misc.lifecycle_touched_at'))
+        ];
+    }
+    
+    public static function transformToEchart($dataPoints)
+    {
+        $result = [];
+
+        foreach ($dataPoints as $date => $count) {
+            $carbon = Carbon::createFromFormat('Y-m-d', $date);
+            $result[] = [$carbon->year, $carbon->month-1, $carbon->day, (integer) $count];
+        }
+        return $result;
+    }
+
+    public static function forwardCallToApi($methodName, $params)
+    {
+        return forward_static_call_array([self::class, $methodName], $params);
     }
 }

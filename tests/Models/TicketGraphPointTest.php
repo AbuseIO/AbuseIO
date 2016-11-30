@@ -8,7 +8,7 @@ use tests\TestCase;
 
 class TicketGraphPointTest extends TestCase
 {
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
 
     public function testGetCompoundStatistics()
     {
