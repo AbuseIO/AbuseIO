@@ -210,7 +210,7 @@ class Account extends Model
      */
     public function isSystemAccount()
     {
-        return $this->systemaccount;
+        return (bool) $this->systemaccount;
     }
 
     /**
@@ -299,7 +299,7 @@ class Account extends Model
     }
 
     /**
-     * @return mixed
+     * @return Account|null
      */
     public static function getSystemAccount()
     {

@@ -19,9 +19,8 @@ class AccountTest extends TestCase
 
     public function testGetSystemAccount()
     {
-        $this->assertEquals(
-            Account::getSystemAccount(),
-            Account::find(1)
+        $this->assertTrue(
+            Account::getSystemAccount()->is(Account::find(1))
         );
     }
 

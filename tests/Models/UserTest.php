@@ -19,15 +19,15 @@ class UserTest extends TestCase
     public function testInverseValueSystemAccount()
     {
         $user = factory(User::class)->create();
-        $oldState = $user->account->systemaccount;
+        $oldState = $user->account->isSystemAccount();
 
-        if ($user->account->isSystemAccount() === '1') {
-            $user->account->systemaccount = '0';
+        if ($user->account->isSystemAccount()) {
+            $user->account->systemaccount = false;
         } else {
-            $user->account->systemaccount = '1';
+            $user->account->systemaccount = true;
         }
 
-        $this->assertNotEquals($user->account->systemaccount, $oldState);
+        $this->assertNotEquals($user->account->isSystemAccount(), $oldState);
     }
 
     public function testMayLoginSystemAccount()
