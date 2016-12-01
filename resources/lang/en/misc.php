@@ -121,4 +121,6 @@ return [
     'till'                                => 'Till',
     'lifecycle'                           => 'Lifecycle',
     'show_graph'                          => 'Show graph',
+    'send_notifications'                  => 'Send notifications',
+    'close'                               => 'Close',
 ];

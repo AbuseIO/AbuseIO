@@ -122,4 +122,6 @@ return [
     'from'                           => 'Vanaf',
     'till'                           => 'Tot',
     'lifecycle'                      => 'Levensloop',
+    'send_notifications'             => 'Verstuur notificaties',
+    'close'                          => 'Afsluiten',
 ];
