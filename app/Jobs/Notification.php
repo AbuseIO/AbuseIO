@@ -19,7 +19,7 @@ class Notification extends Job implements SelfHandling
 
     /**
      * Sends out notifications based on the configured notification modules.
-     * Returns false on failed or havent done anything at all.
+     * Returns false on failed or haven't done anything at all.
      *
      * @param array $notifications ($notifications[$reference][$type] => array $tickets)
      *
@@ -53,7 +53,7 @@ class Notification extends Job implements SelfHandling
                 } else {
                     Log::debug(
                         get_class($this).': '.
-                        "Notifications with {$notificationModule} was successfull for contact reference: ".
+                        "Notifications with {$notificationModule} was successful for contact reference: ".
                         key($notifications)
                     );
                 }
@@ -84,7 +84,7 @@ class Notification extends Job implements SelfHandling
         ) {
             Log::debug(
                 get_class($this).': '.
-                'No notification methods are configured, no sense into calling unexisting methods'
+                'No notification methods are configured, no sense into calling un existing methods'
             );
 
             return true;
