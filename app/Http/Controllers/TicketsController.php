@@ -107,6 +107,7 @@ class TicketsController extends Controller
                         );
                 }
             )
+            ->where('notes.deleted_at', '=', null)
             ->groupBy('tickets.id');
 
         if (!$auth_account->isSystemAccount()) {
