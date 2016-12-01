@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: martin
- * Date: 15/11/16
- * Time: 14:29.
- */
+
 namespace AbuseIO\Traits;
 
 trait InstanceComparable
@@ -13,11 +8,16 @@ trait InstanceComparable
      * @param $instance
      *
      * @return bool
+     *
+     * Please notice that the getKey method is not type safe. I do not no why.
+     * Could be an issue with model factories, because attributes in
+     * model are not explicitly cast to type.
      */
     public function is($instance)
     {
-        return
+        return (bool) (
             get_class($this) === get_class($instance)
-            && $this->getKey() === $instance->getKey();
+            && $this->getKey() == $instance->getKey()
+        );
     }
 }

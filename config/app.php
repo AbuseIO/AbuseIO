@@ -196,6 +196,7 @@ return [
         'AbuseIO\Providers\ConfigServiceProvider',
         'AbuseIO\Providers\HelperServiceProvider',
         'AbuseIO\Providers\RouteServiceProvider',
+        'AbuseIO\Providers\SystemAdminManagerProvider',
         'AbuseIO\Providers\TicketApiTokenProvider',
         'AbuseIO\Providers\ValidationsServiceProvider',
         'Chumper\Zipper\ZipperServiceProvider',

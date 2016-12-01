@@ -161,22 +161,6 @@ class Account extends Model
     {
         $this->brand = $brand;
     }
-
-    /**
-     * Mutator for the active brand.
-     *
-     * @param bool $value
-     */
-    public function setSystemaccountAttribute($value)
-    {
-        if ($value) {
-            $account = self::where('systemaccount', 1);
-            $account->update(['systemaccount' => false]);
-        }
-
-        $this->attributes['systemaccount'] = ($value);
-    }
-
     /*
     |--------------------------------------------------------------------------
     | Custom Methods
