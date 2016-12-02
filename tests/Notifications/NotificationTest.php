@@ -2,12 +2,10 @@
 
 namespace tests\Notifications;
 
-use AbuseIO\Models\Account;
 use AbuseIO\Notification\Factory;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use tests\TestCase;
 
-class NotificationsTest extends TestCase
+class NotificationTest extends TestCase
 {
     public function testNotificationFactoryForMail()
     {

@@ -161,6 +161,7 @@ class Account extends Model
     {
         $this->brand = $brand;
     }
+
     /*
     |--------------------------------------------------------------------------
     | Custom Methods
