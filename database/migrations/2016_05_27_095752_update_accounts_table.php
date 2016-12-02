@@ -2,6 +2,7 @@
 
 use AbuseIO\Models\Account;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class UpdateAccountsTable extends Migration
 {
@@ -13,7 +14,7 @@ class UpdateAccountsTable extends Migration
     public function up()
     {
         // add a token column to the table
-        Schema::table('accounts', function ($table) {
+        Schema::table('accounts', function (Blueprint $table) {
             $table->string('token');
         });
 
@@ -35,6 +36,9 @@ class UpdateAccountsTable extends Migration
      */
     public function down()
     {
-        // nothing to do, table is dropped in the create migration
+        // put this code here because in 5.3 users can rollback by steps.
+        Schema::table('accounts', function (Blueprint $table) {
+            $table->dropColumn('token');
+        });
     }
 }
