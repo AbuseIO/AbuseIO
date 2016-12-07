@@ -110,7 +110,7 @@ class BrandsController extends Controller
                         ]
                     );
                     if (!$brand->isSystemBrand() or $account->isSystemAccount()) {
-                        if (!$account->brand->is(brand)) {
+                        if (!$account->brand->is($brand)) {
                             $actions .= ' <a href="brands/'.$brand->id.
                                 '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> '.
                                 trans('misc.button.activate').'</a> ';
