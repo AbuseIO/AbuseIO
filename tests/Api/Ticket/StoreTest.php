@@ -38,7 +38,6 @@ class StoreTest extends TestCase
 
         $obj = $response->getContent();
 
-
         foreach ($ticket as $key => $value) {
             $this->assertContains(
                 $key,

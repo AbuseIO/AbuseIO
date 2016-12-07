@@ -190,7 +190,6 @@ class BrandsController extends Controller
                 ->withErrors(['logo' => 'Something went wrong, while uploading the logo']);
         }
 
-
         try {
             if (!$account->isSystemAccount()) {
                 $input['creator_id'] = $account->id;
@@ -344,7 +343,6 @@ class BrandsController extends Controller
 
         $input['mail_custom_template'] = $input['mail_custom_template'] == 'true';
         $input['ash_custom_template'] = $input['ash_custom_template'] == 'true';
-
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());

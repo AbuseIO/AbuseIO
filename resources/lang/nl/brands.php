@@ -23,5 +23,4 @@ return [
     'ash_custom_template'  => 'Aangepaste ASH template',
     'ash_template'         => 'ASH template',
 
-
 ];

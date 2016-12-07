@@ -5,6 +5,7 @@
  * Date: 11/11/16
  * Time: 15:02.
  */
+
 namespace tests\Http\Middleware;
 
 use AbuseIO\Http\Middleware\CheckAccount;
@@ -58,7 +59,6 @@ class CheckAccountTest extends TestCase
         $model = factory(Account::class)->create();
 
         $r = new Request(['id' => $model->id]);
-
 
         $callback = $this->middleware->handle(
             $r,
