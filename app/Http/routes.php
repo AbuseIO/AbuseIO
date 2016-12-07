@@ -15,7 +15,6 @@ Route::get(
     }
 );
 
-
 /*
  * Admin routes
  */

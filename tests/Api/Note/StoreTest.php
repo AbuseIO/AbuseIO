@@ -39,7 +39,6 @@ class StoreTest extends TestCase
 
         $response = $this->executeCall($note);
 
-
         $this->assertTrue(
             $response->isSuccessful()
         );

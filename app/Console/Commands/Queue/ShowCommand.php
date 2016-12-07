@@ -13,7 +13,6 @@ class ShowCommand extends Command
 {
     use ShowHelpWhenRunTimeExceptionOccurs;
 
-
     /**
      * The console command name.
      *

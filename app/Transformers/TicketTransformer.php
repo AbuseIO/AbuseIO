@@ -28,7 +28,6 @@ class TicketTransformer extends TransformerAbstract
             $notes[] = (new NoteTransformer())->transform($note);
         }
 
-
         return [
             'id'                                    => (int) $ticket->id,
             'ip'                                    => (string) $ticket->ip,
