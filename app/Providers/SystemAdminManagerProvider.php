@@ -17,7 +17,10 @@ class SystemAdminManagerProvider extends ServiceProvider
         Account::saving(function ($current) {
             /** @var Account $current */
             if ($current->isSystemAccount()) {
-                $account = Account::where('systemaccount', 1)->first();
+                $account = Account::where('systemaccount', 1)
+                    ->where('id','!=', $current->id)
+                    ->first();
+
                 if ($account !== null) {
                     $account->update(['systemaccount' => false]);
                 }
