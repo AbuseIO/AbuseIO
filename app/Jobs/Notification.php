@@ -31,6 +31,9 @@ class Notification extends Job implements SelfHandling
             && is_array(config('notifications'))
         ) {
             foreach (config('notifications') as $notificationModule => $notificationConfig) {
+                /**
+                 * TODO refactor this factory call to an instance variable use de Dependency Container to resolve it to make it testable.
+                 */
                 $notification = notificationFactory::create($notificationModule);
 
                 if (config("notifications.{$notificationModule}.notification.enabled") !== true) {
