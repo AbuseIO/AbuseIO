@@ -18,7 +18,7 @@ class SystemAdminManagerProvider extends ServiceProvider
             /** @var Account $current */
             if ($current->isSystemAccount()) {
                 $account = Account::where('systemaccount', 1)
-                    ->where('id','!=', $current->id)
+                    ->where('id', '!=', $current->id)
                     ->first();
 
                 if ($account !== null) {
