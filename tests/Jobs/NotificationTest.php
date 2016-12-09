@@ -7,8 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Log;
 use tests\TestCase;
 
-
-class NotificationsTest extends TestCase
+class NotificationTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -20,7 +19,6 @@ class NotificationsTest extends TestCase
         $this->notification = new Notification();
     }
 
-
     /** @test */
     public function there_is_no_notifications_key_in_config()
     {
@@ -29,7 +27,6 @@ class NotificationsTest extends TestCase
         Log::shouldReceive('debug')
             ->once()
             ->with('AbuseIO\Jobs\Notification: No notification methods are installed, skipping notifications');
-
 
         $this->assertFalse($this->notification->send([]));
     }
@@ -87,5 +84,4 @@ class NotificationsTest extends TestCase
 //
 //        $this->assertTrue($this->notification->send([]));
 //    }
-
 }
