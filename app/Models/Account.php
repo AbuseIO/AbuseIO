@@ -148,12 +148,11 @@ class Account extends Model
      */
     public function getActiveBrandAttribute()
     {
-        return $this->brand();
+        return $this->brand;
     }
 
     /**
-     * Mutator for the active brand.
-     * TODO: Note mark: put a brand in a relationship?
+     * Mutator/wrapper for the active brand.
      *
      * @param \AbuseIO\Models\Brand $brand
      */
