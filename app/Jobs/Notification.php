@@ -175,7 +175,7 @@ class Notification extends Job implements SelfHandling
      * @param int|bool    $ticket    Ticket ID
      * @param string|bool $reference ReferenceName of contact in ticket
      * @param bool|bool   $force     Force sending even when there are no new events
-     * @param string      $this->only      Only send to ('ip', 'domain' or null (both))
+     * @param string      $only      Only send to ('ip', 'domain' or null (both))
      *
      * @return array $notificationList   List of notifications to send
      */
