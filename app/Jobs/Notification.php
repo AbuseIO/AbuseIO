@@ -21,9 +21,6 @@ class Notification extends Job implements SelfHandling
 
     private $only;
 
-
-
-
     /**
      * Sends out notifications based on the configured notification modules.
      * Returns false on failed or haven't done anything at all.
@@ -201,7 +198,6 @@ class Notification extends Job implements SelfHandling
             return $message;
         }
 
-
         $this->setOnly($only);
 
         $sendInfoAfter = strtotime(config('main.notifications.info_interval').' ago');
@@ -301,9 +297,10 @@ class Notification extends Job implements SelfHandling
     }
 
     /**
-     * Wrapper around notification factory to make use of the factory testable;
-     * 
+     * Wrapper around notification factory to make use of the factory testable;.
+     *
      * @param $notificationModule
+     *
      * @return object
      */
     public function getNotificationInstance($notificationModule)
@@ -315,6 +312,7 @@ class Notification extends Job implements SelfHandling
      * @param $ticket
      * @param $reference
      * @param $force
+     *
      * @return mixed
      */
     private function getTicketList($ticket, $reference, $force)
@@ -335,6 +333,7 @@ class Notification extends Job implements SelfHandling
         }
 
         $tickets = $search->get();
+
         return $tickets;
     }
 
@@ -345,21 +344,23 @@ class Notification extends Job implements SelfHandling
     {
         $validator = Validator::make(
             [
-                'notification info_interval' => strtotime(config('main.notifications.info_interval') . ' ago'),
-                'notification abuse_interval' => strtotime(config('main.notifications.abuse_interval') . ' ago'),
-                'notification min_lastseen' => strtotime(config('main.notifications.min_lastseen') . ' ago'),
+                'notification info_interval'  => strtotime(config('main.notifications.info_interval').' ago'),
+                'notification abuse_interval' => strtotime(config('main.notifications.abuse_interval').' ago'),
+                'notification min_lastseen'   => strtotime(config('main.notifications.min_lastseen').' ago'),
             ],
             [
-                'notification info_interval' => 'required|timestamp',
+                'notification info_interval'  => 'required|timestamp',
                 'notification abuse_interval' => 'required|timestamp',
-                'notification min_lastseen' => 'required|timestamp',
+                'notification min_lastseen'   => 'required|timestamp',
             ]
         );
+
         return $validator;
     }
 
     /**
      * @param $only
+     *
      * @return null
      */
     private function setOnly($only)

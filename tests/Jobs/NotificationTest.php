@@ -70,7 +70,7 @@ class NotificationTest extends TestCase
         $stub = $this->getMock('AbuseIO\Notification\Mail', ['send']);
         $stub->method('send')
             ->will($this->returnValue([
-                'errorStatus' => true
+                'errorStatus' => true,
             ]));
 
         $notification = $this->getMock('AbuseIO\Jobs\Notification', ['getNotificationInstance']);
@@ -81,16 +81,16 @@ class NotificationTest extends TestCase
                 $stub
             ));
 
-
         $this->assertFalse($notification->send([]));
     }
+
     /** @test */
     public function the_notification_was_send_and_the_notification_was_debug_logged_and_returns_true()
     {
         $stub = $this->getMock('AbuseIO\Notification\Mail', ['send']);
         $stub->method('send')
             ->will($this->returnValue([
-                'errorStatus' => false
+                'errorStatus' => false,
             ]));
 
         $notification = $this->getMock('AbuseIO\Jobs\Notification', ['getNotificationInstance']);
