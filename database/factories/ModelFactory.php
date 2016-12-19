@@ -36,8 +36,8 @@ $factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker
     return [
         'reference'   => sprintf('reference_%s', uniqid()),
         'name'        => $faker->name,
-        'email'       => $faker->email,
-        'api_host'    => $faker->url, //'api_host',
+        'email'       => $faker->safeEmail,
+        'api_host'    => $faker->url,
         'auto_notify' => $faker->boolean(),
         'enabled'     => $faker->boolean(),
         'account_id'  => AbuseIO\Models\Account::all()->random()->id,
@@ -61,11 +61,11 @@ $factory->define(AbuseIO\Models\Event::class, function (Faker\Generator $faker) 
     $ticket = $ticket ?: factory(\AbuseIO\Models\Ticket::class)->create();
 
     return [
-        'ticket_id'                 => $ticket->id,
-        'evidence_id'               => $evidence->id,
-        'source'                    => $faker->name,
-        'timestamp'                 => time(),
-        'information'               => json_encode(
+        'ticket_id'   => $ticket->id,
+        'evidence_id' => $evidence->id,
+        'source'      => $faker->name,
+        'timestamp'   => time(),
+        'information' => json_encode(
             [
                 'engine' => $faker->sentence(5),
                 'uri'    => $faker->url,
@@ -177,7 +177,7 @@ $factory->define(AbuseIO\Models\Ticket::class, function (Faker\Generator $faker)
     return [
         'ip'                            => $faker->boolean() ? $faker->ipv4 : $faker->ipv6,
         'domain'                        => $faker->domainName,
-        'class_id'                      => array_rand((trans('classifications'))),
+        'class_id'                      => array_rand(trans('classifications')),
         'type_id'                       => $types[array_rand($types)],
         'ip_contact_account_id'         => $ipContact->account_id,
         'ip_contact_reference'          => $ipContact->reference,
@@ -204,7 +204,7 @@ $factory->define(AbuseIO\Models\User::class, function (Faker\Generator $faker) {
     return [
         'first_name' => $faker->firstName,
         'last_name'  => $faker->lastName,
-        'email'      => $faker->email,
+        'email'      => $faker->safeEmail,
         'password'   => $faker->password(6),
         'account_id' => 1, //factory(\AbuseIO\Models\Account::class)->create(['disabled' => false]),
         'locale'     => 'en',
