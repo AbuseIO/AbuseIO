@@ -17,4 +17,5 @@ return [
     'linked_account'    => 'Gekoppeld account',
     'first_name'        => 'Voornaam',
     'last_name'         => 'Achternaam',
+    'login_disabled'    => 'Deze gebruiker is gedeactiveerd.',
 ];

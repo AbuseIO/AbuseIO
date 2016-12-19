@@ -2,14 +2,16 @@
 
 namespace AbuseIO\Http\Requests;
 
-use AbuseIO\Models\Incident;
-use Input;
+use AbuseIO\Models\Ticket;
+use AbuseIO\Traits\Api;
 
 /**
  * Class TicketFormRequest.
  */
 class TicketFormRequest extends Request
 {
+    use Api;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,47 +35,16 @@ class TicketFormRequest extends Request
             case 'DELETE':
                 break;
             case 'POST':
-                return Incident::createRules();
-            case 'PUT':
+                return Ticket::createRules();
                 break;
+            case 'PUT':
             case 'PATCH':
-                return response('Unauthorized.', 401);
+                return Ticket::updateRules($this);
+                break;
             default:
                 break;
         }
 
         return [];
-    }
-
-    /**
-     * Transform the form results before sending it to validation.
-     *
-     * @param array $query
-     * @param array $request
-     * @param array $attributes
-     * @param array $cookies
-     * @param array $files
-     * @param array $server
-     * @param null  $content
-     */
-    public function initialize(
-        array $query = [],
-        array $request = [],
-        array $attributes = [],
-        array $cookies = [],
-        array $files = [],
-        array $server = [],
-        $content = null
-    ) {
-        parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
-
-        $input = Input::all();
-        $input['timestamp'] = strtotime($input['timestamp']);
-
-        if (!json_decode($input['information'])) {
-            $input['information'] = json_encode(['report' => $input['information']]);
-        }
-
-        $this->getInputSource()->replace($input);
     }
 }

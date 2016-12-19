@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Note.
  *
- * @property int $id
- * @property int $ticket_id fillable
- * @property string $submitter fillable
- * @property string $text fillable
  * @property bool $hidden fillable
  * @property bool $viewed fillable
  * @property int $created_at
- * @property int $updated_at
  * @property int $deleted_at
+ * @property int $id
+ * @property int $ticket_id fillable
+ * @property int $updated_at
+ * @property string $submitter fillable
+ * @property string $text fillable
  */
 class Note extends Model
 {
@@ -85,6 +85,20 @@ class Note extends Model
 
     /*
     |--------------------------------------------------------------------------
+    | Relationship Methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function ticket()
+    {
+        return $this->belongsTo('AbuseIO\Models\Ticket');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | Accessors & Mutators
     |--------------------------------------------------------------------------
     */
@@ -111,5 +125,26 @@ class Note extends Model
     public function getCreatedAtAttribute($date)
     {
         return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
+    }
+
+    /**
+     * Static method to check if the account has access to the model instance.
+     *
+     * @param $model_id
+     * @param \AbuseIO\Models\Account $account
+     *
+     * @return bool
+     */
+    public static function checkAccountAccess($model_id, Account $account)
+    {
+        // Early return when we are in the system account
+        if ($account->isSystemAccount()) {
+            return true;
+        }
+
+        $ticket = self::find($model_id)->ticket;
+
+        return  ($ticket->accountIp->is($account))
+            || ($ticket->domainIp->is($account));
     }
 }

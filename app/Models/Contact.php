@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property bool $auto_notify fillable
  * @property bool $enabled fillable
  * @property int account_id fillable
+ * @property string $token
  * @property int $created_at
  * @property int $updated_at
  * @property int $deleted_at
@@ -44,6 +45,7 @@ class Contact extends Model
         'auto_notify',
         'enabled',
         'account_id',
+        'contact',
     ];
 
     /*
@@ -105,7 +107,7 @@ class Contact extends Model
      */
     public function account()
     {
-        return $this->belongsTo('AbuseIO\Models\Account');
+        return $this->belongsTo(Account::class);
     }
 
     /**
@@ -115,7 +117,7 @@ class Contact extends Model
      */
     public function domains()
     {
-        return $this->hasMany('AbuseIO\Models\Domain');
+        return $this->hasMany(Domain::class);
     }
 
     /**
@@ -125,7 +127,7 @@ class Contact extends Model
      */
     public function netblocks()
     {
-        return $this->hasMany('AbuseIO\Models\Netblock');
+        return $this->hasMany(Netblock::class);
     }
 
     /*
@@ -151,7 +153,7 @@ class Contact extends Model
 
         $contact = self::find($model_id);
 
-        return $contact->account->id == $account->id;
+        return $contact->account->is($account);
     }
 
     /**

@@ -30,6 +30,7 @@
 		"ext-curl" : "*",
 		"laravel/framework": "5.1.*",
 		"laravelcollective/html": "~5.0",
+		"wpb/string-blade-compiler": "3.0.*",
 		"php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
 		"webpatser/laravel-uuid": "1.*",
 		"Chumper/Zipper": "0.6.x",
@@ -38,6 +39,9 @@
 		"yajra/laravel-datatables-oracle": "~5.0",
 		"guzzlehttp/guzzle": "6.1.1",
 		"marknl/iodef": "~1.0.3",
+		"sabre/xml": "1.5.*",
+		"sabre/uri": "1.2.*",
+		"sorskod/larasponse": "dev-L5",
 
 		"abuseio/parser-common": "1.1.*",
 		"abuseio/parser-abusehub": "1.3.*",
@@ -62,15 +66,18 @@
 		"abuseio/collector-snds": "1.4.*",
 		
 		"abuseio/notification-common": "1.1.*",
-		"abuseio/notification-mail": "1.2.*",
+		"abuseio/notification-mail": "1.3.*",
+
 		"zendframework/zend-xmlrpc": "^2.5",
-		"jeremykendall/php-domain-parser": "^3.0"
+		"jeremykendall/php-domain-parser": "^3.0",
+		"zendframework/zend-json": "^3.0"
 
 	},
 	"require-dev": {
 		"fzaninotto/faker": "~1.4",
 		"phpunit/phpunit": "~4.0",
-		"phpspec/phpspec": "~2.1"
+		"phpspec/phpspec": "~2.1",
+		"mockery/mockery": "0.9.5"
 	},
 	"autoload": {
 		"classmap": [

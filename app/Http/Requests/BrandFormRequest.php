@@ -3,12 +3,15 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Brand;
+use AbuseIO\Traits\Api;
 
 /**
  * Class BrandFormRequest.
  */
 class BrandFormRequest extends Request
 {
+    use Api;
+
     /**
      * Determine if the user is authorized to make this request.
      *

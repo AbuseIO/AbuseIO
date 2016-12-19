@@ -1,7 +1,10 @@
 <?php
 
 Route::resource('contacts', 'ContactsController');
-Route::model('contacts', 'AbuseIO\Models\Contact');
+
+Route::model('contacts', 'AbuseIO\Models\Contact', function () {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
+});
 
 Route::group(
     [
@@ -102,6 +105,5 @@ Route::group(
                 'uses'       => 'ContactsController@destroy',
             ]
         );
-
     }
 );

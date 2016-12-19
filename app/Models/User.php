@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Traits\InstanceComparable;
 use Hash;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -28,7 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, SoftDeletes;
+    use Authenticatable, CanResetPassword, SoftDeletes, InstanceComparable;
 
     /**
      * The database table used by the model.
@@ -50,6 +51,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'account_id',
         'locale',
         'disabled',
+        'options',
     ];
 
     /**
@@ -60,6 +62,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = [
         'password',
         'remember_token',
+        'options',
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'options' => 'array',
     ];
 
     /*
@@ -121,21 +133,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Many-To-Many Relationship Method for accessing the User->roles.
      *
-     * @return \Illuminate\Database\Eloquent\Relationship\belongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function roles()
     {
-        return $this->belongsToMany('AbuseIO\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 
     /**
      * One-To-Many relation to account.
      *
-     * @return \Illuminate\Database\Eloquent\Relationship\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
     public function account()
     {
-        return $this->belongsTo('AbuseIO\Models\Account');
+        return $this->belongsTo(Account::class);
     }
 
     /*
@@ -179,7 +191,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected function getAllPermissionsFromAllRoles()
     {
-        $permissions = $this->roles->load('permissions')->fetch('permissions')->toArray();
+        $permissions =
+            $this->roles
+            ->load('permissions')
+            ->pluck('permissions')
+            ->toArray();
 
         return array_map(
             'strtolower',
@@ -205,7 +221,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * Encrypt password to hash.
      *
-     * @param $value The password to set
+     * @param $value String The password to set
      */
     public function setPasswordAttribute($value)
     {
@@ -237,9 +253,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         $user = self::find($model_id);
 
-        $allowed = $user->account_id == $account->id;
-
-        return $allowed;
+        return $user->account->is($account);
     }
 
     /**
@@ -261,27 +275,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function mayLogin(&$messages)
     {
+        $account = $this->account;
         // First user is always allowed to login, early return
-        if ($this->id == 1) {
+        if ($account->isSystemAccount()) {
             return true;
         }
 
         $result = true;
 
         // Check if the account is disabled (system account is never disabled)
-        $account = $this->account;
-        if ($account->disabled && $account->id != 1) {
+
+        if ($account->disabled) {
             array_push($messages, "The account {$account->name} for this login is disabled.");
-            if ($result) {
-                $result = false;
-            }
+            $result = false;
         }
 
         if ($this->disabled) {
-            array_push($messages, 'This login is disabled.');
-            if ($result) {
-                $result = false;
-            }
+            array_push($messages, trans('users.login_disabled'));
+            $result = false;
         }
 
         return $result;
@@ -318,12 +329,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function mayDisable(User $auth_user)
     {
         // can't disable/enable ourselves
-        if ($auth_user->id == $this->id) {
-            return false;
-        }
-
-        // all other cases
-        return true;
+        return !$auth_user->is($this);
     }
 
     /**
@@ -337,5 +343,42 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function mayEnable(User $auth_user)
     {
         return $this->mayDisable($auth_user);
+    }
+
+    /**
+     * Save an option in the user.
+     *
+     * @param $name
+     * @param $value
+     */
+    public function setOption($name, $value)
+    {
+        // can't access the array directly so retrieve it,
+        // edit it and write it back.
+
+        $options = $this->options;
+        $options[$name] = $value;
+        $this->options = $options;
+
+        $this->save();
+    }
+
+    /**
+     * Retrieve an option from the user.
+     *
+     * @param $name
+     *
+     * @return null
+     */
+    public function getOption($name)
+    {
+        $result = null;
+
+        $options = $this->options;
+        if (array_key_exists($name, $options)) {
+            $result = $options[$name];
+        }
+
+        return $result;
     }
 }

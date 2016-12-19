@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
  */
 abstract class AbstractEditCommand extends Command
 {
-    //use ShowHelpWhenRunTimeExceptionOccurs;
+    use ShowHelpWhenRunTimeExceptionOccurs;
 
     private $dirtyAttributes = [];
 

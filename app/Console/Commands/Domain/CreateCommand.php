@@ -20,8 +20,8 @@ class CreateCommand extends AbstractCreateCommand
     {
         return new InputDefinition(
             [
-                new InputArgument('name', null, 'domain name'),
-                new InputArgument('contact_id', null, 'the contact_id'),
+                new InputArgument('name', InputArgument::REQUIRED, 'domain name'),
+                new InputArgument('contact_id', InputArgument::REQUIRED, 'the contact_id'),
                 new InputArgument('enabled', null, 'true|false, Set the account to be enabled', false),
             ]
         );

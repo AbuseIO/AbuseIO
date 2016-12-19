@@ -2,6 +2,7 @@
 
 namespace tests\Console\Commands\User;
 
+use AbuseIO\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -10,8 +11,10 @@ use tests\TestCase;
  */
 class ListCommandTest extends TestCase
 {
-    public function testNetBlockListCommand()
+    public function testUserListCommand()
     {
+        $user = User::all()->random();
+
         $exitCode = Artisan::call(
             'user:list',
             [
@@ -20,22 +23,25 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('admin@isp.local', Artisan::output());
+        $this->assertContains($user->email, Artisan::output());
     }
 
-    public function testNetBlockListCommandWithValidFilter()
+    public function testUserListCommandWithValidFilter()
     {
+        $user = User::all()->random();
+        $other_user = User::where('id', '!=', $user->id)->get()->random();
+
         $exitCode = Artisan::call(
             'user:list',
             [
-                '--filter' => 'user',
+                '--filter' => $user->email,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
 
         $output = Artisan::output();
-        $this->assertContains('user@isp.local', $output);
-        $this->assertNotContains('admin@account2.local', $output);
+        $this->assertContains($user->email, $output);
+        $this->assertNotContains($other_user->email, $output);
     }
 }

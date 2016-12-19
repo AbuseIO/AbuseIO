@@ -12,14 +12,15 @@ class HelperServiceProvider extends ServiceProvider
     protected $helpers = [
         'castBoolToString',
         'castStringToBool',
+        'generateApiToken',
         'generatePassword',
         'getDomain',
         'getUri',
         'getUrlData',
         'hFileSize',
-        'isValidRegex',
-        'inetPtoi',
         'inetItop',
+        'inetPtoi',
+        'isValidRegex',
     ];
 
     /**

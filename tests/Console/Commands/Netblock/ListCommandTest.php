@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Netblock;
 
+use AbuseIO\Models\Contact;
+use AbuseIO\Models\Netblock;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -12,23 +14,32 @@ class ListCommandTest extends TestCase
 {
     public function testNetBlockListCommand()
     {
+        $netblock = Netblock::all()->random();
+        $contact = $netblock->contact;
+
         $exitCode = Artisan::call('netblock:list', []);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('John Doe', Artisan::output());
+        $this->assertContains($contact->name, Artisan::output());
     }
 
     public function testNetBlockListCommandWithValidFilter()
     {
+        $netblock = Netblock::all()->random();
+        $ip = $netblock->first_ip;
+        $netblock_contact = $netblock->contact;
+        $other_contact = Contact::where('id', '!=', $netblock_contact->id)
+            ->get()->random();
+
         $exitCode = Artisan::call(
             'netblock:list',
             [
-                '--filter' => '192.168.1.0',
+                '--filter' => $ip,
             ]
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('ISP Business Internet', Artisan::output());
-        $this->assertNotContains('Customer 1', Artisan::output());
+        $this->assertContains($netblock_contact->name, Artisan::output());
+        $this->assertNotContains($other_contact->name, Artisan::output());
     }
 }

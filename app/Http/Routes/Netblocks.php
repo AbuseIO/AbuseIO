@@ -1,7 +1,10 @@
 <?php
 
 Route::resource('netblocks', 'NetblocksController');
-Route::model('netblocks', 'AbuseIO\Models\Netblock');
+
+Route::model('netblocks', 'AbuseIO\Models\Netblock', function () {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
+});
 
 Route::group(
     [
@@ -102,6 +105,5 @@ Route::group(
                 'uses'       => 'NetblocksController@destroy',
             ]
         );
-
     }
 );

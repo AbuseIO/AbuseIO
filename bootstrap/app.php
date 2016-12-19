@@ -47,7 +47,6 @@ $app->singleton(
 $app->configureMonologUsing(
 
     function (Monolog\Logger $monolog) {
-
         $syslog = new \Monolog\Handler\SyslogHandler('abuseio');
 
         $formatter = new \Monolog\Formatter\LineFormatter('%channel%.%level_name%: %message%');

@@ -3,12 +3,15 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Netblock;
+use AbuseIO\Traits\Api;
 
 /**
  * Class NetblockFormRequest.
  */
 class NetblockFormRequest extends Request
 {
+    use Api;
+
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -1,7 +1,9 @@
 <?php
 
 Route::resource('domains', 'DomainsController');
-Route::model('domains', 'AbuseIO\Models\Domain');
+Route::model('domains', 'AbuseIO\Models\Domain', function () {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
+});
 
 Route::group(
     [
@@ -102,6 +104,5 @@ Route::group(
                 'uses'       => 'DomainsController@destroy',
             ]
         );
-
     }
 );

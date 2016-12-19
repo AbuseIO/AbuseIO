@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Contact;
+use AbuseIO\Traits\Api;
 use Auth;
 
 /**
@@ -10,6 +11,8 @@ use Auth;
  */
 class ContactFormRequest extends Request
 {
+    use Api;
+
     /**
      * ContactFormRequest constructor.
      */
@@ -43,7 +46,6 @@ class ContactFormRequest extends Request
             case 'POST':
                 return Contact::createRules();
             case 'PUT':
-                break;
             case 'PATCH':
                 return Contact::updateRules($this);
             default:

@@ -6,8 +6,12 @@ use AbuseIO\Http\Requests\UserFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\User;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\UserTransformer;
 use Config;
 use Form;
+use Illuminate\Http\Request;
+use League\Fractal\Manager;
 use Log;
 use Redirect;
 use yajra\Datatables\Datatables;
@@ -17,15 +21,23 @@ use yajra\Datatables\Datatables;
  */
 class UsersController extends Controller
 {
+    use Api;
+
     /**
      * UsersController constructor.
+     *
+     * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
+        // initialize the Api methods
+        $this->apiInit($fractal, $request);
+
         // is the logged in account allowed to execute an action on the User
-        $this->middleware('checkaccount:User', ['except' => ['search', 'index', 'create', 'store', 'export']]);
+        $this->middleware('checkaccount:User', ['except' => ['search', 'index', 'create', 'store', 'export', 'apiIndex', 'apiShow']]);
     }
 
     /**
@@ -102,6 +114,16 @@ class UsersController extends Controller
     }
 
     /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex()
+    {
+        $users = User::all();
+
+        return $this->respondWithCollection($users, new UserTransformer());
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -165,7 +187,9 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        $account = Account::find($user->account_id);
+        $data = $this->handleShow($user);
+        $user = $data['user'];
+        $account = $data['account'];
 
         $locale = Config::get('app.locales');
 
@@ -175,6 +199,33 @@ class UsersController extends Controller
             ->with('roles', $user->roles)
             ->with('language', $locale[$user->locale][0])
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * retrieve the necessary data for the show and apiShow functions.
+     *
+     * @param User $user
+     *
+     * @return array
+     */
+    private function handleShow(User $user)
+    {
+        return [
+            'user'    => $user,
+            'account' => $user->account,
+        ];
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiShow(User $user)
+    {
+        $data = $this->handleShow($user);
+
+        return $this->respondWithItem($data['user'], new UserTransformer());
     }
 
     /**
@@ -295,7 +346,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         // Do not allow our own user to be destroyed.
-        if ($user->id == $this->auth_user->id) {
+        if ($user->is($this->auth_user)) {
             return Redirect::back()
                 ->with('message', 'Not allowed to delete current.');
         }

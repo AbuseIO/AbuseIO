@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Account;
 
 use AbuseIO\Console\Commands\AbstractEditCommand;
+use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,6 +16,8 @@ use Validator;
  */
 class EditCommand extends AbstractEditCommand
 {
+    use ShowHelpWhenRunTimeExceptionOccurs;
+
     /**
      * @return InputDefinition
      */
@@ -36,6 +39,12 @@ class EditCommand extends AbstractEditCommand
                     null,
                     InputOption::VALUE_OPTIONAL,
                     'true|false, Set default system account.'
+                ),
+                new InputOption(
+                    'refres_api_token',
+                    null,
+                    InputOption::VALUE_NONE,
+                    'Refresh the api token for this account.'
                 ),
             ]
         );

@@ -3,7 +3,7 @@
 return [
 
     'name'    => 'AbuseIO',
-    'version' => '4.0.1',
+    'version' => '4.1.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -87,6 +87,7 @@ return [
     'locales' => [
         'en' => ['English', 'gb'],
         'nl' => ['Nederlands', 'nl'],
+        'gr' => ['Ελληνικά', 'gr'],
     ],
 
     /*
@@ -183,20 +184,23 @@ return [
         'Illuminate\Session\SessionServiceProvider',
         'Illuminate\Translation\TranslationServiceProvider',
         'Illuminate\Validation\ValidationServiceProvider',
-        'Illuminate\View\ViewServiceProvider',
+        'Wpb\String_Blade_Compiler\ViewServiceProvider',
         'Collective\Html\HtmlServiceProvider',
 
         /*
          * Application Service Providers...
          */
         'AbuseIO\Providers\AppServiceProvider',
+        'AbuseIO\Providers\AshServiceProvider',
         'AbuseIO\Providers\BusServiceProvider',
         'AbuseIO\Providers\ConfigServiceProvider',
-        'AbuseIO\Providers\EventServiceProvider',
-        'AbuseIO\Providers\RouteServiceProvider',
-        'AbuseIO\Providers\ValidationsServiceProvider',
         'AbuseIO\Providers\HelperServiceProvider',
+        'AbuseIO\Providers\RouteServiceProvider',
+        'AbuseIO\Providers\SystemAdminManagerProvider',
+        'AbuseIO\Providers\TicketApiTokenProvider',
+        'AbuseIO\Providers\ValidationsServiceProvider',
         'Chumper\Zipper\ZipperServiceProvider',
+        'Sorskod\Larasponse\LarasponseServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
 
         /*

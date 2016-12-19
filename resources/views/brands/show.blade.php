@@ -28,5 +28,58 @@
 
     <dt>{{ trans('brands.logo') }}</dt>
     <dd><img src="/admin/logo/{{ $brand->id }}" alt="{{ $brand->company_name }}"/></dd>
+
+
+    <dt></dt>
+    <dd>&nbsp;</dd>
 </dl>
+
+@if ( $brand->mail_custom_template)
+<div class="row">
+    <div class="col-sm-offset-2 col-sm-10" style="padding-left: 0;">
+        <div class="panel panel-default panel_info">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title pull-left">{{ trans('brands.mail_template_plain') }}</h3>
+            </div>
+            <div class="panel-body">
+                <pre class="prettyprint">
+                    {{ htmlentities($brand->mail_template_plain) }}
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-offset-2 col-sm-10" style="padding-left: 0;">
+        <div class="panel panel-default panel_info">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title pull-left">{{ trans('brands.mail_template_html') }}</h3>
+            </div>
+            <div class="panel-body">
+                <pre class="prettyprint">
+                    {{ htmlentities($brand->mail_template_html) }}
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
+@if ( $brand->ash_custom_template)
+<div class="row">
+    <div class="col-sm-offset-2 col-sm-10" style="padding-left: 0;">
+        <div class="panel panel-default panel_info">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title pull-left">{{ trans('brands.ash_template') }}</h3>
+            </div>
+            <div class="panel-body">
+                <pre class="prettyprint">
+                    {{ htmlentities($brand->ash_template) }}
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
 @endsection

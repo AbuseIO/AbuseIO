@@ -28,6 +28,12 @@ Route::group(
         'as' => 'admin.',
     ],
     function () {
+        Route::post('verifyexternalapi', 'ApiDomainCheckerController@store');
+
+        // Api key generator;
+        Route::post('apikey', function () {
+            return response()->json(['data' => generateApiToken()]);
+        });
 
         // Language switcher
         Route::get('locale/{locale?}', 'LocaleController@setLocale');
@@ -65,6 +71,9 @@ Route::group(
         // Tickets
         require app_path().'/Http/Routes/Tickets.php';
 
+        // Incidents
+        require app_path().'/Http/Routes/Incidents.php';
+
         // Evidence
         require app_path().'/Http/Routes/Evidence.php';
 
@@ -79,7 +88,6 @@ Route::group(
         require app_path().'/Http/Routes/SettingsBrands.php';
         require app_path().'/Http/Routes/SettingsUsers.php';
         require app_path().'/Http/Routes/Profile.php';
-
     }
 );
 
@@ -136,6 +144,47 @@ Route::group(
                     //
                 ],
             ]
+        );
+    }
+);
+
+/*
+ * API routes group
+ */
+
+Route::get('api/getversioninfo', function () {
+    return response()->json(['version' => 'v1']);
+});
+
+Route::group(
+    [
+        'prefix'     => 'api',
+        'as'         => 'api.',
+        'middleware' => ['apienabled', 'checkapitoken'],
+    ],
+    function ($group) {
+        Route::group(
+            [
+                'prefix' => 'v1',
+                'as'     => 'v1.',
+            ],
+            function () {
+                // Evidence
+                //require app_path().'/Api/Routes/Evidence.php';
+
+                // Analytics
+                //require app_path().'/Api/Routes/Analytics.php';
+
+                require app_path().'/Api/Routes/Accounts.php';
+                require app_path().'/Api/Routes/Brands.php';
+                require app_path().'/Api/Routes/Contacts.php';
+                require app_path().'/Api/Routes/Domains.php';
+                require app_path().'/Api/Routes/Netblocks.php';
+                require app_path().'/Api/Routes/Notes.php';
+                require app_path().'/Api/Routes/Tickets.php';
+                require app_path().'/Api/Routes/Users.php';
+                //require app_path().'/Api/Routes/Incidents.php';
+            }
         );
     }
 );
