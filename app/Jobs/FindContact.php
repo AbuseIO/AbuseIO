@@ -119,7 +119,7 @@ class FindContact extends Job
     public static function byIP($ip)
     {
         // If local lookups are not preferred, then do the remote lookup first
-        if (config('main.external.ip.prefer_local') === false) {
+        if (config('main.external.findcontact.ip.prefer_local') === false) {
             $findContact = self::getExternalContact('ip', $ip);
             if (!empty($findContact)) {
                 return $findContact;
@@ -141,7 +141,7 @@ class FindContact extends Job
         }
 
         // Do a remote lookup, if local lookups are preferred. Else skip this as this was already done.
-        if (config('main.external.ip.prefer_local') === true) {
+        if (config('main.external.findcontact.ip.prefer_local') === true) {
             $findContact = self::getExternalContact('ip', $ip);
 
             if (!empty($findContact)) {
@@ -162,7 +162,7 @@ class FindContact extends Job
     public static function byDomain($domain)
     {
         // If local lookups are not preferred, then do the remote lookup first
-        if (config('main.external.domain.prefer_local') === false) {
+        if (config('main.external.findcontact.domain.prefer_local') === false) {
             $findContact = self::getExternalContact('domain', $domain);
             if (!empty($findContact)) {
                 return $findContact;
@@ -180,7 +180,7 @@ class FindContact extends Job
         }
 
         // Do a remote lookup, if local lookups are preferred. Else skip this as this was already done.
-        if (config('main.external.domain.prefer_local') === true) {
+        if (config('main.external.findcontact.domain.prefer_local') === true) {
             $findContact = self::getExternalContact('domain', $domain);
             if (!empty($findContact)) {
                 return $findContact;
@@ -200,7 +200,7 @@ class FindContact extends Job
     public static function byId($id)
     {
         // If local lookups are not preferred, then do the remote lookup first
-        if (config('main.external.id.prefer_local') === false) {
+        if (config('main.external.findcontact.id.prefer_local') === false) {
             $findContact = self::getExternalContact('id', $id);
             if (!empty($findContact)) {
                 return $findContact;
@@ -218,7 +218,7 @@ class FindContact extends Job
         }
 
         // Do a remote lookup, if local lookups are preferred. Else skip this as this was already done.
-        if (config('main.external.id.prefer_local') === true) {
+        if (config('main.external.findcontact.id.prefer_local') === true) {
             $findContact = self::getExternalContact('id', $id);
             if (!empty($findContact)) {
                 return $findContact;
