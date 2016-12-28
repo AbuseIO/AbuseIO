@@ -67,7 +67,7 @@ return [
         'abuseio3' => [
             'driver'    => 'mysql',
             'host'      => env('V3DB_HOST', 'localhost'),
-            'database'  => env('V3DB_DATABASE', 'abuseio3',
+            'database'  => env('V3DB_DATABASE', 'abuseio3'),
             'username'  => env('V3DB_USERNAME', 'root'),
             'password'  => env('V3DB_PASSWORD', ''),
             'charset'   => 'utf8',
