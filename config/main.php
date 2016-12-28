@@ -60,19 +60,21 @@ return [
     ],
 
     'external' => [
-        'prefer_local'                      => true,
         'findcontact'                       => [
             'id' => [
                 'class'                     => 'Custom',
                 'method'                    => 'getContactById',
+                'prefer_local'              => true,
             ],
             'ip' => [
                 'class'                     => 'Custom',
                 'method'                    => 'getContactByIp',
+                'prefer_local'              => true,
             ],
             'domain' => [
                 'class'                     => 'Custom',
                 'method'                    => 'getContactByDomain',
+                'prefer_local'              => true,
             ],
         ],
     ],
