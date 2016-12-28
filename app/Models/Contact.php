@@ -92,6 +92,28 @@ class Contact extends Model
         return $rules;
     }
 
+    /**
+     * Validation rules for this model being validate (required by findcontact!).
+     *
+     * @param \AbuseIO\Models\Contact $contact
+     *
+     * @return array $rules
+     */
+    public static function validateRules($contact)
+    {
+        $rules = [
+            'reference'     => 'required',
+            'name'          => 'required',
+            'email'         => 'sometimes|emails',
+            'api_host'      => 'sometimes|url',
+            'enabled'       => 'required|boolean',
+            'account_id'    => 'required|integer|exists:accounts,id',
+        ];
+
+        return $rules;
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | Relationship Methods

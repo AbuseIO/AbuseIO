@@ -64,7 +64,7 @@ class FindContact extends Job
             return false;
         }
 
-        $validation = Validator::make($contact->toArray(), Contact::createRules());
+        $validation = Validator::make($contact->toArray(), Contact::validateRules($contact));
 
         if ($validation->fails()) {
             $messages = implode(' ', $validation->messages()->all());
@@ -143,6 +143,7 @@ class FindContact extends Job
         // Do a remote lookup, if local lookups are preferred. Else skip this as this was already done.
         if (config('main.external.prefer_local') === true) {
             $findContact = self::getExternalContact('ip', $ip);
+
             if (!empty($findContact)) {
                 return $findContact;
             }
