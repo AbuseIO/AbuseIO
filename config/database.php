@@ -66,10 +66,10 @@ return [
 
         'abuseio3' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'localhost'),
-            'database'  => 'abuseio3',
-            'username'  => env('DB_USERNAME', 'root'),
-            'password'  => env('DB_PASSWORD', ''),
+            'host'      => env('V3DB_HOST', 'localhost'),
+            'database'  => env('V3DB_DATABASE', 'abuseio3',
+            'username'  => env('V3DB_USERNAME', 'root'),
+            'password'  => env('V3DB_PASSWORD', ''),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
