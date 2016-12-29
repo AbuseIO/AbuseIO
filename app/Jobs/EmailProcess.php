@@ -194,11 +194,17 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
         /*
          * build evidence model, but wait with saving it
+         * but first check if it doesnt exists already (queue retry)
          **/
-        $evidence = new Evidence();
-        $evidence->filename = $this->filename;
-        $evidence->sender = $parsedMail->getHeader('from');
-        $evidence->subject = $parsedMail->getHeader('subject');
+        $evidenceExists = Evidence::where('filename', '=', $this->filename);
+        if ($evidenceExists->count() === 1) {
+            $evidence = $evidenceExists->first();
+        } else {
+            $evidence = new Evidence();
+            $evidence->filename = $this->filename;
+            $evidence->sender = $parsedMail->getHeader('from');
+            $evidence->subject = $parsedMail->getHeader('subject');
+        }
 
         /*
          * Call IncidentsProcess to validate, store evidence and save incidents
