@@ -18,6 +18,27 @@ return [
         'description' => 'This classification has no information text yet.',
     ],
 
+    'OPEN_CWMP_SERVER' => [
+        'name'        => 'Open CPE WAN Management Protocol (CWMP)',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_TELNET_SERVER' => [
+        'name'        => 'Open Telnet Server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_LDAP_SERVER' => [
+        'name'        => 'Open LDAP Server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
     'BOTNET_CONTROLLER' => [
         'name'        => 'Botnet controller',
         'description' => '
