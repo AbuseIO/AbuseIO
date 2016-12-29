@@ -97,6 +97,7 @@ class RunCommand extends Command
         );
 
         $path = '/mailarchive/';
+        $startTime = time() - 3600;
 
         $directories = Storage::directories($path);
 
@@ -108,7 +109,7 @@ class RunCommand extends Command
             // then check for each file check if its linked to a database entry
             foreach ($files as $file) {
                 // Check filesystem if its actually old and not just created
-                if (Storage::lastModified($file) > (time() - 3600)) {
+                if (Storage::lastModified($file) > $startTime) {
                     continue;
                 }
 
