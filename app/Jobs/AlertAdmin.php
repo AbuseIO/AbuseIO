@@ -57,7 +57,7 @@ class AlertAdmin extends Job
     }
 
     /**
-     * Execute the command but with phpmailer to bounce it
+     * Execute the command but with phpmailer to bounce it.
      *
      * @param string $message
      * @param array  $attachments [optional] format: ['name' => 'data']
@@ -76,7 +76,7 @@ class AlertAdmin extends Job
         /*
          * Create a new outgoing e-mail object based on direct SMTP used for bouncing it
          */
-        $mail = new PHPMailer;
+        $mail = new PHPMailer();
         $mail->isSMTP();
 
         /*
@@ -102,10 +102,10 @@ class AlertAdmin extends Job
          */
         $mail->addAddress($parsedMail->getHeader('to'));
         $mail->setFrom($parsedMail->getHeader('from'));
-        $mail->Subject      = !empty($parsedMail->getHeader('subject')) ? $parsedMail->getHeader('subject') : '';
-        $mail->MessageDate  = !empty($parsedMail->getHeader('date')) ? $parsedMail->getHeader('date') : date('D, j M Y H:i:s O');
-        $mail->MessageID    = !empty($parsedMail->getHeader('message-id')) ? $parsedMail->getHeader('message-id') : '';
-        $mail->ContentType  = !empty($parsedMail->getHeader('content-type')) ? $parsedMail->getHeader('content-type') : '';
+        $mail->Subject = !empty($parsedMail->getHeader('subject')) ? $parsedMail->getHeader('subject') : '';
+        $mail->MessageDate = !empty($parsedMail->getHeader('date')) ? $parsedMail->getHeader('date') : date('D, j M Y H:i:s O');
+        $mail->MessageID = !empty($parsedMail->getHeader('message-id')) ? $parsedMail->getHeader('message-id') : '';
+        $mail->ContentType = !empty($parsedMail->getHeader('content-type')) ? $parsedMail->getHeader('content-type') : '';
 
         /*
          * Add required headers from bouncing accourding to RFC 2822 section 3.6.6.
@@ -119,13 +119,13 @@ class AlertAdmin extends Job
         /*
          * Add something new
          */
-        $mail->XMailer      = 'AbuseIO Failed Mail Sender';
+        $mail->XMailer = 'AbuseIO Failed Mail Sender';
 
         /*
-         * Add the original content 
+         * Add the original content
          * Note: the body contains everything including mimeparts (everything except headers)
          */
-        $mail->Body         = preg_split('#\n\s*\n#Uis', $rawMail, 2)[1];
+        $mail->Body = preg_split('#\n\s*\n#Uis', $rawMail, 2)[1];
 
         // Bypass actuall recipiant(s) by changed the SMTP RCPT TO and RCPT FROM commands
         $mail->Sender = Config::get('main.notifications.from_address');
@@ -135,7 +135,7 @@ class AlertAdmin extends Job
             Log::error(
                 'AlertAdmin: '.
                 'Unable to bounce message to admin '.Config::get('main.emailparser.fallback_mail').
-                ' error message: ' . $mail->ErrorInfo
+                ' error message: '.$mail->ErrorInfo
             );
         } else {
             Log::info(
@@ -143,6 +143,5 @@ class AlertAdmin extends Job
                 'Successfully bounced message to admin '.Config::get('main.emailparser.fallback_mail')
             );
         }
-
     }
 }
