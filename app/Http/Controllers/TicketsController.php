@@ -73,6 +73,7 @@ class TicketsController extends Controller
                         );
                 }
             )
+            ->orderBy('id', 'desc')
             ->groupBy('tickets.id');
 
         if (!$auth_account->isSystemAccount()) {
