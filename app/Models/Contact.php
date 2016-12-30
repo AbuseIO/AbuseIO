@@ -113,7 +113,6 @@ class Contact extends Model
         return $rules;
     }
 
-
     /*
     |--------------------------------------------------------------------------
     | Relationship Methods

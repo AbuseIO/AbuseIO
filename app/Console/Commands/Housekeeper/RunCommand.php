@@ -173,7 +173,7 @@ class RunCommand extends Command
                 $created = $job->created_at;
 
                 if ($jobLimit->gt($created)) {
-                    $hangs [] = $job;
+                    $hangs[] = $job;
                 }
             }
         }
