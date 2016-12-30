@@ -14,6 +14,7 @@ return [
 
     'emailparser' => [
         'fallback_mail'                     => 'admin@isp.local',
+        'use_bounce_method'                 => false,
         'notify_on_warnings'                => true,
     ],
 

@@ -256,12 +256,16 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             $fileContents = Storage::get($this->filename);
         }
 
-        AlertAdmin::send(
-            'AbuseIO was not able to process an incoming message. This message is attached to this email.',
-            [
-                'failed_message.eml' => $fileContents,
-            ]
-        );
+        if (Config::get('main.emailparser.use_bounce_method')) {
+            AlertAdmin::bounce($fileContents);
+        } else {
+            AlertAdmin::send(
+                'AbuseIO was not able to process an incoming message. This message is attached to this email.',
+                [
+                    'failed_message.eml' => $fileContents,
+                ]
+            );
+        }
 
         // Delete the evidence file as we are not using it.
         Storage::delete($this->filename);
