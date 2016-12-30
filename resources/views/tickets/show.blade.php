@@ -110,7 +110,7 @@
             <dd>
                 {!! link_to(
                     "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference),
-                    config('main.ash.url') . "/ash/collect/$ticket->id/"
+                    config('main.ash.url') . "/collect/$ticket->id/"
                      . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference)
                 ) !!}
             </dd>
@@ -121,7 +121,7 @@
             <dd>
                 {!! link_to(
                     "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference),
-                    config('main.ash.url') . "/ash/collect/$ticket->id/"
+                    config('main.ash.url') . "/collect/$ticket->id/"
                      . md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference)
                 ) !!}
             </dd>
