@@ -82,6 +82,11 @@ class RunCommand extends Command
             $this->removeUnlinkedEvidence();
         }
 
+
+        Log::debug(
+            get_class($this).': Housekeeping has completed its run'
+        );
+
         return true;
     }
 
@@ -141,6 +146,11 @@ class RunCommand extends Command
                 }
             }
         }
+
+        Log::info(
+            get_class($this).': Housekeeper has completed removing orphaned mailarchive items'
+        );
+        return true;
     }
 
     /**
@@ -217,6 +227,10 @@ class RunCommand extends Command
             }
         }
 
+        Log::info(
+            get_class($this).': Housekeeper has completed queue checks'
+        );
+
         if ($hangCount != 0 || $failedCount != 0) {
             return false;
         }
@@ -281,6 +295,11 @@ class RunCommand extends Command
             }
         }
 
+
+        Log::info(
+            get_class($this).': Housekeeper has completed closing old tickets'
+        );
+
         return true;
     }
 
@@ -324,6 +343,11 @@ class RunCommand extends Command
                 $evidence->delete();
             }
         }
+
+
+        Log::info(
+            get_class($this).': Housekeeper has completed removing old mailarchive items'
+        );
 
         return true;
     }
