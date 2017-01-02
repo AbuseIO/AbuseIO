@@ -250,7 +250,7 @@ class Ticket extends Model
     public function getLastNotifiedAttribute()
     {
         return date(
-            config('app.date_format').' '.config('app.time_format'),
+            config('app.date_format'),
             $this->attributes['last_notify_timestamp']
         );
     }
@@ -265,7 +265,7 @@ class Ticket extends Model
     public function getUpdatedAtAttribute($date)
     {
         return date(
-            config('app.date_format').' '.config('app.time_format'),
+            config('app.date_format'),
             strtotime($date)
         );
     }
@@ -280,7 +280,7 @@ class Ticket extends Model
     public function getCreatedAtAttribute($date)
     {
         return date(
-            config('app.date_format').' '.config('app.time_format'),
+            config('app.date_format'),
             strtotime($date)
         );
     }

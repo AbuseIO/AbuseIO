@@ -62,7 +62,7 @@ class FindContact extends Job
             return false;
         }
 
-        $validation = Validator::make($contact->toArray(), Contact::createRules());
+        $validation = Validator::make($contact->toArray(), Contact::validateRules($contact));
 
         if ($validation->fails()) {
             $messages = implode(' ', $validation->messages()->all());
@@ -213,8 +213,8 @@ class FindContact extends Job
 
         // if external lookups are preferred or if the local lookup fails
         // and the external lookup succeeded return the external lookup
-        if (((config('main.external.prefer_local') === false) ||
-                (config('main.external.prefer_local') === true &&
+        if (((config("main.external.{$type}.prefer_local") === false) ||
+                (config('main.external.{$type}.prefer_local') === true &&
                     $contact->reference === 'UNDEF')) &&
             (!empty($external_contact))) {
             $contact = $external_contact;
