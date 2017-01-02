@@ -11,13 +11,12 @@ use tests\TestCase;
  */
 class EditCommandTest extends TestCase
 {
-    /**
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Not enough arguments (missing: "id").
-     */
     public function testWithoutId()
     {
+        ob_start();
         Artisan::call('brand:edit');
+        $output = ob_get_clean();
+        $this->assertContains('Edit a brand', $output);
     }
 
     public function testWithInvalidId()

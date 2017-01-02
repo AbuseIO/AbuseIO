@@ -15,14 +15,10 @@ class CreateCommandTest extends TestCase
 {
     public function testWithoutArguments()
     {
-        //        $exitCode = Artisan::call('domain:create');
-//        $this->assertEquals(0, $exitCode);
-
-//        $output = Artisan::output();
-//
-//        $this->assertContains('The name field is required.', $output);
-//        $this->assertContains('The contact id field is required.', $output);
-//        $this->assertContains('Failed to create the domain due to validation warnings', $output);
+        ob_start();
+        $exitCode = Artisan::call('domain:create');
+        $this->assertEquals(0, $exitCode);
+        $this->assertContains('Creates a new domain', ob_get_clean());
     }
 
     public function testValidCreate()

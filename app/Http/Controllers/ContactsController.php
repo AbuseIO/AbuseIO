@@ -4,7 +4,11 @@ namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\ContactFormRequest;
 use AbuseIO\Models\Contact;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\ContactTransformer;
 use Form;
+use Illuminate\Http\Request;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
 
@@ -13,13 +17,22 @@ use yajra\Datatables\Datatables;
  */
 class ContactsController extends Controller
 {
+    use Api;
+
+    private $error;
+
     /**
      * ContactsController constructor.
+     *
+     * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
+        // initialize the Api methods
+        $this->apiInit($fractal, $request);
         // is the logged in account allowed to execute an action on the Contact
         $this->middleware('checkaccount:Contact', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
@@ -45,9 +58,9 @@ class ContactsController extends Controller
                 function ($contact) {
                     $actions = Form::open(
                         [
-                            'route'     => ['admin.contacts.destroy', $contact->id],
-                            'method'    => 'DELETE',
-                            'class'     => 'form-inline',
+                            'route'  => ['admin.contacts.destroy', $contact->id],
+                            'method' => 'DELETE',
+                            'class'  => 'form-inline',
                         ]
                     );
                     $actions .= ' <a href="contacts/'.$contact->id.
@@ -97,6 +110,18 @@ class ContactsController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiIndex()
+    {
+        $contacts = Contact::all();
+
+        return $this->respondWithCollection($contacts, new ContactTransformer());
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -128,12 +153,12 @@ class ContactsController extends Controller
 
         if ($format === 'csv') {
             $columns = [
-                'reference'     => 'Reference',
-                'contact'       => 'name',
-                'enabled'       => 'Status',
-                'email'         => 'E-Mail address',
-                'api_host'      => 'RPC address',
-                'auto_notify'   => 'Notifications',
+                'reference'   => 'Reference',
+                'contact'     => 'name',
+                'enabled'     => 'Status',
+                'email'       => 'E-Mail address',
+                'api_host'    => 'RPC address',
+                'auto_notify' => 'Notifications',
             ];
 
             $output = '"'.implode('", "', $columns).'"'.PHP_EOL;
@@ -177,6 +202,21 @@ class ContactsController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param ContactFormRequest $contactForm FormRequest
+     * @param Contact            $contact     Contact
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiStore(ContactFormRequest $contactForm, Contact $contact)
+    {
+        $c = $contact->create($contactForm->all());
+
+        return $this->respondWithItem($c, new ContactTransformer());
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param Contact $contact
@@ -188,6 +228,18 @@ class ContactsController extends Controller
         return view('contacts.show')
             ->with('contact', $contact)
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param Contact $contact
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiShow(Contact $contact)
+    {
+        return $this->respondWithItem($contact, new ContactTransformer());
     }
 
     /**
@@ -221,6 +273,23 @@ class ContactsController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param ContactFormRequest $contactForm FormRequest
+     * @param Contact            $contact     Contact
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiUpdate(ContactFormRequest $contactForm, Contact $contact)
+    {
+        $contact->update(
+            $contactForm->all()
+        );
+
+        return $this->respondWithItem($contact, new ContactTransformer());
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Contact $contact Contact
@@ -229,25 +298,69 @@ class ContactsController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        if ($contact->domains->count() > 0) {
+        if (!$this->handleDestroy($contact)) {
             return Redirect::route('admin.contacts.index')->with(
                 'message',
-                'Contact could not be deleted because '.$contact->domains->count()
-                .' domain(s) is stil pointing to this contact.'
+                $this->getError()
             );
         }
 
-        if ($contact->netblocks->count() > 0) {
-            return Redirect::route('admin.contacts.index')->with(
-                'message',
-                'Contact could not be deleted because '.$contact->netblocks->count()
-                .' netblock(s) is stil pointing to this contact.'
+        return Redirect::route('admin.contacts.index')
+            ->with('message', 'Contact has been deleted.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Contact $contact Contact
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiDestroy(Contact $contact)
+    {
+        if (!$this->handleDestroy($contact)) {
+            $this->respondWithValidationErrors($this->getError());
+        }
+
+        return $this->respondWithItem($contact, new ContactTransformer());
+    }
+
+    private function handleDestroy(Contact $contact)
+    {
+        if ($contact->domains->count() > 0) {
+            $this->setError(
+                sprintf(
+                    'Contact could not be deleted because %d domain(s) is still pointing to this contact.',
+                    $contact->domains->count()
+                )
             );
+
+            return false;
+        }
+
+        if ($contact->netblocks->count() > 0) {
+            $this->setError(
+                sprintf(
+                    'Contact could not be deleted because %s netblock(s) is still pointing to this contact.',
+                    $contact->netblocks->count()
+                )
+            );
+
+            return false;
         }
 
         $contact->delete();
 
-        return Redirect::route('admin.contacts.index')
-            ->with('message', 'Contact has been deleted.');
+        return true;
+    }
+
+    private function setError($error)
+    {
+        $this->error = $error;
+    }
+
+    private function getError()
+    {
+        return $this->error;
     }
 }

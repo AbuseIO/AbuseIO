@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Exceptions;
 
+use AbuseIO\Traits\Api;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -10,6 +11,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
+    use Api;
+
     /**
      * A list of the exception types that should not be reported.
      *
@@ -45,7 +48,14 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         if ($e instanceof ModelNotFoundException) {
+            if ($request->wantsJson()) {
+                return $this->errorNotFound($e->getMessage());
+            }
             $e = new NotFoundHttpException($e->getMessage(), $e);
+        }
+
+        if ($request->wantsJson()) {
+            return $this->errorInternalError($e->getMessage());
         }
 
         return parent::render($request, $e);

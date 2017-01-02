@@ -104,6 +104,7 @@ return [
     'file'                  => 'The :attribute field must contain a valid file location',
     'emails'                => 'All :attribute addresses should be valid.',
     'timestamp'             => 'The :attribute field must contain a valid timestamp integer',
+    'bladetemplate'         => 'The :attribute field must contain a valid Blade template',
 
     /*
     |--------------------------------------------------------------------------
@@ -116,6 +117,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'email'    => 'email address',
+        'password' => 'password',
+    ],
 
 ];

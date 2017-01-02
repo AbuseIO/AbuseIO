@@ -4,35 +4,18 @@ namespace AbuseIO\Http\Middleware;
 
 use Closure;
 use Config;
-use Illuminate\Contracts\Routing\Middleware;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use Session;
 
 /**
  * Class Locale.
  */
-class Locale implements Middleware
+class Locale
 {
     /**
      * @var array
      */
     protected $languages = ['en'];
-
-    /**
-     * Locale constructor.
-     *
-     * @param Application $app
-     * @param Redirector  $redirector
-     * @param Request     $request
-     */
-    public function __construct(Application $app, Redirector $redirector, Request $request)
-    {
-        $this->app = $app;
-        $this->redirector = $redirector;
-        $this->request = $request;
-    }
 
     /**
      * Handle an incoming request.
@@ -49,7 +32,7 @@ class Locale implements Middleware
         if (!Session::has('locale')) {
             Session::put('locale', $request->getPreferredLanguage($this->languages));
         }
-        $this->app->setLocale(Session::get('locale'));
+        app()->setLocale(Session::get('locale'));
 
         return $next($request);
     }

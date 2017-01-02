@@ -50,6 +50,13 @@ class Ticket extends Model
     protected $table = 'tickets';
 
     /**
+     * a readonly property containing the apiToken;.
+     *
+     * @var string
+     */
+    protected $apiToken;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -77,6 +84,8 @@ class Ticket extends Model
         'contact_status_id',
         'last_notify_count',
         'last_notify_timestamp',
+        'ash_token_ip',
+        'ash_token_domain',
     ];
 
     /*
@@ -170,7 +179,7 @@ class Ticket extends Model
      */
     public function events($order = 'asc')
     {
-        return $this->hasMany('AbuseIO\Models\Event')
+        return $this->hasMany(Event::class)
             ->orderBy('timestamp', $order);
     }
 
@@ -181,7 +190,7 @@ class Ticket extends Model
      */
     public function notes()
     {
-        return $this->hasMany('AbuseIO\Models\Note');
+        return $this->hasMany(Note::class);
     }
 
     /**
@@ -191,7 +200,7 @@ class Ticket extends Model
      */
     public function unreadNotes()
     {
-        return $this->hasMany('AbuseIO\Models\Note')
+        return $this->hasMany(Note::class)
             ->where('viewed', 'false');
     }
 
@@ -216,7 +225,7 @@ class Ticket extends Model
      */
     public function accountIp()
     {
-        return $this->belongsTo('AbuseIO\Models\Account', 'ip_contact_account_id');
+        return $this->belongsTo(Account::class, 'ip_contact_account_id');
     }
 
     /**
@@ -224,7 +233,7 @@ class Ticket extends Model
      */
     public function accountDomain()
     {
-        return $this->belongsTo('AbuseIO\Models\Account', 'domain_contact_account_id');
+        return $this->belongsTo(Account::class, 'domain_contact_account_id');
     }
 
     /*
@@ -276,6 +285,26 @@ class Ticket extends Model
         );
     }
 
+    /**
+     * return the numbers of events.
+     *
+     * @return int
+     */
+    public function getEventCountAttribute()
+    {
+        return count($this->events);
+    }
+
+    /**
+     * return the numbers of notes.
+     *
+     * @return int
+     */
+    public function getNoteCountAttribute()
+    {
+        return count($this->notes);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Custom Methods
@@ -299,9 +328,19 @@ class Ticket extends Model
 
         $ticket = self::find($model_id);
 
-        $allowed = ($ticket->ip_contact_account_id == $account->id) ||
-                   ($ticket->domain_contact_account_id == $account->id);
+        return ($ticket->accountIp->is($account)) ||
+            ($ticket->accountDomain->is($account));
+    }
 
-        return $allowed;
+    /**
+     * method to set api token on the ticket; Can savely be called, does not change current value;.
+     *
+     * @return void
+     */
+    public function generateApiToken()
+    {
+        if (is_null($this->api_token)) {
+            $this->api_token = generateApiToken();
+        }
     }
 }

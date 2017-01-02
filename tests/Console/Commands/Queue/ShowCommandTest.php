@@ -56,4 +56,12 @@ class ShowCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
         $this->assertContains('No matching queue was found.', Artisan::output());
     }
+
+    public function testWithoutArguments()
+    {
+        ob_start();
+        $exitCode = Artisan::call('queue:show');
+        $this->assertEquals(0, $exitCode);
+        $this->assertContains('Shows a queue', ob_get_clean());
+    }
 }

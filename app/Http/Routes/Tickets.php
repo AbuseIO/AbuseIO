@@ -1,6 +1,9 @@
 <?php
 
-Route::model('tickets', 'AbuseIO\Models\Ticket');
+Route::model('tickets', 'AbuseIO\Models\Ticket', function () {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
+});
+
 Route::resource('tickets', 'TicketsController');
 
 Route::group(

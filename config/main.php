@@ -80,4 +80,7 @@ return [
         ],
     ],
 
+    'api' => [
+        'enabled'                           => true,
+    ],
 ];

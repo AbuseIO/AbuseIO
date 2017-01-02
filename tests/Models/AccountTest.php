@@ -19,16 +19,27 @@ class AccountTest extends TestCase
 
     public function testGetSystemAccount()
     {
-        $this->assertEquals(
-            Account::getSystemAccount(),
-            Account::find(1)
+        $this->assertTrue(
+            Account::getSystemAccount()->is(Account::find(1))
         );
     }
 
     public function testSetSystemAccount()
     {
+        $oldSysAdmin = Account::getSystemAccount();
+
         $account = factory(Account::class)->create();
         $account->systemaccount = true;
-        $this->assertTrue((bool) Account::find($account->id)->systemaccount);
+        $account->save();
+
+        $newSysAdmin = Account::getSystemAccount();
+
+        $this->assertTrue(
+            $newSysAdmin->is($account)
+        );
+
+        $this->assertFalse(
+            $newSysAdmin->is($oldSysAdmin)
+        );
     }
 }

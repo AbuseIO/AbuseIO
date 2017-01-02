@@ -3,9 +3,14 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\DomainFormRequest;
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\DomainTransformer;
 use Form;
+use Illuminate\Http\Request;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
 
@@ -14,12 +19,20 @@ use yajra\Datatables\Datatables;
  */
 class DomainsController extends Controller
 {
+    use Api;
+
     /**
      * DomainsController constructor.
+     *
+     * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
+
+        // initialize the api
+        $this->apiInit($fractal, $request);
 
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Domain', ['except' => ['search', 'index', 'create', 'store', 'export']]);
@@ -84,6 +97,18 @@ class DomainsController extends Controller
     {
         return view('domains.index')
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex()
+    {
+        $domains = Domain::with('contact')->get();
+
+        return $this->respondWithCollection($domains, new DomainTransformer());
     }
 
     /**
@@ -173,6 +198,20 @@ class DomainsController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param DomainFormRequest $domainForm
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiStore(DomainFormRequest $domainForm)
+    {
+        $domain = Domain::create($domainForm->all());
+
+        return $this->respondWithItem($domain, new DomainTransformer());
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param Domain $domain
@@ -184,6 +223,18 @@ class DomainsController extends Controller
         return view('domains.show')
             ->with('domain', $domain)
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param Domain $domain
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiShow(Domain $domain)
+    {
+        return $this->respondWithItem($domain, new DomainTransformer());
     }
 
     /**
@@ -229,6 +280,21 @@ class DomainsController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param DomainFormRequest $domainForm
+     * @param Domain            $domain
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiUpdate(DomainFormRequest $domainForm, Domain $domain)
+    {
+        $domain->update($domainForm->all());
+
+        return $this->respondWithItem($domain, new DomainTransformer());
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Domain $domain
@@ -241,5 +307,21 @@ class DomainsController extends Controller
 
         return Redirect::route('admin.domains.index')
             ->with('message', 'Domain has been deleted.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Domain $domain
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiDestroy(Domain $domain)
+    {
+        $domain->delete();
+
+        return $this->respondWithItem($domain, new DomainTransformer());
     }
 }

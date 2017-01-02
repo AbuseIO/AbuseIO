@@ -5,6 +5,10 @@ namespace AbuseIO\Http\Controllers;
 use AbuseIO\Http\Requests\NoteFormRequest;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Models\Note;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\NoteTransformer;
+use Illuminate\Http\Request;
+use League\Fractal\Manager;
 use Redirect;
 
 /**
@@ -12,12 +16,22 @@ use Redirect;
  */
 class NotesController extends Controller
 {
+    use Api;
+
     /**
-     * NetblocksController constructor.
+     * NotesController constructor.
+     *
+     * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
+
+        $this->apiInit($fractal, $request);
+
+        // is the logged in account allowed to execute an action on the Note
+        $this->middleware('checkaccount:Note', ['only' => ['apiShow']]);
     }
 
     /**
@@ -50,20 +64,32 @@ class NotesController extends Controller
     public function store(NoteFormRequest $noteForm)
     {
         Note::create($noteForm->all());
-
-        /*
-         * send notication if a new note is added
-         */
-        if ($noteForm->hidden != true) {
-            $notification = new Notification();
-            $notifications = $notification->buildList($noteForm->ticket_id, false, true);
-            $notification->walkList($notifications);
-        }
+        $this->sendNotification($noteForm);
 
         return Redirect::route(
             'admin.tickets.show',
             $noteForm->ticket_id
         )->with('message', 'A new note for this ticket has been created');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param NoteFormRequest $noteForm
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiStore(NoteFormRequest $noteForm)
+    {
+        global $testrunner;
+
+        $note = Note::create($noteForm->all());
+
+        if (!$testrunner) {
+            $this->sendNotification($noteForm);
+        }
+
+        return  $this->respondWithItem($note, new NoteTransformer());
     }
 
     /**
@@ -74,6 +100,16 @@ class NotesController extends Controller
     public function show()
     {
         // No requirement for implementation
+    }
+
+    /**
+     * @param Note $note
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiShow(Note $note)
+    {
+        return $this->respondWithItem($note, new NoteTransformer());
     }
 
     /**
@@ -130,5 +166,19 @@ class NotesController extends Controller
         $note->delete();
 
         return 'delete:OK';
+    }
+
+    /**
+     * Send notifiction if NoteForm not is hidden;.
+     *
+     * @param NoteFormRequest $noteForm
+     */
+    protected function sendNotification(NoteFormRequest $noteForm)
+    {
+        if ($noteForm->hidden != true) {
+            $notification = new Notification();
+            $notifications = $notification->buildList($noteForm->ticket_id, false, true);
+            $notification->walkList($notifications);
+        }
     }
 }

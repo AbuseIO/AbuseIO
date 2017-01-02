@@ -22,8 +22,8 @@ class CreateCommand extends AbstractCreateCommand
     {
         return new InputDefinition(
             [
-                new InputArgument('name', null, 'Name'),
-                new InputArgument('description', null, 'Description'),
+                new InputArgument('name', InputArgument::REQUIRED, 'Name'),
+                new InputArgument('description', InputArgument::REQUIRED, 'Description'),
             ]
         );
     }

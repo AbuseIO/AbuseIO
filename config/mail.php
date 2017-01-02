@@ -126,6 +126,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Mail "Override_address"
+    |--------------------------------------------------------------------------
+    |
+    | If this option is set to an email address it will be used instead of the
+    | email address of the contact.Usefull for development/testing
+    |
+    */
+
+    'override_address' => env('MAIL_OVERRIDE', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | S/MIME Signing options
     |--------------------------------------------------------------------------
     |

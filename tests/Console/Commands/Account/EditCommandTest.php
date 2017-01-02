@@ -22,13 +22,12 @@ class EditCommandTest extends TestCase
         $this->account = factory(Account::class)->create();
     }
 
-    /**
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Not enough arguments (missing: "id").
-     */
     public function testWithoutId()
     {
+        ob_start();
         Artisan::call('account:edit');
+        $output = ob_get_clean();
+        $this->assertContains('Edit a account', $output);
     }
 
     public function testWithInvalidId()

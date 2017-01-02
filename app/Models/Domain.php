@@ -91,7 +91,7 @@ class Domain extends Model
      */
     public function contact()
     {
-        return $this->belongsTo('AbuseIO\Models\Contact');
+        return $this->belongsTo(Contact::class);
     }
 
     /*
@@ -117,6 +117,6 @@ class Domain extends Model
 
         $domain = self::find($model_id);
 
-        return $domain->contact->account->id == $account->id;
+        return $domain->contact->account->is($account);
     }
 }

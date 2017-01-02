@@ -2,8 +2,10 @@
 
 namespace AbuseIO\Http\Middleware;
 
+use AbuseIO\Models\Account;
 use Auth;
 use Closure;
+use Illuminate\Http\Request;
 use Log;
 
 /**
@@ -11,7 +13,13 @@ use Log;
  */
 class CheckAccount
 {
-    const IDSEGMENT = 3;
+    const ID_SEGMENT = 3;
+
+    private $model_id;
+
+    private $request;
+
+    private $model;
 
     /**
      * Handle an incoming request.
@@ -22,36 +30,82 @@ class CheckAccount
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $model)
+    public function handle(Request $request, Closure $next, $model)
     {
-        // gather info
-        $model = '\AbuseIO\Models\\'.$model;
-        $account = Auth::user()->account;
+        $this->request = $request;
+        $this->model = $model;
 
-        // try to retrieve the id of the model (by getting it out the request segment or out the input)
-        $model_id = $request->segment(self::IDSEGMENT);
-        if (empty($model_id)) {
-            $model_id = $request->input('id');
-        }
-
-        // sanity checks on the model_id
-        if (!empty($model_id) and preg_match('/\d+/', $model_id)) {
-            // only check if the checkAccountAccess exists
-
-            if (method_exists($model, 'checkAccountAccess')) {
-                if (!$model::checkAccountAccess($model_id, $account)) {
-                    // if the checkAccountAccess() fails return to the last page
-                    return back()->with('message', 'Account ['.$account->name.'] is not allowed to access this object');
-                }
-            } else {
-                Log::notice(
-                    "CheckAccount Middleware is called for {$model}, which doesn't have a checkAccountAccess method"
-                );
-            }
-        } else {
-            Log::notice("CheckAccount Middleware is called, with model_id [{$model_id}] for {$model}, which doesn't match the model_id format");
+        if ($this->checkModelIdValid()
+            && $this->hasAccountAccessMethod()
+            && !$model::checkAccountAccess($this->model_id, $this->getAccount())
+        ) {
+            return $this->getResponseForNoAccessToModel();
         }
 
         return $next($request);
+    }
+
+    private function hasAccountAccessMethod()
+    {
+        if (!method_exists($this->model, 'checkAccountAccess')) {
+            Log::notice(
+                "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, which doesn't match the model_id format"
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    private function getResponseForNoAccessToModel()
+    {
+        // todo implement proper AJAX response;
+        if ($this->request->ajax()) {
+            //return
+        }
+
+        return back()->with('message', 'Account ['.$this->account->name.'] is not allowed to access this object');
+    }
+
+    /**
+     * @return Account
+     */
+    private function getAccount()
+    {
+        return $this->request->ajax() ? $this->request->api_account : Auth::user()->account;
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function resolveModelId()
+    {
+        $model_id = $this->request->segment(self::ID_SEGMENT);
+        if (empty($model_id)) {
+            $model_id = $this->request->input('id');
+        }
+
+        $this->model_id = $model_id;
+    }
+
+    /**
+     * @return bool
+     */
+    private function checkModelIdValid()
+    {
+        $this->resolveModelId($this->request);
+        if (!empty($this->model_id) and preg_match('/\d+/', $this->model_id)) {
+            return true;
+        }
+
+        Log::notice(
+            "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, which doesn't match the model_id format"
+        );
+
+        return false;
     }
 }

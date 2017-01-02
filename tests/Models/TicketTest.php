@@ -2,6 +2,7 @@
 
 namespace tests\Models;
 
+use AbuseIO\Models\Ticket;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use tests\TestCase;
 
@@ -9,12 +10,19 @@ class TicketTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testModelFactory()
+    public function testGenerateApiToken()
     {
-        //$ticket = factory(Ticket::class)->create();
-        //dd($ticket);
-        //$ticketFromDB = Ticket::where("submitter", $ticket->submitter)->first();
-        //$this->assertEquals($ticket->submitter, $ticketFromDB->submitter);
-        $this->assertTrue(true);
+        $ticket = new Ticket();
+        $this->assertNull($ticket->api_token);
+        $ticket->generateApiToken();
+        $this->assertNotNull($ticket->api_token);
+    }
+
+    public function testTicketModelSaveEventInTicketApiTokenProvider()
+    {
+        $ticket = factory(Ticket::class)->make();
+        $this->assertNull($ticket->api_token);
+        $ticket->save();
+        $this->assertNotNull($ticket->api_token);
     }
 }

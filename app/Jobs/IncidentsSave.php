@@ -104,6 +104,8 @@ class IncidentsSave extends Job implements SelfHandling
              * Search to see if there is an existing ticket for this incident classification
              */
             $ticket = Ticket::where('ip', '=', $incident->ip)
+                ->where('domain', '=',
+                    empty($incident->domain) ? '' : $incident->domain, 'AND')
                 ->where('class_id', '=', $incident->class, 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 'CLOSED', 'AND')
@@ -228,7 +230,7 @@ class IncidentsSave extends Job implements SelfHandling
                         $ticket->domain_contact_email = $domainContact->email;
                         $ticket->domain_contact_api_host = $domainContact->api_host;
                         $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
-                        $ticket->account_id = $domainContact->account->id;
+                        $ticket->accountDomain()->associate($domainContact->account);
                     }
 
                     /*
@@ -247,7 +249,7 @@ class IncidentsSave extends Job implements SelfHandling
                     }
 
                     /*
-                     * Walk thru the escalation upgrade path, and upgrade if required
+                     * Walk through the escalation upgrade path, and upgrade if required
                      */
                     //echo config("escalations.{$ticket->class_id}.abuse.enabled");
                     if (is_array(config("escalations.{$ticket->class_id}"))) {
@@ -321,7 +323,7 @@ class IncidentsSave extends Job implements SelfHandling
                  * We should not never have more then two open tickets for the same case. If this happens there is a
                  * fault in the aggregator which must be resolved first. Until then we will permfail here.
                  */
-                $this->error('Unable to link to ticket, multiple open tickets found for same incident type');
+                return $this->error('Unable to link to ticket, multiple open tickets found for same incident type');
             }
         }
 

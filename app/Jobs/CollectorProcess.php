@@ -62,8 +62,8 @@ class CollectorProcess extends Job implements SelfHandling, ShouldQueue
     {
         Log::error(
             get_class($this).': '.
-            'Unexpected exception was raised from the framework. This useally indicates an error within the '.
-            'framework code. A full strace can be found in the logs and should be reported to the developers'
+            'Unexpected exception was raised from the framework. This usually indicates an error within the '.
+            'framework code. A full trace can be found in the logs and should be reported to the developers'
         );
 
         $this->exception();

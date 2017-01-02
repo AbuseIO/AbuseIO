@@ -20,15 +20,10 @@
             </ul>
         </div>
         <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ trans('tickets.button.send_notification') }} <span class="caret"></span>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target='#notificationModal'>
+                {{ trans('tickets.button.send_notification') }}
             </button>
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id, 'ip']) !!}</li>
-                <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id, 'domain']) !!}</li>
-                <li role="separator" class="divider"></li>
-                <li{!! ($ticket->ip_contact_reference == 'UNDEF' || $ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify', trans('misc.both'), [$ticket->id]) !!}</li>
-            </ul>
+
         </div>
         <div class="btn-group" role="group" aria-label="...">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -109,9 +104,9 @@
             <dt>{{ trans('tickets.ashlink') }} {{ trans('misc.ip')}}</dt>
             <dd>
                 {!! link_to(
-                    "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference),
+                    "/ash/collect/$ticket->id/" . $ticket->ash_token_ip,
                     config('main.ash.url') . "/collect/$ticket->id/"
-                     . md5($ticket->id . $ticket->ip . $ticket->ip_contact_reference)
+                     . $ticket->ash_token_ip
                 ) !!}
             </dd>
             @endif
@@ -120,9 +115,9 @@
             <dt>{{ trans('tickets.ashlink') }} {{ trans('misc.domain')}}</dt>
             <dd>
                 {!! link_to(
-                    "/ash/collect/$ticket->id/" . md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference),
+                    "/ash/collect/$ticket->id/" . $ticket->ash_token_domain,
                     config('main.ash.url') . "/collect/$ticket->id/"
-                     . md5($ticket->id . $ticket->domain . $ticket->domain_contact_reference)
+                     . $ticket->ash_token_domain
                 ) !!}
             </dd>
             @endif
@@ -270,6 +265,29 @@
                 <div class="checkbox"><label>{!! Form::checkbox('hidden') !!} {!! trans('misc.button.hidden') !!}</label></div>
                 {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
                 {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{!! trans('misc.send_notifictions') !!}</h4>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id, 'ip']) !!}</li>
+                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id, 'domain']) !!}</li>
+                    <li role="separator" class="divider"></li>
+                    <li{!! ($ticket->ip_contact_reference == 'UNDEF' || $ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify', trans('misc.both'), [$ticket->id]) !!}</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{!! trans('misc.close') !!}</button>
             </div>
         </div>
     </div>

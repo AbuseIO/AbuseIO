@@ -10,13 +10,11 @@ use tests\TestCase;
  */
 class EditCommandTest extends TestCase
 {
-    /**
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Not enough arguments (missing: "id").
-     */
     public function testWithoutId()
     {
+        ob_start();
         Artisan::call('netblock:edit');
+        $this->assertContains('Edit a netblock', ob_get_clean());
     }
 
     public function testWithInvalidId()

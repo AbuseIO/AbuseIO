@@ -79,7 +79,7 @@ class EditCommand extends AbstractEditCommand
 
                 return false;
             }
-            $model->account_id = $newAccount->id;
+            $model->account->is($newAccount);
         }
 
         $this->handlePasswordUpdate($model);

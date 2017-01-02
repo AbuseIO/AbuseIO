@@ -9,6 +9,23 @@ function fnTicketFilter() {
 }
 
 $(document).ready(function() {
+
+    // default filter options
+    var status_filter = { "search" : "open"};
+    var type_id_filter = null;
+    var classification_id_filter = null;
+
+    // user option filter options
+    if (user_options != undefined && user_options.ticket_status_filter != undefined) {
+        status_filter = { "search" : user_options.ticket_status_filter };
+    }
+    if (user_options != undefined && user_options.ticket_type_filter != undefined) {
+        type_id_filter = { "search" : user_options.ticket_type_filter };
+    }
+    if (user_options != undefined && user_options.ticket_classification_filter != undefined) {
+        classification_id_filter = { "search" : user_options.ticket_classification_filter };
+    }
+
     var table = $('#tickets-table').DataTable( {
         processing: true,
         serverSide: true,
@@ -18,6 +35,17 @@ $(document).ready(function() {
             data: null,
             defaultContent: " "
         } ],
+        "searchCols": [
+            null,
+            null,
+            null,
+            type_id_filter,
+            classification_id_filter,
+            null,
+            null,
+            status_filter,
+            null
+        ],
         language: {
             url: locale
         },
@@ -44,6 +72,28 @@ $(document).ready(function() {
             $('#statuses').on('change', function () {
                 fnTicketFilter();
             });
-        }
-    } );
+
+            // set the status filter default on 'OPEN' or the user option if available
+            if (user_options != undefined && user_options.ticket_status_filter != undefined) {
+                $("#statuses").val(user_options.ticket_status_filter);
+            } else {
+                $("#statuses").val('OPEN');
+            }
+
+            // set the status filter to the user option if available
+            if (user_options != undefined && user_options.ticket_type_filter != undefined) {
+                $("#type_id").val(user_options.ticket_type_filter);
+            }
+
+            // set the status filter to the user option if available
+            if (user_options != undefined && user_options.ticket_classification_filter != undefined) {
+                $("#class_id").val(user_options.ticket_classification_filter);
+            }
+
+        } });
+
+    // if we have saved the sort order, use it
+    if (user_options != undefined && user_options.ticket_sort_order != undefined) {
+        table.order([user_options.ticket_sort_order.column, user_options.ticket_sort_order.dir]);
+    }
 });

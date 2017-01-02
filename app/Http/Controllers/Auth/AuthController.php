@@ -82,6 +82,8 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
+        $this->redirectTo = '/admin/home';
+
         $this->validate(
             $request,
             [
@@ -128,5 +130,15 @@ class AuthController extends Controller
             ->withErrors([
                 $this->loginUsername() => $this->getFailedLoginMessage(),
             ]);
+    }
+
+    public function postRegister()
+    {
+        return abort(404);
+    }
+
+    public function getRegister()
+    {
+        return redirect('/');
     }
 }
