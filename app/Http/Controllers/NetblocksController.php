@@ -5,7 +5,11 @@ namespace AbuseIO\Http\Controllers;
 use AbuseIO\Http\Requests\NetblockFormRequest;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\NetblockTransformer;
 use Form;
+use Illuminate\Http\Request;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
 
@@ -14,12 +18,19 @@ use yajra\Datatables\Datatables;
  */
 class NetblocksController extends Controller
 {
+    use Api;
+
     /**
      * NetblocksController constructor.
+     *
+     * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
+
+        $this->apiInit($fractal, $request);
 
         // is the logged in account allowed to execute an action on the Domain
         $this->middleware('checkaccount:Netblock', ['except' => ['search', 'index', 'create', 'store', 'export']]);
@@ -84,6 +95,18 @@ class NetblocksController extends Controller
     {
         return view('netblocks.index')
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex()
+    {
+        $netblocks = Netblock::all();
+
+        return $this->respondWithCollection($netblocks, new NetblockTransformer());
     }
 
     /**
@@ -175,6 +198,20 @@ class NetblocksController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param NetblockFormRequest $netblockForm
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiStore(NetblockFormRequest $netblockForm)
+    {
+        $netblock = Netblock::create($netblockForm->all());
+
+        return  $this->respondWithItem($netblock, new NetblockTransformer());
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param Netblock $netblock
@@ -186,6 +223,18 @@ class NetblocksController extends Controller
         return view('netblocks.show')
             ->with('netblock', $netblock)
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param Netblock $netblock
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiShow(Netblock $netblock)
+    {
+        return $this->respondWithItem($netblock, new NetblockTransformer());
     }
 
     /**
@@ -231,6 +280,21 @@ class NetblocksController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param NetblockFormRequest $netblockForm
+     * @param Netblock            $netblock
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiUpdate(NetblockFormRequest $netblockForm, Netblock $netblock)
+    {
+        $netblock->update($netblockForm->all());
+
+        return $this->respondWithItem($netblock, new NetblockTransformer());
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Netblock $netblock
@@ -243,5 +307,19 @@ class NetblocksController extends Controller
 
         return Redirect::route('admin.netblocks.index')
             ->with('message', trans('netblocks.msg.deleted'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Netblock $netblock
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiDestroy(Netblock $netblock)
+    {
+        //$netblock->delete();
+
+        return $this->respondWithItem($netblock, new NetblockTransformer());
     }
 }

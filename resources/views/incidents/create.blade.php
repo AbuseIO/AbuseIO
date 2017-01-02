@@ -19,7 +19,7 @@
 @section('content')
 <h1 class="page-header">{{ trans('tickets.header.new') }}</h1>
 
-{!! Form::open(['route' => 'admin.tickets.store', 'files' => true, 'class' => 'form-horizontal']) !!}
+{!! Form::open(['route' => 'admin.incidents.store', 'files' => true, 'class' => 'form-horizontal']) !!}
 
 <div class="form-group @if ($errors->has('source')) has-error @endif">
     {!! Form::label('source', trans('tickets.source').':', ['class' => 'col-sm-2 control-label']) !!}

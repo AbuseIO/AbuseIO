@@ -15,5 +15,13 @@ Route::group(
                 'uses'       => 'AnalyticsController@index',
             ]
         );
+        route::get(
+            'graph',
+            [
+                'middleware' => 'permission:analytics_view',
+                'as'         => 'view',
+                'uses'       => 'AnalyticsController@show',
+            ]
+        );
     }
 );

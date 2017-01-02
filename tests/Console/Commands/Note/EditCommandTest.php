@@ -30,13 +30,11 @@ class EditCommandTest extends TestCase
         $this->noteViewed = factory(Note::class)->create(['viewed' => false]);
     }
 
-    /**
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Not enough arguments (missing: "id").
-     */
     public function testWithoutId()
     {
+        ob_start();
         Artisan::call('note:edit');
+        $this->assertContains('Edit a note', ob_get_clean());
     }
 
     public function testWithInvalidId()

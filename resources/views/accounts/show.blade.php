@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="page-header">{{ trans('accounts.header.detail') }}: {{ $account->name }}</h1>
 <div class="row">
-    <div class="col-md-3 col-md-offset-9 text-right">
+    <div class="col-sm-12 text-right">
         {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.accounts.destroy', $account->id]]) !!}
         {!! link_to_route('admin.accounts.edit', trans('misc.button.edit'), $account->id, ['class' => 'btn btn-info']) !!}
         @if ( $account->disabled )
@@ -30,6 +30,9 @@
 
     <dt>{{ trans('misc.status') }}</dt>
     <dd>{{ $account->disabled ? trans('misc.disabled') : trans('misc.enabled') }}</dd>
+
+    <dt>{{ trans('accounts.api_key') }}</dt>
+    <dd><input id="token" style="padding:0; margin-right:10px; width:300px; border:none;" value="{{ $account->token }}"><button rel="tooltip" title="{!! trans('misc.copied') !!}" id="btnCopyToClipboard" class="btn btn-info" title="{!! trans('misc.copy_to_clipboard') !!}"><i class="glyphicon glyphicon-copy"></i></button></dd>
 </dl>
 
 @if ( $account->users->count() )
@@ -57,3 +60,31 @@
 @endif
 
 @endsection
+
+@section('extrajs')
+    <script>
+        $(document).on('click', '#btnCopyToClipboard', function() {
+            var inp = document.getElementById('token');
+            if (inp && inp.select) {
+                // select text
+                inp.select();
+
+                try {
+                    // copy text
+                    document.execCommand('copy');
+                    inp.blur();
+                }
+                catch (err) {
+                    alert('{!! trans('please_press_ctrl_cmd_to_copy') !!}');
+                    return false;
+                }
+                var tooltip = $('[rel="tooltip"]');
+                tooltip.tooltip('show');
+
+                setTimeout( function() {
+                    tooltip.tooltip('destroy');
+                }, 3000);
+            }
+        });
+    </script>
+@stop

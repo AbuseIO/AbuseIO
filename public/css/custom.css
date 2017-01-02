@@ -87,3 +87,10 @@ while database changes, e.g. by pagination */
     font-size: 20px;
     padding: 2px 0;
 }
+
+/* pretty printing code */
+pre.prettyprint {
+    border: 1px solid #ccc;
+    margin-bottom: 0;
+    padding: 9.5px;
+}

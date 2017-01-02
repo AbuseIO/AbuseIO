@@ -3,8 +3,8 @@
 namespace AbuseIO\Console\Commands\Netblock;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
+use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
-use AbuseIO\Models\User;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
@@ -23,10 +23,10 @@ class CreateCommand extends AbstractCreateCommand
     {
         return new InputDefinition(
             [
-                new InputArgument('contact', null, 'Id from contact'),
-                new InputArgument('first_ip', null, 'Start Ip address from netblock'),
-                new InputArgument('last_ip', null, 'Last Ip address from netblock'),
-                new InputArgument('description', null, 'Description'),
+                new InputArgument('contact', InputArgument::REQUIRED, 'Id from contact'),
+                new InputArgument('first_ip', InputArgument::REQUIRED, 'Start Ip address from netblock'),
+                new InputArgument('last_ip', InputArgument::REQUIRED, 'Last Ip address from netblock'),
+                new InputArgument('description', InputArgument::REQUIRED, 'Description'),
                 new InputArgument('enabled', null, 'Set the account to be enabled', false),
             ]
         );
@@ -48,7 +48,7 @@ class CreateCommand extends AbstractCreateCommand
         $netblock = new Netblock();
 
         $netblock->contact()->associate(
-            User::find($this->argument('contact'))
+            Contact::find($this->argument('contact'))
         );
         $netblock->first_ip = $this->argument('first_ip');
         $netblock->last_ip = $this->argument('last_ip');

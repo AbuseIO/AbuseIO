@@ -16,4 +16,16 @@ class BrandTest extends TestCase
         $accountFromDB = Brand::where('name', $account->name)->first();
         $this->assertEquals($account->name, $accountFromDB->name);
     }
+
+    public function testBrandGetLogoPath()
+    {
+        $b = Brand::getSystemBrand();
+        $logo = $b->getLogoPath();
+
+        // check if the image file is created
+        $this->assertFileExists($logo);
+
+        // remove the file
+        unlink($logo);
+    }
 }

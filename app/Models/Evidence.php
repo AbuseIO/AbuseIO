@@ -76,7 +76,7 @@ class Evidence extends Model
      */
     public function events()
     {
-        return $this->hasMany('AbuseIO\Models\Event');
+        return $this->hasMany(Event::class);
     }
 
     /**
@@ -86,12 +86,7 @@ class Evidence extends Model
      */
     public function tickets()
     {
-        return $this->hasManyThrough(
-            'AbuseIO\Models\Ticket',
-            'AbuseIO\Models\Event',
-            'evidence_id',
-            'id'
-        );
+        return $this->hasManyThrough(Ticket::class, Event::class, 'evidence_id', 'id');
     }
 
     /*
@@ -201,8 +196,8 @@ class Evidence extends Model
         // If tickets ip or domain contact is the same as current account
         // then allow access to this evidence
         foreach ($tickets as $ticket) {
-            if (($ticket->ip_contact_account_id == $account->id) ||
-                ($ticket->domain_contact_account_id == $account->id)
+            if (($ticket->accountIp->is($account)) ||
+                ($ticket->accountDomain->is($account))
             ) {
                 return true;
             }

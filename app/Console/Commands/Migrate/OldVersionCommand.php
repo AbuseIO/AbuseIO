@@ -370,7 +370,7 @@ class OldVersionCommand extends Command
                     $newContact->email = $customer->Contact;
                     $newContact->auto_notify = $customer->AutoNotify;
                     $newContact->enabled = 1;
-                    $newContact->account_id = $account->id;
+                    $newContact->account()->associate($account);
                     $newContact->created_at = Carbon::parse($customer->LastModified);
                     $newContact->updated_at = Carbon::parse($customer->LastModified);
 
@@ -416,7 +416,7 @@ class OldVersionCommand extends Command
                     $newNetblock->last_ip = long2ip($netblock->end_in);
                     $newNetblock->description =
                         'Imported from previous AbuseIO version which did not include a description';
-                    $newNetblock->contact_id = $contact->id;
+                    $newNetblock->contact($contact);
                     $newNetblock->enabled = 1;
                     $newNetblock->created_at = Carbon::parse($netblock->LastModified);
                     $newNetblock->updated_at = Carbon::parse($netblock->LastModified);
@@ -736,7 +736,7 @@ class OldVersionCommand extends Command
         $newTicket->class_id = $ticket->Class;
         $newTicket->type_id = $ticket->Type;
 
-        $newTicket->ip_contact_account_id = $account->id;
+        $newTicket->accountIp()->associate($account);
         $newTicket->ip_contact_reference = $ticket->CustomerCode;
         $newTicket->ip_contact_name = $ticket->CustomerName;
         $newTicket->ip_contact_email = $ticket->CustomerContact;
@@ -745,7 +745,7 @@ class OldVersionCommand extends Command
         $newTicket->ip_contact_notified_count = $ticket->NotifiedCount;
 
         $domainContact = FindContact::undefined();
-        $newTicket->domain_contact_account_id = $domainContact->account_id;
+        $newTicket->accountDomain()->associate($domainContact->account);
         $newTicket->domain_contact_reference = $domainContact->reference;
         $newTicket->domain_contact_name = $domainContact->name;
         $newTicket->domain_contact_email = $domainContact->email;

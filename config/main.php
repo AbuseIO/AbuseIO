@@ -63,6 +63,7 @@ return [
     'external' => [
         'findcontact'                       => [
             'id' => [
+
                 'class'                     => 'Custom',
                 'method'                    => 'getContactById',
                 'prefer_local'              => true,
@@ -80,4 +81,7 @@ return [
         ],
     ],
 
+    'api' => [
+        'enabled'                           => true,
+    ],
 ];

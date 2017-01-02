@@ -2,6 +2,7 @@
 
 namespace tests\Console\Commands\Contact;
 
+use AbuseIO\Models\Contact;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -27,14 +28,16 @@ class ShowCommandTest extends TestCase
 
     public function testWithValidNameFilter()
     {
+        $contact = Contact::all()->random();
+
         $exitCode = Artisan::call(
             'contact:show',
             [
-                'contact' => 'John Doe',
+                'contact' => $contact->name,
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('j.doe@customers.isp.local', Artisan::output());
+        $this->assertContains($contact->email, Artisan::output());
     }
 
     public function testWithInvalidFilter()

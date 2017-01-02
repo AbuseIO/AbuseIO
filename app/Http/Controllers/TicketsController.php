@@ -3,34 +3,39 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\TicketFormRequest;
-use AbuseIO\Jobs\EvidenceSave;
-use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Jobs\TicketUpdate;
 use AbuseIO\Models\Event;
-use AbuseIO\Models\Evidence;
-use AbuseIO\Models\Incident;
 use AbuseIO\Models\Ticket;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\TicketTransformer;
 use DB;
-use Input;
-use Log;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
+use Zend\Json\Json;
 
 /**
  * Class TicketsController.
  */
 class TicketsController extends Controller
 {
+    use Api;
+
     /**
      * TicketsController constructor.
      */
-    public function __construct()
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
-        // is the logged in account allowed to execute an action on the Domain
-        $this->middleware('checkaccount:Ticket', ['except' => ['search', 'index', 'create', 'store', 'export']]);
+        // initialize the api
+        $this->apiInit($fractal, $request);
+
+        // is the logged in account allowed to execute an action on the Ticket
+        $this->middleware('checkaccount:Ticket', ['except' => ['apiSearch', 'search', 'apiIndex', 'index', 'create', 'apiStore', 'store', 'export']]);
     }
 
     /**
@@ -38,9 +43,38 @@ class TicketsController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function search()
+    public function search(Request $request)
     {
         $auth_account = $this->auth_user->account;
+        $auth_user = $this->auth_user;
+
+        // retrieve the filters and column order
+        $columns = $request->input('columns');
+        $order = $request->input('order');
+
+        if (is_array($columns)) {
+            foreach (
+                [
+                'ticket_type_filter' => 3,
+                'ticket_classification_filter' => 4,
+                'ticket_status_filter' => 7,
+                ] as $filter => $column
+            ) {
+                // save the type filter option in the user
+                if (array_key_exists($column, $columns) &&
+                    array_key_exists('search', $columns[$column]) &&
+                    array_key_exists('value', $columns[$column]['search'])) {
+                    $auth_user->setOption($filter, $columns[$column]['search']['value']);
+                }
+            }
+        }
+
+        // check to see if an order is given and save it in the user
+        if (is_array($order)) {
+            if (array_key_exists(0, $order)) {
+                $auth_user->setOption('ticket_sort_order', $order[0]);
+            }
+        }
 
         $tickets = Ticket::select(
             'tickets.id',
@@ -73,6 +107,7 @@ class TicketsController extends Controller
                         );
                 }
             )
+            ->where('notes.deleted_at', '=', null)
             ->orderBy('id', 'desc')
             ->groupBy('tickets.id');
 
@@ -121,6 +156,129 @@ class TicketsController extends Controller
     }
 
     /**
+     * api search
+     * expects query criteria in the body of the request
+     * eg :
+     * {
+     *   "criteria":
+     *   [
+     *     {
+     *        "column": "ip",
+     *        "operator": "like",
+     *        "value": "%10%"
+     *     },
+     *     {
+     *        "column": "id",
+     *        "operator": ">",
+     *        "value": 7
+     *     }
+     *   ],
+     *   "orderby": "ip",
+     *   "desc": true,
+     *   "limit": "5"
+     * }.
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiSearch(Request $request)
+    {
+        $api_account = $this->api_account;
+        $body = $request->getContent();
+        $post_process = [];
+        $mapped_columns = [
+            'event_count',
+            'note_count',
+        ];
+
+        try {
+            $query = Json::decode($body, Json::TYPE_OBJECT);
+        } catch (\Exception $e) {
+            return $this->errorInternalError('Faulty JSON request');
+        }
+
+        // construct model query
+        $tickets = Ticket::query();
+        if (isset($query->criteria)) {
+            foreach ($query->criteria as $c) {
+                // check if we have al the right properties in the criteria
+                if (!(isset($c->column) && isset($c->value))) {
+                    return $this->errorWrongArgs('Criteria field is missing');
+                }
+
+                // no operator, set it to 'equals'
+                $c->operator = isset($c->operator) ? $c->operator : '=';
+
+                // skip mapped columns, process them later
+                if (in_array($c->column, $mapped_columns)) {
+                    array_push($post_process, $c);
+                    continue;
+                }
+
+                $tickets = $tickets->where($c->column, $c->operator, $c->value);
+            }
+        }
+
+        // only show the tickets from the authorized account (or all if it is the system account)
+        if (!$api_account->isSystemAccount()) {
+            $tickets = $tickets->where(
+                function ($query) use ($api_account) {
+                    $query->where('ip_contact_account_id', '=', $api_account->id)
+                        ->orWhere('domain_contact_account_id', '=', $api_account->id);
+                }
+            );
+        }
+
+        // execute the db query
+        try {
+            $result = $tickets->get();
+        } catch (QueryException $e) {
+            return $this->errorInternalError($e->getMessage());
+        }
+
+        // post process the collection, filter on the the dynamic fields
+        foreach ($post_process as $c) {
+            $result = $result->filter(function ($object) use ($c) {
+                $column = $c->column;
+                $value = $object->$column;
+
+                switch ($c->operator) {
+                    case '>': $success = $value > $c->value; break;
+                    case '<': $success = $value < $c->value; break;
+                    case '=': $success = $value == $c->value; break;
+                    case '!=': $success = $value != $c->value; break;
+                    case '>=': $success = $value >= $c->value; break;
+                    case '<=': $success = $value <= $c->value; break;
+                    default: $success = true; break;  // not implemented or unknown operator
+                }
+
+                return $success;
+            });
+        }
+
+        // order the results
+        $sortmethod = 'sortBy';
+        if (isset($query->desc) && $query->desc) {
+            $sortmethod = 'sortByDesc';
+        }
+        if (isset($query->orderby)) {
+            $result = $result->$sortmethod(function ($object) use ($query) {
+                $column = $query->orderby;
+
+                return $object->$column;
+            });
+        }
+
+        // limit the results
+        if (isset($query->limit)) {
+            $result = $result->take($query->limit);
+        }
+
+        return $this->respondWithCollection($result, new TicketTransformer());
+    }
+
+    /**
      * Display all tickets.
      *
      * @return \Illuminate\Http\Response
@@ -129,26 +287,43 @@ class TicketsController extends Controller
     {
         // Get translations for all statuses
         $statuses = Event::getStatuses();
+        $user = $this->auth_user;
+
+        $json_options = json_encode($user->options ? $user->options : []);
 
         return view('tickets.index')
             ->with('types', Event::getTypes())
             ->with('classes', Event::getClassifications())
             ->with('statuses', $statuses['abusedesk'])
             ->with('contact_statuses', $statuses['contact'])
-            ->with('auth_user', $this->auth_user);
+            ->with('auth_user', $this->auth_user)
+            ->with('user_options', $json_options);
     }
 
     /**
-     * Show the form for creating a ticket.
+     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function create()
+    public function apiIndex()
     {
-        return view('tickets.create')
-            ->with('classes', Event::getClassifications())
-            ->with('types', Event::getTypes())
-            ->with('auth_user', $this->auth_user);
+        $api_account = $this->api_account;
+
+        $tickets = Ticket::query();
+
+        // only show the tickets from the authorized account (or all if it is the system account)
+        if (!$api_account->isSystemAccount()) {
+            $tickets = $tickets->where(
+                function ($query) use ($api_account) {
+                    $query->where('ip_contact_account_id', '=', $api_account->id)
+                        ->orWhere('domain_contact_account_id', '=', $api_account->id);
+                }
+            );
+        }
+
+        $tickets = $tickets->get();
+
+        return $this->respondWithCollection($tickets, new TicketTransformer());
     }
 
     /**
@@ -211,102 +386,17 @@ class TicketsController extends Controller
     }
 
     /**
-     * Store a newly created ticket in storage.
+     * Store a newly created resource in storage.
      *
-     * @param TicketFormRequest $ticket
+     * @param TicketFormRequest $ticketForm
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(TicketFormRequest $ticket)
+    public function apiStore(TicketFormRequest $ticketForm)
     {
-        /*
-         * If there was a file attached then we add this to the evidence as attachment
-         */
-        $attachment = [];
-        $uploadedFile = Input::file('evidenceFile');
-        if (!empty($uploadedFile) &&
-            is_object($uploadedFile) &&
-            $uploadedFile->getError() === 0 &&
-            is_file($uploadedFile->getPathname())
-        ) {
-            $attachment = [
-                'filename'    => $uploadedFile->getClientOriginalName(),
-                'size'        => $uploadedFile->getSize(),
-                'contentType' => $uploadedFile->getMimeType(),
-                'data'        => file_get_contents($uploadedFile->getPathname()),
-            ];
-        }
+        $ticket = Ticket::create($ticketForm->all());
 
-        /*
-         * Grab the form and build a incident model from it. The form should be having all the fields except
-         * the form token. We don't need to validate the data as the formRequest already to care of this and
-         * IncidentsSave will do another validation on this.
-         */
-        $incident = new Incident();
-        foreach ($ticket->all() as $key => $value) {
-            if ($key != '_token') {
-                $incident->$key = $value;
-            }
-        }
-
-        /*
-         * Incident process required all incidents to be wrapped in an array.
-         */
-        $incidents = [
-            0 => $incident,
-        ];
-
-        /*
-         * Save the evidence as its required to save events
-         */
-        $evidence = new EvidenceSave();
-        $evidenceData = [
-            'createdBy'     => trim($this->auth_user->fullName()).' ('.$this->auth_user->email.')',
-            'receivedOn'    => time(),
-            'submittedData' => $ticket->all(),
-            'attachments'   => [],
-        ];
-        if (!empty($attachment)) {
-            $evidenceData['attachments'][0] = $attachment;
-        }
-        $evidenceFile = $evidence->save(json_encode($evidenceData));
-
-        if (!$evidenceFile) {
-            Log::error(
-                get_class($this).': '.
-                'Error returned while asking to write evidence file, cannot continue'
-            );
-            $this->exception();
-        }
-
-        $evidence = new Evidence();
-        $evidence->filename = $evidenceFile;
-        $evidence->sender = $this->auth_user->email;
-        $evidence->subject = 'AbuseDesk Created Incident';
-
-        /*
-         * Call IncidentsProcess to validate, store evidence and save incidents
-         */
-        $incidentsProcess = new IncidentsProcess($incidents, $evidence);
-
-        // Validate the data set
-        $validated = $incidentsProcess->validate();
-        if (!$validated) {
-            return Redirect::back()->with('message', "Failed to validate incident model {$validated}");
-        }
-
-        // Write the data set to database
-        if (!$incidentsProcess->save()) {
-            return Redirect::back()->with('message', 'Failed to write to database');
-        }
-
-        return Redirect::route(
-            'admin.tickets.index'
-        )->with(
-            'message',
-            'A new incident has been created. Depending on the aggregator result a new '.
-            'ticket will be created or existing ticket updated'
-        );
+        return $this->respondWithItem($ticket, new TicketTransformer());
     }
 
     /**
@@ -326,6 +416,18 @@ class TicketsController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param Ticket $ticket
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiShow(Ticket $ticket)
+    {
+        return $this->respondWithItem($ticket, new TicketTransformer());
+    }
+
+    /**
      * Update the requested contact information.
      *
      * @param Ticket $ticket
@@ -339,6 +441,21 @@ class TicketsController extends Controller
 
         return Redirect::route('admin.tickets.show', $ticket->id)
             ->with('message', 'Contact has been updated.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param TicketFormRequest $ticketForm
+     * @param Ticket            $ticket
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiUpdate(TicketFormRequest $ticketForm, Ticket $ticket)
+    {
+        $ticket->update($ticketForm->all());
+
+        return $this->respondWithItem($ticket, new TicketTransformer());
     }
 
     /**
@@ -374,5 +491,26 @@ class TicketsController extends Controller
 
         return Redirect::route('admin.tickets.show', $ticket->id)
             ->with('message', 'Contact has been notified.');
+    }
+
+    /**
+     * Send a notification for this ticket to the contacts.
+     * api method.
+     *
+     * @param Ticket $ticket
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiNotify(Ticket $ticket)
+    {
+        $notification = new Notification();
+        $notification->walkList(
+            $notification->buildList($ticket->id, false, true, null)
+        );
+
+        // refresh ticket
+        $ticket = Ticket::find($ticket->id);
+
+        return $this->respondWithItem($ticket, new TicketTransformer());
     }
 }

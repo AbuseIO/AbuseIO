@@ -55,4 +55,12 @@ class ShowCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
         $this->assertContains('No matching permission was found.', Artisan::output());
     }
+
+    public function testWithoutArguments()
+    {
+        ob_start();
+        $exitCode = Artisan::call('permission:show');
+        $this->assertEquals(0, $exitCode);
+        $this->assertContains('Shows a permission', ob_get_clean());
+    }
 }

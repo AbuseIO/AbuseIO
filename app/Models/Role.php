@@ -88,7 +88,7 @@ class Role extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('AbuseIO\Models\User');
+        return $this->belongsToMany(User::class);
     }
 
     /**
@@ -98,6 +98,6 @@ class Role extends Model
      */
     public function permissions()
     {
-        return $this->belongsToMany('AbuseIO\Models\Permission');
+        return $this->belongsToMany(Permission::class);
     }
 }

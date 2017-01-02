@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Console\Commands\Queue;
 
+use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Job;
 use Illuminate\Console\Command;
 
@@ -10,10 +11,29 @@ use Illuminate\Console\Command;
  */
 class ShowCommand extends Command
 {
+    use ShowHelpWhenRunTimeExceptionOccurs;
+
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
     protected $signature = 'queue:show
                             {queue : use the name of the queue to list the jobs}
                             ';
 
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Shows a queue';
+
+    /**
+     * The headers for the table output.
+     *
+     * @var array
+     */
     private $headers = ['Id', 'Queue', 'Method', 'Attempts', 'Created at'];
 
     /**

@@ -3,12 +3,15 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Domain;
+use AbuseIO\Traits\Api;
 
 /**
  * Class DomainFormRequest.
  */
 class DomainFormRequest extends Request
 {
+    use Api;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -34,7 +37,6 @@ class DomainFormRequest extends Request
             case 'POST':
                 return Domain::createRules();
             case 'PUT':
-                break;
             case 'PATCH':
                 return Domain::updateRules($this);
             default:

@@ -5,7 +5,11 @@ namespace AbuseIO\Http\Controllers;
 use AbuseIO\Http\Requests\BrandFormRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
+use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\BrandTransformer;
 use Exception;
+use Illuminate\Http\Request;
+use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
 
@@ -14,15 +18,21 @@ use yajra\Datatables\Datatables;
  */
 class BrandsController extends Controller
 {
+    use Api;
+
     /**
-     * BrandsController constructor.
+     * @param Manager $fractal
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
 
+        // initialize the Api methods
+        $this->apiInit($fractal, $request);
+
         // is the logged in account allowed to execute an action on the Brand
-        $this->middleware('checkaccount:Brand', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo']]);
+        $this->middleware('checkaccount:Brand', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiShow', 'apiDestroy']]);
     }
 
     /**
@@ -37,6 +47,18 @@ class BrandsController extends Controller
         return view('brands.index')
             ->with('brands', $brands)
             ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex()
+    {
+        $brands = Brand::all();
+
+        return $this->respondWithCollection($brands, new BrandTransformer());
     }
 
     /**
@@ -67,7 +89,7 @@ class BrandsController extends Controller
             ->addColumn(
                 'status',
                 function ($brand) use ($account) {
-                    if ($account->brand_id == $brand->id) {
+                    if ($account->brand->is($brand)) {
                         return trans('misc.active');
                     } else {
                         return trans('misc.inactive');
@@ -88,7 +110,7 @@ class BrandsController extends Controller
                         ]
                     );
                     if (!$brand->isSystemBrand() or $account->isSystemAccount()) {
-                        if ($account->brand_id != $brand->id) {
+                        if (!$account->brand->is($brand)) {
                             $actions .= ' <a href="brands/'.$brand->id.
                                 '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> '.
                                 trans('misc.button.activate').'</a> ';
@@ -132,11 +154,16 @@ class BrandsController extends Controller
     public function create()
     {
         $accounts = Account::lists('name', 'id');
+        $templates = Brand::getDefaultMailTemplate();
+        $templates['ash'] = Brand::getDefaultASHTemplate();
 
         return view('brands.create')
             ->with('account_selection', $accounts)
             ->with('selected', null)
             ->with('brand', null)
+            ->with('ash_custom_template', false)
+            ->with('mail_custom_template', false)
+            ->with('templates', $templates)
             ->with('auth_user', $this->auth_user);
     }
 
@@ -151,6 +178,50 @@ class BrandsController extends Controller
     {
         $input = $brandForm->all();
         $account = $this->auth_user->account;
+
+        $input['mail_custom_template'] = $input['mail_custom_template'] == 'true';
+        $input['ash_custom_template'] = $input['ash_custom_template'] == 'true';
+
+        if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
+            $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
+        } else {
+            return Redirect::route('admin.brands.create')
+                ->withInput($input)
+                ->withErrors(['logo' => 'Something went wrong, while uploading the logo']);
+        }
+
+        try {
+            if (!$account->isSystemAccount()) {
+                $input['creator_id'] = $account->id;
+            }
+
+            $brand = Brand::create($input);
+
+            if (!$brand) {
+                // when we can't save the brand, throw an exception
+                throw new Exception("Couldn't create new brand");
+            }
+        } catch (Exception $e) {
+            return Redirect::route('admin.brands.create')
+                ->withInput($input)
+                ->with('message', $e->getMessage());
+        }
+
+        return Redirect::route('admin.brands.index')
+            ->with('message', 'Brand has been created');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param BrandFormRequest $brandForm
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiStore(BrandFormRequest $brandForm)
+    {
+        $input = $brandForm->all();
+        $account = $this->api_account;
 
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
@@ -197,6 +268,18 @@ class BrandsController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @param Brand $brand
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiShow(Brand $brand)
+    {
+        return $this->respondWithItem($brand, new BrandTransformer());
+    }
+
+    /**
      * return the logo as an image.
      *
      * @param int $id
@@ -230,12 +313,20 @@ class BrandsController extends Controller
     public function edit(Brand $brand)
     {
         $accounts = Account::lists('name', 'id');
+        $templates = [
+            'plain_mail' => $brand->mail_template_plain,
+            'html_mail'  => $brand->mail_template_html,
+            'ash'        => $brand->ash_template,
+        ];
 
         return view('brands.edit')
             ->with('account_selection', $accounts)
             ->with('selected', $brand->creator_id)
             ->with('brand', $brand)
-            ->with('auth_user', $this->auth_user);
+            ->with('auth_user', $this->auth_user)
+            ->with('ash_custom_template', $brand->ash_custom_template)
+            ->with('mail_custom_template', $brand->mail_custom_template)
+            ->with('templates', $templates);
     }
 
     /**
@@ -250,6 +341,9 @@ class BrandsController extends Controller
     {
         $input = $brandForm->all();
 
+        $input['mail_custom_template'] = $input['mail_custom_template'] == 'true';
+        $input['ash_custom_template'] = $input['ash_custom_template'] == 'true';
+
         if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
             $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
         }
@@ -258,6 +352,27 @@ class BrandsController extends Controller
 
         return Redirect::route('admin.brands.show', $brand->id)
             ->with('message', 'Brand has been updated.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param BrandFormRequest $brandForm
+     * @param Brand            $brand
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function apiUpdate(BrandFormRequest $brandForm, Brand $brand)
+    {
+        $input = $brandForm->all();
+
+//        if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
+//            $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
+//        }
+//
+        $brand->update($input);
+
+        return $this->respondWithItem($brand, new BrandTransformer());
     }
 
     /**
@@ -278,6 +393,29 @@ class BrandsController extends Controller
 
         return Redirect::route('admin.brands.index')
             ->with('message', 'Brand has been deleted.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiDestroy($id)
+    {
+        $brand = Brand::find($id);
+
+        if (!$brand) {
+            return $this->errorNotFound('Brand Not Found');
+        }
+
+        if (!$brand->canDelete()) {
+            return $this->errorForbidden("Can't Delete an active and/or system brand.");
+        }
+        $brand->delete();
+
+        return $this->respondWithItem($brand, new BrandTransformer());
     }
 
     /**

@@ -7,3 +7,5 @@ AbuseIO.iml
 _ide_helper.php
 composer.lock
 htpasswd
+
+.DS_Store

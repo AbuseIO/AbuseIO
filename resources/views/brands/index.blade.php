@@ -44,6 +44,9 @@
             data: null,
             defaultContent: " "
         } ],
+            language: {
+                url: '{{ asset("/i18n/$auth_user->locale.json") }}'
+            },
             columns: [
             { data: 'name', name: 'name' },
             { data: 'company_name', name: 'company_name' },

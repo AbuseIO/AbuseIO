@@ -14,13 +14,11 @@ class EditCommandTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /**
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Not enough arguments (missing: "id").
-     */
     public function testWithoutId()
     {
+        ob_start();
         Artisan::call('role:edit');
+        $this->assertContains('Edit a role', ob_get_clean());
     }
 
     public function testWithInvalidId()

@@ -21,13 +21,11 @@ class EditCommandTest extends TestCase
         $this->dummy = factory(User::class)->create();
     }
 
-    /**
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Not enough arguments (missing: "user").
-     */
     public function testWithoutUser()
     {
+        ob_start();
         Artisan::call('user:edit');
+        $this->assertContains('Edit a user', ob_get_clean());
     }
 
     public function testWithInvalidUser()

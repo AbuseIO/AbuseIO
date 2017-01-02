@@ -48,6 +48,6 @@ class Permission extends Model
      */
     public function roles()
     {
-        return $this->belongsToMany('AbuseIO\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 }
