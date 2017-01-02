@@ -105,7 +105,7 @@
             <dd>
                 {!! link_to(
                     "/ash/collect/$ticket->id/" . $ticket->ash_token_ip,
-                    'http://' . Request::server('SERVER_NAME') . "/ash/collect/$ticket->id/"
+                    config('main.ash.url') . "/collect/$ticket->id/"
                      . $ticket->ash_token_ip
                 ) !!}
             </dd>
@@ -116,7 +116,7 @@
             <dd>
                 {!! link_to(
                     "/ash/collect/$ticket->id/" . $ticket->ash_token_domain,
-                    'http://' . Request::server('SERVER_NAME') . "/ash/collect/$ticket->id/"
+                    config('main.ash.url') . "/collect/$ticket->id/"
                      . $ticket->ash_token_domain
                 ) !!}
             </dd>
@@ -137,6 +137,9 @@
 
             <dt>{{ trans('contacts.api_host') }}</dt>
             <dd>{{ $ticket->ip_contact_api_host }}</dd>
+
+            <dt>{{ trans('contacts.notification') }}</dt>
+            <dd>{{ $ticket->ip_contact_auto_notify ? trans('misc.automatic') : trans('misc.manual') }}</dd>
         </dl>
         @endif
 
@@ -154,6 +157,9 @@
 
             <dt>{{ trans('contacts.api_host') }}</dt>
             <dd>{{ $ticket->domain_contact_api_host }}</dd>
+
+            <dt>{{ trans('contacts.notification') }}</dt>
+            <dd>{{ $ticket->domain_contact_auto_notify ? trans('misc.automatic') : trans('misc.manual') }}</dd>
         </dl>
         @endif
 

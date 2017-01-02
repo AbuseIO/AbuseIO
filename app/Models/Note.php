@@ -112,7 +112,7 @@ class Note extends Model
      */
     public function getUpdatedAtAttribute($date)
     {
-        return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
+        return date(config('app.date_format'), strtotime($date));
     }
 
     /**
@@ -124,7 +124,7 @@ class Note extends Model
      */
     public function getCreatedAtAttribute($date)
     {
-        return date(config('app.date_format').' '.config('app.time_format'), strtotime($date));
+        return date(config('app.date_format'), strtotime($date));
     }
 
     /**

@@ -1,0 +1,17 @@
+[Unit]
+Description=AbuseIO Queue Daemon for outgoing e-mail
+Requires=mysql.service apache2.service
+
+[Service]
+ExecStart=/usr/bin/php artisan queue:work --daemon --tries=1 --sleep=3 --memory=256 --delay=0 --queue=abuseio_email_outgoing
+ExecStop=/bin/kill -TERM $MAINPID
+WorkingDirectory=/opt/abuseio/
+User=abuseio
+Group=abuseio
+Type=simple 
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+Alias=abuseio_queue_email_outgoing
