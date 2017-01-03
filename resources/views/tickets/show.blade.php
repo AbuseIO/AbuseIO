@@ -178,7 +178,7 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach ($ticket->events as $event)
+            @foreach ($ticket->events('desc')->get() as $event)
             <tr>
                 <td>{{ $event->seen }}</td>
                 <td>{{ $event->source }}</td>
