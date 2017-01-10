@@ -78,6 +78,33 @@ class AlertAdmin extends Job
          */
         $mail = new PHPMailer();
         $mail->isSMTP();
+        if (env('MAIL_ENCRYPTION', false) === true) {
+            $mail->SMTPSecure = 'ssl';
+        }
+        if (env('MAIL_AUTH_ENCRYPTION', false) === true) {
+            $mail->SMTPSecure = 'tls';
+        }
+        if (env('MAIL_SSL_VERIFY', false) === false) {
+            $mail->SMTPOptions = [
+                'ssl' => [
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
+                    'allow_self_signed' => true,
+                ],
+            ];
+        }
+
+        $mail->SMTPAuth = false;
+        $mail->Host = Config::get('mail.host');
+        $mail->Port = Config::get('mail.port');
+
+        if (Config::get('mail.username') !== null &&
+            Config::get('mail.password') !== null
+        ) {
+            $mail->SMTPAuth = true;
+            $mail->Username = Config::get('mail.username');
+            $mail->Password = Config::get('mail.password');
+        }
 
         /*
          * Add all the original headers
