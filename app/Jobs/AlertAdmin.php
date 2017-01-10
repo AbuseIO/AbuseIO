@@ -79,10 +79,10 @@ class AlertAdmin extends Job
         $mail = new PHPMailer();
         $mail->isSMTP();
         if (env('MAIL_ENCRYPTION', false) === true) {
-            $mail->SMTPSecure = "ssl"
+            $mail->SMTPSecure = "ssl";
         }
         if (env('MAIL_AUTH_ENCRYPTION', false) === true) {
-            $mail->SMTPSecure = "tls"
+            $mail->SMTPSecure = "tls";
         }
         if (env('MAIL_SSL_VERIFY', false) === false) {
             $mail->SMTPOptions = array(
