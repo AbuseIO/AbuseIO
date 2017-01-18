@@ -4,6 +4,7 @@ namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\ContactFormRequest;
 use AbuseIO\Models\Contact;
+use AbuseIO\Services\NotificationService;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\ContactTransformer;
 use Form;
@@ -129,7 +130,9 @@ class ContactsController extends Controller
     public function create()
     {
         return view('contacts.create')
-            ->with('auth_user', $this->auth_user);
+            ->with('auth_user', $this->auth_user)
+            ->with('notificationService', new NotificationService())
+            ->with('contact', null);
     }
 
     /**
@@ -195,7 +198,9 @@ class ContactsController extends Controller
      */
     public function store(ContactFormRequest $contactForm, Contact $contact)
     {
-        $contact->create($contactForm->all());
+        $c = $contact->create($contactForm->all());
+
+        $c->syncNotificationMethods($contactForm);
 
         return Redirect::route('admin.contacts.index')
             ->with('message', 'Contact has been created');
@@ -253,7 +258,8 @@ class ContactsController extends Controller
     {
         return view('contacts.edit')
             ->with('contact', $contact)
-            ->with('auth_user', $this->auth_user);
+            ->with('auth_user', $this->auth_user)
+            ->with('notificationService', new NotificationService());
     }
 
     /**
@@ -267,6 +273,8 @@ class ContactsController extends Controller
     public function update(ContactFormRequest $contactForm, Contact $contact)
     {
         $contact->update($contactForm->all());
+
+        $contact->syncNotificationMethods($contactForm);
 
         return Redirect::route('admin.contacts.show', $contact->id)
             ->with('message', 'Contact has been updated.');
@@ -363,4 +371,6 @@ class ContactsController extends Controller
     {
         return $this->error;
     }
+
+    
 }

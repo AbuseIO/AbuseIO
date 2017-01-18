@@ -23,4 +23,6 @@ return [
     'linked_domains'        => 'Gekoppelde Domeinen',
     'netblock_id'           => 'Netwerk Nr',
     'domain_id'             => 'Domein Nr',
+    'no_notification_methods' => 'Er zijn geen notificatiemethoden geactiveerd voor deze contact.',
+
 ];

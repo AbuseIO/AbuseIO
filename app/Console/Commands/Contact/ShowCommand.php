@@ -32,7 +32,7 @@ class ShowCommand extends AbstractShowCommand
      */
     protected function getFields()
     {
-        return ['id', 'reference', 'name', 'email', 'api_host', 'auto_notify', 'enabled', 'account_id'];
+        return ['id', 'reference', 'name', 'email', 'api_host', 'enabled', 'account_id'];
     }
 
     /**
@@ -56,5 +56,13 @@ class ShowCommand extends AbstractShowCommand
                 'Use the id or name for a contact to show it.'
             ),
         ];
+    }
+
+    protected function transformObjectToTableBody($model)
+    {
+        $result = parent::transformObjectToTableBody($model);
+        $result[] = ['Notification methods', $model->notificationMethodsAsString()];
+
+        return $result;
     }
 }

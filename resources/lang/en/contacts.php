@@ -23,4 +23,5 @@ return [
     'linked_domains'        => 'Linked Domains',
     'netblock_id'           => 'Netblock Id',
     'domain_id'             => 'Domain Id',
+    'no_notification_methods' => 'No notification methods where set for this contact',
 ];

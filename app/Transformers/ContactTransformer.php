@@ -13,6 +13,8 @@ class ContactTransformer extends TransformerAbstract
      * @param Contact $contact
      *
      * @return array
+     *
+     * @TODO auto_notify should be remapped as Notification_methods;
      */
     public function transform(Contact $contact)
     {
@@ -22,7 +24,7 @@ class ContactTransformer extends TransformerAbstract
             'name'        => (string) $contact->name,
             'email'       => (string) $contact->email,
             'api_host'    => (string) $contact->api_host,
-            'auto_notify' => (bool) $contact->auto_notify,
+            'auto_notify' => (bool) $contact->auto_notify(),
             'enabled'     => (bool) $contact->enabled,
             //'account' => (new AccountTransformer)->transform($this->account);
         ];

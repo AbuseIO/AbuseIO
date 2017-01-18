@@ -34,4 +34,14 @@ class DestroyTest extends TestCase
     {
         return sprintf('%s/%s', self::URL, $id);
     }
+
+    /**
+     * @return void
+     */
+    public function testHasDataAttribute()
+    {
+        $this->initWithValidResponse();
+        $obj = json_decode($this->content);
+        $this->assertTrue(property_exists($obj, 'data'));
+    }
 }

@@ -34,32 +34,36 @@
 <div class="form-group">
     {!! Form::label('auto_notify', trans('contacts.notification').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::select('auto_notify', [0 => trans('misc.manual'), 1 => trans('misc.automatic')], null, ['class' => 'form-control']) !!}
+        @foreach ($notificationService->listAll() as $method)
+            <div class="checkbox">
+                <label>{!! Form::checkbox('notificationMethods[]', $method, $notificationService->hasNotificationMethod($contact, $method)) !!} {{ $method }}</label>
+            </div>
+        @endforeach
     </div>
 </div>
-<div class="form-group">
-    {!! Form::label('enabled', trans('misc.status').':', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-10">
-        {!! Form::select('enabled', [1 => trans('misc.enabled'), 0 => trans('misc.disabled')], null, ['class' => 'form-control']) !!}
-    </div>
-</div>
-<div class="form-group">
-    {!! Form::label('api-key', trans('misc.api_key').':', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-10">
-        <div class="input-group">
-            {!! Form::text('token', null, ['class' => 'form-control', 'id' => 'apikey']) !!}
-            <span class="input-group-btn">
-                <button id="refreshApiKey" title="{!! trans('misc.refresh') !!}" class="btn"  type="button"><i class="glyphicon glyphicon-refresh"></i></button>
-            </span>
+    <div class="form-group">
+        {!! Form::label('enabled', trans('misc.status').':', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::select('enabled', [1 => trans('misc.enabled'), 0 => trans('misc.disabled')], null, ['class' => 'form-control']) !!}
         </div>
     </div>
-</div>
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        {!! Form::submit($submit_text, ['class'=>'btn btn-success']) !!}
-        {!! link_to(URL::previous(), trans('misc.button.cancel'), ['class' => 'btn btn-default']) !!}
+    <div class="form-group">
+        {!! Form::label('api-key', trans('misc.api_key').':', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            <div class="input-group">
+                {!! Form::text('token', null, ['class' => 'form-control', 'id' => 'apikey']) !!}
+                <span class="input-group-btn">
+                    <button id="refreshApiKey" title="{!! trans('misc.refresh') !!}" class="btn"  type="button"><i class="glyphicon glyphicon-refresh"></i></button>
+                </span>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {!! Form::submit($submit_text, ['class'=>'btn btn-success']) !!}
+            {!! link_to(URL::previous(), trans('misc.button.cancel'), ['class' => 'btn btn-default']) !!}
+        </div>
+    </div>
 
 
 @section('extrajs')

@@ -21,7 +21,7 @@ class ShowCommandTest extends TestCase
         );
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        foreach (['Reference', 'Name', 'Email', 'Api host', 'Auto notify', 'Enabled'] as $el) {
+        foreach (['Reference', 'Name', 'Email', 'Api host', 'Notification methods', 'Enabled'] as $el) {
             $this->assertContains($el, $output);
         }
     }
@@ -37,7 +37,7 @@ class ShowCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($contact->email, Artisan::output());
+        $this->assertContains($contact->name, Artisan::output());
     }
 
     public function testWithInvalidFilter()

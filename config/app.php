@@ -196,6 +196,7 @@ return [
         'AbuseIO\Providers\AshServiceProvider',
         'AbuseIO\Providers\BusServiceProvider',
         'AbuseIO\Providers\ConfigServiceProvider',
+        'AbuseIO\Providers\ContactServiceProvider',
         'AbuseIO\Providers\HelperServiceProvider',
         'AbuseIO\Providers\RouteServiceProvider',
         'AbuseIO\Providers\SystemAdminManagerProvider',
@@ -204,7 +205,7 @@ return [
         'Chumper\Zipper\ZipperServiceProvider',
         'Sorskod\Larasponse\LarasponseServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
-
+        
         /*
          * Developer Providers
          */

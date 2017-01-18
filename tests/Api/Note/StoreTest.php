@@ -28,12 +28,6 @@ class StoreTest extends TestCase
     {
         $note = factory(Model::class)->make()->toArray();
 
-//        $mailer = $this->getMock('Swift_Mailer', array('send'), array(new \Swift_NullTransport()));
-//
-//        $this->app['mailer']->setSwiftMailer($mailer);
-//
-//        $mailer->expects($this->once())
-//            ->method('send');
         global $testrunner;
         $testrunner = true;
 

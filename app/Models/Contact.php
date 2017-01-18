@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Http\Requests\ContactFormRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -13,7 +14,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $name fillable
  * @property string $email fillable
  * @property string $api_host fillable
- * @property bool $auto_notify fillable
  * @property bool $enabled fillable
  * @property int account_id fillable
  * @property string $token
@@ -42,7 +42,6 @@ class Contact extends Model
         'name',
         'email',
         'api_host',
-        'auto_notify',
         'enabled',
         'account_id',
         'contact',
@@ -149,6 +148,97 @@ class Contact extends Model
     public function netblocks()
     {
         return $this->hasMany(Netblock::class);
+    }
+
+    /**
+     * Returns the notification methods for this contact
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notificationMethods()
+    {
+        return $this->hasMany(ContactNotificationMethods::class);
+    }
+
+    /**
+     * convenience method for determing if (old) functionality auto_notification is on or off;
+     *
+     * @return bool
+     */
+    public function auto_notify()
+    {
+       return $this->hasNotificationMethod('Mail');
+    }
+
+    /**
+     * Adds a notification method to this contact.
+     * 
+     * @param $attributes
+     * @return $this
+     */
+    public function addNotificationMethod($attributes)
+    {
+        $this->notificationmethods()->create($attributes);
+        return $this;
+    }
+
+    public function notificationMethodsAsString()
+    {
+        if ($this->notificationMethods->count() === 0) {
+            return 'no notification methods set for this contact';
+        }
+
+        return $this->notificationMethods->implode('method', ', ');
+    }
+
+    /**
+     * Sees whether a notification method is active for this contact.
+     * 
+     * @param $method
+     * @return bool
+     */
+    public function hasNotificationMethod($method)
+    {
+        foreach ($this->notificationMethods as $notificationMethod) {
+            if ($notificationMethod->method === $method) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Syncs the notificationMethods in the database
+     *
+     * @param ContactFormRequest $contactForm
+     */
+    public function syncNotificationMethods(ContactFormRequest $contactForm)
+    {
+        $methods = $contactForm->get('notificationMethods');
+        if ($methods == null) {
+            $methods = [];
+        }
+        $methodsInDB = $this->notificationMethods->map(function ($item) {
+            return $item->method;
+        })->toArray();
+
+
+        $toBeDeleted = array_diff($methodsInDB, $methods);
+        $toBeInserted = array_diff($methods, $methodsInDB);
+
+        foreach ($toBeInserted as $method) {
+            $this->addNotificationMethod(['method' => $method]);
+        }
+
+
+        foreach ($toBeDeleted as $method) {
+            foreach ($this->notificationMethods as $notificationMethod) {
+                if ($notificationMethod->method === $method) {
+                    $notificationMethod->delete();
+                }
+            }
+        }
     }
 
     /*
