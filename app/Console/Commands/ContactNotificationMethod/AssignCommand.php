@@ -4,10 +4,8 @@ namespace AbuseIO\Console\Commands\ContactNotificationMethod;
 
 use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Contact;
-use AbuseIO\Models\ContactNotificationMethods;
 use AbuseIO\Services\NotificationService;
 use Illuminate\Console\Command;
-
 
 /**
  * Class AssignCommand.
@@ -83,7 +81,7 @@ class AssignCommand extends Command
 
             return false;
         }
-        if($method === false) {
+        if ($method === false) {
             $this->error('Unable to find method with this method name');
 
             return false;
