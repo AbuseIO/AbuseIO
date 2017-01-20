@@ -13,16 +13,16 @@ return [
     'button.new_contact'    => 'Nieuw Contact',
 
     // Miscellaneous
-    'csv_export'            => 'CSV Export',
-    'no_contacts'           => 'U heeft nog geen contacten.',
-    'reference'             => 'Referentie',
-    'api_host'              => 'API Server',
-    'notification'          => 'Notificatie',
-    'details_for'           => 'Contact details voor',
-    'linked_netblocks'      => 'Gekoppelde Netwerken',
-    'linked_domains'        => 'Gekoppelde Domeinen',
-    'netblock_id'           => 'Netwerk Nr',
-    'domain_id'             => 'Domein Nr',
+    'csv_export'              => 'CSV Export',
+    'no_contacts'             => 'U heeft nog geen contacten.',
+    'reference'               => 'Referentie',
+    'api_host'                => 'API Server',
+    'notification'            => 'Notificatie',
+    'details_for'             => 'Contact details voor',
+    'linked_netblocks'        => 'Gekoppelde Netwerken',
+    'linked_domains'          => 'Gekoppelde Domeinen',
+    'netblock_id'             => 'Netwerk Nr',
+    'domain_id'               => 'Domein Nr',
     'no_notification_methods' => 'Er zijn geen notificatiemethoden geactiveerd voor deze contact.',
 
 ];

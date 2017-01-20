@@ -205,7 +205,7 @@ return [
         'Chumper\Zipper\ZipperServiceProvider',
         'Sorskod\Larasponse\LarasponseServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
-        
+
         /*
          * Developer Providers
          */

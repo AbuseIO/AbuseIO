@@ -2,7 +2,7 @@
 
 namespace tests\Services;
 
-/**
+/*
  * doesn't load ?
  */
 

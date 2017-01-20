@@ -371,6 +371,4 @@ class ContactsController extends Controller
     {
         return $this->error;
     }
-
-    
 }
