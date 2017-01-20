@@ -127,13 +127,28 @@ class AlertAdmin extends Job
         /*
          * Add all the skipped headers from addCustomHeader and add them using methods
          */
-        preg_match_all('/<(.+?)>/i', $parsedMail->getHeader('to'), $matches);
-        $recipients = $matches[1];
-        foreach ($recipients as $recipient) {
-            $mail->addAddress($recipient);
+
+        // process 'to' header
+        $rawTo = $parsedMail->getHeader('to');
+        $numMatches = preg_match_all('/<(.+?)>/i', $rawTo, $matches);
+        if ($numMatches !== 0) {
+            $recipients = $matches[1];
+            foreach ($recipients as $recipient) {
+                $mail->addAddress($recipient);
+            }
+        } else {
+            $mail->addAddress($rawTo);
         }
-        preg_match('/<(.+?)>/i', $parsedMail->getHeader('from'), $matches);
-        $from = $matches[1];
+
+        // process 'from' header
+        $rawFrom = $parsedMail->getHeader('from');
+        $numMatches = preg_match('/<(.+?)>/i', $rawFrom, $matches);
+        if ($numMatches !== 0) {
+            $from = $matches[1];
+        } else {
+            $from = $rawFrom;
+        }
+
         $mail->setFrom($from);
         $mail->Subject = !empty($parsedMail->getHeader('subject')) ? $parsedMail->getHeader('subject') : '';
         $mail->MessageDate = !empty($parsedMail->getHeader('date')) ? $parsedMail->getHeader('date') : date('D, j M Y H:i:s O');
