@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactNotificationMethods extends Model
 {
-   /**
+    /**
     * The attributes that are mass assignable.
     *
     * @var array
@@ -20,6 +20,7 @@ class ContactNotificationMethods extends Model
    | Validation Rules
    |--------------------------------------------------------------------------
    */
+
    /**
     * Validation rules for this model being created.
     *
@@ -27,7 +28,7 @@ class ContactNotificationMethods extends Model
     */
    public static function createRules()
    {
-      return [
+       return [
           'method' => 'required|string',
       ];
    }
@@ -39,7 +40,7 @@ class ContactNotificationMethods extends Model
     */
    public static function updateRules()
    {
-      return static::createRules();
+       return static::createRules();
    }
 
    /*
@@ -47,13 +48,14 @@ class ContactNotificationMethods extends Model
     | Relationship Methods
     |--------------------------------------------------------------------------
     */
+
    /**
-    * Returns the contact to whom this notification method belongs
+    * Returns the contact to whom this notification method belongs.
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
    public function contact()
    {
-      return $this->belongsTo(Contact::class);
+       return $this->belongsTo(Contact::class);
    }
 }

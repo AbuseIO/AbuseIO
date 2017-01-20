@@ -151,8 +151,8 @@ class Contact extends Model
     }
 
     /**
-     * Returns the notification methods for this contact
-     * 
+     * Returns the notification methods for this contact.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function notificationMethods()
@@ -161,24 +161,26 @@ class Contact extends Model
     }
 
     /**
-     * convenience method for determing if (old) functionality auto_notification is on or off;
+     * convenience method for determing if (old) functionality auto_notification is on or off;.
      *
      * @return bool
      */
     public function auto_notify()
     {
-       return $this->hasNotificationMethod('Mail');
+        return $this->hasNotificationMethod('Mail');
     }
 
     /**
      * Adds a notification method to this contact.
-     * 
+     *
      * @param $attributes
+     *
      * @return $this
      */
     public function addNotificationMethod($attributes)
     {
         $this->notificationmethods()->create($attributes);
+
         return $this;
     }
 
@@ -193,8 +195,9 @@ class Contact extends Model
 
     /**
      * Sees whether a notification method is active for this contact.
-     * 
+     *
      * @param $method
+     *
      * @return bool
      */
     public function hasNotificationMethod($method)
@@ -209,7 +212,7 @@ class Contact extends Model
     }
 
     /**
-     * Syncs the notificationMethods in the database
+     * Syncs the notificationMethods in the database.
      *
      * @param ContactFormRequest $contactForm
      */
@@ -223,14 +226,12 @@ class Contact extends Model
             return $item->method;
         })->toArray();
 
-
         $toBeDeleted = array_diff($methodsInDB, $methods);
         $toBeInserted = array_diff($methods, $methodsInDB);
 
         foreach ($toBeInserted as $method) {
             $this->addNotificationMethod(['method' => $method]);
         }
-
 
         foreach ($toBeDeleted as $method) {
             foreach ($this->notificationMethods as $notificationMethod) {

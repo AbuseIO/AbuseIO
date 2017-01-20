@@ -1,4 +1,5 @@
 <?php
+
 namespace AbuseIO\Services;
 
 use AbuseIO\Models\Contact;

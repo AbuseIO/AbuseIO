@@ -1,8 +1,8 @@
 <?php
 
 use AbuseIO\Models\Contact;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class ContactRemoveAutonotify extends Migration
 {
@@ -13,7 +13,7 @@ class ContactRemoveAutonotify extends Migration
      */
     public function up()
     {
-        foreach(Contact::where('auto_notify', 1) as $contact) {
+        foreach (Contact::where('auto_notify', 1) as $contact) {
             $contact->addNotificationMethod(['method'=> 'Mail']);
         }
 
@@ -43,6 +43,6 @@ class ContactRemoveAutonotify extends Migration
                 // Indexes
                 $table->index('auto_notify');
             }
-        ); 
+        );
     }
 }
