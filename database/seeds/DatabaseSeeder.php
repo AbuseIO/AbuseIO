@@ -11,11 +11,7 @@ class DatabaseSeeder extends Seeder
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
-        factory(AbuseIO\Models\Contact::class, 5)->create(
-            [
-                'auto_notify' => 0,
-            ]
-        );
+        factory(AbuseIO\Models\Contact::class, 5)->create();
         factory(AbuseIO\Models\Netblock::class, 10)->create();
         factory(AbuseIO\Models\Domain::class, 10)->create();
         factory(AbuseIO\Models\Account::class, 4)->create();

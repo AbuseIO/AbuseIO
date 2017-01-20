@@ -24,7 +24,7 @@ class TicketUpdate extends Job
         $ticket->domain_contact_name = $domainContact->name;
         $ticket->domain_contact_email = $domainContact->email;
         $ticket->domain_contact_api_host = $domainContact->api_host;
-        $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
+        $ticket->domain_contact_auto_notify = $domainContact->auto_notify();
         $ticket->save();
     }
 
@@ -43,7 +43,7 @@ class TicketUpdate extends Job
         $ticket->ip_contact_name = $ipContact->name;
         $ticket->ip_contact_email = $ipContact->email;
         $ticket->ip_contact_api_host = $ipContact->api_host;
-        $ticket->ip_contact_auto_notify = $ipContact->auto_notify;
+        $ticket->ip_contact_auto_notify = $ipContact->auto_notify();
         $ticket->save();
     }
 

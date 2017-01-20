@@ -28,7 +28,6 @@ class FindContact extends Job
         $contact->reference = 'UNDEF';
         $contact->name = 'Undefined Contact';
         $contact->enabled = true;
-        $contact->auto_notify = false;
         $contact->email = '';
         $contact->api_host = '';
         $contact->account()->associate(Account::getSystemAccount());

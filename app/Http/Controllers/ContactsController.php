@@ -93,7 +93,7 @@ class ContactsController extends Controller
             ->editColumn(
                 'auto_notify',
                 function ($contact) {
-                    return empty($contact->auto_notify) ? trans('misc.manual') : trans('misc.automatic');
+                    return empty($contact->auto_notify()) ? trans('misc.manual') : trans('misc.automatic');
                 }
             )
             ->make(true);

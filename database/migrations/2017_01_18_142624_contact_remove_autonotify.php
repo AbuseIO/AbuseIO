@@ -13,6 +13,10 @@ class ContactRemoveAutonotify extends Migration
      */
     public function up()
     {
+        foreach(Contact::where('auto_notify', 1) as $contact) {
+            $contact->addNotificationMethod(['method'=> 'Mail']);
+        }
+
         Schema::table(
             'contacts',
             function (Blueprint $table) {
@@ -22,9 +26,6 @@ class ContactRemoveAutonotify extends Migration
                 $table->dropColumn(['auto_notify']);
             }
         );
-        foreach(Contact::where('auto_notify', 1) as $contact) {
-            $contact->addNotificationMethod(['method'=> 'Mail']);
-        }
     }
 
     /**

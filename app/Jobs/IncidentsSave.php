@@ -128,7 +128,7 @@ class IncidentsSave extends Job implements SelfHandling
                 $newTicket->ip_contact_name = $ipContact->name;
                 $newTicket->ip_contact_email = $ipContact->email;
                 $newTicket->ip_contact_api_host = $ipContact->api_host;
-                $newTicket->ip_contact_auto_notify = $ipContact->auto_notify;
+                $newTicket->ip_contact_auto_notify = $ipContact->auto_notify();
                 $newTicket->ip_contact_notified_count = 0;
 
                 $newTicket->domain_contact_account_id = $domainContact->account_id;
@@ -136,7 +136,7 @@ class IncidentsSave extends Job implements SelfHandling
                 $newTicket->domain_contact_name = $domainContact->name;
                 $newTicket->domain_contact_email = $domainContact->email;
                 $newTicket->domain_contact_api_host = $domainContact->api_host;
-                $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
+                $newTicket->domain_contact_auto_notify = $domainContact->auto_notify();
                 $newTicket->domain_contact_notified_count = 0;
 
                 $newTicket->status_id = 'OPEN';
@@ -229,7 +229,7 @@ class IncidentsSave extends Job implements SelfHandling
                         $ticket->domain_contact_name = $domainContact->name;
                         $ticket->domain_contact_email = $domainContact->email;
                         $ticket->domain_contact_api_host = $domainContact->api_host;
-                        $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
+                        $ticket->domain_contact_auto_notify = $domainContact->auto_notify();
                         $ticket->accountDomain()->associate($domainContact->account);
                     }
 
