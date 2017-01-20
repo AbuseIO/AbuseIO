@@ -20,6 +20,7 @@ class NotificationService
     public static function isValidMethod($method)
     {
         $obj = new static();
+
         return in_array($method, $obj->listAll());
     }
 
