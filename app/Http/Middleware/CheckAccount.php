@@ -33,7 +33,7 @@ class CheckAccount
     public function handle(Request $request, Closure $next, $model)
     {
         // add the full model path
-        $model = sprintf("\\AbuseIO\\Models\\%s", $model);
+        $model = sprintf('\\AbuseIO\\Models\\%s', $model);
 
         $this->request = $request;
         $this->model = $model;
@@ -52,7 +52,7 @@ class CheckAccount
     {
         if (!method_exists($this->model, 'checkAccountAccess')) {
             Log::notice(
-                "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, " .
+                "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, ".
                 "which doesn't have the 'checkAccountAccess' method"
             );
 
