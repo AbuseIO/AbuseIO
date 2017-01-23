@@ -32,6 +32,9 @@ class CheckAccount
      */
     public function handle(Request $request, Closure $next, $model)
     {
+        // add the full model path
+        $model = sprintf("\\AbuseIO\\Models\\%s", $model);
+
         $this->request = $request;
         $this->model = $model;
 
@@ -49,7 +52,8 @@ class CheckAccount
     {
         if (!method_exists($this->model, 'checkAccountAccess')) {
             Log::notice(
-                "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, which doesn't match the model_id format"
+                "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, " .
+                "which doesn't have the 'checkAccountAccess' method"
             );
 
             return false;
@@ -68,7 +72,7 @@ class CheckAccount
             //return
         }
 
-        return back()->with('message', 'Account ['.$this->account->name.'] is not allowed to access this object');
+        return back()->with('message', 'You are not allowed to access this object');
     }
 
     /**
@@ -82,11 +86,11 @@ class CheckAccount
     /**
      * @param Request $request
      */
-    private function resolveModelId()
+    private function resolveModelId($request)
     {
-        $model_id = $this->request->segment(self::ID_SEGMENT);
+        $model_id = $request->segment(self::ID_SEGMENT);
         if (empty($model_id)) {
-            $model_id = $this->request->input('id');
+            $model_id = $request->input('id');
         }
 
         $this->model_id = $model_id;
@@ -98,7 +102,8 @@ class CheckAccount
     private function checkModelIdValid()
     {
         $this->resolveModelId($this->request);
-        if (!empty($this->model_id) and preg_match('/\d+/', $this->model_id)) {
+
+        if (!empty($this->model_id) && preg_match('/\d+/', $this->model_id)) {
             return true;
         }
 
