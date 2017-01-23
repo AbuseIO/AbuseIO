@@ -135,8 +135,15 @@ $factory->define(AbuseIO\Models\Job::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(AbuseIO\Models\Note::class, function (Faker\Generator $faker) {
+
+    // get a random ticket
+    $ticket = \AbuseIO\Models\Ticket::all()->random();
+
+    // if no ticket found, we create our own
+    $ticket = $ticket ?: factory(\AbuseIO\Models\Ticket::class)->create();
+
     return [
-        'ticket_id' => factory(\AbuseIO\Models\Ticket::class)->create()->id,
+        'ticket_id' => $ticket->id,
         'submitter' => $faker->userName,
         'text'      => $faker->sentence($faker->numberBetween(5, 10)),
         'hidden'    => $faker->boolean(),
