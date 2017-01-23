@@ -61,7 +61,7 @@ class Contact extends Model
     public static function createRules()
     {
         $rules = [
-            'reference'     => 'required|unique:contacts,reference',
+            'reference'     => 'required|string|unique:contacts,reference',
             'name'          => 'required',
             'email'         => 'sometimes|emails',
             'api_host'      => 'sometimes|url',
@@ -82,7 +82,7 @@ class Contact extends Model
     public static function updateRules($contact)
     {
         $rules = [
-            'reference'     => 'required|unique:contacts,reference,'.$contact->id,
+            'reference'     => 'required|string|unique:contacts,reference,'.$contact->id,
             'name'          => 'required',
             'email'         => 'sometimes|emails',
             'api_host'      => 'sometimes|url',
