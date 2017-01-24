@@ -91,7 +91,7 @@ class FindContact extends Job
         $contact = null;
 
         foreach (config("main.external.findcontact.{$section}") as $config) {
-            // skip part on invalid config
+            // skip part on invalid config or 'prefer_local' param
             if (
                 !is_array($config) ||
                 !array_key_exists('class', $config) ||
