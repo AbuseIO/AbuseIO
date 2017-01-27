@@ -125,7 +125,6 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             return;
         }
 
-
         // Start with detecting valid ARF e-mail
         $attachments = $parsedMail->getAttachments();
         $arfMail = [];
