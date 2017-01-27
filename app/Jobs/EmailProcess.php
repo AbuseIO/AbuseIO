@@ -113,6 +113,18 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             return;
         }
 
+        // Ignore email from our own notification address used in bounching methods to prevent mail loops
+        if (preg_match('/'.Config::get('main.notifications.from_address').'/', $parsedMail->getHeader('Resent-From'))) {
+            Log::warning(
+                get_class($this).': '.
+                'Loop prevention: Ignoring email from self '.Config::get('main.notifications.from_address')
+            );
+
+            $this->exception();
+
+            return;
+        }
+
         // Start with detecting valid ARF e-mail
         $attachments = $parsedMail->getAttachments();
         $arfMail = [];
