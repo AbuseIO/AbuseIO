@@ -45,6 +45,7 @@ class Contact extends Model
         'enabled',
         'account_id',
         'contact',
+        'token',
     ];
 
     /*
