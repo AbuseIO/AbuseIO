@@ -53,6 +53,7 @@ return [
         'notifications_cron'                => '*/15 * * * * *',
         'collectors_cron'                   => '*/60 * * * * *',
         'housekeeper_cron'                  => '*/1 * * * * *',
+//        'collect_statistics_cron'         => '0 0 * * * *', needs some discussion on when to run;
         'enable_queue_problem_alerts'       => true,
     ],
 
