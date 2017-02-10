@@ -68,6 +68,7 @@ class Contact extends Model
             'api_host'      => 'sometimes|url',
             'enabled'       => 'required|boolean',
             'account_id'    => 'required|integer|exists:accounts,id',
+            //'notification_methods' => 'required|array',
         ];
 
         return $rules;
@@ -89,6 +90,7 @@ class Contact extends Model
             'api_host'      => 'sometimes|url',
             'enabled'       => 'required|boolean',
             'account_id'    => 'required|integer|exists:accounts,id',
+            //'notification_methods' => 'required|array',
         ];
 
         return $rules;

@@ -19,14 +19,15 @@
         @if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
     </div>
 </div>
-<div class="form-group">
+<div class="form-group @if ($errors->has('notificationMethods')) has-error @endif">
     {!! Form::label('auto_notify', trans('contacts.notification').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
         @foreach ($notificationService->listAll() as $method)
             <div class="checkbox">
-                <label>{!! Form::checkbox('notificationMethods[]', $method, $notificationService->hasNotificationMethod($contact, $method)) !!} {{ $method }}</label>
+                <label style="color:initial">{!! Form::checkbox('notificationMethods[]', $method, $notificationService->hasNotificationMethod($contact, $method)) !!} {{ $method }}</label>
             </div>
         @endforeach
+        @if ($errors->has('notificationMethods')) <p class="help-block"> {{ trans('contacts.no_notification_methods') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('api_host')) has-error @endif">
