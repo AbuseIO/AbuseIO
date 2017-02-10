@@ -7,7 +7,6 @@ use AbuseIO\Services\NotificationService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use tests\TestCase;
 
-
 class NotificationServiceTest extends TestCase
 {
     use DatabaseTransactions;
@@ -21,7 +20,6 @@ class NotificationServiceTest extends TestCase
             ['Mail']
         );
     }
-
 
     public function testListContact()
     {
@@ -47,7 +45,7 @@ class NotificationServiceTest extends TestCase
 
         $this->assertEquals(
             $this->service->listForContact($contact),
-            ['Mail'] 
+            ['Mail']
         );
     }
 
