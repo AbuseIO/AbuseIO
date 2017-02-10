@@ -2,33 +2,58 @@
 
 namespace tests\Services;
 
-/*
- * doesn't load ?
- */
+use AbuseIO\Models\Contact;
+use AbuseIO\Services\NotificationService;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use tests\TestCase;
 
-//use AbuseIO\Services\NotificationService;
-//use tests\TestCase;
-//
-//
-//class NotificationServiceTest extends TestCase
-//{
-//    public function testListAll()
-//    {
-//        $service = new NotificationService();
-//        $this->assertEquals(
-//            $service->listAll(),
-//            ['Mail']
-//        );
-//    }
 
-//
-//    public function testListContact(){
-//        $service = new NotificationService();
-//        $this->assertEquals(
-//            $service->listAll(),
-//            ['Mail']
-//        );
-//
-//
-//    }
-//}
+class NotificationServiceTest extends TestCase
+{
+    use DatabaseTransactions;
+
+    private $service;
+
+    public function testListAll()
+    {
+        $this->assertEquals(
+            $this->service->listAll(),
+            ['Mail']
+        );
+    }
+
+
+    public function testListContact()
+    {
+        $contact = factory(Contact::class)->create();
+
+        $this->assertEquals(
+            $this->service->listForContact($contact),
+            []
+        );
+    }
+
+    public function testListContactForAllowedActiveMethods()
+    {
+        $contact = factory(Contact::class)->create();
+
+        $contact->addNotificationMethod([
+            'method' => 'Mail',
+        ]);
+
+        $contact->addNotificationMethod([
+            'method' => 'SomeBogusNotificationMethod',
+        ]);
+
+        $this->assertEquals(
+            $this->service->listForContact($contact),
+            ['Mail'] 
+        );
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->service = new NotificationService();
+    }
+}
