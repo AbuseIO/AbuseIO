@@ -3,11 +3,9 @@
 namespace AbuseIO\Console\Commands\CollectStatistics;
 
 use AbuseIO\Jobs\GenerateTicketsGraphPoints;
-use Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
-
 
 /**
  * Class RunCommand.
@@ -48,7 +46,6 @@ class RunCommand extends Command
         Log::debug(
             get_class($this).': KNOCK KNOCK statistics collector'
         );
-
 
         $this->dispatch(new GenerateTicketsGraphPoints());
 
