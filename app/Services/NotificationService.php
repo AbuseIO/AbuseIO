@@ -17,11 +17,12 @@ class NotificationService
 
     /**
      * @param Contact $contact
+     *
      * @return array
      */
     public function listForContact(Contact $contact)
     {
-        return $contact->notificationMethods->map(function($item) {
+        return $contact->notificationMethods->map(function ($item) {
             return $item['method'];
         })->filter(function ($item) {
             return in_array($item, $this->listAll());
@@ -30,6 +31,7 @@ class NotificationService
 
     /**
      * @param $method
+     *
      * @return bool
      */
     public static function isValidMethod($method)
@@ -42,6 +44,7 @@ class NotificationService
     /**
      * @param $contact
      * @param $method
+     *
      * @return bool
      */
     public function hasNotificationMethod($contact, $method)
