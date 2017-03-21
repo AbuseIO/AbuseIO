@@ -40,7 +40,7 @@
             <td>{!! Form::select('class_id', $classes, null, ['placeholder' => '', 'id' => 'class_id', 'class' => 'form-control']) !!}</td>
             <td></td>
             <td></td>
-            <td>{!! Form::select('statuses', $statuses, null, ['placeholder' => '', 'id' => 'statuses', 'class' => 'form-control']) !!}</th>
+            <td>{!! Form::select('statuses', $statuses, null, ['placeholder' => '', 'id' => 'statuses', 'class' => 'form-control']) !!}</td>
             <td></td>
         </tr>
     </tfoot>
