@@ -32,7 +32,7 @@
     <dt>{{ trans('contacts.notification') }}</dt>
     <dd>
         @forelse ($contact->notificationMethods as $method)
-            {!! $method->method !!} </BR>
+            {!! $method->method !!} <br />
         @empty
             {{ trans('contacts.no_notification_methods') }}
         @endforelse
