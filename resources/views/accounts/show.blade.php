@@ -11,7 +11,7 @@
         @else
             {!! link_to_route('admin.accounts.disable', trans('misc.button.disable'), $account->id, ['class' => 'btn btn-warning']) !!}
         @endif
-        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger'.(($account->id == 1) ? ' disabled' : '')]) !!}
+        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger'.(($account->isSystemAccount()) ? ' disabled' : '')]) !!}
         {!! Form::close() !!}
     </div>
 </div>
@@ -32,7 +32,10 @@
     <dd>{{ $account->disabled ? trans('misc.disabled') : trans('misc.enabled') }}</dd>
 
     <dt>{{ trans('accounts.api_key') }}</dt>
-    <dd><input id="token" style="padding:0; margin-right:10px; width:300px; border:none;" value="{{ $account->token }}"><button rel="tooltip" title="{!! trans('misc.copied') !!}" id="btnCopyToClipboard" class="btn btn-info" title="{!! trans('misc.copy_to_clipboard') !!}"><i class="glyphicon glyphicon-copy"></i></button></dd>
+    <dd>
+        {!! Form::input('text', 'token', $account->token, ['id' => 'token', 'style' => 'padding:0; margin-right:10px; width:300px; border:none;']) !!}
+        {!! Form::button('<i class="fa fa-clipboard" aria-hidden="true"></i>', ['id' => 'btnCopyToClipboard', 'rel' => 'tooltip', 'title'=> trans('misc.copy_to_clipboard'), 'class' => 'btn btn-sm btn-info']) !!}
+    </dd>
 </dl>
 
 @if ( $account->users->count() )
