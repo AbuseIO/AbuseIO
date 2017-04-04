@@ -10,10 +10,12 @@ class TicketObserver
     /**
      * Listen to the Ticket saving event.
      *
-     * @param  Ticket $ticket
+     * @param Ticket $ticket
+     *
      * @return void
      */
-    function saving(Ticket $ticket) {
+    public function saving(Ticket $ticket)
+    {
 
         // generate the ApiToken
         if (empty($ticket->api_token)) {
@@ -24,10 +26,12 @@ class TicketObserver
     /**
      * Listen to the Ticket saved event.
      *
-     * @param  Ticket $ticket
+     * @param Ticket $ticket
+     *
      * @return void
      */
-    function saved(Ticket $ticket) {
+    public function saved(Ticket $ticket)
+    {
 
         // create the ash tokens after the ticket is saved
         $salt = env('APP_KEY');
