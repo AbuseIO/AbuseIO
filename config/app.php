@@ -193,14 +193,12 @@ return [
          * Application Service Providers...
          */
         'AbuseIO\Providers\AppServiceProvider',
-        'AbuseIO\Providers\AshServiceProvider',
         'AbuseIO\Providers\BusServiceProvider',
         'AbuseIO\Providers\ConfigServiceProvider',
         'AbuseIO\Providers\ContactServiceProvider',
         'AbuseIO\Providers\HelperServiceProvider',
         'AbuseIO\Providers\RouteServiceProvider',
         'AbuseIO\Providers\SystemAdminManagerProvider',
-        'AbuseIO\Providers\TicketApiTokenProvider',
         'AbuseIO\Providers\ValidationsServiceProvider',
         'Chumper\Zipper\ZipperServiceProvider',
         'Sorskod\Larasponse\LarasponseServiceProvider',

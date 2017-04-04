@@ -22,7 +22,7 @@ class StoreTest extends TestCase
         );
     }
 
-    public function testSuccesfullCreate()
+    public function testSuccessfulCreate()
     {
         $account = factory(Account::class)->make()->toArray();
 

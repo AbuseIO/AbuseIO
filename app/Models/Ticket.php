@@ -4,6 +4,7 @@ namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+Use Log;
 
 /**
  * Class Ticket.
@@ -50,11 +51,19 @@ class Ticket extends Model
     protected $table = 'tickets';
 
     /**
-     * a readonly property containing the apiToken;.
+     * a writeonce property containing the api_token;.
      *
      * @var string
      */
-    protected $apiToken;
+    protected $api_token;
+
+    /**
+     * a property containing the remote api token;.
+     *
+     * @var string
+     */
+    protected $remote_api_token;
+
 
     /**
      * The attributes that are mass assignable.
@@ -330,17 +339,5 @@ class Ticket extends Model
 
         return ($ticket->accountIp->is($account)) ||
             ($ticket->accountDomain->is($account));
-    }
-
-    /**
-     * method to set api token on the ticket; Can savely be called, does not change current value;.
-     *
-     * @return void
-     */
-    public function generateApiToken()
-    {
-        if (is_null($this->api_token)) {
-            $this->api_token = generateApiToken();
-        }
     }
 }

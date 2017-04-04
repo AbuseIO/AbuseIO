@@ -2,6 +2,8 @@
 
 namespace AbuseIO\Providers;
 
+use AbuseIO\Models\Ticket;
+use AbuseIO\Observers\TicketObserver;
 use Illuminate\Support\ServiceProvider;
 use Log;
 
@@ -19,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         /*
          * MARKNL:
-         * OH NOES!! You've lost some bits somewhere! You need at least 64 of them buggers to tun this application.
+         * OH NOES!! You've lost some bits somewhere! You need at least 64 of them buggers to run this application.
          */
         if (PHP_INT_SIZE < 8) {
             Log::emergency(
@@ -27,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
             );
             dd();
         }
+
+        // register observers
+        Ticket::observe(TicketObserver::class);
     }
 
     /**
