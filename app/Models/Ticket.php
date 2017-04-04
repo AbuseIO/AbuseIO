@@ -4,7 +4,6 @@ namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-Use Log;
 
 /**
  * Class Ticket.
@@ -63,7 +62,6 @@ class Ticket extends Model
      * @var string
      */
     protected $remote_api_token;
-
 
     /**
      * The attributes that are mass assignable.
