@@ -23,12 +23,12 @@ class AshServiceProvider extends ServiceProvider
         Ticket::saved(function ($ticket) {
             $salt = env('APP_KEY');
             if (empty($ticket->ash_token_ip)) {
-                $token = md5($salt . $ticket->id . $ticket->ip . $ticket->ip_contact_reference);
-                DB::update("update tickets set ash_token_ip = ? where id = ?", [$token, $ticket->id]);
+                $token = md5($salt.$ticket->id.$ticket->ip.$ticket->ip_contact_reference);
+                DB::update('update tickets set ash_token_ip = ? where id = ?', [$token, $ticket->id]);
             }
             if (empty($ticket->ash_token_domain)) {
-                $token = md5($salt . $ticket->id . $ticket->domain . $ticket->domain_contact_reference);
-                DB::update("update tickets set ash_token_domain = ? where id = ?", [$token, $ticket->id]);
+                $token = md5($salt.$ticket->id.$ticket->domain.$ticket->domain_contact_reference);
+                DB::update('update tickets set ash_token_domain = ? where id = ?', [$token, $ticket->id]);
             }
         });
     }
