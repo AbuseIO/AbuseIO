@@ -1,0 +1,13 @@
+[Unit]
+Description=AbuseIO Incoming Email Queue Service
+After=network.target
+
+[Service]
+Type=simple
+User=abuseio
+WorkingDirectory=/opt/abuseio
+ExecStart=/usr/bin/php artisan queue:work --daemon --tries=1 --sleep=3 --memory=256 --delay=0 --queue=abuseio_email_incoming
+Restart=always
+
+[Install]
+WantedBy=mutli-user.target

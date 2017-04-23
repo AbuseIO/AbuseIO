@@ -25,13 +25,24 @@
 
 #### Packages (ubuntu)
 ```bash
-apt-get install curl git mysql-server apache2 apache2-utils postfix supervisor libapache2-mod-php5 php5 php-pear php5-dev php5-mcrypt php5-mysql php5-pgsql php5-curl php5-intl
+apt-get install curl git mysql-server apache2 apache2-utils postfix libapache2-mod-php5 php5 php-pear php5-dev php5-mcrypt php5-mysql php5-pgsql php5-curl php5-intl
 ```
 
 #### Packages (centos)
 Still a work in progress, but minimal:
 ```bash
 php-bcmath
+```
+
+#### Packages (non-systemd OS)
+For CentOS 6:
+```bash
+yum install supervisor
+```
+
+For Debian/Ubuntu:
+```bash
+apt-get install supervisor
 ```
 
 #### Composer
@@ -110,16 +121,22 @@ chmod -R 770 storage/
 chmod 770 bootstrap/cache/
 ```
 
-
-#### Supervisor, logrotate, rsyslog
-This will setup supervisor, logrotate and rsyslog for you
+#### Logs and log rotation
+This will configure rsyslog to send all log entries tagged with the abuseio user to a separate log file. Logrotate will also be configured to rotate all AbuseIO logs daily.
 ```bash
-cp -vr /opt/abuseio/extra/etc/* /etc/
 mkdir /var/log/abuseio
 chown syslog:adm /var/log/abuseio
-supervisorctl reread
-/etc/init.d/supervisor restart
+cp -vr /opt/abuseio/extra/etc/logrotate.d/* /etc/logrotate.d/
+cp -vr /opt/abuseio/extra/etc/rsyslog.d/* /etc/rsyslog.d/
 service rsyslog restart
+```
+
+#### Service startup
+If you will be using supervisord, do this
+```bash
+cp -vr /opt/abuseio/extra/etc/supervisor/* /etc/
+supervisorctl reread
+service supervisor restart
 ```
 > Important: The supervisord worker threads run in daemon mode. This will allow the framework to
 be cached and saves a lot of CPU cycles. However if you edit the code in _ANY_ way you will need
@@ -128,6 +145,12 @@ to restart these daemons (or better: stop -> code change -> start) to prevent jo
 > Note: If you get messages on 'hanging' jobs its most likely these supervisor jobs are not running.
 Please make sure you see running processes from the configured supervisor jobs before submitting
 a bug report.
+
+If you will be using systemd instead, do this
+```bash
+cp -vr /opt/abuseio/extra/etc/systemd/* /etc/
+systemctl daemon-reload
+```
 
 #### MTA Delivery
 
@@ -326,9 +349,9 @@ sure you leave a 2nd or 3rd with your 'normal' resolvers.
 ### Finalizing configuration
 
 Once completed there are a few settings you will need to configure. First off you need to be aware that by default your
-queue runners are running in --daemon mode (the services from supervisord). This is great for saving CPU and is a lot
+queue runners are running in --daemon mode (the services from supervisord/systemd). This is great for saving CPU and is a lot
 faster, however does not reread the configuration until the daemon has been restarted. So if you change the confguration
-you will need to restart the supervisord services too!
+you will need to restart the supervisord/systemd services too!
 
 Copy `/opt/abuseio/config/main.php` to the environment folder `/opt/abuseio/config/$ENV`. ($ENV being either 'development', 'production' or 'testing')
 f.e. If you want to configure you production environment do
