@@ -18,6 +18,20 @@ return [
         'description' => 'This classification has no information text yet.',
     ],
 
+    'OPEN_VNC_SERVER' => [
+        'name'        => 'Open VNC Server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_SMB_SERVER' => [
+        'name'        => 'Open SAMBA Server (SMB/CIFS)',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
     'OPEN_CWMP_SERVER' => [
         'name'        => 'Open CPE WAN Management Protocol (CWMP)',
         'description' => '
