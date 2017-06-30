@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class TicketAddApiFields extends Migration
@@ -16,7 +15,6 @@ class TicketAddApiFields extends Migration
             $table->string('remote_api_url')->nullable();
             $table->integer('remote_ticket_id')->nullable();
         });
-
     }
 
     /**
