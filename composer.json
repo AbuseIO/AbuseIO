@@ -69,9 +69,13 @@
 		"abuseio/notification-common": "1.1.*",
 		"abuseio/notification-mail": "1.3.*",
 
+		"abuseio/hook-common": "dev-master",
+		"abuseio/hook-log": "dev-master",
+
 		"zendframework/zend-xmlrpc": "^2.5",
 		"jeremykendall/php-domain-parser": "^3.0",
-		"zendframework/zend-json": "^3.0"
+		"zendframework/zend-json": "^3.0",
+		"jover/singleton": "^1.0"
 
 	},
 	"require-dev": {
@@ -80,6 +84,16 @@
 		"phpspec/phpspec": "~2.1",
 		"mockery/mockery": "0.9.5"
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/joverthegrey/abuseio-hook-common"
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/joverthegrey/abuseio-hook-log"
+		}
+	],
 	"autoload": {
 		"classmap": [
 			"database",

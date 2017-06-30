@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Observers;
 
+use AbuseIO\Hook\Common as Hooks;
 use AbuseIO\Models\Ticket;
 use DB;
 
@@ -21,6 +22,9 @@ class TicketObserver
         if (empty($ticket->api_token)) {
             $ticket->api_token = generateApiToken();
         }
+
+        // call hooks
+        Hooks::call($ticket, 'saving');
     }
 
     /**
@@ -43,5 +47,8 @@ class TicketObserver
             $token = md5($salt.$ticket->id.$ticket->domain.$ticket->domain_contact_reference);
             DB::update('update tickets set ash_token_domain = ? where id = ?', [$token, $ticket->id]);
         }
+
+        // call hooks
+        Hooks::call($ticket, 'saved');
     }
 }

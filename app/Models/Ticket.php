@@ -34,6 +34,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property bool $auto_notify fillable
  * @property int $last_notify_count fillable
  * @property int $last_notify_timestamp fillable
+ * @property string $remote_api_token
+ * @property string $api_token
+ * @property string $remote_api_url
+ * @property int $remote_ticket_id
  * @property int $created_at
  * @property int $updated_at
  * @property int $deleted_at

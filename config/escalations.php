@@ -35,11 +35,11 @@ return [
     | tickets will be created by the parser als 'info' and will process when
     | the thresholds are hit.
     |
-    | Using the info at the ticket start, you will have a less agressive
+    | Using the info at the ticket start, you will have a less aggressive
     | notification cycle (once in every 90 days). Once there are 25 or more
     | complaints we consider the 'false-positive' factor gone and upgrade it to
     | abuse which will start real-time notifications.
-    | After the escaltion threshold is hit it will move the status to escalated
+    | After the escalation threshold is hit it will move the status to escalated
     | which can be use for automatic quarantining stuff.
     */
     'FEEDBACK_LOOP' => [
