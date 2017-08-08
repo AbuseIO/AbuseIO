@@ -7,9 +7,8 @@ use AbuseIO\Models\Event;
 
 class EventObserver
 {
-
     /**
-     *  Listen for the created Event event
+     *  Listen for the created Event event.
      *
      * @param Event $event
      */

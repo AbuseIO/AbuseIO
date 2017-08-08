@@ -146,10 +146,10 @@ class IncidentsController extends Controller
     }
 
     /**
-     *
-     * return $this->respondWithItem($ticket, new TicketTransformer());
+     * return $this->respondWithItem($ticket, new TicketTransformer());.
      *
      * @param IncidentFormRequest $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiStore(IncidentFormRequest $request)

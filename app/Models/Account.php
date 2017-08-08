@@ -137,20 +137,20 @@ class Account extends Model
     }
 
     /**
-     * return the admins of an account
+     * return the admins of an account.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function admins()
     {
-        $admins =  DB::table('users')
+        $admins = DB::table('users')
             ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
             ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
-            ->where('roles.name','=','Admin')
+            ->where('roles.name', '=', 'Admin')
             ->where('users.account_id', '=', $this->id)
             ->select('users.*')->get();
 
-        return Account::hydrate($admins);
+        return self::hydrate($admins);
     }
 
     /*
