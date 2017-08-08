@@ -56,6 +56,10 @@ class TicketTransformer extends TransformerAbstract
             'note_count'                            => (int) $ticket->note_count,
             'ash_token_ip'                          => (string) $ticket->ash_token_ip,
             'ash_token_domain'                      => (string) $ticket->ash_token_domain,
+            'remote_api_token'                      => (string) $ticket->remote_api_token,
+            'api_token'                             => (string) $ticket->api_token,
+            'remote_api_url'                        => (string) $ticket->remote_api_url,
+            'remote_ticket_id'                      => (string) $ticket->remote_ticket_id,
             'events'                                => $events,
             'notes'                                 => $notes,
         ];

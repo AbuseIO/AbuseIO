@@ -25,6 +25,9 @@ class IncidentTransformer extends TransformerAbstract
             'class'                 => (string) $incident->class,
             'type'                  => (string) $incident->type,
             'information'           => (string) $incident->information,
+            'remote_api_url'        => (string) $incident->remote_api_url,
+            'remote_api_token'      => (string) $incident->remote_api_token,
+            'remote_ticket_id'      => (string) $incident->remote_ticket_id,
         ];
     }
 }

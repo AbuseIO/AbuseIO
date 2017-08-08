@@ -56,6 +56,22 @@ class Incident
      */
     public $information;
 
+    /**
+     * @var
+     */
+    public $remote_api_token;
+
+    /**
+     * @var
+     */
+    public $remote_api_url;
+
+    /**
+     * @var
+     */
+    public $remote_ticket_id;
+
+
     /*
     |--------------------------------------------------------------------------
     | Validation Rules
@@ -79,6 +95,32 @@ class Incident
                 }
             }
         }
+
+        return $incident;
+    }
+
+    /**
+     * @param Event $event
+     * @return Incident
+     */
+    public static function fromEvent(Event $event)
+    {
+        $incident = new self();
+
+        $ticket = Ticket::find($event->ticket_id);
+
+        // fill the fields
+        $incident->source = $event->source;
+        $incident->source_id = false; // seems to be the default setting
+        $incident->ip = $ticket->ip;
+        $incident->domain = $ticket->domain;
+        $incident->timestamp = $event->timestamp;
+        $incident->class = $ticket->class_id;
+        $incident->type = $ticket->type_id;
+        $incident->information = $event->information;
+        $incident->remote_api_url = route('api.v1.tickets.index');
+        $incident->remote_api_token = $ticket->api_token;
+        $incident->remote_ticket_id = $ticket->id;
 
         return $incident;
     }

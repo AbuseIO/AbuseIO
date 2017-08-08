@@ -2,7 +2,9 @@
 
 namespace AbuseIO\Providers;
 
+use AbuseIO\Models\Event;
 use AbuseIO\Models\Ticket;
+use AbuseIO\Observers\EventObserver;
 use AbuseIO\Observers\TicketObserver;
 use Illuminate\Support\ServiceProvider;
 use Log;
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
 
         // register observers
         Ticket::observe(TicketObserver::class);
+        Event::observe(EventObserver::class);
     }
 
     /**

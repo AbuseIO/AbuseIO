@@ -10,6 +10,7 @@ use AbuseIO\Models\Event;
 use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Incident;
 use AbuseIO\Traits\Api;
+use AbuseIO\Transformers\IncidentTransformer;
 use Form;
 use Illuminate\Http\Request;
 use Input;
@@ -57,7 +58,7 @@ class IncidentsController extends Controller
     /**
      * Store a newly created incident in storage.
      *
-     * @param IncidentFormRequest $incident
+     * @param IncidentFormRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -142,5 +143,73 @@ class IncidentsController extends Controller
             'A new incident has been created. Depending on the aggregator result a new '.
             'ticket will be created or existing ticket updated'
         );
+    }
+
+    /**
+     *
+     * return $this->respondWithItem($ticket, new TicketTransformer());
+     *
+     * @param IncidentFormRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiStore(IncidentFormRequest $request)
+    {
+        // create a new Incident object
+        $incident = Incident::create($request->all());
+
+        /*
+         * Incident process required all incidents to be wrapped in an array.
+         */
+        $incidents = [
+            0 => $incident,
+        ];
+
+        /*
+         * Save the evidence as its required to save events
+         */
+        $systemAccount = Account::where('systemaccount', '=', true)->first();
+        $adminUser = $systemAccount->admins()->first(); // get the first of the admin users
+
+        $evidence = new EvidenceSave();
+        $evidenceData = [
+            'createdBy'     => trim($adminUser->fullName()).' ('.$adminUser->email.')',
+            'receivedOn'    => time(),
+            'submittedData' => $incident->toArray(),
+            'attachments'   => [],
+        ];
+        $evidenceFile = $evidence->save(json_encode($evidenceData));
+
+        if (!$evidenceFile) {
+            Log::error(
+                get_class($this).': '.
+                'Error returned while asking to write evidence file, cannot continue'
+            );
+            $this->exception();
+        }
+
+        $evidence = new Evidence();
+        $evidence->filename = $evidenceFile;
+        $evidence->sender = $adminUser->email;
+        $evidence->subject = 'Delegated AbuseIO Incident';
+
+        /*
+         * Call IncidentsProcess to validate, store evidence and save incidents
+         */
+        $incidentsProcess = new IncidentsProcess($incidents, $evidence);
+
+        // Validate the data set
+        $validated = $incidentsProcess->validate();
+        if (!$validated) {
+            return $this->errorWrongArgs("Failed to validate incident model {$validated}");
+        }
+
+        // Write the data set to database
+        if (!$incidentsProcess->save()) {
+            return $this->errorInternalError('Failed to write to database');
+        }
+
+        // return the processed Incident
+        // TODO: maybe return the Event/Ticket instead
+        return $this->respondWithItem($incident, new IncidentTransformer());
     }
 }

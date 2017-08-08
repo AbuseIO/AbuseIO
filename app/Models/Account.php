@@ -3,6 +3,7 @@
 namespace AbuseIO\Models;
 
 use AbuseIO\Traits\InstanceComparable;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
@@ -133,6 +134,23 @@ class Account extends Model
     public function tickets()
     {
         return $this->hasMany(Brand::class);
+    }
+
+    /**
+     * return the admins of an account
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function admins()
+    {
+        $admins =  DB::table('users')
+            ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
+            ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
+            ->where('roles.name','=','Admin')
+            ->where('users.account_id', '=', $this->id)
+            ->select('users.*')->get();
+
+        return Account::hydrate($admins);
     }
 
     /*

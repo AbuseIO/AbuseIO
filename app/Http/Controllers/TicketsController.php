@@ -427,6 +427,66 @@ class TicketsController extends Controller
     }
 
     /**
+     *
+     * sync status values between AbuseIO instances
+     *
+     * @param TicketFormRequest $ticketForm
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiSyncStatus(TicketFormRequest $ticketForm)
+    {
+        $ticketFromChild = false;
+        $localTicket = null;
+
+        // we receive the remote AbuseIO ticket so we lookup the matching
+        // local ticket
+
+        $remoteTicket = Ticket::create($ticketForm->all());
+        if (!is_null($remoteTicket->remote_ticket_id)) {
+            // we received a ticket from the child instance
+            $localTicket = Ticket::find($remoteTicket->remote_ticket_id);
+            $ticketFromChild = true;
+        } else {
+            // we received a ticket from our parent instance
+            $localTicket = Ticket::where('remote_api_token', '=', $remoteTicket->api_token)->first();
+        }
+
+        if (!$localTicket) {
+            return $this->errorNotFound('No matching local ticket found');
+        }
+
+        // sync and translated the statuses
+        if ($ticketFromChild) {
+            switch ($remoteTicket->status_id) {
+                case 'IGNORED':
+                    $localTicket->contact_status_id = 'IGNORED';
+                    break;
+                case 'CLOSED':
+                case 'RESOLVED':
+                    $localTicket->contact_status_id = 'RESOLVED';
+                    break;
+                case 'OPEN':
+                case 'ESCALATED':
+                default:
+                    $localTicket->contact_status_id = 'OPEN';
+                    break;
+            }
+        } else {
+            $localTicket->status_id = $remoteTicket->contact_status_id;
+            if ($remoteTicket->contact_status_id != $localTicket->contact_status_id)
+            {
+                // if the contact statuses differ 'reopen' the ticket
+                // maybe we should add this state
+                $localTicket->contact_status_id = 'OPEN';
+            }
+        }
+
+        $localTicket->save();
+
+        return $this->respondWithItem($localTicket, new TicketTransformer());
+    }
+
+    /**
      * Update the requested contact information.
      *
      * @param Ticket $ticket
