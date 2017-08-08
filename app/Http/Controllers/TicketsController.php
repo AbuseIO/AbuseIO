@@ -427,10 +427,10 @@ class TicketsController extends Controller
     }
 
     /**
-     *
-     * sync status values between AbuseIO instances
+     * sync status values between AbuseIO instances.
      *
      * @param TicketFormRequest $ticketForm
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiSyncStatus(TicketFormRequest $ticketForm)
@@ -473,8 +473,7 @@ class TicketsController extends Controller
             }
         } else {
             $localTicket->status_id = $remoteTicket->contact_status_id;
-            if ($remoteTicket->contact_status_id != $localTicket->contact_status_id)
-            {
+            if ($remoteTicket->contact_status_id != $localTicket->contact_status_id) {
                 // if the contact statuses differ 'reopen' the ticket
                 // maybe we should add this state
                 $localTicket->contact_status_id = 'OPEN';

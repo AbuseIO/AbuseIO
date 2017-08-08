@@ -71,7 +71,6 @@ class Incident
      */
     public $remote_ticket_id;
 
-
     /*
     |--------------------------------------------------------------------------
     | Validation Rules
@@ -101,6 +100,7 @@ class Incident
 
     /**
      * @param Event $event
+     *
      * @return Incident
      */
     public static function fromEvent(Event $event)
