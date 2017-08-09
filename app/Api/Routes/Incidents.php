@@ -2,8 +2,8 @@
 
 Route::group(
     [
-        'prefix' => 'incidents',
-        'as'     => 'incidents.',
+        'prefix'     => 'incidents',
+        'as'         => 'incidents.',
         'middleware' => ['apiaccountavailable'],
     ],
     function () {

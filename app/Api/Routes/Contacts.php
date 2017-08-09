@@ -2,8 +2,8 @@
 
 Route::group(
     [
-        'prefix' => 'contacts',
-        'as'     => 'contacts.',
+        'prefix'     => 'contacts',
+        'as'         => 'contacts.',
         'middleware' => ['apiaccountavailable'],
     ],
     function () {

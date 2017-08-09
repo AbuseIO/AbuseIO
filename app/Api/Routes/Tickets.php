@@ -9,8 +9,8 @@ Route::group(
         route::get(
             '',
             [
-                'as'   => 'index',
-                'uses' => 'TicketsController@apiIndex',
+                'as'         => 'index',
+                'uses'       => 'TicketsController@apiIndex',
                 'middleware' => ['apiaccountavailable'],
             ]
         );
@@ -18,8 +18,8 @@ Route::group(
         Route::get(
             '{tickets}',
             [
-                'as'   => 'show',
-                'uses' => 'TicketsController@apiShow',
+                'as'         => 'show',
+                'uses'       => 'TicketsController@apiShow',
                 'middleware' => ['apiaccountavailable'],
             ]
         );
@@ -27,8 +27,8 @@ Route::group(
         Route::delete(
             '{tickets}',
             [
-                'as'   => 'delete',
-                'uses' => 'TicketsController@apiDestroy',
+                'as'         => 'delete',
+                'uses'       => 'TicketsController@apiDestroy',
                 'middleware' => ['apiaccountavailable'],
             ]
         );
@@ -36,8 +36,8 @@ Route::group(
         Route::post(
             '',
             [
-                'as'   => 'store',
-                'uses' => 'TicketsController@apiStore',
+                'as'         => 'store',
+                'uses'       => 'TicketsController@apiStore',
                 'middleware' => ['apiaccountavailable'],
             ]
         );
@@ -53,8 +53,8 @@ Route::group(
         Route::put(
             '{tickets}',
             [
-                'as'   => 'update',
-                'uses' => 'TicketsController@apiUpdate',
+                'as'         => 'update',
+                'uses'       => 'TicketsController@apiUpdate',
                 'middleware' => ['apiaccountavailable'],
             ]
         );
@@ -62,8 +62,8 @@ Route::group(
         Route::get(
             '{tickets}/notify',
             [
-                'as'   => 'notify',
-                'uses' => 'TicketsController@apiNotify',
+                'as'         => 'notify',
+                'uses'       => 'TicketsController@apiNotify',
                 'middleware' => ['apiaccountavailable'],
             ]
         );
@@ -71,8 +71,8 @@ Route::group(
         Route::post(
             'search',
             [
-                'as'   => 'search',
-                'uses' => 'TicketsController@apiSearch',
+                'as'         => 'search',
+                'uses'       => 'TicketsController@apiSearch',
                 'middleware' => ['apiaccountavailable'],
             ]
         );
