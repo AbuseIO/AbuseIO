@@ -11,6 +11,7 @@ Route::group(
             [
                 'as'   => 'index',
                 'uses' => 'TicketsController@apiIndex',
+                'middleware' => ['apiaccountavailable'],
             ]
         );
 
@@ -19,6 +20,7 @@ Route::group(
             [
                 'as'   => 'show',
                 'uses' => 'TicketsController@apiShow',
+                'middleware' => ['apiaccountavailable'],
             ]
         );
 
@@ -27,6 +29,7 @@ Route::group(
             [
                 'as'   => 'delete',
                 'uses' => 'TicketsController@apiDestroy',
+                'middleware' => ['apiaccountavailable'],
             ]
         );
 
@@ -35,6 +38,7 @@ Route::group(
             [
                 'as'   => 'store',
                 'uses' => 'TicketsController@apiStore',
+                'middleware' => ['apiaccountavailable'],
             ]
         );
 
@@ -51,6 +55,7 @@ Route::group(
             [
                 'as'   => 'update',
                 'uses' => 'TicketsController@apiUpdate',
+                'middleware' => ['apiaccountavailable'],
             ]
         );
 
@@ -59,6 +64,7 @@ Route::group(
             [
                 'as'   => 'notify',
                 'uses' => 'TicketsController@apiNotify',
+                'middleware' => ['apiaccountavailable'],
             ]
         );
 
@@ -67,6 +73,7 @@ Route::group(
             [
                 'as'   => 'search',
                 'uses' => 'TicketsController@apiSearch',
+                'middleware' => ['apiaccountavailable'],
             ]
         );
     }

@@ -4,6 +4,7 @@ Route::group(
     [
         'prefix' => 'brands',
         'as'     => 'brands.',
+        'middleware' => ['apiaccountavailable'],
     ],
     function () {
         Route::get(

@@ -4,6 +4,7 @@ Route::group(
     [
         'prefix'     => 'accounts',
         'as'         => 'accounts.',
+        'middleware' => ['apiaccountavailable'],
     ],
     function () {
         // Access to index list

@@ -35,7 +35,7 @@ class TicketsController extends Controller
         $this->apiInit($fractal, $request);
 
         // is the logged in account allowed to execute an action on the Ticket
-        $this->middleware('checkaccount:Ticket', ['except' => ['apiSearch', 'search', 'apiIndex', 'index', 'create', 'apiStore', 'store', 'export']]);
+        $this->middleware('checkaccount:Ticket', ['except' => ['apiSearch', 'search', 'apiIndex', 'index', 'create', 'apiStore', 'store', 'apiSyncStatus', 'export']]);
     }
 
     /**
