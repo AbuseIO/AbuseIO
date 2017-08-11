@@ -18,7 +18,7 @@ class IncidentTransformer extends TransformerAbstract
     {
         return [
             'source'                => (string) $incident->source,
-            'source_id'             => (boolean) $incident->source_id,
+            'source_id'             => (bool) $incident->source_id,
             'ip'                    => (string) $incident->ip,
             'domain'                => (string) $incident->domain,
             'timestamp'             => (int) $incident->timestamp,
