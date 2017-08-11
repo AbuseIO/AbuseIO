@@ -53,7 +53,7 @@ class CheckAccount
     private function hasAccountAccessMethod()
     {
         if (!method_exists($this->model, 'checkAccountAccess')) {
-            Log::debug(
+            Log::notice(
                 "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, ".
                 "which doesn't have the 'checkAccountAccess' method"
             );
@@ -115,7 +115,7 @@ class CheckAccount
             return true;
         }
 
-        Log::debug(
+        Log::notice(
             "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, which doesn't match the model_id format"
         );
 
