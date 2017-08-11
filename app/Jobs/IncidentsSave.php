@@ -39,12 +39,12 @@ class IncidentsSave extends Job implements SelfHandling
 
         foreach ($incidents as $incident) {
             /* Here we will seek through all the incidents and look if there is an existing ticket. We will split
-             * them up into two seperate arrays: $incidentsNew and $incidents$known. We can save all the known
+             * them up into two separate arrays: $incidentsNew and $incidents$known. We can save all the known
              * incidents in the DB with a single incident saving loads of queries
              *
              * IP Owner is leading, as in most cases even if the domain is moved
              * The server might still have a problem. Next to the fact that domains
-             * Arent transferred to a new owner 'internally' anyways.
+             * Aren't transferred to a new owner 'internally' anyways.
              *
              * So we do a lookup based on the IP same as with the 3.x engine. After
              * the lookup we check wither the domain contact was changed, if so we UPDATE
@@ -219,7 +219,7 @@ class IncidentsSave extends Job implements SelfHandling
                     /*
                      * If the reference has changed for the domain owner, then we update the ticket with the new
                      * domain owner. We not check if anything else then the reference has changed. If you change the
-                     * contact data you have the option to propogate it onto open tickets.
+                     * contact data you have the option to propegate it onto open tickets.
                      */
                     if (!empty($incident->domain) &&
                         $domainContact !== false &&

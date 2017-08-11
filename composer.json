@@ -71,8 +71,10 @@
 
 		"abuseio/hook-common": "dev-master",
 		"abuseio/hook-log": "dev-master",
+		"abuseio/hook-delegate": "dev-master",
 
 		"zendframework/zend-xmlrpc": "^2.5",
+		"zendframework/zend-http": "2.6",
 		"jeremykendall/php-domain-parser": "^3.0",
 		"zendframework/zend-json": "^3.0",
 		"jover/singleton": "^1.0"
@@ -92,7 +94,12 @@
 		{
 			"type": "vcs",
 			"url": "https://github.com/joverthegrey/abuseio-hook-log"
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/joverthegrey/abuseio-hook-delegate"
 		}
+
 	],
 	"autoload": {
 		"classmap": [
