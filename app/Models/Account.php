@@ -150,7 +150,7 @@ class Account extends Model
             ->where('users.account_id', '=', $this->id)
             ->select('users.*')->get();
 
-        return self::hydrate($admins);
+        return User::hydrate($admins);
     }
 
     /*
