@@ -13,7 +13,9 @@ use Log;
  */
 class CheckAccount
 {
-    const ID_SEGMENT = 3;
+    const WEB_ID_SEGMENT = 3;
+
+    const API_ID_SEGMENT = 4;
 
     private $model_id;
 
@@ -51,7 +53,7 @@ class CheckAccount
     private function hasAccountAccessMethod()
     {
         if (!method_exists($this->model, 'checkAccountAccess')) {
-            Log::notice(
+            Log::debug(
                 "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, ".
                 "which doesn't have the 'checkAccountAccess' method"
             );
@@ -88,7 +90,13 @@ class CheckAccount
      */
     private function resolveModelId($request)
     {
-        $model_id = $request->segment(self::ID_SEGMENT);
+        // use the correct segment
+        if (property_exists($request, 'api_account')) {
+            $model_id = $request->segment(self::API_ID_SEGMENT);
+        } else {
+            $model_id = $request->segment(self::WEB_ID_SEGMENT);
+        }
+
         if (empty($model_id)) {
             $model_id = $request->input('id');
         }
@@ -107,7 +115,7 @@ class CheckAccount
             return true;
         }
 
-        Log::notice(
+        Log::debug(
             "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, which doesn't match the model_id format"
         );
 
