@@ -86,11 +86,23 @@ class Incident
      */
     public static function create($values = [])
     {
+        $fields = [
+            'source', 'source_id', 'ip',
+            'domain', 'timestamp', 'class',
+            'type', 'information', 'remote_api_url',
+            'remote_api_token', 'remote_ticket_id',
+        ];
+
         $incident = new self();
         if (!empty($values)) {
-            foreach ($values as $key => $value) {
-                if (!strstr($key, '_token')) {
-                    $incident->$key = $value;
+            foreach ($fields as $field)
+            {
+                if (array_key_exists($field, $values)) {
+                    if (str_is('timestamp', $field) && !is_int($values[$field])) {
+                        $incident->$field = intval($values[$field]);
+                    } else {
+                        $incident->$field = $values[$field];
+                    }
                 }
             }
         }
