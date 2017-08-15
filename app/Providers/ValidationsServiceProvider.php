@@ -41,7 +41,7 @@ class ValidationsServiceProvider extends ServiceProvider
                 $check = (is_int($value) ? $value : intval($value));
 
                 return ($check <= PHP_INT_MAX)
-                && ($check >= PHP_INT_MIN);
+                && ($check >= ~PHP_INT_MAX);
             }
         );
 
