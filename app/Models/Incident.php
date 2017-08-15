@@ -149,7 +149,7 @@ class Incident
             'source_id'             => 'sometimes|stringorboolean',
             'ip'                    => 'required|ip',
             'domain'                => 'sometimes|stringorboolean|domain',
-            'timestamp'             => 'required|int|timestamp',
+            'timestamp'             => 'required|timestamp',
             'class'                 => 'required|abuseclass',
             'type'                  => 'required|abusetype',
             'information'           => 'required|json',

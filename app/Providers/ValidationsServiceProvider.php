@@ -31,13 +31,17 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'timestamp',
             function ($attribute, $value, $parameters, $validator) {
-                $check = (is_int($value) or is_float($value))
-                    ? $value
-                    : (string) (int) $value;
 
-                return ($check === $value)
-                && ($value <= PHP_INT_MAX)
-                && ($value >= ~PHP_INT_MAX);
+                // early return if it is a string and contains non-numeric characters
+                if (is_string($value) && !ctype_digit($value)) {
+                    return false;
+                }
+
+                // make sure it's a integer otherwise convert it
+                $check = (is_int($value) ? $value : intval($value));
+
+                return ($check <= PHP_INT_MAX)
+                && ($check >= PHP_INT_MIN);
             }
         );
 
