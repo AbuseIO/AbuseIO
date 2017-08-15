@@ -366,10 +366,10 @@ class BrandsController extends Controller
     {
         $input = $brandForm->all();
 
-//        if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
-//            $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
-//        }
-//
+        //        if ($brandForm->hasFile('logo') && $brandForm->file('logo')->isValid()) {
+        //            $input['logo'] = file_get_contents($brandForm->file('logo')->getRealPath());
+        //        }
+        //
         $brand->update($input);
 
         return $this->respondWithItem($brand, new BrandTransformer());

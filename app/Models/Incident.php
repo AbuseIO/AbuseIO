@@ -95,8 +95,7 @@ class Incident
 
         $incident = new self();
         if (!empty($values)) {
-            foreach ($fields as $field)
-            {
+            foreach ($fields as $field) {
                 if (array_key_exists($field, $values)) {
                     if (str_is('timestamp', $field) && !is_int($values[$field])) {
                         $incident->$field = intval($values[$field]);
