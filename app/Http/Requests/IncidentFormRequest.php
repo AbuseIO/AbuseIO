@@ -68,7 +68,12 @@ class IncidentFormRequest extends Request
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
         $input = Input::all();
-        $input['timestamp'] = strtotime($input['timestamp']);
+
+        // convert the timestamp, only if it is in english time format
+        $timestamp = strtotime($input['timestamp']);
+        if ($timestamp !== false) {
+            $input['timestamp'] = $timestamp;
+        }
 
         if (!json_decode($input['information'])) {
             $input['information'] = json_encode(['report' => $input['information']]);
