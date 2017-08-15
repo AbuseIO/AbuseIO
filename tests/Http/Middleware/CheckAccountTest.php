@@ -80,7 +80,7 @@ class CheckAccountTest extends TestCase
         $model = new Job();
 
         $r = new Request(['id' => $model->id]);
-// TODO this should have been the other loghandler
+        // TODO this should have been the other loghandler
         Log::shouldReceive('notice')
             ->once()
             ->with('CheckAccount Middleware is called, with model_id [] for \AbuseIO\Models\[], which doesn\'t match the model_id format');
@@ -102,7 +102,7 @@ class CheckAccountTest extends TestCase
         $model = new Job();
 
         $r = new Request(['id' => $model->id]);
-// todo the arguments in the log method are not correct;
+        // todo the arguments in the log method are not correct;
         Log::shouldReceive('notice')
             ->once()
             ->with('CheckAccount Middleware is called, with model_id [] for \AbuseIO\Models\[], which doesn\'t match the model_id format');

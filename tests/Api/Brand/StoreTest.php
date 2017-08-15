@@ -29,7 +29,7 @@ class StoreTest extends TestCase
         unset($brand['logo']);
         unset($brand['creator_id']);
 
-//        $response = $this->executeCall($brand);
+        //        $response = $this->executeCall($brand);
 
 //        dd($response->getContent());
 //

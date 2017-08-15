@@ -13,25 +13,25 @@ class UpdateTest extends TestCase
     use UpdateTestHelper;
 
     const URL = '/api/v1/brands/';
-// TODO fix logo problem in FromRequest so controller can execute BrandFromRequest before entering controller;
-//    public function testEmptyUpdate()
-//    {
-//        $response = $this->executeCall([]);
-//
-//        $this->assertContains(
-//            'ERR_WRONGARGS',
-//            $response->getContent()
-//        );
-//
-//        $this->assertEquals($response->getStatusCode(), 422);
-//    }
+    // TODO fix logo problem in FromRequest so controller can execute BrandFromRequest before entering controller;
+    //    public function testEmptyUpdate()
+    //    {
+    //        $response = $this->executeCall([]);
+    //
+    //        $this->assertContains(
+    //            'ERR_WRONGARGS',
+    //            $response->getContent()
+    //        );
+    //
+    //        $this->assertEquals($response->getStatusCode(), 422);
+    //    }
 
     public function testUpdate()
     {
         $brand1 = factory(Brand::class)->create();
         $brand2 = factory(Brand::class)->make();
 
-//        $brandArray = $brand2->toArray();
+        //        $brandArray = $brand2->toArray();
 
         $response = $this->executeCall(['name' => $brand2->name], $brand1->id);
 

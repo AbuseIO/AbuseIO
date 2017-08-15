@@ -19,6 +19,7 @@ class ApiDomainCheckerController extends Controller
         $url = Uri\normalize(
             Uri\resolve($request->url, '/api/getversioninfo/')
         );
+
         try {
             if ($response = file_get_contents($url)) {
                 return response()->json(['data' => $response]);
