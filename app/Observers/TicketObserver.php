@@ -64,5 +64,4 @@ class TicketObserver
         // call hooks
         Hooks::call($ticket, 'updating');
     }
-
 }
