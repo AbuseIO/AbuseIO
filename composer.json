@@ -89,15 +89,15 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "https://github.com/joverthegrey/abuseio-hook-common"
+			"url": "https://github.com/AbuseIO/hook-common.git"
 		},
 		{
 			"type": "vcs",
-			"url": "https://github.com/joverthegrey/abuseio-hook-log"
+			"url": "https://github.com/AbuseIO/hook-log.git"
 		},
 		{
 			"type": "vcs",
-			"url": "https://github.com/joverthegrey/abuseio-hook-delegate"
+			"url": "https://github.com/AbuseIO/hook-delegate.git"
 		}
 
 	],

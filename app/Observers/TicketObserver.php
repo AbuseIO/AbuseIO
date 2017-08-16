@@ -51,4 +51,18 @@ class TicketObserver
         // call hooks
         Hooks::call($ticket, 'saved');
     }
+
+    /**
+     * Listen to the Ticket updating event.
+     *
+     * @param Ticket $ticket
+     *
+     * @return void
+     */
+    public function updating(Ticket $ticket)
+    {
+        // call hooks
+        Hooks::call($ticket, 'updating');
+    }
+
 }
