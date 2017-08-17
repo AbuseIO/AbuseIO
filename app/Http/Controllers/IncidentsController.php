@@ -169,14 +169,23 @@ class IncidentsController extends Controller
          */
         $systemAccount = Account::where('systemaccount', '=', true)->first();
         $adminUser = $systemAccount->admins()->first(); // get the first of the admin users
-
         $evidence = new EvidenceSave();
+
+        // remove remote AbuseIO data
+        $submittedData = $incident->toArray();
+        foreach ($submittedData as $key => $data) {
+            if (preg_match('/^remote_/', $key) == 1) {
+                unset($submittedData[$key]);
+            }
+        }
+
         $evidenceData = [
             'createdBy'     => trim($adminUser->fullName()).' ('.$adminUser->email.')',
             'receivedOn'    => time(),
-            'submittedData' => $incident->toArray(),
+            'submittedData' => $submittedData,
             'attachments'   => [],
         ];
+
         $evidenceFile = $evidence->save(json_encode($evidenceData));
 
         if (!$evidenceFile) {
