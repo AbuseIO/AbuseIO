@@ -82,7 +82,8 @@ class CheckAccount
      */
     private function getAccount()
     {
-        return $this->request->ajax() ? $this->request->api_account : Auth::user()->account;
+        return property_exists($this->request, 'api_account') ?
+            $this->request->api_account : Auth::user()->account;
     }
 
     /**
