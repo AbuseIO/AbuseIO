@@ -15,6 +15,23 @@ Route::group(
             ]
         );
 
+        Route::post(
+            'search',
+            [
+                'as'         => 'search',
+                'uses'       => 'TicketsController@apiSearch',
+                'middleware' => ['apiaccountavailable'],
+            ]
+        );
+
+        Route::post(
+            'syncstatus',
+            [
+                'as'    => 'syncstatus',
+                'uses'  => 'TicketsController@apiSyncStatus',
+            ]
+        );
+
         Route::get(
             '{tickets}',
             [
@@ -42,14 +59,6 @@ Route::group(
             ]
         );
 
-        Route::post(
-            'syncstatus',
-            [
-                'as'    => 'syncstatus',
-                'uses'  => 'TicketsController@apiSyncStatus',
-            ]
-        );
-
         Route::put(
             '{tickets}',
             [
@@ -64,15 +73,6 @@ Route::group(
             [
                 'as'         => 'notify',
                 'uses'       => 'TicketsController@apiNotify',
-                'middleware' => ['apiaccountavailable'],
-            ]
-        );
-
-        Route::post(
-            'search',
-            [
-                'as'         => 'search',
-                'uses'       => 'TicketsController@apiSearch',
                 'middleware' => ['apiaccountavailable'],
             ]
         );

@@ -87,10 +87,12 @@ class TicketUpdate extends Job
      */
     public static function status($ticket, $newstatus = null)
     {
-        /*
-         * status list is defined in config/types.php
-         */
-        if (array_key_exists(strtoupper($newstatus), config('types.status.abusedesk'))) {
+
+        // convert to uppercase
+        $newstatus = strtoupper($newstatus);
+
+        //status list is defined in config/types.php
+        if (array_key_exists($newstatus, config('types.status.abusedesk'))) {
             $ticket->status_id = $newstatus;
             $ticket->save();
 
