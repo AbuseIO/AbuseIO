@@ -34,9 +34,11 @@
     {!! Form::label('api_host', trans('contacts.api_host').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
         <div class="input-group">
-            {!! Form::url('api_host', null, ['class' => 'form-control', 'placeholder'=> 'http://api.domain.tld:1234/RPC']) !!}
+            {!! Form::url('api_host', null, ['class' => 'form-control', 'placeholder'=> 'http://abuseio.domain.tld:1234/api/v1', 'id' => 'api_host_url']) !!}
             <span class="input-group-btn">
-                <button id="checkApiURL" title="{!! trans('misc.refresh') !!}" class="btn"  type="button"><i class="glyphicon glyphicon-refresh"></i></button>
+                <button id="checkApiURL" title="{!! trans('misc.refresh') !!}" class="btn"  type="button">
+                    <i id="checkApiUrlGlyph" class="glyphicon @if (!empty($contact->api_host)) glyphicon-ok @else glyphicon-question-sign @endif"></i>
+                </button>
             </span>
         </div>
         @if ($errors->has('api_host')) <p class="help-block">{{ $errors->first('api_host') }}</p> @endif
@@ -71,12 +73,25 @@
             }
         });
         $(document).on('click', '#checkApiURL', function() {
-            $.post('/admin/verifyexternalapi', {url: $('#api_host').val()}, function (data) {
+            $.post('/admin/verifyexternalapi', {url: $('#api_host_url').val()}, function (data) {
+                console.dir($('#api_host').val());
                 console.dir(data);
             })
                 .fail(function (data) {
                     alert('Error, ' + data.responseJSON.error);
+                })
+                .success(function (data) {
+                   if($('#checkApiUrlGlyph').hasClass('glyphicon-question-sign')) {
+                       $('#checkApiUrlGlyph').removeClass('glyphicon-question-sign');
+                       $('#checkApiUrlGlyph').addClass('glyphicon-ok');
+                   }
                 });
         });
+        $(document).on('keypress', '#api_host_url', function() {
+            if ($('#checkApiUrlGlyph').hasClass('glyphicon-ok')) {
+                $('#checkApiUrlGlyph').removeClass('glyphicon-ok');
+                $('#checkApiUrlGlyph').addClass('glyphicon-question-sign');
+            }
+        })
     </script>
 @stop
