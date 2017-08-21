@@ -143,6 +143,16 @@ class IncidentsSave extends Job implements SelfHandling
                 $newTicket->last_notify_count = 0;
                 $newTicket->last_notify_timestamp = 0;
 
+                if (property_exists($incident, 'remote_api_token')) {
+                    $newTicket->remote_api_token = $incident->remote_api_token;
+                }
+                if (property_exists($incident, 'remote_api_url')) {
+                    $newTicket->remote_api_url = $incident->remote_api_url;
+                }
+                if (property_exists($incident, 'remote_ticket_id')) {
+                    $newTicket->remote_ticket_id = $incident->remote_ticket_id;
+                }
+
                 // Validate the model before saving
                 $validator = Validator::make(
                     json_decode(json_encode($newTicket), true),

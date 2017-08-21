@@ -97,6 +97,10 @@ class Ticket extends Model
         'last_notify_timestamp',
         'ash_token_ip',
         'ash_token_domain',
+        'remote_api_url',
+        'remote_api_token',
+        'remote_ticket_id',
+        'api_token',
     ];
 
     /*
