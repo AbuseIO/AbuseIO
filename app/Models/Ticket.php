@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Jobs\FindContact;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -345,5 +346,34 @@ class Ticket extends Model
 
         return ($ticket->accountIp->is($account)) ||
             ($ticket->accountDomain->is($account));
+    }
+
+    /**
+     * has this ticket a parent ticket in another AbuseIO instance ?
+     *
+     * @return bool
+     */
+    public function hasParent()
+    {
+        // only return true is we have all the necessary fields
+        $result = (
+            !empty($this->remote_ticket_id) &&
+            !empty($this->remote_api_url) &&
+            !empty($this->remote_api_token)
+        );
+
+        return $result;
+    }
+
+    /**
+     * has this ticket a child ticket in another AbuseIO instance
+     * @return bool
+     */
+    public function hasChild()
+    {
+        // we assume that, if the ip contact has an api url then the ticket has a child ticket
+        $contact = FindContact::byIP($this->ip);
+
+        return (!empty($contact->api_host));
     }
 }

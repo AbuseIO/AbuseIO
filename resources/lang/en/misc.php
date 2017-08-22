@@ -125,6 +125,6 @@ return [
     'close'                               => 'Close',
 
     // Note text
-    'note_text_status_sync_parent'        => 'Synced statuses with parent AbuseIO instance',
-    'note_text_status_sync_child'         => 'Synced statuses with child AbuseIO instance',
+    'note_text_status_sync_parent'        => 'Synced status with parent AbuseIO instance',
+    'note_text_status_sync_child'         => 'Synced contact status with child AbuseIO instance',
 ];

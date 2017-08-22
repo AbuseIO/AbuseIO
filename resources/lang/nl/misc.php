@@ -128,5 +128,5 @@ return [
 
     // Note text
     'note_text_status_sync_parent'        => 'Status met parent AbuseIO instantie gesynchroniseerd',
-    'note_text_status_sync_child'         => 'Status met child AbuseIO instantie gesynchroniseerd',
+    'note_text_status_sync_child'         => 'Contact status met child AbuseIO instantie gesynchroniseerd',
 ];
