@@ -125,7 +125,6 @@ return [
     'send_notifications'             => 'Verstuur notificaties',
     'close'                          => 'Afsluiten',
 
-
     // Note text
     'note_text_status_sync_parent'        => 'Status met parent AbuseIO instantie gesynchroniseerd',
     'note_text_status_sync_child'         => 'Contact status met child AbuseIO instantie gesynchroniseerd',
