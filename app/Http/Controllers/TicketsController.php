@@ -450,6 +450,24 @@ class TicketsController extends Controller
         // parent status overrules child
         $localTicket->status_id = $remoteTicket->status_id;
 
+        // if we are the leaf of the tree, also set contact_status_id
+        if (!$localTicket->hasChild()) {
+            switch ($remoteTicket->status_id) {
+                case 'IGNORED':
+                    $localTicket->contact_status_id = 'IGNORED';
+                    break;
+                case 'CLOSED':
+                case 'RESOLVED':
+                    $localTicket->contact_status_id = 'RESOLVED';
+                    break;
+                case 'OPEN':
+                case 'ESCALATED':
+                default:
+                    $localTicket->contact_status_id = 'OPEN';
+                    break;
+            }
+        }
+
         // save the ticket
         $localTicket->save();
 
