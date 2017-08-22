@@ -6,6 +6,7 @@ use AbuseIO\Http\Requests\TicketFormRequest;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Jobs\TicketUpdate;
 use AbuseIO\Models\Event;
+use AbuseIO\Models\Note;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\TicketTransformer;
@@ -435,52 +436,85 @@ class TicketsController extends Controller
      */
     public function apiSyncStatus(TicketFormRequest $ticketForm)
     {
-        $ticketFromChild = false;
+        $localTicket = null;
+
+        // we receive the remote AbuseIO ticket so we lookup the matching
+        // local ticket
+        $remoteTicket = Ticket::create($ticketForm->all());
+        $localTicket = Ticket::where('remote_api_token', '=', $remoteTicket->api_token)->first();
+
+        if (!$localTicket) {
+            return $this->errorNotFound('No matching local ticket found');
+        }
+
+        // parent status overrules child
+        $localTicket->status_id = $remoteTicket->status_id;
+
+        // save the ticket
+        $localTicket->save();
+
+        // add a new hidden note, to inform that the ticket is synced
+        $note = new Note();
+        $note->ticket_id = $localTicket->id;
+        $note->viewed = false;
+        $note->hidden = true;
+        $note->submitter = 'AbuseIO';
+        $note->text = trans('misc.note_text_status_sync_parent');
+
+        $note->save();
+
+        return $this->respondWithItem($localTicket, new TicketTransformer());
+    }
+
+    /**
+     * sync contact status values between AbuseIO instances.
+     *
+     * @param TicketFormRequest $ticketForm
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiSyncContactStatus(TicketFormRequest $ticketForm)
+    {
         $localTicket = null;
 
         // we receive the remote AbuseIO ticket so we lookup the matching
         // local ticket
 
         $remoteTicket = Ticket::create($ticketForm->all());
-        if (!is_null($remoteTicket->remote_ticket_id)) {
-            // we received a ticket from the child instance
-            $localTicket = Ticket::find($remoteTicket->remote_ticket_id);
-            $ticketFromChild = true;
-        } else {
-            // we received a ticket from our parent instance
-            $localTicket = Ticket::where('remote_api_token', '=', $remoteTicket->api_token)->first();
-        }
+        $localTicket = Ticket::find($remoteTicket->remote_ticket_id);
 
         if (!$localTicket) {
             return $this->errorNotFound('No matching local ticket found');
         }
 
-        // sync and translated the statuses
-        if ($ticketFromChild) {
-            switch ($remoteTicket->status_id) {
-                case 'IGNORED':
-                    $localTicket->contact_status_id = 'IGNORED';
-                    break;
-                case 'CLOSED':
-                case 'RESOLVED':
-                    $localTicket->contact_status_id = 'RESOLVED';
-                    break;
-                case 'OPEN':
-                case 'ESCALATED':
-                default:
-                    $localTicket->contact_status_id = 'OPEN';
-                    break;
-            }
-        } else {
-            $localTicket->status_id = $remoteTicket->contact_status_id;
-            if ($remoteTicket->contact_status_id != $localTicket->contact_status_id) {
-                // if the contact statuses differ 'reopen' the ticket
-                // maybe we should add this state
-                $localTicket->contact_status_id = 'OPEN';
-            }
+        // update local contact_status_id
+        switch ($remoteTicket->status_id) {
+        case 'IGNORED':
+            $localTicket->contact_status_id = 'IGNORED';
+            break;
+        case 'CLOSED':
+        case 'RESOLVED':
+            $localTicket->contact_status_id = 'RESOLVED';
+            break;
+        case 'OPEN':
+        case 'ESCALATED':
+        default:
+            $localTicket->contact_status_id = 'OPEN';
+            break;
         }
 
+        // save the ticket
         $localTicket->save();
+
+        // add a new hidden note, to inform that the ticket is synced
+        $note = new Note();
+        $note->ticket_id = $localTicket->id;
+        $note->viewed = false;
+        $note->hidden = true;
+        $note->submitter = 'AbuseIO';
+        $note->text = trans('misc.note_text_status_sync_child');
+
+        $note->save();
 
         return $this->respondWithItem($localTicket, new TicketTransformer());
     }

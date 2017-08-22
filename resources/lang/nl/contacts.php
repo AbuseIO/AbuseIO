@@ -16,7 +16,7 @@ return [
     'csv_export'              => 'CSV Export',
     'no_contacts'             => 'U heeft nog geen contacten.',
     'reference'               => 'Referentie',
-    'api_host'                => 'API Server',
+    'api_host'                => 'API URL',
     'notification'            => 'Notificatie',
     'details_for'             => 'Contact details voor',
     'linked_netblocks'        => 'Gekoppelde Netwerken',

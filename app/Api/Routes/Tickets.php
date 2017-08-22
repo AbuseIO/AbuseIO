@@ -32,6 +32,14 @@ Route::group(
             ]
         );
 
+        Route::post(
+            'synccontactstatus',
+            [
+                'as'    => 'synccontactstatus',
+                'uses'  => 'TicketsController@apiSyncContactStatus',
+            ]
+        );
+
         Route::get(
             '{tickets}',
             [

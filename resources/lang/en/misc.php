@@ -123,4 +123,8 @@ return [
     'show_graph'                          => 'Show graph',
     'send_notifications'                  => 'Send notifications',
     'close'                               => 'Close',
+
+    // Note text
+    'note_text_status_sync_parent'        => 'Synced statuses with parent AbuseIO instance',
+    'note_text_status_sync_child'         => 'Synced statuses with child AbuseIO instance',
 ];

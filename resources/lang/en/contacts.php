@@ -16,7 +16,7 @@ return [
     'csv_export'              => 'CSV Export',
     'no_contacts'             => 'You do not yet have any contacts.',
     'reference'               => 'Reference',
-    'api_host'                => 'API Host',
+    'api_host'                => 'API URL',
     'notification'            => 'Notification',
     'details_for'             => 'Contact details for',
     'linked_netblocks'        => 'Linked Netblocks',

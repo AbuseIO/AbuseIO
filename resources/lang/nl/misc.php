@@ -124,4 +124,9 @@ return [
     'lifecycle'                      => 'Levensloop',
     'send_notifications'             => 'Verstuur notificaties',
     'close'                          => 'Afsluiten',
+
+
+    // Note text
+    'note_text_status_sync_parent'        => 'Status met parent AbuseIO instantie gesynchroniseerd',
+    'note_text_status_sync_child'         => 'Status met child AbuseIO instantie gesynchroniseerd',
 ];
