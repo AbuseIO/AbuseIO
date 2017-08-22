@@ -366,7 +366,8 @@ class Ticket extends Model
     }
 
     /**
-     * has this ticket a child ticket in another AbuseIO instance
+     * has this ticket a child ticket in another AbuseIO instance.
+     *
      * @return bool
      */
     public function hasChild()
@@ -374,6 +375,6 @@ class Ticket extends Model
         // we assume that, if the ip contact has an api url then the ticket has a child ticket
         $contact = FindContact::byIP($this->ip);
 
-        return (!empty($contact->api_host));
+        return !empty($contact->api_host);
     }
 }
