@@ -355,18 +355,14 @@ class Ticket extends Model
      */
     public function hasParent()
     {
-        // only return true is we have all the necessary fields
-        $result = (
-            !empty($this->remote_ticket_id) &&
-            !empty($this->remote_api_url) &&
-            !empty($this->remote_api_token)
-        );
+        // just checking for the remote_ticket_id should be enough
+        $result = !empty($this->remote_ticket_id);
 
         return $result;
     }
 
     /**
-     * has this ticket a child ticket in another AbuseIO instance.
+     * has this ticket a child ticket in another AbuseIO instance ?
      *
      * @return bool
      */
