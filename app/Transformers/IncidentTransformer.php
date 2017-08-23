@@ -10,7 +10,7 @@ class IncidentTransformer extends TransformerAbstract
     /**
      * converts the incident object to a generic array.
      *
-     * @param Incident incident
+     * @param Incident $incident
      *
      * @return array
      */
@@ -28,6 +28,7 @@ class IncidentTransformer extends TransformerAbstract
             'remote_api_url'        => (string) $incident->remote_api_url,
             'remote_api_token'      => (string) $incident->remote_api_token,
             'remote_ticket_id'      => (string) $incident->remote_ticket_id,
+            'remote_ash_link'       => (string) $incident->remote_ash_link,
         ];
     }
 }

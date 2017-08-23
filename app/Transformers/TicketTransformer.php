@@ -60,6 +60,7 @@ class TicketTransformer extends TransformerAbstract
             'api_token'                             => (string) $ticket->api_token,
             'remote_api_url'                        => (string) $ticket->remote_api_url,
             'remote_ticket_id'                      => (string) $ticket->remote_ticket_id,
+            'remote_ash_link'                       => (string) $ticket->remote_ash_link,
             'events'                                => $events,
             'notes'                                 => $notes,
         ];

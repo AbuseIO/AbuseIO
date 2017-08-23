@@ -33,6 +33,7 @@ return [
     'modified'                  => 'Ticket modified',
     'reply_status'              => 'Reaction status',
     'ashlink'                   => 'ASH link',
+    'remote_ash_link'           => 'Remote ASH link',
     'timestamp'                 => 'Date / Time',
     'source'                    => 'Source',
     'evidence'                  => 'Evidence',

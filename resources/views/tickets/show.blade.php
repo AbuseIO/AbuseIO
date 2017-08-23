@@ -105,7 +105,7 @@
             <dd>
                 {!! link_to(
                     "/ash/collect/$ticket->id/" . $ticket->ash_token_ip,
-                    config('main.ash.url') . "/collect/$ticket->id/"
+                    config('main.ash.url') . "collect/$ticket->id/"
                      . $ticket->ash_token_ip
                 ) !!}
             </dd>
@@ -116,10 +116,20 @@
             <dd>
                 {!! link_to(
                     "/ash/collect/$ticket->id/" . $ticket->ash_token_domain,
-                    config('main.ash.url') . "/collect/$ticket->id/"
+                    config('main.ash.url') . "collect/$ticket->id/"
                      . $ticket->ash_token_domain
                 ) !!}
             </dd>
+            @endif
+
+            @if (!is_null($ticket->remote_ash_link))
+                <dt>{{ trans('tickets.remote_ash_link') }}</dt>
+                <dd>
+                    {!! link_to(
+                        $ticket->remote_ash_link,
+                        $ticket->remote_ash_link
+                    ) !!}
+                </dd>
             @endif
         </dl>
 

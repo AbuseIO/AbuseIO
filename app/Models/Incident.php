@@ -12,7 +12,11 @@ namespace AbuseIO\Models;
  * @property string $class
  * @property string $type
  * @property int $timestamp
- * @property string $information;
+ * @property string $information
+ * @property string $remote_api_token
+ * @property int $remote_ticket_id
+ * @property string $remote_api_url
+ * @property string $remote_ash_link
  */
 class Incident
 {
@@ -70,6 +74,11 @@ class Incident
      * @var
      */
     public $remote_ticket_id;
+
+    /**
+     * @var
+     */
+    public $remote_ash_link;
 
     /*
     |--------------------------------------------------------------------------
@@ -132,6 +141,13 @@ class Incident
         $incident->remote_api_url = route('api.v1.tickets.index');
         $incident->remote_api_token = $ticket->api_token;
         $incident->remote_ticket_id = $ticket->id;
+        $incident->remote_ash_link =
+            route('ash.show',
+                [
+                    'ticketID' => $ticket->id,
+                    'token' => $ticket->ash_token_ip,
+                ]
+            );
 
         return $incident;
     }

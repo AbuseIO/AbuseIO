@@ -102,6 +102,7 @@ class Ticket extends Model
         'remote_api_token',
         'remote_ticket_id',
         'api_token',
+        'remote_ash_link',
     ];
 
     /*

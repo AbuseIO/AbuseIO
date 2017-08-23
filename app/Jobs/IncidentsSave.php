@@ -152,6 +152,9 @@ class IncidentsSave extends Job implements SelfHandling
                 if (property_exists($incident, 'remote_ticket_id')) {
                     $newTicket->remote_ticket_id = $incident->remote_ticket_id;
                 }
+                if (property_exists($incident, 'remote_ash_link')) {
+                    $newTicket->remote_ash_link = $incident->remote_ash_link;
+                }
 
                 // Validate the model before saving
                 $validator = Validator::make(
