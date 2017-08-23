@@ -145,7 +145,7 @@ class Incident
             route('ash.show',
                 [
                     'ticketID' => $ticket->id,
-                    'token' => $ticket->ash_token_ip,
+                    'token'    => $ticket->ash_token_ip,
                 ]
             );
 
