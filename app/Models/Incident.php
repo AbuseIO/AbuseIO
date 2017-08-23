@@ -100,6 +100,7 @@ class Incident
             'domain', 'timestamp', 'class',
             'type', 'information', 'remote_api_url',
             'remote_api_token', 'remote_ticket_id',
+            'remote_ash_link',
         ];
 
         $incident = new self();
