@@ -70,9 +70,11 @@ class IncidentFormRequest extends Request
         $input = Input::all();
 
         // convert the timestamp, only if it is in english time format
-        $timestamp = strtotime($input['timestamp']);
-        if ($timestamp !== false) {
-            $input['timestamp'] = $timestamp;
+        if (preg_match('/^\d+$/', $input['timestamp']) != 1) {
+            $timestamp = strtotime($input['timestamp']);
+            if ($timestamp !== false) {
+                $input['timestamp'] = $timestamp;
+            }
         }
 
         if (!json_decode($input['information'])) {

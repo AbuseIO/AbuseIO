@@ -23,6 +23,17 @@ class TicketObserver
             $ticket->api_token = generateApiToken();
         }
 
+        // create the ash tokens when they don't exist.
+        $salt = env('APP_KEY');
+        if (empty($ticket->ash_token_ip)) {
+            $token = md5($salt.rand().$ticket->ip.$ticket->ip_contact_reference);
+            $ticket->ash_token_ip = $token;
+        }
+        if (empty($ticket->ash_token_domain)) {
+            $token = md5($salt.rand().$ticket->domain.$ticket->domain_contact_reference);
+            $ticket->ash_token_domain = $token;
+        }
+
         // call hooks
         Hooks::call($ticket, 'saving');
     }
@@ -36,18 +47,6 @@ class TicketObserver
      */
     public function saved(Ticket $ticket)
     {
-
-        // create the ash tokens after the ticket is saved
-        $salt = env('APP_KEY');
-        if (empty($ticket->ash_token_ip)) {
-            $token = md5($salt.$ticket->id.$ticket->ip.$ticket->ip_contact_reference);
-            DB::update('update tickets set ash_token_ip = ? where id = ?', [$token, $ticket->id]);
-        }
-        if (empty($ticket->ash_token_domain)) {
-            $token = md5($salt.$ticket->id.$ticket->domain.$ticket->domain_contact_reference);
-            DB::update('update tickets set ash_token_domain = ? where id = ?', [$token, $ticket->id]);
-        }
-
         // call hooks
         Hooks::call($ticket, 'saved');
     }
