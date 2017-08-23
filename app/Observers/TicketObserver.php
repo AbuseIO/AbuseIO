@@ -4,7 +4,6 @@ namespace AbuseIO\Observers;
 
 use AbuseIO\Hook\Common as Hooks;
 use AbuseIO\Models\Ticket;
-use DB;
 
 class TicketObserver
 {
