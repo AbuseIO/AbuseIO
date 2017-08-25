@@ -33,7 +33,7 @@ return [
     'modified'                  => 'Ticket gewijzigd',
     'reply_status'              => 'Reactie status',
     'ashlink'                   => 'ASH link',
-    'remote_ash_link'           => 'Externe ASH link',
+    'remote_ash_link'           => 'Bovenliggende ASH link',
     'timestamp'                 => 'Datum / Tijd',
     'source'                    => 'Bron',
     'evidence'                  => 'Bewijsmateriaal',
