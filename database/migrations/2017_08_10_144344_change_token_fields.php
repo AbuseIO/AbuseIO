@@ -15,10 +15,10 @@ class ChangeTokenFields extends Migration
         // the tickets where designed for md5 hashes and not uuid4 tokens
         // correct the size of the columns
 
-        Db::statement('ALTER TABLE accounts MODIFY COLUMN token varchar(36)');
-        Db::statement('ALTER TABLE tickets MODIFY COLUMN remote_api_token varchar(36)');
-        Db::statement('ALTER TABLE tickets MODIFY COLUMN api_token varchar(36)');
-        Db::statement('ALTER TABLE contacts MODIFY COLUMN token varchar(36)');
+        DB::statement('ALTER TABLE accounts MODIFY COLUMN token varchar(36)');
+        DB::statement('ALTER TABLE tickets MODIFY COLUMN remote_api_token varchar(36)');
+        DB::statement('ALTER TABLE tickets MODIFY COLUMN api_token varchar(36)');
+        DB::statement('ALTER TABLE contacts MODIFY COLUMN token varchar(36)');
 
         // set all the accounts api tokens to uuids
         Account::all()->each(function ($account, $key) {
