@@ -62,21 +62,21 @@ class RunCommand extends Command
         $this->checkQueues();
 
         /*
-         * Walk thru all tickets to see which need closing
+         * Walk through all tickets to see which need closing
          */
         if (config('main.housekeeping.tickets_close_after') !== false) {
             $this->ticketsClosing();
         }
 
         /*
-         * Walk thru mailarchive to see which need pruning
+         * Walk through mailarchive to see which need pruning
          */
         if (config('main.housekeeping.mailarchive_remove_after') !== false) {
             $this->mailarchivePruning();
         }
 
         /*
-         * Walk thru mailarchive to see which files are ophpaned
+         * Walk through mailarchive to see which files are orphaned
          */
         if (config('main.housekeeping.mailarchive_remove_orphaned') !== false) {
             $this->removeUnlinkedEvidence();
@@ -90,7 +90,7 @@ class RunCommand extends Command
     }
 
     /**
-     * Walk thru all files in the mailarchive folder and remove them from the system.
+     * Walk through all files in the mailarchive folder and remove them from the system.
      *
      * @return bool
      */
@@ -154,7 +154,7 @@ class RunCommand extends Command
     }
 
     /**
-     * Walk thru all jobs and queues to make sure they are working, including firing a testjob at them.
+     * Walk through all jobs and queues to make sure they are working, including firing a testjob at them.
      *
      * @return bool
      */
@@ -239,7 +239,7 @@ class RunCommand extends Command
     }
 
     /**
-     * Walk thru all tickets to see which need closing.
+     * Walk through all tickets to see which need closing.
      *
      * @return bool
      */
@@ -303,7 +303,7 @@ class RunCommand extends Command
     }
 
     /**
-     * Walk thru mailarchive to see which need pruning.
+     * Walk through mailarchive to see which need pruning.
      *
      * @return bool
      */

@@ -65,8 +65,8 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
     {
         Log::error(
             get_class($this).': '.
-            'Unexpected exception was raised from the framework. This useally indicates an error within the '.
-            'framework code. A full strace can be found in the logs and should be reported to the developers'
+            'Unexpected exception was raised from the framework. This usually indicates an error within the '.
+            'framework code. A full trace can be found in the logs and should be reported to the developers'
         );
 
         $this->exception();
@@ -113,7 +113,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             return;
         }
 
-        // Ignore email from our own notification address used in bounching methods to prevent mail loops
+        // Ignore email from our own notification address used in bouncing methods to prevent mail loops
         if (preg_match('/'.Config::get('main.notifications.from_address').'/', $parsedMail->getHeader('Resent-From'))) {
             Log::warning(
                 get_class($this).': '.
@@ -144,8 +144,8 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         }
 
         /*
-         * Sometimes the mime header does not set the main message correctly. This is ment as a fallback and will
-         * use the original content body (which is basicly the same mime element). But only fallback if we actually
+         * Sometimes the mime header does not set the main message correctly. This is meant as a fallback and will
+         * use the original content body (which is basically the same mime element). But only fallback if we actually
          * have a RFC822 message with a feedback report.
          */
         if (empty($arfMail['message']) && isset($arfMail['report']) && isset($arfMail['evidence'])) {
@@ -259,8 +259,8 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         // and this Config::get('main.emailparser.fallback_mail')
         Log::error(
             get_class($this).': '.
-            'Email processor ending with errors. The received e-mail will be deleted from '.
-            'archive and bounced to the admin for investigation'
+            'Email processor ending with errors. The received e-mail '.
+            'will be bounced to the admin for investigation'
         );
 
         $fileContents = null;
@@ -278,8 +278,5 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
                 ]
             );
         }
-
-        // Delete the evidence file as we are not using it.
-        Storage::delete($this->filename);
     }
 }
