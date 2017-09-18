@@ -4,6 +4,7 @@ namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Ticket;
 use AbuseIO\Notification\Factory as NotificationFactory;
+use DB;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Log;
 use Validator;
@@ -317,10 +318,10 @@ class Notification extends Job implements SelfHandling
      */
     private function getTicketList($ticket, $reference, $force)
     {
-        $search = Ticket::where('id', '>', '0');
+        $search = DB::table('tickets');
 
         if (!$force) {
-            $search = Ticket::where('status_id', '!=', 'CLOSED');
+            $search->where('status_id', '!=', 'CLOSED');
         }
 
         if ($ticket !== false) {
@@ -332,7 +333,7 @@ class Notification extends Job implements SelfHandling
                 ->orwhere('domain_contact_reference', '=', $reference);
         }
 
-        $tickets = $search->get();
+        $tickets = Ticket::hydrate($search->get());
 
         return $tickets;
     }
