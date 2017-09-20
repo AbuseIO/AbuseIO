@@ -26,6 +26,7 @@ class ContactTransformer extends TransformerAbstract
             'api_host'    => (string) $contact->api_host,
             'auto_notify' => (bool) $contact->auto_notify(),
             'enabled'     => (bool) $contact->enabled,
+            'account_id'  => (int) $contact->account_id,
             //'account' => (new AccountTransformer)->transform($this->account);
         ];
     }
