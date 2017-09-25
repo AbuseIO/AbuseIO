@@ -4,7 +4,7 @@ Route::group(
     [
         'prefix'     => 'incidents',
         'as'         => 'incidents.',
-        'middleware' => ['apiaccountavailable'],
+        'middleware' => ['apiaccountavailable', 'apisystemaccount'],
     ],
     function () {
         Route::post(

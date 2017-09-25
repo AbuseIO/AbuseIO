@@ -4,7 +4,7 @@ Route::group(
     [
         'prefix'     => 'netblocks',
         'as'         => 'netblocks.',
-        'middleware' => ['apiaccountavailable'],
+        'middleware' => ['apiaccountavailable', 'apisystemaccount'],
     ],
     function () {
         Route::get(

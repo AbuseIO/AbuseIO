@@ -19,7 +19,7 @@ use Log;
  * @property int $created_at
  * @property int $updated_at
  * @property int $deleted_at
- * @property bool $systemaccount' fillable
+ * @property bool $systemaccount fillable
  * @property string $token' fillable
  */
 class Account extends Model

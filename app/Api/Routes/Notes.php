@@ -4,7 +4,7 @@ Route::group(
     [
         'prefix'     => 'notes',
         'as'         => 'notes',
-        'middleware' => ['apiaccountavailable'],
+        'middleware' => ['apiaccountavailable', 'apisystemaccount'],
     ],
     function () {
         // Access to index list
