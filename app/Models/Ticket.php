@@ -376,7 +376,7 @@ class Ticket extends Model
     }
 
     /**
-     * permanently deletes a ticket
+     * permanently deletes a ticket.
      *
      * @return bool
      */
@@ -387,6 +387,7 @@ class Ticket extends Model
 
             return true;
         }
+
         return false;
     }
 }
