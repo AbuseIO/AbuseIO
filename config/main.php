@@ -50,10 +50,12 @@ return [
         'mailarchive_remove_after'          => '500 days',
         'mailarchive_remove_orphaned'       => true,
         'tickets_close_after'               => '14 days',
+        'closed_tickets_remove_after'       => false,
+        'closed_tickets_remove_permanent'   => false,
         'notifications_cron'                => '*/15 * * * * *',
         'collectors_cron'                   => '*/60 * * * * *',
         'housekeeper_cron'                  => '*/1 * * * * *',
-//        'collect_statistics_cron'         => '0 0 * * * *', needs some discussion on when to run;
+        'collect_statistics_cron'           => '0 0 * * * *', //needs some discussion on when to run;
         'enable_queue_problem_alerts'       => true,
     ],
 

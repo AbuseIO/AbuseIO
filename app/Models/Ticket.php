@@ -374,4 +374,19 @@ class Ticket extends Model
 
         return !empty($contact->api_host);
     }
+
+    /**
+     * permanently deletes a ticket
+     *
+     * @return bool
+     */
+    public function purge()
+    {
+        if ($this->trashed() or $this->deleted_at != null) {
+            $this->forceDelete();
+
+            return true;
+        }
+        return false;
+    }
 }

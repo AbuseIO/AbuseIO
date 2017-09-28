@@ -14,6 +14,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
 use Storage;
 use Validator;
+use AbuseIO\Models\Event;
 
 /**
  * Class RunCommand.
@@ -56,28 +57,25 @@ class RunCommand extends Command
             get_class($this).': KNOCK KNOCK! Housekeeping'
         );
 
-        /*
-         * Check all queue's their status
-         */
+        //Check all queue's their status
         $this->checkQueues();
 
-        /*
-         * Walk through all tickets to see which need closing
-         */
+        // Walk through all tickets to see which need closing
         if (config('main.housekeeping.tickets_close_after') !== false) {
             $this->ticketsClosing();
         }
 
-        /*
-         * Walk through mailarchive to see which need pruning
-         */
+        // Walk trough all closed tickets to see which need pruning
+        if (config('main.housekeeping.closed_tickets_remove_after') !== false) {
+            $this->ticketsPruning();
+        }
+
+        // Walk through mailarchive to see which need pruning
         if (config('main.housekeeping.mailarchive_remove_after') !== false) {
             $this->mailarchivePruning();
         }
 
-        /*
-         * Walk through mailarchive to see which files are orphaned
-         */
+        // Walk through mailarchive to see which files are orphaned
         if (config('main.housekeeping.mailarchive_remove_orphaned') !== false) {
             $this->removeUnlinkedEvidence();
         }
@@ -274,7 +272,7 @@ class RunCommand extends Command
 
             foreach ($tickets as $ticket) {
                 /*
-                 * If there something is a ticket without an event we need to use the created_at field instead
+                 * If there is a ticket without an event we need to use the created_at field instead
                  * to prevent an index error on the event check
                  */
                 if (empty($ticket->lastEvent[0])) {
@@ -297,6 +295,55 @@ class RunCommand extends Command
 
         Log::info(
             get_class($this).': Housekeeper has completed closing old tickets'
+        );
+
+        return true;
+    }
+
+    /**
+     * prune old tickets
+     *
+     * @return bool
+     */
+    private function ticketsPruning()
+    {
+        Log::info(
+            get_class($this).': Housekeeper is starting to remove old closed tickets'
+        );
+
+        $closeAfter = strtotime(config('main.housekeeping.closed_tickets_remove_after', 'now') . ' ago');
+        if ($closeAfter !== false) {
+            // valid timestamp
+
+            $closedTickets = Ticket::withTrashed()
+                ->where('status_id', '=', 'CLOSED')
+                ->get();
+
+            foreach ($closedTickets as $closedTicket) {
+                $lastEvent = $closedTicket->lastEvent[0];
+                if (empty($lastEvent)) {
+                    $eventCreated = strtotime($closedTicket->updated_at);
+                } else {
+                    $eventCreated = strtotime($lastEvent->created_at);
+                }
+
+                // skip this ticket if it has events newer then the timestamp
+                if ($eventCreated > $closeAfter) {
+                    continue;
+                }
+
+                // delete ticket
+                $closedTicket->delete();
+
+                // purge ticket, if we want it to be permanent deleted
+                if (config('main.housekeeping.closed_tickets_remove_permanent', false)) {
+                    $closedTicket->purge();
+                }
+            }
+        }
+
+        Log::info(
+            get_class($this).': Housekeeper has completed removing old tickets'
         );
 
         return true;
