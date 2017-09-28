@@ -4,6 +4,7 @@ namespace AbuseIO\Console\Commands\Housekeeper;
 
 use AbuseIO\Jobs\AlertAdmin;
 use AbuseIO\Jobs\QueueTest;
+use AbuseIO\Models\Event;
 use AbuseIO\Models\Evidence;
 use AbuseIO\Models\FailedJob;
 use AbuseIO\Models\Job;
@@ -14,7 +15,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
 use Storage;
 use Validator;
-use AbuseIO\Models\Event;
 
 /**
  * Class RunCommand.
@@ -301,7 +301,7 @@ class RunCommand extends Command
     }
 
     /**
-     * prune old tickets
+     * prune old tickets.
      *
      * @return bool
      */
@@ -311,7 +311,7 @@ class RunCommand extends Command
             get_class($this).': Housekeeper is starting to remove old closed tickets'
         );
 
-        $closeAfter = strtotime(config('main.housekeeping.closed_tickets_remove_after', 'now') . ' ago');
+        $closeAfter = strtotime(config('main.housekeeping.closed_tickets_remove_after', 'now').' ago');
         if ($closeAfter !== false) {
             // valid timestamp
 
