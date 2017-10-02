@@ -1,0 +1,102 @@
+/*Main content */
+.main {
+    padding-top: 70px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+/* Global add-ons */
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Disabled links, really disable */
+.btn.disabled,
+.dropdown-menu > .disabled{
+    cursor: not-allowed;
+}
+.btn.disabled,
+.dropdown-menu > .disabled > a{
+    pointer-events: none;
+}
+
+/* Helper classes for more vertical spacing */
+.top-buffer { margin-top: 20px; }
+
+/* No the ASH page we want less padding on the top */
+body.ash { padding-top: 20px; }
+
+/* ASH Logo styles */
+.img-responsive {
+    max-width: 250px;
+}
+.img-inline {
+    display: inline;
+}
+
+.breadcrumb {
+    background-color: transparent;
+    padding-left: 0;
+}
+
+/* Side Menu */
+.menu {
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+    overflow: auto;
+    padding: 0;
+}
+
+.menu, .menu * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.menu ul {
+    padding: 0;
+    margin: 7px 0;
+}
+
+.menu ul li {
+    list-style: none;
+    padding: 20px -10 20px 30px;
+    font-size: 15px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.menu ul li.active {
+    background-color: #dedede;
+    position: relative;
+}
+
+.menu ul li a {
+    color: rgb(51, 51, 51);
+    text-decoration: none;
+    display:block;
+    position: relative;
+    padding: 20px;
+}
+
+.dl-horizontal > dt {
+    display:table-cell;
+    vertical-align:middle;
+    height:5em;
+}
+.dl-horizontal > dt,
+.dl-horizontal > dd {
+    /*padding: 0px 0 0px 0;*/
+    vertical-align:middle;
+}
