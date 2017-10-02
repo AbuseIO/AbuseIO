@@ -101,7 +101,7 @@ class Kernel extends ConsoleKernel
     ];
 
     /**
-     * Schedule method
+     * Schedule method.
      *
      * @param Schedule $schedule
      *
