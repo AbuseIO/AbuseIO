@@ -24,7 +24,7 @@ class RunCommand extends Command
     use DispatchesJobs;
 
     /**
-     * The console command name
+     * The console command name.
      *
      * @var string
      */
