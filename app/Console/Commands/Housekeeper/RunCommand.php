@@ -24,12 +24,11 @@ class RunCommand extends Command
     use DispatchesJobs;
 
     /**
-     * The console command name.
+     * The console command name
      *
      * @var string
      */
-    protected $signature = 'housekeeper:run
-    ';
+    protected $signature = 'housekeeper:run';
 
     /**
      * The console command description.
