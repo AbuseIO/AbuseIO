@@ -42,21 +42,20 @@ class TicketGraphPoint extends Model
 
     public static function getStatistics($lifecycle)
     {
+        
+        $result = [];
         $today = date('Y-m-d');
-        $oneYearAgo = date('Y-m-d', strtotime($today.' -1 year'));
 
-        $collection = self::where('day_date', '>=', $oneYearAgo)
-            ->where('lifecycle', '=', $lifecycle)
-            ->groupBy('day_date')
-            ->orderBy('day_date', 'desc')
-            ->get();
+        foreach (['year', 'month', 'week', 'day'] as $period) {
+            $after = strtotime($today . ' -1 ' . $period);
 
-        return [
-            'year'  => $collection->take(365)->sum('count'),
-            'month' => $collection->take(30)->sum('count'),
-            'week'  => $collection->take(7)->sum('count'),
-            'day'   => $collection->take(1)->sum('count'),
-        ];
+            $result[$period] = self::where('day_date', '>=', $after)
+                ->where('lifecycle', '=', $lifecycle)
+                ->orderBy('day_date', 'desc')
+                ->get()->sum('count');
+        }
+
+        return $result;
     }
 
     public static function getNewDataPointsForToday()
