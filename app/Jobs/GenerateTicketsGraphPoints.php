@@ -43,8 +43,6 @@ class GenerateTicketsGraphPoints extends Job implements SelfHandling
 
     public static function getTouchedDataPointsForToday()
     {
-
-
         return collect(
             self::getDataPointsForDateWithScope(Carbon::now(), 'updated_at')
                 ->whereRaw('updated_at != created_at')->get()

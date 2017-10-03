@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class TicketGraphPoint extends Model
 {
     /**
-     * Class TicketGraphPoint
+     * Class TicketGraphPoint.
      *
      * @property int id
      * @property date day_date
