@@ -43,10 +43,11 @@ class GenerateTicketsGraphPoints extends Job implements SelfHandling
 
     public static function getTouchedDataPointsForToday()
     {
+
+
         return collect(
             self::getDataPointsForDateWithScope(Carbon::now(), 'updated_at')
-                ->where('updated_at', '<>', 'created_at')
-            ->get()
+                ->whereRaw('updated_at != created_at')->get()
         );
     }
 
@@ -57,6 +58,7 @@ class GenerateTicketsGraphPoints extends Job implements SelfHandling
                 DB::raw('count(*) as cnt, class_id, type_id, status_id, contact_status_id')
             )
             ->whereDate($scope, '=', $date->toDateString())
+            ->whereNull('deleted_at')
             ->groupBy(['class_id', 'type_id', 'status_id', 'contact_status_id']);
     }
 

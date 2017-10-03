@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class TicketGraphPoint extends Model
 {
     /**
-     * Class TicketGraphPoint.
+     * Class TicketGraphPoint
      *
      * @property int id
      * @property date day_date
@@ -202,7 +202,7 @@ class TicketGraphPoint extends Model
     {
         return [
             'created_at' => ucfirst(trans('misc.lifecycle_created_at')),
-            'touched_at' => ucfirst(trans('misc.lifecycle_touched_at')),
+            'updated_at' => ucfirst(trans('misc.lifecycle_updated_at')),
         ];
     }
 
