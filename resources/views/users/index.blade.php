@@ -1,27 +1,30 @@
 @extends('app')
 
 @section('content')
-<h1 class="page-header">{{ trans_choice('misc.users', 2) }}</h1>
-<div class="row">
-    <div class="col-md-3 col-md-offset-9 text-right">
-        {!! link_to_route('admin.users.create', trans('users.button.new_user'), [ ], ['class' => 'btn btn-info']) !!}
+<div class="panel panel-default">
+    <div class="panel-body">
+    <div class="row">
+        <div class="col-md-3 col-md-offset-9 text-right">
+            {!! link_to_route('admin.users.create', trans('users.button.new_user'), [ ], ['class' => 'btn btn-info']) !!}
+        </div>
+    </div>
+    @if ( !$users->count() )
+    <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('users.no_users')}}</div>
+    @else
+    <table class="table table-striped top-buffer" id="users-table">
+        <thead>
+            <tr>
+                <th>{{ trans('misc.id') }}</th>
+                <th>{{ trans('users.first_name') }}</th>
+                <th>{{ trans('users.last_name') }}</th>
+                <th>{{ trans_choice('misc.accounts', 1) }}</th>
+                <th class="text-right">{{ trans('misc.action') }}</th>
+            </tr>
+        </thead>
+    </table>
+    @endif
     </div>
 </div>
-@if ( !$users->count() )
-<div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('users.no_users')}}</div>
-@else
-<table class="table table-striped top-buffer" id="users-table">
-    <thead>
-        <tr>
-            <th>{{ trans('misc.id') }}</th>
-            <th>{{ trans('users.first_name') }}</th>
-            <th>{{ trans('users.last_name') }}</th>
-            <th>{{ trans_choice('misc.accounts', 1) }}</th>
-            <th class="text-right">{{ trans('misc.action') }}</th>
-        </tr>
-    </thead>
-</table>
-@endif
 @endsection
 
 @section('extrajs')

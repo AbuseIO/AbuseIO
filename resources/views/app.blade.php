@@ -55,7 +55,7 @@
                                         <i class="material-icons">translate</i> <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li class="dropdown-header">{{ trans('misc.language') }}</li>
+                                        <li class="dropdown-header">{{ trans('misc.topmenu.language') }}</li>
                                         @foreach(Config::get('app.locales') as $locale => $localeData)
                                             <li>
                                                 <a href="/admin/locale/{{$locale}}"><span
@@ -76,10 +76,10 @@
                                             <i class="material-icons">settings</i> <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li class="dropdown-header">{{ trans('misc.options') }}</li>
-                                            <li>{!! link_to_route_html('admin.accounts.index', '<i class="material-icons">domain</i>&nbsp; '. trans_choice('misc.accounts', 2)) !!}</li>
-                                            <li>{!! link_to_route_html('admin.brands.index', '<i class="material-icons">label</i>&nbsp; '. trans_choice('misc.brands', 2)) !!}</li>
-                                            <li>{!! link_to_route_html('admin.users.index', '<i class="material-icons">group</i>&nbsp; '. trans_choice('misc.users', 2)) !!}</li>
+                                            <li class="dropdown-header">{{ trans('misc.topmenu.options') }}</li>
+                                            <li>{!! link_to_route_html('admin.accounts.index', '<i class="material-icons">domain</i>&nbsp; '. trans('misc.topmenu.accounts')) !!}</li>
+                                            <li>{!! link_to_route_html('admin.brands.index', '<i class="material-icons">label</i>&nbsp; '. trans('misc.topmenu.brands')) !!}</li>
+                                            <li>{!! link_to_route_html('admin.users.index', '<i class="material-icons">group</i>&nbsp; '. trans('misc.topmenu.users')) !!}</li>
                                         </ul>
                                     </li>
                             @endif
@@ -91,8 +91,8 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="dropdown-header">{{ $auth_user->fullName() . ' ('  . $auth_user->account->name .')' }}</li>
-                                        <li>{!! link_to_route_html('admin.profile.index', '<i class="material-icons">face</i>&nbsp; '. trans_choice('misc.profile', 2)) !!}</li>
-                                        <li><a href="/auth/logout"><i class="material-icons">exit_to_app</i>&nbsp; {{ trans_choice('misc.logout', 2) }}</a></li>
+                                        <li>{!! link_to_route_html('admin.profile.index', '<i class="material-icons">face</i>&nbsp; '. trans('misc.topmenu.profile')) !!}</li>
+                                        <li><a href="/auth/logout"><i class="material-icons">exit_to_app</i>&nbsp; {{ trans('misc.topmenu.logout') }}</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -105,7 +105,7 @@
                     <ul>
                         @foreach(Config::get('main.interface.navigation') as $navName => $navIcon)
                             <li{!! (Request::segment(2) == $navName) ? ' class="active"' : '' !!}>
-                                {!! link_to_route_html('admin.'.$navName.'.index', '<i class="fa '.$navIcon.' fa-lg fa-fw"></i>&nbsp; '.trans('misc.'.$navName)) !!}
+                                {!! link_to_route_html('admin.'.$navName.'.index', '<i class="fa '.$navIcon.' fa-lg fa-fw"></i>&nbsp; '.trans('misc.sidemenu.'.$navName)) !!}
                             </li>
                         @endforeach
                     </ul>

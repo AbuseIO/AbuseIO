@@ -1,6 +1,6 @@
 /*Main content */
 .main {
-    padding-top: 70px;
+    padding-top: 84px;
     padding-right: 20px;
     padding-left: 20px;
 }
@@ -66,7 +66,7 @@ body.ash { padding-top: 20px; }
 
 .menu ul {
     padding: 0;
-    margin: 7px 0;
+    margin: 20px 0;
 }
 
 .menu ul li {
@@ -90,13 +90,29 @@ body.ash { padding-top: 20px; }
     padding: 20px;
 }
 
+/* Customize information lists */
 .dl-horizontal > dt {
     display:table-cell;
     vertical-align:middle;
-    height:5em;
+    height:3em;
 }
 .dl-horizontal > dt,
 .dl-horizontal > dd {
-    /*padding: 0px 0 0px 0;*/
     vertical-align:middle;
+}
+
+/* Customize breadcrumbs */
+.breadcrumb li {font-size: 19px;}
+.breadcrumb > li + li:before {content: "\00bb\00a0";}
+
+/*
+ * Customize the CopyToClipboard button
+ * We don't want any space above or under the button.
+ * The space messes up the horizontal alignment.
+*/
+#btnCopyToClipboard {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }

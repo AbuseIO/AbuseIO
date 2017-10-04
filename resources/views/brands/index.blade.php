@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<h1 class="page-header">{{ trans('misc.nav_brands') }}</h1>
+{{--<h1 class="page-header">{{ trans('misc.nav_brands') }}</h1>--}}
 <div class="row">
     <div class="col-md-3 col-md-offset-9 text-right">
         {!! link_to_route('admin.brands.create', trans('brands.button.new_brand'), [ ], ['class' => 'btn btn-info']) !!}

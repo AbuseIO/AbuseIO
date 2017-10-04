@@ -2,7 +2,7 @@
 
 Breadcrumbs::register('admin.home.index', function($breadcrumbs)
 {
-	$breadcrumbs->push('Home', route('admin.home.index'));
+	$breadcrumbs->push(trans('misc.sidemenu.home'), route('admin.home.index'));
 });
 
 
@@ -11,8 +11,7 @@ Breadcrumbs::register('admin.home.index', function($breadcrumbs)
  */
 Breadcrumbs::register('admin.accounts.index', function($breadcrumbs)
 {
-	$breadcrumbs->parent('admin.home.index');
-	$breadcrumbs->push('Accounts', route('admin.accounts.index'));
+	$breadcrumbs->push(trans('misc.topmenu.accounts'), route('admin.accounts.index'));
 });
 
 Breadcrumbs::register('admin.accounts.show', function($breadcrumbs, $account)
@@ -24,13 +23,13 @@ Breadcrumbs::register('admin.accounts.show', function($breadcrumbs, $account)
 Breadcrumbs::register('admin.accounts.create', function($breadcrumbs)
 {
     $breadcrumbs->parent('admin.accounts.index');
-    $breadcrumbs->push(trans('misc.new'), route('admin.accounts.create'));
+    $breadcrumbs->push(trans('accounts.header.new'), route('admin.accounts.create'));
 });
 
 Breadcrumbs::register('admin.accounts.edit', function($breadcrumbs, $account)
 {
 	$breadcrumbs->parent('admin.accounts.show', $account);
-	$breadcrumbs->push(trans('misc.button.edit'), route('admin.accounts.edit', $account->id));
+	$breadcrumbs->push(trans('accounts.header.edit'), route('admin.accounts.edit', $account->id));
 });
 
 
@@ -39,8 +38,7 @@ Breadcrumbs::register('admin.accounts.edit', function($breadcrumbs, $account)
  */
 Breadcrumbs::register('admin.brands.index', function($breadcrumbs)
 {
-	$breadcrumbs->parent('admin.home.index');
-	$breadcrumbs->push('Brands', route('admin.brands.index'));
+	$breadcrumbs->push(trans('misc.topmenu.brands'), route('admin.brands.index'));
 });
 
 Breadcrumbs::register('admin.brands.show', function($breadcrumbs, $brand)
@@ -52,13 +50,13 @@ Breadcrumbs::register('admin.brands.show', function($breadcrumbs, $brand)
 Breadcrumbs::register('admin.brands.create', function($breadcrumbs)
 {
     $breadcrumbs->parent('admin.brands.index');
-    $breadcrumbs->push(trans('misc.new'), route('admin.brands.create'));
+    $breadcrumbs->push(trans('brands.header.new'), route('admin.brands.create'));
 });
 
 Breadcrumbs::register('admin.brands.edit', function($breadcrumbs, $brand)
 {
 	$breadcrumbs->parent('admin.brands.show', $brand);
-	$breadcrumbs->push(trans('misc.button.edit'), route('admin.brands.edit', $brand->id));
+	$breadcrumbs->push(trans('brands.header.edit'), route('admin.brands.edit', $brand->id));
 });
 
 
@@ -67,8 +65,7 @@ Breadcrumbs::register('admin.brands.edit', function($breadcrumbs, $brand)
  */
 Breadcrumbs::register('admin.users.index', function($breadcrumbs)
 {
-	$breadcrumbs->parent('admin.home.index');
-	$breadcrumbs->push('Users', route('admin.users.index'));
+	$breadcrumbs->push(trans('misc.topmenu.users'), route('admin.users.index'));
 });
 
 Breadcrumbs::register('admin.users.show', function($breadcrumbs, $user)
@@ -80,13 +77,13 @@ Breadcrumbs::register('admin.users.show', function($breadcrumbs, $user)
 Breadcrumbs::register('admin.users.create', function($breadcrumbs)
 {
     $breadcrumbs->parent('admin.users.index');
-    $breadcrumbs->push(trans('misc.new'), route('admin.users.create'));
+    $breadcrumbs->push(trans('users.header.new'), route('admin.users.create'));
 });
 
 Breadcrumbs::register('admin.users.edit', function($breadcrumbs, $user)
 {
 	$breadcrumbs->parent('admin.users.show', $user);
-	$breadcrumbs->push(trans('misc.button.edit'), route('admin.users.edit', $user->id));
+	$breadcrumbs->push(trans('users.header.edit'), route('admin.users.edit', $user->id));
 });
 
 
@@ -96,8 +93,7 @@ Breadcrumbs::register('admin.users.edit', function($breadcrumbs, $user)
  */
 Breadcrumbs::register('admin.profile.index', function($breadcrumbs)
 {
-	$breadcrumbs->parent('admin.home.index');
-	$breadcrumbs->push('My Profile', route('admin.profile.index'));
+	$breadcrumbs->push(trans('misc.topmenu.profile'), route('admin.profile.index'));
 });
 
 
@@ -106,8 +102,7 @@ Breadcrumbs::register('admin.profile.index', function($breadcrumbs)
  */
 Breadcrumbs::register('admin.contacts.index', function($breadcrumbs)
 {
-	$breadcrumbs->parent('admin.home.index');
-	$breadcrumbs->push('Contact', route('admin.contacts.index'));
+	$breadcrumbs->push(trans('misc.sidemenu.contacts'), route('admin.contacts.index'));
 });
 
 Breadcrumbs::register('admin.contacts.show', function($breadcrumbs, $contact)
@@ -119,7 +114,7 @@ Breadcrumbs::register('admin.contacts.show', function($breadcrumbs, $contact)
 Breadcrumbs::register('admin.contacts.edit', function($breadcrumbs, $contact)
 {
 	$breadcrumbs->parent('admin.contacts.show', $contact);
-	$breadcrumbs->push(trans('misc.button.edit'), route('admin.contacts.edit', $contact->id));
+	$breadcrumbs->push(trans('contacts.header.edit'), route('admin.contacts.edit', $contact->id));
 });
 
 
@@ -128,8 +123,7 @@ Breadcrumbs::register('admin.contacts.edit', function($breadcrumbs, $contact)
  */
 Breadcrumbs::register('admin.netblocks.index', function($breadcrumbs)
 {
-	$breadcrumbs->parent('admin.home.index');
-	$breadcrumbs->push('Netblocks', route('admin.netblocks.index'));
+	$breadcrumbs->push(trans('misc.sidemenu.netblocks'), route('admin.netblocks.index'));
 });
 
 Breadcrumbs::register('admin.netblocks.show', function($breadcrumbs, $netblock)
@@ -141,7 +135,7 @@ Breadcrumbs::register('admin.netblocks.show', function($breadcrumbs, $netblock)
 Breadcrumbs::register('admin.netblocks.edit', function($breadcrumbs, $netblock)
 {
 	$breadcrumbs->parent('admin.netblocks.show', $netblock);
-	$breadcrumbs->push(trans('misc.button.edit'), route('admin.netblocks.edit', $netblock->id));
+	$breadcrumbs->push(trans('netblocks.header.edit'), route('admin.netblocks.edit', $netblock->id));
 });
 
 
@@ -150,8 +144,7 @@ Breadcrumbs::register('admin.netblocks.edit', function($breadcrumbs, $netblock)
  */
 Breadcrumbs::register('admin.domains.index', function($breadcrumbs)
 {
-	$breadcrumbs->parent('admin.home.index');
-	$breadcrumbs->push('Domains', route('admin.domains.index'));
+	$breadcrumbs->push(trans('misc.sidemenu.domains'), route('admin.domains.index'));
 });
 
 Breadcrumbs::register('admin.domains.show', function($breadcrumbs, $domain)
@@ -163,7 +156,7 @@ Breadcrumbs::register('admin.domains.show', function($breadcrumbs, $domain)
 Breadcrumbs::register('admin.domains.edit', function($breadcrumbs, $domain)
 {
 	$breadcrumbs->parent('admin.domains.show', $domain);
-	$breadcrumbs->push(trans('misc.button.edit'), route('admin.domains.edit', $domain->id));
+	$breadcrumbs->push(trans('domains.header.edit'), route('admin.domains.edit', $domain->id));
 });
 
 
@@ -172,8 +165,7 @@ Breadcrumbs::register('admin.domains.edit', function($breadcrumbs, $domain)
  */
 Breadcrumbs::register('admin.tickets.index', function($breadcrumbs)
 {
-	$breadcrumbs->parent('admin.home.index');
-	$breadcrumbs->push('Tickets', route('admin.tickets.index'));
+	$breadcrumbs->push(trans('misc.sidemenu.tickets'), route('admin.tickets.index'));
 });
 
 Breadcrumbs::register('admin.tickets.show', function($breadcrumbs, $ticket)
@@ -185,7 +177,7 @@ Breadcrumbs::register('admin.tickets.show', function($breadcrumbs, $ticket)
 Breadcrumbs::register('admin.tickets.edit', function($breadcrumbs, $ticket)
 {
 	$breadcrumbs->parent('admin.tickets.show', $ticket);
-	$breadcrumbs->push(trans('misc.button.edit'), route('admin.tickets.edit', $ticket->id));
+	$breadcrumbs->push(trans('tickets.header.edit'), route('admin.tickets.edit', $ticket->id));
 });
 
 
@@ -194,7 +186,6 @@ Breadcrumbs::register('admin.tickets.edit', function($breadcrumbs, $ticket)
  */
 Breadcrumbs::register('admin.analytics.index', function($breadcrumbs)
 {
-	$breadcrumbs->parent('admin.home.index');
-	$breadcrumbs->push('Analytics', route('admin.analytics.index'));
+	$breadcrumbs->push(trans('misc.sidemenu.analytics'), route('admin.analytics.index'));
 });
 

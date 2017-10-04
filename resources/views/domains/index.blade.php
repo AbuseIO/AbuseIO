@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<h1 class="page-header">{{ trans('misc.domains') }}</h1>
+{{--<h1 class="page-header">{{ trans('misc.domains') }}</h1>--}}
 <div class="row">
     <div  class="col-md-3 col-md-offset-9 text-right">
         {!! link_to_route('admin.domains.create', trans('domains.button.new_domain'), [ ], ['class' => 'btn btn-info']) !!}

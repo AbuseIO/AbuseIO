@@ -3,6 +3,7 @@
 /**
  * Miscellaneous translations.
  */
+
 return [
     // AbuseIO intro
     'abuseio_intro1' => 'AbuseIO is a toolkit to receive, process, correlate and notify
@@ -13,18 +14,29 @@ return [
                          and individuals to automate and improve the abuse handling
                          process.',
 
-    // Navigation bar
-    'language'     => 'Language',
-    'home'         => 'Home',
-    'contacts'     => 'Contacts',
-    'netblocks'    => 'Netblocks',
-    'domains'      => 'Domains',
-    'tickets'      => 'Tickets',
-    'search'       => 'Search',
-    'analytics'    => 'Analytics',
-    'nav_brands'   => 'Brands',
-    'nav_accounts' => 'Accounts',
-
+    // Sidemenu
+    'sidemenu' => [
+        'home'         => 'Home',
+        'contacts'      => 'Contacts',
+        'netblocks'    => 'Netblocks',
+        'domains'      => 'Domains',
+        'tickets'      => 'Tickets',
+        'analytics'    => 'Analytics',
+        'language'     => 'Language',
+        'nav_brands'   => 'Brands',
+        'nav_accounts' => 'Accounts',
+        'search'       => 'Search',
+    ],
+    // Topmenu
+    'topmenu' => [
+        'language'  => 'Language',
+        'options'   => 'Options',
+        'accounts'  => 'Accounts',
+        'brands'    => 'Brands',
+        'users'     => 'Users',
+        'profile'   => 'My Profile',
+        'logout'    => 'Logout',
+    ],
     // Button labels
     'button.show'           => 'Show',
     'button.details'        => 'Details',
@@ -59,16 +71,12 @@ return [
     'company_name'                        => 'Company Name',
     'email'                               => 'E-Mail',
     'settings'                            => 'Settings',
-    'accounts'                            => 'Account|Accounts',
-    'users'                               => 'User|Users',
     'profile'                             => 'My profile',
     'logout'                              => 'Logout',
-    'brands'                              => 'Brand|Brands',
-    'options'                             => 'Options',
     'optional'                            => 'Optional',
     'misc'                                => 'Miscellaneous',
     'database_id'                         => 'ID',
-    'contact'                             => 'Contact',
+    'contact'                             => 'Contact|Contacts',
     'description'                         => 'Description',
     'ip'                                  => 'IP',
     'ip_address'                          => 'IP Address',
@@ -97,7 +105,7 @@ return [
     'login'                               => 'Login',
     'refresh'                             => 'Refresh',
     'copy_to_clipboard'                   => 'Copy to Clipboard',
-    'please_press_ctrl_cmd_to_copy'       => 'Please press Control+C to copy.',
+    'select_and_press_ctrl_c'             => 'Please select the key and press CTRL-C to copy.',
     'copied'                              => 'Copied',
     'api_key'                             => 'Api key',
     'last_seven_days'                     => 'Last 7 days',
@@ -123,6 +131,8 @@ return [
     'show_graph'                          => 'Show graph',
     'send_notifications'                  => 'Send notifications',
     'close'                               => 'Close',
+    'language'                            => 'language|languages',
+    'account'                             => 'account|accounts',
 
     // Note text
     'note_text_status_sync_parent'        => 'Synced status with parent AbuseIO instance',
