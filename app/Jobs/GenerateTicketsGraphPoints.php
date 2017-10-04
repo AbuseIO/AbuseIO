@@ -28,9 +28,9 @@ class GenerateTicketsGraphPoints extends Job implements SelfHandling
     public function handle()
     {
         // only create graphpoints once
-        if (count(TicketGraphPoint::where('day_date', '=', \Carbon::yesterday())->get()) > 0)
-        {
-            Log::info("TicketGraphPoint collector has already runned today, skipping");
+        if (count(TicketGraphPoint::where('day_date', '=', \Carbon::yesterday())->get()) > 0) {
+            Log::info('TicketGraphPoint collector has already runned today, skipping');
+
             return;
         }
 
