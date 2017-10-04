@@ -8,7 +8,6 @@ use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Incident;
 use Illuminate\Console\Command;
-use Prophecy\Argument;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;
