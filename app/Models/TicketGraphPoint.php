@@ -57,26 +57,26 @@ class TicketGraphPoint extends Model
         return $result;
     }
 
-    public static function getNewDataPointsForToday()
+    public static function getNewDataPointsForYesterday()
     {
-        return self::where('day_date', '=', Carbon::now()->toDateString())
+        return self::where('day_date', '=', Carbon::yesterday()->toDateString())
             ->where('lifecycle', '=', 'created_at')->get();
     }
 
-    public static function getTouchedDataPointsForToday()
+    public static function getTouchedDataPointsForYesterday()
     {
-        return self::where('day_date', '=', Carbon::now()->toDateString())
+        return self::where('day_date', '=', Carbon::yesterday()->toDateString())
             ->where('lifecycle', '=', 'updated_at')->get();
     }
 
-    public static function createNewWithDataForToday($data)
+    public static function createNewWithDataForYesterday($data)
     {
-        return self::createWithDataDateAndLifecycle($data, Carbon::now(), 'created_at');
+        return self::createWithDataDateAndLifecycle($data, Carbon::yesterday(), 'created_at');
     }
 
-    public static function createTouchedDataForToday($data)
+    public static function createTouchedDataForYesterday($data)
     {
-        return self::createWithDataDateAndLifecycle($data, Carbon::now(), 'updated_at');
+        return self::createWithDataDateAndLifecycle($data, Carbon::yesterday(), 'updated_at');
     }
 
     private static function createWithDataDateAndLifecycle($data, Carbon $date, $lifecycle)

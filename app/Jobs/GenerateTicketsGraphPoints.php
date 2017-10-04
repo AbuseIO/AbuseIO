@@ -27,24 +27,29 @@ class GenerateTicketsGraphPoints extends Job implements SelfHandling
      */
     public function handle()
     {
+        // only create graphpoints once
+        if (count(TicketGraphPoint::where('day_date', '=', \Carbon::yesterday())->get()) > 0)
+        {
+            Log::info("TicketGraphPoint collector has already runned today, skipping");
+            return;
+        }
+
         $this
-            ->storeNewTicketDataForToday()
-            ->storeTouchedDataForToday();
+            ->storeNewTicketDataForYesterday()
+            ->storeTouchedDataForYesterday();
     }
 
-    public static function getNewDataPointsForToday()
+    public static function getNewDataPointsForYesterday()
     {
-        //dd(self::getDataPointsForDateWithScope(Carbon::now(), 'created_at')->toSql());
-
         return collect(
-            self::getDataPointsForDateWithScope(Carbon::now(), 'created_at')->get()
+            self::getDataPointsForDateWithScope(Carbon::yesterday(), 'created_at')->get()
         );
     }
 
-    public static function getTouchedDataPointsForToday()
+    public static function getTouchedDataPointsForYesterday()
     {
         return collect(
-            self::getDataPointsForDateWithScope(Carbon::now(), 'updated_at')
+            self::getDataPointsForDateWithScope(Carbon::yesterday(), 'updated_at')
                 ->whereRaw('updated_at != created_at')->get()
         );
     }
@@ -60,24 +65,24 @@ class GenerateTicketsGraphPoints extends Job implements SelfHandling
             ->groupBy(['class_id', 'type_id', 'status_id', 'contact_status_id']);
     }
 
-    public function storeNewTicketDataForToday()
+    public function storeNewTicketDataForYesterday()
     {
-        self::getNewDataPointsForToday()
+        self::getNewDataPointsForYesterday()
             ->map(
                 function ($data) {
-                    TicketGraphPoint::createNewWithDataForToday($data);
+                    TicketGraphPoint::createNewWithDataForYesterday($data);
                 }
             );
 
         return $this;
     }
 
-    public function storeTouchedDataForToday()
+    public function storeTouchedDataForYesterday()
     {
-        self::getTouchedDataPointsForToday()
+        self::getTouchedDataPointsForYesterday()
             ->map(
                 function ($data) {
-                    TicketGraphPoint::createTouchedDataForToday($data);
+                    TicketGraphPoint::createTouchedDataForYesterday($data);
                 }
             );
 
