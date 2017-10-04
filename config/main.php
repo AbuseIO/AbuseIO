@@ -10,12 +10,12 @@ return [
     'interface' => [
         'language'   => 'en',
         'navigation' => [
-            'home' => 'fa-home',
-            'contacts' => 'fa-users',
+            'home'      => 'fa-home',
+            'contacts'  => 'fa-users',
             'netblocks' => 'fa-gg',
-            'domains' => 'fa-globe',
-            'tickets' => 'fa-ticket',
-            'analytics' => 'fa-bar-chart'
+            'domains'   => 'fa-globe',
+            'tickets'   => 'fa-ticket',
+            'analytics' => 'fa-bar-chart',
         ],
     ],
 

@@ -51,8 +51,8 @@ Route::group(
         Route::get(
             '/home',
             [
-                'as' => 'home.index',
-                'uses' => 'HomeController@index'
+                'as'   => 'home.index',
+                'uses' => 'HomeController@index',
             ]
         );
 

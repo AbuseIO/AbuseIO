@@ -16,16 +16,16 @@ return [
 
     // Sidemenu
     'sidemenu' => [
-        'home'         => 'Home',
+        'home'          => 'Home',
         'contacts'      => 'Contacts',
-        'netblocks'    => 'Netblocks',
-        'domains'      => 'Domains',
-        'tickets'      => 'Tickets',
-        'analytics'    => 'Analytics',
-        'language'     => 'Language',
-        'nav_brands'   => 'Brands',
-        'nav_accounts' => 'Accounts',
-        'search'       => 'Search',
+        'netblocks'     => 'Netblocks',
+        'domains'       => 'Domains',
+        'tickets'       => 'Tickets',
+        'analytics'     => 'Analytics',
+        'language'      => 'Language',
+        'nav_brands'    => 'Brands',
+        'nav_accounts'  => 'Accounts',
+        'search'        => 'Search',
     ],
     // Topmenu
     'topmenu' => [
