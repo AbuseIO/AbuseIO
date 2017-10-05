@@ -117,7 +117,7 @@ return [
     'scope_class'                    => 'classificatie',
     'scope_total'                    => 'Totaal',
     'lifecycle_created_at'           => 'nieuw',
-    'lifecycle_touched_at'           => 'geupdate',
+    'lifecycle_updated_at'           => 'geupdate',
     'scope_by'                       => 'per',
     'from'                           => 'Vanaf',
     'till'                           => 'Tot',

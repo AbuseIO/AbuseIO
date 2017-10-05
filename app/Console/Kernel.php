@@ -115,6 +115,6 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('collector:runall')->cron(config('main.housekeeping.collectors_cron'));
 
-        //        $schedule->command('collectstatisics:run')->cron(config('main.housekeeping.collect_statistics_cron'));
+        $schedule->command('statistics:run')->cron(config('main.housekeeping.collect_statistics_cron'));
     }
 }

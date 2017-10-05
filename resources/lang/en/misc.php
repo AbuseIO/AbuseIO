@@ -123,7 +123,7 @@ return [
     'scope_class'                         => 'classification',
     'scope_total'                         => 'Total',
     'lifecycle_created_at'                => 'new',
-    'lifecycle_touched_at'                => 'updated',
+    'lifecycle_updated_at'                => 'updated',
     'scope_by'                            => 'by',
     'from'                                => 'From',
     'till'                                => 'Till',

@@ -54,6 +54,7 @@
         </tbody>
     </table>
 
+    <div style="height:180px;width=100%;">
     <form class="form col-sm-offset-2 col-sm-8">
         <div class="row">
 
@@ -97,6 +98,7 @@
             </div>
         </div>
     </form>
+    </div>
     <div id="graph" style="width:100%;height:450px;"></div>
 @endsection
 
