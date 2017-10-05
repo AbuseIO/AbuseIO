@@ -43,12 +43,12 @@ class TicketGraphPoint extends Model
     public static function getStatistics($lifecycle)
     {
         $result = [];
-        $today = date('Y-m-d');
 
         foreach (['year', 'month', 'week', 'day'] as $period) {
-            $after = strtotime($today.' -1 '.$period);
+            $timeString = sprintf("1 %s ago", $period);
+            $after = date('Y-m-d', strtotime($timeString));
 
-            $result[$period] = self::where('day_date', '>=', $after)
+            $result[$period] = self::where ('day_date', '>=', $after)
                 ->where('lifecycle', '=', $lifecycle)
                 ->orderBy('day_date', 'desc')
                 ->get()->sum('count');
