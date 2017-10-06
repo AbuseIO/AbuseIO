@@ -1,6 +1,5 @@
 <?php
 
-use AbuseIO\Models\Ticket;
 use Illuminate\Database\Migrations\Migration;
 
 class UpdateTicketsTable extends Migration
