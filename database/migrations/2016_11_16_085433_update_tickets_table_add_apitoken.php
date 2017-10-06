@@ -20,7 +20,7 @@ class UpdateTicketsTableAddApitoken extends Migration
     }
 
     /**
-     * update all existing tickets with the apiToken
+     * update all existing tickets with the apiToken and ash_tokens
      * These are automatically added when the ticket is
      * saved.
      *

@@ -17,22 +17,6 @@ class UpdateTicketsTable extends Migration
             $table->string('ash_token_ip');
             $table->string('ash_token_domain');
         });
-
-        $this->_updateTokens();
-    }
-
-    /**
-     * update all existing tickets with the ashtokens
-     * These are automatically added when the ticket is
-     * saved.
-     *
-     * @return void
-     */
-    private function _updateTokens()
-    {
-        Ticket::all()->map(function ($ticket) {
-            $ticket->save();
-        });
     }
 
     /**
