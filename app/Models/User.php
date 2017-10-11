@@ -375,7 +375,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $result = null;
 
         $options = $this->options;
-        if (array_key_exists($name, $options)) {
+        if (is_array($options) && array_key_exists($name, $options)) {
             $result = $options[$name];
         }
 
