@@ -384,7 +384,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Get the search values for a specified namespace
+     * Get the search values for a specified namespace.
      *
      * @param $namespace
      *
@@ -396,7 +396,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Save the search values for a specified namespace
+     * Save the search values for a specified namespace.
      *
      * @param $namespace
      * @param array $values

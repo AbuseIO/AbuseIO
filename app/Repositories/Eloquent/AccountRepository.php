@@ -3,14 +3,11 @@
 namespace AbuseIO\Repositories\Eloquent;
 
 use AbuseIO\Models\Account;
-use AbuseIO\Http\Requests\UserFormRequest;
 use AbuseIO\Repositories\AbstractRepository;
 use AbuseIO\Repositories\Contracts\AccountRepositoryInterface;
-use Log;
 
 /**
- * Class UserRepositoryInterface
- * @package AbuseIO\Repositories
+ * Class UserRepositoryInterface.
  */
 class AccountRepository extends AbstractRepository implements AccountRepositoryInterface
 {
@@ -106,7 +103,7 @@ class AccountRepository extends AbstractRepository implements AccountRepositoryI
 
         // Sort the list
         $field = (empty($sortFields[0]) || is_null($sortFields[0])) ? 'id' : $sortFields[0];
-        $sort  = (empty($sortFields[1]) || is_null($sortFields[1])) ? 'asc' : $sortFields[1];
+        $sort = (empty($sortFields[1]) || is_null($sortFields[1])) ? 'asc' : $sortFields[1];
 
         $this->model = $this->model->orderBy($field, $sort);
 
