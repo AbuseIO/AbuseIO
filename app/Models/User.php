@@ -247,7 +247,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public static function checkAccountAccess($model_id, Account $account)
     {
-        /**
+        /*
          * Early return when we are in the system account.
          * SystemAccount may access all entities.
          */
