@@ -116,3 +116,24 @@ body.ash { padding-top: 20px; }
     padding-top: 0;
     padding-bottom: 0;
 }
+
+/*
+ * Override the snackbar alignment.
+ */
+#snackbar-container {
+    left: unset;
+    right:20px !important;
+}
+
+.valign-center {
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+}
+
+/**
+ * Fix issue where the carot is too big in the search form
+ */
+#search-form .dropdownjs::after {
+    font-size: unset;
+}

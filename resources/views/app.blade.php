@@ -18,12 +18,18 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap-material-design.min.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/ripples.min.css') }}"/>
 
-        <!-- Google Fonts needed -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/font-roboto.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/material-icons.css') }}"/>
+        <!-- Dropdown -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/dropdownjs.css') }}">
+
+        <!-- Snackbar -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/snackbar.min.css') }}">
 
         <!-- Localization flags -->
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/flag-icon-min.css') }}">
+
+        <!-- Google Fonts needed -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/font-roboto.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/material-icons.css') }}"/>
 
         <!-- Font-Awesome CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/font-awesome.min.css') }}">
@@ -112,22 +118,13 @@
                 </nav>
                 <!-- Main content -->
                 <div class="col-md-10 col-md-offset-2 main">
-                    @if (Session::has('message'))
-                        <div id="system_message" class="alert alert-info alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                            <p>{{ Session::get('message') }}</p>
-                        </div>
-                    @endif
-                    @if(Request::segment(2) != 'home')
-                        {!! Breadcrumbs::render() !!}
-                    @endif
+                    {!! Breadcrumbs::render() !!}
                     @yield('content')
                 </div>
             </div>
         </div>
 
-        <!-- Bootstrap core Javascript
+        <!-- Bootstrap Core Javascript Files
         ================================================== -->
         <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/js/popper.min.js') }}"></script>
@@ -136,6 +133,8 @@
         <script type="text/javascript" src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/js/material.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/js/ripples.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/js/dropdownjs.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/js/snackbar.min.js') }}"></script>
         @yield('extrajs')
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -143,6 +142,7 @@
         <script src="{{ asset('/js/html5shiv.min.js') }}"></script>
         <script src="{{ asset('/js/respond.min.js') }}"></script>
         <![endif]-->
+        <script type="text/javascript">var msgSnack = '{{ Session::get('message') }}';</script>
         <script type="text/javascript" src="{{ asset('/js/global.js') }}"></script>
     </body>
 </html>

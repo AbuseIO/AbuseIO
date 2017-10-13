@@ -3,11 +3,18 @@
 @section('content')
 <div class="panel panel-default">
     <div class="panel-body">
-        <div class="row">
-            <div class="col-md-3 col-md-offset-9 text-right">
+        <div class="row container-fluid">
+            <div class="pull-right">
                 {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.users.destroy', $user->id]]) !!}
                 {!! link_to_route('admin.users.edit', trans('misc.button.edit'), $user->id, ['class' => 'btn btn-info']) !!}
-                {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger'.(($user->id == 1) ? ' disabled' : '')]) !!}
+                @if ($user->id != 1)
+                    @if ( $user->disabled )
+                        {!! link_to_route('admin.users.enable', trans('misc.button.enable'), $user->id, ['class' => 'btn btn-success']) !!}
+                    @else
+                        {!! link_to_route('admin.users.disable', trans('misc.button.disable'), $user->id, ['class' => 'btn btn-warning']) !!}
+                    @endif
+                    {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger']) !!}
+                @endif
                 {!! Form::close() !!}
             </div>
         </div>
@@ -22,7 +29,7 @@
             <dt>{{ trans('misc.email') }}</dt>
             <dd><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></dd>
 
-            <dt>{{ trans('misc.language') }}</dt>
+            <dt>{{ trans_choice('misc.language', 1) }}</dt>
             <dd>{{ $language }}</dd>
 
             <dt>{{ trans('misc.status') }}</dt>
@@ -31,7 +38,7 @@
             <dt>{{ trans('users.linked_account') }}</dt>
             <dd>{{ $account->name }}</dd>
 
-            <dt>{{ trans_choice('misc.member', 2) }}</dt>
+            <dt>{{ trans_choice('misc.roles', sizeof($roles)) }}</dt>
             <dd>
                 @foreach ($roles as $role)
                 <span class="label label-default">{{ $role->name }}</span>

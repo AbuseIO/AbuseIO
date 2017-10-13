@@ -87,7 +87,7 @@ return [
     'domain'                              => 'Domain',
     'ticket_id'                           => 'Ticket Id',
     'ticket_state'                        => 'Ticket state',
-    'id'                                  => 'Id',
+    'id'                                  => 'ID',
     'text'                                => 'Text',
     'both'                                => 'Both',
     'uri'                                 => 'URI / Path',
@@ -131,8 +131,10 @@ return [
     'show_graph'                          => 'Show graph',
     'send_notifications'                  => 'Send notifications',
     'close'                               => 'Close',
-    'language'                            => 'language|languages',
-    'account'                             => 'account|accounts',
+    'language'                            => 'Language|Languages',
+    'account'                             => 'Account|Accounts',
+    'member'                              => 'Member|Members',
+    'search'                              => 'Search',
 
     // Note text
     'note_text_status_sync_parent'        => 'Synced status with parent AbuseIO instance',

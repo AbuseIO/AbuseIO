@@ -1,61 +1,41 @@
 @extends('app')
 
 @section('content')
+@include('users/partials/_search')
 <div class="panel panel-default">
     <div class="panel-body">
-    <div class="row">
-        <div class="col-md-3 col-md-offset-9 text-right">
-            {!! link_to_route('admin.users.create', trans('users.button.new_user'), [ ], ['class' => 'btn btn-info']) !!}
+        <div class="row container-fluid">
+            <div class="pull-left"><h3>Users</h3></div>
+            <div class="pull-right">
+                {!! link_to_route('admin.users.create', trans('users.button.new_user'), [ ], ['class' => 'btn btn-raised btn-info']) !!}
+            </div>
         </div>
-    </div>
-    @if ( !$users->count() )
-    <div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('users.no_users')}}</div>
-    @else
-    <table class="table table-striped top-buffer" id="users-table">
-        <thead>
-            <tr>
-                <th>{{ trans('misc.id') }}</th>
-                <th>{{ trans('users.first_name') }}</th>
-                <th>{{ trans('users.last_name') }}</th>
-                <th>{{ trans_choice('misc.accounts', 1) }}</th>
-                <th class="text-right">{{ trans('misc.action') }}</th>
-            </tr>
-        </thead>
-    </table>
-    @endif
+        @if ( !$users->count() )
+        <div class="alert alert-info top-buffer"><span class="fa fa-exclamation-circle"></span> {{ trans('users.no_users')}}</div>
+        @else
+        {!!
+        $users->columns([
+            'id' => trans('misc.id'),
+            'first_name' => trans('users.first_name'),
+            'last_name' => trans('users.last_name'),
+            'account_id' => trans_choice('misc.account', 1),
+            'action' => trans('misc.action'),
+        ])
+        ->means('account_id', 'account')
+        ->modify('first_name', function($user) {
+            return link_to_route('admin.users.show', $user->first_name, [$user->id]);
+        })
+        ->modify('last_name', function($user) {
+            return link_to_route('admin.users.show', $user->last_name, [$user->id]);
+        })
+        ->modify('account_id', function($account) {
+            return link_to_route('admin.accounts.show', $account->name, [$account->id]);
+        })
+        ->sortable(['id', 'first_name', 'last_name'])
+        ->render()
+         !!}
+        {!! $users->appends(['field' => Input::get('field'), 'sort' => Input::get('sort')])->render() !!}
+        @endif
     </div>
 </div>
-@endsection
-
-@section('extrajs')
-<script>
-     $(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('#users-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{!! route('admin.users.search') .'/query/' !!}',
-            columnDefs: [{
-                targets: -1,
-                data: null,
-                defaultContent: ''
-            }],
-            language: {
-                url: '{{ asset("/i18n/$auth_user->locale.json") }}'
-            },
-            columns: [
-                { data: 'id', name: 'users.id' },
-                { data: 'first_name', name: 'users.first_name' },
-                { data: 'last_name', name: 'users.last_name' },
-                { data: 'account_name', name: 'accounts.name' },
-                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
-            ]
-        });
-    });
-</script>
 @endsection

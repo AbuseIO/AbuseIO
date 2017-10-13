@@ -7,12 +7,14 @@
             <div class="col-sm-12 text-right">
                 {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.accounts.destroy', $account->id]]) !!}
                 {!! link_to_route('admin.accounts.edit', trans('misc.button.edit'), $account->id, ['class' => 'btn btn-info']) !!}
-                @if ( $account->disabled )
-                    {!! link_to_route('admin.accounts.enable', trans('misc.button.enable'), $account->id, ['class' => 'btn btn-success']) !!}
-                @else
-                    {!! link_to_route('admin.accounts.disable', trans('misc.button.disable'), $account->id, ['class' => 'btn btn-warning']) !!}
+                @if (!$account->isSystemAccount())
+                    @if ( $account->disabled )
+                        {!! link_to_route('admin.accounts.enable', trans('misc.button.enable'), $account->id, ['class' => 'btn btn-success']) !!}
+                    @else
+                        {!! link_to_route('admin.accounts.disable', trans('misc.button.disable'), $account->id, ['class' => 'btn btn-warning']) !!}
+                    @endif
+                    {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger']) !!}
                 @endif
-                {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger'.(($account->isSystemAccount()) ? ' disabled' : '')]) !!}
                 {!! Form::close() !!}
             </div>
         </div>

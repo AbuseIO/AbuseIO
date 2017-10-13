@@ -340,7 +340,7 @@ class AccountsController extends Controller
      *
      * @param Account $account
      *
-     * @return \\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Account $account)
     {

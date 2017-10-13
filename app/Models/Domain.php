@@ -4,6 +4,7 @@ namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Stevebauman\EloquentTable\TableTrait;
 
 /**
  * Class Domain.
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Domain extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, TableTrait;
 
     /**
      * The database table used by the model.

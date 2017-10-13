@@ -13,10 +13,10 @@ return [
     'button.new_user'   => 'New User',
 
     // Miscellaneous
-    'no_accounts'       => 'No users',
-    'linked_account'    => 'Linked account',
-    'first_name'        => 'First name',
-    'last_name'         => 'Last name',
+    'no_accounts'       => 'No Users',
+    'linked_account'    => 'Linked Account',
+    'first_name'        => 'First Name',
+    'last_name'         => 'Last Lame',
     'login_disabled'    => 'This login is disabled.',
 
     // Login

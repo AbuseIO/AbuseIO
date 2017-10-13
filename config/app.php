@@ -192,18 +192,21 @@ return [
         /*
          * Application Service Providers...
          */
-        'AbuseIO\Providers\AppServiceProvider',
-        'AbuseIO\Providers\BusServiceProvider',
-        'AbuseIO\Providers\ConfigServiceProvider',
-        'AbuseIO\Providers\ContactServiceProvider',
-        'AbuseIO\Providers\HelperServiceProvider',
-        'AbuseIO\Providers\RouteServiceProvider',
-        'AbuseIO\Providers\SystemAdminManagerProvider',
-        'AbuseIO\Providers\ValidationsServiceProvider',
+        AbuseIO\Providers\AppServiceProvider::class,
+        AbuseIO\Providers\BusServiceProvider::class,
+        AbuseIO\Providers\ConfigServiceProvider::class,
+        AbuseIO\Providers\ContactServiceProvider::class,
+        AbuseIO\Providers\HelperServiceProvider::class,
+        AbuseIO\Providers\RouteServiceProvider::class,
+        AbuseIO\Providers\SystemAdminManagerProvider::class,
+        AbuseIO\Providers\ValidationsServiceProvider::class,
+        //AbuseIO\Providers\RepositoryServiceProvider::class,
+        AbuseIO\Providers\BreadcrumbsServiceProvider::class,
+
         'Chumper\Zipper\ZipperServiceProvider',
         'Sorskod\Larasponse\LarasponseServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
-        AbuseIO\Providers\BreadcrumbsServiceProvider::class,
+        Stevebauman\EloquentTable\EloquentTableServiceProvider::class,
 
         /*
          * Developer Providers
