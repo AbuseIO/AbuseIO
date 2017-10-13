@@ -38,7 +38,7 @@
             <dt>{{ trans('users.linked_account') }}</dt>
             <dd>{{ $account->name }}</dd>
 
-            <dt>{{ trans_choice('misc.roles', sizeof($roles)) }}</dt>
+            <dt>{{ trans_choice('misc.role', sizeof($roles)) }}</dt>
             <dd>
                 @foreach ($roles as $role)
                 <span class="label label-default">{{ $role->name }}</span>

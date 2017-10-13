@@ -57,6 +57,7 @@ return [
     'button.read'           => 'Read',
     'button.unread'         => 'Unread',
     'button.activate'       => 'Activate',
+    'button.search'         => 'Search',
 
     // Miscellaneous
     'all'                                 => 'All',
@@ -91,7 +92,7 @@ return [
     'text'                                => 'Text',
     'both'                                => 'Both',
     'uri'                                 => 'URI / Path',
-    'roles'                               => 'Role|Roles',
+    'role'                                => 'Role|Roles',
     'active'                              => 'Active',
     'inactive'                            => 'Inactive',
     'select_one'                          => 'Select one',

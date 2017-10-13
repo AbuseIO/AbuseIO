@@ -43,7 +43,7 @@
         {!! Form::hidden('account_id', $auth_user->account->id) !!}
     @endif
     <div class="col-sm-4 form-group @if ($errors->has('roles')) has-error @endif">
-        {!! Form::label('roles', trans_choice('misc.roles', 2)) !!}
+        {!! Form::label('roles', trans_choice('misc.role', 2)) !!}
         {!! Form::select('roles[]', $roles, $selected_roles, ['class' => 'form-control', 'multiple' => 'multiple', 'data-lpignore' => 'true']) !!}
         @if ($errors->has('roles')) <p class="help-block">{{ $errors->first('roles') }}</p> @endif
     </div>

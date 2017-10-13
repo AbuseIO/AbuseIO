@@ -17,7 +17,7 @@
             {!! Form::label('account_id', ucfirst(trans_choice('misc.account', 2)), ['class' => 'control-label']) !!}
             {!! Form::select('account_id', $accounts, $search_options['account_id'], ['class' => 'form-control input-sm', 'data-lpignore' => 'true']) !!}
         </div>
-        {!! Form::button('<i class="fa fa-search" aria-hidden="true"></i> '. trans('misc.search'), ['type' => 'submit', 'class' => 'btn btn-sm btn-success']) !!}
+        {!! Form::button('<i class="fa fa-search" aria-hidden="true"></i> '. trans('misc.button.search'), ['type' => 'submit', 'class' => 'btn btn-sm btn-success']) !!}
         {!! Form::button('<i class="fa fa-undo" aria-hidden="true"></i> '. trans('misc.button.reset'), ['id' =>'btnResetSubmit', 'type' => 'submit', 'class' => 'btn btn-sm btn-default']) !!}
         {!! Form::close() !!}
     </div>
