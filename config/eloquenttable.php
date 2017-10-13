@@ -43,8 +43,8 @@ return [
      */
     'default_sorting_icons' => [
 
-        'sort_class' => 'fa fa-sort',
-        'asc_sort_class' => 'fa fa-sort-asc',
+        'sort_class'      => 'fa fa-sort',
+        'asc_sort_class'  => 'fa fa-sort-asc',
         'desc_sort_class' => 'fa fa-sort-desc',
 
     ],

@@ -5,8 +5,8 @@ namespace AbuseIO\Models;
 use AbuseIO\Traits\InstanceComparable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Symfony\Component\HttpFoundation\File\File;
 use Stevebauman\EloquentTable\TableTrait;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class Account.

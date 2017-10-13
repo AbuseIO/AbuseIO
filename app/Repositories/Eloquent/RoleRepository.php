@@ -7,8 +7,7 @@ use AbuseIO\Repositories\AbstractRepository;
 use AbuseIO\Repositories\Contracts\RoleRepositoryInterface;
 
 /**
- * Class RoleRepository
- * @package AbuseIO\Repositories
+ * Class RoleRepository.
  */
 class RoleRepository extends AbstractRepository implements RoleRepositoryInterface
 {
@@ -74,7 +73,7 @@ class RoleRepository extends AbstractRepository implements RoleRepositoryInterfa
 
         // Sort the list
         $field = (empty($sortFields[0]) || is_null($sortFields[0])) ? 'id' : $sortFields[0];
-        $sort  = (empty($sortFields[1]) || is_null($sortFields[1])) ? 'asc' : $sortFields[1];
+        $sort = (empty($sortFields[1]) || is_null($sortFields[1])) ? 'asc' : $sortFields[1];
 
         $this->model = $this->model->orderBy($field, $sort);
 
