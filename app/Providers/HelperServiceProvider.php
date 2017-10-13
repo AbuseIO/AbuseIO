@@ -22,6 +22,7 @@ class HelperServiceProvider extends ServiceProvider
         'inetPtoi',
         'isValidRegex',
         'linkToRouteHtml',
+        'uctrans',
     ];
 
     /**
