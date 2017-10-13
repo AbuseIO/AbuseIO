@@ -21,6 +21,9 @@ class CheckPermission
      */
     public function handle($request, Closure $next, $permission = null)
     {
+        // Auth user: $request->user();
+        // isSystemAccount: $request->user()->account->isSystemAccount()
+        //dd($request->segments());
         if (!app('Illuminate\Contracts\Auth\Guard')->guest()) {
             if ($request->user()->can($permission)) {
                 return $next($request);

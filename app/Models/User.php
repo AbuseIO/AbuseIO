@@ -247,7 +247,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public static function checkAccountAccess($model_id, Account $account)
     {
-        // Early return when we are in the system account
+        /**
+         * Early return when we are in the system account.
+         * SystemAccount may access all entities.
+         */
         if ($account->isSystemAccount()) {
             return true;
         }
@@ -277,7 +280,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function mayLogin(&$messages)
     {
         $account = $this->account;
-        // First user is always allowed to login, early return
+        // First user is always allowed to login, early return.
         if ($account->isSystemAccount()) {
             return true;
         }

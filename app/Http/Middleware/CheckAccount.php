@@ -10,6 +10,8 @@ use Log;
 
 /**
  * Class CheckAccount.
+ *
+ * Checks if the current model is within the scope of the authenticated Account.
  */
 class CheckAccount
 {
@@ -91,7 +93,7 @@ class CheckAccount
      */
     private function resolveModelId($request)
     {
-        // use the correct segment
+        // Use the correct segment.
         if (property_exists($request, 'api_account')) {
             $model_id = $request->segment(self::API_ID_SEGMENT);
         } else {
@@ -112,7 +114,7 @@ class CheckAccount
     {
         $this->resolveModelId($this->request);
 
-        if (!empty($this->model_id) && preg_match('/\d+/', $this->model_id)) {
+        if (!empty($this->model_id) && is_int($this->model_id)) {
             return true;
         }
 

@@ -214,7 +214,7 @@ class UsersController extends Controller
         }
 
         return Redirect::route('admin.users.show', $user->id)
-                       ->with('message', 'User "'.$user->fullName().'" has been created.');
+                       ->with('message', trans('users.message.created', ['user' => $user->fullName()]));
     }
 
     /**
@@ -246,7 +246,7 @@ class UsersController extends Controller
         $user->roles()->sync($formFields['roles']);
 
         return Redirect::route('admin.users.show', $user->id)
-                       ->with('message', 'User "'.$user->fullName().'" has been updated.');
+            ->with('message', trans('users.message.updated', ['user' => $user->fullName()]));
     }
 
     /**
@@ -259,13 +259,13 @@ class UsersController extends Controller
     public function enable(User $user)
     {
         if (!$this->user->mayEnable($this->auth_user)) {
-            return back()->with('message', 'User is not authorized to enable user "'.$user->fullName().'"');
+            return back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.enable')]));
         }
 
         $user->disabled = false;
         $user->save();
 
-        return back()->with('message', 'User "'.$user->fullName().'" has been enabled.');
+        return back()->with('message', trans('users.message.enabled', ['user' => $user->fullName()]));
     }
 
     /**
@@ -278,13 +278,13 @@ class UsersController extends Controller
     public function disable(User $user)
     {
         if (!$this->user->mayEnable($this->auth_user)) {
-            return back()->with('message', 'User is not authorized to disable user "'.$user->fullName().'"');
+            return back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.disable')]));
         }
 
         $user->disabled = true;
         $user->save();
 
-        return back()->with('message', 'User "'.$user->fullName().'" has been disabled.');
+        return back()->with('message', trans('users.message.disabled', ['user' => $user->fullName()]));
     }
 
     /**
@@ -298,16 +298,16 @@ class UsersController extends Controller
     {
         // Do not allow our own user to be destroyed.
         if ($user->is($this->auth_user)) {
-            return Redirect::back()->with('message', 'Not allowed to delete yourself.');
+            return Redirect::back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.delete')]));
         }
 
-        // Save, so we can show it in the snackbar.
+        // Save the username, so we can show it in the snackbar.
         $userName = $user->fullName();
 
         $user->delete();
 
         return Redirect::route('admin.users.index')
-                       ->with('message', 'User "'.$userName.'" has been deleted.');
+            ->with('message', trans('users.message.deleted', ['user' => $userName]));
     }
 
     /**
