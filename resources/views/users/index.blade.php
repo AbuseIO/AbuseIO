@@ -5,7 +5,6 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="row container-fluid">
-            <div class="pull-left"><h3>Users</h3></div>
             <div class="pull-right">
                 {!! link_to_route('admin.users.create', trans('users.button.new_user'), [ ], ['class' => 'btn btn-raised btn-info']) !!}
             </div>
