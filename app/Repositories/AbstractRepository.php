@@ -3,9 +3,7 @@
 namespace AbuseIO\Repositories;
 
 /**
- * Class AbstractRepository
- * @package AbuseIO\Repositories
- *
+ * Class AbstractRepository.
  */
 abstract class AbstractRepository
 {
@@ -20,7 +18,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Get the data
+     * Get the data.
      *
      * @return mixed
      */
@@ -44,7 +42,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Get the search values for a specified namespace
+     * Get the search values for a specified namespace.
      *
      * @param $namespace
      *
@@ -56,7 +54,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Save the search values for a specified namespace
+     * Save the search values for a specified namespace.
      *
      * @param $namespace
      * @param array $values
@@ -68,7 +66,7 @@ abstract class AbstractRepository
         \Auth::user()->setOption($namespace, json_encode($values));
     }
 
-    /**
+    /*
      * Magic method to call all other Model methods
      *
      * @param $method

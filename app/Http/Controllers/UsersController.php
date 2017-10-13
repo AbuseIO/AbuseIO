@@ -4,8 +4,8 @@ namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\UserFormRequest;
 use AbuseIO\Models\Account;
-use AbuseIO\Models\User;
 use AbuseIO\Models\Role;
+use AbuseIO\Models\User;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\UserTransformer;
 use Config;
@@ -19,13 +19,13 @@ use Redirect;
  */
 class UsersController extends Controller
 {
-    /**
+    /*
      * Load Traits
      */
     use Api;
 
     /**
-     * @var User $user
+     * @var User
      */
     private $user;
 
@@ -42,7 +42,7 @@ class UsersController extends Controller
     /**
      * UsersController constructor.
      *
-     * @param User $user
+     * @param User    $user
      * @param Manager $fractal
      * @param Request $request
      */
@@ -66,8 +66,8 @@ class UsersController extends Controller
                     'store',
                     'export',
                     'apiIndex',
-                    'apiShow'
-                ]
+                    'apiShow',
+                ],
             ]
         );
     }
@@ -129,8 +129,8 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        $data    = $this->handleShow($user);
-        $user    = $data['user'];
+        $data = $this->handleShow($user);
+        $user = $data['user'];
         $account = $data['account'];
 
         $locale = Config::get('app.locales');
@@ -214,14 +214,14 @@ class UsersController extends Controller
         }
 
         return Redirect::route('admin.users.show', $user->id)
-                       ->with('message', 'User "'. $user->fullName() .'" has been created.');
+                       ->with('message', 'User "'.$user->fullName().'" has been created.');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param UserFormRequest $userForm
-     * @param User $user
+     * @param User            $user
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -246,7 +246,7 @@ class UsersController extends Controller
         $user->roles()->sync($formFields['roles']);
 
         return Redirect::route('admin.users.show', $user->id)
-                       ->with('message', 'User "'. $user->fullName() .'" has been updated.');
+                       ->with('message', 'User "'.$user->fullName().'" has been updated.');
     }
 
     /**
@@ -258,14 +258,14 @@ class UsersController extends Controller
      */
     public function enable(User $user)
     {
-        if ( ! $this->user->mayEnable($this->auth_user)) {
-            return back()->with('message', 'User is not authorized to enable user "' . $user->fullName() . '"');
+        if (!$this->user->mayEnable($this->auth_user)) {
+            return back()->with('message', 'User is not authorized to enable user "'.$user->fullName().'"');
         }
 
         $user->disabled = false;
         $user->save();
 
-        return back()->with('message', 'User "' . $user->fullName() . '" has been enabled.');
+        return back()->with('message', 'User "'.$user->fullName().'" has been enabled.');
     }
 
     /**
@@ -277,14 +277,14 @@ class UsersController extends Controller
      */
     public function disable(User $user)
     {
-        if ( ! $this->user->mayEnable($this->auth_user)) {
-            return back()->with('message', 'User is not authorized to disable user "' . $user->fullName() . '"');
+        if (!$this->user->mayEnable($this->auth_user)) {
+            return back()->with('message', 'User is not authorized to disable user "'.$user->fullName().'"');
         }
 
         $user->disabled = true;
         $user->save();
 
-        return back()->with('message', 'User "' . $user->fullName() . '" has been disabled.');
+        return back()->with('message', 'User "'.$user->fullName().'" has been disabled.');
     }
 
     /**
@@ -307,11 +307,12 @@ class UsersController extends Controller
         $user->delete();
 
         return Redirect::route('admin.users.index')
-                       ->with('message', 'User "'. $userName .'" has been deleted.');
+                       ->with('message', 'User "'.$userName.'" has been deleted.');
     }
 
     /**
-     * Return all users for API request
+     * Return all users for API request.
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiIndex()
@@ -320,7 +321,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Fetch a single user for API request
+     * Fetch a single user for API request.
      *
      * @param User $user
      *
@@ -360,7 +361,7 @@ class UsersController extends Controller
 
         // Sort the list
         $field = (empty(Input::get('field')) || is_null(Input::get('field'))) ? 'id' : Input::get('field');
-        $sort  = (empty(Input::get('sort')) || is_null(Input::get('sort'))) ? 'asc' : Input::get('sort');
+        $sort = (empty(Input::get('sort')) || is_null(Input::get('sort'))) ? 'asc' : Input::get('sort');
 
         $this->user = $this->user->orderBy($field, $sort);
 
