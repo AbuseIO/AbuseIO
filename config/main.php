@@ -60,7 +60,7 @@ return [
     ],
 
     'ash' => [
-        'url'                               => env('APP_URL', 'http://localhost') . '/ash/',
+        'url'                               => env('APP_URL', 'http://localhost').'/ash/',
     ],
 
     'external' => [

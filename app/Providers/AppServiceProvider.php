@@ -41,7 +41,6 @@ class AppServiceProvider extends ServiceProvider
         // force the base url to the configured APP_URL
         // this helps when AbuseIO is behind a proxy
         URL::forceRootUrl(Config::get('app.url'));
-
     }
 
     /**
