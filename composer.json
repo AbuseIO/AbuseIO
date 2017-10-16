@@ -25,9 +25,17 @@
 	},
 	"require": {
 		"php": ">=5.5.9",
+
 		"ext-mcrypt": "*",
 		"ext-intl" : "*",
 		"ext-curl" : "*",
+                "ext-bcmath": "*",
+                "ext-mailparse" : "*",
+                "ext-mbstring" : "*",
+                "ext-zip": "*",
+                "ext-json" : "*",
+                "ext-libxml" : "*",
+
 		"laravel/framework": "5.1.45",
 		"laravelcollective/html": "~5.0",
 		"wpb/string-blade-compiler": "3.0.*",
