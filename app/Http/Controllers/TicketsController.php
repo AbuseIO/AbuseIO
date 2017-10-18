@@ -440,7 +440,8 @@ class TicketsController extends Controller
 
         // we receive the remote AbuseIO ticket so we lookup the matching
         // local ticket
-        $remoteTicket = Ticket::create($ticketForm->all());
+        $remoteTicket = new Ticket();
+        $remoteTicket->fill($ticketForm->all());
         $localTicket = Ticket::where('remote_api_token', '=', $remoteTicket->api_token)->first();
 
         if (!$localTicket) {
