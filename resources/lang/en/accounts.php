@@ -14,7 +14,7 @@ return [
 
     // Miscellaneous
     'no_accounts'               => 'No accounts',
-    'linked_users'              => 'Linked users',
+    'members'                   => 'Members',
     'first_name'                => 'First name',
     'last_name'                 => 'Last name',
     'no_edit_permissions'       => 'User is not authorized to edit this account.',

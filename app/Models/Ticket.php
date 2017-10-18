@@ -5,6 +5,7 @@ namespace AbuseIO\Models;
 use AbuseIO\Jobs\FindContact;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Stevebauman\EloquentTable\TableTrait;
 
 /**
  * Class Ticket.
@@ -45,7 +46,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Ticket extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, TableTrait;
 
     /**
      * The database table used by the model.

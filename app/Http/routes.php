@@ -49,7 +49,13 @@ Route::group(
                 return Redirect::to('/admin/home');
             }
         );
-        Route::get('/home', 'HomeController@index');
+        Route::get(
+            '/home',
+            [
+                'as'   => 'home.index',
+                'uses' => 'HomeController@index',
+            ]
+        );
 
         // Version check
         Route::get(

@@ -1,21 +1,21 @@
 <div class="form-group @if ($errors->has('first_name')) has-error @endif">
     {!! Form::label('first_name', trans('accounts.first_name').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('first_name', null, ['class' => 'form-control', 'data-lpignore' => 'true']) !!}
         @if ($errors->has('first_name')) <p class="help-block">{{ $errors->first('first_name') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('last_name')) has-error @endif">
     {!! Form::label('last_name', trans('accounts.last_name').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-       {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+       {!! Form::text('last_name', null, ['class' => 'form-control', 'data-lpignore' => 'true']) !!}
        @if ($errors->has('last_name')) <p class="help-block">{{ $errors->first('last_name') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('email')) has-error @endif">
     {!! Form::label('email', trans('misc.email').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::email('email', null, ['class' => 'form-control']) !!}
+        {!! Form::email('email', null, ['class' => 'form-control', 'data-lpignore' => 'true']) !!}
         @if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
     </div>
 </div>

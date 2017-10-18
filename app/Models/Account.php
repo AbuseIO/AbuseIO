@@ -7,6 +7,7 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
+use Stevebauman\EloquentTable\TableTrait;
 
 /**
  * Class Account.
@@ -24,7 +25,7 @@ use Log;
  */
 class Account extends Model
 {
-    use SoftDeletes, InstanceComparable;
+    use SoftDeletes, InstanceComparable, TableTrait;
 
     /**
      * The database table used by the model.

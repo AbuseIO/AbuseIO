@@ -4,6 +4,7 @@ namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Stevebauman\EloquentTable\TableTrait;
 
 /**
  * Class Netblock.
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Netblock extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, TableTrait;
 
     /**
      * The database table used by the model.

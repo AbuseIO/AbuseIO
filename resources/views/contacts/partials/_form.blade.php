@@ -1,21 +1,21 @@
 <div class="form-group @if ($errors->has('reference')) has-error @endif">
     {!! Form::label('reference', trans('contacts.reference').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::text('reference', null, ['class' => 'form-control']) !!}
+        {!! Form::text('reference', null, ['class' => 'form-control', 'data-lpignore' => 'true']) !!}
         @if ($errors->has('reference')) <p class="help-block">{{ $errors->first('reference') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('name')) has-error @endif">
     {!! Form::label('name', trans('misc.name').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('name', null, ['class' => 'form-control', 'data-lpignore' => 'true']) !!}
         @if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('email')) has-error @endif">
     {!! Form::label('email', trans('misc.email').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::email('email', null, ['class' => 'form-control', 'multiple' => 'true']) !!}
+        {!! Form::email('email', null, ['class' => 'form-control', 'multiple' => 'true', 'data-lpignore' => 'true']) !!}
         @if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
     </div>
 </div>
@@ -24,7 +24,7 @@
     <div class="col-sm-10">
         @foreach ($notificationService->listAll() as $method)
             <div class="checkbox">
-                <label style="color:initial">{!! Form::checkbox('notificationMethods[]', $method, $notificationService->hasNotificationMethod($contact, $method)) !!} {{ $method }}</label>
+                <label style="color:initial">{!! Form::checkbox('notificationMethods[]', $method, $notificationService->hasNotificationMethod($contact, $method), ['data-lpignore' => 'true']) !!} {{ $method }}</label>
             </div>
         @endforeach
         @if ($errors->has('notificationMethods')) <p class="help-block"> {{ trans('contacts.no_notification_methods') }}</p> @endif
@@ -34,9 +34,9 @@
     {!! Form::label('api_host', trans('contacts.api_host').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
         <div class="input-group">
-            {!! Form::url('api_host', null, ['class' => 'form-control', 'placeholder'=> 'http://abuseio.domain.tld:1234/api/v1', 'id' => 'api_host_url']) !!}
+            {!! Form::url('api_host', null, ['class' => 'form-control', 'placeholder'=> 'http://abuseio.domain.tld:1234/api/v1', 'id' => 'api_host_url', 'data-lpignore' => 'true']) !!}
             <span class="input-group-btn">
-                <button id="checkApiURL" title="{!! trans('misc.refresh') !!}" class="btn"  type="button">
+                <button id="checkApiURL" title="{!! trans('misc.refresh') !!}" class="btn" type="button">
                     <i id="checkApiUrlGlyph" class="glyphicon @if (!empty($contact->api_host)) glyphicon-ok @else glyphicon-question-sign @endif"></i>
                 </button>
             </span>
@@ -47,14 +47,14 @@
 <div class="form-group @if ($errors->has('token')) has-error @endif">
     {!! Form::label('token', trans('misc.api_key').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::text('token', null, ['class' => 'form-control']) !!}
+        {!! Form::text('token', null, ['class' => 'form-control', 'data-lpignore' => 'true']) !!}
         @if ($errors->has('token')) <p class="help-block">{{ $errors->first('token') }}</p> @endif
     </div>
 </div>
 <div class="form-group">
     {!! Form::label('enabled', trans('misc.status').':', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
-        {!! Form::select('enabled', [1 => trans('misc.enabled'), 0 => trans('misc.disabled')], null, ['class' => 'form-control']) !!}
+        {!! Form::select('enabled', [1 => trans('misc.enabled'), 0 => trans('misc.disabled')], null, ['class' => 'form-control', 'data-lpignore' => 'true']) !!}
     </div>
 </div>
 

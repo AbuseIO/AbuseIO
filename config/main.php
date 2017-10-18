@@ -9,7 +9,14 @@ return [
 
     'interface' => [
         'language'   => 'en',
-        'navigation' => ['home', 'contacts', 'netblocks', 'domains', 'tickets', 'analytics'],
+        'navigation' => [
+            'home'      => 'fa-home',
+            'contacts'  => 'fa-users',
+            'netblocks' => 'fa-gg',
+            'domains'   => 'fa-globe',
+            'tickets'   => 'fa-ticket',
+            'analytics' => 'fa-bar-chart',
+        ],
     ],
 
     'emailparser' => [

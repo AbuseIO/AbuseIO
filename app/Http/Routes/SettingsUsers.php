@@ -13,11 +13,11 @@ Route::group(
     ],
     function () {
         // Search users
-        Route::get(
-            'search/{one?}/{two?}/{three?}',
+        route::put(
+            '',
             [
-                'middleware' => 'permission:users_view',
-                'as'         => 'search',
+                'middleware' => 'permission:accounts_view',
+                'as'         => 'index',
                 'uses'       => 'UsersController@search',
             ]
         );

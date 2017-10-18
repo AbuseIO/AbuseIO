@@ -5,6 +5,7 @@ namespace AbuseIO\Models;
 use AbuseIO\Http\Requests\ContactFormRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Stevebauman\EloquentTable\TableTrait;
 
 /**
  * Class Contact.
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Contact extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, TableTrait;
 
     /**
      * The database table used by the model.

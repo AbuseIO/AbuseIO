@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Stevebauman\EloquentTable\TableTrait;
 
 /**
  * Class User.
@@ -29,7 +30,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, SoftDeletes, InstanceComparable;
+    use Authenticatable, CanResetPassword, SoftDeletes, InstanceComparable, TableTrait;
 
     /**
      * The database table used by the model.
@@ -246,7 +247,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public static function checkAccountAccess($model_id, Account $account)
     {
-        // Early return when we are in the system account
+        /*
+         * Early return when we are in the system account.
+         * SystemAccount may access all entities.
+         */
         if ($account->isSystemAccount()) {
             return true;
         }
@@ -276,7 +280,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function mayLogin(&$messages)
     {
         $account = $this->account;
-        // First user is always allowed to login, early return
+        // First user is always allowed to login, early return.
         if ($account->isSystemAccount()) {
             return true;
         }
@@ -380,5 +384,30 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
 
         return $result;
+    }
+
+    /**
+     * Get the search values for a specified namespace.
+     *
+     * @param $namespace
+     *
+     * @return mixed
+     */
+    public static function getSearchValues($namespace)
+    {
+        return json_decode(\Auth::user()->getOption($namespace), true);
+    }
+
+    /**
+     * Save the search values for a specified namespace.
+     *
+     * @param $namespace
+     * @param array $values
+     *
+     * @return void
+     */
+    public static function saveSearchValues($namespace, $values = [])
+    {
+        \Auth::user()->setOption($namespace, json_encode($values));
     }
 }

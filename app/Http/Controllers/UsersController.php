@@ -9,177 +9,119 @@ use AbuseIO\Models\User;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\UserTransformer;
 use Config;
-use Form;
 use Illuminate\Http\Request;
+use Input;
 use League\Fractal\Manager;
-use Log;
 use Redirect;
-use yajra\Datatables\Datatables;
 
 /**
  * Class UsersController.
  */
 class UsersController extends Controller
 {
+    /*
+     * Load Traits
+     */
     use Api;
+
+    /**
+     * @var User
+     */
+    private $user;
+
+    /**
+     * @var array
+     */
+    public $searchFields = [
+        'id'         => null,
+        'first_name' => null,
+        'last_name'  => null,
+        'account_id' => -1,
+    ];
 
     /**
      * UsersController constructor.
      *
+     * @param User    $user
      * @param Manager $fractal
      * @param Request $request
      */
-    public function __construct(Manager $fractal, Request $request)
+    public function __construct(User $user, Manager $fractal, Request $request)
     {
         parent::__construct();
 
-        // initialize the Api methods
+        $this->user = $user;
+
+        // Initialize the API methods.
         $this->apiInit($fractal, $request);
 
-        // is the logged in account allowed to execute an action on the User
-        $this->middleware('checkaccount:User', ['except' => ['search', 'index', 'create', 'store', 'export', 'apiIndex', 'apiShow']]);
+        // Is the logged in account allowed to execute an action in this controller.
+        $this->middleware(
+            'checkaccount:User',
+            [
+                'except' => [
+                    'search',
+                    'index',
+                    'create',
+                    'store',
+                    'export',
+                    'apiIndex',
+                    'apiShow',
+                ],
+            ]
+        );
     }
 
     /**
-     * Process datatables ajax request.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function search()
-    {
-        $auth_account = $this->auth_user->account;
-
-        $users = User::select('users.*', 'accounts.name as account_name')
-            ->leftJoin('accounts', 'accounts.id', '=', 'users.account_id');
-
-        if (!$auth_account->isSystemAccount()) {
-            $users = $users->where('accounts.id', '=', $auth_account->id);
-        }
-
-        return Datatables::of($users)
-            ->addColumn(
-                'actions',
-                function ($user) {
-                    $actions = Form::open(
-                        [
-                            'route'  => ['admin.users.destroy', $user->id],
-                            'method' => 'DELETE',
-                            'class'  => 'form-inline',
-                        ]
-                    );
-                    $actions .= ' <a href="users/'.$user->id.
-                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
-                        trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="users/'.$user->id.
-                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
-                        trans('misc.button.edit').'</a> ';
-                    if ($user->disabled) {
-                        $actions .= ' <a href="users/'.$user->id.
-                            '/enable" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok-circle"></i> '.
-                            trans('misc.button.enable').'</a> ';
-                    } else {
-                        $actions .= ' <a href="users/'.$user->id.
-                            '/disable" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-ban-circle"></i> '.
-                            trans('misc.button.disable').'</a> ';
-                    }
-                    $disabled = ($user->id == 1) ? ' disabled' : '';
-
-                    $actions .= Form::button(
-                        '<i class="glyphicon glyphicon-remove"></i> '.trans('misc.button.delete'),
-                        [
-                            'type'  => 'submit',
-                            'class' => 'btn btn-danger btn-xs'.$disabled,
-                        ]
-                    );
-                    $actions .= Form::close();
-
-                    return $actions;
-                }
-            )
-            ->make(true);
-    }
-
-    /**
-     * Display a listing of the resource.
+     * Display list of users.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users = User::paginate(10);
+        // Get saved search values.
+        $searchValues = User::getSearchValues('users.search');
 
-        return view('users.index')
-            ->with('users', $users)
-            ->with('auth_user', $this->auth_user);
+        // Only merge if there are saved values.
+        if (is_array($searchValues)) {
+            $this->searchFields = array_merge($this->searchFields, $searchValues);
+        }
+
+        $userList = $this->searchUsers();
+
+        return view('users.index', [
+            'users'          => $userList,
+            'auth_user'      => $this->auth_user,
+            'search_options' => $this->searchFields,
+            'accounts'       => Account::all()->pluck('name', 'id')->put(-1, 'All accounts')->sort(),
+        ]);
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function apiIndex()
-    {
-        $users = User::all();
-
-        return $this->respondWithCollection($users, new UserTransformer());
-    }
-
-    /**
-     * Show the form for creating a new resource.
+     * Search for users.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function search()
     {
-        $accounts = Account::lists('name', 'id');
-        $roles = Role::lists('name', 'id');
+        // Give the possible search fields a value and don't save _token and _method
+        $this->searchFields = array_merge($this->searchFields, Input::except(['_token', '_method']));
 
-        $locales = [];
-        foreach (Config::get('app.locales') as $locale => $locale_data) {
-            $locales[$locale] = $locale_data[0];
-        }
+        // Save the search values
+        User::saveSearchValues('users.search', $this->searchFields);
 
-        return view('users.create')
-            ->with('account_selection', $accounts)
-            ->with('selected', null)
-            ->with('locale_selection', $locales)
-            ->with('locale_selected', null)
-            ->with('disabled_checked', 0)
-            ->with('roles', $roles)
-            ->with('selected_roles', null)
-            ->with('auth_user', $this->auth_user);
+        $userList = $this->searchUsers();
+
+        return view('users.index', [
+            'users'          => $userList,
+            'auth_user'      => $this->auth_user,
+            'search_options' => $this->searchFields,
+            'accounts'       => Account::all()->pluck('name', 'id')->put(-1, 'All accounts')->sort(),
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param UserFormRequest $userForm
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(UserFormRequest $userForm)
-    {
-        $userData = $userForm->all();
-
-        // update data for the create method
-        if (gettype($userData['disabled']) == 'string') {
-            $userData['disabled'] = ($userData['disabled'] == 'true');
-        }
-
-        $user = User::create($userData);
-
-        // link the roles to the user
-        $roles = $userForm->get('roles');
-
-        if ($roles != null) {
-            $user->roles()->sync($roles);
-        }
-
-        return Redirect::route('admin.users.index')
-            ->with('message', 'User has been created');
-    }
-
-    /**
-     * Display the specified resource.
+     * Display the specified user.
      *
      * @param User $user
      *
@@ -202,7 +144,198 @@ class UsersController extends Controller
     }
 
     /**
-     * retrieve the necessary data for the show and apiShow functions.
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $locales = [];
+        foreach (Config::get('app.locales') as $locale => $localeData) {
+            $locales[$locale] = $localeData[0];
+        }
+
+        return view('users.create')
+            ->with('account_selection', Account::lists('name', 'id')->sort())
+            ->with('selected', null)
+            ->with('locale_selection', $locales)
+            ->with('locale_selected', null)
+            ->with('disabled_checked', 0)
+            ->with('roles', Role::lists('name', 'id')->sort())
+            ->with('selected_roles', null)
+            ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        $locales = [];
+        foreach (Config::get('app.locales') as $locale => $locale_data) {
+            $locales[$locale] = $locale_data[0];
+        }
+
+        return view('users.edit')
+            ->with('user', $user)
+            ->with('account_selection', Account::lists('name', 'id')->sort())
+            ->with('selected', $user->account_id)
+            ->with('locale_selection', $locales)
+            ->with('locale_selected', null)
+            ->with('disabled_checked', $user->disabled)
+            ->with('roles', Role::lists('name', 'id')->sort())
+            ->with('selected_roles', $user->roles->lists('id')->toArray())
+            ->with('auth_user', $this->auth_user);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param UserFormRequest $userForm
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(UserFormRequest $userForm)
+    {
+        $formFields = $userForm->all();
+
+        // Convert string to boolean.
+        $formFields['disabled'] = ($formFields['disabled'] === 'true');
+
+        $user = User::create($formFields);
+
+        // Link the roles to the user.
+        if ($formFields['roles'] != null) {
+            $user->roles()->sync($formFields['roles']);
+        }
+
+        return Redirect::route('admin.users.show', $user->id)
+                       ->with('message', trans('users.message.created', ['user' => $user->fullName()]));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param UserFormRequest $userForm
+     * @param User            $user
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UserFormRequest $userForm, User $user)
+    {
+        $formFields = $userForm->all();
+
+        // Convert string to boolean
+        $formFields['disabled'] = ($formFields['disabled'] === 'true');
+
+        if (empty($formFields['password'])) {
+            unset($formFields['password']);
+        }
+
+        // update the user with the data
+        $user->update($formFields);
+
+        // link the roles to the user
+        if ($formFields['roles'] == null) {
+            $formFields['roles'] = [];
+        }
+        $user->roles()->sync($formFields['roles']);
+
+        return Redirect::route('admin.users.show', $user->id)
+            ->with('message', trans('users.message.updated', ['user' => $user->fullName()]));
+    }
+
+    /**
+     * Enable the user.
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function enable(User $user)
+    {
+        if (!$this->user->mayEnable($this->auth_user)) {
+            return back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.enable')]));
+        }
+
+        $user->disabled = false;
+        $user->save();
+
+        return back()->with('message', trans('users.message.enabled', ['user' => $user->fullName()]));
+    }
+
+    /**
+     * Disable the user.
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function disable(User $user)
+    {
+        if (!$this->user->mayEnable($this->auth_user)) {
+            return back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.disable')]));
+        }
+
+        $user->disabled = true;
+        $user->save();
+
+        return back()->with('message', trans('users.message.disabled', ['user' => $user->fullName()]));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(User $user)
+    {
+        // Do not allow our own user to be destroyed.
+        if ($user->is($this->auth_user)) {
+            return Redirect::back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.delete')]));
+        }
+
+        // Save the username, so we can show it in the snackbar.
+        $userName = $user->fullName();
+
+        $user->delete();
+
+        return Redirect::route('admin.users.index')
+            ->with('message', trans('users.message.deleted', ['user' => $userName]));
+    }
+
+    /**
+     * Return all users for API request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex()
+    {
+        return $this->respondWithCollection(User::all(), new UserTransformer());
+    }
+
+    /**
+     * Fetch a single user for API request.
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiShow(User $user)
+    {
+        $data = $this->handleShow($user);
+
+        return $this->respondWithItem($data['user'], new UserTransformer());
+    }
+
+    /**
+     * Retrieve the necessary data for the show and apiShow functions.
      *
      * @param User $user
      *
@@ -216,144 +349,26 @@ class UsersController extends Controller
         ];
     }
 
-    /**
-     * @param User $user
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function apiShow(User $user)
+    public function searchUsers()
     {
-        $data = $this->handleShow($user);
-
-        return $this->respondWithItem($data['user'], new UserTransformer());
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        $accounts = Account::lists('name', 'id');
-        $roles = Role::lists('name', 'id');
-
-        $locales = [];
-        foreach (Config::get('app.locales') as $locale => $locale_data) {
-            $locales[$locale] = $locale_data[0];
+        // Search the users
+        foreach ($this->searchFields as $name => $value) {
+            if ($value != null && $value > -1) {
+                // null = empty and -1 for select inputs that are set to default
+                $this->user = $this->user->where($name, 'like', "%{$value}%");
+            }
         }
 
-        return view('users.edit')
-            ->with('user', $user)
-            ->with('account_selection', $accounts)
-            ->with('selected', $user->account_id)
-            ->with('locale_selection', $locales)
-            ->with('locale_selected', null)
-            ->with('disabled_checked', $user->disabled)
-            ->with('roles', $roles)
-            ->with('selected_roles', $user->roles->lists('id')->toArray())
-            ->with('auth_user', $this->auth_user);
-    }
+        // Sort the list
+        $field = (empty(Input::get('field')) || is_null(Input::get('field'))) ? 'id' : Input::get('field');
+        $sort = (empty(Input::get('sort')) || is_null(Input::get('sort'))) ? 'asc' : Input::get('sort');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UserFormRequest $userForm
-     * @param User            $user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UserFormRequest $userForm, User $user)
-    {
-        $userData = $userForm->all();
+        $this->user = $this->user->orderBy($field, $sort);
 
-        // massage data
-        if (gettype($userData['disabled']) == 'string') {
-            $userData['disabled'] = ($userData['disabled'] == 'true');
+        if (\Auth::user()->account->isSystemAccount()) {
+            return $this->user->paginate(15);
+        } else {
+            return $this->user->where('account_id', '=', \Auth::user()->account->id)->paginate(15);
         }
-
-        Log::info($userData);
-
-        if (empty($userData['password'])) {
-            unset($userData['password']);
-        }
-
-        // update the user with the data
-        $user->update($userData);
-
-        // link the roles to the user
-        $roles = $userForm->get('roles');
-        if ($roles == null) {
-            $roles = [];
-        }
-        $user->roles()->sync($roles);
-
-        return Redirect::route('admin.users.show', $user->id)
-            ->with('message', 'User has been updated.');
-    }
-
-    /**
-     * Enable the user.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function enable(User $user)
-    {
-        if (!$user->mayEnable($this->auth_user)) {
-            return Redirect::route('admin.users.index')
-                ->with('message', 'User is not authorized to enable user "'.$user->fullName().'"');
-        }
-
-        $user->disabled = false;
-        $user->save();
-
-        return Redirect::route('admin.users.index')
-            ->with('message', 'User "'.$user->fullName().'" has been enabled');
-    }
-
-    /**
-     * Disable the user.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function disable(User $user)
-    {
-        if (!$user->mayDisable($this->auth_user)) {
-            return Redirect::route('admin.users.index')
-                ->with('message', 'User is not authorized to disable user "'.$user->fullName().'"');
-        }
-
-        $user->disabled = true;
-        $user->save();
-
-        return Redirect::route('admin.users.index')
-            ->with('message', 'User "'.$user->fullName().'" has been disabled');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        // Do not allow our own user to be destroyed.
-        if ($user->is($this->auth_user)) {
-            return Redirect::back()
-                ->with('message', 'Not allowed to delete current.');
-        }
-
-        $user->delete();
-
-        return Redirect::route('admin.users.index')
-            ->with('message', 'User has been deleted.');
     }
 }

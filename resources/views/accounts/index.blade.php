@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<h1 class="page-header">{{ trans('misc.nav_accounts') }}</h1>
+{{--<h1>{{ trans('misc.nav_accounts') }}</h1>--}}
 <div class="row">
     <div class="col-md-3 col-md-offset-9 text-right">
         @if ($auth_user->account->isSystemAccount() )

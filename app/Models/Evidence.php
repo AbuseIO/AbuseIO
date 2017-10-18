@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 use PhpMimeMailParser\Parser as MimeParser;
+use Stevebauman\EloquentTable\TableTrait;
 use Storage;
 
 /**
@@ -21,7 +22,7 @@ use Storage;
  */
 class Evidence extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, TableTrait;
 
     /**
      * The database table used by the model.

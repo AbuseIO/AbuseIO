@@ -5,6 +5,7 @@ namespace AbuseIO\Models;
 use AbuseIO\Traits\InstanceComparable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Stevebauman\EloquentTable\TableTrait;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
@@ -23,7 +24,7 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class Brand extends Model
 {
-    use SoftDeletes, InstanceComparable;
+    use SoftDeletes, InstanceComparable, TableTrait;
 
     /**
      * The database table used by the model.

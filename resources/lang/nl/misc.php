@@ -97,7 +97,7 @@ return [
     'login'                          => 'Inloggen',
     'refresh'                        => 'Ververs',
     'copy_to_clipboard'              => 'Kopieer naar klembord',
-    'please_press_ctrl_cmd_to_copy'  => 'Gebruik Control+C om te kopieren',
+    'select_and_press_ctrl_c'        => 'Om te kopieren, selecteer de sleutel en druk op CTRL-C.',
     'copied'                         => 'Gekopieerd',
     'api-key'                        => 'Api key',
     'new_tickets'                    => 'Nieuwe tickets',

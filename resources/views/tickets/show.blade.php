@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h1 class="page-header">{{ trans('tickets.header.detail') }}: {{ $ticket->id }}</h1>
+{{--<h1 class="page-header">{{ trans('tickets.header.detail') }}: {{ $ticket->id }}</h1>--}}
 <div class="row">
     <div class="col-md-8 col-md-offset-4 text-right">
         <div class="btn-group" role="group" aria-label="...">
