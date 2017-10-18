@@ -57,6 +57,8 @@
         {!! Form::select('enabled', [1 => trans('misc.enabled'), 0 => trans('misc.disabled')], null, ['class' => 'form-control', 'data-lpignore' => 'true']) !!}
     </div>
 </div>
+
+
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         {!! Form::submit($submit_text, ['class'=>'btn btn-success']) !!}

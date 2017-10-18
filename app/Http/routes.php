@@ -1,5 +1,6 @@
 <?php
 
+
 Route::controllers(
     [
         'auth'     => 'Auth\AuthController',
