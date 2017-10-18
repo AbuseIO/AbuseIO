@@ -67,7 +67,7 @@ return [
     ],
 
     'ash' => [
-        'url'                               => env('ASH_URL', 'https://abuseio.isp.local/ash/'),
+        'url'                               => env('APP_URL', 'http://localhost').'/ash/',
     ],
 
     'external' => [
