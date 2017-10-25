@@ -1,18 +1,17 @@
 /**
- * Contains Javascript code that should be executed when the page is completely loaded.
+ * Contains Javascript code that should be executed when the document is ready.
  */
 $(document).ready(function() {
-    $(window).load(function() {
-        // Initialize Material Design
-        $.material.init();
+    // Initialize Material Design
+    $('body').bootstrapMaterialDesign();
 
-        if (msgSnack) {
-            $.snackbar({
-                content: '<div class="valign-center"><i class="material-icons">settings_applications</i>&nbsp;' + msgSnack + '</div>',
-                htmlAllowed: true
-            });
-        }
-    });
+
+    if (msgSnack) {
+        $.snackbar({
+            content: '<div class="valign-center"><i class="material-icons">settings_applications</i>&nbsp;' + msgSnack + '</div>',
+            htmlAllowed: true
+        });
+    }
 });
 
 /**

@@ -1,9 +1,55 @@
-/*Main content */
-.main {
-    padding-top: 84px;
-    padding-right: 20px;
-    padding-left: 20px;
+/*
+ * Move down content because we have a fixed navbar that is 3.5rem tall
+ */
+body {
+    padding-top: 3.5rem;
+    background-color: white;
 }
+
+/*
+ * Sidebar
+ */
+.sidebar {
+    position: fixed;
+    top: 3.5rem;
+    bottom: 0;
+    left: 0;
+    padding: 40px 0 0 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+}
+
+/* Sidebar navigation */
+.sidebar .nav {
+    margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+    width: 100%;
+}
+
+.sidebar .nav-item + .nav-item {
+    margin-left: 0;
+}
+
+.sidebar .nav-link {
+    border-radius: 0;
+}
+
+.bg-abuseio {
+    background-color: #2196f3;
+}
+
+
+
+
+
+
+
+
+
+
 
 .col-centered {
     float: none;
@@ -29,65 +75,9 @@
 /* Helper classes for more vertical spacing */
 .top-buffer { margin-top: 20px; }
 
-/* No the ASH page we want less padding on the top */
-body.ash { padding-top: 20px; }
-
-/* ASH Logo styles */
-.img-responsive {
-    max-width: 250px;
-}
-.img-inline {
-    display: inline;
-}
-
 .breadcrumb {
     background-color: transparent;
     padding-left: 0;
-}
-
-/* Side Menu */
-.menu {
-    position: fixed;
-    top: 64px;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    background-color: #f5f5f5;
-    border-right: 1px solid #eee;
-    overflow: auto;
-    padding: 0;
-}
-
-.menu, .menu * {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-}
-
-.menu ul {
-    padding: 0;
-    margin: 20px 0;
-}
-
-.menu ul li {
-    list-style: none;
-    padding: 20px -10 20px 30px;
-    font-size: 15px;
-    font-weight: normal;
-    cursor: pointer;
-}
-
-.menu ul li.active {
-    background-color: #dedede;
-    position: relative;
-}
-
-.menu ul li a {
-    color: rgb(51, 51, 51);
-    text-decoration: none;
-    display:block;
-    position: relative;
-    padding: 20px;
 }
 
 /* Customize information lists */
@@ -131,9 +121,18 @@ body.ash { padding-top: 20px; }
     align-items: center;
 }
 
-/**
+/*
  * Fix issue where the carot is too big in the search form
  */
 #search-form .dropdownjs::after {
     font-size: unset;
+}
+
+/*
+ * Prevent material icons from making the navbar higher
+ */
+.material-icons {
+    float: left;
+    margin-top: -2px;
+    margin-right: 5px;
 }
