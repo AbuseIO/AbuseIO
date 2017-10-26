@@ -81,7 +81,7 @@ class ContactFormRequest extends Request
         if (!Auth::user()->hasRole('admin') || !Auth::user()->account->isSystemAccount()) {
             $this->getInputSource()->add(
                 [
-                    'account_id' => (int)Auth::user()->account->id,
+                    'account_id' => (int) Auth::user()->account->id,
                 ]
             );
         }
