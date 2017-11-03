@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ trans('ash.title') }} - {{ trans('ash.ticket') }} {{ $ticket->id }}</title>
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/flag-icon-min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
-    <script src="{{ asset('/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+    <link href="{{ ashAsset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ ashAsset('/css/flag-icon-min.css') }}" rel="stylesheet">
+    <link href="{{ ashAsset('/css/custom.css') }}" rel="stylesheet">
+    <script src="{{ ashAsset('/js/jquery.min.js') }}"></script>
+    <script src="{{ ashAsset('/js/bootstrap.min.js') }}"></script>
 </head>
 <body class="ash">
     <div class="container">
@@ -207,8 +207,6 @@
                     <p>{{ trans('ash.communication.closed') }}</p>
                 @endif
             </div>
-
-
         </div>
     </div>
 </body>
