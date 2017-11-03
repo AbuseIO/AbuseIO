@@ -13,9 +13,9 @@ return [
     ],
 
     'emailparser' => [
-        'fallback_mail'                     => 'admin@isp.local',
-        'use_bounce_method'                 => false,
-        'notify_on_warnings'                => true,
+        'fallback_mail'      => 'admin@isp.local',
+        'use_bounce_method'  => false,
+        'notify_on_warnings' => true,
     ],
 
     // A list of installation UUID's which are considered to be parents allowing them to push events thru the API
@@ -25,71 +25,71 @@ return [
     ],
 
     'reports' => [
-        'min_lastseen'                      => false, //This ignores any event older then threshold
-        'resolvable_only'                   => false, // This drops anything if a domain or netblock cannot be found
+        'min_lastseen'    => false, //This ignores any event older then threshold
+        'resolvable_only' => false, // This drops anything if a domain or netblock cannot be found
     ],
 
     'notes' => [
-        'enabled'                           => true,
-        'deletable'                         => true,
-        'show_abusedesk_names'              => true,
+        'enabled'              => true,
+        'deletable'            => true,
+        'show_abusedesk_names' => true,
     ],
 
     'notifications' => [
-        'enabled'                           => true,
-        'info_interval'                     => '90 days',
-        'abuse_interval'                    => '0 minutes',
-        'min_lastseen'                      => '14 days',
-        'from_address'                      => 'abuse@isp.local',
-        'from_name'                         => 'ISP Abusedesk',
-        'bcc_enabled'                       => false,
-        'bcc_address'                       => 'management@isp.local',
+        'enabled'        => true,
+        'info_interval'  => '90 days',
+        'abuse_interval' => '0 minutes',
+        'min_lastseen'   => '14 days',
+        'from_address'   => 'abuse@isp.local',
+        'from_name'      => 'ISP Abusedesk',
+        'bcc_enabled'    => false,
+        'bcc_address'    => 'management@isp.local',
     ],
 
     'housekeeping' => [
-        'mailarchive_remove_after'          => '500 days',
-        'mailarchive_remove_orphaned'       => true,
-        'tickets_close_after'               => '14 days',
-        'closed_tickets_remove_after'       => false,
-        'closed_tickets_remove_permanent'   => false,
-        'notifications_cron'                => '*/15 * * * * *',
-        'collectors_cron'                   => '*/60 * * * * *',
-        'housekeeper_cron'                  => '*/1 * * * * *',
-        'collect_statistics_cron'           => '0 2 * * * *', //needs some discussion on when to run;
-        'enable_queue_problem_alerts'       => true,
+        'mailarchive_remove_after'        => '500 days',
+        'mailarchive_remove_orphaned'     => true,
+        'tickets_close_after'             => '14 days',
+        'closed_tickets_remove_after'     => false,
+        'closed_tickets_remove_permanent' => false,
+        'notifications_cron'              => '*/15 * * * * *',
+        'collectors_cron'                 => '*/60 * * * * *',
+        'housekeeper_cron'                => '*/1 * * * * *',
+        'collect_statistics_cron'         => '0 2 * * * *', //needs some discussion on when to run;
+        'enable_queue_problem_alerts'     => true,
     ],
 
     'ash' => [
-        'url'                               => env('APP_URL', 'http://localhost').'/ash/',
+        'url' => env('APP_URL', 'http://localhost').'/ash/',
     ],
 
     'external' => [
-        'findcontact'                       => [
+        'findcontact' => [
             'id' => [
-                'prefer_local'              => true,
+                'prefer_local' => true,
                 [
-                    'class'                     => 'Custom',
-                    'method'                    => 'getContactById',
+                    'class'  => 'Custom',
+                    'method' => 'getContactById',
                 ],
             ],
             'ip' => [
-                'prefer_local'              => true,
+                'prefer_local' => true,
                 [
-                    'class'                     => 'Custom',
-                    'method'                    => 'getContactByIp',
+                    'class'  => 'Custom',
+                    'method' => 'getContactByIp',
                 ],
             ],
             'domain' => [
-                'prefer_local'              => true,
+                'prefer_local' => true,
                 [
-                    'class'                     => 'Custom',
-                    'method'                    => 'getContactByDomain',
+                    'class'  => 'Custom',
+                    'method' => 'getContactByDomain',
                 ],
             ],
         ],
     ],
 
     'api' => [
-        'enabled'                           => true,
+        'enabled' => true,
     ],
 ];

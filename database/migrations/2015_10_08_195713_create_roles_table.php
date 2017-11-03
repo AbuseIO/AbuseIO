@@ -32,11 +32,11 @@ class CreateRolesTable extends Migration
         DB::table('roles')->where('id', '=', '1')->delete();
         $roles = [
             [
-                'id'            => 1,
-                'name'          => 'Admin',
-                'description'   => 'System Administrator',
-                'created_at'    => new DateTime(),
-                'updated_at'    => new DateTime(),
+                'id'          => 1,
+                'name'        => 'Admin',
+                'description' => 'System Administrator',
+                'created_at'  => new DateTime(),
+                'updated_at'  => new DateTime(),
             ],
         ];
         DB::table('roles')->insert($roles);

@@ -58,10 +58,10 @@ class AshController extends Controller
             // defensive programming, doubble check the templates
             $validator = \Validator::make(
                 [
-                    'ash'  => $brand->ash_template,
+                    'ash' => $brand->ash_template,
                 ],
                 [
-                    'ash'  => 'required|bladetemplate',
+                    'ash' => 'required|bladetemplate',
                 ]);
 
             if ($validator->passes()) {
@@ -150,10 +150,10 @@ class AshController extends Controller
             // defensive programming, doubble check the templates
             $validator = \Validator::make(
                 [
-                    'ash'  => $brand->ash_template,
+                    'ash' => $brand->ash_template,
                 ],
                 [
-                    'ash'  => 'required|bladetemplate',
+                    'ash' => 'required|bladetemplate',
                 ]);
 
             if ($validator->passes()) {

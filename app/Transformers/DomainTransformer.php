@@ -17,10 +17,10 @@ class DomainTransformer extends TransformerAbstract
     public function transform(Domain $domain)
     {
         return [
-            'id'           => (int) $domain->id,
-            'name'         => (string) $domain->name,
-            'contact'      => (new ContactTransformer())->transform($domain->contact),
-            'enabled'      => (bool) $domain->enabled,
+            'id'      => (int) $domain->id,
+            'name'    => (string) $domain->name,
+            'contact' => (new ContactTransformer())->transform($domain->contact),
+            'enabled' => (bool) $domain->enabled,
         ];
     }
 }

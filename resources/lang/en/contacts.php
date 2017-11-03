@@ -5,12 +5,12 @@
  */
 return [
     // Headers
-    'header.new'            => 'New Contact',
-    'header.edit'           => 'Edit Contact',
-    'header.detail'         => 'Contact details for',
+    'header.new'    => 'New Contact',
+    'header.edit'   => 'Edit Contact',
+    'header.detail' => 'Contact details for',
 
     // Buttons
-    'button.new_contact'    => 'New Contact',
+    'button.new_contact' => 'New Contact',
 
     // Miscellaneous
     'csv_export'              => 'CSV Export',

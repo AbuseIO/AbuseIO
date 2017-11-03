@@ -52,7 +52,7 @@ class PermissionRole extends Model
     public static function createRules($permissionRole)
     {
         $rules = [
-            'role_id'       => 'required|integer|exists:roles,id|'.
+            'role_id' => 'required|integer|exists:roles,id|'.
                                'unique:permission_role,role_id,NULL,id,permission_id,'.$permissionRole->permission_id,
             'permission_id' => 'required|integer|exists:permissions,id|'.
                                'unique:permission_role,permission_id,NULL,id,role_id,'.$permissionRole->role_id,
@@ -71,8 +71,8 @@ class PermissionRole extends Model
     public static function updateRules($permissionRole)
     {
         $rules = [
-            'id'            => 'required|exists:permissions_role,id',
-            'role_id'       => 'required|integer|exists:roles,id|'.
+            'id'      => 'required|exists:permissions_role,id',
+            'role_id' => 'required|integer|exists:roles,id|'.
                                'unique:permission_role,role_id,NULL,id,permission_id,'.$permissionRole->permission_id,
             'permission_id' => 'required|integer|exists:permissions,id|'.
                                'unique:permission_role,permission_id,NULL,id,role_id,'.$permissionRole->role_id,

@@ -10,19 +10,19 @@ class EventsTableSeeder extends Seeder
 
         $events = [
             [
-                'id'                        => '1',
-                'ticket_id'                 => '1',
-                'evidence_id'               => '1',
-                'source'                    => 'Simon Says',
-                'timestamp'                 => time(),
-                'information'               => json_encode(
+                'id'          => '1',
+                'ticket_id'   => '1',
+                'evidence_id' => '1',
+                'source'      => 'Simon Says',
+                'timestamp'   => time(),
+                'information' => json_encode(
                     [
                     'engine' => 'infected website blob',
                     'uri'    => '/dir1',
                     ]
                 ),
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
             ],
         ];
 

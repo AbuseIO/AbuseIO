@@ -27,16 +27,16 @@ Route::group(
         Route::post(
             'syncstatus',
             [
-                'as'    => 'syncstatus',
-                'uses'  => 'TicketsController@apiSyncStatus',
+                'as'   => 'syncstatus',
+                'uses' => 'TicketsController@apiSyncStatus',
             ]
         );
 
         Route::post(
             'synccontactstatus',
             [
-                'as'    => 'synccontactstatus',
-                'uses'  => 'TicketsController@apiSyncContactStatus',
+                'as'   => 'synccontactstatus',
+                'uses' => 'TicketsController@apiSyncContactStatus',
             ]
         );
 

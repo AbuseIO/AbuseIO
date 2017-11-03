@@ -148,9 +148,9 @@ return [
     |
     */
     'smime' => [
-        'enabled'       => false,
-        'key'           => '/opt/abuseio/config/smikme/key.pem',
-        'certificate'   => '/opt/abuseio/config/smikme/certificate.pem',
+        'enabled'     => false,
+        'key'         => '/opt/abuseio/config/smikme/key.pem',
+        'certificate' => '/opt/abuseio/config/smikme/certificate.pem',
     ],
 
 ];

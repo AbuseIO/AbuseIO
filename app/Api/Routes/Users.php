@@ -11,8 +11,8 @@ Route::group(
         route::get(
             '',
             [
-                'as'         => 'index',
-                'uses'       => 'UsersController@apiIndex',
+                'as'   => 'index',
+                'uses' => 'UsersController@apiIndex',
             ]
         );
 
@@ -20,8 +20,8 @@ Route::group(
         route::get(
             '{users}',
             [
-                'as'         => 'show',
-                'uses'       => 'UsersController@apiShow',
+                'as'   => 'show',
+                'uses' => 'UsersController@apiShow',
             ]
         );
     }

@@ -1461,8 +1461,8 @@ return [
     ],
 
     'OPEN_TFTP_SERVER' => [
-        'name'          => 'Open TFTP Server',
-        'description'   => "
+        'name'        => 'Open TFTP Server',
+        'description' => "
             <h2>What is a 'Open TFTP Server'?</h2>
 
             <p>Trivial File Transfer Protocol (TFTP) is a simple File Transfer Protocol

@@ -333,10 +333,10 @@ class OldVersionCommand extends Command
                 DB::setDefaultConnection('abuseio3');
 
                 $output = [
-                    'evidenceId'    => $evidence->ID,
-                    'evidenceData'  => $evidence->Data,
-                    'incidents'     => $incidents,
-                    'newId'         => $evidenceSave->id,
+                    'evidenceId'   => $evidence->ID,
+                    'evidenceData' => $evidence->Data,
+                    'incidents'    => $incidents,
+                    'newId'        => $evidenceSave->id,
                 ];
 
                 if ($filesystem->put($filename, json_encode($output)) === false) {
@@ -633,10 +633,10 @@ class OldVersionCommand extends Command
         $step = (int) round($elapsed / $ticket->ReportCount);
 
         $offset = [
-            'first'     => $firstSeen,
-            'last'      => $lastSeen,
-            'elapsed'   => $elapsed,
-            'step'      => $step,
+            'first'   => $firstSeen,
+            'last'    => $lastSeen,
+            'elapsed' => $elapsed,
+            'step'    => $step,
         ];
         for ($counter = 0; $counter <= $ticket->ReportCount; $counter++) {
             $offset[$counter] = $firstSeen + ($counter * $step);
