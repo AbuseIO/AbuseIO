@@ -44,14 +44,14 @@ class CreateUsersTable extends Migration
         DB::table('users')->where('id', '=', '1')->delete();
         $users = [
             [
-                'id'            => 1,
-                'email'         => 'admin@isp.local',
-                'first_name'    => 'System',
-                'last_name'     => 'Admin',
-                'password'      => Hash::make('admin'),
-                'account_id'    => 1,
-                'created_at'    => new DateTime(),
-                'updated_at'    => new DateTime(),
+                'id'         => 1,
+                'email'      => 'admin@isp.local',
+                'first_name' => 'System',
+                'last_name'  => 'Admin',
+                'password'   => Hash::make('admin'),
+                'account_id' => 1,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
             ],
         ];
         DB::table('users')->insert($users);

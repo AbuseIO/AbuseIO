@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
 
         factory(AbuseIO\Models\Role::class)->create(
             [
-                'name'          => 'Abuse',
-                'description'   => 'Abusedesk User',
+                'name'        => 'Abuse',
+                'description' => 'Abusedesk User',
             ]
         );
 

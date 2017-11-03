@@ -17,10 +17,10 @@ class EvidenceTransformer extends TransformerAbstract
     public function transform(Evidence $evidence)
     {
         return [
-            'id'        => (int) $evidence->id,
-            'filename'  => (string) $evidence->filename,
-            'sender'    => (string) $evidence->sender,
-            'subject'   => (string) $evidence->subject,
+            'id'       => (int) $evidence->id,
+            'filename' => (string) $evidence->filename,
+            'sender'   => (string) $evidence->sender,
+            'subject'  => (string) $evidence->subject,
 
             // not sure if we want to return this by default
             //'data'      => $evidence->data,

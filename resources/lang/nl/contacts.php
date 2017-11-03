@@ -5,12 +5,12 @@
  */
 return [
     // Headers
-    'header.new'            => 'Nieuw Contact',
-    'header.edit'           => 'Bewerk Contact',
-    'header.detail'         => 'Contact details voor',
+    'header.new'    => 'Nieuw Contact',
+    'header.edit'   => 'Bewerk Contact',
+    'header.detail' => 'Contact details voor',
 
     // Buttons
-    'button.new_contact'    => 'Nieuw Contact',
+    'button.new_contact' => 'Nieuw Contact',
 
     // Miscellaneous
     'csv_export'              => 'CSV Export',

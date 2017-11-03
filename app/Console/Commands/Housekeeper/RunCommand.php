@@ -249,10 +249,10 @@ class RunCommand extends Command
         $closeOlderThen = strtotime(config('main.housekeeping.tickets_close_after').' ago');
         $validator = Validator::make(
             [
-                'mailarchive_remove_after'    => $closeOlderThen,
+                'mailarchive_remove_after' => $closeOlderThen,
             ],
             [
-                'mailarchive_remove_after'    => 'required|timestamp',
+                'mailarchive_remove_after' => 'required|timestamp',
             ]
         );
 
@@ -362,10 +362,10 @@ class RunCommand extends Command
         $deleteOlderThen = strtotime(config('main.housekeeping.mailarchive_remove_after').' ago');
         $validator = Validator::make(
             [
-                'mailarchive_remove_after'    => $deleteOlderThen,
+                'mailarchive_remove_after' => $deleteOlderThen,
             ],
             [
-                'mailarchive_remove_after'    => 'required|timestamp',
+                'mailarchive_remove_after' => 'required|timestamp',
             ]
         );
 

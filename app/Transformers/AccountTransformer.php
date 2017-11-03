@@ -17,11 +17,11 @@ class AccountTransformer extends TransformerAbstract
     public function transform(Account $account)
     {
         return [
-            'id'           => (int) $account->id,
-            'name'         => (string) $account->name,
-            'description'  => (string) $account->description,
-            'brand_id'     => (int) $account->brand_id,
-            'disabled'     => (bool) $account->disabled,
+            'id'          => (int) $account->id,
+            'name'        => (string) $account->name,
+            'description' => (string) $account->description,
+            'brand_id'    => (int) $account->brand_id,
+            'disabled'    => (bool) $account->disabled,
         ];
     }
 }

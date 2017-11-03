@@ -40,14 +40,14 @@ class CreateAccountsTable extends Migration
 
         $accounts = [
             [
-                'id'                        => 1,
-                'name'                      => 'Default',
-                'description'               => 'Default system account',
-                'disabled'                  => false,
-                'brand_id'                  => 1,
-                'systemaccount'             => true,
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'id'            => 1,
+                'name'          => 'Default',
+                'description'   => 'Default system account',
+                'disabled'      => false,
+                'brand_id'      => 1,
+                'systemaccount' => true,
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime(),
             ],
         ];
 
