@@ -50,8 +50,8 @@ class Role extends Model
     public static function createRules()
     {
         $rules = [
-            'name'              => 'required|string|min:1|unique:roles,name',
-            'description'       => 'required|string|min:1',
+            'name'        => 'required|string|min:1|unique:roles,name',
+            'description' => 'required|string|min:1',
         ];
 
         return $rules;
@@ -67,9 +67,9 @@ class Role extends Model
     public static function updateRules($role)
     {
         $rules = [
-            'id'                => 'required|exists:roles,id',
-            'name'              => 'required|string|min:1|unique:roles,name,'.$role->id,
-            'description'       => 'required|string|min:1',
+            'id'          => 'required|exists:roles,id',
+            'name'        => 'required|string|min:1|unique:roles,name,'.$role->id,
+            'description' => 'required|string|min:1',
         ];
 
         return $rules;

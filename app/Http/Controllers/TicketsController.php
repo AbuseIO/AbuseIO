@@ -349,14 +349,14 @@ class TicketsController extends Controller
 
         if ($format === 'csv') {
             $columns = [
-                'id'            => 'Ticket ID',
-                'ip'            => 'IP address',
-                'class_id'      => 'Classification',
-                'type_id'       => 'Type',
-                'first_seen'    => 'First seen',
-                'last_seen'     => 'Last seen',
-                'event_count'   => 'Events',
-                'status_id'     => 'Ticket Status',
+                'id'          => 'Ticket ID',
+                'ip'          => 'IP address',
+                'class_id'    => 'Classification',
+                'type_id'     => 'Type',
+                'first_seen'  => 'First seen',
+                'last_seen'   => 'Last seen',
+                'event_count' => 'Events',
+                'status_id'   => 'Ticket Status',
             ];
 
             $output = '"'.implode('", "', $columns).'"'.PHP_EOL;

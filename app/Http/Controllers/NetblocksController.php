@@ -154,10 +154,10 @@ class NetblocksController extends Controller
 
         if ($format === 'csv') {
             $columns = [
-                'contact'   => 'Contact',
-                'enabled'   => 'Status',
-                'first_ip'  => 'First IP',
-                'last_ip'   => 'Last IP',
+                'contact'  => 'Contact',
+                'enabled'  => 'Status',
+                'first_ip' => 'First IP',
+                'last_ip'  => 'Last IP',
             ];
 
             $output = '"'.implode('", "', $columns).'"'.PHP_EOL;

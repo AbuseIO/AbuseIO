@@ -21,9 +21,9 @@ abstract class Job
     protected function error($message)
     {
         return [
-            'errorStatus'   => true,
-            'errorMessage'  => $message,
-            'data'          => '',
+            'errorStatus'  => true,
+            'errorMessage' => $message,
+            'data'         => '',
         ];
     }
 
@@ -37,9 +37,9 @@ abstract class Job
     protected function success($data)
     {
         return [
-            'errorStatus'   => false,
-            'errorMessage'  => 'Data sucessfully parsed',
-            'data'          => $data,
+            'errorStatus'  => false,
+            'errorMessage' => 'Data sucessfully parsed',
+            'data'         => $data,
         ];
     }
 }

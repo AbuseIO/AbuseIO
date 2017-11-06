@@ -53,13 +53,13 @@ class CreateCommandTest extends TestCase
         $name = $faker->name;
 
         Artisan::call('contact:create', [
-            'name'              => $name,
-            'reference'         => $faker->domainWord,
-            'account_id'        => Account::getSystemAccount()->id,
-            'enabled'           => $faker->boolean(),
-            'email'             => $faker->email,
-            'api_host'          => $faker->url,
-            '--with_api_key'    => true,
+            'name'           => $name,
+            'reference'      => $faker->domainWord,
+            'account_id'     => Account::getSystemAccount()->id,
+            'enabled'        => $faker->boolean(),
+            'email'          => $faker->email,
+            'api_host'       => $faker->url,
+            '--with_api_key' => true,
         ]);
 
         $contact = Contact::where('name', $name)->first();

@@ -156,9 +156,9 @@ class DomainsController extends Controller
 
         if ($format === 'csv') {
             $columns = [
-                'contact'   => 'Contact',
-                'domain'    => 'Domain name',
-                'enabled'   => 'Status',
+                'contact' => 'Contact',
+                'domain'  => 'Domain name',
+                'enabled' => 'Status',
             ];
 
             $output = '"'.implode('","', $columns).'"'.PHP_EOL;

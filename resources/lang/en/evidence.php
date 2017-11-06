@@ -5,16 +5,16 @@
  */
 return [
     // Evidence - Headers
-    'header.new'        => 'New Evidence',
-    'header.edit'       => 'Edit Evidence',
-    'header.detail'     => 'Detail for evidence #',
+    'header.new'    => 'New Evidence',
+    'header.edit'   => 'Edit Evidence',
+    'header.detail' => 'Detail for evidence #',
 
     // Evidence - Buttons
-    'button.download'   => 'Download',
+    'button.download' => 'Download',
 
     // Evidence - Miscellaneous
-    'attachment'        => 'Attachments',
-    'message'           => 'Message',
-    'from'              => 'From',
-    'subject'           => 'Subject',
+    'attachment' => 'Attachments',
+    'message'    => 'Message',
+    'from'       => 'From',
+    'subject'    => 'Subject',
 ];

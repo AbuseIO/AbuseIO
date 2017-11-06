@@ -103,22 +103,18 @@
             @if ($ticket->ip_contact_reference != 'UNDEF')
             <dt>{{ trans('tickets.ashlink') }} {{ trans('misc.ip')}}</dt>
             <dd>
-                {!! link_to(
-                    "/ash/collect/$ticket->id/" . $ticket->ash_token_ip,
-                    config('main.ash.url') . "collect/$ticket->id/"
-                     . $ticket->ash_token_ip
-                ) !!}
+                <a href="{!! ashAsset("/ash/collect/" . $ticket->id . "/" . $ticket->ash_token_ip) !!}">
+                    {!! ashAsset("/ash/collect/" . $ticket->id . "/" . $ticket->ash_token_ip) !!}
+                </a>
             </dd>
             @endif
 
             @if ($ticket->domain_contact_reference != 'UNDEF')
             <dt>{{ trans('tickets.ashlink') }} {{ trans('misc.domain')}}</dt>
             <dd>
-                {!! link_to(
-                    "/ash/collect/$ticket->id/" . $ticket->ash_token_domain,
-                    config('main.ash.url') . "collect/$ticket->id/"
-                     . $ticket->ash_token_domain
-                ) !!}
+                <a href="{!! ashAsset("/ash/collect/" . $ticket->id . "/" . $ticket->ash_token_domain) !!}">
+                    {!! ashAsset("/ash/collect/" . $ticket->id . "/" . $ticket->ash_token_domain) !!}
+                </a>
             </dd>
             @endif
 

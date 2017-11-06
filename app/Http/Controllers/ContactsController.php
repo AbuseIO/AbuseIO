@@ -3,6 +3,7 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\ContactFormRequest;
+use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
 use AbuseIO\Services\NotificationService;
 use AbuseIO\Traits\Api;
@@ -132,6 +133,8 @@ class ContactsController extends Controller
         return view('contacts.create')
             ->with('auth_user', $this->auth_user)
             ->with('notificationService', new NotificationService())
+            ->with('accounts', Account::lists('name', 'id'))
+            ->with('selectedAccount', $this->auth_user->account_id)
             ->with('contact', null);
     }
 
@@ -259,6 +262,8 @@ class ContactsController extends Controller
         return view('contacts.edit')
             ->with('contact', $contact)
             ->with('auth_user', $this->auth_user)
+            ->with('accounts', Account::lists('name', 'id'))
+            ->with('selectedAccount', $contact->account_id)
             ->with('notificationService', new NotificationService());
     }
 

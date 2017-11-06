@@ -56,9 +56,9 @@ class Evidence extends Model
     public static function createRules()
     {
         $rules = [
-            'filename'  => 'required|file',
-            'sender'    => 'required|string',
-            'subject'   => 'required|string',
+            'filename' => 'required|file',
+            'sender'   => 'required|string',
+            'subject'  => 'required|string',
         ];
 
         return $rules;
@@ -114,11 +114,11 @@ class Evidence extends Model
 
                 return [
                     'headers' => [
-                        'from'      => $this->sender,
-                        'subject'   => $this->subject,
+                        'from'    => $this->sender,
+                        'subject' => $this->subject,
                     ],
-                    'message'       => json_decode($data),
-                    'files'         => [],
+                    'message' => json_decode($data),
+                    'files'   => [],
                 ];
             } else {
                 // It's a regular email, parse it!
@@ -143,12 +143,12 @@ class Evidence extends Model
 
                 return [
                     'headers' => [
-                        'from'      => $email->getHeader('from'),
-                        'subject'   => $email->getHeader('subject'),
+                        'from'    => $email->getHeader('from'),
+                        'subject' => $email->getHeader('subject'),
                     ],
-                    'message'       => $email->getMessageBody('text'),
-                    'files'         => $email->getAttachments(),
-                    'files_dir'     => $cacheDir,
+                    'message'   => $email->getMessageBody('text'),
+                    'files'     => $email->getAttachments(),
+                    'files_dir' => $cacheDir,
                 ];
             }
         }

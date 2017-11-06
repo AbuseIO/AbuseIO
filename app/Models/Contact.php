@@ -63,12 +63,12 @@ class Contact extends Model
     public static function createRules()
     {
         $rules = [
-            'reference'     => 'required|string|unique:contacts,reference',
-            'name'          => 'required',
-            'email'         => 'sometimes|emails',
-            'api_host'      => 'sometimes|url',
-            'enabled'       => 'required|boolean',
-            'account_id'    => 'required|integer|exists:accounts,id',
+            'reference'  => 'required|string|unique:contacts,reference',
+            'name'       => 'required',
+            'email'      => 'sometimes|emails',
+            'api_host'   => 'sometimes|url',
+            'enabled'    => 'required|boolean',
+            'account_id' => 'required|integer|exists:accounts,id',
             //'notification_methods' => 'required|array',
         ];
 
@@ -85,12 +85,12 @@ class Contact extends Model
     public static function updateRules($contact)
     {
         $rules = [
-            'reference'     => 'required|string|unique:contacts,reference,'.$contact->id,
-            'name'          => 'required',
-            'email'         => 'sometimes|emails',
-            'api_host'      => 'sometimes|url',
-            'enabled'       => 'required|boolean',
-            'account_id'    => 'required|integer|exists:accounts,id',
+            'reference'  => 'required|string|unique:contacts,reference,'.$contact->id,
+            'name'       => 'required',
+            'email'      => 'sometimes|emails',
+            'api_host'   => 'sometimes|url',
+            'enabled'    => 'required|boolean',
+            'account_id' => 'required|integer|exists:accounts,id',
             //'notification_methods' => 'required|array',
         ];
 
@@ -107,12 +107,12 @@ class Contact extends Model
     public static function validateRules($contact)
     {
         $rules = [
-            'reference'     => 'required',
-            'name'          => 'required',
-            'email'         => 'sometimes|emails',
-            'api_host'      => 'sometimes|url',
-            'enabled'       => 'required|boolean',
-            'account_id'    => 'required|integer|exists:accounts,id',
+            'reference'  => 'required',
+            'name'       => 'required',
+            'email'      => 'sometimes|emails',
+            'api_host'   => 'sometimes|url',
+            'enabled'    => 'required|boolean',
+            'account_id' => 'required|integer|exists:accounts,id',
         ];
 
         return $rules;

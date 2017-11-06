@@ -59,11 +59,11 @@ class Netblock extends Model
     public static function createRules($netblock)
     {
         $rules = [
-            'first_ip'      => "required|ip|unique:netblocks,first_ip,NULL,id,last_ip,{$netblock->last_ip}",
-            'last_ip'       => "required|ip|unique:netblocks,last_ip,NULL,id,first_ip,{$netblock->first_ip}",
-            'contact_id'    => 'required|integer|exists:contacts,id',
-            'description'   => 'required',
-            'enabled'       => 'required|boolean',
+            'first_ip'    => "required|ip|unique:netblocks,first_ip,NULL,id,last_ip,{$netblock->last_ip}",
+            'last_ip'     => "required|ip|unique:netblocks,last_ip,NULL,id,first_ip,{$netblock->first_ip}",
+            'contact_id'  => 'required|integer|exists:contacts,id',
+            'description' => 'required',
+            'enabled'     => 'required|boolean',
         ];
 
         return $rules;
@@ -79,11 +79,11 @@ class Netblock extends Model
     public static function updateRules($netblock)
     {
         $rules = [
-            'first_ip'      => "required|ip|unique:netblocks,first_ip,{$netblock->id},id,last_ip,{$netblock->last_ip}",
-            'last_ip'       => "required|ip|unique:netblocks,last_ip,{$netblock->id},id,first_ip,{$netblock->first_ip}",
-            'contact_id'    => 'required|integer|exists:contacts,id',
-            'description'   => 'required',
-            'enabled'       => 'required|boolean',
+            'first_ip'    => "required|ip|unique:netblocks,first_ip,{$netblock->id},id,last_ip,{$netblock->last_ip}",
+            'last_ip'     => "required|ip|unique:netblocks,last_ip,{$netblock->id},id,first_ip,{$netblock->first_ip}",
+            'contact_id'  => 'required|integer|exists:contacts,id',
+            'description' => 'required',
+            'enabled'     => 'required|boolean',
         ];
 
         return $rules;

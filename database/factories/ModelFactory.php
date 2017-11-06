@@ -34,12 +34,12 @@ $factory->define(AbuseIO\Models\Brand::class, function (Faker\Generator $faker) 
 
 $factory->define(AbuseIO\Models\Contact::class, function (Faker\Generator $faker) {
     return [
-        'reference'   => sprintf('reference_%s', uniqid()),
-        'name'        => $faker->name,
-        'email'       => $faker->safeEmail,
-        'api_host'    => $faker->url,
-        'enabled'     => $faker->boolean(),
-        'account_id'  => AbuseIO\Models\Account::all()->random()->id,
+        'reference'  => sprintf('reference_%s', uniqid()),
+        'name'       => $faker->name,
+        'email'      => $faker->safeEmail,
+        'api_host'   => $faker->url,
+        'enabled'    => $faker->boolean(),
+        'account_id' => AbuseIO\Models\Account::all()->random()->id,
     ];
 });
 
@@ -120,13 +120,13 @@ $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $fake
     }
 
     return [
-        'contact_id'    => \AbuseIO\Models\Contact::all()->random()->id,
-        'first_ip'      => $first_ip,
-        'last_ip'       => $last_ip,
-        'first_ip_int'  => inetPtoi($first_ip),
-        'last_ip_int'   => inetPtoi($last_ip),
-        'description'   => $faker->sentence($faker->numberBetween(3, 5)),
-        'enabled'       => $faker->boolean(),
+        'contact_id'   => \AbuseIO\Models\Contact::all()->random()->id,
+        'first_ip'     => $first_ip,
+        'last_ip'      => $last_ip,
+        'first_ip_int' => inetPtoi($first_ip),
+        'last_ip_int'  => inetPtoi($last_ip),
+        'description'  => $faker->sentence($faker->numberBetween(3, 5)),
+        'enabled'      => $faker->boolean(),
     ];
 });
 

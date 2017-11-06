@@ -40,9 +40,9 @@ class HomeController extends Controller
         $url = 'https://abuse.io/version.json';
 
         $curl_options = [
-            CURLOPT_URL             => $url,
-            CURLOPT_TIMEOUT         => 5,
-            CURLOPT_RETURNTRANSFER  => 1,
+            CURLOPT_URL            => $url,
+            CURLOPT_TIMEOUT        => 5,
+            CURLOPT_RETURNTRANSFER => 1,
         ];
 
         $ch = curl_init();

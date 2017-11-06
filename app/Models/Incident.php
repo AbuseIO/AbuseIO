@@ -161,14 +161,14 @@ class Incident
     public static function createRules()
     {
         $rules = [
-            'source'                => 'required|string',
-            'source_id'             => 'sometimes|stringorboolean',
-            'ip'                    => 'required|ip',
-            'domain'                => 'sometimes|stringorboolean|domain',
-            'timestamp'             => 'required|timestamp',
-            'class'                 => 'required|abuseclass',
-            'type'                  => 'required|abusetype',
-            'information'           => 'required|json',
+            'source'      => 'required|string',
+            'source_id'   => 'sometimes|stringorboolean',
+            'ip'          => 'required|ip',
+            'domain'      => 'sometimes|stringorboolean|domain',
+            'timestamp'   => 'required|timestamp',
+            'class'       => 'required|abuseclass',
+            'type'        => 'required|abusetype',
+            'information' => 'required|json',
         ];
 
         return $rules;

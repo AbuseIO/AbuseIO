@@ -17,12 +17,12 @@ class NoteTransformer extends TransformerAbstract
     public function transform(Note $note)
     {
         return [
-            'id'          => (int) $note->id,
-            'ticket_id'   => (int) $note->ticket_id,
-            'submitter'   => (string) $note->submitter,
-            'text'        => (string) $note->text,
-            'hidden'      => (bool) $note->hidden,
-            'viewed'      => (bool) $note->viewed,
+            'id'        => (int) $note->id,
+            'ticket_id' => (int) $note->ticket_id,
+            'submitter' => (string) $note->submitter,
+            'text'      => (string) $note->text,
+            'hidden'    => (bool) $note->hidden,
+            'viewed'    => (bool) $note->viewed,
         ];
     }
 }

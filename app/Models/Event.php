@@ -57,11 +57,11 @@ class Event extends Model
     public static function createRules()
     {
         $rules = [
-            'ticket_id'             => 'required|integer|exists:tickets,id',
-            'evidence_id'           => 'required|integer|exists:evidences,id',
-            'source'                => 'required|string',
-            'timestamp'             => 'required|timestamp',
-            'information'           => 'required|json',
+            'ticket_id'   => 'required|integer|exists:tickets,id',
+            'evidence_id' => 'required|integer|exists:evidences,id',
+            'source'      => 'required|string',
+            'timestamp'   => 'required|timestamp',
+            'information' => 'required|json',
         ];
 
         return $rules;

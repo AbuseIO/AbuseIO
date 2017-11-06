@@ -45,15 +45,15 @@ class CreateBrandsTable extends Migration
 
         $brands = [
             [
-                'id'                        => 1,
-                'name'                      => 'AbuseIO',
-                'company_name'              => 'AbuseIO',
-                'introduction_text'         => 'Open Source abusemanagement',
-                'creator_id'                => 1,
-                'logo'                      => file_get_contents(Brand::getDefaultLogo()->getPathname()),
-                'systembrand'               => true,
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'id'                => 1,
+                'name'              => 'AbuseIO',
+                'company_name'      => 'AbuseIO',
+                'introduction_text' => 'Open Source abusemanagement',
+                'creator_id'        => 1,
+                'logo'              => file_get_contents(Brand::getDefaultLogo()->getPathname()),
+                'systembrand'       => true,
+                'created_at'        => new DateTime(),
+                'updated_at'        => new DateTime(),
             ],
         ];
 

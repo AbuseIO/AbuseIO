@@ -26,10 +26,10 @@ class RolePermissionSeeder extends Seeder
             $permission = Permission::where('name', '=', $permission_name)->first();
 
             $permission_role[] = [
-                'permission_id'             => $permission->id,
-                'role_id'                   => '2',
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'permission_id' => $permission->id,
+                'role_id'       => '2',
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime(),
             ];
         }
 
@@ -39,39 +39,39 @@ class RolePermissionSeeder extends Seeder
         DB::table('role_user')->delete();
         $role_user = [
             [
-                'id'                        => 1,
-                'role_id'                   => 1,   // Admin user role
-                'user_id'                   => 1,
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'id'         => 1,
+                'role_id'    => 1,   // Admin user role
+                'user_id'    => 1,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
             ],
             [
-                'id'                        => 2,
-                'role_id'                   => 2,   // Abusedesk user role
-                'user_id'                   => 2,
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'id'         => 2,
+                'role_id'    => 2,   // Abusedesk user role
+                'user_id'    => 2,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
             ],
             [
-                'id'                        => 3,
-                'role_id'                   => 1,   // Admin user role
-                'user_id'                   => 3,
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'id'         => 3,
+                'role_id'    => 1,   // Admin user role
+                'user_id'    => 3,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
             ],
             [
-                'id'                        => 4,
-                'role_id'                   => 2,   // Abusedesk user role
-                'user_id'                   => 4,
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'id'         => 4,
+                'role_id'    => 2,   // Abusedesk user role
+                'user_id'    => 4,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
             ],
             [
-                'id'                        => 5,
-                'role_id'                   => 1,   // Admin user role
-                'user_id'                   => 5,
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'id'         => 5,
+                'role_id'    => 1,   // Admin user role
+                'user_id'    => 5,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
             ],
         ];
         DB::table('role_user')->insert($role_user);

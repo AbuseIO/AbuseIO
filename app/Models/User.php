@@ -89,14 +89,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public static function createRules()
     {
         $rules = [
-            'first_name'    => 'required|string',
-            'last_name'     => 'required|string',
-            'email'         => 'required|email|unique:users,email',
-            'password'      => 'required|confirmed|min:6|max:32',
-            'account_id'    => 'required|integer|exists:accounts,id',
-            'locale'        => 'required|min:2|max:3',
-            'disabled'      => 'required|stringorboolean', // disabled is sent as a string
-            'roles'         => 'sometimes',
+            'first_name' => 'required|string',
+            'last_name'  => 'required|string',
+            'email'      => 'required|email|unique:users,email',
+            'password'   => 'required|confirmed|min:6|max:32',
+            'account_id' => 'required|integer|exists:accounts,id',
+            'locale'     => 'required|min:2|max:3',
+            'disabled'   => 'required|stringorboolean', // disabled is sent as a string
+            'roles'      => 'sometimes',
         ];
 
         return $rules;
@@ -112,14 +112,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public static function updateRules($user)
     {
         $rules = [
-            'first_name'    => 'required|string',
-            'last_name'     => 'required|string',
-            'email'         => 'required|email|unique:users,email,'.$user->id,
-            'password'      => 'sometimes|confirmed|min:6|max:32',
-            'account_id'    => 'required|integer|exists:accounts,id',
-            'locale'        => 'sometimes|required|min:2|max:3',
-            'disabled'      => 'sometimes|required|stringorboolean', // disabled is sent as a string
-            'roles'         => 'sometimes',
+            'first_name' => 'required|string',
+            'last_name'  => 'required|string',
+            'email'      => 'required|email|unique:users,email,'.$user->id,
+            'password'   => 'sometimes|confirmed|min:6|max:32',
+            'account_id' => 'required|integer|exists:accounts,id',
+            'locale'     => 'sometimes|required|min:2|max:3',
+            'disabled'   => 'sometimes|required|stringorboolean', // disabled is sent as a string
+            'roles'      => 'sometimes',
         ];
 
         return $rules;

@@ -87,13 +87,13 @@ class TicketGraphPoint extends Model
     private static function makeWithDataDateAndLifecycle($data, Carbon $date, $lifecycle)
     {
         return new self([
-            'count'             => $data->cnt,
-            'class'             => $data->class_id,
-            'type'              => $data->type_id,
-            'status'            => $data->status_id,
-            'contact_status'    => $data->contact_status_id,
-            'lifecycle'         => $lifecycle,
-            'day_date'          => $date->toDateString(),
+            'count'          => $data->cnt,
+            'class'          => $data->class_id,
+            'type'           => $data->type_id,
+            'status'         => $data->status_id,
+            'contact_status' => $data->contact_status_id,
+            'lifecycle'      => $lifecycle,
+            'day_date'       => $date->toDateString(),
         ]);
     }
 
