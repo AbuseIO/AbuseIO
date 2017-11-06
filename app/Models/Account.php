@@ -194,7 +194,7 @@ class Account extends Model
      *
      * @return bool
      */
-    public static function checkAccountAccess($model_id, Account $account)
+    public static function checkAccountAccess($model_id, self $account)
     {
         // Early return when we are in the system account
         if ($account->isSystemAccount()) {

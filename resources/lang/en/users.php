@@ -5,23 +5,23 @@
  */
 return [
     // Headers
-    'header.new'      => 'New user',
-    'header.edit'     => 'Edit user',
-    'header.detail'   => 'User details for',
+    'header.new'    => 'New user',
+    'header.edit'   => 'Edit user',
+    'header.detail' => 'User details for',
 
     // Buttons
     'button.new_user' => 'New User',
 
     // Miscellaneous
-    'user'            => 'user|users',
-    'no_users'        => 'No Users',
-    'linked_account'  => 'Linked Account',
-    'first_name'      => 'First Name',
-    'last_name'       => 'Last Lame',
-    'login_disabled'  => 'This login is disabled.',
+    'user'           => 'user|users',
+    'no_users'       => 'No Users',
+    'linked_account' => 'Linked Account',
+    'first_name'     => 'First Name',
+    'last_name'      => 'Last Lame',
+    'login_disabled' => 'This login is disabled.',
 
     // Login
-    'login.whoops'    => '<strong>Whoops!</strong> There were some problems with your input.',
+    'login.whoops' => '<strong>Whoops!</strong> There were some problems with your input.',
 
     'message' => [
         'created'        => 'User <strong>:user</strong> created.',
