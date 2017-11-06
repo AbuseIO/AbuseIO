@@ -1,40 +1,39 @@
+{{--
+  -- Show Users Index
+  --}}
 @extends('app')
 
 @section('content')
-@include('users/partials/_search')
-<div class="panel panel-default">
-    <div class="panel-body">
-        <div class="row container-fluid">
-            <div class="pull-right">
-                {!! link_to_route('admin.users.create', trans('users.button.new_user'), [ ], ['class' => 'btn btn-raised btn-info']) !!}
-            </div>
+    {{-- Draw the title and menu on the right side --}}
+    @include('layout.components.pageheader', [
+        'title' => uctrans('users.user', 2),
+        'menu' => [
+            [
+                'route' => route('admin.users.create'),
+                'class' => 'btn-primary',
+                'icon' => 'add',
+            ]
+        ]
+    ])
+    @if ( !$users->count() )
+        <div class="alert alert-primary top-buffer"><span class="fa fa-exclamation-circle"></span> {{ trans('users.no_users')}}</div>
+    @else
+        <div class="row top-buffer">
+            @foreach($users as $user)
+                @include('layout.components.usercard')
+            @endforeach
         </div>
-        @if ( !$users->count() )
-        <div class="alert alert-info top-buffer"><span class="fa fa-exclamation-circle"></span> {{ trans('users.no_users')}}</div>
-        @else
-        {!!
-        $users->columns([
-            'id' => trans('misc.id'),
-            'first_name' => trans('users.first_name'),
-            'last_name' => trans('users.last_name'),
-            'account_id' => trans_choice('misc.account', 1),
-            'action' => trans('misc.action'),
-        ])
-        ->means('account_id', 'account')
-        ->modify('first_name', function($user) {
-            return link_to_route('admin.users.show', $user->first_name, [$user->id]);
-        })
-        ->modify('last_name', function($user) {
-            return link_to_route('admin.users.show', $user->last_name, [$user->id]);
-        })
-        ->modify('account_id', function($account) {
-            return link_to_route('admin.accounts.show', $account->name, [$account->id]);
-        })
-        ->sortable(['id', 'first_name', 'last_name'])
-        ->render()
-         !!}
-        {!! $users->appends(['field' => Input::get('field'), 'sort' => Input::get('sort')])->render() !!}
-        @endif
-    </div>
-</div>
+    @endif
+    {{-- We need this modal for confirming delete requests --}}
+    @include('layout.components.modals.confirmdelete', ['route' => 'admin.users.destroy' ])
 @endsection
+
+@section('extrajs')
+    <script type="text/javascript">
+        $('#btnResetSubmit').click(function() {
+            clearSearchForm();
+        });
+
+        $('#dropdown-menu').find('select').dropdown();
+    </script>
+@stop

@@ -22,12 +22,3 @@
         {!! Form::close() !!}
     </div>
 </div>
-@section('extrajs')
-        <script type="text/javascript">
-            $('#btnResetSubmit').click(function() {
-                clearSearchForm();
-            });
-
-            $('#dropdown-menu').find('select').dropdown();
-        </script>
-@stop

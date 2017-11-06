@@ -1,0 +1,2 @@
+{{--{!! Breadcrumbs::render() !!}--}}
+@yield('content')

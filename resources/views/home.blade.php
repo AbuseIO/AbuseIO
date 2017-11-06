@@ -1,11 +1,13 @@
 @extends('app')
 
 @section('content')
-<h4>{{ trans('misc.abuseio_intro1') }}</h4>
-<h4>{{ trans('misc.abuseio_intro2') }}</h4>
-<div class="pull-right">
-    <p id="status"></p>
-</div>
+    <div class="card-body">
+        <h4 class="card-title">Home</h4>
+        <p class="card-text">{{ trans('misc.abuseio_intro1') }}</p>
+        <p class="card-text">{{ trans('misc.abuseio_intro2') }}</p>
+        <div class="container-fluid">
+            <div class="row justify-content-end" id="status">Checking ...</div>
+        </div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -41,7 +43,7 @@
                 $('#myModal').modal('show');
 
             }
-        }).fail(function(data) {
+        }).fail(function() {
             ('#status').text('offline, or with errors');
         });
 

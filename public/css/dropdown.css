@@ -53,7 +53,7 @@
 
 /* Theme */
 .dropdownjs > input[readonly] {
-  cursor: pointer;
+    cursor: pointer;
 }
 select[data-dropdownjs][disabled] + .dropdownjs > input[readonly] {
   cursor: default;

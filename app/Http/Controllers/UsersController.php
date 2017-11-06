@@ -9,6 +9,7 @@ use AbuseIO\Models\User;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\UserTransformer;
 use Config;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Input;
 use League\Fractal\Manager;
@@ -292,22 +293,24 @@ class UsersController extends Controller
      *
      * @param User $user
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(User $user)
     {
         // Do not allow our own user to be destroyed.
         if ($user->is($this->auth_user)) {
-            return Redirect::back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.delete')]));
+            return json_encode(['sucess' => false, 'message' => trans('users.message.no_self_action', ['action' => trans('misc.delete')])]);
+//            return Redirect::back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.delete')]));
         }
 
         // Save the username, so we can show it in the snackbar.
         $userName = $user->fullName();
 
-        $user->delete();
+        //$user->delete();
 
-        return Redirect::route('admin.users.index')
-            ->with('message', trans('users.message.deleted', ['user' => $userName]));
+        return json_encode(['success' => true, 'message' => trans('users.message.deleted', ['user' => $userName])]);
+//        return Redirect::route('admin.users.index')
+//            ->with('message', trans('users.message.deleted', ['user' => $userName]));
     }
 
     /**

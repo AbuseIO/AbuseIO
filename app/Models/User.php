@@ -271,6 +271,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Convert the locale to the correct country flag.
+     *
+     * @return string
+     */
+    public function getFlagFromLocale()
+    {
+        switch ($this->locale) {
+            case 'en':
+                return 'gb';
+                break;
+            default:
+                return $this->locale;
+        }
+    }
+
+    /**
      * Check if the current user is allowed to login.
      *
      * @param array &$messages Array of messages

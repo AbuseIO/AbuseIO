@@ -3,7 +3,6 @@
  */
 body {
     padding-top: 3.5rem;
-    background-color: white;
 }
 
 /*
@@ -14,19 +13,23 @@ body {
     top: 3.5rem;
     bottom: 0;
     left: 0;
-    padding: 40px 0 0 0;
+    padding: 2.5rem 0 0 0;
     overflow-x: hidden;
     overflow-y: auto;
     border-right: 1px solid #eee;
 }
 
-/* Sidebar navigation */
 .sidebar .nav {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem
 }
 
 .sidebar .nav-item {
     width: 100%;
+}
+
+.sidebar .nav-item a {
+    color: black;
+    padding-left: 2rem;
 }
 
 .sidebar .nav-item + .nav-item {
@@ -37,29 +40,9 @@ body {
     border-radius: 0;
 }
 
+/* AbuseIO blue */
 .bg-abuseio {
-    background-color: #2196f3;
-}
-
-
-
-
-
-
-
-
-
-
-
-.col-centered {
-    float: none;
-    margin: 0 auto;
-}
-
-/* Global add-ons */
-.sub-header {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    background-color: #2196f3 !important;
 }
 
 /* Disabled links, really disable */
@@ -73,7 +56,7 @@ body {
 }
 
 /* Helper classes for more vertical spacing */
-.top-buffer { margin-top: 20px; }
+.top-buffer { margin-top: 1.25rem; }
 
 .breadcrumb {
     background-color: transparent;
@@ -82,18 +65,18 @@ body {
 
 /* Customize information lists */
 .dl-horizontal > dt {
-    display:table-cell;
-    vertical-align:middle;
-    height:3em;
+    display: table-cell;
+    vertical-align: middle;
+    height: 3rem;
 }
 .dl-horizontal > dt,
 .dl-horizontal > dd {
-    vertical-align:middle;
+    vertical-align: middle;
 }
 
 /* Customize breadcrumbs */
-.breadcrumb li {font-size: 19px;}
-.breadcrumb > li + li:before {content: "\00bb\00a0";}
+.breadcrumb-item { font-size: 1.2rem; }
+.breadcrumb-item+.breadcrumb-item:before { content: "\00bb\00a0"; }
 
 /*
  * Customize the CopyToClipboard button
@@ -112,13 +95,7 @@ body {
  */
 #snackbar-container {
     left: unset;
-    right:20px !important;
-}
-
-.valign-center {
-    display: inline-flex;
-    vertical-align: middle;
-    align-items: center;
+    right: 1.3rem !important;
 }
 
 /*
@@ -128,11 +105,42 @@ body {
     font-size: unset;
 }
 
+#user-search-form .dropdownjs::after {
+    font-size: unset;
+}
+
 /*
  * Prevent material icons from making the navbar higher
  */
 .material-icons {
-    float: left;
-    margin-top: -2px;
-    margin-right: 5px;
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+}
+
+/* Center objects */
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+/* Verticle alignment helper */
+.valign-center {
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.search_box .material-icons {
+    color: rgba(255, 255, 255, 0.498) !important;
+}
+.search_box {
+    width: 32px;
+    transition-timing-function: ease-out;
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+}
+
+.search_box.open {
+    width: 200px;
 }

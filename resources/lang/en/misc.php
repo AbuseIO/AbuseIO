@@ -15,7 +15,7 @@ return [
                          process.',
 
     // Sidemenu
-    'sidemenu'                     => [
+    'sidemenu' => [
         'home'         => 'Home',
         'contacts'     => 'Contacts',
         'netblocks'    => 'Netblocks',
@@ -28,7 +28,7 @@ return [
         'search'       => 'Search',
     ],
     // Topmenu
-    'topmenu'                      => [
+    'topmenu' => [
         'language' => 'Language',
         'options'  => 'Options',
         'accounts' => 'Accounts',
@@ -141,8 +141,17 @@ return [
     'delete'                       => 'delete',
     'update'                       => 'update',
     'create'                       => 'create',
+    'confirm_delete'               => 'Confirm Delete',
+    'yes'                          => 'yes',
+    'no'                           => 'no',
 
     // Note text
     'note_text_status_sync_parent' => 'Synced status with parent AbuseIO instance',
     'note_text_status_sync_child'  => 'Synced contact status with child AbuseIO instance',
+
+    // Sentences
+    'sentence' => [
+        'confirm_delete' => 'Are you sure you want to delete this record?',
+    ],
+
 ];
