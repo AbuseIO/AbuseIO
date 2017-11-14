@@ -3,11 +3,12 @@
 /**
  * Translates the given message based on a count and Uppercases the first character.
  *
- * @param  string  $id
- * @param  int     $number
- * @param  array   $parameters
- * @param  string  $domain
- * @param  string  $locale
+ * @param string $id
+ * @param int    $number
+ * @param array  $parameters
+ * @param string $domain
+ * @param string $locale
+ *
  * @return string
  */
 if (!function_exists('uctrans')) {

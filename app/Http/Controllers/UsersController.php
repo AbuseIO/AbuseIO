@@ -81,9 +81,9 @@ class UsersController extends Controller
     public function index()
     {
         Javascript::put([
-            't_disabled' => uctrans('misc.disabled'),
-            't_enabled' => uctrans('misc.enabled'),
-            't_none' => uctrans('misc.none'),
+            't_disabled'  => uctrans('misc.disabled'),
+            't_enabled'   => uctrans('misc.enabled'),
+            't_none'      => uctrans('misc.none'),
             't_usersaved' => trans('users.user'),
         ]);
 
@@ -197,7 +197,6 @@ class UsersController extends Controller
         return response()->json(['user' => $user, 'message' => trans('users.message.disabled', ['user' => $user->fullName()])]);
     }
 
-
     /**
      * Search for users.
      *
@@ -220,7 +219,6 @@ class UsersController extends Controller
             'accounts'       => Account::all()->pluck('name', 'id')->put(-1, 'All accounts')->sort(),
         ]);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -246,7 +244,6 @@ class UsersController extends Controller
         return Redirect::route('admin.users.show', $user->id)
                        ->with('message', trans('users.message.created', ['user' => $user->fullName()]));
     }
-
 
     /**
      * Remove the specified resource from storage.

@@ -6,8 +6,7 @@ Route::model('users', 'AbuseIO\Models\User', function () {
 
 Route::resource('users', 'UsersController');
 
-Route::group(['prefix' => 'users', 'as' => 'users.'], function()
-{
+Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
     // Search users
     route::get(
         '',
@@ -75,7 +74,7 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function()
         ]
     );
 
-    /**
+    /*
      *
      * These are converted to ajax calls
      *
