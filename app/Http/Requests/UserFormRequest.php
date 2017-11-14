@@ -3,11 +3,14 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\User;
+use Illuminate\Foundation\Http\FormRequest;
+use Symfony\Component\HttpFoundation\ParameterBag;
+
 
 /**
  * Class UserFormRequest.
  */
-class UserFormRequest extends Request
+class UserFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -42,5 +45,41 @@ class UserFormRequest extends Request
         }
 
         return [];
+    }
+
+    /**
+     * Transform the form results before sending it to validation.
+     *
+     * @param array $query
+     * @param array $request
+     * @param array $attributes
+     * @param array $cookies
+     * @param array $files
+     * @param array $server
+     * @param null  $content
+     */
+    public function initialize(
+        array $query = [],
+        array $request = [],
+        array $attributes = [],
+        array $cookies = [],
+        array $files = [],
+        array $server = [],
+        $content = null
+    ) {
+        parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
+
+        if (array_key_exists('disabled', $request)) {
+            $disabled = filter_var($request['disabled'], FILTER_VALIDATE_BOOLEAN);
+        } else {
+            $disabled = false;
+        }
+
+        //$request['disabled'] = $disabled;
+        $this->request->add(
+            [
+                'disabled' => $disabled,
+            ]
+        );
     }
 }

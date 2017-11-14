@@ -5,9 +5,7 @@ body {
     padding-top: 3.5rem;
 }
 
-/*
- * Sidebar
- */
+/* Sidebar */
 .sidebar {
     position: fixed;
     top: 3.5rem;
@@ -18,24 +16,19 @@ body {
     overflow-y: auto;
     border-right: 1px solid #eee;
 }
-
 .sidebar .nav {
     margin-bottom: 1.25rem
 }
-
 .sidebar .nav-item {
     width: 100%;
 }
-
 .sidebar .nav-item a {
     color: black;
     padding-left: 2rem;
 }
-
 .sidebar .nav-item + .nav-item {
     margin-left: 0;
 }
-
 .sidebar .nav-link {
     border-radius: 0;
 }
@@ -44,39 +37,45 @@ body {
 .bg-abuseio {
     background-color: #2196f3 !important;
 }
+.bg-purple {
+    background-color: #3f51b5 !important;
+}
+.bg-blue {
+    background-color: #2972d0 !important;
+}
 
 /* Disabled links, really disable */
-.btn.disabled,
-.dropdown-menu > .disabled{
-    cursor: not-allowed;
-}
-.btn.disabled,
-.dropdown-menu > .disabled > a{
-    pointer-events: none;
-}
+/*.btn.disabled,*/
+/*.dropdown-menu > .disabled{*/
+    /*cursor: not-allowed;*/
+/*}*/
+/*.btn.disabled,*/
+/*.dropdown-menu > .disabled > a{*/
+    /*pointer-events: none;*/
+/*}*/
 
 /* Helper classes for more vertical spacing */
 .top-buffer { margin-top: 1.25rem; }
 
-.breadcrumb {
-    background-color: transparent;
-    padding-left: 0;
-}
+/*.breadcrumb {*/
+    /*background-color: transparent;*/
+    /*padding-left: 0;*/
+/*}*/
 
 /* Customize information lists */
-.dl-horizontal > dt {
-    display: table-cell;
-    vertical-align: middle;
-    height: 3rem;
-}
-.dl-horizontal > dt,
-.dl-horizontal > dd {
-    vertical-align: middle;
-}
+/*.dl-horizontal > dt {*/
+    /*display: table-cell;*/
+    /*vertical-align: middle;*/
+    /*height: 3rem;*/
+/*}*/
+/*.dl-horizontal > dt,*/
+/*.dl-horizontal > dd {*/
+    /*vertical-align: middle;*/
+/*}*/
 
 /* Customize breadcrumbs */
-.breadcrumb-item { font-size: 1.2rem; }
-.breadcrumb-item+.breadcrumb-item:before { content: "\00bb\00a0"; }
+/*.breadcrumb-item { font-size: 1.2rem; }*/
+/*.breadcrumb-item+.breadcrumb-item:before { content: "\00bb\00a0"; }*/
 
 /*
  * Customize the CopyToClipboard button
@@ -93,28 +92,28 @@ body {
 /*
  * Override the snackbar alignment.
  */
-#snackbar-container {
-    left: unset;
-    right: 1.3rem !important;
-}
+/*#snackbar-container {*/
+    /*left: unset;*/
+    /*right: 1.3rem !important;*/
+/*}*/
 
 /*
  * Fix issue where the carot is too big in the search form
  */
-#search-form .dropdownjs::after {
-    font-size: unset;
-}
+/*#search-form .dropdownjs::after {*/
+    /*font-size: unset;*/
+/*}*/
 
-#user-search-form .dropdownjs::after {
-    font-size: unset;
-}
+/*#user-search-form .dropdownjs::after {*/
+    /*font-size: unset;*/
+/*}*/
 
 /*
  * Prevent material icons from making the navbar higher
  */
 .material-icons {
     display: inline-flex;
-    vertical-align: middle;
+    vertical-align: bottom;
     align-items: center;
 }
 
@@ -127,7 +126,7 @@ body {
 /* Verticle alignment helper */
 .valign-center {
     display: inline-flex;
-    vertical-align: middle;
+    vertical-align: bottom;
     align-items: center;
 }
 

@@ -1,17 +1,18 @@
 <?php
 
 /**
- * Uppercase the first character of the translated string
- * Simple wrapper around the trans_choice() function.
+ * Translates the given message based on a count and Uppercases the first character.
  *
- * @param $string
- * @param $count
- *
+ * @param  string  $id
+ * @param  int     $number
+ * @param  array   $parameters
+ * @param  string  $domain
+ * @param  string  $locale
  * @return string
  */
 if (!function_exists('uctrans')) {
-    function uctrans($string, $count = 1)
+    function uctrans($id, $number = 1, array $parameters = [], $domain = 'messages', $locale = null)
     {
-        return ucfirst(trans_choice($string, $count));
+        return ucfirst(app('translator')->transChoice($id, $number, $parameters, $domain, $locale));
     }
 }

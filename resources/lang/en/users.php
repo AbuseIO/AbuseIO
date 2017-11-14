@@ -5,9 +5,8 @@
  */
 return [
     // Headers
-    'header.new'      => 'New user',
-    'header.edit'     => 'Edit user',
-    'header.detail'   => 'User details for',
+    'header.new'      => 'New User',
+    'header.edit'     => 'Edit User',
 
     // Buttons
     'button.new_user' => 'New User',

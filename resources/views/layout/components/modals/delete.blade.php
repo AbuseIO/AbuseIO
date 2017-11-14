@@ -11,8 +11,8 @@
                 {{ trans('misc.sentence.confirm_delete') }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">{{ uctrans('misc.no') }}</button>
-                <button type="button" class="btn btn-raised btn-danger" data-dismiss="modal">{{ uctrans('misc.yes') }}</button>
+                <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">{{ uctrans('misc.button.cancel') }}</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">{{ uctrans('misc.button.delete') }}</button>
             </div>
         </div>
     </div>

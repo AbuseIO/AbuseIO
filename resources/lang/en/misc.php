@@ -144,6 +144,7 @@ return [
     'confirm_delete'               => 'Confirm Delete',
     'yes'                          => 'yes',
     'no'                           => 'no',
+    'none'                         => 'none',
 
     // Note text
     'note_text_status_sync_parent' => 'Synced status with parent AbuseIO instance',
@@ -152,6 +153,7 @@ return [
     // Sentences
     'sentence' => [
         'confirm_delete' => 'Are you sure you want to delete this record?',
+        'confirm' => 'Are you sure you want to :action this record?',
     ],
 
 ];

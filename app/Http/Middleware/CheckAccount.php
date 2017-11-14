@@ -104,7 +104,7 @@ class CheckAccount
             $model_id = $request->input('id');
         }
 
-        $this->model_id = $model_id;
+        $this->model_id = (int) $model_id;
     }
 
     /**
@@ -119,7 +119,8 @@ class CheckAccount
         }
 
         Log::notice(
-            "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, which doesn't match the model_id format"
+            "CheckAccount Middleware is called, with model_id [{$this->model_id}] for {$this->model}, ".
+            "which doesn't match the model_id format"
         );
 
         return false;

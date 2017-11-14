@@ -73,7 +73,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $casts = [
         'options' => 'array',
+        'disabled' => 'boolean',
+        //'systemuser' => 'boolean',
     ];
+
+    /**
+     * Eager load the roles and account related to this user.
+     *
+     * @var array
+     */
+    protected $with = ['roles', 'account'];
 
     /*
     |--------------------------------------------------------------------------
@@ -95,7 +104,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'password'   => 'required|confirmed|min:6|max:32',
             'account_id' => 'required|integer|exists:accounts,id',
             'locale'     => 'required|min:2|max:3',
-            'disabled'   => 'required|stringorboolean', // disabled is sent as a string
+            'disabled'   => 'required|boolean', // disabled is sent as a string
             'roles'      => 'sometimes',
         ];
 
@@ -114,11 +123,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $rules = [
             'first_name' => 'required|string',
             'last_name'  => 'required|string',
-            'email'      => 'required|email|unique:users,email,'.$user->id,
+            'email'      => 'required|email|unique:users,email,'. $user->id,
             'password'   => 'sometimes|confirmed|min:6|max:32',
             'account_id' => 'required|integer|exists:accounts,id',
             'locale'     => 'sometimes|required|min:2|max:3',
-            'disabled'   => 'sometimes|required|stringorboolean', // disabled is sent as a string
+            'disabled'   => 'sometimes|required|boolean',
             'roles'      => 'sometimes',
         ];
 

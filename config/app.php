@@ -207,6 +207,7 @@ return [
         'Sorskod\Larasponse\LarasponseServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
         Stevebauman\EloquentTable\EloquentTableServiceProvider::class,
+        Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
 
         /*
          * Developer Providers

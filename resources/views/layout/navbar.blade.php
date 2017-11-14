@@ -1,4 +1,4 @@
-<nav id="header" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" role="navigation">
+<nav id="header" class="navbar navbar-expand-lg navbar-dark bg-purple fixed-top" role="navigation">
     <a class="navbar-brand" href="/admin/home">{{ Config::get('app.name') }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavTop" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

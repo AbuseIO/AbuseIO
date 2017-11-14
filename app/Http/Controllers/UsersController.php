@@ -12,6 +12,7 @@ use Config;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Input;
+use JavaScript;
 use League\Fractal\Manager;
 use Redirect;
 
@@ -80,6 +81,19 @@ class UsersController extends Controller
      */
     public function index()
     {
+        Javascript::put([
+            't_disabled' => uctrans('misc.disabled'),
+            't_enabled' => uctrans('misc.enabled'),
+            't_none' => uctrans('misc.none'),
+            't_usersaved' => trans('users.user'),
+        ]);
+
+        // Create locales array
+        $locales = ['null' => null];
+        foreach (Config::get('app.locales') as $locale => $locale_data) {
+            $locales[$locale] = $locale_data[0];
+        }
+
         // Get saved search values.
         $searchValues = User::getSearchValues('users.search');
 
@@ -90,13 +104,100 @@ class UsersController extends Controller
 
         $userList = $this->searchUsers();
 
+        $accounts = Account::all()->pluck('name', 'id')->sort()->prepend(null, 'null');
+
         return view('users.index', [
-            'users'          => $userList,
-            'auth_user'      => $this->auth_user,
-            'search_options' => $this->searchFields,
-            'accounts'       => Account::all()->pluck('name', 'id')->put(-1, 'All accounts')->sort(),
+            'users'             => $userList,
+            'locale_selection'  => $locales,
+            'locale_selected'   => null,
+            'account_selection' => $accounts,
+            'account_selected'  => null,
+            'roles_selection'   => Role::all()->pluck('name', 'id')->sort(),
+            'roles_selected'    => null,
+            'disabled_checked'  => false,
+            'auth_user'         => $this->auth_user,
+            'search_options'    => $this->searchFields,
         ]);
     }
+
+    /**
+     * Get User.
+     *
+     * @param User $user
+     *
+     * @return JsonResponse
+     */
+    public function get(User $user)
+    {
+        return response()->json($user);
+    }
+
+    /**
+     * Update User.
+     *
+     * @param UserFormRequest $userForm
+     * @param User            $user
+     *
+     * @return JsonResponse
+     */
+    public function update(UserFormRequest $userForm, User $user)
+    {
+        $formFields = $userForm->all();
+
+        \Log::debug($user);
+        if (empty($formFields['password'])) {
+            unset($formFields['password']);
+        }
+
+        if (!array_key_exists('roles', $formFields)) {
+            $formFields['roles'] = [];
+        }
+
+        $user->roles()->sync($formFields['roles']);
+        $user->update($formFields);
+        $user = $user->fresh();
+
+        return response()->json(['user' => $user, 'message' => trans('users.message.updated', ['user' => $user->fullName()])]);
+    }
+
+    /**
+     * Enable User.
+     *
+     * @param User $user
+     *
+     * @return JsonResponse
+     */
+    public function enable(User $user)
+    {
+        if (!$this->user->mayEnable($this->auth_user)) {
+            return response()->json(['message' => trans('users.message.no_self_action', ['action' => trans('misc.enable')])]);
+        }
+
+        $user->disabled = false;
+        $user->save();
+
+        return response()->json(['user' => $user, 'message' => trans('users.message.enabled', ['user' => $user->fullName()])]);
+    }
+
+    /**
+     * Disable the user.
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function disable(User $user)
+    {
+        if (!$this->user->mayEnable($this->auth_user)) {
+            return response()->json(['message' => trans('users.message.no_self_action', ['action' => trans('misc.disabled')])]);
+        }
+
+        $user->disabled = true;
+        $user->save();
+
+        return response()->json(['user' => $user, 'message' => trans('users.message.disabled', ['user' => $user->fullName()])]);
+    }
+
 
     /**
      * Search for users.
@@ -121,77 +222,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified user.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        $data = $this->handleShow($user);
-        $user = $data['user'];
-        $account = $data['account'];
-
-        $locale = Config::get('app.locales');
-
-        return view('users.show')
-            ->with('account', $account)
-            ->with('user', $user)
-            ->with('roles', $user->roles)
-            ->with('language', $locale[$user->locale][0])
-            ->with('auth_user', $this->auth_user);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $locales = [];
-        foreach (Config::get('app.locales') as $locale => $localeData) {
-            $locales[$locale] = $localeData[0];
-        }
-
-        return view('users.create')
-            ->with('account_selection', Account::lists('name', 'id')->sort())
-            ->with('selected', null)
-            ->with('locale_selection', $locales)
-            ->with('locale_selected', null)
-            ->with('disabled_checked', 0)
-            ->with('roles', Role::lists('name', 'id')->sort())
-            ->with('selected_roles', null)
-            ->with('auth_user', $this->auth_user);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        $locales = [];
-        foreach (Config::get('app.locales') as $locale => $locale_data) {
-            $locales[$locale] = $locale_data[0];
-        }
-
-        return view('users.edit')
-            ->with('user', $user)
-            ->with('account_selection', Account::lists('name', 'id')->sort())
-            ->with('selected', $user->account_id)
-            ->with('locale_selection', $locales)
-            ->with('locale_selected', null)
-            ->with('disabled_checked', $user->disabled)
-            ->with('roles', Role::lists('name', 'id')->sort())
-            ->with('selected_roles', $user->roles->lists('id')->toArray())
-            ->with('auth_user', $this->auth_user);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -218,75 +248,6 @@ class UsersController extends Controller
                        ->with('message', trans('users.message.created', ['user' => $user->fullName()]));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UserFormRequest $userForm
-     * @param User            $user
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(UserFormRequest $userForm, User $user)
-    {
-        $formFields = $userForm->all();
-
-        // Convert string to boolean
-        $formFields['disabled'] = ($formFields['disabled'] === 'true');
-
-        if (empty($formFields['password'])) {
-            unset($formFields['password']);
-        }
-
-        // update the user with the data
-        $user->update($formFields);
-
-        // link the roles to the user
-        if ($formFields['roles'] == null) {
-            $formFields['roles'] = [];
-        }
-        $user->roles()->sync($formFields['roles']);
-
-        return Redirect::route('admin.users.show', $user->id)
-            ->with('message', trans('users.message.updated', ['user' => $user->fullName()]));
-    }
-
-    /**
-     * Enable the user.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function enable(User $user)
-    {
-        if (!$this->user->mayEnable($this->auth_user)) {
-            return back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.enable')]));
-        }
-
-        $user->disabled = false;
-        $user->save();
-
-        return back()->with('message', trans('users.message.enabled', ['user' => $user->fullName()]));
-    }
-
-    /**
-     * Disable the user.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function disable(User $user)
-    {
-        if (!$this->user->mayEnable($this->auth_user)) {
-            return back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.disable')]));
-        }
-
-        $user->disabled = true;
-        $user->save();
-
-        return back()->with('message', trans('users.message.disabled', ['user' => $user->fullName()]));
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -299,18 +260,15 @@ class UsersController extends Controller
     {
         // Do not allow our own user to be destroyed.
         if ($user->is($this->auth_user)) {
-            return json_encode(['sucess' => false, 'message' => trans('users.message.no_self_action', ['action' => trans('misc.delete')])]);
-//            return Redirect::back()->with('message', trans('users.message.no_self_action', ['action' => trans('misc.delete')]));
+            return response()->json(['sucess' => false, 'message' => trans('users.message.no_self_action', ['action' => trans('misc.delete')])]);
         }
 
         // Save the username, so we can show it in the snackbar.
         $userName = $user->fullName();
 
-        //$user->delete();
+        $user->delete();
 
-        return json_encode(['success' => true, 'message' => trans('users.message.deleted', ['user' => $userName])]);
-//        return Redirect::route('admin.users.index')
-//            ->with('message', trans('users.message.deleted', ['user' => $userName]));
+        return response()->json(['success' => true, 'message' => trans('users.message.deleted', ['user' => $userName])]);
     }
 
     /**

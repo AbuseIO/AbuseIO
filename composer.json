@@ -87,7 +87,8 @@
 		"zendframework/zend-http": "2.6",
 		"jeremykendall/php-domain-parser": "^3.0",
 		"zendframework/zend-json": "^3.0",
-		"jover/singleton": "^1.0"
+		"jover/singleton": "^1.0",
+		"laracasts/utilities": "^3.0"
 
 	},
 	"require-dev": {
