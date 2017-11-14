@@ -112,7 +112,7 @@ class CheckAccount
     {
         $this->resolveModelId($this->request);
 
-        if (!empty($this->model_id) && preg_match('/\d+/', $this->model_id)) {
+        if (!empty($this->model_id) && is_numeric($this->model_id)) {
             return true;
         }
 
