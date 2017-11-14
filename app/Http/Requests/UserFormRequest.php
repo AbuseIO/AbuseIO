@@ -4,8 +4,6 @@ namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Symfony\Component\HttpFoundation\ParameterBag;
-
 
 /**
  * Class UserFormRequest.

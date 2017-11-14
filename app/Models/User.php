@@ -72,7 +72,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $casts = [
-        'options' => 'array',
+        'options'  => 'array',
         'disabled' => 'boolean',
         //'systemuser' => 'boolean',
     ];
@@ -123,7 +123,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $rules = [
             'first_name' => 'required|string',
             'last_name'  => 'required|string',
-            'email'      => 'required|email|unique:users,email,'. $user->id,
+            'email'      => 'required|email|unique:users,email,'.$user->id,
             'password'   => 'sometimes|confirmed|min:6|max:32',
             'account_id' => 'required|integer|exists:accounts,id',
             'locale'     => 'sometimes|required|min:2|max:3',
