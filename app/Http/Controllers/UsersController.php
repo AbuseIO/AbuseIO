@@ -9,7 +9,6 @@ use AbuseIO\Models\User;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\UserTransformer;
 use Config;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Input;
 use JavaScript;

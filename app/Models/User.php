@@ -355,7 +355,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @return bool
      */
-    public function mayDisable(User $auth_user)
+    public function mayDisable(self $auth_user)
     {
         // can't disable/enable ourselves
         return !$auth_user->is($this);
@@ -369,7 +369,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @return bool
      */
-    public function mayEnable(User $auth_user)
+    public function mayEnable(self $auth_user)
     {
         return $this->mayDisable($auth_user);
     }
