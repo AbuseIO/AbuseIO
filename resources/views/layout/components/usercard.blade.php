@@ -1,4 +1,4 @@
-<card class="col-sm-6 col-md-4 col-lg-3 mb-4" id="card_{{ $user->id }}">
+<card class="col-sm-6 col-md-4 col-lg-3 mb-4 fade show" id="card_{{ $user->id }}">
     <div class="card">
         <div class="card-header text-white
             @if ($user->disabled)
@@ -41,10 +41,15 @@
                                                 data-callback="usercardUpdate"
                                                 data-route="{{ route('admin.users.disable', $user->id) }}"
                                                 style="display:{{ $user->disabled === true ? 'none' : 'inline-block' }}">{{  trans('misc.button.disable') }}</button>
-                                    <button type="button" class="dropdown-item text-danger" data-toggle="modal"
-                                            data-target="#confirmDelete" data-action="delete"
-                                            data-target-route="{{ route('admin.users.destroy', $user->id) }}"
-                                            data-record-id="{{ $user->id }}">{{  trans('misc.button.delete') }}</button>
+                                        <button id="btnDelete_{{ $user->id }}" type="button" class="dropdown-item text-danger" data-toggle="modal"
+                                                data-target="#confirm"
+                                                data-action="delete"
+                                                data-title="{{ uctrans('misc.delete') }}"
+                                                data-message="{{ trans('misc.sentence.confirm', ['action' => trans('misc.delete')]) }}"
+                                                data-confirm="{{ uctrans('misc.delete') }}"
+                                                data-confirm-class="btn-danger"
+                                                data-callback="usercardRemove"
+                                                data-route="{{ route('admin.users.destroy', $user->id) }}">{{  trans('misc.button.delete') }}</button>
                                 </div>
                             </div>
                         </div>

@@ -124,7 +124,7 @@ class UsersController extends Controller
      *
      * @param User $user
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function get(User $user)
     {
@@ -137,13 +137,12 @@ class UsersController extends Controller
      * @param UserFormRequest $userForm
      * @param User            $user
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UserFormRequest $userForm, User $user)
     {
         $formFields = $userForm->all();
 
-        \Log::debug($user);
         if (empty($formFields['password'])) {
             unset($formFields['password']);
         }
@@ -164,7 +163,7 @@ class UsersController extends Controller
      *
      * @param User $user
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function enable(User $user)
     {
@@ -197,6 +196,28 @@ class UsersController extends Controller
         return response()->json(['user' => $user, 'message' => trans('users.message.disabled', ['user' => $user->fullName()])]);
     }
 
+    /**
+     * Delete the user.
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(User $user)
+    {
+        // Do not allow our own user to be destroyed.
+        if ($user->is($this->auth_user)) {
+            return response()->json(['message' => trans('users.message.no_self_action', ['action' => trans('misc.delete')])]);
+        }
+
+        // Save the username, so we can show it in the snackbar.
+        $userName = $user->fullName();
+        $userId = $user->id;
+
+        $user->delete();
+
+        return response()->json(['message' => trans('users.message.deleted', ['user' => $userName]), 'id' => $userId]);
+    }
 
     /**
      * Search for users.
@@ -248,27 +269,7 @@ class UsersController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy(User $user)
-    {
-        // Do not allow our own user to be destroyed.
-        if ($user->is($this->auth_user)) {
-            return response()->json(['sucess' => false, 'message' => trans('users.message.no_self_action', ['action' => trans('misc.delete')])]);
-        }
 
-        // Save the username, so we can show it in the snackbar.
-        $userName = $user->fullName();
-
-        $user->delete();
-
-        return response()->json(['success' => true, 'message' => trans('users.message.deleted', ['user' => $userName])]);
-    }
 
     /**
      * Return all users for API request.

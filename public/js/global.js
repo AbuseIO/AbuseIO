@@ -40,7 +40,19 @@ $(document).ready(function() {
             $(this).find('.btnConfirm').text(data.confirm);
             $(this).find('.btnConfirm').addClass(data.confirmClass);
 
+            var actionMethod = null;
+            switch(data.action) {
+                case 'enable':
+                case 'disable':
+                    actionMethod = 'GET';
+                    break;
+                case 'delete':
+                    actionMethod = 'DELETE';
+                    break;
+            }
+
             $('.btnConfirm', this).data('route', data.route);
+            $('.btnConfirm', this).data('method', actionMethod);
             $('.btnConfirm', this).data('callback', data.callback);
         })
 
@@ -52,14 +64,14 @@ $(document).ready(function() {
         .on('click', '.btnConfirm', function () {
             var confirmReq = $.ajax({
                 url: $(this).data('route'),
-                type: 'GET',
+                type: $(this).data('method'),
                 data: null,
                 dataType: 'json'
             });
 
             confirmReq.done( function (response) {
                 $(this).closeConfirm();
-
+                console.log(response);
                 var cbFunction = $('#confirm').find('.btnConfirm').data('callback');
                 if (typeof $(this)[cbFunction] === 'function') {
                     $(this)[cbFunction](response);
@@ -113,23 +125,4 @@ $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
-});
-
-// Create jQuery DELETE/PUT function
-jQuery.each( [ "put", "delete" ], function( i, method ) {
-    jQuery[ method ] = function( url, data, callback, type ) {
-        if ( jQuery.isFunction( data ) ) {
-            type = type || callback;
-            callback = data;
-            data = undefined;
-        }
-
-        return jQuery.ajax({
-            url: url,
-            type: method,
-            dataType: type,
-            data: data,
-            success: callback
-        });
-    };
 });

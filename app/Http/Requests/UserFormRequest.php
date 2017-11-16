@@ -4,8 +4,6 @@ namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Symfony\Component\HttpFoundation\ParameterBag;
-
 
 /**
  * Class UserFormRequest.
@@ -48,38 +46,21 @@ class UserFormRequest extends FormRequest
     }
 
     /**
-     * Transform the form results before sending it to validation.
+     * Manipulate the data before we send it to the validator.
      *
-     * @param array $query
-     * @param array $request
-     * @param array $attributes
-     * @param array $cookies
-     * @param array $files
-     * @param array $server
-     * @param null  $content
+     * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function initialize(
-        array $query = [],
-        array $request = [],
-        array $attributes = [],
-        array $cookies = [],
-        array $files = [],
-        array $server = [],
-        $content = null
-    ) {
-        parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
-
-        if (array_key_exists('disabled', $request)) {
-            $disabled = filter_var($request['disabled'], FILTER_VALIDATE_BOOLEAN);
+    public function getValidatorInstance()
+    {
+        $data = $this->all();
+        if (array_key_exists('disabled', $data)) {
+            $data['disabled'] = filter_var($data['disabled'], FILTER_VALIDATE_BOOLEAN);
         } else {
-            $disabled = false;
+            $data['disabled'] = false;
         }
 
-        //$request['disabled'] = $disabled;
-        $this->request->add(
-            [
-                'disabled' => $disabled,
-            ]
-        );
+        $this->getInputSource()->replace($data);
+
+        return parent::getValidatorInstance();
     }
 }

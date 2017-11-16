@@ -21,7 +21,7 @@ $(document).ready(function() {
                     $.get("http://localhost:8000/admin/users/" + data.recordId, function (response) {
 
                         // Fill the normal input fields, no selects, checkboxes and no dropdown fakeinput elements
-                        userModal.find(':input').not(':checkbox :button, select, .fakeinput').each(function() {
+                        userModal.find(':input').not(':checkbox, :button, select').each(function() {
                             if (response.hasOwnProperty(this.id)) {
                                 $(this).val(response[this.id]);
                             }
@@ -93,9 +93,6 @@ $(document).ready(function() {
             });
         });
 
-    // Create fancy dropdowns from all select elements.
-    //$('#dropdown-menu').find('select').dropdown();
-
     $.fn.usercardUpdate = function(json) {
         var userData = json.user;
         var cardFields = ['first_name', 'last_name', 'disabled', 'locale', 'account_id', 'roles'];
@@ -138,5 +135,12 @@ $(document).ready(function() {
                 }
             }
         });
+    };
+
+    $.fn.usercardRemove = function(json) {
+        var id = json.id;
+        var card = $('#card_'+id);
+        card.fadeOut(200);
+        card.remove();
     }
 });
