@@ -14,42 +14,48 @@
                     <div class="container-fluid">
                         <div class="row justify-content-end">
                             <div class="dropdown">
-                                <button type="button" class="btn btn-secondary bmd-btn-icon dropdown-toggle" id="userOptionsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button id="userOptionsMenu" type="button" class="btn btn-secondary bmd-btn-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="material-icons">more_vert</i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userOptionsMenu">
-                                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#user" data-action="edit" data-form-method="patch" data-form-action="{{ route('admin.users.update', $user->id) }}" data-title="{{ uctrans('users.header.edit') }}" data-record-id="{{ $user->id }}">
-                                        {{  trans('misc.button.edit') }}
-                                    </button>
-                                        <button id="btnEnable_{{ $user->id }}" type="button" class="dropdown-item" data-toggle="modal"
-                                                data-target="#confirm"
-                                                data-action="enable"
-                                                data-title="{{ uctrans('misc.enable') }}"
-                                                data-message="{{ trans('misc.sentence.confirm', ['action' => trans('misc.enable')]) }}"
-                                                data-confirm="{{ uctrans('misc.enable') }}"
-                                                data-confirm-class="btn-success"
-                                                data-callback="usercardUpdate"
-                                                data-route="{{ route('admin.users.enable', $user->id) }}"
-                                                style="display:{{ !$user->disabled === true ? 'none' : 'inline-block' }}">{{  trans('misc.button.enable') }}</button>
-                                        <button id="btnDisable_{{ $user->id }}" type="button" class="dropdown-item" data-toggle="modal"
-                                                data-target="#confirm"
-                                                data-action="disable"
-                                                data-title="{{ uctrans('misc.disable') }}"
-                                                data-message="{{ trans('misc.sentence.confirm', ['action' => trans('misc.disable')]) }}"
-                                                data-confirm="{{ uctrans('misc.disable') }}"
-                                                data-confirm-class="btn-danger"
-                                                data-callback="usercardUpdate"
-                                                data-route="{{ route('admin.users.disable', $user->id) }}"
-                                                style="display:{{ $user->disabled === true ? 'none' : 'inline-block' }}">{{  trans('misc.button.disable') }}</button>
-                                        <button id="btnDelete_{{ $user->id }}" type="button" class="dropdown-item text-danger" data-toggle="modal"
-                                                data-target="#confirm"
-                                                data-action="delete"
-                                                data-title="{{ uctrans('misc.delete') }}"
-                                                data-message="{{ trans('misc.sentence.confirm', ['action' => trans('misc.delete')]) }}"
-                                                data-confirm="{{ uctrans('misc.delete') }}"
-                                                data-confirm-class="btn-danger"
-                                                data-callback="usercardRemove"
-                                                data-route="{{ route('admin.users.destroy', $user->id) }}">{{  trans('misc.button.delete') }}</button>
+                                    <button id="btnEdit_{{ $user->id }}" type="button" class="dropdown-item" data-toggle="modal"
+                                            data-target="#user"
+                                            data-action="edit"
+                                            data-uri="{{ route('admin.users.get', $user->id) }}"
+                                            data-form-method="patch"
+                                            data-form-action="{{ route('admin.users.update', $user->id) }}"
+                                            data-title="{{ uctrans('users.header.edit') }}"
+                                            data-record-id="{{ $user->id }}">
+                                            {{  trans('misc.button.edit') }}</button>
+                                    <button id="btnEnable_{{ $user->id }}" type="button" class="dropdown-item" data-toggle="modal"
+                                            data-target="#confirm"
+                                            data-action="enable"
+                                            data-title="{{ uctrans('misc.enable') }}"
+                                            data-message="{{ trans('misc.sentence.confirm', ['action' => trans('misc.enable')]) }}"
+                                            data-confirm="{{ uctrans('misc.enable') }}"
+                                            data-confirm-class="btn-success"
+                                            data-callback="usercardUpdate"
+                                            data-route="{{ route('admin.users.enable', $user->id) }}"
+                                            style="display:{{ !$user->disabled === true ? 'none' : 'inline-block' }}">{{  trans('misc.button.enable') }}</button>
+                                    <button id="btnDisable_{{ $user->id }}" type="button" class="dropdown-item" data-toggle="modal"
+                                            data-target="#confirm"
+                                            data-action="disable"
+                                            data-title="{{ uctrans('misc.disable') }}"
+                                            data-message="{{ trans('misc.sentence.confirm', ['action' => trans('misc.disable')]) }}"
+                                            data-confirm="{{ uctrans('misc.disable') }}"
+                                            data-confirm-class="btn-danger"
+                                            data-callback="usercardUpdate"
+                                            data-route="{{ route('admin.users.disable', $user->id) }}"
+                                            style="display:{{ $user->disabled === true ? 'none' : 'inline-block' }}">{{  trans('misc.button.disable') }}</button>
+                                    <button id="btnDelete_{{ $user->id }}" type="button" class="dropdown-item text-danger" data-toggle="modal"
+                                            data-target="#confirm"
+                                            data-action="delete"
+                                            data-title="{{ uctrans('misc.delete') }}"
+                                            data-message="{{ trans('misc.sentence.confirm', ['action' => trans('misc.delete')]) }}"
+                                            data-confirm="{{ uctrans('misc.delete') }}"
+                                            data-confirm-class="btn-danger"
+                                            data-callback="usercardRemove"
+                                            data-route="{{ route('admin.users.destroy', $user->id) }}">{{  trans('misc.button.delete') }}</button>
                                 </div>
                             </div>
                         </div>

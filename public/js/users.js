@@ -18,8 +18,15 @@ $(document).ready(function() {
                     break;
                 case 'edit':
                     // Fetch current user data with Ajax call and fill form
-                    $.get("http://localhost:8000/admin/users/" + data.recordId, function (response) {
+                    var fetchReq = $.ajax({
+                        url: data.uri,
+                        type: 'get',
+                        data: null,
+                        dataType: 'json'
+                    });
 
+                    fetchReq.done(function (response) {
+                        console.log(response);
                         // Fill the normal input fields, no selects, checkboxes and no dropdown fakeinput elements
                         userModal.find(':input').not(':checkbox, :button, select').each(function() {
                             if (response.hasOwnProperty(this.id)) {
@@ -48,6 +55,16 @@ $(document).ready(function() {
 
                         //$('#dropdown-menu').find('select').dropdown();
                     });
+
+                    fetchReq.fail(function (response) {
+                        console.log(response);
+                        var errors = response.responseJSON;
+                        var errorsHtml= '';
+                        $.each( errors, function( key, value ) {
+                            errorsHtml += '<li>' + value[0] + '</li>';
+                        });
+                        $(this).snackbar('<ul>'+errorsHtml+'</ul>')
+                    })
                     break;
             }
 

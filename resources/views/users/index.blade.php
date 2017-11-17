@@ -7,7 +7,7 @@
         'menu' => [
             [
                 'type' => 'modal',
-                'route' => route('admin.users.create'),
+                'route' => route('admin.users.store'),
                 'action' => 'new',
                 'method' => 'post',
                 'title' => uctrans('users.header.new'),

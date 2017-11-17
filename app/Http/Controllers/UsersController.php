@@ -61,11 +61,7 @@ class UsersController extends Controller
             'checkaccount:User',
             [
                 'except' => [
-                    'search',
                     'index',
-                    'create',
-                    'store',
-                    'export',
                     'apiIndex',
                     'apiShow',
                 ],
@@ -80,6 +76,7 @@ class UsersController extends Controller
      */
     public function index()
     {
+        // Load some translations into javascript
         Javascript::put([
             't_disabled' => uctrans('misc.disabled'),
             't_enabled' => uctrans('misc.enabled'),
@@ -128,6 +125,8 @@ class UsersController extends Controller
      */
     public function get(User $user)
     {
+        $user->load(['roles', 'account']);
+
         return response()->json($user);
     }
 
@@ -153,9 +152,14 @@ class UsersController extends Controller
 
         $user->roles()->sync($formFields['roles']);
         $user->update($formFields);
-        $user = $user->fresh();
 
-        return response()->json(['user' => $user, 'message' => trans('users.message.updated', ['user' => $user->fullName()])]);
+        $user = $user->fresh();
+        $user->load(['roles', 'account']);
+
+        return response()->json([
+            'user' => $user,
+            'message' => trans('users.message.updated', ['user' => $user->fullName()])
+        ]);
     }
 
     /**
@@ -167,14 +171,22 @@ class UsersController extends Controller
      */
     public function enable(User $user)
     {
+        $user->load(['roles', 'account']);
+
         if (!$this->user->mayEnable($this->auth_user)) {
-            return response()->json(['message' => trans('users.message.no_self_action', ['action' => trans('misc.enable')])]);
+            return response()->json([
+                'user' => $user,
+                'message' => trans('users.message.no_self_action', ['action' => trans('misc.enable')])
+            ]);
         }
 
         $user->disabled = false;
         $user->save();
 
-        return response()->json(['user' => $user, 'message' => trans('users.message.enabled', ['user' => $user->fullName()])]);
+        return response()->json([
+            'user' => $user,
+            'message' => trans('users.message.enabled', ['user' => $user->fullName()])
+        ]);
     }
 
     /**
@@ -186,14 +198,22 @@ class UsersController extends Controller
      */
     public function disable(User $user)
     {
+        $user->load(['roles', 'account']);
+
         if (!$this->user->mayEnable($this->auth_user)) {
-            return response()->json(['message' => trans('users.message.no_self_action', ['action' => trans('misc.disabled')])]);
+            return response()->json([
+                'user' => $user,
+                'message' => trans('users.message.no_self_action', ['action' => trans('misc.disabled')])
+            ]);
         }
 
         $user->disabled = true;
         $user->save();
 
-        return response()->json(['user' => $user, 'message' => trans('users.message.disabled', ['user' => $user->fullName()])]);
+        return response()->json([
+            'user' => $user,
+            'message' => trans('users.message.disabled', ['user' => $user->fullName()])
+        ]);
     }
 
     /**
@@ -218,6 +238,11 @@ class UsersController extends Controller
 
         return response()->json(['message' => trans('users.message.deleted', ['user' => $userName]), 'id' => $userId]);
     }
+
+
+
+
+
 
     /**
      * Search for users.

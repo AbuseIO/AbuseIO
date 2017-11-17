@@ -74,15 +74,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $casts = [
         'options' => 'array',
         'disabled' => 'boolean',
-        //'systemuser' => 'boolean',
     ];
-
-    /**
-     * Eager load the roles and account related to this user.
-     *
-     * @var array
-     */
-    protected $with = ['roles', 'account'];
 
     /*
     |--------------------------------------------------------------------------

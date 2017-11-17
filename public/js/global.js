@@ -5,29 +5,6 @@ $(document).ready(function() {
     // Initialize Material Design
     $('body').bootstrapMaterialDesign();
 
-    // Make the call to delete the record, close the modal and remove the card from the page
-    $('#confirmDelete').on('click', '.btn-danger', function(e) {
-        var recordId = $(this).data('recordId');
-        var targetRoute = $(this).data('targetRoute');
-        $.delete(
-            targetRoute,
-            null,
-            function() {
-                $('#confirmDelete').modal('hide');
-                $('#card_'+recordId).remove();
-            },
-            'json'
-        );
-    });
-
-    //Set the correct targetUrl in the modal
-    $('#confirmDelete').on('show.bs.modal', function(e) {
-        var data = $(e.relatedTarget).data();
-
-        $('.btn-danger', this).data('recordId', data.recordId);
-        $('.btn-danger', this).data('targetRoute', data.targetRoute);
-    });
-
     /**
      * #confirm is a modal used for all action that need a confirmation.
      * Any confirm needs a title, message, confirm name (action) and route.
@@ -44,7 +21,7 @@ $(document).ready(function() {
             switch(data.action) {
                 case 'enable':
                 case 'disable':
-                    actionMethod = 'GET';
+                    actionMethod = 'PATCH';
                     break;
                 case 'delete':
                     actionMethod = 'DELETE';

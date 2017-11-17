@@ -3,7 +3,7 @@
 namespace tests\Console\Commands\User;
 
 use AbuseIO\Models\User;
-use Illuminate\Support\Facades\Artisan;
+use Artisan;
 use tests\TestCase;
 
 /**

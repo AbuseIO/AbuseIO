@@ -40,7 +40,7 @@ class ListCommand extends AbstractListCommand
     {
         $users = User::where('email', 'like', "%{$filter}%")->get($this->fields);
 
-        return $this->hydrateWithRoles($users);
+        return $this->hydrateWith($users);
     }
 
     /**
@@ -50,7 +50,7 @@ class ListCommand extends AbstractListCommand
     {
         $users = User::all($this->fields);
 
-        return $this->hydrateWithRoles($users);
+        return $this->hydrateWith($users);
     }
 
     /**
@@ -66,7 +66,7 @@ class ListCommand extends AbstractListCommand
      *
      * @return array
      */
-    private function hydrateWithRoles($users)
+    private function hydrateWith($users)
     {
         $userlist = [];
         foreach ($users as $user) {
@@ -88,10 +88,10 @@ class ListCommand extends AbstractListCommand
             $user = $user->toArray();
             $user['roles'] = implode(', ', $roleList);
             $user['account_id'] = $account;
+            $user['account_id'] = $account;
 
             $userlist[] = $user;
         }
-
         return $userlist;
     }
 }

@@ -6,19 +6,9 @@ Route::model('users', 'AbuseIO\Models\User', function () {
 
 Route::resource('users', 'UsersController');
 
-Route::group(['prefix' => 'users', 'as' => 'users.'], function()
-{
-    // Search users
-    route::get(
-        '',
-        [
-            'middleware' => 'permission:accounts_view',
-            'as'         => 'index',
-            'uses'       => 'UsersController@search',
-        ]
-    );
+Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
 
-    // Access to index list
+    // Index User
     route::get(
         '',
         [
@@ -28,58 +18,6 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function()
         ]
     );
 
-    // Access to export object
-    route::get(
-        'export/{format}',
-        [
-            'middleware' => 'permission:users_export',
-            'as'         => 'export',
-            'uses'       => 'UsersController@export',
-        ]
-    );
-
-    // Access to create object
-    route::get(
-        'create',
-        [
-            'middleware' => 'permission:users_create',
-            'as'         => 'create',
-            'uses'       => 'UsersController@create',
-        ]
-    );
-    route::post(
-        '',
-        [
-            'middleware' => 'permission:users_create',
-            'as'         => 'store',
-            'uses'       => 'UsersController@store',
-        ]
-    );
-
-    // Access to edit object
-    route::get(
-        '{users}/edit',
-        [
-            'middleware' => 'permission:users_edit',
-            'as'         => 'edit',
-            'uses'       => 'UsersController@edit',
-        ]
-    );
-    // Access to delete object
-    route::delete(
-        '/{users}',
-        [
-            'middleware' => 'permission:users_delete',
-            'as'         => 'destroy',
-            'uses'       => 'UsersController@destroy',
-        ]
-    );
-
-    /**
-     *
-     * These are converted to ajax calls
-     *
-     */
     // Get User
     Route::get(
         '{users}',
@@ -89,8 +27,19 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function()
             'uses'       => 'UsersController@get',
         ]
     );
+
+    // Create User
+    route::post(
+        '',
+        [
+            'middleware' => 'permission:users_create',
+            'as'         => 'store',
+            'uses'       => 'UsersController@store',
+        ]
+    );
+
     // Update User
-    route::patch(
+    Route::patch(
         '{users}',
         [
             'middleware' => 'permission:users_edit',
@@ -100,7 +49,7 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function()
     );
 
     // Disable User
-    route::get(
+    Route::patch(
         '{users}/disable',
         [
             'middleware' => 'permission:users_disable',
@@ -110,12 +59,22 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function()
     );
 
     // Enable User
-    route::get(
+    Route::patch(
         '{users}/enable',
         [
             'middleware' => 'permission:users_enable',
             'as'         => 'enable',
             'uses'       => 'UsersController@enable',
+        ]
+    );
+
+    // Delete User
+    Route::delete(
+        '{users}',
+        [
+            'middleware' => 'permission:users_delete',
+            'as'         => 'destroy',
+            'uses'       => 'UsersController@destroy',
         ]
     );
 });
