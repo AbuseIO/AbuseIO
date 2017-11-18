@@ -4,6 +4,6 @@
  * Translations for Pagination.
  */
 return [
-    'previous'  => '&laquo; Επόμενο',
-    'next'      => 'Προηγούμενο &raquo;',
+    'previous' => '&laquo; Επόμενο',
+    'next'     => 'Προηγούμενο &raquo;',
 ];

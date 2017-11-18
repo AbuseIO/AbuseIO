@@ -30,7 +30,13 @@
     <dd>{{ $contact->api_host }}</dd>
 
     <dt>{{ trans('contacts.notification') }}</dt>
-    <dd>{{ $contact->auto_notify ? trans('misc.automatic') : trans('misc.manual') }}</dd>
+    <dd>
+        @forelse ($contact->notificationMethods as $method)
+            {!! $method->method !!} <br />
+        @empty
+            {{ trans('contacts.no_notification_methods') }}
+        @endforelse
+    </dd>
 
     <dt>{{ trans('misc.status') }}</dt>
     <dd>{{ $contact->enabled ? trans('misc.enabled') : trans('misc.disabled') }}</dd>

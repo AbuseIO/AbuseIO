@@ -27,8 +27,8 @@ class ListCommandTest extends TestCase
     private function initDB()
     {
         //        \DB::table('domains')->truncate();
-//        \DB::table('contacts')->truncate();
-//        Contact::all()->delete();
+        //        \DB::table('contacts')->truncate();
+        //        Contact::all()->delete();
 
         $this->contacts = factory(Contact::class, 10)->create();
 

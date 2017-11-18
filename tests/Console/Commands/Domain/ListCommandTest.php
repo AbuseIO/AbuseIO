@@ -2,6 +2,7 @@
 
 namespace tests\Console\Commands\Domain;
 
+use AbuseIO\Models\Domain;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -25,10 +26,13 @@ class ListCommandTest extends TestCase
 
     public function testAll()
     {
+        $domain = Domain::all()->random();
+        $contact = $domain->contact;
+
         $exitCode = Artisan::call('domain:list', []);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Customer 1', Artisan::output());
+        $this->assertContains($contact->name, Artisan::output());
     }
 
     public function testFilter()

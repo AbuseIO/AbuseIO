@@ -55,9 +55,9 @@ class Evidence extends Model
     public static function createRules()
     {
         $rules = [
-            'filename'  => 'required|file',
-            'sender'    => 'required|string',
-            'subject'   => 'required|string',
+            'filename' => 'required|file',
+            'sender'   => 'required|string',
+            'subject'  => 'required|string',
         ];
 
         return $rules;
@@ -76,7 +76,7 @@ class Evidence extends Model
      */
     public function events()
     {
-        return $this->hasMany('AbuseIO\Models\Event');
+        return $this->hasMany(Event::class);
     }
 
     /**
@@ -86,12 +86,7 @@ class Evidence extends Model
      */
     public function tickets()
     {
-        return $this->hasManyThrough(
-            'AbuseIO\Models\Ticket',
-            'AbuseIO\Models\Event',
-            'evidence_id',
-            'id'
-        );
+        return $this->hasManyThrough(Ticket::class, Event::class, 'evidence_id', 'id');
     }
 
     /*
@@ -118,11 +113,11 @@ class Evidence extends Model
 
                 return [
                     'headers' => [
-                        'from'      => $this->sender,
-                        'subject'   => $this->subject,
+                        'from'    => $this->sender,
+                        'subject' => $this->subject,
                     ],
-                    'message'       => json_decode($data),
-                    'files'         => [],
+                    'message' => json_decode($data),
+                    'files'   => [],
                 ];
             } else {
                 // It's a regular email, parse it!
@@ -147,12 +142,12 @@ class Evidence extends Model
 
                 return [
                     'headers' => [
-                        'from'      => $email->getHeader('from'),
-                        'subject'   => $email->getHeader('subject'),
+                        'from'    => $email->getHeader('from'),
+                        'subject' => $email->getHeader('subject'),
                     ],
-                    'message'       => $email->getMessageBody('text'),
-                    'files'         => $email->getAttachments(),
-                    'files_dir'     => $cacheDir,
+                    'message'   => $email->getMessageBody('text'),
+                    'files'     => $email->getAttachments(),
+                    'files_dir' => $cacheDir,
                 ];
             }
         }
@@ -201,8 +196,8 @@ class Evidence extends Model
         // If tickets ip or domain contact is the same as current account
         // then allow access to this evidence
         foreach ($tickets as $ticket) {
-            if (($ticket->ip_contact_account_id == $account->id) ||
-                ($ticket->domain_contact_account_id == $account->id)
+            if (($ticket->accountIp->is($account)) ||
+                ($ticket->accountDomain->is($account))
             ) {
                 return true;
             }

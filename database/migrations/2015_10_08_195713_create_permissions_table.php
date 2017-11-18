@@ -39,22 +39,22 @@ class CreatePermissionsTable extends Migration
         // Add single permissions
         $permissions = [
             [
-                'name'                      => 'login_portal',
-                'description'               => 'Login to portal',
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'name'        => 'login_portal',
+                'description' => 'Login to portal',
+                'created_at'  => new DateTime(),
+                'updated_at'  => new DateTime(),
             ],
             [
-                'name'                      => 'login_api',
-                'description'               => 'Login to api',
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'name'        => 'login_api',
+                'description' => 'Login to api',
+                'created_at'  => new DateTime(),
+                'updated_at'  => new DateTime(),
             ],
             [
-                'name'                      => 'profile_manage',
-                'description'               => 'Manage own profile',
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'name'        => 'profile_manage',
+                'description' => 'Manage own profile',
+                'created_at'  => new DateTime(),
+                'updated_at'  => new DateTime(),
             ],
         ];
 
@@ -84,10 +84,10 @@ class CreatePermissionsTable extends Migration
         foreach ($controllers as $controller) {
             foreach ($actions as $action) {
                 $permissions[] = [
-                    'name'                      => "{$controller}_{$action}",
-                    'description'               => "Allow to {$action} {$controller}",
-                    'created_at'                => new DateTime(),
-                    'updated_at'                => new DateTime(),
+                    'name'        => "{$controller}_{$action}",
+                    'description' => "Allow to {$action} {$controller}",
+                    'created_at'  => new DateTime(),
+                    'updated_at'  => new DateTime(),
                 ];
             }
         }
@@ -96,10 +96,10 @@ class CreatePermissionsTable extends Migration
         foreach (['accounts', 'users'] as $controller) {
             foreach (['disable', 'enable'] as $action) {
                 $permissions[] = [
-                    'name'                      => "{$controller}_{$action}",
-                    'description'               => "Allow to {$action} {$controller}",
-                    'created_at'                => new DateTime(),
-                    'updated_at'                => new DateTime(),
+                    'name'        => "{$controller}_{$action}",
+                    'description' => "Allow to {$action} {$controller}",
+                    'created_at'  => new DateTime(),
+                    'updated_at'  => new DateTime(),
                 ];
             }
         }

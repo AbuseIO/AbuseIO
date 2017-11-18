@@ -52,9 +52,9 @@ class Domain extends Model
     public static function createRules()
     {
         $rules = [
-            'name'          => 'required|stringorboolean|domain|unique:domains',
-            'contact_id'    => 'required|integer|exists:contacts,id',
-            'enabled'       => 'required|boolean',
+            'name'       => 'required|stringorboolean|domain|unique:domains',
+            'contact_id' => 'required|integer|exists:contacts,id',
+            'enabled'    => 'required|boolean',
         ];
 
         return $rules;
@@ -70,9 +70,9 @@ class Domain extends Model
     public static function updateRules($domain)
     {
         $rules = [
-            'name'          => 'required|stringorboolean|domain|unique:domains,name,'.$domain->id,
-            'contact_id'    => 'required|integer|exists:contacts,id',
-            'enabled'       => 'required|boolean',
+            'name'       => 'required|stringorboolean|domain|unique:domains,name,'.$domain->id,
+            'contact_id' => 'required|integer|exists:contacts,id',
+            'enabled'    => 'required|boolean',
         ];
 
         return $rules;
@@ -91,7 +91,7 @@ class Domain extends Model
      */
     public function contact()
     {
-        return $this->belongsTo('AbuseIO\Models\Contact');
+        return $this->belongsTo(Contact::class);
     }
 
     /*
@@ -117,6 +117,6 @@ class Domain extends Model
 
         $domain = self::find($model_id);
 
-        return $domain->contact->account->id == $account->id;
+        return $domain->contact->account->is($account);
     }
 }

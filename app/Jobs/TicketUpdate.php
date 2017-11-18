@@ -24,7 +24,10 @@ class TicketUpdate extends Job
         $ticket->domain_contact_name = $domainContact->name;
         $ticket->domain_contact_email = $domainContact->email;
         $ticket->domain_contact_api_host = $domainContact->api_host;
-        $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
+        $ticket->domain_contact_auto_notify = $domainContact->auto_notify();
+
+        // Clear the ash_token, so it will be generated again
+        $ticket->ash_token_domain = '';
         $ticket->save();
     }
 
@@ -43,7 +46,10 @@ class TicketUpdate extends Job
         $ticket->ip_contact_name = $ipContact->name;
         $ticket->ip_contact_email = $ipContact->email;
         $ticket->ip_contact_api_host = $ipContact->api_host;
-        $ticket->ip_contact_auto_notify = $ipContact->auto_notify;
+        $ticket->ip_contact_auto_notify = $ipContact->auto_notify();
+
+        // Clear the ash_token, so it will be generated again
+        $ticket->ash_token_ip = '';
         $ticket->save();
     }
 
@@ -81,10 +87,12 @@ class TicketUpdate extends Job
      */
     public static function status($ticket, $newstatus = null)
     {
-        /*
-         * status list is defined in config/types.php
-         */
-        if (array_key_exists(strtoupper($newstatus), config('types.status.abusedesk'))) {
+
+        // convert to uppercase
+        $newstatus = strtoupper($newstatus);
+
+        //status list is defined in config/types.php
+        if (array_key_exists($newstatus, config('types.status.abusedesk'))) {
             $ticket->status_id = $newstatus;
             $ticket->save();
 

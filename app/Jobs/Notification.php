@@ -4,6 +4,7 @@ namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Ticket;
 use AbuseIO\Notification\Factory as NotificationFactory;
+use DB;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Log;
 use Validator;
@@ -17,9 +18,13 @@ class Notification extends Job implements SelfHandling
 {
     public $ticket;
 
+    private $selection = [];
+
+    private $only;
+
     /**
      * Sends out notifications based on the configured notification modules.
-     * Returns false on failed or havent done anything at all.
+     * Returns false on failed or haven't done anything at all.
      *
      * @param array $notifications ($notifications[$reference][$type] => array $tickets)
      *
@@ -31,7 +36,7 @@ class Notification extends Job implements SelfHandling
             && is_array(config('notifications'))
         ) {
             foreach (config('notifications') as $notificationModule => $notificationConfig) {
-                $notification = notificationFactory::create($notificationModule);
+                $notification = $this->getNotificationInstance($notificationModule);
 
                 if (config("notifications.{$notificationModule}.notification.enabled") !== true) {
                     return 'disabled';
@@ -53,7 +58,7 @@ class Notification extends Job implements SelfHandling
                 } else {
                     Log::debug(
                         get_class($this).': '.
-                        "Notifications with {$notificationModule} was successfull for contact reference: ".
+                        "Notifications with {$notificationModule} was successful for contact reference: ".
                         key($notifications)
                     );
                 }
@@ -84,7 +89,7 @@ class Notification extends Job implements SelfHandling
         ) {
             Log::debug(
                 get_class($this).': '.
-                'No notification methods are configured, no sense into calling unexisting methods'
+                'No notification methods are configured, no sense into calling un existing methods'
             );
 
             return true;
@@ -178,37 +183,10 @@ class Notification extends Job implements SelfHandling
          * Select a list of tickets that are not closed(2) by default or add ticket / reference
          * conditions if options were passed along.
          */
-        $selection = [];
 
-        $search = Ticket::where('id', '>', '0');
+        $tickets = $this->getTicketList($ticket, $reference, $force);
 
-        if (!$force) {
-            $search = Ticket::where('status_id', '!=', 'CLOSED');
-        }
-
-        if ($ticket !== false) {
-            $search->where('id', '=', $ticket);
-        }
-
-        if ($reference !== false) {
-            $search->where('ip_contact_reference', '=', $reference)
-                ->orwhere('domain_contact_reference', '=', $reference);
-        }
-
-        $tickets = $search->get();
-
-        $validator = Validator::make(
-            [
-                'notification info_interval'    => strtotime(config('main.notifications.info_interval').' ago'),
-                'notification abuse_interval'   => strtotime(config('main.notifications.abuse_interval').' ago'),
-                'notification min_lastseen'     => strtotime(config('main.notifications.min_lastseen').' ago'),
-            ],
-            [
-                'notification info_interval'    => 'required|timestamp',
-                'notification abuse_interval'   => 'required|timestamp',
-                'notification min_lastseen'     => 'required|timestamp',
-            ]
-        );
+        $validator = $this->getValidator();
 
         if ($validator->fails()) {
             $messages = $validator->messages();
@@ -221,10 +199,7 @@ class Notification extends Job implements SelfHandling
             return $message;
         }
 
-        // If an invalid value for $only is given, set default (null = both)
-        if (!in_array($only, ['ip', 'domain'])) {
-            $only = null;
-        }
+        $this->setOnly($only);
 
         $sendInfoAfter = strtotime(config('main.notifications.info_interval').' ago');
         $sendAbuseAfter = strtotime(config('main.notifications.abuse_interval').' ago');
@@ -259,7 +234,7 @@ class Notification extends Job implements SelfHandling
                     // Skip if type Info (1) and last notification was send after info interval
                     if ($ticket->last_notify_count != 0 &&
                         $ticket->type_id == 'INFO' &&
-                        $ticket->last_notify_timestamp >= $sendInfoAfter
+                         $ticket->last_notify_timestamp >= $sendInfoAfter
                     ) {
                         continue;
                     }
@@ -281,9 +256,9 @@ class Notification extends Job implements SelfHandling
                     if (!empty($ticket->ip_contact_reference) &&
                         $ticket->ip_contact_reference != 'UNDEF' &&
                         $ticket->ip_contact_auto_notify == true &&
-                        $only != 'domain'
+                        $this->only != 'domain'
                     ) {
-                        $selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
+                        $this->selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
                     }
 
                     // Conditions just for Domain contacts
@@ -291,9 +266,9 @@ class Notification extends Job implements SelfHandling
                         $ticket->domain_contact_reference != 'UNDEF' &&
                         $ticket->domain_contact_auto_notify == true &&
                         $ticket->domain_contact_reference != $ticket->ip_contact_reference &&
-                        $only != 'ip'
+                        $this->only != 'ip'
                     ) {
-                        $selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
+                        $this->selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
                     }
                 } else {
                     /*
@@ -302,23 +277,99 @@ class Notification extends Job implements SelfHandling
                     // Conditions just for IP contacts
                     if (!empty($ticket->ip_contact_reference) &&
                         $ticket->ip_contact_reference != 'UNDEF' &&
-                        $only != 'domain'
+                        $this->only != 'domain'
                     ) {
-                        $selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
+                        $this->selection[$ticket->ip_contact_reference]['ip'][] = $ticket;
                     }
 
                     // Conditions just for Domain contacts
                     if (!empty($ticket->domain_contact_reference) &&
                         $ticket->domain_contact_reference != 'UNDEF' &&
                         $ticket->domain_contact_reference != $ticket->ip_contact_reference &&
-                        $only != 'ip'
+                        $this->only != 'ip'
                     ) {
-                        $selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
+                        $this->selection[$ticket->domain_contact_reference]['domain'][] = $ticket;
                     }
                 }
             }
         }
 
-        return $selection;
+        return $this->selection;
+    }
+
+    /**
+     * Wrapper around notification factory to make use of the factory testable;.
+     *
+     * @param $notificationModule
+     *
+     * @return object
+     */
+    public function getNotificationInstance($notificationModule)
+    {
+        return notificationFactory::create($notificationModule);
+    }
+
+    /**
+     * @param $ticket
+     * @param $reference
+     * @param $force
+     *
+     * @return mixed
+     */
+    private function getTicketList($ticket, $reference, $force)
+    {
+        $search = DB::table('tickets');
+
+        if (!$force) {
+            $search->where('status_id', '!=', 'CLOSED');
+        }
+
+        if ($ticket !== false) {
+            $search->where('id', '=', $ticket);
+        }
+
+        if ($reference !== false) {
+            $search->where('ip_contact_reference', '=', $reference)
+                ->orwhere('domain_contact_reference', '=', $reference);
+        }
+
+        $tickets = Ticket::hydrate($search->get());
+
+        return $tickets;
+    }
+
+    /**
+     * @return \Illuminate\Validation\Validator
+     */
+    private function getValidator()
+    {
+        $validator = Validator::make(
+            [
+                'notification info_interval'  => strtotime(config('main.notifications.info_interval').' ago'),
+                'notification abuse_interval' => strtotime(config('main.notifications.abuse_interval').' ago'),
+                'notification min_lastseen'   => strtotime(config('main.notifications.min_lastseen').' ago'),
+            ],
+            [
+                'notification info_interval'  => 'required|timestamp',
+                'notification abuse_interval' => 'required|timestamp',
+                'notification min_lastseen'   => 'required|timestamp',
+            ]
+        );
+
+        return $validator;
+    }
+
+    /**
+     * @param $only
+     *
+     * @return null
+     */
+    private function setOnly($only)
+    {
+        $this->only = $only;
+        // If an invalid value for $only is given, set default (null = both)
+        if (!in_array($only, ['ip', 'domain'])) {
+            $this->only = null;
+        }
     }
 }

@@ -15,14 +15,14 @@ return [
 
         // By default leaving info tickets at info, and dont advance them to abuse
         'abuse' => [
-            'enabled'               => false,
-            'threshold'             => 10,
+            'enabled'   => false,
+            'threshold' => 10,
         ],
 
         // By default upgrade abuse tickets to escalation once there are 25 or more events
         'escalation' => [
-            'enabled'               => true,
-            'threshold'             => 25,
+            'enabled'   => true,
+            'threshold' => 25,
         ],
     ],
 
@@ -35,24 +35,24 @@ return [
     | tickets will be created by the parser als 'info' and will process when
     | the thresholds are hit.
     |
-    | Using the info at the ticket start, you will have a less agressive
+    | Using the info at the ticket start, you will have a less aggressive
     | notification cycle (once in every 90 days). Once there are 25 or more
     | complaints we consider the 'false-positive' factor gone and upgrade it to
     | abuse which will start real-time notifications.
-    | After the escaltion threshold is hit it will move the status to escalated
+    | After the escalation threshold is hit it will move the status to escalated
     | which can be use for automatic quarantining stuff.
     */
     'FEEDBACK_LOOP' => [
 
         // By default upgrade info tickets to abuse once there are 25 or more events
         'abuse' => [
-            'enabled'               => true,
-            'threshold'             => 25,
+            'enabled'   => true,
+            'threshold' => 25,
         ],
         // By default upgrade abuse tickets to escalation once there are 100 or more events
         'escalation' => [
-            'enabled'               => true,
-            'threshold'             => 100,
+            'enabled'   => true,
+            'threshold' => 100,
         ],
     ],
 ];

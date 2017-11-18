@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'encryption' => 'tls',
+    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
     /*
     |--------------------------------------------------------------------------
@@ -126,6 +126,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Mail "Override_address"
+    |--------------------------------------------------------------------------
+    |
+    | If this option is set to an email address it will be used instead of the
+    | email address of the contact.Usefull for development/testing
+    |
+    */
+
+    'override_address' => env('MAIL_OVERRIDE', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | S/MIME Signing options
     |--------------------------------------------------------------------------
     |
@@ -136,9 +148,9 @@ return [
     |
     */
     'smime' => [
-        'enabled'       => false,
-        'key'           => '/opt/abuseio/config/smikme/key.pem',
-        'certificate'   => '/opt/abuseio/config/smikme/certificate.pem',
+        'enabled'     => false,
+        'key'         => '/opt/abuseio/config/smikme/key.pem',
+        'certificate' => '/opt/abuseio/config/smikme/certificate.pem',
     ],
 
 ];

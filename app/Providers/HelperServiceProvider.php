@@ -10,16 +10,18 @@ use Illuminate\Support\ServiceProvider;
 class HelperServiceProvider extends ServiceProvider
 {
     protected $helpers = [
+        'ashAsset',
         'castBoolToString',
         'castStringToBool',
+        'generateApiToken',
         'generatePassword',
         'getDomain',
         'getUri',
         'getUrlData',
         'hFileSize',
-        'isValidRegex',
-        'inetPtoi',
         'inetItop',
+        'inetPtoi',
+        'isValidRegex',
     ];
 
     /**

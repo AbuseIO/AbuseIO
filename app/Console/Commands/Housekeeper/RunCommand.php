@@ -4,6 +4,7 @@ namespace AbuseIO\Console\Commands\Housekeeper;
 
 use AbuseIO\Jobs\AlertAdmin;
 use AbuseIO\Jobs\QueueTest;
+use AbuseIO\Models\Event;
 use AbuseIO\Models\Evidence;
 use AbuseIO\Models\FailedJob;
 use AbuseIO\Models\Job;
@@ -27,8 +28,7 @@ class RunCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'housekeeper:run
-    ';
+    protected $signature = 'housekeeper:run';
 
     /**
      * The console command description.
@@ -56,28 +56,25 @@ class RunCommand extends Command
             get_class($this).': KNOCK KNOCK! Housekeeping'
         );
 
-        /*
-         * Check all queue's their status
-         */
+        //Check all queue's their status
         $this->checkQueues();
 
-        /*
-         * Walk thru all tickets to see which need closing
-         */
+        // Walk through all tickets to see which need closing
         if (config('main.housekeeping.tickets_close_after') !== false) {
             $this->ticketsClosing();
         }
 
-        /*
-         * Walk thru mailarchive to see which need pruning
-         */
+        // Walk trough all closed tickets to see which need pruning
+        if (config('main.housekeeping.closed_tickets_remove_after') !== false) {
+            $this->ticketsPruning();
+        }
+
+        // Walk through mailarchive to see which need pruning
         if (config('main.housekeeping.mailarchive_remove_after') !== false) {
             $this->mailarchivePruning();
         }
 
-        /*
-         * Walk thru mailarchive to see which files are ophpaned
-         */
+        // Walk through mailarchive to see which files are orphaned
         if (config('main.housekeeping.mailarchive_remove_orphaned') !== false) {
             $this->removeUnlinkedEvidence();
         }
@@ -90,7 +87,7 @@ class RunCommand extends Command
     }
 
     /**
-     * Walk thru all files in the mailarchive folder and remove them from the system.
+     * Walk through all files in the mailarchive folder and remove them from the system.
      *
      * @return bool
      */
@@ -154,7 +151,7 @@ class RunCommand extends Command
     }
 
     /**
-     * Walk thru all jobs and queues to make sure they are working, including firing a testjob at them.
+     * Walk through all jobs and queues to make sure they are working, including firing a testjob at them.
      *
      * @return bool
      */
@@ -239,7 +236,7 @@ class RunCommand extends Command
     }
 
     /**
-     * Walk thru all tickets to see which need closing.
+     * Walk through all tickets to see which need closing.
      *
      * @return bool
      */
@@ -252,10 +249,10 @@ class RunCommand extends Command
         $closeOlderThen = strtotime(config('main.housekeeping.tickets_close_after').' ago');
         $validator = Validator::make(
             [
-                'mailarchive_remove_after'    => $closeOlderThen,
+                'mailarchive_remove_after' => $closeOlderThen,
             ],
             [
-                'mailarchive_remove_after'    => 'required|timestamp',
+                'mailarchive_remove_after' => 'required|timestamp',
             ]
         );
 
@@ -274,7 +271,7 @@ class RunCommand extends Command
 
             foreach ($tickets as $ticket) {
                 /*
-                 * If there something is a ticket without an event we need to use the created_at field instead
+                 * If there is a ticket without an event we need to use the created_at field instead
                  * to prevent an index error on the event check
                  */
                 if (empty($ticket->lastEvent[0])) {
@@ -303,7 +300,56 @@ class RunCommand extends Command
     }
 
     /**
-     * Walk thru mailarchive to see which need pruning.
+     * prune old tickets.
+     *
+     * @return bool
+     */
+    private function ticketsPruning()
+    {
+        Log::info(
+            get_class($this).': Housekeeper is starting to remove old closed tickets'
+        );
+
+        $closeAfter = strtotime(config('main.housekeeping.closed_tickets_remove_after', 'now').' ago');
+        if ($closeAfter !== false) {
+            // valid timestamp
+
+            $closedTickets = Ticket::withTrashed()
+                ->where('status_id', '=', 'CLOSED')
+                ->get();
+
+            foreach ($closedTickets as $closedTicket) {
+                $lastEvent = $closedTicket->lastEvent[0];
+                if (empty($lastEvent)) {
+                    $eventCreated = strtotime($closedTicket->updated_at);
+                } else {
+                    $eventCreated = strtotime($lastEvent->created_at);
+                }
+
+                // skip this ticket if it has events newer then the timestamp
+                if ($eventCreated > $closeAfter) {
+                    continue;
+                }
+
+                // delete ticket
+                $closedTicket->delete();
+
+                // purge ticket, if we want it to be permanent deleted
+                if (config('main.housekeeping.closed_tickets_remove_permanent', false)) {
+                    $closedTicket->purge();
+                }
+            }
+        }
+
+        Log::info(
+            get_class($this).': Housekeeper has completed removing old tickets'
+        );
+
+        return true;
+    }
+
+    /**
+     * Walk through mailarchive to see which need pruning.
      *
      * @return bool
      */
@@ -316,10 +362,10 @@ class RunCommand extends Command
         $deleteOlderThen = strtotime(config('main.housekeeping.mailarchive_remove_after').' ago');
         $validator = Validator::make(
             [
-                'mailarchive_remove_after'    => $deleteOlderThen,
+                'mailarchive_remove_after' => $deleteOlderThen,
             ],
             [
-                'mailarchive_remove_after'    => 'required|timestamp',
+                'mailarchive_remove_after' => 'required|timestamp',
             ]
         );
 

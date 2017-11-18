@@ -94,7 +94,7 @@ class RoleUser extends Model
      */
     public function role()
     {
-        return $this->belongsTo('AbuseIO\Models\Role');
+        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -104,6 +104,6 @@ class RoleUser extends Model
      */
     public function user()
     {
-        return $this->belongsTo('AbuseIO\Models\User');
+        return $this->belongsTo(User::class);
     }
 }

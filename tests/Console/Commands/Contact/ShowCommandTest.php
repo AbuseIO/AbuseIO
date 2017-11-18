@@ -2,6 +2,7 @@
 
 namespace tests\Console\Commands\Contact;
 
+use AbuseIO\Models\Contact;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -20,21 +21,23 @@ class ShowCommandTest extends TestCase
         );
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        foreach (['Reference', 'Name', 'Email', 'Api host', 'Auto notify', 'Enabled'] as $el) {
+        foreach (['Reference', 'Name', 'Email', 'Api host', 'Notification methods', 'Enabled'] as $el) {
             $this->assertContains($el, $output);
         }
     }
 
     public function testWithValidNameFilter()
     {
+        $contact = Contact::all()->random();
+
         $exitCode = Artisan::call(
             'contact:show',
             [
-                'contact' => 'John Doe',
+                'contact' => $contact->name,
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('j.doe@customers.isp.local', Artisan::output());
+        $this->assertContains($contact->name, Artisan::output());
     }
 
     public function testWithInvalidFilter()

@@ -44,10 +44,10 @@ class CreatePermissionRoleTable extends Migration
         $permission_role = [];
         foreach (Permission::all() as $permission) {
             $permission_role[] = [
-                'permission_id'             => $permission->id,
-                'role_id'                   => '1',
-                'created_at'                => new DateTime(),
-                'updated_at'                => new DateTime(),
+                'permission_id' => $permission->id,
+                'role_id'       => '1',
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime(),
             ];
         }
 

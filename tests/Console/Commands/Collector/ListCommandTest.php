@@ -48,7 +48,7 @@ class ListCommandTest extends TestCase
         $this->assertNotContains('Snds', $output);
     }
 
-//    public function testNotFoundFilter()
+    //    public function testNotFoundFilter()
 //    {
 //        $exitCode = Artisan::call(
 //            'collector:list',

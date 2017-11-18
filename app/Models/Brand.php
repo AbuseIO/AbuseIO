@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Traits\InstanceComparable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Symfony\Component\HttpFoundation\File\File;
@@ -22,7 +23,7 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class Brand extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, InstanceComparable;
 
     /**
      * The database table used by the model.
@@ -42,6 +43,11 @@ class Brand extends Model
         'logo',
         'introduction_text',
         'creator_id',
+        'mail_custom_template',
+        'mail_template_plain',
+        'mail_template_html',
+        'ash_custom_template',
+        'ash_template',
     ];
 
     /**
@@ -67,13 +73,15 @@ class Brand extends Model
     public static function createRules()
     {
         $rules = [
-            'name'              => 'required|unique:brands,name',
-            'company_name'      => 'required',
-            'introduction_text' => 'required',
-            'logo'              => 'required|image|max:64',
-            'creator_id'        => 'required|integer|exists:accounts,id',
-            'systembrand'       => 'sometimes|required|uniqueflag:brands:systembrand',
-
+            'name'                => 'required|unique:brands,name',
+            'company_name'        => 'required',
+            'introduction_text'   => 'required',
+            'logo'                => 'required|image|max:64',
+            'creator_id'          => 'required|integer|exists:accounts,id',
+            'systembrand'         => 'sometimes|required|uniqueflag:brands:systembrand',
+            'mail_template_plain' => 'sometimes|required|bladetemplate',
+            'mail_template_html'  => 'sometimes|required|bladetemplate',
+            'ash_template'        => 'sometimes|required|bladetemplate',
         ];
 
         return $rules;
@@ -89,12 +97,15 @@ class Brand extends Model
     public static function updateRules($brand)
     {
         $rules = [
-            'name'              => 'required|unique:brands,name,'.$brand->id,
-            'company_name'      => 'required',
-            'introduction_text' => 'required',
-            'creator_id'        => 'required|integer|exists:accounts,id',
-            'logo'              => 'sometimes|required|image|max:64',
-            'systembrand'       => 'sometimes|required|uniqueflag:brands:systembrand',
+            'name'                => 'required|unique:brands,name,'.$brand->id,
+            'company_name'        => 'required',
+            'introduction_text'   => 'required',
+            'creator_id'          => 'required|integer|exists:accounts,id',
+            'logo'                => 'sometimes|required|image|max:64',
+            'systembrand'         => 'sometimes|required|uniqueflag:brands:systembrand',
+            'mail_template_plain' => 'sometimes|required|bladetemplate',
+            'mail_template_html'  => 'sometimes|required|bladetemplate',
+            'ash_template'        => 'sometimes|required|bladetemplate',
         ];
 
         return $rules;
@@ -111,7 +122,7 @@ class Brand extends Model
      */
     public function accounts()
     {
-        return $this->hasMany('AbuseIO\Models\Account');
+        return $this->hasMany(Account::class);
     }
 
     /**
@@ -119,7 +130,7 @@ class Brand extends Model
      */
     public function account()
     {
-        return $this->belongsTo('AbuseIO\Models\Account', 'creator_id');
+        return $this->belongsTo(Account::class, 'creator_id');
     }
 
     /**
@@ -179,11 +190,7 @@ class Brand extends Model
             return true;
         }
 
-        $brand = self::find($model_id);
-
-        $allowed = $brand->creator_id == $account->id;
-
-        return $allowed;
+        return self::find($model_id)->creator->is($account);
     }
 
     /**
@@ -221,6 +228,53 @@ class Brand extends Model
         if (count($this->accounts) == 0 && !$this->isSystemBrand()) {
             // we can delete the brand
             $result = true;
+        }
+
+        return $result;
+    }
+
+    /**
+     * writes the logo to a tempfile and returns the filepath.
+     *
+     * @return string
+     */
+    public function getLogoPath()
+    {
+        $path = '';
+
+        $path = tempnam(sys_get_temp_dir(), 'ABUSEIO');
+        $logo = fopen($path, 'w');
+        fwrite($logo, $this->logo);
+        fclose($logo);
+
+        return $path;
+    }
+
+    /**
+     * Returns the default mail templates as defined in notification-mail.
+     * If the config option can't be found, it will return null.
+     *
+     * @return null|array
+     */
+    public static function getDefaultMailTemplate()
+    {
+        return config('notifications.Mail.templates');
+    }
+
+    /**
+     * Returns the default ASH template as a string or null on failure.
+     *
+     * @return null|string
+     */
+    public static function getDefaultASHTemplate()
+    {
+        $result = null;
+
+        $path = view('ash')->getPath();
+        $template = file_get_contents($path);
+
+        if ($template !== false) {
+            $result = $template;
         }
 
         return $result;

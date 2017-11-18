@@ -14,7 +14,7 @@ class DeleteCommandTest extends TestCase
     {
         //TODO make brand table seeder;
         $this->assertTrue(true);
-//        $exitCode = Artisan::call('brand:delete', [
+        //        $exitCode = Artisan::call('brand:delete', [
 //            "--id" => "1"
 //        ]);
 //

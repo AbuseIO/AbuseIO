@@ -21,28 +21,28 @@ class ShowCommandTest extends TestCase
      */
     private $list;
 
-//    public function initDB()
-//    {
-//        $this->list = factory(Job::class, 10)->create();
-//    }
+    //    public function initDB()
+    //    {
+    //        $this->list = factory(Job::class, 10)->create();
+    //    }
 
-//    public function testWithValidIdFilter()
-//    {
-//        //$this->initDB();
-//
-//        $exitCode = Artisan::call(
-//            'queue:show',
-//            [
-//                'queue' => 'abuseio_collector'
-//            ]
-//        );
-//        $this->assertEquals($exitCode, 0);
-//        $output = Artisan::output();
-//
-//        foreach (['Id', 'Queue', 'Attempts',] as $el) {
-//            $this->assertContains($el, $output);
-//        }
-//    }
+    //    public function testWithValidIdFilter()
+    //    {
+    //        //$this->initDB();
+    //
+    //        $exitCode = Artisan::call(
+    //            'queue:show',
+    //            [
+    //                'queue' => 'abuseio_collector'
+    //            ]
+    //        );
+    //        $this->assertEquals($exitCode, 0);
+    //        $output = Artisan::output();
+    //
+    //        foreach (['Id', 'Queue', 'Attempts',] as $el) {
+    //            $this->assertContains($el, $output);
+    //        }
+    //    }
 
     public function testWithInvalidFilter()
     {
@@ -55,5 +55,13 @@ class ShowCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $this->assertContains('No matching queue was found.', Artisan::output());
+    }
+
+    public function testWithoutArguments()
+    {
+        ob_start();
+        $exitCode = Artisan::call('queue:show');
+        $this->assertEquals(0, $exitCode);
+        $this->assertContains('Shows a queue', ob_get_clean());
     }
 }

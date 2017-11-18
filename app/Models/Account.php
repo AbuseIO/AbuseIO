@@ -2,6 +2,8 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Traits\InstanceComparable;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
@@ -17,10 +19,12 @@ use Log;
  * @property int $created_at
  * @property int $updated_at
  * @property int $deleted_at
+ * @property bool $systemaccount fillable
+ * @property string $token' fillable
  */
 class Account extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, InstanceComparable;
 
     /**
      * The database table used by the model.
@@ -40,6 +44,7 @@ class Account extends Model
         'brand_id',
         'disabled',
         'systemaccount',
+        'token',
     ];
 
     /*
@@ -96,7 +101,7 @@ class Account extends Model
      */
     public function users()
     {
-        return $this->hasMany('AbuseIO\Models\User');
+        return $this->hasMany(User::class);
     }
 
     /**
@@ -104,15 +109,15 @@ class Account extends Model
      */
     public function contacts()
     {
-        return $this->hasMany('AbuseIO\Models\Contact');
+        return $this->hasMany(Contact::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function brand()
     {
-        return $this->belongsTo('AbuseIO\Models\Brand');
+        return $this->belongsTo(Brand::class);
     }
 
     /**
@@ -120,7 +125,7 @@ class Account extends Model
      */
     public function brands()
     {
-        return $this->hasMany('AbuseIO\Models\Brand', 'creator_id', 'id');
+        return $this->hasMany(Brand::class, 'creator_id', 'id');
     }
 
     /**
@@ -128,7 +133,24 @@ class Account extends Model
      */
     public function tickets()
     {
-        return $this->hasMany('AbuseIO\Models\Ticket');
+        return $this->hasMany(Brand::class);
+    }
+
+    /**
+     * return the admins of an account.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function admins()
+    {
+        $admins = DB::table('users')
+            ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
+            ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
+            ->where('roles.name', '=', 'Admin')
+            ->where('users.account_id', '=', $this->id)
+            ->select('users.*')->get();
+
+        return User::hydrate($admins);
     }
 
     /*
@@ -148,28 +170,13 @@ class Account extends Model
     }
 
     /**
-     * Mutator for the active brand.
+     * Mutator/wrapper for the active brand.
      *
      * @param \AbuseIO\Models\Brand $brand
      */
     public function setActiveBrandAttribute(Brand $brand)
     {
         $this->brand = $brand;
-    }
-
-    /**
-     * Mutator for the active brand.
-     *
-     * @param bool $value
-     */
-    public function setSystemaccountAttribute($value)
-    {
-        if ($value) {
-            $account = self::where('systemaccount', true);
-            $account->update(['systemaccount' => false]);
-        }
-
-        self::where('id', $this->id)->update(['systemaccount' => $value]);
     }
 
     /*
@@ -182,11 +189,11 @@ class Account extends Model
      * Static method to check if the account has access to the model instance.
      *
      * @param $model_id
-     * @param $account
+     * @param \AbuseIO\Models\Account $account
      *
      * @return bool
      */
-    public static function checkAccountAccess($model_id, $account)
+    public static function checkAccountAccess($model_id, self $account)
     {
         // Early return when we are in the system account
         if ($account->isSystemAccount()) {
@@ -195,9 +202,7 @@ class Account extends Model
 
         $my_account = self::find($model_id);
 
-        $allowed = $my_account->account_id == $account->id;
-
-        return $allowed;
+        return $my_account->is($account);
     }
 
     /**
@@ -207,14 +212,14 @@ class Account extends Model
      */
     public function isSystemAccount()
     {
-        return $this->systemaccount;
+        return (bool) $this->systemaccount;
     }
 
     /**
      * Return the account that currently is the system account
      * If there is none, we die as its impossible to function without it.
      *
-     * @param \Illuminate\Database\Eloquent\Builder
+     * @param \Illuminate\Database\Eloquent\Builder $query
      *
      * @return \AbuseIO\Models\Account $account
      */
@@ -227,7 +232,6 @@ class Account extends Model
                 'FindContact: '.
                 'FATAL ERROR - DEFAULT ACCOUNT (SYSTEMACCOUNT) MISSING'
             );
-            dd();
         }
 
         return $result->first();
@@ -242,26 +246,19 @@ class Account extends Model
      */
     public function mayEdit(User $user)
     {
-        $auth_account = $user->account;
-
-        // System user
-        if ($auth_account->isSystemAccount()) {
+        if ($user->account->isSystemAccount()) {
             return true;
         }
 
         // you can only edit your own account
-        if ($auth_account->id == $this->id) {
-            return true;
-        } else {
-            return false;
-        }
+        return $user->account->is($this);
     }
 
     /**
      * Checks if the current user may destroy the account
      * todo: currently use the mayEdit method to check.
      *
-     * @param User $user
+     * @param \AbuseIO\Models\User $user
      *
      * @return bool
      */
@@ -273,7 +270,7 @@ class Account extends Model
     /**
      * Checks if the current user may disable the account.
      *
-     * @param User $user
+     * @param \AbuseIO\Models\User $user
      *
      * @return bool
      */
@@ -294,7 +291,7 @@ class Account extends Model
      * Check if the user may enable the account
      * (use the same logic as mayDisable() ).
      *
-     * @param User $user
+     * @param \AbuseIO\Models\User $user
      *
      * @return bool
      */
@@ -304,10 +301,10 @@ class Account extends Model
     }
 
     /**
-     * @return mixed
+     * @return Account|null
      */
     public static function getSystemAccount()
     {
-        return self::where('systemaccount', 1)->first();
+        return self::where('systemaccount', true)->first();
     }
 }

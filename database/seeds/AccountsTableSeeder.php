@@ -8,20 +8,22 @@ class AccountsTableSeeder extends Seeder
     {
         $accounts = [
             [
-                'id'            => 2,
-                'name'          => 'Customer Internet',
-                'description'   => 'Customer internet department',
-                'brand_id'      => 1,
-                'created_at'    => new DateTime(),
-                'updated_at'    => new DateTime(),
+                'id'          => 2,
+                'name'        => 'Customer Internet',
+                'description' => 'Customer internet department',
+                'brand_id'    => 1,
+                'token'       => generateApiToken(),
+                'created_at'  => new DateTime(),
+                'updated_at'  => new DateTime(),
             ],
             [
-                'id'            => 3,
-                'name'          => 'Business Internet',
-                'description'   => 'Business internet department',
-                'brand_id'      => 1,
-                'created_at'    => new DateTime(),
-                'updated_at'    => new DateTime(),
+                'id'          => 3,
+                'name'        => 'Business Internet',
+                'description' => 'Business internet department',
+                'brand_id'    => 1,
+                'token'       => generateApiToken(),
+                'created_at'  => new DateTime(),
+                'updated_at'  => new DateTime(),
             ],
         ];
 

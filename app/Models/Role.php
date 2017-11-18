@@ -50,8 +50,8 @@ class Role extends Model
     public static function createRules()
     {
         $rules = [
-            'name'              => 'required|string|min:1|unique:roles,name',
-            'description'       => 'required|string|min:1',
+            'name'        => 'required|string|min:1|unique:roles,name',
+            'description' => 'required|string|min:1',
         ];
 
         return $rules;
@@ -67,9 +67,9 @@ class Role extends Model
     public static function updateRules($role)
     {
         $rules = [
-            'id'                => 'required|exists:roles,id',
-            'name'              => 'required|string|min:1|unique:roles,name,'.$role->id,
-            'description'       => 'required|string|min:1',
+            'id'          => 'required|exists:roles,id',
+            'name'        => 'required|string|min:1|unique:roles,name,'.$role->id,
+            'description' => 'required|string|min:1',
         ];
 
         return $rules;
@@ -88,7 +88,7 @@ class Role extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('AbuseIO\Models\User');
+        return $this->belongsToMany(User::class);
     }
 
     /**
@@ -98,6 +98,6 @@ class Role extends Model
      */
     public function permissions()
     {
-        return $this->belongsToMany('AbuseIO\Models\Permission');
+        return $this->belongsToMany(Permission::class);
     }
 }

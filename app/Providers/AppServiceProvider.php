@@ -2,8 +2,14 @@
 
 namespace AbuseIO\Providers;
 
+use AbuseIO\Models\Event;
+use AbuseIO\Models\Ticket;
+use AbuseIO\Observers\EventObserver;
+use AbuseIO\Observers\TicketObserver;
+use Config;
 use Illuminate\Support\ServiceProvider;
 use Log;
+use URL;
 
 /**
  * Class AppServiceProvider.
@@ -19,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         /*
          * MARKNL:
-         * OH NOES!! You've lost some bits somewhere! You need at least 64 of them buggers to tun this application.
+         * OH NOES!! You've lost some bits somewhere! You need at least 64 of them buggers to run this application.
          */
         if (PHP_INT_SIZE < 8) {
             Log::emergency(
@@ -27,6 +33,14 @@ class AppServiceProvider extends ServiceProvider
             );
             dd();
         }
+
+        // register observers
+        Ticket::observe(TicketObserver::class);
+        Event::observe(EventObserver::class);
+
+        // force the base url to the configured APP_URL
+        // this helps when AbuseIO is behind a proxy
+        URL::forceRootUrl(Config::get('app.url'));
     }
 
     /**

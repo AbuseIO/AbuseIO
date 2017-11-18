@@ -39,12 +39,12 @@ class IncidentsSave extends Job implements SelfHandling
 
         foreach ($incidents as $incident) {
             /* Here we will seek through all the incidents and look if there is an existing ticket. We will split
-             * them up into two seperate arrays: $incidentsNew and $incidents$known. We can save all the known
+             * them up into two separate arrays: $incidentsNew and $incidents$known. We can save all the known
              * incidents in the DB with a single incident saving loads of queries
              *
              * IP Owner is leading, as in most cases even if the domain is moved
              * The server might still have a problem. Next to the fact that domains
-             * Arent transferred to a new owner 'internally' anyways.
+             * Aren't transferred to a new owner 'internally' anyways.
              *
              * So we do a lookup based on the IP same as with the 3.x engine. After
              * the lookup we check wither the domain contact was changed, if so we UPDATE
@@ -104,6 +104,8 @@ class IncidentsSave extends Job implements SelfHandling
              * Search to see if there is an existing ticket for this incident classification
              */
             $ticket = Ticket::where('ip', '=', $incident->ip)
+                ->where('domain', '=',
+                    empty($incident->domain) ? '' : $incident->domain, 'AND')
                 ->where('class_id', '=', $incident->class, 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 'CLOSED', 'AND')
@@ -126,7 +128,7 @@ class IncidentsSave extends Job implements SelfHandling
                 $newTicket->ip_contact_name = $ipContact->name;
                 $newTicket->ip_contact_email = $ipContact->email;
                 $newTicket->ip_contact_api_host = $ipContact->api_host;
-                $newTicket->ip_contact_auto_notify = $ipContact->auto_notify;
+                $newTicket->ip_contact_auto_notify = $ipContact->auto_notify();
                 $newTicket->ip_contact_notified_count = 0;
 
                 $newTicket->domain_contact_account_id = $domainContact->account_id;
@@ -134,12 +136,25 @@ class IncidentsSave extends Job implements SelfHandling
                 $newTicket->domain_contact_name = $domainContact->name;
                 $newTicket->domain_contact_email = $domainContact->email;
                 $newTicket->domain_contact_api_host = $domainContact->api_host;
-                $newTicket->domain_contact_auto_notify = $domainContact->auto_notify;
+                $newTicket->domain_contact_auto_notify = $domainContact->auto_notify();
                 $newTicket->domain_contact_notified_count = 0;
 
                 $newTicket->status_id = 'OPEN';
                 $newTicket->last_notify_count = 0;
                 $newTicket->last_notify_timestamp = 0;
+
+                if (property_exists($incident, 'remote_api_token')) {
+                    $newTicket->remote_api_token = $incident->remote_api_token;
+                }
+                if (property_exists($incident, 'remote_api_url')) {
+                    $newTicket->remote_api_url = $incident->remote_api_url;
+                }
+                if (property_exists($incident, 'remote_ticket_id')) {
+                    $newTicket->remote_ticket_id = $incident->remote_ticket_id;
+                }
+                if (property_exists($incident, 'remote_ash_link')) {
+                    $newTicket->remote_ash_link = $incident->remote_ash_link;
+                }
 
                 // Validate the model before saving
                 $validator = Validator::make(
@@ -217,7 +232,7 @@ class IncidentsSave extends Job implements SelfHandling
                     /*
                      * If the reference has changed for the domain owner, then we update the ticket with the new
                      * domain owner. We not check if anything else then the reference has changed. If you change the
-                     * contact data you have the option to propogate it onto open tickets.
+                     * contact data you have the option to propegate it onto open tickets.
                      */
                     if (!empty($incident->domain) &&
                         $domainContact !== false &&
@@ -227,8 +242,8 @@ class IncidentsSave extends Job implements SelfHandling
                         $ticket->domain_contact_name = $domainContact->name;
                         $ticket->domain_contact_email = $domainContact->email;
                         $ticket->domain_contact_api_host = $domainContact->api_host;
-                        $ticket->domain_contact_auto_notify = $domainContact->auto_notify;
-                        $ticket->account_id = $domainContact->account->id;
+                        $ticket->domain_contact_auto_notify = $domainContact->auto_notify();
+                        $ticket->accountDomain()->associate($domainContact->account);
                     }
 
                     /*
@@ -247,7 +262,7 @@ class IncidentsSave extends Job implements SelfHandling
                     }
 
                     /*
-                     * Walk thru the escalation upgrade path, and upgrade if required
+                     * Walk through the escalation upgrade path, and upgrade if required
                      */
                     //echo config("escalations.{$ticket->class_id}.abuse.enabled");
                     if (is_array(config("escalations.{$ticket->class_id}"))) {
@@ -321,7 +336,7 @@ class IncidentsSave extends Job implements SelfHandling
                  * We should not never have more then two open tickets for the same case. If this happens there is a
                  * fault in the aggregator which must be resolved first. Until then we will permfail here.
                  */
-                $this->error('Unable to link to ticket, multiple open tickets found for same incident type');
+                return $this->error('Unable to link to ticket, multiple open tickets found for same incident type');
             }
         }
 

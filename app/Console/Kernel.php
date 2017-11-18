@@ -68,6 +68,8 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Collector\RunCommand',
         'AbuseIO\Console\Commands\Collector\RunAllCommand',
 
+        'AbuseIO\Console\Commands\CollectStatistics\RunCommand',
+
         'AbuseIO\Console\Commands\Queue\ListCommand',
         'AbuseIO\Console\Commands\Queue\ShowCommand',
 
@@ -76,6 +78,8 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Contact\DeleteCommand',
         'AbuseIO\Console\Commands\Contact\CreateCommand',
         'AbuseIO\Console\Commands\Contact\EditCommand',
+
+        'AbuseIO\Console\Commands\ContactNotificationMethod\AssignCommand',
 
         'AbuseIO\Console\Commands\Note\ShowCommand',
         'AbuseIO\Console\Commands\Note\DeleteCommand',
@@ -110,5 +114,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('housekeeper:notifications --send')->cron(config('main.housekeeping.notifications_cron'));
 
         $schedule->command('collector:runall')->cron(config('main.housekeeping.collectors_cron'));
+
+        $schedule->command('statistics:run')->cron(config('main.housekeeping.collect_statistics_cron'));
     }
 }

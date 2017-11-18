@@ -6,6 +6,7 @@ use AbuseIO\Console\Commands\AbstractCreateCommand;
 use AbuseIO\Models\Account;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 use Validator;
 
 /**
@@ -24,6 +25,7 @@ class CreateCommand extends AbstractCreateCommand
                 new InputArgument('brand_id', InputArgument::REQUIRED, 'brand id'),
                 //new InputArgument('description', null, 'description'),
                 new InputArgument('disabled', InputArgument::OPTIONAL, 'true|false, Set the account to be enabled'),
+                new InputOption('with_api_key', null, InputOption::VALUE_NONE, 'generates api key for account'),
             ]
         );
     }
@@ -47,6 +49,10 @@ class CreateCommand extends AbstractCreateCommand
         $account->brand_id = $this->argument('brand_id');
         //$account->description = $this->argument('description');
         $account->disabled = $this->argument('disabled') === 'true' ? true : false;
+
+        if ($this->option('with_api_key')) {
+            $account->token = generateApiToken();
+        }
 
         return $account;
     }

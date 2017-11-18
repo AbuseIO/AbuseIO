@@ -2,6 +2,7 @@
 
 namespace tests\Console\Commands\Account;
 
+use AbuseIO\Models\Account;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -27,14 +28,16 @@ class ShowCommandTest extends TestCase
 
     public function testWithValidNameFilter()
     {
+        $account = Account::all()->random();
+
         $exitCode = Artisan::call(
             'account:show',
             [
-                'account' => 'Customer Internet',
+                'account' => $account->name,
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Customer Internet', Artisan::output());
+        $this->assertContains($account->name, Artisan::output());
     }
 
     public function testWithInvalidFilter()

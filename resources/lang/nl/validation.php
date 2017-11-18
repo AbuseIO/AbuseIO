@@ -13,42 +13,42 @@ return [
     |
     */
 
-    'accepted'             => ':attribute dient te worden geaccepteerd.',
-    'active_url'           => ':attribute is geen geldige URL.',
-    'after'                => ':attribute dient een datum te zijn na :date.',
-    'alpha'                => ':attribute mag alleen letters bevatten.',
-    'alpha_dash'           => ':attribute mag alleen letters, nummers, and strepen bevatten.',
-    'alpha_num'            => ':attribute mag alleen letters en nummers bevatten.',
-    'array'                => ':attribute moet een array zijn.',
-    'before'               => ':attribute moet een datum zijn eerder dan :date.',
-    'between'              => [
+    'accepted'   => ':attribute dient te worden geaccepteerd.',
+    'active_url' => ':attribute is geen geldige URL.',
+    'after'      => ':attribute dient een datum te zijn na :date.',
+    'alpha'      => ':attribute mag alleen letters bevatten.',
+    'alpha_dash' => ':attribute mag alleen letters, nummers, and strepen bevatten.',
+    'alpha_num'  => ':attribute mag alleen letters en nummers bevatten.',
+    'array'      => ':attribute moet een array zijn.',
+    'before'     => ':attribute moet een datum zijn eerder dan :date.',
+    'between'    => [
         'numeric' => ':attribute moet tussen :min en :max liggen.',
         'file'    => ':attribute moet tussen :min en :max kilobytes zijn.',
         'string'  => ':attribute moet tussen :min en :max karakters lang zijn.',
         'array'   => ':attribute moet tussen :min en :max items bevatten.',
     ],
-    'boolean'              => ':attribute kan enkel true of false zijn.',
-    'confirmed'            => ':attribute bevestiging komt niet overeen.',
-    'date'                 => ':attribute is geen geldige datum.',
-    'date_format'          => ':attribute komt niet overeen met het formaat :format.',
-    'different'            => ':attribute en :other dienen verschillend te zijn.',
-    'digits'               => ':attribute moet :digits cijfers zijn.',
-    'digits_between'       => ':attribute moet tussen :min en :max cijfers zijn.',
-    'email'                => ':attribute dient een geldig emailadres te zijn.',
-    'filled'               => ':attribute veld is verplicht.',
-    'exists'               => 'Het geselecteerde :attribute is ongeldig.',
-    'image'                => ':attribute dient een afbeelding te zijn.',
-    'in'                   => 'Het geselecteerde :attribute is ongeldig.',
-    'integer'              => ':attribute dient een geheel getal te zijn.',
-    'ip'                   => ':attribute dient een geldig IP adres te zijn.',
-    'max'                  => [
+    'boolean'        => ':attribute kan enkel true of false zijn.',
+    'confirmed'      => ':attribute bevestiging komt niet overeen.',
+    'date'           => ':attribute is geen geldige datum.',
+    'date_format'    => ':attribute komt niet overeen met het formaat :format.',
+    'different'      => ':attribute en :other dienen verschillend te zijn.',
+    'digits'         => ':attribute moet :digits cijfers zijn.',
+    'digits_between' => ':attribute moet tussen :min en :max cijfers zijn.',
+    'email'          => ':attribute dient een geldig emailadres te zijn.',
+    'filled'         => ':attribute veld is verplicht.',
+    'exists'         => 'Het geselecteerde :attribute is ongeldig.',
+    'image'          => ':attribute dient een afbeelding te zijn.',
+    'in'             => 'Het geselecteerde :attribute is ongeldig.',
+    'integer'        => ':attribute dient een geheel getal te zijn.',
+    'ip'             => ':attribute dient een geldig IP adres te zijn.',
+    'max'            => [
         'numeric' => ':attribute mag niet groter zijn dan :max.',
         'file'    => ':attribute mag niet groter zijn dan :max kilobytes.',
         'string'  => ':attribute mag niet groter zijn dan :max karakters.',
         'array'   => ':attribute mag niet meer dan :max items bevatten.',
     ],
-    'mimes'                => ':attribute dient een bestand te zijn van het type: :values.',
-    'min'                  => [
+    'mimes' => ':attribute dient een bestand te zijn van het type: :values.',
+    'min'   => [
         'numeric' => ':attribute dient minimaal :min te zijn.',
         'file'    => ':attribute dient minimaal :min kilobytes te zijn.',
         'string'  => ':attribute dient minimaal :min karakters te bevatten.',
@@ -57,7 +57,7 @@ return [
     'not_in'               => 'Het geselecteerde :attribute is ongeldig.',
     'numeric'              => 'Het :attribute dient een nummer te zijn.',
     'regex'                => 'Het :attribute formaat is ongeldig.',
-    'required'             => 'Het :attribute veld is verplicht.',
+    'required'             => 'Het veld :attribute is verplicht.',
     'required_if'          => 'Het :attribute veld is verplicht wanneer :other is :value.',
     'required_with'        => 'Het :attribute veld is verplicht wanneer :values aanwezig is.',
     'required_with_all'    => 'Het :attribute veld is verplicht wanneer :values aanwezig is.',
@@ -70,9 +70,9 @@ return [
         'string'  => ':attribute moet :size karakters lang zijn.',
         'array'   => ':attribute moet :size items bevatten.',
     ],
-    'unique'               => ':attribute is al bezet.',
-    'url'                  => ':attribute formaat is ongeldig.',
-    'timezone'             => ':attribute moet een geldige tijdszone zijn.',
+    'unique'   => ':attribute is al bezet.',
+    'url'      => ':attribute formaat is ongeldig.',
+    'timezone' => ':attribute moet een geldige tijdszone zijn.',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,17 +93,18 @@ return [
             'unique' => 'De combinatie van het eerste en laatste ip adres bestaat al.',
         ],
     ],
-    'abuseclass'            => 'Het :attribute veld moet een geldig :attribute zijn',
-    'abusetype'             => 'Het :attribute veld moet een geldig :attribute zijn',
-    'json'                  => 'Het :attribute veld kon niet omgezet worden in een geldig JSON object',
-    'uri'                   => 'Het :attribute veld is verplicht en moet een geldige URI of Pad zijn',
-    'uniqueflag'            => 'Het :attribute vlaggetje is al gezet in een ander object',
-    'domain'                => 'The :attribute field requires a valid domain name',
-    'string'                => 'Het :attribute veld moet enkel tekst bevatten',
-    'stringorboolean'       => 'Het :attribute veld moet ja/nee (boolean) zijn',
-    'file'                  => 'Het :attribute veld moet een geldige locatie naar een bestand zijn',
-    'emails'                => 'Alle :attribute adressen moeten een geldig emailadres zijn.',
-    'timestamp'             => 'Het :attribute veld moet unix tijdstempel (timestamp) zijn',
+    'abuseclass'      => 'Het :attribute veld moet een geldig :attribute zijn',
+    'abusetype'       => 'Het :attribute veld moet een geldig :attribute zijn',
+    'json'            => 'Het :attribute veld kon niet omgezet worden in een geldig JSON object',
+    'uri'             => 'Het :attribute veld is verplicht en moet een geldige URI of Pad zijn',
+    'uniqueflag'      => 'Het :attribute vlaggetje is al gezet in een ander object',
+    'domain'          => 'The :attribute field requires a valid domain name',
+    'string'          => 'Het :attribute veld moet enkel tekst bevatten',
+    'stringorboolean' => 'Het :attribute veld moet ja/nee (boolean) zijn',
+    'file'            => 'Het :attribute veld moet een geldige locatie naar een bestand zijn',
+    'emails'          => 'Alle :attribute adressen moeten een geldig emailadres zijn.',
+    'timestamp'       => 'Het :attribute veld moet unix tijdstempel (timestamp) zijn',
+    'bladetemplate'   => 'Er moet een valide Blade template in het :attribute veld zitten',
 
     /*
     |--------------------------------------------------------------------------
@@ -116,6 +117,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'email'    => 'e-mailadres',
+        'password' => 'wachtwoord',
+    ],
 
 ];

@@ -92,8 +92,8 @@ class AssignCommand extends Command
 
         $permissionRole = new PermissionRole();
 
-        $permissionRole->permission_id = $permission->id;
-        $permissionRole->role_id = $role->id;
+        $permissionRole->permission()->associate($permission);
+        $permissionRole->role()->associate($role);
 
         $validation = Validator::make($permissionRole->toArray(), PermissionRole::createRules($permissionRole));
 

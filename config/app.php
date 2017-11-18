@@ -3,7 +3,7 @@
 return [
 
     'name'    => 'AbuseIO',
-    'version' => '4.0.2',
+    'version' => '4.1.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -43,7 +43,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -186,7 +186,7 @@ return [
         'Illuminate\Session\SessionServiceProvider',
         'Illuminate\Translation\TranslationServiceProvider',
         'Illuminate\Validation\ValidationServiceProvider',
-        'Illuminate\View\ViewServiceProvider',
+        'Wpb\String_Blade_Compiler\ViewServiceProvider',
         'Collective\Html\HtmlServiceProvider',
 
         /*
@@ -195,11 +195,13 @@ return [
         'AbuseIO\Providers\AppServiceProvider',
         'AbuseIO\Providers\BusServiceProvider',
         'AbuseIO\Providers\ConfigServiceProvider',
-        'AbuseIO\Providers\EventServiceProvider',
-        'AbuseIO\Providers\RouteServiceProvider',
-        'AbuseIO\Providers\ValidationsServiceProvider',
+        'AbuseIO\Providers\ContactServiceProvider',
         'AbuseIO\Providers\HelperServiceProvider',
+        'AbuseIO\Providers\RouteServiceProvider',
+        'AbuseIO\Providers\SystemAdminManagerProvider',
+        'AbuseIO\Providers\ValidationsServiceProvider',
         'Chumper\Zipper\ZipperServiceProvider',
+        'Sorskod\Larasponse\LarasponseServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
 
         /*

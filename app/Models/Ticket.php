@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Jobs\FindContact;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -34,6 +35,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property bool $auto_notify fillable
  * @property int $last_notify_count fillable
  * @property int $last_notify_timestamp fillable
+ * @property string $remote_api_token
+ * @property string $api_token
+ * @property string $remote_api_url
+ * @property int $remote_ticket_id
  * @property int $created_at
  * @property int $updated_at
  * @property int $deleted_at
@@ -48,6 +53,20 @@ class Ticket extends Model
      * @var string
      */
     protected $table = 'tickets';
+
+    /**
+     * a writeonce property containing the api_token;.
+     *
+     * @var string
+     */
+    protected $api_token;
+
+    /**
+     * a property containing the remote api token;.
+     *
+     * @var string
+     */
+    protected $remote_api_token;
 
     /**
      * The attributes that are mass assignable.
@@ -77,6 +96,13 @@ class Ticket extends Model
         'contact_status_id',
         'last_notify_count',
         'last_notify_timestamp',
+        'ash_token_ip',
+        'ash_token_domain',
+        'remote_api_url',
+        'remote_api_token',
+        'remote_ticket_id',
+        'api_token',
+        'remote_ash_link',
     ];
 
     /*
@@ -170,7 +196,7 @@ class Ticket extends Model
      */
     public function events($order = 'asc')
     {
-        return $this->hasMany('AbuseIO\Models\Event')
+        return $this->hasMany(Event::class)
             ->orderBy('timestamp', $order);
     }
 
@@ -181,7 +207,7 @@ class Ticket extends Model
      */
     public function notes()
     {
-        return $this->hasMany('AbuseIO\Models\Note');
+        return $this->hasMany(Note::class);
     }
 
     /**
@@ -191,7 +217,7 @@ class Ticket extends Model
      */
     public function unreadNotes()
     {
-        return $this->hasMany('AbuseIO\Models\Note')
+        return $this->hasMany(Note::class)
             ->where('viewed', 'false');
     }
 
@@ -216,7 +242,7 @@ class Ticket extends Model
      */
     public function accountIp()
     {
-        return $this->belongsTo('AbuseIO\Models\Account', 'ip_contact_account_id');
+        return $this->belongsTo(Account::class, 'ip_contact_account_id');
     }
 
     /**
@@ -224,7 +250,7 @@ class Ticket extends Model
      */
     public function accountDomain()
     {
-        return $this->belongsTo('AbuseIO\Models\Account', 'domain_contact_account_id');
+        return $this->belongsTo(Account::class, 'domain_contact_account_id');
     }
 
     /*
@@ -276,6 +302,26 @@ class Ticket extends Model
         );
     }
 
+    /**
+     * return the numbers of events.
+     *
+     * @return int
+     */
+    public function getEventCountAttribute()
+    {
+        return count($this->events);
+    }
+
+    /**
+     * return the numbers of notes.
+     *
+     * @return int
+     */
+    public function getNoteCountAttribute()
+    {
+        return count($this->notes);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Custom Methods
@@ -299,9 +345,49 @@ class Ticket extends Model
 
         $ticket = self::find($model_id);
 
-        $allowed = ($ticket->ip_contact_account_id == $account->id) ||
-                   ($ticket->domain_contact_account_id == $account->id);
+        return ($ticket->accountIp->is($account)) ||
+            ($ticket->accountDomain->is($account));
+    }
 
-        return $allowed;
+    /**
+     * has this ticket a parent ticket in another AbuseIO instance ?
+     *
+     * @return bool
+     */
+    public function hasParent()
+    {
+        // just checking for the remote_ticket_id should be enough
+        $result = !empty($this->remote_ticket_id);
+
+        return $result;
+    }
+
+    /**
+     * has this ticket a child ticket in another AbuseIO instance ?
+     *
+     * @return bool
+     */
+    public function hasChild()
+    {
+        // we assume that, if the ip contact has an api url then the ticket has a child ticket
+        $contact = FindContact::byIP($this->ip);
+
+        return !empty($contact->api_host);
+    }
+
+    /**
+     * permanently deletes a ticket.
+     *
+     * @return bool
+     */
+    public function purge()
+    {
+        if ($this->trashed() or $this->deleted_at != null) {
+            $this->forceDelete();
+
+            return true;
+        }
+
+        return false;
     }
 }

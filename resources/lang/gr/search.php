@@ -4,9 +4,9 @@ return [
     // Headers
 
     // Buttons
-    'button.search'     => 'Αναζήτηση',
+    'button.search' => 'Αναζήτηση',
 
     // Miscellaneous
-    'customer_code'     => 'Κωδικός Επαφής',
-    'customer_name'     => 'Όνομα Επαφής',
+    'customer_code' => 'Κωδικός Επαφής',
+    'customer_name' => 'Όνομα Επαφής',
 ];
