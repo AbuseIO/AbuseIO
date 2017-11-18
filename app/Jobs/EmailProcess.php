@@ -61,7 +61,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
     /**
      * This method is called by laravel when the job fails on a exception.
      */
-    protected function failed()
+    public function failed()
     {
         Log::error(
             get_class($this).': '.
@@ -103,6 +103,18 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
         // Ignore email from our own notification address to prevent mail loops
         if (preg_match('/'.Config::get('main.notifications.from_address').'/', $parsedMail->getHeader('from'))) {
+            Log::warning(
+                get_class($this).': '.
+                'Loop prevention: Ignoring email from self '.Config::get('main.notifications.from_address')
+            );
+
+            $this->exception();
+
+            return;
+        }
+
+        // Ignore email from our own notification address used in bounching methods to prevent mail loops
+        if (preg_match('/'.Config::get('main.notifications.from_address').'/', $parsedMail->getHeader('Resent-From'))) {
             Log::warning(
                 get_class($this).': '.
                 'Loop prevention: Ignoring email from self '.Config::get('main.notifications.from_address')
@@ -194,11 +206,17 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
 
         /*
          * build evidence model, but wait with saving it
+         * but first check if it doesnt exists already (queue retry)
          **/
-        $evidence = new Evidence();
-        $evidence->filename = $this->filename;
-        $evidence->sender = $parsedMail->getHeader('from');
-        $evidence->subject = $parsedMail->getHeader('subject');
+        $evidenceExists = Evidence::where('filename', '=', $this->filename);
+        if ($evidenceExists->count() === 1) {
+            $evidence = $evidenceExists->first();
+        } else {
+            $evidence = new Evidence();
+            $evidence->filename = $this->filename;
+            $evidence->sender = $parsedMail->getHeader('from');
+            $evidence->subject = $parsedMail->getHeader('subject');
+        }
 
         /*
          * Call IncidentsProcess to validate, store evidence and save incidents
@@ -250,12 +268,16 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
             $fileContents = Storage::get($this->filename);
         }
 
-        AlertAdmin::send(
-            'AbuseIO was not able to process an incoming message. This message is attached to this email.',
-            [
-                'failed_message.eml' => $fileContents,
-            ]
-        );
+        if (Config::get('main.emailparser.use_bounce_method')) {
+            AlertAdmin::bounce($fileContents);
+        } else {
+            AlertAdmin::send(
+                'AbuseIO was not able to process an incoming message. This message is attached to this email.',
+                [
+                    'failed_message.eml' => $fileContents,
+                ]
+            );
+        }
 
         // Delete the evidence file as we are not using it.
         Storage::delete($this->filename);

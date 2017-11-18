@@ -62,9 +62,9 @@ class TicketsController extends Controller
             ->leftJoin(
                 'notes',
                 function ($join) {
-                // We need a LEFT JOIN .. ON .. AND ..).
-                // This doesn't exist within Illuminate's JoinClause class
-                // So we use some nesting foo here
+                    // We need a LEFT JOIN .. ON .. AND ..).
+                    // This doesn't exist within Illuminate's JoinClause class
+                    // So we use some nesting foo here
                     $join->on('notes.ticket_id', '=', 'tickets.id')
                         ->nest(
                             function ($join) {
@@ -73,6 +73,7 @@ class TicketsController extends Controller
                         );
                 }
             )
+            ->orderBy('id', 'desc')
             ->groupBy('tickets.id');
 
         if (!$auth_account->isSystemAccount()) {

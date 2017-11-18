@@ -82,6 +82,10 @@ class RunCommand extends Command
             $this->removeUnlinkedEvidence();
         }
 
+        Log::debug(
+            get_class($this).': Housekeeping has completed its run'
+        );
+
         return true;
     }
 
@@ -97,6 +101,7 @@ class RunCommand extends Command
         );
 
         $path = '/mailarchive/';
+        $startTime = time() - 3600;
 
         $directories = Storage::directories($path);
 
@@ -108,7 +113,7 @@ class RunCommand extends Command
             // then check for each file check if its linked to a database entry
             foreach ($files as $file) {
                 // Check filesystem if its actually old and not just created
-                if (Storage::lastModified($file) > (time() - 3600)) {
+                if (Storage::lastModified($file) > $startTime) {
                     continue;
                 }
 
@@ -140,6 +145,12 @@ class RunCommand extends Command
                 }
             }
         }
+
+        Log::info(
+            get_class($this).': Housekeeper has completed removing orphaned mailarchive items'
+        );
+
+        return true;
     }
 
     /**
@@ -172,7 +183,7 @@ class RunCommand extends Command
                 $created = $job->created_at;
 
                 if ($jobLimit->gt($created)) {
-                    $hangs [] = $job;
+                    $hangs[] = $job;
                 }
             }
         }
@@ -216,6 +227,10 @@ class RunCommand extends Command
             }
         }
 
+        Log::info(
+            get_class($this).': Housekeeper has completed queue checks'
+        );
+
         if ($hangCount != 0 || $failedCount != 0) {
             return false;
         }
@@ -258,7 +273,17 @@ class RunCommand extends Command
             $tickets = Ticket::where('status_id', '!=', 'CLOSED')->get();
 
             foreach ($tickets as $ticket) {
-                if ($ticket->lastEvent[0]->timestamp <= $closeOlderThen &&
+                /*
+                 * If there something is a ticket without an event we need to use the created_at field instead
+                 * to prevent an index error on the event check
+                 */
+                if (empty($ticket->lastEvent[0])) {
+                    $lastEventTimestamp = strtotime($ticket->created_at);
+                } else {
+                    $lastEventTimestamp = $ticket->lastEvent[0]->timestamp;
+                }
+
+                if ($lastEventTimestamp <= $closeOlderThen &&
                     strtotime($ticket->created_at) <= $closeOlderThen
                 ) {
                     $ticket->update(
@@ -269,6 +294,10 @@ class RunCommand extends Command
                 }
             }
         }
+
+        Log::info(
+            get_class($this).': Housekeeper has completed closing old tickets'
+        );
 
         return true;
     }
@@ -308,11 +337,15 @@ class RunCommand extends Command
             $evidences = Evidence::where('created_at', '<=', date('Y-m-d H:i:s', $deleteOlderThen))->get();
 
             foreach ($evidences as $evidence) {
-                $path = storage_path().'/mailarchive/';
+                $path = storage_path().'/';
                 Storage::delete($path.$evidence->filename);
                 $evidence->delete();
             }
         }
+
+        Log::info(
+            get_class($this).': Housekeeper has completed removing old mailarchive items'
+        );
 
         return true;
     }

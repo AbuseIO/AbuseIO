@@ -5,7 +5,6 @@ namespace AbuseIO\Console\Commands\Brand;
 use AbuseIO\Console\Commands\AbstractCreateCommand;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
-use Prophecy\Argument;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Validator;

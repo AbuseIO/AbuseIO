@@ -18,10 +18,109 @@ return [
         'description' => 'This classification has no information text yet.',
     ],
 
+    'OPEN_VNC_SERVER' => [
+        'name'        => 'Open VNC Server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_SMB_SERVER' => [
+        'name'        => 'Open SAMBA Server (SMB/CIFS)',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_CWMP_SERVER' => [
+        'name'        => 'Open CPE WAN Management Protocol (CWMP)',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_TELNET_SERVER' => [
+        'name'        => 'Open Telnet Server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_LDAP_SERVER' => [
+        'name'        => 'Open LDAP Server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
     'BOTNET_CONTROLLER' => [
         'name'        => 'Botnet controller',
         'description' => '
             This classification has no information text yet.
+            ',
+    ],
+
+    'ISAKMP_VULNERABLE_DEVICE' => [
+        'name'        => 'ISAKMP Vulnerable device',
+        'description' => '
+            <h2>What is a \'ISAKMP Vulnerable device\'?</h2>
+
+            <p>  </p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>A vulnerability in Internet Key Exchange version 1 (IKEv1) packet processing code in Cisco IOS,
+             Cisco IOS XE, and Cisco IOS XR Software could allow an unauthenticated, remote attacker to retrieve
+              memory contents, which could lead to the disclosure of confidential information.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>There are no workarounds for this vulnerability except for disabling IPSEC</p>
+
+            <h2>Tips how to resolve this matter</h2>
+            <ul>
+            <li>Upgrade to a non-affected version of Cisco IOS</li>
+            <li>implement an intrusion prevention system (IPS) or intrusion detection system (IDS) to help detect
+            and prevent attacks that attempt to exploit this vulnerability.</li>
+            </ul>
+
+            <h2>Getting more information</h2>
+
+            <a target\'_blank\' href=\'IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products\'>IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products</a><br>
+
+            ',
+    ],
+
+    'OPEN_RDP_SERVER' => [
+        'name'        => 'Open RDP Server',
+        'description' => '
+            <h2>What is a \'Open RDP Server\'?</h2>
+
+            <p>  </p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>This report identifies hosts that have Remote Desktop (RDP) Service running and accessible to the world
+             on the internet. Misconfigured RDP can allow miscreants access to the desktop of a vulnerable host and can
+             also allow for information gathering on a target host as the SSL certificate used by RDP often contains
+             the system\'s trivial hostname. </p>
+
+            <p>In addition your sure will be targetted by brute force attacks, and while most RDP server only allow
+             two sessions you will not be able to connect to the RDP server yourself. In essence you are locked out!</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Disable public access to RDP, or make sure to detect and mitigate brute force attacks</p>
+
+            <h2>Tips how to resolve this matter</h2>
+            <ul>
+            <li>Firewall port TCP/3389 and use a VPN to gain access to your internal network/li>
+            <li>Firewall port TCP/3389 and only allow access from trusted IP addresses</li>
+            </ul>
+
+            <h2>Getting more information</h2>
+
+            <a target\'_blank\' href=\'https://technet.microsoft.com/en-us/library/cc743162(v=ws.11).aspx\'>Remote Desktop Services and Windows Firewall</a><br>
             ',
     ],
 

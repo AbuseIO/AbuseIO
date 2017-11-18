@@ -72,7 +72,7 @@ class ContactsController extends Controller
             ->editColumn(
                 'account_id',
                 function ($contact) {
-                    return $contact->account->name;
+                    return empty($contact->account->name) ? null : $contact->account->name;
                 }
             )
             // Replace auto_notify values for something readable.

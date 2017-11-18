@@ -3,7 +3,7 @@
 return [
 
     'name'    => 'AbuseIO',
-    'version' => '4.0.1',
+    'version' => '4.0.2',
 
     /*
     |--------------------------------------------------------------------------
@@ -67,8 +67,10 @@ return [
     | about setting your own format.
     */
 
-    'date_format' => 'd-m-Y',
-    'time_format' => 'H:i:s P',
+    // Implement ISO 8601 usage
+    'date_format' => 'c',
+    // or use this for more human readable:
+    // 'date_format' => 'd-m-Y H:i:s P',
 
     /*
     |--------------------------------------------------------------------------
@@ -87,6 +89,7 @@ return [
     'locales' => [
         'en' => ['English', 'gb'],
         'nl' => ['Nederlands', 'nl'],
+        'gr' => ['Ελληνικά', 'gr'],
     ],
 
     /*

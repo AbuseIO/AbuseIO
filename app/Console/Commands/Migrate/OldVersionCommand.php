@@ -684,7 +684,7 @@ class OldVersionCommand extends Command
             );
             if ($validator->fails()) {
                 $this->error(
-                    'DevError: Internal validation failed when saving the Event object '.
+                    'DevError: Internal validation failed when saving the reply Event object '.
                     implode(' ', $validator->messages()->all())
                 );
                 $this->exception();
@@ -732,7 +732,7 @@ class OldVersionCommand extends Command
 
         $newTicket->id = $ticket->ID;
         $newTicket->ip = $ticket->IP;
-        $newTicket->domain = empty($ticket->Domain) ? '' : $ticket->Domain;
+        $newTicket->domain = getDomain('http://'.$ticket->Domain);
         $newTicket->class_id = $ticket->Class;
         $newTicket->type_id = $ticket->Type;
 
