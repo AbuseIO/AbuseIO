@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * Class Account.
  *
-
+ *
  * @property int $id
  * @property string $name fillable
  * @property string $company_name fillable
@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\File\File;
  * @property int $created_at
  * @property int $updated_at
  * @property int $deleted_at
-
  */
 class Brand extends Model
 {
