@@ -26,7 +26,6 @@ $(document).ready(function() {
                     });
 
                     fetchReq.done(function (response) {
-                        console.log(response);
                         // Fill the normal input fields, no selects, checkboxes and no dropdown fakeinput elements
                         userModal.find(':input').not(':checkbox, :button, select').each(function() {
                             if (response.hasOwnProperty(this.id)) {
@@ -63,7 +62,7 @@ $(document).ready(function() {
                         $.each( errors, function( key, value ) {
                             errorsHtml += '<li>' + value[0] + '</li>';
                         });
-                        $(this).snackbar('<ul>'+errorsHtml+'</ul>')
+                        $(this).notify('<ul>'+errorsHtml+'</ul>')
                     })
                     break;
             }
@@ -83,30 +82,30 @@ $(document).ready(function() {
         })
 
         // When "Save" button is clicked.
-        .on('click', '.btn-success', function () {
-            $.ajax({
+        .on('click', '.btn-success', function (e) {
+            var saveReq = $.ajax({
                 url: userForm.attr('action'),
                 type: userForm.attr('method'),
                 data: userForm.serialize(),
-                dataType: 'json',
-                success: function (response)
-                {
-                    // User update was a success; close Modal and update card and notify user.
-                    userModal.modal('hide');
-                    $(this).usercardUpdate(response);
-                    $(this).notify(response.message)
-                },
-                error: function (response)
-                {
-                    // Something went wrong. Collect errors and notify user.
-                    console.log(response);
-                    var errors = response.responseJSON;
-                    var errorsHtml= '';
-                    $.each( errors, function( key, value ) {
-                        errorsHtml += '<li>' + value[0] + '</li>';
-                    });
-                    $(this).notify('<ul>'+errorsHtml+'</ul>')
-                }
+                dataType: 'json'
+            });
+
+            saveReq.done( function (response) {
+                // User update was a success; close Modal and update card and notify user.
+                userModal.modal('hide');
+                $(this).usercardUpdate(response);
+                $(this).notify(response.message);
+            });
+
+            saveReq.fail( function (response) {
+                // Something went wrong. Collect errors and notify user.
+                console.log(response);
+                var errors = response.responseJSON;
+                var errorsHtml= '';
+                $.each( errors, function( key, value ) {
+                    errorsHtml += '<li>' + value[0] + '</li>';
+                });
+                $(this).notify('<ul>'+errorsHtml+'</ul>')
             });
         });
 

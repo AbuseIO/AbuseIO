@@ -1,3 +1,4 @@
+{{-- Usercard: Represents a single card on the users screen. --}}
 <card class="col-sm-6 col-md-4 col-lg-3 mb-4 fade show" id="card_{{ $user->id }}">
     <div class="card">
         <div class="card-header text-white
@@ -24,7 +25,7 @@
                                             data-uri="{{ route('admin.users.get', $user->id) }}"
                                             data-form-method="patch"
                                             data-form-action="{{ route('admin.users.update', $user->id) }}"
-                                            data-title="{{ uctrans('users.header.edit') }}"
+                                            data-title="{{ uctrans('users.title.edit') }}"
                                             data-record-id="{{ $user->id }}">
                                             {{  trans('misc.button.edit') }}</button>
                                     <button id="btnEnable_{{ $user->id }}" type="button" class="dropdown-item" data-toggle="modal"
@@ -66,19 +67,19 @@
         <div class="card-body">
             <p class="card-text">
                 <dl class="row">
-                    <dt class="col-sm">{{ uctrans('misc.language', 1) }}</dt>
+                    <dt class="col-sm">{{ trans('users.label.language') }}</dt>
                     <dd class="col-sm text-right" id="locale_{{ $user->id }}">{{ $user->locale }}</dd>
                 </dl>
                 <dl class="row">
-                    <dt class="col-sm">{{ trans('users.linked_account') }}</dt>
+                    <dt class="col-sm">{{ trans('users.label.account') }}</dt>
                     <dd class="col-sm text-right" id="account_id_{{ $user->id }}">{{ $user->account->name }}</dd>
                 </dl>
                 <dl class="row">
-                    <dt class="col-sm">{{ trans_choice('misc.role', sizeof($user->roles)) }}</dt>
+                    <dt class="col-sm">{{ trans('users.label.roles') }}</dt>
                     <dd class="col-sm text-right" id="roles_{{ $user->id }}">
                         @if ( sizeof($user->roles) > 0)
                             @foreach ($user->roles as $role)
-                                <span class="badge badge-primary ml-1">{{ $role->name }}</span>
+                                <span class="badge badge-primary">{{ $role->name }}</span>
                             @endforeach
                         @else
                             <span class="badge badge-secondary">{{ uctrans('misc.none') }}</span>

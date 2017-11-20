@@ -79,9 +79,8 @@ class UsersController extends Controller
         // Load some translations into javascript
         Javascript::put([
             't_disabled' => uctrans('misc.disabled'),
-            't_enabled' => uctrans('misc.enabled'),
-            't_none' => uctrans('misc.none'),
-            't_usersaved' => trans('users.user'),
+            't_enabled'  => uctrans('misc.enabled'),
+            't_none'     => uctrans('misc.none'),
         ]);
 
         // Create locales array
@@ -98,21 +97,13 @@ class UsersController extends Controller
             $this->searchFields = array_merge($this->searchFields, $searchValues);
         }
 
-        $userList = $this->searchUsers();
-
-        $accounts = Account::all()->pluck('name', 'id')->sort()->prepend(null, 'null');
-
         return view('users.index', [
-            'users'             => $userList,
-            'locale_selection'  => $locales,
-            'locale_selected'   => null,
-            'account_selection' => $accounts,
-            'account_selected'  => null,
-            'roles_selection'   => Role::all()->pluck('name', 'id')->sort(),
-            'roles_selected'    => null,
-            'disabled_checked'  => false,
-            'auth_user'         => $this->auth_user,
-            'search_options'    => $this->searchFields,
+            'users'          => $this->searchUsers(),
+            'locales'        => $locales,
+            'accounts'       => Account::all()->pluck('name', 'id')->sort()->prepend(null, 'null'),
+            'roles'          => Role::all()->pluck('name', 'id')->sort(),
+            'auth_user'      => $this->auth_user,
+            'search_options' => $this->searchFields,
         ]);
     }
 
