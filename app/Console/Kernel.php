@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'AbuseIO\Console\Commands\App\InstallationID',
 
-        'AbuseIO\Console\Commands\Migrate\OldVersionCommand',
+//        'AbuseIO\Console\Commands\Migrate\OldVersionCommand',
 
         'AbuseIO\Console\Commands\Receive\EmailCommand',
 

@@ -18,6 +18,20 @@ return [
         'description' => 'This classification has no information text yet.',
     ],
 
+    'OPEN_SMARTINSTALL' => [
+        'name'        => 'Open Cisco Smart Install',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_HADOOP_SERVER' => [
+        'name'        => 'Open Hadoop Server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
     'OPEN_VNC_SERVER' => [
         'name'        => 'Open VNC Server',
         'description' => '
