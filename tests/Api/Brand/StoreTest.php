@@ -12,7 +12,6 @@ class StoreTest extends TestCase
 
     const URL = '/api/v1/brands';
 
-
     // public function testValidationErrors()
     // {
     //     $response = $this->executeCall([]);
