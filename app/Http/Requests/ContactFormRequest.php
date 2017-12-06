@@ -77,13 +77,16 @@ class ContactFormRequest extends Request
     ) {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
-        // force current account if the user isn't admin on the systemaccount
-        if (!Auth::user()->hasRole('admin') || !Auth::user()->account->isSystemAccount()) {
-            $this->getInputSource()->add(
-                [
-                    'account_id' => (int) Auth::user()->account->id,
-                ]
-            );
+        // only interesting when running in the gui
+        if (!is_null(Auth::user())) {
+            // force current account if the user isn't admin on the systemaccount
+            if (!Auth::user()->hasRole('admin') || !Auth::user()->account->isSystemAccount()) {
+                $this->getInputSource()->add(
+                    [
+                        'account_id' => (int) Auth::user()->account->id,
+                    ]
+                );
+            }
         }
     }
 }
