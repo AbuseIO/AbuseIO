@@ -31,7 +31,7 @@ Route::group(
             ]
         );
 
-        /**
+        /*
          * not correct implemented
         Route::post(
             '',
