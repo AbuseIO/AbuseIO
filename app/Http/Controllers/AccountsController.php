@@ -283,11 +283,6 @@ class AccountsController extends Controller
      */
     public function apiUpdate(AccountFormRequest $accountForm, Account $account)
     {
-        // may we edit this account
-        if (!$account->mayEdit($this->auth_user)) {
-            return $this->errorUnauthorized();
-        }
-
         $account->update($accountForm->all());
 
         return $this->respondWithItem($account, new AccountTransformer());
