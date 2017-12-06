@@ -31,6 +31,8 @@ Route::group(
             ]
         );
 
+        /**
+         * not correct implemented
         Route::post(
             '',
             [
@@ -38,6 +40,7 @@ Route::group(
                 'uses' => 'BrandsController@apiStore',
             ]
         );
+        **/
 
         Route::put(
             '{brands}',
