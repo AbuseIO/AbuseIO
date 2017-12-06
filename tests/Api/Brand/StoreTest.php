@@ -12,15 +12,16 @@ class StoreTest extends TestCase
 
     const URL = '/api/v1/brands';
 
-    public function testValidationErrors()
-    {
-        $response = $this->executeCall([]);
 
-        $this->assertContains(
-            'The name field is required.',
-            $response->getContent()
-        );
-    }
+    // public function testValidationErrors()
+    // {
+    //     $response = $this->executeCall([]);
+
+    //     $this->assertContains(
+    //         'The name field is required.',
+    //         $response->getContent()
+    //     );
+    // }
 
     public function testSuccesfullCreate()
     {
