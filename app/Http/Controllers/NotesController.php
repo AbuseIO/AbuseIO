@@ -113,6 +113,18 @@ class NotesController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiIndex()
+    {
+        $notes = Note::all();
+
+        return $this->respondWithCollection($notes, new NoteTransformer());
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param Note $note

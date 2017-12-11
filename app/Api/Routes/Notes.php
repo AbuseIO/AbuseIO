@@ -8,13 +8,13 @@ Route::group(
     ],
     function () {
         // Access to index list
-        //        route::get(
-        //            '',
-        //            [
-        //                'as'   => 'index',
-        //                'uses' => 'NotesController@apiIndex',
-        //            ]
-        //        );
+        route::get(
+            '',
+            [
+                'as'   => 'index',
+                'uses' => 'NotesController@apiIndex',
+            ]
+        );
 
         // Access to show object
         route::get(

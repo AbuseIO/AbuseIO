@@ -299,6 +299,8 @@ class ContactsController extends Controller
             $contactForm->all()
         );
 
+        $contact->syncNotificationMethods($contactForm);
+
         return $this->respondWithItem($contact, new ContactTransformer());
     }
 
