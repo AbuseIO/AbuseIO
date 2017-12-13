@@ -270,6 +270,11 @@ class TicketsController extends Controller
             });
         }
 
+        // offset the results
+        if (isset($query->offset)) {
+            $result = $result->splice($query->offset);
+        }
+
         // limit the results
         if (isset($query->limit)) {
             $result = $result->take($query->limit);
