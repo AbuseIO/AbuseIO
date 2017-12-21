@@ -87,6 +87,7 @@ return [
         'abuseio_collector',
         'abuseio_email_incoming',
         'abuseio_email_outgoing',
+        'abuseio_delegation',
     ],
 
     /*
