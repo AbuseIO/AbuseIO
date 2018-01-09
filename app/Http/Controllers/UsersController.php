@@ -274,8 +274,6 @@ class UsersController extends Controller
             $userData['disabled'] = ($userData['disabled'] == 'true');
         }
 
-        Log::info($userData);
-
         if (empty($userData['password'])) {
             unset($userData['password']);
         }
