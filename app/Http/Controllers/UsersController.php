@@ -12,7 +12,6 @@ use Config;
 use Form;
 use Illuminate\Http\Request;
 use League\Fractal\Manager;
-use Log;
 use Redirect;
 use yajra\Datatables\Datatables;
 
