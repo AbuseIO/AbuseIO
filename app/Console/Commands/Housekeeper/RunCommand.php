@@ -319,10 +319,11 @@ class RunCommand extends Command
                 ->get();
 
             foreach ($closedTickets as $closedTicket) {
-                $lastEvent = $closedTicket->lastEvent[0];
-                if (empty($lastEvent)) {
+                $lastEventCollection = $closedTicket->lastEvent;
+                if (empty($lastEventCollection) || empty($lastEventCollection->first())) {
                     $eventCreated = strtotime($closedTicket->updated_at);
                 } else {
+                    $lastEvent = $lastEventCollection->first();
                     $eventCreated = strtotime($lastEvent->created_at);
                 }
 
