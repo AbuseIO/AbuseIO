@@ -165,21 +165,22 @@
             <div id="resolved" class="tab-pane fade">
                 @if (config('main.notes.enabled') == true && $ticket->status_id != 2)
                     <p>{{ trans('ash.communication.header') }}</p>
-                    {!! Form::model(['method' => 'put']) !!}
-                    <div class="form-group">
-                        {!! Form::label('text', trans('ash.communication.reply').':') !!}
-                        {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder'), 'class' => 'form-control']) !!}
-                    </div>
+                    <form method="POST" accept-charset="UTF-8">
+                        {!! Form::token() !!}
+                        <div class="form-group">
+                            {!! Form::label('text', trans('ash.communication.reply').':') !!}
+                            {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder'), 'class' => 'form-control']) !!}
+                        </div>
 
-                    <div class="form-group">
-                        {!! Form::label('enabled', trans('misc.status').':', ['class' => 'control-label']) !!}
-                        {!! Form::select('changeStatus', $allowedChanges, $ticket->cust_status_id, ['class' => 'form-control']) !!}
-                    </div>
+                        <div class="form-group">
+                            {!! Form::label('enabled', trans('misc.status').':', ['class' => 'control-label']) !!}
+                            {!! Form::select('changeStatus', $allowedChanges, $ticket->cust_status_id, ['class' => 'form-control']) !!}
+                        </div>
 
-                    <div class="form-group">
-                        {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
-                    </div>
-                    {!! Form::close() !!}
+                        <div class="form-group">
+                            {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
+                        </div>
+                    </form>
 
                     <h4>{{ trans('ash.communication.previousCommunication') }}</h4>
                     @if ( !$ticket->notes->count() )
