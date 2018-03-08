@@ -1485,7 +1485,7 @@ return [
             ",
     ],
 
-    'PHISING_WEBSITE' => [
+    'PHISHING_WEBSITE' => [
         'name'        => 'Phishing website',
         'description' => "
             <h2>What is a 'Phishing website'?</h2>
