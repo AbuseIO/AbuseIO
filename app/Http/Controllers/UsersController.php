@@ -238,6 +238,12 @@ class UsersController extends Controller
     {
         $accounts = Account::lists('name', 'id');
         $roles = Role::lists('name', 'id');
+        $selected_roles = $user->roles->lists('id')->toArray();
+
+        // rewrite role ids as ints
+        foreach ($selected_roles as &$role) {
+            $role = intval($role);
+        }
 
         $locales = [];
         foreach (Config::get('app.locales') as $locale => $locale_data) {
@@ -252,7 +258,7 @@ class UsersController extends Controller
             ->with('locale_selected', null)
             ->with('disabled_checked', $user->disabled)
             ->with('roles', $roles)
-            ->with('selected_roles', $user->roles->lists('id')->toArray())
+            ->with('selected_roles', $selected_roles)
             ->with('auth_user', $this->auth_user);
     }
 
