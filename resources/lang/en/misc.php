@@ -24,6 +24,8 @@ return [
     'analytics'    => 'Analytics',
     'nav_brands'   => 'Brands',
     'nav_accounts' => 'Accounts',
+    'whitelist'    => 'Whitelist',
+
 
     // Button labels
     'button.show'       => 'Show',

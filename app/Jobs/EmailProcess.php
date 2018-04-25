@@ -223,6 +223,9 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
          */
         $incidentsProcess = new IncidentsProcess($parserResult['data'], $evidence);
 
+        // Exclude incidents that contain whitelisted IPs
+        $incidentsProcess->exclude_whitelisted();
+
         // Only continue if not empty, empty set is acceptable (exit OK)
         if (!$incidentsProcess->notEmpty()) {
             return;

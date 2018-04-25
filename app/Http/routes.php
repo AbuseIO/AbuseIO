@@ -60,6 +60,19 @@ Route::group(
             ]
         );
 
+        // Whitelist IPs or Subnets listing
+        Route::get(
+          '/whitelist',
+          [
+            'as'    => 'whitelist.listing',
+            'uses'  => 'WhitelistController@listing',
+          ]
+        );
+
+        // Update whitelist
+        Route::post('/whitelist', 'WhitelistController@update');
+
+
         // Contacts
         require app_path().'/Http/Routes/Contacts.php';
 

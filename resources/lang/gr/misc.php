@@ -24,6 +24,7 @@ return [
     'analytics'    => 'Στατιστικά',
     'nav_brands'   => 'Brands',
     'nav_accounts' => 'Λογαριασμοί',
+    'whitelist'    => 'Εξαιρέσεις',
 
     // Button labels
     'button.show'       => 'Προβολή',

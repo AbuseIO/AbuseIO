@@ -45,6 +45,37 @@ class IncidentsProcess extends Job implements SelfHandling
     }
 
     /**
+     * Matches an IPv4 address against an array of subnets (CIDRs)
+     *
+     */
+    private function ipMatch($ip, $cidrs) {
+        foreach((array) $cidrs as $cidr) {
+            if (!strpos($cidr, '/'))
+                $cidr = $cidr . '/32';
+            list($subnet, $mask) = explode('/', $cidr);
+            if(((ip2long($ip) & ($mask = ~ ((1 << (32 - $mask)) - 1))) == (ip2long($subnet) & $mask)))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if any indicent's IP is in the whitelist
+     * The whitelist contains all IPs that are not interested in receiving
+     * any notificatins from our service.
+     */
+    public function exclude_whitelisted(){
+        $whitelist = json_decode(file_get_contents(config_path(env('APP_ENV') . '/whitelist.json'), true));
+
+        foreach ($this->incidents as $key => $incident) {
+            if ($this->ipMatch($incident->ip, $whitelist)) {
+                Log::debug("whitelisting: ". $incident->ip);
+                unset($this->incidents[$key]);
+            }
+        }
+    }
+
+    /**
      * Checks if the incidents set is not empty.
      *
      * @return bool
