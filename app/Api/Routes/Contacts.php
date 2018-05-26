@@ -31,6 +31,22 @@ Route::group(
             ]
         );
 
+        Route::get(
+            'search/{email}',
+            [
+                'as'   => 'search',
+                'uses' => 'ContactsController@apiSearch',
+            ]
+        );
+
+        Route::get(
+            '{contacts}/anonymize',
+            [
+                'as'   => 'anonymize',
+                'uses' => 'ContactsController@apiAnonymize'
+            ]
+        );
+
         Route::post(
             '',
             [

@@ -101,6 +101,20 @@ class ContactsController extends Controller
     }
 
     /**
+     * Return the contact which matches the given email.
+     *
+     * @param $email
+     */
+    public function apiSearch($email)
+    {
+        $contacts = Contact::where('email', '=', $email)->first();
+
+        $this->respondWithCollection($contacts, new ContactTransformer());
+    }
+
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -248,6 +262,19 @@ class ContactsController extends Controller
     public function apiShow(Contact $contact)
     {
         return $this->respondWithItem($contact, new ContactTransformer());
+    }
+
+    /**
+     * Api method which anonymizes the specified Contact
+     *
+     * @param Contact $contact
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiAnonymize(Contact $contact)
+    {
+        $updated = $contact->anonymize();
+
+        return $this->respondWithItem($updated, new ContactTransformer());
     }
 
     /**
