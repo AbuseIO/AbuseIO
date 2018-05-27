@@ -93,6 +93,5 @@ Route::group(
                 'middleware' => ['apiaccountavailable'],
             ]
         );
-
     }
 );
