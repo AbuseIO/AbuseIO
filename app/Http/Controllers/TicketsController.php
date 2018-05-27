@@ -632,10 +632,10 @@ class TicketsController extends Controller
     }
 
     /**
-     *
-     * anonymize the ticket
+     * anonymize the ticket.
      *
      * @param Ticket $ticket
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiAnonymize(Ticket $ticket)

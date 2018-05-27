@@ -43,7 +43,7 @@ Route::group(
             '{contacts}/anonymize',
             [
                 'as'   => 'anonymize',
-                'uses' => 'ContactsController@apiAnonymize'
+                'uses' => 'ContactsController@apiAnonymize',
             ]
         );
 

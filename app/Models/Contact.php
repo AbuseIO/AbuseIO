@@ -282,25 +282,25 @@ class Contact extends Model
     }
 
     /**
-     * Anonymizes the contact and returns the updated Contact
+     * Anonymizes the contact and returns the updated Contact.
      *
      * @return Contact
      */
     public function anonymize()
     {
         // retrieve settings
-        $entropy = env("APP_KEY");
-        $anonymize_domain = env("GDPR_ANONYMIZE_DOMAIN", "example.com");
+        $entropy = env('APP_KEY');
+        $anonymize_domain = env('GDPR_ANONYMIZE_DOMAIN', 'example.com');
 
         // hash personal data and save it
-        $this->reference = md5($entropy . $this->reference);
-        $this->name = md5($entropy . $this->name);
-        $this->email = md5($his->email) . '@' . $anonymize_domain;
+        $this->reference = md5($entropy.$this->reference);
+        $this->name = md5($entropy.$this->name);
+        $this->email = md5($his->email).'@'.$anonymize_domain;
         $this->api_host = '';
         $this->save();
 
         // get the updated Contact and return it
-        $updated = Contact::find($this->id);
+        $updated = self::find($this->id);
 
         return $updated;
     }
