@@ -390,4 +390,43 @@ class Ticket extends Model
 
         return false;
     }
+
+    /**
+     * Anonymize the personal data in the ticket
+     *
+     * @return mixed
+     */
+    public function anonymize()
+    {
+        // retrieve settings
+        $entropy = env("APP_KEY");
+        $anonymize_domain = env("GDPR_ANONYMIZE_DOMAIN", "example.com");
+
+        // hash personal data and save it
+        $this->email = md5($his->email) . '@' . $anonymize_domain;
+
+        // ip contact data
+        if (!empty($this->ip_contact_email)) {
+            $this->ip_contact_email = md5($his->ip_contact_email) . '@' . $anonymize_domain;
+            $this->ip_contact_reference = md5($entropy . $this->ip_contact_reference);
+            $this->ip_contact_name = md5($entropy . $this->ip_contact_name);
+            $this->ip_contact_api_host = '';
+        }
+
+        // domain contact data
+        if (!empty($this->ip_contact_email)) {
+            $this->domain_contact_email = md5($his->domain_contact_email) . '@' . $anonymize_domain;
+            $this->domain_contact_reference = md5($entropy . $this->domain_contact_reference);
+            $this->domain_contact_name = md5($entropy . $this->domain_contact_name);
+            $this->domain_contact_api_host = '';
+        }
+
+        $this->save();
+
+        // get the updated Contact and return it
+        $updated = Ticket::find($this->id);
+
+        return $updated;
+
+    }
 }

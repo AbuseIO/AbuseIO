@@ -84,5 +84,15 @@ Route::group(
                 'middleware' => ['apiaccountavailable'],
             ]
         );
+
+        Route::get(
+            '{tickets}/anonymize',
+            [
+                'as'         => 'anonymize',
+                'uses'       => 'TicketsController@apiAnonymize',
+                'middleware' => ['apiaccountavailable'],
+            ]
+        );
+
     }
 );

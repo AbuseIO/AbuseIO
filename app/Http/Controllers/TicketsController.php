@@ -630,4 +630,18 @@ class TicketsController extends Controller
 
         return $this->respondWithItem($ticket, new TicketTransformer());
     }
+
+    /**
+     *
+     * anonymize the ticket
+     *
+     * @param Ticket $ticket
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiAnonymize(Ticket $ticket)
+    {
+        $updated = $ticket->anonymize();
+
+        return $this->respondWithItem($updated, new TicketTransformer());
+    }
 }
