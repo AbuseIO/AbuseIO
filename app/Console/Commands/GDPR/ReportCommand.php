@@ -3,11 +3,10 @@
  * Created by IntelliJ IDEA.
  * User: jover
  * Date: 28/05/2018
- * Time: 10:08
+ * Time: 10:08.
  */
 
 namespace AbuseIO\Console\Commands\GDPR;
-
 
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Ticket;
@@ -41,7 +40,7 @@ class ReportCommand extends Command
         $success = true;
         $email = $this->argument('email');
 
-        $this->info("Creating report for: " . $email . "\n");
+        $this->info('Creating report for: '.$email."\n");
 
         try {
             // find all contacts
@@ -54,7 +53,7 @@ class ReportCommand extends Command
             $this->report($contacts, 'AbuseIO\Models\Contact', $email);
             $this->report($tickets, 'AbuseIO\Models\Ticket', $email);
         } catch (\Exception $e) {
-            $this->error("Error: " . $e->getMessage());
+            $this->error('Error: '.$e->getMessage());
             $success = false;
         }
 
@@ -62,7 +61,7 @@ class ReportCommand extends Command
     }
 
     /**
-     * export the object data to a table
+     * export the object data to a table.
      *
      * @param $objects
      * @param $type
@@ -94,7 +93,7 @@ class ReportCommand extends Command
     }
 
     /**
-     * pretty print the data in a table and return it
+     * pretty print the data in a table and return it.
      *
      * @param $header
      * @param $body
@@ -128,7 +127,6 @@ class ReportCommand extends Command
             }
         }
 
-
         // calculate the total size of the table
         foreach ($columnSize as $column) {
             // add the column border
@@ -139,22 +137,22 @@ class ReportCommand extends Command
 
         // create the table
         // header
-        $table[] = sprintf("%'={$totalSize}s", "");
+        $table[] = sprintf("%'={$totalSize}s", '');
         $headerNames = '';
         foreach ($header as $key => $column) {
-            $headerNames .= sprintf("%' {$columnSize[$key]}s|", $column . " ");
+            $headerNames .= sprintf("%' {$columnSize[$key]}s|", $column.' ');
         }
-        $table[] = "|" . $headerNames;
-        $table[] = sprintf("%'={$totalSize}s", "");
+        $table[] = '|'.$headerNames;
+        $table[] = sprintf("%'={$totalSize}s", '');
 
         // body
         foreach ($body as $row) {
             $rowValues = '';
             foreach ($row as $key => $column) {
-                $rowValues .= sprintf("%' {$columnSize[$key]}s|", $column . " ");
+                $rowValues .= sprintf("%' {$columnSize[$key]}s|", $column.' ');
             }
-            $table[] = "|" . $rowValues;
-            $table[] = sprintf("%'-{$totalSize}s", "");
+            $table[] = '|'.$rowValues;
+            $table[] = sprintf("%'-{$totalSize}s", '');
         }
 
         return $table;
