@@ -632,8 +632,7 @@ class TicketsController extends Controller
     }
 
     /**
-     *
-     * anonymize the ticket
+     * anonymize the ticket.
      *
      * @param Ticket $ticket
      * @param string $email

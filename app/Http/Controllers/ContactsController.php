@@ -112,8 +112,6 @@ class ContactsController extends Controller
         $this->respondWithCollection($contacts, new ContactTransformer());
     }
 
-
-
     /**
      * Display a listing of the resource.
      *
@@ -265,9 +263,10 @@ class ContactsController extends Controller
     }
 
     /**
-     * Api method which anonymizes the specified Contact
+     * Api method which anonymizes the specified Contact.
      *
      * @param Contact $contact
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiAnonymize(Contact $contact)

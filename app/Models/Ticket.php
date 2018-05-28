@@ -391,39 +391,38 @@ class Ticket extends Model
     }
 
     /**
-     * Anonymize the personal data in the ticket
+     * Anonymize the personal data in the ticket.
      *
      * @return mixed
      */
     public function anonymize($email)
     {
         // retrieve settings
-        $entropy = env("APP_KEY");
-        $anonymize_domain = env("GDPR_ANONYMIZE_DOMAIN", "example.com");
+        $entropy = env('APP_KEY');
+        $anonymize_domain = env('GDPR_ANONYMIZE_DOMAIN', 'example.com');
 
         // hash personal data and save it
         // ip contact data
-        if ($this->ip_contact_email == $email) {
-            $this->ip_contact_email = md5($this->ip_contact_email) . '@' . $anonymize_domain;
-            $this->ip_contact_reference = md5($entropy . $this->ip_contact_reference);
-            $this->ip_contact_name = md5($entropy . $this->ip_contact_name);
+        if (!empty($this->ip_contact_email)) {
+            $this->ip_contact_email = md5($this->ip_contact_email).'@'.$anonymize_domain;
+            $this->ip_contact_reference = md5($entropy.$this->ip_contact_reference);
+            $this->ip_contact_name = md5($entropy.$this->ip_contact_name);
             $this->ip_contact_api_host = '';
         }
 
         // domain contact data
-        if ($this->domain_contact_email == $email) {
-            $this->domain_contact_email = md5($this->domain_contact_email) . '@' . $anonymize_domain;
-            $this->domain_contact_reference = md5($entropy . $this->domain_contact_reference);
-            $this->domain_contact_name = md5($entropy . $this->domain_contact_name);
+        if (!empty($this->domain_contact_email)) {
+            $this->domain_contact_email = md5($this->domain_contact_email).'@'.$anonymize_domain;
+            $this->domain_contact_reference = md5($entropy.$this->domain_contact_reference);
+            $this->domain_contact_name = md5($entropy.$this->domain_contact_name);
             $this->domain_contact_api_host = '';
         }
 
         $this->save();
 
-        // get the updated Ticket and return it
-        $updated = Ticket::find($this->id);
+        // get the updated Contact and return it
+        $updated = self::find($this->id);
 
         return $updated;
-
     }
 }
