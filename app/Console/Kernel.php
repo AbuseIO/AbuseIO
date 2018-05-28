@@ -98,6 +98,9 @@ class Kernel extends ConsoleKernel
         'AbuseIO\Console\Commands\Info\ListClassesCommand',
         'AbuseIO\Console\Commands\Info\ListTypesCommand',
 
+        'AbuseIO\Console\Commands\GDPR\ReportCommand',
+        'AbuseIO\Console\Commands\GDPR\AnonymizeCommand',
+
     ];
 
     /**

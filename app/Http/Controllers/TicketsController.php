@@ -636,11 +636,12 @@ class TicketsController extends Controller
      * anonymize the ticket
      *
      * @param Ticket $ticket
+     * @param string $email
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiAnonymize(Ticket $ticket)
+    public function apiAnonymize(Ticket $ticket, $email)
     {
-        $updated = $ticket->anonymize();
+        $updated = $ticket->anonymize($email);
 
         return $this->respondWithItem($updated, new TicketTransformer());
     }

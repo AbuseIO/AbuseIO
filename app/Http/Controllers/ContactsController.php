@@ -107,7 +107,7 @@ class ContactsController extends Controller
      */
     public function apiSearch($email)
     {
-        $contacts = Contact::where('email', '=', $email)->first();
+        $contacts = Contact::withTrashed()->where('email', '=', $email)->get();
 
         $this->respondWithCollection($contacts, new ContactTransformer());
     }
