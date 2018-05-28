@@ -636,6 +636,7 @@ class TicketsController extends Controller
      *
      * @param Ticket $ticket
      * @param string $email
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiAnonymize(Ticket $ticket, $email)
