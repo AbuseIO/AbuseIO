@@ -89,7 +89,6 @@
 		<script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
-		<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 		@yield('extrajs')
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

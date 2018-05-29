@@ -3,11 +3,11 @@
 @section('content')
 <h1 class="page-header">{{ $contact->name }}</h1>
 <div class="row">
-    <div class="col-md-3 col-md-offset-9 text-right">
-        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.contacts.destroy', $contact->id]]) !!}
+    <div class="col-sm-offset-9 col-sm-3 text-right">
+        {!! Form::open(['name' => 'delContact', 'class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.contacts.destroy', $contact->id]]) !!}
         {!! link_to_route('admin.contacts.edit', trans('misc.button.edit'), $contact->id, ['class' => 'btn btn-info']) !!}
-        {!! link_to_route('admin.gdpr.anonimize', trans('misc.button.anonimize'), $contact->id, ['class' => 'btn btn-warning']) !!}
-        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger']) !!}
+        {!! Form::button(trans('misc.button.anonymize'), ['name' => 'anonBtn', 'class' => 'btn btn-warning']) !!}
+        {!! Form::button(trans('misc.button.delete'), ['name' => 'delBtn', 'class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
     </div>
 </div>
@@ -84,4 +84,53 @@
     </table>
 </div>
 @endif
+
+{!! Form::open(['name' => 'anonContact', 'class' => 'form-inline', 'method' => 'POST', 'route' => ['admin.gdpr.anonymize', $contact->id]]) !!}
+{!! Form::hidden('anonymize', 1);!!}
+{!! Form::close() !!}
+
+<!-- Confirm Modal -->
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="confirmLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="confirmLabel">Please confirm</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to continue with this action?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" id="confirmed">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('extrajs')
+<script type="application/javascript">
+    $('button[name="delBtn"]').on('click', function(e) {
+        var $form = $(this).closest('form');
+        e.preventDefault();
+        $('#confirm').modal({
+            backdrop: 'static',
+            keyboard: false
+        }).one('click', '#confirmed', function(e) {
+            $form.trigger('submit');
+        });
+    });
+
+    $('button[name="anonBtn"]').on('click', function(e) {
+        var $form = $('form[name="anonContact"]');
+        e.preventDefault();
+        $('#confirm').modal({
+            backdrop: 'static',
+            keyboard: false
+        }).one('click', '#confirmed', function(e) {
+            $form.trigger('submit');
+        });
+    });
+</script>
 @endsection
