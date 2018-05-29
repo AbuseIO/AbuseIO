@@ -84,6 +84,9 @@ Route::group(
         // Analytics
         require app_path().'/Http/Routes/Analytics.php';
 
+        // GDPR
+        require app_path().'/Http/Routes/Gdpr.php';
+
         // Settings related
         require app_path().'/Http/Routes/SettingsAccounts.php';
         require app_path().'/Http/Routes/SettingsBrands.php';

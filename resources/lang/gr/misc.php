@@ -45,6 +45,7 @@ return [
     'button.read'       => 'Αναγνωσμένο',
     'button.unread'     => 'Μη αναγνωσμένο',
     'button.activate'   => 'Ενεργοποίηση',
+    'button.anonimize'  => 'Anonimize',
 
     // Miscellaneous
     'all'            => 'Όλα',
