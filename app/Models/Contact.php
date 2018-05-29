@@ -291,7 +291,7 @@ class Contact extends Model
     public function anonymize($randomness)
     {
         // retrieve settings
-        $entropy = env('APP_KEY') . $randomness;
+        $entropy = env('APP_KEY').$randomness;
         $anonymize_domain = env('GDPR_ANONYMIZE_DOMAIN', 'example.com');
 
         // hash personal data and save it

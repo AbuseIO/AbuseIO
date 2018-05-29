@@ -35,7 +35,7 @@ class AnonymizeCommand extends Command
     {
         $email = $this->argument('email');
         $confirm = $this->option('yes');
-        $randomness = sprintf("%d", time());
+        $randomness = sprintf('%d', time());
 
         try {
             $contacts = Contact::withTrashed()->where('email', '=', $email)->get();
