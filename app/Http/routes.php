@@ -188,6 +188,7 @@ Route::group(
                 require app_path().'/Api/Routes/Tickets.php';
                 require app_path().'/Api/Routes/Users.php';
                 require app_path().'/Api/Routes/Incidents.php';
+                require app_path().'/Api/Routes/Gdpr.php';
             }
         );
     }
