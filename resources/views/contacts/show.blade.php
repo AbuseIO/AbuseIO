@@ -6,6 +6,7 @@
     <div class="col-md-3 col-md-offset-9 text-right">
         {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.contacts.destroy', $contact->id]]) !!}
         {!! link_to_route('admin.contacts.edit', trans('misc.button.edit'), $contact->id, ['class' => 'btn btn-info']) !!}
+        {!! link_to_route('admin.gdpr.anonimize', trans('misc.button.anonimize'), $contact->id, ['class' => 'btn btn-warning']) !!}
         {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
     </div>

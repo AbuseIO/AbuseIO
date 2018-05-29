@@ -45,6 +45,7 @@ return [
     'button.read'       => 'Gelezen',
     'button.unread'     => 'Ongelezen',
     'button.activate'   => 'Activeer',
+    'button.anonimize'  => 'Anonimiseer',
 
     // Miscellaneous
     'all'                           => 'Alle',
