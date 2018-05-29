@@ -36,7 +36,7 @@ class GdprController extends Controller
         try {
             $this->anonymizeData($contact->email);
             $message = 'Contact successfully anonymized.';
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $message = 'There was a problem anonymizing the contact. (Error: '.$e->getMessage().')';
         }
 
@@ -65,14 +65,13 @@ class GdprController extends Controller
         ]);
     }
 
-
     /**
      * Anonymize the contact data and all related tickets.
      *
      * @param $email
      */
-    protected function anonymizeData($email) {
-
+    protected function anonymizeData($email)
+    {
         $randomness = sprintf('%d', time());
 
         $contacts = Contact::withTrashed()->where('email', '=', $email)->get();
