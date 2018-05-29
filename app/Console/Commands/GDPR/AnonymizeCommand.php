@@ -35,6 +35,7 @@ class AnonymizeCommand extends Command
     {
         $email = $this->argument('email');
         $confirm = $this->option('yes');
+        $randomness = sprintf("%d", time());
 
         try {
             $contacts = Contact::withTrashed()->where('email', '=', $email)->get();
@@ -47,7 +48,7 @@ class AnonymizeCommand extends Command
             foreach ($contacts as $contact) {
                 if ($confirm) {
                     $this->info("\t- Anonymizing Contact ".$contact->id);
-                    $contact->anonymize();
+                    $contact->anonymize($randomness);
                 } else {
                     $this->info("\t- Skipping Contact ".$contact->id.' (Dry run)');
                 }
@@ -56,7 +57,7 @@ class AnonymizeCommand extends Command
             foreach ($tickets as $ticket) {
                 if ($confirm) {
                     $this->info("\t- Anonymizing Ticket ".$ticket->id);
-                    $ticket->anonymize($email);
+                    $ticket->anonymize($email, $randomness);
                 } else {
                     $this->info("\t- Skipping Ticket ".$ticket->id.' (Dry run)');
                 }

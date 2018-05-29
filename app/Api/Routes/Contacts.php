@@ -40,7 +40,7 @@ Route::group(
         );
 
         Route::get(
-            '{contacts}/anonymize',
+            '{contacts}/anonymize/{randomness}',
             [
                 'as'   => 'anonymize',
                 'uses' => 'ContactsController@apiAnonymize',

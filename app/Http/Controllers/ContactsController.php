@@ -271,9 +271,9 @@ class ContactsController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiAnonymize(Contact $contact)
+    public function apiAnonymize(Contact $contact, $randomness)
     {
-        $updated = $contact->anonymize();
+        $updated = $contact->anonymize($randomness);
 
         return $this->respondWithItem($updated, new ContactTransformer());
     }

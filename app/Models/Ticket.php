@@ -393,12 +393,15 @@ class Ticket extends Model
     /**
      * Anonymize the personal data in the ticket.
      *
+     * @param $email
+     * @param $randomness
+     *
      * @return mixed
      */
-    public function anonymize($email)
+    public function anonymize($email, $randomness)
     {
         // retrieve settings
-        $entropy = env('APP_KEY');
+        $entropy = env('APP_KEY') . $randomness;
         $anonymize_domain = env('GDPR_ANONYMIZE_DOMAIN', 'example.com');
 
         // hash personal data and save it

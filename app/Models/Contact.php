@@ -284,12 +284,14 @@ class Contact extends Model
     /**
      * Anonymizes the contact and returns the updated Contact.
      *
-     * @return Contact
+     * @param $randomness
+     *
+     * @return mixed
      */
-    public function anonymize()
+    public function anonymize($randomness)
     {
         // retrieve settings
-        $entropy = env('APP_KEY');
+        $entropy = env('APP_KEY') . $randomness;
         $anonymize_domain = env('GDPR_ANONYMIZE_DOMAIN', 'example.com');
 
         // hash personal data and save it

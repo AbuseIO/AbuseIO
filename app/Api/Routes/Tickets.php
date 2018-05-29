@@ -86,7 +86,7 @@ Route::group(
         );
 
         Route::get(
-            '{tickets}/anonymize/{email}',
+            '{tickets}/anonymize/{email}/{randomness}',
             [
                 'as'         => 'anonymize',
                 'uses'       => 'TicketsController@apiAnonymize',
