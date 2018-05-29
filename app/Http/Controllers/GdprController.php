@@ -8,7 +8,6 @@ use AbuseIO\Traits\Api;
 use Illuminate\Http\Request;
 use League\Fractal\Manager;
 
-
 class GdprController extends Controller
 {
     use Api;
@@ -30,9 +29,10 @@ class GdprController extends Controller
     }
 
     /**
-     * api method to anonymize all personal data related to the given email address
+     * api method to anonymize all personal data related to the given email address.
      *
      * @param $email
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function apiAnonymize($email)
@@ -55,8 +55,8 @@ class GdprController extends Controller
         }
 
         return $this->respondWithArray([
-            'data' => [],
-            'message' => $this->getMessage('success', 200)
+            'data'    => [],
+            'message' => $this->getMessage('success', 200),
         ]);
     }
 }
