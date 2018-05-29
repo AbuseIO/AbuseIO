@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use Redirect;
 use yajra\Datatables\Datatables;
+use Zend\Json\Json;
 
 /**
  * Class ContactsController.
@@ -104,12 +105,13 @@ class ContactsController extends Controller
      * Return the contact which matches the given email.
      *
      * @param $email
+     * @return \Illuminate\Http\JsonResponse
      */
     public function apiSearch($email)
     {
         $contacts = Contact::withTrashed()->where('email', '=', $email)->get();
 
-        $this->respondWithCollection($contacts, new ContactTransformer());
+        return $this->respondWithCollection($contacts, new ContactTransformer());
     }
 
     /**
