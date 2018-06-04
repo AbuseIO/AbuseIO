@@ -407,7 +407,7 @@ class Ticket extends Model
         // hash personal data and save it
         // ip contact data
         if ($this->ip_contact_email == $email) {
-            $this->ip_contact_email = md5($this->ip_contact_email).'@'.$anonymize_domain;
+            $this->ip_contact_email = md5($entropy.$this->ip_contact_email).'@'.$anonymize_domain;
             $this->ip_contact_reference = md5($entropy.$this->ip_contact_reference);
             $this->ip_contact_name = md5($entropy.$this->ip_contact_name);
             $this->ip_contact_api_host = '';
@@ -415,7 +415,7 @@ class Ticket extends Model
 
         // domain contact data
         if ($this->domain_contact_email == $email) {
-            $this->domain_contact_email = md5($this->domain_contact_email).'@'.$anonymize_domain;
+            $this->domain_contact_email = md5($entropy.$this->domain_contact_email).'@'.$anonymize_domain;
             $this->domain_contact_reference = md5($entropy.$this->domain_contact_reference);
             $this->domain_contact_name = md5($entropy.$this->domain_contact_name);
             $this->domain_contact_api_host = '';

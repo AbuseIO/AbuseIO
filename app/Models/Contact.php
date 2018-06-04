@@ -297,7 +297,7 @@ class Contact extends Model
         // hash personal data and save it
         $this->reference = md5($entropy.$this->reference);
         $this->name = md5($entropy.$this->name);
-        $this->email = md5($this->email).'@'.$anonymize_domain;
+        $this->email = md5($entropy.$this->email).'@'.$anonymize_domain;
         $this->api_host = '';
         $this->save();
 
