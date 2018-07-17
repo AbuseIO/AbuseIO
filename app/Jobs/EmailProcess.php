@@ -90,7 +90,7 @@ class EmailProcess extends Job implements SelfHandling, ShouldQueue
         $parsedMail->setText($rawEmail);
 
         // pull out as variable because not all emails have a text body (some only contain html) this way they don't get ignored by the system.
-        $messageBody = $parsedMail->getMessageBody()?  $parsedMail->getMessageBody('text') :  $parsedMail->getMessageBody('html') ;
+        $messageBody = $parsedMail->getMessageBody() ? $parsedMail->getMessageBody('text') : $parsedMail->getMessageBody('html');
         // Sanity checks
         if (empty($parsedMail->getHeader('from')) || empty($messageBody)) {
             Log::warning(
