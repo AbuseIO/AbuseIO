@@ -31,7 +31,6 @@ class AshController extends Controller
         $ticket = Ticket::find($ticketID);
         $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
-
         if ($AshAuthorisedBy == 'TokenIP') {
             $account = Account::find($ticket->ip_contact_account_id);
         }
@@ -113,7 +112,6 @@ class AshController extends Controller
             $submittor = trans('ash.basic.domain').' '.trans('ash.communication.contact');
         }
 
-
         if (empty($submittor)) {
             abort(500);
         }
@@ -139,7 +137,6 @@ class AshController extends Controller
         }
 
         return redirect(route('ash.show', [$ticket->id, $token]))->with(compact('message'));
-
     }
 
     /**
