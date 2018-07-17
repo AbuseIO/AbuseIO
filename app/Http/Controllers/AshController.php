@@ -9,6 +9,7 @@ use AbuseIO\Models\Ticket;
 use App;
 use Input;
 use Request;
+use Session;
 
 /**
  * Controller handling the ASH interface to contacts.
@@ -27,6 +28,7 @@ class AshController extends Controller
      */
     public function index($ticketID, $token)
     {
+
         $ticket = Ticket::find($ticketID);
         $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
@@ -52,6 +54,10 @@ class AshController extends Controller
             'message'        => '',
             'language'       => App::getLocale(),
         ];
+
+        if (Session::has('message')) {
+            $replacements['message'] = Session::get('message');
+        }
 
         $view = view('ash', $replacements);
 
@@ -175,7 +181,9 @@ class AshController extends Controller
             }
         }
 
-        return $view;
+
+        return redirect(route('ash.show', [$ticket->id, $token]))->with(compact('message'));
+
     }
 
     /**
