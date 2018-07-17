@@ -28,7 +28,6 @@ class AshController extends Controller
      */
     public function index($ticketID, $token)
     {
-
         $ticket = Ticket::find($ticketID);
         $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
@@ -108,17 +107,14 @@ class AshController extends Controller
         $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
         if ($AshAuthorisedBy == 'TokenIP') {
-            $account = Account::find($ticket->ip_contact_account_id);
             $submittor = trans('ash.basic.ip').' '.trans('ash.communication.contact');
         }
         if ($AshAuthorisedBy == 'TokenDomain') {
-            $account = Account::find($ticket->domain_contact_account_id);
             $submittor = trans('ash.basic.domain').' '.trans('ash.communication.contact');
         }
 
-        $brand = empty($account) ? Brand::getSystemBrand() : $account->brand;
 
-        if (empty($brand) || empty($submittor)) {
+        if (empty($submittor)) {
             abort(500);
         }
 
@@ -141,46 +137,6 @@ class AshController extends Controller
             $note->text = $text;
             $note->save();
         }
-
-        $replacements = [
-            'brand'          => $brand,
-            'ticket'         => $ticket,
-            'allowedChanges' => $this->allowedStatusChanges($ticket),
-            'token'          => $token,
-            'message'        => $message,
-            'language'       => App::getLocale(),
-        ];
-
-        $view = view('ash', $replacements);
-
-        if ($brand->ash_custom_template) {
-            // defensive programming, doubble check the templates
-            $validator = \Validator::make(
-                [
-                    'ash' => $brand->ash_template,
-                ],
-                [
-                    'ash' => 'required|bladetemplate',
-                ]);
-
-            if ($validator->passes()) {
-                try {
-                    // only use the template if they pass the validation
-                    $custom_view = view(['template' => $brand->ash_template], $replacements);
-
-                    // try to render the view (missing vars will throw an exception)
-                    $custom_view->render();
-
-                    // no errors occurred while rendering
-                    $view = $custom_view;
-                } catch (\ErrorException $e) {
-                    \Log::warning('Incorrect ash template, falling back to default: '.$e->getMessage());
-                }
-            } else {
-                \Log::warning("Template isn't a valid blade template, falling back to default");
-            }
-        }
-
 
         return redirect(route('ash.show', [$ticket->id, $token]))->with(compact('message'));
 
