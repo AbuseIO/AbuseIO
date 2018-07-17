@@ -30,6 +30,7 @@ class AshController extends Controller
         $ticket = Ticket::find($ticketID);
         $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
+
         if ($AshAuthorisedBy == 'TokenIP') {
             $account = Account::find($ticket->ip_contact_account_id);
         }
@@ -101,7 +102,7 @@ class AshController extends Controller
         $AshAuthorisedBy = Request::get('AshAuthorisedBy');
 
         if ($AshAuthorisedBy == 'TokenIP') {
-            $account = Account::find($ticket->ip_contact_account_ip);
+            $account = Account::find($ticket->ip_contact_account_id);
             $submittor = trans('ash.basic.ip').' '.trans('ash.communication.contact');
         }
         if ($AshAuthorisedBy == 'TokenDomain') {
