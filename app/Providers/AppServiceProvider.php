@@ -41,6 +41,15 @@ class AppServiceProvider extends ServiceProvider
         // force the base url to the configured APP_URL
         // this helps when AbuseIO is behind a proxy
         URL::forceRootUrl(Config::get('app.url'));
+
+        // get the schema from the app_url and force it, fixes proxy errors in a ssl docker container
+        if (preg_match('/^(http(s)?)/', Config::get('app.url'), $matches, PREG_OFFSET_CAPTURE)) {
+            // get the schema
+            $schema = $matches[1][0];
+
+            // enforce it in the routes
+            URL::forceSchema($schema);
+        }
     }
 
     /**
