@@ -3,6 +3,7 @@
 namespace AbuseIO\Models;
 
 use AbuseIO\Jobs\FindContact;
+use Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -401,8 +402,8 @@ class Ticket extends Model
     public function anonymize($email, $randomness)
     {
         // retrieve settings
-        $entropy = env('APP_KEY').$randomness;
-        $anonymize_domain = env('GDPR_ANONYMIZE_DOMAIN', 'example.com');
+        $entropy = Config::get('app.key').$randomness;
+        $anonymize_domain = Config::get('main.gdpr_anonymize_domain');
 
         // hash personal data and save it
         // ip contact data

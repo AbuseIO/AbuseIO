@@ -5,7 +5,6 @@ namespace AbuseIO\Jobs;
 use AbuseIO\Models\Evidence;
 use AbuseIO\Parsers\Factory as ParserFactory;
 use Config;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use Log;
@@ -17,7 +16,7 @@ use Storage;
  *
  * Class EmailProcess
  */
-class EmailProcess extends Job implements SelfHandling, ShouldQueue
+class EmailProcess extends Job implements ShouldQueue
 {
     use SerializesModels;
 

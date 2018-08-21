@@ -4,7 +4,6 @@ namespace AbuseIO\Jobs;
 
 use AbuseIO\Collectors\Factory as CollectorFactory;
 use AbuseIO\Models\Evidence;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use Log;
@@ -14,7 +13,7 @@ use Log;
  *
  * Class CollectorProcess
  */
-class CollectorProcess extends Job implements SelfHandling, ShouldQueue
+class CollectorProcess extends Job implements ShouldQueue
 {
     use SerializesModels;
 

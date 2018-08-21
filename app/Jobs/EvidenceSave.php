@@ -3,7 +3,6 @@
 namespace AbuseIO\Jobs;
 
 use Carbon;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Log;
 use Storage;
 use Uuid;
@@ -13,7 +12,7 @@ use Uuid;
  *
  * Class EvidenceSave
  */
-class EvidenceSave extends Job implements SelfHandling
+class EvidenceSave extends Job
 {
     /**
      * Create a new command instance.

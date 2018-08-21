@@ -3,7 +3,6 @@
 namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Event;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Log;
 
 /**
@@ -13,7 +12,7 @@ use Log;
  *
  * Class IncidentsProcess
  */
-class IncidentsProcess extends Job implements SelfHandling
+class IncidentsProcess extends Job
 {
     /**
      * @var array

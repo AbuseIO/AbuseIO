@@ -153,4 +153,18 @@ return [
         'certificate' => '/opt/abuseio/config/smikme/certificate.pem',
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | ssl_verify option
+    |--------------------------------------------------------------------------
+    |
+    | When this option is disabled, it suppresses SSL certificate warnings.
+    | verify_peer, verify_peer_name are discarded and self_signed ssl
+    | certificates are allowed
+    |
+    */
+    'ssl_verify' => env('MAIL_SSL_VERIFY', false),
+
+
 ];

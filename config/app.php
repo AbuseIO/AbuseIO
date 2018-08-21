@@ -1,6 +1,17 @@
 <?php
 
 return [
+    /*
+   |--------------------------------------------------------------------------
+   | Application Environment
+   |--------------------------------------------------------------------------
+   |
+   | This value determines the "environment" your application is currently
+   | running in. This may determine how you prefer to configure various
+   | services your application utilizes. Set this in your ".env" file.
+   |
+   */
+    'env' => env('APP_ENV', 'production'),
 
     'name'    => 'AbuseIO',
     'version' => '4.1.0',
@@ -164,28 +175,34 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        'Illuminate\Foundation\Providers\ArtisanServiceProvider',
-        'Illuminate\Auth\AuthServiceProvider',
-        'Illuminate\Bus\BusServiceProvider',
-        'Illuminate\Broadcasting\BroadcastServiceProvider',
-        'Illuminate\Cache\CacheServiceProvider',
-        'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
-        'Illuminate\Routing\ControllerServiceProvider',
-        'Illuminate\Cookie\CookieServiceProvider',
-        'Illuminate\Database\DatabaseServiceProvider',
-        'Illuminate\Encryption\EncryptionServiceProvider',
-        'Illuminate\Filesystem\FilesystemServiceProvider',
-        'Illuminate\Foundation\Providers\FoundationServiceProvider',
-        'Illuminate\Hashing\HashServiceProvider',
-        'Illuminate\Mail\MailServiceProvider',
-        'Illuminate\Pagination\PaginationServiceProvider',
-        'Illuminate\Pipeline\PipelineServiceProvider',
-        'Illuminate\Queue\QueueServiceProvider',
-        'Illuminate\Redis\RedisServiceProvider',
-        'Illuminate\Auth\Passwords\PasswordResetServiceProvider',
-        'Illuminate\Session\SessionServiceProvider',
-        'Illuminate\Translation\TranslationServiceProvider',
-        'Illuminate\Validation\ValidationServiceProvider',
+
+//        'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider', -- removed upgrading from 5.2
+
+        Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+        Illuminate\Broadcasting\BroadcastServiceProvider::class,
+        Illuminate\Bus\BusServiceProvider::class,
+        Illuminate\Cache\CacheServiceProvider::class,
+        Illuminate\Cookie\CookieServiceProvider::class,
+        Illuminate\Database\DatabaseServiceProvider::class,
+        Illuminate\Encryption\EncryptionServiceProvider::class,
+        Illuminate\Filesystem\FilesystemServiceProvider::class,
+        Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
+        Illuminate\Foundation\Providers\FoundationServiceProvider::class,
+        Illuminate\Hashing\HashServiceProvider::class,
+        Illuminate\Mail\MailServiceProvider::class,
+        Illuminate\Pagination\PaginationServiceProvider::class,
+        Illuminate\Pipeline\PipelineServiceProvider::class,
+        Illuminate\Queue\QueueServiceProvider::class,
+        Illuminate\Redis\RedisServiceProvider::class,
+        Illuminate\Session\SessionServiceProvider::class,
+        Illuminate\Translation\TranslationServiceProvider::class,
+        Illuminate\Validation\ValidationServiceProvider::class,
+        Illuminate\View\ViewServiceProvider::class,
+
+        /*
+         * Some plugin Service Providers ...
+         */
         'Wpb\String_Blade_Compiler\ViewServiceProvider',
         'Collective\Html\HtmlServiceProvider',
 
@@ -193,7 +210,7 @@ return [
          * Application Service Providers...
          */
         'AbuseIO\Providers\AppServiceProvider',
-        'AbuseIO\Providers\BusServiceProvider',
+//        'AbuseIO\Providers\BusServiceProvider', --removed upgrading to 5.2
         'AbuseIO\Providers\ConfigServiceProvider',
         'AbuseIO\Providers\ContactServiceProvider',
         'AbuseIO\Providers\HelperServiceProvider',
@@ -205,7 +222,7 @@ return [
         'yajra\Datatables\DatatablesServiceProvider',
 
         /*
-         * Developer Providers
+         * Developer Providers ...
          */
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 

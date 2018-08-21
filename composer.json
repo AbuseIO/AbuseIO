@@ -36,9 +36,9 @@
                 "ext-json" : "*",
                 "ext-libxml" : "*",
 
-		"laravel/framework": "5.1.45",
+		"laravel/framework": "5.2.*",
 		"laravelcollective/html": "~5.0",
-		"wpb/string-blade-compiler": "3.0.*",
+		"wpb/string-blade-compiler": "3.2.*",
 		"php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
 		"webpatser/laravel-uuid": "1.*",
 		"Chumper/Zipper": "0.6.x",
@@ -92,7 +92,9 @@
 		"fzaninotto/faker": "~1.4",
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
-		"mockery/mockery": "0.9.5"
+		"mockery/mockery": "0.9.5",
+		"symfony/dom-crawler": "~3.0",
+		"symfony/css-selector": "~3.0"
 	},
 	"autoload": {
 		"classmap": [

@@ -4,11 +4,10 @@ namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\TicketGraphPoint;
 use Carbon\Carbon;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class GenerateTicketsGraphPoints extends Job implements SelfHandling
+class GenerateTicketsGraphPoints extends Job
 {
     /**
      * Create a new job instance.

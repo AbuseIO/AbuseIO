@@ -4,7 +4,6 @@ namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Event;
 use AbuseIO\Models\Ticket;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Log;
 use Validator;
 
@@ -13,7 +12,7 @@ use Validator;
  *
  * Class incidentsSave
  */
-class IncidentsSave extends Job implements SelfHandling
+class IncidentsSave extends Job
 {
     /**
      * Create a new command instance.

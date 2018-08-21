@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Jobs;
 
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use Log;
@@ -12,7 +11,7 @@ use Log;
  *
  * Class QueueTest
  */
-class QueueTest extends Job implements SelfHandling, ShouldQueue
+class QueueTest extends Job implements ShouldQueue
 {
     use SerializesModels;
 
