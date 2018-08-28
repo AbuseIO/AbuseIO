@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone'    => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -94,7 +94,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale'  => 'en',
 
     // 'locale' => ['Language Name', 'flag'],
     'locales' => [
@@ -129,7 +129,7 @@ return [
 
     'key' => env('APP_KEY', 'SomeRandomString'),
 
-    'cipher' => MCRYPT_RIJNDAEL_128,
+    'cipher' => 'AES-256-CBC',
 
     /*
     |--------------------------------------------------------------------------
@@ -191,6 +191,7 @@ return [
         Illuminate\Foundation\Providers\FoundationServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
         Illuminate\Mail\MailServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
         Illuminate\Pagination\PaginationServiceProvider::class,
         Illuminate\Pipeline\PipelineServiceProvider::class,
         Illuminate\Queue\QueueServiceProvider::class,
@@ -199,7 +200,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
         /*
          * Some plugin Service Providers ...
          */
@@ -209,22 +209,23 @@ return [
         /*
          * Application Service Providers...
          */
-        'AbuseIO\Providers\AppServiceProvider',
-//        'AbuseIO\Providers\BusServiceProvider', --removed upgrading to 5.2
-        'AbuseIO\Providers\ConfigServiceProvider',
-        'AbuseIO\Providers\ContactServiceProvider',
-        'AbuseIO\Providers\HelperServiceProvider',
-        'AbuseIO\Providers\RouteServiceProvider',
-        'AbuseIO\Providers\SystemAdminManagerProvider',
-        'AbuseIO\Providers\ValidationsServiceProvider',
-        'Chumper\Zipper\ZipperServiceProvider',
-        'Sorskod\Larasponse\LarasponseServiceProvider',
-        'yajra\Datatables\DatatablesServiceProvider',
+        AbuseIO\Providers\AppServiceProvider::class,
+        // AbuseIO\Providers\BroadcastServiceProvider::class,
+        AbuseIO\Providers\ConfigServiceProvider::class,
+        AbuseIO\Providers\ContactServiceProvider::class,
+        AbuseIO\Providers\HelperServiceProvider::class,
+        AbuseIO\Providers\EventServiceProvider::class,
+        AbuseIO\Providers\RouteServiceProvider::class,
+        AbuseIO\Providers\SystemAdminManagerProvider::class,
+        AbuseIO\Providers\ValidationsServiceProvider::class,
+        Chumper\Zipper\ZipperServiceProvider::class,
+        Sorskod\Larasponse\LarasponseServiceProvider::class,
+        yajra\Datatables\DatatablesServiceProvider::class,
 
         /*
          * Developer Providers ...
          */
-        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 
@@ -241,45 +242,46 @@ return [
 
     'aliases' => [
 
-        'App'        => 'Illuminate\Support\Facades\App',
-        'Artisan'    => 'Illuminate\Support\Facades\Artisan',
-        'Auth'       => 'Illuminate\Support\Facades\Auth',
-        'Blade'      => 'Illuminate\Support\Facades\Blade',
-        'Bus'        => 'Illuminate\Support\Facades\Bus',
-        'Cache'      => 'Illuminate\Support\Facades\Cache',
-        'Config'     => 'Illuminate\Support\Facades\Config',
-        'Cookie'     => 'Illuminate\Support\Facades\Cookie',
-        'Crypt'      => 'Illuminate\Support\Facades\Crypt',
-        'Datatables' => yajra\Datatables\Datatables::class,
-        'DB'         => 'Illuminate\Support\Facades\DB',
-        'Eloquent'   => 'Illuminate\Database\Eloquent\Model',
-        'Event'      => 'Illuminate\Support\Facades\Event',
-        'File'       => 'Illuminate\Support\Facades\File',
-        'Gate'       => Illuminate\Support\Facades\Gate::class,
-        'Hash'       => 'Illuminate\Support\Facades\Hash',
-        'Input'      => 'Illuminate\Support\Facades\Input',
-        'Inspiring'  => 'Illuminate\Foundation\Inspiring',
-        'Lang'       => 'Illuminate\Support\Facades\Lang',
-        'Log'        => 'Illuminate\Support\Facades\Log',
-        'Mail'       => 'Illuminate\Support\Facades\Mail',
-        'Password'   => 'Illuminate\Support\Facades\Password',
-        'Queue'      => 'Illuminate\Support\Facades\Queue',
-        'Redirect'   => 'Illuminate\Support\Facades\Redirect',
-        'Redis'      => 'Illuminate\Support\Facades\Redis',
-        'Request'    => 'Illuminate\Support\Facades\Request',
-        'Response'   => 'Illuminate\Support\Facades\Response',
-        'Route'      => 'Illuminate\Support\Facades\Route',
-        'Schema'     => 'Illuminate\Support\Facades\Schema',
-        'Session'    => 'Illuminate\Support\Facades\Session',
-        'Storage'    => 'Illuminate\Support\Facades\Storage',
-        'URL'        => 'Illuminate\Support\Facades\URL',
-        'Validator'  => 'Illuminate\Support\Facades\Validator',
-        'View'       => 'Illuminate\Support\Facades\View',
-        'Form'       => 'Collective\Html\FormFacade',
-        'Html'       => 'Collective\Html\HtmlFacade',
-        'Uuid'       => 'Webpatser\Uuid\Uuid',
-        'Carbon'     => 'Carbon\Carbon',
-        'Zipper'     => 'Chumper\Zipper\Zipper',
+        'App'          => Illuminate\Support\Facades\App::class,
+        'Artisan'      => Illuminate\Support\Facades\Artisan::class,
+        'Auth'         => Illuminate\Support\Facades\Auth::class,
+        'Blade'        => Illuminate\Support\Facades\Blade::class,
+        'Bus'          => Illuminate\Support\Facades\Bus::class,
+        'Cache'        => Illuminate\Support\Facades\Cache::class,
+        'Config'       => Illuminate\Support\Facades\Config::class,
+        'Cookie'       => Illuminate\Support\Facades\Cookie::class,
+        'Crypt'        => Illuminate\Support\Facades\Crypt::class,
+        'Datatables'   => ajra\Datatables\Datatables::class,
+        'DB'           => Illuminate\Support\Facades\DB::class,
+        'Eloquent'     => Illuminate\Database\Eloquent\Model::class,
+        'Event'        => Illuminate\Support\Facades\Event::class,
+        'File'         => Illuminate\Support\Facades\File::class,
+        'Gate'         => lluminate\Support\Facades\Gate::class,
+        'Hash'         => Illuminate\Support\Facades\Hash::class,
+        'Input'        => Illuminate\Support\Facades\Input::class,
+        'Inspiring'    => Illuminate\Foundation\Inspiring::class,
+        'Lang'         => Illuminate\Support\Facades\Lang::class,
+        'Log'          => Illuminate\Support\Facades\Log::class,
+        'Mail'         => Illuminate\Support\Facades\Mail::class,
+        'Notification' => Illuminate\Support\Facades\Notification::class,
+        'Password'     => Illuminate\Support\Facades\Password::class,
+        'Queue'        => Illuminate\Support\Facades\Queue::class,
+        'Redirect'     => Illuminate\Support\Facades\Redirect::class,
+        'Redis'        => Illuminate\Support\Facades\Redis::class,
+        'Request'      => Illuminate\Support\Facades\Request::class,
+        'Response'     => Illuminate\Support\Facades\Response::class,
+        'Route'        => Illuminate\Support\Facades\Route::class,
+        'Schema'       => Illuminate\Support\Facades\Schema::class,
+        'Session'      => Illuminate\Support\Facades\Session::class,
+        'Storage'      => Illuminate\Support\Facades\Storage::class,
+        'URL'          => Illuminate\Support\Facades\URL::class,
+        'Validator'    => Illuminate\Support\Facades\Validator::class,
+        'View'         => Illuminate\Support\Facades\View::class,
+        'Form'         => Collective\Html\FormFacade::class,
+        'Html'         => Collective\Html\HtmlFacade::class,
+        'Uuid'         => Webpatser\Uuid\Uuid::class,
+        'Carbon'       => Carbon\Carbon::class,
+        'Zipper'       => Chumper\Zipper\Zipper::class,
 
     ],
 

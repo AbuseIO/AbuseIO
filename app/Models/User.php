@@ -4,6 +4,7 @@ namespace AbuseIO\Models;
 
 use AbuseIO\Traits\InstanceComparable;
 use Hash;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -31,7 +32,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, InstanceComparable;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, InstanceComparable, Notifiable;
 
     /**
      * The database table used by the model.

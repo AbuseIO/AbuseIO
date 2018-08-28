@@ -37,7 +37,13 @@ trait Api
     protected function apiInit(Manager $fractal, Request $request)
     {
         // save the api_account in the controller
-        $this->api_account = $request->api_account;
+
+        $this->middleware(function ($request, $next) {
+            $this->api_account = $request->input('api_account');
+
+            return $next($request);
+        });
+
 
         $this->fractal = $fractal;
     }

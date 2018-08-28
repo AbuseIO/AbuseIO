@@ -35,8 +35,10 @@ class CheckApiToken
             return $this->errorUnauthorized('Unauthorized token');
         }
 
-        $request->api_account = $api_account;
-        $request->api_ticket = $api_ticket;
+        $request->merge([
+            'api_account' => $api_account,
+            'api_ticket'=> $api_ticket,
+        ]);
 
         return $next($request);
     }

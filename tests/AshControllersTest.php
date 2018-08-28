@@ -9,7 +9,7 @@ class AshControllersTest extends TestCase
      */
     public function testAshCollectOne()
     {
-        $response = $this->call('GET', '/ash/collect/1/6bb1aef09ea536260e3afe3fb9b432e4');
+        $response = $this->call('GET', '/ash/collect/1/8237675c392d59c64dee7bcee2fda785');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -18,7 +18,7 @@ class AshControllersTest extends TestCase
      */
     public function testAshCollectTwo()
     {
-        $response = $this->call('GET', '/ash/collect/2/92d74aa22a225708cc9092340b3b79be');
+        $response = $this->call('GET', '/ash/collect/2/c8a1f3942226f9a0464c60abc18445a7');
         $this->assertEquals(200, $response->getStatusCode());
     }
 }

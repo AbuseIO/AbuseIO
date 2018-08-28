@@ -22,7 +22,8 @@ class DestroyTest extends TestCase
         $server = $this->transformHeadersToServerVars(
             [
                 'X-API-TOKEN' => Account::getSystemAccount()->token,
-            ]);
+            ]
+        );
 
         $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($account->id), [], [], [], $server);
 

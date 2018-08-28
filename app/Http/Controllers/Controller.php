@@ -23,11 +23,15 @@ abstract class Controller extends BaseController
      */
     public function __construct()
     {
-        // Globalize user information
-        $user = Auth::user();
-        if ($user) {
-            $this->auth_user = $user;
-            Session::put('locale', $user->locale);
-        }
+        $this->middleware(function ($request, $next) {
+            // Globalize user information
+            $user = Auth::user();
+            if ($user) {
+                $this->auth_user = $user;
+                Session::put('locale', $user->locale);
+            }
+
+            return $next($request);
+        });
     }
 }
