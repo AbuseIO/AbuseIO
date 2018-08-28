@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
             $schema = $matches[1][0];
 
             // enforce it in the routes
-            URL::forceSchema($schema);
+            URL::forceScheme($schema);
         }
     }
 

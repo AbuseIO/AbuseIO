@@ -97,6 +97,7 @@ class ContactsController extends Controller
                     return empty($contact->auto_notify()) ? trans('misc.manual') : trans('misc.automatic');
                 }
             )
+            ->rawColumns(['actions'])
             ->make(true);
     }
 

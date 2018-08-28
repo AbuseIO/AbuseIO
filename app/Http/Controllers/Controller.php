@@ -31,6 +31,7 @@ abstract class Controller extends BaseController
                 Session::put('locale', $user->locale);
             }
 
+
             return $next($request);
         });
     }

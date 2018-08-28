@@ -207,6 +207,12 @@ return [
         'Collective\Html\HtmlServiceProvider',
 
         /*
+         * Package Service Providers...
+         */
+        Laravel\Tinker\TinkerServiceProvider::class,
+
+
+        /*
          * Application Service Providers...
          */
         AbuseIO\Providers\AppServiceProvider::class,
@@ -220,7 +226,7 @@ return [
         AbuseIO\Providers\ValidationsServiceProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
         Sorskod\Larasponse\LarasponseServiceProvider::class,
-        yajra\Datatables\DatatablesServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
          * Developer Providers ...
@@ -251,7 +257,7 @@ return [
         'Config'       => Illuminate\Support\Facades\Config::class,
         'Cookie'       => Illuminate\Support\Facades\Cookie::class,
         'Crypt'        => Illuminate\Support\Facades\Crypt::class,
-        'Datatables'   => ajra\Datatables\Datatables::class,
+        'DataTables'   => Yajra\DataTables\Facades\DataTables::class,
         'DB'           => Illuminate\Support\Facades\DB::class,
         'Eloquent'     => Illuminate\Database\Eloquent\Model::class,
         'Event'        => Illuminate\Support\Facades\Event::class,

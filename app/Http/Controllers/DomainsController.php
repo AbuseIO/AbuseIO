@@ -85,6 +85,7 @@ class DomainsController extends Controller
                     return $actions;
                 }
             )
+            ->rawColumns(['actions'])
             ->make(true);
     }
 

@@ -83,6 +83,7 @@ class NetblocksController extends Controller
                     return $actions;
                 }
             )
+            ->rawColumns(['actions'])
             ->make(true);
     }
 

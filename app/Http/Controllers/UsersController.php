@@ -95,6 +95,7 @@ class UsersController extends Controller
                     return $actions;
                 }
             )
+            ->rawColumns(['actions'])
             ->make(true);
     }
 
