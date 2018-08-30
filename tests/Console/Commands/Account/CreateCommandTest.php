@@ -12,14 +12,16 @@ use tests\TestCase;
  */
 class CreateCommandTest extends TestCase
 {
-    public function testWithoutArguments()
-    {
-
+    //risky test disabled because output could not be teste properly (output buffering problem)
+//    public function testWithoutArguments()
+//    {
+//
 //        Artisan::call('account:create');
 //        $output = Artisan::output();
-//
+////        dd($output);
+////
 //        $this->assertContains('account:create', $output);
-    }
+//    }
 
     public function testCreateValid()
     {

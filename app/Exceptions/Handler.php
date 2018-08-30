@@ -5,6 +5,7 @@ namespace AbuseIO\Exceptions;
 use AbuseIO\Traits\Api;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+//use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -64,6 +65,11 @@ class Handler extends ExceptionHandler
             return $this->errorInternalError($exception->getMessage());
         }
 
+        if ($request->wantsJson() && $exception instanceof \Illuminate\Validation\ValidationException) {
+
+            return $this->response($exception->errors());
+        }
+
         return parent::render($request, $exception);
     }
 
@@ -81,4 +87,16 @@ class Handler extends ExceptionHandler
         }
         return redirect()->guest('login');
     }
+
+//    /**
+//     * Convert a validation exception into a JSON response.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @param  \Illuminate\Validation\ValidationException  $exception
+//     * @return \Illuminate\Http\JsonResponse
+//     */
+//    protected function invalidJson($request, ValidationException $exception)
+//    {
+//        return response()->json($exception->errors(), $exception->status);
+//    }
 }

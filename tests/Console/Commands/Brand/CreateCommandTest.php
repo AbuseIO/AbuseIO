@@ -11,8 +11,8 @@ use tests\TestCase;
  */
 class CreateCommandTest extends TestCase
 {
-    public function testWithoutArguments()
-    {
+//    public function testWithoutArguments()
+//    {
         //Artisan::call('brand:create');
        // $output = Artisan::output();
 
@@ -22,7 +22,7 @@ class CreateCommandTest extends TestCase
 //        $this->assertContains('The company name field is required.', $output);
 //        $this->assertContains('The introduction text field is required.', $output);
 //        $this->assertContains('Failed to create the brand due to validation warnings', $output);
-    }
+//    }
 
     public function testCreateValid()
     {

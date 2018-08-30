@@ -231,7 +231,7 @@ trait Api
      */
     public function response(array $errors)
     {
-        if ($this->wantsJson()) {
+        if (request()->wantsJson()) {
             return $this->respondWithValidationErrors($errors);
         }
 

@@ -12,33 +12,14 @@ class StoreTest extends TestCase
 
     const URL = '/api/v1/brands';
 
-    // public function testValidationErrors()
-    // {
-    //     $response = $this->executeCall([]);
-
-    //     $this->assertContains(
-    //         'The name field is required.',
-    //         $response->getContent()
-    //     );
-    // }
-
-    public function testSuccesfullCreate()
+    public function testMethodNotAllowedReturns500()
     {
-        $brand = factory(Brand::class)->make()->toArray();
-
-        unset($brand['logo']);
-        unset($brand['creator_id']);
-
-        //        $response = $this->executeCall($brand);
-
-//        dd($response->getContent());
-//
-//        $this->assertTrue(
-//            $response->isSuccessful()
-//        );
-//
-//        $obj = json_decode($response->getContent());
-//
-//        dd($obj->data);
+        // it is not possible to create a brand with the api No Method allowed;
+        $response = $this->executeCall([])->decodeResponseJson();
+        $this->assertArrayHasKey('message', $response);
+        $this->assertArrayHasKey('success', $response['message']);
+        $this->assertFalse($response['message']['success']);
     }
+
+
 }

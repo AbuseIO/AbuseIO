@@ -68,7 +68,8 @@ class CheckAccountTest extends TestCase
             $model
         );
 
-        $this->isInstanceOf(RedirectResponse::class, $callback);
+            // assert callback is triggerd with request;
+        $this->assertEquals('ok', $callback);
     }
 
     public function testModelHasNoAccountAccessMethodLog()
