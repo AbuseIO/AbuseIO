@@ -16,7 +16,8 @@ class getDomainTest extends TestCase
         $this->assertEquals($expectedResult, getDomain($domain));
     }
 
-    public static function getSet() {
+    public static function getSet()
+    {
         return [
             ['www.sobit.nl', true],
             ['abuse.io', true],
@@ -25,6 +26,4 @@ class getDomainTest extends TestCase
             ["abuse\n.io", true], // a domain in a stuctured text can have a carriage return;
         ];
     }
-
-
 }

@@ -1,8 +1,9 @@
 <?php
+
 Route::group([
     'prefix' => 'auth',
     ],
-    function() {
+    function () {
         Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
         Route::post('login', 'Auth\LoginController@login');
         Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -13,7 +14,6 @@ Route::group([
         Route::post('password/reset', 'Auth\ResetPasswordController@reset');
     }
 );
-
 
 // Redirect the default page to the dashboard (or login)
 Route::get(

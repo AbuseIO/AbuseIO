@@ -19,7 +19,6 @@ class AdminControllersTest extends TestCase
     {
         $response = $this->call('GET', '/admin/');
         $this->assertEquals(302, $response->getStatusCode());
-
     }
 
     /**

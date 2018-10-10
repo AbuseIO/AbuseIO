@@ -62,7 +62,6 @@ class NotificationTest extends TestCase
         $this->assertFalse($this->notification->send([]));
     }
 
-
 //    /**
 //     * @test
 //     *

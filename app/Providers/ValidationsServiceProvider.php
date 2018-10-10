@@ -151,7 +151,7 @@ class ValidationsServiceProvider extends ServiceProvider
                 if (is_bool($value)) {
                     return true;
                 }
-                /**
+                /*
                  * changed implentation of getDomain to some form of isValidDomain;
                  */
 //                $url = 'http://'.$value;

@@ -144,8 +144,6 @@ return [
 
     'id' => env('APP_ID', 'DEFAULT'),
 
-
-
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -197,7 +195,6 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-
 
         /*
          * Application Service Providers...

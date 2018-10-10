@@ -381,7 +381,6 @@ class AccountsController extends Controller
      */
     public function apiDestroy(Account $account)
     {
-
         $brand = $account->brand;
 
         if (!$account->mayDestroy($this->auth_user)) {

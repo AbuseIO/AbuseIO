@@ -16,7 +16,8 @@ class getUriTest extends TestCase
         $this->assertEquals($expectedResult, getUri($url));
     }
 
-    public static function getSet() {
+    public static function getSet()
+    {
         return [
             ['https://abuse.brad', false], // invalid because .brad is not a valid tld;/
             ["http://\nabuse.io", '/'], // it is ok if a uri has carriage return;
@@ -29,6 +30,4 @@ class getUriTest extends TestCase
 
         ];
     }
-
-
 }

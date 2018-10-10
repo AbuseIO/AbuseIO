@@ -13,7 +13,6 @@ use AbuseIO\Models\Account;
 use AbuseIO\Models\Job;
 use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use tests\TestCase;
@@ -68,7 +67,7 @@ class CheckAccountTest extends TestCase
             $model
         );
 
-            // assert callback is triggerd with request;
+        // assert callback is triggerd with request;
         $this->assertEquals('ok', $callback);
     }
 

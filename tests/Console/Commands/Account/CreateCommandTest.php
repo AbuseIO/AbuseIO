@@ -18,8 +18,8 @@ class CreateCommandTest extends TestCase
 //
 //        Artisan::call('account:create');
 //        $output = Artisan::output();
-////        dd($output);
-////
+    ////        dd($output);
+    ////
 //        $this->assertContains('account:create', $output);
 //    }
 

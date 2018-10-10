@@ -102,29 +102,29 @@ class TicketsController extends Controller
                     // So we use some nesting foo here
                     // Going forward to 5_4 removed foo in favour of compound on because nesting deprecated;
                     // Resulting SQL is:
-       /*
-        * SELECT `tickets`.`id`,
-        *        `tickets`.`ip`,
-        *        `tickets`.`domain`,
-        *        `tickets`.`type_id`,
-        *        `tickets`.`class_id`,
-        *        `tickets`.`status_id`,
-        *        `tickets`.`ip_contact_account_id`,
-        *        `tickets`.`ip_contact_reference`,
-        *        `tickets`.`ip_contact_name`,
-        *        `tickets`.`domain_contact_account_id`,
-        *        `tickets`.`domain_contact_reference`,
-        *        `tickets`.`domain_contact_name`,
-        *        count(DISTINCT events.id) AS event_count,
-        *        count(DISTINCT notes.id) AS notes_count
-        * FROM `tickets`
-        * LEFT JOIN `events` ON `events`.`ticket_id` = `tickets`.`id`
-        * LEFT JOIN `notes` ON `notes`.`ticket_id` = `tickets`.`id`
-        * AND `notes`.`viewed` = 'false'
-        * WHERE `notes`.`deleted_at` IS NULL
-        *   AND `tickets`.`deleted_at` IS NULL
-        * GROUP BY `tickets`.`id`
-        */
+                    /*
+                     * SELECT `tickets`.`id`,
+                     *        `tickets`.`ip`,
+                     *        `tickets`.`domain`,
+                     *        `tickets`.`type_id`,
+                     *        `tickets`.`class_id`,
+                     *        `tickets`.`status_id`,
+                     *        `tickets`.`ip_contact_account_id`,
+                     *        `tickets`.`ip_contact_reference`,
+                     *        `tickets`.`ip_contact_name`,
+                     *        `tickets`.`domain_contact_account_id`,
+                     *        `tickets`.`domain_contact_reference`,
+                     *        `tickets`.`domain_contact_name`,
+                     *        count(DISTINCT events.id) AS event_count,
+                     *        count(DISTINCT notes.id) AS notes_count
+                     * FROM `tickets`
+                     * LEFT JOIN `events` ON `events`.`ticket_id` = `tickets`.`id`
+                     * LEFT JOIN `notes` ON `notes`.`ticket_id` = `tickets`.`id`
+                     * AND `notes`.`viewed` = 'false'
+                     * WHERE `notes`.`deleted_at` IS NULL
+                     *   AND `tickets`.`deleted_at` IS NULL
+                     * GROUP BY `tickets`.`id`
+                     */
 
                     $join->on('notes.ticket_id', '=', 'tickets.id')
                         ->on('notes.viewed', '=', DB::raw("'false'"));
@@ -137,7 +137,6 @@ class TicketsController extends Controller
             )
             ->where('notes.deleted_at', '=', null)
             ->groupBy('tickets.id');
-
 
         if (!$auth_account->isSystemAccount()) {
             // We're using a grouped where clause here, otherwise the filtering option
@@ -155,9 +154,9 @@ class TicketsController extends Controller
             ->addColumn(
                 'actions',
                 function ($ticket) {
-                    $actions = ' <a href="tickets/' . $ticket->id .
-                        '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> ' .
-                        trans('misc.button.show') . '</a> ';
+                    $actions = ' <a href="tickets/'.$ticket->id.
+                        '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
+                        trans('misc.button.show').'</a> ';
 
                     return $actions;
                 }
@@ -165,19 +164,19 @@ class TicketsController extends Controller
             ->editColumn(
                 'type_id',
                 function ($ticket) {
-                    return trans('types.type.' . $ticket->type_id . '.name');
+                    return trans('types.type.'.$ticket->type_id.'.name');
                 }
             )
             ->editColumn(
                 'class_id',
                 function ($ticket) {
-                    return trans('classifications.' . $ticket->class_id . '.name');
+                    return trans('classifications.'.$ticket->class_id.'.name');
                 }
             )
             ->editColumn(
                 'status_id',
                 function ($ticket) {
-                    return trans('types.status.abusedesk.' . $ticket->status_id . '.name');
+                    return trans('types.status.abusedesk.'.$ticket->status_id.'.name');
                 }
             )
             ->rawColumns(['actions'])
@@ -407,7 +406,7 @@ class TicketsController extends Controller
                 'status_id'   => 'Ticket Status',
             ];
 
-            $output = '"' . implode('", "', $columns) . '"' . PHP_EOL;
+            $output = '"'.implode('", "', $columns).'"'.PHP_EOL;
 
             foreach ($tickets as $ticket) {
                 $row = [
@@ -421,7 +420,7 @@ class TicketsController extends Controller
                     trans("types.status.abusedesk.{$ticket->status_id}.name"),
                 ];
 
-                $output .= '"' . implode('", "', $row) . '"' . PHP_EOL;
+                $output .= '"'.implode('", "', $row).'"'.PHP_EOL;
             }
 
             return response(substr($output, 0, -1), 200)
@@ -607,7 +606,7 @@ class TicketsController extends Controller
      * Update the specified resource in storage.
      *
      * @param TicketFormRequest $ticketForm
-     * @param Ticket $ticket
+     * @param Ticket            $ticket
      *
      * @return \Illuminate\Http\RedirectResponse
      */
