@@ -4,7 +4,7 @@ namespace AbuseIO\Traits;
 
 trait InstanceComparable
 {
-    /**
+    /*
      * @param $instance
      *
      * @return bool

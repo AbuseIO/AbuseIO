@@ -2,9 +2,9 @@
 
 namespace AbuseIO\Observers;
 
-use Config;
-use AbuseIO\Models\Ticket;
 use AbuseIO\Hook\Common as Hooks;
+use AbuseIO\Models\Ticket;
+use Config;
 
 class TicketObserver
 {

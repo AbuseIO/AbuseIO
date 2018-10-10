@@ -23,7 +23,6 @@ function getUrlData($url)
             '%20',
         ];
 
-
         $url = str_replace($entities, $replacements, $url);
 
         return array_merge([

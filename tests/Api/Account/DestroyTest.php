@@ -65,10 +65,11 @@ class DestroyTest extends TestCase
                 'X-API-TOKEN' => Account::getSystemAccount()->token,
                 'Accept'      => 'application/json',
             ]);
-        $response = $this->actingAs($user)->call('DELETE', self::URL . '/200', [], [], [], $server);
+        $response = $this->actingAs($user)->call('DELETE', self::URL.'/200', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
+
         return $response;
     }
 
@@ -80,7 +81,7 @@ class DestroyTest extends TestCase
         $result = $this->initWithInvalidResponse()->decodeResponseJson();
 
         $this->assertTrue(
-            array_key_exists( 'message', $result)
+            array_key_exists('message', $result)
         );
 
         $this->assertFalse($result['message']['success']);

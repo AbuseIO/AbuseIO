@@ -37,7 +37,7 @@ class CheckApiToken
 
         $request->merge([
             'api_account' => $api_account,
-            'api_ticket'=> $api_ticket,
+            'api_ticket'  => $api_ticket,
         ]);
 
         return $next($request);

@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 /**

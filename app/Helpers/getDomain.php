@@ -22,16 +22,11 @@ function getDomain($domain)
         ];
         $domain = str_replace($entities, $replacements, $domain);
 
-
-
         $manager = new Pdp\Manager(new Pdp\Cache(), new Pdp\CurlHttpClient());
         $rules = $manager->getRules(); //$rules is a Pdp\Rules object
         $resolvedDomain = $rules->resolve($domain);
 
-
-
         return $resolvedDomain->isKnown();
-
     } else {
         return false;
     }

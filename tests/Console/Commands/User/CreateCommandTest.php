@@ -18,10 +18,10 @@ class CreateCommandTest extends TestCase
 //    public function testWithoutArguments()
 //    {
 //        //        Artisan::call('user:create');
-////        $output = Artisan::output();
-////
-////        $this->assertContains('The first name field is required.', $output);
-////        $this->assertContains('Failed to create the user due to validation warnings', $output);
+    ////        $output = Artisan::output();
+    ////
+    ////        $this->assertContains('The first name field is required.', $output);
+    ////        $this->assertContains('Failed to create the user due to validation warnings', $output);
 //    }
 
     public function testCreateValid()

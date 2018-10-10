@@ -153,7 +153,6 @@ return [
         'certificate' => '/opt/abuseio/config/smikme/certificate.pem',
     ],
 
-
     /*
     |--------------------------------------------------------------------------
     | ssl_verify option

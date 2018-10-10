@@ -20,6 +20,4 @@ class StoreTest extends TestCase
         $this->assertArrayHasKey('success', $response['message']);
         $this->assertFalse($response['message']['success']);
     }
-
-
 }

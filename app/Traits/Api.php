@@ -44,7 +44,6 @@ trait Api
             return $next($request);
         });
 
-
         $this->fractal = $fractal;
     }
 

@@ -10,7 +10,6 @@
 function getUri($url)
 {
     if (!empty($url) && $urlData = getUrlData($url)) {
-
         $url = preg_replace("/[\n\r]/", '', $url);
 
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
@@ -22,8 +21,7 @@ function getUri($url)
             return false;
         }
 
-
-        $path = $urlData['path'] . ($urlData['query'] ? '?'.$urlData['query'] : '');
+        $path = $urlData['path'].($urlData['query'] ? '?'.$urlData['query'] : '');
 
         // Sanitize PATH according to RFC1738 (perhaps use RFC3986?)
         $entities = [

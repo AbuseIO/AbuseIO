@@ -3,10 +3,10 @@
 namespace AbuseIO\Http\Controllers;
 
 use Auth;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
 use Session;
 
 /**
@@ -30,7 +30,6 @@ abstract class Controller extends BaseController
                 $this->auth_user = $user;
                 Session::put('locale', $user->locale);
             }
-
 
             return $next($request);
         });

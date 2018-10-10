@@ -2,8 +2,8 @@
 
 namespace AbuseIO\Models;
 
-use Config;
 use AbuseIO\Http\Requests\ContactFormRequest;
+use Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

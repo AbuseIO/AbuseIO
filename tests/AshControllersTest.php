@@ -11,7 +11,7 @@ class AshControllersTest extends TestCase
      */
     public function testAshCollectOne()
     {
-       $this->withTicketId(1);
+        $this->withTicketId(1);
     }
 
     /**
@@ -29,7 +29,6 @@ class AshControllersTest extends TestCase
             $id,
             Ticket::find($id)->ash_token_ip
         );
-
 
         $response = $this->call('GET', $uri);
         $this->assertEquals(200, $response->getStatusCode());
