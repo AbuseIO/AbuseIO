@@ -3,41 +3,35 @@
 /**
  * This helper function can be used to get a valid domain.tld from an url and return it.
  *
- * @param string $url
+ * @param string $domain
  *
  * @return mixed
  */
-function getDomain($url)
+function getDomain($domain)
 {
-    if (!empty($url)) {
-        // Sanitize URL first by removing unwanted chars
-        $url = preg_replace("/[\n\r]/", '', $url);
+    if (!empty($domain)) {
+        // Sanitize domain first by removing unwanted chars
+        $domain = preg_replace("/[\n\r]/", '', $domain);
 
-        // Sanitize URL accourding to RFC1738 (perhaps use RFC3986?)
+        // Sanitize URL according to RFC1738 (perhaps use RFC3986?)
         $entities = [
             ' ',
         ];
         $replacements = [
             '%20',
         ];
-        $url = str_replace($entities, $replacements, $url);
+        $domain = str_replace($entities, $replacements, $domain);
 
-        // Check weither the URL is actually valid
-        if (!filter_var($url, FILTER_VALIDATE_URL) === true) {
-            return false;
-        }
 
-        $pslManager = new Pdp\PublicSuffixListManager();
-        $urlParser = new Pdp\Parser($pslManager->getList());
-        $urlData = $urlParser->parseUrl($url)->toArray();
 
-        if ($urlParser->isSuffixValid($urlData['registerableDomain']) === false) {
-            // Not a valid domain.
-            return false;
-        } else {
-            // Return valid domain
-            return $urlData['registerableDomain'];
-        }
+        $manager = new Pdp\Manager(new Pdp\Cache(), new Pdp\CurlHttpClient());
+        $rules = $manager->getRules(); //$rules is a Pdp\Rules object
+        $resolvedDomain = $rules->resolve($domain);
+
+
+
+        return $resolvedDomain->isKnown();
+
     } else {
         return false;
     }

@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
+
         factory(AbuseIO\Models\Contact::class, 5)->create();
         factory(AbuseIO\Models\Netblock::class, 10)->create();
         factory(AbuseIO\Models\Domain::class, 10)->create();
@@ -23,7 +24,6 @@ class DatabaseSeeder extends Seeder
             $events = random_int(1, 24);
             factory(AbuseIO\Models\Event::class, $events)->create(['ticket_id' => $ticket->id]);
         });
-
         // give the tickets some notes
         \AbuseIO\Models\Ticket::all()->each(function ($ticket) {
             $notes = random_int(1, 24);

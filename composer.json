@@ -24,7 +24,7 @@
 		"ext-mcrypt": "Laravel / AbuseIO requirement"
 	},
 	"require": {
-		"php": ">=7.0.0",
+		"php": ">=7.1.3",
 
 		"ext-mcrypt": "*",
 		"ext-intl" : "*",
@@ -35,11 +35,11 @@
                 "ext-zip": "*",
                 "ext-json" : "*",
                 "ext-libxml" : "*",
-
-		"laravel/framework": "5.5.*",
+		"fideloper/proxy": "^4.0",
+		"laravel/framework": "5.6.*",
 		"laravel/tinker": "~1.0",
 		"laravelcollective/html": "~5.0",
-		"wpb/string-blade-compiler": "3.5.*",
+		"wpb/string-blade-compiler": "3.6",
 		"php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
 		"webpatser/laravel-uuid": "1.*",
 		"Chumper/Zipper": "1.0.*",
@@ -84,20 +84,17 @@
 
 		"zendframework/zend-xmlrpc": "^2.5",
 		"zendframework/zend-http": "2.6",
-		"jeremykendall/php-domain-parser": "^3.0",
+		"jeremykendall/php-domain-parser": "^5.0",
 		"zendframework/zend-json": "^3.0",
 		"jover/singleton": "^1.0"
 
 	},
 	"require-dev": {
-		"filp/whoops": "~2.0",
-		"fzaninotto/faker": "~1.4",
-		"phpunit/phpunit": "~6.0",
-		"phpspec/phpspec": "~2.1",
-		"mockery/mockery": "~1.0",
-		"symfony/dom-crawler": "3.1.*",
-		"symfony/css-selector": "3.1.*",
-		"symfony/thanks": "^1.0"
+		"filp/whoops": "^2.0",
+		"fzaninotto/faker": "^1.4",
+		"mockery/mockery": "^1.0",
+		"nunomaduro/collision": "^2.0",
+		"phpunit/phpunit": "^7.0"
 	},
 	"autoload": {
 		"classmap": [

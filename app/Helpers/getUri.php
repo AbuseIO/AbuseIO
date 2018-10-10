@@ -9,36 +9,23 @@
  */
 function getUri($url)
 {
-    if (!empty($url)) {
-        // Sanitize URL first by removing unwanted chars
+    if (!empty($url) && $urlData = getUrlData($url)) {
+
         $url = preg_replace("/[\n\r]/", '', $url);
 
-        // Sanitize URL accourding to RFC1738 (perhaps use RFC3986?)
-        $entities = [
-            ' ',
-        ];
-        $replacements = [
-            '%20',
-        ];
-        $url = str_replace($entities, $replacements, $url);
-
-        // Check weither the domain is actually valid
-        if (getDomain($url) == false) {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
             return false;
         }
 
-        $pslManager = new Pdp\PublicSuffixListManager();
-        $urlParser = new Pdp\Parser($pslManager->getList());
-        $urlData = $urlParser->parseUrl($url)->toArray();
-
-        $path = $urlData['path'].(!empty($urlData['query']) ? '?'.$urlData['query'] : '');
-
-        // Set the path to root if empty (default)
-        if (empty($path)) {
-            $path = '/';
+        // Check weither the domain is actually valid
+        if (getDomain($urlData['host']) == false) {
+            return false;
         }
 
-        // Sanitize PATH accourding to RFC1738 (perhaps use RFC3986?)
+
+        $path = $urlData['path'] . ($urlData['query'] ? '?'.$urlData['query'] : '');
+
+        // Sanitize PATH according to RFC1738 (perhaps use RFC3986?)
         $entities = [
             ' ',
         ];
