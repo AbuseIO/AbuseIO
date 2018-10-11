@@ -78,7 +78,7 @@
 		"abuseio/notification-common": "1.2.*",
 		"abuseio/notification-mail": "1.4.*",
 
-		"abuseio/hook-common": "^1.0",
+		"abuseio/hook-common": "^1.1",
 		"abuseio/hook-log": "^1.0",
 		"abuseio/hook-delegate": "^1.0",
 
