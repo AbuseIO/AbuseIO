@@ -75,7 +75,7 @@
 		"abuseio/collector-rbl": "1.4.*",
 		"abuseio/collector-snds": "1.5.*",
 		
-		"abuseio/notification-common": "1.2.*",
+		"abuseio/notification-common": "1.1.*",
 		"abuseio/notification-mail": "1.4.*",
 
 		"abuseio/hook-common": "^1.1",
