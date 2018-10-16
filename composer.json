@@ -74,10 +74,10 @@
 		"abuseio/collector-rbl": "1.3.*",
 		"abuseio/collector-snds": "1.4.*",
 		
-		"abuseio/notification-common": "1.1.*",
+		"abuseio/notification-common": "1.1.2",
 		"abuseio/notification-mail": "1.3.*",
 
-		"abuseio/hook-common": "^1.0",
+		"abuseio/hook-common": "1.0.2",
 		"abuseio/hook-log": "^1.0",
 		"abuseio/hook-delegate": "^1.0",
 
