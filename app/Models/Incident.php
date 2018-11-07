@@ -2,6 +2,8 @@
 
 namespace AbuseIO\Models;
 
+use Lang;
+
 /**
  * Class Incident.
  *
@@ -175,10 +177,33 @@ class Incident
     }
 
     /**
+     * Sanitize Model data, allow for classifications aliases
+     */
+    private function sanitize()
+    {
+        $config = config("main.classifications");
+        $classifications = array_keys(Lang::get('classifications'));
+
+        // the incident class is not known
+        if (!in_array($this->class, $classifications)) {
+            // do we have an alias for the current classification,
+            // if so replace it with the alias,
+            // if not use the default
+            if (in_array($this->class, array_keys($config['aliases']))) {
+                $this->class = $config['aliases'][$this->class];
+            } else {
+                $this->class = $config['default'];
+            }
+        }
+    }
+
+    /**
      * Add toArray method manually as this is not a SQL model.
      */
     public function toArray()
     {
+        $this->sanitize();
+
         return json_decode(json_encode($this), true);
     }
 }

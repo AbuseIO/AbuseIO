@@ -92,4 +92,11 @@ return [
     'api' => [
         'enabled' => true,
     ],
+
+    'classifications' => [
+        'default' => 'DEFAULT',
+        'aliases' => [
+            //'MY_CLASSIFICATION' => 'DEFAULT',
+        ]
+    ],
 ];
