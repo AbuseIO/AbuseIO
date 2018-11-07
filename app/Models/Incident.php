@@ -177,11 +177,11 @@ class Incident
     }
 
     /**
-     * Sanitize Model data, allow for classifications aliases
+     * Sanitize Model data, allow for classifications aliases.
      */
     private function sanitize()
     {
-        $config = config("main.classifications");
+        $config = config('main.classifications');
         $classifications = array_keys(Lang::get('classifications'));
 
         // the incident class is not known

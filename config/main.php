@@ -97,6 +97,6 @@ return [
         'default' => 'DEFAULT',
         'aliases' => [
             //'MY_CLASSIFICATION' => 'DEFAULT',
-        ]
+        ],
     ],
 ];
