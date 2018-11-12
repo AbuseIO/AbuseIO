@@ -8,7 +8,7 @@ use Storage;
 class EvidenceObserver
 {
     /**
-     * Deleting event observer
+     * Deleting event observer.
      *
      * When we delete an evidence, also delete the linked mail
      *
