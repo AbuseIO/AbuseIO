@@ -221,9 +221,13 @@
                     </dl>
                 </td>
                 <td>
+                    @if ($event->evidence)
                     {!! link_to_route('admin.evidence.download', trans('ash.communication.download'), [$event->evidence->id]) !!}
                     -
                     {!! link_to_route('admin.evidence.show', trans('ash.communication.view'), [$event->evidence->id]) !!}
+                    @else
+                        {{ trans('misc.notavailable') }}
+                    @endif
                 </td>
             </tr>
             @endforeach

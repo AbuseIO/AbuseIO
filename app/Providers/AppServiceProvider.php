@@ -3,8 +3,10 @@
 namespace AbuseIO\Providers;
 
 use AbuseIO\Models\Event;
+use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Observers\EventObserver;
+use AbuseIO\Observers\EvidenceObserver;
 use AbuseIO\Observers\TicketObserver;
 use Config;
 use Illuminate\Support\ServiceProvider;
@@ -37,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
         // register observers
         Ticket::observe(TicketObserver::class);
         Event::observe(EventObserver::class);
+        Evidence::observe(EvidenceObserver::class);
 
         // force the base url to the configured APP_URL
         // this helps when AbuseIO is behind a proxy

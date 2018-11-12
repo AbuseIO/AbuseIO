@@ -93,6 +93,7 @@ return [
     'notification'                  => 'Notificatie|Notificaties',
     'versioncheck'                  => 'Controleer versie',
     'available'                     => 'Beschikbaar',
+    'notavailable'                  => 'Niet Beschikbaar',
     'noupdate'                      => 'Geen update',
     'error'                         => 'Fout',
     'login'                         => 'Inloggen',

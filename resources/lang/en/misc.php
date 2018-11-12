@@ -93,6 +93,7 @@ return [
     'notification'                  => 'Notification|Notifications',
     'versioncheck'                  => 'Check version',
     'available'                     => 'Available',
+    'notavailable'                  => 'Not Available',
     'noupdate'                      => 'No update',
     'error'                         => 'Error',
     'login'                         => 'Login',
