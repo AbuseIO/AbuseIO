@@ -23,7 +23,7 @@ class EvidenceObserver
             Storage::delete($evidence->filename);
         } catch (Exception $e) {
             // Log what went wrong
-            Log::info("Couldn't delete {$evidence->filename} for Evidence: {$evidence->id} >> "  . $e->getMessage() );
+            Log::info("Couldn't delete {$evidence->filename} for Evidence: {$evidence->id} >> ".$e->getMessage());
         }
     }
 }
