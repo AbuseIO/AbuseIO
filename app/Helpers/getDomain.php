@@ -22,6 +22,13 @@ function getDomain($domain)
         ];
         $domain = str_replace($entities, $replacements, $domain);
 
+
+        // Check weither the URL is actually valid
+        if (!filter_var($domain, FILTER_VALIDATE_URL) === true) {
+            return false;
+        }
+
+
         $manager = new Pdp\Manager(new Pdp\Cache(), new Pdp\CurlHttpClient());
         $rules = $manager->getRules(); //$rules is a Pdp\Rules object
         $resolvedDomain = $rules->resolve($domain);
