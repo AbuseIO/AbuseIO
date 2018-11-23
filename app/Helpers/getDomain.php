@@ -20,7 +20,7 @@ function getDomain($domain)
         $replacements = [
             '%20',
         ];
-        $domain = str_replace($entities, $replacements, $domain);       
+        $domain = str_replace($entities, $replacements, $domain);
 
         $manager = new Pdp\Manager(new Pdp\Cache(), new Pdp\CurlHttpClient());
         $rules = $manager->getRules(); //$rules is a Pdp\Rules object
