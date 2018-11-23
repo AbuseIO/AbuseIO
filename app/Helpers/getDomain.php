@@ -9,7 +9,7 @@
  */
 function getDomain($domain)
 {
-    if (!empty($domain)) {
+    if (!empty($domain) && is_string($domain)) {
         // Sanitize domain first by removing unwanted chars
         $domain = preg_replace("/[\n\r]/", '', $domain);
 
@@ -20,12 +20,7 @@ function getDomain($domain)
         $replacements = [
             '%20',
         ];
-        $domain = str_replace($entities, $replacements, $domain);
-
-        // Check weither the URL is actually valid
-        if (!filter_var($domain, FILTER_VALIDATE_URL) === true) {
-            return false;
-        }
+        $domain = str_replace($entities, $replacements, $domain);       
 
         $manager = new Pdp\Manager(new Pdp\Cache(), new Pdp\CurlHttpClient());
         $rules = $manager->getRules(); //$rules is a Pdp\Rules object
