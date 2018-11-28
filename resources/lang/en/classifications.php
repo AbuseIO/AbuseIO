@@ -2082,4 +2082,11 @@ return [
             This classification has no information text yet.
             ',
     ],
+
+    'HAVE_I_BEEN_PWNED_DOMAIN_FOUND' => [
+        'name'        => 'Have I been pwned breach',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
 ];
