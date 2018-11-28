@@ -94,7 +94,7 @@ return [
     ],
 
     'gdpr_anonymize_domain' => env('GDPR_ANONYMIZE_DOMAIN', 'example.com'),
-    'classifications' => [
+    'classifications'       => [
         'default' => 'DEFAULT',
         'aliases' => [
             //'MY_CLASSIFICATION' => 'DEFAULT',
