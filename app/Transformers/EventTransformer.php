@@ -16,6 +16,12 @@ class EventTransformer extends TransformerAbstract
      */
     public function transform(Event $event)
     {
+        // null evidences shouldn't go through the evidence transformer
+        $evidence = [];
+        if ($event->evidence) {
+            $evidence = (new EvidenceTransformer())->transform($event->evidence);
+        }
+
         return [
             'id'          => (int) $event->id,
             'ticket_id'   => (int) $event->ticket_id,
@@ -23,7 +29,7 @@ class EventTransformer extends TransformerAbstract
             'source'      => (string) $event->source,
             'timestamp'   => (int) $event->timestamp,
             'information' => (string) $event->information,
-            'evidence'    => (new EvidenceTransformer())->transform($event->evidence),
+            'evidence'    => $evidence,
         ];
     }
 }
