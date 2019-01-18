@@ -71,6 +71,7 @@ class CheckAccountTest extends TestCase
         $this->isInstanceOf(RedirectResponse::class, $callback);
     }
 
+    // Mark: This test should be done differently
     public function testModelHasNoAccountAccessMethodLog()
     {
         $this->actingAs(
@@ -78,12 +79,11 @@ class CheckAccountTest extends TestCase
         );
 
         $model = new Job();
-
         $r = new Request(['id' => $model->id]);
         // TODO this should have been the other loghandler
         Log::shouldReceive('notice')
             ->once()
-            ->with('CheckAccount Middleware is called, with model_id [] for \AbuseIO\Models\[], which doesn\'t match the model_id format');
+            ->with('CheckAccount Middleware is called, with model_id [0] for \AbuseIO\Models\[], which doesn\'t match the model_id format');
 
         $this->middleware->handle(
             $r,
@@ -93,6 +93,7 @@ class CheckAccountTest extends TestCase
         );
     }
 
+    // Mark: This test should be done differently
     public function testModelIdDoesNotRespond()
     {
         $this->actingAs(
@@ -105,7 +106,7 @@ class CheckAccountTest extends TestCase
         // todo the arguments in the log method are not correct;
         Log::shouldReceive('notice')
             ->once()
-            ->with('CheckAccount Middleware is called, with model_id [] for \AbuseIO\Models\[], which doesn\'t match the model_id format');
+            ->with('CheckAccount Middleware is called, with model_id [0] for \AbuseIO\Models\[], which doesn\'t match the model_id format');
 
         $this->middleware->handle(
             $r,

@@ -4,30 +4,38 @@
  * Translations for Users.
  */
 return [
-    // Headers
-    'header.new'      => 'New User',
-    'header.edit'     => 'Edit User',
 
-    // Buttons
-    'button.new_user' => 'New User',
+    'title' => [
+        'index' => 'Users',
+        'new'   => 'New User',
+        'edit'  => 'Edit User',
+    ],
 
-    // Miscellaneous
-    'user'            => 'user|users',
-    'no_users'        => 'No Users',
-    'linked_account'  => 'Linked Account',
-    'first_name'      => 'First Name',
-    'last_name'       => 'Last Lame',
-    'login_disabled'  => 'This login is disabled.',
+    'label' => [
+        'first_name'      => 'First Name',
+        'last_name'       => 'Last Name',
+        'email'           => 'E-Mail',
+        'password'        => 'Password',
+        'password_repeat' => 'Password (repeat)',
+        'language'        => 'Language',
+        'account'         => 'Account',
+        'roles'           => 'Roles',
+    ],
 
-    // Login
-    'login.whoops'    => '<strong>Whoops!</strong> There were some problems with your input.',
+    'word' => [
+        'user'  => 'user|users',
+    ],
+
+    'login.whoops' => '<strong>Whoops!</strong> There is a problem with your input.',
 
     'message' => [
+        'none_found'     => 'No users found.',
         'created'        => 'User <strong>:user</strong> created.',
         'updated'        => 'User <strong>:user</strong> updated.',
         'enabled'        => 'User <strong>:user</strong> enabled.',
         'disabled'       => 'User <strong>:user</strong> disabled.',
         'deleted'        => 'User <strong>:user</strong> deleted.',
         'no_self_action' => 'You\'re not allowed to :action yourself.',
+        'required'       => ':field is required.',
     ],
 ];

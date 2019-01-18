@@ -96,7 +96,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'password'   => 'required|confirmed|min:6|max:32',
             'account_id' => 'required|integer|exists:accounts,id',
             'locale'     => 'required|min:2|max:3',
-            'disabled'   => 'required|boolean', // disabled is sent as a string
+            'disabled'   => 'required|boolean',
             'roles'      => 'sometimes',
         ];
 
