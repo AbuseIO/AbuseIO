@@ -148,8 +148,8 @@ class UsersController extends Controller
         $user->load(['roles', 'account']);
 
         return response()->json([
-            'user' => $user,
-            'message' => trans('users.message.updated', ['user' => $user->fullName()])
+            'user'    => $user,
+            'message' => trans('users.message.updated', ['user' => $user->fullName()]),
         ]);
     }
 
@@ -166,8 +166,8 @@ class UsersController extends Controller
 
         if (!$this->user->mayEnable($this->auth_user)) {
             return response()->json([
-                'user' => $user,
-                'message' => trans('users.message.no_self_action', ['action' => trans('misc.enable')])
+                'user'    => $user,
+                'message' => trans('users.message.no_self_action', ['action' => trans('misc.enable')]),
             ]);
         }
 
@@ -175,8 +175,8 @@ class UsersController extends Controller
         $user->save();
 
         return response()->json([
-            'user' => $user,
-            'message' => trans('users.message.enabled', ['user' => $user->fullName()])
+            'user'    => $user,
+            'message' => trans('users.message.enabled', ['user' => $user->fullName()]),
         ]);
     }
 
@@ -193,8 +193,8 @@ class UsersController extends Controller
 
         if (!$this->user->mayEnable($this->auth_user)) {
             return response()->json([
-                'user' => $user,
-                'message' => trans('users.message.no_self_action', ['action' => trans('misc.disabled')])
+                'user'    => $user,
+                'message' => trans('users.message.no_self_action', ['action' => trans('misc.disabled')]),
             ]);
         }
 
@@ -202,8 +202,8 @@ class UsersController extends Controller
         $user->save();
 
         return response()->json([
-            'user' => $user,
-            'message' => trans('users.message.disabled', ['user' => $user->fullName()])
+            'user'    => $user,
+            'message' => trans('users.message.disabled', ['user' => $user->fullName()]),
         ]);
     }
 
@@ -230,11 +230,6 @@ class UsersController extends Controller
         return response()->json(['message' => trans('users.message.deleted', ['user' => $userName]), 'id' => $userId]);
     }
 
-
-
-
-
-
     /**
      * Search for users.
      *
@@ -257,7 +252,6 @@ class UsersController extends Controller
             'accounts'       => Account::all()->pluck('name', 'id')->put(-1, 'All accounts')->sort(),
         ]);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -283,9 +277,6 @@ class UsersController extends Controller
         return Redirect::route('admin.users.show', $user->id)
                        ->with('message', trans('users.message.created', ['user' => $user->fullName()]));
     }
-
-
-
 
     /**
      * Return all users for API request.

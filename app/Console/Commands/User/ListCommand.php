@@ -92,6 +92,7 @@ class ListCommand extends AbstractListCommand
 
             $userlist[] = $user;
         }
+
         return $userlist;
     }
 }
