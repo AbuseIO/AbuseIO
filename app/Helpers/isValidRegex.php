@@ -9,5 +9,5 @@
  */
 function isValidRegex($regex)
 {
-    return @preg_match($regex, null) !== false;
+    return null !== $regex && is_string($regex) && @preg_match($regex, null) !== false;
 }
