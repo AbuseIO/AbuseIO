@@ -31,12 +31,16 @@ class AlertAdmin extends Job
                 $mail->subject('Exception notification');
 
                 foreach ($attachments as $attachmentName => $attachmentData) {
+                    $mimetype = 'text/plain';
+                    if (substr($attachmentName, -4) === '.eml')
+                        $mimetype = 'message/rfc822';
+
                     $mail->attachData(
                         $attachmentData,
                         $attachmentName,
                         [
                             'as'   => $attachmentName,
-                            'mime' => 'text/plain',
+                            'mime' => $mimetype,
                         ]
                     );
                 }
