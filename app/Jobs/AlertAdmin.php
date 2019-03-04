@@ -32,8 +32,9 @@ class AlertAdmin extends Job
 
                 foreach ($attachments as $attachmentName => $attachmentData) {
                     $mimetype = 'text/plain';
-                    if (substr($attachmentName, -4) === '.eml')
+                    if (substr($attachmentName, -4) === '.eml') {
                         $mimetype = 'message/rfc822';
+                    }
 
                     $mail->attachData(
                         $attachmentData,
