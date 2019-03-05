@@ -2089,4 +2089,34 @@ return [
             This classification has no information text yet.
             ',
     ],
+
+    'OPEN_AFP_SERVER' => [
+        'name'        => 'Open Apple Filing Protocol (AFP) Server',
+        'description' => '
+            <h2>What is a \'Open AFP Server\'?</h2>
+
+            <p>Apple Filing Protocol (formerly AppleTalk Filing Protocol) is a transport protocol
+            that Apple macOS uses to share resources.  For example, if a macOS system wants
+            to access a shared directory on another system, it can use AFP. AFPv3 uses TCP
+            port 548. The protocol can also support other options including changing user passwords.</p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>This report identifies hosts that have Apple Filing Protocol (AFP) Service running and accessible to the world
+             on the internet. AFP can allow for information gathering on a target host as information about the host is contained in
+             the protocol messages.</p>
+
+            <p>In addition your sure will be targetted by brute force attacks.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Disable public access to AFP.</p>
+
+            <h2>Tips how to resolve this matter</h2>
+            <ul>
+            <li>Firewall port TCP/548 and use AFP over SSH to gain access to your system/li>
+            </ul>
+
+            ',
+    ],
 ];
