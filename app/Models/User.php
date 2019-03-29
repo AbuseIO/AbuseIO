@@ -6,10 +6,13 @@ use AbuseIO\Traits\InstanceComparable;
 use Hash;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User.
@@ -27,9 +30,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $updated_at
  * @property int $deleted_at
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, SoftDeletes, InstanceComparable;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, InstanceComparable, Notifiable;
 
     /**
      * The database table used by the model.
@@ -163,7 +166,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @return bool
      */
-    public function can($permission = null)
+    public function cando($permission = null)
     {
         return !is_null($permission) && $this->checkPermission($permission);
     }

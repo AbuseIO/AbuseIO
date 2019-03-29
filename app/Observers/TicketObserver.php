@@ -4,6 +4,7 @@ namespace AbuseIO\Observers;
 
 use AbuseIO\Hook\Common as Hooks;
 use AbuseIO\Models\Ticket;
+use Config;
 
 class TicketObserver
 {
@@ -23,7 +24,7 @@ class TicketObserver
         }
 
         // create the ash tokens when they don't exist.
-        $salt = env('APP_KEY');
+        $salt = Config::get('app.key');
         if (empty($ticket->ash_token_ip)) {
             $token = md5($salt.rand().$ticket->ip.$ticket->ip_contact_reference);
             $ticket->ash_token_ip = $token;

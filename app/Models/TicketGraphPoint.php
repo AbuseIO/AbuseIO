@@ -37,7 +37,7 @@ class TicketGraphPoint extends Model
 
     public static function getDistinctFiltersFor($column)
     {
-        return self::distinct($column)->lists($column, $column)->toArray();
+        return self::distinct($column)->pluck($column, $column)->toArray();
     }
 
     public static function getStatistics($lifecycle)

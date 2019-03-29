@@ -24,7 +24,7 @@ class StoreTest extends TestCase
         );
     }
 
-    public function testSuccesfullCreate()
+    public function testSuccessfulCreate()
     {
         $domain = factory(Domain::class)->make()->toArray();
 

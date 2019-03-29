@@ -29,7 +29,7 @@ class TicketFormRequest extends Request
      */
     public function rules()
     {
-        switch ($this->method) {
+        switch ($this->method()) {
             case 'GET':
                 break;
             case 'DELETE':

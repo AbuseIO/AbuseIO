@@ -131,6 +131,7 @@ class AccountsController extends Controller
                     return $actions;
                 }
             )
+            ->rawColumns(['actions'])
             ->make(true);
     }
 

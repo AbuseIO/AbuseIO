@@ -39,7 +39,7 @@ class ShowCommand extends Command
     /**
      * @return bool
      */
-    public function fire()
+    public function handle()
     {
         $jobs = $this->findWithCondition($this->argument('queue'));
 

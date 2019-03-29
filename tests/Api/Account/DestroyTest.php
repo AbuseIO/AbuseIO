@@ -22,7 +22,8 @@ class DestroyTest extends TestCase
         $server = $this->transformHeadersToServerVars(
             [
                 'X-API-TOKEN' => Account::getSystemAccount()->token,
-            ]);
+            ]
+        );
 
         $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($account->id), [], [], [], $server);
 
@@ -62,11 +63,14 @@ class DestroyTest extends TestCase
         $server = $this->transformHeadersToServerVars(
             [
                 'X-API-TOKEN' => Account::getSystemAccount()->token,
+                'Accept'      => 'application/json',
             ]);
         $response = $this->actingAs($user)->call('DELETE', self::URL.'/200', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
+
+        return $response;
     }
 
     /**
@@ -74,18 +78,12 @@ class DestroyTest extends TestCase
      */
     public function testResponseInvalidRequest()
     {
-        $this->initWithInvalidResponse();
+        $result = $this->initWithInvalidResponse()->decodeResponseJson();
 
-        //todo: fix laravel 404 message
+        $this->assertTrue(
+            array_key_exists('message', $result)
+        );
 
-        //$obj = json_decode($this->content);
-
-        //dd($this->content);
-
-        //$this->assertTrue(
-        //    property_exists($obj, 'message')
-        //);
-
-        //$this->assertFalse($obj->message->success);
+        $this->assertFalse($result['message']['success']);
     }
 }

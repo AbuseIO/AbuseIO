@@ -56,9 +56,9 @@ class TicketsController extends Controller
         if (is_array($columns)) {
             foreach (
                 [
-                'ticket_type_filter' => 3,
-                'ticket_classification_filter' => 4,
-                'ticket_status_filter' => 7,
+                    'ticket_type_filter'           => 3,
+                    'ticket_classification_filter' => 4,
+                    'ticket_status_filter'         => 7,
                 ] as $filter => $column
             ) {
                 // save the type filter option in the user
@@ -100,12 +100,39 @@ class TicketsController extends Controller
                     // We need a LEFT JOIN .. ON .. AND ..).
                     // This doesn't exist within Illuminate's JoinClause class
                     // So we use some nesting foo here
+                    // Going forward to 5_4 removed foo in favour of compound on because nesting deprecated;
+                    // Resulting SQL is:
+                    /*
+                     * SELECT `tickets`.`id`,
+                     *        `tickets`.`ip`,
+                     *        `tickets`.`domain`,
+                     *        `tickets`.`type_id`,
+                     *        `tickets`.`class_id`,
+                     *        `tickets`.`status_id`,
+                     *        `tickets`.`ip_contact_account_id`,
+                     *        `tickets`.`ip_contact_reference`,
+                     *        `tickets`.`ip_contact_name`,
+                     *        `tickets`.`domain_contact_account_id`,
+                     *        `tickets`.`domain_contact_reference`,
+                     *        `tickets`.`domain_contact_name`,
+                     *        count(DISTINCT events.id) AS event_count,
+                     *        count(DISTINCT notes.id) AS notes_count
+                     * FROM `tickets`
+                     * LEFT JOIN `events` ON `events`.`ticket_id` = `tickets`.`id`
+                     * LEFT JOIN `notes` ON `notes`.`ticket_id` = `tickets`.`id`
+                     * AND `notes`.`viewed` = 'false'
+                     * WHERE `notes`.`deleted_at` IS NULL
+                     *   AND `tickets`.`deleted_at` IS NULL
+                     * GROUP BY `tickets`.`id`
+                     */
+
                     $join->on('notes.ticket_id', '=', 'tickets.id')
-                        ->nest(
-                            function ($join) {
-                                $join->on('notes.viewed', '=', DB::raw("'false'"));
-                            }
-                        );
+                        ->on('notes.viewed', '=', DB::raw("'false'"));
+//                        ->nest(
+//                            function ($join) {
+//                                $join->on('notes.viewed', '=', DB::raw("'false'"));
+//                            }
+//                        );
                 }
             )
             ->where('notes.deleted_at', '=', null)
@@ -152,6 +179,7 @@ class TicketsController extends Controller
                     return trans('types.status.abusedesk.'.$ticket->status_id.'.name');
                 }
             )
+            ->rawColumns(['actions'])
             ->make(true);
     }
 
@@ -244,13 +272,27 @@ class TicketsController extends Controller
                 $value = $object->$column;
 
                 switch ($c->operator) {
-                    case '>': $success = $value > $c->value; break;
-                    case '<': $success = $value < $c->value; break;
-                    case '=': $success = $value == $c->value; break;
-                    case '!=': $success = $value != $c->value; break;
-                    case '>=': $success = $value >= $c->value; break;
-                    case '<=': $success = $value <= $c->value; break;
-                    default: $success = true; break;  // not implemented or unknown operator
+                    case '>':
+                        $success = $value > $c->value;
+                        break;
+                    case '<':
+                        $success = $value < $c->value;
+                        break;
+                    case '=':
+                        $success = $value == $c->value;
+                        break;
+                    case '!=':
+                        $success = $value != $c->value;
+                        break;
+                    case '>=':
+                        $success = $value >= $c->value;
+                        break;
+                    case '<=':
+                        $success = $value <= $c->value;
+                        break;
+                    default:
+                        $success = true;
+                        break;  // not implemented or unknown operator
                 }
 
                 return $success;
@@ -348,8 +390,8 @@ class TicketsController extends Controller
             $tickets = Ticket::all();
         } else {
             $tickets = Ticket::select('tickets.*')
-              ->where('ip_contact_account_id', $auth_account->id)
-              ->orWhere('domain_contact_account_id', $auth_account);
+                ->where('ip_contact_account_id', $auth_account->id)
+                ->orWhere('domain_contact_account_id', $auth_account);
         }
 
         if ($format === 'csv') {
@@ -514,18 +556,18 @@ class TicketsController extends Controller
 
         // update local contact_status_id
         switch ($remoteTicket->status_id) {
-        case 'IGNORED':
-            $localTicket->contact_status_id = 'IGNORED';
-            break;
-        case 'CLOSED':
-        case 'RESOLVED':
-            $localTicket->contact_status_id = 'RESOLVED';
-            break;
-        case 'OPEN':
-        case 'ESCALATED':
-        default:
-            $localTicket->contact_status_id = 'OPEN';
-            break;
+            case 'IGNORED':
+                $localTicket->contact_status_id = 'IGNORED';
+                break;
+            case 'CLOSED':
+            case 'RESOLVED':
+                $localTicket->contact_status_id = 'RESOLVED';
+                break;
+            case 'OPEN':
+            case 'ESCALATED':
+            default:
+                $localTicket->contact_status_id = 'OPEN';
+                break;
         }
 
         // save the ticket

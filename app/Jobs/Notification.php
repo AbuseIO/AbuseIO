@@ -5,7 +5,6 @@ namespace AbuseIO\Jobs;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Notification\Factory as NotificationFactory;
 use DB;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Log;
 use Validator;
 
@@ -14,7 +13,7 @@ use Validator;
  *
  * Class Notification
  */
-class Notification extends Job implements SelfHandling
+class Notification extends Job
 {
     public $ticket;
 

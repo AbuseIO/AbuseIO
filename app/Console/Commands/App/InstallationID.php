@@ -32,7 +32,7 @@ class InstallationID extends Command
      *
      * @return bool
      */
-    public function fire()
+    public function dispatch()
     {
         if ($this->option('show')) {
             $this->line('<comment>'.$this->laravel['config']['app.id'].'</comment>');

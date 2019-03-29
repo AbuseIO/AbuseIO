@@ -3,7 +3,6 @@
 namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Incident;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Validator;
 
 /**
@@ -11,7 +10,7 @@ use Validator;
  *
  * Class IncidentsValidate
  */
-class IncidentsValidate extends Job implements SelfHandling
+class IncidentsValidate extends Job
 {
     public $incidents;
 

@@ -143,6 +143,7 @@ class BrandsController extends Controller
                     return $logo;
                 }
             )
+            ->rawColumns(['actions'])
             ->make(true);
     }
 

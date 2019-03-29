@@ -24,7 +24,7 @@
 		"ext-mcrypt": "Laravel / AbuseIO requirement"
 	},
 	"require": {
-		"php": ">=5.5.9,<7.2.0",
+		"php": ">=7.1.3",
 
 		"ext-mcrypt": "*",
 		"ext-intl" : "*",
@@ -35,16 +35,17 @@
                 "ext-zip": "*",
                 "ext-json" : "*",
                 "ext-libxml" : "*",
-
-		"laravel/framework": "5.1.45",
+		"fideloper/proxy": "^4.0",
+		"laravel/framework": "5.6.*",
+		"laravel/tinker": "~1.0",
 		"laravelcollective/html": "~5.0",
-		"wpb/string-blade-compiler": "3.0.*",
+		"wpb/string-blade-compiler": "3.6",
 		"php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
 		"webpatser/laravel-uuid": "1.*",
-		"chumper/zipper": "0.6.x",
+		"chumper/zipper": "1.0.*",
 		"barryvdh/laravel-ide-helper": "^2.0",
 		"ddeboer/data-import": "^0.18.0",
-		"yajra/laravel-datatables-oracle": "~5.0",
+		"yajra/laravel-datatables-oracle": "8.7.*",
 		"guzzlehttp/guzzle": "6.1.1",
 		"marknl/iodef": "~1.0.3",
 		"kruisdraad/phpmailer": "v5.2.21",
@@ -52,41 +53,41 @@
 		"sabre/uri": "1.2.*",
 		"sorskod/larasponse": "dev-L5",
 
-		"abuseio/parser-common": "1.1.*",
-		"abuseio/parser-abusehub": "1.3.*",
-		"abuseio/parser-arf": "1.0.*",
-		"abuseio/parser-blocklistde": "1.3.*",
-		"abuseio/parser-cegtek": "1.3.*",
-		"abuseio/parser-cleanmx": "1.3.*",
-		"abuseio/parser-copyrightcompliance": "1.3.*",
-		"abuseio/parser-cyscon": "1.3.*",
-		"abuseio/parser-google": "1.3.*",
-		"abuseio/parser-ipechelon": "1.3.*",
-		"abuseio/parser-netcraft": "1.3.*",
-		"abuseio/parser-projecthoneypot": "1.3.*",
-		"abuseio/parser-shadowserver": "1.3.*",
-		"abuseio/parser-spamcop": "1.3.*",
-		"abuseio/parser-spamexperts": "1.3.*",
+		"abuseio/parser-common": "2.1.*",
+		"abuseio/parser-abusehub": "2.1.*",
+		"abuseio/parser-arf": "2.1.*",
+		"abuseio/parser-blocklistde": "2.1.*",
+		"abuseio/parser-cegtek": "2.1.*",
+		"abuseio/parser-cleanmx": "2.1.*",
+		"abuseio/parser-copyrightcompliance": "2.1.*",
+		"abuseio/parser-cyscon": "2.1.*",
+		"abuseio/parser-google": "2.1.*",
+		"abuseio/parser-ipechelon": "2.1.*",
+		"abuseio/parser-netcraft": "2.1.*",
+		"abuseio/parser-projecthoneypot": "2.1.*",
+		"abuseio/parser-shadowserver": "2.1.*",
+		"abuseio/parser-spamcop": "2.1.*",
+		"abuseio/parser-spamexperts": "2.1.*",
+		"abuseio/parser-webiron": "2.1.*",
+		"abuseio/parser-fbl": "2.1.*",
 		"abuseio/parser-haveibeenpwned": "dev-master",
-		"abuseio/parser-webiron": "1.3.*",
-		"abuseio/parser-fbl": "1.3.*",
 
-		"abuseio/collector-common": "1.1.2",
-		"abuseio/collector-rbl": "1.3.*",
-		"abuseio/collector-snds": "1.4.*",
-		
-		"abuseio/notification-common": "1.1.2",
-		"abuseio/notification-mail": "1.3.*",
+		"abuseio/collector-common": "2.1.*",
+		"abuseio/collector-rbl": "2.1.*",
+		"abuseio/collector-snds": "2.1.*",
 
-		"abuseio/hook-common": "1.0.2",
-		"abuseio/hook-log": "^1.0",
-		"abuseio/hook-delegate": "^1.0",
+		"abuseio/notification-common": "2.1.*",
+		"abuseio/notification-mail": "2.1.*",
+
+		"abuseio/hook-common": "^2.1",
+		"abuseio/hook-log": "^2.1",
+		"abuseio/hook-delegate": "^2.1",
 
 		"abuseio/abuseio-installer": "dev-master",
 
 		"zendframework/zend-xmlrpc": "^2.5",
 		"zendframework/zend-http": "2.6",
-		"jeremykendall/php-domain-parser": "^3.0",
+		"jeremykendall/php-domain-parser": "^5.0",
 		"zendframework/zend-json": "^3.0",
 		"jover/singleton": "^1.0",
 		"illuminated/helper-functions": "5.1.*"
@@ -103,15 +104,18 @@
 		}
 	],
 	"require-dev": {
-		"fzaninotto/faker": "~1.4",
-		"phpunit/phpunit": "~4.0",
-		"phpspec/phpspec": "~2.1",
-		"mockery/mockery": "0.9.5"
+		"filp/whoops": "^2.0",
+		"fzaninotto/faker": "^1.4",
+		"mockery/mockery": "^1.0",
+		"nunomaduro/collision": "^2.0",
+		"phpunit/phpunit": "^7.0"
 	},
 	"autoload": {
 		"classmap": [
 			"database",
-			"vendor/abuseio/"
+			"vendor/abuseio/",
+			"database/seeds",
+			"database/factories"
 		],
 		"psr-4": {
 			"AbuseIO\\": "app/"
@@ -125,28 +129,32 @@
 	"scripts": {
 		"post-install-cmd": [
 			"php artisan clear-compiled",
-			"php artisan optimize",
 			"php artisan queue:restart"
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
 			"php artisan ide-helper:generate",
-			"php artisan optimize",
 			"php artisan queue:restart"
 		],
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
 			"php artisan key:generate",
 			"php artisan app:id"
+		],
+		"post-autoload-dump": [
+			"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+			"@php artisan package:discover"
 		]
 	},
 	"config": {
-		"preferred-install": "dist"
+		"preferred-install": "dist",
+		"sort-packages": true,
+		"optimize-autoloader": true
 	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "4.1.x-dev"
-		}	
+		}
 	},
 	"minimum-stability": "stable"
 }

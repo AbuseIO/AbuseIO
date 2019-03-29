@@ -3,6 +3,7 @@
 namespace AbuseIO\Models;
 
 use AbuseIO\Http\Requests\ContactFormRequest;
+use Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -291,8 +292,8 @@ class Contact extends Model
     public function anonymize($randomness)
     {
         // retrieve settings
-        $entropy = env('APP_KEY').$randomness;
-        $anonymize_domain = env('GDPR_ANONYMIZE_DOMAIN', 'example.com');
+        $entropy = Config::get('app.key').$randomness;
+        $anonymize_domain = Config::get('main.gdpr_anonymize_domain');
 
         // hash personal data and save it
         $this->reference = md5($entropy.$this->reference);

@@ -2,6 +2,8 @@
 
 namespace tests;
 
+use AbuseIO\Models\Ticket;
+
 class AshControllersTest extends TestCase
 {
     /**
@@ -9,8 +11,7 @@ class AshControllersTest extends TestCase
      */
     public function testAshCollectOne()
     {
-        $response = $this->call('GET', '/ash/collect/1/6bb1aef09ea536260e3afe3fb9b432e4');
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->withTicketId(1);
     }
 
     /**
@@ -18,7 +19,18 @@ class AshControllersTest extends TestCase
      */
     public function testAshCollectTwo()
     {
-        $response = $this->call('GET', '/ash/collect/2/92d74aa22a225708cc9092340b3b79be');
+        $this->withTicketId(2);
+    }
+
+    private function withTicketId($id)
+    {
+        $uri = sprintf(
+            '/ash/collect/%d/%s',
+            $id,
+            Ticket::find($id)->ash_token_ip
+        );
+
+        $response = $this->call('GET', $uri);
         $this->assertEquals(200, $response->getStatusCode());
     }
 }

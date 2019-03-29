@@ -12,10 +12,25 @@
 function getUrlData($url)
 {
     if (!empty($url)) {
-        $pslManager = new Pdp\PublicSuffixListManager();
-        $urlParser = new Pdp\Parser($pslManager->getList());
-        $urlData = $urlParser->parseUrl($url)->toArray();
+        // Sanitize URL first by removing unwanted chars
+        $url = preg_replace("/[\n\r]/", '', $url);
 
-        return $urlData;
+        // Sanitize URL according to RFC1738 (perhaps use RFC3986?)
+        $entities = [
+            ' ',
+        ];
+        $replacements = [
+            '%20',
+        ];
+
+        $url = str_replace($entities, $replacements, $url);
+
+        return array_merge([
+            'host'  => '',
+            'path'  => '/', // set the default path to root;
+            'query' => '', // set default query_string to empty string;
+        ],
+            parse_url($url)
+        );
     }
 }

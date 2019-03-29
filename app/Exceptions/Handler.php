@@ -4,9 +4,10 @@ namespace AbuseIO\Exceptions;
 
 use AbuseIO\Traits\Api;
 use Exception;
+use Illuminate\Auth\AuthenticationException;
+//use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
@@ -19,8 +20,13 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        HttpException::class,
-        ModelNotFoundException::class,
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Session\TokenMismatchException::class,
+        \Illuminate\Validation\ValidationException::class,
+
     ];
 
     /**
@@ -28,36 +34,69 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param \Exception $e
+     * @param \Exception $exception
      *
      * @return void
      */
-    public function report(Exception $e)
+    public function report(Exception $exception)
     {
-        parent::report($e);
+        parent::report($exception);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Exception               $e
+     * @param \Exception               $exception
      *
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
+    public function render($request, Exception $exception)
     {
-        if ($e instanceof ModelNotFoundException) {
+        if ($exception instanceof ModelNotFoundException) {
             if ($request->wantsJson()) {
-                return $this->errorNotFound($e->getMessage());
+                return $this->errorNotFound($exception->getMessage());
             }
-            $e = new NotFoundHttpException($e->getMessage(), $e);
+            $exception = new NotFoundHttpException($exception->getMessage(), $exception);
         }
 
-        if ($request->wantsJson()) {
-            return $this->errorInternalError($e->getMessage());
+        if ($request->wantsJson() && !($exception instanceof \Illuminate\Validation\ValidationException)) {
+            return $this->errorInternalError($exception->getMessage());
         }
 
-        return parent::render($request, $e);
+        if ($request->wantsJson() && $exception instanceof \Illuminate\Validation\ValidationException) {
+            return $this->response($exception->errors());
+        }
+
+        return parent::render($request, $exception);
     }
+
+    /**
+     * Convert an authentication exception into an unauthenticated response.
+     *
+     * @param \Illuminate\Http\Request                 $request
+     * @param \Illuminate\Auth\AuthenticationException $exception
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        return redirect()->guest('login');
+    }
+
+//    /**
+//     * Convert a validation exception into a JSON response.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @param  \Illuminate\Validation\ValidationException  $exception
+//     * @return \Illuminate\Http\JsonResponse
+//     */
+//    protected function invalidJson($request, ValidationException $exception)
+//    {
+//        return response()->json($exception->errors(), $exception->status);
+//    }
 }

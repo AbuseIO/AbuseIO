@@ -1,11 +1,18 @@
 <?php
 
-
-Route::controllers(
-    [
-        'auth'     => 'Auth\AuthController',
-        'password' => 'Auth\PasswordController',
-    ]
+Route::group([
+    'prefix' => 'auth',
+    ],
+    function () {
+        Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+        Route::post('login', 'Auth\LoginController@login');
+        Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+        // Password Reset Routes...
+        Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+        Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+        Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+        Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+    }
 );
 
 // Redirect the default page to the dashboard (or login)
@@ -111,6 +118,7 @@ Route::group(
                 'uses'       => 'AshController@index',
                 'middleware' => [
                     'ash.token',
+                    'web',
                 ],
             ]
         );
@@ -122,6 +130,7 @@ Route::group(
                 'uses'       => 'AshController@addNote',
                 'middleware' => [
                     'ash.token',
+                    'web',
                 ],
             ]
         );

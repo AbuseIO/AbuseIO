@@ -22,7 +22,7 @@ class CheckPermission
     public function handle($request, Closure $next, $permission = null)
     {
         if (!app('Illuminate\Contracts\Auth\Guard')->guest()) {
-            if ($request->user()->can($permission)) {
+            if ($request->user()->cando($permission)) {
                 return $next($request);
             }
         }
