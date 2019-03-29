@@ -11,8 +11,8 @@ use AbuseIO\Observers\TicketObserver;
 use Config;
 use Illuminate\Support\ServiceProvider;
 use Log;
-use URL;
 use Request;
+use URL;
 
 /**
  * Class AppServiceProvider.
