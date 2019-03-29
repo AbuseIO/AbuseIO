@@ -200,6 +200,7 @@ return [
         'AbuseIO\Providers\RouteServiceProvider',
         'AbuseIO\Providers\SystemAdminManagerProvider',
         'AbuseIO\Providers\ValidationsServiceProvider',
+        'AbuseIO\AbuseIOInstaller\Providers\LaravelInstallerServiceProvider',
         'Chumper\Zipper\ZipperServiceProvider',
         'Sorskod\Larasponse\LarasponseServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',

@@ -12,6 +12,7 @@ use Config;
 use Illuminate\Support\ServiceProvider;
 use Log;
 use URL;
+use Request;
 
 /**
  * Class AppServiceProvider.
@@ -41,12 +42,15 @@ class AppServiceProvider extends ServiceProvider
         Event::observe(EventObserver::class);
         Evidence::observe(EvidenceObserver::class);
 
-        // force the base url to the configured APP_URL
-        // this helps when AbuseIO is behind a proxy
-        URL::forceRootUrl(Config::get('app.url'));
+        // force the base url and schema to the configured APP_URL, otherwise use the current url
+        $app_url = Request::getSchemeAndHttpHost();
+        if (!empty(env('APP_URL'))) {
+            $app_url = Config::get('app.url');
+        }
+        URL::forceRootUrl($app_url);
 
         // get the schema from the app_url and force it, fixes proxy errors in a ssl docker container
-        if (preg_match('/^(http(s)?)/', Config::get('app.url'), $matches, PREG_OFFSET_CAPTURE)) {
+        if (preg_match('/^(http(s)?)/', $app_url, $matches, PREG_OFFSET_CAPTURE)) {
             // get the schema
             $schema = $matches[1][0];
 

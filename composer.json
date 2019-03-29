@@ -41,7 +41,7 @@
 		"wpb/string-blade-compiler": "3.0.*",
 		"php-mime-mail-parser/php-mime-mail-parser": "2.1.4",
 		"webpatser/laravel-uuid": "1.*",
-		"Chumper/Zipper": "0.6.x",
+		"chumper/zipper": "0.6.x",
 		"barryvdh/laravel-ide-helper": "^2.0",
 		"ddeboer/data-import": "^0.18.0",
 		"yajra/laravel-datatables-oracle": "~5.0",
@@ -67,6 +67,7 @@
 		"abuseio/parser-shadowserver": "1.3.*",
 		"abuseio/parser-spamcop": "1.3.*",
 		"abuseio/parser-spamexperts": "1.3.*",
+		"abuseio/parser-haveibeenpwned": "dev-master",
 		"abuseio/parser-webiron": "1.3.*",
 		"abuseio/parser-fbl": "1.3.*",
 
@@ -81,13 +82,26 @@
 		"abuseio/hook-log": "^1.0",
 		"abuseio/hook-delegate": "^1.0",
 
+		"abuseio/abuseio-installer": "dev-master",
+
 		"zendframework/zend-xmlrpc": "^2.5",
 		"zendframework/zend-http": "2.6",
 		"jeremykendall/php-domain-parser": "^3.0",
 		"zendframework/zend-json": "^3.0",
-		"jover/singleton": "^1.0"
+		"jover/singleton": "^1.0",
+		"illuminated/helper-functions": "5.1.*"
 
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/AbuseIO/parser-haveibeenpwned"
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/AbuseIO/abuseio-installer"
+		}
+	],
 	"require-dev": {
 		"fzaninotto/faker": "~1.4",
 		"phpunit/phpunit": "~4.0",

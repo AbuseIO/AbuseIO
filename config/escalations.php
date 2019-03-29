@@ -47,7 +47,7 @@ return [
         // By default upgrade info tickets to abuse once there are 25 or more events
         'abuse' => [
             'enabled'   => true,
-            'threshold' => 25,
+            'threshold' => env('ESCALATION_THRESHOLD', 25),
         ],
         // By default upgrade abuse tickets to escalation once there are 100 or more events
         'escalation' => [

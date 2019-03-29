@@ -9,3 +9,7 @@ composer.lock
 htpasswd
 
 .DS_Store
+
+storage/installed
+storage/migrated
+storage/seeded
