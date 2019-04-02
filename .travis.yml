@@ -8,7 +8,6 @@ os:
   - linux
 
 php:
-  - 5.5.9
   - 7.0
 
 env:
@@ -17,8 +16,7 @@ env:
 before_script:
   - cp .env.travis .env
   - echo ${TRAVIS_PHP_VERSION:0:5}
-  - if [[ ${TRAVIS_PHP_VERSION:0:5} == "5.5.9" ]]; then echo 'yes' | pecl install mailparse-2.1.6; fi
-  - if [[ ${TRAVIS_PHP_VERSION:0:5} == "7.0" ]]; then echo 'yes' | pecl install mailparse; fi
+  - echo 'yes' | pecl install mailparse;
   - mysql -e 'CREATE DATABASE `abuseio`;'
   - composer self-update
   - composer install --dev --prefer-source --no-interaction
