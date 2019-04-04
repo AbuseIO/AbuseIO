@@ -16,7 +16,7 @@ env:
 before_script:
   - cp .env.travis .env
   - echo ${TRAVIS_PHP_VERSION:0:5}
-  - if [[ ${TRAVIS_PHP_VERSION:0:5} == "7.1.4" ]]; then echo 'yes' | pecl install mailparse; fi
+  - echo 'yes' | pecl install mailparse;
   - mysql -e 'CREATE DATABASE `abuseio`;'
   - composer self-update
   - composer install --dev --prefer-source --no-interaction
