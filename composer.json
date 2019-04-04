@@ -70,7 +70,7 @@
 		"abuseio/parser-spamexperts": "2.1.*",
 		"abuseio/parser-webiron": "2.1.*",
 		"abuseio/parser-fbl": "2.1.*",
-		"abuseio/parser-haveibeenpwned": "dev-master",
+		"abuseio/parser-haveibeenpwned": "2.0.*",
 
 		"abuseio/collector-common": "2.1.*",
 		"abuseio/collector-rbl": "2.1.*",
@@ -83,26 +83,15 @@
 		"abuseio/hook-log": "^2.1",
 		"abuseio/hook-delegate": "^2.1",
 
-		"abuseio/abuseio-installer": "dev-master",
+		"abuseio/abuseio-installer": "6.0.*",
 
 		"zendframework/zend-xmlrpc": "^2.5",
 		"zendframework/zend-http": "2.6",
 		"jeremykendall/php-domain-parser": "^5.0",
 		"zendframework/zend-json": "^3.0",
 		"jover/singleton": "^1.0",
-		"illuminated/helper-functions": "5.1.*"
-
+		"illuminated/helper-functions": "5.6.*"
 	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/AbuseIO/parser-haveibeenpwned"
-		},
-		{
-			"type": "vcs",
-			"url": "https://github.com/AbuseIO/abuseio-installer"
-		}
-	],
 	"require-dev": {
 		"filp/whoops": "^2.0",
 		"fzaninotto/faker": "^1.4",

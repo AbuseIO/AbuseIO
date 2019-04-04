@@ -208,7 +208,6 @@ return [
         AbuseIO\Providers\RouteServiceProvider::class,
         AbuseIO\Providers\SystemAdminManagerProvider::class,
         AbuseIO\Providers\ValidationsServiceProvider::class,
-        AbuseIO\AbuseIOInstaller\Providers\LaravelInstallerServiceProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
         Sorskod\Larasponse\LarasponseServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
