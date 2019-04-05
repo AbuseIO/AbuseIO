@@ -14,6 +14,7 @@ env:
   - DB=mysql
 
 before_script:
+  - pecl install mcrypt
   - cp .env.travis .env
   - echo ${TRAVIS_PHP_VERSION:0:5}
   - echo 'yes' | pecl install mailparse;
