@@ -62,7 +62,7 @@ class Notification extends Job
             }
         } else {
             Log::debug(
-                get_class($this).": No notification methods are installed, skipping notifications"
+                get_class($this).': No notification methods are installed, skipping notifications'
             );
 
             return false;
@@ -84,19 +84,19 @@ class Notification extends Job
             && !is_array(config('notifications'))
         ) {
             Log::info(
-                get_class($this).": No notification methods are configured!"
+                get_class($this).': No notification methods are configured!'
             );
 
             return true;
         }
 
         Log::debug(
-            get_class($this).": A notification run has been started"
+            get_class($this).': A notification run has been started'
         );
 
         if (empty($notifications)) {
             Log::info(
-                get_class($this).": No contacts that need notifications"
+                get_class($this).': No contacts that need notifications'
             );
 
             return true;
@@ -143,7 +143,7 @@ class Notification extends Job
 
         if ($counter === 0) {
             Log::warning(
-                get_class($this).":  Notification methods were configured, but none seemed to run?"
+                get_class($this).':  Notification methods were configured, but none seemed to run?'
             );
             return true;
         }
@@ -212,7 +212,7 @@ class Notification extends Job
                     // Skip if status Ignored
                     if ($ticket->status_id == 'IGNORED') {
                         Log::debug(
-                            get_class($this).": No notification, ticket state is 'IGNORED'"
+                            get_class($this).': No notification, ticket state is IGNORED'
                         );
                         continue;
                     }
@@ -220,7 +220,7 @@ class Notification extends Job
                     // Skip if type Info and contact status Ignored
                     if ($ticket->type_id == 'INFO' && $ticket->contact_status_id == 'IGNORED') {
                         Log::debug(
-                            get_class($this).": No notification, ticket type is INFO and contact status is 'IGNORED'"
+                            get_class($this).': No notification, ticket type is INFO and contact status is IGNORED'
                         );
                         continue;
                     }
@@ -231,7 +231,7 @@ class Notification extends Job
                          $ticket->last_notify_timestamp >= $sendInfoAfter
                     ) {
                         Log::debug(
-                            get_class($this).": No notification, ticket type is INFO, was notified and is not at re-notify interval"
+                            get_class($this).': No notification, ticket type is INFO, was notified and is not at re-notify interval'
                         );
                         continue;
                     }
@@ -242,7 +242,7 @@ class Notification extends Job
                         $ticket->last_notify_timestamp >= $sendAbuseAfter
                     ) {
                         Log::debug(
-                            get_class($this).": No notification, ticket type is NOT INFO, was notified and is not at re-notify interval"
+                            get_class($this).': No notification, ticket type is NOT INFO, was notified and is not at re-notify interval'
                         );
                         continue;
                     }
@@ -250,7 +250,7 @@ class Notification extends Job
                     // Skip if the event received is older the minimal last seen
                     if ($ticket->lastEvent[0]->timestamp <= $sendNotOlderThen) {
                         Log::debug(
-                            get_class($this).": No notification, ticket is too old to send notification for."
+                            get_class($this).': No notification, ticket is too old to send notification for.'
                         );
                         continue;
                     }
