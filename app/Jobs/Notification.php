@@ -138,6 +138,7 @@ class Notification extends Job
             Log::error(
                 get_class($this).": Failed sending out notifications. Encountered {$errors} errors."
             );
+
             return false;
         }
 
@@ -145,6 +146,7 @@ class Notification extends Job
             Log::warning(
                 get_class($this).':  Notification methods were configured, but none seemed to run?'
             );
+
             return true;
         }
 
