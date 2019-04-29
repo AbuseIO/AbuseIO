@@ -49,23 +49,20 @@ class Notification extends Job
 
                 if ($notificationResult['errorStatus']) {
                     Log::error(
-                        get_class($this).': '.
-                        "Notifications with {$notificationModule} did not succeed"
+                        get_class($this).": Notifications with {$notificationModule} did not succeed"
                     );
 
                     return false;
                 } else {
                     Log::debug(
-                        get_class($this).': '.
-                        "Notifications with {$notificationModule} was successful for contact reference: ".
+                        get_class($this).": Notifications with {$notificationModule} was successful for contact reference: ".
                         key($notifications)
                     );
                 }
             }
         } else {
             Log::debug(
-                get_class($this).': '.
-                'No notification methods are installed, skipping notifications'
+                get_class($this).": No notification methods are installed, skipping notifications"
             );
 
             return false;
@@ -86,23 +83,20 @@ class Notification extends Job
         if (empty(config('notifications'))
             && !is_array(config('notifications'))
         ) {
-            Log::debug(
-                get_class($this).': '.
-                'No notification methods are configured, no sense into calling un existing methods'
+            Log::info(
+                get_class($this).": No notification methods are configured!"
             );
 
             return true;
         }
 
-        Log::info(
-            get_class($this).': '.
-            'A notification run has been started'
+        Log::debug(
+            get_class($this).": A notification run has been started"
         );
 
         if (empty($notifications)) {
             Log::info(
-                get_class($this).': '.
-                'No contacts that need notifications'
+                get_class($this).": No contacts that need notifications"
             );
 
             return true;
@@ -141,26 +135,21 @@ class Notification extends Job
         }
 
         if ($errors !== 0) {
-            Log::debug(
-                get_class($this).': '.
-                "Failed sending out notifications. Encountered {$errors} errors."
+            Log::error(
+                get_class($this).": Failed sending out notifications. Encountered {$errors} errors."
             );
-
             return false;
         }
 
         if ($counter === 0) {
-            Log::debug(
-                get_class($this).': '.
-                'None of the notification methods seem to be enabled'
+            Log::warning(
+                get_class($this).":  Notification methods were configured, but none seemed to run?"
             );
-
             return true;
         }
 
-        Log::debug(
-            get_class($this).': '.
-            "Successfully send out notifications to {$counter} contacts"
+        Log::info(
+            get_class($this).": Successfully send out notifications to {$counter} contacts"
         );
 
         return true;
@@ -222,11 +211,17 @@ class Notification extends Job
                 if ($force !== true) {
                     // Skip if status Ignored
                     if ($ticket->status_id == 'IGNORED') {
+                        Log::debug(
+                            get_class($this).": No notification, ticket state is 'IGNORED'"
+                        );
                         continue;
                     }
 
                     // Skip if type Info and contact status Ignored
                     if ($ticket->type_id == 'INFO' && $ticket->contact_status_id == 'IGNORED') {
+                        Log::debug(
+                            get_class($this).": No notification, ticket type is INFO and contact status is 'IGNORED'"
+                        );
                         continue;
                     }
 
@@ -235,6 +230,9 @@ class Notification extends Job
                         $ticket->type_id == 'INFO' &&
                          $ticket->last_notify_timestamp >= $sendInfoAfter
                     ) {
+                        Log::debug(
+                            get_class($this).": No notification, ticket type is INFO, was notified and is not at re-notify interval"
+                        );
                         continue;
                     }
 
@@ -243,11 +241,17 @@ class Notification extends Job
                         $ticket->type_id != 'INFO' &&
                         $ticket->last_notify_timestamp >= $sendAbuseAfter
                     ) {
+                        Log::debug(
+                            get_class($this).": No notification, ticket type is NOT INFO, was notified and is not at re-notify interval"
+                        );
                         continue;
                     }
 
                     // Skip if the event received is older the minimal last seen
                     if ($ticket->lastEvent[0]->timestamp <= $sendNotOlderThen) {
+                        Log::debug(
+                            get_class($this).": No notification, ticket is too old to send notification for."
+                        );
                         continue;
                     }
 
