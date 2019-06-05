@@ -68,13 +68,13 @@ class QueueTest extends Job implements ShouldQueue
      */
     public function handle()
     {
-        Log::info(
+        Log::debug(
             get_class($this).': '."TestJob starting for queue {$this->queueName}"
         );
 
         // TODO - do stuff here
 
-        Log::info(
+        Log::debug(
             get_class($this).': '."TestJob completed for queue {$this->queueName}"
         );
     }
