@@ -6,6 +6,7 @@
 [![Latest Stable Version](https://poser.pugx.org/abuseio/abuseio/v/stable.svg)](https://packagist.org/packages/abuseio/abuseio)
 [![Latest Unstable Version](https://poser.pugx.org/abuseio/abuseio/v/unstable.svg)](https://packagist.org/packages/abuseio/abuseio)
 [![License](https://poser.pugx.org/abuseio/abuseio/license.svg)](https://packagist.org/packages/abuseio/abuseio)
+[![Open Source Helpers](https://www.codetriage.com/abuseio/abuseio/badges/users.svg)](https://www.codetriage.com/abuseio/abuseio)
 
 AbuseIO is a toolkit to receive, process, correlate and notify end users about abuse reports received by network operators, typically
 hosting and access providers. The purpose is to consolidate efforts by various companies and individuals to automate and improve
