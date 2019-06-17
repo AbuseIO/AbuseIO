@@ -13,3 +13,5 @@ htpasswd
 storage/installed
 storage/migrated
 storage/seeded
+
+storage/adminadded

@@ -35,16 +35,9 @@ class RolePermissionSeeder extends Seeder
 
         DB::table('permission_role')->insert($permission_role);
 
-        // Give the admin user the default role as system administrator (1) and the user the user role (2)
+        // Give the users their roles (admin and/or abusedesk)
         DB::table('role_user')->delete();
         $role_user = [
-            [
-                'id'         => 1,
-                'role_id'    => 1,   // Admin user role
-                'user_id'    => 1,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
             [
                 'id'         => 2,
                 'role_id'    => 2,   // Abusedesk user role
