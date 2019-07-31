@@ -28,9 +28,9 @@ class AddAdminRoleToAdmin extends Migration
             if (!$role_found) {
                 // Admin doesn't have admin role add it
                 $admin->roles()->attach($admin_role);
-                $this->info("Attached admin_role to admin user");
+                print("Attached admin_role to admin user\n");
             } else {
-                $this->info("Admin already has the admin_role, won't add it again");
+                print("Admin already has the admin_role, won't add it again\n");
             }
         } else {
             // no admin of admin role found
