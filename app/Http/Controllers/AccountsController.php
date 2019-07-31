@@ -142,7 +142,7 @@ class AccountsController extends Controller
      */
     public function create()
     {
-        $brands = Brand::lists('name', 'id');
+        $brands = Brand::pluck('name', 'id');
 
         return view('accounts.create')
             ->with('brand_selection', $brands)
@@ -229,7 +229,7 @@ class AccountsController extends Controller
                 ->with('message', trans('accounts.no_edit_permissions'));
         }
 
-        $brands = Brand::lists('name', 'id');
+        $brands = Brand::pluck('name', 'id');
 
         return view('accounts.edit')
             ->with('account', $account)

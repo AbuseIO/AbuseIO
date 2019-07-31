@@ -80,7 +80,7 @@ class BrandsController extends Controller
             $active_brands = Brand::where('id', '=', $account->active_brand->id)->get();
 
             // retrieve the created accounts
-            $created_brands = Brand::whereIn('id', $account->brands->lists('id'))->get();
+            $created_brands = Brand::whereIn('id', $account->brands->pluck('id'))->get();
 
             $brands = $active_brands->merge($created_brands);
         }
@@ -154,7 +154,7 @@ class BrandsController extends Controller
      */
     public function create()
     {
-        $accounts = Account::lists('name', 'id');
+        $accounts = Account::pluck('name', 'id');
         $templates = Brand::getDefaultMailTemplate();
         $templates['ash'] = Brand::getDefaultASHTemplate();
 
@@ -314,7 +314,7 @@ class BrandsController extends Controller
      */
     public function edit(Brand $brand)
     {
-        $accounts = Account::lists('name', 'id');
+        $accounts = Account::pluck('name', 'id');
         $templates = [
             'plain_mail' => $brand->mail_template_plain,
             'html_mail'  => $brand->mail_template_html,

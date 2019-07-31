@@ -130,8 +130,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $accounts = Account::lists('name', 'id');
-        $roles = Role::lists('name', 'id');
+        $accounts = Account::pluck('name', 'id');
+        $roles = Role::pluck('name', 'id');
 
         $locales = [];
         foreach (Config::get('app.locales') as $locale => $locale_data) {
@@ -237,9 +237,9 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        $accounts = Account::lists('name', 'id');
-        $roles = Role::lists('name', 'id');
-        $selected_roles = $user->roles->lists('id')->toArray();
+        $accounts = Account::pluck('name', 'id');
+        $roles = Role::pluck('name', 'id');
+        $selected_roles = $user->roles->pluck('id')->toArray();
 
         // rewrite role ids as ints
         foreach ($selected_roles as &$role) {

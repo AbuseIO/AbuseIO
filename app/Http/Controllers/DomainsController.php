@@ -124,9 +124,9 @@ class DomainsController extends Controller
         if (!$auth_account->isSystemAccount()) {
             $contacts = Contact::select('contacts.*')
                 ->where('account_id', $auth_account->id)
-                ->get()->lists('name', 'id');
+                ->get()->pluck('name', 'id');
         } else {
-            $contacts = Contact::lists('name', 'id');
+            $contacts = Contact::pluck('name', 'id');
         }
 
         return view('domains.create')
@@ -252,9 +252,9 @@ class DomainsController extends Controller
         if (!$auth_account->isSystemAccount()) {
             $contacts = Contact::select('contacts.*')
                 ->where('account_id', $auth_account->id)
-                ->get()->lists('name', 'id');
+                ->get()->pluck('name', 'id');
         } else {
-            $contacts = Contact::lists('name', 'id');
+            $contacts = Contact::pluck('name', 'id');
         }
 
         return view('domains.edit')
