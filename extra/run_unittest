@@ -1,7 +1,5 @@
 #!/bin/bash
 rm storage/logs/laravel*.log
-php artisan migrate:rollback
-php artisan migrate
-php artisan db:seed
+php artisan migrate:fresh --seed
 vendor/bin/phpunit
 extra/notifier-samples/runall

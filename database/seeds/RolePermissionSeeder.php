@@ -39,6 +39,13 @@ class RolePermissionSeeder extends Seeder
         DB::table('role_user')->delete();
         $role_user = [
             [
+                'id'         => 1,
+                'role_id'    => 1,   // Admin role
+                'user_id'    => 1,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+            ],
+            [
                 'id'         => 2,
                 'role_id'    => 2,   // Abusedesk user role
                 'user_id'    => 2,
