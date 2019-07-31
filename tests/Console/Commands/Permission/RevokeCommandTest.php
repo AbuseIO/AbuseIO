@@ -2,7 +2,6 @@
 
 namespace tests\Console\Commands\Permission;
 
-use AbuseIO\Models\Permission;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 

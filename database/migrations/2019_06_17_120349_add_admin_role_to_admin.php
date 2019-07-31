@@ -1,7 +1,7 @@
 <?php
 
-use AbuseIO\Models\User;
 use AbuseIO\Models\Role;
+use AbuseIO\Models\User;
 use Illuminate\Database\Migrations\Migration;
 
 class AddAdminRoleToAdmin extends Migration
@@ -9,8 +9,9 @@ class AddAdminRoleToAdmin extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
      * @throws Exception
+     *
+     * @return void
      */
     public function up()
     {
@@ -28,9 +29,9 @@ class AddAdminRoleToAdmin extends Migration
             if (!$role_found) {
                 // Admin doesn't have admin role add it
                 $admin->roles()->attach($admin_role);
-                print("Attached admin_role to admin user\n");
+                echo "Attached admin_role to admin user\n";
             } else {
-                print("Admin already has the admin_role, won't add it again\n");
+                echo "Admin already has the admin_role, won't add it again\n";
             }
         } else {
             // no admin of admin role found
