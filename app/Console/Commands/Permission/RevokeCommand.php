@@ -52,6 +52,7 @@ class RevokeCommand extends Command
             empty($this->option('permission'))
         ) {
             throw new \RuntimeException('Missing options for role and/or permission to select');
+
             return false;
         }
 

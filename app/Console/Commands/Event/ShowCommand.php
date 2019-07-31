@@ -4,7 +4,6 @@ namespace AbuseIO\Console\Commands\Event;
 
 use AbuseIO\Console\Commands\AbstractShowCommand;
 use AbuseIO\Models\Event;
-use AbuseIO\Models\Evidence;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**

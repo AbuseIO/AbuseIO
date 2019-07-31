@@ -50,6 +50,7 @@ class AssignCommand extends Command
             empty($this->option('method'))
         ) {
             throw new \RuntimeException('Missing options for the notification method and/or contact (e-mail) to select');
+
             return false;
         }
 
