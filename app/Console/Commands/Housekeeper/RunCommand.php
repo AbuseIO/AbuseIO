@@ -79,7 +79,7 @@ class RunCommand extends Command
             $this->removeUnlinkedEvidence();
         }
 
-        Log::debug(
+        Log::info(
             get_class($this).': Housekeeping has completed its run'
         );
 
@@ -93,7 +93,7 @@ class RunCommand extends Command
      */
     private function removeUnlinkedEvidence()
     {
-        Log::info(
+        Log::debug(
             get_class($this).': Housekeeper is starting to remove orphaned mailarchive items'
         );
 
@@ -143,7 +143,7 @@ class RunCommand extends Command
             }
         }
 
-        Log::info(
+        Log::debug(
             get_class($this).': Housekeeper has completed removing orphaned mailarchive items'
         );
 
@@ -157,7 +157,7 @@ class RunCommand extends Command
      */
     private function checkQueues()
     {
-        Log::info(
+        Log::debug(
             get_class($this).': Housekeeper is starting queue checks'
         );
 
@@ -224,7 +224,7 @@ class RunCommand extends Command
             }
         }
 
-        Log::info(
+        Log::debug(
             get_class($this).': Housekeeper has completed queue checks'
         );
 
@@ -242,7 +242,7 @@ class RunCommand extends Command
      */
     private function ticketsClosing()
     {
-        Log::info(
+        Log::debug(
             get_class($this).': Housekeeper is starting to close old tickets'
         );
 
@@ -292,7 +292,7 @@ class RunCommand extends Command
             }
         }
 
-        Log::info(
+        Log::debug(
             get_class($this).': Housekeeper has completed closing old tickets'
         );
 
@@ -306,7 +306,7 @@ class RunCommand extends Command
      */
     private function ticketsPruning()
     {
-        Log::info(
+        Log::debug(
             get_class($this).': Housekeeper is starting to remove old closed tickets'
         );
 
@@ -342,7 +342,7 @@ class RunCommand extends Command
             }
         }
 
-        Log::info(
+        Log::debug(
             get_class($this).': Housekeeper has completed removing old tickets'
         );
 
@@ -356,7 +356,7 @@ class RunCommand extends Command
      */
     private function mailarchivePruning()
     {
-        Log::info(
+        Log::debug(
             get_class($this).': Housekeeper is starting to remove old mailarchive items'
         );
 
@@ -388,7 +388,7 @@ class RunCommand extends Command
             }
         }
 
-        Log::info(
+        Log::debug(
             get_class($this).': Housekeeper has completed removing old mailarchive items'
         );
 
