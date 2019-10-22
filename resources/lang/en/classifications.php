@@ -2139,6 +2139,6 @@ return [
         'description' => '
             This classification has no information text yet.
             ',
-    ],    
+    ],
 
 ];
