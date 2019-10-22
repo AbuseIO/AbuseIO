@@ -12,6 +12,9 @@ php:
 
 env:
   - DB=mysql
+  
+services:
+  - mysql
 
 before_script:
   - yes '' | pecl install mcrypt-1.0.2
