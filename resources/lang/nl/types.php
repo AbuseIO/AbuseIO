@@ -5,7 +5,7 @@ return [
     'type' => [
         'INFO' => [
             'name'        => 'Info',
-            'description' => 'We adviseren uw ten zeerste dit probleem te verhelpen. Er is op dit moment nog geen '.
+            'description' => 'We adviseren u ten zeerste dit probleem te verhelpen. Er is op dit moment nog geen '.
                                'abuse gemeld.',
         ],
         'ABUSE' => [
