@@ -51,7 +51,7 @@ class UserTest extends TestCase
         $messages = [];
 
         $this->assertFalse($user->mayLogin($messages));
-        $this->assertContains('The account Default for this login is disabled.', $messages);
+        $this->assertStringContainsString('The account Default for this login is disabled.', $messages);
     }
 
     public function testMayLoginWithDisabledUser()
@@ -65,6 +65,6 @@ class UserTest extends TestCase
         $messages = [];
 
         $this->assertFalse($user->mayLogin($messages));
-        $this->assertContains('This login is disabled.', $messages);
+        $this->assertStringContainsString('This login is disabled.', $messages);
     }
 }

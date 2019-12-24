@@ -116,14 +116,14 @@ class AshController extends Controller
             abort(500);
         }
 
-        $changeStatus = Input::get('changeStatus');
+        $changeStatus = \Illuminate\Support\Facades\Request::get('changeStatus');
 
         if ($changeStatus == 'IGNORED' || $changeStatus == 'RESOLVED') {
             $ticket->contact_status_id = $changeStatus;
             $ticket->save();
         }
 
-        $text = Input::get('text');
+        $text = \Illuminate\Support\Facades\Request::get('text');
         if (empty($text) || strlen($text) < 1) {
             $message = 'noteEmpty';
         } else {

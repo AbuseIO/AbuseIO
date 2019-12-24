@@ -32,7 +32,7 @@ class ListCommandTest extends TestCase
         $headers = ['Id', 'Name', 'Description'];
         $output = Artisan::output();
         foreach ($headers as $header) {
-            $this->assertContains($header, $output);
+            $this->assertStringContainsString($header, $output);
         }
     }
 
@@ -44,8 +44,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains($this->list->get(0)->name, $output);
-        $this->assertContains($this->list->get(1)->name, $output);
+        $this->assertStringContainsString($this->list->get(0)->name, $output);
+        $this->assertStringContainsString($this->list->get(1)->name, $output);
     }
 
     public function testFilter()
@@ -61,8 +61,8 @@ class ListCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
 
-        $this->assertContains((string) $this->list->get(0)->id, $output);
-        $this->assertNotContains((string) $this->list->get(1)->id, $output);
+        $this->assertStringContainsString((string) $this->list->get(0)->id, $output);
+        $this->assertStringNotContainsString((string) $this->list->get(1)->id, $output);
     }
 
     public function testNotFoundFilter()
@@ -76,6 +76,6 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No permission found for given filter.', Artisan::output());
+        $this->assertStringContainsString('No permission found for given filter.', Artisan::output());
     }
 }

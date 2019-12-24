@@ -20,7 +20,7 @@ class ListCommandTest extends TestCase
         $headers = ['Id', 'Contact', 'Name', 'Enabled'];
         $output = Artisan::output();
         foreach ($headers as $header) {
-            $this->assertContains($header, $output);
+            $this->assertStringContainsString($header, $output);
         }
     }
 
@@ -32,7 +32,7 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call('domain:list', []);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($contact->name, Artisan::output());
+        $this->assertStringContainsString($contact->name, Artisan::output());
     }
 
     public function testFilter()
@@ -45,8 +45,8 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('customer1.tld', Artisan::output());
-        $this->assertNotContains('johndoe.tld', Artisan::output());
+        $this->assertStringContainsString('customer1.tld', Artisan::output());
+        $this->assertStringNotContainsString('johndoe.tld', Artisan::output());
     }
 
     public function testNotFoundFilter()
@@ -59,6 +59,6 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No domain found for given filter.', Artisan::output());
+        $this->assertStringContainsString('No domain found for given filter.', Artisan::output());
     }
 }

@@ -14,7 +14,7 @@ class EditCommandTest extends TestCase
     {
         ob_start();
         Artisan::call('netblock:edit');
-        $this->assertContains('Edit a netblock', ob_get_clean());
+        $this->assertStringContainsString('Edit a netblock', ob_get_clean());
     }
 
     public function testWithInvalidId()
@@ -26,7 +26,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find netblock with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find netblock with this criteria', Artisan::output());
     }
 
     public function testWithInvalidContact()
@@ -39,7 +39,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find contact with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find contact with this criteria', Artisan::output());
     }
 
     public function testEnabled()
@@ -52,7 +52,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The netblock has been updated', Artisan::output());
+        $this->assertStringContainsString('The netblock has been updated', Artisan::output());
         /*
          * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
          */

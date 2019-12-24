@@ -16,7 +16,7 @@ class EditCommandTest extends TestCase
         ob_start();
         Artisan::call('brand:edit');
         $output = ob_get_clean();
-        $this->assertContains('Edit a brand', $output);
+        $this->assertStringContainsString('Edit a brand', $output);
     }
 
     public function testWithInvalidId()
@@ -28,7 +28,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find brand with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find brand with this criteria', Artisan::output());
     }
 
     public function testName()
@@ -43,7 +43,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The brand has been updated', Artisan::output());
+        $this->assertStringContainsString('The brand has been updated', Artisan::output());
 
         $brand = Brand::find(1);
         $this->assertEquals('New name', $brand->name);
@@ -63,7 +63,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The brand has been updated', Artisan::output());
+        $this->assertStringContainsString('The brand has been updated', Artisan::output());
 
         $brand = Brand::find(1);
 

@@ -18,7 +18,7 @@ class StoreTest extends TestCase
     {
         $response = $this->executeCall([]);
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The first ip field is required.',
             $response->getContent()
         );
@@ -41,7 +41,7 @@ class StoreTest extends TestCase
         unset($netblock['last_ip_int']);
 
         foreach ($netblock as $key => $value) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 $key,
                 $obj
             );

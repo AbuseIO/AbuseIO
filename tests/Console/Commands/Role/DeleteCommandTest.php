@@ -33,7 +33,7 @@ class DeleteCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('role has been deleted', Artisan::output());
+        $this->assertStringContainsString('role has been deleted', Artisan::output());
     }
 
     public function testInvalidId()
@@ -46,6 +46,6 @@ class DeleteCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find role', Artisan::output());
+        $this->assertStringContainsString('Unable to find role', Artisan::output());
     }
 }

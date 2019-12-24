@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Models;
 
+use Illuminate\Support\Str;
 use Lang;
 
 /**
@@ -109,7 +110,7 @@ class Incident
         if (!empty($values)) {
             foreach ($fields as $field) {
                 if (array_key_exists($field, $values)) {
-                    if (str_is('timestamp', $field) && !is_int($values[$field])) {
+                    if (Str::is('timestamp', $field) && !is_int($values[$field])) {
                         $incident->$field = intval($values[$field]);
                     } else {
                         $incident->$field = $values[$field];

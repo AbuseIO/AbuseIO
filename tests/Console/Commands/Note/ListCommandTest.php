@@ -37,7 +37,7 @@ class ListCommandTest extends TestCase
         $headers = ['Id', 'Ticket id', 'Submitter', 'text', 'Hidden', 'Viewed'];
         $output = Artisan::output();
         foreach ($headers as $header) {
-            $this->assertContains($header, $output);
+            $this->assertStringContainsString($header, $output);
         }
     }
 
@@ -48,8 +48,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains($this->noteList->get(0)->submitter, $output);
-        $this->assertContains($this->noteList->get(1)->submitter, $output);
+        $this->assertStringContainsString($this->noteList->get(0)->submitter, $output);
+        $this->assertStringContainsString($this->noteList->get(1)->submitter, $output);
     }
 
     public function testFilter()
@@ -64,8 +64,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains($this->noteList->get(0)->submitter, $output);
-        $this->assertNotContains($this->noteList->get(1)->submitter, $output);
+        $this->assertStringContainsString($this->noteList->get(0)->submitter, $output);
+        $this->assertStringNotContainsString($this->noteList->get(1)->submitter, $output);
     }
 
     public function testNotFoundFilter()
@@ -79,6 +79,6 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No note found for given filter.', Artisan::output());
+        $this->assertStringContainsString('No note found for given filter.', Artisan::output());
     }
 }

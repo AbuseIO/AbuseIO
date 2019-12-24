@@ -16,7 +16,7 @@ class EditCommandTest extends TestCase
         ob_start();
         Artisan::call('contact:edit');
         $output = ob_get_clean();
-        $this->assertContains('Edit a contact', $output);
+        $this->assertStringContainsString('Edit a contact', $output);
     }
 
     public function testWithInvalidId()
@@ -28,7 +28,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find contact with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find contact with this criteria', Artisan::output());
     }
 
     public function testName()
@@ -44,7 +44,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The contact has been updated', Artisan::output());
+        $this->assertStringContainsString('The contact has been updated', Artisan::output());
 
         // update contact
         $contact = Contact::find($contact->id);
@@ -66,7 +66,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The contact has been updated', Artisan::output());
+        $this->assertStringContainsString('The contact has been updated', Artisan::output());
 
         // update contact
         $contact = Contact::find($contact->id);

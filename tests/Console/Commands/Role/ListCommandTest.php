@@ -20,7 +20,7 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('System Administrator', Artisan::output());
+        $this->assertStringContainsString('System Administrator', Artisan::output());
     }
 
     public function testWithValidFilter()
@@ -35,7 +35,7 @@ class ListCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
 
         $output = Artisan::output();
-        $this->assertContains('Abuse', $output);
-        $this->assertNotContains('System Administrator', $output);
+        $this->assertStringContainsString('Abuse', $output);
+        $this->assertStringNotContainsString('System Administrator', $output);
     }
 }

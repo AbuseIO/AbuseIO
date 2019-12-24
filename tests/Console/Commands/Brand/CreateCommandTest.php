@@ -16,12 +16,12 @@ class CreateCommandTest extends TestCase
     //Artisan::call('brand:create');
     // $output = Artisan::output();
 
-    // $this->assertContains("brand:create", $output);
+    // $this->assertStringContainsString("brand:create", $output);
 
-//        $this->assertContains('The name field is required.', $output);
-//        $this->assertContains('The company name field is required.', $output);
-//        $this->assertContains('The introduction text field is required.', $output);
-//        $this->assertContains('Failed to create the brand due to validation warnings', $output);
+//        $this->assertStringContainsString('The name field is required.', $output);
+//        $this->assertStringContainsString('The company name field is required.', $output);
+//        $this->assertStringContainsString('The introduction text field is required.', $output);
+//        $this->assertStringContainsString('Failed to create the brand due to validation warnings', $output);
 //    }
 
     public function testCreateValid()
@@ -33,7 +33,7 @@ class CreateCommandTest extends TestCase
         ]);
         $output = Artisan::output();
 
-        $this->assertContains('The brand has been created', $output);
+        $this->assertStringContainsString('The brand has been created', $output);
 
         Brand::where('name', 'test_dummy')->forceDelete();
     }

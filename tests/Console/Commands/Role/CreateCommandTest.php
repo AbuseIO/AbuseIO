@@ -28,7 +28,7 @@ class CreateCommandTest extends TestCase
         );
 
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('created', Artisan::output());
+        $this->assertStringContainsString('created', Artisan::output());
 
         Role::where([
             'name'        => $dummy->name,
@@ -41,6 +41,6 @@ class CreateCommandTest extends TestCase
         ob_start();
         $exitCode = Artisan::call('role:create');
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('Creates a new role', ob_get_clean());
+        $this->assertStringContainsString('Creates a new role', ob_get_clean());
     }
 }

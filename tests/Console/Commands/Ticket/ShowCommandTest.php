@@ -62,7 +62,7 @@ class ShowCommandTest extends TestCase
                     'Last notify timestamp', ];
 
         foreach ($fields as $el) {
-            $this->assertContains($el, $output);
+            $this->assertStringContainsString($el, $output);
         }
     }
 
@@ -77,6 +77,6 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching ticket was found.', Artisan::output());
+        $this->assertStringContainsString('No matching ticket was found.', Artisan::output());
     }
 }

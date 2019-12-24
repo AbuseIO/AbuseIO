@@ -40,7 +40,7 @@ class ListCommandTest extends TestCase
         $headers = ['Id', 'Ip', 'Domain', 'Class id', 'Type id'];
         $output = Artisan::output();
         foreach ($headers as $header) {
-            $this->assertContains($header, $output);
+            $this->assertStringContainsString($header, $output);
         }
     }
 
@@ -57,8 +57,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains($this->ticketList->get(0)->domain, $output);
-        $this->assertContains($this->ticketList->get(0)->ip, $output);
+        $this->assertStringContainsString($this->ticketList->get(0)->domain, $output);
+        $this->assertStringContainsString($this->ticketList->get(0)->ip, $output);
     }
 
     public function testFilter()
@@ -74,8 +74,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains($this->ticketList->get(0)->ip, $output);
-        $this->assertNotContains($this->ticketList->get(1)->domain, $output);
+        $this->assertStringContainsString($this->ticketList->get(0)->ip, $output);
+        $this->assertStringNotContainsString($this->ticketList->get(1)->domain, $output);
     }
 
     public function testNotFoundFilter()
@@ -90,7 +90,7 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No ticket found for given filter.', Artisan::output());
+        $this->assertStringContainsString('No ticket found for given filter.', Artisan::output());
     }
 
     public function testJson()

@@ -18,7 +18,7 @@ class StoreTest extends TestCase
     {
         $response = $this->executeCall([]);
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The ip field is required.',
             $response->getContent()
         );
@@ -39,7 +39,7 @@ class StoreTest extends TestCase
         $obj = $response->getContent();
 
         foreach ($ticket as $key => $value) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 $key,
                 $obj
             );

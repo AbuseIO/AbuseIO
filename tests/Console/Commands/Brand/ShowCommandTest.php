@@ -21,7 +21,7 @@ class ShowCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
         foreach (['Name', 'Company name', 'Introduction text', 'Id'] as $el) {
-            $this->assertContains($el, $output);
+            $this->assertStringContainsString($el, $output);
         }
     }
 
@@ -34,7 +34,7 @@ class ShowCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('AbuseIO', Artisan::output());
+        $this->assertStringContainsString('AbuseIO', Artisan::output());
     }
 
     public function testWithInvalidFilter()
@@ -47,6 +47,6 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching brand was found.', Artisan::output());
+        $this->assertStringContainsString('No matching brand was found.', Artisan::output());
     }
 }

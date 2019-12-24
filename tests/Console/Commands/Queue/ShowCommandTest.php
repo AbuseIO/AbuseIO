@@ -40,7 +40,7 @@ class ShowCommandTest extends TestCase
     //        $output = Artisan::output();
     //
     //        foreach (['Id', 'Queue', 'Attempts',] as $el) {
-    //            $this->assertContains($el, $output);
+    //            $this->assertStringContainsString($el, $output);
     //        }
     //    }
 
@@ -54,7 +54,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching queue was found.', Artisan::output());
+        $this->assertStringContainsString('No matching queue was found.', Artisan::output());
     }
 
     public function testWithoutArguments()
@@ -62,6 +62,6 @@ class ShowCommandTest extends TestCase
         ob_start();
         $exitCode = Artisan::call('queue:show');
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('Shows a queue', ob_get_clean());
+        $this->assertStringContainsString('Shows a queue', ob_get_clean());
     }
 }

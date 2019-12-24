@@ -15,6 +15,6 @@ class RevokeCommandTest extends TestCase
         ob_start();
         $exitCode = Artisan::call('permission:revoke');
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('Revokes a permission from a role', ob_get_clean());
+        $this->assertStringContainsString('Revokes a permission from a role', ob_get_clean());
     }
 }

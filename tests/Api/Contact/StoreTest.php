@@ -18,7 +18,7 @@ class StoreTest extends TestCase
     {
         $response = $this->executeCall([]);
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The name field is required.',
             $response->getContent()
         );
@@ -41,7 +41,7 @@ class StoreTest extends TestCase
         foreach ($contact as $value) {
             if ($value && $value != 1) {
                 $value = str_replace('/', '\/', $value);
-                $this->assertContains(
+                $this->assertStringContainsString(
                     $value,
                     $obj
                 );

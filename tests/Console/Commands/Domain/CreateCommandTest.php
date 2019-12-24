@@ -18,7 +18,7 @@ class CreateCommandTest extends TestCase
         ob_start();
         $exitCode = Artisan::call('domain:create');
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('Creates a new domain', ob_get_clean());
+        $this->assertStringContainsString('Creates a new domain', ob_get_clean());
     }
 
     public function testValidCreate()
@@ -32,7 +32,7 @@ class CreateCommandTest extends TestCase
             'contact_id' => Contact::all()->first()->id,
         ]);
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The domain has been created',
             Artisan::output()
         );

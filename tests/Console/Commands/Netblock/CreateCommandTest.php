@@ -28,7 +28,7 @@ class CreateCommandTest extends TestCase
         );
 
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('created', Artisan::output());
+        $this->assertStringContainsString('created', Artisan::output());
 
         Netblock::where([
             'contact_id'  => $dummyBlock->contact_id,
@@ -46,7 +46,7 @@ class CreateCommandTest extends TestCase
         ob_start();
         $exitCode = Artisan::call('netblock:create');
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('Creates a new netblock', ob_get_clean());
+        $this->assertStringContainsString('Creates a new netblock', ob_get_clean());
     }
 
     public function testCreateWithoutParamsButValidUser()
@@ -59,6 +59,6 @@ class CreateCommandTest extends TestCase
             ]
         );
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('Creates a new netblock', ob_get_clean());
+        $this->assertStringContainsString('Creates a new netblock', ob_get_clean());
     }
 }

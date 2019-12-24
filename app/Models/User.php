@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Arr;
 
 /**
  * Class User.
@@ -203,10 +204,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return array_map(
             'strtolower',
             array_unique(
-                array_flatten(
+                Arr::flatten(
                     array_map(
                         function ($permission) {
-                            return array_pluck($permission, 'name');
+                            return Arr::pluck($permission, 'name');
                         },
                         $permissions
                     )

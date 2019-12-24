@@ -9,7 +9,7 @@ class NotificationTest extends TestCase
 {
     public function testNotificationFactoryForMail()
     {
-        $this->assertContains(
+        $this->assertStringContainsString(
             'Mail',
             Factory::getNotification()
         );

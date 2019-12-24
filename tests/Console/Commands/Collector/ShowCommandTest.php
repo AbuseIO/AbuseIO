@@ -21,7 +21,7 @@ class ShowCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
         foreach (['Name', 'Description', 'Enabled', 'Location', 'Key'] as $el) {
-            $this->assertContains($el, $output);
+            $this->assertStringContainsString($el, $output);
         }
     }
 
@@ -34,7 +34,7 @@ class ShowCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Collects data from Microsoft SNDS to generate events', Artisan::output());
+        $this->assertStringContainsString('Collects data from Microsoft SNDS to generate events', Artisan::output());
     }
 
     public function testWithInvalidFilter()
@@ -47,6 +47,6 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching collector was found.', Artisan::output());
+        $this->assertStringContainsString('No matching collector was found.', Artisan::output());
     }
 }

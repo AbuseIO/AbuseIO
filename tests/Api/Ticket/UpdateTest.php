@@ -18,7 +18,7 @@ class UpdateTest extends TestCase
     {
         $response = $this->executeCall([]);
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'ERR_WRONGARGS',
             $response->getContent()
         );
@@ -60,7 +60,7 @@ class UpdateTest extends TestCase
             $response->isSuccessful()
         );
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The ip field is required.',
             $response->getContent()
         );

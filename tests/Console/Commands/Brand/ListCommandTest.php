@@ -44,7 +44,7 @@ class ListCommandTest extends TestCase
         $headers = ['Id', 'Name', 'Company name'];
         $output = Artisan::output();
         foreach ($headers as $header) {
-            $this->assertContains($header, $output);
+            $this->assertStringContainsString($header, $output);
         }
     }
 
@@ -56,7 +56,7 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains($this->name1, $output);
+        $this->assertStringContainsString($this->name1, $output);
     }
 
     public function testFilter()
@@ -71,8 +71,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains($this->name2, $output);
-        $this->assertNotContains($this->name1, $output);
+        $this->assertStringContainsString($this->name2, $output);
+        $this->assertStringNotContainsString($this->name1, $output);
     }
 
     public function testNotFoundFilter()
@@ -87,6 +87,6 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No brand found for given filter.', Artisan::output());
+        $this->assertStringContainsString('No brand found for given filter.', Artisan::output());
     }
 }

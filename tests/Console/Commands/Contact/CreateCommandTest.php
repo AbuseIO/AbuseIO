@@ -18,7 +18,7 @@ class CreateCommandTest extends TestCase
         ob_start();
         Artisan::call('contact:create');
         $output = ob_get_clean();
-        $this->assertContains('Creates a new contact', $output);
+        $this->assertStringContainsString('Creates a new contact', $output);
     }
 
     public function testValidCreate()
@@ -35,7 +35,7 @@ class CreateCommandTest extends TestCase
             'api_host'   => $faker->url,
         ]);
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The contact has been created',
             Artisan::output()
         );
@@ -66,7 +66,7 @@ class CreateCommandTest extends TestCase
 
         $this->assertNotNull($contact->token);
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The contact has been created',
             Artisan::output()
         );
@@ -87,7 +87,7 @@ class CreateCommandTest extends TestCase
             'api_host'   => $faker->url,
         ]);
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The selected account id is invalid.',
             Artisan::output()
         );
