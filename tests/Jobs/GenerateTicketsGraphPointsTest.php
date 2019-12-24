@@ -34,7 +34,7 @@ class GenerateTicketsGraphPointsTest extends TestCase
     private function countTicketsNewYesterday()
     {
         return TicketGraphPoint::getNewDataPointsForYesterday()->reduce(function ($sum, $graphPoint) {
-            return $sum + (int)($graphPoint->count);
+            return $sum + (int) ($graphPoint->count);
         });
     }
 
@@ -53,7 +53,7 @@ class GenerateTicketsGraphPointsTest extends TestCase
     private function countTicketsTouchedYesterday()
     {
         return TicketGraphPoint::getTouchedDataPointsForYesterday()->reduce(function ($sum, $graphPoint) {
-            return $sum + (int)($graphPoint->count);
+            return $sum + (int) ($graphPoint->count);
         });
     }
 }
