@@ -7,7 +7,6 @@ use AbuseIO\Models\Brand;
 use AbuseIO\Models\Note;
 use AbuseIO\Models\Ticket;
 use App;
-use Input;
 use Request;
 use Session;
 
