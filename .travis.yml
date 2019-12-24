@@ -36,7 +36,7 @@ script:
   - php artisan note:create 1 Abusedesk 'Test Note' true false
   - vendor/bin/phpunit
   - php artisan migrate:rollback --env=testing --no-interaction -vvv
-  - wget -O bootstrap/app.php https://raw.githubusercontent.com/laravel/laravel/5.6/bootstrap/app.php
+  - wget -O bootstrap/app.php https://raw.githubusercontent.com/laravel/laravel/master/bootstrap/app.php
   - sed -i 's/App\\/AbuseIO\\/g' bootstrap/app.php
 
 after_script:
