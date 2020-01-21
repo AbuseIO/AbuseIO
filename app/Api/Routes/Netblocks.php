@@ -8,6 +8,14 @@ Route::group(
     ],
     function () {
         Route::get(
+            'search/{type}/{param}',
+            [
+                'as'   => 'search',
+                'uses' => 'NetblocksController@apiSearch',
+            ]
+        );
+
+        Route::get(
             '',
             [
                 'as'   => 'index',

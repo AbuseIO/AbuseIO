@@ -36,6 +36,38 @@ class NetblocksController extends Controller
         $this->middleware('checkaccount:Netblock', ['except' => ['search', 'index', 'create', 'store', 'export']]);
     }
 
+    public function apiSearch($type, $param)
+    {
+        switch ($type) {
+            // Search by ID
+            case 'id':
+                $id = $param;
+                $netblocks = Netblock::withTrashed()->where('id', '=', $id)->get();
+                break;
+
+            // Search by IP Address
+            case 'address':
+                $ip = $param;
+                if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
+                    return false;
+                }
+                
+                $netblocks = Netblock::where('first_ip_int', '<=', inetPtoi($ip))
+                    ->where('last_ip_int', '>=', inetPtoi($ip))
+                    ->where('enabled', '=', true)
+                    ->orderBy('first_ip_int', 'desc')
+                    ->orderBy('last_ip_int', 'asc')
+                    ->take(1),
+                break;
+
+            // Fail unknown method
+            default:
+                return false;
+        }
+
+        return $this->respondWithCollection($netblocks, new NetblockTransformer());
+    }
+
     /**
      * Process datatables ajax request.
      *
