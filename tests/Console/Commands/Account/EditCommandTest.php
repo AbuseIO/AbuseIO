@@ -14,7 +14,7 @@ class EditCommandTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @var Account $account */
+    /** @var Account */
     private $account;
 
     private function initDB()

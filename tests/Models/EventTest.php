@@ -11,10 +11,10 @@ class EventTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @var int $eventId */
+    /** @var int */
     private $eventId;
 
-    /** @var int $evidenceId */
+    /** @var int */
     private $evidenceId;
 
     private function initDB()

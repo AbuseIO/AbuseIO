@@ -19,11 +19,11 @@ class CreateCommandTest extends TestCase
         $exitCode = Artisan::call(
             'note:create',
             [
-               'ticket_id' => $dummy->ticket->id,
-               'submitter' => $dummy->submitter,
-               'text'      => $dummy->text,
-               'hidden'    => $dummy->hidden,
-               'viewed'    => $dummy->viewed,
+                'ticket_id' => $dummy->ticket->id,
+                'submitter' => $dummy->submitter,
+                'text'      => $dummy->text,
+                'hidden'    => $dummy->hidden,
+                'viewed'    => $dummy->viewed,
             ]
         );
 

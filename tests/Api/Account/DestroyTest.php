@@ -64,7 +64,8 @@ class DestroyTest extends TestCase
             [
                 'X-API-TOKEN' => Account::getSystemAccount()->token,
                 'Accept'      => 'application/json',
-            ]);
+            ]
+        );
         $response = $this->actingAs($user)->call('DELETE', self::URL.'/200', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();

@@ -33,7 +33,12 @@ use Illuminate\Support\Arr;
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, InstanceComparable, Notifiable;
+    use Authenticatable;
+    use Authorizable;
+    use CanResetPassword;
+    use SoftDeletes;
+    use InstanceComparable;
+    use Notifiable;
 
     /**
      * The database table used by the model.

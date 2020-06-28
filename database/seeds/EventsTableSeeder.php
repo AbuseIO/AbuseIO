@@ -17,8 +17,8 @@ class EventsTableSeeder extends Seeder
                 'timestamp'   => time(),
                 'information' => json_encode(
                     [
-                    'engine' => 'infected website blob',
-                    'uri'    => '/dir1',
+                        'engine' => 'infected website blob',
+                        'uri'    => '/dir1',
                     ]
                 ),
                 'created_at' => new DateTime(),

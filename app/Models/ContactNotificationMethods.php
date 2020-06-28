@@ -12,8 +12,8 @@ class ContactNotificationMethods extends Model
      * @var array
      */
     protected $fillable = [
-       'method',
-   ];
+        'method',
+    ];
 
     /*
     |--------------------------------------------------------------------------
@@ -29,8 +29,8 @@ class ContactNotificationMethods extends Model
     public static function createRules()
     {
         return [
-          'method' => 'required|string',
-      ];
+            'method' => 'required|string',
+        ];
     }
 
     /**

@@ -23,7 +23,8 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class Brand extends Model
 {
-    use SoftDeletes, InstanceComparable;
+    use SoftDeletes;
+    use InstanceComparable;
 
     /**
      * The database table used by the model.

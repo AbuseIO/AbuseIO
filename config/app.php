@@ -161,7 +161,7 @@ return [
          * Laravel Framework Service Providers...
          */
 
-//        'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider', -- removed upgrading from 5.2
+        //        'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider', -- removed upgrading from 5.2
 
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,

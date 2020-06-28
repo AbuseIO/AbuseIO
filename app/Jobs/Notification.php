@@ -336,7 +336,7 @@ class Notification extends Job
         if ($reference !== false) {
             $search->where('ip_contact_reference', '=', $reference)
                 ->orwhere('domain_contact_reference', '=', $reference);
-	}
+        }
 
         $tickets = Ticket::hydrate($search->get()->toArray());
 

@@ -14,7 +14,7 @@ class DeleteCommandTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @var \AbuseIO\Models\Ticket $ticket */
+    /** @var \AbuseIO\Models\Ticket */
     private $ticket;
 
     private function initDB()

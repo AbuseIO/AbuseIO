@@ -47,7 +47,8 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
     protected function runMigration()
     {
         Artisan::call(
-            'migrate:refresh', ['--seed' => 'true]']
+            'migrate:refresh',
+            ['--seed' => 'true]']
         );
     }
 }

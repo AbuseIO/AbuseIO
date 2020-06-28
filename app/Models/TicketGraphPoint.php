@@ -152,9 +152,9 @@ class TicketGraphPoint extends Model
         }
 
         return [
-                'legend' => self::resolveLegend($lifecycle, $validScopes),
-                'data'   => self::transformToEChart($dataPoints),
-            ];
+            'legend' => self::resolveLegend($lifecycle, $validScopes),
+            'data'   => self::transformToEChart($dataPoints),
+        ];
     }
 
     private static function resolveLegend($lifecycle, $validScopes)

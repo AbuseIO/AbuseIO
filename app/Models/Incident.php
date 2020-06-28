@@ -146,7 +146,8 @@ class Incident
         $incident->remote_api_token = $ticket->api_token;
         $incident->remote_ticket_id = $ticket->id;
         $incident->remote_ash_link =
-            route('ash.show',
+            route(
+                'ash.show',
                 [
                     'ticketID' => $ticket->id,
                     'token'    => $ticket->ash_token_ip,

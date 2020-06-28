@@ -66,7 +66,8 @@ class AshController extends Controller
                 ],
                 [
                     'ash' => 'required|bladetemplate',
-                ]);
+                ]
+            );
 
             if ($validator->passes()) {
                 try {

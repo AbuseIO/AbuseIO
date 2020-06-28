@@ -18,7 +18,7 @@ return [
 
     // Possible ticket statuses
     'status' => [
-         // Abusedesk ticket statuses
+        // Abusedesk ticket statuses
         'abusedesk' => [
             'OPEN' => [
                 'class' => 'primary',

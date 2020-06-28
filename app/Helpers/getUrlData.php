@@ -25,11 +25,12 @@ function getUrlData($url)
 
         $url = str_replace($entities, $replacements, $url);
 
-        return array_merge([
-            'host'  => '',
-            'path'  => '/', // set the default path to root;
-            'query' => '', // set default query_string to empty string;
-        ],
+        return array_merge(
+            [
+                'host'  => '',
+                'path'  => '/', // set the default path to root;
+                'query' => '', // set default query_string to empty string;
+            ],
             parse_url($url)
         );
     }
