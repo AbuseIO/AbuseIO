@@ -2119,4 +2119,25 @@ return [
 
             ',
     ],
+
+    'OPEN_FTP_SERVER' => [
+        'name'        => 'Open FTP Server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_HTTP_SERVER' => [
+        'name'        => 'Open HTTP Server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_RSYNC_SERVER' => [
+        'name'        => 'Open rsync Server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
 ];
