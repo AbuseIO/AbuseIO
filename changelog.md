@@ -1,14 +1,18 @@
-# AbuseIO 4.1.0 Release notes
+# AbuseIO 4.3.0 Release notes
 
 ## Enhancements
 
 ## Changes 
 
-- As of this version any generated token for API, ASH, etc will no longer work due to changes in token generation.
-  Once you have upgraded to a new version old tokens willen no longer work. We advice you to send a notification
-  to all open tickets which automatically result into sending a new token with the notification.
-  e.g.: php artisan housekeeper:notifications --send --force
+- Upgraded Laravel engine to version 6 (from 5.6)
+- Upgraded subpackages to latest version compatible with engine v6
 
 ## Bug fixes
 
-- Fixed: Sorting methods of datatables was not working, due to sort-by/limit-by addition.
+- Fixed a Hydrate error, by casting it to proper array
+- Fixed iodef depricated method usage (https://github.com/marknl/iodef/pull/4)
+
+## Known issues
+
+- wpb/string-blade-compiler is no longer avaiable in the future and must be replaced
+- zendframework/* packages are no longer avaiable in the future and must be replaced

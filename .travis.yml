@@ -8,7 +8,7 @@ os:
   - linux
 
 php:
-  - 7.2.0
+  - 7.4.0
 
 env:
   - DB=mysql
