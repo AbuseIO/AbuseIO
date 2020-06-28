@@ -17,7 +17,6 @@ services:
   - mysql
 
 before_script:
-  - yes '' | pecl install mcrypt-1.0.2
   - cp .env.travis .env
   - echo ${TRAVIS_PHP_VERSION:0:5}
   - echo 'yes' | pecl install mailparse;
