@@ -14,5 +14,11 @@
 
 ## Known issues
 
+### Absolete packages
 - wpb/string-blade-compiler is no longer avaiable in the future and must be replaced
 - zendframework/* packages are no longer avaiable in the future and must be replaced
+
+### Broken parsers
+- feedback loop parser is returning errors on all sampels, unknown reasons
+- spamexperts samples 3 t/m 9 is returning errors on all sampels, unknown reasons
+
