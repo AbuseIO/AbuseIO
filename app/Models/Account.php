@@ -11,16 +11,16 @@ use Log;
 /**
  * Class Account.
  *
- * @property int $id
- * @property string $name fillable
- * @property string $description fillable
- * @property int $brand_id fillable
- * @property bool $disabled fillable
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
- * @property bool $systemaccount fillable
- * @property string $token' fillable
+ * @property int    $id
+ * @property string $name          fillable
+ * @property string $description   fillable
+ * @property int    $brand_id      fillable
+ * @property bool   $disabled      fillable
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
+ * @property bool   $systemaccount fillable
+ * @property string $token'        fillable
  */
 class Account extends Model
 {

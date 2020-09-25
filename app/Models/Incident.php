@@ -14,10 +14,10 @@ use Lang;
  * @property string $domain
  * @property string $class
  * @property string $type
- * @property int $timestamp
+ * @property int    $timestamp
  * @property string $information
  * @property string $remote_api_token
- * @property int $remote_ticket_id
+ * @property int    $remote_ticket_id
  * @property string $remote_api_url
  * @property string $remote_ash_link
  */

@@ -18,18 +18,18 @@ use Illuminate\Support\Arr;
 /**
  * Class User.
  *
- * @property int $id
- * @property string $first_name fillable
- * @property string $last_name fillable
- * @property string $email fillable
- * @property string $password hidden
+ * @property int    $id
+ * @property string $first_name     fillable
+ * @property string $last_name      fillable
+ * @property string $email          fillable
+ * @property string $password       hidden
  * @property string $remember_token hidden
- * @property int $account_id fillable
- * @property string $locale fillable
- * @property bool $disabled fillable
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
+ * @property int    $account_id     fillable
+ * @property string $locale         fillable
+ * @property bool   $disabled       fillable
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
