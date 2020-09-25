@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Event.
  *
- * @property int $id
- * @property int $connection
+ * @property int    $id
+ * @property int    $connection
  * @property string $queue
  * @property string $payload
- * @property int $failed_at
+ * @property int    $failed_at
  */
 class FailedJob extends Model
 {

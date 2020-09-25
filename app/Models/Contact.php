@@ -10,17 +10,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Contact.
  *
- * @property int $id
+ * @property int    $id
  * @property string $reference fillable
- * @property string $name fillable
- * @property string $email fillable
- * @property string $api_host fillable
- * @property bool $enabled fillable
+ * @property string $name      fillable
+ * @property string $email     fillable
+ * @property string $api_host  fillable
+ * @property bool   $enabled   fillable
  * @property int account_id fillable
  * @property string $token
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
  */
 class Contact extends Model
 {

@@ -10,38 +10,38 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Ticket.
  *
- * @property int $id
- * @property string $ip fillable
- * @property string $domain fillable
- * @property string $class_id fillable
- * @property string $type_id fillable
- * @property string $ip_contact_account_id fillable
- * @property string $ip_contact_reference fillable
- * @property string $ip_contact_name fillable
- * @property string $ip_contact_email fillable
- * @property string $ip_contact_api_host fillable
- * @property string $ip_contact_auto_notify fillable
- * @property int $ip_contact_notified_count fillable
- * @property string $domain_contact_account_id fillable
- * @property string $domain_contact_reference fillable
- * @property string $domain_contact_name fillable
- * @property string $domain_contact_email fillable
- * @property string $domain_contact_api_host fillable
- * @property string $domain_contact_auto_notify fillable
- * @property int $domain_contact_notified_count fillable
- * @property int $status_id fillable
- * @property string $contact_status_id fillable
- * @property int $account_id fillable
- * @property bool $auto_notify fillable
- * @property int $last_notify_count fillable
- * @property int $last_notify_timestamp fillable
+ * @property int    $id
+ * @property string $ip                            fillable
+ * @property string $domain                        fillable
+ * @property string $class_id                      fillable
+ * @property string $type_id                       fillable
+ * @property string $ip_contact_account_id         fillable
+ * @property string $ip_contact_reference          fillable
+ * @property string $ip_contact_name               fillable
+ * @property string $ip_contact_email              fillable
+ * @property string $ip_contact_api_host           fillable
+ * @property string $ip_contact_auto_notify        fillable
+ * @property int    $ip_contact_notified_count     fillable
+ * @property string $domain_contact_account_id     fillable
+ * @property string $domain_contact_reference      fillable
+ * @property string $domain_contact_name           fillable
+ * @property string $domain_contact_email          fillable
+ * @property string $domain_contact_api_host       fillable
+ * @property string $domain_contact_auto_notify    fillable
+ * @property int    $domain_contact_notified_count fillable
+ * @property int    $status_id                     fillable
+ * @property string $contact_status_id             fillable
+ * @property int    $account_id                    fillable
+ * @property bool   $auto_notify                   fillable
+ * @property int    $last_notify_count             fillable
+ * @property int    $last_notify_timestamp         fillable
  * @property string $remote_api_token
  * @property string $api_token
  * @property string $remote_api_url
- * @property int $remote_ticket_id
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
+ * @property int    $remote_ticket_id
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
  */
 class Ticket extends Model
 {

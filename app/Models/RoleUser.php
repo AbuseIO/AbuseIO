@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class RoleUser.
  *
- * @property int $id guarded
+ * @property int $id         guarded
  * @property int $role_id
  * @property int $user_id
  * @property int $created_at guarded

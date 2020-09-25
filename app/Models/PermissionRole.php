@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class PermissionRole.
  *
  * @property int $id
- * @property int $role_id fillable
+ * @property int $role_id       fillable
  * @property int $permission_id fillable
  * @property int $created_at
  * @property int $updated_at
