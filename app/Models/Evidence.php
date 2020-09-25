@@ -11,13 +11,13 @@ use Storage;
 /**
  * Class Evidence.
  *
- * @property int $id
- * @property string $filename fillable
- * @property string $sender fillable
- * @property string $subject fillable
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
+ * @property int    $id
+ * @property string $filename   fillable
+ * @property string $sender     fillable
+ * @property string $subject    fillable
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
  */
 class Evidence extends Model
 {

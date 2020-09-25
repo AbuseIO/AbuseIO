@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Netblock.
  *
- * @property int $id
- * @property string $first_ip fillable
- * @property string $last_ip fillable
+ * @property int    $id
+ * @property string $first_ip    fillable
+ * @property string $last_ip     fillable
  * @property string $description fillable
- * @property int $contact_id fillable
- * @property bool $enabled fillable
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
+ * @property int    $contact_id  fillable
+ * @property bool   $enabled     fillable
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
  */
 class Netblock extends Model
 {

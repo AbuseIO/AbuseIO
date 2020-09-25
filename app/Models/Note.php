@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Note.
  *
- * @property bool $hidden fillable
- * @property bool $viewed fillable
- * @property int $created_at
- * @property int $deleted_at
- * @property int $id
- * @property int $ticket_id fillable
- * @property int $updated_at
- * @property string $submitter fillable
- * @property string $text fillable
+ * @property bool   $hidden     fillable
+ * @property bool   $viewed     fillable
+ * @property int    $created_at
+ * @property int    $deleted_at
+ * @property int    $id
+ * @property int    $ticket_id  fillable
+ * @property int    $updated_at
+ * @property string $submitter  fillable
+ * @property string $text       fillable
  */
 class Note extends Model
 {
