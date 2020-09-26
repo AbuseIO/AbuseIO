@@ -27,13 +27,13 @@ class CreateCommand extends AbstractCreateCommand
     {
         return new InputDefinition(
             [
-                new InputArgument('email', InputArgument::REQUIRED, 'The email addres for the account.'),
-                new inputArgument('account', InputArgument::OPTIONAL, 'The new account name where this user is linked to', null),
+                new InputArgument('email', InputArgument::REQUIRED, 'The email address for the account.'),
+                new inputArgument('account', InputArgument::OPTIONAL, 'The new account name where this user is linked to.', null),
                 new InputOption('password', null, InputOption::VALUE_OPTIONAL, 'The new password for the account.'),
-                new InputOption('first_name', null, InputOption::VALUE_OPTIONAL, 'The first name of the users account.', 'dummy'),
-                new InputOption('last_name', null, InputOption::VALUE_OPTIONAL, 'The last name of the users account.', 'dummy'),
-                new inputOption('language', null, InputOption::VALUE_OPTIONAL, 'the default language for the users account, in country code ', 'en'),
-                new inputOption('disabled', null, InputOption::VALUE_OPTIONAL, 'set the new account status to be disabled', 'false'),
+                new InputOption('first_name', null, InputOption::VALUE_OPTIONAL, 'The first name of the user\'s account.', 'dummy'),
+                new InputOption('last_name', null, InputOption::VALUE_OPTIONAL, 'The last name of the user\'s account.', 'dummy'),
+                new inputOption('language', null, InputOption::VALUE_OPTIONAL, 'The default language for the user\'s account, in country code.', 'en'),
+                new inputOption('disabled', null, InputOption::VALUE_OPTIONAL, 'Set the new account status to be disabled.', 'false'),
             ]
         );
     }
