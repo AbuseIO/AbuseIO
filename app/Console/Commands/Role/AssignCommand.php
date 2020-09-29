@@ -70,6 +70,12 @@ class AssignCommand extends Command
             if (!is_object($role)) {
                 $role = Role::find($this->option('role'));
             }
+
+            if (!is_object($role)) {
+                $this->error('Unable to find role with this criteria');
+
+                return false;
+            }
         }
 
         if (!empty($this->option('user'))) {
@@ -78,14 +84,14 @@ class AssignCommand extends Command
             }
 
             if (!is_object($user)) {
-                $user = Role::find($this->option('user'));
+                $user = User::find($this->option('user'));
             }
-        }
 
-        if (!is_object($role) || !is_object($user)) {
-            $this->error('Unable to find role with this criteria');
+            if (!is_object($user)) {
+                $this->error('Unable to find user with this criteria');
 
-            return false;
+                return false;
+            }
         }
 
         $RoleUser = new RoleUser();
