@@ -109,7 +109,7 @@ class RevokeCommand extends Command
             return false;
         }
 
-        $this->info("The role {$role->name} has been revoked from role {$user->email}");
+        $this->info("The role {$role->name} has been revoked from user {$user->email}");
 
         return true;
     }
