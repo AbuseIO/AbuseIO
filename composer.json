@@ -75,18 +75,18 @@
                 "sabre/uri": "2.2.*",
                 "sabre/xml": "2.2.*",
 
-		"laravel/framework": "^6.0",
-		"laravelcollective/html": "~6.0",
-		"illuminated/helper-functions": "6.0.*",
+		"laravel/framework": "6.*",
+		"laravelcollective/html": "6.*",
+		"illuminated/helper-functions": "6.*",
 
 		"jover/singleton": "^1.0",
 		"kruisdraad/phpmailer": "v5.2.21",
 		"abuseio/iodef": "1.0.*",
 
-                "zendframework/zend-http": "2.11.*",
-                "zendframework/zend-json": "3.1.*",
-                "zendframework/zend-xmlrpc": "2.9.*",
-		"wpb/string-blade-compiler": "4.0.*"
+                "laminas/laminas-http": "2.11.*",
+                "laminas/laminas-json": "3.1.*",
+                "laminas/laminas-xmlrpc": "2.9.*",
+		"wpb/string-blade-compiler": "6.*"
 	},
 	"require-dev": {
 		"beyondcode/laravel-dump-server": "^1.0",

@@ -4,7 +4,8 @@
 
 ## Changes 
 
-- Upgraded Laravel engine to version 6 (from 5.6)
+- Upgraded Laravel engine to version 6.20.x (from 5.6) which includes support for composer2
+- Replaced unmaintained packages by referred replacements
 - Upgraded subpackages to latest version compatible with engine v6
 
 ## Bug fixes
