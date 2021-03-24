@@ -25,7 +25,7 @@ class EditCommandTest extends TestCase
     {
         ob_start();
         Artisan::call('user:edit');
-        $this->assertContains('Edit a user', ob_get_clean());
+        $this->assertStringContainsString('Edit a user', ob_get_clean());
     }
 
     public function testWithInvalidUser()
@@ -37,7 +37,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find user with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find user with this criteria', Artisan::output());
     }
 
     public function testChangeFirstName()
@@ -53,7 +53,7 @@ class EditCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
 
         $output = Artisan::output();
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The user has been updated',
             $output
         );
@@ -73,7 +73,7 @@ class EditCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
 
         $output = Artisan::output();
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The user has been updated',
             $output
         );
@@ -92,11 +92,11 @@ class EditCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
 
         $output = Artisan::output();
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The user has been updated',
             $output
         );
-        $this->assertContains(
+        $this->assertStringContainsString(
             'Using auto generated password',
             $output
         );

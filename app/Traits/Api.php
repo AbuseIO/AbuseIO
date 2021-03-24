@@ -114,7 +114,8 @@ trait Api
     {
         if ($this->statusCode === 200) {
             trigger_error(
-                'Error with status 200, strange', E_USER_WARNING
+                'Error with status 200, strange',
+                E_USER_WARNING
             );
         }
 
@@ -218,7 +219,8 @@ trait Api
             $rootScope->toArray(),
             [
                 'message' => $this->getMessage('success', ErrorCodes::CODE_SUCCESSFULL),
-            ]);
+            ]
+        );
 
         return $this->respondWithArray($data);
     }

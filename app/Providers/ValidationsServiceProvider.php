@@ -241,7 +241,6 @@ class ValidationsServiceProvider extends ServiceProvider
 
                 return true;
             }
-
         );
 
         /*

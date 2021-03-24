@@ -13,7 +13,6 @@ use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\IncidentTransformer;
 use Form;
 use Illuminate\Http\Request;
-use Input;
 use League\Fractal\Manager;
 use Log;
 use Redirect;
@@ -71,7 +70,7 @@ class IncidentsController extends Controller
          * If there was a file attached then we add this to the evidence as attachment
          */
         $attachment = [];
-        $uploadedFile = Input::file('evidenceFile');
+        $uploadedFile = \Illuminate\Support\Facades\Request::file('evidenceFile');
         if (!empty($uploadedFile) &&
             is_object($uploadedFile) &&
             $uploadedFile->getError() === 0 &&

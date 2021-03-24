@@ -3,7 +3,6 @@
 namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Models\Incident;
-use Input;
 
 /**
  * Class IncidentFormRequest.
@@ -67,7 +66,7 @@ class IncidentFormRequest extends Request
     ) {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
-        $input = Input::all();
+        $input = \Illuminate\Support\Facades\Request::all();
 
         // convert the timestamp, only if it is in english time format
         if (preg_match('/^\d+$/', $input['timestamp']) != 1) {

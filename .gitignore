@@ -15,3 +15,10 @@ storage/migrated
 storage/seeded
 
 storage/adminadded
+
+.bash_history
+.composer
+.selected_editor
+.viminfo
+.wget-hsts
+

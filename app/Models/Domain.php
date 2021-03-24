@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Domain.
  *
- * @property int $id
- * @property string $name fillable
- * @property int $contact_id fillable
- * @property bool $enabled fillable
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
+ * @property int    $id
+ * @property string $name       fillable
+ * @property int    $contact_id fillable
+ * @property bool   $enabled    fillable
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
  */
 class Domain extends Model
 {

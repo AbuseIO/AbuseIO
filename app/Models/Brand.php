@@ -11,19 +11,20 @@ use Symfony\Component\HttpFoundation\File\File;
  * Class Account.
  *
  *
- * @property int $id
- * @property string $name fillable
- * @property string $company_name fillable
- * @property string $logo fillable
+ * @property int    $id
+ * @property string $name              fillable
+ * @property string $company_name      fillable
+ * @property string $logo              fillable
  * @property string $introduction_text fillable
- * @property bool $systembrand fillable
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
+ * @property bool   $systembrand       fillable
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
  */
 class Brand extends Model
 {
-    use SoftDeletes, InstanceComparable;
+    use SoftDeletes;
+    use InstanceComparable;
 
     /**
      * The database table used by the model.

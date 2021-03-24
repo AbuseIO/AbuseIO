@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Event.
  *
- * @property int $id
- * @property int $ticket_id fillable
- * @property int $evidence_id fillable
- * @property string $source fillable
- * @property int $timestamp fillable
+ * @property int    $id
+ * @property int    $ticket_id   fillable
+ * @property int    $evidence_id fillable
+ * @property string $source      fillable
+ * @property int    $timestamp   fillable
  * @property string $information fillable
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
  */
 class Event extends Model
 {

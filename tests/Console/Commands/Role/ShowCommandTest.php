@@ -23,7 +23,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching role was found.', Artisan::output());
+        $this->assertStringContainsString('No matching role was found.', Artisan::output());
     }
 
     public function testWithValidNameFilter()
@@ -36,6 +36,6 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Admin', Artisan::output());
+        $this->assertStringContainsString('Admin', Artisan::output());
     }
 }

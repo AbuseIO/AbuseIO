@@ -13,26 +13,32 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Arr;
 
 /**
  * Class User.
  *
- * @property int $id
- * @property string $first_name fillable
- * @property string $last_name fillable
- * @property string $email fillable
- * @property string $password hidden
+ * @property int    $id
+ * @property string $first_name     fillable
+ * @property string $last_name      fillable
+ * @property string $email          fillable
+ * @property string $password       hidden
  * @property string $remember_token hidden
- * @property int $account_id fillable
- * @property string $locale fillable
- * @property bool $disabled fillable
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
+ * @property int    $account_id     fillable
+ * @property string $locale         fillable
+ * @property bool   $disabled       fillable
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, InstanceComparable, Notifiable;
+    use Authenticatable;
+    use Authorizable;
+    use CanResetPassword;
+    use SoftDeletes;
+    use InstanceComparable;
+    use Notifiable;
 
     /**
      * The database table used by the model.
@@ -203,10 +209,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return array_map(
             'strtolower',
             array_unique(
-                array_flatten(
+                Arr::flatten(
                     array_map(
                         function ($permission) {
-                            return array_pluck($permission, 'name');
+                            return Arr::pluck($permission, 'name');
                         },
                         $permissions
                     )

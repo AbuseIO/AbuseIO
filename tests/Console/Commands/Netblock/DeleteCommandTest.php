@@ -20,7 +20,7 @@ class DeleteCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('netblock has been deleted', Artisan::output());
+        $this->assertStringContainsString('netblock has been deleted', Artisan::output());
         /*
          * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
          */
@@ -37,6 +37,6 @@ class DeleteCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find netblock', Artisan::output());
+        $this->assertStringContainsString('Unable to find netblock', Artisan::output());
     }
 }

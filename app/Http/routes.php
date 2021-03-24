@@ -1,7 +1,8 @@
 <?php
 
-Route::group([
-    'prefix' => 'auth',
+Route::group(
+    [
+        'prefix' => 'auth',
     ],
     function () {
         Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

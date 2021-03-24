@@ -39,7 +39,7 @@ class ShowCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
         foreach (['Id',  'Name', 'Description'] as $el) {
-            $this->assertContains($el, $output);
+            $this->assertStringContainsString($el, $output);
         }
     }
 
@@ -53,7 +53,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching permission was found.', Artisan::output());
+        $this->assertStringContainsString('No matching permission was found.', Artisan::output());
     }
 
     public function testWithoutArguments()
@@ -61,6 +61,6 @@ class ShowCommandTest extends TestCase
         ob_start();
         $exitCode = Artisan::call('permission:show');
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('Shows a permission', ob_get_clean());
+        $this->assertStringContainsString('Shows a permission', ob_get_clean());
     }
 }

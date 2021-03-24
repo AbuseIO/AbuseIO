@@ -23,7 +23,7 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($user->email, Artisan::output());
+        $this->assertStringContainsString($user->email, Artisan::output());
     }
 
     public function testUserListCommandWithValidFilter()
@@ -41,7 +41,7 @@ class ListCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
 
         $output = Artisan::output();
-        $this->assertContains($user->email, $output);
-        $this->assertNotContains($other_user->email, $output);
+        $this->assertStringContainsString($user->email, $output);
+        $this->assertStringNotContainsString($other_user->email, $output);
     }
 }

@@ -184,7 +184,7 @@ class CreateCommand extends Command
             // Build evidence with added file
             if (!is_file($file)) {
                 $this->error('File does not exist: '.$file);
-                die();
+                exit();
             }
 
             $attachment = [

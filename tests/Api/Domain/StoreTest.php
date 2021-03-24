@@ -18,7 +18,7 @@ class StoreTest extends TestCase
     {
         $response = $this->executeCall([]);
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The name field is required.',
             $response->getContent()
         );
@@ -39,7 +39,7 @@ class StoreTest extends TestCase
         unset($domain['contact_id']);
 
         foreach ($domain as $key => $value) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 $key,
                 $obj
             );

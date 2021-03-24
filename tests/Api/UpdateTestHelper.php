@@ -16,7 +16,8 @@ trait UpdateTestHelper
             [
                 'Accept'      => 'application/json',
                 'X-API-TOKEN' => Account::getSystemAccount()->token,
-            ]);
+            ]
+        );
 
         return $this->call('PUT', $this->getUri($id), $parameters, [], [], $server);
     }

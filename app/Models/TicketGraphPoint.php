@@ -5,6 +5,7 @@ namespace AbuseIO\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class TicketGraphPoint extends Model
 {
@@ -108,7 +109,7 @@ class TicketGraphPoint extends Model
     public static function __callStatic($name, $arguments)
     {
         $params = array_reverse(
-            explode('_', snake_case($name))
+            explode('_', Str::snake($name))
         );
 
         if (!in_array('lifecycle', $params)) {
@@ -151,9 +152,9 @@ class TicketGraphPoint extends Model
         }
 
         return [
-                'legend' => self::resolveLegend($lifecycle, $validScopes),
-                'data'   => self::transformToEChart($dataPoints),
-            ];
+            'legend' => self::resolveLegend($lifecycle, $validScopes),
+            'data'   => self::transformToEChart($dataPoints),
+        ];
     }
 
     private static function resolveLegend($lifecycle, $validScopes)

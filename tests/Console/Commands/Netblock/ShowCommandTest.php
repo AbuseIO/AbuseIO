@@ -36,7 +36,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($this->netblock->contact->name, Artisan::output());
+        $this->assertStringContainsString($this->netblock->contact->name, Artisan::output());
     }
 
     public function testWithInvalidFilter()
@@ -50,7 +50,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching netblock was found.', Artisan::output());
+        $this->assertStringContainsString('No matching netblock was found.', Artisan::output());
     }
 
     public function testWithStartIpFilter()
@@ -66,7 +66,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($this->netblock->contact->name, Artisan::output());
+        $this->assertStringContainsString($this->netblock->contact->name, Artisan::output());
     }
 
     public function testNetBlockShowWithStartEndFilter()
@@ -82,6 +82,6 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($this->netblock->contact->name, Artisan::output());
+        $this->assertStringContainsString($this->netblock->contact->name, Artisan::output());
     }
 }

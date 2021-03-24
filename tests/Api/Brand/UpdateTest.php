@@ -18,7 +18,7 @@ class UpdateTest extends TestCase
     //    {
     //        $response = $this->executeCall([]);
     //
-    //        $this->assertContains(
+    //        $this->assertStringContainsString(
     //            'ERR_WRONGARGS',
     //            $response->getContent()
     //        );

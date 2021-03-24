@@ -20,7 +20,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('john-doe.tld', Artisan::output());
+        $this->assertStringContainsString('john-doe.tld', Artisan::output());
     }
 
     public function testWithValidIdFilter()
@@ -33,7 +33,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('john-doe.tld', Artisan::output());
+        $this->assertStringContainsString('john-doe.tld', Artisan::output());
     }
 
     public function testWithInvalidIdFilter()
@@ -46,6 +46,6 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching domain was found.', Artisan::output());
+        $this->assertStringContainsString('No matching domain was found.', Artisan::output());
     }
 }

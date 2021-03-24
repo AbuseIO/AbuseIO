@@ -16,7 +16,8 @@ trait StoreTestHelper
             [
                 'Accept'      => 'application/json',
                 'X-API-TOKEN' => Account::getSystemAccount()->token,
-            ]);
+            ]
+        );
 
         return $this->call('POST', self::URL, $parameters, [], [], $server);
     }

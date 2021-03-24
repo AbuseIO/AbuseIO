@@ -7,7 +7,6 @@ use AbuseIO\Models\Brand;
 use AbuseIO\Models\Note;
 use AbuseIO\Models\Ticket;
 use App;
-use Input;
 use Request;
 use Session;
 
@@ -67,7 +66,8 @@ class AshController extends Controller
                 ],
                 [
                     'ash' => 'required|bladetemplate',
-                ]);
+                ]
+            );
 
             if ($validator->passes()) {
                 try {
@@ -116,14 +116,14 @@ class AshController extends Controller
             abort(500);
         }
 
-        $changeStatus = Input::get('changeStatus');
+        $changeStatus = \Illuminate\Support\Facades\Request::get('changeStatus');
 
         if ($changeStatus == 'IGNORED' || $changeStatus == 'RESOLVED') {
             $ticket->contact_status_id = $changeStatus;
             $ticket->save();
         }
 
-        $text = Input::get('text');
+        $text = \Illuminate\Support\Facades\Request::get('text');
         if (empty($text) || strlen($text) < 1) {
             $message = 'noteEmpty';
         } else {

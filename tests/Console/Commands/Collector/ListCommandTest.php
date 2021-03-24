@@ -19,7 +19,7 @@ class ListCommandTest extends TestCase
         $headers = ['Name', 'Description'];
         $output = Artisan::output();
         foreach ($headers as $header) {
-            $this->assertContains($header, $output);
+            $this->assertStringContainsString($header, $output);
         }
     }
 
@@ -29,8 +29,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('Rbl', $output);
-        $this->assertContains('Snds', $output);
+        $this->assertStringContainsString('Rbl', $output);
+        $this->assertStringContainsString('Snds', $output);
     }
 
     public function testFilter()
@@ -44,8 +44,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains('Rbl', $output);
-        $this->assertNotContains('Snds', $output);
+        $this->assertStringContainsString('Rbl', $output);
+        $this->assertStringNotContainsString('Snds', $output);
     }
 
     //    public function testNotFoundFilter()
@@ -58,6 +58,6 @@ class ListCommandTest extends TestCase
 //        );
 //
 //        $this->assertEquals($exitCode, 0);
-//        //$this->assertContains('No matching collector was found', Artisan::output());
+//        //$this->assertStringContainsString('No matching collector was found', Artisan::output());
 //    }
 }

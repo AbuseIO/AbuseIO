@@ -54,7 +54,7 @@ class Kernel extends HttpKernel
         'auth'                => \AbuseIO\Http\Middleware\Authenticate::class,
         'auth.basic'          => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings'            => \Illuminate\Routing\Middleware\SubstituteBindings::class, //-- was added laravel 5.3
-//        'can'                 => \Illuminate\Auth\Middleware\Authorize::class, -- should be added because laravel 5.3 but i think we dont use it we use cando on the user
+        //        'can'                 => \Illuminate\Auth\Middleware\Authorize::class, -- should be added because laravel 5.3 but i think we dont use it we use cando on the user
         'guest'               => \AbuseIO\Http\Middleware\RedirectIfAuthenticated::class,
         'permission'          => \AbuseIO\Http\Middleware\CheckPermission::class,
         'ash.token'           => \AbuseIO\Http\Middleware\CheckAshToken::class,

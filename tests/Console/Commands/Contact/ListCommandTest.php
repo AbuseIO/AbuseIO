@@ -47,7 +47,7 @@ class ListCommandTest extends TestCase
         $headers = ['Id', 'Name', 'Email', 'Api host'];
         $output = Artisan::output();
         foreach ($headers as $header) {
-            $this->assertContains($header, $output);
+            $this->assertStringContainsString($header, $output);
         }
     }
 
@@ -59,8 +59,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains($this->name1, $output);
-        $this->assertContains($this->name2, $output);
+        $this->assertStringContainsString($this->name1, $output);
+        $this->assertStringContainsString($this->name2, $output);
     }
 
     public function testFilter()
@@ -76,8 +76,8 @@ class ListCommandTest extends TestCase
 
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertContains($this->name1, $output);
-        $this->assertNotContains($this->name2, $output);
+        $this->assertStringContainsString($this->name1, $output);
+        $this->assertStringNotContainsString($this->name2, $output);
     }
 
     public function testNotFoundFilter()
@@ -92,6 +92,6 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No contact found for given filter.', Artisan::output());
+        $this->assertStringContainsString('No contact found for given filter.', Artisan::output());
     }
 }

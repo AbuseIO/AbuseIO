@@ -22,7 +22,7 @@ class ShowCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
         foreach (['Reference', 'Name', 'Email', 'Api host', 'Notification methods', 'Enabled'] as $el) {
-            $this->assertContains($el, $output);
+            $this->assertStringContainsString($el, $output);
         }
     }
 
@@ -37,7 +37,7 @@ class ShowCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($contact->name, Artisan::output());
+        $this->assertStringContainsString($contact->name, Artisan::output());
     }
 
     public function testWithInvalidFilter()
@@ -50,6 +50,6 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching contact was found.', Artisan::output());
+        $this->assertStringContainsString('No matching contact was found.', Artisan::output());
     }
 }

@@ -22,7 +22,7 @@ class ShowCommandTest extends TestCase
         $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
         foreach (['Name', 'Default', 'Brand', 'Id', 'Description'] as $el) {
-            $this->assertContains($el, $output);
+            $this->assertStringContainsString($el, $output);
         }
     }
 
@@ -37,7 +37,7 @@ class ShowCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($account->name, Artisan::output());
+        $this->assertStringContainsString($account->name, Artisan::output());
     }
 
     public function testWithInvalidFilter()
@@ -50,6 +50,6 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching account was found.', Artisan::output());
+        $this->assertStringContainsString('No matching account was found.', Artisan::output());
     }
 }

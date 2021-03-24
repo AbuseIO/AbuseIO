@@ -20,7 +20,7 @@ class CreateCommandTest extends TestCase
 //        $output = Artisan::output();
     ////        dd($output);
     ////
-//        $this->assertContains('account:create', $output);
+//        $this->assertStringContainsString('account:create', $output);
 //    }
 
     public function testCreateValid()
@@ -33,7 +33,7 @@ class CreateCommandTest extends TestCase
         ]);
         $output = Artisan::output();
 
-        $this->assertContains('The account has been created', $output);
+        $this->assertStringContainsString('The account has been created', $output);
 
         $account = Account::where('name', 'test_dummy')->first();
 
@@ -54,7 +54,7 @@ class CreateCommandTest extends TestCase
         ]);
         $output = Artisan::output();
 
-        $this->assertContains('The account has been created', $output);
+        $this->assertStringContainsString('The account has been created', $output);
 
         $account = Account::where('name', 'test_dummy')->first();
 

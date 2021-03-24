@@ -29,7 +29,7 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('No matching user was found.', Artisan::output());
+        $this->assertStringContainsString('No matching user was found.', Artisan::output());
     }
 
     public function testWithValidFilter()
@@ -44,6 +44,6 @@ class ShowCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($this->user->first_name, Artisan::output());
+        $this->assertStringContainsString($this->user->first_name, Artisan::output());
     }
 }

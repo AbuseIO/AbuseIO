@@ -10,7 +10,7 @@ trait IndexTestHelper
 
     private $content;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

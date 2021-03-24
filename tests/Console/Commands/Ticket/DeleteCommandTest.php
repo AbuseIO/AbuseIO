@@ -14,7 +14,7 @@ class DeleteCommandTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @var \AbuseIO\Models\Ticket $ticket */
+    /** @var \AbuseIO\Models\Ticket */
     private $ticket;
 
     private function initDB()
@@ -31,7 +31,7 @@ class DeleteCommandTest extends TestCase
         ]);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The ticket has been deleted from the system', Artisan::output());
+        $this->assertStringContainsString('The ticket has been deleted from the system', Artisan::output());
         /*
          * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
          */
@@ -48,6 +48,6 @@ class DeleteCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find ticket', Artisan::output());
+        $this->assertStringContainsString('Unable to find ticket', Artisan::output());
     }
 }

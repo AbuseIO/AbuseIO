@@ -338,7 +338,7 @@ class Notification extends Job
                 ->orwhere('domain_contact_reference', '=', $reference);
         }
 
-        $tickets = Ticket::hydrate($search->get());
+        $tickets = Ticket::hydrate($search->get()->toArray());
 
         return $tickets;
     }

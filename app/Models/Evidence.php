@@ -11,13 +11,13 @@ use Storage;
 /**
  * Class Evidence.
  *
- * @property int $id
- * @property string $filename fillable
- * @property string $sender fillable
- * @property string $subject fillable
- * @property int $created_at
- * @property int $updated_at
- * @property int $deleted_at
+ * @property int    $id
+ * @property string $filename   fillable
+ * @property string $sender     fillable
+ * @property string $subject    fillable
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property int    $deleted_at
  */
 class Evidence extends Model
 {
@@ -136,7 +136,7 @@ class Evidence extends Model
                 $email->setText($data);
 
                 foreach ($email->getAttachments() as $index => $attachment) {
-                    $tempFilesystem->put("{$cacheDir}/{$attachment->filename}", $attachment->getContent());
+                    $tempFilesystem->put("{$cacheDir}/{$attachment->getFilename()}", $attachment->getContent());
                     $fileSizes[$index] = strlen($email->getMessageBody('text'));
                 }
 

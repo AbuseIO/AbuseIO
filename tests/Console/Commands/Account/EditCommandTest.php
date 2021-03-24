@@ -14,7 +14,7 @@ class EditCommandTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @var Account $account */
+    /** @var Account */
     private $account;
 
     private function initDB()
@@ -27,7 +27,7 @@ class EditCommandTest extends TestCase
         ob_start();
         Artisan::call('account:edit');
         $output = ob_get_clean();
-        $this->assertContains('Edit a account', $output);
+        $this->assertStringContainsString('Edit a account', $output);
     }
 
     public function testWithInvalidId()
@@ -39,7 +39,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find account with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find account with this criteria', Artisan::output());
     }
 
     public function testWithInvalidBrand()
@@ -52,7 +52,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find brand with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find brand with this criteria', Artisan::output());
     }
 
     public function testName()
@@ -67,7 +67,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The account has been updated', Artisan::output());
+        $this->assertStringContainsString('The account has been updated', Artisan::output());
 
         $account = Account::find(1);
         $this->assertEquals('somebogusstring', $account->name);
@@ -88,7 +88,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The account has been updated', Artisan::output());
+        $this->assertStringContainsString('The account has been updated', Artisan::output());
 
         $account = Account::find(1);
 
@@ -109,7 +109,7 @@ class EditCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The account has been updated', Artisan::output());
+        $this->assertStringContainsString('The account has been updated', Artisan::output());
         $this->assertTrue((bool) Account::find($this->account->id)->systemaccount);
     }
 }

@@ -14,7 +14,7 @@ return [
     'env' => env('APP_ENV', 'production'),
 
     'name'    => 'AbuseIO',
-    'version' => '4.2.0',
+    'version' => '4.3.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,7 +161,7 @@ return [
          * Laravel Framework Service Providers...
          */
 
-//        'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider', -- removed upgrading from 5.2
+        //        'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider', -- removed upgrading from 5.2
 
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
@@ -188,8 +188,8 @@ return [
         /*
          * Some plugin Service Providers ...
          */
-        'Wpb\String_Blade_Compiler\ViewServiceProvider',
-        'Collective\Html\HtmlServiceProvider',
+        Wpb\String_Blade_Compiler\StringBladeServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -208,8 +208,7 @@ return [
         AbuseIO\Providers\RouteServiceProvider::class,
         AbuseIO\Providers\SystemAdminManagerProvider::class,
         AbuseIO\Providers\ValidationsServiceProvider::class,
-        Chumper\Zipper\ZipperServiceProvider::class,
-        Sorskod\Larasponse\LarasponseServiceProvider::class,
+
         Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
@@ -233,6 +232,7 @@ return [
     'aliases' => [
 
         'App'          => Illuminate\Support\Facades\App::class,
+        'Arr'          => Illuminate\Support\Arr::class,
         'Artisan'      => Illuminate\Support\Facades\Artisan::class,
         'Auth'         => Illuminate\Support\Facades\Auth::class,
         'Blade'        => Illuminate\Support\Facades\Blade::class,
@@ -246,9 +246,8 @@ return [
         'Eloquent'     => Illuminate\Database\Eloquent\Model::class,
         'Event'        => Illuminate\Support\Facades\Event::class,
         'File'         => Illuminate\Support\Facades\File::class,
-        'Gate'         => lluminate\Support\Facades\Gate::class,
+        'Gate'         => Illuminate\Support\Facades\Gate::class,
         'Hash'         => Illuminate\Support\Facades\Hash::class,
-        'Input'        => Illuminate\Support\Facades\Input::class,
         'Inspiring'    => Illuminate\Foundation\Inspiring::class,
         'Lang'         => Illuminate\Support\Facades\Lang::class,
         'Log'          => Illuminate\Support\Facades\Log::class,
@@ -264,6 +263,7 @@ return [
         'Schema'       => Illuminate\Support\Facades\Schema::class,
         'Session'      => Illuminate\Support\Facades\Session::class,
         'Storage'      => Illuminate\Support\Facades\Storage::class,
+        'Str'          => Illuminate\Support\Str::class,
         'URL'          => Illuminate\Support\Facades\URL::class,
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
@@ -271,8 +271,6 @@ return [
         'Html'         => Collective\Html\HtmlFacade::class,
         'Uuid'         => Webpatser\Uuid\Uuid::class,
         'Carbon'       => Carbon\Carbon::class,
-        'Zipper'       => Chumper\Zipper\Zipper::class,
-
     ],
 
 ];

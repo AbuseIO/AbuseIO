@@ -34,7 +34,7 @@ class EditCommandTest extends TestCase
     {
         ob_start();
         Artisan::call('note:edit');
-        $this->assertContains('Edit a note', ob_get_clean());
+        $this->assertStringContainsString('Edit a note', ob_get_clean());
     }
 
     public function testWithInvalidId()
@@ -46,7 +46,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find note with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find note with this criteria', Artisan::output());
     }
 
     public function testWithHidden()
@@ -63,7 +63,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The note has been updated', Artisan::output());
+        $this->assertStringContainsString('The note has been updated', Artisan::output());
 
         $this->assertTrue((bool) Note::find($this->noteHidden->id)->hidden);
     }
@@ -82,7 +82,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The note has been updated', Artisan::output());
+        $this->assertStringContainsString('The note has been updated', Artisan::output());
         /*
          * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
          */

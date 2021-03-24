@@ -20,7 +20,7 @@ class ListCommandTest extends TestCase
         $exitCode = Artisan::call('netblock:list', []);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($contact->name, Artisan::output());
+        $this->assertStringContainsString($contact->name, Artisan::output());
     }
 
     public function testNetBlockListCommandWithValidFilter()
@@ -39,7 +39,7 @@ class ListCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains($netblock_contact->name, Artisan::output());
-        $this->assertNotContains($other_contact->name, Artisan::output());
+        $this->assertStringContainsString($netblock_contact->name, Artisan::output());
+        $this->assertStringNotContainsString($other_contact->name, Artisan::output());
     }
 }

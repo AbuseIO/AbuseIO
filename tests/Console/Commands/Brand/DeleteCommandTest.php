@@ -19,7 +19,7 @@ class DeleteCommandTest extends TestCase
 //        ]);
 //
 //        $this->assertEquals($exitCode, 0);
-//        $this->assertContains("The brand has been deleted from the system", Artisan::output());
+//        $this->assertStringContainsString("The brand has been deleted from the system", Artisan::output());
 //        /**
 //         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
 //         */
@@ -36,6 +36,6 @@ class DeleteCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find brand', Artisan::output());
+        $this->assertStringContainsString('Unable to find brand', Artisan::output());
     }
 }

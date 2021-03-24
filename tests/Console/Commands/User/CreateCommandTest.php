@@ -20,8 +20,8 @@ class CreateCommandTest extends TestCase
 //        //        Artisan::call('user:create');
     ////        $output = Artisan::output();
     ////
-    ////        $this->assertContains('The first name field is required.', $output);
-    ////        $this->assertContains('Failed to create the user due to validation warnings', $output);
+    ////        $this->assertStringContainsString('The first name field is required.', $output);
+    ////        $this->assertStringContainsString('Failed to create the user due to validation warnings', $output);
 //    }
 
     public function testCreateValid()
@@ -43,7 +43,7 @@ class CreateCommandTest extends TestCase
 
         $this->assertUsers($user, $this->findUserWithOutput($output), $password);
 
-        $this->assertContains('The user has been created', $output);
+        $this->assertStringContainsString('The user has been created', $output);
     }
 
     public function testNoValidAccountCreateValid()
@@ -61,8 +61,8 @@ class CreateCommandTest extends TestCase
         ]);
         $output = Artisan::output();
 
-        $this->assertContains('No account was found for given account name ', $output);
-        $this->assertContains('The user has been created', $output);
+        $this->assertStringContainsString('No account was found for given account name ', $output);
+        $this->assertStringContainsString('The user has been created', $output);
     }
 
     private function assertUsers($user1, $user2, $password)
@@ -101,7 +101,7 @@ class CreateCommandTest extends TestCase
             (bool) $this->findUserWithOutput($output)->disabled
         );
 
-        $this->assertContains('The user has been created', $output);
+        $this->assertStringContainsString('The user has been created', $output);
     }
 
     public function testWithDisabledArgumentTrue()
@@ -131,7 +131,7 @@ class CreateCommandTest extends TestCase
             $password
         );
 
-        $this->assertContains('The user has been created', $output);
+        $this->assertStringContainsString('The user has been created', $output);
     }
 
     public function testIfNoPasswordIsSuppliedPasswordIsGenerated()
@@ -155,8 +155,8 @@ class CreateCommandTest extends TestCase
             $this->returnGeneratedPasswordWithOutput($output)
         );
 
-        $this->assertContains('Using auto generated password: ', $output);
-        $this->assertContains('The user has been created', $output);
+        $this->assertStringContainsString('Using auto generated password: ', $output);
+        $this->assertStringContainsString('The user has been created', $output);
     }
 
     /**

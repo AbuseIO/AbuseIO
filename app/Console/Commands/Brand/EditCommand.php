@@ -21,7 +21,7 @@ class EditCommand extends AbstractEditCommand
     {
         return new InputDefinition(
             [
-            new inputArgument('id', InputArgument::REQUIRED, 'Brand id to edit'),
+                new inputArgument('id', InputArgument::REQUIRED, 'Brand id to edit'),
                 new InputOption('name', null, InputOption::VALUE_OPTIONAL, 'brand name'),
                 new InputOption('company_name', null, InputOption::VALUE_OPTIONAL, 'company name'),
                 new InputOption('introduction_text', null, InputOption::VALUE_OPTIONAL, 'Introduction text'),

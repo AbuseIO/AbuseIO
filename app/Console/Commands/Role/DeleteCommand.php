@@ -17,11 +17,11 @@ class DeleteCommand extends AbstractDeleteCommand
     public function defineInput()
     {
         return [
-                new InputArgument(
-                    'role',
-                    InputArgument::REQUIRED,
-                    'Use the name or the id for a role to delete it.'
-                ),
+            new InputArgument(
+                'role',
+                InputArgument::REQUIRED,
+                'Use the name or the id for a role to delete it.'
+            ),
         ];
     }
 

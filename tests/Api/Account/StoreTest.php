@@ -16,7 +16,7 @@ class StoreTest extends TestCase
     {
         $response = $this->executeCall([]);
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The name field is required.',
             $response->getContent()
         );

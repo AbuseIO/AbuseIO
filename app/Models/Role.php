@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Role.
  *
- * @property int $id guarded
- * @property string $name fillable
+ * @property int    $id          guarded
+ * @property string $name        fillable
  * @property string $description fillable
- * @property int $created_at guarded
- * @property int $updated_at guarded
- * @property int $deleted_at guarded
+ * @property int    $created_at  guarded
+ * @property int    $updated_at  guarded
+ * @property int    $deleted_at  guarded
  */
 class Role extends Model
 {

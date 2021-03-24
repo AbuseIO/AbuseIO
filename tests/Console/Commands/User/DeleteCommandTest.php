@@ -19,7 +19,7 @@ class DeleteCommandTest extends TestCase
     //        ]);
     //
     //        $this->assertEquals($exitCode, 0);
-    //        $this->assertContains("The account has been deleted from the system", Artisan::output());
+    //        $this->assertStringContainsString("The account has been deleted from the system", Artisan::output());
     //        /**
     //         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
     //         */
@@ -36,6 +36,6 @@ class DeleteCommandTest extends TestCase
         );
 
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find user', Artisan::output());
+        $this->assertStringContainsString('Unable to find user', Artisan::output());
     }
 }

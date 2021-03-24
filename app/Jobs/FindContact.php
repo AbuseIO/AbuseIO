@@ -134,14 +134,16 @@ class FindContact extends Job
     public static function byIP($ip, $local = false)
     {
         return self::getContact(
-            'ip', $ip,
+            'ip',
+            $ip,
             Netblock::where('first_ip_int', '<=', inetPtoi($ip))
                 ->where('last_ip_int', '>=', inetPtoi($ip))
                 ->where('enabled', '=', true)
                 ->orderBy('first_ip_int', 'desc')
                 ->orderBy('last_ip_int', 'asc')
                 ->take(1),
-            $local);
+            $local
+        );
     }
 
     /**
@@ -155,11 +157,13 @@ class FindContact extends Job
     public static function byDomain($domain, $local = false)
     {
         return self::getContact(
-            'domain', $domain,
+            'domain',
+            $domain,
             Domain::where('name', '=', $domain)
                 ->where('enabled', '=', true)
                 ->take(1),
-            $local);
+            $local
+        );
     }
 
     /**
@@ -173,11 +177,13 @@ class FindContact extends Job
     public static function byId($id, $local = false)
     {
         return self::getContact(
-            'id', $id,
+            'id',
+            $id,
             Contact::where('reference', '=', $id)
                 ->where('enabled', '=', true)
                 ->take(1),
-            $local);
+            $local
+        );
     }
 
     /**

@@ -19,16 +19,16 @@ class CreateCommandTest extends TestCase
         $exitCode = Artisan::call(
             'note:create',
             [
-               'ticket_id' => $dummy->ticket->id,
-               'submitter' => $dummy->submitter,
-               'text'      => $dummy->text,
-               'hidden'    => $dummy->hidden,
-               'viewed'    => $dummy->viewed,
+                'ticket_id' => $dummy->ticket->id,
+                'submitter' => $dummy->submitter,
+                'text'      => $dummy->text,
+                'hidden'    => $dummy->hidden,
+                'viewed'    => $dummy->viewed,
             ]
         );
 
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('created', Artisan::output());
+        $this->assertStringContainsString('created', Artisan::output());
 
         Note::where([
             'ticket_id' => $dummy->ticket->id,
@@ -44,6 +44,6 @@ class CreateCommandTest extends TestCase
         ob_start();
         $exitCode = Artisan::call('note:create');
         $this->assertEquals(0, $exitCode);
-        $this->assertContains('Creates a new note', ob_get_clean());
+        $this->assertStringContainsString('Creates a new note', ob_get_clean());
     }
 }

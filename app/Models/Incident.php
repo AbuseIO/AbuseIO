@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Models;
 
+use Illuminate\Support\Str;
 use Lang;
 
 /**
@@ -13,10 +14,10 @@ use Lang;
  * @property string $domain
  * @property string $class
  * @property string $type
- * @property int $timestamp
+ * @property int    $timestamp
  * @property string $information
  * @property string $remote_api_token
- * @property int $remote_ticket_id
+ * @property int    $remote_ticket_id
  * @property string $remote_api_url
  * @property string $remote_ash_link
  */
@@ -109,7 +110,7 @@ class Incident
         if (!empty($values)) {
             foreach ($fields as $field) {
                 if (array_key_exists($field, $values)) {
-                    if (str_is('timestamp', $field) && !is_int($values[$field])) {
+                    if (Str::is('timestamp', $field) && !is_int($values[$field])) {
                         $incident->$field = intval($values[$field]);
                     } else {
                         $incident->$field = $values[$field];
@@ -145,7 +146,8 @@ class Incident
         $incident->remote_api_token = $ticket->api_token;
         $incident->remote_ticket_id = $ticket->id;
         $incident->remote_ash_link =
-            route('ash.show',
+            route(
+                'ash.show',
                 [
                     'ticketID' => $ticket->id,
                     'token'    => $ticket->ash_token_ip,

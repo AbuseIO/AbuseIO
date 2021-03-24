@@ -34,7 +34,8 @@ trait ShowTestHelper
             [
                 'Accept'      => 'application/json',
                 'X-API-TOKEN' => Account::getSystemAccount()->token,
-            ]);
+            ]
+        );
         $response = $this->actingAs($user)->call('GET', self::URL.'/1', [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();

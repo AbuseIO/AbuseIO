@@ -35,7 +35,7 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
         return $app;
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->beforeApplicationDestroyed(function () {
             DB::disconnect();
@@ -47,7 +47,8 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
     protected function runMigration()
     {
         Artisan::call(
-            'migrate:refresh', ['--seed' => 'true]']
+            'migrate:refresh',
+            ['--seed' => 'true]']
         );
     }
 }

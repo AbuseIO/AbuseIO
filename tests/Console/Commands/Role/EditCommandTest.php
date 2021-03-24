@@ -18,7 +18,7 @@ class EditCommandTest extends TestCase
     {
         ob_start();
         Artisan::call('role:edit');
-        $this->assertContains('Edit a role', ob_get_clean());
+        $this->assertStringContainsString('Edit a role', ob_get_clean());
     }
 
     public function testWithInvalidId()
@@ -30,7 +30,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find role with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find role with this criteria', Artisan::output());
     }
 
     public function testEnabled()
@@ -45,7 +45,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The role has been updated', Artisan::output());
+        $this->assertStringContainsString('The role has been updated', Artisan::output());
 
         $this->assertEquals(
             Role::find($this->role->id)->name,

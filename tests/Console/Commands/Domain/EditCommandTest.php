@@ -15,7 +15,7 @@ class EditCommandTest extends TestCase
         ob_start();
         Artisan::call('domain:edit');
         $output = ob_get_clean();
-        $this->assertContains('Edit a domain', $output);
+        $this->assertStringContainsString('Edit a domain', $output);
     }
 
     public function testWithInvalidId()
@@ -27,7 +27,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find domain with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find domain with this criteria', Artisan::output());
     }
 
     public function testWithInvalidContact()
@@ -40,7 +40,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('Unable to find contact with this criteria', Artisan::output());
+        $this->assertStringContainsString('Unable to find contact with this criteria', Artisan::output());
     }
 
     public function testEnabled()
@@ -53,7 +53,7 @@ class EditCommandTest extends TestCase
             ]
         );
         $this->assertEquals($exitCode, 0);
-        $this->assertContains('The domain has been updated', Artisan::output());
+        $this->assertStringContainsString('The domain has been updated', Artisan::output());
         /*
          * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
          */

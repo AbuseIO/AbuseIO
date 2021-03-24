@@ -25,7 +25,7 @@ class NotificationTest extends TestCase
         );
 
         $this->assertTrue(
-           config('notifications.Mail.notification.enabled')
+            config('notifications.Mail.notification.enabled')
         );
     }
 }

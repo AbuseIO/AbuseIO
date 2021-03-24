@@ -23,7 +23,7 @@ class CheckAccountTest extends TestCase
 
     private $middleware;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->middleware = new CheckAccount();
