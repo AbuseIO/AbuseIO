@@ -51,7 +51,7 @@ class NetblocksController extends Controller
                 if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
                     return false;
                 }
-                
+
                 $netblocks = Netblock::where('first_ip_int', '<=', inetPtoi($ip))
                     ->where('last_ip_int', '>=', inetPtoi($ip))
                     ->where('enabled', '=', true)
