@@ -75,7 +75,7 @@
                 "sabre/uri": "2.2.*",
                 "sabre/xml": "2.2.*",
 
-		"laravel/framework": ">6.20.12",
+		"laravel/framework": ">6.20.14",
 		"laravelcollective/html": "6.*",
 		"illuminated/helper-functions": "6.*",
 
