@@ -75,7 +75,7 @@
                 "sabre/uri": "2.2.*",
                 "sabre/xml": "2.2.*",
 
-		"laravel/framework": ">6.20.14",
+		"laravel/framework": ">6.20.20",
 		"laravelcollective/html": "6.*",
 		"illuminated/helper-functions": "6.*",
 
@@ -90,7 +90,6 @@
 	},
 	"require-dev": {
 		"beyondcode/laravel-dump-server": "^1.0",
-		"facade/ignition": "^2.5.2",
 		"fzaninotto/faker": "^1.4",
 		"mockery/mockery": "^1.0",
 		"nunomaduro/collision": "^3.0",
