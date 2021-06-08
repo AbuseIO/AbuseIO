@@ -83,9 +83,9 @@
 		"kruisdraad/phpmailer": "v5.2.21",
 		"abuseio/iodef": "1.0.*",
 
-                "laminas/laminas-http": "2.11.*",
-                "laminas/laminas-json": "3.1.*",
-                "laminas/laminas-xmlrpc": "2.9.*",
+                "laminas/laminas-http": "2.14.*",
+                "laminas/laminas-json": "3.2.*",
+                "laminas/laminas-xmlrpc": "2.10.*",
 		"wpb/string-blade-compiler": "6.*"
 	},
 	"require-dev": {
