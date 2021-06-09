@@ -7,6 +7,7 @@ use Log;
 use Mail;
 use PHPMailer;
 use PhpMimeMailParser\Parser as MimeParser;
+use ZipArchive;
 
 /**
  * Class AlertAdmin.
@@ -23,30 +24,61 @@ class AlertAdmin extends Job
      */
     public static function send($message, $attachments = [])
     {
-        $sent = Mail::raw(
-            $message,
-            function ($mail) use ($attachments) {
-                $mail->from(Config::get('main.notifications.from_address'), 'AbuseIO Alerter');
-                $mail->to(Config::get('main.emailparser.fallback_mail'));
-                $mail->subject('Exception notification');
+        $sent = false;
 
-                foreach ($attachments as $attachmentName => $attachmentData) {
-                    $mimetype = 'text/plain';
-                    if (substr($attachmentName, -4) === '.eml') {
-                        $mimetype = 'message/rfc822';
+        if (Config::get('app.attachment_format') == 'multifile') {
+            $sent = Mail::raw(
+                $message,
+                function ($mail) use ($attachments) {
+                    $mail->from(Config::get('main.notifications.from_address'), 'AbuseIO Alerter');
+                    $mail->to(Config::get('main.emailparser.fallback_mail'));
+                    $mail->subject('Exception notification');
+
+                    foreach ($attachments as $attachmentName => $attachmentData) {
+                        $mail->attachData(
+                            $attachmentData,
+                            $attachmentName,
+                            [
+                                'as'   => $attachmentName,
+                                'mime' => 'text/plain',
+                            ]
+                        );
+                    }
+                }
+            );
+        } elseif (Config::get('app.attachment_format') == 'zipfile') {
+            $zip = new ZipArchive();
+            $tmpZipfile = tmpfile().'.zip';
+
+            $sent = Mail::raw(
+                $message,
+                function ($mail) use ($attachments, $zip, $tmpZipfile) {
+                    $mail->from(Config::get('main.notifications.from_address'), 'AbuseIO Alerter');
+                    $mail->to(Config::get('main.emailparser.fallback_mail'));
+                    $mail->subject('Exception notification');
+
+                    $res = $zip->open($tmpZipfile, ZipArchive::CREATE);
+
+                    if ($res === true) {
+                        foreach ($attachments as $attachmentName => $attachmentData) {
+                            $zip->addFromString($attachmentName, $attachmentData);
+                        }
+                        $zip->close();
                     }
 
-                    $mail->attachData(
-                        $attachmentData,
-                        $attachmentName,
-                        [
-                            'as'   => $attachmentName,
-                            'mime' => $mimetype,
-                        ]
-                    );
+                    $mail->attach($tmpZipfile, [
+                        'as'   => str_replace('.eml', '.zip', $attachmentName),
+                        'mime' => 'application/zip',
+                    ]);
+                    fclose($tmpZipfile);
                 }
-            }
-        );
+            );
+        } else {
+            Log::error(
+                'AlertAdmin: '.
+                'Unknown attachment_format: '.Config::get('app.attachment_format')
+            );
+        }
 
         if (!$sent) {
             Log::error(
