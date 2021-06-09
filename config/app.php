@@ -150,6 +150,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Bounced Email Attachment Format
+    |--------------------------------------------------------------------------
+    |
+    | This lets you configure the format of attachments when they are being
+    | bounced to the admin. This happens when an email cannot be parsed.
+    |
+    | `zipfile` works around mail filters, which can strip attachment
+    | content that it doesn't deem to be safe.
+    |
+    | Available Settings: "multifile", "zipfile"
+    |
+    */
+
+    'attachment_format' => env('APP_ATTACHMENT_FORMAT', 'multifile'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
