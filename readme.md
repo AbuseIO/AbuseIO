@@ -7,22 +7,30 @@
 [![Latest Unstable Version](https://poser.pugx.org/abuseio/abuseio/v/unstable.svg)](https://packagist.org/packages/abuseio/abuseio)
 [![License](https://poser.pugx.org/abuseio/abuseio/license.svg)](https://packagist.org/packages/abuseio/abuseio)
 
-AbuseIO is a toolkit to receive, process, correlate and notify end users about abuse reports received by network operators, typically
-hosting and access providers. The purpose is to consolidate efforts by various companies and individuals to automate and improve
-the abuse handling process.
+AbuseIO is a toolkit to receive, process, correlate and notify end users
+about abuse reports received by network operators,
+typically hosting and access providers.
+The purpose is to consolidate efforts by various companies and individuals
+to automate and improve the abuse handling process.
 
 ## Official Documentation
 
-Documentation for AbuseIO can be found on the [docs directory](https://github.com/AbuseIO/AbuseIO/tree/master/docs).
+Documentation for AbuseIO can be found in [its own repository](https://www.github.com/abuseio/abuseio-docs/).
+
+An online version of the documentation can be found on https://docs.abuse.io/
 
 ## Contributing
 
-Thank you for considering contributing to AbuseIO! The contribution guide can be found in the [AbuseIO website](https://abuse.io/community/get-involved/).
+Thank you for considering contributing to AbuseIO!
+The [contribution guide](https://abuse.io/community/get-involved/) can be found on the AbuseIO website.
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within AbuseIO, please send an e-mail to Bart Vrancken at bart@abuse.io. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within AbuseIO,
+please send an e-mail to Bart Vrancken at bart@abuse.io.
+All security vulnerabilities will be promptly addressed.
 
 ### License
 
-AbuseIO is open-sourced software licensed under the [GNUv2 license](http://www.gnu.org/licenses/gpl-2.0.en.html)
+AbuseIO is open-sourced software
+licensed under the [GNUv2 license](http://www.gnu.org/licenses/gpl-2.0.en.html)
