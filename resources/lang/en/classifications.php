@@ -2140,4 +2140,106 @@ return [
             This classification has no information text yet.
             ',
     ],
+    'OPEN_PROXY_SERVER' => [
+        'name'        => 'Accesiable proxy server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'OPEN_UBIQUITI_SERVER' => [
+        'name'        => 'Accesiable Ubiquiti server',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'BRUTE_FORCE_ATTACK' => [
+        'name'        => 'Brute Force attack',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'AMPLICATION_DDOS_VICTIM' => [
+        'name'        => 'DDOS amplification victim',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'ACCESSIBLE_ADB_REPORT' => [
+        'name'        => 'Accesiable Android Debug Bridge',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'ACCESSIBLE_APPLE_REMOTE_DESKTOP_ARD_REPORT' => [
+        'name'        => 'Accesiable Apple Remote Desktop',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'CAIDA_IP_SPOOFER_REPORT' => [
+        'name'        => 'CAIDA IP spoofer',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'DRONE_BOTNET_DRONE_REPORT' => [
+        'name'        => 'Botnet Drone',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'NETCORE_NETIS_ROUTER_VULNERABILITY_SCAN_REPORT' => [
+        'name'        => 'Netcore/Netis router vulnerable',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'OPEN_DB2_DISCOVERY_SERVICE_REPORT' => [
+        'name'        => 'Accesiable DB2 discovery service ',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'OPEN_MQTT' => [
+        'name'        => 'Accesiable MQTT service ',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'OPEN_COAP' => [
+        'name'        => 'Accesiable COAP service',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'OPEN_IPP' => [
+        'name'        => 'Accesiable IPP service',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'OPEN_RADMIN' => [
+        'name'        => 'Accesiable RAdmin service',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'OPEN_RDPEUDP' => [
+        'name'        => 'Accesiable Microsoft Remote Desktop Protocol service',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'OPEN_BASIC_AUTH_SERVICE' => [
+        'name'        => 'Accesiable Basic Authenticatie service',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],
+    'DARKNET' => [
+        'name'        => 'Service contacting darknets',
+        'description' => '
+            This classification has no information text yet.
+            ',
+    ],    
 ];
