@@ -13,7 +13,9 @@ the abuse handling process.
 
 ## Official Documentation
 
-Documentation for AbuseIO can be found on the [docs directory](https://github.com/AbuseIO/AbuseIO/tree/master/docs).
+Documentation for AbuseIO can be found in [its own repository](https://www.github.com/abuseio/abuseio-docs/).
+
+An online version of the documentation can be found on https://docs.abuse.io/
 
 ## Contributing
 
@@ -21,7 +23,7 @@ Thank you for considering contributing to AbuseIO! The contribution guide can be
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within AbuseIO, please send an e-mail to Bart Vrancken at bart@abuse.io. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within AbuseIO, please send an e-mail to the AbuseIO CERT at cert@abuse.io (GPG available on Key servers). All security vulnerabilities will be promptly addressed.
 
 ### License
 
