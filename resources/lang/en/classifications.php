@@ -2242,4 +2242,31 @@ return [
             This classification has no information text yet.
             ',
     ],    
+    'eicc(stix2)' => [
+        'name'        => 'ei.cc',
+        'description' => '
+            ESET threat intelligence has detected that the host listed is playing the role of Command & Control centre for a botnet. More details may be available on the technical details page.
+            ',
+    ],
+
+    'eibotnet(stix2)' => [
+        'name'        => 'ei.botnet',
+        'description' => '
+            ESET threat intelligence has detected that the host is playing a part in a botnet. More details may be available on the technical details page.
+            ',
+    ],
+
+    'eidomainsv2(stix2)' => [
+        'name'        => 'ei.domains',
+        'description' => '
+            ESET threat intelligence has detected that the host is being used to spread malware on the domain listed. More details may be available on the technical details page.
+            ',
+    ],
+
+    'eiurls(stix2)' => [
+        'name'        => 'ei.urls',
+        'description' => '
+            ESET threat intelligence has detected that the host is being used to spread malware on the URL listed. More details may be available on the technical details page.
+            ',
+    ],    
 ];
