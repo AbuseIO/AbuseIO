@@ -2268,5 +2268,39 @@ return [
         'description' => '
             ESET threat intelligence has detected that the host is being used to spread malware on the URL listed. More details may be available on the technical details page.
             ',
-    ],    
+    ],
+
+    'VULNERABLE_SMTP_SERVER' => [
+        'name'          => 'Vulnerable SMTP server',
+        'description'   => "
+            <h2>What is a 'Vulnerable SMTP server'?</h2>
+            
+            <p>It was discovered that the host, a mail sending server, is running a vulnerable SMTP software.</p>
+
+            <h2>Why would this be bad?</h2>
+        
+            <p>Hackers might exploit the vulnerable SMTP server, resulting in potentially getting the SMTP server compromised.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Update the SMTP software to the latest version.</p>
+            ",
+    ],
+
+    'OPEN_AMQP' => [
+        'name'          => 'Accessible Advanced Message Queuing Protocol (AMQP) server',
+        'description'   => "
+            <h2>What is a AMQP server?</h2>
+
+            <p>AMQP is an open internet protocol for business messaging. It is often also used for IoT device management.</p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>Even though it does allow for encrypted communications via TLS, many instances on the Internet are configured for cleartext authentication and message sharing. Furthermore in the past there have been multiple vulnerabilities discovered in AMQP broker software implementations that can allow for authentication bypass, interception of messages, remote code execution or denial of service and other attacks.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Make sure that the AMQP server is up-to-date and that the AMQP server is not reachable over the internet if it doesnt need to.</p>
+            ",
+    ],
 ];
