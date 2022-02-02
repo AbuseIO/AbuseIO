@@ -17,6 +17,7 @@ class NetblockTransformer extends TransformerAbstract
     public function transform(Netblock $netblock)
     {
         return [
+            'id'          => (int) $netblock->id,
             'first_ip'    => (string) $netblock->first_ip,
             'last_ip'     => (string) $netblock->last_ip,
             'description' => (string) $netblock->description,

@@ -38,6 +38,7 @@ class TicketFormRequest extends Request
                 return Ticket::createRules();
                 break;
             case 'PUT':
+                break;
             case 'PATCH':
                 return Ticket::updateRules($this);
                 break;

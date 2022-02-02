@@ -82,7 +82,7 @@ class CheckAccount
      */
     private function getAccount()
     {
-        return property_exists($this->request, 'api_account') ?
+        return isset($this->request->api_account) ?
             $this->request->api_account : Auth::user()->account;
     }
 
@@ -92,7 +92,7 @@ class CheckAccount
     private function resolveModelId($request)
     {
         // use the correct segment
-        if (property_exists($request, 'api_account')) {
+        if (isset($request->api_account)) {
             $model_id = $request->segment(self::API_ID_SEGMENT);
         } else {
             $model_id = $request->segment(self::WEB_ID_SEGMENT);
