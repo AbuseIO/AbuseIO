@@ -2076,5 +2076,19 @@ return [
         'description' => '
             This classification has no information text yet.
             ',
-    ],    
+    ],
+
+    'VULNERABLE_SMTP_SERVER' => [
+        'name'          => 'Vulnerable SMTP server',
+        'description'   => '
+            This classification has no information text yet.
+            ',
+    ],
+
+    'OPEN_AMQP' => [
+        'name'          => 'Accessible Advanced Message Queuing Protocol (AMQP) server',
+        'description'   => '
+            This classification has no information text yet.
+            ',
+    ],
 ];
