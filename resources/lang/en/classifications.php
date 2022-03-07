@@ -2241,7 +2241,7 @@ return [
         'description' => '
             This classification has no information text yet.
             ',
-    ],    
+    ],
     'eicc(stix2)' => [
         'name'        => 'ei.cc',
         'description' => '
