@@ -2289,7 +2289,7 @@ return [
 
     'OPEN_AMQP' => [
         'name'          => 'Accessible Advanced Message Queuing Protocol (AMQP) server',
-        'description'   => "
+        'description'   => '
             <h2>What is a AMQP server?</h2>
 
             <p>AMQP is an open internet protocol for business messaging. It is often also used for IoT device management.</p>
@@ -2301,6 +2301,6 @@ return [
             <h2>Recommended action</h2>
 
             <p>Make sure that the AMQP server is up-to-date and that the AMQP server is not reachable over the internet if it doesnt need to.</p>
-            ",
+            ',
     ],
 ];
