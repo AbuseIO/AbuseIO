@@ -57,7 +57,7 @@ class NetblocksController extends Controller
                     ->where('enabled', '=', true)
                     ->orderBy('first_ip_int', 'desc')
                     ->orderBy('last_ip_int', 'asc')
-                    ->take(1);
+                    ->take(1)->get();
                 break;
 
             // Fail unknown method

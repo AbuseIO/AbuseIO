@@ -31,10 +31,13 @@ class NetblockFormRequest extends Request
     {
         switch ($this->method()) {
             case 'GET':
+                break;
             case 'DELETE':
+                break;
             case 'POST':
                 return Netblock::createRules($this);
             case 'PUT':
+                break;
             case 'PATCH':
                 return Netblock::updateRules($this);
             default:
