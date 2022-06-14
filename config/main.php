@@ -36,14 +36,14 @@ return [
     ],
 
     'notifications' => [
-        'enabled'        => true,
-        'info_interval'  => '90 days',
-        'abuse_interval' => '0 minutes',
-        'min_lastseen'   => '14 days',
-        'from_address'   => 'abuse@isp.local',
-        'from_name'      => 'ISP Abusedesk',
-        'bcc_enabled'    => false,
-        'bcc_address'    => 'management@isp.local',
+        'enabled'        => env('MAIN_NOTIFICATIONS_ENABLED', true),
+        'info_interval'  => env('MAIN_NOTIFICATIONS_INFO_INTERVAL', '90 days'),
+        'abuse_interval' => env('MAIN_NOTIFICATIONS_ABUSE_INTERVAL', '0 minutes'),
+        'min_lastseen'   => env('MAIN_NOTIFICATIONS_MIN_LASTSEEN', '14 days'),
+        'from_address'   => env('MAIN_NOTIFICATIONS_FROM_ADDRESS', 'abuse@isp.local'),
+        'from_name'      => env('MAIN_NOTIFICATIONS_FROM_NAME', 'ISP Abusedesk'),
+        'bcc_enabled'    => env('MAIN_NOTIFICATIONS_BCC_ENABLED', false),
+        'bcc_address'    => env('MAIN_NOTIFICATIONS_BCC_ADDRESS', 'management@isp.local'),
     ],
 
     'housekeeping' => [
