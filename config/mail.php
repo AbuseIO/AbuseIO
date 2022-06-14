@@ -148,9 +148,9 @@ return [
     |
     */
     'smime' => [
-        'enabled'     => false,
-        'key'         => '/opt/abuseio/config/smikme/key.pem',
-        'certificate' => '/opt/abuseio/config/smikme/certificate.pem',
+        'enabled'     => env('MAIL_SMIME_ENABLED', false),
+        'key'         => env('MAIL_SMIME_KEY', '/opt/abuseio/config/smikme/key.pem'),
+        'certificate' => env('MAIL_SMIME_CERTIFICATE', '/opt/abuseio/config/smikme/certificate.pem'),
     ],
 
     /*
