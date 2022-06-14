@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone'    => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -79,9 +79,10 @@ return [
     */
 
     // Implement ISO 8601 usage
-    'date_format' => 'c',
+    // 'date_format' => 'c',
     // or use this for more human readable:
     // 'date_format' => 'd-m-Y H:i:s P',
+    'date_format' => env('APP_DATE_FORMAT', 'c'),
 
     /*
     |--------------------------------------------------------------------------
