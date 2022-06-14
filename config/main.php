@@ -25,8 +25,8 @@ return [
     ],
 
     'reports' => [
-        'min_lastseen'    => false, //This ignores any event older then threshold
-        'resolvable_only' => false, // This drops anything if a domain or netblock cannot be found
+        'min_lastseen'    => env('MAIN_REPORTS_MIN_LASTSEEN', false), //This ignores any event older then threshold
+        'resolvable_only' => env('MAIN_REPORTS_RESOLVABLE_ONLY', false), // This drops anything if a domain or netblock cannot be found
     ],
 
     'notes' => [
