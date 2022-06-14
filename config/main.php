@@ -13,9 +13,9 @@ return [
     ],
 
     'emailparser' => [
-        'fallback_mail'      => 'admin@isp.local',
-        'use_bounce_method'  => false,
-        'notify_on_warnings' => true,
+        'fallback_mail'      => env('MAIN_EMAILPARSER_FALLBACK_MAIL', 'admin@isp.local'),
+        'use_bounce_method'  => env('MAIN_EMAILPARSER_USE_BOUNCE_METHOD', false),
+        'notify_on_warnings' => env('MAIN_EMAILPARSER_NOTIFY_ON_WARNINGS', true),
     ],
 
     // A list of installation UUID's which are considered to be parents allowing them to push events thru the API
