@@ -1,5 +1,0 @@
-#!/bin/bash
-rm storage/logs/laravel*.log
-php artisan migrate:fresh --seed
-vendor/bin/phpunit
-extra/notifier-samples/runall

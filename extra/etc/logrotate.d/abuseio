@@ -1,9 +1,0 @@
-/var/log/abuseio/*.log {
-	daily
-	missingok
-	rotate 52
-	compress
-	delaycompress
-	notifempty
-    copytruncate
-}
