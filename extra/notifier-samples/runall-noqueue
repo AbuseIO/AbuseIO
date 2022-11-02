@@ -1,6 +1,0 @@
-#!/bin/bash
-for file in `find extra/notifier-samples/ -type f | sort | grep eml`
-  do
-    echo "pushing $file into queue"
-    cat $file | php -q artisan email:receive --noqueue
-done
