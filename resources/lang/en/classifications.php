@@ -763,7 +763,7 @@ return [
             ",
     ],
 
-    'OPEN_IMPI_SERVER' => [
+    'OPEN_IPMI_SERVER' => [
         'name'        => 'Open IPMI Server',
         'description' => "
             <h2>What is an 'Open IPMI Server'?</h2>
@@ -2288,7 +2288,7 @@ return [
     ],
 
     'OPEN_AMQP' => [
-        'name'          => 'Accessible Advanced Message Queuing Protocol (AMQP) server',
+        'name'          => 'Open Advanced Message Queuing Protocol (AMQP) server',
         'description'   => '
             <h2>What is a AMQP server?</h2>
 
@@ -2303,4 +2303,88 @@ return [
             <p>Make sure that the AMQP server is up-to-date and that the AMQP server is not reachable over the internet if it doesnt need to.</p>
             ',
     ],
+
+    'OPEN_SSH_SERVER' => [
+        'name'          => 'Open SSH service',
+        'description'   => '
+            <p> This report identifies hosts that have the Secure Shell (SSH) service running and accessible on the Internet. </p>
+
+            <p> This does not indicate that anything is wrong with the system, but if the SSH running on a system (or the version that is running) seems out of place, you may wish to investigate. </p>
+            ',
+    ],
+
+    'OPEN_SMTP_SERVER' => [
+        'name'          => 'Open SMTP service',
+        'description'   => '
+            <p> This report contains a list of accessible SMTP servers. </p>
+
+            <p> This is just a population scan – there are no vulnerabilities being reported – but network owners should be aware of any unintentional SMTP server exposure and should verify all are patched to the latest software version. </p>
+            ',
+    ],
+
+    'OPEN_ICS' => [
+        'name'          => 'Open Industrial Control Service (ICS) application',
+        'description'   => '
+            <p> This report contains a list of devices that are responding to various specialized ICS/OT scans, along with additional make-and-model information and raw responses received. </p>
+
+            <p> It is extremely unlikely that these types of devices need to be accessible in any form to queries from the Internet, so unless you are running a honeypot if you receive such a report for your network/constituency, you are strongly advised to act immediately and firewall/filter access. </p>
+            ',
+    ],
+
+    'OPEN_POSTGRESQL_SERVER' => [
+        'name'          => 'Open PostgreSQL Server.',
+        'description'   => '
+            <p> This report identifies accessible PostgreSQL server instances on port 5432/TCP. </p>
+
+            <p> It is unlikely that you need to have your PostgreSQL server allowing for external connections from the Internet (and thus a possible external attack surface). If you do receive a report on your network/constituency take action to filter out traffic to your PostreSQL instance. Make sure to implement authentication on the server. </p>
+            ',
+    ],
+
+
+    'OPEN_STUN_SERVICE' => [
+        'name'          => 'Open STUN Service',
+        'description'   => '
+            <p> This report identifies accessible STUN (Session Traversal Utilities for NAT) servers on port 3478/udp. As described on Wikipedia, STUN is a standardized set of methods, including a network protocol, for traversal of network address translator (NAT) gateways in applications of real-time voice, video, messaging, and other interactive communications. The STUN service is known to be a potential UDP message amplifier, that can be abused for reflected DDoS attacks. </p>
+
+            <p> Consider using STUN over TCP instead by default. </p>
+',
+    ],
+
+    'OPEN_ERLANG_PORTMAPPER_DAEMON' => [
+        'name'          => 'Open Erlang Port Mapper Daemon server',
+        'description'   => '
+            <p> This report identifies accessible Erlang Port Mapper Daemon (EPMD) servers on port 4369/tcp. This daemon acts as a name server for hosts involved in distributed Erlang computations. </p>
+
+            <p> It is unlikely that you need to have an EPMD server allowing for external connections from the Internet (and thus a possible external attack surface). Make sure to firewall traffic to this service. If you do receive this report from us for your network or constituency make sure to firewall traffic to this service.</p>
+',
+    ],
+
+    'OPEN_SOCKS_PROXY' => [
+        'name'          => 'Open SOCKS Proxy service',
+        'description'   => '
+            <p> This report identifies hosts that have a SOCKS proxy version 4 or SOCKS proxy version 5 service running on port 1080/TCP and accessible from the Internet. The SOCKS protocol enables the exchange of packets between a client and server through a proxy server. These proxy servers can optionally support authentication.</p>
+
+            <p> Open proxy servers allowing proxying of services without authentication are often subject to abuse. Others, even with authentication, may also have security implications. </p>
+
+            <p> As with all remote access tools, care should be taken to make sure a SOCKS proxy service is configured in a secure manner and the security implications of making it accessible from anywhere on the Internet taken into account. </p>
+            ',
+    ],
+
+    'DEVICE_IDENTIFICATION' => [
+        'name'          => 'Device identification',
+        'description'   => '
+            <p> This is a device population report – no assessment is made on the vulnerability state of the device. The report is intended for recipients to get a better understanding of device population types on networks they are responsible for. Please note the assessment is based only on what was publicly accessible from the Internet.</p>
+            ',
+    ],
+
+    'ACCESSIBLE_XDMCP_SERVICE_REPORT' => [
+        'name'          => 'Open XDCMP Service',
+        'description'   => '
+            <p> This report identifies hosts that have the X Display Manager service running and accessible on the Internet. </p>
+
+            <p> XDMCP leaks information about the host system and, in addition, it can be used in an amplification attack, providing an approximate 7x amplification. Please note that it does not matter if XDMCP responds with a “Willing” or an “Unwilling”; the service provides the same level of amplification. </p>
+            ',
+    ],
+
+
 ];
