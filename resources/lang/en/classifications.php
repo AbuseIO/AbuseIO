@@ -763,7 +763,7 @@ return [
             ",
     ],
 
-    'OPEN_IPMI_SERVER' => [
+    'OPEN_IMPI_SERVER' => [
         'name'        => 'Open IPMI Server',
         'description' => "
             <h2>What is an 'Open IPMI Server'?</h2>
