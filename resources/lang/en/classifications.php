@@ -2340,7 +2340,6 @@ return [
             ',
     ],
 
-
     'OPEN_STUN_SERVICE' => [
         'name'          => 'Open STUN Service',
         'description'   => '
