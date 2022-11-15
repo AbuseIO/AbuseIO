@@ -37,6 +37,7 @@ class NoteFormRequest extends Request
             case 'POST':
                 return Note::createRules();
             case 'PUT':
+                break;
             case 'PATCH':
                 return Note::updateRules();
             default:
