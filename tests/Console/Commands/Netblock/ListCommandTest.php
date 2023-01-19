@@ -6,6 +6,7 @@ use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ListCommandTest.
@@ -19,7 +20,7 @@ class ListCommandTest extends TestCase
 
         $exitCode = Artisan::call('netblock:list', []);
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString($contact->name, Artisan::output());
     }
 
@@ -38,7 +39,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString($netblock_contact->name, Artisan::output());
         $this->assertStringNotContainsString($other_contact->name, Artisan::output());
     }

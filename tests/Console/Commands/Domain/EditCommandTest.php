@@ -2,8 +2,10 @@
 
 namespace tests\Console\Commands\Domain;
 
+use AbuseIO\Models\Domain;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class EditCommandTest.
@@ -26,7 +28,7 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find domain with this criteria', Artisan::output());
     }
 
@@ -39,12 +41,16 @@ class EditCommandTest extends TestCase
                 '--contact_id' => '1000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find contact with this criteria', Artisan::output());
     }
 
     public function testEnabled()
     {
+        $domain = Domain::find(1);
+        if (!$domain->enabled) {
+            $this->enableDomain($domain);
+        }
         $exitCode = Artisan::call(
             'domain:edit',
             [
@@ -52,11 +58,15 @@ class EditCommandTest extends TestCase
                 '--enabled' => 'false',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The domain has been updated', Artisan::output());
-        /*
-         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-         */
-        $this->seed('DomainsTableSeeder');
+        $domain = Domain::find(1);
+        $this->assertEquals(false, $domain->enabled);
+        $this->enableDomain($domain);
+    }
+
+    private function enableDomain($domain)
+    {
+        $domain->update(['enabled' => true]);
     }
 }

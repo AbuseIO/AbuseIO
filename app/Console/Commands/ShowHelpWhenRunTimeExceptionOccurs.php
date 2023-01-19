@@ -14,7 +14,7 @@ trait ShowHelpWhenRunTimeExceptionOccurs
      *
      * @return int
      */
-    public function run(InputInterface $input, OutputInterface $output)
+    public function run(InputInterface $input, OutputInterface $output) : int
     {
         try {
             return parent::run($input, $output);
@@ -29,7 +29,7 @@ trait ShowHelpWhenRunTimeExceptionOccurs
 
             echo Artisan::output();
 
-            return false;
+            return self::FAILURE;
         }
     }
 }

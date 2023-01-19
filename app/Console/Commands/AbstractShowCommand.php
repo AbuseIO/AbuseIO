@@ -37,7 +37,7 @@ abstract class AbstractShowCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
     final public function handle()
     {
@@ -58,13 +58,10 @@ abstract class AbstractShowCommand extends Command
             );
         }
 
-        return true;
+        return self::SUCCESS;
     }
 
-    /**
-     * @return string
-     */
-    final public function getName()
+    final public function getName() : ?string
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
     }
@@ -83,10 +80,7 @@ abstract class AbstractShowCommand extends Command
         return 'show';
     }
 
-    /**
-     * @return string
-     */
-    final public function getDescription()
+    final public function getDescription() : string
     {
         if (!empty($this->commandDescription)) {
             return $this->commandDescription;

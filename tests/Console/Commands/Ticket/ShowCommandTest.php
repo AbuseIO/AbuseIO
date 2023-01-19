@@ -6,6 +6,7 @@ use AbuseIO\Models\Ticket;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ShowCommandTest.
@@ -35,7 +36,7 @@ class ShowCommandTest extends TestCase
                 'ticket' => $this->ticketList->get(1)->id,
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         $fields = [
             'Id',
@@ -76,7 +77,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No matching ticket was found.', Artisan::output());
     }
 }

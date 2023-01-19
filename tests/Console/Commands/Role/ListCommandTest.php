@@ -4,6 +4,7 @@ namespace tests\Console\Commands\Role;
 
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ListCommandTest.
@@ -19,7 +20,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('System Administrator', Artisan::output());
     }
 
@@ -32,7 +33,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
 
         $output = Artisan::output();
         $this->assertStringContainsString('Abuse', $output);

@@ -74,12 +74,9 @@ class DestroyTest extends TestCase
         return $response;
     }
 
-    /**
-     * @return void
-     */
     public function testResponseInvalidRequest()
     {
-        $result = $this->initWithInvalidResponse()->decodeResponseJson();
+        $result = $this->initWithInvalidResponse()->decodeResponseJson()->json();
 
         $this->assertTrue(
             array_key_exists('message', $result)

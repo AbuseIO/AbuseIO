@@ -4,6 +4,7 @@ namespace tests\Console\Commands\Netblock;
 
 use AbuseIO\Models\Netblock;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Command\Command;
 use tests\TestCase;
 
 /**
@@ -27,7 +28,7 @@ class CreateCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('created', Artisan::output());
 
         Netblock::where([
@@ -45,7 +46,7 @@ class CreateCommandTest extends TestCase
     {
         ob_start();
         $exitCode = Artisan::call('netblock:create');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::FAILURE, $exitCode);
         $this->assertStringContainsString('Creates a new netblock', ob_get_clean());
     }
 
@@ -58,7 +59,7 @@ class CreateCommandTest extends TestCase
                 'contact' => '1',
             ]
         );
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::FAILURE, $exitCode);
         $this->assertStringContainsString('Creates a new netblock', ob_get_clean());
     }
 }

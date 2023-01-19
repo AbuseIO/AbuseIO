@@ -4,6 +4,7 @@ namespace tests\Console\Commands\Account;
 
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class DeleteCommandTest.
@@ -18,7 +19,7 @@ class DeleteCommandTest extends TestCase
     //            "--id" => "2"
     //        ]);
     //
-    //        $this->assertEquals($exitCode, 0);
+    //        $this->assertEquals(Command::SUCCESS, $exitCode);
     //        $this->assertStringContainsString("The account has been deleted from the system", Artisan::output());
     //        /**
     //         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
@@ -35,7 +36,7 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find account', Artisan::output());
     }
 }

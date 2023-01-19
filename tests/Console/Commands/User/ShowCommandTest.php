@@ -6,6 +6,7 @@ use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ShowCommandTest.
@@ -28,7 +29,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No matching user was found.', Artisan::output());
     }
 
@@ -43,7 +44,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString($this->user->first_name, Artisan::output());
     }
 }

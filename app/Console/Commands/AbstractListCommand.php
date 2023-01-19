@@ -51,10 +51,7 @@ abstract class AbstractListCommand extends Command
         return implode(' or ', $this->filterArguments);
     }
 
-    /**
-     * @return string
-     */
-    final public function getDescription()
+    final public function getDescription() : string
     {
         if (!empty($this->commandDescription)) {
             return $this->commandDescription;
@@ -63,10 +60,7 @@ abstract class AbstractListCommand extends Command
         return sprintf('Shows a list of available %ss', $this->getAsNoun());
     }
 
-    /**
-     * @return string
-     */
-    final public function getName()
+    final public function getName() : ?string
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
     }
@@ -96,7 +90,7 @@ abstract class AbstractListCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
     final public function handle()
     {
@@ -123,7 +117,7 @@ abstract class AbstractListCommand extends Command
             );
         }
 
-        return true;
+        return self::SUCCESS;
     }
 
     /**

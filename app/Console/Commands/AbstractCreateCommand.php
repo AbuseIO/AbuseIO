@@ -22,7 +22,7 @@ abstract class AbstractCreateCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
     final public function handle()
     {
@@ -39,7 +39,7 @@ abstract class AbstractCreateCommand extends Command
                 sprintf('Failed to create the %s due to validation warnings', $this->getAsNoun())
             );
 
-            return false;
+            return self::INVALID;
         }
 
         if (!$model->save()) {
@@ -47,7 +47,7 @@ abstract class AbstractCreateCommand extends Command
                 sprintf('Failed to save the %s into the database', $this->getAsNoun())
             );
 
-            return false;
+            return self::FAILURE;
         }
         $msg = sprintf('The %s has been created', $this->getAsNoun());
         if (array_key_exists('id', $model->getAttributes())) {
@@ -55,7 +55,7 @@ abstract class AbstractCreateCommand extends Command
         }
         $this->info($msg);
 
-        return true;
+        return self::SUCCESS;
     }
 
     /**
@@ -88,10 +88,7 @@ abstract class AbstractCreateCommand extends Command
             );
     }
 
-    /**
-     * @return string
-     */
-    final public function getName()
+    final public function getName() : ?string
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
     }
@@ -110,10 +107,7 @@ abstract class AbstractCreateCommand extends Command
         return 'create';
     }
 
-    /**
-     * @return string
-     */
-    final public function getDescription()
+    final public function getDescription() : string
     {
         if (!empty($this->commandDescription)) {
             return $this->commandDescription;

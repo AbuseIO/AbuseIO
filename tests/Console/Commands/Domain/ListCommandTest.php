@@ -5,6 +5,7 @@ namespace tests\Console\Commands\Domain;
 use AbuseIO\Models\Domain;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ListCommandTest.
@@ -15,7 +16,7 @@ class ListCommandTest extends TestCase
     {
         $exitCode = Artisan::call('domain:list', []);
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
 
         $headers = ['Id', 'Contact', 'Name', 'Enabled'];
         $output = Artisan::output();
@@ -31,22 +32,26 @@ class ListCommandTest extends TestCase
 
         $exitCode = Artisan::call('domain:list', []);
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString($contact->name, Artisan::output());
     }
 
     public function testFilter()
     {
+        $domains = Domain::all()->pluck('name')->toArray();
+        $filterDomain = array_pop($domains);
+        $anotherDomain = array_pop($domains);
+
         $exitCode = Artisan::call(
             'domain:list',
             [
-                '--filter' => 'customer1.tld',
+                '--filter' => $filterDomain,
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('customer1.tld', Artisan::output());
-        $this->assertStringNotContainsString('johndoe.tld', Artisan::output());
+        $output = Artisan::output();
+        $this->assertEquals(Command::SUCCESS, $exitCode);
+        $this->assertStringContainsString($filterDomain, $output);
+        $this->assertStringNotContainsString($anotherDomain, $output);
     }
 
     public function testNotFoundFilter()
@@ -58,7 +63,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No domain found for given filter.', Artisan::output());
     }
 }

@@ -5,6 +5,7 @@ namespace tests\Console\Commands\Contact;
 use AbuseIO\Models\Contact;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class EditCommandTest.
@@ -27,7 +28,7 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find contact with this criteria', Artisan::output());
     }
 
@@ -43,7 +44,7 @@ class EditCommandTest extends TestCase
                 '--name' => 'New name',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The contact has been updated', Artisan::output());
 
         // update contact
@@ -65,7 +66,7 @@ class EditCommandTest extends TestCase
                 '--reference' => 'New reference',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The contact has been updated', Artisan::output());
 
         // update contact

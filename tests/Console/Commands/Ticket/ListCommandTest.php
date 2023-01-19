@@ -6,6 +6,7 @@ use AbuseIO\Models\Ticket;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ListCommandTest.
@@ -35,7 +36,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
 
         $headers = ['Id', 'Ip', 'Domain', 'Class id', 'Type id'];
         $output = Artisan::output();
@@ -55,7 +56,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         $this->assertStringContainsString($this->ticketList->get(0)->domain, $output);
         $this->assertStringContainsString($this->ticketList->get(0)->ip, $output);
@@ -72,7 +73,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         $this->assertStringContainsString($this->ticketList->get(0)->ip, $output);
         $this->assertStringNotContainsString($this->ticketList->get(1)->domain, $output);
@@ -89,7 +90,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No ticket found for given filter.', Artisan::output());
     }
 
@@ -104,7 +105,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
 
         json_decode(Artisan::output());
         $this->assertEquals(json_last_error(), JSON_ERROR_NONE);

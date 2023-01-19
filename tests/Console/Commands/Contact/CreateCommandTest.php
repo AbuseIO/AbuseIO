@@ -6,6 +6,7 @@ use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
 use Faker\Factory;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Command\Command;
 use tests\TestCase;
 
 /**
@@ -78,7 +79,7 @@ class CreateCommandTest extends TestCase
     {
         $faker = Factory::create();
 
-        Artisan::call('contact:create', [
+        $exitCode = Artisan::call('contact:create', [
             'name'       => $faker->name,
             'reference'  => $faker->domainWord,
             'account_id' => '10000',
@@ -87,6 +88,7 @@ class CreateCommandTest extends TestCase
             'api_host'   => $faker->url,
         ]);
 
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString(
             'The selected account id is invalid.',
             Artisan::output()

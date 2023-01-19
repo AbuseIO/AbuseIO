@@ -6,6 +6,7 @@ use AbuseIO\Models\Note;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class EditCommandTest.
@@ -45,7 +46,7 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find note with this criteria', Artisan::output());
     }
 
@@ -62,7 +63,7 @@ class EditCommandTest extends TestCase
                 '--hidden' => 'true',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The note has been updated', Artisan::output());
 
         $this->assertTrue((bool) Note::find($this->noteHidden->id)->hidden);
@@ -81,7 +82,7 @@ class EditCommandTest extends TestCase
                 '--viewed' => 'true',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The note has been updated', Artisan::output());
         /*
          * I use the seeder to re-initialize the table because Artisan:call is another instance of DB

@@ -5,6 +5,7 @@ namespace tests\Console\Commands\Role;
 use AbuseIO\Models\Role;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Command\Command;
 use tests\TestCase;
 
 /**
@@ -27,7 +28,7 @@ class CreateCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('created', Artisan::output());
 
         Role::where([
@@ -40,7 +41,7 @@ class CreateCommandTest extends TestCase
     {
         ob_start();
         $exitCode = Artisan::call('role:create');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::FAILURE, $exitCode);
         $this->assertStringContainsString('Creates a new role', ob_get_clean());
     }
 }

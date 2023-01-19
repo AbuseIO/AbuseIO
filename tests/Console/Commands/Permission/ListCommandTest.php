@@ -6,6 +6,7 @@ use AbuseIO\Models\Permission;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ListCommandTest.
@@ -27,7 +28,7 @@ class ListCommandTest extends TestCase
 
         $exitCode = Artisan::call('permission:list', []);
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
 
         $headers = ['Id', 'Name', 'Description'];
         $output = Artisan::output();
@@ -42,7 +43,7 @@ class ListCommandTest extends TestCase
 
         $exitCode = Artisan::call('permission:list', []);
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         $this->assertStringContainsString($this->list->get(0)->name, $output);
         $this->assertStringContainsString($this->list->get(1)->name, $output);
@@ -58,7 +59,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
 
         $this->assertStringContainsString((string) $this->list->get(0)->id, $output);
@@ -75,7 +76,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No permission found for given filter.', Artisan::output());
     }
 }

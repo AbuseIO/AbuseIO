@@ -3,6 +3,7 @@
 namespace tests\Console\Commands\Permission;
 
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Command\Command;
 use tests\TestCase;
 
 /**
@@ -14,7 +15,7 @@ class RevokeCommandTest extends TestCase
     {
         ob_start();
         $exitCode = Artisan::call('permission:revoke');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::FAILURE, $exitCode);
         $this->assertStringContainsString('Revokes a permission from a role', ob_get_clean());
     }
 }

@@ -2,8 +2,10 @@
 
 namespace tests\Console\Commands\Netblock;
 
+use AbuseIO\Models\Netblock;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class DeleteCommandTest.
@@ -19,12 +21,10 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('netblock has been deleted', Artisan::output());
-        /*
-         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-         */
-        $this->seed('NetblocksTableSeeder');
+
+        Netblock::withTrashed()->find(1)->restore();
     }
 
     public function testInvalidId()
@@ -36,7 +36,7 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find netblock', Artisan::output());
     }
 }

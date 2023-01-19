@@ -6,6 +6,7 @@ use AbuseIO\Models\Note;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ListCommandTest.
@@ -32,7 +33,7 @@ class ListCommandTest extends TestCase
         $this->initDB();
         $exitCode = Artisan::call('note:list', []);
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
 
         $headers = ['Id', 'Ticket id', 'Submitter', 'text', 'Hidden', 'Viewed'];
         $output = Artisan::output();
@@ -46,7 +47,7 @@ class ListCommandTest extends TestCase
         $this->initDB();
         $exitCode = Artisan::call('note:list', []);
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         $this->assertStringContainsString($this->noteList->get(0)->submitter, $output);
         $this->assertStringContainsString($this->noteList->get(1)->submitter, $output);
@@ -62,7 +63,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         $this->assertStringContainsString($this->noteList->get(0)->submitter, $output);
         $this->assertStringNotContainsString($this->noteList->get(1)->submitter, $output);
@@ -78,7 +79,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No note found for given filter.', Artisan::output());
     }
 }

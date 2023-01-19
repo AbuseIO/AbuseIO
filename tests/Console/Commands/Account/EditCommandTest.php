@@ -5,6 +5,7 @@ namespace tests\Console\Commands\Account;
 use AbuseIO\Models\Account;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Command\Command;
 use tests\TestCase;
 
 /**
@@ -38,7 +39,7 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find account with this criteria', Artisan::output());
     }
 
@@ -51,7 +52,7 @@ class EditCommandTest extends TestCase
                 '--brand_id' => '1000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find brand with this criteria', Artisan::output());
     }
 
@@ -66,7 +67,7 @@ class EditCommandTest extends TestCase
                 '--name' => 'somebogusstring',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The account has been updated', Artisan::output());
 
         $account = Account::find(1);
@@ -87,7 +88,7 @@ class EditCommandTest extends TestCase
                 '--disabled' => 'true',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The account has been updated', Artisan::output());
 
         $account = Account::find(1);
@@ -108,7 +109,7 @@ class EditCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The account has been updated', Artisan::output());
         $this->assertTrue((bool) Account::find($this->account->id)->systemaccount);
     }

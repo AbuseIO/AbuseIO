@@ -5,6 +5,7 @@ namespace tests\Console\Commands\Account;
 use AbuseIO\Models\Account;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ShowCommandTest.
@@ -19,7 +20,7 @@ class ShowCommandTest extends TestCase
                 'account' => '1',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         foreach (['Name', 'Default', 'Brand', 'Id', 'Description'] as $el) {
             $this->assertStringContainsString($el, $output);
@@ -36,7 +37,7 @@ class ShowCommandTest extends TestCase
                 'account' => $account->name,
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString($account->name, Artisan::output());
     }
 
@@ -49,7 +50,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No matching account was found.', Artisan::output());
     }
 }

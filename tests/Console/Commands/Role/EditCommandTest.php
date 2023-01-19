@@ -6,6 +6,7 @@ use AbuseIO\Models\Role;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class EditCommandTest.
@@ -17,7 +18,8 @@ class EditCommandTest extends TestCase
     public function testWithoutId()
     {
         ob_start();
-        Artisan::call('role:edit');
+        $exitCode = Artisan::call('role:edit');
+        $this->assertEquals(Command::FAILURE, $exitCode);
         $this->assertStringContainsString('Edit a role', ob_get_clean());
     }
 
@@ -29,7 +31,7 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find role with this criteria', Artisan::output());
     }
 
@@ -44,7 +46,7 @@ class EditCommandTest extends TestCase
                 '--name' => 'some bogus value',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The role has been updated', Artisan::output());
 
         $this->assertEquals(

@@ -5,6 +5,7 @@ namespace tests\Console\Commands\Brand;
 use AbuseIO\Models\Brand;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class EditCommandTest.
@@ -27,7 +28,7 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find brand with this criteria', Artisan::output());
     }
 
@@ -42,7 +43,7 @@ class EditCommandTest extends TestCase
                 '--name' => 'New name',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The brand has been updated', Artisan::output());
 
         $brand = Brand::find(1);
@@ -62,7 +63,7 @@ class EditCommandTest extends TestCase
                 '--company_name' => 'New name 1',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('The brand has been updated', Artisan::output());
 
         $brand = Brand::find(1);

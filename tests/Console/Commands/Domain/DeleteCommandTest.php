@@ -2,8 +2,13 @@
 
 namespace tests\Console\Commands\Domain;
 
+use AbuseIO\Models\Domain;
+use DateTime;
+use DomainsTableSeeder;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class DeleteCommandTest.
@@ -19,12 +24,10 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('domain has been deleted', Artisan::output());
-        /*
-         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-         */
-        $this->seed('DomainsTableSeeder');
+
+        Domain::withTrashed()->find(1)->restore();
     }
 
     public function testInvalidId()
@@ -36,7 +39,7 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find domain', Artisan::output());
     }
 }

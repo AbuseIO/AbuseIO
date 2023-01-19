@@ -6,6 +6,7 @@ use AbuseIO\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class EditCommandTest.
@@ -36,7 +37,7 @@ class EditCommandTest extends TestCase
                 'user' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::INVALID, $exitCode);
         $this->assertStringContainsString('Unable to find user with this criteria', Artisan::output());
     }
 
@@ -50,7 +51,7 @@ class EditCommandTest extends TestCase
                 '--first_name' => 'jip',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
 
         $output = Artisan::output();
         $this->assertStringContainsString(
@@ -70,7 +71,7 @@ class EditCommandTest extends TestCase
                 '--password'   => 'fbjldkjldj',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
 
         $output = Artisan::output();
         $this->assertStringContainsString(
@@ -89,7 +90,7 @@ class EditCommandTest extends TestCase
                 '--autopassword' => 'some dummy value', // I don't know how to test a InputOption::VALUE_NONE but this works
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
 
         $output = Artisan::output();
         $this->assertStringContainsString(

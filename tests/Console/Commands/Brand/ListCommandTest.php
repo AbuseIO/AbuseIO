@@ -6,6 +6,7 @@ use AbuseIO\Models\Brand;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ListCommandTest.
@@ -39,7 +40,7 @@ class ListCommandTest extends TestCase
         $this->initDB();
         $exitCode = Artisan::call('brand:list', []);
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
 
         $headers = ['Id', 'Name', 'Company name'];
         $output = Artisan::output();
@@ -54,7 +55,7 @@ class ListCommandTest extends TestCase
 
         $exitCode = Artisan::call('brand:list', []);
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         $this->assertStringContainsString($this->name1, $output);
     }
@@ -69,7 +70,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         $this->assertStringContainsString($this->name2, $output);
         $this->assertStringNotContainsString($this->name1, $output);
@@ -86,7 +87,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No brand found for given filter.', Artisan::output());
     }
 }

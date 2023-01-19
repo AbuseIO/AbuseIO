@@ -1,11 +1,12 @@
 <?php
 
-namespace AbuseIO\Console\Commands\Domain;
+namespace tests\Console\Commands\Domain;
 
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
 use Faker\Factory;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Command\Command;
 use tests\TestCase;
 
 /**
@@ -17,7 +18,7 @@ class CreateCommandTest extends TestCase
     {
         ob_start();
         $exitCode = Artisan::call('domain:create');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::FAILURE, $exitCode);
         $this->assertStringContainsString('Creates a new domain', ob_get_clean());
     }
 
@@ -27,11 +28,12 @@ class CreateCommandTest extends TestCase
 
         $domainName = $faker->domainName;
 
-        Artisan::call('domain:create', [
+        $exitCode = Artisan::call('domain:create', [
             'name'       => $domainName,
             'contact_id' => Contact::all()->first()->id,
         ]);
 
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString(
             'The domain has been created',
             Artisan::output()

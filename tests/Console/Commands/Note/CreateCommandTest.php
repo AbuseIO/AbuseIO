@@ -4,6 +4,7 @@ namespace tests\Console\Commands\Note;
 
 use AbuseIO\Models\Note;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Command\Command;
 use tests\TestCase;
 
 /**
@@ -27,7 +28,7 @@ class CreateCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('created', Artisan::output());
 
         Note::where([
@@ -43,7 +44,7 @@ class CreateCommandTest extends TestCase
     {
         ob_start();
         $exitCode = Artisan::call('note:create');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::FAILURE, $exitCode);
         $this->assertStringContainsString('Creates a new note', ob_get_clean());
     }
 }

@@ -4,6 +4,7 @@ namespace tests\Console\Commands\Brand;
 
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ShowCommandTest.
@@ -18,7 +19,7 @@ class ShowCommandTest extends TestCase
                 'brand' => '1',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         foreach (['Name', 'Company name', 'Introduction text', 'Id'] as $el) {
             $this->assertStringContainsString($el, $output);
@@ -33,7 +34,7 @@ class ShowCommandTest extends TestCase
                 'brand' => 'AbuseIO',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('AbuseIO', Artisan::output());
     }
 
@@ -46,7 +47,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No matching brand was found.', Artisan::output());
     }
 }

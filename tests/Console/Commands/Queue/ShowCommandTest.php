@@ -6,6 +6,7 @@ namespace tests\Console\Commands\Queue;
 //use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ShowCommandTest.
@@ -36,7 +37,7 @@ class ShowCommandTest extends TestCase
     //                'queue' => 'abuseio_collector'
     //            ]
     //        );
-    //        $this->assertEquals($exitCode, 0);
+    //        $this->assertEquals(Command::SUCCESS, $exitCode);
     //        $output = Artisan::output();
     //
     //        foreach (['Id', 'Queue', 'Attempts',] as $el) {
@@ -53,7 +54,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No matching queue was found.', Artisan::output());
     }
 
@@ -61,7 +62,7 @@ class ShowCommandTest extends TestCase
     {
         ob_start();
         $exitCode = Artisan::call('queue:show');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::FAILURE, $exitCode);
         $this->assertStringContainsString('Shows a queue', ob_get_clean());
     }
 }

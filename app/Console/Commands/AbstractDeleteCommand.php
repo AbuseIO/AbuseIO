@@ -36,7 +36,7 @@ abstract class AbstractDeleteCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
     final public function handle()
     {
@@ -48,11 +48,11 @@ abstract class AbstractDeleteCommand extends Command
                 sprintf('Unable to find %s with this criteria', $this->getAsNoun())
             );
 
-            return false;
+            return self::INVALID;
         }
 
         if ($this->stopDeleteAndThrowAnErrorBecauseRelations($object)) {
-            return false;
+            return self::FAILURE;
         }
 
         if (!$object->delete()) {
@@ -60,20 +60,17 @@ abstract class AbstractDeleteCommand extends Command
                 sprintf('Unable to delete %s from the system', $this->getAsNoun())
             );
 
-            return false;
+            return self::FAILURE;
         }
 
         $this->info(
             sprintf('The %s has been deleted from the system', $this->getAsNoun())
         );
 
-        return true;
+        return self::SUCCESS;
     }
 
-    /**
-     * @return string
-     */
-    final public function getName()
+    final public function getName() : ?string
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
     }
@@ -92,10 +89,7 @@ abstract class AbstractDeleteCommand extends Command
         return 'delete';
     }
 
-    /**
-     * @return string
-     */
-    final public function getDescription()
+    final public function getDescription() : string
     {
         if (!empty($this->commandDescription)) {
             return $this->commandDescription;

@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Command\Command as CommandAlias;
 
 /**
  * Class AbstractEditCommand.
@@ -24,7 +25,7 @@ abstract class AbstractEditCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
     final public function handle()
     {
@@ -34,11 +35,11 @@ abstract class AbstractEditCommand extends Command
                 sprintf('Unable to find %s with this criteria', $this->getAsNoun())
             );
 
-            return false;
+            return self::INVALID;
         }
 
         if (!$this->handleOptions($model)) {
-            return false;
+            return self::INVALID;
         }
         $validation = $this->getValidator($model);
 
@@ -52,7 +53,7 @@ abstract class AbstractEditCommand extends Command
                 sprintf('Failed to edit the %s due to validation warnings', $this->getAsNoun())
             );
 
-            return false;
+            return self::INVALID;
         }
 
         if (!$model->update()) {
@@ -60,13 +61,13 @@ abstract class AbstractEditCommand extends Command
                 sprintf('Failed to save the %s into the database', $this->getAsNoun())
             );
 
-            return false;
+            return self::FAILURE;
         }
         $this->info(
             sprintf('The %s has been updated', $this->getAsNoun())
         );
 
-        return true;
+        return self::SUCCESS;
     }
 
     abstract protected function getModelFromRequest();
@@ -103,10 +104,7 @@ abstract class AbstractEditCommand extends Command
             );
     }
 
-    /**
-     * @return string
-     */
-    final public function getName()
+    final public function getName(): ?string
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
     }
@@ -125,10 +123,7 @@ abstract class AbstractEditCommand extends Command
         return 'edit';
     }
 
-    /**
-     * @return string
-     */
-    final public function getDescription()
+    final public function getDescription() : string
     {
         if (!empty($this->commandDescription)) {
             return $this->commandDescription;

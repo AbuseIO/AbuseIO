@@ -6,6 +6,7 @@ use AbuseIO\Models\Permission;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ShowCommandTest.
@@ -36,7 +37,7 @@ class ShowCommandTest extends TestCase
                 'permission' => $this->list->get(0)->id,
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         foreach (['Id',  'Name', 'Description'] as $el) {
             $this->assertStringContainsString($el, $output);
@@ -52,7 +53,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No matching permission was found.', Artisan::output());
     }
 
@@ -60,7 +61,7 @@ class ShowCommandTest extends TestCase
     {
         ob_start();
         $exitCode = Artisan::call('permission:show');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(Command::FAILURE, $exitCode);
         $this->assertStringContainsString('Shows a permission', ob_get_clean());
     }
 }

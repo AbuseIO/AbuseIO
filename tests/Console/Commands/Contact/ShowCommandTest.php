@@ -5,6 +5,7 @@ namespace tests\Console\Commands\Contact;
 use AbuseIO\Models\Contact;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Class ShowCommandTest.
@@ -19,7 +20,7 @@ class ShowCommandTest extends TestCase
                 'contact' => '1',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $output = Artisan::output();
         foreach (['Reference', 'Name', 'Email', 'Api host', 'Notification methods', 'Enabled'] as $el) {
             $this->assertStringContainsString($el, $output);
@@ -36,7 +37,7 @@ class ShowCommandTest extends TestCase
                 'contact' => $contact->name,
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString($contact->name, Artisan::output());
     }
 
@@ -49,7 +50,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(Command::SUCCESS, $exitCode);
         $this->assertStringContainsString('No matching contact was found.', Artisan::output());
     }
 }
