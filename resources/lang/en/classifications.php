@@ -2385,4 +2385,21 @@ return [
             ',
     ],
 
+    'VULNERABLE_EXCHANGE_SERVER' => [
+        'name'          => 'Vulnerable Microsoft Exchange server',
+        'description'   => '
+            <h2>What is a "Vulnerable SMTP server"></h2>
+            
+            <p>It was discovered that the host is running a vulnerable version of Microsoft Exchange.</p>
+
+            <h2>Why would this be bad?</h2>
+        
+            <p>Hackers might exploit the vulnerable Microsoft Exchange server, resulting in potentially getting the server compromised.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Update Microsoft Exchange to the latest version.</p>
+            ',
+    ],
+
 ];
