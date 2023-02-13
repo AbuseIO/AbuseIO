@@ -2158,7 +2158,7 @@ return [
             This classification has no information text yet.
             ',
     ],
-'AMPLICATION_DDOS_VICTIM' => [
+    'AMPLICATION_DDOS_VICTIM' => [
         'name'        => 'DDOS amplification victim',
         'description' => "
         
