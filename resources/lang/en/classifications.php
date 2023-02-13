@@ -2158,11 +2158,35 @@ return [
             This classification has no information text yet.
             ',
     ],
-    'AMPLICATION_DDOS_VICTIM' => [
+'AMPLICATION_DDOS_VICTIM' => [
         'name'        => 'DDOS amplification victim',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => "
+        
+            <h2>Honeypot Amplification DDoS Events Report</h2>
+            
+            <p>This report contains information about honeypot observed amplification DDoS events. If you are seeing this report, it 
+            means that your IP was DDoSed using other hosts/services as reflectors.</p>
+            
+            <p>This category of DDoS attacks utilizes UDP-based, open, amplifiable services to reflect packets to a victim, by 
+            spoofing the source IP address of the packets sent by the amplifier to the victim’s IP address.</p>
+            
+            <p>Depending on the protocol and type of open services abused, the size of the original packet content sent by the attacker 
+            can be amplified in the service response multiple times (even by a factor of hundreds), flooding the victim with packets 
+            and enabling DDoS.</p>
+            
+            <p>Honeypots that emulate open and amplifiable services can be used to detect this kind of abuse. However, as the source 
+            of these attacks is spoofed to the victim address, it is possible only to report on victims being abused, not on the true 
+            source of the DDoS.</p>
+            
+            <p>You can read more about our DDoS attack observations <a href='https://sissden.eu/blog/amp2018'>in the SISSDEN blog 
+            entry on observations on DDoS attacks in 2018</a>. For more insight into how amplifiable DDoS attacks work, check out this 
+            <a href='https://christian-rossow.de/articles/Amplification_DDoS.php'>writeup and paper by Christian Rossow</a>,&nbsp;as 
+            well as the <a href='https://www.us-cert.gov/ncas/alerts/TA14-017A'>US-CERT Alert (TA14-017A)</a>.</p>
+            
+            <p>This report contains information about the IP that was attacked (set to src_ip) and the port that was abused on the 
+            honeypot to try to make it attack your IP (set to dst_port).</p>
+    
+            ",
     ],
     'ACCESSIBLE_ADB_REPORT' => [
         'name'        => 'Accesiable Android Debug Bridge',
