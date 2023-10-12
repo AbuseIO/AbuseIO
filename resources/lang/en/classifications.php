@@ -2426,4 +2426,10 @@ return [
             ',
     ],
 
+    'ACCESSIBLE_MSMQ_SERVICE' => [
+        'name'         => 'Accesible Microsoft Message Queuing service',
+        'description'  => '
+            <p> This report identifies accessible Microsoft Message Queuing (MSMQ) servers on port 1801/TCP. This service may be optionally enabled on Windows operating systems, including Windows Server 2022 and Windows 11. </p>',
+    ],
+        
 ];
