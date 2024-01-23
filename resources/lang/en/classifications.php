@@ -2431,5 +2431,17 @@ return [
         'description'  => '
             <p> This report identifies accessible Microsoft Message Queuing (MSMQ) servers on port 1801/TCP. This service may be optionally enabled on Windows operating systems, including Windows Server 2022 and Windows 11. </p>',
     ],
-        
+
+    'ACCESSIBLE_SLP_SERVICE' => [
+        'name'         => 'Accessible Service Location Protocol (SLP) Service',
+        'description'  => '
+            <p> This report identifies accessible SLP (Service Location Protocol) services on port 427/TCP and 427/UDP. The Service Location Protocol (SLP, srvloc) is a service discovery protocol that allows computers and other devices to find services in a local area network without prior configuration </p>',
+    ],
+
+    'ACCESSIBLE_BGP_SERVICE' => [
+        'name'         => 'Accessible Border Gateway Protocol (BGP) Service',
+        'description'  => '
+            <p> This report identifies accessible Border Gateway Protocol (BGP) servers on port 179/TCP. </p>',
+    ],
+
 ];
