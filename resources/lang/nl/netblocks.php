@@ -7,7 +7,7 @@ return [
     // Headers
     'header.new'    => 'Nieuw Netwerkblok',
     'header.edit'   => 'Bewerk Netwerkblok',
-    'header.detail' => 'Netwerkblok details voor',
+    'header.detail' => 'Netwerkblokdetails voor',
 
     // Buttons
     'button.new_netblock' => 'Nieuw Netwerk blok',
