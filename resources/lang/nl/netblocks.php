@@ -10,7 +10,7 @@ return [
     'header.detail' => 'Netwerkblokdetails voor',
 
     // Buttons
-    'button.new_netblock' => 'Nieuw Netwerk blok',
+    'button.new_netblock' => 'Nieuw Netwerkblok',
 
     // Messages
     'msg.added'   => 'Netwerkblok is aangemaakt.',
