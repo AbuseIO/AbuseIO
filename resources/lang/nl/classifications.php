@@ -15,12 +15,12 @@ return [
      */
     'DEFAULT' => [
         'name'        => 'Generiek bericht',
-        'description' => 'Deze klassificatie heeft nog informatie.',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'BOTNET_CONTROLLER' => [
-        'name'        => 'Botnet server',
-        'description' => 'Deze klassificatie heeft nog informatie.',
+        'name'        => 'Botnetserver',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'BOTNET_INFECTION' => [
@@ -101,8 +101,8 @@ return [
     ],
 
     'COMPROMISED_SERVER' => [
-        'name'        => 'Gecompromitteerde server',
-        'description' => 'Deze klassificatie heeft nog informatie.',
+        'name'        => 'Gehackte server',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'COMPROMISED_WEBSITE' => [
@@ -199,23 +199,23 @@ return [
     ],
 
     'DISTRIBUTION_WEBSITE' => [
-        'name'        => 'Distributie website',
+        'name'        => 'Distributiewebsite',
         'description' => "
-            <h2>What is a 'Distribution Website'?</h2>
+            <h2>Wat is een 'Distributiewebsite'?</h2>
 
-            <p>A distribution website, is a site that is hosting malware for download.
-            These are often download links embedded into malicious doc's or executable's code for example.
-            Compromised websites are also highly used here. </p>
+            <p>Een distributiewebsie is een site die malware ter download aanbiedt. 
+            Zie bijvoorbeeld downloadlinks verankerd in malafide documenten of executables. 
+            Gehackte domeinen worden hier regelmatig voor gebruikt. </p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
-            <p>If you are hosting malware on your server. Stop and remove this, this is illegal. This can lead to your site being
-            flagged as suspicious by search engines causing accessibility issues for visitors. If a hacker is hosting
-            malware on your site, then it's also likely compromised.</p>
+            <p>Als je malware op je server hebt staan, stop hier onmiddelijk mee en verwijder het. Dit is namelijk illegaal. 
+            Het kan ertoe leiden dat zoekmachine's jouw site als verdacht gaan aanmerken, waardoor deze minder toegangkelijk voor je bezoekers wordt.
+            Als een hacker malware op jouw site heeft gezet, dan is deze zeer waarschijnlijk gehackt.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevelingen:</h2>
 
-            <p>Remove any maliciously hosted files, check for signs of compromise. Clean up any infected files.</p>
+            <p>Verwijder alle kwaadwillig gehoste bestanden, check of jouw site gehackt is en ruim malafide bestanden op.</p>
 
             <h2>Tips how to resolve this matter</h2>
             <ul>
@@ -224,7 +224,7 @@ return [
             <li>Once the issue(s) have been resolved, begin to request re-evaluations of your site from search engines.</li>
             </ul>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='https://support.google.com/webmasters/topic/4598410?hl=en&ref_topic=4596795'>Google Webmaster tools for infected sites</a><br>
             <a target'_blank' href='http://www.bing.com/webmaster/help/malware-re-evaluation-e6982183'>Bing Reevaluation site</a><br>
@@ -400,9 +400,7 @@ return [
 
     'NOTICE_AND_TAKEDOWN_REQUEST' => [
         'name'        => 'Notice and Takedown verzoek',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'OPEN_CHARGEN_SERVER' => [
@@ -1855,24 +1853,18 @@ return [
     ],
 
     'COPYRIGHT_INFRINGEMENT' => [
-        'name'        => 'Copyright schending',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'name'        => 'Copyrightschending',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'POSSIBLE_DDOS_SENDING_SERVER' => [
         'name'        => 'Mogelijke DDoS Server',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'DDOS_SENDING_SERVER' => [
         'name'        => 'DDoS Server',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'OPEN_PORTMAP_SERVER' => [
@@ -1922,173 +1914,263 @@ return [
 
     'MALWARE_INFECTION' => [
         'name'        => 'Malware infectie',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'COMMENT_SPAM' => [
         'name'        => 'Commentaar Spam',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'HACK_ATTACK' => [
-        'name'        => 'Hack aanval',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'name'        => 'Hackaanval',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'INFORMATIONAL' => [
         'name'        => 'Informationeel',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'LOGIN_ATTACK' => [
-        'name'        => 'Login aanval',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'name'        => 'Loginaanval',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'DICTIONARY_ATTACK' => [
-        'name'        => 'Woordenboek aanval',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'name'        => 'Woordenboekaanval',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'RULE_BREAKER' => [
-        'name'        => 'Regel breker',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'name'        => 'Regelbreker',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'HAVE_I_BEEN_PWNED_DOMAIN_FOUND' => [
         'name'        => 'Have I been pwned breach',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'OPEN_PROXY_SERVER' => [
         'name'        => 'Open proxy server',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'OPEN_UBIQUITI_SERVER' => [
         'name'        => 'Open Ubiquiti server',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'BRUTE_FORCE_ATTACK' => [
         'name'        => 'Brute Force aanval',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'AMPLICATION_DDOS_VICTIM' => [
         'name'        => 'DDOS amplictifcatie slachtoffer',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'ACCESSIBLE_ADB_REPORT' => [
         'name'        => 'Open Android Debug Bridge',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'ACCESSIBLE_APPLE_REMOTE_DESKTOP_ARD_REPORT' => [
         'name'        => 'Open Apple Remote Desktop',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'CAIDA_IP_SPOOFER_REPORT' => [
         'name'        => 'CAIDA IP spoofer',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'DRONE_BOTNET_DRONE_REPORT' => [
-        'name'        => 'Botnet Drone',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'name'        => 'Botnetdrone',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'NETCORE_NETIS_ROUTER_VULNERABILITY_SCAN_REPORT' => [
-        'name'        => 'Netcore/Netis router kwetsbaar',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'name'        => 'Kwetsbare Netcore/Netis router',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'OPEN_DB2_DISCOVERY_SERVICE_REPORT' => [
         'name'        => 'Open DB2 discovery service ',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'OPEN_MQTT' => [
         'name'        => 'OPEN MQTT service ',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'OPEN_COAP' => [
         'name'        => 'Open COAP service',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'OPEN_IPP' => [
         'name'        => 'Open IPP service',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'OPEN_RADMIN' => [
         'name'        => 'Open RAdmin service',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'OPEN_RDPEUDP' => [
         'name'        => 'Open Microsoft Remote Desktop Protocol service',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'OPEN_BASIC_AUTH_SERVICE' => [
         'name'        => 'Open Basic Authenticatie service',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
     'DARKNET' => [
         'name'        => 'Service contacting darknets',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+    ],
+    'eicc(stix2)' => [
+        'name'        => 'ei.cc',
         'description' => '
-            This classification has no information text yet.
+            ESET threat intelligence has detected that the host listed is playing the role of Command & Control centre for a botnet. More details may be available on the technical details page.
+            ',
+    ],
+
+    'eibotnet(stix2)' => [
+        'name'        => 'ei.botnet',
+        'description' => '
+            ESET threat intelligence has detected that the host is playing a part in a botnet. More details may be available on the technical details page.
+            ',
+    ],
+
+    'eidomainsv2(stix2)' => [
+        'name'        => 'ei.domains',
+        'description' => '
+            ESET threat intelligence has detected that the host is being used to spread malware on the domain listed. More details may be available on the technical details page.
+            ',
+    ],
+
+    'eiurls(stix2)' => [
+        'name'        => 'ei.urls',
+        'description' => '
+            ESET threat intelligence has detected that the host is being used to spread malware on the URL listed. More details may be available on the technical details page.
             ',
     ],
 
     'VULNERABLE_SMTP_SERVER' => [
         'name'          => 'Vulnerable SMTP server',
-        'description'   => '
-            This classification has no information text yet.
-            ',
+        'description'   => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'OPEN_AMQP' => [
         'name'          => 'Accessible Advanced Message Queuing Protocol (AMQP) server',
+        'description'   => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+    ],
+
+    'OPEN_SSH_SERVER' => [
+    'name'          => 'Open SSH service',
+    'description'   => '
+        <p> This report identifies hosts that have the Secure Shell (SSH) service running and accessible on the Internet. </p>
+
+        <p> This does not indicate that anything is wrong with the system, but if the SSH running on a system (or the version that is running) seems out of place, you may wish to investigate. </p>
+        ',
+    ],
+
+    'OPEN_SMTP_SERVER' => [
+        'name'          => 'Open SMTP service',
         'description'   => '
-            This classification has no information text yet.
+            <p> Dit rapport bevat een lijst met toegankelijke SMTP servers. </p>
+
+            <p> Dit is slechts een population scan – er worden geen kwetsbaarheden gemeld – maar netwerkbeheerder zouden zich bewust moeten zijn van enige onbedoelde bloodstelling van SMTP servers en zouden moeten verifiëren dat alle naar de nieuwste softwareversie gepatcht zijn. </p>
             ',
     ],
+
+    'OPEN_ICS' => [
+        'name'          => 'Open Industrial Control Service (ICS) application',
+        'description'   => '
+            <p> This report contains a list of devices that are responding to various specialized ICS/OT scans, along with additional make-and-model information and raw responses received. </p>
+
+            <p> It is extremely unlikely that these types of devices need to be accessible in any form to queries from the Internet, so unless you are running a honeypot if you receive such a report for your network/constituency, you are strongly advised to act immediately and firewall/filter access. </p>
+            ',
+    ],
+
+    'OPEN_POSTGRESQL_SERVER' => [
+        'name'          => 'Open PostgreSQL Server.',
+        'description'   => '
+            <p> Dit rapport identificeert toegankelijke PostgreSQL server instances op port 5432/TCP. </p>
+
+            <p> It is unlikely that you need to have your PostgreSQL server allowing for external connections from the Internet (and thus a possible external attack surface). If you do receive a report on your network/constituency take action to filter out traffic to your PostreSQL instance. Make sure to implement authentication on the server. </p>
+            ',
+    ],
+
+    'OPEN_STUN_SERVICE' => [
+        'name'          => 'Open STUN Service',
+        'description'   => '
+            <p> This report identifies accessible STUN (Session Traversal Utilities for NAT) servers on port 3478/udp. As described on Wikipedia, STUN is a standardized set of methods, including a network protocol, for traversal of network address translator (NAT) gateways in applications of real-time voice, video, messaging, and other interactive communications. The STUN service is known to be a potential UDP message amplifier, that can be abused for reflected DDoS attacks. </p>
+
+            <p> Consider using STUN over TCP instead by default. </p>
+',
+    ],
+
+    'OPEN_ERLANG_PORTMAPPER_DAEMON' => [
+        'name'          => 'Open Erlang Port Mapper Daemon server',
+        'description'   => '
+            <p> This report identifies accessible Erlang Port Mapper Daemon (EPMD) servers on port 4369/tcp. This daemon acts as a name server for hosts involved in distributed Erlang computations. </p>
+
+            <p> It is unlikely that you need to have an EPMD server allowing for external connections from the Internet (and thus a possible external attack surface). Make sure to firewall traffic to this service. If you do receive this report from us for your network or constituency make sure to firewall traffic to this service.</p>
+',
+    ],
+
+    'OPEN_SOCKS_PROXY' => [
+        'name'          => 'Open SOCKS Proxy service',
+        'description'   => '
+            <p> This report identifies hosts that have a SOCKS proxy version 4 or SOCKS proxy version 5 service running on port 1080/TCP and accessible from the Internet. The SOCKS protocol enables the exchange of packets between a client and server through a proxy server. These proxy servers can optionally support authentication.</p>
+
+            <p> Open proxy servers allowing proxying of services without authentication are often subject to abuse. Others, even with authentication, may also have security implications. </p>
+
+            <p> As with all remote access tools, care should be taken to make sure a SOCKS proxy service is configured in a secure manner and the security implications of making it accessible from anywhere on the Internet taken into account. </p>
+            ',
+    ],
+
+    'DEVICE_IDENTIFICATION' => [
+        'name'          => 'Device identification',
+        'description'   => '
+            <p> This is a device population report – no assessment is made on the vulnerability state of the device. The report is intended for recipients to get a better understanding of device population types on networks they are responsible for. Please note the assessment is based only on what was publicly accessible from the Internet.</p>
+            ',
+    ],
+
+    'ACCESSIBLE_XDMCP_SERVICE_REPORT' => [
+        'name'          => 'Open XDCMP Service',
+        'description'   => '
+            <p> This report identifies hosts that have the X Display Manager service running and accessible on the Internet. </p>
+
+            <p> XDMCP leaks information about the host system and, in addition, it can be used in an amplification attack, providing an approximate 7x amplification. Please note that it does not matter if XDMCP responds with a “Willing” or an “Unwilling”; the service provides the same level of amplification. </p>
+            ',
+    ],
+
+    'VULNERABLE_EXCHANGE_SERVER' => [
+        'name'          => 'Kwetsbare Microsoft Exchange server',
+        'description'   => '
+            <h2>Wat is een "Kwetsbare Mirosoft Exchange server"></h2>
+            
+            <p>De host draait een kwetsbare versie van Microsoft Exchange.</p>
+
+            <h2>Waarom is dit een probleem?</h2>
+        
+            <p>Hackers zouden misbruik kunnen maken van de kwetsbaarheid in de Microsoft Exchange server, waardoor deze gehackt zou kunnen worden.</p>
+
+            <h2>Aanbevolen actie</h2>
+
+            <p>Update Microsoft Exchange naar de nieuwste versie.</p>
+            ',
+    ],
+
+    'ACCESSIBLE_MSMQ_SERVICE' => [
+        'name'         => 'Accesible Microsoft Message Queuing service',
+        'description'  => '
+            <p> This report identifies accessible Microsoft Message Queuing (MSMQ) servers on port 1801/TCP. This service may be optionally enabled on Windows operating systems, including Windows Server 2022 and Windows 11. </p>',
+    ],
+
+    'ACCESSIBLE_SLP_SERVICE' => [
+        'name'         => 'Accessible Service Location Protocol (SLP) Service',
+        'description'  => '
+            <p> This report identifies accessible SLP (Service Location Protocol) services on port 427/TCP and 427/UDP. The Service Location Protocol (SLP, srvloc) is a service discovery protocol that allows computers and other devices to find services in a local area network without prior configuration </p>',
+    ],
+
+    'ACCESSIBLE_BGP_SERVICE' => [
+        'name'         => 'Accessible Border Gateway Protocol (BGP) Service',
+        'description'  => '
+            <p> This report identifies accessible Border Gateway Protocol (BGP) servers on port 179/TCP. </p>',
+    ],
+
 ];
