@@ -6,18 +6,18 @@
 return [
     // AbuseIO intro
     'abuseio_intro1' => 'AbuseIO is een gereedschap voor het ontvangen, verwerken, correleren
-                         en notificeren van abuse rapporten ontvangen van netwerk beheerders,
-                         veelal hosting bedrijven en access aanbieders.',
-    'abuseio_intro2' => 'Het is een door de community aangestuurd, open source project.
+                         en notificeren van abuserapporten ontvangen van netwerkbeheerders;
+                         veelal hostingbedrijven en accessaanbieders.',
+    'abuseio_intro2' => 'Het is een door de gemeenschap aangestuurd, open source-project.
                          Het doel is het consolideren van de verschillende rapporten van
-                         de verschillende bedrijven en individuen en de afhandeling
+                         verschillende bedrijven en individuen en de afhandeling
                          hiervan te verbeteren en automatiseren.',
 
     // Navigation bar
     'language'     => 'Taal',
     'home'         => 'Home',
     'contacts'     => 'Contacten',
-    'netblocks'    => 'Netwerk Blokken',
+    'netblocks'    => 'Netwerkblokken',
     'domains'      => 'Domeinen',
     'tickets'      => 'Tickets',
     'search'       => 'Zoeken',
@@ -72,7 +72,7 @@ return [
     'contact'                       => 'Contact',
     'description'                   => 'Omschrijving',
     'ip'                            => 'IP',
-    'ip_address'                    => 'IP Adres',
+    'ip_address'                    => 'IP-Adres',
     'classification'                => 'Klassificatie',
     'type'                          => 'Type',
     'details'                       => 'details',
