@@ -7,7 +7,7 @@ return [
     // Headers
     'header.new'    => 'Nieuw Merk',
     'header.edit'   => 'Bewerk Merk',
-    'header.detail' => 'Merk details voor',
+    'header.detail' => 'Merkdetails voor',
 
     // Buttons
     'button.new_brand' => 'Nieuw Merk',
@@ -17,7 +17,7 @@ return [
     'logo'      => 'Bedrijfslogo',
 
     // templates
-    'mail_custom_template' => 'Aangepaste mail templates',
+    'mail_custom_template' => 'Aangepaste mailtemplates',
     'mail_template_plain'  => 'Platte tekst template',
     'mail_template_html'   => 'Html template',
     'ash_custom_template'  => 'Aangepaste ASH template',
