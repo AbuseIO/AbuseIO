@@ -1595,7 +1595,7 @@ return [
             <p>You also might want to check and resolve listings on other RBL's,
             using a RBL checker such as Anti-abuse multi-rbl-check</p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://www.anti-abuse.org/multi-rbl-check'>Anti-abuse multi-rbl-check</a><br>
 
@@ -1642,7 +1642,7 @@ return [
             you must clean your mail queue from all these SPAM messages before
             starting your MTA again.</p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie/h2>
 
             <p>If you are unable to or unsure how to resolve this issue,
             please contact our abuse department for support.</p>
@@ -1691,7 +1691,7 @@ return [
             you must clean your mail queue from all these SPAM messages before
             starting your MTA again.</p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://blog.returnpath.com/blog/jamie-lawler/trap-tips-avoiding-and-removing-spam-traps'>Tips to avoid SpamTraps</a><br>
             <a target'_blank' href='http://www.activecampaign.com/help/bounces-soft-bounce-vs-hard-bounce/'>Hard/Soft Bounce configuration</a><br>
@@ -1702,9 +1702,9 @@ return [
     'SSLV3_VULNERABLE_SERVER' => [
         'name'        => 'SSLv3 kwetsbare server',
         'description' => "
-            <h2>What is a 'SSLv3 Vulnerable Server'?</h2>
+            <h2>Wat is een 'SSLv3 kwetsbare Server'?</h2>
 
-            <p>POODLE (the 'Padding Oracle On Downgraded Legacy Encryption' attack) is the name for an
+            <p>POODLE (de 'Padding Oracle On Downgraded Legacy Encryption' aanval) is de naam voor een
             OpenSSL bug. This bug impacts almost every system using any kind of encryption which is
             based on OpenSSL.</p>
 
@@ -1738,7 +1738,7 @@ return [
 
             <h3>Nginx</h3>
 
-            <p>ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+            <p>ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
 
             Similar to the Apache config above, you will get TLSv1.0+ support and no SSL. You can check the config and restart.
 
@@ -1760,11 +1760,11 @@ return [
 
             <h3>Apache</h3>
 
-            <p>To disable SSLv3 on your Apache server you can configure it using the following.
+            <p>SSLv3 kan op uw Apache server uitgeschakelt worden met behulp van de volgende instellingen:
 
             SSLProtocol All -SSLv2 -SSLv3
 
-            This will give you support for TLSv1.0, TLSv1.1 and TLSv1.2, but explicitly removes support for SSLv2 and SSLv3. Check the config and then restart Apache.
+            Dit geeft support voor TLSv1.0, TLSv1.1, TLSv1.2 en TLSv1.3, maar haalt expliciet de ondersteuning voor SSLv2 and SSLv3 weg. Check de config en start Apache opnieuw op.
 
             apachectl configtest
 
@@ -1775,7 +1775,7 @@ return [
             your system its highly recommended to get a NEW SSL certificate (including key, csr, etc)
             as it might have been comprised. Most SSL suppliers will issue such a certificate for free</p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
             <a target'_blank' href='https://www.poodletest.com/'>SSLv3 / POODLE Test</a><br>
@@ -1808,7 +1808,7 @@ return [
             <li>If infection is found and resolved, begin to delist your URL on the relevant delist's.</li>
             </ul>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='https://wordpress.org/plugins/sucuri-scanner/'>WordPress Security scanner (Sucuri)</a><br>
             <a target'_blank' href='http://spamvertised.abusebutler.com/'>List of Spamvertised websites</a><br>
@@ -1846,9 +1846,9 @@ return [
             <p>Read the ElasticSearch documentation on how to properly secure your ElasticSearch
             instance.
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
-            <a href='http://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution</a><br>
+            <a href='http://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution (Engels)</a><br>
             ",
     ],
 
@@ -2022,38 +2022,38 @@ return [
     'eicc(stix2)' => [
         'name'        => 'ei.cc',
         'description' => '
-            ESET threat intelligence has detected that the host listed is playing the role of Command & Control centre for a botnet. More details may be available on the technical details page.
+            ESET threat intelligence heeft ontdekt dat de genoemde host de rol van Command & Control Centre voor een botnet speelt. Er zijn mogelijk meer details beschikbaar op de "technische details" pagina.
             ',
     ],
 
     'eibotnet(stix2)' => [
         'name'        => 'ei.botnet',
         'description' => '
-            ESET threat intelligence has detected that the host is playing a part in a botnet. More details may be available on the technical details page.
+            ESET threat intelligence heeft ontdekt dat deze host deelneemt aan een botnet. Er zijn mogelijk meer details beschikbaar op de "technische details" pagina.
             ',
     ],
 
     'eidomainsv2(stix2)' => [
         'name'        => 'ei.domains',
         'description' => '
-            ESET threat intelligence has detected that the host is being used to spread malware on the domain listed. More details may be available on the technical details page.
+            ESET threat intelligence heeft ontdekt dat de host gebruikt wordt om malware op het genoemde domein te verspreiden. Er zijn mogelijk meer details beschikbaar op de "technische details" pagina.
             ',
     ],
 
     'eiurls(stix2)' => [
         'name'        => 'ei.urls',
         'description' => '
-            ESET threat intelligence has detected that the host is being used to spread malware on the URL listed. More details may be available on the technical details page.
+            ESET threat intelligence heeft ondekt dat de host gebruikt wordt om malware op de genoemde URL te verspreiden. Er zijn mogelijk meer details beschikbaar op de "technische details" pagina.
             ',
     ],
 
     'VULNERABLE_SMTP_SERVER' => [
-        'name'          => 'Vulnerable SMTP server',
+        'name'          => 'Kwetsbare SMTP server',
         'description'   => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
     'OPEN_AMQP' => [
-        'name'          => 'Accessible Advanced Message Queuing Protocol (AMQP) server',
+        'name'          => 'Toegankelijke Advanced Message Queuing Protocol (AMQP) server',
         'description'   => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
 
@@ -2089,7 +2089,7 @@ return [
         'description'   => '
             <p> Dit rapport identificeert toegankelijke PostgreSQL server instances op port 5432/TCP. </p>
 
-            <p> It is unlikely that you need to have your PostgreSQL server allowing for external connections from the Internet (and thus a possible external attack surface). If you do receive a report on your network/constituency take action to filter out traffic to your PostreSQL instance. Make sure to implement authentication on the server. </p>
+            <p> Het is onwaarschijnlijk dat uw PostgreSQL server benaderbaar hoeft te zijn voor externe verbindingen vanaf het internet.It is unlikely that you need to have your PostgreSQL server allowing for external connections from the Internet (and thus a possible external attack surface). If you do receive a report on your network/constituency take action to filter out traffic to your PostreSQL instance. Make sure to implement authentication on the server. </p>
             ',
     ],
 
@@ -2132,7 +2132,7 @@ return [
     'ACCESSIBLE_XDMCP_SERVICE_REPORT' => [
         'name'          => 'Open XDCMP Service',
         'description'   => '
-            <p> This report identifies hosts that have the X Display Manager service running and accessible on the Internet. </p>
+            <p> Dit rapport identificeert hosts die een X Display Manager servie draaiende hebben die op het Internet benaderbaar is. </p>
 
             <p> XDMCP leaks information about the host system and, in addition, it can be used in an amplification attack, providing an approximate 7x amplification. Please note that it does not matter if XDMCP responds with a “Willing” or an “Unwilling”; the service provides the same level of amplification. </p>
             ',
@@ -2147,7 +2147,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
         
-            <p>Hackers zouden misbruik kunnen maken van de kwetsbaarheid in de Microsoft Exchange server, waardoor deze gehackt zou kunnen worden.</p>
+            <p>Kwaadwillenden zouden misbruik kunnen maken van de kwetsbaarheid in de Microsoft Exchange server, waardoor deze gehackt zou kunnen worden.</p>
 
             <h2>Aanbevolen actie</h2>
 
@@ -2156,21 +2156,21 @@ return [
     ],
 
     'ACCESSIBLE_MSMQ_SERVICE' => [
-        'name'         => 'Accesible Microsoft Message Queuing service',
+        'name'         => 'Togankelijke Microsoft Message Queuing service',
         'description'  => '
-            <p> This report identifies accessible Microsoft Message Queuing (MSMQ) servers on port 1801/TCP. This service may be optionally enabled on Windows operating systems, including Windows Server 2022 and Windows 11. </p>',
+            <p> Dit rapport identificeert toegankelijke Microsoft Message Queuing (MSMQ) servers op port 1801/TCP. Deze service kan optioneel geactiveerd worden op Windows besturingssystemen, waaronder Windows Server 2022 en Windows 11. </p>',
     ],
 
     'ACCESSIBLE_SLP_SERVICE' => [
-        'name'         => 'Accessible Service Location Protocol (SLP) Service',
+        'name'         => 'Toegankelijke Service Location Protocol (SLP) Service',
         'description'  => '
-            <p> This report identifies accessible SLP (Service Location Protocol) services on port 427/TCP and 427/UDP. The Service Location Protocol (SLP, srvloc) is a service discovery protocol that allows computers and other devices to find services in a local area network without prior configuration </p>',
+            <p> Dit rapport identificeert toegankelijke SLP (Service Location Protocol) services op port 427/TCP en 427/UDP. Service Location Protocol (SLP, srvloc) is een service ontdekkings-protocol dat computers en andere apparaten in staat stelt services in een local area network (LAN) te vinden zonder dat daar verder configuratie aan vooraf gaat. </p>',
     ],
 
     'ACCESSIBLE_BGP_SERVICE' => [
-        'name'         => 'Accessible Border Gateway Protocol (BGP) Service',
+        'name'         => 'Toegankelijke Border Gateway Protocol (BGP) Service',
         'description'  => '
-            <p> This report identifies accessible Border Gateway Protocol (BGP) servers on port 179/TCP. </p>',
+            <p> Dit rapport identificeert toegankelijke Border Gateway Protocol (BGP) servers op port 179/TCP. </p>',
     ],
 
 ];
