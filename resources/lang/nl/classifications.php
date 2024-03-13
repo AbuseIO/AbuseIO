@@ -1460,24 +1460,24 @@ return [
             <h2>Wat is een 'Open TFTP Server'?</h2>
 
             <p>Trivial File Transfer Protocol, afgekort TFTP, is een eenvoudig
-            bestandsoverdracht protocol dat veel gebruikt wordt om computers vanaf
-            een netwerk te starten. Als de TCP/IP stack reeds draait kan TFTP ook
+            bestandsoverdrachtprotocol dat veel gebruikt wordt om computers vanaf
+            een netwerk op te starten. Als de TCP/IP stack reeds draait kan TFTP ook
             gebruikt worden om andere apparatuur zoals routers, switches, ADSL- en
             kabelmodems van firmware en configuraties te voorzien. TFTP werd voor
             het eerst gedefinieerd in 1980.</p>
 
-            <h2>Waarom is dit slecht?</h2>
+            <h2>Waarom is dit een probleemt?</h2>
 
             <p>TFTP heeft geen enkele vorm van authentication of encryptie. Dit maakt
-            het erg eenvoudig voor iemand om al je configuratie bestanden te downloaden
-            of een corrupte firmware te uploaden!</p>
+            het erg eenvoudig voor iemand om al je configuratiebestanden te downloaden
+            of corrupte firmware te uploaden!</p>
 
             <h2>Advies</h2>
 
             <p>Er is geen reden om deze dienst op een publieke interface aan te bieden.
             Het advies is om deze dienst te stoppen of ervoor te zorgen dat het niet
-            mogelijk is deze dienst via het internet te bereiken is. Dit kan door gebruik
-            te maken van RFC1918 ip reeksen of een firewall.</p>
+            mogelijk is deze dienst via het internet te kunnen bereiken. Dit kan door gebruik
+            te maken van RFC1918 ip-reeksen of een firewall.</p>
 
             ",
     ],
@@ -1651,11 +1651,11 @@ return [
     ],
 
     'SPAMTRAP' => [
-        'name'        => 'Spamval',
+        'name'        => 'Spam Trap',
         'description' => "
-            <h2>What is a SPAM Trap?</h2>
+            <h2>Wat is een SPAM Trap?</h2>
 
-            <p>A SpamTrap is a honeypot used to collect spam.</p>
+            <p>Een SpamTrap is een honeypot die gebruikt wordt om spam te verzamelen.</p>
 
             <h2>Why would sending email to these this be bad?</h2>
 
@@ -1705,10 +1705,9 @@ return [
             <h2>Wat is een 'SSLv3 kwetsbare Server'?</h2>
 
             <p>POODLE (de 'Padding Oracle On Downgraded Legacy Encryption' aanval) is de naam voor een
-            OpenSSL bug. This bug impacts almost every system using any kind of encryption which is
-            based on OpenSSL.</p>
+            OpenSSL bug. Deze bug heeft een impact op vrijwel elk systeem dat op OpenSSL gebaseerde encryptie gebruikt.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>The whole issue ultimately hinges on the site supporting SSLv3 and the attacker being
             able to downgrade the client to use SSLv3. These protocol downgrade attacks are old news
@@ -1760,7 +1759,7 @@ return [
 
             <h3>Apache</h3>
 
-            <p>SSLv3 kan op uw Apache server uitgeschakelt worden met behulp van de volgende instellingen:
+            <p>SSLv3 kan op uw Apache server uitgeschakelt worden met behulp van de volgende config:
 
             SSLProtocol All -SSLv2 -SSLv3
 
@@ -2060,7 +2059,7 @@ return [
     'OPEN_SSH_SERVER' => [
     'name'          => 'Open SSH service',
     'description'   => '
-        <p> This report identifies hosts that have the Secure Shell (SSH) service running and accessible on the Internet. </p>
+        <p> Dit rapport identificeert hosts die een Secure Shell (SSH) service die vanaf het internet toegankelijk is hebben draaien. </p>
 
         <p> This does not indicate that anything is wrong with the system, but if the SSH running on a system (or the version that is running) seems out of place, you may wish to investigate. </p>
         ',
@@ -2089,7 +2088,7 @@ return [
         'description'   => '
             <p> Dit rapport identificeert toegankelijke PostgreSQL server instances op port 5432/TCP. </p>
 
-            <p> Het is onwaarschijnlijk dat uw PostgreSQL server benaderbaar hoeft te zijn voor externe verbindingen vanaf het internet.It is unlikely that you need to have your PostgreSQL server allowing for external connections from the Internet (and thus a possible external attack surface). If you do receive a report on your network/constituency take action to filter out traffic to your PostreSQL instance. Make sure to implement authentication on the server. </p>
+            <p> Het is onwaarschijnlijk dat uw PostgreSQL server benaderbaar hoeft te zijn voor externe verbindingen vanaf het internet.(oftewel: een mogelijk extern aanvalsoppervlak). Indien u wel een rapport ontvangt op uw netwerk/kring, zorg er dan voor dat dataverkeer naar uw PostgreSQL-instantie gefilterd wordt. Pas authentificatie op de server toe. </p>
             ',
     ],
 
@@ -2156,7 +2155,7 @@ return [
     ],
 
     'ACCESSIBLE_MSMQ_SERVICE' => [
-        'name'         => 'Togankelijke Microsoft Message Queuing service',
+        'name'         => 'Toegankelijke Microsoft Message Queuing service',
         'description'  => '
             <p> Dit rapport identificeert toegankelijke Microsoft Message Queuing (MSMQ) servers op port 1801/TCP. Deze service kan optioneel geactiveerd worden op Windows besturingssystemen, waaronder Windows Server 2022 en Windows 11. </p>',
     ],
