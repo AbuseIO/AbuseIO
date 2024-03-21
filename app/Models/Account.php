@@ -149,7 +149,7 @@ class Account extends Model
             ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
             ->where('roles.name', '=', 'Admin')
             ->where('users.account_id', '=', $this->id)
-            ->select('users.*')->get();
+            ->select('users.*')->get()->toArray();
 
         return User::hydrate($admins);
     }
