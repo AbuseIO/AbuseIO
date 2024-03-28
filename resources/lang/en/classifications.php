@@ -285,7 +285,7 @@ return [
             <ul>
             <li>Look for files that have been changed recently or on times your developers are
             closed and not placing updates on the website</li>
-            <li>Look in temporally folders for (executable) scripts</li>
+            <li>Look in temporary folders for (executable) scripts</li>
             </ul>
 
             <p>In addition future risk of compromise can be reduced by following these basic tips: </p>
