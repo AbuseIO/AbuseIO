@@ -17,7 +17,105 @@ return [
         'name'        => 'Generiek bericht',
         'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
+'OPEN_SMARTINSTALL' => [
+        'name'        => 'Open Cisco Smart Install',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+    ],
 
+    'OPEN_HADOOP_SERVER' => [
+        'name'        => 'Open Hadoop Server',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+    ],
+
+    'OPEN_VNC_SERVER' => [
+        'name'        => 'Open VNC Server',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+    ],
+
+    'OPEN_SMB_SERVER' => [
+        'name'        => 'Open SAMBA Server (SMB/CIFS)',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+    ],
+
+    'OPEN_CWMP_SERVER' => [
+        'name'        => 'Open CPE WAN Management Protocol (CWMP)',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+    ],
+
+    'OPEN_TELNET_SERVER' => [
+        'name'        => 'Open Telnet Server',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+    ],
+
+    'OPEN_LDAP_SERVER' => [
+        'name'        => 'Open LDAP Server',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+    ],
+
+    'ISAKMP_VULNERABLE_DEVICE' => [
+        'name'        => 'ISAKMP Vulnerable device',
+        'description' => '
+            <h2>Wat is een \'ISAKMP Vulnerable device\'?</h2>
+
+            <p>  </p>
+
+            <h2>Waarom is dit een probleem?</h2>
+
+            <p>Een kwetsbaarheid in Internet Key Exchange version 1 (IKEv1) packet processing code in Cisco IOS,
+             Cisco IOS XE, en Cisco IOS XR Software zou een ongeauthentificeerde, remote aanvaller toe kunnen staan om de inhoud van 
+             het geheugen op te halen, wat zou kunnen leiden tot het vrijgeven van vertrouwelijke informatie.</p>
+
+            <h2>Aanbevolen actie</h2>
+
+            <p>De enige manier om deze kwetsbaarheid op te lossen, is om IPSEC uit te zetten.</p>
+
+            <h2>Tips how to resolve this matter</h2>
+            <ul>
+            <li>Upgrade naar een niet-getroffen versie van Cisco IOS</li>
+            <li>implement an intrusion prevention system (IPS) or intrusion detection system (IDS) to help detect
+            and prevent attacks that attempt to exploit this vulnerability.</li>
+            </ul>
+
+            <h2>Meer informatie</h2>
+
+            <a target\'_blank\' href=\'IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products\'>IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products</a><br>
+
+            ',
+    ],
+
+    'OPEN_RDP_SERVER' => [
+        'name'        => 'Open RDP Server',
+        'description' => '
+            <h2>What is a \'Open RDP Server\'?</h2>
+
+            <p>  </p>
+
+            <h2>Waarom is dit een probleem?</h2>
+
+            <p>This report identifies hosts that have Remote Desktop (RDP) Service running and accessible to the world
+             on the internet. Misconfigured RDP can allow miscreants access to the desktop of a vulnerable host and can
+             also allow for information gathering on a target host as the SSL certificate used by RDP often contains
+             the system\'s trivial hostname. </p>
+
+            <p>In addition your sure will be targetted by brute force attacks, and while most RDP server only allow
+             two sessions you will not be able to connect to the RDP server yourself. In essence you are locked out!</p>
+
+            <h2>Aanbevolen actie</h2>
+
+            <p>Disable public access to RDP, or make sure to detect and mitigate brute force attacks</p>
+
+            <h2>Tips how to resolve this matter</h2>
+            <ul>
+            <li>Firewall port TCP/3389 en gebruik een VPN om toegang te krijgen tot uw interne netwerk.</li>
+            <li>Firewall port TCP/3389 en laat alleen vertrouwde IP-adressen toe.</li>
+            </ul>
+
+            <h2>Meer informatie</h2>
+
+            <a target\'_blank\' href=\'https://technet.microsoft.com/en-us/library/cc743162(v=ws.11).aspx\'>Remote Desktop Services and Windows Firewall</a><br>
+            ',
+    ],
+    
     'BOTNET_CONTROLLER' => [
         'name'        => 'Botnetserver',
         'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
@@ -64,28 +162,26 @@ return [
             <h2>Tips to resolve this matter</h2>
 
             <p>Indien uw systeem een werkstation of server is:<ul>
-            <li>Install including all updates an antivirus software and run a full scan of your computer.
-            It's recommended to try several scanners as not every scanner is able to detect a specific
-            kind of malware.</li>
-            <li>Scan the network for infected files. Don't forget to scan the backups, as well as any
-            computers that may have been 'off' for the last little while because of employee vacation,
-            etc.</li>
-            <li>Users of any system with a botnet infection should change all their passwords as quickly
+            <li>Installeer en update een antivirussoftware en voer een volledige scan van uw computer uit. 
+            Het wordt aangeraden om meerdere scanners te gebruiken, omdat niet iedere scanner specifieke
+            soorten malware herkennen kan.</li>
+            <li>Scan het netwerk voor gïnfecteerde bestanden. Vergeet niet ook de backups te scannen, 
+            alsmede alle computers die wellicht al een tijdje uit hebben gestaan ivm. bijv. vakanties.</li>
+            <li>Gebruikers van een 
+            Users of any system with a botnet infection should change all their passwords as quickly
             as possible. This should include any passwords saved locally and used to access other systems
             and applications (including business applications, access to web site administrator accounts,
             personal use of e-mail and social media, etc.).</li>
-            <li>If a computer is infected with malware, there is a significant chance that other malware is
-            also present on the system. A clean reinstall will help prevent any other infections from
-            having free access to the network.</li>
+            <li>Als een computer met malware geïnfecteerd blijkt te zijn, is de kans groot dat er ook andere malware op het systeem aanwezig is. 
+            Een 'clean reinstall' voorkomt dat deze vrij toegang tot het netwerk kunnen krijgen.</li>
             </ul></p>
 
             <p>Indien uw systeem een website / hostingsysteem is:<ul>
-            <li>If you suspect a user account has been compromised, change the password for the account
-                                                                                            immediately.</li>
-            <li>Scan all hosted websites and temporary directories for suspicious files and remove them.
-            Also check your process list for suspicious processes and kill them.</li>
-            <li>Check your mail queues for outgoing SPAM and remove them for the queue.</li>
-            <li>Install a rootkit and a virus scanner to ensure all malicious files have been removed.</li>
+            <li>Als u het vermoeden heeft dat een gebruikersaccount gehackt is, wijzig onmiddelijk het wachtwoord van dit account.</li>
+            <li>Scan alle gehoste websites en tijdelijke mappen voor verdachte bestanden en verwijder deze.
+            Controleer ook uw processenlijst voor mogelijke verdachte processen en beëindig deze.</li>
+            <li>Controleer uw mailqeueus voor uitgaande SPAM en verwijder deze.</li>
+            <li>Installeer een rootkit- en virusscanner om er zeker van te zijn dat alle malafide bestanden verwijderd zijn.</li>
             </ul></p>
 
             <p>Zodra al de malafide software verwijderd is, zorg ervoor dat de server niet opnieuw aangetast kan worden. 
@@ -110,7 +206,7 @@ return [
         'description' => "
             <h2>Wat is een 'Compromised website'?</h2>
 
-            A comprimised website is (hacked) content placed on your site without your permission
+            <p>A comprimised website is (hacked) content placed on your site without your permission
             as a result of vulnerabilities in your site’s security.
 
             Malicious hackers are a devious bunch – always looking for new flaws, exploits and
@@ -118,7 +214,7 @@ return [
             this in mind, it comes as no surprise Malicious hackers are a devious bunch – always
             looking for new flaws, exploits and social engineering tricks that will allow them
             to compromise a website. With this in mind, it comes as no surprise that most website
-            owners simply don’t know how their sites were compromised.
+            owners simply don’t know how their sites were compromised.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -162,16 +258,15 @@ return [
 
             <h2>Tips how to resolve this matter</h2>
 
-            <p>The safest way to clean the hacked website is to delete it entirely and then upload
-            a known clean version of it.</p>
+            <p>De veiligste manier om een gehackte site op te schonen, is om hem helemaal te verwijderen
+            en een versie up te loaden waarvan men zeker weet dat hij schoon is.</p>
 
             <ul>
-            <li>Look for files that have been changed recently or on times your developers are
-            closed and not placing updates on the website</li>
-            <li>Look in temporally folders for (executable) scripts</li>
+            <li>Kijk of er bestanden zijn die recent zijn aangepast en/of op tijden waarop uw developers niet aan het werk waren.</li>
+            <li>Kijk in tijdelijke mappen voor (uitvoerbare) scripts.</li>
             </ul>
 
-            <p>In addition future risk of compromise can be reduced by following these basic tips: </p>
+            <p>In addition, future risk of compromise can be reduced by following these basic tips: </p>
 
             <ul>
             <li>Keep software and all plug-ins updated. Whether you run popular content
@@ -181,8 +276,8 @@ return [
             <li>Use strong, varied passwords. WordPress login credentials, for example,
             should be different from FTP credentials. Never store passwords on your local
             machine.</li>
-            <li>Regularly scan your PC for malware and your website for unautherized changes</li>
-            <li>Use appropriate file permissions on your web server.</li>
+            <li>Scan uw computer regelmatig voor malware en controleer uw website op ongewenste en/of onbevoegde veranderingen.</li>
+            <li>Gebruik geschikte 'file permissions' op uw webserver.</li>
             <li>Research your options and make security a priority when choosing a web hosting
             provider. If you aren’t confident you can protect your site on your own, consider
             using an add-on security service from your hosting provider or a third party website
@@ -217,9 +312,9 @@ return [
 
             <p>Verwijder alle kwaadwillig gehoste bestanden, check of jouw site gehackt is en ruim malafide bestanden op.</p>
 
-            <h2>Tips how to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
             <ul>
-            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plugins and update where possible.</li>
+            <li>Indien dit een CMS (WordPress, Drupal, Joomla, etc.) is, check of er updates voor uw add-ons en plugins beschikbaar zij. Voer deze uit waar mogelijk.I</li>
             <li>If this is a standard website, check for signs of infection or unknown links on web-pages and take the necessary action.</li>
             <li>Once the issue(s) have been resolved, begin to request re-evaluations of your site from search engines.</li>
             </ul>
@@ -368,7 +463,7 @@ return [
 
             <p>Email harvesting is the process of obtaining lists of email addresses or accounts
             using various methods for use in bulk email or other purposes usually
-            like seding SPAM or gaining access to the system.</p>
+            like sending SPAM or gaining access to the system.</p>
 
             <p>A common method is the use of special software known as 'harvesting bots'
             or 'harvesters', which spider web pages, mailing list archives, internet
@@ -380,8 +475,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Sending unsolicited email to recipients gathered by means of harvesting
-            is illegal and not allowed by our terms of service.</p>
+            <p>Ongevraagde e-mail sturen naar ontvangers verkregen via 'harvesting' is illegaal en is - per onze voorwaaarden -  niet toegestaan.</p>
 
             <h2>Aanbevolen actie</h2>
 
@@ -959,7 +1053,10 @@ return [
         'description' => "
             <h2>Wat is een 'Open NTP Server'?</h2>
 
-            <p>Network Time Protocol (NTP) is a networking protocol for clock
+            <p>Network Time Protocol (NTP) is een netwerkprotocol voor tijdsynchronisatie
+            tussen computersysteemen over packet-switched variable-lancy dat networks. 
+            NTP is al vanaf 1985 in gebruik, wat het één van de oudste internetprotocollen nog in gebruik maakt.
+            Network Time Protocol (NTP) is a networking protocol for clock
             synchronization between computer systems over packet-switched,
             variable-latency data networks. In operation since before 1985, NTP
             is one of the oldest Internet protocols in current use.</p>
@@ -1075,11 +1172,11 @@ return [
             command, he can obtain some or all of the following information:</p>
 
             <ul>
-            <li>Computer name</li>
-            <li>Contents of the remote name cache, including IP addresses</li>
-            <li>A list of local NetBIOS names</li>
-            <li>A list of names resolved by broadcast or via WINS</li>
-            <li>Contents of the session table with the destination IP addresses</li>
+            <li>Computernaam</li>
+            <li>Inhoud van de remote name cache, inclusief IP-addressen</li>
+            <li>Een lijst met lokale NetBIOS namen</li>
+            <li>Een lijst met namen geresolved via broadast of WINSA</li>
+            <li>Inhoud van de session table met de IP-adressen van de bestemmming</li>
             </ul>
 
             <p>With this information, the attacker has information about the OS, services, and major
@@ -1657,12 +1754,11 @@ return [
 
             <p>Een SpamTrap is een honeypot die gebruikt wordt om spam te verzamelen.</p>
 
-            <h2>Why would sending email to these this be bad?</h2>
+            <h2>Waarom is hhet een probleem om hier mails naartoe te versturen?</h2>
 
-            <p>SpamTraps are generally e-mail addresses that are made to recieve spam.
-            SpamTraps are often hidden from view on websites, so that they are only harvested from automated scans.
-            Since no legit e-mail is ever sent to this address, any e-mail's that are sent to the Spam-Traps are
-            immediately considered unsolicited.</p>
+            <p>SpamTraps zijn e-mailadressen die speciaal bedoelt zijn om spam te ontvangen.
+            SpamTraps worden voor het oog verborgen op websites, waardoor ze alleen door geautomatiseerde scans worden gezien.
+            Gezien er geen legitieme mail naar dit e-mailadres wordt gestuurd, worden alle ontvangen mails direct als ongewenst aangezien.</p>
 
             <h2>Aanbevolen actie</h2>
 
@@ -1679,8 +1775,8 @@ return [
                     <li>Remove malformed domain names</li>
                     <li>Remove role accounts (sales@example.com, accounts@example.net)</li>
                     <li>Adhere to the unsubscribe process</li>
-                    <li>Never buy a mailing list</li>
-                    <li>Use double opt-in</li>
+                    <li>Koopt nooit een mailing list</li>
+                    <li>Gebruik 'double opt-in'</li>
             </ul>
 
             <p>The best way to solve the problem is to stop your mailserver(MTA)
@@ -1842,7 +1938,7 @@ return [
             <h2>Tips to resolve this matter</h2>
 
             <p>Read the ElasticSearch documentation on how to properly secure your ElasticSearch
-            instance.
+            instance.</p>
 
             <h2>Meer informatie</h2>
 
@@ -1876,8 +1972,8 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Once an attacker discovers an active port 111 on a device, he can use this information
-            to learn about running services, which is a very important first step for a hacking attack.</p>
+            <p>Zodra een aanvaller een actieve port 111 op een systeem ontdekt. kan die deze informatie gebruiken
+            om meer te weten te komen over welke services hierop draaien. Dit is vaak de eerste stap in een hackaanval.</p>
 
             <p>Additionally, hackers have also found this feature useful in performing a
             special type of DDoS attack called an 'Amplification Attack'.</p>
@@ -1904,9 +2000,12 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>We recommend you to only allow RPC calls from trusted sources. This
+            <p>Wij advieseren om enkel RPC calls van vertrouwde bronnen toe te laten.
+            Dit kan worden bereikt door al het verkeer voor RPC services te laten vallen
+            en alleen vebrindingnen van bekende IP-adressen toe te staan.
+            We recommend you to only allow RPC calls from trusted sources. This
             can be achieved by dropping all traffic for RPC services on your local
-            firewall and only allowing connections from trusted IP addresses.
+            firewall and only allowing connections from trusted IP addresses.</p>
             ",
     ],
 
@@ -2060,7 +2159,7 @@ return [
     'description'   => '
         <p> Dit rapport identificeert hosts die een Secure Shell (SSH) service - die vanaf het internet toegankelijk is - hebben draaien. </p>
 
-        <p> This does not indicate that anything is wrong with the system, but if the SSH running on a system (or the version that is running) seems out of place, you may wish to investigate. </p>
+        <p> Dit betekent niet per se dat er iets met dit systeem mis is, maar als de SSH op dit syteem (of de versie die runt) er niet op lijkt te horen staan, is het wellicht een goed idee om hier nader naar te kijken. </p>
         ',
     ],
 
@@ -2078,7 +2177,7 @@ return [
         'description'   => '
             <p> This report contains a list of devices that are responding to various specialized ICS/OT scans, along with additional make-and-model information and raw responses received. </p>
 
-            <p> It is extremely unlikely that these types of devices need to be accessible in any form to queries from the Internet, so unless you are running a honeypot if you receive such a report for your network/constituency, you are strongly advised to act immediately and firewall/filter access. </p>
+            <p> Het is onwaarschijnlijk dat dit soort apparaten op enige manier toegankelijk hoeven te zijn voor queries vanaf het internet, dus tenzij u een honeypot draait, is het sterk aangeraden om - als u een rapportage vor uw netwerk/kring ontvangt - hier onmiddelijk actie op te ondernemen en de toegang tot dit apparaat te beperken/firewallen. </p>
             ',
     ],
 
@@ -2130,9 +2229,9 @@ return [
     'ACCESSIBLE_XDMCP_SERVICE_REPORT' => [
         'name'          => 'Open XDCMP Service',
         'description'   => '
-            <p> Dit rapport identificeert hosts die een X Display Manager servie draaiende hebben die op het Internet benaderbaar is. </p>
+            <p> Dit rapport identificeert hosts die een X Display Manager service draaiende hebben die op het Internet benaderbaar is. </p>
 
-            <p> XDMCP leaks information about the host system and, in addition, it can be used in an amplification attack, providing an approximate 7x amplification. Please note that it does not matter if XDMCP responds with a “Willing” or an “Unwilling”; the service provides the same level of amplification. </p>
+            <p> XDMCP lekt informatie over het hostsysteem. Ook kan deze service in een amplificatie-aanval gebruikt worden. leaks information about the host system and, in addition, it can be used in an amplification attack, providing an approximate 7x amplification. Please note that it does not matter if XDMCP responds with a “Willing” or an “Unwilling”; the service provides the same level of amplification. </p>
             ',
     ],
 
