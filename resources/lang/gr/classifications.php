@@ -1741,7 +1741,7 @@ return [
 
             <h3>Nginx</h3>
 
-            <p>ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+            <p>ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
 
             Similar to the Apache config above, you will get TLSv1.0+ support and no SSL. You can check the config and restart.
 
@@ -1767,7 +1767,7 @@ return [
 
             SSLProtocol All -SSLv2 -SSLv3
 
-            This will give you support for TLSv1.0, TLSv1.1 and TLSv1.2, but explicitly removes support for SSLv2 and SSLv3. Check the config and then restart Apache.
+            This will give you support for TLSv1.0, TLSv1.1, TLSv1.2 and TLSv1.3, but explicitly removes support for SSLv2 and SSLv3. Check the config and then restart Apache.
 
             apachectl configtest
 
