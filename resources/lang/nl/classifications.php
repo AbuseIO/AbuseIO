@@ -24,9 +24,9 @@ return [
     ],
 
     'BOTNET_INFECTION' => [
-        'name'        => 'Botnet infectie',
+        'name'        => 'Botnet-infectie',
         'description' => "
-             <h2>What is a 'Botnet infection'?</h2>
+             <h2>Wat is een 'Botnet-infectie'?</h2>
 
             <p>Botnet is a portmanteau derived from the words robot and network. Bot refers
             to a computer program that independently performs automated jobs. Such programs
@@ -44,26 +44,26 @@ return [
             and even by simply clicking attachments or links in an e-mail or merely connecting
             peripherals such as USB sticks or external hard drives to the system.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>The IP listed in the report (the system behind it using NAT), has seen
             participating inside the botnet. With your system in communication with the
             botnet you can be 99,9% sure it has been compromised. It's hosting malware
             and is participating in a botnet.</p>
 
-            <p>A botnet can be used to steal your personal data, send
-            spam, hack into other computers and launch network attacks. In these examples
-            you are the actual source of these attacks!</p>
+            <p>Een botnet kan worden gebruikt om uw persoonlijke data te stelen, 
+            spam te versturen, andere computers te hacken en netwerkaanvallen te lanceren. 
+            In al deze voorbeelden, bent u de bron van deze aanvallen!</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
-            <p>This issue needs to be resolved by removing the malicious software. In
-            very persistent infections you will need to reinstall the system to get rid
-            of the infection.</p>
+            <p>Dit probleem moet worden opgelost door de kwaadaardige software te verwijderen.
+            In het geval van erg persistente infecties, zal het besturingssysteem opnieuw moeten worden
+            geïnstalleerd om van de infectie af te kunnen komen.</p>
 
             <h2>Tips to resolve this matter</h2>
 
-            <p>If your system is a workstation or server:<ul>
+            <p>Indien uw systeem een werkstation of server is:<ul>
             <li>Install including all updates an antivirus software and run a full scan of your computer.
             It's recommended to try several scanners as not every scanner is able to detect a specific
             kind of malware.</li>
@@ -79,7 +79,7 @@ return [
             having free access to the network.</li>
             </ul></p>
 
-            <p>If your system is a website / hosting system:<ul>
+            <p>Indien uw systeem een website / hostingsysteem is:<ul>
             <li>If you suspect a user account has been compromised, change the password for the account
                                                                                             immediately.</li>
             <li>Scan all hosted websites and temporary directories for suspicious files and remove them.
@@ -88,12 +88,12 @@ return [
             <li>Install a rootkit and a virus scanner to ensure all malicious files have been removed.</li>
             </ul></p>
 
-            <p>Once all malicious software has been removed make sure the server can't be compromised again
-            by installing the latest updates for your operating system, control panel and hosted
-            applications, including themes and plugins (i.e. Wordpress). If you do not upgrade them
-            directly you will face a re-infection in a very short time!</p>
+            <p>Zodra al de malafide software verwijderd is, zorg ervoor dat de server niet opnieuw aangetast kan worden. 
+            Installeer de nieuwste updates voor uw besturingssysteem, control panel en gehoste applicaties,
+            inclusief themas en plugins (oftewel Wordpress) Als u deze niet direct upgradet, zal het systeem binnen korte tijd opnieuw geïnfecteerd zijn!
+            </p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='https://www.ncsc.nl/binaries/content/documents/ncsc-en/current-topics/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet</a><br>
 
@@ -108,7 +108,7 @@ return [
     'COMPROMISED_WEBSITE' => [
         'name'        => 'Gecompromitteerde website',
         'description' => "
-            <h2>What is a 'Compromised website'?</h2>
+            <h2>Wat is een 'Compromised website'?</h2>
 
             A comprimised website is (hacked) content placed on your site without your permission
             as a result of vulnerabilities in your site’s security.
@@ -120,7 +120,7 @@ return [
             to compromise a website. With this in mind, it comes as no surprise that most website
             owners simply don’t know how their sites were compromised.
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>When your website is compromised, not only your website contains changes done by hackers
             but it also contains one or more security problems that allowed a hacker to gain access
@@ -150,7 +150,7 @@ return [
             been recorded. For example a spam-sending script.</li>
             </ul>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
             damage. First take your entire website offline first. This is pretty impopulair, however if
@@ -189,7 +189,7 @@ return [
             security service.</li>
             </ul>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
             <a target'_blank' href='http://www.stopbadware.org/'>stopbadware.org has great information, and their forums have a number of helpful and knowledgeable volunteers who may be able to help.</a><br>
@@ -213,7 +213,7 @@ return [
             Het kan ertoe leiden dat zoekmachine's jouw site als verdacht gaan aanmerken, waardoor deze minder toegangkelijk voor je bezoekers wordt.
             Als een hacker malware op jouw site heeft gezet, dan is deze zeer waarschijnlijk gehackt.</p>
 
-            <h2>Aanbevelingen:</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>Verwijder alle kwaadwillig gehoste bestanden, check of jouw site gehackt is en ruim malafide bestanden op.</p>
 
@@ -235,7 +235,7 @@ return [
     'FEEDBACK_LOOP' => [
         'name'        => 'Feedback Loop (FBL) bericht',
         'description' => "
-                <h2>What is A Feedback Loop?</h2>
+                <h2>Wat is een Feedback Loop?</h2>
 
                 <p>In general, a feedback loop (FBL) or complaint feedback loop is
                 an inter-organizational form of feedback, by which an Internet service provider (ISP) forwards
@@ -268,7 +268,7 @@ return [
                 unfounded, if they complained they were dissatisfied. Smart marketers aim to avoid dissatisfied
                 customers or prospective customers.</p>
 
-                <h2>What can i do?</h2>
+                <h2>What can I do?</h2>
 
                 <p>Campaigns, subject lines and \"from\" addresses can also be monitored to ensure that campaign
                 elements are working well. You can identify areas that need improvement. If a particular mailing,
@@ -310,7 +310,7 @@ return [
         'name'        => 'FREAK kwetsbare server',
         'description' => "
 
-            <h2>What is a 'FREAK Vulnerable Server'?</h2>
+            <h2>Wat is een 'FREAK Vulnerable Server'?</h2>
 
             <p>Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
             attack. Using Internet-wide scanning, we have been performing daily tests of all
@@ -318,7 +318,7 @@ return [
             encryption. More than a third of all servers with browser-trusted certificates are
             at risk.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
             attack. The FREAK attack is possible when a vulnerable browser connects to a
@@ -335,7 +335,7 @@ return [
             it to recover the TLS 'master secret'. From here on out, the attacker sees plaintext
             and can inject anything it wants.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>You should immediately disable support for TLS export cipher suites. While you’re
             at it, you should also disable other cipher suites that are known to be insecure
@@ -350,7 +350,7 @@ return [
 
             SSLCipherSuite ALL:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK</p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='https://freakattack.com/'>Tracking the FREAK Attack</a><br>
             <a target'_blank' href='https://www.ssllabs.com/ssltest/'>SSL Server Testtool.</a><br>
@@ -364,7 +364,7 @@ return [
         'name'        => 'Harvesting',
         'description' => "
 
-            <h2>What is 'Harvesting'?</h2>
+            <h2>Wat is 'Harvesting'?</h2>
 
             <p>Email harvesting is the process of obtaining lists of email addresses or accounts
             using various methods for use in bulk email or other purposes usually
@@ -378,12 +378,12 @@ return [
             by connecting to mailservers and guessing an email address using common
             usernames in email addresses at that domain.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Sending unsolicited email to recipients gathered by means of harvesting
             is illegal and not allowed by our terms of service.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>If you are in fact knowingly harvesting email addresses, we recommend
             you to stop doing that to prevent further escalation.</p>
@@ -393,7 +393,7 @@ return [
             <p>If this is not the case, make sure your server and your hosted websites
             have not been compromised.</p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             ",
     ],
@@ -406,7 +406,7 @@ return [
     'OPEN_CHARGEN_SERVER' => [
         'name'        => 'Open Chargen Server',
         'description' => "
-            <h2>What is an 'Open Chargen server'?</h2>
+            <h2>Wat is een 'Open Chargen server'?</h2>
 
             <p>The Character Generator Protocol (CHARGEN) is a service thats intended
             for testing, debugging, and measurement purposes. The protocol is rarely
@@ -420,7 +420,7 @@ return [
             of characters every time it receives a datagram from the connecting host.
             Any data received by the server is discarded.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Running an open (UDP) service is not bad on its own and it is mostly
             a required dependancy when installing a system.
@@ -447,13 +447,13 @@ return [
             amount of bandwidth coming from a small number of machines into a massive
             traffic load hitting a victim from around the Internet.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>There is no reason to have this CHARGEN service enabled on a public facing
             interface. You should either stop te service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://dnsamplificationattacks.blogspot.nl/2013/07/source-port-chargen-destination-port.html'>Amplification Attacks Observer</a><br>
             ",
@@ -462,17 +462,17 @@ return [
     'OPEN_DNS_RESOLVER' => [
         'name'        => 'Open DNS Resolver',
         'description' => "
-            <h2>What is an 'Open DNS Resolver'?</h2>
+            <h2>Wat is een 'Open DNS Resolver'?</h2>
 
-            <p>An open DNS server is a DNS server which is willing to resolve
-            recursive DNS queries for anyone on the Internet.</p>
+            <p>Een open DNS server is a DNS server die bereid is om recursieve DNS queries 
+            voor een ieder op het Internet uit te voeren.</p>
 
             <p>When a DNS server resolves a recursive DNS query, it tracks down
             information about a domain name hosted on some other DNS server
             somewhere else on the Internet (a recursive process involving
             several other DNS servers in the DNS hierarchy).</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Running an open (UDP) service is not bad on its own and it is mostly
             a required dependancy when installing a system.
@@ -499,7 +499,7 @@ return [
             amount of bandwidth coming from a small number of machines into a massive
             traffic load hitting a victim from around the Internet.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>In most cases the computer has installed a DNS service as an dependancy
             as resolving is needed on that computer. However its only required to do
@@ -558,14 +558,14 @@ return [
 
             <h3>Windows Systems</h3>
 
-            <p>Please see the following Microsoft TechNet examples:<br>
+            <p>Zie de volgende voorbeelden van Microsoft TechNet:<br>
             <br>
             <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc771738.aspx'>Disabling recursion on Windows Server 2008 R2 systems</a><br>
             <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc787602.aspx'>Disabling recursion on older Windows Server systems</a><br>
             <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc773370(WS.10).aspx'>Acting as a non-recursive forwarder</a> (See the 'Notes' section under the 'Using the Windows interface' instructions)<br>
             </p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://dns.measurement-factory.com/cgi-bin/openresolvercheck.pl/'>A website for (re)checking your DNS service</a><br>
             <a target'_blank' href='http://openresolverproject.org/'>the Open Resolver Project</a><br>
@@ -584,7 +584,7 @@ return [
     'OPEN_MDNS_SERVICE' => [
         'name'        => 'Open mDNS Service',
         'description' => "
-            <h2>What is an 'Open mDNS Service'?</h2>
+            <h2>Wat is een 'Open mDNS Service'?</h2>
 
             <p>An Open mDNS Service is a mDNS server which is willing to resolve
             recursive DNS queries for anyone on the Internet.</p>
@@ -594,7 +594,7 @@ return [
             somewhere else on the Internet (a recursive process involving
             several other DNS servers in the DNS hierarchy).</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Running an open (UDP) service is not bad on its own and it is mostly
             a required dependancy when installing a system.
@@ -621,7 +621,7 @@ return [
             amount of bandwidth coming from a small number of machines into a massive
             traffic load hitting a victim from around the Internet.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>In most cases the computer has installed a DNS service as an dependancy
             as resolving is needed on that computer. However its only required to do
@@ -647,7 +647,7 @@ return [
     'OPEN_IMPI_SERVER' => [
         'name'        => 'Open IPMI Server',
         'description' => "
-            <h2>What is an 'Open IPMI Server'?</h2>
+            <h2>Wat is een 'Open IPMI Server'?</h2>
 
             <p>IPMI defines a set of interfaces used by system administrators for
             out-of-band management of computer systems and monitoring of their operation.
@@ -672,7 +672,7 @@ return [
             some more serious than other. In short; you really do not want to expose IPMI
             to the internet. </p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>Implement a seperate network for hosting these Out-Of-Band management entries and
             place them in a RFC1918(non public IP) space in combination with a VPN or add a
@@ -682,7 +682,7 @@ return [
             we havent come across an implementation that actually fully protects the IPMI
             interface from outside influance.</p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://fish2.com/ipmi/'>Dan Farmer on IPMI security issues</a><br>
             <a target'_blank' href='https://www.us-cert.gov/ncas/alerts/TA13-207A'>US-CERT alert TA13-207A</a><br>
@@ -693,14 +693,14 @@ return [
     'OPEN_MEMCACHED_SERVER' => [
         'name'        => 'Open Memcached Server',
         'description' => "
-            <h2>What is an 'Open Memcached Server'?</h2>
+            <h2>Wat is een 'Open Memcached Server'?</h2>
 
             <p>Memcached is an in-memory key-value store for small chunks of
             arbitrary data (strings, objects) from results of database calls,
             API calls, or page rendering. Its intended for use in speeding up
             dynamic web applications by alleviating database load</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>The problem is actually pretty simple - memcached is built for speed,
             not for security, and it does nothing to secure itself. As far as
@@ -744,7 +744,7 @@ return [
             Ouch. We just connected to our server and pulled out our super-secret catch
             phrase. We don't want or need memcache to be listening to the outside world.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>If you are dealing with a multi-server environment, the solution will be more
             complicated than this - you'll want a firewall, a private network, and other
@@ -779,7 +779,7 @@ return [
 
             <p></p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <atarget'_blank'  href='http://blog.codesherpas.com/on_the_path/2010/08/securing-memcache-in-2-minutes.html'>David Bock - Securing Memcache in 2 Minutes</a><br>
 
@@ -789,7 +789,7 @@ return [
     'OPEN_MSSQL_SERVER' => [
         'name'        => 'Open Microsoft SQL Server',
         'description' => "
-            <h2>What is an 'Open Microsoft SQL Server'?</h2>
+            <h2>Wat is een 'Open Microsoft SQL Server'?</h2>
 
             <p>Microsoft SQL Server is a relational database management system developed
             by Microsoft. As a database, it is a software product whose primary function
@@ -801,7 +801,7 @@ return [
             Internet-facing applications with many concurrent users. Its primary query
             languages are T-SQL and ANSI SQL.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>This service has the potential to expose information about a clients network
             on which this service is accessible and the service itself can be used in UDP
@@ -809,7 +809,7 @@ return [
             worm/virus infections that exploit a vulnarability in Windows to gain access
             to your system.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>Either use the Windows Firewall or even better an external firewall to prevent
             access to Netbios (and other Windows ports). The windows firewall has an nasty
@@ -829,7 +829,7 @@ return [
             <p>Ports used by Microsoft are: TCP/1433, UDP/1434, TCP/1434, TCP/4022, TCP/135, TCP/2383.
             In addition the SQL Server uses a randomly assign dynamic port for named instance! </p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='https://msdn.microsoft.com/en-us/library/ms175043.aspx'>Configure a Windows Firewall for Database Engine Access</a><br>
 
@@ -839,7 +839,7 @@ return [
     'OPEN_MONGODB_SERVER' => [
         'name'        => 'Open MongoDB Server',
         'description' => "
-            <h2>What is an 'Open MongoDB Server'?</h2>
+            <h2>Wat is een 'Open MongoDB Server'?</h2>
 
             <p>MongoDB is a cross-platform document-oriented database. Classified as a NoSQL
             database, MongoDB eschews the traditional table-based relational database
@@ -847,7 +847,7 @@ return [
             the format BSON), making the integration of data in certain types of
             applications easier and faster.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Your system has a MongoDB NoSQL database (see www.mongodb.org for more
             information) running which is accessible on the internet. While authentication
@@ -857,7 +857,7 @@ return [
             read-and-write access to these databases, many of which contain sensitive
             customer data or live backends of Web shops</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>Either bind this service only to non-public facing connections or add a firewall
             to block the port MongoDB is running on.</p>
@@ -894,7 +894,7 @@ return [
             (e.g., from the Internet) outside the trusted network, it is crucial to also
             set up transfer encryption and proper access control.</p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://cispa.saarland/wp-content/uploads/2015/02/MongoDB_documentation.pdf'>MongoDB databases at risk</a><br>
 
@@ -904,7 +904,7 @@ return [
     'OPEN_NATPMP_SERVER' => [
         'name'        => 'Open NAT_PMP Server',
         'description' => "
-            <h2>What is an 'Open NAT-PMP Server'?</h2>
+            <h2>Wat is een 'Open NAT-PMP Server'?</h2>
 
             <p>The NAT Port Mapping Protocol (NAT-PMP) is a network protocol for establishing
             network address translation (NAT) settings and port forwarding configurations
@@ -912,7 +912,7 @@ return [
             external IPv4 address of a NAT gateway, and provides means for an application
             to communicate the parameters for communication to peers.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Many NAT-PMP devices are incorrectly configured, allowing them to field requests
             received on external network interfaces or map forwarding routes to addresses
@@ -932,7 +932,7 @@ return [
             about a NAT device, manipulate its port mapping, intercept its private and public
             traffic, access its private client services, and block its host services.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>Developers and administrators implementing NAT-PMP should exercise care to ensure
             that devices are configured securely, specifically that</p>
@@ -946,7 +946,7 @@ return [
             - Deploy firewall rules to block untrusted hosts from being able to access port 5351/udp.
             - Consider disabling NAT-PMP on the device if it is not absolutely necessary.
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
             <a target'_blank' href='https://community.rapid7.com/community/metasploit/blog/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities'>NAT-PMP Implementation and Configuration Vulnerabilities</a>
@@ -957,14 +957,14 @@ return [
     'OPEN_NTP_SERVER' => [
         'name'        => 'Open NTP Server',
         'description' => "
-            <h2>What is an 'Open NTP Server'?</h2>
+            <h2>Wat is een 'Open NTP Server'?</h2>
 
             <p>Network Time Protocol (NTP) is a networking protocol for clock
             synchronization between computer systems over packet-switched,
             variable-latency data networks. In operation since before 1985, NTP
             is one of the oldest Internet protocols in current use.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Running an open (UDP) service is not bad on its own and it is mostly
             a required dependancy when installing a system.
@@ -991,7 +991,7 @@ return [
             amount of bandwidth coming from a small number of machines into a massive
             traffic load hitting a victim from around the Internet.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>In most cases the computer has installed a NTP service as an dependancy
             as timekeeping is needed on that computer. However its only required to do
@@ -1043,7 +1043,7 @@ return [
             Configuring Autokey documentation</a>.</p>
 
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://www.team-cymru.org/secure-ntp-template.html'>Examples in securing a NTP service</a>
             <a target'_blank' href='http://www.internetsociety.org/sites/default/files/01_5.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
@@ -1054,7 +1054,7 @@ return [
     'OPEN_NETBIOS_SERVER' => [
         'name'        => 'Open Netbios Server',
         'description' => "
-            <h2>What is an 'Open Netbios server'?</h2>
+            <h2>Wat is een 'Open Netbios server'?</h2>
 
             <p>NetBIOS is a transport protocol that Microsoft Windows systems use to share
             resources.  For example, if a PC running Windows wants to connect to and access a
@@ -1064,7 +1064,7 @@ return [
             ports 139 and 445.  Both of these approaches, however, tend to increase the attack
             surface of a network.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>The ports that that are open to the Internet are UDP/137, UDP/138, and TCP/139.
             Unfortunately, the most popular attacker target is NetBIOS and against these
@@ -1096,7 +1096,7 @@ return [
             to 0-day attacks or worm/virus infections that exploit a vulnarability in Windows to
             gain access to your system.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>Either use the Windows Firewall or even better an external firewall to prevent access
             to Netbios (and other Windows ports). The windows firewall has an nasty way of trying
@@ -1126,7 +1126,7 @@ return [
             netsh advfirewall firewall add rule name='NetBIOS TCP Port 139' dir=in action=deny protocol=TCP localport=139<br>
             netsh advfirewall firewall add rule name='NetBIOS TCP Port 139' dir=out action=deny protocol=TCP localport=139<br>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='https://technet.microsoft.com/en-us/library/cc940063.aspx'>Microsoft NetBIOS Over TCP/IP guide</a>
 
@@ -1136,7 +1136,7 @@ return [
     'OPEN_QOTD_SERVER' => [
         'name'        => 'Open QOTD Server',
         'description' => "
-            <h2>What is an 'Open QOTD Server'?</h2>
+            <h2>Wat is een 'Open QOTD Server'?</h2>
 
             <p>The Quote Of The Day (QOTD) service is a member of the Internet protocol
             suite, defined in RFC 865. As indicated there, the QOTD concept predated
@@ -1144,7 +1144,7 @@ return [
             a daily quote on request by a user. It was then formally codified both
             for prior purposes as well as for testing and measurement purposes in RFC 865.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Running an open (UDP) service is not bad on its own and it is mostly
             a required dependancy when installing a system.
@@ -1171,7 +1171,7 @@ return [
             amount of bandwidth coming from a small number of machines into a massive
             traffic load hitting a victim from around the Internet.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>There is no reason to have this QOTD service enabled on a public facing
             interface. You should either stop te service or make sure it is not reachable
@@ -1210,14 +1210,14 @@ return [
     'OPEN_REDIS_SERVER' => [
         'name'        => 'Open REDIS Server',
         'description' => "
-            <h2>What is an 'Open REDIS Server'?</h2>
+            <h2>Wat is een 'Open REDIS Server'?</h2>
 
             <p>Redis clients communicate with the Redis server using a protocol called
             RESP (REdis Serialization Protocol). While the protocol was designed
             specifically for Redis, it can be used for other client-server software
             projects.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Redis is designed to be accessed by trusted clients inside trusted environments.
             This means that usually it is not a good idea to expose the Redis instance
@@ -1236,7 +1236,7 @@ return [
             operations to perform against the Redis instance. In general, Redis is not
             optimized for maximum security but for maximum performance and simplicity.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>Access to the Redis port should be denied to everybody but trusted clients in
             the network, so the servers running Redis should be directly accessible only
@@ -1288,7 +1288,7 @@ return [
             enough access to the network to perform eavesdropping.</p>
 
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://redis.io/topics/security'>Redis Security advisory</a><br>
 
@@ -1298,14 +1298,14 @@ return [
     'OPEN_SNMP_SERVER' => [
         'name'        => 'Open SNMP Server',
         'description' => "
-            <h2>What is an 'Open SNMP Server'?</h2>
+            <h2>Wat is een 'Open SNMP Server'?</h2>
 
             <p>Simple Network Management Protocol (SNMP) is a popular protocol for network
             management. It is used for collecting information from, and configuring,
             network devices, such as servers, printers, hubs, switches, and routers on an
             Internet Protocol (IP) network.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Open SNMP Servers can be used to collect privileged information from the
             system or even to write new 'settings' to the system if not correctly
@@ -1336,7 +1336,7 @@ return [
             amount of bandwidth coming from a small number of machines into a massive
             traffic load hitting a victim from around the Internet.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <ul>
             <li>Use firewalling to block UDP/161 entirely or only allow the hosts that
@@ -1399,7 +1399,7 @@ return [
 
             <p>restart your snmp server and test it</p>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             ",
     ],
@@ -1407,7 +1407,7 @@ return [
     'OPEN_SSDP_SERVER' => [
         'name'        => 'Open SSDP Server',
         'description' => "
-            <h2>What is an 'Open SSDP Server'?</h2>
+            <h2>Wat is een 'Open SSDP Server'?</h2>
 
             <p>The Simple Service Discovery Protocol (SSDP) is a network protocol
             based on the Internet Protocol Suite for advertisement and discovery of
@@ -1418,7 +1418,7 @@ return [
             of the discovery protocol of Universal Plug and Play (UPnP) and is
             intended for use in residential or small office environments.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Running an open (UDP) service is not bad on its own and it is mostly
             a required dependancy when installing a system.
@@ -1445,7 +1445,7 @@ return [
             amount of bandwidth coming from a small number of machines into a massive
             traffic load hitting a victim from around the Internet.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>There is no reason to have this CHARGEN service enabled on a public facing
             interface. You should either stop te service or make sure it is not reachable
@@ -1468,7 +1468,7 @@ return [
 
             <h2>Waarom is dit een probleemt?</h2>
 
-            <p>TFTP heeft geen enkele vorm van authentication of encryptie. Dit maakt
+            <p>TFTP heeft geen enkele vorm van authentificatie noch encryptie. Dit maakt
             het erg eenvoudig voor iemand om al je configuratiebestanden te downloaden
             of corrupte firmware te uploaden!</p>
 
@@ -1485,7 +1485,7 @@ return [
     'PHISING_WEBSITE' => [
         'name'        => 'Phishing Website',
         'description' => "
-            <h2>What is a 'Phishing website'?</h2>
+            <h2>Wat is een 'Phishing website'?</h2>
 
             <p>A Phishing website is the attempt to acquire sensitive information such as
             usernames, passwords, and credit card details (and sometimes, indirectly, money)
@@ -1494,7 +1494,7 @@ return [
             online payment processors or IT administrators are commonly used to lure unsuspecting
             public. Phishing emails may contain links to websites that are infected with malware. </p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>A Phishing website is usually the result of a comprimised website or comprimised user
             credentials of that website.</p>
@@ -1504,7 +1504,7 @@ return [
             to your website in the first place. The compromised website provides a useful platform for
             a range of illicit activities.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
             damage. First take your entire website offline first. This is pretty impopulair, however if
@@ -1544,7 +1544,7 @@ return [
             security service.</li>
             </ul>
 
-            <h2>Getting more information</h2>
+            <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
             <a target'_blank' href='http://www.stopbadware.org/'>stopbadware.org has great information, and their forums have a number of helpful and knowledgeable volunteers who may be able to help.</a><br>
@@ -1554,9 +1554,9 @@ return [
     ],
 
     'RBL_LISTED' => [
-        'name'        => 'RBL Notatie',
+        'name'        => 'RBL Listed',
         'description' => "
-            <h2>What does 'RBL Listed' mean?</h2>
+            <h2>Wat betekent 'RBL Listed'?</h2>
 
             <p>Your IP address has been listed on a RBL (real-time block list).</p>
 
@@ -1564,7 +1564,7 @@ return [
             high volume of unsolicited email, your computer or server has been
             misconfigured or has been compromised</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Depending on the problem, your server can potentially be used by malicous
             users on the internet to send spam or do harm to others while using your
@@ -1573,7 +1573,7 @@ return [
             <p>If your server remains listed on this RBL you will have trouble
             sending email to lots of recipients.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>In the case of a misconfiguration it could for example be the case
             that your SMTP server is accepting email from untrusted sources and you
@@ -1611,12 +1611,12 @@ return [
             your server have been flagged by an automated system or
             by an end recipient as spam or unsolicited email.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Sending spam or unsolicited email is illegal and not allowed
             by our terms of service.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>If you are indeed sending bulk email, please ensure you follow
             these bulk email rules to prevent your email from being flagged
@@ -1664,13 +1664,12 @@ return [
             Since no legit e-mail is ever sent to this address, any e-mail's that are sent to the Spam-Traps are
             immediately considered unsolicited.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
-            <p>Clean up your mailing lists. Configure your 'Hard & Soft' Bounce values to
+            <p>Schoon uw mailinglijst op. Configure your 'Hard & Soft' Bounce values to
             correctly remove recipient's when needed.</p>
 
-            <p>If you are not sending bulk email, then check your website and DNS
-            for signs of comprimise. </p>
+            <p>Als u geen bulkmail verstuurd, check dan uw website en DNS voor tekenen van compromittering. </p>
 
             <h2>Tips how to resolve this matter</h2>
 
@@ -1722,7 +1721,7 @@ return [
             more practical to carry out. Every server that is not patched for this bug is
             vulnarable for such attacks.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>The easiest and most robust solution to POODLE is to disable SSLv3 support on your server.
             This does bring with it a couple of caveats though. For web traffic, there are some legacy
@@ -1785,17 +1784,17 @@ return [
     'SPAMVERTISED_WEBSITE' => [
         'name'        => 'Spamvertised website',
         'description' => "
-            <h2>What is a 'Spamvertised web site'?</h2>
+            <h2>Wat is een 'Spamvertised web site'?</h2>
 
-            <p>A site that is being 'spamvertised' means that the site is being included as a link in spam emails.</p>
+            <p>Als een site wordt ge-'spamvertised', betekent dat dat er naar deze site wordt gelinkt in spam emails.</p>
 
-            <h2>Why is my website in Spam Emails?</h2>
+            <h2>Waarom staat mijn website in Spam Emails?</h2>
 
             <p>This is generally the case when your site (or DNS) has been comprimised in some way.
             Spammers or hackers often add a redirect from your site to their Spam site.
             Spammers would prefer to use your website for their links, as most likely their site is already known as bad. </p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>Check your website and DNS for signs of comprimise. </p>
 
@@ -1824,7 +1823,7 @@ return [
             multitenant-capable full-text search engine with a RESTful web interface and
             schema-free JSON documents.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Your system has an ElasticSearch instance running (see www.elastic.co for
             more information) which is accessible on the internet. On its own, ElasticSearch
@@ -1835,7 +1834,7 @@ return [
             <p>This is especially problematic if this instance has dynamic scripting running.
             The scripting engine can be abused to launch a denial of service attack.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>Either bind this service only to non-public facing connections or add a firewall
             to block the port ElasticSearch is running on.</p>
@@ -1869,13 +1868,13 @@ return [
     'OPEN_PORTMAP_SERVER' => [
         'name'        => 'Open Portmapper Server',
         'description' => "
-            <h2>What is an 'Open Portmapper Server'?</h2>
+            <h2>Wat is een 'Open Portmapper Server'?</h2>
 
             <p>The port mapper (rpc.portmap or rpcbind) is a remote procedure call (RPC) service
             running on TCP or UDP port 111 that runs on servers to provide information about
             running services and their corresponding port numbers, such as NFS.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>Once an attacker discovers an active port 111 on a device, he can use this information
             to learn about running services, which is a very important first step for a hacking attack.</p>
@@ -1903,7 +1902,7 @@ return [
             amount of bandwidth coming from a small number of machines into a massive
             traffic load hitting a victim from around the Internet.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie</h2>
 
             <p>We recommend you to only allow RPC calls from trusted sources. This
             can be achieved by dropping all traffic for RPC services on your local
@@ -2059,7 +2058,7 @@ return [
     'OPEN_SSH_SERVER' => [
     'name'          => 'Open SSH service',
     'description'   => '
-        <p> Dit rapport identificeert hosts die een Secure Shell (SSH) service die vanaf het internet toegankelijk is hebben draaien. </p>
+        <p> Dit rapport identificeert hosts die een Secure Shell (SSH) service - die vanaf het internet toegankelijk is - hebben draaien. </p>
 
         <p> This does not indicate that anything is wrong with the system, but if the SSH running on a system (or the version that is running) seems out of place, you may wish to investigate. </p>
         ',
@@ -2095,9 +2094,9 @@ return [
     'OPEN_STUN_SERVICE' => [
         'name'          => 'Open STUN Service',
         'description'   => '
-            <p> This report identifies accessible STUN (Session Traversal Utilities for NAT) servers on port 3478/udp. As described on Wikipedia, STUN is a standardized set of methods, including a network protocol, for traversal of network address translator (NAT) gateways in applications of real-time voice, video, messaging, and other interactive communications. The STUN service is known to be a potential UDP message amplifier, that can be abused for reflected DDoS attacks. </p>
+            <p> Dit rapport identificeert toegankelijke STUN (Session Traversal Utilities for NAT) servers op port 3478/udp. As described on Wikipedia, STUN is a standardized set of methods, including a network protocol, for traversal of network address translator (NAT) gateways in applications of real-time voice, video, messaging, and other interactive communications. The STUN service is known to be a potential UDP message amplifier, that can be abused for reflected DDoS attacks. </p>
 
-            <p> Consider using STUN over TCP instead by default. </p>
+            <p> Overweeg om standaard STUN over TCP te gebruiken. </p>
 ',
     ],
 
