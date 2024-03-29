@@ -69,11 +69,10 @@ return [
 
             <p>De enige manier om deze kwetsbaarheid op te lossen, is om IPSEC uit te zetten.</p>
 
-            <h2>Tips how to resolve this matter</h2>
+            <h2>Tips om dit op te lossen/h2>
             <ul>
             <li>Upgrade naar een niet-getroffen versie van Cisco IOS</li>
-            <li>implement an intrusion prevention system (IPS) or intrusion detection system (IDS) to help detect
-            and prevent attacks that attempt to exploit this vulnerability.</li>
+            <li>implementeer een \'intrusion prevention system\' (IPS) of \'intrusion detection system\' (IDS) waarmee u aanvallen die gebruik maken van deze kwetsbaarheid kan voorkomen en detecteren.</li>
             </ul>
 
             <h2>Meer informatie</h2>
@@ -86,7 +85,7 @@ return [
     'OPEN_RDP_SERVER' => [
         'name'        => 'Open RDP Server',
         'description' => '
-            <h2>What is a \'Open RDP Server\'?</h2>
+            <h2>Wat is een \'Open RDP Server\'?</h2>
 
             <p>  </p>
 
@@ -104,7 +103,7 @@ return [
 
             <p>Disable public access to RDP, or make sure to detect and mitigate brute force attacks</p>
 
-            <h2>Tips how to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
             <ul>
             <li>Firewall port TCP/3389 en gebruik een VPN om toegang te krijgen tot uw interne netwerk.</li>
             <li>Firewall port TCP/3389 en laat alleen vertrouwde IP-adressen toe.</li>
@@ -159,7 +158,7 @@ return [
             In het geval van erg persistente infecties, zal het besturingssysteem opnieuw moeten worden
             geïnstalleerd om van de infectie af te kunnen komen.</p>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <p>Indien uw systeem een werkstation of server is:<ul>
             <li>Installeer en update een antivirussoftware en voer een volledige scan van uw computer uit. 
@@ -256,7 +255,7 @@ return [
             <p>After you closed your website you will need to clean up the changed area's of your
             website.</p>
 
-            <h2>Tips how to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <p>De veiligste manier om een gehackte site op te schonen, is om hem helemaal te verwijderen
             en een versie up te loaden waarvan men zeker weet dat hij schoon is.</p>
@@ -439,7 +438,7 @@ return [
             generator. We also recommend testing your configuration with the Qualys SSL Labs
             SSL Server Test tool</p>
 
-            <h2>Tips how to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <p>With apache server add the following to your SSL section(s):
 
@@ -482,7 +481,7 @@ return [
             <p>If you are in fact knowingly harvesting email addresses, we recommend
             you to stop doing that to prevent further escalation.</p>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <p>If this is not the case, make sure your server and your hosted websites
             have not been compromised.</p>
@@ -605,9 +604,9 @@ return [
             to limit access to the required group of computer or implement safegaurds
             like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
-            <h3>Firewalling the DNS Service</h3>
+            <h3>De DNS Service firewallen</h3>
 
             <p>To block incoming remote requests you will need to filter UDP/port 53. You
             service might also be listening on TCP/port 53, however only UDP services
@@ -727,7 +726,7 @@ return [
             to limit access to the required group of computer or implement safegaurds
             like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <h3>Firewalling the DNS Service</h3>
 
@@ -754,7 +753,7 @@ return [
             but the base is the same on each of them: It allows access to hardware outside
             your operating system (and its locally installed firewall!).</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>IPMI is the base of most of the Out Of Band / Lights Out management suites and
             is implemented by the server's Baseboard Management Controller (BMC). The BMC
@@ -911,7 +910,7 @@ return [
             ports if you install something that uses Netbios. In all cases the
             administrator is unaware of these open ports.</p>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <p>By default, Microsoft Windows enables the Windows Firewall, which closes port
             1433 to prevent Internet computers from connecting to a default instance of SQL
@@ -956,7 +955,7 @@ return [
             <p>Either bind this service only to non-public facing connections or add a firewall
             to block the port MongoDB is running on.</p>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <p>The MongoDB service default configuration enables local access only. Its main
             configuration file is usually found at:
@@ -1035,7 +1034,7 @@ return [
             - NAT-PMP requests are only accepted on internal interfaces, and
             - port mappings are only opened for the requesting internal IP address.
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             - Deploy firewall rules to block untrusted hosts from being able to access port 5351/udp.
             - Consider disabling NAT-PMP on the device if it is not absolutely necessary.
@@ -1101,7 +1100,7 @@ return [
             like ... to prevent a DNS Amplification Attack.</p>
 
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <h3>UNIX/Linux ntpd</h3>
 
@@ -1212,7 +1211,7 @@ return [
             <li>Under no circumstances sharing the Windows or WinNT directories or any directory located beneath them</li>
             </ul>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <p>In a privileged DOS box run the following commands:</p>
 
@@ -1346,9 +1345,9 @@ return [
 
             <p></p>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
-            <h3>Firewalling remote access</h3>
+            <h3>Remote access firewallen</h3>
 
             <p>Simplest way is to block the default port TCP/6379 (or whatever port is listed
             in the report) and only allow IP's that should actually have access to this service.</p>
@@ -1444,7 +1443,7 @@ return [
             community or a string thats more 'secure'</li>
             </ul>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <h3>Windows</h3>
             <ul>
@@ -1563,7 +1562,7 @@ return [
             kabelmodems van firmware en configuraties te voorzien. TFTP werd voor
             het eerst gedefinieerd in 1980.</p>
 
-            <h2>Waarom is dit een probleemt?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
             <p>TFTP heeft geen enkele vorm van authentificatie noch encryptie. Dit maakt
             het erg eenvoudig voor iemand om al je configuratiebestanden te downloaden
@@ -1612,7 +1611,7 @@ return [
             website.</p>
 
 
-            <h2>Tips how to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <p>The safest way to clean the hacked website is to delete it entirely and then upload
             a known clean version of it.</p>
@@ -1655,7 +1654,7 @@ return [
         'description' => "
             <h2>Wat betekent 'RBL Listed'?</h2>
 
-            <p>Your IP address has been listed on a RBL (real-time block list).</p>
+            <p>Uw IP-address staat op een RBL (real-time block list).</p>
 
             <p>This indicates that your server has probably been sending out a
             high volume of unsolicited email, your computer or server has been
@@ -1687,7 +1686,7 @@ return [
 
             <h2>Tips to resolve this matter</h2>
 
-            <p>Run a virus and/or malware scanner on the system to look for infections</p>
+            <p>Check uw systeem voor tekenen van infectie door een virus- en/of malwarescan uit te voeren.</p>
 
             <p>You also might want to check and resolve listings on other RBL's,
             using a RBL checker such as Anti-abuse multi-rbl-check</p>
@@ -1710,34 +1709,30 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Sending spam or unsolicited email is illegal and not allowed
-            by our terms of service.</p>
+            <p>Spam of ongewesnste e-mail versturen is illegaal en -per onze voorwaarden - niet toegestaan.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>If you are indeed sending bulk email, please ensure you follow
-            these bulk email rules to prevent your email from being flagged
-            as spam:</p>
+            <p>Als u inderdaad bulk e-mail verstuurd, volg de onderstaande regels 
+            voor bulk mail om te voorkomen dat uw mails als spam worden aangemerkt:</p>
 
             <ul>
                 <li>1) Your recipients have opted in for the service.</li>
                 <li>2) Each email sent contains a working opt-out link.</li>
             </ul>
 
-            <p>If you are not sending bulk email, then check your website and DNS
-            for signs of comprimise. </p>
+            <p>Als u geen bulk e-mail verstuurd, controleer uw website en DNS op tekenen van compromittering. </p>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
-            <p>If the server should not be sending much or any email, this spam
-            report could indicate that your server has been compromised.</p>
+            <p>Als het niet de bedoeling is dat de server (grote hoeveelheden) 
+            mail verstuurt, kan dit betekenen dat de server gehackt is.</p>
 
-            <p>The best way to solve the problem is to stop your mailserver(MTA)
-            and investigate the mail queues for SPAM messages. When you found an
-            example you can open it to identify its source. By stopping the MTA
-            you will prevent SPAM from being sent out. After solving the problem
-            you must clean your mail queue from all these SPAM messages before
-            starting your MTA again.</p>
+            <p>De beste manier om dit probleem op te lossen, is om uw mailserver (MTA)
+            stop te zetten en de mailqueue op SPAM-berichten te controleren. 
+            Als u verdachte mail vindt, kunt u deze openen om erachter te komen waar deze vandaan komt. 
+            Door de MTA stop te zetten, voorkomt u dat de SPAM wordt verstuurd. 
+            Nadat het probleem is opgelost, moet u alle SPAM uit de mailqueue halen alvorens u uw MTA opnieuw opstart.</p>
 
             <h2>Meer informatie/h2>
 
@@ -1754,10 +1749,10 @@ return [
 
             <p>Een SpamTrap is een honeypot die gebruikt wordt om spam te verzamelen.</p>
 
-            <h2>Waarom is hhet een probleem om hier mails naartoe te versturen?</h2>
+            <h2>Waarom is het een probleem als hier mails naartoe worden verstuurd?</h2>
 
             <p>SpamTraps zijn e-mailadressen die speciaal bedoelt zijn om spam te ontvangen.
-            SpamTraps worden voor het oog verborgen op websites, waardoor ze alleen door geautomatiseerde scans worden gezien.
+            SpamTraps worden voor het oog verborgen op websites, waardoor ze alleen door geautomatiseerde scanners worden gezien.
             Gezien er geen legitieme mail naar dit e-mailadres wordt gestuurd, worden alle ontvangen mails direct als ongewenst aangezien.</p>
 
             <h2>Aanbevolen actie</h2>
@@ -1765,7 +1760,7 @@ return [
             <p>Schoon uw mailinglijst op. Configure your 'Hard & Soft' Bounce values to
             correctly remove recipient's when needed.</p>
 
-            <p>Als u geen bulkmail verstuurd, check dan uw website en DNS voor tekenen van compromittering. </p>
+            <p>Als u geen bulk e-mail verstuurd, check dan uw website en DNS voor tekenen van compromittering. </p>
 
             <h2>Tips how to resolve this matter</h2>
 
@@ -1773,18 +1768,17 @@ return [
 
             <ul>
                     <li>Remove malformed domain names</li>
-                    <li>Remove role accounts (sales@example.com, accounts@example.net)</li>
+                    <li>Haal rolaccounts eruit (sales@example.com, accounts@example.net)</li>
                     <li>Adhere to the unsubscribe process</li>
                     <li>Koopt nooit een mailing list</li>
                     <li>Gebruik 'double opt-in'</li>
             </ul>
 
-            <p>The best way to solve the problem is to stop your mailserver(MTA)
-            and investigate the mail queues for SPAM messages. When you found an
-            example you can open it to identify its source. By stopping the MTA
-            you will prevent SPAM from being sent out. After solving the problem
-            you must clean your mail queue from all these SPAM messages before
-            starting your MTA again.</p>
+            <p>De beste manier om dit probleem op te lossen, is om uw mailserver (MTA)
+            stop te zetten en de mailqueue op SPAM-berichten te controleren. 
+            Als u verdachte mail vindt, kunt u deze openen om erachter te komen waar deze vandaan komt. 
+            Door de MTA stop te zetten, voorkomt u dat de SPAM wordt verstuurd. 
+            Nadat het probleem is opgelost, moet u alle SPAM uit de mailqueue halen alvorens u uw MTA opnieuw opstart.</p>
 
             <h2>Meer informatie</h2>
 
@@ -1884,7 +1878,7 @@ return [
 
             <p>Als een site wordt ge-'spamvertised', betekent dat dat er naar deze site wordt gelinkt in spam emails.</p>
 
-            <h2>Waarom staat mijn website in Spam Emails?</h2>
+            <h2>Waarom staat mijn website in Spam e-mails?</h2>
 
             <p>This is generally the case when your site (or DNS) has been comprimised in some way.
             Spammers or hackers often add a redirect from your site to their Spam site.
@@ -1894,7 +1888,7 @@ return [
 
             <p>Check your website and DNS for signs of comprimise. </p>
 
-            <h2>Tips on how to resolve this</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <ul>
             <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plugins and update where possible.</li>
@@ -2175,7 +2169,8 @@ return [
     'OPEN_ICS' => [
         'name'          => 'Open Industrial Control Service (ICS) application',
         'description'   => '
-            <p> This report contains a list of devices that are responding to various specialized ICS/OT scans, along with additional make-and-model information and raw responses received. </p>
+            <p> Dit rapport bevat een lijst met apparaten die reageren op een aantal gespecializeerde ICS/OT scans. Ook bevat het de ontvangen make-and-model informatie en de 
+            this report contains a list of devices that are responding to various specialized ICS/OT scans, along with additional make-and-model information and raw responses received. </p>
 
             <p> Het is onwaarschijnlijk dat dit soort apparaten op enige manier toegankelijk hoeven te zijn voor queries vanaf het internet, dus tenzij u een honeypot draait, is het sterk aangeraden om - als u een rapportage vor uw netwerk/kring ontvangt - hier onmiddelijk actie op te ondernemen en de toegang tot dit apparaat te beperken/firewallen. </p>
             ',
@@ -2186,14 +2181,17 @@ return [
         'description'   => '
             <p> Dit rapport identificeert toegankelijke PostgreSQL server instances op port 5432/TCP. </p>
 
-            <p> Het is onwaarschijnlijk dat uw PostgreSQL server benaderbaar hoeft te zijn voor externe verbindingen vanaf het internet.(oftewel: een mogelijk extern aanvalsoppervlak). Indien u wel een rapport ontvangt op uw netwerk/kring, zorg er dan voor dat dataverkeer naar uw PostgreSQL-instantie gefilterd wordt. Pas authentificatie op de server toe. </p>
+            <p> Het is onwaarschijnlijk dat uw PostgreSQL server benaderbaar hoeft te zijn voor externe verbindingen vanaf het internet (oftewel: een mogelijk extern aanvalsoppervlak). Indien u wel een rapport ontvangt op uw netwerk/kring, zorg er dan voor dat dataverkeer naar uw PostgreSQL-instantie gefilterd wordt. Pas authentificatie op de server toe. </p>
             ',
     ],
 
     'OPEN_STUN_SERVICE' => [
         'name'          => 'Open STUN Service',
         'description'   => '
-            <p> Dit rapport identificeert toegankelijke STUN (Session Traversal Utilities for NAT) servers op port 3478/udp. As described on Wikipedia, STUN is a standardized set of methods, including a network protocol, for traversal of network address translator (NAT) gateways in applications of real-time voice, video, messaging, and other interactive communications. The STUN service is known to be a potential UDP message amplifier, that can be abused for reflected DDoS attacks. </p>
+            <p> Dit rapport identificeert toegankelijke STUN (Session Traversal Utilities for NAT) servers op port 3478/udp.
+            Zoals omschreven op Wikipedia (EN): "STUN is a standardized set of methods, including a network protocol, for traversal of network address translator (NAT) gateways in applications of 
+            real-time voice, video, messaging, and other interactive communications. 
+            The STUN service is known to be a potential UDP message amplifier, that can be abused for reflected DDoS attacks." </p>
 
             <p> Overweeg om standaard STUN over TCP te gebruiken. </p>
 ',
@@ -2202,27 +2200,35 @@ return [
     'OPEN_ERLANG_PORTMAPPER_DAEMON' => [
         'name'          => 'Open Erlang Port Mapper Daemon server',
         'description'   => '
-            <p> This report identifies accessible Erlang Port Mapper Daemon (EPMD) servers on port 4369/tcp. This daemon acts as a name server for hosts involved in distributed Erlang computations. </p>
+            <p> Dit rapport identificeert toegankelijke Erlang Port Mapper Daemon (EPMD) servers op port 4369/tcp.
+            Deze daemon doet dienst als name server for hosts die bij gedistributeerde Erlang berekeningen betrokken zijn. </p>
 
-            <p> It is unlikely that you need to have an EPMD server allowing for external connections from the Internet (and thus a possible external attack surface). Make sure to firewall traffic to this service. If you do receive this report from us for your network or constituency make sure to firewall traffic to this service.</p>
+            <p> Het is onwaarschijnlik dat uw EPMD server externe verbindingen vanaf het internet toe hoeft te staan (gezien dit een mogelijk extern aanvalsvalk kan zijn).
+            Zorg ervoor dat het verkeer naar deze dienst gefirewallet wordt
+            It is unlikely that you need to have an EPMD server allowing for external connections from the Internet (and thus a possible external attack surface). 
+            Make sure to firewall traffic to this service. If you do receive this report from us for your network or constituency make sure to firewall traffic to this service.</p>
 ',
     ],
 
     'OPEN_SOCKS_PROXY' => [
         'name'          => 'Open SOCKS Proxy service',
         'description'   => '
-            <p> This report identifies hosts that have a SOCKS proxy version 4 or SOCKS proxy version 5 service running on port 1080/TCP and accessible from the Internet. The SOCKS protocol enables the exchange of packets between a client and server through a proxy server. These proxy servers can optionally support authentication.</p>
+            <p>Dit rapport identificeert hosts die een vanaf het internet toegankelijke SOCKS proxy versie 4 of 5 service hebben draaien op port 1080/TCP.
+            Het SOCKS protocol maakt het mogelijk voor een client en server om via een proxy server packets uit te wisselen. Deze proxy servers kunnen optioneel authentificatie ondersteunen.</p>
 
-            <p> Open proxy servers allowing proxying of services without authentication are often subject to abuse. Others, even with authentication, may also have security implications. </p>
+            <p> Open proxy servers die het proxyen van diensten zonder authentificatie toestaan, worden vaak misbruikt. Andere - zelfs met authentificatie - zouden ook gevolgen voor de veiligheid kunnen hebben.</p>
 
-            <p> As with all remote access tools, care should be taken to make sure a SOCKS proxy service is configured in a secure manner and the security implications of making it accessible from anywhere on the Internet taken into account. </p>
+            <p> As with all remote access tools, care should be taken to make sure a SOCKS proxy service is configured in a secure manner
+            and the security implications of making it accessible from anywhere on the Internet taken into account. </p>
             ',
     ],
 
     'DEVICE_IDENTIFICATION' => [
         'name'          => 'Device identification',
         'description'   => '
-            <p> This is a device population report – no assessment is made on the vulnerability state of the device. The report is intended for recipients to get a better understanding of device population types on networks they are responsible for. Please note the assessment is based only on what was publicly accessible from the Internet.</p>
+            <p> This is a device population report – no assessment is made on the vulnerability state of the device. 
+            The report is intended for recipients to get a better understanding of device population types on networks they are responsible for. 
+            Please note the assessment is based only on what was publicly accessible from the Internet.</p>
             ',
     ],
 
@@ -2231,7 +2237,8 @@ return [
         'description'   => '
             <p> Dit rapport identificeert hosts die een X Display Manager service draaiende hebben die op het Internet benaderbaar is. </p>
 
-            <p> XDMCP lekt informatie over het hostsysteem. Ook kan deze service in een amplificatie-aanval gebruikt worden. leaks information about the host system and, in addition, it can be used in an amplification attack, providing an approximate 7x amplification. Please note that it does not matter if XDMCP responds with a “Willing” or an “Unwilling”; the service provides the same level of amplification. </p>
+            <p> XDMCP lekt informatie over het hostsysteem. Ook kan deze service in een amplificatie-aanval gebruikt worden waardoor ongeveer 7x amplificatie wordt gecreëerd.
+            Het maakt niet uit of XDCMP met "Willing" of "Unwilling" antwoord, de service geeft altijd hetzelfde niveau amplificatie. </p>
             ',
     ],
 
