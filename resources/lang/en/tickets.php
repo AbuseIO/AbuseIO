@@ -48,5 +48,5 @@ return [
     'resolved'            => 'Resolved',
     'fourth_layer_filter' => 'This is filtered due to fourth layer nesting',
     'parser_error'        => 'Parser Error',
-    'parser_error_msg'    => 'De parser did not provide valid event data. Contact the administrator.',
+    'parser_error_msg'    => 'The parser did not provide valid event data. Contact the administrator.',
 ];
