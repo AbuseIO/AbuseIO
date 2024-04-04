@@ -369,7 +369,7 @@ return [
                 for privacy or legal reasons. This means it is important for senders to utilize some method
                 other than an email address within a message, in order to identify the recipient.</p>
 
-                <h2>Why Is A Feedback Loop Important?</h2>
+                <h2>Why is a Feedback Loop important?</h2>
 
                 <p>As of May 2008, there were 12 FBLs in place at several of the world's largest ISPs including
                 AOL, Hotmail and Yahoo. Feedback loops have become an email industry standard. The data
@@ -385,7 +385,7 @@ return [
                 unfounded, if they complained they were dissatisfied. Smart marketers aim to avoid dissatisfied
                 customers or prospective customers.</p>
 
-                <h2>What can i do?</h2>
+                <h2>What can I do?</h2>
 
                 <p>Campaigns, subject lines and \"from\" addresses can also be monitored to ensure that campaign
                 elements are working well. You can identify areas that need improvement. If a particular mailing,
@@ -399,14 +399,14 @@ return [
                 thresholds, which vary by ISP. Monitoring the FBL data will improve your email practices,
                 while ensuring complaint rates do not exceed Internet Service Provider (ISP) thresholds.</p>
 
-                <h2>But i am not sending these e-mails</h2>
+                <h2>But I am not sending these e-mails</h2>
 
                 <p>If you receive a high number of FBL complaints on messages that you did not send yourself
                 you should consider the host being reported on (e.g. the IP) to be comprimised as these e-mails
                 did originate from your system. In these cases your advised to shutdown the mailserver and
                 clean the system and its mailqueues before taking it online again.</p>
 
-                <h2>What Is Questionable About Feedback Loops?</h2>
+                <h2>What is questionable about Feedback Loops?</h2>
 
                 <p>The spam button brings some very imprecise functionality. Automatic unsubscribe is an
                 example. For years, end users have been told not to trust email unsubscribe links, to avoid
