@@ -313,9 +313,9 @@ return [
 
             <h2>Tips om dit op te lossen</h2>
             <ul>
-            <li>Indien dit een CMS (WordPress, Drupal, Joomla, etc.) is, check of er updates voor uw add-ons en plugins beschikbaar zij. Voer deze uit waar mogelijk.I</li>
-            <li>If this is a standard website, check for signs of infection or unknown links on web-pages and take the necessary action.</li>
-            <li>Once the issue(s) have been resolved, begin to request re-evaluations of your site from search engines.</li>
+            <li>Indien dit een CMS (WordPress, Drupal, Joomla, etc.) is, check of er updates voor uw add-ons en plugins beschikbaar zij. Voer deze uit waar mogelijk.</li>
+            <li>Indien dit een 'standaard' website is, controleer op tekeken van infectie of onbekende links op uw pagina's. Neem stappen om deze te verwijderen.</li>
+            <li>Zodra het probleem is opgelost, vraag zoekmachines om uw site te herevalueren.</li>
             </ul>
 
             <h2>Meer informatie</h2>
@@ -1757,19 +1757,18 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Schoon uw mailinglijst op. Configure your 'Hard & Soft' Bounce values to
-            correctly remove recipient's when needed.</p>
+            <p>Schoon uw mailinglijst op. Configureer uw 'Hard & Soft' Bounce waardes om ontvangers correct te verwijderen indien nodig.v</p>
 
             <p>Als u geen bulk e-mail verstuurd, check dan uw website en DNS voor tekenen van compromittering. </p>
 
-            <h2>Tips how to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
-            <p>When cleaning your mailing lists there are some thing that you can already do:</p>
+            <p>Er zijn een aantal dingen die u doen kan tijdens het opruimen van uw mailinglist:</p>
 
             <ul>
-                    <li>Remove malformed domain names</li>
+                    <li>Haal misvormde domeinnamen weg</li>
                     <li>Haal rolaccounts eruit (sales@example.com, accounts@example.net)</li>
-                    <li>Adhere to the unsubscribe process</li>
+                    <li>Houd u aan het 'unsubscribe process'</li>
                     <li>Koopt nooit een mailing list</li>
                     <li>Gebruik 'double opt-in'</li>
             </ul>
@@ -1960,29 +1959,33 @@ return [
         'description' => "
             <h2>Wat is een 'Open Portmapper Server'?</h2>
 
-            <p>The port mapper (rpc.portmap or rpcbind) is a remote procedure call (RPC) service
-            running on TCP or UDP port 111 that runs on servers to provide information about
-            running services and their corresponding port numbers, such as NFS.</p>
+            <p>De 'port mapper' (rpc.portmap of rpcbind) is een 'remote procedure call' (RPC) dienst 
+            op TCP of UDP port 111 dat op servers draait en informatie geeft over
+            de de diensten die hierop draaien alsmede hun poortnummers, zals bijvoorbeeld NFS.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Zodra een aanvaller een actieve port 111 op een systeem ontdekt. kan die deze informatie gebruiken
             om meer te weten te komen over welke services hierop draaien. Dit is vaak de eerste stap in een hackaanval.</p>
 
-            <p>Additionally, hackers have also found this feature useful in performing a
-            special type of DDoS attack called an 'Amplification Attack'.</p>
+            <p>Deze functie kwordt tevens ook door hackers misbruikt voor het uitvoeren 
+            van een zogenaamde 'Amplification Attack'; een speciaal type DDoS.</p>
 
-            <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
-            to the victim.</p>
+            <p>De aanvaller vervalst diens IP-adres en stuurt een packet - dat van het slachtoffer 
+            af lijkt te komen - naar een internetadres dat hier direct antwoord op geeft. 
+            Omdat het IP-adres vervalst is, stuurt de remote server het antwoord met de opgevraagde data naar het slachtoffer.
+            </p>
 
-            <p>That has two effects: the actual source of the attack is hidden and is
+            <p>Dit heeft twee effecten: ten eerste, verhult dit de bron van de aanval, waardoor het moeilijk te achterhelen is.
+            Ten tweede, als er veel internetservers worden gebruikt, kan de aanval de vorm aannemen van een overweldigend aantal packets. verstuurd vanaf vele servers over de hele wereld verspreid.
+            
+            That has two effects: the actual source of the attack is hidden and is
             very hard to trace, and, if many Internet servers are used, an attack
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
 
-            <p>But what makes reflection attacks really powerful is when they are
+            <p>
+            But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
             the server (or servers). In that case, an attacker can send a small
             packet 'from' a forged source IP address and have the server (or
@@ -2042,6 +2045,53 @@ return [
         'name'        => 'Have I been pwned breach',
         'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
     ],
+    
+    'OPEN_AFP_SERVER' => [
+        'name'        => 'Open Apple Filing Protocol (AFP) Server',
+        'description' => '
+            <h2>What is a \'Open AFP Server\'?</h2>
+
+            <p>Apple Filing Protocol (formerly AppleTalk Filing Protocol) is a transport protocol
+            that Apple macOS uses to share resources.  For example, if a macOS system wants
+            to access a shared directory on another system, it can use AFP. AFPv3 uses TCP
+            port 548. The protocol can also support other options including changing user passwords.</p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>This report identifies hosts that have Apple Filing Protocol (AFP) Service running and accessible to the world
+             on the internet. AFP can allow for information gathering on a target host as information about the host is contained in
+             the protocol messages.</p>
+
+            <p>In addition your sure will be targetted by brute force attacks.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Disable public access to AFP.</p>
+
+            <h2>Tips how to resolve this matter</h2>
+            <ul>
+            <li>Firewall port TCP/548 and use AFP over SSH to gain access to your system/li>
+            </ul>
+
+            ',
+    ],
+
+    'OPEN_FTP_SERVER' => [
+        'name'        => 'Open FTP Server',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+    ],
+
+    'OPEN_HTTP_SERVER' => [
+        'name'        => 'Open HTTP Server',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar..
+            ',
+    ],
+
+    'OPEN_RSYNC_SERVER' => [
+        'name'        => 'Open rsync Server',
+        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar..
+            ',
+    ],
     'OPEN_PROXY_SERVER' => [
         'name'        => 'Open proxy server',
         'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
@@ -2056,7 +2106,32 @@ return [
     ],
     'AMPLICATION_DDOS_VICTIM' => [
         'name'        => 'DDOS amplictifcatie slachtoffer',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => "        
+            <h2>Honeypot Amplification DDoS Events Report</h2>
+            
+            <p>This report contains information about honeypot observed amplification DDoS events. If you are seeing this report, it 
+            means that your IP was DDoSed using other hosts/services as reflectors.</p>
+            
+            <p>This category of DDoS attacks utilizes UDP-based, open, amplifiable services to reflect packets to a victim, by 
+            spoofing the source IP address of the packets sent by the amplifier to the victim’s IP address.</p>
+            
+            <p>Depending on the protocol and type of open services abused, the size of the original packet content sent by the attacker 
+            can be amplified in the service response multiple times (even by a factor of hundreds), flooding the victim with packets 
+            and enabling DDoS.</p>
+            
+            <p>Honeypots that emulate open and amplifiable services can be used to detect this kind of abuse. However, as the source 
+            of these attacks is spoofed to the victim address, it is possible only to report on victims being abused, not on the true 
+            source of the DDoS.</p>
+            
+            <p>You can read more about our DDoS attack observations <a href='https://sissden.eu/blog/amp2018'>in the SISSDEN blog 
+            entry on observations on DDoS attacks in 2018</a>. For more insight into how amplifiable DDoS attacks work, check out this 
+            <a href='https://christian-rossow.de/articles/Amplification_DDoS.php'>writeup and paper by Christian Rossow</a>,&nbsp;as 
+            well as the <a href='https://www.us-cert.gov/ncas/alerts/TA14-017A'>US-CERT Alert (TA14-017A)</a>.</p>
+            
+            <p>This report contains information about the IP that was attacked (set to src_ip) and the port that was abused on the 
+            honeypot to try to make it attack your IP (set to dst_port).</p>
+    
+            ",
     ],
     'ACCESSIBLE_ADB_REPORT' => [
         'name'        => 'Open Android Debug Bridge',
@@ -2140,12 +2215,36 @@ return [
 
     'VULNERABLE_SMTP_SERVER' => [
         'name'          => 'Kwetsbare SMTP server',
-        'description'   => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description'   => "
+            <h2>What is a 'Vulnerable SMTP server'?</h2>
+            
+            <p>It was discovered that the host, a mail sending server, is running a vulnerable SMTP software.</p>
+
+            <h2>Why would this be bad?</h2>
+        
+            <p>Hackers might exploit the vulnerable SMTP server, resulting in potentially getting the SMTP server compromised.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Update the SMTP software to the latest version.</p>
+            ",
     ],
 
     'OPEN_AMQP' => [
         'name'          => 'Toegankelijke Advanced Message Queuing Protocol (AMQP) server',
-        'description'   => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description'   => '
+            <h2>What is a AMQP server?</h2>
+
+            <p>AMQP is an open internet protocol for business messaging. It is often also used for IoT device management.</p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>Even though it does allow for encrypted communications via TLS, many instances on the Internet are configured for cleartext authentication and message sharing. Furthermore in the past there have been multiple vulnerabilities discovered in AMQP broker software implementations that can allow for authentication bypass, interception of messages, remote code execution or denial of service and other attacks.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Make sure that the AMQP server is up-to-date and that the AMQP server is not reachable over the internet if it doesnt need to.</p>
+            ',
     ],
 
     'OPEN_SSH_SERVER' => [
@@ -2169,7 +2268,7 @@ return [
     'OPEN_ICS' => [
         'name'          => 'Open Industrial Control Service (ICS) application',
         'description'   => '
-            <p> Dit rapport bevat een lijst met apparaten die reageren op een aantal gespecializeerde ICS/OT scans. Ook bevat het de ontvangen make-and-model informatie en de 
+            <p> Dit rapport bevat een lijst met apparaten die reageren op een aantal gespecializeerde ICS/OT scans. Ook bevat het de ontvangen make-and-model informatie en de raw responses die ontvangen zijn.
             this report contains a list of devices that are responding to various specialized ICS/OT scans, along with additional make-and-model information and raw responses received. </p>
 
             <p> Het is onwaarschijnlijk dat dit soort apparaten op enige manier toegankelijk hoeven te zijn voor queries vanaf het internet, dus tenzij u een honeypot draait, is het sterk aangeraden om - als u een rapportage vor uw netwerk/kring ontvangt - hier onmiddelijk actie op te ondernemen en de toegang tot dit apparaat te beperken/firewallen. </p>
@@ -2193,7 +2292,7 @@ return [
             real-time voice, video, messaging, and other interactive communications. 
             The STUN service is known to be a potential UDP message amplifier, that can be abused for reflected DDoS attacks." </p>
 
-            <p> Overweeg om standaard STUN over TCP te gebruiken. </p>
+            <p> Overweeg om STUN standaard over TCP te gebruiken. </p>
 ',
     ],
 
@@ -2203,10 +2302,8 @@ return [
             <p> Dit rapport identificeert toegankelijke Erlang Port Mapper Daemon (EPMD) servers op port 4369/tcp.
             Deze daemon doet dienst als name server for hosts die bij gedistributeerde Erlang berekeningen betrokken zijn. </p>
 
-            <p> Het is onwaarschijnlik dat uw EPMD server externe verbindingen vanaf het internet toe hoeft te staan (gezien dit een mogelijk extern aanvalsvalk kan zijn).
-            Zorg ervoor dat het verkeer naar deze dienst gefirewallet wordt
-            It is unlikely that you need to have an EPMD server allowing for external connections from the Internet (and thus a possible external attack surface). 
-            Make sure to firewall traffic to this service. If you do receive this report from us for your network or constituency make sure to firewall traffic to this service.</p>
+            <p> Het is onwaarschijnlijk dat uw EPMD server externe verbindingen vanaf het internet toe hoeft te staan (gezien dit een mogelijk extern aanvalsvalk kan zijn).
+            Zorg ervoor dat het verkeer naar deze dienst gefirewalled wordt. Als u dit dit rapport ontvangt voor uw netwerk of kring. zorg ervoor dat verkeer richting deze service gefirewalled wordt.</p>
 ',
     ],
 
@@ -2218,8 +2315,8 @@ return [
 
             <p> Open proxy servers die het proxyen van diensten zonder authentificatie toestaan, worden vaak misbruikt. Andere - zelfs met authentificatie - zouden ook gevolgen voor de veiligheid kunnen hebben.</p>
 
-            <p> As with all remote access tools, care should be taken to make sure a SOCKS proxy service is configured in a secure manner
-            and the security implications of making it accessible from anywhere on the Internet taken into account. </p>
+            <p> Zoals bij alle remote access tools, is het belangrijk om ervoor te zorgen dat ook een SOCK proxy service secuur geconfigureerd is.
+            Ook is het belangrijk om de mogelijke beveilingsimplicaties van het overal toegankelijk maken via het internet van deze service mee te nemen. </p>
             ',
     ],
 
