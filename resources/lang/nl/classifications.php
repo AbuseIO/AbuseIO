@@ -15,41 +15,41 @@ return [
      */
     'DEFAULT' => [
         'name'        => 'Generiek bericht',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 'OPEN_SMARTINSTALL' => [
         'name'        => 'Open Cisco Smart Install',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'OPEN_HADOOP_SERVER' => [
         'name'        => 'Open Hadoop Server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'OPEN_VNC_SERVER' => [
         'name'        => 'Open VNC Server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'OPEN_SMB_SERVER' => [
         'name'        => 'Open SAMBA Server (SMB/CIFS)',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'OPEN_CWMP_SERVER' => [
         'name'        => 'Open CPE WAN Management Protocol (CWMP)',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'OPEN_TELNET_SERVER' => [
         'name'        => 'Open Telnet Server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'OPEN_LDAP_SERVER' => [
         'name'        => 'Open LDAP Server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'ISAKMP_VULNERABLE_DEVICE' => [
@@ -117,7 +117,7 @@ return [
     
     'BOTNET_CONTROLLER' => [
         'name'        => 'Botnetserver',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'BOTNET_INFECTION' => [
@@ -197,7 +197,7 @@ return [
 
     'COMPROMISED_SERVER' => [
         'name'        => 'Gehackte server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'COMPROMISED_WEBSITE' => [
@@ -493,7 +493,7 @@ return [
 
     'NOTICE_AND_TAKEDOWN_REQUEST' => [
         'name'        => 'Notice and Takedown verzoek',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'OPEN_CHARGEN_SERVER' => [
@@ -1941,17 +1941,17 @@ return [
 
     'COPYRIGHT_INFRINGEMENT' => [
         'name'        => 'Copyrightschending',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'POSSIBLE_DDOS_SENDING_SERVER' => [
         'name'        => 'Mogelijke DDoS Server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'DDOS_SENDING_SERVER' => [
         'name'        => 'DDoS Server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'OPEN_PORTMAP_SERVER' => [
@@ -2008,42 +2008,42 @@ return [
 
     'MALWARE_INFECTION' => [
         'name'        => 'Malware infectie',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'COMMENT_SPAM' => [
         'name'        => 'Commentaar Spam',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'HACK_ATTACK' => [
         'name'        => 'Hackaanval',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'INFORMATIONAL' => [
         'name'        => 'Informationeel',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'LOGIN_ATTACK' => [
         'name'        => 'Loginaanval',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'DICTIONARY_ATTACK' => [
         'name'        => 'Woordenboekaanval',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'RULE_BREAKER' => [
         'name'        => 'Regelbreker',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'HAVE_I_BEEN_PWNED_DOMAIN_FOUND' => [
         'name'        => 'Have I been pwned breach',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     
     'OPEN_AFP_SERVER' => [
@@ -2078,31 +2078,31 @@ return [
 
     'OPEN_FTP_SERVER' => [
         'name'        => 'Open FTP Server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
     'OPEN_HTTP_SERVER' => [
         'name'        => 'Open HTTP Server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar..
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar..
             ',
     ],
 
     'OPEN_RSYNC_SERVER' => [
         'name'        => 'Open rsync Server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar..
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar..
             ',
     ],
     'OPEN_PROXY_SERVER' => [
         'name'        => 'Open proxy server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'OPEN_UBIQUITI_SERVER' => [
         'name'        => 'Open Ubiquiti server',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'BRUTE_FORCE_ATTACK' => [
         'name'        => 'Brute Force aanval',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'AMPLICATION_DDOS_VICTIM' => [
         'name'        => 'DDOS amplictifcatie slachtoffer',
@@ -2135,55 +2135,55 @@ return [
     ],
     'ACCESSIBLE_ADB_REPORT' => [
         'name'        => 'Open Android Debug Bridge',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'ACCESSIBLE_APPLE_REMOTE_DESKTOP_ARD_REPORT' => [
         'name'        => 'Open Apple Remote Desktop',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'CAIDA_IP_SPOOFER_REPORT' => [
         'name'        => 'CAIDA IP spoofer',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'DRONE_BOTNET_DRONE_REPORT' => [
         'name'        => 'Botnetdrone',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'NETCORE_NETIS_ROUTER_VULNERABILITY_SCAN_REPORT' => [
         'name'        => 'Kwetsbare Netcore/Netis router',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'OPEN_DB2_DISCOVERY_SERVICE_REPORT' => [
         'name'        => 'Open DB2 discovery service ',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'OPEN_MQTT' => [
         'name'        => 'OPEN MQTT service ',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'OPEN_COAP' => [
         'name'        => 'Open COAP service',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'OPEN_IPP' => [
         'name'        => 'Open IPP service',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'OPEN_RADMIN' => [
         'name'        => 'Open RAdmin service',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'OPEN_RDPEUDP' => [
         'name'        => 'Open Microsoft Remote Desktop Protocol service',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'OPEN_BASIC_AUTH_SERVICE' => [
         'name'        => 'Open Basic Authenticatie service',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'DARKNET' => [
         'name'        => 'Service contacting darknets',
-        'description' => 'Er is nog geen informatie over deze klassificatie beschikbaar.',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'eicc(stix2)' => [
         'name'        => 'ei.cc',
