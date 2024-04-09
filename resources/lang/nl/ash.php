@@ -23,7 +23,7 @@ return [
         'ptr'            => 'Reverse DNS',
         'domain'         => 'Domein',
         'domainName'     => 'Domeinnaam',
-        'class'          => 'Klassificatie',
+        'class'          => 'Classificatie',
         'type'           => 'Type',
         'firstSeen'      => 'Eerst gezien',
         'lastSeen'       => 'Laatst gezien',
