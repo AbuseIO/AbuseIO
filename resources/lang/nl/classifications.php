@@ -91,17 +91,22 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>This report identifies hosts that have Remote Desktop (RDP) Service running and accessible to the world
+            <p>Dit rapport identificeert hosts die een RDemote Desktop Protocol (RDP) service hebben draaien die voor iedereen toegankelijk is via het internet.
+            Verkeerd ingestelde RDP kan kwaadwillenden in staat stellen toegang te krijgen tot een desktop van een kwetsbare host.
+            Dit maakt het mogelijk om informatie over de target host te bemachtigen, gezien de SSL -certificaten die door RDP worden gebruikt vaak het systeem\'s \'trivial hostname\' bevatten.
+            This report identifies hosts that have Remote Desktop (RDP) Service running and accessible to the world
              on the internet. Misconfigured RDP can allow miscreants access to the desktop of a vulnerable host and can
              also allow for information gathering on a target host as the SSL certificate used by RDP often contains
              the system\'s trivial hostname. </p>
 
-            <p>In addition your sure will be targetted by brute force attacks, and while most RDP server only allow
+            <p>De kans is groot dat de server doelwit wordt van \'brute force attakcs\'. Omdat de meeste RDP servers maar twee sessies per keer ondersteunen, wordt u buitengesloten. 
+            In addition your sure will be targetted by brute force attacks, and while most RDP server only allow
              two sessions you will not be able to connect to the RDP server yourself. In essence you are locked out!</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Disable public access to RDP, or make sure to detect and mitigate brute force attacks</p>
+            <p>Zetpublieke toegant tot RDP uit of neem maatregelen om \'brute force attacks\' te detecteren en eventueel ook te mitigeren.
+            Disable public access to RDP, or make sure to detect and mitigate brute force attacks</p>
 
             <h2>Tips om dit op te lossen</h2>
             <ul>
