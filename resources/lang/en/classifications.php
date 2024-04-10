@@ -119,8 +119,8 @@ return [
              also allow for information gathering on a target host as the SSL certificate used by RDP often contains
              the system\'s trivial hostname. </p>
 
-            <p>In addition your sure will be targetted by brute force attacks, and while most RDP server only allow
-             two sessions you will not be able to connect to the RDP server yourself. In essence you are locked out!</p>
+            <p>In addition, you sure will be targetted by brute force attacks and as most RDP servers only allow
+             two sessions at a time, you will not be able to connect to the RDP server yourself. In essence you are locked out!</p>
 
             <h2>Recommended action</h2>
 
@@ -232,21 +232,19 @@ return [
 
             Malicious hackers are a devious bunch – always looking for new flaws, exploits and
             social engineering tricks that will allow them to compromise a website. With
-            this in mind, it comes as no surprise Malicious hackers are a devious bunch – always
-            looking for new flaws, exploits and social engineering tricks that will allow them
-            to compromise a website. With this in mind, it comes as no surprise that most website
+            this in mind, it comes as no surprise that most website
             owners simply don’t know how their sites were compromised.
 
             <h2>Why would this be bad?</h2>
 
-            <p>When your website is compromised, not only your website contains changes done by hackers
+            <p>When your website is compromised, your website does not only contain (malicious) changes done by hackers
             but it also contains one or more security problems that allowed a hacker to gain access
             to your website in the first place. The compromised website provides a useful platform for
             a range of illicit activities. These activities include: </p>
 
             <ul>
             <li>Hosting malware – this may take the form of complex scripts that infect any visiting
-            PC. Alternatively, well-crafted emails may have convinced a recipient to download a
+            PC. Alternatively, well-crafted e-mails may have convinced a recipient to download a
             malware file that is hosted on the compromised site. In most cases the malware script
             is hidden in a subdirectory.</li>
             <li>Injected content (SQL). When hackers gain access to your website, they might try to
@@ -270,8 +268,8 @@ return [
             <h2>Recommended action</h2>
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
-            damage. First take your entire website offline first. This is pretty impopulair, however if
-            you consider the fact your might be leaking privacy information or infecting the
+            damage. First, take your entire website offline first. This is pretty impopulair, however if
+            you consider the fact your might be leaking sensitive information or infecting the
             systems of your visitors you want to act as quickly as possible.</p>
 
             <p>After you closed your website you will need to clean up the changed area's of your
@@ -291,17 +289,17 @@ return [
             <p>In addition future risk of compromise can be reduced by following these basic tips: </p>
 
             <ul>
-            <li>Keep software and all plug-ins updated. Whether you run popular content
+            <li>Keep software and all plug-ins updated. Regardless of whether you run popular content
             management software (e.g., WordPress, Joomla, Blogger) or custom software,
             make sure that software and all third party plug-ins or extensions are updated.
-            Remove plug-i ns or other add-ons that aren’t in use</li>
+            Remove plug-ins or other add-ons that are not currently in use</li>
             <li>Use strong, varied passwords. WordPress login credentials, for example,
             should be different from FTP credentials. Never store passwords on your local
             machine.</li>
             <li>Regularly scan your PC for malware and your website for unautherized changes</li>
             <li>Use appropriate file permissions on your web server.</li>
             <li>Research your options and make security a priority when choosing a web hosting
-            provider. If you aren’t confident you can protect your site on your own, consider
+            provider. If you are not confident you can protect your site on your own, consider
             using an add-on security service from your hosting provider or a third party website
             security service.</li>
             </ul>
@@ -322,13 +320,13 @@ return [
 
             <p>A distribution website, is a site that is hosting malware for download.
             These are often download links embedded into malicious doc's or executable's code for example.
-            Compromised websites are also highly used here. </p>
+            Compromised websites are widely used for this purpose. </p>
 
             <h2>Why would this be bad?</h2>
 
-            <p>If you are hosting malware on your server. Stop and remove this, this is illegal. This can lead to your site being
+            <p>If you are hosting malware on your server, cease doing so and and remove the malware, this is illegal. This can lead to your site being
             flagged as suspicious by search engines causing accessibility issues for visitors. If a hacker is hosting
-            malware on your site, then it's also likely compromised.</p>
+            malware on your site, then it is likely compromised.</p>
 
             <h2>Recommended action</h2>
 
@@ -336,7 +334,7 @@ return [
 
             <h2>Tips how to resolve this matter</h2>
             <ul>
-            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plugins and update where possible.</li>
+            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plug-ins and update where possible.</li>
             <li>If this is a standard website, check for signs of infection or unknown links on web-pages and take the necessary action.</li>
             <li>Once the issue(s) have been resolved, begin to request re-evaluations of your site from search engines.</li>
             </ul>
@@ -358,12 +356,12 @@ return [
                 an inter-organizational form of feedback, by which an Internet service provider (ISP) forwards
                 email complaints originating from their users, back to the senders' organizations. Generally,
                 ISPs expect that these transactions are processed as unsubscribe requests and that the sender
-                researches the nature of the request, to reduce the incidence of such complaints.</p>
+                researches the nature of the request to reduce the incidence of such complaints.</p>
 
                 <p>The most common method for ISPs to receive users' complaints is by placing a report spam button
                 on their webmail pages or in their email client. Or, the user may send the email to the ISP
                 Postmaster. In rare cases, these feedback loops may not be based on user reports. For example,
-                they may be based on automated virus detection, or similar mechanisms.</p>
+                they may be based on automated virus detection or similar mechanisms.</p>
 
                 <p>Some ISPs remove the email address of its customer before returning the message to the sender,
                 for privacy or legal reasons. This means it is important for senders to utilize some method
@@ -403,8 +401,8 @@ return [
 
                 <p>If you receive a high number of FBL complaints on messages that you did not send yourself
                 you should consider the host being reported on (e.g. the IP) to be comprimised as these e-mails
-                did originate from your system. In these cases your advised to shutdown the mailserver and
-                clean the system and its mailqueues before taking it online again.</p>
+                did originate from your system. In these cases your advised to shutdown the mail server and
+                clean the system and its mail queues before taking it online again.</p>
 
                 <h2>What is questionable about Feedback Loops?</h2>
 
@@ -484,15 +482,15 @@ return [
             <h2>What is 'Harvesting'?</h2>
 
             <p>Email harvesting is the process of obtaining lists of email addresses or accounts
-            using various methods for use in bulk email or other purposes usually
-            like seding SPAM or gaining access to the system.</p>
+            using various methods for use in bulk email or other purposes.
+            For example: sending SPAM or gaining access to systems.</p>
 
             <p>A common method is the use of special software known as 'harvesting bots'
             or 'harvesters', which spider web pages, mailing list archives, internet
             forums and other online sources to obtain email addresses from public data.</p>
 
-            <p>Another method addresses, known as a directory harvest attack, works
-            by connecting to mailservers and guessing an email address using common
+            <p>Another method - known as a directory harvest attack - works
+            by connecting to mail servers and guessing an email address using common
             usernames in email addresses at that domain.</p>
 
             <h2>Why would this be bad?</h2>
@@ -503,7 +501,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>If you are in fact knowingly harvesting email addresses, we recommend
-            you to stop doing that to prevent further escalation.</p>
+            you to stop doing this to prevent further escalation.</p>
 
             <h2>Tips to resolve this matter</h2>
 
@@ -774,7 +772,7 @@ return [
             or otherwise unresponsive by using a network connection to the hardware
             rather than to an operating system or login shell.</p>
 
-            <p>IPMI is integrated on most server systems, however under different names like
+            <p>IPMI is integrated on most server systems under many different names like
             iRMC, ILOM, BMC, iDRAC, etc. Each vender has their own implementation of IPMI,
             but the base is the same on each of them: It allows access to hardware outside
             your operating system (and its locally installed firewall!).</p>
@@ -824,7 +822,7 @@ return [
             <p>The problem is actually pretty simple - memcached is built for speed,
             not for security, and it does nothing to secure itself. As far as
             memcache's authors are concerned, this isn't a problem... it just
-            means you have to secure it yourself. The problem is the people don't
+            means you have to secure it yourself. The problem is that people don't
             do that.</p>
 
             <p>Since its not secure, this means that random people on the internet
@@ -832,7 +830,7 @@ return [
             it. The kinds of security problems that could create are limited only
             by your imagination and the kinds of data you put into your cache.</p>
 
-            <p>Lets assume I have an insecure memcache instance running at my.example.com.
+            <p>Let's assume I have an insecure memcache instance running at my.example.com.
             I can log into that server, and connect to my memcache instance with telnet:
 
             [dbock@my.example ~]$ telnet localhost 11211
@@ -889,7 +887,7 @@ return [
 
             retry the steps above and you'll find that outside the server, telnet can't connect anymore.</p>
 
-            <p>The memcached settings file might be someplace else on other linuxes, depending
+            <p>The memcached settings file might be someplace else on other linux distributions, depending
             on their file conventions... The memcache installation for your platform should give
             you a clue where this is, as this file is also needed to specify the amount of
             memory in the cache, etc.</p>
@@ -922,17 +920,17 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>This service has the potential to expose information about a clients network
+            <p>This service has the potential to expose information about a client's network
             on which this service is accessible and the service itself can be used in UDP
-            amplification attacks. In addition it opens up your system to 0-day attacks or
+            amplification attacks. In addition it opens up your system to zero-day attacks or
             worm/virus infections that exploit a vulnarability in Windows to gain access
             to your system.</p>
 
             <h2>Recommended action</h2>
 
-            <p>Either use the Windows Firewall or even better an external firewall to prevent
-            access to Netbios (and other Windows ports). The windows firewall has an nasty
-            way of trying to think for himself and for example automaticly starts to open
+            <p>Either use the Windows Firewall or preferably: an external firewall to prevent
+            access to Netbios (and other Windows ports). The Windows Firewall has an nasty
+            way of trying to think for itself and will, for example, automaticly start to open
             ports if you install something that uses Netbios. In all cases the
             administrator is unaware of these open ports.</p>
 
@@ -968,8 +966,8 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Your system has a MongoDB NoSQL database (see www.mongodb.org for more
-            information) running which is accessible on the internet. While authentication
+            <p>Your system runs a MongoDB NoSQL database (see www.mongodb.org for more
+            information) which is accessible on the internet. While authentication
             is available for MongoDB, in many instances this authentication is not enabled.</p>
 
             <p>This enables an attacker, without circumventing any security measures, to get
@@ -1112,15 +1110,15 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>In most cases the computer has installed a NTP service as an dependancy
-            as timekeeping is needed on that computer. However its only required to do
+            <p>In most cases the computer has installed a NTP service as an dependency
+            as timekeeping is needed on that computer. However it is only required in order to do
             local timekeeping, thus the added 'external access' to this service is
-            unneeded. In such cases we recommend either changing the configuration
+            unnecessary. In such cases we recommend either changing the configuration
             of your NTP service or to firewall port 123 for external hosts.</p>
 
-            <p>If you are running a NTP Server for multiple computers, then consider
-            to limit access to the required group of computer or implement safegaurds
-            like ... to prevent a DNS Amplification Attack.</p>
+            <p>If you are running an NTP Server for multiple computers, then consider
+            limiting access to the required group or computer or implement safeguards 
+            to prevent a DNS Amplification Attack.</p>
 
 
             <h2>Tips to resolve this matter</h2>
@@ -1144,7 +1142,7 @@ return [
             </pre>
 
             <p>You can use your standard host firewall filtering capabilities to limit
-            who the NTP process talks to.  If you're using Linux and the host is acting
+            who the NTP process can talk to.  If you're using Linux and the host is acting
             as an NTP client only, the following iptables rules could be adapted to shield
             your NTP listener from unwanted remote hosts.</p>
 
@@ -1178,9 +1176,9 @@ return [
             <p>NetBIOS is a transport protocol that Microsoft Windows systems use to share
             resources.  For example, if a PC running Windows wants to connect to and access a
             share on a file server, it probably uses NetBIOS.  There have been some changes in
-            recent days, however, that allow this connection without it. SMB, the method used
-            to access file and printer shares, can also run independently of NetBIOS over TCP
-            ports 139 and 445.  Both of these approaches, however, tend to increase the attack
+            recent days however, that allow this connection without it. SMB - the method used
+            to access file and printer shares - can also run independently of NetBIOS over TCP
+            ports 139 and 445.  Both of these approaches however, tend to increase the attack
             surface of a network.</p>
 
             <h2>Why would this be bad?</h2>
@@ -1202,9 +1200,9 @@ return [
             </ul>
 
             <p>With this information, the attacker has information about the OS, services, and major
-            applications running on the system. He also has private IP addresses that the LAN/WAN
-            and security engineers have tried hard to hide behind NAT.  And that’s not all.  The
-            lists provided by running NBSTAT also include user IDs.</p>
+            applications running on the system. They also have private IP addresses that the LAN/WAN
+            and security engineers have tried to hide behind NAT. And that is not all: The
+            lists provided by running NBSTAT also includes user ID's.</p>
 
             <p>If null sessions are allowed against IPC$, it isn’t difficult to take the next step
             and connect to the target device.  This connection provides a list of all available
@@ -1212,23 +1210,23 @@ return [
 
             <p>These services have the potential to be used in amplification attacks by criminals
             that wish to perform denial of service attacks. In addition it opens up your system
-            to 0-day attacks or worm/virus infections that exploit a vulnarability in Windows to
+            to zero-day attacks or worm/virus infections that exploit a vulnarability in Windows to
             gain access to your system.</p>
 
             <h2>Recommended action</h2>
 
-            <p>Either use the Windows Firewall or even better an external firewall to prevent access
-            to Netbios (and other Windows ports). The windows firewall has an nasty way of trying
-            to think for himself and for example automaticly starts to open ports if you install
+            <p>Either use the Windows Firewall or preferably: an external firewall to prevent access
+            to Netbios (and other Windows ports). The Windows Firewall has aa tendency to try
+            to think for itself and for example: automatically start to open ports if you install
             something that uses Netbios. In all cases the administrator is unaware of these open
             ports.</p>
 
-            <p>If you really need NETBIOS open for the entire world, then ensure that the exposed
+            <p>If you really need NETBIOS open for the entire world, then ensure the exposed
             system(s) are hardened by:</p>
             <ul>
             <li>Disabling the system’s ability to support null sessions</li>
-            <li>Defining very strong passwords for the local administrator accounts</li>
-            <li>Defining very strong passwords for shares, assuming you absolutely have to have shares on exposed systems</li>
+            <li>Using very strong passwords for the local administrator accounts</li>
+            <li>Using very strong passwords for shares, assuming you absolutely have to have shares on exposed systems</li>
             <li>Keeping the Guest account disabled</li>
             <li>Under no circumstances allowing access to the root of a hard drive via a share</li>
             <li>Under no circumstances sharing the Windows or WinNT directories or any directory located beneath them</li>
@@ -1372,7 +1370,7 @@ return [
 
             <h3>Firewalling remote access</h3>
 
-            <p>Simplest way is to block the default port TCP/6379 (or whatever port is listed
+            <p>The simplest way is to block the default port TCP/6379 (or whatever port is listed
             in the report) and only allow IP's that should actually have access to this service.</p>
 
             <h3>Blocking remote access</h3>
@@ -1430,7 +1428,7 @@ return [
             system or even to write new 'settings' to the system if not correctly
             configured.</p>
 
-            <p>In addition running an open (UDP) service is not bad on its own and it
+            <p>Running an open (UDP) service is not bad on its own and it
             is mostly a required dependancy when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
@@ -1592,7 +1590,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>There is no reason to have this TFTP service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
+            interface. You should either stop the service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
             ",
@@ -1615,7 +1613,7 @@ return [
             <p>A Phishing website is usually the result of a comprimised website or comprimised user
             credentials of that website.</p>
 
-            <p>When your website is compromised, not only your website contains changes done by hackers
+            <p>When your website is compromised, your website not only contains changes done by hackers
             but it also contains one or more security problems that allowed a hacker to gain access
             to your website in the first place. The compromised website provides a useful platform for
             a range of illicit activities.</p>
@@ -1624,8 +1622,8 @@ return [
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
             damage. First take your entire website offline first. This is pretty impopulair, however if
-            you consider the fact your might be leaking privacy information or infecting the
-            systems of your visitors you want to act as quickly as possible.</p>
+            you consider the fact your might be leaking sensitive information or infecting the
+            systems of your visitors, you want to act as quickly as possible.</p>
 
             <p>After you closed your website you will need to clean up the changed area's of your
             website.</p>
@@ -1645,17 +1643,17 @@ return [
             <p>In addition future risk of compromise can be reduced by following these basic tips: </p>
 
             <ul>
-            <li>Keep software and all plug-ins updated. Whether you run popular content
+            <li>Keep software and all plug-ins updated regardless whether you run popular content
             management software (e.g., WordPress, Joomla, Blogger) or custom software,
             make sure that software and all third party plug-ins or extensions are updated.
-            Remove plug-i ns or other add-ons that aren’t in use</li>
+            Remove plug-ins or other add-ons that are not currently in use</li>
             <li>Use strong, varied passwords. WordPress login credentials, for example,
             should be different from FTP credentials. Never store passwords on your local
             machine.</li>
             <li>Regularly scan your PC for malware and your website for unautherized changes</li>
             <li>Use appropriate file permissions on your web server.</li>
             <li>Research your options and make security a priority when choosing a web hosting
-            provider. If you aren’t confident you can protect your site on your own, consider
+            provider. If you are not confident you can protect your site on your own, consider
             using an add-on security service from your hosting provider or a third party website
             security service.</li>
             </ul>
@@ -1691,7 +1689,7 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>In the case of a misconfiguration it could for example be the case
+            <p>In the case of a misconfiguration it could be the case
             that your SMTP server is accepting email from untrusted sources and you
             will need to reconfigure your SMTP server.</p>
 
@@ -1751,8 +1749,8 @@ return [
             <p>If the server should not be sending much or any email, this spam
             report could indicate that your server has been compromised.</p>
 
-            <p>The best way to solve the problem is to stop your mailserver(MTA)
-            and investigate the mail queues for SPAM messages. When you found an
+            <p>The best way to solve the problem is to stop your mail server(MTA)
+            and investigate the mail queues for SPAM messages. When you find an
             example you can open it to identify its source. By stopping the MTA
             you will prevent SPAM from being sent out. After solving the problem
             you must clean your mail queue from all these SPAM messages before
@@ -1785,7 +1783,7 @@ return [
             <p>Clean up your mailing lists. Configure your 'Hard & Soft' Bounce values to
             correctly remove recipient's when needed.</p>
 
-            <p>If you are not sending bulk email, then check your website and DNS
+            <p>If you are not sending bulk e-mail, then check your website and DNS
             for signs of comprimise. </p>
 
             <h2>Tips how to resolve this matter</h2>
@@ -1904,9 +1902,9 @@ return [
         'description' => "
             <h2>What is a 'Spamvertised web site'?</h2>
 
-            <p>A site that is being 'spamvertised' means that the site is being included as a link in spam emails.</p>
+            <p>A site that is being 'spamvertised' means that the site is being included as a link in spam e-mails.</p>
 
-            <h2>Why is my website in Spam Emails?</h2>
+            <h2>Why is my website in Spam E-mails?</h2>
 
             <p>This is generally the case when your site (or DNS) has been comprimised in some way.
             Spammers or hackers often add a redirect from your site to their Spam site.
@@ -1919,7 +1917,7 @@ return [
             <h2>Tips on how to resolve this</h2>
 
             <ul>
-            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plugins and update where possible.</li>
+            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plug-ins and update where possible.</li>
             <li>If this is a standard website, check for signs of infection or unknown links on webpages and take the nessesary action.</li>
             <li>If infection is found and resolved, begin to delist your URL on the relevant delist's.</li>
             </ul>
@@ -2000,7 +1998,7 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Once an attacker discovers an active port 111 on a device, he can use this information
+            <p>Once an attacker discovers an active port 111 on a device, they can use this information
             to learn about running services, which is a very important first step for a hacking attack.</p>
 
             <p>Additionally, hackers have also found this feature useful in performing a
@@ -2106,7 +2104,7 @@ return [
              on the internet. AFP can allow for information gathering on a target host as information about the host is contained in
              the protocol messages.</p>
 
-            <p>In addition your sure will be targetted by brute force attacks.</p>
+            <p>In addition, you risk being targetted by brute force attacks.</p>
 
             <h2>Recommended action</h2>
 
@@ -2141,13 +2139,13 @@ return [
             ',
     ],
     'OPEN_PROXY_SERVER' => [
-        'name'        => 'Accesiable proxy server',
+        'name'        => 'Accessible proxy server',
         'description' => '
             This classification has no information text yet.
             ',
     ],
     'OPEN_UBIQUITI_SERVER' => [
-        'name'        => 'Accesiable Ubiquiti server',
+        'name'        => 'Accessible Ubiquiti server',
         'description' => '
             This classification has no information text yet.
             ',
@@ -2189,13 +2187,13 @@ return [
             ",
     ],
     'ACCESSIBLE_ADB_REPORT' => [
-        'name'        => 'Accesiable Android Debug Bridge',
+        'name'        => 'Accessible Android Debug Bridge',
         'description' => '
             This classification has no information text yet.
             ',
     ],
     'ACCESSIBLE_APPLE_REMOTE_DESKTOP_ARD_REPORT' => [
-        'name'        => 'Accesiable Apple Remote Desktop',
+        'name'        => 'Accessible Apple Remote Desktop',
         'description' => '
             This classification has no information text yet.
             ',
@@ -2213,49 +2211,49 @@ return [
             ',
     ],
     'NETCORE_NETIS_ROUTER_VULNERABILITY_SCAN_REPORT' => [
-        'name'        => 'Netcore/Netis router vulnerable',
+        'name'        => 'Vulnerable Netcore/Netis router ',
         'description' => '
             This classification has no information text yet.
             ',
     ],
     'OPEN_DB2_DISCOVERY_SERVICE_REPORT' => [
-        'name'        => 'Accesiable DB2 discovery service ',
+        'name'        => 'Accessible DB2 discovery service ',
         'description' => '
             This classification has no information text yet.
             ',
     ],
     'OPEN_MQTT' => [
-        'name'        => 'Accesiable MQTT service ',
+        'name'        => 'Accessible MQTT service ',
         'description' => '
             This classification has no information text yet.
             ',
     ],
     'OPEN_COAP' => [
-        'name'        => 'Accesiable COAP service',
+        'name'        => 'Accessible COAP service',
         'description' => '
             This classification has no information text yet.
             ',
     ],
     'OPEN_IPP' => [
-        'name'        => 'Accesiable IPP service',
+        'name'        => 'Accessible IPP service',
         'description' => '
             This classification has no information text yet.
             ',
     ],
     'OPEN_RADMIN' => [
-        'name'        => 'Accesiable RAdmin service',
+        'name'        => 'Accessible RAdmin service',
         'description' => '
             This classification has no information text yet.
             ',
     ],
     'OPEN_RDPEUDP' => [
-        'name'        => 'Accesiable Microsoft Remote Desktop Protocol service',
+        'name'        => 'Accessible Microsoft Remote Desktop Protocol service',
         'description' => '
             This classification has no information text yet.
             ',
     ],
     'OPEN_BASIC_AUTH_SERVICE' => [
-        'name'        => 'Accesiable Basic Authenticatie service',
+        'name'        => 'Accessible Basic Authenticatie service',
         'description' => '
             This classification has no information text yet.
             ',
@@ -2427,7 +2425,7 @@ return [
     ],
 
     'ACCESSIBLE_MSMQ_SERVICE' => [
-        'name'         => 'Accesible Microsoft Message Queuing service',
+        'name'         => 'Accessible Microsoft Message Queuing service',
         'description'  => '
             <p> This report identifies accessible Microsoft Message Queuing (MSMQ) servers on port 1801/TCP. This service may be optionally enabled on Windows operating systems, including Windows Server 2022 and Windows 11. </p>',
     ],
