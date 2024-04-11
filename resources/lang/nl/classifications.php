@@ -91,7 +91,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Dit rapport identificeert hosts die een RDemote Desktop Protocol (RDP) service hebben draaien die voor iedereen toegankelijk is via het internet.
+            <p>Dit rapport identificeert hosts die een Remote Desktop Protocol (RDP) service hebben draaien die voor iedereen toegankelijk is via het internet.
             Verkeerd ingestelde RDP kan kwaadwillenden in staat stellen toegang te krijgen tot een desktop van een kwetsbare host.
             Dit maakt het mogelijk om informatie over de target host te bemachtigen, gezien de SSL -certificaten die door RDP worden gebruikt vaak het systeem\'s \'trivial hostname\' bevatten.
             This report identifies hosts that have Remote Desktop (RDP) Service running and accessible to the world
@@ -99,13 +99,13 @@ return [
              also allow for information gathering on a target host as the SSL certificate used by RDP often contains
              the system\'s trivial hostname. </p>
 
-            <p>De kans is groot dat de server doelwit wordt van \'brute force attakcs\'. Omdat de meeste RDP servers maar twee sessies per keer ondersteunen, wordt u buitengesloten. 
+            <p>De kans is groot dat de server doelwit wordt van \'brute force attakcs\'. Omdat de meeste RDP servers maar twee sessies per keer ondersteunen, wordt u dan buitengesloten. 
             In addition your sure will be targetted by brute force attacks, and while most RDP server only allow
              two sessions you will not be able to connect to the RDP server yourself. In essence you are locked out!</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Zetpublieke toegant tot RDP uit of neem maatregelen om \'brute force attacks\' te detecteren en eventueel ook te mitigeren.
+            <p>Zet publieke toegant tot RDP uit of neem maatregelen om \'brute force attacks\' te detecteren en eventueel ook te mitigeren.
             Disable public access to RDP, or make sure to detect and mitigate brute force attacks</p>
 
             <h2>Tips om dit op te lossen</h2>
@@ -130,7 +130,20 @@ return [
         'description' => "
              <h2>Wat is een 'Botnet-infectie'?</h2>
 
-            <p>Botnet is a portmanteau derived from the words robot and network. Bot refers
+            <p>Botnet is een porte-manteauwoord afgeleid van de woorden 'robot' en 'netwerk'. 
+            Bot refereert aan een computerprogramma dat zelfstandig geautomatiseerde taken uitvoert.
+            Zulke programma's kunnen voor legitieme doeleinden gebruikt worden, 
+            zoekmachines gebruiken bijvoorbeeld bots om websites te indexeren. 
+            Helaas kunnen bots ook voor malafide doeleinden worden misbruikt.
+            Een botnet is een grote groep geïnfecteerde computers die met met elkaar via het internet verbonden zijn.
+            Criminelen die het botnet beheren, zorgen ervoor dat de programma's op zoveel mogelijk computers worden geïnstalleerd.
+            De programma's blijven buiten zicht, draaien vaak op de achtergrond en zijn vaak lastig op te sporen door antivirusprogramma's.
+            Zodra een computer is geïnfecteerd, kan het toegevoegd worden aan het botnet door middel van het exploiteren van softwarekwetsbaarheden aanwezig op het hostsysteem.
+            Er zijn veel manieren om geïnfecteerd te raken, waaronder het bezoeken van een (geïnfecteerde) website, 
+            'drive-by-downloads', (malware die gedownloaded en geïnstalleerd wordt zonder het willen en weten van het slachtoffer), 
+            het klikken op bijlagen of links in e-mails of zelfs (geïnfecteerde) usb-sticks of externe schijven op het systeem aansluiten.
+            
+            Botnet is a portmanteau derived from the words robot and network. Bot refers
             to a computer program that independently performs automated jobs. Such programs
             have many legitimate uses; search engines, for example, commonly use bots to
             catalogue web sites. Unfortunately, bots can also be programmed to perform
@@ -148,7 +161,9 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>The IP listed in the report (the system behind it using NAT), has seen
+            <p>Het IP-adres in de rapportage (het systeem dfjsdfnsdjfn) blablabla. Gezien uw systeem aan het communiceren is met het botnet, 
+            kunt u er 99,9% zeker van zijn dat deze gecompromiteerd is. Het host malware en doet mee in een botnet.
+            The IP listed in the report (the system behind it using NAT), has seen
             participating inside the botnet. With your system in communication with the
             botnet you can be 99,9% sure it has been compromised. It's hosting malware
             and is participating in a botnet.</p>
@@ -160,18 +175,21 @@ return [
             <h2>Aanbevolen actie</h2>
 
             <p>Dit probleem moet worden opgelost door de kwaadaardige software te verwijderen.
-            In het geval van erg persistente infecties, zal het besturingssysteem opnieuw moeten worden
+            In het geval van zeer persistente infecties, zal het besturingssysteem opnieuw moeten worden
             geïnstalleerd om van de infectie af te kunnen komen.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
             <p>Indien uw systeem een werkstation of server is:<ul>
-            <li>Installeer en update een antivirussoftware en voer een volledige scan van uw computer uit. 
+            <li>Installeer en/of update een antivirussoftware en voer een volledige scan van uw computer uit. 
             Het wordt aangeraden om meerdere scanners te gebruiken, omdat niet iedere scanner specifieke
             soorten malware herkennen kan.</li>
             <li>Scan het netwerk voor gïnfecteerde bestanden. Vergeet niet ook de backups te scannen, 
             alsmede alle computers die wellicht al een tijdje uit hebben gestaan ivm. bijv. vakanties.</li>
-            <li>Gebruikers van een 
+            <li>Gebruikers van enig systeem dat met een botnetinfectie te maken heeft, zullen al hun wachtwoorden zo snel mogelijk moeten veranderen.
+            Dit houdt in: alle lokaal-opgeslagen wachtwoorden die toegang verschaffen tot andere systemen en applicaties 
+            (inclusief zakelijke applicaties, toegang tot web beheerder-accounts, persoonlijke e-mail en sociale media, etc.)
+            
             Users of any system with a botnet infection should change all their passwords as quickly
             as possible. This should include any passwords saved locally and used to access other systems
             and applications (including business applications, access to web site administrator accounts,
@@ -215,9 +233,7 @@ return [
 
             Malicious hackers are a devious bunch – always looking for new flaws, exploits and
             social engineering tricks that will allow them to compromise a website. With
-            this in mind, it comes as no surprise Malicious hackers are a devious bunch – always
-            looking for new flaws, exploits and social engineering tricks that will allow them
-            to compromise a website. With this in mind, it comes as no surprise that most website
+            this in mind, it comes as no surprise that most website
             owners simply don’t know how their sites were compromised.</p>
 
             <h2>Waarom is dit een probleem?</h2>
@@ -263,20 +279,21 @@ return [
             <h2>Tips om dit op te lossen</h2>
 
             <p>De veiligste manier om een gehackte site op te schonen, is om hem helemaal te verwijderen
-            en een versie up te loaden waarvan men zeker weet dat hij schoon is.</p>
+            en te vervangen met een eerdere versie waarvan men zeker weet dat hij schoon is.</p>
 
             <ul>
             <li>Kijk of er bestanden zijn die recent zijn aangepast en/of op tijden waarop uw developers niet aan het werk waren.</li>
             <li>Kijk in tijdelijke mappen voor (uitvoerbare) scripts.</li>
             </ul>
 
-            <p>In addition, future risk of compromise can be reduced by following these basic tips: </p>
+            <p>Verder, kan de kans op hercompromitering worden verkleint door deze tips te volgen:
+            In addition, future risk of compromise can be reduced by following these basic tips: </p>
 
             <ul>
             <li>Keep software and all plug-ins updated. Whether you run popular content
             management software (e.g., WordPress, Joomla, Blogger) or custom software,
             make sure that software and all third party plug-ins or extensions are updated.
-            Remove plug-i ns or other add-ons that aren’t in use</li>
+            Remove plug-ins or other add-ons that aren’t in use</li>
             <li>Use strong, varied passwords. WordPress login credentials, for example,
             should be different from FTP credentials. Never store passwords on your local
             machine.</li>
@@ -291,7 +308,6 @@ return [
             <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='http://www.stopbadware.org/'>stopbadware.org has great information, and their forums have a number of helpful and knowledgeable volunteers who may be able to help.</a><br>
             <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
             ",
@@ -479,17 +495,16 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Ongevraagde e-mail sturen naar ontvangers verkregen via 'harvesting' is illegaal en is - per onze voorwaaarden -  niet toegestaan.</p>
+            <p>Ongevraagd e-mail sturen naar ontvangstadressen verkregen via 'harvesting' is illegaal en is - per onze voorwaaarden -  niet toegestaan.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>If you are in fact knowingly harvesting email addresses, we recommend
-            you to stop doing that to prevent further escalation.</p>
+            <p>Indien u bewust e-mailadressen aan het harvesten bent, 
+            raden wij u sterk aan hiermee te stoppen om verdere escalatie te voorkomen.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
-            <p>If this is not the case, make sure your server and your hosted websites
-            have not been compromised.</p>
+            <p>Als u dit niet bewust doet, controleer of uw serrver en website(s) niet gehackt zijn.</p>
 
             <h2>Meer informatie</h2>
 
@@ -565,7 +580,9 @@ return [
             <p>Een open DNS server is a DNS server die bereid is om recursieve DNS queries 
             voor een ieder op het Internet uit te voeren.</p>
 
-            <p>When a DNS server resolves a recursive DNS query, it tracks down
+            <p>Wanneer een DNS server een recursieve DNS query resolved, spoort het 
+            informatie
+            When a DNS server resolves a recursive DNS query, it tracks down
             information about a domain name hosted on some other DNS server
             somewhere else on the Internet (a recursive process involving
             several other DNS servers in the DNS hierarchy).</p>
@@ -1648,7 +1665,6 @@ return [
             <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='http://www.stopbadware.org/'>stopbadware.org has great information, and their forums have a number of helpful and knowledgeable volunteers who may be able to help.</a><br>
             <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
             ",
