@@ -307,7 +307,6 @@ return [
             <h2>Getting more information</h2>
 
             <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='http://www.stopbadware.org/'>stopbadware.org has great information, and their forums have a number of helpful and knowledgeable volunteers who may be able to help.</a><br>
             <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
             ",
@@ -1661,7 +1660,6 @@ return [
             <h2>Getting more information</h2>
 
             <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='http://www.stopbadware.org/'>stopbadware.org has great information, and their forums have a number of helpful and knowledgeable volunteers who may be able to help.</a><br>
             <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
             ",
