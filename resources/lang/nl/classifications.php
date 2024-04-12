@@ -77,7 +77,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target\'_blank\' href=\'IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products\'>IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products</a><br>
+            <a target\'_blank\' href=\'https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-20160916-ikev1\'>IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products</a><br>
 
             ',
     ],
@@ -136,12 +136,12 @@ return [
             zoekmachines gebruiken bijvoorbeeld bots om websites te indexeren. 
             Helaas kunnen bots ook voor malafide doeleinden worden misbruikt.
             Een botnet is een grote groep geïnfecteerde computers die met met elkaar via het internet verbonden zijn.
-            Criminelen die het botnet beheren, zorgen ervoor dat de programma's op zoveel mogelijk computers worden geïnstalleerd.
+            Criminelen die een botnet beheren, zorgen ervoor dat de programma's op zoveel mogelijk computers worden geïnstalleerd.
             De programma's blijven buiten zicht, draaien vaak op de achtergrond en zijn vaak lastig op te sporen door antivirusprogramma's.
-            Zodra een computer is geïnfecteerd, kan het toegevoegd worden aan het botnet door middel van het exploiteren van softwarekwetsbaarheden aanwezig op het hostsysteem.
+            Zodra een computer is geïnfecteerd, kan het toegevoegd worden aan het botnet doormiddel van het exploiteren van softwarekwetsbaarheden aanwezig op het hostsysteem.
             Er zijn veel manieren om geïnfecteerd te raken, waaronder het bezoeken van een (geïnfecteerde) website, 
             'drive-by-downloads', (malware die gedownloaded en geïnstalleerd wordt zonder het willen en weten van het slachtoffer), 
-            het klikken op bijlagen of links in e-mails of zelfs (geïnfecteerde) usb-sticks of externe schijven op het systeem aansluiten.
+            het klikken op bijlagen of links in e-mails of zelfs randapparatuur zoals (geïnfecteerde) usb-sticks of externe schijven op het systeem aansluiten.
             
             Botnet is a portmanteau derived from the words robot and network. Bot refers
             to a computer program that independently performs automated jobs. Such programs
@@ -213,7 +213,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='https://www.ncsc.nl/binaries/content/documents/ncsc-en/current-topics/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet</a><br>
+            <a target'_blank' href='https://web.archive.org/web/20190526123321/https://www.ncsc.nl/binaries/content/documents/ncsc-en/current-topics/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet (2012)</a><br>
 
             ",
     ],
@@ -290,7 +290,7 @@ return [
             In addition, future risk of compromise can be reduced by following these basic tips: </p>
 
             <ul>
-            <li>Keep software and all plug-ins updated. Whether you run popular content
+            <li>Hou software en plug-ins up-to-date. Keep software and all plug-ins updated. Whether you run popular content
             management software (e.g., WordPress, Joomla, Blogger) or custom software,
             make sure that software and all third party plug-ins or extensions are updated.
             Remove plug-ins or other add-ons that aren’t in use</li>
@@ -307,8 +307,8 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
+            <a target'_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
+            <a target'_blank' href='https://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
             ",
     ],
