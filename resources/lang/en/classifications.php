@@ -100,7 +100,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target\'_blank\' href=\'IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products\'>IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products</a><br>
+            <a target\'_blank\' href=\'https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-20160916-ikev1\'>IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products</a><br>
 
             ',
     ],
@@ -210,7 +210,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://www.ncsc.nl/binaries/content/documents/ncsc-en/current-topics/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet</a><br>
+            <a target'_blank' href='https://web.archive.org/web/20190526123321/https://www.ncsc.nl/binaries/content/documents/ncsc-en/current-topics/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet (2012)</a><br>
 
             ",
     ],
@@ -306,8 +306,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
+            <a target'_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
+            <a target'_blank' href='https://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
             ",
     ],
