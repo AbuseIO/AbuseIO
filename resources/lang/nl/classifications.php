@@ -91,22 +91,15 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Dit rapport identificeert hosts die een Remote Desktop Protocol (RDP) service hebben draaien die voor iedereen toegankelijk is via het internet.
+            <p>Dit rapport identificeert hosts die een Remote Desktop Protocol (RDP) service hebben draaien die voor een ieder vrij toegankelijk is via het internet.
             Verkeerd ingestelde RDP kan kwaadwillenden in staat stellen toegang te krijgen tot een desktop van een kwetsbare host.
-            Dit maakt het mogelijk om informatie over de target host te bemachtigen, gezien de SSL -certificaten die door RDP worden gebruikt vaak het systeem\'s \'trivial hostname\' bevatten.
-            This report identifies hosts that have Remote Desktop (RDP) Service running and accessible to the world
-             on the internet. Misconfigured RDP can allow miscreants access to the desktop of a vulnerable host and can
-             also allow for information gathering on a target host as the SSL certificate used by RDP often contains
-             the system\'s trivial hostname. </p>
+            Dit maakt het mogelijk om informatie over de target host te bemachtigen, gezien de SSL -certificaten die door RDP worden gebruikt vaak de \'trivial hostname\' van het systeem bevatten.</p>
 
-            <p>De kans is groot dat de server doelwit wordt van \'brute force attakcs\'. Omdat de meeste RDP servers maar twee sessies per keer ondersteunen, wordt u dan buitengesloten. 
-            In addition your sure will be targetted by brute force attacks, and while most RDP server only allow
-             two sessions you will not be able to connect to the RDP server yourself. In essence you are locked out!</p>
+            <p>De kans is groot dat de server doelwit wordt van \'brute force attakcs\'. Omdat de meeste RDP servers maar twee sessies per keer ondersteunen, wordt u dan buitengesloten.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Zet publieke toegant tot RDP uit of neem maatregelen om \'brute force attacks\' te detecteren en eventueel ook te mitigeren.
-            Disable public access to RDP, or make sure to detect and mitigate brute force attacks</p>
+            <p>Zet publieke toegang tot RDP uit of neem maatregelen om \'brute force attacks\' te detecteren en deze eventueel ook te mitigeren.</p>
 
             <h2>Tips om dit op te lossen</h2>
             <ul>
@@ -161,7 +154,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Het IP-adres in de rapportage (het systeem dfjsdfnsdjfn) blablabla. Gezien uw systeem aan het communiceren is met het botnet, 
+            <p>Het IP-adres in de rapportage (het systeem dat erachter zit ) is geïdentificeerd als deelnemer aan een botnet. Gezien uw systeem aan het communiceren is met het botnet, 
             kunt u er 99,9% zeker van zijn dat deze gecompromiteerd is. Het host malware en doet mee in een botnet.
             The IP listed in the report (the system behind it using NAT), has seen
             participating inside the botnet. With your system in communication with the
@@ -188,12 +181,7 @@ return [
             alsmede alle computers die wellicht al een tijdje uit hebben gestaan ivm. bijv. vakanties.</li>
             <li>Gebruikers van enig systeem dat met een botnetinfectie te maken heeft, zullen al hun wachtwoorden zo snel mogelijk moeten veranderen.
             Dit houdt in: alle lokaal-opgeslagen wachtwoorden die toegang verschaffen tot andere systemen en applicaties 
-            (inclusief zakelijke applicaties, toegang tot web beheerder-accounts, persoonlijke e-mail en sociale media, etc.)
-            
-            Users of any system with a botnet infection should change all their passwords as quickly
-            as possible. This should include any passwords saved locally and used to access other systems
-            and applications (including business applications, access to web site administrator accounts,
-            personal use of e-mail and social media, etc.).</li>
+            (inclusief zakelijke applicaties, toegang tot web beheerder-accounts, persoonlijke e-mail en sociale media, etc.).</li>
             <li>Als een computer met malware geïnfecteerd blijkt te zijn, is de kans groot dat er ook andere malware op het systeem aanwezig is. 
             Een 'clean reinstall' voorkomt dat deze vrij toegang tot het netwerk kunnen krijgen.</li>
             </ul></p>
@@ -201,14 +189,14 @@ return [
             <p>Indien uw systeem een website / hostingsysteem is:<ul>
             <li>Als u het vermoeden heeft dat een gebruikersaccount gehackt is, wijzig onmiddelijk het wachtwoord van dit account.</li>
             <li>Scan alle gehoste websites en tijdelijke mappen voor verdachte bestanden en verwijder deze.
-            Controleer ook uw processenlijst voor mogelijke verdachte processen en beëindig deze.</li>
+            Controleer ook uw lijst met processen (bijv. taakbeheer) voor mogelijke verdachte processen en beëindig deze.</li>
             <li>Controleer uw mailqeueus voor uitgaande SPAM en verwijder deze.</li>
             <li>Installeer een rootkit- en virusscanner om er zeker van te zijn dat alle malafide bestanden verwijderd zijn.</li>
             </ul></p>
 
             <p>Zodra al de malafide software verwijderd is, zorg ervoor dat de server niet opnieuw aangetast kan worden. 
-            Installeer de nieuwste updates voor uw besturingssysteem, control panel en gehoste applicaties,
-            inclusief themas en plugins (oftewel Wordpress) Als u deze niet direct upgradet, zal het systeem binnen korte tijd opnieuw geïnfecteerd zijn!
+            Installeer de nieuwste updates voor uw besturingssysteem, control panel en gehoste applicaties
+            inclusief themas en plug-ins (oftewel Wordpress) Als u deze niet direct upgraded, zal het systeem binnen korte tijd opnieuw geïnfecteerd zijn!
             </p>
 
             <h2>Meer informatie</h2>
@@ -228,9 +216,14 @@ return [
         'description' => "
             <h2>Wat is een 'Compromised website'?</h2>
 
-            <p>A comprimised website is (hacked) content placed on your site without your permission
+            <p>Een gecompromitteerde website betekent dat er (gehackte) content zonder toestemming op uw site is geplaatst. 
+            Dit komt door kwetsbaarheden in de beveiliging van uw site.
+            A comprimised website is (hacked) content placed on your site without your permission
             as a result of vulnerabilities in your site’s security.
 
+            Malafide hackers zijn altijd op zoek naar nieuwe manieren, fouten en trucjes en 'social engineering' tactieken 
+            die gebruikt kunnen worden om een site te compromiteren.
+            Het is geen wonder dat de meeste website-eigenaren geen idee hebben hoe de site überhaupt gehackt heeft kunnen worden.
             Malicious hackers are a devious bunch – always looking for new flaws, exploits and
             social engineering tricks that will allow them to compromise a website. With
             this in mind, it comes as no surprise that most website
@@ -238,20 +231,25 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>When your website is compromised, not only your website contains changes done by hackers
+            <p>Als uw site gehackt is, betekent dat niet alleen dat er ongewenste wijzigingen aan uw site zijn gedaan, 
+            maar ook dat de site één of meerdere beveiligingsproblemen die de hacker in staat stelde in de eerste plaats in te breken.
+            De gehackte site kan worden gebruikt voor een groot aantal ongewenste en/of malafide doeleinden, waaronder:
+            When your website is compromised, not only your website contains changes done by hackers
             but it also contains one or more security problems that allowed a hacker to gain access
             to your website in the first place. The compromised website provides a useful platform for
             a range of illicit activities. These activities include: </p>
 
             <ul>
-            <li>Hosting malware – this may take the form of complex scripts that infect any visiting
-            PC. Alternatively, well-crafted emails may have convinced a recipient to download a
-            malware file that is hosted on the compromised site. In most cases the malware script
-            is hidden in a subdirectory.</li>
-            <li>Injected content (SQL). When hackers gain access to your website, they might try to
+            <li>Het hosten van malware - Dit omvat zowel complexe scripts die bezoekers hun PC infecteren, alsmede 
+            phishing e-mails die een ontvanger hebben weten te overtuigen een bestand dat op uw website gehost is te downloaden. 
+            In veel gevallen is zo'n malwarescript ergens in een subfolder verborgen.</li>
+            <li>
+            Injected content (SQL). When hackers gain access to your website, they might try to
             inject malicious content into existing pages on your site. This often takes the form of
             malicious JavaScript injected directly into the site, or into iframes.</li>
-            <li>URL redirect – thousands of compromised sites may perform simple redirects to a
+            <li>URL redirect - Duizende gehackte sites redirecten naar een handvol 'master URL's'. 
+            Dit wordt gedaan 
+            URL redirect – thousands of compromised sites may perform simple redirects to a
             few master URLs. This is accomplished with a few lines of HTML code hidden in the
             compromised site, forcing the site to act as a 'front door' to the badware. The master
             URLs contain spam product pages or malware.</li>
