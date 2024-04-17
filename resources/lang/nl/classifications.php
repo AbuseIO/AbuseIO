@@ -128,34 +128,18 @@ return [
             Zulke programma's kunnen voor legitieme doeleinden gebruikt worden, 
             zoekmachines gebruiken bijvoorbeeld bots om websites te indexeren. 
             Helaas kunnen bots ook voor malafide doeleinden worden misbruikt.
-            Een botnet is een grote groep geïnfecteerde computers die met met elkaar via het internet verbonden zijn.
+            Een botnet is een grote groep geïnfecteerde computers die via het internet met elkaar verbonden zijn.
             Criminelen die een botnet beheren, zorgen ervoor dat de programma's op zoveel mogelijk computers worden geïnstalleerd.
             De programma's blijven buiten zicht, draaien vaak op de achtergrond en zijn vaak lastig op te sporen door antivirusprogramma's.
-            Zodra een computer is geïnfecteerd, kan het toegevoegd worden aan het botnet doormiddel van het exploiteren van softwarekwetsbaarheden aanwezig op het hostsysteem.
+            Zodra een computer is geïnfecteerd, kan het toegevoegd worden aan het botnet door het exploiteren van kwetsbare software aanwezig op het systeem.
             Er zijn veel manieren om geïnfecteerd te raken, waaronder het bezoeken van een (geïnfecteerde) website, 
-            'drive-by-downloads', (malware die gedownloaded en geïnstalleerd wordt zonder het willen en weten van het slachtoffer), 
-            het klikken op bijlagen of links in e-mails of zelfs randapparatuur zoals (geïnfecteerde) usb-sticks of externe schijven op het systeem aansluiten.
-            
-            Botnet is a portmanteau derived from the words robot and network. Bot refers
-            to a computer program that independently performs automated jobs. Such programs
-            have many legitimate uses; search engines, for example, commonly use bots to
-            catalogue web sites. Unfortunately, bots can also be programmed to perform
-            malicious actions on systems. A botnet is a large group of infected computers
-            connected to each other via the internet. Criminals administering the botnet
-            make sure that the the programs get installed on as many systems as possible.
-            The programs stay under the radar, generally running in the background, and are
-            usually difficult for antivirus software to identify. Once a computer is infected,
-            it can then become part of the botnet through the exploitation of vulnerabilities
-            in software installed on the user's system. There are many avenues for this
-            infection, such as visiting a (generally infected) web site, 'drive-by downloads'
-            (when malware is downloaded and installed on the system without the user's knowledge),
-            and even by simply clicking attachments or links in an e-mail or merely connecting
-            peripherals such as USB sticks or external hard drives to the system.</p>
+            'drive-by-downloads', (malware die gedownloaded en geïnstalleerd wordt zonder het willen of weten van het slachtoffer), 
+            het klikken op malafide bijlagen of links in e-mails of zelfs randapparatuur zoals (geïnfecteerde) usb-sticks of externe schijven op het systeem aansluiten.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Het IP-adres in de rapportage (het systeem dat erachter zit ) is geïdentificeerd als deelnemer aan een botnet. Gezien uw systeem aan het communiceren is met het botnet, 
-            kunt u er 99,9% zeker van zijn dat deze gecompromiteerd is. Het host malware en doet mee in een botnet.
+            <p>Het IP-adres in de rapportage (het systeem dat erachter zit ) is geïdentificeerd als deelnemend aan een botnet. Gezien uw systeem aan het communiceren is met het botnet, 
+            kunt u er 99,9% zeker van zijn dat deze gecompromiteerd is. Het systeem is geïnfeccteerd met malware en doet mee in een botnet.
             The IP listed in the report (the system behind it using NAT), has seen
             participating inside the botnet. With your system in communication with the
             botnet you can be 99,9% sure it has been compromised. It's hosting malware
@@ -175,9 +159,8 @@ return [
 
             <p>Indien uw systeem een werkstation of server is:<ul>
             <li>Installeer en/of update een antivirussoftware en voer een volledige scan van uw computer uit. 
-            Het wordt aangeraden om meerdere scanners te gebruiken, omdat niet iedere scanner specifieke
-            soorten malware herkennen kan.</li>
-            <li>Scan het netwerk voor gïnfecteerde bestanden. Vergeet niet ook de backups te scannen, 
+            Het wordt aangeraden om meerdere scanners te gebruiken, omdat niet alle scanners dezelfde soorten malware herkennen kunnen.</li>
+            <li>Scan het netwerk voor gïnfecteerde bestanden. Vergeet niet ook uw backups te scannen, 
             alsmede alle computers die wellicht al een tijdje uit hebben gestaan ivm. bijv. vakanties.</li>
             <li>Gebruikers van enig systeem dat met een botnetinfectie te maken heeft, zullen al hun wachtwoorden zo snel mogelijk moeten veranderen.
             Dit houdt in: alle lokaal-opgeslagen wachtwoorden die toegang verschaffen tot andere systemen en applicaties 
@@ -196,7 +179,7 @@ return [
 
             <p>Zodra al de malafide software verwijderd is, zorg ervoor dat de server niet opnieuw aangetast kan worden. 
             Installeer de nieuwste updates voor uw besturingssysteem, control panel en gehoste applicaties
-            inclusief themas en plug-ins (oftewel Wordpress) Als u deze niet direct upgraded, zal het systeem binnen korte tijd opnieuw geïnfecteerd zijn!
+            inclusief themas en plug-ins (zoals Wordpress) Als u deze niet direct upgraded, zal het systeem binnen korte tijd opnieuw geïnfecteerd zijn!
             </p>
 
             <h2>Meer informatie</h2>
@@ -221,23 +204,15 @@ return [
             A comprimised website is (hacked) content placed on your site without your permission
             as a result of vulnerabilities in your site’s security.
 
-            Malafide hackers zijn altijd op zoek naar nieuwe manieren, fouten en trucjes en 'social engineering' tactieken 
+            Malafide hackers zijn altijd op zoek naar nieuwe manieren, kwetsbaarheden, trucjes en 'social engineering' tactieken 
             die gebruikt kunnen worden om een site te compromiteren.
-            Het is geen wonder dat de meeste website-eigenaren geen idee hebben hoe de site überhaupt gehackt heeft kunnen worden.
-            Malicious hackers are a devious bunch – always looking for new flaws, exploits and
-            social engineering tricks that will allow them to compromise a website. With
-            this in mind, it comes as no surprise that most website
-            owners simply don’t know how their sites were compromised.</p>
+            Het is geen wonder dat de meeste website-eigenaren geen idee hebben hoe hun site überhaupt gehackt heeft kunnen worden.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Als uw site gehackt is, betekent dat niet alleen dat er ongewenste wijzigingen aan uw site zijn gedaan, 
-            maar ook dat de site één of meerdere beveiligingsproblemen die de hacker in staat stelde in de eerste plaats in te breken.
-            De gehackte site kan worden gebruikt voor een groot aantal ongewenste en/of malafide doeleinden, waaronder:
-            When your website is compromised, not only your website contains changes done by hackers
-            but it also contains one or more security problems that allowed a hacker to gain access
-            to your website in the first place. The compromised website provides a useful platform for
-            a range of illicit activities. These activities include: </p>
+            maar ook dat de site één of meerdere beveiligingsproblemen heeft die de hacker in staat stelde om in te breken.
+            De gehackte site kan worden gebruikt voor een groot aantal ongewenste en/of malafide doeleinden, waaronder: </p>
 
             <ul>
             <li>Het hosten van malware - Dit omvat zowel complexe scripts die bezoekers hun PC infecteren, alsmede 
@@ -248,16 +223,22 @@ return [
             inject malicious content into existing pages on your site. This often takes the form of
             malicious JavaScript injected directly into the site, or into iframes.</li>
             <li>URL redirect - Duizende gehackte sites redirecten naar een handvol 'master URL's'. 
-            Dit wordt gedaan 
+            Met een paar regels veborgen HTML wordt de site in een soort 'voordeur' voor de badware veranderd. 
+            De 'master URL's' kunnen o.a. spammerige productpagina's of malware bevatten.
             URL redirect – thousands of compromised sites may perform simple redirects to a
             few master URLs. This is accomplished with a few lines of HTML code hidden in the
             compromised site, forcing the site to act as a 'front door' to the badware. The master
             URLs contain spam product pages or malware.</li>
-            <li>Hosting phishing, spam pages, pornography – one or two static pages on the compromised
+            <li>Het hosten van o.a. phishing, spampagina's en/of pornografie - 
+            één of meerder statische pagina's op de gehackte site kunnen dienst doen om  bijvoorbeeld 'spam products' (zoals geneesmiddelen, drugs, versterkende middelen, etc.) te adverteren.
+            Ook neppagina's voor banken, paypal of e-maildiensten, etc. of het hosten van epliciet (soms illegaal) content vallen hieronder.
+            Hosting phishing, spam pages, pornography – one or two static pages on the compromised
             site may advertise spam products (pharmaceuticals, replicas, enhancers, etc.), act as
             phishing pages for banks, PayPal, Gmail, etc., or offer explicit (sometimes illegal)
             content</li>
-            <li>Vandalism – the aim of the compromise might be to embarrass the site owner or,
+            <li>Vandalisme - De hack kan zijn uitgevoerd om de eigenaar van de site te vernederen of voor politieke doeleinden. 
+            Dit valt onder de paraplu van het 'hacktivisme'. Sommige beheerders geven aan dat concurrenten dit ook doen.
+            Vandalism – the aim of the compromise might be to embarrass the site owner or,
             alternatively, to make some political point – generally known as 'hacktivism'. Some
             administrators even reported such vandalism by their competitors. </li>
             <li>Other content or activity – some fairly complex forms of site misuse have
