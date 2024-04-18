@@ -201,8 +201,6 @@ return [
 
             <p>Een gecompromitteerde website betekent dat er (gehackte) content zonder toestemming op uw site is geplaatst. 
             Dit komt door kwetsbaarheden in de beveiliging van uw site.
-            A comprimised website is (hacked) content placed on your site without your permission
-            as a result of vulnerabilities in your site’s security.
 
             Malafide hackers zijn altijd op zoek naar nieuwe manieren, kwetsbaarheden, trucjes en 'social engineering' tactieken 
             die gebruikt kunnen worden om een site te compromiteren.
@@ -211,7 +209,7 @@ return [
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Als uw site gehackt is, betekent dat niet alleen dat er ongewenste wijzigingen aan uw site zijn gedaan, 
-            maar ook dat de site één of meerdere beveiligingsproblemen heeft die de hacker in staat stelde om in te breken.
+            maar ook dat de site één of meer beveiligingsproblemen heeft die de hacker in staat stelde om in de eerste plaats in te kunnen breken.
             De gehackte site kan worden gebruikt voor een groot aantal ongewenste en/of malafide doeleinden, waaronder: </p>
 
             <ul>
@@ -223,26 +221,14 @@ return [
             inject malicious content into existing pages on your site. This often takes the form of
             malicious JavaScript injected directly into the site, or into iframes.</li>
             <li>URL redirect - Duizende gehackte sites redirecten naar een handvol 'master URL's'. 
-            Met een paar regels veborgen HTML wordt de site in een soort 'voordeur' voor de badware veranderd. 
-            De 'master URL's' kunnen o.a. spammerige productpagina's of malware bevatten.
-            URL redirect – thousands of compromised sites may perform simple redirects to a
-            few master URLs. This is accomplished with a few lines of HTML code hidden in the
-            compromised site, forcing the site to act as a 'front door' to the badware. The master
-            URLs contain spam product pages or malware.</li>
+            Met een paar regels veborgen HTML wordt uw site in een soort 'voordeur' voor de badware veranderd. 
+            De 'master URL's' kunnen bijvoorbeeld spammerige productpagina's of malware bevatten.</li>
             <li>Het hosten van o.a. phishing, spampagina's en/of pornografie - 
-            één of meerder statische pagina's op de gehackte site kunnen dienst doen om  bijvoorbeeld 'spam products' (zoals geneesmiddelen, drugs, versterkende middelen, etc.) te adverteren.
-            Ook neppagina's voor banken, paypal of e-maildiensten, etc. of het hosten van epliciet (soms illegaal) content vallen hieronder.
-            Hosting phishing, spam pages, pornography – one or two static pages on the compromised
-            site may advertise spam products (pharmaceuticals, replicas, enhancers, etc.), act as
-            phishing pages for banks, PayPal, Gmail, etc., or offer explicit (sometimes illegal)
-            content</li>
-            <li>Vandalisme - De hack kan zijn uitgevoerd om de eigenaar van de site te vernederen of voor politieke doeleinden. 
-            Dit valt onder de paraplu van het 'hacktivisme'. Sommige beheerders geven aan dat concurrenten dit ook doen.
-            Vandalism – the aim of the compromise might be to embarrass the site owner or,
-            alternatively, to make some political point – generally known as 'hacktivism'. Some
-            administrators even reported such vandalism by their competitors. </li>
-            <li>Other content or activity – some fairly complex forms of site misuse have
-            been recorded. For example a spam-sending script.</li>
+            één of meerder statische pagina's op de gehackte site kunnen dienst doen om bijvoorbeeld 'spam products' (zoals geneesmiddelen, drugs, versterkende middelen, etc.) te adverteren.
+            Ook neppagina's voor banken, betaaldiensten, e-maildiensten, etc. of het hosten van expliciet (soms illegaal) content vallen hieronder.</li>
+            <li>Vandalisme - De hack kan zijn uitgevoerd om de eigenaar van de site te vernederen of bijvoorbeeld voor politieke doeleinden. 
+            Dit valt onder de paraplu van het 'hacktivisme'. Sommige beheerders geven aan dat concurrenten dit ook doen. </li>
+            <li>Overige content of activiteiten - Door de jaren heen zijn er aardig complexe vormen van misbruik geconstateerd. Bijvoorbeeld een script dat spam stuurt..</li>
             </ul>
 
             <h2>Aanbevolen actie</h2>
@@ -265,7 +251,7 @@ return [
             <li>Kijk in tijdelijke mappen voor (uitvoerbare) scripts.</li>
             </ul>
 
-            <p>Verder, kan de kans op hercompromitering worden verkleint door deze tips te volgen:
+            <p>Verder, kan de kans op hercompromitering verkleint worden door deze tips te volgen:
             In addition, future risk of compromise can be reduced by following these basic tips: </p>
 
             <ul>
@@ -2323,9 +2309,9 @@ return [
     'DEVICE_IDENTIFICATION' => [
         'name'          => 'Device identification',
         'description'   => '
-            <p> This is a device population report – no assessment is made on the vulnerability state of the device. 
-            The report is intended for recipients to get a better understanding of device population types on networks they are responsible for. 
-            Please note the assessment is based only on what was publicly accessible from the Internet.</p>
+            <p>Dit is een \'device population report\' - Er wordt geen oordeel gevelt over eventuele kwetsbaarheden aanwezig op het apparaat.
+            Deze rapportage is bedoeld om ontvangers een beter overzicht te geven van wat voor soorten apparaten er in diens netwerk actief zijn.
+            De inhoud van deze rapportage is tevens enkel gebaseerd op wat er publiek toegankelijk vanaf het internet is. </p>
             ',
     ],
 
