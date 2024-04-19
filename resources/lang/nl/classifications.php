@@ -138,12 +138,9 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Het IP-adres in de rapportage (het systeem dat erachter zit ) is geïdentificeerd als deelnemend aan een botnet. Gezien uw systeem aan het communiceren is met het botnet, 
-            kunt u er 99,9% zeker van zijn dat deze gecompromiteerd is. Het systeem is geïnfeccteerd met malware en doet mee in een botnet.
-            The IP listed in the report (the system behind it using NAT), has seen
-            participating inside the botnet. With your system in communication with the
-            botnet you can be 99,9% sure it has been compromised. It's hosting malware
-            and is participating in a botnet.</p>
+            <p>Het IP-adres in de rapportage (het systeem dat erachter zit en gebruik maakt van NAT) is geïdentificeerd als deelnemend aan een botnet. 
+            Gezien uw systeem aan het communiceren is met het botnet, kunt u er 99,9% zeker van zijn dat deze gecompromiteerd is. 
+            Het systeem is geïnfeccteerd met malware en doet mee in een botnet.</p>
 
             <p>Een botnet kan worden gebruikt om uw persoonlijke data te stelen, 
             spam te versturen, andere computers te hacken en netwerkaanvallen te lanceren. 
@@ -214,66 +211,58 @@ return [
 
             <ul>
             <li>Het hosten van malware - Dit omvat zowel complexe scripts die bezoekers hun PC infecteren, alsmede 
-            phishing e-mails die een ontvanger hebben weten te overtuigen een bestand dat op uw website gehost is te downloaden. 
-            In veel gevallen is zo'n malwarescript ergens in een subfolder verborgen.</li>
-            <li>
-            Injected content (SQL). When hackers gain access to your website, they might try to
-            inject malicious content into existing pages on your site. This often takes the form of
-            malicious JavaScript injected directly into the site, or into iframes.</li>
+            phishing e-mails die een ontvanger hebben weten te overtuigen een bestand dat (ongewild) op uw website gehost is te downloaden. 
+            In veel gevallen is zo'n malware(script) ergens in een subfolder verborgen.</li>
+            <li>Geïnjecteerde content - Als hackers toegang tot uw website hebben, zouden ze kunnen proberen malafide content te injecteren. 
+            Dit kan zowel direct op de site zelf geberuen via javascript of in iframes. 'SQL injection' is ook een reëele dreiging.</li>
             <li>URL redirect - Duizende gehackte sites redirecten naar een handvol 'master URL's'. 
-            Met een paar regels veborgen HTML wordt uw site in een soort 'voordeur' voor de badware veranderd. 
+            Met een paar regels verborgen HTML wordt uw site in een soort 'voordeur' voor de badware veranderd. 
             De 'master URL's' kunnen bijvoorbeeld spammerige productpagina's of malware bevatten.</li>
             <li>Het hosten van o.a. phishing, spampagina's en/of pornografie - 
-            één of meerder statische pagina's op de gehackte site kunnen dienst doen om bijvoorbeeld 'spam products' (zoals geneesmiddelen, drugs, versterkende middelen, etc.) te adverteren.
+            één of meerdere statische pagina's op de gehackte site kunnen dienst doen om bijvoorbeeld 'spam products' (zoals geneesmiddelen, drugs, versterkende middelen, etc.) te adverteren.
             Ook neppagina's voor banken, betaaldiensten, e-maildiensten, etc. of het hosten van expliciet (soms illegaal) content vallen hieronder.</li>
             <li>Vandalisme - De hack kan zijn uitgevoerd om de eigenaar van de site te vernederen of bijvoorbeeld voor politieke doeleinden. 
             Dit valt onder de paraplu van het 'hacktivisme'. Sommige beheerders geven aan dat concurrenten dit ook doen. </li>
-            <li>Overige content of activiteiten - Door de jaren heen zijn er aardig complexe vormen van misbruik geconstateerd. Bijvoorbeeld een script dat spam stuurt..</li>
+            <li>Overige content of activiteiten - Door de jaren heen zijn er aardig complexe vormen van misbruik geconstateerd. Bijvoorbeeld een script dat spam stuurt.</li>
             </ul>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>If your site has been hacked or infected with malware, you should act quickly to repair the
-            damage. First take your entire website offline first. This is pretty impopulair, however if
-            you consider the fact your might be leaking privacy information or infecting the
-            systems of your visitors you want to act as quickly as possible.</p>
+            <p>Als uw site met malware gehackt of geïnfecteerd is, is het van belagn zo snel mogelijk hierop te reageren om schade te beperken en repareren.
+            Haal eerst de site offline. Dit is wellicht geen populaire maatregel, maar gezien er een kans staat dat uw site gegevens lekt of het systeem van uw bezoekers infecteert, 
+            is het van belang zo snel mogelijk hierop te regaeren.</p>
 
-            <p>After you closed your website you will need to clean up the changed area's of your
-            website.</p>
+            <p>Nadat u uw site offline heeft gezet, zult u de aaangetaste onderdelen van de site moeten opschonen.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
             <p>De veiligste manier om een gehackte site op te schonen, is om hem helemaal te verwijderen
-            en te vervangen met een eerdere versie waarvan men zeker weet dat hij schoon is.</p>
+            en te vervangen met een eerdere versie waarvan men zeker weet dat hij niet geïnfecteerd is.</p>
 
             <ul>
             <li>Kijk of er bestanden zijn die recent zijn aangepast en/of op tijden waarop uw developers niet aan het werk waren.</li>
             <li>Kijk in tijdelijke mappen voor (uitvoerbare) scripts.</li>
             </ul>
 
-            <p>Verder, kan de kans op hercompromitering verkleint worden door deze tips te volgen:
-            In addition, future risk of compromise can be reduced by following these basic tips: </p>
+            <p>Verder kan de kans op hercompromitering verkleint worden door de volgende tips op te volgen: </p>
 
             <ul>
-            <li>Hou software en plug-ins up-to-date. Keep software and all plug-ins updated. Whether you run popular content
-            management software (e.g., WordPress, Joomla, Blogger) or custom software,
-            make sure that software and all third party plug-ins or extensions are updated.
-            Remove plug-ins or other add-ons that aren’t in use</li>
-            <li>Use strong, varied passwords. WordPress login credentials, for example,
-            should be different from FTP credentials. Never store passwords on your local
-            machine.</li>
+            <li>Houd software en plug-ins up-to-date, ongeacht of u populaire content Management Softare (CMS) zoals 
+            WordPress, Joomla of Blogger gebruikt of iets anders.
+            Haal plug-ins die niet in gebruik zijn weg.</li>
+            <li>Gebruik sterke en verschillende wachtwoorden. Uw WordPress inloggegevens zouden bijvoorbeeld anders moeten zijn dan uw FTP inloggegevens.
+            Sla nooit wachtwoorden onbeveiligd op uw lokale machine op.</li>
             <li>Scan uw computer regelmatig voor malware en controleer uw website op ongewenste en/of onbevoegde veranderingen.</li>
             <li>Gebruik geschikte 'file permissions' op uw webserver.</li>
-            <li>Research your options and make security a priority when choosing a web hosting
-            provider. If you aren’t confident you can protect your site on your own, consider
-            using an add-on security service from your hosting provider or a third party website
-            security service.</li>
+            <li>Laat beveiliging een prioriteit zijn bij het zoeken naar een webhoster. Als u niet zeker weet of u uw site zelf kunt beveiligen, 
+            kijk of het een optie is om een beveiligingsservice af te nemen bij uw hosting provider 
+            of een derde partij die zich in websitecybersecurity specialiseert.</li>
             </ul>
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='https://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
+            <a target'_blank' href='https://web.dev/articles/hacked'>Google's tips voor webmasters van gehackte websites (Engels)</a><br>
+            <a target'_blank' href='https://www.antiphishing.org/'>De site antiphishing.org heeft aanbevelingen over hoe men het beste om kan gaan met gehackte sites (Engels)</a><br>
 
             ",
     ],
@@ -332,7 +321,7 @@ return [
                 for privacy or legal reasons. This means it is important for senders to utilize some method
                 other than an email address within a message, in order to identify the recipient.</p>
 
-                <h2>Why Is A Feedback Loop Important?</h2>
+                <h2>Why is a Feedback Loop important?</h2>
 
                 <p>As of May 2008, there were 12 FBLs in place at several of the world's largest ISPs including
                 AOL, Hotmail and Yahoo. Feedback loops have become an email industry standard. The data
@@ -362,14 +351,14 @@ return [
                 thresholds, which vary by ISP. Monitoring the FBL data will improve your email practices,
                 while ensuring complaint rates do not exceed Internet Service Provider (ISP) thresholds.</p>
 
-                <h2>But i am not sending these e-mails</h2>
+                <h2>But I am not sending these e-mails</h2>
 
                 <p>If you receive a high number of FBL complaints on messages that you did not send yourself
                 you should consider the host being reported on (e.g. the IP) to be comprimised as these e-mails
                 did originate from your system. In these cases your advised to shutdown the mailserver and
                 clean the system and its mailqueues before taking it online again.</p>
 
-                <h2>What Is Questionable About Feedback Loops?</h2>
+                <h2>What is questionable about Feedback Loops?</h2>
 
                 <p>The spam button brings some very imprecise functionality. Automatic unsubscribe is an
                 example. For years, end users have been told not to trust email unsubscribe links, to avoid
@@ -446,15 +435,25 @@ return [
 
             <h2>Wat is 'Harvesting'?</h2>
 
-            <p>Email harvesting is the process of obtaining lists of email addresses or accounts
+            <p>'Email harvesting' is het proces van  met een aantal verschillende methoden 
+            grote aantallen e-mailadressen en/of accounts te verzamelen voor gebruik in het versturen van bulk e-mail, 
+            het versturen van spam of toegang tot systemen te verkrijgen.
+            
+            Email harvesting is the process of obtaining lists of email addresses or accounts
             using various methods for use in bulk email or other purposes usually
             like sending SPAM or gaining access to the system.</p>
 
-            <p>A common method is the use of special software known as 'harvesting bots'
+            <p>Een veelvoorkomende methode is het gebruik van software die bekend staat als 'harvesting bots' of 'harvesters'.
+            Deze programma's gaan door webpagina's, mailing lists, internetfora, etc. af om openbaar-toegankelijke e-mailadressen te verzamelen.
+            
+            A common method is the use of special software known as 'harvesting bots'
             or 'harvesters', which spider web pages, mailing list archives, internet
             forums and other online sources to obtain email addresses from public data.</p>
 
-            <p>Another method addresses, known as a directory harvest attack, works
+            <p>Een andere methode ganaamd 'directory harvest attack', werkt door verbinding te maken met een mailserver 
+            en e-mailadressen te raden met gebruik van veelvoorkomende gebruikersnamen voor een bepaald domein.
+            
+            Another method addresses, known as a directory harvest attack, works
             by connecting to mailservers and guessing an email address using common
             usernames in email addresses at that domain.</p>
 
@@ -486,7 +485,16 @@ return [
         'description' => "
             <h2>Wat is een 'Open Chargen server'?</h2>
 
-            <p>The Character Generator Protocol (CHARGEN) is a service thats intended
+            <p>Het Character Generator Protocol (CHARGEN) is een serive bedoeld voor debuggen, 
+            testen en meten. Het wordt zelden gebruikt, gezien de ontwerpfouten van het protocol misbruik toestaan.
+            Aan host kan met een server die CHARGEN onndersteunt via UDP of TCP poort 19. 
+            Zodra er een TCP-verbinding geopend is, zal de server willekeurige characters naar de verbonden host sturen 
+            tot de host de verbinding sluit. 
+            De UDP-implementatie is iets anders. 
+            De server stuurt hierbij een UDP datagram met een willekeurig aantal (tussen 0 en 512) characters 
+            elke keer dat het een datagram van de verbonden host ontvangt. Alle data die de server ontvangt, wordt weggegooid.
+            
+            The Character Generator Protocol (CHARGEN) is a service thats intended
             for testing, debugging, and measurement purposes. The protocol is rarely
             used, as its design flaws allow ready misuse. A host may connect to a
             server that supports the Character Generator Protocol on either
@@ -500,7 +508,10 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
+            <p>Een open (UDP) dienst draaien is niet perse een probleem, en is meestal een vereiste 
+            voor het installeren van een systeem.
+            He
+            Running an open (UDP) service is not bad on its own and it is mostly
             a required dependancy when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
@@ -2202,34 +2213,36 @@ return [
     'VULNERABLE_SMTP_SERVER' => [
         'name'          => 'Kwetsbare SMTP server',
         'description'   => "
-            <h2>What is a 'Vulnerable SMTP server'?</h2>
+            <h2>Wat is een 'Kwetsbare SMTP server'?</h2>
             
-            <p>It was discovered that the host, a mail sending server, is running a vulnerable SMTP software.</p>
+            <p>Het is ontdekt dat de host - een server die mail verstuurd - een kwetsbare SMTP software heeft draaien.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
         
-            <p>Hackers might exploit the vulnerable SMTP server, resulting in potentially getting the SMTP server compromised.</p>
+            <p>Hackers zouden misbruik van deze kwetsbaarheid kunnen maken waardoor de DMTP server gehackt zou kunnen worden.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie:</h2>
 
-            <p>Update the SMTP software to the latest version.</p>
+            <p>Update de SMPT doftware naar de nieuwste versie.</p>
             ",
     ],
 
     'OPEN_AMQP' => [
         'name'          => 'Toegankelijke Advanced Message Queuing Protocol (AMQP) server',
         'description'   => '
-            <h2>What is a AMQP server?</h2>
+            <h2>Wat is een AMQP server?</h2>
 
-            <p>AMQP is an open internet protocol for business messaging. It is often also used for IoT device management.</p>
+            <p>AMQP is een open internet protocol voor \'business messaging\'. Het wordt ook ingezet voor het beheren van IoT (Internet of Things) apparaten.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
-            <p>Even though it does allow for encrypted communications via TLS, many instances on the Internet are configured for cleartext authentication and message sharing. Furthermore in the past there have been multiple vulnerabilities discovered in AMQP broker software implementations that can allow for authentication bypass, interception of messages, remote code execution or denial of service and other attacks.</p>
+            <p>Hoewel AMQP wel de optie heeft om encrypted te communiceren via TLS, zijn veel instanties op het internet zo ingesteld dat authentificatie en boodschappen via cleartext gaan.
+            Verder zijn er in het verleden vele kwetsbaarheden in AMQP broker sotware-implementaties gevonden die het mogelijk maken om o.a. authentificatie te omzeilen, 
+            boodschappen te onderscheppen of zelfs remote code execution of DDoS aanvallen uit te voeren.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen actie:</h2>
 
-            <p>Make sure that the AMQP server is up-to-date and that the AMQP server is not reachable over the internet if it doesnt need to.</p>
+            <p>Zorg ervoor dat de AMQP server up-to-date en niet vrij toegankelijk vanaf het internet is als dit niet nodig is.</p>
             ',
     ],
 
