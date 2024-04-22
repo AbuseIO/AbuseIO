@@ -274,21 +274,21 @@ return [
 
             <p>Een distributiewebsie is een site die malware ter download aanbiedt. 
             Zie bijvoorbeeld downloadlinks verankerd in malafide documenten of executables. 
-            Gehackte domeinen worden hier regelmatig voor gebruikt. </p>
+            Domeinen die hiervoor worden gebruikt, zijn vaak gehackte domeinen.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Als je malware op je server hebt staan, stop hier onmiddelijk mee en verwijder het. Dit is namelijk illegaal. 
-            Het kan ertoe leiden dat zoekmachine's jouw site als verdacht gaan aanmerken, waardoor deze minder toegangkelijk voor je bezoekers wordt.
-            Als een hacker malware op jouw site heeft gezet, dan is deze zeer waarschijnlijk gehackt.</p>
+            <p>Als u malware op uw server hebt staan, stop hier onmiddelijk mee en verwijder het. Dit is namelijk illegaal. 
+            Het kan ertoe leiden dat zoekmachine's uw site als verdacht gaan aanmerken, waardoor deze minder toegangkelijk voor uw bezoekers wordt.
+            Als een hacker malware op uw site heeft gezet, dan is deze zeer waarschijnlijk gehackt.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Verwijder alle kwaadwillig gehoste bestanden, check of jouw site gehackt is en ruim malafide bestanden op.</p>
+            <p>Verwijder alle kwaadwillig gehoste bestanden, check of uw site gehackt is en ruim malafide bestanden op.</p>
 
             <h2>Tips om dit op te lossen</h2>
             <ul>
-            <li>Indien dit een CMS (WordPress, Drupal, Joomla, etc.) is, check of er updates voor uw add-ons en plugins beschikbaar zij. Voer deze uit waar mogelijk.</li>
+            <li>Indien dit om een CMS (WordPress, Drupal, Joomla, etc.) gaat, check of er updates voor uw add-ons en plugins beschikbaar zijn. Voer deze uit waar mogelijk.</li>
             <li>Indien dit een 'standaard' website is, controleer op tekeken van infectie of onbekende links op uw pagina's. Neem stappen om deze te verwijderen.</li>
             <li>Zodra het probleem is opgelost, vraag zoekmachines om uw site te herevalueren.</li>
             </ul>
@@ -435,27 +435,15 @@ return [
 
             <h2>Wat is 'Harvesting'?</h2>
 
-            <p>'Email harvesting' is het proces van  met een aantal verschillende methoden 
+            <p>'Email harvesting' is het proces van met een aantal verschillende methoden 
             grote aantallen e-mailadressen en/of accounts te verzamelen voor gebruik in het versturen van bulk e-mail, 
-            het versturen van spam of toegang tot systemen te verkrijgen.
-            
-            Email harvesting is the process of obtaining lists of email addresses or accounts
-            using various methods for use in bulk email or other purposes usually
-            like sending SPAM or gaining access to the system.</p>
+            het versturen van spam of toegang tot systemen te verkrijgen.</p>
 
-            <p>Een veelvoorkomende methode is het gebruik van software die bekend staat als 'harvesting bots' of 'harvesters'.
-            Deze programma's gaan door webpagina's, mailing lists, internetfora, etc. af om openbaar-toegankelijke e-mailadressen te verzamelen.
-            
-            A common method is the use of special software known as 'harvesting bots'
-            or 'harvesters', which spider web pages, mailing list archives, internet
-            forums and other online sources to obtain email addresses from public data.</p>
+            <p>Een veelvoorkomende techniek is het gebruik van software die bekend staat als 'harvesting bots' of 'harvesters'.
+            Deze programma's gaan webpagina's, mailing lists, internetfora, etc. af om openbaar toegankelijke e-mailadressen te verzamelen.</p>
 
-            <p>Een andere methode ganaamd 'directory harvest attack', werkt door verbinding te maken met een mailserver 
-            en e-mailadressen te raden met gebruik van veelvoorkomende gebruikersnamen voor een bepaald domein.
-            
-            Another method addresses, known as a directory harvest attack, works
-            by connecting to mailservers and guessing an email address using common
-            usernames in email addresses at that domain.</p>
+            <p>Een andere methode genaamd 'directory harvest attack', werkt door verbinding te maken met een mailserver 
+            en e-mailadressen te raden met gebruik van veelvoorkomende gebruikersnamen voor een bepaald domein.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -463,8 +451,7 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Indien u bewust e-mailadressen aan het harvesten bent, 
-            raden wij u sterk aan hiermee te stoppen om verdere escalatie te voorkomen.</p>
+            <p>Indien u bewust e-mailadressen aan het harvesten bent, raden wij u sterk aan hiermee te stoppen om verdere escalatie te voorkomen.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
@@ -485,8 +472,8 @@ return [
         'description' => "
             <h2>Wat is een 'Open Chargen server'?</h2>
 
-            <p>Het Character Generator Protocol (CHARGEN) is een serive bedoeld voor debuggen, 
-            testen en meten. Het wordt zelden gebruikt, gezien de ontwerpfouten van het protocol misbruik toestaan.
+            <p>Het Character Generator Protocol (CHARGEN) is een service bedoeld voor debuggen, 
+            testen en meten. Het wordt zelden gebruikt, gezien de ontwerpfouten van het protocol makkelijk misbruik toestaan.
             Aan host kan met een server die CHARGEN onndersteunt via UDP of TCP poort 19. 
             Zodra er een TCP-verbinding geopend is, zal de server willekeurige characters naar de verbonden host sturen 
             tot de host de verbinding sluit. 
@@ -510,18 +497,31 @@ return [
 
             <p>Een open (UDP) dienst draaien is niet perse een probleem, en is meestal een vereiste 
             voor het installeren van een systeem.
-            He
+            Helaas misbruiken hackers deze dienst voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'Amplification Attack'.
+            
             Running an open (UDP) service is not bad on its own and it is mostly
             a required dependancy when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
 
-            <p>The attacker sends a packet apparently from the intended victim to some
+            <p>Een 'Amplification Attack' is aleen uit te voeren in combinatie met zogeheten 'Reflection'.
+            'Reflection' is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Als de aanvaller geen Reflection toe zou passen, dan zou die zichzelf naemlijk aanvallen.
+            
+            An Amplification Attack is only feasible by using it in combination with 'Reflection'. 
+            Reflection is when an attacker spoofs their IP address to that of their victim. Without reflection, the attacker would be attacking themselves.</p>
+
+            <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft.
+            Omdat het IP-adres gespoofed is, wordt de opgevraagde data naar het slachtoffer verzonden.
+            
+            The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
             IP address is forged, the remote Internet server replies and sends data
             to the victim.</p>
 
-            <p>That has two effects: the actual source of the attack is hidden and is
+            <p>
+            
+            That has two effects: the actual source of the attack is hidden and is
             very hard to trace, and, if many Internet servers are used, an attack
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
@@ -538,7 +538,9 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>There is no reason to have this CHARGEN service enabled on a public facing
+            <p>Er is geen reden om CHARGEN te draaien op een public-facing interface. 
+            Zet deze uit of zorg ervoor dat deze niet vanaf het internet te bereiken is door RFC1918 spaces of een firewall in te zetten.
+            There is no reason to have this CHARGEN service enabled on a public facing
             interface. You should either stop te service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
