@@ -34,7 +34,8 @@ return [
 
     'OPEN_SMB_SERVER' => [
         'name'        => 'Open SAMBA Server (SMB/CIFS)',
-        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
+        'description' => 'Deze rapportage identificeert hosts die een SMB instance hebben draaien op poort 445/TCP die vrij toegankelijk via het internet is. 
+        Deze dienst zou niet toegankelijk via het internet moeten zijn.',
     ],
 
     'OPEN_CWMP_SERVER' => [
@@ -214,7 +215,7 @@ return [
             phishing e-mails die een ontvanger hebben weten te overtuigen een bestand dat (ongewild) op uw website gehost is te downloaden. 
             In veel gevallen is zo'n malware(script) ergens in een subfolder verborgen.</li>
             <li>Geïnjecteerde content - Als hackers toegang tot uw website hebben, zouden ze kunnen proberen malafide content te injecteren. 
-            Dit kan zowel direct op de site zelf geberuen via javascript of in iframes. 'SQL injection' is ook een reëele dreiging.</li>
+            Dit kan zowel direct op de site zelf gebeuren via javascript of in iframes. 'SQL injection' is ook een reëele dreiging.</li>
             <li>URL redirect - Duizende gehackte sites redirecten naar een handvol 'master URL's'. 
             Met een paar regels verborgen HTML wordt uw site in een soort 'voordeur' voor de badware veranderd. 
             De 'master URL's' kunnen bijvoorbeeld spammerige productpagina's of malware bevatten.</li>
@@ -228,9 +229,9 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Als uw site met malware gehackt of geïnfecteerd is, is het van belagn zo snel mogelijk hierop te reageren om schade te beperken en repareren.
-            Haal eerst de site offline. Dit is wellicht geen populaire maatregel, maar gezien er een kans staat dat uw site gegevens lekt of het systeem van uw bezoekers infecteert, 
-            is het van belang zo snel mogelijk hierop te regaeren.</p>
+            <p>Als uw site met malware gehackt of geïnfecteerd is, haal eerst de site offline. 
+            Dit is wellicht geen populaire maatregel, maar gezien er kans is dat uw site gegevens lekt of het systeem van uw bezoekers infecteert, 
+            is het van belang zo snel mogelijk hierop te reageren om eventuele schade te beperken.</p>
 
             <p>Nadat u uw site offline heeft gezet, zult u de aaangetaste onderdelen van de site moeten opschonen.</p>
 
@@ -248,7 +249,7 @@ return [
 
             <ul>
             <li>Houd software en plug-ins up-to-date, ongeacht of u populaire content Management Softare (CMS) zoals 
-            WordPress, Joomla of Blogger gebruikt of iets anders.
+            WordPress, Joomla of Blogger of iets anders gebruikt.
             Haal plug-ins die niet in gebruik zijn weg.</li>
             <li>Gebruik sterke en verschillende wachtwoorden. Uw WordPress inloggegevens zouden bijvoorbeeld anders moeten zijn dan uw FTP inloggegevens.
             Sla nooit wachtwoorden onbeveiligd op uw lokale machine op.</li>
@@ -1583,7 +1584,12 @@ return [
         'description' => "
             <h2>Wat is een 'Phishing website'?</h2>
 
-            <p>A Phishing website is the attempt to acquire sensitive information such as
+            <p>Een phishing website is een site die wordt gebruikt om gevoelige informatie zoals 
+            gebruikersnamen, wachtwoorden, bankiergegevens (en soms indirect: geld) door zich voor te doen als een vertrouwde website. 
+            Mails en communicatie die claimen van populaire sociale media sites, veilingsites, banken, online betaaldiensten of IT beheerders af te komen, 
+            worden ingezet om mensen naar deze sites te krijgen en hun gevoelens daar naartoe te sturen. Deze sites zijn tevens vaak geïnfecteerd met malware.
+            
+            A Phishing website is the attempt to acquire sensitive information such as
             usernames, passwords, and credit card details (and sometimes, indirectly, money)
             by masquerading as a trustworthy entity in an electronic communication.
             Communications purporting to be from popular social web sites, auction sites, banks,
@@ -1592,58 +1598,53 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>A Phishing website is usually the result of a comprimised website or comprimised user
+            <p>Een phishing website is vaak het resultaat van een gehackte website of inloggegevens van een gebruiker van deze site.
+            
+            A Phishing website is usually the result of a comprimised website or comprimised user
             credentials of that website.</p>
 
-            <p>When your website is compromised, not only your website contains changes done by hackers
-            but it also contains one or more security problems that allowed a hacker to gain access
-            to your website in the first place. The compromised website provides a useful platform for
-            a range of illicit activities.</p>
+            <p>Als uw site gehackt is, betekent dat niet alleen dat er ongewenste wijzigingen aan uw site zijn gedaan, 
+            maar ook dat de site één of meer beveiligingsproblemen heeft die de hacker in staat stelde om in de eerste plaats in te kunnen breken.
+            De gehackte site kan worden gebruikt voor een groot aantal ongewenste en/of malafide doeleinden.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>If your site has been hacked or infected with malware, you should act quickly to repair the
-            damage. First take your entire website offline first. This is pretty impopulair, however if
-            you consider the fact your might be leaking privacy information or infecting the
-            systems of your visitors you want to act as quickly as possible.</p>
+            <p>Als uw site met malware gehackt of geïnfecteerd is, haal eerst de site offline. 
+            Dit is wellicht geen populaire maatregel, maar gezien er kans is dat uw site gegevens lekt of het systeem van uw bezoekers infecteert, 
+            is het van belang zo snel mogelijk hierop te reageren om eventuele schade te beperken.</p>
 
-            <p>After you closed your website you will need to clean up the changed area's of your
-            website.</p>
+            <p>Nadat u uw site offline heeft gezet, zult u de aaangetaste onderdelen van de site moeten opschonen.</p>
 
 
             <h2>Tips om dit op te lossen</h2>
 
-            <p>The safest way to clean the hacked website is to delete it entirely and then upload
-            a known clean version of it.</p>
+            <p>De veiligste manier om een gehackte site op te schonen, is om hem helemaal te verwijderen
+            en te vervangen met een eerdere versie waarvan men zeker weet dat hij niet geïnfecteerd is.</p>
 
             <ul>
-            <li>Look for files that have been changed recently or on times your developers are
-            closed and not placing updates on the website<li>
-            <li>Look in temporally folders for (executable) scripts</li>
+            <li>Kijk of er bestanden zijn die recent zijn aangepast en/of op tijden waarop uw developers niet aan het werk waren.</li>
+            <li>Kijk in tijdelijke mappen voor (uitvoerbare) scripts.</li>
             </ul>
 
-            <p>In addition future risk of compromise can be reduced by following these basic tips: </p>
+            <p>Verder kan de kans op hercompromitering verkleint worden door de volgende tips op te volgen: </p>
 
             <ul>
-            <li>Keep software and all plug-ins updated. Whether you run popular content
-            management software (e.g., WordPress, Joomla, Blogger) or custom software,
-            make sure that software and all third party plug-ins or extensions are updated.
-            Remove plug-i ns or other add-ons that aren’t in use</li>
-            <li>Use strong, varied passwords. WordPress login credentials, for example,
-            should be different from FTP credentials. Never store passwords on your local
-            machine.</li>
-            <li>Regularly scan your PC for malware and your website for unautherized changes</li>
-            <li>Use appropriate file permissions on your web server.</li>
-            <li>Research your options and make security a priority when choosing a web hosting
-            provider. If you aren’t confident you can protect your site on your own, consider
-            using an add-on security service from your hosting provider or a third party website
-            security service.</li>
+            <li>Houd software en plug-ins up-to-date, ongeacht of u populaire content Management Softare (CMS) zoals 
+            WordPress, Joomla of Blogger of iets anders gebruikt.
+            Haal plug-ins die niet in gebruik zijn weg.</li>
+            <li>Gebruik sterke en verschillende wachtwoorden. Uw WordPress inloggegevens zouden bijvoorbeeld anders moeten zijn dan uw FTP inloggegevens.
+            Sla nooit wachtwoorden onbeveiligd op uw lokale machine op.</li>
+            <li>Scan uw computer regelmatig voor malware en controleer uw website op ongewenste en/of onbevoegde veranderingen.</li>
+            <li>eGbruik geschikte 'file permissions' op uw webserver.</li>
+            <li>Laat beveiliging een prioriteit zijn bij het zoeken naar een webhoster. Als u niet zeker weet of u uw site zelf kunt beveiligen, 
+            kijk of het een optie is om een beveiligingsservice af te nemen bij uw hosting provider 
+            of een derde partij die zich in websitecybersecurity specialiseert.</li>
             </ul>
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
+            <a target'_blank' href='https://web.dev/articles/hacked'>Google's tips voor webmasters van gehackte websites (Engels)</a><br>
+            <a target'_blank' href='https://www.antiphishing.org/'>De site antiphishing.org heeft aanbevelingen over hoe men het beste om kan gaan met gehackte sites (Engels)</a><br>
 
             ",
     ],
@@ -1700,15 +1701,15 @@ return [
     'SPAM' => [
         'name'        => 'Spam',
         'description' => "
-            <h2>What is 'Spam'?</h2>
+            <h2>Wat is 'Spam'?</h2>
 
-            <p>A spam report indicates that one or more emails sent from
-            your server have been flagged by an automated system or
-            by an end recipient as spam or unsolicited email.</p>
+            <p>Als u een spamrapportge ontvangt, betekent dat dat één of 
+            meerdere e-mails die vanaf uw server verzonden worden, door een automatisch systeem 
+            en/of een ontvanger zijn gemarkeert als spam of ongewenste e-mail.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Spam of ongewesnste e-mail versturen is illegaal en -per onze voorwaarden - niet toegestaan.</p>
+            <p>Spam of ongewenste e-mail versturen is illegaal en -per onze voorwaarden - niet toegestaan.</p>
 
             <h2>Aanbevolen actie</h2>
 
@@ -1716,8 +1717,8 @@ return [
             voor bulk mail om te voorkomen dat uw mails als spam worden aangemerkt:</p>
 
             <ul>
-                <li>1) Your recipients have opted in for the service.</li>
-                <li>2) Each email sent contains a working opt-out link.</li>
+                <li>1) De ontvangers van uw mails hebben zich aangemeld voor deze dienst.</li>
+                <li>2) Elke e-mail bevat een afmeldlink.</li>
             </ul>
 
             <p>Als u geen bulk e-mail verstuurd, controleer uw website en DNS op tekenen van compromittering. </p>
@@ -1729,14 +1730,13 @@ return [
 
             <p>De beste manier om dit probleem op te lossen, is om uw mailserver (MTA)
             stop te zetten en de mailqueue op SPAM-berichten te controleren. 
-            Als u verdachte mail vindt, kunt u deze openen om erachter te komen waar deze vandaan komt. 
+            Als u verdachte mail vindt, kunt u deze openen om er achter te komen waar deze vandaan komt. 
             Door de MTA stop te zetten, voorkomt u dat de SPAM wordt verstuurd. 
             Nadat het probleem is opgelost, moet u alle SPAM uit de mailqueue halen alvorens u uw MTA opnieuw opstart.</p>
 
             <h2>Meer informatie/h2>
 
-            <p>If you are unable to or unsure how to resolve this issue,
-            please contact our abuse department for support.</p>
+            <p>Neem contact op met onze abuse-afdeling als u niet weet hoe u dit probleem op kan lossen.</p>
 
             ",
     ],
@@ -1884,7 +1884,7 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Check your website and DNS for signs of comprimise. </p>
+            <p>Controleer uw website en DNS op tekenen van compromis.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
@@ -1996,12 +1996,9 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Wij advieseren om enkel RPC calls van vertrouwde bronnen toe te laten.
-            Dit kan worden bereikt door al het verkeer voor RPC services te laten vallen
-            en alleen vebrindingnen van bekende IP-adressen toe te staan.
-            We recommend you to only allow RPC calls from trusted sources. This
-            can be achieved by dropping all traffic for RPC services on your local
-            firewall and only allowing connections from trusted IP addresses.</p>
+            <p>Wij adviseren om enkel RPC calls van vertrouwde bronnen toe te laten.
+            Dit kan worden gedaan door al het verkeer voor RPC services te laten vallen
+            en alleen verbindingnen van bekende IP-adressen toe te staan.</p>
             ",
     ],
 
