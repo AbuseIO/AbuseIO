@@ -1584,24 +1584,15 @@ return [
         'description' => "
             <h2>Wat is een 'Phishing website'?</h2>
 
-            <p>Een phishing website is een site die wordt gebruikt om gevoelige informatie zoals 
+            <p>Een phishingwebsite is een site die wordt gebruikt om gevoelige informatie zoals 
             gebruikersnamen, wachtwoorden, bankiergegevens (en soms indirect: geld) door zich voor te doen als een vertrouwde website. 
-            Mails en communicatie die claimen van populaire sociale media sites, veilingsites, banken, online betaaldiensten of IT beheerders af te komen, 
-            worden ingezet om mensen naar deze sites te krijgen en hun gevoelens daar naartoe te sturen. Deze sites zijn tevens vaak geïnfecteerd met malware.
-            
-            A Phishing website is the attempt to acquire sensitive information such as
-            usernames, passwords, and credit card details (and sometimes, indirectly, money)
-            by masquerading as a trustworthy entity in an electronic communication.
-            Communications purporting to be from popular social web sites, auction sites, banks,
-            online payment processors or IT administrators are commonly used to lure unsuspecting
-            public. Phishing emails may contain links to websites that are infected with malware. </p>
+            Mails en communicatie die claimen van o.a. populaire sociale media sites, veilingsites, 
+            banken, online betaaldiensten, beroemdheden of ICT-beheerders af te komen, 
+            worden ingezet om mensen naar deze sites te krijgen en hun gegevens daarheen te sturen. Deze sites kunnen tevens geïnfecteerd met malware zijn. </p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een phishing website is vaak het resultaat van een gehackte website of inloggegevens van een gebruiker van deze site.
-            
-            A Phishing website is usually the result of a comprimised website or comprimised user
-            credentials of that website.</p>
+            <p>Een phishingwebsite is vaak het resultaat van een gehackte website of gecompromitteerde inloggegevens van een gebruiker van deze site.</p>
 
             <p>Als uw site gehackt is, betekent dat niet alleen dat er ongewenste wijzigingen aan uw site zijn gedaan, 
             maar ook dat de site één of meer beveiligingsproblemen heeft die de hacker in staat stelde om in de eerste plaats in te kunnen breken.
@@ -1970,13 +1961,15 @@ return [
             <p>Deze functie kwordt tevens ook door hackers misbruikt voor het uitvoeren 
             van een zogenaamde 'Amplification Attack'; een speciaal type DDoS.</p>
 
+            <p>Een  'Amplificatie Attack' is alleen mogelijk door het in combinatie met 'Reflection' uit te voeren.</p>
+
             <p>De aanvaller vervalst diens IP-adres en stuurt een packet - dat van het slachtoffer 
             af lijkt te komen - naar een internetadres dat hier direct antwoord op geeft. 
             Omdat het IP-adres vervalst is, stuurt de remote server het antwoord met de opgevraagde data naar het slachtoffer.
             </p>
 
             <p>Dit heeft twee effecten: ten eerste, verhult dit de bron van de aanval, waardoor het moeilijk te achterhelen is.
-            Ten tweede, als er veel internetservers worden gebruikt, kan de aanval de vorm aannemen van een overweldigend aantal packets. verstuurd vanaf vele servers over de hele wereld verspreid.
+            Ten tweede, als er veel servers worden gebruikt, kan de aanval de vorm aannemen van een overweldigend aantal packets verstuurd vanaf servers over de hele wereld verspreid.
             
             That has two effects: the actual source of the attack is hidden and is
             very hard to trace, and, if many Internet servers are used, an attack
