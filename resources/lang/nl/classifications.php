@@ -475,12 +475,13 @@ return [
 
             <p>Het Character Generator Protocol (CHARGEN) is een service bedoeld voor debuggen, 
             testen en meten. Het wordt zelden gebruikt, gezien de ontwerpfouten van het protocol makkelijk misbruik toestaan.
-            Aan host kan met een server die CHARGEN onndersteunt via UDP of TCP poort 19. 
+            Een host kan een verbinding met een server die CHARGEN ondersteunt via UDP of TCP poort 19 openen. 
             Zodra er een TCP-verbinding geopend is, zal de server willekeurige characters naar de verbonden host sturen 
             tot de host de verbinding sluit. 
             De UDP-implementatie is iets anders. 
-            De server stuurt hierbij een UDP datagram met een willekeurig aantal (tussen 0 en 512) characters 
-            elke keer dat het een datagram van de verbonden host ontvangt. Alle data die de server ontvangt, wordt weggegooid.
+            De server stuurt hierbij iedere keer dat het een datagram van de verbonden host ontvangt, 
+            een UDP datagram met een willekeurig aantal (tussen 0 en 512) karakters. 
+            Alle data die de server ontvangt, wordt weggegooid.
             
             The Character Generator Protocol (CHARGEN) is a service thats intended
             for testing, debugging, and measurement purposes. The protocol is rarely
@@ -568,10 +569,9 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
-            Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            <p>Een open (UDP) dienst draaien is niet perse een probleem, en is meestal een vereiste 
+            voor het installeren van een systeem.
+            Helaas misbruiken hackers deze dienst voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -1054,16 +1054,13 @@ return [
             <h2>Wat is een 'Open NTP Server'?</h2>
 
             <p>Network Time Protocol (NTP) is een netwerkprotocol voor tijdsynchronisatie
-            tussen computersysteemen over packet-switched variable-lancy dat networks. 
-            NTP is al vanaf 1985 in gebruik, wat het één van de oudste internetprotocollen nog in gebruik maakt.
-            Network Time Protocol (NTP) is a networking protocol for clock
-            synchronization between computer systems over packet-switched,
-            variable-latency data networks. In operation since before 1985, NTP
-            is one of the oldest Internet protocols in current use.</p>
+            tussen computersysteemen over packet-switched variable-lancy data netwerken. 
+            NTP waerdt al vóór 1985 gebruikt, wat het één van de oudste internetprotocollen nog in gebruik maakt.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
+            <p>Een open (UDP) dienst draaien, is nit perse een probleem
+            Running an open (UDP) service is not bad on its own and it is mostly
             a required dependancy when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
@@ -1976,7 +1973,7 @@ return [
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
 
-            <p>
+            <p>'Reflection attacks' kunnen echter nog krachtiger worden als ze gecombineerd worden met amplificatie
             But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
             the server (or servers). In that case, an attacker can send a small
@@ -2259,10 +2256,12 @@ return [
     'OPEN_ICS' => [
         'name'          => 'Open Industrial Control Service (ICS) application',
         'description'   => '
-            <p> Dit rapport bevat een lijst met apparaten die reageren op een aantal gespecializeerde ICS/OT scans. Ook bevat het de ontvangen make-and-model informatie en de raw responses die ontvangen zijn.
-            this report contains a list of devices that are responding to various specialized ICS/OT scans, along with additional make-and-model information and raw responses received. </p>
+            <p> Dit rapport bevat een lijst met apparaten die reageren op een aantal gespecializeerde ICS/OT scans. 
+            Ook bevat het de make-and-model informatie en de raw responses die ontvangen zijn. </p>
 
-            <p> Het is onwaarschijnlijk dat dit soort apparaten op enige manier toegankelijk hoeven te zijn voor queries vanaf het internet, dus tenzij u een honeypot draait, is het sterk aangeraden om - als u een rapportage vor uw netwerk/kring ontvangt - hier onmiddelijk actie op te ondernemen en de toegang tot dit apparaat te beperken/firewallen. </p>
+            <p> Het is onwaarschijnlijk dat dit soort apparaten toegankelijk hoeven te zijn voor queries vanaf het openbare internet, 
+            dus tenzij u een honeypot draait, is het sterk aangeraden om - als u een rapportage voor uw netwerk/kring ontvangt - 
+            hier onmiddelijk actie op te ondernemen en de toegang tot dit apparaat te beperken/firewallen. </p>
             ',
     ],
 
