@@ -92,11 +92,11 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Dit rapport identificeert hosts die een Remote Desktop Protocol (RDP) service hebben draaien die voor een ieder vrij toegankelijk is via het internet.
+            <p>Dit rapport identificeert hosts die een Remote Desktop Protocol (RDP) dienst hebben draaien die voor een ieder vrij toegankelijk is via het internet.
             Verkeerd ingestelde RDP kan kwaadwillenden in staat stellen toegang te krijgen tot een desktop van een kwetsbare host.
             Dit maakt het mogelijk om informatie over de target host te bemachtigen, gezien de SSL -certificaten die door RDP worden gebruikt vaak de \'trivial hostname\' van het systeem bevatten.</p>
 
-            <p>De kans is groot dat de server doelwit wordt van \'brute force attakcs\'. Omdat de meeste RDP servers maar twee sessies per keer ondersteunen, wordt u dan buitengesloten.</p>
+            <p>De kans is groot dat de server doelwit wordt van \'brute force\' aanvallen. Omdat de meeste RDP servers maar twee sessies per keer ondersteunen, wordt u dan buitengesloten.</p>
 
             <h2>Aanbevolen actie</h2>
 
@@ -377,12 +377,14 @@ return [
     ],
 
     'FREAK_VULNERABLE_SERVER' => [
-        'name'        => 'FREAK kwetsbare server',
+        'name'        => 'FREAK Vulnerable Server',
         'description' => "
 
             <h2>Wat is een 'FREAK Vulnerable Server'?</h2>
 
-            <p>Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
+            <p>Servers die RSA_EXPORT ciphersuites accepteren, lopen de kans hun gebruikers bloot te stellen aan de zogenaamde FREAK-aanval.
+            
+            Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
             attack. Using Internet-wide scanning, we have been performing daily tests of all
             HTTPS servers at public IP addresses to determine whether they allow this weakened
             encryption. More than a third of all servers with browser-trusted certificates are
@@ -390,13 +392,15 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
+            <p>Servers die RSA_EXPORT ciphersuites accepteren, lopen de kans hun gebruikers bloot te stellen aan de zogenaamde FREAK-aanval.
+            De FREAK-aanval is mogelijk wanneer een kwetsbare browser verbinding maakt met een webserver die de kwetsbare “export-grade” encryptie ondersteunt.
+            
+            Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
             attack. The FREAK attack is possible when a vulnerable browser connects to a
-            susceptible web server—a server that accepts “export-grade” encryption.</p>
+            susceptible web server — a server that accepts “export-grade” encryption.</p>
 
-            <p>It allows an attacker to intercept HTTPS connections between vulnerable clients and
-            servers and force them to use weakened encryption, which the attacker can break to
-            steal or manipulate sensitive data. </p>
+            <p>Deze kwetsbaarheid staat aanvallers toe HTTPS-verbindingen tussen kwetsbare clients en servers te onderscheppen 
+            en deze te dwingen zwakkere encryptie te gebruiken. Deze is makkelijker te breken en staat de aanvaller toe (gevoelige) data te stelen of manipuleren. </p>
 
             <p>The factoring of such 512-bit export keys can be done with a cluster of EC2 virtual
             servers, and can be done in about 7.5 hours for $104 in EC2 time. The attacker
@@ -407,7 +411,12 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>You should immediately disable support for TLS export cipher suites. While you’re
+            <p>Zet onmiddelijk onderstuening voor TLS export ciphersuites uit. Het is ook een goed idee om 
+            andere kwetsbare ciphersuites uit te zetten en forward security aan te zetten. 
+            Mozilla heeft instructies en een handige tool om geschikte SSL configuraties voor een groot aantal soorten webservers te genereren.
+            Wij raden ook aan uw instellingen te testen met behulp van bijvoorbeeld de Qualys SSL Labsn SSL Server Test tool.
+            
+            You should immediately disable support for TLS export cipher suites. While you’re
             at it, you should also disable other cipher suites that are known to be insecure
             and enable forward secrecy. For instructions on how to secure popular HTTPS server
             software, we recommend Mozilla’s security configuration guide and their SSL configuration
@@ -416,7 +425,7 @@ return [
 
             <h2>Tips om dit op te lossen</h2>
 
-            <p>With apache server add the following to your SSL section(s):
+            <p>Indien u Apache gebruikt, voeg de volgende aan uw SSL configuratie toe:
 
             SSLCipherSuite ALL:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK</p>
 
@@ -425,7 +434,7 @@ return [
             <a target'_blank' href='https://freakattack.com/'>Tracking the FREAK Attack</a><br>
             <a target'_blank' href='https://www.ssllabs.com/ssltest/'>SSL Server Testtool.</a><br>
             <a target'_blank' href='https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations'>Mozilla’s security configuration guide</a><br>
-            <a target'_blank' href='https://mozilla.github.io/server-side-tls/ssl-config-generator/'>SSL configuration generator</a><br>
+            <a target'_blank' href='https://ssl-config.mozilla.org/'>SSL Configuration Generator</a><br>
 
             ",
     ],
