@@ -175,9 +175,9 @@ return [
             <li>Installeer een rootkit- en virusscanner om er zeker van te zijn dat alle malafide bestanden verwijderd zijn.</li>
             </ul></p>
 
-            <p>Zodra al de malafide software verwijderd is, zorg ervoor dat de server niet opnieuw aangetast kan worden. 
-            Installeer de nieuwste updates voor uw besturingssysteem, control panel en gehoste applicaties
-            inclusief themas en plug-ins (zoals Wordpress) Als u deze niet direct upgraded, zal het systeem binnen korte tijd opnieuw geïnfecteerd zijn!
+            <p>Zodra alle malafide software verwijderd is, zorg ervoor dat de server niet opnieuw aangetast kan worden. 
+            Installeer de nieuwste updates voor uw besturingssysteem, control panel en gehoste applicaties 
+            inclusief thema's en plug-ins (zoals Wordpress) Als u deze niet direct upgraded, zal het systeem binnen korte tijd opnieuw geïnfecteerd zijn!
             </p>
 
             <h2>Meer informatie</h2>
@@ -411,7 +411,7 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Zet onmiddelijk onderstuening voor TLS export ciphersuites uit. Het is ook een goed idee om 
+            <p>Zet onmiddelijk ondersteuning voor TLS export ciphersuites uit. Het is ook een goed idee om 
             andere kwetsbare ciphersuites uit te zetten en forward security aan te zetten. 
             Mozilla heeft instructies en een handige tool om geschikte SSL configuraties voor een groot aantal soorten webservers te genereren.
             Wij raden ook aan uw instellingen te testen met behulp van bijvoorbeeld de Qualys SSL Labsn SSL Server Test tool.
@@ -445,7 +445,7 @@ return [
 
             <h2>Wat is 'Harvesting'?</h2>
 
-            <p>'Email harvesting' is het proces van met een aantal verschillende methoden 
+            <p>'E-mail harvesting' is het proces van met een aantal verschillende methoden 
             grote aantallen e-mailadressen en/of accounts te verzamelen voor gebruik in het versturen van bulk e-mail, 
             het versturen van spam of toegang tot systemen te verkrijgen.</p>
 
@@ -487,73 +487,36 @@ return [
             Een host kan een verbinding met een server die CHARGEN ondersteunt via UDP of TCP poort 19 openen. 
             Zodra er een TCP-verbinding geopend is, zal de server willekeurige characters naar de verbonden host sturen 
             tot de host de verbinding sluit. 
-            De UDP-implementatie is iets anders. 
-            De server stuurt hierbij iedere keer dat het een datagram van de verbonden host ontvangt, 
+            De UDP-implementatie is iets anders: 
+            De server stuurt hierbij iedere keer dat het een datagram van de verbonden host ontvangt 
             een UDP datagram met een willekeurig aantal (tussen 0 en 512) karakters. 
-            Alle data die de server ontvangt, wordt weggegooid.
-            
-            The Character Generator Protocol (CHARGEN) is a service thats intended
-            for testing, debugging, and measurement purposes. The protocol is rarely
-            used, as its design flaws allow ready misuse. A host may connect to a
-            server that supports the Character Generator Protocol on either
-            Transmission Control Protocol (TCP) or User Datagram Protocol (UDP) port
-            number 19. Upon opening a TCP connection, the server starts sending
-            arbitrary characters to the connecting host and continues until the host
-            closes the connection. In the UDP implementation of the protocol, the
-            server sends a UDP datagram containing a random number (between 0 and 512)
-            of characters every time it receives a datagram from the connecting host.
-            Any data received by the server is discarded.</p>
+            Alle data die de CHARGEN server ontvangt, wordt tevens weggegooid.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een open (UDP) dienst draaien is niet perse een probleem, en is meestal een vereiste 
-            voor het installeren van een systeem.
-            Helaas misbruiken hackers deze dienst voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'Amplification Attack'.
-            
-            Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
-            Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
-            <p>Een 'Amplification Attack' is aleen uit te voeren in combinatie met zogeheten 'Reflection'.
-            'Reflection' is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
-            Als de aanvaller geen Reflection toe zou passen, dan zou die zichzelf naemlijk aanvallen.
-            
-            An Amplification Attack is only feasible by using it in combination with 'Reflection'. 
-            Reflection is when an attacker spoofs their IP address to that of their victim. Without reflection, the attacker would be attacking themselves.</p>
+            <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
-            <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft.
-            Omdat het IP-adres gespoofed is, wordt de opgevraagde data naar het slachtoffer verzonden.
-            
-            The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
-            to the victim.</p>
+            <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
+            Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>
-            
-            That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
-            can consist of an overwhelming number of packets hitting a victim from
-            all over the world.</p>
+            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>But what makes reflection attacks really powerful is when they are
-            also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
+            In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
 
-            <p>Amplification attacks like that result in an attacker turning a small
-            amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
+            een paar machines een grote hoeveelheid dataverkeer afkomstig vanaf het hele internet op een slachtoffer richten.</p>
 
             <h2>Aanbevolen actie</h2>
 
             <p>Er is geen reden om CHARGEN te draaien op een public-facing interface. 
-            Zet deze uit of zorg ervoor dat deze niet vanaf het internet te bereiken is door RFC1918 spaces of een firewall in te zetten.
-            There is no reason to have this CHARGEN service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
-            from the internet by using RFC1918 spaces or a firewall.</p>
+            Zet deze uit of zorg ervoor dat deze niet vanaf het internet te bereiken is door RFC1918 spaces of een firewall in te zetten.</p>
 
             <h2>Meer informatie</h2>
 
@@ -566,7 +529,7 @@ return [
         'description' => "
             <h2>Wat is een 'Open DNS Resolver'?</h2>
 
-            <p>Een open DNS server is a DNS server die bereid is om recursieve DNS queries 
+            <p>Een open DNS server is een DNS server die bereid is om recursieve DNS queries 
             voor een ieder op het Internet uit te voeren.</p>
 
             <p>Wanneer een DNS server een recursieve DNS query resolved, spoort het 
@@ -578,29 +541,25 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een open (UDP) dienst draaien is niet perse een probleem, en is meestal een vereiste 
-            voor het installeren van een systeem.
-            Helaas misbruiken hackers deze dienst voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'Amplification Attack'.</p>
+            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
-            <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
-            to the victim.</p>
+            <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
-            <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
-            can consist of an overwhelming number of packets hitting a victim from
-            all over the world.</p>
+            <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
+            Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>But what makes reflection attacks really powerful is when they are
-            also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Amplification attacks like that result in an attacker turning a small
-            amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            <p>Reflection aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
+            In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
+
+            <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
+            een paar machines een grote hoeveelheid dataverkeer afkomstig vanaf het hele internet op een slachtoffer richten.</p>
+
 
             <h2>Aanbevolen actie</h2>
 
@@ -661,11 +620,11 @@ return [
 
             <h3>Windows Systems</h3>
 
-            <p>Zie de volgende voorbeelden van Microsoft TechNet:<br>
+            <p>Zie de volgende voorbeelden van Microsoft Learn (Engels):<br>
             <br>
-            <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc771738.aspx'>Disabling recursion on Windows Server 2008 R2 systems</a><br>
-            <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc787602.aspx'>Disabling recursion on older Windows Server systems</a><br>
-            <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc773370(WS.10).aspx'>Acting as a non-recursive forwarder</a> (See the 'Notes' section under the 'Using the Windows interface' instructions)<br>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771738(v=ws.11)'>Disabling recursion on Windows Server 2008 R2 systems</a><br>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc787602(v=ws.10)'>Disabling recursion on older Windows Server systems</a><br>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc773370(v=ws.10)'>Acting as a non-recursive forwarder</a> (See the 'Notes' section under the 'Using the Windows interface' instructions)<br>
             </p>
 
             <h2>Meer informatie</h2>
@@ -689,8 +648,8 @@ return [
         'description' => "
             <h2>Wat is een 'Open mDNS Service'?</h2>
 
-            <p>An Open mDNS Service is a mDNS server which is willing to resolve
-            recursive DNS queries for anyone on the Internet.</p>
+            <p>Een open mDNS server is een mDNS server die bereid is om recursieve DNS queries 
+            voor een ieder op het Internet uit te voeren.</p>
 
             <p>When a DNS server resolves a recursive DNS query, it tracks down
             information about a domain name hosted on some other DNS server
@@ -699,34 +658,35 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
-            Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
-            <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
-            to the victim.</p>
+            <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
-            <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
-            can consist of an overwhelming number of packets hitting a victim from
-            all over the world.</p>
+            <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
+            Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>But what makes reflection attacks really powerful is when they are
-            also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Amplification attacks like that result in an attacker turning a small
-            amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
+            In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
+
+            <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
+            een paar machines een grote hoeveelheid dataverkeer afkomstig vanaf het hele internet op een slachtoffer richten.</p>
+
 
             <h2>Aanbevolen actie</h2>
 
-            <p>In most cases the computer has installed a DNS service as an dependancy
+            <p>Meestal heeft een computer een DNS-dienst geïnstalleerd als verieste omdat er geresolved moet worden.
+            Dit hoeft enkel alleen maar lokaal, dus externe toegang tot deze dienst is onnodig.
+            Indien dit het geval is, is het aan te raden om de configuratie van uw DNS-dienst aan te passen 
+            of poort 5353 to firewallen zodat deze niet toegankelijk is voor externe hosts.
+
+            
+            In most cases the computer has installed a DNS service as an dependancy
             as resolving is needed on that computer. However its only required to do
             local resolving, thus the added 'external access' to this service is
             unneeded. In such cases we recommend either changing the configuration
@@ -738,11 +698,10 @@ return [
 
             <h2>Tips om dit op te lossen</h2>
 
-            <h3>Firewalling the DNS Service</h3>
+            <h3>De DNS-dienst firewallen</h3>
 
-            <p>To block incoming remote requests you will need to filter UDP/port 5353. You
-            service might also be listening on TCP/port 5353, however only UDP services
-            are used in DNS Amplification Attacks. </p>
+            <p>Om inkomende remote requests te blokkeren, zal je moeten filteren op UDP/poort 5353. 
+            Deze dienst kan ook luisteren op TCP/poort 5353, maar alleen UDP-diensten worden misbruikt voor DNS amplificatie-aanvallen.</p>
 
             ",
     ],
@@ -999,7 +958,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='http://cispa.saarland/wp-content/uploads/2015/02/MongoDB_documentation.pdf'>MongoDB databases at risk</a><br>
+            <a target'_blank' href='https://web.archive.org/web/20160304041647/https://cispa.saarland/wp-content/uploads/2015/02/MongoDB_documentation.pdf'>MongoDB databases at risk (2015)</a><br>
 
             ",
     ],
@@ -1063,36 +1022,30 @@ return [
             <h2>Wat is een 'Open NTP Server'?</h2>
 
             <p>Network Time Protocol (NTP) is een netwerkprotocol voor tijdsynchronisatie
-            tussen computersysteemen over packet-switched variable-lancy data netwerken. 
-            NTP waerdt al vóór 1985 gebruikt, wat het één van de oudste internetprotocollen nog in gebruik maakt.</p>
+            tussen computersystemen over packet-switched variable-lancy datanetwerken. 
+            NTP werdt al vóór 1985 gebruikt, wat het één van de oudste internetprotocollen nog in gebruik maakt.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een open (UDP) dienst draaien, is nit perse een probleem
-            Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
-            Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
-            <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
-            to the victim.</p>
+            <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
-            <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
-            can consist of an overwhelming number of packets hitting a victim from
-            all over the world.</p>
+            <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
+            Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>But what makes reflection attacks really powerful is when they are
-            also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet 'from' a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Amplification attacks like that result in an attacker turning a small
-            amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
+            In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
+
+            <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
+            een paar machines een grote hoeveelheid dataverkeer afkomstig vanaf het hele internet op een slachtoffer richten.</p>
+
 
             <h2>Aanbevolen actie</h2>
 
@@ -1249,30 +1202,24 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
-            Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
-            <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
-            to the victim.</p>
+            <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
-            <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
-            can consist of an overwhelming number of packets hitting a victim from
-            all over the world.</p>
+            <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
+            Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>But what makes reflection attacks really powerful is when they are
-            also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Amplification attacks like that result in an attacker turning a small
-            amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            <p>Reflection aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
+            In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
+
+            <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
+            een paar machines een grote hoeveelheid dataverkeer afkomstig vanaf het hele internet op een slachtoffer richten.</p>
 
             <h2>Aanbevolen actie</h2>
 
@@ -1414,30 +1361,25 @@ return [
             system or even to write new 'settings' to the system if not correctly
             configured.</p>
 
-            <p>In addition running an open (UDP) service is not bad on its own and it
-            is mostly a required dependancy when installing a system.
-            Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            <p>Verder hoeft een open (UDP) dienst draaien niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
-            <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
-            to the victim.</p>
+            <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
-            <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
-            can consist of an overwhelming number of packets hitting a victim from
-            all over the world.</p>
+            <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
+            Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>But what makes reflection attacks really powerful is when they are
-            also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Amplification attacks like that result in an attacker turning a small
-            amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            <p>Reflection aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
+            In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
+
+            <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
+            een paar machines een grote hoeveelheid dataverkeer afkomstig vanaf het hele internet op een slachtoffer richten.</p>
+
 
             <h2>Aanbevolen actie</h2>
 
@@ -1523,30 +1465,25 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
-            Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
-            <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
-            to the victim.</p>
+            <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
-            <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
-            can consist of an overwhelming number of packets hitting a victim from
-            all over the world.</p>
+            <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
+            Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>But what makes reflection attacks really powerful is when they are
-            also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Amplification attacks like that result in an attacker turning a small
-            amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            <p>Reflection aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
+            In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
+
+            <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
+            een paar machines een grote hoeveelheid dataverkeer afkomstig vanaf het hele internet op een slachtoffer richten.</p>
+
 
             <h2>Aanbevolen actie</h2>
 
@@ -1860,8 +1797,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='http://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
-            <a target'_blank' href='https://www.poodletest.com/'>SSLv3 / POODLE Test</a><br>
+            <a target'_blank' href='https://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
 
             ",
     ],
@@ -1869,13 +1805,17 @@ return [
     'SPAMVERTISED_WEBSITE' => [
         'name'        => 'Spamvertised website',
         'description' => "
-            <h2>Wat is een 'Spamvertised web site'?</h2>
+            <h2>Wat is een 'Spamvertised website'?</h2>
 
-            <p>Als een site wordt ge-'spamvertised', betekent dat dat er naar deze site wordt gelinkt in spam emails.</p>
+            <p>Als een site wordt ge-'spamvertised', betekent dat dat er naar deze site wordt gelinkt in spam e-mails.</p>
 
-            <h2>Waarom staat mijn website in Spam e-mails?</h2>
+            <h2>Waarom staat mijn website in spam e-mails?</h2>
 
-            <p>This is generally the case when your site (or DNS) has been comprimised in some way.
+            <p>De reden hiervoor is meestal dat uw site (of DNS) op een één of andere manier gecompromitteerd is.
+            Spammers of hackers voegen een redirect aan uw site toe die bezoekers naar diens malafide site linkt.
+            Dit omdat hun eigen site waarschijnlijk reeds een slechte reputatie heeft of bekend staat als verdacht.
+            
+            This is generally the case when your site (or DNS) has been comprimised in some way.
             Spammers or hackers often add a redirect from your site to their Spam site.
             Spammers would prefer to use your website for their links, as most likely their site is already known as bad. </p>
 
@@ -1886,15 +1826,14 @@ return [
             <h2>Tips om dit op te lossen</h2>
 
             <ul>
-            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plugins and update where possible.</li>
-            <li>If this is a standard website, check for signs of infection or unknown links on webpages and take the nessesary action.</li>
-            <li>If infection is found and resolved, begin to delist your URL on the relevant delist's.</li>
+            <li>Indien dit om een CMS (WordPress, Drupal, Joomla, etc.) gaat, check of er updates voor uw add-ons en plugins beschikbaar zijn. Voer deze uit waar mogelijk.</li>
+            <li>Indien dit een 'standaard' website is, controleer op tekeken van infectie of onbekende links op uw pagina's. Neem stappen om deze te verwijderen.</li>
+            <li>Zodra het probleem is opgelost, laat uw URL van blocklists afhalen.</li>
             </ul>
 
             <h2>Meer informatie</h2>
 
             <a target'_blank' href='https://wordpress.org/plugins/sucuri-scanner/'>WordPress Security scanner (Sucuri)</a><br>
-            <a target'_blank' href='http://spamvertised.abusebutler.com/'>List of Spamvertised websites</a><br>
 
             ",
     ],
@@ -1902,36 +1841,43 @@ return [
     'OPEN_ELASTICSEARCH_SERVER' => [
         'name'        => 'Open ElasticSearch Server',
         'description' => "
-            <h2>What is an 'Open ElasticSearch Server'?</h2>
+            <h2>Wat is een 'Open ElasticSearch Server'?</h2>
 
-            <p>Elasticsearch is a search server based on Lucene. It provides a distributed,
+            <p>Elasticsearch is een op Lucene gebaseerde zoekserver. een gedistibuteerde zoekmachine met een RESTful web interface en schema-free JSON documenten.
+            
+            Elasticsearch is a search server based on Lucene. It provides a distributed,
             multitenant-capable full-text search engine with a RESTful web interface and
             schema-free JSON documents.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Your system has an ElasticSearch instance running (see www.elastic.co for
+            <p>
+            
+            Your system has an ElasticSearch instance running (see www.elastic.co for
             more information) which is accessible on the internet. On its own, ElasticSearch
             does not support authentication or restrict access to the datastore, so it is
             possible that any entity that can access the ElasticSearch instance may have
             complete control.</p>
 
-            <p>This is especially problematic if this instance has dynamic scripting running.
+            <p>
+            
+            This is especially problematic if this instance has dynamic scripting running.
             The scripting engine can be abused to launch a denial of service attack.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Either bind this service only to non-public facing connections or add a firewall
+            <p
+            
+            >Either bind this service only to non-public facing connections or add a firewall
             to block the port ElasticSearch is running on.</p>
 
             <h2>Tips to resolve this matter</h2>
 
-            <p>Read the ElasticSearch documentation on how to properly secure your ElasticSearch
-            instance.</p>
+            <p>Lees de documentatie van Elasticsearch over hoe u uw Elasticsearch-instantie het beste kunt beveiligen.</p>
 
             <h2>Meer informatie</h2>
 
-            <a href='http://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution (Engels)</a><br>
+            <a href='https://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution (Engels)</a><br>
             ",
     ],
 
@@ -1967,31 +1913,21 @@ return [
             <p>Deze functie kwordt tevens ook door hackers misbruikt voor het uitvoeren 
             van een zogenaamde 'Amplification Attack'; een speciaal type DDoS.</p>
 
-            <p>Een  'Amplificatie Attack' is alleen mogelijk door het in combinatie met 'Reflection' uit te voeren.</p>
+            <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
-            <p>De aanvaller vervalst diens IP-adres en stuurt een packet - dat van het slachtoffer 
-            af lijkt te komen - naar een internetadres dat hier direct antwoord op geeft. 
-            Omdat het IP-adres vervalst is, stuurt de remote server het antwoord met de opgevraagde data naar het slachtoffer.
-            </p>
+            <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
+            Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>Dit heeft twee effecten: ten eerste, verhult dit de bron van de aanval, waardoor het moeilijk te achterhelen is.
-            Ten tweede, als er veel servers worden gebruikt, kan de aanval de vorm aannemen van een overweldigend aantal packets verstuurd vanaf servers over de hele wereld verspreid.
-            
-            That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
-            can consist of an overwhelming number of packets hitting a victim from
-            all over the world.</p>
+            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>'Reflection attacks' kunnen echter nog krachtiger worden als ze gecombineerd worden met amplificatie
-            But what makes reflection attacks really powerful is when they are
-            also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet 'from' a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            <p>Reflection aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
+            In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
 
-            <p>Amplification attacks like that result in an attacker turning a small
-            amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
+            een paar machines een grote hoeveelheid dataverkeer afkomstig vanaf het hele internet op een slachtoffer richten.</p>
 
             <h2>Aanbevolen actie</h2>
 
