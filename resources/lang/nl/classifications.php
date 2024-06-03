@@ -64,7 +64,7 @@ return [
 
             <p>Een kwetsbaarheid in Internet Key Exchange version 1 (IKEv1) packet processing code in Cisco IOS,
              Cisco IOS XE, en Cisco IOS XR Software zou een ongeauthentificeerde, remote aanvaller toe kunnen staan om de inhoud van 
-             het geheugen op te halen, wat zou kunnen leiden tot het vrijgeven van vertrouwelijke informatie.</p>
+             het geheugen te achterhalen, wat zou kunnen leiden tot het vrijgeven van vertrouwelijke informatie.</p>
 
             <h2>Aanbevolen actie</h2>
 
@@ -104,8 +104,8 @@ return [
 
             <h2>Tips om dit op te lossen</h2>
             <ul>
-            <li>Firewall port TCP/3389 en gebruik een VPN om toegang te krijgen tot uw interne netwerk.</li>
-            <li>Firewall port TCP/3389 en laat alleen vertrouwde IP-adressen toe.</li>
+            <li>Firewall poort TCP/3389 en gebruik een VPN om toegang te krijgen tot uw interne netwerk.</li>
+            <li>Firewall poort TCP/3389 en laat alleen vertrouwde IP-adressen toe.</li>
             </ul>
 
             <h2>Meer informatie</h2>
@@ -307,18 +307,27 @@ return [
         'description' => "
                 <h2>Wat is een Feedback Loop?</h2>
 
-                <p>In general, a feedback loop (FBL) or complaint feedback loop is
+                <p>Een feedback loop (FBL) of 'complaint feedback loop' is een 
+                In general, a feedback loop (FBL) or complaint feedback loop is
                 an inter-organizational form of feedback, by which an Internet service provider (ISP) forwards
                 email complaints originating from their users, back to the senders' organizations. Generally,
                 ISPs expect that these transactions are processed as unsubscribe requests and that the sender
                 researches the nature of the request, to reduce the incidence of such complaints.</p>
 
-                <p>The most common method for ISPs to receive users' complaints is by placing a report spam button
+                <p>De meest veelvorkomende manier waarop ISP klachten van gebruikers ontvangen, is door een 'spam melden' knop 
+                op hun webmailpgagina's of in de e-mailclient te plaatsen. De gebruiker kan de e-mail ook naar een postmaster-account van de ISP sturen. 
+                In sommige gevallen, zijn deze feedback loops niet gebaseerd op meldingen van de gebruikers, maar 
+                bijvoorbeeld op geautomatiseerde virusdetectie of vergelijkbare technieken.
+                
+                The most common method for ISPs to receive users' complaints is by placing a report spam button
                 on their webmail pages or in their email client. Or, the user may send the email to the ISP
                 Postmaster. In rare cases, these feedback loops may not be based on user reports. For example,
                 they may be based on automated virus detection, or similar mechanisms.</p>
 
-                <p>Some ISPs remove the email address of its customer before returning the message to the sender,
+                <p>Sommige ISP's laten in verband met privacy en/of wettelijke verplichtngen het e-mailadres van de klant weg.
+                Dit betekent dat het belangrijk is voor de verzender om een manier los van e-mailadres te hebben om een ontvanger te identificeren.
+                
+                Some ISPs remove the email address of its customer before returning the message to the sender,
                 for privacy or legal reasons. This means it is important for senders to utilize some method
                 other than an email address within a message, in order to identify the recipient.</p>
 
