@@ -303,11 +303,16 @@ return [
     ],
 
     'FEEDBACK_LOOP' => [
-        'name'        => 'Feedback Loop (FBL) bericht',
+        'name'        => 'Feedbackloop (FBL) bericht',
         'description' => "
-                <h2>Wat is een Feedback Loop?</h2>
+                <h2>Wat is een Feedbackloop?</h2>
 
-                <p>Een feedback loop (FBL) of 'complaint feedback loop' is een 
+                <p>Een feedbackloop (FBL) of 'complaint feedback loop' is een 
+                inter-organisatorische vorm van feedback, waarin Internet Service Provider (ISP's) mailklachten 
+                van hun gebruikers terugsturen naar de organisatie waar de verzender vandaan komt.
+                Over het algemeen verwachten ISP's dat deze klachten als afmeldverzoek worden behandeld en dat de 
+                verzender kijkt naar hoe het aantal klachten verminderd kunnen worden.
+               
                 In general, a feedback loop (FBL) or complaint feedback loop is
                 an inter-organizational form of feedback, by which an Internet service provider (ISP) forwards
                 email complaints originating from their users, back to the senders' organizations. Generally,
@@ -331,23 +336,38 @@ return [
                 for privacy or legal reasons. This means it is important for senders to utilize some method
                 other than an email address within a message, in order to identify the recipient.</p>
 
-                <h2>Why is a Feedback Loop important?</h2>
+                <h2>Waarom is een feedbackloop belangrijk?
+                Why is a Feedback Loop important?</h2>
 
-                <p>As of May 2008, there were 12 FBLs in place at several of the world's largest ISPs including
+                <p>In mei 2008 waren er 12 FBL's in gebruik bij een aantal van 's werelds grootste ISP's, waaronder AOL, Hotmail en Yahoo.
+                Feedbackloops zijn inmiddels een industriestandaard voor e-mail geworden.
+                De data die deel uitmaken van het feedbackloopsysteem, zijn extreem waardevol, voor een aantal redenen:
+                
+                As of May 2008, there were 12 FBLs in place at several of the world's largest ISPs including
                 AOL, Hotmail and Yahoo. Feedback loops have become an email industry standard. The data
                 returned as part of the feedback loop system is extremely valuable in a couple of ways:</p>
 
-                <p> - The first is for list hygiene: Members who complain through a feedback loop can be
+                <p> - Allereerst, voor lijsthygiëne: leden die een klacht indienen via een feedbackloop kunnen voor deze mails worden afgemeld.
+                Hierdoor neemt het aantal klachten af. Sommigen noemen dit /'list-washing/', maar eigenlijk is het gewoon . 
+                Als iemand een klacht indient - ook al heeft die eerder aangegeven mail te willen ontvangen -, hoort u te stoppen met e-mail naar deze persoon sturen.
+                
+                - The first is for list hygiene: Members who complain through a feedback loop can be
                 unsubscribed, thereby reducing future complaints. Some may call this list-washing, but
                 it's just common sense. Even if someone previously opted in to receive messages, if the
                 user complains, the first thing you should do is cease mailing to that user.</p>
 
-                <p> - The second use of FBLs is to analyze the complaints. There is a wealth of data in who
+                <p> - Verder kunnen FBL's gebruikt worden om de klachten zelf te onderzoeken. 
+                Een FBL klacht bevat een schat aan data over wie over wat klaagt. 
+                Ongeacht of u gelooft dat de klacht ongegrond is, is een klacht een teken dat de persoon niet tevreden is. 
+                Het is goed om ontevreden klanten te voorkomen.
+                
+                - The second use of FBLs is to analyze the complaints. There is a wealth of data in who
                 complains and what they complain about. Regardless of whether you believe the complaints are
                 unfounded, if they complained they were dissatisfied. Smart marketers aim to avoid dissatisfied
                 customers or prospective customers.</p>
 
-                <h2>What can I do?</h2>
+                <h2>Wat kan ik doen?
+                What can I do?</h2>
 
                 <p>Campaigns, subject lines and \"from\" addresses can also be monitored to ensure that campaign
                 elements are working well. You can identify areas that need improvement. If a particular mailing,
@@ -361,26 +381,40 @@ return [
                 thresholds, which vary by ISP. Monitoring the FBL data will improve your email practices,
                 while ensuring complaint rates do not exceed Internet Service Provider (ISP) thresholds.</p>
 
-                <h2>But I am not sending these e-mails</h2>
+                <h2>Ik verstuur deze e-mails niet
+                But I am not sending these e-mails</h2>
 
-                <p>If you receive a high number of FBL complaints on messages that you did not send yourself
+                <p>Als u een hoog aantal FBL klachten binnenkrijgt op e-mails die u zelf niet heeft verstuurd, 
+                kunt u de host (IP) waar de klacht over gaat als gecompromitteerd beschouwen, gezien deze 
+                e-mails wel afkomstig van uw systeem zijn. In dat geval, is het belangrijk om de mailserver direct offline 
+                te halen en zowel het systeem als de mailqeue schoon te maken voordat u deze weer online zet.
+                
+                If you receive a high number of FBL complaints on messages that you did not send yourself
                 you should consider the host being reported on (e.g. the IP) to be comprimised as these e-mails
                 did originate from your system. In these cases your advised to shutdown the mailserver and
                 clean the system and its mailqueues before taking it online again.</p>
 
-                <h2>What is questionable about Feedback Loops?</h2>
+                <h2>Zijn feedbackloops dubieus?
+                What is questionable about Feedback Loops?</h2>
 
-                <p>The spam button brings some very imprecise functionality. Automatic unsubscribe is an
+                <p>
+                
+                The spam button brings some very imprecise functionality. Automatic unsubscribe is an
                 example. For years, end users have been told not to trust email unsubscribe links, to avoid
                 confirming that the message was received and opened. So, many users hit the spam button as
                 a way of unsubscribing. Users have to trust their ISP to not get into agreements with
                 spammers, in the strict sense of the latter term.</p>
 
-                <p>The spam button may also be used in error, as a means of expressing disagreement with the
+                <p>De spamknop kan ook misbruikt worden om, bijvoorbeeld, gevoelens omtrent de boodschap of de verzender te uiten. 
+                Gezien de knop voor verschillende doeleinden wordt gebruikt, is er altijd wat onzekerheid in hoe men de data zal moeten interpreteren.
+                
+                The spam button may also be used in error, as a means of expressing disagreement with the
                 message content, or as a means of expressing antipathy towards the message sender. Using
                 the same button for multiple conditions implies guesswork in interpreting the data.</p>
 
-                <p>The bottom line, however, is that the benefits of FBLs far outweigh the cons and the the
+                <p>Uiteindelijk hebben FBL's meer voor- dan nadelen en is het aan de ontvanger van FBL om de juiste koers te bepalen.
+                
+                The bottom line, however, is that the benefits of FBLs far outweigh the cons and the the
                 receiver of the Feedback loop must descide on its correct action.</p>
             ",
     ],
@@ -423,7 +457,7 @@ return [
             <p>Zet onmiddelijk ondersteuning voor TLS export ciphersuites uit. Het is ook een goed idee om 
             andere kwetsbare ciphersuites uit te zetten en forward security aan te zetten. 
             Mozilla heeft instructies en een handige tool om geschikte SSL configuraties voor een groot aantal soorten webservers te genereren.
-            Wij raden ook aan uw instellingen te testen met behulp van bijvoorbeeld de Qualys SSL Labsn SSL Server Test tool.
+            Wij raden ook aan uw instellingen te testen met behulp van bijvoorbeeld de Qualys SSL Labs SSL Server Test tool.
             
             You should immediately disable support for TLS export cipher suites. While you’re
             at it, you should also disable other cipher suites that are known to be insecure
