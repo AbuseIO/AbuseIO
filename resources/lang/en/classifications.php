@@ -161,7 +161,7 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>The IP listed in the report (the system behind it using NAT), has seen
+            <p>The IP listed in the report (the system behind it using NAT), has been seen
             participating inside the botnet. With your system in communication with the
             botnet you can be 99,9% sure it has been compromised. It's hosting malware
             and is participating in a botnet.</p>
@@ -179,7 +179,7 @@ return [
             <h2>Tips to resolve this matter</h2>
 
             <p>If your system is a workstation or server:<ul>
-            <li>Install including all updates an antivirus software and run a full scan of your computer.
+            <li>Install an antivirus software and all its updates and run a full scan of your computer.
             It's recommended to try several scanners as not every scanner is able to detect a specific
             kind of malware.</li>
             <li>Scan the network for infected files. Don't forget to scan the backups, as well as any
@@ -318,7 +318,7 @@ return [
             <h2>What is a 'Distribution Website'?</h2>
 
             <p>A distribution website, is a site that is hosting malware for download.
-            These are often download links embedded into malicious doc's or executable's code for example.
+            These are often download links embedded into malicious docs' or executables' code for example.
             Compromised websites are widely used for this purpose. </p>
 
             <h2>Why would this be bad?</h2>
@@ -566,7 +566,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>There is no reason to have this CHARGEN service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
+            interface. You should either stop the service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
             <h2>Getting more information</h2>
@@ -766,7 +766,7 @@ return [
             <h2>What is an 'Open IPMI Server'?</h2>
 
             <p>IPMI defines a set of interfaces used by system administrators for
-            out-of-band management of computer systems and monitoring of their operation.
+            out-of-band management of computer systems and monitoring of their operations.
             For example, IPMI provides a way to manage a computer that may be powered off
             or otherwise unresponsive by using a network connection to the hardware
             rather than to an operating system or login shell.</p>
@@ -795,8 +795,8 @@ return [
             hardware firewall in front of this network that filters access.</p>
 
             <p>Some IPMI implementations do offer some kind of what they call firewalling, however
-            we havent come across an implementation that actually fully protects the IPMI
-            interface from outside influance.</p>
+            we haven't come across an implementation that actually fully protects the IPMI
+            interface from outside influence.</p>
 
             <h2>Getting more information</h2>
 
@@ -813,7 +813,7 @@ return [
 
             <p>Memcached is an in-memory key-value store for small chunks of
             arbitrary data (strings, objects) from results of database calls,
-            API calls, or page rendering. Its intended for use in speeding up
+            API calls, or page rendering. It's intended for use in speeding up
             dynamic web applications by alleviating database load</p>
 
             <h2>Why would this be bad?</h2>
@@ -824,7 +824,7 @@ return [
             means you have to secure it yourself. The problem is that people don't
             do that.</p>
 
-            <p>Since its not secure, this means that random people on the internet
+            <p>Since it's not secure, this means that random people on the internet
             can discover your memcache, read things from it, and even write into
             it. The kinds of security problems that could create are limited only
             by your imagination and the kinds of data you put into your cache.</p>
@@ -884,7 +884,7 @@ return [
 
             sudo /sbin/service memcached restart
 
-            retry the steps above and you'll find that outside the server, telnet can't connect anymore.</p>
+            repeat the steps above and you'll find that outside the server, telnet can't connect anymore.</p>
 
             <p>The memcached settings file might be someplace else on other linux distributions, depending
             on their file conventions... The memcache installation for your platform should give
@@ -928,8 +928,8 @@ return [
             <h2>Recommended action</h2>
 
             <p>Either use the Windows Firewall or preferably: an external firewall to prevent
-            access to Netbios (and other Windows ports). The Windows Firewall has an nasty
-            way of trying to think for itself and will, for example, automaticly start to open
+            access to Netbios (and other Windows ports). The Windows Firewall has a nasty
+            way of trying to think for itself and will, for example, automatically start to open
             ports if you install something that uses Netbios. In all cases the
             administrator is unaware of these open ports.</p>
 
@@ -1141,7 +1141,7 @@ return [
             </pre>
 
             <p>You can use your standard host firewall filtering capabilities to limit
-            who the NTP process can talk to.  If you're using Linux and the host is acting
+            who the NTP process can talk to. If you're using Linux and the host is acting
             as an NTP client only, the following iptables rules could be adapted to shield
             your NTP listener from unwanted remote hosts.</p>
 
@@ -1173,11 +1173,11 @@ return [
             <h2>What is an 'Open Netbios server'?</h2>
 
             <p>NetBIOS is a transport protocol that Microsoft Windows systems use to share
-            resources.  For example, if a PC running Windows wants to connect to and access a
-            share on a file server, it probably uses NetBIOS.  There have been some changes in
+            resources. For example, if a PC running Windows wants to connect to and access a
+            share on a file server, it probably uses NetBIOS. There have been some changes in
             recent days however, that allow this connection without it. SMB - the method used
             to access file and printer shares - can also run independently of NetBIOS over TCP
-            ports 139 and 445.  Both of these approaches however, tend to increase the attack
+            ports 139 and 445. Both of these approaches however, tend to increase the attack
             surface of a network.</p>
 
             <h2>Why would this be bad?</h2>
@@ -1186,9 +1186,9 @@ return [
             Unfortunately, the most popular attacker target is NetBIOS and against these
             ports.</p>
 
-            <p>Once an attacker discovers an active port 139 on a device, he can run NBSTAT to
-            begin the very important first step of an attack—footprinting.  With the NBSTAT
-            command, he can obtain some or all of the following information:</p>
+            <p>Once an attacker discovers an active port 139 on a device, they can run NBSTAT to
+            begin the very important first step of an attack—footprinting. With the NBSTAT
+            command, they can obtain some or all of the following information:</p>
 
             <ul>
             <li>Computer name</li>
@@ -1204,7 +1204,7 @@ return [
             lists provided by running NBSTAT also includes user ID's.</p>
 
             <p>If null sessions are allowed against IPC$, it isn’t difficult to take the next step
-            and connect to the target device.  This connection provides a list of all available
+            and connect to the target device. This connection provides a list of all available
             shares.</p>
 
             <p>These services have the potential to be used in amplification attacks by criminals
