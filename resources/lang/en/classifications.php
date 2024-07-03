@@ -618,20 +618,20 @@ return [
             <h2>Recommended action</h2>
 
             <p>In most cases the computer has installed a DNS service as an dependancy
-            as resolving is needed on that computer. However its only required to do
+            as resolving is needed on that computer. However it is only required to do
             local resolving, thus the added 'external access' to this service is
             unneeded. In such cases we recommend either changing the configuration
             of your DNS service or to firewall port 53 for external hosts.</p>
 
-            <p>If you are running a DNS resolver for multiple computers, then consider
-            to limit access to the required group of computer or implement safegaurds
+            <p>If you are running a DNS resolver for multiple computers, you should consider
+            limiting access to the required group of computer or implement safegaurds
             like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
 
             <h2>Tips to resolve this matter</h2>
 
             <h3>Firewalling the DNS Service</h3>
 
-            <p>To block incoming remote requests you will need to filter UDP/port 53. You
+            <p>To block incoming remote requests you will need to filter UDP/port 53. Your
             service might also be listening on TCP/port 53, however only UDP services
             are used in DNS Amplification Attacks. </p>
 
@@ -685,7 +685,7 @@ return [
 
             <a target'_blank' href='http://dns.measurement-factory.com/cgi-bin/openresolvercheck.pl/'>A website for (re)checking your DNS service</a><br>
             <a target'_blank' href='http://openresolverproject.org/'>the Open Resolver Project</a><br>
-            <a target'_blank' href='http://www.youtube.com/watch?v=XhSTlqYIQnI' Team Cymru 'Who and Why Show' - DNS Amplification Attacks</a> (5 minute YouTube video)<br>
+            <a target'_blank' href='https://www.youtube.com/watch?v=XhSTlqYIQnI' Team Cymru 'Who and Why Show' - DNS Amplification Attacks</a> (5 minute YouTube video)<br>
             <a target'_blank' href='http://www.team-cymru.com/ReadingRoom/Whitepapers/2009/recursion.pdf' Team Cymru DNS Open Recursion Whitepaper</a><br>
             <a target'_blank' href='http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf' http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf</a><br>
             <a target'_blank' href='http://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
@@ -740,13 +740,13 @@ return [
             <h2>Recommended action</h2>
 
             <p>In most cases the computer has installed a DNS service as an dependancy
-            as resolving is needed on that computer. However its only required to do
+            as resolving is needed on that computer. However it is only required to do
             local resolving, thus the added 'external access' to this service is
             unneeded. In such cases we recommend either changing the configuration
             of your DNS service or to firewall port 5353 for external hosts.</p>
 
-            <p>If you are running a DNS resolver for multiple computers, then consider
-            to limit access to the required group of computer or implement safegaurds
+            <p>If you are running a DNS resolver for multiple computers, then you should consider
+            limiting access to the required group of computer or implement safegaurds
             like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
 
             <h2>Tips to resolve this matter</h2>
@@ -813,7 +813,7 @@ return [
 
             <p>Memcached is an in-memory key-value store for small chunks of
             arbitrary data (strings, objects) from results of database calls,
-            API calls, or page rendering. It's intended for use in speeding up
+            API calls, or page rendering. It is intended for use in speeding up
             dynamic web applications by alleviating database load</p>
 
             <h2>Why would this be bad?</h2>
@@ -1215,8 +1215,8 @@ return [
             <h2>Recommended action</h2>
 
             <p>Either use the Windows Firewall or preferably: an external firewall to prevent access
-            to Netbios (and other Windows ports). The Windows Firewall has aa tendency to try
-            to think for itself and for example: automatically start to open ports if you install
+            to Netbios (and other Windows ports). The Windows Firewall has a tendency to try
+            to think for itself and may for example: automatically start to open ports if you install
             something that uses Netbios. In all cases the administrator is unaware of these open
             ports.</p>
 
@@ -1457,7 +1457,7 @@ return [
             <ul>
             <li>Use firewalling to block UDP/161 entirely or only allow the hosts that
             need access to this service</li>
-            <li>Update the SNMP configuration to use a different community string then public. Something
+            <li>Update the SNMP configuration to use a different community string than public. Something
             strong like ThisIsMyCommunityString</li>
             <li>Update the SNMP configuration to use a host based ACL's in combination with either the 'public'
             community or a string thats more 'secure'</li>
@@ -1528,7 +1528,7 @@ return [
             <p>The Simple Service Discovery Protocol (SSDP) is a network protocol
             based on the Internet Protocol Suite for advertisement and discovery of
             network services and presence information. It accomplishes this without
-            assistance of server-based configuration mechanisms, such as the Dynamic
+            assistance of any server-based configuration mechanisms, such as the Dynamic
             Host Configuration Protocol (DHCP) or the Domain Name System (DNS), and
             without special static configuration of a network host. SSDP is the basis
             of the discovery protocol of Universal Plug and Play (UPnP) and is
@@ -1564,7 +1564,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>There is no reason to have this CHARGEN service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
+            interface. You should either stop the service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
             ",
@@ -1609,18 +1609,18 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>A Phishing website is usually the result of a comprimised website or comprimised user
-            credentials of that website.</p>
+            <p>A Phishing website is usually the result of compromised website or user
+            credentials of said website.</p>
 
-            <p>When your website is compromised, your website not only contains changes done by hackers
+            <p>When your website is compromised, it not only contains changes done by hackers
             but it also contains one or more security problems that allowed a hacker to gain access
-            to your website in the first place. The compromised website provides a useful platform for
+            in the first place. The compromised website provides a useful platform for
             a range of illicit activities.</p>
 
             <h2>Recommended action</h2>
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
-            damage. First take your entire website offline first. This is pretty impopulair, however if
+            damage. First, take your entire website offline. This is pretty impopulair, however if
             you consider the fact your might be leaking sensitive information or infecting the
             systems of your visitors, you want to act as quickly as possible.</p>
 
@@ -1636,10 +1636,10 @@ return [
             <ul>
             <li>Look for files that have been changed recently or on times your developers are
             closed and not placing updates on the website<li>
-            <li>Look in temporally folders for (executable) scripts</li>
+            <li>Look in temporary folders for (executable) scripts</li>
             </ul>
 
-            <p>In addition future risk of compromise can be reduced by following these basic tips: </p>
+            <p>In addition, future risk of compromise can be reduced by following these basic tips: </p>
 
             <ul>
             <li>Keep software and all plug-ins updated regardless whether you run popular content
@@ -1736,7 +1736,7 @@ return [
 
             <ul>
                 <li>1) Your recipients have opted in for the service.</li>
-                <li>2) Each email sent contains a working opt-out link.</li>
+                <li>2) Each email sent contains a functioning opt-out link.</li>
             </ul>
 
             <p>If you are not sending bulk email, then check your website and DNS
@@ -2092,7 +2092,7 @@ return [
             <h2>What is a \'Open AFP Server\'?</h2>
 
             <p>Apple Filing Protocol (formerly AppleTalk Filing Protocol) is a transport protocol
-            that Apple macOS uses to share resources.  For example, if a macOS system wants
+            that Apple\'s macOS uses to share resources.  For example, if a macOS system wants
             to access a shared directory on another system, it can use AFP. AFPv3 uses TCP
             port 548. The protocol can also support other options including changing user passwords.</p>
 
