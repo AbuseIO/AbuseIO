@@ -309,7 +309,7 @@ return [
 
                 <p>Een feedbackloop (FBL) of 'complaint feedback loop' is een 
                 inter-organisatorische vorm van feedback, waarin Internet Service Provider (ISP's) mailklachten 
-                van hun gebruikers terugsturen naar de organisatie waar de verzender vandaan komt.
+                van hun gebruikers terugsturen naar de organisatie waar de mail vandaan komt.
                 Over het algemeen verwachten ISP's dat deze klachten als afmeldverzoek worden behandeld en dat de 
                 verzender kijkt naar hoe het aantal klachten verminderd kunnen worden.
                
@@ -321,8 +321,8 @@ return [
 
                 <p>De meest veelvorkomende manier waarop ISP klachten van gebruikers ontvangen, is door een 'spam melden' knop 
                 op hun webmailpgagina's of in de e-mailclient te plaatsen. De gebruiker kan de e-mail ook naar een postmaster-account van de ISP sturen. 
-                In sommige gevallen, zijn deze feedback loops niet gebaseerd op meldingen van de gebruikers, maar 
-                bijvoorbeeld op geautomatiseerde virusdetectie of vergelijkbare technieken.
+                In sommige gevallen zijn deze feedback loops niet gebaseerd op meldingen van de gebruikers, maar 
+                op bijvoorbeeld geautomatiseerde virusdetectie of vergelijkbare technieken.
                 
                 The most common method for ISPs to receive users' complaints is by placing a report spam button
                 on their webmail pages or in their email client. Or, the user may send the email to the ISP
@@ -1633,40 +1633,36 @@ return [
 
             <p>Uw IP-address staat op een RBL (real-time block list).</p>
 
-            <p>This indicates that your server has probably been sending out a
-            high volume of unsolicited email, your computer or server has been
-            misconfigured or has been compromised</p>
+            <p>Dit betekent dat uw server waarscjjnlijk grote hoeveelheden ongewenste e-mail 
+            heeft lopen verstren. Uw server of computer is waarschijnlijk verkeerd geconfigureerd 
+            of gehackt.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Depending on the problem, your server can potentially be used by malicous
-            users on the internet to send spam or do harm to others while using your
-            server as a proxy.</p>
+            <p>Afhankelijk van de situatie, kan uw server mogelijk door malafiden misbruikt worden om bijvoorbeeld 
+            spam te versturen of andere mensen kwaad te doen met behulp van uw server als proxy.</p>
 
-            <p>If your server remains listed on this RBL you will have trouble
+            <p>Als uw server genoteerd staat op deze RBL, gaat u moeite krijgen met e-mail versturen aan een groot aantal ontvangers.
+            If your server remains listed on this RBL you will have trouble
             sending email to lots of recipients.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>In the case of a misconfiguration it could for example be the case
-            that your SMTP server is accepting email from untrusted sources and you
-            will need to reconfigure your SMTP server.</p>
+            <p>In geval van een misconfiguratie, kan het zijn dat uw SMTP server e-mail aanneemt van onvertrouwde bronnen. 
+            Om dit op te lossen, zult u uw SMTP-server opnieuw moeten herinstellen.</p>
 
-            <p>In the case of a compromise your server might have been hacked or infected
-            by a trojan.</p>
+            <p>Mocht dit een gecompromitteerde server zijn, dan kan uw server gehackt of geïnfecteerd zijn met een 'trojan'.</p>
 
-            <p>If you have been accidently listed and have resolved the issue, you
-            can request a delisting using the URL included in the ticket report. Do
-            not attempt to request a delisting at a RBL without knowning for sure you
-            have resolved the issue. If you request a delisting without solving the
-            problem you might end up permanently listed on that RBL!</p>
+            <p>Als u per ongeluk op deze lijst terecht bent gekomen en u het onderliggende probleem heeft opgelost, 
+            kunt u met behulp van URL in deze ticketrapportage een 'delisting' verzoeken.
+            Probeer geen delisting aan te vragen als u nog niet zeker weet of het probleem daadwerkelijk is opgelost. 
+            Als u een delisting verzoekt terwijl het probleem nog speelt, kunt u permanent op de RBL belanden!</p>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <p>Check uw systeem voor tekenen van infectie door een virus- en/of malwarescan uit te voeren.</p>
 
-            <p>You also might want to check and resolve listings on other RBL's,
-            using a RBL checker such as Anti-abuse multi-rbl-check</p>
+            <p>Het is ook handig om te controleren of u ook op andere RBL's staat met behulp van een RBL-checker zoals 'Anti-abuse multi-rbl-check'.</p>
 
             <h2>Meer informatie</h2>
 
