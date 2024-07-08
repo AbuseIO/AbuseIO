@@ -311,93 +311,69 @@ return [
                 inter-organisatorische vorm van feedback, waarin Internet Service Provider (ISP's) mailklachten 
                 van hun gebruikers terugsturen naar de organisatie waar de mail vandaan komt.
                 Over het algemeen verwachten ISP's dat deze klachten als afmeldverzoek worden behandeld en dat de 
-                verzender kijkt naar hoe het aantal klachten verminderd kunnen worden.
-               
-                In general, a feedback loop (FBL) or complaint feedback loop is
-                an inter-organizational form of feedback, by which an Internet service provider (ISP) forwards
-                email complaints originating from their users, back to the senders' organizations. Generally,
-                ISPs expect that these transactions are processed as unsubscribe requests and that the sender
-                researches the nature of the request, to reduce the incidence of such complaints.</p>
+                verzender kijkt naar hoe het aantal klachten verminderd kunnen worden.</p>
 
-                <p>De meest veelvorkomende manier waarop ISP klachten van gebruikers ontvangen, is door een 'spam melden' knop 
+                <p>De meest veelvoorkomende manier waarop ISP klachten van gebruikers ontvangen, is door een 'spam melden' knop 
                 op hun webmailpgagina's of in de e-mailclient te plaatsen. De gebruiker kan de e-mail ook naar een postmaster-account van de ISP sturen. 
                 In sommige gevallen zijn deze feedback loops niet gebaseerd op meldingen van de gebruikers, maar 
-                op bijvoorbeeld geautomatiseerde virusdetectie of vergelijkbare technieken.
-                
-                The most common method for ISPs to receive users' complaints is by placing a report spam button
-                on their webmail pages or in their email client. Or, the user may send the email to the ISP
-                Postmaster. In rare cases, these feedback loops may not be based on user reports. For example,
-                they may be based on automated virus detection, or similar mechanisms.</p>
+                op bijvoorbeeld geautomatiseerde virusdetectie of vergelijkbare technieken.</p>
 
                 <p>Sommige ISP's laten in verband met privacy en/of wettelijke verplichtngen het e-mailadres van de klant weg.
-                Dit betekent dat het belangrijk is voor de verzender om een manier los van e-mailadres te hebben om een ontvanger te identificeren.
-                
-                Some ISPs remove the email address of its customer before returning the message to the sender,
-                for privacy or legal reasons. This means it is important for senders to utilize some method
-                other than an email address within a message, in order to identify the recipient.</p>
+                Dit betekent dat het belangrijk is voor de verzender om een manier los van e-mailadres te hebben om een ontvanger te kunnen identificeren.</p>
 
-                <h2>Waarom is een feedbackloop belangrijk?
-                Why is a Feedback Loop important?</h2>
+                <h2>Waarom is een feedbackloop belangrijk?</h2>
 
                 <p>In mei 2008 waren er 12 FBL's in gebruik bij een aantal van 's werelds grootste ISP's, waaronder AOL, Hotmail en Yahoo.
                 Feedbackloops zijn inmiddels een industriestandaard voor e-mail geworden.
-                De data die deel uitmaken van het feedbackloopsysteem, zijn extreem waardevol, voor een aantal redenen:
-                
-                As of May 2008, there were 12 FBLs in place at several of the world's largest ISPs including
-                AOL, Hotmail and Yahoo. Feedback loops have become an email industry standard. The data
-                returned as part of the feedback loop system is extremely valuable in a couple of ways:</p>
+                De data die deel uitmaken van het feedbackloopsysteem, zijn extreem waardevol, voor een aantal redenen:</p>
 
                 <p> - Allereerst, voor lijsthygiëne: leden die een klacht indienen via een feedbackloop kunnen voor deze mails worden afgemeld.
-                Hierdoor neemt het aantal klachten af. Sommigen noemen dit /'list-washing/', maar eigenlijk is het gewoon . 
-                Als iemand een klacht indient - ook al heeft die eerder aangegeven mail te willen ontvangen -, hoort u te stoppen met e-mail naar deze persoon sturen.
-                
-                - The first is for list hygiene: Members who complain through a feedback loop can be
-                unsubscribed, thereby reducing future complaints. Some may call this list-washing, but
-                it's just common sense. Even if someone previously opted in to receive messages, if the
-                user complains, the first thing you should do is cease mailing to that user.</p>
+                Hierdoor neemt het aantal klachten af. Sommigen noemen dit /'list-washing/', maar eigenlijk is dit logisch. 
+                Als iemand een klacht indient - ook al heeft deze eerder aangegeven mail te willen ontvangen - hoort u te stoppen met e-mail naar deze persoon te sturen..</p>
 
                 <p> - Verder kunnen FBL's gebruikt worden om de klachten zelf te onderzoeken. 
-                Een FBL klacht bevat een schat aan data over wie over wat klaagt. 
+                Een FBL-klacht bevat een schat aan data over wie over wat klaagt. 
                 Ongeacht of u gelooft dat de klacht ongegrond is, is een klacht een teken dat de persoon niet tevreden is. 
-                Het is goed om ontevreden klanten te voorkomen.
+                Het is goed om ontevreden klanten of prospecten te voorkomen.</p>
+
+                <h2>Wat kan ik doen?</h2>
+
+                <p>Campagnes, onderwerptitels en \"from\"-adressen kunnnen worden gemonitoord om te controlen of alle e-mailcampagne-elementen hun werk goed doen. 
+                U kunt kijken welke elementen verbetering nodig zouden kunnen hebben. Als er van een bepaalde mailinglist of lijstsegment veel klachten komen, 
+                is dit het nader onderzoeken waard. Veel klachten komen omdat de mailing niet voldoet aan de verwachtingen. 
+                Het aantal klachten van nieuwe abonnees kan bijvoorbeeld erg hoog zijn. Dit kan  komen doordat 
+                abonnees niet krijgen waar ze zich voor opgegeven hadden of dat er veel tijd tussen de inschrijving en de eerste mailing in zit.
                 
-                - The second use of FBLs is to analyze the complaints. There is a wealth of data in who
-                complains and what they complain about. Regardless of whether you believe the complaints are
-                unfounded, if they complained they were dissatisfied. Smart marketers aim to avoid dissatisfied
-                customers or prospective customers.</p>
-
-                <h2>Wat kan ik doen?
-                What can I do?</h2>
-
-                <p>Campaigns, subject lines and \"from\" addresses can also be monitored to ensure that campaign
+                Campaigns, subject lines and \"from\" addresses can also be monitored to ensure that campaign
                 elements are working well. You can identify areas that need improvement. If a particular mailing,
                 list, or list segment produces too many complaints, it bears further investigation. Many
                 complaints are caused by a failure to meet expectations. As an example, there may be a high
                 complaint rate among new subscribers. This can be caused by subscribers not getting what
                 they thought they signed up for or by a long delay between sign-up and the first mailing.</p>
 
-                <p>To further complicate matters, most ISPs have complaint rate thresholds above which your
+                <p>Bovendien hebben veel ISP's een grenswaarde voor klachten. Mocht het aantal klachten boven deze grenswaarde uit komen, 
+                kan uw mail gefilterd of zelfs geblokkeerd worden. Helaas publiceren de meeste ISP's deze grenswaardes (die tevens per ISP kunnen verschillen) niet. 
+                Door de FBL-data in de gaten te houden, kunt u de kwaliteit van uw e-mail in de gaten houden en 
+                bovendien ervoor zoren dat het aantal klachten niet boven de grenswaardes van de ISP komt.
+                
+                To further complicate matters, most ISPs have complaint rate thresholds above which your
                 messages may be filtered or blocked. Unfortunately, most ISPs don't publish these
                 thresholds, which vary by ISP. Monitoring the FBL data will improve your email practices,
                 while ensuring complaint rates do not exceed Internet Service Provider (ISP) thresholds.</p>
 
-                <h2>Ik verstuur deze e-mails niet
-                But I am not sending these e-mails</h2>
+                <h2>Ik verstuur deze e-mails niet</h2>
 
                 <p>Als u een hoog aantal FBL klachten binnenkrijgt op e-mails die u zelf niet heeft verstuurd, 
                 kunt u de host (IP) waar de klacht over gaat als gecompromitteerd beschouwen, gezien deze 
-                e-mails wel afkomstig van uw systeem zijn. In dat geval, is het belangrijk om de mailserver direct offline 
-                te halen en zowel het systeem als de mailqeue schoon te maken voordat u deze weer online zet.
-                
-                If you receive a high number of FBL complaints on messages that you did not send yourself
-                you should consider the host being reported on (e.g. the IP) to be comprimised as these e-mails
-                did originate from your system. In these cases your advised to shutdown the mailserver and
-                clean the system and its mailqueues before taking it online again.</p>
+                e-mails wel van uw systeem afkomstig zijn. In dat geval, is het belangrijk om de mailserver direct offline 
+                te halen en zowel het systeem als de mailqeue schoon te maken voordat u deze weer online zet.</p>
 
-                <h2>Zijn feedbackloops dubieus?
+                <h2>Zijn feedbackloops twijfelachtig?
                 What is questionable about Feedback Loops?</h2>
 
-                <p>
+                <p>De spamknop brengt enige onnauwkeurige functionaliteit met zich mee Bijvoorbeeld: automatisch afmelden. 
+                Jarenlang is er eindgebruikers verteld afmeldlinks in e-mail niet te vertrouwen, omdat dit zou bevestigen dat de mail gezien en geöpend was. 
+                Velen gebruiken dus de spamknop om zich af te melden. Gebruikers moeten erop kunnen vertrouwen dat ISP's niet het water ingaan met spammers.
                 
                 The spam button brings some very imprecise functionality. Automatic unsubscribe is an
                 example. For years, end users have been told not to trust email unsubscribe links, to avoid
@@ -406,11 +382,7 @@ return [
                 spammers, in the strict sense of the latter term.</p>
 
                 <p>De spamknop kan ook misbruikt worden om, bijvoorbeeld, gevoelens omtrent de boodschap of de verzender te uiten. 
-                Gezien de knop voor verschillende doeleinden wordt gebruikt, is er altijd wat onzekerheid in hoe men de data zal moeten interpreteren.
-                
-                The spam button may also be used in error, as a means of expressing disagreement with the
-                message content, or as a means of expressing antipathy towards the message sender. Using
-                the same button for multiple conditions implies guesswork in interpreting the data.</p>
+                Gezien de knop voor verschillende doeleinden wordt gebruikt, zit er altijd wat onzekerheid in over hoe men de data zal moeten interpreteren.</p>
 
                 <p>Uiteindelijk hebben FBL's meer voor- dan nadelen en is het aan de ontvanger van FBL om de juiste koers te bepalen.
                 
@@ -445,7 +417,12 @@ return [
             <p>Deze kwetsbaarheid staat aanvallers toe HTTPS-verbindingen tussen kwetsbare clients en servers te onderscheppen 
             en deze te dwingen zwakkere encryptie te gebruiken. Deze is makkelijker te breken en staat de aanvaller toe (gevoelige) data te stelen of manipuleren. </p>
 
-            <p>The factoring of such 512-bit export keys can be done with a cluster of EC2 virtual
+            <p>Het bepalen van een 512-bit export key kan binnen een paar uur met een cluster van EC2 virtual servers gedaan worden.
+            De aamvallerbepaalt de RSA modulus om zo de RSA decryption key te herstellen. 
+            Wanneer de client de 'pre-master secret' naar de server versleutelt, kan de aanvaller deze ontsleutelen om zo het 'master secret' te pakken te krijgen. 
+            Met dit 'master secret' kan de aanvaller al het verkeer in plaintext zien en zelfs data injecteren.
+            
+            The factoring of such 512-bit export keys can be done with a cluster of EC2 virtual
             servers, and can be done in about 7.5 hours for $104 in EC2 time. The attacker
             factors the RSA modulus to recover the corresponding RSA decryption key. When the
             client encrypts the 'pre-master secret' to the server, the attacker can now decrypt
@@ -1634,7 +1611,7 @@ return [
             <p>Uw IP-address staat op een RBL (real-time block list).</p>
 
             <p>Dit betekent dat uw server waarscjjnlijk grote hoeveelheden ongewenste e-mail 
-            heeft lopen verstren. Uw server of computer is waarschijnlijk verkeerd geconfigureerd 
+            heeft lopen versturen. Uw server of computer is waarschijnlijk verkeerd geconfigureerd 
             of gehackt.</p>
 
             <h2>Waarom is dit een probleem?</h2>
@@ -1642,14 +1619,12 @@ return [
             <p>Afhankelijk van de situatie, kan uw server mogelijk door malafiden misbruikt worden om bijvoorbeeld 
             spam te versturen of andere mensen kwaad te doen met behulp van uw server als proxy.</p>
 
-            <p>Als uw server genoteerd staat op deze RBL, gaat u moeite krijgen met e-mail versturen aan een groot aantal ontvangers.
-            If your server remains listed on this RBL you will have trouble
-            sending email to lots of recipients.</p>
+            <p>Als uw server genoteerd staat op deze RBL, gaat u moeite krijgen met e-mail versturen aan een groot aantal ontvangers.</p>
 
             <h2>Aanbevolen actie</h2>
 
             <p>In geval van een misconfiguratie, kan het zijn dat uw SMTP server e-mail aanneemt van onvertrouwde bronnen. 
-            Om dit op te lossen, zult u uw SMTP-server opnieuw moeten herinstellen.</p>
+            Om dit op te lossen, zult u uw SMTP-server opnieuw moeten configureren.</p>
 
             <p>Mocht dit een gecompromitteerde server zijn, dan kan uw server gehackt of geïnfecteerd zijn met een 'trojan'.</p>
 
@@ -1852,7 +1827,7 @@ return [
 
             <p>De reden hiervoor is meestal dat uw site (of DNS) op een één of andere manier gecompromitteerd is.
             Spammers of hackers voegen een redirect aan uw site toe die bezoekers naar diens malafide site linkt.
-            Dit omdat hun eigen site waarschijnlijk reeds een slechte reputatie heeft of bekend staat als verdacht.
+            Dit waarschijnlijk omdat hun eigen site reeds een slechte reputatie heeft of als verdacht bekend staat.
             
             This is generally the case when your site (or DNS) has been comprimised in some way.
             Spammers or hackers often add a redirect from your site to their Spam site.
