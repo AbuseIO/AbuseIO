@@ -342,24 +342,12 @@ return [
                 U kunt kijken welke elementen verbetering nodig zouden kunnen hebben. Als er van een bepaalde mailinglist of lijstsegment veel klachten komen, 
                 is dit het nader onderzoeken waard. Veel klachten komen omdat de mailing niet voldoet aan de verwachtingen. 
                 Het aantal klachten van nieuwe abonnees kan bijvoorbeeld erg hoog zijn. Dit kan  komen doordat 
-                abonnees niet krijgen waar ze zich voor opgegeven hadden of dat er veel tijd tussen de inschrijving en de eerste mailing in zit.
-                
-                Campaigns, subject lines and \"from\" addresses can also be monitored to ensure that campaign
-                elements are working well. You can identify areas that need improvement. If a particular mailing,
-                list, or list segment produces too many complaints, it bears further investigation. Many
-                complaints are caused by a failure to meet expectations. As an example, there may be a high
-                complaint rate among new subscribers. This can be caused by subscribers not getting what
-                they thought they signed up for or by a long delay between sign-up and the first mailing.</p>
+                abonnees niet krijgen waar ze zich voor opgegeven hadden of dat er veel tijd tussen de inschrijving en de eerste mailing in zit..</p>
 
                 <p>Bovendien hebben veel ISP's een grenswaarde voor klachten. Mocht het aantal klachten boven deze grenswaarde uit komen, 
                 kan uw mail gefilterd of zelfs geblokkeerd worden. Helaas publiceren de meeste ISP's deze grenswaardes (die tevens per ISP kunnen verschillen) niet. 
                 Door de FBL-data in de gaten te houden, kunt u de kwaliteit van uw e-mail in de gaten houden en 
-                bovendien ervoor zoren dat het aantal klachten niet boven de grenswaardes van de ISP komt.
-                
-                To further complicate matters, most ISPs have complaint rate thresholds above which your
-                messages may be filtered or blocked. Unfortunately, most ISPs don't publish these
-                thresholds, which vary by ISP. Monitoring the FBL data will improve your email practices,
-                while ensuring complaint rates do not exceed Internet Service Provider (ISP) thresholds.</p>
+                bovendien ervoor zoren dat het aantal klachten niet boven de grenswaardes van de ISP komt.</p>
 
                 <h2>Ik verstuur deze e-mails niet</h2>
 
@@ -373,21 +361,12 @@ return [
 
                 <p>De spamknop brengt enige onnauwkeurige functionaliteit met zich mee Bijvoorbeeld: automatisch afmelden. 
                 Jarenlang is er eindgebruikers verteld afmeldlinks in e-mail niet te vertrouwen, omdat dit zou bevestigen dat de mail gezien en geöpend was. 
-                Velen gebruiken dus de spamknop om zich af te melden. Gebruikers moeten erop kunnen vertrouwen dat ISP's niet het water ingaan met spammers.
-                
-                The spam button brings some very imprecise functionality. Automatic unsubscribe is an
-                example. For years, end users have been told not to trust email unsubscribe links, to avoid
-                confirming that the message was received and opened. So, many users hit the spam button as
-                a way of unsubscribing. Users have to trust their ISP to not get into agreements with
-                spammers, in the strict sense of the latter term.</p>
+                Velen gebruiken dus de spamknop om zich af te melden. Gebruikers moeten erop kunnen vertrouwen dat hun ISP niet het water ingaat met spammers.</p>
 
                 <p>De spamknop kan ook misbruikt worden om, bijvoorbeeld, gevoelens omtrent de boodschap of de verzender te uiten. 
                 Gezien de knop voor verschillende doeleinden wordt gebruikt, zit er altijd wat onzekerheid in over hoe men de data zal moeten interpreteren.</p>
 
-                <p>Uiteindelijk hebben FBL's meer voor- dan nadelen en is het aan de ontvanger van FBL om de juiste koers te bepalen.
-                
-                The bottom line, however, is that the benefits of FBLs far outweigh the cons and the the
-                receiver of the Feedback loop must descide on its correct action.</p>
+                <p>Uiteindelijk hebben FBL's meer voor- dan nadelen en is het aan de ontvanger van FBL om de juiste koers te bepalen.</p>
             ",
     ],
 
@@ -408,46 +387,28 @@ return [
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Servers die RSA_EXPORT ciphersuites accepteren, lopen de kans hun gebruikers bloot te stellen aan de zogenaamde FREAK-aanval.
-            De FREAK-aanval is mogelijk wanneer een kwetsbare browser verbinding maakt met een webserver die de kwetsbare “export-grade” encryptie ondersteunt.
-            
-            Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
-            attack. The FREAK attack is possible when a vulnerable browser connects to a
-            susceptible web server — a server that accepts “export-grade” encryption.</p>
+            De FREAK-aanval is mogelijk als een kwetsbare browser verbinding maakt met een webserver die de kwetsbare “export-grade” encryptie ondersteunt.</p>
 
             <p>Deze kwetsbaarheid staat aanvallers toe HTTPS-verbindingen tussen kwetsbare clients en servers te onderscheppen 
             en deze te dwingen zwakkere encryptie te gebruiken. Deze is makkelijker te breken en staat de aanvaller toe (gevoelige) data te stelen of manipuleren. </p>
 
-            <p>Het bepalen van een 512-bit export key kan binnen een paar uur met een cluster van EC2 virtual servers gedaan worden.
-            De aamvallerbepaalt de RSA modulus om zo de RSA decryption key te herstellen. 
-            Wanneer de client de 'pre-master secret' naar de server versleutelt, kan de aanvaller deze ontsleutelen om zo het 'master secret' te pakken te krijgen. 
-            Met dit 'master secret' kan de aanvaller al het verkeer in plaintext zien en zelfs data injecteren.
-            
-            The factoring of such 512-bit export keys can be done with a cluster of EC2 virtual
-            servers, and can be done in about 7.5 hours for $104 in EC2 time. The attacker
-            factors the RSA modulus to recover the corresponding RSA decryption key. When the
-            client encrypts the 'pre-master secret' to the server, the attacker can now decrypt
-            it to recover the TLS 'master secret'. From here on out, the attacker sees plaintext
-            and can inject anything it wants.</p>
+            <p>Het bepalen van een 512-bit export key kan met een cluster van EC2 virtual servers binnen een paar uur gedaan worden.
+            De aamvaller bepaalt de RSA modulus om zo de RSA decryption key te achterhalen. 
+            Wanneer de client het 'pre-master secret' naar de server verstuurt, kan de aanvaller deze ontsleutelen om zo het 'master secret' te pakken te krijgen. 
+            Met dit 'master secret' kan de aanvaller al het verkeer in plaintext zien en zelfs data injecteren.</p>
 
             <h2>Aanbevolen actie</h2>
 
             <p>Zet onmiddelijk ondersteuning voor TLS export ciphersuites uit. Het is ook een goed idee om 
             andere kwetsbare ciphersuites uit te zetten en forward security aan te zetten. 
             Mozilla heeft instructies en een handige tool om geschikte SSL configuraties voor een groot aantal soorten webservers te genereren.
-            Wij raden ook aan uw instellingen te testen met behulp van bijvoorbeeld de Qualys SSL Labs SSL Server Test tool.
-            
-            You should immediately disable support for TLS export cipher suites. While you’re
-            at it, you should also disable other cipher suites that are known to be insecure
-            and enable forward secrecy. For instructions on how to secure popular HTTPS server
-            software, we recommend Mozilla’s security configuration guide and their SSL configuration
-            generator. We also recommend testing your configuration with the Qualys SSL Labs
-            SSL Server Test tool</p>
+            Wij raden ook aan uw instellingen te testen met behulp van bijvoorbeeld de Qualys SSL Labs SSL Server Test tool.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
-            <p>Indien u Apache gebruikt, voeg de volgende aan uw SSL configuratie toe:
+            <p>Indien u Apache gebruikt, voeg het volgende aan uw SSL configuratie toe:
 
-            SSLCipherSuite ALL:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK</p>
+            SSLCipherSuite:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK</p>
 
             <h2>Meer informatie</h2>
 
@@ -552,8 +513,9 @@ return [
             <p>Een open DNS server is een DNS server die bereid is om recursieve DNS queries 
             voor een ieder op het Internet uit te voeren.</p>
 
-            <p>Wanneer een DNS server een recursieve DNS query resolved, spoort het 
-            informatie
+            <p>Wanneer een DNS server een recursieve DNS query resolved, zoekt het naar domeininformatie op andere DNS servers 
+            op het internet op. Dit is een recursief process waarbij meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.
+            
             When a DNS server resolves a recursive DNS query, it tracks down
             information about a domain name hosted on some other DNS server
             somewhere else on the Internet (a recursive process involving
@@ -574,36 +536,44 @@ return [
             <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Reflection aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
+            <p>Reflectionaanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
             In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
 
-            <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
+            <p>Bij amplificatie-aanvallen kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
             een paar machines een grote hoeveelheid dataverkeer afkomstig vanaf het hele internet op een slachtoffer richten.</p>
 
 
             <h2>Aanbevolen actie</h2>
 
-            <p>In most cases the computer has installed a DNS service as an dependancy
+            <p>In veel gevallen heeft de computer een DNS-dienst geïnstalleerd omdat er geresolved moet worden op die machine. 
+            Deze dienst hoeft echter allen lokaal te resolven. Externe toegnag tot deze diesnt is dus niet nodig. 
+            Mocht er hiervan sprake zijn, dan raden wij aan om de configuratie van een DNS_dienst aan te passen 
+            of een firewall op poort 53 te zetten om de toegang van externe hosts tot deze service te beperken.
+            
+            In most cases the computer has installed a DNS service as an dependancy
             as resolving is needed on that computer. However its only required to do
             local resolving, thus the added 'external access' to this service is
             unneeded. In such cases we recommend either changing the configuration
             of your DNS service or to firewall port 53 for external hosts.</p>
 
-            <p>If you are running a DNS resolver for multiple computers, then consider
-            to limit access to the required group of computer or implement safegaurds
-            like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
+            <p>Als u een DNS resolver voor meerdere computers draait, dan adviseren wij de togang tot deze service 
+            te beperken tot de omputers waarvoor deze is opgezet. Het gebruik van 'safeguards' tegen misbruik 
+            zoals 'Response Rate Limiting' (DNS-RRL) is ook een goede manier om DNS amplificatie-aanvallen te voorkomen.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
             <h3>De DNS Service firewallen</h3>
 
-            <p>To block incoming remote requests you will need to filter UDP/port 53. You
+            <p>Om binnenkomende remote-verzoeken te blokkeren, zult u UDP/poort 53 moeten filteren. 
+            Het kan zijn dat uw server ook  op TCP/poort 53 luistert, maar enkel UDP services worden misbruikt voor het uitvoeren van DNS Amplificatie-aanvallen.
+            
+            To block incoming remote requests you will need to filter UDP/port 53. You
             service might also be listening on TCP/port 53, however only UDP services
             are used in DNS Amplification Attacks. </p>
 
             <h3>Bind 9.x Authoritative</h3>
 
-            <p>For BIND 9.x authoritative servers, apply the following global options:
+            <p>Voor BIND 9.x authoritative servers, kunt u de volgende opties toepassen:
             <br>
             <pre>
               options {
@@ -612,14 +582,20 @@ return [
               };
             </pre>
             <br>
+            Vanaf BIND 9.4 en nieuwer, zullen de meeste configuraties defaulten naaar een gesloten resolver. Mocht u een oudere versie draaien, raden wij u sterk aan deze te updaten.
+            
             Beginning with BIND versions 9.4 and later, most configurations would default to a closed resolver. Those running earlier versions should upgrade if possible.<br>
             </p>
 
             <p><h3>Bind 9.x Caching</h3>
 
-            For BIND 9.x caching servers, additionally create access control lists and use 'views' to explicitly permit a limited set of source addresses from your trusted network issue queries to your caching server:
+            Voor BIND 9.x cachingservers is het mogelijk 'access control lists' aan te maken en 'views' daarbij te gebruiken 
+            om expliciet een beperkt aantal source IP's van uw vertrouwde netwerk toe te staan uw cachingserver te bevragen:
+
+            For BIND 9.x caching servers, additionally create access control lists and use 'views' to explicitly permit a 
+            limited set of source addresses from your trusted network issue queries to your caching server:
             <pre>
-              # example only, replace 192.0.2.0/24 a list of your CIDR blocks
+              # voorbeeld, vervang 192.0.2.0/24 met een lijst van uw eigen CIDR-blokken
               acl 'trusted' {
                   192.0.2.0/24;
               };
@@ -651,7 +627,7 @@ return [
 
             <a target'_blank' href='http://dns.measurement-factory.com/cgi-bin/openresolvercheck.pl/'>A website for (re)checking your DNS service</a><br>
             <a target'_blank' href='http://openresolverproject.org/'>the Open Resolver Project</a><br>
-            <a target'_blank' href='http://www.youtube.com/watch?v=XhSTlqYIQnI' Team Cymru 'Who and Why Show' - DNS Amplification Attacks</a> (5 minute YouTube video)<br>
+            <a target'_blank' href='https://www.youtube.com/watch?v=XhSTlqYIQnI' Team Cymru 'Who and Why Show' - DNS Amplification Attacks</a> (5 minute YouTube video)<br>
             <a target'_blank' href='http://www.team-cymru.com/ReadingRoom/Whitepapers/2009/recursion.pdf' Team Cymru DNS Open Recursion Whitepaper</a><br>
             <a target'_blank' href='http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf' http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf</a><br>
             <a target'_blank' href='http://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
@@ -671,7 +647,10 @@ return [
             <p>Een open mDNS server is een mDNS server die bereid is om recursieve DNS queries 
             voor een ieder op het Internet uit te voeren.</p>
 
-            <p>When a DNS server resolves a recursive DNS query, it tracks down
+            <p>Wanneer een DNS server een recursieve DNS query resolved, zoekt het naar domeininformatie op andere DNS servers 
+            op het internet op. Dit is een recursief process waarbij meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.
+            
+            When a DNS server resolves a recursive DNS query, it tracks down
             information about a domain name hosted on some other DNS server
             somewhere else on the Internet (a recursive process involving
             several other DNS servers in the DNS hierarchy).</p>
@@ -1069,22 +1048,29 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>In most cases the computer has installed a NTP service as an dependancy
+            <p>In de meeste gevallen is er een NTP-dienst op een computer geïnstalleerd omdat er voor de machine tijsdiensten nodig zijn. 
+            Echter hoeft dit alleen maar lokaal en is externe toegang tot deze dienst niet nodig. 
+            Wij raden in dit soort gevallen aan om de configuratie van uw NTP-dienst aan te passen of poort 123 te firewallen zodat externen er niet bij kunnen komen.
+            
+            In most cases the computer has installed a NTP service as an dependancy
             as timekeeping is needed on that computer. However its only required to do
             local timekeeping, thus the added 'external access' to this service is
             unneeded. In such cases we recommend either changing the configuration
             of your NTP service or to firewall port 123 for external hosts.</p>
 
-            <p>If you are running a NTP Server for multiple computers, then consider
-            to limit access to the required group of computer or implement safegaurds
-            like ... to prevent a DNS Amplification Attack.</p>
+            <p>Als u een NTP server voor meerdere computers draait, dan adviseren wij de togang tot deze service 
+            te beperken tot de omputers waarvoor deze is opgezet. Het gebruik van 'safeguards' tegen misbruik 
+            zoals 'Response Rate Limiting' (DNS-RRL) is ook een goede manier om DNS amplificatie-aanvallen te voorkomen.</p>
 
 
             <h2>Tips om dit op te lossen</h2>
 
             <h3>UNIX/Linux ntpd</h3>
 
-            <p>The following configuration is for a UNIX/Linux machine to act as simply
+            <p>Onderstaande instellingen zijn voor een UNIX/Linux machine die ingesteld staat als NTP client die 
+            geen inkomende NTP queries accepteert, behalve als deze van het 'loopback address' afkomstig zijn.
+            
+            The following configuration is for a UNIX/Linux machine to act as simply
             an NTP client and never to allow NTP queries to it except from the loopback
             address:</p>
 
@@ -1100,7 +1086,11 @@ return [
             server time.example.net
             </pre>
 
-            <p>You can use your standard host firewall filtering capabilities to limit
+            <p>U kunt de standaardfirewall van uw host gebruiken om te beperken waar het NTP-process mee mag communiceren. 
+            Op een Linux-machine die enkel dienst doet als NTP-client, 
+            kunt u de volgende regels voor iptables gebruiken om uw NTP-listener van ongewenste remote hosts af te schilden.
+            
+            You can use your standard host firewall filtering capabilities to limit
             who the NTP process talks to.  If you're using Linux and the host is acting
             as an NTP client only, the following iptables rules could be adapted to shield
             your NTP listener from unwanted remote hosts.</p>
@@ -1109,7 +1099,9 @@ return [
             -A OUTPUT -s 0/0 -d 0/0 -p udp --destination-port 123:123 -m state --state NEW,ESTABLISHED -j ACCEPT
             </pre>
 
-            <p>Authentication with the reference NTP software on UNIX can be done using
+            <p>Authenticatie 
+            
+            Authentication with the reference NTP software on UNIX can be done using
             symmetric key encryption, much like in Cisco IOS and Juniper JUNOS, using
             MD5.  However, a public key-based approach called 'AutoKey' is also
             available, which is generally be considered to be even more secure.  For
@@ -1132,7 +1124,13 @@ return [
         'description' => "
             <h2>Wat is een 'Open Netbios server'?</h2>
 
-            <p>NetBIOS is a transport protocol that Microsoft Windows systems use to share
+            <p>NetBIOS is een transportprotocol dat door Windowssystemen gebruikt wordt om resources te delen. 
+            Als een Windows-PC bijvoorbeeld verbinding wilt maken met een file-server, gebruikt deze waarschijnlijk NetBIOS om dit te doen.
+            Er zijn  wel ontwikkelingen geweest waardoor verbindingen ook zonder NetBIOS opgezet kunnen worden. 
+            SMB; de methode waarmee men toegang kan krijgen tot file en printer shares kan ook los van NetBIOS op TCP 139 en 445 draaien. 
+            Dit vergroot echter wel de 'attack surface' van een netwerk.
+            
+            NetBIOS is a transport protocol that Microsoft Windows systems use to share
             resources.  For example, if a PC running Windows wants to connect to and access a
             share on a file server, it probably uses NetBIOS.  There have been some changes in
             recent days, however, that allow this connection without it. SMB, the method used
@@ -1142,11 +1140,18 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>The ports that that are open to the Internet are UDP/137, UDP/138, and TCP/139.
+            <p>De poorts die naar het internet open zijn, zijn UDP/137, UDP/138 en TCP/139. 
+            Helaas zijn NetBIOS en deze poorten een geliefd doelwit voor aanvallers.
+
+            
+            The ports that that are open to the Internet are UDP/137, UDP/138, and TCP/139.
             Unfortunately, the most popular attacker target is NetBIOS and against these
             ports.</p>
 
-            <p>Once an attacker discovers an active port 139 on a device, he can run NBSTAT to
+            <p>Zodra een aanvaller een active poort 139 op een machine ontdekt, kan die als eerste stap van attack-footprinting NBSTAT draaien.
+            Met behulp van NBSTAT kan de aanvaller de volgende informati mogelijk achterhalen:
+            
+            Once an attacker discovers an active port 139 on a device, he can run NBSTAT to
             begin the very important first step of an attack—footprinting.  With the NBSTAT
             command, he can obtain some or all of the following information:</p>
 
@@ -1158,23 +1163,35 @@ return [
             <li>Inhoud van de session table met de IP-adressen van de bestemmming</li>
             </ul>
 
-            <p>With this information, the attacker has information about the OS, services, and major
+            <p>Deze informatie vertelt de aanvaller veel over het OS, diensten en belangrijke applicaties die op het systeem draaien. 
+            De aanvaller heeft ook private IP-adressen die de LAN/WAN-engineers en security-engineers hebben geprobeerd achter de NAT te verbergen. 
+            Verder bevatten NBSTAT-lijsten ook gebruiker-ID's.
+            
+            With this information, the attacker has information about the OS, services, and major
             applications running on the system. He also has private IP addresses that the LAN/WAN
             and security engineers have tried hard to hide behind NAT.  And that’s not all.  The
             lists provided by running NBSTAT also include user IDs.</p>
 
-            <p>If null sessions are allowed against IPC$, it isn’t difficult to take the next step
+            <p>Als nullsessies tegen IPC$ zijn toegestaan, is het niet moeilijk om een stapje verder te gaan en een verbinding op te zetten met het doelapparaat. 
+            Deze verbinding geeft een overzicht van alle beschikbare shares.
+            
+            If null sessions are allowed against IPC$, it isn’t difficult to take the next step
             and connect to the target device.  This connection provides a list of all available
             shares.</p>
 
-            <p>These services have the potential to be used in amplification attacks by criminals
+            <p>Deze diensten kunnen door criminelen worden misbruikt om DDoS-aanvallen uit te voeren. 
+            Ook zet dit de deur open voor zogenaamde '0-day-aanvallen' of worms of virussen die kwetsbaarheden in Windows misbruiken om toegang tot uw systeem te krijgen.
+            
+            These services have the potential to be used in amplification attacks by criminals
             that wish to perform denial of service attacks. In addition it opens up your system
             to 0-day attacks or worm/virus infections that exploit a vulnarability in Windows to
             gain access to your system.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Either use the Windows Firewall or even better an external firewall to prevent access
+            <p>Gebruik de Windows Firewall of nog beter: een externe firewall, om de toegang tot NetBIOS (en andere Windows ports) te beperken.
+            
+            Either use the Windows Firewall or even better an external firewall to prevent access
             to Netbios (and other Windows ports). The windows firewall has an nasty way of trying
             to think for himself and for example automaticly starts to open ports if you install
             something that uses Netbios. In all cases the administrator is unaware of these open
