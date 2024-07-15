@@ -513,13 +513,8 @@ return [
             <p>Een open DNS server is een DNS server die bereid is om recursieve DNS queries 
             voor een ieder op het Internet uit te voeren.</p>
 
-            <p>Wanneer een DNS server een recursieve DNS query resolved, zoekt het naar domeininformatie op andere DNS servers 
-            op het internet op. Dit is een recursief process waarbij meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.
-            
-            When a DNS server resolves a recursive DNS query, it tracks down
-            information about a domain name hosted on some other DNS server
-            somewhere else on the Internet (a recursive process involving
-            several other DNS servers in the DNS hierarchy).</p>
+            <p>Wanneer een DNS server een recursieve DNS query resolved, zoekt het domeininformatie bij andere DNS servers 
+            op. Dit is een recursief process waar meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -536,7 +531,7 @@ return [
             <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Reflectionaanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
+            <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
             In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
 
             <p>Bij amplificatie-aanvallen kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
@@ -545,31 +540,21 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>In veel gevallen heeft de computer een DNS-dienst geïnstalleerd omdat er geresolved moet worden op die machine. 
-            Deze dienst hoeft echter allen lokaal te resolven. Externe toegnag tot deze diesnt is dus niet nodig. 
+            <p>In veel gevallen heeft de computer een DNS-dienst geïnstalleerd als vereiste omdat er geresolved moet worden op die machine. 
+            Deze dienst hoeft echter alleen lokaal te resolven. Externe toegang tot deze dienst is dus niet nodig. 
             Mocht er hiervan sprake zijn, dan raden wij aan om de configuratie van een DNS_dienst aan te passen 
-            of een firewall op poort 53 te zetten om de toegang van externe hosts tot deze service te beperken.
-            
-            In most cases the computer has installed a DNS service as an dependancy
-            as resolving is needed on that computer. However its only required to do
-            local resolving, thus the added 'external access' to this service is
-            unneeded. In such cases we recommend either changing the configuration
-            of your DNS service or to firewall port 53 for external hosts.</p>
+            of een firewall op poort 53 te zetten om de toegang van externe hosts tot deze service te beperken.</p>
 
-            <p>Als u een DNS resolver voor meerdere computers draait, dan adviseren wij de togang tot deze service 
-            te beperken tot de omputers waarvoor deze is opgezet. Het gebruik van 'safeguards' tegen misbruik 
+            <p>Als u een DNS resolver voor meerdere computers draait, dan adviseren wij de toegang tot deze dienst
+            te beperken tot de computers waarvoor deze is opgezet. Het gebruik van 'safeguards' tegen misbruik 
             zoals 'Response Rate Limiting' (DNS-RRL) is ook een goede manier om DNS amplificatie-aanvallen te voorkomen.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
             <h3>De DNS Service firewallen</h3>
 
-            <p>Om binnenkomende remote-verzoeken te blokkeren, zult u UDP/poort 53 moeten filteren. 
-            Het kan zijn dat uw server ook  op TCP/poort 53 luistert, maar enkel UDP services worden misbruikt voor het uitvoeren van DNS Amplificatie-aanvallen.
-            
-            To block incoming remote requests you will need to filter UDP/port 53. You
-            service might also be listening on TCP/port 53, however only UDP services
-            are used in DNS Amplification Attacks. </p>
+            <p>Om binnenkomende remote verzoeken te blokkeren, zult u UDP/poort 53 moeten filteren. 
+            Het kan zijn dat uw server ook op TCP/poort 53 luistert, maar het zijn enkel UDP services die worden misbruikt voor het uitvoeren van DNS Amplificatie-aanvallen.</p>
 
             <h3>Bind 9.x Authoritative</h3>
 
@@ -582,18 +567,13 @@ return [
               };
             </pre>
             <br>
-            Vanaf BIND 9.4 en nieuwer, zullen de meeste configuraties defaulten naaar een gesloten resolver. Mocht u een oudere versie draaien, raden wij u sterk aan deze te updaten.
-            
-            Beginning with BIND versions 9.4 and later, most configurations would default to a closed resolver. Those running earlier versions should upgrade if possible.<br>
+            Vanaf BIND 9.4 en nieuwer, zullen de meeste configuraties defaulten naaar een gesloten resolver. Mocht u een oudere versie draaien, raden wij u sterk aan deze - indien mogelijk - te updaten.<br>
             </p>
 
             <p><h3>Bind 9.x Caching</h3>
 
             Voor BIND 9.x cachingservers is het mogelijk 'access control lists' aan te maken en 'views' daarbij te gebruiken 
             om expliciet een beperkt aantal source IP's van uw vertrouwde netwerk toe te staan uw cachingserver te bevragen:
-
-            For BIND 9.x caching servers, additionally create access control lists and use 'views' to explicitly permit a 
-            limited set of source addresses from your trusted network issue queries to your caching server:
             <pre>
               # voorbeeld, vervang 192.0.2.0/24 met een lijst van uw eigen CIDR-blokken
               acl 'trusted' {
@@ -647,20 +627,15 @@ return [
             <p>Een open mDNS server is een mDNS server die bereid is om recursieve DNS queries 
             voor een ieder op het Internet uit te voeren.</p>
 
-            <p>Wanneer een DNS server een recursieve DNS query resolved, zoekt het naar domeininformatie op andere DNS servers 
-            op het internet op. Dit is een recursief process waarbij meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.
-            
-            When a DNS server resolves a recursive DNS query, it tracks down
-            information about a domain name hosted on some other DNS server
-            somewhere else on the Internet (a recursive process involving
-            several other DNS servers in the DNS hierarchy).</p>
+            <p>Wanneer een DNS server een recursieve DNS query resolved, zoekt het domeininformatie bij andere DNS servers 
+            op. Dit is een recursief process waar meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
-            <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
             Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
@@ -679,28 +654,21 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Meestal heeft een computer een DNS-dienst geïnstalleerd als verieste omdat er geresolved moet worden.
+            <p>Meestal heeft een computer een DNS-dienst geïnstalleerd als vereiste omdat er op die machine geresolved moet worden.
             Dit hoeft enkel alleen maar lokaal, dus externe toegang tot deze dienst is onnodig.
             Indien dit het geval is, is het aan te raden om de configuratie van uw DNS-dienst aan te passen 
-            of poort 5353 to firewallen zodat deze niet toegankelijk is voor externe hosts.
+            of poort 5353 to firewallen zodat deze niet toegankelijk is voor externe hosts.</p>
 
-            
-            In most cases the computer has installed a DNS service as an dependancy
-            as resolving is needed on that computer. However its only required to do
-            local resolving, thus the added 'external access' to this service is
-            unneeded. In such cases we recommend either changing the configuration
-            of your DNS service or to firewall port 5353 for external hosts.</p>
-
-            <p>If you are running a DNS resolver for multiple computers, then consider
-            to limit access to the required group of computer or implement safegaurds
-            like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
+            <p>Als u een DNS resolver voor meerdere computers draait, dan adviseren wij de togang tot deze service 
+            te beperken tot de computers waarvoor deze is opgezet. Het gebruik van 'safeguards' tegen misbruik 
+            zoals 'Response Rate Limiting' (DNS-RRL) is ook een goede manier om DNS amplificatie-aanvallen te voorkomen.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
             <h3>De DNS-dienst firewallen</h3>
 
-            <p>Om inkomende remote requests te blokkeren, zal je moeten filteren op UDP/poort 5353. 
-            Deze dienst kan ook luisteren op TCP/poort 5353, maar alleen UDP-diensten worden misbruikt voor DNS amplificatie-aanvallen.</p>
+            <p>Om inkomende remote verzoeken te blokkeren, zult u moeten filteren op UDP/poort 5353. 
+            Deze dienst kan ook luisteren op TCP/poort 5353, maar het zijn enkel UDP-diensten die worden misbruikt voor het uitvoeren van DNS amplificatie-aanvallen.</p>
 
             ",
     ],
@@ -852,7 +820,10 @@ return [
         'description' => "
             <h2>Wat is een 'Open Microsoft SQL Server'?</h2>
 
-            <p>Microsoft SQL Server is a relational database management system developed
+            <p>Microsoft SQL Server is een door Microsoft ontwikkeld relationele database managementsysteem.
+            
+            
+            Microsoft SQL Server is a relational database management system developed
             by Microsoft. As a database, it is a software product whose primary function
             is to store and retrieve data as requested by other software applications,
             be it those on the same computer or those running on another computer across
@@ -1546,7 +1517,7 @@ return [
             <h2>Waarom is dit een probleem?</h2>
 
             <p>TFTP heeft geen enkele vorm van authentificatie noch encryptie. Dit maakt
-            het erg eenvoudig voor iemand om al je configuratiebestanden te downloaden
+            het erg eenvoudig voor iemand om al uw configuratiebestanden te downloaden
             of corrupte firmware te uploaden!</p>
 
             <h2>Advies</h2>
