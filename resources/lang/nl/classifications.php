@@ -1984,26 +1984,24 @@ return [
         'description' => '
             <h2>What is a \'Open AFP Server\'?</h2>
 
-            <p>Apple Filing Protocol (formerly AppleTalk Filing Protocol) is a transport protocol
-            that Apple macOS uses to share resources.  For example, if a macOS system wants
-            to access a shared directory on another system, it can use AFP. AFPv3 uses TCP
-            port 548. The protocol can also support other options including changing user passwords.</p>
+            <p>Apple Filing Protocol (AFP; voorheen AppleTalk Filing Protocol) is een transportprotocl dat Apple\'s MacOS gebruikt om resources te delen. 
+            Als een MacOS-systeem bijvoorbeeld een gedeelde direcdtory op een ander systeem wilt bereiken, kan het AFP hiervoor gebruiken. AFPv3 gebruikt TCP/poort 548. 
+            Dit protocol ondersteunt ook andere opties, waaronder wachtwoorden van gebruikers wijzigen.</p>
 
-            <h2>Why would this be bad?</h2>
+            <h2>Waarom is dit een probleem?</h2>
 
-            <p>This report identifies hosts that have Apple Filing Protocol (AFP) Service running and accessible to the world
-             on the internet. AFP can allow for information gathering on a target host as information about the host is contained in
-             the protocol messages.</p>
+            <p>Deze rapportage identificeert hosts die een openbaar toegankelijke Apple Filing Protocol (AFP) Service draaien. 
+            AFP maakt het mogelijk om informatie te verzamelen over een target host, gezien er informatie over de host in AFP-protocolboodschappen zit.</p>
 
-            <p>In addition your sure will be targetted by brute force attacks.</p>
+            <p>Ook is de kans groot dat de host doelwit van \'brute force\' aanvallen wordt.</p>
 
-            <h2>Recommended action</h2>
+            <h2>Aanbevolen acties:</h2>
 
-            <p>Disable public access to AFP.</p>
+            <p>Zet publieke toegang tot AFP uit.</p>
 
-            <h2>Tips how to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
             <ul>
-            <li>Firewall port TCP/548 and use AFP over SSH to gain access to your system/li>
+            <li>Firewall poort TCP/548 en gebruik \'AFP over SSH\' om toegang tot uw systeem te krijgen</li>
             </ul>
 
             ',
@@ -2038,31 +2036,27 @@ return [
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
     'AMPLICATION_DDOS_VICTIM' => [
-        'name'        => 'DDOS amplictifcatie slachtoffer',
+        'name'        => 'DDOS-amplificatieslachtoffer',
         'description' => "        
             <h2>Honeypot Amplification DDoS Events Report</h2>
             
-            <p>This report contains information about honeypot observed amplification DDoS events. If you are seeing this report, it 
-            means that your IP was DDoSed using other hosts/services as reflectors.</p>
+            <p>Deze rapportage bevat informatie over door honeypot geobserveerde DDoS amplificatie-evenementen. Als u deze rapportage ziet, betekent dat dat uw IP geDDoS't is 
+            door andere hosts of diensten als reflectors te misbruiken.</p>
             
-            <p>This category of DDoS attacks utilizes UDP-based, open, amplifiable services to reflect packets to a victim, by 
-            spoofing the source IP address of the packets sent by the amplifier to the victim’s IP address.</p>
+            <p>Deze soorten DDoS-aanvallen gebruiken op UDP-gebaseerde open diensten die gemaplificeerd kunnen worden. Deze worden naar het slachtoffer gestuurd doormiddel van reflectie; 
+            het spoofen van het IP-adres van de aanvaller om de geamplificeerde packets naar het IP-adres van het slachtoffer te laten sturen.</p>
             
-            <p>Depending on the protocol and type of open services abused, the size of the original packet content sent by the attacker 
-            can be amplified in the service response multiple times (even by a factor of hundreds), flooding the victim with packets 
-            and enabling DDoS.</p>
+            <p>Afhankelijk van het protocol en het soort dienst dat misbruikt wordt, kan de aanvaller diens oorspronkelijke packet meerdere keren 'versterkt' worden (tot een factor van honderden), 
+            waardoor het slachtoffer met packets wordt overspoeld en een DDoS mogelijk wordt.</p>
             
-            <p>Honeypots that emulate open and amplifiable services can be used to detect this kind of abuse. However, as the source 
-            of these attacks is spoofed to the victim address, it is possible only to report on victims being abused, not on the true 
-            source of the DDoS.</p>
+            <p>Honeypots die open amplificeerbare diensten nadoen kunnen worden gebruikt om dit soort misbruik te detecteren. Echter, omdat de source ip van deze aanvallen gespooft is, 
+            is het alleen mogelijk om over de slachtoffers te rapporteren, niet de werkelijk bron van de DDoS.</p>
             
-            <p>You can read more about our DDoS attack observations <a href='https://sissden.eu/blog/amp2018'>in the SISSDEN blog 
-            entry on observations on DDoS attacks in 2018</a>. For more insight into how amplifiable DDoS attacks work, check out this 
-            <a href='https://christian-rossow.de/articles/Amplification_DDoS.php'>writeup and paper by Christian Rossow</a>,&nbsp;as 
-            well as the <a href='https://www.us-cert.gov/ncas/alerts/TA14-017A'>US-CERT Alert (TA14-017A)</a>.</p>
+            <p>Voor meer informatie over hoe geamplificeerde DDoS-aanvallen in hun werk gaan, zie deze 
+            <a href='https://christian-rossow.de/articles/Amplification_DDoS.php'>writeup en paper van Christian Rossow</a> 
+            en de <a href='https://www.us-cert.gov/ncas/alerts/TA14-017A'>US-CERT Alert (TA14-017A)</a>.</p>
             
-            <p>This report contains information about the IP that was attacked (set to src_ip) and the port that was abused on the 
-            honeypot to try to make it attack your IP (set to dst_port).</p>
+            <p>Deze rapportage bevat informatie over het aangevallen IP-adres (src_ip) en de port op de honeypot waarmee geprobeerd is uw IP-adres aan te vallen (dst_port).</p>
     
             ",
     ],
