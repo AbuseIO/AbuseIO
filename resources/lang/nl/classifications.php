@@ -1021,13 +1021,7 @@ return [
 
             <p>In de meeste gevallen is er een NTP-dienst op een computer geïnstalleerd omdat er voor de machine tijsdiensten nodig zijn. 
             Echter hoeft dit alleen maar lokaal en is externe toegang tot deze dienst niet nodig. 
-            Wij raden in dit soort gevallen aan om de configuratie van uw NTP-dienst aan te passen of poort 123 te firewallen zodat externen er niet bij kunnen komen.
-            
-            In most cases the computer has installed a NTP service as an dependancy
-            as timekeeping is needed on that computer. However its only required to do
-            local timekeeping, thus the added 'external access' to this service is
-            unneeded. In such cases we recommend either changing the configuration
-            of your NTP service or to firewall port 123 for external hosts.</p>
+            Wij raden in dit soort gevallen aan om de configuratie van uw NTP-dienst aan te passen of poort 123 te firewallen zodat externe hosts er niet bij kunnen komen.</p>
 
             <p>Als u een NTP server voor meerdere computers draait, dan adviseren wij de togang tot deze service 
             te beperken tot de omputers waarvoor deze is opgezet. Het gebruik van 'safeguards' tegen misbruik 
@@ -1039,11 +1033,7 @@ return [
             <h3>UNIX/Linux ntpd</h3>
 
             <p>Onderstaande instellingen zijn voor een UNIX/Linux machine die ingesteld staat als NTP client die 
-            geen inkomende NTP queries accepteert, behalve als deze van het 'loopback address' afkomstig zijn.
-            
-            The following configuration is for a UNIX/Linux machine to act as simply
-            an NTP client and never to allow NTP queries to it except from the loopback
-            address:</p>
+            geen inkomende NTP queries accepteert, behalve als deze van het 'loopback address' afkomstig zijn:</p>
 
             <pre># by default act only as a basic NTP client
             restrict -4 default nomodify nopeer noquery notrap
@@ -1059,18 +1049,16 @@ return [
 
             <p>U kunt de standaardfirewall van uw host gebruiken om te beperken waar het NTP-process mee mag communiceren. 
             Op een Linux-machine die enkel dienst doet als NTP-client, 
-            kunt u de volgende regels voor iptables gebruiken om uw NTP-listener van ongewenste remote hosts af te schilden.
-            
-            You can use your standard host firewall filtering capabilities to limit
-            who the NTP process talks to.  If you're using Linux and the host is acting
-            as an NTP client only, the following iptables rules could be adapted to shield
-            your NTP listener from unwanted remote hosts.</p>
+            kunt u de volgende regels voor iptables gebruiken om uw NTP-listener van ongewenste remote hosts af te schilden.</p>
 
             <pre>-A INPUT -s 0/0 -d 0/0 -p udp --source-port 123:123 -m state --state ESTABLISHED -j ACCEPT
             -A OUTPUT -s 0/0 -d 0/0 -p udp --destination-port 123:123 -m state --state NEW,ESTABLISHED -j ACCEPT
             </pre>
 
-            <p>Authenticatie 
+            <p>Authenticatie met de reference NTP software op UNIX kan - net als in Cisco IOS en Juniper JUNOS - met behulp van symmetrische key encryptie met MD5 gedaan worden. 
+            Een op public key gebaseerde optie genaamd 'AutoKey' is ook beschikbaar en wordt als veiliger beschouwd. Voor meer informatie over deze opties, 
+            zie <a href='http://www.eecis.udel.edu/~mills/ntp/html/authopt.html' target='_blank'>NTP authentifications options page 
+            en <a href='http://support.ntp.org/bin/view/Support/ConfiguringAutokey' target='_blank'>Configuring AutoKey documentation</a>
             
             Authentication with the reference NTP software on UNIX can be done using
             symmetric key encryption, much like in Cisco IOS and Juniper JUNOS, using
@@ -1096,35 +1084,18 @@ return [
             <h2>Wat is een 'Open Netbios server'?</h2>
 
             <p>NetBIOS is een transportprotocol dat door Windowssystemen gebruikt wordt om resources te delen. 
-            Als een Windows-PC bijvoorbeeld verbinding wilt maken met een file-server, gebruikt deze waarschijnlijk NetBIOS om dit te doen.
+            Als een Windows-PC bijvoorbeeld verbinding wilt maken met een file-server, gebruikt deze waarschijnlijk NetBIOS hiervoor.
             Er zijn  wel ontwikkelingen geweest waardoor verbindingen ook zonder NetBIOS opgezet kunnen worden. 
-            SMB; de methode waarmee men toegang kan krijgen tot file en printer shares kan ook los van NetBIOS op TCP 139 en 445 draaien. 
-            Dit vergroot echter wel de 'attack surface' van een netwerk.
-            
-            NetBIOS is a transport protocol that Microsoft Windows systems use to share
-            resources.  For example, if a PC running Windows wants to connect to and access a
-            share on a file server, it probably uses NetBIOS.  There have been some changes in
-            recent days, however, that allow this connection without it. SMB, the method used
-            to access file and printer shares, can also run independently of NetBIOS over TCP
-            ports 139 and 445.  Both of these approaches, however, tend to increase the attack
-            surface of a network.</p>
+            SMB; de methode waarmee men toegang kan krijgen tot file- en printershares kan ook los van NetBIOS op TCP poorten 139 en 445 draaien. 
+            Dit vergroot echter wel de 'attack surface' van een netwerk.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
             <p>De poorts die naar het internet open zijn, zijn UDP/137, UDP/138 en TCP/139. 
-            Helaas zijn NetBIOS en deze poorten een geliefd doelwit voor aanvallers.
+            Helaas zijn NetBIOS en deze poorten een geliefd doelwit voor aanvallers.</p>
 
-            
-            The ports that that are open to the Internet are UDP/137, UDP/138, and TCP/139.
-            Unfortunately, the most popular attacker target is NetBIOS and against these
-            ports.</p>
-
-            <p>Zodra een aanvaller een active poort 139 op een machine ontdekt, kan die als eerste stap van attack-footprinting NBSTAT draaien.
-            Met behulp van NBSTAT kan de aanvaller de volgende informati mogelijk achterhalen:
-            
-            Once an attacker discovers an active port 139 on a device, he can run NBSTAT to
-            begin the very important first step of an attack—footprinting.  With the NBSTAT
-            command, he can obtain some or all of the following information:</p>
+            <p>Zodra een aanvaller een active poort 139 op een machine ontdekt, kan die, als eerste stap van een attack-footprinting, NBSTAT draaien.
+            Met behulp van NBSTAT kan de aanvaller de volgende informatie mogelijk achterhalen:</p>
 
             <ul>
             <li>Computernaam</li>
@@ -1168,9 +1139,17 @@ return [
             something that uses Netbios. In all cases the administrator is unaware of these open
             ports.</p>
 
-            <p>If you really need NETBIOS open for the entire world, then ensure that the exposed
+            <p>Als het echt nodig is om NETBIOS voor de hele wereld open te hebben, verhard het blootgestelde systeem door de volgende maatregelen uit te voeren:
+            If you really need NETBIOS open for the entire world, then ensure that the exposed
             system(s) are hardened by:</p>
             <ul>
+            <li>Disabling the system’s ability to support null sessions</li>
+            <li>Gebruik sterke wachtwoorden voor lokale administratoraccounts</li>
+            <li>Gebruik sterke wachtwoorden voor shares, uitgaande dat er echt shares op blootgestelde systemen nodig zijn</li>
+            <li>Schakel het gastaccount uit</li>
+            <li>Under no circumstances allowing access to the root of a hard drive via a share</li>
+            <li>Under no circumstances sharing the Windows or WinNT directories or any directory located beneath them</li>
+            
             <li>Disabling the system’s ability to support null sessions</li>
             <li>Defining very strong passwords for the local administrator accounts</li>
             <li>Defining very strong passwords for shares, assuming you absolutely have to have shares on exposed systems</li>
