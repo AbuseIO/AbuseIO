@@ -1057,23 +1057,14 @@ return [
 
             <p>Authenticatie met de reference NTP software op UNIX kan - net als in Cisco IOS en Juniper JUNOS - met behulp van symmetrische key encryptie met MD5 gedaan worden. 
             Een op public key gebaseerde optie genaamd 'AutoKey' is ook beschikbaar en wordt als veiliger beschouwd. Voor meer informatie over deze opties, 
-            zie <a href='http://www.eecis.udel.edu/~mills/ntp/html/authopt.html' target='_blank'>NTP authentifications options page 
-            en <a href='http://support.ntp.org/bin/view/Support/ConfiguringAutokey' target='_blank'>Configuring AutoKey documentation</a>
-            
-            Authentication with the reference NTP software on UNIX can be done using
-            symmetric key encryption, much like in Cisco IOS and Juniper JUNOS, using
-            MD5.  However, a public key-based approach called 'AutoKey' is also
-            available, which is generally be considered to be even more secure.  For
-            more information about these options, see the
-            <a href='http://www.eecis.udel.edu/~mills/ntp/html/authopt.html' target='_blank'>NTP authentication
-            options page</a> and the <a href='http://support.ntp.org/bin/view/Support/ConfiguringAutokey' target='_blank'>
-            Configuring Autokey documentation</a>.</p>
+            zie <a href='https://www.eecis.udel.edu/~mills/ntp/html/authopt.html' target='_blank'>NTP authentifications options page 
+            en <a href='https://support.ntp.org/bin/view/Support/ConfiguringAutokey' target='_blank'>Configuring AutoKey documentation</a>.</p>
 
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='http://www.team-cymru.org/secure-ntp-template.html'>Examples in securing a NTP service</a>
-            <a target'_blank' href='http://www.internetsociety.org/sites/default/files/01_5.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
+            <a target'_blank' href='https://github.com/team-cymru/network-security-templates/tree/master/Secure-NTP-Templates'>Examples in securing a NTP service</a>
+            <a target'_blank' href='https://christian-rossow.de/publications/amplification-ndss2014.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
 
             ",
     ],
