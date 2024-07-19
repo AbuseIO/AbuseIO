@@ -603,13 +603,10 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='http://openresolverproject.org/'>the Open Resolver Project</a><br>
-            <a target'_blank' href='http://www.team-cymru.com/ReadingRoom/Whitepapers/2009/recursion.pdf' Team Cymru DNS Open Recursion Whitepaper</a><br>
             <a target'_blank' href='https://www.cisa.gov/sites/default/files/publications/DNS-recursion033006.pdf'>The Continuing Denial of Service Threat Posed by DNS Recursion (v2.0)</a><br>
-            <a target'_blank' href='http://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
-            <a target'_blank' href='http://www.ripe.net/ripe/meetings/ripe-52/presentations/ripe52-plenary-dnsamp.pdf' http://www.ripe.net/ripe/meetings/ripe-52/presentations/ripe52-plenary-dnsamp.pdf</a><br>
-            <a target'_blank' href='http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf'>http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf</a><br>
-            <a target'_blank' href='http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification'>http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification</a><br>
+            <a target'_blank' href='https://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
+            <a target'_blank' href='https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/dns-ddos-advisory-31mar06-en.pdf'>SSAC Advisory SAC008 DNS Distributed Denial of Service (DDoS) Attacks</a><br>
+            <a target'_blank' href='https://www.secureworks.com/research/dns-amplification'>DNS Amplification Variation Used in Recent DDoS Attacks</a><br>
             <a target'_blank' href='https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/sac-065-en.pdf'>SSAC Advisory on DDoS Attacks Leveraging DNS Infrastructure</a><br>
 
             ",
@@ -710,7 +707,7 @@ return [
             <h2>Meer informatie</h2>
 
             <a target'_blank' href='http://fish2.com/ipmi/'>Dan Farmer on IPMI security issues</a><br>
-            <a target'_blank' href='https://www.us-cert.gov/ncas/alerts/TA13-207A'>US-CERT alert TA13-207A</a><br>
+            <a target'_blank' href='https://www.cisa.gov/news-events/alerts/2013/07/26/risks-using-intelligent-platform-management-interface-ipmi'>US-CERT alert TA13-207A</a><br>
 
             ",
     ],
@@ -800,14 +797,6 @@ return [
             you a clue where this is, as this file is also needed to specify the amount of
             memory in the cache, etc.</p>
 
-            <h2>Tips to resolve this matter</h2>
-
-            <p></p>
-
-            <h2>Meer informatie</h2>
-
-            <atarget'_blank'  href='http://blog.codesherpas.com/on_the_path/2010/08/securing-memcache-in-2-minutes.html'>David Bock - Securing Memcache in 2 Minutes</a><br>
-
             ",
     ],
 
@@ -859,7 +848,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='https://msdn.microsoft.com/en-us/library/ms175043.aspx'>Configure a Windows Firewall for Database Engine Access</a><br>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access?view=sql-server-ver16'>Configure a Windows Firewall for Database Engine Access</a><br>
 
             ",
     ],
@@ -976,8 +965,8 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='http://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
-            <a target'_blank' href='https://community.rapid7.com/community/metasploit/blog/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities'>NAT-PMP Implementation and Configuration Vulnerabilities</a>
+            <a target'_blank' href='https://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
+            <a target'_blank' href='https://www.rapid7.com/blog/post/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities/'>NAT-PMP Implementation and Configuration Vulnerabilities</a>
 
             ",
     ],
@@ -1158,7 +1147,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='https://technet.microsoft.com/en-us/library/cc940063.aspx'>Microsoft NetBIOS Over TCP/IP guide</a>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc940063(v=technet.10)'>Microsoft NetBIOS Over TCP/IP guide</a>
 
             ",
     ],
@@ -1314,7 +1303,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='http://redis.io/topics/security'>Redis Security advisory</a><br>
+            <a target'_blank' href='https://redis.io/docs/latest/operate/oss_and_stack/management/security/'>Redis Security advisory</a><br>
 
             ",
     ],
@@ -1595,7 +1584,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='http://www.anti-abuse.org/multi-rbl-check'>Anti-abuse multi-rbl-check</a><br>
+            <a target'_blank' href='http://www.anti-abuse.org/multi-rbl-check/'>Anti-abuse multi-rbl-check</a><br>
 
             ",
     ],
@@ -1682,8 +1671,8 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='http://blog.returnpath.com/blog/jamie-lawler/trap-tips-avoiding-and-removing-spam-traps'>Tips to avoid SpamTraps</a><br>
-            <a target'_blank' href='http://www.activecampaign.com/help/bounces-soft-bounce-vs-hard-bounce/'>Hard/Soft Bounce configuration</a><br>
+            <a target'_blank' href='https://web.archive.org/web/20150307052636/http://blog.returnpath.com/blog/jamie-lawler/trap-tips-avoiding-and-removing-spam-traps'>Tips to avoid SpamTraps</a><br>
+            <a target'_blank' href='https://web.archive.org/web/20160608210727/http://www.activecampaign.com/help/bounces-soft-bounce-vs-hard-bounce/'>Hard/Soft Bounce configuration</a><br>
 
             ",
     ],
@@ -1845,7 +1834,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a href='https://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution (Engels)</a><br>
+            <a href='https://web.archive.org/web/20160304034616/http://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution (Engels)</a><br>
             ",
     ],
 
