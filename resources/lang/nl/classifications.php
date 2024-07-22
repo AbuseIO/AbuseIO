@@ -1090,24 +1090,17 @@ return [
             and security engineers have tried hard to hide behind NAT.  And that’s not all.  The
             lists provided by running NBSTAT also include user IDs.</p>
 
-            <p>Als nullsessies tegen IPC$ zijn toegestaan, is het niet moeilijk om een stapje verder te gaan en een verbinding op te zetten met het doelapparaat. 
-            Deze verbinding geeft een overzicht van alle beschikbare shares.
-            
-            If null sessions are allowed against IPC$, it isn’t difficult to take the next step
-            and connect to the target device.  This connection provides a list of all available
-            shares.</p>
+            <p>Als null sessions tegen IPC$ zijn toegestaan, is het niet moeilijk om een stapje verder te gaan en een verbinding op te zetten met het doelapparaat. 
+            Deze verbinding geeft een overzicht van alle beschikbare shares.</p>
 
-            <p>Deze diensten kunnen door criminelen worden misbruikt om DDoS-aanvallen uit te voeren. 
-            Ook zet dit de deur open voor zogenaamde '0-day-aanvallen' of worms of virussen die kwetsbaarheden in Windows misbruiken om toegang tot uw systeem te krijgen.
-            
-            These services have the potential to be used in amplification attacks by criminals
-            that wish to perform denial of service attacks. In addition it opens up your system
-            to 0-day attacks or worm/virus infections that exploit a vulnarability in Windows to
-            gain access to your system.</p>
+            <p>Deze diensten zouden door criminelen kunnen worden misbruikt om 'Denial of Service' (DoS) aanvallen uit te voeren. 
+            Ook zet dit de deur open voor zogenaamde '0-day-aanvallen' of worms of virussen die kwetsbaarheden in Windows misbruiken om toegang tot uw systeem te krijgen.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Gebruik de Windows Firewall of nog beter: een externe firewall, om de toegang tot NetBIOS (en andere Windows ports) te beperken.
+            <p>Gebruik de Windows Firewall of nog beter: een externe firewall, om de toegang tot NetBIOS (en andere Windows ports) te beperken. 
+            De Windows Firewall doet vaak dingen uit zichzelf en zet automatisch poorten open als u iets dat NetBOIS gebruikt installeert. 
+            De administrator wordt hier niet van op de hoogte gesteld.
             
             Either use the Windows Firewall or even better an external firewall to prevent access
             to Netbios (and other Windows ports). The windows firewall has an nasty way of trying
@@ -1115,28 +1108,19 @@ return [
             something that uses Netbios. In all cases the administrator is unaware of these open
             ports.</p>
 
-            <p>Als het echt nodig is om NETBIOS voor de hele wereld open te hebben, verhard het blootgestelde systeem door de volgende maatregelen uit te voeren:
-            If you really need NETBIOS open for the entire world, then ensure that the exposed
-            system(s) are hardened by:</p>
+            <p>Als het echt nodig is om NETBIOS voor de hele wereld open te hebben, verhard het blootgestelde systeem door de volgende maatregelen uit te voeren:</p>
             <ul>
-            <li>Disabling the system’s ability to support null sessions</li>
+            <li>Schakel null sessions op uw systeem uit</li>
             <li>Gebruik sterke wachtwoorden voor lokale administratoraccounts</li>
-            <li>Gebruik sterke wachtwoorden voor shares, uitgaande dat er echt shares op blootgestelde systemen nodig zijn</li>
+            <li>Gebruik sterke wachtwoorden voor shares, uitgaande dat het echt nodig is om shares op blootgestelde systemen te hebbenn</li>
             <li>Schakel het gastaccount uit</li>
-            <li>Under no circumstances allowing access to the root of a hard drive via a share</li>
-            <li>Under no circumstances sharing the Windows or WinNT directories or any directory located beneath them</li>
-            
-            <li>Disabling the system’s ability to support null sessions</li>
-            <li>Defining very strong passwords for the local administrator accounts</li>
-            <li>Defining very strong passwords for shares, assuming you absolutely have to have shares on exposed systems</li>
-            <li>Keeping the Guest account disabled</li>
-            <li>Under no circumstances allowing access to the root of a hard drive via a share</li>
-            <li>Under no circumstances sharing the Windows or WinNT directories or any directory located beneath them</li>
+            <li>Geef onder geen geval een share toegang tot de root van een schijf</li>
+            <li>Geef nooit toegang tot de Windows of WinNT folders of folders die hieronder vallen.</li>
             </ul>
 
             <h2>Tips om dit op te lossen</h2>
 
-            <p>In a privileged DOS box run the following commands:</p>
+            <p>Voer de volgende commando's in een privileged DOS box uit:</p>
 
             netsh advfirewall firewall add rule name='NetBIOS UDP Port 137' dir=in action=deny protocol=UDP localport=137<br>
             netsh advfirewall firewall add rule name='NetBIOS UDP Port 137' dir=out action=deny protocol=UDP localport=137<br>
