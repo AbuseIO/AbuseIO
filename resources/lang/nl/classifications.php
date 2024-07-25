@@ -63,7 +63,7 @@ return [
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Een kwetsbaarheid in Internet Key Exchange version 1 (IKEv1) packet processing code in Cisco IOS,
-             Cisco IOS XE, en Cisco IOS XR Software zou een ongeauthentificeerde, remote aanvaller toe kunnen staan om de inhoud van 
+             Cisco IOS XE, en Cisco IOS XR Software zou een niet geauthentificeerde, remote aanvaller toe kunnen staan om de inhoud van 
              het geheugen te achterhalen, wat zou kunnen leiden tot het vrijgeven van vertrouwelijke informatie.</p>
 
             <h2>Aanbevolen actie</h2>
@@ -94,7 +94,7 @@ return [
 
             <p>Dit rapport identificeert hosts die een Remote Desktop Protocol (RDP) dienst hebben draaien die voor een ieder vrij toegankelijk is via het internet.
             Verkeerd ingestelde RDP kan kwaadwillenden in staat stellen toegang te krijgen tot een desktop van een kwetsbare host.
-            Dit maakt het mogelijk om informatie over de target host te bemachtigen, gezien de SSL -certificaten die door RDP worden gebruikt vaak de \'trivial hostname\' van het systeem bevatten.</p>
+            Dit maakt het mogelijk om informatie over de target host te bemachtigen, gezien de SSL-certificaten die door RDP worden gebruikt vaak de \'trivial hostname\' van het systeem bevatten.</p>
 
             <p>De kans is groot dat de server doelwit wordt van \'brute force\' aanvallen. Omdat de meeste RDP servers maar twee sessies per keer ondersteunen, wordt u dan buitengesloten.</p>
 
@@ -124,7 +124,7 @@ return [
         'description' => "
              <h2>Wat is een 'Botnet-infectie'?</h2>
 
-            <p>Botnet is een porte-manteauwoord afgeleid van de woorden 'robot' en 'netwerk'. 
+            <p>Botnet is een Porte-manteauwoord afgeleid van de woorden 'robot' en 'netwerk'. 
             Bot refereert aan een computerprogramma dat zelfstandig geautomatiseerde taken uitvoert.
             Zulke programma's kunnen voor legitieme doeleinden gebruikt worden, 
             zoekmachines gebruiken bijvoorbeeld bots om websites te indexeren. 
@@ -134,14 +134,14 @@ return [
             De programma's blijven buiten zicht, draaien vaak op de achtergrond en zijn vaak lastig op te sporen door antivirusprogramma's.
             Zodra een computer is geïnfecteerd, kan het toegevoegd worden aan het botnet door het exploiteren van kwetsbare software aanwezig op het systeem.
             Er zijn veel manieren om geïnfecteerd te raken, waaronder het bezoeken van een (geïnfecteerde) website, 
-            'drive-by-downloads', (malware die gedownloaded en geïnstalleerd wordt zonder het willen of weten van het slachtoffer), 
-            het klikken op malafide bijlagen of links in e-mails of zelfs randapparatuur zoals (geïnfecteerde) usb-sticks of externe schijven op het systeem aansluiten.</p>
+            'drive-by-downloads', (malware die gedownload en geïnstalleerd wordt zonder het willen of weten van het slachtoffer), 
+            het klikken op malafide bijlagen of links in e-mails of zelfs randapparatuur zoals (geïnfecteerde) USB-sticks of externe schijven op het systeem aansluiten.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Het IP-adres in de rapportage (het systeem dat erachter zit en gebruik maakt van NAT) is geïdentificeerd als deelnemend aan een botnet. 
-            Gezien uw systeem aan het communiceren is met het botnet, kunt u er 99,9% zeker van zijn dat deze gecompromiteerd is. 
-            Het systeem is geïnfeccteerd met malware en doet mee in een botnet.</p>
+            Gezien uw systeem aan het communiceren is met het botnet, kunt u er 99,9% zeker van zijn dat deze gecompromitteerd is. 
+            Het systeem is geïnfecteerd met malware en doet mee in een botnet.</p>
 
             <p>Een botnet kan worden gebruikt om uw persoonlijke data te stelen, 
             spam te versturen, andere computers te hacken en netwerkaanvallen te lanceren. 
@@ -158,17 +158,17 @@ return [
             <p>Indien uw systeem een werkstation of server is:<ul>
             <li>Installeer en/of update een antivirussoftware en voer een volledige scan van uw computer uit. 
             Het wordt aangeraden om meerdere scanners te gebruiken, omdat niet alle scanners dezelfde soorten malware herkennen kunnen.</li>
-            <li>Scan het netwerk voor gïnfecteerde bestanden. Vergeet niet ook uw backups te scannen, 
+            <li>Scan het netwerk voor geïnfecteerde bestanden. Vergeet niet ook uw backups te scannen, 
             alsmede alle computers die wellicht al een tijdje uit hebben gestaan ivm. bijv. vakanties.</li>
             <li>Gebruikers van enig systeem dat met een botnetinfectie te maken heeft, zullen al hun wachtwoorden zo snel mogelijk moeten veranderen.
-            Dit houdt in: alle lokaal-opgeslagen wachtwoorden die toegang verschaffen tot andere systemen en applicaties 
-            (inclusief zakelijke applicaties, toegang tot web beheerder-accounts, persoonlijke e-mail en sociale media, etc.).</li>
+            Dit houdt in: alle lokaal opgeslagen wachtwoorden die toegang verschaffen tot andere systemen en applicaties 
+            (inclusief zakelijke applicaties, toegang tot webbeheeraccounts, persoonlijke e-mail en sociale media, etc.).</li>
             <li>Als een computer met malware geïnfecteerd blijkt te zijn, is de kans groot dat er ook andere malware op het systeem aanwezig is. 
             Een 'clean reinstall' voorkomt dat deze vrij toegang tot het netwerk kunnen krijgen.</li>
             </ul></p>
 
             <p>Indien uw systeem een website / hostingsysteem is:<ul>
-            <li>Als u het vermoeden heeft dat een gebruikersaccount gehackt is, wijzig onmiddelijk het wachtwoord van dit account.</li>
+            <li>Als u het vermoeden heeft dat een gebruikersaccount gehackt is, wijzig onmiddelLijk het wachtwoord van dit account.</li>
             <li>Scan alle gehoste websites en tijdelijke mappen voor verdachte bestanden en verwijder deze.
             Controleer ook uw lijst met processen (bijv. taakbeheer) voor mogelijke verdachte processen en beëindig deze.</li>
             <li>Controleer uw mailqeueus voor uitgaande SPAM en verwijder deze.</li>
@@ -177,7 +177,7 @@ return [
 
             <p>Zodra alle malafide software verwijderd is, zorg ervoor dat de server niet opnieuw aangetast kan worden. 
             Installeer de nieuwste updates voor uw besturingssysteem, control panel en gehoste applicaties 
-            inclusief thema's en plug-ins (zoals Wordpress) Als u deze niet direct upgraded, zal het systeem binnen korte tijd opnieuw geïnfecteerd zijn!
+            inclusief thema's en plug-ins (zoals Wordpress) Als u deze niet direct upgradet, zal het systeem binnen korte tijd opnieuw geïnfecteerd zijn!
             </p>
 
             <h2>Meer informatie</h2>
@@ -201,7 +201,7 @@ return [
             Dit komt door kwetsbaarheden in de beveiliging van uw site.
 
             Malafide hackers zijn altijd op zoek naar nieuwe manieren, kwetsbaarheden, trucjes en 'social engineering' tactieken 
-            die gebruikt kunnen worden om een site te compromiteren.
+            die gebruikt kunnen worden om een site te compromitteren.
             Het is geen wonder dat de meeste website-eigenaren geen idee hebben hoe hun site überhaupt gehackt heeft kunnen worden.</p>
 
             <h2>Waarom is dit een probleem?</h2>
@@ -215,7 +215,7 @@ return [
             phishing e-mails die een ontvanger hebben weten te overtuigen een bestand dat (ongewild) op uw website gehost is te downloaden. 
             In veel gevallen is zo'n malware(script) ergens in een subfolder verborgen.</li>
             <li>Geïnjecteerde content - Als hackers toegang tot uw website hebben, zouden ze kunnen proberen malafide content te injecteren. 
-            Dit kan zowel direct op de site zelf gebeuren via javascript of in iframes. 'SQL injection' is ook een reëele dreiging.</li>
+            Dit kan zowel direct op de site zelf gebeuren via javascript of in iframes. 'SQL injection' is ook een reële dreiging.</li>
             <li>URL redirect - Duizende gehackte sites redirecten naar een handvol 'master URL's'. 
             Met een paar regels verborgen HTML wordt uw site in een soort 'voordeur' voor de badware veranderd. 
             De 'master URL's' kunnen bijvoorbeeld spammerige productpagina's of malware bevatten.</li>
@@ -233,7 +233,7 @@ return [
             Dit is wellicht geen populaire maatregel, maar gezien er kans is dat uw site gegevens lekt of het systeem van uw bezoekers infecteert, 
             is het van belang zo snel mogelijk hierop te reageren om eventuele schade te beperken.</p>
 
-            <p>Nadat u uw site offline heeft gezet, zult u de aaangetaste onderdelen van de site moeten opschonen.</p>
+            <p>Nadat u uw site offline heeft gezet, zult u de aangetaste onderdelen van de site moeten opschonen.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
@@ -245,10 +245,10 @@ return [
             <li>Kijk in tijdelijke mappen voor (uitvoerbare) scripts.</li>
             </ul>
 
-            <p>Verder kan de kans op hercompromitering verkleint worden door de volgende tips op te volgen: </p>
+            <p>Verder kan de kans op hercompromittering verkleint worden door de volgende tips op te volgen: </p>
 
             <ul>
-            <li>Houd software en plug-ins up-to-date, ongeacht of u populaire content Management Softare (CMS) zoals 
+            <li>Houd software en plug-ins up-to-date, ongeacht of u populaire content Management Software (CMS) zoals 
             WordPress, Joomla of Blogger of iets anders gebruikt.
             Haal plug-ins die niet in gebruik zijn weg.</li>
             <li>Gebruik sterke en verschillende wachtwoorden. Uw WordPress inloggegevens zouden bijvoorbeeld anders moeten zijn dan uw FTP inloggegevens.
@@ -278,8 +278,8 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Als u malware op uw server hebt staan, stop hier onmiddelijk mee en verwijder het. Dit is namelijk illegaal. 
-            Het kan ertoe leiden dat zoekmachine's uw site als verdacht gaan aanmerken, waardoor deze minder toegangkelijk voor uw bezoekers wordt.
+            <p>Als u malware op uw server hebt staan, stop hier onmiddellijk mee en verwijder het. Dit is namelijk illegaal. 
+            Het kan ertoe leiden dat zoekmachine's uw site als verdacht gaan aanmerken, waardoor deze minder toegankelijk voor uw bezoekers wordt.
             Als een hacker malware op uw site heeft gezet, dan is deze zeer waarschijnlijk gehackt.</p>
 
             <h2>Aanbevolen actie</h2>
@@ -288,8 +288,8 @@ return [
 
             <h2>Tips om dit op te lossen</h2>
             <ul>
-            <li>Indien dit om een CMS (WordPress, Drupal, Joomla, etc.) gaat, check of er updates voor uw add-ons en plugins beschikbaar zijn. Voer deze uit waar mogelijk.</li>
-            <li>Indien dit een 'standaard' website is, controleer op tekeken van infectie of onbekende links op uw pagina's. Neem stappen om deze te verwijderen.</li>
+            <li>Indien dit om een CMS (WordPress, Drupal, Joomla, etc.) gaat, check of er updates voor uw add-ons en plug-ins beschikbaar zijn. Voer deze uit waar mogelijk.</li>
+            <li>Indien dit een 'standaard' website is, controleer op tekens van infectie of onbekende links op uw pagina's. Neem stappen om deze te verwijderen.</li>
             <li>Zodra het probleem is opgelost, vraag zoekmachines om uw site te herevalueren.</li>
             </ul>
 
@@ -312,7 +312,7 @@ return [
                 verzender kijkt naar hoe het aantal klachten verminderd kunnen worden.</p>
 
                 <p>De meest veelvoorkomende manier waarop ISP klachten van gebruikers ontvangen, is door een 'spam melden' knop 
-                op hun webmailpgagina's of in de e-mailclient te plaatsen. De gebruiker kan de e-mail ook naar een postmaster-account van de ISP sturen. 
+                op hun webmailpagina's of in de e-mailclient te plaatsen. De gebruiker kan de e-mail ook naar een postmaster-account van de ISP sturen. 
                 In sommige gevallen zijn deze feedback loops niet gebaseerd op meldingen van de gebruikers, maar 
                 op bijvoorbeeld geautomatiseerde virusdetectie of vergelijkbare technieken.</p>
 
@@ -336,7 +336,7 @@ return [
 
                 <h2>Wat kan ik doen?</h2>
 
-                <p>Campagnes, onderwerptitels en \"from\"-adressen kunnnen worden gemonitoord om te controlen of alle e-mailcampagne-elementen hun werk goed doen. 
+                <p>Campagnes, onderwerptitels en \"from\"-adressen kunnen worden gemonitord om te controleren of alle e-mailcampagne-elementen hun werk goed doen. 
                 U kunt kijken welke elementen verbetering nodig zouden kunnen hebben. Als er van een bepaalde mailinglist of lijstsegment veel klachten komen, 
                 is dit het nader onderzoeken waard. Veel klachten komen omdat de mailing niet voldoet aan de verwachtingen. 
                 Het aantal klachten van nieuwe abonnees kan bijvoorbeeld erg hoog zijn. Dit kan  komen doordat 
@@ -345,7 +345,7 @@ return [
                 <p>Bovendien hebben veel ISP's een grenswaarde voor klachten. Mocht het aantal klachten boven deze grenswaarde uit komen, 
                 kan uw mail gefilterd of zelfs geblokkeerd worden. Helaas publiceren de meeste ISP's deze grenswaardes (die tevens per ISP kunnen verschillen) niet. 
                 Door de FBL-data in de gaten te houden, kunt u de kwaliteit van uw e-mail in de gaten houden en 
-                bovendien ervoor zoren dat het aantal klachten niet boven de grenswaardes van de ISP komt.</p>
+                bovendien ervoor zorgen dat het aantal klachten niet boven de grenswaardes van de ISP komt.</p>
 
                 <h2>Ik verstuur deze e-mails niet</h2>
 
@@ -358,7 +358,7 @@ return [
                 What is questionable about Feedback Loops?</h2>
 
                 <p>De spamknop brengt enige onnauwkeurige functionaliteit met zich mee Bijvoorbeeld: automatisch afmelden. 
-                Jarenlang is er eindgebruikers verteld afmeldlinks in e-mail niet te vertrouwen, omdat dit zou bevestigen dat de mail gezien en geöpend was. 
+                Jarenlang is er eindgebruikers verteld afmeldlinks in e-mail niet te vertrouwen, omdat dit zou bevestigen dat de mail gezien en geopend was. 
                 Velen gebruiken dus de spamknop om zich af te melden. Gebruikers moeten erop kunnen vertrouwen dat hun ISP niet het water ingaat met spammers.</p>
 
                 <p>De spamknop kan ook misbruikt worden om, bijvoorbeeld, gevoelens omtrent de boodschap of de verzender te uiten. 
@@ -374,7 +374,7 @@ return [
 
             <h2>Wat is een 'FREAK Vulnerable Server'?</h2>
 
-            <p>Servers die RSA_EXPORT ciphersuites accepteren, lopen de kans hun gebruikers bloot te stellen aan de zogenaamde FREAK-aanval.
+            <p>Servers die RSA_EXPORT ciphersuites accepteren, zouden hun gebruikers bloot kunnen stellen aan de zogenaamde FREAK-aanval.
             
             Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
             attack. Using Internet-wide scanning, we have been performing daily tests of all
@@ -391,13 +391,13 @@ return [
             en deze te dwingen zwakkere encryptie te gebruiken. Deze is makkelijker te breken en staat de aanvaller toe (gevoelige) data te stelen of manipuleren. </p>
 
             <p>Het bepalen van een 512-bit export key kan met een cluster van EC2 virtual servers binnen een paar uur gedaan worden.
-            De aamvaller bepaalt de RSA modulus om zo de RSA decryption key te achterhalen. 
+            De aanvaller bepaalt de RSA modulus om zo de RSA decryption key te achterhalen. 
             Wanneer de client het 'pre-master secret' naar de server verstuurt, kan de aanvaller deze ontsleutelen om zo het 'master secret' te pakken te krijgen. 
             Met dit 'master secret' kan de aanvaller al het verkeer in plaintext zien en zelfs data injecteren.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Zet onmiddelijk ondersteuning voor TLS export ciphersuites uit. Het is ook een goed idee om 
+            <p>Zet onmiddellijk ondersteuning voor TLS export ciphersuites uit. Het is ook een goed idee om 
             andere kwetsbare ciphersuites uit te zetten en forward security aan te zetten. 
             Mozilla heeft instructies en een handige tool om geschikte SSL configuraties voor een groot aantal soorten webservers te genereren.
             Wij raden ook aan uw instellingen te testen met behulp van bijvoorbeeld de Qualys SSL Labs SSL Server Test tool.</p>
@@ -436,7 +436,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Ongevraagd e-mail sturen naar ontvangstadressen verkregen via 'harvesting' is illegaal en is - per onze voorwaaarden -  niet toegestaan.</p>
+            <p>Ongevraagd e-mail sturen naar ontvangstadressen verkregen via 'harvesting' is illegaal en is - per onze voorwaarden -  niet toegestaan.</p>
 
             <h2>Aanbevolen actie</h2>
 
@@ -444,7 +444,7 @@ return [
 
             <h2>Tips om dit op te lossen</h2>
 
-            <p>Als u dit niet bewust doet, controleer of uw serrver en website(s) niet gehackt zijn.</p>
+            <p>Als u dit niet bewust doet, controleer of uw server en website(s) niet gehackt zijn.</p>
 
             <h2>Meer informatie</h2>
 
@@ -477,7 +477,7 @@ return [
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
-            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
@@ -512,7 +512,7 @@ return [
             voor een ieder op het Internet uit te voeren.</p>
 
             <p>Wanneer een DNS server een recursieve DNS query resolved, zoekt het domeininformatie bij andere DNS servers 
-            op. Dit is een recursief process waar meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.</p>
+            op. Dit is een recursief proces waar meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -520,7 +520,7 @@ return [
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
-            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
@@ -621,7 +621,7 @@ return [
             voor een ieder op het Internet uit te voeren.</p>
 
             <p>Wanneer een DNS server een recursieve DNS query resolved, zoekt het domeininformatie bij andere DNS servers 
-            op. Dit is een recursief process waar meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.</p>
+            op. Dit is een recursief proces waar meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -629,7 +629,7 @@ return [
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
-            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
@@ -652,7 +652,7 @@ return [
             Indien dit het geval is, is het aan te raden om de configuratie van uw DNS-dienst aan te passen 
             of poort 5353 to firewallen zodat deze niet toegankelijk is voor externe hosts.</p>
 
-            <p>Als u een DNS resolver voor meerdere computers draait, dan adviseren wij de togang tot deze service 
+            <p>Als u een DNS resolver voor meerdere computers draait, dan adviseren wij de toegang tot deze service 
             te beperken tot de computers waarvoor deze is opgezet. Het gebruik van 'safeguards' tegen misbruik 
             zoals 'Response Rate Limiting' (DNS-RRL) is ook een goede manier om DNS amplificatie-aanvallen te voorkomen.</p>
 
@@ -986,7 +986,7 @@ return [
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
-            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
@@ -1004,12 +1004,12 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>In de meeste gevallen is er een NTP-dienst op een computer geïnstalleerd omdat er voor de machine tijsdiensten nodig zijn. 
+            <p>In de meeste gevallen is er een NTP-dienst op een computer geïnstalleerd omdat er voor de machine tijdsdiensten nodig zijn. 
             Echter hoeft dit alleen maar lokaal en is externe toegang tot deze dienst niet nodig. 
             Wij raden in dit soort gevallen aan om de configuratie van uw NTP-dienst aan te passen of poort 123 te firewallen zodat externe hosts er niet bij kunnen komen.</p>
 
-            <p>Als u een NTP server voor meerdere computers draait, dan adviseren wij de togang tot deze service 
-            te beperken tot de omputers waarvoor deze is opgezet. Het gebruik van 'safeguards' tegen misbruik 
+            <p>Als u een NTP server voor meerdere computers draait, dan adviseren wij de toegang tot deze service 
+            te beperken tot de computers waarvoor deze is opgezet. Het gebruik van 'safeguards' tegen misbruik 
             zoals 'Response Rate Limiting' (DNS-RRL) is ook een goede manier om DNS amplificatie-aanvallen te voorkomen.</p>
 
 
@@ -1032,7 +1032,7 @@ return [
             server time.example.net
             </pre>
 
-            <p>U kunt de standaardfirewall van uw host gebruiken om te beperken waar het NTP-process mee mag communiceren. 
+            <p>U kunt de standaardfirewall van uw host gebruiken om te beperken waar het NTP-proces mee mag communiceren. 
             Op een Linux-machine die enkel dienst doet als NTP-client, 
             kunt u de volgende regels voor iptables gebruiken om uw NTP-listener van ongewenste remote hosts af te schilden.</p>
 
@@ -1070,7 +1070,7 @@ return [
             <p>De poorts die naar het internet open zijn, zijn UDP/137, UDP/138 en TCP/139. 
             Helaas zijn NetBIOS en deze poorten een geliefd doelwit voor aanvallers.</p>
 
-            <p>Zodra een aanvaller een active poort 139 op een machine ontdekt, kan die, als eerste stap van een attack-footprinting, NBSTAT draaien.
+            <p>Zodra een aanvaller een actieve poort 139 op een machine ontdekt, kan die, als eerste stap van een attack-footprinting, NBSTAT draaien.
             Met behulp van NBSTAT kan de aanvaller de volgende informatie mogelijk achterhalen:</p>
 
             <ul>
@@ -1078,7 +1078,7 @@ return [
             <li>Inhoud van de remote name cache, inclusief IP-addressen</li>
             <li>Een lijst met lokale NetBIOS namen</li>
             <li>Een lijst met namen geresolved via broadast of WINSA</li>
-            <li>Inhoud van de session table met de IP-adressen van de bestemmming</li>
+            <li>Inhoud van de session table met de IP-adressen van de bestemming</li>
             </ul>
 
             <p>Deze informatie vertelt de aanvaller veel over het OS, diensten en belangrijke applicaties die op het systeem draaien. 
@@ -1112,7 +1112,7 @@ return [
             <ul>
             <li>Schakel null sessions op uw systeem uit</li>
             <li>Gebruik sterke wachtwoorden voor lokale administratoraccounts</li>
-            <li>Gebruik sterke wachtwoorden voor shares, uitgaande dat het echt nodig is om shares op blootgestelde systemen te hebbenn</li>
+            <li>Gebruik sterke wachtwoorden voor shares, uitgaande dat het echt nodig is om shares op blootgestelde systemen te hebben</li>
             <li>Schakel het gastaccount uit</li>
             <li>Geef onder geen geval een share toegang tot de root van een schijf</li>
             <li>Geef nooit toegang tot de Windows of WinNT folders of folders die hieronder vallen.</li>
@@ -1153,7 +1153,7 @@ return [
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
             <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
-            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
@@ -1312,7 +1312,7 @@ return [
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
             <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
-            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
@@ -1416,7 +1416,7 @@ return [
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
             <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
-            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
@@ -1464,7 +1464,7 @@ return [
             <p>Er is geen reden om deze dienst op een publieke interface aan te bieden.
             Het advies is om deze dienst te stoppen of ervoor te zorgen dat het niet
             mogelijk is deze dienst via het internet te kunnen bereiken. Dit kan door gebruik
-            te maken van RFC1918 ip-reeksen of een firewall.</p>
+            te maken van RFC1918 IP-reeksen of een firewall.</p>
 
             ",
     ],
@@ -1475,7 +1475,7 @@ return [
             <h2>Wat is een 'Phishing website'?</h2>
 
             <p>Een phishingwebsite is een site die wordt gebruikt om gevoelige informatie zoals 
-            gebruikersnamen, wachtwoorden, bankiergegevens (en soms indirect: geld) door zich voor te doen als een vertrouwde website. 
+            gebruikersnamen, wachtwoorden, bankgegevens (en soms indirect: geld) door zich voor te doen als een vertrouwde website. 
             Mails en communicatie die claimen van o.a. populaire sociale media sites, veilingsites, 
             banken, online betaaldiensten, beroemdheden of ICT-beheerders af te komen, 
             worden ingezet om mensen naar deze sites te krijgen en hun gegevens daarheen te sturen. Deze sites kunnen tevens geïnfecteerd met malware zijn. </p>
@@ -1494,7 +1494,7 @@ return [
             Dit is wellicht geen populaire maatregel, maar gezien er kans is dat uw site gegevens lekt of het systeem van uw bezoekers infecteert, 
             is het van belang zo snel mogelijk hierop te reageren om eventuele schade te beperken.</p>
 
-            <p>Nadat u uw site offline heeft gezet, zult u de aaangetaste onderdelen van de site moeten opschonen.</p>
+            <p>Nadat u uw site offline heeft gezet, zult u de aangetaste onderdelen van de site moeten opschonen.</p>
 
 
             <h2>Tips om dit op te lossen</h2>
@@ -1510,13 +1510,13 @@ return [
             <p>Verder kan de kans op hercompromitering verkleint worden door de volgende tips op te volgen: </p>
 
             <ul>
-            <li>Houd software en plug-ins up-to-date, ongeacht of u populaire content Management Softare (CMS) zoals 
+            <li>Houd software en plug-ins up-to-date, ongeacht of u populaire content Management Software (CMS) zoals 
             WordPress, Joomla of Blogger of iets anders gebruikt.
             Haal plug-ins die niet in gebruik zijn weg.</li>
             <li>Gebruik sterke en verschillende wachtwoorden. Uw WordPress inloggegevens zouden bijvoorbeeld anders moeten zijn dan uw FTP inloggegevens.
             Sla nooit wachtwoorden onbeveiligd op uw lokale machine op.</li>
             <li>Scan uw computer regelmatig voor malware en controleer uw website op ongewenste en/of onbevoegde veranderingen.</li>
-            <li>eGbruik geschikte 'file permissions' op uw webserver.</li>
+            <li>Gebruik geschikte 'file permissions' op uw webserver.</li>
             <li>Laat beveiliging een prioriteit zijn bij het zoeken naar een webhoster. Als u niet zeker weet of u uw site zelf kunt beveiligen, 
             kijk of het een optie is om een beveiligingsservice af te nemen bij uw hosting provider 
             of een derde partij die zich in websitecybersecurity specialiseert.</li>
@@ -1535,9 +1535,9 @@ return [
         'description' => "
             <h2>Wat betekent 'RBL Listed'?</h2>
 
-            <p>Uw IP-address staat op een RBL (real-time block list).</p>
+            <p>Uw IP-adres staat op een RBL (real-time block list).</p>
 
-            <p>Dit betekent dat uw server waarscjjnlijk grote hoeveelheden ongewenste e-mail 
+            <p>Dit betekent dat uw server waarschijnlijk grote hoeveelheden ongewenste e-mail 
             heeft lopen versturen. Uw server of computer is waarschijnlijk verkeerd geconfigureerd 
             of gehackt.</p>
 
@@ -1578,9 +1578,9 @@ return [
         'description' => "
             <h2>Wat is 'Spam'?</h2>
 
-            <p>Als u een spamrapportge ontvangt, betekent dat dat één of 
+            <p>Als u een spamrapportage ontvangt, betekent dat dat één of 
             meerdere e-mails die vanaf uw server verzonden worden, door een automatisch systeem 
-            en/of een ontvanger zijn gemarkeert als spam of ongewenste e-mail.</p>
+            en/of een ontvanger zijn gemarkeerd als spam of ongewenste e-mail.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -1611,7 +1611,7 @@ return [
 
             <h2>Meer informatie/h2>
 
-            <p>Neem contact op met onze abuse-afdeling als u niet weet hoe u dit probleem op kan lossen.</p>
+            <p>Neem contact op met onze abuseäfdeling als u niet weet hoe u dit probleem op kan lossen.</p>
 
             ",
     ],
@@ -1631,7 +1631,7 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Schoon uw mailinglijst op. Configureer uw 'Hard & Soft' Bounce waardes om ontvangers correct te verwijderen indien nodig.v</p>
+            <p>Schoon uw mailinglijst op. Configureer uw 'Hard & Soft' Bounce waardes om ontvangers correct te verwijderen indien nodig.</p>
 
             <p>Als u geen bulk e-mail verstuurd, check dan uw website en DNS voor tekenen van compromittering. </p>
 
@@ -1754,11 +1754,7 @@ return [
 
             <p>De reden hiervoor is meestal dat uw site (of DNS) op een één of andere manier gecompromitteerd is.
             Spammers of hackers voegen een redirect aan uw site toe die bezoekers naar diens malafide site linkt.
-            Dit waarschijnlijk omdat hun eigen site reeds een slechte reputatie heeft of als verdacht bekend staat.
-            
-            This is generally the case when your site (or DNS) has been comprimised in some way.
-            Spammers or hackers often add a redirect from your site to their Spam site.
-            Spammers would prefer to use your website for their links, as most likely their site is already known as bad. </p>
+            Dit waarschijnlijk omdat hun eigen site reeds een slechte reputatie heeft of als verdacht bekend staat. </p>
 
             <h2>Aanbevolen actie</h2>
 
@@ -1767,8 +1763,8 @@ return [
             <h2>Tips om dit op te lossen</h2>
 
             <ul>
-            <li>Indien dit om een CMS (WordPress, Drupal, Joomla, etc.) gaat, check of er updates voor uw add-ons en plugins beschikbaar zijn. Voer deze uit waar mogelijk.</li>
-            <li>Indien dit een 'standaard' website is, controleer op tekeken van infectie of onbekende links op uw pagina's. Neem stappen om deze te verwijderen.</li>
+            <li>Indien dit om een CMS (WordPress, Drupal, Joomla, etc.) gaat, check of er updates voor uw add-ons en plug-ins beschikbaar zijn. Voer deze uit waar mogelijk.</li>
+            <li>Indien dit een 'standaard' website is, controleer op tekens van infectie of onbekende links op uw pagina's. Neem stappen om deze te verwijderen.</li>
             <li>Zodra het probleem is opgelost, laat uw URL van blocklists afhalen.</li>
             </ul>
 
@@ -1784,7 +1780,7 @@ return [
         'description' => "
             <h2>Wat is een 'Open ElasticSearch Server'?</h2>
 
-            <p>Elasticsearch is een op Lucene gebaseerde zoekserver. een gedistibuteerde zoekmachine met een RESTful web interface en schema-free JSON documenten.
+            <p>Elasticsearch is een op Lucene gebaseerde zoekserver. een gedistribueerde zoekmachine met een RESTful web interface en schema-free JSON documenten.
             
             Elasticsearch is a search server based on Lucene. It provides a distributed,
             multitenant-capable full-text search engine with a RESTful web interface and
@@ -1844,18 +1840,18 @@ return [
 
             <p>De 'port mapper' (rpc.portmap of rpcbind) is een 'remote procedure call' (RPC) dienst 
             op TCP of UDP port 111 dat op servers draait en informatie geeft over
-            de de diensten die hierop draaien alsmede hun poortnummers, zals bijvoorbeeld NFS.</p>
+            de de diensten die hierop draaien alsmede hun poortnummers, zoals bijvoorbeeld NFS.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Zodra een aanvaller een actieve port 111 op een systeem ontdekt. kan die deze informatie gebruiken
             om meer te weten te komen over welke services hierop draaien. Dit is vaak de eerste stap in een hackaanval.</p>
 
-            <p>Deze functie kwordt tevens ook door hackers misbruikt voor het uitvoeren 
+            <p>Deze functie wordt tevens ook door hackers misbruikt voor het uitvoeren 
             van een zogenaamde 'Amplification Attack'; een speciaal type DDoS.</p>
 
             <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
-            Dit is dat een aanvaller doet alsof diens IP-Adres dat van het slachtoffer is (spoofing). 
+            Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
@@ -1874,7 +1870,7 @@ return [
 
             <p>Wij adviseren om enkel RPC calls van vertrouwde bronnen toe te laten.
             Dit kan worden gedaan door al het verkeer voor RPC services te laten vallen
-            en alleen verbindingnen van bekende IP-adressen toe te staan.</p>
+            en alleen verbindingen van bekende IP-adressen toe te staan.</p>
             ",
     ],
 
@@ -1884,7 +1880,7 @@ return [
     ],
 
     'COMMENT_SPAM' => [
-        'name'        => 'Commentaar Spam',
+        'name'        => 'Commentspam',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
@@ -1921,9 +1917,9 @@ return [
     'OPEN_AFP_SERVER' => [
         'name'        => 'Open Apple Filing Protocol (AFP) Server',
         'description' => '
-            <h2>What is a \'Open AFP Server\'?</h2>
+            <h2>Wat is a \'Open AFP Server\'?</h2>
 
-            <p>Apple Filing Protocol (AFP; voorheen AppleTalk Filing Protocol) is een transportprotocl dat Apple\'s MacOS gebruikt om resources te delen. 
+            <p>Apple Filing Protocol (AFP; voorheen AppleTalk Filing Protocol) is een transportprotocol dat Apple\'s MacOS gebruikt om resources te delen. 
             Als een MacOS-systeem bijvoorbeeld een gedeelde direcdtory op een ander systeem wilt bereiken, kan het AFP hiervoor gebruiken. AFPv3 gebruikt TCP/poort 548. 
             Dit protocol ondersteunt ook andere opties, waaronder wachtwoorden van gebruikers wijzigen.</p>
 
@@ -1982,7 +1978,7 @@ return [
             <p>Deze rapportage bevat informatie over door honeypot geobserveerde DDoS amplificatie-evenementen. Als u deze rapportage ziet, betekent dat dat uw IP geDDoS't is 
             door andere hosts of diensten als reflectors te misbruiken.</p>
             
-            <p>Deze soorten DDoS-aanvallen gebruiken op UDP-gebaseerde open diensten die gemaplificeerd kunnen worden. Deze worden naar het slachtoffer gestuurd doormiddel van reflectie; 
+            <p>Deze soorten DDoS-aanvallen gebruiken op UDP-gebaseerde open diensten die geamplificeerd kunnen worden. Deze worden naar het slachtoffer gestuurd door middel van reflectie; 
             het spoofen van het IP-adres van de aanvaller om de geamplificeerde packets naar het IP-adres van het slachtoffer te laten sturen.</p>
             
             <p>Afhankelijk van het protocol en het soort dienst dat misbruikt wordt, kan de aanvaller diens oorspronkelijke packet meerdere keren 'versterkt' worden (tot een factor van honderden), 
@@ -2092,7 +2088,7 @@ return [
 
             <h2>Aanbevolen actie:</h2>
 
-            <p>Update de SMPT doftware naar de nieuwste versie.</p>
+            <p>Update de SMPT-software naar de nieuwste versie.</p>
             ",
     ],
 
@@ -2120,7 +2116,7 @@ return [
     'description'   => '
         <p> Dit rapport identificeert hosts die een Secure Shell (SSH) service - die vanaf het internet toegankelijk is - hebben draaien. </p>
 
-        <p> Dit betekent niet per se dat er iets met dit systeem mis is, maar als de SSH op dit syteem (of de versie die runt) er niet op lijkt te horen staan, is het wellicht een goed idee om hier nader naar te kijken. </p>
+        <p> Dit betekent niet per se dat er iets met dit systeem mis is, maar als de SSH op dit systeem (of de versie die runt) er niet op lijkt te horen staan, is het wellicht een goed idee om hier nader naar te kijken. </p>
         ',
     ],
 
@@ -2129,7 +2125,7 @@ return [
         'description'   => '
             <p> Dit rapport bevat een lijst met toegankelijke SMTP servers. </p>
 
-            <p> Dit is slechts een population scan – er worden geen kwetsbaarheden gemeld – maar netwerkbeheerder zouden zich bewust moeten zijn van enige onbedoelde bloodstelling van SMTP servers en zouden moeten verifiëren dat alle naar de nieuwste softwareversie gepatcht zijn. </p>
+            <p> Dit is slechts een population scan – er worden geen kwetsbaarheden gemeld – maar netwerkbeheerder zouden zich bewust moeten zijn van enige onbedoelde blootstelling van SMTP servers en zouden moeten verifiëren dat alle naar de nieuwste softwareversie gepatcht zijn. </p>
             ',
     ],
 
@@ -2141,7 +2137,7 @@ return [
 
             <p> Het is onwaarschijnlijk dat dit soort apparaten toegankelijk hoeven te zijn voor queries vanaf het openbare internet, 
             dus tenzij u een honeypot draait, is het sterk aangeraden om - als u een rapportage voor uw netwerk/kring ontvangt - 
-            hier onmiddelijk actie op te ondernemen en de toegang tot dit apparaat te beperken/firewallen. </p>
+            hier onmiddellijk actie op te ondernemen en de toegang tot dit apparaat te beperken/firewallen. </p>
             ',
     ],
 
@@ -2170,10 +2166,10 @@ return [
         'name'          => 'Open Erlang Port Mapper Daemon server',
         'description'   => '
             <p> Dit rapport identificeert toegankelijke Erlang Port Mapper Daemon (EPMD) servers op port 4369/tcp.
-            Deze daemon doet dienst als name server for hosts die bij gedistributeerde Erlang berekeningen betrokken zijn. </p>
+            Deze daemon doet dienst als nameserver voor hosts die bij gedistributeerde Erlang berekeningen betrokken zijn. </p>
 
             <p> Het is onwaarschijnlijk dat uw EPMD server externe verbindingen vanaf het internet toe hoeft te staan (gezien dit een mogelijk extern aanvalsvalk kan zijn).
-            Zorg ervoor dat het verkeer naar deze dienst gefirewalled wordt. Als u dit dit rapport ontvangt voor uw netwerk of kring. zorg ervoor dat verkeer richting deze service gefirewalled wordt.</p>
+            Als u dit dit rapport ontvangt voor uw netwerk of kring, zorg ervoor dat verkeer richting deze service gefirewalled wordt.</p>
 ',
     ],
 
@@ -2186,14 +2182,14 @@ return [
             <p> Open proxy servers die het proxyen van diensten zonder authentificatie toestaan, worden vaak misbruikt. Andere - zelfs met authentificatie - zouden ook gevolgen voor de veiligheid kunnen hebben.</p>
 
             <p> Zoals bij alle remote access tools, is het belangrijk om ervoor te zorgen dat ook een SOCK proxy service secuur geconfigureerd is.
-            Ook is het belangrijk om de mogelijke beveilingsimplicaties van het overal toegankelijk maken via het internet van deze service mee te nemen. </p>
+            Ook is het belangrijk om de mogelijke beveiligingsimplicaties van het overal toegankelijk maken via het internet van deze service mee te nemen. </p>
             ',
     ],
 
     'DEVICE_IDENTIFICATION' => [
         'name'          => 'Device identification',
         'description'   => '
-            <p>Dit is een \'device population report\' - Er wordt geen oordeel gevelt over eventuele kwetsbaarheden aanwezig op het apparaat.
+            <p>Dit is een \'device population report\' - Er wordt geen oordeel geveld over eventuele kwetsbaarheden aanwezig op het apparaat.
             Deze rapportage is bedoeld om ontvangers een beter overzicht te geven van wat voor soorten apparaten er in diens netwerk actief zijn.
             De inhoud van deze rapportage is tevens enkel gebaseerd op wat er publiek toegankelijk vanaf het internet is. </p>
             ',
@@ -2235,7 +2231,7 @@ return [
     'ACCESSIBLE_SLP_SERVICE' => [
         'name'         => 'Toegankelijke Service Location Protocol (SLP) Service',
         'description'  => '
-            <p> Dit rapport identificeert toegankelijke SLP (Service Location Protocol) services op port 427/TCP en 427/UDP. Service Location Protocol (SLP, srvloc) is een service ontdekkings-protocol dat computers en andere apparaten in staat stelt services in een local area network (LAN) te vinden zonder dat daar verder configuratie aan vooraf gaat. </p>',
+            <p> Dit rapport identificeert toegankelijke SLP (Service Location Protocol) services op port 427/TCP en 427/UDP. Service Location Protocol (SLP, srvloc) is een service ontdekkingsprotocol dat computers en andere apparaten in staat stelt services in een local area network (LAN) te vinden zonder dat daar verder configuratie aan vooraf gaat. </p>',
     ],
 
     'ACCESSIBLE_BGP_SERVICE' => [
