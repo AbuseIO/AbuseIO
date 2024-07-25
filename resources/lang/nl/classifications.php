@@ -1067,7 +1067,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>De poorts die naar het internet open zijn, zijn UDP/137, UDP/138 en TCP/139. 
+            <p>De poorten die naar het internet open zijn, zijn UDP/137, UDP/138 en TCP/139. 
             Helaas zijn NetBIOS en deze poorten een geliefd doelwit voor aanvallers.</p>
 
             <p>Zodra een aanvaller een actieve poort 139 op een machine ontdekt, kan die, als eerste stap van een attack-footprinting, NBSTAT draaien.
@@ -1083,12 +1083,7 @@ return [
 
             <p>Deze informatie vertelt de aanvaller veel over het OS, diensten en belangrijke applicaties die op het systeem draaien. 
             De aanvaller heeft ook private IP-adressen die de LAN/WAN-engineers en security-engineers hebben geprobeerd achter de NAT te verbergen. 
-            Verder bevatten NBSTAT-lijsten ook gebruiker-ID's.
-            
-            With this information, the attacker has information about the OS, services, and major
-            applications running on the system. He also has private IP addresses that the LAN/WAN
-            and security engineers have tried hard to hide behind NAT.  And that’s not all.  The
-            lists provided by running NBSTAT also include user IDs.</p>
+            Verder bevatten NBSTAT-lijsten ook gebruiker-ID's.</p>
 
             <p>Als null sessions tegen IPC$ zijn toegestaan, is het niet moeilijk om een stapje verder te gaan en een verbinding op te zetten met het doelapparaat. 
             Deze verbinding geeft een overzicht van alle beschikbare shares.</p>
@@ -1098,15 +1093,9 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Gebruik de Windows Firewall of nog beter: een externe firewall, om de toegang tot NetBIOS (en andere Windows ports) te beperken. 
+            <p>Gebruik de Windows Firewall of nog beter: een externe firewall, om de toegang tot NetBIOS (en andere Windows poorten) te beperken. 
             De Windows Firewall doet vaak dingen uit zichzelf en zet automatisch poorten open als u iets dat NetBOIS gebruikt installeert. 
-            De administrator wordt hier niet van op de hoogte gesteld.
-            
-            Either use the Windows Firewall or even better an external firewall to prevent access
-            to Netbios (and other Windows ports). The windows firewall has an nasty way of trying
-            to think for himself and for example automaticly starts to open ports if you install
-            something that uses Netbios. In all cases the administrator is unaware of these open
-            ports.</p>
+            De administrator wordt hier niet van op de hoogte gesteld.</p>
 
             <p>Als het echt nodig is om NETBIOS voor de hele wereld open te hebben, verhard het blootgestelde systeem door de volgende maatregelen uit te voeren:</p>
             <ul>
@@ -1297,21 +1286,27 @@ return [
         'description' => "
             <h2>Wat is een 'Open SNMP Server'?</h2>
 
-            <p>Simple Network Management Protocol (SNMP) is a popular protocol for network
+            <p>Simple Network Management Protocol (SNMP) is een veelgebruikt protocol voor netwerkbeheer. Het wordt gebruikt om informatie van netwerkapparaten 
+            zoals servers, printers, hubs, switches en routers op een IP-netwerk te verzamelen en configureren. 
+            
+            Simple Network Management Protocol (SNMP) is a popular protocol for network
             management. It is used for collecting information from, and configuring,
             network devices, such as servers, printers, hubs, switches, and routers on an
             Internet Protocol (IP) network.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Open SNMP Servers can be used to collect privileged information from the
+            <p>Open SNMP Servers kunnen worden gebruikt om informatie van het systeem van het systeem te verzamelen of zelfs de instellinge te veranderen 
+            indien de server niet goed ingesteld is.
+            
+            Open SNMP Servers can be used to collect privileged information from the
             system or even to write new 'settings' to the system if not correctly
             configured.</p>
 
             <p>Verder hoeft een open (UDP) dienst draaien niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
-            <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
             Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
@@ -1321,7 +1316,7 @@ return [
             <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Reflection aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
+            <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
             In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
 
             <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
@@ -1331,11 +1326,17 @@ return [
             <h2>Aanbevolen actie</h2>
 
             <ul>
-            <li>Use firewalling to block UDP/161 entirely or only allow the hosts that
+            <li>Gebruik een firewall om UDP/161 helemaal te blokkeren of alleen hosts die deze service nodig hebben toe te laten.
+            
+            Use firewalling to block UDP/161 entirely or only allow the hosts that
             need access to this service</li>
-            <li>Update the SNMP configuration to use a different community string then public. Something
+            <li>Update de SNMP-configuratie om een communitystring te gebruiken die niet 'public' is. Zoals VoorbeeldVanCommunityString.
+            
+            Update the SNMP configuration to use a different community string then public. Something
             strong like ThisIsMyCommunityString</li>
-            <li>Update the SNMP configuration to use a host based ACL's in combination with either the 'public'
+            <li>Update de SNMP-configuratie om een op de host gebaseerde ACL in combinatie met de 'public' commonity of string of eentje die 'veiliger' is.
+            
+            Update the SNMP configuration to use a host based ACL's in combination with either the 'public'
             community or a string thats more 'secure'</li>
             </ul>
 
@@ -1401,7 +1402,11 @@ return [
         'description' => "
             <h2>Wat is een 'Open SSDP Server'?</h2>
 
-            <p>The Simple Service Discovery Protocol (SSDP) is a network protocol
+            <p>Het Simple Service Discovery Protocol (SSDP) is een op de Internet Protocol Suite gebaseerd netwerkprotocol 
+            dat wordt gebruikt voor het adverteren en ontdekken van netwerkdiensten en presence-informatie. 
+            
+            
+            The Simple Service Discovery Protocol (SSDP) is a network protocol
             based on the Internet Protocol Suite for advertisement and discovery of
             network services and presence information. It accomplishes this without
             assistance of server-based configuration mechanisms, such as the Dynamic
@@ -1415,7 +1420,7 @@ return [
             <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
-            <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
             Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
@@ -1425,7 +1430,7 @@ return [
             <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Reflection aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
+            <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
             In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
 
             <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
@@ -1434,9 +1439,8 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>There is no reason to have this CHARGEN service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
-            from the internet by using RFC1918 spaces or a firewall.</p>
+            <p>Er is geen reden om deze CHARGEN-dienst op een public facing interface aan te zetten. 
+            Zet deze dienst uit of zorg ervoor dat deze niet vanaf het internet te bereiken is door RFC1918 spaces of een firewall te gebruiken.</p>
 
             ",
     ],
