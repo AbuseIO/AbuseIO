@@ -1286,8 +1286,8 @@ return [
         'description' => "
             <h2>Wat is een 'Open SNMP Server'?</h2>
 
-            <p>Simple Network Management Protocol (SNMP) is een veelgebruikt protocol voor netwerkbeheer. Het wordt gebruikt om informatie van netwerkapparaten 
-            zoals servers, printers, hubs, switches en routers op een IP-netwerk te verzamelen en configureren. 
+            <p>Simple Network Management Protocol (SNMP) is een veelgebruikt protocol voor netwerkbeheer. Het wordt gebruikt om informatie op een IP-netwerk van netwerkapparaten 
+            zoals servers, printers, hubs, switches en routers te verzamelen en configureren. 
             
             Simple Network Management Protocol (SNMP) is a popular protocol for network
             management. It is used for collecting information from, and configuring,
@@ -1326,15 +1326,9 @@ return [
             <h2>Aanbevolen actie</h2>
 
             <ul>
-            <li>Gebruik een firewall om UDP/161 helemaal te blokkeren of alleen hosts die deze service nodig hebben toe te laten.
-            
-            Use firewalling to block UDP/161 entirely or only allow the hosts that
-            need access to this service</li>
-            <li>Update de SNMP-configuratie om een communitystring te gebruiken die niet 'public' is. Zoals VoorbeeldVanCommunityString.
-            
-            Update the SNMP configuration to use a different community string then public. Something
-            strong like ThisIsMyCommunityString</li>
-            <li>Update de SNMP-configuratie om een op de host gebaseerde ACL in combinatie met de 'public' commonity of string of eentje die 'veiliger' is.
+            <li>Gebruik een firewall om UDP/161 helemaal te blokkeren of alleen hosts die deze service nodig hebben toe te laten.</li>
+            <li>Update de SNMP-configuratie om een communitystring te gebruiken die niet 'public' is. Gebruik iets sterkers zoals VoorbeeldVanCommunityString.</li>
+            <li>Update de SNMP-configuratie om een op de host gebaseerde ACL in combinatie met de 'public' community of gebruik een string die 'veiliger' is.
             
             Update the SNMP configuration to use a host based ACL's in combination with either the 'public'
             community or a string thats more 'secure'</li>
@@ -1345,52 +1339,54 @@ return [
             <h3>Windows</h3>
             <ul>
             <li>Click on Windows Key > Administrative Tools > Services.</li>
-            <li>Right click on SNMP Service and click on Properties.</li>
-            <li>Click on the Security tab.</li>
-            <li>Type your randomized 8 - 10 character connection string. Be sure to make it Read Only, not Read Write.</li>
-            <li>Click on Add.</li>
-            <li>Click on OK.</li>
-            <li>Finally restart the SNMP service</li>
+            <li>KLik met uw rechtermuisknop op SNMP Service en selecteer Eigenschappen.
+            Right click on SNMP Service and click on Properties.</li>
+            <li>Klik op Beveiliging
+            Click on the Security tab.</li>
+            <li>Typ uw willekeurige 8-10 tekens connection string. ZOrg ervoor dat deze op 'Alleen lezen' staat, niet 'Lezen Schrijven'.
+            Type your randomized 8 - 10 character connection string. Be sure to make it Read Only, not Read Write.</li>
+            <li>Klik op toevoegen
+            Click on Add.</li>
+            <li>Klik op OK
+            Click on OK.</li>
+            <li>Start de SNMP service opnieuw op
+            Finally restart the SNMP service</li>
             </ul>
 
             <h3>Linux</h3>
-            <p>Edit the SNMP configuration file, which is useally located at: /etc/snmp/snmpd.conf<p>
+            <p>Bewerk het SNMP configuratiebestand. Deze staat meestal in /etc/snmp/snmpd.conf<p>
 
-            <p>Change/Modify line(s) as follows:</p>
-            <p>Find the following Line:</p>
+            <p>Wijzig de volgende regels:</p>
+            <p>Vind de volgende regel::</p>
             <pre>com2sec notConfigUser  default       public</pre>
-            Replace with (make sure you replace 192.168.0.0/24 with your network/subnet) the following lines:
+            Vervang deze met de volgende regels (vervang 192.168.0.0/24 met uw eigen netwerk/subnet):
             <pre>com2sec local     localhost           public
             com2sec mynetwork 192.168.0.0/24      public</pre>
-            <p>Scroll down a bit and change :</p>
-            <p>Find Lines:</p>
+            <p>Scroll naar beneden en vind de volgende regels:</p>
             <pre>group   notConfigGroup v1           notConfigUser
             group   notConfigGroup v2c           notConfigUser</pre>
-            <p>Replace with:</p>
+            <p>Vervang deze met:</p>
             <pre>group MyRWGroup v1         local
             group MyRWGroup v2c        local
             group MyRWGroup usm        local
             group MyROGroup v1         mynetwork
             group MyROGroup v2c        mynetwork
             group MyROGroup usm        mynetwork</pre>
-            <p>Again scroll down a bit and locate the following line:</p>
-            <p>Find line:</p>
+            <p>Scroll naar beneden en vind de volgende regel:</p>
             <pre>view    systemview     included      system</pre>
-            <p>Replace with:</p>
+            <p>Vervang deze met:</p>
             <pre>view all    included  .1                               80</pre>
-            <p>Again scroll down a bit and change the following line:</p>
-            <p>Find line:</p>
+            <p>Scroll naar beneden en vind de volgende regel:</p>
             <pre>access  notConfigGroup ''      any       noauth    exact  systemview none none</pre>
-            <p>Replace with:</p>
+            <p>Vervang deze met:</p>
             <pre>access MyROGroup ''      any       noauth    exact  all    none   none<br>access MyRWGroup ''      any       noauth    exact  all    all    none</pre>
-            <p>Scroll down a bit and change the following lines:</p>
-            <p>Find lines:</p>
-            <pre>syslocation Unknown (edit /etc/snmp/snmpd.conf)
-            syscontact Root <root@localhost> (configure /etc/snmp/snmp.local.conf)</root@localhost></pre>
-            <b>Replace with (make sure you supply appropriate values), for example:</b>
-            <pre>syslocation Linux (RH3_UP2), Home Linux Router.<br>syscontact YourNameHere &lt;you@example.com&gt;</pre>
+            <p>Scroll naar beneden en vind de volgende regels:</p>
+            <pre>syslocation Unknown (bewerk /etc/snmp/snmpd.conf)
+            syscontact Root <root@localhost> (configureer /etc/snmp/snmp.local.conf)</root@localhost></pre>
+            <b>Vervang deze met (denk eraan de juiste waarden op te geven) bijvoorbeeld: </b>
+            <pre>syslocation Linux (RH3_UP2), Home Linux Router.<br>syscontact HierUwNaam &lt;you@example.com&gt;</pre>
 
-            <p>restart your snmp server and test it</p>
+            <p>Start uw SNMP server opnieuw op en test uw configuratie</p>
 
             <h2>Meer informatie</h2>
 
@@ -1404,6 +1400,9 @@ return [
 
             <p>Het Simple Service Discovery Protocol (SSDP) is een op de Internet Protocol Suite gebaseerd netwerkprotocol 
             dat wordt gebruikt voor het adverteren en ontdekken van netwerkdiensten en presence-informatie. 
+            Het doet dit zonder hulp van op server gebaseerde configuratiemachanismes zoals het Dynamic Host Configuration Protocol (DHCP) 
+            of het Domain Name System (DNS) of speciale statische configuratie van een netwerkhost. 
+            SDDP ligt aan de basis van het ontdekkingsprotocol van Universal Plug and Play (UPnP) en is bedoeld voor gebruik in huiselijke omgeving of kleine kantoren.
             
             
             The Simple Service Discovery Protocol (SSDP) is a network protocol
