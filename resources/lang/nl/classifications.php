@@ -374,13 +374,7 @@ return [
 
             <h2>Wat is een 'FREAK Vulnerable Server'?</h2>
 
-            <p>Servers die RSA_EXPORT ciphersuites accepteren, zouden hun gebruikers bloot kunnen stellen aan de zogenaamde FREAK-aanval.
-            
-            Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
-            attack. Using Internet-wide scanning, we have been performing daily tests of all
-            HTTPS servers at public IP addresses to determine whether they allow this weakened
-            encryption. More than a third of all servers with browser-trusted certificates are
-            at risk.</p>
+            <p>Servers die RSA_EXPORT ciphersuites accepteren, zouden hun gebruikers bloot kunnen stellen aan de zogenaamde FREAK-aanval.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -1287,21 +1281,12 @@ return [
             <h2>Wat is een 'Open SNMP Server'?</h2>
 
             <p>Simple Network Management Protocol (SNMP) is een veelgebruikt protocol voor netwerkbeheer. Het wordt gebruikt om informatie op een IP-netwerk van netwerkapparaten 
-            zoals servers, printers, hubs, switches en routers te verzamelen en configureren. 
-            
-            Simple Network Management Protocol (SNMP) is a popular protocol for network
-            management. It is used for collecting information from, and configuring,
-            network devices, such as servers, printers, hubs, switches, and routers on an
-            Internet Protocol (IP) network.</p>
+            zoals servers, printers, hubs, switches en routers te verzamelen en deze apparaten te configureren. .</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Open SNMP Servers kunnen worden gebruikt om informatie van het systeem van het systeem te verzamelen of zelfs de instellinge te veranderen 
-            indien de server niet goed ingesteld is.
-            
-            Open SNMP Servers can be used to collect privileged information from the
-            system or even to write new 'settings' to the system if not correctly
-            configured.</p>
+            indien de server niet goed ingesteld is.</p>
 
             <p>Verder hoeft een open (UDP) dienst draaien niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
@@ -1328,10 +1313,7 @@ return [
             <ul>
             <li>Gebruik een firewall om UDP/161 helemaal te blokkeren of alleen hosts die deze service nodig hebben toe te laten.</li>
             <li>Update de SNMP-configuratie om een communitystring te gebruiken die niet 'public' is. Gebruik iets sterkers zoals VoorbeeldVanCommunityString.</li>
-            <li>Update de SNMP-configuratie om een op de host gebaseerde ACL in combinatie met de 'public' community of gebruik een string die 'veiliger' is.
-            
-            Update the SNMP configuration to use a host based ACL's in combination with either the 'public'
-            community or a string thats more 'secure'</li>
+            <li>Update de SNMP-configuratie om een op de host gebaseerde ACL in combinatie met de 'public' community een string die 'veiliger' is te gebruiken.</li>
             </ul>
 
             <h2>Tips om dit op te lossen</h2>
@@ -1339,18 +1321,12 @@ return [
             <h3>Windows</h3>
             <ul>
             <li>Click on Windows Key > Administrative Tools > Services.</li>
-            <li>KLik met uw rechtermuisknop op SNMP Service en selecteer Eigenschappen.
-            Right click on SNMP Service and click on Properties.</li>
-            <li>Klik op Beveiliging
-            Click on the Security tab.</li>
-            <li>Typ uw willekeurige 8-10 tekens connection string. ZOrg ervoor dat deze op 'Alleen lezen' staat, niet 'Lezen Schrijven'.
-            Type your randomized 8 - 10 character connection string. Be sure to make it Read Only, not Read Write.</li>
-            <li>Klik op toevoegen
-            Click on Add.</li>
-            <li>Klik op OK
-            Click on OK.</li>
-            <li>Start de SNMP service opnieuw op
-            Finally restart the SNMP service</li>
+            <li>KLik met uw rechtermuisknop op SNMP Service en selecteer Eigenschappen.</li>
+            <li>Klik op Beveiliging</li>
+            <li>Typ uw willekeurige 8-10 tekens connection string. Zorg ervoor dat deze op 'Alleen lezen' staat, niet 'Lezen Schrijven'.</li>
+            <li>Klik op toevoegen</li>
+            <li>Klik op OK.</li>
+            <li>Start de SNMP service opnieuw op</li>
             </ul>
 
             <h3>Linux</h3>
