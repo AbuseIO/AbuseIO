@@ -467,7 +467,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            <p>Een open (UDP) dienst draaien hoeft niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
@@ -510,7 +510,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            <p>Een open (UDP) dienst draaien hoeft niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
@@ -586,7 +586,7 @@ return [
               };
             </pre></p>
 
-            <h3>Windows Systems</h3>
+            <h3>Windowssystemen</h3>
 
             <p>Zie de volgende voorbeelden van Microsoft Learn (Engels):<br>
             <br>
@@ -619,7 +619,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            <p>Een open (UDP) dienst draaien hoeft niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
@@ -976,7 +976,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            <p>Een open (UDP) dienst draaien hoeft niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’-aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
@@ -1132,7 +1132,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            <p>Een open (UDP) dienst draaien hoeft niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
             <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
@@ -1288,7 +1288,7 @@ return [
             <p>Open SNMP Servers kunnen worden gebruikt om informatie van het systeem van het systeem te verzamelen of zelfs de instellinge te veranderen 
             indien de server niet goed ingesteld is.</p>
 
-            <p>Verder hoeft een open (UDP) dienst draaien niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            <p>Verder hoeft een open (UDP) dienst draaien niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
@@ -1376,23 +1376,13 @@ return [
 
             <p>Het Simple Service Discovery Protocol (SSDP) is een op de Internet Protocol Suite gebaseerd netwerkprotocol 
             dat wordt gebruikt voor het adverteren en ontdekken van netwerkdiensten en presence-informatie. 
-            Het doet dit zonder hulp van op server gebaseerde configuratiemachanismes zoals het Dynamic Host Configuration Protocol (DHCP) 
-            of het Domain Name System (DNS) of speciale statische configuratie van een netwerkhost. 
-            SDDP ligt aan de basis van het ontdekkingsprotocol van Universal Plug and Play (UPnP) en is bedoeld voor gebruik in huiselijke omgeving of kleine kantoren.
-            
-            
-            The Simple Service Discovery Protocol (SSDP) is a network protocol
-            based on the Internet Protocol Suite for advertisement and discovery of
-            network services and presence information. It accomplishes this without
-            assistance of server-based configuration mechanisms, such as the Dynamic
-            Host Configuration Protocol (DHCP) or the Domain Name System (DNS), and
-            without special static configuration of a network host. SSDP is the basis
-            of the discovery protocol of Universal Plug and Play (UPnP) and is
-            intended for use in residential or small office environments.</p>
+            Het doet dit zonder gebruik te maken van op server gebaseerde configuratiemachanismes zoals het Dynamic Host Configuration Protocol (DHCP), 
+            het Domain Name System (DNS) of speciale statische configuratie van een netwerkhost. 
+            SDDP ligt aan de basis van het ontdekkingsprotocol van Universal Plug and Play (UPnP) en is bedoeld voor gebruik in huiselijke kring of kleine kantoren.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een open (UDP) dienst draaien hoeft niet perse een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            <p>Een open (UDP) dienst draaien hoeft niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
@@ -1658,14 +1648,20 @@ return [
             protocol itself, this isn't something that can be patched out like ShellShock and
             HeartBleed.</p>
 
-            <p>The attack, specifically against the SSLv3 protocol, allows an attacker to obtain the
+            <p>Deze aanval tegen het SSLv3-protocol staat aanvallers toe de plaintext van bepaalde gedeeltes van een SSL-vebinding, 
+            zoals de cookie te bemachtigen. Dit is te vergelijken met BEAST, maar nog makkelijker uit te voeren. 
+            Iedere server die hier niet tegen gepatcht is, is kwetsbaar voor deze aanval.
+            
+            The attack, specifically against the SSLv3 protocol, allows an attacker to obtain the
             plaintext of certain parts of an SSL connection, such as the cookie. Similar to BEAST, but
             more practical to carry out. Every server that is not patched for this bug is
             vulnarable for such attacks.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>The easiest and most robust solution to POODLE is to disable SSLv3 support on your server.
+            <p>De makkelijkste manier om misbruik van POODLE uit te sluiten, is om SSLv3-support op uw server uit te schakelen.
+            
+            The easiest and most robust solution to POODLE is to disable SSLv3 support on your server.
             This does bring with it a couple of caveats though. For web traffic, there are some legacy
             systems out there that won't be able to connect with anything other than SSLv3. For example,
             systems using IE6 and Windows XP installations without SP3, will no longer be able to
@@ -1674,7 +1670,7 @@ return [
             of their web traffic will be affected as 98.88% of Windows XP users connect with TLSv1.0 or
             better.</p>
 
-            <h2>Tips how to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <h3>Nginx</h3>
 
@@ -1711,13 +1707,16 @@ return [
             sudo service apache2 restart</p>
 
 
-            <p>After patching all the service(s) and confirming the bug is nog longer present on
+            <p>Na het patchen van de dienst(en) en bevestigen dat de bug niet meer aanwezig is op uw syseem, raden wij aan een nieuw SSL certificaat (incl key, csr etc.) 
+            aan te vragen, gezien deze wellicht gecompromitteerd zou kunnen zijn. De meeste SSL-leveranciers, zijn bereid zo'n certificaat kostenloos te leveren.
+            
+            After patching all the service(s) and confirming the bug is nog longer present on
             your system its highly recommended to get a NEW SSL certificate (including key, csr, etc)
             as it might have been comprised. Most SSL suppliers will issue such a certificate for free</p>
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='https://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
+            <a target'_blank' href='https://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial (Engels)</a><br>
 
             ",
     ],
