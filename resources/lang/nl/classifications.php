@@ -1640,7 +1640,12 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>The whole issue ultimately hinges on the site supporting SSLv3 and the attacker being
+            <p>Het hele probleem komt doordat de site SSLv3 nog ondersteunt en dat aanvallers de client naar dit protocol kunnen downgraden. 
+            Deze 'protocol downgrade' aanvallen zijn niet nieuw, maar kunnen nog steeds problemen veroorzaken. Door een failure tijdens de negotiation na te doen, 
+            kan de aanvaller een browser en server forceren een ouder protocol te gebruiken, tot SSLv3 aan toe. Gezien de POODLE kwetsbaarheid in het protocol zelf zit, is het niet iets 
+            dat eruit gepatcht kan worden zoals ShellShock of HeartBleed.
+            
+            The whole issue ultimately hinges on the site supporting SSLv3 and the attacker being
             able to downgrade the client to use SSLv3. These protocol downgrade attacks are old news
             and are still surfacing to cause problems. By simulating a failure during the negotiation
             process, an attacker can force a browser and a server to renegotiate using an older
@@ -1649,7 +1654,7 @@ return [
             HeartBleed.</p>
 
             <p>Deze aanval tegen het SSLv3-protocol staat aanvallers toe de plaintext van bepaalde gedeeltes van een SSL-vebinding, 
-            zoals de cookie te bemachtigen. Dit is te vergelijken met BEAST, maar nog makkelijker uit te voeren. 
+            zoals de cookie te bemachtigen. Dit is te vergelijken met BEAST, maar praktischer uit te voeren. 
             Iedere server die hier niet tegen gepatcht is, is kwetsbaar voor deze aanval.
             
             The attack, specifically against the SSLv3 protocol, allows an attacker to obtain the
@@ -1659,7 +1664,9 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>De makkelijkste manier om misbruik van POODLE uit te sluiten, is om SSLv3-support op uw server uit te schakelen.
+            <p>De makkelijkste manier om misbruik van POODLE uit te sluiten, is om SSLv3-support op uw server uit te schakelen. 
+            Het kan zijn dat hierdoor een aantal ernstig-verouderde systemen (zoals  systemen die IE6 gebruiken of Windows XP zonder SP3) geen verbinding meer kunnen maken. 
+            Dit komt gelukkig vrijwel niet voor.
             
             The easiest and most robust solution to POODLE is to disable SSLv3 support on your server.
             This does bring with it a couple of caveats though. For web traffic, there are some legacy
@@ -1676,7 +1683,8 @@ return [
 
             <p>ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
 
-            Similar to the Apache config above, you will get TLSv1.0+ support and no SSL. You can check the config and restart.
+            Hiermee is er steun voor voor TLS1.0+ en geen SSL. Controleeer uw config en start Nginx opnieuw op.
+            LET OP: TLS1.0  en 1.1 worden vanaf maart 2021 niet meer ondersteund.
 
             sudo nginx -t
 
@@ -1684,8 +1692,16 @@ return [
 
             <h3>IIS</h3>
 
-            <p>This one requires some registry tweaks and a server reboot but still isn’t all that bad.
-            Microsoft have a support article with the required information, but all you need to do is
+            <p>Om SSLv3 op IIS uit te schakelen, moeten er wat aanpassingen in de registry gedaan worden en moet de serever opnieuw worden opgestart. 
+            Microsoft heeft een supportartikel met alle benodigde informatie, maar waar het op neer komt, is het aanpssen of creëren van een DWORD value in de registry.
+
+            HKey_Local_Machine\System\CurrentControlSet\Control\SecurityProviders \SCHANNEL\Protocols
+
+            Hierin staat er als het goed is al een SSL 2.0 key. Mocht er nog geen SSL 3.0 key staan, maak deze dan aan. Creeër een Server key en zorg dat de DWORD value op 0 staat. 
+            Sla de instellingne op en start de server opnieuw op zodat de wijzigingen kunnen worden doorgevoerd.
+            
+            This one requires some registry tweaks and a server reboot but still isn’t all that bad.
+            Microsoft has a support article with the required information, but all you need to do is
             modify/create a registry DWORD value.
 
             HKey_Local_Machine\System\CurrentControlSet\Control\SecurityProviders \SCHANNEL\Protocols
@@ -1700,7 +1716,9 @@ return [
 
             SSLProtocol All -SSLv2 -SSLv3
 
-            Dit geeft support voor TLSv1.0, TLSv1.1, TLSv1.2 en TLSv1.3, maar haalt expliciet de ondersteuning voor SSLv2 and SSLv3 weg. Check de config en start Apache opnieuw op.
+            Dit geeft support voor TLSv1.0, TLSv1.1, TLSv1.2 en TLSv1.3, maar haalt expliciet de ondersteuning voor SSLv2 and SSLv3 weg. Controleer uw config en start Apache opnieuw op.
+            LET OP: TLS1.0  en 1.1 worden vanaf maart 2021 niet meer ondersteund.
+
 
             apachectl configtest
 
