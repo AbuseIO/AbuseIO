@@ -17,7 +17,7 @@ return [
         'name'        => 'Generiek bericht',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
-'OPEN_SMARTINSTALL' => [
+'OPOPEN_SMARTINSTALL' => [
         'name'        => 'Open Cisco Smart Install',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
@@ -1124,18 +1124,16 @@ return [
         'description' => "
             <h2>Wat is een 'Open QOTD Server'?</h2>
 
-            <p>The Quote Of The Day (QOTD) service is a member of the Internet protocol
-            suite, defined in RFC 865. As indicated there, the QOTD concept predated
-            the specification, when QOTD was used by mainframe sysadmins to broadcast
-            a daily quote on request by a user. It was then formally codified both
-            for prior purposes as well as for testing and measurement purposes in RFC 865.</p>
+            <p>De Quote Of The Day (QOTD) dienst - gedefinieerd in RFC 865 - maakt deel uit van de Internetprotocolsuite. 
+            Het concept werd al voor de specificatie werd gemaakt, gebruikt door mainframe sysadmins om op verzoek van de gebruiker een dagelijks citaat uit te zenden. 
+            Het werd formeel voor o.a testen en meten gedefinieerd in RFC 865.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Een open (UDP) dienst draaien hoeft niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
-            <p>Een amplificatie aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
+            <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
             Dit is dat een aanvaller doet alsof diens IP-adres dat van het slachtoffer is (spoofing). 
             Als de aanvaller geen reflection toe zou passen, dan zou die zichzelf namelijk aanvallen.</p>
 
@@ -1145,7 +1143,7 @@ return [
             <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
-            <p>Reflection aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
+            <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
             In dat geval stuurt de aanvaller een klein packet van een gespooft IP-adres waarna de server(s) een groot antwoord terug stuurt. </p>
 
             <p>Bij amplificatie-aanvallen zoals dat kunnen kwaadwillenden dus met een klein beetje bandbreedte van 
@@ -1153,32 +1151,32 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>There is no reason to have this QOTD service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
-            from the internet by using RFC1918 spaces or a firewall.</p>
+            <p>Het is niet nodig om deze QOTD dienst via een public facing interaface beschikbaar te stellen. 
+            Zet de dienst uit of zorg ervoor dat deze niet vanaf het internet bereikbaar is doormiddel van RFC1918 spaces of een firewall.</p>
 
-            <h2>Tips to resolve this matter</h2>
+            <h2>Tips om dit op te lossen</h2>
 
             <h3>Unix/Linux</h3>
 
-            <p>To disable QOTD when started from inetd:</p>
+            <p>Indien QOTD via inetd opgestart is:</p>
 
             <ul>
-            <li>Edit the /etc/inetd.conf (or equivalent) file.</li>
-            <li>Locate the line that controls the qotd daemon.</li>
-            <li>Type a # at the beginning of the line to comment out the daemon.</li>
-            <li>Restart inetd.</li>
+            <li>Bewerk het /etc/inetd.conf (of soortgelijk) bestand.</li>
+            <li>Zoek de regel op die de qotd daemon instelt.
+            Locate the line that controls the qotd daemon.</li>
+            <li>Zet een # aan het begin van de regel om deze daemon 'uit te commenten'.</li>
+            <li>Start inetd opnieuw op.</li>
             </ul>
 
             <h3>Windows</h3>
 
-            <p>Set the following registry keys to 0:</p>
+            <p>Zet de volgende registry keys op 0:</p>
             <pre>
             HKLM\System\CurrentControlSet\Services\SimpTCP\Parameters\EnableTcpQotd
             HKLM\System\CurrentControlSet\Services\SimpTCP\Parameters\EnableUdpQotd
             </pre>
 
-            <p>Then launch cmd.exe and type the following commands to restart the service:</p>
+            <p>Start daarna cmd.exe op en type de volgende commandos om de dienst opnieuw op te starten:</p>
             <pre>
             net stop simptcp
             net start simptcp
