@@ -1125,8 +1125,8 @@ return [
             <h2>Wat is een 'Open QOTD Server'?</h2>
 
             <p>De Quote Of The Day (QOTD) dienst - gedefinieerd in RFC 865 - maakt deel uit van de Internetprotocolsuite. 
-            Het concept werd al voor de specificatie werd gemaakt, gebruikt door mainframe sysadmins om op verzoek van de gebruiker een dagelijks citaat uit te zenden. 
-            Het werd formeel voor o.a testen en meten gedefinieerd in RFC 865.</p>
+            Het concept werd - al voor de RFC werd gemaakt - gebruikt door mainframe sysadmins om op verzoek van de gebruiker een dagelijks citaat uit te zenden. 
+            Het werd formeel, voor o.a testen en meten, gedefinieerd in RFC 865.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -1283,7 +1283,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Open SNMP Servers kunnen worden gebruikt om informatie van het systeem van het systeem te verzamelen of zelfs de instellinge te veranderen 
+            <p>Open SNMP Servers kunnen worden gebruikt om informatie van het systeem van het systeem te verzamelen of zelfs de instellingen te veranderen 
             indien de server niet goed ingesteld is.</p>
 
             <p>Verder hoeft een open (UDP) dienst draaien niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
@@ -1682,7 +1682,7 @@ return [
             <p>ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
 
             Hiermee is er steun voor voor TLS1.0+ en geen SSL. Controleeer uw config en start Nginx opnieuw op.
-            LET OP: TLS1.0  en 1.1 worden vanaf maart 2021 niet meer ondersteund.
+            LET OP: TLS1.0 en 1.1 worden vanaf maart 2021 niet meer ondersteund.
 
             sudo nginx -t
 
@@ -1690,23 +1690,13 @@ return [
 
             <h3>IIS</h3>
 
-            <p>Om SSLv3 op IIS uit te schakelen, moeten er wat aanpassingen in de registry gedaan worden en moet de serever opnieuw worden opgestart. 
-            Microsoft heeft een supportartikel met alle benodigde informatie, maar waar het op neer komt, is het aanpssen of creëren van een DWORD value in de registry.
+            <p>Om SSLv3 op IIS uit te schakelen, moeten er wat aanpassingen in de registry gedaan worden en moet de server daarna opnieuw worden opgestart. 
+            Microsoft heeft een supportartikel met alle benodigde informatie, maar waar het op neer komt, is het aanpassen of creëren van een DWORD value in de registry.
 
             HKey_Local_Machine\System\CurrentControlSet\Control\SecurityProviders \SCHANNEL\Protocols
 
             Hierin staat er als het goed is al een SSL 2.0 key. Mocht er nog geen SSL 3.0 key staan, maak deze dan aan. Creeër een Server key en zorg dat de DWORD value op 0 staat. 
-            Sla de instellingne op en start de server opnieuw op zodat de wijzigingen kunnen worden doorgevoerd.
-            
-            This one requires some registry tweaks and a server reboot but still isn’t all that bad.
-            Microsoft has a support article with the required information, but all you need to do is
-            modify/create a registry DWORD value.
-
-            HKey_Local_Machine\System\CurrentControlSet\Control\SecurityProviders \SCHANNEL\Protocols
-
-            Inside protocols you will most likely have an SSL 2.0 key already, so create SSL 3.0
-            alongside it if needed. Under that create a Server key and inside there a DWORD value called
-            Enabled with value 0. Once that’s done reboot the server for the changes to take effect.</p>
+            Sla de instellingne op en start de server opnieuw op zodat de wijzigingen kunnen worden doorgevoerd.</p>
 
             <h3>Apache</h3>
 
@@ -1715,7 +1705,7 @@ return [
             SSLProtocol All -SSLv2 -SSLv3
 
             Dit geeft support voor TLSv1.0, TLSv1.1, TLSv1.2 en TLSv1.3, maar haalt expliciet de ondersteuning voor SSLv2 and SSLv3 weg. Controleer uw config en start Apache opnieuw op.
-            LET OP: TLS1.0  en 1.1 worden vanaf maart 2021 niet meer ondersteund.
+            LET OP: TLS1.0 en 1.1 worden vanaf maart 2021 niet meer ondersteund.
 
 
             apachectl configtest
