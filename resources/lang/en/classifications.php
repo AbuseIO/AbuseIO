@@ -119,7 +119,7 @@ return [
              also allow for information gathering on a target host as the SSL certificate used by RDP often contains
              the system\'s trivial hostname. </p>
 
-            <p>In addition, you sure will be targetted by brute force attacks and as most RDP servers only allow
+            <p>In addition, you sure will be targeted by brute force attacks and as most RDP servers only allow
              two sessions at a time, you will not be able to connect to the RDP server yourself. In essence you are locked out!</p>
 
             <h2>Recommended action</h2>
@@ -134,7 +134,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target\'_blank\' href=\'https://technet.microsoft.com/en-us/library/cc743162(v=ws.11).aspx\'>Remote Desktop Services and Windows Firewall</a><br>
+            <a target\'_blank\' href=\'https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc743162(v=ws.11)\'>Remote Desktop Services and Windows Firewall</a><br>
             ',
     ],
 
@@ -157,12 +157,12 @@ return [
             infection, such as visiting a (generally infected) web site, 'drive-by downloads'
             (when malware is downloaded and installed on the system without the user's knowledge),
             and even by simply clicking attachments or links in an e-mail or merely connecting
-            peripherals such as USB sticks or external hard drives to the system.</p>
+            infected peripherals such as USB sticks or external hard drives to the system.</p>
 
             <h2>Why would this be bad?</h2>
 
             <p>The IP listed in the report (the system behind it using NAT), has been seen
-            participating inside the botnet. With your system in communication with the
+            participating inside a botnet. With your system in communication with the
             botnet you can be 99,9% sure it has been compromised. It's hosting malware
             and is participating in a botnet.</p>
 
@@ -187,7 +187,7 @@ return [
             etc.</li>
             <li>Users of any system with a botnet infection should change all their passwords as quickly
             as possible. This should include any passwords saved locally and used to access other systems
-            and applications (including business applications, access to web site administrator accounts,
+            and applications (including business applications, access to website administrator accounts,
             personal use of e-mail and social media, etc.).</li>
             <li>If a computer is infected with malware, there is a significant chance that other malware is
             also present on the system. A clean reinstall will help prevent any other infections from
@@ -195,8 +195,7 @@ return [
             </ul></p>
 
             <p>If your system is a website / hosting system:<ul>
-            <li>If you suspect a user account has been compromised, change the password for the account
-                                                                                            immediately.</li>
+            <li>If you suspect a user account has been compromised, change the password for the account immediately.</li>
             <li>Scan all hosted websites and temporary directories for suspicious files and remove them.
             Also check your process list for suspicious processes and kill them.</li>
             <li>Check your mail queues for outgoing SPAM and remove them for the queue.</li>
@@ -210,7 +209,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://web.archive.org/web/20190526123321/https://www.ncsc.nl/binaries/content/documents/ncsc-en/current-topics/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet (2012)</a><br>
+            <a target'_blank' href='https://www.bsi.bund.de/EN/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Botnetze/botnet_node.html'>Botnets - consequences and protective actions</a><br>
+            <a target'_blank' href='https://www.bsi.bund.de/EN/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Infizierte-Systeme-bereinigen/infizierte-systeme-bereinigen_node.html'>Cleaning up infected systems</a><br>
 
             ",
     ],
@@ -227,7 +227,7 @@ return [
         'description' => "
             <h2>What is a 'Compromised website'?</h2>
 
-            A comprimised website is (hacked) content placed on your site without your permission
+            A compromised website is (hacked) content placed on your site without your consent
             as a result of vulnerabilities in your site’s security.
 
             Malicious hackers are a devious bunch – always looking for new flaws, exploits and
@@ -247,9 +247,9 @@ return [
             PC. Alternatively, well-crafted e-mails may have convinced a recipient to download a
             malware file that is hosted on the compromised site. In most cases the malware script
             is hidden in a subdirectory.</li>
-            <li>Injected content (SQL). When hackers gain access to your website, they might try to
+            <li>Injected content. When hackers gain access to your website, they might try to
             inject malicious content into existing pages on your site. This often takes the form of
-            malicious JavaScript injected directly into the site, or into iframes.</li>
+            malicious JavaScript injected directly into the site or into iframes. SQL injection is another significant threat</li>
             <li>URL redirect – thousands of compromised sites may perform simple redirects to a
             few master URLs. This is accomplished with a few lines of HTML code hidden in the
             compromised site, forcing the site to act as a 'front door' to the badware. The master
@@ -268,11 +268,11 @@ return [
             <h2>Recommended action</h2>
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
-            damage. First, take your entire website offline first. This is pretty impopulair, however if
-            you consider the fact your might be leaking sensitive information or infecting the
-            systems of your visitors you want to act as quickly as possible.</p>
+            damage. First, take your entire website offline first. This is pretty unpopular, however if
+            you consider the fact you might be leaking sensitive information or infecting the
+            systems of your visitors, you want to act as quickly as possible.</p>
 
-            <p>After you closed your website you will need to clean up the changed area's of your
+            <p>After you closed your website you will need to clean up the changed areas of your
             website.</p>
 
             <h2>Tips how to resolve this matter</h2>
@@ -281,22 +281,22 @@ return [
             a known clean version of it.</p>
 
             <ul>
-            <li>Look for files that have been changed recently or on times your developers are
-            closed and not placing updates on the website</li>
+            <li>Look for files that have been changed recently or at times your developers were
+            not present and not updating on the website</li>
             <li>Look in temporary folders for (executable) scripts</li>
             </ul>
 
-            <p>In addition future risk of compromise can be reduced by following these basic tips: </p>
+            <p>In addition, future risk of compromise can be reduced by following these basic tips: </p>
 
             <ul>
             <li>Keep software and all plug-ins updated. Regardless of whether you run popular content
             management software (e.g., WordPress, Joomla, Blogger) or custom software,
             make sure that software and all third party plug-ins or extensions are updated.
-            Remove plug-ins or other add-ons that are not currently in use</li>
+            Remove plug-ins and other add-ons that are not currently in use</li>
             <li>Use strong, varied passwords. WordPress login credentials, for example,
             should be different from FTP credentials. Never store passwords on your local
             machine.</li>
-            <li>Regularly scan your PC for malware and your website for unautherized changes</li>
+            <li>Regularly scan your PC for malware and your website for unauthorized changes</li>
             <li>Use appropriate file permissions on your web server.</li>
             <li>Research your options and make security a priority when choosing a web hosting
             provider. If you are not confident you can protect your site on your own, consider
@@ -307,7 +307,6 @@ return [
             <h2>Getting more information</h2>
 
             <a target'_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='https://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
             ",
     ],
@@ -323,25 +322,24 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>If you are hosting malware on your server, cease doing so and and remove the malware, this is illegal. This can lead to your site being
+            <p>If you are intentionally hosting malware on your server, cease doing so and and remove the malware, this is illegal. This can lead to your site being
             flagged as suspicious by search engines causing accessibility issues for visitors. If a hacker is hosting
             malware on your site, then it is likely compromised.</p>
 
             <h2>Recommended action</h2>
 
-            <p>Remove any maliciously hosted files, check for signs of compromise. Clean up any infected files.</p>
+            <p>Remove any maliciously hosted files and check for signs of compromise. Clean up any infected files.</p>
 
             <h2>Tips how to resolve this matter</h2>
             <ul>
-            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plug-ins and update where possible.</li>
+            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the add-ons/plug-ins and update where possible.</li>
             <li>If this is a standard website, check for signs of infection or unknown links on web-pages and take the necessary action.</li>
             <li>Once the issue(s) have been resolved, begin to request re-evaluations of your site from search engines.</li>
             </ul>
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://support.google.com/webmasters/topic/4598410?hl=en&ref_topic=4596795'>Google Webmaster tools for infected sites</a><br>
-            <a target'_blank' href='http://www.bing.com/webmaster/help/malware-re-evaluation-e6982183'>Bing Reevaluation site</a><br>
+            <a target'_blank' href='https://developers.google.com/search/blog/2007/08/malware-reviews-via-webmaster-tools'>Google Webmaster tools for infected sites</a><br>
 
             ",
     ],
@@ -359,8 +357,8 @@ return [
 
                 <p>The most common method for ISPs to receive users' complaints is by placing a report spam button
                 on their webmail pages or in their email client. Or, the user may send the email to the ISP
-                Postmaster. In rare cases, these feedback loops may not be based on user reports. For example,
-                they may be based on automated virus detection or similar mechanisms.</p>
+                Postmaster. In rare cases, these feedback loops may not be based on user reports, but for example,
+                on automated virus detection or similar mechanisms.</p>
 
                 <p>Some ISPs remove the email address of its customer before returning the message to the sender,
                 for privacy or legal reasons. This means it is important for senders to utilize some method
@@ -379,12 +377,12 @@ return [
 
                 <p> - The second use of FBLs is to analyze the complaints. There is a wealth of data in who
                 complains and what they complain about. Regardless of whether you believe the complaints are
-                unfounded, if they complained they were dissatisfied. Smart marketers aim to avoid dissatisfied
+                unfounded, if they complained, they were dissatisfied. Smart marketers aim to avoid dissatisfied
                 customers or prospective customers.</p>
 
                 <h2>What can I do?</h2>
 
-                <p>Campaigns, subject lines and \"from\" addresses can also be monitored to ensure that campaign
+                <p>Campaigns, subject lines and \"from\" addresses can be monitored to ensure that campaign
                 elements are working well. You can identify areas that need improvement. If a particular mailing,
                 list, or list segment produces too many complaints, it bears further investigation. Many
                 complaints are caused by a failure to meet expectations. As an example, there may be a high
@@ -399,7 +397,7 @@ return [
                 <h2>But I am not sending these e-mails</h2>
 
                 <p>If you receive a high number of FBL complaints on messages that you did not send yourself
-                you should consider the host being reported on (e.g. the IP) to be comprimised as these e-mails
+                you should consider the host being reported on (e.g. the IP) to be compromised as these e-mails
                 did originate from your system. In these cases your advised to shutdown the mail server and
                 clean the system and its mail queues before taking it online again.</p>
 
@@ -415,8 +413,8 @@ return [
                 message content, or as a means of expressing antipathy towards the message sender. Using
                 the same button for multiple conditions implies guesswork in interpreting the data.</p>
 
-                <p>The bottom line, however, is that the benefits of FBLs far outweigh the cons and the the
-                receiver of the Feedback loop must descide on its correct action.</p>
+                <p>The bottom line, however, is that the benefits of FBLs far outweigh the cons and that the
+                receiver of the Feedback loop must decide on the correct action to take.</p>
             ",
     ],
 
@@ -426,17 +424,16 @@ return [
 
             <h2>What is a 'FREAK Vulnerable Server'?</h2>
 
-            <p>Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
+            <p>Servers that accept RSA_EXPORT cipher suites put their users at risk of the FREAK
             attack. Using Internet-wide scanning, we have been performing daily tests of all
             HTTPS servers at public IP addresses to determine whether they allow this weakened
-            encryption. More than a third of all servers with browser-trusted certificates are
-            at risk.</p>
+            encryption.</p>
 
             <h2>Why would this be bad?</h2>
 
             <p>Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
             attack. The FREAK attack is possible when a vulnerable browser connects to a
-            susceptible web server—a server that accepts “export-grade” encryption.</p>
+            susceptible web server; a server that accepts “export-grade” encryption.</p>
 
             <p>It allows an attacker to intercept HTTPS connections between vulnerable clients and
             servers and force them to use weakened encryption, which the attacker can break to
@@ -469,8 +466,7 @@ return [
             <a target'_blank' href='https://freakattack.com/'>Tracking the FREAK Attack</a><br>
             <a target'_blank' href='https://www.ssllabs.com/ssltest/'>SSL Server Testtool.</a><br>
             <a target'_blank' href='https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations'>Mozilla’s security configuration guide</a><br>
-            <a target'_blank' href='https://mozilla.github.io/server-side-tls/ssl-config-generator/'>SSL configuration generator</a><br>
-
+            <a target'_blank' href='https://ssl-config.mozilla.org/'>SSL Configuration Generator</a><br>
             ",
     ],
 
@@ -524,7 +520,7 @@ return [
         'description' => "
             <h2>What is an 'Open Chargen server'?</h2>
 
-            <p>The Character Generator Protocol (CHARGEN) is a service thats intended
+            <p>The Character Generator Protocol (CHARGEN) is a service that is intended
             for testing, debugging, and measurement purposes. The protocol is rarely
             used, as its design flaws allow ready misuse. A host may connect to a
             server that supports the Character Generator Protocol on either
@@ -538,8 +534,8 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
 
@@ -571,7 +567,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://dnsamplificationattacks.blogspot.nl/2013/07/source-port-chargen-destination-port.html'>Amplification Attacks Observer</a><br>
+            <a target'_blank' href='https://dnsamplificationattacks.blogspot.nl/2013/07/source-port-chargen-destination-port.html'>Amplification Attacks Observer</a><br>
             ",
     ],
 
@@ -590,8 +586,8 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
 
@@ -617,14 +613,14 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>In most cases the computer has installed a DNS service as an dependancy
+            <p>In most cases the computer has installed a DNS service as an dependency
             as resolving is needed on that computer. However it is only required to do
             local resolving, thus the added 'external access' to this service is
             unneeded. In such cases we recommend either changing the configuration
             of your DNS service or to firewall port 53 for external hosts.</p>
 
             <p>If you are running a DNS resolver for multiple computers, you should consider
-            limiting access to the required group of computer or implement safegaurds
+            limiting access to the required group of computer or implement safeguards
             like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
 
             <h2>Tips to resolve this matter</h2>
@@ -676,23 +672,17 @@ return [
 
             <p>Please see the following Microsoft TechNet examples:<br>
             <br>
-            <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc771738.aspx'>Disabling recursion on Windows Server 2008 R2 systems</a><br>
-            <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc787602.aspx'>Disabling recursion on older Windows Server systems</a><br>
-            <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc773370(WS.10).aspx'>Acting as a non-recursive forwarder</a> (See the 'Notes' section under the 'Using the Windows interface' instructions)<br>
-            </p>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771738(v=ws.11)'>Disabling recursion on Windows Server 2008 R2 systems</a><br>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc787602(v=ws.10)'>Disabling recursion on older Windows Server systems</a><br>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc773370(v=ws.10)'>Acting as a non-recursive forwarder</a> (See the 'Notes' section under the 'Using the Windows interface' instructions)<br>
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://dns.measurement-factory.com/cgi-bin/openresolvercheck.pl/'>A website for (re)checking your DNS service</a><br>
-            <a target'_blank' href='http://openresolverproject.org/'>the Open Resolver Project</a><br>
-            <a target'_blank' href='https://www.youtube.com/watch?v=XhSTlqYIQnI' Team Cymru 'Who and Why Show' - DNS Amplification Attacks</a> (5 minute YouTube video)<br>
-            <a target'_blank' href='http://www.team-cymru.com/ReadingRoom/Whitepapers/2009/recursion.pdf' Team Cymru DNS Open Recursion Whitepaper</a><br>
-            <a target'_blank' href='http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf' http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf</a><br>
-            <a target'_blank' href='http://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
-            <a target'_blank' href='http://www.ripe.net/ripe/meetings/ripe-52/presentations/ripe52-plenary-dnsamp.pdf' http://www.ripe.net/ripe/meetings/ripe-52/presentations/ripe52-plenary-dnsamp.pdf</a><br>
-            <a target'_blank' href='http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf'>http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf</a><br>
-            <a target'_blank' href='http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification'>http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification</a><br>
-            <a target'_blank' href='http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf'>http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf</a><br>
+            <a target'_blank' href='https://www.cisa.gov/sites/default/files/publications/DNS-recursion033006.pdf'>The Continuing Denial of Service Threat Posed by DNS Recursion (v2.0)</a><br>
+            <a target'_blank' href='https://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
+            <a target'_blank' href='https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/dns-ddos-advisory-31mar06-en.pdf'>SSAC Advisory SAC008 DNS Distributed Denial of Service (DDoS) Attacks</a><br>
+            <a target'_blank' href='https://www.secureworks.com/research/dns-amplification'>DNS Amplification Variation Used in Recent DDoS Attacks</a><br>
+            <a target'_blank' href='https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/sac-065-en.pdf'>SSAC Advisory on DDoS Attacks Leveraging DNS Infrastructure</a><br>
 
             ",
     ],
@@ -712,8 +702,8 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
 
@@ -739,14 +729,14 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>In most cases the computer has installed a DNS service as an dependancy
+            <p>In most cases the computer has installed a DNS service as a dependency
             as resolving is needed on that computer. However it is only required to do
             local resolving, thus the added 'external access' to this service is
             unneeded. In such cases we recommend either changing the configuration
             of your DNS service or to firewall port 5353 for external hosts.</p>
 
             <p>If you are running a DNS resolver for multiple computers, then you should consider
-            limiting access to the required group of computer or implement safegaurds
+            limiting access to the required group of computer or implement safeguards
             like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
 
             <h2>Tips to resolve this matter</h2>
@@ -772,8 +762,8 @@ return [
             rather than to an operating system or login shell.</p>
 
             <p>IPMI is integrated on most server systems under many different names like
-            iRMC, ILOM, BMC, iDRAC, etc. Each vender has their own implementation of IPMI,
-            but the base is the same on each of them: It allows access to hardware outside
+            iRMC, ILOM, BMC, iDRAC, etc. Each vendor has their own implementation of IPMI,
+            but the base is the same for each of them: It allows access to hardware outside
             your operating system (and its locally installed firewall!).</p>
 
             <h2>Why would this be bad?</h2>
@@ -790,7 +780,7 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>Implement a seperate network for hosting these Out-Of-Band management entries and
+            <p>Implement a separate network for hosting these Out-Of-Band management entries and
             place them in a RFC1918(non public IP) space in combination with a VPN or add a
             hardware firewall in front of this network that filters access.</p>
 
@@ -801,7 +791,7 @@ return [
             <h2>Getting more information</h2>
 
             <a target'_blank' href='http://fish2.com/ipmi/'>Dan Farmer on IPMI security issues</a><br>
-            <a target'_blank' href='https://www.us-cert.gov/ncas/alerts/TA13-207A'>US-CERT alert TA13-207A</a><br>
+            <a target'_blank' href='https://www.cisa.gov/news-events/alerts/2013/07/26/risks-using-intelligent-platform-management-interface-ipmi'>US-CERT alert TA13-207A</a><br>
 
             ",
     ],
@@ -897,8 +887,6 @@ return [
 
             <h2>Getting more information</h2>
 
-            <atarget'_blank'  href='http://blog.codesherpas.com/on_the_path/2010/08/securing-memcache-in-2-minutes.html'>David Bock - Securing Memcache in 2 Minutes</a><br>
-
             ",
     ],
 
@@ -922,7 +910,7 @@ return [
             <p>This service has the potential to expose information about a client's network
             on which this service is accessible and the service itself can be used in UDP
             amplification attacks. In addition it opens up your system to zero-day attacks or
-            worm/virus infections that exploit a vulnarability in Windows to gain access
+            worm/virus infections that exploit a vulnerability in Windows to gain access
             to your system.</p>
 
             <h2>Recommended action</h2>
@@ -940,14 +928,14 @@ return [
             Server on your computer. Connections to the default instance using TCP/IP are not
             possible unless you reopen port 1433. If you need access from remote machines to
             your Microsoft SQL server, then only allow the required hosts and close down
-            world wide accesss to the SQL server.</p>
+            world wide access to the SQL server.</p>
 
             <p>Ports used by Microsoft are: TCP/1433, UDP/1434, TCP/1434, TCP/4022, TCP/135, TCP/2383.
-            In addition the SQL Server uses a randomly assign dynamic port for named instance! </p>
+            In addition the SQL Server uses a randomly assigned dynamic port for named instances! </p>
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://msdn.microsoft.com/en-us/library/ms175043.aspx'>Configure a Windows Firewall for Database Engine Access</a><br>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access?view=sql-server-ver16'>Configure a Windows Firewall for Database Engine Access</a><br>
 
             ",
     ],
@@ -1012,7 +1000,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://cispa.saarland/wp-content/uploads/2015/02/MongoDB_documentation.pdf'>MongoDB databases at risk</a><br>
+            <a target'_blank' href='https://www.mongodb.com/resources/products/capabilities/best-practices'>7 Best Practices For MongoDB Security (2020)</a><br>
 
             ",
     ],
@@ -1064,8 +1052,9 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
-            <a target'_blank' href='https://community.rapid7.com/community/metasploit/blog/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities'>NAT-PMP Implementation and Configuration Vulnerabilities</a>
+            <a target'_blank' href='https://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
+            <a target'_blank' href='https://www.rapid7.com/blog/post/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities/'>NAT-PMP Implementation and Configuration Vulnerabilities</a>
+
 
             ",
     ],
@@ -1082,8 +1071,8 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
 
@@ -1151,8 +1140,8 @@ return [
 
             <p>Authentication with the reference NTP software on UNIX can be done using
             symmetric key encryption, much like in Cisco IOS and Juniper JUNOS, using
-            MD5.  However, a public key-based approach called 'AutoKey' is also
-            available, which is generally be considered to be even more secure.  For
+            MD5. However, a public key-based approach called 'AutoKey' is also
+            available, which is generally be considered to be even more secure. For
             more information about these options, see the
             <a href='http://www.eecis.udel.edu/~mills/ntp/html/authopt.html' target='_blank'>NTP authentication
             options page</a> and the <a href='http://support.ntp.org/bin/view/Support/ConfiguringAutokey' target='_blank'>
@@ -1161,8 +1150,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://www.team-cymru.org/secure-ntp-template.html'>Examples in securing a NTP service</a>
-            <a target'_blank' href='http://www.internetsociety.org/sites/default/files/01_5.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
+            <a target'_blank' href='https://github.com/team-cymru/network-security-templates/tree/master/Secure-NTP-Templates'>Examples in securing a NTP service</a>
+            <a target'_blank' href='https://christian-rossow.de/publications/amplification-ndss2014.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
 
             ",
     ],
@@ -1209,7 +1198,7 @@ return [
 
             <p>These services have the potential to be used in amplification attacks by criminals
             that wish to perform denial of service attacks. In addition it opens up your system
-            to zero-day attacks or worm/virus infections that exploit a vulnarability in Windows to
+            to zero-day attacks or worm/virus infections that exploit a vulnerability in Windows to
             gain access to your system.</p>
 
             <h2>Recommended action</h2>
@@ -1244,7 +1233,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://technet.microsoft.com/en-us/library/cc940063.aspx'>Microsoft NetBIOS Over TCP/IP guide</a>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc940063(v=technet.10)'>Microsoft NetBIOS Over TCP/IP guide</a>
 
             ",
     ],
@@ -1262,8 +1251,8 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
 
@@ -1290,7 +1279,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>There is no reason to have this QOTD service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
+            interface. You should either stop the service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
             <h2>Tips to resolve this matter</h2>
@@ -1406,7 +1395,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://redis.io/topics/security'>Redis Security advisory</a><br>
+            <a target'_blank' href='https://redis.io/docs/latest/operate/oss_and_stack/management/security/'>Redis Security advisory</a><br>
 
             ",
     ],
@@ -1427,8 +1416,8 @@ return [
             system or even to write new 'settings' to the system if not correctly
             configured.</p>
 
-            <p>Running an open (UDP) service is not bad on its own and it
-            is mostly a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and
+            is often a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
 
@@ -1477,7 +1466,7 @@ return [
             </ul>
 
             <h3>Linux</h3>
-            <p>Edit the SNMP configuration file, which is useally located at: /etc/snmp/snmpd.conf<p>
+            <p>Edit the SNMP configuration file, which is usually located at: /etc/snmp/snmpd.conf<p>
 
             <p>Change/Modify line(s) as follows:</p>
             <p>Find the following Line:</p>
@@ -1536,8 +1525,8 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called a 'Amplification Attack'.</p>
 
@@ -1620,7 +1609,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
-            damage. First, take your entire website offline. This is pretty impopulair, however if
+            damage. First, take your entire website offline. This is pretty unpopular, however if
             you consider the fact your might be leaking sensitive information or infecting the
             systems of your visitors, you want to act as quickly as possible.</p>
 
@@ -1649,7 +1638,7 @@ return [
             <li>Use strong, varied passwords. WordPress login credentials, for example,
             should be different from FTP credentials. Never store passwords on your local
             machine.</li>
-            <li>Regularly scan your PC for malware and your website for unautherized changes</li>
+            <li>Regularly scan your PC for malware and your website for unauthorized changes</li>
             <li>Use appropriate file permissions on your web server.</li>
             <li>Research your options and make security a priority when choosing a web hosting
             provider. If you are not confident you can protect your site on your own, consider
@@ -1659,8 +1648,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
+            <a target'_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
+            <a target'_blank' href='https://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
             ",
     ],
@@ -1678,7 +1667,7 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Depending on the problem, your server can potentially be used by malicous
+            <p>Depending on the problem, your server can potentially be used by malicious
             users on the internet to send spam or do harm to others while using your
             server as a proxy.</p>
 
@@ -1694,9 +1683,9 @@ return [
             <p>In the case of a compromise your server might have been hacked or infected
             by a trojan.</p>
 
-            <p>If you have been accidently listed and have resolved the issue, you
+            <p>If you have been accidentally listed and have resolved the issue, you
             can request a delisting using the URL included in the ticket report. Do
-            not attempt to request a delisting at a RBL without knowning for sure you
+            not attempt to request a delisting at a RBL without knowing for sure you
             have resolved the issue. If you request a delisting without solving the
             problem you might end up permanently listed on that RBL!</p>
 
@@ -1740,7 +1729,7 @@ return [
             </ul>
 
             <p>If you are not sending bulk email, then check your website and DNS
-            for signs of comprimise. </p>
+            for signs of compromise. </p>
 
             <h2>Tips to resolve this matter</h2>
 
@@ -1771,7 +1760,7 @@ return [
 
             <h2>Why would sending email to these this be bad?</h2>
 
-            <p>SpamTraps are generally e-mail addresses that are made to recieve spam.
+            <p>SpamTraps are generally e-mail addresses that are made to receive spam.
             SpamTraps are often hidden from view on websites, so that they are only harvested from automated scans.
             Since no legit e-mail is ever sent to this address, any e-mail's that are sent to the Spam-Traps are
             immediately considered unsolicited.</p>
@@ -1779,10 +1768,10 @@ return [
             <h2>Recommended action</h2>
 
             <p>Clean up your mailing lists. Configure your 'Hard & Soft' Bounce values to
-            correctly remove recipient's when needed.</p>
+            correctly remove recipients when needed.</p>
 
             <p>If you are not sending bulk e-mail, then check your website and DNS
-            for signs of comprimise. </p>
+            for signs of compromise. </p>
 
             <h2>Tips how to resolve this matter</h2>
 
@@ -1805,8 +1794,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://blog.returnpath.com/blog/jamie-lawler/trap-tips-avoiding-and-removing-spam-traps'>Tips to avoid SpamTraps</a><br>
-            <a target'_blank' href='http://www.activecampaign.com/help/bounces-soft-bounce-vs-hard-bounce/'>Hard/Soft Bounce configuration</a><br>
+            <a target'_blank' href='https://www.techtarget.com/searchsecurity/definition/spam-trap'>What is a spam trap and how do you avoid them?</a><br>
 
             ",
     ],
@@ -1833,7 +1821,7 @@ return [
             <p>The attack, specifically against the SSLv3 protocol, allows an attacker to obtain the
             plaintext of certain parts of an SSL connection, such as the cookie. Similar to BEAST, but
             more practical to carry out. Every server that is not patched for this bug is
-            vulnarable for such attacks.</p>
+            vulnerable for such attacks.</p>
 
             <h2>Recommended action</h2>
 
@@ -1889,8 +1877,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
-            <a target'_blank' href='https://www.poodletest.com/'>SSLv3 / POODLE Test</a><br>
+            <a target'_blank' href='https://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
 
             ",
     ],
@@ -1904,26 +1891,25 @@ return [
 
             <h2>Why is my website in Spam E-mails?</h2>
 
-            <p>This is generally the case when your site (or DNS) has been comprimised in some way.
+            <p>This is generally the case when your site (or DNS) has been compromised in some way.
             Spammers or hackers often add a redirect from your site to their Spam site.
             Spammers would prefer to use your website for their links, as most likely their site is already known as bad. </p>
 
             <h2>Recommended action</h2>
 
-            <p>Check your website and DNS for signs of comprimise. </p>
+            <p>Check your website and DNS for signs of compromise. </p>
 
             <h2>Tips on how to resolve this</h2>
 
             <ul>
-            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plug-ins and update where possible.</li>
-            <li>If this is a standard website, check for signs of infection or unknown links on webpages and take the nessesary action.</li>
-            <li>If infection is found and resolved, begin to delist your URL on the relevant delist's.</li>
+            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the add-ons/plug-ins and update where possible.</li>
+            <li>If this is a standard website, check for signs of infection or unknown links on webpages and take the necessary action.</li>
+            <li>If infection is found and resolved, begin to delist your URL on the relevant lists.</li>
             </ul>
 
             <h2>Getting more information</h2>
 
             <a target'_blank' href='https://wordpress.org/plugins/sucuri-scanner/'>WordPress Security scanner (Sucuri)</a><br>
-            <a target'_blank' href='http://spamvertised.abusebutler.com/'>List of Spamvertised websites</a><br>
 
             ",
     ],
@@ -1960,7 +1946,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a href='http://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution</a><br>
+            <a href='https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-cluster.html#preventing-unauthorized-access'>Secure the Elastic Stack</a><br>
             ",
     ],
 
@@ -2092,7 +2078,7 @@ return [
             <h2>What is a \'Open AFP Server\'?</h2>
 
             <p>Apple Filing Protocol (formerly AppleTalk Filing Protocol) is a transport protocol
-            that Apple\'s macOS uses to share resources.  For example, if a macOS system wants
+            that Apple\'s macOS uses to share resources. For example, if a macOS system wants
             to access a shared directory on another system, it can use AFP. AFPv3 uses TCP
             port 548. The protocol can also support other options including changing user passwords.</p>
 
@@ -2102,7 +2088,7 @@ return [
              on the internet. AFP can allow for information gathering on a target host as information about the host is contained in
              the protocol messages.</p>
 
-            <p>In addition, you risk being targetted by brute force attacks.</p>
+            <p>In addition, you risk being targeted by brute force attacks.</p>
 
             <h2>Recommended action</h2>
 
@@ -2320,7 +2306,7 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>Make sure that the AMQP server is up-to-date and that the AMQP server is not reachable over the internet if it doesnt need to.</p>
+            <p>Make sure that the AMQP server is up-to-date and that the AMQP server is not reachable over the internet if it doesn\'t need to be.</p>
             ',
     ],
 
