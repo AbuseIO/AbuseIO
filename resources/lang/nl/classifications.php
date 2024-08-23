@@ -182,7 +182,8 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='https://web.archive.org/web/20190526123321/https://www.ncsc.nl/binaries/content/documents/ncsc-en/current-topics/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet (2012)</a><br>
+            <a target'_blank' href='https://www.bsi.bund.de/EN/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Botnetze/botnet_node.html'>Botnets - consequences and protective actions</a><br>
+            <a target'_blank' href='https://www.bsi.bund.de/EN/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Infizierte-Systeme-bereinigen/infizierte-systeme-bereinigen_node.html'>Cleaning up infected systems</a><br>
 
             ",
     ],
@@ -672,8 +673,8 @@ return [
             rather than to an operating system or login shell.</p>
 
             <p>IPMI is integrated on most server systems, however under different names like
-            iRMC, ILOM, BMC, iDRAC, etc. Each vender has their own implementation of IPMI,
-            but the base is the same on each of them: It allows access to hardware outside
+            iRMC, ILOM, BMC, iDRAC, etc. Each vendor has their own implementation of IPMI,
+            but the base is the same for each of them: It allows access to hardware outside
             your operating system (and its locally installed firewall!).</p>
 
             <h2>Waarom is dit een probleem?</h2>
@@ -690,7 +691,7 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Implement a seperate network for hosting these Out-Of-Band management entries and
+            <p>Implement a separate network for hosting these Out-Of-Band management entries and
             place them in a RFC1918(non public IP) space in combination with a VPN or add a
             hardware firewall in front of this network that filters access.</p>
 
@@ -799,10 +800,7 @@ return [
         'description' => "
             <h2>Wat is een 'Open Microsoft SQL Server'?</h2>
 
-            <p>Microsoft SQL Server is een door Microsoft ontwikkeld relationele database managementsysteem.
-            
-            
-            Microsoft SQL Server is a relational database management system developed
+            <p>Microsoft SQL Server is a relational database management system developed
             by Microsoft. As a database, it is a software product whose primary function
             is to store and retrieve data as requested by other software applications,
             be it those on the same computer or those running on another computer across
@@ -817,7 +815,7 @@ return [
             <p>This service has the potential to expose information about a clients network
             on which this service is accessible and the service itself can be used in UDP
             amplification attacks. In addition it opens up your system to 0-day attacks or
-            worm/virus infections that exploit a vulnarability in Windows to gain access
+            worm/virus infections that exploit a vulnerability in Windows to gain access
             to your system.</p>
 
             <h2>Aanbevolen actie</h2>
@@ -835,10 +833,10 @@ return [
             Server on your computer. Connections to the default instance using TCP/IP are not
             possible unless you reopen port 1433. If you need access from remote machines to
             your Microsoft SQL server, then only allow the required hosts and close down
-            world wide accesss to the SQL server.</p>
+            world wide access to the SQL server.</p>
 
             <p>Ports used by Microsoft are: TCP/1433, UDP/1434, TCP/1434, TCP/4022, TCP/135, TCP/2383.
-            In addition the SQL Server uses a randomly assign dynamic port for named instance! </p>
+            In addition the SQL Server uses a randomly assigned dynamic port for named instances! </p>
 
             <h2>Meer informatie</h2>
 
@@ -907,7 +905,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='https://web.archive.org/web/20160304041647/https://cispa.saarland/wp-content/uploads/2015/02/MongoDB_documentation.pdf'>MongoDB databases at risk (2015)</a><br>
+            <a target'_blank' href='https://www.mongodb.com/resources/products/capabilities/best-practices'>7 Best Practices For MongoDB Security (2020)</a><br>
 
             ",
     ],
@@ -1055,7 +1053,7 @@ return [
 
             <p>NetBIOS is een transportprotocol dat door Windowssystemen gebruikt wordt om resources te delen. 
             Als een Windows-PC bijvoorbeeld verbinding wilt maken met een file-server, gebruikt deze waarschijnlijk NetBIOS hiervoor.
-            Er zijn  wel ontwikkelingen geweest waardoor verbindingen ook zonder NetBIOS opgezet kunnen worden. 
+            Er zijn wel ontwikkelingen geweest waardoor verbindingen ook zonder NetBIOS opgezet kunnen worden. 
             SMB; de methode waarmee men toegang kan krijgen tot file- en printershares kan ook los van NetBIOS op TCP poorten 139 en 445 draaien. 
             Dit vergroot echter wel de 'attack surface' van een netwerk.</p>
 
@@ -1162,8 +1160,7 @@ return [
 
             <ul>
             <li>Bewerk het /etc/inetd.conf (of soortgelijk) bestand.</li>
-            <li>Zoek de regel op die de qotd daemon instelt.
-            Locate the line that controls the qotd daemon.</li>
+            <li>Zoek de regel op waarmee de qotd daemon kan worden geconfigureerd.</li>
             <li>Zet een # aan het begin van de regel om deze daemon 'uit te commenten'.</li>
             <li>Start inetd opnieuw op.</li>
             </ul>
@@ -1318,7 +1315,7 @@ return [
 
             <h3>Windows</h3>
             <ul>
-            <li>Click on Windows Key > Administrative Tools > Services.</li>
+            <li>Klik op Windows Key > Administrative Tools > Services.</li>
             <li>KLik met uw rechtermuisknop op SNMP Service en selecteer Eigenschappen.</li>
             <li>Klik op Beveiliging</li>
             <li>Typ uw willekeurige 8-10 tekens connection string. Zorg ervoor dat deze op 'Alleen lezen' staat, niet 'Lezen Schrijven'.</li>
@@ -1330,8 +1327,8 @@ return [
             <h3>Linux</h3>
             <p>Bewerk het SNMP configuratiebestand. Deze staat meestal in /etc/snmp/snmpd.conf<p>
 
-            <p>Wijzig de volgende regels:</p>
-            <p>Vind de volgende regel::</p>
+            <p>Voer de volgende wijzigingen door:</p>
+            <p>Vind de volgende regel:</p>
             <pre>com2sec notConfigUser  default       public</pre>
             Vervang deze met de volgende regels (vervang 192.168.0.0/24 met uw eigen netwerk/subnet):
             <pre>com2sec local     localhost           public
@@ -1413,8 +1410,8 @@ return [
         'description' => "
             <h2>Wat is een 'Open TFTP Server'?</h2>
 
-            <p>Trivial File Transfer Protocol, afgekort TFTP, is een eenvoudig
-            bestandsoverdrachtprotocol dat veel gebruikt wordt om computers vanaf
+            <p>Trivial File Transfer Protocol - afgekort TFTP - is een eenvoudig
+            bestandsoverdrachtsprotocol dat veel gebruikt wordt om computers vanaf
             een netwerk op te starten. Als de TCP/IP stack reeds draait kan TFTP ook
             gebruikt worden om andere apparatuur zoals routers, switches, ADSL- en
             kabelmodems van firmware en configuraties te voorzien. TFTP werd voor
@@ -1622,8 +1619,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='https://web.archive.org/web/20150307052636/http://blog.returnpath.com/blog/jamie-lawler/trap-tips-avoiding-and-removing-spam-traps'>Tips to avoid SpamTraps</a><br>
-            <a target'_blank' href='https://web.archive.org/web/20160608210727/http://www.activecampaign.com/help/bounces-soft-bounce-vs-hard-bounce/'>Hard/Soft Bounce configuration</a><br>
+            <a target'_blank' href='https://www.techtarget.com/searchsecurity/definition/spam-trap'>What is a spam trap and how do you avoid them?</a><br>
 
             ",
     ],
@@ -1641,39 +1637,17 @@ return [
             <p>Het hele probleem komt doordat de site SSLv3 nog ondersteunt en dat aanvallers de client naar dit protocol kunnen downgraden. 
             Deze 'protocol downgrade' aanvallen zijn niet nieuw, maar kunnen nog steeds problemen veroorzaken. Door een failure tijdens de negotiation na te doen, 
             kan de aanvaller een browser en server forceren een ouder protocol te gebruiken, tot SSLv3 aan toe. Gezien de POODLE kwetsbaarheid in het protocol zelf zit, is het niet iets 
-            dat eruit gepatcht kan worden zoals ShellShock of HeartBleed.
-            
-            The whole issue ultimately hinges on the site supporting SSLv3 and the attacker being
-            able to downgrade the client to use SSLv3. These protocol downgrade attacks are old news
-            and are still surfacing to cause problems. By simulating a failure during the negotiation
-            process, an attacker can force a browser and a server to renegotiate using an older
-            protocol, right back down to SSLv3. As the POODLE vulnerability is actually in the
-            protocol itself, this isn't something that can be patched out like ShellShock and
-            HeartBleed.</p>
+            dat eruit gepatcht kan worden zoals ShellShock of HeartBleed.</p>
 
             <p>Deze aanval tegen het SSLv3-protocol staat aanvallers toe de plaintext van bepaalde gedeeltes van een SSL-vebinding, 
-            zoals de cookie te bemachtigen. Dit is te vergelijken met BEAST, maar praktischer uit te voeren. 
-            Iedere server die hier niet tegen gepatcht is, is kwetsbaar voor deze aanval.
-            
-            The attack, specifically against the SSLv3 protocol, allows an attacker to obtain the
-            plaintext of certain parts of an SSL connection, such as the cookie. Similar to BEAST, but
-            more practical to carry out. Every server that is not patched for this bug is
-            vulnarable for such attacks.</p>
+            zoals de cookie, te bemachtigen. Dit is te vergelijken met BEAST, maar praktischer uit te voeren. 
+            Iedere server die hier niet tegen gepatcht is, is kwetsbaar voor deze aanval.</p>
 
             <h2>Aanbevolen actie</h2>
 
             <p>De makkelijkste manier om misbruik van POODLE uit te sluiten, is om SSLv3-support op uw server uit te schakelen. 
-            Het kan zijn dat hierdoor een aantal ernstig-verouderde systemen (zoals  systemen die IE6 gebruiken of Windows XP zonder SP3) geen verbinding meer kunnen maken. 
-            Dit komt gelukkig vrijwel niet voor.
-            
-            The easiest and most robust solution to POODLE is to disable SSLv3 support on your server.
-            This does bring with it a couple of caveats though. For web traffic, there are some legacy
-            systems out there that won't be able to connect with anything other than SSLv3. For example,
-            systems using IE6 and Windows XP installations without SP3, will no longer be able to
-            communicate with any site that ditches SSLv3. According to figures released by CloudFlare,
-            who have completely disabled SSLv3 across their entire customer estate, only a tiny fraction
-            of their web traffic will be affected as 98.88% of Windows XP users connect with TLSv1.0 or
-            better.</p>
+            Het kan zijn dat hierdoor een aantal ernstig-verouderde systemen (zoals systemen die IE6 gebruiken of Windows XP zonder SP3) geen verbinding meer kunnen maken. 
+            Dit komt gelukkig vrijwel niet meer voor.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
@@ -1700,7 +1674,7 @@ return [
 
             <h3>Apache</h3>
 
-            <p>SSLv3 kan op uw Apache server uitgeschakelt worden met behulp van de volgende config:
+            <p>SSLv3 kan op uw Apache server uitgeschakeld worden met behulp van de volgende config:
 
             SSLProtocol All -SSLv2 -SSLv3
 
@@ -1714,11 +1688,7 @@ return [
 
 
             <p>Na het patchen van de dienst(en) en bevestigen dat de bug niet meer aanwezig is op uw syseem, raden wij aan een nieuw SSL certificaat (incl key, csr etc.) 
-            aan te vragen, gezien deze wellicht gecompromitteerd zou kunnen zijn. De meeste SSL-leveranciers, zijn bereid zo'n certificaat kostenloos te leveren.
-            
-            After patching all the service(s) and confirming the bug is nog longer present on
-            your system its highly recommended to get a NEW SSL certificate (including key, csr, etc)
-            as it might have been comprised. Most SSL suppliers will issue such a certificate for free</p>
+            aan te vragen, gezien deze wellicht gecompromitteerd zou kunnen zijn. Veel SSL-leveranciers zijn bereid zo'n vervangend certificaat kostenloos te leveren.</p>
 
             <h2>Meer informatie</h2>
 
@@ -1798,7 +1768,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a href='https://web.archive.org/web/20160304034616/http://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution (Engels)</a><br>
+            <a href='https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-cluster.html#preventing-unauthorized-access'>Secure the Elastic Stack (Engels)</a><br>
             ",
     ],
 
