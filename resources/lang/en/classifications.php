@@ -41,9 +41,8 @@ return [
 
     'OPEN_SMB_SERVER' => [
         'name'        => 'Open SAMBA Server (SMB/CIFS)',
-        'description' => '
-            This classification has no information text yet.
-            ',
+        'description' => 'This report identifies hosts that have an SMB instance running on port 445/TCP that are accessible on the Internet.
+        This service should not be exposed to the Internet.',
     ],
 
     'OPEN_CWMP_SERVER' => [
@@ -156,7 +155,7 @@ return [
             in software installed on the user's system. There are many avenues for this
             infection, such as visiting a (generally infected) web site, 'drive-by downloads'
             (when malware is downloaded and installed on the system without the user's knowledge),
-            and even by simply clicking attachments or links in an e-mail or merely connecting
+            and even by simply clicking attachments or links in an email or merely connecting
             infected peripherals such as USB sticks or external hard drives to the system.</p>
 
             <h2>Why would this be bad?</h2>
@@ -188,7 +187,7 @@ return [
             <li>Users of any system with a botnet infection should change all their passwords as quickly
             as possible. This should include any passwords saved locally and used to access other systems
             and applications (including business applications, access to website administrator accounts,
-            personal use of e-mail and social media, etc.).</li>
+            personal use of email and social media, etc.).</li>
             <li>If a computer is infected with malware, there is a significant chance that other malware is
             also present on the system. A clean reinstall will help prevent any other infections from
             having free access to the network.</li>
@@ -244,7 +243,7 @@ return [
 
             <ul>
             <li>Hosting malware – this may take the form of complex scripts that infect any visiting
-            PC. Alternatively, well-crafted e-mails may have convinced a recipient to download a
+            PC. Alternatively, well-crafted emails may have convinced a recipient to download a
             malware file that is hosted on the compromised site. In most cases the malware script
             is hidden in a subdirectory.</li>
             <li>Injected content. When hackers gain access to your website, they might try to
@@ -268,7 +267,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
-            damage. First, take your entire website offline first. This is pretty unpopular, however if
+            damage. First, take your entire website offline. This might be unpopular, however if
             you consider the fact you might be leaking sensitive information or infecting the
             systems of your visitors, you want to act as quickly as possible.</p>
 
@@ -316,14 +315,14 @@ return [
         'description' => "
             <h2>What is a 'Distribution Website'?</h2>
 
-            <p>A distribution website, is a site that is hosting malware for download.
+            <p>A distribution website is a site that is hosting malware for download.
             These are often download links embedded into malicious docs' or executables' code for example.
             Compromised websites are widely used for this purpose. </p>
 
             <h2>Why would this be bad?</h2>
 
             <p>If you are intentionally hosting malware on your server, cease doing so and and remove the malware, this is illegal. This can lead to your site being
-            flagged as suspicious by search engines causing accessibility issues for visitors. If a hacker is hosting
+            flagged as suspicious by search engines, causing accessibility issues for visitors. If a hacker is hosting
             malware on your site, then it is likely compromised.</p>
 
             <h2>Recommended action</h2>
@@ -355,7 +354,7 @@ return [
                 ISPs expect that these transactions are processed as unsubscribe requests and that the sender
                 researches the nature of the request to reduce the incidence of such complaints.</p>
 
-                <p>The most common method for ISPs to receive users' complaints is by placing a report spam button
+                <p>The most common method for ISPs to receive users' complaints is by placing a 'report spam' button
                 on their webmail pages or in their email client. Or, the user may send the email to the ISP
                 Postmaster. In rare cases, these feedback loops may not be based on user reports, but for example,
                 on automated virus detection or similar mechanisms.</p>
@@ -394,10 +393,10 @@ return [
                 thresholds, which vary by ISP. Monitoring the FBL data will improve your email practices,
                 while ensuring complaint rates do not exceed Internet Service Provider (ISP) thresholds.</p>
 
-                <h2>But I am not sending these e-mails</h2>
+                <h2>But I am not sending these emails</h2>
 
                 <p>If you receive a high number of FBL complaints on messages that you did not send yourself
-                you should consider the host being reported on (e.g. the IP) to be compromised as these e-mails
+                you should consider the host being reported on (e.g. the IP) to be compromised as these emails
                 did originate from your system. In these cases your advised to shutdown the mail server and
                 clean the system and its mail queues before taking it online again.</p>
 
@@ -500,7 +499,7 @@ return [
 
             <h2>Tips to resolve this matter</h2>
 
-            <p>If this is not the case, make sure your server and your hosted websites
+            <p>If this is not the case, make sure your server and your hosted website(s)
             have not been compromised.</p>
 
             <h2>Getting more information</h2>
@@ -537,7 +536,7 @@ return [
             <p>Running an open (UDP) service is not bad on its own and is often
             a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -551,9 +550,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -589,7 +587,7 @@ return [
             <p>Running an open (UDP) service is not bad on its own and is often
             a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -603,9 +601,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -705,7 +702,7 @@ return [
             <p>Running an open (UDP) service is not bad on its own and is often
             a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -719,9 +716,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -781,7 +777,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>Implement a separate network for hosting these Out-Of-Band management entries and
-            place them in a RFC1918(non public IP) space in combination with a VPN or add a
+            place them in a RFC1918 (non public IP) space in combination with a VPN or add a
             hardware firewall in front of this network that filters access.</p>
 
             <p>Some IPMI implementations do offer some kind of what they call firewalling, however
@@ -1074,7 +1070,7 @@ return [
             <p>Running an open (UDP) service is not bad on its own and is often
             a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -1088,9 +1084,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet 'from' a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet 'from' a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -1254,7 +1249,7 @@ return [
             <p>Running an open (UDP) service is not bad on its own and is often
             a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -1268,9 +1263,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -1419,7 +1413,7 @@ return [
             <p>Running an open (UDP) service is not bad on its own and
             is often a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -1433,9 +1427,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server() send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -1528,7 +1521,7 @@ return [
             <p>Running an open (UDP) service is not bad on its own and is often
             a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -1542,9 +1535,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -1593,12 +1585,12 @@ return [
             usernames, passwords, and credit card details (and sometimes, indirectly, money)
             by masquerading as a trustworthy entity in an electronic communication.
             Communications purporting to be from popular social web sites, auction sites, banks,
-            online payment processors or IT administrators are commonly used to lure unsuspecting
+            online payment processors or IT administrators are commonly used to lure the unsuspecting
             public. Phishing emails may contain links to websites that are infected with malware. </p>
 
             <h2>Why would this be bad?</h2>
 
-            <p>A Phishing website is usually the result of compromised website or user
+            <p>A Phishing website is usually the result of a compromised website or user
             credentials of said website.</p>
 
             <p>When your website is compromised, it not only contains changes done by hackers
@@ -1610,10 +1602,10 @@ return [
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
             damage. First, take your entire website offline. This is pretty unpopular, however if
-            you consider the fact your might be leaking sensitive information or infecting the
+            you consider the fact you might be leaking sensitive information or infecting the
             systems of your visitors, you want to act as quickly as possible.</p>
 
-            <p>After you closed your website you will need to clean up the changed area's of your
+            <p>After taking your website offline you will need to clean up the changed areas of your
             website.</p>
 
 
@@ -1760,9 +1752,9 @@ return [
 
             <h2>Why would sending email to these this be bad?</h2>
 
-            <p>SpamTraps are generally e-mail addresses that are made to receive spam.
+            <p>SpamTraps are generally email addresses that are made to receive spam.
             SpamTraps are often hidden from view on websites, so that they are only harvested from automated scans.
-            Since no legit e-mail is ever sent to this address, any e-mail's that are sent to the Spam-Traps are
+            Since no legit email is ever sent to this address, any emails that are sent to the Spam-Traps are
             immediately considered unsolicited.</p>
 
             <h2>Recommended action</h2>
@@ -1770,7 +1762,7 @@ return [
             <p>Clean up your mailing lists. Configure your 'Hard & Soft' Bounce values to
             correctly remove recipients when needed.</p>
 
-            <p>If you are not sending bulk e-mail, then check your website and DNS
+            <p>If you are not sending bulk email, then check your website and DNS
             for signs of compromise. </p>
 
             <h2>Tips how to resolve this matter</h2>
@@ -1786,7 +1778,7 @@ return [
             </ul>
 
             <p>The best way to solve the problem is to stop your mailserver(MTA)
-            and investigate the mail queues for SPAM messages. When you found an
+            and investigate the mail queues for SPAM messages. When you find an
             example you can open it to identify its source. By stopping the MTA
             you will prevent SPAM from being sent out. After solving the problem
             you must clean your mail queue from all these SPAM messages before
@@ -1829,10 +1821,7 @@ return [
             This does bring with it a couple of caveats though. For web traffic, there are some legacy
             systems out there that won't be able to connect with anything other than SSLv3. For example,
             systems using IE6 and Windows XP installations without SP3, will no longer be able to
-            communicate with any site that ditches SSLv3. According to figures released by CloudFlare,
-            who have completely disabled SSLv3 across their entire customer estate, only a tiny fraction
-            of their web traffic will be affected as 98.88% of Windows XP users connect with TLSv1.0 or
-            better.</p>
+            communicate with any site that ditches SSLv3.</p>
 
             <h2>Tips how to resolve this matter</h2>
 
@@ -1841,6 +1830,7 @@ return [
             <p>ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
 
             Similar to the Apache config above, you will get TLSv1.0+ support and no SSL. You can check the config and restart.
+            IMPORTANT: TLS1.0 and 1.1 have been deprecated since March 2021!
 
             sudo nginx -t
 
@@ -1856,7 +1846,7 @@ return [
 
             Inside protocols you will most likely have an SSL 2.0 key already, so create SSL 3.0
             alongside it if needed. Under that create a Server key and inside there a DWORD value called
-            Enabled with value 0. Once that’s done reboot the server for the changes to take effect.</p>
+            Enabled with value 0. Once that’s done, reboot the server for the changes to take effect.</p>
 
             <h3>Apache</h3>
 
@@ -1865,6 +1855,7 @@ return [
             SSLProtocol All -SSLv2 -SSLv3
 
             This will give you support for TLSv1.0, TLSv1.1, TLSv1.2 and TLSv1.3, but explicitly removes support for SSLv2 and SSLv3. Check the config and then restart Apache.
+            IMPORTANT: TLS1.0 and 1.1 have been deprecated since March 2021!
 
             apachectl configtest
 
@@ -1887,9 +1878,9 @@ return [
         'description' => "
             <h2>What is a 'Spamvertised web site'?</h2>
 
-            <p>A site that is being 'spamvertised' means that the site is being included as a link in spam e-mails.</p>
+            <p>A site that is being 'spamvertised' means that the site is being included as a link in spam emails.</p>
 
-            <h2>Why is my website in Spam E-mails?</h2>
+            <h2>Why is my website in Spam emails?</h2>
 
             <p>This is generally the case when your site (or DNS) has been compromised in some way.
             Spammers or hackers often add a redirect from your site to their Spam site.
@@ -2000,9 +1991,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet 'from' a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet 'from' a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -2157,7 +2147,7 @@ return [
             and enabling DDoS.</p>
             
             <p>Honeypots that emulate open and amplifiable services can be used to detect this kind of abuse. However, as the source 
-            of these attacks is spoofed to the victim address, it is possible only to report on victims being abused, not on the true 
+            of these attacks is spoofed to the victim address, it is only possible to report on victims being abused, not on the true 
             source of the DDoS.</p>
             
             <p>You can read more about our DDoS attack observations <a href='https://sissden.eu/blog/amp2018'>in the SISSDEN blog 
