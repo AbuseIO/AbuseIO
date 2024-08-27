@@ -18,10 +18,122 @@ return [
         'description' => 'Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.',
     ],
 
+    'OPEN_SMARTINSTALL' => [
+        'name'        => 'Open Cisco Smart Install',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+
+    'OPEN_HADOOP_SERVER' => [
+        'name'        => 'Open Hadoop Server',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+
+    'OPEN_VNC_SERVER' => [
+        'name'        => 'Open VNC Server',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+
+    'OPEN_SMB_SERVER' => [
+        'name'        => 'Open SAMBA Server (SMB/CIFS)',
+        'description' => 'This report identifies hosts that have an SMB instance running on port 445/TCP that are accessible on the Internet.
+        This service should not be exposed to the Internet.',
+    ],
+
+    'OPEN_CWMP_SERVER' => [
+        'name'        => 'Open CPE WAN Management Protocol (CWMP)',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+
+    'OPEN_TELNET_SERVER' => [
+        'name'        => 'Open Telnet Server',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+
+    'OPEN_LDAP_SERVER' => [
+        'name'        => 'Open LDAP Server',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+
     'BOTNET_CONTROLLER' => [
         'name'        => 'Botnet controller',
         'description' => '
             Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+
+    'ISAKMP_VULNERABLE_DEVICE' => [
+        'name'        => 'ISAKMP Vulnerable device',
+        'description' => '
+            <h2>What is a \'ISAKMP Vulnerable device\'?</h2>
+
+            <p>  </p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>A vulnerability in Internet Key Exchange version 1 (IKEv1) packet processing code in Cisco IOS,
+             Cisco IOS XE, and Cisco IOS XR Software could allow an unauthenticated, remote attacker to retrieve
+              memory contents, which could lead to the disclosure of confidential information.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>There are no workarounds for this vulnerability except for disabling IPSEC</p>
+
+            <h2>Tips how to resolve this matter</h2>
+            <ul>
+            <li>Upgrade to a non-affected version of Cisco IOS</li>
+            <li>implement an intrusion prevention system (IPS) or intrusion detection system (IDS) to help detect
+            and prevent attacks that attempt to exploit this vulnerability.</li>
+            </ul>
+
+            <h2>Getting more information</h2>
+
+            <a target\'_blank\' href=\'https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-20160916-ikev1\'>IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products</a><br>
+
+            ',
+    ],
+
+    'OPEN_RDP_SERVER' => [
+        'name'        => 'Open RDP Server',
+        'description' => '
+            <h2>What is a \'Open RDP Server\'?</h2>
+
+            <p>  </p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>This report identifies hosts that have Remote Desktop (RDP) Service running and accessible to the world
+             on the internet. Misconfigured RDP can allow miscreants access to the desktop of a vulnerable host and can
+             also allow for information gathering on a target host as the SSL certificate used by RDP often contains
+             the system\'s trivial hostname. </p>
+
+            <p>In addition, you sure will be targeted by brute force attacks and as most RDP servers only allow
+             two sessions at a time, you will not be able to connect to the RDP server yourself. In essence you are locked out!</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Disable public access to RDP, or make sure to detect and mitigate brute force attacks</p>
+
+            <h2>Tips how to resolve this matter</h2>
+            <ul>
+            <li>Firewall port TCP/3389 and use a VPN to gain access to your internal network/li>
+            <li>Firewall port TCP/3389 and only allow access from trusted IP addresses</li>
+            </ul>
+
+            <h2>Getting more information</h2>
+
+            <a target\'_blank\' href=\'https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc743162(v=ws.11)\'>Remote Desktop Services and Windows Firewall</a><br>
             ',
     ],
 
@@ -43,13 +155,13 @@ return [
             in software installed on the user's system. There are many avenues for this
             infection, such as visiting a (generally infected) web site, 'drive-by downloads'
             (when malware is downloaded and installed on the system without the user's knowledge),
-            and even by simply clicking attachments or links in an e-mail or merely connecting
-            peripherals such as USB sticks or external hard drives to the system.</p>
+            and even by simply clicking attachments or links in an email or merely connecting
+            infected peripherals such as USB sticks or external hard drives to the system.</p>
 
             <h2>Why would this be bad?</h2>
 
-            <p>The IP listed in the report (the system behind it using NAT), has seen
-            participating inside the botnet. With your system in communication with the
+            <p>The IP listed in the report (the system behind it using NAT), has been seen
+            participating inside a botnet. With your system in communication with the
             botnet you can be 99,9% sure it has been compromised. It's hosting malware
             and is participating in a botnet.</p>
 
@@ -66,7 +178,7 @@ return [
             <h2>Tips to resolve this matter</h2>
 
             <p>If your system is a workstation or server:<ul>
-            <li>Install including all updates an antivirus software and run a full scan of your computer.
+            <li>Install an antivirus software and all its updates and run a full scan of your computer.
             It's recommended to try several scanners as not every scanner is able to detect a specific
             kind of malware.</li>
             <li>Scan the network for infected files. Don't forget to scan the backups, as well as any
@@ -74,16 +186,15 @@ return [
             etc.</li>
             <li>Users of any system with a botnet infection should change all their passwords as quickly
             as possible. This should include any passwords saved locally and used to access other systems
-            and applications (including business applications, access to web site administrator accounts,
-            personal use of e-mail and social media, etc.).</li>
+            and applications (including business applications, access to website administrator accounts,
+            personal use of email and social media, etc.).</li>
             <li>If a computer is infected with malware, there is a significant chance that other malware is
             also present on the system. A clean reinstall will help prevent any other infections from
             having free access to the network.</li>
             </ul></p>
 
             <p>If your system is a website / hosting system:<ul>
-            <li>If you suspect a user account has been compromised, change the password for the account
-                                                                                            immediately.</li>
+            <li>If you suspect a user account has been compromised, change the password for the account immediately.</li>
             <li>Scan all hosted websites and temporary directories for suspicious files and remove them.
             Also check your process list for suspicious processes and kill them.</li>
             <li>Check your mail queues for outgoing SPAM and remove them for the queue.</li>
@@ -97,7 +208,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://www.ncsc.nl/binaries/content/documents/ncsc-en/current-topics/factsheets/release-me-from-a-botnet/1/Release%2Bme%2Bfrom%2Ba%2Bbotnet.pdf'>NCSC factsheet - Release me from a botnet</a><br>
+            <a target'_blank' href='https://www.bsi.bund.de/EN/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Botnetze/botnet_node.html'>Botnets - consequences and protective actions</a><br>
+            <a target'_blank' href='https://www.bsi.bund.de/EN/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Infizierte-Systeme-bereinigen/infizierte-systeme-bereinigen_node.html'>Cleaning up infected systems</a><br>
 
             ",
     ],
@@ -114,19 +226,17 @@ return [
         'description' => "
             <h2>What is a 'Compromised website'?</h2>
 
-            A comprimised website is (hacked) content placed on your site without your permission
+            A compromised website is (hacked) content placed on your site without your consent
             as a result of vulnerabilities in your site’s security.
 
             Malicious hackers are a devious bunch – always looking for new flaws, exploits and
             social engineering tricks that will allow them to compromise a website. With
-            this in mind, it comes as no surprise Malicious hackers are a devious bunch – always
-            looking for new flaws, exploits and social engineering tricks that will allow them
-            to compromise a website. With this in mind, it comes as no surprise that most website
+            this in mind, it comes as no surprise that most website
             owners simply don’t know how their sites were compromised.
 
             <h2>Why would this be bad?</h2>
 
-            <p>When your website is compromised, not only your website contains changes done by hackers
+            <p>When your website is compromised, your website does not only contain (malicious) changes done by hackers
             but it also contains one or more security problems that allowed a hacker to gain access
             to your website in the first place. The compromised website provides a useful platform for
             a range of illicit activities. These activities include: </p>
@@ -136,9 +246,9 @@ return [
             PC. Alternatively, well-crafted emails may have convinced a recipient to download a
             malware file that is hosted on the compromised site. In most cases the malware script
             is hidden in a subdirectory.</li>
-            <li>Injected content (SQL). When hackers gain access to your website, they might try to
+            <li>Injected content. When hackers gain access to your website, they might try to
             inject malicious content into existing pages on your site. This often takes the form of
-            malicious JavaScript injected directly into the site, or into iframes.</li>
+            malicious JavaScript injected directly into the site or into iframes. SQL injection is another significant threat</li>
             <li>URL redirect – thousands of compromised sites may perform simple redirects to a
             few master URLs. This is accomplished with a few lines of HTML code hidden in the
             compromised site, forcing the site to act as a 'front door' to the badware. The master
@@ -157,11 +267,11 @@ return [
             <h2>Recommended action</h2>
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
-            damage. First take your entire website offline first. This is pretty impopulair, however if
-            you consider the fact your might be leaking privacy information or infecting the
-            systems of your visitors you want to act as quickly as possible.</p>
+            damage. First, take your entire website offline. This might be unpopular, however if
+            you consider the fact you might be leaking sensitive information or infecting the
+            systems of your visitors, you want to act as quickly as possible.</p>
 
-            <p>After you closed your website you will need to clean up the changed area's of your
+            <p>After you closed your website you will need to clean up the changed areas of your
             website.</p>
 
             <h2>Tips how to resolve this matter</h2>
@@ -170,33 +280,32 @@ return [
             a known clean version of it.</p>
 
             <ul>
-            <li>Look for files that have been changed recently or on times your developers are
-            closed and not placing updates on the website</li>
-            <li>Look in temporally folders for (executable) scripts</li>
+            <li>Look for files that have been changed recently or at times your developers were
+            not present and not updating on the website</li>
+            <li>Look in temporary folders for (executable) scripts</li>
             </ul>
 
-            <p>In addition future risk of compromise can be reduced by following these basic tips: </p>
+            <p>In addition, future risk of compromise can be reduced by following these basic tips: </p>
 
             <ul>
-            <li>Keep software and all plug-ins updated. Whether you run popular content
+            <li>Keep software and all plug-ins updated. Regardless of whether you run popular content
             management software (e.g., WordPress, Joomla, Blogger) or custom software,
             make sure that software and all third party plug-ins or extensions are updated.
-            Remove plug-i ns or other add-ons that aren’t in use</li>
+            Remove plug-ins and other add-ons that are not currently in use</li>
             <li>Use strong, varied passwords. WordPress login credentials, for example,
             should be different from FTP credentials. Never store passwords on your local
             machine.</li>
-            <li>Regularly scan your PC for malware and your website for unautherized changes</li>
+            <li>Regularly scan your PC for malware and your website for unauthorized changes</li>
             <li>Use appropriate file permissions on your web server.</li>
             <li>Research your options and make security a priority when choosing a web hosting
-            provider. If you aren’t confident you can protect your site on your own, consider
+            provider. If you are not confident you can protect your site on your own, consider
             using an add-on security service from your hosting provider or a third party website
             security service.</li>
             </ul>
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
+            <a target'_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
 
             ",
     ],
@@ -206,31 +315,30 @@ return [
         'description' => "
             <h2>What is a 'Distribution Website'?</h2>
 
-            <p>A distribution website, is a site that is hosting malware for download.
-            These are often download links embedded into malicious doc's or executable's code for example.
-            Compromised websites are also highly used here. </p>
+            <p>A distribution website is a site that is hosting malware for download.
+            These are often download links embedded into malicious docs' or executables' code for example.
+            Compromised websites are widely used for this purpose. </p>
 
             <h2>Why would this be bad?</h2>
 
-            <p>If you are hosting malware on your server. Stop and remove this, this is illegal. This can lead to your site being
-            flagged as suspicious by search engines causing accessibility issues for visitors. If a hacker is hosting
-            malware on your site, then it's also likely compromised.</p>
+            <p>If you are intentionally hosting malware on your server, cease doing so and and remove the malware, this is illegal. This can lead to your site being
+            flagged as suspicious by search engines, causing accessibility issues for visitors. If a hacker is hosting
+            malware on your site, then it is likely compromised.</p>
 
             <h2>Recommended action</h2>
 
-            <p>Remove any maliciously hosted files, check for signs of compromise. Clean up any infected files.</p>
+            <p>Remove any maliciously hosted files and check for signs of compromise. Clean up any infected files.</p>
 
             <h2>Tips how to resolve this matter</h2>
             <ul>
-            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plugins and update where possible.</li>
+            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the add-ons/plug-ins and update where possible.</li>
             <li>If this is a standard website, check for signs of infection or unknown links on web-pages and take the necessary action.</li>
             <li>Once the issue(s) have been resolved, begin to request re-evaluations of your site from search engines.</li>
             </ul>
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://support.google.com/webmasters/topic/4598410?hl=en&ref_topic=4596795'>Google Webmaster tools for infected sites</a><br>
-            <a target'_blank' href='http://www.bing.com/webmaster/help/malware-re-evaluation-e6982183'>Bing Reevaluation site</a><br>
+            <a target'_blank' href='https://developers.google.com/search/blog/2007/08/malware-reviews-via-webmaster-tools'>Google Webmaster tools for infected sites</a><br>
 
             ",
     ],
@@ -244,18 +352,18 @@ return [
                 an inter-organizational form of feedback, by which an Internet service provider (ISP) forwards
                 email complaints originating from their users, back to the senders' organizations. Generally,
                 ISPs expect that these transactions are processed as unsubscribe requests and that the sender
-                researches the nature of the request, to reduce the incidence of such complaints.</p>
+                researches the nature of the request to reduce the incidence of such complaints.</p>
 
-                <p>The most common method for ISPs to receive users' complaints is by placing a report spam button
+                <p>The most common method for ISPs to receive users' complaints is by placing a 'report spam' button
                 on their webmail pages or in their email client. Or, the user may send the email to the ISP
-                Postmaster. In rare cases, these feedback loops may not be based on user reports. For example,
-                they may be based on automated virus detection, or similar mechanisms.</p>
+                Postmaster. In rare cases, these feedback loops may not be based on user reports, but for example,
+                on automated virus detection or similar mechanisms.</p>
 
                 <p>Some ISPs remove the email address of its customer before returning the message to the sender,
                 for privacy or legal reasons. This means it is important for senders to utilize some method
                 other than an email address within a message, in order to identify the recipient.</p>
 
-                <h2>Why Is A Feedback Loop Important?</h2>
+                <h2>Why is a Feedback Loop important?</h2>
 
                 <p>As of May 2008, there were 12 FBLs in place at several of the world's largest ISPs including
                 AOL, Hotmail and Yahoo. Feedback loops have become an email industry standard. The data
@@ -268,12 +376,12 @@ return [
 
                 <p> - The second use of FBLs is to analyze the complaints. There is a wealth of data in who
                 complains and what they complain about. Regardless of whether you believe the complaints are
-                unfounded, if they complained they were dissatisfied. Smart marketers aim to avoid dissatisfied
+                unfounded, if they complained, they were dissatisfied. Smart marketers aim to avoid dissatisfied
                 customers or prospective customers.</p>
 
-                <h2>What can i do?</h2>
+                <h2>What can I do?</h2>
 
-                <p>Campaigns, subject lines and \"from\" addresses can also be monitored to ensure that campaign
+                <p>Campaigns, subject lines and \"from\" addresses can be monitored to ensure that campaign
                 elements are working well. You can identify areas that need improvement. If a particular mailing,
                 list, or list segment produces too many complaints, it bears further investigation. Many
                 complaints are caused by a failure to meet expectations. As an example, there may be a high
@@ -285,14 +393,14 @@ return [
                 thresholds, which vary by ISP. Monitoring the FBL data will improve your email practices,
                 while ensuring complaint rates do not exceed Internet Service Provider (ISP) thresholds.</p>
 
-                <h2>But i am not sending these e-mails</h2>
+                <h2>But I am not sending these emails</h2>
 
                 <p>If you receive a high number of FBL complaints on messages that you did not send yourself
-                you should consider the host being reported on (e.g. the IP) to be comprimised as these e-mails
-                did originate from your system. In these cases your advised to shutdown the mailserver and
-                clean the system and its mailqueues before taking it online again.</p>
+                you should consider the host being reported on (e.g. the IP) to be compromised as these emails
+                did originate from your system. In these cases your advised to shutdown the mail server and
+                clean the system and its mail queues before taking it online again.</p>
 
-                <h2>What Is Questionable About Feedback Loops?</h2>
+                <h2>What is questionable about Feedback Loops?</h2>
 
                 <p>The spam button brings some very imprecise functionality. Automatic unsubscribe is an
                 example. For years, end users have been told not to trust email unsubscribe links, to avoid
@@ -304,8 +412,8 @@ return [
                 message content, or as a means of expressing antipathy towards the message sender. Using
                 the same button for multiple conditions implies guesswork in interpreting the data.</p>
 
-                <p>The bottom line, however, is that the benefits of FBLs far outweigh the cons and the the
-                receiver of the Feedback loop must descide on its correct action.</p>
+                <p>The bottom line, however, is that the benefits of FBLs far outweigh the cons and that the
+                receiver of the Feedback loop must decide on the correct action to take.</p>
             ",
     ],
 
@@ -315,17 +423,16 @@ return [
 
             <h2>What is a 'FREAK Vulnerable Server'?</h2>
 
-            <p>Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
+            <p>Servers that accept RSA_EXPORT cipher suites put their users at risk of the FREAK
             attack. Using Internet-wide scanning, we have been performing daily tests of all
             HTTPS servers at public IP addresses to determine whether they allow this weakened
-            encryption. More than a third of all servers with browser-trusted certificates are
-            at risk.</p>
+            encryption.</p>
 
             <h2>Why would this be bad?</h2>
 
             <p>Servers that accept RSA_EXPORT cipher suites put their users at risk from the FREAK
             attack. The FREAK attack is possible when a vulnerable browser connects to a
-            susceptible web server—a server that accepts “export-grade” encryption.</p>
+            susceptible web server; a server that accepts “export-grade” encryption.</p>
 
             <p>It allows an attacker to intercept HTTPS connections between vulnerable clients and
             servers and force them to use weakened encryption, which the attacker can break to
@@ -358,8 +465,7 @@ return [
             <a target'_blank' href='https://freakattack.com/'>Tracking the FREAK Attack</a><br>
             <a target'_blank' href='https://www.ssllabs.com/ssltest/'>SSL Server Testtool.</a><br>
             <a target'_blank' href='https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations'>Mozilla’s security configuration guide</a><br>
-            <a target'_blank' href='https://mozilla.github.io/server-side-tls/ssl-config-generator/'>SSL configuration generator</a><br>
-
+            <a target'_blank' href='https://ssl-config.mozilla.org/'>SSL Configuration Generator</a><br>
             ",
     ],
 
@@ -370,15 +476,15 @@ return [
             <h2>What is 'Harvesting'?</h2>
 
             <p>Email harvesting is the process of obtaining lists of email addresses or accounts
-            using various methods for use in bulk email or other purposes usually
-            like seding SPAM or gaining access to the system.</p>
+            using various methods for use in bulk email or other purposes.
+            For example: sending SPAM or gaining access to systems.</p>
 
             <p>A common method is the use of special software known as 'harvesting bots'
             or 'harvesters', which spider web pages, mailing list archives, internet
             forums and other online sources to obtain email addresses from public data.</p>
 
-            <p>Another method addresses, known as a directory harvest attack, works
-            by connecting to mailservers and guessing an email address using common
+            <p>Another method - known as a directory harvest attack - works
+            by connecting to mail servers and guessing an email address using common
             usernames in email addresses at that domain.</p>
 
             <h2>Why would this be bad?</h2>
@@ -389,11 +495,11 @@ return [
             <h2>Recommended action</h2>
 
             <p>If you are in fact knowingly harvesting email addresses, we recommend
-            you to stop doing that to prevent further escalation.</p>
+            you to stop doing this to prevent further escalation.</p>
 
             <h2>Tips to resolve this matter</h2>
 
-            <p>If this is not the case, make sure your server and your hosted websites
+            <p>If this is not the case, make sure your server and your hosted website(s)
             have not been compromised.</p>
 
             <h2>Getting more information</h2>
@@ -413,7 +519,7 @@ return [
         'description' => "
             <h2>What is an 'Open Chargen server'?</h2>
 
-            <p>The Character Generator Protocol (CHARGEN) is a service thats intended
+            <p>The Character Generator Protocol (CHARGEN) is a service that is intended
             for testing, debugging, and measurement purposes. The protocol is rarely
             used, as its design flaws allow ready misuse. A host may connect to a
             server that supports the Character Generator Protocol on either
@@ -427,10 +533,10 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -444,9 +550,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -455,12 +560,12 @@ return [
             <h2>Recommended action</h2>
 
             <p>There is no reason to have this CHARGEN service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
+            interface. You should either stop the service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://dnsamplificationattacks.blogspot.nl/2013/07/source-port-chargen-destination-port.html'>Amplification Attacks Observer</a><br>
+            <a target'_blank' href='https://dnsamplificationattacks.blogspot.nl/2013/07/source-port-chargen-destination-port.html'>Amplification Attacks Observer</a><br>
             ",
     ],
 
@@ -479,10 +584,10 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -496,9 +601,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -506,21 +610,21 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>In most cases the computer has installed a DNS service as an dependancy
-            as resolving is needed on that computer. However its only required to do
+            <p>In most cases the computer has installed a DNS service as an dependency
+            as resolving is needed on that computer. However it is only required to do
             local resolving, thus the added 'external access' to this service is
             unneeded. In such cases we recommend either changing the configuration
             of your DNS service or to firewall port 53 for external hosts.</p>
 
-            <p>If you are running a DNS resolver for multiple computers, then consider
-            to limit access to the required group of computer or implement safegaurds
+            <p>If you are running a DNS resolver for multiple computers, you should consider
+            limiting access to the required group of computer or implement safeguards
             like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
 
             <h2>Tips to resolve this matter</h2>
 
             <h3>Firewalling the DNS Service</h3>
 
-            <p>To block incoming remote requests you will need to filter UDP/port 53. You
+            <p>To block incoming remote requests you will need to filter UDP/port 53. Your
             service might also be listening on TCP/port 53, however only UDP services
             are used in DNS Amplification Attacks. </p>
 
@@ -565,23 +669,17 @@ return [
 
             <p>Please see the following Microsoft TechNet examples:<br>
             <br>
-            <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc771738.aspx'>Disabling recursion on Windows Server 2008 R2 systems</a><br>
-            <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc787602.aspx'>Disabling recursion on older Windows Server systems</a><br>
-            <a target'_blank' href='http://technet.microsoft.com/en-us/library/cc773370(WS.10).aspx'>Acting as a non-recursive forwarder</a> (See the 'Notes' section under the 'Using the Windows interface' instructions)<br>
-            </p>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771738(v=ws.11)'>Disabling recursion on Windows Server 2008 R2 systems</a><br>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc787602(v=ws.10)'>Disabling recursion on older Windows Server systems</a><br>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc773370(v=ws.10)'>Acting as a non-recursive forwarder</a> (See the 'Notes' section under the 'Using the Windows interface' instructions)<br>
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://dns.measurement-factory.com/cgi-bin/openresolvercheck.pl/'>A website for (re)checking your DNS service</a><br>
-            <a target'_blank' href='http://openresolverproject.org/'>the Open Resolver Project</a><br>
-            <a target'_blank' href='http://www.youtube.com/watch?v=XhSTlqYIQnI' Team Cymru 'Who and Why Show' - DNS Amplification Attacks</a> (5 minute YouTube video)<br>
-            <a target'_blank' href='http://www.team-cymru.com/ReadingRoom/Whitepapers/2009/recursion.pdf' Team Cymru DNS Open Recursion Whitepaper</a><br>
-            <a target'_blank' href='http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf' http://www.us-cert.gov/reading_room/DNS-recursion033006.pdf</a><br>
-            <a target'_blank' href='http://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
-            <a target'_blank' href='http://www.ripe.net/ripe/meetings/ripe-52/presentations/ripe52-plenary-dnsamp.pdf' http://www.ripe.net/ripe/meetings/ripe-52/presentations/ripe52-plenary-dnsamp.pdf</a><br>
-            <a target'_blank' href='http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf'>http://www.icann.org/committees/security/dns-ddos-advisory-31mar06.pdf</a><br>
-            <a target'_blank' href='http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification'>http://www.secureworks.com/research/threats/dns-amplification/?threat=dns-amplification</a><br>
-            <a target'_blank' href='http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf'>http://www.icann.org/en/groups/ssac/documents/sac-065-en.pdf</a><br>
+            <a target'_blank' href='https://www.cisa.gov/sites/default/files/publications/DNS-recursion033006.pdf'>The Continuing Denial of Service Threat Posed by DNS Recursion (v2.0)</a><br>
+            <a target'_blank' href='https://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
+            <a target'_blank' href='https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/dns-ddos-advisory-31mar06-en.pdf'>SSAC Advisory SAC008 DNS Distributed Denial of Service (DDoS) Attacks</a><br>
+            <a target'_blank' href='https://www.secureworks.com/research/dns-amplification'>DNS Amplification Variation Used in Recent DDoS Attacks</a><br>
+            <a target'_blank' href='https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/sac-065-en.pdf'>SSAC Advisory on DDoS Attacks Leveraging DNS Infrastructure</a><br>
 
             ",
     ],
@@ -601,10 +699,10 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -618,9 +716,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -628,14 +725,14 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>In most cases the computer has installed a DNS service as an dependancy
-            as resolving is needed on that computer. However its only required to do
+            <p>In most cases the computer has installed a DNS service as a dependency
+            as resolving is needed on that computer. However it is only required to do
             local resolving, thus the added 'external access' to this service is
             unneeded. In such cases we recommend either changing the configuration
             of your DNS service or to firewall port 5353 for external hosts.</p>
 
-            <p>If you are running a DNS resolver for multiple computers, then consider
-            to limit access to the required group of computer or implement safegaurds
+            <p>If you are running a DNS resolver for multiple computers, then you should consider
+            limiting access to the required group of computer or implement safeguards
             like 'Response Rate Limiting'(DNS-RRL) to prevent a DNS Amplification Attack.</p>
 
             <h2>Tips to resolve this matter</h2>
@@ -655,14 +752,14 @@ return [
             <h2>What is an 'Open IPMI Server'?</h2>
 
             <p>IPMI defines a set of interfaces used by system administrators for
-            out-of-band management of computer systems and monitoring of their operation.
+            out-of-band management of computer systems and monitoring of their operations.
             For example, IPMI provides a way to manage a computer that may be powered off
             or otherwise unresponsive by using a network connection to the hardware
             rather than to an operating system or login shell.</p>
 
-            <p>IPMI is integrated on most server systems, however under different names like
-            iRMC, ILOM, BMC, iDRAC, etc. Each vender has their own implementation of IPMI,
-            but the base is the same on each of them: It allows access to hardware outside
+            <p>IPMI is integrated on most server systems under many different names like
+            iRMC, ILOM, BMC, iDRAC, etc. Each vendor has their own implementation of IPMI,
+            but the base is the same for each of them: It allows access to hardware outside
             your operating system (and its locally installed firewall!).</p>
 
             <h2>Why would this be bad?</h2>
@@ -679,18 +776,18 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>Implement a seperate network for hosting these Out-Of-Band management entries and
-            place them in a RFC1918(non public IP) space in combination with a VPN or add a
+            <p>Implement a separate network for hosting these Out-Of-Band management entries and
+            place them in a RFC1918 (non public IP) space in combination with a VPN or add a
             hardware firewall in front of this network that filters access.</p>
 
             <p>Some IPMI implementations do offer some kind of what they call firewalling, however
-            we havent come across an implementation that actually fully protects the IPMI
-            interface from outside influance.</p>
+            we haven't come across an implementation that actually fully protects the IPMI
+            interface from outside influence.</p>
 
             <h2>Getting more information</h2>
 
             <a target'_blank' href='http://fish2.com/ipmi/'>Dan Farmer on IPMI security issues</a><br>
-            <a target'_blank' href='https://www.us-cert.gov/ncas/alerts/TA13-207A'>US-CERT alert TA13-207A</a><br>
+            <a target'_blank' href='https://www.cisa.gov/news-events/alerts/2013/07/26/risks-using-intelligent-platform-management-interface-ipmi'>US-CERT alert TA13-207A</a><br>
 
             ",
     ],
@@ -702,7 +799,7 @@ return [
 
             <p>Memcached is an in-memory key-value store for small chunks of
             arbitrary data (strings, objects) from results of database calls,
-            API calls, or page rendering. Its intended for use in speeding up
+            API calls, or page rendering. It is intended for use in speeding up
             dynamic web applications by alleviating database load</p>
 
             <h2>Why would this be bad?</h2>
@@ -710,15 +807,15 @@ return [
             <p>The problem is actually pretty simple - memcached is built for speed,
             not for security, and it does nothing to secure itself. As far as
             memcache's authors are concerned, this isn't a problem... it just
-            means you have to secure it yourself. The problem is the people don't
+            means you have to secure it yourself. The problem is that people don't
             do that.</p>
 
-            <p>Since its not secure, this means that random people on the internet
+            <p>Since it's not secure, this means that random people on the internet
             can discover your memcache, read things from it, and even write into
             it. The kinds of security problems that could create are limited only
             by your imagination and the kinds of data you put into your cache.</p>
 
-            <p>Lets assume I have an insecure memcache instance running at my.example.com.
+            <p>Let's assume I have an insecure memcache instance running at my.example.com.
             I can log into that server, and connect to my memcache instance with telnet:
 
             [dbock@my.example ~]$ telnet localhost 11211
@@ -773,9 +870,9 @@ return [
 
             sudo /sbin/service memcached restart
 
-            retry the steps above and you'll find that outside the server, telnet can't connect anymore.</p>
+            repeat the steps above and you'll find that outside the server, telnet can't connect anymore.</p>
 
-            <p>The memcached settings file might be someplace else on other linuxes, depending
+            <p>The memcached settings file might be someplace else on other linux distributions, depending
             on their file conventions... The memcache installation for your platform should give
             you a clue where this is, as this file is also needed to specify the amount of
             memory in the cache, etc.</p>
@@ -785,8 +882,6 @@ return [
             <p></p>
 
             <h2>Getting more information</h2>
-
-            <atarget'_blank'  href='http://blog.codesherpas.com/on_the_path/2010/08/securing-memcache-in-2-minutes.html'>David Bock - Securing Memcache in 2 Minutes</a><br>
 
             ",
     ],
@@ -808,17 +903,17 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>This service has the potential to expose information about a clients network
+            <p>This service has the potential to expose information about a client's network
             on which this service is accessible and the service itself can be used in UDP
-            amplification attacks. In addition it opens up your system to 0-day attacks or
-            worm/virus infections that exploit a vulnarability in Windows to gain access
+            amplification attacks. In addition it opens up your system to zero-day attacks or
+            worm/virus infections that exploit a vulnerability in Windows to gain access
             to your system.</p>
 
             <h2>Recommended action</h2>
 
-            <p>Either use the Windows Firewall or even better an external firewall to prevent
-            access to Netbios (and other Windows ports). The windows firewall has an nasty
-            way of trying to think for himself and for example automaticly starts to open
+            <p>Either use the Windows Firewall or preferably: an external firewall to prevent
+            access to Netbios (and other Windows ports). The Windows Firewall has a nasty
+            way of trying to think for itself and will, for example, automatically start to open
             ports if you install something that uses Netbios. In all cases the
             administrator is unaware of these open ports.</p>
 
@@ -829,14 +924,14 @@ return [
             Server on your computer. Connections to the default instance using TCP/IP are not
             possible unless you reopen port 1433. If you need access from remote machines to
             your Microsoft SQL server, then only allow the required hosts and close down
-            world wide accesss to the SQL server.</p>
+            world wide access to the SQL server.</p>
 
             <p>Ports used by Microsoft are: TCP/1433, UDP/1434, TCP/1434, TCP/4022, TCP/135, TCP/2383.
-            In addition the SQL Server uses a randomly assign dynamic port for named instance! </p>
+            In addition the SQL Server uses a randomly assigned dynamic port for named instances! </p>
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://msdn.microsoft.com/en-us/library/ms175043.aspx'>Configure a Windows Firewall for Database Engine Access</a><br>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access?view=sql-server-ver16'>Configure a Windows Firewall for Database Engine Access</a><br>
 
             ",
     ],
@@ -854,8 +949,8 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Your system has a MongoDB NoSQL database (see www.mongodb.org for more
-            information) running which is accessible on the internet. While authentication
+            <p>Your system runs a MongoDB NoSQL database (see www.mongodb.org for more
+            information) which is accessible on the internet. While authentication
             is available for MongoDB, in many instances this authentication is not enabled.</p>
 
             <p>This enables an attacker, without circumventing any security measures, to get
@@ -901,7 +996,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://cispa.saarland/wp-content/uploads/2015/02/MongoDB_documentation.pdf'>MongoDB databases at risk</a><br>
+            <a target'_blank' href='https://www.mongodb.com/resources/products/capabilities/best-practices'>7 Best Practices For MongoDB Security (2020)</a><br>
 
             ",
     ],
@@ -953,8 +1048,9 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
-            <a target'_blank' href='https://community.rapid7.com/community/metasploit/blog/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities'>NAT-PMP Implementation and Configuration Vulnerabilities</a>
+            <a target'_blank' href='https://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
+            <a target'_blank' href='https://www.rapid7.com/blog/post/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities/'>NAT-PMP Implementation and Configuration Vulnerabilities</a>
+
 
             ",
     ],
@@ -971,10 +1067,10 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -988,9 +1084,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet 'from' a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet 'from' a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -998,15 +1093,15 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>In most cases the computer has installed a NTP service as an dependancy
-            as timekeeping is needed on that computer. However its only required to do
+            <p>In most cases the computer has installed a NTP service as an dependency
+            as timekeeping is needed on that computer. However it is only required in order to do
             local timekeeping, thus the added 'external access' to this service is
-            unneeded. In such cases we recommend either changing the configuration
+            unnecessary. In such cases we recommend either changing the configuration
             of your NTP service or to firewall port 123 for external hosts.</p>
 
-            <p>If you are running a NTP Server for multiple computers, then consider
-            to limit access to the required group of computer or implement safegaurds
-            like ... to prevent a DNS Amplification Attack.</p>
+            <p>If you are running an NTP Server for multiple computers, then consider
+            limiting access to the required group or computer or implement safeguards 
+            to prevent a DNS Amplification Attack.</p>
 
 
             <h2>Tips to resolve this matter</h2>
@@ -1030,7 +1125,7 @@ return [
             </pre>
 
             <p>You can use your standard host firewall filtering capabilities to limit
-            who the NTP process talks to.  If you're using Linux and the host is acting
+            who the NTP process can talk to. If you're using Linux and the host is acting
             as an NTP client only, the following iptables rules could be adapted to shield
             your NTP listener from unwanted remote hosts.</p>
 
@@ -1040,8 +1135,8 @@ return [
 
             <p>Authentication with the reference NTP software on UNIX can be done using
             symmetric key encryption, much like in Cisco IOS and Juniper JUNOS, using
-            MD5.  However, a public key-based approach called 'AutoKey' is also
-            available, which is generally be considered to be even more secure.  For
+            MD5. However, a public key-based approach called 'AutoKey' is also
+            available, which is generally be considered to be even more secure. For
             more information about these options, see the
             <a href='http://www.eecis.udel.edu/~mills/ntp/html/authopt.html' target='_blank'>NTP authentication
             options page</a> and the <a href='http://support.ntp.org/bin/view/Support/ConfiguringAutokey' target='_blank'>
@@ -1050,8 +1145,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://www.team-cymru.org/secure-ntp-template.html'>Examples in securing a NTP service</a>
-            <a target'_blank' href='http://www.internetsociety.org/sites/default/files/01_5.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
+            <a target'_blank' href='https://github.com/team-cymru/network-security-templates/tree/master/Secure-NTP-Templates'>Examples in securing a NTP service</a>
+            <a target'_blank' href='https://christian-rossow.de/publications/amplification-ndss2014.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
 
             ",
     ],
@@ -1062,11 +1157,11 @@ return [
             <h2>What is an 'Open Netbios server'?</h2>
 
             <p>NetBIOS is a transport protocol that Microsoft Windows systems use to share
-            resources.  For example, if a PC running Windows wants to connect to and access a
-            share on a file server, it probably uses NetBIOS.  There have been some changes in
-            recent days, however, that allow this connection without it. SMB, the method used
-            to access file and printer shares, can also run independently of NetBIOS over TCP
-            ports 139 and 445.  Both of these approaches, however, tend to increase the attack
+            resources. For example, if a PC running Windows wants to connect to and access a
+            share on a file server, it probably uses NetBIOS. There have been some changes in
+            recent days however, that allow this connection without it. SMB - the method used
+            to access file and printer shares - can also run independently of NetBIOS over TCP
+            ports 139 and 445. Both of these approaches however, tend to increase the attack
             surface of a network.</p>
 
             <h2>Why would this be bad?</h2>
@@ -1075,9 +1170,9 @@ return [
             Unfortunately, the most popular attacker target is NetBIOS and against these
             ports.</p>
 
-            <p>Once an attacker discovers an active port 139 on a device, he can run NBSTAT to
-            begin the very important first step of an attack—footprinting.  With the NBSTAT
-            command, he can obtain some or all of the following information:</p>
+            <p>Once an attacker discovers an active port 139 on a device, they can run NBSTAT to
+            begin the very important first step of an attack—footprinting. With the NBSTAT
+            command, they can obtain some or all of the following information:</p>
 
             <ul>
             <li>Computer name</li>
@@ -1088,33 +1183,33 @@ return [
             </ul>
 
             <p>With this information, the attacker has information about the OS, services, and major
-            applications running on the system. He also has private IP addresses that the LAN/WAN
-            and security engineers have tried hard to hide behind NAT.  And that’s not all.  The
-            lists provided by running NBSTAT also include user IDs.</p>
+            applications running on the system. They also have private IP addresses that the LAN/WAN
+            and security engineers have tried to hide behind NAT. And that is not all: The
+            lists provided by running NBSTAT also includes user ID's.</p>
 
             <p>If null sessions are allowed against IPC$, it isn’t difficult to take the next step
-            and connect to the target device.  This connection provides a list of all available
+            and connect to the target device. This connection provides a list of all available
             shares.</p>
 
             <p>These services have the potential to be used in amplification attacks by criminals
             that wish to perform denial of service attacks. In addition it opens up your system
-            to 0-day attacks or worm/virus infections that exploit a vulnarability in Windows to
+            to zero-day attacks or worm/virus infections that exploit a vulnerability in Windows to
             gain access to your system.</p>
 
             <h2>Recommended action</h2>
 
-            <p>Either use the Windows Firewall or even better an external firewall to prevent access
-            to Netbios (and other Windows ports). The windows firewall has an nasty way of trying
-            to think for himself and for example automaticly starts to open ports if you install
+            <p>Either use the Windows Firewall or preferably: an external firewall to prevent access
+            to Netbios (and other Windows ports). The Windows Firewall has a tendency to try
+            to think for itself and may for example: automatically start to open ports if you install
             something that uses Netbios. In all cases the administrator is unaware of these open
             ports.</p>
 
-            <p>If you really need NETBIOS open for the entire world, then ensure that the exposed
+            <p>If you really need NETBIOS open for the entire world, then ensure the exposed
             system(s) are hardened by:</p>
             <ul>
             <li>Disabling the system’s ability to support null sessions</li>
-            <li>Defining very strong passwords for the local administrator accounts</li>
-            <li>Defining very strong passwords for shares, assuming you absolutely have to have shares on exposed systems</li>
+            <li>Using very strong passwords for the local administrator accounts</li>
+            <li>Using very strong passwords for shares, assuming you absolutely have to have shares on exposed systems</li>
             <li>Keeping the Guest account disabled</li>
             <li>Under no circumstances allowing access to the root of a hard drive via a share</li>
             <li>Under no circumstances sharing the Windows or WinNT directories or any directory located beneath them</li>
@@ -1133,7 +1228,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://technet.microsoft.com/en-us/library/cc940063.aspx'>Microsoft NetBIOS Over TCP/IP guide</a>
+            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc940063(v=technet.10)'>Microsoft NetBIOS Over TCP/IP guide</a>
 
             ",
     ],
@@ -1151,10 +1246,10 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -1168,9 +1263,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -1179,7 +1273,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>There is no reason to have this QOTD service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
+            interface. You should either stop the service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
             <h2>Tips to resolve this matter</h2>
@@ -1258,7 +1352,7 @@ return [
 
             <h3>Firewalling remote access</h3>
 
-            <p>Simplest way is to block the default port TCP/6379 (or whatever port is listed
+            <p>The simplest way is to block the default port TCP/6379 (or whatever port is listed
             in the report) and only allow IP's that should actually have access to this service.</p>
 
             <h3>Blocking remote access</h3>
@@ -1295,7 +1389,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://redis.io/topics/security'>Redis Security advisory</a><br>
+            <a target'_blank' href='https://redis.io/docs/latest/operate/oss_and_stack/management/security/'>Redis Security advisory</a><br>
 
             ",
     ],
@@ -1316,10 +1410,10 @@ return [
             system or even to write new 'settings' to the system if not correctly
             configured.</p>
 
-            <p>In addition running an open (UDP) service is not bad on its own and it
-            is mostly a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and
+            is often a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -1333,9 +1427,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server() send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -1346,7 +1439,7 @@ return [
             <ul>
             <li>Use firewalling to block UDP/161 entirely or only allow the hosts that
             need access to this service</li>
-            <li>Update the SNMP configuration to use a different community string then public. Something
+            <li>Update the SNMP configuration to use a different community string than public. Something
             strong like ThisIsMyCommunityString</li>
             <li>Update the SNMP configuration to use a host based ACL's in combination with either the 'public'
             community or a string thats more 'secure'</li>
@@ -1366,7 +1459,7 @@ return [
             </ul>
 
             <h3>Linux</h3>
-            <p>Edit the SNMP configuration file, which is useally located at: /etc/snmp/snmpd.conf<p>
+            <p>Edit the SNMP configuration file, which is usually located at: /etc/snmp/snmpd.conf<p>
 
             <p>Change/Modify line(s) as follows:</p>
             <p>Find the following Line:</p>
@@ -1417,7 +1510,7 @@ return [
             <p>The Simple Service Discovery Protocol (SSDP) is a network protocol
             based on the Internet Protocol Suite for advertisement and discovery of
             network services and presence information. It accomplishes this without
-            assistance of server-based configuration mechanisms, such as the Dynamic
+            assistance of any server-based configuration mechanisms, such as the Dynamic
             Host Configuration Protocol (DHCP) or the Domain Name System (DNS), and
             without special static configuration of a network host. SSDP is the basis
             of the discovery protocol of Universal Plug and Play (UPnP) and is
@@ -1425,10 +1518,10 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and it is mostly
-            a required dependancy when installing a system.
+            <p>Running an open (UDP) service is not bad on its own and is often
+            a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
-            special type of DDoS attack called a 'Amplification Attack'.</p>
+            special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
             server on the Internet that will reply immediately. Because the source
@@ -1442,9 +1535,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet from a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet from a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -1453,7 +1545,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>There is no reason to have this CHARGEN service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
+            interface. You should either stop the service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
             ",
@@ -1478,7 +1570,7 @@ return [
             <h2>Recommended action</h2>
 
             <p>There is no reason to have this TFTP service enabled on a public facing
-            interface. You should either stop te service or make sure it is not reachable
+            interface. You should either stop the service or make sure it is not reachable
             from the internet by using RFC1918 spaces or a firewall.</p>
 
             ",
@@ -1493,27 +1585,27 @@ return [
             usernames, passwords, and credit card details (and sometimes, indirectly, money)
             by masquerading as a trustworthy entity in an electronic communication.
             Communications purporting to be from popular social web sites, auction sites, banks,
-            online payment processors or IT administrators are commonly used to lure unsuspecting
+            online payment processors or IT administrators are commonly used to lure the unsuspecting
             public. Phishing emails may contain links to websites that are infected with malware. </p>
 
             <h2>Why would this be bad?</h2>
 
-            <p>A Phishing website is usually the result of a comprimised website or comprimised user
-            credentials of that website.</p>
+            <p>A Phishing website is usually the result of a compromised website or user
+            credentials of said website.</p>
 
-            <p>When your website is compromised, not only your website contains changes done by hackers
+            <p>When your website is compromised, it not only contains changes done by hackers
             but it also contains one or more security problems that allowed a hacker to gain access
-            to your website in the first place. The compromised website provides a useful platform for
+            in the first place. The compromised website provides a useful platform for
             a range of illicit activities.</p>
 
             <h2>Recommended action</h2>
 
             <p>If your site has been hacked or infected with malware, you should act quickly to repair the
-            damage. First take your entire website offline first. This is pretty impopulair, however if
-            you consider the fact your might be leaking privacy information or infecting the
-            systems of your visitors you want to act as quickly as possible.</p>
+            damage. First, take your entire website offline. This is pretty unpopular, however if
+            you consider the fact you might be leaking sensitive information or infecting the
+            systems of your visitors, you want to act as quickly as possible.</p>
 
-            <p>After you closed your website you will need to clean up the changed area's of your
+            <p>After taking your website offline you will need to clean up the changed areas of your
             website.</p>
 
 
@@ -1525,31 +1617,31 @@ return [
             <ul>
             <li>Look for files that have been changed recently or on times your developers are
             closed and not placing updates on the website<li>
-            <li>Look in temporally folders for (executable) scripts</li>
+            <li>Look in temporary folders for (executable) scripts</li>
             </ul>
 
-            <p>In addition future risk of compromise can be reduced by following these basic tips: </p>
+            <p>In addition, future risk of compromise can be reduced by following these basic tips: </p>
 
             <ul>
-            <li>Keep software and all plug-ins updated. Whether you run popular content
+            <li>Keep software and all plug-ins updated regardless whether you run popular content
             management software (e.g., WordPress, Joomla, Blogger) or custom software,
             make sure that software and all third party plug-ins or extensions are updated.
-            Remove plug-i ns or other add-ons that aren’t in use</li>
+            Remove plug-ins or other add-ons that are not currently in use</li>
             <li>Use strong, varied passwords. WordPress login credentials, for example,
             should be different from FTP credentials. Never store passwords on your local
             machine.</li>
-            <li>Regularly scan your PC for malware and your website for unautherized changes</li>
+            <li>Regularly scan your PC for malware and your website for unauthorized changes</li>
             <li>Use appropriate file permissions on your web server.</li>
             <li>Research your options and make security a priority when choosing a web hosting
-            provider. If you aren’t confident you can protect your site on your own, consider
+            provider. If you are not confident you can protect your site on your own, consider
             using an add-on security service from your hosting provider or a third party website
             security service.</li>
             </ul>
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://www.google.com/webmasters/hacked/'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='http://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
+            <a target'_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
+            <a target'_blank' href='https://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
             ",
     ],
@@ -1567,7 +1659,7 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Depending on the problem, your server can potentially be used by malicous
+            <p>Depending on the problem, your server can potentially be used by malicious
             users on the internet to send spam or do harm to others while using your
             server as a proxy.</p>
 
@@ -1576,16 +1668,16 @@ return [
 
             <h2>Recommended action</h2>
 
-            <p>In the case of a misconfiguration it could for example be the case
+            <p>In the case of a misconfiguration it could be the case
             that your SMTP server is accepting email from untrusted sources and you
             will need to reconfigure your SMTP server.</p>
 
             <p>In the case of a compromise your server might have been hacked or infected
             by a trojan.</p>
 
-            <p>If you have been accidently listed and have resolved the issue, you
+            <p>If you have been accidentally listed and have resolved the issue, you
             can request a delisting using the URL included in the ticket report. Do
-            not attempt to request a delisting at a RBL without knowning for sure you
+            not attempt to request a delisting at a RBL without knowing for sure you
             have resolved the issue. If you request a delisting without solving the
             problem you might end up permanently listed on that RBL!</p>
 
@@ -1625,19 +1717,19 @@ return [
 
             <ul>
                 <li>1) Your recipients have opted in for the service.</li>
-                <li>2) Each email sent contains a working opt-out link.</li>
+                <li>2) Each email sent contains a functioning opt-out link.</li>
             </ul>
 
             <p>If you are not sending bulk email, then check your website and DNS
-            for signs of comprimise. </p>
+            for signs of compromise. </p>
 
             <h2>Tips to resolve this matter</h2>
 
             <p>If the server should not be sending much or any email, this spam
             report could indicate that your server has been compromised.</p>
 
-            <p>The best way to solve the problem is to stop your mailserver(MTA)
-            and investigate the mail queues for SPAM messages. When you found an
+            <p>The best way to solve the problem is to stop your mail server(MTA)
+            and investigate the mail queues for SPAM messages. When you find an
             example you can open it to identify its source. By stopping the MTA
             you will prevent SPAM from being sent out. After solving the problem
             you must clean your mail queue from all these SPAM messages before
@@ -1660,18 +1752,18 @@ return [
 
             <h2>Why would sending email to these this be bad?</h2>
 
-            <p>SpamTraps are generally e-mail addresses that are made to recieve spam.
+            <p>SpamTraps are generally email addresses that are made to receive spam.
             SpamTraps are often hidden from view on websites, so that they are only harvested from automated scans.
-            Since no legit e-mail is ever sent to this address, any e-mail's that are sent to the Spam-Traps are
+            Since no legit email is ever sent to this address, any emails that are sent to the Spam-Traps are
             immediately considered unsolicited.</p>
 
             <h2>Recommended action</h2>
 
             <p>Clean up your mailing lists. Configure your 'Hard & Soft' Bounce values to
-            correctly remove recipient's when needed.</p>
+            correctly remove recipients when needed.</p>
 
             <p>If you are not sending bulk email, then check your website and DNS
-            for signs of comprimise. </p>
+            for signs of compromise. </p>
 
             <h2>Tips how to resolve this matter</h2>
 
@@ -1686,7 +1778,7 @@ return [
             </ul>
 
             <p>The best way to solve the problem is to stop your mailserver(MTA)
-            and investigate the mail queues for SPAM messages. When you found an
+            and investigate the mail queues for SPAM messages. When you find an
             example you can open it to identify its source. By stopping the MTA
             you will prevent SPAM from being sent out. After solving the problem
             you must clean your mail queue from all these SPAM messages before
@@ -1694,8 +1786,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://blog.returnpath.com/blog/jamie-lawler/trap-tips-avoiding-and-removing-spam-traps'>Tips to avoid SpamTraps</a><br>
-            <a target'_blank' href='http://www.activecampaign.com/help/bounces-soft-bounce-vs-hard-bounce/'>Hard/Soft Bounce configuration</a><br>
+            <a target'_blank' href='https://www.techtarget.com/searchsecurity/definition/spam-trap'>What is a spam trap and how do you avoid them?</a><br>
 
             ",
     ],
@@ -1722,7 +1813,7 @@ return [
             <p>The attack, specifically against the SSLv3 protocol, allows an attacker to obtain the
             plaintext of certain parts of an SSL connection, such as the cookie. Similar to BEAST, but
             more practical to carry out. Every server that is not patched for this bug is
-            vulnarable for such attacks.</p>
+            vulnerable for such attacks.</p>
 
             <h2>Recommended action</h2>
 
@@ -1730,10 +1821,7 @@ return [
             This does bring with it a couple of caveats though. For web traffic, there are some legacy
             systems out there that won't be able to connect with anything other than SSLv3. For example,
             systems using IE6 and Windows XP installations without SP3, will no longer be able to
-            communicate with any site that ditches SSLv3. According to figures released by CloudFlare,
-            who have completely disabled SSLv3 across their entire customer estate, only a tiny fraction
-            of their web traffic will be affected as 98.88% of Windows XP users connect with TLSv1.0 or
-            better.</p>
+            communicate with any site that ditches SSLv3.</p>
 
             <h2>Tips how to resolve this matter</h2>
 
@@ -1742,6 +1830,7 @@ return [
             <p>ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
 
             Similar to the Apache config above, you will get TLSv1.0+ support and no SSL. You can check the config and restart.
+            IMPORTANT: TLS1.0 and 1.1 have been deprecated since March 2021!
 
             sudo nginx -t
 
@@ -1757,7 +1846,7 @@ return [
 
             Inside protocols you will most likely have an SSL 2.0 key already, so create SSL 3.0
             alongside it if needed. Under that create a Server key and inside there a DWORD value called
-            Enabled with value 0. Once that’s done reboot the server for the changes to take effect.</p>
+            Enabled with value 0. Once that’s done, reboot the server for the changes to take effect.</p>
 
             <h3>Apache</h3>
 
@@ -1766,6 +1855,7 @@ return [
             SSLProtocol All -SSLv2 -SSLv3
 
             This will give you support for TLSv1.0, TLSv1.1, TLSv1.2 and TLSv1.3, but explicitly removes support for SSLv2 and SSLv3. Check the config and then restart Apache.
+            IMPORTANT: TLS1.0 and 1.1 have been deprecated since March 2021!
 
             apachectl configtest
 
@@ -1778,8 +1868,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
-            <a target'_blank' href='https://www.poodletest.com/'>SSLv3 / POODLE Test</a><br>
+            <a target'_blank' href='https://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
 
             ",
     ],
@@ -1791,28 +1880,27 @@ return [
 
             <p>A site that is being 'spamvertised' means that the site is being included as a link in spam emails.</p>
 
-            <h2>Why is my website in Spam Emails?</h2>
+            <h2>Why is my website in Spam emails?</h2>
 
-            <p>This is generally the case when your site (or DNS) has been comprimised in some way.
+            <p>This is generally the case when your site (or DNS) has been compromised in some way.
             Spammers or hackers often add a redirect from your site to their Spam site.
             Spammers would prefer to use your website for their links, as most likely their site is already known as bad. </p>
 
             <h2>Recommended action</h2>
 
-            <p>Check your website and DNS for signs of comprimise. </p>
+            <p>Check your website and DNS for signs of compromise. </p>
 
             <h2>Tips on how to resolve this</h2>
 
             <ul>
-            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the addons/plugins and update where possible.</li>
-            <li>If this is a standard website, check for signs of infection or unknown links on webpages and take the nessesary action.</li>
-            <li>If infection is found and resolved, begin to delist your URL on the relevant delist's.</li>
+            <li>If this is a CMS (WordPress, Drupal, Joomla etc), check the add-ons/plug-ins and update where possible.</li>
+            <li>If this is a standard website, check for signs of infection or unknown links on webpages and take the necessary action.</li>
+            <li>If infection is found and resolved, begin to delist your URL on the relevant lists.</li>
             </ul>
 
             <h2>Getting more information</h2>
 
             <a target'_blank' href='https://wordpress.org/plugins/sucuri-scanner/'>WordPress Security scanner (Sucuri)</a><br>
-            <a target'_blank' href='http://spamvertised.abusebutler.com/'>List of Spamvertised websites</a><br>
 
             ",
     ],
@@ -1849,7 +1937,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a href='http://bouk.co/blog/elasticsearch-rce/'>Insecure default in Elasticsearch enables remote code execution</a><br>
+            <a href='https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-cluster.html#preventing-unauthorized-access'>Secure the Elastic Stack</a><br>
             ",
     ],
 
@@ -1885,7 +1973,7 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Once an attacker discovers an active port 111 on a device, he can use this information
+            <p>Once an attacker discovers an active port 111 on a device, they can use this information
             to learn about running services, which is a very important first step for a hacking attack.</p>
 
             <p>Additionally, hackers have also found this feature useful in performing a
@@ -1903,9 +1991,8 @@ return [
 
             <p>But what makes reflection attacks really powerful is when they are
             also amplified: when a small forged packet elicits a large reply from
-            the server (or servers). In that case, an attacker can send a small
-            packet 'from' a forged source IP address and have the server (or
-            servers) send large replies to the victim.</p>
+            the server(s). In that case, an attacker can send a small
+            packet 'from' a forged source IP address and have the server(s) send large replies to the victim.</p>
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
@@ -1974,4 +2061,359 @@ return [
             Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
             ',
     ],
+
+    'OPEN_AFP_SERVER' => [
+        'name'        => 'Open Apple Filing Protocol (AFP) Server',
+        'description' => '
+            <h2>What is a \'Open AFP Server\'?</h2>
+
+            <p>Apple Filing Protocol (formerly AppleTalk Filing Protocol) is a transport protocol
+            that Apple\'s macOS uses to share resources. For example, if a macOS system wants
+            to access a shared directory on another system, it can use AFP. AFPv3 uses TCP
+            port 548. The protocol can also support other options including changing user passwords.</p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>This report identifies hosts that have Apple Filing Protocol (AFP) Service running and accessible to the world
+             on the internet. AFP can allow for information gathering on a target host as information about the host is contained in
+             the protocol messages.</p>
+
+            <p>In addition, you risk being targeted by brute force attacks.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Disable public access to AFP.</p>
+
+            <h2>Tips how to resolve this matter</h2>
+            <ul>
+            <li>Firewall port TCP/548 and use AFP over SSH to gain access to your system/li>
+            </ul>
+
+            ',
+    ],
+
+    'OPEN_FTP_SERVER' => [
+        'name'        => 'Open FTP Server',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+
+    'OPEN_HTTP_SERVER' => [
+        'name'        => 'Open HTTP Server',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+
+    'OPEN_RSYNC_SERVER' => [
+        'name'        => 'Open rsync Server',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'OPEN_PROXY_SERVER' => [
+        'name'        => 'Accessible proxy server',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'OPEN_UBIQUITI_SERVER' => [
+        'name'        => 'Accessible Ubiquiti server',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'BRUTE_FORCE_ATTACK' => [
+        'name'        => 'Brute Force attack',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'AMPLICATION_DDOS_VICTIM' => [
+        'name'        => 'DDOS amplification victim',
+        'description' => "
+        
+            <h2>Honeypot Amplification DDoS Events Report</h2>
+            
+            <p>This report contains information about honeypot observed amplification DDoS events. If you are seeing this report, it 
+            means that your IP was DDoSed using other hosts/services as reflectors.</p>
+            
+            <p>This category of DDoS attacks utilizes UDP-based, open, amplifiable services to reflect packets to a victim, by 
+            spoofing the source IP address of the packets sent by the amplifier to the victim’s IP address.</p>
+            
+            <p>Depending on the protocol and type of open services abused, the size of the original packet content sent by the attacker 
+            can be amplified in the service response multiple times (even by a factor of hundreds), flooding the victim with packets 
+            and enabling DDoS.</p>
+            
+            <p>Honeypots that emulate open and amplifiable services can be used to detect this kind of abuse. However, as the source 
+            of these attacks is spoofed to the victim address, it is only possible to report on victims being abused, not on the true 
+            source of the DDoS.</p>
+            
+            <p>You can read more about our DDoS attack observations <a href='https://sissden.eu/blog/amp2018'>in the SISSDEN blog 
+            entry on observations on DDoS attacks in 2018</a>. For more insight into how amplifiable DDoS attacks work, check out this 
+            <a href='https://christian-rossow.de/articles/Amplification_DDoS.php'>writeup and paper by Christian Rossow</a>,&nbsp;as 
+            well as the <a href='https://www.us-cert.gov/ncas/alerts/TA14-017A'>US-CERT Alert (TA14-017A)</a>.</p>
+            
+            <p>This report contains information about the IP that was attacked (set to src_ip) and the port that was abused on the 
+            honeypot to try to make it attack your IP (set to dst_port).</p>
+    
+            ",
+    ],
+    'ACCESSIBLE_ADB_REPORT' => [
+        'name'        => 'Accessible Android Debug Bridge',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'ACCESSIBLE_APPLE_REMOTE_DESKTOP_ARD_REPORT' => [
+        'name'        => 'Accessible Apple Remote Desktop',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'CAIDA_IP_SPOOFER_REPORT' => [
+        'name'        => 'CAIDA IP spoofer',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'DRONE_BOTNET_DRONE_REPORT' => [
+        'name'        => 'Botnet Drone',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'NETCORE_NETIS_ROUTER_VULNERABILITY_SCAN_REPORT' => [
+        'name'        => 'Vulnerable Netcore/Netis router ',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'OPEN_DB2_DISCOVERY_SERVICE_REPORT' => [
+        'name'        => 'Accessible DB2 discovery service ',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'OPEN_MQTT' => [
+        'name'        => 'Accessible MQTT service ',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'OPEN_COAP' => [
+        'name'        => 'Accessible COAP service',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'OPEN_IPP' => [
+        'name'        => 'Accessible IPP service',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'OPEN_RADMIN' => [
+        'name'        => 'Accessible RAdmin service',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'OPEN_RDPEUDP' => [
+        'name'        => 'Accessible Microsoft Remote Desktop Protocol service',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'OPEN_BASIC_AUTH_SERVICE' => [
+        'name'        => 'Accessible Basic Authenticatie service',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'DARKNET' => [
+        'name'        => 'Service contacting darknets',
+        'description' => '
+            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            ',
+    ],
+    'eicc(stix2)' => [
+        'name'        => 'ei.cc',
+        'description' => '
+            ESET threat intelligence has detected that the host listed is playing the role of Command & Control centre for a botnet. More details may be available on the technical details page.
+            ',
+    ],
+
+    'eibotnet(stix2)' => [
+        'name'        => 'ei.botnet',
+        'description' => '
+            ESET threat intelligence has detected that the host is playing a part in a botnet. More details may be available on the technical details page.
+            ',
+    ],
+
+    'eidomainsv2(stix2)' => [
+        'name'        => 'ei.domains',
+        'description' => '
+            ESET threat intelligence has detected that the host is being used to spread malware on the domain listed. More details may be available on the technical details page.
+            ',
+    ],
+
+    'eiurls(stix2)' => [
+        'name'        => 'ei.urls',
+        'description' => '
+            ESET threat intelligence has detected that the host is being used to spread malware on the URL listed. More details may be available on the technical details page.
+            ',
+    ],
+
+    'VULNERABLE_SMTP_SERVER' => [
+        'name'          => 'Vulnerable SMTP server',
+        'description'   => "
+            <h2>What is a 'Vulnerable SMTP server'?</h2>
+            
+            <p>It was discovered that the host, a mail sending server, is running a vulnerable SMTP software.</p>
+
+            <h2>Why would this be bad?</h2>
+        
+            <p>Hackers might exploit the vulnerable SMTP server, resulting in potentially getting the SMTP server compromised.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Update the SMTP software to the latest version.</p>
+            ",
+    ],
+
+    'OPEN_AMQP' => [
+        'name'          => 'Open Advanced Message Queuing Protocol (AMQP) server',
+        'description'   => '
+            <h2>What is a AMQP server?</h2>
+
+            <p>AMQP is an open internet protocol for business messaging. It is often also used for IoT device management.</p>
+
+            <h2>Why would this be bad?</h2>
+
+            <p>Even though it does allow for encrypted communications via TLS, many instances on the Internet are configured for cleartext authentication and message sharing. Furthermore in the past there have been multiple vulnerabilities discovered in AMQP broker software implementations that can allow for authentication bypass, interception of messages, remote code execution or denial of service and other attacks.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Make sure that the AMQP server is up-to-date and that the AMQP server is not reachable over the internet if it doesn\'t need to be.</p>
+            ',
+    ],
+
+    'OPEN_SSH_SERVER' => [
+        'name'          => 'Open SSH service',
+        'description'   => '
+            <p> This report identifies hosts that have the Secure Shell (SSH) service running and accessible on the Internet. </p>
+
+            <p> This does not indicate that anything is wrong with the system, but if the SSH running on a system (or the version that is running) seems out of place, you may wish to investigate. </p>
+            ',
+    ],
+
+    'OPEN_SMTP_SERVER' => [
+        'name'          => 'Open SMTP service',
+        'description'   => '
+            <p> This report contains a list of accessible SMTP servers. </p>
+
+            <p> This is just a population scan – there are no vulnerabilities being reported – but network owners should be aware of any unintentional SMTP server exposure and should verify all are patched to the latest software version. </p>
+            ',
+    ],
+
+    'OPEN_ICS' => [
+        'name'          => 'Open Industrial Control Service (ICS) application',
+        'description'   => '
+            <p> This report contains a list of devices that are responding to various specialized ICS/OT scans, along with additional make-and-model information and raw responses received. </p>
+
+            <p> It is extremely unlikely that these types of devices need to be accessible in any form to queries from the Internet, so unless you are running a honeypot if you receive such a report for your network/constituency, you are strongly advised to act immediately and firewall/filter access. </p>
+            ',
+    ],
+
+    'OPEN_POSTGRESQL_SERVER' => [
+        'name'          => 'Open PostgreSQL Server.',
+        'description'   => '
+            <p> This report identifies accessible PostgreSQL server instances on port 5432/TCP. </p>
+
+            <p> It is unlikely that you need to have your PostgreSQL server allowing for external connections from the Internet (and thus a possible external attack surface). If you do receive a report on your network/constituency take action to filter out traffic to your PostreSQL instance. Make sure to implement authentication on the server. </p>
+            ',
+    ],
+
+    'OPEN_STUN_SERVICE' => [
+        'name'          => 'Open STUN Service',
+        'description'   => '
+            <p> This report identifies accessible STUN (Session Traversal Utilities for NAT) servers on port 3478/udp. As described on Wikipedia, STUN is a standardized set of methods, including a network protocol, for traversal of network address translator (NAT) gateways in applications of real-time voice, video, messaging, and other interactive communications. The STUN service is known to be a potential UDP message amplifier, that can be abused for reflected DDoS attacks. </p>
+
+            <p> Consider using STUN over TCP instead by default. </p>
+',
+    ],
+
+    'OPEN_ERLANG_PORTMAPPER_DAEMON' => [
+        'name'          => 'Open Erlang Port Mapper Daemon server',
+        'description'   => '
+            <p> This report identifies accessible Erlang Port Mapper Daemon (EPMD) servers on port 4369/tcp. This daemon acts as a name server for hosts involved in distributed Erlang computations. </p>
+
+            <p> It is unlikely that you need to have an EPMD server allowing for external connections from the Internet (and thus a possible external attack surface). Make sure to firewall traffic to this service. If you do receive this report from us for your network or constituency make sure to firewall traffic to this service.</p>
+',
+    ],
+
+    'OPEN_SOCKS_PROXY' => [
+        'name'          => 'Open SOCKS Proxy service',
+        'description'   => '
+            <p> This report identifies hosts that have a SOCKS proxy version 4 or SOCKS proxy version 5 service running on port 1080/TCP and accessible from the Internet. The SOCKS protocol enables the exchange of packets between a client and server through a proxy server. These proxy servers can optionally support authentication.</p>
+
+            <p> Open proxy servers allowing proxying of services without authentication are often subject to abuse. Others, even with authentication, may also have security implications. </p>
+
+            <p> As with all remote access tools, care should be taken to make sure a SOCKS proxy service is configured in a secure manner and the security implications of making it accessible from anywhere on the Internet taken into account. </p>
+            ',
+    ],
+
+    'DEVICE_IDENTIFICATION' => [
+        'name'          => 'Device identification',
+        'description'   => '
+            <p> This is a device population report – no assessment is made on the vulnerability state of the device. The report is intended for recipients to get a better understanding of device population types on networks they are responsible for. Please note the assessment is based only on what was publicly accessible from the Internet.</p>
+            ',
+    ],
+
+    'ACCESSIBLE_XDMCP_SERVICE_REPORT' => [
+        'name'          => 'Open XDCMP Service',
+        'description'   => '
+            <p> This report identifies hosts that have the X Display Manager service running and accessible on the Internet. </p>
+
+            <p> XDMCP leaks information about the host system and, in addition, it can be used in an amplification attack, providing an approximate 7x amplification. Please note that it does not matter if XDMCP responds with a “Willing” or an “Unwilling”; the service provides the same level of amplification. </p>
+            ',
+    ],
+
+    'VULNERABLE_EXCHANGE_SERVER' => [
+        'name'          => 'Vulnerable Microsoft Exchange server',
+        'description'   => '
+            <h2>What is a "Vulnerable SMTP server"></h2>
+            
+            <p>It was discovered that the host is running a vulnerable version of Microsoft Exchange.</p>
+
+            <h2>Why would this be bad?</h2>
+        
+            <p>Hackers might exploit the vulnerable Microsoft Exchange server, resulting in potentially getting the server compromised.</p>
+
+            <h2>Recommended action</h2>
+
+            <p>Update Microsoft Exchange to the latest version.</p>
+            ',
+    ],
+
+    'ACCESSIBLE_MSMQ_SERVICE' => [
+        'name'         => 'Accessible Microsoft Message Queuing service',
+        'description'  => '
+            <p> This report identifies accessible Microsoft Message Queuing (MSMQ) servers on port 1801/TCP. This service may be optionally enabled on Windows operating systems, including Windows Server 2022 and Windows 11. </p>',
+    ],
+
+    'ACCESSIBLE_SLP_SERVICE' => [
+        'name'         => 'Accessible Service Location Protocol (SLP) Service',
+        'description'  => '
+            <p> This report identifies accessible SLP (Service Location Protocol) services on port 427/TCP and 427/UDP. The Service Location Protocol (SLP, srvloc) is a service discovery protocol that allows computers and other devices to find services in a local area network without prior configuration </p>',
+    ],
+
+    'ACCESSIBLE_BGP_SERVICE' => [
+        'name'         => 'Accessible Border Gateway Protocol (BGP) Service',
+        'description'  => '
+            <p> This report identifies accessible Border Gateway Protocol (BGP) servers on port 179/TCP. </p>',
+    ],
+
 ];
