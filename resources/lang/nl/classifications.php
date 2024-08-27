@@ -17,7 +17,7 @@ return [
         'name'        => 'Generiek bericht',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
-'OPOPEN_SMARTINSTALL' => [
+'OPEN_SMARTINSTALL' => [
         'name'        => 'Open Cisco Smart Install',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
@@ -145,12 +145,12 @@ return [
 
             <p>Een botnet kan worden gebruikt om uw persoonlijke data te stelen, 
             spam te versturen, andere computers te hacken en netwerkaanvallen te lanceren. 
-            In al deze voorbeelden, bent u de bron van deze aanvallen!</p>
+            In al deze voorbeelden bent u de bron van deze aanvallen!</p>
 
             <h2>Aanbevolen actie</h2>
 
             <p>Dit probleem moet worden opgelost door de kwaadaardige software te verwijderen.
-            In het geval van zeer persistente infecties, zal het besturingssysteem opnieuw moeten worden
+            In het geval van zeer persistente infecties zal het besturingssysteem opnieuw moeten worden
             geïnstalleerd om van de infectie af te kunnen komen.</p>
 
             <h2>Tips om dit op te lossen</h2>
@@ -208,7 +208,7 @@ return [
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Als uw site gehackt is, betekent dat niet alleen dat er ongewenste wijzigingen aan uw site zijn gedaan, 
-            maar ook dat de site één of meer beveiligingsproblemen heeft die de hacker in staat stelde om in de eerste plaats in te kunnen breken.
+            maar ook dat de site één of meer beveiligingsproblemen heeft die de hacker in staat stelde om überhaupt in te kunnen breken.
             De gehackte site kan worden gebruikt voor een groot aantal ongewenste en/of malafide doeleinden, waaronder: </p>
 
             <ul>
@@ -231,8 +231,8 @@ return [
             <h2>Aanbevolen actie</h2>
 
             <p>Als uw site met malware gehackt of geïnfecteerd is, haal eerst de site offline. 
-            Dit is wellicht geen populaire maatregel, maar gezien er kans is dat uw site gegevens lekt of het systeem van uw bezoekers infecteert, 
-            is het van belang zo snel mogelijk hierop te reageren om eventuele schade te beperken.</p>
+            Dit is wellicht geen populaire maatregel, maar gezien er kans is dat uw site gegevens lekt of systemen van uw bezoekers infecteert, 
+            is het van belang zo snel mogelijk hierop te handhaven om eventuele schade te beperken.</p>
 
             <p>Nadat u uw site offline heeft gezet, zult u de aangetaste onderdelen van de site moeten opschonen.</p>
 
@@ -246,18 +246,18 @@ return [
             <li>Kijk in tijdelijke mappen voor (uitvoerbare) scripts.</li>
             </ul>
 
-            <p>Verder kan de kans op hercompromittering verkleint worden door de volgende tips op te volgen: </p>
+            <p>Verder kan de kans op hercompromittering verkleind worden door de volgende tips op te volgen: </p>
 
             <ul>
             <li>Houd software en plug-ins up-to-date, ongeacht of u populaire content Management Software (CMS) zoals 
             WordPress, Joomla of Blogger of iets anders gebruikt.
             Haal plug-ins die niet in gebruik zijn weg.</li>
-            <li>Gebruik sterke en verschillende wachtwoorden. Uw WordPress inloggegevens zouden bijvoorbeeld anders moeten zijn dan uw FTP inloggegevens.
+            <li>Gebruik sterke en verschillende wachtwoorden. Uw WordPress inloggegevens zouden bijvoorbeeld anders moeten zijn dan die voor FTP.
             Sla nooit wachtwoorden onbeveiligd op uw lokale machine op.</li>
             <li>Scan uw computer regelmatig voor malware en controleer uw website op ongewenste en/of onbevoegde veranderingen.</li>
             <li>Gebruik geschikte 'file permissions' op uw webserver.</li>
             <li>Laat beveiliging een prioriteit zijn bij het zoeken naar een webhoster. Als u niet zeker weet of u uw site zelf kunt beveiligen, 
-            kijk of het een optie is om een beveiligingsservice af te nemen bij uw hosting provider 
+            kijk of het mogelijk is om een beveiligingsservice af te nemen bij uw hostingprovider 
             of een derde partij die zich in websitecybersecurity specialiseert.</li>
             </ul>
 
@@ -310,11 +310,11 @@ return [
                 inter-organisatorische vorm van feedback, waarin Internet Service Provider (ISP's) mailklachten 
                 van hun gebruikers terugsturen naar de organisatie waar de mail vandaan komt.
                 Over het algemeen verwachten ISP's dat deze klachten als afmeldverzoek worden behandeld en dat de 
-                verzender kijkt naar hoe het aantal klachten verminderd kunnen worden.</p>
+                afzender kijkt naar hoe het aantal klachten verminderd kunnen worden.</p>
 
                 <p>De meest veelvoorkomende manier waarop ISP klachten van gebruikers ontvangen, is door een 'spam melden' knop 
                 op hun webmailpagina's of in de e-mailclient te plaatsen. De gebruiker kan de e-mail ook naar een postmaster-account van de ISP sturen. 
-                In sommige gevallen zijn deze feedback loops niet gebaseerd op meldingen van de gebruikers, maar 
+                In sommige gevallen zijn deze feedbackloops niet gebaseerd op meldingen van de gebruikers, maar 
                 op bijvoorbeeld geautomatiseerde virusdetectie of vergelijkbare technieken.</p>
 
                 <p>Sommige ISP's laten in verband met privacy en/of wettelijke verplichtngen het e-mailadres van de klant weg.
@@ -324,7 +324,7 @@ return [
 
                 <p>In mei 2008 waren er 12 FBL's in gebruik bij een aantal van 's werelds grootste ISP's, waaronder AOL, Hotmail en Yahoo.
                 Feedbackloops zijn inmiddels een industriestandaard voor e-mail geworden.
-                De data die deel uitmaken van het feedbackloopsysteem, zijn extreem waardevol, voor een aantal redenen:</p>
+                De data die deel uitmaken van het feedbackloopsysteem zijn extreem waardevol, voor een aantal redenen:</p>
 
                 <p> - Allereerst, voor lijsthygiëne: leden die een klacht indienen via een feedbackloop kunnen voor deze mails worden afgemeld.
                 Hierdoor neemt het aantal klachten af. Sommigen noemen dit /'list-washing/', maar eigenlijk is dit logisch. 
@@ -337,32 +337,31 @@ return [
 
                 <h2>Wat kan ik doen?</h2>
 
-                <p>Campagnes, onderwerptitels en \"from\"-adressen kunnen worden gemonitord om te controleren of alle e-mailcampagne-elementen hun werk goed doen. 
-                U kunt kijken welke elementen verbetering nodig zouden kunnen hebben. Als er van een bepaalde mailinglist of lijstsegment veel klachten komen, 
+                <p>Campagnes, onderwerptitels en \"from\"-adressen kunnen worden gemonitoord om te controleren of alle e-mailcampagne-elementen hun werk goed doen. 
+                U kunt kijken welke elementen verbetering nodig zouden kunnen hebben. Als er vanuit een bepaalde mailinglist of lijstsegment veel klachten komen, 
                 is dit het nader onderzoeken waard. Veel klachten komen omdat de mailing niet voldoet aan de verwachtingen. 
                 Het aantal klachten van nieuwe abonnees kan bijvoorbeeld erg hoog zijn. Dit kan  komen doordat 
                 abonnees niet krijgen waar ze zich voor opgegeven hadden of dat er veel tijd tussen de inschrijving en de eerste mailing in zit..</p>
 
                 <p>Bovendien hebben veel ISP's een grenswaarde voor klachten. Mocht het aantal klachten boven deze grenswaarde uit komen, 
                 kan uw mail gefilterd of zelfs geblokkeerd worden. Helaas publiceren de meeste ISP's deze grenswaardes (die tevens per ISP kunnen verschillen) niet. 
-                Door de FBL-data in de gaten te houden, kunt u de kwaliteit van uw e-mail in de gaten houden en 
-                bovendien ervoor zorgen dat het aantal klachten niet boven de grenswaardes van de ISP komt.</p>
+                Door de FBL-data in de gaten te houden, kunt u de kwaliteit van uw e-mail in de gaten houden en er 
+                bovendien voor zorgen dat het aantal klachten niet boven de grenswaardes van de ISP uit komt.</p>
 
                 <h2>Ik verstuur deze e-mails niet</h2>
 
-                <p>Als u een hoog aantal FBL klachten binnenkrijgt op e-mails die u zelf niet heeft verstuurd, 
+                <p>Als u een hoog aantal FBL klachten binnenkrijgt over e-mails die u zelf niet heeft verstuurd, 
                 kunt u de host (IP) waar de klacht over gaat als gecompromitteerd beschouwen, gezien deze 
                 e-mails wel van uw systeem afkomstig zijn. In dat geval, is het belangrijk om de mailserver direct offline 
                 te halen en zowel het systeem als de mailqeue schoon te maken voordat u deze weer online zet.</p>
 
-                <h2>Zijn feedbackloops twijfelachtig?
-                What is questionable about Feedback Loops?</h2>
+                <h2>Wat is er dubieus aan feedbackloops?</h2>
 
-                <p>De spamknop brengt enige onnauwkeurige functionaliteit met zich mee Bijvoorbeeld: automatisch afmelden. 
+                <p>De spamknop brengt enige onnauwkeurige functionaliteit met zich mee. Bijvoorbeeld: automatisch afmelden. 
                 Jarenlang is er eindgebruikers verteld afmeldlinks in e-mail niet te vertrouwen, omdat dit zou bevestigen dat de mail gezien en geopend was. 
-                Velen gebruiken dus de spamknop om zich af te melden. Gebruikers moeten erop kunnen vertrouwen dat hun ISP niet het water ingaat met spammers.</p>
+                Velen gebruiken dus de spamknop om zich af te melden. Gebruikers moeten erop kunnen vertrouwen dat hun ISP niet met spammers het water ingaat.</p>
 
-                <p>De spamknop kan ook misbruikt worden om, bijvoorbeeld, gevoelens omtrent de boodschap of de verzender te uiten. 
+                <p>De spamknop kan ook misbruikt worden om bijvoorbeeld gevoelens omtrent de boodschap of de verzender te uiten. 
                 Gezien de knop voor verschillende doeleinden wordt gebruikt, zit er altijd wat onzekerheid in over hoe men de data zal moeten interpreteren.</p>
 
                 <p>Uiteindelijk hebben FBL's meer voor- dan nadelen en is het aan de ontvanger van FBL om te bepalen wat die ermee doet.</p>
@@ -419,7 +418,7 @@ return [
 
             <h2>Wat is 'Harvesting'?</h2>
 
-            <p>'E-mail harvesting' is het proces van met een aantal verschillende methoden 
+            <p>'E-mail harvesting' is het proces van met een aantal verschillende methodes 
             grote aantallen e-mailadressen en/of accounts te verzamelen voor gebruik in het versturen van bulk e-mail, 
             het versturen van spam of toegang tot systemen te verkrijgen.</p>
 
