@@ -13,9 +13,9 @@ return [
     ],
 
     'emailparser' => [
-        'fallback_mail'      => 'admin@isp.local',
-        'use_bounce_method'  => false,
-        'notify_on_warnings' => true,
+        'fallback_mail'      => env('MAIN_EMAILPARSER_FALLBACK_MAIL', 'admin@isp.local'),
+        'use_bounce_method'  => env('MAIN_EMAILPARSER_USE_BOUNCE_METHOD', false),
+        'notify_on_warnings' => env('MAIN_EMAILPARSER_NOTIFY_ON_WARNINGS', true),
     ],
 
     // A list of installation UUID's which are considered to be parents allowing them to push events thru the API
@@ -25,8 +25,8 @@ return [
     ],
 
     'reports' => [
-        'min_lastseen'    => false, //This ignores any event older then threshold
-        'resolvable_only' => false, // This drops anything if a domain or netblock cannot be found
+        'min_lastseen'    => env('MAIN_REPORTS_MIN_LASTSEEN', false), //This ignores any event older then threshold
+        'resolvable_only' => env('MAIN_REPORTS_RESOLVABLE_ONLY', false), // This drops anything if a domain or netblock cannot be found
     ],
 
     'notes' => [
@@ -36,14 +36,14 @@ return [
     ],
 
     'notifications' => [
-        'enabled'        => true,
-        'info_interval'  => '90 days',
-        'abuse_interval' => '0 minutes',
-        'min_lastseen'   => '14 days',
-        'from_address'   => 'abuse@isp.local',
-        'from_name'      => 'ISP Abusedesk',
-        'bcc_enabled'    => false,
-        'bcc_address'    => 'management@isp.local',
+        'enabled'        => env('MAIN_NOTIFICATIONS_ENABLED', true),
+        'info_interval'  => env('MAIN_NOTIFICATIONS_INFO_INTERVAL', '90 days'),
+        'abuse_interval' => env('MAIN_NOTIFICATIONS_ABUSE_INTERVAL', '0 minutes'),
+        'min_lastseen'   => env('MAIN_NOTIFICATIONS_MIN_LASTSEEN', '14 days'),
+        'from_address'   => env('MAIN_NOTIFICATIONS_FROM_ADDRESS', 'abuse@isp.local'),
+        'from_name'      => env('MAIN_NOTIFICATIONS_FROM_NAME', 'ISP Abusedesk'),
+        'bcc_enabled'    => env('MAIN_NOTIFICATIONS_BCC_ENABLED', false),
+        'bcc_address'    => env('MAIN_NOTIFICATIONS_BCC_ADDRESS', 'management@isp.local'),
     ],
 
     'housekeeping' => [
