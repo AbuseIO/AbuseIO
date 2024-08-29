@@ -92,7 +92,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Dit rapport identificeert hosts die een Remote Desktop Protocol (RDP) dienst hebben draaien die voor een ieder vrij toegankelijk is via het internet.
+            <p>Dit rapport identificeert hosts die een Remote Desktop Protocol (RDP) dienst hebben draaien die voor een ieder vrij toegankelijk via het internet is.
             Verkeerd ingestelde RDP kan kwaadwillenden in staat stellen toegang te krijgen tot een desktop van een kwetsbare host.
             Dit maakt het mogelijk om informatie over de target host te bemachtigen, gezien de SSL-certificaten die door RDP worden gebruikt vaak de \'trivial hostname\' van het systeem bevatten.</p>
 
@@ -126,8 +126,8 @@ return [
 
             <p>Botnet is een Porte-manteauwoord afgeleid van de woorden 'robot' en 'netwerk'. 
             Bot refereert aan een computerprogramma dat zelfstandig geautomatiseerde taken uitvoert.
-            Zulke programma's kunnen voor legitieme doeleinden gebruikt worden, 
-            zoekmachines gebruiken bijvoorbeeld bots om websites te indexeren. 
+            Zulke programma's kunnen voor legitieme doeleinden gebruikt worden. 
+            Zoekmachines gebruiken bijvoorbeeld bots om websites te indexeren. 
             Helaas kunnen bots ook voor malafide doeleinden worden misbruikt.
             Een botnet is een grote groep geïnfecteerde computers die via het internet met elkaar verbonden zijn.
             Criminelen die een botnet beheren, zorgen ervoor dat de programma's op zoveel mogelijk computers worden geïnstalleerd.
@@ -457,8 +457,8 @@ return [
 
             <p>Het Character Generator Protocol (CHARGEN) is een service bedoeld voor debuggen, 
             testen en meten. Het wordt zelden gebruikt, gezien de ontwerpfouten van het protocol makkelijk misbruik toestaan.
-            Een host kan een verbinding met een server die CHARGEN ondersteunt via UDP of TCP poort 19 openen. 
-            Zodra er een TCP-verbinding geopend is, zal de server willekeurige characters naar de verbonden host sturen 
+            Een host kan een verbinding met een server die CHARGEN via UDP of TCP poort 19 ondersteunt openen. 
+            Zodra er een TCP-verbinding geopend is, zal de server willekeurige karakters naar de verbonden host sturen 
             tot de host de verbinding sluit. 
             De UDP-implementatie is iets anders: 
             De server stuurt hierbij iedere keer dat het een datagram van de verbonden host ontvangt 
@@ -477,7 +477,7 @@ return [
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
             Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            <p>Dit heeft twee gevolgen: allereerst maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
             <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
@@ -489,7 +489,7 @@ return [
             <h2>Aanbevolen actie</h2>
 
             <p>Er is geen reden om CHARGEN te draaien op een public-facing interface. 
-            Zet deze uit of zorg ervoor dat deze niet vanaf het internet te bereiken is door RFC1918 spaces of een firewall in te zetten.</p>
+            Zet deze uit of zorg ervoor dat deze niet vanaf het internet te bereiken is doormiddel van RFC1918 spaces of door een firewall in te zetten.</p>
 
             <h2>Meer informatie</h2>
 
@@ -503,7 +503,7 @@ return [
             <h2>Wat is een 'Open DNS Resolver'?</h2>
 
             <p>Een open DNS server is een DNS server die bereid is om recursieve DNS queries 
-            voor een ieder op het Internet uit te voeren.</p>
+            voor een ieder op het internet uit te voeren.</p>
 
             <p>Wanneer een DNS server een recursieve DNS query resolved, zoekt het domeininformatie bij andere DNS servers 
             op. Dit is een recursief proces waar meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.</p>
@@ -520,7 +520,7 @@ return [
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
             Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            <p>Dit heeft twee gevolgen: allereerst maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
             <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
@@ -534,7 +534,7 @@ return [
 
             <p>In veel gevallen heeft de computer een DNS-dienst geïnstalleerd als vereiste omdat er geresolved moet worden op die machine. 
             Deze dienst hoeft echter alleen lokaal te resolven. Externe toegang tot deze dienst is dus niet nodig. 
-            Mocht er hiervan sprake zijn, dan raden wij aan om de configuratie van een DNS_dienst aan te passen 
+            Mocht er hiervan sprake zijn, dan raden wij aan om de configuratie van de DNS-dienst aan te passen 
             of een firewall op poort 53 te zetten om de toegang van externe hosts tot deze service te beperken.</p>
 
             <p>Als u een DNS resolver voor meerdere computers draait, dan adviseren wij de toegang tot deze dienst
@@ -629,7 +629,7 @@ return [
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
             Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            <p>Dit heeft twee gevolgen: allereerst maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
             <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
@@ -968,7 +968,7 @@ return [
             <h2>Wat is een 'Open NTP Server'?</h2>
 
             <p>Network Time Protocol (NTP) is een netwerkprotocol voor tijdsynchronisatie
-            tussen computersystemen over packet-switched variable-lancy datanetwerken. 
+            tussen computersystemen over packet-switched variable-latency datanetwerken. 
             NTP werdt al vóór 1985 gebruikt, wat het één van de oudste internetprotocollen nog in gebruik maakt.</p>
 
             <h2>Waarom is dit een probleem?</h2>
@@ -983,7 +983,7 @@ return [
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
             Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            <p>Dit heeft twee gevolgen: allereerst maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
             <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplificatie; als een klein packet een groot antwoord krijgt van de server(s). 
@@ -1053,12 +1053,12 @@ return [
             <p>NetBIOS is een transportprotocol dat door Windowssystemen gebruikt wordt om resources te delen. 
             Als een Windows-PC bijvoorbeeld verbinding wilt maken met een file-server, gebruikt deze waarschijnlijk NetBIOS hiervoor.
             Er zijn wel ontwikkelingen geweest waardoor verbindingen ook zonder NetBIOS opgezet kunnen worden. 
-            SMB; de methode waarmee men toegang kan krijgen tot file- en printershares kan ook los van NetBIOS op TCP poorten 139 en 445 draaien. 
+            SMB bijvoorbeeld; de methode waarmee men toegang kan krijgen tot file- en printershares, kan ook los van NetBIOS op TCP poorten 139 en 445 draaien. 
             Dit vergroot echter wel de 'attack surface' van een netwerk.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>De poorten die naar het internet open zijn, zijn UDP/137, UDP/138 en TCP/139. 
+            <p>De poorten die naar het internet open staan, zijn UDP/137, UDP/138 en TCP/139. 
             Helaas zijn NetBIOS en deze poorten een geliefd doelwit voor aanvallers.</p>
 
             <p>Zodra een aanvaller een actieve poort 139 op een machine ontdekt, kan die, als eerste stap van een attack-footprinting, NBSTAT draaien.
@@ -1076,7 +1076,7 @@ return [
             De aanvaller heeft ook private IP-adressen die de LAN/WAN-engineers en security-engineers hebben geprobeerd achter de NAT te verbergen. 
             Verder bevatten NBSTAT-lijsten ook gebruiker-ID's.</p>
 
-            <p>Als null sessions tegen IPC$ zijn toegestaan, is het niet moeilijk om een stapje verder te gaan en een verbinding op te zetten met het doelapparaat. 
+            <p>Als null sessions tegen IPC$ zijn toegestaan, is het makkelijk om een stapje verder te gaan en een verbinding op te zetten met het doelapparaat. 
             Deze verbinding geeft een overzicht van alle beschikbare shares.</p>
 
             <p>Deze diensten zouden door criminelen kunnen worden misbruikt om 'Denial of Service' (DoS) aanvallen uit te voeren. 
@@ -1137,7 +1137,7 @@ return [
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
             Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            <p>Dit heeft twee gevolgen: allereerst maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
             <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
@@ -1275,7 +1275,7 @@ return [
             <h2>Wat is een 'Open SNMP Server'?</h2>
 
             <p>Simple Network Management Protocol (SNMP) is een veelgebruikt protocol voor netwerkbeheer. Het wordt gebruikt om informatie op een IP-netwerk van netwerkapparaten 
-            zoals servers, printers, hubs, switches en routers te verzamelen en deze apparaten te configureren. .</p>
+            zoals servers, printers, hubs, switches en routers te verzamelen en deze apparaten te configureren.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -1292,7 +1292,7 @@ return [
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
             Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            <p>Dit heeft twee gevolgen: allereerst maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
             <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
@@ -1386,7 +1386,7 @@ return [
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
             Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            <p>Dit heeft twee gevolgen: allereerst maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
             <p>Reflection-aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
@@ -1399,7 +1399,7 @@ return [
             <h2>Aanbevolen actie</h2>
 
             <p>Er is geen reden om deze CHARGEN-dienst op een public facing interface aan te zetten. 
-            Zet deze dienst uit of zorg ervoor dat deze niet vanaf het internet te bereiken is door RFC1918 spaces of een firewall te gebruiken.</p>
+            Zet deze dienst uit of zorg ervoor dat deze niet vanaf het internet te bereiken is doormiddel van RFC1918 spaces of door een firewall te gebruiken.</p>
 
             ",
     ],
@@ -1433,22 +1433,22 @@ return [
     ],
 
     'PHISING_WEBSITE' => [
-        'name'        => 'Phishing Website',
+        'name'        => 'Phishingweebsite',
         'description' => "
-            <h2>Wat is een 'Phishing website'?</h2>
+            <h2>Wat is een 'phishingwebsite'?</h2>
 
             <p>Een phishingwebsite is een site die wordt gebruikt om gevoelige informatie zoals 
             gebruikersnamen, wachtwoorden, bankgegevens (en soms indirect: geld) door zich voor te doen als een vertrouwde website. 
-            Mails en communicatie die claimen van o.a. populaire sociale media sites, veilingsites, 
+            E-mails en communicatie die beweren van o.a. populaire sociale media sites, veilingsites, 
             banken, online betaaldiensten, beroemdheden of ICT-beheerders af te komen, 
-            worden ingezet om mensen naar deze sites te krijgen en hun gegevens daarheen te sturen. Deze sites kunnen tevens geïnfecteerd met malware zijn. </p>
+            worden ingezet om mensen naar deze sites te krijgen en hun gegevens daarheen te sturen. Deze sites kunnen tevens ook met malware geïnfecteerd zijn. </p>
 
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Een phishingwebsite is vaak het resultaat van een gehackte website of gecompromitteerde inloggegevens van een gebruiker van deze site.</p>
 
             <p>Als uw site gehackt is, betekent dat niet alleen dat er ongewenste wijzigingen aan uw site zijn gedaan, 
-            maar ook dat de site één of meer beveiligingsproblemen heeft die de hacker in staat stelde om in de eerste plaats in te kunnen breken.
+            maar ook dat de site één of meer beveiligingsproblemen heeft die de hacker in staat stelde om überhaupt in te kunnen breken.
             De gehackte site kan worden gebruikt voor een groot aantal ongewenste en/of malafide doeleinden.</p>
 
             <h2>Aanbevolen actie</h2>
@@ -1470,18 +1470,18 @@ return [
             <li>Kijk in tijdelijke mappen voor (uitvoerbare) scripts.</li>
             </ul>
 
-            <p>Verder kan de kans op hercompromitering verkleint worden door de volgende tips op te volgen: </p>
+            <p>Verder kan de kans op hercompromittering verkleind worden door de volgende tips op te volgen: </p>
 
             <ul>
             <li>Houd software en plug-ins up-to-date, ongeacht of u populaire content Management Software (CMS) zoals 
             WordPress, Joomla of Blogger of iets anders gebruikt.
             Haal plug-ins die niet in gebruik zijn weg.</li>
-            <li>Gebruik sterke en verschillende wachtwoorden. Uw WordPress inloggegevens zouden bijvoorbeeld anders moeten zijn dan uw FTP inloggegevens.
+            <li>Gebruik sterke en gevarieerde wachtwoorden. Uw WordPress inloggegevens zouden bijvoorbeeld moeten verschillen van uw FTP inloggegevens.
             Sla nooit wachtwoorden onbeveiligd op uw lokale machine op.</li>
             <li>Scan uw computer regelmatig voor malware en controleer uw website op ongewenste en/of onbevoegde veranderingen.</li>
             <li>Gebruik geschikte 'file permissions' op uw webserver.</li>
             <li>Laat beveiliging een prioriteit zijn bij het zoeken naar een webhoster. Als u niet zeker weet of u uw site zelf kunt beveiligen, 
-            kijk of het een optie is om een beveiligingsservice af te nemen bij uw hosting provider 
+            kijk of het een optie is om een beveiligingsservice af te nemen bij uw hostingprovider 
             of een derde partij die zich in websitecybersecurity specialiseert.</li>
             </ul>
 
@@ -1509,7 +1509,7 @@ return [
             <p>Afhankelijk van de situatie, kan uw server mogelijk door malafiden misbruikt worden om bijvoorbeeld 
             spam te versturen of andere mensen kwaad te doen met behulp van uw server als proxy.</p>
 
-            <p>Als uw server genoteerd staat op deze RBL, gaat u moeite krijgen met e-mail versturen aan een groot aantal ontvangers.</p>
+            <p>Als uw server op een RBL staat, gaat u moeite krijgen met e-mail versturen aan een groot aantal ontvangers.</p>
 
             <h2>Aanbevolen actie</h2>
 
@@ -1547,12 +1547,12 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Spam of ongewenste e-mail versturen is illegaal en -per onze voorwaarden - niet toegestaan.</p>
+            <p>Spam of ongewenste e-mail versturen is illegaal en - per onze voorwaarden - niet toegestaan.</p>
 
             <h2>Aanbevolen actie</h2>
 
             <p>Als u inderdaad bulk e-mail verstuurd, volg de onderstaande regels 
-            voor bulk mail om te voorkomen dat uw mails als spam worden aangemerkt:</p>
+            voor bulk e-mail om te voorkomen dat uw mails als spam worden aangemerkt:</p>
 
             <ul>
                 <li>1) De ontvangers van uw mails hebben zich aangemeld voor deze dienst.</li>
@@ -1574,7 +1574,7 @@ return [
 
             <h2>Meer informatie/h2>
 
-            <p>Neem contact op met onze abuseäfdeling als u niet weet hoe u dit probleem op kan lossen.</p>
+            <p>Neem contact op met onze abuse-afdeling als u niet weet hoe u dit probleem zelf op kan lossen.</p>
 
             ",
     ],
@@ -1600,7 +1600,7 @@ return [
 
             <h2>Tips om dit op te lossen</h2>
 
-            <p>Er zijn een aantal dingen die u doen kan tijdens het opruimen van uw mailinglist:</p>
+            <p>Er zijn een aantal dingen die u kunt doen tijdens het opruimen van uw mailinglist:</p>
 
             <ul>
                     <li>Haal misvormde domeinnamen weg</li>
@@ -1618,7 +1618,7 @@ return [
 
             <h2>Meer informatie</h2>
 
-            <a target'_blank' href='https://www.techtarget.com/searchsecurity/definition/spam-trap'>What is a spam trap and how do you avoid them?</a><br>
+            <a target'_blank' href='https://www.techtarget.com/searchsecurity/definition/spam-trap'>What is a spam trap and how do you avoid them? (Engels)</a><br>
 
             ",
     ],
@@ -1638,13 +1638,13 @@ return [
             kan de aanvaller een browser en server forceren een ouder protocol te gebruiken, tot SSLv3 aan toe. Gezien de POODLE kwetsbaarheid in het protocol zelf zit, is het niet iets 
             dat eruit gepatcht kan worden zoals ShellShock of HeartBleed.</p>
 
-            <p>Deze aanval tegen het SSLv3-protocol staat aanvallers toe de plaintext van bepaalde gedeeltes van een SSL-vebinding, 
+            <p>Deze aanval tegen het SSLv3-protocol staat aanvallers toe de plaintext van bepaalde gedeeltes van een SSL-verbinding, 
             zoals de cookie, te bemachtigen. Dit is te vergelijken met BEAST, maar praktischer uit te voeren. 
-            Iedere server die hier niet tegen gepatcht is, is kwetsbaar voor deze aanval.</p>
+            Iedere server die hier niet voor gepatcht is, is kwetsbaar voor deze aanval.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>De makkelijkste manier om misbruik van POODLE uit te sluiten, is om SSLv3-support op uw server uit te schakelen. 
+            <p>De makkelijkste manier om misbruik van POODLE te voorkomen, is om ondersteuning voor SSLv3 op uw server uit te schakelen. 
             Het kan zijn dat hierdoor een aantal ernstig-verouderde systemen (zoals systemen die IE6 gebruiken of Windows XP zonder SP3) geen verbinding meer kunnen maken. 
             Dit komt gelukkig vrijwel niet meer voor.</p>
 
@@ -1711,12 +1711,12 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Controleer uw website en DNS op tekenen van compromis.</p>
+            <p>Controleer uw website en DNS op tekenen van compromittering.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
             <ul>
-            <li>Indien dit om een CMS (WordPress, Drupal, Joomla, etc.) gaat, check of er updates voor uw add-ons en plug-ins beschikbaar zijn. Voer deze uit waar mogelijk.</li>
+            <li>Indien dit om een CMS (WordPress, Drupal, Joomla, etc.) gaat, ga na of er updates voor uw add-ons en plug-ins beschikbaar zijn. Voer deze uit waar mogelijk.</li>
             <li>Indien dit een 'standaard' website is, controleer op tekens van infectie of onbekende links op uw pagina's. Neem stappen om deze te verwijderen.</li>
             <li>Zodra het probleem is opgelost, laat uw URL van blocklists afhalen.</li>
             </ul>
@@ -1733,32 +1733,24 @@ return [
         'description' => "
             <h2>Wat is een 'Open ElasticSearch Server'?</h2>
 
-            <p>Elasticsearch is een op Lucene gebaseerde zoekserver. een gedistribueerde zoekmachine met een RESTful web interface en schema-free JSON documenten.
-            
-            Elasticsearch is a search server based on Lucene. It provides a distributed,
+            <p>Elasticsearch is a search server based on Lucene. It provides a distributed,
             multitenant-capable full-text search engine with a RESTful web interface and
             schema-free JSON documents.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>
-            
-            Your system has an ElasticSearch instance running (see www.elastic.co for
+            <p> Your system has an ElasticSearch instance running (see www.elastic.co for
             more information) which is accessible on the internet. On its own, ElasticSearch
             does not support authentication or restrict access to the datastore, so it is
             possible that any entity that can access the ElasticSearch instance may have
             complete control.</p>
 
-            <p>
-            
-            This is especially problematic if this instance has dynamic scripting running.
+            <p>This is especially problematic if this instance has dynamic scripting running.
             The scripting engine can be abused to launch a denial of service attack.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p
-            
-            >Either bind this service only to non-public facing connections or add a firewall
+            <p>Either bind this service only to non-public facing connections or add a firewall
             to block the port ElasticSearch is running on.</p>
 
             <h2>Tips to resolve this matter</h2>
@@ -1810,7 +1802,7 @@ return [
             <p>De aanvaller stuurt een packet dat afkomstig lijkt te zijn van het slachtoffer naar een server die daar direct antwoord op geeft. 
             Omdat het IP-adres gespooft is, wordt de opgevraagde data naar het slachtoffer verzonden.</p>
 
-            <p>Dit heeft twee gevolgen: allereerst, maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
+            <p>Dit heeft twee gevolgen: allereerst maakt dit de werkelijke bron van de aanval heel moeilijk te traceren. 
             Verder, indien er veel servers voor de aanval worden misbruikt, kan de aanval bestaan uit een overweldigend aantal packets afkomstig vanaf servers over de hele wereld verspreid.</p>
 
             <p>Reflection aanvallen kunnen nog krachtiger zijn wanneer deze gecombineerd zijn met amplification; als een klein packet een groot antwoord krijgt van de server(s). 
@@ -1822,8 +1814,8 @@ return [
             <h2>Aanbevolen actie</h2>
 
             <p>Wij adviseren om enkel RPC calls van vertrouwde bronnen toe te laten.
-            Dit kan worden gedaan door al het verkeer voor RPC services te laten vallen
-            en alleen verbindingen van bekende IP-adressen toe te staan.</p>
+            Dit kan worden gedaan door al het verkeer richting RPC services te laten vallen
+            en alleen verbindingen vanaf vertrouwde IP-adressen toe te staan.</p>
             ",
     ],
 
@@ -1872,9 +1864,9 @@ return [
         'description' => '
             <h2>Wat is a \'Open AFP Server\'?</h2>
 
-            <p>Apple Filing Protocol (AFP; voorheen AppleTalk Filing Protocol) is een transportprotocol dat Apple\'s MacOS gebruikt om resources te delen. 
-            Als een MacOS-systeem bijvoorbeeld een gedeelde direcdtory op een ander systeem wilt bereiken, kan het AFP hiervoor gebruiken. AFPv3 gebruikt TCP/poort 548. 
-            Dit protocol ondersteunt ook andere opties, waaronder wachtwoorden van gebruikers wijzigen.</p>
+            <p>Apple Filing Protocol (AFP; voorheen AppleTalk Filing Protocol) is een transportprotocol dat door Apple\'s MacOS gebruikt wordt om resources te delen. 
+            Als een MacOS-systeem bijvoorbeeld een gedeelde map op een ander systeem wilt bereiken, kan het AFP hiervoor gebruiken. AFPv3 gebruikt TCP/poort 548. 
+            Dit protocol ondersteunt ook andere opties, waaronder het wijzigen van gebruikerswachtwoorden.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -1937,7 +1929,7 @@ return [
             <p>Afhankelijk van het protocol en het soort dienst dat misbruikt wordt, kan de aanvaller diens oorspronkelijke packet meerdere keren 'versterkt' worden (tot een factor van honderden), 
             waardoor het slachtoffer met packets wordt overspoeld en een DDoS mogelijk wordt.</p>
             
-            <p>Honeypots die open amplificeerbare diensten nadoen kunnen worden gebruikt om dit soort misbruik te detecteren. Echter, omdat de source ip van deze aanvallen gespooft is, 
+            <p>Honeypots die open amplificeerbare diensten nadoen, kunnen worden gebruikt om dit soort misbruik te detecteren. Echter, omdat de source ip van deze aanvallen gespooft is, 
             is het alleen mogelijk om over de slachtoffers te rapporteren, niet de werkelijk bron van de DDoS.</p>
             
             <p>Voor meer informatie over hoe geamplificeerde DDoS-aanvallen in hun werk gaan, zie deze 
@@ -2121,7 +2113,7 @@ return [
             <p> Dit rapport identificeert toegankelijke Erlang Port Mapper Daemon (EPMD) servers op port 4369/tcp.
             Deze daemon doet dienst als nameserver voor hosts die bij gedistributeerde Erlang berekeningen betrokken zijn. </p>
 
-            <p> Het is onwaarschijnlijk dat uw EPMD server externe verbindingen vanaf het internet toe hoeft te staan (gezien dit een mogelijk extern aanvalsvalk kan zijn).
+            <p> Het is onwaarschijnlijk dat uw EPMD server externe verbindingen vanaf het internet toe hoeft te staan (gezien dit een mogelijk extern aanvalsvlak kan zijn).
             Als u dit dit rapport ontvangt voor uw netwerk of kring, zorg ervoor dat verkeer richting deze service gefirewalled wordt.</p>
 ',
     ],
@@ -2135,7 +2127,7 @@ return [
             <p> Open proxy servers die het proxyen van diensten zonder authentificatie toestaan, worden vaak misbruikt. Andere - zelfs met authentificatie - zouden ook gevolgen voor de veiligheid kunnen hebben.</p>
 
             <p> Zoals bij alle remote access tools, is het belangrijk om ervoor te zorgen dat ook een SOCK proxy service secuur geconfigureerd is.
-            Ook is het belangrijk om de mogelijke beveiligingsimplicaties van het overal toegankelijk maken via het internet van deze service mee te nemen. </p>
+            Ook is het belangrijk om de mogelijke beveiligingsimplicaties van het overal toegankelijk maken via het internet van deze service mee te nemen in uw besluitvorming. </p>
             ',
     ],
 
@@ -2184,7 +2176,7 @@ return [
     'ACCESSIBLE_SLP_SERVICE' => [
         'name'         => 'Toegankelijke Service Location Protocol (SLP) Service',
         'description'  => '
-            <p> Dit rapport identificeert toegankelijke SLP (Service Location Protocol) services op port 427/TCP en 427/UDP. Service Location Protocol (SLP, srvloc) is een service ontdekkingsprotocol dat computers en andere apparaten in staat stelt services in een local area network (LAN) te vinden zonder dat daar verder configuratie aan vooraf gaat. </p>',
+            <p> Dit rapport identificeert toegankelijke SLP (Service Location Protocol) services op port 427/TCP en 427/UDP. Service Location Protocol (SLP, srvloc) is een dienstontdekkingsprotocol dat computers en andere apparaten in staat stelt diensten in een local area network (LAN) te vinden zonder dat daar verdere configuratie aan vooraf gaat. </p>',
     ],
 
     'ACCESSIBLE_BGP_SERVICE' => [
