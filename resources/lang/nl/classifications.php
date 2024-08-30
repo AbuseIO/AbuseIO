@@ -34,7 +34,7 @@ return [
 
     'OPEN_SMB_SERVER' => [
         'name'        => 'Open SAMBA Server (SMB/CIFS)',
-        'description' => 'Deze rapportage identificeert hosts die een SMB instance hebben draaien op poort 445/TCP die vrij toegankelijk via het internet is. 
+        'description' => 'Deze rapportage identificeert hosts die een SMB instance hebben draaien op poort 445/TCP die vrij toegankelijk is via het internet. 
         Deze dienst zou niet toegankelijk via het internet moeten zijn.',
     ],
 
@@ -50,6 +50,11 @@ return [
 
     'OPEN_LDAP_SERVER' => [
         'name'        => 'Open LDAP Server',
+        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
+    ],
+      
+    'BOTNET_CONTROLLER' => [
+        'name'        => 'Botnetserver',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
 
@@ -92,7 +97,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Dit rapport identificeert hosts die een Remote Desktop Protocol (RDP) dienst hebben draaien die voor een ieder vrij toegankelijk via het internet is.
+            <p>Dit rapport identificeert hosts die een Remote Desktop Protocol (RDP) dienst hebben draaien die voor een ieder vrij toegankelijk is via het internet.
             Verkeerd ingestelde RDP kan kwaadwillenden in staat stellen toegang te krijgen tot een desktop van een kwetsbare host.
             Dit maakt het mogelijk om informatie over de target host te bemachtigen, gezien de SSL-certificaten die door RDP worden gebruikt vaak de \'trivial hostname\' van het systeem bevatten.</p>
 
@@ -113,18 +118,13 @@ return [
             <a target\'_blank\' href=\'https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc743162(v=ws.11)\'>Remote Desktop Services and Windows Firewall</a><br>
             ',
     ],
-    
-    'BOTNET_CONTROLLER' => [
-        'name'        => 'Botnetserver',
-        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
-    ],
 
     'BOTNET_INFECTION' => [
         'name'        => 'Botnet-infectie',
         'description' => "
              <h2>Wat is een 'Botnet-infectie'?</h2>
 
-            <p>Botnet is een Porte-manteauwoord afgeleid van de woorden 'robot' en 'netwerk'. 
+            <p>Botnet is een porte-manteauwoord afgeleid van de woorden 'robot' en 'netwerk'. 
             Bot refereert aan een computerprogramma dat zelfstandig geautomatiseerde taken uitvoert.
             Zulke programma's kunnen voor legitieme doeleinden gebruikt worden. 
             Zoekmachines gebruiken bijvoorbeeld bots om websites te indexeren. 
@@ -156,20 +156,20 @@ return [
             <h2>Tips om dit op te lossen</h2>
 
             <p>Indien uw systeem een werkstation of server is:<ul>
-            <li>Installeer en/of update een antivirussoftware en voer een volledige scan van uw computer uit. 
-            Het wordt aangeraden om meerdere scanners te gebruiken, omdat niet alle scanners dezelfde soorten malware herkennen kunnen.</li>
-            <li>Scan het netwerk voor geïnfecteerde bestanden. Vergeet niet ook uw backups te scannen, 
+            <li>Installeer en/of update antivirussoftware en voer een volledige scan van uw computer uit. 
+            Het wordt aangeraden om meerdere scanners te gebruiken, omdat niet alle scanners dezelfde soorten malware kunnen herkennen.</li>
+            <li>Scan het netwerk op geïnfecteerde bestanden. Vergeet niet ook uw backups te scannen, 
             alsmede alle computers die wellicht al een tijdje uit hebben gestaan ivm. bijv. vakanties.</li>
             <li>Gebruikers van enig systeem dat met een botnetinfectie te maken heeft, zullen al hun wachtwoorden zo snel mogelijk moeten veranderen.
             Dit houdt in: alle lokaal opgeslagen wachtwoorden die toegang verschaffen tot andere systemen en applicaties 
             (inclusief zakelijke applicaties, toegang tot webbeheeraccounts, persoonlijke e-mail en sociale media, etc.).</li>
-            <li>Als een computer met malware geïnfecteerd blijkt te zijn, is de kans groot dat er ook andere malware op het systeem aanwezig is. 
-            Een 'clean reinstall' voorkomt dat deze vrij toegang tot het netwerk kunnen krijgen.</li>
+            <li>Als een computer is geïnfecteerd met malware, is de kans groot dat er ook andere malware op het systeem aanwezig is. 
+            Een 'clean reinstall' voorkomt dat deze vrije toegang tot het netwerk kunnen krijgen.</li>
             </ul></p>
 
             <p>Indien uw systeem een website / hostingsysteem is:<ul>
-            <li>Als u het vermoeden heeft dat een gebruikersaccount gehackt is, wijzig onmiddelLijk het wachtwoord van dit account.</li>
-            <li>Scan alle gehoste websites en tijdelijke mappen voor verdachte bestanden en verwijder deze.
+            <li>Als u het vermoeden heeft dat een gebruikersaccount gehackt is, wijzig onmiddellijk het wachtwoord van dit account.</li>
+            <li>Scan alle gehoste websites en tijdelijke mappen op verdachte bestanden en verwijder deze.
             Controleer ook uw lijst met processen (bijv. taakbeheer) voor mogelijke verdachte processen en beëindig deze.</li>
             <li>Controleer uw mailqeueus voor uitgaande SPAM en verwijder deze.</li>
             <li>Installeer een rootkit- en virusscanner om er zeker van te zijn dat alle malafide bestanden verwijderd zijn.</li>
@@ -212,25 +212,22 @@ return [
             De gehackte site kan worden gebruikt voor een groot aantal ongewenste en/of malafide doeleinden, waaronder: </p>
 
             <ul>
-            <li>Het hosten van malware - Dit omvat zowel complexe scripts die bezoekers hun PC infecteren, alsmede 
-            phishing e-mails die een ontvanger hebben weten te overtuigen een bestand dat (ongewild) op uw website gehost is te downloaden. 
+            <li>Het hosten van malware - Dit kan de vorm aannemen van complexe scripts die elke bezoekende pc infecteren. Alternatief kunnen goed opgestelde e-mails een ontvanger overtuigen om een malwarebestand te downloaden dat op de gecompromitteerde site is gehost.
             In veel gevallen is zo'n malware(script) ergens in een subfolder verborgen.</li>
             <li>Geïnjecteerde content - Als hackers toegang tot uw website hebben, zouden ze kunnen proberen malafide content te injecteren. 
             Dit kan zowel direct op de site zelf gebeuren via javascript of in iframes. 'SQL injection' is ook een reële dreiging.</li>
             <li>URL redirect - Duizende gehackte sites redirecten naar een handvol 'master URL's'. 
             Met een paar regels verborgen HTML wordt uw site in een soort 'voordeur' voor de badware veranderd. 
             De 'master URL's' kunnen bijvoorbeeld spammerige productpagina's of malware bevatten.</li>
-            <li>Het hosten van o.a. phishing, spampagina's en/of pornografie - 
-            één of meerdere statische pagina's op de gehackte site kunnen dienst doen om bijvoorbeeld 'spam products' (zoals geneesmiddelen, drugs, versterkende middelen, etc.) te adverteren.
-            Ook neppagina's voor banken, betaaldiensten, e-maildiensten, etc. of het hosten van expliciet (soms illegaal) content vallen hieronder.</li>
-            <li>Vandalisme - De hack kan zijn uitgevoerd om de eigenaar van de site te vernederen of bijvoorbeeld voor politieke doeleinden. 
-            Dit valt onder de paraplu van het 'hacktivisme'. Sommige beheerders geven aan dat concurrenten dit ook doen. </li>
+            <li>Het hosten van o.a. phishing, spampagina's en/of pornografie - Eén of meerdere statische pagina's op de gehackte site kunnen dienst doen om bijvoorbeeld 'spam products' (zoals geneesmiddelen, drugs, etc.) te adverteren. Ook neppagina's voor banken, betaaldiensten, e-maildiensten, etc. of het hosten van expliciet (soms illegale) content vallen hieronder.</li>
+            <li>Vandalisme - De hack kan zijn uitgevoerd om de eigenaar van de site in verlegenheid te brengen of bijvoorbeeld voor politieke doeleinden. 
+            Dit valt onder de paraplu van het 'hacktivisme'.</li>
             <li>Overige content of activiteiten - Door de jaren heen zijn er aardig complexe vormen van misbruik geconstateerd. Bijvoorbeeld een script dat spam stuurt.</li>
             </ul>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Als uw site met malware gehackt of geïnfecteerd is, haal eerst de site offline. 
+            <p>Als uw site met malware gehackt of geïnfecteerd is, haal dan eerst de site offline. 
             Dit is wellicht geen populaire maatregel, maar gezien er kans is dat uw site gegevens lekt of systemen van uw bezoekers infecteert, 
             is het van belang zo snel mogelijk hierop te handhaven om eventuele schade te beperken.</p>
 
@@ -254,7 +251,7 @@ return [
             Haal plug-ins die niet in gebruik zijn weg.</li>
             <li>Gebruik sterke en verschillende wachtwoorden. Uw WordPress inloggegevens zouden bijvoorbeeld anders moeten zijn dan die voor FTP.
             Sla nooit wachtwoorden onbeveiligd op uw lokale machine op.</li>
-            <li>Scan uw computer regelmatig voor malware en controleer uw website op ongewenste en/of onbevoegde veranderingen.</li>
+            <li>Scan uw computer regelmatig op malware en controleer uw website op ongewenste en/of onbevoegde veranderingen.</li>
             <li>Gebruik geschikte 'file permissions' op uw webserver.</li>
             <li>Laat beveiliging een prioriteit zijn bij het zoeken naar een webhoster. Als u niet zeker weet of u uw site zelf kunt beveiligen, 
             kijk of het mogelijk is om een beveiligingsservice af te nemen bij uw hostingprovider 
@@ -280,17 +277,17 @@ return [
             <h2>Waarom is dit een probleem?</h2>
 
             <p>Als u malware op uw server hebt staan, stop hier onmiddellijk mee en verwijder het. Dit is namelijk illegaal. 
-            Het kan ertoe leiden dat zoekmachine's uw site als verdacht gaan aanmerken, waardoor deze minder toegankelijk voor uw bezoekers wordt.
-            Als een hacker malware op uw site heeft gezet, dan is deze zeer waarschijnlijk gehackt.</p>
+            Het kan ertoe leiden dat zoekmachines uw site als verdacht aanmerken, waardoor deze minder toegankelijk voor uw bezoekers wordt.
+            Als een hacker malware op uw site heeft gezet, dan is deze zeer waarschijnlijk gecompromitteerd.</p>
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Verwijder alle kwaadwillig gehoste bestanden, check of uw site gehackt is en ruim malafide bestanden op.</p>
+            <p>Verwijder alle malafide gehoste bestanden, check of uw site gehackt is en ruim geïnfecteerde bestanden op.</p>
 
             <h2>Tips om dit op te lossen</h2>
             <ul>
             <li>Indien dit om een CMS (WordPress, Drupal, Joomla, etc.) gaat, check of er updates voor uw add-ons en plug-ins beschikbaar zijn. Voer deze uit waar mogelijk.</li>
-            <li>Indien dit een 'standaard' website is, controleer op tekens van infectie of onbekende links op uw pagina's. Neem stappen om deze te verwijderen.</li>
+            <li>Indien dit een 'standaard' website is, controleer op tekenen van infectie of onbekende links op uw pagina's. Neem stappen om deze te verwijderen.</li>
             <li>Zodra het probleem is opgelost, vraag zoekmachines om uw site te herevalueren.</li>
             </ul>
 
@@ -317,18 +314,18 @@ return [
                 In sommige gevallen zijn deze feedbackloops niet gebaseerd op meldingen van de gebruikers, maar 
                 op bijvoorbeeld geautomatiseerde virusdetectie of vergelijkbare technieken.</p>
 
-                <p>Sommige ISP's laten in verband met privacy en/of wettelijke verplichtngen het e-mailadres van de klant weg.
+                <p>Sommige ISP's laten in verband met privacy en/of wettelijke verplichtingen het e-mailadres van de klant weg.
                 Dit betekent dat het belangrijk is voor de verzender om een manier los van e-mailadres te hebben om een ontvanger te kunnen identificeren.</p>
 
                 <h2>Waarom is een feedbackloop belangrijk?</h2>
 
                 <p>In mei 2008 waren er 12 FBL's in gebruik bij een aantal van 's werelds grootste ISP's, waaronder AOL, Hotmail en Yahoo.
                 Feedbackloops zijn inmiddels een industriestandaard voor e-mail geworden.
-                De data die deel uitmaken van het feedbackloopsysteem zijn extreem waardevol, voor een aantal redenen:</p>
+                De data die deel uitmaken van het feedbackloopsysteem zijn extreem waardevol, om een aantal redenen:</p>
 
                 <p> - Allereerst, voor lijsthygiëne: leden die een klacht indienen via een feedbackloop kunnen voor deze mails worden afgemeld.
                 Hierdoor neemt het aantal klachten af. Sommigen noemen dit /'list-washing/', maar eigenlijk is dit logisch. 
-                Als iemand een klacht indient - ook al heeft deze eerder aangegeven mail te willen ontvangen - hoort u te stoppen met e-mail naar deze persoon te sturen..</p>
+                Als iemand een klacht indient - ook al heeft deze eerder aangegeven mail te willen ontvangen - hoort u te stoppen met e-mail naar deze persoon te sturen.</p>
 
                 <p> - Verder kunnen FBL's gebruikt worden om de klachten zelf te onderzoeken. 
                 Een FBL-klacht bevat een schat aan data over wie over wat klaagt. 
@@ -337,11 +334,11 @@ return [
 
                 <h2>Wat kan ik doen?</h2>
 
-                <p>Campagnes, onderwerptitels en \"from\"-adressen kunnen worden gemonitoord om te controleren of alle e-mailcampagne-elementen hun werk goed doen. 
+                <p>Campagnes, onderwerptitels en \"from\"-adressen kunnen worden gemonitord om te controleren of alle e-mailcampagne-elementen hun werk goed doen. 
                 U kunt kijken welke elementen verbetering nodig zouden kunnen hebben. Als er vanuit een bepaalde mailinglist of lijstsegment veel klachten komen, 
                 is dit het nader onderzoeken waard. Veel klachten komen omdat de mailing niet voldoet aan de verwachtingen. 
-                Het aantal klachten van nieuwe abonnees kan bijvoorbeeld erg hoog zijn. Dit kan  komen doordat 
-                abonnees niet krijgen waar ze zich voor opgegeven hadden of dat er veel tijd tussen de inschrijving en de eerste mailing in zit..</p>
+                Het aantal klachten van nieuwe abonnees kan bijvoorbeeld erg hoog zijn. Dit kan komen doordat 
+                abonnees niet krijgen waar ze zich voor opgegeven hadden of dat er veel tijd tussen de inschrijving en de eerste mailing in zit.</p>
 
                 <p>Bovendien hebben veel ISP's een grenswaarde voor klachten. Mocht het aantal klachten boven deze grenswaarde uit komen, 
                 kan uw mail gefilterd of zelfs geblokkeerd worden. Helaas publiceren de meeste ISP's deze grenswaardes (die tevens per ISP kunnen verschillen) niet. 
@@ -355,16 +352,14 @@ return [
                 e-mails wel van uw systeem afkomstig zijn. In dat geval, is het belangrijk om de mailserver direct offline 
                 te halen en zowel het systeem als de mailqeue schoon te maken voordat u deze weer online zet.</p>
 
-                <h2>Wat is er dubieus aan feedbackloops?</h2>
+                <h2>Wat is er problematisch aan feedbackloops?</h2>
 
-                <p>De spamknop brengt enige onnauwkeurige functionaliteit met zich mee. Bijvoorbeeld: automatisch afmelden. 
-                Jarenlang is er eindgebruikers verteld afmeldlinks in e-mail niet te vertrouwen, omdat dit zou bevestigen dat de mail gezien en geopend was. 
-                Velen gebruiken dus de spamknop om zich af te melden. Gebruikers moeten erop kunnen vertrouwen dat hun ISP niet met spammers het water ingaat.</p>
+                <p>De spamknop brengt enkele zeer onnauwkeurige functionaliteiten met zich mee. Automatisch uitschrijven is hier een voorbeeld van. Jarenlang is eindgebruikers verteld om geen e-mailuitschrijflinks te vertrouwen, om te voorkomen dat wordt bevestigd dat het bericht is ontvangen en geopend. Daarom gebruiken veel gebruikers de spamknop als een manier om zich uit te schrijven. Gebruikers moeten erop vertrouwen dat hun ISP niet met spammers in zee gaat.</p>
 
                 <p>De spamknop kan ook misbruikt worden om bijvoorbeeld gevoelens omtrent de boodschap of de verzender te uiten. 
                 Gezien de knop voor verschillende doeleinden wordt gebruikt, zit er altijd wat onzekerheid in over hoe men de data zal moeten interpreteren.</p>
 
-                <p>Uiteindelijk hebben FBL's meer voor- dan nadelen en is het aan de ontvanger van FBL om te bepalen wat die ermee doet.</p>
+                <p>Uiteindelijk hebben FBL's meer voor- dan nadelen en is het aan de ontvanger van FBL om te bepalen wat hij ermee doet.</p>
             ",
     ],
 
@@ -455,15 +450,7 @@ return [
         'description' => "
             <h2>Wat is een 'Open Chargen server'?</h2>
 
-            <p>Het Character Generator Protocol (CHARGEN) is een service bedoeld voor debuggen, 
-            testen en meten. Het wordt zelden gebruikt, gezien de ontwerpfouten van het protocol makkelijk misbruik toestaan.
-            Een host kan een verbinding met een server die CHARGEN via UDP of TCP poort 19 ondersteunt openen. 
-            Zodra er een TCP-verbinding geopend is, zal de server willekeurige karakters naar de verbonden host sturen 
-            tot de host de verbinding sluit. 
-            De UDP-implementatie is iets anders: 
-            De server stuurt hierbij iedere keer dat het een datagram van de verbonden host ontvangt 
-            een UDP datagram met een willekeurig aantal (tussen 0 en 512) karakters. 
-            Alle data die de CHARGEN server ontvangt, wordt tevens weggegooid.</p>
+            <p>Het Character Generator Protocol (CHARGEN) is een dienst die bedoeld is voor test-, foutopsporings- en meetdoeleinden. Het protocol wordt zelden gebruikt, omdat de ontwerpgebreken eenvoudig misbruik mogelijk maken. Een host kan verbinding maken met een server die het Character Generator Protocol ondersteunt via zowel Transmission Control Protocol (TCP) als User Datagram Protocol (UDP) op poortnummer 19. Bij het openen van een TCP-verbinding begint de server willekeurige tekens naar de verbindende host te sturen en gaat door totdat de host de verbinding verbreekt. In de UDP-implementatie van het protocol stuurt de server elke keer dat hij een datagram van de verbindende host ontvangt, een UDP-datagram met een willekeurig aantal tekens (tussen 0 en 512). Alle gegevens die door de server worden ontvangen, worden genegeerd.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -489,7 +476,7 @@ return [
             <h2>Aanbevolen actie</h2>
 
             <p>Er is geen reden om CHARGEN te draaien op een public-facing interface. 
-            Zet deze uit of zorg ervoor dat deze niet vanaf het internet te bereiken is doormiddel van RFC1918 spaces of door een firewall in te zetten.</p>
+            Zet deze uit of zorg ervoor dat deze niet vanaf het internet te bereiken is door middel van RFC1918 spaces of door een firewall in te zetten.</p>
 
             <h2>Meer informatie</h2>
 
@@ -612,7 +599,7 @@ return [
             <h2>Wat is een 'Open mDNS Service'?</h2>
 
             <p>Een open mDNS server is een mDNS server die bereid is om recursieve DNS queries 
-            voor een ieder op het Internet uit te voeren.</p>
+            voor iedereen op het Internet uit te voeren.</p>
 
             <p>Wanneer een DNS server een recursieve DNS query resolved, zoekt het domeininformatie bij andere DNS servers 
             op. Dit is een recursief proces waar meerdere DNS servers in de DNS-hiërarchie bij betrokken worden.</p>
@@ -1051,7 +1038,7 @@ return [
             <h2>Wat is een 'Open Netbios server'?</h2>
 
             <p>NetBIOS is een transportprotocol dat door Windowssystemen gebruikt wordt om resources te delen. 
-            Als een Windows-PC bijvoorbeeld verbinding wilt maken met een file-server, gebruikt deze waarschijnlijk NetBIOS hiervoor.
+            Als een Windows-PC bijvoorbeeld verbinding wilt maken met een file-server, gebruikt deze hier  waarschijnlijk NetBIOS voor.
             Er zijn wel ontwikkelingen geweest waardoor verbindingen ook zonder NetBIOS opgezet kunnen worden. 
             SMB bijvoorbeeld; de methode waarmee men toegang kan krijgen tot file- en printershares, kan ook los van NetBIOS op TCP poorten 139 en 445 draaien. 
             Dit vergroot echter wel de 'attack surface' van een netwerk.</p>
@@ -1088,13 +1075,13 @@ return [
             De Windows Firewall doet vaak dingen uit zichzelf en zet automatisch poorten open als u iets dat NetBOIS gebruikt installeert. 
             De administrator wordt hier niet van op de hoogte gesteld.</p>
 
-            <p>Als het echt nodig is om NETBIOS voor de hele wereld open te hebben, verhard het blootgestelde systeem door de volgende maatregelen uit te voeren:</p>
+            <p>Als het echt nodig is om NETBIOS voor de hele wereld open te hebben, versterk het blootgestelde systeem dan door de volgende maatregelen uit te voeren:</p>
             <ul>
-            <li>Schakel null sessions op uw systeem uit</li>
-            <li>Gebruik sterke wachtwoorden voor lokale administratoraccounts</li>
-            <li>Gebruik sterke wachtwoorden voor shares, uitgaande dat het echt nodig is om shares op blootgestelde systemen te hebben</li>
+            <li>Schakel null sessions op uw systeem uit.</li>
+            <li>Gebruik sterke wachtwoorden voor lokale administratoraccounts.</li>
+            <li>Gebruik sterke wachtwoorden voor shares, uitgaande dat het echt nodig is om shares op blootgestelde systemen te hebben.</li>
             <li>Schakel het gastaccount uit</li>
-            <li>Geef onder geen geval een share toegang tot de root van een schijf</li>
+            <li>Geef onder geen geval een share toegang tot de root van een schijf.</li>
             <li>Geef nooit toegang tot de Windows of WinNT folders of folders die hieronder vallen.</li>
             </ul>
 
@@ -1149,7 +1136,7 @@ return [
             <h2>Aanbevolen actie</h2>
 
             <p>Het is niet nodig om deze QOTD dienst via een public facing interaface beschikbaar te stellen. 
-            Zet de dienst uit of zorg ervoor dat deze niet vanaf het internet bereikbaar is doormiddel van RFC1918 spaces of een firewall.</p>
+            Zet de dienst uit of zorg ervoor dat deze niet vanaf het internet bereikbaar is door middel van RFC1918 spaces of een firewall.</p>
 
             <h2>Tips om dit op te lossen</h2>
 
@@ -1372,7 +1359,7 @@ return [
             dat wordt gebruikt voor het adverteren en ontdekken van netwerkdiensten en presence-informatie. 
             Het doet dit zonder gebruik te maken van op server gebaseerde configuratiemachanismes zoals het Dynamic Host Configuration Protocol (DHCP), 
             het Domain Name System (DNS) of speciale statische configuratie van een netwerkhost. 
-            SDDP ligt aan de basis van het ontdekkingsprotocol van Universal Plug and Play (UPnP) en is bedoeld voor gebruik in huiselijke kring of kleine kantoren.</p>
+            SDDP ligt aan de basis van het ontdekkingsprotocol van Universal Plug and Play (UPnP) en is bedoeld voor thuisgebruik of kleine kantoren.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -1399,7 +1386,7 @@ return [
             <h2>Aanbevolen actie</h2>
 
             <p>Er is geen reden om deze CHARGEN-dienst op een public facing interface aan te zetten. 
-            Zet deze dienst uit of zorg ervoor dat deze niet vanaf het internet te bereiken is doormiddel van RFC1918 spaces of door een firewall te gebruiken.</p>
+            Zet deze dienst uit of zorg ervoor dat deze niet vanaf het internet te bereiken is door middel van RFC1918 spaces of door een firewall te gebruiken.</p>
 
             ",
     ],
@@ -1418,7 +1405,7 @@ return [
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>TFTP heeft geen enkele vorm van authentificatie noch encryptie. Dit maakt
+            <p>TFTP heeft geen enkele vorm van authentificatie of encryptie. Dit maakt
             het erg eenvoudig voor iemand om al uw configuratiebestanden te downloaden
             of corrupte firmware te uploaden!</p>
 
@@ -1501,7 +1488,7 @@ return [
             <p>Uw IP-adres staat op een RBL (real-time block list).</p>
 
             <p>Dit betekent dat uw server waarschijnlijk grote hoeveelheden ongewenste e-mail 
-            heeft lopen versturen. Uw server of computer is waarschijnlijk verkeerd geconfigureerd 
+            heeft verstuurd. Uw server of computer is waarschijnlijk verkeerd geconfigureerd 
             of gehackt.</p>
 
             <h2>Waarom is dit een probleem?</h2>
@@ -1518,10 +1505,7 @@ return [
 
             <p>Mocht dit een gecompromitteerde server zijn, dan kan uw server gehackt of geïnfecteerd zijn met een 'trojan'.</p>
 
-            <p>Als u per ongeluk op deze lijst terecht bent gekomen en u het onderliggende probleem heeft opgelost, 
-            kunt u met behulp van URL in deze ticketrapportage een 'delisting' verzoeken.
-            Probeer geen delisting aan te vragen als u nog niet zeker weet of het probleem daadwerkelijk is opgelost. 
-            Als u een delisting verzoekt terwijl het probleem nog speelt, kunt u permanent op de RBL belanden!</p>
+            <p>Indien u per ongeluk op de lijst bent geplaatst en het probleem hebt verholpen, kunt u een verzoek tot verwijdering indienen via de URL die in het ticketrapport is opgenomen. Het is belangrijk om geen verzoek tot verwijdering aan te vragen bij een RBL zonder er zeker van te zijn dat u het probleem daadwerkelijk heeft opgelost. Indien u een verzoek tot verwijdering indient zonder het probleem op te lossen, loopt u het risico permanent op die RBL te worden vermeld!</p>
 
             <h2>Tips om dit op te lossen</h2>
 
@@ -1584,12 +1568,12 @@ return [
         'description' => "
             <h2>Wat is een SPAM Trap?</h2>
 
-            <p>Een SpamTrap is een honeypot die gebruikt wordt om spam te verzamelen.</p>
+            <p>Een SPAM Trap is een honeypot die gebruikt wordt om spam te verzamelen.</p>
 
             <h2>Waarom is het een probleem als hier mails naartoe worden verstuurd?</h2>
 
-            <p>SpamTraps zijn e-mailadressen die speciaal bedoelt zijn om spam te ontvangen.
-            SpamTraps worden voor het oog verborgen op websites, waardoor ze alleen door geautomatiseerde scanners worden gezien.
+            <p>SPAM Traps zijn e-mailadressen die speciaal bedoelt zijn om spam te ontvangen.
+            SPAM Traps worden voor het oog verborgen op websites, waardoor ze alleen door geautomatiseerde scanners worden gezien.
             Gezien er geen legitieme mail naar dit e-mailadres wordt gestuurd, worden alle ontvangen mails direct als ongewenst aangezien.</p>
 
             <h2>Aanbevolen actie</h2>
@@ -2025,7 +2009,7 @@ return [
         'description'   => "
             <h2>Wat is een 'Kwetsbare SMTP server'?</h2>
             
-            <p>Het is ontdekt dat de host - een server die mail verstuurd - een kwetsbare SMTP software heeft draaien.</p>
+            <p>Het is ontdekt dat de host - een server die mail verstuurd - kwetsbare SMTP software heeft draaien.</p>
 
             <h2>Waarom is dit een probleem?</h2>
         
