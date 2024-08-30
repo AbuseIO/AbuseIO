@@ -76,7 +76,7 @@ return [
     'ISAKMP_VULNERABLE_DEVICE' => [
         'name'        => 'ISAKMP Vulnerable device',
         'description' => '
-            <h2>What is a \'ISAKMP Vulnerable device\'?</h2>
+            <h2>What is an \'ISAKMP Vulnerable device\'?</h2>
 
             <p>  </p>
 
@@ -107,19 +107,18 @@ return [
     'OPEN_RDP_SERVER' => [
         'name'        => 'Open RDP Server',
         'description' => '
-            <h2>What is a \'Open RDP Server\'?</h2>
+            <h2>What is an \'Open RDP Server\'?</h2>
 
             <p>  </p>
 
             <h2>Why would this be bad?</h2>
 
-            <p>This report identifies hosts that have Remote Desktop (RDP) Service running and accessible to the world
+            <p>This report identifies hosts that have Remote Desktop Protocol (RDP) service running and accessible to the world
              on the internet. Misconfigured RDP can allow miscreants access to the desktop of a vulnerable host and can
              also allow for information gathering on a target host as the SSL certificate used by RDP often contains
              the system\'s trivial hostname. </p>
 
-            <p>In addition, you sure will be targeted by brute force attacks and as most RDP servers only allow
-             two sessions at a time, you will not be able to connect to the RDP server yourself. In essence you are locked out!</p>
+            <p>Moreover, if your RDP server is targeted by brute force attacks, it could quickly reach its limit of two active sessions. If both sessions are occupied by unauthorized users, you will be unable to connect to the server yourself, effectively locking you out!</p>
 
             <h2>Recommended action</h2>
 
@@ -226,8 +225,7 @@ return [
         'description' => "
             <h2>What is a 'Compromised website'?</h2>
 
-            A compromised website is (hacked) content placed on your site without your consent
-            as a result of vulnerabilities in your site’s security.
+            A compromised website means that unauthorised (hacked) content has been placed on your site without your consent as a result of vulnerabilities in your site’s security.
 
             Malicious hackers are a devious bunch – always looking for new flaws, exploits and
             social engineering tricks that will allow them to compromise a website. With
@@ -258,8 +256,7 @@ return [
             phishing pages for banks, PayPal, Gmail, etc., or offer explicit (sometimes illegal)
             content</li>
             <li>Vandalism – the aim of the compromise might be to embarrass the site owner or,
-            alternatively, to make some political point – generally known as 'hacktivism'. Some
-            administrators even reported such vandalism by their competitors. </li>
+            alternatively, to make some political point – generally known as 'hacktivism'.</li>
             <li>Other content or activity – some fairly complex forms of site misuse have
             been recorded. For example a spam-sending script.</li>
             </ul>
@@ -349,7 +346,7 @@ return [
                 <h2>What is A Feedback Loop?</h2>
 
                 <p>In general, a feedback loop (FBL) or complaint feedback loop is
-                an inter-organizational form of feedback, by which an Internet service provider (ISP) forwards
+                an inter-organizational form of feedback, by which an internet service provider (ISP) forwards
                 email complaints originating from their users, back to the senders' organizations. Generally,
                 ISPs expect that these transactions are processed as unsubscribe requests and that the sender
                 researches the nature of the request to reduce the incidence of such complaints.</p>
@@ -391,7 +388,7 @@ return [
                 <p>To further complicate matters, most ISPs have complaint rate thresholds above which your
                 messages may be filtered or blocked. Unfortunately, most ISPs don't publish these
                 thresholds, which vary by ISP. Monitoring the FBL data will improve your email practices,
-                while ensuring complaint rates do not exceed Internet Service Provider (ISP) thresholds.</p>
+                while ensuring complaint rates do not exceed internet Service Provider (ISP) thresholds.</p>
 
                 <h2>But I am not sending these emails</h2>
 
@@ -424,7 +421,7 @@ return [
             <h2>What is a 'FREAK Vulnerable Server'?</h2>
 
             <p>Servers that accept RSA_EXPORT cipher suites put their users at risk of the FREAK
-            attack. Using Internet-wide scanning, we have been performing daily tests of all
+            attack. Using internet-wide scanning, we have been performing daily tests of all
             HTTPS servers at public IP addresses to determine whether they allow this weakened
             encryption.</p>
 
@@ -539,12 +536,12 @@ return [
             special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
+            server on the internet that will reply immediately. Because the source
+            IP address is forged, the remote internet server replies and sends data
             to the victim.</p>
 
             <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
+            very hard to trace, and, if many internet servers are used, an attack
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
 
@@ -555,7 +552,7 @@ return [
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            traffic load hitting a victim from around the internet.</p>
 
             <h2>Recommended action</h2>
 
@@ -575,11 +572,11 @@ return [
             <h2>What is an 'Open DNS Resolver'?</h2>
 
             <p>An open DNS server is a DNS server which is willing to resolve
-            recursive DNS queries for anyone on the Internet.</p>
+            recursive DNS queries for anyone on the internet.</p>
 
             <p>When a DNS server resolves a recursive DNS query, it tracks down
             information about a domain name hosted on some other DNS server
-            somewhere else on the Internet (a recursive process involving
+            somewhere else on the internet (a recursive process involving
             several other DNS servers in the DNS hierarchy).</p>
 
             <h2>Why would this be bad?</h2>
@@ -590,12 +587,12 @@ return [
             special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
+            server on the internet that will reply immediately. Because the source
+            IP address is forged, the remote internet server replies and sends data
             to the victim.</p>
 
             <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
+            very hard to trace, and, if many internet servers are used, an attack
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
 
@@ -606,7 +603,7 @@ return [
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            traffic load hitting a victim from around the internet.</p>
 
             <h2>Recommended action</h2>
 
@@ -690,11 +687,11 @@ return [
             <h2>What is an 'Open mDNS Service'?</h2>
 
             <p>An Open mDNS Service is a mDNS server which is willing to resolve
-            recursive DNS queries for anyone on the Internet.</p>
+            recursive DNS queries for anyone on the internet.</p>
 
             <p>When a DNS server resolves a recursive DNS query, it tracks down
             information about a domain name hosted on some other DNS server
-            somewhere else on the Internet (a recursive process involving
+            somewhere else on the internet (a recursive process involving
             several other DNS servers in the DNS hierarchy).</p>
 
             <h2>Why would this be bad?</h2>
@@ -705,12 +702,12 @@ return [
             special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
+            server on the internet that will reply immediately. Because the source
+            IP address is forged, the remote internet server replies and sends data
             to the victim.</p>
 
             <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
+            very hard to trace, and, if many internet servers are used, an attack
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
 
@@ -721,7 +718,7 @@ return [
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            traffic load hitting a victim from around the internet.</p>
 
             <h2>Recommended action</h2>
 
@@ -895,10 +892,10 @@ return [
             by Microsoft. As a database, it is a software product whose primary function
             is to store and retrieve data as requested by other software applications,
             be it those on the same computer or those running on another computer across
-            a network (including the Internet). There are at least a dozen different
+            a network (including the internet). There are at least a dozen different
             editions of Microsoft SQL Server aimed at different audiences and for
             workloads ranging from small single-machine applications to large
-            Internet-facing applications with many concurrent users. Its primary query
+            internet-facing applications with many concurrent users. Its primary query
             languages are T-SQL and ANSI SQL.</p>
 
             <h2>Why would this be bad?</h2>
@@ -920,7 +917,7 @@ return [
             <h2>Tips to resolve this matter</h2>
 
             <p>By default, Microsoft Windows enables the Windows Firewall, which closes port
-            1433 to prevent Internet computers from connecting to a default instance of SQL
+            1433 to prevent internet computers from connecting to a default instance of SQL
             Server on your computer. Connections to the default instance using TCP/IP are not
             possible unless you reopen port 1433. If you need access from remote machines to
             your Microsoft SQL server, then only allow the required hosts and close down
@@ -985,13 +982,13 @@ return [
             the use-case scenario includes only services that need to access MongoDB from
             the same host as the database service.</p>
 
-            <p>However, a common setup and scalable solution for most Internet services is to
+            <p>However, a common setup and scalable solution for most internet services is to
             have a database server running on one physical machine, while the services
             using this database service are (often virtualized) running on another machine.
             In this case, the easiest solution is to comment out the flag 'bind.ip =
             127.0.0.1' or to remove it completely, which defaults to accepting all network
             connections to the database. If access is possible from untrusted machines
-            (e.g., from the Internet) outside the trusted network, it is crucial to also
+            (e.g., from the internet) outside the trusted network, it is crucial to also
             set up transfer encryption and proper access control.</p>
 
             <h2>Getting more information</h2>
@@ -1063,7 +1060,7 @@ return [
             <p>Network Time Protocol (NTP) is a networking protocol for clock
             synchronization between computer systems over packet-switched,
             variable-latency data networks. In operation since before 1985, NTP
-            is one of the oldest Internet protocols in current use.</p>
+            is one of the oldest internet protocols in current use.</p>
 
             <h2>Why would this be bad?</h2>
 
@@ -1073,12 +1070,12 @@ return [
             special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
+            server on the internet that will reply immediately. Because the source
+            IP address is forged, the remote internet server replies and sends data
             to the victim.</p>
 
             <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
+            very hard to trace, and, if many internet servers are used, an attack
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
 
@@ -1089,7 +1086,7 @@ return [
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            traffic load hitting a victim from around the internet.</p>
 
             <h2>Recommended action</h2>
 
@@ -1166,7 +1163,7 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>The ports that that are open to the Internet are UDP/137, UDP/138, and TCP/139.
+            <p>The ports that that are open to the internet are UDP/137, UDP/138, and TCP/139.
             Unfortunately, the most popular attacker target is NetBIOS and against these
             ports.</p>
 
@@ -1238,7 +1235,7 @@ return [
         'description' => "
             <h2>What is an 'Open QOTD Server'?</h2>
 
-            <p>The Quote Of The Day (QOTD) service is a member of the Internet protocol
+            <p>The Quote Of The Day (QOTD) service is a member of the internet protocol
             suite, defined in RFC 865. As indicated there, the QOTD concept predated
             the specification, when QOTD was used by mainframe sysadmins to broadcast
             a daily quote on request by a user. It was then formally codified both
@@ -1252,12 +1249,12 @@ return [
             special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
+            server on the internet that will reply immediately. Because the source
+            IP address is forged, the remote internet server replies and sends data
             to the victim.</p>
 
             <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
+            very hard to trace, and, if many internet servers are used, an attack
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
 
@@ -1268,7 +1265,7 @@ return [
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            traffic load hitting a victim from around the internet.</p>
 
             <h2>Recommended action</h2>
 
@@ -1402,7 +1399,7 @@ return [
             <p>Simple Network Management Protocol (SNMP) is a popular protocol for network
             management. It is used for collecting information from, and configuring,
             network devices, such as servers, printers, hubs, switches, and routers on an
-            Internet Protocol (IP) network.</p>
+            internet Protocol (IP) network.</p>
 
             <h2>Why would this be bad?</h2>
 
@@ -1416,12 +1413,12 @@ return [
             special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
+            server on the internet that will reply immediately. Because the source
+            IP address is forged, the remote internet server replies and sends data
             to the victim.</p>
 
             <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
+            very hard to trace, and, if many internet servers are used, an attack
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
 
@@ -1432,7 +1429,7 @@ return [
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            traffic load hitting a victim from around the internet.</p>
 
             <h2>Recommended action</h2>
 
@@ -1508,7 +1505,7 @@ return [
             <h2>What is an 'Open SSDP Server'?</h2>
 
             <p>The Simple Service Discovery Protocol (SSDP) is a network protocol
-            based on the Internet Protocol Suite for advertisement and discovery of
+            based on the internet Protocol Suite for advertisement and discovery of
             network services and presence information. It accomplishes this without
             assistance of any server-based configuration mechanisms, such as the Dynamic
             Host Configuration Protocol (DHCP) or the Domain Name System (DNS), and
@@ -1524,12 +1521,12 @@ return [
             special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
+            server on the internet that will reply immediately. Because the source
+            IP address is forged, the remote internet server replies and sends data
             to the victim.</p>
 
             <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
+            very hard to trace, and, if many internet servers are used, an attack
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
 
@@ -1540,7 +1537,7 @@ return [
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            traffic load hitting a victim from around the internet.</p>
 
             <h2>Recommended action</h2>
 
@@ -1748,12 +1745,12 @@ return [
         'description' => "
             <h2>What is a SPAM Trap?</h2>
 
-            <p>A SpamTrap is a honeypot used to collect spam.</p>
+            <p>A SPAM Trap is a honeypot used to collect spam.</p>
 
             <h2>Why would sending email to these this be bad?</h2>
 
-            <p>SpamTraps are generally email addresses that are made to receive spam.
-            SpamTraps are often hidden from view on websites, so that they are only harvested from automated scans.
+            <p>SPAM Traps are generally email addresses that are made to receive spam.
+            SPAM Traps are often hidden from view on websites, so that they are only harvested from automated scans.
             Since no legit email is ever sent to this address, any emails that are sent to the Spam-Traps are
             immediately considered unsolicited.</p>
 
@@ -1980,12 +1977,12 @@ return [
             special type of DDoS attack called an 'Amplification Attack'.</p>
 
             <p>The attacker sends a packet apparently from the intended victim to some
-            server on the Internet that will reply immediately. Because the source
-            IP address is forged, the remote Internet server replies and sends data
+            server on the internet that will reply immediately. Because the source
+            IP address is forged, the remote internet server replies and sends data
             to the victim.</p>
 
             <p>That has two effects: the actual source of the attack is hidden and is
-            very hard to trace, and, if many Internet servers are used, an attack
+            very hard to trace, and, if many internet servers are used, an attack
             can consist of an overwhelming number of packets hitting a victim from
             all over the world.</p>
 
@@ -1996,7 +1993,7 @@ return [
 
             <p>Amplification attacks like that result in an attacker turning a small
             amount of bandwidth coming from a small number of machines into a massive
-            traffic load hitting a victim from around the Internet.</p>
+            traffic load hitting a victim from around the internet.</p>
 
             <h2>Recommended action</h2>
 
@@ -2292,7 +2289,7 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Even though it does allow for encrypted communications via TLS, many instances on the Internet are configured for cleartext authentication and message sharing. Furthermore in the past there have been multiple vulnerabilities discovered in AMQP broker software implementations that can allow for authentication bypass, interception of messages, remote code execution or denial of service and other attacks.</p>
+            <p>Even though it does allow for encrypted communications via TLS, many instances on the internet are configured for cleartext authentication and message sharing. Furthermore in the past there have been multiple vulnerabilities discovered in AMQP broker software implementations that can allow for authentication bypass, interception of messages, remote code execution or denial of service and other attacks.</p>
 
             <h2>Recommended action</h2>
 
@@ -2303,7 +2300,7 @@ return [
     'OPEN_SSH_SERVER' => [
         'name'          => 'Open SSH service',
         'description'   => '
-            <p> This report identifies hosts that have the Secure Shell (SSH) service running and accessible on the Internet. </p>
+            <p> This report identifies hosts that have the Secure Shell (SSH) service running and accessible on the internet. </p>
 
             <p> This does not indicate that anything is wrong with the system, but if the SSH running on a system (or the version that is running) seems out of place, you may wish to investigate. </p>
             ',
@@ -2323,7 +2320,7 @@ return [
         'description'   => '
             <p> This report contains a list of devices that are responding to various specialized ICS/OT scans, along with additional make-and-model information and raw responses received. </p>
 
-            <p> It is extremely unlikely that these types of devices need to be accessible in any form to queries from the Internet, so unless you are running a honeypot if you receive such a report for your network/constituency, you are strongly advised to act immediately and firewall/filter access. </p>
+            <p> It is extremely unlikely that these types of devices need to be accessible in any form to queries from the internet, so unless you are running a honeypot if you receive such a report for your network/constituency, you are strongly advised to act immediately and firewall/filter access. </p>
             ',
     ],
 
@@ -2332,7 +2329,7 @@ return [
         'description'   => '
             <p> This report identifies accessible PostgreSQL server instances on port 5432/TCP. </p>
 
-            <p> It is unlikely that you need to have your PostgreSQL server allowing for external connections from the Internet (and thus a possible external attack surface). If you do receive a report on your network/constituency take action to filter out traffic to your PostreSQL instance. Make sure to implement authentication on the server. </p>
+            <p> It is unlikely that you need to have your PostgreSQL server allowing for external connections from the internet (and thus a possible external attack surface). If you do receive a report on your network/constituency take action to filter out traffic to your PostreSQL instance. Make sure to implement authentication on the server. </p>
             ',
     ],
 
@@ -2350,32 +2347,32 @@ return [
         'description'   => '
             <p> This report identifies accessible Erlang Port Mapper Daemon (EPMD) servers on port 4369/tcp. This daemon acts as a name server for hosts involved in distributed Erlang computations. </p>
 
-            <p> It is unlikely that you need to have an EPMD server allowing for external connections from the Internet (and thus a possible external attack surface). Make sure to firewall traffic to this service. If you do receive this report from us for your network or constituency make sure to firewall traffic to this service.</p>
+            <p> It is unlikely that you need to have an EPMD server allowing for external connections from the internet (and thus a possible external attack surface). Make sure to firewall traffic to this service. If you do receive this report from us for your network or constituency make sure to firewall traffic to this service.</p>
 ',
     ],
 
     'OPEN_SOCKS_PROXY' => [
         'name'          => 'Open SOCKS Proxy service',
         'description'   => '
-            <p> This report identifies hosts that have a SOCKS proxy version 4 or SOCKS proxy version 5 service running on port 1080/TCP and accessible from the Internet. The SOCKS protocol enables the exchange of packets between a client and server through a proxy server. These proxy servers can optionally support authentication.</p>
+            <p> This report identifies hosts that have a SOCKS proxy version 4 or SOCKS proxy version 5 service running on port 1080/TCP and accessible from the internet. The SOCKS protocol enables the exchange of packets between a client and server through a proxy server. These proxy servers can optionally support authentication.</p>
 
             <p> Open proxy servers allowing proxying of services without authentication are often subject to abuse. Others, even with authentication, may also have security implications. </p>
 
-            <p> As with all remote access tools, care should be taken to make sure a SOCKS proxy service is configured in a secure manner and the security implications of making it accessible from anywhere on the Internet taken into account. </p>
+            <p> As with all remote access tools, care should be taken to make sure a SOCKS proxy service is configured in a secure manner and the security implications of making it accessible from anywhere on the internet taken into account. </p>
             ',
     ],
 
     'DEVICE_IDENTIFICATION' => [
         'name'          => 'Device identification',
         'description'   => '
-            <p> This is a device population report – no assessment is made on the vulnerability state of the device. The report is intended for recipients to get a better understanding of device population types on networks they are responsible for. Please note the assessment is based only on what was publicly accessible from the Internet.</p>
+            <p> This is a device population report – no assessment is made on the vulnerability state of the device. The report is intended for recipients to get a better understanding of device population types on networks they are responsible for. Please note the assessment is based only on what was publicly accessible from the internet.</p>
             ',
     ],
 
     'ACCESSIBLE_XDMCP_SERVICE_REPORT' => [
         'name'          => 'Open XDCMP Service',
         'description'   => '
-            <p> This report identifies hosts that have the X Display Manager service running and accessible on the Internet. </p>
+            <p> This report identifies hosts that have the X Display Manager service running and accessible on the internet. </p>
 
             <p> XDMCP leaks information about the host system and, in addition, it can be used in an amplification attack, providing an approximate 7x amplification. Please note that it does not matter if XDMCP responds with a “Willing” or an “Unwilling”; the service provides the same level of amplification. </p>
             ',
