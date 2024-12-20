@@ -11,7 +11,7 @@ use Closure;
 class CheckAshToken
 {
     /**
-     * @param $request
+     * @param         $request
      * @param Closure $next
      *
      * @throws \Exception
@@ -29,7 +29,6 @@ class CheckAshToken
         $ticket = Ticket::find($ticketID);
 
         if (!empty($ticket)) {
-
             // retrieve ash tokens from the ticket, so we can check our token against them
             $validTokenIP = $ticket->ash_token_ip;
             $validTokenDomain = $ticket->ash_token_domain;

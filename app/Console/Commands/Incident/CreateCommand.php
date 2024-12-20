@@ -167,7 +167,7 @@ class CreateCommand extends Command
      * Build the evidence object as its required to save incidents.
      *
      * @param $incident object AbuseIO\Models\Incident
-     * @param $file string File
+     * @param $file     string File
      */
     protected function setEvidenceFile($incident, $file)
     {
@@ -184,7 +184,7 @@ class CreateCommand extends Command
             // Build evidence with added file
             if (!is_file($file)) {
                 $this->error('File does not exist: '.$file);
-                exit();
+                exit;
             }
 
             $attachment = [

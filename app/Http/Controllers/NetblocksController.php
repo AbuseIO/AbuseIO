@@ -45,7 +45,7 @@ class NetblocksController extends Controller
                 $netblocks = Netblock::withTrashed()->where('id', '=', $id)->get();
                 break;
 
-            // Search by IP Address
+                // Search by IP Address
             case 'address':
                 $ip = $param;
                 if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
@@ -60,7 +60,7 @@ class NetblocksController extends Controller
                     ->take(1)->get();
                 break;
 
-            // Fail unknown method
+                // Fail unknown method
             default:
                 return false;
         }

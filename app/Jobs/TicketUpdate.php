@@ -87,7 +87,6 @@ class TicketUpdate extends Job
      */
     public static function status($ticket, $newstatus = null)
     {
-
         // convert to uppercase
         $newstatus = strtoupper($newstatus);
 

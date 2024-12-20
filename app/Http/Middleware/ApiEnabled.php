@@ -10,7 +10,7 @@ class ApiEnabled
     use Api;
 
     /**
-     * @param $request
+     * @param         $request
      * @param Closure $next
      *
      * @return mixed

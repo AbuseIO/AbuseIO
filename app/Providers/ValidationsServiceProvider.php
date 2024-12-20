@@ -23,7 +23,6 @@ class ValidationsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         /*
          * Add timestamp validation
          */
@@ -31,7 +30,6 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'timestamp',
             function ($attribute, $value, $parameters, $validator) {
-
                 // early return if it is a string and contains non-numeric characters
                 if (is_string($value) && !ctype_digit($value)) {
                     return false;
@@ -151,6 +149,7 @@ class ValidationsServiceProvider extends ServiceProvider
                 if (is_bool($value)) {
                     return true;
                 }
+
                 /*
                  * changed implentation of getDomain to some form of isValidDomain;
                  */
@@ -195,7 +194,6 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'uniqueflag',
             function ($attribute, $value, $parameters, $validator) {
-
                 // gather data
                 $data = $validator->getData();
 

@@ -190,10 +190,10 @@ class FindContact extends Job
      * Helper method that retrieves the external or internal contact
      * does most of the work ;).
      *
-     * @param string $type ip, domain or id
-     * @param string $term search the contact for this term
-     * @param $local_query $query to retrieve the local contact
-     * @param bool $local only return the local contact
+     * @param string $type        ip, domain or id
+     * @param string $term        search the contact for this term
+     * @param        $local_query $query to retrieve the local contact
+     * @param bool   $local       only return the local contact
      *
      * @return object
      */

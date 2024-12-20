@@ -3,7 +3,7 @@
 /**
  * Function to convert a boolean to its name in string.
  *
- * @param  $bool
+ * @param $bool
  *
  * @return string
  */

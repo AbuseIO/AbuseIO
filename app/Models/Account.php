@@ -189,7 +189,7 @@ class Account extends Model
     /**
      * Static method to check if the account has access to the model instance.
      *
-     * @param $model_id
+     * @param                         $model_id
      * @param \AbuseIO\Models\Account $account
      *
      * @return bool

@@ -71,7 +71,6 @@ class AlertAdmin extends Job
      */
     public static function bounce($rawMail)
     {
-
         /*
          * Parse the original e-mail into its parts needed to rebuild it into a new mail object
          */

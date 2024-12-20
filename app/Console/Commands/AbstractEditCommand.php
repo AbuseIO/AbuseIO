@@ -138,8 +138,8 @@ abstract class AbstractEditCommand extends Command
     }
 
     /**
-     * @param $model
-     * @param $option
+     * @param        $model
+     * @param        $option
      * @param string $fieldType
      */
     protected function updateFieldWithOption($model, $option, $fieldType = 'string')

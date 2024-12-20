@@ -28,7 +28,7 @@ class CheckAccount
      *
      * @param \Illuminate\Http\Request $request
      * @param \Closure                 $next
-     * @param $model
+     * @param                          $model
      *
      * @return mixed
      */

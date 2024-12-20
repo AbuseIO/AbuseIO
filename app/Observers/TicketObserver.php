@@ -17,7 +17,6 @@ class TicketObserver
      */
     public function saving(Ticket $ticket)
     {
-
         // generate the ApiToken
         if (empty($ticket->api_token)) {
             $ticket->api_token = generateApiToken();

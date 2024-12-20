@@ -331,8 +331,8 @@ class Ticket extends Model
     /**
      * Static method to check if the account has access to the model instance.
      *
-     * @param  $model_id                        Model Id
-     * @param \AbuseIO\Models\Account $account The Account Model
+     * @param                         $model_id Model Id
+     * @param \AbuseIO\Models\Account $account  The Account Model
      *
      * @return bool
      */
@@ -345,8 +345,8 @@ class Ticket extends Model
 
         $ticket = self::find($model_id);
 
-        return ($ticket->accountIp->is($account)) ||
-            ($ticket->accountDomain->is($account));
+        return $ticket->accountIp->is($account) ||
+            $ticket->accountDomain->is($account);
     }
 
     /**
