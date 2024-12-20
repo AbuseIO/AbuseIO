@@ -46,7 +46,7 @@ return [
     'communication' => [
         'header'                => 'You can use the form below to reply to this ticket.',
         'noMessages'            => 'No interaction has been done yet.',
-        'placeholder'           => 'Use this text box to ask your question or your applied solution.',
+        'placeholder'           => 'Use this text box to ask your question or reply with your applied solution.',
         'placeholder_admin'     => 'Enter a reply to the contact',
         'previousCommunication' => 'Previous communication',
         'responseFrom'          => 'Response from',
@@ -56,7 +56,7 @@ return [
         'reply'                 => 'Reply',
         'download'              => 'Download',
         'view'                  => 'View',
-        'closed'                => 'You can not add notes to this ticket because it was closed or notes have been disabled',
+        'closed'                => 'You cannot add notes to this ticket because it was closed or notes have been disabled',
         'unchanged'             => 'Do not change the ticket status',
         'open'                  => 'Leave ticket status open',
         'resolved'              => 'I have resolved the issue',

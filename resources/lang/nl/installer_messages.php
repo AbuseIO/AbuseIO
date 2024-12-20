@@ -16,7 +16,7 @@ return [
      *
      */
     'welcome' => [
-        'title'   => 'Welkom bij het installatie proces...',
+        'title'   => 'Welkom bij het installatieproces...',
         'message' => 'Welkom bij de installatiewizard',
     ],
 
