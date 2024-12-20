@@ -287,7 +287,6 @@ class IncidentsSave extends Job
                             'Escalation path settings are missing or incomplete. Skipping this phase'
                         );
                     } else {
-
                         // Now actually check if anything needs to be changed and if so, change it.
                         if (!empty(config("escalations.{$escalationPath}.abuse.enabled")) &&
                             !empty(config("escalations.{$escalationPath}.abuse.threshold")) &&

@@ -130,7 +130,7 @@ class Note extends Model
     /**
      * Static method to check if the account has access to the model instance.
      *
-     * @param $model_id
+     * @param                         $model_id
      * @param \AbuseIO\Models\Account $account
      *
      * @return bool
@@ -144,7 +144,7 @@ class Note extends Model
 
         $ticket = self::find($model_id)->ticket;
 
-        return  ($ticket->accountIp->is($account))
-            || ($ticket->domainIp->is($account));
+        return  $ticket->accountIp->is($account)
+            || $ticket->domainIp->is($account);
     }
 }

@@ -29,7 +29,6 @@ class EventObserver
                     $notification->buildList($ticket->id)
                 );
             } else {
-
                 // only ip contact
                 if ($ticket->ip_contact_auto_notify) {
                     $notification = new Notification();

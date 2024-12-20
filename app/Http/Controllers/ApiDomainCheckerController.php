@@ -3,7 +3,7 @@
 namespace AbuseIO\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Sabre\Uri as Uri;
+use Sabre\Uri;
 
 class ApiDomainCheckerController extends Controller
 {

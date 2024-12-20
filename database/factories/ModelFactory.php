@@ -107,7 +107,6 @@ $factory->define(AbuseIO\Models\Evidence::class, function (Faker\Generator $fake
 //});
 
 $factory->define(AbuseIO\Models\Netblock::class, function (Faker\Generator $faker) {
-
     // Randomize ipv4 or ipv6 generation
     if ($faker->boolean()) {
         $first_ip = $faker->ipv4;
@@ -135,7 +134,6 @@ $factory->define(AbuseIO\Models\Job::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(AbuseIO\Models\Note::class, function (Faker\Generator $faker) {
-
     // get a random ticket
     $ticket = \AbuseIO\Models\Ticket::all()->random();
 

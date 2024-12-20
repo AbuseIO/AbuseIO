@@ -2,7 +2,7 @@
 
 namespace tests;
 
-use Sabre\Uri as Uri;
+use Sabre\Uri;
 
 class UrlCheckerTest extends TestCase
 {

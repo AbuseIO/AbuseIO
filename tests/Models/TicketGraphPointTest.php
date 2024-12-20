@@ -16,7 +16,7 @@ class TicketGraphPointTest extends TestCase
         $oneYearAgo = date('Y-m-d', strtotime($today.' -1 year'));
         $this->createDateSeries($oneYearAgo, $today, 'created_at');
 
-        $statistics = (TicketGraphPoint::getStatistics('created_at'));
+        $statistics = TicketGraphPoint::getStatistics('created_at');
 
         $this->assertArrayHasKey('year', $statistics);
         $this->assertArrayHasKey('month', $statistics);

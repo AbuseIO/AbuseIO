@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AppendNoteSubmitter
 {
     /**
-     * @param $request
+     * @param         $request
      * @param Closure $next
      *
      * @return mixed
