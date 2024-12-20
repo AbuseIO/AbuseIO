@@ -17,7 +17,7 @@ return [
         'name'        => 'Generiek bericht',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
-'OPEN_SMARTINSTALL' => [
+    'OPEN_SMARTINSTALL' => [
         'name'        => 'Open Cisco Smart Install',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
@@ -52,7 +52,7 @@ return [
         'name'        => 'Open LDAP Server',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
-      
+
     'BOTNET_CONTROLLER' => [
         'name'        => 'Botnetserver',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
@@ -1842,7 +1842,7 @@ return [
         'name'        => 'Have I been pwned breach',
         'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
     ],
-    
+
     'OPEN_AFP_SERVER' => [
         'name'        => 'Open Apple Filing Protocol (AFP) Server',
         'description' => '
@@ -2041,8 +2041,8 @@ return [
     ],
 
     'OPEN_SSH_SERVER' => [
-    'name'          => 'Open SSH service',
-    'description'   => '
+        'name'          => 'Open SSH service',
+        'description'   => '
         <p> Dit rapport identificeert hosts die een Secure Shell (SSH) service - die vanaf het internet toegankelijk is - hebben draaien. </p>
 
         <p> Dit betekent niet per se dat er iets met dit systeem mis is, maar als de SSH op dit systeem (of de versie die runt) er niet op lijkt te horen staan, is het wellicht een goed idee om hier nader naar te kijken. </p>
