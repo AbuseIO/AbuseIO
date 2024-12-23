@@ -99,7 +99,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target\'_blank\' href=\'https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-20160916-ikev1\'>IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products</a><br>
+            <a target=\'_blank\' href=\'https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-20160916-ikev1\'>IKEv1 Information Disclosure Vulnerability in Multiple Cisco Products</a><br>
 
             ',
     ],
@@ -132,7 +132,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target\'_blank\' href=\'https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc743162(v=ws.11)\'>Remote Desktop Services and Windows Firewall</a><br>
+            <a target=\'_blank\' href=\'https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc743162(v=ws.11)\'>Remote Desktop Services and Windows Firewall</a><br>
             ',
     ],
 
@@ -1934,7 +1934,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a href='https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-cluster.html#preventing-unauthorized-access'>Secure the Elastic Stack</a><br>
+            <a target='_blank' href='https://www.elastic.co/guide/en/elasticsearch/reference/current/secure-cluster.html#preventing-unauthorized-access'>Secure the Elastic Stack</a><br>
             ",
     ],
 
@@ -2147,10 +2147,10 @@ return [
             of these attacks is spoofed to the victim address, it is only possible to report on victims being abused, not on the true 
             source of the DDoS.</p>
             
-            <p>You can read more about our DDoS attack observations <a href='https://sissden.eu/blog/amp2018'>in the SISSDEN blog 
+            <p>You can read more about our DDoS attack observations <a target='_blank' href='https://sissden.eu/blog/amp2018'>in the SISSDEN blog 
             entry on observations on DDoS attacks in 2018</a>. For more insight into how amplifiable DDoS attacks work, check out this 
-            <a href='https://christian-rossow.de/articles/Amplification_DDoS.php'>writeup and paper by Christian Rossow</a>,&nbsp;as 
-            well as the <a href='https://www.us-cert.gov/ncas/alerts/TA14-017A'>US-CERT Alert (TA14-017A)</a>.</p>
+            <a target='_blank' href='https://christian-rossow.de/articles/Amplification_DDoS.php'>writeup and paper by Christian Rossow</a>,&nbsp;as 
+            well as the <a target='_blank' href='https://www.us-cert.gov/ncas/alerts/TA14-017A'>US-CERT Alert (TA14-017A)</a>.</p>
             
             <p>This report contains information about the IP that was attacked (set to src_ip) and the port that was abused on the 
             honeypot to try to make it attack your IP (set to dst_port).</p>
