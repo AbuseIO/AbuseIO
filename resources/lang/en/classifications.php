@@ -207,8 +207,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://www.bsi.bund.de/EN/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Botnetze/botnet_node.html'>Botnets - consequences and protective actions</a><br>
-            <a target'_blank' href='https://www.bsi.bund.de/EN/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Infizierte-Systeme-bereinigen/infizierte-systeme-bereinigen_node.html'>Cleaning up infected systems</a><br>
+            <a target='_blank' href='https://www.bsi.bund.de/EN/Themen/Verbraucherinnen-und-Verbraucher/Cyber-Sicherheitslage/Methoden-der-Cyber-Kriminalitaet/Botnetze/botnet_node.html'>Botnets - consequences and protective actions</a><br>
+            <a target='_blank' href='https://www.bsi.bund.de/EN/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Infizierte-Systeme-bereinigen/infizierte-systeme-bereinigen_node.html'>Cleaning up infected systems</a><br>
 
             ",
     ],
@@ -302,7 +302,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
+            <a target='_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
 
             ",
     ],
@@ -335,7 +335,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://developers.google.com/search/blog/2007/08/malware-reviews-via-webmaster-tools'>Google Webmaster tools for infected sites</a><br>
+            <a target='_blank' href='https://developers.google.com/search/blog/2007/08/malware-reviews-via-webmaster-tools'>Google Webmaster tools for infected sites</a><br>
 
             ",
     ],
@@ -459,10 +459,10 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://freakattack.com/'>Tracking the FREAK Attack</a><br>
-            <a target'_blank' href='https://www.ssllabs.com/ssltest/'>SSL Server Testtool.</a><br>
-            <a target'_blank' href='https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations'>Mozilla’s security configuration guide</a><br>
-            <a target'_blank' href='https://ssl-config.mozilla.org/'>SSL Configuration Generator</a><br>
+            <a target='_blank' href='https://freakattack.com/'>Tracking the FREAK Attack</a><br>
+            <a target='_blank' href='https://www.ssllabs.com/ssltest/'>SSL Server Testtool.</a><br>
+            <a target='_blank' href='https://wiki.mozilla.org/Security/Server_Side_TLS#Recommended_configurations'>Mozilla’s security configuration guide</a><br>
+            <a target='_blank' href='https://ssl-config.mozilla.org/'>SSL Configuration Generator</a><br>
             ",
     ],
 
@@ -562,7 +562,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://dnsamplificationattacks.blogspot.nl/2013/07/source-port-chargen-destination-port.html'>Amplification Attacks Observer</a><br>
+            <a target='_blank' href='https://dnsamplificationattacks.blogspot.nl/2013/07/source-port-chargen-destination-port.html'>Amplification Attacks Observer</a><br>
             ",
     ],
 
@@ -666,17 +666,17 @@ return [
 
             <p>Please see the following Microsoft TechNet examples:<br>
             <br>
-            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771738(v=ws.11)'>Disabling recursion on Windows Server 2008 R2 systems</a><br>
-            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc787602(v=ws.10)'>Disabling recursion on older Windows Server systems</a><br>
-            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc773370(v=ws.10)'>Acting as a non-recursive forwarder</a> (See the 'Notes' section under the 'Using the Windows interface' instructions)<br>
+            <a target='_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771738(v=ws.11)'>Disabling recursion on Windows Server 2008 R2 systems</a><br>
+            <a target='_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc787602(v=ws.10)'>Disabling recursion on older Windows Server systems</a><br>
+            <a target='_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc773370(v=ws.10)'>Acting as a non-recursive forwarder</a> (See the 'Notes' section under the 'Using the Windows interface' instructions)<br>
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://www.cisa.gov/sites/default/files/publications/DNS-recursion033006.pdf'>The Continuing Denial of Service Threat Posed by DNS Recursion (v2.0)</a><br>
-            <a target'_blank' href='https://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
-            <a target'_blank' href='https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/dns-ddos-advisory-31mar06-en.pdf'>SSAC Advisory SAC008 DNS Distributed Denial of Service (DDoS) Attacks</a><br>
-            <a target'_blank' href='https://www.secureworks.com/research/dns-amplification'>DNS Amplification Variation Used in Recent DDoS Attacks</a><br>
-            <a target'_blank' href='https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/sac-065-en.pdf'>SSAC Advisory on DDoS Attacks Leveraging DNS Infrastructure</a><br>
+            <a target='_blank' href='https://www.cisa.gov/sites/default/files/publications/DNS-recursion033006.pdf'>The Continuing Denial of Service Threat Posed by DNS Recursion (v2.0)</a><br>
+            <a target='_blank' href='https://www.cymru.com/Documents/secure-bind-template.html'>http://www.cymru.com/Documents/secure-bind-template.html</a><br>
+            <a target='_blank' href='https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/dns-ddos-advisory-31mar06-en.pdf'>SSAC Advisory SAC008 DNS Distributed Denial of Service (DDoS) Attacks</a><br>
+            <a target='_blank' href='https://www.secureworks.com/research/dns-amplification'>DNS Amplification Variation Used in Recent DDoS Attacks</a><br>
+            <a target='_blank' href='https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/sac-065-en.pdf'>SSAC Advisory on DDoS Attacks Leveraging DNS Infrastructure</a><br>
 
             ",
     ],
@@ -783,8 +783,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://fish2.com/ipmi/'>Dan Farmer on IPMI security issues</a><br>
-            <a target'_blank' href='https://www.cisa.gov/news-events/alerts/2013/07/26/risks-using-intelligent-platform-management-interface-ipmi'>US-CERT alert TA13-207A</a><br>
+            <a target='_blank' href='http://fish2.com/ipmi/'>Dan Farmer on IPMI security issues</a><br>
+            <a target='_blank' href='https://www.cisa.gov/news-events/alerts/2013/07/26/risks-using-intelligent-platform-management-interface-ipmi'>US-CERT alert TA13-207A</a><br>
 
             ",
     ],
@@ -928,7 +928,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access?view=sql-server-ver16'>Configure a Windows Firewall for Database Engine Access</a><br>
+            <a target='_blank' href='https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access?view=sql-server-ver16'>Configure a Windows Firewall for Database Engine Access</a><br>
 
             ",
     ],
@@ -993,7 +993,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://www.mongodb.com/resources/products/capabilities/best-practices'>7 Best Practices For MongoDB Security (2020)</a><br>
+            <a target='_blank' href='https://www.mongodb.com/resources/products/capabilities/best-practices'>7 Best Practices For MongoDB Security (2020)</a><br>
 
             ",
     ],
@@ -1045,8 +1045,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
-            <a target'_blank' href='https://www.rapid7.com/blog/post/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities/'>NAT-PMP Implementation and Configuration Vulnerabilities</a>
+            <a target='_blank' href='https://www.kb.cert.org/vuls/id/184540'>Incorrect implementation of NAT-PMP in multiple devices</a><br>
+            <a target='_blank' href='https://www.rapid7.com/blog/post/2014/10/21/r7-2014-17-nat-pmp-implementation-and-configuration-vulnerabilities/'>NAT-PMP Implementation and Configuration Vulnerabilities</a>
 
 
             ",
@@ -1142,8 +1142,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://github.com/team-cymru/network-security-templates/tree/master/Secure-NTP-Templates'>Examples in securing a NTP service</a>
-            <a target'_blank' href='https://christian-rossow.de/publications/amplification-ndss2014.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
+            <a target='_blank' href='https://github.com/team-cymru/network-security-templates/tree/master/Secure-NTP-Templates'>Examples in securing a NTP service</a>
+            <a target='_blank' href='https://christian-rossow.de/publications/amplification-ndss2014.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
 
             ",
     ],
@@ -1225,7 +1225,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc940063(v=technet.10)'>Microsoft NetBIOS Over TCP/IP guide</a>
+            <a target='_blank' href='https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc940063(v=technet.10)'>Microsoft NetBIOS Over TCP/IP guide</a>
 
             ",
     ],
@@ -1386,7 +1386,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://redis.io/docs/latest/operate/oss_and_stack/management/security/'>Redis Security advisory</a><br>
+            <a target='_blank' href='https://redis.io/docs/latest/operate/oss_and_stack/management/security/'>Redis Security advisory</a><br>
 
             ",
     ],
@@ -1637,8 +1637,8 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
-            <a target'_blank' href='https://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
+            <a target='_blank' href='https://web.dev/articles/hacked'>Google's help for webmasters of hacked websites</a><br>
+            <a target='_blank' href='https://www.antiphishing.org/'>The site antiphishing.org has recommendations on dealing with hacked sites.</a><br>
 
             ",
     ],
@@ -1687,7 +1687,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='http://www.anti-abuse.org/multi-rbl-check'>Anti-abuse multi-rbl-check</a><br>
+            <a target='_blank' href='http://www.anti-abuse.org/multi-rbl-check'>Anti-abuse multi-rbl-check</a><br>
 
             ",
     ],
@@ -1783,7 +1783,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://www.techtarget.com/searchsecurity/definition/spam-trap'>What is a spam trap and how do you avoid them?</a><br>
+            <a target='_blank' href='https://www.techtarget.com/searchsecurity/definition/spam-trap'>What is a spam trap and how do you avoid them?</a><br>
 
             ",
     ],
@@ -1865,7 +1865,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
+            <a target='_blank' href='https://disablesslv3.com/'>Disable SSLv3 - a community-powered step-by-step tutorial</a><br>
 
             ",
     ],
@@ -1897,7 +1897,7 @@ return [
 
             <h2>Getting more information</h2>
 
-            <a target'_blank' href='https://wordpress.org/plugins/sucuri-scanner/'>WordPress Security scanner (Sucuri)</a><br>
+            <a target='_blank' href='https://wordpress.org/plugins/sucuri-scanner/'>WordPress Security scanner (Sucuri)</a><br>
 
             ",
     ],
