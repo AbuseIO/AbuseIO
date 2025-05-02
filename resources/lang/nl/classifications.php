@@ -2169,4 +2169,12 @@ return [
             <p> Dit rapport identificeert toegankelijke Border Gateway Protocol (BGP) servers op port 179/TCP. </p>',
     ],
 
+    'OPEN_MYSQL_SERVER' => [
+        'name'        => 'Open MySQL Server',
+        'description' => '
+            <p>Dit rapport identificeert toegankelijke MySQL server instances on port 3306/TCP.  Dit zijn instances die op ons request met een Server Greeting beantwoorden.</p
+        
+            <p>Het is onwaarschijnlijk dat uw MySQL server externe verbindingen vanaf het internet zou moeten toestaan (gezien dit een mogelijk extern aanvalsvlak kan zijn). Als u een rapportage over uw netwerk of kring ontvangt, raden wij aan actie te ondernemen om het verkeer naar uw MySQL instace te filteren en authentificatie te implementeren op de server.</p>',
+    ],
+
 ];
