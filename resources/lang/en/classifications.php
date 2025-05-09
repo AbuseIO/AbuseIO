@@ -2415,7 +2415,7 @@ return [
     'OPEN_MYSQL_SERVER' => [
         'name'        => 'Open MySQL Server',
         'description' => '
-            <p>This report identifies accessible MySQL server instances on port 3306/TCP.  These are instances that respond to our request with a Server Greeting.</p
+            <p>This report identifies accessible MySQL server instances on port 3306/TCP.  These are instances that respond to our request with a Server Greeting.</p>
         
             <p>It is unlikely that you need to have your MySQL server allowing for external connections from the Internet (and thus a possible external attack surface). If you do receive a report on your network/constituency take action to filter out traffic to your MySQL instance and make sure to implement authentication on the server.</p>',
     ],
