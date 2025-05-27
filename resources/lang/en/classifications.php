@@ -21,21 +21,25 @@ return [
     'OPEN_SMARTINSTALL' => [
         'name'        => 'Open Cisco Smart Install',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have the Cisco Smart Install feature running and are accessible to the Internet at large.
+            This feature can be used to read or potentially modify a switch’s configuration.
             ',
     ],
 
     'OPEN_HADOOP_SERVER' => [
         'name'        => 'Open Hadoop Server',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that are running Hadoop and have either the NameNode or DataNode web interfaces running and accessible to the world on the Internet.
+            At a minimum, this can allow for information-gathering against the target organization.
+            In other instances, it may allow a threat actor to manipulate the Hadoop instance.
             ',
     ],
 
     'OPEN_VNC_SERVER' => [
         'name'        => 'Open VNC Server',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have a VNC instance running on ports 5900-5905, 5800-5805, 6000, 17689 that are accessible on the IPv4 Internet. For IPv6 we currently scan 5900 and 5901 only.
+            If improperly configured, VNC may allow remote access to a desktop in an unintended manner.
             ',
     ],
 
@@ -48,21 +52,25 @@ return [
     'OPEN_CWMP_SERVER' => [
         'name'        => 'Open CPE WAN Management Protocol (CWMP)',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have the CPE WAN Management Protocol (CWMP) running and accessible on the Internet. It is unlikely this service needs to be exposed to the wider Internet. 
+            Vulnerabilities in CWMP services can be abused by IoT botnets, such as Mirai. Note: this report identifies only accessible services, not necessarily vulnerable ones. 
+            Nevertheless please block external access if you receive a report from us to reduce your potential attack surface – why wait for a vulnerability to be discovered?
             ',
     ],
 
     'OPEN_TELNET_SERVER' => [
         'name'        => 'Open Telnet Server',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have a Telnet instance running on port 23/TCP (and others) that are accessible on the Internet.
+            Telnet provides no encryption and may expose sensitive information or system credentials.
             ',
     ],
 
     'OPEN_LDAP_SERVER' => [
         'name'        => 'Open LDAP Server',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have an LDAP instance running on port 389/UDP that are accessible on the Internet.
+            These hosts are often Active Directory servers. In addition to allowing for an ~60x amplification vector, the data disclosed by the server could reveal large amounts of information about the network that the server resides on.
             ',
     ],
 
@@ -2092,21 +2100,23 @@ return [
     'OPEN_FTP_SERVER' => [
         'name'        => 'Open FTP Server',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have an FTP instance running on port 21/TCP that’s accessible on the Internet.
+            FTP provides no encryption (unless FTPS is utilized) and may expose sensitive information or system credentials.
             ',
     ],
 
     'OPEN_HTTP_SERVER' => [
         'name'        => 'Open HTTP Server',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have the Hypertext Transfer Protocol (HTTP) running on some port and are accessible on the Internet.
+            This is just a population/external surface exposure scan. We are not highlighting any vulnerabilities in this report, just the fact there is an HTTP server running. This allows you to track your daily asset exposure. 
             ',
     ],
 
     'OPEN_RSYNC_SERVER' => [
         'name'        => 'Open rsync Server',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have the rsync service running, bound to a network port (873/tcp, 8873/tcp) and accessible on the Internet without a password. 
             ',
     ],
     'OPEN_PROXY_SERVER' => [
@@ -2118,7 +2128,9 @@ return [
     'OPEN_UBIQUITI_SERVER' => [
         'name'        => 'Accessible Ubiquiti server',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have the Ubiquiti Discovery service running and accessible on the Internet.
+            These services have the potential to be used in amplification attacks by criminals that wish to perform denial of service attacks. In addition, they expose a large amount of information about the system running the service.
+            The service is tested by sending a UDP packet containing a four-byte payload to UDP port 10001.
             ',
     ],
     'BRUTE_FORCE_ATTACK' => [
@@ -2159,13 +2171,15 @@ return [
     'ACCESSIBLE_ADB_REPORT' => [
         'name'        => 'Accessible Android Debug Bridge',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have the Android Debug Bridge (ADB) running, bound to a network port (5555/tcp) and accessible on the Internet.
+            Make sure to block external access to ADB as it is often abused by malware and other threat actors. If you receive a report from us, check for signs of compromise!
             ',
     ],
     'ACCESSIBLE_APPLE_REMOTE_DESKTOP_ARD_REPORT' => [
         'name'        => 'Accessible Apple Remote Desktop',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have the Apple Remote Desktop service on port 3283/udp running and accessible on the Internet.  
+            This can be abused in an amplification attack and it also leaks information about the system that it is running on.
             ',
     ],
     'CAIDA_IP_SPOOFER_REPORT' => [
@@ -2183,37 +2197,48 @@ return [
     'NETCORE_NETIS_ROUTER_VULNERABILITY_SCAN_REPORT' => [
         'name'        => 'Vulnerable Netcore/Netis router ',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that are running a vulnerable or backdoored Netis Router with service open (port 53413/udp) and accessible from the Internet.
             ',
     ],
     'OPEN_DB2_DISCOVERY_SERVICE_REPORT' => [
         'name'        => 'Accessible DB2 discovery service ',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have the DB2 Discovery Service running and accessible on the Internet.
+            This service has the potential to expose information about a client’s network on which this service is accessible, and the service itself can be used in UDP amplification attacks.
             ',
     ],
     'OPEN_MQTT' => [
         'name'        => 'Accessible MQTT service ',
         'description' => '
-            This classification has no information text yet.
+            This report identifies all hosts that have an accessible MQTT (Message Queuing Telemetry Transport) service enabled on port 1883/TCP and on port 8883/TCP. 
+            In particular it identifies MQTT instances that enable anonymous access, which can be abused to leak data. 
+            Additionally, unlike the TLS version of the service typically on port 8883/TCP the MQTT service on port 1883/TCP is unencrypted, so even password protected instances can lead to data leakage.
             ',
     ],
     'OPEN_COAP' => [
         'name'        => 'Accessible COAP service',
         'description' => '
-            This classification has no information text yet.
+            This report identifies devices that have an accessible CoAP (Constrained Application Protocol) on port 5683/UDP. 
+            CoAP is a specialized web transfer protocol for use with constrained nodes and constrained networks. 
+            As described in RFC 7252, it is designed for machine-to-machine (M2M) applications such as smart energy and building automation.
+            
+            Exposed CoAP services can be used as reflectors in DDoS amplification attacks. 
+            They can also leak information (including authentication credentials), and in some cases may potentially allow for remote manipulation of exposed devices and associated services.
             ',
     ],
     'OPEN_IPP' => [
         'name'        => 'Accessible IPP service',
         'description' => '
-            This classification has no information text yet.
+            This report identifies devices that have an open IPP (Internet Printing Protocol) service enabled on port 631/TCP.  
+            This means anyone can connect to these devices (printers) anonymously. An attacker can abuse such devices for information disclosure including potential access to and manipulation of print jobs. 
+            Remote code execution vulnerabilities have also been uncovered in the past on various printer models and could potentially be exploited as well.
             ',
     ],
     'OPEN_RADMIN' => [
         'name'        => 'Accessible RAdmin service',
         'description' => '
-            This classification has no information text yet.
+            This report identifies hosts that have a Radmin service running on port 4899/TCP and accessible from the Internet. 
+            As with all remote access tools, care should be taken to make sure the service is configured in a secure manner and the security implications of making it accessible from anywhere on the Internet taken into account.
             ',
     ],
     'OPEN_RDPEUDP' => [
