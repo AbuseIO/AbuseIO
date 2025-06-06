@@ -2248,9 +2248,10 @@ return [
             ',
     ],
     'OPEN_BASIC_AUTH_SERVICE' => [
-        'name'        => 'Accessible Basic Authenticatie service',
+        'name'        => 'Accessible Basic Authentication service',
         'description' => '
-            This classification has no information text yet.
+            This concerns HTTP hosts that implement Basic Authentication in plain HTTP. 
+            This is a security risk as credentials are transmitted in cleartext, without encryption. Enforce the use of HTTPS instead. 
             ',
     ],
     'DARKNET' => [
