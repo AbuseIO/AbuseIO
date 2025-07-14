@@ -21,21 +21,25 @@ return [
     'OPEN_SMARTINSTALL' => [
         'name'        => 'Open Cisco Smart Install',
         'description' => '
-            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            This report identifies hosts that have the Cisco Smart Install feature running and are accessible to the Internet at large.
+            This feature can be used to read or potentially modify a switch’s configuration.
             ',
     ],
 
     'OPEN_HADOOP_SERVER' => [
         'name'        => 'Open Hadoop Server',
         'description' => '
-            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            This report identifies hosts that are running Hadoop and have either the NameNode or DataNode web interfaces running and accessible to the world on the Internet.
+            At a minimum, this can allow for information-gathering against the target organization.
+            In other instances, it may allow a threat actor to manipulate the Hadoop instance.
             ',
     ],
 
     'OPEN_VNC_SERVER' => [
         'name'        => 'Open VNC Server',
         'description' => '
-            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            This report identifies hosts that have a VNC instance running on ports 5900-5905, 5800-5805, 6000, 17689 that are accessible on the IPv4 Internet. For IPv6 we currently scan 5900 and 5901 only.
+            If improperly configured, VNC may allow remote access to a desktop in an unintended manner.
             ',
     ],
 
@@ -48,21 +52,24 @@ return [
     'OPEN_CWMP_SERVER' => [
         'name'        => 'Open CPE WAN Management Protocol (CWMP)',
         'description' => '
-            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            This report identifies hosts that have a VNC instance running on ports 5900-5905, 5800-5805, 6000, 17689 that are accessible on the IPv4 Internet. For IPv6 we currently scan 5900 and 5901 only.
+            If improperly configured, VNC may allow remote access to a desktop in an unintended manner.
             ',
     ],
 
     'OPEN_TELNET_SERVER' => [
         'name'        => 'Open Telnet Server',
         'description' => '
-            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            This report identifies hosts that have a Telnet instance running on port 23/TCP (and others) that are accessible on the Internet.
+            Telnet provides no encryption and may expose sensitive information or system credentials.
             ',
     ],
 
     'OPEN_LDAP_SERVER' => [
         'name'        => 'Open LDAP Server',
         'description' => '
-            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            This report identifies hosts that have an LDAP instance running on port 389/UDP that are accessible on the Internet.
+            These hosts are often Active Directory servers. In addition to allowing for an ~60x amplification vector, the data disclosed by the server could reveal large amounts of information about the network that the server resides on.
             ',
     ],
 
