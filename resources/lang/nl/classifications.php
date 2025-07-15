@@ -26,9 +26,9 @@ return [
 
     'OPEN_HADOOP_SERVER' => [
         'name'        => 'Open Hadoop Server',
-        'description' => 'This report identifies hosts that are running Hadoop and have either the NameNode or DataNode web interfaces running and accessible to the world on the Internet.
-            At a minimum, this can allow for information-gathering against the target organization.
-            In other instances, it may allow a threat actor to manipulate the Hadoop instance.
+        'description' => 'Deze rapportage bevat informatie over hosts die Hadoop draaien en of de NameNode of DataNode web interface hebben draaien en vrij toegankelijk via het internet zijn.
+        Dit maakt het mogelijk om informatie over het doelwit te verzamelen.
+        Er is ook een risico dat dit malafiden in staat stelt de Hadoop instance te besturen.
             ',
     ],
 
@@ -47,11 +47,11 @@ return [
 
     'OPEN_CWMP_SERVER' => [
         'name'        => 'Open CPE WAN Management Protocol (CWMP)',
-        'description' => '
-            This report identifies hosts that have the CPE WAN Management Protocol (CWMP) running and accessible on the Internet. It is unlikely this service needs to be exposed to the wider Internet. 
-            Vulnerabilities in CWMP services can be abused by IoT botnets, such as Mirai. Note: this report identifies only accessible services, not necessarily vulnerable ones. 
-            Nevertheless please block external access if you receive a report from us to reduce your potential attack surface – why wait for a vulnerability to be discovered?
-            ',
+        'description' => 'Deze rapportage identificeert hosts die het CPE WAN Management Protocol (CWMP) toegankelijk vanaf het internet draaien.
+        Het is onwaarschijnlijk dat deze dienst aan het internet bloot moet worden gesteld.
+        Kwetsbaarheden in CWMP diensten kunnen door IoT botnets zoals Mirai misbruikt worden. 
+        Let op: deze rapportage identificeert alleen toegankelijke diensten. Deze zijn niet per se kwetsbaar.
+        Als u een rapportage van ons ontvangt, is het ongeacht een goed idee om externe toegang tot deze diensten te ontzeggen om uw potentieel aanvalsvlak te verkleinen.',
     ],
 
     'OPEN_TELNET_SERVER' => [
@@ -62,9 +62,9 @@ return [
 
     'OPEN_LDAP_SERVER' => [
         'name'        => 'Open LDAP Server',
-        'description' => 'This report identifies hosts that have an LDAP instance running on port 389/UDP that are accessible on the Internet.
-            These hosts are often Active Directory servers. In addition to allowing for an ~60x amplification vector, the data disclosed by the server could reveal large amounts of information about the network that the server resides on.
-            ',
+        'description' => 'Deze rapportage identificeert (via het internet bereikbare) hosts die een LDAP instance op port 389/UDP hebben draaien.
+        Deze hosts zijn vaak Active Directory servers. Dit maakt niet alleen een ~60x amplificatievector voor DDoS-aanvallen mogelijk, 
+        maar de data die door de server wordt vrijgegeven, kan ook veel informatie blootstellen over het netwerk waar de server zich in bevindt.',
     ],
 
     'BOTNET_CONTROLLER' => [
