@@ -26,8 +26,8 @@ return [
 
     'OPEN_HADOOP_SERVER' => [
         'name'        => 'Open Hadoop Server',
-        'description' => 'Deze rapportage bevat informatie over hosts die Hadoop draaien en of de NameNode of DataNode web interface hebben draaien en vrij toegankelijk via het internet zijn.
-        Dit maakt het mogelijk om informatie over het doelwit te verzamelen.
+        'description' => 'Deze rapportage bevat informatie over hosts, vrij toegankelijk vanaf het internet, die Hadoop draaien en/of de NameNode of DataNode web interface hebben draaien.
+        Dit maakt het voor malafiden mogelijk om informatie over een doelwit te verzamelen.
         Er is ook een risico dat dit malafiden in staat stelt de Hadoop instance te besturen.
             ',
     ],
@@ -49,7 +49,7 @@ return [
         'name'        => 'Open CPE WAN Management Protocol (CWMP)',
         'description' => 'Deze rapportage identificeert hosts die het CPE WAN Management Protocol (CWMP) toegankelijk vanaf het internet draaien.
         Het is onwaarschijnlijk dat deze dienst aan het internet bloot moet worden gesteld.
-        Kwetsbaarheden in CWMP diensten kunnen door IoT botnets zoals Mirai misbruikt worden. 
+        Kwetsbaarheden in CWMP-diensten kunnen namelijk door IoT botnets zoals Mirai misbruikt worden. 
         Let op: deze rapportage identificeert alleen toegankelijke diensten. Deze zijn niet per se kwetsbaar.
         Als u een rapportage van ons ontvangt, is het ongeacht een goed idee om externe toegang tot deze diensten te ontzeggen om uw potentieel aanvalsvlak te verkleinen.',
     ],
@@ -210,7 +210,7 @@ return [
     'COMPROMISED_WEBSITE' => [
         'name'        => 'Gecompromitteerde website',
         'description' => "
-            <h2>Wat is een 'Compromised website'?</h2>
+            <h2>Wat is een 'gecompromitteerde website'?</h2>
 
             <p>Een gecompromitteerde website betekent dat er (gehackte) content zonder toestemming op uw site is geplaatst. 
             Dit komt door kwetsbaarheden in de beveiliging van uw site.
@@ -1893,14 +1893,16 @@ return [
 
     'OPEN_HTTP_SERVER' => [
         'name'        => 'Open HTTP Server',
-        'description' => 'This report identifies hosts that have the Hypertext Transfer Protocol (HTTP) running on some port and are accessible on the Internet.
-            This is just a population/external surface exposure scan. We are not highlighting any vulnerabilities in this report, just the fact there is an HTTP server running. This allows you to track your daily asset exposure.
+        'description' => 'Deze rapportage bevat informatie over hosts die het Hypertext Transfer Protocol (HTTP) op een port draaien die ook via het internet toegankelijk is.
+        Dit is enkel een population/external surface exposure scan. In deze rapportage belichten wij namelijk geen mogelijke kwetsbaarheden, enkel dat er een HTTP server op de host draait.
+        Dit geeft u meer overzicht over welke activa blootgesteld worden.
             ',
     ],
 
     'OPEN_RSYNC_SERVER' => [
         'name'        => 'Open rsync Server',
-        'description' => 'This report identifies hosts that have the rsync service running, bound to a network port (873/tcp, 8873/tcp) and accessible on the Internet without a password.
+        'description' => 'Deze rapportage bevat informatie over hosts die de rsync service op een netwerkport (873/tcp, 8873/tcp) hebben draaien die zonder wachtwoord toegankelijk vanaf het internet zijn.
+        This report identifies hosts that have the rsync service running, bound to a network port (873/tcp, 8873/tcp) and accessible on the Internet without a password.
             ',
     ],
     'OPEN_PROXY_SERVER' => [
@@ -2013,7 +2015,10 @@ return [
     ],
     'OPEN_RDPEUDP' => [
         'name'        => 'Open Microsoft Remote Desktop Protocol service',
-        'description' => 'Er is nog geen informatie over deze classificatie beschikbaar.',
+        'description' => '
+            Microsoft RDPEUDP is an extension to allow UDP transport for Microsoft Remote Desktop Protocol service (RDP), which by default uses TCP port 3389.
+            Exposed RDPEUDP services can be used as reflectors in DDoS amplification attacks. The response to the initial request packet is amplified ~28 times, with the protocol sending that response 3 times.
+            ',
     ],
     'OPEN_BASIC_AUTH_SERVICE' => [
         'name'        => 'Open Basic Authenticatie service',
