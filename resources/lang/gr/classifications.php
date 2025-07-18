@@ -2246,7 +2246,8 @@ return [
     'OPEN_RDPEUDP' => [
         'name'        => 'Accessible Microsoft Remote Desktop Protocol service',
         'description' => '
-            Αυτή η κατηγοριοποίηση δεν έχει επεξηγηματικό κείμενο ακόμα.
+            Microsoft RDPEUDP is an extension to allow UDP transport for Microsoft Remote Desktop Protocol service (RDP), which by default uses TCP port 3389.
+            Exposed RDPEUDP services can be used as reflectors in DDoS amplification attacks. The response to the initial request packet is amplified ~28 times, with the protocol sending that response 3 times.
             ',
     ],
     'OPEN_BASIC_AUTH_SERVICE' => [
