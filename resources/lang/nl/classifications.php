@@ -89,7 +89,7 @@ return [
 
             <p>De enige manier om deze kwetsbaarheid op te lossen, is om IPSEC uit te zetten.</p>
 
-            <h2>Tips om dit op te lossen/h2>
+            <h2>Tips om dit op te lossen</h2>
             <ul>
             <li>Upgrade naar een niet-getroffen versie van Cisco IOS</li>
             <li>implementeer een \'intrusion prevention system\' (IPS) of \'intrusion detection system\' (IDS) waarmee u aanvallen die gebruik maken van deze kwetsbaarheid kan voorkomen en detecteren.</li>
