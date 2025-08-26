@@ -1034,7 +1034,7 @@ return [
 
             <p>Authenticatie met de reference NTP software op UNIX kan - net als in Cisco IOS en Juniper JUNOS - met behulp van symmetrische key encryptie met MD5 gedaan worden. 
             Een op public key gebaseerde optie genaamd 'AutoKey' is ook beschikbaar en wordt als veiliger beschouwd. Voor meer informatie over deze opties, 
-            zie <a href='https://www.eecis.udel.edu/~mills/ntp/html/authopt.html' target='_blank'>NTP authentifications options page 
+            zie <a href='https://www.eecis.udel.edu/~mills/ntp/html/authopt.html' target='_blank'>NTP authentifications options page</a>
             en <a href='https://support.ntp.org/bin/view/Support/ConfiguringAutokey' target='_blank'>Configuring AutoKey documentation</a>.</p>
 
 
@@ -1325,7 +1325,7 @@ return [
             </ul>
 
             <h3>Linux</h3>
-            <p>Bewerk het SNMP configuratiebestand. Deze staat meestal in /etc/snmp/snmpd.conf<p>
+            <p>Bewerk het SNMP configuratiebestand. Deze staat meestal in /etc/snmp/snmpd.conf</p>
 
             <p>Voer de volgende wijzigingen door:</p>
             <p>Vind de volgende regel:</p>
