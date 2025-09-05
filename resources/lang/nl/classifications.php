@@ -2232,4 +2232,33 @@ return [
             <p>Het is onwaarschijnlijk dat uw MySQL-server externe verbindingen vanaf het internet moet toestaan (en dus een mogelijk extern aanvalsoppervlak moet bieden). Indien u een rapport over uw netwerk/domein ontvangt, onderneem dan actie om het verkeer naar uw MySQL-instance uit te filteren en zorg ervoor dat authenticie op de server wordt geïmplementeerd.</p>',
     ],
 
+    'ACCESSIBLE_KUBERNETES' => [
+        'name'        => 'Accessible Kubernetes',
+        'description' => '
+            <p>Deze rapportage bevat informatie over toegankelijke Kubernetes API instances die met een 200 OK HTTP op onze steekproeven antwoordden. 
+            Dit hoeft niet per se te betekenen dat deze instances volledig openstaan of kwetsbaar voor aanvallen zouden kunnen zijn. Wel is het een indicatie om uit te zoeken of er geen sprake is van een onbedoeld groot aanvalsvlak. 
+            Deze instances zouden ook informatie over de versie en build kunnen lekken.</p>
+            ',
+    ],
+
+    'ACCESSIBLE_MSRPC' => [
+        'name'         => 'Accessible Microsoft RPC',
+        'description'  => '
+            <p>Deze rapportage identificeert hosts die Microsoft RPC diensten, waaronder de MS-RPC Endpoint Mapper dienst op port 135/TCP, hebben draaien. Dit omvat ook diensten die via de ports 49664/TCP tot 49670/TCP en port 49152/TCP direct toegankelijk zijn. 
+            Als deze poorten open worden gelaten, kan dit een beveiligingsrisico vormen, wegens het aan derden blootstellen van diensten of andere informatie.
+            Wij raden aan om deze ports met behulp van een firewall afgesloten van het publieke internet te houden.</p>',
+    ],
+
+   'ACCESSIBLE_IMAP' => [
+        'name'         => 'Accessible IMAP',
+        'description'  => '
+            <p>Deze rapportage identificeert hosts die IMAP op port 143/TCP of 993/TCP hebben draaien.</p>',
+    ], 
+
+    'ACCESSIBLE_POP3' => [
+        'name'         => 'Accessible POP3',
+        'description'  => '
+            <p>Deze rapportage identificeert hosts die POP3 op port 110/TCP of 995/TCP hebben draaien.</p>',
+    ],
+
 ];
