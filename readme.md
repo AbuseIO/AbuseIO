@@ -1,12 +1,25 @@
 ## Version 5.0 is DEV and NOT working !
 
 TODO
-- Check "ddeboer/data-import": "^0.20.0" (DEFUNCT?)
+- Check "ddeboer/data-import": "^0.20.0" (NO LONGER MAINTAINED, REMOVED PROD)
+- laminas/laminas-json (NO LONGER MAINTAINED, REMOVED PROD)
+- wpb/string-blade-compiler (NO LONGER MAINTAINED, REMOVED PROD)
+- fzaninotto/faker (NO LONGER MAINTAINED, REMOVED DEV)
+
+- fix dependancy error for abuseio/hook-delegate (FOR NOW REMOVED)
+- fix depdenancy error for abuseio/iodef (FOR NOW REMOVED)
+
 - jover/singleton (still works?)
 - kruisdraad/phpmailer (might need update)
-- laminas/laminas-json (NO LONGER MAINTAINED)
-- wpb/string-blade-compiler (DEFUNCT?)
-- fzaninotto/faker (NO LONGER MAINTAINED, REMOVED DEV)
+
+Due to:
+- Package laminas/laminas-loader is abandoned, you should avoid using it. No replacement was suggested.
+- Package laminas/laminas-math is abandoned, you should avoid using it. No replacement was suggested.
+Removed:
+                "laminas/laminas-http": "2.22.*",
+                "laminas/laminas-xmlrpc": "2.21.*"
+
+
 
 ## AbuseIO - Abusemanagement tools
 
