@@ -1,5 +1,13 @@
 ## Version 5.0 is DEV and NOT working !
 
+TODO
+- Check "ddeboer/data-import": "^0.20.0" (DEFUNCT?)
+- jover/singleton (still works?)
+- kruisdraad/phpmailer (might need update)
+- laminas/laminas-json (NO LONGER MAINTAINED)
+- wpb/string-blade-compiler (DEFUNCT?)
+- fzaninotto/faker (NO LONGER MAINTAINED, REMOVED DEV)
+
 ## AbuseIO - Abusemanagement tools
 
 [![StyleCI](https://styleci.io/repos/31737623/shield?style=flat&branch=4.0)](https://styleci.io/repos/31737623?branch=4.0)
