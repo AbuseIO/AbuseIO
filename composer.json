@@ -84,14 +84,10 @@
 		"phpunit/phpunit": "^12.0"
 	},
 	"autoload": {
-		"classmap": [
-			"database",
-			"vendor/abuseio/",
-			"database/seeds",
-			"database/factories"
-		],
 		"psr-4": {
-			"AbuseIO\\": "app/"
+			"AbuseIO\\": "app/",
+		        "Database\\Factories\\": "database/factories/",
+		        "Database\\Seeders\\": "database/seeders/"
 		}
 	},
 	"autoload-dev": {
