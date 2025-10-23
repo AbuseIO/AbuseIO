@@ -88,7 +88,10 @@
 			"AbuseIO\\": "app/",
 		        "Database\\Factories\\": "database/factories/",
 		        "Database\\Seeders\\": "database/seeders/"
-		}
+		},
+    "classmap": [
+        "vendor/abuseio/"
+    ]
 	},
 	"autoload-dev": {
 		"psr-4": {

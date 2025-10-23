@@ -2,6 +2,7 @@
 
 TODO
 - TAG erors // MISSING-ABUSEIO5
+- Update composer.json legacy classmap into psr4 (but errors when done)
 - update public/js/*
 - Do updates from LTS 6.x towards 12.x (OMG)
   TODO From 8.0 -> 9.0 NEXT
