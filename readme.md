@@ -2,7 +2,7 @@
 
 TODO
 - TAG erors // MISSING-ABUSEIO5
-
+- update public/js/*
 - Do updates from LTS 6.x towards 12.x (OMG)
 
 - Check "ddeboer/data-import": "^0.20.0" (NO LONGER MAINTAINED, REMOVED PROD)
@@ -16,13 +16,33 @@ TODO
 - jover/singleton (still works?)
 - kruisdraad/phpmailer (might need update)
 
+TODO From 6.0 -> 7.0
+
+---
+Symfony Console, which is the underlying component that powers Artisan, expects all commands to return an integer. Therefore, you should ensure that any of your commands which return a value are returning integers:
+
+public function handle()
+{
+    // Before...
+    return true;
+ 
+    // After...
+    return 0;
+}
+---
+The default Markdown mail templates have been refreshed with a more professional and appealing design. In addition, the undocumented promotion Markdown mail component has been removed.
+
+Because indentation has special meaning within Markdown, Markdown mail templates expect unindented HTML. If you've previously published Laravel's default mail templates, you'll need to re-publish your mail templates or manually unindent them:
+
+php artisan vendor:publish --tag=laravel-mail --force
+---
 Due to:
 - Package laminas/laminas-loader is abandoned, you should avoid using it. No replacement was suggested.
 - Package laminas/laminas-math is abandoned, you should avoid using it. No replacement was suggested.
 Removed:
                 "laminas/laminas-http": "2.22.*",
                 "laminas/laminas-xmlrpc": "2.21.*"
-
+---
 Autoload errors during composer install
 ```
 Generating optimized autoload files
