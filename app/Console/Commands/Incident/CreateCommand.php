@@ -225,7 +225,7 @@ class CreateCommand extends Command
     /**
      * @return string
      */
-    final public function getName()
+    final public function getName(): ?string
     {
         return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
     }
@@ -247,7 +247,7 @@ class CreateCommand extends Command
     /**
      * @return string
      */
-    final public function getDescription()
+    final public function getDescription(): string
     {
         if (!empty($this->commandDescription)) {
             return $this->commandDescription;
