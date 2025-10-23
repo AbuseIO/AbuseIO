@@ -4,184 +4,113 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Mail Driver
+    | Default Mailer
     |--------------------------------------------------------------------------
     |
-    | Laravel supports both SMTP and PHP's "mail" function as drivers for the
-    | sending of e-mail. You may specify which one you're using throughout
-    | your application here. By default, Laravel is setup for SMTP mail.
-    |
-    | Supported: "smtp", "mail", "sendmail", "mailgun", "mandrill", "log"
+    | This option controls the default mailer that is used to send all email
+    | messages unless another mailer is explicitly specified when sending
+    | the message. All additional mailers can be configured within the
+    | "mailers" array. Examples of each type of mailer are provided.
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'log'),
 
     /*
     |--------------------------------------------------------------------------
-    | SMTP Host Address
+    | Mailer Configurations
     |--------------------------------------------------------------------------
     |
-    | Here you may provide the host address of the SMTP server used by your
-    | applications. A default option is provided that is compatible with
-    | the Mailgun mail service which will provide reliable deliveries.
+    | Here you may configure all of the mailers used by your application plus
+    | their respective settings. Several examples have been configured for
+    | you and you are free to add your own as your application requires.
+    |
+    | Laravel supports a variety of mail "transport" drivers that can be used
+    | when delivering an email. You may specify which one you're using for
+    | your mailers below. You may also add additional mailers if needed.
+    |
+    | Supported: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
+    |            "postmark", "resend", "log", "array",
+    |            "failover", "roundrobin"
     |
     */
 
-    'host' => env('MAIL_HOST', 'localhost'),
+    'mailers' => [
 
-    /*
-    |--------------------------------------------------------------------------
-    | SMTP Host Port
-    |--------------------------------------------------------------------------
-    |
-    | This is the SMTP port used by your application to deliver e-mails to
-    | users of the application. Like the host we have set this value to
-    | stay compatible with the Mailgun e-mail application by default.
-    |
-    */
+        'smtp' => [
+            'transport' => 'smtp',
+            'scheme' => env('MAIL_SCHEME'),
+            'url' => env('MAIL_URL'),
+            'host' => env('MAIL_HOST', '127.0.0.1'),
+            'port' => env('MAIL_PORT', 2525),
+            'username' => env('MAIL_USERNAME'),
+            'password' => env('MAIL_PASSWORD'),
+            'timeout' => null,
+            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+        ],
 
-    'port' => env('MAIL_PORT', 25),
+        'ses' => [
+            'transport' => 'ses',
+        ],
+
+        'postmark' => [
+            'transport' => 'postmark',
+            // 'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
+            // 'client' => [
+            //     'timeout' => 5,
+            // ],
+        ],
+
+        'resend' => [
+            'transport' => 'resend',
+        ],
+
+        'sendmail' => [
+            'transport' => 'sendmail',
+            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'),
+        ],
+
+        'log' => [
+            'transport' => 'log',
+            'channel' => env('MAIL_LOG_CHANNEL'),
+        ],
+
+        'array' => [
+            'transport' => 'array',
+        ],
+
+        'failover' => [
+            'transport' => 'failover',
+            'mailers' => [
+                'smtp',
+                'log',
+            ],
+        ],
+
+        'roundrobin' => [
+            'transport' => 'roundrobin',
+            'mailers' => [
+                'ses',
+                'postmark',
+            ],
+        ],
+
+    ],
 
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address
     |--------------------------------------------------------------------------
     |
-    | You may wish for all e-mails sent by your application to be sent from
-    | the same address. Here, you may specify a name and address that is
-    | used globally for all e-mails that are sent by your application.
+    | You may wish for all emails sent by your application to be sent from
+    | the same address. Here you may specify a name and address that is
+    | used globally for all emails that are sent by your application.
     |
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'root@localhost.net'),
-        'name'    => env('MAIL_FROM_NAME', 'AbuseIO Password Reset'),
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | E-Mail Encryption Protocol
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify the encryption protocol that should be used when
-    | the application send e-mail messages. A sensible default using the
-    | transport layer security protocol should provide great security.
-    |
-    */
-
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | SMTP Server Username
-    |--------------------------------------------------------------------------
-    |
-    | If your SMTP server requires a username for authentication, you should
-    | set it here. This will get used to authenticate with your server on
-    | connection. You may also set the "password" value below this one.
-    |
-    */
-
-    'username' => env('MAIL_USERNAME'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | SMTP Server Password
-    |--------------------------------------------------------------------------
-    |
-    | Here you may set the password required by your SMTP server to send out
-    | messages from your application. This will be given to the server on
-    | connection so that the application will be able to send messages.
-    |
-    */
-
-    'password' => env('MAIL_PASSWORD'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Sendmail System Path
-    |--------------------------------------------------------------------------
-    |
-    | When using the "sendmail" driver to send e-mails, we will need to know
-    | the path to where Sendmail lives on this server. A default path has
-    | been provided here, which will work well on most of your systems.
-    |
-    */
-
-    'sendmail' => '/usr/sbin/sendmail -bs',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Mail "Pretend"
-    |--------------------------------------------------------------------------
-    |
-    | When this option is enabled, e-mail will not actually be sent over the
-    | web and will instead be written to your application's logs files so
-    | you may inspect the message. This is great for local development.
-    |
-    */
-
-    'pretend' => false,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Mail "Override_address"
-    |--------------------------------------------------------------------------
-    |
-    | If this option is set to an email address it will be used instead of the
-    | email address of the contact.Usefull for development/testing
-    |
-    */
-
-    'override_address' => env('MAIL_OVERRIDE', false),
-
-    /*
-    |--------------------------------------------------------------------------
-    | S/MIME Signing options
-    |--------------------------------------------------------------------------
-    |
-    | When this option is enabled, e-mail can be signed with the selected
-    | PEM key and certificate placed in ./config/smime/ dir. Please make sure
-    | That your certificate matches the sender/signer in the main config section
-    | under main.notifications.from_address
-    |
-    */
-    'smime' => [
-        'enabled'     => env('MAIL_SMIME_ENABLED', false),
-        'key'         => env('MAIL_SMIME_KEY', '/opt/abuseio/config/smikme/key.pem'),
-        'certificate' => env('MAIL_SMIME_CERTIFICATE', '/opt/abuseio/config/smikme/certificate.pem'),
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | ssl_verify option
-    |--------------------------------------------------------------------------
-    |
-    | When this option is disabled, it suppresses SSL certificate warnings.
-    | verify_peer, verify_peer_name are discarded and self_signed ssl
-    | certificates are allowed
-    |
-    */
-    'ssl_verify' => env('MAIL_SSL_VERIFY', false),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Markdown Mail Settings
-    |--------------------------------------------------------------------------
-    |
-    | If you are using Markdown based email rendering, you may configure your
-    | theme and component paths here, allowing you to customize the design
-    | of the emails. Or, you may simply stick with the Laravel defaults!
-    |
-    */
-
-    'markdown' => [
-        'theme' => 'default',
-
-        'paths' => [
-            resource_path('views/vendor/mail'),
-        ],
+        'address' => env('MAIL_FROM_ADDRESS', 'abuseio@isp.local'),
+        'name' => env('MAIL_FROM_NAME', 'AbuseIO'),
     ],
 
 ];
