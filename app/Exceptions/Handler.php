@@ -3,7 +3,7 @@
 namespace AbuseIO\Exceptions;
 
 use AbuseIO\Traits\Api;
-use Exception;
+use Throwable;
 use Illuminate\Auth\AuthenticationException;
 //use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -38,7 +38,14 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
-    public function report(Exception $exception)
+
+    //public function shouldReport(Throwable $exception);
+    // MISSING-ABUSEIO5
+
+    //public function renderForConsole($output, Throwable $exception);
+    // MISSING-ABUSEIO5
+
+    public function report(Throwable $exception) 
     {
         parent::report($exception);
     }
@@ -51,7 +58,7 @@ class Handler extends ExceptionHandler
      *
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         if ($exception instanceof ModelNotFoundException) {
             if ($request->wantsJson()) {

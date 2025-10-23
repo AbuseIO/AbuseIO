@@ -189,8 +189,10 @@ return [
         /*
          * Some plugin Service Providers ...
          */
-        Wpb\String_Blade_Compiler\StringBladeServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
+	//Wpb\String_Blade_Compiler\StringBladeServiceProvider::class,
+	//MISSING-ABUSEIO5
+	//Collective\Html\HtmlServiceProvider::class,
+	//MISSING-ABUSEIO5
 
         /*
          * Package Service Providers...
@@ -215,7 +217,7 @@ return [
         /*
          * Developer Providers ...
          */
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        //Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 

@@ -22,3 +22,8 @@ storage/adminadded
 .viminfo
 .wget-hsts
 
+.cache
+.config
+.lesshst
+.local
+
