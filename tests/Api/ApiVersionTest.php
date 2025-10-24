@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Api\Account;
+namespace tests\Api;
 
 use tests\TestCase;
 

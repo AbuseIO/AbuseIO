@@ -5,5 +5,7 @@
  */
 function generateApiToken()
 {
-    return Uuid::generate(4)->__toString();
+    //MISSING-ABUSEIO5
+    //What is the coeect output (was _toSTring ?!
+    return Str::fastUuid();
 }

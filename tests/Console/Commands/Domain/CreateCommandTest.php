@@ -1,6 +1,6 @@
 <?php
 
-namespace AbuseIO\Console\Commands\Domain;
+namespace tests\Console\Commands\Domain;
 
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;

@@ -86,12 +86,14 @@
 	"autoload": {
 		"psr-4": {
 			"AbuseIO\\": "app/",
+			"Log\\": "app/",
+			"tests\\": "tests/",
 		        "Database\\Factories\\": "database/factories/",
 		        "Database\\Seeders\\": "database/seeders/"
 		},
-    "classmap": [
-        "vendor/abuseio/"
-    ]
+                "classmap": [
+                    "vendor/abuseio/"
+                ]
 	},
 	"autoload-dev": {
 		"psr-4": {
@@ -105,7 +107,6 @@
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
-			"php artisan ide-helper:generate",
 			"php artisan queue:restart"
 		],
 		"post-create-project-cmd": [

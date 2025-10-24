@@ -37,14 +37,6 @@ Removed:
                 "laminas/laminas-http": "2.22.*",
                 "laminas/laminas-xmlrpc": "2.21.*"
 ---
-Autoload errors during composer install
-```
-Generating optimized autoload files
-Class tests\Api\Account\ApiVersionTest located in ./tests/Api/ApiVersionTest.php does not comply with psr-4 autoloading standard (rule: tests\ => ./tests). Skipping.
-Class AbuseIO\Console\Commands\Domain\CreateCommandTest located in ./tests/Console/Commands/Domain/CreateCommandTest.php does not comply with psr-4 autoloading standard (rule: tests\ => ./tests). Skipping.
-Class App\Logging\AbuseIOFormatter located in ./app/Logging/AbuseIOFormatter.php does not comply with psr-4 autoloading standard (rule: AbuseIO\ => ./app). Skipping.
-Class App\Providers\BroadcastServiceProvider located in ./app/Providers/BroadcastServiceProvider.php does not comply with psr-4 autoloading standard (rule: AbuseIO\ => ./app). Skipping.
-```
 
 
 ## AbuseIO - Abusemanagement tools

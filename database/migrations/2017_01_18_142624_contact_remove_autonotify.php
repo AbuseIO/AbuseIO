@@ -14,7 +14,9 @@ class ContactRemoveAutonotify extends Migration
     public function up()
     {
         foreach (Contact::where('auto_notify', 1) as $contact) {
-            $contact->addNotificationMethod(['method' => 'Mail']);
+            if(!empty($contact)) {
+                $contact->addNotificationMethod(['method' => 'Mail']);
+            }
         }
 
         Schema::table(
