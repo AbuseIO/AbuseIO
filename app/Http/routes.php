@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use AbuseIO\Http\Controllers\AccountsController;
 use AbuseIO\Http\Controllers\AshLinksController;
 use AbuseIO\Http\Controllers\Auth\LoginController;
@@ -12,6 +11,7 @@ use AbuseIO\Http\Controllers\NotesController;
 use AbuseIO\Http\Controllers\SearchController;
 use AbuseIO\Http\Controllers\TicketsController;
 use AbuseIO\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +40,7 @@ Route::get('auth/logout', [LoginController::class, 'logout'])->name('logout');
 */
 
 Route::prefix('admin')->group(function () {
-
     Route::group(['middleware' => ['auth', 'permission']], function () {
-
         Route::get('/home', function () {
             return view('home');
         })->name('home');

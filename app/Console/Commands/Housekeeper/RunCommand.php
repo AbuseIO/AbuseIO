@@ -83,7 +83,7 @@ class RunCommand extends Command
             get_class($this).': Housekeeping has completed its run'
         );
 
-	return Command::SUCCESS;
+        return Command::SUCCESS;
     }
 
     /**

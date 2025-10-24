@@ -87,7 +87,7 @@ class NotificationsCommand extends Command
         ) {
             $this->error('Invalid or incomplete option(s) used, try --help');
 
-	    return Command::FAILURE;
+            return Command::FAILURE;
         }
 
         $notification = new Notification();

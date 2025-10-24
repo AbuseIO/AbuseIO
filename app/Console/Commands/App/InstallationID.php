@@ -65,7 +65,7 @@ class InstallationID extends Command
             }
         }
 
-	    $id = Str::uuid()->toString();
+        $id = Str::uuid()->toString();
 
         $path = base_path('.env');
 
