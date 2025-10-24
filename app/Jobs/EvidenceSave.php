@@ -3,9 +3,9 @@
 namespace AbuseIO\Jobs;
 
 use Carbon;
+use Illuminate\Support\Str;
 use Log;
 use Storage;
-use Illuminate\Support\Str;
 
 /**
  * This EvidenceSave class handles the writing of evidence files to FS.

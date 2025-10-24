@@ -63,11 +63,12 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $e
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \Throwable               $e
      *
      * @throws \Throwable
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Throwable $e)
     {
@@ -87,8 +88,9 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception as JSON.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $e
+     * @param \Illuminate\Http\Request $request
+     * @param \Throwable               $e
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function renderJsonException($request, Throwable $e)
@@ -98,7 +100,7 @@ class Handler extends ExceptionHandler
 
         $response = [
             'message' => $message,
-            'status' => $status,
+            'status'  => $status,
         ];
 
         if (config('app.debug')) {
@@ -116,8 +118,9 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception for API routes.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $e
+     * @param \Illuminate\Http\Request $request
+     * @param \Throwable               $e
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function renderApiException($request, Throwable $e)
@@ -126,7 +129,7 @@ class Handler extends ExceptionHandler
 
         return response()->json([
             'error' => [
-                'message' => $this->getExceptionMessage($e),
+                'message'     => $this->getExceptionMessage($e),
                 'status_code' => $status,
             ],
         ], $status);
@@ -135,7 +138,8 @@ class Handler extends ExceptionHandler
     /**
      * Get the status code from the exception.
      *
-     * @param  \Throwable  $e
+     * @param \Throwable $e
+     *
      * @return int
      */
     protected function getExceptionStatusCode(Throwable $e): int
@@ -174,7 +178,8 @@ class Handler extends ExceptionHandler
     /**
      * Get the exception message.
      *
-     * @param  \Throwable  $e
+     * @param \Throwable $e
+     *
      * @return string
      */
     protected function getExceptionMessage(Throwable $e): string
@@ -218,8 +223,9 @@ class Handler extends ExceptionHandler
     /**
      * Convert an authentication exception into a response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @param \Illuminate\Http\Request                 $request
+     * @param \Illuminate\Auth\AuthenticationException $exception
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)
@@ -236,15 +242,16 @@ class Handler extends ExceptionHandler
     /**
      * Convert a validation exception into a JSON response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Validation\ValidationException  $exception
+     * @param \Illuminate\Http\Request                   $request
+     * @param \Illuminate\Validation\ValidationException $exception
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function invalidJson($request, ValidationException $exception)
     {
         return response()->json([
             'message' => $exception->getMessage(),
-            'errors' => $exception->errors(),
+            'errors'  => $exception->errors(),
         ], $exception->status);
     }
 }
