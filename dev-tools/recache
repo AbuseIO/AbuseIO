@@ -1,0 +1,14 @@
+echo caches
+rm -rf bootstrap/cache/*.php
+composer clear-cache
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+php artisan route:clear
+composer dump-autoload
+
+echo restart services
+sudo systemctl restart abuseio_queue_collector
+sudo systemctl restart abuseio_queue_email_incoming
+sudo systemctl restart abuseio_queue_email_outgoing
+sudo systemctl restart abuseio_queue_delegation

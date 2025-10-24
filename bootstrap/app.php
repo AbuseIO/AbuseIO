@@ -29,13 +29,23 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // Register middleware aliases
         $middleware->alias([
+            'api.enabled' => \AbuseIO\Http\Middleware\ApiEnabled::class,
+            'api.account' => \AbuseIO\Http\Middleware\ApiAccountAvailable::class,
+            'api.system' => \AbuseIO\Http\Middleware\ApiSystemAccount::class,
+            'api.token' => \AbuseIO\Http\Middleware\CheckApiToken::class,
+            'ash.token' => \AbuseIO\Http\Middleware\CheckAshToken::class,
             'auth' => \AbuseIO\Http\Middleware\Authenticate::class,
             'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
             'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
             'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
             'can' => \Illuminate\Auth\Middleware\Authorize::class,
+            'check.account' => \AbuseIO\Http\Middleware\CheckAccount::class,
+            'check.system' => \AbuseIO\Http\Middleware\CheckSystemAccount::class,
             'guest' => \AbuseIO\Http\Middleware\RedirectIfAuthenticated::class,
+            'locale' => \AbuseIO\Http\Middleware\Locale::class,
+            'note.submitter' => \AbuseIO\Http\Middleware\AppendNoteSubmitter::class,
             'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
+            'permission' => \AbuseIO\Http\Middleware\CheckPermission::class,
             'precognition' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
             'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
             'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,

@@ -39,7 +39,7 @@
 	                    @endforeach
 	                </ul>
 					<ul class="nav navbar-nav navbar-right">
-						@if ($auth_user->hasRole('admin'))
+						@if (auth()->user()->hasRole('admin'))
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> {{ trans('misc.settings') }} <span class="caret"></span></a>
 							<ul class="dropdown-menu">
@@ -52,7 +52,7 @@
 						@endif
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<span class="glyphicon glyphicon-user"></span> {{ $auth_user->fullName() . ' ( '  . $auth_user->account->name .' )' }} <span class="caret"></span>
+								<span class="glyphicon glyphicon-user"></span> {{ auth()->user()->fullName() . ' ( '  . auth()->user()->account->name .' )' }} <span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
 								<li class="dropdown-header">{{ trans('misc.language') }}</li>
@@ -60,7 +60,7 @@
 								<li>
 									<a href="/admin/locale/{{$locale}}">
 										<span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}
-										@if ($locale == $auth_user->locale)
+										@if ($locale == auth()->user()->locale)
 										<span class="glyphicon glyphicon-ok"></span>
 										@endif
 									</a>
