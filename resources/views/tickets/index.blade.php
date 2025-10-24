@@ -2,7 +2,7 @@
 
 @section('extrajs')
 <script>
-    var searchroute = '{!! route('admin.tickets.search') .'/query/' !!}';
+    var searchroute = '{!! route('admin.tickets.search') !!}';
     var locale = '{{ asset("/i18n/$auth_user->locale.json") }}';
     var user_options = jQuery.parseJSON('{!! $user_options !!}');
 </script>
@@ -13,8 +13,8 @@
 <h1 class="page-header">{{ trans('misc.tickets') }}</h1>
 <div class="row">
     <div class="col-md-4 col-md-offset-8 text-right">
-        {!! link_to_route('admin.incidents.create', trans('tickets.button.new_event'), [], ['class' => 'btn btn-info']) !!}
-        {!! link_to_route('admin.tickets.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
+        <a href="{{ route('admin.incidents.create') }}" class="btn btn-info">{{ trans('tickets.button.new_event') }}</a>
+        <a href="{{ route('admin.tickets.export', ['format' => 'csv']) }}" class="btn btn-info">{{ trans('misc.button.csv_export') }}</a>
     </div>
 </div>
 <table class="table table-striped table-condensed top-buffer" id="tickets-table">
@@ -36,11 +36,32 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>{!! Form::select('type_id', $types, null, ['placeholder' => '', 'id' => 'type_id', 'class' => 'form-control']) !!}</td>
-            <td>{!! Form::select('class_id', $classes, null, ['placeholder' => '', 'id' => 'class_id', 'class' => 'form-control']) !!}</td>
+            <td>
+                <select id="type_id" class="form-control">
+                    <option value=""></option>
+                    @foreach($types as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </td>
+            <td>
+                <select id="class_id" class="form-control">
+                    <option value=""></option>
+                    @foreach($classes as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </td>
             <td></td>
             <td></td>
-            <td>{!! Form::select('statuses', $statuses, null, ['placeholder' => '', 'id' => 'statuses', 'class' => 'form-control']) !!}</td>
+            <td>
+                <select id="statuses" class="form-control">
+                    <option value=""></option>
+                    @foreach($statuses as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </td>
             <td></td>
         </tr>
     </tfoot>

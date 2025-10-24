@@ -2,7 +2,7 @@
 
 namespace AbuseIO\Http\Middleware;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 /**
@@ -21,15 +21,20 @@ class CheckPermission
      */
     public function handle($request, Closure $next, $permission = null)
     {
-        if (!app('Illuminate\Contracts\Auth\Guard')->guest()) {
+        if (Auth::check()) {
             if ($request->user()->cando($permission)) {
                 return $next($request);
             }
         }
 
         Auth::logout();
-        $message = 'Sorry! You are not authorized to access that resource and have been logged out.'.
-            " Missing permission : {$permission}";
+        $message = 'Sorry! You are not authorized to access that resource and have been logged out.';
+        
+        if (!empty($permission)) {
+            $message .= " Missing permission: {$permission}";
+        } else {
+            $message .= " No permission specified for this route.";
+        }
 
         $request->session()->flash(
             'message',
@@ -48,6 +53,6 @@ class CheckPermission
         }
 
         // If not authorized then return a 401 for AJAX or redirect back with a message
-        return $request->ajax ? response('Unauthorized.', 401) : redirect()->back();
+        return $request->ajax() ? response('Unauthorized.', 401) : redirect()->back();
     }
 }

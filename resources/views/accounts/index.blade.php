@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-3 col-md-offset-9 text-right">
         @if ($auth_user->account->isSystemAccount() )
-            {!! link_to_route('admin.accounts.create', trans('accounts.button.new_account'), [ ], ['class' => 'btn btn-info']) !!}
+            <a href="{{ route('admin.accounts.create') }}" class="btn btn-info">{{ trans('accounts.button.new_account') }}</a>
         @endif
     </div>
 </div>
@@ -37,7 +37,7 @@
             processing: true,
             serverSide: true,
             sort: false,
-            ajax: '{!! route('admin.accounts.search') .'/query/' !!}',
+            ajax: '{!! route('admin.accounts.search') !!}',
             columnDefs: [ {
             targets: -1,
             data: null,
@@ -47,7 +47,7 @@
             url: '{{ asset("/i18n/$auth_user->locale.json") }}'
         },
             columns: [
-            { data: 'name', name: 'name' },
+                { data: 'name', name: 'name' },
             { data: 'description', name: 'description' },
             { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
         ]

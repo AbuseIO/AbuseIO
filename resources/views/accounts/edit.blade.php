@@ -2,8 +2,10 @@
 
 @section('content')
 <h1 class="page-header">{{ trans('accounts.header.edit') }}</h1>
-{!! Form::model($account, ['method' => 'PATCH', 'route' => ['admin.accounts.update', $account->id], 'class' => 'form-horizontal']) !!}
-{!! Form::hidden('id', $account->id) !!}
+<form method="POST" action="{{ route('admin.accounts.update', $account->id) }}" class="form-horizontal">
+@csrf
+@method('PATCH')
+<input type="hidden" name="id" value="{{ $account->id }}">
 @include('accounts/partials/_form', ['submit_text' => trans('misc.button.save')])
-{!! Form::close() !!}
+</form>
 @endsection

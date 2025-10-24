@@ -1,52 +1,56 @@
 <div class="form-group @if ($errors->has('name')) has-error @endif">
-    {!! Form::label('name', trans('misc.name').':', ['class' => 'col-sm-2 control-label']) !!}
+    <label for="name" class="col-sm-2 control-label">{{ trans('misc.name') }}:</label>
     <div class="col-sm-10">
-       {!! Form::text('name', null, ['class' => 'form-control']) !!}
+       <input type="text" name="name" id="name" value="{{ old('name', isset($brand) ? $brand->name : null) }}" class="form-control">
        @if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('company_name')) has-error @endif">
-    {!! Form::label('company_name', trans('misc.company_name').':', ['class' => 'col-sm-2 control-label']) !!}
+    <label for="company_name" class="col-sm-2 control-label">{{ trans('misc.company_name') }}:</label>
     <div class="col-sm-10">
-        {!! Form::text('company_name', null, ['class' => 'form-control']) !!}
+        <input type="text" name="company_name" id="company_name" value="{{ old('company_name', isset($brand) ? $brand->company_name : null) }}" class="form-control">
         @if ($errors->has('company_name')) <p class="help-block">{{ $errors->first('company_name') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('introduction_text')) has-error @endif">
-    {!! Form::label('introduction_text', trans('misc.text').':', ['class' => 'col-sm-2 control-label']) !!}
+    <label for="introduction_text" class="col-sm-2 control-label">{{ trans('misc.text') }}:</label>
     <div class="col-sm-10">
-        {!! Form::text('introduction_text', null, ['class' => 'form-control']) !!}
+        <input type="text" name="introduction_text" id="introduction_text" value="{{ old('introduction_text', isset($brand) ? $brand->introduction_text : null) }}" class="form-control">
         @if ($errors->has('introduction_text')) <p class="help-block">{{ $errors->first('introduction_text') }}</p> @endif
     </div>
 </div>
 @if ($auth_user->account->isSystemAccount())
-<div class="form-group @if ($errors->has('account_id')) has-error @endif">
-    {!! Form::label('creator_id', trans('misc.creator').':', ['class' => 'col-sm-2 control-label']) !!}
+<div class="form-group @if ($errors->has('creator_id')) has-error @endif">
+    <label for="creator_id" class="col-sm-2 control-label">{{ trans('misc.creator') }}:</label>
     <div class="col-sm-10">
-        {!! Form::select('creator_id', $account_selection, $selected, ['class' => 'form-control']) !!}
+        <select name="creator_id" id="creator_id" class="form-control">
+            @foreach($account_selection as $id => $name)
+                <option value="{{ $id }}" @if(old('creator_id', $selected) == $id) selected @endif>{{ $name }}</option>
+            @endforeach
+        </select>
         @if ($errors->has('creator_id')) <p class="help-block">{{ $errors->first('creator_id') }}</p> @endif
     </div>
 </div>
 @else
-{!! Form::hidden('creator_id', $auth_user->account->id) !!}
+<input type="hidden" name="creator_id" value="{{ $auth_user->account->id }}">
 @endif
-<div class="form-group @if ($errors->has('introduction_text')) has-error @endif">
-    {!! Form::label('logo', trans('brands.logo').':', ['class' => 'col-sm-2 control-label']) !!}
+<div class="form-group @if ($errors->has('logo')) has-error @endif">
+    <label for="logo" class="col-sm-2 control-label">{{ trans('brands.logo') }}:</label>
     <div class="col-sm-10">
         @if ($brand)
             @if ($brand->logo)
                 <img src="/admin/logo/{{ $brand->id }}" />
             @endif
         @endif
-        {!! Form::file('logo') !!}
+        <input type="file" name="logo" id="logo">
         @if ($errors->has('logo')) <p class="help-block">{{ $errors->first('logo') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('mail_custom_template')) has-error @endif">
-    {!! Form::label('mail_custom_template', trans('brands.mail_custom_template').':', ['class' => 'col-sm-2 control-label']) !!}
+    <label for="mail_custom_template" class="col-sm-2 control-label">{{ trans('brands.mail_custom_template') }}:</label>
     <div class="col-sm-10">
-        {!! Form::hidden('mail_custom_template', $mail_custom_template) !!}
-        {!! Form::checkbox('mail_custom_templatedummy', true, $mail_custom_template, ['id' => 'mail_custom_templatedummy']) !!}
+        <input type="hidden" name="mail_custom_template" id="mail_custom_template" value="{{ old('mail_custom_template', $mail_custom_template) ? 'true' : 'false' }}">
+        <input type="checkbox" name="mail_custom_templatedummy" id="mail_custom_templatedummy" value="1" @if(old('mail_custom_template', $mail_custom_template)) checked @endif>
         @if ($errors->has('mail_custom_template')) <p class="help-block">{{ $errors->first('mail_custom_template') }}</p> @endif
     </div>
 </div>
@@ -58,7 +62,7 @@
             </div>
             <div class="panel-body">
                 @if ($errors->has('mail_template_plain')) <p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_plain')}}</p> @endif
-                {!! Form::textarea('mail_template_plain', htmlentities($templates['plain_mail']), ['id' => 'mail_template_plain', 'style' => 'width: 100%']) !!}
+                <textarea name="mail_template_plain" id="mail_template_plain" style="width: 100%">{{ old('mail_template_plain', htmlentities($templates['plain_mail'])) }}</textarea>
             </div>
         </div>
     </div>
@@ -71,16 +75,16 @@
             </div>
             <div class="panel-body">
                 @if ($errors->has('mail_template_html')) <p class="help-block has-error"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_html')}}</p> @endif
-                {!! Form::textarea('mail_template_html', htmlentities($templates['html_mail']), ['id' => 'mail_template_html', 'style' => 'width: 100%']) !!}
+                <textarea name="mail_template_html" id="mail_template_html" style="width: 100%">{{ old('mail_template_html', htmlentities($templates['html_mail'])) }}</textarea>
             </div>
         </div>
     </div>
 </div>
 <div class="form-group @if ($errors->has('ash_custom_template')) has-error @endif">
-    {!! Form::label('ash_custom_template', trans('brands.ash_custom_template').':', ['class' => 'col-sm-2 control-label']) !!}
+    <label for="ash_custom_template" class="col-sm-2 control-label">{{ trans('brands.ash_custom_template') }}:</label>
     <div class="col-sm-10">
-        {!! Form::hidden('ash_custom_template', $ash_custom_template) !!}
-        {!! Form::checkbox('ash_custom_templatedummy', true, $ash_custom_template, ['id' => 'ash_custom_templatedummy']) !!}
+        <input type="hidden" name="ash_custom_template" id="ash_custom_template" value="{{ old('ash_custom_template', $ash_custom_template) ? 'true' : 'false' }}">
+        <input type="checkbox" name="ash_custom_templatedummy" id="ash_custom_templatedummy" value="1" @if(old('ash_custom_template', $ash_custom_template)) checked @endif>
         @if ($errors->has('ash_custom_template')) <p class="help-block">{{ $errors->first('ash_custom_template') }}</p> @endif
     </div>
 </div>
@@ -92,15 +96,15 @@
             </div>
             <div class="panel-body">
                 @if ($errors->has('ash_template')) <p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('ash_template')}}</p> @endif
-                {!! Form::textarea('ash_template', htmlentities($templates['ash']), ['id' => 'ash_template', 'style' => 'width: 100%']) !!}
+                <textarea name="ash_template" id="ash_template" style="width: 100%">{{ old('ash_template', htmlentities($templates['ash'])) }}</textarea>
             </div>
         </div>
     </div>
 </div>
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-        {!! Form::submit($submit_text, ['class'=>'btn btn-success']) !!}
-        {!! link_to(URL::previous(), trans('misc.button.cancel'), ['class' => 'btn btn-default']) !!}
+        <button type="submit" class="btn btn-success">{{ $submit_text }}</button>
+        <a href="{{ URL::previous() }}" class="btn btn-default">{{ trans('misc.button.cancel') }}</a>
     </div>
 </div>
 

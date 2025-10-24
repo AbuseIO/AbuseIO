@@ -34,12 +34,12 @@
 	                <ul class="nav navbar-nav">
 	                    @foreach(Config::get('main.interface.navigation') as $navLink)
 	                    <li class="{{ Request::path() == $navLink ? 'active' : '' }}">
-							<a href="{{ url('/'.Request::segment(1).'/'.$navLink) }}">{{ trans('misc.'.$navLink) }}</a>
+							<a href="{{ url('/admin/'.$navLink) }}">{{ trans('misc.'.$navLink) }}</a>
 						</li>
 	                    @endforeach
 	                </ul>
 					<ul class="nav navbar-nav navbar-right">
-						@if (auth()->user()->hasRole('admin'))
+						@if (auth()->check() && auth()->user()->hasRole('admin'))
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> {{ trans('misc.settings') }} <span class="caret"></span></a>
 							<ul class="dropdown-menu">
@@ -52,7 +52,7 @@
 						@endif
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<span class="glyphicon glyphicon-user"></span> {{ auth()->user()->fullName() . ' ( '  . auth()->user()->account->name .' )' }} <span class="caret"></span>
+								<span class="glyphicon glyphicon-user"></span> {{ auth()->check() ? auth()->user()->fullName() . ' ( '  . auth()->user()->account->name .' )' : 'Guest' }} <span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
 								<li class="dropdown-header">{{ trans('misc.language') }}</li>
@@ -60,7 +60,7 @@
 								<li>
 									<a href="/admin/locale/{{$locale}}">
 										<span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}
-										@if ($locale == auth()->user()->locale)
+										@if (auth()->check() && $locale == auth()->user()->locale)
 										<span class="glyphicon glyphicon-ok"></span>
 										@endif
 									</a>

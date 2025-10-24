@@ -8,7 +8,7 @@ use AbuseIO\Models\Contact;
 use AbuseIO\Services\NotificationService;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\ContactTransformer;
-use Form;
+
 use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use Redirect;
@@ -58,28 +58,12 @@ class ContactsController extends Controller
             ->addColumn(
                 'actions',
                 function ($contact) {
-                    $actions = Form::open(
-                        [
-                            'route'  => ['admin.contacts.destroy', $contact->id],
-                            'method' => 'DELETE',
-                            'class'  => 'form-inline',
-                        ]
-                    );
-                    $actions .= ' <a href="contacts/'.$contact->id.
-                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
-                        trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="contacts/'.$contact->id.
-                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
-                        trans('misc.button.edit').'</a> ';
-                    $actions .= Form::button(
-                        '<i class="glyphicon glyphicon-remove"></i> '.
-                        trans('misc.button.delete'),
-                        [
-                            'type'  => 'submit',
-                            'class' => 'btn btn-danger btn-xs',
-                        ]
-                    );
-                    $actions .= Form::close();
+                    $deleteAction = route('admin.contacts.destroy', $contact->id);
+                    $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
+                    $actions .= ' <a href="contacts/'.$contact->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.trans('misc.button.show').'</a> ';
+                    $actions .= ' <a href="contacts/'.$contact->id.'/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.trans('misc.button.edit').'</a> ';
+                    $actions .= ' <button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> '.trans('misc.button.delete').'</button>';
+                    $actions .= '</form>';
 
                     return $actions;
                 }

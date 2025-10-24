@@ -99,16 +99,8 @@ class BrandsController extends Controller
             ->addColumn(
                 'actions',
                 function ($brand) use ($account) {
-                    $actions = \Form::open(
-                        [
-                            'route' => [
-                                'admin.brands.destroy',
-                                $brand->id,
-                            ],
-                            'method' => 'DELETE',
-                            'class'  => 'form-inline',
-                        ]
-                    );
+                    $deleteAction = route('admin.brands.destroy', $brand->id);
+                    $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
                     if (!$brand->isSystemBrand() or $account->isSystemAccount()) {
                         if (!$account->brand->is($brand)) {
                             $actions .= ' <a href="brands/'.$brand->id.
@@ -121,16 +113,10 @@ class BrandsController extends Controller
                         $actions .= ' <a href="brands/'.$brand->id.
                             '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
                             trans('misc.button.edit').'</a> ';
-                        $actions .= \Form::button(
-                            '<i class="glyphicon glyphicon-remove"></i> '
-                            .trans('misc.button.delete'),
-                            [
-                                'type'  => 'submit',
-                                'class' => 'btn btn-danger btn-xs',
-                            ]
-                        );
+                        $actions .= '<button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> '.
+                            trans('misc.button.delete').'</button>';
                     }
-                    $actions .= \Form::close();
+                    $actions .= '</form>';
 
                     return $actions;
                 }

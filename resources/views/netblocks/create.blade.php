@@ -6,7 +6,8 @@
 
 @section('content')
 <h1 class="page-header">{{ trans('netblocks.header.new') }}</h1>
-{!! Form::open(['route' => 'admin.netblocks.store', 'class' => 'form-horizontal']) !!}
+<form method="POST" action="{{ route('admin.netblocks.store') }}" class="form-horizontal">
+@csrf
 @include('netblocks/partials/_form', ['submit_text' => trans('misc.button.save')])
-{!! Form::close() !!}
+</form>
 @endsection

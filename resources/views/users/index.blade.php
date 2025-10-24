@@ -4,7 +4,7 @@
 <h1 class="page-header">{{ trans_choice('misc.users', 2) }}</h1>
 <div class="row">
     <div class="col-md-3 col-md-offset-9 text-right">
-        {!! link_to_route('admin.users.create', trans('users.button.new_user'), [ ], ['class' => 'btn btn-info']) !!}
+        <a href="{{ route('admin.users.create') }}" class="btn btn-info">{{ trans('users.button.new_user') }}</a>
     </div>
 </div>
 @if ( !$users->count() )
@@ -36,7 +36,7 @@
         $('#users-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('admin.users.search') .'/query/' !!}',
+            ajax: '{!! route('admin.users.search') !!}',
             columnDefs: [{
                 targets: -1,
                 data: null,

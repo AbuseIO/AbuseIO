@@ -5,11 +5,11 @@
 <div class="row">
     <div class="col-sm-12 text-right">
         {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.accounts.destroy', $account->id]]) !!}
-        {!! link_to_route('admin.accounts.edit', trans('misc.button.edit'), $account->id, ['class' => 'btn btn-info']) !!}
+        <a href="{{ route('admin.accounts.edit', $account->id) }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
         @if ( $account->disabled )
-            {!! link_to_route('admin.accounts.enable', trans('misc.button.enable'), $account->id, ['class' => 'btn btn-success']) !!}
+            <a href="{{ route('admin.accounts.enable', $account->id) }}" class="btn btn-success">{{ trans('misc.button.enable') }}</a>
         @else
-            {!! link_to_route('admin.accounts.disable', trans('misc.button.disable'), $account->id, ['class' => 'btn btn-warning']) !!}
+            <a href="{{ route('admin.accounts.disable', $account->id) }}" class="btn btn-warning">{{ trans('misc.button.disable') }}</a>
         @endif
         {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger'.(($account->isSystemAccount()) ? ' disabled' : '')]) !!}
         {!! Form::close() !!}
@@ -54,7 +54,7 @@
         <td>{{ $user->id }}</td>
         <td>{{ $user->first_name }} {{ $user->last_name }}</td>
         <td class="text-right">
-            {!! link_to_route('admin.users.show', trans('misc.button.details'), $user->id, ['class' => 'btn btn-info btn-xs']) !!}
+            <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-info btn-xs">{{ trans('misc.button.details') }}</a>
         </td>
     </tr>
     @endforeach

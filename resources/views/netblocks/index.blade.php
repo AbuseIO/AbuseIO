@@ -4,8 +4,8 @@
 <h1 class="page-header">{{ trans('misc.netblocks') }}</h1>
 <div class="row">
     <div  class="col-md-3 col-md-offset-9 text-right">
-        {!! link_to_route('admin.netblocks.create', trans('netblocks.button.new_netblock'), [], ['class' => 'btn btn-info']) !!}
-        {!! link_to_route('admin.netblocks.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
+        <a href="{{ route('admin.netblocks.create') }}" class="btn btn-info">{{ trans('netblocks.button.new_netblock') }}</a>
+        <a href="{{ route('admin.netblocks.export', ['format' => 'csv']) }}" class="btn btn-info">{{ trans('misc.button.csv_export') }}</a>
     </div>
 </div>
 <table class="table table-striped" id="netblocks-table">
@@ -32,7 +32,7 @@
         $('#netblocks-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('admin.netblocks.search') .'/query/' !!}',
+            ajax: '{!! route('admin.netblocks.search') !!}',
             columnDefs: [{
                 targets: -1,
                 data: null,
@@ -43,7 +43,7 @@
             },
             columns: [
                 { data: 'first_ip', name: 'first_ip' },
-                { data: 'last_ip', name: 'last_ip' },
+
                 { data: 'contacts_name', name: 'contacts.name' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
             ]

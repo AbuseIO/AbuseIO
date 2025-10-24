@@ -4,8 +4,8 @@
 <h1 class="page-header">{{ trans('evidence.header.detail') }}{{ $evidence->id }}</h1>
 <div class="row">
     <div  class="col-md-3 col-md-offset-9 text-right">
-        {!! link_to_route('admin.evidence.download', trans('evidence.button.download'), $evidence->id, ['class' => 'btn btn-info']) !!}
-        {!! link_to(URL::previous(), trans('misc.button.back'), ['class' => 'btn btn-default']) !!}
+        <a href="{{ route('admin.evidence.download', $evidence->id) }}" class="btn btn-info">{{ trans('evidence.button.download') }}</a>
+        <a href="{{ URL::previous() }}" class="btn btn-default">{{ trans('misc.button.back') }}</a>
     </div>
 </div>
 @if(is_object($evidence))
@@ -23,7 +23,7 @@
             @foreach ($evidence->data['files'] as $index => $attachment)
                 <tr>
                     <td>
-                        {!! link_to_route('admin.evidence.attachment', $attachment->getFilename(), [$evidence->id, $attachment->getFilename()]) !!}
+                        <a href="{{ route('admin.evidence.attachment', [$evidence->id, $attachment->getFilename()]) }}">{{ $attachment->getFilename() }}</a>
                         <span class="badge">{{ hFileSize(Storage::disk('local_temp')->size("{$evidence->data['files_dir']}/{$attachment->getFilename()}")) }}</span>
                         <span class="label label-primary">{{ $attachment->getContentType() }}</span>
                     </td>

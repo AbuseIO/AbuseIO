@@ -2,7 +2,8 @@
 
 @section('content')
 <h1 class="page-header">{{ trans('users.header.new') }}</h1>
-{!! Form::model(new AbuseIO\Models\User, ['route' => 'admin.users.store', 'class' => 'form-horizontal']) !!}
+<form method="POST" action="{{ route('admin.users.store') }}" class="form-horizontal">
+@csrf
 @include('users/partials/_form', ['submit_text' => trans('misc.button.save')])
-{!! Form::close() !!}
+</form>
 @endsection

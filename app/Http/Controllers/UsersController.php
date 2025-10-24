@@ -59,13 +59,8 @@ class UsersController extends Controller
             ->addColumn(
                 'actions',
                 function ($user) {
-                    $actions = Form::open(
-                        [
-                            'route'  => ['admin.users.destroy', $user->id],
-                            'method' => 'DELETE',
-                            'class'  => 'form-inline',
-                        ]
-                    );
+                    $deleteAction = route('admin.users.destroy', $user->id);
+                    $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
                     $actions .= ' <a href="users/'.$user->id.
                         '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
                         trans('misc.button.show').'</a> ';
@@ -82,15 +77,9 @@ class UsersController extends Controller
                             trans('misc.button.disable').'</a> ';
                     }
                     $disabled = ($user->id == 1) ? ' disabled' : '';
-
-                    $actions .= Form::button(
-                        '<i class="glyphicon glyphicon-remove"></i> '.trans('misc.button.delete'),
-                        [
-                            'type'  => 'submit',
-                            'class' => 'btn btn-danger btn-xs'.$disabled,
-                        ]
-                    );
-                    $actions .= Form::close();
+                    $actions .= '<button type="submit" class="btn btn-danger btn-xs'.$disabled.'"><i class="glyphicon glyphicon-remove"></i> '.
+                        trans('misc.button.delete').'</button>';
+                    $actions .= '</form>';
 
                     return $actions;
                 }

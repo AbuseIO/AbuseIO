@@ -4,8 +4,8 @@
 <h1 class="page-header">{{ trans('misc.domains') }}</h1>
 <div class="row">
     <div  class="col-md-3 col-md-offset-9 text-right">
-        {!! link_to_route('admin.domains.create', trans('domains.button.new_domain'), [ ], ['class' => 'btn btn-info']) !!}
-        {!! link_to_route('admin.domains.export', trans('misc.button.csv_export'), ['format' => 'csv'], ['class' => 'btn btn-info']) !!}
+        <a href="{{ route('admin.domains.create') }}" class="btn btn-info">{{ trans('domains.button.new_domain') }}</a>
+        <a href="{{ route('admin.domains.export', ['format' => 'csv']) }}" class="btn btn-info">{{ trans('misc.button.csv_export') }}</a>
     </div>
 </div>
 
@@ -32,7 +32,7 @@
         $('#domains-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('admin.domains.search') .'/query/' !!}',
+            ajax: '{!! route('admin.domains.search') !!}',
             columnDefs: [{
                 targets: -1,
                 data: null,

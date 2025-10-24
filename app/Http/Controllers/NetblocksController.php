@@ -90,27 +90,17 @@ class NetblocksController extends Controller
             ->addColumn(
                 'actions',
                 function ($netblock) {
-                    $actions = Form::open(
-                        [
-                            'route'  => ['admin.netblocks.destroy', $netblock->id],
-                            'method' => 'DELETE',
-                            'class'  => 'form-inline',
-                        ]
-                    );
+                    $deleteAction = route('admin.netblocks.destroy', $netblock->id);
+                    $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
                     $actions .= ' <a href="netblocks/'.$netblock->id.
                         '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
                         trans('misc.button.show').'</a> ';
                     $actions .= ' <a href="netblocks/'.$netblock->id.
                         '/edit" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> '.
                         trans('misc.button.edit').'</a> ';
-                    $actions .= Form::button(
-                        '<span class="glyphicon glyphicon-remove"></span> '.trans('misc.button.delete'),
-                        [
-                            'type'  => 'submit',
-                            'class' => 'btn btn-danger btn-xs',
-                        ]
-                    );
-                    $actions .= Form::close();
+                    $actions .= '<button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> '.
+                        trans('misc.button.delete').'</button>';
+                    $actions .= '</form>';
 
                     return $actions;
                 }

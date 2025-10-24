@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-sm-offset-9 col-sm-3 text-right">
         {!! Form::open(['name' => 'delContact', 'class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.contacts.destroy', $contact->id]]) !!}
-        {!! link_to_route('admin.contacts.edit', trans('misc.button.edit'), $contact->id, ['class' => 'btn btn-info']) !!}
+        <a href="{{ route('admin.contacts.edit', $contact->id) }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
         {!! Form::button(trans('misc.button.anonymize'), ['name' => 'anonBtn', 'class' => 'btn btn-warning']) !!}
         {!! Form::button(trans('misc.button.delete'), ['name' => 'delBtn', 'class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}

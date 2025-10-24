@@ -60,27 +60,17 @@ class DomainsController extends Controller
             ->addColumn(
                 'actions',
                 function ($domain) {
-                    $actions = Form::open(
-                        [
-                            'route'  => ['admin.domains.destroy', $domain->id],
-                            'method' => 'DELETE',
-                            'class'  => 'form-inline',
-                        ]
-                    );
+                    $deleteAction = route('admin.domains.destroy', $domain->id);
+                    $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
                     $actions .= ' <a href="domains/'.$domain->id.
                         '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
                         trans('misc.button.show').'</a> ';
                     $actions .= ' <a href="domains/'.$domain->id.
                         '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
                         trans('misc.button.edit').'</a> ';
-                    $actions .= Form::button(
-                        '<i class="glyphicon glyphicon-remove"></i> '.trans('misc.button.delete'),
-                        [
-                            'type'  => 'submit',
-                            'class' => 'btn btn-danger btn-xs',
-                        ]
-                    );
-                    $actions .= Form::close();
+                    $actions .= '<button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> '.
+                        trans('misc.button.delete').'</button>';
+                    $actions .= '</form>';
 
                     return $actions;
                 }
