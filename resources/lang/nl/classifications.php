@@ -2249,11 +2249,11 @@ return [
             Wij raden aan om deze ports met behulp van een firewall afgesloten van het publieke internet te houden.</p>',
     ],
 
-   'ACCESSIBLE_IMAP' => [
+    'ACCESSIBLE_IMAP' => [
         'name'         => 'Toegankelijke IMAP',
         'description'  => '
             <p>Deze rapportage identificeert hosts die IMAP op port 143/TCP of 993/TCP hebben draaien.</p>',
-    ], 
+    ],
 
     'ACCESSIBLE_POP3' => [
         'name'         => 'Toegankelijke POP3',

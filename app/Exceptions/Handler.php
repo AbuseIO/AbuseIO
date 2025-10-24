@@ -3,12 +3,12 @@
 namespace AbuseIO\Exceptions;
 
 use AbuseIO\Traits\Api;
-use Throwable;
 use Illuminate\Auth\AuthenticationException;
-//use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+//use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
     //public function renderForConsole($output, Throwable $exception);
     // MISSING-ABUSEIO5
 
-    public function report(Throwable $exception) 
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }

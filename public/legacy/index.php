@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file allows you to use the old ASH tokens and exchange them for a new ASH token
  * by redirecting the client. You can add this /legacy dir the old ash-abuseio.domain.tld
