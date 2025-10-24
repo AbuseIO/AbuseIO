@@ -1,6 +1,7 @@
 ## Version 5.0 is DEV and NOT working !
 
 TODO
+- Update all console commands to return INT not true/false with return Command::SUCCESS; or  return Command::FAILURE; (see example housekeeper)
 - TAG erors // MISSING-ABUSEIO5
 - Update composer.json legacy classmap into psr4 (but errors when done)
 - update public/js/*

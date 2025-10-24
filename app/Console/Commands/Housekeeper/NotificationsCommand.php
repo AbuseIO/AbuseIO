@@ -87,7 +87,7 @@ class NotificationsCommand extends Command
         ) {
             $this->error('Invalid or incomplete option(s) used, try --help');
 
-            return false;
+	    return Command::FAILURE;
         }
 
         $notification = new Notification();
@@ -109,12 +109,12 @@ class NotificationsCommand extends Command
 
         if (!empty($this->option('list')) && $this->option('list') === true) {
             if (empty($notifications)) {
-                return true;
+                return Command::SUCCESS;
             }
             if (!is_array($notifications)) {
                 $this->error('Error(s) received while building notifications list:'.PHP_EOL.$notifications);
 
-                return false;
+                return Command::FAILURE;
             }
 
             /*
@@ -147,6 +147,6 @@ class NotificationsCommand extends Command
             }
         }
 
-        return true;
+        return Command::SUCCESS;
     }
 }

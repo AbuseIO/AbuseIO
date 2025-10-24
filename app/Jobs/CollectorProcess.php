@@ -57,7 +57,7 @@ class CollectorProcess extends Job implements ShouldQueue
     /**
      * This method is called by laravel when the job fails on a exception.
      */
-    public function failed()
+    public function failed(): void
     {
         Log::error(
             get_class($this).': '.

@@ -3,7 +3,8 @@
 namespace AbuseIO\Console\Commands\App;
 
 use Illuminate\Console\Command;
-use Uuid;
+use Illuminate\Support\Str;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 /**
  * Class InstallationID.
@@ -32,12 +33,12 @@ class InstallationID extends Command
      *
      * @return bool
      */
-    public function dispatch()
+    public function handle(): int
     {
         if ($this->option('show')) {
             $this->line('<comment>'.$this->laravel['config']['app.id'].'</comment>');
 
-            return true;
+            return SymfonyCommand::SUCCESS;
         }
 
         if ($this->laravel['config']['app.id'] != 'DEFAULT' &&
@@ -45,7 +46,7 @@ class InstallationID extends Command
         ) {
             $this->info('You already have an installation ID. Not changing the ID unless --force is used');
 
-            return false;
+            return SymfonyCommand::FAILURE;
         }
 
         if ($this->laravel['config']['app.id'] != 'DEFAULT' &&
@@ -60,11 +61,11 @@ class InstallationID extends Command
             );
 
             if (!$this->confirm('Do you wish to continue? [y|N]')) {
-                return false;
+                return SymfonyCommand::FAILURE;
             }
         }
 
-        $id = Uuid::generate(4);
+	    $id = Str::uuid()->toString();
 
         $path = base_path('.env');
 
@@ -82,19 +83,19 @@ class InstallationID extends Command
         } else {
             $this->error('Unable to set Application key becayse the .env file is not present');
 
-            return false;
+            return SymfonyCommand::FAILURE;
         }
 
         if ($replaces === 0) {
             $this->error('Unable to set Application key into the .env file, because the variable is not configured');
 
-            return false;
+            return SymfonyCommand::FAILURE;
         }
 
         $this->laravel['config']['app.id'] = $id;
 
         $this->info("Application ID [$id] set successfully.");
 
-        return true;
+        return SymfonyCommand::SUCCESS;
     }
 }

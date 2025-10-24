@@ -1,72 +1,48 @@
+
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Create The Application
-|--------------------------------------------------------------------------
-|
-| The first thing we will do is create a new Laravel application instance
-| which serves as the "glue" for all the components of Laravel, and is
-| the IoC container for the system binding all of the various parts.
-|
-*/
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Route;
 
-$app = new Illuminate\Foundation\Application(
-    realpath(__DIR__.'/../')
-);
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        using: function () {
+            // Load the existing routes file from app/Http/routes.php
+            Route::middleware('web')
+                ->group(base_path('app/Http/routes.php'));
+        },
+        commands: __DIR__.'/../app/Console/routes.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware) {
+        // Web middleware group
+        $middleware->web(append: [
+            \AbuseIO\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \AbuseIO\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ]);
 
-/*
-|--------------------------------------------------------------------------
-| Bind Important Interfaces
-|--------------------------------------------------------------------------
-|
-| Next, we need to bind some important interfaces into the container so
-| we will be able to resolve them when needed. The kernels serve the
-| incoming requests to this application from both the web and CLI.
-|
-*/
-
-$app->singleton(
-    'Illuminate\Contracts\Http\Kernel',
-    'AbuseIO\Http\Kernel'
-);
-
-$app->singleton(
-    'Illuminate\Contracts\Console\Kernel',
-    'AbuseIO\Console\Kernel'
-);
-
-$app->singleton(
-    'Illuminate\Contracts\Debug\ExceptionHandler',
-    'AbuseIO\Exceptions\Handler'
-);
-
-///*
-// * Configure Monolog.
-// */
-//$app->configureMonologUsing(
-//
-//    function (Monolog\Logger $monolog) {
-//        $syslog = new \Monolog\Handler\SyslogHandler('abuseio');
-//
-//        $formatter = new \Monolog\Formatter\LineFormatter('%channel%.%level_name%: %message%');
-//
-//        $syslog->setFormatter($formatter);
-//
-//        $monolog->pushHandler($syslog);
-//    }
-//
-//);
-
-/*
-|--------------------------------------------------------------------------
-| Return The Application
-|--------------------------------------------------------------------------
-|
-| This script returns the application instance. The instance is given to
-| the calling script so we can separate the building of the instances
-| from the actual running of the application and sending responses.
-|
-*/
-
-return $app;
+        // Register middleware aliases
+        $middleware->alias([
+            'auth' => \AbuseIO\Http\Middleware\Authenticate::class,
+            'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+            'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
+            'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+            'can' => \Illuminate\Auth\Middleware\Authorize::class,
+            'guest' => \AbuseIO\Http\Middleware\RedirectIfAuthenticated::class,
+            'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
+            'precognition' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
+            'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+            'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+            'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
+        //
+    })
+    ->create();

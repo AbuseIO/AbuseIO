@@ -5,7 +5,7 @@ namespace AbuseIO\Jobs;
 use Carbon;
 use Log;
 use Storage;
-use Uuid;
+use Illuminate\Support\Str;
 
 /**
  * This EvidenceSave class handles the writing of evidence files to FS.
@@ -33,8 +33,8 @@ class EvidenceSave extends Job
     {
         $datefolder = Carbon::now()->format('Ymd');
         $path = 'mailarchive/'.$datefolder;
-        $fileName = Uuid::generate(4).'.eml';
-        $file = "${path}/{$fileName}";
+        //$fileName = Str::uuid()->toString().'.eml';
+        $file = "{$path}/{$fileName}";
 
         umask(0007);
 

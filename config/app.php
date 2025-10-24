@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Facade;
+
 return [
     /*
    |--------------------------------------------------------------------------
@@ -14,7 +16,7 @@ return [
     'env' => env('APP_ENV', 'production'),
 
     'name'    => 'AbuseIO',
-    'version' => '4.3.0',
+    'version' => '5.0.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -232,7 +234,7 @@ return [
     |
     */
 
-    'aliases' => [
+    'aliases' => Facade::defaultAliases()->merge([
 
         'App'          => Illuminate\Support\Facades\App::class,
         'Arr'          => Illuminate\Support\Arr::class,
@@ -272,8 +274,7 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
         'Form'         => Collective\Html\FormFacade::class,
         'Html'         => Collective\Html\HtmlFacade::class,
-        'Uuid'         => Webpatser\LaravelUuid\Uuid::class,
         'Carbon'       => Carbon\Carbon::class,
-    ],
+    ])->toArray(),
 
 ];

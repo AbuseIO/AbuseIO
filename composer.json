@@ -73,7 +73,6 @@
 		"sabre/uri": "3.0.*",
 		"sabre/xml": "4.0.*",
 		"spatie/laravel-html": "^3.12",
-		"webpatser/laravel-uuid": "6.*",
 		"yajra/laravel-datatables-oracle": "12.6.*",
 		"composer/class-map-generator": "1.6.*"
 	},
