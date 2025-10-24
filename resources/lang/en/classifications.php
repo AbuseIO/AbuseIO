@@ -2464,11 +2464,11 @@ return [
             It is recommended to keep these ports firewalled from the public Internet.</p>',
     ],
 
-   'ACCESSIBLE_IMAP' => [
+    'ACCESSIBLE_IMAP' => [
         'name'         => 'Accessible IMAP',
         'description'  => '
             <p>This report identifies hosts that have a IMAP service running on port 143/TCP or 993/TCP.</p>',
-    ], 
+    ],
 
     'ACCESSIBLE_POP3' => [
         'name'         => 'Accessible POP3',

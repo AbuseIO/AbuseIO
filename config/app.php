@@ -189,10 +189,10 @@ return [
         /*
          * Some plugin Service Providers ...
          */
-	//Wpb\String_Blade_Compiler\StringBladeServiceProvider::class,
-	//MISSING-ABUSEIO5
-	//Collective\Html\HtmlServiceProvider::class,
-	//MISSING-ABUSEIO5
+        //Wpb\String_Blade_Compiler\StringBladeServiceProvider::class,
+        //MISSING-ABUSEIO5
+        //Collective\Html\HtmlServiceProvider::class,
+        //MISSING-ABUSEIO5
 
         /*
          * Package Service Providers...
