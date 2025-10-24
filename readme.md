@@ -29,14 +29,6 @@ public function handle()
     return 0;
 }
 
----
-Due to:
-- Package laminas/laminas-loader is abandoned, you should avoid using it. No replacement was suggested.
-- Package laminas/laminas-math is abandoned, you should avoid using it. No replacement was suggested.
-Removed:
-                "laminas/laminas-http": "2.22.*",
-                "laminas/laminas-xmlrpc": "2.21.*"
----
 
 
 ## AbuseIO - Abusemanagement tools

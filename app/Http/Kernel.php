@@ -50,7 +50,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $routeMiddleware = [
+    protected $middlewareAliases = [
         'auth'                => \AbuseIO\Http\Middleware\Authenticate::class,
         'auth.basic'          => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings'            => \Illuminate\Routing\Middleware\SubstituteBindings::class, //-- was added laravel 5.3
