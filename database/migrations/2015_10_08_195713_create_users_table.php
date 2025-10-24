@@ -36,7 +36,7 @@ class CreateUsersTable extends Migration
             }
         );
 
-	//Why was this added?!
+        //Why was this added?!
         //$this->addDefaultUsers();
     }
 

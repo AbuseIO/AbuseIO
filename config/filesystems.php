@@ -45,8 +45,8 @@ return [
 
         'local' => [
             'driver' => 'local',
-	    'root'   => storage_path(),
-	    'throw' => true,
+            'root'   => storage_path(),
+            'throw'  => true,
         ],
 
         'local_temp' => [
