@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    // Flip everything hidden using Bootstrap to hidden by jQuery.
-    $('.hidden').removeClass('hidden').hide();
+    // Limit conversion of Bootstrap hidden class to only read/unread button spans
+    $('.btnRead span.hidden').removeClass('hidden').hide();
 
     // If you click one of the Flip buttons
     $('.btnFlip').click(function () {
@@ -31,33 +31,42 @@ $(document).ready(function() {
             success: function(data) {
                 switch(data) {
                     case 'flip:OK':
-                        // Switch button colors
-                        $(this).toggleClass('btn-success btn-warning');
-
-                        // Switch button text
-                        $(this).find('span').each(function() {
-                            $(this).toggle();
-                        });
-
-                        // If 'hidden/visible' was clicked, we need to toggle
-                        // the 'panel-hidden' class on the element.
-                        if ($(this).hasClass('btnHide')) {
-                            $(this).closest('.ticket-note').toggleClass('panel-hidden');
-                        }
-
-                        // If 'read/unread' was clicked, we need to toggle
-                        // the 'panel-info' class on the element.
-                        if ($(this).hasClass('btnRead')) {
-                            $(this).closest('.ticket-note').toggleClass('panel-info');
-                        }
-                        break;
                     case 'delete:OK':
-                        if ($(this).hasClass('btnDelete')) {
-                            $(this).closest('.ticket-note').hide();
+                        // Reload the page to reflect server changes; preserve active tab via hash
+                        if (history.replaceState) {
+                            history.replaceState(null, null, window.location.hash || '#communication');
                         }
+                        window.location.reload();
                         break;
+                    default:
+                        // Fallback: reload to ensure UI stays in sync
+                        window.location.reload();
                 }
             }
         });
+    });
+
+    // Persist active tab via URL hash on load
+    var hash = window.location.hash;
+    if (hash) {
+        var $tab = $('.nav.nav-tabs a[href="' + hash + '"]');
+        if (!$tab.length) {
+            $tab = $('.nav-tabs a[href="' + hash + '"]');
+        }
+        if ($tab.length) {
+            $tab.tab('show');
+        }
+    }
+
+    // Keep hash in sync when switching tabs
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr('href');
+        if (target) {
+            if (history.replaceState) {
+                history.replaceState(null, null, target);
+            } else {
+                window.location.hash = target;
+            }
+        }
     });
 });

@@ -63,10 +63,11 @@ class NotesController extends Controller
         Note::create($noteForm->all());
         $this->sendNotification($noteForm);
 
-        return Redirect::route(
-            'admin.tickets.show',
-            $noteForm->ticket_id
-        )->with('message', 'A new note for this ticket has been created');
+        $redirectUrl = route('admin.tickets.show', $noteForm->ticket_id);
+        // Preserve Communication tab active state
+        $redirectUrl .= '#communication';
+        return Redirect::to($redirectUrl)
+            ->with('message', 'A new note for this ticket has been created');
     }
 
     /**
@@ -137,26 +138,26 @@ class NotesController extends Controller
      * Update the specified resource in storage.
      *
      * @param NoteFormRequest $noteForm
+     * @param Note $notes
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(NoteFormRequest $noteForm)
+    public function update(NoteFormRequest $noteForm, Note $notes)
     {
         $input = $noteForm->all();
-        $note = Note::find($input['note']);
 
         switch ($input['action']) {
             case 'hide':
-                $note->hidden = !$note->hidden;
+                $notes->hidden = !$notes->hidden;
                 break;
             case 'view':
-                $note->viewed = !$note->viewed;
+                $notes->viewed = !$notes->viewed;
                 break;
             default:
                 // code...
                 break;
         }
-        $note->save();
+        $notes->save();
 
         return 'flip:OK';
     }
@@ -165,14 +166,13 @@ class NotesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param NoteFormRequest $noteForm
+     * @param Note $notes
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NoteFormRequest $noteForm)
+    public function destroy(NoteFormRequest $noteForm, Note $notes)
     {
-        $input = $noteForm->all();
-        $note = Note::find($input['note']);
-        $note->delete();
+        $notes->delete();
 
         return 'delete:OK';
     }

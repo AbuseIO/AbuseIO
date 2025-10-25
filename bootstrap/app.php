@@ -45,6 +45,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest' => \AbuseIO\Http\Middleware\RedirectIfAuthenticated::class,
             'locale' => \AbuseIO\Http\Middleware\Locale::class,
             'note.submitter' => \AbuseIO\Http\Middleware\AppendNoteSubmitter::class,
+            'appendnotesubmitter' => \AbuseIO\Http\Middleware\AppendNoteSubmitter::class,
             'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'permission' => \AbuseIO\Http\Middleware\CheckPermission::class,
             'precognition' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,

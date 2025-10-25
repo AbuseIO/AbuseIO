@@ -6,6 +6,19 @@
 
 @section('content')
 <h1 class="page-header">{{ trans('tickets.header.detail') }}: {{ $ticket->id }}</h1>
+@if (session('message'))
+<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> {{ session('message') }}</div>
+@endif
+@if ($errors->any())
+<div class="alert alert-danger">
+    <span class="glyphicon glyphicon-exclamation-sign"></span>
+    <ul class="list-unstyled">
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="row">
     <div class="col-md-8 col-md-offset-4 text-right">
         <div class="btn-group" role="group" aria-label="...">
@@ -273,7 +286,7 @@
                     <label for="text">{{ trans('ash.communication.reply') }}</label>
                     <textarea name="text" id="text" class="form-control" rows="5" placeholder="{{ trans('ash.communication.placeholder_admin') }}"></textarea>
                     <div class="checkbox"><label><input type="checkbox" name="hidden" value="1"> {{ trans('misc.button.hidden') }}</label></div>
-                    <input type="hidden" name="viewed" value="true">
+                    {{-- Removed viewed field; default is set by middleware --}}
                     <button type="submit" class="btn btn-success">{{ trans('ash.communication.submit') }}</button>
                 </form>
             </div>

@@ -29,7 +29,8 @@ class AppendNoteSubmitter
                 $request->merge(
                     [
                         'submitter' => trans('ash.communication.abusedesk').$postingUser,
-                        'viewed'    => true,
+                        // Default notes to not viewed when created
+                        'viewed'    => false,
                     ]
                 );
                 break;

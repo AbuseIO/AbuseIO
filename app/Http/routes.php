@@ -197,7 +197,10 @@ Route::prefix('admin')->group(function () {
         /*
          * Notes
          */
-        Route::resource('notes', NotesController::class, ['only' => ['store', 'update', 'destroy']]);
+        Route::post('notes', [NotesController::class, 'store'])->middleware(['permission:notes_create', 'appendnotesubmitter'])->name('notes.store');
+        Route::patch('notes/{notes}', [NotesController::class, 'update'])->middleware(['permission:notes_edit', 'appendnotesubmitter'])->name('notes.update');
+        Route::put('notes/{notes}', [NotesController::class, 'update'])->middleware(['permission:notes_edit', 'appendnotesubmitter']);
+        Route::delete('notes/{notes}', [NotesController::class, 'destroy'])->middleware('permission:notes_delete')->name('notes.destroy');
 
         /*
          * Analytics
