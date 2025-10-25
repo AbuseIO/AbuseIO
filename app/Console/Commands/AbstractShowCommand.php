@@ -37,9 +37,9 @@ abstract class AbstractShowCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    final public function handle()
+    final public function handle(): int
     {
         $object = $this
             ->getCollectionWithArguments()
@@ -58,7 +58,7 @@ abstract class AbstractShowCommand extends Command
             );
         }
 
-        return true;
+        return Command::SUCCESS;
     }
 
     /**
@@ -129,35 +129,32 @@ abstract class AbstractShowCommand extends Command
     abstract protected function defineInput();
 
     /**
-     * @param $model
+     * @param $object
      *
      * @return array
      */
-    protected function transformObjectToTableBody($model)
+    protected function transformObjectToTableBody($object)
     {
-        $result = [];
-        foreach ($model->getAttributes() as $key => $value) {
-            $heading = ucfirst(str_replace('_', ' ', $key));
-            $result[] = [$heading, $value];
-        }
-
-        return $result;
-    }
-
-    /**
-     * @param $resultSet
-     * @param $property
-     *
-     * @return mixed
-     */
-    protected function hideProperty($resultSet, $property)
-    {
-        foreach ($resultSet as $key => $result) {
-            if ($result[0] === $property) {
-                unset($resultSet[$key]);
+        $rows = [];
+        $fields = $this->getFields();
+        foreach ($fields as $field) {
+            if (method_exists($object, 'getAttribute')) {
+                $value = $object->getAttribute($field);
+            } else {
+                $value = isset($object->$field) ? $object->$field : null;
             }
+            if (is_object($value)) {
+                if (method_exists($value, '__toString')) {
+                    $value = (string) $value;
+                } elseif (property_exists($value, 'name')) {
+                    $value = $value->name;
+                } else {
+                    $value = json_encode($value);
+                }
+            }
+            $rows[] = [$field, $value];
         }
-
-        return $resultSet;
+    
+        return $rows;
     }
 }

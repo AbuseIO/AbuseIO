@@ -40,16 +40,16 @@ class RevokeCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         if (empty($this->option('role')) &&
             empty($this->option('user'))
         ) {
             $this->error('Missing options for role and/or user(e-mail) to select');
 
-            return false;
+            return Command::FAILURE;
         }
 
         /*
@@ -70,7 +70,7 @@ class RevokeCommand extends Command
             if (!is_object($role)) {
                 $this->error('Unable to find role with this criteria');
 
-                return false;
+                return Command::FAILURE;
             }
         }
 
@@ -86,7 +86,7 @@ class RevokeCommand extends Command
             if (!is_object($user)) {
                 $this->error('Unable to find user with this criteria');
 
-                return false;
+                return Command::FAILURE;
             }
         }
 
@@ -97,20 +97,20 @@ class RevokeCommand extends Command
 
         if (!is_object($roleUser)) {
             $this->error(
-                'Nothing to delete, this {$permission->name} permission is not linked to the role {$role->name}'
+                'Nothing to delete, this {$role->name} role is not linked to the user {$user->email}'
             );
 
-            return false;
+            return Command::FAILURE;
         }
 
         if (!$roleUser->delete()) {
-            $this->error('Failed to remove the permission into the database');
+            $this->error('Failed to remove the role from the database');
 
-            return false;
+            return Command::FAILURE;
         }
 
         $this->info("The role {$role->name} has been revoked from user {$user->email}");
 
-        return true;
+        return Command::SUCCESS;
     }
 }

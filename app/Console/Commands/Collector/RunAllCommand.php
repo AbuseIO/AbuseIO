@@ -2,14 +2,14 @@
 
 namespace AbuseIO\Console\Commands\Collector;
 
-use AbuseIO\Collectors\Factory as CollectorFactory;
 use AbuseIO\Jobs\CollectorProcess;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
+use AbuseIO\Collector\Factory as collectorFactory;
 
 /**
- * Class RunAllCommand.
+ * Class RunCommand.
  */
 class RunAllCommand extends Command
 {
@@ -21,7 +21,8 @@ class RunAllCommand extends Command
      * @var string
      */
     protected $signature = 'collector:runall
-                                {--noqueue : Do not queue the collectors, but directly handle it }
+                            {--debug : Do not create events, just display the results }
+                            {--noqueue : Do not queue the collectors, but directly handle it }
     ';
 
     /**
@@ -29,7 +30,7 @@ class RunAllCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Run all enabled collection processes';
+    protected $description = 'Run collection processes for all collectors';
 
     /**
      * Create a new command instance.
@@ -42,9 +43,9 @@ class RunAllCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         Log::info(
             get_class($this).': '.
@@ -78,6 +79,6 @@ class RunAllCommand extends Command
             'Completed collections startup for all enabled collectors'
         );
 
-        return true;
+        return Command::SUCCESS;
     }
 }

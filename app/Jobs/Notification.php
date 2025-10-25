@@ -250,7 +250,8 @@ class Notification extends Job
                     }
 
                     // Skip if the event received is older the minimal last seen
-                    if ($ticket->lastEvent[0]->timestamp <= $sendNotOlderThen) {
+                    $lastEvent = $ticket->lastEvent->first();
+                    if (!$lastEvent || $lastEvent->timestamp <= $sendNotOlderThen) {
                         Log::debug(
                             get_class($this).': No notification, ticket is too old to send notification for.'
                         );

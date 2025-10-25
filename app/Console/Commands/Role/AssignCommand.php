@@ -44,16 +44,14 @@ class AssignCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         if (empty($this->option('role')) &&
             empty($this->option('user'))
         ) {
             throw new \RuntimeException('Missing options for role and/or user(e-mail) to select');
-
-            return false;
         }
 
         /*
@@ -74,7 +72,7 @@ class AssignCommand extends Command
             if (!is_object($role)) {
                 $this->error('Unable to find role with this criteria');
 
-                return false;
+                return Command::FAILURE;
             }
         }
 
@@ -90,7 +88,7 @@ class AssignCommand extends Command
             if (!is_object($user)) {
                 $this->error('Unable to find user with this criteria');
 
-                return false;
+                return Command::FAILURE;
             }
         }
 
@@ -106,17 +104,17 @@ class AssignCommand extends Command
 
             $this->error('Failed to create the permission due to validation warnings');
 
-            return false;
+            return Command::FAILURE;
         }
 
         if (!$RoleUser->save()) {
             $this->error('Failed to save the permission into the database');
 
-            return false;
+            return Command::FAILURE;
         }
 
         $this->info("The role {$role->name} has been granted to user {$user->email}");
 
-        return true;
+        return Command::SUCCESS;
     }
 }

@@ -37,9 +37,9 @@ class ShowCommand extends Command
     private $headers = ['Id', 'Queue', 'Method', 'Attempts', 'Created at'];
 
     /**
-     * @return bool
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $jobs = $this->findWithCondition($this->argument('queue'));
 
@@ -48,7 +48,7 @@ class ShowCommand extends Command
                 'No matching queue was found.'
             );
 
-            return false;
+            return Command::FAILURE;
         }
 
         $this->table(
@@ -56,7 +56,7 @@ class ShowCommand extends Command
             $this->transformListToTableBody($jobs)
         );
 
-        return true;
+        return Command::SUCCESS;
     }
 
     /**

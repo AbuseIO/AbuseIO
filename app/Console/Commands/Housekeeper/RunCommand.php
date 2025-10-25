@@ -48,9 +48,9 @@ class RunCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         Log::debug(
             get_class($this).': KNOCK KNOCK! Housekeeping'
@@ -201,36 +201,9 @@ class RunCommand extends Command
             }
         }
 
-        /*
-         * Check for any kind of failed jobs, if any found start alarm bells
-         */
-        $failed = $this->laravel['queue.failer']->all();
-        $failedCount = count($failed);
-        if ($failedCount != 0) {
-            // Reset object to string for reporting
-            foreach ($failed as $key => $job) {
-                $failed[$key] = implode(' ', get_object_vars($job));
-            }
-
-            Log::warning(
-                get_class($this).": Housekeeper detected failed {$failedCount} jobs which need to be handled!"
-            );
-
-            if (config('main.housekeeping.enable_queue_problem_alerts')) {
-                AlertAdmin::send(
-                    "Alert: There are {$failedCount} jobs that have failed:".PHP_EOL.PHP_EOL.
-                    implode(PHP_EOL, $failed)
-                );
-            }
-        }
-
         Log::debug(
             get_class($this).': Housekeeper has completed queue checks'
         );
-
-        if ($hangCount != 0 || $failedCount != 0) {
-            return false;
-        }
 
         return true;
     }
@@ -243,107 +216,62 @@ class RunCommand extends Command
     private function ticketsClosing()
     {
         Log::debug(
-            get_class($this).': Housekeeper is starting to close old tickets'
+            get_class($this).': Housekeeper is closing tickets that are over time'
         );
 
-        $closeOlderThen = strtotime(config('main.housekeeping.tickets_close_after').' ago');
-        $validator = Validator::make(
-            [
-                'mailarchive_remove_after' => $closeOlderThen,
-            ],
-            [
-                'mailarchive_remove_after' => 'required|timestamp',
-            ]
-        );
+        $closingperiod = 'PT'.config('main.housekeeping.tickets_close_after').'H';
+        $tickets = Ticket::where('status_id', '=', Ticket::STATUS_OPEN)->get();
 
-        if ($validator->fails()) {
-            $messages = $validator->messages();
+        foreach ($tickets as $ticket) {
+            $lastnotified = $ticket->last_notify_count();
+            $closingDate = $ticket->updated_at->add(new \DateInterval($closingperiod));
 
-            $message = '';
-            foreach ($messages->all() as $messagePart) {
-                $message .= $messagePart.PHP_EOL;
+            if ($lastnotified > 3 && $ticket->updated_at->lt($closingDate)) {
+                continue;
             }
-            echo $message;
 
-            return false;
-        } else {
-            $tickets = Ticket::where('status_id', '!=', 'CLOSED')->get();
-
-            foreach ($tickets as $ticket) {
-                /*
-                 * If there is a ticket without an event we need to use the created_at field instead
-                 * to prevent an index error on the event check
-                 */
-                if (empty($ticket->lastEvent[0])) {
-                    $lastEventTimestamp = strtotime($ticket->created_at);
-                } else {
-                    $lastEventTimestamp = $ticket->lastEvent[0]->timestamp;
-                }
-
-                if ($lastEventTimestamp <= $closeOlderThen &&
-                    strtotime($ticket->created_at) <= $closeOlderThen
-                ) {
-                    $ticket->update(
-                        [
-                            'status_id' => 'CLOSED',
-                        ]
-                    );
-                }
+            $ticket->status_id = Ticket::STATUS_CLOSED;
+            if (!$ticket->save()) {
+                Log::error(
+                    get_class($this).": Housekeeper was unable to close the ticket {$ticket->id}"
+                );
             }
         }
 
         Log::debug(
-            get_class($this).': Housekeeper has completed closing old tickets'
+            get_class($this).': Housekeeper completed closing overdue tickets'
         );
 
         return true;
     }
 
     /**
-     * prune old tickets.
+     * Walk trough all closed tickets to see which need pruning.
      *
      * @return bool
      */
     private function ticketsPruning()
     {
         Log::debug(
-            get_class($this).': Housekeeper is starting to remove old closed tickets'
+            get_class($this).': Housekeeper is pruning closed tickets that are over time'
         );
 
-        $closeAfter = strtotime(config('main.housekeeping.closed_tickets_remove_after', 'now').' ago');
-        if ($closeAfter !== false) {
-            // valid timestamp
+        $removaldate = new Carbon('1 month ago');
 
-            $closedTickets = Ticket::withTrashed()
-                ->where('status_id', '=', 'CLOSED')
-                ->get();
+        $tickets = Ticket::where('status_id', '=', Ticket::STATUS_CLOSED)
+            ->where('updated_at', '<', $removaldate)
+            ->get();
 
-            foreach ($closedTickets as $closedTicket) {
-                $lastEventCollection = $closedTicket->lastEvent;
-                if (empty($lastEventCollection) || empty($lastEventCollection->first())) {
-                    $eventCreated = strtotime($closedTicket->updated_at);
-                } else {
-                    $lastEvent = $lastEventCollection->first();
-                    $eventCreated = strtotime($lastEvent->created_at);
-                }
-
-                // skip this ticket if it has events newer then the timestamp
-                if ($eventCreated > $closeAfter) {
-                    continue;
-                }
-
-                // delete ticket
-                $closedTicket->delete();
-
-                // purge ticket, if we want it to be permanent deleted
-                if (config('main.housekeeping.closed_tickets_remove_permanent', false)) {
-                    $closedTicket->purge();
-                }
+        foreach ($tickets as $ticket) {
+            if (!$ticket->delete()) {
+                Log::error(
+                    get_class($this).": Housekeeper was unable to remove the ticket {$ticket->id}"
+                );
             }
         }
 
         Log::debug(
-            get_class($this).': Housekeeper has completed removing old tickets'
+            get_class($this).': Housekeeper completed pruning closed tickets that are over time'
         );
 
         return true;
@@ -357,39 +285,38 @@ class RunCommand extends Command
     private function mailarchivePruning()
     {
         Log::debug(
-            get_class($this).': Housekeeper is starting to remove old mailarchive items'
+            get_class($this).': Housekeeper is pruning mailarchive'
         );
 
-        $deleteOlderThen = strtotime(config('main.housekeeping.mailarchive_remove_after').' ago');
-        $validator = Validator::make(
-            [
-                'mailarchive_remove_after' => $deleteOlderThen,
-            ],
-            [
-                'mailarchive_remove_after' => 'required|timestamp',
-            ]
-        );
+        $removaldate = new Carbon('1 month ago');
 
-        if ($validator->fails()) {
-            $messages = $validator->messages();
+        $evidences = Evidence::where('created_at', '<', $removaldate)
+            ->get();
 
-            $message = '';
-            foreach ($messages->all() as $messagePart) {
-                $message .= $messagePart.PHP_EOL;
+        foreach ($evidences as $evidence) {
+            $event = Event::where('evidence_id', '=', $evidence->id)->get();
+
+            if ($event->count() !== 0) {
+                continue;
             }
-            echo $message;
 
-            return false;
-        } else {
-            $evidences = Evidence::where('created_at', '<=', date('Y-m-d H:i:s', $deleteOlderThen))->get();
+            try {
+                Storage::delete($evidence->filename);
+            } catch (\Exception $e) {
+                Log::error(
+                    get_class($this).": Housekeeper was unable to remove the file {$evidence->filename}"
+                );
+            }
 
-            foreach ($evidences as $evidence) {
-                $evidence->delete();
+            if (!$evidence->delete()) {
+                Log::error(
+                    get_class($this).": Housekeeper was unable to remove evidence item {$evidence->id}"
+                );
             }
         }
 
         Log::debug(
-            get_class($this).': Housekeeper has completed removing old mailarchive items'
+            get_class($this).': Housekeeper completed pruning mailarchive'
         );
 
         return true;

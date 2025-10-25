@@ -44,16 +44,14 @@ class RevokeCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         if (empty($this->option('role')) ||
             empty($this->option('permission'))
         ) {
             throw new \RuntimeException('Missing options for role and/or permission to select');
-
-            return false;
         }
 
         /*
@@ -90,7 +88,7 @@ class RevokeCommand extends Command
         if (!is_object($role)) {
             $this->error('Unable to find role with this criteria');
 
-            return false;
+            return Command::FAILURE;
         }
 
         /*
@@ -108,7 +106,7 @@ class RevokeCommand extends Command
         if (!is_object($permission)) {
             $this->error('Unable to find permission with this criteria');
 
-            return false;
+            return Command::FAILURE;
         }
 
         $permissionRole = PermissionRole::all()
@@ -121,17 +119,17 @@ class RevokeCommand extends Command
                 'Nothing to delete, this {$permission->name} permission is not linked to the role {$role->name}'
             );
 
-            return false;
+            return Command::FAILURE;
         }
 
         if (!$permissionRole->delete()) {
             $this->error('Failed to remove the permission into the database');
 
-            return false;
+            return Command::FAILURE;
         }
 
         $this->info("The permission {$permission->name} has been revoked from role {$role->name}");
 
-        return true;
+        return Command::SUCCESS;
     }
 }

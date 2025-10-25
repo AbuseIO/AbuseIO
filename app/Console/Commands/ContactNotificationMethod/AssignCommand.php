@@ -42,9 +42,9 @@ class AssignCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         if (empty($this->option('contact')) &&
             empty($this->option('method'))
@@ -80,16 +80,16 @@ class AssignCommand extends Command
         if (!is_object($contact)) {
             $this->error('Unable to find contact with this contact info');
 
-            return false;
+            return Command::FAILURE;
         }
         if ($method === false) {
             $this->error('Unable to find method with this method name');
 
-            return false;
+            return Command::FAILURE;
         }
         $contact->addNotificationMethod(['method' => $method]);
         $this->info("The notification method {$method} has been granted to contact {$contact->email}");
 
-        return true;
+        return Command::SUCCESS;
     }
 }

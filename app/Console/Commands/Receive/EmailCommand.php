@@ -43,9 +43,9 @@ class EmailCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         Log::info(
             get_class($this).': '.
@@ -75,6 +75,8 @@ class EmailCommand extends Command
                 'Error returned while asking to write evidence file, cannot continue'
             );
             $this->exception($rawEmail);
+
+            return Command::FAILURE;
         }
 
         if ($this->option('noqueue') == true) {
@@ -99,7 +101,7 @@ class EmailCommand extends Command
             'Successfully received the incoming e-mail'
         );
 
-        return true;
+        return Command::SUCCESS;
     }
 
     /**
@@ -107,9 +109,9 @@ class EmailCommand extends Command
      *
      * @param string $rawEmail
      *
-     * @return mixed
+     * @return void
      */
-    protected function exception($rawEmail)
+    protected function exception($rawEmail): void
     {
         // This only bounces with config errors or problems with installations where we cannot accept
         // the email at all. In normal cases the bounce will be handled within EmailProcess::()

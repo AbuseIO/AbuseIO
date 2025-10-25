@@ -42,9 +42,9 @@ class RunCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         if ($this->option('noqueue') == true) {
             // In debug mode we don't queue the job
@@ -63,6 +63,6 @@ class RunCommand extends Command
             $this->dispatch(new CollectorProcess($this->argument('name')));
         }
 
-        return true;
+        return Command::SUCCESS;
     }
 }

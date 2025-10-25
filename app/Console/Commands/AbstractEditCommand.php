@@ -24,9 +24,9 @@ abstract class AbstractEditCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    final public function handle()
+    final public function handle(): int
     {
         $model = $this->getModelFromRequest();
         if (null === $model) {
@@ -34,11 +34,11 @@ abstract class AbstractEditCommand extends Command
                 sprintf('Unable to find %s with this criteria', $this->getAsNoun())
             );
 
-            return false;
+            return Command::FAILURE;
         }
 
         if (!$this->handleOptions($model)) {
-            return false;
+            return Command::FAILURE;
         }
         $validation = $this->getValidator($model);
 
@@ -52,7 +52,7 @@ abstract class AbstractEditCommand extends Command
                 sprintf('Failed to edit the %s due to validation warnings', $this->getAsNoun())
             );
 
-            return false;
+            return Command::FAILURE;
         }
 
         if (!$model->update()) {
@@ -60,34 +60,18 @@ abstract class AbstractEditCommand extends Command
                 sprintf('Failed to save the %s into the database', $this->getAsNoun())
             );
 
-            return false;
+            return Command::FAILURE;
         }
         $this->info(
             sprintf('The %s has been updated', $this->getAsNoun())
         );
 
-        return true;
+        return Command::SUCCESS;
     }
 
     abstract protected function getModelFromRequest();
-
-    /**
-     * @param $model
-     *
-     * @return bool
-     */
     abstract protected function handleOptions($model);
-
-    /**
-     * @param $model
-     *
-     * @return mixed
-     */
     abstract protected function getValidator($model);
-
-    /**
-     * @return mixed
-     */
     abstract public function getAsNoun();
 
     /**

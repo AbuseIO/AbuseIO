@@ -5,6 +5,7 @@ namespace AbuseIO\Console\Commands;
 use Artisan;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Illuminate\Console\Command;
 
 trait ShowHelpWhenRunTimeExceptionOccurs
 {
@@ -29,7 +30,7 @@ trait ShowHelpWhenRunTimeExceptionOccurs
 
             echo Artisan::output();
 
-            return false;
+            return Command::FAILURE;
         }
     }
 }

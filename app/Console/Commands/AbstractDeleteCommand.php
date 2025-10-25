@@ -36,9 +36,9 @@ abstract class AbstractDeleteCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    final public function handle()
+    final public function handle(): int
     {
         /** @var Model $object */
         $object = $this->getObjectByArguments();
@@ -48,11 +48,11 @@ abstract class AbstractDeleteCommand extends Command
                 sprintf('Unable to find %s with this criteria', $this->getAsNoun())
             );
 
-            return false;
+            return Command::FAILURE;
         }
 
         if ($this->stopDeleteAndThrowAnErrorBecauseRelations($object)) {
-            return false;
+            return Command::FAILURE;
         }
 
         if (!$object->delete()) {
@@ -60,14 +60,14 @@ abstract class AbstractDeleteCommand extends Command
                 sprintf('Unable to delete %s from the system', $this->getAsNoun())
             );
 
-            return false;
+            return Command::FAILURE;
         }
 
         $this->info(
             sprintf('The %s has been deleted from the system', $this->getAsNoun())
         );
 
-        return true;
+        return Command::SUCCESS;
     }
 
     /**
@@ -105,8 +105,9 @@ abstract class AbstractDeleteCommand extends Command
     }
 
     /**
-     * @param $object
+     * Hook to stop delete when relations exist.
      *
+     * @param mixed $object
      * @return bool
      */
     protected function stopDeleteAndThrowAnErrorBecauseRelations($object)
@@ -114,23 +115,8 @@ abstract class AbstractDeleteCommand extends Command
         return false;
     }
 
-    /**
-     * @return mixed
-     */
     abstract protected function getAsNoun();
-
-    /**
-     * @return mixed
-     */
     abstract protected function getAllowedArguments();
-
-    /**
-     * @return mixed
-     */
     abstract protected function getObjectByArguments();
-
-    /**
-     * @return mixed
-     */
     abstract protected function defineInput();
 }

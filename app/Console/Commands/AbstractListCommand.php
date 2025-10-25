@@ -96,9 +96,9 @@ abstract class AbstractListCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    final public function handle()
+    final public function handle(): int
     {
         $options = $this->option();
 
@@ -123,7 +123,7 @@ abstract class AbstractListCommand extends Command
             );
         }
 
-        return true;
+        return Command::SUCCESS;
     }
 
     /**

@@ -77,9 +77,9 @@ class NotificationsCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         if (empty($this->option('list')) &&
             empty($this->option('send'))
