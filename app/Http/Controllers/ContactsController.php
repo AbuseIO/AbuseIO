@@ -176,7 +176,7 @@ class ContactsController extends Controller
                     $contact['enabled'] ? 'Enabled' : 'Disabled',
                     $contact['email'],
                     $contact['api_host'],
-                    $contact['auto_notify'] ? 'Automatic' : 'Manual',
+                    $contact->auto_notify() ? 'Automatic' : 'Manual',
                 ];
 
                 $output .= '"'.implode('", "', $row).'"'.PHP_EOL;
