@@ -167,20 +167,24 @@
             <div id="resolved" class="tab-pane fade">
                 @if (config('main.notes.enabled') == true && $ticket->status_id != 2)
                     <p>{{ trans('ash.communication.header') }}</p>
-                    <form method="POST" accept-charset="UTF-8">
-                        {!! Form::token() !!}
+                    <form method="POST" action="{{ route('ash.addnote', [$ticket->id, $token]) }}" accept-charset="UTF-8">
+                        @csrf
                         <div class="form-group">
-                            {!! Form::label('text', trans('ash.communication.reply').':') !!}
-                            {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder'), 'class' => 'form-control']) !!}
+                            <label for="text">{{ trans('ash.communication.reply') }}:</label>
+                            <textarea name="text" id="text" rows="5" cols="30" placeholder="{{ trans('ash.communication.placeholder') }}" class="form-control"></textarea>
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('enabled', trans('misc.status').':', ['class' => 'control-label']) !!}
-                            {!! Form::select('changeStatus', $allowedChanges, $ticket->cust_status_id, ['class' => 'form-control']) !!}
+                            <label for="changeStatus" class="control-label">{{ trans('misc.status') }}:</label>
+                            <select name="changeStatus" id="changeStatus" class="form-control">
+                                @foreach($allowedChanges as $key => $value)
+                                    <option value="{{ $key }}" {{ $ticket->contact_status_id == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">
-                            {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
+                            <button type="submit" class="btn btn-success">{{ trans('ash.communication.submit') }}</button>
                         </div>
                     </form>
 
