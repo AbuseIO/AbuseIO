@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use AbuseIO\Models\Ticket;
 use DateTime;
 
 class TicketsTableSeeder extends Seeder

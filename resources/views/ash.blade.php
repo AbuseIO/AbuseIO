@@ -82,10 +82,12 @@
                     <dd>{{ trans('types.type.' . $ticket->type_id . '.description') }}</dd>
 
                     <dt>{{ trans('ash.basic.firstSeen') }}</dt>
-                    <dd>{{ $ticket->firstEvent[0]->seen }}</dd>
+                    @php($firstEvent = $ticket->events('asc')->first())
+                    <dd>{{ $firstEvent ? $firstEvent->seen : trans('misc.never') }}</dd>
 
                     <dt>{{ trans('ash.basic.lastSeen') }}</dt>
-                    <dd>{{ $ticket->lastEvent[0]->seen }}</dd>
+                    @php($lastEvent = $ticket->events('desc')->first())
+                    <dd>{{ $lastEvent ? $lastEvent->seen : trans('misc.never') }}</dd>
 
                     <dt>{{ trans('ash.basic.reportCount') }}</dt>
                     <dd>{{ $ticket->events->count() }}</dd>

@@ -2,6 +2,7 @@
 
 use AbuseIO\Http\Controllers\AccountsController;
 use AbuseIO\Http\Controllers\AshLinksController;
+use AbuseIO\Http\Controllers\AshController;
 use AbuseIO\Http\Controllers\Auth\LoginController;
 use AbuseIO\Http\Controllers\ContactsController;
 use AbuseIO\Http\Controllers\DomainsController;
@@ -197,17 +198,33 @@ Route::prefix('admin')->group(function () {
         //Route::get('search', [SearchController::class, 'index'])->name('search');
 
         /*
-         * AshLink
-         */
-        //Route::resource('ash_link', AshLinksController::class);
-
-        /*
          * Evidence
          */
         Route::get('evidence/{evidence}', [EvidenceController::class, 'show'])->middleware('permission:evidence_view')->name('evidence.show');
         Route::get('evidence/{evidence}/download', [EvidenceController::class, 'download'])->middleware('permission:evidence_view')->name('evidence.download');
         Route::get('evidence/{evidence}/attachment/{file}', [EvidenceController::class, 'attachment'])->middleware('permission:evidence_view')->name('evidence.attachment');
     });
+});
+
+// Public ASH routes
+Route::group(['prefix' => 'ash'], function () {
+    // ASH ticket page
+    Route::get('collect/{ticketID}/{token}', [AshController::class, 'index'])
+        ->middleware(['ash.token'])
+        ->name('ash.show');
+
+    // ASH add note (POST)
+    Route::post('collect/{ticketID}/{token}', [AshController::class, 'addNote'])
+        ->middleware(['ash.token'])
+        ->name('ash.addnote');
+
+    // Public locale switch for ASH
+    Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])
+        ->name('ash.locale');
+
+    // Brand logo for ASH
+    Route::get('logo/{id}', [BrandsController::class, 'logo'])
+        ->name('ash.logo');
 });
 
 Route::model('contacts', \AbuseIO\Models\Contact::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
