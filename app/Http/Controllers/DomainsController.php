@@ -30,12 +30,10 @@ class DomainsController extends Controller
     public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
-
-        // initialize the api
         $this->apiInit($fractal, $request);
 
-        // is the logged in account allowed to execute an action on the Domain
-        $this->middleware('checkaccount:Domain', ['except' => ['search', 'index', 'create', 'store', 'export']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckSystemAccount::class, ['only' => ['create', 'store']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Domain', ['except' => ['index', 'create', 'store', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']]);
     }
 
     /**

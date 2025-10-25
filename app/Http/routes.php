@@ -12,6 +12,9 @@ use AbuseIO\Http\Controllers\SearchController;
 use AbuseIO\Http\Controllers\TicketsController;
 use AbuseIO\Http\Controllers\UsersController;
 use AbuseIO\Http\Controllers\BrandsController;
+use AbuseIO\Http\Controllers\IncidentsController;
+use AbuseIO\Http\Controllers\ProfileController;
+use AbuseIO\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,10 +44,22 @@ Route::get('auth/logout', [LoginController::class, 'logout'])->name('logout');
 */
 
 Route::prefix('admin')->group(function () {
-    Route::group(['middleware' => ['auth', 'permission:login_portal'], 'as' => 'admin.'], function () {
+    Route::group(['middleware' => ['web', 'auth', 'permission:login_portal'], 'as' => 'admin.'], function () {
         Route::get('/home', function () {
             return view('home');
         })->name('home');
+
+        /*
+         * Locale
+         */
+        Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])->name('locale');
+
+        /*
+         * Profile
+         */
+        Route::get('profile', [ProfileController::class, 'edit'])->middleware('permission:profile_manage')->name('profile.index');
+        Route::patch('profile/{profile}', [ProfileController::class, 'update'])->middleware('permission:profile_manage')->name('profile.update');
+        Route::put('profile/{profile}', [ProfileController::class, 'update'])->middleware('permission:profile_manage');
 
         /*
          * Tickets
@@ -59,6 +74,12 @@ Route::prefix('admin')->group(function () {
         Route::patch('tickets/{tickets}', [TicketsController::class, 'update'])->middleware('permission:tickets_edit');
         Route::delete('tickets/{tickets}', [TicketsController::class, 'destroy'])->middleware('permission:tickets_delete')->name('tickets.destroy');
         Route::get('tickets/export/{format}', [TicketsController::class, 'export'])->middleware('permission:tickets_export')->name('tickets.export');
+
+        /*
+         * Incidents
+         */
+        Route::get('incidents/create', [IncidentsController::class, 'create'])->middleware('permission:incidents_create')->name('incidents.create');
+        Route::post('incidents', [IncidentsController::class, 'store'])->middleware('permission:incidents_create')->name('incidents.store');
 
         /*
          * Contacts
@@ -165,3 +186,7 @@ Route::prefix('admin')->group(function () {
         //Route::resource('ash_link', AshLinksController::class);
     });
 });
+
+Route::model('contacts', \AbuseIO\Models\Contact::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
+Route::model('netblocks', \AbuseIO\Models\Netblock::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
+Route::model('domains', \AbuseIO\Models\Domain::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });

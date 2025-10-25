@@ -66,4 +66,21 @@ class Kernel extends HttpKernel
         'apisystemaccount'    => \AbuseIO\Http\Middleware\ApiSystemAccount::class,
         'appendnotesubmitter' => \AbuseIO\Http\Middleware\AppendNoteSubmitter::class,
     ];
+
+    // Laravel <9 expects aliases under $routeMiddleware; add for compatibility
+    protected $routeMiddleware = [
+        'auth'                => \AbuseIO\Http\Middleware\Authenticate::class,
+        'auth.basic'          => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings'            => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'guest'               => \AbuseIO\Http\Middleware\RedirectIfAuthenticated::class,
+        'permission'          => \AbuseIO\Http\Middleware\CheckPermission::class,
+        'ash.token'           => \AbuseIO\Http\Middleware\CheckAshToken::class,
+        'checkaccount'        => \AbuseIO\Http\Middleware\CheckAccount::class,
+        'checksystemaccount'  => \AbuseIO\Http\Middleware\CheckSystemAccount::class,
+        'apienabled'          => \AbuseIO\Http\Middleware\ApiEnabled::class,
+        'checkapitoken'       => \AbuseIO\Http\Middleware\CheckApiToken::class,
+        'apiaccountavailable' => \AbuseIO\Http\Middleware\ApiAccountAvailable::class,
+        'apisystemaccount'    => \AbuseIO\Http\Middleware\ApiSystemAccount::class,
+        'appendnotesubmitter' => \AbuseIO\Http\Middleware\AppendNoteSubmitter::class,
+    ];
 }

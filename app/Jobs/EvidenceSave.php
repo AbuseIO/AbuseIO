@@ -33,7 +33,7 @@ class EvidenceSave extends Job
     {
         $datefolder = Carbon::now()->format('Ymd');
         $path = 'mailarchive/'.$datefolder;
-        //$fileName = Str::uuid()->toString().'.eml';
+        $fileName = Str::uuid()->toString().'.eml';
         $file = "{$path}/{$fileName}";
 
         umask(0007);
@@ -89,8 +89,9 @@ class EvidenceSave extends Job
             return false;
         }
 
-        // Temporally hack until we can do this with Storage::
-        chgrp(storage_path()."/{$file}", config('app.group'));
+	// Temporally hack until we can do this with Storage::
+	// No longer permitted, also previously the path returns chmod that blocks new files
+        //chgrp(storage_path()."/{$file}", config('app.group'));
 
         return $file;
     }

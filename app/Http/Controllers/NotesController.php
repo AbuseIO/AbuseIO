@@ -27,11 +27,8 @@ class NotesController extends Controller
     public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
-
         $this->apiInit($fractal, $request);
-
-        // is the logged in account allowed to execute an action on the Note
-        $this->middleware('checkaccount:Note', ['only' => ['apiShow']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Note', ['except' => ['index', 'create', 'store', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']]);
     }
 
     /**

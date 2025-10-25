@@ -13,10 +13,10 @@
                 {!! trans('tickets.button.update_contact') !!} <span class="caret"></span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
-                <li>{!! link_to_route('admin.tickets.update', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id, 'ip']) !!}</li>
-                <li>{!! link_to_route('admin.tickets.update', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id, 'domain']) !!}</li>
+                <li><a href="{{ url('admin/tickets/' . $ticket->id . '/update/ip') }}">{{ trans('misc.ip').' '.trans('misc.contact') }}</a></li>
+                <li><a href="{{ url('admin/tickets/' . $ticket->id . '/update/domain') }}">{{ trans('misc.domain').' '.trans('misc.contact') }}</a></li>
                 <li role="separator" class="divider"></li>
-                <li>{!! link_to_route('admin.tickets.update', trans('misc.both'), [$ticket->id]) !!}</li>
+                <li><a href="{{ url('admin/tickets/' . $ticket->id . '/update') }}">{{ trans('misc.both') }}</a></li>
             </ul>
         </div>
         <div class="btn-group" role="group" aria-label="...">
@@ -31,18 +31,17 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-header">{{ trans('tickets.set_ticket_status') }}:</li>
-                <li{!! ($ticket->status_id == 'OPEN') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.open'), [$ticket->id, 'open']) !!}</li>
-                <li{!! ($ticket->status_id == 'CLOSED') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.closed'), [$ticket->id, 'closed']) !!}</li>
+                <li{!! ($ticket->status_id == 'OPEN') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/status/open') }}">{{ trans('tickets.open') }}</a></li>
+                <li{!! ($ticket->status_id == 'CLOSED') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/status/closed') }}">{{ trans('tickets.closed') }}</a></li>
                 <li role="separator" class="divider"></li>
-                <li{!! ($ticket->status_id == 'ESCALATED') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.escalated'), [$ticket->id, 'escalated']) !!}</li>
-                <li{!! ($ticket->status_id == 'IGNORED') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.ignored'), [$ticket->id, 'ignored']) !!}</li>
-                <li{!! ($ticket->status_id == 'RESOLVED') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.status', trans('tickets.resolved'), [$ticket->id, 'resolved']) !!}</li>
+                <li{!! ($ticket->status_id == 'ESCALATED') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/status/escalated') }}">{{ trans('tickets.escalated') }}</a></li>
+                <li{!! ($ticket->status_id == 'IGNORED') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/status/ignored') }}">{{ trans('tickets.ignored') }}</a></li>
+                <li{!! ($ticket->status_id == 'RESOLVED') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/status/resolved') }}">{{ trans('tickets.resolved') }}</a></li>
             </ul>
         </div>
     </div>
 </div>
 <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#info"><span class="glyphicon glyphicon-file"></span> {{ trans('tickets.information') }}</a></li>
     <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ trans('tickets.evidence') }}</a></li>
     <li><a data-toggle="tab" href="#communication"><span class="glyphicon glyphicon-envelope"></span> {{ trans('tickets.communication') }}</a></li>
 </ul>
@@ -73,7 +72,6 @@
             <dd>{{ $ticket->lastEvent[0]->seen }}</dd>
 
             <dt>{{ trans('tickets.events') }}</dt>
-            <dd>{{ $ticket->events->count() }}</dd>
 
             <dt>{{ trans('misc.status') }}</dt>
             <dd><span class="label label-{{ $ticket_class }}">{{ trans("types.status.abusedesk.{$ticket->status_id}.name") }}</span></dd>
@@ -103,7 +101,6 @@
             @if ($ticket->ip_contact_reference != 'UNDEF')
             <dt>{{ trans('tickets.ashlink') }} {{ trans('misc.ip')}}</dt>
             <dd>
-                <a href="{!! ashAsset("/ash/collect/" . $ticket->id . "/" . $ticket->ash_token_ip) !!}">
                     {!! ashAsset("/ash/collect/" . $ticket->id . "/" . $ticket->ash_token_ip) !!}
                 </a>
             </dd>
@@ -139,7 +136,6 @@
             <dd>{{ $ticket->ip_contact_name }}</dd>
 
             <dt>{{ trans('misc.email') }}</dt>
-            <dd>{{ $ticket->ip_contact_email }}</dd>
 
             <dt>{{ trans('contacts.api_host') }}</dt>
             <dd>{{ $ticket->ip_contact_api_host }}</dd>
@@ -177,7 +173,6 @@
         <table class="table table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>{{ trans('tickets.timestamp') }}</th>
                     <th>{{ trans('tickets.source') }}</th>
                     <th>{{ trans('tickets.information') }}</th>
                     <th>{{ trans('tickets.evidence') }}</th>
@@ -200,10 +195,9 @@
                                     @if (is_array($l2value))
                                         @foreach ($l2value as $l3field=>$l3value)
                                             @if (is_array($l3value))
-                                                <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
+                                                <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}})</dt>
                                                 <dd>{{ trans('tickets.fourth_layer_filter') }}</dd>
-                                            @else
-                                                <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}}</dt>
+                                                <dt>{{ ucfirst($l1field) . ' ' . ucfirst($l2field) . ' ' . ucfirst($l3field)}})</dt>
                                                 <dd>{{ htmlentities($l3value) }}</dd>
                                             @endif
                                         @endforeach
@@ -230,7 +224,6 @@
                     @endif
                 </td>
             </tr>
-            @endforeach
             </tbody>
         </table>
         @endif
@@ -248,7 +241,6 @@
                         <span class="pull-left">&nbsp;</span>
                         <div class="pull-left ticket-hover-toggle invisible">
                             <button type="button" class="btn btnFlip btnHide btn-xs btn-{{ ($note->hidden == true) ? 'warning' : 'success' }}" value="{{ $note->id }}">
-                                <span {!! ($note->hidden == true) ? '' : 'class="hidden"' !!}>{{ trans('misc.button.hidden') }}</span><span {!! ($note->hidden == true) ? 'class="hidden"' : '' !!}>{{ trans('misc.button.visible') }}</span>
                             </button>
                             <button type="button" class="btn btnFlip btnRead btn-xs btn-{{ ($note->viewed == true) ? 'success' : 'warning' }}" value="{{ $note->id }}">
                                 <span {!! ($note->viewed == true) ? '' : 'class="hidden"' !!} >{{ trans('misc.button.read') }}</span><span {!! ($note->viewed == true) ? 'class="hidden"' : '' !!}>{{ trans('misc.button.unread') }}</span>
@@ -268,7 +260,6 @@
         @endif
         <div class="row">
             <div class="col-xs-11 col-xs-offset-1">
-                {!! Form::model(new AbuseIO\Models\Note, ['route' => 'admin.notes.store', 'class' => 'form-horizontal']) !!}
                 {!! Form::hidden('ticket_id', $ticket->id) !!}
                 {!! Form::label('text', trans('ash.communication.reply')) !!}
                 {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder_admin'), 'class' => 'form-control']) !!}
@@ -290,10 +281,9 @@
             </div>
             <div class="modal-body">
                 <ul>
-                    <li{!! ($ticket->ip_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify', trans('misc.ip').' '.trans('misc.contact'), [$ticket->id, 'ip']) !!}</li>
-                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify', trans('misc.domain').' '.trans('misc.contact'), [$ticket->id, 'domain']) !!}</li>
+                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/notify/domain') }}">{{ trans('misc.domain').' '.trans('misc.contact') }}</a></li>
                     <li role="separator" class="divider"></li>
-                    <li{!! ($ticket->ip_contact_reference == 'UNDEF' || $ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}>{!! link_to_route('admin.tickets.notify', trans('misc.both'), [$ticket->id]) !!}</li>
+                    <li{!! ($ticket->ip_contact_reference == 'UNDEF' || $ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/notify') }}">{{ trans('misc.both') }}</a></li>
                 </ul>
             </div>
             <div class="modal-footer">

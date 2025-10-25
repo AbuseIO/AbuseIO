@@ -29,11 +29,10 @@ class NetblocksController extends Controller
     public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
-
         $this->apiInit($fractal, $request);
 
-        // is the logged in account allowed to execute an action on the Domain
-        $this->middleware('checkaccount:Netblock', ['except' => ['search', 'index', 'create', 'store', 'export']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckSystemAccount::class, ['only' => ['create', 'store']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Netblock', ['except' => ['index', 'create', 'store', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']]);
     }
 
     public function apiSearch($type, $param)

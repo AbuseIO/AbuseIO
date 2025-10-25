@@ -1,41 +1,41 @@
 <div class="form-group @if ($errors->has('first_name')) has-error @endif">
-    {!! Form::label('first_name', trans('accounts.first_name').':', ['class' => 'col-sm-2 control-label']) !!}
+    <label for="first_name" class="col-sm-2 control-label">{{ trans('accounts.first_name') }}:</label>
     <div class="col-sm-10">
-        {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+        <input type="text" name="first_name" id="first_name" value="{{ old('first_name', $auth_user->first_name) }}" class="form-control">
         @if ($errors->has('first_name')) <p class="help-block">{{ $errors->first('first_name') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('last_name')) has-error @endif">
-    {!! Form::label('last_name', trans('accounts.last_name').':', ['class' => 'col-sm-2 control-label']) !!}
+    <label for="last_name" class="col-sm-2 control-label">{{ trans('accounts.last_name') }}:</label>
     <div class="col-sm-10">
-       {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+       <input type="text" name="last_name" id="last_name" value="{{ old('last_name', $auth_user->last_name) }}" class="form-control">
        @if ($errors->has('last_name')) <p class="help-block">{{ $errors->first('last_name') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('email')) has-error @endif">
-    {!! Form::label('email', trans('misc.email').':', ['class' => 'col-sm-2 control-label']) !!}
+    <label for="email" class="col-sm-2 control-label">{{ trans('misc.email') }}:</label>
     <div class="col-sm-10">
-        {!! Form::email('email', null, ['class' => 'form-control']) !!}
+        <input type="email" name="email" id="email" value="{{ old('email', $auth_user->email) }}" class="form-control">
         @if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('password')) has-error @endif">
-    {!! Form::label('password', trans('profile.password').':', ['class' => 'col-sm-2 control-label']) !!}
+    <label for="password" class="col-sm-2 control-label">{{ trans('profile.password') }}:</label>
     <div class="col-sm-10">
-        {!! Form::password('password', ['class' => 'form-control']) !!}
+        <input type="password" name="password" id="password" class="form-control">
         @if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
     </div>
 </div>
 <div class="form-group @if ($errors->has('password_confirmation')) has-error @endif">
-    {!! Form::label('password_confirmation', trans('profile.password_confirmation').':', ['class' => 'col-sm-2 control-label']) !!}
+    <label for="password_confirmation" class="col-sm-2 control-label">{{ trans('profile.password_confirmation') }}:</label>
     <div class="col-sm-10">
-        {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
         @if ($errors->has('password_confirmation')) <p class="help-block">{{ $errors->first('password_confirmation') }}</p> @endif
     </div>
 </div>
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-        {!! Form::submit($submit_text, ['class'=>'btn btn-success']) !!}
-        {!! link_to(URL::previous(), trans('misc.button.cancel'), ['class' => 'btn btn-default']) !!}
+        <button type="submit" class="btn btn-success">{{ $submit_text }}</button>
+        <a href="{{ URL::previous() }}" class="btn btn-default">{{ trans('misc.button.cancel') }}</a>
     </div>
 </div>

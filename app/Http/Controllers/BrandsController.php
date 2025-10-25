@@ -27,12 +27,9 @@ class BrandsController extends Controller
     public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
-
-        // initialize the Api methods
         $this->apiInit($fractal, $request);
-
-        // is the logged in account allowed to execute an action on the Brand
-        $this->middleware('checkaccount:Brand', ['except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiShow', 'apiDestroy']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckSystemAccount::class, ['only' => ['create', 'store']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Brand', ['except' => ['index', 'create', 'store', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']]);
     }
 
     /**

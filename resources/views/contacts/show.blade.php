@@ -1,14 +1,16 @@
 @extends('app')
 
 @section('content')
-<h1 class="page-header">{{ $contact->name }}</h1>
+<h1 class="page-header">{{ isset($contact) ? $contact->name : '' }}</h1>
 <div class="row">
     <div class="col-sm-offset-9 col-sm-3 text-right">
-        {!! Form::open(['name' => 'delContact', 'class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.contacts.destroy', $contact->id]]) !!}
-        <a href="{{ route('admin.contacts.edit', $contact->id) }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
-        {!! Form::button(trans('misc.button.anonymize'), ['name' => 'anonBtn', 'class' => 'btn btn-warning']) !!}
-        {!! Form::button(trans('misc.button.delete'), ['name' => 'delBtn', 'class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
+        <form name="delContact" class="form-inline" method="POST" action="{{ url('admin/contacts/' . $contact->id) }}">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <a href="{{ url('admin/contacts/' . $contact->id . '/edit') }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
+            <button type="button" name="anonBtn" class="btn btn-warning">{{ trans('misc.button.anonymize') }}</button>
+            <button type="button" name="delBtn" class="btn btn-danger">{{ trans('misc.button.delete') }}</button>
+        </form>
     </div>
 </div>
 <dl class="dl-horizontal">
@@ -16,7 +18,7 @@
     <dd>{{ $contact->id }}</dd>
 
     <dt>{{ trans_choice('misc.accounts', 1) }}</dt>
-    <dd>{{ $contact->account->name }}</dd>
+    <dd>{{ ($contact && $contact->account) ? $contact->account->name : '' }}</dd>
 
     <dt>{{ trans('contacts.reference') }}</dt>
     <dd>{{ $contact->reference }}</dd>
@@ -85,9 +87,10 @@
 </div>
 @endif
 
-{!! Form::open(['name' => 'anonContact', 'class' => 'form-inline', 'method' => 'POST', 'route' => ['admin.gdpr.anonymize', $contact->id]]) !!}
-{!! Form::hidden('anonymize', 1);!!}
-{!! Form::close() !!}
+<form name="anonContact" class="form-inline" method="POST" action="{{ url('admin/gdpr/' . $contact->id) }}">
+    {{ csrf_field() }}
+    <input type="hidden" name="anonymize" value="1">
+</form>
 
 <!-- Confirm Modal -->
 <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="confirmLabel">

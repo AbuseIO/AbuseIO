@@ -33,13 +33,12 @@ class AccountsController extends Controller
         $this->apiInit($fractal, $request);
 
         // is the logged in account allowed to execute an action on the account
-        $this->middleware(
-            'checkaccount:Account',
-            ['except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']]
-        );
+        $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Account', [
+            'except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']
+        ]);
 
         // method that only may be executed by the systemaccount
-        $this->middleware('checksystemaccount', ['only' => ['create', 'store']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckSystemAccount::class, ['only' => ['create', 'store']]);
     }
 
     /**

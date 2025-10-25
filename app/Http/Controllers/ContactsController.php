@@ -35,8 +35,9 @@ class ContactsController extends Controller
 
         // initialize the Api methods
         $this->apiInit($fractal, $request);
-        // is the logged in account allowed to execute an action on the Contact
-        $this->middleware('checkaccount:Contact', ['except' => ['search', 'index', 'create', 'store', 'export']]);
+
+        $this->middleware(\AbuseIO\Http\Middleware\CheckSystemAccount::class, ['only' => ['create', 'store']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Contact', ['except' => ['index', 'create', 'store', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']]);
     }
 
     /**
@@ -58,7 +59,7 @@ class ContactsController extends Controller
             ->addColumn(
                 'actions',
                 function ($contact) {
-                    $deleteAction = route('admin.contacts.destroy', $contact->id);
+                    $deleteAction = route('admin.contacts.destroy', ['contacts' => $contact]);
                     $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
                     $actions .= ' <a href="contacts/'.$contact->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.trans('misc.button.show').'</a> ';
                     $actions .= ' <a href="contacts/'.$contact->id.'/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.trans('misc.button.edit').'</a> ';
@@ -299,25 +300,6 @@ class ContactsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param ContactFormRequest $contactForm FormRequest
-     * @param Contact            $contact     Contact
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function apiUpdate(ContactFormRequest $contactForm, Contact $contact)
-    {
-        $contact->update(
-            $contactForm->all()
-        );
-
-        $contact->syncNotificationMethods($contactForm);
-
-        return $this->respondWithItem($contact, new ContactTransformer());
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param Contact $contact Contact
@@ -335,22 +317,6 @@ class ContactsController extends Controller
 
         return Redirect::route('admin.contacts.index')
             ->with('message', 'Contact has been deleted.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Contact $contact Contact
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function apiDestroy(Contact $contact)
-    {
-        if (!$this->handleDestroy($contact)) {
-            $this->respondWithValidationErrors($this->getError());
-        }
-
-        return $this->respondWithItem($contact, new ContactTransformer());
     }
 
     private function handleDestroy(Contact $contact)

@@ -7,6 +7,11 @@ php artisan view:clear
 php artisan route:clear
 composer dump-autoload
 
+cd /opt/abuseio
+chown -R abuseio:abuseio .
+chmod -R 777 storage/
+chmod 775 bootstrap/cache/
+
 echo restart services
 sudo systemctl restart abuseio_queue_collector
 sudo systemctl restart abuseio_queue_email_incoming

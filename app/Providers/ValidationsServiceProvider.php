@@ -249,39 +249,14 @@ class ValidationsServiceProvider extends ServiceProvider
             function ($attribute, $value, $parameters, $validator) {
                 $result = false;
 
-                $view = view(
-                    [
-                        'template'                    => $value,
-                        'cache_key'                   => md5($value),
-                        'secondsTemplateCacheExpires' => 0,
-                    ],
-                    []
-                );
-
-                // compile the template and get the path to the compiled file
-                $viewPath = $view->getPath();
-                $engine = $view->getEngine();
-                $compiler = $engine->getCompiler();
-                $compiler->compile($viewPath);
-                $compiledPath = escapeshellarg($compiler->getCompiledPath($viewPath));
-
-                // check php syntax of the compiled file
-                // runkit_lint_file() is preferred, but we can fallback on exec() calling php -l
-                if (function_exists('runkit_lint_file')) {
-                    $result = runkit_lint_file($compiledPath);
-                } else {
-                    Log::warning(
-                        'no runkit pecl extension installed, falling back to exec() to check the php syntax'
-                    );
-                    $phpfinder = new PhpExecutableFinder();
-                    $command = $phpfinder->find()." -l $compiledPath";
-                    $output = exec($command);
-                    if (strstr($output, 'No syntax errors detected') !== false) {
-                        $result = true;
-                    }
+                // Basic sanity check: attempt to render inside a try/catch.
+                try {
+                    view(['template' => $value, 'cache_key' => md5($value), 'secondsTemplateCacheExpires' => 0], [])->render();
+                    return true;
+                } catch (\Throwable $e) {
+                    Log::warning('bladetemplate validator failed to render: '.$e->getMessage());
+                    return false;
                 }
-
-                return $result;
             }
         );
     }

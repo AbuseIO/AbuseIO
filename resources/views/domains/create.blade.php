@@ -2,7 +2,8 @@
 
 @section('content')
 <h1 class="page-header">{{ trans('domains.header.new') }}</h1>
-{!! Form::model(new AbuseIO\Models\Domain, ['route' => 'admin.domains.store', 'class' => 'form-horizontal']) !!}
-@include('domains/partials/_form', ['submit_text' => trans('misc.button.save')])
-{!! Form::close() !!}
+<form method="POST" action="{{ route('admin.domains.store') }}" class="form-horizontal">
+    {{ csrf_field() }}
+    @include('domains/partials/_form', ['submit_text' => trans('misc.button.save'), 'selected' => old('contact_id')])
+</form>
 @endsection

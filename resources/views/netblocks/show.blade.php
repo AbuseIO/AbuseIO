@@ -4,10 +4,10 @@
 <h1 class="page-header">{{ trans('netblocks.header.detail') }}:</h1>
 <div class="row">
     <div  class="col-md-3 col-md-offset-9 text-right">
-        <form class="form-inline" method="POST" action="{{ route('admin.netblocks.destroy', $netblock->id) }}">
+        <form class="form-inline" method="POST" action="{{ url('admin/netblocks/' . $netblock->id) }}">
             @csrf
             @method('DELETE')
-            <a href="{{ route('admin.netblocks.edit', $netblock->id) }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
+            <a href="{{ url('admin/netblocks/' . $netblock->id . '/edit') }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
             <button type="submit" class="btn btn-danger">{{ trans('misc.button.delete') }}</button>
         </form>
     </div>
@@ -23,7 +23,7 @@
     <dd>{{ $netblock->last_ip }}</dd>
 
     <dt>{{ trans('misc.contact') }}</dt>
-    <dd>{{ $netblock->contact->name }} ({{ $netblock->contact->reference }})</dd>
+    <dd>{{ isset($netblock->contact) ? ($netblock->contact->name . ' (' . $netblock->contact->reference . ')') : trans('misc.notavailable') }}</dd>
 
     <dt>{{ trans('misc.description') }}</dt>
     <dd>{{ $netblock->description }}</dd>

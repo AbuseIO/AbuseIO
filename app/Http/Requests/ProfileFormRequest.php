@@ -64,7 +64,7 @@ class ProfileFormRequest extends Request
         array $files = [],
         array $server = [],
         $content = null
-    ) {
+    ): void {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
         $this->getInputSource()->add(

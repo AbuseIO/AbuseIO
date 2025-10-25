@@ -1,13 +1,15 @@
 @extends('app')
 
 @section('content')
-<h1 class="page-header">{{ trans('domains.header.detail') }}: {{ $domain->name }}</h1>
+<h1 class="page-header">{{ trans('domains.header.detail') }}: {{ isset($domain) ? $domain->name : '' }}</h1>
 <div class="row">
     <div  class="col-md-3 col-md-offset-9 text-right">
-        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.domains.destroy', $domain->id]]) !!}
-        <a href="{{ route('admin.domains.edit', $domain->id) }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
-        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
+        <form class="form-inline" method="POST" action="{{ url('admin/domains/' . $domain->id) }}">
+            @csrf
+            @method('DELETE')
+            <a href="{{ url('admin/domains/' . $domain->id . '/edit') }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
+            <button type="submit" class="btn btn-danger">{{ trans('misc.button.delete') }}</button>
+        </form>
     </div>
 </div>
 <dl class="dl-horizontal">
@@ -18,7 +20,7 @@
     <dd>{{ $domain->name }}</dd>
 
     <dt>{{ trans('misc.contact') }}</dt>
-    <dd>{{ $domain->contact->name }} ({{ $domain->contact->reference }})</dd>
+    <dd>{{ isset($domain->contact) ? ($domain->contact->name . ' (' . $domain->contact->reference . ')') : trans('misc.notavailable') }}</dd>
 
     <dt>{{ trans('misc.status') }}</dt>
     <dd>{{ $domain->enabled ? trans('misc.enabled') : trans('misc.disabled') }}</dd>

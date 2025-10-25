@@ -31,12 +31,10 @@ class TicketsController extends Controller
     public function __construct(Manager $fractal, Request $request)
     {
         parent::__construct();
-
-        // initialize the api
         $this->apiInit($fractal, $request);
 
-        // is the logged in account allowed to execute an action on the Ticket
-        $this->middleware('checkaccount:Ticket', ['except' => ['apiSearch', 'search', 'apiIndex', 'index', 'create', 'apiStore', 'store', 'apiSyncStatus', 'export']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckSystemAccount::class, ['only' => ['create', 'store']]);
+        $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Ticket', ['except' => ['index', 'create', 'store', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']]);
     }
 
     /**

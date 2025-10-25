@@ -21,10 +21,10 @@ class LocaleController extends Controller
     public function setLocale($locale = 'en')
     {
         $rules = [
-            'locales' => 'in:en,nl,gr', // List of supported locales
+            'locale' => 'in:en,nl,gr', // List of supported locales
         ];
 
-        $validator = Validator::make(compact($locale), $rules);
+        $validator = Validator::make(['locale' => $locale], $rules);
 
         // update the locale setting in the user
         if (!empty($this->auth_user)) {

@@ -75,7 +75,7 @@ class ContactFormRequest extends Request
         array $files = [],
         array $server = [],
         $content = null
-    ) {
+    ): void {
         parent::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
 
         // only interesting when running in the gui

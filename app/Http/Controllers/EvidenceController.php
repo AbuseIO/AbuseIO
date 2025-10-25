@@ -16,8 +16,7 @@ class EvidenceController extends Controller
     {
         parent::__construct();
 
-        // Is the logged in account allowed to execute an action on the Evidence
-        $this->middleware('checkaccount:Evidence');
+        $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Evidence');
     }
 
     /**
