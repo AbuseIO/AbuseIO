@@ -66,10 +66,10 @@
             <dd>{{ trans("types.type.{$ticket->type_id}.description") }}</dd>
 
             <dt>{{ trans('tickets.first_seen') }}</dt>
-            <dd>{{ $ticket->firstEvent[0]->seen }}</dd>
+            <dd>{{ optional($ticket->firstEvent->first())->seen ?? trans('misc.never') }}</dd>
 
             <dt>{{ trans('tickets.last_seen') }}</dt>
-            <dd>{{ $ticket->lastEvent[0]->seen }}</dd>
+            <dd>{{ optional($ticket->lastEvent->first())->seen ?? trans('misc.never') }}</dd>
 
             <dt>{{ trans('tickets.events') }}</dt>
 
@@ -216,14 +216,15 @@
                 </td>
                 <td>
                     @if ($event->evidence)
-                    {!! link_to_route('admin.evidence.download', trans('ash.communication.download'), [$event->evidence->id]) !!}
+                    <a href="{{ route('admin.evidence.download', $event->evidence->id) }}">{{ trans('ash.communication.download') }}</a>
                     -
-                    {!! link_to_route('admin.evidence.show', trans('ash.communication.view'), [$event->evidence->id]) !!}
+                    <a href="{{ route('admin.evidence.show', $event->evidence->id) }}">{{ trans('ash.communication.view') }}</a>
                     @else
                         {{ trans('misc.notavailable') }}
                     @endif
                 </td>
             </tr>
+            @endforeach
             </tbody>
         </table>
         @endif
@@ -260,12 +261,19 @@
         @endif
         <div class="row">
             <div class="col-xs-11 col-xs-offset-1">
-                {!! Form::hidden('ticket_id', $ticket->id) !!}
-                {!! Form::label('text', trans('ash.communication.reply')) !!}
-                {!! Form::textarea('text', null, ['size' => '30x5', 'placeholder' => trans('ash.communication.placeholder_admin'), 'class' => 'form-control']) !!}
-                <div class="checkbox"><label>{!! Form::checkbox('hidden') !!} {!! trans('misc.button.hidden') !!}</label></div>
-                {!! Form::submit(trans('ash.communication.submit'), ['class'=>'btn btn-success']) !!}
-                {!! Form::close() !!}
+                <form action="{{ route('admin.notes.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+                    @php
+                        $submitterName = config('main.notes.show_abusedesk_names') === true && auth()->check() ? ' (' . auth()->user()->fullName() . ')' : '';
+                    @endphp
+                    <input type="hidden" name="submitter" value="{{ trans('ash.communication.abusedesk') . $submitterName }}">
+                    <label for="text">{{ trans('ash.communication.reply') }}</label>
+                    <textarea name="text" id="text" class="form-control" rows="5" placeholder="{{ trans('ash.communication.placeholder_admin') }}"></textarea>
+                    <div class="checkbox"><label><input type="checkbox" name="hidden" value="1"> {{ trans('misc.button.hidden') }}</label></div>
+                    <input type="hidden" name="viewed" value="true">
+                    <button type="submit" class="btn btn-success">{{ trans('ash.communication.submit') }}</button>
+                </form>
             </div>
         </div>
     </div>

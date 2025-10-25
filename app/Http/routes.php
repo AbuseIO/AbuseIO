@@ -15,6 +15,7 @@ use AbuseIO\Http\Controllers\BrandsController;
 use AbuseIO\Http\Controllers\IncidentsController;
 use AbuseIO\Http\Controllers\ProfileController;
 use AbuseIO\Http\Controllers\LocaleController;
+use AbuseIO\Http\Controllers\EvidenceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,6 +75,21 @@ Route::prefix('admin')->group(function () {
         Route::patch('tickets/{tickets}', [TicketsController::class, 'update'])->middleware('permission:tickets_edit');
         Route::delete('tickets/{tickets}', [TicketsController::class, 'destroy'])->middleware('permission:tickets_delete')->name('tickets.destroy');
         Route::get('tickets/export/{format}', [TicketsController::class, 'export'])->middleware('permission:tickets_export')->name('tickets.export');
+
+        /*
+         * Ticket contact update (GET)
+         */
+        Route::get('tickets/{tickets}/update/{who?}', [TicketsController::class, 'update'])->middleware('permission:tickets_edit')->name('tickets.contact_update');
+
+        /*
+         * Notifications
+         */
+        Route::get('tickets/{tickets}/notify/{who?}', [TicketsController::class, 'notify'])->middleware('permission:tickets_edit')->name('tickets.notify');
+
+        /*
+         * Ticket status
+         */
+        Route::get('tickets/{tickets}/status/{status}', [TicketsController::class, 'status'])->middleware('permission:tickets_edit')->name('tickets.status');
 
         /*
          * Incidents
@@ -184,9 +200,18 @@ Route::prefix('admin')->group(function () {
          * AshLink
          */
         //Route::resource('ash_link', AshLinksController::class);
+
+        /*
+         * Evidence
+         */
+        Route::get('evidence/{evidence}', [EvidenceController::class, 'show'])->middleware('permission:evidence_view')->name('evidence.show');
+        Route::get('evidence/{evidence}/download', [EvidenceController::class, 'download'])->middleware('permission:evidence_view')->name('evidence.download');
+        Route::get('evidence/{evidence}/attachment/{file}', [EvidenceController::class, 'attachment'])->middleware('permission:evidence_view')->name('evidence.attachment');
     });
 });
 
 Route::model('contacts', \AbuseIO\Models\Contact::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
 Route::model('netblocks', \AbuseIO\Models\Netblock::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
 Route::model('domains', \AbuseIO\Models\Domain::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
+Route::model('tickets', \AbuseIO\Models\Ticket::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
+Route::model('evidence', \AbuseIO\Models\Evidence::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });

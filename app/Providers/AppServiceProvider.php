@@ -1,5 +1,4 @@
 <?php
-
 namespace AbuseIO\Providers;
 
 use AbuseIO\Models\Event;
@@ -66,6 +65,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Provide a compatibility alias for Composer\Autoload\ClassMapGenerator used by older hooks
+        if (!class_exists(\Composer\Autoload\ClassMapGenerator::class) && class_exists(\Composer\ClassMapGenerator\ClassMapGenerator::class)) {
+            class_alias(\Composer\ClassMapGenerator\ClassMapGenerator::class, \Composer\Autoload\ClassMapGenerator::class);
+        }
     }
 }
