@@ -38,6 +38,7 @@
 		"abuseio/collector-snds": "5.0.*",
 		"abuseio/hook-common": "3.0.*",
 		"abuseio/hook-log": "3.0.*",
+		"abuseio/iodef": "3.0",
 		"abuseio/notification-common": "5.0.*",
 		"abuseio/notification-mail": "5.0.*",
 		"abuseio/parser-abusehub": "5.0.*",
@@ -58,7 +59,7 @@
 		"abuseio/parser-spamcop": "5.0.*",
 		"abuseio/parser-spamexperts": "5.0.*",
 		"abuseio/parser-webiron": "5.0.*",
-		"composer/class-map-generator": "*",
+		"composer/class-map-generator": "1.6.*",
 		"guzzlehttp/guzzle": "7.10.*",
 		"illuminated/helper-functions": "^12.0",
 		"jeremykendall/php-domain-parser": "6.4.*",
@@ -73,8 +74,7 @@
 		"sabre/uri": "3.0.*",
 		"sabre/xml": "4.0.*",
 		"spatie/laravel-html": "^3.12",
-		"yajra/laravel-datatables-oracle": "12.6.*",
-		"composer/class-map-generator": "1.6.*"
+		"yajra/laravel-datatables-oracle": "12.6.*"
 	},
 	"require-dev": {
 		"beyondcode/laravel-dump-server": "^2.1",
