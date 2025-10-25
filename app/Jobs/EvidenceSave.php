@@ -58,8 +58,9 @@ class EvidenceSave extends Job
                 return false;
             }
 
-            // Temporally hack until we can do this with Storage::
-            chgrp(storage_path()."/{$path}", config('app.group'));
+            // Ensure owner/group only when mismatched, and handle permission errors gracefully
+            $fullDirPath = storage_path()."/{$path}";
+            $this->ensureOwnerGroup($fullDirPath);
         }
 
         if (Storage::exists($file)) {
@@ -89,10 +90,53 @@ class EvidenceSave extends Job
             return false;
         }
 
-	// Temporally hack until we can do this with Storage::
-	// No longer permitted, also previously the path returns chmod that blocks new files
-        //chgrp(storage_path()."/{$file}", config('app.group'));
+        // Ensure correct owner/group for file, if mismatched
+        $fullFilePath = storage_path()."/{$file}";
+        $this->ensureOwnerGroup($fullFilePath);
 
         return $file;
+    }
+
+    private function ensureOwnerGroup($fullPath)
+    {
+        $targetUser = config('app.user');
+        $targetGroup = config('app.group');
+
+        // Read current owner/group
+        $currentUid = @fileowner($fullPath);
+        $currentGid = @filegroup($fullPath);
+
+        $currentUser = null;
+        $currentGroup = null;
+
+        if ($currentUid !== false && function_exists('posix_getpwuid')) {
+            $pw = @posix_getpwuid($currentUid);
+            $currentUser = is_array($pw) && isset($pw['name']) ? $pw['name'] : null;
+        }
+
+        if ($currentGid !== false && function_exists('posix_getgrgid')) {
+            $gr = @posix_getgrgid($currentGid);
+            $currentGroup = is_array($gr) && isset($gr['name']) ? $gr['name'] : null;
+        }
+
+        // Change group only if different
+        if (!empty($targetGroup) && ($currentGroup === null || $currentGroup !== $targetGroup)) {
+            if (!@chgrp($fullPath, $targetGroup)) {
+                Log::warning(
+                    get_class($this).': '.
+                    'Unable to change group on '.$fullPath.' to '.$targetGroup.' (insufficient permissions?)'
+                );
+            }
+        }
+
+        // Change owner only if different
+        if (!empty($targetUser) && ($currentUser === null || $currentUser !== $targetUser)) {
+            if (!@chown($fullPath, $targetUser)) {
+                Log::warning(
+                    get_class($this).': '.
+                    'Unable to change owner on '.$fullPath.' to '.$targetUser.' (insufficient permissions?)'
+                );
+            }
+        }
     }
 }
