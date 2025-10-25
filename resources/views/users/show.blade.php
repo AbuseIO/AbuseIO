@@ -4,10 +4,12 @@
 <h1 class="page-header">{{ trans('users.header.detail') }}: {{ $user->first_name }} {{ $user->last_name }}</h1>
 <div class="row">
     <div class="col-md-3 col-md-offset-9 text-right">
-        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.users.destroy', $user->id]]) !!}
-        {!! link_to_route('admin.users.edit', trans('misc.button.edit'), $user->id, ['class' => 'btn btn-info']) !!}
-        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger'.(($user->id == 1) ? ' disabled' : '')]) !!}
-        {!! Form::close() !!}
+        <form class="form-inline" method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
+            @csrf
+            @method('DELETE')
+            <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
+            <button type="submit" class="btn btn-danger{{ ($user->id == 1) ? ' disabled' : '' }}">{{ trans('misc.button.delete') }}</button>
+        </form>
     </div>
 </div>
 <dl class="dl-horizontal">

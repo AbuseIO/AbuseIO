@@ -152,6 +152,8 @@ Route::prefix('admin')->group(function () {
         Route::put('accounts/{accounts}', [AccountsController::class, 'update'])->middleware('permission:accounts_edit')->name('accounts.update');
         Route::patch('accounts/{accounts}', [AccountsController::class, 'update'])->middleware('permission:accounts_edit');
         Route::delete('accounts/{accounts}', [AccountsController::class, 'destroy'])->middleware('permission:accounts_delete')->name('accounts.destroy');
+        Route::get('accounts/{accounts}/enable', [AccountsController::class, 'enable'])->middleware('permission:accounts_enable')->name('accounts.enable');
+        Route::get('accounts/{accounts}/disable', [AccountsController::class, 'disable'])->middleware('permission:accounts_disable')->name('accounts.disable');
 
         /*
          * Users
@@ -165,6 +167,8 @@ Route::prefix('admin')->group(function () {
         Route::put('users/{users}', [UsersController::class, 'update'])->middleware('permission:users_edit')->name('users.update');
         Route::patch('users/{users}', [UsersController::class, 'update'])->middleware('permission:users_edit');
         Route::delete('users/{users}', [UsersController::class, 'destroy'])->middleware('permission:users_delete')->name('users.destroy');
+        Route::get('users/{users}/enable', [UsersController::class, 'enable'])->middleware('permission:users_enable')->name('users.enable');
+        Route::get('users/{users}/disable', [UsersController::class, 'disable'])->middleware('permission:users_disable')->name('users.disable');
 
         /*
          * Brands
@@ -232,3 +236,6 @@ Route::model('netblocks', \AbuseIO\Models\Netblock::class, function () { throw n
 Route::model('domains', \AbuseIO\Models\Domain::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
 Route::model('tickets', \AbuseIO\Models\Ticket::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
 Route::model('evidence', \AbuseIO\Models\Evidence::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
+Route::model('users', \AbuseIO\Models\User::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
+Route::model('brands', \AbuseIO\Models\Brand::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
+Route::model('accounts', \AbuseIO\Models\Account::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });

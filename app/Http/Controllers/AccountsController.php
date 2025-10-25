@@ -88,23 +88,21 @@ class AccountsController extends Controller
             ->addColumn(
                 'actions',
                 function ($account) {
-                    $deleteAction = route('admin.accounts.destroy', $account->id);
+                    $deleteAction = route('admin.accounts.destroy', ['accounts' => $account->id]);
                     $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
                     $actions .= ' <a href="accounts/'.$account->id.
                         '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
                         trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="accounts/'.$account->id.
-                        '/edit" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> '.
+                    $actions .= ' <a href="'.route('admin.accounts.edit', ['accounts' => $account->id]).
+                        '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> '.
                         trans('misc.button.edit').'</a> ';
                     if ($account->disabled) {
-                        $actions .= ' <a href="accounts/'.$account->id.
-                            '/enable'.
+                        $actions .= ' <a href="'.route('admin.accounts.enable', ['accounts' => $account->id]).
                             '" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-ok-circle"></span> '.
                             trans('misc.button.enable')
                             .'</a> ';
                     } else {
-                        $actions .= ' <a href="accounts/'.$account->id.
-                            '/disable'.
+                        $actions .= ' <a href="'.route('admin.accounts.disable', ['accounts' => $account->id]).
                             '" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-ban-circle"></span> '.
                             trans('misc.button.disable')
                             .'</a> ';

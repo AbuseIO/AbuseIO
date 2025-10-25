@@ -4,15 +4,17 @@
 <h1 class="page-header">{{ trans('accounts.header.detail') }}: {{ $account->name }}</h1>
 <div class="row">
     <div class="col-sm-12 text-right">
-        {!! Form::open(['class' => 'form-inline', 'method' => 'DELETE', 'route' => ['admin.accounts.destroy', $account->id]]) !!}
-        <a href="{{ route('admin.accounts.edit', $account->id) }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
-        @if ( $account->disabled )
-            <a href="{{ route('admin.accounts.enable', $account->id) }}" class="btn btn-success">{{ trans('misc.button.enable') }}</a>
-        @else
-            <a href="{{ route('admin.accounts.disable', $account->id) }}" class="btn btn-warning">{{ trans('misc.button.disable') }}</a>
-        @endif
-        {!! Form::submit(trans('misc.button.delete'), ['class' => 'btn btn-danger'.(($account->isSystemAccount()) ? ' disabled' : '')]) !!}
-        {!! Form::close() !!}
+        <form class="form-inline" method="POST" action="{{ route('admin.accounts.destroy', ['accounts' => $account->id]) }}">
+            @csrf
+            @method('DELETE')
+            <a href="{{ route('admin.accounts.edit', ['accounts' => $account->id]) }}" class="btn btn-info">{{ trans('misc.button.edit') }}</a>
+            @if ( $account->disabled )
+                <a href="{{ route('admin.accounts.enable', ['accounts' => $account->id]) }}" class="btn btn-success">{{ trans('misc.button.enable') }}</a>
+            @else
+                <a href="{{ route('admin.accounts.disable', ['accounts' => $account->id]) }}" class="btn btn-warning">{{ trans('misc.button.disable') }}</a>
+            @endif
+            <button type="submit" class="btn btn-danger{{ ($account->isSystemAccount()) ? ' disabled' : '' }}">{{ trans('misc.button.delete') }}</button>
+        </form>
     </div>
 </div>
 <dl class="dl-horizontal">
@@ -33,8 +35,8 @@
 
     <dt>{{ trans('accounts.api_key') }}</dt>
     <dd>
-        {!! Form::input('text', 'token', $account->token, ['id' => 'token', 'style' => 'padding:0; margin-right:10px; width:300px; border:none;']) !!}
-        {!! Form::button('<i class="fa fa-clipboard" aria-hidden="true"></i>', ['id' => 'btnCopyToClipboard', 'rel' => 'tooltip', 'title'=> trans('misc.copy_to_clipboard'), 'class' => 'btn btn-sm btn-info']) !!}
+        <input type="text" id="token" value="{{ $account->token }}" style="padding:0; margin-right:10px; width:300px; border:none;" readonly>
+        <button id="btnCopyToClipboard" rel="tooltip" title="{{ trans('misc.copy_to_clipboard') }}" class="btn btn-sm btn-info"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
     </dd>
 </dl>
 
@@ -75,19 +77,10 @@
                 try {
                     // copy text
                     document.execCommand('copy');
-                    inp.blur();
+                } catch (err) {
+                    // ignore
                 }
-                catch (err) {
-                    alert('{!! trans('please_press_ctrl_cmd_to_copy') !!}');
-                    return false;
-                }
-                var tooltip = $('[rel="tooltip"]');
-                tooltip.tooltip('show');
-
-                setTimeout( function() {
-                    tooltip.tooltip('destroy');
-                }, 3000);
             }
         });
     </script>
-@stop
+@endsection

@@ -15,6 +15,9 @@
 		<!-- Localization flags -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('/css/flag-icon-min.css') }}">
 
+		<!-- Font Awesome icons (local) -->
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/font-awesome.min.css') }}">
+
 		<!-- Custom css -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('/css/custom.css') }}">
 	</head>
@@ -52,38 +55,28 @@
 						@endif
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<span class="glyphicon glyphicon-user"></span> {{ auth()->check() ? auth()->user()->fullName() . ' ( '  . auth()->user()->account->name .' )' : 'Guest' }} <span class="caret"></span>
+								<span class="flag-icon flag-icon-{{ $auth_user->locale }}"></span> {{ $auth_user->first_name }} {{ $auth_user->last_name }} <span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li class="dropdown-header">{{ trans('misc.language') }}</li>
-								@foreach(Config::get('app.locales') as $locale => $localeData)
-								<li>
-									<a href="/admin/locale/{{$locale}}">
-										<span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}
-										@if (auth()->check() && $locale == auth()->user()->locale)
-										<span class="glyphicon glyphicon-ok"></span>
-										@endif
-									</a>
-								</li>
-								@endforeach
+								<li><a href="#">{{ trans('misc.version') }} {{ Config::get('app.version') }}</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="/admin/profile"><span class="glyphicon glyphicon-file"></span> {{ trans_choice('misc.profile', 2) }}</a></li>
-								<li><a href="/auth/logout"><span class="glyphicon glyphicon-log-out"></span> {{ trans_choice('misc.logout', 2) }}</a></li>
+								<li><a href="{{ url('/auth/logout') }}">{{ trans('misc.button.logout') }}</a></li>
 							</ul>
 						</li>
 					</ul>
-	            </div>
-	        </div>
-	    </nav>
+				</div>
+			</div>
+		</nav>
 		<div class="container">
 			@if (Session::has('message'))
-		    <div class="alert alert-info alert-dismissible">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <p>{{ Session::get('message') }}</p>
-		    </div>
+			    <div class="alert alert-info alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <p>{{ Session::get('message') }}</p>
+			    </div>
 			@endif
 			@yield('content')
 		</div>
+
 		<!-- Bootstrap Javascript ---------------------------->
 		<script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
