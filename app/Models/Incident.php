@@ -166,9 +166,9 @@ class Incident
     {
         $rules = [
             'source'      => 'required|string',
-            'source_id'   => 'sometimes|stringorboolean',
+            'source_id'   => 'nullable|stringorboolean',
             'ip'          => 'required|ip',
-            'domain'      => 'sometimes|stringorboolean|domain',
+            'domain'      => 'nullable|stringorboolean|domain',
             'timestamp'   => 'required|timestamp',
             'class'       => 'required|abuseclass',
             'type'        => 'required|abusetype',
