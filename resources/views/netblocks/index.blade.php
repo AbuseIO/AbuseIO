@@ -42,8 +42,8 @@
                 url: '{{ asset("/i18n/$auth_user->locale.json") }}'
             },
             columns: [
-                { data: 'first_ip', name: 'first_ip' },
-
+                { data: 'first_ip', name: 'netblocks.first_ip' },
+                { data: 'last_ip', name: 'netblocks.last_ip' },
                 { data: 'contacts_name', name: 'contacts.name' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
             ]
