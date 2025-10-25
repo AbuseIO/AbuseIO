@@ -28,6 +28,23 @@
 @section('content')
 <h1 class="page-header">{{ trans('tickets.header.new') }}</h1>
 
+@if (session('message'))
+    <div class="alert alert-danger">
+        {{ session('message') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>{{ __('Validation failed') }}:</strong>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form method="POST" action="{{ route('admin.incidents.store') }}" enctype="multipart/form-data" class="form-horizontal">
     @csrf
 

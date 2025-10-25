@@ -29,6 +29,8 @@ class IncidentsProcess extends Job
      */
     private $origin;
 
+    private $lastErrorMessage = '';
+
     /**
      * Create a new command instance.
      *
@@ -74,6 +76,7 @@ class IncidentsProcess extends Job
         $validatorResult = $validator->check($this->incidents);
 
         if ($validatorResult['errorStatus'] === true) {
+            $this->lastErrorMessage = $validatorResult['errorMessage'];
             Log::error(
                 get_class($validator).': '.
                 'Validator has ended with errors ! : '.$validatorResult['errorMessage']
@@ -89,6 +92,7 @@ class IncidentsProcess extends Job
             'Validator has ended without errors'
         );
 
+        $this->lastErrorMessage = '';
         return true;
     }
 
@@ -140,5 +144,15 @@ class IncidentsProcess extends Job
         );
 
         return true;
+    }
+
+    /**
+     * Get last validation error message.
+     *
+     * @return string
+     */
+    public function getLastErrorMessage()
+    {
+        return $this->lastErrorMessage;
     }
 }

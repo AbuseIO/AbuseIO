@@ -125,12 +125,16 @@ class IncidentsController extends Controller
         // Validate the data set
         $validated = $incidentsProcess->validate();
         if (!$validated) {
-            return Redirect::back()->with('message', "Failed to validate incident model {$validated}");
+            return Redirect::back()->withErrors(['incident' => $incidentsProcess->getLastErrorMessage()])
+                ->withInput()
+                ->with('message', 'Failed to validate incident model');
         }
 
         // Write the data set to database
         if (!$incidentsProcess->save()) {
-            return Redirect::back()->with('message', 'Failed to write to database');
+            return Redirect::back()->withErrors(['incident' => 'Failed to write to database'])
+                ->withInput()
+                ->with('message', 'Failed to write to database');
         }
 
         return Redirect::route(
@@ -206,7 +210,7 @@ class IncidentsController extends Controller
         // Validate the data set
         $validated = $incidentsProcess->validate();
         if (!$validated) {
-            return $this->errorWrongArgs("Failed to validate incident model {$validated}");
+            return $this->errorWrongArgs('Failed to validate incident model '.$incidentsProcess->getLastErrorMessage());
         }
 
         // Write the data set to database
