@@ -53,9 +53,10 @@
 							</ul>
 						</li>
 						@endif
+						@if (auth()->check())
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<span class="flag-icon flag-icon-{{ $auth_user->locale }}"></span> {{ $auth_user->first_name }} {{ $auth_user->last_name }} <span class="caret"></span>
+								<span class="flag-icon flag-icon-{{ auth()->user()->locale ?? Config::get('app.locale') }}"></span> {{ auth()->user()->first_name ?? '' }} {{ auth()->user()->last_name ?? '' }} <span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="#">{{ trans('misc.version') }} {{ Config::get('app.version') }}</a></li>
@@ -63,6 +64,7 @@
 								<li><a href="{{ url('/auth/logout') }}">{{ trans('misc.button.logout') }}</a></li>
 							</ul>
 						</li>
+						@endif
 					</ul>
 				</div>
 			</div>

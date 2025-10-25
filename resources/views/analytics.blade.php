@@ -60,16 +60,20 @@
 
             <div class="col-sm-4">
                 <label for="{{ trans('misc.event') }}" class="control-label">{!! trans('misc.lifecycle') !!}</label>
-                {!!  Form::select('s_lifecycle', $lifecycle_options, 'created_at', ['class'=>'form-control', 'id' =>'lifecycle']) !!}
+                <select name="s_lifecycle" id="lifecycle" class="form-control">
+                    @foreach($lifecycle_options as $key => $label)
+                        <option value="{{ $key }}" {{ $key === 'created_at' ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="col-sm-4">
                 <label for="{{ trans('misc.from') }}" class="control-label">{!! trans('misc.from') !!}</label>
-                {!!  Form::input('date', 's_from', null, ['class' => 'form-control', 'id' => 's_from']) !!}
+                <input type="date" name="s_from" id="s_from" class="form-control" value="{{ request('s_from') }}">
             </div>
             <div class="col-sm-4">
                 <label for="{{ trans('misc.till') }}" class="control-label">{!! trans('misc.till') !!}</label>
-                {!!  Form::input('date','s_till', null, ['class' => 'form-control', 'id' => 's_till']) !!}
+                <input type="date" name="s_till" id="s_till" class="form-control" value="{{ request('s_till') }}">
             </div>
 
 
@@ -84,14 +88,29 @@
         <div class="row">
 
             <div class="col-sm-4">
-                {!!  Form::select('s_class_options', [null=> trans('misc.please_select')] + $class_options, null, ['class'=>'form-control', 'id' =>'classification']) !!}
-            </div>
-            <div class="col-sm-4">
-                {!!  Form::select('s_type', [null=> trans('misc.please_select')] + $type_options, null, ['class'=>'form-control', 'id' => 'type']) !!}
-            </div>
-            <div class="col-sm-4">
-                {!! Form::select('s_status', [null=> trans('misc.please_select')] + $status_options, null, ['class'=>'form-control', 'id'=>'status'])  !!}
-            </div>
+                <select name="s_class_options" id="classification" class="form-control">
+                    <option value="">{{ trans('misc.please_select') }}</option>
+                    @foreach($class_options as $key => $label)
+                        <option value="{{ $key }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+             </div>
+             <div class="col-sm-4">
+                <select name="s_type" id="type" class="form-control">
+                    <option value="">{{ trans('misc.please_select') }}</option>
+                    @foreach($type_options as $key => $label)
+                        <option value="{{ $key }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+             </div>
+             <div class="col-sm-4">
+                <select name="s_status" id="status" class="form-control">
+                    <option value="">{{ trans('misc.please_select') }}</option>
+                    @foreach($status_options as $key => $label)
+                        <option value="{{ $key }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+             </div>
             <div class="col-sm-4">
                 <button type="submit" class="btn btn-primary form-control"
                         id="search_btn"><i class="glyphicon glyphicon-signal"></i> {!! trans('misc.show_graph') !!}</button>
@@ -123,7 +142,7 @@
                 s_status: $("#status").val()
             };
 
-            $.get('analytics/graph', params, function (data) {
+            $.get("{{ route('admin.analytics.graph') }}", params, function (data) {
                 drawGraph(data);
             });
         }

@@ -17,6 +17,7 @@ use AbuseIO\Http\Controllers\IncidentsController;
 use AbuseIO\Http\Controllers\ProfileController;
 use AbuseIO\Http\Controllers\LocaleController;
 use AbuseIO\Http\Controllers\EvidenceController;
+use AbuseIO\Http\Controllers\AnalyticsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -195,6 +196,12 @@ Route::prefix('admin')->group(function () {
          * Notes
          */
         Route::resource('notes', NotesController::class, ['only' => ['store', 'update', 'destroy']]);
+
+        /*
+         * Analytics
+         */
+        Route::get('analytics', [AnalyticsController::class, 'index'])->middleware('permission:analytics_view')->name('analytics.index');
+        Route::get('analytics/graph', [AnalyticsController::class, 'show'])->middleware('permission:analytics_view')->name('analytics.graph');
 
         /*
          * Search
