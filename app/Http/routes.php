@@ -18,6 +18,7 @@ use AbuseIO\Http\Controllers\ProfileController;
 use AbuseIO\Http\Controllers\LocaleController;
 use AbuseIO\Http\Controllers\EvidenceController;
 use AbuseIO\Http\Controllers\AnalyticsController;
+use AbuseIO\Http\Controllers\GdprController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -112,7 +113,8 @@ Route::prefix('admin')->group(function () {
         Route::patch('contacts/{contacts}', [ContactsController::class, 'update'])->middleware('permission:contacts_edit');
         Route::delete('contacts/{contacts}', [ContactsController::class, 'destroy'])->middleware('permission:contacts_delete')->name('contacts.destroy');
         Route::get('contacts/export/{format}', [ContactsController::class, 'export'])->middleware('permission:contacts_export')->name('contacts.export');
-
+        Route::post('contacts/{contacts}/gdpr', [GdprController::class, 'anonymize'])->middleware('permission:contacts_edit')->name('contacts.gdpr');
+        
         /*
          * Netblocks
          */

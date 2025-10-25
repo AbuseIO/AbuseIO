@@ -40,7 +40,7 @@ class GdprController extends Controller
             $message = 'There was a problem anonymizing the contact. (Error: '.$e->getMessage().')';
         }
 
-        return Redirect::route('admin.contacts.index')
+        return Redirect::route('admin.contacts.show', ['contacts' => $contact->id])
                        ->with('message', $message);
     }
 

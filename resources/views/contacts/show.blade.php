@@ -87,7 +87,7 @@
 </div>
 @endif
 
-<form name="anonContact" class="form-inline" method="POST" action="{{ url('admin/gdpr/' . $contact->id) }}">
+<form name="anonContact" class="form-inline" method="POST" action="{{ route('admin.contacts.gdpr', ['contacts' => $contact->id]) }}">
     {{ csrf_field() }}
     <input type="hidden" name="anonymize" value="1">
 </form>
