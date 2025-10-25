@@ -29,9 +29,16 @@ class Locale
     {
         $this->languages = array_keys(Config::get('app.locales'));
 
+        // Allow switching via query parameter, e.g. ?locale=nl
+        $paramLocale = $request->query('locale');
+        if (!empty($paramLocale) && in_array($paramLocale, $this->languages, true)) {
+            Session::put('locale', $paramLocale);
+        }
+
         if (!Session::has('locale')) {
             Session::put('locale', $request->getPreferredLanguage($this->languages));
         }
+
         app()->setLocale(Session::get('locale'));
 
         return $next($request);
