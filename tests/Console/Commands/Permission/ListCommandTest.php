@@ -18,7 +18,7 @@ class ListCommandTest extends TestCase
 
     private function initDB()
     {
-        $this->list = factory(Permission::class, 3)->create();
+        $this->list = Permission::factory()->count(3)->create();
     }
 
     public function testHeaders()

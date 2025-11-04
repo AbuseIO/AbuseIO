@@ -16,7 +16,7 @@ class ShowCommandTest extends TestCase
 
     private function initDB()
     {
-        $this->user = factory(User::class)->create();
+        $this->user = User::factory()->create();
     }
 
     public function testWithInvalidFilter()

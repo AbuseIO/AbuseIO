@@ -5,7 +5,7 @@ Route::group(
     [
         'prefix'     => 'domains',
         'as'         => 'domains.',
-        'middleware' => ['apiaccountavailable', 'apisystemaccount'],
+        'middleware' => ['api.account', 'api.system'],
     ],
     function () {
         Route::get('', [DomainsController::class, 'apiIndex'])->name('index');

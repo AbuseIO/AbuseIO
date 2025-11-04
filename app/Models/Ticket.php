@@ -4,6 +4,7 @@ namespace AbuseIO\Models;
 
 use AbuseIO\Jobs\FindContact;
 use Config;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -45,6 +46,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Ticket extends Model
 {
+    use HasFactory;
     use SoftDeletes;
 
     /**

@@ -24,7 +24,7 @@ class ListCommandTest extends TestCase
     public function initDB()
     {
         //$this->assertTrue(true);
-        $this->noteList = factory(Note::class, 10)->create();
+        $this->noteList = Note::factory()->count(10)->create();
     }
 
     public function testHeaders()

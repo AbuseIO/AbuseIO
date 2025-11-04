@@ -19,3 +19,7 @@ sudo systemctl restart abuseio_queue_collector
 sudo systemctl restart abuseio_queue_email_incoming
 sudo systemctl restart abuseio_queue_email_outgoing
 sudo systemctl restart abuseio_queue_delegation
+
+php artisan user:create admin@isp.local --password=password
+php artisan role:assign --role=admin --user=admin@isp.local
+

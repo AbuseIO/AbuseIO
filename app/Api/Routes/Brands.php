@@ -5,7 +5,7 @@ Route::group(
     [
         'prefix'     => 'brands',
         'as'         => 'brands.',
-        'middleware' => ['apiaccountavailable', 'apisystemaccount'],
+        'middleware' => ['api.account', 'api.system'],
     ],
     function () {
         Route::get('', [BrandsController::class, 'apiIndex'])->name('index');

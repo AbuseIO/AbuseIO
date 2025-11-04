@@ -5,7 +5,7 @@ Route::group(
     [
         'prefix'     => 'incidents',
         'as'         => 'incidents.',
-        'middleware' => ['apiaccountavailable', 'apisystemaccount'],
+        'middleware' => ['api.account', 'api.system'],
     ],
     function () {
         Route::post('', [IncidentsController::class, 'apiStore'])->name('store');

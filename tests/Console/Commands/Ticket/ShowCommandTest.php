@@ -23,7 +23,7 @@ class ShowCommandTest extends TestCase
 
     public function initDB()
     {
-        $this->ticketList = factory(Ticket::class, 10)->create();
+        $this->ticketList = Ticket::factory()->count(10)->create();
     }
 
     public function testWithValidIdFilter()

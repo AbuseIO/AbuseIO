@@ -5,7 +5,7 @@ Route::group(
     [
         'prefix'     => 'contacts',
         'as'         => 'contacts.',
-        'middleware' => ['apiaccountavailable', 'apisystemaccount'],
+        'middleware' => ['api.account', 'api.system'],
     ],
     function () {
         Route::get('', [ContactsController::class, 'apiIndex'])->name('index');

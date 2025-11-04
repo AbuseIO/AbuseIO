@@ -12,13 +12,13 @@ class UserTest extends TestCase
 
     public function testUserModelFactory()
     {
-        $user = factory(User::class)->make(['first_name' => 'testing name']);
+        $user = User::factory()->make(['first_name' => 'testing name']);
         $this->assertEquals($user->first_name, 'testing name');
     }
 
     public function testInverseValueSystemAccount()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $oldState = $user->account->isSystemAccount();
 
         if ($user->account->isSystemAccount()) {

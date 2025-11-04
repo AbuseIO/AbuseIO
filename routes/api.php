@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Guard all API routes with API enabled and token checks
-// Use legacy aliases for broad compatibility across Laravel versions
-Route::middleware(['apienabled', 'checkapitoken'])->group(function () {
+// Guard all API routes with API enabled and token checks, under v1
+Route::prefix('v1')->middleware(['api.enabled', 'api.token'])->group(function () {
     // Include modular API route files from app/Api/Routes
     foreach ([
         'Accounts',

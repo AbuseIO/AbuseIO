@@ -26,7 +26,7 @@ class StoreTest extends TestCase
 
     public function testSuccesfullCreate()
     {
-        $note = factory(Model::class)->make()->toArray();
+        $note = Model::factory()->make()->toArray();
 
         global $testrunner;
         $testrunner = true;

@@ -3,6 +3,7 @@
 namespace AbuseIO\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 use PhpMimeMailParser\Parser as MimeParser;
@@ -22,6 +23,7 @@ use Storage;
 class Evidence extends Model
 {
     use SoftDeletes;
+    use HasFactory;
 
     /**
      * The database table used by the model.

@@ -4,6 +4,7 @@ namespace AbuseIO\Models;
 
 use AbuseIO\Traits\InstanceComparable;
 use Hash;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -33,6 +34,7 @@ use Illuminate\Support\Arr;
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
+    use HasFactory;
     use Authenticatable;
     use Authorizable;
     use CanResetPassword;

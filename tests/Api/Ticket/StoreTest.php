@@ -26,7 +26,7 @@ class StoreTest extends TestCase
 
     public function testSuccesfullCreate()
     {
-        $ticket = factory(Ticket::class)->make()->toArray();
+        $ticket = Ticket::factory()->make()->toArray();
 
         $response = $this->executeCall($ticket);
 

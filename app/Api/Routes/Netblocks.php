@@ -5,7 +5,7 @@ Route::group(
     [
         'prefix'     => 'netblocks',
         'as'         => 'netblocks.',
-        'middleware' => ['apiaccountavailable', 'apisystemaccount'],
+        'middleware' => ['api.account', 'api.system'],
     ],
     function () {
         Route::get('search/{type}/{param}', [NetblocksController::class, 'apiSearch'])->name('search');

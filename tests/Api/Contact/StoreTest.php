@@ -26,7 +26,7 @@ class StoreTest extends TestCase
 
     public function testSuccesfullCreate()
     {
-        $contact = factory(Contact::class)->make()->toArray();
+        $contact = Contact::factory()->make()->toArray();
 
         $response = $this->executeCall($contact);
 
