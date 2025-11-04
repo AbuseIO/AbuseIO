@@ -1,10 +1,6 @@
 <?php
 
-Route::resource('netblocks', 'NetblocksController');
-
-Route::model('netblocks', 'AbuseIO\Models\Netblock', function () {
-    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
-});
+use AbuseIO\Http\Controllers\NetblocksController;
 
 Route::group(
     [
@@ -13,97 +9,44 @@ Route::group(
     ],
     function () {
         // Search netblock
-        Route::get(
-            'search/{one?}/{two?}/{three?}',
-            [
-                'middleware' => 'permission:netblocks_view',
-                'as'         => 'search',
-                'uses'       => 'NetblocksController@search',
-            ]
-        );
+        Route::get('search/{one?}/{two?}/{three?}', [NetblocksController::class, 'search'])
+            ->middleware('permission:netblocks_view')
+            ->name('search');
 
         // Access to index list
-        route::get(
-            '',
-            [
-                'middleware' => 'permission:netblocks_view',
-                'as'         => 'index',
-                'uses'       => 'NetblocksController@index',
-            ]
-        );
+        Route::get('', [NetblocksController::class, 'index'])
+            ->middleware('permission:netblocks_view')
+            ->name('index');
 
         // Access to show object
-        route::get(
-            '{netblocks}',
-            [
-                'middleware' => 'permission:netblocks_view',
-                'as'         => 'show',
-                'uses'       => 'NetblocksController@show',
-            ]
-        );
+        Route::get('{netblocks}', [NetblocksController::class, 'show'])
+            ->middleware('permission:netblocks_view')
+            ->name('show');
 
         // Access to export object
-        route::get(
-            'export/{format}',
-            [
-                'middleware' => 'permission:netblocks_export',
-                'as'         => 'export',
-                'uses'       => 'NetblocksController@export',
-            ]
-        );
+        Route::get('export/{format}', [NetblocksController::class, 'export'])
+            ->middleware('permission:netblocks_export')
+            ->name('export');
 
         // Access to create object
-        route::get(
-            'create',
-            [
-                'middleware' => 'permission:netblocks_create',
-                'as'         => 'create',
-                'uses'       => 'NetblocksController@create',
-            ]
-        );
-        route::post(
-            '',
-            [
-                'middleware' => 'permission:netblocks_create',
-                'as'         => 'store',
-                'uses'       => 'NetblocksController@store',
-            ]
-        );
+        Route::get('create', [NetblocksController::class, 'create'])
+            ->middleware('permission:netblocks_create')
+            ->name('create');
+        Route::post('', [NetblocksController::class, 'store'])
+            ->middleware('permission:netblocks_create')
+            ->name('store');
 
         // Access to edit object
-        route::get(
-            '{netblocks}/edit',
-            [
-                'middleware' => 'permission:netblocks_edit',
-                'as'         => 'edit',
-                'uses'       => 'NetblocksController@edit',
-            ]
-        );
-        route::patch(
-            '{netblocks}',
-            [
-                'middleware' => 'permission:netblocks_edit',
-                'as'         => 'update',
-                'uses'       => 'NetblocksController@update',
-            ]
-        );
-        route::put(
-            '{netblocks}',
-            [
-                'middleware' => 'permission:netblocks_edit',
-                'as'         => 'update',
-                'uses'       => 'NetblocksController@update',
-            ]
-        );
+        Route::get('{netblocks}/edit', [NetblocksController::class, 'edit'])
+            ->middleware('permission:netblocks_edit')
+            ->name('edit');
+        Route::match(['put', 'patch'], '{netblocks}', [NetblocksController::class, 'update'])
+            ->middleware('permission:netblocks_edit')
+            ->name('update');
 
         // Access to delete object
-        route::delete(
-            '/{netblocks}',
-            [
-                'middleware' => 'permission:netblocks_delete',
-                'as'         => 'destroy',
-                'uses'       => 'NetblocksController@destroy',
-            ]
-        );
+        Route::delete('/{netblocks}', [NetblocksController::class, 'destroy'])
+            ->middleware('permission:netblocks_delete')
+            ->name('destroy');
     }
 );

@@ -1,4 +1,5 @@
 <?php
+use AbuseIO\Http\Controllers\TicketsController;
 
 Route::group(
     [
@@ -6,92 +7,42 @@ Route::group(
         'as'     => 'tickets.',
     ],
     function () {
-        route::get(
-            '',
-            [
-                'as'         => 'index',
-                'uses'       => 'TicketsController@apiIndex',
-                'middleware' => ['apiaccountavailable'],
-            ]
-        );
+        Route::get('', [TicketsController::class, 'apiIndex'])
+            ->middleware(['apiaccountavailable'])
+            ->name('index');
 
-        Route::post(
-            'search',
-            [
-                'as'         => 'search',
-                'uses'       => 'TicketsController@apiSearch',
-                'middleware' => ['apiaccountavailable'],
-            ]
-        );
+        Route::post('search', [TicketsController::class, 'apiSearch'])
+            ->middleware(['apiaccountavailable'])
+            ->name('search');
 
-        Route::post(
-            'syncstatus',
-            [
-                'as'   => 'syncstatus',
-                'uses' => 'TicketsController@apiSyncStatus',
-            ]
-        );
+        Route::post('syncstatus', [TicketsController::class, 'apiSyncStatus'])
+            ->name('syncstatus');
 
-        Route::post(
-            'synccontactstatus',
-            [
-                'as'   => 'synccontactstatus',
-                'uses' => 'TicketsController@apiSyncContactStatus',
-            ]
-        );
+        Route::post('synccontactstatus', [TicketsController::class, 'apiSyncContactStatus'])
+            ->name('synccontactstatus');
 
-        Route::get(
-            '{tickets}',
-            [
-                'as'         => 'show',
-                'uses'       => 'TicketsController@apiShow',
-                'middleware' => ['apiaccountavailable'],
-            ]
-        );
+        Route::get('{tickets}', [TicketsController::class, 'apiShow'])
+            ->middleware(['apiaccountavailable'])
+            ->name('show');
 
-        Route::delete(
-            '{tickets}',
-            [
-                'as'         => 'delete',
-                'uses'       => 'TicketsController@apiDestroy',
-                'middleware' => ['apiaccountavailable'],
-            ]
-        );
+        Route::delete('{tickets}', [TicketsController::class, 'apiDestroy'])
+            ->middleware(['apiaccountavailable'])
+            ->name('delete');
 
-        Route::post(
-            '',
-            [
-                'as'         => 'store',
-                'uses'       => 'TicketsController@apiStore',
-                'middleware' => ['apiaccountavailable'],
-            ]
-        );
+        Route::post('', [TicketsController::class, 'apiStore'])
+            ->middleware(['apiaccountavailable'])
+            ->name('store');
 
-        Route::put(
-            '{tickets}',
-            [
-                'as'         => 'update',
-                'uses'       => 'TicketsController@apiUpdate',
-                'middleware' => ['apiaccountavailable'],
-            ]
-        );
+        Route::put('{tickets}', [TicketsController::class, 'apiUpdate'])
+            ->middleware(['apiaccountavailable'])
+            ->name('update');
 
-        Route::get(
-            '{tickets}/notify',
-            [
-                'as'         => 'notify',
-                'uses'       => 'TicketsController@apiNotify',
-                'middleware' => ['apiaccountavailable'],
-            ]
-        );
+        Route::get('{tickets}/notify', [TicketsController::class, 'apiNotify'])
+            ->middleware(['apiaccountavailable'])
+            ->name('notify');
 
-        Route::get(
-            '{tickets}/anonymize/{email}/{randomness}',
-            [
-                'as'         => 'anonymize',
-                'uses'       => 'TicketsController@apiAnonymize',
-                'middleware' => ['apiaccountavailable'],
-            ]
-        );
+        Route::get('{tickets}/anonymize/{email}/{randomness}', [TicketsController::class, 'apiAnonymize'])
+            ->middleware(['apiaccountavailable'])
+            ->name('anonymize');
     }
 );

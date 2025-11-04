@@ -1,4 +1,5 @@
 <?php
+use AbuseIO\Http\Controllers\GdprController;
 
 Route::group(
     [
@@ -7,12 +8,6 @@ Route::group(
         'middleware' => ['apiaccountavailable', 'apisystemaccount'],
     ],
     function () {
-        Route::get(
-            'anonymize/{email}',
-            [
-                'as'   => 'anonymize',
-                'uses' => 'GdprController@apiAnonymize',
-            ]
-        );
+        Route::get('anonymize/{email}', [GdprController::class, 'apiAnonymize'])->name('anonymize');
     }
 );

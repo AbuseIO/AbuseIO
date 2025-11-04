@@ -1,9 +1,6 @@
 <?php
-
-Route::resource('evidence', 'EvidenceController');
-Route::model('evidence', 'AbuseIO\Models\Evidence', function () {
-    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
-});
+use AbuseIO\Http\Controllers\EvidenceController;
+// Model binding is centralized in RouteServiceProvider
 
 Route::group(
     [
@@ -14,46 +11,26 @@ Route::group(
         /*
          * Index evidence
          */
-        Route::get(
-            '',
-            [
-                'middleware' => 'permission:evidence_view',
-                'as'         => 'index',
-                'uses'       => 'EvidenceController@index',
-            ]
-        );
+        Route::get('', [EvidenceController::class, 'index'])
+            ->middleware('permission:evidence_view')
+            ->name('index');
 
         /*
         | Show evidence
         */
-        Route::get(
-            '{evidence}',
-            [
-                'middleware' => 'permission:evidence_view',
-                'as'         => 'show',
-                'uses'       => 'EvidenceController@show',
-            ]
-        );
+        Route::get('{evidence}', [EvidenceController::class, 'show'])
+            ->middleware('permission:evidence_view')
+            ->name('show');
 
         /*
         | Download evidence
         */
-        Route::get(
-            '{evidence}/download',
-            [
-                'middleware' => 'permission:evidence_view',
-                'as'         => 'download',
-                'uses'       => 'EvidenceController@download',
-            ]
-        );
+        Route::get('{evidence}/download', [EvidenceController::class, 'download'])
+            ->middleware('permission:evidence_view')
+            ->name('download');
 
-        Route::get(
-            '{evidence}/attachment/{file}',
-            [
-                'middleware' => 'permission:evidence_view',
-                'as'         => 'attachment',
-                'uses'       => 'EvidenceController@attachment',
-            ]
-        );
+        Route::get('{evidence}/attachment/{file}', [EvidenceController::class, 'attachment'])
+            ->middleware('permission:evidence_view')
+            ->name('attachment');
     }
 );

@@ -1,10 +1,7 @@
 <?php
+use AbuseIO\Http\Controllers\AccountsController;
 
-Route::model('accounts', 'AbuseIO\Models\Account', function () {
-    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
-});
-
-Route::resource('accounts', 'AccountsController');
+// Model binding is centralized in RouteServiceProvider
 
 Route::group(
     [
@@ -13,117 +10,54 @@ Route::group(
     ],
     function () {
         // Search contacts
-        Route::get(
-            'search/{one?}/{two?}/{three?}/{four?}/{five?}',
-            [
-                'middleware' => 'permission:accounts_view',
-                'as'         => 'search',
-                'uses'       => 'AccountsController@search',
-            ]
-        );
+        Route::get('search/{one?}/{two?}/{three?}/{four?}/{five?}', [AccountsController::class, 'search'])
+            ->middleware('permission:accounts_view')
+            ->name('search');
 
         // Access to index list
-        route::get(
-            '',
-            [
-                'middleware' => 'permission:accounts_view',
-                'as'         => 'index',
-                'uses'       => 'AccountsController@index',
-            ]
-        );
+        Route::get('', [AccountsController::class, 'index'])
+            ->middleware('permission:accounts_view')
+            ->name('index');
 
         // Access to show object
-        route::get(
-            '{accounts}',
-            [
-                'middleware' => 'permission:accounts_view',
-                'as'         => 'show',
-                'uses'       => 'AccountsController@show',
-            ]
-        );
+        Route::get('{accounts}', [AccountsController::class, 'show'])
+            ->middleware('permission:accounts_view')
+            ->name('show');
 
         // Access to export object
-        route::get(
-            'export/{format}',
-            [
-                'middleware' => 'permission:accounts_export',
-                'as'         => 'export',
-                'uses'       => 'AccountsController@export',
-            ]
-        );
+        Route::get('export/{format}', [AccountsController::class, 'export'])
+            ->middleware('permission:accounts_export')
+            ->name('export');
 
         // Access to create object
-        route::get(
-            'create',
-            [
-                'middleware' => 'permission:accounts_create',
-                'as'         => 'create',
-                'uses'       => 'AccountsController@create',
-            ]
-        );
-        route::post(
-            '',
-            [
-                'middleware' => 'permission:accounts_create',
-                'as'         => 'store',
-                'uses'       => 'AccountsController@store',
-            ]
-        );
+        Route::get('create', [AccountsController::class, 'create'])
+            ->middleware('permission:accounts_create')
+            ->name('create');
+        Route::post('', [AccountsController::class, 'store'])
+            ->middleware('permission:accounts_create')
+            ->name('store');
 
         // Access to disable object
-        route::get(
-            '{accounts}/disable',
-            [
-                'middleware' => 'permission:accounts_disable',
-                'as'         => 'disable',
-                'uses'       => 'AccountsController@disable',
-            ]
-        );
+        Route::get('{accounts}/disable', [AccountsController::class, 'disable'])
+            ->middleware('permission:accounts_disable')
+            ->name('disable');
 
         // Access to enable object
-        route::get(
-            '{accounts}/enable',
-            [
-                'middleware' => 'permission:accounts_enable',
-                'as'         => 'enable',
-                'uses'       => 'AccountsController@enable',
-            ]
-        );
+        Route::get('{accounts}/enable', [AccountsController::class, 'enable'])
+            ->middleware('permission:accounts_enable')
+            ->name('enable');
 
         // Access to edit object
-        route::get(
-            '{accounts}/edit',
-            [
-                'middleware' => 'permission:accounts_edit',
-                'as'         => 'edit',
-                'uses'       => 'AccountsController@edit',
-            ]
-        );
-        route::patch(
-            '{accounts}',
-            [
-                'middleware' => 'permission:accounts_edit',
-                'as'         => '',
-                'uses'       => 'AccountsController@update',
-            ]
-        );
-        route::put(
-            '{accounts}',
-            [
-                'middleware' => 'permission:accounts_edit',
-                'as'         => 'update',
-                'uses'       => 'AccountsController@update',
-            ]
-        );
+        Route::get('{accounts}/edit', [AccountsController::class, 'edit'])
+            ->middleware('permission:accounts_edit')
+            ->name('edit');
+        Route::match(['put', 'patch'], '{accounts}', [AccountsController::class, 'update'])
+            ->middleware('permission:accounts_edit')
+            ->name('update');
 
         // Access to delete object
-        route::delete(
-            '/{accounts}',
-            [
-                'middleware' => 'permission:accounts_delete',
-                'as'         => 'destroy',
-                'uses'       => 'AccountsController@destroy',
-            ]
-        );
+        Route::delete('/{accounts}', [AccountsController::class, 'destroy'])
+            ->middleware('permission:accounts_delete')
+            ->name('destroy');
     }
 );

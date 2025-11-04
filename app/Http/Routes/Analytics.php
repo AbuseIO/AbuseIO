@@ -1,5 +1,6 @@
 <?php
 
+use AbuseIO\Http\Controllers\AnalyticsController;
 Route::group(
     [
         'prefix' => 'analytics',
@@ -7,21 +8,11 @@ Route::group(
     ],
     function () {
         // Access to index list
-        route::get(
-            '',
-            [
-                'middleware' => 'permission:analytics_view',
-                'as'         => 'view',
-                'uses'       => 'AnalyticsController@index',
-            ]
-        );
-        route::get(
-            'graph',
-            [
-                'middleware' => 'permission:analytics_view',
-                'as'         => 'view',
-                'uses'       => 'AnalyticsController@show',
-            ]
-        );
+        Route::get('', [AnalyticsController::class, 'index'])
+            ->middleware('permission:analytics_view')
+            ->name('index');
+        Route::get('graph', [AnalyticsController::class, 'show'])
+            ->middleware('permission:analytics_view')
+            ->name('graph');
     }
 );

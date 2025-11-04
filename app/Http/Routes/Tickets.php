@@ -1,10 +1,7 @@
 <?php
+use AbuseIO\Http\Controllers\TicketsController;
 
-Route::model('tickets', 'AbuseIO\Models\Ticket', function () {
-    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
-});
-
-Route::resource('tickets', 'TicketsController');
+// Model binding is centralized in RouteServiceProvider
 
 Route::group(
     [
@@ -15,110 +12,57 @@ Route::group(
         /*
         | Ticket search
         */
-        Route::get(
-            'search/{one?}/{two?}/{three?}/{four?}/{five?}',
-            [
-                'middleware' => 'permission:tickets_view',
-                'as'         => 'search',
-                'uses'       => 'TicketsController@search',
-            ]
-        );
+        Route::get('search/{one?}/{two?}/{three?}/{four?}/{five?}', [TicketsController::class, 'search'])
+            ->middleware('permission:tickets_view')
+            ->name('search');
 
         /*
         | Index tickets
         */
-        Route::get(
-            '',
-            [
-                'middleware' => 'permission:tickets_view',
-                'as'         => 'index',
-                'uses'       => 'TicketsController@index',
-            ]
-        );
+        Route::get('', [TicketsController::class, 'index'])
+            ->middleware('permission:tickets_view')
+            ->name('index');
 
         /*
         | Show ticket
         */
-        Route::get(
-            '{tickets}',
-            [
-                'middleware' => 'permission:tickets_view',
-                'as'         => 'show',
-                'uses'       => 'TicketsController@show',
-            ]
-        );
+        Route::get('{tickets}', [TicketsController::class, 'show'])
+            ->middleware('permission:tickets_view')
+            ->name('show');
 
         /*
         | Export tickets
         */
-        Route::get(
-            'export/{format}',
-            [
-                'middleware' => 'permission:tickets_export',
-                'as'         => 'export',
-                'uses'       => 'TicketsController@export',
-            ]
-        );
+        Route::get('export/{format}', [TicketsController::class, 'export'])
+            ->middleware('permission:tickets_export')
+            ->name('export');
 
         /*
         | Create ticket
         */
-        Route::get(
-            'create',
-            [
-                'middleware' => 'permission:tickets_create',
-                'as'         => 'create',
-                'uses'       => 'TicketsController@create',
-            ]
-        );
-        Route::post(
-            '',
-            [
-                'middleware' => 'permission:tickets_create',
-                'as'         => 'store',
-                'uses'       => 'TicketsController@store',
-            ]
-        );
+        Route::get('create', [TicketsController::class, 'create'])
+            ->middleware('permission:tickets_create')
+            ->name('create');
+        Route::post('', [TicketsController::class, 'store'])
+            ->middleware('permission:tickets_create')
+            ->name('store');
 
         /*
         | Edit ticket
         */
-        Route::get(
-            '{tickets}/edit',
-            [
-                'middleware' => 'permission:tickets_edit',
-                'as'         => 'edit',
-                'uses'       => 'TicketsController@edit',
-            ]
-        );
-        Route::patch(
-            '{tickets}',
-            [
-                'middleware' => 'permission:tickets_edit',
-                'as'         => 'update',
-                'uses'       => 'TicketsController@update',
-            ]
-        );
-        Route::put(
-            '{tickets}',
-            [
-                'middleware' => 'permission:tickets_edit',
-                'as'         => 'update',
-                'uses'       => 'TicketsController@update',
-            ]
-        );
+        Route::get('{tickets}/edit', [TicketsController::class, 'edit'])
+            ->middleware('permission:tickets_edit')
+            ->name('edit');
+        Route::match(['put', 'patch'], '{tickets}', [TicketsController::class, 'update'])
+            ->middleware('permission:tickets_edit')
+            ->name('update');
 
         /*
         | Delete ticket
         */
-        route::delete(
-            '/{tickets}',
-            [
-                'middleware' => 'permission:tickets_delete',
-                'as'         => 'destroy',
-                'uses'       => 'TicketsController@destroy',
-            ]
-        );
+        Route::delete('/{tickets}', [TicketsController::class, 'destroy'])
+            ->middleware('permission:tickets_delete')
+            ->name('destroy');
 
         /*
         | Contact information
@@ -128,14 +72,9 @@ Route::group(
                 'prefix' => '{tickets}/update',
             ],
             function () {
-                Route::get(
-                    '{who?}',
-                    [
-                        'middleware' => 'permission:tickets_edit',
-                        'as'         => 'update',
-                        'uses'       => 'TicketsController@update',
-                    ]
-                );
+                Route::get('{who?}', [TicketsController::class, 'update'])
+                    ->middleware('permission:tickets_edit')
+                    ->name('contact_update');
             }
         );
 
@@ -147,14 +86,9 @@ Route::group(
                 'prefix' => '{tickets}/notify',
             ],
             function () {
-                Route::get(
-                    '{who?}',
-                    [
-                        'middleware' => 'permission:tickets_edit',
-                        'as'         => 'notify',
-                        'uses'       => 'TicketsController@notify',
-                    ]
-                );
+                Route::get('{who?}', [TicketsController::class, 'notify'])
+                    ->middleware('permission:tickets_edit')
+                    ->name('notify');
             }
         );
 
@@ -166,14 +100,9 @@ Route::group(
                 'prefix' => '{tickets}/status',
             ],
             function () {
-                Route::get(
-                    '{status}',
-                    [
-                        'middleware' => 'permission:tickets_edit',
-                        'as'         => 'status',
-                        'uses'       => 'TicketsController@status',
-                    ]
-                );
+                Route::get('{status}', [TicketsController::class, 'status'])
+                    ->middleware('permission:tickets_edit')
+                    ->name('status');
             }
         );
     }

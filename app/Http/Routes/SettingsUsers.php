@@ -1,10 +1,7 @@
 <?php
+use AbuseIO\Http\Controllers\UsersController;
 
-Route::model('users', 'AbuseIO\Models\User', function () {
-    throw new \Illuminate\Database\Eloquent\ModelNotFoundException('User Not Found.');
-});
-
-Route::resource('users', 'UsersController');
+// Model binding is centralized in RouteServiceProvider
 
 Route::group(
     [
@@ -13,117 +10,54 @@ Route::group(
     ],
     function () {
         // Search users
-        Route::get(
-            'search/{one?}/{two?}/{three?}',
-            [
-                'middleware' => 'permission:users_view',
-                'as'         => 'search',
-                'uses'       => 'UsersController@search',
-            ]
-        );
+        Route::get('search/{one?}/{two?}/{three?}', [UsersController::class, 'search'])
+            ->middleware('permission:users_view')
+            ->name('search');
 
         // Access to index list
-        route::get(
-            '',
-            [
-                'middleware' => 'permission:users_view',
-                'as'         => 'index',
-                'uses'       => 'UsersController@index',
-            ]
-        );
+        Route::get('', [UsersController::class, 'index'])
+            ->middleware('permission:users_view')
+            ->name('index');
 
         // Access to show object
-        route::get(
-            '{users}',
-            [
-                'middleware' => 'permission:users_view',
-                'as'         => 'show',
-                'uses'       => 'UsersController@show',
-            ]
-        );
+        Route::get('{users}', [UsersController::class, 'show'])
+            ->middleware('permission:users_view')
+            ->name('show');
 
         // Access to export object
-        route::get(
-            'export/{format}',
-            [
-                'middleware' => 'permission:users_export',
-                'as'         => 'export',
-                'uses'       => 'UsersController@export',
-            ]
-        );
+        Route::get('export/{format}', [UsersController::class, 'export'])
+            ->middleware('permission:users_export')
+            ->name('export');
 
         // Access to create object
-        route::get(
-            'create',
-            [
-                'middleware' => 'permission:users_create',
-                'as'         => 'create',
-                'uses'       => 'UsersController@create',
-            ]
-        );
-        route::post(
-            '',
-            [
-                'middleware' => 'permission:users_create',
-                'as'         => 'store',
-                'uses'       => 'UsersController@store',
-            ]
-        );
+        Route::get('create', [UsersController::class, 'create'])
+            ->middleware('permission:users_create')
+            ->name('create');
+        Route::post('', [UsersController::class, 'store'])
+            ->middleware('permission:users_create')
+            ->name('store');
 
         // Access to disable object
-        route::get(
-            '{users}/disable',
-            [
-                'middleware' => 'permission:users_disable',
-                'as'         => 'disable',
-                'uses'       => 'UsersController@disable',
-            ]
-        );
+        Route::get('{users}/disable', [UsersController::class, 'disable'])
+            ->middleware('permission:users_disable')
+            ->name('disable');
 
         // Access to enable object
-        route::get(
-            '{users}/enable',
-            [
-                'middleware' => 'permission:users_enable',
-                'as'         => 'enable',
-                'uses'       => 'UsersController@enable',
-            ]
-        );
+        Route::get('{users}/enable', [UsersController::class, 'enable'])
+            ->middleware('permission:users_enable')
+            ->name('enable');
 
         // Access to edit object
-        route::get(
-            '{users}/edit',
-            [
-                'middleware' => 'permission:users_edit',
-                'as'         => 'edit',
-                'uses'       => 'UsersController@edit',
-            ]
-        );
-        route::patch(
-            '{users}',
-            [
-                'middleware' => 'permission:users_edit',
-                'as'         => 'update',
-                'uses'       => 'UsersController@update',
-            ]
-        );
-        route::put(
-            '{users}',
-            [
-                'middleware' => 'permission:users_edit',
-                'as'         => 'update',
-                'uses'       => 'UsersController@update',
-            ]
-        );
+        Route::get('{users}/edit', [UsersController::class, 'edit'])
+            ->middleware('permission:users_edit')
+            ->name('edit');
+        Route::match(['put', 'patch'], '{users}', [UsersController::class, 'update'])
+            ->middleware('permission:users_edit')
+            ->name('update');
 
         // Access to delete object
-        route::delete(
-            '/{users}',
-            [
-                'middleware' => 'permission:users_delete',
-                'as'         => 'destroy',
-                'uses'       => 'UsersController@destroy',
-            ]
-        );
+        Route::delete('/{users}', [UsersController::class, 'destroy'])
+            ->middleware('permission:users_delete')
+            ->name('destroy');
     }
 );

@@ -1,4 +1,5 @@
 <?php
+use AbuseIO\Http\Controllers\ContactsController;
 
 Route::group(
     [
@@ -7,60 +8,18 @@ Route::group(
         'middleware' => ['apiaccountavailable', 'apisystemaccount'],
     ],
     function () {
-        Route::get(
-            '',
-            [
-                'as'   => 'index',
-                'uses' => 'ContactsController@apiIndex',
-            ]
-        );
+        Route::get('', [ContactsController::class, 'apiIndex'])->name('index');
 
-        Route::get(
-            '{contacts}',
-            [
-                'as'   => 'show',
-                'uses' => 'ContactsController@apiShow',
-            ]
-        );
+        Route::get('{contacts}', [ContactsController::class, 'apiShow'])->name('show');
 
-        Route::delete(
-            '{contacts}',
-            [
-                'as'   => 'delete',
-                'uses' => 'ContactsController@apiDestroy',
-            ]
-        );
+        Route::delete('{contacts}', [ContactsController::class, 'apiDestroy'])->name('delete');
 
-        Route::get(
-            'search/{email}',
-            [
-                'as'   => 'search',
-                'uses' => 'ContactsController@apiSearch',
-            ]
-        );
+        Route::get('search/{email}', [ContactsController::class, 'apiSearch'])->name('search');
 
-        Route::get(
-            '{contacts}/anonymize/{randomness}',
-            [
-                'as'   => 'anonymize',
-                'uses' => 'ContactsController@apiAnonymize',
-            ]
-        );
+        Route::get('{contacts}/anonymize/{randomness}', [ContactsController::class, 'apiAnonymize'])->name('anonymize');
 
-        Route::post(
-            '',
-            [
-                'as'   => 'store',
-                'uses' => 'ContactsController@apiStore',
-            ]
-        );
+        Route::post('', [ContactsController::class, 'apiStore'])->name('store');
 
-        Route::put(
-            '{contacts}',
-            [
-                'as'   => 'update',
-                'uses' => 'ContactsController@apiUpdate',
-            ]
-        );
+        Route::put('{contacts}', [ContactsController::class, 'apiUpdate'])->name('update');
     }
 );

@@ -1,4 +1,5 @@
 <?php
+use AbuseIO\Http\Controllers\IncidentsController;
 
 Route::group(
     [
@@ -7,12 +8,6 @@ Route::group(
         'middleware' => ['apiaccountavailable', 'apisystemaccount'],
     ],
     function () {
-        Route::post(
-            '',
-            [
-                'as'   => 'store',
-                'uses' => 'IncidentsController@apiStore',
-            ]
-        );
+        Route::post('', [IncidentsController::class, 'apiStore'])->name('store');
     }
 );

@@ -1,6 +1,5 @@
 <?php
-
-Route::resource('gdpr', 'GdprController');
+use AbuseIO\Http\Controllers\GdprController;
 
 Route::group(
     [
@@ -9,13 +8,8 @@ Route::group(
     ],
     function () {
         // Access to edit object
-        route::post(
-            '{contacts}',
-            [
-                'middleware' => 'permission:contacts_edit',
-                'as'         => 'anonymize',
-                'uses'       => 'GdprController@anonymize',
-            ]
-        );
+        Route::post('{contacts}', [GdprController::class, 'anonymize'])
+            ->middleware('permission:contacts_edit')
+            ->name('anonymize');
     }
 );

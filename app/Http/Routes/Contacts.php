@@ -1,10 +1,6 @@
 <?php
 
-Route::resource('contacts', 'ContactsController');
-
-Route::model('contacts', 'AbuseIO\Models\Contact', function () {
-    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
-});
+use AbuseIO\Http\Controllers\ContactsController;
 
 Route::group(
     [
@@ -13,97 +9,44 @@ Route::group(
     ],
     function () {
         // Search contacts
-        Route::get(
-            'search/{one?}/{two?}/{three?}/{four?}/{five?}',
-            [
-                'middleware' => 'permission:contacts_view',
-                'as'         => 'search',
-                'uses'       => 'ContactsController@search',
-            ]
-        );
+        Route::get('search/{one?}/{two?}/{three?}/{four?}/{five?}', [ContactsController::class, 'search'])
+            ->middleware('permission:contacts_view')
+            ->name('search');
 
         // Access to index list
-        route::get(
-            '',
-            [
-                'middleware' => 'permission:contacts_view',
-                'as'         => 'index',
-                'uses'       => 'ContactsController@index',
-            ]
-        );
+        Route::get('', [ContactsController::class, 'index'])
+            ->middleware('permission:contacts_view')
+            ->name('index');
 
         // Access to show object
-        route::get(
-            '{contacts}',
-            [
-                'middleware' => 'permission:contacts_view',
-                'as'         => 'show',
-                'uses'       => 'ContactsController@show',
-            ]
-        );
+        Route::get('{contacts}', [ContactsController::class, 'show'])
+            ->middleware('permission:contacts_view')
+            ->name('show');
 
         // Access to export object
-        route::get(
-            'export/{format}',
-            [
-                'middleware' => 'permission:contacts_export',
-                'as'         => 'export',
-                'uses'       => 'ContactsController@export',
-            ]
-        );
+        Route::get('export/{format}', [ContactsController::class, 'export'])
+            ->middleware('permission:contacts_export')
+            ->name('export');
 
         // Access to create object
-        route::get(
-            'create',
-            [
-                'middleware' => 'permission:contacts_create',
-                'as'         => 'create',
-                'uses'       => 'ContactsController@create',
-            ]
-        );
-        route::post(
-            '',
-            [
-                'middleware' => 'permission:contacts_create',
-                'as'         => 'store',
-                'uses'       => 'ContactsController@store',
-            ]
-        );
+        Route::get('create', [ContactsController::class, 'create'])
+            ->middleware('permission:contacts_create')
+            ->name('create');
+        Route::post('', [ContactsController::class, 'store'])
+            ->middleware('permission:contacts_create')
+            ->name('store');
 
         // Access to edit object
-        route::get(
-            '{contacts}/edit',
-            [
-                'middleware' => 'permission:contacts_edit',
-                'as'         => 'edit',
-                'uses'       => 'ContactsController@edit',
-            ]
-        );
-        route::patch(
-            '{contacts}',
-            [
-                'middleware' => 'permission:contacts_edit',
-                'as'         => 'update',
-                'uses'       => 'ContactsController@update',
-            ]
-        );
-        route::put(
-            '{contacts}',
-            [
-                'middleware' => 'permission:contacts_edit',
-                'as'         => 'update',
-                'uses'       => 'ContactsController@update',
-            ]
-        );
+        Route::get('{contacts}/edit', [ContactsController::class, 'edit'])
+            ->middleware('permission:contacts_edit')
+            ->name('edit');
+        Route::match(['put', 'patch'], '{contacts}', [ContactsController::class, 'update'])
+            ->middleware('permission:contacts_edit')
+            ->name('update');
 
         // Access to delete object
-        route::delete(
-            '{contacts}',
-            [
-                'middleware' => 'permission:contacts_delete',
-                'as'         => 'destroy',
-                'uses'       => 'ContactsController@destroy',
-            ]
-        );
+        Route::delete('{contacts}', [ContactsController::class, 'destroy'])
+            ->middleware('permission:contacts_delete')
+            ->name('destroy');
     }
 );

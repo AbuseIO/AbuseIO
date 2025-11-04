@@ -1,4 +1,5 @@
 <?php
+use AbuseIO\Http\Controllers\NotesController;
 
 Route::group(
     [
@@ -8,22 +9,10 @@ Route::group(
     ],
     function () {
         // Access to index list
-        route::get(
-            '',
-            [
-                'as'   => 'index',
-                'uses' => 'NotesController@apiIndex',
-            ]
-        );
+        Route::get('', [NotesController::class, 'apiIndex'])->name('index');
 
         // Access to show object
-        route::get(
-            '{notes}',
-            [
-                'as'   => 'show',
-                'uses' => 'NotesController@apiShow',
-            ]
-        );
+        Route::get('{notes}', [NotesController::class, 'apiShow'])->name('show');
         //
         //        Route::delete(
         //            '{notes}',
@@ -33,13 +22,7 @@ Route::group(
         //            ]
         //        );
         //
-        Route::post(
-            '',
-            [
-                'as'   => 'store',
-                'uses' => 'NotesController@apiStore',
-            ]
-        );
+        Route::post('', [NotesController::class, 'apiStore'])->name('store');
         //
 //        Route::put(
 //            '{notes}',

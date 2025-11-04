@@ -15,7 +15,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        // Modern maintenance middleware (Laravel 8+)
+        \AbuseIO\Http\Middleware\PreventRequestsDuringMaintenance::class,
         // -added to make ModelRouteBinding work;
     ];
 
@@ -37,7 +38,8 @@ class Kernel extends HttpKernel
 
         ],
         'api' => [
-            'throttle:60,1',
+            // Use named rate limiter defined in RouteServiceProvider
+            'throttle:api',
             'bindings',
         ],
         'install' => [

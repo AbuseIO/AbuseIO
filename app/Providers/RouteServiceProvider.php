@@ -4,6 +4,9 @@ namespace AbuseIO\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
 
 /**
  * Class RouteServiceProvider.
@@ -26,7 +29,21 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Define API rate limiter using modern style
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        });
+
+        // Centralized route model bindings
+        Route::model('contacts', \AbuseIO\Models\Contact::class);
+        Route::model('netblocks', \AbuseIO\Models\Netblock::class);
+        Route::model('domains', \AbuseIO\Models\Domain::class);
+        Route::model('tickets', \AbuseIO\Models\Ticket::class);
+        Route::model('evidence', \AbuseIO\Models\Evidence::class);
+        Route::model('users', \AbuseIO\Models\User::class);
+        Route::model('brands', \AbuseIO\Models\Brand::class);
+        Route::model('accounts', \AbuseIO\Models\Account::class);
+
         parent::boot();
     }
 
@@ -37,15 +54,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        /* @noinspection PhpUnusedParameterInspection */
-        Route::group(
-            [
-                'middleware' => 'web',
-                'namespace'  => $this->namespace,
-            ],
-            function ($router) {
-                require app_path('Http/routes.php');
-            }
-        );
+        // Routing is configured via bootstrap/app.php using modern bootstrapping.
+        // No additional mapping required here to avoid double registration.
     }
 }

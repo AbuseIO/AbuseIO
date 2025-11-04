@@ -48,7 +48,7 @@ Route::get('auth/logout', [LoginController::class, 'logout'])->name('logout');
 */
 
 Route::prefix('admin')->group(function () {
-    Route::group(['middleware' => ['web', 'auth', 'permission:login_portal'], 'as' => 'admin.'], function () {
+    Route::middleware(['web', 'auth', 'permission:login_portal'])->as('admin.')->group(function () {
         Route::get('/home', function () {
             return view('home');
         })->name('home');
@@ -223,7 +223,7 @@ Route::prefix('admin')->group(function () {
 });
 
 // Public ASH routes
-Route::group(['prefix' => 'ash'], function () {
+Route::prefix('ash')->group(function () {
     // ASH ticket page
     Route::get('collect/{ticketID}/{token}', [AshController::class, 'index'])
         ->middleware(['ash.token'])
@@ -243,11 +243,4 @@ Route::group(['prefix' => 'ash'], function () {
         ->name('ash.logo');
 });
 
-Route::model('contacts', \AbuseIO\Models\Contact::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
-Route::model('netblocks', \AbuseIO\Models\Netblock::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
-Route::model('domains', \AbuseIO\Models\Domain::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
-Route::model('tickets', \AbuseIO\Models\Ticket::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
-Route::model('evidence', \AbuseIO\Models\Evidence::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
-Route::model('users', \AbuseIO\Models\User::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
-Route::model('brands', \AbuseIO\Models\Brand::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
-Route::model('accounts', \AbuseIO\Models\Account::class, function () { throw new \Illuminate\Database\Eloquent\ModelNotFoundException(); });
+// Model bindings are centralized in RouteServiceProvider

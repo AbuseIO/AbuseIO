@@ -1,39 +1,15 @@
 <?php
 
-Route::resource('profile', 'ProfileController');
+use AbuseIO\Http\Controllers\ProfileController;
 
-Route::group(
-    [
-        'prefix' => 'profile',
-        'as'     => 'profile.',
-    ],
-    function () {
-        // Access to index list
-        route::get(
-            '',
-            [
-                'middleware' => 'permission:profile_manage',
-                'as'         => 'index',
-                'uses'       => 'ProfileController@edit',
-            ]
-        );
+Route::prefix('profile')->as('profile.')->group(function () {
+    // Access to index list
+    Route::get('', [ProfileController::class, 'edit'])
+        ->middleware('permission:profile_manage')
+        ->name('index');
 
-        // Access to edit object
-        route::patch(
-            '{profile}',
-            [
-                'middleware' => 'permission:profile_manage',
-                'as'         => 'update',
-                'uses'       => 'ProfileController@update',
-            ]
-        );
-        route::put(
-            '{profile}',
-            [
-                'middleware' => 'permission:profile_manage',
-                'as'         => 'update',
-                'uses'       => 'ProfileController@update',
-            ]
-        );
-    }
-);
+    // Access to edit object
+    Route::match(['put', 'patch'], '{profile}', [ProfileController::class, 'update'])
+        ->middleware('permission:profile_manage')
+        ->name('update');
+});

@@ -1,4 +1,5 @@
 <?php
+use AbuseIO\Http\Controllers\AccountsController;
 
 Route::group(
     [
@@ -8,45 +9,15 @@ Route::group(
     ],
     function () {
         // Access to index list
-        route::get(
-            '',
-            [
-                'as'   => 'index',
-                'uses' => 'AccountsController@apiIndex',
-            ]
-        );
+        Route::get('', [AccountsController::class, 'apiIndex'])->name('index');
 
         // Access to show object
-        route::get(
-            '{accounts}',
-            [
-                'as'   => 'show',
-                'uses' => 'AccountsController@apiShow',
-            ]
-        );
+        Route::get('{accounts}', [AccountsController::class, 'apiShow'])->name('show');
 
-        Route::delete(
-            '{accounts}',
-            [
-                'as'   => 'delete',
-                'uses' => 'AccountsController@apiDestroy',
-            ]
-        );
+        Route::delete('{accounts}', [AccountsController::class, 'apiDestroy'])->name('delete');
 
-        Route::post(
-            '',
-            [
-                'as'   => 'store',
-                'uses' => 'AccountsController@apiStore',
-            ]
-        );
+        Route::post('', [AccountsController::class, 'apiStore'])->name('store');
 
-        Route::put(
-            '{accounts}',
-            [
-                'as'   => 'update',
-                'uses' => 'AccountsController@apiUpdate',
-            ]
-        );
+        Route::put('{accounts}', [AccountsController::class, 'apiUpdate'])->name('update');
     }
 );

@@ -1,10 +1,5 @@
 <?php
-
-Route::model('incidents', 'AbuseIO\Models\Incident', function () {
-    throw new \Illuminate\Database\Eloquent\ModelNotFoundException();
-});
-
-Route::resource('incidents', 'IncidentsController');
+use AbuseIO\Http\Controllers\IncidentsController;
 
 Route::group(
     [
@@ -20,7 +15,7 @@ Route::group(
             [
                 'middleware' => 'permission:incidents_create',
                 'as'         => 'create',
-                'uses'       => 'IncidentsController@create',
+                'uses'       => [IncidentsController::class, 'create'],
             ]
         );
         Route::post(
@@ -28,7 +23,7 @@ Route::group(
             [
                 'middleware' => 'permission:incidents_create',
                 'as'         => 'store',
-                'uses'       => 'IncidentsController@store',
+                'uses'       => [IncidentsController::class, 'store'],
             ]
         );
     }

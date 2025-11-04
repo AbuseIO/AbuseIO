@@ -1,4 +1,5 @@
 <?php
+use AbuseIO\Http\Controllers\DomainsController;
 
 Route::group(
     [
@@ -7,44 +8,14 @@ Route::group(
         'middleware' => ['apiaccountavailable', 'apisystemaccount'],
     ],
     function () {
-        Route::get(
-            '',
-            [
-                'as'   => 'index',
-                'uses' => 'DomainsController@apiIndex',
-            ]
-        );
+        Route::get('', [DomainsController::class, 'apiIndex'])->name('index');
 
-        Route::get(
-            '{domains}',
-            [
-                'as'   => 'show',
-                'uses' => 'DomainsController@apiShow',
-            ]
-        );
+        Route::get('{domains}', [DomainsController::class, 'apiShow'])->name('show');
 
-        Route::delete(
-            '{domains}',
-            [
-                'as'   => 'delete',
-                'uses' => 'DomainsController@apiDestroy',
-            ]
-        );
+        Route::delete('{domains}', [DomainsController::class, 'apiDestroy'])->name('delete');
 
-        Route::post(
-            '',
-            [
-                'as'   => 'store',
-                'uses' => 'DomainsController@apiStore',
-            ]
-        );
+        Route::post('', [DomainsController::class, 'apiStore'])->name('store');
 
-        Route::put(
-            '{domains}',
-            [
-                'as'   => 'update',
-                'uses' => 'DomainsController@apiUpdate',
-            ]
-        );
+        Route::put('{domains}', [DomainsController::class, 'apiUpdate'])->name('update');
     }
 );

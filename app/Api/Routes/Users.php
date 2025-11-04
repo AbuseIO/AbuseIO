@@ -1,4 +1,5 @@
 <?php
+use AbuseIO\Http\Controllers\UsersController;
 
 Route::group(
     [
@@ -8,21 +9,9 @@ Route::group(
     ],
     function () {
         // Access to index list
-        route::get(
-            '',
-            [
-                'as'   => 'index',
-                'uses' => 'UsersController@apiIndex',
-            ]
-        );
+        Route::get('', [UsersController::class, 'apiIndex'])->name('index');
 
         // Access to show object
-        route::get(
-            '{users}',
-            [
-                'as'   => 'show',
-                'uses' => 'UsersController@apiShow',
-            ]
-        );
+        Route::get('{users}', [UsersController::class, 'apiShow'])->name('show');
     }
 );

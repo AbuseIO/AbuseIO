@@ -1,4 +1,5 @@
 <?php
+use AbuseIO\Http\Controllers\BrandsController;
 
 Route::group(
     [
@@ -7,29 +8,11 @@ Route::group(
         'middleware' => ['apiaccountavailable', 'apisystemaccount'],
     ],
     function () {
-        Route::get(
-            '',
-            [
-                'as'   => 'index',
-                'uses' => 'BrandsController@apiIndex',
-            ]
-        );
+        Route::get('', [BrandsController::class, 'apiIndex'])->name('index');
 
-        Route::get(
-            '{brands}',
-            [
-                'as'   => 'show',
-                'uses' => 'BrandsController@apiShow',
-            ]
-        );
+        Route::get('{brands}', [BrandsController::class, 'apiShow'])->name('show');
 
-        Route::delete(
-            '{id}',
-            [
-                'as'   => 'delete',
-                'uses' => 'BrandsController@apiDestroy',
-            ]
-        );
+        Route::delete('{id}', [BrandsController::class, 'apiDestroy'])->name('delete');
 
         /*
          * not correct implemented
@@ -42,12 +25,6 @@ Route::group(
         );
         **/
 
-        Route::put(
-            '{brands}',
-            [
-                'as'   => 'update',
-                'uses' => 'BrandsController@apiUpdate',
-            ]
-        );
+        Route::put('{brands}', [BrandsController::class, 'apiUpdate'])->name('update');
     }
 );

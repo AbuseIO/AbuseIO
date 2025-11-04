@@ -1,4 +1,5 @@
 <?php
+use AbuseIO\Http\Controllers\NetblocksController;
 
 Route::group(
     [
@@ -7,52 +8,16 @@ Route::group(
         'middleware' => ['apiaccountavailable', 'apisystemaccount'],
     ],
     function () {
-        Route::get(
-            'search/{type}/{param}',
-            [
-                'as'   => 'search',
-                'uses' => 'NetblocksController@apiSearch',
-            ]
-        );
+        Route::get('search/{type}/{param}', [NetblocksController::class, 'apiSearch'])->name('search');
 
-        Route::get(
-            '',
-            [
-                'as'   => 'index',
-                'uses' => 'NetblocksController@apiIndex',
-            ]
-        );
+        Route::get('', [NetblocksController::class, 'apiIndex'])->name('index');
 
-        Route::get(
-            '{netblocks}',
-            [
-                'as'   => 'show',
-                'uses' => 'NetblocksController@apiShow',
-            ]
-        );
+        Route::get('{netblocks}', [NetblocksController::class, 'apiShow'])->name('show');
 
-        Route::delete(
-            '{netblocks}',
-            [
-                'as'   => 'delete',
-                'uses' => 'NetblocksController@apiDestroy',
-            ]
-        );
+        Route::delete('{netblocks}', [NetblocksController::class, 'apiDestroy'])->name('delete');
 
-        Route::post(
-            '',
-            [
-                'as'   => 'store',
-                'uses' => 'NetblocksController@apiStore',
-            ]
-        );
+        Route::post('', [NetblocksController::class, 'apiStore'])->name('store');
 
-        Route::put(
-            '{netblocks}',
-            [
-                'as'   => 'update',
-                'uses' => 'NetblocksController@apiUpdate',
-            ]
-        );
+        Route::put('{netblocks}', [NetblocksController::class, 'apiUpdate'])->name('update');
     }
 );
