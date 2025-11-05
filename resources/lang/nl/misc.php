@@ -46,6 +46,7 @@ return [
     'button.unread'     => 'Ongelezen',
     'button.activate'   => 'Activeer',
     'button.anonymize'  => 'Anonimiseer',
+    'button.logout'     => 'Uitloggen',
 
     // Miscellaneous
     'all'                           => 'Alle',
@@ -68,6 +69,7 @@ return [
     'options'                       => 'Opties',
     'optional'                      => 'Optioneel',
     'misc'                          => 'Algemeen',
+    'version'                       => 'Versie',
     'database_id'                   => 'Nr',
     'contact'                       => 'Contact',
     'description'                   => 'Omschrijving',

@@ -46,6 +46,7 @@ return [
     'button.unread'     => 'Μη αναγνωσμένο',
     'button.activate'   => 'Ενεργοποίηση',
     'button.anonymize'  => 'Anonymize',
+    'button.logout'     => 'Αποσύνδεση',
 
     // Miscellaneous
     'all'            => 'Όλα',
@@ -68,6 +69,7 @@ return [
     'options'        => 'Επιλογές',
     'optional'       => 'Προαιρετικό',
     'misc'           => 'Διάφορα',
+    'version'        => 'Έκδοση',
     'database_id'    => 'ID',
     'contact'        => 'Επαφή',
     'description'    => 'Περιγραφή',

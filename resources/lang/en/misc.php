@@ -46,6 +46,7 @@ return [
     'button.unread'     => 'Unread',
     'button.activate'   => 'Activate',
     'button.anonymize'  => 'Anonymize',
+    'button.logout'     => 'Logout',
 
     // Miscellaneous
     'all'                           => 'All',
@@ -68,6 +69,7 @@ return [
     'options'                       => 'Options',
     'optional'                      => 'Optional',
     'misc'                          => 'Miscellaneous',
+    'version'                       => 'Version',
     'database_id'                   => 'ID',
     'contact'                       => 'Contact',
     'description'                   => 'Description',
