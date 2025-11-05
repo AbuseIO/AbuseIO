@@ -5,6 +5,7 @@ namespace AbuseIO\Console\Commands\Receive;
 use AbuseIO\Jobs\AlertAdmin;
 use AbuseIO\Jobs\EmailProcess;
 use AbuseIO\Jobs\EvidenceSave;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
@@ -14,6 +15,7 @@ use Log;
  */
 class EmailCommand extends Command
 {
+    use ExitCodeHooks;
     use DispatchesJobs;
 
     /**
@@ -76,7 +78,7 @@ class EmailCommand extends Command
             );
             $this->exception($rawEmail);
 
-            return Command::FAILURE;
+            return $this->getSaveFailedExitCode();
         }
 
         if ($this->option('noqueue') == true) {
@@ -101,8 +103,8 @@ class EmailCommand extends Command
             'Successfully received the incoming e-mail'
         );
 
-        return Command::SUCCESS;
-    }
+        return $this->getSuccessExitCode();
+}
 
     /**
      * We've hit a snag, so we are gracefully killing ourselves after we contact the admin about it.

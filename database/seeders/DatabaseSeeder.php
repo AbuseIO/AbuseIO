@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             TicketsTableSeeder::class,
             EvidencesTableSeeder::class,
             EventsTableSeeder::class,
+            RolesTableSeeder::class,
             NotesTableSeeder::class,
             RolePermissionSeeder::class,
         ]);

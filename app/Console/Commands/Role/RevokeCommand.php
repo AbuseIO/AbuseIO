@@ -6,12 +6,14 @@ use AbuseIO\Models\Role;
 use AbuseIO\Models\RoleUser;
 use AbuseIO\Models\User;
 use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 
 /**
  * Class RevokeCommand.
  */
 class RevokeCommand extends Command
 {
+    use ExitCodeHooks;
     /**
      * The console command name.
      *
@@ -49,7 +51,7 @@ class RevokeCommand extends Command
         ) {
             $this->error('Missing options for role and/or user(e-mail) to select');
 
-            return Command::FAILURE;
+            return $this->getInvalidOptionExitCode();
         }
 
         /*
@@ -70,7 +72,7 @@ class RevokeCommand extends Command
             if (!is_object($role)) {
                 $this->error('Unable to find role with this criteria');
 
-                return Command::FAILURE;
+                return $this->getNotFoundExitCode();
             }
         }
 
@@ -86,7 +88,7 @@ class RevokeCommand extends Command
             if (!is_object($user)) {
                 $this->error('Unable to find user with this criteria');
 
-                return Command::FAILURE;
+                return $this->getNotFoundExitCode();
             }
         }
 
@@ -100,17 +102,17 @@ class RevokeCommand extends Command
                 'Nothing to delete, this {$role->name} role is not linked to the user {$user->email}'
             );
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
 
         if (!$roleUser->delete()) {
             $this->error('Failed to remove the role from the database');
 
-            return Command::FAILURE;
+            return $this->getDeleteFailedExitCode();
         }
 
         $this->info("The role {$role->name} has been revoked from user {$user->email}");
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 }

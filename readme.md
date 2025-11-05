@@ -1,12 +1,9 @@
 ## Version 5.0 is DEV and NOT working !
 
 TODO
-- Update all console commands to return INT not true/false with return Command::SUCCESS; or  return Command::FAILURE; (see example housekeeper)
 - TAG erors // MISSING-ABUSEIO5
 - Update composer.json legacy classmap into psr4 (but errors when done)
 - update public/js/*
-- Do updates from LTS 6.x towards 12.x (OMG)
-  TODO From 8.0 -> 9.0 NEXT
 - Check "ddeboer/data-import": "^0.20.0" (NO LONGER MAINTAINED, REMOVED PROD)
 - laminas/laminas-json (NO LONGER MAINTAINED, REMOVED PROD)
 - wpb/string-blade-compiler (NO LONGER MAINTAINED, REMOVED PROD)
@@ -17,20 +14,6 @@ TODO
 
 - jover/singleton (still works?)
 - kruisdraad/phpmailer (might need update)
-
----
-Symfony Console, which is the underlying component that powers Artisan, expects all commands to return an integer. Therefore, you should ensure that any of your commands which return a value are returning integers:
-
-public function handle()
-{
-    // Before...
-    return true;
- 
-    // After...
-    return 0;
-}
-
-
 
 ## AbuseIO - Abusemanagement tools
 

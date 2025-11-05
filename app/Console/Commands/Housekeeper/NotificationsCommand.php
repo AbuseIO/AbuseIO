@@ -4,12 +4,14 @@ namespace AbuseIO\Console\Commands\Housekeeper;
 
 use AbuseIO\Jobs\Notification;
 use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 
 /**
  * Class NotificationsCommand.
  */
 class NotificationsCommand extends Command
 {
+    use ExitCodeHooks;
     /**
      * The console command name.
      *
@@ -87,7 +89,7 @@ class NotificationsCommand extends Command
         ) {
             $this->error('Invalid or incomplete option(s) used, try --help');
 
-            return Command::FAILURE;
+            return $this->getInvalidOptionExitCode();
         }
 
         $notification = new Notification();
@@ -109,12 +111,12 @@ class NotificationsCommand extends Command
 
         if (!empty($this->option('list')) && $this->option('list') === true) {
             if (empty($notifications)) {
-                return Command::SUCCESS;
+                return $this->getSuccessExitCode();
             }
             if (!is_array($notifications)) {
                 $this->error('Error(s) received while building notifications list:'.PHP_EOL.$notifications);
 
-                return Command::FAILURE;
+                return $this->getFailureExitCode();
             }
 
             /*
@@ -147,6 +149,6 @@ class NotificationsCommand extends Command
             }
         }
 
-        return Command::SUCCESS;
-    }
+        return $this->getSuccessExitCode();
+}
 }

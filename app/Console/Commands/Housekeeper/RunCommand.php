@@ -11,6 +11,7 @@ use AbuseIO\Models\Job;
 use AbuseIO\Models\Ticket;
 use Carbon;
 use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
 use Storage;
@@ -21,6 +22,7 @@ use Validator;
  */
 class RunCommand extends Command
 {
+    use ExitCodeHooks;
     use DispatchesJobs;
 
     /**
@@ -83,7 +85,7 @@ class RunCommand extends Command
             get_class($this).': Housekeeping has completed its run'
         );
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 
     /**

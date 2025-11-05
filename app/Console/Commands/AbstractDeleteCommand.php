@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputDefinition;
  */
 abstract class AbstractDeleteCommand extends Command
 {
-    use ShowHelpWhenRunTimeExceptionOccurs;
+    use ShowHelpWhenRunTimeExceptionOccurs, ExitCodeHooks;
 
     final protected function configure()
     {
@@ -48,11 +48,11 @@ abstract class AbstractDeleteCommand extends Command
                 sprintf('Unable to find %s with this criteria', $this->getAsNoun())
             );
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
 
         if ($this->stopDeleteAndThrowAnErrorBecauseRelations($object)) {
-            return Command::FAILURE;
+            return $this->getDeleteBlockedExitCode();
         }
 
         if (!$object->delete()) {
@@ -60,14 +60,14 @@ abstract class AbstractDeleteCommand extends Command
                 sprintf('Unable to delete %s from the system', $this->getAsNoun())
             );
 
-            return Command::FAILURE;
+            return $this->getDeleteFailedExitCode();
         }
 
         $this->info(
             sprintf('The %s has been deleted from the system', $this->getAsNoun())
         );
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 
     /**
@@ -119,4 +119,6 @@ abstract class AbstractDeleteCommand extends Command
     abstract protected function getAllowedArguments();
     abstract protected function getObjectByArguments();
     abstract protected function defineInput();
+
+    // Exit code hooks now provided by ExitCodeHooks trait
 }

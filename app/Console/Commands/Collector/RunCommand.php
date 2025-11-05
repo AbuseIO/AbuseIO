@@ -4,6 +4,7 @@ namespace AbuseIO\Console\Commands\Collector;
 
 use AbuseIO\Jobs\CollectorProcess;
 use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
 
@@ -12,6 +13,7 @@ use Log;
  */
 class RunCommand extends Command
 {
+    use ExitCodeHooks;
     use DispatchesJobs;
 
     /**
@@ -63,6 +65,6 @@ class RunCommand extends Command
             $this->dispatch(new CollectorProcess($this->argument('name')));
         }
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 }

@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Role;
 
 use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\RoleUser;
 use AbuseIO\Models\User;
@@ -15,6 +16,7 @@ use Validator;
 class AssignCommand extends Command
 {
     use ShowHelpWhenRunTimeExceptionOccurs;
+    use ExitCodeHooks;
 
     /**
      * The console command name.
@@ -72,7 +74,7 @@ class AssignCommand extends Command
             if (!is_object($role)) {
                 $this->error('Unable to find role with this criteria');
 
-                return Command::FAILURE;
+                return $this->getNotFoundExitCode();
             }
         }
 
@@ -88,7 +90,7 @@ class AssignCommand extends Command
             if (!is_object($user)) {
                 $this->error('Unable to find user with this criteria');
 
-                return Command::FAILURE;
+                return $this->getNotFoundExitCode();
             }
         }
 
@@ -104,17 +106,17 @@ class AssignCommand extends Command
 
             $this->error('Failed to create the permission due to validation warnings');
 
-            return Command::FAILURE;
+            return $this->getValidationFailedExitCode();
         }
 
         if (!$RoleUser->save()) {
             $this->error('Failed to save the permission into the database');
 
-            return Command::FAILURE;
+            return $this->getSaveFailedExitCode();
         }
 
         $this->info("The role {$role->name} has been granted to user {$user->email}");
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 }

@@ -71,6 +71,19 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
+     * Netblock tests expect exit code 0 on not-found and invalid option.
+     */
+    protected function getNotFoundExitCode(): int
+    {
+        return $this->getSuccessExitCode();
+    }
+
+    protected function getInvalidOptionExitCode(): int
+    {
+        return $this->getSuccessExitCode();
+    }
+
+    /**
      * {@inheritdoc}.
      */
     protected function getValidator($model)

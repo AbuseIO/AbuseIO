@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Permission;
 
 use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Models\Permission;
 use AbuseIO\Models\PermissionRole;
 use AbuseIO\Models\Role;
@@ -15,6 +16,7 @@ use Illuminate\Console\Command;
 class RevokeCommand extends Command
 {
     use ShowHelpWhenRunTimeExceptionOccurs;
+    use ExitCodeHooks;
 
     /**
      * The console command name.
@@ -88,7 +90,7 @@ class RevokeCommand extends Command
         if (!is_object($role)) {
             $this->error('Unable to find role with this criteria');
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
 
         /*
@@ -106,7 +108,7 @@ class RevokeCommand extends Command
         if (!is_object($permission)) {
             $this->error('Unable to find permission with this criteria');
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
 
         $permissionRole = PermissionRole::all()
@@ -119,17 +121,17 @@ class RevokeCommand extends Command
                 'Nothing to delete, this {$permission->name} permission is not linked to the role {$role->name}'
             );
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
 
         if (!$permissionRole->delete()) {
             $this->error('Failed to remove the permission into the database');
 
-            return Command::FAILURE;
+            return $this->getDeleteFailedExitCode();
         }
 
         $this->info("The permission {$permission->name} has been revoked from role {$role->name}");
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 
 trait ShowHelpWhenRunTimeExceptionOccurs
 {
+    use ExitCodeHooks;
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
@@ -26,14 +27,14 @@ trait ShowHelpWhenRunTimeExceptionOccurs
             if (app()->environment('testing')) {
                 $this->line($this->getDescription());
                 echo $this->getDescription().PHP_EOL;
-                return Command::FAILURE;
+                return $this->getFailureExitCode();
             }
 
             // In normal CLI, render full help output for the command
             Artisan::call('help', ['command_name' => $this->getName()]);
             $output->write(Artisan::output());
 
-            return Command::FAILURE;
+            return $this->getFailureExitCode();
         }
     }
 }

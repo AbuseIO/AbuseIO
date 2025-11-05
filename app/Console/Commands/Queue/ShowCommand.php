@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Queue;
 
 use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Models\Job;
 use Illuminate\Console\Command;
 
@@ -12,6 +13,7 @@ use Illuminate\Console\Command;
 class ShowCommand extends Command
 {
     use ShowHelpWhenRunTimeExceptionOccurs;
+    use ExitCodeHooks;
 
     /**
      * The console command name.
@@ -48,7 +50,7 @@ class ShowCommand extends Command
                 'No matching queue was found.'
             );
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
 
         $this->table(
@@ -56,7 +58,7 @@ class ShowCommand extends Command
             $this->transformListToTableBody($jobs)
         );
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 
     /**

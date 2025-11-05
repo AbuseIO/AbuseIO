@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputOption;
  */
 abstract class AbstractShowCommand extends Command
 {
-    use ShowHelpWhenRunTimeExceptionOccurs;
+    use ShowHelpWhenRunTimeExceptionOccurs, ExitCodeHooks;
 
     /**
      * Configure the console command.
@@ -49,6 +49,8 @@ abstract class AbstractShowCommand extends Command
             $this->error(
                 sprintf('No matching %s was found.', $this->getAsNoun())
             );
+
+            return $this->getNotFoundExitCode();
         } elseif ($this->option('json')) {
             echo $object->toJson();
         } else {
@@ -58,7 +60,7 @@ abstract class AbstractShowCommand extends Command
             );
         }
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 
     /**
@@ -157,5 +159,11 @@ abstract class AbstractShowCommand extends Command
         }
 
         return $rows;
+    }
+
+    // Not-found in show context should still be a successful exit
+    protected function getNotFoundExitCode(): int
+    {
+        return $this->getSuccessExitCode();
     }
 }

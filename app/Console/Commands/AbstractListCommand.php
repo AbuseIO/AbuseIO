@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
  */
 abstract class AbstractListCommand extends Command
 {
+    use ExitCodeHooks;
     protected $headers = [];
 
     protected $filterArguments = [];
@@ -112,6 +113,9 @@ abstract class AbstractListCommand extends Command
             $this->error(
                 sprintf('No %s found for given filter.', $this->getAsNoun())
             );
+
+            // Allow subclasses to customize exit codes for not-found filter.
+            return $this->getNotFoundExitCode();
         }
         if ($this->option('json')) {
             /* the juggling from and to json is a way of ensuring pretty_print */
@@ -123,7 +127,7 @@ abstract class AbstractListCommand extends Command
             );
         }
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 
     /**
@@ -149,4 +153,10 @@ abstract class AbstractListCommand extends Command
      * @return string
      */
     abstract protected function getAsNoun();
+
+    // Not-found in list context should still be a successful exit
+    protected function getNotFoundExitCode(): int
+    {
+        return $this->getSuccessExitCode();
+    }
 }

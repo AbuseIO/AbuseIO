@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\ContactNotificationMethod;
 
 use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Models\Contact;
 use AbuseIO\Services\NotificationService;
 use Illuminate\Console\Command;
@@ -13,6 +14,7 @@ use Illuminate\Console\Command;
 class AssignCommand extends Command
 {
     use ShowHelpWhenRunTimeExceptionOccurs;
+    use ExitCodeHooks;
 
     /**
      * The console command name.
@@ -51,7 +53,7 @@ class AssignCommand extends Command
         ) {
             throw new \RuntimeException('Missing options for the notification method and/or contact (e-mail) to select');
 
-            return false;
+            return $this->getInvalidOptionExitCode();
         }
 
         $method = false;
@@ -80,16 +82,16 @@ class AssignCommand extends Command
         if (!is_object($contact)) {
             $this->error('Unable to find contact with this contact info');
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
         if ($method === false) {
             $this->error('Unable to find method with this method name');
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
         $contact->addNotificationMethod(['method' => $method]);
         $this->info("The notification method {$method} has been granted to contact {$contact->email}");
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 }

@@ -3,15 +3,12 @@
 namespace tests\Helpers;
 
 use tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class getDomainTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider getSet
-     */
-    public function it_should_test_getDomain($domain, $expectedResult)
+    #[DataProvider('getSet')]
+    public function testGetDomain($domain, $expectedResult)
     {
         $this->assertEquals($expectedResult, getDomain($domain));
     }

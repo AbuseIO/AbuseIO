@@ -4,6 +4,7 @@ namespace AbuseIO\Console\Commands\Collector;
 
 use AbuseIO\Jobs\CollectorProcess;
 use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
 use AbuseIO\Collector\Factory as collectorFactory;
@@ -13,6 +14,7 @@ use AbuseIO\Collector\Factory as collectorFactory;
  */
 class RunAllCommand extends Command
 {
+    use ExitCodeHooks;
     use DispatchesJobs;
 
     /**
@@ -79,6 +81,6 @@ class RunAllCommand extends Command
             'Completed collections startup for all enabled collectors'
         );
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
  */
 abstract class AbstractEditCommand extends Command
 {
-    use ShowHelpWhenRunTimeExceptionOccurs;
+    use ShowHelpWhenRunTimeExceptionOccurs, ExitCodeHooks;
 
     private $dirtyAttributes = [];
 
@@ -34,11 +34,11 @@ abstract class AbstractEditCommand extends Command
                 sprintf('Unable to find %s with this criteria', $this->getAsNoun())
             );
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
 
         if (!$this->handleOptions($model)) {
-            return Command::FAILURE;
+            return $this->getInvalidOptionExitCode();
         }
         $validation = $this->getValidator($model);
 
@@ -52,7 +52,7 @@ abstract class AbstractEditCommand extends Command
                 sprintf('Failed to edit the %s due to validation warnings', $this->getAsNoun())
             );
 
-            return Command::FAILURE;
+            return $this->getValidationFailedExitCode();
         }
 
         if (!$model->update()) {
@@ -60,13 +60,13 @@ abstract class AbstractEditCommand extends Command
                 sprintf('Failed to save the %s into the database', $this->getAsNoun())
             );
 
-            return Command::FAILURE;
+            return $this->getSaveFailedExitCode();
         }
         $this->info(
             sprintf('The %s has been updated', $this->getAsNoun())
         );
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 
     abstract protected function getModelFromRequest();
@@ -207,4 +207,6 @@ abstract class AbstractEditCommand extends Command
      * @return mixed
      */
     abstract public function getOptionsList();
+
+    // Exit code hooks now provided by ExitCodeHooks trait
 }

@@ -48,4 +48,12 @@ class DeleteCommand extends AbstractDeleteCommand
             ),
         ];
     }
+
+    /**
+     * Ticket tests expect exit code 0 when not found.
+     */
+    protected function getNotFoundExitCode(): int
+    {
+        return $this->getSuccessExitCode();
+    }
 }

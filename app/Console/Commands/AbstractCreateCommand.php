@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputDefinition;
  */
 abstract class AbstractCreateCommand extends Command
 {
-    use ShowHelpWhenRunTimeExceptionOccurs;
+    use ShowHelpWhenRunTimeExceptionOccurs, ExitCodeHooks;
 
     /**
      * Create a new command instance.
@@ -87,7 +87,7 @@ abstract class AbstractCreateCommand extends Command
                 sprintf('Failed to create the %s due to validation warnings', $this->getAsNoun())
             );
 
-            return Command::FAILURE;
+            return $this->getValidationFailedExitCode();
         }
 
         if (!$model->save()) {
@@ -95,7 +95,7 @@ abstract class AbstractCreateCommand extends Command
                 sprintf('Failed to save the %s into the database', $this->getAsNoun())
             );
 
-            return Command::FAILURE;
+            return $this->getSaveFailedExitCode();
         }
         $msg = sprintf('The %s has been created', $this->getAsNoun());
         if (array_key_exists('id', $model->getAttributes())) {
@@ -103,11 +103,13 @@ abstract class AbstractCreateCommand extends Command
         }
         $this->info($msg);
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 
     abstract public function getArgumentsList();
     abstract protected function getModelFromRequest();
     abstract protected function getValidator($model);
     abstract protected function getAsNoun();
+
+    // Exit code hooks now provided by ExitCodeHooks trait
 }

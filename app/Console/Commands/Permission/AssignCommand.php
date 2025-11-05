@@ -6,6 +6,7 @@ use AbuseIO\Models\Permission;
 use AbuseIO\Models\PermissionRole;
 use AbuseIO\Models\Role;
 use Illuminate\Console\Command;
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use Validator;
 
 /**
@@ -13,6 +14,7 @@ use Validator;
  */
 class AssignCommand extends Command
 {
+    use ExitCodeHooks;
     /**
      * The console command name.
      *
@@ -50,7 +52,7 @@ class AssignCommand extends Command
         ) {
             $this->error('Missing options for role and/or permission to select, try --help');
 
-            return Command::FAILURE;
+            return $this->getInvalidOptionExitCode();
         }
 
         /*
@@ -69,7 +71,7 @@ class AssignCommand extends Command
         if (!is_object($role)) {
             $this->error('Unable to find role with this criteria');
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
 
         /*
@@ -87,7 +89,7 @@ class AssignCommand extends Command
         if (!is_object($permission)) {
             $this->error('Unable to find permission with this criteria');
 
-            return Command::FAILURE;
+            return $this->getNotFoundExitCode();
         }
 
         $permissionRole = new PermissionRole();
@@ -102,17 +104,17 @@ class AssignCommand extends Command
 
             $this->error('Failed to create the permission due to validation warnings');
 
-            return Command::FAILURE;
+            return $this->getValidationFailedExitCode();
         }
 
         if (!$permissionRole->save()) {
             $this->error('Failed to save the permission into the database');
 
-            return Command::FAILURE;
+            return $this->getSaveFailedExitCode();
         }
 
         $this->info("The permission {$permission->name} has been granted to role {$role->name}");
 
-        return Command::SUCCESS;
+        return $this->getSuccessExitCode();
     }
 }

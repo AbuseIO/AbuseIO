@@ -20,7 +20,7 @@ class NotificationTest extends TestCase
     }
 
     /** @test */
-    public function there_is_no_notifications_key_in_config()
+    public function testThereIsNoNotificationsKeyInConfig()
     {
         unset(app()['config']['notifications']);
 

@@ -32,7 +32,41 @@ class ShowCommand extends AbstractShowCommand
      */
     protected function getFields()
     {
-        return ['first_ip', 'last_ip', 'description', 'enabled'];
+        // Show actual Domain attributes instead of Netblock fields
+        return ['id', 'contact', 'name', 'enabled'];
+    }
+
+    /**
+     * {@inherit docs}.
+     */
+    protected function transformObjectToTableBody($model)
+    {
+        $rows = [];
+
+        // Id
+        $rows[] = ['Id', $model->id];
+
+        // Contact displayed as reference and/or email
+        $contactText = '';
+        if ($model->contact) {
+            $parts = [];
+            if (!empty($model->contact->reference)) {
+                $parts[] = $model->contact->reference;
+            }
+            if (!empty($model->contact->email)) {
+                $parts[] = $model->contact->email;
+            }
+            $contactText = implode(' / ', $parts);
+        }
+        $rows[] = ['Contact', $contactText];
+
+        // Name
+        $rows[] = ['Name', $model->name];
+
+        // Enabled
+        $rows[] = ['Enabled', $model->enabled];
+
+        return $rows;
     }
 
     /**
