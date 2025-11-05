@@ -1,18 +1,18 @@
 echo reinstall
 php artisan db:wipe
 rm -rf composer.lock vendor
-composer install
+sudo -u abuseio composer --working-dir=/opt/abuseio install
 php artisan key:generate
 php artisan migrate
 
 echo caches
 rm -rf bootstrap/cache/*.php
-composer clear-cache
-php artisan cache:clear
-php artisan config:clear
-php artisan view:clear
-php artisan route:clear
-composer dump-autoload
+sudo -u abuseio composer --working-dir=/opt/abuseio clear-cache
+sudo -u abuseio php /opt/abuseio/artisan cache:clear
+sudo -u abuseio php /opt/abuseio/artisan config:clear
+sudo -u abuseio php /opt/abuseio/artisan view:clear
+sudo -u abuseio php /opt/abuseio/artisan route:clear
+sudo -u abuseio composer --working-dir=/opt/abuseio dump-autoload
 
 echo restart services
 sudo systemctl restart abuseio_queue_collector
@@ -20,6 +20,6 @@ sudo systemctl restart abuseio_queue_email_incoming
 sudo systemctl restart abuseio_queue_email_outgoing
 sudo systemctl restart abuseio_queue_delegation
 
-php artisan user:create admin@isp.local --password=password
-php artisan role:assign --role=admin --user=admin@isp.local
+sudo -u abuseio php /opt/abuseio/artisan user:create admin@isp.local --password=password
+sudo -u abuseio php /opt/abuseio/artisan role:assign --role=admin --user=admin@isp.local
 
