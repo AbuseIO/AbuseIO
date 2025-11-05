@@ -3,14 +3,14 @@
 namespace AbuseIO\Console\Commands;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputDefinition;
 
 /**
  * Class AbstractCreateCommand.
  */
 abstract class AbstractCreateCommand extends Command
 {
-    use ShowHelpWhenRunTimeExceptionOccurs, ExitCodeHooks;
+    use ShowHelpWhenRunTimeExceptionOccurs;
+    use ExitCodeHooks;
 
     /**
      * Create a new command instance.
@@ -107,8 +107,11 @@ abstract class AbstractCreateCommand extends Command
     }
 
     abstract public function getArgumentsList();
+
     abstract protected function getModelFromRequest();
+
     abstract protected function getValidator($model);
+
     abstract protected function getAsNoun();
 
     // Exit code hooks now provided by ExitCodeHooks trait

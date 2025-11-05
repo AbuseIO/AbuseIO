@@ -42,12 +42,14 @@ class BrandFormRequest extends Request
                 if ($this->wantsJson()) {
                     return $this->filterRulesForPresentFields($rules);
                 }
+
                 return $rules;
             case 'PATCH':
                 $rules = Brand::updateRules($this);
                 if ($this->wantsJson()) {
                     return $this->filterRulesForPresentFields($rules);
                 }
+
                 return $rules;
             default:
                 break;

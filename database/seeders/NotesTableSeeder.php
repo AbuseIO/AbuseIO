@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use DateTime;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use DateTime;
 
 class NotesTableSeeder extends Seeder
 {

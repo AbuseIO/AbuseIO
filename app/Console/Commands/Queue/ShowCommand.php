@@ -2,8 +2,8 @@
 
 namespace AbuseIO\Console\Commands\Queue;
 
-use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Console\Commands\ExitCodeHooks;
+use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Job;
 use Illuminate\Console\Command;
 

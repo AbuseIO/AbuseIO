@@ -2,10 +2,9 @@
 
 namespace AbuseIO\Console\Commands\App;
 
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use AbuseIO\Console\Commands\ExitCodeHooks;
 
 /**
  * Class InstallationID.

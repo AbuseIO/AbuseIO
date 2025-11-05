@@ -66,6 +66,7 @@ class NotesController extends Controller
         $redirectUrl = route('admin.tickets.show', $noteForm->ticket_id);
         // Preserve Communication tab active state
         $redirectUrl .= '#communication';
+
         return Redirect::to($redirectUrl)
             ->with('message', 'A new note for this ticket has been created');
     }
@@ -138,7 +139,7 @@ class NotesController extends Controller
      * Update the specified resource in storage.
      *
      * @param NoteFormRequest $noteForm
-     * @param Note $notes
+     * @param Note            $notes
      *
      * @return \Illuminate\Http\Response
      */
@@ -166,7 +167,7 @@ class NotesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param NoteFormRequest $noteForm
-     * @param Note $notes
+     * @param Note            $notes
      *
      * @return \Illuminate\Http\Response
      */

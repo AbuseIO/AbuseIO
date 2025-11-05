@@ -2,11 +2,11 @@
 
 namespace AbuseIO\Console\Commands\Role;
 
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\RoleUser;
 use AbuseIO\Models\User;
 use Illuminate\Console\Command;
-use AbuseIO\Console\Commands\ExitCodeHooks;
 
 /**
  * Class RevokeCommand.

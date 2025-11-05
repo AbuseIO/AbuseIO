@@ -4,8 +4,8 @@ namespace AbuseIO\Models;
 
 use AbuseIO\Traits\InstanceComparable;
 use DB;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 

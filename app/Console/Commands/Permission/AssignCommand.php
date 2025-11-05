@@ -2,11 +2,11 @@
 
 namespace AbuseIO\Console\Commands\Permission;
 
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Models\Permission;
 use AbuseIO\Models\PermissionRole;
 use AbuseIO\Models\Role;
 use Illuminate\Console\Command;
-use AbuseIO\Console\Commands\ExitCodeHooks;
 use Validator;
 
 /**

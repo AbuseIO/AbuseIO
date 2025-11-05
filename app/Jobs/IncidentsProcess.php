@@ -93,6 +93,7 @@ class IncidentsProcess extends Job
         );
 
         $this->lastErrorMessage = '';
+
         return true;
     }
 

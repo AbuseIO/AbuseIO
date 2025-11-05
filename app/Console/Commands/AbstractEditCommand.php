@@ -9,7 +9,8 @@ use Illuminate\Console\Command;
  */
 abstract class AbstractEditCommand extends Command
 {
-    use ShowHelpWhenRunTimeExceptionOccurs, ExitCodeHooks;
+    use ShowHelpWhenRunTimeExceptionOccurs;
+    use ExitCodeHooks;
 
     private $dirtyAttributes = [];
 
@@ -70,8 +71,11 @@ abstract class AbstractEditCommand extends Command
     }
 
     abstract protected function getModelFromRequest();
+
     abstract protected function handleOptions($model);
+
     abstract protected function getValidator($model);
+
     abstract public function getAsNoun();
 
     /**

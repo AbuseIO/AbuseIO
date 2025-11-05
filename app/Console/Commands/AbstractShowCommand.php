@@ -12,7 +12,8 @@ use Symfony\Component\Console\Input\InputOption;
  */
 abstract class AbstractShowCommand extends Command
 {
-    use ShowHelpWhenRunTimeExceptionOccurs, ExitCodeHooks;
+    use ShowHelpWhenRunTimeExceptionOccurs;
+    use ExitCodeHooks;
 
     /**
      * Configure the console command.

@@ -1,24 +1,23 @@
 <?php
 
 use AbuseIO\Http\Controllers\AccountsController;
-use AbuseIO\Http\Controllers\AshLinksController;
+use AbuseIO\Http\Controllers\AnalyticsController;
 use AbuseIO\Http\Controllers\AshController;
 use AbuseIO\Http\Controllers\Auth\LoginController;
+use AbuseIO\Http\Controllers\BrandsController;
 use AbuseIO\Http\Controllers\ContactsController;
 use AbuseIO\Http\Controllers\DomainsController;
 use AbuseIO\Http\Controllers\EventsController;
+use AbuseIO\Http\Controllers\EvidenceController;
+use AbuseIO\Http\Controllers\GdprController;
+use AbuseIO\Http\Controllers\IncidentsController;
+use AbuseIO\Http\Controllers\LocaleController;
 use AbuseIO\Http\Controllers\NetblocksController;
 use AbuseIO\Http\Controllers\NotesController;
+use AbuseIO\Http\Controllers\ProfileController;
 use AbuseIO\Http\Controllers\SearchController;
 use AbuseIO\Http\Controllers\TicketsController;
 use AbuseIO\Http\Controllers\UsersController;
-use AbuseIO\Http\Controllers\BrandsController;
-use AbuseIO\Http\Controllers\IncidentsController;
-use AbuseIO\Http\Controllers\ProfileController;
-use AbuseIO\Http\Controllers\LocaleController;
-use AbuseIO\Http\Controllers\EvidenceController;
-use AbuseIO\Http\Controllers\AnalyticsController;
-use AbuseIO\Http\Controllers\GdprController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -114,7 +113,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('contacts/{contacts}', [ContactsController::class, 'destroy'])->middleware('permission:contacts_delete')->name('contacts.destroy');
         Route::get('contacts/export/{format}', [ContactsController::class, 'export'])->middleware('permission:contacts_export')->name('contacts.export');
         Route::post('contacts/{contacts}/gdpr', [GdprController::class, 'anonymize'])->middleware('permission:contacts_edit')->name('contacts.gdpr');
-        
+
         /*
          * Netblocks
          */

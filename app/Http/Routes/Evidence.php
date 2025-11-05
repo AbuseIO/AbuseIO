@@ -1,5 +1,7 @@
 <?php
+
 use AbuseIO\Http\Controllers\EvidenceController;
+
 // Model binding is centralized in RouteServiceProvider
 
 Route::group(

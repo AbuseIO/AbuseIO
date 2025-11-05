@@ -2,9 +2,9 @@
 
 namespace AbuseIO\Console\Commands\Collector;
 
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Jobs\CollectorProcess;
 use Illuminate\Console\Command;
-use AbuseIO\Console\Commands\ExitCodeHooks;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
 

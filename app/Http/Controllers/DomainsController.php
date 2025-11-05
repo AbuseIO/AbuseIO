@@ -3,7 +3,6 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\DomainFormRequest;
-use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
 use AbuseIO\Traits\Api;

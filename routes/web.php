@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use AbuseIO\Http\Controllers\Auth\LoginController;
-use AbuseIO\Http\Controllers\LocaleController;
-use AbuseIO\Http\Controllers\BrandsController;
 use AbuseIO\Http\Controllers\AshController;
+use AbuseIO\Http\Controllers\Auth\LoginController;
+use AbuseIO\Http\Controllers\BrandsController;
+use AbuseIO\Http\Controllers\LocaleController;
+use Illuminate\Support\Facades\Route;
 
 // Migrate legacy app/Http/routes.php content into modern routes/web.php
 // Keep existing namespaces by importing controllers via FQCN or relying on RouteServiceProvider namespace.

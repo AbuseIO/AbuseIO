@@ -2,8 +2,8 @@
 
 namespace tests;
 
-use AbuseIO\Models\User;
 use AbuseIO\Models\Role;
+use AbuseIO\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
