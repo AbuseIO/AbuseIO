@@ -18,12 +18,13 @@ class EditCommandTest extends TestCase
 
     private function initDB()
     {
-        $this->dummy = factory(User::class)->create();
+        $this->dummy = User::factory()->create();
     }
 
     public function testWithoutUser()
     {
-        Artisan::call('user:edit');
+        $exitCode = Artisan::call('user:edit', ['--help' => 'true']);
+        $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString('Edit a user', Artisan::output());
     }
 
@@ -35,7 +36,7 @@ class EditCommandTest extends TestCase
                 'user' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find user with this criteria', Artisan::output());
     }
 

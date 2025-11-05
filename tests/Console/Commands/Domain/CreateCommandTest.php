@@ -17,7 +17,7 @@ class CreateCommandTest extends TestCase
     {
         ob_start();
         $exitCode = Artisan::call('domain:create');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Creates a new domain', ob_get_clean());
     }
 

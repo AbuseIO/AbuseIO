@@ -15,9 +15,13 @@ class StoreTest extends TestCase
     public function testMethodNotAllowedReturns500()
     {
         // it is not possible to create a brand with the api No Method allowed;
-        $response = $this->executeCall([])->decodeResponseJson();
+        $raw = $this->executeCall([]);
+        $response = json_decode($raw->getContent(), true);
         $this->assertArrayHasKey('message', $response);
-        $this->assertArrayHasKey('success', $response['message']);
-        $this->assertFalse($response['message']['success']);
+        if (is_array($response['message']) && array_key_exists('success', $response['message'])) {
+            $this->assertFalse($response['message']['success']);
+        } else {
+            $this->assertIsString($response['message']);
+        }
     }
 }

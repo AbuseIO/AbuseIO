@@ -13,10 +13,10 @@ class ApiVersionTest extends TestCase
     public function testApiVersionCall()
     {
         $this->executeCall();
-
-        $response = json_decode($this->content);
-
-        $this->assertEquals($response->version, 'v1');
+        $response = json_decode($this->content, true);
+        $this->assertIsArray($response);
+        $this->assertArrayHasKey('version', $response);
+        $this->assertEquals('v1', $response['version']);
     }
 
     protected function executeCall()

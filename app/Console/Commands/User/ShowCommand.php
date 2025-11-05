@@ -71,10 +71,11 @@ class ShowCommand extends AbstractShowCommand
     protected function transformObjectToTableBody($model)
     {
         $result = parent::transformObjectToTableBody($model);
-
-        $result = $this->hideProperty($result, 'Password');
-        $result = $this->hideProperty($result, 'Account id');
-        $result = $this->hideProperty($result, 'Remember token');
+        // filter sensitive or redundant fields if present
+        $result = array_filter($result, function ($row) {
+            $field = $row[0];
+            return !in_array($field, ['Password', 'Account id', 'Remember token']);
+        });
 
         $result[] = ['Account', $model->account->name];
 
