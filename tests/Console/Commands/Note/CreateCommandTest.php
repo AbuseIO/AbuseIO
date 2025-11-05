@@ -43,7 +43,7 @@ class CreateCommandTest extends TestCase
     {
         ob_start();
         $exitCode = Artisan::call('note:create');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Creates a new note', ob_get_clean());
     }
 }

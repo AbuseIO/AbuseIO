@@ -4,6 +4,7 @@ namespace tests\Api\Account;
 
 use AbuseIO\Models\Account;
 use AbuseIO\Models\User;
+use AbuseIO\Models\Role;
 use tests\Api\DestroyTestHelper;
 use tests\TestCase;
 
@@ -16,6 +17,13 @@ class DestroyTest extends TestCase
     public function initWithValidResponse()
     {
         $user = User::find(1);
+        if (is_null($user)) {
+            $user = User::factory()->create(['account_id' => 1]);
+            $adminRole = Role::find(1);
+            if ($adminRole) {
+                $user->roles()->syncWithoutDetaching([$adminRole->id]);
+            }
+        }
 
         $account = Account::factory()->create();
 
@@ -39,6 +47,13 @@ class DestroyTest extends TestCase
     public function testWithUndeleteable()
     {
         $user = User::find(1);
+        if (is_null($user)) {
+            $user = User::factory()->create(['account_id' => 1]);
+            $adminRole = Role::find(1);
+            if ($adminRole) {
+                $user->roles()->syncWithoutDetaching([$adminRole->id]);
+            }
+        }
 
         $response = $this->actingAs($user)->call('DELETE', self::getURLWithId(1));
 
@@ -59,6 +74,13 @@ class DestroyTest extends TestCase
     public function initWithInvalidResponse()
     {
         $user = User::find(1);
+        if (is_null($user)) {
+            $user = User::factory()->create(['account_id' => 1]);
+            $adminRole = Role::find(1);
+            if ($adminRole) {
+                $user->roles()->syncWithoutDetaching([$adminRole->id]);
+            }
+        }
 
         $server = $this->transformHeadersToServerVars(
             [

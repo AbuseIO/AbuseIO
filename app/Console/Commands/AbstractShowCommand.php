@@ -152,9 +152,10 @@ abstract class AbstractShowCommand extends Command
                     $value = json_encode($value);
                 }
             }
-            $rows[] = [$field, $value];
+            $heading = ucfirst(str_replace('_', ' ', $field));
+            $rows[] = [$heading, $value];
         }
-    
+
         return $rows;
     }
 }

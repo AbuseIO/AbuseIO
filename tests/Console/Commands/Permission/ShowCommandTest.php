@@ -59,7 +59,7 @@ class ShowCommandTest extends TestCase
     public function testWithoutArguments()
     {
         $exitCode = Artisan::call('permission:show');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Shows a permission', Artisan::output());
     }
 }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use AbuseIO\Models\Ticket;
+use Illuminate\Support\Facades\Config;
 use DateTime;
 
 class TicketsTableSeeder extends Seeder
@@ -96,6 +97,18 @@ class TicketsTableSeeder extends Seeder
                 'updated_at'                    => new DateTime(),
             ],
         ];
+
+        // Generate ash tokens so ASH public endpoints can be accessed in tests
+        $salt = Config::get('app.key');
+        foreach ($tickets as &$t) {
+            $ipRef = $t['ip_contact_reference'] ?? '';
+            $domainRef = $t['domain_contact_reference'] ?? '';
+            $domain = $t['domain'] ?? '';
+
+            $t['ash_token_ip'] = md5($salt.rand().$t['ip'].$ipRef);
+            $t['ash_token_domain'] = md5($salt.rand().$domain.$domainRef);
+        }
+        unset($t);
 
         DB::table('tickets')->insert($tickets);
     }

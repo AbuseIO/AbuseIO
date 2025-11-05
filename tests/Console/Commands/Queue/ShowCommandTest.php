@@ -52,15 +52,14 @@ class ShowCommandTest extends TestCase
                 'queue' => 'xxx',
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals($exitCode, 1);
         $this->assertStringContainsString('No matching queue was found.', Artisan::output());
     }
 
     public function testWithoutArguments()
     {
         $exitCode = Artisan::call('queue:show');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Shows a queue', Artisan::output());
     }
 }

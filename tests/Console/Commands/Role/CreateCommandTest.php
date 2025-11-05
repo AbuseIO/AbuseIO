@@ -30,17 +30,22 @@ class CreateCommandTest extends TestCase
         $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString('created', Artisan::output());
 
+        // Detach permissions before hard-deleting to avoid FK constraint violations
         Role::where([
             'name'        => $dummy->name,
             'description' => $dummy->description,
-        ])->forceDelete();
+        ])->get()->each(function (Role $role) {
+            $role->permissions()->detach();
+            $role->forceDelete();
+        });
     }
 
     public function testWithoutParams()
     {
         ob_start();
         $exitCode = Artisan::call('role:create');
-        $this->assertEquals(0, $exitCode);
+        // The command shows help via the runtime-exception helper and returns failure
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Creates a new role', ob_get_clean());
     }
 }

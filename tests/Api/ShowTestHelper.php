@@ -30,6 +30,10 @@ trait ShowTestHelper
     public function initWithValidResponse()
     {
         $user = User::find(1);
+        if (is_null($user)) {
+            // Ensure a valid authenticatable user exists for API tests
+            $user = User::factory()->create(['account_id' => 1]);
+        }
         $server = $this->transformHeadersToServerVars(
             [
                 'Accept'      => 'application/json',
@@ -77,6 +81,10 @@ trait ShowTestHelper
     public function initWithInvalidResponse()
     {
         $user = User::find(1);
+        if (is_null($user)) {
+            // Ensure a valid authenticatable user exists for API tests
+            $user = User::factory()->create(['account_id' => 1]);
+        }
         $account = $user->account;
 
         $server = $this->transformHeadersToServerVars(

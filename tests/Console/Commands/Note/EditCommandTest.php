@@ -44,7 +44,7 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals($exitCode, 1);
         $this->assertStringContainsString('Unable to find note with this criteria', Artisan::output());
     }
 

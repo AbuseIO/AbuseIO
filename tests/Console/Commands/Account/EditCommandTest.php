@@ -37,7 +37,7 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals($exitCode, 1);
         $this->assertStringContainsString('Unable to find account with this criteria', Artisan::output());
     }
 
@@ -50,7 +50,7 @@ class EditCommandTest extends TestCase
                 '--brand_id' => '1000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals($exitCode, 1);
         $this->assertStringContainsString('Unable to find brand with this criteria', Artisan::output());
     }
 

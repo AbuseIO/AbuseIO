@@ -1,5 +1,30 @@
 #!/bin/bash
-rm storage/logs/laravel*.log
-php artisan migrate:fresh --seed
+set -euo pipefail
+
+# Prevent running tests in production environment
+ENVIRONMENT="${APP_ENV:-}"
+
+# Try to infer environment from .env if not set
+if [[ -z "$ENVIRONMENT" && -f .env ]]; then
+  if grep -qE '^APP_ENV=production' .env; then
+    ENVIRONMENT="production"
+  fi
+fi
+
+# Fallback: ask Artisan what the environment is
+if [[ -z "$ENVIRONMENT" ]]; then
+  ARTISAN_ENV_OUTPUT=$(php artisan env 2>/dev/null || true)
+  if echo "$ARTISAN_ENV_OUTPUT" | grep -qi 'production'; then
+    ENVIRONMENT="production"
+  fi
+fi
+
+if [[ "${ENVIRONMENT,,}" == "production" ]]; then
+  echo "Refusing to run unit tests in production environment."
+  exit 1
+fi
+
+# Do not delete logs; keep environment side effects minimal during tests
+php artisan migrate:fresh --seed --no-interaction
 vendor/bin/phpunit
 extra/notifier-samples/runall

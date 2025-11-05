@@ -57,4 +57,17 @@ class ShowCommand extends AbstractShowCommand
             ),
         ];
     }
+
+    /**
+     * {@inheritdoc}.
+     */
+    protected function transformObjectToTableBody($model)
+    {
+        return [
+            ['Id', $model->id],
+            ['Name', $model->name],
+            ['Company name', $model->company_name],
+            ['Introduction text', $model->introduction_text],
+        ];
+    }
 }

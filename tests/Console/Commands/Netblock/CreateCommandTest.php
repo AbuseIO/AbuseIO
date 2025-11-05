@@ -45,7 +45,7 @@ class CreateCommandTest extends TestCase
     {
         ob_start();
         $exitCode = Artisan::call('netblock:create');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Creates a new netblock', ob_get_clean());
     }
 
@@ -58,7 +58,7 @@ class CreateCommandTest extends TestCase
                 'contact' => '1',
             ]
         );
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Creates a new netblock', ob_get_clean());
     }
 }

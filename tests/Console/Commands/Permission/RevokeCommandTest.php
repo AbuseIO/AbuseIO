@@ -13,7 +13,7 @@ class RevokeCommandTest extends TestCase
     public function testWithoutArguments()
     {
         $exitCode = Artisan::call('permission:revoke');
-        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Revokes a permission from a role', Artisan::output());
     }
 }

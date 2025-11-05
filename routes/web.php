@@ -21,6 +21,11 @@ Route::get('auth/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Include modular route files under unified admin group
 Route::prefix('admin')->middleware(['web', 'auth', 'permission:login_portal'])->as('admin.')->group(function () {
+    // Redirect admin root to admin home
+    Route::get('/', function () {
+        return redirect('/admin/home');
+    });
+
     // Admin home
     Route::get('/home', function () {
         return view('home');

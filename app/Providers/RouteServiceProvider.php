@@ -43,6 +43,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('users', \AbuseIO\Models\User::class);
         Route::model('brands', \AbuseIO\Models\Brand::class);
         Route::model('accounts', \AbuseIO\Models\Account::class);
+        Route::model('notes', \AbuseIO\Models\Note::class);
 
         parent::boot();
     }

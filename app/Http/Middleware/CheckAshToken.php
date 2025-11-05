@@ -23,8 +23,9 @@ class CheckAshToken
      */
     public function handle($request, Closure $next)
     {
-        $ticketID = $request->ticketID;
-        $token = $request->token;
+        // Read parameters from the route to be compatible across Laravel versions
+        $ticketID = $request->route('ticketID');
+        $token = $request->route('token');
 
         $ticket = Ticket::find($ticketID);
 

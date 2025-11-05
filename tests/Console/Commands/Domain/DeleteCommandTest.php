@@ -36,7 +36,7 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals($exitCode, 1);
         $this->assertStringContainsString('Unable to find domain', Artisan::output());
     }
 }

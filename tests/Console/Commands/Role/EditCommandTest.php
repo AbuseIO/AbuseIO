@@ -16,8 +16,10 @@ class EditCommandTest extends TestCase
 
     public function testWithoutId()
     {
+        ob_start();
         Artisan::call('role:edit');
-        $this->assertStringContainsString('Edit a role', Artisan::output());
+        $output = ob_get_clean();
+        $this->assertStringContainsString('Edit a role', $output);
     }
 
     public function testWithInvalidId()
@@ -28,7 +30,7 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find role with this criteria', Artisan::output());
     }
 

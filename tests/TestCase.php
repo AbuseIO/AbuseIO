@@ -3,6 +3,7 @@
 namespace tests;
 
 use AbuseIO\Models\User;
+use AbuseIO\Models\Role;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
@@ -32,6 +33,14 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
         $this->user = User::find($this->userId);
+        if (is_null($this->user)) {
+            // Ensure a valid authenticatable admin user exists tied to system account
+            $this->user = User::factory()->create(['account_id' => 1]);
+            $adminRole = Role::find(1);
+            if ($adminRole) {
+                $this->user->roles()->syncWithoutDetaching([$adminRole->id]);
+            }
+        }
 
         return $app;
     }

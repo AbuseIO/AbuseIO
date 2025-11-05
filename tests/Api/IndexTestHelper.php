@@ -3,6 +3,7 @@
 namespace tests\Api;
 
 use AbuseIO\Models\User;
+use AbuseIO\Models\Account;
 
 trait IndexTestHelper
 {
@@ -61,11 +62,18 @@ trait IndexTestHelper
     protected function executeCall()
     {
         $user = User::find(1);
-        $account = $user->account;
+        if (is_null($user)) {
+            // Ensure a valid authenticatable user exists for API tests
+            // Create a user tied to the system account (id=1) so token checks work
+            $user = User::factory()->create(['account_id' => 1]);
+        }
+
+        // Prefer explicit system account token to avoid relying on user->account
+        $account = Account::getSystemAccount();
 
         $server = $this->transformHeadersToServerVars(
             [
-                'X-API-TOKEN' => $account->token,
+                'X-API-TOKEN' => $account ? $account->token : null,
             ]
         );
 
