@@ -97,9 +97,8 @@ class ValidationsServiceProvider extends ServiceProvider
         Validator::extend(
             'abuseclass',
             function ($attribute, $value, $parameters, $validator) {
-                $classes = Lang::get('classifications');
-
-                return array_key_exists($value, $classes);
+                // Accept canonical classification keys and aliases via helper
+                return classificationLookup($value) !== null;
             }
         );
 

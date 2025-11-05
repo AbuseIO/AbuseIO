@@ -168,7 +168,8 @@ class TicketsController extends Controller
             ->editColumn(
                 'class_id',
                 function ($ticket) {
-                    return trans('classifications.'.$ticket->class_id.'.name');
+                    $canonical = classificationLookup($ticket->class_id) ?? $ticket->class_id;
+                    return trans('classifications.'.$canonical.'.name');
                 }
             )
             ->editColumn(
@@ -240,6 +241,14 @@ class TicketsController extends Controller
                 if (in_array($c->column, $mapped_columns)) {
                     array_push($post_process, $c);
                     continue;
+                }
+
+                // Canonicalize classification lookups by alias
+                if ($c->column === 'class_id' && is_string($c->value)) {
+                    $canonical = classificationLookup($c->value);
+                    if ($canonical !== null) {
+                        $c->value = $canonical;
+                    }
                 }
 
                 $tickets = $tickets->where($c->column, $c->operator, $c->value);
@@ -407,10 +416,11 @@ class TicketsController extends Controller
             $output = '"'.implode('", "', $columns).'"'.PHP_EOL;
 
             foreach ($tickets as $ticket) {
+                $canonicalClass = classificationLookup($ticket->class_id) ?? $ticket->class_id;
                 $row = [
                     $ticket->id,
                     $ticket->ip,
-                    trans("classifications.{$ticket->class_id}.name"),
+                    trans("classifications.{$canonicalClass}.name"),
                     trans("types.type.{$ticket->type_id}.name"),
                     $ticket->firstEvent[0]->seen,
                     $ticket->lastEvent[0]->seen,

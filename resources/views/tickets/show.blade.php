@@ -71,7 +71,7 @@
             @endif
 
             <dt>{{ trans('misc.classification') }}</dt>
-            <dd>{{ trans("classifications.{$ticket->class_id}.name") }}</dd>
+            <dd>{{ trans('classifications.' . (classificationLookup($ticket->class_id) ?? $ticket->class_id) . '.name') }}</dd>
 
             <dt>{{ trans('misc.type') }}</dt>
             <dd>{{ trans("types.type.{$ticket->type_id}.name") }}</dd>

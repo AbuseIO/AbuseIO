@@ -29,16 +29,19 @@ class AnalyticsController extends Controller
     {
         $classCounts = [];
 
-        foreach ((array) Lang::get('classifications') as $classID => $classInfo) {
+        foreach ((array) Lang::get('classifications') as $canonicalID => $classInfo) {
             $classTotal = new \stdClass();
 
-            $tickets = Ticket::where('class_id', $classID);
-            $ticketCount = $tickets->count();
-            $tickets = $tickets->get();
+            // Include tickets stored with canonical class_id or any aliases
+            $query = Ticket::where('class_id', $canonicalID);
+            if (!empty($classInfo['aliases']) && is_array($classInfo['aliases'])) {
+                $query = $query->orWhereIn('class_id', $classInfo['aliases']);
+            }
 
+            $ticketCount = $query->count();
             if ($ticketCount !== 0) {
                 $classTotal->name = $classInfo['name'];
-                $classTotal->tickets = $tickets->count();
+                $classTotal->tickets = $ticketCount;
 
                 $classCounts[] = $classTotal;
             }

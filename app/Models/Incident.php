@@ -184,19 +184,10 @@ class Incident
     private function sanitize()
     {
         $config = config('main.classifications');
-        $classifications = array_keys(Lang::get('classifications'));
+        $canonical = classificationLookup($this->class);
 
-        // the incident class is not known
-        if (!in_array($this->class, $classifications)) {
-            // do we have an alias for the current classification,
-            // if so replace it with the alias,
-            // if not use the default
-            if (in_array($this->class, array_keys($config['aliases']))) {
-                $this->class = $config['aliases'][$this->class];
-            } else {
-                $this->class = $config['default'];
-            }
-        }
+        // Use canonical if found, otherwise fall back to default
+        $this->class = $canonical ?? $config['default'];
     }
 
     /**

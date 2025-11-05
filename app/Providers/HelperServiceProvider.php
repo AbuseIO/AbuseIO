@@ -22,6 +22,7 @@ class HelperServiceProvider extends ServiceProvider
         'inetItop',
         'inetPtoi',
         'isValidRegex',
+        'classificationLookup',
     ];
 
     /**
