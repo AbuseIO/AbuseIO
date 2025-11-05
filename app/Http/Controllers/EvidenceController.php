@@ -47,6 +47,7 @@ class EvidenceController extends Controller
         // If the file exists but is not readable by the web server, report a permission issue
         if (is_string($evidence->filename) && $evidence->filename !== '' && file_exists($fullPath) && !is_readable($fullPath)) {
             \Log::warning(get_class($this).': Evidence file exists but is not readable: '.$fullPath);
+
             return response()->view('errors.403', ['message' => 'Evidence file exists but is not readable by the web server.'], 403);
         }
 
@@ -62,6 +63,7 @@ class EvidenceController extends Controller
         // Distinguish not found vs. unreadable
         if (file_exists($fullPath)) {
             \Log::warning(get_class($this).': Evidence file exists but reading failed (likely permission): '.$fullPath);
+
             return response()->view('errors.403', ['message' => 'Evidence file exists but cannot be read due to permissions.'], 403);
         }
 
@@ -83,6 +85,7 @@ class EvidenceController extends Controller
         // If the file exists but is not readable by the web server, report a permission issue
         if (is_string($evidence->filename) && $evidence->filename !== '' && file_exists($fullPath) && !is_readable($fullPath)) {
             \Log::warning(get_class($this).': Evidence file exists but is not readable: '.$fullPath);
+
             return response()->view('errors.403', ['message' => 'Evidence file exists but is not readable by the web server.'], 403);
         }
 
@@ -95,6 +98,7 @@ class EvidenceController extends Controller
             // Distinguish not found vs. unreadable
             if (file_exists($fullPath)) {
                 \Log::warning(get_class($this).': Attachment read failed, evidence file exists: '.$fullPath);
+
                 return response()->view('errors.403', ['message' => 'Evidence file exists but cannot be read due to permissions.'], 403);
             }
 
