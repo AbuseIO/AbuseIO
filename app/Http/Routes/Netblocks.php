@@ -18,9 +18,10 @@ Route::group(
             ->middleware('permission:netblocks_view')
             ->name('index');
 
-        // Access to show object
+        // Access to show object (id must be numeric)
         Route::get('{netblocks}', [NetblocksController::class, 'show'])
             ->middleware('permission:netblocks_view')
+            ->where('netblocks', '[0-9]+')
             ->name('show');
 
         // Access to export object
@@ -36,17 +37,20 @@ Route::group(
             ->middleware('permission:netblocks_create')
             ->name('store');
 
-        // Access to edit object
+        // Access to edit object (id must be numeric)
         Route::get('{netblocks}/edit', [NetblocksController::class, 'edit'])
             ->middleware('permission:netblocks_edit')
+            ->where('netblocks', '[0-9]+')
             ->name('edit');
         Route::match(['put', 'patch'], '{netblocks}', [NetblocksController::class, 'update'])
             ->middleware('permission:netblocks_edit')
+            ->where('netblocks', '[0-9]+')
             ->name('update');
 
-        // Access to delete object
+        // Access to delete object (id must be numeric)
         Route::delete('/{netblocks}', [NetblocksController::class, 'destroy'])
             ->middleware('permission:netblocks_delete')
+            ->where('netblocks', '[0-9]+')
             ->name('destroy');
     }
 );

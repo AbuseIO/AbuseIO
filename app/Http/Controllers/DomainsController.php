@@ -31,7 +31,7 @@ class DomainsController extends Controller
         parent::__construct();
         $this->apiInit($fractal, $request);
 
-        $this->middleware(\AbuseIO\Http\Middleware\CheckSystemAccount::class, ['only' => ['create', 'store']]);
+        // Rely on route-level permission middleware for create/store
         $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Domain', ['except' => ['index', 'create', 'store', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']]);
     }
 

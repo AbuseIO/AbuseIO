@@ -10,7 +10,8 @@ use AbuseIO\Models\Evidence;
 use AbuseIO\Models\FailedJob;
 use AbuseIO\Models\Job;
 use AbuseIO\Models\Ticket;
-use Carbon;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
@@ -220,18 +221,20 @@ class RunCommand extends Command
             get_class($this).': Housekeeper is closing tickets that are over time'
         );
 
-        $closingperiod = 'PT'.config('main.housekeeping.tickets_close_after').'H';
-        $tickets = Ticket::where('status_id', '=', Ticket::STATUS_OPEN)->get();
+        $closingInterval = CarbonInterval::createFromDateString(config('main.housekeeping.tickets_close_after'));
+        $tickets = Ticket::where('status_id', '=', 'OPEN')->get();
 
         foreach ($tickets as $ticket) {
-            $lastnotified = $ticket->last_notify_count();
-            $closingDate = $ticket->updated_at->add(new \DateInterval($closingperiod));
+            $lastnotified = $ticket->last_notify_count;
+            $updatedAt = Carbon::parse($ticket->getOriginal('updated_at'));
+            $closingDate = $updatedAt->copy()->add($closingInterval);
 
-            if ($lastnotified > 3 && $ticket->updated_at->lt($closingDate)) {
+            // If frequently notified and not yet past closing period, skip closing
+            if ($lastnotified > 3 && Carbon::now()->lt($closingDate)) {
                 continue;
             }
 
-            $ticket->status_id = Ticket::STATUS_CLOSED;
+            $ticket->status_id = 'CLOSED';
             if (!$ticket->save()) {
                 Log::error(
                     get_class($this).": Housekeeper was unable to close the ticket {$ticket->id}"
@@ -259,7 +262,7 @@ class RunCommand extends Command
 
         $removaldate = new Carbon('1 month ago');
 
-        $tickets = Ticket::where('status_id', '=', Ticket::STATUS_CLOSED)
+        $tickets = Ticket::where('status_id', '=', 'CLOSED')
             ->where('updated_at', '<', $removaldate)
             ->get();
 

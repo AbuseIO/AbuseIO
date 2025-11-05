@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use AbuseIO\Models\Permission;
+use AbuseIO\Models\Role;
+use AbuseIO\Models\User;
 use DateTime;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -39,45 +41,23 @@ class RolePermissionSeeder extends Seeder
 
         DB::table('permission_role')->insert($permission_role);
 
-        // Give the users their roles (admin and/or abusedesk)
-        DB::table('role_user')->delete();
-        $role_user = [
-            [
-                'id'         => 1,
-                'role_id'    => 1,   // Admin role
-                'user_id'    => 1,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
-            [
-                'id'         => 2,
-                'role_id'    => 2,   // Abusedesk user role
-                'user_id'    => 2,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
-            [
-                'id'         => 3,
-                'role_id'    => 1,   // Admin user role
-                'user_id'    => 3,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
-            [
-                'id'         => 4,
-                'role_id'    => 2,   // Abusedesk user role
-                'user_id'    => 4,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
-            [
-                'id'         => 5,
-                'role_id'    => 1,   // Admin user role
-                'user_id'    => 5,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
+        // Optionally assign default roles to known users, but only if they exist.
+        // This avoids pre-populating the pivot with non-existent user IDs.
+        $defaultAssignments = [
+            1 => 1, // user_id 1 => Admin role
+            2 => 2, // user_id 2 => Abusedesk role
+            3 => 1, // user_id 3 => Admin role
+            4 => 2, // user_id 4 => Abusedesk role
+            5 => 1, // user_id 5 => Admin role
         ];
-        DB::table('role_user')->insert($role_user);
+
+        foreach ($defaultAssignments as $userId => $roleId) {
+            $user = User::find($userId);
+            $role = Role::find($roleId);
+            if ($user && $role) {
+                // Attach without removing existing roles; skip if already attached
+                $user->roles()->syncWithoutDetaching([$role->id]);
+            }
+        }
     }
 }

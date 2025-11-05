@@ -35,7 +35,7 @@ class ContactsController extends Controller
         // initialize the Api methods
         $this->apiInit($fractal, $request);
 
-        $this->middleware(\AbuseIO\Http\Middleware\CheckSystemAccount::class, ['only' => ['create', 'store']]);
+        // Rely on route-level permission middleware for create/store
         $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Contact', ['except' => ['index', 'create', 'store', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']]);
     }
 

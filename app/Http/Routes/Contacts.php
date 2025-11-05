@@ -18,9 +18,10 @@ Route::group(
             ->middleware('permission:contacts_view')
             ->name('index');
 
-        // Access to show object
+        // Access to show object (id must be numeric)
         Route::get('{contacts}', [ContactsController::class, 'show'])
             ->middleware('permission:contacts_view')
+            ->where('contacts', '[0-9]+')
             ->name('show');
 
         // Access to export object
@@ -36,17 +37,20 @@ Route::group(
             ->middleware('permission:contacts_create')
             ->name('store');
 
-        // Access to edit object
+        // Access to edit object (id must be numeric)
         Route::get('{contacts}/edit', [ContactsController::class, 'edit'])
             ->middleware('permission:contacts_edit')
+            ->where('contacts', '[0-9]+')
             ->name('edit');
         Route::match(['put', 'patch'], '{contacts}', [ContactsController::class, 'update'])
             ->middleware('permission:contacts_edit')
+            ->where('contacts', '[0-9]+')
             ->name('update');
 
-        // Access to delete object
+        // Access to delete object (id must be numeric)
         Route::delete('{contacts}', [ContactsController::class, 'destroy'])
             ->middleware('permission:contacts_delete')
+            ->where('contacts', '[0-9]+')
             ->name('destroy');
     }
 );

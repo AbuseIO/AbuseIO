@@ -27,32 +27,68 @@ class CheckPermission
             }
         }
 
-        Auth::logout();
-        $message = 'Sorry! You are not authorized to access that resource and have been logged out.';
+        // Build detailed forbidden context
+        $routeName = $request->route() ? $request->route()->getName() : null;
+        $routeUri = $request->route() ? $request->route()->uri() : $request->path();
+        // Do not collect object identifiers to avoid leaking model info
 
+        $message = 'Forbidden: missing required permission.';
+        
         if (!empty($permission)) {
             $message .= " Missing permission: {$permission}";
         } else {
             $message .= ' No permission specified for this route.';
         }
 
-        $request->session()->flash(
-            'message',
-            $message
-        );
+        if ($routeName) {
+            $message .= " | Route: {$routeName}";
+        }
+        if ($routeUri) {
+            $message .= " | URI: {$routeUri}";
+        }
+        // Intentionally omit object identifiers from the message
+
+        // If AJAX/JSON request, return structured JSON; otherwise render 403 view with context
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json(
+                [
+                    'error' => 'forbidden',
+                    'message' => $message,
+                    'permission' => $permission,
+                    'route' => $routeName,
+                    'uri' => $routeUri,
+                ],
+                403
+            );
+        }
 
         // If we don't have the permission 'login_portal' and it is requested redirect to logout
         if ($permission === 'login_portal') {
-            return redirect('/auth/login')
-                ->with(['message', $message]);
+            // Return a 403 instead of redirecting to avoid confusing loops
+            return response()->view('errors.403', [
+                'message' => $message,
+                'permission' => $permission,
+                'route' => $routeName,
+                'uri' => $routeUri,
+            ], 403);
         }
 
         // If we are redirecting back to the current page then return a 403 error instead of looping
         if (strpos(back(), '>'.$request->fullUrl().'</a>') !== false) {
-            abort(403);
+            return response()->view('errors.403', [
+                'message' => $message,
+                'permission' => $permission,
+                'route' => $routeName,
+                'uri' => $routeUri,
+            ], 403);
         }
 
-        // If not authorized then return a 401 for AJAX or redirect back with a message
-        return $request->ajax() ? response('Unauthorized.', 401) : redirect()->back();
+        // Default: render 403 view with detailed context
+        return response()->view('errors.403', [
+            'message' => $message,
+            'permission' => $permission,
+            'route' => $routeName,
+            'uri' => $routeUri,
+        ], 403);
     }
 }
