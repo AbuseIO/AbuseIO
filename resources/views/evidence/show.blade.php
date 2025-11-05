@@ -9,22 +9,26 @@
     </div>
 </div>
 @if(is_object($evidence))
+@php($data = $evidence->data)
 <dl class="dl-horizontal">
     @foreach (['from', 'subject'] as $header)
-        @if(!empty($evidence->data['headers'][$header]))
+        @php($headerValue = ($data && isset($data['headers'][$header])) ? $data['headers'][$header] : ($header === 'from' ? $evidence->sender : $evidence->subject))
+        @if(!empty($headerValue))
             <dt>{{ trans("evidence.{$header}") }} :</dt>
-            <dd>{{ $evidence->data['headers'][$header] }}</dd>
+            <dd>{{ $headerValue }}</dd>
         @endif
     @endforeach
-    @if (count($evidence->data['files']) > 0)
+    @if ($data && isset($data['files']) && count($data['files']) > 0)
         <dt>{{ trans('evidence.attachment') }} :</dt>
         <dd>
             <table class="table table-condensed">
-            @foreach ($evidence->data['files'] as $index => $attachment)
+            @foreach ($data['files'] as $index => $attachment)
                 <tr>
                     <td>
                         <a href="{{ route('admin.evidence.attachment', [$evidence->id, $attachment->getFilename()]) }}">{{ $attachment->getFilename() }}</a>
-                        <span class="badge">{{ hFileSize(Storage::disk('local_temp')->size("{$evidence->data['files_dir']}/{$attachment->getFilename()}")) }}</span>
+                        @if ($data && isset($data['files_dir']))
+                        <span class="badge">{{ hFileSize(Storage::disk('local_temp')->size("{$data['files_dir']}/{$attachment->getFilename()}")) }}</span>
+                        @endif
                         <span class="label label-primary">{{ $attachment->getContentType() }}</span>
                     </td>
                 </tr>
@@ -33,7 +37,11 @@
         </dd>
     @endif
     <dt>{{ trans('evidence.message') }} :</dt>
-    <dd><pre>{{ (is_object($evidence->data['message'])) ? print_r($evidence->data['message'], true) : $evidence->data['message'] }}</pre></dd>
+    @if ($data && isset($data['message']))
+        <dd><pre>{{ (is_object($data['message'])) ? print_r($data['message'], true) : $data['message'] }}</pre></dd>
+    @else
+        <dd><em>{{ trans('misc.notavailable') }}</em></dd>
+    @endif
 </dl>
 @endif
 @endsection
