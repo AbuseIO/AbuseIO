@@ -10,6 +10,14 @@ use AbuseIO\Models\Evidence;
 class EvidenceController extends Controller
 {
     /**
+     * Evidence does not have an index list; provide a clean 404.
+     */
+    public function index()
+    {
+        return abort(404);
+    }
+
+    /**
      * EvidenceController constructor.
      */
     public function __construct()
