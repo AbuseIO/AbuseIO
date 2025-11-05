@@ -1,3 +1,9 @@
+echo reset permissions
+cd /opt/abuseio
+chown -R abuseio:abuseio .
+chmod -R 770 storage/
+chmod 770 bootstrap/cache/
+
 echo reinstall
 php artisan db:wipe
 rm -rf composer.lock vendor
@@ -7,6 +13,7 @@ php artisan migrate
 
 echo caches
 rm -rf bootstrap/cache/*.php
+rm -rf storage/mailarchive/*
 sudo -u abuseio composer --working-dir=/opt/abuseio clear-cache
 sudo -u abuseio php /opt/abuseio/artisan cache:clear
 sudo -u abuseio php /opt/abuseio/artisan config:clear

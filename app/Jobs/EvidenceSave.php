@@ -61,6 +61,24 @@ class EvidenceSave extends Job
             // Ensure owner/group only when mismatched, and handle permission errors gracefully
             $fullDirPath = storage_path()."/{$path}";
             $this->ensureOwnerGroup($fullDirPath);
+
+            // Explicitly set directory permissions to 0770 and verify
+            @chmod($fullDirPath, 0770);
+            $currentPerms = @fileperms($fullDirPath);
+            if ($currentPerms !== false) {
+                $oct = $currentPerms & 0777;
+                if ($oct !== 0770) {
+                    Log::warning(
+                        get_class($this).': '.
+                        'Directory permissions mismatch on '.$fullDirPath.'. Expected 0770, actual '.decoct($oct)
+                    );
+                }
+            } else {
+                Log::warning(
+                    get_class($this).': '.
+                    'Unable to read directory permissions after creation: '.$fullDirPath
+                );
+            }
         }
 
         if (Storage::exists($file)) {

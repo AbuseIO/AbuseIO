@@ -1,11 +1,11 @@
 echo caches
 rm -rf bootstrap/cache/*.php
-composer clear-cache
-php artisan cache:clear
-php artisan config:clear
-php artisan view:clear
-php artisan route:clear
-composer dump-autoload
+sudo -u abuseio composer --working-dir=/opt/abuseio clear-cache
+sudo -u abuseio php /opt/abuseio/artisan cache:clear
+sudo -u abuseio php /opt/abuseio/artisan config:clear
+sudo -u abuseio php /opt/abuseio/artisan view:clear
+sudo -u abuseio php /opt/abuseio/artisan route:clear
+sudo -u abuseio composer --working-dir=/opt/abuseio dump-autoload
 
 cd /opt/abuseio
 chown -R abuseio:abuseio .
