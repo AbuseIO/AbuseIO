@@ -1583,8 +1583,9 @@ return [
             ",
     ],
 
-    'PHISING_WEBSITE' => [
+    'PHISHING_WEBSITE' => [
         'name'        => 'Phishing website',
+        'aliases'     => ['PHISING_WEBSITE'],
         'description' => "
             <h2>What is a 'Phishing website'?</h2>
 

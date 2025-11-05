@@ -33,14 +33,14 @@ class ListClassesCommand extends AbstractListCommand
      *
      * @var array
      */
-    protected $headers = ['Tag', 'Name'];
+    protected $headers = ['Tag', 'Name', 'Aliasses'];
 
     /**
      * The fields of the table / database row.
      *
      * @var array
      */
-    protected $fields = ['Tag', 'Name'];
+    protected $fields = ['Tag', 'Name', 'Aliasses'];
 
     /**
      * {@inheritdoc}.
@@ -57,14 +57,20 @@ class ListClassesCommand extends AbstractListCommand
     {
         $taglist = [];
         foreach (trans('classifications') as $tag => $classInfo) {
-            if (preg_match("/{$filter}/i", $tag) ||
-                preg_match("/{$filter}/i", $classInfo['name'])
-            ) {
-                $taglist[$tag] =
-                    [
-                        $tag,
-                        $classInfo['name'],
-                    ];
+            $aliases = isset($classInfo['aliases']) && is_array($classInfo['aliases'])
+                ? implode(', ', $classInfo['aliases'])
+                : '';
+
+            $matchesFilter = preg_match("/{$filter}/i", $tag)
+                || preg_match("/{$filter}/i", $classInfo['name'])
+                || ($aliases !== '' && preg_match("/{$filter}/i", $aliases));
+
+            if ($matchesFilter) {
+                $taglist[$tag] = [
+                    $tag,
+                    $classInfo['name'],
+                    $aliases,
+                ];
             }
         }
 
@@ -78,11 +84,13 @@ class ListClassesCommand extends AbstractListCommand
     {
         $taglist = [];
         foreach (trans('classifications') as $tag => $classInfo) {
-            $taglist[$tag] =
-                [
-                    $tag,
-                    $classInfo['name'],
-                ];
+            $taglist[$tag] = [
+                $tag,
+                $classInfo['name'],
+                (isset($classInfo['aliases']) && is_array($classInfo['aliases']))
+                    ? implode(', ', $classInfo['aliases'])
+                    : '',
+            ];
         }
 
         return $taglist;
