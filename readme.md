@@ -1,12 +1,8 @@
 ## Version 5.0 is DEV and NOT working !
 
 TODO
-- TAG erors // MISSING-ABUSEIO5
 - Update composer.json legacy classmap into psr4 (but errors when done)
 - update public/js/*
-- laminas/laminas-json (NO LONGER MAINTAINED, REMOVED PROD)
-- wpb/string-blade-compiler (NO LONGER MAINTAINED, REMOVED PROD)
-- fzaninotto/faker (NO LONGER MAINTAINED, REMOVED DEV)
 
 - fix dependancy error for abuseio/hook-delegate (FOR NOW REMOVED)
 
