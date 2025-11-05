@@ -42,16 +42,30 @@ class EvidenceController extends Controller
      */
     public function download(Evidence $evidence)
     {
+        $fullPath = storage_path()."/{$evidence->filename}";
+
+        // If the file exists but is not readable by the web server, report a permission issue
+        if (is_string($evidence->filename) && $evidence->filename !== '' && file_exists($fullPath) && !is_readable($fullPath)) {
+            \Log::warning(get_class($this).': Evidence file exists but is not readable: '.$fullPath);
+            return response()->view('errors.403', ['message' => 'Evidence file exists but is not readable by the web server.'], 403);
+        }
+
         $eml = $evidence->eml;
 
-        if ($eml) {
+        if ($eml !== false) {
             return response($eml, 200)
                 ->header('Content-Type', 'message/rfc822')
                 ->header('Content-Transfer-Encoding', 'Binary')
                 ->header('Content-Disposition', "attachment; filename=\"abuseio_evidence_{$evidence->id}.eml\"");
-        } else {
-            return abort(404);
         }
+
+        // Distinguish not found vs. unreadable
+        if (file_exists($fullPath)) {
+            \Log::warning(get_class($this).': Evidence file exists but reading failed (likely permission): '.$fullPath);
+            return response()->view('errors.403', ['message' => 'Evidence file exists but cannot be read due to permissions.'], 403);
+        }
+
+        return abort(404);
     }
 
     /**
@@ -64,12 +78,26 @@ class EvidenceController extends Controller
      */
     public function attachment(Evidence $evidence, $filename)
     {
+        $fullPath = storage_path()."/{$evidence->filename}";
+
+        // If the file exists but is not readable by the web server, report a permission issue
+        if (is_string($evidence->filename) && $evidence->filename !== '' && file_exists($fullPath) && !is_readable($fullPath)) {
+            \Log::warning(get_class($this).': Evidence file exists but is not readable: '.$fullPath);
+            return response()->view('errors.403', ['message' => 'Evidence file exists but is not readable by the web server.'], 403);
+        }
+
         if ($attachment = $evidence->getAttachment($filename)) {
             return response($attachment->getContent(), 200)
                 ->header('Content-Type', $attachment->getContentType())
                 ->header('Content-Transfer-Encoding', 'Binary')
                 ->header('Content-Disposition', "attachment; filename=\"{$filename}\"");
         } else {
+            // Distinguish not found vs. unreadable
+            if (file_exists($fullPath)) {
+                \Log::warning(get_class($this).': Attachment read failed, evidence file exists: '.$fullPath);
+                return response()->view('errors.403', ['message' => 'Evidence file exists but cannot be read due to permissions.'], 403);
+            }
+
             return abort(404);
         }
     }

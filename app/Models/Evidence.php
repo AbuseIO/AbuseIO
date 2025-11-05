@@ -108,7 +108,19 @@ class Evidence extends Model
         $tempFilesystem = Storage::disk('local_temp');
 
         if (Storage::exists($this->filename)) {
+            $fullPath = storage_path()."/{$this->filename}";
+
+            // If the file exists on disk but is not readable, report a permission issue
+            if (is_string($this->filename) && $this->filename !== '' && file_exists($fullPath) && !is_readable($fullPath)) {
+                Log::warning(get_class($this).': Evidence file exists but is not readable: '.$fullPath);
+                return false;
+            }
+
             $data = Storage::get($this->filename);
+            if ($data === false || $data === null) {
+                Log::error(get_class($this).': Unable to read file from location: '.$this->filename);
+                return false;
+            }
 
             if (is_object(json_decode($data))) {
                 // It's json data
@@ -165,7 +177,19 @@ class Evidence extends Model
     public function getEmlAttribute()
     {
         if (Storage::exists($this->filename)) {
-            return Storage::get($this->filename);
+            $fullPath = storage_path()."/{$this->filename}";
+            if (is_string($this->filename) && $this->filename !== '' && file_exists($fullPath) && !is_readable($fullPath)) {
+                Log::warning(get_class($this).': Evidence file exists but is not readable: '.$fullPath);
+                return false;
+            }
+
+            $data = Storage::get($this->filename);
+            if ($data === false || $data === null) {
+                Log::error(get_class($this).': Unable to read file from location: '.$this->filename);
+                return false;
+            }
+
+            return $data;
         }
 
         return false;
@@ -223,7 +247,17 @@ class Evidence extends Model
      */
     public function getAttachment($filename)
     {
+        $fullPath = storage_path()."/{$this->filename}";
+        if (is_string($this->filename) && $this->filename !== '' && file_exists($fullPath) && !is_readable($fullPath)) {
+            Log::warning(get_class($this).': Evidence file exists but is not readable: '.$fullPath);
+            return false;
+        }
+
         $data = Storage::get($this->filename);
+        if ($data === false || $data === null) {
+            Log::error(get_class($this).': Unable to read file from location: '.$this->filename);
+            return false;
+        }
 
         $email = new MimeParser();
         $email->setText($data);
