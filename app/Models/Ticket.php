@@ -122,7 +122,7 @@ class Ticket extends Model
     {
         $rules = [
             'ip'                            => 'required|ip',
-            'domain'                        => 'sometimes|stringorboolean|domain',
+            'domain'                        => 'nullable|stringorboolean|domain',
             'class_id'                      => 'required|string|max:100',
             'type_id'                       => 'required|in:INFO,ABUSE,ESCALATION',
             'ip_contact_account_id'         => 'required|integer|exists:accounts,id',

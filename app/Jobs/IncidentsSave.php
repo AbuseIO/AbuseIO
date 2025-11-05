@@ -72,7 +72,7 @@ class IncidentsSave extends Job
 
             $ipContact = $findContact->byIP($incident->ip);
 
-            if ($incident->domain != '') {
+            if (is_string($incident->domain) && $incident->domain !== '') {
                 $domainContact = $findContact->byDomain($incident->domain);
             } else {
                 $domainContact = $findContact->undefined();
@@ -102,13 +102,14 @@ class IncidentsSave extends Job
             /*
              * Search to see if there is an existing ticket for this incident classification
              */
-            $ticket = Ticket::where('ip', '=', $incident->ip)
-                ->where(
-                    'domain',
-                    '=',
-                    empty($incident->domain) ? '' : $incident->domain,
-                    'AND'
-                )
+            $ticketQuery = Ticket::where('ip', '=', $incident->ip);
+            $domainValue = (is_string($incident->domain) && $incident->domain !== '') ? $incident->domain : null;
+            if ($domainValue === null) {
+                $ticketQuery = $ticketQuery->whereNull('domain');
+            } else {
+                $ticketQuery = $ticketQuery->where('domain', '=', $domainValue, 'AND');
+            }
+            $ticket = $ticketQuery
                 ->where('class_id', '=', $incident->class, 'AND')
                 ->where('ip_contact_reference', '=', $ipContact->reference, 'AND')
                 ->where('status_id', '!=', 'CLOSED', 'AND')
@@ -122,7 +123,7 @@ class IncidentsSave extends Job
 
                 $newTicket = new Ticket();
                 $newTicket->ip = $incident->ip;
-                $newTicket->domain = empty($incident->domain) ? '' : $incident->domain;
+                $newTicket->domain = $domainValue; // use null when absent/invalid
                 $newTicket->class_id = $incident->class;
                 $newTicket->type_id = $incident->type;
 

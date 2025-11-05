@@ -10,9 +10,7 @@ TODO
 - fzaninotto/faker (NO LONGER MAINTAINED, REMOVED DEV)
 
 - fix dependancy error for abuseio/hook-delegate (FOR NOW REMOVED)
-- fix depdenancy error for abuseio/iodef (FOR NOW REMOVED)
 
-- jover/singleton (still works?)
 - kruisdraad/phpmailer (might need update)
 
 ## AbuseIO - Abusemanagement tools
