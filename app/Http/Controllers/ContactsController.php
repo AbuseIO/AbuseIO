@@ -300,6 +300,37 @@ class ContactsController extends Controller
     }
 
     /**
+     * Update the specified resource via API.
+     *
+     * @param ContactFormRequest $contactForm FormRequest
+     * @param Contact            $contact     Contact
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiUpdate(ContactFormRequest $contactForm, Contact $contact)
+    {
+        $contact->update($contactForm->all());
+
+        return $this->respondWithItem($contact, new ContactTransformer());
+    }
+
+    /**
+     * Remove the specified resource via API.
+     *
+     * @param Contact $contact Contact
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function apiDestroy(Contact $contact)
+    {
+        if (!$this->handleDestroy($contact)) {
+            return $this->errorInternalError($this->getError());
+        }
+
+        return $this->respondWithItem($contact, new ContactTransformer());
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Contact $contact Contact

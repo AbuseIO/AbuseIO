@@ -23,7 +23,7 @@ class ShowCommandTest extends TestCase
 
     public function initDB()
     {
-        $this->list = factory(Permission::class, 10)->create();
+        $this->list = Permission::factory()->count(10)->create();
     }
 
     public function testWithValidIdFilter()
@@ -58,9 +58,8 @@ class ShowCommandTest extends TestCase
 
     public function testWithoutArguments()
     {
-        ob_start();
         $exitCode = Artisan::call('permission:show');
         $this->assertEquals(0, $exitCode);
-        $this->assertStringContainsString('Shows a permission', ob_get_clean());
+        $this->assertStringContainsString('Shows a permission', Artisan::output());
     }
 }

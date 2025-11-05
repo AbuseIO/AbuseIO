@@ -7,14 +7,13 @@ use Sabre\Uri;
 class UrlCheckerTest extends TestCase
 {
     /**
-     * @param $url
-     * @param $result
-     *
-     * @dataProvider getNormalizerDataSet
+     * Validate URI normalization across dataset.
      */
-    public function testNormalizeUrl($url, $result)
+    public function testNormalizeUrl()
     {
-        $this->assertEquals(Uri\normalize($url), $result);
+        foreach ($this->getNormalizerDataSet() as [$url, $result]) {
+            $this->assertEquals(Uri\normalize($url), $result);
+        }
     }
 
     public function getNormalizerDataSet()
@@ -28,18 +27,16 @@ class UrlCheckerTest extends TestCase
     }
 
     /**
-     * @param $url
-     * @param $relativeUrl
-     * @param $result
-     *
-     * @dataProvider getResolverDataset
+     * Validate URI resolution across dataset.
      */
-    public function testResolveUrl($basePath, $relativeUrl, $result)
+    public function testResolveUrl()
     {
-        $this->assertEquals(
-            Uri\resolve($basePath, $relativeUrl),
-            $result
-        );
+        foreach ($this->getResolverDataset() as [$basePath, $relativeUrl, $result]) {
+            $this->assertEquals(
+                Uri\resolve($basePath, $relativeUrl),
+                $result
+            );
+        }
     }
 
     public function getResolverDataset()

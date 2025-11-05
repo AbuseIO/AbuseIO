@@ -24,7 +24,7 @@ class StoreTest extends TestCase
 
     public function testSuccessfulCreate()
     {
-        $account = factory(Account::class)->make()->toArray();
+        $account = Account::factory()->make()->toArray();
 
         $response = $this->executeCall($account);
 

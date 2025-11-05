@@ -46,7 +46,8 @@ class ContactFormRequest extends Request
             case 'POST':
                 return Contact::createRules();
             case 'PUT':
-                break;
+                // Treat PUT the same as PATCH for API update endpoints
+                return Contact::updateRules($this);
             case 'PATCH':
                 return Contact::updateRules($this);
             default:

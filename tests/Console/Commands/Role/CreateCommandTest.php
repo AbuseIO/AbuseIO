@@ -17,7 +17,7 @@ class CreateCommandTest extends TestCase
     public function testCreate()
     {
         /** @var Role $dummy */
-        $dummy = factory(Role::class)->make();
+        $dummy = Role::factory()->make();
 
         $exitCode = Artisan::call(
             'role:create',

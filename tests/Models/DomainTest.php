@@ -12,7 +12,7 @@ class DomainTest extends TestCase
 
     public function testModelFactory()
     {
-        $domain = factory(Domain::class)->create();
+        $domain = Domain::factory()->create();
         $domainFromDB = Domain::where('name', $domain->name)->first();
         $this->assertEquals($domain->name, $domainFromDB->name);
     }

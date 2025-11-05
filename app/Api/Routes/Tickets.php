@@ -8,11 +8,11 @@ Route::group(
     ],
     function () {
         Route::get('', [TicketsController::class, 'apiIndex'])
-            ->middleware(['apiaccountavailable'])
+            ->middleware(['api.account'])
             ->name('index');
 
         Route::post('search', [TicketsController::class, 'apiSearch'])
-            ->middleware(['apiaccountavailable'])
+            ->middleware(['api.account'])
             ->name('search');
 
         Route::post('syncstatus', [TicketsController::class, 'apiSyncStatus'])
@@ -22,27 +22,27 @@ Route::group(
             ->name('synccontactstatus');
 
         Route::get('{tickets}', [TicketsController::class, 'apiShow'])
-            ->middleware(['apiaccountavailable'])
+            ->middleware(['api.account'])
             ->name('show');
 
         Route::delete('{tickets}', [TicketsController::class, 'apiDestroy'])
-            ->middleware(['apiaccountavailable'])
+            ->middleware(['api.account'])
             ->name('delete');
 
         Route::post('', [TicketsController::class, 'apiStore'])
-            ->middleware(['apiaccountavailable'])
+            ->middleware(['api.account'])
             ->name('store');
 
         Route::put('{tickets}', [TicketsController::class, 'apiUpdate'])
-            ->middleware(['apiaccountavailable'])
+            ->middleware(['api.account'])
             ->name('update');
 
         Route::get('{tickets}/notify', [TicketsController::class, 'apiNotify'])
-            ->middleware(['apiaccountavailable'])
+            ->middleware(['api.account'])
             ->name('notify');
 
         Route::get('{tickets}/anonymize/{email}/{randomness}', [TicketsController::class, 'apiAnonymize'])
-            ->middleware(['apiaccountavailable'])
+            ->middleware(['api.account'])
             ->name('anonymize');
     }
 );

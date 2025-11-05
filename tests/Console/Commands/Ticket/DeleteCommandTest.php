@@ -19,7 +19,7 @@ class DeleteCommandTest extends TestCase
 
     private function initDB()
     {
-        $this->ticket = factory(Ticket::class)->create();
+        $this->ticket = Ticket::factory()->create();
     }
 
     public function testValid()

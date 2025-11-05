@@ -26,7 +26,7 @@ class StoreTest extends TestCase
 
     public function testSuccessfulCreate()
     {
-        $domain = factory(Domain::class)->make()->toArray();
+        $domain = Domain::factory()->make()->toArray();
 
         $response = $this->executeCall($domain);
 

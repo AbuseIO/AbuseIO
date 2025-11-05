@@ -15,9 +15,8 @@ class CreateCommandTest extends TestCase
 {
     public function testWithoutArguments()
     {
-        ob_start();
         Artisan::call('contact:create');
-        $output = ob_get_clean();
+        $output = Artisan::output();
         $this->assertStringContainsString('Creates a new contact', $output);
     }
 

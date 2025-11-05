@@ -12,7 +12,7 @@ class NetblockTest extends TestCase
 
     public function testModelFactory()
     {
-        $netblock = factory(Netblock::class)->create();
+        $netblock = Netblock::factory()->create();
         $netblockFromDB = Netblock::where(
             [
                 'first_ip' => $netblock->first_ip,

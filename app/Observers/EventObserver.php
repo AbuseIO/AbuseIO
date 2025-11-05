@@ -47,8 +47,10 @@ class EventObserver
             }
         }
 
-        // call hooks
-        Hooks::call($event, 'created');
+        // call hooks when enabled
+        if (config('main.hooks.enabled')) {
+            Hooks::call($event, 'created');
+        }
     }
 
     /**
@@ -58,8 +60,10 @@ class EventObserver
      */
     public function saving(Event $event)
     {
-        // call hooks
-        Hooks::call($event, 'saving');
+        // call hooks when enabled
+        if (config('main.hooks.enabled')) {
+            Hooks::call($event, 'saving');
+        }
     }
 
     /**
@@ -69,7 +73,9 @@ class EventObserver
      */
     public function saved(Event $event)
     {
-        // call hooks
-        Hooks::call($event, 'saved');
+        // call hooks when enabled
+        if (config('main.hooks.enabled')) {
+            Hooks::call($event, 'saved');
+        }
     }
 }

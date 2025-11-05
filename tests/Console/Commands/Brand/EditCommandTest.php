@@ -13,9 +13,8 @@ class EditCommandTest extends TestCase
 {
     public function testWithoutId()
     {
-        ob_start();
         Artisan::call('brand:edit');
-        $output = ob_get_clean();
+        $output = Artisan::output();
         $this->assertStringContainsString('Edit a brand', $output);
     }
 

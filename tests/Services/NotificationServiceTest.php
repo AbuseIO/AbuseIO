@@ -23,7 +23,7 @@ class NotificationServiceTest extends TestCase
 
     public function testListContact()
     {
-        $contact = factory(Contact::class)->create();
+        $contact = Contact::factory()->create();
 
         $this->assertEquals(
             $this->service->listForContact($contact),
@@ -33,7 +33,7 @@ class NotificationServiceTest extends TestCase
 
     public function testListContactForAllowedActiveMethods()
     {
-        $contact = factory(Contact::class)->create();
+        $contact = Contact::factory()->create();
 
         $contact->addNotificationMethod([
             'method' => 'Mail',

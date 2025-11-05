@@ -37,7 +37,7 @@ class DomainFormRequest extends Request
             case 'POST':
                 return Domain::createRules();
             case 'PUT':
-                break;
+                return Domain::updateRules($this);
             case 'PATCH':
                 return Domain::updateRules($this);
             default:

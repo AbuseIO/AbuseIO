@@ -32,7 +32,7 @@ class UserTest extends TestCase
 
     public function testMayLoginSystemAccount()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
         $user->account->systemaccount = true;
 
         $messages = [];
@@ -43,7 +43,7 @@ class UserTest extends TestCase
 
     public function testMayLoginWithDisabledAccount()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
         $user->account->systemaccount = false;
         $user->account->disabled = true;
         $user->disabled = false;
@@ -56,7 +56,7 @@ class UserTest extends TestCase
 
     public function testMayLoginWithDisabledUser()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
         $user->account->systemaccount = false;
         $user->account->disabled = false;
 

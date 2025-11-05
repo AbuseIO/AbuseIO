@@ -12,10 +12,8 @@ class AsignCommandTest extends TestCase
 {
     public function testWithoutParams()
     {
-        ob_start();
         $exitCode = Artisan::call('role:assign');
         $this->assertEquals($exitCode, 0);
-
-        $this->assertStringContainsString('Assign a role to a user', ob_get_clean());
+        $this->assertStringContainsString('Assign a role to a user', Artisan::output());
     }
 }

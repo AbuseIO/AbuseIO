@@ -34,7 +34,7 @@ class CheckAccountTest extends TestCase
     {
         $this->actingAs(User::find(1));
 
-        $model = factory(Account::class)->create();
+        $model = Account::factory()->create();
 
         $callback = $this->middleware->handle(
             new Request(),
@@ -52,11 +52,11 @@ class CheckAccountTest extends TestCase
 
     public function testUserIsNotOwner()
     {
-        $userNotInDB = factory(User::class)->create();
+        $userNotInDB = User::factory()->create();
 
         $this->actingAs($userNotInDB);
 
-        $model = factory(Account::class)->create();
+        $model = Account::factory()->create();
 
         $r = new Request(['id' => $model->id]);
 
@@ -75,7 +75,7 @@ class CheckAccountTest extends TestCase
     public function testModelHasNoAccountAccessMethodLog()
     {
         $this->actingAs(
-            factory(User::class)->create()
+            User::factory()->create()
         );
 
         $model = new Job();
@@ -97,7 +97,7 @@ class CheckAccountTest extends TestCase
     public function testModelIdDoesNotRespond()
     {
         $this->actingAs(
-            factory(User::class)->create()
+            User::factory()->create()
         );
 
         $model = new Job();

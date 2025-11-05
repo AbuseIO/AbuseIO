@@ -12,7 +12,7 @@ class TicketTest extends TestCase
 
     public function testTicketModelSaveEventInTicketApiTokenProvider()
     {
-        $ticket = factory(Ticket::class)->make();
+        $ticket = Ticket::factory()->make();
         $this->assertNull($ticket->api_token);
         $ticket->save();
         $this->assertNotNull($ticket->api_token);

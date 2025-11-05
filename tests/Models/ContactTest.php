@@ -12,14 +12,14 @@ class ContactTest extends TestCase
 
     public function testModelFactory()
     {
-        $contact = factory(Contact::class)->create();
+        $contact = Contact::factory()->create();
         $contactFromDB = Contact::where('name', $contact->name)->first();
         $this->assertEquals($contact->name, $contactFromDB->name);
     }
 
     public function testContactNotificationMethod()
     {
-        $contact = factory(Contact::class)->create();
+        $contact = Contact::factory()->create();
         $contact->addNotificationMethod([
             'method' => 'Mail',
         ]);
@@ -30,13 +30,13 @@ class ContactTest extends TestCase
 
     public function testHasNotificationMethodWithoutMethod()
     {
-        $contact = factory(Contact::class)->create();
+        $contact = Contact::factory()->create();
         $this->assertFalse($contact->hasNotificationMethod('Mail'));
     }
 
     public function testHasNotificationMethod()
     {
-        $contact = factory(Contact::class)->create();
+        $contact = Contact::factory()->create();
         $contact->addNotificationMethod([
             'method' => 'Mail',
         ]);

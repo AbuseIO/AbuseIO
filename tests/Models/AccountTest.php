@@ -12,7 +12,7 @@ class AccountTest extends TestCase
 
     public function testModelFactory()
     {
-        $account = factory(Account::class)->create();
+        $account = Account::factory()->create();
         $accountFromDB = Account::where('name', $account->name)->first();
         $this->assertEquals($account->name, $accountFromDB->name);
     }
@@ -28,7 +28,7 @@ class AccountTest extends TestCase
     {
         $oldSysAdmin = Account::getSystemAccount();
 
-        $account = factory(Account::class)->create();
+        $account = Account::factory()->create();
         $account->systemaccount = true;
         $account->save();
 

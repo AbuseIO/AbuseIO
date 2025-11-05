@@ -82,7 +82,7 @@ class ListCommandTest extends TestCase
     {
         Account::where('id', '!=', 1)->delete();
 
-        $this->accounts = factory(Account::class, 10)->create();
+        $this->accounts = Account::factory()->count(10)->create();
 
         $this->name1 = $this->accounts->first()->name;
         $this->name2 = $this->accounts->get(1)->name;

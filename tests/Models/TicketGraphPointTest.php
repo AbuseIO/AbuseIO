@@ -79,7 +79,7 @@ class TicketGraphPointTest extends TestCase
         $dateRange = new \DatePeriod($begin, $interval, $end);
 
         foreach ($dateRange as $date) {
-            factory(TicketGraphPoint::class)
+            TicketGraphPoint::factory()
                 ->create([
                     'day_date'  => $date,
                     'class'     => $config['class'][array_rand($config['class'], 1)],

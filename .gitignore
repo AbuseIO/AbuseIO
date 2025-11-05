@@ -7,6 +7,8 @@ AbuseIO.iml
 _ide_helper.php
 composer.lock
 htpasswd
+/.phpunit.cache
+.phpunit.result.cache
 
 .DS_Store
 

@@ -25,7 +25,7 @@ class CreateCommandTest extends TestCase
 
     public function testCreateValid()
     {
-        $brand = factory(Brand::class)->create();
+        $brand = Brand::factory()->create();
 
         Artisan::call('account:create', [
             'name'     => 'test_dummy',
@@ -45,7 +45,7 @@ class CreateCommandTest extends TestCase
 
     public function testCreateValidWithApiToken()
     {
-        $brand = factory(Brand::class)->create();
+        $brand = Brand::factory()->create();
 
         Artisan::call('account:create', [
             'name'           => 'test_dummy',

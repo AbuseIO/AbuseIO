@@ -30,7 +30,7 @@ class ListCommandTest extends TestCase
         //        \DB::table('contacts')->truncate();
         //        Contact::all()->delete();
 
-        $this->contacts = factory(Contact::class, 10)->create();
+        $this->contacts = Contact::factory()->count(10)->create();
 
         $this->name1 = $this->contacts->first()->name;
         $this->name2 = $this->contacts->get(1)->name;

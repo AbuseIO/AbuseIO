@@ -18,7 +18,7 @@ class DestroyTest extends TestCase
     {
         $user = User::find(1);
 
-        $netblock = factory(Netblock::class)->create();
+        $netblock = Netblock::factory()->create();
 
         $server = $this->transformHeadersToServerVars(
             [

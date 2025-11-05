@@ -28,8 +28,8 @@ class UpdateTest extends TestCase
 
     public function testUpdate()
     {
-        $contact1 = factory(Contact::class)->create();
-        $contact2 = factory(Contact::class)->make()->toArray();
+        $contact1 = Contact::factory()->create();
+        $contact2 = Contact::factory()->make()->toArray();
 
         $response = $this->executeCall($contact2, $contact1->id);
 
@@ -45,8 +45,8 @@ class UpdateTest extends TestCase
 
     public function testUpdateWithMissingPropertyName()
     {
-        $contact1 = factory(Contact::class)->create();
-        $contact2 = factory(Contact::class)->make()->toArray();
+        $contact1 = Contact::factory()->create();
+        $contact2 = Contact::factory()->make()->toArray();
 
         unset($contact2['name']);
 

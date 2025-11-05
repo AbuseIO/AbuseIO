@@ -18,6 +18,7 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
     protected $userId = 1; // use the default admin user defined in the db seed
 
     public $user;
+    protected $startingObLevel;
 
     /**
      * Creates the application.
@@ -35,8 +36,22 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
         return $app;
     }
 
+    public function setUp(): void
+    {
+        parent::setUp();
+        // Record the buffer level at the start of the test so we can safely clean up
+        // only buffers opened by the test or application code, without touching PHPUnit's.
+        $this->startingObLevel = ob_get_level();
+    }
+
     protected function tearDown(): void
     {
+        // Ensure test leaves no open output buffers it created,
+        // but do not close PHPUnit's own output buffer.
+        while (ob_get_level() > $this->startingObLevel) {
+            ob_end_clean();
+        }
+
         $this->beforeApplicationDestroyed(function () {
             DB::disconnect();
         });

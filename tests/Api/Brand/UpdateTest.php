@@ -28,8 +28,8 @@ class UpdateTest extends TestCase
 
     public function testUpdate()
     {
-        $brand1 = factory(Brand::class)->create();
-        $brand2 = factory(Brand::class)->make();
+        $brand1 = Brand::factory()->create();
+        $brand2 = Brand::factory()->make();
 
         //        $brandArray = $brand2->toArray();
 

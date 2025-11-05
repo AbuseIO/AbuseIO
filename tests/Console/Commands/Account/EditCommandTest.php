@@ -19,14 +19,13 @@ class EditCommandTest extends TestCase
 
     private function initDB()
     {
-        $this->account = factory(Account::class)->create();
+        $this->account = Account::factory()->create();
     }
 
     public function testWithoutId()
     {
-        ob_start();
         Artisan::call('account:edit');
-        $output = ob_get_clean();
+        $output = Artisan::output();
         $this->assertStringContainsString('Edit a account', $output);
     }
 

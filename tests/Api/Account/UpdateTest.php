@@ -28,8 +28,8 @@ class UpdateTest extends TestCase
 
     public function testUpdate()
     {
-        $account1 = factory(Account::class)->create();
-        $account2 = factory(Account::class)->make();
+        $account1 = Account::factory()->create();
+        $account2 = Account::factory()->make();
 
         $response = $this->executeCall(['name' => $account2->name, 'brand_id' => $account1->brand_id], $account1->id);
 

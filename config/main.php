@@ -46,6 +46,11 @@ return [
         'bcc_address'    => env('MAIN_NOTIFICATIONS_BCC_ADDRESS', 'management@isp.local'),
     ],
 
+    // Global hook system toggle; disable during tests to avoid vendor Singleton wakeup errors
+    'hooks' => [
+        'enabled' => env('MAIN_HOOKS_ENABLED', true),
+    ],
+
     'housekeeping' => [
         'mailarchive_remove_after'        => '500 days',
         'mailarchive_remove_orphaned'     => true,

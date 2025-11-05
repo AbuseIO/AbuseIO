@@ -20,8 +20,8 @@ class ShowCommandTest extends TestCase
 
     private function initDB()
     {
-        $this->netblock = factory(Netblock::class)->create(
-            ['contact_id' => factory(Contact::class)->create()->id]
+        $this->netblock = Netblock::factory()->create(
+            ['contact_id' => Contact::factory()->create()->id]
         );
     }
 

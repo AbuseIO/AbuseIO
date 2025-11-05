@@ -12,7 +12,7 @@ class BrandTest extends TestCase
 
     public function testModelFactory()
     {
-        $account = factory(Brand::class)->create();
+        $account = Brand::factory()->create();
         $accountFromDB = Brand::where('name', $account->name)->first();
         $this->assertEquals($account->name, $accountFromDB->name);
     }

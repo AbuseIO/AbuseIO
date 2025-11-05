@@ -26,7 +26,7 @@ class StoreTest extends TestCase
 
     public function testSuccesfullCreate()
     {
-        $netblock = factory(Netblock::class)->make()->toArray();
+        $netblock = Netblock::factory()->make()->toArray();
 
         $response = $this->executeCall($netblock);
 

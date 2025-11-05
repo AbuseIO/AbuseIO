@@ -26,7 +26,7 @@ class CreateCommandTest extends TestCase
 
     public function testCreateValid()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
 
         $password = 'jiperish';
 
@@ -48,7 +48,7 @@ class CreateCommandTest extends TestCase
 
     public function testNoValidAccountCreateValid()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
 
         Artisan::call('user:create', [
             '--first_name' => $user->first_name,
@@ -85,7 +85,7 @@ class CreateCommandTest extends TestCase
 
     public function testWithoutDisabledArgument()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
 
         Artisan::call('user:create', [
             '--first_name' => $user->first_name,
@@ -106,7 +106,7 @@ class CreateCommandTest extends TestCase
 
     public function testWithDisabledArgumentTrue()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
 
         $password = 'jiperish';
 
@@ -136,7 +136,7 @@ class CreateCommandTest extends TestCase
 
     public function testIfNoPasswordIsSuppliedPasswordIsGenerated()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
 
         Artisan::call('user:create', [
             '--first_name' => $user->first_name,

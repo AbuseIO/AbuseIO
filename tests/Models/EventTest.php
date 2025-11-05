@@ -19,7 +19,7 @@ class EventTest extends TestCase
 
     private function initDB()
     {
-        $event = factory(Event::class)->create();
+        $event = Event::factory()->create();
 
         $this->eventId = $event->id;
         $this->evidenceId = $event->evidence_id;
@@ -37,7 +37,7 @@ class EventTest extends TestCase
 
     public function testModelFactory()
     {
-        $event = factory(Event::class)->create();
+        $event = Event::factory()->create();
         $eventFromDB = Event::where('source', $event->source)->first();
         $this->assertEquals($event->source, $eventFromDB->source);
     }

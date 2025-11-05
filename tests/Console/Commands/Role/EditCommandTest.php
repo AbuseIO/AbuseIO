@@ -16,9 +16,8 @@ class EditCommandTest extends TestCase
 
     public function testWithoutId()
     {
-        ob_start();
         Artisan::call('role:edit');
-        $this->assertStringContainsString('Edit a role', ob_get_clean());
+        $this->assertStringContainsString('Edit a role', Artisan::output());
     }
 
     public function testWithInvalidId()
@@ -55,6 +54,6 @@ class EditCommandTest extends TestCase
 
     private function initDB()
     {
-        $this->role = factory(Role::class)->create();
+        $this->role = Role::factory()->create();
     }
 }

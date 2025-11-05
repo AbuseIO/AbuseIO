@@ -28,8 +28,8 @@ class UpdateTest extends TestCase
 
     public function testUpdate()
     {
-        $domain1 = factory(Domain::class)->create();
-        $domain2 = factory(Domain::class)->make()->toArray();
+        $domain1 = Domain::factory()->create();
+        $domain2 = Domain::factory()->make()->toArray();
 
         $response = $this->executeCall($domain2, $domain1->id);
 
@@ -45,8 +45,8 @@ class UpdateTest extends TestCase
 
     public function testUpdateWithMissingPropertyName()
     {
-        $domain1 = factory(Domain::class)->create();
-        $domain2 = factory(Domain::class)->make()->toArray();
+        $domain1 = Domain::factory()->create();
+        $domain2 = Domain::factory()->make()->toArray();
 
         unset($domain2['name']);
 

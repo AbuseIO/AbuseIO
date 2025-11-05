@@ -23,9 +23,8 @@ class EditCommandTest extends TestCase
 
     public function testWithoutUser()
     {
-        ob_start();
         Artisan::call('user:edit');
-        $this->assertStringContainsString('Edit a user', ob_get_clean());
+        $this->assertStringContainsString('Edit a user', Artisan::output());
     }
 
     public function testWithInvalidUser()

@@ -23,7 +23,7 @@ class ShowCommandTest extends TestCase
 
     public function initDB()
     {
-        $this->noteList = factory(Note::class, 10)->create();
+        $this->noteList = Note::factory()->count(10)->create();
     }
 
     public function testWithValidIdFilter()

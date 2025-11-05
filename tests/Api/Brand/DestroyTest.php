@@ -18,7 +18,7 @@ class DestroyTest extends TestCase
     {
         $user = User::find(1);
 
-        $brand = factory(Brand::class)->create();
+        $brand = Brand::factory()->create();
         $server = $this->transformHeadersToServerVars(
             [
                 'X-API-TOKEN' => Account::getSystemAccount()->token,

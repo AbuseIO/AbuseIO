@@ -28,8 +28,8 @@ class UpdateTest extends TestCase
 
     public function testUpdate()
     {
-        $ticket1 = factory(Ticket::class)->create();
-        $ticket2 = factory(Ticket::class)->make()->toArray();
+        $ticket1 = Ticket::factory()->create();
+        $ticket2 = Ticket::factory()->make()->toArray();
 
         $ticket2['last_notify_timestamp'] = $ticket2['last_notify_timestamp'];
 
@@ -47,8 +47,8 @@ class UpdateTest extends TestCase
 
     public function testUpdateWithMissingPropertyName()
     {
-        $ticket1 = factory(Ticket::class)->create();
-        $ticket2 = factory(Ticket::class)->make()->toArray();
+        $ticket1 = Ticket::factory()->create();
+        $ticket2 = Ticket::factory()->make()->toArray();
 
         unset($ticket2['ip']);
 

@@ -17,7 +17,7 @@ class EvidenceTest extends TestCase
 
     private function initDB()
     {
-        $event = factory(Event::class)->create();
+        $event = Event::factory()->create();
 
         $this->eventId = $event->id;
         $this->evidenceId = $event->evidence_id;

@@ -22,7 +22,7 @@ class GenerateTicketsGraphPointsTest extends TestCase
 
     public function testStoreNewTicketDataForYesterday()
     {
-        factory(Ticket::class, 10)->create([
+        Ticket::factory()->count(10)->create([
             'created_at' => \Carbon::yesterday(),
             'updated_at' => \Carbon::yesterday(),
         ]);
@@ -40,7 +40,7 @@ class GenerateTicketsGraphPointsTest extends TestCase
 
     public function testStoreTouchedTicketsForYesterday()
     {
-        factory(Ticket::class, 10)->create([
+        Ticket::factory()->count(10)->create([
             'created_at' => new \Carbon('2 days ago'),
             'updated_at' => \Carbon::yesterday(),
         ]);

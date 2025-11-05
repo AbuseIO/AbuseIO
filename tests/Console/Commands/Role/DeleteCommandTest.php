@@ -18,7 +18,7 @@ class DeleteCommandTest extends TestCase
 
     private function initDB()
     {
-        $this->role = factory(Role::class)->create();
+        $this->role = Role::factory()->create();
     }
 
     public function testValid()

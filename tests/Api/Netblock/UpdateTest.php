@@ -28,8 +28,8 @@ class UpdateTest extends TestCase
 
     public function testUpdate()
     {
-        $netblock1 = factory(Netblock::class)->create();
-        $netblock2 = factory(Netblock::class)->make()->toArray();
+        $netblock1 = Netblock::factory()->create();
+        $netblock2 = Netblock::factory()->make()->toArray();
 
         $response = $this->executeCall($netblock2, $netblock1->id);
 
@@ -48,8 +48,8 @@ class UpdateTest extends TestCase
 
     public function testUpdateWithMissingProperty()
     {
-        $netblock1 = factory(Netblock::class)->create();
-        $netblock2 = factory(Netblock::class)->make()->toArray();
+        $netblock1 = Netblock::factory()->create();
+        $netblock2 = Netblock::factory()->make()->toArray();
 
         unset($netblock2['description']);
 

@@ -26,15 +26,14 @@ class EditCommandTest extends TestCase
 
     private function initDB()
     {
-        $this->noteHidden = factory(Note::class)->create(['hidden' => false]);
-        $this->noteViewed = factory(Note::class)->create(['viewed' => false]);
+        $this->noteHidden = Note::factory()->create(['hidden' => false]);
+        $this->noteViewed = Note::factory()->create(['viewed' => false]);
     }
 
     public function testWithoutId()
     {
-        ob_start();
         Artisan::call('note:edit');
-        $this->assertStringContainsString('Edit a note', ob_get_clean());
+        $this->assertStringContainsString('Edit a note', Artisan::output());
     }
 
     public function testWithInvalidId()

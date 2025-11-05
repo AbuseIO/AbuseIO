@@ -59,9 +59,8 @@ class ShowCommandTest extends TestCase
 
     public function testWithoutArguments()
     {
-        ob_start();
         $exitCode = Artisan::call('queue:show');
         $this->assertEquals(0, $exitCode);
-        $this->assertStringContainsString('Shows a queue', ob_get_clean());
+        $this->assertStringContainsString('Shows a queue', Artisan::output());
     }
 }

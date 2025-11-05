@@ -28,7 +28,7 @@ class ListCommandTest extends TestCase
     {
         Brand::where('id', '!=', 1)->delete();
 
-        $this->brands = factory(Brand::class, 10)->create();
+        $this->brands = Brand::factory()->count(10)->create();
 
         $this->name1 = $this->brands->first()->name;
         $this->name2 = $this->brands->get(1)->name;

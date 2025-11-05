@@ -17,7 +17,7 @@ class DestroyTest extends TestCase
     {
         $user = User::find(1);
 
-        $account = factory(Account::class)->create();
+        $account = Account::factory()->create();
 
         $server = $this->transformHeadersToServerVars(
             [

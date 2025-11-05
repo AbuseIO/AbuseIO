@@ -23,7 +23,7 @@ class DestroyTest extends TestCase
             ]
         );
 
-        $contact = factory(Contact::class)->create();
+        $contact = Contact::factory()->create();
 
         $response = $this->actingAs($user)->call('DELETE', self::getURLWithId($contact->id), [], [], [], $server);
 

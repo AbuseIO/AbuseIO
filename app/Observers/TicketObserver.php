@@ -33,8 +33,10 @@ class TicketObserver
             $ticket->ash_token_domain = $token;
         }
 
-        // call hooks
-        Hooks::call($ticket, 'saving');
+        // call hooks when enabled
+        if (config('main.hooks.enabled')) {
+            Hooks::call($ticket, 'saving');
+        }
     }
 
     /**
@@ -46,8 +48,10 @@ class TicketObserver
      */
     public function saved(Ticket $ticket)
     {
-        // call hooks
-        Hooks::call($ticket, 'saved');
+        // call hooks when enabled
+        if (config('main.hooks.enabled')) {
+            Hooks::call($ticket, 'saved');
+        }
     }
 
     /**
@@ -59,7 +63,9 @@ class TicketObserver
      */
     public function updating(Ticket $ticket)
     {
-        // call hooks
-        Hooks::call($ticket, 'updating');
+        // call hooks when enabled
+        if (config('main.hooks.enabled')) {
+            Hooks::call($ticket, 'updating');
+        }
     }
 }

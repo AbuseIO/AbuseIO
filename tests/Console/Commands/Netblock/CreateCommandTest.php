@@ -14,7 +14,7 @@ class CreateCommandTest extends TestCase
     public function testCreate()
     {
         /** @var Netblock $dummyBlock */
-        $dummyBlock = factory(Netblock::class)->make();
+        $dummyBlock = Netblock::factory()->make();
 
         $exitCode = Artisan::call(
             'netblock:create',

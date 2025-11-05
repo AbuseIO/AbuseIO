@@ -14,7 +14,7 @@ class CreateCommandTest extends TestCase
     public function testCreate()
     {
         /** @var Note $dummy */
-        $dummy = factory(Note::class)->make();
+        $dummy = Note::factory()->make();
 
         $exitCode = Artisan::call(
             'note:create',
