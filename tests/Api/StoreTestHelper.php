@@ -3,8 +3,8 @@
 namespace tests\Api;
 
 use AbuseIO\Models\Account;
-use AbuseIO\Models\User;
 use AbuseIO\Models\Role;
+use AbuseIO\Models\User;
 
 trait StoreTestHelper
 {

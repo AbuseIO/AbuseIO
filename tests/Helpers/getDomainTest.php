@@ -2,8 +2,8 @@
 
 namespace tests\Helpers;
 
-use tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use tests\TestCase;
 
 class getDomainTest extends TestCase
 {

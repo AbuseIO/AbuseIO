@@ -3,13 +3,14 @@
 namespace AbuseIO\Console\Commands;
 
 use Artisan;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Illuminate\Console\Command;
 
 trait ShowHelpWhenRunTimeExceptionOccurs
 {
     use ExitCodeHooks;
+
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
@@ -27,6 +28,7 @@ trait ShowHelpWhenRunTimeExceptionOccurs
             if (app()->environment('testing')) {
                 $this->line($this->getDescription());
                 echo $this->getDescription().PHP_EOL;
+
                 return $this->getFailureExitCode();
             }
 

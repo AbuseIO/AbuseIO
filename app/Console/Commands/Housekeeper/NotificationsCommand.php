@@ -2,9 +2,9 @@
 
 namespace AbuseIO\Console\Commands\Housekeeper;
 
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Jobs\Notification;
 use Illuminate\Console\Command;
-use AbuseIO\Console\Commands\ExitCodeHooks;
 
 /**
  * Class NotificationsCommand.
@@ -150,5 +150,5 @@ class NotificationsCommand extends Command
         }
 
         return $this->getSuccessExitCode();
-}
+    }
 }

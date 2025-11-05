@@ -2,8 +2,8 @@
 
 namespace AbuseIO\Console\Commands\Permission;
 
-use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Console\Commands\ExitCodeHooks;
+use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Permission;
 use AbuseIO\Models\PermissionRole;
 use AbuseIO\Models\Role;

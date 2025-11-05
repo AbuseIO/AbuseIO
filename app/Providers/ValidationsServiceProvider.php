@@ -6,7 +6,6 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
 use Lang;
 use Log;
-use Symfony\Component\Process\PhpExecutableFinder;
 use Validator;
 
 /**
@@ -252,9 +251,11 @@ class ValidationsServiceProvider extends ServiceProvider
                 // Basic sanity check: attempt to render inside a try/catch.
                 try {
                     view(['template' => $value, 'cache_key' => md5($value), 'secondsTemplateCacheExpires' => 0], [])->render();
+
                     return true;
                 } catch (\Throwable $e) {
                     Log::warning('bladetemplate validator failed to render: '.$e->getMessage());
+
                     return false;
                 }
             }

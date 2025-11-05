@@ -2,8 +2,8 @@
 
 namespace AbuseIO\Console\Commands\ContactNotificationMethod;
 
-use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Console\Commands\ExitCodeHooks;
+use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Contact;
 use AbuseIO\Services\NotificationService;
 use Illuminate\Console\Command;

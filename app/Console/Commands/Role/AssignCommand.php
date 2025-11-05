@@ -2,8 +2,8 @@
 
 namespace AbuseIO\Console\Commands\Role;
 
-use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Console\Commands\ExitCodeHooks;
+use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\RoleUser;
 use AbuseIO\Models\User;

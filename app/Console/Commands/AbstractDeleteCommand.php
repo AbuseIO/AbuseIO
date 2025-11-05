@@ -11,7 +11,8 @@ use Symfony\Component\Console\Input\InputDefinition;
  */
 abstract class AbstractDeleteCommand extends Command
 {
-    use ShowHelpWhenRunTimeExceptionOccurs, ExitCodeHooks;
+    use ShowHelpWhenRunTimeExceptionOccurs;
+    use ExitCodeHooks;
 
     final protected function configure()
     {
@@ -108,6 +109,7 @@ abstract class AbstractDeleteCommand extends Command
      * Hook to stop delete when relations exist.
      *
      * @param mixed $object
+     *
      * @return bool
      */
     protected function stopDeleteAndThrowAnErrorBecauseRelations($object)
@@ -116,8 +118,11 @@ abstract class AbstractDeleteCommand extends Command
     }
 
     abstract protected function getAsNoun();
+
     abstract protected function getAllowedArguments();
+
     abstract protected function getObjectByArguments();
+
     abstract protected function defineInput();
 
     // Exit code hooks now provided by ExitCodeHooks trait

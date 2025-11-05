@@ -1,4 +1,5 @@
 <?php
+
 namespace AbuseIO\Providers;
 
 use AbuseIO\Models\Event;

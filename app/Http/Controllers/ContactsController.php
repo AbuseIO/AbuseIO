@@ -8,7 +8,6 @@ use AbuseIO\Models\Contact;
 use AbuseIO\Services\NotificationService;
 use AbuseIO\Traits\Api;
 use AbuseIO\Transformers\ContactTransformer;
-
 use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use Redirect;

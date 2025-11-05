@@ -34,7 +34,7 @@ class AccountsController extends Controller
 
         // is the logged in account allowed to execute an action on the account
         $this->middleware(\AbuseIO\Http\Middleware\CheckAccount::class.':Account', [
-            'except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy']
+            'except' => ['search', 'index', 'create', 'store', 'export', 'logo', 'apiIndex', 'apiStore', 'apiShow', 'apiUpdate', 'apiDestroy'],
         ]);
 
         // method that only may be executed by the systemaccount

@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Console\Commands\Housekeeper;
 
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Jobs\AlertAdmin;
 use AbuseIO\Jobs\QueueTest;
 use AbuseIO\Models\Event;
@@ -11,11 +12,9 @@ use AbuseIO\Models\Job;
 use AbuseIO\Models\Ticket;
 use Carbon;
 use Illuminate\Console\Command;
-use AbuseIO\Console\Commands\ExitCodeHooks;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
 use Storage;
-use Validator;
 
 /**
  * Class RunCommand.

@@ -1,4 +1,5 @@
 <?php
+
 use AbuseIO\Http\Controllers\DomainsController;
 
 Route::group(

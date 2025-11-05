@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use AbuseIO\Models\Ticket;
-use Illuminate\Support\Facades\Config;
 use DateTime;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class TicketsTableSeeder extends Seeder
 {

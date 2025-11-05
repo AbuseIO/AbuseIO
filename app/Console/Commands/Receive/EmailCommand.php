@@ -2,10 +2,10 @@
 
 namespace AbuseIO\Console\Commands\Receive;
 
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Jobs\AlertAdmin;
 use AbuseIO\Jobs\EmailProcess;
 use AbuseIO\Jobs\EvidenceSave;
-use AbuseIO\Console\Commands\ExitCodeHooks;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Log;
@@ -104,7 +104,7 @@ class EmailCommand extends Command
         );
 
         return $this->getSuccessExitCode();
-}
+    }
 
     /**
      * We've hit a snag, so we are gracefully killing ourselves after we contact the admin about it.

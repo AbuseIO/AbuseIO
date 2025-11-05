@@ -10,6 +10,7 @@
  * - Must be a valid hostname with at least one dot and TLD length >= 2
  *
  * @param string $domain
+ *
  * @return bool
  */
 function getDomain($domain)

@@ -2,8 +2,8 @@
 
 namespace AbuseIO\Http\Middleware;
 
-use Illuminate\Support\Facades\Auth;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class CheckPermission.
@@ -29,11 +29,11 @@ class CheckPermission
 
         Auth::logout();
         $message = 'Sorry! You are not authorized to access that resource and have been logged out.';
-        
+
         if (!empty($permission)) {
             $message .= " Missing permission: {$permission}";
         } else {
-            $message .= " No permission specified for this route.";
+            $message .= ' No permission specified for this route.';
         }
 
         $request->session()->flash(

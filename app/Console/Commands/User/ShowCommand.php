@@ -74,6 +74,7 @@ class ShowCommand extends AbstractShowCommand
         // filter sensitive or redundant fields if present
         $result = array_filter($result, function ($row) {
             $field = $row[0];
+
             return !in_array($field, ['Password', 'Account id', 'Remember token']);
         });
 

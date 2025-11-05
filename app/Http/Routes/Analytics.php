@@ -1,6 +1,7 @@
 <?php
 
 use AbuseIO\Http\Controllers\AnalyticsController;
+
 Route::group(
     [
         'prefix' => 'analytics',
