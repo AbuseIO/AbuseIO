@@ -29,6 +29,7 @@ Route::group(
         */
         Route::get('{tickets}', [TicketsController::class, 'show'])
             ->middleware('permission:tickets_view')
+            ->where('tickets', '[0-9]+')
             ->name('show');
 
         /*
@@ -53,9 +54,11 @@ Route::group(
         */
         Route::get('{tickets}/edit', [TicketsController::class, 'edit'])
             ->middleware('permission:tickets_edit')
+            ->where('tickets', '[0-9]+')
             ->name('edit');
         Route::match(['put', 'patch'], '{tickets}', [TicketsController::class, 'update'])
             ->middleware('permission:tickets_edit')
+            ->where('tickets', '[0-9]+')
             ->name('update');
 
         /*
@@ -63,6 +66,7 @@ Route::group(
         */
         Route::delete('/{tickets}', [TicketsController::class, 'destroy'])
             ->middleware('permission:tickets_delete')
+            ->where('tickets', '[0-9]+')
             ->name('destroy');
 
         /*
@@ -75,6 +79,7 @@ Route::group(
             function () {
                 Route::get('{who?}', [TicketsController::class, 'update'])
                     ->middleware('permission:tickets_edit')
+                    ->where('tickets', '[0-9]+')
                     ->name('contact_update');
             }
         );
@@ -89,6 +94,7 @@ Route::group(
             function () {
                 Route::get('{who?}', [TicketsController::class, 'notify'])
                     ->middleware('permission:tickets_edit')
+                    ->where('tickets', '[0-9]+')
                     ->name('notify');
             }
         );
@@ -103,6 +109,7 @@ Route::group(
             function () {
                 Route::get('{status}', [TicketsController::class, 'status'])
                     ->middleware('permission:tickets_edit')
+                    ->where('tickets', '[0-9]+')
                     ->name('status');
             }
         );

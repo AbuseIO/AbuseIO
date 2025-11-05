@@ -22,6 +22,14 @@ class CheckAccount
     private $request;
 
     private $model;
+    
+    /**
+     * The expected route parameter name for the model.
+     * Example: Ticket -> 'tickets', Contact -> 'contacts'.
+     *
+     * @var string|null
+     */
+    private $routeParamName;
 
     /**
      * Handle an incoming request.
@@ -39,6 +47,7 @@ class CheckAccount
 
         $this->request = $request;
         $this->model = $model;
+        $this->routeParamName = $this->getRouteParamName();
 
         if ($this->checkModelIdValid()
             && $this->hasAccountAccessMethod()
@@ -91,15 +100,18 @@ class CheckAccount
      */
     private function resolveModelId($request)
     {
-        // use the correct segment
-        if (isset($request->api_account)) {
-            $model_id = $request->segment(self::API_ID_SEGMENT);
-        } else {
-            $model_id = $request->segment(self::WEB_ID_SEGMENT);
-        }
-
-        if (empty($model_id)) {
-            $model_id = $request->input('id');
+        // Prefer route parameter specific to the model; if not present, leave model_id null.
+        $model_id = null;
+        if (!empty($this->routeParamName)) {
+            $paramValue = $request->route($this->routeParamName);
+            if (!is_null($paramValue)) {
+                // If route model binding is used, extract the key from the model instance.
+                if (is_object($paramValue) && method_exists($paramValue, 'getKey')) {
+                    $model_id = $paramValue->getKey();
+                } else {
+                    $model_id = $paramValue;
+                }
+            }
         }
 
         $this->model_id = $model_id;
@@ -112,6 +124,11 @@ class CheckAccount
     {
         $this->resolveModelId($this->request);
 
+        // If the route does not include a model parameter, skip validation without logging.
+        if (is_null($this->model_id)) {
+            return false;
+        }
+
         if (!empty($this->model_id) && is_numeric($this->model_id)) {
             return true;
         }
@@ -121,5 +138,34 @@ class CheckAccount
         );
 
         return false;
+    }
+
+    /**
+     * Determine the expected route parameter name for the current model.
+     *
+     * @return string|null
+     */
+    private function getRouteParamName()
+    {
+        // Map known models to their route parameter names.
+        $map = [
+            'Ticket'   => 'tickets',
+            'Account'  => 'accounts',
+            'Brand'    => 'brands',
+            'Contact'  => 'contacts',
+            'Domain'   => 'domains',
+            'Netblock' => 'netblocks',
+            'Note'     => 'notes',
+            'Evidence' => 'evidence',
+            'User'     => 'users',
+        ];
+
+        $base = class_basename($this->model);
+        if (array_key_exists($base, $map)) {
+            return $map[$base];
+        }
+
+        // Fallback: lowercase plural of the base class name.
+        return strtolower($base).'s';
     }
 }
