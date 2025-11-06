@@ -35,6 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'api.enabled' => \AbuseIO\Http\Middleware\ApiEnabled::class,
             'api.account' => \AbuseIO\Http\Middleware\ApiAccountAvailable::class,
             'api.system' => \AbuseIO\Http\Middleware\ApiSystemAccount::class,
+            'api.enabled' => \AbuseIO\Http\Middleware\ApiEnabled::class,
             'api.token' => \AbuseIO\Http\Middleware\CheckApiToken::class,
             'ash.token' => \AbuseIO\Http\Middleware\CheckAshToken::class,
             'auth' => \AbuseIO\Http\Middleware\Authenticate::class,
