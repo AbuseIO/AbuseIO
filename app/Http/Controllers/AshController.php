@@ -136,7 +136,8 @@ class AshController extends Controller
             $note->save();
         }
 
-        return redirect(route('ash.show', [$ticket->id, $token]))->with(compact('message'));
+        // Redirect back to ASH page and focus the communication tab
+        return redirect(route('ash.show', [$ticket->id, $token]).'#resolved')->with(compact('message'));
     }
 
     /**

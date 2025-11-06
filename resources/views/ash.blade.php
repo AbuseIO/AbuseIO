@@ -216,5 +216,32 @@
             </div>
         </div>
     </div>
+    <script>
+        // Activate tab from URL fragment on load (e.g., #resolved)
+        (function() {
+            var hash = window.location.hash;
+            if (hash) {
+                var $tab = $('.nav.nav-tabs a[href="' + hash + '"]');
+                if (!$tab.length) {
+                    $tab = $('.nav-tabs a[href="' + hash + '"]');
+                }
+                if ($tab.length && typeof $tab.tab === 'function') {
+                    $tab.tab('show');
+                }
+            }
+
+            // Keep fragment synced when switching tabs
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var target = $(e.target).attr('href');
+                if (target) {
+                    if (history.replaceState) {
+                        history.replaceState(null, null, target);
+                    } else {
+                        window.location.hash = target;
+                    }
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
