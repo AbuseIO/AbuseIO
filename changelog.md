@@ -33,12 +33,12 @@
 
 ## Known issues
 
+- API is 'wonky', it was never fully tested, but it needs to be. For now its experimental at best.
+
 - PHPmailuser needs to be migrated from kruisdraad to abuseio repo, and changes backported (while retaining our patches)
 - abuseio-docker is broken, at this point set to be removed in favour if Ansible
 - abuseio-ansible needs to be updated for 5.0
 
-- width of display needs to be improved
-- add ticket filter on customer reference (plus display)
 - netcraft new samples with xarf
 - Shadowserver Report Changes #373
 
