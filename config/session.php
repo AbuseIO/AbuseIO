@@ -1,5 +1,19 @@
 <?php
 
+$url = env('dAPP_URL', null);
+$scheme = $url ? parse_url($url, PHP_URL_SCHEME) : null;
+$host = parse_url($url, PHP_URL_HOST) ?? null;
+
+//default is not SSL
+$secure_flag = false;
+$httponly_flag = false;
+$domain_flag = $host;
+
+if (strtolower((string) $scheme) === 'https') {
+    $secure_flag = true;
+    $httponly_flag = true;
+}
+
 return [
 
     /*
@@ -137,7 +151,7 @@ return [
     |
     */
 
-    'domain' => null,
+    'domain' => $domain_flag,
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +164,6 @@ return [
     |
     */
 
-    'secure' => false,
-
+    'secure' => $secure_flag,
+    'httponly' => $httponly_flag,
 ];
