@@ -38,7 +38,7 @@
             <td></td>
             <td>
                 <select id="type_id" class="form-control">
-                    <option value=""></option>
+                    <option value="">{{ trans('misc.all') }}</option>
                     @foreach($types as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
@@ -46,7 +46,7 @@
             </td>
             <td>
                 <select id="class_id" class="form-control">
-                    <option value=""></option>
+                    <option value="">{{ trans('misc.all') }}</option>
                     @foreach($classes as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
@@ -56,7 +56,8 @@
             <td></td>
             <td>
                 <select id="statuses" class="form-control">
-                    <option value=""></option>
+                    <option value="">{{ trans('misc.all') }}</option>
+                    <option value="OPEN_ESCALATED">{{ trans('tickets.open') }} + {{ trans('tickets.escalated') }}</option>
                     @foreach($statuses as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach

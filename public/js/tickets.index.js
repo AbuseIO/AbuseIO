@@ -11,7 +11,7 @@ function fnTicketFilter() {
 $(document).ready(function() {
 
     // default filter options
-    var status_filter = { "search" : "open"};
+    var status_filter = { "search" : "OPEN_ESCALATED"};
     var type_id_filter = null;
     var classification_id_filter = null;
 
@@ -77,7 +77,7 @@ $(document).ready(function() {
             if (user_options != undefined && user_options.ticket_status_filter != undefined) {
                 $("#statuses").val(user_options.ticket_status_filter);
             } else {
-                $("#statuses").val('OPEN');
+                $("#statuses").val('OPEN_ESCALATED');
             }
 
             // set the status filter to the user option if available

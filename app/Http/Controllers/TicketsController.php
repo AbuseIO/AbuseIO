@@ -159,6 +159,17 @@ class TicketsController extends Controller
                     return $actions;
                 }
             )
+            // Custom filter for status column to support combined option OPEN+ESCALATED
+            // Target the column name used by DataTables ('tickets.status_id') so the override applies
+            ->filterColumn('tickets.status_id', function ($query, $keyword) {
+                $keyword = strtoupper(trim((string) $keyword));
+                if ($keyword === 'OPEN_ESCALATED') {
+                    $query->whereIn('tickets.status_id', ['OPEN', 'ESCALATED']);
+                } elseif ($keyword !== '') {
+                    // Use exact match for explicit statuses
+                    $query->where('tickets.status_id', $keyword);
+                }
+            })
             ->editColumn(
                 'type_id',
                 function ($ticket) {
