@@ -3,7 +3,6 @@
 namespace AbuseIO\Models;
 
 use Illuminate\Support\Str;
-use Lang;
 
 /**
  * Class Incident.

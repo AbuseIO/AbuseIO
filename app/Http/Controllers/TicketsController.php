@@ -187,6 +187,7 @@ class TicketsController extends Controller
                 'class_id',
                 function ($ticket) {
                     $canonical = classificationLookup($ticket->class_id) ?? $ticket->class_id;
+
                     return trans('classifications.'.$canonical.'.name');
                 }
             )
@@ -201,6 +202,7 @@ class TicketsController extends Controller
                 'updated_at',
                 function ($ticket) {
                     $formatted = date('d-m-Y H:i', strtotime($ticket->getOriginal('updated_at')));
+
                     return '<span style="white-space: nowrap;">'.$formatted.'</span>';
                 }
             )
@@ -217,12 +219,13 @@ class TicketsController extends Controller
                             .$unread
                             .'</span>';
                     }
+
                     return $html;
                 }
             )
             ->rawColumns(['actions', 'updated_at', 'notes_count'])
             ->make(true);
-        }
+    }
 
     /**
      * api search

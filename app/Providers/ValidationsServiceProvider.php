@@ -4,7 +4,6 @@ namespace AbuseIO\Providers;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
-use Lang;
 use Log;
 use Validator;
 

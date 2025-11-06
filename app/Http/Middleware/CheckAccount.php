@@ -22,7 +22,7 @@ class CheckAccount
     private $request;
 
     private $model;
-    
+
     /**
      * Base model name as provided to the middleware (without namespace).
      * Used for logging to match historical test expectations.
@@ -30,7 +30,7 @@ class CheckAccount
      * @var string
      */
     private $modelBase;
-    
+
     /**
      * The expected route parameter name for the model.
      * Example: Ticket -> 'tickets', Contact -> 'contacts'.
@@ -140,6 +140,7 @@ class CheckAccount
             Log::notice(
                 "CheckAccount Middleware is called, with model_id [] for \\AbuseIO\\Models\\[{$this->modelBase}], which doesn't match the model_id format"
             );
+
             return false;
         }
 

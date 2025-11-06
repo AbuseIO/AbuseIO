@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
  *   classificationLookup('PHISING_WEBSITE')  => 'PHISHING_WEBSITE'
  *
  * @param string|null $keyOrAlias
+ *
  * @return string|null
  */
 function classificationLookup(?string $keyOrAlias): ?string
@@ -40,5 +41,6 @@ function classificationLookup(?string $keyOrAlias): ?string
     }
 
     Log::error("classificationLookup: Unknown classification '{$keyOrAlias}' (no canonical key or alias match)");
+
     return null;
 }
