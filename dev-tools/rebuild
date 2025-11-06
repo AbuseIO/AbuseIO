@@ -21,11 +21,17 @@ sudo -u abuseio php /opt/abuseio/artisan view:clear
 sudo -u abuseio php /opt/abuseio/artisan route:clear
 sudo -u abuseio composer --working-dir=/opt/abuseio dump-autoload
 
-echo restart services
-sudo systemctl restart abuseio_queue_collector
-sudo systemctl restart abuseio_queue_email_incoming
-sudo systemctl restart abuseio_queue_email_outgoing
-sudo systemctl restart abuseio_queue_delegation
+echo stopping services
+systemctl stop abuseio_queue_collector
+systemctl stop abuseio_queue_email_incoming
+systemctl stop abuseio_queue_email_outgoing
+systemctl stop abuseio_queue_delegation
+
+echo starting services
+systemctl start abuseio_queue_collector
+systemctl start abuseio_queue_email_incoming
+systemctl start abuseio_queue_email_outgoing
+systemctl start abuseio_queue_delegation
 
 sudo -u abuseio php /opt/abuseio/artisan user:create admin@isp.local --password=password
 sudo -u abuseio php /opt/abuseio/artisan role:assign --role=admin --user=admin@isp.local
