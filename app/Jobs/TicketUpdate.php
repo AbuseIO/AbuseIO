@@ -3,6 +3,7 @@
 namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Ticket;
+use Carbon\Carbon;
 
 /**
  * Class TicketUpdate.
@@ -16,7 +17,9 @@ class TicketUpdate extends Job
      */
     public static function domainContact($ticket)
     {
-        $domainContact = FindContact::byDomain($ticket['domain']);
+        $firstEventTs = optional($ticket->firstEvent->first())->timestamp;
+        $date = $firstEventTs ? Carbon::createFromTimestamp($firstEventTs) : null;
+        $domainContact = FindContact::byDomain($ticket['domain'], false, $date);
 
         // Update Domain Contact fields in ticket
         $ticket->domain_contact_account_id = $domainContact->account_id;
@@ -38,7 +41,9 @@ class TicketUpdate extends Job
      */
     public static function ipContact($ticket)
     {
-        $ipContact = FindContact::byIP($ticket['ip']);
+        $firstEventTs = optional($ticket->firstEvent->first())->timestamp;
+        $date = $firstEventTs ? Carbon::createFromTimestamp($firstEventTs) : null;
+        $ipContact = FindContact::byIP($ticket['ip'], false, $date);
 
         // Update IP Contact fields in ticket
         $ticket->ip_contact_account_id = $ipContact->account_id;

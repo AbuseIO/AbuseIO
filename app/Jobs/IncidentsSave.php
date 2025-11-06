@@ -4,6 +4,7 @@ namespace AbuseIO\Jobs;
 
 use AbuseIO\Models\Event;
 use AbuseIO\Models\Ticket;
+use Carbon\Carbon;
 use Log;
 use Validator;
 
@@ -70,10 +71,12 @@ class IncidentsSave extends Job
             // Lookup the ip contact and if needed the domain contact too
             $findContact = new FindContact();
 
-            $ipContact = $findContact->byIP($incident->ip);
+            // Use incident timestamp for point-in-time ownership resolution
+            $ts = Carbon::createFromTimestamp($incident->timestamp);
+            $ipContact = $findContact->byIP($incident->ip, false, $ts);
 
             if (is_string($incident->domain) && $incident->domain !== '') {
-                $domainContact = $findContact->byDomain($incident->domain);
+                $domainContact = $findContact->byDomain($incident->domain, false, $ts);
             } else {
                 $domainContact = $findContact->undefined();
             }

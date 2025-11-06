@@ -6,8 +6,8 @@ use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
 use AbuseIO\Models\Netblock;
+use Carbon\Carbon;
 use Log;
-use ReflectionMethod;
 use Validator;
 
 /**
@@ -80,12 +80,13 @@ class FindContact extends Job
     /**
      * Return the contact from the external method;.
      *
-     * @param string $section
-     * @param string $search
+     * @param string      $section
+     * @param string      $search
+     * @param null|string $timestamp point-in-time for ownership (optional)
      *
      * @return object | false
      */
-    public static function getExternalContact($section, $search)
+    public static function getExternalContact($section, $search, $timestamp = null)
     {
         $result = false;
         $contact = null;
@@ -107,8 +108,17 @@ class FindContact extends Job
                 $method = $config['method'];
 
                 if (class_exists($class) === true && method_exists($class, $method) === true) {
-                    $reflectionMethod = new ReflectionMethod($class, $method);
-                    $contact = $reflectionMethod->invoke(new $class(), $search);
+                    $instance = new $class();
+                    // Prefer calling provider with (search, timestamp) and gracefully fallback to legacy (search)
+                    try {
+                        $contact = $instance->$method($search, $timestamp);
+                    } catch (\ArgumentCountError | \TypeError | \Throwable $e) {
+                        try {
+                            $contact = $instance->$method($search);
+                        } catch (\Throwable $e2) {
+                            $contact = null;
+                        }
+                    }
 
                     if (!empty($contact) && self::validateContact($contact)) {
                         $result = $contact;
@@ -131,7 +141,7 @@ class FindContact extends Job
      *
      * @return object
      */
-    public static function byIP($ip, $local = false)
+    public static function byIP($ip, $local = false, $timestamp = null)
     {
         return self::getContact(
             'ip',
@@ -142,7 +152,8 @@ class FindContact extends Job
                 ->orderBy('first_ip_int', 'desc')
                 ->orderBy('last_ip_int', 'asc')
                 ->take(1),
-            $local
+            $local,
+            $timestamp
         );
     }
 
@@ -154,7 +165,7 @@ class FindContact extends Job
      *
      * @return object
      */
-    public static function byDomain($domain, $local = false)
+    public static function byDomain($domain, $local = false, $timestamp = null)
     {
         return self::getContact(
             'domain',
@@ -162,7 +173,8 @@ class FindContact extends Job
             Domain::where('name', '=', $domain)
                 ->where('enabled', '=', true)
                 ->take(1),
-            $local
+            $local,
+            $timestamp
         );
     }
 
@@ -174,7 +186,7 @@ class FindContact extends Job
      *
      * @return object
      */
-    public static function byId($id, $local = false)
+    public static function byId($id, $local = false, $timestamp = null)
     {
         return self::getContact(
             'id',
@@ -182,7 +194,8 @@ class FindContact extends Job
             Contact::where('reference', '=', $id)
                 ->where('enabled', '=', true)
                 ->take(1),
-            $local
+            $local,
+            $timestamp
         );
     }
 
@@ -193,15 +206,31 @@ class FindContact extends Job
      * @param string $type        ip, domain or id
      * @param string $term        search the contact for this term
      * @param        $local_query $query to retrieve the local contact
-     * @param bool   $local       only return the local contact
+     * @param bool        $local       only return the local contact
+     * @param null|string $timestamp   point-in-time for ownership (optional)
      *
      * @return object
      */
-    public static function getContact($type, $term, $local_query, $local)
+    public static function getContact($type, $term, $local_query, $local, $timestamp = null)
     {
         $contact = self::undefined();
+        // Determine effective timestamp: default to now() when null
+        $date = $timestamp instanceof Carbon ? $timestamp : ($timestamp ? Carbon::parse($timestamp) : Carbon::now());
+        $timestampString = $date->toDateTimeString();
 
         // internal lookup
+        // Apply point-in-time filters for models that use SoftDeletes
+        $modelClass = get_class($local_query->getModel());
+        $usesSoftDeletes = in_array('Illuminate\\Database\\Eloquent\\SoftDeletes', class_uses_recursive($modelClass));
+        if ($usesSoftDeletes) {
+            $local_query = $local_query
+                ->withTrashed()
+                ->where(function ($q) use ($timestampString) {
+                    $q->whereNull('deleted_at')
+                      ->orWhere('deleted_at', '>', $timestampString);
+                });
+        }
+
         $result = $local_query->get();
 
         if (isset($result[0])) {
@@ -214,7 +243,7 @@ class FindContact extends Job
         }
 
         // external lookup
-        $external_contact = self::getExternalContact($type, $term);
+        $external_contact = self::getExternalContact($type, $term, $timestampString);
 
         // if external lookups are preferred or if the local lookup fails
         // and the external lookup succeeded return the external lookup
