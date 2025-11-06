@@ -28,6 +28,7 @@
             <th>{{ trans('tickets.events') }}</th>
             <th>{{ trans('tickets.notes') }}</th>
             <th>{{ trans('misc.status') }}</th>
+            <th>Last Update</th>
             <th class="text-right">{{ trans('misc.action') }}</th>
         </tr>
     </thead>
@@ -63,6 +64,7 @@
                     @endforeach
                 </select>
             </td>
+            <td></td>
             <td></td>
         </tr>
     </tfoot>

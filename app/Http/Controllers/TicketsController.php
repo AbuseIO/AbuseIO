@@ -82,6 +82,7 @@ class TicketsController extends Controller
             'tickets.type_id',
             'tickets.class_id',
             'tickets.status_id',
+            'tickets.updated_at',
             'tickets.ip_contact_account_id',
             'tickets.ip_contact_reference',
             'tickets.ip_contact_name',
@@ -189,9 +190,17 @@ class TicketsController extends Controller
                     return trans('types.status.abusedesk.'.$ticket->status_id.'.name');
                 }
             )
-            ->rawColumns(['actions'])
+            // Format Last Update as d-m-Y H:i and prevent wrapping
+            ->editColumn(
+                'updated_at',
+                function ($ticket) {
+                    $formatted = date('d-m-Y H:i', strtotime($ticket->getOriginal('updated_at')));
+                    return '<span style="white-space: nowrap;">'.$formatted.'</span>';
+                }
+            )
+            ->rawColumns(['actions', 'updated_at'])
             ->make(true);
-    }
+        }
 
     /**
      * api search

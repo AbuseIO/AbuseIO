@@ -44,6 +44,7 @@ $(document).ready(function() {
             null,
             null,
             status_filter,
+            null,
             null
         ],
         language: {
@@ -58,6 +59,7 @@ $(document).ready(function() {
             { data: 'event_count', name: 'event_count', searchable: false },
             { data: 'notes_count', name: 'notes_count', searchable: false },
             { data: 'status_id', name: 'tickets.status_id' },
+            { data: 'updated_at', name: 'tickets.updated_at' },
             { data: 'actions', orderable: false, searchable: false, class: "text-right" }
         ],
         initComplete: function () {
