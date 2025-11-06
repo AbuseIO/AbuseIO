@@ -54,12 +54,12 @@ class TicketsController extends Controller
         if (is_array($columns)) {
             foreach (
                 [
-                    'ticket_type_filter'           => 3,
-                    'ticket_classification_filter' => 4,
-                    'ticket_status_filter'         => 7,
+                    'ticket_type_filter'           => 5,
+                    'ticket_classification_filter' => 6,
+                    'ticket_status_filter'         => 9,
                 ] as $filter => $column
             ) {
-                // save the type filter option in the user
+                // save the type/class/status filter option in the user
                 if (array_key_exists($column, $columns) &&
                     array_key_exists('search', $columns[$column]) &&
                     array_key_exists('value', $columns[$column]['search'])) {
@@ -156,12 +156,16 @@ class TicketsController extends Controller
                     });
                 }
             })
-            // Ensure unread filtering applies even if column mapping differs
+            // Ensure unread filtering applies even if column order differs
             ->filter(function ($query) use ($request) {
                 $columns = $request->input('columns');
-                if (is_array($columns) && array_key_exists(6, $columns)) {
-                    $value = $columns[6]['search']['value'] ?? '';
-                    if (strtoupper(trim((string) $value)) === 'UNREAD') {
+                if (!is_array($columns)) {
+                    return;
+                }
+                foreach ($columns as $col) {
+                    $dataName = $col['data'] ?? '';
+                    $searchVal = $col['search']['value'] ?? '';
+                    if ($dataName === 'notes_count' && strtoupper(trim((string) $searchVal)) === 'UNREAD') {
                         $query->whereExists(function ($sub) {
                             $sub->select(DB::raw(1))
                                 ->from('notes as n')
@@ -169,6 +173,7 @@ class TicketsController extends Controller
                                 ->where('n.viewed', '=', 'false')
                                 ->whereNull('n.deleted_at');
                         });
+                        break;
                     }
                 }
             }, true)

@@ -94,3 +94,9 @@ pre.prettyprint {
     margin-bottom: 0;
     padding: 9.5px;
 }
+
+/* Padding for fluid main container to add left/right whitespace */
+.app-container {
+    padding-left: 40px;
+    padding-right: 40px;
+}

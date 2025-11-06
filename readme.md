@@ -1,9 +1,6 @@
 ## Version 5.0 is DEV and NOT working !
 
 TODO
-- Update composer.json legacy classmap into psr4 (but errors when done)
-- update public/js/*
-
 - fix dependancy error for abuseio/hook-delegate (FOR NOW REMOVED)
 
 - kruisdraad/phpmailer (might need update)

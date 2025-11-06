@@ -28,6 +28,8 @@
             <th>{{ trans('misc.ticket_id') }}</th>
             <th>{{ trans('misc.ip') }}</th>
             <th>{{ trans('misc.domain') }}</th>
+            <th class="col-ip-owner">IP Owner</th>
+            <th class="col-domain-owner">Domain Owner</th>
             <th>{{ trans('misc.type') }}</th>
             <th>{{ trans('misc.classification') }}</th>
             <th>{{ trans('tickets.events') }}</th>
@@ -42,6 +44,8 @@
             <td></td>
             <td></td>
             <td></td>
+            <td><input id="ip_owner_ref" class="form-control" placeholder="Search IP owner" /></td>
+            <td><input id="domain_owner_ref" class="form-control" placeholder="Search Domain owner" /></td>
             <td>
                 <select id="type_id" class="form-control">
                     <option value="">{{ trans('misc.all') }}</option>

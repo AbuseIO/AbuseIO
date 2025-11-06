@@ -1,25 +1,49 @@
-# AbuseIO 4.3.0 Release notes
+# AbuseIO 5.0.0 Release notes
 
 ## Enhancements
 
+- Switch Laravel from mysql to mariadb native engine
+- Changed support into PHP8.4 (which is the minimum requirement now)
+- Updated /admin/tickets, sorting shows default state, last-updated, ip/domain owner and shows unread notes
+- Classifications now have aliasses, so wrongly named classifications can be fixed and duplicate code removed
+- improve layout for modern screen resolutions and accomidate for extra fields in tables
+
 ## Changes 
 
-- Upgraded Laravel engine to version 6.20.x (from 5.6) which includes support for composer2
+- Upgraded Laravel engine to version 12.x (from 6.x) 
+-- all legacy coding styles from Laravel have been addressed, using 12.x coding, where found.
+-- $auth_user replaced with $auth()->user(), new coding style
+-- CLI commands have different exit results (as of Laravel 8.x) which has been replaced with a helper.
+-- CSV via ddeboer/data-import has been migrated into native CSV handling from PHP8
+- Upgraded all dependancies to their latest version or replaced them
+-- Moved from Uuid to Str::Uuid
 - Replaced unmaintained packages by referred replacements
-- Upgraded subpackages to latest version compatible with engine v6
+- Removed packages that do not have any referred replacements and refactored code
+- Upgraded subpackages to latest version compatible with engine v12
+
+## Security fixes
+
+- Updated public/js and public/css components to their latest version
 
 ## Bug fixes
 
-- Fixed a Hydrate error, by casting it to proper array
-- Fixed iodef depricated method usage (https://github.com/marknl/iodef/pull/4)
+- Fixed bug where you could not change language properly
+- Fixed bug and add guard where mailarchive directories where not setting chmod properly
+- Fixed bug in iodef and singleton packages and moved them into AbuseIO repo for better management
 
 ## Known issues
 
+- PHPmailuser needs to be migrated from kruisdraad to abuseio repo, and changes backported (while retaining our patches)
+- abuseio-docker is broken, at this point set to be removed in favour if Ansible
+- abuseio-ansible needs to be updated for 5.0
+
+- width of display needs to be improved
+- add ticket filter on customer reference (plus display)
+- netcraft new samples with xarf
+- Shadowserver Report Changes #373
+
+
 ### Absolete packages
-- wpb/string-blade-compiler is no longer avaiable in the future and must be replaced
-- zendframework/* packages are no longer avaiable in the future and must be replaced
 
 ### Broken parsers
-- feedback loop parser is returning errors on all sampels, unknown reasons
-- spamexperts samples 3 t/m 9 is returning errors on all sampels, unknown reasons
 

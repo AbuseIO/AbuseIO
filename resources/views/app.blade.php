@@ -23,7 +23,7 @@
 	</head>
 	<body>
 	    <nav class="navbar navbar-inverse navbar-fixed-top">
-	        <div class="container">
+	        <div class="container-fluid">
 	            <div class="navbar-header">
 	                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
 	                    <span class="sr-only">Toggle navigation</span>
@@ -69,7 +69,7 @@
 				</div>
 			</div>
 		</nav>
-		<div class="container">
+		<div class="container-fluid app-container">
 			@if (Session::has('message'))
 			    <div class="alert alert-info alert-dismissible">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

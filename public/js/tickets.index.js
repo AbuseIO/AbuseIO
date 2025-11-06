@@ -4,10 +4,10 @@ function fnTicketFilter() {
     var class_id = $("#class_id option:selected").val();
     var statuses = $("#statuses option:selected").val();
     var notesFilter = $("#notes_filter option:selected").val();
-    table.column(3).search(type_id);
-    table.column(4).search(class_id);
-    table.column(6).search(notesFilter);
-    table.column(7).search(statuses).draw();
+    table.column(5).search(type_id);
+    table.column(6).search(class_id);
+    table.column(8).search(notesFilter);
+    table.column(9).search(statuses).draw();
 }
 
 $(document).ready(function() {
@@ -32,23 +32,33 @@ $(document).ready(function() {
     var table = $('#tickets-table').DataTable( {
         processing: true,
         serverSide: true,
+        autoWidth: false,
         ajax: searchroute,
-        columnDefs: [ {
-            targets: -1,
-            data: null,
-            defaultContent: " "
-        } ],
+        columnDefs: [
+            {
+                targets: -1,
+                data: null,
+                defaultContent: " "
+            },
+            {
+                targets: [3, 4],
+                className: 'col-ip-owner',
+                width: '120px'
+            }
+        ],
         "searchCols": [
-            null,
-            null,
-            null,
-            type_id_filter,
-            classification_id_filter,
-            null,
-            notes_filter,
-            status_filter,
-            null,
-            null
+            null,                // id
+            null,                // ip
+            null,                // domain
+            null,                // ip_contact_reference
+            null,                // domain_contact_reference
+            type_id_filter,      // type
+            classification_id_filter, // class
+            null,                // events
+            notes_filter,        // notes
+            status_filter,       // status
+            null,                // updated_at
+            null                 // actions
         ],
         language: {
             url: locale
@@ -57,6 +67,8 @@ $(document).ready(function() {
             { data: 'id', name: 'tickets.id' },
             { data: 'ip', name: 'tickets.ip' },
             { data: 'domain', name: 'tickets.domain' },
+            { data: 'ip_contact_reference', name: 'tickets.ip_contact_reference', className: 'col-ip-owner' },
+            { data: 'domain_contact_reference', name: 'tickets.domain_contact_reference', className: 'col-domain-owner' },
             { data: 'type_id', name: 'tickets.type_id' },
             { data: 'class_id', name: 'tickets.class_id' },
             { data: 'event_count', name: 'event_count', searchable: false },
@@ -114,4 +126,12 @@ $(document).ready(function() {
     if (user_options != undefined && user_options.ticket_sort_order != undefined) {
         table.order([user_options.ticket_sort_order.column, user_options.ticket_sort_order.dir]);
     }
+
+    // Wire per-column search for IP/Domain owner references
+    $('#ip_owner_ref').on('keyup change', function () {
+        table.column(3).search(this.value).draw();
+    });
+    $('#domain_owner_ref').on('keyup change', function () {
+        table.column(4).search(this.value).draw();
+    });
 });
