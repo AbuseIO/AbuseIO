@@ -13,6 +13,11 @@
 <h1 class="page-header">{{ trans('misc.tickets') }}</h1>
 <div class="row">
     <div class="col-md-4 col-md-offset-8 text-right">
+        @if(!empty($has_unread_notes) && $has_unread_notes)
+        <a href="#" id="unread-notes-alert" class="btn btn-warning" style="margin-right:8px;">
+            <span class="glyphicon glyphicon-envelope"></span> Unread notes!
+        </a>
+        @endif
         <a href="{{ route('admin.incidents.create') }}" class="btn btn-info">{{ trans('tickets.button.new_event') }}</a>
         <a href="{{ route('admin.tickets.export', ['format' => 'csv']) }}" class="btn btn-info">{{ trans('misc.button.csv_export') }}</a>
     </div>
@@ -54,7 +59,12 @@
                 </select>
             </td>
             <td></td>
-            <td></td>
+            <td>
+                <select id="notes_filter" class="form-control">
+                    <option value="">All</option>
+                    <option value="UNREAD">Unread</option>
+                </select>
+            </td>
             <td>
                 <select id="statuses" class="form-control">
                     <option value="">{{ trans('misc.all') }}</option>

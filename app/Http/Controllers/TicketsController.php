@@ -90,51 +90,22 @@ class TicketsController extends Controller
             'tickets.domain_contact_reference',
             'tickets.domain_contact_name',
             DB::raw('count(distinct events.id) as event_count'),
-            DB::raw('count(distinct notes.id) as notes_count')
+            DB::raw('count(distinct notes_all.id) as notes_count'),
+            DB::raw('count(distinct notes_unread.id) as unread_notes_count')
         )
             ->leftJoin('events', 'events.ticket_id', '=', 'tickets.id')
-            ->leftJoin(
-                'notes',
-                function ($join) {
-                    // We need a LEFT JOIN .. ON .. AND ..).
-                    // This doesn't exist within Illuminate's JoinClause class
-                    // So we use some nesting foo here
-                    // Going forward to 5_4 removed foo in favour of compound on because nesting deprecated;
-                    // Resulting SQL is:
-                    /*
-                     * SELECT `tickets`.`id`,
-                     *        `tickets`.`ip`,
-                     *        `tickets`.`domain`,
-                     *        `tickets`.`type_id`,
-                     *        `tickets`.`class_id`,
-                     *        `tickets`.`status_id`,
-                     *        `tickets`.`ip_contact_account_id`,
-                     *        `tickets`.`ip_contact_reference`,
-                     *        `tickets`.`ip_contact_name`,
-                     *        `tickets`.`domain_contact_account_id`,
-                     *        `tickets`.`domain_contact_reference`,
-                     *        `tickets`.`domain_contact_name`,
-                     *        count(DISTINCT events.id) AS event_count,
-                     *        count(DISTINCT notes.id) AS notes_count
-                     * FROM `tickets`
-                     * LEFT JOIN `events` ON `events`.`ticket_id` = `tickets`.`id`
-                     * LEFT JOIN `notes` ON `notes`.`ticket_id` = `tickets`.`id`
-                     * AND `notes`.`viewed` = 'false'
-                     * WHERE `notes`.`deleted_at` IS NULL
-                     *   AND `tickets`.`deleted_at` IS NULL
-                     * GROUP BY `tickets`.`id`
-                     */
-
-                    $join->on('notes.ticket_id', '=', 'tickets.id')
-                        ->on('notes.viewed', '=', DB::raw("'false'"));
-//                        ->nest(
-//                            function ($join) {
-//                                $join->on('notes.viewed', '=', DB::raw("'false'"));
-//                            }
-//                        );
-                }
-            )
-            ->where('notes.deleted_at', '=', null)
+            // Join all notes (for total count)
+            ->leftJoin('notes as notes_all', function ($join) {
+                $join->on('notes_all.ticket_id', '=', 'tickets.id');
+            })
+            // Join unread notes (for unread count)
+            ->leftJoin('notes as notes_unread', function ($join) {
+                $join->on('notes_unread.ticket_id', '=', 'tickets.id')
+                    ->on('notes_unread.viewed', '=', DB::raw("'false'"));
+            })
+            // Exclude soft-deleted notes from both joins
+            ->whereNull('notes_all.deleted_at')
+            ->whereNull('notes_unread.deleted_at')
             ->groupBy('tickets.id');
 
         if (!$auth_account->isSystemAccount()) {
@@ -171,6 +142,36 @@ class TicketsController extends Controller
                     $query->where('tickets.status_id', $keyword);
                 }
             })
+            // Filter for notes column: allow selecting only tickets with unread notes
+            ->filterColumn('notes_count', function ($query, $keyword) {
+                $keyword = strtoupper(trim((string) $keyword));
+                if ($keyword === 'UNREAD') {
+                    // Robust filter: use EXISTS to ensure tickets with at least one unread note
+                    $query->whereExists(function ($sub) {
+                        $sub->select(DB::raw(1))
+                            ->from('notes as n')
+                            ->whereColumn('n.ticket_id', 'tickets.id')
+                            ->where('n.viewed', '=', 'false')
+                            ->whereNull('n.deleted_at');
+                    });
+                }
+            })
+            // Ensure unread filtering applies even if column mapping differs
+            ->filter(function ($query) use ($request) {
+                $columns = $request->input('columns');
+                if (is_array($columns) && array_key_exists(6, $columns)) {
+                    $value = $columns[6]['search']['value'] ?? '';
+                    if (strtoupper(trim((string) $value)) === 'UNREAD') {
+                        $query->whereExists(function ($sub) {
+                            $sub->select(DB::raw(1))
+                                ->from('notes as n')
+                                ->whereColumn('n.ticket_id', 'tickets.id')
+                                ->where('n.viewed', '=', 'false')
+                                ->whereNull('n.deleted_at');
+                        });
+                    }
+                }
+            }, true)
             ->editColumn(
                 'type_id',
                 function ($ticket) {
@@ -198,7 +199,23 @@ class TicketsController extends Controller
                     return '<span style="white-space: nowrap;">'.$formatted.'</span>';
                 }
             )
-            ->rawColumns(['actions', 'updated_at'])
+            // Render notes total with unread badge/icon when present
+            ->editColumn(
+                'notes_count',
+                function ($ticket) {
+                    $total = (int) ($ticket->notes_count ?? 0);
+                    $unread = (int) ($ticket->unread_notes_count ?? 0);
+                    $html = (string) $total;
+                    if ($unread > 0) {
+                        $html .= ' <span class="label label-warning" title="Unread notes">'
+                            .'<span class="glyphicon glyphicon-envelope"></span> '
+                            .$unread
+                            .'</span>';
+                    }
+                    return $html;
+                }
+            )
+            ->rawColumns(['actions', 'updated_at', 'notes_count'])
             ->make(true);
         }
 
@@ -362,6 +379,21 @@ class TicketsController extends Controller
         // Get translations for all statuses
         $statuses = Event::getStatuses();
         $user = $this->auth_user;
+        $auth_account = $this->auth_user->account;
+
+        // Determine if there are any unread notes for tickets visible to this account
+        $hasUnreadNotes = DB::table('notes')
+            ->join('tickets', 'notes.ticket_id', '=', 'tickets.id')
+            ->where('notes.viewed', '=', 'false')
+            ->whereNull('notes.deleted_at')
+            ->whereNull('tickets.deleted_at')
+            ->when(!$auth_account->isSystemAccount(), function ($query) use ($auth_account) {
+                $query->where(function ($q) use ($auth_account) {
+                    $q->where('tickets.ip_contact_account_id', '=', $auth_account->id)
+                      ->orWhere('tickets.domain_contact_account_id', '=', $auth_account->id);
+                });
+            })
+            ->exists();
 
         $json_options = json_encode($user->options ? $user->options : []);
 
@@ -371,7 +403,8 @@ class TicketsController extends Controller
             ->with('statuses', $statuses['abusedesk'])
             ->with('contact_statuses', $statuses['contact'])
             ->with('auth_user', $this->auth_user)
-            ->with('user_options', $json_options);
+            ->with('user_options', $json_options)
+            ->with('has_unread_notes', $hasUnreadNotes);
     }
 
     /**
