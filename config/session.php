@@ -1,15 +1,19 @@
 <?php
 
-$url = env('dAPP_URL', null);
-$scheme = $url ? parse_url($url, PHP_URL_SCHEME) : null;
-$host = parse_url($url, PHP_URL_HOST) ?? null;
+// Apply stricter session flags only during real web requests.
+// Keep CLI/phpunit sane by using relaxed defaults.
+$isWebRequest = (PHP_SAPI !== 'cli' && PHP_SAPI !== 'phpdbg') && isset($_SERVER['HTTP_HOST']);
 
-//default is not SSL
+$url = $isWebRequest ? env('APP_URL', null) : null;
+$scheme = $isWebRequest && $url ? parse_url($url, PHP_URL_SCHEME) : null;
+$host = $isWebRequest && $url ? (parse_url($url, PHP_URL_HOST) ?? null) : null;
+
+// Defaults when not in a web request
 $secure_flag = false;
 $httponly_flag = false;
-$domain_flag = $host;
+$domain_flag = $isWebRequest ? $host : null;
 
-if (strtolower((string) $scheme) === 'https') {
+if ($isWebRequest && strtolower((string) $scheme) === 'https') {
     $secure_flag = true;
     $httponly_flag = true;
 }
