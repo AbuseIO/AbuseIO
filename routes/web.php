@@ -3,6 +3,7 @@
 use AbuseIO\Http\Controllers\AshController;
 use AbuseIO\Http\Controllers\Auth\LoginController;
 use AbuseIO\Http\Controllers\BrandsController;
+use AbuseIO\Http\Controllers\HomeController;
 use AbuseIO\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,9 @@ Route::prefix('admin')->middleware(['web', 'auth', 'permission:login_portal'])->
     Route::get('/home', function () {
         return view('home');
     })->name('home');
+
+    // Admin version check endpoint
+    Route::get('version', [HomeController::class, 'version'])->name('version');
 
     // Locale switch inside admin
     Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])->name('locale');
