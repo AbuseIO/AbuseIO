@@ -54,21 +54,32 @@
 						</li>
 						@endif
 						@if (auth()->check())
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<span class="flag-icon flag-icon-{{ auth()->user()->locale ?? Config::get('app.locale') }}"></span> {{ auth()->user()->first_name ?? '' }} {{ auth()->user()->last_name ?? '' }} <span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">{{ trans('misc.version') }} {{ Config::get('app.version') }}</a></li>
-								<li role="separator" class="divider"></li>
-								<li><a href="{{ url('/auth/logout') }}">{{ trans('misc.button.logout') }}</a></li>
-							</ul>
-						</li>
-						@endif
+					<li class="dropdown">
+						@php($currentLocale = Session::get('locale', auth()->user()->locale ?? Config::get('app.locale')))
+						@php($currentFlag = (Config::get('app.locales')[$currentLocale][1] ?? $currentLocale))
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<span class="flag-icon flag-icon-{{ $currentFlag }}"></span> {{ auth()->user()->first_name ?? '' }} {{ auth()->user()->last_name ?? '' }} <span class="caret"></span>
+						</a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">{{ trans('misc.language') }}</li>
+						@php($locales = Config::get('app.locales'))
+						@foreach($locales as $code => $meta)
+							<li class="{{ (Session::get('locale', Config::get('app.locale')) === $code) ? 'active' : '' }}">
+								<a href="{{ route('admin.locale', ['locale' => $code]) }}">
+									<span class="flag-icon flag-icon-{{ $meta[1] }}"></span> {{ $meta[0] }}
+								</a>
+							</li>
+						@endforeach
+						<li role="separator" class="divider"></li>
+						<li><a href="{{ route('admin.profile.index') }}">{{ trans('misc.profile') }}</a></li>
+						<li><a href="{{ url('/auth/logout') }}">{{ trans('misc.button.logout') }}</a></li>
 					</ul>
-				</div>
+					</li>
+					@endif
+				</ul>
 			</div>
-		</nav>
+		</div>
+	</nav>
 		<div class="container-fluid app-container">
 			@if (Session::has('message'))
 			    <div class="alert alert-info alert-dismissible">
