@@ -15,7 +15,7 @@ chmod -R 777 storage/
 chmod 775 bootstrap/cache/
 
 echo rebuilding database
-sudo -u abuseio php /opt/abuseio/artisan db:wipe
+sudo -u abuseio php /opt/abuseio/artisan db:wipe --force
 sudo -u abuseio php /opt/abuseio/artisan migrate --force
 
 echo creating default user
