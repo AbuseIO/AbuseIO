@@ -151,39 +151,62 @@ class MailTestCommand extends Command
 
         // 3) FQDN checks
         $fqdn = trim(shell_exec('hostname --fqdn 2>/dev/null') ?? '');
-        if ($fqdn === '') {
-            $this->error('hostname --fqdn is empty or failed. Configure system FQDN.');
+        $shortHost = trim(shell_exec('hostname -s 2>/dev/null') ?? '') ?: (gethostname() ?: 'localhost');
+        $hasDot = ($fqdn !== '' && strpos($fqdn, '.') !== false);
+
+        if ($fqdn === '' || !$hasDot) {
+            $this->warn("hostname --fqdn returned '".($fqdn !== '' ? $fqdn : '<empty>')."', which is not a fully-qualified domain name.");
         } else {
             $this->info('System FQDN: '.$fqdn);
-            // Check /etc/hosts mapping for 127.0.1.1
-            $hosts = @file('/etc/hosts', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [];
-            $mappingOk = false;
-            foreach ($hosts as $line) {
-                $line = trim(preg_replace('/#.*/', '', $line));
-                if ($line === '') continue;
-                $parts = preg_split('/\s+/', $line);
-                if (count($parts) >= 2 && $parts[0] === '127.0.1.1') {
-                    $names = array_slice($parts, 1);
-                    if (in_array($fqdn, $names, true) && in_array(explode('.', $fqdn)[0], $names, true)) {
+        }
+
+        // Check /etc/hosts mapping for 127.0.1.1
+        $hosts = @file('/etc/hosts', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [];
+        $mappingOk = false;
+        $candidateFqdn = null;
+        foreach ($hosts as $line) {
+            $line = trim(preg_replace('/#.*/', '', $line));
+            if ($line === '') continue;
+            $parts = preg_split('/\s+/', $line);
+            if (count($parts) >= 2 && $parts[0] === '127.0.1.1') {
+                $names = array_slice($parts, 1);
+                foreach ($names as $n) {
+                    if (strpos($n, '.') !== false) { $candidateFqdn = $candidateFqdn ?: $n; }
+                }
+                if ($hasDot) {
+                    if (in_array($fqdn, $names, true) && in_array($shortHost, $names, true)) {
                         $mappingOk = true;
                         break;
                     }
                 }
             }
-            if (!$mappingOk) {
-                $short = explode('.', $fqdn)[0];
-                $this->warn('Invalid /etc/hosts 127.0.1.1 mapping.');
-                $this->line("Example correct entry: 127.0.1.1 {$short} {$fqdn}");
-            } else {
-                $this->info('/etc/hosts mapping for 127.0.1.1 looks correct.');
+        }
+
+        if ($hasDot && $mappingOk) {
+            $this->info('/etc/hosts mapping for 127.0.1.1 looks correct.');
+        } else {
+            $this->warn('Invalid or incomplete /etc/hosts 127.0.1.1 mapping.');
+            $exampleFqdn = $hasDot ? $fqdn : ($candidateFqdn ?: ($shortHost.'.example.local'));
+            $this->line("Example correct entry: 127.0.1.1 {$shortHost} {$exampleFqdn}");
+            if (!$hasDot) {
+                $this->line('Tip: set a proper FQDN by mapping the short hostname and the FQDN on the 127.0.1.1 line.');
+                $this->line("For example: 127.0.1.1 {$shortHost} {$shortHost}.abuse.io");
             }
         }
 
         // 4) Optional: send a test email
         $to = $this->option('to') ?: (Config::get('main.emailparser.fallback_mail') ?? Config::get('mail.from.address'));
         $from = Config::get('main.notifications.from_address') ?? Config::get('mail.from.address') ?? 'no-reply@'.($fqdn ?: 'localhost');
+        $body = $this->option('message');
+        $appUrl = Config::get('app.url');
+        if ($hasDot) {
+            $body .= "\n\nServer FQDN: {$fqdn}";
+        } else {
+            $body .= "\n\nServer host: {$shortHost}\nFQDN: ".($fqdn !== '' ? $fqdn.' (not fully-qualified)' : '<empty>');
+        }
+        $body .= "\nAPP_URL: ".($appUrl ?: '<empty>');
         try {
-            Mail::raw($this->option('message'), function ($mail) use ($to, $from) {
+            Mail::raw($body, function ($mail) use ($to, $from) {
                 $mail->from($from, 'MailTest');
                 $mail->to($to);
                 $mail->subject($this->option('subject'));
