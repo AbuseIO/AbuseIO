@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# This script injects .eml samples into Postfix using sendmail.
+# It uses the original "From:" header from each EML as the envelope sender.
+# If no recipient override is provided, it uses "-t" so Postfix reads To/Cc/Bcc
+# from the message headers. A manual "-r" override forces delivery to one address.
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SAMPLES_DIR="$SCRIPT_DIR" # default: current notifier-samples directory
+RECIPIENT=""             # no default; if empty we'll use -t
+DRY_RUN=false
+
+# Optionally auto-detect a default recipient from Postfix transport map.
+# This runs only if no explicit -r is given.
+TRANSPORT_FILE="/etc/postfix/transport"
+
+usage() {
+  echo "Usage: $0 [-d samples_dir] [-r recipient] [-n]" >&2
+  echo "  -d  Directory containing .eml files (default: this directory)" >&2
+  echo "  -r  Override recipient (otherwise use recipients from headers via -t)" >&2
+  echo "  -n  Dry run (show actions, do not send)" >&2
+}
+
+while getopts ":d:r:nh" opt; do
+  case "$opt" in
+    d) SAMPLES_DIR="$OPTARG" ;;
+    r) RECIPIENT="$OPTARG" ;;
+    n) DRY_RUN=true ;;
+    h) usage; exit 0 ;;
+    :) echo "Option -$OPTARG requires an argument" >&2; usage; exit 2 ;;
+    \?) echo "Invalid option: -$OPTARG" >&2; usage; exit 2 ;;
+  esac
+done
+
+# If no explicit recipient, try to infer one from /etc/postfix/transport
+if [ -z "$RECIPIENT" ] && [ -f "$TRANSPORT_FILE" ]; then
+  first_token=$(grep -v '^[[:space:]]*#' "$TRANSPORT_FILE" | awk 'NF>0 {print $1; exit}')
+  if [ -n "$first_token" ]; then
+    case "$first_token" in
+      *"@"*) RECIPIENT="$first_token" ;;
+      *) RECIPIENT="notifier@${first_token}" ;;
+    esac
+  fi
+fi
+
+# Extract the From header (with folded lines) and parse the email address.
+extract_from_address() {
+  local file="$1"
+  # Grab From header, including folded continuation lines
+  local from_header
+  from_header=$(awk 'BEGIN{IGNORECASE=1}
+    /^From:/ {f=1; h=$0; next}
+    f && /^[ \t]/ {h=h " " $0; next}
+    f {print h; exit}
+  ' "$file" || true)
+
+  # Pull email from angle brackets if present; else use bare address pattern
+  local email
+  email=$(printf '%s\n' "$from_header" | grep -E -o '<[^>]+>' | head -n1 | tr -d '<>' || true)
+  if [ -z "$email" ]; then
+    email=$(printf '%s\n' "$from_header" | grep -E -o '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+' | head -n1 || true)
+  fi
+  printf '%s' "$email"
+}
+
+if [ ! -d "$SAMPLES_DIR" ]; then
+  echo "Samples directory not found: $SAMPLES_DIR" >&2
+  exit 1
+fi
+
+echo "Scanning EML files in: $SAMPLES_DIR"
+mapfile -t EMLS < <(find "$SAMPLES_DIR" -type f -name '*.eml' | sort)
+
+if [ ${#EMLS[@]} -eq 0 ]; then
+  echo "No .eml files found." >&2
+  exit 1
+fi
+
+for eml in "${EMLS[@]}"; do
+  sender=$(extract_from_address "$eml")
+  if [ -z "$sender" ]; then
+    echo "[SKIP] Could not extract From sender from: $eml" >&2
+    continue
+  fi
+
+  # Build sendmail args: use -t if no explicit RECIPIENT, else pass recipient.
+  if [ -z "$RECIPIENT" ]; then
+    SENDMAIL_ARGS=("-i" "-f" "$sender" "-t")
+    target_desc="headers (To/Cc/Bcc)"
+  else
+    SENDMAIL_ARGS=("-i" "-f" "$sender" "$RECIPIENT")
+    target_desc="$RECIPIENT"
+  fi
+
+  echo "[SEND] $(basename "$eml") from <$sender> to $target_desc"
+  if [ "$DRY_RUN" = true ]; then
+    echo "       sendmail ${SENDMAIL_ARGS[*]} < '$eml'"
+  else
+    # shellcheck disable=SC2068
+    sendmail ${SENDMAIL_ARGS[@]} < "$eml"
+  fi
+done
+
+echo "Done."
