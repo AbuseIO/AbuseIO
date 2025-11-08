@@ -265,15 +265,44 @@ class EmailProcess extends Job implements ShouldQueue
         );
 
         $fileContents = null;
+        $sender = null;
+        $subject = null;
+        $reason = null;
+        
         if (Storage::exists($this->filename)) {
             $fileContents = Storage::get($this->filename);
+            try {
+                $parser = new MimeParser();
+                $parser->setText($fileContents);
+                $sender = $parser->getHeader('from');
+                $subject = $parser->getHeader('subject');
+            } catch (\Throwable $e) {
+                // ignore parsing errors
+            }
         }
 
         if (Config::get('main.emailparser.use_bounce_method')) {
             AlertAdmin::bounce($fileContents);
         } else {
+            // Try to refine reason based on recent log contexts above; otherwise generic
+            if ($sender && $subject) {
+                $reason = 'No parser available or parser failed';
+            }
+
+            $details = [];
+            if ($sender) { $details[] = 'Sender: '.$sender; }
+            if ($subject) { $details[] = 'Subject: '.$subject; }
+            if ($this->filename) { $details[] = 'Filename: '.$this->filename; }
+            if ($reason) { $details[] = 'Reason: '.$reason; }
+
+            $body = 'AbuseIO was not able to process an incoming message.';
+            if (!empty($details)) {
+                $body .= "\n".implode("\n", $details);
+            }
+            $body .= "\n\nThis message is attached to this email.";
+
             AlertAdmin::send(
-                'AbuseIO was not able to process an incoming message. This message is attached to this email.',
+                $body,
                 [
                     'failed_message.eml' => $fileContents,
                 ]
