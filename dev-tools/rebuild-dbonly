@@ -1,25 +1,19 @@
 #!/bin/bash
 echo rebuiding database
 cd /opt/abuseio/
-php artisan db:wipe
-php artisan migrate
-php artisan db:seed
+sudo -u abuseio php /opt/abuseio/artisan db:wipe
+sudo -u abuseio php /opt/abuseio/artisan migrate
+sudo -u abuseio php /opt/abuseio/artisan db:seed
 
 echo creating admin user
 sudo -u abuseio php /opt/abuseio/artisan user:create admin@isp.local --password=password
 sudo -u abuseio php /opt/abuseio/artisan role:assign --role=admin --user=admin@isp.local
 
-echo stopping services
-systemctl stop abuseio_queue_collector
-systemctl stop abuseio_queue_email_incoming
-systemctl stop abuseio_queue_email_outgoing
-systemctl stop abuseio_queue_delegation
-
 echo starting services
-systemctl start abuseio_queue_collector
-systemctl start abuseio_queue_email_incoming
-systemctl start abuseio_queue_email_outgoing
-systemctl start abuseio_queue_delegation
+systemctl restart abuseio_queue_collector
+systemctl restart abuseio_queue_email_incoming
+systemctl restart abuseio_queue_email_outgoing
+systemctl restart abuseio_queue_delegation
 
 echo running notifier samples with queue
 sudo -u abuseio extra/notifier-samples/runall
