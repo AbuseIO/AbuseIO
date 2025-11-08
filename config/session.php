@@ -11,7 +11,7 @@ $host = $isWebRequest && $url ? (parse_url($url, PHP_URL_HOST) ?? null) : null;
 // Defaults when not in a web request
 $secure_flag = false;
 $httponly_flag = true;
-$domain_flag = $isWebRequest ? $host : null;
+$domain_flag = $host;
 
 if ($isWebRequest && strtolower((string) $scheme) === 'https') {
     $secure_flag = true;
