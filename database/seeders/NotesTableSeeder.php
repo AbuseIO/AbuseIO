@@ -2,79 +2,45 @@
 
 namespace Database\Seeders;
 
+use AbuseIO\Models\Note;
+use AbuseIO\Models\Ticket;
 use DateTime;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class NotesTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('notes')->delete();
-
-        $notes = [
+        // Seed demo notes attached to real tickets, avoiding hardcoded IDs
+        $demoNotes = [
             [
-                'id'         => '1',
-                'ticket_id'  => '1',
-                'submitter'  => 'Abusedesk',
-                'text'       => 'Warned client that we will terminate service until resolved',
-                'hidden'     => false,
-                'viewed'     => false,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
+                'submitter' => 'Abusedesk',
+                'text'      => 'Warned client that we will terminate service until resolved',
+                'hidden'    => false,
             ],
             [
-                'id'         => '2',
-                'ticket_id'  => '1',
-                'submitter'  => 'IP Contact',
-                'text'       => 'Oh please dont shut my internet off!',
-                'hidden'     => false,
-                'viewed'     => false,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
-            [
-                'id'         => '3',
-                'ticket_id'  => '1',
-                'submitter'  => 'Abusedesk',
-                'text'       => 'Well too bad!',
-                'hidden'     => true,
-                'viewed'     => false,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
-            [
-                'id'         => '4',
-                'ticket_id'  => '1',
-                'submitter'  => 'Domain Contact',
-                'text'       => 'Hoster ... Please fix the problem ...',
-                'hidden'     => false,
-                'viewed'     => false,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
-            [
-                'id'         => '5',
-                'ticket_id'  => '2',
-                'submitter'  => 'Abusedesk (Default Admin)',
-                'text'       => 'Placed in quarantine until client is contacted',
-                'hidden'     => true,
-                'viewed'     => false,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-            ],
-            [
-                'id'         => '6',
-                'ticket_id'  => '2',
-                'submitter'  => 'IP Contact',
-                'text'       => 'Antivirus has removed malware',
-                'hidden'     => false,
-                'viewed'     => false,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
+                'submitter' => 'IP Contact',
+                'text'      => 'Please do not shut my internet off!',
+                'hidden'    => false,
             ],
         ];
 
-        DB::table('notes')->insert($notes);
+        foreach (Ticket::all() as $ticket) {
+            foreach ($demoNotes as $noteData) {
+                Note::query()->firstOrCreate(
+                    [
+                        'ticket_id' => $ticket->id,
+                        'submitter' => $noteData['submitter'],
+                        'text'      => $noteData['text'],
+                    ],
+                    [
+                        'hidden'     => $noteData['hidden'],
+                        'viewed'     => false,
+                        'created_at' => new DateTime(),
+                        'updated_at' => new DateTime(),
+                    ]
+                );
+            }
+        }
     }
 }

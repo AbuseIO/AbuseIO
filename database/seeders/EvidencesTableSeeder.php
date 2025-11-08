@@ -2,27 +2,23 @@
 
 namespace Database\Seeders;
 
+use AbuseIO\Models\Evidence;
 use DateTime;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class EvidencesTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('evidences')->delete();
-
-        $evidences = [
+        // Seed a default demo evidence if not present; avoid hardcoded IDs
+        Evidence::query()->updateOrCreate(
+            ['filename' => 'mailarchive/20150906/1_messageid'],
             [
-                'id'         => '1',
-                'filename'   => 'mailarchive/20150906/1_messageid',
-                'sender'     => '1 me',
-                'subject'    => 'i say 1',
+                'sender'     => 'Seeder Demo',
+                'subject'    => 'Demo evidence message',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
-            ],
-        ];
-
-        DB::table('evidences')->insert($evidences);
+            ]
+        );
     }
 }

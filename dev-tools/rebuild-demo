@@ -8,10 +8,19 @@ sudo -u abuseio php /opt/abuseio/artisan view:clear
 sudo -u abuseio php /opt/abuseio/artisan route:clear
 sudo -u abuseio composer --working-dir=/opt/abuseio dump-autoload
 
+echo reset permissions
 cd /opt/abuseio
 chown -R abuseio:abuseio .
 chmod -R 777 storage/
 chmod 775 bootstrap/cache/
+
+echo rebuilding database
+sudo -u abuseio php /opt/abuseio/artisan db:wipe
+sudo -u abuseio php /opt/abuseio/artisan migrate --force
+
+echo creating default user
+sudo -u abuseio php /opt/abuseio/artisan user:create admin@isp.local --password=ispadmin
+sudo -u abuseio php /opt/abuseio/artisan role:assign --role=admin --user=admin@isp.local
 
 echo restart services
 sudo systemctl restart abuseio_queue_collector
@@ -19,9 +28,10 @@ sudo systemctl restart abuseio_queue_email_incoming
 sudo systemctl restart abuseio_queue_email_outgoing
 sudo systemctl restart abuseio_queue_delegation
 
-sudo -u abuseio php /opt/abuseio/artisan user:create admin@isp.local --password=ispadmin
-sudo -u abuseio php /opt/abuseio/artisan role:assign --role=admin --user=admin@isp.local
+echo seeding database defaults
+sudo -u abuseio php /opt/abuseio/artisan db:seed --force
 
-php artisan db:seed
+
+echo seeding notifier samples
 sudo -u abuseio /opt/abuseio/extra/notifier-samples/runall
 

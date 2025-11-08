@@ -2,43 +2,44 @@
 
 namespace Database\Seeders;
 
+use AbuseIO\Models\Contact;
+use AbuseIO\Models\Domain;
 use DateTime;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class DomainsTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('domains')->delete();
+        // Resolve contacts dynamically and create domains linked to them
+        $john = Contact::query()->where('reference', 'JOHND')->first();
+        $cust1 = Contact::query()->where('reference', 'CUST1')->first();
 
         $domains = [
             [
-                'id'         => 1,
                 'name'       => 'john-doe.tld',
-                'contact_id' => 1,
-                'enabled'    => 1,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
+                'contact_id' => optional($john)->id,
             ],
             [
-                'id'         => 2,
                 'name'       => 'johndoe.tld',
-                'contact_id' => 1,
-                'enabled'    => 1,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
+                'contact_id' => optional($john)->id,
             ],
             [
-                'id'         => 3,
                 'name'       => 'customer1.tld',
-                'contact_id' => 2,
-                'enabled'    => 1,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
+                'contact_id' => optional($cust1)->id,
             ],
         ];
 
-        DB::table('domains')->insert($domains);
+        foreach ($domains as $row) {
+            Domain::query()->updateOrCreate(
+                ['name' => $row['name']],
+                [
+                    'contact_id' => $row['contact_id'],
+                    'enabled'    => 1,
+                    'created_at' => new DateTime(),
+                    'updated_at' => new DateTime(),
+                ]
+            );
+        }
     }
 }

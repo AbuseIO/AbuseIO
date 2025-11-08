@@ -27,19 +27,29 @@ class RolePermissionSeeder extends Seeder
             'evidence_view',
         ];
 
-        // User role permissions
-        foreach ($permissions as $permission_name) {
-            $permission = Permission::where('name', '=', $permission_name)->first();
-
-            $permission_role[] = [
-                'permission_id' => $permission->id,
-                'role_id'       => '2',
-                'created_at'    => new DateTime(),
-                'updated_at'    => new DateTime(),
-            ];
+        // Resolve the Abusedesk role dynamically
+        $role = Role::where('name', '=', 'Abusedesk')->first();
+        if (!$role) {
+            // Fallback to id 2 when tests expect it
+            $role = Role::find(2);
         }
 
-        DB::table('permission_role')->insert($permission_role);
+        // Upsert pivot rows to avoid duplicate unique key violations
+        foreach ($permissions as $permission_name) {
+            $permission = Permission::where('name', '=', $permission_name)->first();
+            if ($permission && $role) {
+                DB::table('permission_role')->updateOrInsert(
+                    [
+                        'permission_id' => $permission->id,
+                        'role_id'       => $role->id,
+                    ],
+                    [
+                        'created_at'    => new DateTime(),
+                        'updated_at'    => new DateTime(),
+                    ]
+                );
+            }
+        }
 
         // Optionally assign default roles to known users, but only if they exist.
         // This avoids pre-populating the pivot with non-existent user IDs.

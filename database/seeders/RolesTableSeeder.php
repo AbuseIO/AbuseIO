@@ -2,27 +2,22 @@
 
 namespace Database\Seeders;
 
+use AbuseIO\Models\Role;
 use DateTime;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class RolesTableSeeder extends Seeder
 {
     public function run()
     {
-        // Ensure Admin role exists with id 1 (kept by migration)
-        // Add Abusedesk user role with id 2 expected by tests and seeders
-
-        DB::table('roles')->where('id', '=', 2)->delete();
-
-        DB::table('roles')->insert([
+        // Ensure Abusedesk role exists; do not force a specific ID
+        Role::query()->firstOrCreate(
+            ['name' => 'Abusedesk'],
             [
-                'id'          => 2,
-                'name'        => 'Abusedesk',
                 'description' => 'Abusedesk user',
                 'created_at'  => new DateTime(),
                 'updated_at'  => new DateTime(),
-            ],
-        ]);
+            ]
+        );
     }
 }
