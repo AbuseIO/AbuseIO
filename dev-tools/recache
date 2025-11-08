@@ -1,4 +1,9 @@
 #!/bin/bash
+echo stopping services
+systemctl stop abuseio_queue_collector
+systemctl stop abuseio_queue_email_incoming
+systemctl stop abuseio_queue_email_outgoing
+systemctl stop abuseio_queue_delegation
 
 echo caches
 rm -rf bootstrap/cache/*.php
@@ -15,7 +20,7 @@ chmod -R 777 storage/
 chmod 775 bootstrap/cache/
 
 echo restart services
-sudo systemctl restart abuseio_queue_collector
-sudo systemctl restart abuseio_queue_email_incoming
-sudo systemctl restart abuseio_queue_email_outgoing
-sudo systemctl restart abuseio_queue_delegation
+sudo systemctl start abuseio_queue_collector
+sudo systemctl start abuseio_queue_email_incoming
+sudo systemctl start abuseio_queue_email_outgoing
+sudo systemctl start abuseio_queue_delegation

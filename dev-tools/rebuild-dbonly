@@ -1,4 +1,10 @@
 #!/bin/bash
+echo stopping services
+systemctl stop abuseio_queue_collector
+systemctl stop abuseio_queue_email_incoming
+systemctl stop abuseio_queue_email_outgoing
+systemctl stop abuseio_queue_delegation
+
 echo rebuiding database
 cd /opt/abuseio/
 sudo -u abuseio php /opt/abuseio/artisan db:wipe
@@ -10,10 +16,10 @@ sudo -u abuseio php /opt/abuseio/artisan user:create admin@isp.local --password=
 sudo -u abuseio php /opt/abuseio/artisan role:assign --role=admin --user=admin@isp.local
 
 echo starting services
-systemctl restart abuseio_queue_collector
-systemctl restart abuseio_queue_email_incoming
-systemctl restart abuseio_queue_email_outgoing
-systemctl restart abuseio_queue_delegation
+systemctl start abuseio_queue_collector
+systemctl start abuseio_queue_email_incoming
+systemctl start abuseio_queue_email_outgoing
+systemctl start abuseio_queue_delegation
 
 echo running notifier samples with queue
 sudo -u abuseio extra/notifier-samples/runall
