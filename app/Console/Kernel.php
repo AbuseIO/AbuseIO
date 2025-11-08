@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \AbuseIO\Console\Commands\MailTestCommand::class,
     ];
 
     /**
