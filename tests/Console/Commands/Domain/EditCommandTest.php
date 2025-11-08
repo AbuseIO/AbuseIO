@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Domain;
 
+use AbuseIO\Models\Contact;
+use AbuseIO\Models\Domain;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -32,11 +34,16 @@ class EditCommandTest extends TestCase
 
     public function testWithInvalidContact()
     {
+        // Create a valid domain to ensure the ID exists
+        $domain = Domain::factory()->create([
+            'contact_id' => Contact::factory()->create()->id,
+        ]);
+
         $exitCode = Artisan::call(
             'domain:edit',
             [
-                'id'           => '1',
-                '--contact_id' => '1000',
+                'id'           => (string) $domain->id,
+                '--contact_id' => '100000',
             ]
         );
         $this->assertEquals($exitCode, 1);
@@ -45,10 +52,15 @@ class EditCommandTest extends TestCase
 
     public function testEnabled()
     {
+        // Create a valid domain to ensure the ID exists
+        $domain = Domain::factory()->create([
+            'contact_id' => Contact::factory()->create()->id,
+        ]);
+
         $exitCode = Artisan::call(
             'domain:edit',
             [
-                'id'        => '1',
+                'id'        => (string) $domain->id,
                 '--enabled' => 'false',
             ]
         );

@@ -2,6 +2,7 @@
 
 namespace tests\Console\Commands\Domain;
 
+use AbuseIO\Models\Domain;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -12,28 +13,20 @@ class ShowCommandTest extends TestCase
 {
     public function testWithValidNameFilter()
     {
-        $exitCode = Artisan::call(
-            'domain:show',
-            [
-                'domain' => 'john-doe.tld',
-            ]
-        );
+        $domain = Domain::factory()->create();
+        $exitCode = Artisan::call('domain:show', ['domain' => $domain->name]);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('john-doe.tld', Artisan::output());
+        $this->assertStringContainsString($domain->name, Artisan::output());
     }
 
     public function testWithValidIdFilter()
     {
-        $exitCode = Artisan::call(
-            'domain:show',
-            [
-                'domain' => '1',
-            ]
-        );
+        $domain = Domain::factory()->create();
+        $exitCode = Artisan::call('domain:show', ['domain' => (string) $domain->id]);
 
         $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('john-doe.tld', Artisan::output());
+        $this->assertStringContainsString($domain->name, Artisan::output());
     }
 
     public function testWithInvalidIdFilter()

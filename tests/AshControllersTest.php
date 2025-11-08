@@ -2,10 +2,13 @@
 
 namespace tests;
 
+use AbuseIO\Models\Contact;
 use AbuseIO\Models\Ticket;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AshControllersTest extends TestCase
 {
+    use DatabaseTransactions;
     /**
      * @return void
      */
@@ -24,11 +27,17 @@ class AshControllersTest extends TestCase
 
     private function withTicketId($id)
     {
-        $uri = sprintf(
-            '/ash/collect/%d/%s',
-            $id,
-            Ticket::find($id)->ash_token_ip
-        );
+        // Ensure a ticket exists with ash_token_ip populated
+        $ticket = Ticket::find($id);
+        if (!$ticket) {
+            // Create contacts to satisfy factory requirements and generate ash token via observer
+            Contact::factory()->create();
+            Contact::factory()->create();
+            $ticket = Ticket::factory()->create();
+            $id = $ticket->id;
+        }
+
+        $uri = sprintf('/ash/collect/%d/%s', $id, $ticket->ash_token_ip);
 
         $response = $this->call('GET', $uri);
         $this->assertEquals(200, $response->getStatusCode());

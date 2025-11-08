@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Netblock;
 
+use AbuseIO\Models\Contact;
+use AbuseIO\Models\Netblock;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -12,10 +14,15 @@ class DeleteCommandTest extends TestCase
 {
     public function testValid()
     {
+        // Create a netblock to ensure the ID exists and is owned by a valid contact
+        $netblock = Netblock::factory()->create([
+            'contact_id' => Contact::factory()->create()->id,
+        ]);
+
         $exitCode = Artisan::call(
             'netblock:delete',
             [
-                'id' => '1',
+                'id' => (string) $netblock->id,
             ]
         );
 

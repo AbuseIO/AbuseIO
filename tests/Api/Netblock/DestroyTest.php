@@ -3,6 +3,7 @@
 namespace tests\Api\Netblock;
 
 use AbuseIO\Models\Account;
+use AbuseIO\Models\Role;
 use AbuseIO\Models\Netblock;
 use AbuseIO\Models\User;
 use tests\Api\DestroyTestHelper;
@@ -16,7 +17,16 @@ class DestroyTest extends TestCase
 
     public function initWithValidResponse()
     {
-        $user = User::find(1);
+        // Resolve an admin user under the system account, create if necessary
+        $systemAccount = Account::getSystemAccount();
+        $user = $systemAccount ? $systemAccount->admins()->first() : null;
+        if (!$user) {
+            $user = User::factory()->create(['account_id' => $systemAccount ? $systemAccount->id : 1]);
+            $adminRole = Role::where('name', 'Admin')->first();
+            if ($adminRole) {
+                $user->roles()->syncWithoutDetaching([$adminRole->id]);
+            }
+        }
 
         $netblock = Netblock::factory()->create();
 

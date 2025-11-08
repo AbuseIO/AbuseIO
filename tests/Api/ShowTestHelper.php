@@ -3,6 +3,14 @@
 namespace tests\Api;
 
 use AbuseIO\Models\Account;
+use AbuseIO\Models\Brand;
+use AbuseIO\Models\Contact;
+use AbuseIO\Models\Domain;
+use AbuseIO\Models\Evidence;
+use AbuseIO\Models\Netblock;
+use AbuseIO\Models\Note;
+use AbuseIO\Models\Role;
+use AbuseIO\Models\Ticket;
 use AbuseIO\Models\User;
 
 trait ShowTestHelper
@@ -29,18 +37,27 @@ trait ShowTestHelper
      */
     public function initWithValidResponse()
     {
-        $user = User::find(1);
-        if (is_null($user)) {
-            // Ensure a valid authenticatable user exists for API tests
-            $user = User::factory()->create(['account_id' => 1]);
+        // Resolve an admin user under the system account, create if necessary
+        $systemAccount = Account::getSystemAccount();
+        $user = $systemAccount ? $systemAccount->admins()->first() : null;
+        if (!$user) {
+            $user = User::factory()->create(['account_id' => $systemAccount ? $systemAccount->id : 1]);
+            $adminRole = Role::where('name', 'Admin')->first();
+            if ($adminRole) {
+                $user->roles()->syncWithoutDetaching([$adminRole->id]);
+            }
         }
+
+        // Create a valid record for the current URL resource and use its id
+        $id = $this->createResourceAndGetId();
+
         $server = $this->transformHeadersToServerVars(
             [
                 'Accept'      => 'application/json',
-                'X-API-TOKEN' => Account::getSystemAccount()->token,
+                'X-API-TOKEN' => $systemAccount ? $systemAccount->token : null,
             ]
         );
-        $response = $this->actingAs($user)->call('GET', self::URL.'/1', [], [], [], $server);
+        $response = $this->actingAs($user)->call('GET', self::URL.'/'.(string) $id, [], [], [], $server);
 
         $this->statusCode = $response->getStatusCode();
         $this->content = $response->getContent();
@@ -71,7 +88,6 @@ trait ShowTestHelper
     public function testStatusCodeInvalidRequest()
     {
         $this->initWithInvalidResponse();
-        //dd($this->content);
         $this->assertEquals(404, $this->statusCode);
     }
 
@@ -80,17 +96,21 @@ trait ShowTestHelper
      */
     public function initWithInvalidResponse()
     {
-        $user = User::find(1);
-        if (is_null($user)) {
-            // Ensure a valid authenticatable user exists for API tests
-            $user = User::factory()->create(['account_id' => 1]);
+        // Resolve an admin user under the system account, create if necessary
+        $systemAccount = Account::getSystemAccount();
+        $user = $systemAccount ? $systemAccount->admins()->first() : null;
+        if (!$user) {
+            $user = User::factory()->create(['account_id' => $systemAccount ? $systemAccount->id : 1]);
+            $adminRole = Role::where('name', 'Admin')->first();
+            if ($adminRole) {
+                $user->roles()->syncWithoutDetaching([$adminRole->id]);
+            }
         }
-        $account = $user->account;
 
         $server = $this->transformHeadersToServerVars(
             [
                 'Accept'      => 'application/json',
-                'X-API-TOKEN' => $account->token,
+                'X-API-TOKEN' => $systemAccount ? $systemAccount->token : null,
             ]
         );
         $response = $this->actingAs($user)->call('GET', self::URL.'/20000', [], [], [], $server);
@@ -100,20 +120,39 @@ trait ShowTestHelper
     }
 
     /**
-     * @return void
+     * Create a valid resource for the current URL and return its id.
+     *
+     * @return int|string
      */
-    public function testResponseInvalidRequest()
+    private function createResourceAndGetId()
     {
-        $this->initWithInvalidResponse();
-        $obj = json_decode($this->content, true);
+        // Extract last path segment from self::URL
+        $url = rtrim(self::URL, '/');
+        $segments = explode('/', $url);
+        $resource = end($segments);
 
-        $this->assertTrue(isset($obj['message']));
-
-        if (is_array($obj['message']) && array_key_exists('success', $obj['message'])) {
-            $this->assertFalse($obj['message']['success']);
-        } else {
-            // Fallback when handler returns simple string message
-            $this->assertIsString($obj['message']);
+        switch ($resource) {
+            case 'contacts':
+                return Contact::factory()->create()->id;
+            case 'domains':
+                return Domain::factory()->create()->id;
+            case 'netblocks':
+                return Netblock::factory()->create()->id;
+            case 'tickets':
+                return Ticket::factory()->create()->id;
+            case 'accounts':
+                return Account::factory()->create()->id;
+            case 'brands':
+                return Brand::factory()->create()->id;
+            case 'notes':
+                return Note::factory()->create()->id;
+            case 'evidence':
+                return Evidence::factory()->create()->id;
+            case 'users':
+                return User::factory()->create()->id;
+            default:
+                // Fallback: try to create a contact as a generic resource
+                return Contact::factory()->create()->id;
         }
     }
 }

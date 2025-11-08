@@ -16,7 +16,8 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
      */
     protected $baseUrl = 'http://localhost';
 
-    protected $userId = 1; // use the default admin user defined in the db seed
+    // Dynamically resolve a valid admin user on the system account
+    protected $userId = null;
 
     public $user;
     protected $startingObLevel;
@@ -32,11 +33,20 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
-        $this->user = User::find($this->userId);
+        // Resolve the system account and an admin user under it
+        $systemAccount = \AbuseIO\Models\Account::getSystemAccount();
+
+        // Try to find any admin user under the system account
+        $this->user = $systemAccount
+            ? $systemAccount->admins()->first()
+            : null;
+
         if (is_null($this->user)) {
             // Ensure a valid authenticatable admin user exists tied to system account
-            $this->user = User::factory()->create(['account_id' => 1]);
-            $adminRole = Role::find(1);
+            $accountId = $systemAccount ? $systemAccount->id : 1;
+            $this->user = User::factory()->create(['account_id' => $accountId]);
+            // Attach the Admin role by name if available
+            $adminRole = Role::where('name', 'Admin')->first();
             if ($adminRole) {
                 $this->user->roles()->syncWithoutDetaching([$adminRole->id]);
             }
@@ -72,7 +82,7 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
     {
         Artisan::call(
             'migrate:refresh',
-            ['--seed' => 'true]']
+            ['--seed' => true]
         );
     }
 }

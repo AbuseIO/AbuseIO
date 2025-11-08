@@ -153,7 +153,8 @@ class Account extends Model
             ->where('users.account_id', '=', $this->id)
             ->select('users.*')->get();
 
-        return User::hydrate($admins);
+        // Hydrate expects an array; convert the collection to plain arrays
+        return User::hydrate($admins->toArray());
     }
 
     /*

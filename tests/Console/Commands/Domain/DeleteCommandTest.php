@@ -2,6 +2,7 @@
 
 namespace tests\Console\Commands\Domain;
 
+use AbuseIO\Models\Domain;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -12,12 +13,9 @@ class DeleteCommandTest extends TestCase
 {
     public function testValid()
     {
-        $exitCode = Artisan::call(
-            'domain:delete',
-            [
-                'id' => '1',
-            ]
-        );
+        // Create a domain dynamically and delete it
+        $domain = Domain::factory()->create();
+        $exitCode = Artisan::call('domain:delete', ['id' => (string) $domain->id]);
 
         $this->assertEquals($exitCode, 0);
         $this->assertStringContainsString('domain has been deleted', Artisan::output());

@@ -2,6 +2,8 @@
 
 namespace tests\Console\Commands\Netblock;
 
+use AbuseIO\Models\Contact;
+use AbuseIO\Models\Netblock;
 use Illuminate\Support\Facades\Artisan;
 use tests\TestCase;
 
@@ -31,11 +33,16 @@ class EditCommandTest extends TestCase
 
     public function testWithInvalidContact()
     {
+        // Create a valid netblock to ensure the ID exists
+        $netblock = Netblock::factory()->create([
+            'contact_id' => Contact::factory()->create()->id,
+        ]);
+
         $exitCode = Artisan::call(
             'netblock:edit',
             [
-                'id'           => '1',
-                '--contact_id' => '1000',
+                'id'           => (string) $netblock->id,
+                '--contact_id' => '100000', // invalid contact id
             ]
         );
         $this->assertEquals($exitCode, 0);
@@ -44,10 +51,15 @@ class EditCommandTest extends TestCase
 
     public function testEnabled()
     {
+        // Create a valid netblock to ensure the ID exists
+        $netblock = Netblock::factory()->create([
+            'contact_id' => Contact::factory()->create()->id,
+        ]);
+
         $exitCode = Artisan::call(
             'netblock:edit',
             [
-                'id'        => '1',
+                'id'        => (string) $netblock->id,
                 '--enabled' => 'false',
             ]
         );
