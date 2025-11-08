@@ -3,8 +3,8 @@
 namespace tests\Api\Netblock;
 
 use AbuseIO\Models\Account;
-use AbuseIO\Models\Role;
 use AbuseIO\Models\Netblock;
+use AbuseIO\Models\Role;
 use AbuseIO\Models\User;
 use tests\Api\DestroyTestHelper;
 use tests\TestCase;

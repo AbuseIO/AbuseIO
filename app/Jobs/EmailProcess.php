@@ -268,9 +268,10 @@ class EmailProcess extends Job implements ShouldQueue
         $sender = null;
         $subject = null;
         $reason = null;
-        
+
         if (Storage::exists($this->filename)) {
             $fileContents = Storage::get($this->filename);
+
             try {
                 $parser = new MimeParser();
                 $parser->setText($fileContents);
@@ -290,10 +291,18 @@ class EmailProcess extends Job implements ShouldQueue
             }
 
             $details = [];
-            if ($sender) { $details[] = 'Sender: '.$sender; }
-            if ($subject) { $details[] = 'Subject: '.$subject; }
-            if ($this->filename) { $details[] = 'Filename: '.$this->filename; }
-            if ($reason) { $details[] = 'Reason: '.$reason; }
+            if ($sender) {
+                $details[] = 'Sender: '.$sender;
+            }
+            if ($subject) {
+                $details[] = 'Subject: '.$subject;
+            }
+            if ($this->filename) {
+                $details[] = 'Filename: '.$this->filename;
+            }
+            if ($reason) {
+                $details[] = 'Reason: '.$reason;
+            }
 
             $body = 'AbuseIO was not able to process an incoming message.';
             if (!empty($details)) {

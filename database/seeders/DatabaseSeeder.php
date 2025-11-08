@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
 
         if (!empty($missing)) {
             throw new \RuntimeException(
-                'Database not migrated: missing tables [' . implode(', ', $missing) . ']. Run `php artisan migrate` first.'
+                'Database not migrated: missing tables ['.implode(', ', $missing).']. Run `php artisan migrate` first.'
             );
         }
     }

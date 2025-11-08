@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Event;
+use AbuseIO\Models\Evidence;
 use AbuseIO\Models\Ticket;
 use DateTime;
 use Illuminate\Database\Seeder;
