@@ -23,40 +23,52 @@ class AlertAdmin extends Job
      */
     public static function send($message, $attachments = [])
     {
-        $sent = Mail::raw(
-            $message,
-            function ($mail) use ($attachments) {
-                $mail->from(Config::get('main.notifications.from_address'), 'AbuseIO Alerter');
-                $mail->to(Config::get('main.emailparser.fallback_mail'));
-                $mail->subject('Exception notification');
+        try {
+            Mail::raw(
+                $message,
+                function ($mail) use ($attachments) {
+                    $mail->from(Config::get('main.notifications.from_address'), 'AbuseIO Alerter');
+                    $mail->to(Config::get('main.emailparser.fallback_mail'));
+                    $mail->subject('Exception notification');
 
-                foreach ($attachments as $attachmentName => $attachmentData) {
-                    $mimetype = 'text/plain';
-                    if (substr($attachmentName, -4) === '.eml') {
-                        $mimetype = 'message/rfc822';
+                    foreach ($attachments as $attachmentName => $attachmentData) {
+                        $mimetype = 'text/plain';
+                        if (substr($attachmentName, -4) === '.eml') {
+                            $mimetype = 'message/rfc822';
+                        }
+
+                        $mail->attachData(
+                            $attachmentData,
+                            $attachmentName,
+                            [
+                                'as'   => $attachmentName,
+                                'mime' => $mimetype,
+                            ]
+                        );
                     }
-
-                    $mail->attachData(
-                        $attachmentData,
-                        $attachmentName,
-                        [
-                            'as'   => $attachmentName,
-                            'mime' => $mimetype,
-                        ]
-                    );
                 }
-            }
-        );
-
-        if (!$sent) {
-            Log::error(
-                'AlertAdmin: '.
-                'Unable to send out alert to admin '.Config::get('main.emailparser.fallback_mail')
             );
-        } else {
+
+            $defaultMailer = Config::get('mail.default');
+            $smtp = Config::get('mail.mailers.smtp', []);
             Log::info(
-                'AlertAdmin: '.
-                'Successfully send out alert to admin '.Config::get('main.emailparser.fallback_mail')
+                'AlertAdmin: Successfully queued alert email',
+                [
+                    'to'         => Config::get('main.emailparser.fallback_mail'),
+                    'mailer'     => $defaultMailer,
+                    'host'       => $smtp['host'] ?? null,
+                    'port'       => $smtp['port'] ?? null,
+                    'encryption' => $smtp['encryption'] ?? null,
+                ]
+            );
+        } catch (\Throwable $e) {
+            Log::error(
+                'AlertAdmin: Failed to send alert email',
+                [
+                    'to'       => Config::get('main.emailparser.fallback_mail'),
+                    'error'    => $e->getMessage(),
+                    'mailer'   => Config::get('mail.default'),
+                ]
             );
         }
     }
@@ -82,32 +94,46 @@ class AlertAdmin extends Job
          */
         $mail = new PHPMailer();
         $mail->isSMTP();
-        if (Config::get('mail.encryption') === true) {
+        // Read modern SMTP configuration from Laravel mailers
+        $smtpConfig = Config::get('mail.mailers.smtp', []);
+
+        // Encryption: 'ssl', 'tls', or null
+        $encryption = isset($smtpConfig['encryption']) ? $smtpConfig['encryption'] : Config::get('mail.encryption');
+        if ($encryption === 'ssl') {
             $mail->SMTPSecure = 'ssl';
-        }
-        if (Config::get('mail.encryption') === true) {
+        } elseif ($encryption === 'tls') {
             $mail->SMTPSecure = 'tls';
+        } else {
+            // No encryption: prevent opportunistic STARTTLS
+            $mail->SMTPSecure = '';
+            $mail->SMTPAutoTLS = false;
         }
-        if (Config::get('mail.ssl_verify') === false) {
+
+        // SSL verification options (development only)
+        $streamSsl = Config::get('mail.mailers.smtp.stream.ssl');
+        if (is_array($streamSsl)) {
             $mail->SMTPOptions = [
                 'ssl' => [
-                    'verify_peer'       => false,
-                    'verify_peer_name'  => false,
-                    'allow_self_signed' => true,
+                    'verify_peer'       => $streamSsl['verify_peer'] ?? true,
+                    'verify_peer_name'  => $streamSsl['verify_peer_name'] ?? true,
+                    'allow_self_signed' => $streamSsl['allow_self_signed'] ?? false,
                 ],
             ];
         }
 
-        $mail->SMTPAuth = false;
-        $mail->Host = Config::get('mail.host');
-        $mail->Port = Config::get('mail.port');
+        // Host / Port
+        $mail->Host = $smtpConfig['host'] ?? Config::get('mail.host');
+        $mail->Port = $smtpConfig['port'] ?? Config::get('mail.port');
 
-        if (Config::get('mail.username') !== null &&
-            Config::get('mail.password') !== null
-        ) {
+        // Authentication
+        $username = $smtpConfig['username'] ?? Config::get('mail.username');
+        $password = $smtpConfig['password'] ?? Config::get('mail.password');
+        if (!empty($username) && !empty($password)) {
             $mail->SMTPAuth = true;
-            $mail->Username = Config::get('mail.username');
-            $mail->Password = Config::get('mail.password');
+            $mail->Username = $username;
+            $mail->Password = $password;
+        } else {
+            $mail->SMTPAuth = false;
         }
 
         /*
