@@ -168,6 +168,6 @@ return [
     |
     */
 
-    'secure' => $secure_flag,
+    'secure'   => $secure_flag,
     'httponly' => $httponly_flag,
 ];

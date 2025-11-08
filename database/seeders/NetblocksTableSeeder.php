@@ -16,7 +16,7 @@ class NetblocksTableSeeder extends Seeder
     {
         $john = Contact::query()->where('reference', 'JOHND')->first();
         $cust1 = Contact::query()->where('reference', 'CUST1')->first();
-        $isp1  = Contact::query()->where('reference', 'ISP1')->first();
+        $isp1 = Contact::query()->where('reference', 'ISP1')->first();
 
         $netblocks = [
             [

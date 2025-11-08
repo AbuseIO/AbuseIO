@@ -18,7 +18,7 @@ class MailTestCommand extends Command
         // 1) Read SMTP config
         $smtp = Config::get('mail.mailers.smtp', []);
         $host = $smtp['host'] ?? env('MAIL_HOST');
-        $port = (int)($smtp['port'] ?? env('MAIL_PORT', 25));
+        $port = (int) ($smtp['port'] ?? env('MAIL_PORT', 25));
         $encryption = $smtp['encryption'] ?? env('MAIL_ENCRYPTION');
 
         $this->line("SMTP host: {$host}");
@@ -28,14 +28,15 @@ class MailTestCommand extends Command
         // 2) Connect to SMTP and inspect certificate CN/SAN via TLS (supports STARTTLS on port 25)
         $certInfo = null;
         $expectedHost = $host;
+
         try {
             $context = stream_context_create([
                 'ssl' => [
                     'capture_peer_cert' => true,
-                    'SNI_enabled' => true,
-                    'peer_name' => $expectedHost,
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
+                    'SNI_enabled'       => true,
+                    'peer_name'         => $expectedHost,
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
                 ],
             ]);
 
@@ -58,8 +59,11 @@ class MailTestCommand extends Command
                         }
                         // Avoid long waits
                         $meta = stream_get_meta_data($socket);
-                        if ($meta['timed_out']) break;
+                        if ($meta['timed_out']) {
+                            break;
+                        }
                     }
+
                     return trim($resp);
                 };
 
@@ -166,12 +170,16 @@ class MailTestCommand extends Command
         $candidateFqdn = null;
         foreach ($hosts as $line) {
             $line = trim(preg_replace('/#.*/', '', $line));
-            if ($line === '') continue;
+            if ($line === '') {
+                continue;
+            }
             $parts = preg_split('/\s+/', $line);
             if (count($parts) >= 2 && $parts[0] === '127.0.1.1') {
                 $names = array_slice($parts, 1);
                 foreach ($names as $n) {
-                    if (strpos($n, '.') !== false) { $candidateFqdn = $candidateFqdn ?: $n; }
+                    if (strpos($n, '.') !== false) {
+                        $candidateFqdn = $candidateFqdn ?: $n;
+                    }
                 }
                 if ($hasDot) {
                     if (in_array($fqdn, $names, true) && in_array($shortHost, $names, true)) {
@@ -205,6 +213,7 @@ class MailTestCommand extends Command
             $body .= "\n\nServer host: {$shortHost}\nFQDN: ".($fqdn !== '' ? $fqdn.' (not fully-qualified)' : '<empty>');
         }
         $body .= "\nAPP_URL: ".($appUrl ?: '<empty>');
+
         try {
             Mail::raw($body, function ($mail) use ($to, $from) {
                 $mail->from($from, 'MailTest');

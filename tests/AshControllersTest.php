@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class AshControllersTest extends TestCase
 {
     use DatabaseTransactions;
+
     /**
      * @return void
      */
