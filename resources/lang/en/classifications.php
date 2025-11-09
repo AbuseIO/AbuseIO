@@ -18,6 +18,43 @@ return [
         'description' => 'This classification has no information text yet.',
     ],
 
+    'DEFAULT_OPEN_SERVICE' => [
+        'name'        => 'Generic message on open services',
+	'description' => 'This report identifies hosts that have a service or feature running and are accessible to the Internet at large. It is recommended that such services are disabled or filtered access from the internet.',
+        'aliases'     => [
+             'OPEN_ACTIVEMQ',
+             'OPEN_BADSECRETS',
+             'OPEN_BGP',
+             'OPEN_COUCHDB',
+             'OPEN_DDOS_MIDDLEBOX',
+             'OPEN_DOCKER',
+             'OPEN_DVR_DHCPDISCOVER',
+             'OPEN_ELASTICSEARCH_SERVER',
+             'OPEN_GTP',
+             'OPEN_HTTP_PROXY',
+             'OPEN_IMAP',
+             'OPEN_IMAP_VULNERABLE',
+             'OPEN_IPP',
+             'OPEN_IP_TUNNEL',
+             'OPEN_ISAKMP',
+             'OPEN_KUBERNETES',
+             'OPEN_LOOP_DOS',
+             'OPEN_MQTT_ANON',
+             'OPEN_MSRPC',
+             'OPEN_NETIS_ROUTER',
+             'OPEN_POP3',
+             'OPEN_POP3_VULNERABLE',
+             'OPEN_POST_EXPLOITATION_FRAMEWORK',
+             'OPEN_QOTD_SERVER',
+             'OPEN_QUIC',
+             'OPEN_SIP',
+             'OPEN_SSL',
+             'OPEN_SYNFULKNOCK',
+             'OPEN_WS_DISCOVERY',
+	],
+
+    ],
+
     'OPEN_SMARTINSTALL' => [
         'name'        => 'Open Cisco Smart Install',
         'description' => '

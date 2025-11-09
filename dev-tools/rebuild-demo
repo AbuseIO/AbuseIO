@@ -39,5 +39,5 @@ sudo -u abuseio php /opt/abuseio/artisan db:seed --force
 
 
 echo seeding notifier samples
-sudo -u abuseio /opt/abuseio/extra/notifier-samples/runall
+sudo -u abuseio /opt/abuseio/extra/notifier-samples/runall-postfix
 
