@@ -1,0 +1,45 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <07b8df06e33076cabc174d4c65b91045@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_07b8df06e33076cabc174d4c65b91045"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_msrpc-sample Report: 2025-11-04
+
+--b1_07b8df06e33076cabc174d4c65b91045
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_07b8df06e33076cabc174d4c65b91045
+Content-Type: application/octet-stream; name="2025-11-04-scan_msrpc-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-scan_msrpc-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvkxDsYvAIAAIcRAAAkAAAAMjAyNS0xMS0wNC1zY2FuX21zcnBjLXNhbXBs
+ZS1hc24uY3N2xZddb5swFIbv9yuqXLvIPrax4a6bqmrS1E1t75FjDEEjgMDp2n+/Q1J1jaG5G6DE
+8QnBPHmPzwcbX+3d4M2+25DN4J5dX/lXnFaj3fWtb21bj9O29/ixawffmL3DqTcljmZocCxdi2Pv
+yqodTXtaozGVHT5clA3tobfueCPr2x4neL/hdE1n7G/nM//auXMrezb14cN3RW3KcdXceJP1ruvd
+4Bpv/GmZojflHu2sdk3pdyPhwe/+WdbUdVblONubl8z3phn2lX8ze2dd9eyOf2tobXVcNCv79jCq
+0Zs/+Iuha5vBbb5sgIK8ZuyaiismU3yB3pBdVe4IozSKRcQoj0ATbzsikjiWhOyHvrNEMwqMPN6R
+b7f3Tw83P8jj9/u7m18/H26JZArPErJ5cN5U9dVTb3LEkRElX6smz1ABwoDQF8rHuxwPElNCCSNS
+C3oa8DQeTHEgISanKfBPMRlfGlLEdBaSh5CMIqj875T6SClA09PwRukKFVCKFNDpocc5RArePa6X
+9jjw5ByTQkppylSAKXTEYCWPA5dxAIlCJimIAFLiW/F3MZOFOXPuWMCpU2AY6Jc5xcKcxdbQOT1Z
+GEFSRiDFO2e8MCePXbA5GUOnpyK+zLm0npxqmMQ6nclIHziXjyKeq3wS6sBxgwaUMY2Aq9W8zrbW
+BJwilTKVyeecy6vJTF6QuYoOl9VcnNOCDdRUqcS0FCb4WGKClyupKXXC5tSUNKTUkfiXONXShUhD
+PC3quDvDhKR4lND1MB32EXOYyUXMpQMd8jjYmkynXE3L5Tnm0i0SFEJO8yakMsybSo6N8WpViG0F
+m63q+jLn4m4HOq/nZHeqCESyop7OTroPylLOPudcoTdOOJ32SHImiM7VXJxTAQ84FRahaRRpHum1
+ypAo+HZShgQ+aIRlKImAsdWeM0AVWIb+AlBLAQI/AxQAAgAIADyxalvkxDsYvAIAAIcRAAAkAAAA
+AAAAAAAAAAC2gQAAAAAyMDI1LTExLTA0LXNjYW5fbXNycGMtc2FtcGxlLWFzbi5jc3ZQSwUGAAAA
+AAEAAQBSAAAA/gIAAAAA
+
+
+--b1_07b8df06e33076cabc174d4c65b91045--

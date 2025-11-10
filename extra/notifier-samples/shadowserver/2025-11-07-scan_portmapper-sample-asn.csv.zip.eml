@@ -1,0 +1,44 @@
+Date: Fri, 07 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <ebbe8ff4c7a76ad323ef7c4dd9c586b5@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_ebbe8ff4c7a76ad323ef7c4dd9c586b5"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_portmapper-sample Report: 2025-11-07
+
+--b1_ebbe8ff4c7a76ad323ef7c4dd9c586b5
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_ebbe8ff4c7a76ad323ef7c4dd9c586b5
+Content-Type: application/octet-stream; name="2025-11-07-scan_portmapper-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-07-scan_portmapper-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltY8GYRbgIAAB0ZAAApAAAAMjAyNS0xMS0wNy1zY2FuX3BvcnRtYXBwZXIt
+c2FtcGxlLWFzbi5jc3bdWE1vnDAQvfdXIM6O6/kwNu4pqqKoUpVWSe8R2qVbpLCsgK3a/vqOs5Ea
+MJce45UWzMOe8WM84xmXc9e309z0p1KVU/uzHbv5tzS7+Hwah3nYDU+xOYyz3H4M03xs+laac3OQ
+azMd5XpoB7mO7aEb4uPuIuPYdLvp1aDHaTiPu/ZZ0W4exouGw9j0sVc/nI/z/vFFUfsrNqZnqdNp
+OE4yuvsTx8pUn7rv3a6Zo7J3JRq0VwBXxhWGAtvAvlR9u+/OvQJjdMU63upKnfcnBQBKRdF9czq1
+o/JgENTDrfp4c/ft/vqzevh0d3v99cv9jbLg5K1S5X07N91T8W1s9nECIk1+BRci673I/FC8IJQg
+mCD/N6pUSgF7RdqZJVMM1gaoU6ag0WTFlAL5YCFlWgtTl5tRTbCUUAXSwC43q4qnVglVjF0zMypT
+MC5hSuKpaDMzqoUANqVK2ucWlNgEgylTq63Pzaa4tdFwpcFlZ1QKiFtUOb+QBG6LqHuLadIFsQUU
+VFVcrzGyZBcYFlwRwxqzCG6BUcHEVK8wCxW8kocyV8Gcc2vMLzBDMhbNYnqiYAkhuqQXgghjs1QK
+cXIJxhuYoJHFemyC8SssLh32XgFKjrV2EqyC2YgHXnNuGzdVwXLC1GrwnF+Mt2kyJiEec9vNCLaS
+MZdbfUhx8fIGUatrn9tmVgVIF69zMR3LLSJxQL9FFRkzW7/gt3IxbyQs5Xe+wXabKedXH9o0KHnU
+nJunWhdogymJp9aZGdVsVk0+/nPLHlBq4eR8DsVTMwu/GM830uM56aKR3FstES9lmdSD1QpDb6n6
+90lk2XL8JH8BUEsBAj8DFAACAAgAPLFqW1jwZhFuAgAAHRkAACkAAAAAAAAAAAAAALaBAAAAADIw
+MjUtMTEtMDctc2Nhbl9wb3J0bWFwcGVyLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAVwAAALUC
+AAAAAA==
+
+
+--b1_ebbe8ff4c7a76ad323ef7c4dd9c586b5--

@@ -1,0 +1,44 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <ab2ea377c4f2b8b398f8bfa98d94ebc0@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_ab2ea377c4f2b8b398f8bfa98d94ebc0"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ipmi-sample Report: 2025-11-05
+
+--b1_ab2ea377c4f2b8b398f8bfa98d94ebc0
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_ab2ea377c4f2b8b398f8bfa98d94ebc0
+Content-Type: application/octet-stream; name="2025-11-05-scan_ipmi-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-scan_ipmi-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxals+Q/FioAIAALwOAAAjAAAAMjAyNS0xMS0wNS1zY2FuX2lwbWktc2FtcGxl
+LWFzbi5jc3bNlU1vozAQhu/7KyLOLvIYTIAbbekGbUO0JGzVU+QFN0HlI+Kjq/77HWiSNm72uClR
+ZM9gjB+/9sxobVbIphXFTiNaI19knbWvaGa9v6urtkqqvDerusVuWzVtKQqJZis22IqmxHYjK2xr
+ucmq3k3evlGKLGk+TFo3VVcnclgoaat6WKbI1rho8zaxrEq5Fl27RbtI2bvJD+ZONM2zfD24lSwO
+ZiqfRJe3zz3VTta4q0Zsjl/rGlnnuL3844Meqgcsuzzv/X4/iLDOq03W48i6HihT+ZIlMkuPZi1f
+0H7K6uKPqPfe+y4KUXZPImk7HBomfXywVw+lTbukHYb39jDyTWOU8SuAK8on1HC55TJDI9tssyVA
+qW6ZOsOOUYd06Y5YzCCkF5HYQBmQICRzb+ZF3nK2ijwyj+fXXkA4THGYEC2SrcjyyaoWKUIwnZKy
+OvnvRSSyFL9zmR77V9ns3zj8VFDGXdNRQJnOzbOY8ZIsZsGC3CzukRC9SxAatsvtU0JwDB3MMTGC
+y0BRcaqDZY0IkbqUqjLijYQRyUinny8jdtxQEKcOGLRH/BVE34Mw8AgGznUchRegZK5huDA9pTRQ
+SHNMlHjezGWmqqWjA4znuDnDEz9FNDGwp2xUQjLT5QolWFwHRs8q6cVEC/2HyXIRr2aTB+/eX2pk
++Xgb+o8XuZ0mYMZU4xxz0T/i/Gtxh5Cnzufszhg/i3vrk5m/XPoh0e4iL/xxF0eriTefzL0g1Ai3
+wHSc/xz93OVqZTf4aIGNHhjUxE+5bsNIeQF51SLg6M5Y7wMHF5iaHjCL2faoslh/c5W0wPpka7Fx
+1VbLpWrVAoaVi49KTWCfYwqTAJjng+rGIz9j/9q/IfNFuIp87/4ypcDGY1coOWB+tb+U8i9QSwEC
+PwMUAAIACAA8sWpbPkPxYqACAAC8DgAAIwAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wNS1zY2Fu
+X2lwbWktc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBRAAAA4QIAAAAA
+
+
+--b1_ab2ea377c4f2b8b398f8bfa98d94ebc0--

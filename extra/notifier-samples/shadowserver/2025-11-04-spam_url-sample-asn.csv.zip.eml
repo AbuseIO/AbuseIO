@@ -1,0 +1,36 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <d167045b5defdde44dd76e968cb7aff5@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_d167045b5defdde44dd76e968cb7aff5"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver spam_url-sample Report: 2025-11-04
+
+--b1_d167045b5defdde44dd76e968cb7aff5
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_d167045b5defdde44dd76e968cb7aff5
+Content-Type: application/octet-stream; name="2025-11-04-spam_url-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-spam_url-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsAkOuS2gAAAFECAAAiAAAAMjAyNS0xMS0wNC1zcGFtX3VybC1zYW1wbGUt
+YXNuLmNzdpWQS24DIQxA9zlFxdpBQD5qs+0NuswmIsSdUmVwBEzV3D42k2TVkToI2Q+w9QBVY4+l
++v6iQA35zPGLSk2+R8You74kjh0Sx4xdJFmGWK+cko+hcC4YKuUGP5jHswvlyqn6TvZpyAFbQTph
+qxyO39wllMOhmQRGm9BoFHpaZXE3Cz7tzPcbLJQzbrO0dmnWL8bs2lQAiU5orMZffukZdaAe7JvT
+dvuqjbawXW+sg/0ePpoK3lkCBiCmTwKo/EPA4x8df/ntw+8m/G62383xu4d/NeFfzfZPdixuUEsB
+Aj8DFAACAAgAPLFqWwCQ65LaAAAAUQIAACIAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDQtc3Bh
+bV91cmwtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBQAAAAGgEAAAAA
+
+
+--b1_d167045b5defdde44dd76e968cb7aff5--

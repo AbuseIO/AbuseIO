@@ -1,0 +1,43 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <3b968e73915f33418f73d4e4c9652488@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_3b968e73915f33418f73d4e4c9652488"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_epmd-sample Report: 2025-11-06
+
+--b1_3b968e73915f33418f73d4e4c9652488
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_3b968e73915f33418f73d4e4c9652488
+Content-Type: application/octet-stream; name="2025-11-06-scan_epmd-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan_epmd-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalth9dL2XgIAAJAMAAAjAAAAMjAyNS0xMS0wNi1zY2FuX2VwbWQtc2FtcGxl
+LWFzbi5jc3a9lt9vmzAQx9/3V0Q8X5HPP7DhjXVZm6klU2hU9alyiZWwJSECVqnS/vid25fVrNJU
+QSVMjJL4w919/T1HfX1wXW8Ppwiizj26tu6faFr751Pb9E3V7P20aXv62DVdf7QHR9PebuluuyPd
+t66he+u2deMfq5c1jrauur/+dN81v9rKPYOqvmn9T5qN66JPEWdcnSGesWSGOlMmYzyCXb3dATIW
+JzJGJmJuoK9OIEWSArjTYQMGGUcoL+B8Xtys8isoF8VF/n25moNCTd8CRCvX23o/u2ntxqNb+/BQ
+98BVonkA5plIM6UDMFcxx2QE8rG7R+BI6w4CZiZTGHA1j7nU00acUJ4zbl6TlYjTqbH+kmHAIkZl
+piZLlTHxmsyRtMXHKLH7QWjXbkDyQZUJLTMVogXGiDht0CqTmq7XZKNiTNUYYGf33kRAIgo9kLYQ
+GWdBpYWJ0zdiXpdwnl8tvi5XxSKHqMyL2bdlOY/eH7cJi51Qsdm/6fkaomJ+OyuX65vL2W1+NS8j
+KO++FPO7d28vEeo8pWHSD3kBslJfgeAFlI4xeWOjLQq4zi/zVV5eUv3hen39OV+830zNEK3kxOQX
+dwn7R5LGKNXE6BfFpQHaUL4nDpoxsnHKeKh1HSfJGOT90/Fn39oKpGLsd2uP1e7+eVnFMMgB9e5h
+F+XksG/Z3Gg5SL3kQrPhwvdwPQbaPtodSImp/p9+Jhn5jJ5c64JlItB6YijZU+/vZ2fHUOpoaKjJ
+g/addHB8YDQmD9qf1FSgMEYnxI8wlgEYkSQ2cbYZSUxlIuyi0p9b0vHRfwBQSwECPwMUAAIACAA8
+sWpbYfXS9l4CAACQDAAAIwAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wNi1zY2FuX2VwbWQtc2Ft
+cGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBRAAAAnwIAAAAA
+
+
+--b1_3b968e73915f33418f73d4e4c9652488--

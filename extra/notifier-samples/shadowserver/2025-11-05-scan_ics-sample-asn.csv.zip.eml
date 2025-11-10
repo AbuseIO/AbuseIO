@@ -1,0 +1,45 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <836cbe9f94eab9d3c018b7aed53b2eec@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_836cbe9f94eab9d3c018b7aed53b2eec"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ics-sample Report: 2025-11-05
+
+--b1_836cbe9f94eab9d3c018b7aed53b2eec
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_836cbe9f94eab9d3c018b7aed53b2eec
+Content-Type: application/octet-stream; name="2025-11-05-scan_ics-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-scan_ics-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvEnkVczAIAAJsMAAAiAAAAMjAyNS0xMS0wNS1zY2FuX2ljcy1zYW1wbGUt
+YXNuLmNzdr2WW3OaQBTH3/spHJ5XZs/eWHgjianmAh3RZvKUIbg1zKg4gGmTT9+D2iSuaVMTjYPr
+Lsj+zu1/wKnzqanqdDp3iFOZe1Pm9QNO82Y9L4u6yIpJMy3KGn/uiqqepVOD0zod45hWMxzHpsCx
+NOO8aJbZao9ZmmfVi5tuqmJRZmYJyuqixMnI3OeZubk3s9HLdf0wN8+raTEyk5d/LqsVZ33C3i0f
+LY2p5sWswqv5Y7NXmf68+XPO+eIwymQboE1li4qAy4Azh9zl4zsClLpKuEK74GmyGM2J8DTVhNym
+2czURANlQIYJOQ4veqdxP+qFxEnCqHUWJx2HSLwLKCFO39RpPmkNynSE/PVnAwwyYAKPTTDjwgXw
+SZ0hWQvcqphn7UXavs1nafmw5odD4kSdq1YSDwfd1lV40UkcklyfRJ3rnUxggWAB5ZYJLgO+NIAJ
+KgjJTdZWVHu0jffhiZUJZ9/IID6/jtfjDlTqB0LgYVGFcH12QCzGW0DAfQsLmGnF3oj3SYd0O0nS
+iYhz2g+j89Nhf9AKL1uXYS/CpCsQvv9/RngBui9tI5jEclslHXnoe4azD6O12IoA9QKwAg+cu9r7
+tAAsq54rywZMgv9ZJlAecC+QsGmC1K7Wqwz4AIT8KH49iz3u9mJyHF8ML49wtUut00BwTLnlLsIY
+9/ZPUw1N2glmzVe+Ka09+OltkvVTK9unl00Jsa2ODRywh8CBaILZiqWuZAdJIARS2uqQrlzlTzbd
+AZ+It4vqXbimDl5JHFhiAIV6hEPVpy1+X7iKHbY8XxUG89BRdVDwqt1RbYGpdBV9o999CKuaRyy3
+W5xEMj2sv/h80QG3/BUcG5DavzTZUi2WNDnFPvCv9xfPB04b8Pde/2uveYELk+7RsB/tGGHgW20B
+mO9KZSu1nU2KyozeC+bbXqstEUnl6r9X1H5cfjXcmMWnvrvPqvoNUEsBAj8DFAACAAgAPLFqW8Se
+RVzMAgAAmwwAACIAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDUtc2Nhbl9pY3Mtc2FtcGxlLWFz
+bi5jc3ZQSwUGAAAAAAEAAQBQAAAADAMAAAAA
+
+
+--b1_836cbe9f94eab9d3c018b7aed53b2eec--

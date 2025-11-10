@@ -1,0 +1,44 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <3823f7e9ca74968424382b376cbf41da@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_3823f7e9ca74968424382b376cbf41da"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ipmi-sample Report: 2025-11-09
+
+--b1_3823f7e9ca74968424382b376cbf41da
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_3823f7e9ca74968424382b376cbf41da
+Content-Type: application/octet-stream; name="2025-11-09-scan_ipmi-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_ipmi-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsPunLqiAIAAOkMAAAjAAAAMjAyNS0xMS0wOS1zY2FuX2lwbWktc2FtcGxl
+LWFzbi5jc3bNlk1vozAQhu/7KyLOLvIYTMA32tIN2oZoIWzVU+QFN0HlI+Kjq/77HWiSNmyu7RJF
+9gzG+PHr8dhamxWqaWWx14jWqBdVZ+0rmlnv7+uqrZIq782qbrHaVU1bykKh2cotlrIpsdyqCsta
+bbOqd5O3b5QyS5oPnTZN1dWJGgZK2qoehimyDQ7avHUsq1JtZNfu0C5S9m7yo7mXTfOsXo9upYqj
+maon2eXtc0+1VzXOqpHb09e6RtU5Ti//+KCH6gHLLs97v58PImzyapv1OKquB8pUvWSJytKTWasX
+tJ+yuvgj64P3PotClt2TTNoOm4ZOHx8c1ENp0y5ph+aDPbR80xhl/ArgijozyoTJBWUa2WXbHQFK
+dcvUGVaMOqRL98RiBiG9iMQGyoD4AVm6Czd0o8U6dMkyXl67PuEwx2ZCtFC1Mstn61qmCMF0Ssrq
+7H8QkahS/s5VeqpfVXN44/g7BzUEdQTAOaiBnKYx4pw7YFASR+SXH373A98lyHodh8HXUHLB7LGc
+jg5wUU2kXC38FblZ3aOQ6H0+IhPMEQY9RzQNHeZsQkIOcclGyw0W14HRi0q6MdEC72EWreL1Yvbg
+3nuRRqLH28B7/AJcENwQpjPCdea47uY0cW1h0jGuoTPGL+LeemThRZEXEO0udIMfd3G4nrnL2dL1
+A41wC0zH+dx9BQ4mgNG+MvhkgTF+qYCRwhYKTK2J8sKF/QZznbOJ8hq2gNG5BZTrNkw1Hpig5iiA
+Hd2ZZvhigjD/zWcYv2Dbkzol+FzwUdSy/jCz2LRuBTaSjjCBYTbgk1LTMATno0XHJAvm5U1145Kf
+sXft3ZDlKliHnnv/JZR4xaKjKxZwwPPL/q+UfwFQSwECPwMUAAIACAA8sWpbD7py6ogCAADpDAAA
+IwAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wOS1zY2FuX2lwbWktc2FtcGxlLWFzbi5jc3ZQSwUG
+AAAAAAEAAQBRAAAAyQIAAAAA
+
+
+--b1_3823f7e9ca74968424382b376cbf41da--

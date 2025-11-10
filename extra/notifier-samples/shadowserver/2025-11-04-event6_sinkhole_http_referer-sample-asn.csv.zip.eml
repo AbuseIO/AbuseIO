@@ -1,0 +1,39 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <a206f3461bcd870826fc7144b1971f46@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_a206f3461bcd870826fc7144b1971f46"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver event6_sinkhole_http_referer-sample Report: 2025-11-04
+
+--b1_a206f3461bcd870826fc7144b1971f46
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_a206f3461bcd870826fc7144b1971f46
+Content-Type: application/octet-stream; name="2025-11-04-event6_sinkhole_http_referer-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-event6_sinkhole_http_referer-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvXXgSoWQEAAGgEAAA2AAAAMjAyNS0xMS0wNC1ldmVudDZfc2lua2hvbGVf
+aHR0cF9yZWZlcmVyLXNhbXBsZS1hc24uY3N2pZLRbsIgGIXv9xRLr38t0HZTbvcGu/TGUPrXkbRA
+gJrt7QdWnWHTJZo05HCAw/lSiqBG9EGMtoDCOhOMNEOUHyHYrcMeHbqtsrljjQu5J7zOrR2a3HK4
+U+bXRqnCV+59GB+0GDH3tVDS56ZHGYyLrsc9ujmt82GunsSxcZJz0aTmfkmda6WJ/Dl/USJNT3cn
+fb7STu2g5Nabycm0Uek+Ls1xvRjVkMKC2MVRWBu3iuNibOpnFUvrWLY7YU3u/BNSg4w2YfohFnAx
+4dDuqWCENQtKF6R+JoQfvgKg78ia16JteCdwzVvyuuKcArzUDWWw2cD7gRveIjHgZ3wGAy41BiAA
+EcPEALrmTIqOy7pu+aph/RzQNFWdB2jTIaHLLAdCfGCnEaAUVpV7Wk62EwHzM9KMkFB5WV7G/MVH
+r/GxR/nYLT52Bx+7h49d46se5atu8VV38FX/8n0DUEsBAj8DFAACAAgAPLFqW9deBKhZAQAAaAQA
+ADYAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDQtZXZlbnQ2X3Npbmtob2xlX2h0dHBfcmVmZXJl
+ci1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAGQAAACtAQAAAAA=
+
+
+--b1_a206f3461bcd870826fc7144b1971f46--

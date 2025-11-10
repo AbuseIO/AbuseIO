@@ -1,0 +1,44 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <2b98cbd519221484a6abbf8b1a18831b@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_2b98cbd519221484a6abbf8b1a18831b"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_telnet-sample Report: 2025-11-02
+
+--b1_2b98cbd519221484a6abbf8b1a18831b
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_2b98cbd519221484a6abbf8b1a18831b
+Content-Type: application/octet-stream; name="2025-11-02-scan_telnet-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-scan_telnet-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalulCeLTgAIAANsMAAAlAAAAMjAyNS0xMS0wMi1zY2FuX3RlbG5ldC1zYW1w
+bGUtYXNuLmNzdr2Wb2/TMBDG3/MpoogXgLzId/nXWEKiGtsoK+3UdAiJIZZlpkRK45K4Q5OqfXYu
+65AoTstom72JHUXt77m75862dTaVlU6mM5vZlbyRZaZvaZvV77NSaZWqvN6qUtPyXVW6SKaStjqZ
+0DOpCnpOpKJnKSeZql/T5X8USZZWf/zoa6XmZSrvQalWJW2ukqKQpf3MRo7+AcABRwt84aHwOjab
+yutsPmXAuRN4DoDreCHT6Yx5nCNjWuaF1KwDHIHFJ+zwaDAedfss7g1OumfD0RHzIaSvjNkjqZMs
+t8Zlck386NXH5PLy4gJuTxeLoPfTHd/9SD69XlHBuQAULhgqfMfz7kWgu4MEG5FbH7K0VJX6pq3j
+8ZkVy/ImS+XCyAZGgvuGjsjbj5Dzq3mh5xaiwz3Ht/rjeFFNZnlyVVm5mmSF+EsPCuTCjww9HjqI
+frOg81PWHw7eDge/l3ViXhSqkC+bwR1BuQBugl0HXHgAb49eLD4n19OseJOrNMlrz1p3X56vauBu
+rcE3remjE0U7xv4YARAIygOHjQK2lrBMe5P90AAGkdMJdk56vw71XR1qY8lpEgRNJQ9p2THb/yAv
+zRZtIrfIRsIbJkMIHXQ7rcbNI4FAeION+6j2pu4OqK0EeCbYdXi7pfbrdGNgkkMH0NuN3dxRZGoM
+N/P2TAQa2WaELhKx07adAxofAtzN9NbYLp1XRhtjne7W0RQ2GoYmBt1k1vdSzA67/d7xcDTodZkd
+dwfW+2F8ZG95YtbOdk0JYX19WBP+/wp4zDAzu2tVQ+sqqANAcPMgAU4j3X+SYoR0pW3yw4qENgUs
+T/IGAUCVeKpCrBkGAJGDPNhPFh5G4C9QSwECPwMUAAIACAA8sWpbpQni04ACAADbDAAAJQAAAAAA
+AAAAAAAAtoEAAAAAMjAyNS0xMS0wMi1zY2FuX3RlbG5ldC1zYW1wbGUtYXNuLmNzdlBLBQYAAAAA
+AQABAFMAAADDAgAAAAA=
+
+
+--b1_2b98cbd519221484a6abbf8b1a18831b--

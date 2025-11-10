@@ -1,0 +1,44 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <56392e648ed89f9e73abc38828e62785@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_56392e648ed89f9e73abc38828e62785"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ip_tunnel-sample Report: 2025-11-05
+
+--b1_56392e648ed89f9e73abc38828e62785
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_56392e648ed89f9e73abc38828e62785
+Content-Type: application/octet-stream; name="2025-11-05-scan_ip_tunnel-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-scan_ip_tunnel-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalu9LZsTcQIAAF0PAAAoAAAAMjAyNS0xMS0wNS1zY2FuX2lwX3R1bm5lbC1z
+YW1wbGUtYXNuLmNzds2WTW+bMBjH7/sUyGc38gsY8I0QVNDSZHKyTD1NCKwUKeAISKV++xmyVs3i
+kR2GwsUYJeb56f9/XgzaopRNm5ZHAEEjX2VdtG96W3Tvx1q1KlOHbqvqVj9eVNNWaSn1tk33ek2b
+Sq97qfRay32hutfs/I0qLbLm06GfjTrVmewDZa2q+yPNUVWNBF8AQcR5wPgBORZCnNqc+gCWMi9O
+JcQIzZg9wy6bIbivJYT9irHrMQ+GAQRzkWyTTWyF6+X3p3kSALhLwu1aJAF0sEcwghAs0ja1vtUq
+k01TVHtoxRqs36RVbgl5SFuZWxtZvxb6LwDK7EXV8nh4u4DDDkcOt10THCbe3fEop4QTo3bY8Seg
+HrY5YUY85k0Aj2gBsRHPdSZgLtLmmvF8cnc8m+vSdYx4hNBpqIeRCY9OQjzMkbFwGZ1AYVDGsdFa
+Zk+jq9jGruLfvWp10lHXVLWE6J5HYJGVR83HisqGLkYu/QsfCNc/kjAOVtY8eAb6BCRIf5t5nuRu
+mhLOL8PqdKcck+uwzowg75/DfshyGTDP0R8Bzy5cN080w58sYA7VCaNDBct5JLYBDONos43EUyQi
+rbyLMdbKh6osT1WRpa2+UjTwXePOjNcil/XZgd92vP86PBOpbQAj/iDaevV1mazGw+r6ETNg+XQI
+C4hoYS2iSICxyPoxSJyr1LnhZLB8DMTzSFB97+Y2MUDdcHFUrHPWY9uANeziyFjnWWxQizlDVIto
+t16NmlbXCd898L0Tvhtv1yai+6a8vir7prmGyDBWkIiFSKJRGxdyjVg3WlecPMaWSHYjenm+SBm8
+pMOixclq+19z/xdQSwECPwMUAAIACAA8sWpbvS2bE3ECAABdDwAAKAAAAAAAAAAAAAAAtoEAAAAA
+MjAyNS0xMS0wNS1zY2FuX2lwX3R1bm5lbC1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFYAAAC3
+AgAAAAA=
+
+
+--b1_56392e648ed89f9e73abc38828e62785--

@@ -1,0 +1,43 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <b367750feda2184ed606b65cf5789e99@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_b367750feda2184ed606b65cf5789e99"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ipmi-sample Report: 2025-11-02
+
+--b1_b367750feda2184ed606b65cf5789e99
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_b367750feda2184ed606b65cf5789e99
+Content-Type: application/octet-stream; name="2025-11-02-scan_ipmi-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-scan_ipmi-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsyPuUpVwIAACgKAAAjAAAAMjAyNS0xMS0wMi1zY2FuX2lwbWktc2FtcGxl
+LWFzbi5jc3bNlctuozAUhvfzFBHrU2QbTMA72tIJmoZoIEzVVeQBN0HlEhnoqG8/hzTphWbbCoTs
+/2CMP/+2D0ZXVKrtZLU3wGjVk9JF94yyGOK9broma8pBNrrDate0XS0rhbKTWyxlW2O5VQ2WWm2L
+Zgizl2/Ussjad502bdPrTB0GyrpGH4apig0O2r50rJtabWTf7VBXOXuT/CT3sm0f1fMpbFR1krl6
+kH3ZPQ5Ue6VxVq3cvn6tb5UucXrl+wcD1ABY92U5xMN8EGFTNttiwFFaHyhz9VRkqshfpVZPqB8K
+Xf2T+hi9zaKSdf8gs67HpkOn9w+O7qG1eZ91h+ajPrT8MBhh/ILSC8JmxBPEFdQxYFdsd0AJMR3b
+ZFgx4kGf78FhFsBgIriUMAphBEt/4cd+sljHPizT5aUfAqdzbAYwYtXJopyttcwRgpkE6ubDfTQR
+VC3/lip/rZ9Ve3zjdH0EdYXFBbc+g3JrxDn3qEUgTeBPGP8Mo9AHZL1M4+gbKD3BbMHZmNIzKT3r
+JlKuFuEKrla3aCRG32Gk7QlKPiKiYzjClHy0HUFGkLZl0jmbEKUrGFK6Iyu9Oa62fXa5/RSMKLib
+Jat0vZjd+bdBYkByfx0F999iKp0Lez7anBY3GeNnca8DWARJEkRg3MR+9Osmjdczfzlb+mFkAHeo
+7XlfC0zYp+RECTddOkleVxBHWKP9wDzT4xPF5ZivRvuBOnjKXHdSp4w7go5dHZKBM61kQJmw6QiT
+Mkz/fFKY+B9l1jj9c5Pa5w/VlQ+/0+AyuILlKlrHgX/7NZT/AVBLAQI/AxQAAgAIADyxalsyPuUp
+VwIAACgKAAAjAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTAyLXNjYW5faXBtaS1zYW1wbGUtYXNu
+LmNzdlBLBQYAAAAAAQABAFEAAACYAgAAAAA=
+
+
+--b1_b367750feda2184ed606b65cf5789e99--

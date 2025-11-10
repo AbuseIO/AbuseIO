@@ -1,0 +1,45 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <03fdf093cf17facba63db76800b296b1@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_03fdf093cf17facba63db76800b296b1"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan6_smb-sample Report: 2025-11-06
+
+--b1_03fdf093cf17facba63db76800b296b1
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_03fdf093cf17facba63db76800b296b1
+Content-Type: application/octet-stream; name="2025-11-06-scan6_smb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan6_smb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvwmPTzswIAAEMKAAAjAAAAMjAyNS0xMS0wNi1zY2FuNl9zbWItc2FtcGxl
+LWFzbi5jc3bFlltv0zAUgN/5FVOejWQ7vp63sJW1QNup7R54qnztArSZkoDEv+dkAwmVBmlCEVHk
++DiNz+dzbdHXx9T17vhYkKJL31Jb999xWg/yY9v0TWi+DNOm7fHx0HT9yR0TTnt3wNF1JxwPqcGx
+TYe6GcTwvMfJ1aH77aN913xtQ3pSFPqmHT5vwwM+Pqfh993R74/uU9PuT1+PPrW/lurT+VKbvtXd
+s65BROpB2nd9W58OxauCUy5fM/aaqismgUrgpiAP9eGBcEoZRG/AeQWppBRKnwQEibOQuQJlOCN9
+eCRCSEJwd2IYxaV3d2S3fv9x/XOUTOM6IcUm9a7+crVrXcSTPV3n+ksJjJ/rDzGCpajV+eDA2DKg
+mA3q1/SS/u0tuZ6tdpvqA9kuVrfV3XozexEFnk2wcwrFMpQWBV4GDiozDslQDZrSeIlisSLLal5t
+qu0cUcjyfvmmWrzYGHIUQ+UIxogSrJAaeLB8CgoBDE8sRil0zAlUGR24yNBDQYj/gWHQCOCy1WBL
+BNJlDBNgYAhSA+U4hnVKgQ4MpBAObGRTULASoxPtMU4RXQStjYJoSgfSBzsNBt7UjmI4dEnprIPs
+MGEwMug0aUItyHEKr20CmQ2KKgXAbc0UGHzwiRz3ic84SBk95KQCMC3j/wiNyGJCx6DVQkkzBKfy
+NE55ythxDMOwYGhmISWNYSolmyJdLQgNVI9iZO885mwCk3jAnkbZZD75M09c1OCwomQhDBhJExZy
+EzA8wnTxSc8hSqwUKSFFlFxDwo4KWnoK6JqL7eR+S7CZ3q5X5M262twsq9XLGiu/0N69xkY2/Kfg
+dkgR6SFZlyErzcYQ5os1uV5/QCOg9M8t1QgQCgGSEwpfOyyZznPwTl20wc2MzGfb7WxFirebavX+
+7f1md1Utr5bVYlX8neYHUEsBAj8DFAACAAgAPLFqW/CY9POzAgAAQwoAACMAAAAAAAAAAAAAALaB
+AAAAADIwMjUtMTEtMDYtc2NhbjZfc21iLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAUQAAAPQC
+AAAAAA==
+
+
+--b1_03fdf093cf17facba63db76800b296b1--

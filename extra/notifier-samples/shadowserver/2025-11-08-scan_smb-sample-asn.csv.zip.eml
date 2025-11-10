@@ -1,0 +1,41 @@
+Date: Sat, 08 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <c776fe51fdb30b9654ef19f503c5536a@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_c776fe51fdb30b9654ef19f503c5536a"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_smb-sample Report: 2025-11-08
+
+--b1_c776fe51fdb30b9654ef19f503c5536a
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_c776fe51fdb30b9654ef19f503c5536a
+Content-Type: application/octet-stream; name="2025-11-08-scan_smb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-08-scan_smb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxals0ZNCV3gEAAJkLAAAiAAAAMjAyNS0xMS0wOC1zY2FuX3NtYi1zYW1wbGUt
+YXNuLmNzdrWWTW/bMAyG7/sVhc+qIFKSZetWDEUxYOiGtPfAdQVHW20Hslpg/35UggGrcg2DRB92
+7Cd8yddMk+MctjzMx0Y0W/gIKeY/tIxlf0xrXsf1rSzXlGk6rFtehjnQMg8TjcO20DiFlcYUpriW
+7Xi+xzLEcfvvov22vqcxnEBjXlO5PI0Hmn6H8v1tftnPw6817Zf3+SWkf4fiUh9K4SNuZ1bZ0q8u
+u/2WU1ym5kuDCu0twK3qbqD1Gr0xjTjE6SBAKdkaCYgSNYg8HoUxVgi6jehAIYinB/H1/vF5d/dd
+PH17fLj7+WN3Lyw4OitEswt5iG83z2l4pUBOr8849NB5ZSucRumQgea87j2qimaUROOuj1Pak5yA
+Nc7IjoNGKONtnTkrURk2mq5p9HGaIXPWa6B3hXNWguLAtZ6Sd+EC56hQerZCqcXsgZA8NgDtsRIT
+VS+BozDPHq+jKzgkzPVxxQTeVo8UBJoYtFR90dLWWkJLqQOWwjRUm1VhokFpDJfrsP9M01QnFtli
+qxJXxOQTssqbMUxpc97iRU22JKRicIBS1OO8UZc0w/aorELr6P8CW9OpktYzdbiTs2sVAR2VSMuV
+NOzqHqDJbCzONu6iwSG25DbHVv+VlmhR6isF9xdQSwECPwMUAAIACAA8sWpbNGTQld4BAACZCwAA
+IgAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wOC1zY2FuX3NtYi1zYW1wbGUtYXNuLmNzdlBLBQYA
+AAAAAQABAFAAAAAeAgAAAAA=
+
+
+--b1_c776fe51fdb30b9654ef19f503c5536a--

@@ -1,0 +1,41 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <bcf8d216286db9ebaa9788fdc2899ed6@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_bcf8d216286db9ebaa9788fdc2899ed6"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_chargen-sample Report: 2025-11-09
+
+--b1_bcf8d216286db9ebaa9788fdc2899ed6
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_bcf8d216286db9ebaa9788fdc2899ed6
+Content-Type: application/octet-stream; name="2025-11-09-scan_chargen-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_chargen-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltaLIQ2zgEAAO8FAAAmAAAAMjAyNS0xMS0wOS1zY2FuX2NoYXJnZW4tc2Ft
+cGxlLWFzbi5jc3a9k0uPmzAUhff9FRHrO8hPjNk5GaZBDUQlodsKEZqxFEIETqX21/dCu2gLSH2M
+ZnNsy7r+7j069pxt6t6Vzc0Dr68/1511X3Brh/Ota11btZdh23YOl+e2d9eyqXHryjNq2V9Rz3WL
+2tVn2w7H6vsb19JW/U9FH/v23lX1CKpc240l/a299nhlvw4X2MfFfrJV6YaX3niMMPlA6QPRK8Ii
+GkaSeNDUJ3tvgBLiB8KnPPAV3E83oBqgei67c32FkBJGIckgNVuTm8P2mBtIi3RtEpBU4TWAl9eu
+tJfVsStPCOdMq1F8Qn4l84jqiNPfyQwXRvRLsLFCjDJhs4iLiE6mVspn/EXQnIRslBk0DSKuJoYL
+4WPJPLo4wH6b7GGz3yEVTwvUQGL3g8xQiYjY1GzqU/To/6hcBWqUGSpTEZnMyiRH8mK8Yngs1ju0
++8eygJWShaPMJIsFkZATizVimVzAPsawjQ+HOAPvKTfZu6ciP65MukpNkiEsoELrv0oYGk74ZHQu
+X68H9IHO2a99/Wod4B8nYtKB4D4NpmlXmnIy5O5Dkr9NssQAfrZ1kWf/8sMxAzKcZEBi4nW4MP3G
+wPsiXscbSPfZMY/N7o/A3wBQSwECPwMUAAIACAA8sWpbWiyENs4BAADvBQAAJgAAAAAAAAAAAAAA
+toEAAAAAMjAyNS0xMS0wOS1zY2FuX2NoYXJnZW4tc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBU
+AAAAEgIAAAAA
+
+
+--b1_bcf8d216286db9ebaa9788fdc2899ed6--

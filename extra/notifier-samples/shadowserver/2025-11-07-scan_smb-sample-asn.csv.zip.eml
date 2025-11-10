@@ -1,0 +1,41 @@
+Date: Fri, 07 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <20db20e810c177506693a0be0adbc834@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_20db20e810c177506693a0be0adbc834"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_smb-sample Report: 2025-11-07
+
+--b1_20db20e810c177506693a0be0adbc834
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_20db20e810c177506693a0be0adbc834
+Content-Type: application/octet-stream; name="2025-11-07-scan_smb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-07-scan_smb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvUAzhi5AEAAJULAAAiAAAAMjAyNS0xMS0wNy1zY2FuX3NtYi1zYW1wbGUt
+YXNuLmNzdrWWTWvcMBCG7/0VwWdFaEYjW9ItlBACIS2b3BfHFbtuY3uRlUD/fccbCl31mjFYH7bl
+xzPzasZNGae0ln46NapZ03vKY/nNw3Gbn/JSlmF53YZLLtwdl7XM/ZR4WPoDt/06c3tIC7c5HcZl
+mw4f75j7cVj/WbRfl7c8pDNoKEvelufhyN2vtD2/Ti/7qf+55P38Nr2k/PfSONeXcnof1w/WNuWv
+3mb7teRxPjRfGjTorgGuTXcFLiJE4xp1HA9HBcbolvTWBafKcFJETil+i/JgENTTnfp6+/i8u3lQ
+T/ePdzffv+1ulYOO7yrV7FLpx9er59z/YDvOxwXN2IhdBF/REDVa+Hwc+MhE01U4i7pDKeMMVjQy
+GqkTMA4j2mhrXxJpL0AzhsMWyVQ0p9GQgG2O/RipVqXjs7MiOOeirY3rrA5GgNZFCtHUgQvARAFZ
+QhuR9wFd4tAEDSJCCRvOhgoHqD1JbQKqfIloWCxGRCg2RGgrHCcUQC/gSw4dRVf7klATiWXLahdY
+1omTkSVAJLikOauhlRIlVIXAc9kRq3FVGfCeJQJSbnSVG4NQWj7D6pKzKQRAKmhoL2nEtGDF0mQV
+Nue4osplyYrWgrYkVbuxSiOt1+hkHEn//1H6jv+7Pikj/wFQSwECPwMUAAIACAA8sWpb1AM4YuQB
+AACVCwAAIgAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wNy1zY2FuX3NtYi1zYW1wbGUtYXNuLmNz
+dlBLBQYAAAAAAQABAFAAAAAkAgAAAAA=
+
+
+--b1_20db20e810c177506693a0be0adbc834--

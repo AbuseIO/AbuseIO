@@ -1,0 +1,43 @@
+Date: Fri, 07 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <9be3bbffc6674affcd436d772798dc0a@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_9be3bbffc6674affcd436d772798dc0a"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_activemq-sample Report: 2025-11-07
+
+--b1_9be3bbffc6674affcd436d772798dc0a
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_9be3bbffc6674affcd436d772798dc0a
+Content-Type: application/octet-stream; name="2025-11-07-scan_activemq-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-07-scan_activemq-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluhTGaVOwIAAJIQAAAnAAAAMjAyNS0xMS0wNy1zY2FuX2FjdGl2ZW1xLXNh
+bXBsZS1hc24uY3N2zZddb9owFIbv9ytQro3l48/gXUUr1dhY0JqiqldTFDwWicQsSZH273dCVdEO
+76JSN3yB44BjHr3nvMcnyVA3rh/KZp+QpHcH19XDL5zW4/2+84Ov/G6c+m7Ayw/fD23ZOJwO5RbH
+sm9x3DqPY+e2tR9vq8c92rKu+mcPfev9Q1e54x9Vg+/Glb5pynaDs4NrN8evEKEft3mXcMbVFGDK
+zASM5cYqnpAKAeuq3BFgjGpJQQqqDRmqPdGgwRBSVkN9cM3P99XBTXEPMZVaM0lSYBzI+jNZrvKr
+Vf50UWDwF0KSGzeU9W5y25UbZLyrO3ftu6YcFu13T7Ljpl++EkUhpfwlnLJSWa7P4ThQAZdlQ9WU
+BREQjmmq+CvgCvIhWy6uVzf5IiNJkeWTT6tinrwNJEjLg5CGwkxGQclgDDMLUWKcgak4tHxMRghR
+CsolRE+pqdBxQKaWzawIQQqUkkWSluhwsMBClPgxsTgcyxAL1W+By7WMhZJjzGWAchaPw8c6JK1Q
+55Sao8EjkVJYaSzTQUjF4hBSWon+DjAajsaJR0htlTmHTDEllYlJyVkQkoOIyTeBcCMje8WRk61J
+ks/vJsVqfftxcpct50VCivurfH7/ZlpyLEKN29QPzakEYZ08UeoT5T/CEoE8HJvcl1hcUnlBKjVW
+bB5wh8bVMIslqMiJrQSoP9UzqB7/b+pJqkJFOg2dykA1i8YSf29xJDxPv0tH+fgeI0Kc6bFpjAh0
+fCsMgGJXi6ffJTl/A1BLAQI/AxQAAgAIADyxaluhTGaVOwIAAJIQAAAnAAAAAAAAAAAAAAC2gQAA
+AAAyMDI1LTExLTA3LXNjYW5fYWN0aXZlbXEtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBVAAAA
+gAIAAAAA
+
+
+--b1_9be3bbffc6674affcd436d772798dc0a--

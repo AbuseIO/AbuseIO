@@ -1,0 +1,45 @@
+Date: Sat, 08 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <719471f81af036a74242f8fd0e02e360@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_719471f81af036a74242f8fd0e02e360"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_telnet-sample Report: 2025-11-08
+
+--b1_719471f81af036a74242f8fd0e02e360
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_719471f81af036a74242f8fd0e02e360
+Content-Type: application/octet-stream; name="2025-11-08-scan_telnet-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-08-scan_telnet-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltJ0xQjtgIAAP8MAAAlAAAAMjAyNS0xMS0wOC1zY2FuX3RlbG5ldC1zYW1w
+bGUtYXNuLmNzdr2WXU/bMBSG7/cromgXILnG30l8wYigA7bSTk25QgiFYLqINq5SFwmpP35uOjZW
+p0FQsqqynVbtc3z8vsfHN/lUzU06nfnAn6tHVebmyS7z1fOs1EZnerJa6tLY6aeemyKdKrs06diO
+6byw41hpO5ZqnOvVY7b+jyLNs/mLH93M9aLMVAXKjC7t4jYtClX6n3yCCO9g3EGhh7mkyL59MFV3
++WIKMEJQMIgxghhxYLIZIBQAoyaFMiDEiGCQnILjbn80jHsgOe+fxj8Gwy7gOLDfAuAPlUnziTcq
+0zuLn+hxXsh/mUQii+UOk1Eognrk5XfQG/RPBv3n6Q04IRmXBDs4TiAju+H8vUIXat9bYzdSG0ga
+SkYbue2QmeRMEuKQgwjyaFdyTYoRlSiQLHSAESTo4w+02h529ENIYInBzpnt6SydnFkf1SfXasme
+LGuiUxpGrdGZ3TttokcIkffSl937+zzLVWE8HnLsJSdJz7uKRxfX3lAvjCq9vdXnHbHvPSJvqNK7
+p2X8JT48fB7wAbEjPWC9ektY8zM3d5RA3oLzq+LGiIujKxe2aP1Q4kjysBncYtWhjkB4CMWuO35F
+mqEkSKKoidwaG0lOJRabbAGDtawC+3ovOknOOgSizmCmCru+CaCYYe/ydlGYRYctqhnBYOk41Wod
+B05NRCunsi1HkYDjuHf+dTDsn8eWHPe9b4Ok62/36/Kq1Noc/U2Pmc6uP9fKUTSHsnMwW676umJZ
+tRcB/yhyoyGERETyqDmEFgNA1o5CclcImNsTWF/HAUJoxxCONqGM1PVYL6Ci5p54675fsWVV7906
+yLBt9qI/qfd/x5Br2/a+1wgX+UOpR/mD9yggY5B6e7bTvp2o/WXtTVQJkzj5EbZAY9GmI9ZV0mm4
+hYBY/B9DVIXJlYaNgPCPi8BVxi9QSwECPwMUAAIACAA8sWpbSdMUI7YCAAD/DAAAJQAAAAAAAAAA
+AAAAtoEAAAAAMjAyNS0xMS0wOC1zY2FuX3RlbG5ldC1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQAB
+AFMAAAD5AgAAAAA=
+
+
+--b1_719471f81af036a74242f8fd0e02e360--

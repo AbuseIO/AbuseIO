@@ -1,0 +1,35 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <571b13bdb7daea30171f8ea9a8463fad@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_571b13bdb7daea30171f8ea9a8463fad"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver ransomware_victim-sample Report: 2025-11-06
+
+--b1_571b13bdb7daea30171f8ea9a8463fad
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_571b13bdb7daea30171f8ea9a8463fad
+Content-Type: application/octet-stream; name="2025-11-06-ransomware_victim-sample-ip.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-ransomware_victim-sample-ip.csv.zip
+
+UEsDBBQAAgAIADyxalvUcisMnAAAACoBAAAqAAAAMjAyNS0xMS0wNi1yYW5zb213YXJlX3ZpY3Rp
+bS1zYW1wbGUtaXAuY3N2lU67DsIwDNz5CpTZldIiGPgMxi6WSw1E5FElLhV/j9MBMcCAZVnn093Z
+RlzgIhQmA4ajOHlipMC6LTwUJxVdOenMfHUpKih8lpQVjCSM0zx4V248VgnFksJCubo80x1rAs7Z
+r7YHZ81XSDUANRb1tBTc2fHNShLyH/zGdLbbN23b2MPW2uPaBgD6Hk7rS1DLxUsC+CZu/xF3P8Uv
+UEsBAj8DFAACAAgAPLFqW9RyKwycAAAAKgEAACoAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDYt
+cmFuc29td2FyZV92aWN0aW0tc2FtcGxlLWlwLmNzdlBLBQYAAAAAAQABAFgAAADkAAAAAAA=
+
+
+--b1_571b13bdb7daea30171f8ea9a8463fad--

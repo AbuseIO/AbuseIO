@@ -1,0 +1,43 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <e924b04619caf10c9cad1758b692217a@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_e924b04619caf10c9cad1758b692217a"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver device_id-sample Report: 2025-11-04
+
+--b1_e924b04619caf10c9cad1758b692217a
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_e924b04619caf10c9cad1758b692217a
+Content-Type: application/octet-stream; name="2025-11-04-device_id-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-device_id-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalttBYreXAIAAPcPAAAjAAAAMjAyNS0xMS0wNC1kZXZpY2VfaWQtc2FtcGxl
+LWFzbi5jc3bNll1vmzAUhu/3KyKuHeTjDwzeFWvph5aSKSSqelUx4qVICUTgReq/36GdtuJqzcWq
+xlLi+AhiHmG/73sCW+9Mb8vdPiBBbw6mq+0jTuuh3netbat2O0zbzuLPQ9vbptwZnNpyg2PZNzhu
+TItjZzZ1O5TV8xpNWVf9iz/d9+3PrjJPD6ps2+FkbQ51Ze4Pplm/rO3j3vytdu3abF/e3PXDcz4F
+jDI5BZhSMaGJpkpLFpC6+dESoDSMRAhchEoSW+2JEJyQZlqZxnbl9nPfb0kMlAEpLslZli8X6YwU
+1/ll+m2+yIgEhVcJCRbGlvV2suzKNRLl0/L71pBnkOmubMqN2eGKeOH3wmRMJbWMNI8dKhmHeNPb
+WOmKBHl2Oynmq+XV5DadZUVAirvzPLt7T7pECxjTRRAyzk8PhxsaaxBjOCYhhDj2hE64G8tkGDEv
+4JQWzqsDgV9I3qY7z8hVVhRZToKLRZp/vVgtlpP0ZnKTXucBkRGIJPlvPmCaRpomYz4R4/sDD/Ao
+1ZRpiMZ4iqEsYj/wADSlY7yYhgn1ge7JU7hyHY+GcMzxPowv0swRLlN/pBGj/h6s3X80lNKM/RPq
+9Hrlr/BARLinyhPBJq9SlkGChuKPYMFNsjDhPtBhWFDNqJtkKFgfzh6mrMSPm2Vs8BRvsoI5Ucbx
+5IHyxO2U5s7mKh5KL4KWD00UdXQrFYaZJ3SAh8+R7dClRJ7gUS2coGWDMI4pY1WQ+dX1nJzNZ6ub
+L1i9V9+JTZ3U3G2c0EkkPx0R18KRZ4TyFMmJiPhgGNz1MwXHs/49kX4BUEsBAj8DFAACAAgAPLFq
+W20Fit5cAgAA9w8AACMAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDQtZGV2aWNlX2lkLXNhbXBs
+ZS1hc24uY3N2UEsFBgAAAAABAAEAUQAAAJ0CAAAAAA==
+
+
+--b1_e924b04619caf10c9cad1758b692217a--

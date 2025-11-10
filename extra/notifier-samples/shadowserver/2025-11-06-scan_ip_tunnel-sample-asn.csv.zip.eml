@@ -1,0 +1,43 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <d70736034e0eb9704401ac79ae65fce5@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_d70736034e0eb9704401ac79ae65fce5"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ip_tunnel-sample Report: 2025-11-06
+
+--b1_d70736034e0eb9704401ac79ae65fce5
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_d70736034e0eb9704401ac79ae65fce5
+Content-Type: application/octet-stream; name="2025-11-06-scan_ip_tunnel-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan_ip_tunnel-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvYoT9mZwIAAHMPAAAoAAAAMjAyNS0xMS0wNi1zY2FuX2lwX3R1bm5lbC1z
+YW1wbGUtYXNuLmNzds2XTW+jMBCG7/srkM9u5E8+fCMENWjTpHKyXfW0QmClSAFHQCr1368J26rb
+OMle2HAZbIGZRzPveGzQFqVq2rTcAwga9arqon0zw6Kb72vd6kzvuqGuW/N40U1bpaUywzbdGps2
+lbFbpY2t1bbQ3TTr/1GlRdZ8WvSr0Yc6U0dHWavr45Jmr6tGgW+AIMLvML5DroO5IEgQBmCp8uJQ
+QozQxGUT7LkTBLe1gvBoMfZ814dRCMFUJptkPXei1eLHwzQJAXxKos1KJiHk2CcYQQhmaZs6j7XO
+VNMU1RY6cwN2HKRV7ki1S1uVO2tVvxbmEwBV9qJrtd+9ncD5gro2OEz8EeBRKjC24vHg1ngIC0wE
+Cqx47hiihzyBfSuex0eAh7Hgdu0FZBzRY9boEUJHgMewIK4dj40hua5A1sol/ObaQ0xQfmbfo/jm
+dEhQdqZwKRlJz/BsdC4dSWaRle7mZWF2FOoJTmx0AR9BP+NMoFPdEWL6GYFFVu4Nn1tUDHoYefQM
+H4hWP5NoHi6dafgMzApIECLC9X0lvDQlQnyVO2GCnbZRwicE+f/s9iMsfzvMc/TFYb934hOHaPK5
+9F1OjWCMq3AxjeUmhNE8Xm9i+RDL2ETewxibyEe6LA9VkaWtOS428D3GXTJei1zVfQb+pOP97dnS
+MoUfmI3TAkaCi2ir5fdFshwKqz9IMAtWQC9hARnPnFkcSzAcGWOWJm0Mvwh2L8PlLHYeZZjIJB4W
+z1LuV4QWLu5D+TwQVH9qtRxsropsUKxeZJxasC6LbHCs7vp22k+uKGwWP60Gq0fWXYssV0r034X1
+G1BLAQI/AxQAAgAIADyxalvYoT9mZwIAAHMPAAAoAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA2
+LXNjYW5faXBfdHVubmVsLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAVgAAAK0CAAAAAA==
+
+
+--b1_d70736034e0eb9704401ac79ae65fce5--

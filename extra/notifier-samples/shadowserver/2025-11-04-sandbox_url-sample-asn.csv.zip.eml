@@ -1,0 +1,36 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <fa138ffe10176185022249d59b1ca2c9@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_fa138ffe10176185022249d59b1ca2c9"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver sandbox_url-sample Report: 2025-11-04
+
+--b1_fa138ffe10176185022249d59b1ca2c9
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_fa138ffe10176185022249d59b1ca2c9
+Content-Type: application/octet-stream; name="2025-11-04-sandbox_url-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-sandbox_url-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltRHuXSuwAAAJgBAAAlAAAAMjAyNS0xMS0wNC1zYW5kYm94X3VybC1zYW1w
+bGUtYXNuLmNzdp2PwQrCMAyG7z6F9BxLU91Qr76BRy9StrgVbCNtFX1703mcIBjCnz+QfCGq+EC5
+uHBToDI9KPnyEutr73IUHYhFQ9+I3tO1aqZ0dgPFIs3IuUQXqM5QGbkXE53v8gTsCicxiQbPFdZ9
+8DdOdTePDj/FNq1aKGtss0Jcmc3SmP2UCny8MODOamy32miEdtOghdMJJCL3ZFDTUz64ku44ABiA
+43QPDnJNhr6BcQa2c7D9A2xn4PUcvP4FfgNQSwECPwMUAAIACAA8sWpbUR7l0rsAAACYAQAAJQAA
+AAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wNC1zYW5kYm94X3VybC1zYW1wbGUtYXNuLmNzdlBLBQYA
+AAAAAQABAFMAAAD+AAAAAAA=
+
+
+--b1_fa138ffe10176185022249d59b1ca2c9--

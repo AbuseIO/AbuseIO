@@ -1,0 +1,44 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <c4283d82156cf13b42500eeee3da5257@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_c4283d82156cf13b42500eeee3da5257"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_vnc-sample Report: 2025-11-02
+
+--b1_c4283d82156cf13b42500eeee3da5257
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_c4283d82156cf13b42500eeee3da5257
+Content-Type: application/octet-stream; name="2025-11-02-scan_vnc-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-scan_vnc-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsNW9CTqwIAAC4OAAAiAAAAMjAyNS0xMS0wMi1zY2FuX3ZuYy1zYW1wbGUt
+YXNuLmNzdsWWXW+bMBSG7/crENcu8gfG4F3RNG3SplCFZFWvJkatBC2BCJxJ+/c7JI1UHDZVG2EX
+MTgR+Mn7ni9b51tV63S7s5Fdqx+qyvVPuM2b/a4qdZmVm+a2rDRc1mWti3Sr4FanK1jTuoB1pUpY
+K7XKy2abHd9RpHlWv3voa13uq0wdDsp0WR1PeN1nzZu/pUWhKvuTTTHlV4RcYWphLCmTmNpona/W
+iGDseK5D4SJ8pLMd4gEmCP0oMuQTTAlK7tBoHC3m4Qwl0+gufIrnY8SJgF8RsudKp/nGWlTpawPx
+JRpZp39oMceHr+a313AoczD22yTEk8SXhLVJOHaIK4YlwZ5kWJKgTUI8h3DSSbJ8QLM4uomj06UX
+CnCGSm44IwKgcE8UuEWRoFE4m97G82gaIjsJI+s+TsZ2X+5gKpln0HDHDTolCZfIjsbPVhIvFxPr
+OZyNExslLzfR+KVHdYgwPKKBQynvlKcHItEiEgZRIKkvXWxkkksdQv6PRuAZ9yXzDY18DlnVKdE0
+Qo/hJJyHyQTSCj0uH6/DaS/iAAqDYDZSihLAEax/lo+EMvBmUInzLN2ceHwIHqPWfIbP1b5I93p9
+eTAuaSAxM0ViUALp8CK5XHJhskB+4aENe6uEZ3EMBZl1t4YL6iKgCEJ7MPulgP5AhmY55LdLzgM5
+ABws2jYNGsnH6HENxxhzKAuGjh6vySpOziccioOBy+CxR1CTpcnxTpL7J7SIH17it7WXSswlIYfq
+15aDgzW8M4D/DuIDGW1CEOw6Hv4XIcLdbqOsSm1LraxXVX/X5c6Ct7xj8f2gqx2ceeJCM8Bej678
+OWGAAHLGGPb4uyH84nHhH8YX05IAxpfgt/NmPJnGaBTPIENg12MPxCZGU9Bw9/B9EQzwQ5xhCA8G
+BHJZMX4BUEsBAj8DFAACAAgAPLFqWw1b0JOrAgAALg4AACIAAAAAAAAAAAAAALaBAAAAADIwMjUt
+MTEtMDItc2Nhbl92bmMtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBQAAAA6wIAAAAA
+
+
+--b1_c4283d82156cf13b42500eeee3da5257--

@@ -1,0 +1,43 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <9400acb9b18cb56b6cb0fdea11162e8f@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_9400acb9b18cb56b6cb0fdea11162e8f"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_epmd-sample Report: 2025-11-05
+
+--b1_9400acb9b18cb56b6cb0fdea11162e8f
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_9400acb9b18cb56b6cb0fdea11162e8f
+Content-Type: application/octet-stream; name="2025-11-05-scan_epmd-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-scan_epmd-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxals0XjS6WgIAAIgMAAAjAAAAMjAyNS0xMS0wNS1zY2FuX2VwbWQtc2FtcGxl
+LWFzbi5jc3a9ll2PmkAUhu/7KwzXs+TMJx93dJeutgqNaDZ7tWFxorQKBmiTTfrje9C2qbNwY8BE
+hyHiPHPeec85WE1+0HWTHo4WsWr9U1d584bTvL0/VmVTZuW+nZZVg5ddWTdFetA4bdItjmld4LjV
+JY6V3uZle5ud1yjSPKv/+9NLXf6oMn0CZU1ZtY+UG11bHywGTN5RegdyQqXPPfxYZJdvd4QC2ErY
+FLjNXNJkRyK48gjRx8OGuBQYJckjuQ+j1TKYk2QWPQZf42VIJHXwV0KspW7SfD9ZVemmRVfp62ve
+ECaVwy7BoFqwBAPMwXZG5f4J2LnkMooBMzUAWX9DtK42RDAAA618wd6hXWlTTw4Rs073rb+IoBQh
+HWoL85i5Z7MeudcJuQ/ms0/xMpoFxEqCaPI5TkLrGsldnzFfuqbk1HZ6FA/WxIrCp0kSr1fTyVMw
+DxOLJM8PUfh8Db8V3Qdl8BkKoORNNiB9ED43BKCS2/ImAnTnGle2ZMPhj3X9VmS4lgOd0VMzegfl
+76kxs4gsgmmwDJIpmp8s1ouPwew651HWkeyOrdQQ5P1b8b2pUoxaAvyq0iLbvZyWlUA7PWjsRLm4
+mZE1AMx78DkzU9/tPf3ByNzn/F3eUQfwewsylca5AyY9jOy4k9mFkWoCazwfxHH/2gvnDuOdURsn
+7VG7r70MJve5vpgZDrK/wK6/kHkcPcTR38vVndw0NkL7jD0EtLOioKUZFaNBAfPX9aXRvT0soC4d
+D3quG+YrA3ZNxW5Sscx+jeyb+FiYZUPw8TvVOWbM6Et0+4owQtC/AVBLAQI/AxQAAgAIADyxals0
+XjS6WgIAAIgMAAAjAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA1LXNjYW5fZXBtZC1zYW1wbGUt
+YXNuLmNzdlBLBQYAAAAAAQABAFEAAACbAgAAAAA=
+
+
+--b1_9400acb9b18cb56b6cb0fdea11162e8f--

@@ -1,0 +1,38 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <3cb6b6ce6e5930bb1a7131c6da4abfdf@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_3cb6b6ce6e5930bb1a7131c6da4abfdf"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver event4_ip_spoofer-sample Report: 2025-11-02
+
+--b1_3cb6b6ce6e5930bb1a7131c6da4abfdf
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_3cb6b6ce6e5930bb1a7131c6da4abfdf
+Content-Type: application/octet-stream; name="2025-11-02-event4_ip_spoofer-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-event4_ip_spoofer-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluf6CbKQwEAAEQCAAArAAAAMjAyNS0xMS0wMi1ldmVudDRfaXBfc3Bvb2Zl
+ci1zYW1wbGUtYXNuLmNzdk2P0W7CIBSG732Khmt0gFWndy5ui8k2k267NgyOjqwFArSLbz8QppJA
+vv9wevqBgurAB95ZhJF1Jhhh2ojeib2yBaxxoSD3utARTCEHR2X+y0KFU8Fv44PmHZSouRK+sAcR
+jItBwqAE7AfQ8jaHk4Vr6oyEsxQM4PJ86UP2S1D8Ema/RNkv0cUvBXH9/sYvxX+/xBc/23+1Kvqa
+3onUqPQhXuVxB96pNg0L/BhPbm1s5eUymvpMUVpHWRlRQ/g17ieSM30A6a0xh/PDfGnWPKARYoTN
+xpSOCasIXbHpii4RDsJiSshkXk9o3ATjmhHC5vVycY8fGoya7a56btZvm8dqs6veP18Q/mjWr7Gw
+3uK8OpCq7yLM6xllpSi4khwrOz7rgEs1ZYcaY7ogE5L/dsdq7ECAGkBiRmaL6YLgJ956GP0BUEsB
+Aj8DFAACAAgAPLFqW5/oJspDAQAARAIAACsAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDItZXZl
+bnQ0X2lwX3Nwb29mZXItc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBZAAAAjAEAAAAA
+
+
+--b1_3cb6b6ce6e5930bb1a7131c6da4abfdf--

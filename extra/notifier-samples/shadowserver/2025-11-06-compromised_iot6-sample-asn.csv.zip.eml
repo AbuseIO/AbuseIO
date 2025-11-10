@@ -1,0 +1,37 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <911fd6e38b7a92fbaa9b257d7c6c3d13@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_911fd6e38b7a92fbaa9b257d7c6c3d13"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver compromised_iot6-sample Report: 2025-11-06
+
+--b1_911fd6e38b7a92fbaa9b257d7c6c3d13
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_911fd6e38b7a92fbaa9b257d7c6c3d13
+Content-Type: application/octet-stream; name="2025-11-06-compromised_iot6-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-compromised_iot6-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalv0j196EQEAAIUCAAAqAAAAMjAyNS0xMS0wNi1jb21wcm9taXNlZF9pb3Q2
+LXNhbXBsZS1hc24uY3N2rZDBbsIwDIbve4qpZ4PSQNnodW+wI5fKpKaL1sQocdF4+zlFCCZNHKZF
+kfNbsv05fyU+UBYMxwqqTCdKXs4qfcmPiYUdj0VyEn0+OEvEQCoFB42Yo8aBWGOiwXNJ3WVGRO/y
+XVOXeUqOZpATTip6OnlH3Ylif5/L+Ui3LHBP431xyhfOZd612qHQwKmQDxj8WIT+TKY89wr6+SPT
+fvTutgo6x1OUeamko7uybfdJpTvgqOWqu/yBttlUT5U1tlnU9cJsno1p51uBjweGQ2+27Rr3Tdsj
+bdu9eXlt2xoAoq5v6iV9qckjLR0HELUcNuumtrDbwfvsG7ypa2Dg5/mNWD8i2ivR/iPRPiKursTV
+X4nfUEsBAj8DFAACAAgAPLFqW/SPX3oRAQAAhQIAACoAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEt
+MDYtY29tcHJvbWlzZWRfaW90Ni1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFgAAABZAQAAAAA=
+
+
+--b1_911fd6e38b7a92fbaa9b257d7c6c3d13--

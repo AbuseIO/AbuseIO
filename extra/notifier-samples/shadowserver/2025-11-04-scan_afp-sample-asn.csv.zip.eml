@@ -1,0 +1,67 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <2368ceb010722fce9e9529159eadfc9c@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_2368ceb010722fce9e9529159eadfc9c"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_afp-sample Report: 2025-11-04
+
+--b1_2368ceb010722fce9e9529159eadfc9c
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_2368ceb010722fce9e9529159eadfc9c
+Content-Type: application/octet-stream; name="2025-11-04-scan_afp-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-scan_afp-sample-asn.csv.zip
+
+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
+
+
+--b1_2368ceb010722fce9e9529159eadfc9c--

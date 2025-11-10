@@ -1,0 +1,56 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <db0dfba3f274e8e8271ac3403250f9ae@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_db0dfba3f274e8e8271ac3403250f9ae"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_pop3_vulnerable-sample Report: 2025-11-04
+
+--b1_db0dfba3f274e8e8271ac3403250f9ae
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_db0dfba3f274e8e8271ac3403250f9ae
+Content-Type: application/octet-stream; name="2025-11-04-scan_pop3_vulnerable-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-scan_pop3_vulnerable-sample-asn.csv.zip
+
+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
+AAAAYQUAAAAA
+
+
+--b1_db0dfba3f274e8e8271ac3403250f9ae--

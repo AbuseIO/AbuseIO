@@ -1,0 +1,43 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <dc0913f0fbf4ed301705f2e96305f999@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_dc0913f0fbf4ed301705f2e96305f999"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_dns-sample Report: 2025-11-02
+
+--b1_dc0913f0fbf4ed301705f2e96305f999
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_dc0913f0fbf4ed301705f2e96305f999
+Content-Type: application/octet-stream; name="2025-11-02-scan_dns-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-scan_dns-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltiJnafWwIAABsNAAAiAAAAMjAyNS0xMS0wMi1zY2FuX2Rucy1zYW1wbGUt
+YXNuLmNzdr1WXW+bMBR936+IeJ2xfP0B2HuK2qzKFiVT0j1HhHgpUsAZkEp72W/fZVWnJmZVo0Ik
+ZBuQfc7lnnsuQZMXtm7S4hCQoLaPtsqbX7jM2/tD5RqXuX27dFWD04OrmzItLC6bdIdjWpc47qzD
+sbK73LW32dMZZZpn9YtN69odq8z+BcoaV+FiW9ZrxKyf9hV5uUYm+/xHnqVN++xDwBlXIUDI+IjF
+RirDeUAKu82PBQHGaCQp8JiCislxeyBKEOIOtqxs7fZ4MkmAcSCrO3Izmd8vxzOyms7vxt8WywlR
+EONbQoKlbdJ8P7qv0i2yI0BFcgqcGKUNiz1gQV/AbtzuWD/jfno/Ca3OSUhhmPZIaKAQ80GjF4nh
+7Bw4ShCXDYrLYyPkOa6mnMlBYQGMiDxYSZOkL1hNIaESQvi9tRvgRwhv7SZPyw46sVEKLy/tIGks
+hs06x3rzi63VfTQsMDNKdBQbF6pH3Eh6RY4BJx5uTDnvLfFoeEVa/ww51awz2a3DebFzKljfDA55
++OD2NnxEKlBl6iN08xFG+sancJN+u/N9/0pmi/ntYv48XaIGFqES/azgdCUCQhnwCejrEWg14eWA
+M4qr11TxVswuRbD/yQFLRPtUOPqZ7P9rCAzx3+nod/qUDvZk1mFRnNMErpQakIZHXQSupQ2GzaGD
+AJol6D7E0V0R2Jd9QcoToxw4bNbRE/E/kL/emt4XdVdbamEhHgxT6o4vHam2DQ+GiYbLwPM7BliJ
+7IL0rsjNeDb9vFjOp2MSrMbz0ZfFahJcQAV/fdBxpE8FDQGioan8AVBLAQI/AxQAAgAIADyxalti
+JnafWwIAABsNAAAiAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTAyLXNjYW5fZG5zLXNhbXBsZS1h
+c24uY3N2UEsFBgAAAAABAAEAUAAAAJsCAAAAAA==
+
+
+--b1_dc0913f0fbf4ed301705f2e96305f999--

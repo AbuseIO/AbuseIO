@@ -1,0 +1,43 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <9af04ed291040be977067521e2482411@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_9af04ed291040be977067521e2482411"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_vnc-sample Report: 2025-11-06
+
+--b1_9af04ed291040be977067521e2482411
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_9af04ed291040be977067521e2482411
+Content-Type: application/octet-stream; name="2025-11-06-scan_vnc-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan_vnc-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalt3IH7YeAIAAH0OAAAiAAAAMjAyNS0xMS0wNi1zY2FuX3ZuYy1zYW1wbGUt
+YXNuLmNzdsWXTW+bQBCG7/0ViPMGzewHC9sTcZzYrYMrYzfKqaIE2UgJWBhH6r/vEMdpWFttDw4+
+eHfBMvv4nXdnBrcpnvJNkz6tXeZu8ue8LppftCza63VdNVVWPbbLqm5oWlWbpkyfclo26ZLGdFPS
+uMwrGut8WVTtZbZ7RpkW2ebdj35sqm2d5S8bZU1V73Z42Gbtk3+mZZnX7ieXA1cXiBfgOwAGfSOE
+y1bFcsUQwPOlx2nSAWuyNVMhIGPPZcYCBI4suWGDYTyfRROWjOOb6Nt0NmQKNX3LmDvLm7R4dOZ1
++tBCfI8Hzv4fOsIL6Nbs+pI2FR5A0CVBZSQaCLskoU8wYk8i+yHxDYLh8DcS0ZsmvqG7HRL0PVR4
+NDqLr2wyja+m8X46CYU2UhiUFgUnQaTeY0AHI2GDaDK+ns7iccTcJIqdL9Nk6J4EZ2dZ2ygYIgkj
++sdpWcAov4vja48reZQmWjA3Ht45yXQxHzl30WSYuCy5v4qH96cB4oZTuIStD4ULPwpId4D0gX9A
+G24pxCX3EMOjNv5wiXzDQwN4aCHO4Twa7YKmbaJWJ3UWotdjZp/6MKCoyTNqxO2oBcpTx4M2jtlt
+NIpmUTKi5MxuF7eX0fiE4iDloIyqeZGlj3ucgCyku6b+TJ+LbZlum9UpwP5VMQQY4JZGis6a0H2L
+RAoFh55WyhPi9Cj/U0gtM3MUHkreN8su+SibJXzfX/TFQqlZGVSHPlaEJN4yD+/dyK/pxyoaKKn3
+CcOeVQLKzGik1RByAdQU9o3yIovdm0rKOnAWEsRD62ggN1vJplfrhNRsGK4P32k4hH3nQLIOp9cJ
+2zp02P8ULfy4iP0GUEsBAj8DFAACAAgAPLFqW3cgfth4AgAAfQ4AACIAAAAAAAAAAAAAALaBAAAA
+ADIwMjUtMTEtMDYtc2Nhbl92bmMtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBQAAAAuAIAAAAA
+
+
+--b1_9af04ed291040be977067521e2482411--

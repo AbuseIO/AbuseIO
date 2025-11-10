@@ -1,0 +1,44 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <a92710ce43862faade430f5e6884b3b2@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_a92710ce43862faade430f5e6884b3b2"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_adb-sample Report: 2025-11-05
+
+--b1_a92710ce43862faade430f5e6884b3b2
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_a92710ce43862faade430f5e6884b3b2
+Content-Type: application/octet-stream; name="2025-11-05-scan_adb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-scan_adb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltW8zDJgAIAAJMRAAAiAAAAMjAyNS0xMS0wNS1zY2FuX2FkYi1zYW1wbGUt
+YXNuLmNzds2X0W6bMBSG7/cUEdeOdWxjA75Da9pla4lUElW9ihjxUiQSMnCi9u13IG3Xra5UqVSB
+C+MDBH/5/Z9j49liYxqbbXYe8RpzMHVhH7BbtPGurmyVV2XbrWqLp7uqsdtsY7BrszW2WbPFdm0q
+bGuzLqo2zI/v2GZF3rz40bKp9nVuuoFyW9XYWZlDkZvlwWxXL2P7sDN/o021MuXLh+vmOM7jhee3
+PZL9+zx2fpnM7mvTeF88DlyOGRuDHDGludJ+4JEc/3SRZyVhAFT5lImIcklsviMSD0Ky1U8SMuCM
+LH6Qy1lyNkueTpIFeIcQ79rYrChH8zpb4ZjdgbrWpTX39yS9Gl9ECs6fLqFGm1Ub2OWBk+bOlCV2
+/uMLtAQN8jUfF5wiy4f57kxd/UaafU7S+CpdJBfjDlRA/Hwvs/ZdsKgk09wBKxVlIIcFG2rGtIgc
+Mw+CsremPiVf48vp+ew6mcbES+Nk9H2WTrzPtADXwtcsdIG2sob9gfYp75vGZQwoC+QwqUMNoCVz
+UTNMOTUYU0gNwplqTAjKoUd5N4CMF/PxFAUFjN6DhyIKoX0HnpJo2eC0dDjLgmOpek0XCiqG6UxQ
+WigN3DXhjCpwQscL4iWTm1E6W8y/jW7iy0nqkfT2LJncfoaobeoIV+ooTJ3g5IRHUzorvmQ04r0C
+fjC9O4cKV82XPhViSKjHHZRLVQU0hOGh+i5UXEmjXlF7z33hKvaBpL4cksRSc3BuVrgA3E/7Q9X4
+bW9wydEb0YBEblf+yLm6+mhjNmQbS+1zJzbnwWCtEWgeaqkcnzXUF6dfeLuvLld1kDQMT4/XVQTu
+qAhdXskhAArcuzimVwW4uToN4B9QSwECPwMUAAIACAA8sWpbVvMwyYACAACTEQAAIgAAAAAAAAAA
+AAAAtoEAAAAAMjAyNS0xMS0wNS1zY2FuX2FkYi1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFAA
+AADAAgAAAAA=
+
+
+--b1_a92710ce43862faade430f5e6884b3b2--

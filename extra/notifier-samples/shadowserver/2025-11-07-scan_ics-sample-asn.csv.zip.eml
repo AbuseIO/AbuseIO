@@ -1,0 +1,45 @@
+Date: Fri, 07 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <c0ab2c3134eb70d5d5c4ab6382507f5c@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_c0ab2c3134eb70d5d5c4ab6382507f5c"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ics-sample Report: 2025-11-07
+
+--b1_c0ab2c3134eb70d5d5c4ab6382507f5c
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_c0ab2c3134eb70d5d5c4ab6382507f5c
+Content-Type: application/octet-stream; name="2025-11-07-scan_ics-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-07-scan_ics-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluPRTFX0AIAAKsMAAAiAAAAMjAyNS0xMS0wNy1zY2FuX2ljcy1zYW1wbGUt
+YXNuLmNzdr2WXW/aMBSG7/crUK6N5eOP2PFd2qYjGw0SKat6VaXBo5GAoCR06379HChqMf0QLZSL
+xDZxnvccH7+x1xQzUzfZbOEhrzb3piqaB9ss2v6iKpsyL6dts6wae7sr62aezYxtNtnEXrN6bq8T
+U9prZSZF2Xbz9TvmWZHXzybd1OWyys0KlDdlZRtjc1/k5ubezMfP+83Dwjz1ZuXYTJ8/XNVrzuOA
++7ZivBJTL8p5bf8t/rXvqrI/N5sx75tHCRVdgC6RHeJrIjQEHrorJncICME+x1xhkAotxwvEpSIK
+odssn5sGKSAU0ChFp2E/Ph8MkzhEXhomnR+DNPKQsLOAIOQNTZMV085llY0t//G3BQaqOdXAtsEg
+BeYCNfkCUU44QoXJuz5RknTtRDuwFhCOkJdEV510MLrsda7CfpR6KL0+S6Lr/TVQV0Ngowf+lSJA
+E7ktglKKA7bSAAEAQr/Lv0/ZH/TiATod9EcXJ7a3J0xq5sIUVnLNItSGm9vWmnUWoV6UplGCvPNh
+mPw8Hw0vO+FF5yKME7vcPvAgeAWsuIOWGkALvo0WAQYfVmyuuA2iXOTdZda9LeZZ9fB5FY4GX3O+
+owEYw/LLNBCmudrV4EvcltbXJQK4BuGIEApTJg9fdWta4JY4wYIeBcY0c0NTAou1sYi2xq2t3i7r
+D+GAihfDU66VUUuFY8QnbBlTt36sbx0eRlYbhoGzaQWmhLxrkJ80Kqo0daJUrN2sb32XPh4payMl
+7rZs88qPsIhi9dl1S0ZRbBN6eJrUAjR1YuM2mdQ/Vsk4MEZsZOyNkpEBMNKCf8XD73F7rgjT3slo
+mOzFDrSgO2kVPlbkVWc9CNiupwg0ON9VoNblCD0uus033dmilLfuw1zD6+bTsjbjj5LZ7mmCaOr4
+ugw2R7jjgcXq4PaCx1P2vi/FETobnfTjZHPbbyvZUwwjTsi2uqk85onxP1BLAQI/AxQAAgAIADyx
+aluPRTFX0AIAAKsMAAAiAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA3LXNjYW5faWNzLXNhbXBs
+ZS1hc24uY3N2UEsFBgAAAAABAAEAUAAAABADAAAAAA==
+
+
+--b1_c0ab2c3134eb70d5d5c4ab6382507f5c--

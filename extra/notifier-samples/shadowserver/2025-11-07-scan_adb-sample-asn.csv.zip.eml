@@ -1,0 +1,44 @@
+Date: Fri, 07 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <d7aeb16bcf2649af6504ef21cc90daeb@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_d7aeb16bcf2649af6504ef21cc90daeb"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_adb-sample Report: 2025-11-07
+
+--b1_d7aeb16bcf2649af6504ef21cc90daeb
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_d7aeb16bcf2649af6504ef21cc90daeb
+Content-Type: application/octet-stream; name="2025-11-07-scan_adb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-07-scan_adb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalumwiHJiwIAAEYRAAAiAAAAMjAyNS0xMS0wNy1zY2FuX2FkYi1zYW1wbGUt
+YXNuLmNzds2WXW/aMBSG7/crUK5N5GPHTuy7aKUdWxukBlT1qsqCB5ECYYlB7b/fCdCuVV2pGmhJ
+hJzjfPnh+H197NliZRqbrTYe8RqzM3VhnzAs2v6mrmyVV2UbVrXF07Jq7DpbGQxttsA2a9bYLkyF
+bW0WRdV288M31lmRN69eemiqbZ2b/UC5rWoM5mZX5OZhZ9bz1337tDF/e6tqbsrXD9fNYZzjhZev
+HcnePo/BL5PZbW0a74vHKBNDgCENBxBqxjSTHsnxTxd5VhKg1JeBDwH3ZUhsviECD0Ky+U8SAWVA
+Zj/I9SS5mCTPJwEh3iHEuzU2K8rBtM7mOOb+WNHHR3I1HY4VpxR7mJnVnGC27cOOkWZpyhKDt1RU
+aY4/6qAKqc+QphMsEJoyHTiSxSj3QdHTsRCgLq1BtvRmeKUkvXy+9CnAUAeYt+A9oJA+g+h0vqWp
+q99Is81JGt+ks+RquAflNH65l1n72WxyTZVjkmmI2QzctCn5Gl+PLye3yTgmXhong++TdOT9L2pE
+5pEOuJuaQXg+6n+SqNQAWrj8DBTdIzrGEx8am3GfBXA+vBOdJHUAGlzTrACnWvQGNMJ0auEADQSu
+4ayfJpKaS+c6FTIUadCtSD+2eATocN6xhSLdFm0HnUKDK9lx7lSbOxG+p5PiQ7p4RrxkdDdIJ7Pp
+t8FdfD1KPZLeXySj+/Onj2mO8wsOY3PwJT0r4DmrZdRWS4gc3FHLzs8KftqadLB34LA3wyIUqc5F
+cFx/HCoFiWWI91YEh/2dqypJ5Yf95T6UfXBXU8Zoj8SLrEK4N/kCK7/oXrz78uQSLxNYPZXqrQoO
+eyqHCrj0e1AZwnZRAObYSbU7Ptk/jTq20XsFdKPRP1BLAQI/AxQAAgAIADyxalumwiHJiwIAAEYR
+AAAiAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA3LXNjYW5fYWRiLXNhbXBsZS1hc24uY3N2UEsF
+BgAAAAABAAEAUAAAAMsCAAAAAA==
+
+
+--b1_d7aeb16bcf2649af6504ef21cc90daeb--

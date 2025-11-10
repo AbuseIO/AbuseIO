@@ -1,0 +1,41 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <c340b8a01e9064b34b6cab7a22b72a91@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_c340b8a01e9064b34b6cab7a22b72a91"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver event4_honeypot_ddos_target-sample Report: 2025-11-05
+
+--b1_c340b8a01e9064b34b6cab7a22b72a91
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_c340b8a01e9064b34b6cab7a22b72a91
+Content-Type: application/octet-stream; name="2025-11-05-event4_honeypot_ddos_target-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-event4_honeypot_ddos_target-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsiIA573QEAAMsFAAA1AAAAMjAyNS0xMS0wNS1ldmVudDRfaG9uZXlwb3Rf
+ZGRvc190YXJnZXQtc2FtcGxlLWFzbi5jc3adU8uOnDAQvOcrIs5ewmOZPK75gxz3grymASv4EbuZ
+ZPL1aWMzQDSakcZCqKrtbqq6TYZSgUeubMYy6wwaYSaCncdW2gSscZgg9zqhAUxCDgZp1rCQeElw
+NB41V5Co5lL4hD0INC4QOEsB7Rl0t+d4sbAxZToIojycwcX63omoL4CkL8CoL6CoL6CrvkDElr/T
+F+iqL+BNn1Fc6tab2Ylw0M7vkxQbl7qno7F8z5WcQnHkA725tXSUp01S7iMiE5qa261tAfxt3M+N
+Ke4D44hcLOHZrUVirL2a3/F1RoveTTg6rj1fFMZPDmLJHBFtqwBH063MchyvmFrTceQrnz14H0Yg
+bTsC78C1UdyB61kdQp0ho73jgyLHh51+0bhx2dGJOJktaP144M4fi3j49f8X/eVYF40/cjyamF2Y
+FFV5J2L6Vhit4zxDniVPgO0Eelhakzi1lLor/0KXfciqompeyvKlaD4WxbflyRgrP1d5ecqLvGTs
+1DT1K3t7Yz+We8i+k0+m6UoXZQ5/6M+bIKexs4KFRRfKsPJrSP+S8l+bsnqQL4yK+Ug/8/reySg+
+lael/K3EW+uWsXJvrLpnrHpsrLpnrHrWWPWUsWpvrL5nrH5srL5nrH7WWP3Y2D9QSwECPwMUAAIA
+CAA8sWpbIiAOe90BAADLBQAANQAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wNS1ldmVudDRfaG9u
+ZXlwb3RfZGRvc190YXJnZXQtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBjAAAAMAIAAAAA
+
+
+--b1_c340b8a01e9064b34b6cab7a22b72a91--

@@ -1,0 +1,43 @@
+Date: Fri, 07 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <23049a714956e8eb58e7d9ab6919f1fc@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_23049a714956e8eb58e7d9ab6919f1fc"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_cisco_smart_install-sample Report: 2025-11-07
+
+--b1_23049a714956e8eb58e7d9ab6919f1fc
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_23049a714956e8eb58e7d9ab6919f1fc
+Content-Type: application/octet-stream; name="2025-11-07-scan_cisco_smart_install-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-07-scan_cisco_smart_install-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvsMVu7VgIAAFMMAAAyAAAAMjAyNS0xMS0wNy1zY2FuX2Npc2NvX3NtYXJ0
+X2luc3RhbGwtc2FtcGxlLWFzbi5jc3bFlV2rokAYx+/3U4jXU8wzrzZ31pESKsOKZa8WMWmF1FBP
+sN9+H2sXzjkpxeEMCzKOiP7+/+dt3DYvsqZNirNL3Ca7ZHXe/sZt3j2f66qt0urUbau6xduvqmnL
+pMhw2yZHXJOmxPWYVbjW2TGvusf09o8yydPmzUc/m+q1TrMrKG2r2v3mMsrkCGBEtUOVYcqAdEmK
+GvI0ORGgdKzEGDgdMw6kTc9EaE8RkuZNWo2aIqnbUV6i/NOJaE9qTmY+idY7Pw4jsoti3EZEgseA
+EuLOqqJ4LfHPLcpsiLPN6kueZs6mri75IauJk5QHZ4Fq8/L47+0Hkdwwz3DdI1LxMegHGgWjlE+k
+Vt5boatwu8XL3899Qsg7HqiOR3k/j0kLPAEG6D1PqLGkD3AeMHol+ctpEO988hLvV4tguQxiIsTk
+loU4a5P85Ozq5PAhuKANY3jdw5mQaBieciu4ZJ2Glb8Od9HUJ9/D9TrcBPM7r9pwZWgPDm2MQTxy
+qyRX4q3b4GXVFdwaK04DwNdUHKqknmHQoxJvTPJnc+JO43AXbhfOLFruV9PQd8l2H8fBj6dSI42U
+hvc0p8BQPYrURAmm3uXE3UQYsXngLH1nE/thHAbuXX5uTBhgKltQ7HEq+qG2nN66bsApCFvQbrSw
+Aaid8P6dn7QfyuwY9Qw2EegBJrVpdCC6zI5TSg2aFQNdKjw70Ou5zQY6RlJbOeXUyIE6enhSfBKK
+hxM3cqCQtP4Ps2HCLeYUvAGopdF7O+n6W4aB1Xmv+qFsYiunAEPVy4SyWUgD4f3CPv0DUEsBAj8D
+FAACAAgAPLFqW+wxW7tWAgAAUwwAADIAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDctc2Nhbl9j
+aXNjb19zbWFydF9pbnN0YWxsLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAYAAAAKYCAAAAAA==
+
+
+--b1_23049a714956e8eb58e7d9ab6919f1fc--

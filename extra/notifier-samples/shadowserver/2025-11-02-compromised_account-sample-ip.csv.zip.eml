@@ -1,0 +1,35 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <f70f9581154a7c2fc41e71b43b27321e@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_f70f9581154a7c2fc41e71b43b27321e"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver compromised_account-sample Report: 2025-11-02
+
+--b1_f70f9581154a7c2fc41e71b43b27321e
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_f70f9581154a7c2fc41e71b43b27321e
+Content-Type: application/octet-stream; name="2025-11-02-compromised_account-sample-ip.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-compromised_account-sample-ip.csv.zip
+
+UEsDBBQAAgAIADyxaltIokHgkQAAADUBAAAsAAAAMjAyNS0xMS0wMi1jb21wcm9taXNlZF9hY2Nv
+dW50LXNhbXBsZS1pcC5jc3adjk0KAjEMRveeQrruSFpx48qbDLVGCfRnaNNBb29aYVaCYCnktckj
+n2KKWNnFRWmF0VGQSumOnikn4Zpb8Ti30htLuwby8+evN9lxqwLsHv2JKxbi18Cy0phpgsnFjjfk
+vmCnLNjTZMwEdg9wHlfpPggA5oJPiRPw4HPULOG0nFElVxb+5pvNt3/5dvOPv/03UEsBAj8DFAAC
+AAgAPLFqW0iiQeCRAAAANQEAACwAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDItY29tcHJvbWlz
+ZWRfYWNjb3VudC1zYW1wbGUtaXAuY3N2UEsFBgAAAAABAAEAWgAAANsAAAAAAA==
+
+
+--b1_f70f9581154a7c2fc41e71b43b27321e--

@@ -1,0 +1,44 @@
+Date: Sat, 08 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <00df67930a306f4035531e675a183905@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_00df67930a306f4035531e675a183905"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_adb-sample Report: 2025-11-08
+
+--b1_00df67930a306f4035531e675a183905
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_00df67930a306f4035531e675a183905
+Content-Type: application/octet-stream; name="2025-11-08-scan_adb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-08-scan_adb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsqK2uZgAIAALsRAAAiAAAAMjAyNS0xMS0wOC1zY2FuX2FkYi1zYW1wbGUt
+YXNuLmNzdtWWW2/aMBTH3/cpUJ6N5Xscv0UrZWw0SA2o6lOVBQ8iBcISg9pvvwOlLVvdqdqikeXB
+Oc7Nvxz/zyVwxco2LlttAhQ0dmfrwj2AWeznm7pyVV6Ve7OqHZyWVePW2cqC6bIFjFmzhnFhKxhr
+uyiq/TR//MY6K/Lm5KW7ptrWuT0slLuqBmNud0Vu73Z2PT+du4eNfZmtqrktTx+um8d1jheev3Yk
++/l5ML7ZzG1r2wQfAkaY7FPaJ7pHpRHaEBWgHH66yLMSUUKwEpiGEZYRcvkGSTgQyuZfkaaEUTT7
+gsaT5GKSPJ0kDeEOQsG1dVlR9qZ1Noc1D8fS1tX30tltjtL4Kp0lw3561R9GnMTP9zLnwGGrOYJN
+cHc7hpqlLUswfoFVhnND6GtYxhmW4d/Dwvo18NzfowOjIpdPl97DR7hhoWHa40wSYhoJP2CKPsbj
+0eXkOhnFKEjjpPd5kg6C34KuCDAOp/0R+JHA7F3uk4YCofTgUQL7Lc+LR5RhkaEePMXBeS3StSnJ
+0PAIuD3QClPVInQb0pQeTs2wUGcWJpBxQ31JCDaeeuHiGQqSwU0vncymn3o38XiQBii9vUgGt/9s
+77VhBNKnJx0xjZlqlbuV7WevUaV8K3Geh/QYUKE3oBTrHqknpCinWJFWUf88oQpfvhcQWIx0NrDC
+faES3AOuJRZRV7kJOVQwT5TRCOq/pp1TLxee5EUk1qqz2mAHHwtfEwMVV/Kzhx10qUIZ6slg0A9g
+3fGok9SnXg3eFV1SrzScGUp8pRdUoEVnnfxmD84EdLmKdkG+0C1Ij3yZhKrBSbeSGIMi55OBZCDb
+6L9oFw6osnPdIvGINAyxll2KrR9QSwECPwMUAAIACAA8sWpbKitrmYACAAC7EQAAIgAAAAAAAAAA
+AAAAtoEAAAAAMjAyNS0xMS0wOC1zY2FuX2FkYi1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFAA
+AADAAgAAAAA=
+
+
+--b1_00df67930a306f4035531e675a183905--

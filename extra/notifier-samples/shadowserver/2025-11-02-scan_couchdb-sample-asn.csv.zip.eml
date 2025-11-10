@@ -1,0 +1,37 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <f50c08a2adabefc24745a9ce43be6ace@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_f50c08a2adabefc24745a9ce43be6ace"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_couchdb-sample Report: 2025-11-02
+
+--b1_f50c08a2adabefc24745a9ce43be6ace
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_f50c08a2adabefc24745a9ce43be6ace
+Content-Type: application/octet-stream; name="2025-11-02-scan_couchdb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-scan_couchdb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluEWyrZ8wAAACUCAAAmAAAAMjAyNS0xMS0wMi1zY2FuX2NvdWNoZGItc2Ft
+cGxlLWFzbi5jc3atkMFuwyAMhu97iilnNwK6Vtuue4Mde0EOcROkBleYRNvbz2GrWqk7TUNgfmPw
+h92UOJEUnM4NNEIL5Vg+VcbVP2cuHPi0Ss5Ft5GlJJxIZcFBLUpSOxCrzTREXt3wnSNhDHLzyAvP
+OVAFhcK5iqxIr0t+nvIcxr7z+inBgW5OrneGWLyMqOpIWOZMK2Sh1NeUS5TYncj3WLBDqUHKucbq
+7jOhaKKHxhm321i7Me7RmNc6G4jpyGBfXGv3z61pLQAk7snYlj60TSdqA09QtGmwf9pZB4cDvNfK
+4U3rBgPX8RvC3iHcBeH+CeHuENsLYvsXxBdQSwECPwMUAAIACAA8sWpbhFsq2fMAAAAlAgAAJgAA
+AAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wMi1zY2FuX2NvdWNoZGItc2FtcGxlLWFzbi5jc3ZQSwUG
+AAAAAAEAAQBUAAAANwEAAAAA
+
+
+--b1_f50c08a2adabefc24745a9ce43be6ace--

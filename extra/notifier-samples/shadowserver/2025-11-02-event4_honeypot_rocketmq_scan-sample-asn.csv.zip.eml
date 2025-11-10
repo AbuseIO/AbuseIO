@@ -1,0 +1,42 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <d8662dc9712f531fed4123783efe1f9b@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_d8662dc9712f531fed4123783efe1f9b"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver event4_honeypot_rocketmq_scan-sample Report: 2025-11-02
+
+--b1_d8662dc9712f531fed4123783efe1f9b
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_d8662dc9712f531fed4123783efe1f9b
+Content-Type: application/octet-stream; name="2025-11-02-event4_honeypot_rocketmq_scan-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-event4_honeypot_rocketmq_scan-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalshD23D5AEAALcDAAA3AAAAMjAyNS0xMS0wMi1ldmVudDRfaG9uZXlwb3Rf
+cm9ja2V0bXFfc2Nhbi1zYW1wbGUtYXNuLmNzdm2S3W6jMBCF7/sUEddDBRQI6R2KVtp2paZKf26R
+sQdiFWxqm6yyT792MCGrrCXgnDPGfHgcGN6jNqQfAggGJY2ksrNSK1rxwYtBKuMl0cKrFqVXClsu
+55hyc/LyILURpEdvBeFUe62RGqmsYXjkFKsjCnbtzWnAxfWS4RkKj6im9Zk2E58Tns/Jic+pic+p
+C58zdHn/is/Zmc/pC98w1h23vHJU1E3korGlabmG9LxzixnS2jsZBjuV+KIl1ZOy0MLCMheOnUBF
+at5ZigrF2N+E/5lHO6L1TaqpVHibLlv0b2HhMQeFxFSNsr/+W6qvJTLE/hqdEOYI6UHw7xF9SlSL
+ZmmX9/bgsJGaJZiRqe2c26nuvEMdEe1IWpfIgdhFzz1VnHT8z6XntWQn/6hqojFPg7sgiZIsjOMw
+SlZR+vhQPGZpAIYOEEfRfZ7ex4m94gSyLE0SWBfZ+gG2Jexe3sv90w7ed3srdwBZXCRxBMFW9v0o
+fLc0rN5QuZO2elXyyBkqWBHBVj/tAeGinasB2HHg7QFgU6xzyNPMfvLjF5zHtnzdP23L8McHKEm/
+0PTfoaZE2NLsIY1iyBpWRDXNww2SJkwJi6yKm7BhtM5YUuR0k8P1iKMMInguP0uI4flt9wJw9xdQ
+SwECPwMUAAIACAA8sWpbIQ9tw+QBAAC3AwAANwAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wMi1l
+dmVudDRfaG9uZXlwb3Rfcm9ja2V0bXFfc2Nhbi1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAGUA
+AAA5AgAAAAA=
+
+
+--b1_d8662dc9712f531fed4123783efe1f9b--

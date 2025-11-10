@@ -1,0 +1,45 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <80292c4fe2b3031069fb4de60620be29@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_80292c4fe2b3031069fb4de60620be29"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_tftp-sample Report: 2025-11-06
+
+--b1_80292c4fe2b3031069fb4de60620be29
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_80292c4fe2b3031069fb4de60620be29
+Content-Type: application/octet-stream; name="2025-11-06-scan_tftp-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan_tftp-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalumz3b/0gIAALkPAAAjAAAAMjAyNS0xMS0wNi1zY2FuX3RmdHAtc2FtcGxl
+LWFzbi5jc3bFl8tum0AUhvd9CsR6gubMfdjRxrm0CY58UZRVhQh2kByPBbhS+/Q9GCyFcTaVarOZ
+C5jh8/+fOWcIm/K9qJvsfReSsC5+FVXZ/MZh2c53lWtc7jbt0FUNdm+ubrbZe4HDJltjm9VbbNeF
+w7Yq1qVrp3m3xjYr8/rDQz9rt6/y4vCivHEVDtwud6/tlaKqXPVxfOyRrs7WxWH5eue2NS5T/mnn
+yLwpV2WeNe1bv4SMMnkFcEVVQEUsZSx1SMrtyhGgNFIiAmEizsn+dUckWA2ENKtmRwxQBmR+S75N
+0sUseSDz+/Q2eZrOJvgzjXcJCWdFk5WbYFFlLaEkQMKbclMEW9cEK7ffvoanF8ASiLgagsmY0Rj4
+EIy1bPQIxuR/BktdUO/zt2CFNxBLIxYDHwtUTNUQi+sIjOmwhJZqFCwdSxhiKRuBhAOWAsvN5bFE
+zEzMPSzgqJY6YDEwlg6wlj/IwzS9nqbH7l+QUtfctCMCnNDIch+GQyzsEEaie/bAIrRgQ4mSJf7J
+yXMwny4Xd8Fz8jCZh2T+cp1OXs4S8AK1Ur5WKFa3E7lWakw+zBT61Eur0PROP2uoGpcPd6bw+dqk
+IXuDjR4XkMuYcx/QRACic1hoLUcFZDoWXi1gJmJcd7nNMiZG3SHoMJNDPpSPdXiCKQaj4n3iL8NS
+ymgXgJIrOgS8T8ljcpfMkvkdZmLyuHz8mtyfRzkeMz+3SIa5pdfOgJdcLoiGxcv4qrFI9EEnlaJj
+kbFY0iEZysZ6NxUm51HADvtUeoEmVCT6QiE1ujqal8IPM2sj0SU4QTXVI0mGtZ95knGIZOclt5rL
+kcAwyED6kuHOlN05V1EhhvH//Ykspj9epn17DhtBxtRjYljn+08CQw1clki0+Ut6RzdGbWSOgQVe
+YF0ASdCT4xoTIrKsz1tW0osjqZPtJ/GwLfryrfjFfROfHLkj3X8rcSr42YH+AlBLAQI/AxQAAgAI
+ADyxalumz3b/0gIAALkPAAAjAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA2LXNjYW5fdGZ0cC1z
+YW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFEAAAATAwAAAAA=
+
+
+--b1_80292c4fe2b3031069fb4de60620be29--

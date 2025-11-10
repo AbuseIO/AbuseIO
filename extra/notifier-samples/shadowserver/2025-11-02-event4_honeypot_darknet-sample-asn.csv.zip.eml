@@ -1,0 +1,44 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <40821d7741e835fa20af4e7099e23927@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_40821d7741e835fa20af4e7099e23927"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver event4_honeypot_darknet-sample Report: 2025-11-02
+
+--b1_40821d7741e835fa20af4e7099e23927
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_40821d7741e835fa20af4e7099e23927
+Content-Type: application/octet-stream; name="2025-11-02-event4_honeypot_darknet-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-event4_honeypot_darknet-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsIr9sgggIAAJgTAAAxAAAAMjAyNS0xMS0wMi1ldmVudDRfaG9uZXlwb3Rf
+ZGFya25ldC1zYW1wbGUtYXNuLmNzdtXXS2/iMBAA4Pv+CpSzG3ns2CG+UYpU1C5ZQdvV7qXKJi61
+RB5KDFL//Y5LSsvjwEqrNokQjJPgfIzswfasyXVjk7zyiFfVpS3TcoVhU6ePpmqDqqxtGyZN0UZL
+XbZRrZemfDudGvvShs9lY4sk122zSEzatHGjU1vW2Mj0xqT6caOL7GPbvlT6vZWXmX5F6Y2ut/1n
+jd36XND6XLj1uWjrc9HO5xrp+/c/+Fzzzefina9a/1kZ9JbrOnU3muIJL227e0pys3Kd2WSJ70lV
+4a1JexGlzTZCdIHYDMO0XBfW++YxysQFwAVlA0qVew09YtOKAKW+DHzJfGCEcUkjPCU4pWQ8IvHs
+bjSfxuRnHF8t7uLxDSEChgwo8cZlnq+L9ukNGSx07TI3+FGXG5PpmgySIhtc4w82xfLtqkfweDbL
+Z+wHDyIDgU9tj9zUidl9EHKEZgrYPpr7jA4JQBSIE+rbeHYVz/4fmfF/AXMFQkFwCvyZ1vvFvpZY
+vSq0PZFfkIpGe1zqB5IwyQLetexCoAQoHh5zP1M6mpydW1AB7GGBSx9wCnAK7FR6PZxvs8mvwXg+
+mdx4X5RmRpXAcUwP5NSPQgJDzoFIwWXg3N7lfHo3XVwPxvHt/ffL6cgjD6PZOL5/mMydPgSAz9aD
+K3RCnNJ/GfzMMYN2iJQIOmX/PTrPzlytFmEv885VgGVbdsp+Zg1HOxZF4H20t4uS/fHOIPRlREQU
+RKLTlQbpwdGSqtV3fcQ7+9HKqi92/FsNccL21C5wFRN1yn7ubH2t8CzsqR2QT/tqDw9XNP2x41zl
+fc27GCrWLfuZqzHciFJ5uBHtS43kiknFoZf2APenh3unDo/3v1BLAQI/AxQAAgAIADyxalsIr9sg
+ggIAAJgTAAAxAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTAyLWV2ZW50NF9ob25leXBvdF9kYXJr
+bmV0LXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAXwAAANECAAAAAA==
+
+
+--b1_40821d7741e835fa20af4e7099e23927--

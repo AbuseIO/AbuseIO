@@ -1,0 +1,43 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <6e3200324a20039a014621ff5379e47e@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_6e3200324a20039a014621ff5379e47e"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver event6_sinkhole-sample Report: 2025-11-05
+
+--b1_6e3200324a20039a014621ff5379e47e
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_6e3200324a20039a014621ff5379e47e
+Content-Type: application/octet-stream; name="2025-11-05-event6_sinkhole-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-event6_sinkhole-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltM95VbUAIAACoIAAApAAAAMjAyNS0xMS0wNS1ldmVudDZfc2lua2hvbGUt
+c2FtcGxlLWFzbi5jc3btlN9umzAUxu/3FIhrJ7KNjcF3rM3WbFlSlURVryJjTlI0wAho1L79Dg3p
+n1VVH6C1EHyfbQ7f+YHw+6KCrjdV4xO/aV3vrCtRdq3dFs0oGtf2ozRdPao9uFG1sC/cadoW/cMo
+b13X16aC0damsN2oO7C9a9HkcCgsbA9Q5y99/9DAs6tcDo+h4ADtsX7e9cd8gxjzDfKYb1DHfIN6
+yjcY+3z/i3yDPeUb9FO+5i4rC8zr7lo7bCzqHS4dy+1MVZRDsd7s8WyaBreacRGTdkeFoWsMmw8N
+dCUGaG6hHU0HLW58DPHN55TLCWMTKj2qNMND+qS3DeGUMp1nkWbWRprv0CkqY1SglbWhhhgkkTKO
+IhIxyhn5dUnWq983q/FMJFO4QPwr6E1ReuvW5NgNDos8MXRJsC2Kz2Ca6SDgWsOOCBEQxYRkZJOS
+s2Qx/7G6Ws4TcrmYJWmyXK+WQ+GID4XPXFXd1WP7HfFSbAxfnXfZukORQ0s8U+feBRIv6v1pFRPg
+bOuKfJqZPHP3/EOPY71It8ks3TIebX+e/dmmFwmXISmb6X05MXk3ta56DTPULNBUvAsTKEithDAa
+uMk1iCgmImBB+EXzLU0WaxZqGfxHU1k5wKRaCCq0VMroLIysjqQVJIipOMFMNsRfzq69dLVZX3jX
+yWKW+iS9OV/Obj77dyo08mPsPbJRzqmWEIU6i2ODZCEjQoaCf5H9gCxy40rTN79TQbVRSBYsF6gi
+o3dMWK1UAESEoTp9s/MZOd98X8yXp8unwJlNy+zvpHPlI89/UEsBAj8DFAACAAgAPLFqW0z3lVtQ
+AgAAKggAACkAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDUtZXZlbnQ2X3Npbmtob2xlLXNhbXBs
+ZS1hc24uY3N2UEsFBgAAAAABAAEAVwAAAJcCAAAAAA==
+
+
+--b1_6e3200324a20039a014621ff5379e47e--

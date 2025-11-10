@@ -1,0 +1,44 @@
+Date: Sat, 08 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <dbd9d026608f85f18674c36271ed4e4f@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_dbd9d026608f85f18674c36271ed4e4f"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_vnc-sample Report: 2025-11-08
+
+--b1_dbd9d026608f85f18674c36271ed4e4f
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_dbd9d026608f85f18674c36271ed4e4f
+Content-Type: application/octet-stream; name="2025-11-08-scan_vnc-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-08-scan_vnc-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluumg32igIAAFUOAAAiAAAAMjAyNS0xMS0wOC1zY2FuX3ZuYy1zYW1wbGUt
+YXNuLmNzdsWWXW+bMBSG7/crENeO5XNs87Ur2qZq+gFVSFblamIUJUgpREAq7d/v0LTd4rBdTAm5
+iDEowU/ec97XttviJW/a9GVjM7vJX/O6aH/StOjuN3XVVlm17qZV3dJlVTVtmb7kNG3TJY1pU9K4
+zCsa63xZVN1ttntHmRZZ88ePvjfVts7yt4Wytqp3Kzxvs+7NP9KyzGv7i40C9QhgJDxLOAHIQIHN
+VsVyxUAI7igOQnKULmuzDdO+EIy9lhnzQCCwecIuw/vJdTyNJiGzkzCybuNkbDMNLn2DMXuat2mx
+tmZ1+tyRfIsurY+/aUnu0aPp9YUlaA0hvH0c0IFyA2nioMNRnQcH8FAdKTh4eDYcx8DxgYMjz4Dj
+BEIG6O3juA7/rQ0MBiP8rpEFGjA+B63OIA0G4AbCqJTjcvwLTThndjR+spJ4PruxnsL7cWKzZHEV
+jRfHkYd8rgKU+0CokAP4vdU6OZEOJAbaIAIHiOqTCIck2oUP+gaRq7nSpyqauwfk9hqM4iejPaPI
+0vUHVOd6b5/pK31G2zLdtqt3vEnEHsKbcBomN7NpyB7mDxfh5Di1EwH4gVZmTCPHfuufDoVsJr1D
+FK257I/EU6tyEM8eNTQMrYrTmQuNjQuFR+2MQ8vyFj3SrJByuRL9+8Qdu4+jqzj6uBwxkY3NSgLX
++vh6/NPVZGlKGin2SRS1iRi6Mn53ntBG4Cmf62NYZ5qn645mXLZ5vamLJrdeyZVWVVvrlB59kmki
+E33JBwZZBze0qXd9o9HcpnyO7sCm7hQhXQxRUBKKFkMHDHUwUB+bAeNzr/+Ac/vIZvHdIn4fj2Kk
+t2ABM+SU4j4OxUAFUXRsMGNF0rHK6y3J/zEc1OIXUEsBAj8DFAACAAgAPLFqW66aDfaKAgAAVQ4A
+ACIAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDgtc2Nhbl92bmMtc2FtcGxlLWFzbi5jc3ZQSwUG
+AAAAAAEAAQBQAAAAygIAAAAA
+
+
+--b1_dbd9d026608f85f18674c36271ed4e4f--

@@ -1,0 +1,44 @@
+Date: Sat, 01 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <f5178008da3377060ef2d4fb1a355381@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_f5178008da3377060ef2d4fb1a355381"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_vnc-sample Report: 2025-11-01
+
+--b1_f5178008da3377060ef2d4fb1a355381
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_f5178008da3377060ef2d4fb1a355381
+Content-Type: application/octet-stream; name="2025-11-01-scan_vnc-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-01-scan_vnc-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluE3oW3gwIAAH8OAAAiAAAAMjAyNS0xMS0wMS1zY2FuX3ZuYy1zYW1wbGUt
+YXNuLmNzdsWWTW+bQBCG7/0ViPMG7czu8tUTcUniysYV2I1yqihBNpIDFuBI/fcd4jgqayL1YOMD
+6wULeHhn5p0x2+Ilb9r0ZWcys8lf87po/9C26M53ddVWWbXttlXd0s+matoyfclp26ZrWtOmpHWd
+V7TW+bqoutPs8IwyLbLmn5t+NdW+zvK3F2VtVR/e8LzPuif/Tssyr80vJnJUNwA3HAxQPrd9Lk22
+KdYbBpxbtrTApUMCa7MdUx7njL2WGXOBI7Dknk3CaBkHM5ZMo/vgxyIOmQKH/mXMjPM2LbbGsk6f
+O4qf0cQ4fqIhLJcuxXe3BufC4tzto3DhI/rA+yiKE4lzJIFxSJQvvBMSz7aQiyOJHIUE0EfXB9Un
+QdcCpQY1WSVsEsymd4s4mgbMTILI+L5IQvM8NJQsyldun8axLRfHh6G0Re6j0GA8kkYOJu4VpEGB
+lvQGaYIVM6Pw0UgWq+WD8RjMwsRkydO3KHw6ozwC+kC2Y+En8lwciCrK9iVqCiHV93AqXxroPWRa
+AoFHUFJdSiKnR+ScEJHvSFc3Y0UuOAg0jdg8eAjiIHkg82Hz1fw2mJ4FpTNj8KWtmbGwEOD8KP/h
+gYLcOKPOWWTp9ojjUvporeErHTf7Mt23m1HAHGLTwqXQAuGMHa9BN6QuYQlxlXgh6llMZQWDhX5B
+FOdtunE0z+Hkgp/Y8uUiRCyK0lhnAUHzDY4dIrurbhCnJaW6pvXhfjh6TXHud0JpoxcgGQ+XI2fP
+gQX1iAlOo+DIATs0T6HJIqmm+HVINNOTHvWGM5DEebrtaMKyzetdXTS58UoWZlS1sU3p0geZIjI+
+FC6hWWAHJ66iEarT8vKABow+zaWr6y9QSwECPwMUAAIACAA8sWpbhN6Ft4MCAAB/DgAAIgAAAAAA
+AAAAAAAAtoEAAAAAMjAyNS0xMS0wMS1zY2FuX3ZuYy1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQAB
+AFAAAADDAgAAAAA=
+
+
+--b1_f5178008da3377060ef2d4fb1a355381--

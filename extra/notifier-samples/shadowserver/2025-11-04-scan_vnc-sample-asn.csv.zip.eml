@@ -1,0 +1,44 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <5b4bdefb1a34abe4533eb5dd9aa6c2a5@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_5b4bdefb1a34abe4533eb5dd9aa6c2a5"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_vnc-sample Report: 2025-11-04
+
+--b1_5b4bdefb1a34abe4533eb5dd9aa6c2a5
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_5b4bdefb1a34abe4533eb5dd9aa6c2a5
+Content-Type: application/octet-stream; name="2025-11-04-scan_vnc-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-scan_vnc-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalugLviVkAIAAK8OAAAiAAAAMjAyNS0xMS0wNC1zY2FuX3ZuYy1zYW1wbGUt
+YXNuLmNzdsWX32+bMBCA3/dXIJ5d63y2+eE90Za22VIyhWZVnyZGUYKUQkRIpf33O1qlShy0TlUa
+pMQYhcCXu8++i9uWT8W6zZ5WLnPXxXPRlO0fmpbd+aqp2zqvl920blo6LOp1W2VPBU3bbE5jtq5o
+nBc1jU0xL+vuNH+9R5WV+XrnS7/W9abJi5cH5W3dvD7hcZN3d/6dVVXRuF9cBNRnQpyBciA0qA2E
+LluU8wUTANxTHKXgUrI2XzEdAjD2XOUsEICCpdfsIk7uptGYpaPkOvoxmcZMC58+ZcydFm1WLp27
+JnvsIKZFtvyZXDhx1RbNqinXhbP9wY7iorvi6twBUBxAWGBgEIyW+2AauFD+Fkx8GKyDeiORPHgj
+kUQSWCRoZGik3icJPY7wFiJ5GhJtpDIq+BeJOgmJ0EZRgqzsCLoUpd/rzSxlF9F4dDWZJqOIuWmU
+ON8maeweB8czQhjlWzjIhZBD0djCCKQ8qSGCo432DIC1xAMutO5dSZ9KA4GR/qE5nqDghFsc3MWJ
+ZsxN4nsnnczubpz7aBynLksfLpP44VjxoYUFtjy+5kr3ZusIQP4ekP9fNoeUtKGIsNuMAS2FgByC
+cBgikpr2INIop3Ja5tlySyWRq2Cf6Su9zzZVtmkXp3MK0ShrC6BwoT9UuFAaqrH7PB4XgRoKqCsg
+luMouoXXv2WPEnYb3UTTKL2hgsZuZ7fn0ehoyZIHdmuqZUKcGAU8g4Jeh1oHHNFqfA61/sQYvewA
+At8Bg5ODdQ0s7ZeeXWyRsHqr2yeiSNNpbTsN/m5pO55I79UQWl/aLvoi3O0VTyX1ayvf447u/mro
+Aa2mvojkke+R4RBk6L/EbE9r5XMF/U3bdzaeJJeTZHv4KMVfUEsBAj8DFAACAAgAPLFqW6Au+JWQ
+AgAArw4AACIAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDQtc2Nhbl92bmMtc2FtcGxlLWFzbi5j
+c3ZQSwUGAAAAAAEAAQBQAAAA0AIAAAAA
+
+
+--b1_5b4bdefb1a34abe4533eb5dd9aa6c2a5--

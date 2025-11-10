@@ -1,0 +1,41 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <960523d1f966d9a8cf8d0a413003e951@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_960523d1f966d9a8cf8d0a413003e951"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_smb-sample Report: 2025-11-09
+
+--b1_960523d1f966d9a8cf8d0a413003e951
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_960523d1f966d9a8cf8d0a413003e951
+Content-Type: application/octet-stream; name="2025-11-09-scan_smb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_smb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvm7CaZ3AEAAJcLAAAiAAAAMjAyNS0xMS0wOS1zY2FuX3NtYi1zYW1wbGUt
+YXNuLmNzdrWWy2rdMBCG932K4LUiNCPJtrQLJYRASMtJ9gfHFT5uY/sgK4G+fUdJC+10mzFGlnz7
+PNffTZmXtJdhOTeq2dNrynP5SdO5rs95K9u4PdfplgsdTtte1mFJNC3DROOwrzROaaMxp2ne6nJ8
+f8c6zOP+10PHfXvJY3oDjWXL9fE8nujwI9X79+XpuAzft3xcX5anlP+cmld+KqfXeX9n1SV9dV0d
+95LndWo+NWjQXwJcmnABPlqMDhp1mqeTAmN06zSA0WC8KuNZOeeVoteoHgyCerhRn6/vHw9Xd+rh
+9v7m6uuXw7Xy0NFVpZpDKsP8fPGYh29kyNv2L66LBiIiwzmj0XUCuDZaF53luF4DitBcR+5kNK/R
+OBFXUvCgZbTO6mA+nmbaiCZaw2me8sQK4GxEcqXnuI7yJEhZh6wKEFD3EpHz0YWIntNaMhCkfMmL
+AJFK3BuRvMSeiAxnkWquFwtdYDiH2kmEDivN9ZxmtQcp24C7stcOROLm4L/uZa2G4MVMc4wWKCcl
+OjMlJMkOo7VEc1Ki41l5d1VzUKwxM1pfaSCl3zxsQUbhfosA68qhBk4kRQztrNYgUP57mRzx0fCe
+bLSXaJEkNi4Cb5EG6D+vE8sRLm/YksR9EO4XUEsBAj8DFAACAAgAPLFqW+bsJpncAQAAlwsAACIA
+AAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDktc2Nhbl9zbWItc2FtcGxlLWFzbi5jc3ZQSwUGAAAA
+AAEAAQBQAAAAHAIAAAAA
+
+
+--b1_960523d1f966d9a8cf8d0a413003e951--

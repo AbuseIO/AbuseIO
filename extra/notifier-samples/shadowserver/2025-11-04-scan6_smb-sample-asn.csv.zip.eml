@@ -1,0 +1,45 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <5334d1cb5b4ce12df49f6bd04add216f@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_5334d1cb5b4ce12df49f6bd04add216f"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan6_smb-sample Report: 2025-11-04
+
+--b1_5334d1cb5b4ce12df49f6bd04add216f
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_5334d1cb5b4ce12df49f6bd04add216f
+Content-Type: application/octet-stream; name="2025-11-04-scan6_smb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-scan6_smb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltiTkxUxQIAAEMKAAAjAAAAMjAyNS0xMS0wNC1zY2FuNl9zbWItc2FtcGxl
+LWFzbi5jc3bFlktP20AQx+/9FMjnRdr3Y24GAqSQBCVw6Amt9xHckhjZBqnfvmNopRZwVQ5Wc1jv
+bOydn2d2/uOir3ep6/3uoSBFl55SW/ffcVoP9kPb9E1o7odp0/Z4uWu6fu93Cae93+Louz2O29Tg
+2KZt3QxmeNlj7+vQ/fbQbdc8tiE9Owp90w6Pt+EOL9/ScH+3q253/mvT3u4fd1Vqfy3V+9dLbXqq
+uxdfg4nUg3Xb9W293xafCk65OmTskMoDSkEpULogd/X2jnBKGcTKgq80JIH/iipJCApnIXMN2nJG
++vBApFSE4O7EMopLn6/I9eriy+rnqJjBdUKKdep9fX9w3fqIb/b8+9O/BiqBm9f+Q4zgKHr1VfBg
+nQhoZov+DX3P/+aMHM+W1+vykmzmy7PyarWe/TsFUyA4CPqaQrMMwqHBReCgM+OQLDVgKI3vUcyX
+ZFGel+tyc44oZHGzOCrnHw6GG8XQOYK1UoCTygAPjk9AwQRQi/EYpTAxJ9AievCRYYaClNNgCA1M
+jmJYDAL47Aw4gUBGxDAFhhowFBvFcF5rMIGBktKDi2wKCvSDWVdmnCL6CMZYDdEKD6oKbgoMB9KC
+1KMYHlMivPOQPRYMngw6UUqwWsdTUhmXQGWLpk4BcFs7RTBQOvGAinGMjINSsYKcdABmVPwf5RpZ
+TJgYjFoQNEPwOk9XJ+PRiJahYBjmICWDx1QpNg0GqqgYV41c+QprNoFNPGBPo2wy7aL2TVeNBjye
+myyxjKyiCYXcBjweEykXBluq1xAClSIlpIiKG0jYUcGoigKm5t12crMh2EzPVktytCrXJ4ty+QEG
+CUOjesNQGWxkwzcFd0OJqAqS8xmyNmwM4Xy+IserSwwCWh8JArfA3yiWlShjCJC8xBpWHiXTVxwq
+r9+NwcmMnM82m9mSFKfrcnlxerO+PigXB4tyviz+TvMDUEsBAj8DFAACAAgAPLFqW2JOTFTFAgAA
+QwoAACMAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDQtc2NhbjZfc21iLXNhbXBsZS1hc24uY3N2
+UEsFBgAAAAABAAEAUQAAAAYDAAAAAA==
+
+
+--b1_5334d1cb5b4ce12df49f6bd04add216f--

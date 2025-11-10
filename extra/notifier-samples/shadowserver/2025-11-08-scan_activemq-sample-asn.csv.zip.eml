@@ -1,0 +1,44 @@
+Date: Sat, 08 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <3661574209733fbde7e49e4d8e3bb7ae@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_3661574209733fbde7e49e4d8e3bb7ae"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_activemq-sample Report: 2025-11-08
+
+--b1_3661574209733fbde7e49e4d8e3bb7ae
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_3661574209733fbde7e49e4d8e3bb7ae
+Content-Type: application/octet-stream; name="2025-11-08-scan_activemq-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-08-scan_activemq-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvDqSbxdAIAAHAQAAAnAAAAMjAyNS0xMS0wOC1zY2FuX2FjdGl2ZW1xLXNh
+bXBsZS1hc24uY3N2zZddb5swFIbv9ysirh3Lxz7mw7tibdpmS8gWGkW9mhDxMqQSOqCR9u93SNpu
+a9xpmToFIRkDxjw6x+95jdcWpW3arLzzmNfYra2L9jt1i+76rq7aKq9uu25Vt3T6WjXtJistddts
+TW3WbKhd24ra2q6LqrvM93NssiJvfnnpc1Pd17ndfShvq7obWZVltllRb2s3q90tQmi6ad54Ukg9
+BBiKcCDQIBipPFbaVXFfMhCC+8hBRhxAsTa/Yz7QwViWt8XWlt9YCEICSy/Z2Si5nscTlo6Ty/jj
+bD5iGgJ6ypg3t21W3A6u62xFXMuithdVXWbtePOlYvFupukn5nPg8jce8I0KjQSP5RSwIs9un4i0
+5CifgIKfQG/zrR3SHGqIvi/wgW/xgU1myfkseTwdyaY5hIdwUrvhgojr6NRwWhqhDuGkklwHp4XT
+Rkgj0QWnutSelG4vAu078ioCDhEeQZeys3gyvpjNk3HMvDROBu9n6ch7jRgGBrWByEEJglag7gWl
+gI5SOzTik9pVPyBBGRQGAyek1D2BpDroG+HMN9Bw9feU8YJ5yWg5SGeL66vBMp6MUo+lN+fJ6ObV
+Uo7yuYdI5Oj/wUFem0o5cqwc4dP6qHL4f4MHnaSNCp4HDyUHDE8WvX1OVfgcS5M+FJ4YC12aUMB9
+0Zus7s04dHCGmmPUM+k6Ng0QkfOF0JuABkaQrRzIRJKpROLERQa1Y1+DRAbYm/jtzARcu0NNZqL6
+pBxB9VC4QGWfXO9hReILoFFvNA6iW6MgHUbYceqeLVFH5oOQh9gjwxYvlPYIj/tZGCdsGl/F8zi9
+ov9oNl1M38Xjf0T8AVBLAQI/AxQAAgAIADyxalvDqSbxdAIAAHAQAAAnAAAAAAAAAAAAAAC2gQAA
+AAAyMDI1LTExLTA4LXNjYW5fYWN0aXZlbXEtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBVAAAA
+uQIAAAAA
+
+
+--b1_3661574209733fbde7e49e4d8e3bb7ae--

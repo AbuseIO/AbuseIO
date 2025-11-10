@@ -1,0 +1,43 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <462cd66fd03ae44c823ca742e7a568cd@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_462cd66fd03ae44c823ca742e7a568cd"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver population6_bgp-sample Report: 2025-11-04
+
+--b1_462cd66fd03ae44c823ca742e7a568cd
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_462cd66fd03ae44c823ca742e7a568cd
+Content-Type: application/octet-stream; name="2025-11-04-population6_bgp-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-population6_bgp-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltRFYa9NwIAAI0ZAAApAAAAMjAyNS0xMS0wNC1wb3B1bGF0aW9uNl9iZ3At
+c2FtcGxlLWFzbi5jc3blmMGO2jAQhu99iihnr2Q7CRDf2GirRupCBez2GJlkNngFdhR7kfbtOwEq
+URqfeqnMxYxHjscfvyczEDt1AOvkoYtJbOEIvXKfaKph3vXGmdrsB9P0Dj92xjotD4Cmky2O0moc
+WzA49tAqM0zr8x5aqtpePVRZ89HXcApUO9OjgbGtbKHag27d7srhPju4mVZKD0fYtl2Fx7TnUBZ0
+A311PsbO7JtqALosUw1op94UXIXiN1vz670P8t30FfQ9jrVpYMT1e6XSf628cZ1Wfok55dkDYw80
+jSgTfCpoGhOl3wzhFB3NdiYYo1QIRlzdETbNCcHDk+mMzygp5iR+XJWbcv0tKpbfX54fy3lMXueL
+Yvny+rQi2YTlOSUknjcYX1nXS6eOEEndROuPbpDtZP+U1kH0LDUiH/BbOTlXaDYKHzA6WkN/VDWg
+Xjwnyx9PC8JIejkEIYvlpvxaFvNNuVyQhBQgLZAJiQujNWo5bLCCd7SgiUn2BzTLBM8EpePQPFDo
+VHCO3OPQyR0qzZA7C1psPs6dhpzZSSIS6uUON7kzKhLm5Q44v3PBPXrLkO855SLz5Pc2XG6Ennn1
+Hrj/R3DGcpZl/0Z+adQ8ijfhvtnOGZ6McvNwL/q5gHuwacjcmOCeQsZZ6Nzj6c0nwXLTKUKLLPVy
+h/paSxDaV8gG7uQOG1U+C7phm/p+mGCBC5YbxZ558zvoBh2rdMq83Dxo7vG+pQ79fwfmw75TtZNg
+izeWaE+zBkFd8l9QSwECPwMUAAIACAA8sWpbURWGvTcCAACNGQAAKQAAAAAAAAAAAAAAtoEAAAAA
+MjAyNS0xMS0wNC1wb3B1bGF0aW9uNl9iZ3Atc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBXAAAA
+fgIAAAAA
+
+
+--b1_462cd66fd03ae44c823ca742e7a568cd--

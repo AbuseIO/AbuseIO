@@ -1,0 +1,45 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <d794a2ac6689a61e0f58d0e3954b67ab@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_d794a2ac6689a61e0f58d0e3954b67ab"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ics-sample Report: 2025-11-06
+
+--b1_d794a2ac6689a61e0f58d0e3954b67ab
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_d794a2ac6689a61e0f58d0e3954b67ab
+Content-Type: application/octet-stream; name="2025-11-06-scan_ics-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan_ics-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalv/8aZnsgIAAKoMAAAiAAAAMjAyNS0xMS0wNi1zY2FuX2ljcy1zYW1wbGUt
+YXNuLmNzdr1WXW/aMBR936+I8mwsfyaO37I2VelHMhFQ1acqDR5EKglK0m7dr98NMJWaVqiDgMDY
+htxz7vW5R3bbYmGaNlssXeQ25sXURfsK06JbL+uqrfLqqZtWdQtf86ppy2xhYNpmMxizpoRxZioY
+azMrqm6Zr2OUWZE3Ww89NNVznZsVUN5WNUym5qXIzcOLKafb6/Z1ad5Wi2pqnrb/XDdrnM2GHa2Y
+rsg0y6ps4NfiTxerzn49/Ntzv7mMMDmgdEA8h0rNqBbERfNiNkeUEOwJLBSmvkLP0yUSviIKoccs
+L02LFCWMokmKzsKb4UUyiochctMwdq6SNHKRhKcoQcgdmTYrnpxxnU0Bf/N6B0yI5oGW4j0w4wJT
+GqA2B2QlIFS1zAfP2eCxKLP6dYMfTpAbR3dOmkzGl85deBOlLkrvz+Po/isUIHfOtQjeU6CBhwGj
+Y8AEEQgVJh94RPlkAA/CxnE5eFoqeNscKGaMnIwE04JraYkANMD8U1IQmnh2HRimcn8drn6gcXJ9
+n2zGr9UfNECs1JnCap06hAfQHGZrpPMIXUZpGsXIvRiF8fXFZDR2wlvnNhzGoH+PiiD4BFiJHflJ
+oqndARTq7rE9HXAAjQ/b0Ko7p9CF3sk4cM2V5sw6e6hDcDIKXkdBSouCVOBIGyEElCL0s/r95oHJ
+5TBBZ8nN5PY7rL4mOgHeYze9YtgXfYBBgZndWXDETNDjo/maBFpYqYGXYcn6SI0zLf3d1Oi+BjoE
+tksQJEttsWC+3y4PrC0lWlq4nGElesXtPEJoZnskkWASPWesOnfeOWD4BMeXbucBRAsLTHEQFF9d
+hbgIFIQy7dzUedb+F2TA0Af3L/satAX6yf3rkJ6BqlLb6XyOpepdRVxT2+Wph2kPPrRGY3zXYiG/
+vgzdko6AU2TeUcD+AlBLAQI/AxQAAgAIADyxalv/8aZnsgIAAKoMAAAiAAAAAAAAAAAAAAC2gQAA
+AAAyMDI1LTExLTA2LXNjYW5faWNzLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAUAAAAPICAAAA
+AA==
+
+
+--b1_d794a2ac6689a61e0f58d0e3954b67ab--

@@ -1,0 +1,44 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <55f16ed6d446c9408e2d2f3c37dcec79@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_55f16ed6d446c9408e2d2f3c37dcec79"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver blocklist-sample Report: 2025-11-06
+
+--b1_55f16ed6d446c9408e2d2f3c37dcec79
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_55f16ed6d446c9408e2d2f3c37dcec79
+Content-Type: application/octet-stream; name="2025-11-06-blocklist-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-blocklist-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalumnkPVfwIAAL4NAAAjAAAAMjAyNS0xMS0wNi1ibG9ja2xpc3Qtc2FtcGxl
+LWFzbi5jc3bNltFu2yAUhu/3FIhrwgA7TuI7t03bTG3axd3uiUMdVNtYgNttTz9I16rOrCmV7GYX
+seBYge8c/sNvaGUpjOVlDRE04lFoaX+6ofTzrTK24qXwr1SjMz/QghtVuQE3/pkLtQvmchfMnv9d
+cZmZ3YKZVdoNLM/hJ8gIG48oHZEIEBLTMCYEokI9IUoIjkJMqfuxCULwjFteF7wSWOkcjECaXoLE
+WlHW1q1rzDYrpKgsmlLCKEov0Ol8ebdKrlC6WF4ktzerORrTiXuL4EpYLgtwp/nG8XdBBO+AuOXG
+PCm9adPUT7yx2x5oophELZogwuQzCxHaVGZdjBhuMlFrZV1hcSUsqpQdmVpk8l6KTT/lmO4DTCYv
+29OBtw/Cjvz99rI2eM2zB5NxV3cttD+SIZJvC5IRr4cjC/LfEAML8i89vNJ8jCI6AHx/Hk+Qf7b/
+MEG2k6dshhmL3pX+txSdJleL85vVcpEgmCZL8OUmncNDIYJ4vHdDBgGmM38GvMpd5ropxC9sHhA8
+0Y0V4Fw5qwAnhcoehLv8e6EIgjicdFPAeSl0Lqsc3G2dO1njOuNUla4spTRiAy6di3kz2o/1REZo
+HO7ZWBi5NnFgJ7Li+ic4E/eiMt48l8qC9OV4YH/n05YoHRNMp6zjwjhbpuC70MaZNfjaCO282gnp
+8TnSUzlYTMK9jomcbp2FwbWXRCGNxRvhaDL3TSGFBrWqA8DXza5EXcHewKLDwGTJ61egxXVyC5Ke
+QaaHgbzdexiQ2WEg136ZF5C3k75AKD0MpKWVITRC2aEgxt7LH29YWvOBWtvd/ZhGk+O0dgdOMMOU
+zP4bnJDgIDwezd53W4QjMqxJ/gZQSwECPwMUAAIACAA8sWpbpp5D1X8CAAC+DQAAIwAAAAAAAAAA
+AAAAtoEAAAAAMjAyNS0xMS0wNi1ibG9ja2xpc3Qtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBR
+AAAAwAIAAAAA
+
+
+--b1_55f16ed6d446c9408e2d2f3c37dcec79--

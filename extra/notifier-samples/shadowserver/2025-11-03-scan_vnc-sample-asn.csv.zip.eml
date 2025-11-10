@@ -1,0 +1,44 @@
+Date: Mon, 03 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <c5f2593ea9e711b4b76c0c2092fce156@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_c5f2593ea9e711b4b76c0c2092fce156"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_vnc-sample Report: 2025-11-03
+
+--b1_c5f2593ea9e711b4b76c0c2092fce156
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_c5f2593ea9e711b4b76c0c2092fce156
+Content-Type: application/octet-stream; name="2025-11-03-scan_vnc-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-03-scan_vnc-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluGLpd4rAIAAHAOAAAiAAAAMjAyNS0xMS0wMy1zY2FuX3ZuYy1zYW1wbGUt
+YXNuLmNzdsWWUW+bMBSF3/crEM+u5WsbDOyJtrRNm0IFyao+TYyiBCmBiJBKk/bjd0matLis0qqU
+PsQYJeAvx+fca7Mplvm6SZcrk5jr/Cmvi+Y3Tov2flVXTZVVi3Za1Q1e5tW6KdNljtMmneGYrksc
+Z3mFY53Piqq9zXbvKNMiW7966Oe62tRZvl0oa6p6t8LjJmvf/Csty7w2v5mccesE4IQJg9ke5x5n
+JpkXszkBxqgtKRdAhSBNtiKWyxghT2VGHGAcSHJJzoJwEvtjkozCS/8uigNigcJvCTHjvEmLhTGp
+08cWIs7TxY/wzAjKJq9XdbHOjf0fNiSF9hcXpwZjkjIGXTBwPAYeyC6YZVMAvgeDD4O1UAcSQZ0D
+iUASR5PI8iRKJLokrk05O0gkBiQR7nskchASQEFsD6BLArg7FvTuzvSGjKPwPAr3l6PogWK0kmgU
+FuVc7Sl4hyIhZ/54dBHF4cgnZuKHxnWUBOZxNNk5VnVpbE5Bqd4ofS6N5VnKY1p+lIvyyOFpdmWG
+Kb3McCrdXhp/SswwuDeSaDq5Mu79cZCYJHk4D4OH48ijtkCagW1F+T/kGQCIuZ7Qvew6WPA+jUh1
+iNQbB0nmWVrd4wyJmPslRIx5HBOmEwHqpPq71Sgkt/6VH/vJFVZBcju9PfVHx8yXrdcejLtQx2d5
+X5dtusDWdREUJB9al52P3+yR+7pJDccC7rYiZ3jmKrJ0cThHtMXH6vaI7/g52ZTpppkP4R7sXHp1
+bnsF6z1S/B/JaZwvqyY3kOgZgktc4I/GgK5x0Diagx37tYNhsJ1CPd44mAMm2x6YhQmPo4m1I7F0
+0MAD+/cl17p/XYE0WpkZ0r87Munq/RxTbrHhvYMVh/ekXOJJEPjXqYQnQuygwtE7KO2P1/UdmUQ3
+D9Hz+FGCv1BLAQI/AxQAAgAIADyxaluGLpd4rAIAAHAOAAAiAAAAAAAAAAAAAAC2gQAAAAAyMDI1
+LTExLTAzLXNjYW5fdm5jLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAUAAAAOwCAAAAAA==
+
+
+--b1_c5f2593ea9e711b4b76c0c2092fce156--

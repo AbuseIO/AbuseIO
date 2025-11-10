@@ -1,0 +1,43 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <353c425b7876b7819d76d32a8b329050@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_353c425b7876b7819d76d32a8b329050"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_epmd-sample Report: 2025-11-02
+
+--b1_353c425b7876b7819d76d32a8b329050
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_353c425b7876b7819d76d32a8b329050
+Content-Type: application/octet-stream; name="2025-11-02-scan_epmd-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-scan_epmd-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalu6weBGcwIAAJQMAAAjAAAAMjAyNS0xMS0wMi1zY2FuX2VwbWQtc2FtcGxl
+LWFzbi5jc3a9lk1v2kAQhu/9FcjnzWpnvB/23tyEBlpiIhwU5YSM2YIrYJHtVIqUH991klbNApfI
+zmU/5I/Hs/POOw6acmfqJt8dAhLU5repyubJLct2f6hsYwu7bZe2aty0sXWzz3fGLZt87ca83rtx
+bawbK7MubbstXt+xz8ui/u+hRW0fq8K8gIrGVu0tdmXq4EuADMUFwAXDASjNmGYQkE253hBgjEpO
+gYUUI9IUB8JDGRNiDrsViYAhkOyaXA7Tu1kyIdk4vU5up7MhEaDcVUKCmWnycju4q/JVi67y5bJs
+CAqp0AOj5qAF88ChpAiqX7LSDo6hR+YRRcE6IO/sfm1tbcod4Yih8uhSQ6y5H7dgFDDuO+5TqVZI
+kfd84kLzSKMXM7LITR2AC/tYbFbLxb5eAOGSKfH8skQABs/LfPlUl01jqoX9ufh3gZ2SI4/ef2LM
+nCawg080v9zhmGrlFHFEfk2LR44EhVh0kRWTb1vXIRzA1yILNUctpIeWNOpXDy031Az92o9oDKfB
+84xcJpPxt+ksHSckyJJ08H2aDYOPiFFqrnQofXhMUfUOf4uc+9UfUiFPw5M5CdLh/SCbzu9Gg/tk
+MswCkj1cpcOHj/CZDiMNPt8Z/hnvGafkJhklsyQbubSTm/nN12T8wcCd1JTfZyics4CuyG+V7Rsu
+0jj+FLBX2BAp12t6PmzXYLjG2PNb19MBPiXNXszc2ei54urstIUOmavs92TpmjpEPZNfDdw3FOW0
+rXonC3YkbWSCYs9g6TxMM09gkob4KcI+chHXLOWZZjn/QSbT9Gqa/p26SrDLL54r5A6gzLUpcfTP
+FDvziKBT6B9QSwECPwMUAAIACAA8sWpbusHgRnMCAACUDAAAIwAAAAAAAAAAAAAAtoEAAAAAMjAy
+NS0xMS0wMi1zY2FuX2VwbWQtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBRAAAAtAIAAAAA
+
+
+--b1_353c425b7876b7819d76d32a8b329050--

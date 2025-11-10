@@ -1,0 +1,45 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <570389b4703ef8a0f29e7276873c9229@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_570389b4703ef8a0f29e7276873c9229"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan6_smb-sample Report: 2025-11-02
+
+--b1_570389b4703ef8a0f29e7276873c9229
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_570389b4703ef8a0f29e7276873c9229
+Content-Type: application/octet-stream; name="2025-11-02-scan6_smb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-scan6_smb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalv3woLSyQIAAEMKAAAjAAAAMjAyNS0xMS0wMi1zY2FuNl9zbWItc2FtcGxl
+LWFzbi5jc3a1lktP20AQx+/9FJHPi7QP78NzMxAghSQogUNPaJ+JWxIj2yD123cMrdqSGImDc1jv
+bOydn2f2P+Osq3ax7ezuKSNZG19iU3U/cVr19lNTd7WvH/tp3XR42dZtt7e7iNPObnC07R7HTaxx
+bOKmqnvTv+2xt5Vv/3nooa2fGx9fHfmubvrHG7/Fy4/Y39/u3MPOfq+bh/3zzsXmz1K1f7/UxJeq
+ffPVm0jdWw9t11T7TfYl45TLE8ZOKJ8wCaIAKjOyrTZbwillEJwB6xREQSkIF3PwEmc+cQXKcEY6
+/0TyXBKCuxPDKC59vSV3y+tvy9+jZBrXCclWsbPV4+SusQHf7PX3v38BuQZh3vv3IUBB0at13oIp
+hEczGfSv6TH/60tyNl3crcobsp4tLsvb5Wr6KQqmgbL3FIolDA8aXHgOKjEO0VANmtJwjGK2IPPy
+qlyV6ytEIfP7+Wk5+wSGBGogF4MYKgUwJhdQ5FID9wUfg+ItGMMUOqQISgQLNjDMkM/zcYKBL8r5
+IIbBIIBNhYZCIJAWwY+BQUFS4MUgRmGVAu0ZyDy3UATmxwnGUZn+pQg2gNZGQTDCgnS+GAmDAhsO
+hsWUCFtYSBYFgyeDjkCBAmTso5PhdBFBJoOmih5wWzNOMLAgfqATl3CQMjhIUXkUlRypaGAF5fkg
+RmAhYmLwPi9oAm9VGiMpAgQDqocxDMOCoVkBMWo8plKycaKBRVoOYyRnHWo2goncY0+jo1Dkfe0S
+BxQ2aLDY1FKeGzCSRizkxuPxGKNmoB+Jajw4nwIrRYz4b5BcQ8SOClo6Cpiao+3kfk2wmV4uF+R0
+Wa7O5+XicxpBDRxI1WlsZP03BS96iUgHsbAJktJsCOFqtiRnyxsMAlqfbakH6jCYIYUA0eYKmLRY
+Mq3j4Kw6GoPzKbmartfTBckuVuXi+uJ+dTcp55N5OVtkH9P8AlBLAQI/AxQAAgAIADyxalv3woLS
+yQIAAEMKAAAjAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTAyLXNjYW42X3NtYi1zYW1wbGUtYXNu
+LmNzdlBLBQYAAAAAAQABAFEAAAAKAwAAAAA=
+
+
+--b1_570389b4703ef8a0f29e7276873c9229--
