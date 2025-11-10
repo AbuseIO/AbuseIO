@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","detail","application"
+"2025-11-08 11:02:12",high,100.64.140.105,udp,53,,dns,81021,UK,LONDON,LONDON,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 11:06:17",high,100.64.143.67,udp,53,,dns,81021,UK,LONDON,LONDON,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:49:04",high,100.64.19.35,udp,53,,dns,81021,UK,LONDON,LONDON,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:12:34",high,100.64.205.49,udp,53,,dns,81021,UK,LONDON,LONDON,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 11:01:46",high,100.64.227.191,udp,53,,dns,81021,UK,LONDON,LONDON,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:25:21",high,100.64.107.194,udp,53,,dns,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:27:44",high,100.64.110.175,udp,53,,dns,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:48:19",high,100.64.61.209,udp,53,,dns,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:30:09",high,100.64.73.77,udp,53,,dns,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:35:53",high,100.64.85.53,udp,53,,dns,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:56:01",high,100.64.124.238,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:04:06",high,100.64.55.57,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 09:42:00",high,100.64.131.60,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 11:06:59",high,100.64.185.49,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 09:42:36",high,100.64.197.181,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:01:29",high,100.64.249.52,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 09:33:22",high,100.64.251.130,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:29:34",high,100.64.252.199,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:23:58",high,100.64.31.114,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:44:24",high,100.64.40.87,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:30:24",high,100.64.52.195,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:06:13",high,100.64.52.230,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 09:43:14",high,100.64.78.84,udp,53,,dns,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:20:24",high,100.64.194.194,udp,53,,dns,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",loop-dos,dns
+"2025-11-08 10:08:42",high,100.64.61.151,udp,53,,dns,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",loop-dos,dns

@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","packets","response_size","amplification"
+"2025-11-07 15:27:45",medium,100.64.58.55,udp,123,,ntpmonitor,65915,CA,QUEBEC,LAVAL,517112,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-07 15:23:23",medium,100.64.168.4,udp,123,,ntpmonitor,64751,CA,ONTARIO,TORONTO,611310,,"Education Services",1,440,36.67
+"2025-11-07 14:54:24",medium,100.64.168.9,udp,123,,ntpmonitor,64751,CA,ONTARIO,TORONTO,611310,,"Education Services",1,440,36.67
+"2025-11-07 13:02:49",medium,100.64.197.193,udp,123,,ntpmonitor,128461,CA,ONTARIO,TORONTO,518210,,"Communications, Service Provider, and Hosting Service",68,29920,2493.33
+"2025-11-07 15:11:35",medium,100.64.116.184,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,152,12.67
+"2025-11-07 06:01:51",medium,100.64.58.148,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-07 13:03:05",medium,100.64.39.46,udp,123,,ntpmonitor,78573,CA,ONTARIO,TORONTO,518210,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-07 15:15:57",medium,100.64.44.211,udp,123,,ntpmonitor,65364,CA,"BRITISH COLUMBIA",VANCOUVER,517111,,"Communications, Service Provider, and Hosting Service",1,152,12.67
+"2025-11-07 00:02:01",medium,100.64.166.120,udp,123,,ntpmonitor,65364,CA,ALBERTA,EDMONTON,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-07 14:58:02",medium,100.64.107.178,udp,123,,ntpmonitor,86461,CA,ONTARIO,TORONTO,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-07 06:02:00",medium,100.64.237.111,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",4,1760,146.67
+"2025-11-07 15:27:41",medium,100.64.239.158,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-07 00:01:49",medium,100.64.239.191,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-07 15:06:53",medium,100.64.239.197,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",38,16720,1393.33
+"2025-11-07 15:16:06",medium,100.64.239.213,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",2,880,73.33
+"2025-11-07 07:44:38",medium,100.64.239.87,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",61,26840,2236.67
+"2025-11-07 00:01:58",medium,100.64.246.246,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-07 10:48:42",medium,100.64.253.153,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",54,23760,1980.00
+"2025-11-07 13:02:37",medium,100.64.253.195,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",3,1320,110.00
+"2025-11-07 15:15:57",medium,100.64.253.204,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-07 13:02:36",medium,100.64.109.115,udp,123,,ntpmonitor,97642,CA,ONTARIO,MILTON,,,,2,880,73.33
+"2025-11-07 15:11:40",medium,100.64.136.91,udp,123,,ntpmonitor,70157,CA,ONTARIO,TORONTO,517111,,Information,1,440,36.67
+"2025-11-07 14:58:21",medium,100.64.207.17,udp,123,,ntpmonitor,65364,CA,ONTARIO,OTTAWA,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-07 15:32:04",medium,100.64.35.51,udp,123,,ntpmonitor,65364,CA,"BRITISH COLUMBIA",SURREY,517111,,"Communications, Service Provider, and Hosting Service",1,368,30.67
+"2025-11-07 15:23:58",medium,100.64.183.45,udp,123,,ntpmonitor,75802,CA,QUEBEC,HUBERDEAU,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67

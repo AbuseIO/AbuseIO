@@ -1,0 +1,4 @@
+"timestamp","severity","ip","asn","geo","md5","protocol","port","hostname","bytes_in","bytes_out","region","city","naics","sector","sha1","sha256"
+"2025-11-04 00:00:00",info,192.168.0.1,64512,ZZ,,,,node01.example.com,,,Region,City,0,,,
+"2025-11-04 00:00:01",info,192.168.0.2,64512,ZZ,,,,node02.example.com,,,Region,City,0,,,
+"2025-11-04 00:00:02",info,192.168.0.3,64512,ZZ,,,,node03.example.com,,,Region,City,0,,,

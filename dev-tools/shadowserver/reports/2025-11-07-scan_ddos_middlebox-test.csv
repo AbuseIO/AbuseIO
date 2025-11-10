@@ -1,0 +1,10 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","source_port","bytes","amplification","method"
+"2025-11-07 17:11:32",medium,100.64.10.136,tcp,80,,ddos-middlebox,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",42007,970,23.66,SYN/GET
+"2025-11-07 15:43:19",medium,100.64.136.216,tcp,80,,ddos-middlebox,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",49357,963,23.49,SYN+ACK:PSH
+"2025-11-07 16:31:07",medium,100.64.142.151,tcp,80,,ddos-middlebox,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",53071,1126,27.46,SYN/GET
+"2025-11-07 15:06:51",medium,100.64.30.122,tcp,80,,ddos-middlebox,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",42323,49574,1209.12,SYN+ACK:PSH
+"2025-11-07 17:25:11",medium,100.64.199.11,tcp,80,,ddos-middlebox,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",53463,1228,29.95,SYN/GET
+"2025-11-07 16:30:58",medium,100.64.51.47,tcp,80,,ddos-middlebox,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",44488,1460,35.61,SYN/GET
+"2025-11-07 15:42:56",medium,100.64.108.94,tcp,80,,ddos-middlebox,73499,US,OREGON,BOARDMAN,517810,,"Retail Trade",51906,7083,172.76,SYN+ACK:PSH
+"2025-11-07 06:45:19",medium,100.64.172.107,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",44815,7084,172.78,SYN+ACK:PSH
+"2025-11-07 09:47:34",medium,100.64.172.109,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",60929,7082,172.73,SYN+ACK:PSH

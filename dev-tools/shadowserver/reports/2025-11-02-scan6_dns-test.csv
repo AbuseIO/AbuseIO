@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","dns_version","min_amplification"
+"2025-11-02 15:18:00",medium,2001:db8:913:3501:342f:aebb:edef:6709,udp,53,,openresolver,81021,ZA,"WESTERN CAPE","CAPE TOWN",517810,,"Retail Trade",,1.57
+"2025-11-02 15:39:37",medium,2001:db8:5ca:ed00:fadf:c1a2:4c3b:eda2,udp,53,,openresolver,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",,1.57
+"2025-11-02 15:09:25",medium,2001:db8:891:2110:acfc:5b4a:736c:ed,udp,53,,openresolver,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",,1.57
+"2025-11-02 15:13:23",medium,2001:db8:a0:2100:3c43:5815:2c1d:b5bd,udp,53,,openresolver,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",,1.57
+"2025-11-02 15:35:09",medium,2001:db8:bc3:8c02:ba3:1ad1:d104:aea8,udp,53,,openresolver,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",,1.57
+"2025-11-02 15:17:59",medium,2001:db8:ea7:9700:1961:e8d1:592b:d0d3,udp,53,,bogusresolver;openresolver,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",,1.57
+"2025-11-02 15:18:00",medium,2001:db8:efd:b300:3463:43d2:7c9c:f151,udp,53,,openresolver,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",,1.57
+"2025-11-02 15:22:18",medium,2001:db8:802:db00:f3e6:87c0:2951:206,udp,53,,openresolver,81021,JP,OSAKA,OSAKA,517810,,"Retail Trade",,4.38
+"2025-11-02 15:43:48",medium,2001:db8:4c8:7600:5af8:9b56:ad55:ce0c,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.57
+"2025-11-02 15:17:59",medium,2001:db8:b67:ee00:e299:9b2:593:f2d0,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.57
+"2025-11-02 10:10:42",medium,2001:db8:908:d000:a797:e8f9:4613:934,udp,53,,openresolver,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",,1.57
+"2025-11-02 15:47:58",medium,2001:db8:699:2201:7ce6:e745:4161:3814,udp,53,,openresolver,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",,1.57
+"2025-11-02 14:18:22",medium,2001:db8:6ee:b100:100c:3347:fdd0:6e3d,udp,53,,openresolver,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",,1.57
+"2025-11-02 15:09:27",medium,2001:db8:14da:c300:c113:a96e:8879:23b5,udp,53,,openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,1.57
+"2025-11-02 10:10:44",medium,2001:db8:28f4:3400:48c5:f5dc:85cb:d365,udp,53,,openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,1.57
+"2025-11-02 10:10:32",medium,2001:db8:391:8610:6a70:62f9:51d9:633c,udp,53,,bogusresolver;openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,1.95
+"2025-11-02 15:26:32",medium,2001:db8:990:6400:835d:c14c:e079:f354,udp,53,,openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,1.57
+"2025-11-02 15:30:47",medium,2001:db8:d39:6512:241:9672:68c5:ef64,udp,53,,bogusresolver;openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,1.57
+"2025-11-02 07:12:39",medium,2001:db8:d39:6514:94ab:114f:8599:b36,udp,53,,bogusresolver;openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,1.57
+"2025-11-02 14:18:29",medium,2001:db8:eb9:2201::11,udp,53,,openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,2.14
+"2025-11-02 13:18:43",medium,2001:db8:eb9:2201::12,udp,53,,openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,2.14
+"2025-11-02 07:12:41",medium,2001:db8:eb9:2201::13,udp,53,,openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,2.14
+"2025-11-02 14:18:30",medium,2001:db8:eb9:2201::14,udp,53,,openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,2.14
+"2025-11-02 15:09:27",medium,2001:db8:eb9:2201::15,udp,53,,openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,2.14
+"2025-11-02 13:49:59",medium,2001:db8:eb9:2202::11,udp,53,,openresolver,81021,US,OREGON,BOARDMAN,517810,,"Retail Trade",,2.14

@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","packets","response_size","amplification"
+"2025-11-04 05:57:02",medium,100.64.38.126,udp,23257,,ntpmonitor,91444,CA,QUEBEC,MONTREAL,722511,,"Accommodation and Food Services",1,440,36.67
+"2025-11-04 13:32:28",medium,100.64.49.10,udp,123,,ntpmonitor,65364,CA,"BRITISH COLUMBIA",VANCOUVER,517111,,"Communications, Service Provider, and Hosting Service",1,224,18.67
+"2025-11-04 14:55:54",medium,100.64.197.193,udp,123,,ntpmonitor,128461,CA,ONTARIO,TORONTO,518210,,"Communications, Service Provider, and Hosting Service",68,29920,2493.33
+"2025-11-04 12:13:37",medium,100.64.58.148,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 01:36:26",medium,100.64.169.213,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,152,12.67
+"2025-11-04 15:17:50",medium,100.64.44.211,udp,123,,ntpmonitor,65364,CA,"BRITISH COLUMBIA",VANCOUVER,517111,,"Communications, Service Provider, and Hosting Service",1,224,18.67
+"2025-11-04 15:00:01",medium,100.64.241.144,udp,123,,ntpmonitor,65364,CA,ALBERTA,"SLAVE LAKE",517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 15:26:53",medium,100.64.166.120,udp,123,,ntpmonitor,65364,CA,ALBERTA,EDMONTON,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 14:59:59",medium,100.64.107.178,udp,123,,ntpmonitor,86461,CA,ONTARIO,TORONTO,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 13:32:19",medium,100.64.101.15,udp,123,,ntpmonitor,83679,CA,ONTARIO,GRAVENHURST,517111,,Utilities,1,152,12.67
+"2025-11-04 05:56:54",medium,100.64.239.139,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",32,14080,1173.33
+"2025-11-04 01:36:26",medium,100.64.239.163,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 15:26:45",medium,100.64.239.176,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 14:00:16",medium,100.64.239.191,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",7,3080,256.67
+"2025-11-04 15:35:29",medium,100.64.241.214,udp,123,,ntpmonitor,71634,CA,MANITOBA,DAUPHIN,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 14:27:29",medium,100.64.245.62,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 15:08:56",medium,100.64.246.117,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 12:13:28",medium,100.64.246.122,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 15:04:12",medium,100.64.246.231,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 01:36:06",medium,100.64.247.8,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",6,2640,220.00
+"2025-11-04 15:00:00",medium,100.64.252.90,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 15:22:37",medium,100.64.253.153,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 13:04:19",medium,100.64.253.174,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 14:59:55",medium,100.64.253.178,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-04 14:27:34",medium,100.64.253.204,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67

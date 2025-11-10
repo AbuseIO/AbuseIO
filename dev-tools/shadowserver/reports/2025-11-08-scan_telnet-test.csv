@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","banner"
+"2025-11-08 15:30:30",medium,100.64.110.105,tcp,23,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",login:
+"2025-11-08 12:05:35",medium,100.64.143.67,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-08 16:45:21",medium,100.64.152.42,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-08 17:38:43",medium,100.64.152.42,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-08 14:54:22",medium,100.64.179.59,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-08 03:07:48",medium,100.64.19.20,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-08 14:54:15",medium,100.64.227.197,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-08 15:27:34",medium,100.64.227.197,tcp,3389,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-08 15:44:13",medium,100.64.227.197,tcp,9002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","|Efficient 5851 SDSL [ATM] Router (5851-6) v0 Ready|A?A>>A?A>>A?A1/2A?A3/4Login:"
+"2025-11-08 17:12:44",medium,100.64.232.57,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-08 15:30:42",medium,100.64.233.152,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-08 18:19:58",medium,100.64.233.152,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-08 17:38:33",medium,100.64.58.62,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-08 18:20:09",medium,100.64.58.62,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-08 10:53:16",medium,100.64.6.77,tcp,7777,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.7|"
+"2025-11-08 15:12:17",medium,100.64.107.194,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","||[root@LocalHost tmp]$"
+"2025-11-08 18:19:56",medium,100.64.107.194,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",login:
+"2025-11-08 12:07:34",medium,100.64.110.175,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-08 16:02:59",medium,100.64.110.175,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-08 08:36:57",medium,100.64.115.109,tcp,7000,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",@
+"2025-11-08 08:42:35",medium,100.64.115.109,tcp,6002,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"
+"2025-11-08 17:12:58",medium,100.64.41.149,tcp,23,,"telnet,iot",81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","|MikroTik v6.44.3 (stable)|Login:"
+"2025-11-08 12:07:25",medium,100.64.63.116,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",login:
+"2025-11-08 18:20:00",medium,100.64.66.165,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-08 15:12:35",medium,100.64.66.255,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"

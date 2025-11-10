@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","banner"
+"2025-11-03 15:22:48",medium,100.64.15.44,tcp,23,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade","220 Microsoft FTP Service|"
+"2025-11-03 00:11:37",medium,100.64.194.44,tcp,23,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade","Ubuntu 22.04.5 LTS|sgplabs login:"
+"2025-11-03 11:50:25",medium,100.64.109.252,tcp,2002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",PPCC5YU^HS#Y(OC/Bgi:ONmT7mpDOa&K`S30LY|
+"2025-11-03 18:40:13",medium,100.64.117.212,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-03 03:14:51",medium,100.64.19.0,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","||[root@localhost ~]$"
+"2025-11-03 03:16:33",medium,100.64.19.0,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-03 17:21:05",medium,100.64.22.34,tcp,9002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","||[root@localhost ~]$"
+"2025-11-03 17:57:30",medium,100.64.22.34,tcp,17000,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-03 18:25:25",medium,100.64.22.34,tcp,7000,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-03 18:26:42",medium,100.64.22.34,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-03 18:33:28",medium,100.64.22.34,tcp,7777,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","+OK i  GoMail V0 POP3"
+"2025-11-03 18:39:03",medium,100.64.22.34,tcp,6002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-03 17:21:55",medium,100.64.221.166,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-03 15:40:02",medium,100.64.224.76,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",||root$
+"2025-11-03 16:09:11",medium,100.64.224.76,tcp,3389,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","No cfingerd.conf file present.  Check your setup.|"
+"2025-11-03 16:22:01",medium,100.64.224.76,tcp,17000,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","A?A1/4A?A>>A?A>>A?A1/2A?A>>A?A1/2A?A>>A?A>>""A?A>>Login:"
+"2025-11-03 16:44:06",medium,100.64.224.76,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-03 16:56:01",medium,100.64.224.76,tcp,4002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","220|220-FileZilla Server version 3U|"
+"2025-11-03 09:19:23",medium,100.64.24.228,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-03 18:00:54",medium,100.64.24.228,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-03 15:40:01",medium,100.64.102.146,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-03 17:09:13",medium,100.64.105.168,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-03 01:57:17",medium,100.64.105.28,tcp,7777,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","220 y.ARK Sendmail ready. |"
+"2025-11-03 02:41:55",medium,100.64.105.28,tcp,2002,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","220 FTP Server 2.1 ready|"
+"2025-11-03 12:19:51",medium,100.64.107.194,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"

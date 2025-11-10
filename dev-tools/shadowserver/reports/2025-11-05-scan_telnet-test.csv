@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","banner"
+"2025-11-05 15:55:31",medium,100.64.110.105,tcp,2323,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",login:
+"2025-11-05 05:43:52",medium,100.64.113.47,tcp,4002,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",9*=(OuDyR>$(U*V29jf^\\;_R|g
+"2025-11-05 00:12:26",medium,100.64.61.89,tcp,23,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",login:
+"2025-11-05 15:54:08",medium,100.64.61.89,tcp,2323,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade","Debian GNU/Linux 7|Login:"
+"2025-11-05 15:52:36",medium,100.64.194.44,tcp,23,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade","Ubuntu 22.04.5 LTS|sgplabs login:"
+"2025-11-05 00:13:19",medium,100.64.139.123,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-05 15:02:27",medium,100.64.139.25,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-05 15:54:02",medium,100.64.139.25,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-05 15:10:02",medium,100.64.203.253,tcp,7777,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","Sorry, you (67.423.051.98) are not among the allowed hosts...|"
+"2025-11-05 03:13:47",medium,100.64.205.45,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-05 12:13:31",medium,100.64.207.54,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-05 15:10:06",medium,100.64.22.186,tcp,7777,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",A?A>>A?A>>A?A1/2|||#
+"2025-11-05 15:19:17",medium,100.64.22.186,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-05 15:54:48",medium,100.64.22.186,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-05 16:00:40",medium,100.64.22.186,tcp,17000,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","h|Listener for x AutoSysAdapter|EOS|Exit Code = 1001|IP <6> is not authorized for this request. Please contact your Web Administrator.|EOS|"
+"2025-11-05 16:01:32",medium,100.64.22.186,tcp,7000,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","h|Listener for x AutoSysAdapter|EOS|Exit Code = 1001|IP <6> is not authorized for this request. Please contact your Web Administrator.|EOS|"
+"2025-11-05 16:04:38",medium,100.64.22.186,tcp,2002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","220 SPAM, we hates it<|"
+"2025-11-05 16:06:41",medium,100.64.22.186,tcp,6002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","220 SPAM, we hates it<|"
+"2025-11-05 16:08:54",medium,100.64.22.186,tcp,9002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","220 SPAM, we hates it<|"
+"2025-11-05 15:02:12",medium,100.64.221.237,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-05 15:49:24",medium,100.64.232.21,tcp,9002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","220 GlobalSCAPE Secure FTP Server|"
+"2025-11-05 15:53:18",medium,100.64.232.21,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","||[root@LocalHost tmp]$"
+"2025-11-05 15:54:57",medium,100.64.232.21,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-05 16:00:40",medium,100.64.232.21,tcp,17000,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",":T NOTICE * :BitlBee-IRCd initialized, please go on|"
+"2025-11-05 16:01:03",medium,100.64.232.21,tcp,7000,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",":T NOTICE * :BitlBee-IRCd initialized, please go on|"

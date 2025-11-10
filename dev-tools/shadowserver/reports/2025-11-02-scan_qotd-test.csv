@@ -1,0 +1,9 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","quote","response_size","amplification"
+"2025-11-02 00:26:49",medium,100.64.136.7,udp,17,,qotd,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade","_Man can climb to the highest summits, but he cannot dwell there long._?? George Bernard Shaw (1856-1950)?",107,107.00
+"2025-11-02 00:12:18",medium,100.64.77.239,udp,17,,qotd,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade","_When a stupid man is doing something he is ashamed of, he always declares?? that it is his duty._ George Bernard Shaw (1856-1950)?",132,132.00
+"2025-11-02 00:40:55",medium,100.64.144.82,udp,17,,qotd,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade","_In Heaven an angel is nobody in particular._ George Bernard Shaw (1856-1950)?",79,79.00
+"2025-11-02 01:21:20",medium,100.64.21.124,udp,17,,qotd,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade","_A wonderful fact to reflect upon, that every human creature is constituted?? to be that profound secret and mystery to every other._?? Charles Dickens (1812-70)?",163,163.00
+"2025-11-02 01:03:08",medium,100.64.83.133,udp,17,,qotd,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",?,1,1.00
+"2025-11-02 00:50:42",medium,100.64.253.217,udp,17,,qotd,81021,IE,DUBLIN,DUBLIN,517810,,"Retail Trade","_A wonderful fact to reflect upon, that every human creature is constituted?? to be that profound secret and mystery to every other._?? Charles Dickens (1812-70)?",163,163.00
+"2025-11-02 00:45:45",medium,100.64.141.91,udp,17,,qotd,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",17:UDP?,7,7.00
+"2025-11-02 01:24:46",medium,100.64.138.44,udp,17,,qotd,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",17:UDP?,7,7.00

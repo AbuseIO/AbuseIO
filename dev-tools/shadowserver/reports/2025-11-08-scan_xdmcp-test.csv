@@ -1,0 +1,12 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","opcode","reported_hostname","status","response_size","amplification"
+"2025-11-08 06:52:17",high,100.64.5.135,udp,177,,xdmcp,78573,CA,ONTARIO,TORONTO,518210,,"Communications, Service Provider, and Hosting Service",Willing,,,17,2.43
+"2025-11-08 06:17:23",high,100.64.102.88,udp,177,,xdmcp,65324,CA,ONTARIO,OTTAWA,517111,,"Communications, Service Provider, and Hosting Service",Willing,,,25,3.57
+"2025-11-08 02:32:32",high,100.64.191.75,udp,177,,xdmcp,119126,CA,ONTARIO,MARKHAM,517112,,Information,Willing,,"0 user,  load: 0.0, 0.0, 0.0",44,6.29
+"2025-11-08 01:58:19",high,100.64.66.1,udp,177,,xdmcp,90180,CA,ALBERTA,EDMONTON,518210,,"Data Processing, Hosting, and Related Services",Willing,,"0 user,  load: 0.0, 0.0, 0.0",45,6.43
+"2025-11-08 02:38:03",high,100.64.66.14,udp,177,,xdmcp,90180,CA,ALBERTA,EDMONTON,518210,,"Data Processing, Hosting, and Related Services",Willing,,"0 user,  load: 0.3, 0.3, 0.4",43,6.14
+"2025-11-08 02:14:38",high,100.64.66.16,udp,177,,xdmcp,90180,CA,ALBERTA,EDMONTON,518210,,"Data Processing, Hosting, and Related Services",Willing,,"0 user,  load: 0.0, 0.0, 0.0",45,6.43
+"2025-11-08 02:32:32",high,100.64.66.250,udp,177,,xdmcp,90180,CA,ALBERTA,EDMONTON,518210,,"Data Processing, Hosting, and Related Services",Willing,,"0 user,  load: 0.4, 0.5, 0.5",43,6.14
+"2025-11-08 02:00:00",high,100.64.66.90,udp,177,,xdmcp,90180,CA,ALBERTA,EDMONTON,518210,,"Data Processing, Hosting, and Related Services",Willing,,"0 user,  load: 0.0, 0.0, 0.0",45,6.43
+"2025-11-08 02:14:30",high,100.64.66.91,udp,177,,xdmcp,90180,CA,ALBERTA,EDMONTON,518210,,"Data Processing, Hosting, and Related Services",Willing,,"0 user,  load: 0.8, 0.7, 0.7",43,6.14
+"2025-11-08 01:59:44",high,100.64.230.82,udp,177,,xdmcp,77831,CA,ONTARIO,STITTSVILLE,517111,,Information,Willing,,,37,5.29
+"2025-11-08 01:23:06",high,100.64.21.115,udp,177,,xdmcp,90180,CA,"BRITISH COLUMBIA",VANCOUVER,518210,,"Data Processing, Hosting, and Related Services",Willing,,"0 user,  load: 0.0, 0.0, 0.0",49,7.00

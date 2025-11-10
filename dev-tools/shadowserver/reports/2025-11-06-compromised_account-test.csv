@@ -1,0 +1,4 @@
+"timestamp","email","infection","source_url","public_source","status","tag","severity","service","username","detail"
+"2025-11-06 00:00:00",user0001@example.com,test,,,,test,info,,,
+"2025-11-06 00:00:01",user0002@example.com,test,,,,test,info,,,
+"2025-11-06 00:00:02",user0003@example.com,test,,,,test,info,,,

@@ -1,0 +1,2 @@
+"timestamp","protocol","src_ip","src_port","src_asn","src_geo","src_region","src_city","src_hostname","src_naics","src_sector","device_vendor","device_type","device_model","severity","dst_ip","dst_port","dst_asn","dst_geo","dst_region","dst_city","dst_hostname","dst_naics","dst_sector","public_source","infection","family","tag","application","version","event_id","network","routedspoof","session","nat"
+"2025-11-02 01:23:19",tcp,100.64.164.0,,4200264978,BR,"RIO GRANDE DO SUL",TRAMANDAI,,,,,,,medium,,,64512,,,,,,,caida,ip-spoofer,,,,ipv4,,170.0.164.0/24,received,2057370,False

@@ -1,0 +1,4 @@
+"timestamp","protocol","src_ip","src_port","src_asn","src_geo","src_region","src_city","src_hostname","src_naics","src_sector","device_vendor","device_type","device_model","severity","infection","family","tag","query_type","query","count"
+"2025-11-02 00:00:00",,192.168.0.1,,64512,ZZ,Region,City,node01.example.com,0,,,,,info,test,,test,,2-1-2-3-2.example.org,
+"2025-11-02 00:00:01",,192.168.0.2,,64512,ZZ,Region,City,node02.example.com,0,,,,,info,test,,test,,2-1-2-3-2.example.org,
+"2025-11-02 00:00:02",,192.168.0.3,,64512,ZZ,Region,City,node03.example.com,0,,,,,info,test,,test,,2-1-2-3-2.example.org,

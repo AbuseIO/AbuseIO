@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","command","vendor","version"
+"2025-11-07 17:27:52",critical,100.64.143.67,tcp,61617,,activemq;cve-2023-46604,81021,UK,LONDON,LONDON,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 15:45:26",critical,100.64.21.31,tcp,61617,,activemq;cve-2023-46604,81021,UK,LONDON,LONDON,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 17:55:13",critical,100.64.106.52,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 17:14:23",critical,100.64.107.194,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 01:45:03",critical,100.64.121.105,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 15:45:21",critical,100.64.123.241,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 15:45:21",critical,100.64.126.36,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 18:09:31",critical,100.64.133.204,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 07:51:10",critical,100.64.134.17,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 17:55:02",critical,100.64.135.164,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 17:28:04",critical,100.64.191.105,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 01:44:35",critical,100.64.62.244,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 13:47:06",critical,100.64.62.50,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 04:49:36",critical,100.64.72.174,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 13:46:57",critical,100.64.81.157,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 04:49:39",critical,100.64.81.213,tcp,61617,,activemq;cve-2023-46604,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 01:44:36",critical,100.64.1.206,tcp,61617,,activemq;cve-2023-46604,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 04:49:24",medium,100.64.19.166,tcp,61616,,activemq,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.3
+"2025-11-07 13:46:26",medium,100.64.24.46,tcp,61616,,activemq,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.3
+"2025-11-07 15:28:27",critical,100.64.65.119,tcp,61617,,activemq;cve-2023-46604,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 15:09:15",medium,100.64.74.42,tcp,61616,,activemq,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.14.5
+"2025-11-07 13:47:08",critical,100.64.131.60,tcp,61617,,activemq;cve-2023-46604,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 07:51:10",critical,100.64.141.46,tcp,61617,,activemq;cve-2023-46604,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 17:14:30",critical,100.64.184.133,tcp,61617,,activemq;cve-2023-46604,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2
+"2025-11-07 17:55:10",critical,100.64.204.72,tcp,61617,,activemq;cve-2023-46604,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",WireFormatInfo,ActiveMQ,5.18.2

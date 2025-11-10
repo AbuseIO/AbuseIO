@@ -1,0 +1,5 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","sequence_number","ack_number","window_size","urgent_pointer","tcp_flags","raw_packet"
+"2025-11-02 06:05:56",critical,100.64.167.94,tcp,80,,synfulknock,69320,CN,"BEIJING SHI",BEIJING,517111,,Information,0,791102,8192,0,4608,
+"2025-11-02 00:02:13",critical,100.64.45.66,tcp,80,,synfulknock,101660,NG,LAGOS,LAGOS,517112,,Information,0,791102,8192,0,4608,
+"2025-11-02 00:01:24",critical,100.64.43.106,tcp,80,,synfulknock,82134,CN,"GUANGDONG SHENG",GUANGZHOU,517111,,Information,0,791102,8192,0,4608,
+"2025-11-02 03:03:33",critical,100.64.44.133,tcp,80,,synfulknock,82134,CN,"GUANGDONG SHENG",GUANGZHOU,517111,,Information,0,791102,8192,0,4608,

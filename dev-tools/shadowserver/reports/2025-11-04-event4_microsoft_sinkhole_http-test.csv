@@ -1,0 +1,4 @@
+"timestamp","protocol","src_ip","src_port","src_asn","src_geo","src_region","src_city","src_hostname","src_naics","src_sector","device_vendor","device_type","device_model","severity","dst_ip","dst_port","dst_asn","dst_geo","dst_region","dst_city","dst_hostname","dst_naics","dst_sector","public_source","infection","family","tag","application","version","event_id","ssl_cipher","ssl_servername"
+"2025-11-04 00:00:00",,192.168.0.1,,64512,ZZ,Region,City,node01.example.com,0,,,,,info,172.16.0.1,,65534,ZZ,Region,City,node01.example.net,0,,,test,,test,,,,,
+"2025-11-04 00:00:01",,192.168.0.2,,64512,ZZ,Region,City,node02.example.com,0,,,,,info,172.16.0.2,,65534,ZZ,Region,City,node02.example.net,0,,,test,,test,,,,,
+"2025-11-04 00:00:02",,192.168.0.3,,64512,ZZ,Region,City,node03.example.com,0,,,,,info,172.16.0.3,,65534,ZZ,Region,City,node03.example.net,0,,,test,,test,,,,,

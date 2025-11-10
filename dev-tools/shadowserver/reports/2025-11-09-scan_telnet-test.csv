@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","banner"
+"2025-11-09 05:44:25",medium,100.64.105.166,tcp,7000,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade","SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.13|"
+"2025-11-09 16:21:17",medium,100.64.110.105,tcp,2323,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",login:
+"2025-11-09 15:44:56",medium,100.64.113.47,tcp,4002,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",9*OD]O!.cwBqfkI+/%t
+"2025-11-09 03:16:10",medium,100.64.194.44,tcp,23,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade","Ubuntu 22.04.5 LTS|sgplabs login:"
+"2025-11-09 17:39:19",medium,100.64.116.238,tcp,830,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","A?A3/4Genetec Integration Service (STUDENT03)||||========================================================================|  Integration Service Main Menu|========================================================================||  1) CONFIG|     Displays the configuration settings for the service||  2) STATUS|     Displays the status of the external systems being run by this|     service.||  ?) Help||  x) Exit|========================================================================|"
+"2025-11-09 18:06:37",medium,100.64.116.238,tcp,4002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-09 05:50:07",medium,100.64.118.158,tcp,6002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","<monopd><server host="""" version=""0""/></monopd>|"
+"2025-11-09 16:21:15",medium,100.64.152.103,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-09 17:54:19",medium,100.64.152.103,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-09 03:17:16",medium,100.64.56.56,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-09 18:07:24",medium,100.64.102.97,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",login:
+"2025-11-09 18:20:43",medium,100.64.102.97,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",login:
+"2025-11-09 15:48:40",medium,100.64.107.194,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",login:
+"2025-11-09 16:05:07",medium,100.64.107.194,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",login:
+"2025-11-09 15:04:46",medium,100.64.108.159,tcp,7777,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","220 D Service ready.|214- Valid commands are:|214- HELO  MAIL  RCPT  DATA  RSET  QUIT  NOOP|214- HELP  VRFY|214- Commands not valid are:|214- SEND  SOML  SAML  TURN|214- Y is running the OS/400 operating system.|"
+"2025-11-09 09:13:23",medium,100.64.110.175,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-09 18:20:45",medium,100.64.110.175,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-09 16:34:19",medium,100.64.113.61,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"
+"2025-11-09 17:00:42",medium,100.64.113.61,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"
+"2025-11-09 17:27:52",medium,100.64.121.128,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"
+"2025-11-09 06:14:33",medium,100.64.133.117,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-09 14:56:20",medium,100.64.69.38,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-09 15:32:06",medium,100.64.69.38,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-09 05:50:23",medium,100.64.80.126,tcp,9002,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",p|lA?A?A1/40a
+"2025-11-09 16:33:48",medium,100.64.80.75,tcp,3389,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","lpd: Host name for your address (4.0.4.2) unknown|"

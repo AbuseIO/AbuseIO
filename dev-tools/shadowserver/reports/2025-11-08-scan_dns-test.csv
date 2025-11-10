@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","dns_version","min_amplification"
+"2025-11-08 10:34:43",medium,100.64.127.157,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-08 10:57:46",medium,100.64.68.170,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-08 11:04:01",medium,100.64.94.88,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-08 10:52:53",medium,100.64.13.235,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.64
+"2025-11-08 10:24:40",medium,100.64.17.228,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",dnsmasq-2.90,1.38
+"2025-11-08 11:02:12",medium,100.64.140.105,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-08 11:06:50",medium,100.64.142.95,udp,53,,openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-08 11:06:17",medium,100.64.143.67,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-08 10:49:04",medium,100.64.19.35,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-08 10:29:46",medium,100.64.202.184,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",3.10.202.184,4.79
+"2025-11-08 10:12:34",medium,100.64.205.49,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-08 09:26:35",medium,100.64.221.114,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-08 11:01:46",medium,100.64.227.191,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-08 11:08:52",medium,100.64.64.217,udp,53,,openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-08 11:06:36",medium,100.64.65.124,udp,53,,openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-08 10:25:21",medium,100.64.107.194,udp,53,,bogusresolver;openresolver,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",,1.38
+"2025-11-08 10:44:32",medium,100.64.109.228,udp,53,,bogusresolver;openresolver,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",,1.38
+"2025-11-08 10:27:44",medium,100.64.110.175,udp,53,,bogusresolver;openresolver,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",,1.38
+"2025-11-08 10:57:40",medium,100.64.31.214,udp,53,,bogusresolver;openresolver,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",,6.43
+"2025-11-08 09:30:49",medium,100.64.73.133,udp,53,,bogusresolver;openresolver,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",,1.38
+"2025-11-08 10:30:09",medium,100.64.73.77,udp,53,,bogusresolver;openresolver,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",,1.38
+"2025-11-08 10:35:53",medium,100.64.85.53,udp,53,,bogusresolver;openresolver,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",,1.38
+"2025-11-08 10:56:01",medium,100.64.124.238,udp,53,,bogusresolver;openresolver,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",,1.38
+"2025-11-08 10:04:06",medium,100.64.55.57,udp,53,,bogusresolver;openresolver,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",,1.38
+"2025-11-08 10:42:56",medium,100.64.65.109,udp,53,,bogusresolver;openresolver,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",,1.38

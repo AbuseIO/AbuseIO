@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","source_port","bytes","amplification","method"
+"2025-11-05 17:42:51",medium,100.64.117.43,tcp,80,,ddos-middlebox,87507,CA,ONTARIO,TORONTO,517111,,"Communications, Service Provider, and Hosting Service",52464,131,3.2,SYN+ACK:PSH
+"2025-11-05 18:25:02",medium,100.64.119.36,tcp,80,,ddos-middlebox,87507,CA,QUEBEC,MONTREAL,517111,,"Communications, Service Provider, and Hosting Service",34659,131,3.2,SYN+ACK:PSH
+"2025-11-05 06:44:17",medium,100.64.125.215,tcp,80,,ddos-middlebox,87507,CA,ONTARIO,TORONTO,517111,,"Communications, Service Provider, and Hosting Service",33337,131,3.2,SYN+ACK:PSH
+"2025-11-05 06:44:08",medium,100.64.125.228,tcp,80,,ddos-middlebox,87507,CA,ONTARIO,TORONTO,517111,,"Communications, Service Provider, and Hosting Service",50867,131,3.2,SYN+ACK:PSH
+"2025-11-05 18:25:07",medium,100.64.127.164,tcp,80,,ddos-middlebox,87507,CA,QUEBEC,MONTREAL,517111,,"Communications, Service Provider, and Hosting Service",37832,131,3.2,SYN+ACK:PSH
+"2025-11-05 18:04:34",medium,100.64.116.120,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",40704,131,3.2,SYN+ACK:PSH
+"2025-11-05 12:42:25",medium,100.64.116.158,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",33262,131,3.2,SYN+ACK:PSH
+"2025-11-05 16:15:40",medium,100.64.116.190,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",34982,131,3.2,SYN+ACK:PSH
+"2025-11-05 17:09:57",medium,100.64.116.210,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",37647,131,3.2,SYN+ACK:PSH
+"2025-11-05 17:20:12",medium,100.64.116.44,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",42489,131,3.2,SYN+ACK:PSH
+"2025-11-05 15:24:50",medium,100.64.118.10,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",40236,131,3.2,SYN+ACK:PSH
+"2025-11-05 03:39:27",medium,100.64.118.105,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",40383,131,3.2,SYN+ACK:PSH
+"2025-11-05 00:44:59",medium,100.64.118.116,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",40951,131,3.2,SYN+ACK:PSH
+"2025-11-05 15:41:34",medium,100.64.118.123,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",33240,131,3.2,SYN+ACK:PSH
+"2025-11-05 18:04:13",medium,100.64.118.127,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",40783,131,3.2,SYN+ACK:PSH
+"2025-11-05 03:39:34",medium,100.64.118.129,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",38280,131,3.2,SYN+ACK:PSH
+"2025-11-05 18:25:01",medium,100.64.118.131,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",38074,131,3.2,SYN+ACK:PSH
+"2025-11-05 06:44:22",medium,100.64.118.141,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",59913,131,3.2,SYN+ACK:PSH
+"2025-11-05 17:20:03",medium,100.64.118.158,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",59519,131,3.2,SYN+ACK:PSH
+"2025-11-05 18:24:55",medium,100.64.118.18,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",55390,131,3.2,SYN+ACK:PSH
+"2025-11-05 15:41:28",medium,100.64.118.180,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",59680,131,3.2,SYN+ACK:PSH
+"2025-11-05 17:42:49",medium,100.64.118.185,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",45811,131,3.2,SYN+ACK:PSH
+"2025-11-05 17:42:51",medium,100.64.118.21,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",46175,131,3.2,SYN+ACK:PSH
+"2025-11-05 17:43:09",medium,100.64.118.25,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",39948,131,3.2,SYN+ACK:PSH
+"2025-11-05 12:42:07",medium,100.64.118.33,tcp,80,,ddos-middlebox,87507,CA,ALBERTA,CALGARY,517111,,"Communications, Service Provider, and Hosting Service",35718,131,3.2,SYN+ACK:PSH

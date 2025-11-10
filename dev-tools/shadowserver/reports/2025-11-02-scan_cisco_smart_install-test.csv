@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector"
+"2025-11-02 17:49:25",critical,100.64.34.72,tcp,4786,,cisco-smart-install,4200394352,CA,MANITOBA,WINNIPEG,,,
+"2025-11-02 12:27:32",critical,100.64.130.231,tcp,4786,,cisco-smart-install,78573,CA,ONTARIO,TORONTO,518210,,"Communications, Service Provider, and Hosting Service"
+"2025-11-02 16:02:55",critical,100.64.133.178,tcp,4786,,cisco-smart-install,65089,CA,ONTARIO,ETOBICOKE,517111,,"Communications, Service Provider, and Hosting Service"
+"2025-11-02 16:18:28",critical,100.64.163.17,tcp,4786,,cisco-smart-install,4200395768,CA,ONTARIO,MISSISSAUGA,,,
+"2025-11-02 16:18:26",critical,100.64.163.25,tcp,4786,,cisco-smart-install,4200395768,CA,ONTARIO,MISSISSAUGA,,,
+"2025-11-02 06:31:43",critical,100.64.46.50,tcp,4786,,cisco-smart-install,81208,CA,ALBERTA,DRUMHELLER,449210,,"Retail Trade"
+"2025-11-02 17:11:06",critical,100.64.120.140,tcp,4786,,cisco-smart-install,65364,CA,ALBERTA,EDMONTON,517111,,"Communications, Service Provider, and Hosting Service"
+"2025-11-02 17:36:50",critical,100.64.100.253,tcp,4786,,cisco-smart-install,81208,CA,"BRITISH COLUMBIA",SURREY,449210,,"Retail Trade"
+"2025-11-02 17:36:49",critical,100.64.40.106,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 15:11:32",critical,100.64.40.110,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 16:33:27",critical,100.64.40.114,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 17:11:11",critical,100.64.40.12,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 16:46:25",critical,100.64.40.120,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 17:36:51",critical,100.64.40.148,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 03:27:49",critical,100.64.40.150,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 16:18:30",critical,100.64.40.161,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 17:23:50",critical,100.64.40.177,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 16:46:21",critical,100.64.40.193,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 15:29:35",critical,100.64.40.196,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 06:32:22",critical,100.64.40.216,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 18:16:00",critical,100.64.40.229,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 16:46:21",critical,100.64.40.250,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 18:02:08",critical,100.64.40.80,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 12:27:43",critical,100.64.40.86,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,
+"2025-11-02 17:23:45",critical,100.64.40.88,tcp,4786,,cisco-smart-install,96426,CA,MANITOBA,"PORTAGE LA PRAIRIE",,,

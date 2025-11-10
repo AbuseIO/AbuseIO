@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","banner"
+"2025-11-07 16:52:27",medium,100.64.101.94,tcp,830,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade","SSH-2.0-OpenSSH_9.7 with CVE-2024-6387,CVE-2024-39894 fixes|"
+"2025-11-07 16:10:57",medium,100.64.110.105,tcp,23,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",login:
+"2025-11-07 17:48:51",medium,100.64.110.105,tcp,2323,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",login:
+"2025-11-07 17:06:17",medium,100.64.113.47,tcp,4002,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade","9*|ky-t""I C3:(A""\\hOZXE~"
+"2025-11-07 06:13:43",medium,100.64.184.141,tcp,23,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade","Warning: Telnet is not a secure protocol, and it is recommended to use STelnet."
+"2025-11-07 02:44:01",medium,100.64.109.252,tcp,2002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","PPCC5VRO[apostrophe]#sE1Z.A-n&_i XsL~m"
+"2025-11-07 02:44:01",medium,100.64.139.159,tcp,2002,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","220 ESMTP Mail Enable SMTP Service, Version: 3N-- ready at"
+"2025-11-07 16:10:44",medium,100.64.143.67,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",login:
+"2025-11-07 16:40:49",medium,100.64.143.67,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade",||root$
+"2025-11-07 06:13:02",medium,100.64.19.71,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-07 15:01:38",medium,100.64.21.31,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-07 15:20:18",medium,100.64.226.39,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-07 03:12:33",medium,100.64.235.135,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-07 18:42:47",medium,100.64.235.181,tcp,3389,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","A?A>>A?A>>A?A>>Error2 negotiated with client 18 and get 1 char is a a d.VOIP CPE firmware VG112-D51(S) V1"
+"2025-11-07 17:42:00",medium,100.64.24.245,tcp,7777,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-07 17:59:07",medium,100.64.24.245,tcp,17000,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","sysrqd password:"
+"2025-11-07 16:26:56",medium,100.64.101.14,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-07 15:54:48",medium,100.64.105.50,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"
+"2025-11-07 16:11:10",medium,100.64.105.50,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"
+"2025-11-07 16:26:51",medium,100.64.107.194,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-07 16:54:06",medium,100.64.107.194,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-07 09:16:04",medium,100.64.109.14,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","||[root@LocalHost tmp]$"
+"2025-11-07 17:07:55",medium,100.64.110.175,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"
+"2025-11-07 18:02:24",medium,100.64.110.175,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","||[root@localhost ~]$"
+"2025-11-07 16:52:24",medium,100.64.117.5,tcp,830,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",SSH-2.0-OpenSSH_8.2|

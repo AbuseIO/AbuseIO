@@ -1,0 +1,4 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","db2_hostname","servername","response_size","amplification"
+"2025-11-04 05:22:38",high,100.64.69.131,udp,523,,db2,100863,CA,QUEBEC,MONTREAL,518210,,"Communications, Service Provider, and Hosting Service",,lcbob2b,298,14.90
+"2025-11-04 05:21:26",high,100.64.69.132,udp,523,,db2,100863,CA,QUEBEC,MONTREAL,518210,,"Communications, Service Provider, and Hosting Service",,lcbob2b,298,14.90
+"2025-11-04 05:31:40",high,100.64.69.133,udp,523,,db2,100863,CA,QUEBEC,MONTREAL,518210,,"Communications, Service Provider, and Hosting Service",,lcbob2b,298,14.90

@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","response","response_size","amplification"
+"2025-11-05 11:45:59",critical,100.64.241.250,udp,53413,,netis_vulnerability,67974,TW,"TAICHUNG CITY",TAICHUNG,517111,,"Communications, Service Provider, and Hosting Service",Login:,18,18.00
+"2025-11-05 11:12:31",critical,100.64.107.55,udp,53413,,netis_vulnerability,67974,TW,"KAOHSIUNG CITY",KAOHSIUNG,517111,,"Communications, Service Provider, and Hosting Service",Login:,18,18.00
+"2025-11-05 11:31:31",critical,100.64.131.252,udp,53413,,netis_vulnerability,69349,CN,"HEILONGJIANG SHENG",HARBIN,517111,,Information,Login:,18,18.00
+"2025-11-05 11:48:49",critical,100.64.162.39,udp,53413,,netis_vulnerability,69349,CN,"HEILONGJIANG SHENG",HARBIN,517111,,Information,Login:,18,18.00
+"2025-11-05 10:15:51",critical,100.64.244.198,udp,53413,,netis_vulnerability,69349,CN,"HEILONGJIANG SHENG",HARBIN,517111,,Information,Login:,18,18.00
+"2025-11-05 10:32:18",critical,100.64.145.188,udp,53413,,netis_vulnerability,69349,CN,"HEILONGJIANG SHENG",HARBIN,517111,,Information,Login:,18,18.00
+"2025-11-05 10:33:01",critical,100.64.253.40,udp,53413,,netis_vulnerability,69349,CN,"HEILONGJIANG SHENG",HARBIN,517111,,Information,Login:,18,18.00
+"2025-11-05 07:56:29",critical,100.64.103.189,udp,53413,,netis_vulnerability,102475,CN,"SHANGHAI SHI",SHANGHAI,518210,,"Data Processing, Hosting, and Related Services",Login:,17,17.00
+"2025-11-05 08:25:44",critical,100.64.137.218,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",SHIJIAZHUANG,517111,,Information,Login:,18,18.00
+"2025-11-05 08:28:04",critical,100.64.253.208,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",SHIJIAZHUANG,517111,,Information,Login:,18,18.00
+"2025-11-05 08:45:38",critical,100.64.120.100,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",BAODING,517111,,Information,Login:,18,18.00
+"2025-11-05 08:07:31",critical,100.64.45.38,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",XINGTAI,517111,,Information,Login:,18,18.00
+"2025-11-05 08:28:15",critical,100.64.152.171,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",HANDAN,517111,,Information,Login:,18,18.00
+"2025-11-05 07:53:51",critical,100.64.108.68,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",XINGTAI,517111,,Information,Login:,18,18.00
+"2025-11-05 07:29:18",critical,100.64.53.198,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",XINGTAI,517111,,Information,Login:,18,18.00
+"2025-11-05 08:47:31",critical,100.64.114.36,udp,53413,,netis_vulnerability,69349,CN,"ZHEJIANG SHENG",WENZHOU,517111,,Information,Login:,18,18.00
+"2025-11-05 08:00:18",critical,100.64.224.79,udp,53413,,netis_vulnerability,102475,CN,"SHANGHAI SHI",SHANGHAI,518210,,"Data Processing, Hosting, and Related Services",Login:,17,17.00
+"2025-11-05 07:27:02",critical,100.64.51.188,udp,53413,,netis_vulnerability,68646,CN,"JILIN SHENG",CHANGCHUN,517111,,Information,Login:,18,18.00
+"2025-11-05 08:12:04",critical,100.64.178.92,udp,53413,,netis_vulnerability,76901,RU,"KURSKAYA OBLAST",KURSK,517111,,Information,Login:,18,18.00
+"2025-11-05 08:22:03",critical,100.64.78.203,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",BAODING,517111,,Information,Login:,18,18.00
+"2025-11-05 07:35:18",critical,100.64.112.177,udp,53413,,netis_vulnerability,4200136907,TH,"KRUNG THEP MAHA NAKHON BANGKOK",BANGKOK,517121,,"Communications, Service Provider, and Hosting Service",Login:,17,17.00
+"2025-11-05 07:28:14",critical,100.64.119.58,udp,53413,,netis_vulnerability,4200136907,TH,"KRUNG THEP MAHA NAKHON BANGKOK",BANGKOK,517121,,"Communications, Service Provider, and Hosting Service",Login:,17,17.00
+"2025-11-05 08:25:48",critical,100.64.241.41,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",SHIJIAZHUANG,517111,,Information,Login:,18,18.00
+"2025-11-05 08:45:22",critical,100.64.163.63,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",CANGZHOU,517111,,Information,Login:,18,18.00
+"2025-11-05 07:32:59",critical,100.64.22.45,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",SHIJIAZHUANG,517111,,Information,Login:,18,18.00

@@ -1,0 +1,9 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","quote","response_size","amplification"
+"2025-11-08 00:43:01",medium,100.64.136.7,udp,17,,qotd,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade","_We want a few mad people now. See where the sane ones have landed us!_?? George Bernard Shaw (1856-1950)?",107,107.00
+"2025-11-08 01:29:01",medium,100.64.77.239,udp,17,,qotd,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade","_In Heaven an angel is nobody in particular._ George Bernard Shaw (1856-1950)?",79,79.00
+"2025-11-08 00:25:16",medium,100.64.144.82,udp,17,,qotd,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade","_When a stupid man is doing something he is ashamed of, he always declares?? that it is his duty._ George Bernard Shaw (1856-1950)?",132,132.00
+"2025-11-08 01:33:46",medium,100.64.21.124,udp,17,,qotd,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade","_My spelling is Wobbly.  It's good spelling but it Wobbles, and the letters?? get in the wrong places._ A. A. Milne (1882-1958)?",129,129.00
+"2025-11-08 01:18:59",medium,100.64.83.133,udp,17,,qotd,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",?,1,1.00
+"2025-11-08 00:12:16",medium,100.64.253.217,udp,17,,qotd,81021,IE,DUBLIN,DUBLIN,517810,,"Retail Trade","_Here's the rule for bargains: _Do other men, for they would do you._?? That's the true business precept._ Charles Dickens (1812-70)?",134,134.00
+"2025-11-08 00:39:30",medium,100.64.141.91,udp,17,,qotd,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",17:UDP?,7,7.00
+"2025-11-08 01:01:32",medium,100.64.138.44,udp,17,,qotd,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",17:UDP?,7,7.00

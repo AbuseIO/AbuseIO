@@ -1,0 +1,9 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","version","servername","url"
+"2025-11-04 06:08:16",critical,100.64.74.216,tcp,443,,eol;exchange,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",14.3.210.2,,
+"2025-11-04 06:10:18",critical,100.64.122.92,tcp,443,,cve-2023-36439;cve-2023-36745;cve-2024-26198;cve-2025-53786;exchange,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",15.2.1258.12,EXCHANGENODE1,
+"2025-11-04 03:10:28",critical,100.64.226.0,tcp,443,,cve-2022-41082;cve-2023-21529;cve-2023-36439;cve-2023-36745;cve-2024-21410;cve-2024-26198;cve-2025-53786;exchange,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",15.1.2507.6,CBAWSOHEXCH02A,
+"2025-11-04 00:05:41",critical,100.64.101.111,tcp,443,,cve-2023-21529;cve-2024-26198;cve-2025-53786;exchange,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",15.1.2375.34,RYMSAXG05,
+"2025-11-04 03:06:46",critical,100.64.85.55,tcp,443,,cve-2023-21529;cve-2023-36439;cve-2023-36745;cve-2024-26198;cve-2025-53786;exchange,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",15.2.1118.20,EX04,
+"2025-11-04 06:01:42",critical,100.64.250.92,tcp,443,,cve-2024-26198;cve-2025-53786;exchange,81021,IE,DUBLIN,DUBLIN,517810,,"Retail Trade",15.2.1544.4,EC2AMAZ-4B5OGTE,
+"2025-11-04 09:06:15",critical,100.64.76.214,tcp,443,,cve-2025-53786;exchange,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",15.2.1258.38,EXCH2019,
+"2025-11-04 12:13:53",critical,100.64.73.253,tcp,443,,cve-2024-26198;cve-2025-53786;exchange,81021,CA,QUEBEC,MONTREAL,517810,,"Retail Trade",15.2.1118.40,ITCEXC1A,

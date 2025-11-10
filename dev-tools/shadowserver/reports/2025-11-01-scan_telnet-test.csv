@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","banner"
+"2025-11-01 06:13:29",medium,100.64.110.105,tcp,2323,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",login:
+"2025-11-01 15:52:24",medium,100.64.113.47,tcp,4002,,telnet,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",9*H{!c*|UNRU++3RZ;Ii[apostrophe]*Ro9-A
+"2025-11-01 18:11:13",medium,100.64.154.222,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-01 17:45:09",medium,100.64.154.52,tcp,2323,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-01 06:13:06",medium,100.64.221.253,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","(none) login:"
+"2025-11-01 16:52:41",medium,100.64.24.228,tcp,23,,telnet,81021,UK,LONDON,LONDON,517810,,"Retail Trade","LocalHost login:"
+"2025-11-01 18:23:52",medium,100.64.102.116,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-01 16:11:32",medium,100.64.107.194,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-01 17:18:15",medium,100.64.107.194,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-01 17:31:43",medium,100.64.110.175,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-01 18:11:23",medium,100.64.110.175,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-01 15:39:55",medium,100.64.112.36,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-01 15:55:36",medium,100.64.112.36,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-01 03:11:20",medium,100.64.120.92,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",login:
+"2025-11-01 16:11:32",medium,100.64.120.92,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"
+"2025-11-01 17:58:17",medium,100.64.126.52,tcp,23,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",login:
+"2025-11-01 18:11:22",medium,100.64.126.52,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",login:
+"2025-11-01 06:13:22",medium,100.64.132.25,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","(none) login:"
+"2025-11-01 08:35:10",medium,100.64.133.180,tcp,830,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",A?Al
+"2025-11-01 08:40:11",medium,100.64.133.180,tcp,6002,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","+OK Samsung Contact POP3 interface ready on: l|"
+"2025-11-01 03:13:08",medium,100.64.190.141,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","LocalHost login:"
+"2025-11-01 03:13:13",medium,100.64.33.11,tcp,2323,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",login:
+"2025-11-01 17:43:50",medium,100.64.33.134,tcp,2002,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","220 kingate(W-win32) ftp proxy ready|"
+"2025-11-01 18:22:58",medium,100.64.33.134,tcp,6002,,telnet,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","220 kingate(W-win32) ftp proxy ready|"
+"2025-11-01 06:12:42",medium,100.64.41.149,tcp,23,,"telnet,iot",81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade","|MikroTik v6.44.3 (stable)|Login:"

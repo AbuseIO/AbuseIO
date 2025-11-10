@@ -1,0 +1,13 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","response_size","amplification"
+"2025-11-04 00:18:24",medium,100.64.136.7,udp,19,,chargen,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",5700,5700.00
+"2025-11-04 00:16:36",medium,100.64.200.209,udp,19,,chargen,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",1024,1024.00
+"2025-11-04 01:18:16",medium,100.64.77.239,udp,19,,chargen,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",6842,6842.00
+"2025-11-04 00:49:48",medium,100.64.144.82,udp,19,,chargen,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",346,346.00
+"2025-11-04 00:51:03",medium,100.64.21.124,udp,19,,chargen,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",5492,5492.00
+"2025-11-04 00:51:11",medium,100.64.130.0,udp,19,,chargen,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",1024,1024.00
+"2025-11-04 00:43:04",medium,100.64.253.217,udp,19,,chargen,81021,IE,DUBLIN,DUBLIN,517810,,"Retail Trade",3525,3525.00
+"2025-11-04 00:58:12",medium,100.64.193.225,udp,19,,chargen,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",1024,1024.00
+"2025-11-04 00:30:44",medium,100.64.235.225,udp,19,,chargen,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",1024,1024.00
+"2025-11-04 00:25:59",medium,100.64.29.95,udp,19,,chargen,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",1024,1024.00
+"2025-11-04 00:56:34",medium,100.64.243.162,udp,19,,chargen,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",1024,1024.00
+"2025-11-04 01:15:54",medium,100.64.151.198,udp,19,,chargen,81021,CA,QUEBEC,MONTREAL,517810,,"Retail Trade",1024,1024.00
