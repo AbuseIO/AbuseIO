@@ -1,20 +1,24 @@
 #!/usr/bin/env php
 <?php
+
 declare(strict_types=1);
 
 error_reporting(E_ALL);
 
-function stderr(string $msg): void { fwrite(STDERR, $msg); }
+function stderr(string $msg): void
+{
+    fwrite(STDERR, $msg);
+}
 
 // Resolve project root (/opt/abuseio) from dev-tools
-$root = realpath(__DIR__ . '/..');
+$root = realpath(__DIR__.'/..');
 if ($root === false) {
     stderr("Failed to resolve project root from dev-tools\n");
     exit(1);
 }
 
 // Load English classifications definitions (canonical keys + aliases)
-$classFile = $root . '/resources/lang/en/classifications.php';
+$classFile = $root.'/resources/lang/en/classifications.php';
 if (!is_file($classFile)) {
     stderr("Missing classifications file: $classFile\n");
     exit(1);
@@ -28,13 +32,13 @@ if (!is_array($definitions)) {
 
 $defined = [];
 foreach ($definitions as $canonKey => $entry) {
-    $canon = strtoupper(trim((string)$canonKey));
+    $canon = strtoupper(trim((string) $canonKey));
     if ($canon !== '') {
         $defined[$canon] = $canon; // map to itself
     }
     if (is_array($entry) && isset($entry['aliases']) && is_array($entry['aliases'])) {
         foreach ($entry['aliases'] as $alias) {
-            $a = strtoupper(trim((string)$alias));
+            $a = strtoupper(trim((string) $alias));
             if ($a !== '') {
                 $defined[$a] = $canon; // alias maps to canonical
             }
@@ -43,9 +47,11 @@ foreach ($definitions as $canonKey => $entry) {
 }
 
 // Scan parser configs: vendor/abuseio/parser-*/config/*.php
-$pattern = $root . '/vendor/abuseio/parser-*/config/*.php';
+$pattern = $root.'/vendor/abuseio/parser-*/config/*.php';
 $files = glob($pattern, GLOB_NOSORT);
-if ($files === false) { $files = []; }
+if ($files === false) {
+    $files = [];
+}
 
 $usedClasses = []; // class => list of occurrences
 $feedCount = 0;
@@ -62,21 +68,31 @@ foreach ($files as $file) {
         }
     }
     $cfg = require $file;
-    if (!is_array($cfg)) { continue; }
+    if (!is_array($cfg)) {
+        continue;
+    }
     $feeds = $cfg['feeds'] ?? null;
-    if (!is_array($feeds)) { continue; }
+    if (!is_array($feeds)) {
+        continue;
+    }
     $parserCount[$parser] = true;
     foreach ($feeds as $feedName => $feedCfg) {
         $feedCount++;
-        if (!is_array($feedCfg)) { continue; }
+        if (!is_array($feedCfg)) {
+            continue;
+        }
         $class = $feedCfg['class'] ?? null;
-        if (!is_string($class) || $class === '') { continue; }
+        if (!is_string($class) || $class === '') {
+            continue;
+        }
         $norm = strtoupper(trim($class));
-        if ($norm === '') { continue; }
+        if ($norm === '') {
+            continue;
+        }
         $usedClasses[$norm][] = [
-            'parser' => $parser,
-            'feed' => (string)$feedName,
-            'file' => substr($file, strlen($root)+1),
+            'parser'  => $parser,
+            'feed'    => (string) $feedName,
+            'file'    => substr($file, strlen($root) + 1),
             'enabled' => $feedCfg['enabled'] ?? null,
         ];
     }
@@ -97,23 +113,25 @@ foreach ($uniqueUsed as $class) {
 $numParsers = count($parserCount);
 echo "Parser classification audit\n";
 echo "- Project root: $root\n";
-echo "- Parser config files: " . count($files) . "\n";
+echo '- Parser config files: '.count($files)."\n";
 echo "- Parsers found: $numParsers\n";
 echo "- Feeds scanned: $feedCount\n";
-echo "- Unique classes used: " . count($uniqueUsed) . "\n";
-echo "- Classes defined (including aliases): " . count($defined) . "\n";
-echo "- Missing class definitions: " . count($missing) . "\n\n";
+echo '- Unique classes used: '.count($uniqueUsed)."\n";
+echo '- Classes defined (including aliases): '.count($defined)."\n";
+echo '- Missing class definitions: '.count($missing)."\n\n";
 
 if (!empty($missing)) {
     echo "Missing classifications (used by parsers but not defined in resources/lang/en/classifications.php):\n";
     foreach ($missing as $class => $occurrences) {
-        echo "  - $class (" . count($occurrences) . " occurrences)\n";
+        echo "  - $class (".count($occurrences)." occurrences)\n";
         // Show up to 5 occurrences for quick context
         $shown = 0;
         foreach ($occurrences as $occ) {
-            echo "      parser=" . $occ['parser'] . ", feed=" . $occ['feed'] . ", file=" . $occ['file'] . "\n";
+            echo '      parser='.$occ['parser'].', feed='.$occ['feed'].', file='.$occ['file']."\n";
             $shown++;
-            if ($shown >= 5) { break; }
+            if ($shown >= 5) {
+                break;
+            }
         }
     }
 } else {
