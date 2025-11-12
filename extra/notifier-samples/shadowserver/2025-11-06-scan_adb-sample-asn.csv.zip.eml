@@ -1,0 +1,44 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <86575e49a95c16799797e7c261e42ad7@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_86575e49a95c16799797e7c261e42ad7"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_adb-sample Report: 2025-11-06
+
+--b1_86575e49a95c16799797e7c261e42ad7
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_86575e49a95c16799797e7c261e42ad7
+Content-Type: application/octet-stream; name="2025-11-06-scan_adb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan_adb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalua0TgTegIAAFcRAAAiAAAAMjAyNS0xMS0wNi1zY2FuX2FkYi1zYW1wbGUt
+YXNuLmNzds2X32+bMBDH3/dXRDw7ls/G2PgNrWnXrSVSaVT1KWLES5BIyMCN2v9+R/pj2eZKm4YE
+PNh3QPAn5/PX58CVW9u6fLsPSNDag21K94Rm2fn7pnZ1UVedWTcOu03dul2+tWi6fI1t3u6wXdsa
+28auy7pzi+dv7PKyaE9+tGzrh6awx4EKVzdorOyhLOzyYHerU9897e1Pb1uvbHX6ctM+j/Ny4+1r
+L2S/vo/GN5u7h8a2wYeAMy6nAFMWTUAawQyEASnwT5dFXhFgjEYhhVBQERJX7InEi5B89ZVoYBzI
+4gu5mqdn8/S1k6DwCSHBjXV5WU1um3yFYx4vjGtTOfv4SLLr6UUcsfPXWxij7apz3PLASbuxVYXG
+b3yR4bER2sOngMYwOB83AhHVn3ycCRr9P96WIdnF7fQyFoyh95dBY2B45IHiFDgMRKWN4IYxH1VI
+EWYEUymNDH18kvIRrARcrAAePCEQcQR8EhE90wsMKMA7UpKRj8nV5fn8Jr1MSJAl6eTzPJsF/Wef
+Mkx7sw+YohD3iLexTf0do/ZQkCy5zhbpxfQYUMGSt2e5c/9ALXzUupOYgYOqDcfdwyM0AAwVWo5i
+zsGHJ2nIB6aTJoyMiD10XNFYjzMh31WhSGNOsnFCP0fas0kr3A/VSJe+7pI39Cx9hZIfDr7wEU56
+0kBrKvSYtdS3A/Buj/fLQbIgQTq7m2Tzxe2nyV1yNcsCkt2fpbP73qPKGBZt/mJXAI1Yr4D9iwL3
+HSI45mo0YvCuZvGBx11d1W9K9FKeSk/9JyXtOXv7FV88YfpOSAARxliNFbxbjRhwX3EjNXaDy0Un
+aMpIXwGhsPoK9cDZ+wNQSwECPwMUAAIACAA8sWpbmtE4E3oCAABXEQAAIgAAAAAAAAAAAAAAtoEA
+AAAAMjAyNS0xMS0wNi1zY2FuX2FkYi1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFAAAAC6AgAA
+AAA=
+
+
+--b1_86575e49a95c16799797e7c261e42ad7--

@@ -1,0 +1,10 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","sequence_number","ack_number","window_size","urgent_pointer","tcp_flags","raw_packet"
+"2025-11-08 08:56:57",critical,100.64.167.94,tcp,80,,synfulknock,69320,CN,"BEIJING SHI",BEIJING,517111,,Information,0,791102,8192,0,4608,
+"2025-11-08 11:53:20",critical,100.64.45.66,tcp,80,,synfulknock,101660,NG,DELTA,WARRI,517112,,Information,0,791102,8192,0,4608,
+"2025-11-08 11:53:26",critical,100.64.134.190,tcp,80,,synfulknock,82069,PK,"SINDH - SOUTH",KARACHI,518210,,Government,0,791102,8192,0,4608,
+"2025-11-08 08:56:59",critical,100.64.43.106,tcp,80,,synfulknock,82134,CN,"GUANGDONG SHENG",GUANGZHOU,517111,,Information,0,791102,8192,0,4608,
+"2025-11-08 00:01:45",critical,100.64.107.154,tcp,80,,synfulknock,85440,EG,"AL QAHIRAH",CAIRO,,,,0,791102,8192,0,4608,
+"2025-11-08 05:53:30",critical,100.64.203.52,tcp,80,,synfulknock,74069,PK,"SINDH - SOUTH",KARACHI,517111,,Government,0,791102,8192,0,4608,
+"2025-11-08 08:57:10",critical,100.64.190.217,tcp,80,,synfulknock,98079,LS,MASERU,MASERU,,,,0,791102,8192,0,4608,
+"2025-11-08 05:53:21",critical,100.64.190.98,tcp,80,,synfulknock,98079,LS,MASERU,MASERU,,,,0,791102,8192,0,4608,
+"2025-11-08 02:57:13",critical,100.64.44.133,tcp,80,,synfulknock,82134,CN,"GUANGDONG SHENG",GUANGZHOU,517111,,Information,0,791102,8192,0,4608,

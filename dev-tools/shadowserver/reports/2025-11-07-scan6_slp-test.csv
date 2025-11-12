@@ -1,0 +1,2 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","version","function","function_text","flags","next_extension_offset","xid","language_tag_length","language_tag","error_code","error_code_text","response_size","raw_response"
+"2025-11-07 13:51:04",high,2001:db8:203:6f9b::1001,tcp,427,,slp,80788,CA,QUEBEC,MONTREAL,518210,,"Communications, Service Provider, and Hosting Service",2,2,"Service reply",0x0000,0,5,2,en,50,"Unknown SRVLOC Error",40,

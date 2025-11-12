@@ -1,0 +1,42 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <5b75cb0d1b4608bffd40ed3fbc550120@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_5b75cb0d1b4608bffd40ed3fbc550120"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_dns-sample Report: 2025-11-09
+
+--b1_5b75cb0d1b4608bffd40ed3fbc550120
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_5b75cb0d1b4608bffd40ed3fbc550120
+Content-Type: application/octet-stream; name="2025-11-09-scan_dns-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_dns-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsGbi4iLAIAAMQMAAAiAAAAMjAyNS0xMS0wOS1zY2FuX2Rucy1zYW1wbGUt
+YXNuLmNzdr1WTY+bMBC991dEnL2WZ4wNeE/RNl2ljUiVbM8RS2iKFHDER6X++w5drZTGNGo261z8
+AcLvzczzG4KurIq2y6pDwIK2+Fk0ZfeLluWwPzS2s7ndD0vbdDT9sG1XZ1VByy7b0Zi1NY27wtLY
+FLvSDtv85Yw6K/P26KNNa/smL/4A5Z1taLGt2w1hti/fVWW9ISb78nuZZ93w7EOAAtUdwJ1IJgBG
+okEdsKrYln3FQAiuQw4YcVAR67cHpiRj9lDUTdHaPZ3MYhAIbP3IHmbp02q6YOt5+jj9ulzNmIKI
+3jIWrIouK/eTpybbEjsGXMZ/A6MRchQ44Rh7xAWjtJHCwZX8KNxnu+vbV9z760kk6jR4iI1ySSTA
+IUKvWQdhpDoFVpKD9lvscARWxxSu8IgrjFImxFNckpgIvcKGscHYKS+EPJJ+w9VUYPdODfrWXi8V
+ijE9S45SvSOuDk91hclYoiOOnk1EJgYcXSGXntUck2u6siKvRvx/8/r2hS2W6cdl+jpd5B+UcDVG
+4egi+2QABtRYEkIklz2X/KuiRm2EG7UmI4HwRmEj1T50FCcGqcubUCBXi0bcBSVyEHCrLFD/BpeC
+IgFEt6IQkds5FKgO5y32KkxJ+nP+lQZYiLxpHiQV3MFUQzvxFqdQRiVOu9YE+/7FDfr62fb1dgJD
+oyJR/cPuwO0vgszmErmt2cN0Mf+0XKXzKQvW03TyebmeBZdZEJgwcZlIruFsOd6E/RtQSwECPwMU
+AAIACAA8sWpbBm4uIiwCAADEDAAAIgAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wOS1zY2FuX2Ru
+cy1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFAAAABsAgAAAAA=
+
+
+--b1_5b75cb0d1b4608bffd40ed3fbc550120--

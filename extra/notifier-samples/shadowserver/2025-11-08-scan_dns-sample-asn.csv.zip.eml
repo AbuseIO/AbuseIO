@@ -1,0 +1,43 @@
+Date: Sat, 08 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <87e1ecebc1701e34071d12d7b408c5b7@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_87e1ecebc1701e34071d12d7b408c5b7"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_dns-sample Report: 2025-11-08
+
+--b1_87e1ecebc1701e34071d12d7b408c5b7
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_87e1ecebc1701e34071d12d7b408c5b7
+Content-Type: application/octet-stream; name="2025-11-08-scan_dns-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-08-scan_dns-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluRcLqxTQIAAGsNAAAiAAAAMjAyNS0xMS0wOC1zY2FuX2Rucy1zYW1wbGUt
+YXNuLmNzdr2W246bMBCG7/sUEdeO5fEBg3uFduk2bUSqkGi1VxElNEUKOAVSqW/fYVfbA0aVoibc
+GHPy/3ls/zNeV1ZF22XVySNeW3wvmrL7gd2yvz81trO5PfZd23R4+Wrbrs6qArtddsA2a2tsD4XF
+tikOpe1v85cx6qzM2z9+2rX23OTFs1De2QY7+7rdoWb78l9V1jskOZZfyjzr+mdvPM64mgPMWTAD
+ZoQ0UnikKvbluSLAGPUlBa4pKE3O+xNRghB7KuqmaO0RRyYBMA4kfSB3cbJZR0uSLpKH6NNqHRMF
+Gt8S4q2LLiuPs02T7ZGOABXBUFhpI/2hsB9Q0OyGumCYNAyGuqGkQXDb6XKj3DgLyoW6oq4vh7oc
+15c5uppyfrX54parsvbbnNOQjYecG+AOg2QU2O/Jf7aHc/tK8XYEafuRLFfJ/Sp5vVy06r5Rbhgk
+Iv8z/P+rCdrVFNTXk8yaGRnidncIQirURAA8HDnk+AmFQF4fQeCG+jW6pDoc4gBHv3NxFJXhFAFh
+oeG+Ecoh4EAB5FRHAcbWpHf8EKZCCNAPHe9HCtC3PI3CzTcKc528kSZuf2W4k2uA9aG+ZLVTchct
+F+9W62QRES+NktmHVRp7l1mBNML1YBb+lQimQeGY+V1XwqMLWk2M0hchTloQgBvxluvjUymGxiB6
+tx6SaHQ0ISaOCZKwMRKtpwZRIyVToKiaOiLKHykZ0TeweLvg7ERb4iXx4yxdbTfvZ4/RMk49kj7d
+J/HTRTR9AesYmcKw6OlZJFa1o6bKwglgfgJQSwECPwMUAAIACAA8sWpbkXC6sU0CAABrDQAAIgAA
+AAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wOC1zY2FuX2Rucy1zYW1wbGUtYXNuLmNzdlBLBQYAAAAA
+AQABAFAAAACNAgAAAAA=
+
+
+--b1_87e1ecebc1701e34071d12d7b408c5b7--

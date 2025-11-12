@@ -1,0 +1,41 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <7e90dbfc5364f1adbad7e5cbdd4a77e9@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_7e90dbfc5364f1adbad7e5cbdd4a77e9"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver event4_honeypot_ddos_target-sample Report: 2025-11-04
+
+--b1_7e90dbfc5364f1adbad7e5cbdd4a77e9
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_7e90dbfc5364f1adbad7e5cbdd4a77e9
+Content-Type: application/octet-stream; name="2025-11-04-event4_honeypot_ddos_target-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-event4_honeypot_ddos_target-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalv8Q06y3gEAAMsFAAA1AAAAMjAyNS0xMS0wNC1ldmVudDRfaG9uZXlwb3Rf
+ZGRvc190YXJnZXQtc2FtcGxlLWFzbi5jc3adU8uumzAQ3fcrKta+lEeSPrb3D7q8G+RrBrCKH9ce
+0qZf3zE2AaookWIhdM7YM5wzYzKUCjxyZTOWWWfQCDMSbD020iZgjcMEudcJ9WASctBLs4SFxEuC
+g/GouYJENZfCJ+xBoHGBwFkKaM6g2y3Hi4WVKdNCEOXhDC7W905EfQEkfQFGfQFFfQFd9QUi1vyN
+vkAXfQGv+oziUjfeTE6Eg3Z6H6VYudQdHY3lO67kGIoj7+nNraWjPG2Sch8RmdDU3HZpC+Bv436t
+THEfGEfkYg5PbikSY83V/IYvM5r1rsLRce35rDB+shdz5oBoGwU4mHZhluNwxdSaliNf+OTB+zAC
+aZsBeAuuieJ2XE9qF2oNGe0c7xU53u10s8aVy5ZOxMmsQeuHHXd+X8TDx/9f9Jd9XTR+z3FvYnJh
+UlTlnYjpGmG0jvMMeZY8ATYj6H5uTeLUUuqu/Att9imriur4UpYvxeFzUfyYn4yx8muVl6e8yEvG
+TsdjfWBvb+znfA/ZK/lkmq50Uebwh/68EXIaOytYWHShDCu/h/RvKf9wLKsH+cKomI/0My/vjYzi
+S3may99KvLVuGSu3xqp7xqrHxqp7xqpnjVVPGau2xup7xurHxup7xupnjdWPjf0DUEsBAj8DFAAC
+AAgAPLFqW/xDTrLeAQAAywUAADUAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDQtZXZlbnQ0X2hv
+bmV5cG90X2Rkb3NfdGFyZ2V0LXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAYwAAADECAAAAAA==
+
+
+--b1_7e90dbfc5364f1adbad7e5cbdd4a77e9--

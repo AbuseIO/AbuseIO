@@ -1,0 +1,41 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <21fe57238cbe86f28ad5de9c13efa7de@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_21fe57238cbe86f28ad5de9c13efa7de"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_smb-sample Report: 2025-11-05
+
+--b1_21fe57238cbe86f28ad5de9c13efa7de
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_21fe57238cbe86f28ad5de9c13efa7de
+Content-Type: application/octet-stream; name="2025-11-05-scan_smb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-scan_smb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltzR6sC8QEAAIkLAAAiAAAAMjAyNS0xMS0wNS1zY2FuX3NtYi1zYW1wbGUt
+YXNuLmNzdr2Wy27bMBBF9/2KQGuG4AwforgL2iAoGtiFk6wNRSVktZFoUEyA/n1HDgI0tDdtzQoC
+H5Klo8uZuXSVhtHPqR33Fatm/+LjkH7ScFjm+xhS6MLTMgwxUbcLc5ra0dMwtT217TxR2/tAbfT9
+EJZp9/qOqR26+beHtnN4jp0/gLoU4vJ47HbU/fDL7+fxcTu230PcTs/jo49vl4YpvxT9yzC/spYp
+ffUy284pDlNffahQoL4EuBT6ArQTks6K7YZ+x0AIbhQHITlalro9U0ozRm9hFgQCu7thH69X95ur
+W3b3eXVz9XW9uWYaarrLWLXxqR2eLu5j+410HI4TNNAZDQQR9flxxELhQGU4RI4SiqgjnMxxEnmN
+BWjGoXHSZjRlSeB/i5zmKFSBwDUO9XHgjOVKFqAJh0Chy2i15I0otZISc5peqq4ADh3SaTKcldwW
+qziRBQ5Fw1EVwEHtZONkFjmkioMi9mWcAieykkMluYZiBd68p6klV6BUWmKmzTRlnJm0ARxbJVgK
+ninlJ9jkG0FNa2lKGQrAe5yktYRikYMscpa0SVGswjNtDbmXhWIrmVuzIH0nN7mHL+x2vfq0Xr11
+f2glCMcZCao+M8ouoqQ8kfynfeTvUYI8RDnIE18hRezMog5/fjDf1gxQGqp/R/0CUEsBAj8DFAAC
+AAgAPLFqW3NHqwLxAQAAiQsAACIAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDUtc2Nhbl9zbWIt
+c2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBQAAAAMQIAAAAA
+
+
+--b1_21fe57238cbe86f28ad5de9c13efa7de--

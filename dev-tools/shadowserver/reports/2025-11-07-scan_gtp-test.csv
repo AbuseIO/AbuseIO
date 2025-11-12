@@ -1,0 +1,10 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","flags","message_type","message_type_text","message_length","teid","sequence","recovery","response_size","raw_response"
+"2025-11-07 10:04:40",low,100.64.59.204,udp,2123,,gtp-c-v1,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",0x32,0x02,"Echo response",6,00000000,0000,189,14,
+"2025-11-07 02:02:19",low,100.64.73.147,udp,2123,,gtp-c-v2,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",0x40,0x02,"Echo response",9,,000000,80,13,
+"2025-11-07 09:26:49",low,100.64.73.147,udp,2123,,gtp-c-v1,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",0x32,0x02,"Echo response",6,00000000,0000,80,14,
+"2025-11-07 01:40:22",low,100.64.207.19,udp,2123,,gtp-c-v2,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",0x40,0x02,"Echo response",9,,000000,34,13,
+"2025-11-07 02:25:47",low,100.64.76.25,udp,2123,,gtp-c-v2,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",0x40,0x02,"Echo response",9,,000000,13,13,
+"2025-11-07 09:13:26",low,100.64.76.25,udp,2123,,gtp-c-v1,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",0x32,0x02,"Echo response",6,00000000,0000,13,14,
+"2025-11-07 02:25:47",low,100.64.215.102,udp,2123,,gtp-c-v2,81021,IE,DUBLIN,DUBLIN,517810,,"Retail Trade",0x40,0x02,"Echo response",9,,000000,90,13,
+"2025-11-07 10:07:18",low,100.64.215.102,udp,2123,,gtp-c-v1,81021,IE,DUBLIN,DUBLIN,517810,,"Retail Trade",0x32,0x02,"Echo response",6,00000000,0000,90,14,
+"2025-11-07 09:57:04",low,100.64.115.26,udp,2123,,gtp-c-v1,81021,UK,LONDON,LONDON,517810,,"Retail Trade",0x32,0x02,"Echo response",6,00000000,0000,255,14,

@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","message_length","message_type","message_type_int","bgp_version","sender_asn","hold_time","bgp_identifier","message2_type","message2_type_int","major_error_code","major_error_code_int","minor_error_code","minor_error_code_int"
+"2025-11-09 15:03:24",info,100.64.136.188,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 15:03:49",info,100.64.136.189,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 17:20:38",info,100.64.136.228,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 17:46:49",info,100.64.137.118,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 15:38:36",info,100.64.138.190,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 16:27:05",info,100.64.138.218,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 16:27:01",info,100.64.138.246,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 16:10:58",info,100.64.138.46,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 13:28:49",info,100.64.139.110,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 16:40:11",info,100.64.139.174,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 04:35:17",info,100.64.139.246,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 18:26:45",info,100.64.139.54,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 16:10:57",info,100.64.141.110,tcp,179,,bgp,86236,CA,ONTARIO,LISTOWEL,517111,,Information,29,OPEN,1,4,86236,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 01:33:55",info,100.64.212.33,tcp,179,,bgp,94486,CA,ONTARIO,"OWEN SOUND",517112,,Information,29,OPEN,1,4,94486,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 17:33:36",info,100.64.212.34,tcp,179,,bgp,94486,CA,ONTARIO,"OWEN SOUND",517112,,Information,29,OPEN,1,4,94486,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 01:33:52",info,100.64.212.35,tcp,179,,bgp,94486,CA,ONTARIO,"OWEN SOUND",517112,,Information,29,OPEN,1,4,94486,,,NOTIFICATION,3,Cease,6,"Connection Rejected",5
+"2025-11-09 18:00:16",info,100.64.24.10,tcp,179,,bgp,105300,CA,ONTARIO,LONDON,518210,,"Communications, Service Provider, and Hosting Service",21,NOTIFICATION,3,,64512,,,,,Cease,6,"Connection Rejected",5
+"2025-11-09 13:28:41",info,100.64.24.102,tcp,179,,bgp,105300,CA,ONTARIO,LONDON,518210,,"Communications, Service Provider, and Hosting Service",21,NOTIFICATION,3,,64512,,,,,Cease,6,"Connection Rejected",5
+"2025-11-09 01:33:55",info,100.64.24.106,tcp,179,,bgp,105300,CA,ONTARIO,LONDON,518210,,"Communications, Service Provider, and Hosting Service",21,NOTIFICATION,3,,64512,,,,,Cease,6,"Connection Rejected",5
+"2025-11-09 15:03:11",info,100.64.24.110,tcp,179,,bgp,105300,CA,ONTARIO,LONDON,518210,,"Communications, Service Provider, and Hosting Service",21,NOTIFICATION,3,,64512,,,,,Cease,6,"Connection Rejected",5
+"2025-11-09 17:46:40",info,100.64.24.114,tcp,179,,bgp,105300,CA,ONTARIO,LONDON,518210,,"Communications, Service Provider, and Hosting Service",21,NOTIFICATION,3,,64512,,,,,Cease,6,"Connection Rejected",5
+"2025-11-09 10:33:02",info,100.64.24.118,tcp,179,,bgp,105300,CA,ONTARIO,LONDON,518210,,"Communications, Service Provider, and Hosting Service",21,NOTIFICATION,3,,64512,,,,,Cease,6,"Connection Rejected",5
+"2025-11-09 17:06:57",info,100.64.24.122,tcp,179,,bgp,105300,CA,ONTARIO,LONDON,518210,,"Communications, Service Provider, and Hosting Service",21,NOTIFICATION,3,,64512,,,,,Cease,6,"Connection Rejected",5
+"2025-11-09 17:06:49",info,100.64.24.126,tcp,179,,bgp,105300,CA,ONTARIO,LONDON,518210,,"Communications, Service Provider, and Hosting Service",21,NOTIFICATION,3,,64512,,,,,Cease,6,"Connection Rejected",5
+"2025-11-09 16:10:53",info,100.64.24.130,tcp,179,,bgp,105300,CA,ONTARIO,LONDON,518210,,"Communications, Service Provider, and Hosting Service",21,NOTIFICATION,3,,64512,,,,,Cease,6,"Connection Rejected",5

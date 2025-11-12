@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","dns_version","min_amplification"
+"2025-11-07 00:48:10",medium,100.64.127.157,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 01:19:29",medium,100.64.129.28,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 00:55:07",medium,100.64.191.172,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 00:16:31",medium,100.64.53.16,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 00:58:12",medium,100.64.68.170,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 01:26:34",medium,100.64.9.204,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 01:16:15",medium,100.64.94.88,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 00:44:31",medium,100.64.114.73,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 01:22:36",medium,100.64.124.136,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 00:39:37",medium,100.64.13.235,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.64
+"2025-11-07 00:29:47",medium,100.64.144.0,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 00:50:17",medium,100.64.17.228,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 01:19:36",medium,100.64.2.30,udp,53,,openresolver,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",,1.38
+"2025-11-07 00:49:22",medium,100.64.142.95,udp,53,,openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-07 00:06:40",medium,100.64.20.100,udp,53,,openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-07 00:53:58",medium,100.64.202.184,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,4.79
+"2025-11-07 00:58:03",medium,100.64.232.67,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-07 01:07:52",medium,100.64.235.135,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-07 01:03:25",medium,100.64.27.236,udp,53,,openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-07 00:25:53",medium,100.64.64.217,udp,53,,openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-07 00:17:03",medium,100.64.65.124,udp,53,,openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-07 00:49:18",medium,100.64.96.65,udp,53,,bogusresolver;openresolver,81021,UK,LONDON,LONDON,517810,,"Retail Trade",,1.38
+"2025-11-07 00:37:57",medium,100.64.103.61,udp,53,,openresolver,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",,1.38
+"2025-11-07 00:51:54",medium,100.64.105.50,udp,53,,bogusresolver;openresolver,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",,1.38
+"2025-11-07 00:31:34",medium,100.64.108.203,udp,53,,bogusresolver;openresolver,81021,US,CALIFORNIA,"SAN JOSE",517810,,"Retail Trade",,1.38

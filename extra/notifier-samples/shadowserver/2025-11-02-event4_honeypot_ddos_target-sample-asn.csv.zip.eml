@@ -1,0 +1,41 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <adcd153a49cb15a96e6a0db78d3bb580@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_adcd153a49cb15a96e6a0db78d3bb580"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver event4_honeypot_ddos_target-sample Report: 2025-11-02
+
+--b1_adcd153a49cb15a96e6a0db78d3bb580
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_adcd153a49cb15a96e6a0db78d3bb580
+Content-Type: application/octet-stream; name="2025-11-02-event4_honeypot_ddos_target-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-event4_honeypot_ddos_target-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalv7AVxo3QEAAMsFAAA1AAAAMjAyNS0xMS0wMi1ldmVudDRfaG9uZXlwb3Rf
+ZGRvc190YXJnZXQtc2FtcGxlLWFzbi5jc3adU8uumzAQ3fcrKta+FMxN+tj2D7q8G+RrJmAVP2oP
+adOv7xibAFWUSLEQOmfsGc6ZMQUqDQGFdgUrnLdopR0JdgFb5TJw1mOGIpiMerAZeeiVXcJS4SXD
+wQY0QkOmRigZMg4g0fpI4KwktGcw3ZbjxcHKtO0gigpwBp/qBy+TvgiyvgiTvoiSvoiu+iKRa/5G
+X6SLvohXfVYLZdpgJy/jQTe9j0quXJkTHU3lT0KrMRZH0dNbOEdHRd4k5SEhMmGoud3SFsDf1v9c
+mRYhMoEo5Bye/FIkxdqr+Q1fZjTrXYWjFyaIWWH6ZC/nzAHRtRpwsN3CnMDhiqk1nUCx8ClACHEE
+yrUDiA58m8TtuJn0LtRZMnryotfkeLdzmjWuXHV0Ik1mDbow7LgP+yIBfv3/xXDZ10Ub9hz3JiYf
+J0VV3onYUyutMWmeMc+RJ8B2BNPPrcmcWkrdVX+hKz4UvOKHl7p+qfjHqvo2PwVj9Wde1seyKmvG
+jodD88re3tiP+R6y7+STGbrSVV3CH/rzRihp7KxicdGFsqz+GtO/5PzXQ80f5EurUz7Sz7y8NzKq
+T/VxLn8r8da6ZazeGuP3jPHHxvg9Y/xZY/wpY3xrrLlnrHlsrLlnrHnWWPPY2D9QSwECPwMUAAIA
+CAA8sWpb+wFcaN0BAADLBQAANQAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wMi1ldmVudDRfaG9u
+ZXlwb3RfZGRvc190YXJnZXQtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBjAAAAMAIAAAAA
+
+
+--b1_adcd153a49cb15a96e6a0db78d3bb580--

@@ -1,0 +1,45 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <64dea8b1867b7a48d92282a166954bd8@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_64dea8b1867b7a48d92282a166954bd8"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_msrpc-sample Report: 2025-11-09
+
+--b1_64dea8b1867b7a48d92282a166954bd8
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_64dea8b1867b7a48d92282a166954bd8
+Content-Type: application/octet-stream; name="2025-11-09-scan_msrpc-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_msrpc-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalt7jO/XuAIAAIMRAAAkAAAAMjAyNS0xMS0wOS1zY2FuX21zcnBjLXNhbXBs
+ZS1hc24uY3N2xZddb5swFIbv9yuqXLvIxx/Y+K6bqmrS1E1t75EBQ9ASQMbp2n8/k2xrYifRriBS
+HJ8Q7Cfv8flg5dqtGZ3eDiu0Gs2rsa1799N2sgfbu77sN9O0t85/rPvRdXpr/NTpxo967PzYmN6P
+1jRtP5nlYY1Ot+V4dFM+9jtbmv1Gpeutn/j9xsM9gy5/Gpe798GcWvmr3uyOvqs3uplWrbTTuTWD
+NaPpnHaHZWqrm623843pGreeCHdu/WGVerPJ28rPtvotd1Z347Z1f0xrStO+mv3fGvuy3S+aN7bf
+TWpY/cv/Yhz6bjSrTyuCCb8FuMXZDQhFmMJ4hdZts0aAcZKyBDBNiESuHBDL0lQitB3tUCIJmAB6
+fkBf7h9fnu6+oeevjw93P74/3SMOwl9FaPVknG43Ny9WVx6HJxh9brsq9wogIAi/YTrtsn+hFCOM
+AHHJ8GHwl/2LVVCgU0yuCCgmA0xKEkH2mED5zJDYcBZApopixUQAyUQCsJiWQHEVYFLFU8VClzOZ
+wFJaEpqSU0gsFfGcLIDk/i3oPzHTmTkLSWUgJkzxw8V1zrn1lIXf5ZRTKmD+eF7mnN/rRcEgUhMT
+BWGYc54QH2zLUNJKZrGWPoDgMuXkczE3p4YwhogiIvZ5KhNGF8MkkshzTifZRcwF8hEvcKQlpoqF
+kIImGV4Ksih0XCVZXIA+ICeHZ3NjmpKjqOegcc48xZy7TpKapefCnKZXMWcPH5MW/3cy+dTFLXQ0
+oc7qgNIfzdT3HZcpF1GTRnVSKI7jChRwzn44aRbkI1/MIVOMhJwiISxbrD8ikzRnUhKH65yz5yTJ
+qqh3Z1RhcZ2TzR1HRQ2RnnhyfcApaSL5QsHOasbPiQmh07OEHD0IzR7rXLA4J4k41jPwfid/OQWe
+lzPjQsTPlWRKS5c553e6rI3vNn8DUEsBAj8DFAACAAgAPLFqW3uM79e4AgAAgxEAACQAAAAAAAAA
+AAAAALaBAAAAADIwMjUtMTEtMDktc2Nhbl9tc3JwYy1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQAB
+AFIAAAD6AgAAAAA=
+
+
+--b1_64dea8b1867b7a48d92282a166954bd8--

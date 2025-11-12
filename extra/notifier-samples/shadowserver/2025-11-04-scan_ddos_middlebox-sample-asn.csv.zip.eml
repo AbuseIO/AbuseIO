@@ -1,0 +1,42 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <8f151e745913e0b8639a8a97310d9645@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_8f151e745913e0b8639a8a97310d9645"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ddos_middlebox-sample Report: 2025-11-04
+
+--b1_8f151e745913e0b8639a8a97310d9645
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_8f151e745913e0b8639a8a97310d9645
+Content-Type: application/octet-stream; name="2025-11-04-scan_ddos_middlebox-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-scan_ddos_middlebox-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxals4u1QYFQIAAEIGAAAtAAAAMjAyNS0xMS0wNC1zY2FuX2Rkb3NfbWlkZGxl
+Ym94LXNhbXBsZS1hc24uY3N2rZRNb5tAEIbv/RUR147pzn7C3khk2TQOWIa0yikiQBMkEyLYVM2/
+7xDnkNQm7sGXYQa0s4/eeQfPNW09uKJ98sAb6t9137gXSpuxfuo715Xddky73tHjoRvcY9HWlLri
+nmIxPFK8rzuKfX3fdGNZ7no8Fk05vDt0O3TPfVm/XlS6rh+T1ze3b93vXlw9HiCabfOrKQu369fW
+7qGrvC8eZ1zNEGdMnjFmJVqpPWjrqnluARnztfSR+Sg0uPIJAgZQVd0wa5uq2tZ33R8IkHGEbAEX
+8yTfRCvI4mQRrdPNHBQa+grgbWpXNNuzvC8qYpVoUEJoGHDhaw3ZTfJtMc8/sGBgObNK7LFInyN+
+zhIncBUto02ULQkIrq6vzqN4EoYzHQBKzUAoX+NhGmVZaFmwr4wiHHNKHJKGH8XRVhmr2B6O0IRz
+ZFLf15CnlzfpW5zgUFKpAEItxhnJcMT4Gl1c2nW2/OgZYYUm2+yhcFKGHRnUdQbpMk7hIl2RKFRN
+wgShps6GA9c+qqkZ8cAy+S+JIPdyPgViQhRsBPkRbxZxEkdAYzq/3iTTLNwguUYxSTeQ4OSeKXEI
+SQqr9pAU+tKcjogcjP/h4IPqoAnJNvLonH4SBO11niaQzaM8X01utwqUUMCRg6Lu09oYy9Whn43h
+tFanXCkVqkCCYYGAsbnRn80LmUV1mCk8IZNmWocjE98xiQ9MfwFQSwECPwMUAAIACAA8sWpbOLtU
+GBUCAABCBgAALQAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wNC1zY2FuX2Rkb3NfbWlkZGxlYm94
+LXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAWwAAAGACAAAAAA==
+
+
+--b1_8f151e745913e0b8639a8a97310d9645--

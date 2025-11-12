@@ -1,0 +1,43 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <cd06cb3915077bf8c9bb7f1f2115b9b5@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_cd06cb3915077bf8c9bb7f1f2115b9b5"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_bgp-sample Report: 2025-11-09
+
+--b1_cd06cb3915077bf8c9bb7f1f2115b9b5
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_cd06cb3915077bf8c9bb7f1f2115b9b5
+Content-Type: application/octet-stream; name="2025-11-09-scan_bgp-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_bgp-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltYpvNheAIAABMTAAAiAAAAMjAyNS0xMS0wOS1zY2FuX2JncC1zYW1wbGUt
+YXNuLmNzdtWXTW+jMBCG7/srEOdp5E8wvlVpVxupgqpNtUfEEpe6KnZkaKX++zWhlVKgl92LycGx
+je153vEMNnGvW9X1VXuMIe7Um3K6f/dVPbSPzva2ti9D1bre/z3ZrjdVq3y1rxpfVp3xZaOsL51q
+tB2a9biGqXTdnU0qO/vqanUyVPfW+Yq33VWNKl+Uafqns47+/agmzVKbAeFPcyw9Zjea6pQ5KFeO
+GE/25VAOgj6G6YMyvX7U6swUmSxNztduq2frSuWcL2t7UAtdnyO1mY2cdJ1G/ogJIvwC4wuURZhL
+RCVhMWjzaAEjtEnYBtNkg4WAvj4CTjMAjw4iITSB7SUU+f7yblfAze5+X/y+vgGOU4wxwM4v4dqq
+934AkkFxe50DBvYxEyAv9rufu+3lflfkQGGrqk5BAvHWGuPd76dFd+rZ19QhBr7AybIlziwkzlQS
+JKmYcxIiwuJkyYI/0w3Gge07FZImU06xwRkKiTORJJWIzzlJWP4cOfECJ0vC4sRIcjHnDAvTvzvF
+QhplPo0CC0+GJMYLnCkLiBMxSbnE6ZwzsPAUkniX8jknZ+Fl0dSdDAcWnghLSiWfuJNgsqH0K2bG
+mPiCGXvGPLovHvKreEQl36OOs//34PSo0wPphMoCQ/3wKllA5aF5VUjk309Tr/pYnYQpRpwi9CVO
+i/zK2+NYED94sNa2r0bXJ84Oonvl3nStoltn3/zt20FUmUP0y38AaNN8Po2B4Ck/JIwPsv3vH44E
+vCCFrE3LN3k5aElWty+nLwi8sC8rjLHx9o4WtLDVaUFDjCGyoEWscF9QMjtvBy2ErFPL9Gp70rK+
+3B/vQXSuha4i9/8CUEsBAj8DFAACAAgAPLFqW1im82F4AgAAExMAACIAAAAAAAAAAAAAALaBAAAA
+ADIwMjUtMTEtMDktc2Nhbl9iZ3Atc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBQAAAAuAIAAAAA
+
+
+--b1_cd06cb3915077bf8c9bb7f1f2115b9b5--

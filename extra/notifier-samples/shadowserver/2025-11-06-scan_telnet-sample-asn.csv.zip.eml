@@ -1,0 +1,43 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <81ead49ecc994e4136a745e330618efd@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_81ead49ecc994e4136a745e330618efd"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_telnet-sample Report: 2025-11-06
+
+--b1_81ead49ecc994e4136a745e330618efd
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_81ead49ecc994e4136a745e330618efd
+Content-Type: application/octet-stream; name="2025-11-06-scan_telnet-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan_telnet-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltlIaofVgIAALkMAAAlAAAAMjAyNS0xMS0wNi1zY2FuX3RlbG5ldC1zYW1w
+bGUtYXNuLmNzdr2WXWvbMBSG7/crgq5apggdffhD3RghSdt0wQ5Jt4tRKK4rMrPEyhylMOj+++SG
+wTrFaSFxwcgyxn7ec/SeIyFbLPXaZssVwmitH3RV2F9uWtTPq8pYk5tFPTWVdbfvZm3LbKnd1GZz
+N2br0o1zbdxY6Xlh6sd8+48yK/L1Px/drs2myvUTKLemcpO7rCx1hd4hRpnsAnRp0AGhJFMiRHip
+74vNEgOlJBAEgBKgEtt8hRnH2OpFqS2OgDLAswvcHybX094Yz0bJRW+STodYQujeYoym2mbFonNd
+ZfcOvzDzolQe010vMI9OlYpGSsT/U5mISbhlUsoOYKLZ7LLLCO2mK126+W1ExAo6A31XZGVXvr/X
+dwAb+Yh2yALuJYPGhEnWJOzLZzxOk0Ga/L01iJpM+n1pT05/j76ekfPuzc3Dx8eI//j56dvAfEiB
+nV09U0O5okIxL0nAazW73fBaKeikNKU+7WzXBu2yhJ8FAYQ1W+K16EYTCuETOeHiUCAamzxbXLpa
+bAzXVV3geZFy50d6WJ6bK47t5x2TSKkCqphX4wxCIkTbRqLU4zICDnEY9+VFdRd4aO6SzA521J6g
+aVD3EB75ZElk0Ca5jpkr4Rur9pZoPd2ud/qtioLbSRqDnuF+bzw6T6fJqOdadi/pXKWzITrAa34L
+oSGBWLyJBKYgULAjCVFd3G+VBbZjX30uoXUBft09HSdCeRwBzTuI3M9ti+wi9rYPYCGJoyNl/DXN
+jrG9EtoWQWN3cNp5WuF7Tw3HWgG/4z4nt8MFJT0ud+g4aG3l/wBQSwECPwMUAAIACAA8sWpbZSGq
+H1YCAAC5DAAAJQAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wNi1zY2FuX3RlbG5ldC1zYW1wbGUt
+YXNuLmNzdlBLBQYAAAAAAQABAFMAAACZAgAAAAA=
+
+
+--b1_81ead49ecc994e4136a745e330618efd--

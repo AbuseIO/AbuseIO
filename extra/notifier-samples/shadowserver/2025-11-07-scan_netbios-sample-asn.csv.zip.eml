@@ -1,0 +1,51 @@
+Date: Fri, 07 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <44bbf4d2dae5974f2615471650898ec9@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_44bbf4d2dae5974f2615471650898ec9"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_netbios-sample Report: 2025-11-07
+
+--b1_44bbf4d2dae5974f2615471650898ec9
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_44bbf4d2dae5974f2615471650898ec9
+Content-Type: application/octet-stream; name="2025-11-07-scan_netbios-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-07-scan_netbios-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltp7gALKAQAAN0QAAAmAAAAMjAyNS0xMS0wNy1zY2FuX25ldGJpb3Mtc2Ft
+cGxlLWFzbi5jc3a9l1tvo1YQx9/7KSI/n0HnfoC3wy12EoMLeNPtS+Q6NEFNTGQ7rdpP3yGbrGwM
+rtRlV7bhjMCcn+byn2Gyr5+r3X71/DIhk131Z7Wt93/jsm7tl22zb9bNU7tstns8PTa7/Wb1XOFy
+v3rA42q3weND1eBxWz3UTWuuvzxjs6rXu4M/3e2a1+26ettovW+2uHhere9W9/fbatfe+Fez/eNh
+27y+fLnyWG+qu/fdXnfV9n2JN780mx0+rv6ntZH9qf69Xq/27e4/TTjlChgDai6o8pnyFZ+Qx/rh
+kTBKHS0dRoXDXfJ6/0KYMIRsqv1vdbMjLqOckeKShHFa5vaGFLP00i6yPCaKGbxKyCSv9qv66aLc
+ru5xb8qBM4hjYBaiCJKA3Gb59WWeLRckDrmd218hdcNEuwEhTBkiHCaPCaXPjK9oh5AJx1OjEFoQ
+MVAKiQDuQez2EJZp4i6C4gyh8qXsEHK8kXsjOTFSEBvQMcSyHzFdhgmLzRCi8gXzqeggSoOOHInQ
+BkAj8EKwCrTXQ7gIrrKrMBl2ohA+64bZGIfLsZyoGXAXeNL60Y16EGm55IFIhxE5xrlTK5xrhzMz
+UiqasPWi8tpoy7gHUeTh1E7z4Thz7nPWQcRiYUYMIS6vyU2WRln6cRrGiyi4EoIQpHfswdtZCkU6
+L0uRexpzajjIni+6HpT4o+yb8Sgcfw/wCOFYitJRbpdHGV/oTtJ5zPHoIE5BQnszS7I8nVkyKWx6
+cZUV8eRM3iUJhBbcEBiqoegrjU8pYz9fD3nN+JKhxBxTKuFIPhrkie/I3IYwn6UzhMIHctzsxHXa
+l27HdS7DTNNDWHZJJml8e1Fky3J6cWtv4mJCis9RGn8eJNPAOUh0ogFuIJAknM7S0ubZ1wXkUTE9
+m3PMV13p49ThY2LaFjBkkNg23Lwj0bBYmDPdw/Vlh894mKtj8p0pjtkCmOEgUB0pQp3YzBOI7eou
+Nu0bHDS6Vv0g8DLLc9TWIs4/xXnHGqp3Lnx50mQUJu4Q8yzFUpja3BZTVHEyX84DOzuTBlpAZCCh
+7cQjTZ+Cy6kU1+GZJiNOhwm3RWTjMHKg2AUtWCwtBYnqYeTz1JXaDjMqbISsK5seThN6LEajIUiw
+B751bXnAuJj/UpSX9Ey9U3FSTxwT82OQkB5Ojt9E9x/FREG64KFeSXli9+flm8JzPsysKOPfjXmo
+O+Iw4eLI0x0mXEfwsaIsknaaQA+JCORhJrZpmKUYfxGpyETDiK14mu5AgZR0tILWraKzBGgMgfd/
+ClpQ7JXHiFo7eiTJOQlsYfH+DxXnGiS85+GBOSSPFHt6dxxq32O+E+px3SAEfhg1HWsQVpzMkky4
+2DvHodXtKI7ZiZUbhRD1vbqaoKSX6fWZaRzfuryulnNH0x8Re+zgUgC2tq79taP/C1BLAQI/AxQA
+AgAIADyxaltp7gALKAQAAN0QAAAmAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA3LXNjYW5fbmV0
+Ymlvcy1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFQAAABsBAAAAAA=
+
+
+--b1_44bbf4d2dae5974f2615471650898ec9--

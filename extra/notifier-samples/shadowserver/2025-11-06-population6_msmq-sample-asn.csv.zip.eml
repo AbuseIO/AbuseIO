@@ -1,0 +1,43 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <a34bd05797983dbac9ccdad7de19ba64@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_a34bd05797983dbac9ccdad7de19ba64"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver population6_msmq-sample Report: 2025-11-06
+
+--b1_a34bd05797983dbac9ccdad7de19ba64
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_a34bd05797983dbac9ccdad7de19ba64
+Content-Type: application/octet-stream; name="2025-11-06-population6_msmq-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-population6_msmq-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalt7jbR2VAIAAGkJAAAqAAAAMjAyNS0xMS0wNi1wb3B1bGF0aW9uNl9tc21x
+LXNhbXBsZS1hc24uY3N2xZbPb5swFMfv+ysiLru40nv+Aebd0jRa0dLQJml3nMCYDGlABrTS9tfv
+JdOkNmTaDtHCwX6Wsb8f4/eDYKhq3w9ZvQtE0PsX31XDdzar/XjXtUPr2q97s+0G7r60/dBktWdz
+yLbcZn3D7da33HZ+W7X7ofu1R5NVrn+16HPfPnfOH4Tc0HaHJf2ubXqeqn744F0gQZorxCsIJ6gI
+gCQEomrKVkgApCK3pAFjNngujFVOkS4U2dAC5dqJwe0EWkAh6r7+JiJpQIvZVKTLzXSVpCKdfnxK
+Fou5MBgh8mvBrK3r56Zy2cDsvZisffdSOT+579qXqvCdmGRNMbnlI1TN9vdsIEwk39IaBiM0f6a1
+uS6oAKnJW23JlA4uistcoI5xkTSRBz9CC41R4R4tuF4lm2R9O5mli8e762QaiFUyu71LlzeCn5GQ
+IsNCOBaKiNTZZPj7KiDQp2Q824RnPNBJtzwoxRRbH1EcSkeYx8XZRA1BSBgei0rueQBEufXHYhYi
+a/diD4/z6/lM8Oab1Xy6YGeyEuG8vs/XHI3pFMksckSXREMgA6fQlNP5hdE0B8cpNL2H1qRiklLm
+JLW8GCYwBhLaf8JUl/bBUYQgW1T6EqlElZF1YKh0oSejSn1MG0cozSvap/nq5nF5flZOVnzzo5yo
+NPeGeRFdRk5pTZkxBZWxHZcKkBZfoS7eT9fr9O5+k6TL/1bcjASKNZdeKvMwHyc7Jd9Us026YjM9
+P94hJeMokiJXlFRkoWZIrrihVQUj8y+Dz91fYTkxL5Llh09penMW4J9QSwECPwMUAAIACAA8sWpb
+e420dlQCAABpCQAAKgAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wNi1wb3B1bGF0aW9uNl9tc21x
+LXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAWAAAAJwCAAAAAA==
+
+
+--b1_a34bd05797983dbac9ccdad7de19ba64--

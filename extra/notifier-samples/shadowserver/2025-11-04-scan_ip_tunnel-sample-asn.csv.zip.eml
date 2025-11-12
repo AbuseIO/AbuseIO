@@ -1,0 +1,44 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <ce62af8c5527694180eba92e8b5ccdd2@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_ce62af8c5527694180eba92e8b5ccdd2"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ip_tunnel-sample Report: 2025-11-04
+
+--b1_ce62af8c5527694180eba92e8b5ccdd2
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_ce62af8c5527694180eba92e8b5ccdd2
+Content-Type: application/octet-stream; name="2025-11-04-scan_ip_tunnel-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-scan_ip_tunnel-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalu4ncCFbQIAAHwPAAAoAAAAMjAyNS0xMS0wNC1zY2FuX2lwX3R1bm5lbC1z
+YW1wbGUtYXNuLmNzds2XTW/iMBCG7/srIp9d5LHjfPgWQlQisaVK2a56WkXBopFIjJKA1H+/A92u
+SmPYvaDkYhyBM49m3nfGkK6sdNvl1Y5Q0uqDbsruDbfl8XnXmM4UZnvcmqbDj1fTdnVeadx2+QbX
+vK1x3WiDa6M3pTk+Fu/vqPOyaD8d+tWafVPoU6CiM83pSLszdavJN8IZl3cAd8x1QComlAuEVnpd
+7isKjE08dwK+N2F002hKTyuAH3gBjSNKplm6Sp/mTrxc/Pg+TSNCn9N4tczSiEoIODBKySzvcuex
+MYVu27LeUGeOYKdNXq+dTG/zTq+dJ90cSvwJobp4NY3ebd/O4VwlQ+WGNjjgweB4UnGumLTiyXBw
+PKEYKGktLXjBGPC4AjueL0dQXBYo7lrxQj4G7XkKfBse52IEeOArkHY8dwzFvdT1uBxce8xVIlQy
+sOEJGEHyBFMut9INbgxseQK7ntUY3vC+OCZOSc9KNwZbCPfCvA2HdwXOWnRFvyNzjvOM07Kodsjn
+lbVLfWC+uMBH4uXPNJ5HD840eiF4gnKG7/aCQCs/z7lS52FPJRN9uXM54Sz477B/03IecL1mXwOe
+3C/Y14AM585nAXtSoGQwWLSYJtkKg2bJzJklSUYw9T4AYOpjU1X7uizyDu+LLf1I8rEah3Ktm/cS
+/KnHx7fX1CsUeH0yT14Fu8+ih1niPGZRmqXJrfCwUgLnTr9tTuAaXRwt7qPs5VY5Q08FNk+hgMJB
+sXBAc7BgXRfZjbHwxi9st65/KGyWPC8fbsvUbwBsWGEhE7aJfgUZv46FHpyhC29lQl8J3/an6Ih1
+XfE3bBO/AVBLAQI/AxQAAgAIADyxalu4ncCFbQIAAHwPAAAoAAAAAAAAAAAAAAC2gQAAAAAyMDI1
+LTExLTA0LXNjYW5faXBfdHVubmVsLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAVgAAALMCAAAA
+AA==
+
+
+--b1_ce62af8c5527694180eba92e8b5ccdd2--

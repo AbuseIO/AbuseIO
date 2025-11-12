@@ -1,0 +1,10 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","source_port","bytes","amplification","method"
+"2025-11-08 15:36:10",medium,100.64.10.136,tcp,80,,ddos-middlebox,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",41714,970,23.66,SYN+ACK:PSH
+"2025-11-08 17:16:12",medium,100.64.14.211,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",36031,1460,35.61,SYN/GET
+"2025-11-08 17:16:14",medium,100.64.105.217,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",40495,1460,35.61,SYN/GET
+"2025-11-08 03:37:38",medium,100.64.136.216,tcp,80,,ddos-middlebox,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",41158,963,23.49,SYN+ACK:PSH
+"2025-11-08 09:34:10",medium,100.64.103.142,tcp,80,,ddos-middlebox,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",50935,1126,27.46,SYN/GET
+"2025-11-08 17:28:48",medium,100.64.199.11,tcp,80,,ddos-middlebox,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",43997,1227,29.93,SYN/GET
+"2025-11-08 00:38:28",medium,100.64.103.1,tcp,80,,ddos-middlebox,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",47586,6820,166.34,SYN/GET
+"2025-11-08 09:34:45",medium,100.64.172.107,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",54129,7084,172.78,SYN+ACK:PSH
+"2025-11-08 15:36:26",medium,100.64.172.109,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",44353,7082,172.73,SYN+ACK:PSH

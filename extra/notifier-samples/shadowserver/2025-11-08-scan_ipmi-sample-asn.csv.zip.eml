@@ -1,0 +1,44 @@
+Date: Sat, 08 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <4eb97c0750a2de4c6f9bb0115ce21c54@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_4eb97c0750a2de4c6f9bb0115ce21c54"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ipmi-sample Report: 2025-11-08
+
+--b1_4eb97c0750a2de4c6f9bb0115ce21c54
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_4eb97c0750a2de4c6f9bb0115ce21c54
+Content-Type: application/octet-stream; name="2025-11-08-scan_ipmi-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-08-scan_ipmi-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvbRb0HdwIAADUMAAAjAAAAMjAyNS0xMS0wOC1zY2FuX2lwbWktc2FtcGxl
+LWFzbi5jc3bNlV1vmzAUhu/3KyKuXWQbzNedm9IFrSEahFW9ijxwElQ+IgOd+u93SJO0IbldRhTh
+92CMH78cH2ttXsqmFeVOQ1oj36TK23eQeR/vVN3WaV30slYtNNu6aStRSpCt2MBVNBVcN7KGq5Kb
+vO7D9OMdlcjT5sugVVN3KpX7idK2VvtpynwFkzYfA6u6kivRtVvQZUY/JTvKnWiaV/l+DGtZHmUm
+16Ir2teeaicVrKoRm9PbukaqApZXfL3RQ/WAVVcUfdyvBxBWRb3Jexyp1J4yk295KvPsJJV8A73O
+VflHqEP0uYpSVN1apG0HXftBX28c3ANrsy5t990Hve/5plFM2R0hd9iZYNNjrseohrb5ZosIxrpl
+6hQail3UZTtkUQOh3kTkEEwJCkI05zMe8Xi2jDiaJ/N7HiBGbOhGSItkK/JislQiAwiqY1TVZ/+D
+iUhW4nchs1P7LpvDE8ffOSjzDMfD9jkosQ2dOVc5kxgtZsECTRdPgAjRTRBtzySXXjJjgGi7xMA9
+4q8g+h6EAUdg530ShbeipM6Q0tUJGY+RjHqMnSOaBnxuOi4jHY+4g4y0mE4ovuokT5AW+s+TeJEs
+Z5Nn/uTHGopfHkL/5Qa4pmfATjcHuK4N390cIa7lYeciB4hr6JSyq7gPPpr5ceyHSHuMePjjMYmW
+Ez6fzHkQaohZxHTdf5sOwEzxYF8ZbLTApmdCRbUGDhNbZ3SkvNT1qDHgxUx3yEgTgmFAHiSEq7vj
+TAfYcObFAUv7qmuNq+qal2cDJRSOMDYiTKi2zCODU5ZANSDm9WydcvQz8e/9KZovwmXk86ebmIkN
+zxhuKUag0Dr/lfIvUEsBAj8DFAACAAgAPLFqW9tFvQd3AgAANQwAACMAAAAAAAAAAAAAALaBAAAA
+ADIwMjUtMTEtMDgtc2Nhbl9pcG1pLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAUQAAALgCAAAA
+AA==
+
+
+--b1_4eb97c0750a2de4c6f9bb0115ce21c54--

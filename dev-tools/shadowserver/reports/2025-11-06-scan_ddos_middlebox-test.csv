@@ -1,0 +1,17 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","source_port","bytes","amplification","method"
+"2025-11-06 15:50:34",medium,100.64.10.136,tcp,80,,ddos-middlebox,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",49761,970,23.66,SYN+ACK:PSH
+"2025-11-06 17:35:14",medium,100.64.14.211,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",46845,1460,35.61,SYN/GET
+"2025-11-06 16:46:34",medium,100.64.105.217,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",60473,1460,35.61,SYN/GET
+"2025-11-06 17:10:52",medium,100.64.136.216,tcp,80,,ddos-middlebox,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",41692,963,23.49,SYN/GET
+"2025-11-06 00:34:30",medium,100.64.190.128,tcp,80,,ddos-middlebox,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",44011,1072,26.15,SYN/GET
+"2025-11-06 06:40:05",medium,100.64.103.142,tcp,80,,ddos-middlebox,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",51480,1126,27.46,SYN/GET
+"2025-11-06 06:39:50",medium,100.64.249.121,tcp,80,,ddos-middlebox,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",56357,1126,27.46,SYN/GET
+"2025-11-06 00:34:20",medium,100.64.99.96,tcp,80,,ddos-middlebox,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",57776,1126,27.46,SYN/GET
+"2025-11-06 16:58:49",medium,100.64.125.201,tcp,80,,ddos-middlebox,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",46639,1126,27.46,SYN/GET
+"2025-11-06 00:34:14",medium,100.64.199.11,tcp,80,,ddos-middlebox,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",58252,1226,29.9,SYN/GET
+"2025-11-06 06:39:54",medium,100.64.51.47,tcp,80,,ddos-middlebox,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",48220,1460,35.61,SYN/GET
+"2025-11-06 16:58:57",medium,100.64.16.96,tcp,80,,ddos-middlebox,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",48079,1460,35.61,SYN/GET
+"2025-11-06 16:18:56",medium,100.64.194.246,tcp,80,,ddos-middlebox,73499,US,OREGON,BOARDMAN,517810,,"Retail Trade",34616,7084,172.78,SYN+ACK:PSH
+"2025-11-06 16:32:11",medium,100.64.155.79,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",60524,1460,35.61,SYN/GET
+"2025-11-06 17:23:22",medium,100.64.172.108,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",42177,7084,172.78,SYN+ACK:PSH
+"2025-11-06 12:44:10",medium,100.64.172.109,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",39649,7084,172.78,SYN+ACK:PSH

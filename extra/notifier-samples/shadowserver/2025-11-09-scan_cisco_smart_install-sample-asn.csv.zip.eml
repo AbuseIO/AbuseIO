@@ -1,0 +1,43 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <a224d0e22a5475fd80eb53fec887ca83@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_a224d0e22a5475fd80eb53fec887ca83"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_cisco_smart_install-sample Report: 2025-11-09
+
+--b1_a224d0e22a5475fd80eb53fec887ca83
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_a224d0e22a5475fd80eb53fec887ca83
+Content-Type: application/octet-stream; name="2025-11-09-scan_cisco_smart_install-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_cisco_smart_install-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxals9jLHoVwIAAEgMAAAyAAAAMjAyNS0xMS0wOS1zY2FuX2Npc2NvX3NtYXJ0
+X2luc3RhbGwtc2FtcGxlLWFzbi5jc3bFlV+LozAUxd/3U4jPaUlu/qh5s13pCG0t1mHZp0WsdIVW
+izqF/fZ7bVmYmUZamIZ9iZFSf+fcc3Pj9tWx7Pr8eHKJ25Xnsq36P7ithvdT2/RN0RyGbdP2+Pjd
+dH2dH0vc9vke17yrcd2XDa5tua+a4bW4fqPOq6J796dfXfPWFuUFVPRN635zgYKcMDahgcM8TZnm
+4JICNVRFfiCM0qkSU8bpFDgjfXEiwvMVIUXVFc2kO+ZtP6lqlH84EM+XHifzkCTrLEzjhGRJituE
+SOYDo4S48+Z4fKvxyz3K7IizLdtzVZTOpm3O1a5siZPXO+cF1Vb1/t+vn0RKVKilSaTiU+bd0SiA
+Uh5IT/nvhc7ScLXJkjUh5AOMKg1Uc2aGgXwqjCEMNDU4E2oq6R2Wz4BeMOFyFqVZiNvlIkx/EiGC
+a/HTss+rg5O1+e5zTZXmErO/JYOQaJU95FNwCYOAVbiOs2QWkh/xeh1vosWNUU+DryEwVBXolIl7
+VpXkSry3Gn1fDX22xkbzGGNPajSMg2lJDSrxAZI/Gog7S+Ms3r4482T5uprFoUu2r2kaPRaN0BLL
+ZVAhsFT3KhUoAepDJu4mwYotImcZOps0jNM4cm/yuTIDM9MW9NqDMAIVdqCeFjjxxpwqK1B6aSwq
+zFCwZVRKzdQI01KkMBjl3ggUbPURxSvCN0OFbydSPkw0PlJeSW1lOlzXI6Ph7tD+yokZmw2e9x+O
+acDtQKUWgRZyBKpsQs2Zgq2BFGjAkW8uL0Bg8ZyOORXKFnS4080TCeyd06F7zRPpeffaX1BLAQI/
+AxQAAgAIADyxals9jLHoVwIAAEgMAAAyAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA5LXNjYW5f
+Y2lzY29fc21hcnRfaW5zdGFsbC1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAGAAAACnAgAAAAA=
+
+
+--b1_a224d0e22a5475fd80eb53fec887ca83--

@@ -1,0 +1,43 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <43f777485adadc6b94839dbabd6881d0@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_43f777485adadc6b94839dbabd6881d0"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver population6_bgp-sample Report: 2025-11-05
+
+--b1_43f777485adadc6b94839dbabd6881d0
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_43f777485adadc6b94839dbabd6881d0
+Content-Type: application/octet-stream; name="2025-11-05-population6_bgp-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-population6_bgp-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltBAFYoNAIAAI4ZAAApAAAAMjAyNS0xMS0wNS1wb3B1bGF0aW9uNl9iZ3At
+c2FtcGxlLWFzbi5jc3blmMFu4yAQhu/7FJbPUwmwncTcUqurtbRNVknbPVrEnjpUCViYRurbL3ay
+UpSa015W9IIHhGE+/zAMjq08Ym/FsYsh7vGERtoPZ8qh3hltda0Pg6mNdY+97q0SR3SmFa0rRa9c
+2aJ2pcFW6qFan8dQQtb91UtVr99NjeNEtdXGGW7uXrRYHVC1dn/VYD86vKlWUg0u7Nqucm7256l6
+VA2a6uzGXh+aagC6dJMNKitfJV5NxW6GZtdjH8WbNhUa48paNzjR9LenVJ963jSNPb/FjLDsjtI7
+kkU04wnlhMUg1asGRgjlzW7BKSWEcwq27oDOcwDnPMwXbEGgWEJ8vymfyu2PqFj/fH68L5cxvCxX
+xfr55WED2YzmOQGIl42bX/bWCCtPGAnVRNv3bpBttH+L3mL0KJRDPrqvMjZunNlI94JW0RbNSdbo
+9GI5rH89rIBCenECYLV+Kr+XxfKpXK8ggQJFjzCDuNBKOS2HATb45ixsYsimoOk0NAsT2jGmKSez
+aegkaOh0EpoGvcLZjKfUy50FqvecJznPpsMZTUPWmzpKP3eoQS0d13nq5U6C1duhpx69RbDr/LK/
+PXrvAo/nSe7n/h/BKc1plv07OeN0Pk3ehBvZyJijTnOzcDf4GXs6S2Uk9MDmkZuGnqiSae5ZyNzD
+AZ56udkXvJgM3EnQCXoyzb34mr9aWB70hSzh1HOOidAvoomXO9y45gA98bwOenvnbof7sENVm/Es
+92WpdVCH2B9QSwECPwMUAAIACAA8sWpbQQBWKDQCAACOGQAAKQAAAAAAAAAAAAAAtoEAAAAAMjAy
+NS0xMS0wNS1wb3B1bGF0aW9uNl9iZ3Atc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBXAAAAewIA
+AAAA
+
+
+--b1_43f777485adadc6b94839dbabd6881d0--

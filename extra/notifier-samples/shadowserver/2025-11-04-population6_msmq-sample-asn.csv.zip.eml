@@ -1,0 +1,44 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <efb801bd3c388a2308bb87c64c9b9d0d@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_efb801bd3c388a2308bb87c64c9b9d0d"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver population6_msmq-sample Report: 2025-11-04
+
+--b1_efb801bd3c388a2308bb87c64c9b9d0d
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_efb801bd3c388a2308bb87c64c9b9d0d
+Content-Type: application/octet-stream; name="2025-11-04-population6_msmq-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-population6_msmq-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltQFvaijgIAAB4KAAAqAAAAMjAyNS0xMS0wNC1wb3B1bGF0aW9uNl9tc21x
+LXNhbXBsZS1hc24uY3N2xZZNj5swEIbv/RURl168kj/BzI0kqEElYZuw22MFxqRIBVJgV2p/fYdd
+VcqGXbUH2nAwAzbMY3vmHTtDVdt+yOqTQ5zePtquGn6gWY3Pp64dWtN+G822G/D2te2HJqstmkN2
+xDbrG2yPtsW2s8eqHR/N8z+arDL92Udf+vahM/bJkRna7umT/tQ2PXZVP63zzuGUqxvGbqhcMAXC
+A+k6pGrKlnBKGRS5BkmZjwal4PoiB08WArSrKeTSkMGcCNOUEVL39XficUUlWQUk2aXBPkpIEny8
+j+I4JIp5jOEwZ9XW9UNTmWxA9p4sDrZ7rIxd3HbtY1XYjiyyplhscApVc/zd6xDl8Re0iCMYcPU2
+rc5lAQXlEqyWGlRp6PVwmQDuAvUvcRlIAEvtBM1VSrgjmrPcR2l02CxWSXy3XUaBQ/bRarNNdmuC
+18QR7qIAQaeOPMDXc7nBv+J8pss/urFoA/sfE7I++Np64LvcAMv9YjanApR4JRc490oopCdBqtyA
+cpmLo4oCyrzMJtFFtfBH50G8DPcpQmzDdbSKduFiE6TOc4zxGWPsjZXi42ZRzAjItb2E1NTTeoT8
+dBcuwxXBFUn3YRAjneaMzkrHKabnlA5TI/MMwNXQ3tKSEU0YmV8RbVw1CUq+hiYZxR4QPoYlz3Ec
+vzam+itMcU3MMUP4REvQgtKWDEomMtCGKiiNa1EESnlJ63uMqzPa+3C/vtvNz4oa46PCXLIKiXeF
+vIyZDIyQEjKlUIF8Pa1vlGt2hhq/Dw6HZHubRslu/hLHQWmgkxhQmPa+xPMCiqSbTxVa8BclOE32
+aCb/qAKzyd57pkBJz1yJkHhMcLUoEBnPOTY3f4TFahJHuw+fk2Q9C/AvUEsBAj8DFAACAAgAPLFq
+W1AW9qKOAgAAHgoAACoAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDQtcG9wdWxhdGlvbjZfbXNt
+cS1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFgAAADWAgAAAAA=
+
+
+--b1_efb801bd3c388a2308bb87c64c9b9d0d--

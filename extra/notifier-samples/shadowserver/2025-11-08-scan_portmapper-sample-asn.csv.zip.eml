@@ -1,0 +1,44 @@
+Date: Sat, 08 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <44993bcc54129acdc5d7f990589d10b6@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_44993bcc54129acdc5d7f990589d10b6"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_portmapper-sample Report: 2025-11-08
+
+--b1_44993bcc54129acdc5d7f990589d10b6
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_44993bcc54129acdc5d7f990589d10b6
+Content-Type: application/octet-stream; name="2025-11-08-scan_portmapper-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-08-scan_portmapper-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalt9gpYLcQIAABsZAAApAAAAMjAyNS0xMS0wOC1zY2FuX3BvcnRtYXBwZXIt
+c2FtcGxlLWFzbi5jc3bdWE1v2zAMve9XGD6rmvghS9ZOxVAUA4ZuaHsvjMTLDNRxYDvDtl8/qimw
+OvKlxyhIZPlFIvVMhnpKOXd9O81NfyhVObW/2rGb/0i3i/eHcZiHzfAcu8M4y+XnMM37pm+lOzc7
+aZtpL+2uHaQd2103xNvNyca+6TbTm0lP03AcN+2Lo808jCcPu7Hp46h+OO7n7dOro/Z37EwvVqfD
+sJ9kdvc3zpWlPnc/uk0zR2cfSjRorwCujC+MDcCBfKn6dtsdewXG6Ip1vNSVOm4PCgCUiqb75nBo
+R+XBIKiHW/X55u7x/vqrevhyd3v9/dv9jbLg5Fulyvt2brrn4nFstnEBYk1eBRdi66PY/FS8IpQg
+mCDvm1UqpYC9Iu3MkmkVyATDKVPQaDJjCi4QpExrYeqyomqDNQHT9AXSwC6zqDIGpoQqxqGZBVWY
+WpswJfmlos0sqEiB0qASaZ9dUE2wLmVqtfWZMYU62CphypUGl9tOQxBMvUaVc9tSvSilNaLuEmXS
+CbEFFFRVXJ9jZMkuMCy4IoZzzCK4BUYFE1N9hlmo4I09lLUK5pw7x/wCMyRz0SyWJw6WEKJLRiGI
+MTZLpxAXl2C8ggkaWZzPTTB+g8XUYe8VoGisZOM2gVONwl5zdjXeifZMmFoNPrd6QLRWD6TEo8+t
+8q1mr8vwfIgB0+R1Vte5CRQrm1mqr52Lciw3fe3XVKdHzTa3oJKcm1KmpJHr3KjaQCalGj8+w6Nw
+kr9oRD5gbkw5GJ8yFUFF7lIl9knWip6uzjD0lqr/j0TSlleKl4EAmD4SURmcWfBR3snfICh5bnOT
+yLIhgUmZkr78rfcfUEsBAj8DFAACAAgAPLFqW32ClgtxAgAAGxkAACkAAAAAAAAAAAAAALaBAAAA
+ADIwMjUtMTEtMDgtc2Nhbl9wb3J0bWFwcGVyLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAVwAA
+ALgCAAAAAA==
+
+
+--b1_44993bcc54129acdc5d7f990589d10b6--

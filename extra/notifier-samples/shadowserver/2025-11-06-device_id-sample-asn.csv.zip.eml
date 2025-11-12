@@ -1,0 +1,43 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <92cc7ca58b3c2252d0257b38150faeec@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_92cc7ca58b3c2252d0257b38150faeec"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver device_id-sample Report: 2025-11-06
+
+--b1_92cc7ca58b3c2252d0257b38150faeec
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_92cc7ca58b3c2252d0257b38150faeec
+Content-Type: application/octet-stream; name="2025-11-06-device_id-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-device_id-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltNAvkEYgIAAOoPAAAjAAAAMjAyNS0xMS0wNi1kZXZpY2VfaWQtc2FtcGxl
+LWFzbi5jc3bNl01v2zAMhu/7FYHPiiHqwx/ayWvdpljrDHGCoqfCc7TUgGMHttah/350UqCNgjWH
+takusgjb0gORL0l5plrr3hTrjUe8Xj/qrjJPOK0Ge9O1pi3bepi2ncHHQ9ubplhrnJpihWPRNziu
+dItjp1dVO5jlbo2mqMr+1U/3ffu7K/V2o9K0HU6W+rEq9f2jbpavbfO00S/Wul3q+vXHXT/s88Vj
+lMkxwJgGIxooyhUwj1TNr5YApX4gfODCDyUx5YYIwQlpxqVuTFfUX/u+JhFQBiS/JGdpNp8l1yS/
+yi6TH9NZSiSE+JYQb6ZNUdWjeVcskSgbFz9rTXYg43XRFCu9xhXxxfPCZJ+KKsoOqWTk40dvYyUL
+4mXp7SifLuaT0W1yneYeye/Os/Tu3egiJWMlg326AHzG+efD0cGhlO/DMQk+RJETdKC43KcTkQ+4
+/5tw5ymZpHmeZsS7mCXZ94vFbD5KbkY3yVXmERmAiOP/x+MDnrTiLmTo2cgFvF3gRft4EfVj6gLd
+NpXYdCCpD8dEexI+YIoKJYSljNAHiLd4Ecb3gzGbE0MBKBr/E+qTfRordCunlk9FgD4NXeDbFgpq
+8TGIMaE4kk+4Ejae9GPuyOHBoWAZCtad2LOlAWzIKe6EnlUrOEYehI5ku0CBdXoh9yU4UskixWCf
+ToZYzFygY0oKxUJLtkOXEjjTpYjosIni1BFhIKHVHrNBt8eEu8jJdHI1JWfT68XNN7Teq+3EPCIP
+kCCE42X2w5Ak3iCUtErDQBR83hkJPCaP1O2fl0pPj/e+H0a0jXNm3wKH5oifjugvUEsBAj8DFAAC
+AAgAPLFqW00C+QRiAgAA6g8AACMAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDYtZGV2aWNlX2lk
+LXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAUQAAAKMCAAAAAA==
+
+
+--b1_92cc7ca58b3c2252d0257b38150faeec--

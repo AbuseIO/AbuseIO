@@ -1,0 +1,10 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","ipmi_version","none_auth","md2_auth","md5_auth","passkey_auth","oem_auth","defaultkg","permessage_auth","userlevel_auth","usernames","nulluser","anon_login","error","deviceid","devicerev","firmwarerev","version","manufacturerid","manufacturername","productid","productname"
+"2025-11-07 07:25:21",high,100.64.209.11,udp,623,,ipmi,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",2.0,no,no,no,no,no,default,enabled,enabled,yes,no,no,,,,,,,,,
+"2025-11-07 07:25:20",high,100.64.43.172,udp,623,,ipmi,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",2.0,no,no,no,no,no,default,enabled,enabled,yes,no,no,,,,,,,,,
+"2025-11-07 07:55:00",high,100.64.253.158,udp,623,,ipmi,81021,IE,DUBLIN,DUBLIN,517810,,"Retail Trade",2.0,no,no,no,no,no,default,enabled,enabled,yes,no,no,,,,,,,,,
+"2025-11-07 07:53:01",high,100.64.197.114,udp,623,,ipmi,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",2.0,no,no,no,no,no,default,enabled,enabled,yes,no,no,,,,,,,,,
+"2025-11-07 07:29:20",high,100.64.63.206,udp,623,,ipmi,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2.0,no,no,no,no,no,default,enabled,enabled,yes,no,no,,,,,,,,,
+"2025-11-07 07:49:51",high,100.64.117.52,udp,623,,ipmi,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2.0,no,no,no,no,no,default,enabled,enabled,yes,no,no,,,,,,,,,
+"2025-11-07 06:40:50",high,100.64.105.81,udp,623,,ipmi,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2.0,no,no,no,no,no,default,enabled,enabled,yes,no,no,,,,,,,,,
+"2025-11-07 07:04:03",high,100.64.29.95,udp,623,,ipmi,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2.0,no,no,no,no,no,default,enabled,enabled,yes,no,no,,,,,,,,,
+"2025-11-07 07:24:57",high,100.64.135.141,udp,623,,ipmi,81021,CA,QUEBEC,MONTREAL,517810,,"Retail Trade",2.0,no,no,no,no,no,default,enabled,enabled,yes,no,no,,,,,,,,,

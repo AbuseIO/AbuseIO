@@ -1,0 +1,41 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <8ed99b118e34b3f3d02a7fd1bbd542eb@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_8ed99b118e34b3f3d02a7fd1bbd542eb"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver event4_honeypot_ddos-sample Report: 2025-11-05
+
+--b1_8ed99b118e34b3f3d02a7fd1bbd542eb
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_8ed99b118e34b3f3d02a7fd1bbd542eb
+Content-Type: application/octet-stream; name="2025-11-05-event4_honeypot_ddos-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-event4_honeypot_ddos-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvix+Gn4wEAANsFAAAuAAAAMjAyNS0xMS0wNS1ldmVudDRfaG9uZXlwb3Rf
+ZGRvcy1zYW1wbGUtYXNuLmNzdp1Ty46cMBC85ysizl7CY5k8rvsHe9wL8poGrMWP2M0kk69PG5th
+iEYz0SCEqhp3u6rbzlAq8MiVzVhmnUEjzETQO9FKm4A1DhPkXic0gEnIwSDNGhYSTwmOxqPmChLV
+XAqfsAeBxhHp4CgFtEfQ3SXHk4WNKdPBIgqO4GL9zmPUF0DSF2DUF1DUF9BZXyBiy7/QF+iqL+BN
+n1Fc6tab2Ymw0M7vkxQbl7qnpbF8z5WcQnHkA325tbSUp5+k3EdEJjSJ79ZtAX8Z97ExxX1gHJGL
+JTy7tUiMtefhXPC1B4veTTg6rj1fFMYtB7Fkjoi2VYCj6VZmOY5nTK3pOPKVzx68DyOQth2Bd+Da
+KG7H9ax2oc6Q0d7xQZHj3Z9+0bhx2dGKOJktaP24487vi3j4+e+O/rSvi8bvOe5NzC5Miqq8EzF9
+K4zWcZ4hz5InwHYCPSytSZxaSt2Vf+DcOj4Eg5+yqqiap7J8KprPRfFjeTPGyu9VXh6+5UVeMnZ4
+bsqKvb2x1+VUshdyzTQd8KLM4TfdwwlyYRQrWHjoeBlWfg35Kb1p6uc76XSGYjrSzV6/bCtTfCkP
+S/Vr+159rjkrd86qW86qu86qW86qR51Vjzmrds7qW87qu87qW87qR53V/+HsL1BLAQI/AxQAAgAI
+ADyxalvix+Gn4wEAANsFAAAuAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA1LWV2ZW50NF9ob25l
+eXBvdF9kZG9zLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAXAAAAC8CAAAAAA==
+
+
+--b1_8ed99b118e34b3f3d02a7fd1bbd542eb--

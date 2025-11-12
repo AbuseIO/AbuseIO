@@ -1,0 +1,44 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <e0c51151acf5b5ea62272a21d5b114c1@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_e0c51151acf5b5ea62272a21d5b114c1"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ddos_middlebox-sample Report: 2025-11-05
+
+--b1_e0c51151acf5b5ea62272a21d5b114c1
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_e0c51151acf5b5ea62272a21d5b114c1
+Content-Type: application/octet-stream; name="2025-11-05-scan_ddos_middlebox-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-scan_ddos_middlebox-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltkH4+HeAIAAGsSAAAtAAAAMjAyNS0xMS0wNS1zY2FuX2Rkb3NfbWlkZGxl
+Ym94LXNhbXBsZS1hc24uY3N2xZdNb5wwEIbv/RUrrnWQZ/ztG1mtmqppNtmkh5wiAu4GKawjIFHz
+72s2qdRqXa2lSMDBDCCbh9Hrd4ZsaFrXD2X7lJGsdy+ua4bXEDbj9VPnB1/5xzH03RBOD74fdmXr
+QjiU2zCW/S6MW+fD2Llt48fL6m2NXdlU/V+T7nr/3FVu/6Jq8N0Y7O/cva9+/zq4cUKgeWx+NlU5
+vK3XuuHB19mnDCmKE4ATKhagLEcrICOtq5vnlgClueQ5gMo5I0P1RDQlpK59f9I2df3o7v0vopWg
+iiwLsr64KTZf1+RmvQnhmghQAEBItvRt+7x7f3dPFteue2kqt7js/EtTu44syl29OAuf1Oy2f55m
+RCCXnAADwnIk17cXn4vlN3t5ffYvtLYoLMVDaJMzeRT66sfqdLUk3wPxZlWcfxiacSnMUWgqLecW
+1AE0ihxBTJ5qFg6VSE11lBr19AKhWqpUgURyrXIIAptcIUozTKGm3DJ+KGsZyOlR6uL8dLW5KUJ4
+/qXY3H6YmlNFEzYjjg6CIkot9OTUjKFMyLW0ICynUWozfa4ZNzqBWllqrFAxaoQZqJXkKoUaqQWM
+UXM+vayR6+N2HdSB3IqIQHQOc+xFDJXtqFszy4xFFYcWM1AzzY5T07HGCBOlBjkDtRGQIhAOUbcO
+1Mjm8D1OE2sMsDi1mqPGpChkr+v/5dpMn2uNmqZ2IRClDnOnp6aKJ3Z8iFFqPj21MAZYYo2hcV3P
+0IWIYCEmSSHB+USUegZowQxNND7UcWg6Q6plymbc/+jyeJHRM5RGoQESqUXUQnD6vcglKJEEzUKj
+GoWePtPMGK4Tf2NotHViM1RzoSAO/RtQSwECPwMUAAIACAA8sWpbZB+Ph3gCAABrEgAALQAAAAAA
+AAAAAAAAtoEAAAAAMjAyNS0xMS0wNS1zY2FuX2Rkb3NfbWlkZGxlYm94LXNhbXBsZS1hc24uY3N2
+UEsFBgAAAAABAAEAWwAAAMMCAAAAAA==
+
+
+--b1_e0c51151acf5b5ea62272a21d5b114c1--

@@ -1,0 +1,42 @@
+Date: Fri, 07 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <2d638d26de4865706553e61776bcb961@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_2d638d26de4865706553e61776bcb961"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ipmi-sample Report: 2025-11-07
+
+--b1_2d638d26de4865706553e61776bcb961
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_2d638d26de4865706553e61776bcb961
+Content-Type: application/octet-stream; name="2025-11-07-scan_ipmi-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-07-scan_ipmi-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxals5TF9xFwIAAJIHAAAjAAAAMjAyNS0xMS0wNy1zY2FuX2lwbWktc2FtcGxl
+LWFzbi5jc3bNk9GOojAUhu/3KQjXHdIWKsIdKrOSVcyA7GSuTBcqkgFqSnHj229h1HFYb8dISPuf
+lvZ85y/VZVGxRtJqrwO9YQcmCnlUsujiveCSp7zsJBdSdTveyJpWTElJc9XSplZtzrhqBcsL3oXp
+xx41LdLmatGm4a1IWZ8olVz0aapio5I2HwtrXrMNbeVO6SrDn5Kc5Z42zTs7nkPOqrPM2Ja2pXzv
+qPZMqKoaml92axsmSlVeeT3QQXWAdVuWXdzVoxA2Jc+LDocJ0VNm7FCkrMguUrCD0ttCVH+pOEWf
+VVS0brc0la2a6hddD5zcU9ZmbSr76ZPuZ37oGGLyhNATtDVou5i4GOlgV+Q7gCA0RpaBoWMgBNps
+D0bYBKDzEIwRxAgkMVjNgxWYrhbJcqIigmw1A4AeMUmLUlsLmqn02ICg5l/ek32A1fRPybJLf2TN
+6YvzcwsRfkW0TAPZeIBoO8iEHeLvIPoZhIEHvHg+SaLwLpSEuHBAiYnCJOObTgY+mCWTRRCeu7sw
+mi4cHDZybHXY1k1GLwF66L9q8SpZz7VXb+HHOojfZqH/dp+Dd/47+JGpfs/RTdqZD+Z+HPsh0J8j
+L/z1nERrzVtqSy8IdUBGyHKc7+W1HJcM7UW2QfBD8o5cC7pk4C+CxBijB/UXWi40B1fMMRzyoLjY
+cok9sNckBrJu+zv1wEviT/wpWK7CdeR7i++5ZP8AUEsBAj8DFAACAAgAPLFqWzlMX3EXAgAAkgcA
+ACMAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDctc2Nhbl9pcG1pLXNhbXBsZS1hc24uY3N2UEsF
+BgAAAAABAAEAUQAAAFgCAAAAAA==
+
+
+--b1_2d638d26de4865706553e61776bcb961--

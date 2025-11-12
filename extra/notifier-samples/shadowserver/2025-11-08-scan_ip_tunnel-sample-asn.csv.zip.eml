@@ -1,0 +1,43 @@
+Date: Sat, 08 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <9dde9f2c78b88e0125d62aeefcfb412c@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_9dde9f2c78b88e0125d62aeefcfb412c"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ip_tunnel-sample Report: 2025-11-08
+
+--b1_9dde9f2c78b88e0125d62aeefcfb412c
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_9dde9f2c78b88e0125d62aeefcfb412c
+Content-Type: application/octet-stream; name="2025-11-08-scan_ip_tunnel-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-08-scan_ip_tunnel-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluz62pJXwIAAG4PAAAoAAAAMjAyNS0xMS0wOC1zY2FuX2lwX3R1bm5lbC1z
+YW1wbGUtYXNuLmNzds2XTY+bMBCG7/0VyGcvsg3mwzdCUIOaTSqSbrWnCoGVRQo4AhJp/32HZLfa
+BjfphYWLMQIzj96Z1x5QW5SyadPygDBq5EnWRfsK06K7P9SqVZnad1NVt3B5UU1bpaWEaZvuYEyb
+CsadVDDWcleo7ja7fKNKi6z5sOhXo451Js+BslbV5yXNQVWNRF8QI4w/UPpAPINyQT1h2wiXMi+O
+JaaEmI5tUtcxCd7VEuPzSKnrOR4OA4xmSbyNNwsjXC9/PM7iAOGnONyukzjAnHqMEozRPG1T43ut
+Mtk0RbXDxgLAzpO0yo1E7tNW5sZG1qcCXkFYZi+qlof96zUcoYJo4SjzRsejnXbc1eJxf2w8kI4B
+nq/Fc7wJJBfUs/TquXx0PEtwWzCuxfPZFKzhA6EOjzFrItbw9Hj26NYgwnIEtbR4nE/DGkyLZ9HR
+xXMFc0E/LR2bQmq54FrfOuP7whacCEq0dPaU9zx/dFcQJrglSJ+OMTjPGC6y8gB8TlHZ2KXEtf7B
+h8L1zzhcBCtjFjwjWIEZgW87nieFm6ZMiOuwBMzI+mG5yYj332H/yPJ3wDwnVwE799uC9PxFzI/W
+d7gFBQOhguUsSrYBDhfRZhslj1ESgfIupRSUD1VZHqsiS1toFxv8rnGXjFORy/qSgbd0vD+9VbyO
+sGwNGPNvoq1X35bxaigsOAq5ppEALN+6hYWSaG7MoyhBQ5FZYCZB+x3YnUwGy69B8jwU1NlGms7h
+bhYHxXrbt10N1u0sDqzW5Rek38iYDr9FNY+e1gMWfNce9DdCcmeL+KSCZ/0kkk8v+d9QSwECPwMU
+AAIACAA8sWpbs+tqSV8CAABuDwAAKAAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wOC1zY2FuX2lw
+X3R1bm5lbC1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFYAAAClAgAAAAA=
+
+
+--b1_9dde9f2c78b88e0125d62aeefcfb412c--

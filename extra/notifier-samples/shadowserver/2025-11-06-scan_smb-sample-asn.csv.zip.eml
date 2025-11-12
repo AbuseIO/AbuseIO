@@ -1,0 +1,41 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <936177945341d2d86f08607aa77af18a@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_936177945341d2d86f08607aa77af18a"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_smb-sample Report: 2025-11-06
+
+--b1_936177945341d2d86f08607aa77af18a
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_936177945341d2d86f08607aa77af18a
+Content-Type: application/octet-stream; name="2025-11-06-scan_smb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan_smb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaltUQNsg2AEAAJgLAAAiAAAAMjAyNS0xMS0wNi1zY2FuX3NtYi1zYW1wbGUt
+YXNuLmNzdr2WTW/cIBCG7/0Vkc8EMQP4g1tURVGlKq02ua8cF3lpY7PCJFL/fYdNKzX42qkPfNiG
+x/N6XqDJYfFbHpdzI5rNv/oU8k9qhtI/p5jjFJ9LM6ZM1SlueR0XT808zlSO20rl7COVyc8hlu70
+Nsc6hmn7a9Bxiy9p8hfQlGMqw9N0ouqHL+9vy9NxGb/HdFxflief/twKa30r+dewvbFKl7669I5b
+TmGdmw8NKrTXANeqvYLW4eDANuIU5pMApWRrJCgtsRd5OgtjrBA0i+hBIYiHO/Hx9v7xcPNZPHy6
+v7v5+uVwKyx09FSI5uDzGJ6vHtP4jeK4XO9pvdPg9I7WStAMOKUdoEOscIgSNTDglLvIWeGMkmg6
+BlzrYHC2js4Y2XdcWmqoaT3pySWlNhWtJSk1Q3C/XdDXuF4azUXbpWVni+9YTKfId6rC9SBRsXlO
+v6ehGsgElssEdaIgUMWQliUyQ2rWNJS94aLpmoZKglVcnjO1lBrJ4Rx7QeeMdrpOFIPSGBYa5QlW
+JkAyOLAY3NrdjzPF4zw0sLuktB2tJhw060y7E7Ir2wCy0GiptNWBYTCyHbj8Vi9dAD2ZoP1vBlDS
+sh2F6nOeJi0tS0ZSZPVBSA+k5T/KyF9QSwECPwMUAAIACAA8sWpbVEDbINgBAACYCwAAIgAAAAAA
+AAAAAAAAtoEAAAAAMjAyNS0xMS0wNi1zY2FuX3NtYi1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQAB
+AFAAAAAYAgAAAAA=
+
+
+--b1_936177945341d2d86f08607aa77af18a--

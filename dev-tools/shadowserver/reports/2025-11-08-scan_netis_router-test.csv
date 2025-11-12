@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","response","response_size","amplification"
+"2025-11-08 00:09:12",critical,100.64.215.129,udp,53413,,netis_vulnerability,69349,CN,"HEILONGJIANG SHENG",HARBIN,517111,,Information,Login:,18,18.00
+"2025-11-08 03:34:18",critical,100.64.155.250,udp,53413,,netis_vulnerability,69349,CN,"ZHEJIANG SHENG",WENZHOU,517111,,Information,Login:,18,18.00
+"2025-11-08 00:41:52",critical,100.64.39.69,udp,49762,,netis_vulnerability,69349,CN,"ZHEJIANG SHENG",HANGZHOU,517111,,Information,Login:,18,18.00
+"2025-11-08 03:21:22",critical,100.64.229.244,udp,53413,,netis_vulnerability,82561,TW,"TAICHUNG CITY",TAICHUNG,517111,,Information,Login:,18,18.00
+"2025-11-08 02:49:55",critical,100.64.231.176,udp,53413,,netis_vulnerability,82561,TW,"TAICHUNG CITY",TAICHUNG,517111,,Information,Login:,18,18.00
+"2025-11-08 03:22:44",critical,100.64.125.46,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",XINGTAI,517111,,Information,Login:,18,18.00
+"2025-11-08 02:58:06",critical,100.64.163.80,udp,53413,,netis_vulnerability,73928,TW,"TAIPEI CITY",TAIPEI,,,,Login:,18,18.00
+"2025-11-08 03:24:11",critical,100.64.137.130,udp,53413,,netis_vulnerability,69292,TW,"TAICHUNG CITY",TAICHUNG,517111,,Information,Login:,18,18.00
+"2025-11-08 03:28:45",critical,100.64.130.85,udp,53413,,netis_vulnerability,69292,TW,"TAICHUNG CITY",TAICHUNG,517111,,Information,Login:,18,18.00
+"2025-11-08 03:21:08",critical,100.64.26.124,udp,53413,,netis_vulnerability,69278,KR,SEOUL-TEUKBYEOLSI,SEOUL,517111,,Information,Login:,18,18.00
+"2025-11-08 02:55:58",critical,100.64.63.58,udp,53413,,netis_vulnerability,69349,CN,"SHANDONG SHENG",JINAN,517111,,Information,Login:,18,18.00
+"2025-11-08 02:57:27",critical,100.64.137.25,udp,53413,,netis_vulnerability,69349,CN,"SHANDONG SHENG",JINAN,517111,,Information,Login:,18,18.00
+"2025-11-08 03:28:36",critical,100.64.164.83,udp,53413,,netis_vulnerability,69349,CN,"GUANGDONG SHENG",GUANGZHOU,517111,,Information,Login:,18,18.00
+"2025-11-08 02:53:08",critical,100.64.174.125,udp,53413,,netis_vulnerability,4200136907,SG,CENTRAL,SINGAPORE,517121,,"Communications, Service Provider, and Hosting Service",Login:,17,17.00
+"2025-11-08 00:22:38",critical,100.64.36.1,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00
+"2025-11-08 00:04:12",critical,100.64.36.152,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00
+"2025-11-08 00:13:37",critical,100.64.36.156,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00
+"2025-11-08 00:14:41",critical,100.64.36.181,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00
+"2025-11-08 00:13:30",critical,100.64.36.203,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00
+"2025-11-08 00:21:23",critical,100.64.36.211,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00
+"2025-11-08 03:34:08",critical,100.64.36.54,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00
+"2025-11-08 03:04:26",critical,100.64.37.111,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00
+"2025-11-08 01:14:24",critical,100.64.37.139,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00
+"2025-11-08 03:28:58",critical,100.64.37.144,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00
+"2025-11-08 01:20:56",critical,100.64.79.12,udp,53413,,netis_vulnerability,120560,CN,"BEIJING SHI",BEIJING,517112,,Information,Login:,18,18.00

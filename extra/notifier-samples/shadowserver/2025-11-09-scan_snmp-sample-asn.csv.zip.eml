@@ -1,0 +1,44 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <31840988d3842030a671b9c2970b20f5@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_31840988d3842030a671b9c2970b20f5"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_snmp-sample Report: 2025-11-09
+
+--b1_31840988d3842030a671b9c2970b20f5
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_31840988d3842030a671b9c2970b20f5
+Content-Type: application/octet-stream; name="2025-11-09-scan_snmp-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_snmp-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalv1fPyGeQIAANYOAAAjAAAAMjAyNS0xMS0wOS1zY2FuX3NubXAtc2FtcGxl
+LWFzbi5jc3bFlt9vmzAQx9/3V0Q8u8hnbAN+Y2umZmuJFBJVfYoYeKml8EOYVOr++h1J1zbQvmUQ
+EXPGNv5w97V9TmsKbdu0qB3iWP2kG9M+o2m6et1UbZVV+86smhZvj5Vty7TQaLbpDsvUlljudIVl
+o3em6qrZ6R1lajL7btDWVocm08eJsrZq0Mj1k8n09kmX+ft6+1zrt1pR5Xr/vnNjT/O8PHh921uL
+fbYvmGjl2mYdVVUUh/KE1mhbV6XFseZP1wu/f29+myxtT+MPdecXNIo026Z5jv3tcYKOc2vyV9v5
+4jDKxBXAFQ1nVCoaKMoc8mh2jwQodSV3wQtdCCQ55DUBCYTYsqhJAJQB2fwkt8v4ehn/uwnwsYUQ
+Z6Xb1Oxn6ybNEeT4Y/ivD7/2JiMAQUDAc8OgaziH4MoDxcMehAzdEEZjQEd01zkDo74LYkwGUKLn
+BwbIwLwRgyGY8vqO8Dx0BBsNQiiBovB6iqDMDf2PGRLyLbpdfF+u4kVEnCSKZz+Wydy5kDopBqbP
+glEJ+egwQgEGSPRggLrAxQQw3FdAP4Dxp4BhvvIGOxnqFqbQDA8U64XJZy6HKVDEQL4BxojJCVgE
+bvSyHyNAmI/3lmhDnHh+P0uWm/XN7D66nScOSR6u4/nDZTRDmWJ0yCPpNDicKtHHEd05xKfgOSYH
+ffd4iDQFDFcsUBCcwwiGu7CYJlYoZcrPcaSPoQqmwfFwofdWuS9QPcFEyqGDbCqULvOncQ7gMu9n
+EyH/9ARfxOQuuolWUXKzXkXkbnP3NVpcaDPmg3SbseDTdPu/keBxyQYkHFzG/bFBhETx9ta1xPyf
+jg3ChzmnlJ/mvZcE+QtQSwECPwMUAAIACAA8sWpb9Xz8hnkCAADWDgAAIwAAAAAAAAAAAAAAtoEA
+AAAAMjAyNS0xMS0wOS1zY2FuX3NubXAtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBRAAAAugIA
+AAAA
+
+
+--b1_31840988d3842030a671b9c2970b20f5--

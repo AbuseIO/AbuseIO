@@ -1,0 +1,44 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <017a86a51d609666eb2db1a9e3f3ebc5@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_017a86a51d609666eb2db1a9e3f3ebc5"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_cisco_smart_install-sample Report: 2025-11-02
+
+--b1_017a86a51d609666eb2db1a9e3f3ebc5
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_017a86a51d609666eb2db1a9e3f3ebc5
+Content-Type: application/octet-stream; name="2025-11-02-scan_cisco_smart_install-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-scan_cisco_smart_install-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsDjGbAdAIAAIEMAAAyAAAAMjAyNS0xMS0wMi1zY2FuX2Npc2NvX3NtYXJ0
+X2luc3RhbGwtc2FtcGxlLWFzbi5jc3a9ll+L4jAUxd/3U5Q+x5Lc/Gmat+oULatWqrLs01JqcQva
+StsR9ttv4rDgjBF9MAuSphT7O7n35DT+UB+rfiiOJx/5fXWuunr4o6e1uT917dCW7cFM227Ql99t
+PzTFsdLTodjrsegbPe6rVo9dta9bc1t+vKMp6rK/+tOvvn3vyuoCKoe287/5gIGPCBlh8EioWKSA
++6jUGuqyOCCCcSBYQFkQAhrKE2KhFAiVdV+2o/5YdMOobrT4wwExwJhGjHJAkxgt4mW6ycYx+pEu
+l+kqmSKEPsNAQago3MIIxQFQ8gAXSh5SQ8qWmzhPM7TJcj3NECcSCEbIn7TH43uj3zzomvTIW1fd
+uS4rb9W153pXdcgrmp0306Wpm/2/p18qIhQGxblNJA1IKB+IFBzL6FpkomuSTrLviZYZEkJeJpNI
+BdIiUxiZT3WOh0JeS12k67X+xdtpfNO7D56w84C/moeFokQxestjIuD4AU4SwBdSPB8n+SZGb/l2
+MUvm8yRHjEUfZsmroagP3qYrdtXNriBEYdtiAQeE4YceoIJd45O3hTHq8rUW0HtJKI4tKvUFOH22
+SP44TzfpeuZNsvl2MU5jH623eZ78fLJWWgWLLI3SpcLigYhIMBCf0sNfZbpk08Sbx94qj9M8Tfwb
+N3LTIFuSGCjBbqDaklQn2B0ocwO9WJEQOxRcLZQJ60fhwsSuFmrcfGehTDqBYtPPu+blznyko5Ri
+O1QQV+UFag0LAw1Dl0a609OIusoGiBS9497ITSCZz5U+3dgDCYijFJTKnFbsPQWI/n9PwdWWkeZQ
+hqUVKh0xL6dV6wlEM4XDXcrs3pWvy8C/UEsBAj8DFAACAAgAPLFqWwOMZsB0AgAAgQwAADIAAAAA
+AAAAAAAAALaBAAAAADIwMjUtMTEtMDItc2Nhbl9jaXNjb19zbWFydF9pbnN0YWxsLXNhbXBsZS1h
+c24uY3N2UEsFBgAAAAABAAEAYAAAAMQCAAAAAA==
+
+
+--b1_017a86a51d609666eb2db1a9e3f3ebc5--

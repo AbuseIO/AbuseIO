@@ -1,0 +1,9 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","version","servername","url"
+"2025-11-04 14:01:53",critical,2001:db8:1:5::11,tcp,443,,eol;exchange,84673,CA,ONTARIO,THORNHILL,517111,,Information,14.3.513.0,,
+"2025-11-04 14:29:01",critical,2001:db8:1:4::e0e0,tcp,443,,cve-2025-53786;exchange,65536,CA,"BRITISH COLUMBIA",RICHMOND,,,,15.1.2507.43,EX2,
+"2025-11-04 12:17:30",critical,2001:db8:1:7:e01::1,tcp,443,,cve-2025-53786;exchange,65536,CA,"BRITISH COLUMBIA",RICHMOND,,,,15.1.2507.43,EX01,
+"2025-11-04 01:38:34",critical,2001:db8:1:7:e9:98e7:962c:1b9d,tcp,443,,cve-2025-53786;exchange,65536,CA,"BRITISH COLUMBIA",RICHMOND,,,,15.1.2507.43,EX01,
+"2025-11-04 14:29:25",critical,2001:db8::192:110:173:10,tcp,443,,cve-2023-21529;cve-2024-26198;cve-2025-53786;exchange,119338,CA,ONTARIO,LONDON,,,,15.1.2375.34,EX-MBX-4,
+"2025-11-04 07:42:00",critical,2001:db8::192:110:173:6,tcp,443,,cve-2023-36439;cve-2023-36745;cve-2024-26198;cve-2025-53786;exchange,119338,CA,ONTARIO,LONDON,,,,15.2.1118.26,EX-MBX-7,
+"2025-11-04 01:39:07",critical,2001:db8:203:410:54:39:222b:242,tcp,443,,cve-2025-53786;exchange,80788,CA,QUEBEC,MONTREAL,518210,,"Communications, Service Provider, and Hosting Service",15.2.1258.34,MAIL-HA,
+"2025-11-04 12:17:40",critical,2001:db8:203:410:54:39:222b:243,tcp,443,,cve-2025-53786;exchange,80788,CA,QUEBEC,MONTREAL,518210,,"Communications, Service Provider, and Hosting Service",15.2.1258.34,MAIL-HA,

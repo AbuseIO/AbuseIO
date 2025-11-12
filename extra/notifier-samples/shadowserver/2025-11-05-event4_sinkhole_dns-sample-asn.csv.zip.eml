@@ -1,0 +1,37 @@
+Date: Wed, 05 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <63cf3a783d072627cbb52b1850d185d9@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_63cf3a783d072627cbb52b1850d185d9"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver event4_sinkhole_dns-sample Report: 2025-11-05
+
+--b1_63cf3a783d072627cbb52b1850d185d9
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_63cf3a783d072627cbb52b1850d185d9
+Content-Type: application/octet-stream; name="2025-11-05-event4_sinkhole_dns-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-05-event4_sinkhole_dns-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalussJcx7gAAAF0CAAAtAAAAMjAyNS0xMS0wNS1ldmVudDRfc2lua2hvbGVf
+ZG5zLXNhbXBsZS1hc24uY3N2rZDBbsMgDIbve4qJs4mALNW2695gx14qRNwMKeAM3Kh5+9KUbqs0
+9bIhZP7fsvwZC/YBM9swCRBTIiZHY5E5uZ2fqpgocZU2x6oGpKoSDp6uaed5qfKDMkcbsNpovctV
+Z3RMqZgeZ+9wN2Psf3peJvx2gXpch8IZ06W/j/vS4oLd2+DHc5LtUOLnAdNy7bCa8jo6RBYPwijT
+Sa2l6h6Vel2vANAvptGb50Y1GmDz1GkD2y28r/+Ct0KEWEZQusFj2dSIjaMACs6nDELAZYVQo5Fa
+GtlK81VMaYDfyPqGbO6Rzf+SzQ25vUdu/0A+AVBLAQI/AxQAAgAIADyxalussJcx7gAAAF0CAAAt
+AAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA1LWV2ZW50NF9zaW5raG9sZV9kbnMtc2FtcGxlLWFz
+bi5jc3ZQSwUGAAAAAAEAAQBbAAAAOQEAAAAA
+
+
+--b1_63cf3a783d072627cbb52b1850d185d9--

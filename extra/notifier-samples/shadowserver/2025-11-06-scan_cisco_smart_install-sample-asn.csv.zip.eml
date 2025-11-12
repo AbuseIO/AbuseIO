@@ -1,0 +1,43 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <a8cf9addf5c1b868c5aed6bb3e68b252@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_a8cf9addf5c1b868c5aed6bb3e68b252"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_cisco_smart_install-sample Report: 2025-11-06
+
+--b1_a8cf9addf5c1b868c5aed6bb3e68b252
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_a8cf9addf5c1b868c5aed6bb3e68b252
+Content-Type: application/octet-stream; name="2025-11-06-scan_cisco_smart_install-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan_cisco_smart_install-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalv+1k6OWAIAAFAMAAAyAAAAMjAyNS0xMS0wNi1zY2FuX2Npc2NvX3NtYXJ0
+X2luc3RhbGwtc2FtcGxlLWFzbi5jc3a1lV+rokAYxu/3U4jXU8x/de6sIyVUhhnLXi1i0g6kEzon
+2G+/Y+1Ch0aKpYEYRyR/z/s877z6WjZ1r8vm7AO/ry91J/Vvs5XD/blTWlXqNGxVp83ll+p1Wza1
+2eryaNayb816rJVZu/oo1XBb3d7RlrLq7/70s1efXVVfQZVWnf/NxxCzCUITyD0UCMYFpD6ojAZZ
+lSeAIJxyOkUETjFBQFdnQIOQA1DJvlKTvik7PZGtkX86gSBkAQHzGGSbIs7TDBRZbrYZYCjECALg
+z1XTfLbmzdrI7IG3q7uLrGpv26mLPNQd8Mr24C2NWtke/z19EAmNzsgikpMpCp5opBhCErGAh/dC
+1+luZ37xfhEDAL7yuMCRwIGdh9m7eRAKUyLijzzKpww+wYUIwyspXs2SvIjBR75fL5PVKskBpdEt
+hbzWpTx5RVceHs0lWEALHFNmCkYvVUsJw4OGdbxJi2wWg+/pZpNuk8WDt6bQSKDQ4i2GU0SfVcsZ
+4fS+2uRjPTTcxnRcgBB6T8fdEoHQotJcMCOvZuLP8rRId0tvnq3261ka+2C3z/PkxyvRwKEJBUOW
+vjBWPXMq4hTzL5n428w4tki8Vext8zjN08R/6EUiEBGEjjC5G+jN7sgOdVSpOeWMCRaOQKkzKLee
+tivUjb1/z1xgh2I3kd56l40wnUWKmIDEDqWhK3eHAToCZc4qhUjgkdHwdGj//2zAgo30URC4gZqP
+MTKx2qERcWMvE5QLMpJpxF1map8NGEcup6B99GLKHQ4Hgu1Q5vLLhuzznjpEQnvvhu/z9g9QSwEC
+PwMUAAIACAA8sWpb/tZOjlgCAABQDAAAMgAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wNi1zY2Fu
+X2Npc2NvX3NtYXJ0X2luc3RhbGwtc2FtcGxlLWFzbi5jc3ZQSwUGAAAAAAEAAQBgAAAAqAIAAAAA
+
+
+--b1_a8cf9addf5c1b868c5aed6bb3e68b252--

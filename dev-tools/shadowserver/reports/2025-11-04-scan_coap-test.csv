@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","version","response","response_size","amplification"
+"2025-11-04 08:01:24",medium,100.64.170.128,udp,5683,,coap,81021,SG,CENTRAL,SINGAPORE,517810,,"Retail Trade",2,"</fw>,</efento>,</efento/c>,</efento/i>,</efento/m>,</efento/t>,</sw>,</api>,</api/v1>,</.well-known/core>",113,5.38
+"2025-11-04 07:48:54",medium,100.64.196.82,udp,5683,,coap,81021,UK,LONDON,LONDON,517810,,"Retail Trade",2,</.well-known/core>,26,1.24
+"2025-11-04 07:59:14",medium,100.64.136.181,udp,5683,,coap,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",2,"</fw>,</efento>,</efento/c>,</efento/i>,</efento/m>,</efento/t>,</sw>,</i>,</i/3a7c89ba-7966-68c5-87a5-0d6e03735d08>,</i/3acbc4d9-519d-0756-72fc-7397ea042d5e>,</i/3c3c5829-e98d-7328-bcde-7c17f6dd8e9a>,</i/52900560-4b3c-7ff2-e152-d1f78d5be3be>,</i/6ed255a5-55dd-2b4a-79e2-7ce93d707a2f>,</i/bc4dce23-1628-5814-6828-716651cc0e2a>,</api>,</api/v1>,</.well-known/core>",370,17.62
+"2025-11-04 07:32:04",medium,100.64.199.231,udp,5683,,coap,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",2,"</.well-known/core>;ct=""40"",</data>,</commands>,<https://christian.amsuess.com/tools/aiocoap/#version-0.4.7>;rel=""impl-info""",131,6.24
+"2025-11-04 07:30:41",medium,100.64.233.116,udp,5683,,coap,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",2,"</.well-known/core>;ct=""40"",</data>,</commands>,<https://christian.amsuess.com/tools/aiocoap/#version-0.4.12>;rel=""impl-info""",132,6.29
+"2025-11-04 08:01:47",medium,100.64.215.207,udp,5683,,coap,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",2,"</dp>,</rd>;rt=""core.rd""",31,1.48
+"2025-11-04 06:56:59",medium,100.64.99.13,udp,5683,,coap,81021,AU,"NEW SOUTH WALES",SYDNEY,517810,,"Retail Trade",2,"</api>,</api/v1>;obs,</efento>;obs,</efento/c>,</efento/i>,</efento/m>,</efento/t>,</fw>;obs,</sw>;obs",109,5.19
+"2025-11-04 07:25:26",medium,100.64.219.249,udp,5683,,coap,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",2,"</fw>,</efento>,</efento/c>,</efento/i>,</efento/m>,</efento/t>,</sw>,</api>,</api/v1>,</.well-known/core>",113,5.38
+"2025-11-04 07:16:13",medium,100.64.1.190,udp,5683,,coap,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",2,"</fw>,</efento>,</efento/c>,</efento/i>,</efento/m>,</efento/t>,</sw>,</api>,</api/v1>,</.well-known/core>",113,5.38
+"2025-11-04 07:11:31",medium,100.64.117.136,udp,5683,,coap,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",2,"</fw>,</efento>,</efento/c>,</efento/i>,</efento/m>,</efento/t>,</sw>,</api>,</api/v1>,</.well-known/core>",113,5.38
+"2025-11-04 07:20:34",medium,100.64.123.144,udp,5683,,coap,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",2,"</fw>,</efento>,</efento/c>,</efento/i>,</efento/m>,</efento/t>,</sw>,</api>,</api/v1>,</.well-known/core>",113,5.38
+"2025-11-04 07:50:16",medium,100.64.108.215,udp,5683,,coap,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",2,</bs>,12,0.57
+"2025-11-04 07:26:19",medium,100.64.18.30,udp,5683,,coap,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",2,"</bs>,</dp>,</ka>,</rd>;rt=""core.rd""",43,2.05
+"2025-11-04 08:20:59",medium,100.64.252.231,udp,5683,,coap,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",2,"</rd>;rt=""core.rd"",</.well-known/core>",45,2.14
+"2025-11-04 07:52:40",medium,100.64.121.180,udp,5683,,coap,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",2,"</api>,</api/v1>,</.well-known/core>",43,2.05
+"2025-11-04 08:22:29",medium,100.64.219.112,udp,5683,,coap,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2,"</sec>;title=""Secure COAP Resource"",</ddb>;title=""Ddb Resource"",</.well-known/core>",90,4.29
+"2025-11-04 08:13:29",medium,100.64.243.193,udp,5683,,coap,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2,"</api>,</api/v1>,</.well-known/core>",43,2.05
+"2025-11-04 07:37:02",medium,100.64.196.148,udp,5683,,coap,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2,</bs>,12,0.57
+"2025-11-04 07:24:02",medium,100.64.19.31,udp,5683,,coap,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2,"</fw>,</efento>,</efento/c>,</efento/i>,</efento/m>,</efento/t>,</sw>,</api>,</api/v1>,</.well-known/core>",113,5.38
+"2025-11-04 07:46:47",medium,100.64.225.56,udp,5683,,coap,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2,"</api>,</api/v1>;obs,</efento>;obs,</efento/c>,</efento/i>,</efento/m>,</efento/t>,</fw>;obs,</sw>;obs",109,5.19
+"2025-11-04 07:38:44",medium,100.64.42.33,udp,5683,,coap,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2,"</dp>,</rd>;rt=""core.rd""",31,1.48
+"2025-11-04 07:30:28",medium,100.64.106.5,udp,5683,,coap,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2,"</efento>,</efento/m>,</api>,</api/v1>,</.well-known/core>",65,3.10
+"2025-11-04 07:34:11",medium,100.64.182.214,udp,5683,,coap,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2,"</c>,</t>,</e>,</i>;title=""DeviceInfo"",</m>;title=""Measurement"",</.well-known/core>",90,4.29
+"2025-11-04 08:08:06",medium,100.64.213.91,udp,5683,,coap,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2,"</sec>;title=""Secure COAP Resource"",</ddb>;title=""Ddb Resource"",</.well-known/core>",90,4.29
+"2025-11-04 07:27:23",medium,100.64.236.61,udp,5683,,coap,81021,DE,HESSEN,"FRANKFURT AM MAIN",561499,,"Retail Trade",2,</bs>,12,0.57

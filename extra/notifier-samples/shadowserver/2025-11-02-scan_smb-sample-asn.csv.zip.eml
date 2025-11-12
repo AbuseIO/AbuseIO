@@ -1,0 +1,41 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <da577ec977403b7748ad3bf029e22069@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_da577ec977403b7748ad3bf029e22069"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_smb-sample Report: 2025-11-02
+
+--b1_da577ec977403b7748ad3bf029e22069
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_da577ec977403b7748ad3bf029e22069
+Content-Type: application/octet-stream; name="2025-11-02-scan_smb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-scan_smb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvGSkW27AEAAJALAAAiAAAAMjAyNS0xMS0wMi1zY2FuX3NtYi1zYW1wbGUt
+YXNuLmNzdr2Wy27bMBBF9/2KQGuG4AxJUeIuaIKgaGAXTro2FJWQ1UaSQTEB+vcdxghQT4quynrB
+hyzp+HIe11Uap7CmbjpWolrDS4hj+knLMe+PcUlLvzzl5RITTYdlTXM3BVqmbqCxW2cah7DQGMMw
+Lnnbn94xd2O//vbQfl2eYx9eQX1aYn489geafoR8/zo97qfu+xL38/P0GOLbpXHml2J4GdcTK2/p
+V+fdfk1xnIfqQ4UK7SXApcILpTxqj1iJwzgcBCglayMBUaIGkfqjMMYKQa8RDSgEcX8rPt5sHnZX
+d+L+0+b26st2dyMsOPpWiGoXUjc+XTzE7hsJef2c4QA9Og+G4YySaFwBnMvqjOO4hhT+e5qig6y9
+5TQrUZkCtNZj4y2PnNOyVQVO0npsvVKcZklfXUBc7bXymotrtGxssaNsz2kIKJsSgTuVHDCa0dJC
+MW2s4rSW0BY4SWhymkDDaC1lCZbJEvCK0UzOyxK9i2j6Xe+qSZspVW88SRqUuikSNeJpew5rs7hi
+MBY0UCARSzUS1NzfHOVIXay2uTiXTadcAdSslWBNzcuVcm/kvYRSxf6vxmWo3FpdzHCYBVhF6kqF
+DZi7WfLSQn+CDFk371uUktqVcQAKG+slACDdH2lfP4u77eZ6u3mb/kr6BVBLAQI/AxQAAgAIADyx
+alvGSkW27AEAAJALAAAiAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTAyLXNjYW5fc21iLXNhbXBs
+ZS1hc24uY3N2UEsFBgAAAAABAAEAUAAAACwCAAAAAA==
+
+
+--b1_da577ec977403b7748ad3bf029e22069--

@@ -1,0 +1,4 @@
+"timestamp","url","hostname","ip","asn","geo","region","city","naics","sector","severity","port","tag","source","sender","subject","src_ip","src_asn","src_geo","src_region","src_city","src_naics","src_sector"
+"2025-11-06 00:00:00",,node01.example.com,192.168.0.1,64512,ZZ,Region,City,0,,info,,test,,,,192.168.0.1,64512,ZZ,Region,City,0,
+"2025-11-06 00:00:01",,node02.example.com,192.168.0.2,64512,ZZ,Region,City,0,,info,,test,,,,192.168.0.2,64512,ZZ,Region,City,0,
+"2025-11-06 00:00:02",,node03.example.com,192.168.0.3,64512,ZZ,Region,City,0,,info,,test,,,,192.168.0.3,64512,ZZ,Region,City,0,

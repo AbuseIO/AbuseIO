@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","packets","response_size","amplification"
+"2025-11-05 13:35:12",medium,100.64.58.55,udp,123,,ntpmonitor,65915,CA,QUEBEC,LAVAL,517112,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-05 14:03:38",medium,100.64.180.249,udp,123,,ntpmonitor,70157,CA,ONTARIO,WOODSTOCK,517111,,Information,1,440,36.67
+"2025-11-05 02:22:11",medium,100.64.197.193,udp,123,,ntpmonitor,128461,CA,ONTARIO,TORONTO,518210,,"Communications, Service Provider, and Hosting Service",68,29920,2493.33
+"2025-11-05 15:14:52",medium,100.64.58.148,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",17,7480,623.33
+"2025-11-05 15:28:12",medium,100.64.169.213,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",3,1320,110.00
+"2025-11-05 10:38:27",medium,100.64.135.75,udp,123,,ntpmonitor,75772,CA,ONTARIO,GODERICH,517111,,"Communications, Service Provider, and Hosting Service",11,4840,403.33
+"2025-11-05 15:10:22",medium,100.64.44.211,udp,123,,ntpmonitor,65364,CA,"BRITISH COLUMBIA",VANCOUVER,517111,,"Communications, Service Provider, and Hosting Service",1,152,12.67
+"2025-11-05 00:02:06",medium,100.64.241.144,udp,123,,ntpmonitor,65364,CA,ALBERTA,"SLAVE LAKE",517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-05 02:22:20",medium,100.64.166.120,udp,123,,ntpmonitor,65364,CA,ALBERTA,EDMONTON,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-05 14:58:14",medium,100.64.107.178,udp,123,,ntpmonitor,86461,CA,ONTARIO,TORONTO,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-05 00:37:47",medium,100.64.237.111,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",4,1760,146.67
+"2025-11-05 15:10:31",medium,100.64.239.191,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",95,41800,3483.33
+"2025-11-05 15:28:24",medium,100.64.246.117,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",66,29040,2420.00
+"2025-11-05 00:02:11",medium,100.64.246.239,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",72,31680,2640.00
+"2025-11-05 15:06:18",medium,100.64.246.246,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-05 15:32:37",medium,100.64.246.252,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",8,3520,293.33
+"2025-11-05 15:14:58",medium,100.64.253.131,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",76,33440,2786.67
+"2025-11-05 00:37:45",medium,100.64.253.178,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",55,24200,2016.67
+"2025-11-05 15:23:47",medium,100.64.253.195,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",2,880,73.33
+"2025-11-05 00:38:07",medium,100.64.253.214,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-05 14:30:59",medium,100.64.253.229,udp,123,,ntpmonitor,71634,CA,MANITOBA,WINNIPEG,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-05 10:38:52",medium,100.64.254.24,udp,123,,ntpmonitor,65364,CA,"BRITISH COLUMBIA",OSOYOOS,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-05 14:58:18",medium,100.64.4.179,udp,123,,ntpmonitor,65364,CA,"BRITISH COLUMBIA",BURNABY,517111,,"Communications, Service Provider, and Hosting Service",1,440,36.67
+"2025-11-05 15:19:57",medium,100.64.109.115,udp,123,,ntpmonitor,97642,CA,ONTARIO,MILTON,,,,1,440,36.67
+"2025-11-05 00:37:36",medium,100.64.136.91,udp,123,,ntpmonitor,70157,CA,ONTARIO,TORONTO,517111,,Information,1,440,36.67

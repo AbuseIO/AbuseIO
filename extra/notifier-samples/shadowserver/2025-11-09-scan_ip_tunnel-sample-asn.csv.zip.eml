@@ -1,0 +1,43 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <f33ee171ae5e45e274886a27d2aa1d45@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_f33ee171ae5e45e274886a27d2aa1d45"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ip_tunnel-sample Report: 2025-11-09
+
+--b1_f33ee171ae5e45e274886a27d2aa1d45
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_f33ee171ae5e45e274886a27d2aa1d45
+Content-Type: application/octet-stream; name="2025-11-09-scan_ip_tunnel-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_ip_tunnel-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsv/4rrYQIAAJwPAAAoAAAAMjAyNS0xMS0wOS1zY2FuX2lwX3R1bm5lbC1z
+YW1wbGUtYXNuLmNzds2Xy26jMBSG9/MUyGs38pWLd4SgBk2aVE6mo65GFrFSpIAjIJH69mPSqdSZ
+OMmKgY0xAtsf//nPsQFtUeqmVeUBQNDok66L9t12i+7+UJvW5GbfdU3d2subadpKldp2W7WzrWoq
+2+60sW2td4XpbvOPOSpV5M2XQb8ac6xzfV4ob019HtIcTNVo8A0QRPgDxg8o8jAVJBIUA1jqbXEs
+IUZo4rMJDvwJgrtaQ3huMQ5CP4RJDMFUZptsPfeS1eLH0zSLAXzJks1KZjHkOCQYQQhmqlXec21y
+3TRFtYPe3IKdO6raelLvVau33lrXp8K+AqDO30ytD/v3v+G4IFywwAWHSTg4HhU8EIg58Xg0BvWw
+IKETzx9cPRQIjgVzOg8HfATqoVAQ5MSLyOB4THCbt07vEUIHDy4SlAqG3HhsBMGloWDO1CB8FN5j
+V7xH8eB0NraR4G46Mo6qh51lxafjqCqYO+lGkRZIIN9FFw2eFYh0dI7IEmL3MwKLvDxYPr+oGAww
+CugVPpCsfmbJPF560/gV2BGQIDu3H4ZaBEoRIRzJiKN/l0WTr5noc2rjZxeMF9NUbmKYzNP1JpVP
+qUytEAHG2AqRmLI8VkWuWnt6a+DnJ3fanIqtrj8E+aPO59M7GyhygJHoJtpq+X2RLXvC6k5FvuDc
+gRXRW1hApjNvlqYS9EV2LlyMXZL5/CbYo4yXs9R7lnEms7Q3PGs06hAO3zFavHiM5WtfJru2kd81
+Wa9Y9vhj/wyI78C6bbKesYjgoRXsEuu2w2bpy2rZr+svmdCdCtZ7PiLcFTDH/xP675b/DVBLAQI/
+AxQAAgAIADyxalsv/4rrYQIAAJwPAAAoAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA5LXNjYW5f
+aXBfdHVubmVsLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAVgAAAKcCAAAAAA==
+
+
+--b1_f33ee171ae5e45e274886a27d2aa1d45--

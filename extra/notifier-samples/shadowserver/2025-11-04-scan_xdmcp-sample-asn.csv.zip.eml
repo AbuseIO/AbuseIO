@@ -1,0 +1,44 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <aaad7505708ce34d5a4b24aa0ad4c929@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_aaad7505708ce34d5a4b24aa0ad4c929"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_xdmcp-sample Report: 2025-11-04
+
+--b1_aaad7505708ce34d5a4b24aa0ad4c929
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_aaad7505708ce34d5a4b24aa0ad4c929
+Content-Type: application/octet-stream; name="2025-11-04-scan_xdmcp-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-scan_xdmcp-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluax2AaggIAANwIAAAkAAAAMjAyNS0xMS0wNC1zY2FuX3hkbWNwLXNhbXBs
+ZS1hc24uY3N2zdVdb9owFAbg+/6KKNeHyMcf+bpLKRPRgEyQ0t1VUZLSSBCjJFTdfv2Ooe2A0O1m
+U3tjHCzHj95jO3ZXbcq2yzZbG+y2fCqbqvtB3co8bxvd6VyvTVc3Hf086rars01J3S5bUZu1NbWr
+UlPblKtKm8f88I46q/L2aNJ9q3dNXu4XyjvdUEdvc12U+7lmhbK4P1qBWN2u3Q+2W1239ILqpxkg
+7bp6qPKsM+td2ZxxNUAcMGkxDLkMWWDDY7V6BGTMcaUTSIcjg12xBfQ8gOdik2/B4y4XMIzAniXL
+yFoMkzSObBhHk/hL9B1cREGTwB4Vu8NS1qJsnqq8JNNdtV5X9YpGJ1W9e7aUg8phAxTBYFXWlGJu
+g1TgOlKc+ljI/FB6pz6aLVSP5ytvz0tmaTSPE0iTOXUTUOjzPWyoN5td/ZJDC68861ujn6qibMDK
+6sIaU6JEfR09stNqwC8IJQsVngqRccf3z4muElweE5M0je4iEnqI+C+EXIFwlHcqdEPOQ5RnwgAd
+rxci0t/cPSZOo/nXcTQ9GDlAXD/oZrMHHlWVWbvW8Ky1zorQYg6Dt4YqK6myPDhXKQwFO1W5roPn
+poChzwwpmlyP5mkEo5upKezsd2Vvsi4zIdFeaw3oNaJDXvNyndFZubgd/wK/tCUJ7oVS9OHyY+W+
+Qct9Q3IBRtSTsxAvRO5+/swF9g4ZyblinyB01zTq3dClCpXfowfss4fu0V4JedCXf/ARRYMWf97o
+wgvZ2XbhgsrFe58Nzxd4fOEt0jhNF8t4Mhm9XcwXLz0QHqhL15rqhcbRQVTvpmZfz+M0XoytYTK5
+nV6br+oymg2T2+Vo/v8SfKt9AJ7D2NUvUEsBAj8DFAACAAgAPLFqW5rHYBqCAgAA3AgAACQAAAAA
+AAAAAAAAALaBAAAAADIwMjUtMTEtMDQtc2Nhbl94ZG1jcC1zYW1wbGUtYXNuLmNzdlBLBQYAAAAA
+AQABAFIAAADEAgAAAAA=
+
+
+--b1_aaad7505708ce34d5a4b24aa0ad4c929--

@@ -1,0 +1,44 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <bac139a06c7c703c10abcf39fa03abae@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_bac139a06c7c703c10abcf39fa03abae"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_epmd-sample Report: 2025-11-09
+
+--b1_bac139a06c7c703c10abcf39fa03abae
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_bac139a06c7c703c10abcf39fa03abae
+Content-Type: application/octet-stream; name="2025-11-09-scan_epmd-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_epmd-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvgbYPtlgIAANQMAAAjAAAAMjAyNS0xMS0wOS1zY2FuX2VwbWQtc2FtcGxl
+LWFzbi5jc3a9lt9v2jAQx9/3V6A8u5HPP+I4b1nHWqYWJlJU9QmF4EE2iFHiTUPqH78Dpmk48FIl
+lRLHUcCfO9/37hy4cmsal293AQka88vUpdvjtDy872rrbGE3h6mtHT7WtnFVvjU4dfkKx7ypcFwZ
+i2NtVqU9vBanNaq8LJr//jRv7M+6MEdQ4Wx9+Ildmib4EDDK5A3ADdUDUAlECY8Dsi5XawKUhpEI
+QcQhk5S4YkcEjzQhZrddkhgoA5Ldkdvh+GmaPpBsNL5Lv06mQyJB4VdCgqlxebkZPNX58sDe2mpl
+bWPKLRGMcdWiyyhh0qMrFjKhOqDX+WJROsJkpNg5meqE60R4ZEY5kqELv90xnHMcf+8JsEhrzwCa
+CEg49w2I8dEBv7A/i/VyMa+aORABQqjX45QBUHhd5It9Uzpn6rn9Nv/3gXomojBkIqJzEyUPda+h
+AZlIitc5VlNUJOsAbL4j2dRL1ONlh/2YAKeh6ttjLhJopQEPQcb9pgFPBMMc9FTIIQSA90hAdU6O
+ZQhadgE2+eZQbFH70Ko6J4ExP8xxqK/4PMvIbfow+jyZjkcpCbJ0PPgyyYbB29XdguuQqd7hfzdd
+eOFmaEB0ZdfTGQnGw+dBNpk93Q+e04dhFpDs5dN4+PIWA04Z5hmg4XrUu+Xj7mO7E15tgQgbDo+7
+M2DXNPuqwLWUV2FAJDJutR3QeMf6nTbggvx4FF6rrZ26f7nrYvTpFedHY/KY3qfTNLvHxCePs8eP
+6egtbrNDhW0dc1ioewafPOa+x5HGM5bsGX3MNel3MxVjbac9o4+HG6Y9dKzQ654DfWylzAs0AxVG
+URfkzb764eocxS0pfa3zqljPj8tKChe17lkS4RFPvYfkWknGsLVCD5L7A1BLAQI/AxQAAgAIADyx
+alvgbYPtlgIAANQMAAAjAAAAAAAAAAAAAAC2gQAAAAAyMDI1LTExLTA5LXNjYW5fZXBtZC1zYW1w
+bGUtYXNuLmNzdlBLBQYAAAAAAQABAFEAAADXAgAAAAA=
+
+
+--b1_bac139a06c7c703c10abcf39fa03abae--

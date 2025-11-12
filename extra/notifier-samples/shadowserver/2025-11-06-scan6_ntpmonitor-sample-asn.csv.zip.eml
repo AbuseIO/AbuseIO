@@ -1,0 +1,36 @@
+Date: Thu, 06 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <702f3a2657dc8956aac3d8ab133495f5@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_702f3a2657dc8956aac3d8ab133495f5"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan6_ntpmonitor-sample Report: 2025-11-06
+
+--b1_702f3a2657dc8956aac3d8ab133495f5
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_702f3a2657dc8956aac3d8ab133495f5
+Content-Type: application/octet-stream; name="2025-11-06-scan6_ntpmonitor-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-06-scan6_ntpmonitor-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalvd0FVX2AAAAOABAAAqAAAAMjAyNS0xMS0wNi1zY2FuNl9udHBtb25pdG9y
+LXNhbXBsZS1hc24uY3N2pY9BTgMxDEX3nAJl7VZJ2ik0W27AshvkZjxDRCceJW4FnB5nUCUWqBIi
+ipxvyf7vx0iaqApOswFT6UIlyYfK1Pq5sHDkU5NcRJ9XrpJxIpWCo1asWetIrLXQmLi18dsjY4r1
+x9JL5XOJtICicGm2GN9I6rJcZ85Vh9JnG9FEpzSkiNI874y3vls5t7K7e2vDcg2kPDAMvd2HLR67
+0CPtw9E+PIbgACBzT9at6b150TryBKJ/hd22cx4OB3heAsOTxgUL7fzGcbc4/srx/+b4W5zNlbP5
+G+cLUEsBAj8DFAACAAgAPLFqW93QVVfYAAAA4AEAACoAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEt
+MDYtc2NhbjZfbnRwbW9uaXRvci1zYW1wbGUtYXNuLmNzdlBLBQYAAAAAAQABAFgAAAAgAQAAAAA=
+
+
+--b1_702f3a2657dc8956aac3d8ab133495f5--

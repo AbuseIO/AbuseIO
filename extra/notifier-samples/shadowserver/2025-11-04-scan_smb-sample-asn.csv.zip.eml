@@ -1,0 +1,41 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <11b3b9eb4619d01094b0e572549b72c4@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_11b3b9eb4619d01094b0e572549b72c4"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_smb-sample Report: 2025-11-04
+
+--b1_11b3b9eb4619d01094b0e572549b72c4
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_11b3b9eb4619d01094b0e572549b72c4
+Content-Type: application/octet-stream; name="2025-11-04-scan_smb-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-scan_smb-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalt4xoP83gEAAJkLAAAiAAAAMjAyNS0xMS0wNC1zY2FuX3NtYi1zYW1wbGUt
+YXNuLmNzdr2WzW7cIBCA732KyGdiMQMYwy2qoqhSlVab3FeOi3ZpY7PCJFLfvkOiSl32mqllYcCG
+z/PLdCUuYSvTcupEt4XXkGP5Td1Yx6ecSprTc+2mXOhxTFtZpyVQt0wHaqdtpfYQErU5HGKqw/l9
+j3WK8/bPov2WXvIc3kBzSbkuz/ORHr9C/X5bnvbL9DPl/fqyPIX8dyqu7VQOr3F7Z9Uh/XUd7beS
+43roPnUo0VwDXEt9BegRPGAnjvFwFCBlP+getOxRW1Hmk9DaCEHbiBEkgni4E59v7x93N1/Fw5f7
+u5vv33a3woClt0J0u1Cm+Hz1mKcfJMjbdYGTXpsWp/uRgzZ6dF7phmZMj0az4KTxcmhw1pIuHQPO
+eDN4aKUbVT+aj6dJ5WHwajynoXQkHAdu8IheygYHA+kTGHCyhgG2uLGn1UwwgHOYUj04w0ZrDKcc
+xQGyOKWWXrlzmtZMZnMeyVHsOW0g2SSfT7pLmuaBgdeNk1jySOQwGyUS8Kbx/7HS2MwGjSJd1SWX
+Ii8OARh7VAPLIQCW7gaHSHkS/ld0A1LyQp7wNnS3OFvPcL5sottDB8h+TNUJuUqbmMk1DYtsVC0Y
+uMzLAFxRYJrCSxPNKQbZrJfW6ybAqe6Cjyoq/wBQSwECPwMUAAIACAA8sWpbeMaD/N4BAACZCwAA
+IgAAAAAAAAAAAAAAtoEAAAAAMjAyNS0xMS0wNC1zY2FuX3NtYi1zYW1wbGUtYXNuLmNzdlBLBQYA
+AAAAAQABAFAAAAAeAgAAAAA=
+
+
+--b1_11b3b9eb4619d01094b0e572549b72c4--

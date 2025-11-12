@@ -1,16 +1,15 @@
 [Unit]
 Description=AbuseIO Queue Daemon for collectors
-Requires=mysql.service apache2.service
+Requires=mysql.service
 
 [Service]
-ExecStart=/usr/bin/php artisan queue:work --daemon --tries=5 --sleep=3 --memory=256 --delay=30 --queue=abuseio_delegation
-ExecStop=/bin/kill -TERM $MAINPID
-WorkingDirectory=/opt/abuseio/
+Type=simple
 User=abuseio
 Group=abuseio
-Type=simple 
-KillMode=process
+WorkingDirectory=/opt/abuseio/
 Restart=always
+RestartSec=30
+ExecStart=/usr/bin/php artisan queue:work --daemon --tries=5 --sleep=3 --memory=256 --delay=30 --queue=abuseio_delegation
 
 [Install]
 WantedBy=multi-user.target

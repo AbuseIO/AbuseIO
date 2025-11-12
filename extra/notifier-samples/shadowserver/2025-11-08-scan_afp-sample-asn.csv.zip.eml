@@ -1,0 +1,68 @@
+Date: Sat, 08 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <12e5585e43c8517607612d71fa43694a@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_12e5585e43c8517607612d71fa43694a"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_afp-sample Report: 2025-11-08
+
+--b1_12e5585e43c8517607612d71fa43694a
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_12e5585e43c8517607612d71fa43694a
+Content-Type: application/octet-stream; name="2025-11-08-scan_afp-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-08-scan_afp-sample-asn.csv.zip
+
+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
+
+
+--b1_12e5585e43c8517607612d71fa43694a--

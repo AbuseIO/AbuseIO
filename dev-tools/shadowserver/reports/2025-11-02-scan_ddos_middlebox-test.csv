@@ -1,0 +1,10 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","source_port","bytes","amplification","method"
+"2025-11-02 15:15:07",medium,100.64.14.211,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",58529,1460,35.61,SYN/GET
+"2025-11-02 16:21:03",medium,100.64.105.217,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",34039,1460,35.61,SYN/GET
+"2025-11-02 03:47:10",medium,100.64.136.216,tcp,80,,ddos-middlebox,81021,JP,TOKYO,TOKYO,517810,,"Retail Trade",49860,963,23.49,SYN/GET
+"2025-11-02 15:15:06",medium,100.64.142.151,tcp,80,,ddos-middlebox,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",52478,590,14.39,SYN/GET
+"2025-11-02 00:43:21",medium,100.64.254.133,tcp,80,,ddos-middlebox,81021,US,OHIO,COLUMBUS,517810,,"Retail Trade",54048,1126,27.46,SYN/GET
+"2025-11-02 09:48:54",medium,100.64.199.11,tcp,80,,ddos-middlebox,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",54398,1228,29.95,SYN/GET
+"2025-11-02 15:14:55",medium,100.64.51.47,tcp,80,,ddos-middlebox,79130,US,VIRGINIA,ASHBURN,517810,,"Retail Trade",47977,1460,35.61,SYN/GET
+"2025-11-02 03:47:44",medium,100.64.172.107,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",34092,7081,172.71,SYN+ACK:PSH
+"2025-11-02 18:05:58",medium,100.64.172.109,tcp,80,,ddos-middlebox,81021,IN,MAHARASHTRA,MUMBAI,517810,,"Retail Trade",49337,7083,172.76,SYN+ACK:PSH

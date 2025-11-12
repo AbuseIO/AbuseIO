@@ -1,0 +1,7 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","sequence_number","ack_number","window_size","urgent_pointer","tcp_flags","raw_packet"
+"2025-11-03 00:01:54",critical,100.64.45.66,tcp,80,,synfulknock,101660,NG,DELTA,WARRI,517112,,Information,0,791102,8192,0,4608,
+"2025-11-03 03:00:03",critical,100.64.43.106,tcp,80,,synfulknock,82134,CN,"GUANGDONG SHENG",GUANGZHOU,517111,,Information,0,791102,8192,0,4608,
+"2025-11-03 09:06:22",critical,100.64.55.210,tcp,80,,synfulknock,100317,GE,TBILISI,TBILISI,517112,,Information,0,791102,8192,0,4608,
+"2025-11-03 00:01:28",critical,100.64.89.161,tcp,80,,synfulknock,85440,EG,"AL QAHIRAH",CAIRO,,,,0,791102,8192,0,4608,
+"2025-11-03 09:06:31",critical,100.64.203.52,tcp,80,,synfulknock,74069,PK,"SINDH - SOUTH",KARACHI,517111,,Government,0,791102,8192,0,4608,
+"2025-11-03 12:08:59",critical,100.64.44.133,tcp,80,,synfulknock,82134,CN,"GUANGDONG SHENG",GUANGZHOU,517111,,Information,0,791102,8192,0,4608,

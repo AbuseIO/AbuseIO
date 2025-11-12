@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","response_size","amplification"
+"2025-11-02 00:38:33",medium,100.64.168.177,udp,19,,chargen,65367,CA,"NEW BRUNSWICK","SAINT JOHN",517111,,"Communications, Service Provider, and Hosting Service",74,74.00
+"2025-11-02 00:26:40",medium,100.64.182.140,udp,19,,chargen,65367,CA,"NEW BRUNSWICK","RICHIBUCTO ROAD",517111,,"Communications, Service Provider, and Hosting Service",74,74.00
+"2025-11-02 00:12:45",medium,100.64.182.204,udp,19,,chargen,65367,CA,"NEW BRUNSWICK","RICHIBUCTO ROAD",517111,,"Communications, Service Provider, and Hosting Service",74,74.00
+"2025-11-02 01:35:30",medium,100.64.182.74,udp,19,,chargen,65367,CA,"NEW BRUNSWICK","RICHIBUCTO ROAD",517111,,"Communications, Service Provider, and Hosting Service",74,74.00
+"2025-11-02 00:36:33",medium,100.64.78.104,udp,19,,chargen,65367,CA,"NOVA SCOTIA",SAMPSONVILLE,517111,,"Communications, Service Provider, and Hosting Service",2458,2458.00
+"2025-11-02 01:05:31",medium,100.64.194.152,udp,19,,chargen,80788,CA,QUEBEC,BEAUHARNOIS,518210,,"Communications, Service Provider, and Hosting Service",5666,5666.00
+"2025-11-02 01:14:11",medium,100.64.194.154,udp,19,,chargen,80788,CA,QUEBEC,BEAUHARNOIS,518210,,"Communications, Service Provider, and Hosting Service",82,82.00
+"2025-11-02 01:04:22",medium,100.64.172.16,udp,19,,chargen,80788,CA,QUEBEC,MONTREAL,518210,,"Communications, Service Provider, and Hosting Service",5878,5878.00
+"2025-11-02 10:06:24",medium,100.64.97.68,udp,19,,chargen,80788,CA,QUEBEC,MONTREAL,518210,,"Communications, Service Provider, and Hosting Service",5000,5000.00
+"2025-11-02 00:23:46",medium,100.64.226.44,udp,19,,chargen,80788,CA,QUEBEC,MONTREAL,518210,,"Communications, Service Provider, and Hosting Service",4498,4498.00
+"2025-11-02 01:51:04",medium,100.64.39.46,udp,19,,chargen,78573,CA,ONTARIO,TORONTO,518210,,"Communications, Service Provider, and Hosting Service",8192,8192.00
+"2025-11-02 01:19:55",medium,100.64.86.145,udp,19,,chargen,94908,CA,"NOVA SCOTIA",PUGWASH,,,,74,74.00
+"2025-11-02 00:34:23",medium,100.64.251.37,udp,19,,chargen,78161,CA,ONTARIO,ETOBICOKE,517112,,Information,2282,2282.00
+"2025-11-02 01:21:59",medium,100.64.173.152,udp,19,,chargen,70281,CA,QUEBEC,QUEBEC,517111,,"Communications, Service Provider, and Hosting Service",4307,4307.00
+"2025-11-02 00:14:25",medium,100.64.31.242,udp,19,,chargen,4200397545,CA,"NOVA SCOTIA",DARTMOUTH,517112,,Information,74,74.00
+"2025-11-02 01:28:33",medium,100.64.49.46,udp,19,,chargen,118425,CA,"PRINCE EDWARD ISLAND",CHARLOTTETOWN,,,,74,74.00
+"2025-11-02 01:46:16",medium,100.64.223.22,udp,19,,chargen,118511,CA,ONTARIO,TORONTO,518210,,"Communications, Service Provider, and Hosting Service",74,74.00
+"2025-11-02 01:03:19",medium,100.64.223.26,udp,19,,chargen,118511,CA,ONTARIO,TORONTO,518210,,"Communications, Service Provider, and Hosting Service",74,74.00
+"2025-11-02 00:07:36",medium,100.64.166.2,udp,19,,chargen,65324,CA,ONTARIO,NEPEAN,517111,,"Communications, Service Provider, and Hosting Service",2777,2777.00
+"2025-11-02 00:23:08",medium,100.64.5.175,udp,19,,chargen,65089,CA,ONTARIO,ETOBICOKE,517111,,"Communications, Service Provider, and Hosting Service",2024,2024.00
+"2025-11-02 00:40:47",medium,100.64.157.34,udp,19,,chargen,65089,CA,ONTARIO,OTTAWA,517111,,"Communications, Service Provider, and Hosting Service",1024,1024.00
+"2025-11-02 00:48:52",medium,100.64.253.92,udp,19,,chargen,65089,CA,ALBERTA,CALGARY,517112,,"Communications, Service Provider, and Hosting Service",922,922.00
+"2025-11-02 01:34:15",medium,100.64.184.127,udp,19,,chargen,70839,CA,ALBERTA,CALGARY,517112,,"Communications, Service Provider, and Hosting Service",1024,1024.00
+"2025-11-02 04:26:51",medium,100.64.172.90,udp,19,,chargen,101005,CA,"NOVA SCOTIA",HALIFAX,,,"Communications, Service Provider, and Hosting Service",3800,3800.00
+"2025-11-02 03:41:57",medium,100.64.10.211,udp,19,,chargen,80788,CA,QUEBEC,MONTREAL,518210,,"Communications, Service Provider, and Hosting Service",3838,3838.00

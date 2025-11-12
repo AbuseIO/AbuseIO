@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","machine_name","response_size","amplification"
+"2025-11-05 11:39:01",high,100.64.8.75,udp,3283,,ard,4200400331,CA,ONTARIO,MARKHAM,,,,server3,1006,201.20
+"2025-11-05 11:31:56",high,100.64.8.77,udp,3283,,ard,4200400331,CA,ONTARIO,MARKHAM,,,,cmw2,1006,201.20
+"2025-11-05 11:58:37",high,100.64.8.78,udp,3283,,ard,4200400331,CA,ONTARIO,MARKHAM,,,,cmw2,1006,201.20
+"2025-11-05 11:32:54",high,100.64.253.243,udp,3283,,ard,70281,CA,QUEBEC,SAINT-COLOMBAN,517111,,"Communications, Service Provider, and Hosting Service",FMS_AndreAuger,1006,201.20
+"2025-11-05 03:49:24",high,100.64.132.38,udp,3283,,ard,64888,CA,QUEBEC,MONTREAL,611310,,"Education Services",GROENLAND,1006,201.20
+"2025-11-05 05:21:05",high,100.64.168.155,udp,3283,,ard,97603,CA,ALBERTA,CALGARY,621111,,"Education Services","Geuking Lab 27inch iMac",1006,201.20
+"2025-11-05 03:44:28",high,100.64.114.47,udp,3283,,ard,65089,CA,ONTARIO,MARKHAM,517111,,"Communications, Service Provider, and Hosting Service","Andora Admin Server",360,72.00
+"2025-11-05 04:28:33",high,100.64.230.224,udp,3283,,ard,65089,CA,QUEBEC,SAINT-NICOLAS,517111,,"Communications, Service Provider, and Hosting Service","Mac Mini",1006,201.20
+"2025-11-05 04:38:52",high,100.64.172.213,udp,3283,,ard,65089,CA,ONTARIO,"NORTH YORK",517111,,"Communications, Service Provider, and Hosting Service","Rosemounts Mac mini",1006,201.20
+"2025-11-05 04:52:32",high,100.64.222.230,udp,3283,,ard,65089,CA,QUEBEC,MONTREAL,517111,,"Communications, Service Provider, and Hosting Service",Server02,1006,201.20
+"2025-11-05 04:31:43",high,100.64.73.218,udp,3283,,ard,88010,CA,ONTARIO,ETOBICOKE,517111,,"Communications, Service Provider, and Hosting Service",SalonFM12server,1006,201.20
+"2025-11-05 03:47:17",high,100.64.160.173,udp,3283,,ard,119515,CA,"BRITISH COLUMBIA",NELSON,,,,"CWI Mac Monitor",1006,201.20
+"2025-11-05 04:12:25",high,100.64.134.148,udp,3283,,ard,65089,CA,ONTARIO,OTTAWA,517111,,"Communications, Service Provider, and Hosting Service",Marvin,1006,201.20
+"2025-11-05 03:52:12",high,100.64.78.200,udp,3283,,ard,70839,CA,"BRITISH COLUMBIA",NANAIMO,517112,,"Communications, Service Provider, and Hosting Service",sav-f01898efe9bf0000,1006,201.20
+"2025-11-05 03:52:57",high,100.64.150.206,udp,3283,,ard,70839,CA,"BRITISH COLUMBIA",VICTORIA,517112,,"Communications, Service Provider, and Hosting Service",sav-f01898f01c780000,1006,201.20
+"2025-11-05 04:14:04",high,100.64.183.178,udp,3283,,ard,70839,CA,MANITOBA,WINNIPEG,517112,,"Communications, Service Provider, and Hosting Service",CityPressServer,1006,201.20
+"2025-11-05 04:30:29",high,100.64.125.174,udp,3283,,ard,70839,CA,"BRITISH COLUMBIA",DUNCAN,517112,,"Communications, Service Provider, and Hosting Service",mail.trimount.com,360,72.00
+"2025-11-05 04:44:07",high,100.64.83.38,udp,3283,,ard,70839,CA,"BRITISH COLUMBIA",VANCOUVER,517112,,"Communications, Service Provider, and Hosting Service",evokeserver,1006,201.20
+"2025-11-05 03:53:03",high,100.64.153.158,udp,3283,,ard,70839,CA,"BRITISH COLUMBIA",WHISTLER,517112,,"Communications, Service Provider, and Hosting Service",c82a1423aee50000,1006,201.20
+"2025-11-05 03:57:41",high,100.64.216.102,udp,3283,,ard,70839,CA,ALBERTA,LACOMBE,517112,,"Communications, Service Provider, and Hosting Service",users,1006,201.20
+"2025-11-05 04:37:26",high,100.64.35.78,udp,3283,,ard,70839,CA,ALBERTA,CALGARY,517112,,"Communications, Service Provider, and Hosting Service","MacServer New",1006,201.20
+"2025-11-05 05:02:58",high,100.64.72.158,udp,3283,,ard,70839,CA,MANITOBA,WINNIPEG,517112,,"Communications, Service Provider, and Hosting Service",server,1006,201.20
+"2025-11-05 00:05:26",high,100.64.87.60,udp,3283,,ard,117871,CA,"BRITISH COLUMBIA",VICTORIA,,,,xserver,360,72.00
+"2025-11-05 00:24:27",high,100.64.235.32,udp,3283,,ard,65315,CA,SASKATCHEWAN,SASKATOON,517111,,"Communications, Service Provider, and Hosting Service",GlobeFMP2-Mini,1006,201.20
+"2025-11-05 00:05:21",high,100.64.75.235,udp,3283,,ard,75441,CA,QUEBEC,MONTREAL,,,"Communications, Service Provider, and Hosting Service","Newtown X1",1006,201.20

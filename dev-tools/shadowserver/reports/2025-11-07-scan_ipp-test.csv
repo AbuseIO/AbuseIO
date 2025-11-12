@@ -1,0 +1,4 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","device_vendor","device_type","device_model","device_version","device_sector","ipp_version","cups_version","printer_uris","printer_name","printer_info","printer_more_info","printer_make_and_model","printer_firmware_name","printer_firmware_string_version","printer_firmware_version","printer_organization","printer_organization_unit","printer_uuid","printer_wifi_ssid"
+"2025-11-07 00:00:00",info,192.168.0.1,,,node01.example.com,test,64512,ZZ,Region,City,0,,,,,,,,,,,,,,,,,,,,,
+"2025-11-07 00:00:01",info,192.168.0.2,,,node02.example.com,test,64512,ZZ,Region,City,0,,,,,,,,,,,,,,,,,,,,,
+"2025-11-07 00:00:02",info,192.168.0.3,,,node03.example.com,test,64512,ZZ,Region,City,0,,,,,,,,,,,,,,,,,,,,,

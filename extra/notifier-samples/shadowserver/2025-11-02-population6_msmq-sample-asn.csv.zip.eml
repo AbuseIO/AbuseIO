@@ -1,0 +1,44 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <6cfcee170c8d55ad61daaddd6b10eb38@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_6cfcee170c8d55ad61daaddd6b10eb38"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver population6_msmq-sample Report: 2025-11-02
+
+--b1_6cfcee170c8d55ad61daaddd6b10eb38
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_6cfcee170c8d55ad61daaddd6b10eb38
+Content-Type: application/octet-stream; name="2025-11-02-population6_msmq-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-population6_msmq-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxaluNxEixaQIAAGkJAAAqAAAAMjAyNS0xMS0wMi1wb3B1bGF0aW9uNl9tc21x
+LXNhbXBsZS1hc24uY3N2xZXLjpswFIb3fYqITTceyVdszi7JRA1SElqStMvKGJMiFUiBGal9+h5m
+VGkGIk0XGYWFfXyB/zM+l6AvK9/1tjoHJOj8o2/L/jea5TA+t03fuObnYDZtj92PputrW3k0e3vC
+1nY1tiffYNv6U9kMQ/f8jdqWrnvx0veueWidfxJyfdM+vdKdm7rDpfKPDz4EnHJ1x9gd5TOmQCiQ
+NCBlXTSEU8ogzwzOUAqag821HiYE5I56CBlnpHdnwgxlhFRd9YtorqgkyzlJdod5GidkPd/Gm0Oy
+I4ppxnBbsGyq6qEune0RvSOzvW8fS+dnn9vmscx9S2a2zmdrPEFZn/6tBkRp/gqWSqACuJrCsggN
+JA4jkYGWuQATGgqZdG/SLo7pJt59eg9eJoAq4HLMy0ACeOrpGC5USoQDXLBI40O8X8+Wyea4XcTz
+gKTxcr1NdvcEn4kQXqEBTqdCGkBcT0aACEFFl2Q82sCueCBmLv45VIogMl5DFHIHLIvyq4lKEHhC
+PRbl2PMhHiAzfixmqDZmEPtyXC1WS4IfP6Sr+QadyXBGr+hMQ5ii/0/pMCSsdgC3REPXUPwSmnAy
+uyXa852qS2iSUVC4HgHnPENv4zfDROcSHIT8L0xxu7/5nNAmEcLQgsIXDAomLBiHuwoXelCikGPa
+SDOuXtB+XaX3x917OCXHZMXGrEJir5CXMWfBCSnBKpVDEZlJotSUG/YCdfNxvt8n28+H+P2qxSSK
+FKcQSaxmUGRhNk12gr+qZ4ckRTO5fvHVmBrxpsd42uUF5DaUCIlFKDQiR2Sswj5zb8JiYh6K77ck
+ub8K8F9QSwECPwMUAAIACAA8sWpbjcRIsWkCAABpCQAAKgAAAAAAAAAAAAAAtoEAAAAAMjAyNS0x
+MS0wMi1wb3B1bGF0aW9uNl9tc21xLXNhbXBsZS1hc24uY3N2UEsFBgAAAAABAAEAWAAAALECAAAA
+AA==
+
+
+--b1_6cfcee170c8d55ad61daaddd6b10eb38--

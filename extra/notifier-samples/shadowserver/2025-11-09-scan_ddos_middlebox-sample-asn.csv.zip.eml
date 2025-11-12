@@ -1,0 +1,42 @@
+Date: Sun, 09 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <ff9cb510a455336d1b4f34a9c2f05c8d@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_ff9cb510a455336d1b4f34a9c2f05c8d"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_ddos_middlebox-sample Report: 2025-11-09
+
+--b1_ff9cb510a455336d1b4f34a9c2f05c8d
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_ff9cb510a455336d1b4f34a9c2f05c8d
+Content-Type: application/octet-stream; name="2025-11-09-scan_ddos_middlebox-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-09-scan_ddos_middlebox-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalsJnRi6AwIAACYGAAAtAAAAMjAyNS0xMS0wOS1zY2FuX2Rkb3NfbWlkZGxl
+Ym94LXNhbXBsZS1hc24uY3N2rdRNT+MwEAbg+/4KlOsOWY/tsWPfAkJtFmirfqzECYUkC5EaghKz
+Wv79ToAD3dBy6cWx8zF+9Dp2FOqm6kPePEUQ9dWfqqvDC3frYfzUtaEt2u3QbbvAl4e2D495U3E3
+5Pfc5v0jt/dVy21X3dftMCzeajzmddF/+Oi2b5+7onqdqAhtN3Re79y+V797CdXwAWu29e+6yMNb
+vaYKD20ZfYukkHSKeCrcCZIX6CVF0FRl/dwAChEbHaOIURkIxRMkAqAs2/60qctyW921fyFBIRFW
+Ezi/mK2X6RWsstkkXcyXF0Bo+SlAtKxCXm9P1l1espUUTwrOCpAqNgZWN7Pv6fmlX6ymu57EI3vE
+2EOxRHsYlM3gOp2my3Q1ZRVcb67P0myfSGkhLaA2AhTFBgfSj8nFeocjhNfktRtxlGHOF/n8XMB6
+fnkzf2/3JYPE7zqjhmS0+5SBxkvtCUcMx8skk8OMzQrm02wO5/MrDoRHeyA6sUYDOcGhxModykOP
+IWawH8dBhksddqBlhFf2f4ekYW3UcSBKk2IESgPSxtp8nojy2nitxom4GHEfxDrk0jz1r2w5yWZZ
+CvzPnm2Ws70Wg4kElIPFxe4AhUZ7hzDW9mgSze8nX+0bXh/B6yNHqRDF1h1zF5PV9KWGPCkvx7vY
+Sj5YkiNyiChxYEWiYShuk52D7h9QSwECPwMUAAIACAA8sWpbCZ0YugMCAAAmBgAALQAAAAAAAAAA
+AAAAtoEAAAAAMjAyNS0xMS0wOS1zY2FuX2Rkb3NfbWlkZGxlYm94LXNhbXBsZS1hc24uY3N2UEsF
+BgAAAAABAAEAWwAAAE4CAAAAAA==
+
+
+--b1_ff9cb510a455336d1b4f34a9c2f05c8d--

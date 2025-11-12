@@ -1,0 +1,44 @@
+Date: Sun, 02 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <9633ef5ac2699a385edf580e35f34f33@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_9633ef5ac2699a385edf580e35f34f33"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_portmapper-sample Report: 2025-11-02
+
+--b1_9633ef5ac2699a385edf580e35f34f33
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_9633ef5ac2699a385edf580e35f34f33
+Content-Type: application/octet-stream; name="2025-11-02-scan_portmapper-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-02-scan_portmapper-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalu/Zt9kiQIAAPgYAAApAAAAMjAyNS0xMS0wMi1zY2FuX3BvcnRtYXBwZXIt
+c2FtcGxlLWFzbi5jc3bdmF1r2zAUhu/3K4yvVU/nQx/WrsooZTC60fa+mMTLDHUcbGds+/U7Sgpr
+Ig822AZVILb82jrSYx0dH6mcu76d5qbflaqc2i/t2M3fpNjF6904zMNqeIzFYZzl9HmY5m3Tt1Kc
+m40cm2krx007yHFsN90QL1dHG9umW03PKj1Mw35ctYeGVvMwHlvYjE0fn+qH/XZePzw11H6Nhelg
+ddoN20lqd99jXenqY/epWzVzbOxViRrNBcCFxkKboClQXaq+XXf7XoHWleUqnmqr9uudAgCloum+
+2e3aUXnQCOruWr29urm/vXyv7t7dXF9+/HB7pQw4uatUedvOTfdY3I/NOnZArMmv4EJsvRabb4on
+hRIFE+XPapVKKWCvqHL6lJQD68A2Ja0r1C4rVArGB3YJKlAF7DIbVXJCm6BifDQzUlMHTGcqUeVz
+I42TFVNSUxmfG6kPQAkp2wqyc18NgfQSqnuJH5qjYgooyFquzzUyZE40LNgSw7lmENyJRgUTU32m
+GbDwzB5KX0Vzzp1r/kTTJHVRn3RPGjiVEF3yFIIYY33aKMTOJRovaKJGivO6icbPtOg67L0ClO9x
+4jsmGE59x1ec2ywhCmwSUlOB59w+Z1ZCQkIqkQ+zC/IuAC+RUm5pJwRM006rK6S/nXbib8RmwdCW
+fhUODyDaK0xATAAjeWUC4vJbEyFIbE1BTVXnNglZYusCqYt5ZVao4r2SadESKjLm5r+8lD97LVEn
+N1JcGtQDKee3e4HpSqGu6szmqZYhTTIglBHNbJrGHcbAOiXFf5AY/LfF33HBJSs9e6ahN2R/vhJZ
+0/DyvhWY9JXIX15FZn5OAW2KKgkw57fHoZONK5QpbV78OvUHUEsBAj8DFAACAAgAPLFqW79m32SJ
+AgAA+BgAACkAAAAAAAAAAAAAALaBAAAAADIwMjUtMTEtMDItc2Nhbl9wb3J0bWFwcGVyLXNhbXBs
+ZS1hc24uY3N2UEsFBgAAAAABAAEAVwAAANACAAAAAA==
+
+
+--b1_9633ef5ac2699a385edf580e35f34f33--

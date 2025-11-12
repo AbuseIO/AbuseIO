@@ -1,0 +1,26 @@
+"timestamp","severity","ip","protocol","port","hostname","tag","asn","geo","region","city","naics","hostname_source","sector","response","response_size","amplification"
+"2025-11-09 08:13:25",critical,100.64.253.52,udp,53413,,netis_vulnerability,69349,CN,"HEILONGJIANG SHENG",HARBIN,517111,,Information,Login:,18,18.00
+"2025-11-09 09:10:43",critical,100.64.209.22,udp,53413,,netis_vulnerability,69349,CN,"HEILONGJIANG SHENG",HARBIN,517111,,Information,Login:,18,18.00
+"2025-11-09 01:51:19",critical,100.64.241.120,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",BAODING,517111,,Information,Login:,18,18.00
+"2025-11-09 02:03:32",critical,100.64.112.60,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",QINHUANGDAO,517111,,Information,Login:,18,18.00
+"2025-11-09 09:35:44",critical,100.64.37.85,udp,12494,,netis_vulnerability,69349,CN,"ZHEJIANG SHENG",HANGZHOU,517111,,Information,Login:,18,18.00
+"2025-11-09 08:16:34",critical,100.64.39.11,udp,3659,,netis_vulnerability,69349,CN,"ZHEJIANG SHENG",HANGZHOU,517111,,Information,Login:,18,18.00
+"2025-11-09 02:45:28",critical,100.64.2.111,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",SHIJIAZHUANG,517111,,Information,Login:,18,18.00
+"2025-11-09 02:38:23",critical,100.64.80.185,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",BAODING,517111,,Information,Login:,18,18.00
+"2025-11-09 03:24:55",critical,100.64.229.244,udp,53413,,netis_vulnerability,82561,TW,"TAICHUNG CITY",TAICHUNG,517111,,Information,Login:,18,18.00
+"2025-11-09 02:56:18",critical,100.64.125.46,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",XINGTAI,517111,,Information,Login:,18,18.00
+"2025-11-09 02:18:55",critical,100.64.241.182,udp,53413,,netis_vulnerability,69349,CN,"HEBEI SHENG",SHIJIAZHUANG,517111,,Information,Login:,18,18.00
+"2025-11-09 02:03:34",critical,100.64.45.62,udp,53413,,netis_vulnerability,74274,KR,SEOUL-TEUKBYEOLSI,BONGCHEON-DONG,,,,Login:,18,18.00
+"2025-11-09 03:05:50",critical,100.64.163.80,udp,53413,,netis_vulnerability,73928,TW,"TAIPEI CITY",TAIPEI,,,,Login:,18,18.00
+"2025-11-09 03:27:47",critical,100.64.6.162,udp,53413,,netis_vulnerability,67974,TW,"TAIPEI CITY",TAIPEI,517111,,"Communications, Service Provider, and Hosting Service",Login:,18,18.00
+"2025-11-09 02:43:22",critical,100.64.34.170,udp,53413,,netis_vulnerability,67974,TW,"TAIPEI CITY",TAIPEI,517111,,"Communications, Service Provider, and Hosting Service",Login:,18,18.00
+"2025-11-09 02:56:27",critical,100.64.129.199,udp,53413,,netis_vulnerability,68646,CN,"YUNNAN SHENG",BAOSHAN,517111,,Information,Login:,18,18.00
+"2025-11-09 01:53:38",critical,100.64.224.90,udp,53413,,netis_vulnerability,69349,CN,"SHANDONG SHENG",JINAN,517111,,Information,Login:,18,18.00
+"2025-11-09 02:24:11",critical,100.64.225.75,udp,53413,,netis_vulnerability,69349,CN,"SHANDONG SHENG",JINAN,517111,,Information,Login:,18,18.00
+"2025-11-09 03:13:04",critical,100.64.230.201,udp,53413,,netis_vulnerability,69349,CN,"SHANDONG SHENG",JINAN,517111,,Information,Login:,18,18.00
+"2025-11-09 02:25:24",critical,100.64.168.245,udp,53413,,netis_vulnerability,69349,CN,"SHANDONG SHENG",JINAN,517111,,Information,Login:,18,18.00
+"2025-11-09 03:08:39",critical,100.64.189.244,udp,53413,,netis_vulnerability,69349,CN,"SHANDONG SHENG",JINAN,517111,,Information,Login:,18,18.00
+"2025-11-09 02:52:52",critical,100.64.105.48,udp,53413,,netis_vulnerability,74320,CN,"ANHUI SHENG",WUHU,517112,,Information,Login:,18,18.00
+"2025-11-09 02:55:19",critical,100.64.237.166,udp,53413,,netis_vulnerability,69349,CN,"JIANGSU SHENG",YANCHENG,517111,,Information,Login:,18,18.00
+"2025-11-09 02:41:57",critical,100.64.207.37,udp,53413,,netis_vulnerability,69349,CN,"CHONGQING SHI",CHONGQING,517111,,Information,Login:,18,18.00
+"2025-11-09 02:14:49",critical,100.64.62.131,udp,53413,,netis_vulnerability,69349,CN,"HEILONGJIANG SHENG",HARBIN,517111,,Information,Login:,18,18.00

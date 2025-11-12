@@ -1,0 +1,41 @@
+Date: Tue, 04 Nov 2025 19:28:33 +0000
+From: Root User <autoreports@shadowserver.org>
+Message-ID: <f2b98b8c7ceda85b76d112f64f150db6@reports.shadowserver.org>
+X-Priority: 3
+X-Mailer: PHPMailer 5.2.9 (https://github.com/PHPMailer/PHPMailer/)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_f2b98b8c7ceda85b76d112f64f150db6"
+Content-Transfer-Encoding: 8bit
+To: abuse@isp.tld
+Subject: [SAMPLE] Shadowserver scan_chargen-sample Report: 2025-11-04
+
+--b1_f2b98b8c7ceda85b76d112f64f150db6
+Content-Type: text/plain; charset=us-ascii
+
+The report content can be obtained from the following link:
+http://dl.shadowserver.org/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+The report is xxxx bytes and contains xxxx events.
+For more information on this report go to: https://www.shadowserver.org/wiki/pmwiki.php/Services/xxxxxxxxxxxxxx
+
+
+--b1_f2b98b8c7ceda85b76d112f64f150db6
+Content-Type: application/octet-stream; name="2025-11-04-scan_chargen-sample-asn.csv.zip"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=2025-11-04-scan_chargen-sample-asn.csv.zip
+
+UEsDBBQAAgAIADyxalv6CnrO0wEAAGUGAAAmAAAAMjAyNS0xMS0wNC1zY2FuX2NoYXJnZW4tc2Ft
+cGxlLWFzbi5jc3a9lE2PmzAQhu/9FRHnWeRPwNycLNugBqKS0GuFCM1aCiECp1L76zvQHqoapK66
+3QOvbazxM+8w2LOmbQZbtTcPvKH52vTGfsOpGde3vrNd3V3GaddbHJ67wV6rtsGprc6o1XBFPTcd
+at+cTTcu659nXCtTD78FfR66e183E6i2XT+FDLfuOuCW+T5uYB4X88XUlR1PeucxwuQDpQ9ErAiJ
+aRQz4UHbnMy9BUqIHwif8sAP4X66AVUA9XPVn5srRJQwCmkOmd7qQh+2x0JDVmZrnYKkIW4DeEVj
+K3NZHfvqhHAZEjKJT4hDDmIe/ElmODCiXoONEWISh01H19Rhh6HP+Kugg0iwSWZsCxWLyCm4EH7E
+FtDlAfbbdA+b/Q6puFqgchGMzwxT0phwp9TUp1ihf2NKodgk81RK3dbCXnCgocL3I/RTWrxP81QD
+1nldFvnLPy5WmMfEaWkmOTpebOoEHsv1Dj/yr2GpxJLJSebsYk8xx65CLMbMYx8T2CaHQ5KD91To
+/MNTWRxXOltlOs2xtgEVSr3IOkf3rnUu3zIHJmOpnByUr94sA4k3i1sFwX0asP/Zetjv6N29TSX+
+aSpacL/R8LFM1skGsn1+LBK9+yvwD1BLAQI/AxQAAgAIADyxalv6CnrO0wEAAGUGAAAmAAAAAAAA
+AAAAAAC2gQAAAAAyMDI1LTExLTA0LXNjYW5fY2hhcmdlbi1zYW1wbGUtYXNuLmNzdlBLBQYAAAAA
+AQABAFQAAAAXAgAAAAA=
+
+
+--b1_f2b98b8c7ceda85b76d112f64f150db6--
