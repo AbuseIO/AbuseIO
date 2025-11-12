@@ -22,9 +22,8 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         /*
          * MARKNL:
@@ -44,10 +43,10 @@ class AppServiceProvider extends ServiceProvider
 
         // force the base url and schema to the configured APP_URL, otherwise use the current url
         $app_url = Request::getSchemeAndHttpHost();
-        if (!empty(env('APP_URL'))) {
+        if (!empty(config('APP_URL'))) {
             $app_url = Config::get('app.url');
         }
-        URL::forceRootUrl($app_url);
+        URL::useOrigin($app_url);
 
         // get the schema from the app_url and force it, fixes proxy errors in a ssl docker container
         if (preg_match('/^(http(s)?)/', $app_url, $matches, PREG_OFFSET_CAPTURE)) {
@@ -62,9 +61,8 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         // Provide a compatibility alias for Composer\Autoload\ClassMapGenerator used by older hooks
         if (!class_exists(\Composer\Autoload\ClassMapGenerator::class) && class_exists(\Composer\ClassMapGenerator\ClassMapGenerator::class)) {

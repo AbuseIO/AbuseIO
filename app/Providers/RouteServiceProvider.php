@@ -25,9 +25,8 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // Define API rate limiter using modern style
         RateLimiter::for('api', function (Request $request) {
@@ -51,9 +50,8 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @return void
      */
-    public function map()
+    public function map(): void
     {
         // Routing is configured via bootstrap/app.php using modern bootstrapping.
         // No additional mapping required here to avoid double registration.
