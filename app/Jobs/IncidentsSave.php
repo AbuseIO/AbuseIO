@@ -72,7 +72,7 @@ class IncidentsSave extends Job
             $findContact = new FindContact();
 
             // Use incident timestamp for point-in-time ownership resolution
-            $ts = Carbon::createFromTimestamp($incident->timestamp);
+            $ts = Carbon::createFromTimestamp($incident->timestamp, config('app.timezone'));
             $ipContact = $findContact->byIP($incident->ip, false, $ts);
 
             if (is_string($incident->domain) && $incident->domain !== '') {

@@ -18,7 +18,7 @@ class TicketUpdate extends Job
     public static function domainContact($ticket)
     {
         $firstEventTs = optional($ticket->firstEvent->first())->timestamp;
-        $date = $firstEventTs ? Carbon::createFromTimestamp($firstEventTs) : null;
+        $date = $firstEventTs ? Carbon::createFromTimestamp($firstEventTs, config('app.timezone')) : null;
         $domainContact = FindContact::byDomain($ticket['domain'], false, $date);
 
         // Update Domain Contact fields in ticket
@@ -42,7 +42,7 @@ class TicketUpdate extends Job
     public static function ipContact($ticket)
     {
         $firstEventTs = optional($ticket->firstEvent->first())->timestamp;
-        $date = $firstEventTs ? Carbon::createFromTimestamp($firstEventTs) : null;
+        $date = $firstEventTs ? Carbon::createFromTimestamp($firstEventTs, config('app.timezone')) : null;
         $ipContact = FindContact::byIP($ticket['ip'], false, $date);
 
         // Update IP Contact fields in ticket
