@@ -3,7 +3,8 @@
 namespace AbuseIO\Models;
 
 use AbuseIO\Traits\InstanceComparable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Database\Factories\BrandFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Symfony\Component\HttpFoundation\File\File;
@@ -22,9 +23,9 @@ use Symfony\Component\HttpFoundation\File\File;
  * @property int    $updated_at
  * @property int    $deleted_at
  */
+#[UseFactory(BrandFactory::class)]
 class Brand extends Model
 {
-    use HasFactory;
     use SoftDeletes;
     use InstanceComparable;
 

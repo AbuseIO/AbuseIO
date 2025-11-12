@@ -4,7 +4,8 @@ namespace AbuseIO\Models;
 
 use AbuseIO\Jobs\FindContact;
 use Config;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Database\Factories\TicketFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -44,9 +45,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int    $updated_at
  * @property int    $deleted_at
  */
+#[UseFactory(TicketFactory::class)]
 class Ticket extends Model
 {
-    use HasFactory;
     use SoftDeletes;
 
     /**

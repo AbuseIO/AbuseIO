@@ -2,7 +2,8 @@
 
 namespace AbuseIO\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Database\Factories\NetblockFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -19,10 +20,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int    $updated_at
  * @property int    $deleted_at
  */
+#[UseFactory(NetblockFactory::class)]
 class Netblock extends Model
 {
     use SoftDeletes;
-    use HasFactory;
 
     /**
      * The database table used by the model.

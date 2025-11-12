@@ -3,8 +3,9 @@
 namespace AbuseIO\Models;
 
 use AbuseIO\Traits\InstanceComparable;
+use Database\Factories\AccountFactory;
 use DB;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
@@ -23,9 +24,10 @@ use Log;
  * @property bool   $systemaccount fillable
  * @property string $token'        fillable
  */
+
+#[UseFactory(AccountFactory::class)]
 class Account extends Model
 {
-    use HasFactory;
     use SoftDeletes;
     use InstanceComparable;
 
