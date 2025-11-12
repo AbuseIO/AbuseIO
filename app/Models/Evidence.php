@@ -2,7 +2,9 @@
 
 namespace AbuseIO\Models;
 
+use AbuseIO\Observers\EvidenceObserver;
 use Database\Factories\EvidenceFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +24,7 @@ use Storage;
  * @property int    $deleted_at
  */
 #[UseFactory(EvidenceFactory::class)]
+#[ObservedBy(EvidenceObserver::class)]
 class Evidence extends Model
 {
     use SoftDeletes;
