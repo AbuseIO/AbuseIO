@@ -2,7 +2,8 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\DomainFormRequest;
+use AbuseIO\Http\Requests\StoreDomainRequest;
+use AbuseIO\Http\Requests\UpdateDomainRequest;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
 use AbuseIO\Traits\Api;
@@ -173,11 +174,11 @@ class DomainsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param DomainFormRequest $domainForm
+     * @param StoreDomainRequest $domainForm
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(DomainFormRequest $domainForm)
+    public function store(StoreDomainRequest $domainForm)
     {
         Domain::create($domainForm->all());
 
@@ -188,11 +189,11 @@ class DomainsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param DomainFormRequest $domainForm
+     * @param StoreDomainRequest $domainForm
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiStore(DomainFormRequest $domainForm)
+    public function apiStore(StoreDomainRequest $domainForm)
     {
         $domain = Domain::create($domainForm->all());
 
@@ -254,12 +255,12 @@ class DomainsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param DomainFormRequest $domainForm
+     * @param UpdateDomainRequest $domainForm
      * @param Domain            $domain
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(DomainFormRequest $domainForm, Domain $domain)
+    public function update(UpdateDomainRequest $domainForm, Domain $domain)
     {
         $domain->update($domainForm->all());
 
@@ -270,12 +271,12 @@ class DomainsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param DomainFormRequest $domainForm
+     * @param UpdateDomainRequest $domainForm
      * @param Domain            $domain
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiUpdate(DomainFormRequest $domainForm, Domain $domain)
+    public function apiUpdate(UpdateDomainRequest $domainForm, Domain $domain)
     {
         $domain->update($domainForm->all());
 
