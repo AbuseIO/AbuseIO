@@ -1,0 +1,21 @@
+<?php
+
+namespace AbuseIO\Rules;
+
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
+
+class AbuseType implements ValidationRule
+{
+    /**
+     * Run the validation rule.
+     *
+     * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     */
+    public function validate(string $attribute, mixed $value, Closure $fail): void
+    {
+        if (!in_array($value, config('types.type'))) {
+            $fail(trans('validation.abusetype', ['attribute' => $attribute]));
+        }
+    }
+}
