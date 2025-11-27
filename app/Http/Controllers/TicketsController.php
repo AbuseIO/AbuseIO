@@ -2,7 +2,8 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\TicketFormRequest;
+use AbuseIO\Http\Requests\StoreTicketRequest;
+use AbuseIO\Http\Requests\UpdateTicketRequest;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Jobs\TicketUpdate;
 use AbuseIO\Models\Event;
@@ -504,11 +505,11 @@ class TicketsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param TicketFormRequest $ticketForm
+     * @param StoreTicketRequest $ticketForm
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiStore(TicketFormRequest $ticketForm)
+    public function apiStore(StoreTicketRequest $ticketForm)
     {
         $ticket = Ticket::create($ticketForm->all());
 
@@ -520,7 +521,7 @@ class TicketsController extends Controller
      *
      * @param Ticket $ticket
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function show(Ticket $ticket)
     {
@@ -536,7 +537,7 @@ class TicketsController extends Controller
      *
      * @param Ticket $ticket
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function apiShow(Ticket $ticket)
     {
@@ -546,11 +547,11 @@ class TicketsController extends Controller
     /**
      * sync status values between AbuseIO instances.
      *
-     * @param TicketFormRequest $ticketForm
+     * @param StoreTicketRequest $ticketForm
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiSyncStatus(TicketFormRequest $ticketForm)
+    public function apiSyncStatus(StoreTicketRequest $ticketForm)
     {
         $localTicket = null;
 
@@ -604,11 +605,11 @@ class TicketsController extends Controller
     /**
      * sync contact status values between AbuseIO instances.
      *
-     * @param TicketFormRequest $ticketForm
+     * @param StoreTicketRequest $ticketForm
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiSyncContactStatus(TicketFormRequest $ticketForm)
+    public function apiSyncContactStatus(StoreTicketRequest $ticketForm)
     {
         $localTicket = null;
 
@@ -674,12 +675,12 @@ class TicketsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param TicketFormRequest $ticketForm
+     * @param UpdateTicketRequest $ticketForm
      * @param Ticket            $ticket
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiUpdate(TicketFormRequest $ticketForm, Ticket $ticket)
+    public function apiUpdate(UpdateTicketRequest $ticketForm, Ticket $ticket)
     {
         $ticket->update($ticketForm->all());
 

@@ -3,6 +3,8 @@
 namespace AbuseIO\Http\Controllers;
 
 use AbuseIO\Http\Requests\NoteFormRequest;
+use AbuseIO\Http\Requests\StoreNoteRequest;
+use AbuseIO\Http\Requests\UpdateNoteRequest;
 use AbuseIO\Jobs\Notification;
 use AbuseIO\Models\Note;
 use AbuseIO\Traits\Api;
@@ -54,11 +56,11 @@ class NotesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param NoteFormRequest $noteForm
+     * @param StoreNoteRequest $noteForm
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(NoteFormRequest $noteForm)
+    public function store(StoreNoteRequest $noteForm)
     {
         Note::create($noteForm->all());
         $this->sendNotification($noteForm);
@@ -74,11 +76,11 @@ class NotesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param NoteFormRequest $noteForm
+     * @param StoreNoteRequest $noteForm
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiStore(NoteFormRequest $noteForm)
+    public function apiStore(StoreNoteRequest $noteForm)
     {
         global $testrunner;
 
@@ -138,12 +140,12 @@ class NotesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param NoteFormRequest $noteForm
+     * @param UpdateNoteRequest $noteForm
      * @param Note            $notes
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(NoteFormRequest $noteForm, Note $notes)
+    public function update(UpdateNoteRequest $noteForm, Note $notes)
     {
         $input = $noteForm->all();
 
@@ -166,12 +168,11 @@ class NotesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param NoteFormRequest $noteForm
      * @param Note            $notes
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NoteFormRequest $noteForm, Note $notes)
+    public function destroy(Note $notes)
     {
         $notes->delete();
 
@@ -181,9 +182,9 @@ class NotesController extends Controller
     /**
      * Send notifiction if NoteForm not is hidden;.
      *
-     * @param NoteFormRequest $noteForm
+     * @param StoreNoteRequest $noteForm
      */
-    protected function sendNotification(NoteFormRequest $noteForm)
+    protected function sendNotification(StoreNoteRequest $noteForm)
     {
         if ($noteForm->hidden != true) {
             $notification = new Notification();
