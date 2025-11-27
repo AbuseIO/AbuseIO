@@ -2,7 +2,7 @@
 
 namespace AbuseIO\Models;
 
-use AbuseIO\Http\Requests\ContactFormRequest;
+use AbuseIO\Http\Requests\UpdateContactRequest;
 use Config;
 use Database\Factories\ContactFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -221,9 +221,9 @@ class Contact extends Model
     /**
      * Syncs the notificationMethods in the database.
      *
-     * @param ContactFormRequest $contactForm
+     * @param UpdateContactRequest $contactForm
      */
-    public function syncNotificationMethods(ContactFormRequest $contactForm)
+    public function syncNotificationMethods(UpdateContactRequest $contactForm)
     {
         $methods = $contactForm->get('notificationMethods');
         if ($methods == null) {
