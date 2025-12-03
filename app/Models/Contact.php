@@ -6,6 +6,7 @@ use AbuseIO\Http\Requests\UpdateContactRequest;
 use Config;
 use Database\Factories\ContactFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Contact extends Model
 {
     use SoftDeletes;
+    use HasFactory;
 
     /**
      * The database table used by the model.

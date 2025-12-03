@@ -6,6 +6,7 @@ use AbuseIO\Traits\InstanceComparable;
 use Database\Factories\AccountFactory;
 use DB;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
@@ -29,6 +30,7 @@ use Log;
 class Account extends Model
 {
     use SoftDeletes;
+    use HasFactory;
     use InstanceComparable;
 
     /**

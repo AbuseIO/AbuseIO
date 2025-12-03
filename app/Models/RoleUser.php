@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RoleUser extends Model
 {
     use SoftDeletes;
+    use HasFactory;
 
     /**
      * The database table used by the model.

@@ -6,6 +6,7 @@ use AbuseIO\Observers\EvidenceObserver;
 use Database\Factories\EvidenceFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
@@ -28,6 +29,7 @@ use Storage;
 class Evidence extends Model
 {
     use SoftDeletes;
+    use HasFactory;
 
     /**
      * The database table used by the model.

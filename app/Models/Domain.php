@@ -4,6 +4,7 @@ namespace AbuseIO\Models;
 
 use Database\Factories\DomainFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Domain extends Model
 {
     use SoftDeletes;
+    use HasFactory;
 
     /**
      * The database table used by the model.
