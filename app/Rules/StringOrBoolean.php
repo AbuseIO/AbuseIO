@@ -4,6 +4,7 @@ namespace AbuseIO\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Support\Facades\Validator;
 
 class StringOrBoolean implements ValidationRule
 {
@@ -14,7 +15,7 @@ class StringOrBoolean implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!is_string($value) && !is_bool($value)) {
+        if (!is_string($value) && !is_bool((bool) $value)) {
             $fail(trans('validation.stringorboolean'));
         }
     }
