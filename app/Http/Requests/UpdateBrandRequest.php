@@ -4,7 +4,6 @@ namespace AbuseIO\Http\Requests;
 
 use AbuseIO\Rules\BladeTemplate;
 use AbuseIO\Rules\UniqueFlag;
-use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBrandRequest extends BaseBrandRequest
 {

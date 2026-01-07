@@ -23,8 +23,8 @@ class UpdatePermissionRoleRequest extends FormRequest
     {
         return [
             'id' => ['required', 'integer', 'exists:permission_role,id'],
-            'role_id' => ['required', 'integer', 'exists:roles,id', 'unique:permission_role,role_id,NULL,id,permission_id,'.$this->input('id')],
-            'permission_id' => ['required', 'integer', 'exists:permissions,id', 'unique:permission_role,permission_id,NULL,id,role_id,'.$this->input('id')],
+            'role_id' => ['required', 'integer', 'exists:roles,id', 'unique:permission_role,role_id,NULL,id,permission_id,'.$this->permission_id],
+            'permission_id' => ['required', 'integer', 'exists:permissions,id', 'unique:permission_role,permission_id,NULL,id,role_id,'.$this->role_id],
         ];
     }
 
