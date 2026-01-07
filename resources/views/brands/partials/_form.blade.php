@@ -62,7 +62,7 @@
             </div>
             <div class="panel-body">
                 @if ($errors->has('mail_template_plain')) <p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_plain')}}</p> @endif
-                <textarea name="mail_template_plain" id="mail_template_plain" style="width: 100%">{{ old('mail_template_plain', htmlentities($templates['plain_mail'])) }}</textarea>
+                <textarea name="mail_template_plain" id="mail_template_plain" style="width: 100%">{{ old('mail_template_plain', html_entity_decode($templates['plain_mail'])) }}</textarea>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
             </div>
             <div class="panel-body">
                 @if ($errors->has('mail_template_html')) <p class="help-block has-error"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_html')}}</p> @endif
-                <textarea name="mail_template_html" id="mail_template_html" style="width: 100%">{{ old('mail_template_html', htmlentities($templates['html_mail'])) }}</textarea>
+                <textarea name="mail_template_html" id="mail_template_html" style="width: 100%">{{ old('mail_template_html', html_entity_decode($templates['html_mail'])) }}</textarea>
             </div>
         </div>
     </div>
@@ -96,7 +96,7 @@
             </div>
             <div class="panel-body">
                 @if ($errors->has('ash_template')) <p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('ash_template')}}</p> @endif
-                <textarea name="ash_template" id="ash_template" style="width: 100%">{{ old('ash_template', htmlentities($templates['ash'])) }}</textarea>
+                <textarea name="ash_template" id="ash_template" style="width: 100%">{{ old('ash_template', html_entity_decode($templates['ash'])) }}</textarea>
             </div>
         </div>
     </div>

@@ -18,7 +18,7 @@ class BladeTemplate implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         try {
-            $value = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
+//            $value = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
             // Maak een Blade compiler aan
             $filesystem = new FileSystem();
             $compiler = new BladeCompiler($filesystem, sys_get_temp_dir());
