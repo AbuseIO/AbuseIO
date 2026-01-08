@@ -2,6 +2,8 @@
 
 namespace AbuseIO\Jobs;
 
+use AbuseIO\Http\Requests\StoreEventRequest;
+use AbuseIO\Http\Requests\StoreTicketRequest;
 use AbuseIO\Models\Event;
 use AbuseIO\Models\Ticket;
 use Carbon\Carbon;
@@ -166,7 +168,7 @@ class IncidentsSave extends Job
                 // Validate the model before saving
                 $validator = Validator::make(
                     json_decode(json_encode($newTicket), true),
-                    Ticket::createRules()
+                    new StoreTicketRequest()->rules()
                 );
                 if ($validator->fails()) {
                     return $this->error(
@@ -187,7 +189,7 @@ class IncidentsSave extends Job
                 // Validate the model before saving
                 $validator = Validator::make(
                     json_decode(json_encode($newEvent), true),
-                    Event::createRules()
+                    new StoreEventRequest()->rules()
                 );
                 if ($validator->fails()) {
                     return $this->error(
@@ -225,7 +227,7 @@ class IncidentsSave extends Job
                     // Validate the model before saving
                     $validator = Validator::make(
                         json_decode(json_encode($newEvent), true),
-                        Event::createRules()
+                        new StoreEventRequest()->rules()
                     );
                     if ($validator->fails()) {
                         return $this->error(
@@ -326,7 +328,7 @@ class IncidentsSave extends Job
                     // Validate the model before saving
                     $validator = Validator::make(
                         json_decode(json_encode($ticket), true),
-                        Ticket::createRules()
+                        new StoreTicketRequest()->rules()
                     );
                     if ($validator->fails()) {
                         return $this->error(

@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Contact;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
+use AbuseIO\Http\Requests\StoreContactRequest;
 use AbuseIO\Models\Contact;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -68,6 +69,6 @@ class CreateCommand extends AbstractCreateCommand
      */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Contact::createRules());
+        return Validator::make($model->toArray(), new StoreContactRequest()->rules());
     }
 }

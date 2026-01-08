@@ -9,12 +9,14 @@
 
 namespace AbuseIO\Console\Commands\GDPR;
 
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Ticket;
 use Illuminate\Console\Command;
 
 class ReportCommand extends Command
 {
+    use ExitCodeHooks;
     /**
      * The console command name.
      *
@@ -38,7 +40,6 @@ class ReportCommand extends Command
      */
     public function handle()
     {
-        $success = true;
         $email = $this->argument('email');
 
         $this->info('Creating report for: '.$email."\n");
@@ -54,11 +55,10 @@ class ReportCommand extends Command
             $this->report($contacts, 'AbuseIO\Models\Contact', $email);
             $this->report($tickets, 'AbuseIO\Models\Ticket', $email);
         } catch (\Exception $e) {
-            $this->error('Error: '.$e->getMessage());
-            $success = false;
+            $this->fail('Error: '.$e->getMessage());
         }
 
-        return $success;
+        return $this->getSuccessExitCode();
     }
 
     /**
