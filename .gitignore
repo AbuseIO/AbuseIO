@@ -29,3 +29,6 @@ storage/adminadded
 .lesshst
 .local
 .gitconfig
+
+.npm
+package-lock.json

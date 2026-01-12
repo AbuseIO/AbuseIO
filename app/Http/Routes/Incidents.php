@@ -11,21 +11,12 @@ Route::group(
         /*
         | Create incident
         */
-        Route::get(
-            'create',
-            [
-                'middleware' => 'permission:incidents_create',
-                'as'         => 'create',
-                'uses'       => [IncidentsController::class, 'create'],
-            ]
-        );
-        Route::post(
-            '',
-            [
-                'middleware' => 'permission:incidents_create',
-                'as'         => 'store',
-                'uses'       => [IncidentsController::class, 'store'],
-            ]
-        );
+        Route::get('create', [IncidentsController::class, 'create'])
+            ->middleware('permission:incidents_create')
+            ->name('create');
+
+        Route::post('', [IncidentsController::class, 'store'])
+            ->middleware('permission:incidents_create')
+            ->name('store');
     }
 );

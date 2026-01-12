@@ -101,16 +101,16 @@ class BrandsController extends Controller
                     if (!$brand->isSystemBrand() or $account->isSystemAccount()) {
                         if (!$account->brand->is($brand)) {
                             $actions .= ' <a href="brands/'.$brand->id.
-                                '/activate" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-play"></i> '.
+                                '/activate" class="btn btn-sm btn-primary"><i class="fa fa-play"></i> '.
                                 trans('misc.button.activate').'</a> ';
                         }
                         $actions .= ' <a href="brands/'.$brand->id.
-                            '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                            '" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> '.
                             trans('misc.button.show').'</a> ';
                         $actions .= ' <a href="brands/'.$brand->id.
-                            '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                            '/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> '.
                             trans('misc.button.edit').'</a> ';
-                        $actions .= '<button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> '.
+                        $actions .= '<button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> '.
                             trans('misc.button.delete').'</button>';
                     }
                     $actions .= '</form>';

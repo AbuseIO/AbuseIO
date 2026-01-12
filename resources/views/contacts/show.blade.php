@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="page-header">{{ isset($contact) ? $contact->name : '' }}</h1>
 <div class="row">
-    <div class="col-sm-offset-9 col-sm-3 text-right">
+    <div class="offset-sm-9 col-sm-3 text-end">
         <form name="delContact" class="form-inline" method="POST" action="{{ url('admin/contacts/' . $contact->id) }}">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
@@ -27,10 +27,10 @@
     <dd>{{ $contact->name }}</dd>
 
     <dt>{{ trans('misc.email') }}</dt>
-    <dd>{{ $contact->email }}</dd>
+    <dd>{{ $contact->email ?: trans('misc.notavailable') }}</dd>
 
     <dt>{{ trans('contacts.api_host') }}</dt>
-    <dd>{{ $contact->api_host }}</dd>
+    <dd>{{ $contact->api_host ?: trans('misc.notavailable') }}</dd>
 
     <dt>{{ trans('contacts.notification') }}</dt>
     <dd>
@@ -46,8 +46,8 @@
 </dl>
 
 @if ( $contact->netblocks->count() )
-<div class="panel panel-info">
-    <div class="panel-heading"><h3 class="panel-title">{{ trans('contacts.linked_netblocks') }}</h3></div>
+<div class="card border-info">
+    <div class="card-header bg-info text-white"><h3 class="card-title">{{ trans('contacts.linked_netblocks') }}</h3></div>
     <table class="table table-striped info">
         <thead>
             <tr>
@@ -68,8 +68,8 @@
 @endif
 
 @if ( $contact->domains->count() )
-<div class="panel panel-info">
-    <div class="panel-heading"><h3 class="panel-title">{{ trans('contacts.linked_domains') }}</h3></div>
+<div class="card border-info">
+    <div class="card-header bg-info text-white"><h3 class="card-title">{{ trans('contacts.linked_domains') }}</h3></div>
     <table class="table table-striped info">
         <thead>
             <tr>
@@ -97,14 +97,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="confirmLabel">Please confirm</h4>
             </div>
             <div class="modal-body">
                 Are you sure you want to continue with this action?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <button type="button" class="btn btn-danger" id="confirmed">Yes</button>
             </div>
         </div>
@@ -117,23 +117,23 @@
     $('button[name="delBtn"]').on('click', function(e) {
         var $form = $(this).closest('form');
         e.preventDefault();
-        $('#confirm').modal({
-            backdrop: 'static',
-            keyboard: false
-        }).one('click', '#confirmed', function(e) {
+        var modalEl = document.getElementById('confirm');
+        var modal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+        $(modalEl).one('click', '#confirmed', function() {
             $form.trigger('submit');
         });
+        modal.show();
     });
 
     $('button[name="anonBtn"]').on('click', function(e) {
         var $form = $('form[name="anonContact"]');
         e.preventDefault();
-        $('#confirm').modal({
-            backdrop: 'static',
-            keyboard: false
-        }).one('click', '#confirmed', function(e) {
+        var modalEl = document.getElementById('confirm');
+        var modal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+        $(modalEl).one('click', '#confirmed', function() {
             $form.trigger('submit');
         });
+        modal.show();
     });
 </script>
 @endsection

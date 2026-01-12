@@ -12,14 +12,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/font-awesome.min.css') }}">
 
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/js/bootstrap.bundle.min.js') }}"></script>
 	@yield('extrajs')
 </head>
 <body>
 	<div class="container">
 	@if (Session::has('message'))
 	    <div class="alert alert-info alert-dismissible">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <p>{{ Session::get('message') }}</p>
 	    </div>
 	@endif

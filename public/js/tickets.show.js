@@ -1,6 +1,5 @@
 $(document).ready(function() {
-    // Limit conversion of Bootstrap hidden class to only read/unread button spans
-    $('.btnRead span.hidden').removeClass('hidden').hide();
+    // No-op: read/unread button now renders a single state label
 
     // If you click one of the Flip buttons
     $('.btnFlip').click(function () {
@@ -54,12 +53,17 @@ $(document).ready(function() {
             $tab = $('.nav-tabs a[href="' + hash + '"]');
         }
         if ($tab.length) {
-            $tab.tab('show');
+            if (window.bootstrap && typeof window.bootstrap.Tab === 'function') {
+                var tab = new bootstrap.Tab($tab[0]);
+                tab.show();
+            } else if (typeof $tab.tab === 'function') {
+                $tab.tab('show');
+            }
         }
     }
 
-    // Keep hash in sync when switching tabs
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    // Keep hash in sync when switching tabs (Bootstrap 5)
+    $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
         var target = $(e.target).attr('href');
         if (target) {
             if (history.replaceState) {

@@ -125,7 +125,7 @@ class TicketsController extends Controller
                 'actions',
                 function ($ticket) {
                     $actions = ' <a href="tickets/'.$ticket->id.
-                        '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
+                        '" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> '.
                         trans('misc.button.show').'</a> ';
 
                     return $actions;
@@ -214,12 +214,11 @@ class TicketsController extends Controller
                     $unread = (int) ($ticket->unread_notes_count ?? 0);
                     $html = (string) $total;
                     if ($unread > 0) {
-                        $html .= ' <span class="label label-warning" title="Unread notes">'
-                            .'<span class="glyphicon glyphicon-envelope"></span> '
+                        $html .= ' <span class="badge bg-warning text-dark" title="Unread notes">'
+                            .'<i class="fa fa-envelope"></i> '
                             .$unread
                             .'</span>';
                     }
-
                     return $html;
                 }
             )

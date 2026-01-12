@@ -91,23 +91,23 @@ class AccountsController extends Controller
                     $deleteAction = route('admin.accounts.destroy', ['accounts' => $account->id]);
                     $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
                     $actions .= ' <a href="accounts/'.$account->id.
-                        '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
+                        '" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> '.
                         trans('misc.button.show').'</a> ';
                     $actions .= ' <a href="'.route('admin.accounts.edit', ['accounts' => $account->id]).
-                        '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> '.
+                        '" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> '.
                         trans('misc.button.edit').'</a> ';
                     if ($account->disabled) {
                         $actions .= ' <a href="'.route('admin.accounts.enable', ['accounts' => $account->id]).
-                            '" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-ok-circle"></span> '.
+                            '" class="btn btn-sm btn-success"><i class="fa fa-check-circle"></i> '.
                             trans('misc.button.enable')
                             .'</a> ';
                     } else {
                         $actions .= ' <a href="'.route('admin.accounts.disable', ['accounts' => $account->id]).
-                            '" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-ban-circle"></span> '.
+                            '" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> '.
                             trans('misc.button.disable')
                             .'</a> ';
                     }
-                    $actions .= '<button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> '
+                    $actions .= '<button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> '
                         .trans('misc.button.delete').'</button>';
                     $actions .= '</form>';
 

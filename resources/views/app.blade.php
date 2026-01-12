@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css') }}"/>
 
 		<!-- dataTables css for bootstrap -->
-		<link rel="stylesheet" type="text/css" href="{{ asset('/css/dataTables.bootstrap.min.css') }}"/>
+		<link rel="stylesheet" type="text/css" href="{{ asset('/css/dataTables.bootstrap5.min.css') }}"/>
 
 		<!-- Localization flags -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('/css/flag-icon-min.css') }}">
@@ -22,57 +22,55 @@
 		<link rel="stylesheet" type="text/css" href="{{ asset('/css/custom.css') }}">
 	</head>
 	<body>
-	    <nav class="navbar navbar-inverse navbar-fixed-top">
+	    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	        <div class="container-fluid">
 	            <div class="navbar-header">
-	                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-	                    <span class="sr-only">Toggle navigation</span>
-	                    <span class="icon-bar"></span>
-	                    <span class="icon-bar"></span>
-	                    <span class="icon-bar"></span>
+	                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+	                    <span class="visually-hidden">Toggle navigation</span>
+	                    <span class="navbar-toggler-icon"></span>
 	                </button>
 	                <a class="navbar-brand" href="https://abuse.io" target="_blank">{{ Config::get('app.name') }}</a>
 	            </div>
 	            <div class="navbar-collapse collapse">
-	                <ul class="nav navbar-nav">
+	                <ul class="navbar-nav me-auto">
 	                    @foreach(Config::get('main.interface.navigation') as $navLink)
-	                    <li class="{{ Request::path() == $navLink ? 'active' : '' }}">
-							<a href="{{ url('/admin/'.$navLink) }}">{{ trans('misc.'.$navLink) }}</a>
+	                    <li class="nav-item">
+							<a class="nav-link {{ Request::path() == $navLink ? 'active' : '' }}" href="{{ url('/admin/'.$navLink) }}">{{ trans('misc.'.$navLink) }}</a>
 						</li>
 	                    @endforeach
 	                </ul>
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="navbar-nav ms-auto">
 						@if (auth()->check() && auth()->user()->hasRole('admin'))
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> {{ trans('misc.settings') }} <span class="caret"></span></a>
-							<ul class="dropdown-menu">
+						<li class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> {{ trans('misc.settings') }}</a>
+							<ul class="dropdown-menu dropdown-menu-end">
 								<li class="dropdown-header">{{ trans('misc.options') }}</li>
-								<li><a href="/admin/accounts"><span class="glyphicon glyphicon-tag"></span> {{ trans_choice('misc.accounts', 2) }}</a></li>
-								<li><a href="/admin/brands"><span class="glyphicon glyphicon-tags"></span> {{ trans_choice('misc.brands', 2) }}</a></li>
-								<li><a href="/admin/users"><span class="glyphicon glyphicon-user"></span> {{ trans_choice('misc.users', 2) }}</a></li>
+								<li><a class="dropdown-item" href="/admin/accounts"><i class="fa fa-tag"></i> {{ trans_choice('misc.accounts', 2) }}</a></li>
+								<li><a class="dropdown-item" href="/admin/brands"><i class="fa fa-tags"></i> {{ trans_choice('misc.brands', 2) }}</a></li>
+								<li><a class="dropdown-item" href="/admin/users"><i class="fa fa-user"></i> {{ trans_choice('misc.users', 2) }}</a></li>
 							</ul>
 						</li>
 						@endif
 						@if (auth()->check())
-					<li class="dropdown">
+					<li class="nav-item dropdown">
 						@php($currentLocale = Session::get('locale', auth()->user()->locale ?? Config::get('app.locale')))
 						@php($currentFlag = (Config::get('app.locales')[$currentLocale][1] ?? $currentLocale))
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							<span class="flag-icon flag-icon-{{ $currentFlag }}"></span> {{ auth()->user()->first_name ?? '' }} {{ auth()->user()->last_name ?? '' }} <span class="caret"></span>
+						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<span class="flag-icon flag-icon-{{ $currentFlag }}"></span> {{ auth()->user()->first_name ?? '' }} {{ auth()->user()->last_name ?? '' }}
 						</a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu dropdown-menu-end">
 						<li class="dropdown-header">{{ trans('misc.language') }}</li>
 						@php($locales = Config::get('app.locales'))
 						@foreach($locales as $code => $meta)
 							<li class="{{ (Session::get('locale', Config::get('app.locale')) === $code) ? 'active' : '' }}">
-								<a href="{{ route('admin.locale', ['locale' => $code]) }}">
+								<a class="dropdown-item" href="{{ route('admin.locale', ['locale' => $code]) }}">
 									<span class="flag-icon flag-icon-{{ $meta[1] }}"></span> {{ $meta[0] }}
 								</a>
 							</li>
 						@endforeach
-						<li role="separator" class="divider"></li>
-						<li><a href="{{ route('admin.profile.index') }}">{{ trans('misc.profile') }}</a></li>
-						<li><a href="{{ url('/auth/logout') }}">{{ trans('misc.button.logout') }}</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="{{ route('admin.profile.index') }}">{{ trans('misc.profile') }}</a></li>
+						<li><a class="dropdown-item" href="{{ url('/auth/logout') }}">{{ trans('misc.button.logout') }}</a></li>
 					</ul>
 					</li>
 					@endif
@@ -83,7 +81,7 @@
 		<div class="container-fluid app-container">
 			@if (Session::has('message'))
 			    <div class="alert alert-info alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			        <p>{{ Session::get('message') }}</p>
 			    </div>
 			@endif
@@ -92,9 +90,9 @@
 
 		<!-- Bootstrap Javascript ---------------------------->
 		<script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('/js/bootstrap.bundle.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('/js/jquery.dataTables.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('/js/dataTables.bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('/js/dataTables.bootstrap5.min.js') }}"></script>
 		@yield('extrajs')
 	</body>
 </html>

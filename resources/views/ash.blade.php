@@ -9,41 +9,41 @@
     <link href="{{ ashAsset('/css/flag-icon-min.css') }}" rel="stylesheet">
     <link href="{{ ashAsset('/css/custom.css') }}" rel="stylesheet">
     <script src="{{ ashAsset('/js/jquery.min.js') }}"></script>
-    <script src="{{ ashAsset('/js/bootstrap.min.js') }}"></script>
+    <script src="{{ ashAsset('/js/bootstrap.bundle.min.js') }}"></script>
 </head>
 <body class="ash">
     <div class="container">
-        <div class="jumbotron">
+    <div class="jumbotron">
             <div class="media">
                 <div class="media-left">
                     <img class="img-responsive img-inline" src="/ash/logo/{{ $brand->id }}" alt='{{ $brand->company_name }}' />
                 </div>
                 <div class="media-body">
-                    <h1>{{ trans('ash.title') }}</h1>
-                    <h2>{{ $brand->company_name }}</h2>
+                    <h1 class="display-4">{{ trans('ash.title') }}</h1>
+                    <h2 class="h3">{{ $brand->company_name }}</h2>
                 </div>
             </div>
         </div>
         <h1 class="page-header">{{ trans('ash.ticket') }} {{ $ticket->id }}</h1>
         <div class="row">
-            <div class="col-md-3 col-md-offset-9 text-right">
+            <div class="col-md-3 offset-md-9 text-end">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ trans('misc.language') }} <span class="caret"></span></button>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ trans('misc.language') }} <i class="fa fa-angle-down"></i></button>
                     <ul class="dropdown-menu">
                         @foreach(config('app.locales') as $locale => $localeData)
-                            <li><a href="/ash/locale/{{$locale}}"><span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}</a></li>
+                            <li><a class="dropdown-item" href="/ash/locale/{{$locale}}"><span class="flag-icon flag-icon-{{$localeData[1]}}"></span> {{ $localeData[0] }}</a></li>
                         @endforeach
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="panel panel-danger top-buffer">
-            <div class="panel-heading">
+        <div class="card border-danger top-buffer">
+            <div class="card-header bg-danger text-white">
                 {{ trans('ash.intro') }}
             </div>
         </div>
-        <div class="panel">
-            <div class="panel-heading">
+        <div class="card top-buffer">
+            <div class="card-header">
                 {{ $brand->introduction_text }}
             </div>
         </div>
@@ -54,14 +54,14 @@
             </div>
         @endif
 
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#basicinfo"><span class="glyphicon glyphicon-file"></span> {{ trans('ash.menu.basic') }}</a></li>
-            <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ trans('ash.menu.technical') }}</a></li>
-            <li><a data-toggle="tab" href="#whatsthis"><span class="glyphicon glyphicon-question-sign"></span> {{ trans('ash.menu.about') }}</a></li>
-            <li><a data-toggle="tab" href="#resolved"><span class="glyphicon glyphicon-ok"></span> {{ trans('ash.menu.communication') }}</a></li>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#basicinfo"><i class="fa fa-file"></i> {{ trans('ash.menu.basic') }}</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#events"><i class="fa fa-list-alt"></i> {{ trans('ash.menu.technical') }}</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#whatsthis"><i class="fa fa-question-circle"></i> {{ trans('ash.menu.about') }}</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#resolved"><i class="fa fa-check"></i> {{ trans('ash.menu.communication') }}</a></li>
         </ul>
         <div class="tab-content">
-            <div id="basicinfo" class="tab-pane fade in active">
+            <div id="basicinfo" class="tab-pane fade show active">
                 <dl class="dl-horizontal">
 
                     <dt>{{ trans('ash.basic.ipAddress') }}</dt>
@@ -111,7 +111,7 @@
                 @if ( !$ticket->events->count() )
                     {{ trans('ash.technical.collectError') }}
                 @else
-                    <table class="table table-striped table-condensed">
+                    <table class="table table-striped table-sm">
                         <thead>
                         <tr>
                             <th>{{ trans('ash.technical.timestamp') }}</th>
@@ -195,13 +195,13 @@
                         @foreach ($ticket->notes as $note)
                             @if ($note->hidden != true)
                                 <div class="row">
-                                    <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
-                                        <div class="panel panel-{{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary' }}">
-                                            <div class="panel-heading clearfix">
-                                                <h3 class="panel-title pull-left">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
-                                                <span class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
+                                    <div class="col-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'offset-1' }}">
+                                        <div class="card border-{{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'info' : 'primary' }}">
+                                            <div class="card-header clearfix {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? 'bg-info text-white' : 'bg-primary text-white' }}">
+                                                <h3 class="card-title float-start">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
+                                                <span class="float-end"><i class="fa fa-clock-o"></i> {{ $note->created_at }}</span>
                                             </div>
-                                            <div class="panel-body">
+                                            <div class="card-body">
                                                 {{ htmlentities($note->text) }}
                                             </div>
                                         </div>
@@ -231,7 +231,7 @@
             }
 
             // Keep fragment synced when switching tabs
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
                 var target = $(e.target).attr('href');
                 if (target) {
                     if (history.replaceState) {

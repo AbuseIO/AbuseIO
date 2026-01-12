@@ -3,12 +3,12 @@
 @section('content')
 <h1 class="page-header">{{ trans_choice('misc.users', 2) }}</h1>
 <div class="row">
-    <div class="col-md-3 col-md-offset-9 text-right">
+    <div class="col-md-3 offset-md-9 text-end">
         <a href="{{ route('admin.users.create') }}" class="btn btn-info">{{ trans('users.button.new_user') }}</a>
     </div>
 </div>
 @if ( !$users->count() )
-<div class="alert alert-info top-buffer"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('users.no_users')}}</div>
+<div class="alert alert-info top-buffer"><i class="fa fa-info-circle"></i> {{ trans('users.no_users')}}</div>
 @else
 <table class="table table-striped top-buffer" id="users-table">
     <thead>
@@ -17,7 +17,7 @@
             <th>{{ trans('users.first_name') }}</th>
             <th>{{ trans('users.last_name') }}</th>
             <th>{{ trans_choice('misc.accounts', 1) }}</th>
-            <th class="text-right">{{ trans('misc.action') }}</th>
+            <th class="text-end">{{ trans('misc.action') }}</th>
         </tr>
     </thead>
 </table>
@@ -50,7 +50,7 @@
                 { data: 'first_name', name: 'users.first_name' },
                 { data: 'last_name', name: 'users.last_name' },
                 { data: 'account_name', name: 'accounts.name' },
-                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-end" },
             ]
         });
     });

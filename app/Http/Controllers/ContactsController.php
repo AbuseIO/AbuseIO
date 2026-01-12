@@ -60,9 +60,9 @@ class ContactsController extends Controller
                 function ($contact) {
                     $deleteAction = route('admin.contacts.destroy', ['contacts' => $contact]);
                     $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
-                    $actions .= ' <a href="contacts/'.$contact->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.trans('misc.button.show').'</a> ';
-                    $actions .= ' <a href="contacts/'.$contact->id.'/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.trans('misc.button.edit').'</a> ';
-                    $actions .= ' <button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> '.trans('misc.button.delete').'</button>';
+                    $actions .= ' <a href="contacts/'.$contact->id.'" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> '.trans('misc.button.show').'</a> ';
+                    $actions .= ' <a href="contacts/'.$contact->id.'/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> '.trans('misc.button.edit').'</a> ';
+                    $actions .= ' <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> '.trans('misc.button.delete').'</button>';
                     $actions .= '</form>';
 
                     return $actions;

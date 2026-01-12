@@ -55,26 +55,26 @@
     </div>
 </div>
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10 mail_template" style="padding-left: 0;">
-        <div class="panel panel-default panel_info">
-            <div class="panel-heading clearfix">
-                <h3 class="panel-title pull-left">{{ trans('brands.mail_template_plain') }}</h3>
+    <div class="offset-sm-2 col-sm-10 mail_template" style="padding-left: 0;">
+        <div class="card">
+            <div class="card-header clearfix">
+                <h3 class="card-title float-start">{{ trans('brands.mail_template_plain') }}</h3>
             </div>
-            <div class="panel-body">
-                @if ($errors->has('mail_template_plain')) <p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_plain')}}</p> @endif
+            <div class="card-body">
+                @if ($errors->has('mail_template_plain')) <p class="help-block"><i class="fa fa-exclamation-circle"></i> {{$errors->first('mail_template_plain')}}</p> @endif
                 <textarea name="mail_template_plain" id="mail_template_plain" style="width: 100%">{{ old('mail_template_plain', htmlentities($templates['plain_mail'])) }}</textarea>
             </div>
         </div>
     </div>
 </div>
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10 mail_template" style="padding-left: 0;">
-        <div class="panel panel-default panel_info">
-            <div class="panel-heading clearfix">
-                <h3 class="panel-title pull-left">{{ trans('brands.mail_template_html') }}</h3>
+    <div class="offset-sm-2 col-sm-10 mail_template" style="padding-left: 0;">
+        <div class="card">
+            <div class="card-header clearfix">
+                <h3 class="card-title float-start">{{ trans('brands.mail_template_html') }}</h3>
             </div>
-            <div class="panel-body">
-                @if ($errors->has('mail_template_html')) <p class="help-block has-error"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('mail_template_html')}}</p> @endif
+            <div class="card-body">
+                @if ($errors->has('mail_template_html')) <p class="help-block has-error"><i class="fa fa-exclamation-circle"></i> {{$errors->first('mail_template_html')}}</p> @endif
                 <textarea name="mail_template_html" id="mail_template_html" style="width: 100%">{{ old('mail_template_html', htmlentities($templates['html_mail'])) }}</textarea>
             </div>
         </div>
@@ -89,22 +89,22 @@
     </div>
 </div>
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10 ash_template" style="padding-left: 0;">
-        <div class="panel panel-default panel_info">
-            <div class="panel-heading clearfix">
-                <h3 class="panel-title pull-left">{{ trans('brands.ash_template') }}</h3>
+    <div class="offset-sm-2 col-sm-10 ash_template" style="padding-left: 0;">
+        <div class="card">
+            <div class="card-header clearfix">
+                <h3 class="card-title float-start">{{ trans('brands.ash_template') }}</h3>
             </div>
-            <div class="panel-body">
-                @if ($errors->has('ash_template')) <p class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span> {{$errors->first('ash_template')}}</p> @endif
+            <div class="card-body">
+                @if ($errors->has('ash_template')) <p class="help-block"><i class="fa fa-exclamation-circle"></i> {{$errors->first('ash_template')}}</p> @endif
                 <textarea name="ash_template" id="ash_template" style="width: 100%">{{ old('ash_template', htmlentities($templates['ash'])) }}</textarea>
             </div>
         </div>
     </div>
 </div>
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="offset-sm-2 col-sm-10">
         <button type="submit" class="btn btn-success">{{ $submit_text }}</button>
-        <a href="{{ URL::previous() }}" class="btn btn-default">{{ trans('misc.button.cancel') }}</a>
+        <a href="{{ URL::previous() }}" class="btn btn-secondary">{{ trans('misc.button.cancel') }}</a>
     </div>
 </div>
 

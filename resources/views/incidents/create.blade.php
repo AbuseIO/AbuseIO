@@ -1,26 +1,59 @@
 @extends('app')
 
 @section('extrajs')
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap-datetimepicker.min.css') }}">
-    <script type="text/javascript" src="{{ asset('/js/moment.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            //Make the timestamp human-readable
-            var timestampInput = $('input[name=timestamp]');
+            var displayInput = $('input[name=timestamp_display]');
+            var hiddenInput = $('input[name=timestamp]');
+            var pad = function(n){ return n < 10 ? '0' + n : n; };
+            function toIsoLocal(d){
+                return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+            }
+            function ddmmToIso(str){
+                var m = str && str.match(/^(\d{2})-(\d{2})-(\d{4})\s+(\d{2}):(\d{2})$/);
+                if (!m) return null;
+                return m[3] + '-' + m[2] + '-' + m[1] + 'T' + m[4] + ':' + m[5];
+            }
+            function isoToUnix(str){
+                // Try native Date parsing first (handles YYYY-MM-DDTHH:MM[:SS])
+                var d = new Date(str);
+                if (!isNaN(d.getTime())) {
+                    return Math.floor(d.getTime() / 1000);
+                }
+                // Fallback: parse YYYY-MM-DDTHH:MM or with seconds via regex
+                var m = str && str.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/);
+                if (!m) return null;
+                d = new Date(parseInt(m[1],10), parseInt(m[2],10)-1, parseInt(m[3],10), parseInt(m[4],10), parseInt(m[5],10), parseInt(m[6]||'0',10));
+                return Math.floor(d.getTime() / 1000);
+            }
+
             if({{ json_encode(old('timestamp') !== null) }}){
-                // If old timestamp is numeric then parse as UNIX, otherwise display as-is
                 var tsOld = {{ json_encode(old('timestamp')) }};
                 if (tsOld && /^\d+$/.test(tsOld)) {
                     var d = new Date(parseInt(tsOld, 10) * 1000);
-                    var pad = n => (n < 10 ? '0' + n : n);
-                    var formatted = pad(d.getDate()) + '-' + pad(d.getMonth()+1) + '-' + d.getFullYear() + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
-                    timestampInput.val(formatted);
+                    displayInput.val(toIsoLocal(d));
+                    hiddenInput.val(String(tsOld));
                 } else if (tsOld) {
-                    timestampInput.val(tsOld);
+                    var iso = ddmmToIso(tsOld);
+                    if (iso) {
+                        displayInput.val(iso);
+                        var u = isoToUnix(iso);
+                        if (u) hiddenInput.val(String(u));
+                    } else if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(tsOld)) {
+                        displayInput.val(tsOld);
+                        var u2 = isoToUnix(tsOld);
+                        if (u2) hiddenInput.val(String(u2));
+                    }
                 }
             }
-            timestampInput.datetimepicker({sideBySide: true,format: 'DD-MM-YYYY HH:mm'});
+
+            $('#incident-form').on('submit', function(){
+                var val = displayInput.val();
+                var unix = isoToUnix(val);
+                if (unix) {
+                    hiddenInput.val(String(unix));
+                }
+            });
         });
     </script>
 @endsection
@@ -45,7 +78,7 @@
     </div>
 @endif
 
-<form method="POST" action="{{ route('admin.incidents.store') }}" enctype="multipart/form-data" class="form-horizontal">
+<form id="incident-form" method="POST" action="{{ route('admin.incidents.store') }}" enctype="multipart/form-data" class="form-horizontal">
     @csrf
 
     <div class="form-group @if ($errors->has('source')) has-error @endif">
@@ -101,7 +134,8 @@
     <div class="form-group @if ($errors->has('timestamp')) has-error @endif">
         <label for="timestamp" class="col-sm-2 control-label">{{ trans('tickets.timestamp') }}:</label>
         <div class="col-sm-10">
-            <input type="text" name="timestamp" id="timestamp" value="{{ old('timestamp') }}" class="form-control">
+            <input type="datetime-local" name="timestamp_display" id="timestamp_display" value="{{ old('timestamp') }}" class="form-control">
+            <input type="hidden" name="timestamp" id="timestamp" value="{{ old('timestamp') }}">
             @if ($errors->has('timestamp')) <p class="help-block">{{ $errors->first('timestamp') }}</p> @endif
         </div>
     </div>

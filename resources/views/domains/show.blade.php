@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="page-header">{{ trans('domains.header.detail') }}: {{ isset($domain) ? $domain->name : '' }}</h1>
 <div class="row">
-    <div  class="col-md-3 col-md-offset-9 text-right">
+    <div  class="col-md-3 offset-md-9 text-end">
         <form class="form-inline" method="POST" action="{{ url('admin/domains/' . $domain->id) }}">
             @csrf
             @method('DELETE')
