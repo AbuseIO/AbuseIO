@@ -219,6 +219,7 @@ class TicketsController extends Controller
                             .$unread
                             .'</span>';
                     }
+
                     return $html;
                 }
             )
