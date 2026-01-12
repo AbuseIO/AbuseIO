@@ -33,10 +33,15 @@
             </ul>
         </div>
         <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target='#notificationModal'>
-                {{ trans('tickets.button.send_notification') }}
+            <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ trans('tickets.button.send_notification') }} <i class="fa fa-angle-down"></i>
             </button>
-
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="{{ url('admin/tickets/' . $ticket->id . '/notify/ip') }}">{{ trans('misc.ip').' '.trans('misc.contact') }}</a></li>
+                <li><a class="dropdown-item" href="{{ url('admin/tickets/' . $ticket->id . '/notify/domain') }}">{{ trans('misc.domain').' '.trans('misc.contact') }}</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{{ url('admin/tickets/' . $ticket->id . '/notify') }}">{{ trans('misc.both') }}</a></li>
+            </ul>
         </div>
         <div class="btn-group" role="group" aria-label="...">
             <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -297,25 +302,4 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">{!! trans('misc.send_notifications') !!}</h4>
-            </div>
-            <div class="modal-body">
-                <ul>
-                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/notify/domain') }}">{{ trans('misc.domain').' '.trans('misc.contact') }}</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li{!! ($ticket->ip_contact_reference == 'UNDEF' || $ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/notify') }}">{{ trans('misc.both') }}</a></li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{!! trans('misc.close') !!}</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
