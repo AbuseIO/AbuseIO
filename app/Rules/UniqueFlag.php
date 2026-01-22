@@ -33,10 +33,12 @@ class UniqueFlag implements ValidationRule, DataAwareRule
             return;
         }
 
+        // Checks if the value is a sting and represents a boolean true
         if (gettype($value) == 'string') {
             $value = ($value == 'true' or $value == '1');
         }
 
+        // If the value is true, we need to check if there is already another entry with the flag set to true
         if ($value) {
             $query = \DB::table($this->table)->where($this->field, true);
 
