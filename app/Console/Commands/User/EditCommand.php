@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\User;
 
 use AbuseIO\Console\Commands\AbstractEditCommand;
+use AbuseIO\Http\Requests\UpdateUserRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\User;
 use Symfony\Component\Console\Input\InputArgument;
@@ -99,7 +100,7 @@ class EditCommand extends AbstractEditCommand
             $user['password_confirmation'] = $this->updatedPassword;
         }
 
-        return Validator::make($user, User::updateRules($model));
+        return Validator::make($user, new UpdateUserRequest()->rules());
     }
 
     /**

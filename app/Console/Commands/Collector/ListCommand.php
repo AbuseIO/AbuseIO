@@ -31,7 +31,7 @@ class ListCommand extends AbstractListCommand
      *
      * @param array $collectors
      *
-     * @return bool
+     * @return array
      */
     public function hydrateCollectorsWithDescription($collectors)
     {
