@@ -57,6 +57,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         ]);
     })
+    ->withCommands([
+        __DIR__.'/../app/Console/Commands',
+    ])
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })
