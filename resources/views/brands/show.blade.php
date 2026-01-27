@@ -45,7 +45,7 @@
             </div>
             <div class="panel-body">
                 <pre class="prettyprint">
-                    {{ htmlentities($brand->mail_template_plain) }}
+                    {!! htmlspecialchars(html_entity_decode($brand->mail_template_plain)) !!}
                 </pre>
             </div>
         </div>
@@ -59,7 +59,7 @@
             </div>
             <div class="panel-body">
                 <pre class="prettyprint">
-                    {{ htmlentities($brand->mail_template_html) }}
+                    {!! htmlspecialchars(html_entity_decode($brand->mail_template_html)) !!}
                 </pre>
             </div>
         </div>
@@ -76,7 +76,7 @@
             </div>
             <div class="panel-body">
                 <pre class="prettyprint">
-                    {{ htmlentities($brand->ash_template) }}
+                    {!! htmlspecialchars(html_entity_decode($brand->ash_template)) !!}
                 </pre>
             </div>
         </div>
