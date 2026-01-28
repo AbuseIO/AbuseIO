@@ -26,7 +26,7 @@ class StoreAccountRequest extends FormRequest
         return [
             'name' => ['required', 'unique:accounts'],
             'brand_id' => ['required', 'integer', 'exists:brands,id'],
-            'systemaccount' => ['sometimes', 'required', new UniqueFlag("accounts", "systemaccount")],
+            'systemaccount' => ['sometimes', 'required', new UniqueFlag('accounts', 'systemaccount')],
             'disabled' => ['required', new StringOrBoolean],
         ];
     }

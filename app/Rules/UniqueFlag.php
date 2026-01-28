@@ -22,9 +22,13 @@ class UniqueFlag implements ValidationRule, DataAwareRule
     }
 
     /**
-     * Run the validation rule.
+     * Validate that a boolean flag is unique in the given table and field.
      *
-     * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param string $attribute, the attribute that is being validated
+     * @param mixed $value, the value of the attribute
+     * @param Closure $fail
+     *
+     * @return void
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
@@ -33,10 +37,8 @@ class UniqueFlag implements ValidationRule, DataAwareRule
             return;
         }
 
-        // Checks if the value is a sting and represents a boolean true
-        if (gettype($value) == 'string') {
-            $value = ($value == 'true' or $value == '1');
-        }
+        // Convert the value to boolean
+        $value = $this->valueToBoolean($attribute, $value, $fail);
 
         // If the value is true, we need to check if there is already another entry with the flag set to true
         if ($value) {
@@ -60,5 +62,31 @@ class UniqueFlag implements ValidationRule, DataAwareRule
                 $fail("The {$attribute} field must be unique in table {$this->table}");
             }
         }
+    }
+
+    // Convert various representations of boolean to actual boolean
+    private function valueToBoolean(string $attribute, mixed $value, Closure $fail): bool
+    {
+        if (!isset($value) || $value === []) {
+            $fail("The '{$attribute}' field must be a boolean value");
+            return false;
+        }
+
+        // Checks if the value is a string and representation of a boolean true
+        if (gettype($value) == 'string' && !in_array($value, ['true', 'false', '1', '0'])) {
+            $fail("The '{$attribute}' field must be a boolean string value");
+            return false;
+        }
+
+        if (gettype($value) == 'integer' && !is_bool((bool)$value)) {
+            $fail("The '{$attribute}' field must be a boolean integer value");
+            return false;
+        }
+
+        if ($value === 'false' || $value === '0') {
+            $value = false;
+        }
+
+        return (bool) $value;
     }
 }

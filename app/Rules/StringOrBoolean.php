@@ -15,7 +15,7 @@ class StringOrBoolean implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!is_string($value) && !is_bool((bool) $value)) {
+        if (!is_string($value) && !in_array($value, [true, false, 1, 0, "1", "0", "true", "false"], true)) {
             $fail(trans('validation.stringorboolean'));
         }
     }
