@@ -3,13 +3,15 @@
 namespace tests\Models;
 
 use AbuseIO\Models\Account;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 class AccountTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
+    #[group("functional")]
     public function testModelFactory()
     {
         $account = Account::factory()->create();
@@ -17,6 +19,7 @@ class AccountTest extends TestCase
         $this->assertEquals($account->name, $accountFromDB->name);
     }
 
+    #[group("functional")]
     public function testGetSystemAccount()
     {
         $this->assertTrue(
@@ -24,11 +27,12 @@ class AccountTest extends TestCase
         );
     }
 
+    #[group("functional")]
     public function testSetSystemAccount()
     {
         $oldSysAdmin = Account::getSystemAccount();
 
-        $account = Account::factory()->create();
+        $account = Account::factory()->make();
         $account->systemaccount = true;
         $account->save();
 

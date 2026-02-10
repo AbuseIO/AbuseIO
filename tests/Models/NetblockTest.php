@@ -3,13 +3,15 @@
 namespace tests\Models;
 
 use AbuseIO\Models\Netblock;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 class NetblockTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
+    #[group('functional')]
     public function testModelFactory()
     {
         $netblock = Netblock::factory()->create();

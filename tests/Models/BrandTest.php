@@ -3,13 +3,15 @@
 namespace tests\Models;
 
 use AbuseIO\Models\Brand;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 class BrandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
+    #[group("functional")]
     public function testModelFactory()
     {
         $account = Brand::factory()->create();
@@ -17,6 +19,7 @@ class BrandTest extends TestCase
         $this->assertEquals($account->name, $accountFromDB->name);
     }
 
+    #[group("functional")]
     public function testBrandGetLogoPath()
     {
         $b = Brand::getSystemBrand();
