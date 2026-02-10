@@ -3,7 +3,9 @@
 namespace tests\Console\Commands\Brand;
 
 use AbuseIO\Models\Brand;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -11,30 +13,26 @@ use tests\TestCase;
  */
 class CreateCommandTest extends TestCase
 {
-//    public function testWithoutArguments()
-//    {
-    //Artisan::call('brand:create');
-    // $output = Artisan::output();
+    use RefreshDatabase;
 
-    // $this->assertStringContainsString("brand:create", $output);
-
-//        $this->assertStringContainsString('The name field is required.', $output);
-//        $this->assertStringContainsString('The company name field is required.', $output);
-//        $this->assertStringContainsString('The introduction text field is required.', $output);
-//        $this->assertStringContainsString('Failed to create the brand due to validation warnings', $output);
-//    }
-
-    public function testCreateValid()
+    #[group('functional')]
+    public function testBrandCreateCommandShouldFailWithoutArguments(): void
     {
-        Artisan::call('brand:create', [
-            'name'              => 'test_dummy',
-            'company_name'      => 'test_company_name',
-            'introduction_text' => 'abcdefg',
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Not enough arguments (missing: "name, company_name").');
+        Artisan::call('brand:create');
+    }
+
+    #[group('functional')]
+    public function testBrandCreateCommandShouldPassWithValidValues(): void
+    {
+        $exitCode = Artisan::call('brand:create', [
+            'name' => 'Test name',
+            'company_name' => 'Test company name',
+            'introduction_text' => 'Just do it',
         ]);
-        $output = Artisan::output();
 
-        $this->assertStringContainsString('The brand has been created', $output);
-
-        Brand::where('name', 'test_dummy')->forceDelete();
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString('The brand has been created', Artisan::output());
     }
 }

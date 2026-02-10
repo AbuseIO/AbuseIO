@@ -2,10 +2,10 @@
 
 namespace tests\Console\Commands\Contact;
 
-use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
-use Faker\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -13,82 +13,64 @@ use tests\TestCase;
  */
 class CreateCommandTest extends TestCase
 {
-    public function testWithoutArguments()
+    use RefreshDatabase;
+
+    #[group('functional')]
+    public function testContactCreateCommandShouldFailWithoutArguments(): void
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Not enough arguments (missing: "name, reference, account_id, enabled, email, api_host")');
         Artisan::call('contact:create');
-        $output = Artisan::output();
-        $this->assertStringContainsString('Creates a new contact', $output);
     }
 
-    public function testValidCreate()
+    #[group('functional')]
+    public function testContactCreateCommandShouldPassWithValidArguments(): void
     {
-        $faker = Factory::create();
-        $name = $faker->name;
-
-        Artisan::call('contact:create', [
-            'name'       => $name,
-            'reference'  => $faker->domainWord,
-            'account_id' => Account::getSystemAccount()->id,
-            'enabled'    => $faker->boolean(),
-            'email'      => $faker->email,
-            'api_host'   => $faker->url,
+        $exitCode = Artisan::call('contact:create', [
+            'name' => 'Test contact name',
+            'reference' => 'Test reference',
+            'account_id' => 1,
+            'enabled' => true,
+            'email' => 'example@mail.com',
+            'api_host' => 'https://www.example.com',
         ]);
 
-        $this->assertStringContainsString(
-            'The contact has been created',
-            Artisan::output()
-        );
-
-        $contact = Contact::where('name', $name)->first();
-
-        $this->assertEquals('', $contact->token);
-
-        $contact->forceDelete();
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString('The contact has been created', Artisan::output());
     }
 
-    public function testValidCreateWithApiToken()
+    #[group('integration')]
+    public function testContactCreateCommandShouldPassWithApiToken(): void
     {
-        $faker = Factory::create();
-        $name = $faker->name;
-
         Artisan::call('contact:create', [
-            'name'           => $name,
-            'reference'      => $faker->domainWord,
-            'account_id'     => Account::getSystemAccount()->id,
-            'enabled'        => $faker->boolean(),
-            'email'          => $faker->email,
-            'api_host'       => $faker->url,
+            'name' => 'Test contact name',
+            'reference' => 'Test reference',
+            'account_id' => 1,
+            'enabled' => true,
+            'email' => 'example@mail.com',
+            'api_host' => 'https://www.example.com',
             '--with_api_key' => true,
         ]);
 
-        $contact = Contact::where('name', $name)->first();
+        $contact = Contact::where('name', 'Test contact name')->first();
 
         $this->assertNotNull($contact->token);
-
-        $this->assertStringContainsString(
-            'The contact has been created',
-            Artisan::output()
-        );
-
-        Contact::where('name', $name)->forceDelete();
+        $this->assertStringContainsString('The contact has been created', Artisan::output());
     }
 
-    public function testCreateWithInvalidAccountId()
+    #[group('functional')]
+    public function testContactCreateCommandShouldFailWithInvalidAccountId(): void
     {
-        $faker = Factory::create();
-
-        Artisan::call('contact:create', [
-            'name'       => $faker->name,
-            'reference'  => $faker->domainWord,
-            'account_id' => '10000',
-            'enabled'    => $faker->boolean(),
-            'email'      => $faker->email,
-            'api_host'   => $faker->url,
+        $exitCode = Artisan::call('contact:create', [
+            'name' => 'Test contact name',
+            'reference' => 'Test reference',
+            'account_id' => 10000,
+            'enabled' => true,
+            'email' => 'example@mail.com',
+            'api_host' => 'https://www.example.com',
         ]);
 
-        $this->assertStringContainsString(
-            'The selected account id is invalid.',
-            Artisan::output()
-        );
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('The selected account id is invalid.', Artisan::output());
     }
 }

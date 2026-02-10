@@ -4,7 +4,9 @@ namespace tests\Console\Commands\Role;
 
 use AbuseIO\Models\Role;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,40 +14,28 @@ use tests\TestCase;
  */
 class CreateCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    public function testCreate()
+    #[group('functional')]
+    public function testRoleCreateCommandShouldPassWithValidArguments(): void
     {
-        /** @var Role $dummy */
-        $dummy = Role::factory()->make();
-
         $exitCode = Artisan::call(
             'role:create',
             [
-                'name'        => $dummy->name,
-                'description' => $dummy->description,
+                'name'        => 'Some name',
+                'description' => 'Some description',
             ]
         );
 
         $this->assertEquals(0, $exitCode);
-        $this->assertStringContainsString('created', Artisan::output());
-
-        // Detach permissions before hard-deleting to avoid FK constraint violations
-        Role::where([
-            'name'        => $dummy->name,
-            'description' => $dummy->description,
-        ])->get()->each(function (Role $role) {
-            $role->permissions()->detach();
-            $role->forceDelete();
-        });
+        $this->assertStringContainsString('Role created successfully.', Artisan::output());
     }
 
-    public function testWithoutParams()
+    #[group('functional')]
+    public function testRoleCreateCommandShouldFailWithoutParameters(): void
     {
-        ob_start();
-        $exitCode = Artisan::call('role:create');
-        // The command shows help via the runtime-exception helper and returns failure
-        $this->assertEquals(1, $exitCode);
-        $this->assertStringContainsString('Creates a new role', ob_get_clean());
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Not enough arguments (missing: "name, description")');
+        Artisan::call('role:create');
     }
 }

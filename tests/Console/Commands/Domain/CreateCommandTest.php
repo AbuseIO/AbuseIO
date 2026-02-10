@@ -3,9 +3,9 @@
 namespace tests\Console\Commands\Domain;
 
 use AbuseIO\Models\Contact;
-use AbuseIO\Models\Domain;
-use Faker\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -13,30 +13,45 @@ use tests\TestCase;
  */
 class CreateCommandTest extends TestCase
 {
-    public function testWithoutArguments()
+    use RefreshDatabase;
+
+    #[group('functional')]
+    public function testDomainCreateCommandShouldFailWithoutArguments(): void
     {
-        ob_start();
-        $exitCode = Artisan::call('domain:create');
-        $this->assertEquals(1, $exitCode);
-        $this->assertStringContainsString('Creates a new domain', ob_get_clean());
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Not enough arguments (missing: "name, contact_id")');
+        Artisan::call('domain:create');
     }
 
-    public function testValidCreate()
+    #[group('functional')]
+    public function testDomainCreateCommandShouldPassWithValidArguments(): void
     {
-        $faker = Factory::create();
-
-        $domainName = $faker->domainName;
-
-        Artisan::call('domain:create', [
-            'name'       => $domainName,
-            'contact_id' => Contact::all()->first()->id,
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference'  => 'Old reference',
+            'name'       => 'Old name',
+            'email'      => 'test@example.com',
+            'enabled'    => true,
         ]);
 
-        $this->assertStringContainsString(
-            'The domain has been created',
-            Artisan::output()
-        );
+        $exitCode = Artisan::call('domain:create', [
+            'name'       => 'test.com',
+            'contact_id' => $contact->id,
+        ]);
 
-        Domain::where('name', $domainName)->forceDelete();
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString('The domain has been created', Artisan::output());
+    }
+
+    #[group('functional')]
+    public function testDomainCreateCommandShouldFailWithInvalidContactId(): void
+    {
+        $exitCode = Artisan::call('domain:create', [
+            'name'       => 'test.com',
+            'contact_id' => 9999,
+        ]);
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Could not find contact.', Artisan::output());
     }
 }
