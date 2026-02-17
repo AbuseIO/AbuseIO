@@ -2,6 +2,7 @@
 
 namespace AbuseIO\Http\Requests;
 
+use AbuseIO\Rules\TimeStamp;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreEventRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreEventRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +26,7 @@ class StoreEventRequest extends FormRequest
             'ticket_id' => ['required', 'integer', 'exists:tickets,id'],
             'evidence_id' => ['required', 'integer', 'exists:evidences,id'],
             'source' => ['required', 'string'],
-            'timestamp' => ['required', 'timestamp'],
+            'timestamp' => ['required', new TimeStamp],
             'information' => ['required', 'json'],
         ];
     }
