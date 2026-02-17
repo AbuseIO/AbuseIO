@@ -4,7 +4,9 @@ namespace tests\Console\Commands\Domain;
 
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,15 +14,21 @@ use tests\TestCase;
  */
 class EditCommandTest extends TestCase
 {
-    public function testWithoutId()
+    use RefreshDatabase;
+
+    #[group('functional')]
+    public function testDomainEditCommandShouldFailWithoutArguments(): void
     {
-        ob_start();
-        Artisan::call('domain:edit');
-        $output = ob_get_clean();
-        $this->assertStringContainsString('Edit a domain', $output);
+        $exitCode = Artisan::call('domain:edit');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "id")', $output);
+        $this->assertStringContainsString('Edits an existing domain', $output);
     }
 
-    public function testWithInvalidId()
+    #[group('functional')]
+    public function testDomainEditCommandShouldFailWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'domain:edit',
@@ -28,15 +36,25 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 1);
+
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find domain with this criteria', Artisan::output());
     }
 
-    public function testWithInvalidContact()
+    #[group('functional')]
+    public function testDomainEditCommandShouldFailWithInvalidContact(): void
     {
-        // Create a valid domain to ensure the ID exists
-        $domain = Domain::factory()->create([
-            'contact_id' => Contact::factory()->create()->id,
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference'  => 'Old reference',
+            'name'       => 'Old name',
+            'email'      => 'test@example.com',
+            'enabled'    => true,
+        ]);
+        $domain = Domain::create([
+            'name' => 'example.com',
+            'contact_id' => $contact->id,
+            'enabled' => true,
         ]);
 
         $exitCode = Artisan::call(
@@ -46,29 +64,36 @@ class EditCommandTest extends TestCase
                 '--contact_id' => '100000',
             ]
         );
-        $this->assertEquals($exitCode, 1);
+
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find contact with this criteria', Artisan::output());
     }
 
-    public function testEnabled()
+    #[group('functional')]
+    public function testDomainEditCommandShouldPassSettingEnabledToFalse(): void
     {
-        // Create a valid domain to ensure the ID exists
-        $domain = Domain::factory()->create([
-            'contact_id' => Contact::factory()->create()->id,
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference'  => 'Old reference',
+            'name'       => 'Old name',
+            'email'      => 'test@example.com',
+            'enabled'    => true,
+        ]);
+        $domain = Domain::create([
+            'name'       => 'example.com',
+            'contact_id' => $contact->id,
+            'enabled'    => true,
         ]);
 
         $exitCode = Artisan::call(
             'domain:edit',
             [
-                'id'        => (string) $domain->id,
+                'id'        => $domain->id,
                 '--enabled' => 'false',
             ]
         );
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('The domain has been updated', Artisan::output());
-        /*
-         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-         */
-        $this->seed('DomainsTableSeeder');
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString('Domain updated successfully.', Artisan::output());
     }
 }
