@@ -18,9 +18,12 @@ class CreateCommandTest extends TestCase
     #[group('functional')]
     public function testNetblockCreateCommandShouldFailWithoutArguments(): void
     {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Not enough arguments (missing: "contact, first_ip, last_ip, description")');
-        Artisan::call('netblock:create');
+        $exitCode = Artisan::call('netblock:create');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "contact, first_ip, last_ip, description")', $output);
+        $this->assertStringContainsString('Creates a new netblock', $output);
     }
 
     #[group('functional')]

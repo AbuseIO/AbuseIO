@@ -16,6 +16,18 @@ class CreateCommandTest extends TestCase
 {
     use RefreshDatabase;
 
+
+    #[group('functional')]
+    public function testRoleCreateCommandShouldFailWithoutParameters(): void
+    {
+        $exitCode = Artisan::call('role:create');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "name, description")', $output);
+        $this->assertStringContainsString('Creates a new role', $output);
+    }
+
     #[group('functional')]
     public function testRoleCreateCommandShouldPassWithValidArguments(): void
     {
@@ -29,13 +41,5 @@ class CreateCommandTest extends TestCase
 
         $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString('Role created successfully.', Artisan::output());
-    }
-
-    #[group('functional')]
-    public function testRoleCreateCommandShouldFailWithoutParameters(): void
-    {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Not enough arguments (missing: "name, description")');
-        Artisan::call('role:create');
     }
 }

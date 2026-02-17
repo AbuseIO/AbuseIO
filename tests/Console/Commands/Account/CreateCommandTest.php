@@ -20,10 +20,12 @@ class CreateCommandTest extends TestCase
     #[group('functional')]
     public function testAccountCreateCommandShouldFailWithoutArguments(): void
     {
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Not enough arguments (missing: "name, brand_id")');
+        $exitCode = Artisan::call('account:create');
+        $output = Artisan::output();
 
-        Artisan::call('account:create');
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "name, brand_id")', $output);
+        $this->assertStringContainsString('Creates an account', $output);
     }
 
     #[group('integration')]
