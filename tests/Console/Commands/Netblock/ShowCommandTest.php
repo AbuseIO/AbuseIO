@@ -4,8 +4,9 @@ namespace tests\Console\Commands\Netblock;
 
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -13,35 +14,51 @@ use tests\TestCase;
  */
 class ShowCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /** @var Netblock */
-    private $netblock;
-
-    private function initDB()
+    #[group('functional')]
+    public function testNetblockShowCommandShouldFailWithoutArguments(): void
     {
-        $this->netblock = Netblock::factory()->create(
-            ['contact_id' => Contact::factory()->create()->id]
-        );
+        $exitCode = Artisan::call('netblock:show');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "netblock").', $output);
+        $this->assertStringContainsString('Shows the details of a netblock', $output);
     }
 
-    public function testWithValidContactFilter()
+    #[group('functional')]
+    public function testNetblockShowCommandShouldPassWithValidContactFilter(): void
     {
-        $this->initDB();
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference'  => 'Old reference',
+            'name'       => 'Old name',
+            'email'      => 'test@example.com',
+            'enabled'    => true,
+        ]);
+        $netblock = Netblock::create([
+            'contact_id'  => $contact->id,
+            'first_ip'    => '192.168.1.1',
+            'last_ip'     => '192.168.1.10',
+            'description' => 'Test netblock',
+            'enabled'     => true,
+        ]);
+
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                'netblock' => $this->netblock->contact->name,
+                'netblock' => $netblock->contact->name,
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString($this->netblock->contact->name, Artisan::output());
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($netblock->contact->name, Artisan::output());
     }
 
-    public function testWithInvalidFilter()
+    #[group('functional')]
+    public function testNetblockShowCommandShouldFailWithInvalidFilter(): void
     {
-        $this->initDB();
         $exitCode = Artisan::call(
             'netblock:show',
             [
@@ -49,39 +66,65 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('No matching netblock was found.', Artisan::output());
     }
 
-    public function testWithStartIpFilter()
+    #[group('functional')]
+    public function testNetblockShowCommandShouldPassWithStartIpFilter(): void
     {
-        $this->initDB();
-        $ip = $this->netblock->first_ip;
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference'  => 'Old reference',
+            'name'       => 'Old name',
+            'email'      => 'test@example.com',
+            'enabled'    => true,
+        ]);
+        $netblock = Netblock::create([
+            'contact_id'  => $contact->id,
+            'first_ip'    => '192.168.1.1',
+            'last_ip'     => '192.168.1.10',
+            'description' => 'Test netblock',
+            'enabled'     => true,
+        ]);
 
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                'netblock' => $ip,
+                'netblock' => $netblock->first_ip,
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString($this->netblock->contact->name, Artisan::output());
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($netblock->contact->name, Artisan::output());
     }
 
-    public function testNetBlockShowWithStartEndFilter()
+    #[group('functional')]
+    public function testNetBlockShowCommandShouldPassWithStartEndFilter(): void
     {
-        $this->initDB();
-        $ip = $this->netblock->last_ip;
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference'  => 'Old reference',
+            'name'       => 'Old name',
+            'email'      => 'test@example.com',
+            'enabled'    => true,
+        ]);
+        $netblock = Netblock::create([
+            'contact_id'  => $contact->id,
+            'first_ip'    => '192.168.1.1',
+            'last_ip'     => '192.168.1.10',
+            'description' => 'Test netblock',
+            'enabled'     => true,
+        ]);
 
         $exitCode = Artisan::call(
             'netblock:show',
             [
-                'netblock' => $ip,
+                'netblock' => $netblock->last_ip,
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString($this->netblock->contact->name, Artisan::output());
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($netblock->contact->name, Artisan::output());
     }
 }

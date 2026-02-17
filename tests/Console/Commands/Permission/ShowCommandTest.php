@@ -3,8 +3,9 @@
 namespace tests\Console\Commands\Permission;
 
 use AbuseIO\Models\Permission;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,38 +13,44 @@ use tests\TestCase;
  */
 class ShowCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /**
-     * The list of testing fixtures to test against.
-     *
-     * @var \Illuminate\Database\Eloquent\Collection
-     */
-    private $list;
-
-    public function initDB()
+    #[group('functional')]
+    public function testPermissionShowCommandShouldFailWithoutArguments(): void
     {
-        $this->list = Permission::factory()->count(10)->create();
+        $exitCode = Artisan::call('permission:show');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "permission").', $output);
+        $this->assertStringContainsString('Shows a permission based on the provided ID', $output);
     }
 
-    public function testWithValidIdFilter()
+    #[group('functional')]
+    public function testPermissionShowCommandShouldPassWithValidIdFilter(): void
     {
-        $this->initDB();
+        $headers = ['Id',  'Name', 'Description'];
+        $permission = Permission::create([
+            'name' => 'test-permission',
+            'description' => 'A permission for testing purposes',
+        ]);
 
         $exitCode = Artisan::call(
             'permission:show',
             [
-                'permission' => $this->list->get(0)->id,
+                'permission' => $permission->id,
             ]
         );
-        $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        foreach (['Id',  'Name', 'Description'] as $el) {
+
+        $this->assertEquals(0, $exitCode);
+        foreach ($headers as $el) {
             $this->assertStringContainsString($el, $output);
         }
     }
 
-    public function testWithInvalidFilter()
+    #[group('functional')]
+    public function testPermissionShowCommandShouldFailWithInvalidIdFilter(): void
     {
         $exitCode = Artisan::call(
             'permission:show',
@@ -52,14 +59,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('No matching permission was found.', Artisan::output());
-    }
-
-    public function testWithoutArguments()
-    {
-        $exitCode = Artisan::call('permission:show');
         $this->assertEquals(1, $exitCode);
-        $this->assertStringContainsString('Shows a permission', Artisan::output());
+        $this->assertStringContainsString('No matching permission was found.', Artisan::output());
     }
 }
