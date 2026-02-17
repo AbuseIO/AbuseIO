@@ -4,7 +4,9 @@ namespace tests\Console\Commands\Netblock;
 
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,34 +14,78 @@ use tests\TestCase;
  */
 class ListCommandTest extends TestCase
 {
-    public function testNetBlockListCommand()
+    use RefreshDatabase;
+
+    #[group('functional')]
+    public function testNetBlockListCommandShouldFailWithNoNetblocks(): void
     {
-        $netblock = Netblock::all()->random();
-        $contact = $netblock->contact;
+        $exitCode = Artisan::call('netblock:list', []);
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('No netblocks found.', Artisan::output());
+    }
+
+    #[group('functional')]
+    public function testNetBlockListCommandShouldPassWithAValidNetblock(): void
+    {
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference' => 'Old reference',
+            'name' => 'Old name',
+            'email' => 'test@example.com',
+            'enabled' => true,
+        ]);
+
+        $netblock = Netblock::create([
+            'contact_id' => $contact->id,
+            'first_ip' => '192.168.1.1',
+            'last_ip' => '192.168.1.10',
+            'description' => 'Test netblock',
+            'enabled' => true,
+        ]);
 
         $exitCode = Artisan::call('netblock:list', []);
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString($contact->name, Artisan::output());
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($netblock->contact->name, Artisan::output());
     }
 
-    public function testNetBlockListCommandWithValidFilter()
+    #[group('functional')]
+    public function testNetBlockListCommandShouldPassWithValidFilter(): void
     {
-        $netblock = Netblock::all()->random();
-        $ip = $netblock->first_ip;
-        $netblock_contact = $netblock->contact;
-        $other_contact = Contact::where('id', '!=', $netblock_contact->id)
-            ->get()->random();
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference' => 'Old reference',
+            'name' => 'Old name',
+            'email' => 'test@example.com',
+            'enabled' => true,
+        ]);
+        $otherContact = Contact::create([
+            'account_id' => 1,
+            'reference' => 'Other reference',
+            'name' => 'Other name',
+            'email' => 'othertTest@example.com',
+            'enabled' => true,
+        ]);
+        $netblock = Netblock::create([
+            'contact_id' => $contact->id,
+            'first_ip' => '192.168.1.1',
+            'last_ip' => '192.168.1.10',
+            'description' => 'Test netblock',
+            'enabled' => true,
+        ]);
+        $netblockContact = $netblock->contact;
 
         $exitCode = Artisan::call(
             'netblock:list',
             [
-                '--filter' => $ip,
+                '--filter' => $netblock->first_ip,
             ]
         );
+        $output = Artisan::output();
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString($netblock_contact->name, Artisan::output());
-        $this->assertStringNotContainsString($other_contact->name, Artisan::output());
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($netblockContact->name, $output);
+        $this->assertStringNotContainsString($otherContact->name, $output);
     }
 }

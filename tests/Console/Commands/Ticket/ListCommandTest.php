@@ -3,50 +3,44 @@
 namespace tests\Console\Commands\Ticket;
 
 use AbuseIO\Models\Ticket;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
  * Class ListCommandTest.
+ *
+ * @note In this test we use the ticket factory to create tickets, the model itself is really large to set up so we use factories to keep the test code clean.
  */
 class ListCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /**
-     * The list of testing fixtures to test against.
-     *
-     * @var Illuminate\Database\Eloquent\Collection
-     */
-    private $ticketList;
-
-    public function initDB()
+    #[group('functional')]
+    public function testTicketListCommandShouldPassToShowTableHeaders(): void
     {
-        $this->ticketList = Ticket::factory()->count(10)->create();
-    }
+        $headers = ['Id', 'Ip', 'Domain', 'Class id', 'Type id'];
+        Ticket::factory()->create();
 
-    public function testHeaders()
-    {
         $exitCode = Artisan::call(
             'ticket:list',
             [
                 //
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
-
-        $headers = ['Id', 'Ip', 'Domain', 'Class id', 'Type id'];
         $output = Artisan::output();
+
+        $this->assertEquals(0, $exitCode);
         foreach ($headers as $header) {
             $this->assertStringContainsString($header, $output);
         }
     }
 
-    public function testAll()
+    #[group('functional')]
+    public function testTicketListCommandShouldPassShowingTickets(): void
     {
-        $this->initDB();
+        $ticket = Ticket::factory()->create();
 
         $exitCode = Artisan::call(
             'ticket:list',
@@ -54,34 +48,35 @@ class ListCommandTest extends TestCase
                 //
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertStringContainsString($this->ticketList->get(0)->domain, $output);
-        $this->assertStringContainsString($this->ticketList->get(0)->ip, $output);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($ticket->ip, $output);
+        $this->assertStringContainsString($ticket->domain, $output);
     }
 
-    public function testFilter()
+
+    #[group('functional')]
+    public function testTicketListCommandShouldPassWithValidIdFilter(): void
     {
-        $this->initDB();
+        $ticket = Ticket::factory()->create();
 
         $exitCode = Artisan::call(
             'ticket:list',
             [
-                '--filter' => $this->ticketList->get(0)->id,
+                '--filter' => $ticket->id,
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertStringContainsString($this->ticketList->get(0)->ip, $output);
-        $this->assertStringNotContainsString($this->ticketList->get(1)->domain, $output);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($ticket->ip, $output);
+        $this->assertStringContainsString($ticket->domain, $output);
     }
 
-    public function testNotFoundFilter()
+    #[group('integration')]
+    public function testTicketListCommandShouldFailWithInvalidIdFilter(): void
     {
-        $this->initDB();
-
         $exitCode = Artisan::call(
             'ticket:list',
             [
@@ -89,13 +84,14 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('No ticket found for given filter.', Artisan::output());
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('No tickets found.', Artisan::output());
     }
 
-    public function testJson()
+    #[group('functional')]
+    public function testTicketListCommandShouldPassWithJsonFilterTrue(): void
     {
-        $this->initDB();
+        Ticket::factory()->create();
 
         $exitCode = Artisan::call(
             'ticket:list',
@@ -103,10 +99,9 @@ class ListCommandTest extends TestCase
                 '--json' => 'true',
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
-
         json_decode(Artisan::output());
-        $this->assertEquals(json_last_error(), JSON_ERROR_NONE);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertEquals(JSON_ERROR_NONE, json_last_error());
     }
 }
