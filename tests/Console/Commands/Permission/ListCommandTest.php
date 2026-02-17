@@ -32,14 +32,8 @@ class ListCommandTest extends TestCase
     #[group('functional')]
     public function testPermissionListCommandShouldPassShowingTwoPermissions(): void
     {
-        $permissionOne = Permission::create([
-            'name' => 'test-permission-one',
-            'description' => 'A permission for testing purposes',
-        ]);
-        $permissionTwo = Permission::create([
-            'name' => 'test-permission-two',
-            'description' => 'A permission for testing purposes',
-        ]);
+        $permissionOne = Permission::factory()->create();
+        $permissionTwo = Permission::factory()->create();
 
         $exitCode = Artisan::call('permission:list', []);
         $output = Artisan::output();
@@ -52,14 +46,8 @@ class ListCommandTest extends TestCase
     #[group('functional')]
     public function testPermissionListCommandShouldPassWithValidFilter(): void
     {
-        $permissionOne = Permission::create([
-            'name' => 'test-permission-one',
-            'description' => 'A permission for testing purposes',
-        ]);
-        $permissionTwo = Permission::create([
-            'name' => 'test-permission-two',
-            'description' => 'A permission for testing purposes',
-        ]);
+        $permissionOne = Permission::factory()->create();
+        $permissionTwo = Permission::factory()->create();
 
         $exitCode = Artisan::call(
             'permission:list',

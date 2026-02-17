@@ -30,10 +30,7 @@ class ShowCommandTest extends TestCase
     public function testPermissionShowCommandShouldPassWithValidIdFilter(): void
     {
         $headers = ['Id',  'Name', 'Description'];
-        $permission = Permission::create([
-            'name' => 'test-permission',
-            'description' => 'A permission for testing purposes',
-        ]);
+        $permission = Permission::factory()->create();
 
         $exitCode = Artisan::call(
             'permission:show',

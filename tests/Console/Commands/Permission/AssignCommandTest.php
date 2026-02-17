@@ -37,13 +37,10 @@ class AssignCommandTest extends TestCase
     #[group('functional')]
     public function testRoleAssignmentShouldPassWithValidIds(): void
     {
+        $permission = Permission::factory()->create();
         $role = Role::create([
             'name' => 'test-role',
             'description' => 'A role for testing purposes',
-        ]);
-        $permission = Permission::create([
-            'name' => 'test-permission',
-            'description' => 'A permission for testing purposes',
         ]);
 
         $exitCode = Artisan::call('permission:assign', [

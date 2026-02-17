@@ -21,10 +21,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int    $updated_at
  * @property int    $deleted_at
  */
-#[UseFactory(JobFactory::class)]
 class Job extends Model
 {
-    use HasFactory;
     /**
      * The database table used by the model.
      *
