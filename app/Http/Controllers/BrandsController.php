@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\BrandFormRequest;
 use AbuseIO\Http\Requests\StoreBrandRequest;
 use AbuseIO\Http\Requests\UpdateBrandRequest;
 use AbuseIO\Models\Account;
