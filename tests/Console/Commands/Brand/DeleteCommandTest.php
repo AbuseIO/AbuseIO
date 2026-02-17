@@ -2,7 +2,10 @@
 
 namespace tests\Console\Commands\Brand;
 
+use AbuseIO\Models\Brand;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -10,32 +13,49 @@ use tests\TestCase;
  */
 class DeleteCommandTest extends TestCase
 {
-    public function testValid()
+    use RefreshDatabase;
+
+    #[group('functional')]
+    public function testBrandDeleteCommandShouldFailWithoutArguments(): void
     {
-        //TODO make brand table seeder;
-        $this->assertTrue(true);
-        //        $exitCode = Artisan::call('brand:delete', [
-//            "--id" => "1"
-//        ]);
-//
-//        $this->assertEquals($exitCode, 0);
-//        $this->assertStringContainsString("The brand has been deleted from the system", Artisan::output());
-//        /**
-//         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-//         */
-//        $this->seed('BrandTableSeeder');
+        $exitCode = Artisan::call('brand:delete');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "id")', $output);
+        $this->assertStringContainsString('Deletes a brand from the system', $output);
     }
 
-    public function testInvalidId()
+    #[group('functional')]
+    public function testBrandDeleteCommandShouldPassWithValidId(): void
+    {
+        $brand = Brand::create([
+            'name' => 'Functional Test Brand',
+            'company_name' => 'Testing Co',
+            'logo' => 'logo.png',
+            'introduction_text' => 'Welcome to Testing Co',
+            'creator_id' => 1,
+        ]);
+
+        $exitCode = Artisan::call('brand:delete', [
+            'id' => $brand->id,
+        ]);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString("The brand has been deleted from the system", Artisan::output());
+    }
+
+    #[group('functional')]
+    public function testBrandDeleteCommandShouldFailWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'brand:delete',
             [
-                'id' => '1000',
+                'id' => 1000,
             ]
         );
 
-        $this->assertEquals($exitCode, 1);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find brand', Artisan::output());
     }
 }
