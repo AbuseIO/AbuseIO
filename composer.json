@@ -74,8 +74,9 @@
 		"sabre/uri": "3.0.*",
 		"sabre/xml": "4.0.*",
 		"spatie/laravel-html": "^3.12",
-		"yajra/laravel-datatables-oracle": "12.6.*"
-	},
+		"yajra/laravel-datatables-oracle": "12.6.*",
+        "ext-fileinfo": "*"
+    },
   "require-dev": {
 		"beyondcode/laravel-dump-server": "^2.1",
 		"fakerphp/faker": "^1.23",

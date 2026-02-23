@@ -3,8 +3,9 @@
 namespace tests\Console\Commands\Role;
 
 use AbuseIO\Models\Role;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,31 +13,40 @@ use tests\TestCase;
  */
 class DeleteCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    private $role;
-
-    private function initDB()
+    #[group('functional')]
+    public function testDeleteRoleCommandShouldFailWithoutId(): void
     {
-        $this->role = Role::factory()->create();
+        $exitCode  = Artisan::call('role:delete');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "role").', $output);
+        $this->assertStringContainsString('Deletes a role from the system', $output);
     }
 
-    public function testValid()
+    #[group('functional')]
+    public function testDeleteRoleCommandShouldPassWithValidId(): void
     {
-        $this->initDB();
+        $role = Role::create([
+            'name'    => 'some role',
+            'description' => 'some description',
+        ]);
 
         $exitCode = Artisan::call(
             'role:delete',
             [
-                'role' => $this->role->id,
+                'role' => $role->id,
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('role has been deleted', Artisan::output());
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString('The role has been deleted', Artisan::output());
     }
 
-    public function testInvalidId()
+    #[group('functional')]
+    public function testRoleDeletionCommandWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'role:delete',
@@ -45,7 +55,7 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 1);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find role', Artisan::output());
     }
 }

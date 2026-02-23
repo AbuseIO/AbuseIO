@@ -2,10 +2,6 @@
 
 namespace AbuseIO\Models;
 
-use AbuseIO\Observers\EventObserver;
-use Database\Factories\EventFactory;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,8 +19,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int    $updated_at
  * @property int    $deleted_at
  */
-#[UseFactory(EventFactory::class)]
-#[ObservedBy(EventObserver::class)]
 class Event extends Model
 {
     use SoftDeletes;

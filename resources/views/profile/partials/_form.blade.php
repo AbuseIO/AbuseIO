@@ -36,6 +36,6 @@
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-success">{{ $submit_text }}</button>
-        <a href="{{ URL::previous() }}" class="btn btn-default">{{ trans('misc.button.cancel') }}</a>
+        <a href="{{ route('admin.home') }}" class="btn btn-default">{{ trans('misc.button.cancel') }}</a>
     </div>
 </div>

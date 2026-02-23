@@ -2,31 +2,56 @@
 
 namespace tests\Console\Commands\Note;
 
+use AbuseIO\Models\Note;
+use AbuseIO\Models\Ticket;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
  * Class DeleteCommandTest.
+ *
+ * @note In this test we use the ticket factory to create tickets for the notes.
+ *       - The tickets model is really large to set up so we use factories to keep the test code clean.
  */
 class DeleteCommandTest extends TestCase
 {
-    // TODO not working because seeder is not deleting and id=1 is in te schema.
+    use RefreshDatabase;
 
-    //    public function testValid()
-    //    {
-    //        $exitCode = Artisan::call('account:delete', [
-    //            "--id" => "2"
-    //        ]);¬¬¬
-    //
-    //        $this->assertEquals($exitCode, 0);
-    //        $this->assertStringContainsString("The account has been deleted from the system", Artisan::output());
-    //        /**
-    //         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-    //         */
-    //        //$this->seed('AccountsTableSeeder');
-    //    }
+    #[group('functional')]
+    public function testNoteDeleteCommandShouldFailWithNoArguments(): void
+    {
+        $exitCode = Artisan::call('note:delete');
+        $output = Artisan::output();
 
-    public function testInvalidId()
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "id")', $output);
+        $this->assertStringContainsString('Deletes a note from the system', $output);
+    }
+
+    #[group('functional')]
+    public function testNoteDeleteCommandShouldPassWithValidId(): void
+    {
+        $ticket = Ticket::factory()->create();
+        $note = Note::create([
+            'ticket_id' => $ticket->id,
+            'submitter' => 'Tester',
+            'text'      => 'This is a test note to be deleted by the unit tests.',
+            'hidden'    => false,
+            'viewed'    => false,
+        ]);
+
+        $exitCode = Artisan::call('note:delete', [
+            'id' => $note->id,
+        ]);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString("Successfully deleted the note.", Artisan::output());
+    }
+
+    #[group('functional')]
+    public function testNoteDeleteCommandShouldFailWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'note:delete',
@@ -35,7 +60,7 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 1);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find note', Artisan::output());
     }
 }

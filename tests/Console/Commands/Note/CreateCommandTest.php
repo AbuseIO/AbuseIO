@@ -21,9 +21,12 @@ class CreateCommandTest extends TestCase
     #[group('functional')]
     public function testCreateNoteCommandShouldFailWithNoArguments(): void
     {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Not enough arguments (missing: "ticket_id, submitter, text")');
-        Artisan::call('note:create');
+        $exitCode = Artisan::call('note:create');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "ticket_id, submitter, text")', $output);
+        $this->assertStringContainsString('Create a new note for a ticket in the system', $output);
     }
 
     #[group('functional')]

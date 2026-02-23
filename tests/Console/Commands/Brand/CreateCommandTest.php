@@ -18,9 +18,12 @@ class CreateCommandTest extends TestCase
     #[group('functional')]
     public function testBrandCreateCommandShouldFailWithoutArguments(): void
     {
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Not enough arguments (missing: "name, company_name").');
-        Artisan::call('brand:create');
+        $exitCode = Artisan::call('brand:create');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "name, company_name").', $output);
+        $this->assertStringContainsString('Create a new brand in the system', $output);
     }
 
     #[group('functional')]

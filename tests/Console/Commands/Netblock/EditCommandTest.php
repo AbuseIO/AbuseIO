@@ -4,7 +4,9 @@ namespace tests\Console\Commands\Netblock;
 
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,14 +14,21 @@ use tests\TestCase;
  */
 class EditCommandTest extends TestCase
 {
-    public function testWithoutId()
+    use RefreshDatabase;
+
+    #[group('functional')]
+    public function testNetblockEditCommandShouldFailWithoutId(): void
     {
-        ob_start();
-        Artisan::call('netblock:edit');
-        $this->assertStringContainsString('Edit a netblock', ob_get_clean());
+        $exitCode = Artisan::call('netblock:edit');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "id")', $output);
+        $this->assertStringContainsString('Edits an existing netblock', $output);
     }
 
-    public function testWithInvalidId()
+    #[group('functional')]
+    public function testNetblockEditCommandShouldFailWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'netblock:edit',
@@ -27,15 +36,27 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find netblock with this criteria', Artisan::output());
     }
 
-    public function testWithInvalidContact()
+    #[group('functional')]
+    public function testNetblockEditCommandShouldFailWithInvalidContact(): void
     {
-        // Create a valid netblock to ensure the ID exists
-        $netblock = Netblock::factory()->create([
-            'contact_id' => Contact::factory()->create()->id,
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference'  => 'Old reference',
+            'name'       => 'Old name',
+            'email'      => 'test@example.com',
+            'enabled'    => true,
+        ]);
+        $netblock = Netblock::create([
+            'contact_id'  => $contact->id,
+            'first_ip'    => '192.168.1.1',
+            'last_ip'     => '192.168.1.10',
+            'description' => 'Test netblock',
+            'enabled'     => true,
         ]);
 
         $exitCode = Artisan::call(
@@ -45,29 +66,38 @@ class EditCommandTest extends TestCase
                 '--contact_id' => '100000', // invalid contact id
             ]
         );
-        $this->assertEquals($exitCode, 0);
+
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find contact with this criteria', Artisan::output());
     }
 
-    public function testEnabled()
+    #[group('functional')]
+    public function testNetblockEditCommandShouldPassSettingEnabledToFalse(): void
     {
-        // Create a valid netblock to ensure the ID exists
-        $netblock = Netblock::factory()->create([
-            'contact_id' => Contact::factory()->create()->id,
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference'  => 'Old reference',
+            'name'       => 'Old name',
+            'email'      => 'test@example.com',
+            'enabled'    => true,
+        ]);
+        $netblock = Netblock::create([
+            'contact_id'  => $contact->id,
+            'first_ip'    => '192.168.1.1',
+            'last_ip'     => '192.168.1.10',
+            'description' => 'Test netblock',
+            'enabled'     => true,
         ]);
 
         $exitCode = Artisan::call(
             'netblock:edit',
             [
-                'id'        => (string) $netblock->id,
+                'id'        => $netblock->id,
                 '--enabled' => 'false',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+
+        $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString('The netblock has been updated', Artisan::output());
-        /*
-         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-         */
-        $this->seed('NetblocksTableSeeder');
     }
 }

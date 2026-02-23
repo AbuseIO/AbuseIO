@@ -2,7 +2,9 @@
 
 namespace AbuseIO\Console\Commands\Incident;
 
+use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
+use AbuseIO\Http\Requests\StoreIncidentRequest;
 use AbuseIO\Jobs\EvidenceSave;
 use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Models\Evidence;
@@ -18,6 +20,7 @@ use Validator;
 class CreateCommand extends Command
 {
     use ShowHelpWhenRunTimeExceptionOccurs;
+    use ExitCodeHooks;
 
     /*
      * Evidence file generated for this incident
@@ -38,7 +41,7 @@ class CreateCommand extends Command
      *
      * @return bool
      */
-    final public function handle()
+    final public function handle(): int
     {
         $incident = $this->getModelFromRequest();
 
@@ -47,7 +50,7 @@ class CreateCommand extends Command
         if (empty($this->evidenceFile)) {
             $this->error('Error returned while asking to write evidence file, cannot continue');
 
-            return false;
+            return $this->getInvalidOptionExitCode();
         }
 
         /** @var $validation */
@@ -61,7 +64,7 @@ class CreateCommand extends Command
                 sprintf('Failed to create the %s due to validation warnings', $this->getAsNoun())
             );
 
-            return false;
+            return $this->getValidationFailedExitCode();
         }
 
         /*
@@ -69,7 +72,7 @@ class CreateCommand extends Command
          **/
         $evidence = new Evidence();
         $evidence->filename = $this->evidenceFile;
-        $evidence->sender = trim(posix_getpwuid(posix_geteuid())['name']).' (CLI)';
+        $evidence->sender = 'Create Command (CLI)';
         $evidence->subject = 'CLI Created Incident';
 
         /*
@@ -90,7 +93,7 @@ class CreateCommand extends Command
         $msg = sprintf('The %s has been created', $this->getAsNoun());
         $this->info($msg);
 
-        return true;
+        return $this->getSuccessExitCode();
     }
 
     /**
@@ -102,9 +105,9 @@ class CreateCommand extends Command
      */
     private function exception($message)
     {
-        $this->error('ERROR: '.$message);
+        $this->error('ERROR: ' . $message);
 
-        return false;
+        return $this->getFailureExitCode();
     }
 
     /**
@@ -173,25 +176,25 @@ class CreateCommand extends Command
     {
         $evidence = new EvidenceSave();
         $evidenceData = [
-            'createdBy'     => trim(posix_getpwuid(posix_geteuid())['name']).' (CLI)',
-            'receivedOn'    => time(),
+            'createdBy' => 'Create Command (CLI)',
+            'receivedOn' => time(),
             'submittedData' => $incident->toArray(),
-            'attachments'   => [],
+            'attachments' => [],
         ];
 
         // Add the file to evidence object if it was given
         if ($file !== null) {
             // Build evidence with added file
             if (!is_file($file)) {
-                $this->error('File does not exist: '.$file);
-                exit;
+                $this->error('File does not exist: ' . $file);
+                return $this->getInvalidOptionExitCode();
             }
 
             $attachment = [
-                'filename'    => basename($file),
-                'size'        => filesize($file),
+                'filename' => basename($file),
+                'size' => filesize($file),
                 'contentType' => mime_content_type($file),
-                'data'        => file_get_contents($file),
+                'data' => file_get_contents($file),
             ];
             $evidenceData['attachments'][] = $attachment;
         }
@@ -206,7 +209,7 @@ class CreateCommand extends Command
      */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Incident::createRules());
+        return Validator::make($model->toArray(), new StoreIncidentRequest()->rules());
     }
 
     /**

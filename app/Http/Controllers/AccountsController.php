@@ -2,7 +2,6 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\AccountFormRequest;
 use AbuseIO\Http\Requests\StoreAccountRequest;
 use AbuseIO\Http\Requests\UpdateAccountRequest;
 use AbuseIO\Models\Account;
@@ -46,7 +45,7 @@ class AccountsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function index()
     {
@@ -262,12 +261,12 @@ class AccountsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param AccountFormRequest $accountForm
+     * @param UpdateAccountRequest $accountForm
      * @param Account            $account
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiUpdate(AccountFormRequest $accountForm, Account $account)
+    public function apiUpdate(UpdateAccountRequest $accountForm, Account $account)
     {
         $account->update($accountForm->all());
 

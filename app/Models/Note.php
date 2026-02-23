@@ -2,8 +2,6 @@
 
 namespace AbuseIO\Models;
 
-use Database\Factories\NoteFactory;
-use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +19,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $submitter  fillable
  * @property string $text       fillable
  */
-#[UseFactory(NoteFactory::class)]
 class Note extends Model
 {
     use SoftDeletes;

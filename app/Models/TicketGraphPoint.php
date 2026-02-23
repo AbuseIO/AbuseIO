@@ -3,14 +3,11 @@
 namespace AbuseIO\Models;
 
 use Carbon\Carbon;
-use Database\Factories\TicketGraphPointFactory;
-use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-#[UseFactory(TicketGraphPointFactory::class)]
 class TicketGraphPoint extends Model
 {
     use HasFactory;

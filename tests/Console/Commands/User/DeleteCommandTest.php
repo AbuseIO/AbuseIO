@@ -2,7 +2,10 @@
 
 namespace tests\Console\Commands\User;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use AbuseIO\Models\User;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -10,23 +13,41 @@ use tests\TestCase;
  */
 class DeleteCommandTest extends TestCase
 {
-    // TODO not working because seeder is not deleting and id=1 is in te schema.
+    use RefreshDatabase;
 
-    //    public function testValid()
-    //    {
-    //        $exitCode = Artisan::call('account:delete', [
-    //            "--id" => "2"
-    //        ]);
-    //
-    //        $this->assertEquals($exitCode, 0);
-    //        $this->assertStringContainsString("The account has been deleted from the system", Artisan::output());
-    //        /**
-    //         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-    //         */
-    //        //$this->seed('AccountsTableSeeder');
-    //    }
+    #[group('functional')]
+    public function testUserDeleteCommandShouldFailWithoutId(): void
+    {
+        $exitCode = Artisan::call('user:delete');
+        $output = Artisan::output();
 
-    public function testInvalidId()
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "user").', $output);
+        $this->assertStringContainsString('Deletes a user from the system', $output);
+    }
+
+    #[group('functional')]
+    public function testUserDeleteCommandShouldPassWithValidId(): void
+    {
+        $user = User::create([
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'johndoe@example.com',
+            'account_id' => 1,
+            'locale' => 'en',
+            'disabled' => false,
+        ]);
+
+        $exitCode = Artisan::call('user:delete', [
+            'user' => $user->id
+        ]);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString("The user has been deleted from the system", Artisan::output());
+    }
+
+    #[group('functional')]
+    public function testUserDeleteCommandShouldFailWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'user:delete',
@@ -35,7 +56,7 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 1);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find user', Artisan::output());
     }
 }

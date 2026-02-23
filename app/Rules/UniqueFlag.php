@@ -67,26 +67,47 @@ class UniqueFlag implements ValidationRule, DataAwareRule
     // Convert various representations of boolean to actual boolean
     private function valueToBoolean(string $attribute, mixed $value, Closure $fail): bool
     {
-        if (!isset($value) || $value === []) {
+        // If value is null or empty string, treat it as false
+        if ($value === null || $value === '') {
             $fail("The '{$attribute}' field must be a boolean value");
             return false;
         }
 
-        // Checks if the value is a string and representation of a boolean true
-        if (gettype($value) == 'string' && !in_array($value, ['true', 'false', '1', '0'])) {
-            $fail("The '{$attribute}' field must be a boolean string value");
+        // If the value is an array, it's invalid for a boolean field
+        if (is_array($value)) {
+            $fail("The '{$attribute}' field must be a boolean value, not an array");
             return false;
         }
 
-        if (gettype($value) == 'integer' && !is_bool((bool)$value)) {
-            $fail("The '{$attribute}' field must be a boolean integer value");
-            return false;
+        // If the value is a string, check for common boolean representations
+        if (is_string($value)) {
+            $lowerValue = strtolower($value);
+            if (!in_array($lowerValue, ['true', 'false', '1', '0'])) {
+                $fail("The '{$attribute}' field must be a boolean string value (true, false, 1, or 0)");
+                return false;
+            }
+
+            // convert string to boolean
+            return in_array($lowerValue, ['true', '1']);
         }
 
-        if ($value === 'false' || $value === '0') {
-            $value = false;
+        // If the value is an integer, check for 0 or 1
+        if (is_int($value)) {
+            if (!in_array($value, [0, 1])) {
+                $fail("The '{$attribute}' field must be a boolean integer value (0 or 1)");
+                return false;
+            }
+
+            return $value === 1;
         }
 
-        return (bool) $value;
+        // if the value is a boolean return it as is
+        if (is_bool($value)) {
+            return $value;
+        }
+
+        // if the value is of any other type, it's invalid for a boolean field
+        $fail("The '{$attribute}' field must be a boolean, string (true/false/1/0), or integer (0/1)");
+        return false;
     }
 }

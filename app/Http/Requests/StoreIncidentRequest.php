@@ -5,6 +5,7 @@ namespace AbuseIO\Http\Requests;
 use AbuseIO\Rules\AbuseClass;
 use AbuseIO\Rules\AbuseType;
 use AbuseIO\Rules\StringOrBoolean;
+use AbuseIO\Rules\TimeStamp;
 
 class StoreIncidentRequest extends BaseIncidentRequest
 {
@@ -28,7 +29,7 @@ class StoreIncidentRequest extends BaseIncidentRequest
             'source_id'   => ['nullable', new StringOrBoolean],
             'ip'          => ['required', 'ip'],
             'domain'      => ['nullable', new StringOrBoolean, 'string'],
-            'timestamp'   => ['required', 'date'],
+            'timestamp'   => ['required', new TimeStamp],
             'class'       => ['required', new AbuseClass],
             'type'        => ['required', new AbuseType],
             'information' => ['required', 'json'],

@@ -11,7 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         using: function () {
             // Load modern routes files
             Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+                ->group(base_path('app/Http/routes.php'));
             Route::prefix('api')->middleware('api')
                 ->group(base_path('routes/api.php'));
         },
@@ -35,7 +35,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'api.enabled' => \AbuseIO\Http\Middleware\ApiEnabled::class,
             'api.account' => \AbuseIO\Http\Middleware\ApiAccountAvailable::class,
             'api.system' => \AbuseIO\Http\Middleware\ApiSystemAccount::class,
-            'api.enabled' => \AbuseIO\Http\Middleware\ApiEnabled::class,
             'api.token' => \AbuseIO\Http\Middleware\CheckApiToken::class,
             'ash.token' => \AbuseIO\Http\Middleware\CheckAshToken::class,
             'auth' => \AbuseIO\Http\Middleware\Authenticate::class,

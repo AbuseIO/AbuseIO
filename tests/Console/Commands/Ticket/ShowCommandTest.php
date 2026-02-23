@@ -3,40 +3,35 @@
 namespace tests\Console\Commands\Ticket;
 
 use AbuseIO\Models\Ticket;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
  * Class ShowCommandTest.
+ *
+ * @note In this test we use the ticket factory to create tickets, the model itself is really large to set up so we use factories to keep the test code clean.
  */
 class ShowCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /**
-     * The list of testing fixtures to test against.
-     *
-     * @var \Illuminate\Database\Eloquent\Collection
-     */
-    private $ticketList;
-
-    public function initDB()
+    #[group('functional')]
+    public function testTicketShowCommandShouldFailWithNoArguments(): void
     {
-        $this->ticketList = Ticket::factory()->count(10)->create();
+        $exitCode = Artisan::call('ticket:show');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "ticket").', $output);
+        $this->assertStringContainsString('Shows a ticket based on the provided ID', $output);
     }
 
-    public function testWithValidIdFilter()
+    #[group('functional')]
+    public function testTicketShowCommandShouldPassWithValidIdFilter(): void
     {
-        $this->initDB();
-        $exitCode = Artisan::call(
-            'ticket:show',
-            [
-                'ticket' => $this->ticketList->get(1)->id,
-            ]
-        );
-        $this->assertEquals($exitCode, 0);
-        $output = Artisan::output();
+        $ticket = Ticket::factory()->create();
         $fields = [
             'Id',
             'Ip',
@@ -59,16 +54,26 @@ class ShowCommandTest extends TestCase
             //                    'domain_contact_notified_count',
             //                    'status_id',
             //                    'last_notify_count',
-            'Last notify timestamp', ];
+            'Last notify timestamp',
+        ];
 
+        $exitCode = Artisan::call(
+            'ticket:show',
+            [
+                'ticket' => $ticket->id,
+            ]
+        );
+        $output = Artisan::output();
+
+        $this->assertEquals(0, $exitCode);
         foreach ($fields as $el) {
             $this->assertStringContainsString($el, $output);
         }
     }
 
-    public function testWithInvalidFilter()
+    #[group('functional')]
+    public function testTicketShowCommandShouldFailWithInvalidFilter(): void
     {
-        $this->initDB();
         $exitCode = Artisan::call(
             'ticket:show',
             [
@@ -76,7 +81,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('No matching ticket was found.', Artisan::output());
     }
 }
