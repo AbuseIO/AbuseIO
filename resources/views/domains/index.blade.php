@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="page-header">{{ trans('misc.domains') }}</h1>
 <div class="row">
-    <div  class="col-md-3 col-md-offset-9 text-right">
+    <div  class="col-md-3 offset-md-9 text-end">
         <a href="{{ route('admin.domains.create') }}" class="btn btn-info">{{ trans('domains.button.new_domain') }}</a>
         <a href="{{ route('admin.domains.export', ['format' => 'csv']) }}" class="btn btn-info">{{ trans('misc.button.csv_export') }}</a>
     </div>
@@ -14,7 +14,7 @@
     <tr>
         <th>{{ trans('domains.domainname') }}</th>
         <th>{{ trans('misc.contact') }}</th>
-        <th class="text-right">{{ trans('misc.action') }}</th>
+        <th class="text-end">{{ trans('misc.action') }}</th>
     </tr>
     </thead>
 </table>
@@ -44,7 +44,7 @@
             columns: [
                 { data: 'name', name: 'domains.name' },
                 { data: 'contacts_name', name: 'contacts.name' },
-                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-end" },
             ]
         });
     });

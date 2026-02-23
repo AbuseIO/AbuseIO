@@ -6,7 +6,7 @@
             <p>{{ trans('misc.abuseio_intro1') }}</p>
             <p>{{ trans('misc.abuseio_intro2') }}</p>
         </div>
-        <div class="pull-right">
+        <div class="float-end">
             <p id="status">
 
             </p>
@@ -17,12 +17,12 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="modalTitle"></h4>
                     </div>
                     <div class="modal-body" id="modalBody"></div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 if (data.action === 'showModal') {
                     $('#modalBody').text(data.body);
                     $('#modalTitle').text(data.title);
-                    $('#myModal').modal('show');
+                    (new bootstrap.Modal(document.getElementById('myModal'))).show();
 
                 }
             }).fail(function(data) {

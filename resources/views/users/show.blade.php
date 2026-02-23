@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="page-header">{{ trans('users.header.detail') }}: {{ $user->first_name }} {{ $user->last_name }}</h1>
 <div class="row">
-    <div class="col-md-3 col-md-offset-9 text-right">
+    <div class="col-md-3 offset-md-9 text-end">
         <form class="form-inline" method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
             @csrf
             @method('DELETE')

@@ -44,7 +44,7 @@ div .media-body h2 {
 
 /* Show Note options when hovering a note */
 .ticket-hover-group:hover .ticket-hover-toggle {
-    visibility: visible;
+    visibility: visible !important;
     z-index: 11;
     position: relative;
 }
@@ -99,4 +99,23 @@ pre.prettyprint {
 .app-container {
     padding-left: 40px;
     padding-right: 40px;
+}
+
+/* Restore Bootstrap 3-like horizontal definition lists */
+@media (min-width: 768px) {
+    .dl-horizontal dt {
+        float: left;
+        width: 220px;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-top: 0px;
+        margin-bottom: 0px;
+    }
+    .dl-horizontal dd {
+        margin-left: 240px;
+        padding-top: 0px;
+        margin-bottom: 0px;
+    }
 }

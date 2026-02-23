@@ -93,12 +93,12 @@ class NetblocksController extends Controller
                     $deleteAction = route('admin.netblocks.destroy', $netblock->id);
                     $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
                     $actions .= ' <a href="netblocks/'.$netblock->id.
-                        '" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-eye-open"></span> '.
+                        '" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> '.
                         trans('misc.button.show').'</a> ';
                     $actions .= ' <a href="netblocks/'.$netblock->id.
-                        '/edit" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-edit"></span> '.
+                        '/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> '.
                         trans('misc.button.edit').'</a> ';
-                    $actions .= '<button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> '.
+                    $actions .= '<button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> '.
                         trans('misc.button.delete').'</button>';
                     $actions .= '</form>';
 

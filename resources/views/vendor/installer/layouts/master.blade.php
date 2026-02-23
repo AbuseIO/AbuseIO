@@ -16,11 +16,7 @@
                 'csrfToken' => csrf_token(),
             ]); ?>
         </script>
-        <script
-                src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
-                crossorigin="anonymous">
-        </script>
+        <script src="{{ asset('/js/jquery.min.js') }}"></script>
     </head>
     <body>
         <div class="master">
@@ -89,7 +85,7 @@
                     @endif
                     @if(session()->has('errors'))
                         <div class="alert alert-danger" id="error_alert">
-                            <button type="button" class="close" id="close_alert" data-dismiss="alert" aria-hidden="true">
+                            <button type="button" class="close" id="close_alert" data-bs-dismiss="alert" aria-hidden="true">
                                  <i class="fa fa-close" aria-hidden="true"></i>
                             </button>
                             <h4>

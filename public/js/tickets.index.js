@@ -75,7 +75,7 @@ $(document).ready(function() {
             { data: 'notes_count', name: 'notes_count', searchable: true },
             { data: 'status_id', name: 'tickets.status_id' },
             { data: 'updated_at', name: 'tickets.updated_at' },
-            { data: 'actions', orderable: false, searchable: false, class: "text-right" }
+            { data: 'actions', orderable: false, searchable: false, class: "text-end" }
         ],
         initComplete: function () {
             $('#type_id').on('change', function () {

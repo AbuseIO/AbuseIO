@@ -80,9 +80,9 @@
 </div>
 
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="offset-sm-2 col-sm-10">
         <button type="submit" class="btn btn-success">{{ $submit_text }}</button>
-        <a href="{{ URL::previous() }}" class="btn btn-default">{{ trans('misc.button.cancel') }}</a>
+        <a href="{{ URL::previous() }}" class="btn btn-secondary">{{ trans('misc.button.cancel') }}</a>
     </div>
 </div>
 

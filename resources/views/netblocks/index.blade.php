@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="page-header">{{ trans('misc.netblocks') }}</h1>
 <div class="row">
-    <div  class="col-md-3 col-md-offset-9 text-right">
+    <div  class="col-md-3 offset-md-9 text-end">
         <a href="{{ route('admin.netblocks.create') }}" class="btn btn-info">{{ trans('netblocks.button.new_netblock') }}</a>
         <a href="{{ route('admin.netblocks.export', ['format' => 'csv']) }}" class="btn btn-info">{{ trans('misc.button.csv_export') }}</a>
     </div>
@@ -14,7 +14,7 @@
         <th>{{ trans('netblocks.first_ip') }}</th>
         <th>{{ trans('netblocks.last_ip') }}</th>
         <th>{{ trans('misc.contact') }}</th>
-        <th class="text-right">{{ trans('misc.action') }}</th>
+        <th class="text-end">{{ trans('misc.action') }}</th>
     </tr>
     </thead>
 </table>
@@ -45,7 +45,7 @@
                 { data: 'first_ip', name: 'netblocks.first_ip' },
                 { data: 'last_ip', name: 'netblocks.last_ip' },
                 { data: 'contacts_name', name: 'contacts.name' },
-                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-end" },
             ]
         });
     });

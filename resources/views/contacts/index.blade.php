@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="page-header">{{ trans('misc.contacts') }}</h1>
 <div class="row">
-    <div class="col-md-3 col-md-offset-9 text-right">
+    <div class="col-md-3 offset-md-9 text-end">
         <a href="{{ route('admin.contacts.create') }}" class="btn btn-info">{{ trans('contacts.button.new_contact') }}</a>
         <a href="{{ route('admin.contacts.export', ['format' => 'csv']) }}" class="btn btn-info">{{ trans('misc.button.csv_export') }}</a>
     </div>
@@ -16,7 +16,7 @@
         <th>{{ trans('contacts.reference') }}</th>
         <th>{{ trans('contacts.notification') }}</th>
         <th>{{ trans_choice('misc.accounts', 1) }}</th>
-        <th class="text-right">{{ trans('misc.action') }}</th>
+        <th class="text-end">{{ trans('misc.action') }}</th>
     </tr>
     </thead>
 </table>
@@ -48,7 +48,7 @@
                 { data: 'reference', name: 'reference' },
                 { data: 'auto_notify', name: 'auto_notify' },
                 { data: 'account_id', name: 'account_id' },
-                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-right" },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false, class: "text-end" },
             ]
         });
     });

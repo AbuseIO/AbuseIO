@@ -61,12 +61,12 @@ class DomainsController extends Controller
                     $deleteAction = route('admin.domains.destroy', $domain->id);
                     $actions = '<form method="POST" action="'.$deleteAction.'" class="form-inline">'.csrf_field().method_field('DELETE');
                     $actions .= ' <a href="domains/'.$domain->id.
-                        '" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye-open"></i> '.
+                        '" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> '.
                         trans('misc.button.show').'</a> ';
                     $actions .= ' <a href="domains/'.$domain->id.
-                        '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> '.
+                        '/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> '.
                         trans('misc.button.edit').'</a> ';
-                    $actions .= '<button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> '.
+                    $actions .= '<button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> '.
                         trans('misc.button.delete').'</button>';
                     $actions .= '</form>';
 

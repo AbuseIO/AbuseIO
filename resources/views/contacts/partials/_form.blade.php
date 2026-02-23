@@ -49,11 +49,9 @@
     <div class="col-sm-10">
         <div class="input-group">
             <input type="url" name="api_host" id="api_host_url" value="{{ old('api_host', isset($contact) ? $contact->api_host : null) }}" class="form-control" placeholder="http://abuseio.domain.tld:1234/api/v1" />
-            <span class="input-group-btn">
-                <button id="checkApiURL" title="{!! trans('misc.refresh') !!}" class="btn"  type="button">
-                    <i id="checkApiUrlGlyph" class="glyphicon @if (!empty($contact->api_host)) glyphicon-ok @else glyphicon-question-sign @endif"></i>
-                </button>
-            </span>
+            <button id="checkApiURL" title="{!! trans('misc.refresh') !!}" class="btn btn-outline-secondary" type="button">
+                <i id="checkApiUrlGlyph" class="fa @if (!empty($contact->api_host)) fa-check @else fa-question-circle @endif"></i>
+            </button>
         </div>
         @if ($errors->has('api_host')) <p class="help-block">{{ $errors->first('api_host') }}</p> @endif
     </div>
@@ -77,9 +75,9 @@
 
 
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="offset-sm-2 col-sm-10">
         <button type="submit" class="btn btn-success">{{ $submit_text }}</button>
-        <a href="{{ URL::previous() }}" class="btn btn-default">{{ trans('misc.button.cancel') }}</a>
+        <a href="{{ URL::previous() }}" class="btn btn-secondary">{{ trans('misc.button.cancel') }}</a>
     </div>
 </div>
 
@@ -100,16 +98,16 @@
                     alert('Error, ' + data.responseJSON.error);
                 })
                 .success(function (data) {
-                   if($('#checkApiUrlGlyph').hasClass('glyphicon-question-sign')) {
-                       $('#checkApiUrlGlyph').removeClass('glyphicon-question-sign');
-                       $('#checkApiUrlGlyph').addClass('glyphicon-ok');
+                   if($('#checkApiUrlGlyph').hasClass('fa-question-circle')) {
+                       $('#checkApiUrlGlyph').removeClass('fa-question-circle');
+                       $('#checkApiUrlGlyph').addClass('fa-check');
                    }
                 });
         });
         $(document).on('keypress', '#api_host_url', function() {
-            if ($('#checkApiUrlGlyph').hasClass('glyphicon-ok')) {
-                $('#checkApiUrlGlyph').removeClass('glyphicon-ok');
-                $('#checkApiUrlGlyph').addClass('glyphicon-question-sign');
+            if ($('#checkApiUrlGlyph').hasClass('fa-check')) {
+                $('#checkApiUrlGlyph').removeClass('fa-check');
+                $('#checkApiUrlGlyph').addClass('fa-question-circle');
             }
         })
     </script>

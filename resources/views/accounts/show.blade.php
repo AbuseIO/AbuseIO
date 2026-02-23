@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="page-header">{{ trans('accounts.header.detail') }}: {{ $account->name }}</h1>
 <div class="row">
-    <div class="col-sm-12 text-right">
+    <div class="col-sm-12 text-end">
         <form class="form-inline" method="POST" action="{{ route('admin.accounts.destroy', ['accounts' => $account->id]) }}">
             @csrf
             @method('DELETE')
@@ -42,12 +42,12 @@
 
 @if ( $account->users->count() )
 <h3 class="page-header">{{ trans('accounts.linked_users') }}: {{ $account->users->count() }}</h3>
-<table class="table table-striped table-condensed">
+<table class="table table-striped table-sm">
     <thead>
         <tr>
             <th>{{ trans('misc.id') }}</th>
             <th>{{ trans('misc.name') }}</th>
-            <th class="text-right">{{ trans('misc.action') }}</th>
+            <th class="text-end">{{ trans('misc.action') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -55,8 +55,8 @@
     <tr>
         <td>{{ $user->id }}</td>
         <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-        <td class="text-right">
-            <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-info btn-xs">{{ trans('misc.button.details') }}</a>
+        <td class="text-end">
+            <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-info btn-sm">{{ trans('misc.button.details') }}</a>
         </td>
     </tr>
     @endforeach

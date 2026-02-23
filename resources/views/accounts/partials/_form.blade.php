@@ -36,18 +36,16 @@
     <div class="col-sm-10">
         <div class="input-group">
             <input type="text" name="token" id="apikey" value="{{ old('token', isset($account) ? $account->token : null) }}" class="form-control">
-            <span class="input-group-btn">
-                <button id="refreshApiKey" title="{{ trans('misc.refresh') }}" class="btn"  type="button"><i class="glyphicon glyphicon-refresh"></i></button>
-            </span>
+            <button id="refreshApiKey" title="{{ trans('misc.refresh') }}" class="btn btn-outline-secondary"  type="button"><i class="fa fa-refresh"></i></button>
         </div>
     </div>
 </div>
 
 
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="offset-sm-2 col-sm-10">
         <button type="submit" class="btn btn-success">{{ $submit_text }}</button>
-        <a href="{{ URL::previous() }}" class="btn btn-default">{{ trans('misc.button.cancel') }}</a>
+        <a href="{{ URL::previous() }}" class="btn btn-secondary">{{ trans('misc.button.cancel') }}</a>
     </div>
 </div>
 

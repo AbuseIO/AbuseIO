@@ -11,22 +11,15 @@
     <link href="{{ asset('/css/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/font-awesome.min.css') }}">
 
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		<script src="{{ asset('/js/html5shiv.min.js') }}"></script>
-		<script src="{{ asset('/js/respond.min.js') }}"></script>
-	<![endif]-->
-
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/js/bootstrap.bundle.min.js') }}"></script>
 	@yield('extrajs')
 </head>
 <body>
 	<div class="container">
 	@if (Session::has('message'))
 	    <div class="alert alert-info alert-dismissible">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <p>{{ Session::get('message') }}</p>
 	    </div>
 	@endif

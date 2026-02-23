@@ -7,11 +7,11 @@
 @section('content')
 <h1 class="page-header">{{ trans('tickets.header.detail') }}: {{ $ticket->id }}</h1>
 @if (session('message'))
-<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> {{ session('message') }}</div>
+<div class="alert alert-success"><i class="fa fa-check"></i> {{ session('message') }}</div>
 @endif
 @if ($errors->any())
 <div class="alert alert-danger">
-    <span class="glyphicon glyphicon-exclamation-sign"></span>
+    <i class="fa fa-exclamation-circle"></i>
     <ul class="list-unstyled">
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -20,47 +20,52 @@
 </div>
 @endif
 <div class="row">
-    <div class="col-md-8 col-md-offset-4 text-right">
+    <div class="col-md-8 offset-md-4 text-end">
         <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {!! trans('tickets.button.update_contact') !!} <span class="caret"></span>
+            <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {!! trans('tickets.button.update_contact') !!} <i class="fa fa-angle-down"></i>
             </button>
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li><a href="{{ url('admin/tickets/' . $ticket->id . '/update/ip') }}">{{ trans('misc.ip').' '.trans('misc.contact') }}</a></li>
-                <li><a href="{{ url('admin/tickets/' . $ticket->id . '/update/domain') }}">{{ trans('misc.domain').' '.trans('misc.contact') }}</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="{{ url('admin/tickets/' . $ticket->id . '/update') }}">{{ trans('misc.both') }}</a></li>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="{{ url('admin/tickets/' . $ticket->id . '/update/ip') }}">{{ trans('misc.ip').' '.trans('misc.contact') }}</a></li>
+                <li><a class="dropdown-item" href="{{ url('admin/tickets/' . $ticket->id . '/update/domain') }}">{{ trans('misc.domain').' '.trans('misc.contact') }}</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{{ url('admin/tickets/' . $ticket->id . '/update') }}">{{ trans('misc.both') }}</a></li>
             </ul>
         </div>
         <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target='#notificationModal'>
-                {{ trans('tickets.button.send_notification') }}
+            <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ trans('tickets.button.send_notification') }} <i class="fa fa-angle-down"></i>
             </button>
-
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="{{ url('admin/tickets/' . $ticket->id . '/notify/ip') }}">{{ trans('misc.ip').' '.trans('misc.contact') }}</a></li>
+                <li><a class="dropdown-item" href="{{ url('admin/tickets/' . $ticket->id . '/notify/domain') }}">{{ trans('misc.domain').' '.trans('misc.contact') }}</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{{ url('admin/tickets/' . $ticket->id . '/notify') }}">{{ trans('misc.both') }}</a></li>
+            </ul>
         </div>
         <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ trans('tickets.ticket') }} {{ trans('misc.status') }} <span class="caret"></span>
+            <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ trans('tickets.ticket') }} {{ trans('misc.status') }} <i class="fa fa-angle-down"></i>
             </button>
-            <ul class="dropdown-menu dropdown-menu-right">
+            <ul class="dropdown-menu dropdown-menu-end">
                 <li class="dropdown-header">{{ trans('tickets.set_ticket_status') }}:</li>
-                <li{!! ($ticket->status_id == 'OPEN') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/status/open') }}">{{ trans('tickets.open') }}</a></li>
-                <li{!! ($ticket->status_id == 'CLOSED') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/status/closed') }}">{{ trans('tickets.closed') }}</a></li>
-                <li role="separator" class="divider"></li>
-                <li{!! ($ticket->status_id == 'ESCALATED') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/status/escalated') }}">{{ trans('tickets.escalated') }}</a></li>
-                <li{!! ($ticket->status_id == 'IGNORED') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/status/ignored') }}">{{ trans('tickets.ignored') }}</a></li>
-                <li{!! ($ticket->status_id == 'RESOLVED') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/status/resolved') }}">{{ trans('tickets.resolved') }}</a></li>
+                <li{!! ($ticket->status_id == 'OPEN') ? ' class="disabled"' : '' !!}><a class="dropdown-item{!! ($ticket->status_id == 'OPEN') ? ' disabled' : '' !!}" href="{{ url('admin/tickets/' . $ticket->id . '/status/open') }}">{{ trans('tickets.open') }}</a></li>
+                <li{!! ($ticket->status_id == 'CLOSED') ? ' class="disabled"' : '' !!}><a class="dropdown-item{!! ($ticket->status_id == 'CLOSED') ? ' disabled' : '' !!}" href="{{ url('admin/tickets/' . $ticket->id . '/status/closed') }}">{{ trans('tickets.closed') }}</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li{!! ($ticket->status_id == 'ESCALATED') ? ' class="disabled"' : '' !!}><a class="dropdown-item{!! ($ticket->status_id == 'ESCALATED') ? ' disabled' : '' !!}" href="{{ url('admin/tickets/' . $ticket->id . '/status/escalated') }}">{{ trans('tickets.escalated') }}</a></li>
+                <li{!! ($ticket->status_id == 'IGNORED') ? ' class="disabled"' : '' !!}><a class="dropdown-item{!! ($ticket->status_id == 'IGNORED') ? ' disabled' : '' !!}" href="{{ url('admin/tickets/' . $ticket->id . '/status/ignored') }}">{{ trans('tickets.ignored') }}</a></li>
+                <li{!! ($ticket->status_id == 'RESOLVED') ? ' class="disabled"' : '' !!}><a class="dropdown-item{!! ($ticket->status_id == 'RESOLVED') ? ' disabled' : '' !!}" href="{{ url('admin/tickets/' . $ticket->id . '/status/resolved') }}">{{ trans('tickets.resolved') }}</a></li>
             </ul>
         </div>
     </div>
 </div>
 <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#info"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('tickets.information') }}</a></li>
-    <li><a data-toggle="tab" href="#events"><span class="glyphicon glyphicon-list-alt"></span> {{ trans('tickets.evidence') }}</a></li>
-    <li><a data-toggle="tab" href="#communication"><span class="glyphicon glyphicon-envelope"></span> {{ trans('tickets.communication') }}</a></li>
+    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#info"><i class="fa fa-info-circle"></i> {{ trans('tickets.information') }}</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#events"><i class="fa fa-list-alt"></i> {{ trans('tickets.evidence') }}</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#communication"><i class="fa fa-envelope"></i> {{ trans('tickets.communication') }}</a></li>
 </ul>
 <div class="tab-content">
-    <div id="info" class="tab-pane fade in active">
+    <div id="info" class="tab-pane fade show active">
         <dl class="dl-horizontal">
             <dt>{{ trans('misc.ip_address') }}</dt>
             <dd>{{ $ticket->ip }}</dd>
@@ -86,12 +91,13 @@
             <dd>{{ optional($ticket->lastEvent->first())->seen ?? trans('misc.never') }}</dd>
 
             <dt>{{ trans('tickets.events') }}</dt>
+            <dd>{{ $ticket->events->count() }}</dd>
 
             <dt>{{ trans('misc.status') }}</dt>
-            <dd><span class="label label-{{ $ticket_class }}">{{ trans("types.status.abusedesk.{$ticket->status_id}.name") }}</span></dd>
+            <dd><span class="badge bg-{{ $ticket_class }}">{{ trans("types.status.abusedesk.{$ticket->status_id}.name") }}</span></dd>
 
             <dt>{{ trans('misc.contact_status') }}</dt>
-            <dd><span class="label label-{{ $contact_ticket_class }}">{{ trans("types.status.contact.{$ticket->contact_status_id}.name") }}</span></dd>
+            <dd><span class="badge bg-{{ $contact_ticket_class }}">{{ trans("types.status.contact.{$ticket->contact_status_id}.name") }}</span></dd>
 
             <dt>{{ trans('tickets.created') }}</dt>
             <dd>{{ $ticket->created_at }}</dd>
@@ -151,9 +157,10 @@
             <dd>{{ $ticket->ip_contact_name }}</dd>
 
             <dt>{{ trans('misc.email') }}</dt>
+            <dd>{{ $ticket->ip_contact_email ?: trans('misc.notavailable') }}</dd>
 
             <dt>{{ trans('contacts.api_host') }}</dt>
-            <dd>{{ $ticket->ip_contact_api_host }}</dd>
+            <dd>{{ $ticket->ip_contact_api_host ?: trans('misc.notavailable') }}</dd>
 
             <dt>{{ trans('contacts.notification') }}</dt>
             <dd>{{ $ticket->ip_contact_auto_notify ? trans('misc.automatic') : trans('misc.manual') }}</dd>
@@ -170,10 +177,10 @@
             <dd>{{ $ticket->domain_contact_name }}</dd>
 
             <dt>{{ trans('misc.email') }}</dt>
-            <dd>{{ $ticket->domain_contact_email }}</dd>
+            <dd>{{ $ticket->domain_contact_email ?: trans('misc.notavailable') }}</dd>
 
             <dt>{{ trans('contacts.api_host') }}</dt>
-            <dd>{{ $ticket->domain_contact_api_host }}</dd>
+            <dd>{{ $ticket->domain_contact_api_host ?: trans('misc.notavailable') }}</dd>
 
             <dt>{{ trans('contacts.notification') }}</dt>
             <dd>{{ $ticket->domain_contact_auto_notify ? trans('misc.automatic') : trans('misc.manual') }}</dd>
@@ -183,9 +190,9 @@
     </div>
     <div id="events" class="tab-pane fade">
         @if ( !$ticket->events->count() )
-        <div class="alert alert-danger"><span class="glyphicon glyphicon-info-sign"></span> No events found</div>
+        <div class="alert alert-danger"><i class="fa fa-info-circle"></i> No events found</div>
         @else
-        <table class="table table-striped table-condensed">
+        <table class="table table-striped table-sm">
             <thead>
                 <tr>
                     <th>{{ trans('tickets.source') }}</th>
@@ -246,27 +253,28 @@
     </div>
     <div id="communication" class="tab-pane fade">
         @if ( !$ticket->notes->count() )
-        <div class="alert alert-info"><span class="glyphicon glyphicon-info-sign"></span> {{ trans('ash.communication.noMessages') }}</div>
+        <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ trans('ash.communication.noMessages') }}</div>
         @else
         @foreach ($ticket->notes as $note)
         <div class="row">
-            <div class="col-xs-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'col-xs-offset-1' }}">
-                <div class="ticket-note panel ticket-hover-group panel-default{{ $note->hidden == true ? ' panel-hidden' : '' }}{{ $note->viewed == false ? ' panel-info' : '' }}">
-                    <div class="panel-heading clearfix">
-                        <h3 class="panel-title pull-left{{ ($note->viewed == true) ? ' text-muted' : '' }}">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
-                        <span class="pull-left">&nbsp;</span>
-                        <div class="pull-left ticket-hover-toggle invisible">
-                            <button type="button" class="btn btnFlip btnHide btn-xs btn-{{ ($note->hidden == true) ? 'warning' : 'success' }}" value="{{ $note->id }}">
+            <div class="col-11 {{ (stripos($note->submitter, trans('ash.communication.abusedesk')) !== false) ? '' : 'offset-1' }}">
+                <div class="ticket-note card ticket-hover-group{{ $note->hidden == true ? ' panel-hidden' : '' }}{{ $note->viewed == false ? ' panel-info' : '' }}">
+                    <div class="card-header clearfix">
+                        <h3 class="card-title float-start{{ ($note->viewed == true) ? ' text-muted' : '' }}">{{ trans('ash.communication.responseFrom') }}: {{ $note->submitter }}</h3>
+                        <span class="float-start">&nbsp;</span>
+                        <div class="float-start ticket-hover-toggle invisible">
+                            <button type="button" class="btn btnFlip btnHide btn-sm btn-{{ ($note->hidden == true) ? 'warning' : 'success' }}" value="{{ $note->id }}">
+                                <i class="fa {{ ($note->hidden == true) ? 'fa-eye' : 'fa-eye-slash' }}"></i> {{ ($note->hidden == true) ? 'Mark as '.trans('misc.button.visible') : 'Mark as '.trans('misc.button.hidden') }}
                             </button>
-                            <button type="button" class="btn btnFlip btnRead btn-xs btn-{{ ($note->viewed == true) ? 'success' : 'warning' }}" value="{{ $note->id }}">
-                                <span {!! ($note->viewed == true) ? '' : 'class="hidden"' !!} >{{ trans('misc.button.read') }}</span><span {!! ($note->viewed == true) ? 'class="hidden"' : '' !!}>{{ trans('misc.button.unread') }}</span>
+                            <button type="button" class="btn btnFlip btnRead btn-sm btn-{{ ($note->viewed == true) ? 'success' : 'warning' }}" value="{{ $note->id }}">
+                                <i class="fa {{ ($note->viewed == true) ? 'fa-envelope-o' : 'fa-envelope' }}"></i> {{ ($note->viewed == true) ? 'Mark as '.trans('misc.button.read') : 'Mark as '.trans('misc.button.unread') }}
                             </button>
-                            <button type="button" class="btn btnFlip btnDelete btn-xs btn-danger" value="{{ $note->id }}">{{ trans('misc.button.delete') }}</button>
+                            <button type="button" class="btn btnFlip btnDelete btn-sm btn-danger" value="{{ $note->id }}">{{ trans('misc.button.delete') }}</button>
                         </div>
 
-                        <span class="pull-right{{ ($note->viewed == true) ? ' text-muted' : '' }}"><span class="glyphicon glyphicon-time"></span> {{ $note->created_at }}</span>
+                        <span class="float-end{{ ($note->viewed == true) ? ' text-muted' : '' }}"><i class="fa fa-clock-o"></i> {{ $note->created_at }}</span>
                     </div>
-                    <div class="panel-body{{ ($note->viewed == true) ? ' text-muted' : '' }}">
+                    <div class="card-body{{ ($note->viewed == true) ? ' text-muted' : '' }}">
                         {{ htmlentities($note->text) }}
                     </div>
                 </div>
@@ -275,7 +283,7 @@
         @endforeach
         @endif
         <div class="row">
-            <div class="col-xs-11 col-xs-offset-1">
+            <div class="col-11 offset-1">
                 <form action="{{ route('admin.notes.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
@@ -294,25 +302,4 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">{!! trans('misc.send_notifications') !!}</h4>
-            </div>
-            <div class="modal-body">
-                <ul>
-                    <li{!! ($ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/notify/domain') }}">{{ trans('misc.domain').' '.trans('misc.contact') }}</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li{!! ($ticket->ip_contact_reference == 'UNDEF' || $ticket->domain_contact_reference == 'UNDEF') ? ' class="disabled"' : '' !!}><a href="{{ url('admin/tickets/' . $ticket->id . '/notify') }}">{{ trans('misc.both') }}</a></li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{!! trans('misc.close') !!}</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

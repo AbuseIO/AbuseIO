@@ -2,7 +2,7 @@
 
 @section('content')
     <h1 class="page-header">{{ trans('misc.analytics') }}</h1>
-    <table class="table table-striped table-condensed">
+    <table class="table table-striped table-sm">
         <thead>
         <tr>
             <th>{{ trans('misc.classification') }}</th>
@@ -20,7 +20,7 @@
     </table>
 
     <h1 class="page-header">{{ trans('misc.tickets') }}</h1>
-    <table class="table table-striped table-condensed">
+    <table class="table table-striped table-sm">
         <thead>
         <tr>
             <th>{{ trans('misc.period') }}</th>
@@ -55,7 +55,7 @@
     </table>
 
     <div style="height:180px;width=100%;">
-    <form class="form col-sm-offset-2 col-sm-8">
+    <form class="form offset-sm-2 col-sm-8">
         <div class="row">
 
             <div class="col-sm-4">
@@ -113,7 +113,7 @@
              </div>
             <div class="col-sm-4">
                 <button type="submit" class="btn btn-primary form-control"
-                        id="search_btn"><i class="glyphicon glyphicon-signal"></i> {!! trans('misc.show_graph') !!}</button>
+                        id="search_btn"><i class="fa fa-signal"></i> {!! trans('misc.show_graph') !!}</button>
             </div>
         </div>
     </form>
