@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RoleUser extends Model
 {
     use SoftDeletes;
-    use HasFactory;
 
     /**
      * The database table used by the model.

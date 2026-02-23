@@ -5,8 +5,6 @@ namespace AbuseIO\Models;
 use AbuseIO\Http\Requests\StoreContactRequest;
 use AbuseIO\Http\Requests\UpdateContactRequest;
 use Config;
-use Database\Factories\ContactFactory;
-use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,7 +24,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int    $updated_at
  * @property int    $deleted_at
  */
-#[UseFactory(ContactFactory::class)]
 class Contact extends Model
 {
     use SoftDeletes;

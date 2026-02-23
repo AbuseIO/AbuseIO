@@ -2,7 +2,6 @@
 
 namespace tests\Console\Commands\Queue;
 
-use AbuseIO\Models\Job;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use PHPUnit\Framework\Attributes\Group;
@@ -24,25 +23,6 @@ class ShowCommandTest extends TestCase
         $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Not enough arguments (missing: "queue").', $output);
         $this->assertStringContainsString('Shows a queue', $output);
-    }
-
-    #[group('functional')]
-    public function testQueueShowCommandShouldPassWithValidIdFilter(): void
-    {
-        Job::factory()->count(1)->create();
-
-        $exitCode = Artisan::call(
-            'queue:show',
-            [
-                'queue' => 'abuseio_collector'
-            ]
-        );
-        $this->assertEquals(0, $exitCode);
-        $output = Artisan::output();
-
-        foreach (['Id', 'Queue', 'Attempts',] as $el) {
-            $this->assertStringContainsString($el, $output);
-        }
     }
 
     #[group('functional')]

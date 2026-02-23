@@ -2,9 +2,6 @@
 
 namespace AbuseIO\Models;
 
-use Database\Factories\JobFactory;
-use Illuminate\Database\Eloquent\Attributes\UseFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
