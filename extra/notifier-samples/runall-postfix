@@ -70,7 +70,7 @@ if [ ! -d "$SAMPLES_DIR" ]; then
 fi
 
 echo "Scanning EML files in: $SAMPLES_DIR"
-mapfile -t EMLS < <(find "$SAMPLES_DIR" -type f -name '*.eml' | sort)
+mapfile -t EMLS < <(find "$SAMPLES_DIR" -type f -name '*.eml' | sort | grep -v disabled)
 
 if [ ${#EMLS[@]} -eq 0 ]; then
   echo "No .eml files found." >&2
