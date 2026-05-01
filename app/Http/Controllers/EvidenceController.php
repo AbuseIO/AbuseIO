@@ -100,6 +100,7 @@ class EvidenceController extends Controller
         if ($attachment = $evidence->getAttachment($filename)) {
             // sanitize filename for header injection and path traversal
             $safeFilename = basename(preg_replace("/[\r\n\"]/", '', (string) $filename));
+
             return response($attachment->getContent(), 200)
                 ->header('Content-Type', $attachment->getContentType())
                 ->header('Content-Transfer-Encoding', 'Binary')
