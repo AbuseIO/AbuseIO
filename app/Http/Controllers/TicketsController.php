@@ -510,6 +510,10 @@ class TicketsController extends Controller
      */
     public function apiStore(TicketFormRequest $ticketForm)
     {
+        if (!$this->isAllowedForApiAccount($ticket)) {
+            return $this->errorNotFound();
+        }
+
         $ticket = Ticket::create($ticketForm->all());
 
         return $this->respondWithItem($ticket, new TicketTransformer());
@@ -540,6 +544,21 @@ class TicketsController extends Controller
      */
     public function apiShow(Ticket $ticket)
     {
+        if (!$this->isAllowedForApiAccount($ticket)) {
+            return $this->errorNotFound();
+        }
+
+        return $this->respondWithItem($ticket, new TicketTransformer());
+    }
+
+    public function apiDestroy(Ticket $ticket)
+    {
+        $api_account = $this->api_account;
+
+        if (!$api_account->isSystemAccount()) {
+            return $this->errorNotFound();
+        }
+
         return $this->respondWithItem($ticket, new TicketTransformer());
     }
 
@@ -617,7 +636,7 @@ class TicketsController extends Controller
 
         $remoteTicket = new Ticket();
         $remoteTicket->fill($ticketForm->all());
-        $localTicket = Ticket::find($remoteTicket->remote_ticket_id);
+        $localTicket = Ticket::where('remote_api_token', '=', $remoteTicket->api_token)->first();
 
         if (!$localTicket) {
             return $this->errorNotFound('No matching local ticket found');
@@ -681,6 +700,10 @@ class TicketsController extends Controller
      */
     public function apiUpdate(TicketFormRequest $ticketForm, Ticket $ticket)
     {
+        if (!$this->isAllowedForApiAccount($ticket)) {
+            return $this->errorNotFound();
+        }
+
         $ticket->update($ticketForm->all());
 
         return $this->respondWithItem($ticket, new TicketTransformer());
@@ -731,6 +754,10 @@ class TicketsController extends Controller
      */
     public function apiNotify(Ticket $ticket)
     {
+        if (!$this->isAllowedForApiAccount($ticket)) {
+            return $this->errorNotFound();
+        }
+
         $notification = new Notification();
         $notification->walkList(
             $notification->buildList($ticket->id, false, true, null)
@@ -752,8 +779,37 @@ class TicketsController extends Controller
      */
     public function apiAnonymize(Ticket $ticket, $email, $randomness)
     {
+        if (!$this->isAllowedForApiAccount($ticket)) {
+            return $this->errorNotFound();
+        }
+
         $updated = $ticket->anonymize($email, $randomness);
 
         return $this->respondWithItem($updated, new TicketTransformer());
+    }
+
+    /**
+     * Returns true when the current API account is allowed to access the
+     * given ticket. The system account may access every ticket; any other
+     * account may only access tickets where it is the IP or domain contact.
+     *
+     * @param Ticket $ticket
+     *
+     * @return bool
+     */
+    protected function isAllowedForApiAccount(Ticket $ticket)
+    {
+        $account = $this->api_account;
+
+        if ($account === null) {
+            return false;
+        }
+
+        if ($account->isSystemAccount()) {
+            return true;
+        }
+
+        return (int) $ticket->ip_contact_account_id === (int) $account->id
+            || (int) $ticket->domain_contact_account_id === (int) $account->id;
     }
 }
