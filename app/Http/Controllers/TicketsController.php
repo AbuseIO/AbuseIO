@@ -510,11 +510,11 @@ class TicketsController extends Controller
      */
     public function apiStore(TicketFormRequest $ticketForm)
     {
+	$ticket = Ticket::create($ticketForm->all());
+
         if (!$this->isAllowedForApiAccount($ticket)) {
             return $this->errorNotFound();
         }
-
-        $ticket = Ticket::create($ticketForm->all());
 
         return $this->respondWithItem($ticket, new TicketTransformer());
     }
