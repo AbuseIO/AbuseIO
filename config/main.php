@@ -95,7 +95,7 @@ return [
     ],
 
     'api' => [
-        'enabled' => true,
+        'enabled' => false,
     ],
 
     'gdpr_anonymize_domain' => env('GDPR_ANONYMIZE_DOMAIN', 'example.com'),
