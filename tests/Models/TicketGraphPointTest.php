@@ -3,13 +3,15 @@
 namespace tests\Models;
 
 use AbuseIO\Models\TicketGraphPoint;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 class TicketGraphPointTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
+    #[group('functional')]
     public function testGetCompoundStatistics()
     {
         $today = date('Y-m-d');
@@ -23,20 +25,23 @@ class TicketGraphPointTest extends TestCase
         $this->assertArrayHasKey('day', $statistics);
     }
 
+    #[group('functional')]
     public function testTotalNewGraph()
     {
         $this->createDateSeries('1-8-2016', '31-8-2016', 'created_at');
-        $this->assertEquals(TicketGraphPoint::getLifecycle('created_at')['legend'], 'Total new by day');
+        $this->assertEquals('Total new by day', TicketGraphPoint::getLifecycle('created_at')['legend']);
         $this->assertCount(31, TicketGraphPoint::getLifecycle('created_at')['data']);
     }
 
+    #[group('functional')]
     public function testTotalTouchedGraph()
     {
         $this->createDateSeries('1-8-2016', '31-8-2016', 'updated_at');
-        $this->assertEquals(TicketGraphPoint::getLifecycle('updated_at')['legend'], 'Total touched by day');
+        $this->assertEquals('Total touched by day', TicketGraphPoint::getLifecycle('updated_at')['legend']);
         $this->assertCount(31, TicketGraphPoint::getLifecycle('updated_at')['data']);
     }
 
+    #[group('functional')]
     public function testNewGraphWithTwoClasses()
     {
         $this->createDateSeries('1-8-2016', '31-8-2016', 'created_at', ['class' => ['red', 'blue']]);
@@ -50,6 +55,7 @@ class TicketGraphPointTest extends TestCase
         $this->assertCount(31, $total['data']);
     }
 
+    #[group('functional')]
     public function testNewGraphWithTwoClassesOverlappingTimeseries()
     {
         $this->createDateSeries('10-8-2016', '31-8-2016', 'created_at', ['class' => ['blue']]);

@@ -2,7 +2,11 @@
 
 namespace tests\Console\Commands\Account;
 
+use AbuseIO\Models\Account;
+use AbuseIO\Models\Brand;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -10,23 +14,49 @@ use tests\TestCase;
  */
 class DeleteCommandTest extends TestCase
 {
-    // TODO not working because seeder is not deleting and id=1 is in te schema.
+    use RefreshDatabase;
 
-    //    public function testValid()
-    //    {
-    //        $exitCode = Artisan::call('account:delete', [
-    //            "--id" => "2"
-    //        ]);
-    //
-    //        $this->assertEquals($exitCode, 0);
-    //        $this->assertStringContainsString("The account has been deleted from the system", Artisan::output());
-    //        /**
-    //         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-    //         */
-    //        //$this->seed('AccountsTableSeeder');
-    //    }
+    #[group('functional')]
+    public function testDeletingAnAccountShouldFailWithoutId(): void
+    {
+        $exitCode = Artisan::call('account:delete');
+        $output = Artisan::output();
 
-    public function testInvalidId()
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "id")', $output);
+        $this->assertStringContainsString('Deletes an account', $output);
+    }
+
+    #[group('functional')]
+    public function testAccountDeleteCommandShouldPassWithValidId(): void
+    {
+        $brand = Brand::create([
+            'name' => 'Functional Test Brand',
+            'company_name' => 'Testing Co',
+            'logo' => 'logo.png',
+            'introduction_text' => 'Welcome to Testing Co',
+            'creator_id' => 1,
+        ]);
+
+        $account = Account::create([
+            'name'          => 'test name',
+            'description'   => 'test description',
+            'disabled'      => 0,
+            'token'         => generateApiToken(),
+            'systemaccount' => 0,
+            'brand_id'      => $brand->id,
+        ]);
+
+        $exitCode = Artisan::call('account:delete', [
+            'id' => $account->id,
+        ]);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString("Account deleted successfully.", Artisan::output());
+    }
+
+    #[group('functional')]
+    public function testAccountDeleteCommandShouldFailWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'account:delete',
@@ -35,7 +65,7 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 1);
-        $this->assertStringContainsString('Unable to find account', Artisan::output());
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Account not found.', Artisan::output());
     }
 }

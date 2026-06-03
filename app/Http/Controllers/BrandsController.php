@@ -2,7 +2,8 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\BrandFormRequest;
+use AbuseIO\Http\Requests\StoreBrandRequest;
+use AbuseIO\Http\Requests\UpdateBrandRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use AbuseIO\Traits\Api;
@@ -11,6 +12,7 @@ use Exception;
 use Illuminate\Http\Request;
 use League\Fractal\Manager;
 use Redirect;
+use Route;
 use yajra\Datatables\Datatables;
 
 /**
@@ -35,7 +37,7 @@ class BrandsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function index()
     {
@@ -133,7 +135,7 @@ class BrandsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function create()
     {
@@ -154,11 +156,11 @@ class BrandsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param BrandFormRequest $brandForm
+     * @param StoreBrandRequest $brandForm
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(BrandFormRequest $brandForm)
+    public function store(StoreBrandRequest $brandForm)
     {
         $input = $brandForm->all();
         $account = $this->auth_user->account;
@@ -199,11 +201,11 @@ class BrandsController extends Controller
      * Store a newly created resource in storage.
      * todo.
      *
-     * @param BrandFormRequest $brandForm
+     * @param StoreBrandRequest $brandForm
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiStore(BrandFormRequest $brandForm)
+    public function apiStore(StoreBrandRequest $brandForm)
     {
         $input = $brandForm->all();
         $account = $this->api_account;
@@ -242,7 +244,7 @@ class BrandsController extends Controller
      *
      * @param Brand $brand
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function show(Brand $brand)
     {
@@ -293,7 +295,7 @@ class BrandsController extends Controller
      *
      * @param Brand $brand
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function edit(Brand $brand)
     {
@@ -317,12 +319,12 @@ class BrandsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param BrandFormRequest $brandForm
+     * @param UpdateBrandRequest $brandForm
      * @param Brand            $brand
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(BrandFormRequest $brandForm, Brand $brand)
+    public function update(UpdateBrandRequest $brandForm, Brand $brand)
     {
         $input = $brandForm->all();
 
@@ -342,12 +344,12 @@ class BrandsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param BrandFormRequest $brandForm
+     * @param UpdateBrandRequest $brandForm
      * @param Brand            $brand
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function apiUpdate(BrandFormRequest $brandForm, Brand $brand)
+    public function apiUpdate(UpdateBrandRequest $brandForm, Brand $brand)
     {
         $input = $brandForm->all();
 

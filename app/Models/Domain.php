@@ -19,8 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Domain extends Model
 {
-    use HasFactory;
     use SoftDeletes;
+    use HasFactory;
 
     /**
      * The database table used by the model.
@@ -39,46 +39,6 @@ class Domain extends Model
         'contact_id',
         'enabled',
     ];
-
-    /*
-    |--------------------------------------------------------------------------
-    | Validation Rules
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Validation rules for this model being created.
-     *
-     * @return array $rules
-     */
-    public static function createRules()
-    {
-        $rules = [
-            'name'       => 'required|stringorboolean|domain|unique:domains',
-            'contact_id' => 'required|integer|exists:contacts,id',
-            'enabled'    => 'required|boolean',
-        ];
-
-        return $rules;
-    }
-
-    /**
-     * Validation rules for this model being updated.
-     *
-     * @param \AbuseIO\Models\Domain $domain
-     *
-     * @return array $rules
-     */
-    public static function updateRules($domain)
-    {
-        $rules = [
-            'name'       => 'required|stringorboolean|domain|unique:domains,name,'.$domain->id,
-            'contact_id' => 'required|integer|exists:contacts,id',
-            'enabled'    => 'required|boolean',
-        ];
-
-        return $rules;
-    }
 
     /*
     |--------------------------------------------------------------------------

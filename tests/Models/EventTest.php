@@ -4,37 +4,39 @@ namespace tests\Models;
 
 use AbuseIO\Models\Event;
 use AbuseIO\Models\Evidence;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 class EventTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /** @var int */
-    private $eventId;
+    #[group("unit")]
+    public function testIfEventsPutInEvidenceIsVisibleInEvidence() {
+        $evidence = Evidence::make([
+            'filename' => 'example.txt',
+            'sender' => 'John',
+            'subject' => 'Test Evidence',
+        ]);
 
-    /** @var int */
-    private $evidenceId;
+        $event = Event::make([
+            'ticket_id' => 2,
+            'evidence_id' => $evidence->id,
+            'source' => 'email',
+            'timestamp' => now(),
+            'information' => 'Test event information',
+        ]);
 
-    private function initDB()
-    {
-        $event = Event::factory()->create();
-
-        $this->eventId = $event->id;
-        $this->evidenceId = $event->evidence_id;
-    }
-
-    public function testBelongsToRelation()
-    {
-        $this->initDB();
+        $event->evidence()->associate($evidence);
 
         $this->assertEquals(
-            Evidence::find($this->evidenceId),
-            Event::find($this->eventId)->evidence
+            $evidence,
+            $event->evidence
         );
     }
 
+    #[group('functional')]
     public function testModelFactory()
     {
         $event = Event::factory()->create();

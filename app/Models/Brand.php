@@ -24,8 +24,8 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class Brand extends Model
 {
-    use HasFactory;
     use SoftDeletes;
+    use HasFactory;
     use InstanceComparable;
 
     /**
@@ -61,58 +61,6 @@ class Brand extends Model
     protected $hidden = [
         'systembrand',
     ];
-
-    /*
-    |--------------------------------------------------------------------------
-    | Validation Rules
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Validation rules for this model being created.
-     *
-     * @return array $rules
-     */
-    public static function createRules()
-    {
-        $rules = [
-            'name'                => 'required|unique:brands,name',
-            'company_name'        => 'required',
-            'introduction_text'   => 'required',
-            'logo'                => 'required|image|max:64',
-            'creator_id'          => 'required|integer|exists:accounts,id',
-            'systembrand'         => 'sometimes|required|uniqueflag:brands:systembrand',
-            'mail_template_plain' => 'sometimes|required|bladetemplate',
-            'mail_template_html'  => 'sometimes|required|bladetemplate',
-            'ash_template'        => 'sometimes|required|bladetemplate',
-        ];
-
-        return $rules;
-    }
-
-    /**
-     * Validation rules for this model being updated.
-     *
-     * @param \AbuseIO\Models\Brand $brand
-     *
-     * @return array $rules
-     */
-    public static function updateRules($brand)
-    {
-        $rules = [
-            'name'                => 'required|unique:brands,name,'.$brand->id,
-            'company_name'        => 'required',
-            'introduction_text'   => 'required',
-            'creator_id'          => 'required|integer|exists:accounts,id',
-            'logo'                => 'sometimes|required|image|max:64',
-            'systembrand'         => 'sometimes|required|uniqueflag:brands:systembrand',
-            'mail_template_plain' => 'sometimes|required|bladetemplate',
-            'mail_template_html'  => 'sometimes|required|bladetemplate',
-            'ash_template'        => 'sometimes|required|bladetemplate',
-        ];
-
-        return $rules;
-    }
 
     /*
      |--------------------------------------------------------------------------

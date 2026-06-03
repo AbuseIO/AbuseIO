@@ -3,8 +3,9 @@
 namespace tests\Console\Commands\User;
 
 use AbuseIO\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,23 +13,21 @@ use tests\TestCase;
  */
 class EditCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    private $dummy;
-
-    private function initDB()
+    #[group('functional')]
+    public function testUserEditCommandShouldFailWithoutUser(): void
     {
-        $this->dummy = User::factory()->create();
+        $exitCode = Artisan::call('user:edit');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "user")', $output);
+        $this->assertStringContainsString('Edits an existing user in the system.', $output);
     }
 
-    public function testWithoutUser()
-    {
-        $exitCode = Artisan::call('user:edit', ['--help' => 'true']);
-        $this->assertEquals(0, $exitCode);
-        $this->assertStringContainsString('Edit a user', Artisan::output());
-    }
-
-    public function testWithInvalidUser()
+    #[group('functional')]
+    public function testUserEditCommandShouldFailWithInvalidUser(): void
     {
         $exitCode = Artisan::call(
             'user:edit',
@@ -36,62 +35,88 @@ class EditCommandTest extends TestCase
                 'user' => '10000',
             ]
         );
+
         $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find user with this criteria', Artisan::output());
     }
 
-    public function testChangeFirstName()
+    #[group('functional')]
+    public function testUserEditCommandShouldPassChangeFirstName(): void
     {
-        $this->initDB();
+        $user = User::create([
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'johndoe@example.com',
+            'account_id' => 1,
+            'locale' => 'en',
+            'disabled' => false,
+        ]);
+
         $exitCode = Artisan::call(
             'user:edit',
             [
-                'user'         => $this->dummy->id,
-                '--first_name' => 'jip',
+                'user'         => $user->id,
+                '--first_name' => 'Johnny',
             ]
         );
-        $this->assertEquals($exitCode, 0);
-
         $output = Artisan::output();
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString('The user has been updated', $output);
+    }
+
+    #[group('functional')]
+    public function testUserEditCommandShouldPassChangingFirstNameWithPassword(): void
+    {
+        $password = 'JohnOldDog';
+        $user = User::create([
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'johndoe@example.com',
+            'password' => bcrypt($password),
+            'account_id' => 1,
+            'locale' => 'en',
+            'disabled' => false,
+        ]);
+
+        $exitCode = Artisan::call(
+            'user:edit',
+            [
+                'user'         => $user->id,
+                '--first_name' => 'Johnny',
+                '--password'   => 'JohnNewDog',
+            ]
+        );
+
+        $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString(
             'The user has been updated',
-            $output
+            Artisan::output()
         );
     }
 
-    public function testChangeFirstNameWithPassword()
+    #[group('functional')]
+    public function testUserEditCommandShouldChangeWithAutoPassword(): void
     {
-        $this->initDB();
+        $user = User::create([
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'johndoe@example.com',
+            'account_id' => 1,
+            'locale' => 'en',
+            'disabled' => false,
+        ]);
+
         $exitCode = Artisan::call(
             'user:edit',
             [
-                'user'         => $this->dummy->id,
-                '--first_name' => 'jip',
-                '--password'   => 'fbjldkjldj',
-            ]
-        );
-        $this->assertEquals($exitCode, 0);
-
-        $output = Artisan::output();
-        $this->assertStringContainsString(
-            'The user has been updated',
-            $output
-        );
-    }
-
-    public function testChangeWithAutoPassword()
-    {
-        $this->initDB();
-        $exitCode = Artisan::call(
-            'user:edit',
-            [
-                'user'           => $this->dummy->id,
+                'user'           => $user->id,
                 '--autopassword' => 'some dummy value', // I don't know how to test a InputOption::VALUE_NONE but this works
             ]
         );
-        $this->assertEquals($exitCode, 0);
-
         $output = Artisan::output();
+
+        $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString(
             'The user has been updated',
             $output

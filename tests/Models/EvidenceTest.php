@@ -4,36 +4,32 @@ namespace tests\Models;
 
 use AbuseIO\Models\Event;
 use AbuseIO\Models\Evidence;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 class EvidenceTest extends TestCase
 {
-    use DatabaseTransactions;
 
-    private $eventId;
+    #[group("unit")]
+    public function testIfEventsPutInEvidenceIsVisibleInEvidence() {
+        $evidence = Evidence::make([
+            'filename' => 'example.txt',
+            'sender' => 'John',
+            'subject' => 'Test Evidence',
+        ]);
 
-    private $evidenceId;
+        $event = Event::make([
+            'ticket_id' => 2,
+            'evidence_id' => $evidence->id,
+            'source' => 'email',
+            'timestamp' => now(),
+            'information' => 'Test event information',
+        ]);
 
-    private function initDB()
-    {
-        $event = Event::factory()->create();
-
-        $this->eventId = $event->id;
-        $this->evidenceId = $event->evidence_id;
-    }
-
-    /**
-     * Testing the events() method on the model.
-     */
-    public function testHasManyEvents()
-    {
-        $this->initDB();
+        $evidence->events->add($event);
 
         $this->assertTrue(
-            Evidence::find($this->evidenceId)->events->contains(
-                Event::find($this->eventId)->id
-            )
+            $evidence->events->contains($event->id)
         );
     }
 }

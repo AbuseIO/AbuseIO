@@ -4,6 +4,7 @@ namespace AbuseIO\Console\Commands\Account;
 
 use AbuseIO\Console\Commands\AbstractEditCommand;
 use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
+use AbuseIO\Http\Requests\UpdateAccountRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -89,11 +90,12 @@ class EditCommand extends AbstractEditCommand
     }
 
     /**
+     * //        return Validator::make($model->toArray(), new UpdateAccountRequest()->rules());
      * {@inheritdoc}.
      */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Account::updateRules($model));
+        return Validator::make($model->toArray(), new UpdateAccountRequest()->rules());
     }
 
     /**

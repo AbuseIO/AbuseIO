@@ -74,15 +74,17 @@
 		"sabre/uri": "3.0.*",
 		"sabre/xml": "4.0.*",
 		"spatie/laravel-html": "^3.12",
-		"yajra/laravel-datatables-oracle": "12.6.*"
-	},
+		"yajra/laravel-datatables-oracle": "12.6.*",
+        "ext-fileinfo": "*"
+    },
   "require-dev": {
-    "beyondcode/laravel-dump-server": "^2.1",
-    "mockery/mockery": "^1.6",
-    "nunomaduro/collision": "^8.1",
-    "phpunit/phpunit": "^12.0",
-    "fakerphp/faker": "^1.23"
-  },
+		"beyondcode/laravel-dump-server": "^2.1",
+		"fakerphp/faker": "^1.23",
+		"fruitcake/laravel-debugbar": "^4.0",
+		"mockery/mockery": "^1.6",
+		"nunomaduro/collision": "^8.1",
+		"phpunit/phpunit": "^12.0"
+	},
 	"autoload": {
 		"psr-4": {
 			"AbuseIO\\": "app/",

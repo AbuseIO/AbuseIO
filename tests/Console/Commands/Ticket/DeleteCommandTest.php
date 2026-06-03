@@ -4,41 +4,46 @@ namespace tests\Console\Commands\Ticket;
 
 use AbuseIO\Models\Ticket;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
  * Class DeleteCommandTest.
+ *
+ * @note In this test we use the ticket factory to create tickets, the model itself is really large to set up so we use factories to keep the test code clean.
  */
 class DeleteCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /** @var \AbuseIO\Models\Ticket */
-    private $ticket;
-
-    private function initDB()
+    #[group('functional')]
+    public function testTicketDeleteCommandShouldFailWithoutId(): void
     {
-        $this->ticket = Ticket::factory()->create();
+        $exitCode = Artisan::call('ticket:delete');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "id")', $output);
+        $this->assertStringContainsString('Deletes a ticket from the system', $output);
     }
 
-    public function testValid()
+    #[group('functional')]
+    public function testTicketDeleteCommandShouldPassWithValidId(): void
     {
-        $this->initDB();
+        $ticket = Ticket::factory()->create();
 
         $exitCode = Artisan::call('ticket:delete', [
-            'id' => $this->ticket->id,
+            'id' => $ticket->id,
         ]);
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString('The ticket has been deleted from the system', Artisan::output());
-        /*
-         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-         */
-        //$this->seed('AccountsTableSeeder');
     }
 
-    public function testInvalidId()
+    #[group('functional')]
+    public function testTicketDeleteCommandShouldFailWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'ticket:delete',
@@ -47,7 +52,7 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find ticket', Artisan::output());
     }
 }

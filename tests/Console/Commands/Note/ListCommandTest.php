@@ -3,74 +3,106 @@
 namespace tests\Console\Commands\Note;
 
 use AbuseIO\Models\Note;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use AbuseIO\Models\Ticket;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
  * Class ListCommandTest.
+ *
+ * @note In this test we use the ticket factory to create tickets for the notes.
+ *     - The tickets model is really large to set up so we use factories to keep the test code clean.
  */
 class ListCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    private $noteList;
-
-    /**
-     * the list of test fixture to test against.
-     *
-     * @var \Illuminate\Database\Eloquent\Collection
-     */
-    public function initDB()
+    #[group('functional')]
+    public function testNoteListCommandShouldPassShowingTableHeaders(): void
     {
-        //$this->assertTrue(true);
-        $this->noteList = Note::factory()->count(10)->create();
-    }
-
-    public function testHeaders()
-    {
-        $this->initDB();
-        $exitCode = Artisan::call('note:list', []);
-
-        $this->assertEquals($exitCode, 0);
-
         $headers = ['Id', 'Ticket id', 'Submitter', 'text', 'Hidden', 'Viewed'];
+        $ticket = Ticket::factory()->create();
+        Note::create([
+            'ticket_id' => $ticket->id,
+            'submitter' => 'Tester',
+            'text' => 'This is a test note to be deleted by the unit tests.',
+            'hidden' => false,
+            'viewed' => false,
+        ]);
+
+        $exitCode = Artisan::call('note:list', []);
         $output = Artisan::output();
+
+        $this->assertEquals(0, $exitCode);
         foreach ($headers as $header) {
             $this->assertStringContainsString($header, $output);
         }
     }
 
-    public function testAll()
+    #[group('functional')]
+    public function testNoteListCommandShouldPassWithTwoNotes(): void
     {
-        $this->initDB();
-        $exitCode = Artisan::call('note:list', []);
+        $ticket = Ticket::factory()->create();
+        $noteOne = Note::create([
+            'ticket_id' => $ticket->id,
+            'submitter' => 'Tester',
+            'text' => 'This is a test note to be deleted by the unit tests.',
+            'hidden' => false,
+            'viewed' => false,
+        ]);
+        $noteTwo = Note::create([
+            'ticket_id' => $ticket->id,
+            'submitter' => 'Tester',
+            'text' => 'This is a test note to be deleted by the unit tests.',
+            'hidden' => false,
+            'viewed' => false,
+        ]);
 
-        $this->assertEquals($exitCode, 0);
+        $exitCode = Artisan::call('note:list', []);
         $output = Artisan::output();
-        $this->assertStringContainsString($this->noteList->get(0)->submitter, $output);
-        $this->assertStringContainsString($this->noteList->get(1)->submitter, $output);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($noteOne->submitter, $output);
+        $this->assertStringContainsString($noteTwo->submitter, $output);
     }
 
-    public function testFilter()
+    #[group('functional')]
+    public function testNoteListCommandShouldPassWithFiltering(): void
     {
-        $this->initDB();
+        $ticket = Ticket::factory()->create();
+        $noteOne = Note::create([
+            'ticket_id' => $ticket->id,
+            'submitter' => 'Tester One',
+            'text' => 'This is a test note to be deleted by the unit tests.',
+            'hidden' => false,
+            'viewed' => false,
+        ]);
+        $noteTwo = Note::create([
+            'ticket_id' => $ticket->id,
+            'submitter' => 'Tester Two',
+            'text' => 'This is a test note to be deleted by the unit tests.',
+            'hidden' => false,
+            'viewed' => false,
+        ]);
+
         $exitCode = Artisan::call(
             'note:list',
             [
-                '--filter' => $this->noteList->get(0)->submitter,
+                '--filter' => $noteOne->submitter,
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertStringContainsString($this->noteList->get(0)->submitter, $output);
-        $this->assertStringNotContainsString($this->noteList->get(1)->submitter, $output);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($noteOne->submitter, $output);
+        $this->assertStringNotContainsString($noteTwo->submitter, $output);
     }
 
-    public function testNotFoundFilter()
+    #[group('functional')]
+    public function testNoteListCommandShouldFailWithInvalidFilter(): void
     {
-        $this->initDB();
         $exitCode = Artisan::call(
             'note:list',
             [
@@ -78,7 +110,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('No note found for given filter.', Artisan::output());
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('No notes found.', Artisan::output());
     }
 }

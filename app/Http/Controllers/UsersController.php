@@ -2,7 +2,8 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\UserFormRequest;
+use AbuseIO\Http\Requests\StoreUserRequest;
+use AbuseIO\Http\Requests\UpdateUserRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\User;
@@ -138,11 +139,11 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param UserFormRequest $userForm
+     * @param StoreUserRequest $userForm
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(UserFormRequest $userForm)
+    public function store(StoreUserRequest $userForm)
     {
         $userData = $userForm->all();
 
@@ -252,12 +253,12 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param UserFormRequest $userForm
+     * @param UpdateUserRequest $userForm
      * @param User            $user
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(UserFormRequest $userForm, User $user)
+    public function update(UpdateUserRequest $userForm, User $user)
     {
         $userData = $userForm->all();
 

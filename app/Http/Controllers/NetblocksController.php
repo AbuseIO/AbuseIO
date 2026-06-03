@@ -2,7 +2,8 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\NetblockFormRequest;
+use AbuseIO\Http\Requests\StoreNetblockRequest;
+use AbuseIO\Http\Requests\UpdateNetblockRequest;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
 use AbuseIO\Traits\Api;
@@ -207,11 +208,11 @@ class NetblocksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param NetblockFormRequest $netblockForm
+     * @param StoreNetblockRequest $netblockForm
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(NetblockFormRequest $netblockForm)
+    public function store(StoreNetblockRequest $netblockForm)
     {
         Netblock::create($netblockForm->all());
 
@@ -222,11 +223,11 @@ class NetblocksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param NetblockFormRequest $netblockForm
+     * @param StoreNetblockRequest $netblockForm
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiStore(NetblockFormRequest $netblockForm)
+    public function apiStore(StoreNetblockRequest $netblockForm)
     {
         $netblock = Netblock::create($netblockForm->all());
 
@@ -288,12 +289,12 @@ class NetblocksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param NetblockFormRequest $netblockForm
+     * @param UpdateNetblockRequest $netblockForm
      * @param Netblock            $netblock
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(NetblockFormRequest $netblockForm, Netblock $netblock)
+    public function update(UpdateNetblockRequest $netblockForm, Netblock $netblock)
     {
         $netblock->update($netblockForm->all());
 
@@ -304,12 +305,12 @@ class NetblocksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param NetblockFormRequest $netblockForm
+     * @param UpdateNetblockRequest $netblockForm
      * @param Netblock            $netblock
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiUpdate(NetblockFormRequest $netblockForm, Netblock $netblock)
+    public function apiUpdate(UpdateNetblockRequest $netblockForm, Netblock $netblock)
     {
         $netblock->update($netblockForm->all());
 

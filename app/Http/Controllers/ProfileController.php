@@ -2,7 +2,7 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\ProfileFormRequest;
+use AbuseIO\Http\Requests\UpdateProfileRequest;
 use Redirect;
 
 /**
@@ -21,7 +21,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function edit()
     {
@@ -32,11 +32,11 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param ProfileFormRequest $profileForm
+     * @param UpdateProfileRequest $profileForm
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileFormRequest $profileForm)
+    public function update(UpdateProfileRequest $profileForm)
     {
         $input = $profileForm->all();
 

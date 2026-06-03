@@ -2,7 +2,7 @@
 
 namespace AbuseIO\Jobs;
 
-use AbuseIO\Models\Incident;
+use AbuseIO\Http\Requests\StoreIncidentRequest;
 use Validator;
 
 /**
@@ -42,7 +42,7 @@ class IncidentsValidate extends Job
 
             $validator = Validator::make(
                 $incident->toArray(),
-                Incident::createRules()
+                new StoreIncidentRequest()->rules()
             );
 
             if ($validator->fails()) {

@@ -5,13 +5,13 @@ namespace tests\Jobs;
 use AbuseIO\Jobs\GenerateTicketsGraphPoints;
 use AbuseIO\Models\Ticket;
 use AbuseIO\Models\TicketGraphPoint;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use tests\TestCase;
 
 class GenerateTicketsGraphPointsTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function setUp(): void
     {

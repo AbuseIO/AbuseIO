@@ -38,51 +38,6 @@ class PermissionRole extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | Validation Rules
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Validation rules for this model being created.
-     *
-     * @param \AbuseIO\Models\PermissionRole $permissionRole
-     *
-     * @return array $rules
-     */
-    public static function createRules($permissionRole)
-    {
-        $rules = [
-            'role_id' => 'required|integer|exists:roles,id|'.
-                               'unique:permission_role,role_id,NULL,id,permission_id,'.$permissionRole->permission_id,
-            'permission_id' => 'required|integer|exists:permissions,id|'.
-                               'unique:permission_role,permission_id,NULL,id,role_id,'.$permissionRole->role_id,
-        ];
-
-        return $rules;
-    }
-
-    /**
-     * Validation rules for this model being updated.
-     *
-     * @param \AbuseIO\Models\PermissionRole $permissionRole
-     *
-     * @return array $rules
-     */
-    public static function updateRules($permissionRole)
-    {
-        $rules = [
-            'id'      => 'required|exists:permissions_role,id',
-            'role_id' => 'required|integer|exists:roles,id|'.
-                               'unique:permission_role,role_id,NULL,id,permission_id,'.$permissionRole->permission_id,
-            'permission_id' => 'required|integer|exists:permissions,id|'.
-                               'unique:permission_role,permission_id,NULL,id,role_id,'.$permissionRole->role_id,
-        ];
-
-        return $rules;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
     | Relationship Methods
     |--------------------------------------------------------------------------
     */

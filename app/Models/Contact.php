@@ -2,7 +2,8 @@
 
 namespace AbuseIO\Models;
 
-use AbuseIO\Http\Requests\ContactFormRequest;
+use AbuseIO\Http\Requests\StoreContactRequest;
+use AbuseIO\Http\Requests\UpdateContactRequest;
 use Config;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,8 +26,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Contact extends Model
 {
-    use HasFactory;
     use SoftDeletes;
+    use HasFactory;
 
     /**
      * The database table used by the model.
@@ -50,54 +51,6 @@ class Contact extends Model
         'contact',
         'token',
     ];
-
-    /*
-    |--------------------------------------------------------------------------
-    | Validation Rules
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Validation rules for this model being created.
-     *
-     * @return array $rules
-     */
-    public static function createRules()
-    {
-        $rules = [
-            'reference'  => 'required|string|unique:contacts,reference',
-            'name'       => 'required',
-            'email'      => 'sometimes|emails',
-            'api_host'   => 'nullable|url',
-            'enabled'    => 'required|boolean',
-            'account_id' => 'required|integer|exists:accounts,id',
-            //'notification_methods' => 'required|array',
-        ];
-
-        return $rules;
-    }
-
-    /**
-     * Validation rules for this model being updated.
-     *
-     * @param \AbuseIO\Models\Contact $contact
-     *
-     * @return array $rules
-     */
-    public static function updateRules($contact)
-    {
-        $rules = [
-            'reference'  => 'required|string|unique:contacts,reference,'.$contact->id,
-            'name'       => 'required',
-            'email'      => 'sometimes|emails',
-            'api_host'   => 'nullable|url',
-            'enabled'    => 'required|boolean',
-            'account_id' => 'required|integer|exists:accounts,id',
-            //'notification_methods' => 'required|array',
-        ];
-
-        return $rules;
-    }
 
     /**
      * Validation rules for this model being validate (required by findcontact!).
@@ -220,9 +173,9 @@ class Contact extends Model
     /**
      * Syncs the notificationMethods in the database.
      *
-     * @param ContactFormRequest $contactForm
+     * @param UpdateContactRequest|StoreContactRequest $contactForm
      */
-    public function syncNotificationMethods(ContactFormRequest $contactForm)
+    public function syncNotificationMethods(UpdateContactRequest|StoreContactRequest $contactForm)
     {
         $methods = $contactForm->get('notificationMethods');
         if ($methods == null) {

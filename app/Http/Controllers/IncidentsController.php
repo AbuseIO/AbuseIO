@@ -2,7 +2,7 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\IncidentFormRequest;
+use AbuseIO\Http\Requests\StoreIncidentRequest;
 use AbuseIO\Jobs\EvidenceSave;
 use AbuseIO\Jobs\IncidentsProcess;
 use AbuseIO\Models\Account;
@@ -55,11 +55,11 @@ class IncidentsController extends Controller
     /**
      * Store a newly created incident in storage.
      *
-     * @param IncidentFormRequest $request
+     * @param StoreIncidentRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(IncidentFormRequest $request)
+    public function store(StoreIncidentRequest $request)
     {
         // create a new Incident object
         $incident = Incident::create($request->all());
@@ -149,11 +149,11 @@ class IncidentsController extends Controller
     /**
      * return $this->respondWithItem($ticket, new TicketTransformer());.
      *
-     * @param IncidentFormRequest $request
+     * @param StoreIncidentRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiStore(IncidentFormRequest $request)
+    public function apiStore(StoreIncidentRequest $request)
     {
         // create a new Incident object
         $incident = Incident::create($request->all());

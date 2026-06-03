@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class TicketGraphPoint extends Model
 {
     use HasFactory;
+
     /**
      * Class TicketGraphPoint.
      *

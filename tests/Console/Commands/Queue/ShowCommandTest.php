@@ -2,9 +2,9 @@
 
 namespace tests\Console\Commands\Queue;
 
-//use AbuseIO\Models\Job;
-//use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,39 +12,21 @@ use tests\TestCase;
  */
 class ShowCommandTest extends TestCase
 {
-    //use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /**
-     * The list of testing fixtures to test against.
-     *
-     * @var \Illuminate\Database\Eloquent\Collection
-     */
-    private $list;
+    #[group('functional')]
+    public function testQueueShowCommandShouldFailWithoutArguments(): void
+    {
+        $exitCode = Artisan::call('queue:show');
+        $output = Artisan::output();
 
-    //    public function initDB()
-    //    {
-    //        $this->list = factory(Job::class, 10)->create();
-    //    }
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "queue").', $output);
+        $this->assertStringContainsString('Shows a queue', $output);
+    }
 
-    //    public function testWithValidIdFilter()
-    //    {
-    //        //$this->initDB();
-    //
-    //        $exitCode = Artisan::call(
-    //            'queue:show',
-    //            [
-    //                'queue' => 'abuseio_collector'
-    //            ]
-    //        );
-    //        $this->assertEquals($exitCode, 0);
-    //        $output = Artisan::output();
-    //
-    //        foreach (['Id', 'Queue', 'Attempts',] as $el) {
-    //            $this->assertStringContainsString($el, $output);
-    //        }
-    //    }
-
-    public function testWithInvalidFilter()
+    #[group('functional')]
+    public function testQueueShowCommandShouldFailWithInvalidFilter(): void
     {
         $exitCode = Artisan::call(
             'queue:show',
@@ -52,14 +34,8 @@ class ShowCommandTest extends TestCase
                 'queue' => 'xxx',
             ]
         );
-        $this->assertEquals($exitCode, 1);
-        $this->assertStringContainsString('No matching queue was found.', Artisan::output());
-    }
 
-    public function testWithoutArguments()
-    {
-        $exitCode = Artisan::call('queue:show');
         $this->assertEquals(1, $exitCode);
-        $this->assertStringContainsString('Shows a queue', Artisan::output());
+        $this->assertStringContainsString('No matching queue was found.', Artisan::output());
     }
 }

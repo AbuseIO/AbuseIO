@@ -10,9 +10,8 @@ class SystemAdminManagerProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Account::saving(function ($current) {
             /** @var Account $current */
@@ -31,9 +30,8 @@ class SystemAdminManagerProvider extends ServiceProvider
     /**
      * Register the application services.
      *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }

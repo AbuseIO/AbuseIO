@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Mail;
 
 class MailTestCommand extends Command
 {
+    use ExitCodeHooks;
+
     protected $signature = 'mail:test {--to=} {--subject=SMTP CN/FQDN test} {--message=This is a test email from mail:test}';
     protected $description = 'Send a test email and validate SMTP certificate CN and system FQDN/hosts configuration.';
 
@@ -225,6 +227,6 @@ class MailTestCommand extends Command
             $this->error('Failed to send test email: '.$e->getMessage());
         }
 
-        return 0;
+        return $this->getSuccessExitCode();
     }
 }

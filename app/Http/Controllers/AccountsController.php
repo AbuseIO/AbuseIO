@@ -2,7 +2,8 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\AccountFormRequest;
+use AbuseIO\Http\Requests\StoreAccountRequest;
+use AbuseIO\Http\Requests\UpdateAccountRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use AbuseIO\Traits\Api;
@@ -44,7 +45,7 @@ class AccountsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function index()
     {
@@ -121,7 +122,7 @@ class AccountsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
     public function create()
     {
@@ -137,11 +138,11 @@ class AccountsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param AccountFormRequest $accountForm
+     * @param StoreAccountRequest $accountForm
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(AccountFormRequest $accountForm)
+    public function store(StoreAccountRequest $accountForm)
     {
         $accountData = $accountForm->all();
 
@@ -159,11 +160,11 @@ class AccountsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param AccountFormRequest $accountForm
+     * @param StoreAccountRequest $accountForm
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apiStore(AccountFormRequest $accountForm)
+    public function apiStore(StoreAccountRequest $accountForm)
     {
         $account = Account::create($accountForm->all());
 
@@ -225,12 +226,12 @@ class AccountsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param AccountFormRequest $accountForm FormRequest
+     * @param UpdateAccountRequest $accountForm FormRequest
      * @param Account            $account     Account
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(AccountFormRequest $accountForm, Account $account)
+    public function update(UpdateAccountRequest $accountForm, Account $account)
     {
         $accountData = $accountForm->all();
 
@@ -260,12 +261,12 @@ class AccountsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param AccountFormRequest $accountForm
+     * @param UpdateAccountRequest $accountForm
      * @param Account            $account
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiUpdate(AccountFormRequest $accountForm, Account $account)
+    public function apiUpdate(UpdateAccountRequest $accountForm, Account $account)
     {
         $account->update($accountForm->all());
 
