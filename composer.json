@@ -30,7 +30,7 @@
 		"ext-intl": "*",
 		"ext-json": "*",
 		"ext-libxml": "*",
-		"ext-mailparse": "^3.1.9",
+		"ext-mailparse": "^3.2.0",
 		"ext-mbstring": "*",
 		"ext-zip": "*",
 		"abuseio/collector-common": "5.0.*",
