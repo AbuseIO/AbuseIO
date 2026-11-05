@@ -15,7 +15,7 @@
     <div class="col-md-4 offset-md-8 text-end">
         @if(!empty($has_unread_notes) && $has_unread_notes)
         <a href="#" id="unread-notes-alert" class="btn btn-warning" style="margin-right:8px;">
-            <i class="fa fa-envelope"></i> Unread notes!
+            <i class="fa fa-envelope"></i> {{ trans('misc.unread_notes') }}
         </a>
         @endif
         <a href="{{ route('admin.incidents.create') }}" class="btn btn-info">{{ trans('tickets.button.new_event') }}</a>
@@ -44,8 +44,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><input id="ip_owner_ref" class="form-control" placeholder="Search IP owner" /></td>
-            <td><input id="domain_owner_ref" class="form-control" placeholder="Search Domain owner" /></td>
+            <td><input id="ip_owner_ref" class="form-control" placeholder="{{ trans('misc.ip_owner') }}" /></td>
+            <td><input id="domain_owner_ref" class="form-control" placeholder="{{ trans('misc.domain_owner') }}" /></td>
             <td>
                 <select id="type_id" class="form-control">
                     <option value="">{{ trans('misc.all') }}</option>
