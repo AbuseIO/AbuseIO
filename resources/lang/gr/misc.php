@@ -104,7 +104,7 @@ return [
     'please_press_ctrl_cmd_to_copy' => 'Please press Control+C to copy.',
     'copied'                        => 'Copied',
     'api_key'                       => 'Api key',
-    'new_tickets'		    => 'Νέα δελτία'
+    'new_tickets'		    => 'Νέα δελτία',
     'last_seven_days'               => 'Last 7 days',
     'last_day'                      => 'Last day',
     'last_30_days'                  => 'Last 30 days',
@@ -128,9 +128,9 @@ return [
     'show_graph'                    => 'Show graph',
     'send_notifications'            => 'Send notifications',
     'close'                         => 'Κλείσιμο',
-    'ip_owner'                      => 'IP Owner'
-    'domain_owner'                  => 'Domain Owner'
-    'last_update'                   => 'Last Update'
+    'ip_owner'                      => 'IP Owner',
+    'domain_owner'                  => 'Domain Owner',
+    'last_update'                   => 'Last Update',
 
     // Note text
     'note_text_status_sync_parent' => 'Synced status with parent AbuseIO instance',
