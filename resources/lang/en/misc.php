@@ -128,9 +128,9 @@ return [
     'show_graph'                    => 'Show graph',
     'send_notifications'            => 'Send notifications',
     'close'                         => 'Close',
-    'ip_owner'           	    => 'IP Owner'
-    'domain_owner'		    => 'Domain Owner'
-    'last_update'		    => 'Last Update'
+    'ip_owner'           	        => 'IP Owner',
+    'domain_owner'		            => 'Domain Owner',
+    'last_update'		            => 'Last Update',
 
     // Note text
     'note_text_status_sync_parent' => 'Synced status with parent AbuseIO instance',
