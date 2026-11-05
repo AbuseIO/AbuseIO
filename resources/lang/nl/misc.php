@@ -131,6 +131,7 @@ return [
     'ip_owner'                      => 'IP Eigenaar',
     'domain_owner'                  => 'Domeineigenaar',
     'last_update'                   => 'Laatste update',
+    'unread_notes'                  => 'Ongelezen notities',
 
     // Note text
     'note_text_status_sync_parent' => 'Status met parent AbuseIO instantie gesynchroniseerd',
