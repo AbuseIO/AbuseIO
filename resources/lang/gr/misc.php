@@ -131,6 +131,7 @@ return [
     'ip_owner'                      => 'IP Owner',
     'domain_owner'                  => 'Domain Owner',
     'last_update'                   => 'Last Update',
+    'unread_notes'                  => 'Unread Notes',
 
     // Note text
     'note_text_status_sync_parent' => 'Synced status with parent AbuseIO instance',
