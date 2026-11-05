@@ -128,9 +128,9 @@ return [
     'show_graph'                    => 'Toon grafiek',
     'send_notifications'            => 'Verstuur notificaties',
     'close'                         => 'Afsluiten',
-    'ip_owner'                      => 'IP Eigenaar'
-    'domain_owner'                  => 'Domeineigenaar'
-    'last_update'                   => 'Laatste update'
+    'ip_owner'                      => 'IP Eigenaar',
+    'domain_owner'                  => 'Domeineigenaar',
+    'last_update'                   => 'Laatste update',
 
     // Note text
     'note_text_status_sync_parent' => 'Status met parent AbuseIO instantie gesynchroniseerd',
