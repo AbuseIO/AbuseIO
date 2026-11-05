@@ -46,7 +46,7 @@ return [
     'escalated'           => 'Geëscaleerd',
     'ignored'             => 'Genegeerd',
     'resolved'            => 'Opgelost',
-    'unread'              => 'Ongelezen'
+    'unread'              => 'Ongelezen',
     'fourth_layer_filter' => 'Dit is gefiltert vanwege het vierde niveau.',
     'parser_error'        => 'Parser Fout',
     'parser_error_msg'    => 'De parser gaf geen geldige event data. Neem contact op met de beheerder.',
