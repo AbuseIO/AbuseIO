@@ -20,11 +20,6 @@ Route::group(
             ->middleware('permission:brands_view')
             ->name('index');
 
-        // Access to show object
-        Route::get('{brands}', [BrandsController::class, 'show'])
-            ->middleware('permission:brands_view')
-            ->name('show');
-
         // Access to export object
         Route::get('export/{format}', [BrandsController::class, 'export'])
             ->middleware('permission:brands_export')
@@ -49,6 +44,11 @@ Route::group(
         Route::match(['put', 'patch'], '{brands}', [BrandsController::class, 'update'])
             ->middleware('permission:brands_edit')
             ->name('update');
+
+        // Access to show object
+        Route::get('{brands}', [BrandsController::class, 'show'])
+            ->middleware('permission:brands_view')
+            ->name('show');
 
         // Access to delete object
         Route::delete('/{brands}', [BrandsController::class, 'destroy'])

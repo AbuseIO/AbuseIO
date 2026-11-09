@@ -20,11 +20,6 @@ Route::group(
             ->middleware('permission:accounts_view')
             ->name('index');
 
-        // Access to show object
-        Route::get('{accounts}', [AccountsController::class, 'show'])
-            ->middleware('permission:accounts_view')
-            ->name('show');
-
         // Access to export object
         Route::get('export/{format}', [AccountsController::class, 'export'])
             ->middleware('permission:accounts_export')
@@ -55,6 +50,11 @@ Route::group(
         Route::match(['put', 'patch'], '{accounts}', [AccountsController::class, 'update'])
             ->middleware('permission:accounts_edit')
             ->name('update');
+
+        // Access to show object
+        Route::get('{accounts}', [AccountsController::class, 'show'])
+            ->middleware('permission:accounts_view')
+            ->name('show');
 
         // Access to delete object
         Route::delete('/{accounts}', [AccountsController::class, 'destroy'])
