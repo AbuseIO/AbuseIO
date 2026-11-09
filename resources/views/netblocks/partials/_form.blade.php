@@ -2,7 +2,7 @@
     <label for="first_ip" class="col-sm-2 control-label">{{ trans('netblocks.first_ip') }}:</label>
     <div class="col-sm-10">
         <input type="text" name="first_ip" id="first_ip" value="{{ old('first_ip', isset($netblock) ? $netblock->first_ip : null) }}" class="form-control">
-        <p class="help-block">Can be a single IPv4 or IPv6 address. <small>(You can enter CIDR to auto fill 'Last IP address')</small></p>
+        <p class="help-block">{{ trans('netblocks.enter_ip') }} <small>{{ trans('netblocks.enter_ip_cidr') }}</small></p>
         @if ($errors->has('first_ip')) <p class="help-block">{{ $errors->first('first_ip') }}</p> @endif
     </div>
 </div>
