@@ -21,4 +21,6 @@ return [
     'no_netblocks' => 'U heeft nog geen netwerkblokken',
     'first_ip'     => 'Eerste IP',
     'last_ip'      => 'Laatste IP',
+    'enter_ip'     => 'Kan een enkel IPv4- of IPv6-Adres zijn.',
+    'enter_ip_cidr' => '(Vul CIDR in om \'Laatste IP\' automatisch in te vullen)',
 ];
