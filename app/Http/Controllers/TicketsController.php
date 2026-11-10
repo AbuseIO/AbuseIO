@@ -515,7 +515,7 @@ class TicketsController extends Controller
         if (!$this->isAllowedForApiAccount($ticket)) {
             return $this->errorNotFound();
         }
-        
+
         $ticket->save();
 
         return $this->respondWithItem($ticket, new TicketTransformer());
