@@ -2252,11 +2252,12 @@ return [
             ',
     ],
     'OPEN_BASIC_AUTH_SERVICE' => [
-        'name'        => 'Accessible Basic Authentication service',
-        'description' => '
-            This concerns HTTP hosts that implement Basic Authentication in plain HTTP. 
-            This is a security risk as credentials are transmitted in cleartext, without encryption. Enforce the use of HTTPS instead. 
-            ',
+        'name'        => 'Vulnerable HTTP',
+        'description' => "
+            <p>This report identifies hosts that have the Hypertext Transfer Protocol (HTTP) service running on some port that may have a vulnerability.
+            We typically focus on pre-auth RCE vulnerabilities (or vulnerabilities that can be chained together by attackers to remotely execute code) in critical or otherwise popular software that is often exposed to the public Internet. We strongly recommend reviewing any system (and your network!) for signs of compromise if you receive a report from us. This is because many of these are known to be actively exploited in the wild. You should also make sure to proceed to mitigate the vulnerability based on the current vendor recommendations.
+            This report contains checks for a high number of vulnerabilities. We highly recommend going to <a target='_blank' href='https://www.shadowserver.org/what-we-do/network-reporting/vulnerable-http-report/'>the list at Shadowserver</a> to find the vulnerability reported on and steps that can be taken to mitigate the issue.</p> 
+            ",
     ],
     'DARKNET' => [
         'name'        => 'Service contacting darknets',

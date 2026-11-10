@@ -1571,7 +1571,7 @@ return [
             Door de MTA stop te zetten, voorkomt u dat de SPAM wordt verstuurd. 
             Nadat het probleem is opgelost, moet u alle SPAM uit de mailqueue halen alvorens u uw MTA opnieuw opstart.</p>
 
-            <h2>Meer informatie/h2>
+            <h2>Meer informatie</h2>
 
             <p>Neem contact op met onze abuse-afdeling als u niet weet hoe u dit probleem zelf op kan lossen.</p>
 
@@ -2022,11 +2022,12 @@ return [
             ',
     ],
     'OPEN_BASIC_AUTH_SERVICE' => [
-        'name'        => 'Open Basic Authenticatie service',
-        'description' => '
-            This concerns HTTP hosts that implement Basic Authentication in plain HTTP. 
-            This is a security risk as credentials are transmitted in cleartext, without encryption. Enforce the use of HTTPS instead. 
-            ',
+        'name'        => 'Kwetsbare HTTP',
+        'description' => "
+        <p>Deze rapportage identificeert hosts die een mogelijk kwetsbare Hypertext Transfer Protocol (HTTP ) service op een bepaalde port hebben draaien.
+        Wij richten ons voornamelijk op zogenaamde “pre-auth RCE vulnerabilities” (ofterwel: kwetsbaarheden die aan elkaar geketend kunnen worden door malafiden om remote code uit te voeren) in kritieke en/of veelgebruikte software die vaak bloot wordt gesteld aan het publieke internet. Als je deze rapportage ontvangt, raden wij u aan om uw systeem (en het netwerk waarin deze leeft) op compromitering te controleren. Van veel van deze kwetsbaarheden wordt namelijk actief misbruik gemaakt. 
+        Deze rapportage checkt voor een groot aantal mogelijke kwetsbaarheden. Het is sterk aanbevolen om <a target='_blank' href='https://www.shadowserver.org/what-we-do/network-reporting/vulnerable-http-report/'>de lijst van Shadowserver</a> raad te plegen voor meer informatie over de gerapporteerde kwetsbaarheid en welke stappen moeten worden ondernomen om deze te mitigeren.</p>
+        ",
     ],
     'DARKNET' => [
         'name'        => 'Service contacting darknets',
