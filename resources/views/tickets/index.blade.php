@@ -15,7 +15,7 @@
     <div class="col-md-4 offset-md-8 text-end">
         @if(!empty($has_unread_notes) && $has_unread_notes)
         <a href="#" id="unread-notes-alert" class="btn btn-warning" style="margin-right:8px;">
-            <i class="fa fa-envelope"></i> Unread notes!
+            <i class="fa fa-envelope"></i> {{ trans('misc.unread_notes') }}
         </a>
         @endif
         <a href="{{ route('admin.incidents.create') }}" class="btn btn-info">{{ trans('tickets.button.new_event') }}</a>
@@ -28,14 +28,14 @@
             <th>{{ trans('misc.ticket_id') }}</th>
             <th>{{ trans('misc.ip') }}</th>
             <th>{{ trans('misc.domain') }}</th>
-            <th class="col-ip-owner">IP Owner</th>
-            <th class="col-domain-owner">Domain Owner</th>
+            <th class="col-ip-owner">{{ trans('misc.ip_owner') }}</th>
+            <th class="col-domain-owner">{{ trans('misc.domain_owner') }}</th>
             <th>{{ trans('misc.type') }}</th>
             <th>{{ trans('misc.classification') }}</th>
             <th>{{ trans('tickets.events') }}</th>
             <th>{{ trans('tickets.notes') }}</th>
             <th>{{ trans('misc.status') }}</th>
-            <th>Last Update</th>
+            <th>{{ trans('misc.last_update') }}</th>
             <th class="text-end">{{ trans('misc.action') }}</th>
         </tr>
     </thead>
@@ -44,8 +44,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><input id="ip_owner_ref" class="form-control" placeholder="Search IP owner" /></td>
-            <td><input id="domain_owner_ref" class="form-control" placeholder="Search Domain owner" /></td>
+            <td><input id="ip_owner_ref" class="form-control" placeholder="{{ trans('misc.ip_owner') }}" /></td>
+            <td><input id="domain_owner_ref" class="form-control" placeholder="{{ trans('misc.domain_owner') }}" /></td>
             <td>
                 <select id="type_id" class="form-control">
                     <option value="">{{ trans('misc.all') }}</option>
@@ -65,8 +65,8 @@
             <td></td>
             <td>
                 <select id="notes_filter" class="form-control">
-                    <option value="">All</option>
-                    <option value="UNREAD">Unread</option>
+                    <option value="">{{ trans('misc.all') }}</option>
+                    <option value="UNREAD">{{ trans('tickets.unread') }}</option>
                 </select>
             </td>
             <td>

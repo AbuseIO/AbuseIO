@@ -214,7 +214,7 @@ class TicketsController extends Controller
                     $unread = (int) ($ticket->unread_notes_count ?? 0);
                     $html = (string) $total;
                     if ($unread > 0) {
-                        $html .= ' <span class="badge bg-warning text-dark" title="Unread notes">'
+                        $html .= ' <span class="badge bg-warning text-dark" title="'.trans('misc.unread_notes').'">'
                             .'<i class="fa fa-envelope"></i> '
                             .$unread
                             .'</span>';
