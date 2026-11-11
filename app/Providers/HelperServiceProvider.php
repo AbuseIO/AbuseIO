@@ -28,7 +28,7 @@ class HelperServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      */
-    public function boot()
+    public function boot(): void
     {
         // ..
     }
@@ -36,7 +36,7 @@ class HelperServiceProvider extends ServiceProvider
     /**
      * Register the application services.
      */
-    public function register()
+    public function register(): void
     {
         foreach ($this->helpers as $helper) {
             $helper_file = app_path().'/Helpers/'.$helper.'.php';

@@ -1,4 +1,5 @@
 .env
+.env.testing
 .phpstorm.meta.php
 /.idea
 /node_modules

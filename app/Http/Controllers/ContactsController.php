@@ -2,7 +2,8 @@
 
 namespace AbuseIO\Http\Controllers;
 
-use AbuseIO\Http\Requests\ContactFormRequest;
+use AbuseIO\Http\Requests\StoreContactRequest;
+use AbuseIO\Http\Requests\UpdateContactRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Contact;
 use AbuseIO\Services\NotificationService;
@@ -193,12 +194,12 @@ class ContactsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ContactFormRequest $contactForm FormRequest
+     * @param StoreContactRequest $contactForm FormRequest
      * @param Contact            $contact     Contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(ContactFormRequest $contactForm, Contact $contact)
+    public function store(StoreContactRequest $contactForm, Contact $contact)
     {
         $c = $contact->create($contactForm->all());
 
@@ -211,12 +212,12 @@ class ContactsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ContactFormRequest $contactForm FormRequest
+     * @param StoreContactRequest $contactForm FormRequest
      * @param Contact            $contact     Contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function apiStore(ContactFormRequest $contactForm, Contact $contact)
+    public function apiStore(StoreContactRequest $contactForm, Contact $contact)
     {
         $c = $contact->create($contactForm->all());
 
@@ -283,12 +284,12 @@ class ContactsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param ContactFormRequest $contactForm FormRequest
+     * @param UpdateContactRequest $contactForm FormRequest
      * @param Contact            $contact     Contact
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ContactFormRequest $contactForm, Contact $contact)
+    public function update(UpdateContactRequest $contactForm, Contact $contact)
     {
         $contact->update($contactForm->all());
 
@@ -301,12 +302,12 @@ class ContactsController extends Controller
     /**
      * Update the specified resource via API.
      *
-     * @param ContactFormRequest $contactForm FormRequest
+     * @param UpdateContactRequest $contactForm FormRequest
      * @param Contact            $contact     Contact
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function apiUpdate(ContactFormRequest $contactForm, Contact $contact)
+    public function apiUpdate(UpdateContactRequest $contactForm, Contact $contact)
     {
         $contact->update($contactForm->all());
 

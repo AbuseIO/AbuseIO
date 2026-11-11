@@ -45,28 +45,6 @@ class Evidence extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | Validation Rules
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Validation rules for this model being created.
-     *
-     * @return array $rules
-     */
-    public static function createRules()
-    {
-        $rules = [
-            'filename' => 'required|file',
-            'sender'   => 'required|string',
-            'subject'  => 'required|string',
-        ];
-
-        return $rules;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
     | Relationship Methods
     |--------------------------------------------------------------------------
     */

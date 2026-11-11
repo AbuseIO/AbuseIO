@@ -3,8 +3,9 @@
 namespace tests\Console\Commands\Brand;
 
 use AbuseIO\Models\Brand;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,73 +13,73 @@ use tests\TestCase;
  */
 class ListCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    private $name1;
-
-    private $name2;
-
-    private $brands;
-
-    /**
-     * this should not be part of the setUp method because the database connection
-     * has NOT been setUp properly at that moment.
-     */
-    private function initDB()
+    #[group('functional')]
+    public function testBrandListCommandHeadersShouldPass(): void
     {
-        Brand::where('id', '!=', 1)->delete();
-
-        $this->brands = Brand::factory()->count(10)->create();
-
-        $this->name1 = $this->brands->first()->name;
-        $this->name2 = $this->brands->get(1)->name;
-    }
-
-    public function testHeaders()
-    {
-        $this->initDB();
-        $exitCode = Artisan::call('brand:list', []);
-
-        $this->assertEquals($exitCode, 0);
-
         $headers = ['Id', 'Name', 'Company name'];
+
+        $exitCode = Artisan::call('brand:list', []);
         $output = Artisan::output();
+
+        $this->assertEquals(0, $exitCode);
         foreach ($headers as $header) {
             $this->assertStringContainsString($header, $output);
         }
     }
 
-    public function testAll()
+    #[group('functional')]
+    public function testBrandListCommandShouldPassWhenBrandIsListed(): void
     {
-        $this->initDB();
+        $brand = Brand::create([
+            'name' => 'Functional Test Brand',
+            'company_name' => 'Testing Co',
+            'logo' => 'logo.png',
+            'introduction_text' => 'Welcome to Testing Co',
+            'creator_id' => 1,
+        ]);
 
-        $exitCode = Artisan::call('brand:list', []);
+        $exitCode = Artisan::call('brand:list');
 
-        $this->assertEquals($exitCode, 0);
-        $output = Artisan::output();
-        $this->assertStringContainsString($this->name1, $output);
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($brand->name, Artisan::output());
     }
 
-    public function testFilter()
+    #[group('functional')]
+    public function testBrandListCommandShouldPassWhenOnlyFilteredValueIsGiven(): void
     {
-        $this->initDB();
+        $brandOne = Brand::create([
+            'name' => 'Functional Test Brand no. 1',
+            'company_name' => 'Testing Co',
+            'logo' => 'logo.png',
+            'introduction_text' => 'Welcome to Testing Co',
+            'creator_id' => 1,
+        ]);
+        $brandTwo = Brand::create([
+            'name' => 'Functional Test Brand no. 2',
+            'company_name' => 'Testing Co',
+            'logo' => 'logo.png',
+            'introduction_text' => 'Welcome to Testing Co',
+            'creator_id' => 1,
+        ]);
+
         $exitCode = Artisan::call(
             'brand:list',
             [
-                '--filter' => $this->name2,
+                '--filter' => $brandOne->name,
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertStringContainsString($this->name2, $output);
-        $this->assertStringNotContainsString($this->name1, $output);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($brandOne->name, $output);
+        $this->assertStringNotContainsString($brandTwo->name, $output);
     }
 
-    public function testNotFoundFilter()
+    #[group('functional')]
+    public function testBrandListCommandShouldFailWithInvalidFilterValue(): void
     {
-        $this->initDB();
-
         $exitCode = Artisan::call(
             'brand:list',
             [
@@ -86,7 +87,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('No brand found for given filter.', Artisan::output());
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('No brands found.', Artisan::output());
     }
 }

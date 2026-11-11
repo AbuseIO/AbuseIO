@@ -23,10 +23,11 @@ use Log;
  * @property bool   $systemaccount fillable
  * @property string $token'        fillable
  */
+
 class Account extends Model
 {
-    use HasFactory;
     use SoftDeletes;
+    use HasFactory;
     use InstanceComparable;
 
     /**
@@ -49,49 +50,6 @@ class Account extends Model
         'systemaccount',
         'token',
     ];
-
-    /*
-    |--------------------------------------------------------------------------
-    | Validation Rules
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Validation rules for this model being created.
-     *
-     * @return array $rules
-     */
-    public static function createRules()
-    {
-        $rules = [
-            'name'          => 'required|unique:accounts',
-            'brand_id'      => 'required|integer|exists:brands,id',
-            'systemaccount' => 'sometimes|required|uniqueflag:accounts:systemaccount',
-            'disabled'      => 'required|stringorboolean', // disabled is sent as a string
-
-        ];
-
-        return $rules;
-    }
-
-    /**
-     * Validation rules for this model being updated.
-     *
-     * @param \AbuseIO\Models\Account $account
-     *
-     * @return array $rules
-     */
-    public static function updateRules($account)
-    {
-        $rules = [
-            'name'          => 'required|unique:accounts,name,'.$account->id,
-            'brand_id'      => 'required|integer|exists:brands,id',
-            'systemaccount' => 'sometimes|required|uniqueflag:accounts:systemaccount',
-            'disabled'      => 'sometimes|required|stringorboolean', // disabled is sent as a string
-        ];
-
-        return $rules;
-    }
 
     /*
     |--------------------------------------------------------------------------

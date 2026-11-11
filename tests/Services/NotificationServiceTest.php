@@ -4,12 +4,12 @@ namespace tests\Services;
 
 use AbuseIO\Models\Contact;
 use AbuseIO\Services\NotificationService;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use tests\TestCase;
 
 class NotificationServiceTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     private $service;
 
@@ -23,7 +23,7 @@ class NotificationServiceTest extends TestCase
 
     public function testListContact()
     {
-        $contact = Contact::factory()->create();
+        $contact = Contact::factory()->make();
 
         $this->assertEquals(
             $this->service->listForContact($contact),

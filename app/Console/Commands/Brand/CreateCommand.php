@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Brand;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
+use AbuseIO\Http\Requests\StoreBrandRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\Brand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -57,6 +58,6 @@ class CreateCommand extends AbstractCreateCommand
      */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Brand::createRules());
+        return Validator::make($model->toArray(), new StoreBrandRequest()->rules());
     }
 }

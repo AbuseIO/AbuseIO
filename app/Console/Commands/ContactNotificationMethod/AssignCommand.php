@@ -51,7 +51,7 @@ class AssignCommand extends Command
         if (empty($this->option('contact')) &&
             empty($this->option('method'))
         ) {
-            throw new \RuntimeException('Missing options for the notification method and/or contact (e-mail) to select');
+            $this->error('Missing options for the notification method and/or contact (e-mail) to select');
 
             return $this->getInvalidOptionExitCode();
         }

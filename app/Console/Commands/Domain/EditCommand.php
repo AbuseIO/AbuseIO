@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Domain;
 
 use AbuseIO\Console\Commands\AbstractEditCommand;
+use AbuseIO\Http\Requests\UpdateDomainRequest;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Domain;
 use Symfony\Component\Console\Input\InputArgument;
@@ -79,7 +80,7 @@ class EditCommand extends AbstractEditCommand
     {
         if (null !== $model) {
             $data = $this->getModelAsArrayForDirtyAttributes($model);
-            $updateRules = $this->getUpdateRulesForDirtyAttributes(Domain::updateRules($model));
+            $updateRules = $this->getUpdateRulesForDirtyAttributes(new UpdateDomainRequest()->rules());
 
             return Validator::make($data, $updateRules);
         }

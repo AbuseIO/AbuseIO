@@ -3,22 +3,25 @@
 namespace tests\Models;
 
 use AbuseIO\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 class UserTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
+    #[group('unit')]
     public function testUserModelFactory()
     {
         $user = User::factory()->make(['first_name' => 'testing name']);
         $this->assertEquals($user->first_name, 'testing name');
     }
 
+    #[group('unit')]
     public function testInverseValueSystemAccount()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->make();
         $oldState = $user->account->isSystemAccount();
 
         if ($user->account->isSystemAccount()) {
@@ -30,6 +33,7 @@ class UserTest extends TestCase
         $this->assertNotEquals($user->account->isSystemAccount(), $oldState);
     }
 
+    #[group('unit')]
     public function testMayLoginSystemAccount()
     {
         $user = User::factory()->make();
@@ -41,6 +45,7 @@ class UserTest extends TestCase
         $this->assertTrue(empty($messages));
     }
 
+    #[group('unit')]
     public function testMayLoginWithDisabledAccount()
     {
         $user = User::factory()->make();
@@ -54,6 +59,7 @@ class UserTest extends TestCase
         $this->assertContains('The account Default for this login is disabled.', $messages);
     }
 
+    #[group('unit')]
     public function testMayLoginWithDisabledUser()
     {
         $user = User::factory()->make();

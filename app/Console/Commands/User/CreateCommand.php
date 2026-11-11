@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\User;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
+use AbuseIO\Http\Requests\StoreUserRequest;
 use AbuseIO\Models\Account;
 use AbuseIO\Models\User;
 use Symfony\Component\Console\Input\InputArgument;
@@ -94,7 +95,7 @@ class CreateCommand extends AbstractCreateCommand
         $arr['password'] = $this->password;
         $arr['password_confirmation'] = $this->password;
 
-        return Validator::make($arr, User::createRules());
+        return Validator::make($arr, new StoreUserRequest()->rules());
     }
 
     /**

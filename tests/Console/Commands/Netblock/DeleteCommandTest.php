@@ -4,7 +4,9 @@ namespace tests\Console\Commands\Netblock;
 
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,29 +14,50 @@ use tests\TestCase;
  */
 class DeleteCommandTest extends TestCase
 {
-    public function testValid()
+    use RefreshDatabase;
+
+    #[group('functional')]
+    public function testNetblockDeleteCommandShouldFailWithoutArguments(): void
     {
-        // Create a netblock to ensure the ID exists and is owned by a valid contact
-        $netblock = Netblock::factory()->create([
-            'contact_id' => Contact::factory()->create()->id,
+        $exitCode = Artisan::call('netblock:delete');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "id").', $output);
+        $this->assertStringContainsString('Deletes a netblock from the system', $output);
+    }
+
+    #[group('functional')]
+    public function testNetblockDeleteCommandShouldPassWithValidNetblock(): void
+    {
+        $contact = Contact::create([
+            'account_id' => 1,
+            'reference'  => 'Old reference',
+            'name'       => 'Old name',
+            'email'      => 'test@example.com',
+            'enabled'    => true,
+        ]);
+        $netblock = Netblock::create([
+            'contact_id'  => $contact->id,
+            'first_ip'    => '192.168.1.1',
+            'last_ip'     => '192.168.1.10',
+            'description' => 'Test netblock',
+            'enabled'     => true,
         ]);
 
         $exitCode = Artisan::call(
             'netblock:delete',
             [
-                'id' => (string) $netblock->id,
+                'id' => $netblock->id,
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('netblock has been deleted', Artisan::output());
-        /*
-         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-         */
-        $this->seed('NetblocksTableSeeder');
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString('Netblock has been deleted.', Artisan::output());
     }
 
-    public function testInvalidId()
+    #[group('functional')]
+    public function testNetblockDeleteCommandShouldFailWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'netblock:delete',
@@ -43,7 +66,7 @@ class DeleteCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 1);
-        $this->assertStringContainsString('Unable to find netblock', Artisan::output());
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Unable to find netblock.', Artisan::output());
     }
 }

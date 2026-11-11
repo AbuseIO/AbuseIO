@@ -13,9 +13,8 @@ class ContactServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // register a saving event listener on Ticket
         // which will add the ash tokens
@@ -27,9 +26,8 @@ class ContactServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }

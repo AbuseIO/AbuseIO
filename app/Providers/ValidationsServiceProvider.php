@@ -17,9 +17,8 @@ class ValidationsServiceProvider extends ServiceProvider
     /**
      * Contains the added validations centralized on a single loaded place.
      *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         /*
          * Add timestamp validation
@@ -263,9 +262,8 @@ class ValidationsServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }

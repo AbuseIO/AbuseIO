@@ -3,47 +3,62 @@
 namespace tests\Console\Commands\Note;
 
 use AbuseIO\Models\Note;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use AbuseIO\Models\Ticket;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
  * Class ShowCommandTest.
+ *
+ * @note In this test we use the ticket factory to create tickets for the notes.
+ *       - The tickets model is really large to set up so we use factories to keep the test code clean.
  */
 class ShowCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /**
-     * The list of testing fixtures to test against.
-     *
-     * @var Illuminate\Database\Eloquent\Collection
-     */
-    private $noteList;
-
-    public function initDB()
+    #[group('functional')]
+    public function testNoteShowCommandShouldFailWithNoNotes(): void
     {
-        $this->noteList = Note::factory()->count(10)->create();
+        $exitCode = Artisan::call('note:show');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "note").', $output);
+        $this->assertStringContainsString('Shows a note based on the provided id', $output);
     }
 
-    public function testWithValidIdFilter()
+    #[group('functional')]
+    public function testNoteShowCommandShouldPassWithValidNoteId(): void
     {
-        $this->initDB();
+        $headers = ['Id',  'Ticket id', 'Submitter', 'Text', 'Hidden', 'Viewed'];
+        $ticket = Ticket::factory()->create();
+        $note = Note::create([
+            'ticket_id' => $ticket->id,
+            'submitter' => 'Tester',
+            'text' => 'This is a test note to be deleted by the unit tests.',
+            'hidden' => false,
+            'viewed' => false,
+        ]);
 
         $exitCode = Artisan::call(
             'note:show',
             [
-                'note' => $this->noteList->get(0)->id,
+                'note' => $note->id,
             ]
         );
-        $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        foreach (['Id',  'Ticket id', 'Submitter', 'Text', 'Hidden', 'Viewed'] as $el) {
+
+        $this->assertEquals(0, $exitCode);
+        foreach ($headers as $el) {
             $this->assertStringContainsString($el, $output);
         }
     }
 
-    public function testWithInvalidFilter()
+    #[group('functional')]
+    public function testNoteShowCommandShouldFailWithInvalidNoteId(): void
     {
         $exitCode = Artisan::call(
             'note:show',
@@ -52,7 +67,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('No matching note was found.', Artisan::output());
     }
 }

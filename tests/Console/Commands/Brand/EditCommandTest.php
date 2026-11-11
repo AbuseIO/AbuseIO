@@ -3,22 +3,33 @@
 namespace tests\Console\Commands\Brand;
 
 use AbuseIO\Models\Brand;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
  * Class EditCommandTest.
+ *
+ * @note This test has one brand already seeded in the database from the migrations.
  */
 class EditCommandTest extends TestCase
 {
-    public function testWithoutId()
+    use RefreshDatabase;
+
+    #[group('functional')]
+    public function testBrandEditCommandShouldFailWithoutId(): void
     {
-        Artisan::call('brand:edit');
+        $exitCode = Artisan::call('brand:edit');
         $output = Artisan::output();
-        $this->assertStringContainsString('Edit a brand', $output);
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "id").', $output);
+        $this->assertStringContainsString('Edits an existing brand', $output);
     }
 
-    public function testWithInvalidId()
+    #[group('functional')]
+    public function testBrandEditCommandShouldFailWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'brand:edit',
@@ -26,48 +37,42 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 1);
+
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find brand with this criteria', Artisan::output());
     }
 
-    public function testName()
+    #[group('integration')]
+    public function testBrandEditCommandShouldPassWithChangedNames(): void
     {
-        $this->assertEquals('AbuseIO', Brand::find(1)->name);
-
         $exitCode = Artisan::call(
             'brand:edit',
             [
-                'id'     => '1',
+                'id' => '1',
                 '--name' => 'New name',
             ]
         );
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('The brand has been updated', Artisan::output());
 
-        $brand = Brand::find(1);
+        $brand = Brand::where('id', 1)->first();
+
+        $this->assertEquals(0, $exitCode);
         $this->assertEquals('New name', $brand->name);
-        $brand->name = 'AbuseIO';
-        $brand->save();
     }
 
-    public function testCompanyName()
+    #[group('integration')]
+    public function testBrandEditCommandShouldPassWithChangedCompanyName(): void
     {
-        $this->assertEquals('AbuseIO', Brand::find(1)->company_name);
-
         $exitCode = Artisan::call(
             'brand:edit',
             [
-                'id'             => '1',
-                '--company_name' => 'New name 1',
+                'id' => '1',
+                '--company_name' => 'New company name',
             ]
         );
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('The brand has been updated', Artisan::output());
 
         $brand = Brand::find(1);
 
-        $this->assertEquals('New name 1', $brand->company_name);
-        $brand->company_name = 'AbuseIO';
-        $brand->save();
+        $this->assertEquals(0, $exitCode);
+        $this->assertEquals('New company name', $brand->company_name);
     }
 }

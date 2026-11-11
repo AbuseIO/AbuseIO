@@ -16,34 +16,6 @@ class ContactNotificationMethods extends Model
     ];
 
     /*
-    |--------------------------------------------------------------------------
-    | Validation Rules
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Validation rules for this model being created.
-     *
-     * @return array $rules
-     */
-    public static function createRules()
-    {
-        return [
-            'method' => 'required|string',
-        ];
-    }
-
-    /**
-     * Validation rules for this model being updated.
-     *
-     * @return array $rules
-     */
-    public static function updateRules()
-    {
-        return static::createRules();
-    }
-
-    /*
      |--------------------------------------------------------------------------
      | Relationship Methods
      |--------------------------------------------------------------------------

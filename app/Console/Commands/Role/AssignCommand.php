@@ -4,6 +4,7 @@ namespace AbuseIO\Console\Commands\Role;
 
 use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Console\Commands\ShowHelpWhenRunTimeExceptionOccurs;
+use AbuseIO\Http\Requests\StoreRoleUserRequest;
 use AbuseIO\Models\Role;
 use AbuseIO\Models\RoleUser;
 use AbuseIO\Models\User;
@@ -99,7 +100,7 @@ class AssignCommand extends Command
         $RoleUser->user()->associate($user);
         $RoleUser->role()->associate($role);
 
-        $validation = Validator::make($RoleUser->toArray(), RoleUser::createRules($RoleUser));
+        $validation = Validator::make($RoleUser->toArray(), new StoreRoleUserRequest()->rules());
 
         if ($validation->fails()) {
             $this->warn('The role has already been granted this permission');

@@ -17,9 +17,8 @@ class ConfigServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // Publish config files of all installed Parsers
         // All parser configs we will put into the master 'parsers' tree of the config
@@ -67,7 +66,7 @@ class ConfigServiceProvider extends ServiceProvider
      * @param $list
      * @param $type
      */
-    private function buildConfig($list, $type)
+    private function buildConfig($list, $type): void
     {
         foreach ($list as $handler) {
             $defaultConfig = [];
@@ -89,9 +88,8 @@ class ConfigServiceProvider extends ServiceProvider
     /**
      * Register the application services.
      *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         config(
             [

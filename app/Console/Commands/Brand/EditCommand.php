@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Brand;
 
 use AbuseIO\Console\Commands\AbstractEditCommand;
+use AbuseIO\Http\Requests\UpdateBrandRequest;
 use AbuseIO\Models\Brand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -63,7 +64,7 @@ class EditCommand extends AbstractEditCommand
     protected function getValidator($model)
     {
         $data = $this->getModelAsArrayForDirtyAttributes($model);
-        $updateRules = $this->getUpdateRulesForDirtyAttributes(Brand::updateRules($model));
+        $updateRules = $this->getUpdateRulesForDirtyAttributes(new UpdateBrandRequest()->rules());
 
         return Validator::make($data, $updateRules);
     }

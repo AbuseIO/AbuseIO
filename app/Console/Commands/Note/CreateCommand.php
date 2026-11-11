@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Note;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
+use AbuseIO\Http\Requests\StoreNoteRequest;
 use AbuseIO\Models\Note;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -60,6 +61,6 @@ class CreateCommand extends AbstractCreateCommand
      */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Note::createRules());
+        return Validator::make($model->toArray(), new StoreNoteRequest()->rules());
     }
 }

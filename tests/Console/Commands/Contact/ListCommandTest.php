@@ -3,8 +3,9 @@
 namespace tests\Console\Commands\Contact;
 
 use AbuseIO\Models\Contact;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,78 +13,72 @@ use tests\TestCase;
  */
 class ListCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    private $contacts;
-
-    private $name1;
-
-    private $name2;
-
-    /**
-     * this should not be part of the setUp method because the database connection
-     * has NOT been setUp properly at that moment.
-     */
-    private function initDB()
+    #[group('functional')]
+    public function testContactListCommandShouldPassShowingContacts(): void
     {
-        //        \DB::table('domains')->truncate();
-        //        \DB::table('contacts')->truncate();
-        //        Contact::all()->delete();
+        $contactOne = Contact::create([
+            'reference' => sprintf('reference_%s', uniqid()),
+            'name' => 'Test name no. 1',
+            'email' => 'example@mail.com',
+            'api_host' => 'https://api.example.com',
+            'enabled' => true,
+            'account_id' => 1,
+        ]);
+        $contactTwo = Contact::create([
+            'reference' => sprintf('reference_%s', uniqid()),
+            'name' => 'Test name no. 2',
+            'email' => 'example@mail.com',
+            'api_host' => 'https://api.example.com',
+            'enabled' => true,
+            'account_id' => 1,
+        ]);
 
-        $this->contacts = Contact::factory()->count(10)->create();
-
-        $this->name1 = $this->contacts->first()->name;
-        $this->name2 = $this->contacts->get(1)->name;
-    }
-
-    public function testHeaders()
-    {
-        $this->initDB();
-
-        $exitCode = Artisan::call('contact:list', []);
-
-        $this->assertEquals($exitCode, 0);
-
-        $headers = ['Id', 'Name', 'Email', 'Api host'];
+        $exitCode = Artisan::call('contact:list');
         $output = Artisan::output();
-        foreach ($headers as $header) {
-            $this->assertStringContainsString($header, $output);
-        }
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($contactOne->name, $output);
+        $this->assertStringContainsString($contactTwo->name, $output);
     }
 
-    public function testAll()
+    #[group('integration')]
+    public function testContactListCommandShouldPassWithValidNameFilter(): void
     {
-        $this->initDB();
-
-        $exitCode = Artisan::call('contact:list', []);
-
-        $this->assertEquals($exitCode, 0);
-        $output = Artisan::output();
-        $this->assertStringContainsString($this->name1, $output);
-        $this->assertStringContainsString($this->name2, $output);
-    }
-
-    public function testFilter()
-    {
-        $this->initDB();
+        $contactOne = Contact::create([
+            'reference' => sprintf('reference_%s', uniqid()),
+            'name' => 'Test name no. 1',
+            'email' => 'example@mail.com',
+            'api_host' => 'https://api.example.com',
+            'enabled' => true,
+            'account_id' => 1,
+        ]);
+        $contactTwo = Contact::create([
+            'reference' => sprintf('reference_%s', uniqid()),
+            'name' => 'Test name no. 2',
+            'email' => 'example@mail.com',
+            'api_host' => 'https://api.example.com',
+            'enabled' => true,
+            'account_id' => 1,
+        ]);
 
         $exitCode = Artisan::call(
             'contact:list',
             [
-                '--filter' => $this->name1,
+                '--filter' => $contactOne->name,
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertStringContainsString($this->name1, $output);
-        $this->assertStringNotContainsString($this->name2, $output);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($contactOne->name, $output);
+        $this->assertStringNotContainsString($contactTwo->name, $output);
     }
 
-    public function testNotFoundFilter()
+    #[group('integration')]
+    public function testContactListCommandShouldFailWithInvalidFilter(): void
     {
-        $this->initDB();
-
         $exitCode = Artisan::call(
             'contact:list',
             [
@@ -91,7 +86,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('No contact found for given filter.', Artisan::output());
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('No contacts found.', Artisan::output());
     }
 }

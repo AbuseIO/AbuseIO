@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Domain;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
+use AbuseIO\Http\Requests\StoreDomainRequest;
 use AbuseIO\Models\Domain;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -54,6 +55,6 @@ class CreateCommand extends AbstractCreateCommand
      */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Domain::createRules());
+        return Validator::make($model->toArray(), new StoreDomainRequest()->rules());
     }
 }

@@ -46,47 +46,6 @@ class Note extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | Validation Rules
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Validation rules for this model being created.
-     *
-     * @return array $rules
-     */
-    public static function createRules()
-    {
-        $rules = [
-            'ticket_id' => 'required|integer|exists:tickets,id',
-            'submitter' => 'required|string',
-            'text'      => 'required|string',
-            'hidden'    => 'sometimes|boolean',
-            'viewed'    => 'sometimes|boolean',
-        ];
-
-        return $rules;
-    }
-
-    /**
-     * Validation rules for this model being updated.
-     *
-     * @return array $rules
-     */
-    public static function updateRules()
-    {
-        $rules = [
-            'ticket_id' => 'required|integer|exists:tickets,id',
-            'submitter' => 'required|string',
-            'hidden'    => 'sometimes|boolean',
-            'viewed'    => 'sometimes|boolean',
-        ];
-
-        return $rules;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
     | Relationship Methods
     |--------------------------------------------------------------------------
     */

@@ -3,13 +3,15 @@
 namespace tests\Models;
 
 use AbuseIO\Models\Contact;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 class ContactTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
+    #[group('functional')]
     public function testModelFactory()
     {
         $contact = Contact::factory()->create();
@@ -17,6 +19,7 @@ class ContactTest extends TestCase
         $this->assertEquals($contact->name, $contactFromDB->name);
     }
 
+    #[group('functional')]
     public function testContactNotificationMethod()
     {
         $contact = Contact::factory()->create();
@@ -28,12 +31,14 @@ class ContactTest extends TestCase
         $this->assertEquals($methodsFromDB->first()->method, 'Mail');
     }
 
+    #[group('functional')]
     public function testHasNotificationMethodWithoutMethod()
     {
         $contact = Contact::factory()->create();
         $this->assertFalse($contact->hasNotificationMethod('Mail'));
     }
 
+    #[group('functional')]
     public function testHasNotificationMethod()
     {
         $contact = Contact::factory()->create();

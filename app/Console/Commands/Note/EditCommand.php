@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Note;
 
 use AbuseIO\Console\Commands\AbstractEditCommand;
+use AbuseIO\Http\Requests\UpdateNoteRequest;
 use AbuseIO\Models\Note;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -61,7 +62,7 @@ class EditCommand extends AbstractEditCommand
     protected function getValidator($model)
     {
         $data = $this->getModelAsArrayForDirtyAttributes($model);
-        $updateRules = $this->getUpdateRulesForDirtyAttributes(Note::updateRules());
+        $updateRules = $this->getUpdateRulesForDirtyAttributes(new UpdateNoteRequest()->rules());
 
         return Validator::make($data, $updateRules);
     }

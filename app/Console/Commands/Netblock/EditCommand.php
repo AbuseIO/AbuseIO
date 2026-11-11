@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Netblock;
 
 use AbuseIO\Console\Commands\AbstractEditCommand;
+use AbuseIO\Http\Requests\UpdateNetblockRequest;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
 use Symfony\Component\Console\Input\InputArgument;
@@ -89,7 +90,7 @@ class EditCommand extends AbstractEditCommand
     protected function getValidator($model)
     {
         $data = $this->getModelAsArrayForDirtyAttributes($model);
-        $updateRules = $this->getUpdateRulesForDirtyAttributes(Netblock::updateRules($model));
+        $updateRules = $this->getUpdateRulesForDirtyAttributes(new UpdateNetblockRequest()->rules());
 
         return Validator::make($data, $updateRules);
     }

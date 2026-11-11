@@ -96,7 +96,7 @@ abstract class AbstractEditCommand extends Command
      */
     final public function getName(): ?string
     {
-        return sprintf('%s:%s', $this->getAsNoun(), $this->getCommandName());
+        return sprintf('old:%s:%s', $this->getAsNoun() . "s", $this->getCommandName());
     }
 
     /**

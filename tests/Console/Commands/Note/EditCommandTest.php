@@ -3,40 +3,35 @@
 namespace tests\Console\Commands\Note;
 
 use AbuseIO\Models\Note;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use AbuseIO\Models\Ticket;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
  * Class EditCommandTest.
+ *
+ * @note In this test we use the ticket factory to create tickets for the notes.
+ *       - The tickets model is really large to set up so we use factories to keep the test code clean.
  */
 class EditCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /**
-     * @var \AbuseIO\Models\Note
-     */
-    private $noteHidden;
-
-    /**
-     * @var \AbuseIO\Models\Note
-     */
-    private $noteViewed;
-
-    private function initDB()
+    #[group('functional')]
+    public function testNoteEditCommandShouldFailWithoutAnId()
     {
-        $this->noteHidden = Note::factory()->create(['hidden' => false]);
-        $this->noteViewed = Note::factory()->create(['viewed' => false]);
+        $exitCode = Artisan::call('note:edit');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "id")', $output);
+        $this->assertStringContainsString('Edits an existing note', $output);
     }
 
-    public function testWithoutId()
-    {
-        Artisan::call('note:edit');
-        $this->assertStringContainsString('Edit a note', Artisan::output());
-    }
-
-    public function testWithInvalidId()
+    #[group('functional')]
+    public function testNoteEditCommandShouldFailWithInvalidId()
     {
         $exitCode = Artisan::call(
             'note:edit',
@@ -44,47 +39,59 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 1);
+
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('Unable to find note with this criteria', Artisan::output());
     }
 
-    public function testWithHidden()
+    #[group('integration')]
+    public function testNoteEditCommandShouldPassWithHiddenAttributeSetToTrue()
     {
-        $this->initDB();
+        $ticket = Ticket::factory()->create();
+        $note = Note::create([
+            'ticket_id' => $ticket->id,
+            'submitter' => 'Tester',
+            'text'      => 'This is a test note created by the unit tests.',
+            'hidden'    => false,
+            'viewed'    => false,
+        ]);
 
-        $this->assertFalse((bool) $this->noteHidden->hidden);
+        $this->assertFalse((bool) $note->hidden);
 
         $exitCode = Artisan::call(
             'note:edit',
             [
-                'id'       => $this->noteHidden->id,
-                '--hidden' => 'true',
+                'id'       => $note->id,
+                '--hidden' => true,
             ]
         );
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('The note has been updated', Artisan::output());
 
-        $this->assertTrue((bool) Note::find($this->noteHidden->id)->hidden);
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString('Note updated successfully', Artisan::output());
+        $this->assertTrue((bool) Note::find($note->id)->hidden);
     }
 
-    public function testEnabled()
-    {
-        $this->initDB();
-
-        $this->assertFalse((bool) Note::find($this->noteViewed->id)->viewed);
+    #[group('integration')]
+    public function testNoteEditCommandShouldPassWithViewedAttributeIsSetToTrueAfterCommand() {
+        $ticket = Ticket::factory()->create();
+        $note = Note::create([
+            'ticket_id' => $ticket->id,
+            'submitter' => 'Tester',
+            'text'      => 'This is a test note created by the unit tests.',
+            'hidden'    => false,
+            'viewed'    => false,
+        ]);
 
         $exitCode = Artisan::call(
             'note:edit',
             [
-                'id'       => $this->noteViewed->id,
+                'id'       => $note->id,
                 '--viewed' => 'true',
             ]
         );
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('The note has been updated', Artisan::output());
-        /*
-         * I use the seeder to re-initialize the table because Artisan:call is another instance of DB
-         */
-        $this->assertTrue((bool) Note::find($this->noteViewed->id)->viewed);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString('Note updated successfully', Artisan::output());
+        $this->assertTrue((bool) Note::find($note->id)->viewed);
     }
 }

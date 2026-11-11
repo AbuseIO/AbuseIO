@@ -3,8 +3,9 @@
 namespace tests\Console\Commands\Permission;
 
 use AbuseIO\Models\Permission;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,62 +13,58 @@ use tests\TestCase;
  */
 class ListCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    private $list;
-
-    private function initDB()
+    #[group('functional')]
+    public function testPermissionListCommandShouldPassToShowTableHeaders(): void
     {
-        $this->list = Permission::factory()->count(3)->create();
-    }
-
-    public function testHeaders()
-    {
-        $this->initDB();
+        $headers = ['Id', 'Name', 'Description'];
 
         $exitCode = Artisan::call('permission:list', []);
-
-        $this->assertEquals($exitCode, 0);
-
-        $headers = ['Id', 'Name', 'Description'];
         $output = Artisan::output();
+
+        $this->assertEquals(0, $exitCode);
         foreach ($headers as $header) {
             $this->assertStringContainsString($header, $output);
         }
     }
 
-    public function testAll()
+    #[group('functional')]
+    public function testPermissionListCommandShouldPassShowingTwoPermissions(): void
     {
-        $this->initDB();
+        $permissionOne = Permission::factory()->create();
+        $permissionTwo = Permission::factory()->create();
 
         $exitCode = Artisan::call('permission:list', []);
-
-        $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        $this->assertStringContainsString($this->list->get(0)->name, $output);
-        $this->assertStringContainsString($this->list->get(1)->name, $output);
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($permissionOne->name, $output);
+        $this->assertStringContainsString($permissionTwo->name, $output);
     }
 
-    public function testFilter()
+    #[group('functional')]
+    public function testPermissionListCommandShouldPassWithValidFilter(): void
     {
-        $this->initDB();
+        $permissionOne = Permission::factory()->create();
+        $permissionTwo = Permission::factory()->create();
+
         $exitCode = Artisan::call(
             'permission:list',
             [
-                '--filter' => $this->list->get(0)->id,
+                '--filter' => $permissionOne->id,
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
 
-        $this->assertStringContainsString((string) $this->list->get(0)->id, $output);
-        $this->assertStringNotContainsString((string) $this->list->get(1)->id, $output);
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($permissionOne->id, $output);
+        $this->assertStringNotContainsString($permissionTwo->id, $output);
     }
 
-    public function testNotFoundFilter()
+    #[group('functional')]
+    public function testPermissionListCommandShouldFailWithInvalidFilter(): void
     {
-        $this->initDB();
         $exitCode = Artisan::call(
             'permission:list',
             [
@@ -75,7 +72,7 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('No permission found for given filter.', Artisan::output());
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('No permissions found.', Artisan::output());
     }
 }

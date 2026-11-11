@@ -3,6 +3,7 @@
 namespace AbuseIO\Console\Commands\Netblock;
 
 use AbuseIO\Console\Commands\AbstractCreateCommand;
+use AbuseIO\Http\Requests\StoreNetblockRequest;
 use AbuseIO\Models\Contact;
 use AbuseIO\Models\Netblock;
 use Symfony\Component\Console\Input\InputArgument;
@@ -63,6 +64,6 @@ class CreateCommand extends AbstractCreateCommand
      */
     protected function getValidator($model)
     {
-        return Validator::make($model->toArray(), Netblock::createRules($model));
+        return Validator::make($model->toArray(), new StoreNetblockRequest()->rules());
     }
 }

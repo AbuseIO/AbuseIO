@@ -82,12 +82,6 @@ class Incident
      */
     public $remote_ash_link;
 
-    /*
-    |--------------------------------------------------------------------------
-    | Validation Rules
-    |--------------------------------------------------------------------------
-    */
-
     /**
      * creates a new Incident object.
      *
@@ -154,27 +148,6 @@ class Incident
             );
 
         return $incident;
-    }
-
-    /**
-     * Validation rules for this model being created.
-     *
-     * @return array $rules
-     */
-    public static function createRules()
-    {
-        $rules = [
-            'source'      => 'required|string',
-            'source_id'   => 'nullable|stringorboolean',
-            'ip'          => 'required|ip',
-            'domain'      => 'nullable|stringorboolean|domain',
-            'timestamp'   => 'required|timestamp',
-            'class'       => 'required|abuseclass',
-            'type'        => 'required|abusetype',
-            'information' => 'required|json',
-        ];
-
-        return $rules;
     }
 
     /**

@@ -3,8 +3,9 @@
 namespace tests\Console\Commands\Account;
 
 use AbuseIO\Models\Account;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -12,24 +13,21 @@ use tests\TestCase;
  */
 class EditCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
-    /** @var Account */
-    private $account;
-
-    private function initDB()
+    #[group('functional')]
+    public function testEditAccountCommandShouldFailWithoutId(): void
     {
-        $this->account = Account::factory()->create();
-    }
-
-    public function testWithoutId()
-    {
-        Artisan::call('account:edit');
+        $exitCode = Artisan::call('account:edit');
         $output = Artisan::output();
-        $this->assertStringContainsString('Edit a account', $output);
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "id")', $output);
+        $this->assertStringContainsString('Edits an existing account', $output);
     }
 
-    public function testWithInvalidId()
+    #[group('functional')]
+    public function testEditAccountCommandShouldFailWithInvalidId(): void
     {
         $exitCode = Artisan::call(
             'account:edit',
@@ -37,11 +35,12 @@ class EditCommandTest extends TestCase
                 'id' => '10000',
             ]
         );
-        $this->assertEquals($exitCode, 1);
-        $this->assertStringContainsString('Unable to find account with this criteria', Artisan::output());
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Account not found', Artisan::output());
     }
 
-    public function testWithInvalidBrand()
+    #[group('functional')]
+    public function testEditAccountCommandShouldFailWithInvalidBrand(): void
     {
         $exitCode = Artisan::call(
             'account:edit',
@@ -50,32 +49,36 @@ class EditCommandTest extends TestCase
                 '--brand_id' => '1000',
             ]
         );
-        $this->assertEquals($exitCode, 1);
-        $this->assertStringContainsString('Unable to find brand with this criteria', Artisan::output());
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Brand not found', Artisan::output());
     }
 
-    public function testName()
+    #[group('functional')]
+    public function testEditAccountCommandShouldPassWithDifferentName(): void
     {
-        $this->assertEquals('Default', Account::find(1)->name);
+        $account = Account::create([
+            'name'          => 'Default User Outdated',
+            'description'   => 'test description',
+            'brand_id'      => 1,
+            'disabled'      => 0,
+            'token'         => generateApiToken(),
+            'systemaccount' => 0,
+        ]);
 
         $exitCode = Artisan::call(
             'account:edit',
             [
-                'id'     => '1',
-                '--name' => 'somebogusstring',
+                'id'     => $account->id,
+                '--name' => 'Changed Name',
             ]
         );
-        $this->assertEquals($exitCode, 0);
-        $this->assertStringContainsString('The account has been updated', Artisan::output());
 
-        $account = Account::find(1);
-        $this->assertEquals('somebogusstring', $account->name);
-
-        $account->name = 'Default';
-        $account->save();
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString('The account has been updated successfully.', Artisan::output());
     }
 
-    public function testEnabled()
+    #[group('functional')]
+    public function testEditAccountCommandShouldPassSettingDisabledToTrue(): void
     {
         $this->assertFalse((bool) Account::find(1)->disabled);
 
@@ -86,29 +89,38 @@ class EditCommandTest extends TestCase
                 '--disabled' => 'true',
             ]
         );
-        $this->assertEquals($exitCode, 0);
+
+        $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString('The account has been updated', Artisan::output());
-
-        $account = Account::find(1);
-
-        $this->assertTrue((bool) $account->disabled);
-        $account->disabled = false;
-        $account->save();
     }
 
-    public function testSetSystemAccount()
+    #[group('functional')]
+    public function testEditAccountCommandShouldPassSettingSystemAccountToTrue(): void
     {
-        $this->initDB();
+        $firstAccount = Account::find(1)->first();
+        $firstAccount->systemaccount = 0;
+        $this->assertFalse((bool) $firstAccount->systemaccount);
+        $firstAccount->save();
+        $account = Account::create([
+            'name'          => 'Default User Outdated',
+            'description'   => 'test description',
+            'brand_id'      => 1,
+            'disabled'      => 0,
+            'token'         => generateApiToken(),
+            'systemaccount' => 0,
+        ]);
+
         $exitCode = Artisan::call(
             'account:edit',
             [
-                'id'              => $this->account->id,
+                'id'              => $account->id,
+                '--name'          => 'Default User Updated',
                 '--systemaccount' => true,
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString('The account has been updated', Artisan::output());
-        $this->assertTrue((bool) Account::find($this->account->id)->systemaccount);
+        $this->assertTrue((bool) Account::find($account->id)->toArray()['systemaccount']);
     }
 }

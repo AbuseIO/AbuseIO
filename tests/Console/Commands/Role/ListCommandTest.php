@@ -2,7 +2,10 @@
 
 namespace tests\Console\Commands\Role;
 
+use AbuseIO\Models\Role;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -10,7 +13,10 @@ use tests\TestCase;
  */
 class ListCommandTest extends TestCase
 {
-    public function testAll()
+    use RefreshDatabase;
+
+    #[group('functional')]
+    public function testRoleListCommandShouldPassWithNoArguments(): void
     {
         $exitCode = Artisan::call(
             'role:list',
@@ -19,23 +25,48 @@ class ListCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString('System Administrator', Artisan::output());
     }
 
-    public function testWithValidFilter()
+    #[group('functional')]
+    public function testRoleListCommandShouldFailWithInvalidFilter(): void
     {
         $exitCode = Artisan::call(
             'role:list',
             [
-                '--filter' => 'Abuse',
+                '--filter' => 'TestRoleThatDoesNotExist',
             ]
         );
-
-        $this->assertEquals($exitCode, 0);
-
         $output = Artisan::output();
-        $this->assertStringContainsString('Abuse', $output);
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('No roles found matching the criteria.', $output);
         $this->assertStringNotContainsString('System Administrator', $output);
+    }
+
+    #[group('functional')]
+    public function testRoleListCommandShouldPassWithValidFilter(): void
+    {
+        $roleOne = Role::create([
+            'name' => 'TestRoleThatDoesExist',
+            'description' => 'Some description',
+        ]);
+        $roleTwo = Role::create([
+            'name' => 'TestRoleThatAlsoExists',
+            'description' => 'Some description',
+        ]);
+
+        $exitCode = Artisan::call(
+            'role:list',
+            [
+                '--filter' => $roleOne->name,
+            ]
+        );
+        $output = Artisan::output();
+
+        $this->assertEquals(0, $exitCode);
+        $this->assertStringContainsString($roleOne->name, $output);
+        $this->assertStringNotContainsString($roleTwo->name, $output);
     }
 }

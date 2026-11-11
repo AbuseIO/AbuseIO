@@ -3,7 +3,9 @@
 namespace tests\Console\Commands\Contact;
 
 use AbuseIO\Models\Contact;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\Group;
 use tests\TestCase;
 
 /**
@@ -11,24 +13,57 @@ use tests\TestCase;
  */
 class ShowCommandTest extends TestCase
 {
-    public function testWithValidIdFilter()
+    use RefreshDatabase;
+
+    #[group('functional')]
+    public function testContactShowCommandShouldFailWithoutArguments(): void
     {
+        $exitCode = Artisan::call('contact:show');
+        $output = Artisan::output();
+
+        $this->assertEquals(1, $exitCode);
+        $this->assertStringContainsString('Not enough arguments (missing: "contact")', $output);
+        $this->assertStringContainsString('Shows details of a contact based on the given id or name', $output);
+    }
+
+    #[group('integration')]
+    public function testContactShowCommandShouldPassWithValidIdFilter(): void
+    {
+        $headers = ['Id', 'Reference', 'Name', 'Email', 'Api host', 'Enabled', 'Account'];
+        $contact = Contact::create([
+            'reference' => sprintf('reference_%s', uniqid()),
+            'name' => 'Test name no. 1',
+            'email' => 'example@mail.com',
+            'api_host' => 'https://api.example.com',
+            'enabled' => true,
+            'account_id' => 1,
+        ]);
+
         $exitCode = Artisan::call(
             'contact:show',
             [
-                'contact' => '1',
+                'contact' => $contact->id,
             ]
         );
-        $this->assertEquals($exitCode, 0);
         $output = Artisan::output();
-        foreach (['Reference', 'Name', 'Email', 'Api host', 'Notification methods', 'Enabled'] as $el) {
+
+        $this->assertEquals(0, $exitCode);
+        foreach ($headers as $el) {
             $this->assertStringContainsString($el, $output);
         }
     }
 
-    public function testWithValidNameFilter()
+    #[group('integration')]
+    public function testContactShowCommandShouldPassWithValidNameFilter(): void
     {
-        $contact = Contact::all()->random();
+        $contact = Contact::create([
+            'reference' => sprintf('reference_%s', uniqid()),
+            'name' => 'Test name no. 1',
+            'email' => 'example@mail.com',
+            'api_host' => 'https://api.example.com',
+            'enabled' => true,
+            'account_id' => 1,
+        ]);
 
         $exitCode = Artisan::call(
             'contact:show',
@@ -36,11 +71,13 @@ class ShowCommandTest extends TestCase
                 'contact' => $contact->name,
             ]
         );
-        $this->assertEquals($exitCode, 0);
+
+        $this->assertEquals(0, $exitCode);
         $this->assertStringContainsString($contact->name, Artisan::output());
     }
 
-    public function testWithInvalidFilter()
+    #[group('integration')]
+    public function testContactShowCommandShouldFailWithInvalidFilter(): void
     {
         $exitCode = Artisan::call(
             'contact:show',
@@ -49,7 +86,7 @@ class ShowCommandTest extends TestCase
             ]
         );
 
-        $this->assertEquals($exitCode, 0);
+        $this->assertEquals(1, $exitCode);
         $this->assertStringContainsString('No matching contact was found.', Artisan::output());
     }
 }

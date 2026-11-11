@@ -2,7 +2,7 @@
 
 namespace AbuseIO\Console\Commands\Collector;
 
-use AbuseIO\Collector\Factory as collectorFactory;
+use AbuseIO\Collectors\Factory as collectorFactory;
 use AbuseIO\Console\Commands\ExitCodeHooks;
 use AbuseIO\Jobs\CollectorProcess;
 use Illuminate\Console\Command;
