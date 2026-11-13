@@ -36,7 +36,8 @@ return [
         'name'        => 'Open VNC Server',
         'description' => 'Deze rapportage identificeert hosts die een VNC instance op ports 5900-5905, 5800-5805, 6000, 17689 hebben draaien die via IPv4 internet beschikbaar zijn. 
         Voor IPv6 wordt momenteel enkel naar ports 5900 en 5901 gekeken. 
-        Als VNC verkeerd is ingesteld, kan deze onbedoeld remote access tot een desktop toekennen.',
+        Als VNC verkeerd is ingesteld, kan deze onbedoeld remote access tot een desktop toekennen.
+        We hebben ook (vanaf 01-05-2025) detectie van VNC instanties zonder authenticatie toegevoegd. Deze instanties hebben de extra tag vnc-unauth.',
     ],
 
     'OPEN_SMB_SERVER' => [
@@ -77,7 +78,7 @@ return [
         'description' => '
             <h2>Wat is een \'ISAKMP Vulnerable device\'?</h2>
 
-            <p>  </p>
+            <p>Deze rapportage identificeert hosts die een kwetsbare IKE-dienst toegankelijk vanaf het internet draaien</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -215,9 +216,13 @@ return [
             <p>Een gecompromitteerde website betekent dat er (gehackte) content zonder toestemming op uw site is geplaatst. 
             Dit komt door kwetsbaarheden in de beveiliging van uw site.
 
-            Malafide hackers zijn altijd op zoek naar nieuwe manieren, kwetsbaarheden, trucjes en 'social engineering' tactieken 
-            die gebruikt kunnen worden om een site te compromitteren.
-            Het is geen wonder dat de meeste website-eigenaren geen idee hebben hoe hun site überhaupt gehackt heeft kunnen worden.</p>
+            Deze rapportage bevat zowel websites die gecompromitteerd zijn, als apparaten hebben gedetecteerd dat deze gecompromitteerd zijn met bijvoorbeeld webshells of implantaten toegankelijk via HTTP.
+
+            De reden achter de rapportage wordt in het “tag” of “category” veldje in de rapportage vermeld. Check alstublieft ook de “url” en “detail” velden voor extra context.
+            Denk eraan dat wanneer u probeert remote een webshell te identificeren door te pogen verbinding te maken met de url in de rapportage, een 404 reply niet per se betekent dat deze webshell niet bestaat. Zorg ervoor dat u dit probleem vanaf het systeem zelf onderzoekt!
+            Zoals altijd kunnen wij geen garantie geven dat de gerapporteerde compromissen of infecties op een gegeven systeem de enige zijn die daarop staan. We hebben diverse malafide acteurs dezelfde kwetsbare systemen voor verschillende doeleinden zien misbruiken.
+            We raden aan om deze systemen de onderzoeken in de veronderderstelling dat er meer kwetsbaarheden en compromissen in het systeem zitten dan gerapporteerd.
+            Zie voor meer informatie <a target='_blank' href='https://www.shadowserver.org/what-we-do/network-reporting/compromised-website-report/'>Shadowserserver’s Compromised Website report pagina (Engels)</a>.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -383,7 +388,9 @@ return [
 
             <h2>Wat is een 'FREAK Vulnerable Server'?</h2>
 
-            <p>Servers die RSA_EXPORT ciphersuites accepteren, zouden hun gebruikers bloot kunnen stellen aan de zogenaamde FREAK-aanval.</p>
+            <p>Deze rapportage identificeert hosts die het gebruik van SSL/TTS met RSA_EXPORT ciphers (oftwewel “export-grade” encryptie) toestaan.
+            Hosts met deze verzwakte ciphers kunnen worden misbruikt voor een man-in-the-middle aanval, die een browser een zwakke export key die makkelijk te kraken valt forcveert te gebruiken.
+            Dit noemt men een FREAK (Factoring RSA Export Keys) aanval.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
@@ -410,6 +417,10 @@ return [
             <p>Indien u Apache gebruikt, voeg het volgende aan uw SSL configuratie toe:
 
             SSLCipherSuite:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK</p>
+
+            <p>Denk eraan dat dit het absoluut minste is dat nodig is om de FREAK aanval te mitigeren. Dit is dus geen veilige setup geschikt voor een modern systeem.
+            Wij raden sterk aan om van de onderstaande hulpmiddelen gebruik te maken om een moderne SSL configuratie voor uw webserver te creëren
+            Keep in mind that this is the bare minimum for mitigating the FREAK attack. This is not a sufficiently secure setting for a modern system.</p>
 
             <h2>Meer informatie</h2>
 
@@ -968,7 +979,8 @@ return [
         'description' => "
             <h2>Wat is een 'Open NTP Server'?</h2>
 
-            <p>Network Time Protocol (NTP) is een netwerkprotocol voor tijdsynchronisatie
+            <p>Deze rapportage identificeert NTP servers die potentieel door kwaadwillendeen kunnen worden misbruikt om denial of service (DoS) aanvallen uit te voeren.
+            Network Time Protocol (NTP) is een netwerkprotocol voor tijdsynchronisatie
             tussen computersystemen over packet-switched variable-latency datanetwerken. 
             NTP werdt al vóór 1985 gebruikt, wat het één van de oudste internetprotocollen nog in gebruik maakt.</p>
 
@@ -1042,6 +1054,7 @@ return [
 
             <a target='_blank' href='https://github.com/team-cymru/network-security-templates/tree/master/Secure-NTP-Templates'>Examples in securing a NTP service</a>
             <a target='_blank' href='https://christian-rossow.de/publications/amplification-ndss2014.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
+            <a targat='_blank' href='https://support.ntp.org/Support/AccessRestrictions'>Access Restrictions for NTP</a>
 
             ",
     ],
@@ -1122,13 +1135,17 @@ return [
         'description' => "
             <h2>Wat is een 'Open QOTD Server'?</h2>
 
-            <p>De Quote Of The Day (QOTD) dienst - gedefinieerd in RFC 865 - maakt deel uit van de Internetprotocolsuite. 
+            <p>Deze rapportage identificeert hosts die een Quote of the Day (QOTD) dienst toegankelijk vanaf het internet draaien.
+            De Quote Of The Day (QOTD) dienst - gedefinieerd in RFC 865 - maakt deel uit van de Internetprotocolsuite. 
             Het concept werd - al voor de RFC werd gemaakt - gebruikt door mainframe sysadmins om op verzoek van de gebruiker een dagelijks citaat uit te zenden. 
             Het werd formeel, voor o.a testen en meten, gedefinieerd in RFC 865.</p>
 
             <h2>Waarom is dit een probleem?</h2>
 
-            <p>Een open (UDP) dienst draaien hoeft niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
+            <p>Deze diensten kunnen potentieel door kwaadwillenden misbruikt worden om amplificatie-aanvallen uit te voeren.
+            De aanwezigheid van deze dienst wordt getest door een UDP packet met een single carriage return naar UDP port 17 te sturen.
+            
+            Een open (UDP) dienst draaien hoeft niet per se een probleem te zijn en is meestal een vereiste voor het installeren van een systeem. 
             Helaas misbruiken hackers deze dienst graag voor het uitvoeren van een bepaald type DDoS; de zogenaamde 'amplificatie’ aanval.</p>
 
             <p>Een amplificatie-aanval is alleen uit te voeren in combinatie met zogeheten 'reflection'.
@@ -1149,7 +1166,7 @@ return [
 
             <h2>Aanbevolen actie</h2>
 
-            <p>Het is niet nodig om deze QOTD dienst via een public facing interaface beschikbaar te stellen. 
+            <p>Het is niet nodig om deze QOTD dienst via een public facing interface beschikbaar te stellen. 
             Zet de dienst uit of zorg ervoor dat deze niet vanaf het internet bereikbaar is door middel van RFC1918 spaces of een firewall.</p>
 
             <h2>Tips om dit op te lossen</h2>
