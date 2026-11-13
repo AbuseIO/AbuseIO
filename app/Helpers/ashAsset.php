@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Function to return an url for an ash asset.
  *

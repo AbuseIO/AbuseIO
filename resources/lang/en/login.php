@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Translations for login.
  */
