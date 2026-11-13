@@ -109,7 +109,7 @@
                 @if ( !$ticket->events->count() )
                     {{ trans('ash.technical.collectError') }}
                 @else
-                    <table class="table table-striped table-condensed">
+                    <table class="table table-striped table-condensed" style="display:block;overflow-y:scroll">
                         <thead>
                         <tr>
                             <th>{{ trans('ash.technical.timestamp') }}</th>
@@ -212,3 +212,4 @@
     </div>
 </body>
 </html>
+

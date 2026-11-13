@@ -40,6 +40,7 @@ return [
         'description' => '
             This report identifies hosts that have a VNC instance running on ports 5900-5905, 5800-5805, 6000, 17689 that are accessible on the IPv4 Internet. For IPv6 we currently scan 5900 and 5901 only.
             If improperly configured, VNC may allow remote access to a desktop in an unintended manner.
+            We also added detection of VNC instances without any authentication (starting 2025-05-01). These instances are additionally tagged vnc-unauth.
             ',
     ],
 
@@ -86,7 +87,7 @@ return [
         'description' => '
             <h2>What is an \'ISAKMP Vulnerable device\'?</h2>
 
-            <p>  </p>
+            <p>This report identifies hosts that have a vulnerable IKE service accessible on the Internet.</p>
 
             <h2>Why would this be bad?</h2>
 
@@ -235,10 +236,11 @@ return [
 
             A compromised website means that unauthorised (hacked) content has been placed on your site without your consent as a result of vulnerabilities in your site’s security.
 
-            Malicious hackers are a devious bunch – always looking for new flaws, exploits and
-            social engineering tricks that will allow them to compromise a website. With
-            this in mind, it comes as no surprise that most website
-            owners simply don’t know how their sites were compromised.
+            This report includes both websites that have been verified to be compromised , but also includes devices that we have detected to be compromised with webshells or implants that are accessible via HTTP.
+            
+            This reason for listing will be provided either in the “tag” or the “category” field of the report. Please also review the “url” and “detail” fields for contextualization. Please note that when attempting to remotely identify a webshell by connecting to a url specified in the report, a 404 reply does not imply that the webshell in fact does not exist. Make sure to investigate on the compromised system side!
+            As always, there is no guarantee that there are no additional infections or compromises on any IP that we report on. We have seen several different threat actors abusing the same compromised system for different purposes. We recommend investigating systems with the assumption that there are more compromises on the systems than are reported.
+            See <a target='_blank' href='https://www.shadowserver.org/what-we-do/network-reporting/compromised-website-report/'>Shadowserserver’s Compromised Website report page</a> for more information.
 
             <h2>Why would this be bad?</h2>
 
@@ -428,10 +430,9 @@ return [
 
             <h2>What is a 'FREAK Vulnerable Server'?</h2>
 
-            <p>Servers that accept RSA_EXPORT cipher suites put their users at risk of the FREAK
-            attack. Using internet-wide scanning, we have been performing daily tests of all
-            HTTPS servers at public IP addresses to determine whether they allow this weakened
-            encryption.</p>
+            <p>This report identifies hosts that allow the use of SSL/TLS with RSA_EXPORT ciphers (aka “export-grade” encryption).
+            Hosts with these weakened ciphers can be used in a man-in-the-middle attack, which forces a browser to use a weak export key, which is easily crackable. 
+            This is called a FREAK (Factoring RSA Export Keys) attack.</p>
 
             <h2>Why would this be bad?</h2>
 
@@ -464,6 +465,9 @@ return [
             <p>With apache server add the following to your SSL section(s):
 
             SSLCipherSuite ALL:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK</p>
+
+            <p>Keep in mind that this is the bare minimum for mitigating the FREAK attack. This is not a sufficiently secure setting for a modern system.
+            We recommend using the resources below to create a modern SSL config for your given webserver.</p>
 
             <h2>Getting more information</h2>
 
@@ -1065,7 +1069,8 @@ return [
         'description' => "
             <h2>What is an 'Open NTP Server'?</h2>
 
-            <p>Network Time Protocol (NTP) is a networking protocol for clock
+            <p>This report identifies NTP servers that have the potential to be used in amplification attacks by criminals that wish to perform denial of service attacks.
+            Network Time Protocol (NTP) is a networking protocol for clock
             synchronization between computer systems over packet-switched,
             variable-latency data networks. In operation since before 1985, NTP
             is one of the oldest internet protocols in current use.</p>
@@ -1152,6 +1157,7 @@ return [
 
             <a target='_blank' href='https://github.com/team-cymru/network-security-templates/tree/master/Secure-NTP-Templates'>Examples in securing a NTP service</a>
             <a target='_blank' href='https://christian-rossow.de/publications/amplification-ndss2014.pdf'>Amplification Hell: Revisiting Network Protocols for DDoS Abuse</a>
+            <a targat='_blank' href='https://support.ntp.org/Support/AccessRestrictions'>Access Restrictions for NTP</a>
 
             ",
     ],
@@ -1243,7 +1249,8 @@ return [
         'description' => "
             <h2>What is an 'Open QOTD Server'?</h2>
 
-            <p>The Quote Of The Day (QOTD) service is a member of the internet protocol
+            <p>This report identifies hosts that have the Quote of the Day (QOTD) service running and accessible on the Internet.
+            The Quote Of The Day (QOTD) service is a member of the internet protocol
             suite, defined in RFC 865. As indicated there, the QOTD concept predated
             the specification, when QOTD was used by mainframe sysadmins to broadcast
             a daily quote on request by a user. It was then formally codified both
@@ -1251,7 +1258,10 @@ return [
 
             <h2>Why would this be bad?</h2>
 
-            <p>Running an open (UDP) service is not bad on its own and is often
+            <p>These services have the potential to be used in amplification attacks by criminals that wish to perform denial of service attacks. 
+            The service is tested by sending a UDP packet containing a single carriage return to UDP port 17.
+            
+            Running an open (UDP) service is not bad on its own and is often
             a required dependency when installing a system.
             Unfortunately, hackers have also found this feature useful in performing a
             special type of DDoS attack called an 'Amplification Attack'.</p>
