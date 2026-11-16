@@ -2459,7 +2459,7 @@ return [
             <p>It is unlikely that you need to have your MySQL server allowing for external connections from the Internet (and thus a possible external attack surface). If you do receive a report on your network/constituency take action to filter out traffic to your MySQL instance and make sure to implement authentication on the server.</p>',
     ],
 
-    'ACCESSIBLE_KUBERNETES' => [
+    'OPEN_KUBERNETES' => [
         'name'        => 'Accessible Kubernetes',
         'description' => '
             <p>This report identifies accessible Kubernetes API instances that respond with a 200 OK HTTP to our probes. 
@@ -2468,7 +2468,7 @@ return [
             ',
     ],
 
-    'ACCESSIBLE_MSRPC' => [
+    'OPEN_MSRPC' => [
         'name'         => 'Accessible Microsoft RPC',
         'description'  => '
             <p>This report identifies hosts that have Microsoft RPC services running. This includes the MS-RPC Endpoint Mapper service running on port 135/TCP, but also other services directly accessible on ports 49664/TCP to 49670/TCP as well as 49152/TCP.
@@ -2476,13 +2476,13 @@ return [
             It is recommended to keep these ports firewalled from the public Internet.</p>',
     ],
 
-    'ACCESSIBLE_IMAP' => [
+    'OPEN_IMAP' => [
         'name'         => 'Accessible IMAP',
         'description'  => '
             <p>This report identifies hosts that have a IMAP service running on port 143/TCP or 993/TCP.</p>',
     ],
 
-    'ACCESSIBLE_POP3' => [
+    'OPEN_POP3' => [
         'name'         => 'Accessible POP3',
         'description'  => '
             <p>This report identifies hosts that have a POP3 service running on port 110/TCP or 995/TCP.</p>',
