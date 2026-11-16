@@ -2250,7 +2250,7 @@ return [
             <p>Het is onwaarschijnlijk dat uw MySQL-server externe verbindingen vanaf het internet moet toestaan (en dus een mogelijk extern aanvalsoppervlak moet bieden). Indien u een rapport over uw netwerk/domein ontvangt, onderneem dan actie om het verkeer naar uw MySQL-instance uit te filteren en zorg ervoor dat authenticie op de server wordt geïmplementeerd.</p>',
     ],
 
-    'ACCESSIBLE_KUBERNETES' => [
+    'OPEN_KUBERNETES' => [
         'name'        => 'Toegankelijke Kubernetes',
         'description' => '
             <p>Deze rapportage bevat informatie over toegankelijke Kubernetes API instances die met een 200 OK HTTP op onze steekproeven antwoordden. 
@@ -2259,7 +2259,7 @@ return [
             ',
     ],
 
-    'ACCESSIBLE_MSRPC' => [
+    'OPEN_MSRPC' => [
         'name'         => 'Toegankelijke Microsoft RPC',
         'description'  => '
             <p>Deze rapportage identificeert hosts die Microsoft RPC diensten, waaronder de MS-RPC Endpoint Mapper dienst op port 135/TCP, hebben draaien. Dit omvat ook diensten die via de ports 49664/TCP tot 49670/TCP en port 49152/TCP direct toegankelijk zijn. 
@@ -2267,13 +2267,13 @@ return [
             Wij raden aan om deze ports met behulp van een firewall afgesloten van het publieke internet te houden.</p>',
     ],
 
-    'ACCESSIBLE_IMAP' => [
+    'OPEN_IMAP' => [
         'name'         => 'Toegankelijke IMAP',
         'description'  => '
             <p>Deze rapportage identificeert hosts die IMAP op port 143/TCP of 993/TCP hebben draaien.</p>',
     ],
 
-    'ACCESSIBLE_POP3' => [
+    'OPEN_POP3' => [
         'name'         => 'Toegankelijke POP3',
         'description'  => '
             <p>Deze rapportage identificeert hosts die POP3 op port 110/TCP of 995/TCP hebben draaien.</p>',
